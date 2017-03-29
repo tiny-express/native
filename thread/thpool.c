@@ -1,4 +1,5 @@
 /* ********************************
+
  * Author:       Johan Hanssen Seferidis
  * License:	     MIT
  * Description:  Library providing a threading pool where you can add
