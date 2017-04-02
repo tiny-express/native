@@ -1,3 +1,11 @@
 /.idea
 /CMakeLists.txt
+/CMakeFiles
+/cmake-build-debug
+/cmake_install.cmake
+/CMakeCache.txt
+/Makefile
+/native
+/native.cbp
 .DS_Store
+

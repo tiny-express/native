@@ -1,8 +1,6 @@
 #ifndef BUILTIN_API_H
 #define BUILTIN_API_H
 
-#include "../apis/config.h"
-#include "cassandra.h"
 #include <stdarg.h>
 
 /***** APP_MODE ******/
@@ -31,18 +29,11 @@ typedef struct BUILD {
 	char *time;
 } BUILD;
 
-typedef struct DATABASE {
-	CassCluster* cluster;
-	CassSession* session;
-} DATABASE;
-
 typedef struct Context {
 	BUILD *build;
 	APP_MODE mode;
 	LOGGER *logger;
 	CACHE *cache;
-	DATABASE *database;
-	CONFIG *config;
 } Context;
 
 Context *createRequestContext(Context *context);

@@ -1,3 +1,4 @@
+/*
 #include "../builtin.h"
 #include "../storage.h"
 #include <stdlib.h>
@@ -233,3 +234,5 @@ FIND_FIELD(int);
 FIND_FIELD(long);
 FIND_FIELD(float);
 FIND_FIELD(double);
+
+*/
