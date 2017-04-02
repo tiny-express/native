@@ -1,3 +1,2 @@
 # native
-Food Tiny Native - Native Library for C/C++  
-abc
+Food Tiny Native - Native Library for C/C++ 
