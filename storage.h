@@ -1,7 +1,6 @@
 #ifndef BUILTIN_STORAGE_H
 #define BUILTIN_STORAGE_H
 
-#include "cassandra.h"
 #include "context.h"
 
 typedef enum {

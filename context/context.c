@@ -3,9 +3,8 @@
 Context *createRequestContext(Context *context) {
 	Context *requestContext = malloc(sizeof(Context));
 	requestContext->mode = context->mode;
-	requestContext->config = context->config;
-	requestContext->database = NULL;
-	requestContext->logger = malloc(sizeof(LOGGER));
+	//requestContext->database = NULL;
+	//requestContext->logger = malloc(sizeof(LOGGER));
 	requestContext->build = context->build;
 	return requestContext;
 }
@@ -13,7 +12,7 @@ Context *createRequestContext(Context *context) {
 Context* mockContext() {
 	Context *context = malloc(sizeof(Context));
 	context->mode = APP_TESTING;
-	context->database = NULL;
+	//context->database = NULL;
 	context->logger = malloc(sizeof(LOGGER));
     context->logger->request_id = "0";
 	context->logger->process_order = 0;
@@ -73,6 +72,7 @@ char *findParamFromUrl(char *name, char *url) {
 }
 
 void freeContext(Context *context) {
+	/*
 	if (context->database != NULL) {
 		cass_cluster_free(context->database->cluster);
 		cass_session_free(context->database->session);
@@ -83,5 +83,6 @@ void freeContext(Context *context) {
     if (context->logger != NULL) {
        free(context->logger);
     }
+    */
 	free(context);
 }
