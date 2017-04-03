@@ -61,7 +61,8 @@ TEST(Builtin_Length, PointerPointerChar) {
 	// Dynamic string
 	int NUM = 135;
 	char** data2 = (char**) calloc(NUM + 1, sizeof(char*));
-	for (int i=0; i<NUM; i++) {
+	int i;
+	for (i=0; i<NUM; i++) {
 		data2[i] = (char*) "test";
 	}
 	data2[NUM] = '\0';
