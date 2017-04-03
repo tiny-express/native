@@ -3,8 +3,6 @@ os:
 - linux
 compiler:
 - gcc
-services:
-- docker
 before_script:
 - cmake .
 script:

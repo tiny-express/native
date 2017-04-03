@@ -1,3 +1,4 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 PROJECT(native)
 
 SET(CMAKE_C_COMPILER gcc)
@@ -35,7 +36,6 @@ SET(SOURCE_FILES
     system/device_test.c
     thread/thpool.c
     thread/thpool.h
-    thread/thread.c
     thread/thread.h
     thread/thread_test.c
     type/json/json.c
