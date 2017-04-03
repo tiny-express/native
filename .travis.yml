@@ -1,9 +1,22 @@
-language: c
+sudo: required
+language: cpp
 os:
-    linux
+- linux
+- osx
 compiler:
-  - gcc
+- gcc
+services:
+- docker
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
 before_script:
-  - cmake .
+- export CC='gcc-4.8'
+- export CXX='g++-4.8'
+- cmake .
 script:
-  - make && ./native
+- make
