@@ -12,7 +12,8 @@ char *join_pointer_##TYPE(TYPE *target) {\
     int num = length_pointer_##TYPE(target);\
     register int total_length = 0, item_length = 0;\
     char *tmp = calloc(MAX_SIZE, sizeof(char));\
-    for (int i = 0; i < num; i++) {\
+	register int i;\
+    for (i = 0; i < num; i++) {\
         item_length = length_##TYPE(target[i]);\
         memcpy(tmp + total_length, string_from_##TYPE(target[i]), item_length);\
         total_length += item_length;\
@@ -31,7 +32,8 @@ char *join_delim_pointer_##TYPE(TYPE *target, const char *delim) {\
     register int item_length = 0, total_length = 0;\
     int delim_length = length_pointer_char(delim);\
     char *tmp = calloc(MAX_SIZE, sizeof(char));\
-    for (int i = 0; i < num; i++) {\
+	register int i;\
+    for (i = 0; i < num; i++) {\
         item_length = length_##TYPE(target[i]);\
         memcpy(tmp + total_length, string_from_##TYPE(target[i]), item_length);\
         total_length += item_length;\

@@ -1,6 +1,8 @@
 #ifndef BUILTIN_CONTEXT_H
 #define BUILTIN_CONTEXT_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "../type/json.h"
 #include "../string.h"
 
