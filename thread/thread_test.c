@@ -1,6 +1,5 @@
 #include "../../native/builtin.h"
 #include "../unit_test.h"
-#include "thread.h"
 
 // pid = (int)pthread_self();
 
