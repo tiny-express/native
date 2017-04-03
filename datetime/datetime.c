@@ -1,4 +1,5 @@
 #include <time.h>
+#include <stdlib.h>
 #include "../datetime.h"
 #include "../string.h"
 

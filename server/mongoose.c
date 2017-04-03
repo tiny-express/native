@@ -14460,7 +14460,8 @@ void mg_lwip_if_remove_conn(struct mg_connection *nc) {
   struct mg_ev_mgr_lwip_data *md =
       (struct mg_ev_mgr_lwip_data *) nc->iface->data;
   /* Walk the queue and null-out further signals for this conn. */
-  for (int i = 0; i < MG_SIG_QUEUE_LEN; i++) {
+  register int i;
+  for (i = 0; i < MG_SIG_QUEUE_LEN; i++) {
     if (md->sig_queue[i].nc == nc) {
       md->sig_queue[i].sig = MG_SIG_TOMBSTONE;
     }

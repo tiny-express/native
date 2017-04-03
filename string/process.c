@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
+#include <string.h>
+#include <time.h>
 #include "../string.h"
 #include "../general.h"
 
@@ -10,13 +11,11 @@
 char  *string_replace(char *target, char* find, char* replace_with) {
 	char *result;
 	register int i, count = 0;
-	int oldlen = strlen(find);
-	int newlen = strlen(replace_with);
+	int oldlen = length_pointer_char(find);
+	int newlen = length_pointer_char(replace_with);
 
-	for (i = 0; target[i] != '\0'; i++)
-	{
-		if (strstr(&target[i], find) == &target[i])
-		{
+	for (i = 0; target[i] != '\0'; i++) {
+		if (strstr(&target[i], find) == &target[i]) {
 			count++;
 			i += oldlen - 1;
 		}
@@ -91,18 +90,19 @@ char *string_join(char *target[], const char *delim) {
 	int num = length_pointer_pointer_char(target) - 1;
 	int len = 0, wlen = 0;
 	char *tmp = calloc(MAX_SIZE, sizeof(char));
-	for (int i=0; i<num; i++) {
+	register int i;
+	for (i=0; i<num; i++) {
 		// Copy memory segment
-		wlen = strlen(target[i]);
+		wlen = length_pointer_char(target[i]);
 		memcpy(tmp + len, target[i], wlen);
 		len += wlen;
 		// Copy memory segment
-		wlen = strlen(delim);
+		wlen = length_pointer_char(delim);
 		memcpy(tmp + len, delim, wlen);
 		len += wlen;
 	}
 	// Copy memory segment
-	wlen = strlen(target[num]);
+	wlen = length_pointer_char(target[num]);
 	memcpy(tmp + len, target[num], wlen);
 	len += wlen;
 	len += 1;
@@ -118,7 +118,7 @@ char *string_join(char *target[], const char *delim) {
 char *string_trim(char *target) {
 	int len, left, right;
 	left = 0;
-	right = strlen(target) - 1;
+	right = length_pointer_char(target) - 1;
 	while (target[left] == ' ') left++;
 	while (target[right] == ' ') right--;
 	len = right - left + 1;

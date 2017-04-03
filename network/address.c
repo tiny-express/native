@@ -1,4 +1,6 @@
 #include "../network.h"
+#include <unistd.h>
+#include <stdlib.h>
 #include <arpa/inet.h>
 
 char *getIPAddress()

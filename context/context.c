@@ -25,7 +25,8 @@ char *findParam(char *name, char *params) {
     }
     char **queryPairs = string_split(params, "&");
     int lengthPairs = length_pointer_pointer_char(queryPairs);
-    for (int i=0; i<lengthPairs; i++) {
+	register int i;
+    for (i=0; i<lengthPairs; i++) {
         char **pair = string_split(queryPairs[i], "=");
         if (length_pointer_pointer_char(pair) == 2) {
             if (strcmp(pair[0], name) == 0) {
@@ -50,7 +51,8 @@ char *findParamFromUrl(char *name, char *url) {
 	char *queryUrl = urlComponents[1];
 	char **queryPairs = string_split(queryUrl, "&");
 	int lengthPairs = length_pointer_pointer_char(queryPairs);
-	for (int i=0; i<lengthPairs; i++) {
+	register int i;
+	for (i=0; i<lengthPairs; i++) {
 		char **pair = string_split(queryPairs[i], "=");
 		if (length_pointer_pointer_char(pair) == 2) {
 			if (strcmp(pair[0], name) == 0) {
