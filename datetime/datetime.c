@@ -32,10 +32,9 @@ uint64_t get_timestamp() {
         uint64_t current = mach_absolute_time() * timebase;
         return current;
     #endif
-        
     #ifdef __linux__
-    struct timespec tsp;
-    clock_gettime(0, &tsp);
-    return tsp.tv_sec * 1000000000 + tsp.tv_nsec;
+	    struct timespec tsp;
+	    clock_gettime(0, &tsp);
+	    return tsp.tv_sec * 1000000000 + tsp.tv_nsec;
     #endif
 }
