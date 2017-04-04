@@ -6,7 +6,7 @@ SET(CMAKE_C_FLAGS  "${CMAKE_CXX_FLAGS} -w")
 
 FIND_PACKAGE(Threads REQUIRED)
 
-file(GLOB_RECURSE SOURCES
+FILE(GLOB_RECURSE SOURCES
     context/*
     crypto/*
     datetime/*
