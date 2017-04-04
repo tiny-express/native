@@ -13,6 +13,7 @@
 #include "string.h"
 #include "type.h"
 #include "context.h"
+#include "crypto.h"
 #include "server.h"
 #include "storage.h"
 #include "datetime.h"
