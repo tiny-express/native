@@ -57,7 +57,7 @@ SET(SOURCE_FILES
     system.h
     type.h
     unistd.h
-    unit_test.h)
+    unit_test.h file/operation.c storage/file.c)
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} Threads::Threads)
