@@ -4,6 +4,8 @@
 #define MAX_PATH_LEN		1024
 #define	MINI_GZ_MIN(a, b)	((a) < (b) ? (a) : (b))
 
+#include <stdint.h>
+
 struct mini_gzip {
     size_t		total_len;
     size_t		data_len;
