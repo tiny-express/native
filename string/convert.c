@@ -1,4 +1,7 @@
+#define _GNU_SOURCE
+
 #include <stdio.h>
+#include <memory.h>
 #include "../string.h"
 
 #define CONVERT_STR(TYPE, FORMAT); \
@@ -21,7 +24,7 @@ CONVERT_STR(short,  "%d\0");
 CONVERT_STR(int,    "%d\0");
 CONVERT_STR(long,   "%ld\0");
 CONVERT_STR(float,  "%g\0");
-CONVERT_STR(double, "%lg\0");
+CONVERT_STR(double, "%.16g\0");
 
 STR_TO(short,  "%hi\0");
 STR_TO(int,    "%d\0");

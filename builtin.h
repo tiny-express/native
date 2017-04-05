@@ -22,7 +22,7 @@
 #include "storage/logger.h"
 #include "component.h"
 #include "thread/thread.h"
-#include "storage/file.h"
+#include "file.h"
 
 #endif //BUILTIN_BUILTIN_H
 
