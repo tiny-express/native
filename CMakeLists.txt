@@ -8,6 +8,7 @@ FIND_PACKAGE(Threads REQUIRED)
 
 FILE(GLOB_RECURSE SOURCES
     context/*
+    compress/*
     crypto/*
     datetime/*
     general/*
