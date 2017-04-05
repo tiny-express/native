@@ -65,16 +65,15 @@ TEST(Builtin_String, FromFloat) {
 }
 
 TEST(Builtin_String, FromDouble) {
-    // TODO: fix this
     double input = 125.569123;
-    char *expect="125.569123";
-    char *result=string_from_double(input);
-    ASSERT_STR(expect,result);
+    char *expect = "125.569123";
+    char *result = string_from_double(input);
+    ASSERT_STR(expect, result);
 
     double input1 = -125.56123;
-    char *expect1="-125.56123";
-    char *result1=string_from_double(input1);
-    ASSERT_STR(expect1,result1);
+    char *expect1 = "-125.56123";
+    char *result1 = string_from_double(input1);
+    ASSERT_STR(expect1, result1);
 }
 
 TEST(Builtin_String, ToShort) {
