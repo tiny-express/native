@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 // Get content of file
-char *file_get_content(char *filename);
+char *file_get_contents(char *filename);
 
 // Put content into file
 int file_put_content(char *file_path, char *content);

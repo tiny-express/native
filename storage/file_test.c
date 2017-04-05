@@ -5,13 +5,19 @@
 #include "../../native/builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_File, file_put_content){
+TEST(Builtin_File, FilePutContent){
 	char *file_path = "storage/test.txt";
 	char *content = "Hello FoodTiny";
-	ASSERT_TRUE(file_put_content(file_path, content));
+
+	int isSuccess = file_put_content(file_path, content);
+	ASSERT_TRUE(isSuccess);
 }
 
-TEST(Builtin_File, file_get_content){
+TEST(Builtin_File, FileGetContets){
 	char *target = "Hello FoodTiny";
-	ASSERT_STR(file_get_content("storage/test.txt"), target);
+	char *content = file_get_contents("storage/test.txt");
+	ASSERT_STR(content, target);
+
+	char *content_false = file_get_contents("storage/test_false.txt");
+	ASSERT_NOT_EQUAL(content_false, target);
 }

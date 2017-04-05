@@ -1,13 +1,13 @@
-#include "../storage/file.h"
+#include "../file.h"
 
 // Get content of file
-char *file_get_content(char *filename){
+char *file_get_contents(char *filename){
 	FILE *fi;
 	fi = fopen(filename, "r");
 
 	if(fi == NULL){
-		fprintf(stderr, "File not available\n");
-		exit(1);
+		printf("File not available\n");
+		return "";
 	}
 
 	fseek(fi, 0, SEEK_END);
