@@ -1,32 +1,28 @@
 #include "../storage/file.h"
+#define TRUE 1
+#define FALSE 0
 
-// Get content of file
-char *file_get_content(char *filename){
-	FILE *fi;
-	fi = fopen(filename, "r");
-
-	if(fi == NULL){
-		fprintf(stderr, "File not available\n");
-		exit(1);
+char *file_get_contents(char *file_name){
+	FILE *input_file = fopen(file_name, "r");
+	if (input_file == NULL) {
+		fprintf(stderr, "File does not exist !\n");
+		return NULL;
 	}
-
-	fseek(fi, 0, SEEK_END);
-	size_t size_of_file = ftell(fi);
-	char *result = (char*)malloc((size_of_file + 1)* sizeof(char));
-	rewind(fi);
-	fread(result, 1, size_of_file, fi);
-
-	fclose(fi);
+	fseek(input_file, 0, SEEK_END);
+	size_t file_size = ftell(input_file);
+	char *result = (char*) malloc((file_size + 1) * sizeof(char));
+	rewind(input_file);
+	fread(result, 1, file_size, input_file);
+	fclose(input_file);
 	return result;
 }
 
-// Put content to file
-int file_put_content(char *file_path, char *content){
-	FILE *fo = fopen(file_path, "w");
-	if(fo == NULL){
-		return 0;
+int file_put_contents(char *file_path, char *content){
+	FILE *outputFile = fopen(file_path, "w");
+	if (outputFile == NULL) {
+		return FALSE;
 	}
-	fputs(content, fo);
-	fclose(fo);
-	return 1;
+	fputs(content, outputFile);
+	fclose(outputFile);
+	return TRUE;
 }

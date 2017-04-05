@@ -1,17 +1,23 @@
-//
-// Created by coder on 05/04/2017.
-//
-
-#include "../../native/builtin.h"
+#include "../storage/file.h"
 #include "../unit_test.h"
 
-TEST(Builtin_File, file_put_content){
-	char *file_path = "storage/test.txt";
-	char *content = "Hello FoodTiny";
-	ASSERT_TRUE(file_put_content(file_path, content));
+TEST(Builtin_File, filePutContents) {
+    const char* file_path = "test.txt";
+    // Make sure file does not exist before testing
+    // No need to care about delete success or not
+    remove(file_path);
+	char *content = "Sample content";
+	// Verify write operation
+	ASSERT_TRUE(file_put_contents(file_path, content));
 }
 
-TEST(Builtin_File, file_get_content){
-	char *target = "Hello FoodTiny";
-	ASSERT_STR(file_get_content("storage/test.txt"), target);
+TEST(Builtin_File, fileGetContents) {
+    const char* file_path = "test.txt";
+    // Make sure file does not exist before testing
+    // No need to care about delete success or not
+    remove(file_path);
+    char *content = "Sample content";
+    file_put_contents(file_path, content);
+    // Verify read operation
+    ASSERT_STR(file_get_contents(file_path), content);
 }
