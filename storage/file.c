@@ -18,8 +18,9 @@ char *file_get_contents(char *file_name){
 }
 
 int file_put_contents(char *file_path, char *content){
-	FILE *outputFile = fopen(file_path, "w");
+	FILE *outputFile = fopen(file_path, "wb+");
 	if (outputFile == NULL) {
+		fprintf(stderr, "Permission denied !\n");
 		return FALSE;
 	}
 	fputs(content, outputFile);
