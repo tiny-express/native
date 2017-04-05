@@ -22,6 +22,8 @@
 #include "storage/logger.h"
 #include "component.h"
 #include "thread/thread.h"
-#endif
+#include "storage/file.h"
+
+#endif //BUILTIN_BUILTIN_H
 
 
