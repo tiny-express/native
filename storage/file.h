@@ -8,10 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Get content of file
-char *file_get_content(char *filename);
-
-// Put content into file
-int file_put_content(char *file_path, char *content);
+char *file_get_contents(char *file_name);
+int file_put_contents(char *file_path, char *content);
 
 #endif //NATIVE_FILE_H
