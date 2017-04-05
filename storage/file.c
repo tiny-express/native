@@ -14,6 +14,7 @@ char *file_get_contents(char *file_name){
 	rewind(input_file);
 	fread(result, 1, file_size, input_file);
 	fclose(input_file);
+    result[file_size] = '\0';
 	return result;
 }
 
