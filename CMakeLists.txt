@@ -7,18 +7,18 @@ SET(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -w")
 FIND_PACKAGE(Threads REQUIRED)
 
 FILE(GLOB_RECURSE SOURCES
-    context/*
-    compress/*
-    crypto/*
-    datetime/*
-    general/*
-    network/*
-    server/*
-    storage/*
-    string/*
-    system/*
-    thread/*
-    type/*
+    context/*.c
+    compress/*.c
+    crypto/*.c
+    datetime/*.c
+    general/*.c
+    network/*.c
+    server/*.c
+    storage/*.c
+    string/*.c
+    system/*.c
+    thread/*.c
+    type/*.c
     main.c
 )
 
@@ -28,3 +28,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 else()
     TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt)
 endif()
+
+LIST(REMOVE_ITEM SOURCES main.c)
+ADD_LIBRARY(builtin STATIC ${SOURCES})
+TARGET_COMPILE_DEFINITIONS(builtin PRIVATE CASSANDRA)
