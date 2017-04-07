@@ -1,4 +1,4 @@
-#include "../../native/builtin.h"
+#include "../builtin.h"
 #include "../unit_test.h"
 
 // pid = (int)pthread_self();
