@@ -59,7 +59,7 @@ void logger_write(const char *fmt, ...) {
     }
 
     char *query;
-	asprintf(&query, "[worker]|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n",
+	asprintf(&query, "[worker]|%s|%s|%d|%s|%s|%d|%s|%s|%s|%ld\n",
 		param[REQUEST_ID], param[PROCESS_ORDER], param[LEVEL], param[FILE], param[FUNCTION],
 		param[LINE], param[SCOPE], param[MESSAGE], param[DATA_LOG], param[TIMESTAMP]);
 	
