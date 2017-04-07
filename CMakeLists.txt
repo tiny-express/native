@@ -29,6 +29,31 @@ else()
     TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt)
 endif()
 
-LIST(REMOVE_ITEM SOURCES main.c)
+FILE(GLOB_RECURSE TESTS
+        context/*_test.c
+        compress/*_test.c
+        crypto/*_test.c
+        datetime/*_test.c
+        general/*_test.c
+        network/*_test.c
+        server/*_test.c
+        storage/*_test.c
+        string/*_test.c
+        system/*_test.c
+        thread/*_test.c
+        type/*_test.c
+        main.c
+        )
+
+foreach(test ${TESTS})
+    list(REMOVE_ITEM SOURCES ${test})
+endforeach()
+
 ADD_LIBRARY(builtin STATIC ${SOURCES})
+
 TARGET_COMPILE_DEFINITIONS(builtin PRIVATE CASSANDRA)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    TARGET_LINK_LIBRARIES(builtin ${CMAKE_THREAD_LIBS_INIT})
+else()
+    TARGET_LINK_LIBRARIES(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt)
+endif()

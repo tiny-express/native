@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../../native/builtin.h"
+#include "../builtin.h"
 #include "../unit_test.h"
 
 TEST(Builtin_Append, PointerChar) {
