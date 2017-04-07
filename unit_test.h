@@ -30,21 +30,22 @@
 
 #include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
 #include <stddef.h> /* size_t */
+#include <signal.h>
 
 typedef void (*SetupFunc)(void*);
 typedef void (*TearDownFunc)(void*);
 
 struct ctest {
-	const char* ssname;  // suite name
-	const char* ttname;  // test name
-	void (*run)();
-	int skip;
-	
-	void* data;
-	SetupFunc setup;
-	TearDownFunc teardown;
-	
-	unsigned int magic;
+    const char* ssname;  // suite name
+    const char* ttname;  // test name
+    void (*run)();
+    int skip;
+
+    void* data;
+    SetupFunc setup;
+    TearDownFunc teardown;
+
+    unsigned int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run
@@ -386,7 +387,7 @@ static uint64_t getCurrentTime() {
 
 static void color_print(const char* color, const char* text) {
     if (color_output)
-        printf("%s%s"ANSI_NORMAL"\n", color, text);
+        printf("%s%s " ANSI_NORMAL "\n", color, text);
     else
         printf("%s\n", text);
 }
@@ -499,10 +500,10 @@ int ctest_main(int argc, const char *argv[])
 #endif
 
                     if (test->setup) test->setup(test->data);
-                    if (test->data)
-                        test->run(test->data);
-                    else
-                        test->run();
+//                    if (test->data)
+//                        test->run(test->data);
+//                    else
+                    test->run();
                     if (test->teardown) test->teardown(test->data);
                     // if we got here it's ok
 #ifdef CTEST_COLOR_OK
