@@ -48,7 +48,7 @@ FILE(GLOB_RECURSE TESTS
         thread/*_test.c
         type/*_test.c
         main.c
-        )
+)
 
 foreach(test ${TESTS})
     list(REMOVE_ITEM SOURCES ${test})
