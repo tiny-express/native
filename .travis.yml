@@ -6,7 +6,8 @@ os:
 compiler:
 - gcc
 before_script:
-- ./install_dependencies
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./install_linux; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
 - cmake .
 script:
 - make native
