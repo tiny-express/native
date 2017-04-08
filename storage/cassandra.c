@@ -183,7 +183,8 @@ char *findField(char *fieldName, Rows *rows, int position) {
     char ***records = rows->records;
     char **record = records[position];
     int lengthValue;
-    for (int i = 0; i < rows->header_length; i++) {
+    int i;
+    for (i = 0; i < rows->header_length; i++) {
         if (strcmp(fieldName, rows->headers[i]) == 0) {
             lengthValue = length_pointer_char(record[i]);
             char *fieldValue;

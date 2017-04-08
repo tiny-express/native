@@ -7,4 +7,5 @@ compiler:
 before_script:
 - cmake .
 script:
-- make
+- make native
+- ./native
