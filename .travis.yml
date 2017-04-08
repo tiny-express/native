@@ -6,6 +6,7 @@ os:
 compiler:
 - gcc
 before_script:
+- ./install-dependencies
 - cmake .
 script:
 - make native
