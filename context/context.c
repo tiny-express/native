@@ -1,5 +1,5 @@
 #include "../builtin.h"
-
+#include "../context.h"
 Context *createRequestContext(Context *context) {
 	Context *requestContext = malloc(sizeof(Context));
 	requestContext->mode = context->mode;
