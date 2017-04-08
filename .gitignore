@@ -6,6 +6,7 @@
 /Makefile
 /native
 /native.cbp
+/libbuiltin.a
 /test.txt
 .DS_Store
 

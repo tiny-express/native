@@ -22,7 +22,7 @@ typedef struct CACHE {
 /****** LOG MODE **********/
 typedef struct LOGGER {
     char *request_id;
-	int process_order;
+	char *process_order;
 } LOGGER;
 
 typedef struct BUILD {
