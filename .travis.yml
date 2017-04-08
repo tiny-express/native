@@ -11,5 +11,5 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
 - cmake .
 script:
-- make native
+- make
 - ./native

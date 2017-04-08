@@ -211,8 +211,8 @@ char *string_concat(char *target, char *subtarget) {
 char *convert_to_pointer_char(char *target) {
 	size_t length_array =  strlen(target);
 	char *result = (char*)malloc((length_array + 1) * sizeof(char));
-
-	for(int index = 0; index < length_array; index++){
+	int index;
+	for(index = 0; index < length_array; index++){
 		result[index] = target[index];
 	}
 
