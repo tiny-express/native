@@ -9,7 +9,7 @@
 #define P_LEN(TYPE); \
 int length_pointer_##TYPE(TYPE *target) {\
 	register TYPE*pointer;\
-	for (pointer = target; *pointer ; ++pointer);\
+	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
 }
 
