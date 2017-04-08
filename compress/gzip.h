@@ -5,6 +5,7 @@
 #define	MINI_GZ_MIN(a, b)	((a) < (b) ? (a) : (b))
 
 #include <stdint.h>
+#include <inttypes.h>
 
 struct mini_gzip {
     size_t		total_len;
