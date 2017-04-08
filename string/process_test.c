@@ -140,3 +140,12 @@ TEST(Builtin_String, Concat) {
     ASSERT_STR("Hello", result);
     ASSERT_EQUAL(5, length_pointer_char(result));
 }
+
+// Convert
+TEST(Builtin_String, ConvertToPointerChar){
+    char *target = "Hello Hello Hello Hello Hello Hello!";
+    char array[50] = "Hello Hello Hello Hello Hello Hello!";
+    char *result = convert_to_pointer_char(array);
+
+    ASSERT_STR(result, target);
+}

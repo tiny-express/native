@@ -9,6 +9,7 @@
 #include <getopt.h>
 #include <limits.h>
 #include <stdarg.h>
+#include <zlib.h>
 #include "general.h"
 #include "string.h"
 #include "type.h"
@@ -23,6 +24,7 @@
 #include "component.h"
 #include "thread/thread.h"
 #include "file.h"
+#include "compress.h"
 
 #endif //BUILTIN_BUILTIN_H
 

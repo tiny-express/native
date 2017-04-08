@@ -47,6 +47,7 @@ int    string_start(char *target, const char *prefix);
 int    string_end(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+char *convert_to_pointer_char(char target[]);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"
