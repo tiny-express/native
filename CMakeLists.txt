@@ -1,13 +1,13 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(native)
+cmake_minimum_required(VERSION 2.8)
+project(native)
 
-SET(CMAKE_C_COMPILER gcc)
-SET(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -w")
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
-FIND_LIBRARY(ZLIB REQUIRED)
-FIND_PACKAGE(Threads REQUIRED)
+find_library(ZLIB REQUIRED)
+find_package(Threads REQUIRED)
 
-FILE(GLOB_RECURSE SOURCES
+file(GLOB_RECURSE SOURCES
     context/*.c
     compress/*.c
     crypto/*.c
@@ -23,14 +23,14 @@ FILE(GLOB_RECURSE SOURCES
     main.c
 )
 
-ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz)
 else()
-    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
 endif()
 
-FILE(GLOB_RECURSE TESTS
+file(GLOB_RECURSE TESTS
         context/*_test.c
         compress/*_test.c
         crypto/*_test.c
@@ -50,11 +50,11 @@ foreach(test ${TESTS})
     list(REMOVE_ITEM SOURCES ${test})
 endforeach()
 
-ADD_LIBRARY(builtin STATIC ${SOURCES})
+add_library(builtin STATIC ${SOURCES})
 
-TARGET_COMPILE_DEFINITIONS(builtin PRIVATE CASSANDRA)
+target_compile_definitions(builtin PRIVATE CASSANDRA)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    TARGET_LINK_LIBRARIES(builtin ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz)
 else()
-    TARGET_LINK_LIBRARIES(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
 endif()
