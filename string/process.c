@@ -206,3 +206,16 @@ char *string_concat(char *target, char *subtarget) {
 
 	return result;
 }
+
+// Convert array char to pointer char
+char *convert_to_pointer_char(char *target) {
+	size_t length_array =  strlen(target);
+	char *result = (char*)malloc((length_array + 1) * sizeof(char));
+	int index;
+	for(index = 0; index < length_array; index++){
+		result[index] = target[index];
+	}
+
+	result[length_array] = '\0';
+	return result;
+}
