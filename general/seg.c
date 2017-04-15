@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../general.h"
 
 #define P_SEG(TYPE); \
 TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
