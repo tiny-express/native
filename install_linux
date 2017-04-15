@@ -1,0 +1,6 @@
+sudo apt-get install -y libuv-dev
+git clone https://github.com/datastax/cpp-driver.git
+mkdir cpp-driver/build
+cd cpp-driver/build
+cmake .. -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl
+make && sudo make install

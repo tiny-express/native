@@ -1,7 +1,5 @@
-/*
+#ifdef CASSANDRA
 #include "../builtin.h"
-#include "../storage.h"
-#include <stdlib.h>
 
 #define FIND_FIELD(TYPE); \
 TYPE find_field_##TYPE(char *fieldName, Rows *rows, int position) { \
@@ -185,7 +183,8 @@ char *findField(char *fieldName, Rows *rows, int position) {
     char ***records = rows->records;
     char **record = records[position];
     int lengthValue;
-    for (int i = 0; i < rows->header_length; i++) {
+    int i;
+    for (i = 0; i < rows->header_length; i++) {
         if (strcmp(fieldName, rows->headers[i]) == 0) {
             lengthValue = length_pointer_char(record[i]);
             char *fieldValue;
@@ -235,4 +234,4 @@ FIND_FIELD(long);
 FIND_FIELD(float);
 FIND_FIELD(double);
 
-*/
+#endif
