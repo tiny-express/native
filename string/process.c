@@ -213,3 +213,4 @@ char *convert_to_pointer_char(char *target) {
 	result[length_array] = '\0';
 	return result;
 }
+
