@@ -8,6 +8,10 @@
 #include "../general.h"
 #include "../string.h"
 
+#define HTTPS "https://"
+#define HTTP "http://"
+#define LOCALHOST "localhost"
+
 /**
  * Retrieve url schema
  *
@@ -18,7 +22,12 @@ char *http_schema(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	return "";
+	if(string_index(url, "https://")) {
+		return HTTPS;
+	} else if(string_index(url, "http://")) {
+		return HTTP;
+	}
+	return NULL;
 }
 
 /**
@@ -31,7 +40,10 @@ char *http_hostname(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	return "";
+	if(string_index(url, "localhost")) {
+		return LOCALHOST;
+	}
+	return NULL;
 }
 
 /**
@@ -44,6 +56,7 @@ char *http_port(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
+
 	return "";
 }
 
