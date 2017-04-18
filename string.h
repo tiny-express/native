@@ -48,6 +48,15 @@ char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
 char  *convert_to_pointer_char(char target[]);
 
+char *string_from_to(char *target, int from, int to); // Cut from position to position - Please re-use segment in seg.h
+char *string_from(char *target, int from); // Cut from position to end of string - Please re-use segment in seg.h
+char *string_to(char *target, int to); // Cut from 0 to 'to position' - Please re-use segment in seg.h
+char *string_copy(char *target); // Clone string with new address
+char *string_upper(char *target); // Make upper case all characters
+char *string_lower(char *target); // Make lower case all characters
+char *string_title(char *target); // Make first letter of a word becomes upper case
+
+
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"
 
