@@ -214,3 +214,65 @@ char *convert_to_pointer_char(char *target) {
 	return result;
 }
 
+char *string_from_to(char *target, int from, int to) {
+	if (from < 0 || to < 0 || from > to || to > length_pointer_char(target)) return "";
+	char *result = malloc((to - from + 1) * sizeof(char));
+	memcpy(result, target + from, to - from);
+	result[to - from] = '\0';
+	return result;
+}
+
+char *string_from(char *target, int from) {
+	return string_from_to(target, from, length_pointer_char(target));
+}
+
+char *string_to(char *target, int to) {
+	return string_from_to(target, 0, to);
+}
+
+char *string_copy(char *target) {
+	int length = length_pointer_char(target);
+	char *result = malloc((length + 1) * sizeof(char));
+	memcpy(result, target, length);
+	result[length] = '\0';
+	return result;
+}
+
+char *string_upper(char *target) {
+	char *result = string_copy(target);
+	char *index = result;
+	for (; *index; index++) {
+		if (('a' <= *index) && (*index <= 'z')) {
+			*index = *index - 32;
+		}
+	}
+	return result;
+}
+
+char *string_lower(char *target) {
+	char *result = string_copy(target);
+	char *index = result;
+	for (; *index; index++) {
+		if (('A' <= *index) && (*index <= 'Z')) {
+			*index = *index + 32;
+		}
+	}
+	return result;
+}
+
+char *string_title(char *target) {
+	char *result = string_copy(target);
+	char *index = result;
+	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
+		*index = *index - 32;
+	}
+	char lastIndex = *index;
+	index++;
+	for (; *index; index++) {
+		if (lastIndex == ' ' && 'a' <= *index && *index <= 'z') {
+			*index = *index - ('a' - 'A');
+		}
+		lastIndex = *index;
+	}
+	return result;
+}
