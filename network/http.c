@@ -8,8 +8,8 @@
 #include "../general.h"
 #include "../string.h"
 
-#define HTTPS "https://"
-#define HTTP "http://"
+#define HTTPS "https"
+#define HTTP "http"
 #define LOCALHOST "localhost"
 
 /**
@@ -22,9 +22,9 @@ char *http_schema(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	if(string_index(url, "https://")) {
+	if (string_index(url, "https://") != -1) {
 		return HTTPS;
-	} else if(string_index(url, "http://")) {
+	} else if (string_index(url, "http://") != -1) {
 		return HTTP;
 	}
 	return NULL;
@@ -41,35 +41,78 @@ char *http_hostname(char *url) {
 		return NULL;
 	}
 
-	if(string_index(url, "127.0.0.1")) {
+	if (string_index(url, "127.0.0.1") != -1) {
 		return LOCALHOST;
+	} else {
+		int first_position = string_index(url, "://") + 3;
+		char *result = (char*)malloc(50 * sizeof(char));
+
+		int index = 0; // index in arrayHostname
+		while (1) {
+			if (url[first_position] == '/' || url[first_position] == ':') {
+				break;
+			}
+			result[index++] = url[first_position++];
+		}
+
+		result[index] = '\0';
+		return result;
 	}
 
-	int indexOfHostname = string_index(url, "://") + 3;
-	char charInUrl = url[indexOfHostname];
-	char arrayHostname[100];
-	int index = 0; // index in arrayHostname
-
-	while(url[indexOfHostname] != '/' || url[indexOfHostname] != ':') {
-		arrayHostname[index++] = url[indexOfHostname++];
-	}
-
-	char *result = convert_to_pointer_char(arrayHostname);
-	return result;
+	return NULL;
 }
 
 /**
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return int
  */
-char *http_port(char *url) {
+int http_port(char *url) {
 	if (length_pointer_char(url) == 0) {
-		return NULL;
+		return -1000;
 	}
 
-	return "";
+	int first_position = string_index(url, ":"); // index of ':' in url
+
+	if (first_position == -1) {
+		return -1000;
+	}
+
+	if (first_position > 5) {
+		first_position = -1;
+	}
+
+
+	if (first_position != -1) {
+		if (string_index(url, "http://") != -1) {
+			return 80;
+		} else if (string_index(url, "https://") != -1) {
+			return 443;
+		}
+	} else {
+		int iUrl = first_position + 1;
+		for (iUrl; iUrl < length_pointer_char(url); iUrl++) {
+			if(url[iUrl] == ':'){
+				iUrl++;
+				break;
+			}
+		}
+
+		int iResult = 0;
+		char result[10];
+		while(1) {
+			if ((url[iUrl] >= '0') && (url[iUrl] <= '9')) {
+				result[iResult++] = url[iUrl++];
+			} else {
+				break;
+			}
+		}
+
+		return atoi(result);
+	}
+
+	return -1000;
 }
 
 /**
@@ -81,16 +124,25 @@ char *http_port(char *url) {
  */
 char *http_query(char *url) {
 	int length_url = length_pointer_char(url);
+
 	if (length_url == 0) {
 		return NULL;
 	}
+
 	int first_position = string_index(url, "?");
-	if (first_position < 0) {
-		// Url query does not exist
-		return NULL;
+	int end_position = first_position;
+
+	for (end_position; end_position < length_pointer_char(url); end_position++) {
+		if (url[end_position] == '/' || url[end_position] == ':') {
+			break;
+		}
 	}
-	//return string_substr(url, first_position, length_url + 1);
-	return "";
+
+	if (first_position != -1) {
+		return string_from_to(url, first_position + 1, end_position);
+	}
+
+	return NULL;
 }
 
 /**
