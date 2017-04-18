@@ -22,4 +22,11 @@ TEST(Builtin_Network, HttpSchema) {
 	ASSERT_NOT_EQUAL(schemaNull, HTTPS);
 }
 
-TEST(Builtin_Network, Http)
+TEST(Builtin_Network, HttpHostname){
+	char *hostname = "foodtiny.com.vn";
+	ASSERT_STR(http_hostname("https://foodtiny.com.vn/home/bundaumamtom/"), hostname);
+
+	ASSERT_STR(http_hostname("http://localhost:3000"), LOCALHOST);
+
+	ASSERT_STR(http_hostname("https://127.0.0.1/fanpage/vietnamsexybae"), LOCALHOST);
+}
