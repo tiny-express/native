@@ -60,7 +60,7 @@ void logger_write(const char *fmt, ...) {
 
     char *query;
 	asprintf(&query, "[worker]|%s|%s|%d|%s|%s|%d|%s|%s|%s|%ld\n",
-		param[REQUEST_ID_INDEX], param[PROCESS_ORDER_INDEX], param[LEVEL_INDEX_INDEX], param[FILE_INDEX], param[FUNCTION_INDEX],
+		param[REQUEST_ID_INDEX], param[PROCESS_ORDER_INDEX], param[LEVEL_INDEX], param[FILE_INDEX], param[FUNCTION_INDEX],
 		param[LINE_INDEX], param[SCOPE_INDEX], param[MESSAGE_INDEX], param[DATA_LOG_INDEX], param[TIMESTAMP_INDEX]);
 	
 	fprintf(stdout, "%s", query);
