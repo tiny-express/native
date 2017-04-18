@@ -36,17 +36,26 @@ float string_to_float(char* target);
 #define indexOf string_index
 
 char  *string_replace(char *target, char *find, char *replace_with);
-char **string_substr(char *target, int from, int to);
+char  *string_substr(char *target, int from, int to);
 char **string_split(char *target, const char *delim);
 char **string_slice(char **target, const char *flag);
 char  *string_join(char **target, char const *delim);
 int    string_index(char *target, char *subtarget);
 char  *string_trim(char *target);
-int   *string_match(char **target, char *regex);
 int    string_start(char *target, const char *prefix);
 int    string_end(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+char  *convert_to_pointer_char(char target[]);
+
+char *string_from_to(char *target, int from, int to);
+char *string_from(char *target, int from);
+char *string_to(char *target, int to);
+char *string_copy(char *target);
+char *string_upper(char *target);
+char *string_lower(char *target);
+char *string_title(char *target);
+
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

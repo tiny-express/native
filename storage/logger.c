@@ -49,19 +49,19 @@ void logger_write(const char *fmt, ...) {
     buff[strlen(buff)] = '\0';
 
 	char **param = string_split(buff, "|");
-	if (strcmp(param[MODE], LOG_APP_TEST) == 0) { 
+	if (strcmp(param[MODE_INDEX], LOG_APP_TEST) == 0) {
     	va_end(args);
     	return;
     }
 
-    if (NULL == param[DATA_LOG]) {
-    	param[DATA_LOG] = "";
+    if (NULL == param[DATA_LOG_INDEX]) {
+    	param[DATA_LOG_INDEX] = "";
     }
 
     char *query;
-	asprintf(&query, "[worker]|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n",
-		param[REQUEST_ID], param[PROCESS_ORDER], param[LEVEL], param[FILE], param[FUNCTION],
-		param[LINE], param[SCOPE], param[MESSAGE], param[DATA_LOG], param[TIMESTAMP]);
+	asprintf(&query, "[worker]|%s|%s|%d|%s|%s|%d|%s|%s|%s|%ld\n",
+		param[REQUEST_ID_INDEX], param[PROCESS_ORDER_INDEX], param[LEVEL_INDEX], param[FILE_INDEX], param[FUNCTION_INDEX],
+		param[LINE_INDEX], param[SCOPE_INDEX], param[MESSAGE_INDEX], param[DATA_LOG_INDEX], param[TIMESTAMP_INDEX]);
 	
 	fprintf(stdout, "%s", query);
 	fflush(stdout);
