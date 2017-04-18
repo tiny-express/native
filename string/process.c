@@ -13,7 +13,6 @@ char  *string_replace(char *target, char* find, char* replace_with) {
 	register int i, count = 0;
 	int oldlen = length_pointer_char(find);
 	int newlen = length_pointer_char(replace_with);
-
 	for (i = 0; target[i] != '\0'; i++) {
 		if (strstr(&target[i], find) == &target[i]) {
 			count++;
@@ -133,7 +132,6 @@ int string_start(char *target, const char *prefix) {
     if (target_length < prefix_length) {
 		return 0;
 	}
-
     register int i;
     for (i = 0; i < prefix_length; i++) {
         if (prefix[i] != target[i]) {
@@ -149,7 +147,6 @@ int string_end(char *target, const char *suffix) {
     if (target_length < suffix_length) {
 		return 0;
 	}
-
     register int i;
     for (i = suffix_length - 1; i >= 0; i--) {
         if (suffix[i] != target[target_length - suffix_length + i]) {
@@ -163,9 +160,9 @@ int string_index(char *target, char *subtarget) {
     int target_length = length_pointer_char(target);
     int subtarget_length = length_pointer_char(subtarget);
     if (target_length < subtarget_length) {
+		// Can not found subtarget in target
 		return -1;
 	}
-
     register int i, j;
     for (i = 0; i <= (target_length - subtarget_length); i++) {
         if (target[i] != subtarget[0]) {
@@ -198,11 +195,84 @@ char *string_random(char *target, int size) {
 char *string_concat(char *target, char *subtarget) {
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
-
 	char *result = malloc((target_length + subtarget_length + 1) * sizeof(char));
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
     result[target_length + subtarget_length] = '\0';
+	return result;
+}
 
+// Convert array char to pointer char
+char *convert_to_pointer_char(char *target) {
+	size_t length_array =  strlen(target);
+	char *result = (char*)malloc((length_array + 1) * sizeof(char));
+	int index;
+	for(index = 0; index < length_array; index++){
+		result[index] = target[index];
+	}
+	result[length_array] = '\0';
+	return result;
+}
+
+char *string_from_to(char *target, int from, int to) {
+	if (from < 0 || to < 0 || from > to || to > length_pointer_char(target)) return "";
+	char *result = malloc((to - from + 1) * sizeof(char));
+	memcpy(result, target + from, to - from);
+	result[to - from] = '\0';
+	return result;
+}
+
+char *string_from(char *target, int from) {
+	return string_from_to(target, from, length_pointer_char(target));
+}
+
+char *string_to(char *target, int to) {
+	return string_from_to(target, 0, to);
+}
+
+char *string_copy(char *target) {
+	int length = length_pointer_char(target);
+	char *result = malloc((length + 1) * sizeof(char));
+	memcpy(result, target, length);
+	result[length] = '\0';
+	return result;
+}
+
+char *string_upper(char *target) {
+	char *result = string_copy(target);
+	register char *index = result;
+	for (; *index; index++) {
+		if (('a' <= *index) && (*index <= 'z')) {
+			*index = *index - 32;
+		}
+	}
+	return result;
+}
+
+char *string_lower(char *target) {
+	char *result = string_copy(target);
+	register char *index = result;
+	for (; *index; index++) {
+		if (('A' <= *index) && (*index <= 'Z')) {
+			*index = *index + 32;
+		}
+	}
+	return result;
+}
+
+char *string_title(char *target) {
+	char *result = string_copy(target);
+	register char *index = result;
+	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
+		*index = *index - 32;
+	}
+	char lastIndex = *index;
+	index++;
+	for (; *index; index++) {
+		if (lastIndex == ' ' && 'a' <= *index && *index <= 'z') {
+			*index = *index - 32;
+		}
+		lastIndex = *index;
+	}
 	return result;
 }

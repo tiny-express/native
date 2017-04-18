@@ -4,6 +4,9 @@
 #define uint64_t long 
 #elif __APPLE__
 #include <mach/mach_time.h>
+#elif defined _WIN32 || defined __CYGWIN__
+typedef __int32 int32_t;
+typedef unsigned __int32 uint32_t;
 #endif
 
 long now();

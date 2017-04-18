@@ -1,4 +1,4 @@
-#include "../../native/builtin.h"
+#include "../builtin.h"
 #include "../unit_test.h"
 
 TEST(Builtin_String, Replace) {
@@ -139,4 +139,129 @@ TEST(Builtin_String, Concat) {
     result = string_concat(target, subtarget);
     ASSERT_STR("Hello", result);
     ASSERT_EQUAL(5, length_pointer_char(result));
+}
+
+// Convert
+TEST(Builtin_String, ConvertToPointerChar){
+    char *target = "Hello Hello Hello Hello Hello Hello!";
+    char array[50] = "Hello Hello Hello Hello Hello Hello!";
+    char *result = convert_to_pointer_char(array);
+
+    ASSERT_STR(result, target);
+}
+
+TEST(Builtin_String, FromTo) {
+    char *target = "Hello World";
+    int from = 6;
+    int to = 11;
+    char *result = string_from_to(target, from, to);
+    char *expect = "World";
+    ASSERT_STR(expect, result);
+
+    from = 11;
+    to = 6;
+    result = string_from_to(target, from, to);
+    expect = "";
+    ASSERT_STR(expect, result);
+
+    from = -1;
+    to = 11;
+    result = string_from_to(target, from, to);
+    expect = "";
+    ASSERT_STR(expect, result);
+
+    from = 0;
+    to = 20;
+    result = string_from_to(target, from, to);
+    expect = "";
+    ASSERT_STR(expect, result);
+}
+
+TEST(Builtin_String, From) {
+    char *target = "Hello World";
+    int from = 6;
+    char *result = string_from(target, from);
+    char *expect = "World";
+    ASSERT_STR(expect, result);
+
+    from = -1;
+    expect = "";
+    result = string_from(target, from);
+    ASSERT_STR(expect, result);
+
+    from = 20;
+    expect = "";
+    result = string_from(target, from);
+    ASSERT_STR(expect, result);
+}
+
+TEST(Builtin_String, To) {
+    char *target = "Hello World";
+    int to = 5;
+    char *result = string_to(target, to);
+    char *expect = "Hello";
+    ASSERT_STR(expect, result);
+    
+    to = -1;
+    expect = "";
+    result = string_to(target, to);
+    ASSERT_STR(expect, result);
+
+    to = 20;
+    expect = "";
+    result = string_to(target, to);
+    ASSERT_STR(expect, result);
+}
+
+TEST(Builtin_String, Copy) {
+    char *target = "Hello World";
+    char *result = string_copy(target);
+    ASSERT_STR(target, result);
+
+    target = "";
+    result = string_copy(target);
+    ASSERT_STR(target, result);
+}
+
+TEST(Builtin_String, ToUpper) {
+    char *target = "Hello World";
+    char *result = string_upper(target);
+    char *expect = "HELLO WORLD";
+    ASSERT_STR(expect, result);
+
+    target = "&*^&%&";
+    result = string_upper(target);
+    ASSERT_STR(target, result);
+
+    target = "JIJjifje&*^";
+    result = string_upper(target);
+    expect = "JIJJIFJE&*^";
+    ASSERT_STR(expect, result);
+}
+
+TEST(Builtin_String, Lower) {
+    char *target = "HELLO WORLD";
+    char *result = string_lower(target);
+    char *expect = "hello world";
+    ASSERT_STR(expect, result);
+
+    target = "&*%&*";
+    result = string_lower(target);
+    ASSERT_STR(target, result);
+    
+    target = "HIhahaHI!@#";
+    result = string_lower(target);
+    expect = "hihahahi!@#";
+    ASSERT_STR(expect, result);
+}
+
+TEST(Builtin_String, Title) {
+    char *target = "hello world";
+    char *result = string_title(target);
+    char *expect = "Hello World";
+    ASSERT_STR(expect, result);
+
+    target = "#hi";
+    result = string_title(target);
+    ASSERT_STR(target, result);
 }

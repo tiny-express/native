@@ -1,15 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <limits.h>
-#include <math.h>
 #include "../string.h"
 
 // Length of pointer
 #define P_LEN(TYPE); \
 int length_pointer_##TYPE(TYPE *target) {\
 	register TYPE*pointer;\
-	for (pointer = target; *pointer ; ++pointer);\
+	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
 }
 
