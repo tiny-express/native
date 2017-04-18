@@ -240,7 +240,7 @@ char *string_copy(char *target) {
 
 char *string_upper(char *target) {
 	char *result = string_copy(target);
-	char *index = result;
+	register char *index = result;
 	for (; *index; index++) {
 		if (('a' <= *index) && (*index <= 'z')) {
 			*index = *index - 32;
@@ -251,7 +251,7 @@ char *string_upper(char *target) {
 
 char *string_lower(char *target) {
 	char *result = string_copy(target);
-	char *index = result;
+	register char *index = result;
 	for (; *index; index++) {
 		if (('A' <= *index) && (*index <= 'Z')) {
 			*index = *index + 32;
@@ -262,7 +262,7 @@ char *string_lower(char *target) {
 
 char *string_title(char *target) {
 	char *result = string_copy(target);
-	char *index = result;
+	register char *index = result;
 	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
 		*index = *index - 32;
 	}
@@ -270,7 +270,7 @@ char *string_title(char *target) {
 	index++;
 	for (; *index; index++) {
 		if (lastIndex == ' ' && 'a' <= *index && *index <= 'z') {
-			*index = *index - ('a' - 'A');
+			*index = *index - 32;
 		}
 		lastIndex = *index;
 	}
