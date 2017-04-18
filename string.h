@@ -48,6 +48,15 @@ char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
 char  *convert_to_pointer_char(char target[]);
 
+char *string_from_to(char *target, int from, int to);
+char *string_from(char *target, int from);
+char *string_to(char *target, int to);
+char *string_copy(char *target);
+char *string_upper(char *target);
+char *string_lower(char *target);
+char *string_title(char *target);
+
+
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"
 

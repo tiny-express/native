@@ -6,17 +6,17 @@
 #define WORKER_LOGGER_H
 #include "../builtin.h"
 
-#define LEVEL 		0
-#define MESSAGE         1
-#define FILE 		2
-#define FUNCTION 	3
-#define LINE 		4
-#define TIMESTAMP       5
-#define SCOPE           6
-#define REQUEST_ID      7
-#define PROCESS_ORDER   8
-#define MODE            9
-#define DATA_LOG        10
+#define LEVEL_INDEX 		0
+#define MESSAGE_INDEX         1
+#define FILE_INDEX 		2
+#define FUNCTION_INDEX 	3
+#define LINE_INDEX 		4
+#define TIMESTAMP_INDEX       5
+#define SCOPE_INDEX           6
+#define REQUEST_ID_INDEX      7
+#define PROCESS_ORDER_INDEX   8
+#define MODE_INDEX            9
+#define DATA_LOG_INDEX        10
 
 #define LOG_NGINX       "NGINX"
 #define LOG_HANDLER     "HANDLER"

@@ -40,10 +40,22 @@ char *http_hostname(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	if(string_index(url, "localhost")) {
+
+	if(string_index(url, "127.0.0.1")) {
 		return LOCALHOST;
 	}
-	return NULL;
+
+	int indexOfHostname = string_index(url, "://") + 3;
+	char charInUrl = url[indexOfHostname];
+	char arrayHostname[100];
+	int index = 0; // index in arrayHostname
+
+	while(url[indexOfHostname] != '/' || url[indexOfHostname] != ':') {
+		arrayHostname[index++] = url[indexOfHostname++];
+	}
+
+	char *result = convert_to_pointer_char(arrayHostname);
+	return result;
 }
 
 /**
