@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(native)
 
-set(CMAKE_C_COMPILER gcc)
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 find_library(ZLIB REQUIRED)
