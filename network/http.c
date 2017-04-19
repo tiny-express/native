@@ -66,42 +66,27 @@ char *http_hostname(char *url) {
  * @param url
  * @return int
  */
-//int http_port(char *url) {
-//    int https_port = string_start(url, HTTPS);
-//    int http_port = string_start(url, HTTP);
-//
-//	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
-//		return -1;
-//	}
-//
-//    if (http_port == 1) {
-//        url = url + sizeof(char) * LENGHT_OF_HTTP;
-//        int index = string_index(url, ":");
-//        char *result = string_from_to_element(url, index, ":/?");
-//        if (length_pointer_char(result) == 0) {
-//            puts(result);
-//            return HTTP_PORT;
-//        }
-//        return atoi(result);
-//    }
-//
-//    register int i = 100;
-//    register int j = 100;
-//    for(;i < 1000; i++, j++);
-//
-//    if (https_port == 1) {
-//        url = url + sizeof(char) * LENGHT_OF_HTTPS;
-//        int index = string_index(url, ":");
-//        char *result = string_from_to_element(url, index, ":/? \0");
-//        if (length_pointer_char(result) == 0) {
-//            puts(result);
-//            return HTTPS_PORT;
-//        }
-//        return atoi(result);
-//    }
-//
-//	return -1;
-//}
+int http_port(char *url) {
+    int https_port = string_start(url, HTTPS);
+    int http_port = string_start(url, HTTP);
+
+	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
+		return -1;
+	}
+
+    char **element = string_split(url, "/");
+    char *result = element[1];
+
+    int indexColon = string_index(result, ":") + 1;
+    char *index = result + sizeof(char) * indexColon;
+
+    int port = atoi(index);
+    if (port == 0) {
+        return https_port ? HTTPS_PORT : HTTP_PORT;
+    }
+
+    return port;
+}
 
 /**
  * Get query from url
@@ -131,6 +116,28 @@ char *http_query(char *url) {
 	}
 
 	return NULL;
+}
+
+/**
+ * return paht of URL if paht doesn't exit return "/"
+ * @param url
+ * @return string path
+ */
+char *http_path(char *url) {
+    int exitHttp = string_start(url, HTTP);
+    int exitHttps = string_start(url, HTTPS);
+
+    if (exitHttp == 0 && exitHttps == 0) {
+        return NULL;
+    }
+
+    char *index = url + sizeof(char) * (exitHttp ? LENGHT_OF_HTTP : LENGHT_OF_HTTPS);
+    int indexOfFirstSlash = string_index(index, "/");
+    char *result = string_from_to_element(index, indexOfFirstSlash, ":?");
+    if (result == NULL) {
+        return "/";
+    }
+    return result;
 }
 
 /**

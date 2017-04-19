@@ -1,8 +1,8 @@
 #ifndef BUILTIN_NETWORK_H
 #define BUILTIN_NETWORK_H
 
-#define HTTPS "https"
-#define HTTP "http"
+#define HTTPS "https://"
+#define HTTP "http://"
 #define LOCALHOST "localhost"
 #define LENGHT_OF_HTTP 7
 #define LENGHT_OF_HTTPS 8
@@ -16,5 +16,6 @@ char *http_hostname(char *url);
 int   http_port(char *url);
 char *http_query(char *url);
 char *http_request(char *url, char *data, char *headers);
+char *http_path(char *url);
 
 #endif
