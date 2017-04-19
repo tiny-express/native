@@ -283,3 +283,10 @@ TEST(Builtin_String, FromToElement) {
 
     ASSERT_EQUAL(string_from_to_element("", 0,"/"), NULL);
 }
+
+TEST(Builtin_String, StringInString) {
+    char *target = "1234";
+    char subtarget = '3';
+    int result = string_in_string(target, subtarget);
+    ASSERT_EQUAL(1, result);
+}

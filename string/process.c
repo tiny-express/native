@@ -275,10 +275,10 @@ char *string_title(char *target) {
 	return result;
 }
 
-int string_in_string(char target, char *subtarget) {
-	register int index = 0;
-	for(; index < length_pointer_char(subtarget); index++) {
-		if (subtarget[index] == target) {
+int string_in_string(char *target, char subtarget) {
+    char *index = target;
+	for(; *index; index++) {
+		if (*index == subtarget) {
 			return 1;
 		}
 	}
@@ -291,17 +291,16 @@ char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) 
 		return NULL;
 	}
 
-	url = url + sizeof(char) * indexFirstElement;
+	char *index = url + sizeof(char) * indexFirstElement;
+
 	char *result = (char*)malloc((lengthUrl - indexFirstElement + 1) * sizeof(char));
-	int index = 0;
-	for(; *url; url++, index++) {
-		if (string_in_string(*url, subtarget) == TRUE) {
-			break;
-		}
-		result[index] = *url;
+	int indexInResult = 0;
+	for(; *index && !string_in_string(subtarget, *index); index++, indexInResult++) {
+		result[indexInResult] = *index;
 	}
 
-	result[index] = '\0';
+	realloc(result, indexInResult);
+    result[indexInResult] = '\0';
 	return result;
 }
 
