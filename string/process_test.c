@@ -262,6 +262,12 @@ TEST(Builtin_String, Title) {
     ASSERT_STR(expect, result);
 
     target = "#hi";
+    expect = "#hi";
     result = string_title(target);
-    ASSERT_STR(target, result);
+    ASSERT_STR(expect, result);
+    
+    target = "abcd";
+    expect = "Abcd";
+    result = string_title(target);
+    ASSERT_STR(expect, result);
 }
