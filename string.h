@@ -55,6 +55,7 @@ char *string_upper(char *target);
 char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
+int string_in_string(char *target, char subtarget);
 
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

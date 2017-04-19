@@ -66,42 +66,27 @@ char *http_hostname(char *url) {
  * @param url
  * @return int
  */
-//int http_port(char *url) {
-//    int https_port = string_start(url, HTTPS);
-//    int http_port = string_start(url, HTTP);
-//
-//	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
-//		return -1;
-//	}
-//
-//    if (http_port == 1) {
-//        url = url + sizeof(char) * LENGHT_OF_HTTP;
-//        int index = string_index(url, ":");
-//        char *result = string_from_to_element(url, index, ":/?");
-//        if (length_pointer_char(result) == 0) {
-//            puts(result);
-//            return HTTP_PORT;
-//        }
-//        return atoi(result);
-//    }
-//
-//    register int i = 100;
-//    register int j = 100;
-//    for(;i < 1000; i++, j++);
-//
-//    if (https_port == 1) {
-//        url = url + sizeof(char) * LENGHT_OF_HTTPS;
-//        int index = string_index(url, ":");
-//        char *result = string_from_to_element(url, index, ":/? \0");
-//        if (length_pointer_char(result) == 0) {
-//            puts(result);
-//            return HTTPS_PORT;
-//        }
-//        return atoi(result);
-//    }
-//
-//	return -1;
-//}
+int http_port(char *url) {
+    int https_port = string_start(url, HTTPS);
+    int http_port = string_start(url, HTTP);
+
+	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
+		return -1;
+	}
+
+    char **element = string_split(url, "/");
+    char *result = element[1];
+
+    int indexColon = string_index(result, ":") + 1;
+    char *index = result + sizeof(char) * indexColon;
+
+    int port = atoi(index);
+    if (port == 0) {
+        return https_port ? HTTPS_PORT : HTTP_PORT;
+    }
+
+    return port;
+}
 
 /**
  * Get query from url
@@ -134,6 +119,28 @@ char *http_query(char *url) {
 }
 
 /**
+ * return paht of URL if paht doesn't exit return "/"
+ * @param url
+ * @return string path
+ */
+char *http_path(char *url) {
+    int exitHttp = string_start(url, HTTP);
+    int exitHttps = string_start(url, HTTPS);
+
+    if (exitHttp == 0 && exitHttps == 0) {
+        return NULL;
+    }
+
+    char *index = url + sizeof(char) * (exitHttp ? LENGHT_OF_HTTP : LENGHT_OF_HTTPS);
+    int indexOfFirstSlash = string_index(index, "/");
+    char *result = string_from_to_element(index, indexOfFirstSlash, ":?");
+    if (result == NULL) {
+        return "/";
+    }
+    return result;
+}
+
+/**
  * Send request to server with data in request body
  * This function can be used in general case with all requests
  *
@@ -142,13 +149,23 @@ char *http_query(char *url) {
  */
 
 char *http_request(char *method, char *url, char **headers, char **body) {
-	int port = 80;
+	int port = http_port(url);
 	char *host = http_hostname(url);
-	char *path = "/";
+	char *path = http_path(url);
 
-	char *template = "%s %s%s%s HTTP/1.1\r\nConnection: close\r\nHost: %s\r\n%s\r\n\r\n%s";
-	char *headerString = "";
-	char *bodyString = "";
+	char *template = 	"%s %s%s%s HTTP/1.1\r\n"
+						"Connection: close\r\n"
+						"Host: %s:%d\r\n"
+						"%s\r\n\r\n"
+						"%s";
+	char *headerString = string_join(headers, "\r\n");
+	char *bodyString = string_join(body, "&");
+
+	if (strcmp(method, "GET")) {
+		int bodySize = length_pointer_char(bodyString);
+		asprintf(&headerString, "%s\r\nContent-Length: %d", headerString, bodySize);
+	}
+
 	struct hostent *server;
 	struct sockaddr_in serv_addr;
 	int sockfd, bytes, sent, received, total, message_size;
@@ -161,6 +178,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 				length_pointer_char(bodyString) > 0 ? "?" : "",
 				bodyString,
 				host,
+				port,
 				headerString,
 				"");
 	} else {
@@ -170,23 +188,20 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 				"",
 				"",
 				host,
+				port,
 				headerString,
 				bodyString);
 	}
 	int messageSize = length_pointer_char(message);
 
 	printf("Request:\n%s\n", message);
-	fflush(stdout);
 
-	// create the socket
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0) error("ERROR opening socket");
 
-	// lookup the ip address
 	server = gethostbyname(host);
 	if (server == NULL) error("ERROR, no such host");
 
-	// fill in the structure
 	memset(&serv_addr,0,sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port = htons(port);
