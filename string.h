@@ -53,6 +53,7 @@ char *string_copy(char *target);
 char *string_upper(char *target);
 char *string_lower(char *target);
 char *string_title(char *target);
+char *string_standardized(char *target);
 
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
