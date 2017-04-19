@@ -1,30 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
+//#include <unistd.h>
+//#include <string.h>
+//#include <sys/socket.h>
+//#include <netinet/in.h>
+//#include <netdb.h>
 #include "../general.h"
 #include "../string.h"
+#include "../network.h"
 
-#define HTTPS "https"
-#define HTTP "http"
-#define LOCALHOST "localhost"
 
 /**
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return string (https or http)
  */
 char *http_schema(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	if (string_index(url, "https://") != -1) {
+	if (string_start(url, "https://") == 1) {
 		return HTTPS;
-	} else if (string_index(url, "http://") != -1) {
+	} else if (string_start(url, "http://") == 1) {
 		return HTTP;
 	}
 	return NULL;
@@ -34,7 +32,7 @@ char *http_schema(char *url) {
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return string (hostname)
  */
 char *http_hostname(char *url) {
 	if (length_pointer_char(url) == 0) {
@@ -68,52 +66,42 @@ char *http_hostname(char *url) {
  * @param url
  * @return int
  */
-int http_port(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return -1000;
-	}
-
-	int first_position = string_index(url, ":"); // index of ':' in url
-
-	if (first_position == -1) {
-		return -1000;
-	}
-
-	if (first_position > 5) {
-		first_position = -1;
-	}
-
-
-	if (first_position != -1) {
-		if (string_index(url, "http://") != -1) {
-			return 80;
-		} else if (string_index(url, "https://") != -1) {
-			return 443;
-		}
-	} else {
-		int iUrl = first_position + 1;
-		for (iUrl; iUrl < length_pointer_char(url); iUrl++) {
-			if(url[iUrl] == ':'){
-				iUrl++;
-				break;
-			}
-		}
-
-		int iResult = 0;
-		char result[10];
-		while(1) {
-			if ((url[iUrl] >= '0') && (url[iUrl] <= '9')) {
-				result[iResult++] = url[iUrl++];
-			} else {
-				break;
-			}
-		}
-
-		return atoi(result);
-	}
-
-	return -1000;
-}
+//int http_port(char *url) {
+//    int https_port = string_start(url, HTTPS);
+//    int http_port = string_start(url, HTTP);
+//
+//	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
+//		return -1;
+//	}
+//
+//    if (http_port == 1) {
+//        url = url + sizeof(char) * LENGHT_OF_HTTP;
+//        int index = string_index(url, ":");
+//        char *result = string_from_to_element(url, index, ":/?");
+//        if (length_pointer_char(result) == 0) {
+//            puts(result);
+//            return HTTP_PORT;
+//        }
+//        return atoi(result);
+//    }
+//
+//    register int i = 100;
+//    register int j = 100;
+//    for(;i < 1000; i++, j++);
+//
+//    if (https_port == 1) {
+//        url = url + sizeof(char) * LENGHT_OF_HTTPS;
+//        int index = string_index(url, ":");
+//        char *result = string_from_to_element(url, index, ":/? \0");
+//        if (length_pointer_char(result) == 0) {
+//            puts(result);
+//            return HTTPS_PORT;
+//        }
+//        return atoi(result);
+//    }
+//
+//	return -1;
+//}
 
 /**
  * Get query from url

@@ -49,6 +49,7 @@ char  *string_concat(char *target, char *subtarget);
 char  *convert_to_pointer_char(char target[]);
 
 char *string_from_to(char *target, int from, int to);
+char *string_from_to_element(char *url, int indexFirstElement, char *subtarget);
 char *string_from(char *target, int from);
 char *string_to(char *target, int to);
 char *string_copy(char *target);
