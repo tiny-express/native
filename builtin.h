@@ -25,6 +25,7 @@
 #include "thread/thread.h"
 #include "file.h"
 #include "compress.h"
+#include "network.h"
 
 #endif //BUILTIN_BUILTIN_H
 

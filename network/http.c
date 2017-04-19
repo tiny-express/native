@@ -1,30 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
+//#include <unistd.h>
+//#include <string.h>
+//#include <sys/socket.h>
+//#include <netinet/in.h>
+//#include <netdb.h>
 #include "../general.h"
 #include "../string.h"
+#include "../network.h"
 
-#define HTTPS "https://"
-#define HTTP "http://"
-#define LOCALHOST "localhost"
 
 /**
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return string (https or http)
  */
 char *http_schema(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	if(string_index(url, "https://")) {
+	if (string_start(url, "https://") == 1) {
 		return HTTPS;
-	} else if(string_index(url, "http://")) {
+	} else if (string_start(url, "http://") == 1) {
 		return HTTP;
 	}
 	return NULL;
@@ -34,43 +32,76 @@ char *http_schema(char *url) {
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return string (hostname)
  */
 char *http_hostname(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
 
-	if(string_index(url, "127.0.0.1")) {
+	if (string_index(url, "127.0.0.1") != -1) {
 		return LOCALHOST;
+	} else {
+		int first_position = string_index(url, "://") + 3;
+		char *result = (char*)malloc(50 * sizeof(char));
+
+		int index = 0; // index in arrayHostname
+		while (1) {
+			if (url[first_position] == '/' || url[first_position] == ':') {
+				break;
+			}
+			result[index++] = url[first_position++];
+		}
+
+		result[index] = '\0';
+		return result;
 	}
 
-	int indexOfHostname = string_index(url, "://") + 3;
-	char charInUrl = url[indexOfHostname];
-	char arrayHostname[100];
-	int index = 0; // index in arrayHostname
-
-	while(url[indexOfHostname] != '/' || url[indexOfHostname] != ':') {
-		arrayHostname[index++] = url[indexOfHostname++];
-	}
-
-	char *result = convert_to_pointer_char(arrayHostname);
-	return result;
+	return NULL;
 }
 
 /**
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return int
  */
-char *http_port(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return NULL;
-	}
-
-	return "";
-}
+//int http_port(char *url) {
+//    int https_port = string_start(url, HTTPS);
+//    int http_port = string_start(url, HTTP);
+//
+//	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
+//		return -1;
+//	}
+//
+//    if (http_port == 1) {
+//        url = url + sizeof(char) * LENGHT_OF_HTTP;
+//        int index = string_index(url, ":");
+//        char *result = string_from_to_element(url, index, ":/?");
+//        if (length_pointer_char(result) == 0) {
+//            puts(result);
+//            return HTTP_PORT;
+//        }
+//        return atoi(result);
+//    }
+//
+//    register int i = 100;
+//    register int j = 100;
+//    for(;i < 1000; i++, j++);
+//
+//    if (https_port == 1) {
+//        url = url + sizeof(char) * LENGHT_OF_HTTPS;
+//        int index = string_index(url, ":");
+//        char *result = string_from_to_element(url, index, ":/? \0");
+//        if (length_pointer_char(result) == 0) {
+//            puts(result);
+//            return HTTPS_PORT;
+//        }
+//        return atoi(result);
+//    }
+//
+//	return -1;
+//}
 
 /**
  * Get query from url
@@ -81,16 +112,25 @@ char *http_port(char *url) {
  */
 char *http_query(char *url) {
 	int length_url = length_pointer_char(url);
+
 	if (length_url == 0) {
 		return NULL;
 	}
+
 	int first_position = string_index(url, "?");
-	if (first_position < 0) {
-		// Url query does not exist
-		return NULL;
+	int end_position = first_position;
+	int length_target = length_pointer_char(url);
+	for (end_position; end_position < length_target; end_position++) {
+		if (url[end_position] == '/' || url[end_position] == ':') {
+			break;
+		}
 	}
-	//return string_substr(url, first_position, length_url + 1);
-	return "";
+
+	if (first_position != -1) {
+		return string_from_to(url, first_position + 1, end_position - 1);
+	}
+
+	return NULL;
 }
 
 /**

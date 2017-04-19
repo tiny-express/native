@@ -197,7 +197,7 @@ TEST(Builtin_String, From) {
 
 TEST(Builtin_String, To) {
     char *target = "Hello World";
-    int to = 5;
+    int to = 4;
     char *result = string_to(target, to);
     char *expect = "Hello";
     ASSERT_STR(expect, result);
@@ -262,6 +262,24 @@ TEST(Builtin_String, Title) {
     ASSERT_STR(expect, result);
 
     target = "#hi";
+    expect = "#hi";
     result = string_title(target);
-    ASSERT_STR(target, result);
+    ASSERT_STR(expect, result);
+    
+    target = "abcd";
+    expect = "Abcd";
+    result = string_title(target);
+    ASSERT_STR(expect, result);
+}
+
+
+TEST(Builtin_String, FromToElement) {
+    char *target = "https://www.google.com/search?client=ubuntu&channel=fs&q=dich&ie=utf-8&oe=utf-8";
+    char *result = string_from_to_element(target, LENGHT_OF_HTTPS, "+?/");
+    ASSERT_STR(result, "www.google.com");
+
+    result = string_from_to_element(target, 0, " ");
+    ASSERT_STR(result, target);
+
+    ASSERT_EQUAL(string_from_to_element("", 0,"/"), NULL);
 }

@@ -6,6 +6,8 @@
 #include "../general.h"
 
 #define MAX_SIZE 1000000
+#define TRUE 1
+#define FALSE 0
 
 // Find and replace
 char  *string_replace(char *target, char* find, char* replace_with) {
@@ -215,11 +217,7 @@ char *convert_to_pointer_char(char *target) {
 }
 
 char *string_from_to(char *target, int from, int to) {
-	if (from < 0 || to < 0 || from > to || to > length_pointer_char(target)) return "";
-	char *result = malloc((to - from + 1) * sizeof(char));
-	memcpy(result, target + from, to - from);
-	result[to - from] = '\0';
-	return result;
+	return segment_pointer_char(target, from, to);
 }
 
 char *string_from(char *target, int from) {
@@ -276,3 +274,34 @@ char *string_title(char *target) {
 	}
 	return result;
 }
+
+int string_in_string(char target, char *subtarget) {
+	register int index = 0;
+	for(; index < length_pointer_char(subtarget); index++) {
+		if (subtarget[index] == target) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) {
+	int lengthUrl = length_pointer_char(url);
+	if (lengthUrl == 0 || indexFirstElement < 0 || indexFirstElement > lengthUrl) {
+		return NULL;
+	}
+
+	url = url + sizeof(char) * indexFirstElement;
+	char *result = (char*)malloc((lengthUrl - indexFirstElement + 1) * sizeof(char));
+	int index = 0;
+	for(; *url; url++, index++) {
+		if (string_in_string(*url, subtarget) == TRUE) {
+			break;
+		}
+		result[index] = *url;
+	}
+
+	result[index] = '\0';
+	return result;
+}
+
