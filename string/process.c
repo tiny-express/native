@@ -275,7 +275,6 @@ char *string_title(char *target) {
 	return result;
 }
 
-<<<<<<< HEAD
 int string_in_string(char target, char *subtarget) {
 	register int index = 0;
 	for(; index < length_pointer_char(subtarget); index++) {
@@ -305,5 +304,4 @@ char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) 
 	result[index] = '\0';
 	return result;
 }
-=======
->>>>>>> 46fdb4e8168657fe7052b618db37ba400ef9c741
+
