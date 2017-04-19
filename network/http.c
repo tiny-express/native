@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <unistd.h>
-//#include <string.h>
-//#include <sys/socket.h>
-//#include <netinet/in.h>
-//#include <netdb.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
@@ -140,85 +140,43 @@ char *http_query(char *url) {
  * @method GET POST PUT PATCH DELETE HEAD OPTIONS
  * @return string
  */
-char *http_request(char *url, char *body, char *headers) {
 
-}
+char *http_request(char *method, char *url, char **headers, char **body) {
+	int port = 80;
+	char *host = http_hostname(url);
+	char *path = "/";
 
-/*
-char *http_request(char* url) {
-	int i;
-	int portno = atoi(argv[2])>0?atoi(argv[2]):80;
-	char *host = strlen(argv[1])>0?argv[1]:"localhost";
-
+	char *template = "%s %s%s%s HTTP/1.1\r\nConnection: close\r\nHost: %s\r\n%s\r\n\r\n%s";
+	char *headerString = "";
+	char *bodyString = "";
 	struct hostent *server;
 	struct sockaddr_in serv_addr;
 	int sockfd, bytes, sent, received, total, message_size;
 	char *message, response[4096];
 
-	if (argc < 5) { puts("Parameters: <host> <port> <method> <path> [<data> [<headers>]]"); exit(0); }
-
-	message_size=0;
-	if(!strcmp(argv[3],"GET"))
-	{
-		message_size+=strlen("%s %s%s%s HTTP/1.0\r\n");        // method
-		message_size+=strlen(argv[3]);                         // path
-		message_size+=strlen(argv[4]);                         // headers
-		if(argc>5)
-			message_size+=strlen(argv[5]);                     // query string
-		for(i=6;i<argc;i++)                                    // headers
-			message_size+=strlen(argv[i])+strlen("\r\n");
-		message_size+=strlen("\r\n");                          // blank line
+	if (!strcmp(method, "GET")) {
+		asprintf(&message, template,
+				method,
+				path,
+				length_pointer_char(bodyString) > 0 ? "?" : "",
+				bodyString,
+				host,
+				headerString,
+				"");
+	} else {
+		asprintf(&message, template,
+				method,
+				path,
+				"",
+				"",
+				host,
+				headerString,
+				bodyString);
 	}
-	else
-	{
-		message_size+=strlen("%s %s HTTP/1.0\r\n");
-		message_size+=strlen(argv[3]);                         // method
-		message_size+=strlen(argv[4]);                         // path
-		for(i=6;i<argc;i++)                                    // headers
-			message_size+=strlen(argv[i])+strlen("\r\n");
-		if(argc>5)
-			message_size+=strlen("Content-Length: %d\r\n")+10; // content length
-		message_size+=strlen("\r\n");                          // blank line
-		if(argc>5)
-			message_size+=strlen(argv[5]);                     // body
-	}
+	int messageSize = length_pointer_char(message);
 
-	// allocate space for the message
-	message=malloc(message_size);
-
-	// fill in the parameters
-	if(!strcmp(argv[3],"GET"))
-	{
-		if(argc>5)
-			sprintf(message,"%s %s%s%s HTTP/1.0\r\n",
-					strlen(argv[3])>0?argv[3]:"GET",               // method
-					strlen(argv[4])>0?argv[4]:"/",                 // path
-					strlen(argv[5])>0?"?":"",                      // ?
-					strlen(argv[5])>0?argv[5]:"");                 // query string
-		else
-			sprintf(message,"%s %s HTTP/1.0\r\n",
-					strlen(argv[3])>0?argv[3]:"GET",               // method
-					strlen(argv[4])>0?argv[4]:"/");                // path
-		for(i=6;i<argc;i++)                                    // headers
-		{strcat(message,argv[i]);strcat(message,"\r\n");}
-		strcat(message,"\r\n");                                // blank line
-	}
-	else
-	{
-		sprintf(message,"%s %s HTTP/1.0\r\n",
-				strlen(argv[3])>0?argv[3]:"POST",                  // method
-				strlen(argv[4])>0?argv[4]:"/");                    // path
-		for(i=6;i<argc;i++)                                    // headers
-		{strcat(message,argv[i]);strcat(message,"\r\n");}
-		if(argc>5)
-			sprintf(message+strlen(message),"Content-Length: %d\r\n",strlen(argv[5]));
-		strcat(message,"\r\n");                                // blank line
-		if(argc>5)
-			strcat(message,argv[5]);                           // body
-	}
-
-	// What are we going to send?
-	printf("Request:\n%s\n",message);
+	printf("Request:\n%s\n", message);
+	fflush(stdout);
 
 	// create the socket
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -231,13 +189,13 @@ char *http_request(char* url) {
 	// fill in the structure
 	memset(&serv_addr,0,sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(portno);
+	serv_addr.sin_port = htons(port);
 	memcpy(&serv_addr.sin_addr.s_addr,server->h_addr,server->h_length);
 
 	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
 		error("ERROR connecting");
 
-	total = strlen(message);
+	total = messageSize;
 	sent = 0;
 	do {
 		bytes = write(sockfd,message+sent,total-sent);
@@ -253,10 +211,12 @@ char *http_request(char* url) {
 	received = 0;
 	do {
 		bytes = read(sockfd,response+received,total-received);
-		if (bytes < 0)
+		if (bytes < 0) {
 			error("ERROR reading response from socket");
-		if (bytes == 0)
+		}
+		if (bytes == 0) {
 			break;
+		}
 		received+=bytes;
 	} while (received < total);
 
@@ -268,6 +228,130 @@ char *http_request(char* url) {
 	printf("Response:\n%s\n",response);
 
 	free(message);
-	return 0;
+	return response;
 }
-*/
+//
+//char *http_request(char *method, char* url, char **headers, char *body) {
+//	int i;
+//	int port = http_port(url);
+//	char *host = http_hostname(url);
+//	char *query = http_query(url);
+//
+//	struct hostent *server;
+//	struct sockaddr_in serv_addr;
+//	int sockfd, bytes, sent, received, total, message_size;
+//	char *message, response[4096];
+//
+//	message_size=0;
+//	if(!strcmp(method,"GET"))
+//	{
+//		message_size+=length_pointer_char("%s %s%s%s HTTP/1.0\r\n");        // method
+//		message_size+=length_pointer_char(argv[3]);                         // path
+//		message_size+=length_pointer_pointer_char(headers);                         // headers
+//		if(argc>5)
+//			message_size+=length_pointer_char(query);                     // query string
+//		for(i=6;i<argc;i++)                                    // headers
+//			message_size+=length_pointer_char(argv[i])+length_pointer_char("\r\n");
+//		message_size+=length_pointer_char("\r\n");                          // blank line
+//	}
+//	else
+//	{
+//		message_size+=length_pointer_char("%s %s HTTP/1.0\r\n");
+//		message_size+=length_pointer_char(argv[3]);                         // method
+//		message_size+=length_pointer_char(argv[4]);                         // path
+//		for(i=6;i<argc;i++)                                    // headers
+//			message_size+=length_pointer_char(argv[i])+length_pointer_char("\r\n");
+//		if(argc>5)
+//			message_size+=length_pointer_char("Content-Length: %d\r\n")+10; // content length
+//		message_size+=length_pointer_char("\r\n");                          // blank line
+//		if(argc>5)
+//			message_size+=length_pointer_char(argv[5]);                     // body
+//	}
+//
+//	// allocate space for the message
+//	message=malloc(message_size);
+//
+//	// fill in the parameters
+//	if(!strcmp(argv[3],"GET"))
+//	{
+//		if(argc>5)
+//			sprintf(message,"%s %s%s%s HTTP/1.0\r\n",
+//					length_pointer_char(argv[3])>0?argv[3]:"GET",               // method
+//					length_pointer_char(argv[4])>0?argv[4]:"/",                 // path
+//					length_pointer_char(argv[5])>0?"?":"",                      // ?
+//					length_pointer_char(argv[5])>0?argv[5]:"");                 // query string
+//		else
+//			sprintf(message,"%s %s HTTP/1.0\r\n",
+//					length_pointer_char(argv[3])>0?argv[3]:"GET",               // method
+//					length_pointer_char(argv[4])>0?argv[4]:"/");                // path
+//		for(i=6;i<argc;i++)                                    // headers
+//		{strcat(message,argv[i]);strcat(message,"\r\n");}
+//		strcat(message,"\r\n");                                // blank line
+//	}
+//	else
+//	{
+//		sprintf(message,"%s %s HTTP/1.0\r\n",
+//				length_pointer_char(argv[3])>0?argv[3]:"POST",                  // method
+//				length_pointer_char(argv[4])>0?argv[4]:"/");                    // path
+//		for(i=6;i<argc;i++)                                    // headers
+//		{strcat(message,argv[i]);strcat(message,"\r\n");}
+//		if(argc>5)
+//			sprintf(message+length_pointer_char(message),"Content-Length: %d\r\n",length_pointer_char(argv[5]));
+//		strcat(message,"\r\n");                                // blank line
+//		if(argc>5)
+//			strcat(message,argv[5]);                           // body
+//	}
+//
+//	// What are we going to send?
+//	printf("Request:\n%s\n",message);
+//
+//	// create the socket
+//	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+//	if (sockfd < 0) error("ERROR opening socket");
+//
+//	// lookup the ip address
+//	server = gethostbyname(host);
+//	if (server == NULL) error("ERROR, no such host");
+//
+//	// fill in the structure
+//	memset(&serv_addr,0,sizeof(serv_addr));
+//	serv_addr.sin_family = AF_INET;
+//	serv_addr.sin_port = htons(port);
+//	memcpy(&serv_addr.sin_addr.s_addr,server->h_addr,server->h_length);
+//
+//	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
+//		error("ERROR connecting");
+//
+//	total = length_pointer_char(message);
+//	sent = 0;
+//	do {
+//		bytes = write(sockfd,message+sent,total-sent);
+//		if (bytes < 0)
+//			error("ERROR writing message to socket");
+//		if (bytes == 0)
+//			break;
+//		sent+=bytes;
+//	} while (sent < total);
+//
+//	memset(response,0,sizeof(response));
+//	total = sizeof(response)-1;
+//	received = 0;
+//	do {
+//		bytes = read(sockfd,response+received,total-received);
+//		if (bytes < 0)
+//			error("ERROR reading response from socket");
+//		if (bytes == 0)
+//			break;
+//		received+=bytes;
+//	} while (received < total);
+//
+//	if (received == total)
+//		error("ERROR storing complete response from socket");
+//
+//	close(sockfd);
+//
+//	printf("Response:\n%s\n",response);
+//
+//	free(message);
+//	return 0;
+//}

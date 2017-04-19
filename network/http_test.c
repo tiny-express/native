@@ -52,3 +52,10 @@ TEST(Builtin_Network, HttpQuery) {
 	char *result2 = http_query("http://localhost/index?key1=value1&key2=value2:3000");
 	ASSERT_STR("key1=value1&key2=value2", result2);
 }
+
+TEST(Builtin_Network, HttpRequest) {
+	char *headers[2] = {
+			{"h=1", '\0'}
+	};
+	http_request("GET", "http://google.com", headers, headers);
+}
