@@ -36,9 +36,7 @@ float string_to_float(char* target);
 #define indexOf string_index
 
 char  *string_replace(char *target, char *find, char *replace_with);
-char  *string_substr(char *target, int from, int to);
 char **string_split(char *target, const char *delim);
-char **string_slice(char **target, const char *flag);
 char  *string_join(char **target, char const *delim);
 int    string_index(char *target, char *subtarget);
 char  *string_trim(char *target);
