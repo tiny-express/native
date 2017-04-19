@@ -197,7 +197,7 @@ TEST(Builtin_String, From) {
 
 TEST(Builtin_String, To) {
     char *target = "Hello World";
-    int to = 5;
+    int to = 4;
     char *result = string_to(target, to);
     char *expect = "Hello";
     ASSERT_STR(expect, result);
@@ -271,3 +271,5 @@ TEST(Builtin_String, Title) {
     result = string_title(target);
     ASSERT_STR(expect, result);
 }
+
+
