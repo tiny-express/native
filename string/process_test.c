@@ -273,7 +273,6 @@ TEST(Builtin_String, Title) {
 }
 
 
-<<<<<<< HEAD
 TEST(Builtin_String, FromToElement) {
     char *target = "https://www.google.com/search?client=ubuntu&channel=fs&q=dich&ie=utf-8&oe=utf-8";
     char *result = string_from_to_element(target, LENGHT_OF_HTTPS, "+?/");
@@ -284,5 +283,3 @@ TEST(Builtin_String, FromToElement) {
 
     ASSERT_EQUAL(string_from_to_element("", 0,"/"), NULL);
 }
-=======
->>>>>>> 46fdb4e8168657fe7052b618db37ba400ef9c741
