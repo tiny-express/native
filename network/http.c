@@ -119,15 +119,15 @@ char *http_query(char *url) {
 
 	int first_position = string_index(url, "?");
 	int end_position = first_position;
-
-	for (end_position; end_position < length_pointer_char(url); end_position++) {
+	int length_target = length_pointer_char(url);
+	for (end_position; end_position < length_target; end_position++) {
 		if (url[end_position] == '/' || url[end_position] == ':') {
 			break;
 		}
 	}
 
 	if (first_position != -1) {
-		return string_from_to(url, first_position + 1, end_position);
+		return string_from_to(url, first_position + 1, end_position - 1);
 	}
 
 	return NULL;

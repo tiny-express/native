@@ -217,11 +217,7 @@ char *convert_to_pointer_char(char *target) {
 }
 
 char *string_from_to(char *target, int from, int to) {
-	if (from < 0 || to < 0 || from > to || to > length_pointer_char(target)) return "";
-	char *result = malloc((to - from + 1) * sizeof(char));
-	memcpy(result, target + from, to - from);
-	result[to - from] = '\0';
-	return result;
+	return segment_pointer_char(target, from, to);
 }
 
 char *string_from(char *target, int from) {
@@ -279,6 +275,7 @@ char *string_title(char *target) {
 	return result;
 }
 
+<<<<<<< HEAD
 int string_in_string(char target, char *subtarget) {
 	register int index = 0;
 	for(; index < length_pointer_char(subtarget); index++) {
@@ -308,3 +305,5 @@ char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) 
 	result[index] = '\0';
 	return result;
 }
+=======
+>>>>>>> 46fdb4e8168657fe7052b618db37ba400ef9c741
