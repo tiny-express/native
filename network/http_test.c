@@ -47,8 +47,8 @@ TEST(Builtin_Network, HttpHostname) {
 TEST(Builtin_Network, HttpQuery) {
 	char *url = "http://localhost/index?key1=value1&key2=value2";
 	char *result1 = http_query(url);
-	ASSERT_STR(result1, "key1=value1&key2=value2");
+	ASSERT_STR("key1=value1&key2=value2", result1);
 
 	char *result2 = http_query("http://localhost/index?key1=value1&key2=value2:3000");
-	ASSERT_STR(result2, "key1=value1&key2=value2");
+	ASSERT_STR("key1=value1&key2=value2", result2);
 }
