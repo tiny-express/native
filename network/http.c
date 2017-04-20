@@ -39,22 +39,13 @@ char *http_hostname(char *url) {
 		return NULL;
 	}
 
-	if (string_index(url, "127.0.0.1") != -1) {
+	if (string_index(url, "127.0.0.1", FIRST_TIMES) != -1) {
 		return LOCALHOST;
 	} else {
-		int first_position = string_index(url, "://") + 3;
-		char *result = (char*)malloc(50 * sizeof(char));
-
-		int index = 0; // index in arrayHostname
-		while (1) {
-			if (url[first_position] == '/' || url[first_position] == ':') {
-				break;
-			}
-			result[index++] = url[first_position++];
-		}
-
-		result[index] = '\0';
-		return result;
+		int firstPos = string_index(url, "://", FIRST_TIMES);
+        char *indexUrl = url + sizeof(char) * (firstPos + 3);
+        char *result = string_get_substr(indexUrl, 0, ":/?");
+        return result;
 	}
 
 	return NULL;
@@ -77,7 +68,7 @@ int http_port(char *url) {
     char **element = string_split(url, "/");
     char *result = element[1];
 
-    int indexColon = string_index(result, ":") + 1;
+    int indexColon = string_index(result, ":", FIRST_TIMES) + 1;
     char *index = result + sizeof(char) * indexColon;
 
     int port = atoi(index);
@@ -102,7 +93,7 @@ char *http_query(char *url) {
 		return NULL;
 	}
 
-	int first_position = string_index(url, "?");
+	int first_position = string_index(url, "?", FIRST_TIMES);
 	int end_position = first_position;
 	int length_target = length_pointer_char(url);
 	for (end_position; end_position < length_target; end_position++) {
@@ -132,8 +123,8 @@ char *http_path(char *url) {
     }
 
     char *index = url + sizeof(char) * (exitHttp ? LENGHT_OF_HTTP : LENGHT_OF_HTTPS);
-    int indexOfFirstSlash = string_index(index, "/");
-    char *result = string_from_to_element(index, indexOfFirstSlash, ":?");
+    int indexOfFirstSlash = string_index(index, "/", FIRST_TIMES);
+    char *result = string_get_substr(index, indexOfFirstSlash, ":?");
     if (result == NULL) {
         return "/";
     }

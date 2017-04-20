@@ -158,27 +158,37 @@ int string_end(char *target, const char *suffix) {
     return 1;
 }
 
-int string_index(char *target, char *subtarget) {
+int string_index(char *target, char *subtarget, int times) {
     int target_length = length_pointer_char(target);
     int subtarget_length = length_pointer_char(subtarget);
-    if (target_length < subtarget_length) {
+    if (target_length < subtarget_length || (times == 0)) {
 		// Can not found subtarget in target
 		return -1;
 	}
-    register int i, j;
-    for (i = 0; i <= (target_length - subtarget_length); i++) {
-        if (target[i] != subtarget[0]) {
-			continue;
-		}
-        for (j = 1; j < subtarget_length; j++) {
-            if (target[i + j] != subtarget[j]) {
-				break;
-			}
+
+    register int indexTarget, indexSubtarget, countTimes = 0, pos_result;
+
+    for (indexTarget = 0; indexTarget <= (target_length - subtarget_length); indexTarget++) {
+
+        if (target[indexTarget] != subtarget[0]) {
+            continue;
         }
-        if (j == subtarget_length) {
-			return i;
-		}
+
+        for (indexSubtarget = 1; indexSubtarget < subtarget_length; indexSubtarget++) {
+            if (target[indexTarget + indexSubtarget] != subtarget[indexSubtarget]) {
+                break;
+            }
+        }
+
+        if (indexSubtarget == subtarget_length) {
+            pos_result = indexTarget;
+            countTimes++;
+            if(countTimes == times) {
+                return pos_result;
+            }
+        }
     }
+
     return -1;
 }
 
@@ -275,7 +285,7 @@ char *string_title(char *target) {
 	return result;
 }
 
-int string_in_string(char *target, char subtarget) {
+int string_char_in_string(char *target, char subtarget) {
     char *index = target;
 	for(; *index; index++) {
 		if (*index == subtarget) {
@@ -285,17 +295,17 @@ int string_in_string(char *target, char subtarget) {
 	return 0;
 }
 
-char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) {
+char *string_get_substr(char *url, int indexFirstElement, char *subtarget) {
 	int lengthUrl = length_pointer_char(url);
 	if (lengthUrl == 0 || indexFirstElement < 0 || indexFirstElement > lengthUrl) {
 		return NULL;
 	}
 
 	char *index = url + sizeof(char) * indexFirstElement;
-
 	char *result = (char*)malloc((lengthUrl - indexFirstElement + 1) * sizeof(char));
 	int indexInResult = 0;
-	for(; *index && !string_in_string(subtarget, *index); index++, indexInResult++) {
+
+	for(; *index && !string_char_in_string(subtarget, *index); index++, indexInResult++) {
 		result[indexInResult] = *index;
 	}
 

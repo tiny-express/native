@@ -106,16 +106,35 @@ TEST(Builtin_String, EndWith) {
 TEST(Builtin_String, IndexOf) {
     char *target = "Hello World";
     char *subtarget = "World";
-    ASSERT_EQUAL(6, string_index(target, subtarget));
+    int result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(6, result);
+
+    target = "Hello World World World World";
+    subtarget = "World";
+    result = string_index(target, subtarget, 3);
+    ASSERT_EQUAL(18, result);
+
+    target = "Hello World World World World";
+    subtarget = "orl";
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(13, result);
+
+    target = "###############";
+    subtarget = "##";
+    result = string_index(target, subtarget, 4);
+    ASSERT_EQUAL(3, result);
 
     subtarget = "Substring is longer than target";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Hello";
-    ASSERT_EQUAL(0, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Nope";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 }
 
 TEST(Builtin_String, Random) {
@@ -273,20 +292,21 @@ TEST(Builtin_String, Title) {
 }
 
 
-TEST(Builtin_String, FromToElement) {
+TEST(Builtin_String, GetSubstr) {
     char *target = "https://www.google.com/search?client=ubuntu&channel=fs&q=dich&ie=utf-8&oe=utf-8";
-    char *result = string_from_to_element(target, LENGHT_OF_HTTPS, "+?/");
+    char *result = string_get_substr(target, LENGHT_OF_HTTPS, "+?/");
     ASSERT_STR(result, "www.google.com");
 
-    result = string_from_to_element(target, 0, " ");
+    result = string_get_substr(target, 0, " ");
     ASSERT_STR(result, target);
 
-    ASSERT_EQUAL(string_from_to_element("", 0,"/"), NULL);
+    result = string_get_substr("", 0, "/");
+    ASSERT_EQUAL(result, NULL);
 }
 
 TEST(Builtin_String, StringInString) {
     char *target = "1234";
     char subtarget = '3';
-    int result = string_in_string(target, subtarget);
+    int result = string_char_in_string(target, subtarget);
     ASSERT_EQUAL(1, result);
 }
