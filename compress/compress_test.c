@@ -5,7 +5,7 @@
 #include "../compress.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Compress, Zlib_Encode_Decode) {
+TEST(Builtin_Compress, ZlibCompressor) {
 	// English
 	char *contents = "Hello Hello Hello Hello Hello Hello!";
 	char *compressed = zlib_encode(contents);
