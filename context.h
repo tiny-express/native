@@ -66,6 +66,6 @@ Context *createRequestContext(Context *context);
 Context* mockContext();
 CONFIG *getRemoteConfig();
 void freeContext(Context *context);
-char *findParam(char *name, char *params);
+char *find_param(char *name, char *params);
 char *findParamFromUrl(char *name, char *url);
 #endif

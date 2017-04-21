@@ -4,21 +4,21 @@
 
 TEST(Builtin_Context, FindParam) {
     char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
-    ASSERT_STR("loint", findParam("username", params));
-    ASSERT_STR("Loi AbC", findParam("firstName", params));
-    ASSERT_STR("1234", findParam("password", params));
+    ASSERT_STR("loint", find_param("username", params));
+    ASSERT_STR("Loi AbC", find_param("firstName", params));
+    ASSERT_STR("1234", find_param("password", params));
 
     char *params2 = "username=&password=&firstName=Loi&&lastName=Nguyen";
-    ASSERT_STR("", findParam("username", params2));
-    ASSERT_STR("Loi", findParam("firstName", params2));
-    ASSERT_STR("", findParam("password", params2));
-    ASSERT_STR("Nguyen", findParam("lastName", params2));
+    ASSERT_STR("", find_param("username", params2));
+    ASSERT_STR("Loi", find_param("firstName", params2));
+    ASSERT_STR("", find_param("password", params2));
+    ASSERT_STR("Nguyen", find_param("lastName", params2));
 
     char *params3 = "";
-    ASSERT_STR("", findParam("username", params3));
-    ASSERT_STR("", findParam("firstName", params3));
-    ASSERT_STR("", findParam("password", params3));
-    ASSERT_STR("", findParam("lastName", params3));
+    ASSERT_STR("", find_param("username", params3));
+    ASSERT_STR("", find_param("firstName", params3));
+    ASSERT_STR("", find_param("password", params3));
+    ASSERT_STR("", find_param("lastName", params3));
 }
 
 TEST(Builtin_Context, FindParamFromUrl) {
