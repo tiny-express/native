@@ -143,6 +143,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 	int port = http_port(url);
 	char *host = http_hostname(url);
 	char *path = http_path(url);
+    int isGetMethod = strcmp(method, "GET")?0:1;
 
 	char *template = 	"%s %s%s%s HTTP/1.1\r\n"
 						"Connection: close\r\n"
@@ -152,17 +153,17 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 	char *headerString = string_join(headers, "\r\n");
 	char *bodyString = string_join(body, "&");
 
-	if (strcmp(method, "GET")) {
+	if (!isGetMethod) {
 		int bodySize = length_pointer_char(bodyString);
-		asprintf(&headerString, "%s\r\nContent-Length: %d", headerString, bodySize);
+		asprintf(&headerString, "%sContent-Length: %d", headerString, bodySize);
 	}
 
 	struct hostent *server;
 	struct sockaddr_in serv_addr;
 	int sockfd, bytes, sent, received, total, message_size;
-	char *message, response[4096];
+	char *message, *response;
 
-	if (!strcmp(method, "GET")) {
+	if (isGetMethod) {
 		asprintf(&message, template,
 				method,
 				path,
@@ -185,53 +186,49 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 	}
 	int messageSize = length_pointer_char(message);
 
-	printf("Request:\n%s\n", message);
-
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) error("ERROR opening socket");
+	if (sockfd < 0) return "";
 
 	server = gethostbyname(host);
-	if (server == NULL) error("ERROR, no such host");
+	if (server == NULL) return "";
 
-	memset(&serv_addr,0,sizeof(serv_addr));
+	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port = htons(port);
-	memcpy(&serv_addr.sin_addr.s_addr,server->h_addr,server->h_length);
+	memcpy(&serv_addr.sin_addr.s_addr, server->h_addr, server->h_length);
 
 	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
-		error("ERROR connecting");
+        return "";
 
 	total = messageSize;
 	sent = 0;
 	do {
-		bytes = write(sockfd,message+sent,total-sent);
+		bytes = write(sockfd, message + sent, total - sent);
 		if (bytes < 0)
-			error("ERROR writing message to socket");
+            return "";
 		if (bytes == 0)
 			break;
-		sent+=bytes;
+		sent += bytes;
 	} while (sent < total);
 
-	memset(response,0,sizeof(response));
-	total = sizeof(response)-1;
+	response = malloc(100000 * sizeof(char));
+	total = 99999;
 	received = 0;
 	do {
-		bytes = read(sockfd,response+received,total-received);
+		bytes = read(sockfd, response + received, total - received);
 		if (bytes < 0) {
-			error("ERROR reading response from socket");
+            return "";
 		}
 		if (bytes == 0) {
 			break;
 		}
-		received+=bytes;
+		received += bytes;
 	} while (received < total);
 
 	if (received == total)
-		error("ERROR storing complete response from socket");
+        return "";
 
 	close(sockfd);
-
-	printf("Response:\n%s\n",response);
 
 	free(message);
 	return response;
