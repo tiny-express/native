@@ -1,6 +1,8 @@
 #ifndef BUILTIN_STRING_H
 #define BUILTIN_STRING_H
 
+#include "string.h"
+
 #define ToString string_from_const_pointer_char
 char* string_from_const_pointer_char(const char *target);
 
@@ -40,8 +42,8 @@ char **string_split(char *target, const char *delim);
 char  *string_join(char **target, char const *delim);
 int    string_index(char *target, char *subtarget, int times);
 char  *string_trim(char *target);
-int    string_start(char *target, const char *prefix);
-int    string_end(char *target, const char *suffix);
+int    string_startswith(char *target, const char *prefix);
+int    string_endswith(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
 char  *convert_to_pointer_char(char target[]);

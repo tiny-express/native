@@ -31,8 +31,9 @@ int length_##TYPE(TYPE target) {\
 	char *result = string_from_##TYPE(target);\
 	return length_pointer_char(result);\
 }
-
+#ifdef __APPLE__
 P_LEN(char);
+#endif
 P_C_LEN(char);
 P_P_LEN(char);
 NUM_LEN(short);
