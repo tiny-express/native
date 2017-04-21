@@ -63,9 +63,14 @@ TEST(Builtin_Network, HttpRequest) {
 	};
 
 	char *body[2] = {
-			"\0"
+            "a=b",
+            '\0'
 	};
-	http_request("GET", "http://google.com", headers, body);
+	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
+    ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
+
+    response = http_request("GET", "http://httpbin.org/get", headers, body);
+    ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
 }
 
 TEST(Builtin_String, HttpPath) {
