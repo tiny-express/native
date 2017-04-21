@@ -282,22 +282,3 @@ TEST(Builtin_String, Title) {
     ASSERT_STR(expect, result);
 }
 
-
-TEST(Builtin_String, GetSubstr) {
-    char *target = "https://www.google.com/search?client=ubuntu&channel=fs&q=dich&ie=utf-8&oe=utf-8";
-    char *result = string_get_substr(target, LENGHT_OF_HTTPS, "+?/");
-    ASSERT_STR(result, "www.google.com");
-
-    result = string_get_substr(target, 0, " ");
-    ASSERT_STR(result, target);
-
-    result = string_get_substr("", 0, "/");
-    ASSERT_EQUAL(result, NULL);
-}
-
-TEST(Builtin_String, StringInString) {
-    char *target = "1234";
-    char subtarget = '3';
-    int result = string_char_in_string(target, subtarget);
-    ASSERT_EQUAL(1, result);
-}

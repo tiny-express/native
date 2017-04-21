@@ -217,7 +217,7 @@ inline char *string_to(char *target, int to) {
 	return string_from_to(target, 0, to);
 }
 
-inline char *string_copy(char *target) {
+char *string_copy(char *target) {
 	int length = length_pointer_char(target);
 	char *result = malloc((length + 1) * sizeof(char));
 	memcpy(result, target, length);
@@ -225,7 +225,7 @@ inline char *string_copy(char *target) {
 	return result;
 }
 
-inline char *string_upper(char *target) {
+char *string_upper(char *target) {
 	char *result = string_copy(target);
 	register char *index = result;
 	for (; *index; index++) {
@@ -236,7 +236,7 @@ inline char *string_upper(char *target) {
 	return result;
 }
 
-inline char *string_lower(char *target) {
+char *string_lower(char *target) {
 	char *result = string_copy(target);
 	register char *index = result;
 	for (; *index; index++) {
@@ -247,7 +247,7 @@ inline char *string_lower(char *target) {
 	return result;
 }
 
-inline char *string_title(char *target) {
+char *string_title(char *target) {
 	char *result = string_copy(target);
 	register char *index = result;
 	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
