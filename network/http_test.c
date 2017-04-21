@@ -71,6 +71,8 @@ TEST(Builtin_Network, HttpRequest) {
 
     response = http_request("GET", "http://httpbin.org/get", headers, body);
     ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
+
+    // NOTE: https tests depend on host cert
 }
 
 TEST(Builtin_String, HttpPath) {
