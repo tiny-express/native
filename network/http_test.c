@@ -17,32 +17,35 @@ TEST(Builtin_Network, HttpSchema) {
 TEST(Builtin_Network, HttpHostname) {
 	char *hostname = "foodtiny.com.vn";
 	char *foodtiny = http_hostname("https://foodtiny.com.vn/home/bundaumamtom/");
-	ASSERT_STR(foodtiny, hostname);
+	ASSERT_STR(hostname, foodtiny);
 
 
-	char *localhost = http_hostname("http://localhost:3000");
-	ASSERT_STR(localhost, LOCALHOST);
+    hostname = http_hostname("http://localhost:3000");
+	ASSERT_STR(hostname, LOCALHOST);
 
-
-	ASSERT_STR(http_hostname("https://127.0.0.1/fanpage/bundaumamtom"), LOCALHOST);
+    hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
+	ASSERT_STR(hostname, LOCALHOST);
 }
 
-//TEST(Builtin_Network, HttpPort) {
-//	int result = http_port("http://localhost:3001");
-//	ASSERT_EQUAL(result, 3001);
-//
-//    result = http_port("https://localhost:5000/fanpage/bundaumamtom");
-//	ASSERT_EQUAL(result, 5000);
-//
-//    result = http_port("https://foodtiny.com");
-//	ASSERT_EQUAL(result, 443);
-//
-//    result = http_port("http://foodtiny.com");
-//	ASSERT_EQUAL(result, 80);
-//
-//    result = http_port("foodtiny.com");
-//	ASSERT_EQUAL(result, -1);
-//}
+TEST(Builtin_Network, HttpPort) {
+	int result = http_port("http://localhost:3001");
+	ASSERT_EQUAL(3001, result);
+
+    result = http_port("https://localhost:5000/fanpage/bundaumamtom");
+	ASSERT_EQUAL(5000, result);
+
+    result = http_port("https://foodtiny.com");
+	ASSERT_EQUAL(443, result);
+
+    result = http_port("http://foodtiny.com");
+	ASSERT_EQUAL(80, result);
+
+    result = http_port("http://foodtiny.com/asdfasdf:3241243");
+	ASSERT_EQUAL(80, result);
+
+    result = http_port("http://foodtiny.com:3000/asdfasdf:3241243");
+    ASSERT_EQUAL(3000, result);
+}
 
 TEST(Builtin_Network, HttpQuery) {
 	char *url = "http://localhost/index?key1=value1&key2=value2";
@@ -51,4 +54,38 @@ TEST(Builtin_Network, HttpQuery) {
 
 	char *result2 = http_query("http://localhost/index?key1=value1&key2=value2:3000");
 	ASSERT_STR("key1=value1&key2=value2", result2);
+}
+
+
+TEST(Builtin_Network, HttpRequest) {
+	char *headers[2] = {
+			"\0"
+	};
+
+	char *body[2] = {
+            "a=b",
+            '\0'
+	};
+	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
+    ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
+
+    response = http_request("GET", "http://httpbin.org/get", headers, body);
+    ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
+}
+
+TEST(Builtin_String, HttpPath) {
+    char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
+    char *result = http_path(target);
+    char *expect = "/index/file1/key.pem";
+    ASSERT_STR(expect, result);
+
+    target = "http://localhost:3000?key1=value1&key2=value2:3000";
+    result = http_path(target);
+    expect = "/";
+    ASSERT_STR(expect, result);
+
+    target = "https://google.com";
+    result = http_path(target);
+    expect = "/";
+    ASSERT_STR(expect, result);
 }

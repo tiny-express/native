@@ -5,7 +5,7 @@
 
 static int total = 0;
 
-void task1(){
+void task1() {
 	total++;
 }
 

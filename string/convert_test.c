@@ -77,53 +77,53 @@ TEST(Builtin_String, FromDouble) {
 }
 
 TEST(Builtin_String, ToShort) {
-    ASSERT_EQUAL(0, StringToShort(NULL));
+    ASSERT_EQUAL(0, string_to_short(NULL));
 
     char *input = "123";
-    short result=StringToShort(input);
+    short result = StringToShort(input);
     ASSERT_EQUAL(123, result);
 
     char *input1 = "-123";
-    short result1=StringToShort(input1);
+    short result1 = StringToShort(input1);
     ASSERT_EQUAL(-123, result1);
 }
 
 TEST(Builtin_String, ToInt) {
     char *input = "123";
-    int result=StringToInt(input);
+    int result = StringToInt(input);
     ASSERT_EQUAL(123, result);
 
     char *input1 = "-123";
-    int result1=StringToInt(input1);
+    int result1 = StringToInt(input1);
     ASSERT_EQUAL(-123, result1);
 }
 
 TEST(Builtin_String, ToLong) {
     char *input = "21474836";
-    long result=StringToLong(input);
+    long result = StringToLong(input);
     ASSERT_EQUAL(21474836, result);
 
     char *input1 = "-21474836";
-    long result1=StringToLong(input1);
+    long result1 = StringToLong(input1);
     ASSERT_EQUAL(-21474836, result1);
 }
 
 TEST(Builtin_String, ToFloat) {
     char *input = "12.56";
-    float result=StringToFloat(input);
+    float result = StringToFloat(input);
     ASSERT_EQUAL(12.56, result);
 
     char *input1 = "-1.56799";
-    float result1=StringToFloat(input1);
+    float result1 = StringToFloat(input1);
     ASSERT_EQUAL(-1.56799, result1);
 }
 
 TEST(Builtin_String, ToDouble) {
     char *input = "125.569123";
-    double result=StringToDouble(input);
+    double result = StringToDouble(input);
     ASSERT_EQUAL(125.569123, result);
 
     char *input1 = "-125.56123";
-    double result1=StringToDouble(input1);
+    double result1 = StringToDouble(input1);
     ASSERT_EQUAL(-125.56123, result1);
 }

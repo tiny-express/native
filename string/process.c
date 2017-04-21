@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include "../string.h"
 #include "../general.h"
 
@@ -128,7 +126,7 @@ char *string_trim(char *target) {
 	return result;
 }
 
-int string_start(char *target, const char *prefix) {
+int string_startswith(char *target, const char *prefix) {
     int target_length = length_pointer_char(target);
     int prefix_length = length_pointer_char(prefix);
     if (target_length < prefix_length) {
@@ -143,7 +141,7 @@ int string_start(char *target, const char *prefix) {
     return 1;
 }
 
-int string_end(char *target, const char *suffix) {
+int string_endswith(char *target, const char *suffix) {
     int target_length = length_pointer_char(target);
     int suffix_length = length_pointer_char(suffix);
     if (target_length < suffix_length) {
@@ -158,32 +156,41 @@ int string_end(char *target, const char *suffix) {
     return 1;
 }
 
-int string_index(char *target, char *subtarget) {
+int string_index(char *target, char *subtarget, int times) {
     int target_length = length_pointer_char(target);
     int subtarget_length = length_pointer_char(subtarget);
-    if (target_length < subtarget_length) {
+    if (target_length < subtarget_length || (times == 0)) {
 		// Can not found subtarget in target
 		return -1;
 	}
-    register int i, j;
-    for (i = 0; i <= (target_length - subtarget_length); i++) {
-        if (target[i] != subtarget[0]) {
-			continue;
-		}
-        for (j = 1; j < subtarget_length; j++) {
-            if (target[i + j] != subtarget[j]) {
-				break;
-			}
+
+    register int indexTarget, indexSubtarget, countTimes = 0, pos_result;
+
+    for (indexTarget = 0; indexTarget <= (target_length - subtarget_length); indexTarget++) {
+
+        if (target[indexTarget] != subtarget[0]) {
+            continue;
         }
-        if (j == subtarget_length) {
-			return i;
-		}
+
+        for (indexSubtarget = 1; indexSubtarget < subtarget_length; indexSubtarget++) {
+            if (target[indexTarget + indexSubtarget] != subtarget[indexSubtarget]) {
+                break;
+            }
+        }
+
+        if (indexSubtarget == subtarget_length) {
+            pos_result = indexTarget;
+            countTimes++;
+            if(countTimes == times) {
+                return pos_result;
+            }
+        }
     }
+
     return -1;
 }
 
 char *string_random(char *target, int size) {
-    srand(time(NULL));
 	int target_length = length_pointer_char(target);
 	char *result = malloc((size + 1) * sizeof(char));
 	register int i;
@@ -201,18 +208,6 @@ char *string_concat(char *target, char *subtarget) {
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
     result[target_length + subtarget_length] = '\0';
-	return result;
-}
-
-// Convert array char to pointer char
-char *convert_to_pointer_char(char *target) {
-	size_t length_array =  strlen(target);
-	char *result = (char*)malloc((length_array + 1) * sizeof(char));
-	int index;
-	for(index = 0; index < length_array; index++){
-		result[index] = target[index];
-	}
-	result[length_array] = '\0';
 	return result;
 }
 
@@ -275,33 +270,32 @@ char *string_title(char *target) {
 	return result;
 }
 
-int string_in_string(char target, char *subtarget) {
-	register int index = 0;
-	for(; index < length_pointer_char(subtarget); index++) {
-		if (subtarget[index] == target) {
+int string_char_in_string(char *target, char subtarget) {
+    char *index = target;
+	for(; *index; index++) {
+		if (*index == subtarget) {
 			return 1;
 		}
 	}
 	return 0;
 }
 
-char *string_from_to_element(char *url, int indexFirstElement, char *subtarget) {
+char *string_get_substr(char *url, int indexFirstElement, char *subtarget) {
 	int lengthUrl = length_pointer_char(url);
 	if (lengthUrl == 0 || indexFirstElement < 0 || indexFirstElement > lengthUrl) {
 		return NULL;
 	}
 
-	url = url + sizeof(char) * indexFirstElement;
+	char *index = url + sizeof(char) * indexFirstElement;
 	char *result = (char*)malloc((lengthUrl - indexFirstElement + 1) * sizeof(char));
-	int index = 0;
-	for(; *url; url++, index++) {
-		if (string_in_string(*url, subtarget) == TRUE) {
-			break;
-		}
-		result[index] = *url;
+	int indexInResult = 0;
+
+	for(; *index && !string_char_in_string(subtarget, *index); index++, indexInResult++) {
+		result[indexInResult] = *index;
 	}
 
-	result[index] = '\0';
+	realloc(result, indexInResult);
+    result[indexInResult] = '\0';
 	return result;
 }
 

@@ -79,43 +79,62 @@ TEST(Builtin_String, Split) {
     ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", urlComponents[1]);
 }
 
-TEST(Builtin_String, StartWith) {
+TEST(Builtin_String, StartsWith) {
     char *target = "Hello World";
     char *prefix = "Hello";
-    ASSERT_TRUE(string_start(target, prefix));
+    ASSERT_TRUE(string_startswith(target, prefix));
 
     prefix = "Nope";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 
     prefix = "Prefix is longer than target";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 }
 
-TEST(Builtin_String, EndWith) {
+TEST(Builtin_String, EndsWith) {
     char *target = "Hello World";
     char *suffix = "World";
-    ASSERT_TRUE(string_end(target, suffix));
+    ASSERT_TRUE(string_endswith(target, suffix));
 
     suffix = "Nope";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
 
     suffix = "Suffix is longer than target";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
 }
 
 TEST(Builtin_String, IndexOf) {
     char *target = "Hello World";
     char *subtarget = "World";
-    ASSERT_EQUAL(6, string_index(target, subtarget));
+    int result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(6, result);
+
+    target = "Hello World World World World";
+    subtarget = "World";
+    result = string_index(target, subtarget, 3);
+    ASSERT_EQUAL(18, result);
+
+    target = "Hello World World World World";
+    subtarget = "orl";
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(13, result);
+
+    target = "###############";
+    subtarget = "##";
+    result = string_index(target, subtarget, 4);
+    ASSERT_EQUAL(3, result);
 
     subtarget = "Substring is longer than target";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Hello";
-    ASSERT_EQUAL(0, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Nope";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, FIRST_TIMES);
+    ASSERT_EQUAL(-1, result);
 }
 
 TEST(Builtin_String, Random) {
@@ -139,15 +158,6 @@ TEST(Builtin_String, Concat) {
     result = string_concat(target, subtarget);
     ASSERT_STR("Hello", result);
     ASSERT_EQUAL(5, length_pointer_char(result));
-}
-
-// Convert
-TEST(Builtin_String, ConvertToPointerChar){
-    char *target = "Hello Hello Hello Hello Hello Hello!";
-    char array[50] = "Hello Hello Hello Hello Hello Hello!";
-    char *result = convert_to_pointer_char(array);
-
-    ASSERT_STR(result, target);
 }
 
 TEST(Builtin_String, FromTo) {
@@ -223,7 +233,7 @@ TEST(Builtin_String, Copy) {
     ASSERT_STR(target, result);
 }
 
-TEST(Builtin_String, ToUpper) {
+TEST(Builtin_String, Upper) {
     char *target = "Hello World";
     char *result = string_upper(target);
     char *expect = "HELLO WORLD";
@@ -273,13 +283,21 @@ TEST(Builtin_String, Title) {
 }
 
 
-TEST(Builtin_String, FromToElement) {
+TEST(Builtin_String, GetSubstr) {
     char *target = "https://www.google.com/search?client=ubuntu&channel=fs&q=dich&ie=utf-8&oe=utf-8";
-    char *result = string_from_to_element(target, LENGHT_OF_HTTPS, "+?/");
+    char *result = string_get_substr(target, LENGHT_OF_HTTPS, "+?/");
     ASSERT_STR(result, "www.google.com");
 
-    result = string_from_to_element(target, 0, " ");
+    result = string_get_substr(target, 0, " ");
     ASSERT_STR(result, target);
 
-    ASSERT_EQUAL(string_from_to_element("", 0,"/"), NULL);
+    result = string_get_substr("", 0, "/");
+    ASSERT_EQUAL(result, NULL);
+}
+
+TEST(Builtin_String, StringInString) {
+    char *target = "1234";
+    char subtarget = '3';
+    int result = string_char_in_string(target, subtarget);
+    ASSERT_EQUAL(1, result);
 }
