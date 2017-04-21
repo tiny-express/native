@@ -50,11 +50,8 @@ file(GLOB_RECURSE TESTS
     system/*_test.c
     thread/*_test.c
     type/*_test.c
-<<<<<<< HEAD
     etcd/*_test.c
-=======
     vendor/*_test.c
->>>>>>> a900266d6cc5926587e4246d33712470fe4d56e6
     main.c
 )
 
