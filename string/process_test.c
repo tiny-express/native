@@ -106,7 +106,7 @@ TEST(Builtin_String, EndsWith) {
 TEST(Builtin_String, IndexOf) {
     char *target = "Hello World";
     char *subtarget = "World";
-    int result = string_index(target, subtarget, FIRST_TIMES);
+    int result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(6, result);
 
     target = "Hello World World World World";
@@ -125,15 +125,15 @@ TEST(Builtin_String, IndexOf) {
     ASSERT_EQUAL(3, result);
 
     subtarget = "Substring is longer than target";
-    result = string_index(target, subtarget, FIRST_TIMES);
+    result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(-1, result);
 
     subtarget = "Hello";
-    result = string_index(target, subtarget, FIRST_TIMES);
+    result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(-1, result);
 
     subtarget = "Nope";
-    result = string_index(target, subtarget, FIRST_TIMES);
+    result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(-1, result);
 }
 
