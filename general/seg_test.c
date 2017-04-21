@@ -25,14 +25,8 @@ TEST(Builtin_Segment, PointerType) {
 TEST(Builtin_Segment, PointerConstChar) {
     char *charArray = "Hello World";
     int from = 6;
-    int to = 10;
-    char *result = segment_pointer_constant_char(charArray, from, to);
-    ASSERT_EQUAL(5, length_pointer_char(result));
-    ASSERT_STR("World", result);
-
-    from = 6;
-    to = 6;
-    result = segment_pointer_char(charArray, from, to);
+    int to = 6;
+    char *result = segment_pointer_char(charArray, from, to);
     ASSERT_EQUAL(1, length_pointer_char(result));
     ASSERT_STR("W", result);
 
@@ -45,16 +39,16 @@ TEST(Builtin_Segment, PointerConstChar) {
 
 TEST(Builtin_Segment, PointerPointerChar) {
     char *target[] = {
-            (char *) "The",
-            (char *) "quick",
-            (char *) "brown",
-            (char *) "fox",
-            (char *) "jumps",
-            (char *) "over",
-            (char *) "the",
-            (char *) "lazy",
-            (char *) "dog",
-            '\0'
+        (char *) "The",
+        (char *) "quick",
+        (char *) "brown",
+        (char *) "fox",
+        (char *) "jumps",
+        (char *) "over",
+        (char *) "the",
+        (char *) "lazy",
+        (char *) "dog",
+        '\0'
     };
     int from = 2;
     int to = 5;

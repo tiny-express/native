@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 project(native)
 
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -w")
+enable_language(C)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    enable_language(ASM)
+endif()
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
 find_library(ZLIB REQUIRED)
 find_package(Threads REQUIRED)
@@ -25,9 +31,9 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
 
 file(GLOB_RECURSE TESTS
@@ -55,7 +61,7 @@ add_library(builtin STATIC ${SOURCES})
 
 target_compile_definitions(builtin PRIVATE CASSANDRA)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
