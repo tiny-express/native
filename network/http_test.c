@@ -75,7 +75,7 @@ TEST(Builtin_Network, HttpRequest) {
     // NOTE: https tests depend on host cert
 }
 
-TEST(Builtin_String, HttpPath) {
+TEST(Builtin_Network, HttpPath) {
     char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
     char *result = http_path(target);
     char *expect = "/index/file1/key.pem";
