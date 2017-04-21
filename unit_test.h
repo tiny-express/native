@@ -373,7 +373,7 @@ static int suite_all(struct ctest* t) {
 }
 
 static int suite_filter(struct ctest* t) {
-    return strncmp(suite_name, t->ssname, strlen(suite_name)) == 0;
+    return strncmp(suite_name, t->ssname, length_pointer_char(suite_name)) == 0;
 }
 
 static uint64_t getCurrentTime() {
@@ -395,7 +395,7 @@ static void color_print(const char* color, const char* text) {
 #ifdef __APPLE__
 static void *find_symbol(struct ctest *test, const char *fname)
 {
-    size_t len = strlen(test->ssname) + 1 + strlen(fname);
+    size_t len = length_pointer_char(test->ssname) + 1 + length_pointer_char(fname);
     char *symbol_name = (char *) malloc(len + 1);
     memset(symbol_name, 0, len + 1);
     snprintf(symbol_name, len + 1, "%s_%s", test->ssname, fname);
