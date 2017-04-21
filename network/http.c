@@ -156,7 +156,8 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 
     if (!isGetMethod) {
         int bodySize = length_pointer_char(bodyString);
-        asprintf(&headerString, "%sContent-Length: %d", headerString, bodySize);
+        asprintf(&headerString, "%s%sContent-Length: %d", headerString, length_pointer_char(headerString) > 0?"\r\n":"", bodySize);
+
     }
 
     char *request;
