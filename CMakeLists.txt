@@ -26,14 +26,15 @@ file(GLOB_RECURSE SOURCES
     thread/*
     type/*
     etcd/*
+    vendor/*
     main.c
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
 
 file(GLOB_RECURSE TESTS
@@ -49,7 +50,11 @@ file(GLOB_RECURSE TESTS
     system/*_test.c
     thread/*_test.c
     type/*_test.c
+<<<<<<< HEAD
     etcd/*_test.c
+=======
+    vendor/*_test.c
+>>>>>>> a900266d6cc5926587e4246d33712470fe4d56e6
     main.c
 )
 
@@ -61,7 +66,7 @@ add_library(builtin STATIC ${SOURCES})
 
 target_compile_definitions(builtin PRIVATE CASSANDRA)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
