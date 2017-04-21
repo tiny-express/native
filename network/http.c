@@ -17,9 +17,9 @@ char *http_schema(char *url) {
 	if (length_pointer_char(url) == 0) {
 		return NULL;
 	}
-	if (string_start(url, "https://") == 1) {
+	if (string_startswith(url, "https://") == 1) {
 		return HTTPS;
-	} else if (string_start(url, "http://") == 1) {
+	} else if (string_startswith(url, "http://") == 1) {
 		return HTTP;
 	}
 	return NULL;
@@ -55,8 +55,8 @@ char *http_hostname(char *url) {
  * @return int
  */
 int http_port(char *url) {
-    int https_port = string_start(url, HTTPS);
-    int http_port = string_start(url, HTTP);
+    int https_port = string_startswith(url, HTTPS);
+    int http_port = string_startswith(url, HTTP);
 
 	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
 		return -1;
@@ -112,8 +112,8 @@ char *http_query(char *url) {
  * @return string path
  */
 char *http_path(char *url) {
-    int exitHttp = string_start(url, HTTP);
-    int exitHttps = string_start(url, HTTPS);
+    int exitHttp = string_startswith(url, HTTP);
+    int exitHttps = string_startswith(url, HTTPS);
 
     if (exitHttp == 0 && exitHttps == 0) {
         return NULL;

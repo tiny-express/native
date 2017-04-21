@@ -41,6 +41,3 @@ TYPE **segment_pointer_pointer_##TYPE(TYPE **target, int from, int to) {\
 P_SEG(char);
 P_C_SEG(char);
 P_P_SEG(char);
-P_SEG(int);
-P_SEG(long);
-P_SEG(double);

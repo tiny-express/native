@@ -79,28 +79,28 @@ TEST(Builtin_String, Split) {
     ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", urlComponents[1]);
 }
 
-TEST(Builtin_String, StartWith) {
+TEST(Builtin_String, StartsWith) {
     char *target = "Hello World";
     char *prefix = "Hello";
-    ASSERT_TRUE(string_start(target, prefix));
+    ASSERT_TRUE(string_startswith(target, prefix));
 
     prefix = "Nope";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 
     prefix = "Prefix is longer than target";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 }
 
-TEST(Builtin_String, EndWith) {
+TEST(Builtin_String, EndsWith) {
     char *target = "Hello World";
     char *suffix = "World";
-    ASSERT_TRUE(string_end(target, suffix));
+    ASSERT_TRUE(string_endswith(target, suffix));
 
     suffix = "Nope";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
 
     suffix = "Suffix is longer than target";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
 }
 
 TEST(Builtin_String, IndexOf) {
@@ -158,15 +158,6 @@ TEST(Builtin_String, Concat) {
     result = string_concat(target, subtarget);
     ASSERT_STR("Hello", result);
     ASSERT_EQUAL(5, length_pointer_char(result));
-}
-
-// Convert
-TEST(Builtin_String, ConvertToPointerChar){
-    char *target = "Hello Hello Hello Hello Hello Hello!";
-    char array[50] = "Hello Hello Hello Hello Hello Hello!";
-    char *result = convert_to_pointer_char(array);
-
-    ASSERT_STR(result, target);
 }
 
 TEST(Builtin_String, FromTo) {
@@ -242,7 +233,7 @@ TEST(Builtin_String, Copy) {
     ASSERT_STR(target, result);
 }
 
-TEST(Builtin_String, ToUpper) {
+TEST(Builtin_String, Upper) {
     char *target = "Hello World";
     char *result = string_upper(target);
     char *expect = "HELLO WORLD";

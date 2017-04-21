@@ -1,5 +1,3 @@
-#define _GNU_SOURCE
-
 #include <stdio.h>
 #include <memory.h>
 #include "../string.h"
@@ -18,7 +16,6 @@ TYPE string_to_##TYPE(char *target) {\
     sscanf(target, FORMAT, &result);\
     return result;\
 }
-
 
 CONVERT_STR(short,  "%d\0");
 CONVERT_STR(int,    "%d\0");
