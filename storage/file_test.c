@@ -1,7 +1,7 @@
 #include "../file.h"
 #include "../unit_test.h"
 
-TEST(Builtin_File, filePutContents) {
+TEST(Builtin_File, FilePutContents) {
     const char* file_path = "test.txt";
     // Make sure file does not exist before testing
     // No need to care about delete success or not
@@ -11,7 +11,7 @@ TEST(Builtin_File, filePutContents) {
 	ASSERT_TRUE(file_put_contents(file_path, content));
 }
 
-TEST(Builtin_File, fileGetContents) {
+TEST(Builtin_File, FileGetContents) {
     const char* file_path = "test.txt";
     // Make sure file does not exist before testing
     // No need to care about delete success or not

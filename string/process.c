@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include "../string.h"
 #include "../general.h"
 
@@ -128,7 +126,7 @@ char *string_trim(char *target) {
 	return result;
 }
 
-int string_start(char *target, const char *prefix) {
+int string_startswith(char *target, const char *prefix) {
     int target_length = length_pointer_char(target);
     int prefix_length = length_pointer_char(prefix);
     if (target_length < prefix_length) {
@@ -143,7 +141,7 @@ int string_start(char *target, const char *prefix) {
     return 1;
 }
 
-int string_end(char *target, const char *suffix) {
+int string_endswith(char *target, const char *suffix) {
     int target_length = length_pointer_char(target);
     int suffix_length = length_pointer_char(suffix);
     if (target_length < suffix_length) {
@@ -193,7 +191,6 @@ int string_index(char *target, char *subtarget, int times) {
 }
 
 char *string_random(char *target, int size) {
-    srand(time(NULL));
 	int target_length = length_pointer_char(target);
 	char *result = malloc((size + 1) * sizeof(char));
 	register int i;
@@ -211,18 +208,6 @@ char *string_concat(char *target, char *subtarget) {
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
     result[target_length + subtarget_length] = '\0';
-	return result;
-}
-
-// Convert array char to pointer char
-char *convert_to_pointer_char(char *target) {
-	size_t length_array =  strlen(target);
-	char *result = (char*)malloc((length_array + 1) * sizeof(char));
-	int index;
-	for(index = 0; index < length_array; index++){
-		result[index] = target[index];
-	}
-	result[length_array] = '\0';
 	return result;
 }
 
