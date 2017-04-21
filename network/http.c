@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
-
+#include "openssl/ssl.h"
+#include "openssl/bio.h"
+#include "openssl/err.h"
 
 /**
  * Retrieve url schema
@@ -138,223 +135,134 @@ char *http_path(char *url) {
  * @method GET POST PUT PATCH DELETE HEAD OPTIONS
  * @return string
  */
-
 char *http_request(char *method, char *url, char **headers, char **body) {
-	int port = http_port(url);
-	char *host = http_hostname(url);
-	char *path = http_path(url);
+    // Parse URL
+    int port = http_port(url);
+    char *host = http_hostname(url);
+    asprintf(&host, "%s:%d", host, port);
+    char *path = http_path(url);
+    char *schema = http_schema(url);
+    int isHTTPS = strcmp(schema, HTTPS)?0:1;
     int isGetMethod = strcmp(method, "GET")?0:1;
 
-	char *template = 	"%s %s%s%s HTTP/1.1\r\n"
-						"Connection: close\r\n"
-						"Host: %s:%d\r\n"
-						"%s\r\n\r\n"
-						"%s";
-	char *headerString = string_join(headers, "\r\n");
-	char *bodyString = string_join(body, "&");
+    // Prepare request message
+    char *template = 	"%s %s%s%s HTTP/1.1\r\n"
+                        "Connection: close\r\n"
+                        "Host: %s\r\n"
+                        "%s\r\n\r\n"
+                        "%s";
+    char *headerString = string_join(headers, "\r\n");
+    char *bodyString = string_join(body, "&");
 
-	if (!isGetMethod) {
-		int bodySize = length_pointer_char(bodyString);
-		asprintf(&headerString, "%sContent-Length: %d", headerString, bodySize);
-	}
+    if (!isGetMethod) {
+        int bodySize = length_pointer_char(bodyString);
+        asprintf(&headerString, "%sContent-Length: %d", headerString, bodySize);
+    }
 
-	struct hostent *server;
-	struct sockaddr_in serv_addr;
-	int sockfd, bytes, sent, received, total, message_size;
-	char *message, *response;
+    char *request;
+    if (isGetMethod) {
+        asprintf(&request, template,
+                 method,
+                 path,
+                 length_pointer_char(bodyString) > 0 ? "?" : "",
+                 bodyString,
+                 host,
+                 headerString,
+                 "");
+    } else {
+        asprintf(&request, template,
+                 method,
+                 path,
+                 "",
+                 "",
+                 host,
+                 headerString,
+                 bodyString);
+    }
 
-	if (isGetMethod) {
-		asprintf(&message, template,
-				method,
-				path,
-				length_pointer_char(bodyString) > 0 ? "?" : "",
-				bodyString,
-				host,
-				port,
-				headerString,
-				"");
-	} else {
-		asprintf(&message, template,
-				method,
-				path,
-				"",
-				"",
-				host,
-				port,
-				headerString,
-				bodyString);
-	}
-	int messageSize = length_pointer_char(message);
+    BIO * bio;
+    SSL * ssl;
+    SSL_CTX * ctx;
+    char *response = malloc(100000 * sizeof(char));
+    int received = 0;
 
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) return "";
+    if (isHTTPS) {
+        SSL_library_init();
+    }
 
-	server = gethostbyname(host);
-	if (server == NULL) return "";
+    ERR_load_BIO_strings();
+    SSL_load_error_strings();
+    OpenSSL_add_all_algorithms();
 
-	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(port);
-	memcpy(&serv_addr.sin_addr.s_addr, server->h_addr, server->h_length);
-
-	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
-        return "";
-
-	total = messageSize;
-	sent = 0;
-	do {
-		bytes = write(sockfd, message + sent, total - sent);
-		if (bytes < 0)
+    if (isHTTPS) {
+        const SSL_METHOD *method = TLSv1_2_client_method();	/* SSLv3 but can rollback to v2 */
+        if (! method) {
+            fprintf(stderr, "SSL client method failed\n");
             return "";
-		if (bytes == 0)
-			break;
-		sent += bytes;
-	} while (sent < total);
+        }
 
-	response = malloc(100000 * sizeof(char));
-	total = 99999;
-	received = 0;
-	do {
-		bytes = read(sockfd, response + received, total - received);
-		if (bytes < 0) {
+        ctx = SSL_CTX_new(method);
+        if (! ctx) {
+            fprintf(stderr, "SSL context is NULL\n");
+            ERR_print_errors_fp(stderr);
             return "";
-		}
-		if (bytes == 0) {
-			break;
-		}
-		received += bytes;
-	} while (received < total);
+        }
 
-	if (received == total)
-        return "";
+        /* Setup the connection */
+        bio = BIO_new_ssl_connect(ctx);
 
-	close(sockfd);
+        /* Set the SSL_MODE_AUTO_RETRY flag */
+        BIO_get_ssl(bio, &ssl);
+        SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
 
-	free(message);
-	return response;
+        /* Create and setup the connection */
+        BIO_set_conn_hostname(bio, host);
+
+        if(BIO_do_connect(bio) <= 0) {
+            fprintf(stderr, "Error attempting to connect\n");
+            ERR_print_errors_fp(stderr);
+            printf("%s\n", ERR_error_string(ERR_get_error(), NULL));
+            BIO_free_all(bio);
+            SSL_CTX_free(ctx);
+            return "";
+        }
+    } else {
+        bio = BIO_new_connect(host);
+        if(bio == NULL) {
+            fprintf(stderr, "BIO is null\n");
+            return "";
+        }
+
+        if(BIO_do_connect(bio) <= 0) {
+            ERR_print_errors_fp(stderr);
+            BIO_free_all(bio);
+            return "";
+        }
+    }
+
+    /* Send the request */
+    BIO_write(bio, request, length_pointer_char(request));
+
+    /* Read in the response */
+    int bytes;
+    for(;;) {
+        bytes = BIO_read(bio, response + received, 1023);
+        if(bytes < 0) {
+            printf("ERROR received");
+            return "";
+        }
+        if (bytes == 0) {
+            break;
+        }
+        received += bytes;
+    }
+
+    /* Close the connection and free the context */
+    BIO_free_all(bio);
+    if (isHTTPS) {
+        SSL_CTX_free(ctx);
+    }
+    free(request);
+
+    return response;
 }
-//
-//char *http_request(char *method, char* url, char **headers, char *body) {
-//	int i;
-//	int port = http_port(url);
-//	char *host = http_hostname(url);
-//	char *query = http_query(url);
-//
-//	struct hostent *server;
-//	struct sockaddr_in serv_addr;
-//	int sockfd, bytes, sent, received, total, message_size;
-//	char *message, response[4096];
-//
-//	message_size=0;
-//	if(!strcmp(method,"GET"))
-//	{
-//		message_size+=length_pointer_char("%s %s%s%s HTTP/1.0\r\n");        // method
-//		message_size+=length_pointer_char(argv[3]);                         // path
-//		message_size+=length_pointer_pointer_char(headers);                         // headers
-//		if(argc>5)
-//			message_size+=length_pointer_char(query);                     // query string
-//		for(i=6;i<argc;i++)                                    // headers
-//			message_size+=length_pointer_char(argv[i])+length_pointer_char("\r\n");
-//		message_size+=length_pointer_char("\r\n");                          // blank line
-//	}
-//	else
-//	{
-//		message_size+=length_pointer_char("%s %s HTTP/1.0\r\n");
-//		message_size+=length_pointer_char(argv[3]);                         // method
-//		message_size+=length_pointer_char(argv[4]);                         // path
-//		for(i=6;i<argc;i++)                                    // headers
-//			message_size+=length_pointer_char(argv[i])+length_pointer_char("\r\n");
-//		if(argc>5)
-//			message_size+=length_pointer_char("Content-Length: %d\r\n")+10; // content length
-//		message_size+=length_pointer_char("\r\n");                          // blank line
-//		if(argc>5)
-//			message_size+=length_pointer_char(argv[5]);                     // body
-//	}
-//
-//	// allocate space for the message
-//	message=malloc(message_size);
-//
-//	// fill in the parameters
-//	if(!strcmp(argv[3],"GET"))
-//	{
-//		if(argc>5)
-//			sprintf(message,"%s %s%s%s HTTP/1.0\r\n",
-//					length_pointer_char(argv[3])>0?argv[3]:"GET",               // method
-//					length_pointer_char(argv[4])>0?argv[4]:"/",                 // path
-//					length_pointer_char(argv[5])>0?"?":"",                      // ?
-//					length_pointer_char(argv[5])>0?argv[5]:"");                 // query string
-//		else
-//			sprintf(message,"%s %s HTTP/1.0\r\n",
-//					length_pointer_char(argv[3])>0?argv[3]:"GET",               // method
-//					length_pointer_char(argv[4])>0?argv[4]:"/");                // path
-//		for(i=6;i<argc;i++)                                    // headers
-//		{strcat(message,argv[i]);strcat(message,"\r\n");}
-//		strcat(message,"\r\n");                                // blank line
-//	}
-//	else
-//	{
-//		sprintf(message,"%s %s HTTP/1.0\r\n",
-//				length_pointer_char(argv[3])>0?argv[3]:"POST",                  // method
-//				length_pointer_char(argv[4])>0?argv[4]:"/");                    // path
-//		for(i=6;i<argc;i++)                                    // headers
-//		{strcat(message,argv[i]);strcat(message,"\r\n");}
-//		if(argc>5)
-//			sprintf(message+length_pointer_char(message),"Content-Length: %d\r\n",length_pointer_char(argv[5]));
-//		strcat(message,"\r\n");                                // blank line
-//		if(argc>5)
-//			strcat(message,argv[5]);                           // body
-//	}
-//
-//	// What are we going to send?
-//	printf("Request:\n%s\n",message);
-//
-//	// create the socket
-//	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-//	if (sockfd < 0) error("ERROR opening socket");
-//
-//	// lookup the ip address
-//	server = gethostbyname(host);
-//	if (server == NULL) error("ERROR, no such host");
-//
-//	// fill in the structure
-//	memset(&serv_addr,0,sizeof(serv_addr));
-//	serv_addr.sin_family = AF_INET;
-//	serv_addr.sin_port = htons(port);
-//	memcpy(&serv_addr.sin_addr.s_addr,server->h_addr,server->h_length);
-//
-//	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
-//		error("ERROR connecting");
-//
-//	total = length_pointer_char(message);
-//	sent = 0;
-//	do {
-//		bytes = write(sockfd,message+sent,total-sent);
-//		if (bytes < 0)
-//			error("ERROR writing message to socket");
-//		if (bytes == 0)
-//			break;
-//		sent+=bytes;
-//	} while (sent < total);
-//
-//	memset(response,0,sizeof(response));
-//	total = sizeof(response)-1;
-//	received = 0;
-//	do {
-//		bytes = read(sockfd,response+received,total-received);
-//		if (bytes < 0)
-//			error("ERROR reading response from socket");
-//		if (bytes == 0)
-//			break;
-//		received+=bytes;
-//	} while (received < total);
-//
-//	if (received == total)
-//		error("ERROR storing complete response from socket");
-//
-//	close(sockfd);
-//
-//	printf("Response:\n%s\n",response);
-//
-//	free(message);
-//	return 0;
-//}
