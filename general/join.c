@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../general.h"
-#include "../string.h"
 
 #define MAX_SIZE 100000
 
-char *join_pointer_pointer_char(char **target)
+inline char *join_pointer_pointer_char(char **target)
 {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
@@ -24,7 +23,7 @@ char *join_pointer_pointer_char(char **target)
 	return result;
 }
 
-char *join_delim_pointer_pointer_char(char **target, const char *delim)
+inline char *join_delim_pointer_pointer_char(char **target, const char *delim)
 {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;

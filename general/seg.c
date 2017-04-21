@@ -4,7 +4,7 @@
 #include "../general.h"
 
 #define P_SEG(TYPE); \
-TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
+inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
 	int lenTarget = length_pointer_##TYPE(target);\
 	if (from > to || from < 0 || from > lenTarget || to < 0 || to > lenTarget) {\
 		return "";\
@@ -16,7 +16,7 @@ TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
 }
 
 #define P_C_SEG(TYPE); \
-TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int to) {\
+inline TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int to) {\
 	int lenTarget = length_pointer_##TYPE(target);\
 	if (from > to || from < 0 || from > lenTarget || to < 0 || to > lenTarget) {\
 		return "";\
@@ -28,7 +28,7 @@ TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int to) {\
 }
 
 #define P_P_SEG(TYPE);\
-TYPE **segment_pointer_pointer_##TYPE(TYPE **target, int from, int to) {\
+inline TYPE **segment_pointer_pointer_##TYPE(TYPE **target, int from, int to) {\
     int lenTarget = length_pointer_pointer_##TYPE(target);\
 	if (from > to || from < 0 || from > lenTarget || to < 0 || to > lenTarget) {\
 		return "";\

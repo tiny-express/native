@@ -3,7 +3,7 @@
 #define TRUE 1
 #define FALSE 0
 
-char *file_get_contents(char *file_name) {
+inline char *file_get_contents(char *file_name) {
 	FILE *input_file = fopen(file_name, "r");
 	if (input_file == NULL) {
 		fprintf(stderr, "File does not exist !\n");
@@ -19,7 +19,7 @@ char *file_get_contents(char *file_name) {
 	return result;
 }
 
-int file_put_contents(char *file_path, char *content) {
+inline int file_put_contents(char *file_path, char *content) {
 	FILE *outputFile = fopen(file_path, "wb+");
 	if (outputFile == NULL) {
 		fprintf(stderr, "Permission denied !\n");
