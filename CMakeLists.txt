@@ -24,9 +24,9 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
 
 file(GLOB_RECURSE TESTS
@@ -53,7 +53,7 @@ add_library(builtin STATIC ${SOURCES})
 
 target_compile_definitions(builtin PRIVATE CASSANDRA)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
