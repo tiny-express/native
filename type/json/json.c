@@ -139,7 +139,7 @@ static char * parson_strndup(const char *string, size_t n) {
 }
 
 static char * parson_strdup(const char *string) {
-	return parson_strndup(string, strlen(string));
+	return parson_strndup(string, length_pointer_char(string));
 }
 
 static int is_utf16_hex(const unsigned char *s) {
@@ -266,8 +266,8 @@ static void remove_comments(char *string, const char *start_token, const char *e
 	int in_string = 0, escaped = 0;
 	size_t i;
 	char *ptr = NULL, current_char;
-	size_t start_token_len = strlen(start_token);
-	size_t end_token_len = strlen(end_token);
+	size_t start_token_len = length_pointer_char(start_token);
+	size_t end_token_len = length_pointer_char(end_token);
 	if (start_token_len == 0 || end_token_len == 0) {
 		return;
 	}
@@ -373,7 +373,7 @@ static JSON_Status json_object_resize(JSON_Object *object, size_t new_capacity) 
 static JSON_Value * json_object_nget_value(const JSON_Object *object, const char *name, size_t n) {
 	size_t i, name_length;
 	for (i = 0; i < json_object_get_count(object); i++) {
-		name_length = strlen(object->names[i]);
+		name_length = length_pointer_char(object->names[i]);
 		if (name_length != n) {
 			continue;
 		}
@@ -895,7 +895,7 @@ static int json_serialize_to_buffer_r(const JSON_Value *value, char *buf, int le
 }
 
 static int json_serialize_string(const char *string, char *buf) {
-	size_t i = 0, len = strlen(string);
+	size_t i = 0, len = length_pointer_char(string);
 	char c = '\0';
 	int written = -1, written_total = 0;
 	APPEND_STRING("\"");
@@ -934,7 +934,7 @@ static int append_indent(char *buf, int level) {
 
 static int append_string(char *buf, const char *string) {
 	if (buf == NULL) {
-		return (int)strlen(string);
+		return (int)length_pointer_char(string);
 	}
 	return sprintf(buf, "%s", string);
 }
@@ -993,7 +993,7 @@ JSON_Value * json_object_get_value(const JSON_Object *object, const char *name) 
 	if (object == NULL || name == NULL) {
 		return NULL;
 	}
-	return json_object_nget_value(object, name, strlen(name));
+	return json_object_nget_value(object, name, length_pointer_char(name));
 }
 
 const char * json_object_get_string(const JSON_Object *object, const char *name) {
@@ -1192,7 +1192,7 @@ JSON_Value * json_value_init_string(const char *string) {
 	if (string == NULL) {
 		return NULL;
 	}
-	string_len = strlen(string);
+	string_len = length_pointer_char(string);
 	if (!is_valid_utf8(string, string_len)) {
 		return NULL;
 	}

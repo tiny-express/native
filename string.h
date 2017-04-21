@@ -3,9 +3,6 @@
 
 #include "string.h"
 
-#define ToString string_from_const_pointer_char
-char* string_from_const_pointer_char(const char *target);
-
 /****** STRING CONVERT *******/
 #define ShortToString string_from_short
 #define IntToString string_from_int
