@@ -19,6 +19,7 @@ file(GLOB_RECURSE SOURCES
     system/*.c
     thread/*.c
     type/*.c
+    vendor/*.c
     main.c
 )
 
@@ -42,6 +43,7 @@ file(GLOB_RECURSE TESTS
         system/*_test.c
         thread/*_test.c
         type/*_test.c
+        vendor/*_test.c
         main.c
 )
 
