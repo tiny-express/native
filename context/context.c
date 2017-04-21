@@ -24,7 +24,7 @@ Context* mockContext() {
 	return context;
 }
 
-char *findParam(char *name, char *params) {
+char *find_param(char *name, char *params) {
     if (strcmp(params, "") == 0) {
         return "";
     }
