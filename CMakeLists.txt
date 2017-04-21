@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
-project(native ASM C)
+project(native)
+
+enable_language(C)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    enable_language(ASM)
+endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
