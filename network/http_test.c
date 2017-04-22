@@ -1,12 +1,34 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Network, HttpSchema) {
-	char *schemaHttp = http_schema("http://google.com");
-	ASSERT_STR(schemaHttp, HTTP);
+TEST(Builtin_Network, IsUrl) {
+	char *url = "https://google.com";
+	int expect = IS_HTTPS;
+	int result = is_url(url);
+	ASSERT_EQUAL(expect, result);
 
-	char *schemaHtpps = http_schema("https://facebook.com");
-	ASSERT_STR(schemaHtpps, HTTPS);
+	url = "http://google.com";
+	expect = IS_HTTP;
+	result = is_url(url);
+	ASSERT_EQUAL(expect, result);
+
+	url = "google.http://";
+	expect = NOT_URL;
+	result = is_url(url);
+	ASSERT_EQUAL(expect, result);
+
+	url = "";
+	expect = NOT_URL;
+	result= is_url(url);
+	ASSERT_EQUAL(expect, result);
+}
+
+TEST(Builtin_Network, HttpSchema) {
+	char *schema_http = http_schema("http://google.com");
+	ASSERT_STR(schema_http, HTTP);
+
+	char *schema_https = http_schema("https://facebook.com");
+	ASSERT_STR(schema_https, HTTPS);
 
 	char *schemaNull = http_schema("");
 	ASSERT_EQUAL(schemaNull, NULL);
@@ -47,13 +69,18 @@ TEST(Builtin_Network, HttpPort) {
 
 TEST(Builtin_Network, HttpQuery) {
 	char *url = "http://localhost/index?key1=value1&key2=value2";
-	char *result1 = http_query(url);
-	ASSERT_STR("key1=value1&key2=value2", result1);
+	char *result = http_query(url);
+	char *expect = "key1=value1&key2=value2";
+	ASSERT_STR(expect, result);
 
-	char *result2 = http_query("http://localhost/index?key1=value1&key2=value2:3000");
-	ASSERT_STR("key1=value1&key2=value2", result2);
+	result = http_query("http://localhost/index?key1=value1&key2=value2:3000");
+	ASSERT_STR("key1=value1&key2=value2", result);
+
+	result = http_query("http://localhost/index");
+	expect = "";
+	ASSERT_STR(expect, result);
+
 }
-
 
 TEST(Builtin_Network, HttpRequest) {
 	char *headers[2] = {
@@ -76,7 +103,7 @@ TEST(Builtin_Network, HttpRequest) {
 TEST(Builtin_Network, HttpPath) {
     char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
     char *result = http_path(target);
-    char *expect = "/index/file1/key.pem";
+    char *expect = "index/file1/key.pem";
     ASSERT_STR(expect, result);
 
     target = "http://localhost:3000?key1=value1&key2=value2:3000";

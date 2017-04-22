@@ -8,21 +8,45 @@
 #include "openssl/err.h"
 
 /**
+ *
+ * @param url
+ * @return 1 if url is HTTPS, 2 if HTTP, else 0
+ */
+int is_url(char *url) {
+    if (length_pointer_char(url) == 0) {
+        return NOT_URL;
+    }
+
+    if (string_startswith(url, "https://") == 1) {
+        return IS_HTTPS;
+    }
+
+    if (string_startswith(url, "http://") == 1) {
+        return IS_HTTP;
+    }
+
+    return NOT_URL;
+}
+
+/**
  * Retrieve url schema
  *
  * @param url
  * @return string (https or http)
  */
+
 char *http_schema(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return NULL;
-	}
-	if (string_startswith(url, "https://") == 1) {
-		return HTTPS;
-	} else if (string_startswith(url, "http://") == 1) {
-		return HTTP;
-	}
-	return NULL;
+    int is_url_result = is_url(url);
+
+    if (is_url_result == 0) {
+        return NULL;
+    }
+
+    if (is_url_result == 1) {
+        return HTTPS;
+    }
+
+    return HTTP;
 }
 
 /**
@@ -31,17 +55,32 @@ char *http_schema(char *url) {
  * @param url
  * @return string (hostname)
  */
+
 char *http_hostname(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return NULL;
-	}
+    int is_url_result = is_url(url);
+
+    if (is_url_result == 0) {
+        return NULL;
+    }
 
 	if (string_index(url, "127.0.0.1", 1) != -1) {
 		return LOCALHOST;
-	} else {
-		int firstPos = string_index(url, "://", 1);
-        char *indexUrl = url + sizeof(char) * (firstPos + 3);
-        char *result = string_get_substr(indexUrl, 0, ":/?");
+	}
+
+    if(is_url(url)) {
+        int len_url = length_pointer_char(url);
+        int begin_pos = string_index(url, "://", 1) + 3;
+        int end_pos = len_url;
+
+        // Find end position to cut, if meet ':', '?' or '/'
+        for (int index = begin_pos; index < len_url; index++) {
+            if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
+                end_pos = index;
+                break;
+            }
+        }
+
+        char *result = string_from_to(url, begin_pos, end_pos - 1);
         return result;
 	}
 
@@ -55,12 +94,11 @@ char *http_hostname(char *url) {
  * @return int
  */
 int http_port(char *url) {
-    int https_port = string_startswith(url, HTTPS);
-    int http_port = string_startswith(url, HTTP);
+    int is_url_result = is_url(url);
 
-	if (length_pointer_char(url) == 0 || (http_port == 0 && https_port == 0)) {
-		return -1;
-	}
+    if (is_url_result == 0) {
+        return NULL;
+    }
 
     char **element = string_split(url, "/");
     char *result = element[1];
@@ -70,7 +108,7 @@ int http_port(char *url) {
 
     int port = atoi(index);
     if (port == 0) {
-        return https_port ? HTTPS_PORT : HTTP_PORT;
+        return (is_url_result == 1) ? HTTPS_PORT : HTTP_PORT;
     }
 
     return port;
@@ -84,26 +122,29 @@ int http_port(char *url) {
  * @return string
  */
 char *http_query(char *url) {
+    int is_url_result = is_url(url);
+
+    if (is_url_result == 0) {
+        return NULL;
+    }
+
 	int length_url = length_pointer_char(url);
+	int begin_pos = string_index(url, "?", 1) + 1;
 
-	if (length_url == 0) {
-		return NULL;
-	}
+    if (begin_pos == 0) {
+        return "";
+    }
 
-	int first_position = string_index(url, "?", 1);
-	int end_position = first_position;
-	int length_target = length_pointer_char(url);
-	for (end_position; end_position < length_target; end_position++) {
-		if (url[end_position] == '/' || url[end_position] == ':') {
+	int end_pos = begin_pos;
+
+	for (end_pos; end_pos < length_url; end_pos++) {
+		if (url[end_pos] == '/' || url[end_pos] == ':') {
 			break;
 		}
 	}
 
-	if (first_position != -1) {
-		return string_from_to(url, first_position + 1, end_position - 1);
-	}
-
-	return NULL;
+    char *result = string_from_to(url, begin_pos, end_pos - 1);
+    return result;
 }
 
 /**
@@ -112,19 +153,28 @@ char *http_query(char *url) {
  * @return string path
  */
 char *http_path(char *url) {
-    int exitHttp = string_startswith(url, HTTP);
-    int exitHttps = string_startswith(url, HTTPS);
+    int is_url_result = is_url(url);
 
-    if (exitHttp == 0 && exitHttps == 0) {
+    if (is_url_result == 0) {
         return NULL;
     }
 
-    char *index = url + sizeof(char) * (exitHttp ? LENGHT_OF_HTTP : LENGHT_OF_HTTPS);
-    int indexOfFirstSlash = string_index(index, "/", 1);
-    char *result = string_get_substr(index, indexOfFirstSlash, ":?");
-    if (result == NULL) {
+    int len_url = length_pointer_char(url);
+    int begin_pos = string_index(url, "/", 3) + 1;
+
+    if (begin_pos == 0) {
         return "/";
     }
+
+    int end_pos = len_url;
+    for (int index = begin_pos; index < len_url; index++) {
+        if (url[index] == ':' || url[index] == '?') {
+            end_pos = index;
+            break;
+        }
+    }
+
+    char *result = string_from_to(url, begin_pos, end_pos - 1);
     return result;
 }
 

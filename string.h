@@ -34,12 +34,6 @@ char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
 
-// TODO - Please remove 2 functions after refactor
-/*****************/
-char *string_get_substr(char *url, int indexFirstElement, char *subtarget);
-int string_char_in_string(char *target, char subtarget);
-/****************/
-
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"
 
