@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../general.h"
-#include "../string.h"
+#include "../_string.h"
 #include "../network.h"
 #include "openssl/ssl.h"
 #include "openssl/bio.h"
