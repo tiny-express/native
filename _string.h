@@ -1,7 +1,7 @@
 #ifndef BUILTIN_STRING_H
 #define BUILTIN_STRING_H
 
-#include "string.h"
+#include <string.h>
 
 char* string_from_short(short target);
 char* string_from_int(int target);

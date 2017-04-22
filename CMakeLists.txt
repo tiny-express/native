@@ -25,7 +25,6 @@ file(GLOB_RECURSE SOURCES
     system/*
     thread/*
     type/*
-    etcd/*
     vendor/*
     main.c
 )
@@ -50,7 +49,6 @@ file(GLOB_RECURSE TESTS
     system/*_test.c
     thread/*_test.c
     type/*_test.c
-    etcd/*_test.c
     vendor/*_test.c
     main.c
 )
@@ -63,7 +61,7 @@ add_library(builtin STATIC ${SOURCES})
 
 target_compile_definitions(builtin PRIVATE CASSANDRA)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto -lcassandra)
 else()
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
+    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto -lcassandra)
 endif()
