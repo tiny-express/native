@@ -189,7 +189,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     char *path = http_path(url);
     char *schema = http_schema(url);
     int is_https = strcmp(schema, HTTPS) ? 0 : 1;
-    int is_get_method = strcmp(method, "GET")?0:1;
+    int is_get_method = strcmp(method, "GET") ? 0 : 1;
 
     // Prepare request message
     char *template = 	"%s %s%s%s HTTP/1.1\r\n"
@@ -203,7 +203,6 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     if (!is_get_method) {
         int bodySize = length_pointer_char(body_string);
         asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", bodySize);
-
     }
 
     char *request;
@@ -309,6 +308,5 @@ char *http_request(char *method, char *url, char **headers, char **body) {
         SSL_CTX_free(ctx);
     }
     free(request);
-
     return response;
 }
