@@ -1,4 +1,4 @@
-brew install libuv cmake
+brew install libuv cmake openssl
 git clone https://github.com/datastax/cpp-driver.git
 mkdir cpp-driver/build
 cd cpp-driver/build
