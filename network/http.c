@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../general.h"
-#include "../_string.h"
+#include "../string.h"
 #include "../network.h"
 #include "openssl/ssl.h"
 #include "openssl/err.h"
@@ -67,19 +67,19 @@ char *http_hostname(char *url) {
 	}
 
 
-    int len_url = length_pointer_char(url);
-    int begin_pos = string_index(url, "://", 1) + 3;
-    int end_pos = len_url;
+    int length_url = length_pointer_char(url);
+    int begin_position = string_index(url, "://", 1) + 3;
+    int end_position = length_url;
 
     // Find end position to cut, if meet ':', '?' or '/'
-    for (int index = begin_pos; index < len_url; index++) {
+    for (int index = begin_position; index < length_url; index++) {
         if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
-            end_pos = index;
+            end_position = index;
             break;
         }
     }
 
-    char *result = string_from_to(url, begin_pos, end_pos - 1);
+    char *result = string_from_to(url, begin_position, end_position - 1);
     return result;
 }
 
@@ -125,21 +125,21 @@ char *http_query(char *url) {
     }
 
 	int length_url = length_pointer_char(url);
-	int begin_pos = string_index(url, "?", 1) + 1;
+	int begin_position = string_index(url, "?", 1) + 1;
 
-    if (begin_pos == 0) {
+    if (begin_position == 0) {
         return "";
     }
 
-	int end_pos = begin_pos;
+	int end_position = begin_position;
 
-	for (end_pos; end_pos < length_url; end_pos++) {
-		if (url[end_pos] == '/' || url[end_pos] == ':') {
+	for (end_position; end_position < length_url; end_position++) {
+		if (url[end_position] == '/' || url[end_position] == ':') {
 			break;
 		}
 	}
 
-    char *result = string_from_to(url, begin_pos, end_pos - 1);
+    char *result = string_from_to(url, begin_position, end_position - 1);
     return result;
 }
 
@@ -162,7 +162,8 @@ char *http_path(char *url) {
     }
 
     int end_pos = len_url;
-    for (int index = begin_pos; index < len_url; index++) {
+    int index;
+    for (index = begin_pos; index < len_url; index++) {
         if (url[index] == ':' || url[index] == '?') {
             end_pos = index;
             break;
