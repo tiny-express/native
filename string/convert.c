@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <memory.h>
-#include "../string.h"
+#include "../_string.h"
 
 #define STR_FROM(TYPE, FORMAT); \
 inline char* string_from_##TYPE(TYPE target) {\

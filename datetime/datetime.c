@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../datetime.h"
-#include "../string.h"
+#include "../_string.h"
 
 long now() {
     return time(NULL);

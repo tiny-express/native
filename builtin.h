@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <zlib.h>
 #include "general.h"
-#include "string.h"
+#include "_string.h"
 #include "type.h"
 #include "context.h"
 #include "crypto.h"
