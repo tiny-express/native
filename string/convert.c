@@ -3,14 +3,14 @@
 #include "../string.h"
 
 #define STR_FROM(TYPE, FORMAT); \
-char* string_from_##TYPE(TYPE target) {\
+inline char* string_from_##TYPE(TYPE target) {\
 	char *convert;\
 	asprintf(&convert, FORMAT, target);\
 	return convert;\
 }
 
 #define STR_TO(TYPE, FORMAT);\
-TYPE string_to_##TYPE(char *target) {\
+inline TYPE string_to_##TYPE(char *target) {\
     if (target == NULL || strcmp(target, "\0") == 0) return 0;\
 	TYPE result;\
     sscanf(target, FORMAT, &result);\

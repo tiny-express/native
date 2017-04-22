@@ -1,4 +1,3 @@
-
 #include "../builtin.h"
 #include "../unit_test.h"
 #include "../vendor.h"
@@ -14,11 +13,21 @@ TEST(BUILTIN_ETCD, ETCDGet) {
     ASSERT_FALSE(length_pointer_char(node) > 0);
 }
 
-TEST(BUILTIN_ETCD, ETCDSet) {
-    char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "1223");
+
+TEST(Builtin_Vendor, ETCDSet) {
+    char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "1223");
     ASSERT_TRUE(length_pointer_char(result) > 0);
 
-    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "Hello World");
+    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "Hello World");
     ASSERT_TRUE(length_pointer_char(result) > 0);
+
+    result = etcd_set("", "/elassandra/development/seeds", "Hello World");
+    ASSERT_FALSE(length_pointer_char(result) > 0);
+
+    result = etcd_set(ETCD_MASTER, "", "Hello World");
+    ASSERT_FALSE(length_pointer_char(result) > 0);
+
+    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "");
+    ASSERT_FALSE(length_pointer_char(result) > 0);
 }
 

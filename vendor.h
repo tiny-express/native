@@ -15,4 +15,6 @@ char* etcd_set(char* host, char *key, char *value);
 
 char *search(char *host, char *index, char *query);
 
+char *es_query(char *host, char *index, char *query);
+
 #endif
