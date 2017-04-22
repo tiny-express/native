@@ -1,5 +1,5 @@
 
-#include "../_string.h"
+#include "../string.h"
 #include "../general.h"
 
 // Length of pointer

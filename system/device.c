@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../_string.h"
+#include "../string.h"
 
 #define BUF_MAX 1024
 

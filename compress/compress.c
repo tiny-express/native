@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "../_string.h"
+#include "../string.h"
 #include "../compress.h"
 #include "../general.h"
 
