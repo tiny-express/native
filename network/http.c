@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 #include <stdlib.h>
 #include "../general.h"
 #include "../string.h"
@@ -102,7 +102,6 @@ int http_port(char *url) {
 
     int index_colon = string_index(result, ":", 1) + 1;
     char *index = result + sizeof(char) * index_colon;
-
     int port = string_to_int(index);
     if (port == 0) {
         return (is_url_result == 1) ? HTTPS_PORT : HTTP_PORT;
@@ -304,7 +303,6 @@ char *http_request(char *method, char *url, char **headers, char **body) {
         }
         received += bytes;
     }
-
     /* Close the connection and free the context */
     BIO_free_all(bio);
     if (is_https) {
