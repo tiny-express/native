@@ -104,7 +104,8 @@ char *etcd_set(char *host, char *key, char *value) {
     char* result = string_from_to(
             response,
             response_body_begin_index,
-            response_length - 2);
+            response_length - 2
+    );
     return result;
 }
 
