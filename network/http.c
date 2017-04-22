@@ -1,10 +1,9 @@
 
 #include <stdlib.h>
 #include "../general.h"
-#include "../_string.h"
+#include "../string.h"
 #include "../network.h"
 #include "openssl/ssl.h"
-#include "openssl/bio.h"
 #include "openssl/err.h"
 
 /**
@@ -67,24 +66,22 @@ char *http_hostname(char *url) {
 		return LOCALHOST;
 	}
 
-    if(is_url(url)) {
-        int len_url = length_pointer_char(url);
-        int begin_pos = string_index(url, "://", 1) + 3;
-        int end_pos = len_url;
 
-        // Find end position to cut, if meet ':', '?' or '/'
-        for (int index = begin_pos; index < len_url; index++) {
-            if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
-                end_pos = index;
-                break;
-            }
+    int length_url = length_pointer_char(url);
+    int begin_position = string_index(url, "://", 1) + 3;
+    int end_position = length_url;
+
+    // Find end position to cut, if meet ':', '?' or '/'
+    int index = begin_position;
+    for (; index < length_url; index++) {
+        if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
+            end_position = index;
+            break;
         }
+    }
 
-        char *result = string_from_to(url, begin_pos, end_pos - 1);
-        return result;
-	}
-
-	return NULL;
+    char *result = string_from_to(url, begin_position, end_position - 1);
+    return result;
 }
 
 /**
@@ -128,21 +125,21 @@ char *http_query(char *url) {
     }
 
 	int length_url = length_pointer_char(url);
-	int begin_pos = string_index(url, "?", 1) + 1;
+	int begin_position = string_index(url, "?", 1) + 1;
 
-    if (begin_pos == 0) {
+    if (begin_position == 0) {
         return "";
     }
 
-	int end_pos = begin_pos;
+	int end_position = begin_position;
 
-	for (end_pos; end_pos < length_url; end_pos++) {
-		if (url[end_pos] == '/' || url[end_pos] == ':') {
+	for (end_position; end_position < length_url; end_position++) {
+		if (url[end_position] == '/' || url[end_position] == ':') {
 			break;
 		}
 	}
 
-    char *result = string_from_to(url, begin_pos, end_pos - 1);
+    char *result = string_from_to(url, begin_position, end_position - 1);
     return result;
 }
 
@@ -159,14 +156,14 @@ char *http_path(char *url) {
     }
 
     int len_url = length_pointer_char(url);
-    int begin_pos = string_index(url, "/", 3) + 1;
-
-    if (begin_pos == 0) {
+    int begin_pos = string_index(url, "/", 3);
+    if (begin_pos == -1) {
         return "/";
     }
 
     int end_pos = len_url;
-    for (int index = begin_pos; index < len_url; index++) {
+    int index;
+    for (index = begin_pos; index < len_url; index++) {
         if (url[index] == ':' || url[index] == '?') {
             end_pos = index;
             break;
@@ -191,8 +188,8 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     asprintf(&host, "%s:%d", host, port);
     char *path = http_path(url);
     char *schema = http_schema(url);
-    int isHTTPS = strcmp(schema, HTTPS)?0:1;
-    int isGetMethod = strcmp(method, "GET")?0:1;
+    int is_https = strcmp(schema, HTTPS) ? 0 : 1;
+    int is_get_method = strcmp(method, "GET")?0:1;
 
     // Prepare request message
     char *template = 	"%s %s%s%s HTTP/1.1\r\n"
@@ -200,24 +197,24 @@ char *http_request(char *method, char *url, char **headers, char **body) {
                         "Host: %s\r\n"
                         "%s\r\n\r\n"
                         "%s";
-    char *headerString = string_join(headers, "\r\n");
-    char *bodyString = string_join(body, "&");
+    char *header_content = string_join(headers, "\r\n");
+    char *body_string = string_join(body, "&");
 
-    if (!isGetMethod) {
-        int bodySize = length_pointer_char(bodyString);
-        asprintf(&headerString, "%s%sContent-Length: %d", headerString, length_pointer_char(headerString) > 0?"\r\n":"", bodySize);
+    if (!is_get_method) {
+        int bodySize = length_pointer_char(body_string);
+        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", bodySize);
 
     }
 
     char *request;
-    if (isGetMethod) {
+    if (is_get_method) {
         asprintf(&request, template,
                  method,
                  path,
-                 length_pointer_char(bodyString) > 0 ? "?" : "",
-                 bodyString,
+                 length_pointer_char(body_string) > 0 ? "?" : "",
+                 body_string,
                  host,
-                 headerString,
+                 header_content,
                  "");
     } else {
         asprintf(&request, template,
@@ -226,8 +223,8 @@ char *http_request(char *method, char *url, char **headers, char **body) {
                  "",
                  "",
                  host,
-                 headerString,
-                 bodyString);
+                 header_content,
+                 body_string);
     }
 
     BIO * bio;
@@ -236,7 +233,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     char *response = malloc(100000 * sizeof(char));
     int received = 0;
 
-    if (isHTTPS) {
+    if (is_https) {
         SSL_library_init();
     }
 
@@ -244,7 +241,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     SSL_load_error_strings();
     OpenSSL_add_all_algorithms();
 
-    if (isHTTPS) {
+    if (is_https) {
         const SSL_METHOD *method = TLSv1_2_client_method();	/* SSLv3 but can rollback to v2 */
         if (! method) {
             fprintf(stderr, "SSL client method failed\n");
@@ -308,7 +305,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     }
     /* Close the connection and free the context */
     BIO_free_all(bio);
-    if (isHTTPS) {
+    if (is_https) {
         SSL_CTX_free(ctx);
     }
     free(request);
