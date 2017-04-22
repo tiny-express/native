@@ -22,7 +22,7 @@ TEST(Builtin_File, FileGetContents) {
     // Verify read operation
     ASSERT_STR(expect, content);
 
-    content = file_get_contents("http://etcd.foodtiny.net/v2/keys/elassandra/development/seeds/test_node");
-    expect = "{\"action\":\"get\",\"node\":{\"key\":\"/elassandra/development/seeds/test_node\",\"value\":\"Hello World\",\"modifiedIndex\":45,\"createdIndex\":45}}\n";
-    ASSERT_STR(expect, content);
+//    content = file_get_contents("http://etcd.foodtiny.net/v2/keys/elassandra/development/seeds/test_node");
+//    expect = "{\"action\":\"get\",\"node\":{\"key\":\"/elassandra/development/seeds/test_node\",\"value\":\"Hello World\",\"modifiedIndex\":45,\"createdIndex\":45}}\n";
+//    ASSERT_STR(expect, content);
 }

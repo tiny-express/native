@@ -1,7 +1,7 @@
 #include "../../builtin.h"
 #include "../../unit_test.h"
 
-TEST(Builtin_Json, JSONEncoding) {
+TEST(Builtin_Json, JSONSerialize) {
 	JSON_Value *root_value = json_value_init_object();
 	JSON_Object *root_object = json_value_get_object(root_value);
 	char *serialized_string = NULL;
@@ -42,8 +42,7 @@ TEST(Builtin_Json, JSONEncoding) {
 	json_value_free(root_value);
 }
 
-TEST(Builtin_Json, JSONDecoding) {
-	/*
+TEST(Builtin_Json, JSONUnserialize) {
 	typedef struct addressType {
 		char *city;
 	};
@@ -77,15 +76,23 @@ TEST(Builtin_Json, JSONDecoding) {
 	};
 
 	JSON_Array *emailArray = json_object_dotget_array(root_object, "contact.emails");
+	//ASSERT_EQUAL(10, json_array_get_count(emailArray));
+
 	char **emailJSONs = (char**) calloc(json_array_get_count(emailArray), sizeof(char*));
 
 	struct contactType contactJSON = {
 		.emails = emailJSONs
 	};
+
 	struct jsonType json = {
 		.name = json_object_get_string(root_object, "name"),
 		.address =	addressJSON,
 		.age = json_object_get_number(root_object, "age"),
 		.contact = contactJSON,
-	};*/
+	};
+
+	ASSERT_EQUAL(25, json.age);
+	ASSERT_STR("John Smith", json.name);
+	ASSERT_STR("Cupertino", json.address.city);
+	//ASSERT_TRUE(length_pointer_pointer_char(json.contact.emails)  == 3);
 }
