@@ -5,6 +5,7 @@
 #include "../_string.h"
 #include "../general.h"
 #include "../vendor.h"
+#include <stdio.h>
 
 /**
  * get node
@@ -28,6 +29,8 @@ char *etcd_get(char* url, char *key) {
     int response_body_begin_index = string_index(response, "{", 1);
     int response_length = length_pointer_char(response);
     char* result = string_from_to(response, response_body_begin_index, response_length - 2);
+    printf("etcd get: %s\n", response);
+    fflush(stdout);
     return result;
 }
 

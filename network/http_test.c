@@ -80,6 +80,10 @@ TEST(Builtin_Network, HttpQuery) {
 	expect = "";
 	ASSERT_STR(expect, result);
 
+	result = http_query("http://localhost/index?");
+	expect = "";
+	ASSERT_STR(expect, result);
+
 }
 
 TEST(Builtin_Network, HttpRequest) {
