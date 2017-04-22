@@ -14,19 +14,19 @@ TEST(BUILTIN_ETCD, ETCDGet) {
 }
 
 TEST(Builtin_Vendor, ETCDSet) {
-    char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "1223");
+    char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "1223");
     ASSERT_TRUE(length_pointer_char(result) > 0);
 
-    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "Hello World");
+    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "Hello World");
     ASSERT_TRUE(length_pointer_char(result) > 0);
 
-    result = etcd_set("", "/elassandra/development/seeds", "Hello World");
+    result = etcd_set("", "/elassandra/development/seeds/test_node", "Hello World");
     ASSERT_FALSE(length_pointer_char(result) > 0);
 
     result = etcd_set(ETCD_MASTER, "", "Hello World");
     ASSERT_FALSE(length_pointer_char(result) > 0);
 
-    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds", "");
+    result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "");
     ASSERT_FALSE(length_pointer_char(result) > 0);
 }
 
