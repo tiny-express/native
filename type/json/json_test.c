@@ -75,24 +75,32 @@ TEST(Builtin_Json, JSONUnserialize) {
 		.city = json_object_dotget_string(root_object, "address.city")
 	};
 
-	JSON_Array *emailArray = json_object_dotget_array(root_object, "contact.emails");
-	//ASSERT_EQUAL(10, json_array_get_count(emailArray));
+    JSON_Array *emails = json_object_dotget_array(root_object, "contact.emails");
+    int lengthEmails = json_array_get_count(emails);
+    ASSERT_EQUAL(2, lengthEmails);
 
-	char **emailJSONs = (char**) calloc(json_array_get_count(emailArray), sizeof(char*));
+    char **emailJSONs = (char**) calloc(lengthEmails + 1, sizeof(char*));
+    register int i=0;
+    for (i=0; i<lengthEmails; i++) {
+        JSON_Value *obj = json_array_get_value(emails, i);
+        emailJSONs[i] = json_value_get_string(obj);
+    }
 
-	struct contactType contactJSON = {
-		.emails = emailJSONs
+    struct contactType contactJSONs = {
+		.emails = emailJSONs,
 	};
 
 	struct jsonType json = {
 		.name = json_object_get_string(root_object, "name"),
 		.address =	addressJSON,
 		.age = json_object_get_number(root_object, "age"),
-		.contact = contactJSON,
+		.contact = contactJSONs,
 	};
 
 	ASSERT_EQUAL(25, json.age);
 	ASSERT_STR("John Smith", json.name);
 	ASSERT_STR("Cupertino", json.address.city);
-	//ASSERT_TRUE(length_pointer_pointer_char(json.contact.emails)  == 3);
+    ASSERT_EQUAL(2, length_pointer_pointer_char(json.contact.emails));
+    ASSERT_STR("email@example.com", json.contact.emails[0]);
+    ASSERT_STR("email2@example.com", json.contact.emails[1]);
 }
