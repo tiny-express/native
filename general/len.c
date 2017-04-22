@@ -1,4 +1,5 @@
 #include "../string.h"
+#include "../general.h"
 
 // Length of pointer
 #define P_LEN(TYPE); \

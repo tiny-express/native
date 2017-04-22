@@ -264,32 +264,4 @@ char *string_title(char *target) {
 	return result;
 }
 
-int string_char_in_string(char *target, char subtarget) {
-    char *index = target;
-	for(; *index; index++) {
-		if (*index == subtarget) {
-			return 1;
-		}
-	}
-	return 0;
-}
-
-char *string_get_substr(char *url, int indexFirstElement, char *subtarget) {
-	int lengthUrl = length_pointer_char(url);
-	if (lengthUrl == 0 || indexFirstElement < 0 || indexFirstElement > lengthUrl) {
-		return NULL;
-	}
-
-	char *index = url + sizeof(char) * indexFirstElement;
-	char *result = (char*)malloc((lengthUrl - indexFirstElement + 1) * sizeof(char));
-	int indexInResult = 0;
-
-	for(; *index && !string_char_in_string(subtarget, *index); index++, indexInResult++) {
-		result[indexInResult] = *index;
-	}
-
-	realloc(result, indexInResult);
-    result[indexInResult] = '\0';
-	return result;
-}
 

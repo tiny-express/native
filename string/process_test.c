@@ -29,9 +29,9 @@ TEST(Builtin_String, Trim) {
     char *result2 = string_trim(target2);
     ASSERT_STR(expect, result2);
 
-    char *target3 = "Hello   World";
-    char *result3 = string_trim(target3);
-    //ASSERT_STR(expect, result3);
+//    char *target3 = "Hello   World";
+//    char *result3 = string_trim(target3);
+//    ASSERT_STR(expect, result3);
 }
 
 TEST(Builtin_String, Join) {
