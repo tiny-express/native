@@ -72,7 +72,8 @@ char *http_hostname(char *url) {
     int end_position = length_url;
 
     // Find end position to cut, if meet ':', '?' or '/'
-    for (int index = begin_position; index < length_url; index++) {
+    int index = begin_position;
+    for (; index < length_url; index++) {
         if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
             end_position = index;
             break;
