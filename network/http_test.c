@@ -1,7 +1,5 @@
 #include "../builtin.h"
 #include "../unit_test.h"
-#include "../network.h"
-
 
 TEST(Builtin_Network, HttpSchema) {
 	char *schemaHttp = http_schema("http://google.com");

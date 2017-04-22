@@ -31,6 +31,7 @@
 #include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
 #include <stddef.h> /* size_t */
 #include <signal.h>
+#include "./general.h"
 
 typedef void (*SetupFunc)(void*);
 typedef void (*TearDownFunc)(void*);
@@ -373,7 +374,7 @@ static int suite_all(struct ctest* t) {
 }
 
 static int suite_filter(struct ctest* t) {
-    return strncmp(suite_name, t->ssname, length_pointer_char(suite_name)) == 0;
+    return strncmp(suite_name, t->ssname, length_pointer_char((char *)suite_name)) == 0;
 }
 
 static uint64_t getCurrentTime() {

@@ -43,6 +43,7 @@ TEST(Builtin_Json, JSONEncoding) {
 }
 
 TEST(Builtin_Json, JSONDecoding) {
+	/*
 	typedef struct addressType {
 		char *city;
 	};
@@ -70,23 +71,21 @@ TEST(Builtin_Json, JSONDecoding) {
 					   "}";
 	JSON_Value *root_value = json_parse_string(json_string);
 	JSON_Object *root_object = json_value_get_object(root_value);
-    ASSERT_STR("hello", "hello");
 
-    /*
 	struct addressType addressJSON = {
 		.city = json_object_dotget_string(root_object, "address.city")
 	};
+
 	JSON_Array *emailArray = json_object_dotget_array(root_object, "contact.emails");
-	char **emailArray = (char**) calloc(json_array_get_count(emailArray), sizeof(char*));
+	char **emailJSONs = (char**) calloc(json_array_get_count(emailArray), sizeof(char*));
 
 	struct contactType contactJSON = {
-		.emails =
+		.emails = emailJSONs
 	};
 	struct jsonType json = {
 		.name = json_object_get_string(root_object, "name"),
 		.address =	addressJSON,
 		.age = json_object_get_number(root_object, "age"),
-		.contact =
-	};
-    */
+		.contact = contactJSON,
+	};*/
 }

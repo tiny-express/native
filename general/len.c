@@ -1,8 +1,8 @@
 #include "../string.h"
-
+#include "../general.h"
 // Length of pointer
 #define P_LEN(TYPE); \
-int length_pointer_##TYPE(TYPE *target) {\
+inline int length_pointer_##TYPE(TYPE *target) {\
 	register TYPE*pointer;\
 	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
@@ -10,7 +10,7 @@ int length_pointer_##TYPE(TYPE *target) {\
 
 // length of pointer pointer
 #define P_P_LEN(TYPE); \
-int length_pointer_pointer_##TYPE(TYPE **target) {\
+inline int length_pointer_pointer_##TYPE(TYPE **target) {\
 	register TYPE**pointer;\
 	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
@@ -18,7 +18,7 @@ int length_pointer_pointer_##TYPE(TYPE **target) {\
 
 // Length of number
 #define NUM_LEN(TYPE); \
-int length_##TYPE(TYPE target) {\
+inline int length_##TYPE(TYPE target) {\
 	char *result = string_from_##TYPE(target);\
 	return length_pointer_char(result);\
 }

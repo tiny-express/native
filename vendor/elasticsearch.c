@@ -1,7 +1,7 @@
-#include "../builtin.h"
 #include "../network.h"
+#include "../vendor.h"
 
-char *search(char *host, char *index, char *query) {
+char *es_query(char *host, char *index, char *query) {
     char *headers[2] = {
             "Content-Type: application/json",
             '\0'
