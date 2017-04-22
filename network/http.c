@@ -6,6 +6,8 @@
 #include "openssl/ssl.h"
 #include "openssl/err.h"
 
+#define min(a,b) (a < b ? a : b)
+
 /**
  *
  * @param url
@@ -97,16 +99,22 @@ int http_port(char *url) {
         return NULL;
     }
 
-    char **element = string_split(url, "/");
-    char *result = element[1];
-
-    int index_colon = string_index(result, ":", 1) + 1;
-    char *index = result + sizeof(char) * index_colon;
-    int port = string_to_int(index);
-    if (port == 0) {
-        return (is_url_result == 1) ? HTTPS_PORT : HTTP_PORT;
+    int url_length = length_pointer_char(url);
+    int prefix_position = string_index(url, "://", 1);
+    char* url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
+    int url_without_prefix_length = length_pointer_char(url_without_prefix);
+    int port_index_begin = string_index(url_without_prefix, ":", 1) + 1;
+    int port_index_end = string_index(url_without_prefix, "/", 1) - 1;
+    if (port_index_end < 0) {
+        port_index_end = url_without_prefix_length - 1;
     }
-
+    char* port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
+    int port = string_to_int(port_string);
+    if (port == 0) {
+        if (is_url_result == IS_HTTPS)
+            return HTTPS_PORT;
+        return HTTP_PORT;
+    }
     return port;
 }
 

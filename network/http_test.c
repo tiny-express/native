@@ -48,8 +48,7 @@ TEST(Builtin_Network, HttpHostname) {
 }
 
 TEST(Builtin_Network, HttpPort) {
-	// TODO -  @anhkhoa Please help to fix
-	/*
+
 	int result = http_port("http://localhost:3001");
 	ASSERT_EQUAL(3001, result);
 
@@ -67,7 +66,15 @@ TEST(Builtin_Network, HttpPort) {
 
     result = http_port("http://foodtiny.com:3000/asdfasdf:3241243");
     ASSERT_EQUAL(3000, result);
-    */
+
+    result = http_port("https://foodtiny.com/");
+    ASSERT_EQUAL(443, result);
+
+    result = http_port("https://foodtiny.com:1234/");
+    ASSERT_EQUAL(1234, result);
+
+    result = http_port("http://foodtiny.com");
+    ASSERT_EQUAL(80, result);
 }
 
 TEST(Builtin_Network, HttpQuery) {
@@ -89,7 +96,6 @@ TEST(Builtin_Network, HttpQuery) {
 
 }
 TEST(Builtin_Network, HttpRequest) {
-	/*
 	char *headers[2] = {
 		"\0"
 	};
@@ -102,7 +108,6 @@ TEST(Builtin_Network, HttpRequest) {
 
     response = http_request("GET", "http://httpbin.org/get", headers, body);
     ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
-    */
 }
 
 TEST(Builtin_Network, HttpPath) {
