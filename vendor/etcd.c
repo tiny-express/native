@@ -1,5 +1,5 @@
 #include "../network.h"
-#include "../string.h"
+#include "../_string.h"
 #include "../general.h"
 #include "../vendor.h"
 
