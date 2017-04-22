@@ -65,6 +65,15 @@ TEST(Builtin_Network, HttpPort) {
 
     result = http_port("http://foodtiny.com:3000/asdfasdf:3241243");
     ASSERT_EQUAL(3000, result);
+
+    result = http_port("https://foodtiny.com/");
+    ASSERT_EQUAL(443, result);
+
+    result = http_port("https://foodtiny.com:1234/");
+    ASSERT_EQUAL(1234, result);
+
+    result = http_port("http://foodtiny.com");
+    ASSERT_EQUAL(80, result);
 }
 
 TEST(Builtin_Network, HttpQuery) {
