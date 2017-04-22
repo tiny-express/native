@@ -1,12 +1,10 @@
 
 #include <stdlib.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
-#include "openssl/ssl.h"
-#include "openssl/err.h"
-
-#define min(a,b) (a < b ? a : b)
 
 /**
  *
