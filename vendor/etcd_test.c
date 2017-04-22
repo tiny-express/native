@@ -3,13 +3,13 @@
 #include "../vendor.h"
 
 TEST(BUILTIN_ETCD, ETCDGet) {
-    char *node = etcd_get(ETCD_LOCALHOST, "/elassandra/development/seeds/test_node");
+    char *node = etcd_get(ETCD_MASTER, "/elassandra/development/seeds/test_node");
     ASSERT_TRUE(length_pointer_char(node) > 0);
 
     node = etcd_get("", "/elassandra/development/seeds/test_node");
     ASSERT_FALSE(length_pointer_char(node) > 0);
 
-    node = etcd_get(ETCD_LOCALHOST, "");
+    node = etcd_get(ETCD_MASTER, "");
     ASSERT_FALSE(length_pointer_char(node) > 0);
 }
 
