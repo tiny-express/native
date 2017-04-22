@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../general.h"
-#include "../_string.h"
+#include "../string.h"
 #include "../network.h"
 #include "openssl/ssl.h"
 #include "openssl/bio.h"
@@ -73,7 +73,8 @@ char *http_hostname(char *url) {
         int end_pos = len_url;
 
         // Find end position to cut, if meet ':', '?' or '/'
-        for (int index = begin_pos; index < len_url; index++) {
+        int index;
+        for (index = begin_pos; index < len_url; index++) {
             if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
                 end_pos = index;
                 break;
@@ -167,7 +168,8 @@ char *http_path(char *url) {
     }
 
     int end_pos = len_url;
-    for (int index = begin_pos; index < len_url; index++) {
+    int index;
+    for (index = begin_pos; index < len_url; index++) {
         if (url[index] == ':' || url[index] == '?') {
             end_pos = index;
             break;
