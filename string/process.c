@@ -163,20 +163,20 @@ inline int string_index(char *target, char *subtarget, int times) {
 		// Can not found subtarget in target
 		return -1;
 	}
-    register int indexTarget, indexSubtarget, countTimes = 0, pos_result;
-    for (indexTarget = 0; indexTarget <= (target_length - subtarget_length); indexTarget++) {
-        if (target[indexTarget] != subtarget[0]) {
+    register int index_target, index_subtarget, count_times = 0, pos_result;
+    for (index_target = 0; index_target <= (target_length - subtarget_length); index_target++) {
+        if (target[index_target] != subtarget[0]) {
             continue;
         }
-        for (indexSubtarget = 1; indexSubtarget < subtarget_length; indexSubtarget++) {
-            if (target[indexTarget + indexSubtarget] != subtarget[indexSubtarget]) {
+        for (index_subtarget = 1; index_subtarget < subtarget_length; index_subtarget++) {
+            if (target[index_target + index_subtarget] != subtarget[index_subtarget]) {
                 break;
             }
         }
-        if (indexSubtarget == subtarget_length) {
-            pos_result = indexTarget;
-            countTimes++;
-            if(countTimes == times) {
+        if (index_subtarget == subtarget_length) {
+            pos_result = index_target;
+            count_times++;
+            if(count_times == times) {
                 return pos_result;
             }
         }
