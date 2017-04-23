@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <memory.h>
 #include "../string.h"
 
@@ -24,7 +25,14 @@ STR_FROM(float,  "%g\0");
 STR_FROM(double, "%.16g\0");
 
 STR_TO(short,  "%hi\0");
-STR_TO(int,    "%d\0");
+//STR_TO(int,    "%d\0");
 STR_TO(long,   "%ld\0");
 STR_TO(float,  "%g\0");
 STR_TO(double, "%lg\0");
+
+int string_to_int(char* target) {
+	if (target == NULL) {
+		return 0;
+	}
+	return atoi(target);
+}
