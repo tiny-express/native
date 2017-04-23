@@ -40,11 +40,11 @@ TEST(Builtin_Segment, PointerType) {
     ASSERT_EQUAL(0, length_pointer_char(result));
     ASSERT_STR("", result);
 
-//    from = 0;
-//    to = 15;
-//    result = segment_pointer_char(charArray, from, to);
-//    ASSERT_EQUAL(0, length_pointer_char(result));
-//    ASSERT_STR("Hello World", result);
+    from = 0;
+    to = 15;
+    result = segment_pointer_char(charArray, from, to);
+    ASSERT_EQUAL(0, length_pointer_char(result));
+    ASSERT_STR("Hello World", result);
 
     from = 15;
     to = 20;
@@ -52,12 +52,12 @@ TEST(Builtin_Segment, PointerType) {
     ASSERT_EQUAL(0, length_pointer_char(result));
     ASSERT_STR("", result);
 
-//    charArray = NULL;
-//    from = 15;
-//    to = 20;
-//    result = segment_pointer_char(charArray, from, to);
-//    ASSERT_EQUAL(0, length_pointer_char(result));
-//    ASSERT_STR("", result);
+    charArray = NULL;
+    from = 15;
+    to = 20;
+    result = segment_pointer_char(charArray, from, to);
+    ASSERT_EQUAL(0, length_pointer_char(result));
+    ASSERT_STR("", result);
 
     from = 15;
     to = 20;

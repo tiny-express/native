@@ -146,30 +146,30 @@ TEST(Builtin_String, IndexOf) {
     result = string_index(target, subtarget, 2);
     ASSERT_EQUAL(-1, result);
 
-//    subtarget = "";
-//    target = NULL;
-//    result = string_index(target, subtarget, 2);
-//    ASSERT_EQUAL(-1, result);
+    subtarget = "";
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
 
-//    subtarget = NULL;
-//    target = NULL;
-//    result = string_index(target, subtarget, 2);
-//    ASSERT_EQUAL(-1, result);
+    subtarget = NULL;
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "\0";
     target = "\0";
     result = string_index(target, subtarget, -1);
     ASSERT_EQUAL(-1, result);
 
-//    subtarget = "\0";
-//    target = NULL;
-//    result = string_index(target, subtarget, -1);
-//    ASSERT_EQUAL(-1, result);
+    subtarget = "\0";
+    target = NULL;
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
 
-//    subtarget = NULL;
-//    target = "\0";
-//    result = string_index(target, subtarget, -1);
-//    ASSERT_EQUAL(-1, result);
+    subtarget = NULL;
+    target = "\0";
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
 
 }
 
