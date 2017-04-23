@@ -109,6 +109,7 @@ int http_port(char *url) {
     }
     char* port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
     int port = string_to_int(port_string);
+    printf("port string - port_int: %s - %d\n", port_string, port);
     if (port == 0) {
         if (is_url_result == IS_HTTPS)
             return HTTPS_PORT;
