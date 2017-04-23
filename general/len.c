@@ -5,6 +5,7 @@
 // Length of pointer
 #define P_LEN(TYPE); \
 inline int length_pointer_##TYPE(TYPE *target) {\
+    if (target == NULL) return 0;\
 	register TYPE*pointer;\
 	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
@@ -29,6 +30,7 @@ inline int length_##TYPE(TYPE target) {\
 P_LEN(char);
 #endif
 
+P_LEN(char);
 P_P_LEN(char);
 NUM_LEN(short);
 NUM_LEN(int);

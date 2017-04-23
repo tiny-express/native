@@ -4,6 +4,16 @@
 TEST(Builtin_Length, PointerChar) {
 	char* data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
+
+	data = "";
+	ASSERT_EQUAL(0, length_pointer_char(data));
+
+	data = "\0";
+	ASSERT_EQUAL(0, length_pointer_char(data));
+
+	data = NULL;
+	ASSERT_EQUAL(0, length_pointer_char(data));
+
 }
 
 TEST(Builtin_Length, PointerPointerChar) {
