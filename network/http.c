@@ -99,7 +99,7 @@ int http_port(char *url) {
 
     int url_length = length_pointer_char(url);
     int prefix_position = string_index(url, "://", 1);
-    char* url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
+    char *url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
     int url_without_prefix_length = length_pointer_char(url_without_prefix);
     int port_index_begin = string_index(url_without_prefix, ":", 1) + 1;
     int port_index_end = string_index(url_without_prefix, "/", 1) - 1;
