@@ -70,7 +70,7 @@ TEST(Builtin_Network, HttpPort) {
     result = http_port("https://foodtiny.com/");
     ASSERT_EQUAL(443, result);
 
-    result = http_port("https://foodtiny.com:1234/");
+    result = http_port("https://foodtiny.com:1234?file/adsfasdf/aa");
     ASSERT_EQUAL(1234, result);
 
     result = http_port("http://foodtiny.com");
@@ -106,6 +106,9 @@ TEST(Builtin_Network, HttpQuery) {
 	expect = "";
 	ASSERT_STR(expect, result);
 
+    result = http_query("http://localhost/index?");
+    expect = "";
+    ASSERT_STR(expect, result);
 }
 TEST(Builtin_Network, HttpRequest) {
 	char *headers[2] = {

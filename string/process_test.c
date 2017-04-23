@@ -101,6 +101,9 @@ TEST(Builtin_String, EndsWith) {
 
     suffix = "Suffix is longer than target";
     ASSERT_FALSE(string_endswith(target, suffix));
+
+    suffix = "Suffix is longer than target";
+    ASSERT_FALSE(string_endswith(target, suffix));
 }
 
 TEST(Builtin_String, IndexOf) {
