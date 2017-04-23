@@ -9,8 +9,34 @@ endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
-find_library(ZLIB REQUIRED)
+# GCC flags for Darwin - Unix
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -w -undefined dynamic_lookup")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(OPENSSL_ROOT_DIR "/usr/include/openssl")
+else()
+    set(OPENSSL_ROOT_DIR "C:/Program Files (x86)/GnuWin32/include")
+endif()
+
+# Discover dependencies
+# 1. OpenSSL
+# 3. LibUV for Darwin
+set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
+find_package(ZLIB REQUIRED)
+find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    find_package(LibUV)
+endif()
+
+if (OPENSSL_FOUND)
+    include_directories("${OPENSSL_INCLUDE_DIR}")
+endif()
+
+set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 file(GLOB_RECURSE SOURCES
     context/*
