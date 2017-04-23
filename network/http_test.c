@@ -75,6 +75,15 @@ TEST(Builtin_Network, HttpPort) {
 
     result = http_port("http://foodtiny.com");
     ASSERT_EQUAL(80, result);
+
+    result = http_port("alksdjsad");
+    ASSERT_EQUAL(-1, result);
+
+    result = http_port(NULL);
+    ASSERT_EQUAL(-1, result);
+
+    result = http_port("1");
+    ASSERT_EQUAL(-1, result);
 }
 
 TEST(Builtin_Network, HttpQuery) {
