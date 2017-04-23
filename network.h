@@ -4,8 +4,6 @@
 #define HTTPS "https://"
 #define HTTP "http://"
 #define LOCALHOST "localhost"
-#define LENGHT_OF_HTTP 7
-#define LENGHT_OF_HTTPS 8
 #define HTTP_PORT 80
 #define HTTPS_PORT 443
 #define IS_HTTPS 1
