@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUILTIN_STRING_H
 #define BUILTIN_STRING_H
 
