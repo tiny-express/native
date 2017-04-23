@@ -1,43 +1,46 @@
 cmake_minimum_required(VERSION 2.8)
 project(native)
 
+# Native is written in pure C
 enable_language(C)
 
+# Only enable GNU Assembly for Linux amd64
+# Please careful when you would like to optimize any function in ASM
+# ASM implementation must be GNU Assembly for Linux 64bit
+# C implementation must be implemented first for __APPLE__
+# Keep human readable for __APPLE__ - no need to optimize for testing
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     enable_language(ASM)
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
-# GCC flags for Darwin - Unix
+# Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -w -undefined dynamic_lookup")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(OPENSSL_ROOT_DIR "/usr/include/openssl")
 else()
     set(OPENSSL_ROOT_DIR "C:/Program Files (x86)/GnuWin32/include")
 endif()
-
-# Discover dependencies
-# 1. OpenSSL
-# 3. LibUV for Darwin
 set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
+
+# Detect installed components
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
-
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     find_package(LibUV)
 endif()
-
 if (OPENSSL_FOUND)
     include_directories("${OPENSSL_INCLUDE_DIR}")
 endif()
 
+# Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
+# Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
     context/*
     compress/*
@@ -52,16 +55,9 @@ file(GLOB_RECURSE SOURCES
     thread/*
     type/*
     vendor/*
-    main.c
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
-else()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
-endif()
-
+# Include all unit test cases
 file(GLOB_RECURSE TESTS
     context/*_test.c
     compress/*_test.c
@@ -76,18 +72,27 @@ file(GLOB_RECURSE TESTS
     thread/*_test.c
     type/*_test.c
     vendor/*_test.c
-    main.c
 )
 
+# Remove all test files within c files
 foreach(test ${TESTS})
     list(REMOVE_ITEM SOURCES ${test})
 endforeach()
 
-add_library(builtin STATIC ${SOURCES})
+# Create test binary for testing
+add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
-target_compile_definitions(builtin PRIVATE CASSANDRA)
+# Enable native library build with Cassandra Driver
+# Create native library for static linking
+add_library(${PROJECT_NAME} ${SOURCES} ${LIBCASSANDRA_LIBRARIES})
+target_compile_definitions(${PROJECT_NAME} PRIVATE CASSANDRA)
+
+# Link library for OSX and other platform
+# Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto -lcassandra)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lz -lssl -lcrypto)
 else()
-    target_link_libraries(builtin ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto -lcassandra)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lrt -lz -lssl -lcrypto)
 endif()
