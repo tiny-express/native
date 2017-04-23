@@ -96,6 +96,26 @@ TEST(Builtin_String, ToInt) {
     char *input1 = "-123\0";
     int result1 = string_to_int(input1);
     ASSERT_EQUAL(-123, result1);
+
+    char *input2 = "\0";
+    int result2 = string_to_int(input2);
+    ASSERT_EQUAL(0, result2);
+
+    char *input3 = "";
+    int result3 = string_to_int(input3);
+    ASSERT_EQUAL(0, result3);
+
+    char *input4 = "12.321";
+    int result4 = string_to_int(input4);
+    ASSERT_EQUAL(12, result4);
+
+    char *input5 = "kajshdkashd";
+    int result5 = string_to_int(input5);
+    ASSERT_EQUAL(0, result5);
+
+    char *input6 = NULL;
+    int result6 = string_to_int(input6);
+    ASSERT_EQUAL(0, result6);
 }
 
 TEST(Builtin_String, ToLong) {

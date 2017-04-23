@@ -12,7 +12,8 @@
  * @return 1 if url is HTTPS, 2 if HTTP, else 0
  */
 int is_url(char *url) {
-    if (length_pointer_char(url) == 0) {
+
+    if (url == NULL || length_pointer_char(url) == 0) {
         return NOT_URL;
     }
 
@@ -94,7 +95,7 @@ int http_port(char *url) {
     int is_url_result = is_url(url);
 
     if (is_url_result == 0) {
-        return NULL;
+        return -1;
     }
 
     int url_length = length_pointer_char(url);
