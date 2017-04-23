@@ -135,7 +135,7 @@ TEST(Builtin_String, IndexOf) {
     subtarget = "Nope";
     result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(-1, result);
-    
+
 }
 
 TEST(Builtin_String, Random) {
