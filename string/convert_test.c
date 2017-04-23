@@ -116,6 +116,10 @@ TEST(Builtin_String, ToInt) {
     char *input6 = NULL;
     int result6 = string_to_int(input6);
     ASSERT_EQUAL(0, result6);
+
+    char *input7 = "foodtiny.com";
+    int result7 = string_to_int(input7);
+    ASSERT_EQUAL(0, result7);
 }
 
 TEST(Builtin_String, ToLong) {
