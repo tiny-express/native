@@ -101,6 +101,9 @@ TEST(Builtin_String, EndsWith) {
 
     suffix = "Suffix is longer than target";
     ASSERT_FALSE(string_endswith(target, suffix));
+
+    suffix = "Suffix is longer than target";
+    ASSERT_FALSE(string_endswith(target, suffix));
 }
 
 TEST(Builtin_String, IndexOf) {
@@ -135,6 +138,42 @@ TEST(Builtin_String, IndexOf) {
     subtarget = "Nope";
     result = string_index(target, subtarget, 1);
     ASSERT_EQUAL(-1, result);
+
+    subtarget = "xxx";
+    target = "";
+    result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "";
+    target = "";
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "";
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = NULL;
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "\0";
+    target = "\0";
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "\0";
+    target = NULL;
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = NULL;
+    target = "\0";
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
 }
 
 TEST(Builtin_String, Random) {
