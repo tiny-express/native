@@ -1,3 +1,4 @@
+#pragma once
 #include "../string.h"
 #include "../general.h"
 
@@ -25,9 +26,9 @@ inline int length_##TYPE(TYPE target) {\
 	return length_pointer_char(result);\
 }
 
-#ifdef __APPLE__
-P_LEN(char);
-#endif
+//#ifdef __APPLE__
+//P_LEN(char);
+//#endif
 
 P_LEN(char);
 P_P_LEN(char);

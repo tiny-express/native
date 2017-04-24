@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../general.h"
 
-#define P_SEG(TYPE); \
+#define P_SEG(TYPE);\
 inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
 	if (target == NULL){\
 		return "";\
@@ -21,7 +21,7 @@ inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
 	return pointer;\
 }
 
-#define P_C_SEG(TYPE); \
+#define P_C_SEG(TYPE);\
 inline TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int to) {\
 	if (target == NULL){\
 		return "";\
