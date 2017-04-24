@@ -46,22 +46,22 @@ pthread_t set_time_out(void *callback, unsigned int miliseconds) {
 }
 
 void *loop(void *argument) {
-    pthread_mutex_lock(&mutex);
-    for(;;) {
+//    pthread_mutex_lock(&mutex);
+    while(1) {
         ((void(*)())((thread_argument*)argument)->callback)();
         usleep(((thread_argument *)argument)->miliseconds*1000);
     }
 }
 
 void *run(void *argument) {
-    pthread_mutex_t run_mutex = PTHREAD_MUTEX_INITIALIZER;
     usleep(((thread_argument *)argument)->miliseconds*1000);
-    pthread_mutex_lock(&run_mutex);
+//    pthread_mutex_t run_mutex = PTHREAD_MUTEX_INITIALIZER;
+//    pthread_mutex_lock(&run_mutex);
     ((void(*)())((thread_argument*)argument)->callback)();
-    pthread_mutex_unlock(&run_mutex);
+//    pthread_mutex_unlock(&run_mutex);
 }
 
 void stop_thread(pthread_t pthread) {
-    pthread_mutex_unlock(&mutex);
+//    pthread_mutex_unlock(&mutex);
     pthread_cancel(pthread);
 }
