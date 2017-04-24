@@ -48,7 +48,7 @@ file(GLOB_RECURSE SOURCES
         compress/*
         crypto/*
         datetime/*
-        general/*
+        general/*.c
         network/*
         server/*
         storage/*
