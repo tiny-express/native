@@ -1,5 +1,4 @@
 
-#include <stdlib.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include "../general.h"
@@ -12,7 +11,8 @@
  * @return 1 if url is HTTPS, 2 if HTTP, else 0
  */
 int is_url(char *url) {
-    if (length_pointer_char(url) == 0) {
+
+    if (url == NULL || length_pointer_char(url) == 0) {
         return NOT_URL;
     }
 
@@ -94,12 +94,12 @@ int http_port(char *url) {
     int is_url_result = is_url(url);
 
     if (is_url_result == 0) {
-        return NULL;
+        return -1;
     }
 
     int url_length = length_pointer_char(url);
     int prefix_position = string_index(url, "://", 1);
-    char* url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
+    char *url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
     int url_without_prefix_length = length_pointer_char(url_without_prefix);
     int port_index_begin = string_index(url_without_prefix, ":", 1) + 1;
     int port_index_end = string_index(url_without_prefix, "/", 1) - 1;

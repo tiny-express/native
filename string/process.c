@@ -9,6 +9,9 @@
 
 // Find and replace
 inline char *string_replace(char *target, char* find, char* replace_with) {
+    if (target == NULL || find == NULL || replace_with == NULL) {
+        return NULL;
+    }
 	char *result;
 	register int i, count = 0;
 	int oldlen = length_pointer_char(find);
@@ -39,6 +42,9 @@ inline char *string_replace(char *target, char* find, char* replace_with) {
 
 // Split string to one dimession array by delimiter
 inline char **string_split(char *target, const char *delim_) {
+    if (target == NULL || delim_ == NULL) {
+        return NULL;
+    }
 	char* delim = (char*) delim_;
 	int len_target = length_pointer_char(target);
 	int len_delim = length_pointer_char(delim);
@@ -86,6 +92,9 @@ inline char **string_split(char *target, const char *delim_) {
 
 // Join string with delimiter
 inline char *string_join(char *target[], const char *delim) {
+    if (target == NULL || delim == NULL) {
+        return NULL;
+    }
 	int num = length_pointer_pointer_char(target) - 1;
 	int len = 0, wlen = 0;
 	char *tmp = calloc(MAX_SIZE, sizeof(char));
@@ -115,6 +124,9 @@ inline char *string_join(char *target[], const char *delim) {
 
 // Trim all space left and right
 inline char *string_trim(char *target) {
+    if (target == NULL) {
+        return NULL;
+    }
 	int len, left, right;
 	left = 0;
 	right = length_pointer_char(target) - 1;
@@ -127,6 +139,9 @@ inline char *string_trim(char *target) {
 }
 
 inline int string_startswith(char *target, const char *prefix) {
+    if (target == NULL || prefix == NULL) {
+        return 0;
+    }
     int target_length = length_pointer_char(target);
     int prefix_length = length_pointer_char(prefix);
     if (target_length < prefix_length) {
@@ -142,6 +157,9 @@ inline int string_startswith(char *target, const char *prefix) {
 }
 
 inline int string_endswith(char *target, const char *suffix) {
+    if (target == NULL || suffix == NULL) {
+        return 0;
+    }
     int target_length = length_pointer_char(target);
     int suffix_length = length_pointer_char(suffix);
     if (target_length < suffix_length) {
@@ -157,26 +175,32 @@ inline int string_endswith(char *target, const char *suffix) {
 }
 
 inline int string_index(char *target, char *subtarget, int times) {
+    if (target == NULL || subtarget == NULL) {
+        return -1;
+    }
+
     int target_length = length_pointer_char(target);
     int subtarget_length = length_pointer_char(subtarget);
-    if (target_length < subtarget_length || (times == 0)) {
+
+    if ( target_length == 0 || subtarget_length == 0 || target_length < subtarget_length || (times == 0)) {
 		// Can not found subtarget in target
 		return -1;
 	}
-    register int indexTarget, indexSubtarget, countTimes = 0, pos_result;
-    for (indexTarget = 0; indexTarget <= (target_length - subtarget_length); indexTarget++) {
-        if (target[indexTarget] != subtarget[0]) {
+
+    register int index_target, index_subtarget, count_times = 0, pos_result;
+    for (index_target = 0; index_target <= (target_length - subtarget_length); index_target++) {
+        if (target[index_target] != subtarget[0]) {
             continue;
         }
-        for (indexSubtarget = 1; indexSubtarget < subtarget_length; indexSubtarget++) {
-            if (target[indexTarget + indexSubtarget] != subtarget[indexSubtarget]) {
+        for (index_subtarget = 1; index_subtarget < subtarget_length; index_subtarget++) {
+            if (target[index_target + index_subtarget] != subtarget[index_subtarget]) {
                 break;
             }
         }
-        if (indexSubtarget == subtarget_length) {
-            pos_result = indexTarget;
-            countTimes++;
-            if(countTimes == times) {
+        if (index_subtarget == subtarget_length) {
+            pos_result = index_target;
+            count_times++;
+            if(count_times == times) {
                 return pos_result;
             }
         }
@@ -185,6 +209,9 @@ inline int string_index(char *target, char *subtarget, int times) {
 }
 
 inline char *string_random(char *target, int size) {
+    if (target == NULL) {
+        return NULL;
+    }
 	int target_length = length_pointer_char(target);
 	char *result = malloc((size + 1) * sizeof(char));
 	register int i;
@@ -196,6 +223,9 @@ inline char *string_random(char *target, int size) {
 }
 
 inline char *string_concat(char *target, char *subtarget) {
+    if (target == NULL || subtarget == NULL) {
+        return NULL;
+    }
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
 	char *result = malloc((target_length + subtarget_length + 1) * sizeof(char));
@@ -218,6 +248,9 @@ inline char *string_to(char *target, int to) {
 }
 
 char *string_copy(char *target) {
+    if (target == NULL) {
+        return NULL;
+    }
 	int length = length_pointer_char(target);
 	char *result = malloc((length + 1) * sizeof(char));
 	memcpy(result, target, length);
@@ -226,6 +259,9 @@ char *string_copy(char *target) {
 }
 
 char *string_upper(char *target) {
+    if (target == NULL) {
+        return NULL;
+    }
 	char *result = string_copy(target);
 	register char *index = result;
 	for (; *index; index++) {
@@ -237,6 +273,9 @@ char *string_upper(char *target) {
 }
 
 char *string_lower(char *target) {
+    if (target == NULL) {
+        return NULL;
+    }
 	char *result = string_copy(target);
 	register char *index = result;
 	for (; *index; index++) {
@@ -248,6 +287,9 @@ char *string_lower(char *target) {
 }
 
 char *string_title(char *target) {
+    if (target == NULL) {
+        return NULL;
+    }
 	char *result = string_copy(target);
 	register char *index = result;
 	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
