@@ -25,9 +25,9 @@ inline int length_##TYPE(TYPE target) {\
 	return length_pointer_char(result);\
 }
 
-#ifdef __APPLE__
+//#ifdef __APPLE__
 P_LEN(char);
-#endif
+//#endif
 
 P_P_LEN(char);
 NUM_LEN(short);
