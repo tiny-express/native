@@ -54,10 +54,11 @@ void *loop(void *argument) {
 }
 
 void *run(void *argument) {
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_t run_mutex = PTHREAD_MUTEX_INITIALIZER;
     usleep(((thread_argument *)argument)->miliseconds*1000);
+    pthread_mutex_lock(&run_mutex);
     ((void(*)())((thread_argument*)argument)->callback)();
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&run_mutex);
 }
 
 void stop_thread(pthread_t pthread) {
