@@ -44,7 +44,6 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
-<<<<<<< HEAD
         context/*
         compress/*
         crypto/*
@@ -76,39 +75,6 @@ file(GLOB_RECURSE TESTS
         type/*_test.c
         vendor/*_test.c
         )
-=======
-    context/*
-    compress/*
-    crypto/*
-    datetime/*
-    general/*
-    network/*
-    server/*
-    storage/*
-    string/*
-    system/*
-    thread/*
-    type/*
-    vendor/*
-)
-
-# Include all unit test cases
-file(GLOB_RECURSE TESTS
-    context/*_test.c
-    compress/*_test.c
-    crypto/*_test.c
-    datetime/*_test.c
-    general/*_test.c
-    network/*_test.c
-    server/*_test.c
-    storage/*_test.c
-    string/*_test.c
-    system/*_test.c
-    thread/*_test.c
-    type/*_test.c
-    vendor/*_test.c
-)
->>>>>>> ce40ec436f38cee73353b7cac3ff07e7635066b6
 
 # Remove all test files within c files
 foreach(test ${TESTS})
@@ -120,28 +86,15 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
-<<<<<<< HEAD
 add_library(${PROJECT_NAME} ${SOURCES})
-=======
-add_library(${PROJECT_NAME} ${SOURCES} ${LIBCASSANDRA_LIBRARIES})
->>>>>>> ce40ec436f38cee73353b7cac3ff07e7635066b6
 target_compile_definitions(${PROJECT_NAME} PRIVATE CASSANDRA)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-<<<<<<< HEAD
     target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${LIBCASSANDRA_LIBRARIES} -lcrypto)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else()
     target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${LIBCASSANDRA_LIBRARIES} -lcrypto -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif()
-=======
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
-else()
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
-endif()
->>>>>>> ce40ec436f38cee73353b7cac3ff07e7635066b6
