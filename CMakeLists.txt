@@ -56,6 +56,7 @@ file(GLOB_RECURSE SOURCES
     thread/*
     type/*
     vendor/*
+    validator/*
 )
 
 # Include all unit test cases
@@ -73,6 +74,7 @@ file(GLOB_RECURSE TESTS
     thread/*_test.c
     type/*_test.c
     vendor/*_test.c
+    validator/*_test.c
 )
 
 # Remove all test files within c files
@@ -85,7 +87,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
-add_library(${PROJECT_NAME} ${SOURCES})
+add_library(${PROJECT_NAME} ${SOURCES} validator.h)
 target_compile_definitions(${PROJECT_NAME} PRIVATE CASSANDRA)
 
 # Link library for OSX and other platform
