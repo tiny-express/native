@@ -37,11 +37,11 @@ int is_url(char *url) {
 char *http_schema(char *url) {
     int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    if (is_url_result == NOT_URL) {
         return NULL;
     }
 
-    if (is_url_result == 1) {
+    if (is_url_result == IS_HTTPS) {
         return HTTPS;
     }
 

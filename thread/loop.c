@@ -16,7 +16,12 @@ void *loop(void *argument);
 
 void *run(void *argument);
 
-
+/**
+ * Run a callback repeatedly after period of time
+ * @param callback
+ * @param miliseconds
+ * @return thread
+ */
 pthread_t set_interval(void *callback, unsigned int miliseconds) {
     if (callback == NULL) {
         return NULL;
@@ -33,6 +38,12 @@ pthread_t set_interval(void *callback, unsigned int miliseconds) {
     return thread;
 }
 
+/**
+ * Run callback after milisenconds
+ * @param callback
+ * @param miliseconds
+ * @return thread
+ */
 pthread_t set_time_out(void *callback, unsigned int miliseconds) {
 
     if (callback == NULL) {
@@ -50,6 +61,11 @@ pthread_t set_time_out(void *callback, unsigned int miliseconds) {
     return thread;
 }
 
+/**
+ * run callback repeatedly
+ * @param argument
+ * @return
+ */
 void *loop(void *argument) {
     while(1) {
         ((void(*)())((thread_argument*)argument)->callback)();
@@ -57,6 +73,11 @@ void *loop(void *argument) {
     }
 }
 
+/**
+ * execute a callback
+ * @param argument
+ * @return
+ */
 void *run(void *argument) {
     usleep(((thread_argument *)argument)->miliseconds*1000);
     ((void(*)())((thread_argument*)argument)->callback)();
