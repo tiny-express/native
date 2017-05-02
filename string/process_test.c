@@ -273,3 +273,11 @@ TEST(Builtin_String, Title) {
 }
 
 
+TEST(Builtin_String, Standard) {
+    char *target = " hello   world ";
+    char *result = string_standardized(target);
+    char *expect = "hello world";
+    ASSERT_STR(expect, result);
+}
+
+
