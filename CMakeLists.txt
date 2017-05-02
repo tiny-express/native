@@ -34,7 +34,7 @@ find_package(Threads REQUIRED)
 find_package(LibCassandra)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    find_package(LibUV REQUIRED)
+    find_package(LibUV)
 endif()
 if (OPENSSL_FOUND)
     include_directories("${OPENSSL_INCLUDE_DIR}")
