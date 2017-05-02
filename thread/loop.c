@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-
 typedef struct thread_argument {
     void *callback;
     unsigned int miliseconds;
@@ -18,8 +16,16 @@ void *loop(void *argument);
 
 void *run(void *argument);
 
-
+/**
+ * Run a callback repeatedly after period of time
+ * @param callback
+ * @param miliseconds
+ * @return thread
+ */
 pthread_t set_interval(void *callback, unsigned int miliseconds) {
+    if (callback == NULL) {
+        return NULL;
+    }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
     argument->miliseconds = miliseconds;
@@ -32,7 +38,17 @@ pthread_t set_interval(void *callback, unsigned int miliseconds) {
     return thread;
 }
 
+/**
+ * Run callback after milisenconds
+ * @param callback
+ * @param miliseconds
+ * @return thread
+ */
 pthread_t set_time_out(void *callback, unsigned int miliseconds) {
+
+    if (callback == NULL) {
+        return NULL;
+    }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
     argument->miliseconds = miliseconds;
@@ -45,22 +61,24 @@ pthread_t set_time_out(void *callback, unsigned int miliseconds) {
     return thread;
 }
 
+/**
+ * run callback repeatedly
+ * @param argument
+ * @return
+ */
 void *loop(void *argument) {
-    pthread_mutex_lock(&mutex);
-    for(;;) {
+    while(1) {
         ((void(*)())((thread_argument*)argument)->callback)();
         usleep(((thread_argument *)argument)->miliseconds*1000);
     }
 }
 
+/**
+ * execute a callback
+ * @param argument
+ * @return
+ */
 void *run(void *argument) {
-    pthread_mutex_lock(&mutex);
     usleep(((thread_argument *)argument)->miliseconds*1000);
     ((void(*)())((thread_argument*)argument)->callback)();
-    pthread_mutex_unlock(&mutex);
-}
-
-void stop_thread(pthread_t pthread) {
-    pthread_mutex_unlock(&mutex);
-    pthread_cancel(pthread);
 }
