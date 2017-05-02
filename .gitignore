@@ -6,7 +6,6 @@
 /cmake_install.cmake
 /CMakeCache.txt
 /Makefile
-/native
 /native_test
 /native.cbp
 /libnative.a
