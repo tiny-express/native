@@ -31,7 +31,7 @@ set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
-find_package(LibCassandra REQUIRED)
+find_package(LibCassandra)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     find_package(LibUV REQUIRED)
