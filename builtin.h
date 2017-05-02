@@ -26,6 +26,7 @@
 #include "file.h"
 #include "compress.h"
 #include "network.h"
+#include "validator.h"
 
 #endif //BUILTIN_BUILTIN_H
 

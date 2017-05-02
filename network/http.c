@@ -1,65 +1,87 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
+
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 #include "../general.h"
 #include "../string.h"
-
-#define HTTPS "https"
-#define HTTP "http"
-#define LOCALHOST "localhost"
+#include "../network.h"
 
 /**
- * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return 1 if url is HTTPS, 2 if HTTP, else 0
  */
-char *http_schema(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return NULL;
-	}
-	if (string_index(url, "https://") != -1) {
-		return HTTPS;
-	} else if (string_index(url, "http://") != -1) {
-		return HTTP;
-	}
-	return NULL;
+int is_url(char *url) {
+
+    if (url == NULL || length_pointer_char(url) == 0) {
+        return NOT_URL;
+    }
+
+    if (string_startswith(url, "https://") == 1) {
+        return IS_HTTPS;
+    }
+
+    if (string_startswith(url, "http://") == 1) {
+        return IS_HTTP;
+    }
+
+    return NOT_URL;
 }
 
 /**
  * Retrieve url schema
  *
  * @param url
- * @return string
+ * @return string (https or http)
  */
+
+char *http_schema(char *url) {
+    int is_url_result = is_url(url);
+
+    if (is_url_result == NOT_URL) {
+        return NULL;
+    }
+
+    if (is_url_result == IS_HTTPS) {
+        return HTTPS;
+    }
+
+    return HTTP;
+}
+
+/**
+ * Retrieve url schema
+ *
+ * @param url
+ * @return string (hostname)
+ */
+
 char *http_hostname(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return NULL;
-	}
+    int is_url_result = is_url(url);
 
-	if (string_index(url, "127.0.0.1") != -1) {
+    if (is_url_result == 0) {
+        return NULL;
+    }
+
+	if (string_index(url, "127.0.0.1", 1) != -1) {
 		return LOCALHOST;
-	} else {
-		int first_position = string_index(url, "://") + 3;
-		char *result = (char*)malloc(50 * sizeof(char));
-
-		int index = 0; // index in arrayHostname
-		while (1) {
-			if (url[first_position] == '/' || url[first_position] == ':') {
-				break;
-			}
-			result[index++] = url[first_position++];
-		}
-
-		result[index] = '\0';
-		return result;
 	}
 
-	return NULL;
+
+    int length_url = length_pointer_char(url);
+    int begin_position = string_index(url, "://", 1) + 3;
+    int end_position = length_url;
+
+    // Find end position to cut, if meet ':', '?' or '/'
+    int index = begin_position;
+    for (; index < length_url; index++) {
+        if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
+            end_position = index;
+            break;
+        }
+    }
+
+    char *result = string_from_to(url, begin_position, end_position - 1);
+    return result;
 }
 
 /**
@@ -69,50 +91,29 @@ char *http_hostname(char *url) {
  * @return int
  */
 int http_port(char *url) {
-	if (length_pointer_char(url) == 0) {
-		return -1000;
-	}
+    int is_url_result = is_url(url);
 
-	int first_position = string_index(url, ":"); // index of ':' in url
+    if (is_url_result == 0) {
+        return -1;
+    }
 
-	if (first_position == -1) {
-		return -1000;
-	}
-
-	if (first_position > 5) {
-		first_position = -1;
-	}
-
-
-	if (first_position != -1) {
-		if (string_index(url, "http://") != -1) {
-			return 80;
-		} else if (string_index(url, "https://") != -1) {
-			return 443;
-		}
-	} else {
-		int iUrl = first_position + 1;
-		for (iUrl; iUrl < length_pointer_char(url); iUrl++) {
-			if(url[iUrl] == ':'){
-				iUrl++;
-				break;
-			}
-		}
-
-		int iResult = 0;
-		char result[10];
-		while(1) {
-			if ((url[iUrl] >= '0') && (url[iUrl] <= '9')) {
-				result[iResult++] = url[iUrl++];
-			} else {
-				break;
-			}
-		}
-
-		return atoi(result);
-	}
-
-	return -1000;
+    int url_length = length_pointer_char(url);
+    int prefix_position = string_index(url, "://", 1);
+    char *url_without_prefix = string_from_to(url, prefix_position + 3, url_length);
+    int url_without_prefix_length = length_pointer_char(url_without_prefix);
+    int port_index_begin = string_index(url_without_prefix, ":", 1) + 1;
+    int port_index_end = string_index(url_without_prefix, "/", 1) - 1;
+    if (port_index_end < 0) {
+        port_index_end = url_without_prefix_length - 1;
+    }
+    char* port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
+    int port = string_to_int(port_string);
+    if (port == 0) {
+        if (is_url_result == IS_HTTPS)
+            return HTTPS_PORT;
+        return HTTP_PORT;
+    }
+    return port;
 }
 
 /**
@@ -123,26 +124,60 @@ int http_port(char *url) {
  * @return string
  */
 char *http_query(char *url) {
+    int is_url_result = is_url(url);
+
+    if (is_url_result == 0) {
+        return NULL;
+    }
+
 	int length_url = length_pointer_char(url);
+	int begin_position = string_index(url, "?", 1) + 1;
 
-	if (length_url == 0) {
-		return NULL;
-	}
+    if (begin_position == 0) {
+        return "";
+    }
 
-	int first_position = string_index(url, "?");
-	int end_position = first_position;
-	int length_target = length_pointer_char(url);
-	for (end_position; end_position < length_target; end_position++) {
+	int end_position = begin_position;
+
+	for (end_position; end_position < length_url; end_position++) {
 		if (url[end_position] == '/' || url[end_position] == ':') {
 			break;
 		}
 	}
 
-	if (first_position != -1) {
-		return string_from_to(url, first_position + 1, end_position - 1);
-	}
+    char *result = string_from_to(url, begin_position, end_position - 1);
+    return result;
+}
 
-	return NULL;
+/**
+ * return paht of URL if paht doesn't exit return "/"
+ * @param url
+ * @return string path
+ */
+char *http_path(char *url) {
+    int is_url_result = is_url(url);
+
+    if (is_url_result == 0) {
+        return NULL;
+    }
+
+    int len_url = length_pointer_char(url);
+    int begin_pos = string_index(url, "/", 3);
+    if (begin_pos == -1) {
+        return "/";
+    }
+
+    int end_pos = len_url;
+    int index;
+    for (index = begin_pos; index < len_url; index++) {
+        if (url[index] == ':' || url[index] == '?') {
+            end_pos = index;
+            break;
+        }
+    }
+
+    char *result = string_from_to(url, begin_pos, end_pos - 1);
+    return result;
 }
 
 /**
@@ -152,134 +187,132 @@ char *http_query(char *url) {
  * @method GET POST PUT PATCH DELETE HEAD OPTIONS
  * @return string
  */
-char *http_request(char *url, char *body, char *headers) {
+char *http_request(char *method, char *url, char **headers, char **body) {
+    // Parse URL
+    int port = http_port(url);
+    char *host = http_hostname(url);
+    asprintf(&host, "%s:%d", host, port);
+    char *path = http_path(url);
+    char *schema = http_schema(url);
+    int is_https = strcmp(schema, HTTPS) ? 0 : 1;
+    int is_get_method = strcmp(method, "GET") ? 0 : 1;
 
+    // Prepare request message
+    char *template = 	"%s %s%s%s HTTP/1.1\r\n"
+                        "Connection: close\r\n"
+                        "Host: %s\r\n"
+                        "%s\r\n\r\n"
+                        "%s";
+    char *header_content = string_join(headers, "\r\n");
+    char *body_string = string_join(body, "&");
+
+    if (!is_get_method) {
+        int bodySize = length_pointer_char(body_string);
+        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", bodySize);
+    }
+
+    char *request;
+    if (is_get_method) {
+        asprintf(&request, template,
+                 method,
+                 path,
+                 length_pointer_char(body_string) > 0 ? "?" : "",
+                 body_string,
+                 host,
+                 header_content,
+                 "");
+    } else {
+        asprintf(&request, template,
+                 method,
+                 path,
+                 "",
+                 "",
+                 host,
+                 header_content,
+                 body_string);
+    }
+
+    BIO * bio;
+    SSL * ssl;
+    SSL_CTX * ctx;
+    char *response = malloc(100000 * sizeof(char));
+    int received = 0;
+
+    if (is_https) {
+        SSL_library_init();
+    }
+
+    ERR_load_BIO_strings();
+    SSL_load_error_strings();
+    OpenSSL_add_all_algorithms();
+
+    if (is_https) {
+        const SSL_METHOD *method = TLSv1_2_client_method();	/* SSLv3 but can rollback to v2 */
+        if (! method) {
+            fprintf(stderr, "SSL client method failed\n");
+            return "";
+        }
+
+        ctx = SSL_CTX_new(method);
+        if (! ctx) {
+            fprintf(stderr, "SSL context is NULL\n");
+            ERR_print_errors_fp(stderr);
+            return "";
+        }
+
+        /* Setup the connection */
+        bio = BIO_new_ssl_connect(ctx);
+
+        /* Set the SSL_MODE_AUTO_RETRY flag */
+        BIO_get_ssl(bio, &ssl);
+        SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+
+        /* Create and setup the connection */
+        BIO_set_conn_hostname(bio, host);
+
+        if(BIO_do_connect(bio) <= 0) {
+            fprintf(stderr, "Error attempting to connect\n");
+            ERR_print_errors_fp(stderr);
+            printf("%s\n", ERR_error_string(ERR_get_error(), NULL));
+            BIO_free_all(bio);
+            SSL_CTX_free(ctx);
+            return "";
+        }
+    } else {
+        bio = BIO_new_connect(host);
+        if(bio == NULL) {
+            fprintf(stderr, "BIO is null\n");
+            return "";
+        }
+
+        if(BIO_do_connect(bio) <= 0) {
+            ERR_print_errors_fp(stderr);
+            BIO_free_all(bio);
+            return "";
+        }
+    }
+
+    /* Send the request */
+    BIO_write(bio, request, length_pointer_char(request));
+
+    /* Read in the response */
+    int bytes;
+    for(;;) {
+        bytes = BIO_read(bio, response + received, 1023);
+        if(bytes < 0) {
+            printf("ERROR received");
+            return "";
+        }
+        if (bytes == 0) {
+            break;
+        }
+        received += bytes;
+    }
+    /* Close the connection and free the context */
+    BIO_free_all(bio);
+    if (is_https) {
+        SSL_CTX_free(ctx);
+    }
+    free(request);
+    return response;
 }
-
-/*
-char *http_request(char* url) {
-	int i;
-	int portno = atoi(argv[2])>0?atoi(argv[2]):80;
-	char *host = strlen(argv[1])>0?argv[1]:"localhost";
-
-	struct hostent *server;
-	struct sockaddr_in serv_addr;
-	int sockfd, bytes, sent, received, total, message_size;
-	char *message, response[4096];
-
-	if (argc < 5) { puts("Parameters: <host> <port> <method> <path> [<data> [<headers>]]"); exit(0); }
-
-	message_size=0;
-	if(!strcmp(argv[3],"GET"))
-	{
-		message_size+=strlen("%s %s%s%s HTTP/1.0\r\n");        // method
-		message_size+=strlen(argv[3]);                         // path
-		message_size+=strlen(argv[4]);                         // headers
-		if(argc>5)
-			message_size+=strlen(argv[5]);                     // query string
-		for(i=6;i<argc;i++)                                    // headers
-			message_size+=strlen(argv[i])+strlen("\r\n");
-		message_size+=strlen("\r\n");                          // blank line
-	}
-	else
-	{
-		message_size+=strlen("%s %s HTTP/1.0\r\n");
-		message_size+=strlen(argv[3]);                         // method
-		message_size+=strlen(argv[4]);                         // path
-		for(i=6;i<argc;i++)                                    // headers
-			message_size+=strlen(argv[i])+strlen("\r\n");
-		if(argc>5)
-			message_size+=strlen("Content-Length: %d\r\n")+10; // content length
-		message_size+=strlen("\r\n");                          // blank line
-		if(argc>5)
-			message_size+=strlen(argv[5]);                     // body
-	}
-
-	// allocate space for the message
-	message=malloc(message_size);
-
-	// fill in the parameters
-	if(!strcmp(argv[3],"GET"))
-	{
-		if(argc>5)
-			sprintf(message,"%s %s%s%s HTTP/1.0\r\n",
-					strlen(argv[3])>0?argv[3]:"GET",               // method
-					strlen(argv[4])>0?argv[4]:"/",                 // path
-					strlen(argv[5])>0?"?":"",                      // ?
-					strlen(argv[5])>0?argv[5]:"");                 // query string
-		else
-			sprintf(message,"%s %s HTTP/1.0\r\n",
-					strlen(argv[3])>0?argv[3]:"GET",               // method
-					strlen(argv[4])>0?argv[4]:"/");                // path
-		for(i=6;i<argc;i++)                                    // headers
-		{strcat(message,argv[i]);strcat(message,"\r\n");}
-		strcat(message,"\r\n");                                // blank line
-	}
-	else
-	{
-		sprintf(message,"%s %s HTTP/1.0\r\n",
-				strlen(argv[3])>0?argv[3]:"POST",                  // method
-				strlen(argv[4])>0?argv[4]:"/");                    // path
-		for(i=6;i<argc;i++)                                    // headers
-		{strcat(message,argv[i]);strcat(message,"\r\n");}
-		if(argc>5)
-			sprintf(message+strlen(message),"Content-Length: %d\r\n",strlen(argv[5]));
-		strcat(message,"\r\n");                                // blank line
-		if(argc>5)
-			strcat(message,argv[5]);                           // body
-	}
-
-	// What are we going to send?
-	printf("Request:\n%s\n",message);
-
-	// create the socket
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) error("ERROR opening socket");
-
-	// lookup the ip address
-	server = gethostbyname(host);
-	if (server == NULL) error("ERROR, no such host");
-
-	// fill in the structure
-	memset(&serv_addr,0,sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(portno);
-	memcpy(&serv_addr.sin_addr.s_addr,server->h_addr,server->h_length);
-
-	if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
-		error("ERROR connecting");
-
-	total = strlen(message);
-	sent = 0;
-	do {
-		bytes = write(sockfd,message+sent,total-sent);
-		if (bytes < 0)
-			error("ERROR writing message to socket");
-		if (bytes == 0)
-			break;
-		sent+=bytes;
-	} while (sent < total);
-
-	memset(response,0,sizeof(response));
-	total = sizeof(response)-1;
-	received = 0;
-	do {
-		bytes = read(sockfd,response+received,total-received);
-		if (bytes < 0)
-			error("ERROR reading response from socket");
-		if (bytes == 0)
-			break;
-		received+=bytes;
-	} while (received < total);
-
-	if (received == total)
-		error("ERROR storing complete response from socket");
-
-	close(sockfd);
-
-	printf("Response:\n%s\n",response);
-
-	free(message);
-	return 0;
-}
-*/

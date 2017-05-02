@@ -27,11 +27,9 @@ char* zlib_encode(char* compress_contents){
 	deflateInit(&defstream, Z_BEST_COMPRESSION);
 	deflate(&defstream, Z_FINISH);
 	deflateEnd(&defstream);
-	// End compressing
 
 	// Convert to char pointer
-	char *result = convert_to_pointer_char(char_array_temp);
-	return result;
+	return string_copy(char_array_temp);
 }
 
 // Decompress
@@ -52,7 +50,7 @@ char *zlib_decode(char *encode_contents){
 	inflate(&infstream, Z_NO_FLUSH);
 	inflateEnd(&infstream);
 
-	char *result = convert_to_pointer_char(char_array_temp);
+	char *result = string_copy(char_array_temp);
 
 	return result;
 }
