@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUILTIN_STRING_H
 #define BUILTIN_STRING_H
 
@@ -33,6 +34,9 @@ char *string_upper(char *target);
 char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
+
+char *url_encode(char *target);
+char *url_decode(char *target);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

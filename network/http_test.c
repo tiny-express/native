@@ -21,6 +21,10 @@ TEST(Builtin_Network, IsUrl) {
 	expect = NOT_URL;
 	result= is_url(url);
 	ASSERT_EQUAL(expect, result);
+
+	result = is_url(NULL);
+	expect = NOT_URL;
+	ASSERT_EQUAL(result, expect);
 }
 
 TEST(Builtin_Network, HttpSchema) {
@@ -32,6 +36,12 @@ TEST(Builtin_Network, HttpSchema) {
 
 	char *schemaNull = http_schema("");
 	ASSERT_EQUAL(schemaNull, NULL);
+
+	schemaNull = http_schema("ht tp://google.com/");
+	ASSERT_EQUAL(schemaNull, NULL);
+
+//	schema_http = http_schema("ht\0tp://google.com/");
+//	ASSERT_EQUAL(schema_http, HTTP);
 }
 
 TEST(Builtin_Network, HttpHostname) {
@@ -39,12 +49,17 @@ TEST(Builtin_Network, HttpHostname) {
 	char *foodtiny = http_hostname("https://foodtiny.com.vn/home/bundaumamtom/");
 	ASSERT_STR(hostname, foodtiny);
 
-
     hostname = http_hostname("http://localhost:3000");
 	ASSERT_STR(hostname, LOCALHOST);
 
     hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
 	ASSERT_STR(hostname, LOCALHOST);
+
+	hostname = http_hostname("https://");
+	ASSERT_STR("", hostname);
+
+	hostname = http_hostname("");
+	ASSERT_STR(NULL, hostname);
 }
 
 TEST(Builtin_Network, HttpPort) {
@@ -118,6 +133,7 @@ TEST(Builtin_Network, HttpRequest) {
 		"a=b",
 		'\0'
 	};
+
 	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
     ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
 

@@ -222,7 +222,7 @@ TEST(Builtin_String, FromTo) {
     from = 0;
     to = 20;
     result = string_from_to(target, from, to);
-    expect = "";
+    expect = "Hello World";
     ASSERT_STR(expect, result);
 }
 
@@ -257,7 +257,7 @@ TEST(Builtin_String, To) {
     ASSERT_STR(expect, result);
 
     to = 20;
-    expect = "";
+    expect = "Hello World";
     result = string_to(target, to);
     ASSERT_STR(expect, result);
 }

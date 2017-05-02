@@ -1,10 +1,11 @@
-
+#pragma once
 #include "../string.h"
 #include "../general.h"
 
 // Length of pointer
 #define P_LEN(TYPE); \
 inline int length_pointer_##TYPE(TYPE *target) {\
+    if (target == NULL) return 0;\
 	register TYPE*pointer;\
 	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
@@ -25,10 +26,7 @@ inline int length_##TYPE(TYPE target) {\
 	return length_pointer_char(result);\
 }
 
-//#ifdef __APPLE__
 P_LEN(char);
-//#endif
-
 P_P_LEN(char);
 NUM_LEN(short);
 NUM_LEN(int);
