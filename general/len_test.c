@@ -4,46 +4,16 @@
 TEST(Builtin_Length, PointerChar) {
 	char* data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
-}
 
-TEST(Builtin_Length, PointerShort) {
-	short input[] = {1, 2, 3, 4, 5};
-	//ASSERT_EQUAL(5, length_pointer_short(input));
-    short input2[] = {1, 0, 2};
-    //ASSERT_EQUAL(3, length_pointer_short(input2));
-}
+	data = "";
+	ASSERT_EQUAL(0, length_pointer_char(data));
 
-TEST(Builtin_Length, PointerInt) {
-	int input[] = {1, 2, 3, 4, 5};
-	//ASSERT_EQUAL(5, length_pointer_int(input));
-    int input2[] = {1, 0, 2};
-    //ASSERT_EQUAL(3, length_pointer_int(input2));
-}
+	data = "\0";
+	ASSERT_EQUAL(0, length_pointer_char(data));
 
-TEST(Builtin_Length, PointerLong) {
-	long input[] = {1234, 223, 3423, 4432, 5423};
-	//ASSERT_EQUAL(5, length_pointer_long(input));
-    long input2[] = {1425, 2, 0, 4543};
-    //ASSERT_EQUAL(4, length_pointer_long(input2));
-}
+	data = NULL;
+	ASSERT_EQUAL(0, length_pointer_char(data));
 
-TEST(Builtin_Length, PointerDouble) {
-	double input[] = {1.234, 2, 3.66, 4, 5};
-	//ASSERT_EQUAL(5, length_pointer_double(input));
-    double input2[] = {1.234, 2, 3.66, 0};
-    //ASSERT_EQUAL(4, length_pointer_double(input2));
-}
-
-TEST(Builtin_Length, PointerFloat) {
-	float input[] = {1.2, 2, 3.5, 4, 5};
-	//ASSERT_EQUAL(5, length_pointer_float(input));
-    float input2[] = {1.3, 2, 0, 4, 5.5};
-    //ASSERT_EQUAL(5, length_pointer_float(input2));
-}
-
-TEST(Builtin_Length, PointerConstChar) {
-	const char* data = "Hello world";
-	ASSERT_EQUAL(11, length_pointer_constant_char(data));
 }
 
 TEST(Builtin_Length, PointerPointerChar) {

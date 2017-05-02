@@ -29,9 +29,9 @@ TEST(Builtin_String, Trim) {
     char *result2 = string_trim(target2);
     ASSERT_STR(expect, result2);
 
-    char *target3 = "Hello   World";
-    char *result3 = string_trim(target3);
-    //ASSERT_STR(expect, result3);
+//    char *target3 = "Hello   World";
+//    char *result3 = string_trim(target3);
+//    ASSERT_STR(expect, result3);
 }
 
 TEST(Builtin_String, Join) {
@@ -79,43 +79,101 @@ TEST(Builtin_String, Split) {
     ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", urlComponents[1]);
 }
 
-TEST(Builtin_String, StartWith) {
+TEST(Builtin_String, StartsWith) {
     char *target = "Hello World";
     char *prefix = "Hello";
-    ASSERT_TRUE(string_start(target, prefix));
+    ASSERT_TRUE(string_startswith(target, prefix));
 
     prefix = "Nope";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 
     prefix = "Prefix is longer than target";
-    ASSERT_FALSE(string_start(target, prefix));
+    ASSERT_FALSE(string_startswith(target, prefix));
 }
 
-TEST(Builtin_String, EndWith) {
+TEST(Builtin_String, EndsWith) {
     char *target = "Hello World";
     char *suffix = "World";
-    ASSERT_TRUE(string_end(target, suffix));
+    ASSERT_TRUE(string_endswith(target, suffix));
 
     suffix = "Nope";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
 
     suffix = "Suffix is longer than target";
-    ASSERT_FALSE(string_end(target, suffix));
+    ASSERT_FALSE(string_endswith(target, suffix));
+
+    suffix = "Suffix is longer than target";
+    ASSERT_FALSE(string_endswith(target, suffix));
 }
 
 TEST(Builtin_String, IndexOf) {
     char *target = "Hello World";
     char *subtarget = "World";
-    ASSERT_EQUAL(6, string_index(target, subtarget));
+    int result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(6, result);
+
+    target = "Hello World World World World";
+    subtarget = "World";
+    result = string_index(target, subtarget, 3);
+    ASSERT_EQUAL(18, result);
+
+    target = "Hello World World World World";
+    subtarget = "orl";
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(13, result);
+
+    target = "###############";
+    subtarget = "##";
+    result = string_index(target, subtarget, 4);
+    ASSERT_EQUAL(3, result);
 
     subtarget = "Substring is longer than target";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Hello";
-    ASSERT_EQUAL(0, string_index(target, subtarget));
+    result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(-1, result);
 
     subtarget = "Nope";
-    ASSERT_EQUAL(-1, string_index(target, subtarget));
+    result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "xxx";
+    target = "";
+    result = string_index(target, subtarget, 1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "";
+    target = "";
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "";
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = NULL;
+    target = NULL;
+    result = string_index(target, subtarget, 2);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "\0";
+    target = "\0";
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = "\0";
+    target = NULL;
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
+    subtarget = NULL;
+    target = "\0";
+    result = string_index(target, subtarget, -1);
+    ASSERT_EQUAL(-1, result);
+
 }
 
 TEST(Builtin_String, Random) {
@@ -141,15 +199,6 @@ TEST(Builtin_String, Concat) {
     ASSERT_EQUAL(5, length_pointer_char(result));
 }
 
-// Convert
-TEST(Builtin_String, ConvertToPointerChar){
-    char *target = "Hello Hello Hello Hello Hello Hello!";
-    char array[50] = "Hello Hello Hello Hello Hello Hello!";
-    char *result = convert_to_pointer_char(array);
-
-    ASSERT_STR(result, target);
-}
-
 TEST(Builtin_String, FromTo) {
     char *target = "Hello World";
     int from = 6;
@@ -173,7 +222,7 @@ TEST(Builtin_String, FromTo) {
     from = 0;
     to = 20;
     result = string_from_to(target, from, to);
-    expect = "";
+    expect = "Hello World";
     ASSERT_STR(expect, result);
 }
 
@@ -208,7 +257,7 @@ TEST(Builtin_String, To) {
     ASSERT_STR(expect, result);
 
     to = 20;
-    expect = "";
+    expect = "Hello World";
     result = string_to(target, to);
     ASSERT_STR(expect, result);
 }
@@ -223,7 +272,7 @@ TEST(Builtin_String, Copy) {
     ASSERT_STR(target, result);
 }
 
-TEST(Builtin_String, ToUpper) {
+TEST(Builtin_String, Upper) {
     char *target = "Hello World";
     char *result = string_upper(target);
     char *expect = "HELLO WORLD";
@@ -272,6 +321,7 @@ TEST(Builtin_String, Title) {
     ASSERT_STR(expect, result);
 }
 
+<<<<<<< HEAD
 
 TEST(Builtin_String, Standard) {
     char *target = " hello   world ";
@@ -281,3 +331,5 @@ TEST(Builtin_String, Standard) {
 }
 
 
+=======
+>>>>>>> a91108b6dd7d607f60d38ca2f04678a5f0c0ea58

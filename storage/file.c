@@ -1,9 +1,26 @@
 #include "../file.h"
+#include "../network.h"
+#include "../builtin.h"
 
 #define TRUE 1
 #define FALSE 0
 
-char *file_get_contents(char *file_name) {
+inline char *file_get_contents(char *file_name) {
+	if (is_url(file_name) != 0) {
+        char *headers[2] = {
+                "\0"
+        };
+
+        char *body[2] = {
+                "a=b",
+                '\0'
+        };
+		char *result = http_request("GET", file_name, headers, body);
+        int pos = string_index(result, "\r\n\r\n", 1);
+        result = result + sizeof(char) * (pos + 4);
+		return result;
+	}
+
 	FILE *input_file = fopen(file_name, "r");
 	if (input_file == NULL) {
 		fprintf(stderr, "File does not exist !\n");
@@ -19,7 +36,7 @@ char *file_get_contents(char *file_name) {
 	return result;
 }
 
-int file_put_contents(char *file_path, char *content) {
+inline int file_put_contents(char *file_path, char *content) {
 	FILE *outputFile = fopen(file_path, "wb+");
 	if (outputFile == NULL) {
 		fprintf(stderr, "Permission denied !\n");

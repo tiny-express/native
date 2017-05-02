@@ -46,7 +46,7 @@ void logger_write(const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
     vsprintf(buff, fmt, args);
-    buff[strlen(buff)] = '\0';
+    buff[length_pointer_char(buff)] = '\0';
 
 	char **param = string_split(buff, "|");
 	if (strcmp(param[MODE_INDEX], LOG_APP_TEST) == 0) {
