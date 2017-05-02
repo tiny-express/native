@@ -1,85 +1,73 @@
-# Find the libcassandra library.
+# - Try to find Cassandra C/C++ Driver
+# Once done, this will define
 #
-# This module defines
-#  LIBCASSANDRA_FOUND             - True if LIBCASSANDRA was found.
-#  LIBCASSANDRA_INCLUDE_DIRS      - Include directories for LIBCASSANDRA headers.
-#  LIBCASSANDRA_LIBRARIES         - Libraries for LIBCASSANDRA.
+#  CASSANDRADRIVER_FOUND - system has Mysql-Connector-C++ installed
+#  CASSANDRADRIVER_INCLUDE_DIRS - the Mysql-Connector-C++ include directories
+#  CASSANDRADRIVER_LIBRARIES - link these to use Mysql-Connector-C++
 #
-# To specify an additional directory to search, set LIBCASSANDRA_ROOT.
-#
-# Copyright (c) 2010, Ewen Cheslack-Postava
-# Based on FindSQLite3.cmake by:
-#  Copyright (c) 2006, Jaroslaw Staniek, <js@iidea.pl>
-#  Extended by Siddhartha Chaudhuri, 2008.
-#
-# Redistribution and use is allowed according to the terms of the BSD license.
-#
-SET(LIBCASSANDRA_FOUND FALSE)
-SET(LIBCASSANDRA_INCLUDE_DIRS)
-SET(LIBCASSANDRA_LIBRARIES)
+# The user may wish to set, in the CMake GUI or otherwise, this variable:
+#  CASSANDRADRIVER_ROOT_DIR - path to start searching for the module
 
-IF(LIBCASSANDRA_ROOT)
-    SET(SEARCH_PATHS
-            ${LIBCASSANDRA_ROOT}
-            ${LIBCASSANDRA_ROOT}/include
-            ${SEARCH_PATHS}
-            )
-ENDIF()
+SET(CASSANDRADRIVER_ROOT_DIR
+        "${CASSANDRADRIVER_ROOT_DIR}"
+        CACHE
+        PATH
+        "Where to start looking for this component.")
 
-FIND_PATH(LIBCASSANDRA_INCLUDE_DIRS
-        NAMES libcassandra/cassandra.h
-        PATHS ${SEARCH_PATHS}
-        NO_DEFAULT_PATH)
-IF(NOT LIBCASSANDRA_INCLUDE_DIRS)  # now look in system locations
-    FIND_PATH(LIBCASSANDRA_INCLUDE_DIRS NAMES libcassandra/cassandra.h)
-ENDIF(NOT LIBCASSANDRA_INCLUDE_DIRS)
+IF (WIN32)
+    FIND_PATH(CASSANDRADRIVER_INCLUDE_DIR
+            NAMES
+            cassandra.h
+            PATHS
+            "C:\\Program Files"
+            HINTS
+            ${CASSANDRADRIVER_ROOT_DIR}
+            PATH_SUFFIXES
+            include)
 
-SET(LIBCASSANDRA_LIBRARY_DIRS)
-IF(LIBCASSANDRA_ROOT)
-    SET(LIBCASSANDRA_LIBRARY_DIRS ${LIBCASSANDRA_ROOT})
-    IF(EXISTS "${LIBCASSANDRA_ROOT}/lib")
-        SET(LIBCASSANDRA_LIBRARY_DIRS ${LIBCASSANDRA_LIBRARY_DIRS} ${LIBCASSANDRA_ROOT}/lib)
-    ENDIF()
-ENDIF()
+    FIND_LIBRARY(CASSANDRADRIVER_LIBRARY
+            NAMES
+            cassandra
+            cassandra_static
+            HINTS
+            ${CASSANDRADRIVER_ROOT_DIR}
+            PATH_SUFFIXES
+            lib)
 
-#libcassandra
-# Without system dirs
-FIND_LIBRARY(LIBCASSANDRA_LIBRARY
-        NAMES cassandra
-        PATHS ${LIBCASSANDRA_LIBRARY_DIRS}
-        NO_DEFAULT_PATH
-        )
-IF(NOT LIBCASSANDRA_LIBRARY)  # now look in system locations
-    FIND_LIBRARY(LIBCASSANDRA_LIBRARY NAMES cassandra)
-ENDIF(NOT LIBCASSANDRA_LIBRARY)
+ELSE ()
+    FIND_PATH(CASSANDRADRIVER_INCLUDE_DIR
+            cassandra.h
+            HINTS
+            ${CASSANDRADRIVER_ROOT_DIR}
+            PATH_SUFFIXES
+            include)
 
-# libgenthrift
-# Without system dirs
-FIND_LIBRARY(LIBGENTHRIFT_LIBRARY
-        NAMES genthrift
-        PATHS ${LIBCASSANDRA_LIBRARY_DIRS}
-        NO_DEFAULT_PATH
-        )
-IF(NOT LIBGENTHRIFT_LIBRARY)  # now look in system locations
-    FIND_LIBRARY(LIBGENTHRIFT_LIBRARY NAMES genthrift)
-ENDIF(NOT LIBGENTHRIFT_LIBRARY)
+    FIND_LIBRARY(CASSANDRADRIVER_LIBRARY
+            NAMES
+            cassandra
+            cassandra_static
+            HINTS
+            ${CASSANDRADRIVER_ROOT_DIR}
+            PATH_SUFFIXES
+            lib64
+            lib)
+ENDIF ()
 
+MARK_AS_ADVANCED(CASSANDRADRIVER_INCLUDE_DIR
+        CASSANDRADRIVER_LIBRARY)
 
-SET(LIBCASSANDRA_LIBRARIES)
-IF(LIBCASSANDRA_LIBRARY AND LIBGENTHRIFT_LIBRARY)
-    SET(LIBCASSANDRA_LIBRARIES ${LIBCASSANDRA_LIBRARY} ${LIBGENTHRIFT_LIBRARY})
-ENDIF()
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(CASSANDRADRIVER
+        DEFAULT_MSG
+        CASSANDRADRIVER_INCLUDE_DIR
+        CASSANDRADRIVER_LIBRARY)
 
-IF(LIBCASSANDRA_INCLUDE_DIRS AND LIBCASSANDRA_LIBRARIES)
-    SET(LIBCASSANDRA_FOUND TRUE)
-    IF(NOT LIBCASSANDRA_FIND_QUIETLY)
-        MESSAGE(STATUS "Found libcassandra: headers at ${LIBCASSANDRA_INCLUDE_DIRS}, libraries at ${LIBCASSANDRA_LIBRARY_DIRS} :: ${LIBCASSANDRA_LIBRARIES}")
-    ENDIF(NOT LIBCASSANDRA_FIND_QUIETLY)
-ELSE(LIBCASSANDRA_INCLUDE_DIRS AND LIBCASSANDRA_LIBRARIES)
-    SET(LIBCASSANDRA_FOUND FALSE)
-    IF(LIBCASSANDRA_FIND_REQUIRED)
-        MESSAGE(STATUS "libcassandra not found")
-    ENDIF(LIBCASSANDRA_FIND_REQUIRED)
-ENDIF(LIBCASSANDRA_INCLUDE_DIRS AND LIBCASSANDRA_LIBRARIES)
-
-MARK_AS_ADVANCED(LIBCASSANDRA_INCLUDE_DIRS LIBCASSANDRA_LIBRARIES)
+IF (CASSANDRADRIVER_FOUND)
+    SET(CASSANDRADRIVER_INCLUDE_DIRS
+            "${CASSANDRADRIVER_INCLUDE_DIR}")
+    # Add any dependencies here
+    SET(CASSANDRADRIVER_LIBRARIES
+            "${CASSANDRADRIVER_LIBRARY}")
+    # Add any dependencies here
+    MARK_AS_ADVANCED(CASSANDRADRIVER_ROOT_DIR)
+ENDIF (CASSANDRADRIVER_FOUND)

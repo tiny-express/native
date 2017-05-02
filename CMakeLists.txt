@@ -9,7 +9,6 @@ enable_language(C)
 # ASM implementation must be GNU Assembly for Linux 64bit
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
-
 #if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 #    enable_language(ASM)
 #endif()
@@ -32,6 +31,8 @@ set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
+find_package(LibCassandra)
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     find_package(LibUV)
 endif()
@@ -44,37 +45,39 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
-        context/*
-        compress/*
-        crypto/*
-        datetime/*
-        general/*.c
-        network/*
-        server/*
-        storage/*
-        string/*
-        system/*
-        thread/*
-        type/*
-        vendor/*
-        )
+    context/*
+    compress/*
+    crypto/*
+    datetime/*
+    general/*
+    network/*
+    server/*
+    storage/*
+    string/*
+    system/*
+    thread/*
+    type/*
+    vendor/*
+    validator/*
+)
 
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
-        context/*_test.c
-        compress/*_test.c
-        crypto/*_test.c
-        datetime/*_test.c
-        general/*_test.c
-        network/*_test.c
-        server/*_test.c
-        storage/*_test.c
-        string/*_test.c
-        system/*_test.c
-        thread/*_test.c
-        type/*_test.c
-        vendor/*_test.c
-        )
+    context/*_test.c
+    compress/*_test.c
+    crypto/*_test.c
+    datetime/*_test.c
+    general/*_test.c
+    network/*_test.c
+    server/*_test.c
+    storage/*_test.c
+    string/*_test.c
+    system/*_test.c
+    thread/*_test.c
+    type/*_test.c
+    vendor/*_test.c
+    validator/*_test.c
+)
 
 # Remove all test files within c files
 foreach(test ${TESTS})
@@ -92,9 +95,9 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE CASSANDRA)
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcassandra -lcrypto)
+    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${CASSANDRADRIVER_LIBRARIES} -lcrypto)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcassandra -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${CASSANDRADRIVER_LIBRARIES} -lcrypto -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif()
