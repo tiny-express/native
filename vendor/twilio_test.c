@@ -14,7 +14,7 @@ TEST(Builtin_Vendor, TestTwilio) {
     content = "Hello Sms";
     ASSERT_TRUE(send_sms(from, to, content));
 
-    to = "849090 15425";
+    to = "84 909 015 425";
     content = "Hello Sms";
     ASSERT_FALSE(send_sms(from, to, content));
 

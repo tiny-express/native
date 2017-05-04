@@ -36,6 +36,8 @@ int send_sms(char* from, char* to, char* content) {
 
     char* from_with_prefix = (string_index(from, "+", 1) == STRING_NOT_FOUND)? string_concat("+", from) : from;
     char* to_with_prefix = (string_index(to, "+", 1) == STRING_NOT_FOUND)? string_concat("+", to) : to;
+    from_with_prefix = string_replace(from_with_prefix, " ", "");
+    to_with_prefix = string_replace(to_with_prefix, " ", "");
     char* body_string;
     asprintf(
             &body_string,
