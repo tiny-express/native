@@ -2,7 +2,8 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-TEST(ETCD, Get) {
+TEST(Vendor, ETCDGet) {
+
     char *node = etcd_get(ETCD_MASTER, "/elassandra/development/seeds/test_node");
     ASSERT_TRUE(length_pointer_char(node) > 0);
 
@@ -13,7 +14,7 @@ TEST(ETCD, Get) {
     ASSERT_FALSE(length_pointer_char(node) > 0);
 }
 
-TEST(ETCD, Set) {
+TEST(Vendor, ETCDSet) {
 
     char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "1223");
     ASSERT_TRUE(length_pointer_char(result) > 0);
