@@ -38,6 +38,9 @@ char *string_standardized(char *target);
 char *url_encode(char *target);
 char *url_decode(char *target);
 
+char *find_param(char *name, char *params);
+char *find_param_from_url(char *name, char *url);
+
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"
 
