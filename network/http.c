@@ -5,27 +5,6 @@
 #include "../string.h"
 #include "../network.h"
 
-/**
- *
- * @param url
- * @return 1 if url is HTTPS, 2 if HTTP, else 0
- */
-int is_url(char *url) {
-
-    if (url == NULL || length_pointer_char(url) == 0) {
-        return NOT_URL;
-    }
-
-    if (string_startswith(url, "https://") == 1) {
-        return IS_HTTPS;
-    }
-
-    if (string_startswith(url, "http://") == 1) {
-        return IS_HTTP;
-    }
-
-    return NOT_URL;
-}
 
 /**
  * Retrieve url schema
@@ -35,13 +14,12 @@ int is_url(char *url) {
  */
 
 char *http_schema(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == NOT_URL) {
+    if (!is_url(url)) {
         return NULL;
     }
 
-    if (is_url_result == IS_HTTPS) {
+    if (string_startswith(url, HTTPS)) {
         return HTTPS;
     }
 
@@ -56,16 +34,14 @@ char *http_schema(char *url) {
  */
 
 char *http_hostname(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    if (is_url(url) == 0) {
         return NULL;
     }
 
 	if (string_index(url, "127.0.0.1", 1) != -1) {
 		return LOCALHOST;
 	}
-
 
     int length_url = length_pointer_char(url);
     int begin_position = string_index(url, "://", 1) + 3;
@@ -91,9 +67,10 @@ char *http_hostname(char *url) {
  * @return int
  */
 int http_port(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    char* schema = http_schema(url);
+
+    if (schema == NULL) {
         return -1;
     }
 
@@ -109,7 +86,7 @@ int http_port(char *url) {
     char* port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
     int port = string_to_int(port_string);
     if (port == 0) {
-        if (is_url_result == IS_HTTPS)
+        if (schema == HTTPS)
             return HTTPS_PORT;
         return HTTP_PORT;
     }
@@ -125,9 +102,7 @@ int http_port(char *url) {
  */
 char *http_query(char *url) {
 
-    int is_url_result = is_url(url);
-
-    if (is_url_result == 0) {
+    if (!is_url(url)) {
         return NULL;
     }
 

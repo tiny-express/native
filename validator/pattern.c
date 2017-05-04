@@ -6,7 +6,7 @@
 #include <regex.h>
 
 
-int match_url(char *url) {
+int is_url(char *url) {
 
     if (url == NULL || length_pointer_char(url) == 0) {
         return FALSE;
@@ -28,7 +28,7 @@ int match_url(char *url) {
     return FALSE;
 }
 
-int match_email(char *email) {
+int is_email(char *email) {
     if (email == NULL || length_pointer_char(email) == 0) {
         return FALSE;
     }
@@ -50,7 +50,7 @@ int match_email(char *email) {
     return FALSE;
 }
 
-int match_phone_number(char *phone_number) {
+int is_phone_number(char *phone_number) {
     if (phone_number == NULL || length_pointer_char(phone_number) < 7 || length_pointer_char(phone_number) > 15) {
         return FALSE;
     }

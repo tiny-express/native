@@ -11,8 +11,8 @@
 #define TRUE 1
 #define FALSE 0
 
-int match_email(char *email);
-int match_phone_number(char *phone_number);
-int match_url(char *url);
+int is_email(char *email);
+int is_phone_number(char *phone_number);
+int is_url(char *url);
 
 #endif //NATIVE_VALIDATOR_H
