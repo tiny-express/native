@@ -13,7 +13,7 @@ void task2(){
 	total++;
 }
 	
-TEST(Builtin_Thread, MultipleThreading) {
+TEST(Thread, MultipleThreading) {
 	// Init number of parallel processes
 	threadpool thpool = thpool_init(5);
 	int i;

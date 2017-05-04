@@ -2,7 +2,7 @@
 #include "../unit_test.h"
 #include <stdlib.h>
 
-TEST(Builtin_Validator, EmailPattern) {
+TEST(Validator, EmailPattern) {
     char *target = "anh_khoa.1@gmail.com";
     int result = match_email(target);
     ASSERT_TRUE(result);
@@ -61,7 +61,7 @@ TEST(Builtin_Validator, EmailPattern) {
     ASSERT_FALSE(result);
 }
 
-TEST(Builtin_Validator, PhonePattern) {
+TEST(Validator, PhonePattern) {
     char *target = "0986216213";
     int result = match_phone_number(target);
     ASSERT_FALSE(result);

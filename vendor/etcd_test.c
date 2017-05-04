@@ -3,7 +3,6 @@
 #include "../vendor.h"
 
 TEST(ETCD, Get) {
-
     char *node = etcd_get(ETCD_MASTER, "/elassandra/development/seeds/test_node");
     ASSERT_TRUE(length_pointer_char(node) > 0);
 
