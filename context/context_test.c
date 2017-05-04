@@ -2,7 +2,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Context, FindParam) {
+TEST(Context, FindParam) {
     char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
     ASSERT_STR("loint", find_param("username", params));
     ASSERT_STR("Loi AbC", find_param("firstName", params));
@@ -21,7 +21,7 @@ TEST(Builtin_Context, FindParam) {
     ASSERT_STR("", find_param("lastName", params3));
 }
 
-TEST(Builtin_Context, FindParamFromUrl) {
+TEST(Context, FindParamFromUrl) {
 	char *url = "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	ASSERT_STR("loint", findParamFromUrl("username", url));
 	ASSERT_STR("Loi AbC", findParamFromUrl("firstName", url));
