@@ -24,13 +24,13 @@ typedef struct Rows {
 	char ***records;
 } Rows;
 
-#define findStringField findField
-
-#define findShortField find_field_short
-#define findIntField find_field_int
-#define findLongField find_field_long
-#define findFloatField find_field_float
-#define findDoubleField find_field_double
+//#define findStringField findField
+//
+//#define findShortField find_field_short
+//#define findIntField find_field_int
+//#define findLongField find_field_long
+//#define findFloatField find_field_float
+//#define findDoubleField find_field_double
 
 short find_field_short(char *fieldName, Rows *rows, int position);
 int find_field_int(char *fieldName, Rows *rows, int position);

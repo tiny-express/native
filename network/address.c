@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <arpa/inet.h>
 
-char *getIPAddress()
+char *get_ip_address()
 {
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
