@@ -1,6 +1,7 @@
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include <stdio.h>
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
@@ -182,8 +183,8 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     char *header_content = string_join(headers, "\r\n");
     char *body_string = string_join(body, "&");
     if (!is_get_method) {
-        int bodySize = length_pointer_char(body_string);
-        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", bodySize);
+        int body_size = length_pointer_char(body_string);
+        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", body_size);
     }
 
     char *request;

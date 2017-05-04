@@ -1,22 +1,22 @@
 #include <time.h>
 #include "logger.h"
 
-char* get_log_name(LOG_MODE logMode) {
-	if (logMode == LOG_ALL)     return "ALL   |";
-	if (logMode == LOG_DEBUG)   return "DEBUG |";
-	if (logMode == LOG_ERROR)   return "ERROR |";
-	if (logMode == LOG_FATAL)   return "FATAL |";
-	if (logMode == LOG_INFO)    return "INFO  |";
-	if (logMode == LOG_OFF)     return "OFF   |";
-	if (logMode == LOG_TRACE)   return "TRACE |";
-	if (logMode == LOG_WARN)    return "WARN  |";
+char* get_log_name(LOG_MODE log_mode) {
+	if (log_mode == LOG_ALL)     return "ALL   |";
+	if (log_mode == LOG_DEBUG)   return "DEBUG |";
+	if (log_mode == LOG_ERROR)   return "ERROR |";
+	if (log_mode == LOG_FATAL)   return "FATAL |";
+	if (log_mode == LOG_INFO)    return "INFO  |";
+	if (log_mode == LOG_OFF)     return "OFF   |";
+	if (log_mode == LOG_TRACE)   return "TRACE |";
+	if (log_mode == LOG_WARN)    return "WARN  |";
 	return NULL;
 }
 
 void LOG(Context *context, LOG_MODE mode, char* message) {
 	if (context->mode == APP_DEVELOPMENT) {
-		char *modeName = get_log_name(mode);
-		fprintf(stdout, "\n%s %s", modeName, message);
+		char *log_name = get_log_name(mode);
+		fprintf(stdout, "\n%s %s", log_name, message);
 		fflush(stdout);
 	}
 }
