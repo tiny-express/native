@@ -3,7 +3,12 @@
 # Reference from http://www.int80h.org/strlen/
 .section .text
     .global length_pointer_char
+return_empty:
+    mov $0, %rax
+    ret
 length_pointer_char:
+    test %rdi, %rdi
+    je return_empty
     push %rdi
     sub	%rcx, %rcx
     mov 0(%rsp), %rdi
@@ -13,5 +18,5 @@ length_pointer_char:
 repne scasb
 	not	%rcx
 	pop	%rdi
-	lea	-1(%rcx), %rax
-	ret
+    lea	-1(%rcx), %rax
+    ret
