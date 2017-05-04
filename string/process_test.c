@@ -184,10 +184,9 @@ TEST(String, ProcessRandom) {
     ASSERT_EQUAL(4, length_pointer_char(result));
 }
 
-
 TEST(String, ProcessConcat) {
-    char *target = "Hello";
-    char *subtarget = "World";
+    char *target = "Hello\0";
+    char *subtarget = "World\0";
 
     char *result = string_concat(target, subtarget);
     ASSERT_STR("HelloWorld", result);
@@ -195,6 +194,22 @@ TEST(String, ProcessConcat) {
 
     subtarget = "";
     result = string_concat(target, subtarget);
+    ASSERT_STR("Hello", result);
+    ASSERT_EQUAL(5, length_pointer_char(result));
+}
+
+TEST(String, ProcessConcatAsm) {
+    return;
+    // TODO loint@foodtiny.com
+    char *target = "Hello\0";
+    char *subtarget = "World\0";
+
+    char *result = string_concat_asm(target, subtarget);
+    ASSERT_STR("HelloWorld", result);
+    ASSERT_EQUAL(10, length_pointer_char(result));
+
+    subtarget = "";
+    result = string_concat_asm(target, subtarget);
     ASSERT_STR("Hello", result);
     ASSERT_EQUAL(5, length_pointer_char(result));
 }
