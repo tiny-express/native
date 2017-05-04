@@ -1,5 +1,6 @@
 #include "../validator.h"
 #include "../general.h"
+#include "../string.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <regex.h>
@@ -15,7 +16,6 @@ int match_url(char *url) {
     int convert = regcomp(&exp, URL_PATTERN, REG_EXTENDED);
 
     if (convert != 0) {
-        printf("CAN'T CONVERT\n");
         return FALSE;
     }
 
@@ -37,9 +37,9 @@ int match_email(char *email) {
     int convert = regcomp(&exp, EMAIL_PATTERN, REG_EXTENDED);
 
     if (convert != 0) {
-        printf("CAN'T CONVERT\n");
         return FALSE;
     }
+
 
     if (regexec(&exp, email, 0, NULL, 0) == 0) {
 
@@ -51,7 +51,11 @@ int match_email(char *email) {
 }
 
 int match_phone_number(char *phone_number) {
-    if (phone_number == NULL || length_pointer_char(phone_number) < 10 || length_pointer_char(phone_number) > 12) {
+    if (phone_number == NULL || length_pointer_char(phone_number) < 7 || length_pointer_char(phone_number) > 15) {
+        return FALSE;
+    }
+
+    if (string_to_int(string_replace(phone_number, "+", "")) == 0) {
         return FALSE;
     }
 
@@ -59,12 +63,10 @@ int match_phone_number(char *phone_number) {
     int convert = regcomp(&exp, PHONE_PATTERN, REG_EXTENDED);
 
     if (convert != 0) {
-        printf("CAN'T CONVERT\n");
         return FALSE;
     }
 
     if (regexec(&exp, phone_number, 0, NULL, 0) == 0) {
-
         return TRUE;
     }
 

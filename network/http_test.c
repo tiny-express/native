@@ -40,8 +40,6 @@ TEST(Builtin_Network, HttpSchema) {
 	schemaNull = http_schema("ht tp://google.com/");
 	ASSERT_EQUAL(schemaNull, NULL);
 
-//	schema_http = http_schema("ht\0tp://google.com/");
-//	ASSERT_EQUAL(schema_http, HTTP);
 }
 
 TEST(Builtin_Network, HttpHostname) {

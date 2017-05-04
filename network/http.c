@@ -124,6 +124,7 @@ int http_port(char *url) {
  * @return string
  */
 char *http_query(char *url) {
+
     int is_url_result = is_url(url);
 
     if (is_url_result == 0) {

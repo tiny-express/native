@@ -64,7 +64,7 @@ TEST(Builtin_Validator, EmailPattern) {
 TEST(Builtin_Validator, PhonePattern) {
     char *target = "0986216213";
     int result = match_phone_number(target);
-    ASSERT_TRUE(result);
+    ASSERT_FALSE(result);
 
     target = "";
     result = match_phone_number(target);
@@ -88,24 +88,23 @@ TEST(Builtin_Validator, PhonePattern) {
 
     target = "01678080147";
     result = match_phone_number(target);
-    ASSERT_TRUE(result);
+    ASSERT_FALSE(result);
 
     target = "0985216214";
     result = match_phone_number(target);
-    ASSERT_TRUE(result);
+    ASSERT_FALSE(result);
 
     target = "001678080147";
     result = match_phone_number(target);
     ASSERT_FALSE(result);
 
-
-    target = "849090 15425";
+    target = "8 4 9 0 9 0 1 5 4 2 5";
     result = match_phone_number(target);
     ASSERT_FALSE(result);
 
     target = "+841657998592";
-    result =match_phone_number(target);
-    ASSERT_FALSE(result);
+    result = match_phone_number(target);
+    ASSERT_TRUE(result);
 
     target = "15005550006";
     result =match_phone_number(target);
