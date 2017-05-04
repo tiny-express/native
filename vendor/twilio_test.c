@@ -5,7 +5,7 @@
 
 char* from = "15005550006";
 
-TEST(Builtin_Vendor, TestTwilio) {
+TEST(Vendor, TestTwilio) {
     char* to = "84909015425";
     char* content = "HelloSms";
     ASSERT_TRUE(send_sms(from, to, content));
