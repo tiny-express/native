@@ -47,7 +47,7 @@ int send_sms(char* from, char* to, char* content) {
              url_encode(content)
     );
 
-    char *body[1] = {
+    char *body[3] = {
             body_string,
             '\0'
     };
