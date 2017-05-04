@@ -47,3 +47,57 @@ char *url_decode(char *target) {
     *result_index = '\0';
     return result;
 }
+
+char *find_param(char *name, char *params) {
+    if (strcmp(params, "") == 0) {
+        return "";
+    }
+    char **queryPairs = string_split(params, "&");
+    int lengthPairs = length_pointer_pointer_char(queryPairs);
+    register int i;
+    for (i=0; i<lengthPairs; i++) {
+        char **pair = string_split(queryPairs[i], "=");
+        if (length_pointer_pointer_char(pair) == 2) {
+            if (strcmp(pair[0], name) == 0) {
+                char *result = malloc(sizeof(char));
+                result = pair[1];
+                free(pair);
+                free(queryPairs);
+                return result;
+            }
+        }
+        free(pair);
+    }
+    free(queryPairs);
+    return "";
+}
+
+char *find_param_from_url(char *name, char *url) {
+    char **urlComponents = string_split(url, "?");
+    if (length_pointer_pointer_char(urlComponents) < 2) {
+        return "";
+    }
+    char *queryUrl = urlComponents[1];
+    char **queryPairs = string_split(queryUrl, "&");
+    int lengthPairs = length_pointer_pointer_char(queryPairs);
+    register int i;
+    for (i=0; i<lengthPairs; i++) {
+        char **pair = string_split(queryPairs[i], "=");
+        if (length_pointer_pointer_char(pair) == 2) {
+            if (strcmp(pair[0], name) == 0) {
+                char *result = malloc(sizeof(char));
+                result = pair[1];
+                free(pair);
+                free(urlComponents);
+                free(queryUrl);
+                free(queryPairs);
+                return result;
+            }
+        }
+        free(pair);
+    }
+    free(queryUrl);
+    free(urlComponents);
+    free(queryPairs);
+    return "";
+}

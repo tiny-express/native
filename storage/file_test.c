@@ -1,4 +1,4 @@
-#include "../file.h"
+#include "../storage.h"
 #include "../unit_test.h"
 
 TEST(Storage, FilePutContents) {
