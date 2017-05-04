@@ -37,12 +37,12 @@ inline char *file_get_contents(char *file_name) {
 }
 
 inline int file_put_contents(char *file_path, char *content) {
-	FILE *outputFile = fopen(file_path, "wb+");
-	if (outputFile == NULL) {
+	FILE *output_file = fopen(file_path, "wb+");
+	if (output_file == NULL) {
 		fprintf(stderr, "Permission denied !\n");
 		return FALSE;
 	}
-	fputs(content, outputFile);
-	fclose(outputFile);
+	fputs(content, output_file);
+	fclose(output_file);
 	return TRUE;
 }
