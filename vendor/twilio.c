@@ -13,18 +13,17 @@
 #define TRUE 1
 #define FALSE 0
 
-char* account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
-char* token = "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ==";
-char* url = "https://api.twilio.com/2010-04-01/Accounts/AC85ddd85dbdd4f002c799676b7ad28914/Messages.json";
-
 /**
  * Send SMS by using Twilio's SMS Service
+ * @param account_id
+ * @param account_token
+ * @param url
  * @param from
  * @param to
  * @param content
  * @return TRUE if success, else FALSE
  */
-int send_sms(char* from, char* to, char* content) {
+int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content) {
 
     if (content == NULL || length_pointer_char(content) == 0) {
         return FALSE;
@@ -33,6 +32,12 @@ int send_sms(char* from, char* to, char* content) {
     if (!(is_phone_number(to)&& is_phone_number(from))) {
         return FALSE;
     }
+
+    // TODO: remove hard code and uncomment 3 commands below when base64_encode completed
+    char* token = "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ==";
+//    char* token;
+//    asprintf(&token, "%s:%s", account_id, account_token);
+//    token =  base64_encode(token);
 
     char* from_with_prefix = (string_index(from, "+", 1) == STRING_NOT_FOUND)? string_concat("+", from) : from;
     char* to_with_prefix = (string_index(to, "+", 1) == STRING_NOT_FOUND)? string_concat("+", to) : to;
