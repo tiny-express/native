@@ -10,7 +10,7 @@
 #define IS_HTTP 2
 #define NOT_URL 0
 
-char *getIPAddress();
+char *get_ip_address();
 int is_url(char *url);
 char *http_schema(char *url);
 char *http_hostname(char *url);
