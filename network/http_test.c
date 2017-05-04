@@ -32,10 +32,13 @@ TEST(Network, HttpHostname) {
 
 TEST(Network, HttpPort) {
 
-//    int result = http_port("https://localhost:5000/fanpage/bundaumamtom");
-//	ASSERT_EQUAL(5000, result);
+	int result = http_port("http://localhost:3001");
+	ASSERT_EQUAL(3001, result);
 
-    int result = http_port("https://foodtiny.com");
+    result = http_port("https://localhost:5000/fanpage/bundaumamtom");
+	ASSERT_EQUAL(5000, result);
+
+    result = http_port("https://foodtiny.com");
 	ASSERT_EQUAL(443, result);
 
     result = http_port("http://foodtiny.com");
@@ -70,26 +73,25 @@ TEST(Network, HttpPort) {
 }
 
 TEST(Network, HttpQuery) {
-
 	char *url = "http://localhost/index?key1=value1&key2=value2";
 	char *result = http_query(url);
 	char *expect = "key1=value1&key2=value2";
-//	ASSERT_STR(expect, result);
+	ASSERT_STR(expect, result);
 
-//	result = http_query("http://localhost/index?key1=value1&key2=value2:3000");
-//	ASSERT_STR("key1=value1&key2=value2", result);
+	result = http_query("http://localhost/index?key1=value1&key2=value2:3000");
+	ASSERT_STR("key1=value1&key2=value2", result);
 
-//	result = http_query("http://localhost/index");
-//	expect = "";
-//	ASSERT_STR(expect, result);
+	result = http_query("http://localhost/index");
+	expect = "";
+	ASSERT_STR(expect, result);
 
-//	result = http_query("http://localhost/index?");
-//	expect = "";
-//	ASSERT_STR(expect, result);
-//
-//    result = http_query("http://localhost/index?");
-//    expect = "";
-//    ASSERT_STR(expect, result);
+	result = http_query("http://localhost/index?");
+	expect = "";
+	ASSERT_STR(expect, result);
+
+    result = http_query("http://localhost/index?");
+    expect = "";
+    ASSERT_STR(expect, result);
 }
 TEST(Network, HttpRequest) {
 	char *headers[2] = {
@@ -111,12 +113,12 @@ TEST(Network, HttpPath) {
     char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
     char *result = http_path(target);
     char *expect = "/index/file1/key.pem";
-//    ASSERT_STR(expect, result);
+    ASSERT_STR(expect, result);
 
-//    target = "http://localhost:3000?key1=value1&key2=value2:3000";
-//    result = http_path(target);
-//    expect = "/";
-//    ASSERT_STR(expect, result);
+    target = "http://localhost:3000?key1=value1&key2=value2:3000";
+    result = http_path(target);
+    expect = "/";
+    ASSERT_STR(expect, result);
 
     target = "https://google.com";
     result = http_path(target);
