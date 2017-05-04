@@ -1,7 +1,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Segment, PointerType) {
+TEST(General, SegmentPointerType) {
     char *charArray = "Hello World";
     int from = 6;
     int to = 10;
@@ -87,7 +87,7 @@ TEST(Builtin_Segment, PointerType) {
     ASSERT_STR("", result);
 }
 
-TEST(Builtin_Segment, PointerConstChar) {
+TEST(General, SegmentPointerConstChar) {
     char *charArray = "Hello World";
     int from = 6;
     int to = 6;
@@ -102,7 +102,7 @@ TEST(Builtin_Segment, PointerConstChar) {
     ASSERT_STR("", result);
 }
 
-TEST(Builtin_Segment, PointerPointerChar) {
+TEST(General, SegmentPointerPointerChar) {
     char *target[] = {
         (char *) "The",
         (char *) "quick",

@@ -1,11 +1,11 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_DateTime, Now) {
+TEST(DateTime, Now) {
     ASSERT_TRUE(now() > 0);
 }
 
-TEST(Builtin_DateTime, Date) {
+TEST(DateTime, Date) {
     long timestamp = 1473765499;
     char *format = "d/m/y";
     ASSERT_STR("13/09/2016", date(timestamp, format));

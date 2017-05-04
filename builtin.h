@@ -21,7 +21,6 @@
 #include "network.h"
 #include "system.h"
 #include "storage/logger.h"
-#include "component.h"
 #include "thread/thread.h"
 #include "file.h"
 #include "compress.h"
