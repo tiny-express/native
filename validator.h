@@ -5,9 +5,11 @@
 #ifndef NATIVE_VALIDATOR_H
 #define NATIVE_VALIDATOR_H
 
-#define EMAIL_PATTERN "^[[:alnum:]._]+[@][a-z]{3,10}[.][a-z]{2,5}"
-#define URL_PATTERN   "http(s|)://[[:alnum:].-]+[.][a-z]{2,5}([:digit:]{1,5}||)[[:alnum:]?<>+=!/:]+"
+#define EMAIL_PATTERN "^[[:alnum:]._]+[@][a-z]{2,10}[.][a-z]{2,5}"
+#define URL_PATTERN   "http(s|)://[[:alnum:].-]+[.]([a-z]{2,5}|[0-9]{1,3})([:digit:]{1,5}||)(|[[:alnum:]?<>+=!/:]+)"
 #define PHONE_PATTERN "(01[2689]|09|08)[0-9]{8}"
+#define TRUE 1
+#define FALSE 0
 
 int match_email(char *email);
 int match_phone_number(char *phone_number);

@@ -8,7 +8,7 @@
 int match_url(char *url) {
 
     if (url == NULL || length_pointer_char(url) == 0) {
-        return 0;
+        return FALSE;
     }
 
     regex_t exp;
@@ -16,16 +16,16 @@ int match_url(char *url) {
 
     if (convert != 0) {
         printf("CAN'T CONVERT\n");
-        return 0;
+        return FALSE;
     }
 
     if (regexec(&exp, url, 0, NULL, 0) == 0) {
 
-        return 1;
+        return TRUE;
     }
 
     regfree(&exp);
-    return 0;
+    return FALSE;
 }
 
 int match_email(char *email) {
