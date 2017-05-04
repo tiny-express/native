@@ -97,6 +97,23 @@ TEST(Builtin_Validator, PhonePattern) {
     target = "001678080147";
     result = match_phone_number(target);
     ASSERT_FALSE(result);
+
+
+    target = "849090 15425";
+    result = match_phone_number(target);
+    ASSERT_FALSE(result);
+
+    target = "+841657998592";
+    result =match_phone_number(target);
+    ASSERT_FALSE(result);
+
+    target = "15005550006";
+    result =match_phone_number(target);
+    ASSERT_TRUE(result);
+
+    target = "+15005550006";
+    result =match_phone_number(target);
+    ASSERT_TRUE(result);
 }
 
 //TEST(Builtin_Validator, UrlPattern) {

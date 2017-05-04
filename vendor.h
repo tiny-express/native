@@ -17,6 +17,6 @@ char *search(char *host, char *index, char *query);
 
 char *es_query(char *host, char *index, char *query);
 
-int send_sms(char* to, char* content);
+int send_sms(char* from, char* to, char* content);
 
 #endif
