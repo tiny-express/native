@@ -37,7 +37,7 @@ int read_cpu_fields(FILE *fp, unsigned long long int *fields)
     return 1;
 }
 
-float getCpuUsage() {
+float get_cpu_usage() {
 	#ifdef __APPLE__
 		return 1.0L;
 	#endif
@@ -86,7 +86,7 @@ float getCpuUsage() {
     return percent_usage;
 }
 
-float getRamUsage() {
+float get_ram_usage() {
 	#ifdef __APPLE__
 		return 1.0L;
 	#endif
@@ -97,7 +97,7 @@ float getRamUsage() {
 	#endif
 }
 
-float getDiskAvailable() {
+float get_disk_available() {
 	#ifdef __APPLE__
 		return 1.0L;
 	#endif

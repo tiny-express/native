@@ -17,4 +17,6 @@ char *search(char *host, char *index, char *query);
 
 char *es_query(char *host, char *index, char *query);
 
+int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content);
+
 #endif

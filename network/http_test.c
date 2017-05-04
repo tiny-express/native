@@ -1,33 +1,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Network, IsUrl) {
-	char *url = "https://google.com";
-	int expect = IS_HTTPS;
-	int result = is_url(url);
-	ASSERT_EQUAL(expect, result);
-
-	url = "http://google.com";
-	expect = IS_HTTP;
-	result = is_url(url);
-	ASSERT_EQUAL(expect, result);
-
-	url = "google.http://";
-	expect = NOT_URL;
-	result = is_url(url);
-	ASSERT_EQUAL(expect, result);
-
-	url = "";
-	expect = NOT_URL;
-	result= is_url(url);
-	ASSERT_EQUAL(expect, result);
-
-	result = is_url(NULL);
-	expect = NOT_URL;
-	ASSERT_EQUAL(result, expect);
-}
-
-TEST(Builtin_Network, HttpSchema) {
+TEST(Network, HttpSchema) {
 	char *schema_http = http_schema("http://google.com");
 	ASSERT_STR(schema_http, HTTP);
 
@@ -39,30 +13,24 @@ TEST(Builtin_Network, HttpSchema) {
 
 	schemaNull = http_schema("ht tp://google.com/");
 	ASSERT_EQUAL(schemaNull, NULL);
-
-//	schema_http = http_schema("ht\0tp://google.com/");
-//	ASSERT_EQUAL(schema_http, HTTP);
 }
 
-TEST(Builtin_Network, HttpHostname) {
+TEST(Network, HttpHostname) {
 	char *hostname = "foodtiny.com.vn";
 	char *foodtiny = http_hostname("https://foodtiny.com.vn/home/bundaumamtom/");
 	ASSERT_STR(hostname, foodtiny);
 
-    hostname = http_hostname("http://localhost:3000");
-	ASSERT_STR(hostname, LOCALHOST);
-
     hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
-	ASSERT_STR(hostname, LOCALHOST);
+	ASSERT_STR(LOCALHOST, hostname);
 
 	hostname = http_hostname("https://");
-	ASSERT_STR("", hostname);
+	ASSERT_STR(NULL, hostname);
 
 	hostname = http_hostname("");
 	ASSERT_STR(NULL, hostname);
 }
 
-TEST(Builtin_Network, HttpPort) {
+TEST(Network, HttpPort) {
 
 	int result = http_port("http://localhost:3001");
 	ASSERT_EQUAL(3001, result);
@@ -104,7 +72,7 @@ TEST(Builtin_Network, HttpPort) {
     ASSERT_EQUAL(443, result);
 }
 
-TEST(Builtin_Network, HttpQuery) {
+TEST(Network, HttpQuery) {
 	char *url = "http://localhost/index?key1=value1&key2=value2";
 	char *result = http_query(url);
 	char *expect = "key1=value1&key2=value2";
@@ -125,7 +93,7 @@ TEST(Builtin_Network, HttpQuery) {
     expect = "";
     ASSERT_STR(expect, result);
 }
-TEST(Builtin_Network, HttpRequest) {
+TEST(Network, HttpRequest) {
 	char *headers[2] = {
 		"\0"
 	};
@@ -141,7 +109,7 @@ TEST(Builtin_Network, HttpRequest) {
     ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
 }
 
-TEST(Builtin_Network, HttpPath) {
+TEST(Network, HttpPath) {
     char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
     char *result = http_path(target);
     char *expect = "/index/file1/key.pem";
