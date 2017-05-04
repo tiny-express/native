@@ -1,4 +1,4 @@
-# length_pointer_char(char *target)
+# int length_pointer_char(char *target)
 # Optimized algorithms for length_pointer_char() with greater speed
 # Reference from http://www.int80h.org/strlen/
 .section .text
