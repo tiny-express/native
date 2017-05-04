@@ -30,7 +30,7 @@ int send_sms(char* from, char* to, char* content) {
         return FALSE;
     }
 
-    if (!(match_phone_number(to)&&match_phone_number(from))) {
+    if (!(is_phone_number(to)&& is_phone_number(from))) {
         return FALSE;
     }
 
