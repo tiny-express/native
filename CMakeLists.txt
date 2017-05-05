@@ -9,9 +9,9 @@ enable_language(C)
 # ASM implementation must be GNU Assembly for Linux 64bit
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
-#if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-#    enable_language(ASM)
-#endif()
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    enable_language(ASM)
+endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
