@@ -24,4 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// TODO
+#include "../unit_test.h"
+#include "../vendor.h"
+
+TEST(Vendor, SendGrid) {
+    char *from_mail = "sample_mail@sample.com";
+    char *to_mail = "neacao@gmail.com";
+    char *subject = "Sample";
+    char *content = "hello world";
+
+    ASSERT_EQUAL(0, send_mail(NULL, to_mail, subject, content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, NULL, subject, content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, NULL, content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, NULL));
+
+    ASSERT_EQUAL(0, send_mail("", to_mail, subject, content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, "", subject, content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, "", content));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, ""));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content));
+
+}

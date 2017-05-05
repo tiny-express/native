@@ -39,6 +39,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     enable_language(ASM)
 endif()
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
 # Detect platform and include path for OpenSSL
@@ -57,9 +58,6 @@ find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    find_package(LibUV)
-endif()
 if (OPENSSL_FOUND)
     include_directories("${OPENSSL_INCLUDE_DIR}")
 endif()

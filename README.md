@@ -8,7 +8,7 @@ Beside C standard library, we would like to have a greater performance, custom o
 
 We use this library in our production and it 's cared by Unit Test with Travis CI so it just works !
 
-This project is also useful for new developers in programming practical
+This project is also useful for new developers in practical programming 
 
 ### Standard Library
 - General (length, append, join, segment, sort & search)
