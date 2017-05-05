@@ -115,67 +115,74 @@ TEST(Validator, PhonePattern) {
     ASSERT_TRUE(result);
 }
 
-//TEST(Builtin_Validator, UrlPattern) {
-//    char *target = "https://goo-gle.com";
-//    int result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://google.com.net.vn:3000";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://google.com.net.vn:3000/";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://google.com.net.vn:3000/filepath/givemeaname/";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>value3";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "";
-//    result = is_url(target);
-//    ASSERT_FALSE(result);
-//
-//    target = NULL;
-//    result = is_url(target);
-//    ASSERT_FALSE(result);
-//
-//    target = "/google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>";
-//    result = is_url(target);
-//    ASSERT_FALSE(result);
-//
-//    target = "https://www.google.com.vn/search?site=&source=hp&q=s.com&oq=s.com&gs_l=hp.3..0i10k1l2j0j0i20k1j0l2j0i10k1j0l3.250.973.0.1195.6.6.0.0.0.0.153.612.0j5.5.0....0...1c.1.64.hp..1.4.484.0..46j35i39k1j0i131k1j0i46k1.NYmuphuoiu0";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://www.google.com.vn/search?q=ハンサムなE3%83%8F%E3%83%B3%E3%82%B5%E3%83%A0%E3%81%AA%E5%85%89&gs_l=serp.3...232363.232363.0.232819.1.1.0.0.0.0.137.137.0j1.1.0....0...1c.1.64.serp..0.0.0.bWmCVIHE5kI";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "https://translate.google.com.vn/#vi/ja/Quang%20%C4%91%E1%BA%B9p%20trai";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);;
-//
-//    target = "https://foodtiny..vn";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "http://192.168.1.1";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//    target = "http://google.com/index.html";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//
-//
-//    target = "http://abc.xyz/";
-//    result = is_url(target);
-//    ASSERT_TRUE(result);
-//}
+TEST(Builtin_Validator, UrlPattern) {
+    char *target = "https://goo-gle.com";
+    int result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://google.com.net.vn:3000";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://google.com.net.vn:3000/";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://google.com.net.vn:3000/filepath/givemeaname/";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>value3";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "";
+    result = is_url(target);
+    ASSERT_FALSE(result);
+
+    target = NULL;
+    result = is_url(target);
+    ASSERT_FALSE(result);
+
+    target = "/google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>";
+    result = is_url(target);
+    ASSERT_FALSE(result);
+
+    target = "https://www.google.com.vn/search?site=&source=hp&q=s.com&oq=s.com&gs_l=hp.3..0i10k1l2j0j0i20k1j0l2j0i10k1j0l3.250.973.0.1195.6.6.0.0.0.0.153.612.0j5.5.0....0...1c.1.64.hp..1.4.484.0..46j35i39k1j0i131k1j0i46k1.NYmuphuoiu0";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://www.google.com.vn/search?q=ハンサムなE3%83%8F%E3%83%B3%E3%82%B5%E3%83%A0%E3%81%AA%E5%85%89&gs_l=serp.3...232363.232363.0.232819.1.1.0.0.0.0.137.137.0j1.1.0....0...1c.1.64.serp..0.0.0.bWmCVIHE5kI";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://translate.google.com.vn/#vi/ja/Quang%20%C4%91%E1%BA%B9p%20trai";
+    result = is_url(target);
+    ASSERT_TRUE(result);;
+
+    target = "https://foodtiny..vn";
+    result = is_url(target);
+    ASSERT_FALSE(result);
+
+    target = "http://192.168.1.1";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "http://google.com/index.html";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "http://abc.xyz/";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "http://localhost/q=?xxx";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+
+    target = "https://foodtiny.com:1234?file/adsfasdf/aa";
+    result = is_url(target);
+    ASSERT_TRUE(result);
+}
 
 
