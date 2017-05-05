@@ -27,73 +27,20 @@
 #include <regex.h>
 #include "../validator.h"
 #include "../general.h"
-#include "../string.h"
+#include <stdio.h>
 
-
-int is_url(char *url) {
-
-    if (url == NULL || length_pointer_char(url) == 0) {
-        return FALSE;
-    }
-
-    regex_t exp;
-    int convert = regcomp(&exp, URL_PATTERN, REG_EXTENDED);
-
-    if (convert != 0) {
-        return FALSE;
-    }
-
-    if (regexec(&exp, url, 0, NULL, 0) == 0) {
-
-        return TRUE;
-    }
-
-    regfree(&exp);
-    return FALSE;
+#define IS(TYPE, PATTERN);\
+inline int is_##TYPE(char* input) {\
+    if (input == NULL || length_pointer_char(input) == 0) return FALSE;\
+    regex_t exp;\
+    int convert = regcomp(&exp, PATTERN, REG_EXTENDED);\
+    if (convert != 0) return FALSE;\
+    if (regexec(&exp, input, 0, NULL, 0) == 0) return TRUE;\
+    regfree(&exp);\
+    return FALSE;\
 }
 
-int is_email(char *email) {
-    if (email == NULL || length_pointer_char(email) == 0) {
-        return FALSE;
-    }
+IS(url, URL_PATTERN);
+IS(phone_number, PHONE_PATTERN);
+IS(email, EMAIL_PATTERN);
 
-    regex_t exp;
-    int convert = regcomp(&exp, EMAIL_PATTERN, REG_EXTENDED);
-
-    if (convert != 0) {
-        return FALSE;
-    }
-
-
-    if (regexec(&exp, email, 0, NULL, 0) == 0) {
-
-        return TRUE;
-    }
-
-    regfree(&exp);
-    return FALSE;
-}
-
-int is_phone_number(char *phone_number) {
-    if (phone_number == NULL || length_pointer_char(phone_number) < 7 || length_pointer_char(phone_number) > 15) {
-        return FALSE;
-    }
-
-    if (string_to_int(string_replace(phone_number, "+", "")) == 0) {
-        return FALSE;
-    }
-
-    regex_t exp;
-    int convert = regcomp(&exp, PHONE_PATTERN, REG_EXTENDED);
-
-    if (convert != 0) {
-        return FALSE;
-    }
-
-    if (regexec(&exp, phone_number, 0, NULL, 0) == 0) {
-        return TRUE;
-    }
-
-    regfree(&exp);
-    return FALSE;
-}
