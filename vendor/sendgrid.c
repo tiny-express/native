@@ -24,4 +24,45 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// TODO - SendGrid Service
+#include "../vendor.h"
+#include "../network.h"
+#include "../string.h"
+#include "../general.h"
+#include "../builtin.h"
+
+char *body_format =
+                "{\"personalizations\":"
+                        "[{\"to\": [{\"email\": \"%s\"}],"
+                        "\"subject\": \"%s\"}],"
+                "\"from\":"
+                        "{\"email\": \"%s\"},"
+                "\"content\":"
+                        "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}";
+
+char *header[3] = {
+        "Authorization: Bearer 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",
+        "Content-Type: application/json",
+        '\0'
+};
+
+char *send_mail_url = "https://api.sendgrid.com/v3/mail/send";
+
+int send_mail(char *from_email, char *to_email, char *subject, char *content ) {
+    if (NULL == from_email          || NULL == to_email ||
+        NULL == subject             || NULL == content  ||
+        strcmp(from_email, "") == 0 || strcmp(to_email, "") == 0 ||
+        strcmp(subject, "")    == 0 || strcmp(content, "")  == 0 ) {
+        return 0;
+    }
+
+    char *body[2];
+    asprintf(&body[0], body_format, to_email, subject, from_email, content);
+    body[1] = '\0';
+
+//    printf("Send body: =>%s<=\n", body[0]);
+
+    char *response = http_request("POST", send_mail_url, header, body);
+    printf("resp: %s\n", response);
+
+    return 0;
+}
