@@ -1,40 +1,70 @@
 // TODO - Twilio Service
 #include <printf.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
 #include "../crypto.h"
 #include "../general.h"
+#include "../builtin.h"
 
-char* account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
-char* account_token = "87c76ffe015078c17e7080d19af46cae";
-char* from = "15005550006";
-char* url = "https://api.twilio.com/2010-04-01/Accounts/AC85ddd85dbdd4f002c799676b7ad28914/Messages.json";
+#define STRING_NOT_FOUND -1
+#define TRUE 1
+#define FALSE 0
 
-int send_sms(char* to, char* content) {
+/**
+ * Send SMS by using Twilio's SMS Service
+ * @param account_id
+ * @param account_token
+ * @param url
+ * @param from
+ * @param to
+ * @param content
+ * @return TRUE if success, else FALSE
+ */
+int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content) {
 
-    char *auth_string = "";
-    auth_string = string_concat(auth_string, account_id);
-    auth_string = string_concat(auth_string, ":");
-    auth_string = string_concat(auth_string,account_token);
-//    auth_string = string_concat(auth_string, "@");
-//    auth_string = base64_encode(auth_string, sizeof(auth_string));
-    char *xbod;
-//    asprintf(&xbody,);
-    char *body[1] = {
-            "&Body=Hello&From=%2B15005550006&To=%2B841657998592",
+    if (content == NULL || length_pointer_char(content) == 0) {
+        return FALSE;
+    }
+
+    if (!(is_phone_number(to)&& is_phone_number(from))) {
+        return FALSE;
+    }
+
+    // TODO: remove hard code and uncomment 3 commands below when base64_encode completed
+    char* token = "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ==";
+//    char* token;
+//    asprintf(&token, "%s:%s", account_id, account_token);
+//    token =  base64_encode(token);
+
+    char* from_with_prefix = (string_index(from, "+", 1) == STRING_NOT_FOUND)? string_concat("+", from) : from;
+    char* to_with_prefix = (string_index(to, "+", 1) == STRING_NOT_FOUND)? string_concat("+", to) : to;
+    from_with_prefix = string_replace(from_with_prefix, " ", "");
+    to_with_prefix = string_replace(to_with_prefix, " ", "");
+    char* body_string;
+    asprintf(
+            &body_string,
+             "From=%s&To=%s&Body=%s",
+             url_encode(from_with_prefix),
+             url_encode(to_with_prefix),
+             url_encode(content)
+    );
+
+    char *body[3] = {
+            body_string,
             '\0'
     };
-    char *headers[5] = {
-            "Content-Length: 90",
+    char *headers[3] = {
             "Content-Type: application/x-www-form-urlencoded",
-            string_concat("Authorization: Basic ", "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ=="),
-            "\0"
+            string_concat("Authorization: Basic ", token),
+            '\0'
     };
 
     char *response = http_request("POST", url, headers, body);
-    printf("%s\n",response);
-    //printf("%s\n", xbody);
-    return 0;
+    if (string_index(response, account_id, 1) != STRING_NOT_FOUND) {
+        return TRUE;
+    }
+    return FALSE;
 }

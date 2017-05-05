@@ -4,4 +4,7 @@
 #include "type/json.h"
 #include "type/default.h"
 
+#define TRUE 1
+#define FALSE 0
+
 #endif
