@@ -25,6 +25,7 @@ int    string_startswith(char *target, const char *prefix);
 int    string_endswith(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+char  *string_concat_asm(char *target, char *subtarget);
 
 char *string_from_to(char *target, int from, int to);
 char *string_from(char *target, int from);
