@@ -27,9 +27,7 @@
 #include "../storage.h"
 #include "../network.h"
 #include "../builtin.h"
-
-#define TRUE 1
-#define FALSE 0
+#include "../type.h"
 
 inline char *file_get_contents(char *file_name) {
 	if (is_url(file_name) != 0) {
