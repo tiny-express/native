@@ -30,7 +30,10 @@ This project is also useful for new developers in programming practical
 
 ### Assembly Optimization
 This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly.
-Note that GNU Assembly is ONLY work with Linux AMD64. No need to optimize performance for Apple MacOSX because only development.
+
+Note that GNU Assembly is ONLY work with Linux AMD64.
+
+No need to enable ASM optimization for Apple MacOSX because only development.
 
 ### Contributors
 Members in Food Tiny Team are authors of this projects.
