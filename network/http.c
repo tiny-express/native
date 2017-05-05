@@ -29,6 +29,7 @@
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
+#include "../validator.h"
 
 /**
  * Retrieve url schema

@@ -27,8 +27,8 @@
 #ifndef NATIVE_VALIDATOR_H
 #define NATIVE_VALIDATOR_H
 
-#define EMAIL_PATTERN "^[[:alnum:]._]+[@][a-z]{2,10}[.][a-z]{2,5}"
-#define URL_PATTERN   "^http(s)?:\/\/([a-z0-9]+([\-\.]{1}[a-z0-9]+)*[\.]{1}([a-z]{2,5}|[1-9]{1,3})|localhost)(:[0-9]{1,5})?(\/.*)?([?]{1}[a-z0-9]*)*"
+#define EMAIL_PATTERN "^[a-zA-Z0-9]((\\.|_)?[a-zA-Z0-9])*[@]([a-z0-9]+(\\.|-)?)*[a-zA-Z0-9]+[.][a-z]{2,253}$"
+#define URL_PATTERN   "^http(s)?:\\/\\/([a-z0-9A-Z]((\\.|\\-)?[a-zA-Z0-9])*[\\.][a-z0-9]{1,64}|localhost)((\\:)[0-9]{1,4}|)((\\/)(.)*|)((\\?)(.)*|)$"
 #define PHONE_PATTERN "^[+]{0,1}[1-9]{1,2}([0-9]){5,13}"
 
 

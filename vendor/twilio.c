@@ -29,10 +29,10 @@
 #include "../string.h"
 #include "../general.h"
 #include "../builtin.h"
+#include "../type.h"
 
 #define STRING_NOT_FOUND -1
-#define TRUE 1
-#define FALSE 0
+
 
 /**
  * Send SMS by using Twilio's SMS Service
