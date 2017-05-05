@@ -1,7 +1,7 @@
 #ifndef BUILTIN_DATETIME_H
 #define BUILTIN_DATETIME_H
 #ifdef __linux__
-#define uint64_t long 
+#include <stdint.h>
 #elif __APPLE__
 #include <mach/mach_time.h>
 #elif defined _WIN32 || defined __CYGWIN__

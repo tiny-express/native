@@ -29,16 +29,16 @@
 
 TEST(Network, HttpSchema) {
 	char *schema_http = http_schema("http://google.com");
-	ASSERT_STR(schema_http, HTTP);
+	ASSERT_STR(HTTP, schema_http);
 
 	char *schema_https = http_schema("https://facebook.com");
-	ASSERT_STR(schema_https, HTTPS);
+	ASSERT_STR(HTTPS, schema_https);
 
 	char *schemaNull = http_schema("");
-	ASSERT_EQUAL(schemaNull, NULL);
+	ASSERT_EQUAL(NULL, schemaNull);
 
 	schemaNull = http_schema("ht tp://google.com/");
-	ASSERT_EQUAL(schemaNull, NULL);
+	ASSERT_EQUAL(NULL, schemaNull);
 }
 
 TEST(Network, HttpHostname) {
