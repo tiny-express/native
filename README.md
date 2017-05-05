@@ -3,8 +3,12 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 
 This library provides set of functions which are common used in C/C++ application.
+
 Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
-We use this library in our production and it 's cared by Unit Test with Travis CI so it's just work !
+
+We use this library in our production and it 's cared by Unit Test with Travis CI so it just works !
+
+This project is also useful for new developers in programming practical
 
 ### Standard Library
 - General (length, append, join, segment, sort & search)
@@ -22,7 +26,6 @@ We use this library in our production and it 's cared by Unit Test with Travis C
 ### Roadmap
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS and Java
 - Optimize fundamental functions in GNU Assembly for performance but C version will be delivered first
-- This project is also useful for new developers in programming practical
 - Develop fundamental algorithms and advanced data structure
 
 ### Assembly Optimization
