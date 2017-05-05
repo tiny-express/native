@@ -84,6 +84,10 @@ TEST(Validator, EmailPattern) {
     target = "______@____.______";
     result = is_email(target);
     ASSERT_FALSE(result);
+
+    target = "info@abxxxxxxxc.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    result = is_email(target);
+    ASSERT_TRUE(result);
 }
 
 TEST(Validator, PhonePattern) {
@@ -149,7 +153,7 @@ TEST(Builtin_Validator, UrlPattern) {
     result = is_url(target);
     ASSERT_TRUE(result);
 
-    target = "https://google.com.net.vn:3000/";
+    target = "http://localhost:3001";
     result = is_url(target);
     ASSERT_TRUE(result);
 
@@ -208,6 +212,10 @@ TEST(Builtin_Validator, UrlPattern) {
     target = "https://foodtiny.com:1234?file/adsfasdf/aa";
     result = is_url(target);
     ASSERT_TRUE(result);
+
+    target = "https://";
+    result = is_url(target);
+    ASSERT_FALSE(result);
 }
 
 

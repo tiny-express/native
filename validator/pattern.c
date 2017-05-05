@@ -32,12 +32,18 @@
 
 #define IS(TYPE, PATTERN);\
 inline int is_##TYPE(char* input) {\
-    if (input == NULL || length_pointer_char(input) == 0) return FALSE;\
+    if (input == NULL || length_pointer_char(input) == 0) {\
+        return FALSE;\
+    }\
     regex_t exp;\
     int convert = regcomp(&exp, PATTERN, REG_EXTENDED);\
-    if (convert != 0) return FALSE;\
-    if (regexec(&exp, input, 0, NULL, 0) == 0) return TRUE;\
-    regfree(&exp);\
+    if (convert != 0) {\
+        return FALSE;\
+    }\
+    if (regexec(&exp, input, 0, NULL, 0) == 0) {\
+        return TRUE;\
+        regfree(&exp);\
+    }\
     return FALSE;\
 }
 
