@@ -1,1 +1,1 @@
-brew install libuv cmake openssl
+brew install libuv openssl
