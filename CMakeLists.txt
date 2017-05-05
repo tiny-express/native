@@ -9,9 +9,9 @@ enable_language(C)
 # ASM implementation must be GNU Assembly for Linux 64bit
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+#if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 #    enable_language(ASM)
-endif()
+#endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
@@ -31,6 +31,8 @@ set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
+find_package(LibCassandra)
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     find_package(LibUV)
 endif()
@@ -87,15 +89,15 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
-add_library(${PROJECT_NAME} ${SOURCES} validator.h)
+add_library(${PROJECT_NAME} ${SOURCES})
 target_compile_definitions(${PROJECT_NAME} PRIVATE CASSANDRA)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${LIBCASSANDRA_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${CASSANDRADRIVER_LIBRARIES} -lcrypto)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${LIBCASSANDRA_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} ${CASSANDRADRIVER_LIBRARIES} -lcrypto -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif()
