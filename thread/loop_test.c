@@ -37,7 +37,7 @@ void *stop_interval() {
 }
 
 
-TEST(Builtin_Thread, SetInterval) {
+TEST(Thread, LoopSetInterval) {
 
     pthread_t pthread1 = set_interval(add, 100);
     while(1) {
@@ -49,12 +49,12 @@ TEST(Builtin_Thread, SetInterval) {
 }
 
 
-TEST(Builtin_Thread, SetIntervalNullCallback) {
+TEST(Thread, LoopSetIntervalNullCallback) {
     pthread_t pthread1 = set_interval(NULL, 10);
     ASSERT_NULL(pthread1);
 }
 
-TEST(Builtin_Thread, SetIntervalMutex) {
+TEST(Thread, LoopSetIntervalMutex) {
     t = 0;
     pthread_t pthread2 = set_interval(add_for_interval_mutex, 0);
     pthread_t pthread3 = set_interval(subtract_for_interval_mutex, 0);
@@ -67,7 +67,7 @@ TEST(Builtin_Thread, SetIntervalMutex) {
     ASSERT_TRUE(t != count1 - count2);
 }
 
-TEST(Builtin_Thread, SetTimeOut) {
+TEST(Thread, LoopSetTimeOut) {
     t = 0;
     set_time_out(add, 200);
     ASSERT_EQUAL(0, t);
@@ -78,7 +78,7 @@ TEST(Builtin_Thread, SetTimeOut) {
     ASSERT_EQUAL(1, t);
 }
 
-TEST(Builtin_Thread, TimeOutStopInterval) {
+TEST(Thread, LoopTimeOutStopInterval) {
     t = 0;
     interval_thread = set_interval(add, 20);
     time_out_thread = set_time_out(stop_interval, 500);
@@ -89,7 +89,7 @@ TEST(Builtin_Thread, TimeOutStopInterval) {
     ASSERT_TRUE(t > 0);
 }
 
-TEST(Builtin_Thread, SetTimeOutNullCallback) {
+TEST(Thread, LoopSetTimeOutNullCallback) {
     pthread_t pthread = set_time_out(NULL, 0);
     ASSERT_NULL(pthread);
 }

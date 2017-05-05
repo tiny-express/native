@@ -295,13 +295,13 @@ char *string_title(char *target) {
 	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z')  {
 		*index = *index - 32;
 	}
-	char lastIndex = *index;
+	char last_index = *index;
 	index++;
 	for (; *index; index++) {
-		if (lastIndex == ' ' && 'a' <= *index && *index <= 'z') {
+		if (last_index == ' ' && 'a' <= *index && *index <= 'z') {
 			*index = *index - 32;
 		}
-		lastIndex = *index;
+		last_index = *index;
 	}
 	return result;
 }
