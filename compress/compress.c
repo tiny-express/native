@@ -29,11 +29,11 @@
 #include "../compress.h"
 #include "../general.h"
 
-#define MAXLEN 100000
+#define MAXLEN_STRING_COMPRESS 100000
 
 // Compress
 char* zlib_encode(char* compress_contents){
-	char char_array_temp[MAXLEN];
+	char char_array_temp[MAXLEN_STRING_COMPRESS];
 
 	// Compressing
 	z_stream defstream;
@@ -56,7 +56,7 @@ char* zlib_encode(char* compress_contents){
 
 // Decompress
 char *zlib_decode(char *encode_contents){
-	char char_array_temp[MAXLEN];
+	char char_array_temp[MAXLEN_STRING_COMPRESS];
 
 	z_stream infstream;
 	infstream.zalloc = Z_NULL;

@@ -24,24 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <regex.h>
-#include "../validator.h"
-#include "../general.h"
-#include <stdio.h>
-#include "../type.h"
+#ifndef BUILTIN_SYSTEM_H
+#define BUILTIN_SYSTEM_H
 
-#define IS(TYPE, PATTERN);\
-inline int is_##TYPE(char* input) {\
-    if (input == NULL || length_pointer_char(input) == 0) return FALSE;\
-    regex_t exp;\
-    int convert = regcomp(&exp, PATTERN, REG_EXTENDED);\
-    if (convert != 0) return FALSE;\
-    if (regexec(&exp, input, 0, NULL, 0) == 0) return TRUE;\
-    regfree(&exp);\
-    return FALSE;\
-}
+float get_cpu_usage();
+float get_ram_usage();
+float get_disk_available();
 
-IS(url, URL_PATTERN);
-IS(phone_number, PHONE_PATTERN);
-IS(email, EMAIL_PATTERN);
-
+#endif
