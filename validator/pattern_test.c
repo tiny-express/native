@@ -1,5 +1,6 @@
 #include "../validator.h"
 #include "../unit_test.h"
+#include <stdlib.h>
 
 TEST(Builtin_Validator, EmailPattern) {
     char *target = "anh_khoa.1@gmail.com";
@@ -62,49 +63,40 @@ TEST(Builtin_Validator, EmailPattern) {
 
 TEST(Builtin_Validator, PhonePattern) {
     char *target = "0986216213";
-    int expect = 1;
     int result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_TRUE(result);
 
     target = "";
-    expect = 0;
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_FALSE(result);
 
     target = NULL;
-    expect = 0;
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_FALSE(result);
 
-    target = "foodtiny";
-    expect = 0;
+    target = "foodtiny.com.vn";
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_FALSE(result);
 
-    target = "0012238364";
-    expect = 0;
+    target = "841658080147";
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_TRUE(result);
 
-    target = "1234";
-    expect = 0;
+    target = "84986216214";
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_TRUE(result);
 
-    target = "1234567890909090";
-    expect = 0;
+    target = "01678080147";
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_TRUE(result);
 
-    target = "01657998592";
-    expect = 1;
+    target = "0985216214";
     result = match_phone_number(target);
-    ASSERT_EQUAL(expect, result);
+    ASSERT_TRUE(result);
 
-    target = "841657998592";
-    expect = 1;
+    target = "001678080147";
     result = match_phone_number(target);
-    //ASSERT_EQUAL(expect, result);
+    ASSERT_FALSE(result);
 }
 
 TEST(Builtin_Validator, UrlPattern) {
@@ -169,5 +161,7 @@ TEST(Builtin_Validator, UrlPattern) {
     result = match_url(target);
     ASSERT_TRUE(result);
 }
+
+
 
 
