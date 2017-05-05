@@ -11,7 +11,6 @@
 #define NOT_URL 0
 
 char *get_ip_address();
-int is_url(char *url);
 char *http_schema(char *url);
 char *http_hostname(char *url);
 int   http_port(char *url);
