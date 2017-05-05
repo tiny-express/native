@@ -13,8 +13,8 @@ TEST(General, LengthPointerChar) {
 
 	data = NULL;
 	ASSERT_EQUAL(0, length_pointer_char(data));
-
 }
+
 
 TEST(General, LengthPointerPointerChar) {
 	char *data_raw[] = {
