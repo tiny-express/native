@@ -25,6 +25,7 @@ int    string_startswith(char *target, const char *prefix);
 int    string_endswith(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+char  *string_concat_asm(char *target, char *subtarget);
 
 char *string_from_to(char *target, int from, int to);
 char *string_from(char *target, int from);
@@ -37,6 +38,9 @@ char *string_standardized(char *target);
 
 char *url_encode(char *target);
 char *url_decode(char *target);
+
+char *find_param(char *name, char *params);
+char *find_param_from_url(char *name, char *url);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

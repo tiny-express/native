@@ -1,7 +1,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_String, FromShort) {
+TEST(String, ConvertFromShort) {
     int number = 123;
     char *expect="123";
     char *result= string_from_short(number);
@@ -13,7 +13,7 @@ TEST(Builtin_String, FromShort) {
     ASSERT_STR(expect2, result2);
 }
 
-TEST(Builtin_String, FromInt) {
+TEST(String, ConvertFromInt) {
     int input = 0;
     char *expect = "0";
     char *result=string_from_int(input);
@@ -40,7 +40,7 @@ TEST(Builtin_String, FromInt) {
     ASSERT_STR(expect4,result4);
 }
 
-TEST(Builtin_String, FromLong) {
+TEST(String, ConvertFromLong) {
     long input = 2147483647;
     char *expect="2147483647";
     char *result=string_from_long(input);
@@ -52,7 +52,7 @@ TEST(Builtin_String, FromLong) {
     ASSERT_STR(expect1,result1);
 }
 
-TEST(Builtin_String, FromFloat) {
+TEST(String, ConvertFromFloat) {
     float input = 12.56;
     char *expect="12.56";
     char *result=string_from_float(input);
@@ -64,7 +64,7 @@ TEST(Builtin_String, FromFloat) {
     ASSERT_STR(expect1,result1);
 }
 
-TEST(Builtin_String, FromDouble) {
+TEST(String, ConvertFromDouble) {
     double input = 125.569123;
     char *expect = "125.569123";
     char *result = string_from_double(input);
@@ -76,7 +76,7 @@ TEST(Builtin_String, FromDouble) {
     ASSERT_STR(expect1, result1);
 }
 
-TEST(Builtin_String, ToShort) {
+TEST(String, ConvertToShort) {
     ASSERT_EQUAL(0, string_to_short(NULL));
 
     char *input = "123";
@@ -88,7 +88,7 @@ TEST(Builtin_String, ToShort) {
     ASSERT_EQUAL(-123, result1);
 }
 
-TEST(Builtin_String, ToInt) {
+TEST(String, ConvertToInt) {
     char *input = "123\0";
     int result = string_to_int(input);
     ASSERT_EQUAL(123, result);
@@ -122,7 +122,7 @@ TEST(Builtin_String, ToInt) {
     ASSERT_EQUAL(0, result7);
 }
 
-TEST(Builtin_String, ToLong) {
+TEST(String, ConvertToLong) {
     char *input = "21474836";
     long result = string_to_long(input);
     ASSERT_EQUAL(21474836, result);
@@ -132,7 +132,7 @@ TEST(Builtin_String, ToLong) {
     ASSERT_EQUAL(-21474836, result1);
 }
 
-TEST(Builtin_String, ToFloat) {
+TEST(String, ConvertToFloat) {
     char *input = "12.56";
     float result = string_to_float(input);
     ASSERT_EQUAL(12.56, result);
@@ -142,7 +142,7 @@ TEST(Builtin_String, ToFloat) {
     ASSERT_EQUAL(-1.56799, result1);
 }
 
-TEST(Builtin_String, ToDouble) {
+TEST(String, ConvertToDouble) {
     char *input = "125.569123";
     double result = string_to_double(input);
     ASSERT_EQUAL(125.569123, result);

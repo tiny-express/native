@@ -2,7 +2,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Append, PointerChar) {
+TEST(General, AppendPointerChar) {
 	char *target[] = {
 			(char *) "The",
 			(char *) "quick",
@@ -30,7 +30,7 @@ TEST(Builtin_Append, PointerChar) {
 
     append = "";
     result = append_pointer_char(target, append);
-	ASSERT_EQUAL(8, length_pointer_pointer_char(target));
+	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
 }
 
 
