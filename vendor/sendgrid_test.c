@@ -29,7 +29,7 @@
 //
 //TEST(Vendor, SendGrid) {
 //    char *from_mail = "sample_mail@sample.com";
-//    char *to_mail = "neacao@gmail.com";
+//    char *to_mail = "sample_mail2@gmail.com";
 //    char *subject = "Sample";
 //    char *content = "hello world";
 //
@@ -52,3 +52,4 @@
 //    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content));
 //
 //}
+//
