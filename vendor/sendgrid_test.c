@@ -62,5 +62,6 @@ TEST(Vendor, SendGrid) {
 
     ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
 
+    ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
 }
 
