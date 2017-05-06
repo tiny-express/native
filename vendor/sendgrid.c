@@ -39,12 +39,15 @@
                      "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
 
 int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token) {
-    if (NULL == from_email      || NULL == to_email
-        || NULL == subject      || NULL == content
-        || NULL == service_url  || NULL == service_token
-        || strcmp(from_email, "")   == 0  || strcmp(to_email, "")       == 0
-        || strcmp(subject, "")      == 0  || strcmp(content, "")        == 0
-        || strcmp(service_url, "")  == 0  || strcmp(service_token, "")  == 0) {
+    if (is_email(from_email) == FALSE
+        || is_email(to_email) == FALSE
+        || is_url(service_url) == FALSE
+        || NULL == subject
+        || NULL == content
+        || NULL == service_token
+        || strcmp(subject, "") == 0
+        || strcmp(content, "")  == 0
+        || strcmp(service_token, "")  == 0) {
         return 0;
     }
 
@@ -58,6 +61,9 @@ int send_mail(char *from_email, char *to_email, char *subject, char *content, ch
             '\0'
     };
 
-    http_request("POST", service_url, header, body);
+    char *response = http_request("POST", service_url, header, body);
+    if (response != NULL) {
+        printf("response: >%s<", response); //TODO: debug on CI because mac can not investigate this
+    }
     return 1;
 }
