@@ -29,6 +29,8 @@
 #include "../string.h"
 #include "../builtin.h"
 
+#define RESPONSE_SUCCESS "202 Accepted"
+
 #define BODY_FORMAT \
                 "{\"personalizations\":"\
                      "[{\"to\": [{\"email\": \"%s\"}],"\
@@ -39,15 +41,15 @@
                      "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
 
 int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token) {
-    if (is_email(from_email) == FALSE
-        || is_email(to_email) == FALSE
-        || is_url(service_url) == FALSE
+    if (!is_email(from_email)
+        || !is_email(to_email)
+        || !is_url(service_url)
         || NULL == subject
         || NULL == content
         || NULL == service_token
         || strcmp(subject, "") == 0
-        || strcmp(content, "")  == 0
-        || strcmp(service_token, "")  == 0) {
+        || strcmp(content, "") == 0
+        || strcmp(service_token, "") == 0) {
         return 0;
     }
 
@@ -62,8 +64,10 @@ int send_mail(char *from_email, char *to_email, char *subject, char *content, ch
     };
 
     char *response = http_request("POST", service_url, header, body);
-    if (response != NULL) {
-        printf("response: >%s<", response); //TODO: debug on CI because mac can not investigate this
+
+    if (strstr(response, RESPONSE_SUCCESS) == NULL) {
+        return 0;
     }
+
     return 1;
 }
