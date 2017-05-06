@@ -66,11 +66,8 @@ TEST(Vendor, SendGrid) {
 
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "wrong_url", service_token));
 
-#ifdef __linux__ /// TODO: remove this condition after fixed Grib's problem on Mac (issue's noted on Slack)
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
 
     ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
-#endif
-    
 }
 
