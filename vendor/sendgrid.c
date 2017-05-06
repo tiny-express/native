@@ -27,42 +27,38 @@
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
-#include "../general.h"
 #include "../builtin.h"
 
-char *body_format =
-                "{\"personalizations\":"
-                        "[{\"to\": [{\"email\": \"%s\"}],"
-                        "\"subject\": \"%s\"}],"
-                "\"from\":"
-                        "{\"email\": \"%s\"},"
-                "\"content\":"
-                        "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}";
+#define BODY_FORMAT \
+             "{\"personalizations\":"\
+                     "[{\"to\": [{\"email\": \"%s\"}],"\
+                     "\"subject\": \"%s\"}],"\
+                     "\"from\":"\
+                     "{\"email\": \"%s\"},"\
+                     "\"content\":"\
+                     "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
 
-char *header[3] = {
-        "Authorization: Bearer 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",
-        "Content-Type: application/json",
-        '\0'
-};
-
-char *send_mail_url = "https://api.sendgrid.com/v3/mail/send";
+#define GRID_URL            "https://api.sendgrid.com/v3/mail/send"
+#define GRID_STAGING_TOKEN  "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"
 
 int send_mail(char *from_email, char *to_email, char *subject, char *content ) {
-    if (NULL == from_email          || NULL == to_email ||
-        NULL == subject             || NULL == content  ||
-        strcmp(from_email, "") == 0 || strcmp(to_email, "") == 0 ||
-        strcmp(subject, "")    == 0 || strcmp(content, "")  == 0 ) {
+    if (NULL == from_email              || NULL == to_email
+        || NULL == subject              || NULL == content
+        || strcmp(from_email, "") == 0  || strcmp(to_email, "") == 0
+        || strcmp(subject, "")    == 0  || strcmp(content, "")  == 0 ) {
         return 0;
     }
 
     char *body[2];
-    asprintf(&body[0], body_format, to_email, subject, from_email, content);
+    asprintf(&body[0], BODY_FORMAT, to_email, subject, from_email, content);
     body[1] = '\0';
 
-//    printf("Send body: =>%s<=\n", body[0]);
+    char *header[3] = {
+            string_concat("Authorization: Bearer ", GRID_STAGING_TOKEN),
+            "Content-Type: application/json",
+            '\0'
+    };
 
-    char *response = http_request("POST", send_mail_url, header, body);
-    printf("resp: %s\n", response);
-
-    return 0;
+    http_request("POST", GRID_URL, header, body);
+    return 1;
 }
