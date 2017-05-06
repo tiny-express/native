@@ -30,7 +30,7 @@
 TEST(Vendor, SendGrid) {
 
     char *from_mail = "sample_mail@sample.com";
-    char *to_mail = "neacao@gmail.com";
+    char *to_mail = "test@gmail.com";
     char *subject = "Sample";
     char *content = "hello world";
     char *service_url   = "https://api.sendgrid.com/v3/mail/send";
@@ -61,6 +61,24 @@ TEST(Vendor, SendGrid) {
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, ""));
 
     ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
+
+
+    service_token = "wrong service token";
+    int result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
+    ASSERT_FALSE(result);
+
+    to_mail = "to mail with space";
+    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
+    ASSERT_FALSE(result);
+
+    from_mail = "from mail with space";
+    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
+    ASSERT_FALSE(result);
+
+    to_mail = "mail_not_match_pattern@food.";
+    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
+    ASSERT_FALSE(result);
+
 
 }
 
