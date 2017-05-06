@@ -60,10 +60,19 @@ int send_sms(char* account_id, char* account_token, char* url, char* from, char*
 //    asprintf(&token, "%s:%s", account_id, account_token);
 //    token =  base64_encode(token);
 
-    char* from_with_prefix = (string_index(from, "+", 1) == STRING_NOT_FOUND)? string_concat("+", from) : from;
-    char* to_with_prefix = (string_index(to, "+", 1) == STRING_NOT_FOUND)? string_concat("+", to) : to;
+    char *from_with_prefix = from;
+    if (string_index(from, "+", 1) == STRING_NOT_FOUND) {
+        from_with_prefix = string_concat("+", from);
+    }
+
+    char *to_with_prefix = to;
+    if (string_index(to, "+", 1) == STRING_NOT_FOUND) {
+        to_with_prefix = string_concat("+", to);
+    }
+
     from_with_prefix = string_replace(from_with_prefix, " ", "");
     to_with_prefix = string_replace(to_with_prefix, " ", "");
+
     char* body_string;
     asprintf(
             &body_string,
