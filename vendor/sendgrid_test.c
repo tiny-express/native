@@ -60,23 +60,17 @@ TEST(Vendor, SendGrid) {
 
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, ""));
 
+    ASSERT_EQUAL(0, send_mail("wrong_mail", to_mail, subject, content, service_url, service_token));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, "wrong_mail", subject, content, "", service_token));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "wrong_url", service_token));
+
+#ifdef __linux__ /// TODO: remove this condition after fixed Grib's problem on Mac (issue's noted on Slack)
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
+
     ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
-
-    service_token = "wrong service token";
-    int result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
-    ASSERT_FALSE(result);
-
-    to_mail = "to mail with space";
-    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
-    ASSERT_FALSE(result);
-
-    from_mail = "from mail with space";
-    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
-    ASSERT_FALSE(result);
-
-    to_mail = "mail_not_match_pattern@food.";
-    result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
-    ASSERT_FALSE(result);
-
+#endif
+    
 }
 
