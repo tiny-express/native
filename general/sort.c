@@ -25,4 +25,27 @@
  */
 
 // Distribution Counting Sort
+
 // Quick Sort
+
+void quick_sort(int *array, int left , int right) {
+    if (left >= right) {
+        return;
+    }
+
+    int array_mid_value = array[(left + right) / 2];
+
+    int left_index = left;
+    int right_index = right;
+
+    while (left_index < right_index) {
+        while (array[right_index] >= array_mid_value) {
+            right_index--;
+        }
+
+        while (array[left_index] <= array_mid_value) {
+            left_index++;
+        }
+        
+    }
+}

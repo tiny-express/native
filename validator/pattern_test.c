@@ -84,7 +84,7 @@ TEST(Validator, EmailPattern) {
     target = "______@____.______";
     result = is_email(target);
     ASSERT_FALSE(result);
-    
+
     target = "info@abxxxxxxxc.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     result = is_email(target);
     ASSERT_TRUE(result);
