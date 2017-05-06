@@ -30,22 +30,24 @@
 #include "../builtin.h"
 
 #define BODY_FORMAT \
-             "{\"personalizations\":"\
+                "{\"personalizations\":"\
                      "[{\"to\": [{\"email\": \"%s\"}],"\
                      "\"subject\": \"%s\"}],"\
-                     "\"from\":"\
+                "\"from\":"\
                      "{\"email\": \"%s\"},"\
-                     "\"content\":"\
+                "\"content\":"\
                      "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
 
-#define GRID_URL            "https://api.sendgrid.com/v3/mail/send"
-#define GRID_STAGING_TOKEN  "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"
-
-int send_mail(char *from_email, char *to_email, char *subject, char *content ) {
-    if (NULL == from_email              || NULL == to_email
-        || NULL == subject              || NULL == content
-        || strcmp(from_email, "") == 0  || strcmp(to_email, "") == 0
-        || strcmp(subject, "")    == 0  || strcmp(content, "")  == 0 ) {
+int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token) {
+    if (is_email(from_email) == FALSE
+        || is_email(to_email) == FALSE
+        || is_url(service_url) == FALSE
+        || NULL == subject
+        || NULL == content
+        || NULL == service_token
+        || strcmp(subject, "") == 0
+        || strcmp(content, "")  == 0
+        || strcmp(service_token, "")  == 0) {
         return 0;
     }
 
@@ -54,11 +56,14 @@ int send_mail(char *from_email, char *to_email, char *subject, char *content ) {
     body[1] = '\0';
 
     char *header[3] = {
-            string_concat("Authorization: Bearer ", GRID_STAGING_TOKEN),
+            string_concat("Authorization: Bearer ", service_token),
             "Content-Type: application/json",
             '\0'
     };
 
-    http_request("POST", GRID_URL, header, body);
+    char *response = http_request("POST", service_url, header, body);
+    if (response != NULL) {
+        printf("response: >%s<", response); //TODO: debug on CI because mac can not investigate this
+    }
     return 1;
 }
