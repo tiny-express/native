@@ -61,6 +61,9 @@ int send_mail(char *from_email, char *to_email, char *subject, char *content, ch
             '\0'
     };
 
-    http_request("POST", service_url, header, body);
+    char *response = http_request("POST", service_url, header, body);
+    if (response != NULL) {
+        printf("response: >%s<", response); //TODO: debug on CI because mac can not investigate this
+    }
     return 1;
 }
