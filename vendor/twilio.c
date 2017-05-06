@@ -50,7 +50,7 @@ int send_sms(char* account_id, char* account_token, char* url, char* from, char*
         return FALSE;
     }
 
-    if (!(is_phone_number(to)&& is_phone_number(from))) {
+    if (!(is_phone_number(to) && is_phone_number(from))) {
         return FALSE;
     }
 
