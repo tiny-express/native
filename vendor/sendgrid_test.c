@@ -62,7 +62,6 @@ TEST(Vendor, SendGrid) {
 
     ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
 
-
     service_token = "wrong service token";
     int result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
     ASSERT_FALSE(result);
@@ -78,7 +77,6 @@ TEST(Vendor, SendGrid) {
     to_mail = "mail_not_match_pattern@food.";
     result = send_mail(from_mail, to_mail, subject, content, service_url, service_token);
     ASSERT_FALSE(result);
-
 
 }
 
