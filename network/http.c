@@ -1,31 +1,35 @@
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include "../general.h"
 #include "../string.h"
 #include "../network.h"
-
-/**
- *
- * @param url
- * @return 1 if url is HTTPS, 2 if HTTP, else 0
- */
-int is_url(char *url) {
-
-    if (url == NULL || length_pointer_char(url) == 0) {
-        return NOT_URL;
-    }
-
-    if (string_startswith(url, "https://") == 1) {
-        return IS_HTTPS;
-    }
-
-    if (string_startswith(url, "http://") == 1) {
-        return IS_HTTP;
-    }
-
-    return NOT_URL;
-}
+#include "../validator.h"
 
 /**
  * Retrieve url schema
@@ -35,13 +39,12 @@ int is_url(char *url) {
  */
 
 char *http_schema(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == NOT_URL) {
+    if (!is_url(url)) {
         return NULL;
     }
 
-    if (is_url_result == IS_HTTPS) {
+    if (string_startswith(url, HTTPS)) {
         return HTTPS;
     }
 
@@ -56,9 +59,8 @@ char *http_schema(char *url) {
  */
 
 char *http_hostname(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    if (is_url(url) == 0) {
         return NULL;
     }
 
@@ -66,14 +68,13 @@ char *http_hostname(char *url) {
 		return LOCALHOST;
 	}
 
-
     int length_url = length_pointer_char(url);
     int begin_position = string_index(url, "://", 1) + 3;
     int end_position = length_url;
 
     // Find end position to cut, if meet ':', '?' or '/'
-    int index = begin_position;
-    for (; index < length_url; index++) {
+    register int index;
+    for (index = begin_position; index < length_url; index++) {
         if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
             end_position = index;
             break;
@@ -91,9 +92,10 @@ char *http_hostname(char *url) {
  * @return int
  */
 int http_port(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    char* schema = http_schema(url);
+
+    if (schema == NULL) {
         return -1;
     }
 
@@ -109,7 +111,7 @@ int http_port(char *url) {
     char* port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
     int port = string_to_int(port_string);
     if (port == 0) {
-        if (is_url_result == IS_HTTPS)
+        if (schema == HTTPS)
             return HTTPS_PORT;
         return HTTP_PORT;
     }
@@ -124,9 +126,8 @@ int http_port(char *url) {
  * @return string
  */
 char *http_query(char *url) {
-    int is_url_result = is_url(url);
 
-    if (is_url_result == 0) {
+    if (!is_url(url)) {
         return NULL;
     }
 
@@ -205,10 +206,9 @@ char *http_request(char *method, char *url, char **headers, char **body) {
                         "%s";
     char *header_content = string_join(headers, "\r\n");
     char *body_string = string_join(body, "&");
-
     if (!is_get_method) {
-        int bodySize = length_pointer_char(body_string);
-        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", bodySize);
+        int body_size = length_pointer_char(body_string);
+        asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0?"\r\n":"", body_size);
     }
 
     char *request;

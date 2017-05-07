@@ -1,4 +1,29 @@
-#pragma once
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #ifndef BUILTIN_STRING_H
 #define BUILTIN_STRING_H
 
@@ -25,6 +50,7 @@ int    string_startswith(char *target, const char *prefix);
 int    string_endswith(char *target, const char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+char  *string_concat_asm(char *target, char *subtarget);
 
 char *string_from_to(char *target, int from, int to);
 char *string_from(char *target, int from);
@@ -37,6 +63,9 @@ char *string_standardized(char *target);
 
 char *url_encode(char *target);
 char *url_decode(char *target);
+
+char *find_param(char *name, char *params);
+char *find_param_from_url(char *name, char *url);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

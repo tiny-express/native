@@ -1,7 +1,33 @@
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_String, FromShort) {
+TEST(String, ConvertFromShort) {
     int number = 123;
     char *expect="123";
     char *result= string_from_short(number);
@@ -13,7 +39,7 @@ TEST(Builtin_String, FromShort) {
     ASSERT_STR(expect2, result2);
 }
 
-TEST(Builtin_String, FromInt) {
+TEST(String, ConvertFromInt) {
     int input = 0;
     char *expect = "0";
     char *result=string_from_int(input);
@@ -40,7 +66,7 @@ TEST(Builtin_String, FromInt) {
     ASSERT_STR(expect4,result4);
 }
 
-TEST(Builtin_String, FromLong) {
+TEST(String, ConvertFromLong) {
     long input = 2147483647;
     char *expect="2147483647";
     char *result=string_from_long(input);
@@ -52,7 +78,7 @@ TEST(Builtin_String, FromLong) {
     ASSERT_STR(expect1,result1);
 }
 
-TEST(Builtin_String, FromFloat) {
+TEST(String, ConvertFromFloat) {
     float input = 12.56;
     char *expect="12.56";
     char *result=string_from_float(input);
@@ -64,7 +90,7 @@ TEST(Builtin_String, FromFloat) {
     ASSERT_STR(expect1,result1);
 }
 
-TEST(Builtin_String, FromDouble) {
+TEST(String, ConvertFromDouble) {
     double input = 125.569123;
     char *expect = "125.569123";
     char *result = string_from_double(input);
@@ -76,7 +102,7 @@ TEST(Builtin_String, FromDouble) {
     ASSERT_STR(expect1, result1);
 }
 
-TEST(Builtin_String, ToShort) {
+TEST(String, ConvertToShort) {
     ASSERT_EQUAL(0, string_to_short(NULL));
 
     char *input = "123";
@@ -88,7 +114,7 @@ TEST(Builtin_String, ToShort) {
     ASSERT_EQUAL(-123, result1);
 }
 
-TEST(Builtin_String, ToInt) {
+TEST(String, ConvertToInt) {
     char *input = "123\0";
     int result = string_to_int(input);
     ASSERT_EQUAL(123, result);
@@ -122,7 +148,7 @@ TEST(Builtin_String, ToInt) {
     ASSERT_EQUAL(0, result7);
 }
 
-TEST(Builtin_String, ToLong) {
+TEST(String, ConvertToLong) {
     char *input = "21474836";
     long result = string_to_long(input);
     ASSERT_EQUAL(21474836, result);
@@ -132,7 +158,7 @@ TEST(Builtin_String, ToLong) {
     ASSERT_EQUAL(-21474836, result1);
 }
 
-TEST(Builtin_String, ToFloat) {
+TEST(String, ConvertToFloat) {
     char *input = "12.56";
     float result = string_to_float(input);
     ASSERT_EQUAL(12.56, result);
@@ -142,7 +168,7 @@ TEST(Builtin_String, ToFloat) {
     ASSERT_EQUAL(-1.56799, result1);
 }
 
-TEST(Builtin_String, ToDouble) {
+TEST(String, ConvertToDouble) {
     char *input = "125.569123";
     double result = string_to_double(input);
     ASSERT_EQUAL(125.569123, result);

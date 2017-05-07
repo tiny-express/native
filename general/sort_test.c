@@ -24,50 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../vendor.h"
-#include "../network.h"
-#include "../string.h"
 #include "../builtin.h"
+#include "../unit_test.h"
 
-#define RESPONSE_SUCCESS "202 Accepted"
-
-#define BODY_FORMAT \
-                "{\"personalizations\":"\
-                     "[{\"to\": [{\"email\": \"%s\"}],"\
-                     "\"subject\": \"%s\"}],"\
-                "\"from\":"\
-                     "{\"email\": \"%s\"},"\
-                "\"content\":"\
-                     "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
-
-int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token) {
-    if (!is_email(from_email)
-        || !is_email(to_email)
-        || !is_url(service_url)
-        || NULL == subject
-        || NULL == content
-        || NULL == service_token
-        || strcmp(subject, "") == 0
-        || strcmp(content, "") == 0
-        || strcmp(service_token, "") == 0) {
-        return 0;
-    }
-
-    char *body[2];
-    asprintf(&body[0], BODY_FORMAT, to_email, subject, from_email, content);
-    body[1] = '\0';
-
-    char *header[3] = {
-            string_concat("Authorization: Bearer ", service_token),
-            "Content-Type: application/json",
-            '\0'
-    };
-
-    char *response = http_request("POST", service_url, header, body);
-
-    if (strstr(response, RESPONSE_SUCCESS) == NULL) {
-        return 0;
-    }
-
-    return 1;
+TEST(General, DistributionCountingSort) {
+    ASSERT_EQUAL(1, 1);
 }
