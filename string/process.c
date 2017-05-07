@@ -338,9 +338,9 @@ char *string_standardized(char *target) {
         return NULL;
     }
 
-	char *target2 = string_replace(target,"  "," ");
-	char **target3 = string_split(target2," ");
-	char *result = string_join(target3," ");
+	char *target_replaced = string_replace(target,"  "," ");
+	char **target_splitted = string_split(target_replaced," ");
+	char *result = string_join(target_splitted," ");
 	result[strlen(result) - 1] = '\0';
 	return result;
 }
