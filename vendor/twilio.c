@@ -63,12 +63,12 @@ int send_sms(
     }
 
     // Check service url format
-    if (is_url(service_url)) {
+    if (!is_url(service_url)) {
         return FALSE;
     }
 
     // Check phone number
-    if (!(is_phone_number(phone_number_from) && is_phone_number(phone_number_to))) {
+    if (!is_phone_number(phone_number_from) || !is_phone_number(phone_number_to)) {
         return FALSE;
     }
 

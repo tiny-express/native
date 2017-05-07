@@ -28,7 +28,7 @@
 #define NATIVE_VALIDATOR_H
 
 #define EMAIL_PATTERN "^[a-zA-Z0-9](([.]{1}|[_]{1})?[a-zA-Z0-9])*[@]([a-z0-9]+([.]{1}|-)?)*[a-zA-Z0-9]+[.]{1}[a-z]{2,253}$"
-#define URL_PATTERN   "^http(s)?:\/\/([a-z0-9]+([\-\.]{1}[a-z0-9]+)*[\.]{1}([a-z]{2,5}|[1-9]{1,3})|localhost)(:[0-9]{1,5})?(\/.*)?([a-z0-9]*)*"
+#define URL_PATTERN   "^http(s)?:\/\/([a-z0-9]+([\-\.]{1}[a-z0-9]+)*[\.]{1}([a-z]{2,5}|[1-9]{1,3})|localhost)(:[0-9]{1,5})?(\/.*)?([?]{1}[a-z0-9]*)*"
 #define PHONE_PATTERN "^[+]{0,1}[1-9]{1,2}([0-9]){5,13}"
 
 int is_email(char *email);
