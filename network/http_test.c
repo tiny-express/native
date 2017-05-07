@@ -94,7 +94,7 @@ TEST(Network, HttpPort) {
     result = http_port("1");
     ASSERT_EQUAL(-1, result);
 
-    result = http_port("https://foodtiny.com\n");
+    result = http_port("https://foodtiny.com");
     ASSERT_EQUAL(443, result);
 }
 
