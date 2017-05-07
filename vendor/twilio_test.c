@@ -27,37 +27,68 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-char* account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
-char* from = "15005550006";
-char* account_token = "87c76ffe015078c17e7080d19af46cae";
-char* url = "https://api.twilio.com/2010-04-01/Accounts/AC85ddd85dbdd4f002c799676b7ad28914/Messages.json";
+TEST(Vendor, TwilioCheckNULL) {
+    // Initialize all parameters are NULL
+    char *account_id = NULL;
+    char *account_token = NULL;
+    char *service_url = NULL;
+    char *phone_number_from = NULL;
+    char *phone_number_to = NULL;
+    char *sms_content = NULL;
 
-TEST(Vendor, Twilio) {
-    char* to = "84909015425";
-    char* content = "HelloSms";
-    ASSERT_TRUE(send_sms(account_id, account_token, url, from, to, content));
+    // Fail because account_id is NULL
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = "84909015425";
-    content = "Hello Sms";
-    ASSERT_TRUE(send_sms(account_id, account_token, url, from, to, content));
+    // Re-assign account_id with valid string but fail because account_token is NULL
+    account_id = "sample";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = "84 909 015 425";
-    content = "Hello Sms";
-    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+    // Re-assign account_token with valid string but fail because service_url is NULL
+    account_token = "sample";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = "84909015425";
-    content = "Hello Sms";
-    ASSERT_TRUE(send_sms(account_id, account_token, url, from, to, content));
+    // Re-assign service_url with valid string but fail because phone_number_from is NULL
+    service_url = "sample";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = "04909015425";
-    content = "";
-    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+    // Re-assign phone_number_from with valid string but fail because phone_number_to is NULL
+    phone_number_from = "sample";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = NULL;
-    content = "";
-    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+    // Re-assign phone_number_to with valid string but fail because sms_content is NULL
+    phone_number_to = "sample";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
-    to = "04909015425";
-    content = NULL;
-    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+    // All things are correct at the end
+}
+
+TEST(Vendor, TwilioSendSMS) {
+
+    // Initialize all variable with valid information
+    char* account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
+    char* account_token = "87c76ffe015078c17e7080d19af46cae";
+    char* service_url = "https://api.twilio.com/2010-04-01/Accounts/AC85ddd85dbdd4f002c799676b7ad28914/Messages.json";
+    char* phone_number_from = "15005550006";
+    char* phone_number_to = "84909015425";
+    char* sms_content = "HelloSms";
+
+    // Test fail cases
+    char *invalid_url = "asdasdkasdkasd";
+    ASSERT_FALSE(send_sms(account_id, account_token, invalid_url, phone_number_from, phone_number_to, sms_content));
+
+    char *invalid_from_phone_number = "111111111111";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, invalid_from_phone_number, phone_number_to, sms_content));
+
+    char *invalid_to_phone_number = "84 909 015 425";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, invalid_to_phone_number, sms_content));
+
+    char *invalid_sms_content = "";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, invalid_sms_content));
+
+    // Test success cases
+    ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
+
+    phone_number_to = "84909015425";
+    sms_content = "Hello Sms";
+    ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 }

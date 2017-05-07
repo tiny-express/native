@@ -43,4 +43,5 @@ int length_float(float target);
 
 char *segment_pointer_char(char *target, int from, int to);
 char **segment_pointer_pointer_char(char **target, int from, int to);
+
 #endif
