@@ -73,8 +73,7 @@ char *http_hostname(char *url) {
     int end_position = length_url;
 
     // Find end position to cut, if meet ':', '?' or '/'
-    register int index;
-    for (index = begin_position; index < length_url; index++) {
+    for (int index = begin_position; index < length_url; index++) {
         if (url[index] == ':' || url[index] == '/' || url[index] == '?') {
             end_position = index;
             break;
@@ -82,6 +81,7 @@ char *http_hostname(char *url) {
     }
 
     char *result = string_from_to(url, begin_position, end_position - 1);
+	result[end_position - begin_position] = '\0';
     return result;
 }
 
@@ -192,7 +192,7 @@ char *http_request(char *method, char *url, char **headers, char **body) {
     // Parse URL
     int port = http_port(url);
     char *host = http_hostname(url);
-    asprintf(&host, "%s:%d", host, port);
+    asprintf(&host, "%s:%s", host, string_from_int(port));
     char *path = http_path(url);
     char *schema = http_schema(url);
     int is_https = strcmp(schema, HTTPS) ? 0 : 1;
