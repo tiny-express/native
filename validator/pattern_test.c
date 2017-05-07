@@ -217,9 +217,9 @@ TEST(Builtin_Validator, UrlPattern) {
     result = is_url(target);
     ASSERT_FALSE(result);
 
-    target = "https://foodtiny.com:1234586?file/adsfasdf/aa";
+    target = "https://foodtiny.com:1286?file/adsfasdf/aa";
     result = is_url(target);
-    ASSERT_FALSE(result);
+    ASSERT_TRUE(result);
 }
 
 
