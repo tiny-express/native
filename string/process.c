@@ -333,3 +333,15 @@ char *string_title(char *target) {
 }
 
 
+char *string_standardized(char *target) {
+	if (target == NULL) {
+        return NULL;
+    }
+
+	char *target_replaced = string_replace(target,"  "," ");
+	char **target_splitted = string_split(target_replaced," ");
+	char *result = string_join(target_splitted," ");
+	result[strlen(result) - 1] = '\0';
+	return result;
+}
+
