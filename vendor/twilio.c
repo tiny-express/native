@@ -46,11 +46,15 @@
  */
 int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content) {
 
+    if (account_id == NULL || account_token == NULL) {
+        return FALSE;
+    }
+
     if (content == NULL || length_pointer_char(content) == 0) {
         return FALSE;
     }
 
-    if (!(is_phone_number(to) && is_phone_number(from))) {
+    if (!(is_phone_number(to) && is_phone_number(from) && is_url(url))) {
         return FALSE;
     }
 
