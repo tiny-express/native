@@ -27,7 +27,7 @@
 #include "../validator.h"
 #include "../unit_test.h"
 
-TEST(Validator, EmailPattern) {
+TEST(Validator, IsEmail) {
     char *target = "anh_khoa.1@gmail.com";
     int result = is_email(target);
     ASSERT_TRUE(result);
@@ -90,7 +90,7 @@ TEST(Validator, EmailPattern) {
     ASSERT_TRUE(result);
 }
 
-TEST(Validator, PhonePattern) {
+TEST(Validator, IsPhoneNumber) {
     char *target = "0986216213";
     int result = is_phone_number(target);
     ASSERT_FALSE(result);
@@ -143,8 +143,8 @@ TEST(Validator, PhonePattern) {
     result = is_phone_number(target);
     ASSERT_TRUE(result);
 }
-
-TEST(Builtin_Validator, UrlPattern) {
+/*
+TEST(Validator, IsURL) {
     char *target = "https://goo-gle.com";
     int result = is_url(target);
     ASSERT_TRUE(result);
@@ -220,6 +220,15 @@ TEST(Builtin_Validator, UrlPattern) {
     target = "https://foodtiny.com:1234586?file/adsfasdf/aa";
     result = is_url(target);
     ASSERT_FALSE(result);
+}*/
+
+TEST(Validator, IsEmpty) {
+    char *target1 = NULL;
+    ASSERT_TRUE(is_empty(target1));
+
+    char *target2 = "";
+    ASSERT_TRUE(is_empty(target2));
+
+    char *target3 = "abcd";
+    ASSERT_FALSE(is_empty(target3));
 }
-
-

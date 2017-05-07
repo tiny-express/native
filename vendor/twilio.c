@@ -33,9 +33,9 @@
 
 #define STRING_NOT_FOUND -1
 
-
 /**
- * Send SMS by using Twilio's SMS Service
+ * Send SMS using Twillio Service
+ *
  * @param account_id
  * @param account_token
  * @param url
@@ -44,57 +44,81 @@
  * @param content
  * @return TRUE if success, else FALSE
  */
-int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content) {
+int send_sms(
+    char* account_id,
+    char* account_token,
+    char* service_url,
+    char* phone_number_from,
+    char* phone_number_to,
+    char* content) {
 
-    if (content == NULL || length_pointer_char(content) == 0) {
+    // Check empty string
+    if (is_empty(account_id)
+        || is_empty(account_token)
+            || is_empty(service_url)
+                || is_empty(phone_number_from)
+                    || is_empty(phone_number_to)
+                        || is_empty(content)) {
         return FALSE;
     }
 
-    if (!(is_phone_number(to) && is_phone_number(from))) {
+    // Check service url format
+    if (is_url(service_url)) {
+        return FALSE;
+    }
+
+    // Check phone number
+    if (!(is_phone_number(phone_number_from) && is_phone_number(phone_number_to))) {
         return FALSE;
     }
 
     // TODO: remove hard code and uncomment 3 commands below when base64_encode completed
     char* token = "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ==";
-//    char* token;
-//    asprintf(&token, "%s:%s", account_id, account_token);
-//    token =  base64_encode(token);
 
-    char *from_with_prefix = from;
-    if (string_index(from, "+", 1) == STRING_NOT_FOUND) {
-        from_with_prefix = string_concat("+", from);
+    /*
+    char* token;
+    asprintf(&token, "%s:%s", account_id, account_token);
+    token =  base64_encode(token);
+    */
+
+    char *phone_number_from_with_prefix = phone_number_from;
+    if (string_index(phone_number_from, "+", 1) == STRING_NOT_FOUND) {
+        phone_number_from_with_prefix = string_concat("+", phone_number_from);
     }
+    // Remove all space from phone number
+    phone_number_from_with_prefix = string_replace(phone_number_from_with_prefix, " ", "");
 
-    char *to_with_prefix = to;
-    if (string_index(to, "+", 1) == STRING_NOT_FOUND) {
-        to_with_prefix = string_concat("+", to);
+    char *phone_number_to_with_prefix = phone_number_to;
+    if (string_index(phone_number_to, "+", 1) == STRING_NOT_FOUND) {
+        phone_number_to_with_prefix = string_concat("+", phone_number_to);
     }
-
-    from_with_prefix = string_replace(from_with_prefix, " ", "");
-    to_with_prefix = string_replace(to_with_prefix, " ", "");
+    // Remove all space from phone number
+    phone_number_to_with_prefix = string_replace(phone_number_to_with_prefix, " ", "");
 
     char* body_string;
     asprintf(
-            &body_string,
-             "From=%s&To=%s&Body=%s",
-             url_encode(from_with_prefix),
-             url_encode(to_with_prefix),
-             url_encode(content)
+        &body_string,
+        "From=%s&To=%s&Body=%s",
+        url_encode(phone_number_from_with_prefix),
+        url_encode(phone_number_to_with_prefix),
+        url_encode(content)
     );
 
     char *body[3] = {
-            body_string,
-            '\0'
-    };
-    char *headers[3] = {
-            "Content-Type: application/x-www-form-urlencoded",
-            string_concat("Authorization: Basic ", token),
-            '\0'
+        body_string,
+        '\0'
     };
 
-    char *response = http_request("POST", url, headers, body);
+    char *headers[3] = {
+        "Content-Type: application/x-www-form-urlencoded",
+        string_concat("Authorization: Basic ", token),
+        '\0'
+    };
+
+    char *response = http_request("POST", service_url, headers, body);
     if (string_index(response, account_id, 1) != STRING_NOT_FOUND) {
         return TRUE;
     }
+
     return FALSE;
 }
