@@ -362,11 +362,17 @@ TEST(String, ProcessTitle) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, Standard) {
+TEST(String, Standard) {
     char *target = "  hello  world ";
     char *expect = "hello world";
     char *result = string_standardized(target);
     ASSERT_STR(expect, result);
+    
+    target = "     hello      world      world     ";
+    expect = "hello world world";
+    result = string_standardized(target);
+    ASSERT_STR(expect, result);
+
 }
 
 
