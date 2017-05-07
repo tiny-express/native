@@ -321,15 +321,12 @@ TEST(Builtin_String, Title) {
     ASSERT_STR(expect, result);
 }
 
-<<<<<<< HEAD
-
 TEST(Builtin_String, Standard) {
-    char *target = " hello   world ";
-    char *result = string_standardized(target);
+    char *target = "  hello  world ";
     char *expect = "hello world";
+    char *result = string_standardized(target);
     ASSERT_STR(expect, result);
 }
 
 
-=======
->>>>>>> a91108b6dd7d607f60d38ca2f04678a5f0c0ea58
+
