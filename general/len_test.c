@@ -1,7 +1,33 @@
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_Length, PointerChar) {
+TEST(General, LengthPointerChar) {
 	char* data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 
@@ -13,10 +39,10 @@ TEST(Builtin_Length, PointerChar) {
 
 	data = NULL;
 	ASSERT_EQUAL(0, length_pointer_char(data));
-
 }
 
-TEST(Builtin_Length, PointerPointerChar) {
+
+TEST(General, LengthPointerPointerChar) {
 	char *data_raw[] = {
 		(char*) "abc",
 		(char*) "abd",
@@ -40,35 +66,35 @@ TEST(Builtin_Length, PointerPointerChar) {
 	free(data2);
 }
 
-TEST(Builtin_Length, Short) {
+TEST(General, LengthShort) {
 	short input = 0;
 	ASSERT_EQUAL(1, length_short(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_short(input));
 }
 
-TEST(Builtin_Length, Int) {
+TEST(General, LengthInt) {
 	int input = 0;
 	ASSERT_EQUAL(1, length_int(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_int(input));
 }
 
-TEST(Builtin_Length, Long) {
+TEST(General, LengthLong) {
 	long input = 0;
 	ASSERT_EQUAL(1, length_long(input));
 	input = 123456;
 	ASSERT_EQUAL(6, length_long(input));
 }
 
-TEST(Builtin_Length, Double) {
+TEST(General, LengthDouble) {
 	double input = 0;
 	ASSERT_EQUAL(1, length_double(input));
 	input = 123.456;
 	ASSERT_EQUAL(7, length_double(input));
 }
 
-TEST(Builtin_Length, Float) {
+TEST(General, LengthFloat) {
 	float input = 1.23;
 	ASSERT_EQUAL(4, length_float(input));
 	input = 0.345;

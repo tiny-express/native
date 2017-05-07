@@ -34,6 +34,7 @@
 #include <ctype.h>
 #include <math.h>
 
+
 #define STARTING_CAPACITY         15
 #define ARRAY_MAX_CAPACITY    122880 /* 15*(2^13) */
 #define OBJECT_MAX_CAPACITY      960 /* 15*(2^6)  */

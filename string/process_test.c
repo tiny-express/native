@@ -1,7 +1,33 @@
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(Builtin_String, Replace) {
+TEST(String, ProcessReplace) {
     char *target = "Hello World";
     char *find = "World";
     char *replace_with = "Foodship";
@@ -15,7 +41,7 @@ TEST(Builtin_String, Replace) {
     ASSERT_STR(expect1, result1);
 }
 
-TEST(Builtin_String, Trim) {
+TEST(String, ProcessTrim) {
     char *expect = "Hello World";
     char *target = "  Hello World  ";
     char *result = string_trim(target);
@@ -34,7 +60,7 @@ TEST(Builtin_String, Trim) {
 //    ASSERT_STR(expect, result3);
 }
 
-TEST(Builtin_String, Join) {
+TEST(String, ProcessJoin) {
     char *target[] = {
             (char *) "The",
             (char *) "quick",
@@ -54,7 +80,7 @@ TEST(Builtin_String, Join) {
     ASSERT_STR(expect, string_join(target, delim));
 }
 
-TEST(Builtin_String, Split) {
+TEST(String, ProcessSplit) {
     char *target = "The|quick|brown|fox|jumps|over|the|lazy|dog";
     char *delim = "|";
     char **result = string_split(target, delim);
@@ -79,7 +105,7 @@ TEST(Builtin_String, Split) {
     ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", urlComponents[1]);
 }
 
-TEST(Builtin_String, StartsWith) {
+TEST(String, ProcessStartsWith) {
     char *target = "Hello World";
     char *prefix = "Hello";
     ASSERT_TRUE(string_startswith(target, prefix));
@@ -91,7 +117,7 @@ TEST(Builtin_String, StartsWith) {
     ASSERT_FALSE(string_startswith(target, prefix));
 }
 
-TEST(Builtin_String, EndsWith) {
+TEST(String, ProcessEndsWith) {
     char *target = "Hello World";
     char *suffix = "World";
     ASSERT_TRUE(string_endswith(target, suffix));
@@ -106,7 +132,7 @@ TEST(Builtin_String, EndsWith) {
     ASSERT_FALSE(string_endswith(target, suffix));
 }
 
-TEST(Builtin_String, IndexOf) {
+TEST(String, ProcessIndexOf) {
     char *target = "Hello World";
     char *subtarget = "World";
     int result = string_index(target, subtarget, 1);
@@ -176,7 +202,7 @@ TEST(Builtin_String, IndexOf) {
 
 }
 
-TEST(Builtin_String, Random) {
+TEST(String, ProcessRandom) {
     char *target = "ABCXYZ";
     int size = 4;
     char *result = string_random(target, size);
@@ -184,10 +210,9 @@ TEST(Builtin_String, Random) {
     ASSERT_EQUAL(4, length_pointer_char(result));
 }
 
-
-TEST(Builtin_String, Concat) {
-    char *target = "Hello";
-    char *subtarget = "World";
+TEST(String, ProcessConcat) {
+    char *target = "Hello\0";
+    char *subtarget = "World\0";
 
     char *result = string_concat(target, subtarget);
     ASSERT_STR("HelloWorld", result);
@@ -199,7 +224,23 @@ TEST(Builtin_String, Concat) {
     ASSERT_EQUAL(5, length_pointer_char(result));
 }
 
-TEST(Builtin_String, FromTo) {
+TEST(String, ProcessConcatAsm) {
+    return;
+    // TODO loint@foodtiny.com
+    char *target = "Hello\0";
+    char *subtarget = "World\0";
+
+    char *result = string_concat_asm(target, subtarget);
+    ASSERT_STR("HelloWorld", result);
+    ASSERT_EQUAL(10, length_pointer_char(result));
+
+    subtarget = "";
+    result = string_concat_asm(target, subtarget);
+    ASSERT_STR("Hello", result);
+    ASSERT_EQUAL(5, length_pointer_char(result));
+}
+
+TEST(String, ProcessFromTo) {
     char *target = "Hello World";
     int from = 6;
     int to = 11;
@@ -226,7 +267,7 @@ TEST(Builtin_String, FromTo) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, From) {
+TEST(String, ProcessFrom) {
     char *target = "Hello World";
     int from = 6;
     char *result = string_from(target, from);
@@ -244,7 +285,7 @@ TEST(Builtin_String, From) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, To) {
+TEST(String, ProcessTo) {
     char *target = "Hello World";
     int to = 4;
     char *result = string_to(target, to);
@@ -262,7 +303,7 @@ TEST(Builtin_String, To) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, Copy) {
+TEST(String, ProcessCopy) {
     char *target = "Hello World";
     char *result = string_copy(target);
     ASSERT_STR(target, result);
@@ -272,7 +313,7 @@ TEST(Builtin_String, Copy) {
     ASSERT_STR(target, result);
 }
 
-TEST(Builtin_String, Upper) {
+TEST(String, ProcessUpper) {
     char *target = "Hello World";
     char *result = string_upper(target);
     char *expect = "HELLO WORLD";
@@ -288,7 +329,7 @@ TEST(Builtin_String, Upper) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, Lower) {
+TEST(String, ProcessLower) {
     char *target = "HELLO WORLD";
     char *result = string_lower(target);
     char *expect = "hello world";
@@ -304,7 +345,7 @@ TEST(Builtin_String, Lower) {
     ASSERT_STR(expect, result);
 }
 
-TEST(Builtin_String, Title) {
+TEST(String, ProcessTitle) {
     char *target = "hello world";
     char *result = string_title(target);
     char *expect = "Hello World";

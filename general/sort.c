@@ -24,50 +24,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../vendor.h"
-#include "../network.h"
-#include "../string.h"
-#include "../builtin.h"
+// Distribution Counting Sort
 
-#define RESPONSE_SUCCESS "202 Accepted"
+// Quick Sort
 
-#define BODY_FORMAT \
-                "{\"personalizations\":"\
-                     "[{\"to\": [{\"email\": \"%s\"}],"\
-                     "\"subject\": \"%s\"}],"\
-                "\"from\":"\
-                     "{\"email\": \"%s\"},"\
-                "\"content\":"\
-                     "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
-
-int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token) {
-    if (!is_email(from_email)
-        || !is_email(to_email)
-        || !is_url(service_url)
-        || NULL == subject
-        || NULL == content
-        || NULL == service_token
-        || strcmp(subject, "") == 0
-        || strcmp(content, "") == 0
-        || strcmp(service_token, "") == 0) {
-        return 0;
+void quick_sort(int *array, int left , int right) {
+    if (left >= right) {
+        return;
     }
 
-    char *body[2];
-    asprintf(&body[0], BODY_FORMAT, to_email, subject, from_email, content);
-    body[1] = '\0';
+    int array_mid_value = array[(left + right) / 2];
 
-    char *header[3] = {
-            string_concat("Authorization: Bearer ", service_token),
-            "Content-Type: application/json",
-            '\0'
-    };
+    int left_index = left;
+    int right_index = right;
 
-    char *response = http_request("POST", service_url, header, body);
+    while (left_index < right_index) {
+        while (array[right_index] >= array_mid_value) {
+            right_index--;
+        }
 
-    if (strstr(response, RESPONSE_SUCCESS) == NULL) {
-        return 0;
+        while (array[left_index] <= array_mid_value) {
+            left_index++;
+        }
+        
     }
-
-    return 1;
 }
