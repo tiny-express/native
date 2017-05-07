@@ -79,7 +79,7 @@ TEST(Vendor, TwilioSendSMS) {
     char *invalidFromPhoneNumber = "111111111111";
     ASSERT_FALSE(send_sms(account_id, account_token, service_url, invalidFromPhoneNumber, phone_number_to, sms_content));
 
-    char *invalidToPhoneNumber = "111111111111";
+    char *invalidToPhoneNumber = "84 909 015 425";
     ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, invalidToPhoneNumber, sms_content));
 
     char *invalidSMSContent = "";
@@ -91,10 +91,6 @@ TEST(Vendor, TwilioSendSMS) {
     phone_number_to = "84909015425";
     sms_content = "Hello Sms";
     ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
-
-    phone_number_to = "84 909 015 425";
-    sms_content = "Hello Sms";
-    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 
     phone_number_to = "84909015425";
     sms_content = "Hello Sms";
