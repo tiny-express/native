@@ -73,17 +73,17 @@ TEST(Vendor, TwilioSendSMS) {
     char* sms_content = "HelloSms";
 
     // Test fail cases
-    char *invalidURL = "asdasdkasdkasd";
-    ASSERT_FALSE(send_sms(account_id, account_token, invalidURL, phone_number_from, phone_number_to, sms_content));
+    char *invalid_url = "asdasdkasdkasd";
+    ASSERT_FALSE(send_sms(account_id, account_token, invalid_url, phone_number_from, phone_number_to, sms_content));
 
-    char *invalidFromPhoneNumber = "111111111111";
-    ASSERT_FALSE(send_sms(account_id, account_token, service_url, invalidFromPhoneNumber, phone_number_to, sms_content));
+    char *invalid_from_phone_number = "111111111111";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, invalid_from_phone_number, phone_number_to, sms_content));
 
-    char *invalidToPhoneNumber = "84 909 015 425";
-    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, invalidToPhoneNumber, sms_content));
+    char *invalid_to_phone_number = "84 909 015 425";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, invalid_to_phone_number, sms_content));
 
-    char *invalidSMSContent = "";
-    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, invalidSMSContent));
+    char *invalid_sms_content = "";
+    ASSERT_FALSE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, invalid_sms_content));
 
     // Test success cases
     ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
