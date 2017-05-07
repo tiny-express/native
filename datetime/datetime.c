@@ -29,6 +29,13 @@
 #include "../datetime.h"
 #include "../string.h"
 
+/**
+ * Format timestamp to date
+ *
+ * @param timestamp
+ * @param format
+ * @return
+ */
 char *date(long timestamp, char *format) {
     char *date_format = string_replace(format, "D", "%d");
     date_format = string_replace(date_format, "d", "%d");
@@ -43,6 +50,12 @@ char *date(long timestamp, char *format) {
     return result;
 }
 
+/**
+ * Return timestamp from 1970
+ * Apple and Linux have difference way to retrieve timestamp
+ *
+ * @return long
+ */
 long timestamp() {
     #ifdef __APPLE__
         double timebase = 0.0;
