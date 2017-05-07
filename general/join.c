@@ -31,6 +31,13 @@
 
 #define MAX_SIZE 100000
 
+/**
+ * Join pointer pointer char
+ * Concatenating all elements in target array into single string
+ *
+ * @param target
+ * @return char pointer
+ */
 inline char *join_pointer_pointer_char(char **target)
 {
 	register char **pointer;
@@ -49,6 +56,13 @@ inline char *join_pointer_pointer_char(char **target)
 	return result;
 }
 
+/**
+ * Join delimiter pointer pointer char
+ * Concatenating all elements in target array into single string with delimiter
+ *
+ * @param target
+ * @return char pointer
+ */
 inline char *join_delim_pointer_pointer_char(char **target, const char *delim)
 {
 	register char **pointer;
