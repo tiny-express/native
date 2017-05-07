@@ -27,15 +27,20 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-TEST(Vendor, SendGrid) {
+char *from_mail = "sample_mail@sample.com";
+char *to_mail = "test@gmail.com";
+char *subject = "Sample";
+char *content = "hello world";
+char *service_url   = "https://api.sendgrid.com/v3/mail/send";
+char *service_token = "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";
 
-    char *from_mail = "sample_mail@sample.com";
-    char *to_mail = "test@gmail.com";
-    char *subject = "Sample";
-    char *content = "hello world";
-    char *service_url   = "https://api.sendgrid.com/v3/mail/send";
-    char *service_token = "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";
+TEST(Vendor, SendGridCheckProcess) {
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
 
+    ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
+}
+
+TEST(Vendor, SendGridCheckNULLFields) {
     ASSERT_EQUAL(0, send_mail(NULL, to_mail, subject, content, service_url, service_token));
 
     ASSERT_EQUAL(0, send_mail(from_mail, NULL, subject, content, service_url, service_token));
@@ -47,7 +52,9 @@ TEST(Vendor, SendGrid) {
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, NULL, service_token));
 
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, NULL));
+}
 
+TEST(Vendor, SendGridCheckEmptyFields) {
     ASSERT_EQUAL(0, send_mail("", to_mail, subject, content, service_url, service_token));
 
     ASSERT_EQUAL(0, send_mail(from_mail, "", subject, content, service_url, service_token));
@@ -59,15 +66,12 @@ TEST(Vendor, SendGrid) {
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "", service_token));
 
     ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, ""));
-
-    ASSERT_EQUAL(0, send_mail("wrong_mail", to_mail, subject, content, service_url, service_token));
-
-    ASSERT_EQUAL(0, send_mail(from_mail, "wrong_mail", subject, content, "", service_token));
-
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "wrong_url", service_token));
-
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
-
-    ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
 }
 
+TEST(Vendor, SendGridCheckWrongFormat) {
+    ASSERT_EQUAL(0, send_mail("wrong_mail_format", to_mail, subject, content, service_url, service_token));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, "wrong_mail_format", subject, content, "", service_token));
+
+    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "wrong_url_format", service_token));
+}
