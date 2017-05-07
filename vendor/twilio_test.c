@@ -91,8 +91,4 @@ TEST(Vendor, TwilioSendSMS) {
     phone_number_to = "84909015425";
     sms_content = "Hello Sms";
     ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
-
-    phone_number_to = "84909015425";
-    sms_content = "Hello Sms";
-    ASSERT_TRUE(send_sms(account_id, account_token, service_url, phone_number_from, phone_number_to, sms_content));
 }
