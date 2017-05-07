@@ -60,4 +60,31 @@ TEST(Vendor, Twilio) {
     to = "04909015425";
     content = NULL;
     ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    to = "04909015425";
+    content = "Say hello";
+    account_id = "";
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    account_id = NULL;
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    to = "04909015425";
+    content = "Say hello";
+    account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
+    account_token = NULL;
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    account_token = "";
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    to = "04909015425";
+    content = "Say hello";
+    account_id = "AC85ddd85dbdd4f002c799676b7ad28914";
+    account_token = "87c76ffe015078c17e7080d19af46cae";
+    url = NULL;
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
+
+    url = "";
+    ASSERT_FALSE(send_sms(account_id, account_token, url, from, to, content));
 }
