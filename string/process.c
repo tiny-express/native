@@ -308,27 +308,14 @@ char *string_title(char *target) {
 
 
 char *string_standardized(char *target) {
-	while(target[0] = ' ')
-	{
-		target = string_copy(&target[1]);
-	}
-	int endposition = strlen(target);
-	while(target[endposition] = ' ')
-	{
-		target[endposition - 1]  = string_copy(&target[endposition]);
-		endposition--;
-	}
-	register int i = 0;
-	while(i < endposition)
-	{
-		if(target[i] = ' ' && target[i] == target[i+1])
-		{
-			target = string_copy(&target[i+1]);
-			i--;
-		}
-	}
-	return target;
-} 
-=======
->>>>>>> a91108b6dd7d607f60d38ca2f04678a5f0c0ea58
+	if (target == NULL) {
+        return NULL;
+    }
+
+	char *target2 = string_replace(target,"  "," ");
+	char **target3 = string_split(target2," ");
+	char *result = string_join(target3," ");
+	result[strlen(result) - 1] = '\0';
+	return result;
+}
 
