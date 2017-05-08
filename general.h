@@ -43,5 +43,7 @@ int length_float(float target);
 
 char *segment_pointer_char(char *target, int from, int to);
 char **segment_pointer_pointer_char(char **target, int from, int to);
+int linear_search(int a[], int n, int x);
+int binary_search(int a[], int n, int x);
 
 #endif

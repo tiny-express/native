@@ -26,7 +26,80 @@
 
 #include "../builtin.h"
 #include "../unit_test.h"
+#include "../general.h"
 
-TEST(General, LinearSearch) {
-    ASSERT_EQUAL(1, 1);
+
+TEST(General, binary_search) {
+    int array[] = {2 ,3, 4, 7, 8, 10};
+    int length = 6;
+    int x = 7;
+    int result = binary_search(array, length, x);
+    ASSERT_EQUAL(3, result);
+
+      length = -1;
+      x = -5;
+      result = binary_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+    length = 6;
+    x = 2;
+    result = binary_search(array, length, x);
+    ASSERT_EQUAL(0, result);
+
+    length = 6;
+    x = 10;
+    result = binary_search(array, length, x);
+    ASSERT_EQUAL(5, result);
+
+    length = 6;
+    x = 9;
+    result = binary_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+    length = -1;
+    x = 10;
+    result = binary_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+    length = 10;
+    x = 200;
+    result = binary_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
 }
+
+
+TEST(General, linear_search) {
+    int array[] = {2 ,3, 4, 7, 8, 10};
+    int length = 6;
+    int x = 7;
+    int result = linear_search(array, length, x);
+    ASSERT_EQUAL(3, result);
+
+    length = -1;
+    x = 5;
+    result = linear_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+
+    length = 6;
+    x = 2;
+    result = linear_search(array, length, x);
+    ASSERT_EQUAL(0, result);
+
+    length = 6;
+    x = 10;
+    result = linear_search(array, length, x);
+    ASSERT_EQUAL(5, result);
+
+    length = 6;
+    x = -9;
+    result = linear_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+    length = -1;
+    x = -10;
+    result = linear_search(array, length, x);
+    ASSERT_EQUAL(-1, result);
+
+}
+

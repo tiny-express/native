@@ -26,4 +26,35 @@
 
 // Linear Search
 
+#define NOT_FOUND -1
+
+int linear_search(int a[], int n, int x) {
+    register int index;
+    for(index = 0; index < n; index++) {
+        if(a[index] == x) {
+            return index;
+        }
+    }
+    return NOT_FOUND;
+}
+
+
 // Binary Search
+int binary_search(int a[], int n, int x) {
+    int index;
+    int left, right;
+    left = 0;
+    right = n;
+    while(left <= right) {
+        index = (left + right )/2;
+        if(x==a[index]) {
+            return index;
+        }
+        if(x<a[index]) {
+            right = index - 1;
+        } else {
+            left = index + 1;
+        }
+    }
+    return NOT_FOUND;
+}
