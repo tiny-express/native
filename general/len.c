@@ -28,7 +28,6 @@
 #include "../general.h"
 #include "../type.h"
 
-// Length of pointer
 #define P_LEN(TYPE); \
 inline int length_pointer_##TYPE(TYPE *target) {\
     if (target == NULL) return 0;\
