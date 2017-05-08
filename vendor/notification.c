@@ -24,6 +24,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// TODO
-// Apple Push Notification
-// Google Push Notification
+#include <stdio.h>
+#include "../string.h"
+#include "../network.h"
+#include "../builtin.h"
+
+#define JSON_FORMAT \
+                "{\"to\":\"%s\","\
+                    "\"notification\":{" \
+                        "\"title\":\"%s\"," \
+                        "\"body\":\"%s\"" \
+                    "},\"priority\":10}"
+#define SUCCESS "success"
+#define SUCCESS_CHARACTER '1'
+
+int send_notification(char *service_url,
+                      char* service_token,
+                      char* device_token,
+                      char* title,
+                      char* body) {
+
+    if (!is_url(service_url)
+            || is_empty(service_token)
+            || is_empty(device_token)
+            || is_empty(title)
+            || is_empty(body)) {
+        return FALSE;
+    }
+
+    char *request_body[2];
+    asprintf(&request_body[0], JSON_FORMAT, device_token, title, body);
+    request_body[1] = '\0';
+
+    char *request_header[3] = {
+            string_concat("Authorization: key=", service_token),
+            "Content-Type: application/json",
+            '\0'
+    };
+    char* response = http_request("POST", service_url, request_header, request_body);
+    if (is_empty(response)) {
+        return FALSE;
+    }
+
+    int success_index = string_index(response, SUCCESS, 1) + length_pointer_char(SUCCESS) + 2;
+    if (response[success_index] == SUCCESS_CHARACTER) {
+        return TRUE;
+    }
+    return FALSE;
+}
