@@ -46,10 +46,10 @@ char **segment_pointer_pointer_char(char **target, int from, int to);
 int linear_search(int array[], int lenght, int key);
 int binary_search(int array[], int lenght, int key);
 
-void quick_sort_int(int *array, int begin_array, int end_array);
-void quick_sort_float(float *array, int begin_array, int end_array);
-void quick_sort_double(double *array, int begin_array, int end_array);
-void quick_sort_long(long *array, int begin_array, int end_array);
+void sort_int(int *array, int begin_array, int end_array);
+void sort_float(float *array, int begin_array, int end_array);
+void sort_double(double *array, int begin_array, int end_array);
+void sort_long(long *array, int begin_array, int end_array);
 
 int is_increase_int_array(int *array, int length);
 int is_increase_float_array(float *array, int length);
