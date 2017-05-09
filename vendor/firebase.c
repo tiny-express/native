@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
@@ -79,7 +80,7 @@ int push_notification(
     };
 
     char* response = http_request("POST", service_url, request_header, request_body);
-
+    printf("response is : %s\n");
     if (is_empty(response)) {
         return FALSE;
     }
