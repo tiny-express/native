@@ -48,7 +48,7 @@ TEST(Vendor, TwilioCheckNULL) {
     char *to_phone_number = NULL;
     char *sms_content = NULL;
 
-    // Fail because account_id is NULL
+    // Fail because service_url is NULL
     service_url = "valid_string";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
