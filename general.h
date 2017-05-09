@@ -43,6 +43,8 @@ int length_float(float target);
 
 char *segment_pointer_char(char *target, int from, int to);
 char **segment_pointer_pointer_char(char **target, int from, int to);
+int linear_search(int array[], int lenght, int key);
+int binary_search(int array[], int lenght, int key);
 
 void quick_sort_int(int *array, int begin_array, int end_array);
 void quick_sort_float(float *array, int begin_array, int end_array);

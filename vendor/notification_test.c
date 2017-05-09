@@ -23,5 +23,57 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include "../unit_test.h"
+#include "../vendor.h"
 
-// TODO
+#define VALID_URL "https://fcm.googleapis.com/fcm/send"
+#define VALID_SERVICE_TOKEN "AAAARs12iRs:APA91bGcaUlACTb6VdvjeUNmeQ-I3Tsr14p8Q20-egTAFu3zq2juaRYyVDSNohBjRKutx4bqpoY8BM8BxolEILw6A1A-YfBecDCzhBIDoQTwwPNADOmhulj-8NTbRIobK28EwOfZnMQd"
+#define VALID_DEVICE_TOKEN "dqs-1BBsWEE:APA91bHs7ixQativdjcIJ_3DRNWceVH8fLIriF9shRFoauodG9VXpG4D86VzAmJakgcu7mrYaQmZEwvKC124uiRUABPaBv0zrjftI9CuhoOfxOKVPBR1qSHRtQmbynsECRv6I2Y_XLQ0"
+
+TEST(Vendor, Notification) {
+    char* service_url = VALID_URL;
+    char* service_token = VALID_SERVICE_TOKEN;
+    char* device_token = VALID_DEVICE_TOKEN;
+    char* title = "Hello";
+    char* body = "Test notification";
+    ASSERT_TRUE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = "";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = VALID_URL;
+    service_token = "";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = VALID_URL;
+    service_token = VALID_SERVICE_TOKEN;
+    device_token = "";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = VALID_URL;
+    service_token = VALID_SERVICE_TOKEN;
+    device_token = VALID_DEVICE_TOKEN;
+    title = "";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = "invalid_url";
+    service_token = VALID_SERVICE_TOKEN;
+    device_token = VALID_DEVICE_TOKEN;
+    title = "Hello";
+    body = "";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = VALID_URL;
+    service_token = "invalid_service_token";
+    device_token = VALID_DEVICE_TOKEN;
+    title = "Hello";
+    body = "Notification";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+
+    service_url = VALID_URL;
+    service_token = VALID_SERVICE_TOKEN;
+    device_token = "invalid_device_token";
+    title = "Hello";
+    body = "Notification";
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+}
