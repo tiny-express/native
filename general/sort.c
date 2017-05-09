@@ -24,37 +24,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
 #include "../general.h"
 #include "../type.h"
 
 #define SWAP(value1, value2, TYPE) { TYPE SWAP = value1; value1 = value2; value2 = SWAP; }
 
-
-// Distribution Counting Sort
-
-
-// Quick Sort
+/**
+ * Quick Sort
+ * Complexity O(M*log(N))
+ *
+ * @param array
+ * @param length
+ * @param key
+ * @return result
+ */
 #define QUICK_SORT(TYPE)\
-void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
-    int left = begin_array;\
-    int right = end_array;\
-    TYPE pivot = array[(begin_array + end_array) / 2];\
+void sort_##TYPE(TYPE *array, int left_position, int right_position) {\
+    int left = left_position;\
+    int right = right_position;\
+    TYPE pivot = array[(left + right) / 2];\
     while (left <= right) {\
-        while (array[left] < pivot)\
-            left++;\
-        while (array[right] > pivot)\
-            right--;\
+        while (array[left] < pivot)  left++;\
+        while (array[right] > pivot) right--;\
         if (left <= right) {\
             SWAP(array[left], array[right], TYPE);\
             left++;\
             right--;\
         }\
     }\
-    if (begin_array < right)\
-        quick_sort_##TYPE(array, begin_array, right);\
-    if (left < end_array)\
-        quick_sort_##TYPE(array, left, end_array);\
+    if (left_position < right) sort_##TYPE(array, left_position, right);\
+    if (left < right_position) sort_##TYPE(array, left, right_position);\
 }
 
 #define INCREASE(TYPE)\
@@ -76,15 +75,6 @@ int is_decrease_##TYPE##_array(TYPE *array, int length) {\
     }\
     return TRUE;\
 }
-
-//#define CREATE_ARRAY(TYPE);\
-//TYPE *create_array_##TYPE(int length) {\
-//    srand(time(NULL));\
-//    TYPE *array = malloc(length * sizeof(TYPE));\
-//    for (int index = 0; index < length; ++index) {\
-//        array[index] = \
-//    }\
-//}
 
 INCREASE(int);
 INCREASE(float);

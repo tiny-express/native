@@ -54,10 +54,6 @@ TEST(String, ProcessTrim) {
     char *target2 = "Hello World  ";
     char *result2 = string_trim(target2);
     ASSERT_STR(expect, result2);
-
-    char *target3 = "Hello   World";
-    char *result3 = string_trim(target3);
-    ASSERT_STR(expect, result3);
 }
 
 TEST(String, ProcessJoin) {
@@ -371,7 +367,6 @@ TEST(String, Standard) {
     expect = "hello world world";
     result = string_standardized(target);
     ASSERT_STR(expect, result);
-
 }
 
 
