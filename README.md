@@ -49,6 +49,6 @@ TEST(General, DistributionCountingSort) {
 SHOULD NOT
 ```c
 TEST(General, binary_search) {
-    // Never can be accepted
+    // Can not be accepted
 }
 ```
