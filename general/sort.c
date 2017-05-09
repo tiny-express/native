@@ -40,21 +40,17 @@ void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
     int left = begin_array;\
     int right = end_array;\
     TYPE pivot = array[(begin_array + end_array) / 2];\
-    \
     while (left <= right) {\
         while (array[left] < pivot)\
             left++;\
-    \
         while (array[right] > pivot)\
             right--;\
-    \
         if (left <= right) {\
             SWAP(array[left], array[right], TYPE);\
             left++;\
             right--;\
         }\
     }\
-    \
     if (begin_array < right)\
         quick_sort_##TYPE(array, begin_array, right);\
     if (left < end_array)\
@@ -62,8 +58,9 @@ void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
 }
 
 #define INCREASE(TYPE)\
-int is_increase_##TYPE##_array(TYPE *array, int length) {   \
-    for (int i = 0; i < length - 1; i++) {\
+int is_increase_##TYPE##_array(TYPE *array, int length) {\
+    register int i;\
+    for (i = 0; i < length - 1; i++) {\
         if (array[i] > array[i + 1])\
             return FALSE;\
     }\
@@ -71,8 +68,9 @@ int is_increase_##TYPE##_array(TYPE *array, int length) {   \
 }
 
 #define DECREASE(TYPE)\
-int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
-    for (int i = 0; i < length - 1; i++) {\
+int is_decrease_##TYPE##_array(TYPE *array, int length) {\
+    register int i;\
+    for (i = 0; i < length - 1; i++) {\
         if (array[i] < array[i + 1])\
         return FALSE;\
     }\
