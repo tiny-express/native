@@ -26,7 +26,23 @@
 
 #include "../builtin.h"
 #include "../unit_test.h"
+#include <time.h>
 
-TEST(General, DistributionCountingSort) {
-    ASSERT_EQUAL(1, 1);
+
+TEST(General, QuickSort) {
+    srand(time(NULL));
+
+    // INT
+    int *array_int = malloc(50 * sizeof(int));
+    for (int index = 0; index < 50; ++index) {
+        array_int[index] = rand();
+    }
+    quick_sort_int(array_int, 0, 49);
+    int result = is_increase_int_array(array_int, 50);
+    ASSERT_TRUE(result);
+    // FLOAT
+
+    // DOUBLE
+
+    //Long
 }

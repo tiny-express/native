@@ -20,7 +20,7 @@ This project is also useful for new developers in practical programming
 - String (converter, processor)
 - Threading (multiple threading, timer)
 - Validation (phone, email, url)
-- Data type (json)
+- Data TYPE (json)
 - Third Party Client (Twillio, SendGrid, Etcd, Elastic Search, Stripe, Apple/Google Push Notification)
 
 ### Roadmap
