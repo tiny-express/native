@@ -55,15 +55,19 @@ TEST(General, distribution_sort) {
 
 ##### SHOULD
 ```c
+int array_length = 10;
+// Put loop variable in register to optimize performance
 register int index = 0;
-for (index = 0; index < 10; index++) {
+for (index = 0; index < array_length; index++) {
     // doSomething()
 }
 ```
 
-##### SHOULD NOT (C99 mode does not allowed)
+##### SHOULD NOT
+- C99 mode does not allow declaring variable inside loop parameters
+- Do not use calculation in loop parameters
 ```c
-for (int index = 0; index < 10; index++) {
+for (int index = 0; index < length_pointer_char(array); index++) {
     // doSomething()
 }
 ```
