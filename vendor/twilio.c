@@ -30,8 +30,8 @@
 #include "../builtin.h"
 #include "../type.h"
 
-#define STRING_NOT_FOUND -1
-
+#define STRING_NOT_FOUND        -1
+#define TWILIO_RESPONSE_SUCCESS "201 CREATED"
 /**
  * Send mail via Twillio service
  *
@@ -116,9 +116,8 @@ int send_sms(
     };
 
     char *response = http_request("POST", service_url, headers, body);
-    if (string_index(response, account_id, 1) != STRING_NOT_FOUND) {
+    if (string_index(response, TWILIO_RESPONSE_SUCCESS, 1) != STRING_NOT_FOUND) {
         return TRUE;
     }
-
     return FALSE;
 }
