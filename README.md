@@ -22,7 +22,7 @@ This project is also useful for new developers in practical programming
 - Threading (multiple threading, timer)
 - Validation (phone, email, url)
 - Data Type (json)
-- Third Party (Twilio, SendGrid, Etcd, Elastic Search, Stripe, FireBase)
+- Third Party (Twilio, SendGrid, Etcd, ElasticSearch, Stripe, Firebase)
 
 ### Road map
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
