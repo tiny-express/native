@@ -56,16 +56,16 @@ void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
     }\
     \
     if (begin_array < right)\
-        quick_sort(array, begin_array, right);\
+        quick_sort_##TYPE(array, begin_array, right);\
     if (left < end_array)\
-        quick_sort(array, left, end_array);\
+        quick_sort_##TYPE(array, left, end_array);\
 }
 
 #define INCREASE(TYPE)\
 int is_increase_##TYPE##_array(TYPE *array, int length) {   \
     for (int i = 0; i < length - 1; i++) {\
-        if (array[i] <= array[i + 1])\
-        return FALSE;\
+        if (array[i] > array[i + 1])\
+            return FALSE;\
     }\
     return TRUE;\
 }
@@ -73,7 +73,7 @@ int is_increase_##TYPE##_array(TYPE *array, int length) {   \
 #define DECREASE(TYPE)\
 int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
     for (int i = 0; i < length - 1; i++) {\
-        if (array[i] >= array[i + 1])\
+        if (array[i] < array[i + 1])\
         return FALSE;\
     }\
     return TRUE;\
@@ -88,11 +88,6 @@ int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
 //    }\
 //}
 
-QUICK_SORT(int);
-QUICK_SORT(float);
-QUICK_SORT(long);
-QUICK_SORT(double);
-
 INCREASE(int);
 INCREASE(float);
 INCREASE(double);
@@ -102,3 +97,8 @@ DECREASE(int);
 DECREASE(float);
 DECREASE(double);
 DECREASE(long);
+
+QUICK_SORT(int);
+QUICK_SORT(float);
+QUICK_SORT(long);
+QUICK_SORT(double);
