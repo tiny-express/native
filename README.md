@@ -39,16 +39,16 @@ No need to enable ASM optimization for Apple MacOSX because only development.
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) here before starting your contribution
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Some rules for text cases :
+- Some rules for text cases
 
-SHOULD
+***SHOULD
 ```c
 TEST(General, DistributionCountingSort) {
     // Assert whatever you want
 }
 ```
 
-SHOULD NOT
+***SHOULD NOT
 ```c
 TEST(General, binary_search) {
     // Can not be accepted
