@@ -29,7 +29,7 @@
 #include "../general.h"
 
 
-TEST(General, binary_search) {
+TEST(General, BinarySearch) {
     int array[] = {2 ,3, 4, 7, 8, 10};
     int length = 6;
     int key = 7;
@@ -68,7 +68,7 @@ TEST(General, binary_search) {
 }
 
 
-TEST(General, linear_search) {
+TEST(General, LinearSearch) {
     int array[] = {2 ,3, 4, 7, 8, 10};
     int length = 6;
     int key = 7;
