@@ -29,16 +29,16 @@
 #include "../general.h"
 
 
-TEST(General, binary_search) {
+TEST(General, BinarySearch) {
     int array[] = {2 ,3, 4, 7, 8, 10};
     int length = 6;
     int key = 7;
     int result = binary_search(array, length, key);
     ASSERT_EQUAL(3, result);
 
-      length = -1;
-      key = -5;
-      result = binary_search(array, length, key);
+    length = -1;
+    key = -5;
+    result = binary_search(array, length, key);
     ASSERT_EQUAL(-1, result);
 
     length = 6;
@@ -68,7 +68,7 @@ TEST(General, binary_search) {
 }
 
 
-TEST(General, linear_search) {
+TEST(General, LinearSearch) {
     int array[] = {2 ,3, 4, 7, 8, 10};
     int length = 6;
     int key = 7;
@@ -79,7 +79,6 @@ TEST(General, linear_search) {
     key = 5;
     result = linear_search(array, length, key);
     ASSERT_EQUAL(-1, result);
-
 
     length = 6;
     key = 2;
