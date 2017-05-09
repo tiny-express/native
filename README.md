@@ -39,6 +39,22 @@ This project is also useful for new developers in practical programming
 - Data Race Detector with [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
 - Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
+### Get Started
+Installation
+```bash
+make && make install
+```
+Sample program with length_pointer_char
+```c
+#include <stdio.h>
+#include <native/general.h>
+int main() {
+    char *sample = "Hello World";
+    printf("Length of sample is %d\n", length_pointer_char(sample));
+    fflush(stdout);
+}
+```
+
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
