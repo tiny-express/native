@@ -24,56 +24,90 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
 #include "../string.h"
 #include "../network.h"
-#include "../builtin.h"
+#include "../validator.h"
+#include "../type.h"
+#include "../general.h"
 
-#define JSON_FORMAT \
+// TODO @dquang add notification data to format
+#define FIREBASE_REQUEST_FORMAT \
                 "{\"to\":\"%s\","\
                     "\"notification\":{" \
                         "\"title\":\"%s\"," \
                         "\"body\":\"%s\"" \
-                    "},\"priority\":10, \"data\":{\"%s\"}"
-#define SUCCESS "success"
-#define SUCCESS_CHARACTER '1'
+                    "},\"priority\":10}"
 
-int send_notification(char *service_url,
-                      char* service_token,
-                      char* device_token,
-                      char* title,
-                      char* body,
-                      char* data) {
+#define SUCCESS_LABEL "success"
+#define SUCCESS_VALUE 1
 
-    if (!is_url(service_url)
-            || is_empty(service_token)
+/**
+ * Push Notification via Google FireBase service
+ *
+ * @param service_url
+ * @param service_token
+ * @param device_token
+ * @param notification_title
+ * @param notification_body
+ * @return TRUE | FALSE
+ */
+int push_notification(
+    char *service_url,
+    char *service_token,
+    char *device_token,
+    char *notification_title,
+    char *notification_body,
+    char *notification_data) {
+
+    // NULL value or empty string can not be accepted
+    if (is_empty(service_token)
             || is_empty(device_token)
-            || is_empty(title)
-            || is_empty(body)) {
+                || is_empty(notification_title)
+                    || is_empty(notification_body)) {
         return FALSE;
     }
 
-    if (data == NULL) {
-        data = "";
+    // Check validation
+    if (!is_url(service_url)) {
+        return FALSE;
+    }
+
+    if (notification_data == NULL) {
+        notification_data = "";
     }
 
     char *request_body[2];
-    asprintf(&request_body[0], JSON_FORMAT, device_token, title, body, data);
+    asprintf(&request_body[0], FIREBASE_REQUEST_FORMAT, device_token, notification_title, notification_body, notification_data);
     request_body[1] = '\0';
 
     char *request_header[3] = {
-            string_concat("Authorization: key=", service_token),
-            "Content-Type: application/json",
-            '\0'
+        string_concat("Authorization: key=", service_token),
+        "Content-Type: application/json",
+        '\0'
     };
+
     char* response = http_request("POST", service_url, request_header, request_body);
+
     if (is_empty(response)) {
         return FALSE;
     }
 
-    int success_index = string_index(response, SUCCESS, 1) + length_pointer_char(SUCCESS) + 2;
-    if (response[success_index] == SUCCESS_CHARACTER) {
+    // Firebase reponse has format
+    // {"success": 1}
+    // So we need to parse this response to get the success value
+    response = string_from_to(
+            response,
+            string_index(response, "{", 1),
+            length_pointer_char(response) - 1
+    );
+    JSON_Value *root_value = json_parse_string(response);
+    JSON_Object *root_object = json_value_get_object(root_value);
+    int status_value = (int) json_object_get_number(root_object, SUCCESS_LABEL);
+    printf("%s\n", response);
+    printf("%d\n", status_value);
+    if (status_value == SUCCESS_VALUE) {
         return TRUE;
     }
+
     return FALSE;
 }
