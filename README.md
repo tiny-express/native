@@ -23,7 +23,7 @@ This project is also useful for new developers in practical programming
 - Data TYPE (json)
 - Third Party Client (Twillio, SendGrid, Etcd, Elastic Search, Stripe, Apple/Google Push Notification)
 
-### Roadmap
+### Road map
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS and Java
 - Optimize fundamental functions in GNU Assembly for performance but C version will be delivered first
 - Develop fundamental algorithms and advanced data structure
@@ -36,4 +36,21 @@ Note that GNU Assembly is ONLY work with Linux AMD64.
 No need to enable ASM optimization for Apple MacOSX because only development.
 
 ### Contributors
-Members in Food Tiny Team are authors of this projects.
+- Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) here before starting your contribution
+- Make sure that your commits must be passed before you create pull request
+- At least one contributor in this project reviews your commits (except you) before merging
+- Some rules for text cases
+
+***SHOULD
+```c
+TEST(General, DistributionCountingSort) {
+    // Assert whatever you want
+}
+```
+
+***SHOULD NOT
+```c
+TEST(General, binary_search) {
+    // Can not be accepted
+}
+```

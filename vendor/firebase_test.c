@@ -24,21 +24,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_VENDOR_H
-#define BUILTIN_VENDOR_H
+#include "../unit_test.h"
+#include "../vendor.h"
 
-#define POST_METHOD "POST"
-#define GET_METHOD "GET"
-#define ETCD_LOCALHOST "http://127.0.0.1:2379"
-#define ETCD_MASTER "http://etcd.foodtiny.net:80"
-#define ETCD_DEVELOPMENT_PATH "/v2/keys/elassandra/development/seeds"
+#define FIREBASE_SERVICE_URL "https://fcm.googleapis.com/fcm/send"
+#define FIREBASE_SERVICE_TOKEN "AAAARs12iRs:APA91bGcaUlACTb6VdvjeUNmeQ-I3Tsr14p8Q20-egTAFu3zq2juaRYyVDSNohBjRKutx4bqpoY8BM8BxolEILw6A1A-YfBecDCzhBIDoQTwwPNADOmhulj-8NTbRIobK28EwOfZnMQd"
+#define FIREBASE_DEVICE_TOKEN "dqs-1BBsWEE:APA91bHs7ixQativdjcIJ_3DRNWceVH8fLIriF9shRFoauodG9VXpG4D86VzAmJakgcu7mrYaQmZEwvKC124uiRUABPaBv0zrjftI9CuhoOfxOKVPBR1qSHRtQmbynsECRv6I2Y_XLQ0"
 
-char* etcd_get(char* host, char *key);
-char* etcd_set(char* host, char *key, char *value);
+// Warning
+// Because in send_notification we used is_empty to verify all parameters are NULL or empty string
+// so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
+// See: int is_empty(char *target);
+TEST(Vendor, FirebaseCheckNULL) {
 
-char *es_query(char *host, char *index, char *query);
-int send_sms(char* service_url, char* account_id, char* account_token, char* from_phone_number, char* to_phone_number, char* sms_content);
-int send_mail(char *service_url,  char *service_token, char *from_mail, char *to_mail, char *mail_subject, char *mail_content);
-int push_notification(char *service_url, char *service_token, char *device_token, char *notification_title, char *notification_body);
+}
 
-#endif
+TEST(Vendor, FirebaseCheckValidation) {
+
+}
+
+TEST(Vendor, FirebaseCheckRequestToServer) {
+
+}
