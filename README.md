@@ -41,14 +41,14 @@ No need to enable ASM optimization for Apple MacOSX because only development.
 - At least one contributor in this project reviews your commits (except you) before merging
 - Some rules for text cases
 
-####SHOULD
+###SHOULD
 ```c
 TEST(General, DistributionCountingSort) {
     // Assert whatever you want
 }
 ```
 
-####SHOULD NOT
+###SHOULD NOT
 ```c
 TEST(General, binary_search) {
     // Can not be accepted
