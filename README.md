@@ -1,6 +1,7 @@
 # Native Library
 
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
+[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-yellow.svg)]()
 
 This library provides set of functions which are common used in C/C++ application.
 
