@@ -43,7 +43,7 @@ This project is also useful for new developers in practical programming
 Installation
 ```bash
 git clone https://github.com/foodtiny/native.git
-make && sudo make install
+make -j && sudo make install
 ```
 Sample program with length_pointer_char
 ```c
