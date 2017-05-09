@@ -24,6 +24,52 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Linear Search
+//Linear Search
+#define NOT_FOUND -1
 
-// Binary Search
+/**
+ * Linear Search
+ * Complexity O(N)
+ *
+ * @param array
+ * @param length
+ * @param key
+ * @return result
+ */
+int linear_search(int array[], int length, int key) {
+    register int index;
+    for(index = 0; index < length; index++) {
+        if(array[index] == key) {
+            return index;
+        }
+    }
+    return NOT_FOUND;
+}
+
+/**
+ * Binary Search
+ * Complexity O(log(N))
+ *
+ * @param array
+ * @param length
+ * @param key
+ * @return result
+ */
+int binary_search(int array[], int length, int key) {
+    int index;
+    int left, right;
+    left = 0;
+    right = length;
+    while(left <= right) {
+        index = (left + right )/2;
+        if(key == array[index]) {
+            return index;
+        }
+        if(key < array[index]) {
+            right = index - 1;
+        } else {
+            left = index + 1;
+        }
+    }
+    return NOT_FOUND;
+}

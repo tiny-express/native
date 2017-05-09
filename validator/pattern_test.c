@@ -142,8 +142,12 @@ TEST(Validator, IsPhoneNumber) {
     target = "+15005550006";
     result = is_phone_number(target);
     ASSERT_TRUE(result);
+
+    target = "11111111111111111111111111111111111111";
+    result = is_phone_number(target);
+    ASSERT_FALSE(result);
 }
-/*
+
 TEST(Validator, IsURL) {
     char *target = "https://goo-gle.com";
     int result = is_url(target);
@@ -219,9 +223,8 @@ TEST(Validator, IsURL) {
 
     target = "https://foodtiny.com:1286?file/adsfasdf/aa";
     result = is_url(target);
-<<<<<<< HEAD
-    ASSERT_FALSE(result);
-}*/
+    ASSERT_TRUE(result);
+}
 
 TEST(Validator, IsEmpty) {
     char *target1 = NULL;

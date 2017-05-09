@@ -37,7 +37,9 @@ char* etcd_get(char* host, char *key);
 char* etcd_set(char* host, char *key, char *value);
 
 char *es_query(char *host, char *index, char *query);
-int send_sms(char* account_id, char* account_token, char* url, char* from, char* to, char* content);
-int send_mail(char *from_email, char *to_email, char *subject, char *content, char *service_url, char *service_token);
+
+int send_sms(char* service_url, char* account_id, char* account_token, char* from_phone_number, char* to_phone_number, char* sms_content);
+int send_mail(char *service_url,  char *service_token, char *from_mail, char *to_mail, char *mail_subject, char *mail_content);
+int push_notification(char *service_url, char *service_token, char *device_token, char *notification_title, char *notification_body, char *notification_data);
 
 #endif
