@@ -40,13 +40,13 @@ This project is also useful for new developers in practical programming
 - Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 ### Get Started
-Installation
+#### Installation
 ```bash
-git clone https://github.com/foodtiny/native.git
+$ git clone https://github.com/foodtiny/native.git
 $ make -j && make test
 $ sudo make install
 ```
-Sample program with length_pointer_char
+#### Sample program with length_pointer_char
 ```c
 #include <stdio.h>
 #include <native/general.h>
@@ -57,6 +57,15 @@ int main() {
     fflush(stdout);
     return 0;
 }
+
+#### Sample unit test with native (thanks to C-Unit)
+```c
+#include <native/unit_test.h>
+
+TEST(YourTestSuite, YourTestCase) {
+    ASSERT_STR("me", "you");
+}
+```
 ```
 Note: You need to link your program with native library (libnative_static.a or libnative.so)
 
