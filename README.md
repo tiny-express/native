@@ -12,7 +12,7 @@ We use this library in our production and it 's cared by Unit Test with Travis C
 This project is also useful for new developers in practical programming
 
 ### Standard Library
-- General (length, append, join, segment, sort, search)
+- Generic functions (length, append, join, segment, sort, search)
 - Compression (gzip)
 - Cryptography (md5, sha1, base64)
 - Datetime (timestamp and date format)
