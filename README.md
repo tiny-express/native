@@ -12,7 +12,7 @@ We use this library in our production and it 's cared by Unit Test with Travis C
 This project is also useful for new developers in practical programming 
 
 ### Standard Library
-- General (length, append, join, segment, sort & search)
+- General (length, append, join, segment, sort, search)
 - Compression (gzip)
 - Cryptography (md5, sha1, base64)
 - Datetime (time format)
@@ -21,20 +21,17 @@ This project is also useful for new developers in practical programming
 - String (converter, processor)
 - Threading (multiple threading, timer)
 - Validation (phone, email, url)
-- Data TYPE (json)
-- Third Party Client (Twillio, SendGrid, Etcd, Elastic Search, Stripe, Apple/Google Push Notification)
+- Data Type (json)
+- Third Party (Twilio, SendGrid, Etcd, Elastic Search, Stripe, FireBase)
 
 ### Road map
-- Inherit good builtin functions from PHP, Python, Ruby, NodeJS and Java
-- Optimize fundamental functions in GNU Assembly for performance but C version will be delivered first
+- Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
 - Develop fundamental algorithms and advanced data structure
+- Optimize fundamental functions in GNU Assembly for performance but C version will be delivered first
 
 ### Assembly Optimization
-This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly.
-
-Note that GNU Assembly is ONLY work with Linux AMD64.
-
-No need to enable ASM optimization for Apple MacOSX because only development.
+- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly.
+- Note that GNU Assembly is ONLY work with Linux AMD64.
 
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
