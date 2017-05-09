@@ -43,7 +43,8 @@ This project is also useful for new developers in practical programming
 Installation
 ```bash
 git clone https://github.com/foodtiny/native.git
-make -j && sudo make install
+$ make -j && make test
+$ sudo make install
 ```
 Sample program with length_pointer_char
 ```c
@@ -56,6 +57,8 @@ int main() {
     fflush(stdout);
     return 0;
 }
+
+Notice that you need to link your program with native (libnative_static.a or libnative.so)
 ```
 
 ### Contributors
