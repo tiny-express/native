@@ -1,21 +1,21 @@
 # Native Library
 
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
-&nbsp; [![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-yellow.svg)]()
+&nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-yellow.svg)]()
 
-This library provides set of functions which are common used in C/C++ application.
+This library provides a set of standard functions which are common used in C/C++ application.
 
 Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
 
 We use this library in our production and it 's cared by Unit Test with Travis CI so it just works !
 
-This project is also useful for new developers in practical programming 
+This project is also useful for new developers in practical programming
 
 ### Standard Library
 - General (length, append, join, segment, sort, search)
 - Compression (gzip)
 - Cryptography (md5, sha1, base64)
-- Datetime (time format)
+- Datetime (timestamp and date format)
 - Network (http, ip address)
 - Storage (file)
 - String (converter, processor)
