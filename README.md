@@ -42,16 +42,19 @@ This project is also useful for new developers in practical programming
 ### Get Started
 Installation
 ```bash
-make && make install
+git clone https://github.com/foodtiny/native.git
+make && sudo make install
 ```
 Sample program with length_pointer_char
 ```c
 #include <stdio.h>
 #include <native/general.h>
+
 int main() {
-    char *sample = "Hello World";
-    printf("Length of sample is %d\n", length_pointer_char(sample));
+    char *sample_text = "Hello World";
+    printf("Length of sample_text is %d\n", length_pointer_char(sample));
     fflush(stdout);
+    return 0;
 }
 ```
 
