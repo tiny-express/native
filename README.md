@@ -38,7 +38,7 @@ No need to enable ASM optimization for Apple MacOSX because only development.
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) here before starting your contribution
 - Make sure that your commits must be passed before you create pull request
-- At least one contributor in this project reviews your commits (except you) before merging and he will response for your work
+- At least one contributor in this project reviews your commits (except you) before merging
 - Some rules for text cases :
 SHOULD
 ```c
