@@ -34,44 +34,54 @@ char *content = "hello world";
 char *service_url   = "https://api.sendgrid.com/v3/mail/send";
 char *service_token = "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";
 
-TEST(Vendor, SendGridCheckProcess) {
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, "wrong_token"));
-
-    ASSERT_EQUAL(1, send_mail(from_mail, to_mail, subject, content, service_url, service_token));
-}
-
+// Only one param is NULL, process should be failed
 TEST(Vendor, SendGridCheckNULLFields) {
-    ASSERT_EQUAL(0, send_mail(NULL, to_mail, subject, content, service_url, service_token));
+    ASSERT_FALSE(send_mail(NULL, to_mail, subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, NULL, subject, content, service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, NULL, subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, NULL, content, service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, NULL, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, NULL, service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, NULL, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, NULL, service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, NULL, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, NULL));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, NULL));
 }
 
+// Only one param is empty, process should be failed
 TEST(Vendor, SendGridCheckEmptyFields) {
-    ASSERT_EQUAL(0, send_mail("", to_mail, subject, content, service_url, service_token));
+    ASSERT_FALSE(send_mail("", to_mail, subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, "", subject, content, service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, "", subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, "", content, service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, "", content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, "", service_url, service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, "", service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "", service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, "", service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, service_url, ""));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, ""));
 }
 
+// Only one param is wrong format, process should be failed
 TEST(Vendor, SendGridCheckWrongFormat) {
-    ASSERT_EQUAL(0, send_mail("wrong_mail_format", to_mail, subject, content, service_url, service_token));
+    ASSERT_FALSE(send_mail("wrong_email_format@.com", to_mail, subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, "wrong_mail_format", subject, content, "", service_token));
+    ASSERT_FALSE(send_mail(from_mail, "wrong_email_format@abc", subject, content, service_url, service_token));
 
-    ASSERT_EQUAL(0, send_mail(from_mail, to_mail, subject, content, "wrong_url_format", service_token));
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, "123wrong_service_url_format.com", service_token));
+}
+
+TEST(Vendor, SendGridCheckProcess) {
+    // These cases must be failed
+    char *wrong_token = "wrong_token";
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, wrong_token));
+
+    char *wrong_service_url = "https://api.somewhere.com/v3/mail/send";
+    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, wrong_service_url, service_token));
+
+    // Success case
+    ASSERT_TRUE(send_mail(from_mail, to_mail, subject, content, service_url, service_token));
+
 }
