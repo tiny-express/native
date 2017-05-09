@@ -44,12 +44,9 @@ int send_mail(char *from_email, char *to_email, char *subject, char *content, ch
     if (!is_email(from_email)
         || !is_email(to_email)
         || !is_url(service_url)
-        || NULL == subject
-        || NULL == content
-        || NULL == service_token
-        || strcmp(subject, "") == 0
-        || strcmp(content, "") == 0
-        || strcmp(service_token, "") == 0) {
+        || is_empty(subject)
+        || is_empty(content)
+        || is_empty(service_token)) {
         return 0;
     }
 

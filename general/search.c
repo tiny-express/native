@@ -24,6 +24,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Linear Search
+//Linear Search
+#define NOT_FOUND -1
+
+int linear_search(int array[], int lenght, int key) {
+    register int index;
+    for(index = 0; index < lenght; index++) {
+        if(array[index] == key) {
+            return index;
+        }
+    }
+    return NOT_FOUND;
+}
+
 
 // Binary Search
+int binary_search(int array[], int lenght, int key) {
+    int index;
+    int left, right;
+    left = 0;
+    right = lenght;
+    while(left <= right) {
+        index = (left + right )/2;
+        if(key == array[index]) {
+            return index;
+        }
+        if(key < array[index]) {
+            right = index - 1;
+        } else {
+            left = index + 1;
+        }
+    }
+    return NOT_FOUND;
+}
