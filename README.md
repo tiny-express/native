@@ -64,8 +64,8 @@ for (index = 0; index < array_length; index++) {
 ```
 
 ##### SHOULD NOT
-- C99 mode does not allow declaring variable inside loop parameters
-- Do not use calculation in loop parameters
+- C99 mode - Declaring variable inside loop parameters can not be allowed here
+- Use calculation in loop parameters
 ```c
 for (int index = 0; index < length_pointer_char(array); index++) {
     // doSomething()
