@@ -11,6 +11,7 @@
 /Makefile
 /native_test
 /native.cbp
+/native
 /libnative_static.a
 /libnative.so
 /test.txt
