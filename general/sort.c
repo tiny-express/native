@@ -46,6 +46,5 @@ void quick_sort(int *array, int left , int right) {
         while (array[left_index] <= array_mid_value) {
             left_index++;
         }
-        
     }
 }
