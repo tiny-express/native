@@ -71,8 +71,7 @@ TEST(YourTestSuite, YourTestCase) {
 ```
 ```
 Note: You need to link your program with native library (libnative_static.a or libnative.so)
-
-
+```
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
