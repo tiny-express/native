@@ -55,7 +55,7 @@ $ sudo make install
 
 int main() {
     char *sample_text = "Hello World";
-    printf("Length of sample_text is %d\n", length_pointer_char(sample));
+    printf("Length of sample_text is %d\n", length_pointer_char(sample_text));
     fflush(stdout);
     return 0;
 }
