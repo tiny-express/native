@@ -58,14 +58,14 @@ TEST(General, distribution_sort) {
 ##### SHOULD
 ```c
 register int index = 0;
-for (index=0; index<10; index++) {
+for (index = 0; index < 10; index++) {
     // doSomething()
 }
 ```
 
 ##### SHOULD NOT (C99 mode does not allowed)
 ```c
-for (int index=0; index<10; index++) {
+for (int index = 0; index < 10; index++) {
     // doSomething()
 }
 ```
