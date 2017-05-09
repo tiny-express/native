@@ -36,9 +36,9 @@ TEST(General, BinarySearch) {
     int result = binary_search(array, length, key);
     ASSERT_EQUAL(3, result);
 
-      length = -1;
-      key = -5;
-      result = binary_search(array, length, key);
+    length = -1;
+    key = -5;
+    result = binary_search(array, length, key);
     ASSERT_EQUAL(-1, result);
 
     length = 6;
@@ -79,7 +79,6 @@ TEST(General, LinearSearch) {
     key = 5;
     result = linear_search(array, length, key);
     ASSERT_EQUAL(-1, result);
-
 
     length = 6;
     key = 2;
