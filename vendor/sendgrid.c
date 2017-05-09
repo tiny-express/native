@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
@@ -62,9 +63,9 @@ int send_mail(
     if (!is_email(mail_from)
             || !is_email(mail_to)
                 || !is_url(service_url)
-                    || is_empty(mail_subject)
-                        || is_empty(mail_content)
-                            || is_empty(service_token)) {
+                       || is_empty(mail_subject)
+                       || is_empty(mail_content)
+                       || is_empty(service_token)) {
         return FALSE;
     }
 
