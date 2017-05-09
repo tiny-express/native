@@ -109,7 +109,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
-add_library(${PROJECT_NAME} ${SOURCES})
+add_library(${PROJECT_NAME} ${SOURCES} crypto/base64_test.c crypto/md5_test.c crypto/sha1_test.c)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
