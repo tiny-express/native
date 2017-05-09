@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
@@ -87,7 +88,6 @@ int push_notification(
     };
 
     char* response = http_request("POST", service_url, request_header, request_body);
-
     if (is_empty(response)) {
         return FALSE;
     }
@@ -95,6 +95,7 @@ int push_notification(
     // Firebase reponse has format
     // {"success": 1}
     // So we need to parse this response to get the success value
+    // TODO: @dquang replace by http_parser
     response = string_from_to(
             response,
             string_index(response, "{", 1),
@@ -103,8 +104,6 @@ int push_notification(
     JSON_Value *root_value = json_parse_string(response);
     JSON_Object *root_object = json_value_get_object(root_value);
     int status_value = (int) json_object_get_number(root_object, SUCCESS_LABEL);
-    printf("%s\n", response);
-    printf("%d\n", status_value);
     if (status_value == SUCCESS_VALUE) {
         return TRUE;
     }

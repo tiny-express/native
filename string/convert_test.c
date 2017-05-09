@@ -73,20 +73,20 @@ TEST(String, ConvertFromLong) {
     ASSERT_STR(expect,result);
 
     long input1 = -2147483647;
-    char *expect1="-2147483647";
-    char *result1=string_from_long(input1);
+    char *expect1 = "-2147483647";
+    char *result1 = string_from_long(input1);
     ASSERT_STR(expect1,result1);
 }
 
 TEST(String, ConvertFromFloat) {
     float input = 12.56;
-    char *expect="12.56";
-    char *result=string_from_float(input);
+    char *expect = "12.56";
+    char *result = string_from_float(input);
     ASSERT_STR(expect,result);
 
     float input1 = -1.56799;
-    char *expect1="-1.56799";
-    char *result1=string_from_float(input1);
+    char *expect1 = "-1.56799";
+    char *result1 = string_from_float(input1);
     ASSERT_STR(expect1,result1);
 }
 

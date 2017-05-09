@@ -39,6 +39,39 @@ This project is also useful for new developers in practical programming
 - Data Race Detector with [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
 - Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
+### Get Started
+
+#### Installation
+```bash
+$ git clone https://github.com/foodtiny/native.git
+$ make -j && make test
+$ sudo make install
+```
+
+#### Sample program with length_pointer_char
+```c
+#include <stdio.h>
+#include <native/general.h>
+
+int main() {
+    char *sample_text = "Hello World";
+    printf("Length of sample_text is %d\n", length_pointer_char(sample_text));
+    fflush(stdout);
+    return 0;
+}
+```
+
+#### Sample unit test with native (thanks to C-Unit)
+```c
+#include <native/unit_test.h>
+
+TEST(YourTestSuite, YourTestCase) {
+    ASSERT_STR("me", "you");
+}
+```
+```
+Note: You need to link your program with native library (libnative_static.a or libnative.so)
+```
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
