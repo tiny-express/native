@@ -34,7 +34,7 @@
                     "\"notification\":{" \
                         "\"title\":\"%s\"," \
                         "\"body\":\"%s\"" \
-                    "},\"priority\":10}"
+                    "},\"priority\":10, \"data\":{\"%s\"}"
 #define SUCCESS "success"
 #define SUCCESS_CHARACTER '1'
 
@@ -42,7 +42,8 @@ int send_notification(char *service_url,
                       char* service_token,
                       char* device_token,
                       char* title,
-                      char* body) {
+                      char* body,
+                      char* data) {
 
     if (!is_url(service_url)
             || is_empty(service_token)
@@ -52,8 +53,12 @@ int send_notification(char *service_url,
         return FALSE;
     }
 
+    if (data == NULL) {
+        data = "";
+    }
+
     char *request_body[2];
-    asprintf(&request_body[0], JSON_FORMAT, device_token, title, body);
+    asprintf(&request_body[0], JSON_FORMAT, device_token, title, body, data);
     request_body[1] = '\0';
 
     char *request_header[3] = {
