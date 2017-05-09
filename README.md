@@ -41,16 +41,31 @@ No need to enable ASM optimization for Apple MacOSX because only development.
 - At least one contributor in this project reviews your commits (except you) before merging
 
 
-#### SHOULD
+##### SHOULD (Test case name must be named in camel syntax)
 ```c
 TEST(General, DistributionCountingSort) {
     // Assert whatever you want
 }
 ```
 
-#### SHOULD NOT
+##### SHOULD NOT
 ```c
-TEST(General, binary_search) {
+TEST(General, distribution_sort) {
     // Can not be accepted
+}
+```
+
+##### SHOULD
+```c
+register int index = 0;
+for (index=0; index<10; index++) {
+    // doSomething()
+}
+```
+
+##### SHOULD NOT (C99 mode does not allowed)
+```c
+for (int index=0; index<10; index++) {
+    // doSomething()
 }
 ```
