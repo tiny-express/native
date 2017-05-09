@@ -4,11 +4,15 @@
 /CMakeFiles
 /cmake-build-debug
 /cmake_install.cmake
+/CTestTestfile.cmake
+/install_manifest.txt
 /CMakeCache.txt
+/Testing
 /Makefile
 /native_test
 /native.cbp
-/libnative.a
+/native
+/libnative_static.a
+/libnative.so
 /test.txt
-.DS_Store
 

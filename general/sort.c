@@ -24,28 +24,69 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Distribution Counting Sort
+#include "../general.h"
+#include "../type.h"
 
-// Quick Sort
+#define SWAP(value1, value2, TYPE) { TYPE SWAP = value1; value1 = value2; value2 = SWAP; }
 
-void quick_sort(int *array, int left , int right) {
-    if (left >= right) {
-        return;
-    }
-
-    int array_mid_value = array[(left + right) / 2];
-
-    int left_index = left;
-    int right_index = right;
-
-    while (left_index < right_index) {
-        while (array[right_index] >= array_mid_value) {
-            right_index--;
-        }
-
-        while (array[left_index] <= array_mid_value) {
-            left_index++;
-        }
-        
-    }
+/**
+ * Quick Sort
+ * Complexity O(M*log(N))
+ *
+ * @param array
+ * @param length
+ * @param key
+ * @return result
+ */
+#define QUICK_SORT(TYPE)\
+void sort_##TYPE(TYPE *array, int left_position, int right_position) {\
+    int left = left_position;\
+    int right = right_position;\
+    TYPE pivot = array[(left + right) / 2];\
+    while (left <= right) {\
+        while (array[left] < pivot)  left++;\
+        while (array[right] > pivot) right--;\
+        if (left <= right) {\
+            SWAP(array[left], array[right], TYPE);\
+            left++;\
+            right--;\
+        }\
+    }\
+    if (left_position < right) sort_##TYPE(array, left_position, right);\
+    if (left < right_position) sort_##TYPE(array, left, right_position);\
 }
+
+#define INCREASE(TYPE)\
+int is_increase_##TYPE##_array(TYPE *array, int length) {\
+    register int i;\
+    for (i = 0; i < length - 1; i++) {\
+        if (array[i] > array[i + 1])\
+            return FALSE;\
+    }\
+    return TRUE;\
+}
+
+#define DECREASE(TYPE)\
+int is_decrease_##TYPE##_array(TYPE *array, int length) {\
+    register int i;\
+    for (i = 0; i < length - 1; i++) {\
+        if (array[i] < array[i + 1])\
+        return FALSE;\
+    }\
+    return TRUE;\
+}
+
+INCREASE(int);
+INCREASE(float);
+INCREASE(double);
+INCREASE(long);
+
+DECREASE(int);
+DECREASE(float);
+DECREASE(double);
+DECREASE(long);
+
+QUICK_SORT(int);
+QUICK_SORT(float);
+QUICK_SORT(long);
+QUICK_SORT(double);

@@ -31,7 +31,7 @@
 
 typedef struct thread_argument {
     void *callback;
-    unsigned int miliseconds;
+    unsigned int milliseconds;
 } thread_argument;
 
 void *loop(void *argument);
@@ -44,13 +44,13 @@ void *run(void *argument);
  * @param miliseconds
  * @return thread
  */
-pthread_t set_interval(void *callback, unsigned int miliseconds) {
+pthread_t set_interval(void *callback, unsigned int milliseconds) {
     if (callback == NULL) {
         return NULL;
     }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
-    argument->miliseconds = miliseconds;
+    argument->milliseconds = milliseconds;
     argument->callback = callback;
     int error = pthread_create(&thread, NULL, loop, (void *)argument);
     if (error) {
@@ -66,14 +66,14 @@ pthread_t set_interval(void *callback, unsigned int miliseconds) {
  * @param miliseconds
  * @return thread
  */
-pthread_t set_time_out(void *callback, unsigned int miliseconds) {
+pthread_t set_time_out(void *callback, unsigned int milliseconds) {
 
     if (callback == NULL) {
         return NULL;
     }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
-    argument->miliseconds = miliseconds;
+    argument->milliseconds = milliseconds;
     argument->callback = callback;
     int error = pthread_create(&thread, NULL, run, (void *)argument);
     if (error) {
@@ -91,7 +91,7 @@ pthread_t set_time_out(void *callback, unsigned int miliseconds) {
 void *loop(void *argument) {
     while(1) {
         ((void(*)())((thread_argument*)argument)->callback)();
-        usleep(((thread_argument *)argument)->miliseconds*1000);
+        usleep(((thread_argument *)argument)->milliseconds*1000);
     }
 }
 
@@ -101,6 +101,6 @@ void *loop(void *argument) {
  * @return
  */
 void *run(void *argument) {
-    usleep(((thread_argument *)argument)->miliseconds*1000);
+    usleep(((thread_argument *)argument)->milliseconds*1000);
     ((void(*)())((thread_argument*)argument)->callback)();
 }
