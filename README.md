@@ -7,7 +7,7 @@ This library provides a set of standard functions which are common used in C/C++
 
 Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
 
-We use this library in our production and it 's cared by Unit Test with Travis CI so it just works !
+We use this library in our production and unit test with Travis CI so it just works !
 
 This project is also useful for new developers in practical programming
 
@@ -15,7 +15,7 @@ This project is also useful for new developers in practical programming
 - Generic functions (length, append, join, segment, sort, search)
 - Compression (gzip)
 - Cryptography (md5, sha1, base64)
-- Datetime (timestamp and date format)
+- Datetime (timestamp, date format)
 - Network (http, ip address)
 - Storage (file)
 - String (converter, processor)
@@ -27,11 +27,17 @@ This project is also useful for new developers in practical programming
 ### Road map
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
 - Develop fundamental algorithms and advanced data structure
-- Optimize fundamental functions in GNU Assembly for performance but C version will be delivered first
+- Fix comments and complete test cases for all exported functions
 
 ### Assembly Optimization
-- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly.
-- Note that GNU Assembly is ONLY work with Linux AMD64.
+- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
+- C version of that function should be implemented first then optimize again for Linux platform
+- GNU Assembly (GAS) in this project is ONLY compatible with Linux amd64
+
+### Useful Resources
+- Debugging & Profiling with [Valgrind](http://valgrind.org/)
+- Data Race Detector with [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
+- Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 ### Contributors
 - Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
@@ -64,8 +70,8 @@ for (index = 0; index < array_length; index++) {
 ```
 
 ##### SHOULD NOT
-- C99 mode does not allow declaring variable inside loop parameters
-- Do not use calculation in loop parameters
+- C99 mode - Declaring variable inside loop parameters can not be allowed here
+- Use calculation in loop parameters
 ```c
 for (int index = 0; index < length_pointer_char(array); index++) {
     // doSomething()
