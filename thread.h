@@ -28,9 +28,9 @@
 #define BUILTIN_THREAD_H
 
 #include <pthread.h>
+#include "thread/thread.h"
 
-pthread_t set_interval(void *callback, unsigned int miliseconds);
-
-pthread_t set_time_out(void *callback, unsigned int miliseconds);
+pthread_t set_interval(void *callback, unsigned int milliseconds);
+pthread_t set_time_out(void *callback, unsigned int milliseconds);
 
 #endif
