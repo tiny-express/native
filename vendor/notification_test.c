@@ -36,44 +36,45 @@ TEST(Vendor, Notification) {
     char* device_token = VALID_DEVICE_TOKEN;
     char* title = "Hello";
     char* body = "Test notification";
-    ASSERT_TRUE(send_notification(service_url, service_token, device_token, title, body));
+    char* data = "{test:test}";
+    ASSERT_TRUE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = "";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = VALID_URL;
     service_token = "";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = VALID_URL;
     service_token = VALID_SERVICE_TOKEN;
     device_token = "";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = VALID_URL;
     service_token = VALID_SERVICE_TOKEN;
     device_token = VALID_DEVICE_TOKEN;
     title = "";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = "invalid_url";
     service_token = VALID_SERVICE_TOKEN;
     device_token = VALID_DEVICE_TOKEN;
     title = "Hello";
     body = "";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = VALID_URL;
     service_token = "invalid_service_token";
     device_token = VALID_DEVICE_TOKEN;
     title = "Hello";
     body = "Notification";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 
     service_url = VALID_URL;
     service_token = VALID_SERVICE_TOKEN;
     device_token = "invalid_device_token";
     title = "Hello";
     body = "Notification";
-    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body));
+    ASSERT_FALSE(send_notification(service_url, service_token, device_token, title, body, data));
 }
