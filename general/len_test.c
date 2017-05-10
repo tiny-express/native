@@ -28,7 +28,7 @@
 #include "../unit_test.h"
 
 TEST(General, LengthPointerChar) {
-	char* data = "Hello world";
+	char *data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 
 	data = "";

@@ -25,6 +25,7 @@
  */
 
 #include "../unit_test.h"
+#include "../general.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -54,3 +55,4 @@ TEST(General, QuickSort) {
     free(array_float);
     ASSERT_TRUE(result);
 }
+
