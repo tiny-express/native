@@ -33,7 +33,6 @@
 
 // Distribution Counting Sort
 
-
 // Quick Sort
 #define QUICK_SORT(TYPE)\
 void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
@@ -63,8 +62,9 @@ void quick_sort_##TYPE(TYPE *array, int begin_array, int end_array) {\
 
 #define INCREASE(TYPE)\
 int is_increase_##TYPE##_array(TYPE *array, int length) {   \
-    for (int i = 0; i < length - 1; i++) {\
-        if (array[i] > array[i + 1])\
+    register int index = 0;\
+    for (index = 0; index < length - 1; index++) {\
+        if (array[index] > array[index + 1])\
             return FALSE;\
     }\
     return TRUE;\
@@ -72,8 +72,9 @@ int is_increase_##TYPE##_array(TYPE *array, int length) {   \
 
 #define DECREASE(TYPE)\
 int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
-    for (int i = 0; i < length - 1; i++) {\
-        if (array[i] < array[i + 1])\
+    register int index = 0;\
+    for (index = 0; index < length - 1; index++) {\
+        if (array[index] < array[index + 1])\
         return FALSE;\
     }\
     return TRUE;\
