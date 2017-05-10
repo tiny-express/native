@@ -82,6 +82,10 @@ file(GLOB_RECURSE SOURCES
     validator/*
 )
 
+file(GLOB_RECURSE HEADERS
+    ./*.h
+)
+
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
     context/*_test.c
@@ -109,7 +113,21 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
+<<<<<<< HEAD
 add_library(${PROJECT_NAME} ${SOURCES} crypto/base64_test.c crypto/md5_test.c crypto/sha1_test.c)
+=======
+add_library(${PROJECT_NAME}_static ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+# Add make test
+enable_testing()
+add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
+
+# Add make install - installation to unix system
+install (TARGETS ${PROJECT_NAME}_static DESTINATION bin)
+install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+install (FILES ${HEADERS} DESTINATION include/native)
+>>>>>>> 70267b6022d7ca4b5621f8ed9a697b08b0ca9d1f
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)

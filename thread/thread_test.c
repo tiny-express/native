@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
 #include "../unit_test.h"
+#include "../thread.h"
 
 static int total = 0;
 
