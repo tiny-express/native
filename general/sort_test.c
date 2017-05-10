@@ -35,7 +35,8 @@ TEST(General, QuickSort) {
     // INT
     int *array_int = malloc(50 * sizeof(int));
     srand(time(NULL));
-    for (int index = 0; index < 50; ++index) {
+    int index = 0;
+    for (; index < 50; ++index) {
         array_int[index] = rand();
     }
     quick_sort_int(array_int, 0, 49);
@@ -46,7 +47,8 @@ TEST(General, QuickSort) {
     // FLOAT
     float *array_float = malloc(50 * sizeof(float));
     srand((unsigned int)time(NULL));
-    for (int index = 0; index < 50; index++) {
+    index = 0;
+    for (; index < 50; index++) {
         array_float[index] = ((float)rand()/(float)(RAND_MAX)) * 100.0;
     }
     quick_sort_float(array_float, 0, 49);
