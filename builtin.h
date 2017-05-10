@@ -38,7 +38,6 @@
 #include <zlib.h>
 #include <ctype.h>
 #include <curses.h>
-#include <system.h>
 #include <pthread.h>
 
 #include "compress.h"
