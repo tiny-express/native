@@ -37,7 +37,6 @@
 #include <stdarg.h>
 #include <zlib.h>
 #include <ctype.h>
-#include <curses.h>
 #include <pthread.h>
 
 #include "compress.h"
