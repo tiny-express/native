@@ -27,7 +27,6 @@
 #include <regex.h>
 #include "../validator.h"
 #include "../general.h"
-#include <stdio.h>
 #include "../type.h"
 
 #define IS(TYPE, PATTERN);\
