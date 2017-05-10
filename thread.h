@@ -27,7 +27,6 @@
 #ifndef BUILTIN_THREAD_H
 #define BUILTIN_THREAD_H
 
-#include <pthread.h>
 #include "thread/thread.h"
 
 pthread_t set_interval(void *callback, unsigned int milliseconds);

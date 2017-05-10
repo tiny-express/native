@@ -30,7 +30,7 @@
 #include "../vendor.h"
 
 /**
- * get node
+ * Etcd Get
  * @param host
  * @param key
  * @return json
@@ -55,7 +55,7 @@ char *etcd_get(char* url, char *key) {
 }
 
 /**
- * set value of node
+ * Etcd Set
  * @param host
  * @param key
  * @param value
@@ -96,5 +96,6 @@ char *etcd_set(char *url, char *key, char *value) {
             response,
             response_body_begin_index,
             response_length - 2);
+
     return result;
 }
