@@ -24,14 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_VENDOR_H
-#define BUILTIN_VENDOR_H
-
-#define POST_METHOD "POST"
-#define GET_METHOD "GET"
-#define ETCD_LOCALHOST "http://127.0.0.1:2379"
-#define ETCD_MASTER "http://etcd.foodtiny.net:80"
-#define ETCD_DEVELOPMENT_PATH "/v2/keys/elassandra/development/seeds"
+#ifndef NATIVE_VENDOR_H
+#define NATIVE_VENDOR_H
 
 char* etcd_get(char* host, char *key);
 char* etcd_set(char* host, char *key, char *value);
