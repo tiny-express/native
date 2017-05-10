@@ -54,30 +54,25 @@ TEST(String, ProcessTrim) {
     char *target2 = "Hello World  ";
     char *result2 = string_trim(target2);
     ASSERT_STR(expect, result2);
-
-//    char *target3 = "Hello   World";
-//    char *result3 = string_trim(target3);
-//    ASSERT_STR(expect, result3);
 }
 
 TEST(String, ProcessJoin) {
     char *target[] = {
-            (char *) "The",
-            (char *) "quick",
-            (char *) "brown",
-            (char *) "fox",
-            (char *) "jumps",
-            (char *) "over",
-            (char *) "the",
-            (char *) "lazy",
-            (char *) "dog",
-            '\0'
+        (char *) "The",
+        (char *) "quick",
+        (char *) "brown",
+        (char *) "fox",
+        (char *) "jumps",
+        (char *) "over",
+        (char *) "the",
+        (char *) "lazy",
+        (char *) "dog",
+        '\0'
     };
     char *delim = "|";
     char *expect = "The|quick|brown|fox|jumps|over|the|lazy|dog";
     char *result = string_join(target, delim);
-
-    ASSERT_STR(expect, string_join(target, delim));
+    ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessSplit) {
@@ -372,7 +367,6 @@ TEST(String, Standard) {
     expect = "hello world world";
     result = string_standardized(target);
     ASSERT_STR(expect, result);
-
 }
 
 

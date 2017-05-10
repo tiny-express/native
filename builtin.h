@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_BUILTIN_H
-#define BUILTIN_BUILTIN_H
+#ifndef NATIVE_BUILTIN_H
+#define NATIVE_BUILTIN_H
 
 #include <stdio.h>
 #include <stddef.h>
@@ -36,17 +36,23 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <zlib.h>
-#include "general.h"
-#include "string.h"
-#include "type.h"
-#include "crypto.h"
-#include "storage.h"
-#include "datetime.h"
-#include "network.h"
-#include "thread/thread.h"
+#include <ctype.h>
+#include <curses.h>
+#include <pthread.h>
+
 #include "compress.h"
+#include "crypto.h"
+#include "datetime.h"
+#include "general.h"
 #include "network.h"
+#include "network.h"
+#include "storage.h"
+#include "string.h"
+#include "system.h"
+#include "thread.h"
+#include "type.h"
 #include "validator.h"
+#include "vendor.h"
 
 #endif //BUILTIN_BUILTIN_H
 

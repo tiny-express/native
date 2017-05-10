@@ -52,7 +52,6 @@ TEST(General, AppendPointerChar) {
     ASSERT_STR("the", result[6]);
     ASSERT_STR("lazy", result[7]);
     ASSERT_STR("dog", result[8]);
-
     append = "";
     result = append_pointer_char(target, append);
 	ASSERT_EQUAL(9, length_pointer_pointer_char(result));

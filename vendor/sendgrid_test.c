@@ -27,61 +27,97 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-char *from_mail = "sample_mail@sample.com";
-char *to_mail = "test@gmail.com";
-char *subject = "Sample";
-char *content = "hello world";
-char *service_url   = "https://api.sendgrid.com/v3/mail/send";
-char *service_token = "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";
+#define GRID_SERVICE_URL        "https://api.sendgrid.com/v3/mail/send"
+#define GRID_SERVICE_TOKEN      "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"
+#define GRID_SERVICE_MAIL_FROM  "sample_mail@sample.com"
+#define GRID_SERVICE_MAIL_TO    "testmail@gmail.com"
+#define GRID_SERVICE_SUBJECT    "Hello world"
+#define GRID_SERVICE_CONTENT    "Say hi"
 
-// Only one param is NULL, process should be failed
-TEST(Vendor, SendGridCheckNULLFields) {
-    ASSERT_FALSE(send_mail(NULL, to_mail, subject, content, service_url, service_token));
+// Warning
+// Because in send_mail we used is_empty to verify all parameters are NULL or empty string
+// so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
+// See: int is_empty(char *target);
+TEST(Vendor, SendGridCheckNULL) {
+    // Initialize all parameters are NULL
+    char *service_url   = NULL;
+    char *service_token = NULL;
+    char *mail_from     = NULL;
+    char *mail_to       = NULL;
+    char *mail_subject  = NULL;
+    char *mail_content  = NULL;
 
-    ASSERT_FALSE(send_mail(from_mail, NULL, subject, content, service_url, service_token));
+    // Re-assign service_url with valid url but fail because service_token is still NULL
+    service_url = "valid_url";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, NULL, content, service_url, service_token));
+    // Re-assign service_token with some string but fail because mail_from is still NULL
+    service_token = "some_token";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, NULL, service_url, service_token));
+    // Re-assign mail_from with valid string but fail because mail_to is still NULL
+    mail_from = "valid_email";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, NULL, service_token));
+    // Re-assign mail_to with valid string but fail because mail_subject is still NULL
+    mail_to = "valid_email";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, NULL));
+    // Re-assign mail_subject with valid string but fail because mail_content is NULL
+    mail_subject = "some_subject";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
+
+    // Re-assign mail_content with valid string but fail because validation does not check
+    // We will check in next test case
+    // See Vendor.SendGridCheckValidation
+    mail_content = "some_content";
+    ASSERT_FALSE(send_sms(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
+
 }
 
-// Only one param is empty, process should be failed
-TEST(Vendor, SendGridCheckEmptyFields) {
-    ASSERT_FALSE(send_mail("", to_mail, subject, content, service_url, service_token));
+TEST(Vendor, SendGridCheckValidation) {
+    // Initialize all variable with valid information
+    char *service_url           = GRID_SERVICE_URL;
+    char *service_token         = GRID_SERVICE_TOKEN;
+    char *mail_from             = GRID_SERVICE_MAIL_FROM;
+    char *mail_to               = GRID_SERVICE_MAIL_TO;
+    char *mail_subject          = GRID_SERVICE_SUBJECT;
+    char *mail_content          = GRID_SERVICE_CONTENT;
 
-    ASSERT_FALSE(send_mail(from_mail, "", subject, content, service_url, service_token));
+    // Fail because wrong url format
+    char *invalid_service_url = "some_url_here_without_http";
+    ASSERT_FALSE(send_mail(invalid_service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, "", content, service_url, service_token));
+    // Fail because wrong phone number format
+    char *invalid_mail_from_format = "some_email_without_domain";
+    ASSERT_FALSE(send_mail(service_url, service_token, invalid_mail_from_format, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, "", service_url, service_token));
+    // Fail because wrong phone number format
+    char *invalid_mail_to_format = "123123123email";
+    ASSERT_FALSE(send_mail(service_url, service_token, mail_from, invalid_mail_to_format, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, "", service_token));
+    // More wrong mail format
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, ""));
 }
 
-// Only one param is wrong format, process should be failed
-TEST(Vendor, SendGridCheckWrongFormat) {
-    ASSERT_FALSE(send_mail("wrong_email_format@.com", to_mail, subject, content, service_url, service_token));
+TEST(Vendor, SendGridCheckRequestToServer) {
+    // Initialize all variable with valid information
+    char *service_url           = GRID_SERVICE_URL;
+    char *service_token         = GRID_SERVICE_TOKEN;
+    char *mail_from             = GRID_SERVICE_MAIL_FROM;
+    char *mail_to               = GRID_SERVICE_MAIL_TO;
+    char *mail_subject          = GRID_SERVICE_SUBJECT;
+    char *mail_content          = GRID_SERVICE_CONTENT;
 
-    ASSERT_FALSE(send_mail(from_mail, "wrong_email_format@abc", subject, content, service_url, service_token));
+    // Test success case
+    ASSERT_TRUE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, "123wrong_service_url_format.com", service_token));
-}
+    // Fail because wrong token
+    char *wrong_token = "some_wrong_token";
+    ASSERT_FALSE(send_mail(service_url, wrong_token, mail_from, mail_to, mail_subject, mail_content));
 
-TEST(Vendor, SendGridCheckProcess) {
-    // These cases must be failed
-    char *wrong_token = "wrong_token";
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, service_url, wrong_token));
-
-    char *wrong_service_url = "https://api.somewhere.com/v3/mail/send";
-    ASSERT_FALSE(send_mail(from_mail, to_mail, subject, content, wrong_service_url, service_token));
-
-    // Success case
-    ASSERT_TRUE(send_mail(from_mail, to_mail, subject, content, service_url, service_token));
+    //Fail because wrong service url
+    char *wrong_service_url = "https://api.somewhereoninternet.com/v3/mail/send";
+    ASSERT_FALSE(send_mail(wrong_service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
 }
