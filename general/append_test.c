@@ -29,15 +29,15 @@
 
 TEST(General, AppendPointerChar) {
 	char *target[] = {
-			(char *) "The",
-			(char *) "quick",
-			(char *) "brown",
-			(char *) "fox",
-			(char *) "jumps",
-			(char *) "over",
-			(char *) "the",
-			(char *) "lazy",
-	        '\0'
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		'\0'
 	};
 	char *append = "dog";
 	ASSERT_EQUAL(8, length_pointer_pointer_char(target));
