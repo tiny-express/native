@@ -26,12 +26,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../type.h"
 #include "../string.h"
 #include "../general.h"
-
-#define MAX_SIZE 1000000
-#define TRUE 1
-#define FALSE 0
 
 // Find and replace
 inline char *string_replace(char *target, char* find, char* replace_with) {
@@ -77,7 +74,7 @@ inline char **string_split(char *target, const char *delim_) {
 	int distance = len_target - len_delim + 1;
 	int len_item = 0;
 	char *segment = calloc(len_delim, sizeof(char));
-	char **data = malloc(MAX_SIZE * sizeof(char*));
+	char **data = malloc(MAX_STRING_LENGTH * sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
 	while (to <= distance) {
@@ -123,12 +120,12 @@ inline char *string_join(char *target[], const char *delim) {
     }
 	int num = length_pointer_pointer_char(target) - 1;
 	int len = 0, wlen = 0;
-	char *tmp = calloc(MAX_SIZE, sizeof(char));
-	register int i;
-	for (i=0; i<num; i++) {
+	char *tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
+	register int index;
+	for (index = 0; index < num; index++) {
 		// Copy memory segment
-		wlen = length_pointer_char(target[i]);
-		memcpy(tmp + len, target[i], wlen);
+		wlen = length_pointer_char(target[index]);
+		memcpy(tmp + len, target[index], wlen);
 		len += wlen;
 		// Copy memory segment
 		wlen = length_pointer_char(delim);
