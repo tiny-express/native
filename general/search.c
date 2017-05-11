@@ -38,8 +38,8 @@
  */
 int linear_search(int array[], int length, int key) {
     register int index;
-    for(index = 0; index < length; index++) {
-        if(array[index] == key) {
+    for (index = 0; index < length; index++) {
+        if (array[index] == key) {
             return index;
         }
     }
@@ -56,19 +56,18 @@ int linear_search(int array[], int length, int key) {
  * @return result
  */
 int binary_search(int array[], int length, int key) {
-    int index;
-    int left, right;
+    int middle, left, right;
     left = 0;
     right = length;
-    while(left <= right) {
-        index = (left + right )/2;
-        if(key == array[index]) {
-            return index;
+    while (left <= right) {
+        middle = (left + right ) / 2;
+        if (key == array[middle]) {
+            return middle;
         }
-        if(key < array[index]) {
-            right = index - 1;
+        if (key < array[middle]) {
+            right = middle - 1;
         } else {
-            left = index + 1;
+            left = middle + 1;
         }
     }
     return NOT_FOUND;
