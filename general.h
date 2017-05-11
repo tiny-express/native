@@ -30,7 +30,7 @@
 char **append_pointer_char(char **target, char *append);
 
 char *join_pointer_pointer_char(char **target);
-char *join_delim_pointer_pointer_char(char **target, const char *delim);
+char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter);
 
 int length_pointer_char(char *target);
 int length_pointer_pointer_char(char **target);
