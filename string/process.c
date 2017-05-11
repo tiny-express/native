@@ -30,34 +30,41 @@
 #include "../string.h"
 #include "../general.h"
 
-// Find and replace
-inline char *string_replace(char *target, char* find, char* replace_with) {
-    if (target == NULL || find == NULL || replace_with == NULL) {
+/**
+ * String replace
+ * Find a string in target and replace it by replace_with
+ *
+ * @param target
+ * @param find
+ * @param replace_with
+ * @return string
+ */
+inline char *string_replace(char *target, char* find_string, char* replace_with) {
+    if (target == NULL || find_string == NULL || replace_with == NULL) {
         return NULL;
     }
-	char *result;
+	int old_length = length_pointer_char(find_string);
+	int new_length = length_pointer_char(replace_with);
 	register int i, count = 0;
-	int oldlen = length_pointer_char(find);
-	int newlen = length_pointer_char(replace_with);
 	for (i = 0; target[i] != '\0'; i++) {
-		if (strstr(&target[i], find) == &target[i]) {
+		if (strstr(&target[i], find_string) == &target[i]) {
 			count++;
-			i += oldlen - 1;
+			i += old_length - 1;
 		}
 	}
-	result = (char*) malloc(i + count * (newlen - oldlen));
+	char *result = (char*) malloc(i + count * (new_length - old_length));
 	if (result == NULL) {
-		exit(EXIT_FAILURE);
+		return NULL;
 	}
 	i = 0;
-	while (*target)
-	{
-		if (strstr(target, find) == target)
-		{
+	while (*target) {
+		if (strstr(target, find_string) == target) {
 			strcpy(&result[i], replace_with);
-			i += newlen;
-			target += oldlen;
-		} else result[i++] = *target++;
+			i += new_length;
+			target += old_length;
+		} else {
+			result[i++] = *target++;
+		}
 	}
 	result[i] = '\0';
 	return result;
