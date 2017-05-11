@@ -35,7 +35,7 @@
  * Find a string in target and replace it by replace_with
  *
  * @param target
- * @param find
+ * @param find_string
  * @param replace_with
  * @return string
  */

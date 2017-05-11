@@ -30,6 +30,8 @@
 #include "type/json.h"
 #include "type/default.h"
 
+int asprintf(char **strp, const char *fmt, ...);
+
 #define TRUE 1
 #define FALSE 0
 #define NULL 0
