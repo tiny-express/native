@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_NETWORK_H
-#define BUILTIN_NETWORK_H
+#ifndef NATIVE_NETWORK_H
+#define NATIVE_NETWORK_H
 
 #define HTTPS "https://"
 #define HTTP "http://"

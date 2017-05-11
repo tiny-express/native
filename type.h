@@ -24,14 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_TYPE_H
-#define BUILTIN_TYPE_H
+#ifndef NATIVE_TYPE_H
+#define NATIVE_TYPE_H
 
 #include "type/json.h"
 #include "type/default.h"
 
+int asprintf(char **strp, const char *fmt, ...);
+
 #define TRUE 1
 #define FALSE 0
 #define NULL 0
+#define MAX_STRING_LENGTH 100000
 
 #endif

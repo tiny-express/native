@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_DATETIME_H
-#define BUILTIN_DATETIME_H
+#ifndef NATIVE_DATETIME_H
+#define NATIVE_DATETIME_H
 #ifdef __linux__
 #include <stdint.h>
 #elif __APPLE__

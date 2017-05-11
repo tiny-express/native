@@ -29,22 +29,22 @@
 #include "../builtin.h"
 #include "../type.h"
 
+/**
+ * File get contents
+ * If file name is string then read file
+ * if file name is url then send http request
+ * This function is converted from PHP function file_get_contents()
+ *
+ * @param file_name
+ * @return file content | http response content
+ */
 inline char *file_get_contents(char *file_name) {
-	if (is_url(file_name) != 0) {
-        char *headers[2] = {
-                "\0"
-        };
-
-        char *body[2] = {
-                "a=b",
-                '\0'
-        };
-		char *result = http_request("GET", file_name, headers, body);
+	if (is_url(file_name)) {
+		char *result = http_request("GET", file_name, NULL, NULL);
         int pos = string_index(result, "\r\n\r\n", 1);
         result = result + sizeof(char) * (pos + 4);
 		return result;
 	}
-
 	FILE *input_file = fopen(file_name, "r");
 	if (input_file == NULL) {
 		fprintf(stderr, "File does not exist !\n");
@@ -60,13 +60,22 @@ inline char *file_get_contents(char *file_name) {
 	return result;
 }
 
-inline int file_put_contents(char *file_path, char *content) {
+/**
+ * File get contents
+ * If file name is string then write content into file
+ * This function is converted from PHP function file_put_contents()
+ *
+ * @param file_path
+ * @param file_content
+ * @return TRUE | FALSE
+ */
+inline int file_put_contents(char *file_path, char *file_content) {
 	FILE *output_file = fopen(file_path, "wb+");
 	if (output_file == NULL) {
 		fprintf(stderr, "Permission denied !\n");
 		return FALSE;
 	}
-	fputs(content, output_file);
+	fputs(file_content, output_file);
 	fclose(output_file);
 	return TRUE;
 }
