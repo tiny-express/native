@@ -24,50 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define NOT_FOUND -1
-
-/**
- * Linear Search
- * Complexity O(N)
- *
- * @param array
- * @param length
- * @param key
- * @return result
- */
-int linear_search(int array[], int length, int key) {
-    register int index;
-    for (index = 0; index < length; index++) {
-        if (array[index] == key) {
-            return index;
-        }
-    }
-    return NOT_FOUND;
+extern "C" {
+#include "../unit_test.h"
 }
+#include "../generic.h"
+#include <iostream>
 
-/**
- * Binary Search
- * Complexity O(log(N))
- *
- * @param array
- * @param length
- * @param key
- * @return result
- */
-int binary_search(int array[], int length, int key) {
-    register int middle, left, right;
-    left = 0;
-    right = length;
-    while (left <= right) {
-        middle = (left + right ) / 2;
-        if (key == array[middle]) {
-            return middle;
-        }
-        if (key < array[middle]) {
-            right = middle - 1;
-        } else {
-            left = middle + 1;
-        }
-    }
-    return NOT_FOUND;
+TEST(Generic, Len) {
+    std::string target_string = std::string("Hello world");
+    ASSERT_EQUAL(11, len(target_string));
+
+    char *target_pointer_char = (char*) "Hello world";
+    ASSERT_EQUAL(11, len(target_pointer_char));
+
+    short target_short = 10;
+    ASSERT_EQUAL(2, len(target_short));
+
+    int target_int = 100000;
+    ASSERT_EQUAL(6, len(target_int));
+
+    int target_long = 100000000;
+    ASSERT_EQUAL(9, len(target_long));
+
+    // TODO - @anhkhoa will fix
+    int target_float = 1.23;
+    //ASSERT_EQUAL(4, len(target_float));
+
+    // TODO - @anhkhoa will fix
+    int target_double = 1234444444.112;
+    //ASSERT_EQUAL(14, len(target_double));
 }

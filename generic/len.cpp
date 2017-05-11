@@ -24,50 +24,53 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define NOT_FOUND -1
+extern "C" {
+#include "../general.h"
+#include "../string.h"
+}
+#include <iostream>
+#include <map>
+#include <vector>
 
-/**
- * Linear Search
- * Complexity O(N)
- *
- * @param array
- * @param length
- * @param key
- * @return result
- */
-int linear_search(int array[], int length, int key) {
-    register int index;
-    for (index = 0; index < length; index++) {
-        if (array[index] == key) {
-            return index;
-        }
-    }
-    return NOT_FOUND;
+// Default length is zero because
+// this type is not supported
+template <typename T> int len(T t) {
+    return 0;
 }
 
-/**
- * Binary Search
- * Complexity O(log(N))
- *
- * @param array
- * @param length
- * @param key
- * @return result
- */
-int binary_search(int array[], int length, int key) {
-    register int middle, left, right;
-    left = 0;
-    right = length;
-    while (left <= right) {
-        middle = (left + right ) / 2;
-        if (key == array[middle]) {
-            return middle;
-        }
-        if (key < array[middle]) {
-            right = middle - 1;
-        } else {
-            left = middle + 1;
-        }
-    }
-    return NOT_FOUND;
+// Support for string in C++
+template<> int len(std::string target) {
+    return target.length();
 }
+template int len<std::string>(std::string target);
+
+// Support for char pointer
+template<> int len(char *target) {
+    return length_pointer_char(target);
+}
+template int len<char*>(char *target);
+
+template<> int len(short target) {
+    return length_pointer_char(string_from_short(target));
+}
+template int len<short>(short target);
+
+template<> int len(int target) {
+    return length_pointer_char(string_from_int(target));
+}
+template int len<int>(int target);
+
+template<> int len(long target) {
+    return length_pointer_char(string_from_long(target));
+}
+template int len<long>(long target);
+
+template<> int len(float target) {
+    return length_pointer_char(string_from_float(target));
+}
+template int len<float>(float target);
+
+template<> int len(double target) {
+    return length_pointer_char(string_from_double(target));
+}
+template int len<double>(double target);

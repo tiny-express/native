@@ -30,7 +30,7 @@
 char **append_pointer_char(char **target, char *append);
 
 char *join_pointer_pointer_char(char **target);
-char *join_delim_pointer_pointer_char(char **target, const char *delim);
+char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter);
 
 int length_pointer_char(char *target);
 int length_pointer_pointer_char(char **target);
@@ -43,8 +43,8 @@ int length_float(float target);
 
 char *segment_pointer_char(char *target, int from, int to);
 char **segment_pointer_pointer_char(char **target, int from, int to);
-int linear_search(int array[], int lenght, int key);
-int binary_search(int array[], int lenght, int key);
+int linear_search(int array[], int length, int key);
+int binary_search(int array[], int length, int key);
 
 void sort_int(int *array, int begin_array, int end_array);
 void sort_float(float *array, int begin_array, int end_array);

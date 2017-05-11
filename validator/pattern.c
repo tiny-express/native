@@ -31,7 +31,7 @@
 
 #define IS(TYPE, PATTERN);\
 inline int is_##TYPE(char* input) {\
-    if (input == NULL || length_pointer_char(input) == 0) {\
+    if (length_pointer_char(input) == 0) {\
         return FALSE;\
     }\
     regex_t exp;\

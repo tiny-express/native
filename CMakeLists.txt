@@ -25,10 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8)
-project(native)
-
-# Native is written in pure C
-enable_language(C)
+project(native C CXX)
 
 # Only enable GNU Assembly for Linux amd64
 # Please careful when you would like to optimize any function in ASM
@@ -72,6 +69,7 @@ file(GLOB_RECURSE SOURCES
     crypto/*
     datetime/*
     general/*
+    generic/*
     network/*
     server/*
     storage/*
@@ -93,6 +91,7 @@ file(GLOB_RECURSE TESTS
     crypto/*_test.c
     datetime/*_test.c
     general/*_test.c
+    generic/*_test.cpp
     network/*_test.c
     server/*_test.c
     storage/*_test.c

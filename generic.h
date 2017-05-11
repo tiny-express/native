@@ -24,50 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define NOT_FOUND -1
-
 /**
- * Linear Search
- * Complexity O(N)
+ * Generic functions inspired from Python Builtin Functions
  *
- * @param array
- * @param length
- * @param key
- * @return result
+ * We feel that Python has an awesome builtin functions so we would like to
+ * rewrite it in C++ using Native Library
+ *
+ * Thanks to Python Authors
+ * https://docs.python.org/2/library/functions.html
+ * © Copyright 1990-2017, Python Software Foundation
+ * All right reserve.
  */
-int linear_search(int array[], int length, int key) {
-    register int index;
-    for (index = 0; index < length; index++) {
-        if (array[index] == key) {
-            return index;
-        }
-    }
-    return NOT_FOUND;
-}
 
-/**
- * Binary Search
- * Complexity O(log(N))
- *
- * @param array
- * @param length
- * @param key
- * @return result
- */
-int binary_search(int array[], int length, int key) {
-    register int middle, left, right;
-    left = 0;
-    right = length;
-    while (left <= right) {
-        middle = (left + right ) / 2;
-        if (key == array[middle]) {
-            return middle;
-        }
-        if (key < array[middle]) {
-            right = middle - 1;
-        } else {
-            left = middle + 1;
-        }
-    }
-    return NOT_FOUND;
-}
+#ifndef NATIVE_GENERIC_H
+#define NATIVE_GENERIC_H
+
+template <typename T> int len(T target);
+
+#endif //NATIVE_GENERIC_H

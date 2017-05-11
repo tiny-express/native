@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_STORAGE_H
-#define BUILTIN_STORAGE_H
+#ifndef NATIVE_STORAGE_H
+#define NATIVE_STORAGE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +38,6 @@
 #include <errno.h>
 
 char *file_get_contents(char *file_name);
-int file_put_contents(char *file_path, char *content);
+int file_put_contents(char *file_path, char *file_content);
 
 #endif
