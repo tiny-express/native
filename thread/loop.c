@@ -29,17 +29,10 @@
 #include <unistd.h>
 #include "../thread.h"
 
-typedef struct thread_argument {
-    void *callback;
-    unsigned int milliseconds;
-} thread_argument;
-
-void *loop(void *argument);
-
-void *run(void *argument);
-
 /**
- * Run a callback repeatedly after period of time
+ * Run a callback repeatedly after a period of time
+ * This function is converted from Javascript setInterval()
+ *
  * @param callback
  * @param miliseconds
  * @return thread
@@ -61,13 +54,14 @@ pthread_t set_interval(void *callback, unsigned int milliseconds) {
 }
 
 /**
- * Run callback after milisenconds
+ * Run callback after milliseconds
+ * This function is converted from Javascript setTimeout()
+ *
  * @param callback
- * @param miliseconds
- * @return thread
+ * @param milliseconds
+ * @return thread_t
  */
 pthread_t set_time_out(void *callback, unsigned int milliseconds) {
-
     if (callback == NULL) {
         return NULL;
     }
@@ -84,9 +78,8 @@ pthread_t set_time_out(void *callback, unsigned int milliseconds) {
 }
 
 /**
- * run callback repeatedly
+ * Loop callback
  * @param argument
- * @return
  */
 void *loop(void *argument) {
     while(1) {
@@ -96,9 +89,8 @@ void *loop(void *argument) {
 }
 
 /**
- * execute a callback
+ * Run a callback
  * @param argument
- * @return
  */
 void *run(void *argument) {
     usleep(((thread_argument *)argument)->milliseconds*1000);

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_SYSTEM_H
-#define BUILTIN_SYSTEM_H
+#ifndef NATIVE_SYSTEM_H
+#define NATIVE_SYSTEM_H
 
 float get_cpu_usage();
 float get_ram_usage();
