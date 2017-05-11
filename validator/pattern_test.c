@@ -142,6 +142,10 @@ TEST(Validator, IsPhoneNumber) {
     target = "+15005550006";
     result = is_phone_number(target);
     ASSERT_TRUE(result);
+
+    target = "11111111111111111111111111111111111111";
+    result = is_phone_number(target);
+    ASSERT_FALSE(result);
 }
 
 TEST(Validator, IsURL) {

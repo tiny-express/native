@@ -24,22 +24,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
 #include "../unit_test.h"
+#include <stdlib.h>
 #include <time.h>
-
 
 TEST(General, QuickSort) {
     srand(time(NULL));
 
-    // INT
     int *array_int = malloc(50 * sizeof(int));
     srand(time(NULL));
     int index = 0;
     for (; index < 50; ++index) {
         array_int[index] = rand();
     }
-    quick_sort_int(array_int, 0, 49);
+    sort_int(array_int, 0, 49);
     int result = is_increase_int_array(array_int, 50);
     free(array_int);
     ASSERT_TRUE(result);
@@ -51,12 +49,20 @@ TEST(General, QuickSort) {
     for (; index < 50; index++) {
         array_float[index] = ((float)rand()/(float)(RAND_MAX)) * 100.0;
     }
-    quick_sort_float(array_float, 0, 49);
+    sort_float(array_float, 0, 49);
     result = is_increase_float_array(array_float, 50);
     free(array_float);
     ASSERT_TRUE(result);
-
-    // DOUBLE
-
-    //Long
 }
+
+TEST(General, DistributionCountingSort) {
+    int *array_int = malloc(50 * sizeof(int));
+    int index = 0;
+    for (; index < 50; ++index) {
+        array_int[index] = rand() % (10) + 1;
+    }
+    distribution_counting_sort(array_int, 50, 10);
+    int result = is_increase_int_array(array_int, 50);
+    ASSERT_TRUE(result);
+}
+
