@@ -27,9 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../type.h"
 #include "../general.h"
-
-#define MAX_SIZE 100000
 
 /**
  * Join pointer pointer char
@@ -38,11 +37,10 @@
  * @param target
  * @return char pointer
  */
-inline char *join_pointer_pointer_char(char **target)
-{
+inline char *join_pointer_pointer_char(char **target) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
-	char *result_tmp = calloc(MAX_SIZE, sizeof(char));
+	char *result_tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
 		item_length = length_pointer_char(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
@@ -57,29 +55,28 @@ inline char *join_pointer_pointer_char(char **target)
 }
 
 /**
- * Join delimiter pointer pointer char
- * Concatenating all elements in target array into single string with delimiter
+ * Join delimiteriter pointer pointer char
+ * Concatenating all elements in target array into single string with delimiteriter
  *
  * @param target
  * @return char pointer
  */
-inline char *join_delim_pointer_pointer_char(char **target, const char *delim)
-{
+inline char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
-	int delim_length = length_pointer_char((char*) delim);
-	char *result_tmp = calloc(MAX_SIZE, sizeof(char));
+	int delimiter_length = length_pointer_char((char*) delimiter);
+	char *result_tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
 		item_length = length_pointer_char(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
 		total_length += item_length;
-		memcpy(result_tmp + total_length, delim, delim_length);
-		total_length += delim_length;
+		memcpy(result_tmp + total_length, delimiter, delimiter_length);
+		total_length += delimiter_length;
 	}
 	// Deallocate memory
-	char *result = calloc(total_length - delim_length + 1, sizeof(char));
-	// Copy and remove remainder delimiter
-	memcpy(result, result_tmp, total_length - delim_length);
+	char *result = calloc(total_length - delimiter_length + 1, sizeof(char));
+	// Copy and remove remainder delimiteriter
+	memcpy(result, result_tmp, total_length - delimiter_length);
 	// Saving memory
 	free(result_tmp);
 	return result;
