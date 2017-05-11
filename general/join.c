@@ -46,17 +46,17 @@ inline char *join_pointer_pointer_char(char **target) {
 		memcpy(result_tmp + total_length, *pointer, item_length);
 		total_length += item_length;
 	}
-	// Deallocate memory
+	// Allocate enough memory for result
 	char *result = calloc(total_length + 1, sizeof(char));
 	memcpy(result, result_tmp, total_length);
-	// Saving memory
+	// Free memory for temporary variable
 	free(result_tmp);
 	return result;
 }
 
 /**
- * Join delimiteriter pointer pointer char
- * Concatenating all elements in target array into single string with delimiteriter
+ * Join delimiter pointer pointer char
+ * Concatenating all elements in target array into single string with delimiter
  *
  * @param target
  * @return char pointer
@@ -73,11 +73,11 @@ inline char *join_delimiter_pointer_pointer_char(char **target, const char *deli
 		memcpy(result_tmp + total_length, delimiter, delimiter_length);
 		total_length += delimiter_length;
 	}
-	// Deallocate memory
+	// Allocate enough memory for result
 	char *result = calloc(total_length - delimiter_length + 1, sizeof(char));
-	// Copy and remove remainder delimiteriter
+	// Copy and remove remainder delimiter
 	memcpy(result, result_tmp, total_length - delimiter_length);
-	// Saving memory
+	// Free memory for temporary variable
 	free(result_tmp);
 	return result;
 }
