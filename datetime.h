@@ -37,5 +37,4 @@ typedef unsigned __int32 uint32_t;
 
 long timestamp();
 char *date(long timestamp, char *format);
-uint64_t get_timestamp();
 #endif

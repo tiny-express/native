@@ -27,6 +27,20 @@
 #ifndef NATIVE_GENERAL_H
 #define NATIVE_GENERAL_H
 
+
+#define typename(x) _Generic((x),                                                 \
+                                                                                  \
+        _Bool: "_Bool",                  unsigned char: "unsigned char",          \
+         char: "char",                     signed char: "signed char",            \
+    short int: "short int",         unsigned short int: "unsigned short int",     \
+          int: "int",                     unsigned int: "unsigned int",           \
+     long int: "long int",           unsigned long int: "unsigned long int",      \
+long long int: "long long int", unsigned long long int: "unsigned long long int", \
+        float: "float",                         double: "double",                 \
+  long double: "long double",                    char*: "pointer to char",        \
+       void *: "pointer to void",                int *: "pointer to int",         \
+      default: "other")
+
 char **append_pointer_char(char **target, char *append);
 
 char *join_pointer_pointer_char(char **target);
@@ -46,12 +60,13 @@ char **segment_pointer_pointer_char(char **target, int from, int to);
 int linear_search(int array[], int lenght, int key);
 int binary_search(int array[], int lenght, int key);
 
-void distribution_counting_sort(int *array, int size, int max_value);
+void distribution_counting_sort(int *array, int size);
 
 void sort_int(int *array, int begin_array, int end_array);
-void sort_float(float *array, int begin_array, int end_array);
-void sort_double(double *array, int begin_array, int end_array);
-void sort_long(long *array, int begin_array, int end_array);
+//void sort_float(pointer_float array, int begin_array, int end_array);
+//void sort_double(pointer_double array, int begin_array, int end_array);
+//void sort_long(pointer_long array, int begin_array, int end_array);
+//void sort_string(pointer_char array, int begin_array, int end_array);
 
 int is_increase_int_array(int *array, int length);
 int is_increase_float_array(float *array, int length);
@@ -62,5 +77,11 @@ int is_decrease_int_array(int *array, int length);
 int is_decrease_float_array(float *array, int length);
 int is_decrease_double_array(double *array, int length);
 int is_decrease_long_array(long *array, int length);
+
+//int compare_pointer_char(char *value1, char *value2);
+int compare_int(int value1, int value2);
+int compare_float(float value1, float value2);
+int compare_double(double value1, double value2);
+int compare_long(long value1, long value2);
 
 #endif //NATIVE_GENERAL_H
