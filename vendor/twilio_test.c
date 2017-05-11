@@ -41,14 +41,14 @@
 TEST(Vendor, TwilioCheckNULL) {
 
     // Initialize all parameters are NULL
-    char *service_url = NULL;
-    char *account_id = NULL;
-    char *account_token = NULL;
+    char *service_url       = NULL;
+    char *account_id        = NULL;
+    char *account_token     = NULL;
     char *from_phone_number = NULL;
-    char *to_phone_number = NULL;
-    char *sms_content = NULL;
+    char *to_phone_number   = NULL;
+    char *sms_content       = NULL;
 
-    // Fail because account_id is NULL
+    // Re-assign service_url with valid string but fail because account_id is still NULL
     service_url = "valid_string";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
@@ -56,21 +56,21 @@ TEST(Vendor, TwilioCheckNULL) {
     account_id = "sample";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
-    // Re-assign account_token with valid string but fail because service_url is still NULL
+    // Re-assign account_token with valid string but fail because from_phone_number is still NULL
     account_token = "sample";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
-    // Re-assign from_phone_number with valid string but fail because phone_number_to is still NULL
+    // Re-assign from_phone_number with valid string but fail because to_phone_number is still NULL
     from_phone_number = "sample";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
-    // Re-assign phone_number_to with valid string but fail because sms_content is NULL
+    // Re-assign to_phone_number with valid string but fail because sms_content is NULL
     to_phone_number = "sample";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 
     // Re-assign sms_content with valid string but fail because of validation does not check
     // We will check in next test case
-    // See Vendor.TwilioSendSMS
+    // See Vendor.TwilioCheckValidation
     sms_content = "sample";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
 }
@@ -78,12 +78,12 @@ TEST(Vendor, TwilioCheckNULL) {
 TEST(Vendor, TwilioCheckValidation) {
 
     // Initialize all variable with valid information
-    char *service_url =  TWILLIO_SERVICE_URL;
-    char *account_id = TWILLIO_ACCOUNT_ID;
-    char *account_token = TWILLIO_ACCOUNT_TOKEN;
-    char *from_phone_number = TWILLIO_FROM_PHONE_NUMBER;
-    char *to_phone_number = TWILLIO_TO_PHONE_NUMBER;
-    char *sms_content = TWILLIO_SMS_CONTENT;
+    char *service_url           = TWILLIO_SERVICE_URL;
+    char *account_id            = TWILLIO_ACCOUNT_ID;
+    char *account_token         = TWILLIO_ACCOUNT_TOKEN;
+    char *from_phone_number     = TWILLIO_FROM_PHONE_NUMBER;
+    char *to_phone_number       = TWILLIO_TO_PHONE_NUMBER;
+    char *sms_content           = TWILLIO_SMS_CONTENT;
 
     // Fail because wrong url format
     char *invalid_service_url = "asdasdkasdkasd";
@@ -97,6 +97,8 @@ TEST(Vendor, TwilioCheckValidation) {
     char *invalid_to_phone_number = "--84 909 015 425";
     ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number, invalid_to_phone_number, sms_content));
 
+    // More wrong phone number format
+
     // Fail because sms content can not be empty
     char *invalid_sms_content = "";
     ASSERT_FALSE(send_sms(account_id, account_token, service_url, from_phone_number, to_phone_number, invalid_sms_content));
@@ -105,14 +107,20 @@ TEST(Vendor, TwilioCheckValidation) {
 TEST(Vendor, TwilioCheckRequestToServer) {
 
     // Initialize all variable with valid information
-    char *account_id = TWILLIO_ACCOUNT_ID;
-    char *account_token = TWILLIO_ACCOUNT_TOKEN;
-    char *service_url =  TWILLIO_SERVICE_URL;
+    char *account_id        = TWILLIO_ACCOUNT_ID;
+    char *account_token     = TWILLIO_ACCOUNT_TOKEN;
+    char *service_url       = TWILLIO_SERVICE_URL;
     char *from_phone_number = TWILLIO_FROM_PHONE_NUMBER;
-    char *to_phone_number = TWILLIO_TO_PHONE_NUMBER;
-    char *sms_content = TWILLIO_SMS_CONTENT;
+    char *to_phone_number   = TWILLIO_TO_PHONE_NUMBER;
+    char *sms_content       = TWILLIO_SMS_CONTENT;
 
     // Test success cases
     ASSERT_TRUE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
+
+    // Fail because from phone number is not exist
+    char *from_phone_number_not_exist = "84000000000";
+    ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number_not_exist, to_phone_number, sms_content));
+
+    // Can not check to phone number is not exist because Twilio does not validate phone number that's sent
 }
 

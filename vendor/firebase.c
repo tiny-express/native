@@ -24,17 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
 #include "../type.h"
+#include "../general.h"
 
+// TODO @dquang add notification data to format
 #define FIREBASE_REQUEST_FORMAT \
                 "{\"to\":\"%s\","\
                     "\"notification\":{" \
                         "\"title\":\"%s\"," \
                         "\"body\":\"%s\"" \
                     "},\"priority\":10}"
+
 #define SUCCESS_LABEL "success"
 #define SUCCESS_VALUE 1
 
@@ -53,7 +57,8 @@ int push_notification(
     char *service_token,
     char *device_token,
     char *notification_title,
-    char *notification_body) {
+    char *notification_body,
+    char *notification_data) {
 
     // NULL value or empty string can not be accepted
     if (is_empty(service_token)
@@ -68,8 +73,12 @@ int push_notification(
         return FALSE;
     }
 
+    if (notification_data == NULL) {
+        notification_data = "";
+    }
+
     char *request_body[2];
-    asprintf(&request_body[0], FIREBASE_REQUEST_FORMAT, device_token, notification_title, notification_body);
+    asprintf(&request_body[0], FIREBASE_REQUEST_FORMAT, device_token, notification_title, notification_body, notification_data);
     request_body[1] = '\0';
 
     char *request_header[3] = {
@@ -79,7 +88,6 @@ int push_notification(
     };
 
     char* response = http_request("POST", service_url, request_header, request_body);
-
     if (is_empty(response)) {
         return FALSE;
     }
@@ -87,10 +95,15 @@ int push_notification(
     // Firebase reponse has format
     // {"success": 1}
     // So we need to parse this response to get the success value
+    // TODO: @dquang replace by http_parser
+    response = string_from_to(
+            response,
+            string_index(response, "{", 1),
+            length_pointer_char(response) - 1
+    );
     JSON_Value *root_value = json_parse_string(response);
     JSON_Object *root_object = json_value_get_object(root_value);
     int status_value = (int) json_object_get_number(root_object, SUCCESS_LABEL);
-
     if (status_value == SUCCESS_VALUE) {
         return TRUE;
     }

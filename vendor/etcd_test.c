@@ -26,7 +26,8 @@
 
 #include "../builtin.h"
 #include "../unit_test.h"
-#include "../vendor.h"
+
+#define ETCD_MASTER "http://etcd.foodtiny.net:80"
 
 TEST(Vendor, EtcdGet) {
 
