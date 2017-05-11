@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_THREAD_H
-#define BUILTIN_THREAD_H
+#ifndef NATIVE_THREAD_H
+#define NATIVE_THREAD_H
 
 #include "thread/thread.h"
 

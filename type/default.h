@@ -24,10 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_DEFAULT_H
-#define BUILTIN_DEFAULT_H
+#ifndef NATIVE_TYPE_DEFAULT_H
+#define NATIVE_TYPE_DEFAULT_H
 
 char* string_default(char* target);
 double number_default(double target);
 
-#endif
+#endif //NATIVE_TYPE_DEFAULT_H
