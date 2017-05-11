@@ -55,7 +55,7 @@ int linear_search(int array[], int length, int key) {
  * @return result
  */
 int binary_search(int array[], int length, int key) {
-    int middle, left, right;
+    register int middle, left, right;
     left = 0;
     right = length;
     while (left <= right) {
