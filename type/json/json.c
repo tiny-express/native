@@ -26,6 +26,7 @@
 #endif /* _CRT_SECURE_NO_WARNINGS */
 #endif /* _MSC_VER */
 
+#include "../../general.h"
 #include "../json.h"
 
 #include <stdio.h>
