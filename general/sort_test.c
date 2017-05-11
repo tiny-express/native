@@ -25,6 +25,7 @@
  */
 
 #include "../unit_test.h"
+#include "../general.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -33,8 +34,8 @@ TEST(General, QuickSort) {
 
     int *array_int = malloc(50 * sizeof(int));
     srand(time(NULL));
-    int index = 0;
-    for (; index < 50; ++index) {
+    int index;
+    for (index = 0; index < 50; ++index) {
         array_int[index] = rand();
     }
     sort_int(array_int, 0, 49);
@@ -42,17 +43,16 @@ TEST(General, QuickSort) {
     free(array_int);
     ASSERT_TRUE(result);
 
-    // FLOAT
-    float *array_float = malloc(50 * sizeof(float));
-    srand((unsigned int)time(NULL));
-    index = 0;
-    for (; index < 50; index++) {
-        array_float[index] = ((float)rand()/(float)(RAND_MAX)) * 100.0;
-    }
-    sort_float(array_float, 0, 49);
-    result = is_increase_float_array(array_float, 50);
-    free(array_float);
-    ASSERT_TRUE(result);
+//    // FLOAT
+//    float *array_float = malloc(50 * sizeof(float));
+//    srand((unsigned int)time(NULL));
+//    for (index = 0; index < 50; index++) {
+//        array_float[index] = ((float)rand()/(float)(RAND_MAX)) * 100.0;
+//    }
+//    sort_float(array_float, 0, 49);
+//    result = is_increase_float_array(array_float, 50);
+//    free(array_float);
+//    ASSERT_TRUE(result);
 }
 
 TEST(General, DistributionCountingSort) {
@@ -61,7 +61,7 @@ TEST(General, DistributionCountingSort) {
     for (; index < 50; ++index) {
         array_int[index] = rand() % (10) + 1;
     }
-    distribution_counting_sort(array_int, 50, 10);
+    distribution_counting_sort(array_int, 50);
     int result = is_increase_int_array(array_int, 50);
     ASSERT_TRUE(result);
 }
