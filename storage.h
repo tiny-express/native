@@ -38,6 +38,6 @@
 #include <errno.h>
 
 char *file_get_contents(char *file_name);
-int file_put_contents(char *file_path, char *content);
+int file_put_contents(char *file_path, char *file_content);
 
 #endif
