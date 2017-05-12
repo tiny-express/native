@@ -23,3 +23,48 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/**
+ * Generic functions inspired from Python Builtin Functions
+ *
+ * We feel that Python has an awesome builtin functions so we would like to
+ * rewrite it in C++ using Native Library
+ *
+ * Thanks to Python Authors
+ * https://docs.python.org/2/library/functions.html
+ * © Copyright 1990-2017, Python Software Foundation
+ * All right reserve.
+ */
+
+#ifndef NATIVE_GENERIC_H
+#define NATIVE_GENERIC_H
+
+extern "C" {
+#include "builtin.h"
+};
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <iomanip>
+#include <algorithm>
+
+// Type casting
+template <typename T> int Integer(T target);
+template <typename T> long Long(T target);
+template <typename T> char* String(T target);
+template <typename T> double Double(T target);
+template <typename T> float Float(T target);
+template <typename T> bool Boolean(T target);
+
+// Math functions
+template <typename T> long round(double target, int precision);
+
+// Util functions
+template <typename T> int len(T target);
+template <typename T> int size(T target);
+template <typename T> char* file(char *file_name);
+template <typename T> bool file(char *file_name, char *file_content);
+
+#endif //NATIVE_GENERIC_H

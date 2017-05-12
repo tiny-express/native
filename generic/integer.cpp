@@ -25,96 +25,86 @@
  */
 
 extern "C" {
-#include "../general.h"
 #include "../string.h"
 }
-#include <iostream>
+#include "../native.h"
 
 /**
- * Length by default - un-supported type
+ * Integer value by default - un-supported type
  *
  * @param T
  * @param t
  * @return 0
  */
-template <typename T> int len(T) {
+template <typename T> int Integer(T) {
     return 0;
 }
 
 /**
- * Length of std::string
+ * Integer value of std::string
  *
  * @param target
  * @return int
  */
-template<> int len(std::string target) {
-    return target.length();
+template<> int Integer(std::string target) {
+    return string_to_int((char*) target.c_str());
 }
-template int len<std::string>(std::string target);
+template int Integer<std::string>(std::string target);
 
 /**
- * Length pointer char
+ * Integer value of char pointer
  *
  * @param target
  * @return int
  */
-template<> int len(char *target) {
-    return length_pointer_char(target);
+template<> int Integer(char *target) {
+    return string_to_int(target);
 }
-template int len<char*>(char *target);
+template int Integer<char*>(char *target);
 
 /**
- * Length short number
+ * Integer value of integer
  *
  * @param target
  * @return int
  */
-template<> int len(short target) {
-    return length_pointer_char(string_from_short(target));
+template<> int Integer(int target) {
+    return target;
 }
-template int len<short>(short target);
+template int Integer<int>(int target);
 
 /**
- * Length int number
+ * Integer value of long
+ * Can not cast long to int
  *
  * @param target
- * @return int
+ * @return 0
  */
-template<> int len(int target) {
-    return length_pointer_char(string_from_int(target));
+template<> int Integer(long target) {
+    return 0;
 }
-template int len<int>(int target);
+template int Integer<long>(long target);
 
 /**
- * Length long number
+ * Integer value of float
+ * Can not cast long to int
  *
  * @param target
  * @return int
  */
-template<> int len(long target) {
-    return length_pointer_char(string_from_long(target));
+template<> int Integer(float target) {
+    return (int) floor(target);
 }
-template int len<long>(long target);
+template int Integer<float>(float target);
 
 /**
- * Length float number
+ * Integer value of double
+ * Can not cast long to int
  *
  * @param target
  * @return int
  */
-template<> int len(float target) {
-    return length_pointer_char(string_from_float(target));
+template<> int Integer(double target) {
+    return (int) floor(target);
 }
-template int len<float>(float target);
-
-/**
- * Length double number
- *
- * @param target
- * @return int
- */
-template<> int len(double target) {
-    return length_pointer_char(string_from_double(target));
-}
-template int len<double>(double target);
-
+template int Integer<double>(double target);
