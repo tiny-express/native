@@ -84,7 +84,7 @@ void sort_int(int *array, int begin_array, int end_array);
 void sort_long(long *array, int begin_array, int end_array);
 void sort_short(short *array, int begin_array, int end_array);
 void sort_float(float *array, int begin_array, int end_array);
-//void sort_double(double array, int begin_array, int end_array);
+void sort_string(char *array[], int left_position, int right_position);
 
 
 int is_increase_int_array(int *array, int length);
@@ -92,6 +92,7 @@ int is_increase_float_array(float *array, int length);
 int is_increase_double_array(double *array, int length);
 int is_increase_long_array(long *array, int length);
 int is_increase_short_array(short *array, int length);
+int is_increase_string_array(char **array, int size);
 
 int is_decrease_int_array(int *array, int length);
 int is_decrease_float_array(float *array, int length);
