@@ -29,6 +29,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define SWAP(value1, value2, TYPE) { TYPE temp = value1; value1 = value2; value2 = temp; }
+
 /**
  * Distribution Counting Sort
  * Complexity O(M) with M is max value of array
@@ -38,28 +40,28 @@
  */
 void distribution_counting_sort(int *array, int size) {
 
-    register int current;
+    register int index;
     int max_value = 0;
-    for (current = 0; current < size; ++current) {
-        if (array[current] > max_value)
-            max_value = array[current];
+    for (index = 0; index < size; ++index) {
+        if (array[index] > max_value)
+            max_value = array[index];
     }
 
     int * counting_array = calloc(max_value, sizeof(int));
 
-    for(current = 0; current < size; current ++){
-        counting_array[array[current]]++;
+    for(index = 0; index < size; index ++){
+        counting_array[array[index]]++;
     }
 
     int num = 0;
-    current = 0;
+    index = 0;
 
-    while(current <= size) {
+    while(index <= size) {
         while(counting_array[num] > 0) {
-            array[current] = num;
+            array[index] = num;
             counting_array[num]--;
-            current++;
-            if(current > size){ break; }
+            index++;
+            if(index > size){ break; }
         }
         num++;
     }
@@ -74,18 +76,16 @@ void distribution_counting_sort(int *array, int size) {
  * @param key
  * @return result
  */
-#define QUICK_SORT(TYPE, TYPE_COMPARE)                                             \
-inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {       \
+#define QUICK_SORT(TYPE)                                                           \
+inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
     int left = left_position;                                                      \
     int right = right_position;                                                    \
     TYPE pivot = array[(left + right) / 2];                                        \
     while (left <= right) {                                                        \
-        while (compare_##TYPE_COMPARE(array[left], pivot) < 0)  left++;            \
-        while (compare_##TYPE_COMPARE(array[right], pivot) > 0) right--;           \
+        while (array[left] < pivot)  left++;                                       \
+        while (array[right] > pivot) right--;                                      \
         if (left <= right) {                                                       \
-            TYPE tmp = array[left];                                                \
-            array[right] = array[left];                                            \
-            array[left] = tmp;                                                     \
+            SWAP(array[left], array[right], TYPE);                                 \
             left++;                                                                \
             right--;                                                               \
         }                                                                          \
@@ -94,14 +94,7 @@ inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {   
     if (left < right_position) sort_##TYPE(array, left, right_position);           \
 }
 
-#define COMPARE(TYPE)                                                   \
-inline int compare_##TYPE(TYPE value1, TYPE value2) {                   \
-	if (typename(value1) == "pointer to char") {                        \
-		return (strcmp(value1, value2));	                            \
-	}                                                                   \
-                                                                        \
-	return ((value1) - (value2));                                       \
-}
+
 
 #define INCREASE(TYPE)                                      \
 int is_increase_##TYPE##_array(TYPE *array, int length) {   \
@@ -127,27 +120,18 @@ INCREASE(int);
 INCREASE(float);
 INCREASE(double);
 INCREASE(long);
+INCREASE(short);
 
 DECREASE(int);
 DECREASE(float);
 DECREASE(double);
 DECREASE(long);
 
-
-QUICK_SORT(int, int);
-
-//QUICK_SORT(pointer_float, float);
-//QUICK_SORT(pointer_long, long);
-//QUICK_SORT(pointer_double, double);
-//QUICK_SORT(pointer_char, pointer_char);
+QUICK_SORT(int);
+QUICK_SORT(long);
+QUICK_SORT(short);
 
 
-COMPARE(int);
-
-//COMPARE(int);
-//COMPARE(float);
-//COMPARE(long);
-//COMPARE(double);
 
 
 

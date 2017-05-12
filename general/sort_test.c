@@ -28,12 +28,11 @@
 #include "../general.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 TEST(General, QuickSort) {
     srand(time(NULL));
-
     int *array_int = malloc(50 * sizeof(int));
-    srand(time(NULL));
     int index;
     for (index = 0; index < 50; ++index) {
         array_int[index] = rand();
@@ -43,22 +42,39 @@ TEST(General, QuickSort) {
     free(array_int);
     ASSERT_TRUE(result);
 
-//    // FLOAT
-//    float *array_float = malloc(50 * sizeof(float));
-//    srand((unsigned int)time(NULL));
-//    for (index = 0; index < 50; index++) {
-//        array_float[index] = ((float)rand()/(float)(RAND_MAX)) * 100.0;
-//    }
-//    sort_float(array_float, 0, 49);
-//    result = is_increase_float_array(array_float, 50);
-//    free(array_float);
-//    ASSERT_TRUE(result);
+    // SHORT
+    short *array_short = malloc(50 * sizeof(short));
+    for (index = 0; index < 50; ++index) {
+        array_short[index] = rand() % (32767 + 32768 - 1) + (-32768);
+    }
+    sort_short(array_short, 0, 49);
+    result = is_increase_short_array(array_short, 50);
+    free(array_short);
+    ASSERT_TRUE(result);
+
+    // LONG
+    long *array_long = malloc(50 * sizeof(long));
+    for (index = 0; index < 0; ++index) {
+        array_long[index] =
+                (((uint64_t) rand() <<  0) & 0x000000000000FFFFull) |
+                (((uint64_t) rand() << 16) & 0x00000000FFFF0000ull) |
+                (((uint64_t) rand() << 32) & 0x0000FFFF00000000ull) |
+                (((uint64_t) rand() << 48) & 0xFFFF000000000000ull);
+        printf("%ld\t", array_long[index]);
+    }
+    for (index = 0; index < 0; ++index) {
+        printf("%ld\t", array_long[index]);
+    }
+    sort_long(array_long, 0, 49);
+    result = is_increase_long_array(array_long, 50);
+    free(array_long);
+    ASSERT_TRUE(result);
 }
 
 TEST(General, DistributionCountingSort) {
     int *array_int = malloc(50 * sizeof(int));
-    int index = 0;
-    for (; index < 50; ++index) {
+    int index;
+    for (index = 0; index < 50; ++index) {
         array_int[index] = rand() % (10) + 1;
     }
     distribution_counting_sort(array_int, 50);
