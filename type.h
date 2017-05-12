@@ -34,7 +34,9 @@ int asprintf(char **strp, const char *fmt, ...);
 
 #define TRUE 1
 #define FALSE 0
+#ifndef NULL
 #define NULL 0
+#endif
 #define MAX_STRING_LENGTH 100000
 
 #endif
