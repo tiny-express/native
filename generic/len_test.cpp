@@ -46,11 +46,9 @@ TEST(Generic, Len) {
     int target_long = 100000000;
     ASSERT_EQUAL(9, len(target_long));
 
-    // TODO - @anhkhoa will fix
-    int target_float = 1.23;
-    //ASSERT_EQUAL(4, len(target_float));
+    float target_float = 1.23;
+    ASSERT_EQUAL(4, len(target_float));
 
-    // TODO - @anhkhoa will fix
-    int target_double = 1234444444.112;
-    //ASSERT_EQUAL(14, len(target_double));
+    double target_double = 1234444444.112;
+    ASSERT_EQUAL(14, len(target_double));
 }

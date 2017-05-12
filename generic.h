@@ -64,6 +64,6 @@ template <typename T> long round(double target, int precision);
 template <typename T> int len(T target);
 template <typename T> int size(T target);
 template <typename T> char* file(char *file_name);
-template <typename T> void file(char *file_name, char *file_content);
+template <typename T> bool file(char *file_name, char *file_content);
 
 #endif //NATIVE_GENERIC_H
