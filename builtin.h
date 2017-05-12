@@ -28,6 +28,7 @@
 #define NATIVE_BUILTIN_H
 
 #include <stdio.h>
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
