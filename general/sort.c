@@ -28,6 +28,7 @@
 #include "../type.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define SWAP(value1, value2, TYPE) { TYPE temp = value1; value1 = value2; value2 = temp; }
 
@@ -94,7 +95,38 @@ inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {   
     if (left < right_position) sort_##TYPE(array, left, right_position);           \
 }
 
+void sort_string(char *array[], int left_position, int right_position) {
+    int left = left_position;
+    int right = right_position;
+    char *pivot = array[(left + right) / 2];
 
+    while (left <= right) {
+        while (strcmp(array[left], pivot) < 0)  left++;
+        while (strcmp(array[right], pivot) > 0) right--;
+        if (left <= right) {
+            char *temp = malloc(sizeof(char) * MAX_STRING_LENGTH);
+            strcpy(temp, array[left]);
+            array[left] = malloc(sizeof(char) * length_pointer_char(array[right]) + 1);
+            strcpy(array[left], array[right]);
+            array[right] = malloc(sizeof(char) * length_pointer_char(temp) + 1);
+            strcpy(array[right], temp);
+            free(temp);
+            left++;
+            right--;
+        }
+    }
+    if (left_position < right) sort_string(array, left_position, right);
+    if (left < right_position) sort_string(array, left, right_position);
+}
+
+inline int is_increase_string_array(char **array, int size) {
+    register int index = 0;
+    for (index = 0; index < size - 1; index++) {
+        if (strcmp(array[index], array[index + 1]) > 0)
+            return FALSE;
+    }
+    return TRUE;
+}
 
 #define INCREASE(TYPE)                                      \
 int is_increase_##TYPE##_array(TYPE *array, int length) {   \
