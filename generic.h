@@ -39,6 +39,31 @@
 #ifndef NATIVE_GENERIC_H
 #define NATIVE_GENERIC_H
 
+extern "C" {
+#include "builtin.h"
+};
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <algorithm>
+
+// Type casting
+template <typename T> int Integer(T target);
+template <typename T> long Long(T target);
+template <typename T> char* String(T target);
+template <typename T> double Double(T target);
+template <typename T> float Float(T target);
+template <typename T> bool Boolean(T target);
+
+// Math functions
+template <typename T> long round(double target, int precision);
+
+// Util functions
 template <typename T> int len(T target);
+template <typename T> int size(T target);
+template <typename T> char* file(char *file_name);
+template <typename T> void file(char *file_name, char *file_content);
 
 #endif //NATIVE_GENERIC_H
