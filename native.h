@@ -47,6 +47,7 @@ extern "C" {
 #include <string>
 #include <vector>
 #include <map>
+#include <iomanip>
 #include <algorithm>
 
 // Type casting
