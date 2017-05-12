@@ -25,8 +25,8 @@ This project is also useful for new developers in practical programming
 - Third Party (Twilio, SendGrid, Etcd, ElasticSearch, Stripe, Firebase)
 
 ### Generic C++ Functions (generic.h)
+- Integer, Long, Double, Float, Boolean, String
 - type, ord, chr, max, min, round
-- str, int, short, long, float, double
 - len, slice, sorted, reverse, range, sum
 
 ### Road map
