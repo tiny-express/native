@@ -33,7 +33,9 @@ extern "C" {
 #include "../native.h"
 
 /**
- * @tparam T
+ *
+ *
+ * @param T
  * @return NULL
  */
 template <typename T> char *String(T) {
@@ -130,28 +132,3 @@ template <> char *String(std::string str) {
 }
 template char *String<std::string>(std::string str);
 
-//**
-// *
-// * @param array
-// * @return
-// */
-//template <> char *String(int array[]) {
-//    std::string str;
-//    str.append("[");
-//
-//    register int index;
-//    int sizeOfAraay = sizeof(array) / sizeof(int);
-//
-//    for (index = 0; index < sizeOfAraay - 1; ++index) {
-//        str.append(string_from_int(array[index]));
-//        str.append(", ");
-//    }
-//
-//    str.append(string_from_int(array[index]));
-//    str.append("]");
-//
-//    char *result = new char[str.length() + 1];
-//    std::strcpy(result, str.c_str());
-//    return result;
-//}
-//template char *String<int[]>(int array[]);
