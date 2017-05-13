@@ -79,8 +79,7 @@ template <> char *String(std::vector<int> vectorInt) {
     str.append(string_from_int(*it));
     str.append("]");
 
-    char *result = new char[str.length() + 1];
-    std::strcpy(result, str.c_str());
+    char *result = string_copy((char *) str.c_str());
     return result;
 }
 template char *String<std::vector<int> >(std::vector<int> vectorInt);
@@ -102,8 +101,7 @@ template <> char *String(std::vector<double> vectorInt) {
     str.append(string_from_double(*it));
     str.append("]");
 
-    char *result = new char[str.length() + 1];
-    std::strcpy(result, str.c_str());
+    char *result = string_copy((char *) str.c_str());
     return result;
 }
 template char *String<std::vector<double> >(std::vector<double> vectorInt);
