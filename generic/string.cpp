@@ -33,19 +33,20 @@ extern "C" {
 #include "../native.h"
 
 /**
- *
+ * Un-supported type
  *
  * @param T
- * @return NULL
+ * @return ""
  */
 template <typename T> char *String(T) {
-    return NULL;
+    return "";
 }
 
 /**
+ * String int number
  *
  * @param int_number
- * @return pointer char
+ * @return Pointer char
  */
 template <> char *String(int int_number) {
     char *result = string_from_int(int_number);
@@ -54,9 +55,10 @@ template <> char *String(int int_number) {
 template char *String<int>(int int_number);
 
 /**
+ *  String double number
  *
  * @param double_number
- * @return pointer char
+ * @return Pointer char
  */
 template <> char *String(double doubleNumber) {
     char *result = string_from_double(doubleNumber);
@@ -65,9 +67,10 @@ template <> char *String(double doubleNumber) {
 template char *String<double>(double doubleNumber);
 
 /**
+ * String of vector int
  *
  * @param vectorInt
- * @return pointer char
+ * @return Pointer char
  */
 template <> char *String(std::vector<int> vectorInt) {
     std::string str;
@@ -87,9 +90,10 @@ template <> char *String(std::vector<int> vectorInt) {
 template char *String<std::vector<int> >(std::vector<int> vectorInt);
 
 /**
+ * String of vector double
  *
  * @param vectorDouble
- * @return pointer char
+ * @return Pointer char
  */
 template <> char *String(std::vector<double> vectorInt) {
     std::string str;
@@ -108,22 +112,23 @@ template <> char *String(std::vector<double> vectorInt) {
 }
 template char *String<std::vector<double> >(std::vector<double> vectorInt);
 
-/**
- *
- * @param pointer char
- * @return
- */
-template <> char *String(const char *pointerChar) {
-    char *result = new char[strlen(pointerChar) + 1];
-    std::strcpy(result, pointerChar);
-    return result;
-}
-template char *String<const char *>(const char *pointerChar);
+//**
+// *
+// * @param pointer char
+// * @return Pointer char
+// */
+//template <> char *String(const char *pointerChar) {
+//    char *result = new char[strlen(pointerChar) + 1];
+//    std::strcpy(result, pointerChar);
+//    return result;
+//}
+//template char *String<const char *>(const char *pointerChar);
 
 /**
+ * Convert string (C++) to pointer char
  *
- * @param str
- * @return
+ * @param string
+ * @return Pointer char
  */
 template <> char *String(std::string str) {
     char *result = new char[str.length() + 1];
