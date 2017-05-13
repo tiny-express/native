@@ -27,7 +27,7 @@
 extern "C" {
 #include "../string.h"
 }
-#include "../generic.h"
+#include "../native.h"
 
 /**
  * Integer value by default - un-supported type

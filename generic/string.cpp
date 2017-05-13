@@ -27,10 +27,10 @@
 extern "C" {
 #include "../string.h"
 }
-
-#include "../generic.h"
+#include <string>
 #include <vector>
 #include <cstring>
+#include "../native.h"
 
 /**
  * @tparam T
@@ -110,6 +110,18 @@ template char *String<std::vector<double> >(std::vector<double> vectorInt);
 
 /**
  *
+ * @param pointer char
+ * @return
+ */
+template <> char *String(const char *pointerChar) {
+    char *result = new char[strlen(pointerChar) + 1];
+    std::strcpy(result, pointerChar);
+    return result;
+}
+template char *String<const char *>(const char *pointerChar);
+
+/**
+ *
  * @param str
  * @return
  */
@@ -118,6 +130,7 @@ template <> char *String(std::string str) {
     std::strcpy(result, str.c_str());
     return result;
 }
+template char *String<std::string>(std::string str);
 
 //**
 // *

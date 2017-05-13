@@ -119,6 +119,13 @@ void sort_string(char *array[], int left_position, int right_position) {
     if (left < right_position) sort_string(array, left, right_position);
 }
 
+/**
+ * Is increase string array
+ *
+ * @param array
+ * @param size
+ * @return TRUE | FALSE
+ */
 inline int is_increase_string_array(char **array, int size) {
     register int index = 0;
     for (index = 0; index < size - 1; index++) {
@@ -128,6 +135,13 @@ inline int is_increase_string_array(char **array, int size) {
     return TRUE;
 }
 
+/**
+ * Is increase generic type array
+ *
+ * @param array
+ * @param size
+ * @return TRUE | FALSE
+ */
 #define INCREASE(TYPE)                                      \
 int is_increase_##TYPE##_array(TYPE *array, int length) {   \
     register int index = 0;                                 \
@@ -148,22 +162,19 @@ int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
     return TRUE;                                            \
 }
 
+INCREASE(short);
 INCREASE(int);
+INCREASE(long);
 INCREASE(float);
 INCREASE(double);
-INCREASE(long);
-INCREASE(short);
 
+DECREASE(short);
 DECREASE(int);
+DECREASE(long);
 DECREASE(float);
 DECREASE(double);
-DECREASE(long);
 
+QUICK_SORT(short);
 QUICK_SORT(int);
 QUICK_SORT(long);
-QUICK_SORT(short);
-
-
-
-
 
