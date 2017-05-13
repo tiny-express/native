@@ -37,6 +37,5 @@ TEST(Generic, String) {
     char *result6 = String(pointerChar);
     const char *expect6 = "foodtiny";
     ASSERT_STR(expect6, result6);
-    delete result6;
 }
 
