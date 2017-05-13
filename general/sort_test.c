@@ -45,18 +45,18 @@ TEST(General, QuickSort) {
 
 TEST(General, SortString) {
     char *target[] = {
-            (char *) "The",
-            (char *) "quick",
-            (char *) "brown",
-            (char *) "fox",
-            (char *) "jumps",
-            (char *) "over",
-            (char *) "the",
-            (char *) "lazy",
-            (char *) "dog",
-            '\0'
+        (char *) "The",
+        (char *) "quick",
+        (char *) "brown",
+        (char *) "fox",
+        (char *) "jumps",
+        (char *) "over",
+        (char *) "the",
+        (char *) "lazy",
+        (char *) "dog",
+        '\0'
     };
-    int index;
+
     sort_string(target, 0, 8);
     int result = is_increase_string_array(target, 9);
     ASSERT_TRUE(result);

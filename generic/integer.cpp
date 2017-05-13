@@ -33,7 +33,6 @@ extern "C" {
  * Integer value by default - un-supported type
  *
  * @param T
- * @param t
  * @return 0
  */
 template <typename T> int Integer(T) {

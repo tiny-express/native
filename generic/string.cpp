@@ -23,3 +23,124 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+extern "C" {
+#include "../string.h"
+}
+
+#include "../generic.h"
+#include <vector>
+#include <cstring>
+
+/**
+ * @tparam T
+ * @return NULL
+ */
+template <typename T> char *String(T) {
+    return NULL;
+}
+
+/**
+ *
+ * @param int_number
+ * @return pointer char
+ */
+template <> char *String(int int_number) {
+    char *result = string_from_int(int_number);
+    return result;
+}
+template char *String<int>(int int_number);
+
+/**
+ *
+ * @param double_number
+ * @return pointer char
+ */
+template <> char *String(double doubleNumber) {
+    char *result = string_from_double(doubleNumber);
+    return result;
+}
+template char *String<double>(double doubleNumber);
+
+/**
+ *
+ * @param vectorInt
+ * @return pointer char
+ */
+template <> char *String(std::vector<int> vectorInt) {
+    std::string str;
+    str.append("[");
+    std::vector<int>::iterator it;
+
+    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+        str.append(string_from_int(*it));
+        str.append(", ");
+    }
+    str.append(string_from_int(*it));
+    str.append("]");
+
+    char *result = new char[str.length() + 1];
+    std::strcpy(result, str.c_str());
+    return result;
+}
+template char *String<std::vector<int> >(std::vector<int> vectorInt);
+
+/**
+ *
+ * @param vectorDouble
+ * @return pointer char
+ */
+template <> char *String(std::vector<double> vectorInt) {
+    std::string str;
+    str.append("[");
+    std::vector<double>::iterator it;
+
+    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+        str.append(string_from_double(*it));
+        str.append(", ");
+    }
+    str.append(string_from_double(*it));
+    str.append("]");
+
+    char *result = new char[str.length() + 1];
+    std::strcpy(result, str.c_str());
+    return result;
+}
+template char *String<std::vector<double> >(std::vector<double> vectorInt);
+
+/**
+ *
+ * @param str
+ * @return
+ */
+template <> char *String(std::string str) {
+    char *result = new char[str.length() + 1];
+    std::strcpy(result, str.c_str());
+    return result;
+}
+
+//**
+// *
+// * @param array
+// * @return
+// */
+//template <> char *String(int array[]) {
+//    std::string str;
+//    str.append("[");
+//
+//    register int index;
+//    int sizeOfAraay = sizeof(array) / sizeof(int);
+//
+//    for (index = 0; index < sizeOfAraay - 1; ++index) {
+//        str.append(string_from_int(array[index]));
+//        str.append(", ");
+//    }
+//
+//    str.append(string_from_int(array[index]));
+//    str.append("]");
+//
+//    char *result = new char[str.length() + 1];
+//    std::strcpy(result, str.c_str());
+//    return result;
+//}
+//template char *String<int[]>(int array[]);

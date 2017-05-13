@@ -28,7 +28,7 @@ extern "C" {
 #include "../unit_test.h"
 }
 #include "../generic.h"
-#include <iostream>
+
 
 TEST(Generic, Integer) {
 
@@ -49,5 +49,4 @@ TEST(Generic, Integer) {
 
     int string_to_integer_valid_2 = Integer((char*) "-123.45");
     ASSERT_EQUAL(-123, string_to_integer_valid_2);
-
 }
