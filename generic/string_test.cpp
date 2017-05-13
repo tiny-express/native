@@ -32,11 +32,11 @@ TEST(Generic, String) {
     const char *expect5 = "[12.3457, 12.3457, 12.3457, 12.3457]";
     ASSERT_STR(expect5, result5);
     delete result5;
-//
-//    char const *pointerChar = "foodtiny";
-//    char *result6 = String(pointerChar);
-//    const char *expect6 = "foodtiny";
-//    ASSERT_STR(expect6, result6);
-//    delete result6;
+
+    char const *pointerChar = "foodtiny";
+    char *result6 = String(pointerChar);
+    const char *expect6 = "foodtiny";
+    ASSERT_STR(expect6, result6);
+    delete result6;
 }
 
