@@ -27,7 +27,8 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../generic.h"
+#include "../native.h"
+
 
 
 TEST(Generic, Integer) {

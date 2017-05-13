@@ -1,7 +1,8 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../generic.h"
+
+#include "../native.h"
 #include <vector>
 #include <string>
 
@@ -32,5 +33,10 @@ TEST(Generic, String) {
     ASSERT_STR(expect5, result5);
     delete result5;
 
+    char const *pointerChar = "foodtiny";
+    char *result6 = String(pointerChar);
+    const char *expect6 = "foodtiny";
+    ASSERT_STR(expect6, result6);
+    delete result6;
 }
 
