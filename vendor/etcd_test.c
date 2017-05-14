@@ -27,7 +27,8 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-#define ETCD_MASTER "http://etcd.foodtiny.net:80"
+#define ETCD_MASTER "http://etcd.foodtiny.net"
+#define ETCD_KEY "/elassandra/development/seeds/test_node"
 
 TEST(Vendor, EtcdGet) {
 
@@ -43,20 +44,20 @@ TEST(Vendor, EtcdGet) {
 
 TEST(Vendor, EtcdSet) {
 
-    char *result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "1223");
-    ASSERT_TRUE(length_pointer_char(result) > 0);
+    int result = etcd_set(ETCD_MASTER, ETCD_KEY, "1223");
+    ASSERT_TRUE(result);
 
     result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "Hello World");
-    ASSERT_TRUE(length_pointer_char(result) > 0);
+    ASSERT_TRUE(result);
 
     result = etcd_set("", "/elassandra/development/seeds/test_node", "Hello World");
-    ASSERT_FALSE(length_pointer_char(result) > 0);
+    ASSERT_FALSE(result);
 
     result = etcd_set(ETCD_MASTER, "", "Hello World");
-    ASSERT_FALSE(length_pointer_char(result) > 0);
+    ASSERT_FALSE(result);
 
     result = etcd_set(ETCD_MASTER, "/elassandra/development/seeds/test_node", "");
-    ASSERT_FALSE(length_pointer_char(result) > 0);
+    ASSERT_FALSE(result);
 }
 
 
