@@ -29,7 +29,6 @@ extern "C" {
 }
 #include <string>
 #include <vector>
-#include <cstring>
 #include "../native.h"
 
 /**
@@ -131,8 +130,7 @@ template char *String<std::vector<double> >(std::vector<double> vectorInt);
  * @return Pointer char
  */
 template <> char *String(std::string str) {
-    char *result = new char[str.length() + 1];
-    std::strcpy(result, str.c_str());
+    char *result = string_copy((char*) str.c_str());
     return result;
 }
 template char *String<std::string>(std::string str);
