@@ -29,9 +29,8 @@
 #include "../string.h"
 #include "../builtin.h"
 #include "../type.h"
+#include "../crypto.h"
 
-#define STRING_NOT_FOUND        -1
-#define TWILIO_RESPONSE_SUCCESS "201 CREATED"
 /**
  * Send mail via Twillio service
  *
@@ -71,14 +70,9 @@ int send_sms(
         return FALSE;
     }
 
-    // TODO: remove hard code and uncomment 3 commands below when base64_encode completed
-    char* token = "QUM4NWRkZDg1ZGJkZDRmMDAyYzc5OTY3NmI3YWQyODkxNDo4N2M3NmZmZTAxNTA3OGMxN2U3MDgwZDE5YWY0NmNhZQ==";
-
-    /*
     char* token;
     asprintf(&token, "%s:%s", account_id, account_token);
-    token =  base64_encode(token);
-    */
+    token =  base64_encode(token, length_pointer_char(token));
 
     char *from_phone_number_with_prefix = from_phone_number;
     if (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND) {
