@@ -6,19 +6,19 @@ extern "C" {
 
 TEST(Generic, String) {
 
-    char *result1 = String(3);
-    const char *expect1 = "3";
-    ASSERT_STR(expect1, result1);
-
-    char *result2 = String(4039249.5023);
-    const char *expect2 = "4039249.5023";
-    ASSERT_STR(expect2, result2);
-
-    std::string str("foodtiny");
-    char *result3 = String(str);
-    const char *expect3 = "foodtiny";
-    ASSERT_STR(expect3, result3);
-    delete result3;
+//    char *result1 = String(3);
+//    const char *expect1 = "3";
+//    ASSERT_STR(expect1, result1);
+//
+//    char *result2 = String(4039249.5023);
+//    const char *expect2 = "4039249.5023";
+//    ASSERT_STR(expect2, result2);
+//
+//    std::string str("foodtiny");
+//    char *result3 = String(str);
+//    const char *expect3 = "foodtiny";
+//    ASSERT_STR(expect3, result3);
+//    delete result3;
 
 //    std::vector<int> vectorInt(4, 2000);
 //    char *result4 = String(vectorInt);
