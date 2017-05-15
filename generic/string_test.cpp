@@ -3,8 +3,6 @@ extern "C" {
 }
 
 #include "../native.h"
-#include <vector>
-#include <string>
 
 TEST(Generic, String) {
     char *result1 = String(3);

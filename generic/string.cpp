@@ -35,23 +35,23 @@ extern "C" {
  * Un-supported type
  *
  * @param T
- * @return ""
+ * @return empty string
  */
 template <typename T> char *String(T) {
-    return "";
+    return (char*) "\0";
 }
 
 /**
- * String int number
+ * String  int number
  *
  * @param int_number
  * @return Pointer char
  */
-template <> char *String(int int_number) {
-    char *result = string_from_int(int_number);
+template <> char *String(int target) {
+    char *result = string_from_int(target);
     return result;
 }
-template char *String<int>(int int_number);
+template char *String<int>(int target);
 
 /**
  *  String double number
@@ -59,11 +59,11 @@ template char *String<int>(int int_number);
  * @param double_number
  * @return Pointer char
  */
-template <> char *String(double doubleNumber) {
-    char *result = string_from_double(doubleNumber);
+template <> char *String(double target) {
+    char *result = string_from_double(target);
     return result;
 }
-template char *String<double>(double doubleNumber);
+template char *String<double>(double target);
 
 /**
  * String of vector int
@@ -71,12 +71,12 @@ template char *String<double>(double doubleNumber);
  * @param vectorInt
  * @return Pointer char
  */
-template <> char *String(std::vector<int> vectorInt) {
+template <> char *String(std::vector<int> target) {
     std::string str;
     str.append("[");
     std::vector<int>::iterator it;
 
-    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+    for (it = target.begin(); it != target.end() - 1; ++it) {
         str.append(string_from_int(*it));
         str.append(", ");
     }
@@ -86,20 +86,20 @@ template <> char *String(std::vector<int> vectorInt) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<int> >(std::vector<int> vectorInt);
+template char *String<std::vector<int> >(std::vector<int> target);
 
 /**
  * String of vector double
  *
- * @param vectorDouble
- * @return Pointer char
+ * @param target
+ * @return pointer char
  */
-template <> char *String(std::vector<double> vectorInt) {
+template <> char *String(std::vector<double> target) {
     std::string str;
     str.append("[");
     std::vector<double>::iterator it;
 
-    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+    for (it = target.begin(); it != target.end() - 1; ++it) {
         str.append(string_from_double(*it));
         str.append(", ");
     }
@@ -109,29 +109,17 @@ template <> char *String(std::vector<double> vectorInt) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<double> >(std::vector<double> vectorInt);
-
-//**
-// *
-// * @param pointer char
-// * @return Pointer char
-// */
-//template <> char *String(const char *pointerChar) {
-//    char *result = new char[strlen(pointerChar) + 1];
-//    std::strcpy(result, pointerChar);
-//    return result;
-//}
-//template char *String<const char *>(const char *pointerChar);
+template char *String<std::vector<double> >(std::vector<double> target);
 
 /**
- * Convert string (C++) to pointer char
+ * Convert std::string to pointer char
  *
  * @param string
- * @return Pointer char
+ * @return pointer char
  */
-template <> char *String(std::string str) {
-    char *result = string_copy((char*) str.c_str());
+template <> char *String(std::string target) {
+    char *result = string_copy((char*) target.c_str());
     return result;
 }
-template char *String<std::string>(std::string str);
+template char *String<std::string>(std::string target);
 
