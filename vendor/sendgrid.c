@@ -30,16 +30,6 @@
 #include "../validator.h"
 #include "../type.h"
 
-#define SENDGRID_RESPONSE_SUCCESS "202 Accepted"
-#define SENDGRID_REQUEST_FORMAT \
-                "{\"personalizations\":"\
-                     "[{\"to\": [{\"email\": \"%s\"}],"\
-                     "\"subject\": \"%s\"}],"\
-                "\"from\":"\
-                     "{\"email\": \"%s\"},"\
-                "\"content\":"\
-                     "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
-
 /**
  * Send mail via SendGrid service
  *

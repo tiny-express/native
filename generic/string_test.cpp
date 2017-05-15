@@ -3,10 +3,9 @@ extern "C" {
 }
 
 #include "../native.h"
-#include <vector>
-#include <string>
 
 TEST(Generic, String) {
+
 //    char *result1 = String(3);
 //    const char *expect1 = "3";
 //    ASSERT_STR(expect1, result1);
@@ -20,7 +19,7 @@ TEST(Generic, String) {
 //    const char *expect3 = "foodtiny";
 //    ASSERT_STR(expect3, result3);
 //    delete result3;
-//
+
 //    std::vector<int> vectorInt(4, 2000);
 //    char *result4 = String(vectorInt);
 //    const char *expect4 = "[2000, 2000, 2000, 2000]";

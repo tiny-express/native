@@ -27,8 +27,32 @@
 #ifndef NATIVE_VENDOR_H
 #define NATIVE_VENDOR_H
 
+#define SENDGRID_RESPONSE_SUCCESS "202 Accepted"
+#define SENDGRID_REQUEST_FORMAT \
+                "{\"personalizations\":"\
+                     "[{\"to\": [{\"email\": \"%s\"}],"\
+                     "\"subject\": \"%s\"}],"\
+                "\"from\":"\
+                     "{\"email\": \"%s\"},"\
+                "\"content\":"\
+                     "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
+
+// TODO @dquang add notification 'data' to format
+#define FIREBASE_REQUEST_FORMAT \
+                "{\"to\":\"%s\","\
+                    "\"notification\":{" \
+                        "\"title\":\"%s\"," \
+                        "\"body\":\"%s\"" \
+                    "},\"priority\":10}"
+
+#define SUCCESS_LABEL "success"
+#define SUCCESS_VALUE 1
+
+#define STRING_NOT_FOUND        -1
+#define TWILIO_RESPONSE_SUCCESS "201 CREATED"
+
 char* etcd_get(char* host, char *key);
-char* etcd_set(char* host, char *key, char *value);
+int etcd_set(char* host, char *key, char *value);
 
 char *es_query(char *host, char *index, char *query);
 

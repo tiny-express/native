@@ -1,9 +1,3 @@
-//
-// Created by User on 4/5/17.
-//
-
-#include "sha1.h"
-
 /*
 SHA-1 in C
 By Steve Reid <steve@edmweb.com>
@@ -29,7 +23,7 @@ A million repetitions of "a"
 /* for uint32_t */
 #include <stdint.h>
 
-#include "sha1.h"
+#include "../crypto.h"
 
 
 #define rol(value, bits) (((value) << (bits)) | ((value) >> (32 - (bits))))

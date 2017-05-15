@@ -28,15 +28,16 @@
 #define NATIVE_TYPE_H
 
 #include "type/json.h"
-#include "type/default.h"
-
-int asprintf(char **strp, const char *fmt, ...);
 
 #define TRUE 1
 #define FALSE 0
+#define MAX_STRING_LENGTH 100000
+
 #ifndef NULL
 #define NULL 0
 #endif
-#define MAX_STRING_LENGTH 100000
+
+char* string_default(char* target);
+double number_default(double target);
 
 #endif

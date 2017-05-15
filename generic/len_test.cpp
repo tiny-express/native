@@ -37,6 +37,17 @@ TEST(Generic, Len) {
     char *target_pointer_char = (char*) "Hello world";
     ASSERT_EQUAL(11, len(target_pointer_char));
 
+    char *target_pointer_pointer_char[] = {
+        (char*) "abc",
+        (char*) "abd",
+        (char*) "abf",
+        (char*) "xyz",
+        (char*) "123",
+        (char*) "3456",
+        (char*) '\0'
+    };
+    ASSERT_EQUAL(6, len(target_pointer_pointer_char));
+
     short target_short = 10;
     ASSERT_EQUAL(2, len(target_short));
 
