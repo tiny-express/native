@@ -39,6 +39,7 @@ inline int length_pointer_##TYPE(TYPE *target) {\
 // length of pointer pointer
 #define P_P_LEN(TYPE); \
 inline int length_pointer_pointer_##TYPE(TYPE **target) {\
+	if (target == NULL) return 0;\
 	register TYPE**pointer;\
 	for (pointer = target; *pointer; ++pointer);\
 	return pointer - target;\
