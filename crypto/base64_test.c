@@ -26,7 +26,6 @@
 
 #include "../unit_test.h"
 #include "../crypto.h"
-#include "../general.h"
 
 TEST(Crypto, Base64Encode) {
     char *expect = "Zm9vZHRpbnk=";
