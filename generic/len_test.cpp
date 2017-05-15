@@ -44,7 +44,7 @@ TEST(Generic, Len) {
         (char*) "xyz",
         (char*) "123",
         (char*) "3456",
-        '\0'
+        (char*) '\0'
     };
     ASSERT_EQUAL(6, len(target_pointer_pointer_char));
 
