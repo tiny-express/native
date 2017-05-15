@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "default.h"
+#include "../type.h"
 #include <stdio.h>
 
 char* string_default(char *target) {
