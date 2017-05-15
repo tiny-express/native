@@ -64,6 +64,17 @@ template<> int len(char *target) {
 template int len<char*>(char *target);
 
 /**
+ * Length pointer pointer char
+ *
+ * @param target
+ * @return int
+ */
+template<> int len(char **target) {
+    return length_pointer_pointer_char(target);
+}
+template int len<char**>(char **target);
+
+/**
  * Length short number
  *
  * @param target
