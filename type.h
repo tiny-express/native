@@ -28,7 +28,6 @@
 #define NATIVE_TYPE_H
 
 #include "type/json.h"
-#include "type/default.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -37,5 +36,8 @@
 #ifndef NULL
 #define NULL 0
 #endif
+
+char* string_default(char* target);
+double number_default(double target);
 
 #endif

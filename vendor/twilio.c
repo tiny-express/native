@@ -31,8 +31,6 @@
 #include "../type.h"
 #include "../crypto.h"
 
-#define STRING_NOT_FOUND        -1
-#define TWILIO_RESPONSE_SUCCESS "201 CREATED"
 /**
  * Send mail via Twillio service
  *
@@ -75,7 +73,7 @@ int send_sms(
     char* token;
     asprintf(&token, "%s:%s", account_id, account_token);
     token =  base64_encode(token, length_pointer_char(token));
-    
+
     char *from_phone_number_with_prefix = from_phone_number;
     if (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND) {
         from_phone_number_with_prefix = string_concat("+", from_phone_number);

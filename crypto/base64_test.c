@@ -25,7 +25,7 @@
  */
 
 #include "../unit_test.h"
-#include "base64.h"
+#include "../crypto.h"
 #include "../general.h"
 
 TEST(Crypto, Base64Encode) {
