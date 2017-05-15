@@ -31,7 +31,7 @@
 #include "../type.h"
 #include "../general.h"
 
-// TODO @dquang add notification data to format
+// TODO @dquang add notification 'data' to format
 #define FIREBASE_REQUEST_FORMAT \
                 "{\"to\":\"%s\","\
                     "\"notification\":{" \
