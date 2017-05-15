@@ -1,5 +1,5 @@
-#include "../../builtin.h"
-#include "../../unit_test.h"
+#include "../builtin.h"
+#include "../unit_test.h"
 
 TEST(Type, JsonSerialize) {
 	JSON_Value *root_value = json_value_init_object();
