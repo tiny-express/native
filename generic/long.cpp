@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
- extern "C" {
+extern "C" {
 #include "../string.h"
 }
 #include "../native.h"
