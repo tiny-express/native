@@ -25,31 +25,32 @@
  */
 
 
-
 #include <cmath>
-
+#include <stdlib.h>
 
 /**
  * Round double number
- *
- *
+ * absolute value
  * @param double
  * @return double
  */
-
-
-double round(double number, int precision)
+double round(double target, int precision)
 {
-    double number_temp = number;
-    if(precision < 0) {
-        precision = - precision;
-    }
-    int value = 1;
-    register int index;
-    for(index = 0; index < precision; index++){
-        value = value * 10;
-    }
-    number_temp = round(number_temp * value) / value;
-    return number_temp;
+    precision = abs(precision);
+    int value = pow(10,precision);
+    return round(target * value) / value;
+}
+
+/**
+ * Round fl number
+ * absolute value
+ * @param float
+ * @return float
+ */
+float round(float target, int precision)
+{
+    precision = abs(precision);
+    int value = pow(10,precision);
+    return round(target * value) / value;
 }
 
