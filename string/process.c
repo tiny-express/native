@@ -26,41 +26,45 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../type.h"
 #include "../string.h"
 #include "../general.h"
 
-#define MAX_SIZE 1000000
-#define TRUE 1
-#define FALSE 0
-
-// Find and replace
-inline char *string_replace(char *target, char* find, char* replace_with) {
-    if (target == NULL || find == NULL || replace_with == NULL) {
+/**
+ * String replace
+ * Find a string in target and replace it by replace_with
+ *
+ * @param target
+ * @param find_string
+ * @param replace_with
+ * @return string
+ */
+inline char *string_replace(char *target, char* find_string, char* replace_with) {
+    if (target == NULL || find_string == NULL || replace_with == NULL) {
         return NULL;
     }
-	char *result;
+	int old_length = length_pointer_char(find_string);
+	int new_length = length_pointer_char(replace_with);
 	register int i, count = 0;
-	int oldlen = length_pointer_char(find);
-	int newlen = length_pointer_char(replace_with);
 	for (i = 0; target[i] != '\0'; i++) {
-		if (strstr(&target[i], find) == &target[i]) {
+		if (strstr(&target[i], find_string) == &target[i]) {
 			count++;
-			i += oldlen - 1;
+			i += old_length - 1;
 		}
 	}
-	result = (char*) malloc(i + count * (newlen - oldlen));
+	char *result = (char*) malloc(i + count * (new_length - old_length));
 	if (result == NULL) {
-		exit(EXIT_FAILURE);
+		return NULL;
 	}
 	i = 0;
-	while (*target)
-	{
-		if (strstr(target, find) == target)
-		{
+	while (*target) {
+		if (strstr(target, find_string) == target) {
 			strcpy(&result[i], replace_with);
-			i += newlen;
-			target += oldlen;
-		} else result[i++] = *target++;
+			i += new_length;
+			target += old_length;
+		} else {
+			result[i++] = *target++;
+		}
 	}
 	result[i] = '\0';
 	return result;
@@ -77,7 +81,7 @@ inline char **string_split(char *target, const char *delim_) {
 	int distance = len_target - len_delim + 1;
 	int len_item = 0;
 	char *segment = calloc(len_delim, sizeof(char));
-	char **data = malloc(MAX_SIZE * sizeof(char*));
+	char **data = malloc(MAX_STRING_LENGTH * sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
 	while (to <= distance) {
@@ -123,12 +127,12 @@ inline char *string_join(char *target[], const char *delim) {
     }
 	int num = length_pointer_pointer_char(target) - 1;
 	int len = 0, wlen = 0;
-	char *tmp = calloc(MAX_SIZE, sizeof(char));
-	register int i;
-	for (i=0; i<num; i++) {
+	char *tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
+	register int index;
+	for (index = 0; index < num; index++) {
 		// Copy memory segment
-		wlen = length_pointer_char(target[i]);
-		memcpy(tmp + len, target[i], wlen);
+		wlen = length_pointer_char(target[index]);
+		memcpy(tmp + len, target[index], wlen);
 		len += wlen;
 		// Copy memory segment
 		wlen = length_pointer_char(delim);

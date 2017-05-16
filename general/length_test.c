@@ -28,7 +28,7 @@
 #include "../unit_test.h"
 
 TEST(General, LengthPointerChar) {
-	char* data = "Hello world";
+	char *data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 
 	data = "";
@@ -41,8 +41,11 @@ TEST(General, LengthPointerChar) {
 	ASSERT_EQUAL(0, length_pointer_char(data));
 }
 
-
 TEST(General, LengthPointerPointerChar) {
+
+	char *data_null = NULL;
+	ASSERT_EQUAL(0, length_pointer_pointer_char(data_null));
+
 	char *data_raw[] = {
 		(char*) "abc",
 		(char*) "abd",
@@ -54,6 +57,7 @@ TEST(General, LengthPointerPointerChar) {
 	};
 	char **data1 = (char**) data_raw;
 	ASSERT_EQUAL(6, length_pointer_pointer_char(data1));
+
 	// Dynamic string
 	int NUM = 135;
 	char** data2 = (char**) calloc(NUM + 1, sizeof(char*));

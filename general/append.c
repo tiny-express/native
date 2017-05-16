@@ -29,6 +29,14 @@
 #include <string.h>
 #include "../general.h"
 
+/**
+ * Append pointer char
+ * Use to append one more element to array
+ *
+ * @param target
+ * @param append
+ * @return char pointer pointer
+ */
 inline char **append_pointer_char(char **target, char *append) {
 	int len = length_pointer_pointer_char(target);
 	char **pointer = calloc(len + 2, sizeof(char *));

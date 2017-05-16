@@ -24,28 +24,157 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Distribution Counting Sort
+#include "../general.h"
+#include "../type.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
-// Quick Sort
+#define SWAP(value1, value2, TYPE) { TYPE temp = value1; value1 = value2; value2 = temp; }
 
-void quick_sort(int *array, int left , int right) {
-    if (left >= right) {
-        return;
+/**
+ * Distribution Counting Sort
+ * Complexity O(M) with M is max value of array
+ *
+ * @param array
+ * @param size
+ */
+void distribution_counting_sort(int *array, int size) {
+
+    register int index;
+    int max_value = 0;
+    for (index = 0; index < size; ++index) {
+        if (array[index] > max_value)
+            max_value = array[index];
     }
 
-    int array_mid_value = array[(left + right) / 2];
+    int * counting_array = calloc(max_value, sizeof(int));
 
-    int left_index = left;
-    int right_index = right;
+    for(index = 0; index < size; index ++){
+        counting_array[array[index]]++;
+    }
 
-    while (left_index < right_index) {
-        while (array[right_index] >= array_mid_value) {
-            right_index--;
+    int num = 0;
+    index = 0;
+
+    while(index <= size) {
+        while(counting_array[num] > 0) {
+            array[index] = num;
+            counting_array[num]--;
+            index++;
+            if(index > size){ break; }
         }
-
-        while (array[left_index] <= array_mid_value) {
-            left_index++;
-        }
-        
+        num++;
     }
 }
+
+/**
+ * Quick Sort
+ * Complexity O(M*log(N))
+ *
+ * @param array
+ * @param length
+ * @param key
+ * @return result
+ */
+#define QUICK_SORT(TYPE)                                                           \
+inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
+    int left = left_position;                                                      \
+    int right = right_position;                                                    \
+    TYPE pivot = array[(left + right) / 2];                                        \
+    while (left <= right) {                                                        \
+        while (array[left] < pivot)  left++;                                       \
+        while (array[right] > pivot) right--;                                      \
+        if (left <= right) {                                                       \
+            SWAP(array[left], array[right], TYPE);                                 \
+            left++;                                                                \
+            right--;                                                               \
+        }                                                                          \
+    }                                                                              \
+    if (left_position < right) sort_##TYPE(array, left_position, right);           \
+    if (left < right_position) sort_##TYPE(array, left, right_position);           \
+}
+
+void sort_string(char *array[], int left_position, int right_position) {
+    int left = left_position;
+    int right = right_position;
+    char *pivot = array[(left + right) / 2];
+
+    while (left <= right) {
+        while (strcmp(array[left], pivot) < 0)  left++;
+        while (strcmp(array[right], pivot) > 0) right--;
+        if (left <= right) {
+            char *temp = malloc(sizeof(char) * MAX_STRING_LENGTH);
+            strcpy(temp, array[left]);
+            array[left] = malloc(sizeof(char) * length_pointer_char(array[right]) + 1);
+            strcpy(array[left], array[right]);
+            array[right] = malloc(sizeof(char) * length_pointer_char(temp) + 1);
+            strcpy(array[right], temp);
+            free(temp);
+            left++;
+            right--;
+        }
+    }
+    if (left_position < right) sort_string(array, left_position, right);
+    if (left < right_position) sort_string(array, left, right_position);
+}
+
+/**
+ * Is increase string array
+ *
+ * @param array
+ * @param size
+ * @return TRUE | FALSE
+ */
+inline int is_increase_string_array(char **array, int size) {
+    register int index = 0;
+    for (index = 0; index < size - 1; index++) {
+        if (strcmp(array[index], array[index + 1]) > 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+/**
+ * Is increase generic type array
+ *
+ * @param array
+ * @param size
+ * @return TRUE | FALSE
+ */
+#define INCREASE(TYPE)                                      \
+int is_increase_##TYPE##_array(TYPE *array, int length) {   \
+    register int index = 0;                                 \
+    for (index = 0; index < length - 1; index++) {          \
+        if (array[index] > array[index + 1])                \
+            return FALSE;                                   \
+    }                                                       \
+    return TRUE;                                            \
+}
+
+#define DECREASE(TYPE)                                      \
+int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
+    register int index = 0;                                 \
+    for (index = 0; index < length - 1; index++) {          \
+        if (array[index] < array[index + 1])                \
+        return FALSE;                                       \
+    }                                                       \
+    return TRUE;                                            \
+}
+
+INCREASE(short);
+INCREASE(int);
+INCREASE(long);
+INCREASE(float);
+INCREASE(double);
+
+DECREASE(short);
+DECREASE(int);
+DECREASE(long);
+DECREASE(float);
+DECREASE(double);
+
+QUICK_SORT(short);
+QUICK_SORT(int);
+QUICK_SORT(long);
+

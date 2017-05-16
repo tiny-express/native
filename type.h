@@ -24,14 +24,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_TYPE_H
-#define BUILTIN_TYPE_H
+#ifndef NATIVE_TYPE_H
+#define NATIVE_TYPE_H
 
 #include "type/json.h"
-#include "type/default.h"
 
 #define TRUE 1
 #define FALSE 0
+#define MAX_STRING_LENGTH 100000
+
+#ifndef NULL
 #define NULL 0
+#endif
+
+char* string_default(char* target);
+double number_default(double target);
 
 #endif
