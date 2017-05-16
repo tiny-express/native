@@ -372,7 +372,6 @@ TEST(String, Standard) {
     expect = "hello world world";
     result = string_standardized(target);
     ASSERT_STR(expect, result);
-
 }
 
 
