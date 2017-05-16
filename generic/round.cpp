@@ -34,23 +34,23 @@
  * @param double
  * @return double
  */
-double round(double target, int precision)
-{
+double round(double target, int precision) {
     precision = abs(precision);
     int value = pow(10,precision);
-    return round(target * value) / value;
+    double result =  round(target * value) / value;
+    return result;
 }
 
 /**
- * Round fl number
+ * Round float number
  * absolute value
  * @param float
  * @return float
  */
-float round(float target, int precision)
-{
+float round(float target, int precision) {
     precision = abs(precision);
     int value = pow(10,precision);
-    return round(target * value) / value;
+    float result = (float) round(target * value) / value;
+    return result;
 }
 
