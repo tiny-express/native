@@ -54,3 +54,7 @@ TEST(Generic, Long) {
     int string_to_long_valid_2 = Long((char*) "-123.45");
     ASSERT_EQUAL(-123, string_to_long_valid_2);
 }
+
+TEST(Generic, TestEmail) {
+    
+}
