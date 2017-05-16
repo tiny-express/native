@@ -55,21 +55,47 @@ extern "C" {
  */
 
 char *
-base64_encode (const unsigned char *, size_t);
+base64_encode(const unsigned char *, size_t);
 
 /**
  * Dencode `char *' source with `size_t' size.
  * Returns a `unsigned char *' base64 decoded string.
  */
 unsigned char *
-base64_decode (const char *, size_t);
+base64_decode(const char *, size_t);
 
 /**
  * Dencode `char *' source with `size_t' size.
  * Returns a `unsigned char *' base64 decoded string + size of decoded string.
  */
 unsigned char *
-base64_decode_ex (const char *, size_t, size_t *);
+base64_decode_ex(const char *, size_t, size_t *);
+
+/**
+ * Encode `unsigned char *'
+ * Return a `char *' sha1 decoded string
+ */
+char *sha1_encode(unsigned char *target);
+
+/**
+ * Decode `char *'
+ * Returns a `unsigned char *' sha1 decoded string
+ */
+unsigned char *
+sha1_decode(const char *target);
+
+/**
+ * Encode `unsigned char *'
+ * Return a `char *' md5 decoded string
+ */
+char *md5_encode(unsigned char *target);
+
+/**
+ * Decode `char *'
+ * Returns a `unsigned char *' md5 decoded string
+ */
+unsigned char *
+md5_decode(const char *target);
 
 #ifdef __cplusplus
 }
