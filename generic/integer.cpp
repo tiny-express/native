@@ -72,36 +72,36 @@ template<> int Integer(int target) {
 }
 template int Integer<int>(int target);
 
-// /**
-//  * Integer value of long
-//  * Can not cast long to int
-//  *
-//  * @param target
-//  * @return 0
-//  */
-// template<> int Integer(long target) {
-//     return 0;
-// }
-// template int Integer<long>(long target);
+/**
+ * Integer value of long
+ * Can not cast long to int
+ *
+ * @param target
+ * @return 0
+ */
+template<> int Integer(long target) {
+    return 0;
+}
+template int Integer<long>(long target);
 
-// /**
-//  * Integer value of float
-//  *
-//  * @param target
-//  * @return int
-//  */
-// template<> int Integer(float target) {
-//     return (int) floor(target);
-// }
-// template int Integer<float>(float target);
+/**
+ * Integer value of float
+ *
+ * @param target
+ * @return int
+ */
+template<> int Integer(float target) {
+    return (int) floor(target);
+}
+template int Integer<float>(float target);
 
-// /**
-//  * Integer value of double
-//  *
-//  * @param target
-//  * @return int
-//  */
-// template<> int Integer(double target) {
-//     return (int) floor(target);
-// }
-// template int Integer<double>(double target);
+/**
+ * Integer value of double
+ *
+ * @param target
+ * @return int
+ */
+template<> int Integer(double target) {
+    return (int) floor(target);
+}
+template int Integer<double>(double target);
