@@ -23,3 +23,85 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+extern "C" {
+#include "../string.h"
+}
+#include "../native.h"
+
+/**
+ * Float value by default - un-supported type
+ *
+ * @param T
+ * @return 0
+ */
+template <typename T> double Double(T) {
+    return 0;
+}
+
+/**
+ * Floatvalue of std::string
+ *
+ * @param target
+ * @return float
+ */
+template<> float Float(std::string target) {
+    return string_to_float((char*) target.c_str());
+}
+template float Float<std::string>(std::string target);
+
+/**
+ * Float value of char pointer
+ *
+ * @param target
+ * @return float
+ */
+template<> float Float(char *target) {
+    return string_to_float(target);
+}
+template float Float<char*>(char *target);
+
+/**
+ * Float value of integer
+ *
+ * @param target
+ * @return double
+ */
+template<> float Float(int target) {
+    return target;
+}
+template float Float<int>(int target);
+
+/**
+ * Float value of long
+ *
+ * @param target
+ * @return 0
+ */
+template<> float Float(long target) {
+    return 0;
+}
+template float Float<long>(long target);
+
+/**
+ * Float value of float
+ *
+ * @param target
+ * @return float
+ */
+template<> float Float(float target) {
+    return (int) floor(target);
+}
+template float Float<float>(float target);
+
+/**
+ * Float value of double
+ *
+ * @param target
+ * @return float
+ */
+template<> float Float(double target) {
+    return (float) floor(target);
+}
+
+template float Float<double>(double target);

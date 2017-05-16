@@ -28,6 +28,6 @@ char *md5_encode(unsigned char *target) {
 }
 
 
-unsigned char *md5_decode(const char *target) {
-    return NULL;
-}
+//unsigned char *md5_decode(const char *target) {
+//    return "\0";
+//}

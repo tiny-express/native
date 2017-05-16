@@ -7,7 +7,3 @@ TEST(Crypto, Md5Encode) {
     char *expect = "24dca22fdab7a594baa005d55db4f7bf";
     ASSERT_STR(expect, result);
 }
-
-TEST(Crypto, Md5Decode) {
-
-}

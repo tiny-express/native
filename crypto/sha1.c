@@ -28,11 +28,11 @@ char *sha1_encode(unsigned char *target) {
     return result;
 }
 
-/**
- *
- * @param target
- * @return
- */
-unsigned char *sha1_decode(const char *target) {
-    return NULL;
-}
+//**
+// *
+// * @param target
+// * @return
+// */
+//unsigned char *sha1_decode(const char *target) {
+//    return "";
+//}
