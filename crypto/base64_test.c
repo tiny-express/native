@@ -24,6 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// TODO
-// Apple Push Notification
-// Google Push Notification
+#include "../unit_test.h"
+#include "../crypto.h"
+
+TEST(Crypto, Base64Encode) {
+    char *expect = "Zm9vZHRpbnk=";
+    char *target = "foodtiny";
+    char *result = base64_encode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+
+    expect = "7IKs656R7ZW0";
+    target = "사랑해";
+    result = base64_encode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+
+    expect = "4Lic4Lih4Lij4Lix4LiB4LiE4Li44LiT";
+    target = "ผมรักคุณ";
+    result = base64_encode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+}
+
+TEST(Crypto, Base64Decode) {
+    char *expect = "foodtiny";
+    char *target = "Zm9vZHRpbnk=";
+    char *result = base64_decode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+
+    expect = "사랑해";
+    target = "7IKs656R7ZW0";
+    result = base64_decode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+
+    expect = "ผมรักคุณ";
+    target = "4Lic4Lih4Lij4Lix4LiB4LiE4Li44LiT";
+    result = base64_decode(target, length_pointer_char(target));
+    ASSERT_STR(expect, result);
+}

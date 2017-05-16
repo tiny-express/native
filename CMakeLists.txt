@@ -25,10 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8)
-project(native)
-
-# Native is written in pure C
-enable_language(C)
+project(native C CXX)
 
 # Only enable GNU Assembly for Linux amd64
 # Please careful when you would like to optimize any function in ASM
@@ -72,6 +69,7 @@ file(GLOB_RECURSE SOURCES
     crypto/*
     datetime/*
     general/*
+    generic/*
     network/*
     server/*
     storage/*
@@ -82,6 +80,10 @@ file(GLOB_RECURSE SOURCES
     validator/*
 )
 
+file(GLOB_RECURSE HEADERS
+    ./*.h
+)
+
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
     context/*_test.c
@@ -89,6 +91,7 @@ file(GLOB_RECURSE TESTS
     crypto/*_test.c
     datetime/*_test.c
     general/*_test.c
+    generic/*_test.cpp
     network/*_test.c
     server/*_test.c
     storage/*_test.c
@@ -109,14 +112,26 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
-add_library(${PROJECT_NAME} ${SOURCES})
+add_library(${PROJECT_NAME}_static ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+# Add make test
+enable_testing()
+add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
+
+# Add make install - installation to unix system
+install (TARGETS ${PROJECT_NAME}_static DESTINATION bin)
+install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME}      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif()

@@ -24,13 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUILTIN_THREAD_H
-#define BUILTIN_THREAD_H
+#ifndef NATIVE_THREAD_H
+#define NATIVE_THREAD_H
 
 #include <pthread.h>
+#include "thread/thpool.h"
 
-pthread_t set_interval(void *callback, unsigned int miliseconds);
+typedef struct thread_argument {
+    void *callback;
+    unsigned int milliseconds;
+} thread_argument;
 
-pthread_t set_time_out(void *callback, unsigned int miliseconds);
+void *loop(void *argument);
+void *run(void *argument);
+
+pthread_t set_interval(void *callback, unsigned int milliseconds);
+pthread_t set_time_out(void *callback, unsigned int milliseconds);
 
 #endif
