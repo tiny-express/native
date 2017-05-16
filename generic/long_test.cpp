@@ -56,5 +56,5 @@ TEST(Generic, Long) {
 }
 
 TEST(Generic, TestEmail) {
-    
+    char *Test = "hello";
 }
