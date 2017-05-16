@@ -59,7 +59,9 @@ template <typename T> float Float(T target);
 template <typename T> bool Boolean(T target);
 
 // Math functions
-template <typename T> long round(double target, int precision);
+//template <typename T> double round(double target, int precision);
+double round(double target, int precision);
+
 
 // Util functions
 template <typename T> int len(T target);

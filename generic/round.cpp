@@ -23,3 +23,53 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+
+/**
+ * Round double number
+ *
+ *
+ * @param double
+ * @return double
+ */
+
+#include <iostream>
+using namespace std;
+double round(double number, int precision)
+{
+    double number_temp = number;
+    int value = 10;
+    if (precision > 0) {
+        register int i;
+        for (i = 0; i < precision - 1; i++) {
+            value = value * 10;
+        }
+        int temp = int(number_temp * value * 10) % 10;
+        if (temp >= 5 && temp <= 9 || temp >= -9 && temp <= -5) {
+            number_temp = double(int(number_temp * value) + 1) / value;
+        }else {
+            number_temp = double(int(number_temp * value)) / value;
+        }
+    }else if (precision < 0) {
+        precision = -precision;
+        register int i;
+        for (i = 0; i < precision - 1; i++) {
+            value = value * 10;
+        }
+        int temp = (int(number_temp) / (value / 10)) % 10;
+        if  (temp >= 5 && temp <= 9 || temp >= -9 && temp <= -5) {
+            number_temp = (int(number_temp) / value + 1 ) * value;
+        }else{
+            number_temp = int(number_temp / value) * value;
+        }
+    }else {
+        int temp = int(number_temp * value) % 10;
+        if  (temp >= 5 && temp <= 9 || temp >= -9 && temp <= -5) {
+            number_temp = int(number_temp) + 1;
+        }else {
+            number_temp = int(number_temp);
+        }
+    }
+    return number_temp;
+}
+
