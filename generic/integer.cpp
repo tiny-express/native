@@ -86,7 +86,6 @@ template int Integer<long>(long target);
 
 /**
  * Integer value of float
- * Can not cast long to int
  *
  * @param target
  * @return int
@@ -98,7 +97,6 @@ template int Integer<float>(float target);
 
 /**
  * Integer value of double
- * Can not cast long to int
  *
  * @param target
  * @return int
