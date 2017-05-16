@@ -31,32 +31,29 @@ extern "C" {
 
 
 
-TEST(Generic, TestEmail) {
-    const char *Test = "hello";
-}
-
-
-TEST(Generic, Long) {
+TEST(Generic, Float) {
     
-    long string_to_long = Long(std::string("123456"));
-    ASSERT_EQUAL(123456, string_to_long);
+    double string_to_float = Float(std::string("123456"));
+    ASSERT_EQUAL(123456.0, string_to_float);
 
-    long string_to_long_not_valid = Long((char*) "Hello world");
-    ASSERT_EQUAL(0, string_to_long_not_valid);
+    double string_to_float_not_valid = Float((char*) "Hello world");
+    ASSERT_EQUAL(0, string_to_float_not_valid);
 
-    long string_to_long_valid_1 = Long((char*) "-12345");
-    ASSERT_EQUAL(-12345, string_to_long_valid_1);
+    double string_to_float_valid_1 = Float((char*) "-12345");
+    ASSERT_EQUAL(-12345.0, string_to_float_valid_1);
 
-    long string_to_long_valid_2 = Long((char*) "-123.45");
-    ASSERT_EQUAL(-123, string_to_long_valid_2);
+    double string_to_float_valid_2 = Float((char*) "-123.45");
+    ASSERT_EQUAL(-123.0, string_to_float_valid_2);
     
-    long long_to_long = Long(2147483647);
-    ASSERT_EQUAL(2147483647, long_to_long);
+    double double_to_float = Float(2.3E-3);
+    ASSERT_EQUAL(0.0023, double_to_float);
+    
+    double long_to_float = Double(2147483647);
+    ASSERT_EQUAL(2147483647.0, long_to_float);
 
-    long integer_to_long = Long(2345);
-    ASSERT_EQUAL(2345, integer_to_long);
+    double integer_to_float = Float(2345);
+    ASSERT_EQUAL(2345.0, integer_to_float);
 
-    long float_to_long = Long(1.234);
-    ASSERT_EQUAL(1, float_to_long);
-
+    double float_to_float = Float(234231.234);
+    ASSERT_EQUAL(234231.234, float_to_float);
 }
