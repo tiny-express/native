@@ -7,7 +7,7 @@
  * Encode `unsigned char *'
  * Return a `char *' md5 decoded string
  */
-char *md5(unsigned char *target) {
+char *md5_encode(unsigned char *target) {
     unsigned char digest[16];
 
     int length_target = length_pointer_char(target);
