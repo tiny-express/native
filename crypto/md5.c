@@ -4,17 +4,16 @@
 #include "../string.h"
 
 /**
- *
- * @param target
- * @return
+ * Encode `unsigned char *'
+ * Return a `char *' md5 decoded string
  */
-char *md5_encode(unsigned char *target) {
+char *md5(unsigned char *target) {
     unsigned char digest[16];
 
     int length_target = length_pointer_char(target);
     MD5_CTX ctx;
     MD5_Init(&ctx);
-    MD5_Update(&ctx, target, strlen(target));
+    MD5_Update(&ctx, target, (size_t)length_target);
     MD5_Final(digest, &ctx);
 
     char mdString[33];
@@ -27,7 +26,3 @@ char *md5_encode(unsigned char *target) {
     return result;
 }
 
-
-//unsigned char *md5_decode(const char *target) {
-//    return "\0";
-//}

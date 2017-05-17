@@ -75,27 +75,14 @@ base64_decode_ex(const char *, size_t, size_t *);
  * Encode `unsigned char *'
  * Return a `char *' sha1 decoded string
  */
-char *sha1_encode(unsigned char *target);
-
-/**
- * Decode `char *'
- * Returns a `unsigned char *' sha1 decoded string
- */
-unsigned char *
-sha1_decode(const char *target);
+char *sha1(unsigned char *target);
 
 /**
  * Encode `unsigned char *'
  * Return a `char *' md5 decoded string
  */
-char *md5_encode(unsigned char *target);
+char *md5(unsigned char *target);
 
-/**
- * Decode `char *'
- * Returns a `unsigned char *' md5 decoded string
- */
-unsigned char *
-md5_decode(const char *target);
 
 #ifdef __cplusplus
 }
