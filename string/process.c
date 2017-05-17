@@ -102,9 +102,9 @@ inline char **string_split(char *target, const char *delim_) {
 		++to;
 	}
 	if (to - from > 0) {
-		len_item = to - from;
+		len_item = len_target - from;
 		char *item = malloc((len_item + 1) * sizeof(char));
-		memcpy(item, &target[from], len_item + 1);
+		memcpy(item, &target[from], len_item);
 		item[len_item] = '\0';
 		// Append element to result
 		data[count++] = item;
