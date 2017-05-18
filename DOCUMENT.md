@@ -17,13 +17,13 @@
 ### Productivity C++ Functions
 
 #### Standard Type
--[ ] Short
--[x] Integer
--[x] Long
--[x] Float
--[x] Double
--[x] String
--[x] Boolean
+- [ ] Short
+- [x] Integer
+- [x] Long
+- [x] Float
+- [x] Double
+- [x] String
+- [x] Boolean
 
 #### Util functions
 
