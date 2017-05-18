@@ -3,23 +3,21 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 
-This library provides a set of standard functions which are common used in C/C++ application.
+This library provides a set of low-level and productivity functions for C/C++ application.
 
-Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
+Beside standard library, we would like to have a greater library with main goals:
 
-We use this library in our production and unit test with Travis CI so it just works !
+- Blazing fast performance of GAS & C
+- Flexibility of Python builtin functions
+- Advanced data structure of Java collections
+- High level object oriented, generic types of C++
+- Third party clients support for FoodTiny micro-components
 
-This project is also useful for new developers in practical programming
-
-### Road map
-- Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
-- Develop fundamental algorithms and advanced data structure
-- Fix comments and complete test cases for all exported functions
+This project is also useful for new developers in practical programming.
 
 ### Assembly Optimization
 - This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
-- C version of that function should be implemented first then optimize again for Linux platform
-- GNU Assembly (GAS) in this project is ONLY compatible with Linux amd64
+- C version of that function should be implemented first then optimize again in GNU Assembly for Linux amd64
 
 ### Useful Resources
 - Debugging & Profiling with [Valgrind](http://valgrind.org/)
@@ -70,9 +68,9 @@ Note: You need to link your program with native library (libnative_static.a or l
 
 # Documentation
 
-### Productivity C++ Functions
+### C++ Functions
 
-#### Type Casting (inspired by Java)
+#### Type Casting
 - [ ] Short - short
 - [x] Integer - int
 - [x] Long - long
@@ -81,13 +79,15 @@ Note: You need to link your program with native library (libnative_static.a or l
 - [x] String - char*
 - [x] Boolean - bool
 
-##### Usage
-```cpp
-int number = Integer(1.234);
-char *text = String(-12456);
-```
+#### Collections
+- [ ] ArrayList
+- [ ] LinkedList
+- [ ] HashMap
+- [ ] HashSet
+- [ ] TreeSet
+- [ ] PriorityQueue
 
-#### Utility (inspired by Python)
+#### Builtin Functions
 - [x] empty
 - [x] len
 - [ ] copy
@@ -107,7 +107,7 @@ char *text = String(-12456);
 - [x] sha1
 - [ ] type
 
-### Low-level C Library
+### C Library
 #### Common
 - [x] length_pointer_char
 - [x] length_pointer_pointer_char
