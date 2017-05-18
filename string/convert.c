@@ -64,7 +64,6 @@ STR_FROM(float,  "%g\0");
 STR_FROM(double, "%.16g\0");
 
 STR_TO(short,  "%hi\0");
-STR_TO(long,   "%ld\0");
 STR_TO(float,  "%g\0");
 STR_TO(double, "%lg\0");
 
@@ -79,4 +78,17 @@ int string_to_int(char* target) {
 		return 0;
 	}
 	return atoi(target);
+}
+
+/**
+ * String to long
+ *
+ * @param target
+ * @return string
+ */
+long string_to_long(char* target) {
+	if (target == NULL) {
+		return 0;
+	}
+	return atol(target);
 }
