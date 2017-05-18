@@ -4,8 +4,10 @@
 #include "../string.h"
 
 /**
- * Encode `unsigned char *'
- * Return a `char *' sha1 decoded string
+ * SHA1 Encode
+ *
+ * @param target
+ * @return sha1 string
  */
 char *sha1_encode(unsigned char *target) {
 

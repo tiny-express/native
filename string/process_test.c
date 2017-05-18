@@ -366,7 +366,7 @@ TEST(String, ProcessTitle) {
     ASSERT_STR(expect, result);
 }
 
-TEST(String, Standard) {
+TEST(String, ProcessStandardized) {
     char *target = "  hello  world ";
     char *expect = "hello world";
     char *result = string_standardized(target);

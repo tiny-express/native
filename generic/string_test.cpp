@@ -1,7 +1,6 @@
 extern "C" {
 #include "../unit_test.h"
 }
-
 #include "../native.h"
 
 TEST(Generic, String) {
