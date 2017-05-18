@@ -35,21 +35,23 @@ $ make -j && make test
 $ sudo make install
 ```
 
-#### Sample program with length_pointer_char
-```c
+#### Sample program
+```cpp
 #include <stdio.h>
-#include <native/general.h>
+#include <native/native.h>
 
 int main() {
     char *sample_text = "Hello World";
-    printf("Length of sample_text is %d\n", length_pointer_char(sample_text));
+    printf("Length of sample_text is %d\n", len(sample_text));
+    int sample_number = 1021;
+    printf("Length of sample_number is %d\n", len(sample_number));
     fflush(stdout);
     return 0;
 }
 ```
 
-#### Sample unit test with native (thanks to C-Unit)
-```c
+#### Unit test with native (thanks to C-Unit)
+```cpp
 #include <native/unit_test.h>
 
 TEST(YourTestSuite, YourTestCase) {
