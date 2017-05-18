@@ -73,17 +73,17 @@ Note: You need to link your program with native library (libnative_static.a or l
 ### Productivity C++ Functions
 
 #### Type Casting (inspired by Java class)
-- [ ] Short
-- [x] Integer
-- [x] Long
-- [x] Float
-- [x] Double
-- [x] String
-- [x] Boolean
+- [ ] Short - short
+- [x] Integer - int
+- [x] Long - long
+- [x] Float - float
+- [x] Double - double
+- [x] String - char*
+- [x] Boolean - bool
 
 ```cpp
 int number = Integer(1.234);
-string text = String(-12456);
+char *text = String(-12456);
 ```
 
 #### Utility (inspired by Python functions)
