@@ -71,41 +71,41 @@ inline char *string_replace(char *target, char* find_string, char* replace_with)
 }
 
 // Split string to one dimession array by delimiter
-inline char **string_split(char *target, const char *delim_) {
-    if (target == NULL || delim_ == NULL) {
+inline char **string_split(char *target, const char *constant_delimiter) {
+    if (target == NULL || constant_delimiter == NULL) {
         return NULL;
     }
-	char* delim = (char*) delim_;
-	int len_target = length_pointer_char(target);
-	int len_delim = length_pointer_char(delim);
-	int distance = len_target - len_delim + 1;
-	int len_item = 0;
-	char *segment = calloc(len_delim, sizeof(char));
+	char* delimiter = (char*) constant_delimiter;
+	int length_target = length_pointer_char(target);
+	int length_delimiter = length_pointer_char(delimiter);
+	int distance = length_target - length_delimiter + 1;
+	int length_item = 0;
+	char *segment = calloc(length_delimiter, sizeof(char));
 	char **data = malloc(MAX_STRING_LENGTH * sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
 	while (to <= distance) {
-		memcpy(segment, &target[to], len_delim);
-		if (strcmp(segment, delim) == 0) {
+		memcpy(segment, &target[to], length_delimiter);
+		if (strcmp(segment, delimiter) == 0) {
 			if (to - from > 0) {
-				len_item = to - from;
-				char *item = malloc((len_item + 1) * sizeof(char));
-				memcpy(item, &target[from], len_item);
-				item[len_item] = '\0';
+				length_item = to - from;
+				char *item = malloc((length_item + 1) * sizeof(char));
+				memcpy(item, &target[from], length_item);
+				item[length_item] = '\0';
 				// Append element to result
 				data[count++] = item;
-				from = to + len_delim;
-			} else from += len_delim;
+				from = to + length_delimiter;
+			} else from += length_delimiter;
 			to = from;
 			continue;
 		}
 		++to;
 	}
 	if (to - from > 0) {
-		len_item = len_target - from;
-		char *item = malloc((len_item + 1) * sizeof(char));
-		memcpy(item, &target[from], len_item);
-		item[len_item] = '\0';
+		length_item = length_target - from;
+		char *item = malloc((length_item + 1) * sizeof(char));
+		memcpy(item, &target[from], length_item);
+		item[length_item] = '\0';
 		// Append element to result
 		data[count++] = item;
 	}
@@ -121,8 +121,8 @@ inline char **string_split(char *target, const char *delim_) {
 }
 
 // Join string with delimiter
-inline char *string_join(char *target[], const char *delim) {
-    if (target == NULL || delim == NULL) {
+inline char *string_join(char *target[], const char *delimiter) {
+    if (target == NULL || delimiter == NULL) {
         return NULL;
     }
 	int num = length_pointer_pointer_char(target) - 1;
@@ -135,8 +135,8 @@ inline char *string_join(char *target[], const char *delim) {
 		memcpy(tmp + len, target[index], wlen);
 		len += wlen;
 		// Copy memory segment
-		wlen = length_pointer_char(delim);
-		memcpy(tmp + len, delim, wlen);
+		wlen = length_pointer_char(delimiter);
+		memcpy(tmp + len, delimiter, wlen);
 		len += wlen;
 	}
 	// Copy memory segment
@@ -341,9 +341,8 @@ char *string_standardized(char *target) {
 	if (target == NULL) {
         return NULL;
     }
-    
-	char **target_splitted = string_split(target," ");
-	char *result = string_join(target_splitted," ");
+	char **segments = string_split(target," ");
+	char *result = string_join(segments," ");
 	result[strlen(result) - 1] = '\0';
 	return result;
 }

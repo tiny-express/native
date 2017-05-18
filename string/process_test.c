@@ -69,16 +69,16 @@ TEST(String, ProcessJoin) {
         (char *) "dog",
         '\0'
     };
-    char *delim = "|";
+    char *delimiter = "|";
     char *expect = "The|quick|brown|fox|jumps|over|the|lazy|dog";
-    char *result = string_join(target, delim);
+    char *result = string_join(target, delimiter);
     ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessSplit) {
     char *target = "The|quick|brown|fox|jumps|over|the|lazy|dog";
-    char *delim = "|";
-    char **result = string_split(target, delim);
+    char *delimiter = "|";
+    char **result = string_split(target, delimiter);
     ASSERT_STR("The", result[0]);
     ASSERT_STR("quick", result[1]);
     ASSERT_STR("brown", result[2]);
@@ -90,7 +90,7 @@ TEST(String, ProcessSplit) {
     ASSERT_STR("dog", result[8]);
 
     target = "Nothing to split";
-    result = string_split(target, delim);
+    result = string_split(target, delimiter);
     ASSERT_STR("Nothing to split", result[0]);
 
     char *url = "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
