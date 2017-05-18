@@ -64,11 +64,11 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
+    common/*
     context/*
     compress/*
     crypto/*
     datetime/*
-    general/*
     generic/*
     network/*
     server/*
@@ -86,11 +86,11 @@ file(GLOB_RECURSE HEADERS
 
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
+    common/*_test.c
     context/*_test.c
     compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
-    general/*_test.c
     generic/*_test.cpp
     network/*_test.c
     server/*_test.c
