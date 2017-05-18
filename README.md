@@ -72,7 +72,7 @@ Note: You need to link your program with native library (libnative_static.a or l
 
 ### Productivity C++ Functions
 
-#### Type Casting (inspired by Java class)
+#### Type Casting (inspired by Java)
 - [ ] Short - short
 - [x] Integer - int
 - [x] Long - long
@@ -81,12 +81,13 @@ Note: You need to link your program with native library (libnative_static.a or l
 - [x] String - char*
 - [x] Boolean - bool
 
+##### Usage
 ```cpp
 int number = Integer(1.234);
 char *text = String(-12456);
 ```
 
-#### Utility (inspired by Python functions)
+#### Utility (inspired by Python)
 - [x] len
 - [ ] copy
 - [ ] split
@@ -105,14 +106,25 @@ char *text = String(-12456);
 - [x] sha1
 - [ ] type
 
-### Standard C Library
+### Low-level C Library
 #### Common
 - [x] length_pointer_char
 - [x] length_pointer_pointer_char
 - [x] join_pointer_pointer_char
+- [x] linear_search
+- [x] binary_search
+- [x] quick_sort
+- [x] segment_pointer_char
+- [x] segment_pointer_pointer_char
 #### Compress
 #### Crypto
+- [x] base64_encode
+- [x] base64_decode
+- [x] md5_encode
+- [x] sha1_encode
 #### Datetime
+- [x] date
+- [x] timestamp
 #### Network
 #### Storage
 #### String
@@ -121,8 +133,12 @@ char *text = String(-12456);
 - [x] string_concat
 #### System
 #### Thread
-#### Type
+- [x] set_interval
+- [x] set_timeout
 #### Validator
+- [x] is_phone_number
+- [x] is_email
+- [x] is_url
 #### Vendor
 - [x] send_sms
 - [x] send_mail
