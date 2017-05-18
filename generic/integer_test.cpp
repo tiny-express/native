@@ -32,7 +32,6 @@ extern "C" {
 
 
 TEST(Generic, Integer) {
-/*
     int integer_to_integer = Integer(2345);
     ASSERT_EQUAL(2345, integer_to_integer);
 
@@ -49,5 +48,5 @@ TEST(Generic, Integer) {
     ASSERT_EQUAL(-12345, string_to_integer_valid_1);
 
     int string_to_integer_valid_2 = Integer((char*) "-123.45");
-    ASSERT_EQUAL(-123, string_to_integer_valid_2);*/
+    ASSERT_EQUAL(-123, string_to_integer_valid_2);
 }
