@@ -24,42 +24,34 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../network.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <arpa/inet.h>
+extern "C" {
+#include "../unit_test.h"
+}
+#include "../native.h"
 
-char *get_ip_address()
-{
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
-        close(sockfd);
-        return "0.0.0.0";
-    }
+TEST(Generic, Float) {
+    
+    double string_to_float = Float(std::string("123456"));
+    ASSERT_EQUAL(123456.0, string_to_float);
 
-    const char* dns_ip = "8.8.8.8";
-    uint16_t dns_port = 53;
+    double string_to_float_not_valid = Float((char*) "Hello world");
+    ASSERT_EQUAL(0, string_to_float_not_valid);
 
-    struct sockaddr_in serv_addr;
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(dns_port);
-    serv_addr.sin_addr.s_addr = inet_addr(dns_ip);
+    double string_to_float_valid_1 = Float((char*) "-12345");
+    ASSERT_EQUAL(-12345.0, string_to_float_valid_1);
 
-    if (connect(sockfd, &serv_addr, sizeof(serv_addr)) < 0) {
-        close(sockfd);
-        return "0.0.0.0";
-    }
+    double string_to_float_valid_2 = Float((char*) "-123.45");
+    ASSERT_EQUAL(-123.0, string_to_float_valid_2);
+    
+    double double_to_float = Float(2.3E-3);
+    ASSERT_EQUAL(0.0023, double_to_float);
+    
+    double long_to_float = Double(2147483647);
+    ASSERT_EQUAL(2147483647.0, long_to_float);
 
-    struct sockaddr_in name;
-    socklen_t name_len = sizeof(name);
-    if (getsockname(sockfd, &name, &name_len) < 0) {
-        close(sockfd);
-        return "0.0.0.0";
-    }
+    double integer_to_float = Float(2345);
+    ASSERT_EQUAL(2345.0, integer_to_float);
 
-    char *ip_addr = calloc(INET_ADDRSTRLEN, sizeof(char));
-    inet_ntop(AF_INET, &(name.sin_addr), ip_addr, INET_ADDRSTRLEN);
-
-    close(sockfd);
-    return ip_addr;
+    double float_to_float = Float(234231.234);
+    ASSERT_EQUAL(234231.234, float_to_float);
 }

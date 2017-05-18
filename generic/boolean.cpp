@@ -23,3 +23,97 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+  
+extern "C" {
+#include "../string.h"
+}
+#include "../native.h"
+
+/**
+ * Boolean value by default - un-supported type
+ *
+ * @param T
+ * @return 0
+ */
+template <typename T> bool Boolean(T) {
+    return 0;
+}
+
+/**
+ * Boolean value of std::string
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(std::string target) {
+    return string_to_double((char*) target.c_str());
+}
+template bool Boolean<std::string>(std::string target);
+
+// /**
+//  * Boolean value of char pointer
+//  *
+//  * @param target
+//  * @return bool
+//  */
+// template<> bool Boolean(char *target) {
+//     return string_to_boolean(target);
+// }
+template bool Boolean<char*>(char *target);
+
+/**
+ * Boolean value of integer
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(int target) {
+    return target;
+}
+template bool Boolean<int>(int target);
+
+/**
+ * Boolean value of long
+ *
+ * @param target
+ * @return 0
+ */
+template<> bool Boolean(long target) {
+    return 0;
+}
+template bool Boolean<long>(long target);
+
+/**
+ * Boolean value of float
+ *
+ * @param target
+ * @return double
+ */
+template<> bool Boolean(float target) {
+    return (int) floor(target);
+}
+template bool Boolean<float>(float target);
+
+/**
+ * Boolean value of double
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(double target) {
+    return (bool) floor(target);
+}
+
+template bool Boolean<double>(double target);
+
+// /**
+//  * Boolean value of boolean
+//  *
+//  * @param target
+//  * @return bool
+//  */
+// template<> bool Boolean(bool target) {
+//     return (bool) floor(target);
+// }
+
+// template bool Boolean<boolean>(bool target);
