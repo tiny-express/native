@@ -88,6 +88,7 @@ char *text = String(-12456);
 ```
 
 #### Utility (inspired by Python)
+- [x] empty
 - [x] len
 - [ ] copy
 - [ ] split

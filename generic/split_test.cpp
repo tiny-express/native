@@ -24,5 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <vector>
-#include <map>
+extern "C" {
+#include "../unit_test.h"
+}
+#include "../native.h"
+
+TEST(Generic, Split) {
+//    std::string text = nullptr;
+//    std::vector strings = split(nullptr, nullptr);
+//    ASSERT_EQUAL(empty(strings));
+}
