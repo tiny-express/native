@@ -31,6 +31,7 @@
 
 #define TRUE 1
 #define FALSE 0
+#define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
 
 #ifndef NULL
