@@ -4,9 +4,9 @@ extern "C" {
 #include "../native.h"
 
 TEST(Generic, Md5) {
-//    char *result1 = md5(NULL);
-//    const char *expect1 = "d41d8cd98f00b204e9800998ecf8427e";
-//    ASSERT_STR(expect1, result1);
+    char *result1 = md5(NULL);
+    const char *expect1 = "cfcd208495d565ef66e7dff9f98764da";
+    ASSERT_STR(expect1, result1);
 
     short shortNumber = 1234;
     char *result2 = md5(shortNumber);
@@ -28,7 +28,7 @@ TEST(Generic, Md5) {
     const char *expect5 = "56ab24c15b72a457069c5ea42fcfc640";
     ASSERT_STR(expect5, result5);
 
-    char *pointerChar = (char*)"";
+    char *pointerChar = (char*) "";
     char *result6 = md5(pointerChar);
     const char *expect6 = "d41d8cd98f00b204e9800998ecf8427e";
     ASSERT_STR(expect6, result6);
