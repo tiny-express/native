@@ -72,7 +72,7 @@ Note: You need to link your program with native library (libnative_static.a or l
 
 ### Productivity C++ Functions
 
-#### Standard Type
+#### Type Casting (inspired by Java class)
 - [ ] Short
 - [x] Integer
 - [x] Long
@@ -81,7 +81,12 @@ Note: You need to link your program with native library (libnative_static.a or l
 - [x] String
 - [x] Boolean
 
-#### Utility Functions
+```cpp
+int number = Integer(1.234);
+string text = String(-12456);
+```
+
+#### Utility (inspired by Python functions)
 - [x] len
 - [ ] copy
 - [ ] split
