@@ -11,24 +11,6 @@ We use this library in our production and unit test with Travis CI so it just wo
 
 This project is also useful for new developers in practical programming
 
-### Standard C Library
-- Generic functions (length, append, join, segment, sort, search)
-- Compression (gzip)
-- Cryptography (md5, sha1, base64)
-- Datetime (timestamp, date format)
-- Network (http, ip address)
-- Storage (file)
-- String (converter, processor)
-- Threading (multiple threading, timer)
-- Validation (phone, email, url)
-- Data Type (json)
-- Third Party (Twilio, SendGrid, Etcd, ElasticSearch, Stripe, Firebase)
-
-### Generic C++ Functions (native.h)
-- Integer, Long, Double, Float, Boolean, String
-- type, ord, chr, max, min, round
-- len, slice, sorted, reverse, range, sum
-
 ### Road map
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
 - Develop fundamental algorithms and advanced data structure

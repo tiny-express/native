@@ -77,9 +77,10 @@ template <> char *md5(short target) {
 template char *md5<short>(short target);
 
 /**
+ * MD5 Encode for int
  *
- * @param Int number
- * @return Pointer char md5 encoded string
+ * @param Short number
+ * @return MD5 encoded string
  */
 template <> char *md5(int target) {
     char *result = md5_encode((unsigned char*) string_from_int(target));
