@@ -41,16 +41,16 @@ $ sudo make install
 #include <native/native.h>
 
 int main() {
-    char *sample_text = "Hello World";
-    printf("Length of sample_text is %d\n", len(sample_text));
-    int sample_number = 1021;
-    printf("Length of sample_number is %d\n", len(sample_number));
+    char *text = "Hello World";
+    printf("Length of text is %d\n", len(text));
+    int number = 1021;
+    printf("Length of number is %d\n", len(number));
     fflush(stdout);
     return 0;
 }
 ```
 
-#### Unit test with native (thanks to C-Unit)
+#### Unit test (thanks to C-Unit)
 ```cpp
 #include <native/unit_test.h>
 
