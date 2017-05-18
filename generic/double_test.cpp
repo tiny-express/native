@@ -29,8 +29,6 @@ extern "C" {
 }
 #include "../native.h"
 
-
-
 TEST(Generic, Double) {
     
     double string_to_double = Double(std::string("123456"));
