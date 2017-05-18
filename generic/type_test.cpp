@@ -24,4 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+extern "C" {
+#include "../unit_test.h"
+}
 #include "../native.h"

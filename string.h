@@ -42,12 +42,12 @@ double string_to_double(char* target);
 float string_to_float(char* target);
 
 char  *string_replace(char *target, char *find, char *replace_with);
-char **string_split(char *target, const char *delimiter);
-char  *string_join(char **target, char const *delimiter);
+char **string_split(char *target, char *delimiter);
+char  *string_join(char **target, char *delimiter);
 int    string_index(char *target, char *subtarget, int times);
 char  *string_trim(char *target);
-int    string_startswith(char *target, const char *prefix);
-int    string_endswith(char *target, const char *suffix);
+int    string_startswith(char *target, char *prefix);
+int    string_endswith(char *target, char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
 char  *string_concat_asm(char *target, char *subtarget);
