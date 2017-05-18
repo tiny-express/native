@@ -74,14 +74,13 @@ inline char *string_replace(char *target, char* find_string, char* replace_with)
  * String split
  *
  * @param target
- * @param constant_delimiter
+ * @param delimiter
  * @return array char pointer
  */
-inline char **string_split(char *target, const char *constant_delimiter) {
-    if (target == NULL || constant_delimiter == NULL) {
+inline char **string_split(char *target, char *delimiter) {
+    if (target == NULL || delimiter == NULL) {
         return NULL;
     }
-	char* delimiter = (char*) constant_delimiter;
 	int length_target = length_pointer_char(target);
 	int length_delimiter = length_pointer_char(delimiter);
 	int distance = length_target - length_delimiter + 1;
@@ -133,7 +132,7 @@ inline char **string_split(char *target, const char *constant_delimiter) {
  * @param delimiter
  * @return string
  */
-inline char *string_join(char *target[], const char *delimiter) {
+inline char *string_join(char *target[], char *delimiter) {
     if (target == NULL || delimiter == NULL) {
         return NULL;
     }
@@ -186,13 +185,13 @@ inline char *string_trim(char *target) {
 }
 
 /**
- * String startwiths a prefix
+ * String start withs a prefix
  *
  * @param target
  * @param prefix
  * @return TRUE | FALSE
  */
-inline int string_startswith(char *target, const char *prefix) {
+inline int string_startswith(char *target, char *prefix) {
     if (target == NULL || prefix == NULL) {
         return FALSE;
     }
@@ -211,13 +210,13 @@ inline int string_startswith(char *target, const char *prefix) {
 }
 
 /**
- * String endwiths a suffix
+ * String end withs a suffix
  *
  * @param target
  * @param suffix
  * @return TRUE | FALSE
  */
-inline int string_endswith(char *target, const char *suffix) {
+inline int string_endswith(char *target, char *suffix) {
     if (target == NULL || suffix == NULL) {
         return FALSE;
     }

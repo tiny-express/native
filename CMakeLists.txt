@@ -36,8 +36,26 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     enable_language(ASM)
 endif()
 
+# Check compiler version
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(COMPILER_SUPPORTS_CXX11)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+else()
+    message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
+
+set(CMAKE_C_COMPILER ${CC})
+set(CMAKE_CXX_COMPILER ${CXX})
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -w")
+set(CMAKE_CXX_FLAGS         "-w")
+set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
 # Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
