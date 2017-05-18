@@ -5,19 +5,19 @@
 
 This library provides a set of low-level and productivity functions for C/C++ application.
 
-Beside standard library, we would like to have a greater library with main goals:
+Beside standard library, we would like to have a greater customization with main goals:
 
 - Blazing fast performance of GAS & C
 - Flexibility of Python builtin functions
 - Advanced data structure of Java collections
 - High level object oriented, generic types of C++
-- Third party clients support for FoodTiny micro-components
+- Third party clients support for Food Tiny micro-components
 
 This project is also useful for new developers in practical programming.
 
-### Assembly Optimization
+###  Optimization
 - This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
-- C version of that function should be implemented first then optimize again in GNU Assembly for Linux amd64
+- C version of that function should be implemented first then optimize again in GNU Assembly for Linux Amd64
 
 ### Useful Resources
 - Debugging & Profiling with [Valgrind](http://valgrind.org/)
