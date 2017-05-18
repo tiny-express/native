@@ -38,7 +38,7 @@
 // Because in send_sms we used is_empty to verify all parameters are NULL or empty string
 // so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
 // See: int is_empty(char *target);
-TEST(Vendor, TwilioCheckNULL) {
+TEST(Vendor, TwilioCheckNull) {
 
     // Initialize all parameters are NULL
     char *service_url       = NULL;

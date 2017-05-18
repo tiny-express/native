@@ -28,7 +28,6 @@ extern "C" {
 #include "../unit_test.h"
 }
 #include "../native.h"
-#include <iostream>
 
 TEST(Generic, Len) {
     std::string target_string = std::string("Hello world");

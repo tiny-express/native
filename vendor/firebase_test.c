@@ -37,7 +37,7 @@
 // so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
 // See: int is_empty(char *target);
 
-TEST(Vendor, FirebaseCheckNULL) {
+TEST(Vendor, FirebaseCheckNull) {
     // Initialize all parameters are NULL
     char *service_url           = NULL;
     char *service_token         = NULL;
@@ -95,12 +95,12 @@ TEST(Vendor, FirebaseCheckRequestToServer) {
     // Test success case
     ASSERT_TRUE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
 
-    // Fail because wrong service url
-    char *wrong_service_url = "https://fcm.somewhereidontknow.com:80/fcm/send";
-    ASSERT_FALSE(push_notification(wrong_service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Fail because token is invalid
-    char *wrong_service_token = "some_invalid_token";
+    // Fail because wrong_service_token
+    char *wrong_service_token = "1312";
     ASSERT_FALSE(push_notification(service_url, wrong_service_token, device_token, notification_title, notification_body, notification_data));
+
+    // Fail because wrong_device_token is invalid
+    char *wrong_device_token = "some device token";
+    ASSERT_FALSE(push_notification(service_url, service_token, wrong_device_token, notification_title, notification_body, notification_data));
 }
 
