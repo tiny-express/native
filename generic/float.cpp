@@ -35,7 +35,7 @@ extern "C" {
  * @param T
  * @return 0
  */
-template <typename T> double Double(T) {
+template <typename T> float Float(T) {
     return 0;
 }
 
@@ -82,17 +82,6 @@ template<> float Float(long target) {
     return 0;
 }
 template float Float<long>(long target);
-
-/**
- * Float value of float
- *
- * @param target
- * @return float
- */
-template<> float Float(float target) {
-    return (int) floor(target);
-}
-template float Float<float>(float target);
 
 /**
  * Float value of double
