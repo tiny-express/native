@@ -29,13 +29,6 @@ extern "C" {
 }
 #include "../native.h"
 
-
-
-TEST(Generic, TestEmail) {
-    const char *Test = "hello";
-}
-
-
 TEST(Generic, Long) {
     
     long string_to_long = Long(std::string("123456"));
