@@ -9,8 +9,8 @@
  */
 char *sha1_encode(unsigned char *target) {
 
-    unsigned char digest[SHA_DIGEST_LENGTH];
     int length_target = length_pointer_char(target);
+    unsigned char digest[SHA_DIGEST_LENGTH];
 
     SHA_CTX ctx;
     SHA1_Init(&ctx);
