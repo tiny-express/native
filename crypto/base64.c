@@ -3,7 +3,7 @@
  * `encode.c' - base64
  *
  * copyright (c) 2014 joseph werle
- */
+*/
 #include "../crypto.h"
 #include <stdlib.h>
 

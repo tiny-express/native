@@ -23,3 +23,84 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+extern "C" {
+#include "../string.h"
+}
+#include "../native.h"
+
+/**
+ * Long value by default - un-supported type
+ *
+ * @param T
+ * @return 0
+ */
+template <typename T> long Long(T) {
+    return 0;
+}
+
+/**
+ * Long value of std::string
+ *
+ * @param target
+ * @return long
+ */
+template<> long Long(std::string target) {
+    return string_to_long((char*) target.c_str());
+}
+template long Long<std::string>(std::string target);
+
+/**
+ * Long value of char pointer
+ *
+ * @param target
+ * @return long
+ */
+template<> long Long(char *target) {
+    return string_to_long(target);
+}
+template long Long<char*>(char *target);
+
+/**
+ * Long value of integer
+ *
+ * @param target
+ * @return long
+ */
+template<> long Long(int target) {
+    return target;
+}
+template long Long<int>(int target);
+
+/**
+ * Long value of long
+ *
+ * @param target
+ * @return long
+ */
+template<> long Long(long target) {
+    return target;
+}
+template long Long<long>(long target);
+
+/**
+ * Integer value of float
+ *
+ * @param target
+ * @return int
+ */
+template<> long Long(float target) {
+    return (long) floor(target);
+}
+template long Long<float>(float target);
+
+/**
+ * Integer value of double
+ *
+ * @param target
+ * @return long
+ */
+template<> long Long(double target) {
+    return (long) floor(target);
+}
+template long Long<double>(double target);

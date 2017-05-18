@@ -156,6 +156,10 @@ TEST(String, ConvertToLong) {
     char *input1 = "-21474836";
     long result1 = string_to_long(input1);
     ASSERT_EQUAL(-21474836, result1);
+    
+    char *input2 = "Hello world";
+    long result2 = string_to_long(input2);
+    ASSERT_EQUAL(0, result2);
 }
 
 TEST(String, ConvertToFloat) {

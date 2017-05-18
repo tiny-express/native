@@ -32,7 +32,6 @@ extern "C" {
 
 
 TEST(Generic, Integer) {
-
     int integer_to_integer = Integer(2345);
     ASSERT_EQUAL(2345, integer_to_integer);
 

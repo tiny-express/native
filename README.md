@@ -11,24 +11,6 @@ We use this library in our production and unit test with Travis CI so it just wo
 
 This project is also useful for new developers in practical programming
 
-### Standard C Library
-- Generic functions (length, append, join, segment, sort, search)
-- Compression (gzip)
-- Cryptography (md5, sha1, base64)
-- Datetime (timestamp, date format)
-- Network (http, ip address)
-- Storage (file)
-- String (converter, processor)
-- Threading (multiple threading, timer)
-- Validation (phone, email, url)
-- Data Type (json)
-- Third Party (Twilio, SendGrid, Etcd, ElasticSearch, Stripe, Firebase)
-
-### Generic C++ Functions (native.h)
-- Integer, Long, Double, Float, Boolean, String
-- type, ord, chr, max, min, round
-- len, slice, sorted, reverse, range, sum
-
 ### Road map
 - Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
 - Develop fundamental algorithms and advanced data structure
@@ -53,21 +35,23 @@ $ make -j && make test
 $ sudo make install
 ```
 
-#### Sample program with length_pointer_char
-```c
+#### Sample program
+```cpp
 #include <stdio.h>
-#include <native/general.h>
+#include <native/native.h>
 
 int main() {
-    char *sample_text = "Hello World";
-    printf("Length of sample_text is %d\n", length_pointer_char(sample_text));
+    char *text = "Hello World";
+    printf("Length of text is %d\n", len(text));
+    int number = 1021;
+    printf("Length of number is %d\n", len(number));
     fflush(stdout);
     return 0;
 }
 ```
 
-#### Sample unit test with native (thanks to C-Unit)
-```c
+#### Unit test (thanks to C-Unit)
+```cpp
 #include <native/unit_test.h>
 
 TEST(YourTestSuite, YourTestCase) {
@@ -78,40 +62,84 @@ TEST(YourTestSuite, YourTestCase) {
 Note: You need to link your program with native library (libnative_static.a or libnative.so)
 ```
 ### Contributors
-- Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
+- You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Some popular rules in this project
+- Please read guidelines in CONTRIBUTION.md
 
-##### SHOULD (Test case name must be named in camel syntax)
-```c
-TEST(General, DistributionCountingSort) {
-    // Assert whatever you want
-}
+
+# Documentation
+
+### Productivity C++ Functions
+
+#### Type Casting (inspired by Java)
+- [ ] Short - short
+- [x] Integer - int
+- [x] Long - long
+- [x] Float - float
+- [x] Double - double
+- [x] String - char*
+- [x] Boolean - bool
+
+##### Usage
+```cpp
+int number = Integer(1.234);
+char *text = String(-12456);
 ```
 
-##### SHOULD NOT
-```c
-TEST(General, distribution_sort) {
-    // Can not be accepted
-}
-```
+#### Utility (inspired by Python)
+- [x] len
+- [ ] copy
+- [ ] split
+- [ ] trim
+- [ ] join
+- [ ] range
+- [ ] sorted
+- [ ] reversed
+- [ ] random
+- [ ] print
+- [ ] file
+- [ ] chr
+- [ ] ord
+- [x] round
+- [x] md5
+- [x] sha1
+- [ ] type
 
-##### SHOULD
-```c
-int array_length = 10;
-// Put loop variable in register to optimize performance
-register int index = 0;
-for (index = 0; index < array_length; index++) {
-    // doSomething()
-}
-```
-
-##### SHOULD NOT
-- C99 mode - Declaring variable inside loop parameters can not be allowed here
-- Use calculation in loop parameters
-```c
-for (int index = 0; index < length_pointer_char(array); index++) {
-    // doSomething()
-}
-```
+### Low-level C Library
+#### Common
+- [x] length_pointer_char
+- [x] length_pointer_pointer_char
+- [x] join_pointer_pointer_char
+- [x] linear_search
+- [x] binary_search
+- [x] quick_sort
+- [x] segment_pointer_char
+- [x] segment_pointer_pointer_char
+#### Compress
+#### Crypto
+- [x] base64_encode
+- [x] base64_decode
+- [x] md5_encode
+- [x] sha1_encode
+#### Datetime
+- [x] date
+- [x] timestamp
+#### Network
+#### Storage
+#### String
+- [x] string_copy
+- [x] string_split
+- [x] string_concat
+#### System
+#### Thread
+- [x] set_interval
+- [x] set_timeout
+#### Validator
+- [x] is_phone_number
+- [x] is_email
+- [x] is_url
+#### Vendor
+- [x] send_sms
+- [x] send_mail
+- [x] send_notification

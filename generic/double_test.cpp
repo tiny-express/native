@@ -24,71 +24,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "../type.h"
-#include "../string.h"
-
-/**
- * Convert generic types to string
- *
- * @param target
- * @return string
- */
-#define STR_FROM(TYPE, FORMAT); \
-inline char* string_from_##TYPE(TYPE target) {\
-	char *convert;\
-	asprintf(&convert, FORMAT, target);\
-	return convert;\
+extern "C" {
+#include "../unit_test.h"
 }
+#include "../native.h"
 
-/**
- * Convert string to generic types
- *
- * @param target
- * @return generic values
- */
-#define STR_TO(TYPE, FORMAT);\
-inline TYPE string_to_##TYPE(char *target) {\
-    if (target == NULL || strcmp(target, "\0") == 0) return 0;\
-	TYPE result;\
-    sscanf(target, FORMAT, &result);\
-    return result;\
-}
 
-STR_FROM(short,  "%d\0");
-STR_FROM(int,    "%d\0");
-STR_FROM(long,   "%ld\0");
-STR_FROM(float,  "%g\0");
-STR_FROM(double, "%.16g\0");
 
-STR_TO(short,  "%hi\0");
-STR_TO(float,  "%g\0");
-STR_TO(double, "%lg\0");
+TEST(Generic, Double) {
+    
+    double string_to_double = Double(std::string("123456"));
+    ASSERT_EQUAL(123456, string_to_double);
 
-/**
- * String to int
- *
- * @param target
- * @return string
- */
-int string_to_int(char* target) {
-	if (target == NULL) {
-		return 0;
-	}
-	return atoi(target);
-}
+    double string_to_double_not_valid = Double((char*) "Hello world");
+    ASSERT_EQUAL(0, string_to_double_not_valid);
 
-/**
- * String to long
- *
- * @param target
- * @return string
- */
-long string_to_long(char* target) {
-	if (target == NULL) {
-		return 0;
-	}
-	return atol(target);
+    double string_to_double_valid_1 = Double((char*) "-12345");
+    ASSERT_EQUAL(-12345, string_to_double_valid_1);
+
+    double string_to_double_valid_2 = Double((char*) "-123.45");
+    ASSERT_EQUAL(-123, string_to_double_valid_2);
+    
+    double double_to_double = Double(2.3E-308);
+    ASSERT_EQUAL(2.3E-308, double_to_double);
+    
+    double long_to_double = Double(2147483647);
+    ASSERT_EQUAL(2147483647, long_to_double);
+
+    double integer_to_double = Double(2345);
+    ASSERT_EQUAL(2345, integer_to_double);
+
+    double float_to_double = Double(234231.234);
+    ASSERT_EQUAL(234231, float_to_double);
 }

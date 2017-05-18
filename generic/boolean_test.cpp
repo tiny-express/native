@@ -24,71 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "../type.h"
-#include "../string.h"
-
-/**
- * Convert generic types to string
- *
- * @param target
- * @return string
- */
-#define STR_FROM(TYPE, FORMAT); \
-inline char* string_from_##TYPE(TYPE target) {\
-	char *convert;\
-	asprintf(&convert, FORMAT, target);\
-	return convert;\
+extern "C" {
+#include "../unit_test.h"
 }
+#include "../native.h"
 
-/**
- * Convert string to generic types
- *
- * @param target
- * @return generic values
- */
-#define STR_TO(TYPE, FORMAT);\
-inline TYPE string_to_##TYPE(char *target) {\
-    if (target == NULL || strcmp(target, "\0") == 0) return 0;\
-	TYPE result;\
-    sscanf(target, FORMAT, &result);\
-    return result;\
-}
 
-STR_FROM(short,  "%d\0");
-STR_FROM(int,    "%d\0");
-STR_FROM(long,   "%ld\0");
-STR_FROM(float,  "%g\0");
-STR_FROM(double, "%.16g\0");
 
-STR_TO(short,  "%hi\0");
-STR_TO(float,  "%g\0");
-STR_TO(double, "%lg\0");
+TEST(Generic, Boolean) {
+    
+    double boolean_to_boolean = Boolean(1);
+    ASSERT_EQUAL(1, boolean_to_boolean);
+        
+    double string_to_boolean = Boolean(std::string("True"));
+    ASSERT_EQUAL(1, string_to_boolean);
 
-/**
- * String to int
- *
- * @param target
- * @return string
- */
-int string_to_int(char* target) {
-	if (target == NULL) {
-		return 0;
-	}
-	return atoi(target);
-}
+    double string_to_boolean_not_valid = Boolean((char*) "True");
+    ASSERT_EQUAL(0, string_to_boolean_not_valid);
+    
+    double double_to_boolean = Boolean(2.3E-3);
+    ASSERT_EQUAL(0, double_to_boolean);
+    
+    double long_to_boolean = Boolean(2147483647);
+    ASSERT_EQUAL(1, long_to_boolean);
 
-/**
- * String to long
- *
- * @param target
- * @return string
- */
-long string_to_long(char* target) {
-	if (target == NULL) {
-		return 0;
-	}
-	return atol(target);
+    double integer_to_boolean = Boolean(2345);
+    ASSERT_EQUAL(1, integer_to_boolean);
+
+    double float_to_boolean = Boolean(234231.234);
+    ASSERT_EQUAL(1, float_to_boolean);
 }

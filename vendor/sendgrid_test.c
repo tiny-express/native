@@ -38,7 +38,7 @@
 // Because in send_mail we used is_empty to verify all parameters are NULL or empty string
 // so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
 // See: int is_empty(char *target);
-TEST(Vendor, SendGridCheckNULL) {
+TEST(Vendor, SendGridCheckNull) {
     // Initialize all parameters are NULL
     char *service_url   = NULL;
     char *service_token = NULL;
@@ -113,11 +113,6 @@ TEST(Vendor, SendGridCheckRequestToServer) {
     ASSERT_TRUE(send_mail(service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
 
     // Fail because wrong token
-    char *wrong_token = "some_wrong_token";
-    ASSERT_FALSE(send_mail(service_url, wrong_token, mail_from, mail_to, mail_subject, mail_content));
-
-    //Fail because wrong service url
-    char *wrong_service_url = "https://api.somewhereoninternet.com/v3/mail/send";
-    ASSERT_FALSE(send_mail(wrong_service_url, service_token, mail_from, mail_to, mail_subject, mail_content));
-
+    char *wrong_service_token = "some_wrong_token";
+    ASSERT_FALSE(send_mail(service_url, wrong_service_token, mail_from, mail_to, mail_subject, mail_content));
 }

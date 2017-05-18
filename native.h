@@ -57,9 +57,13 @@ template <typename T> char* String(T target);
 template <typename T> double Double(T target);
 template <typename T> float Float(T target);
 template <typename T> bool Boolean(T target);
+template <typename T> char* sha1(T target);
+template <typename T> char* md5(T target);
 
 // Math functions
-template <typename T> long round(double target, int precision);
+//template <typename T> double round(double target, int precision);
+double round(double target, int precision);
+
 
 // Util functions
 template <typename T> int len(T target);
