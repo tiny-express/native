@@ -60,12 +60,11 @@ template <typename T> bool Boolean(T target);
 template <typename T> char* sha1(T target);
 template <typename T> char* md5(T target);
 
-// Math functions
-//template <typename T> double round(double target, int precision);
+// Mathematics functions
 double round(double target, int precision);
 
-
-// Util functions
+// Utility functions
+#define empty(X) len(X) == 0
 template <typename T> int len(T target);
 template <typename T> int size(T target);
 template <typename T> char* file(char *file_name);

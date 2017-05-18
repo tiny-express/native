@@ -29,6 +29,18 @@ extern "C" {
 }
 #include "../native.h"
 
+/**
+ * Empty is an alias of len
+ * if (len(target) == 0) then target is empty
+ */
+TEST(Generic, Empty) {
+    char *null_string = NULL;
+    ASSERT_TRUE(empty(null_string));
+
+    char *empty_string = (char*) "";
+    ASSERT_TRUE(empty(empty_string));
+}
+
 TEST(Generic, Len) {
     std::string target_string = std::string("Hello world");
     ASSERT_EQUAL(11, len(target_string));
