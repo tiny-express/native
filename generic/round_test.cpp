@@ -30,6 +30,7 @@ extern "C" {
 #include "../native.h"
 
 TEST(Generic, Round) {
+
     double number = 1.5345;
     double result = round(number, 2);
     ASSERT_TRUE(result == 1.53);
