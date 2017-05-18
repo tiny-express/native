@@ -42,6 +42,40 @@ template <typename T> char *String(T) {
 }
 
 /**
+ * Convert char to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+template <> char *String(char target) {
+    return string_copy(&target);
+}
+template char *String<char>(char target);
+
+/**
+ * Convert constant pointer char to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+template <> char *String(const char *target) {
+    return (char*) target;
+}
+template char *String<const char*>(const char *target);
+
+/**
+ * Convert std::string to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+template <> char *String(std::string target) {
+    char *result = string_copy((char*) target.c_str());
+    return result;
+}
+template char *String<std::string>(std::string target);
+
+/**
  * String  int number
  *
  * @param int_number
@@ -110,16 +144,4 @@ template <> char *String(std::vector<double> target) {
     return result;
 }
 template char *String<std::vector<double> >(std::vector<double> target);
-
-/**
- * Convert std::string to pointer char
- *
- * @param string
- * @return pointer char
- */
-template <> char *String(std::string target) {
-    char *result = string_copy((char*) target.c_str());
-    return result;
-}
-template char *String<std::string>(std::string target);
 

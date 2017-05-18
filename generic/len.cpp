@@ -28,7 +28,10 @@ extern "C" {
 #include "../general.h"
 #include "../string.h"
 }
+#include <algorithm>
 #include <iostream>
+#include <vector>
+#include <map>
 
 /**
  * Length by default - un-supported type
@@ -128,4 +131,48 @@ template<> int len(double target) {
     return length_pointer_char(string_from_double(target));
 }
 template int len<double>(double target);
+
+/**
+ * Length of vector pointer char
+ *
+ * @param target
+ * @return int
+ */
+template<> int len(std::vector<char*> target) {
+    return (int) target.size();
+}
+template int len<std::vector<char*> >(std::vector<char*> target);
+
+/**
+ * Length of vector std::string
+ *
+ * @param target
+ * @return int
+ */
+template<> int len(std::vector<std::string> target) {
+    return (int) target.size();
+}
+template int len<std::vector<std::string> >(std::vector<std::string> target);
+
+/**
+ * Length of map char pointer
+ *
+ * @param target
+ * @return int
+ */
+template<> int len(std::map<char*, char*> target) {
+    return (int) target.size();
+}
+template int len<std::map<char*, char*> >(std::map<char*, char*> target);
+
+/**
+ * Length of map
+ *
+ * @param target
+ * @return int
+ */
+template<> int len(std::map<std::string, std::string> target) {
+    return (int) target.size();
+}
+template int len<std::map<std::string, std::string> >(std::map<std::string, std::string> target);
 

@@ -6,6 +6,18 @@ extern "C" {
 
 TEST(Generic, String) {
 
+    char given_char = '\0';
+    char *expect_string_char_pointer_0 = (char*) "\0";
+    ASSERT_STR(expect_string_char_pointer_0, String('\0'));
+
+    const char* given_constant_pointer_char = "hello world";
+    char *expect_string_char_pointer_1 = (char*) "hello world";
+    ASSERT_STR(expect_string_char_pointer_1, String(given_constant_pointer_char));
+
+    std::string given_std_string = std::string("hello world");
+    char *expect_string_char_pointer_2 = (char*) "hello world";
+    ASSERT_STR(expect_string_char_pointer_2, String(given_std_string));
+
     char *result1 = String(3);
     const char *expect1 = "3";
     ASSERT_STR(expect1, result1);
@@ -13,12 +25,6 @@ TEST(Generic, String) {
     char *result2 = String(4039249.5023);
     const char *expect2 = "4039249.5023";
     ASSERT_STR(expect2, result2);
-
-    std::string str("foodtiny");
-    char *result3 = String(str);
-    const char *expect3 = "foodtiny";
-    ASSERT_STR(expect3, result3);
-    delete result3;
 
     std::vector<int> vectorInt(4, 2000);
     char *result4 = String(vectorInt);
