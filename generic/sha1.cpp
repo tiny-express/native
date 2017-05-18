@@ -5,9 +5,9 @@ extern "C" {
 }
 #include <iostream>
 
-
 /**
  * Un-supported type
+ *
  * @param T
  * @return
  */
@@ -16,9 +16,10 @@ template <typename T> char *sha1(T) {
 }
 
 /**
+ * SHA1 Encode from char pointer
  *
- * @param Pointer char
- * @return Pointer char sha1 encoded string
+ * @param target
+ * @return SHA1 encoded string
  */
 template <> char *sha1(char *target) {
     char *result = sha1_encode((unsigned char*)target);
@@ -27,9 +28,10 @@ template <> char *sha1(char *target) {
 template char *sha1<char *>(char *target);
 
 /**
+ * SHA1 Encode from std::string
  *
- * @param String (C++)
- * @return Pointer char sha1 encoded string
+ * @param target
+ * @return SHA1 encoded string
  */
 template <> char *sha1(std::string target) {
     char *result = sha1_encode((unsigned char*)target.c_str());
@@ -38,48 +40,52 @@ template <> char *sha1(std::string target) {
 template char *sha1<std::string>(std::string target);
 
 /**
+ * SHA1 Encode from short
  *
- * @param Int number
- * @return Pointer char sha1 encoded string
- */
-template <> char *sha1(int target) {
-    char *result = sha1_encode((unsigned char*)string_from_int(target));
-    return result;
-}
-template char *sha1<int>(int target);
-
-/**
- *
- * @param Long number
- * @return Pointer char sha1 encoded string
- */
-template <> char *sha1(long target) {
-    char *result = sha1_encode((unsigned char*)string_from_long(target));
-    return result;
-}
-template char *sha1<long>(long target);
-
-/**
- *
- * @param Double number
- * @return Pointer char sha1 encoded string
- */
-template <> char *sha1(double target) {
-    char *result = sha1_encode((unsigned char*)string_from_double(target));
-    return result;
-}
-template char *sha1<double>(double target);
-
-/**
- *
- * @param Short number
- * @return Pointer char sha1 encoded string
+ * @param target
+ * @return SHA1 encoded string
  */
 template <> char *sha1(short target) {
     char *result = sha1_encode((unsigned char*)string_from_short(target));
     return result;
 }
 template char *sha1<short>(short target);
+
+/**
+ * SHA1 Encode from int
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+template <> char *sha1(int target) {
+    char *result = sha1_encode((unsigned char*) string_from_int(target));
+    return result;
+}
+template char *sha1<int>(int target);
+
+/**
+ * SHA1 Encode from long
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+template <> char *sha1(long target) {
+    char *result = sha1_encode((unsigned char*) string_from_long(target));
+    return result;
+}
+template char *sha1<long>(long target);
+
+/**
+ * SHA1 Encode from double
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+template <> char *sha1(double target) {
+    char *result = sha1_encode((unsigned char*) string_from_double(target));
+    return result;
+}
+template char *sha1<double>(double target);
 
 
 

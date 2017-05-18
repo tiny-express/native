@@ -42,8 +42,8 @@ double string_to_double(char* target);
 float string_to_float(char* target);
 
 char  *string_replace(char *target, char *find, char *replace_with);
-char **string_split(char *target, const char *delim);
-char  *string_join(char **target, char const *delim);
+char **string_split(char *target, const char *delimiter);
+char  *string_join(char **target, char const *delimiter);
 int    string_index(char *target, char *subtarget, int times);
 char  *string_trim(char *target);
 int    string_startswith(char *target, const char *prefix);

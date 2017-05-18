@@ -29,8 +29,6 @@ extern "C" {
 }
 #include "../native.h"
 
-
-
 TEST(Generic, Float) {
     
     double string_to_float = Float(std::string("123456"));
