@@ -103,5 +103,4 @@ template float Float<float>(float target);
 template<> float Float(double target) {
     return (float) floor(target);
 }
-
 template float Float<double>(double target);
