@@ -60,40 +60,63 @@ TEST(YourTestSuite, YourTestCase) {
 Note: You need to link your program with native library (libnative_static.a or libnative.so)
 ```
 ### Contributors
-- Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
+- You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Some popular rules in this project
+- Please read guidelines in CONTRIBUTION.md
 
-##### SHOULD (Test case name must be named in camel syntax)
-```c
-TEST(General, DistributionCountingSort) {
-    // Assert whatever you want
-}
-```
 
-##### SHOULD NOT
-```c
-TEST(General, distribution_sort) {
-    // Can not be accepted
-}
-```
+# Documentation
 
-##### SHOULD
-```c
-int array_length = 10;
-// Put loop variable in register to optimize performance
-register int index = 0;
-for (index = 0; index < array_length; index++) {
-    // doSomething()
-}
-```
+### Productivity C++ Functions
 
-##### SHOULD NOT
-- C99 mode - Declaring variable inside loop parameters can not be allowed here
-- Use calculation in loop parameters
-```c
-for (int index = 0; index < length_pointer_char(array); index++) {
-    // doSomething()
-}
-```
+#### Standard Type
+- [ ] Short
+- [x] Integer
+- [x] Long
+- [x] Float
+- [x] Double
+- [x] String
+- [x] Boolean
+
+#### Utility Functions
+- [x] len
+- [ ] copy
+- [ ] split
+- [ ] trim
+- [ ] join
+- [ ] range
+- [ ] sorted
+- [ ] reversed
+- [ ] random
+- [ ] print
+- [ ] file
+- [ ] chr
+- [ ] ord
+- [x] round
+- [x] md5
+- [x] sha1
+- [ ] type
+
+### Standard C Library
+#### Common
+- [x] length_pointer_char
+- [x] length_pointer_pointer_char
+- [x] join_pointer_pointer_char
+#### Compress
+#### Crypto
+#### Datetime
+#### Network
+#### Storage
+#### String
+- [x] string_copy
+- [x] string_split
+- [x] string_concat
+#### System
+#### Thread
+#### Type
+#### Validator
+#### Vendor
+- [x] send_sms
+- [x] send_mail
+- [x] send_notification
