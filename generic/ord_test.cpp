@@ -8,6 +8,6 @@ extern "C" {
 #include "../generic.hpp"
 
 TEST(Generic, Ord) {
-    int tager = ord('a');
-    ASSERT_EQUAL(97,tager);
+    int target = ord('a');
+    ASSERT_EQUAL(97,target);
 }
