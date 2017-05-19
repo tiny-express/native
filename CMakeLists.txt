@@ -133,7 +133,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} generic/chr_test.cpp generic/ord_test.cpp)
 
 # Add make test
 enable_testing()
