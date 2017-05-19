@@ -8,9 +8,9 @@ extern "C" {
 #include "../generic.hpp"
 
 TEST(Generic, Chr) {
-    char tager = chr(97);
-    ASSERT_EQUAL('a',tager);
+    char target = chr(97);
+    ASSERT_EQUAL('a',target);
 
-    tager = chr(257);
-    ASSERT_EQUAL(-1,tager);
+    target = chr(257);
+    ASSERT_EQUAL(-1,target);
 }
