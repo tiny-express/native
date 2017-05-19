@@ -9,5 +9,5 @@ extern "C" {
 
 TEST(Generic, Ord) {
     int target = ord('a');
-    ASSERT_EQUAL(97,target);
+    ASSERT_EQUAL(97, target);
 }
