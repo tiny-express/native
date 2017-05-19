@@ -77,6 +77,15 @@ double round(double target, int precision);
 char chr(int target);
 int ord(char target);
 
+void print(const char *target);
+void print(char *target);
+void print(std::string target);
+void print(short target);
+void print(int target);
+void print(long target);
+void print(double target);
+void print(std::vector<int> target);
+void print(std::vector<double> target);
 
 int *random(int limitation);
 char *random(char *range, int limitation);
