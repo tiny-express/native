@@ -98,7 +98,7 @@ file(GLOB_RECURSE SOURCES
     validator/*
 )
 
-file(GLOB_RECURSE HEADERS
+file(GLOB HEADERS
     ./*.h
     ./*.hpp
 )
@@ -141,6 +141,7 @@ add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 # Add make install - installation to unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install (TARGETS ${PROJECT_NAME} DESTINATION lib)
+install (FILES ${HEADERS} DESTINATION include/native)
 install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform
