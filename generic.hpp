@@ -72,6 +72,9 @@ char *String(std::vector<int> target);
 char *String(std::vector<double> target);
 
 double round(double target, int precision);
+char chr(int target);
+int ord(char target);
+
 
 int *random(int limitation);
 char *random(char *range, int limitation);
