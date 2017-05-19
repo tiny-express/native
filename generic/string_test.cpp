@@ -27,13 +27,13 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../native.hpp"
 
 TEST(Generic, String) {
 
     char given_char = '\0';
     char *expect_string_char_pointer_0 = (char*) "\0";
-    ASSERT_STR(expect_string_char_pointer_0, String('\0'));
+    ASSERT_STR(expect_string_char_pointer_0, String(given_char));
 
     const char* given_constant_pointer_char = "hello world";
     char *expect_string_char_pointer_1 = (char*) "hello world";

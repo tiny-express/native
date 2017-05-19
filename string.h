@@ -50,6 +50,7 @@ int    string_startswith(char *target, char *prefix);
 int    string_endswith(char *target, char *suffix);
 char  *string_random(char *target, int size);
 char  *string_concat(char *target, char *subtarget);
+int    string_equals(char *target1, char *target2);
 char  *string_concat_asm(char *target, char *subtarget);
 
 char *string_from_to(char *target, int from, int to);
@@ -60,6 +61,7 @@ char *string_upper(char *target);
 char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
+int   string_to_boolean(char* target);
 
 char *url_encode(char *target);
 char *url_decode(char *target);

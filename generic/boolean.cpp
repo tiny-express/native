@@ -24,16 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.h"
+#include "../native.hpp"
 
 /**
- * Boolean value by default - un-supported type
+ * Boolean value of char pointer
  *
- * @param T
- * @return 0
+ * @param target
+ * @return bool
  */
-template <typename T> bool Boolean(T) {
-    return 0;
+bool Boolean(char *target) {
+    return string_to_boolean(string_lower(target));
 }
 
 /**
@@ -42,21 +42,9 @@ template <typename T> bool Boolean(T) {
  * @param target
  * @return bool
  */
-template<> bool Boolean(std::string target) {
-    return string_to_double((char*) target.c_str());
+bool Boolean(std::string target) {
+    return string_to_boolean(string_lower((char*) target.c_str()));
 }
-template bool Boolean<std::string>(std::string target);
-
-// /**
-//  * Boolean value of char pointer
-//  *
-//  * @param target
-//  * @return bool
-//  */
-// template<> bool Boolean(char *target) {
-//     return string_to_boolean(target);
-// }
-template bool Boolean<char*>(char *target);
 
 /**
  * Boolean value of integer
@@ -64,10 +52,9 @@ template bool Boolean<char*>(char *target);
  * @param target
  * @return bool
  */
-template<> bool Boolean(int target) {
-    return target;
+bool Boolean(int target) {
+    return (bool) target;
 }
-template bool Boolean<int>(int target);
 
 /**
  * Boolean value of long
@@ -75,42 +62,8 @@ template bool Boolean<int>(int target);
  * @param target
  * @return 0
  */
-template<> bool Boolean(long target) {
-    return 0;
-}
-template bool Boolean<long>(long target);
-
-/**
- * Boolean value of float
- *
- * @param target
- * @return double
- */
-template<> bool Boolean(float target) {
-    return (int) floor(target);
-}
-template bool Boolean<float>(float target);
-
-/**
- * Boolean value of double
- *
- * @param target
- * @return bool
- */
-template<> bool Boolean(double target) {
-    return (bool) floor(target);
+bool Boolean(long target) {
+    return (bool) target;
 }
 
-template bool Boolean<double>(double target);
 
-// /**
-//  * Boolean value of boolean
-//  *
-//  * @param target
-//  * @return bool
-//  */
-// template<> bool Boolean(bool target) {
-//     return (bool) floor(target);
-// }
-
-// template bool Boolean<boolean>(bool target);

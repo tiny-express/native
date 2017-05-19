@@ -43,7 +43,7 @@
 #include "compress.h"
 #include "crypto.h"
 #include "datetime.h"
-#include "general.h"
+#include "common.h"
 #include "network.h"
 #include "network.h"
 #include "storage.h"

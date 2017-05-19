@@ -27,7 +27,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../native.hpp"
 
 TEST(Generic, Sha1) {
     char *result1 = sha1(NULL);

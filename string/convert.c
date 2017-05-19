@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include "../common.h"
 #include "../type.h"
 #include "../string.h"
 
@@ -91,4 +92,24 @@ long string_to_long(char* target) {
 		return 0;
 	}
 	return atol(target);
+}
+
+/**
+ * String to boolean
+ *
+ * @param target
+ * @return TRUE | FALSE
+ */
+int string_to_boolean(char* target) {
+	if (length_pointer_char(target) == 0) {
+		return FALSE;
+	}
+	char *boolean_value = string_lower(target);
+	if (string_equals(boolean_value, "true")) {
+		return TRUE;
+	}
+    if (string_to_int(boolean_value) == TRUE) {
+        return TRUE;
+    }
+	return FALSE;
 }

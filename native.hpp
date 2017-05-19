@@ -24,52 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
- * Generic functions inspired from Python Builtin Functions
- *
- * We feel that Python has an awesome builtin functions so we would like to
- * rewrite it in C++ using Native Library
- *
- * Thanks to Python Authors
- * https://docs.python.org/2/library/functions.html
- * © Copyright 1990-2017, Python Software Foundation
- * All right reserve.
- */
-
-#ifndef NATIVE_GENERIC_H
-#define NATIVE_GENERIC_H
+#ifndef NATIVE_LIBRARY_H
+#define NATIVE_LIBRARY_H
 
 extern "C" {
 #include "builtin.h"
 };
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <iomanip>
-#include <algorithm>
+#include "generic.hpp"
+#include "collection.hpp"
 
-// Type casting
-template <typename T> int Integer(T target);
-template <typename T> long Long(T target);
-template <typename T> char* String(T target);
-template <typename T> double Double(T target);
-template <typename T> float Float(T target);
-template <typename T> bool Boolean(T target);
-template <typename T> char* sha1(T target);
-template <typename T> char* md5(T target);
-
-// Mathematics functions
-double round(double target, int precision);
-int *random(int limitation);
-char *random(char *range, int limitation);
-
-// Utility functions
-#define empty(X) len(X) == 0
-template <typename T> int len(T target);
-template <typename T> std::vector<char*> split(T target, char *delimiter);
-template <typename T> char* file(char *file_name);
-template <typename T> bool file(char *file_name, char *file_content);
-
-#endif //NATIVE_GENERIC_H
+#endif //NATIVE_LIBRARY_H

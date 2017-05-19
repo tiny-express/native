@@ -26,7 +26,7 @@
 
 #include "../network.h"
 #include "../string.h"
-#include "../general.h"
+#include "../common.h"
 #include "../vendor.h"
 #include "../type.h"
 #include "../builtin.h"
