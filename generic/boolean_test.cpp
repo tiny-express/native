@@ -29,8 +29,6 @@ extern "C" {
 }
 #include "../native.h"
 
-
-
 TEST(Generic, Boolean) {
     
     double boolean_to_boolean = Boolean(1);

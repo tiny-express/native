@@ -46,19 +46,20 @@ template <typename T> bool Boolean(T) {
  * @return bool
  */
 template<> bool Boolean(std::string target) {
-    return string_to_double((char*) target.c_str());
+    return string_to_double((char*) target.c_str()); //here
 }
 template bool Boolean<std::string>(std::string target);
 
-// /**
-//  * Boolean value of char pointer
-//  *
-//  * @param target
-//  * @return bool
-//  */
-// template<> bool Boolean(char *target) {
-//     return string_to_boolean(target);
-// }
+/**
+ * Boolean value of char pointer
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(char *target) {
+    return string_to_double(target);
+}
+
 template bool Boolean<char*>(char *target);
 
 /**
@@ -106,14 +107,15 @@ template<> bool Boolean(double target) {
 
 template bool Boolean<double>(double target);
 
-// /**
-//  * Boolean value of boolean
-//  *
-//  * @param target
-//  * @return bool
-//  */
-// template<> bool Boolean(bool target) {
-//     return (bool) floor(target);
-// }
+// CHECK
+/**
+ * Boolean value of boolean
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(bool target) {
+    return (bool) floor(target);
+}
 
-// template bool Boolean<boolean>(bool target);
+template bool Boolean<bool>(bool target);
