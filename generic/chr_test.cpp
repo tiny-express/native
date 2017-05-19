@@ -9,8 +9,8 @@ extern "C" {
 
 TEST(Generic, Chr) {
     char target = chr(97);
-    ASSERT_EQUAL('a',target);
+    ASSERT_EQUAL('a', target);
 
     target = chr(257);
-    ASSERT_EQUAL(-1,target);
+    ASSERT_EQUAL(-1, target);
 }
