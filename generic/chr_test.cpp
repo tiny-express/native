@@ -5,7 +5,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../generic.hpp"
 
 TEST(Generic, Chr) {
     char tager = chr(97);

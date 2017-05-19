@@ -5,7 +5,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../generic.hpp"
 
 TEST(Generic, Ord) {
     int tager = ord('a');
