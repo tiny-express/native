@@ -24,15 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#include "Object.hpp"
 
-extern "C" {
-#include "builtin.h"
-};
+using namespace java::lang;
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+Object::Object() {
+}
 
-#endif //NATIVE_LIBRARY_H
+
+

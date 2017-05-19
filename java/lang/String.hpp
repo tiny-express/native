@@ -24,15 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
-
-extern "C" {
-#include "builtin.h"
-};
-
+#include "Object.hpp"
 #include <iostream>
 #include <string>
-#include <algorithm>
 
-#endif //NATIVE_LIBRARY_H
+namespace java {
+    namespace lang {
+        class String: public virtual Object {
+        public:
+            static String parseChar(char target);
+            static String parseCString(char *target);
+            static String parseString(std::string target);
+            static String parseInt(int target);
+            static String parseLong(long target);
+            static String parseFloat(float target);
+            static String parseDouble(double target);
+
+            String(const char* target);
+            String(char *target);
+            ~String();
+            int length();
+            String* toString();
+            char *toCharacters();
+
+        private:
+            char *value;
+        };
+    }
+}

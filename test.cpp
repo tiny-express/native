@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <native/native.hpp>
-
+#include <native/java.hpp>
+using namespace java::lang;
 int main() {
-    char *text = String("Hello World");
-    puts(String(len(text)));
-    int number = 1021;
-    puts(String(len(number)));
+    String *output = new String("Hello C++");
+    System::out::println(output);
+    delete output;
     return 0;
 }
+
 

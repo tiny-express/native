@@ -24,15 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#include <stdarg.h>
+#include "System.hpp"
 
-extern "C" {
-#include "builtin.h"
-};
+using namespace java::lang;
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+void System::out::print(String *target) {
+    char *targetCharacters = target->toCharacters();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s", targetCharacters);
+    fflush(stdout);
+}
 
-#endif //NATIVE_LIBRARY_H
+void System::out::println(String *target) {
+    char *targetCharacters = target->toCharacters();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s\n", targetCharacters);
+    fflush(stdout);
+}
+
+
+void System::exit(int status) {
+    exit(status);
+}
+
+void System::gc() {
+}

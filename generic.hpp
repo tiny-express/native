@@ -34,6 +34,7 @@
 #include <iomanip>
 #include <algorithm>
 
+/*
 int Integer(char *target);
 int Integer(std::string target);
 int Integer(long target);
@@ -70,6 +71,7 @@ char *String(int target);
 char *String(double target);
 char *String(std::vector<int> target);
 char *String(std::vector<double> target);
+ */
 
 double round(double target, int precision);
 char chr(int target);

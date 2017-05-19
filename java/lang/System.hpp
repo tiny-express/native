@@ -24,15 +24,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#include "Object.hpp"
+#include "String.hpp"
 
-extern "C" {
-#include "builtin.h"
-};
-
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-#endif //NATIVE_LIBRARY_H
+namespace java {
+    namespace lang {
+        class System : public virtual Object {
+        public:
+            class in {
+            };
+            class out {
+            public:
+                static void print(String *target);
+                static void println(String *target);
+            };
+            class err {
+            };
+            static void exit(int status);
+            static void gc();
+            static String getenv(char* name);
+        };
+    }
+}

@@ -82,13 +82,12 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
-    collection/*
     common/*
     context/*
     compress/*
     crypto/*
     datetime/*
-    generic/*
+    java/*
     network/*
     server/*
     storage/*
@@ -106,13 +105,12 @@ file(GLOB_RECURSE HEADERS
 
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
-    collection/*_test.c
     common/*_test.c
     context/*_test.c
     compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
-    generic/*_test.cpp
+    java/**/*Test.cpp
     network/*_test.c
     server/*_test.c
     storage/*_test.c

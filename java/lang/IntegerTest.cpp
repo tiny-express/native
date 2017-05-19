@@ -24,59 +24,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.hpp"
-#include <limits.h>
-
-/**
- * Integer value of char pointer
- *
- * @param target
- * @return int
- */
-int Integer(char *target) {
-    return string_to_int(target);
+extern "C" {
+#include "../../unit_test.h"
 }
+#include "Integer.hpp"
 
-/**
- * Integer value of std::string
- *
- * @param target
- * @return int
- */
-int Integer(std::string target) {
-    return string_to_int((char*) target.c_str());
-}
+using namespace java::lang;
 
-/**
- * Integer value of long
- * Can not cast long to int
- *
- * @param target
- * @return 0
- */
-int Integer(long target) {
-    if ((target >= INT_MIN) && (target <= INT_MAX)) {
-        return (int) target;
-    }
-    return 0;
-}
+TEST(JavaLang, Integer) {
 
-/**
- * Integer value of float
- *
- * @param target
- * @return int
- */
-int Integer(float target) {
-    return (int) floor(target);
-}
+//    Integer *char_to_integer = Integer::parseChar('6');
+//    ASSERT_EQUAL(6, char_to_integer->intValue());
 
-/**
- * Integer value of double
- *
- * @param target
- * @return int
- */
-int Integer(double target) {
-    return (int) floor(target);
+//    Integer *long_large_to_integer = Integer::parseLong((long) 120999999345);
+//    ASSERT_EQUAL(0, long_large_to_integer->intValue());
+
+//    int long_small_to_integer = Integer((long) 12345);
+//    ASSERT_EQUAL(12345, long_small_to_integer);
+//
+//    int float_to_integer = Integer(1.234);
+//    ASSERT_EQUAL(1, float_to_integer);
+//
+//    int string_to_integer = Integer(std::string("123456"));
+//    ASSERT_EQUAL(123456, string_to_integer);
+//
+//    int string_to_integer_not_valid = Integer((char*) "Hello world");
+//    ASSERT_EQUAL(0, string_to_integer_not_valid);
+//
+//    int string_to_integer_valid_1 = Integer((char*) "-12345");
+//    ASSERT_EQUAL(-12345, string_to_integer_valid_1);
+//
+//    int string_to_integer_valid_2 = Integer((char*) "-123.45");
+//    ASSERT_EQUAL(-123, string_to_integer_valid_2);
 }

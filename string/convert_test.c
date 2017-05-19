@@ -27,6 +27,14 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
+TEST(String, ConvertFromChar) {
+    char number_character = '6';
+    ASSERT_STR("6", string_from_char(number_character));
+
+    char null_character = '\0';
+    ASSERT_STR("", string_from_char(null_character));
+}
+
 TEST(String, ConvertFromShort) {
     int number = 123;
     char *expect="123";

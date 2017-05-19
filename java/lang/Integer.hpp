@@ -24,15 +24,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#include "Object.hpp"
 
-extern "C" {
-#include "builtin.h"
-};
+namespace java {
+    namespace lang {
+        class Integer: public virtual Object {
+        public:
+            static int MAX_VALUE;
+            static int MIN_VALUE;
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+            Integer(int target);
 
-#endif //NATIVE_LIBRARY_H
+            static Integer *parseChar(char target);
+            static Integer *parseCString(char *target);
+            static Integer *parseString(std::string target);
+            static Integer *parseLong(long target);
+            static Integer *parseFloat(float target);
+            static Integer *parseDouble(double target);
+
+            char charValue();
+            char *cstringValue();
+            std::string stringValue();
+            int intValue();
+            long longValue();
+            float floatValue();
+            double doubleValue();
+
+            String* toString();
+        private:
+            int value;
+        };
+    }
+}
+
+
