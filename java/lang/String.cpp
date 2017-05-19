@@ -24,15 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#include "String.hpp"
+#include "../../generic.hpp"
 
-extern "C" {
-#include "builtin.h"
-};
+using namespace java::lang;
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+String::String(const char *target) {
+    this->value = (char*) target;
+}
 
-#endif //NATIVE_LIBRARY_H
+String::String(char *target) {
+    this->value = target;
+}
+
+int String::length() {
+    return length_pointer_char(value);
+}
+
+String* String::toString() {
+    return new String(this->value);
+}
+
+char* String::toCharacters() {
+    return this->value;
+}

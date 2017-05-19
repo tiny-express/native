@@ -23,16 +23,3 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
-
-extern "C" {
-#include "builtin.h"
-};
-
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-#endif //NATIVE_LIBRARY_H

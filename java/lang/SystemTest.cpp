@@ -24,15 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
-
 extern "C" {
-#include "builtin.h"
-};
+#include "../../unit_test.h"
+}
+#include "System.hpp"
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+using namespace java::lang;
 
-#endif //NATIVE_LIBRARY_H
+TEST(JavaLang, System) {
+    String *string = new String("Hello World");
+    System::out::print(string);
+}

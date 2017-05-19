@@ -24,15 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#ifndef NATIVE_JAVA_LANG_OBJECT_H
+#define NATIVE_JAVA_LANG_OBJECT_H
 
-extern "C" {
-#include "builtin.h"
-};
+#include "../../native.hpp"
 
-#include <iostream>
-#include <string>
-#include <algorithm>
+namespace java {
+    namespace lang {
 
-#endif //NATIVE_LIBRARY_H
+        // Pre-declaration
+        class Object;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class Boolean;
+        class String;
+
+        class Object {
+        protected:
+            Object();
+            virtual String* toString() {}
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_OBJECT_H
