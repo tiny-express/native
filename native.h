@@ -64,6 +64,8 @@ template <typename T> char* md5(T target);
 double round(double target, int precision);
 int *random(int limitation);
 char *random(char *range, int limitation);
+char chr(int target);
+int ord(char target);
 
 // Utility functions
 #define empty(X) len(X) == 0
