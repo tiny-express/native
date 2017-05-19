@@ -29,7 +29,6 @@
  * @param integer
  * @return integer
  */
-
 int ord(char target){
     return int( target );
 }
