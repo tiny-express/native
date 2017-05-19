@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../general.h"
+#include "../common.h"
 
 #define P_SEG(TYPE);\
 inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\

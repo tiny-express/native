@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../type.h"
-#include "../general.h"
+#include "../common.h"
 
 /**
  * Join pointer pointer char

@@ -101,6 +101,7 @@ file(GLOB_RECURSE SOURCES
 
 file(GLOB_RECURSE HEADERS
     ./*.h
+    ./*.hpp
 )
 
 # Include all unit test cases
@@ -140,8 +141,8 @@ enable_testing()
 add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 
 # Add make install - installation to unix system
-install (TARGETS ${PROJECT_NAME}_static DESTINATION bin)
-install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
+install (TARGETS ${PROJECT_NAME} DESTINATION lib)
 install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform

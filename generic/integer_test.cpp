@@ -27,13 +27,15 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
-
-
+#include "../native.hpp"
 
 TEST(Generic, Integer) {
-    int integer_to_integer = Integer(2345);
-    ASSERT_EQUAL(2345, integer_to_integer);
+
+    int long_large_to_integer = Integer((long) 120999999345);
+    ASSERT_EQUAL(0, long_large_to_integer);
+
+    int long_small_to_integer = Integer((long) 12345);
+    ASSERT_EQUAL(12345, long_small_to_integer);
 
     int float_to_integer = Integer(1.234);
     ASSERT_EQUAL(1, float_to_integer);

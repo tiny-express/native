@@ -16,8 +16,9 @@ Beside standard library, we would like to have a greater customization with main
 This project is also useful for new developers in practical programming.
 
 ###  Optimization
-- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
-- C version of that function should be implemented first then optimize again in GNU Assembly for Linux Amd64
+- This library is originally developed in C but we still can make things go faster by optimizing in GAS for Linux amd64
+- C version of that function should be delivered first
+- Documentation for GAS can be found at here: [http://cs.lmu.edu/~ray/notes/gasexamples](http://cs.lmu.edu/~ray/notes/gasexamples)
 
 ### Useful Resources
 - Debugging & Profiling with [Valgrind](http://valgrind.org/)
@@ -29,36 +30,48 @@ This project is also useful for new developers in practical programming.
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ make -j && make test
+$ cmake . && make -j && make test
 $ sudo make install
 ```
 
 #### Sample program
+test.cpp
 ```cpp
 #include <stdio.h>
-#include <native/native.h>
+#include <native/native.hpp>
 
 int main() {
-    char *text = "Hello World";
-    printf("Length of text is %d\n", len(text));
+    char *text = String("Hello World");
+    puts(String(len(text)));
     int number = 1021;
-    printf("Length of number is %d\n", len(number));
-    fflush(stdout);
+    puts(String(len(number)));
     return 0;
 }
 ```
+Compilation & Run
+```bash
+$ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
+$ ./test
+```
 
-#### Unit test (thanks to C-Unit)
+#### Unit Test with C-Unit
+main_test.cpp
 ```cpp
+#define CTEST_MAIN
+#define CTEST_SEGFAULT
+
 #include <native/unit_test.h>
+
+int main(int argc, const char *argv[]) {
+   int result = ctest_main(argc, argv);
+   return result;
+}
 
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
 ```
-```
-Note: You need to link your program with native library (libnative_static.a or libnative.so)
-```
+
 ### Contributors
 - You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
