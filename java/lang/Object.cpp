@@ -28,11 +28,5 @@
 
 using namespace Java::Lang;
 
-Object::Object() {
-}
-
-Object::~Object() {
-}
-
 
 
