@@ -27,9 +27,15 @@
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
 
+#include <pthread.h>
 #include "unit_test.h"
+#include "network.h"
+
+pthread_t mock_thread();
 
 int main(int argc, const char *argv[]) {
-   int result = ctest_main(argc, argv);
-   return result;
+    start_mock_server();
+    int result = ctest_main(argc, argv);
+    stop_mock_server();
+    return result;
 }
