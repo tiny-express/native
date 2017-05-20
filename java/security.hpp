@@ -24,15 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#ifndef NATIVE_JAVA_SECURITY_HPP
+#define NATIVE_JAVA_SECURITY_HPP
 
-extern "C" {
-#include "builtin.h"
-};
-
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-#endif //NATIVE_LIBRARY_H
+#endif//NATIVE_JAVA_SECURITY_HPP

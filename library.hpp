@@ -24,7 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
-#define NATIVE_JAVA_LANG_BOOLEAN_HPP
+#ifndef NATIVE_LIBRARY_HPP
+#define NATIVE_LIBRARY_HPP
 
-#endif//NATIVE_JAVA_LANG_BOOLEAN_HPP
+#include "java/lang.hpp"
+#include "java/io.hpp"
+#include "java/util.hpp"
+#include "java/vendor.hpp"
+
+#endif //NATIVE_LIBRARY_HPP

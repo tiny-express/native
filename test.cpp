@@ -1,9 +1,13 @@
-#include <native/java.hpp>
-using namespace java::lang;
+#include <native/library.hpp>
+
+using namespace Java::Lang;
+using namespace Java::IO;
+
 int main() {
-    String *output = new String("Hello C++");
-    System::out::println(output);
-    delete output;
+    String text = "Hello Native Library";
+    File file = "text.txt";
+
+    System::out::println(text);
     return 0;
 }
 

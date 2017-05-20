@@ -27,10 +27,18 @@
 #ifndef NATIVE_JAVA_LANG_OBJECT_H
 #define NATIVE_JAVA_LANG_OBJECT_H
 
-#include "../../native.hpp"
+extern "C" {
+#include "../../builtin.h"
+};
 
-namespace java {
-    namespace lang {
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cstdarg>
+#include <cmath>
+
+namespace Java {
+    namespace Lang {
 
         // Pre-declaration
         class Object;
@@ -45,6 +53,7 @@ namespace java {
         class Object {
         protected:
             Object();
+            ~Object();
             virtual String* toString() {}
         };
     }

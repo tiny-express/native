@@ -35,12 +35,11 @@ $ sudo make install
 #### Sample program
 test.cpp
 ```cpp
-#include <native/java.hpp>
+#include <native/native.hpp>
 using namespace java::lang;
 int main() {
-    String *output = new String("Hello C++");
+    String string = "Hello world";
     System::out::println(output);
-    delete output;
     return 0;
 }
 ```

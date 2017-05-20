@@ -27,7 +27,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.hpp"
+#include "../library.hpp"
 
 TEST(Generic, Split) {
     std::vector<char*> null_target_delimiter = split((char*) NULL, NULL);

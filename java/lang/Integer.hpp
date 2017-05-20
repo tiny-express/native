@@ -24,10 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_LANG_INTEGER_HPP
+#define NATIVE_JAVA_LANG_INTEGER_HPP
+
 #include "Object.hpp"
 
-namespace java {
-    namespace lang {
+namespace Java {
+    namespace Lang {
         class Integer: public virtual Object {
         public:
             static int MAX_VALUE;
@@ -57,4 +60,5 @@ namespace java {
     }
 }
 
+#endif//NATIVE_JAVA_LANG_INTEGER_HPP
 

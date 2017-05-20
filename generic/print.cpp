@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.hpp"
+#include "../library.hpp"
 
 /**
  * Print const pointer char to screen
