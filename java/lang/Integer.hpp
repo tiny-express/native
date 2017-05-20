@@ -33,9 +33,6 @@ namespace Java {
     namespace Lang {
         class Integer: public virtual Number {
         public:
-            static int MAX_VALUE;
-            static int MIN_VALUE;
-
             static Integer *parseChar(char target);
             static Integer *parseInt(int target);
             static Integer *parseCString(char *target);
@@ -46,15 +43,17 @@ namespace Java {
 
             Integer(int target);
 
-            char charValue() override;
-            char *cstringValue() override;
-            std::string stringValue() override;
-            int intValue() override;
-            long longValue() override;
-            float floatValue() override;
-            double doubleValue() override;
+            char charValue() const override;
+            char *cstringValue() const override;
+            std::string stringValue() const override;
+            short shortValue() const override;
+            int intValue() const override;
+            long longValue() const override;
+            float floatValue() const override;
+            double doubleValue() const override;
 
-            String *toString() override;
+            String *toString() const override;
+
         private:
             int value;
         };

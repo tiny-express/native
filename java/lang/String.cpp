@@ -28,12 +28,20 @@
 
 using namespace Java::Lang;
 
+String::String() {
+    this->original = "";
+}
+
 String::String(const char *original) {
     this->original = (char*) original;
 }
 
 String::String(char *target) {
     this->original = target;
+}
+
+String::String(const String& target) {
+    this->original = target.original;
 }
 
 String::~String() {
@@ -71,42 +79,58 @@ String* String::parseDouble(double target) {
     return new String(string_from_double(target));
 }
 
-char String::charValue() {
+char String::charValue() const {
     return string_to_char(this->original);
 }
 
-char *String::cstringValue() {
+char *String::cstringValue() const {
     return this->original;
 }
 
-std::string String::stringValue() {
+std::string String::stringValue() const {
     return std::string(this->original);
 }
 
-short String::shortValue() {
+short String::shortValue() const {
     return string_to_short(this->original);
 }
 
-int String::intValue() {
+int String::intValue() const {
     return string_to_int(this->original);
 }
 
-long String::longValue() {
+long String::longValue() const {
     return string_to_long(this->original);
 }
 
-float String::floatValue() {
+float String::floatValue() const {
     return string_to_float(this->original);
 }
 
-double String::doubleValue() {
+double String::doubleValue() const {
     return string_to_double(this->original);
 }
 
-int String::length() {
+int String::length() const {
     return length_pointer_char(original);
 }
 
-String* String::toString() {
+String* String::toString() const {
     return new String(this->original);
+}
+
+String String::operator+(const String& target2) {
+    String result = string_concat(this->original, target2.original);
+    return result;
+}
+
+bool String::operator==(const String &target2) {
+    if (string_equals(this->original, target2.cstringValue())) {
+        return true;
+    }
+    return false;
+}
+
+bool String::operator!=(const String &target2) {
+    return !this->operator==(target2);
 }

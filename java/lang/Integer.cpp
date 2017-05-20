@@ -116,7 +116,7 @@ Integer* Integer::parseDouble(double target) {
  *
  * @return String
  */
-String* Integer::toString() {
+String* Integer::toString() const  {
     return new String(string_from_int(this->value));
 }
 
@@ -125,7 +125,7 @@ String* Integer::toString() {
  *
  * @return char
  */
-char Integer::charValue() {
+char Integer::charValue() const {
     return string_to_char(string_from_int(this->value));
 }
 
@@ -134,7 +134,7 @@ char Integer::charValue() {
  *
  * @return CString
  */
-char* Integer::cstringValue() {
+char* Integer::cstringValue() const  {
     return string_from_int(this->value);
 }
 
@@ -143,8 +143,17 @@ char* Integer::cstringValue() {
  *
  * @return CString
  */
-std::string Integer::stringValue() {
+std::string Integer::stringValue() const  {
     return std::string(this->cstringValue());
+}
+
+/**
+ * Short value of Integer
+ *
+ * @return short
+ */
+short Integer::shortValue() const  {
+    return this->value;
 }
 
 /**
@@ -152,7 +161,7 @@ std::string Integer::stringValue() {
  *
  * @return int
  */
-int Integer::intValue() {
+int Integer::intValue() const  {
     return this->value;
 }
 
@@ -161,7 +170,7 @@ int Integer::intValue() {
  *
  * @return int
  */
-long Integer::longValue() {
+long Integer::longValue() const  {
     return (long) this->value;
 }
 
@@ -171,7 +180,7 @@ long Integer::longValue() {
  *
  * @return int
  */
-float Integer::floatValue() {
+float Integer::floatValue() const  {
     return (float) this->value;
 }
 
@@ -180,9 +189,6 @@ float Integer::floatValue() {
  *
  * @return int
  */
-double Integer::doubleValue() {
+double Integer::doubleValue() const  {
     return (double) this->value;
 }
-
-
-

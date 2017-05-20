@@ -52,7 +52,7 @@ namespace Java {
 
         class Object {
         protected:
-            virtual String* toString() {}
+            virtual String* toString() const = 0;
         };
     }
 }
