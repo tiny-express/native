@@ -46,6 +46,7 @@ int parse_uri(char* response, http_response *result) {
         if (response[scan_index] == ' ') {
             count ++;
             if (count == 1) {
+                printf("fuck\n");
                 result->method = string_from_to(response, mark_index, scan_index - 1);
                 mark_index = scan_index + 1;
             } else if (count == 2) {
