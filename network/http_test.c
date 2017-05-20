@@ -128,7 +128,8 @@ TEST(Network, HttpRequest) {
 		'\0'
 	};
 
-	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
+	char *response = http_request("POST", "http://localhost:9999/test", headers, body);
+	printf("response: \n%s\n", response);
     ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
 
     response = http_request("GET", "http://httpbin.org/get", headers, body);

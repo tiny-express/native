@@ -31,10 +31,9 @@
 #include <sys/socket.h>
 #include <resolv.h>
 #include <arpa/inet.h>
-#include <errno.h>
 #include <string.h>
-#include <fcntl.h> // for open
 #include <unistd.h> // for close
+#include <pthread.h>
 #include "../network.h"
 
 #define MY_PORT		9999
@@ -48,8 +47,7 @@ void* start() {
     char buffer[MAXBUF];
 
     /*---Create streaming socket---*/
-    if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 )
-    {
+    if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
         perror("Socket");
         exit(errno);
     }
@@ -61,31 +59,30 @@ void* start() {
     self.sin_addr.s_addr = INADDR_ANY;
 
     /*---Assign a port number to the socket---*/
-    if ( bind(sockfd, (struct sockaddr*)&self, sizeof(self)) != 0 )
-    {
+    if ( bind(sockfd, (struct sockaddr*)&self, sizeof(self)) != 0 ) {
         perror("socket--bind");
         exit(errno);
     }
 
     /*---Make it a "listening socket"---*/
-    if ( listen(sockfd, 20) != 0 )
-    {
+    if ( listen(sockfd, 20) != 0 ) {
         perror("socket--listen");
         exit(errno);
     }
 
     /*---Forever... ---*/
-    while (1)
-    {	int clientfd;
+    while (1) {
+        int clientfd;
         struct sockaddr_in client_addr;
         int addrlen=sizeof(client_addr);
 
         /*---accept a connection (creating a data pipe)---*/
         clientfd = accept(sockfd, (struct sockaddr*)&client_addr, &addrlen);
 
-        /*---Echo back anything sent---*/
-        send(clientfd, buffer, recv(clientfd, buffer, MAXBUF, 0), 0);
-        printf("%s\n", buffer);
+        /*---On receive message---*/
+        recv(clientfd, buffer, MAXBUF, 0);
+        on_receive(clientfd, parse(buffer));
+
         /*---Close data connection---*/
         close(clientfd);
     }
@@ -106,4 +103,16 @@ void start_mock_server() {
 void stop_mock_server() {
     close_socket();
     pthread_cancel(pthread);
+}
+
+void on_receive(int client_id, http_response* content) {
+    char* path = content->path;
+    if (strcmp(path, "/test/")) {
+        on_test_http_request(client_id, content);
+    }
+}
+
+void send_response(int client_id, char* content) {
+    size_t size = sizeof(content);
+    send(client_id, content, size, 0);
 }
