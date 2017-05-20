@@ -23,3 +23,47 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "../native.hpp"
+
+/**
+ * Boolean value of char pointer
+ *
+ * @param target
+ * @return bool
+ */
+bool Boolean(char *target) {
+    return string_to_boolean(string_lower(target));
+}
+
+/**
+ * Boolean value of std::string
+ *
+ * @param target
+ * @return bool
+ */
+bool Boolean(std::string target) {
+    return string_to_boolean(string_lower((char*) target.c_str()));
+}
+
+/**
+ * Boolean value of integer
+ *
+ * @param target
+ * @return bool
+ */
+bool Boolean(int target) {
+    return (bool) target;
+}
+
+/**
+ * Boolean value of long
+ *
+ * @param target
+ * @return 0
+ */
+bool Boolean(long target) {
+    return (bool) target;
+}
+
+

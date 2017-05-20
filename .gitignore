@@ -12,6 +12,7 @@
 /native_test
 /native.cbp
 /native
+/test
 /libnative_static.a
 /libnative.so
 /test.txt

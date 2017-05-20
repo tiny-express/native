@@ -27,7 +27,7 @@
 #ifndef NATIVE_THREAD_H
 #define NATIVE_THREAD_H
 
-#include "thread/thread.h"
+#include <pthread.h>
 
 typedef struct thread_argument {
     void *callback;

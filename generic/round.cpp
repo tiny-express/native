@@ -23,3 +23,33 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include <cmath>
+#include <stdlib.h>
+
+/**
+ * Round double number
+ * absolute value
+ * @param double
+ * @return double
+ */
+double round(double target, int precision) {
+    precision = abs(precision);
+    int value = pow(10,precision);
+    double result =  round(target * value) / value;
+    return result;
+}
+
+/**
+ * Round float number
+ * absolute value
+ * @param float
+ * @return float
+ */
+float round(float target, int precision) {
+    precision = abs(precision);
+    int value = pow(10,precision);
+    float result = (float) round(target * value) / value;
+    return result;
+}
+
