@@ -26,9 +26,12 @@
 
 #include "Object.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
 Object::Object() {
+}
+
+Object::~Object() {
 }
 
 

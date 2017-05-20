@@ -25,26 +25,88 @@
  */
 
 #include "String.hpp"
-#include "../../generic.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
-String::String(const char *target) {
-    this->value = (char*) target;
+String::String(const char *original) {
+    this->original = (char*) original;
 }
 
 String::String(char *target) {
-    this->value = target;
+    this->original = target;
+}
+
+String::~String() {
+}
+
+String* String::parseChar(char target) {
+    return new String(string_from_char(target));
+}
+
+String* String::parseCString(char *target) {
+    return new String(target);
+}
+
+String* String::parseString(std::string target) {
+    return new String(target.c_str());
+}
+
+String* String::parseShort(short target) {
+    return new String(string_from_short(target));
+}
+
+String* String::parseInt(int target) {
+    return new String(string_from_int(target));
+}
+
+String* String::parseLong(long target) {
+    return new String(string_from_long(target));
+}
+
+String* String::parseFloat(float target) {
+    return new String(string_from_float(target));
+}
+
+String* String::parseDouble(double target) {
+    return new String(string_from_double(target));
+}
+
+char String::charValue() {
+    return string_to_char(this->original);
+}
+
+char *String::cstringValue() {
+    return this->original;
+}
+
+std::string String::stringValue() {
+    return std::string(this->original);
+}
+
+short String::shortValue() {
+    return string_to_short(this->original);
+}
+
+int String::intValue() {
+    return string_to_int(this->original);
+}
+
+long String::longValue() {
+    return string_to_long(this->original);
+}
+
+float String::floatValue() {
+    return string_to_float(this->original);
+}
+
+double String::doubleValue() {
+    return string_to_double(this->original);
 }
 
 int String::length() {
-    return length_pointer_char(value);
+    return length_pointer_char(original);
 }
 
 String* String::toString() {
-    return new String(this->value);
-}
-
-char* String::toCharacters() {
-    return this->value;
+    return new String(this->original);
 }

@@ -24,5 +24,5 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.hpp"
+#include "../library.hpp"
 #include "../unit_test.h"

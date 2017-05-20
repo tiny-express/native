@@ -24,7 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
-#define NATIVE_JAVA_LANG_BOOLEAN_HPP
+#ifndef NATIVE_JAVA_VENDOR_HPP
+#define NATIVE_JAVA_VENDOR_HPP
 
-#endif//NATIVE_JAVA_LANG_BOOLEAN_HPP
+#include "vendor/ElasticSearch.hpp"
+#include "vendor/Etcd.hpp"
+#include "vendor/Firebase.hpp"
+#include "vendor/SendGrid.hpp"
+#include "vendor/Twilio.hpp"
+
+#endif//NATIVE_JAVA_VENDOR_HPP

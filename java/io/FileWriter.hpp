@@ -24,7 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
-#define NATIVE_JAVA_LANG_BOOLEAN_HPP
+#ifndef NATIVE_IO_FILE_HPP
+#define NATIVE_IO_FILE_HPP
 
-#endif//NATIVE_JAVA_LANG_BOOLEAN_HPP
+#include "../lang/Object.hpp"
+
+using namespace Java::Lang;
+
+namespace Java {
+    namespace IO {
+        class FileWriter : public virtual Object {
+
+        };
+    }
+}
+
+#endif//NATIVE_IO_FILE_HPP

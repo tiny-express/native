@@ -24,13 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdarg.h>
 #include "System.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
 void System::out::print(String *target) {
-    char *targetCharacters = target->toCharacters();
+    char *targetCharacters = target->cstringValue();
     if (is_empty(targetCharacters)) {
         return;
     }
@@ -39,14 +38,13 @@ void System::out::print(String *target) {
 }
 
 void System::out::println(String *target) {
-    char *targetCharacters = target->toCharacters();
+    char *targetCharacters = target->cstringValue();
     if (is_empty(targetCharacters)) {
         return;
     }
     printf("%s\n", targetCharacters);
     fflush(stdout);
 }
-
 
 void System::exit(int status) {
     exit(status);

@@ -98,9 +98,9 @@ file(GLOB_RECURSE SOURCES
     validator/*
 )
 
-file(GLOB HEADERS
+file(GLOB_RECURSE HEADERS
     ./*.h
-    ./*.hpp
+        library.hpp
 )
 
 # Include all unit test cases
@@ -142,6 +142,7 @@ add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install (TARGETS ${PROJECT_NAME} DESTINATION lib)
 install (FILES ${HEADERS} DESTINATION include/native)
+install (DIRECTORY java DESTINATION include/native)
 install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform
