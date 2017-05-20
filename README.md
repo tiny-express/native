@@ -3,23 +3,20 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 
-This library provides a set of standard functions which are common used in C/C++ application.
+This library provides a set of low-level and productivity functions for C/C++ application.
 
-Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
+Beside standard library, we would like to have a greater customization with main goals:
 
-We use this library in our production and unit test with Travis CI so it just works !
+- Blazing fast performance of GAS & C/C++
+- Using Java packages in C++ with human readable
+- Third party clients support for Food Tiny micro-components will be in java.vendor
 
-This project is also useful for new developers in practical programming
+This project is also useful for new developers in practical programming.
 
-### Road map
-- Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
-- Develop fundamental algorithms and advanced data structure
-- Fix comments and complete test cases for all exported functions
-
-### Assembly Optimization
-- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
-- C version of that function should be implemented first then optimize again for Linux platform
-- GNU Assembly (GAS) in this project is ONLY compatible with Linux amd64
+###  Optimization
+- This library is originally developed in C but we still can make things go faster by optimizing in GAS for Linux amd64
+- C version of that function should be delivered first
+- Documentation for GAS can be found at here: [http://cs.lmu.edu/~ray/notes/gasexamples](http://cs.lmu.edu/~ray/notes/gasexamples)
 
 ### Useful Resources
 - Debugging & Profiling with [Valgrind](http://valgrind.org/)
@@ -31,36 +28,45 @@ This project is also useful for new developers in practical programming
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ make -j && make test
+$ cmake . && make -j && make test
 $ sudo make install
 ```
 
 #### Sample program
+test.cpp
 ```cpp
-#include <stdio.h>
-#include <native/native.h>
-
+#include <native/native.hpp>
+using namespace java::lang;
 int main() {
-    char *text = "Hello World";
-    printf("Length of text is %d\n", len(text));
-    int number = 1021;
-    printf("Length of number is %d\n", len(number));
-    fflush(stdout);
+    String string = "Hello world";
+    System::out::println(output);
     return 0;
 }
 ```
+Compilation & Run
+```bash
+$ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
+$ ./test
+```
 
-#### Unit test (thanks to C-Unit)
+#### Unit Test with C-Unit
+main_test.cpp
 ```cpp
+#define CTEST_MAIN
+#define CTEST_SEGFAULT
+
 #include <native/unit_test.h>
+
+int main(int argc, const char *argv[]) {
+   int result = ctest_main(argc, argv);
+   return result;
+}
 
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
 ```
-```
-Note: You need to link your program with native library (libnative_static.a or libnative.so)
-```
+
 ### Contributors
 - You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
@@ -70,9 +76,9 @@ Note: You need to link your program with native library (libnative_static.a or l
 
 # Documentation
 
-### Productivity C++ Functions
+### C++ Functions
 
-#### Type Casting (inspired by Java)
+#### Type Casting
 - [ ] Short - short
 - [x] Integer - int
 - [x] Long - long
@@ -81,13 +87,15 @@ Note: You need to link your program with native library (libnative_static.a or l
 - [x] String - char*
 - [x] Boolean - bool
 
-##### Usage
-```cpp
-int number = Integer(1.234);
-char *text = String(-12456);
-```
+#### Collections
+- [ ] ArrayList
+- [ ] LinkedList
+- [ ] HashMap
+- [ ] HashSet
+- [ ] TreeSet
+- [ ] PriorityQueue
 
-#### Utility (inspired by Python)
+#### Builtin Functions
 - [x] empty
 - [x] len
 - [ ] copy
@@ -107,7 +115,7 @@ char *text = String(-12456);
 - [x] sha1
 - [ ] type
 
-### Low-level C Library
+### C Library
 #### Common
 - [x] length_pointer_char
 - [x] length_pointer_pointer_char

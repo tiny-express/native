@@ -32,7 +32,7 @@
 #include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
 #include <stddef.h> /* size_t */
 #include <signal.h>
-#include "./general.h"
+#include "common.h"
 
 typedef void (*SetupFunc)(void*);
 typedef void (*TearDownFunc)(void*);

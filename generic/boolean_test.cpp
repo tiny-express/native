@@ -27,23 +27,31 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
-
-
+#include "../library.hpp"
 
 TEST(Generic, Boolean) {
-    
-    double boolean_to_boolean = Boolean(1);
-    ASSERT_EQUAL(1, boolean_to_boolean);
-        
-    double string_to_boolean = Boolean(std::string("True"));
-    ASSERT_EQUAL(1, string_to_boolean);
 
-    double string_to_boolean_not_valid = Boolean((char*) "True");
-    ASSERT_EQUAL(0, string_to_boolean_not_valid);
-    
-    double double_to_boolean = Boolean(2.3E-3);
-    ASSERT_EQUAL(0, double_to_boolean);
+    char *target0 = "1";
+    int boolean0 = string_to_boolean(target0);
+    ASSERT_TRUE(boolean0);
+
+    bool char_pointer_to_boolean_0 = Boolean((char*) "1");
+    ASSERT_TRUE(char_pointer_to_boolean_0);
+
+    bool string_to_boolean_0 = Boolean(std::string("1"));
+    ASSERT_TRUE(string_to_boolean_0);
+
+    bool string_to_boolean_1 = Boolean(std::string("True"));
+    ASSERT_TRUE(string_to_boolean_1);
+
+    bool string_to_boolean_2 = Boolean((char*) "true");
+    ASSERT_TRUE(string_to_boolean_2);
+
+    bool string_to_boolean_3 = Boolean(std::string("XYZ"));
+    ASSERT_FALSE(string_to_boolean_3);
+
+    bool string_to_boolean_4 = Boolean((char*) "false");
+    ASSERT_FALSE(string_to_boolean_4);
     
     double long_to_boolean = Boolean(2147483647);
     ASSERT_EQUAL(1, long_to_boolean);
@@ -51,6 +59,4 @@ TEST(Generic, Boolean) {
     double integer_to_boolean = Boolean(2345);
     ASSERT_EQUAL(1, integer_to_boolean);
 
-    double float_to_boolean = Boolean(234231.234);
-    ASSERT_EQUAL(1, float_to_boolean);
 }

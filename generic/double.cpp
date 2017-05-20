@@ -27,16 +27,16 @@
 extern "C" {
 #include "../string.h"
 }
-#include "../native.h"
+#include "../library.hpp"
 
 /**
- * Double value by default - un-supported type
+ * Double value of char pointer
  *
- * @param T
- * @return 0
+ * @param target
+ * @return double
  */
-template <typename T> double Double(T) {
-    return 0;
+double Double(char *target) {
+    return string_to_double(target);
 }
 
 /**
@@ -45,21 +45,9 @@ template <typename T> double Double(T) {
  * @param target
  * @return double
  */
-template<> double Double(std::string target) {
+double Double(std::string target) {
     return string_to_double((char*) target.c_str());
 }
-template double Double<std::string>(std::string target);
-
-/**
- * Double value of char pointer
- *
- * @param target
- * @return double
- */
-template<> double Double(char *target) {
-    return string_to_double(target);
-}
-template double Double<char*>(char *target);
 
 /**
  * Double value of integer
@@ -67,10 +55,9 @@ template double Double<char*>(char *target);
  * @param target
  * @return double
  */
-template<> double Double(int target) {
+double Double(int target) {
     return target;
 }
-template double Double<int>(int target);
 
 /**
  * Double value of long
@@ -78,10 +65,9 @@ template double Double<int>(int target);
  * @param target
  * @return 0
  */
-template<> double Double(long target) {
+double Double(long target) {
     return 0;
 }
-template double Double<long>(long target);
 
 /**
  * Double value of float
@@ -89,7 +75,6 @@ template double Double<long>(long target);
  * @param target
  * @return double
  */
-template<> double Double(float target) {
+double Double(float target) {
     return (int) floor(target);
 }
-template double Double<float>(float target);

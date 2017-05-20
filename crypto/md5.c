@@ -1,6 +1,6 @@
 #include "../crypto.h"
 #include <openssl/md5.h>
-#include "../general.h"
+#include "../common.h"
 #include "../string.h"
 
 /**

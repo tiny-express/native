@@ -27,4 +27,4 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../library.hpp"

@@ -27,8 +27,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include "../common.h"
 #include "../type.h"
 #include "../string.h"
+#include "../validator.h"
 
 /**
  * Convert generic types to string
@@ -68,6 +70,35 @@ STR_TO(float,  "%g\0");
 STR_TO(double, "%lg\0");
 
 /**
+ * String from char
+ *
+ * @param target
+ * @return string
+ */
+char *string_from_char(char target) {
+    if (target == '\0') {
+        return (char*) "";
+    }
+    char *result = malloc(2 * sizeof(char));
+    result[0] = target;
+    result[1] = '\0';
+    return result;
+}
+
+/**
+ * String to char
+ *
+ * @param target
+ * @return string
+ */
+char string_to_char(char* target) {
+	if (is_empty(target)) {
+		return '\0';
+	}
+	return target[0];
+}
+
+/**
  * String to int
  *
  * @param target
@@ -91,4 +122,24 @@ long string_to_long(char* target) {
 		return 0;
 	}
 	return atol(target);
+}
+
+/**
+ * String to boolean
+ *
+ * @param target
+ * @return TRUE | FALSE
+ */
+int string_to_boolean(char* target) {
+	if (length_pointer_char(target) == 0) {
+		return FALSE;
+	}
+	char *boolean_value = string_lower(target);
+	if (string_equals(boolean_value, "true")) {
+		return TRUE;
+	}
+    if (string_to_int(boolean_value) == TRUE) {
+        return TRUE;
+    }
+	return FALSE;
 }

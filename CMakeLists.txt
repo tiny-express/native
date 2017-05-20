@@ -87,7 +87,7 @@ file(GLOB_RECURSE SOURCES
     compress/*
     crypto/*
     datetime/*
-    generic/*
+    java/*
     network/*
     server/*
     storage/*
@@ -100,6 +100,7 @@ file(GLOB_RECURSE SOURCES
 
 file(GLOB_RECURSE HEADERS
     ./*.h
+        library.hpp
 )
 
 # Include all unit test cases
@@ -109,7 +110,7 @@ file(GLOB_RECURSE TESTS
     compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
-    generic/*_test.cpp
+    java/**/*Test.cpp
     network/*_test.c
     server/*_test.c
     storage/*_test.c
@@ -131,15 +132,17 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} generic/chr_test.cpp generic/ord_test.cpp)
 
 # Add make test
 enable_testing()
 add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 
 # Add make install - installation to unix system
-install (TARGETS ${PROJECT_NAME}_static DESTINATION bin)
-install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
+install (TARGETS ${PROJECT_NAME} DESTINATION lib)
+install (FILES ${HEADERS} DESTINATION include/native)
+install (DIRECTORY java DESTINATION include/native)
 install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform

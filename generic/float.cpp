@@ -27,28 +27,7 @@
 extern "C" {
 #include "../string.h"
 }
-#include "../native.h"
-
-/**
- * Float value by default - un-supported type
- *
- * @param T
- * @return 0
- */
-template <typename T> float Float(T) {
-    return 0;
-}
-
-/**
- * Floatvalue of std::string
- *
- * @param target
- * @return float
- */
-template<> float Float(std::string target) {
-    return string_to_float((char*) target.c_str());
-}
-template float Float<std::string>(std::string target);
+#include "../library.hpp"
 
 /**
  * Float value of char pointer
@@ -56,10 +35,19 @@ template float Float<std::string>(std::string target);
  * @param target
  * @return float
  */
-template<> float Float(char *target) {
+float Float(char *target) {
     return string_to_float(target);
 }
-template float Float<char*>(char *target);
+
+/**
+ * Float value of std::string
+ *
+ * @param target
+ * @return float
+ */
+float Float(std::string target) {
+    return string_to_float((char*) target.c_str());
+}
 
 /**
  * Float value of integer
@@ -67,10 +55,9 @@ template float Float<char*>(char *target);
  * @param target
  * @return double
  */
-template<> float Float(int target) {
+float Float(int target) {
     return target;
 }
-template float Float<int>(int target);
 
 /**
  * Float value of long
@@ -78,10 +65,9 @@ template float Float<int>(int target);
  * @param target
  * @return 0
  */
-template<> float Float(long target) {
+float Float(long target) {
     return 0;
 }
-template float Float<long>(long target);
 
 /**
  * Float value of double
@@ -89,7 +75,6 @@ template float Float<long>(long target);
  * @param target
  * @return float
  */
-template<> float Float(double target) {
+float Float(double target) {
     return (float) floor(target);
 }
-template float Float<double>(double target);

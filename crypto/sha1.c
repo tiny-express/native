@@ -1,6 +1,6 @@
 #include "../crypto.h"
 #include <openssl/sha.h>
-#include "../general.h"
+#include "../common.h"
 #include "../string.h"
 
 /**

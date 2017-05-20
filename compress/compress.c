@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include "../string.h"
 #include "../compress.h"
-#include "../general.h"
+#include "../common.h"
 
 #define MAXLEN_STRING_COMPRESS 100000
 

@@ -27,7 +27,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../library.hpp"
 
 TEST(Generic, Empty) {
     char *null_string = NULL;
