@@ -29,7 +29,7 @@ extern "C" {
 }
 #include "System.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
 TEST(JavaLang, System) {
     String *string = new String("Hello World");

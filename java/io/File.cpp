@@ -24,12 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../lang/Object.hpp"
-
-namespace java {
-    namespace io {
-        class File : public virtual java::lang::Object {
-
-        };
-    }
-}
+#include "File.hpp"

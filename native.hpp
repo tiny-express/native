@@ -24,15 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#ifndef NATIVE_LIBRARY_HPP
+#define NATIVE_LIBRARY_HPP
 
-extern "C" {
-#include "builtin.h"
-};
+#include "java/lang.hpp"
+#include "java/io.hpp"
+#include "java/util.hpp"
 
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-#endif //NATIVE_LIBRARY_H
+#endif //NATIVE_LIBRARY_HPP

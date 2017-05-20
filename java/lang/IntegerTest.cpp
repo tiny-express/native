@@ -29,9 +29,12 @@ extern "C" {
 }
 #include "Integer.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
 TEST(JavaLang, Integer) {
+
+    Integer integer = 3;
+    ASSERT_EQUAL(3, integer.intValue());
 
     Integer *char_to_integer = Integer::parseChar('6');
     ASSERT_EQUAL(6, char_to_integer->intValue());
