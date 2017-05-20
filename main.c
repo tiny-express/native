@@ -34,8 +34,8 @@
 pthread_t mock_thread();
 
 int main(int argc, const char *argv[]) {
-//    start_mock_server();
+    start_mock_server();
     int result = ctest_main(argc, argv);
-//    stop_mock_server();
+    stop_mock_server();
     return result;
 }
