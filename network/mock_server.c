@@ -81,7 +81,7 @@ void* start() {
 
         /*---On receive message---*/
         recv(clientfd, buffer, MAXBUF, 0);
-        on_receive(clientfd, parse(buffer));
+        on_receive((int) clientfd, (http_response*) parse(buffer));
 
         /*---Close data connection---*/
         close(clientfd);

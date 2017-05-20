@@ -27,10 +27,10 @@
 #ifndef NATIVE_LIBRARY_HPP
 #define NATIVE_LIBRARY_HPP
 
-#include "java/io.hpp"
-#include "java/lang.hpp"
-#include "java/security.hpp"
-#include "java/util.hpp"
-#include "java/vendor.hpp"
+#include "java/IO.hpp"
+#include "java/Lang.hpp"
+#include "java/Security.hpp"
+#include "java/Util.hpp"
+#include "java/Vendor.hpp"
 
 #endif //NATIVE_LIBRARY_HPP

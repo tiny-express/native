@@ -34,8 +34,6 @@ extern "C" {
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <cstdarg>
-#include <cmath>
 
 namespace Java {
     namespace Lang {
