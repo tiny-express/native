@@ -24,37 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../library.hpp"
+#ifndef NATIVE_JAVA_VENDOR_HPP
+#define NATIVE_JAVA_VENDOR_HPP
 
-/**
- * Split pointer char
- *
- * @param target
- * @return char pointer array
- */
-std::vector<char*> split(char *target, char *delimiter) {
-    std::vector<char*> string_vector;
-    if (empty(target)) {
-        return string_vector;
-    }
-    if (empty(delimiter)) {
-        string_vector.push_back(target);
-        return string_vector;
-    }
-    char **string_array = string_split(target, delimiter);
-    int array_length = length_pointer_pointer_char(string_array);
-    for (int index=0; index<array_length; index++) {
-        string_vector.push_back(string_array[index]);
-    }
-    return string_vector;
-}
+#include "vendor/ElasticSearch.hpp"
+#include "vendor/Etcd.hpp"
+#include "vendor/Firebase.hpp"
+#include "vendor/SendGrid.hpp"
+#include "vendor/Twilio.hpp"
 
-/**
- * Split std::string
- *
- * @param target
- * @return std::string array
- */
-std::vector<char*> split(std::string target, char *delimiter) {
-    return split(String(target), delimiter);
-}
+#endif//NATIVE_JAVA_VENDOR_HPP

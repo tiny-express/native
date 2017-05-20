@@ -24,11 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-#include "java/lang.hpp"
-#include "java/io.hpp"
-#include "java/util.hpp"
+#ifndef NATIVE_JAVA_LANG_MATH_HPP
+#define NATIVE_JAVA_LANG_MATH_HPP
 
-#endif //NATIVE_LIBRARY_HPP
+#include "Object.hpp"
+#include "String.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Math: public virtual Object {
+        public:
+            static double max(double a, double b);
+            static float max(float a, float b);
+            static int	max(int a, int b);
+            static long	max(long a, long b);
+            static double min(double a, double b);
+            static float min(float a, float b);
+            static int	min(int a, int b);
+            static long	round(double a);
+            static int	round(float a);
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_MATH_HPP
