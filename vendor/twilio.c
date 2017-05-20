@@ -28,7 +28,6 @@
 #include "../network.h"
 #include "../string.h"
 #include "../builtin.h"
-#include "../type.h"
 
 #define STRING_NOT_FOUND        -1
 #define TWILIO_RESPONSE_SUCCESS "201 CREATED"
