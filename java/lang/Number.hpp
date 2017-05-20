@@ -42,7 +42,7 @@ namespace Java {
             virtual int intValue() = 0;
             virtual long longValue() = 0;
             virtual float floatValue() = 0;
-            virtual double doubleValue() = 0g;
+            virtual double doubleValue() = 0;
         };
     }
 }
