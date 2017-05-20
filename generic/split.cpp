@@ -24,19 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.h"
-
-/**
- * Split  by default - un-supported type
- *
- * @param T
- * @param t
- * @return empty array
- */
-template <typename T> std::vector<char*> split(T target, char *delimiter) {
-    std::vector<T> emptyVector;
-    return emptyVector;
-}
+#include "../library.hpp"
 
 /**
  * Split pointer char
@@ -44,7 +32,7 @@ template <typename T> std::vector<char*> split(T target, char *delimiter) {
  * @param target
  * @return char pointer array
  */
-template<> std::vector<char*> split(char *target, char *delimiter) {
+std::vector<char*> split(char *target, char *delimiter) {
     std::vector<char*> string_vector;
     if (empty(target)) {
         return string_vector;
@@ -60,7 +48,6 @@ template<> std::vector<char*> split(char *target, char *delimiter) {
     }
     return string_vector;
 }
-template std::vector<char*> split<char*>(char *target, char *delimiter);
 
 /**
  * Split std::string
@@ -68,7 +55,6 @@ template std::vector<char*> split<char*>(char *target, char *delimiter);
  * @param target
  * @return std::string array
  */
-template<> std::vector<char*> split<std::string>(std::string target, char *delimiter) {
+std::vector<char*> split(std::string target, char *delimiter) {
     return split(String(target), delimiter);
 }
-template std::vector<char*> split<std::string>(std::string target, char *delimiter);

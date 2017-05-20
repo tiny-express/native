@@ -24,29 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../unit_test.h"
-}
-#include "../native.h"
+#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
+#define NATIVE_JAVA_LANG_BOOLEAN_HPP
 
-
-
-TEST(Generic, Integer) {
-    int integer_to_integer = Integer(2345);
-    ASSERT_EQUAL(2345, integer_to_integer);
-
-    int float_to_integer = Integer(1.234);
-    ASSERT_EQUAL(1, float_to_integer);
-
-    int string_to_integer = Integer(std::string("123456"));
-    ASSERT_EQUAL(123456, string_to_integer);
-
-    int string_to_integer_not_valid = Integer((char*) "Hello world");
-    ASSERT_EQUAL(0, string_to_integer_not_valid);
-
-    int string_to_integer_valid_1 = Integer((char*) "-12345");
-    ASSERT_EQUAL(-12345, string_to_integer_valid_1);
-
-    int string_to_integer_valid_2 = Integer((char*) "-123.45");
-    ASSERT_EQUAL(-123, string_to_integer_valid_2);
-}
+#endif//NATIVE_JAVA_LANG_BOOLEAN_HPP

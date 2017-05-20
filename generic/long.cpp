@@ -24,16 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.h"
+#include "../library.hpp"
+
 
 /**
- * Long value by default - un-supported type
+ * Long value of char pointer
  *
- * @param T
- * @return 0
+ * @param target
+ * @return long
  */
-template <typename T> long Long(T) {
-    return 0;
+long Long(char *target) {
+    return string_to_long(target);
 }
 
 /**
@@ -42,21 +43,9 @@ template <typename T> long Long(T) {
  * @param target
  * @return long
  */
-template<> long Long(std::string target) {
+long Long(std::string target) {
     return string_to_long((char*) target.c_str());
 }
-template long Long<std::string>(std::string target);
-
-/**
- * Long value of char pointer
- *
- * @param target
- * @return long
- */
-template<> long Long(char *target) {
-    return string_to_long(target);
-}
-template long Long<char*>(char *target);
 
 /**
  * Long value of integer
@@ -64,21 +53,9 @@ template long Long<char*>(char *target);
  * @param target
  * @return long
  */
-template<> long Long(int target) {
+long Long(int target) {
     return target;
 }
-template long Long<int>(int target);
-
-/**
- * Long value of long
- *
- * @param target
- * @return long
- */
-template<> long Long(long target) {
-    return target;
-}
-template long Long<long>(long target);
 
 /**
  * Integer value of float
@@ -86,10 +63,9 @@ template long Long<long>(long target);
  * @param target
  * @return int
  */
-template<> long Long(float target) {
+long Long(float target) {
     return (long) floor(target);
 }
-template long Long<float>(float target);
 
 /**
  * Integer value of double
@@ -97,7 +73,6 @@ template long Long<float>(float target);
  * @param target
  * @return long
  */
-template<> long Long(double target) {
+long Long(double target) {
     return (long) floor(target);
 }
-template long Long<double>(double target);

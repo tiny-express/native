@@ -24,81 +24,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.h"
+#ifndef NATIVE_JAVA_LANG_OBJECT_H
+#define NATIVE_JAVA_LANG_OBJECT_H
 
-/**
- * Integer value by default - un-supported type
- *
- * @param T
- * @return 0
- */
-template <typename T> int Integer(T) {
-    return 0;
+extern "C" {
+#include "../../builtin.h"
+};
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+namespace Java {
+    namespace Lang {
+
+        // Pre-declaration
+        class Object;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class Boolean;
+        class String;
+
+        class Object {
+        protected:
+            virtual String* toString() const = 0;
+        };
+    }
 }
 
-/**
- * Integer value of std::string
- *
- * @param target
- * @return int
- */
-template<> int Integer(std::string target) {
-    return string_to_int((char*) target.c_str());
-}
-template int Integer<std::string>(std::string target);
-
-/**
- * Integer value of char pointer
- *
- * @param target
- * @return int
- */
-template<> int Integer(char *target) {
-    return string_to_int(target);
-}
-template int Integer<char*>(char *target);
-
-/**
- * Integer value of integer
- *
- * @param target
- * @return int
- */
-template<> int Integer(int target) {
-    return target;
-}
-template int Integer<int>(int target);
-
-/**
- * Integer value of long
- * Can not cast long to int
- *
- * @param target
- * @return 0
- */
-template<> int Integer(long target) {
-    return 0;
-}
-template int Integer<long>(long target);
-
-/**
- * Integer value of float
- *
- * @param target
- * @return int
- */
-template<> int Integer(float target) {
-    return (int) floor(target);
-}
-template int Integer<float>(float target);
-
-/**
- * Integer value of double
- *
- * @param target
- * @return int
- */
-template<> int Integer(double target) {
-    return (int) floor(target);
-}
-template int Integer<double>(double target);
+#endif//NATIVE_JAVA_LANG_OBJECT_H

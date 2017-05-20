@@ -25,7 +25,7 @@
  */
 
 #include "../string.h"
-#include "../general.h"
+#include "../common.h"
 #include "../type.h"
 
 #define P_LEN(TYPE); \
