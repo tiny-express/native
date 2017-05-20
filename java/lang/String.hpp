@@ -27,11 +27,33 @@
 #ifndef NATIVE_JAVA_LANG_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_HPP
 
-#include "Object.hpp"
+#include "Number.hpp"
 
 namespace Java {
     namespace Lang {
         class String: public virtual Object {
+        public:
+            String();
+            String(const char* original);
+            String(char *original);
+            String(const String &target);
+            ~String();
+
+            char charValue() const;
+            char *cstringValue() const;
+            std::string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            int length() const;
+            String *toString() const;
+
+            String operator+(const String& target2);
+            bool operator==(const String& target2);
+            bool operator!=(const String& target2);
+
         public:
             static String* parseChar(char target);
             static String* parseCString(char *target);
@@ -41,21 +63,6 @@ namespace Java {
             static String* parseLong(long target);
             static String* parseFloat(float target);
             static String* parseDouble(double target);
-
-            char charValue();
-            char *cstringValue();
-            std::string stringValue();
-            short shortValue();
-            int intValue();
-            long longValue();
-            float floatValue();
-            double doubleValue();
-
-            String(const char* original);
-            String(char *original);
-            ~String();
-            int length();
-            String* toString();
 
         private:
             char *original;

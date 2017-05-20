@@ -33,9 +33,38 @@ using namespace Java::Lang;
 
 TEST(JavaLang, String) {
 
-    String text = "Hello world";
-    ASSERT_STR("Hello world", text.cstringValue());
-    ASSERT_EQUAL(11, text.length());
+    String string_empty;
+    string_empty = "Hello world";
+    ASSERT_STR("Hello world", string_empty.cstringValue());
+
+    String string_text_with_length = "Hello world";
+    ASSERT_STR("Hello world", string_text_with_length.cstringValue());
+
+    String string_text_plus_1 = "Hello ";
+    String string_text_plus_2 = "World";
+    String string_result_plus = string_text_plus_1 + string_text_plus_2;
+    ASSERT_STR("Hello World", string_result_plus.cstringValue());
+
+    String string_text_compare_equal_1 = "Hello";
+    String string_text_compare_equal_2 = "Hello";
+    int comparable_equal = FALSE;
+    if (string_text_compare_equal_1 == string_text_compare_equal_2) {
+        comparable_equal = TRUE;
+    }
+    ASSERT_TRUE(comparable_equal);
+
+    String string_text_compare_not_equal_1 = "Hello1";
+    String string_text_compare_not_equal_2 = "Hello2";
+    int comparable_not_equal = FALSE;
+    if (string_text_compare_not_equal_1 != string_text_compare_not_equal_2) {
+        comparable_not_equal = TRUE;
+    }
+    ASSERT_TRUE(comparable_not_equal);
+
+    char *given_string_with_length = "Hello world";
+    String string_with_length = given_string_with_length;
+    ASSERT_STR(given_string_with_length, string_with_length.cstringValue());
+    ASSERT_EQUAL(11, string_with_length.length());
 
     char given_char = '\0';
     String *string_from_char = String::parseChar(given_char);
@@ -49,24 +78,23 @@ TEST(JavaLang, String) {
     String *string_from_std_string = String::parseString(given_std_string);
     ASSERT_STR(given_std_string.c_str(), string_from_std_string->cstringValue());
 
-//
-//    char *result1 = String(3);
-//    const char *expect1 = "3";
-//    ASSERT_STR(expect1, result1);
-//
-//    char *result2 = String(4039249.5023);
-//    const char *expect2 = "4039249.5023";
-//    ASSERT_STR(expect2, result2);
-//
-//    std::vector<int> vectorInt(4, 2000);
-//    char *result4 = String(vectorInt);
-//    const char *expect4 = "[2000, 2000, 2000, 2000]";
-//    ASSERT_STR(expect4, result4);
-//    delete result4;
-//
-//    std::vector<double> vectorDouble(4, 12.3457);
-//    char *result5 = String(vectorDouble);
-//    const char *expect5 = "[12.3457, 12.3457, 12.3457, 12.3457]";
-//    ASSERT_STR(expect5, result5);
-//    delete result5;
+    short given_short = 5;
+    String *string_from_short = String::parseShort(given_short);
+    ASSERT_EQUAL(given_short, string_from_short->shortValue());
+
+    int given_int = 34567;
+    String *string_from_int = String::parseInt(given_int);
+    ASSERT_EQUAL(given_int, string_from_int->intValue());
+
+    long given_long = (long) 10000000000;
+    String *string_from_long = String::parseLong(given_long);
+    ASSERT_EQUAL(given_long, string_from_long->longValue());
+
+    float given_float = (float) 5.68;
+    String *string_from_float = String::parseFloat(given_float);
+    ASSERT_EQUAL(given_float, string_from_float->floatValue());
+
+    long given_double = (long) 456.324234234234234234234234234234;
+    String *string_from_double = String::parseDouble(given_double);
+    ASSERT_EQUAL(given_double, string_from_double->doubleValue());
 }
