@@ -25,7 +25,6 @@
  */
 
 #include "Integer.hpp"
-#include "String.hpp"
 
 using namespace Java::Lang;
 
@@ -173,7 +172,6 @@ int Integer::intValue() const  {
 long Integer::longValue() const  {
     return (long) this->value;
 }
-
 
 /**
  * Integer value in float
