@@ -25,20 +25,22 @@
  */
 
 extern "C" {
-#include "../general.h"
+#include "../common.h"
 #include "../string.h"
 }
+#include <algorithm>
 #include <iostream>
+#include <vector>
+#include <map>
 
 /**
- * Length by default - un-supported type
+ * Length pointer char
  *
- * @param T
- * @param t
- * @return 0
+ * @param target
+ * @return int
  */
-template <typename T> int len(T) {
-    return 0;
+int len(char *target) {
+    return length_pointer_char(target);
 }
 
 /**
@@ -47,21 +49,19 @@ template <typename T> int len(T) {
  * @param target
  * @return int
  */
-template<> int len(std::string target) {
+int len(std::string target) {
     return target.length();
 }
-template int len<std::string>(std::string target);
 
 /**
- * Length pointer char
+ * Length pointer pointer char
  *
  * @param target
  * @return int
  */
-template<> int len(char *target) {
-    return length_pointer_char(target);
+int len(char **target) {
+    return length_pointer_pointer_char(target);
 }
-template int len<char*>(char *target);
 
 /**
  * Length short number
@@ -69,10 +69,9 @@ template int len<char*>(char *target);
  * @param target
  * @return int
  */
-template<> int len(short target) {
+int len(short target) {
     return length_pointer_char(string_from_short(target));
 }
-template int len<short>(short target);
 
 /**
  * Length int number
@@ -80,10 +79,9 @@ template int len<short>(short target);
  * @param target
  * @return int
  */
-template<> int len(int target) {
+int len(int target) {
     return length_pointer_char(string_from_int(target));
 }
-template int len<int>(int target);
 
 /**
  * Length long number
@@ -91,10 +89,9 @@ template int len<int>(int target);
  * @param target
  * @return int
  */
-template<> int len(long target) {
+int len(long target) {
     return length_pointer_char(string_from_long(target));
 }
-template int len<long>(long target);
 
 /**
  * Length float number
@@ -102,10 +99,9 @@ template int len<long>(long target);
  * @param target
  * @return int
  */
-template<> int len(float target) {
+int len(float target) {
     return length_pointer_char(string_from_float(target));
 }
-template int len<float>(float target);
 
 /**
  * Length double number
@@ -113,8 +109,47 @@ template int len<float>(float target);
  * @param target
  * @return int
  */
-template<> int len(double target) {
+int len(double target) {
     return length_pointer_char(string_from_double(target));
 }
-template int len<double>(double target);
+
+/**
+ * Length of vector pointer char
+ *
+ * @param target
+ * @return int
+ */
+int len(std::vector<char*> target) {
+    return (int) target.size();
+}
+
+/**
+ * Length of vector std::string
+ *
+ * @param target
+ * @return int
+ */
+int len(std::vector<std::string> target) {
+    return (int) target.size();
+}
+
+/**
+ * Length of map char pointer
+ *
+ * @param target
+ * @return int
+ */
+int len(std::map<char*, char*> target) {
+    return (int) target.size();
+}
+
+/**
+ * Length of map
+ *
+ * @param target
+ * @return int
+ */
+int len(std::map<std::string, std::string> target) {
+    return (int) target.size();
+}
 

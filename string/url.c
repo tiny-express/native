@@ -27,7 +27,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include "../string.h"
-#include "../general.h"
+#include "../common.h"
 
 char from_hex(char ch) {
     return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;

@@ -23,3 +23,56 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "../native.hpp"
+
+
+/**
+ * Long value of char pointer
+ *
+ * @param target
+ * @return long
+ */
+long Long(char *target) {
+    return string_to_long(target);
+}
+
+/**
+ * Long value of std::string
+ *
+ * @param target
+ * @return long
+ */
+long Long(std::string target) {
+    return string_to_long((char*) target.c_str());
+}
+
+/**
+ * Long value of integer
+ *
+ * @param target
+ * @return long
+ */
+long Long(int target) {
+    return target;
+}
+
+/**
+ * Integer value of float
+ *
+ * @param target
+ * @return int
+ */
+long Long(float target) {
+    return (long) floor(target);
+}
+
+/**
+ * Integer value of double
+ *
+ * @param target
+ * @return long
+ */
+long Long(double target) {
+    return (long) floor(target);
+}

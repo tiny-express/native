@@ -29,29 +29,49 @@ extern "C" {
 }
 #include <string>
 #include <vector>
-#include "../native.h"
+#include "../native.hpp"
 
 /**
- * Un-supported type
+ * Convert char to pointer char
  *
- * @param T
- * @return ""
+ * @param string
+ * @return pointer char
  */
-template <typename T> char *String(T) {
-    return "";
+char *String(char target) {
+    return string_copy(&target);
 }
 
 /**
- * String int number
+ * Convert constant pointer char to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+char *String(char const *target) {
+    return (char*) target;
+}
+
+/**
+ * Convert std::string to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+char *String(std::string target) {
+    char *result = string_copy((char*) target.c_str());
+    return result;
+}
+
+/**
+ * String  int number
  *
  * @param int_number
  * @return Pointer char
  */
-template <> char *String(int int_number) {
-    char *result = string_from_int(int_number);
+char *String(int target) {
+    char *result = string_from_int(target);
     return result;
 }
-template char *String<int>(int int_number);
 
 /**
  *  String double number
@@ -59,11 +79,10 @@ template char *String<int>(int int_number);
  * @param double_number
  * @return Pointer char
  */
-template <> char *String(double doubleNumber) {
-    char *result = string_from_double(doubleNumber);
+char *String(double target) {
+    char *result = string_from_double(target);
     return result;
 }
-template char *String<double>(double doubleNumber);
 
 /**
  * String of vector int
@@ -71,12 +90,12 @@ template char *String<double>(double doubleNumber);
  * @param vectorInt
  * @return Pointer char
  */
-template <> char *String(std::vector<int> vectorInt) {
+char *String(std::vector<int> target) {
     std::string str;
     str.append("[");
     std::vector<int>::iterator it;
 
-    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+    for (it = target.begin(); it != target.end() - 1; ++it) {
         str.append(string_from_int(*it));
         str.append(", ");
     }
@@ -86,20 +105,19 @@ template <> char *String(std::vector<int> vectorInt) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<int> >(std::vector<int> vectorInt);
 
 /**
  * String of vector double
  *
- * @param vectorDouble
- * @return Pointer char
+ * @param target
+ * @return pointer char
  */
-template <> char *String(std::vector<double> vectorInt) {
+char *String(std::vector<double> target) {
     std::string str;
     str.append("[");
     std::vector<double>::iterator it;
 
-    for (it = vectorInt.begin(); it != vectorInt.end() - 1; ++it) {
+    for (it = target.begin(); it != target.end() - 1; ++it) {
         str.append(string_from_double(*it));
         str.append(", ");
     }
@@ -109,29 +127,4 @@ template <> char *String(std::vector<double> vectorInt) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<double> >(std::vector<double> vectorInt);
-
-//**
-// *
-// * @param pointer char
-// * @return Pointer char
-// */
-//template <> char *String(const char *pointerChar) {
-//    char *result = new char[strlen(pointerChar) + 1];
-//    std::strcpy(result, pointerChar);
-//    return result;
-//}
-//template char *String<const char *>(const char *pointerChar);
-
-/**
- * Convert string (C++) to pointer char
- *
- * @param string
- * @return Pointer char
- */
-template <> char *String(std::string str) {
-    char *result = string_copy((char*) str.c_str());
-    return result;
-}
-template char *String<std::string>(std::string str);
 

@@ -29,18 +29,8 @@
 #include "../network.h"
 #include "../validator.h"
 #include "../type.h"
-#include "../general.h"
-
-// TODO @dquang add notification data to format
-#define FIREBASE_REQUEST_FORMAT \
-                "{\"to\":\"%s\","\
-                    "\"notification\":{" \
-                        "\"title\":\"%s\"," \
-                        "\"body\":\"%s\"" \
-                    "},\"priority\":10}"
-
-#define SUCCESS_LABEL "success"
-#define SUCCESS_VALUE 1
+#include "../common.h"
+#include "../vendor.h"
 
 /**
  * Push Notification via Google FireBase service

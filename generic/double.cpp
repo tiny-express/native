@@ -23,3 +23,58 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+extern "C" {
+#include "../string.h"
+}
+#include "../native.hpp"
+
+/**
+ * Double value of char pointer
+ *
+ * @param target
+ * @return double
+ */
+double Double(char *target) {
+    return string_to_double(target);
+}
+
+/**
+ * Double value of std::string
+ *
+ * @param target
+ * @return double
+ */
+double Double(std::string target) {
+    return string_to_double((char*) target.c_str());
+}
+
+/**
+ * Double value of integer
+ *
+ * @param target
+ * @return double
+ */
+double Double(int target) {
+    return target;
+}
+
+/**
+ * Double value of long
+ *
+ * @param target
+ * @return 0
+ */
+double Double(long target) {
+    return 0;
+}
+
+/**
+ * Double value of float
+ *
+ * @param target
+ * @return double
+ */
+double Double(float target) {
+    return (int) floor(target);
+}

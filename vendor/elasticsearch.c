@@ -26,7 +26,8 @@
 
 #include "../network.h"
 #include "../vendor.h"
-#include "../type.h"
+#include "../common.h"
+#include "../string.h"
 
 /**
  * Elastic Search Query
@@ -48,5 +49,8 @@ char *es_query(char *host, char *index, char *query) {
     };
     char *url;
     asprintf(&url, "http://%s:9200/%s/_search?pretty", host, index);
-    return http_request("POST", url, headers, body);
+    char *http_response = http_request("POST", url, headers, body);
+    char **response = string_split(http_response, "\r\n\r\n");
+    int response_len = length_pointer_pointer_char(response);
+    return response[response_len - 1];
 }
