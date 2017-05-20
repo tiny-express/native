@@ -24,8 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COLLECTION_H
-#define NATIVE_COLLECTION_H
+#ifndef NATIVE_IO_FILE_HPP
+#define NATIVE_IO_FILE_HPP
 
+#include "../lang/Object.hpp"
 
-#endif//NATIVE_COLLECTION_H
+using namespace Java::Lang;
+
+namespace Java {
+    namespace Io {
+        class File : public virtual Object {
+
+        };
+    }
+}
+
+#endif//NATIVE_IO_FILE_HPP

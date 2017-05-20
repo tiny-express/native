@@ -24,31 +24,43 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Object.hpp"
-#include <iostream>
-#include <string>
+#ifndef NATIVE_JAVA_LANG_STRING_HPP
+#define NATIVE_JAVA_LANG_STRING_HPP
 
-namespace java {
-    namespace lang {
+#include "Object.hpp"
+
+namespace Java {
+    namespace Lang {
         class String: public virtual Object {
         public:
-            static String parseChar(char target);
-            static String parseCString(char *target);
-            static String parseString(std::string target);
-            static String parseInt(int target);
-            static String parseLong(long target);
-            static String parseFloat(float target);
-            static String parseDouble(double target);
+            static String* parseChar(char target);
+            static String* parseCString(char *target);
+            static String* parseString(std::string target);
+            static String* parseShort(short target);
+            static String* parseInt(int target);
+            static String* parseLong(long target);
+            static String* parseFloat(float target);
+            static String* parseDouble(double target);
 
-            String(const char* target);
-            String(char *target);
+            char charValue();
+            char *cstringValue();
+            std::string stringValue();
+            short shortValue();
+            int intValue();
+            long longValue();
+            float floatValue();
+            double doubleValue();
+
+            String(const char* original);
+            String(char *original);
             ~String();
             int length();
             String* toString();
-            char *toCharacters();
 
         private:
-            char *value;
+            char *original;
         };
     }
 }
+
+#endif//#ifndef NATIVE_JAVA_LANG_STRING_HPP

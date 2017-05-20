@@ -24,11 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_LANG_SYSTEM_HPP
+#define NATIVE_JAVA_LANG_SYSTEM_HPP
+
 #include "Object.hpp"
 #include "String.hpp"
 
-namespace java {
-    namespace lang {
+namespace Java {
+    namespace Lang {
         class System : public virtual Object {
         public:
             class in {
@@ -46,3 +49,5 @@ namespace java {
         };
     }
 }
+
+#endif//NATIVE_JAVA_LANG_SYSTEM_HPP

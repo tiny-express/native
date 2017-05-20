@@ -27,7 +27,7 @@
 #include "Integer.hpp"
 #include "String.hpp"
 
-using namespace java::lang;
+using namespace Java::Lang;
 
 /**
  * Integer initialization
