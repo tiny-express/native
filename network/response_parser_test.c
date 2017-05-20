@@ -9,7 +9,7 @@ TEST(Network, Parser) {
             "Content-Type: application/json\n"
             "Content-Length: 230\n"
             "\n"
-            "{\"to\":\"dqs-1BB}";
+            "{\"to\":\"dqs-1BB\"}";
     http_response *result = parse(response);
     ASSERT_STR("POST", result->method);
     ASSERT_STR("/fcm/send", result->path);
@@ -24,20 +24,19 @@ TEST(Network, Parser) {
     ASSERT_STR("application/json", result->headers[3]->value);
     ASSERT_STR("Content-Length", result->headers[4]->name);
     ASSERT_STR("230", result->headers[4]->value);
-    ASSERT_STR("{\"to\":\"dqs-1BB}", result->body);
-    free_http_response(result);
-}
+    ASSERT_STR("{\"to\":\"dqs-1BB\"}", result->body);
 
-TEST (Network, Free) {
-    char* responses = "POST /fcm/send HTTP/1.1\n"
-            "Connection: close\n"
-            "Host: localhost:9999\n"
-            "Authorization: key=AAAA\n"
-            "Content-Type: application/json\n"
-            "Content-Length: 230\n"
-            "\n"
-            "{\"to\":\"dqs-1BB}";
-    http_response *result = parse(responses);
-    free_http_response(result);
-    ASSERT_NULL(result);
+    // test free memory
+//    header *header0 = result->headers[0];
+//    header *header1 = result->headers[1];
+//    header *header2 = result->headers[2];
+//    header *header3 = result->headers[3];
+//    header *header4 = result->headers[4];
+//    free_http_response(result);
+//    ASSERT_NULL(header0);
+//    ASSERT_NULL(header1);
+//    ASSERT_NULL(header2);
+//    ASSERT_NULL(header3);
+//    ASSERT_NULL(header4);
+//    ASSERT_NULL(result);
 }

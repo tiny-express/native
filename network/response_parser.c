@@ -21,11 +21,16 @@ int parse_uri(char* response, http_response *result);
  */
 int parse_header(char* response, http_response *result, int index);
 
+/**
+ * free memory of a pointer
+ * @param pointer
+ */
+void get_free(void** pointer);
+
 http_response *parse(char* response) {
     http_response *result = malloc(sizeof(http_response*));
     int header_index = parse_uri(response, result);
     int body_index = parse_header(response, result, header_index);
-    result->body = malloc(sizeof(char*));
     result->body = string_from_to(response, body_index, length_pointer_char(response) - 1);
     return result;
 }
@@ -33,10 +38,10 @@ http_response *parse(char* response) {
 int parse_uri(char* response, http_response *result) {
     result->method = malloc(sizeof(char*));
     result->path = malloc(sizeof(char*));
-    result->version =  malloc(sizeof(char*));
+    result->version = malloc(sizeof(char*));
     register int scan_index = 0;
     register int mark_index = 0;
-    int count = 0;
+    register int count = 0;
     while (response[scan_index] != '\n' && response[scan_index] != '\0') {
         if (response[scan_index] == ' ') {
             count ++;
@@ -65,11 +70,11 @@ int parse_header(char* response, http_response *result, int index) {
         if (response[scan_index] == ':' && response[scan_index + 1] == ' ') {
             result->headers[result->header_quantity] = malloc(sizeof(header*));
             result->headers[result->header_quantity]->name = malloc(sizeof(char*));
-            result->headers[result->header_quantity]->name = string_from_to(response, mark_index, scan_index - 1);
+            char* method = string_from_to(response, mark_index, scan_index - 1);
+            result->headers[result->header_quantity]->name = method;
             scan_index++;
             mark_index = scan_index + 1;
         } else if (response[scan_index] == '\n') {
-            result->headers[result->header_quantity]->value = malloc(sizeof(char*));
             result->headers[result->header_quantity]->value = string_from_to(response, mark_index, scan_index - 1);
             mark_index = scan_index + 1;
             result->header_quantity ++;
@@ -82,6 +87,7 @@ int parse_header(char* response, http_response *result, int index) {
     return scan_index;
 }
 
+// TODO @dthongvl please help me implement this function
 http_response *free_http_response(http_response *response) {
     register int index;
     for (index = 0; index < response->header_quantity; index++) {
@@ -89,12 +95,18 @@ http_response *free_http_response(http_response *response) {
         free(response->headers[index]->value);
         free(response->headers[index]);
     }
-
     free(response->method);
     free(response->path);
     free(response->version);
     free(response->body);
-    response = malloc(sizeof(http_response));
     free(response);
     return response;
+}
+
+void get_free(void** pointer) {
+    if (*pointer != NULL) {
+        free(*pointer);
+        *pointer = NULL;
+    }
+    return;
 }
