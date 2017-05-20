@@ -41,13 +41,16 @@ TEST(JavaLang, String) {
     String *string_from_char = String::parseChar(given_char);
     ASSERT_STR((char*) "\0", string_from_char->cstringValue());
 
-//    const char* given_constant_pointer_char = "hello world";
-//    char *expect_string_char_pointer_1 = (char*) "hello world";
-//    ASSERT_STR(expect_string_char_pointer_1, String(given_constant_pointer_char));
-//
-//    std::string given_std_string = std::string("hello world");
-//    char *expect_string_char_pointer_2 = (char*) "hello world";
-//    ASSERT_STR(expect_string_char_pointer_2, String(given_std_string));
+    char *given_char_pointer = (char*) "Hello world";
+    String *string_from_char_pointer = String::parseCString(given_char_pointer);
+    ASSERT_STR(given_char_pointer, string_from_char_pointer->cstringValue());
+
+    std::string given_std_string = std::string("hello world");
+    String *string_from_std_string = String::parseString(given_std_string);
+    ASSERT_STR(given_std_string.c_str(), string_from_std_string->cstringValue());
+
+
+
 //
 //    char *result1 = String(3);
 //    const char *expect1 = "3";

@@ -24,19 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_IO_FILE_HPP
-#define NATIVE_IO_FILE_HPP
+#ifndef NATIVE_JAVA_VENDOR_TWILIO_HPP
+#define NATIVE_JAVA_VENDOR_TWILIO_HPP
 
-#include "../lang/Object.hpp"
-
-using namespace Java::Lang;
-
-namespace Java {
-    namespace Io {
-        class File : public virtual Object {
-
-        };
-    }
-}
-
-#endif//NATIVE_IO_FILE_HPP
+#endif//NATIVE_JAVA_VENDOR_TWILIO_HPP
