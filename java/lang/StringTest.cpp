@@ -49,8 +49,6 @@ TEST(JavaLang, String) {
     String *string_from_std_string = String::parseString(given_std_string);
     ASSERT_STR(given_std_string.c_str(), string_from_std_string->cstringValue());
 
-
-
 //
 //    char *result1 = String(3);
 //    const char *expect1 = "3";

@@ -52,8 +52,6 @@ namespace Java {
 
         class Object {
         protected:
-            Object();
-            ~Object();
             virtual String* toString() {}
         };
     }

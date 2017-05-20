@@ -24,42 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_INTEGER_HPP
-#define NATIVE_JAVA_LANG_INTEGER_HPP
-
 #include "Number.hpp"
-
-namespace Java {
-    namespace Lang {
-        class Integer: public virtual Number {
-        public:
-            static int MAX_VALUE;
-            static int MIN_VALUE;
-
-            static Integer *parseChar(char target);
-            static Integer *parseInt(int target);
-            static Integer *parseCString(char *target);
-            static Integer *parseString(std::string target);
-            static Integer *parseLong(long target);
-            static Integer *parseFloat(float target);
-            static Integer *parseDouble(double target);
-
-            Integer(int target);
-
-            char charValue() override;
-            char *cstringValue() override;
-            std::string stringValue() override;
-            int intValue() override;
-            long longValue() override;
-            float floatValue() override;
-            double doubleValue() override;
-
-            String *toString() override;
-        private:
-            int value;
-        };
-    }
-}
-
-#endif//NATIVE_JAVA_LANG_INTEGER_HPP
-

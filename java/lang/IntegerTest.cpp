@@ -36,6 +36,9 @@ TEST(JavaLang, Integer) {
     Integer integer = 3;
     ASSERT_EQUAL(3, integer.intValue());
 
+    Integer integer1 = 4;
+    integer1.doubleValue();
+
     Integer *char_to_integer = Integer::parseChar('6');
     ASSERT_EQUAL(6, char_to_integer->intValue());
 

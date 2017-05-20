@@ -49,6 +49,16 @@ Integer* Integer::parseChar(char target) {
 }
 
 /**
+ * Parse integer
+ *
+ * @param target
+ * @return Integer
+ */
+Integer* Integer::parseInt(int target) {
+    return new Integer(target);
+}
+
+/**
  * Parse CString to Integer
  *
  * @param target
