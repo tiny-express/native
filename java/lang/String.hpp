@@ -34,7 +34,7 @@ namespace Java {
         class String: public virtual Object {
         public:
             String();
-            String(const char* original);
+            String(const_string original);
             String(string original);
             String(byte *bytes);
             String(const String &target);

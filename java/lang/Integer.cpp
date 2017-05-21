@@ -25,6 +25,7 @@
  */
 
 #include "Integer.hpp"
+#include "String.hpp"
 
 using namespace Java::Lang;
 
@@ -33,18 +34,8 @@ using namespace Java::Lang;
  *
  * @param target
  */
-Integer::Integer(int target) {
-   this->value = target;
-}
-
-/**
- * Parse Char to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseChar(char target) {
-    return new Integer(string_to_int(string_from_char(target)));
+Integer::Integer(int original) {
+   this->original = original;
 }
 
 /**
@@ -53,61 +44,8 @@ Integer* Integer::parseChar(char target) {
  * @param target
  * @return Integer
  */
-Integer* Integer::parseInt(int target) {
-    return new Integer(target);
-}
-
-/**
- * Parse CString to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseCString(char *target) {
-    return new Integer(string_to_int(target));
-}
-
-/**
- * Parse String to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseString(std::string target) {
-    return new Integer(string_to_int((char*) target.c_str()));
-}
-
-/**
- * Parse Long to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseLong(long target) {
-    if ((target >= INT_MIN) && (target <= INT_MAX)) {
-        return new Integer((int) target);
-    }
-    return new Integer(0);
-}
-
-/**
- * Parse Float to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseFloat(float target) {
-    return new Integer((int) floor(target));
-}
-
-/**
- * Parse Float to Integer
- *
- * @param target
- * @return Integer
- */
-Integer* Integer::parseDouble(double target) {
-    return new Integer((int) floor(target));
+Integer *Integer::parseInt(String target) {
+    return new Integer(string_to_int(target.toCharArray()));
 }
 
 /**
@@ -116,7 +54,7 @@ Integer* Integer::parseDouble(double target) {
  * @return String
  */
 String Integer::toString() const  {
-    return string_from_int(this->value);
+    return string_from_int(this->original);
 }
 
 /**
@@ -125,16 +63,7 @@ String Integer::toString() const  {
  * @return char
  */
 char Integer::charValue() const {
-    return string_to_char(string_from_int(this->value));
-}
-
-/**
- * Integer to CString
- *
- * @return CString
- */
-char* Integer::cstringValue() const  {
-    return string_from_int(this->value);
+    return string_to_char(string_from_int(this->original));
 }
 
 /**
@@ -142,8 +71,8 @@ char* Integer::cstringValue() const  {
  *
  * @return CString
  */
-std::string Integer::stringValue() const  {
-    return std::string(this->cstringValue());
+string Integer::stringValue() const  {
+    return String::valueOf(this->original).toCharArray();
 }
 
 /**
@@ -152,7 +81,7 @@ std::string Integer::stringValue() const  {
  * @return short
  */
 short Integer::shortValue() const  {
-    return this->value;
+    return this->original;
 }
 
 /**
@@ -161,7 +90,7 @@ short Integer::shortValue() const  {
  * @return int
  */
 int Integer::intValue() const  {
-    return this->value;
+    return this->original;
 }
 
 /**
@@ -170,7 +99,7 @@ int Integer::intValue() const  {
  * @return int
  */
 long Integer::longValue() const  {
-    return (long) this->value;
+    return this->original;
 }
 
 /**
@@ -179,7 +108,7 @@ long Integer::longValue() const  {
  * @return int
  */
 float Integer::floatValue() const  {
-    return (float) this->value;
+    return (float) this->original;
 }
 
 /**
@@ -188,5 +117,5 @@ float Integer::floatValue() const  {
  * @return int
  */
 double Integer::doubleValue() const  {
-    return (double) this->value;
+    return (double) this->original;
 }
