@@ -27,9 +27,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
-
-
+#include "../native.hpp"
 
 TEST(Generic, Double) {
     
@@ -44,16 +42,13 @@ TEST(Generic, Double) {
 
     double string_to_double_valid_2 = Double((char*) "-123.45");
     ASSERT_EQUAL(-123, string_to_double_valid_2);
-    
-    double double_to_double = Double(2.3E-308);
-    ASSERT_EQUAL(2.3E-308, double_to_double);
-    
+
     double long_to_double = Double(2147483647);
     ASSERT_EQUAL(2147483647, long_to_double);
 
     double integer_to_double = Double(2345);
     ASSERT_EQUAL(2345, integer_to_double);
 
-    double float_to_double = Double(234231.234);
-    ASSERT_EQUAL(234231, float_to_double);
+    float float_to_double = Double((float) 1235.234);
+    ASSERT_EQUAL(1235.234, float_to_double);
 }

@@ -24,19 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../string.h"
-}
-#include "../native.h"
+#include "../native.hpp"
+#include <limits.h>
 
 /**
- * Integer value by default - un-supported type
+ * Integer value of char pointer
  *
- * @param T
- * @return 0
+ * @param target
+ * @return int
  */
-template <typename T> int Integer(T) {
-    return 0;
+int Integer(char *target) {
+    return string_to_int(target);
 }
 
 /**
@@ -45,32 +43,9 @@ template <typename T> int Integer(T) {
  * @param target
  * @return int
  */
-template<> int Integer(std::string target) {
+int Integer(std::string target) {
     return string_to_int((char*) target.c_str());
 }
-template int Integer<std::string>(std::string target);
-
-/**
- * Integer value of char pointer
- *
- * @param target
- * @return int
- */
-template<> int Integer(char *target) {
-    return string_to_int(target);
-}
-template int Integer<char*>(char *target);
-
-/**
- * Integer value of integer
- *
- * @param target
- * @return int
- */
-template<> int Integer(int target) {
-    return target;
-}
-template int Integer<int>(int target);
 
 /**
  * Integer value of long
@@ -79,10 +54,12 @@ template int Integer<int>(int target);
  * @param target
  * @return 0
  */
-template<> int Integer(long target) {
+int Integer(long target) {
+    if ((target >= INT_MIN) && (target <= INT_MAX)) {
+        return (int) target;
+    }
     return 0;
 }
-template int Integer<long>(long target);
 
 /**
  * Integer value of float
@@ -90,10 +67,9 @@ template int Integer<long>(long target);
  * @param target
  * @return int
  */
-template<> int Integer(float target) {
+int Integer(float target) {
     return (int) floor(target);
 }
-template int Integer<float>(float target);
 
 /**
  * Integer value of double
@@ -101,7 +77,6 @@ template int Integer<float>(float target);
  * @param target
  * @return int
  */
-template<> int Integer(double target) {
+int Integer(double target) {
     return (int) floor(target);
 }
-template int Integer<double>(double target);

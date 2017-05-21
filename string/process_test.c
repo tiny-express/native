@@ -347,6 +347,11 @@ TEST(String, ProcessLower) {
     result = string_lower(target);
     expect = "hihahahi!@#";
     ASSERT_STR(expect, result);
+
+    target = "1";
+    result = string_lower(target);
+    expect = "1";
+    ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessTitle) {
@@ -366,7 +371,7 @@ TEST(String, ProcessTitle) {
     ASSERT_STR(expect, result);
 }
 
-TEST(String, Standard) {
+TEST(String, ProcessStandardized) {
     char *target = "  hello  world ";
     char *expect = "hello world";
     char *result = string_standardized(target);
@@ -377,6 +382,29 @@ TEST(String, Standard) {
     result = string_standardized(target);
     ASSERT_STR(expect, result);
 }
+
+TEST(String, ProcessEquals) {
+    char *target1 = NULL;
+    char *target2 = NULL;
+    ASSERT_TRUE(string_equals(target1, target2));
+
+    target1 = (char*) "hello";
+    target2 = NULL;
+    ASSERT_FALSE(string_equals(target1, target2));
+
+    target1 = NULL;
+    target2 = (char*) "hello";
+    ASSERT_FALSE(string_equals(target1, target2));
+
+    target1 = "hello  world ";
+    target2 = "  hello world";
+    ASSERT_FALSE(string_equals(target1, target2));
+
+    target1 = "abcd";
+    target2 = "abcd";
+    ASSERT_TRUE(string_equals(target1, target2));
+}
+
 
 
 

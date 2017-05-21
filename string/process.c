@@ -28,7 +28,8 @@
 #include <stdlib.h>
 #include "../type.h"
 #include "../string.h"
-#include "../general.h"
+#include "../validator.h"
+#include "../common.h"
 
 /**
  * String replace
@@ -74,14 +75,13 @@ inline char *string_replace(char *target, char* find_string, char* replace_with)
  * String split
  *
  * @param target
- * @param constant_delimiter
+ * @param delimiter
  * @return array char pointer
  */
-inline char **string_split(char *target, const char *constant_delimiter) {
-    if (target == NULL || constant_delimiter == NULL) {
+inline char **string_split(char *target, char *delimiter) {
+    if (target == NULL || delimiter == NULL) {
         return NULL;
     }
-	char* delimiter = (char*) constant_delimiter;
 	int length_target = length_pointer_char(target);
 	int length_delimiter = length_pointer_char(delimiter);
 	int distance = length_target - length_delimiter + 1;
@@ -133,7 +133,7 @@ inline char **string_split(char *target, const char *constant_delimiter) {
  * @param delimiter
  * @return string
  */
-inline char *string_join(char *target[], const char *delimiter) {
+inline char *string_join(char *target[], char *delimiter) {
     if (target == NULL || delimiter == NULL) {
         return NULL;
     }
@@ -186,13 +186,13 @@ inline char *string_trim(char *target) {
 }
 
 /**
- * String startwiths a prefix
+ * String start withs a prefix
  *
  * @param target
  * @param prefix
  * @return TRUE | FALSE
  */
-inline int string_startswith(char *target, const char *prefix) {
+inline int string_startswith(char *target, char *prefix) {
     if (target == NULL || prefix == NULL) {
         return FALSE;
     }
@@ -211,13 +211,13 @@ inline int string_startswith(char *target, const char *prefix) {
 }
 
 /**
- * String endwiths a suffix
+ * String end withs a suffix
  *
  * @param target
  * @param suffix
  * @return TRUE | FALSE
  */
-inline int string_endswith(char *target, const char *suffix) {
+inline int string_endswith(char *target, char *suffix) {
     if (target == NULL || suffix == NULL) {
         return FALSE;
     }
@@ -244,7 +244,7 @@ inline int string_endswith(char *target, const char *suffix) {
  * @return position
  */
 inline int string_index(char *target, char *subtarget, int times) {
-    if (target == NULL || subtarget == NULL) {
+    if (is_empty(target) || is_empty(subtarget) || (times <= 0))  {
         return NOT_FOUND;
     }
 
@@ -284,7 +284,7 @@ inline int string_index(char *target, char *subtarget, int times) {
  * @return random string
  */
 inline char *string_random(char *target, int size) {
-    if (target == NULL) {
+    if (is_empty(target)) {
         return NULL;
     }
 	int target_length = length_pointer_char(target);
@@ -305,8 +305,11 @@ inline char *string_random(char *target, int size) {
  * @return string
  */
 inline char *string_concat(char *target, char *subtarget) {
-    if (target == NULL || subtarget == NULL) {
-        return NULL;
+    if (is_empty(target)) {
+        return subtarget;
+    }
+    if (is_empty(subtarget)) {
+        return target;
     }
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
@@ -339,6 +342,13 @@ inline char *string_from(char *target, int from) {
 	return string_from_to(target, from, length_pointer_char(target));
 }
 
+/**
+ * String from a position
+ *
+ * @param target
+ * @param to
+ * @return
+ */
 inline char *string_to(char *target, int to) {
 	return string_from_to(target, 0, to);
 }
@@ -350,8 +360,8 @@ inline char *string_to(char *target, int to) {
  * @return string
  */
 char *string_copy(char *target) {
-    if (target == NULL) {
-        return NULL;
+    if (is_empty(target)) {
+        return "\0";
     }
 	int length = length_pointer_char(target);
 	char *result = malloc((length + 1) * sizeof(char));
@@ -367,7 +377,7 @@ char *string_copy(char *target) {
  * @return string
  */
 char *string_upper(char *target) {
-    if (target == NULL) {
+    if (is_empty(target)) {
         return NULL;
     }
 	char *result = string_copy(target);
@@ -387,7 +397,7 @@ char *string_upper(char *target) {
  * @return string
  */
 char *string_lower(char *target) {
-    if (target == NULL) {
+    if (is_empty(target)) {
         return NULL;
     }
 	char *result = string_copy(target);
@@ -407,7 +417,7 @@ char *string_lower(char *target) {
  * @return string
  */
 char *string_title(char *target) {
-    if (target == NULL) {
+    if (is_empty(target)) {
         return NULL;
     }
 	char *result = string_copy(target);
@@ -433,7 +443,7 @@ char *string_title(char *target) {
  * @return string
  */
 char *string_standardized(char *target) {
-	if (target == NULL) {
+	if (is_empty(target)) {
         return NULL;
     }
 	char **segments = string_split(target," ");
@@ -442,3 +452,22 @@ char *string_standardized(char *target) {
 	return result;
 }
 
+/**
+ * Check two string equals or not
+ *
+ * @param target1
+ * @param target2
+ * @return TRUE | FALSE
+ */
+int string_equals(char *target1, char *target2) {
+	if ((target1 == NULL) && (target2 == NULL)) {
+		return TRUE;
+	}
+	if ((target1 == NULL) || (target2 == NULL)) {
+		return FALSE;
+	}
+	if (strcmp(target1, target2) == 0) {
+		return TRUE;
+	}
+	return FALSE;
+}

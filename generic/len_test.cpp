@@ -27,9 +27,18 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
+#include "../native.hpp"
+
+TEST(Generic, Empty) {
+    char *null_string = NULL;
+    ASSERT_TRUE(empty(null_string));
+
+    char *empty_string = (char*) "";
+    ASSERT_TRUE(empty(empty_string));
+}
 
 TEST(Generic, Len) {
+
     std::string target_string = std::string("Hello world");
     ASSERT_EQUAL(11, len(target_string));
 
@@ -37,13 +46,13 @@ TEST(Generic, Len) {
     ASSERT_EQUAL(11, len(target_pointer_char));
 
     char *target_pointer_pointer_char[] = {
-        (char*) "abc",
-        (char*) "abd",
-        (char*) "abf",
-        (char*) "xyz",
-        (char*) "123",
-        (char*) "3456",
-        (char*) '\0'
+        String("abc"),
+        String("abd"),
+        String("abf"),
+        String("xyz"),
+        String("123"),
+        String("3456"),
+        '\0'
     };
     ASSERT_EQUAL(6, len(target_pointer_pointer_char));
 
@@ -61,4 +70,16 @@ TEST(Generic, Len) {
 
     double target_double = 1234444444.112;
     ASSERT_EQUAL(14, len(target_double));
+
+    std::vector<char*> target_vector;
+    target_vector.push_back(String("food"));
+    target_vector.push_back(String("tiny"));
+    target_vector.push_back(String("hello"));
+    target_vector.push_back(String("world"));
+    ASSERT_EQUAL(4, len(target_vector));
+
+    std::map<char*, char*> target_map;
+    target_map.insert(std::pair<char*, char*>(String("food"), String("tiny")));
+    target_map.insert(std::pair<char*, char*>(String("hello"), String("world")));
+    ASSERT_EQUAL(2, len(target_map));
 }

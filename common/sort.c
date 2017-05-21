@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../general.h"
+#include "../common.h"
 #include "../type.h"
 #include <stdlib.h>
 #include <string.h>

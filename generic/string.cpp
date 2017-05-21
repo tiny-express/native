@@ -29,16 +29,37 @@ extern "C" {
 }
 #include <string>
 #include <vector>
-#include "../native.h"
+#include "../native.hpp"
 
 /**
- * Un-supported type
+ * Convert char to pointer char
  *
- * @param T
- * @return empty string
+ * @param string
+ * @return pointer char
  */
-template <typename T> char *String(T) {
-    return (char*) "\0";
+char *String(char target) {
+    return string_copy(&target);
+}
+
+/**
+ * Convert constant pointer char to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+char *String(char const *target) {
+    return (char*) target;
+}
+
+/**
+ * Convert std::string to pointer char
+ *
+ * @param string
+ * @return pointer char
+ */
+char *String(std::string target) {
+    char *result = string_copy((char*) target.c_str());
+    return result;
 }
 
 /**
@@ -47,11 +68,10 @@ template <typename T> char *String(T) {
  * @param int_number
  * @return Pointer char
  */
-template <> char *String(int target) {
+char *String(int target) {
     char *result = string_from_int(target);
     return result;
 }
-template char *String<int>(int target);
 
 /**
  *  String double number
@@ -59,11 +79,10 @@ template char *String<int>(int target);
  * @param double_number
  * @return Pointer char
  */
-template <> char *String(double target) {
+char *String(double target) {
     char *result = string_from_double(target);
     return result;
 }
-template char *String<double>(double target);
 
 /**
  * String of vector int
@@ -71,7 +90,7 @@ template char *String<double>(double target);
  * @param vectorInt
  * @return Pointer char
  */
-template <> char *String(std::vector<int> target) {
+char *String(std::vector<int> target) {
     std::string str;
     str.append("[");
     std::vector<int>::iterator it;
@@ -86,7 +105,6 @@ template <> char *String(std::vector<int> target) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<int> >(std::vector<int> target);
 
 /**
  * String of vector double
@@ -94,7 +112,7 @@ template char *String<std::vector<int> >(std::vector<int> target);
  * @param target
  * @return pointer char
  */
-template <> char *String(std::vector<double> target) {
+char *String(std::vector<double> target) {
     std::string str;
     str.append("[");
     std::vector<double>::iterator it;
@@ -109,17 +127,4 @@ template <> char *String(std::vector<double> target) {
     char *result = string_copy((char *) str.c_str());
     return result;
 }
-template char *String<std::vector<double> >(std::vector<double> target);
-
-/**
- * Convert std::string to pointer char
- *
- * @param string
- * @return pointer char
- */
-template <> char *String(std::string target) {
-    char *result = string_copy((char*) target.c_str());
-    return result;
-}
-template char *String<std::string>(std::string target);
 

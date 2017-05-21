@@ -28,7 +28,6 @@
 #define NATIVE_THREAD_H
 
 #include <pthread.h>
-#include "thread/thpool.h"
 
 typedef struct thread_argument {
     void *callback;

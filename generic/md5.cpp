@@ -31,26 +31,15 @@ extern "C" {
 #include <iostream>
 
 /**
- * Un-supported type
- *
- * @param T
- * @return Pointer char '\0'
- */
-template <typename T> char *md5(T) {
-    return (char*) '\0';
-}
-
-/**
  * MD5 Encode for char pointer
  *
  * @param target
  * @return MD5 encoded string
  */
-template <> char *md5(char *target) {
+char *md5(char *target) {
     char *result = md5_encode((unsigned char*) target);
     return result;
 }
-template char *md5<char *>(char *target);
 
 /**
  * MD5 Encode for std::string
@@ -58,11 +47,10 @@ template char *md5<char *>(char *target);
  * @param std::string
  * @return MD5 encoded string
  */
-template <> char *md5(std::string target) {
+char *md5(std::string target) {
     char *result = md5_encode((unsigned char*) target.c_str());
     return result;
 }
-template char *md5<std::string>(std::string target);
 
 /**
  * MD5 Encode for short
@@ -70,22 +58,21 @@ template char *md5<std::string>(std::string target);
  * @param Short number
  * @return MD5 encoded string
  */
-template <> char *md5(short target) {
+char *md5(short target) {
     char *result = md5_encode((unsigned char*)string_from_short(target));
     return result;
 }
-template char *md5<short>(short target);
 
 /**
+ * MD5 Encode for int
  *
- * @param Int number
- * @return Pointer char md5 encoded string
+ * @param Short number
+ * @return MD5 encoded string
  */
-template <> char *md5(int target) {
+char *md5(int target) {
     char *result = md5_encode((unsigned char*) string_from_int(target));
     return result;
 }
-template char *md5<int>(int target);
 
 /**
  * MD5 Encode for long
@@ -93,11 +80,21 @@ template char *md5<int>(int target);
  * @param Long number
  * @return Pointer char md5 encoded string
  */
-template <> char *md5(long target) {
+char *md5(long target) {
     char *result = md5_encode((unsigned char*) string_from_long(target));
     return result;
 }
-template char *md5<long>(long target);
+
+/**
+ * MD5 Encode for float
+ *
+ * @param Long number
+ * @return Pointer char md5 encoded string
+ */
+char *md5(float target) {
+    char *result = md5_encode((unsigned char*) string_from_float(target));
+    return result;
+}
 
 /**
  * MD5 Encode for double
@@ -105,12 +102,10 @@ template char *md5<long>(long target);
  * @param target
  * @return md5 encoded string
  */
-template <> char *md5(double target) {
+char *md5(double target) {
     char *result = md5_encode((unsigned char*) string_from_double(target));
     return result;
 }
-template char *md5<double>(double target);
-
 
 
 
