@@ -40,6 +40,10 @@ String::String(char *target) {
     this->original = target;
 }
 
+String::String(byte *bytes) {
+    this->original = reinterpret_cast<char*>(bytes);
+}
+
 String::String(const String& target) {
     this->original = target.original;
 }

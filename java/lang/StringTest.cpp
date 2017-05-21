@@ -37,6 +37,10 @@ TEST(JavaLang, String) {
     string_empty = "Hello world";
     ASSERT_STR("Hello world", string_empty.cstringValue());
 
+    byte bytes[3] = {65, 66, 67};
+    String string_bytes = bytes;
+    ASSERT_STR("ABC", string_bytes.cstringValue());
+
     String string_text_with_length = "Hello world";
     ASSERT_STR("Hello world", string_text_with_length.cstringValue());
 

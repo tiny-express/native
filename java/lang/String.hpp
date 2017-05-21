@@ -36,6 +36,7 @@ namespace Java {
             String();
             String(const char* original);
             String(char *original);
+            String(byte *bytes);
             String(const String &target);
             ~String();
 
