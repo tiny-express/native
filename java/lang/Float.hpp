@@ -23,3 +23,37 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_LANG_FLOAT_HPP
+#define NATIVE_JAVA_LANG_FLOAT_HPP
+
+#include "Number.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Float : public virtual Number {
+        public:
+            Float();
+            Float(float original);
+            Float(const Float &floatN);
+            ~Float();
+
+        public:
+            char charValue() const override;
+            string stringValue() const override;
+            short shortValue() const override;
+            int intValue() const override;
+            long longValue() const override;
+            float floatValue() const override;
+            double doubleValue() const override;
+            String toString() const override;
+
+        public:
+            static Float *parseInt(String target);
+
+        private:
+            float original;
+        };
+    }
+}
+#endif//NATIVE_JAVA_LANG_FLOAT_HPP

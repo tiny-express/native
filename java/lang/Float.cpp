@@ -23,3 +23,114 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Float.hpp"
+
+using namespace Java::Lang;
+
+/**
+ * Float initialization
+ *
+ * @param original
+ */
+Float::Float() {
+    this->original = 0;
+}
+
+/**
+ * Float initialization
+ *
+ * @param original
+ */
+Float::Float(float original) {
+    this->original = original;
+}
+
+/**
+ * Float initialization
+ *
+ * @param original
+ */
+Float::Float(const Float &floatNumber) {
+    this->original = floatNumber.original;
+}
+
+Float::~Float() {
+
+}
+
+/**
+ * Float value
+ *
+ * @return float
+ */
+float Float::floatValue() const {
+    return this->original;
+}
+
+/**
+ * Char value
+ *
+ * @return char
+ */
+char Float::charValue() const {
+    return string_to_char(string_from_int(this->original));
+}
+
+/**
+ * Short value
+ *
+ * @return short
+ */
+short Float::shortValue() const {
+    return (short) this->original;
+}
+
+/**
+ * Int value
+ *
+ * @return int
+ */
+int Float::intValue() const {
+    return (int) this->original;
+}
+
+/**
+ * Long value
+ *
+ * @return long
+ */
+long Float::longValue() const {
+    return (long) this->original;
+}
+
+/**
+ * Double value
+ *
+ * @return
+ */
+double Float::doubleValue() const {
+    return this->original;
+}
+
+/**
+ * Float to String
+ *
+ * @return String
+ */
+String Float::toString() const  {
+    return string_from_int(this->original);
+}
+
+/**
+ * Float to String
+ *
+ * @return CString
+ */
+string Float::stringValue() const  {
+    return String::valueOf(this->original).toCharArray();
+}
+
+Float *Float::parseInt(String target) {
+    return new Float(string_to_int(target.toCharArray()));
+}
