@@ -33,34 +33,14 @@ using namespace Java::Lang;
 
 TEST(JavaLang, Integer) {
 
-//    Integer integer = 3;
-//    ASSERT_EQUAL(3, integer.intValue());
-//
-//    Integer integer1 = 4;
-//    integer1.doubleValue();
-//    
-//
-//    Integer *char_to_integer = Integer::parseChar('6');
-//    ASSERT_EQUAL(6, char_to_integer->intValue());
-//
-//    Integer *string_to_integer_not_valid = Integer::parseCString((char*) "Hello world");
-//    ASSERT_EQUAL(0, string_to_integer_not_valid->intValue());
-//
-//    Integer *string_to_integer_valid_1 = Integer::parseCString((char*) "-12345");
-//    ASSERT_EQUAL(-12345, string_to_integer_valid_1->intValue());
-//
-//    Integer *string_to_integer_valid_2 = Integer::parseCString((char*) "-123.45");
-//    ASSERT_EQUAL(-123, string_to_integer_valid_2->intValue());
-//
-//    Integer *string_to_integer = Integer::parseString(std::string("123456"));
-//    ASSERT_EQUAL(123456, string_to_integer->intValue());
-//
-//    Integer *long_large_to_integer = Integer::parseLong((long) 120999999345);
-//    ASSERT_EQUAL(0, long_large_to_integer->intValue());
-//
-//    Integer *long_small_to_integer = Integer::parseLong((long) 12345);
-//    ASSERT_EQUAL(12345, long_small_to_integer->intValue());
-//
-//    Integer *float_to_integer = Integer::parseFloat(1.234);
-//    ASSERT_EQUAL(1, float_to_integer->intValue());
+    Integer emptyInteger;
+    emptyInteger = 3;
+    ASSERT_EQUAL(3, emptyInteger.intValue());
+
+    Integer validInteger = 3;
+    ASSERT_EQUAL(3, validInteger.intValue());
+
+    Integer *validIntegerPointer = Integer::parseInt("6");
+    ASSERT_EQUAL(6, validIntegerPointer->intValue());
+
 }
