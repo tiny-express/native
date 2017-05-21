@@ -27,14 +27,7 @@
 extern "C" {
 #include "../unit_test.h"
 }
-#include "../native.h"
-
-
-
-TEST(Generic, TestEmail) {
-    const char *Test = "hello";
-}
-
+#include "../native.hpp"
 
 TEST(Generic, Long) {
     

@@ -68,8 +68,8 @@ TEST(String, ConvertFromInt) {
 
 TEST(String, ConvertFromLong) {
     long input = 2147483647;
-    char *expect="2147483647";
-    char *result=string_from_long(input);
+    char *expect = "2147483647";
+    char *result = string_from_long(input);
     ASSERT_STR(expect,result);
 
     long input1 = -2147483647;
@@ -180,4 +180,34 @@ TEST(String, ConvertToDouble) {
     char *input1 = "-125.56123";
     double result1 = string_to_double(input1);
     ASSERT_EQUAL(-125.56123, result1);
+}
+
+TEST(String, ConvertToBoolean) {
+    char *target0 = "1";
+    int boolean0 = string_to_boolean(target0);
+    ASSERT_TRUE(boolean0);
+
+    char *target1 = "TRUE";
+    int boolean1 = string_to_boolean(target1);
+    ASSERT_TRUE(boolean1);
+
+    char *target2 = "True";
+    int boolean2 = string_to_boolean(target2);
+    ASSERT_TRUE(boolean2);
+
+    char *target3 = "true";
+    int boolean3 = string_to_boolean(target3);
+    ASSERT_TRUE(boolean3);
+
+    char *target4 = "FALSE";
+    int boolean4 = string_to_boolean(target4);
+    ASSERT_FALSE(boolean4);
+
+    char *target5 = "False";
+    int boolean5 = string_to_boolean(target5);
+    ASSERT_FALSE(boolean5);
+
+    char *target6 = "false";
+    int boolean6 = string_to_boolean(target6);
+    ASSERT_FALSE(boolean6);
 }

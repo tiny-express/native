@@ -25,7 +25,7 @@
  */
 
 #include "../unit_test.h"
-#include "../general.h"
+#include "../common.h"
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>

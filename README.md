@@ -3,41 +3,22 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 
-This library provides a set of standard functions which are common used in C/C++ application.
+This library provides a set of low-level and productivity functions for C/C++ application.
 
-Beside C standard library, we would like to have a greater performance, custom optimization and easier to remember
+Beside standard library, we would like to have a greater customization with main goals:
 
-We use this library in our production and unit test with Travis CI so it just works !
+- Blazing fast performance of GAS & C
+- Flexibility of Python builtin functions
+- Advanced data structure of Java collections
+- High level object oriented, generic types of C++
+- Third party clients support for Food Tiny micro-components
 
-This project is also useful for new developers in practical programming
+This project is also useful for new developers in practical programming.
 
-### Standard C Library
-- Generic functions (length, append, join, segment, sort, search)
-- Compression (gzip)
-- Cryptography (md5, sha1, base64)
-- Datetime (timestamp, date format)
-- Network (http, ip address)
-- Storage (file)
-- String (converter, processor)
-- Threading (multiple threading, timer)
-- Validation (phone, email, url)
-- Data Type (json)
-- Third Party (Twilio, SendGrid, Etcd, ElasticSearch, Stripe, Firebase)
-
-### Generic C++ Functions (native.h)
-- Integer, Long, Double, Float, Boolean, String
-- type, ord, chr, max, min, round
-- len, slice, sorted, reverse, range, sum
-
-### Road map
-- Inherit good builtin functions from PHP, Python, Ruby, NodeJS, Perl
-- Develop fundamental algorithms and advanced data structure
-- Fix comments and complete test cases for all exported functions
-
-### Assembly Optimization
-- This library is originally developed in C but we still can make things go faster by optimizing in GNU Assembly
-- C version of that function should be implemented first then optimize again for Linux platform
-- GNU Assembly (GAS) in this project is ONLY compatible with Linux amd64
+###  Optimization
+- This library is originally developed in C but we still can make things go faster by optimizing in GAS for Linux amd64
+- C version of that function should be delivered first
+- Documentation for GAS can be found at here: [http://cs.lmu.edu/~ray/notes/gasexamples](http://cs.lmu.edu/~ray/notes/gasexamples)
 
 ### Useful Resources
 - Debugging & Profiling with [Valgrind](http://valgrind.org/)
@@ -49,69 +30,130 @@ This project is also useful for new developers in practical programming
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ make -j && make test
+$ cmake . && make -j && make test
 $ sudo make install
 ```
 
-#### Sample program with length_pointer_char
-```c
+#### Sample program
+test.cpp
+```cpp
 #include <stdio.h>
-#include <native/general.h>
+#include <native/native.hpp>
 
 int main() {
-    char *sample_text = "Hello World";
-    printf("Length of sample_text is %d\n", length_pointer_char(sample_text));
-    fflush(stdout);
+    char *text = String("Hello World");
+    puts(String(len(text)));
+    int number = 1021;
+    puts(String(len(number)));
     return 0;
 }
 ```
+Compilation & Run
+```bash
+$ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
+$ ./test
+```
 
-#### Sample unit test with native (thanks to C-Unit)
-```c
+#### Unit Test with C-Unit
+main_test.cpp
+```cpp
+#define CTEST_MAIN
+#define CTEST_SEGFAULT
+
 #include <native/unit_test.h>
+
+int main(int argc, const char *argv[]) {
+   int result = ctest_main(argc, argv);
+   return result;
+}
 
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
 ```
-```
-Note: You need to link your program with native library (libnative_static.a or libnative.so)
-```
+
 ### Contributors
-- Please read coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
+- You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Some popular rules in this project
+- Please read guidelines in CONTRIBUTION.md
 
-##### SHOULD (Test case name must be named in camel syntax)
-```c
-TEST(General, DistributionCountingSort) {
-    // Assert whatever you want
-}
-```
 
-##### SHOULD NOT
-```c
-TEST(General, distribution_sort) {
-    // Can not be accepted
-}
-```
+# Documentation
 
-##### SHOULD
-```c
-int array_length = 10;
-// Put loop variable in register to optimize performance
-register int index = 0;
-for (index = 0; index < array_length; index++) {
-    // doSomething()
-}
-```
+### C++ Functions
 
-##### SHOULD NOT
-- C99 mode - Declaring variable inside loop parameters can not be allowed here
-- Use calculation in loop parameters
-```c
-for (int index = 0; index < length_pointer_char(array); index++) {
-    // doSomething()
-}
-```
+#### Type Casting
+- [ ] Short - short
+- [x] Integer - int
+- [x] Long - long
+- [x] Float - float
+- [x] Double - double
+- [x] String - char*
+- [x] Boolean - bool
+
+#### Collections
+- [ ] ArrayList
+- [ ] LinkedList
+- [ ] HashMap
+- [ ] HashSet
+- [ ] TreeSet
+- [ ] PriorityQueue
+
+#### Builtin Functions
+- [x] empty
+- [x] len
+- [ ] copy
+- [ ] split
+- [ ] trim
+- [ ] join
+- [ ] range
+- [ ] sorted
+- [ ] reversed
+- [ ] random
+- [ ] print
+- [ ] file
+- [ ] chr
+- [ ] ord
+- [x] round
+- [x] md5
+- [x] sha1
+- [ ] type
+
+### C Library
+#### Common
+- [x] length_pointer_char
+- [x] length_pointer_pointer_char
+- [x] join_pointer_pointer_char
+- [x] linear_search
+- [x] binary_search
+- [x] quick_sort
+- [x] segment_pointer_char
+- [x] segment_pointer_pointer_char
+#### Compress
+#### Crypto
+- [x] base64_encode
+- [x] base64_decode
+- [x] md5_encode
+- [x] sha1_encode
+#### Datetime
+- [x] date
+- [x] timestamp
+#### Network
+#### Storage
+#### String
+- [x] string_copy
+- [x] string_split
+- [x] string_concat
+#### System
+#### Thread
+- [x] set_interval
+- [x] set_timeout
+#### Validator
+- [x] is_phone_number
+- [x] is_email
+- [x] is_url
+#### Vendor
+- [x] send_sms
+- [x] send_mail
+- [x] send_notification

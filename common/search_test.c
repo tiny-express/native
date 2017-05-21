@@ -26,7 +26,7 @@
 
 #include "../builtin.h"
 #include "../unit_test.h"
-#include "../general.h"
+#include "../common.h"
 
 
 TEST(General, BinarySearch) {

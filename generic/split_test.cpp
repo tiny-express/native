@@ -24,51 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
- * Generic functions inspired from Python Builtin Functions
- *
- * We feel that Python has an awesome builtin functions so we would like to
- * rewrite it in C++ using Native Library
- *
- * Thanks to Python Authors
- * https://docs.python.org/2/library/functions.html
- * © Copyright 1990-2017, Python Software Foundation
- * All right reserve.
- */
-
-#ifndef NATIVE_GENERIC_H
-#define NATIVE_GENERIC_H
-
 extern "C" {
-#include "builtin.h"
-};
+#include "../unit_test.h"
+}
+#include "../native.hpp"
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <iomanip>
-#include <algorithm>
+TEST(Generic, Split) {
+    std::vector<char*> null_target_delimiter = split((char*) NULL, NULL);
+    ASSERT_TRUE(empty(null_target_delimiter));
 
-// Type casting
-template <typename T> int Integer(T target);
-template <typename T> long Long(T target);
-template <typename T> char* String(T target);
-template <typename T> double Double(T target);
-template <typename T> float Float(T target);
-template <typename T> bool Boolean(T target);
-template <typename T> char* sha1(T target);
-template <typename T> char* md5(T target);
+    std::vector<char*> null_delimiter = split((char*) "hello", NULL);
+    ASSERT_EQUAL(1, len(null_delimiter));
 
-// Math functions
-//template <typename T> double round(double target, int precision);
-double round(double target, int precision);
-
-
-// Util functions
-template <typename T> int len(T target);
-template <typename T> int size(T target);
-template <typename T> char* file(char *file_name);
-template <typename T> bool file(char *file_name, char *file_content);
-
-#endif //NATIVE_GENERIC_H
+    char *text = "hello world";
+    std::vector<char*> strings = split(text, String(" "));
+    ASSERT_EQUAL(2, len(strings));
+}

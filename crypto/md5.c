@@ -1,11 +1,13 @@
 #include "../crypto.h"
 #include <openssl/md5.h>
-#include "../general.h"
+#include "../common.h"
 #include "../string.h"
 
 /**
- * Encode `unsigned char *'
- * Return a `char *' md5 decoded string
+ * MD5 Encode
+ *
+ * @param target
+ * @return md5 string
  */
 char *md5_encode(unsigned char *target) {
     int length_target = length_pointer_char(target);

@@ -29,7 +29,7 @@
 #include "../network.h"
 #include "../validator.h"
 #include "../type.h"
-#include "../general.h"
+#include "../common.h"
 #include "../vendor.h"
 
 /**
