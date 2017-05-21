@@ -35,7 +35,7 @@ namespace Java {
         public:
             Integer();
             Integer(int original);
-            Integer(Integer &integer);
+            Integer(const Integer &integer);
             ~Integer();
 
         public:

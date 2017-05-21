@@ -25,17 +25,37 @@
  */
 
 #include "Integer.hpp"
-#include "String.hpp"
 
 using namespace Java::Lang;
 
 /**
  * Integer initialization
  *
- * @param target
+ * @param original
+ */
+Integer::Integer() {
+    this->original = 0;
+}
+
+/**
+ * Integer initialization
+ *
+ * @param original
  */
 Integer::Integer(int original) {
    this->original = original;
+}
+
+/**
+ * Integer initialization
+ *
+ * @param original
+ */
+Integer::Integer(const Integer &integer) {
+    this->original = integer.original;
+}
+
+Integer::~Integer() {
 }
 
 /**
