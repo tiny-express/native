@@ -34,20 +34,20 @@ using namespace Java::Lang;
 TEST(JavaLang, String) {
 
     String string_empty;
-    string_empty = "Hello world";
-    ASSERT_STR("Hello world", string_empty.cstringValue());
+    string_empty = (string) "Hello world";
+    ASSERT_STR("Hello world", string_empty.toCharArray());
 
-    byte bytes[3] = {65, 66, 67};
+    byte bytes[4] = {65, 66, 67, 0};
     String string_bytes = bytes;
-    ASSERT_STR("ABC", string_bytes.cstringValue());
+    ASSERT_STR("ABC", string_bytes.toCharArray());
 
     String string_text_with_length = "Hello world";
-    ASSERT_STR("Hello world", string_text_with_length.cstringValue());
+    ASSERT_STR("Hello world", string_text_with_length.toCharArray());
 
     String string_text_plus_1 = "Hello ";
     String string_text_plus_2 = "World";
     String string_result_plus = string_text_plus_1 + string_text_plus_2;
-    ASSERT_STR("Hello World", string_result_plus.cstringValue());
+    ASSERT_STR("Hello World", string_result_plus.toCharArray());
 
     String string_text_compare_equal_1 = "Hello";
     String string_text_compare_equal_2 = "Hello";
@@ -65,40 +65,36 @@ TEST(JavaLang, String) {
     }
     ASSERT_TRUE(comparable_not_equal);
 
-    char *given_string_with_length = "Hello world";
+    string given_string_with_length = "Hello world";
     String string_with_length = given_string_with_length;
-    ASSERT_STR(given_string_with_length, string_with_length.cstringValue());
+    ASSERT_STR(given_string_with_length, string_with_length.toCharArray());
     ASSERT_EQUAL(11, string_with_length.length());
 
     char given_char = '\0';
-    String *string_from_char = String::parseChar(given_char);
-    ASSERT_STR((char*) "\0", string_from_char->cstringValue());
+    String string_from_char = String::valueOf(given_char);
+    ASSERT_STR((string) "\0", string_from_char.toCharArray());
 
-    char *given_char_pointer = (char*) "Hello world";
-    String *string_from_char_pointer = String::parseCString(given_char_pointer);
-    ASSERT_STR(given_char_pointer, string_from_char_pointer->cstringValue());
+    string given_char_pointer = "Hello world";
+    String string_from_char_pointer = String::valueOf(given_char_pointer);
+    ASSERT_STR(given_char_pointer, string_from_char_pointer.toCharArray());
 
-    std::string given_std_string = std::string("hello world");
-    String *string_from_std_string = String::parseString(given_std_string);
-    ASSERT_STR(given_std_string.c_str(), string_from_std_string->cstringValue());
+//    short given_short = 5;
+//    String string_from_short = String::valueOf(given_short);
+//    ASSERT_EQUAL(given_short, Short::parseString(string_from_short));
 
-    short given_short = 5;
-    String *string_from_short = String::parseShort(given_short);
-    ASSERT_EQUAL(given_short, string_from_short->shortValue());
-
-    int given_int = 34567;
-    String *string_from_int = String::parseInt(given_int);
-    ASSERT_EQUAL(given_int, string_from_int->intValue());
-
-    long given_long = (long) 10000000000;
-    String *string_from_long = String::parseLong(given_long);
-    ASSERT_EQUAL(given_long, string_from_long->longValue());
-
-    float given_float = (float) 5.68;
-    String *string_from_float = String::parseFloat(given_float);
-    ASSERT_EQUAL(given_float, string_from_float->floatValue());
-
-    long given_double = (long) 456.324234234234234234234234234234;
-    String *string_from_double = String::parseDouble(given_double);
-    ASSERT_EQUAL(given_double, string_from_double->doubleValue());
+//    int given_int = 34567;
+//    String *string_from_int = String::parseInt(given_int);
+//    ASSERT_EQUAL(given_int, string_from_int->intValue());
+//
+//    long given_long = (long) 10000000000;
+//    String *string_from_long = String::parseLong(given_long);
+//    ASSERT_EQUAL(given_long, string_from_long->longValue());
+//
+//    float given_float = (float) 5.68;
+//    String *string_from_float = String::parseFloat(given_float);
+//    ASSERT_EQUAL(given_float, string_from_float->floatValue());
+//
+//    long given_double = (long) 456.324234234234234234234234234234;
+//    String *string_from_double = String::parseDouble(given_double);
+//    ASSERT_EQUAL(given_double, string_from_double->doubleValue());
 }

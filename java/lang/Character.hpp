@@ -23,3 +23,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_LANG_CHARACTER_HPP
+#define NATIVE_JAVA_LANG_CHARACTER_HPP
+
+#include "Number.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Character : public virtual Object {
+        public:
+            Character();
+            Character(char original);
+            ~Character();
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_CHARACTER_HPP

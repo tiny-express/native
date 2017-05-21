@@ -115,8 +115,8 @@ Integer* Integer::parseDouble(double target) {
  *
  * @return String
  */
-String* Integer::toString() const  {
-    return new String(string_from_int(this->value));
+String Integer::toString() const  {
+    return string_from_int(this->value);
 }
 
 /**
