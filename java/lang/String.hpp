@@ -35,38 +35,52 @@ namespace Java {
         public:
             String();
             String(const char* original);
-            String(char *original);
+            String(string original);
             String(byte *bytes);
             String(const String &target);
             ~String();
 
-            char charValue() const;
-            char *cstringValue() const;
-            std::string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
+        public:
+            int indexOf(int ch) const;
+            int indexOf(int ch, int fromIndex) const;
+            int indexOf(String str) const;
+            int indexOf(String str, int fromIndex) const;
+            boolean isEmpty() const;
+            int lastIndexOf(int ch) const;
+            int lastIndexOf(int ch, int fromIndex) const;
+            int lastIndexOf(String str) const;
+            int lastIndexOf(String str, int fromIndex) const;
             int length() const;
-            String *toString() const;
-
-            String operator+(const String& target2);
-            bool operator==(const String& target2);
-            bool operator!=(const String& target2);
+            boolean matches(String regex) const;
+            String replace(char oldChar, char newChar) const;
+            String replaceAll(String regex, String replacement) const;
+            String replaceFirst(String regex, String replacement) const;
+            String *split(String regex) const;
+            String *split(String regex, int limit) const;
+            boolean startsWith(String prefix, int toffset) const;
+            string toCharArray() const;
+            String toLowerCase() const;
+            String toString() const;
+            String toUpperCase();
+            String trim();
 
         public:
-            static String* parseChar(char target);
-            static String* parseCString(char *target);
-            static String* parseString(std::string target);
-            static String* parseShort(short target);
-            static String* parseInt(int target);
-            static String* parseLong(long target);
-            static String* parseFloat(float target);
-            static String* parseDouble(double target);
+            String operator+(const String& target2);
+            boolean operator==(const String& target2);
+            boolean operator!=(const String& target2);
+
+        public:
+            static String valueOf(boolean target);
+            static String valueOf(char target);
+            static String valueOf(string target);
+            static String valueOf(short target);
+            static String valueOf(int target);
+            static String valueOf(long target);
+            static String valueOf(float target);
+            static String valueOf(double target);
 
         private:
-            char *original;
+            string original;
         };
     }
 }

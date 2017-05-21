@@ -52,7 +52,7 @@ namespace Java {
             float floatValue() const override;
             double doubleValue() const override;
 
-            String *toString() const override;
+            String toString() const override;
 
         private:
             int value;

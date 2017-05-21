@@ -35,6 +35,9 @@ extern "C" {
 #include <string>
 #include <algorithm>
 
+typedef bool boolean;
+typedef char* string;
+
 namespace Java {
     namespace Lang {
 
@@ -50,7 +53,7 @@ namespace Java {
 
         class Object {
         protected:
-            virtual String* toString() const = 0;
+            virtual String toString() const = 0;
         };
     }
 }

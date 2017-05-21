@@ -32,16 +32,16 @@ String::String() {
     this->original = "";
 }
 
-String::String(const char *original) {
-    this->original = (char*) original;
+String::String(const char* target) {
+    this->original = (string) target;
 }
 
-String::String(char *target) {
+String::String(string target) {
     this->original = target;
 }
 
 String::String(byte *bytes) {
-    this->original = reinterpret_cast<char*>(bytes);
+    this->original = reinterpret_cast<string>(bytes);
 }
 
 String::String(const String& target) {
@@ -51,76 +51,16 @@ String::String(const String& target) {
 String::~String() {
 }
 
-String* String::parseChar(char target) {
-    return new String(string_from_char(target));
-}
-
-String* String::parseCString(char *target) {
-    return new String(target);
-}
-
-String* String::parseString(std::string target) {
-    return new String(target.c_str());
-}
-
-String* String::parseShort(short target) {
-    return new String(string_from_short(target));
-}
-
-String* String::parseInt(int target) {
-    return new String(string_from_int(target));
-}
-
-String* String::parseLong(long target) {
-    return new String(string_from_long(target));
-}
-
-String* String::parseFloat(float target) {
-    return new String(string_from_float(target));
-}
-
-String* String::parseDouble(double target) {
-    return new String(string_from_double(target));
-}
-
-char String::charValue() const {
-    return string_to_char(this->original);
-}
-
-char *String::cstringValue() const {
-    return this->original;
-}
-
-std::string String::stringValue() const {
-    return std::string(this->original);
-}
-
-short String::shortValue() const {
-    return string_to_short(this->original);
-}
-
-int String::intValue() const {
-    return string_to_int(this->original);
-}
-
-long String::longValue() const {
-    return string_to_long(this->original);
-}
-
-float String::floatValue() const {
-    return string_to_float(this->original);
-}
-
-double String::doubleValue() const {
-    return string_to_double(this->original);
-}
-
 int String::length() const {
     return length_pointer_char(original);
 }
 
-String* String::toString() const {
-    return new String(this->original);
+string String::toCharArray() const {
+    return this->original;
+}
+
+String String::toString() const {
+    return this->original;
 }
 
 String String::operator+(const String& target2) {
@@ -129,7 +69,7 @@ String String::operator+(const String& target2) {
 }
 
 bool String::operator==(const String &target2) {
-    if (string_equals(this->original, target2.cstringValue())) {
+    if (string_equals(this->original, target2.toCharArray())) {
         return true;
     }
     return false;
@@ -137,4 +77,38 @@ bool String::operator==(const String &target2) {
 
 bool String::operator!=(const String &target2) {
     return !this->operator==(target2);
+}
+
+String String::valueOf(boolean target) {
+    if (target) return (string) "1";
+    return (string) "0";
+}
+
+String String::valueOf(char target) {
+    return string_from_char(target);
+}
+
+String String::valueOf(string target) {
+    if (is_empty(target)) return (string) "";
+    return target;
+}
+
+String String::valueOf(short target) {
+    return string_from_short(target);
+}
+
+String String::valueOf(int target) {
+    return string_from_int(target);
+}
+
+String String::valueOf(long target) {
+    return string_from_long(target);
+}
+
+String String::valueOf(float target) {
+    return string_from_float(target);
+}
+
+String String::valueOf(double target) {
+    return string_from_double(target);
 }
