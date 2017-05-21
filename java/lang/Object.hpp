@@ -32,11 +32,11 @@ extern "C" {
 };
 
 #include <iostream>
-#include <string>
 #include <algorithm>
 
 typedef bool boolean;
 typedef char* string;
+typedef const char* const_string;
 
 namespace Java {
     namespace Lang {

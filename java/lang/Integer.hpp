@@ -33,29 +33,26 @@ namespace Java {
     namespace Lang {
         class Integer: public virtual Number {
         public:
-            static Integer *parseChar(char target);
-            static Integer *parseInt(int target);
-            static Integer *parseCString(char *target);
-            static Integer *parseString(std::string target);
-            static Integer *parseLong(long target);
-            static Integer *parseFloat(float target);
-            static Integer *parseDouble(double target);
+            Integer();
+            Integer(int original);
+            Integer(Integer &integer);
+            ~Integer();
 
-            Integer(int target);
-
+        public:
             char charValue() const override;
-            char *cstringValue() const override;
-            std::string stringValue() const override;
+            string stringValue() const override;
             short shortValue() const override;
             int intValue() const override;
             long longValue() const override;
             float floatValue() const override;
             double doubleValue() const override;
-
             String toString() const override;
 
+        public:
+            static Integer *parseInt(String target);
+
         private:
-            int value;
+            int original;
         };
     }
 }

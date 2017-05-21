@@ -32,7 +32,7 @@ String::String() {
     this->original = "";
 }
 
-String::String(const char* target) {
+String::String(const_string target) {
     this->original = (string) target;
 }
 
