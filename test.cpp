@@ -1,11 +1,13 @@
-#include <stdio.h>
-#include <native/native.hpp>
+#include "library.hpp"
+
+using namespace Java::Lang;
+using namespace Java::IO;
 
 int main() {
-    char *text = String("Hello World");
-    puts(String(len(text)));
-    int number = 1021;
-    puts(String(len(number)));
+    String text = "Hello Native Library";
+    FileWriter file = "text.txt";
+    System::out::println(text);
     return 0;
 }
+
 

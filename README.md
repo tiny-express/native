@@ -7,11 +7,9 @@ This library provides a set of low-level and productivity functions for C/C++ ap
 
 Beside standard library, we would like to have a greater customization with main goals:
 
-- Blazing fast performance of GAS & C
-- Flexibility of Python builtin functions
-- Advanced data structure of Java collections
-- High level object oriented, generic types of C++
-- Third party clients support for Food Tiny micro-components
+- Blazing fast performance of GAS & C/C++
+- Using Java packages in C++ with human readable
+- Third party clients support for Food Tiny micro-components will be in java.vendor
 
 This project is also useful for new developers in practical programming.
 
@@ -37,14 +35,11 @@ $ sudo make install
 #### Sample program
 test.cpp
 ```cpp
-#include <stdio.h>
 #include <native/native.hpp>
-
+using namespace java::lang;
 int main() {
-    char *text = String("Hello World");
-    puts(String(len(text)));
-    int number = 1021;
-    puts(String(len(number)));
+    String string = "Hello world";
+    System::out::println(output);
     return 0;
 }
 ```

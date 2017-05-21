@@ -24,14 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_H
-#define NATIVE_LIBRARY_H
+#ifndef NATIVE_JAVA_LANG_THROWABLE_HPP
+#define NATIVE_JAVA_LANG_THROWABLE_HPP
 
-extern "C" {
-#include "builtin.h"
-};
+#include "Object.hpp"
+#include "String.hpp"
 
-#include "generic.hpp"
-#include "collection.hpp"
-
-#endif //NATIVE_LIBRARY_H
+#endif//NATIVE_JAVA_LANG_THROWABLE_HPP

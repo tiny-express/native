@@ -27,7 +27,7 @@
 extern "C" {
 #include "../string.h"
 }
-#include "../native.hpp"
+#include "../library.hpp"
 
 /**
  * Float value of char pointer

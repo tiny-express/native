@@ -23,3 +23,81 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "../library.hpp"
+
+/**
+ * Print const pointer char to screen
+ * @param target
+ */
+void print(const char *target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Print poiter char to screen
+ * @param target
+ */
+void print(char *target) {
+    print((const char *)target);
+}
+
+/**
+ * Print `std::string' to screen
+ * @param target
+ */
+void print(std::string target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Print `short' number to screen
+ * @param target
+ */
+void print(short target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Print `int' number to screen
+ * @param target
+ */
+void print(int target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Print `long' number to screen
+ * @param target
+ */
+void print(long target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Print `double' number to screen
+ * @param target
+ */
+void print(double target) {
+    std::cout << target << std::endl;
+}
+
+/**
+ * Convert `std::vector<int>' to `char *' and print this to screen
+ * @param target
+ */
+void print(std::vector<int> target) {
+    const char *convertString = String(target);
+    print(convertString);
+}
+
+/**
+ * Convert `std::vector<double>' to `char *' and print this to screen
+ * @param target
+ */
+void print(std::vector<double> target) {
+    const char *convertString = String(target);
+    print(convertString);
+}
+
+

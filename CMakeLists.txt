@@ -82,13 +82,12 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
-    collection/*
     common/*
     context/*
     compress/*
     crypto/*
     datetime/*
-    generic/*
+    java/*
     network/*
     server/*
     storage/*
@@ -101,18 +100,17 @@ file(GLOB_RECURSE SOURCES
 
 file(GLOB_RECURSE HEADERS
     ./*.h
-    ./*.hpp
+        library.hpp
 )
 
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
-    collection/*_test.c
     common/*_test.c
     context/*_test.c
     compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
-    generic/*_test.cpp
+    java/**/*Test.cpp
     network/*_test.c
     server/*_test.c
     storage/*_test.c
@@ -143,6 +141,8 @@ add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 # Add make install - installation to unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install (TARGETS ${PROJECT_NAME} DESTINATION lib)
+install (FILES ${HEADERS} DESTINATION include/native)
+install (DIRECTORY java DESTINATION include/native)
 install (FILES ${HEADERS} DESTINATION include/native)
 
 # Link library for OSX and other platform

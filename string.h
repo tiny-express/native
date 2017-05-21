@@ -29,12 +29,14 @@
 
 #include <string.h>
 
+char *string_from_char(char target);
 char* string_from_short(short target);
 char* string_from_int(int target);
 char* string_from_long(long target);
 char* string_from_double(double target);
 char* string_from_float(float target);
 
+char string_to_char(char* target);
 short string_to_short(char* target);
 int string_to_int(char* target);
 long string_to_long(char* target);

@@ -24,59 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../native.hpp"
-#include <limits.h>
+// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-/**
- * Integer value of char pointer
- *
- * @param target
- * @return int
- */
-int Integer(char *target) {
-    return string_to_int(target);
-}
+#ifndef NATIVE_JAVA_LANG_NUMBER_HPP
+#define NATIVE_JAVA_LANG_NUMBER_HPP
 
-/**
- * Integer value of std::string
- *
- * @param target
- * @return int
- */
-int Integer(std::string target) {
-    return string_to_int((char*) target.c_str());
-}
+#include "Object.hpp"
+#include "String.hpp"
 
-/**
- * Integer value of long
- * Can not cast long to int
- *
- * @param target
- * @return 0
- */
-int Integer(long target) {
-    if ((target >= INT_MIN) && (target <= INT_MAX)) {
-        return (int) target;
+namespace Java {
+    namespace Lang {
+        class Number: public virtual Object {
+        protected:
+            virtual char charValue() const = 0;
+            virtual string stringValue() const = 0;
+            virtual short shortValue() const = 0;
+            virtual int intValue() const = 0;
+            virtual long longValue() const = 0;
+            virtual float floatValue() const = 0;
+            virtual double doubleValue() const = 0;
+        };
     }
-    return 0;
 }
 
-/**
- * Integer value of float
- *
- * @param target
- * @return int
- */
-int Integer(float target) {
-    return (int) floor(target);
-}
-
-/**
- * Integer value of double
- *
- * @param target
- * @return int
- */
-int Integer(double target) {
-    return (int) floor(target);
-}
+#endif//NATIVE_JAVA_LANG_NUMBER_HPP
