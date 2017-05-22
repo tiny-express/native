@@ -31,7 +31,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(JavaLang, System) {
+TEST(JavaLang, SystemOut) {
     // String *string = new String("Hello World");
     // System::out::println(string);
 }

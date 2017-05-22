@@ -31,7 +31,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(Java_Lang_Integer, Constructor) {
+TEST(JavaLang, IntegerConstructor) {
     // Given empty value for Integer constructor and assign value - Return integer
     Integer emptyInteger;
     emptyInteger = 3;
@@ -42,10 +42,10 @@ TEST(Java_Lang_Integer, Constructor) {
     ASSERT_EQUAL(3, validInteger.intValue());
 }
 
-TEST(Java_Lang_Integer, Operator) {
+TEST(JavaLang, IntegerOperator) {
 }
 
-TEST(Java_Lang_Integer, ParseInt) {
+TEST(JavaLang, IntegerParseInt) {
     // Given value for Integer constructor and assign value - Return integer
     Integer *validIntegerPointer = Integer::parseInt("6");
     ASSERT_EQUAL(6, validIntegerPointer->intValue());

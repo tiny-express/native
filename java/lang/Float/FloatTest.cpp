@@ -31,7 +31,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(JavaLang, Float) {
+TEST(JavaLang, FloatConstructor) {
     Float emptyFloat;
     emptyFloat = 3.0;
     ASSERT_EQUAL(3, emptyFloat.intValue());
@@ -41,4 +41,10 @@ TEST(JavaLang, Float) {
 
     Float *validIntegerPointer = Float::parseFloat("1.345");
     ASSERT_EQUAL(1.3, validIntegerPointer->intValue());
+}
+
+TEST(JavaLang, FloatOperator) {
+}
+
+TEST(JavaLang, FloatParseFloat) {
 }
