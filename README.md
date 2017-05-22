@@ -33,8 +33,7 @@ $ cmake . && make -j && make test
 $ sudo make install
 ```
 
-#### Sample program
-test.cpp
+#### Sample program (test.cpp)
 ```cpp
 #include <native/library.hpp>
 int main() {
@@ -50,7 +49,6 @@ $ ./test
 ```
 
 #### Unit Test with C-Unit
-main_test.cpp
 ```cpp
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
