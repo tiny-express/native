@@ -36,8 +36,7 @@ $ sudo make install
 #### Sample program
 test.cpp
 ```cpp
-#include <native/native.hpp>
-using namespace Java::Lang;
+#include <native/library.hpp>
 int main() {
     String string = "Hello world";
     System::out::println(output);
@@ -83,7 +82,7 @@ TEST(YourTestSuite, YourTestCase) {
 - [x] double
 - [x] boolean
 
-### Additional features outside Java packages
+#### Additional features outside Java packages
 - [x] Java.Lang.Array
 - [ ] Java.Vendor.AbstractVendor
 - [ ] Java.Vendor.ElasticSearch
@@ -92,7 +91,7 @@ TEST(YourTestSuite, YourTestCase) {
 - [ ] Java.Vendor.SendGrid
 - [ ] Java.Vendor.Twilio
 
-### Java Standard Packages
+#### Java Standard Packages
 ##### Java.Lang
 - [ ] Java.Lang.Boolean
 - [ ] Java.Lang.Byte
