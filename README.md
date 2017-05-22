@@ -65,7 +65,7 @@ TEST(YourTestSuite, YourTestCase) {
 ### Contributors
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Please read guidelines in (CONTRIBUTION.md)[https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md]
+- Please read guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
 
 # Documentation
 
