@@ -28,4 +28,26 @@
 #ifndef NATIVE_JAVA_UTIL_ARRAYLIST_HPP
 #define NATIVE_JAVA_UTIL_ARRAYLIST_HPP
 
+#include "AbstractList.hpp"
+
+namespace Java {
+    namespace Util {
+        template <class E>
+        class ArrayList: public virtual AbstractList {
+            bool add(E element);
+            void add(int index, E element);
+            bool addAll(Collection c);
+            bool contains(E element);
+            bool remove(int index);
+            bool remove(E element);
+            bool removeAll();
+            bool removeRange(int fromIndex, int toIndex);
+            E get(int index);
+            bool set(int index, E element);
+            int size();
+            bool isEmpty();
+        };
+    }
+}
+
 #endif//NATIVE_JAVA_UTIL_ARRAYLIST_HPP
