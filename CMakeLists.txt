@@ -84,7 +84,6 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 file(GLOB_RECURSE SOURCES
     common/*
     context/*
-    compress/*
     crypto/*
     datetime/*
     java/*
@@ -107,7 +106,6 @@ file(GLOB_RECURSE HEADERS
 file(GLOB_RECURSE TESTS
     common/*_test.c
     context/*_test.c
-    compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
     java/**/*Test.cpp

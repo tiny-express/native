@@ -31,7 +31,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(Java_Lang_String, Constructor) {
+TEST(JavaLang, StringConstructor) {
     // Given empty value for String constructor and assign value - Return string
     String emptyString;
     emptyString = (string) "Hello world";
@@ -47,7 +47,7 @@ TEST(Java_Lang_String, Constructor) {
     ASSERT_STR("Hello world", normalString.toCharArray());
 }
 
-TEST(Java_Lang_String, Operator) {
+TEST(JavaLang, StringOperator) {
     // Given two strings and concatenate them - Return string
     String textPlus1 = "Hello ";
     String textPlus2 = "World";
@@ -73,11 +73,11 @@ TEST(Java_Lang_String, Operator) {
     ASSERT_TRUE(comparable);
 }
 
-TEST(Java_Lang_String, Split) {
+TEST(JavaLang, StringSplit) {
 
 }
 
-TEST(Java_Lang_String, ValueOf) {
+TEST(JavaLang, StringValueOf) {
     // Value of boolean
     boolean isChecked = true;
     String valueOfBoolean = String::valueOf(isChecked);
