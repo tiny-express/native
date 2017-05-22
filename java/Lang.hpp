@@ -38,6 +38,7 @@
 #include "lang/Comparable/Comparable.hpp"
 #include "lang/Double/Double.hpp"
 #include "lang/Enum/Enum.hpp"
+#include "lang/Error/Error.hpp"
 #include "lang/Exception/Exception.hpp"
 #include "lang/Float/Float.hpp"
 #include "lang/Integer/Integer.hpp"
