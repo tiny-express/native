@@ -18,6 +18,7 @@ namespace Java {
             protected:
                 AbstractCollection();
                 ~AbstractCollection();
+
                 virtual bool add(T const &);
                 //virtual bool addAll(Collection c);
                 virtual void clear();
