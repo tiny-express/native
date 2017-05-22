@@ -54,8 +54,8 @@ namespace Java {
             int indexOf(String str) const;
             int indexOf(String str, int fromIndex) const;
             boolean isEmpty() const;
-            int lastIndexOf(int ch) const;
-            int lastIndexOf(int ch, int fromIndex) const;
+            int lastIndexOf(int ch);
+            int lastIndexOf(int ch, int fromIndex);
             int lastIndexOf(String str) const;
             int lastIndexOf(String str, int fromIndex) const;
             int length() const;
