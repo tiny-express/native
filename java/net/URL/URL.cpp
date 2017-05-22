@@ -31,8 +31,7 @@
 using namespace Java::Net;
 
 URL::URL() {
-    String url("");
-    this->url = url;
+    this->url = "";
 }
 
 URL::URL(String url) {
