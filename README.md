@@ -70,26 +70,19 @@ TEST(YourTestSuite, YourTestCase) {
 # Documentation
 
 #### Data Types
-- [x] char
-- [x] byte
-- [x] string
-- [x] short
-- [x] int
-- [x] long
-- [x] float
-- [x] double
-- [x] boolean
-
-#### Additional features outside Java packages
-- [x] Java.Lang.Array
-- [ ] Java.Vendor.AbstractVendor
-- [ ] Java.Vendor.ElasticSearch
-- [ ] Java.Vendor.Etcd
-- [ ] Java.Vendor.Firebase
-- [ ] Java.Vendor.SendGrid
-- [ ] Java.Vendor.Twilio
+All data types are implemented and ready to use in C++ Application
+- [x] char - Java & C++
+- [x] byte - Java & C++ (unsigned char)
+- [x] string - C++ (char*)
+- [x] short - Java & C++
+- [x] int - Java & C++
+- [x] long - Java & C++
+- [x] float - Java & C++
+- [x] double - Java & C++
+- [x] boolean - Java & C++ (bool)
 
 #### Java Standard Packages
+All Java packages are still in transformation so we can have a general look below
 ##### Java.Lang
 - [ ] Java.Lang.Boolean
 - [ ] Java.Lang.Byte
@@ -125,3 +118,12 @@ TEST(YourTestSuite, YourTestCase) {
 ##### Java.Net
 - [ ] Java.Net.URL
 - [ ] Java.Net.HttpURLConnection
+
+#### Additional features outside Java packages
+- [x] Java.Lang.Array
+- [ ] Java.Vendor.AbstractVendor
+- [ ] Java.Vendor.ElasticSearch
+- [ ] Java.Vendor.Etcd
+- [ ] Java.Vendor.Firebase
+- [ ] Java.Vendor.SendGrid
+- [ ] Java.Vendor.Twilio
