@@ -5,10 +5,13 @@
 #ifndef NATIVE_ARRAYLIST_H
 #define NATIVE_ARRAYLIST_H
 
+#include "ArrayList.h"
 
-class ArrayList {
+namespace Java {
+    namespace Lang {
 
-};
+    }
+}
 
 
 #endif //NATIVE_ARRAYLIST_H
