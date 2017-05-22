@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
 #define NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
 
-#include "../IO.hpp"
+#include "../../Net.hpp"
 
 using namespace Java::Net;
 

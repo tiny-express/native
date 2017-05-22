@@ -27,4 +27,21 @@
 #ifndef NATIVE_JAVA_NET_HTTP_URL_CONNECTION_HPP
 #define NATIVE_JAVA_NET_HTTP_URL_CONNECTION_HPP
 
+#include "../URL/URL.hpp"
+
+namespace Java {
+    namespace Net {
+        class HttpURLConnection {
+        private:
+            URL url;
+        public:
+            HttpURLConnection();
+            HttpURLConnection(URL url);
+            ~HttpURLConnection();
+        public:
+            String getSchema(URL url);
+        };
+    }
+}
+
 #endif//NATIVE_JAVA_NET_HTTP_URL_CONNECTION_HPP

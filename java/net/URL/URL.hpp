@@ -27,12 +27,24 @@
 #ifndef NATIVE_JAVA_NET_URL_HPP
 #define NATIVE_JAVA_NET_URL_HPP
 
-#include "../Lang.hpp"
+#include "../../lang/String/String.hpp"
 
 using namespace Java::Lang;
 
-class URL {
-
-};
+namespace Java {
+    namespace Net {
+        class URL {
+        private:
+            String url;
+        public:
+            URL();
+            URL(String url);
+            ~URL();
+        public:
+            boolean isURL();
+            String getURL();
+        };
+    }
+}
 
 #endif//NATIVE_JAVA_NET_URL_HPP
