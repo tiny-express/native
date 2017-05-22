@@ -24,12 +24,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_LANG_INTEGER_HPP
+#define NATIVE_JAVA_LANG_INTEGER_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+#include "../Number/Number.hpp"
 
-#endif//NATIVE_JAVA_IO_HPP
+namespace Java {
+    namespace Lang {
+        class Integer: public virtual Number {
+        public:
+            Integer();
+            Integer(int original);
+            Integer(const Integer &target);
+            ~Integer();
+
+        public:
+            char charValue() const override;
+            string stringValue() const override;
+            short shortValue() const override;
+            int intValue() const override;
+            long longValue() const override;
+            float floatValue() const override;
+            double doubleValue() const override;
+            String toString() const override;
+
+        public:
+            static Integer *parseInt(String target);
+
+        private:
+            int original;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_INTEGER_HPP
+

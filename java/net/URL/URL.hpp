@@ -24,12 +24,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_NET_URL_HPP
+#define NATIVE_JAVA_NET_URL_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+#include "../Lang.hpp"
 
-#endif//NATIVE_JAVA_IO_HPP
+using namespace Java::Lang;
+
+class URL {
+
+};
+
+#endif//NATIVE_JAVA_NET_URL_HPP

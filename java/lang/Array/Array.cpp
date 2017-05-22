@@ -24,12 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#include "Array.hpp"
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+using namespace Java::Lang;
 
-#endif//NATIVE_JAVA_IO_HPP
+template <typename E>
+Array<E>::Array() {
+}
+
+template <typename E>
+Array<E>::Array(E *array) {
+}
+
+template <typename E>
+Array<E>::Array(int length) {
+}
+
+template <typename E>
+Array<E>::Array(const Array &target) {
+}
+
+template <typename E>
+Array<E>::~Array() {
+}
+
+//template <typename E>
+//String Array<E>::toString() const {
+//    string original = "serialize";
+//    return original;
+//}
+

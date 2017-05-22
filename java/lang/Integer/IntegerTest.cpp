@@ -24,12 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+extern "C" {
+#include "../../../unit_test.h"
+}
+#include "Integer.hpp"
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+using namespace Java::Lang;
 
-#endif//NATIVE_JAVA_IO_HPP
+TEST(JavaLang, Integer) {
+
+    Integer emptyInteger;
+    emptyInteger = 3;
+    ASSERT_EQUAL(3, emptyInteger.intValue());
+
+    Integer validInteger = 3;
+    ASSERT_EQUAL(3, validInteger.intValue());
+
+    Integer *validIntegerPointer = Integer::parseInt("6");
+    ASSERT_EQUAL(6, validIntegerPointer->intValue());
+
+}
