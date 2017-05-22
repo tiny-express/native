@@ -37,8 +37,8 @@ $ sudo make install
 ```cpp
 #include <native/library.hpp>
 int main() {
-    String string = "Hello world";
-    System::out::println(output);
+    String text = "Hello world";
+    System::out::println(text);
     return 0;
 }
 ```
