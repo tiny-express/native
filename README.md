@@ -42,7 +42,6 @@ int main() {
     return 0;
 }
 ```
-Compilation & Run
 ```bash
 $ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
 $ ./test
