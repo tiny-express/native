@@ -44,7 +44,7 @@ int main() {
 ```
 ```bash
 $ g++ -c -o test.o ./test.cpp
-$ gcc -o native test.o libnative_static.a -lstdc++
+$ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
 $ ./native
 ```
 
