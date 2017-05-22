@@ -114,3 +114,81 @@ String String::valueOf(float target) {
 String String::valueOf(double target) {
     return string_from_double(target);
 }
+
+char String::charAt(int index) {
+    return this->original[index];
+}
+
+String String::concat(String str) {
+    return string_concat(original, str.original);
+}
+
+int String::indexOf(int ch) const {
+    return string_index(original, string_from_char((char) ch), 1);
+}
+
+int String::indexOf(int ch, int fromIndex) const {
+//    return string_index(original, string_from_char((char) ch), fromIndex);
+    int length = length_pointer_char(original);
+    if(fromIndex > length) {
+        return -1;
+    }
+    register int k = fromIndex;
+    for(k; k < length; k++) {
+        if(original[k] == (char) ch) {
+            return k;
+        }
+    }
+    return -1;
+}
+
+int String::indexOf(String str) const {
+    return string_index(original, str.original, 1);
+}
+
+int String::indexOf(String str, int fromIndex) const {
+//    return string_index(original, str.original, fromIndex);
+//    int length = length_pointer_char(original);
+//    if(fromIndex > length) {
+//        return -1;
+//    }
+//    int length_str = length_pointer_char(str.original);
+//    int index = 0;
+//    int temp;
+//    register int k = fromIndex;
+//    for(k; k < length; k++) {
+//       if(original[k] == str.original[index] ) {
+//
+//       }
+//    }
+//    return -1;
+}
+
+boolean String::isEmpty() const {
+    if(length_pointer_char(this->original) == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+int String::lastIndexOf(int ch) {
+    int length = length_pointer_char(original);
+    register int k = length - 1;
+    for( k; k >= 0; k--) {
+        if(charAt(k) == (char) ch) {
+            return k;
+        }
+    }
+    return -1;
+}
+
+int String::lastIndexOf(int ch, int fromIndex) {
+    int length = fromIndex;
+    register int k = length - 1;
+    for(k; k >= 0; k--) {
+        if(charAt(k) == (char) ch) {
+            return k;
+        }
+    }
+    return -1;
+}
