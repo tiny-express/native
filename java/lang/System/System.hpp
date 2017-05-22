@@ -38,14 +38,14 @@ namespace Java {
             };
             class out {
             public:
-                static void print(String *target);
-                static void println(String *target);
+                static void print(String target);
+                static void println(String target);
             };
             class err {
             };
             static void exit(int status);
             static void gc();
-            static String getenv(char* name);
+            static String getenv(string name);
         };
     }
 }

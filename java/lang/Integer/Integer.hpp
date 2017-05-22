@@ -40,14 +40,14 @@ namespace Java {
             Integer(const Integer &target);
             ~Integer();
         public:
-            char charValue() const override;
-            string stringValue() const override;
-            short shortValue() const override;
-            int intValue() const override;
-            long longValue() const override;
-            float floatValue() const override;
-            double doubleValue() const override;
-            String toString() const override;
+            char charValue() const;
+            string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            String toString() const;
             static Integer *parseInt(String target);
         };
     }

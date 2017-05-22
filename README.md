@@ -43,8 +43,9 @@ int main() {
 }
 ```
 ```bash
-$ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
-$ ./test
+$ g++ -c -o test.o ./test.cpp
+$ gcc -o native test.o libnative_static.a -lstdc++
+$ ./native
 ```
 
 #### Unit Test with C-Unit
