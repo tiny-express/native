@@ -24,17 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+extern "C" {
+#include "../../../unit_test.h"
+}
+#include "../System/System.hpp"
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
-
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
 using namespace Java::Lang;
 
-#endif //NATIVE_LIBRARY_HPP
+TEST(JavaLang, SystemOut) {
+    // String *string = new String("Hello World");
+    // System::out::println(string);
+}

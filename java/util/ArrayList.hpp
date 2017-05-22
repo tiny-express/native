@@ -24,17 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#ifndef NATIVE_JAVA_UTIL_ARRAYLIST_HPP
+#define NATIVE_JAVA_UTIL_ARRAYLIST_HPP
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+#include "AbstractList.hpp"
 
-#endif //NATIVE_LIBRARY_HPP
+namespace Java {
+    namespace Util {
+        template <class E>
+        class ArrayList: public virtual AbstractList {
+            bool add(E element);
+            void add(int index, E element);
+            bool addAll(Collection c);
+            bool contains(E element);
+            bool remove(int index);
+            bool remove(E element);
+            bool removeAll();
+            bool removeRange(int fromIndex, int toIndex);
+            E get(int index);
+            bool set(int index, E element);
+            int size();
+            bool isEmpty();
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_UTIL_ARRAYLIST_HPP

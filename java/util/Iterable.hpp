@@ -24,23 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
 
-#include <stdint.h>
-#include "json.h"
+#ifndef NATIVE_ITERABLE_H
+#define NATIVE_ITERABLE_H
 
-char* string_default(char* target);
-double number_default(double target);
+namespace Java {
+    namespace Util {
+        class Iterable {
+            virtual void forEach() = 0;
+        };
+    }
+}
 
-#define TRUE 1
-#define FALSE 0
-#define NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
-#ifndef NULL
-#define NULL 0
-#endif
-
-typedef unsigned char byte;
-
-#endif
+#endif //NATIVE_ITERABLE_H

@@ -24,17 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_LANG_ARRAY_HPP
+#define NATIVE_JAVA_LANG_ARRAY_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "../Object/Object.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+namespace Java {
+    namespace Lang {
+        template <typename E>
+        class Array : public virtual Object {
+        public:
+            Array();
+            Array(E *array);
+            Array(int length);
+            Array(const Array &target);
+            ~Array();
+        public:
+            E at(int index) const;
+            void push(E element);
+            int length() const;
+            String toString() const;
+        private:
+            std::vector<E> container;
+        };
+    }
+}
 
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVA_LANG_ARRAY_HPP

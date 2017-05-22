@@ -24,17 +24,41 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_LANG_OBJECT_H
+#define NATIVE_JAVA_LANG_OBJECT_H
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+extern "C" {
+#include "../../../builtin.h"
+};
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
 
-#endif //NATIVE_LIBRARY_HPP
+typedef bool boolean;
+typedef char* string;
+typedef const char* const_string;
+
+namespace Java {
+    namespace Lang {
+
+        // Pre-declaration
+        class Object;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class Boolean;
+        class String;
+
+        class Object {
+        protected:
+            virtual String toString() const = 0;
+            unsigned long hashCode();
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_OBJECT_H

@@ -24,17 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_NET_HPP
+#define NATIVE_JAVA_NET_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "net/URL/URL.hpp"
+#include "net/HttpURLConnection/HttpURLConnection.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
-
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVA_NET_HPP

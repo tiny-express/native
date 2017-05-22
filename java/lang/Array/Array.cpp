@@ -24,17 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#include "Array.hpp"
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
-
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
 using namespace Java::Lang;
 
-#endif //NATIVE_LIBRARY_HPP
+template <typename E>
+Array<E>::Array() {
+}
+
+template <typename E>
+Array<E>::Array(E *array) {
+}
+
+template <typename E>
+Array<E>::Array(int length) {
+}
+
+template <typename E>
+Array<E>::Array(const Array &target) {
+}
+
+template <typename E>
+Array<E>::~Array() {
+}
+
+//template <typename E>
+//String Array<E>::toString() const {
+//    string original = "serialize";
+//    return original;
+//}
+
