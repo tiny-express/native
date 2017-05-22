@@ -24,9 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <sstream>
 #include "Object.hpp"
 
 using namespace Java::Lang;
 
+unsigned long Object::hashCode() {
+    void *addr = this;
 
+    std::stringstream ss;
+    ss << addr;
 
+    unsigned long hashCode;
+//    hashCode = std::hash<string>()(ss.str()); //FIXME: should to change typealias of string
+    return hashCode;
+}

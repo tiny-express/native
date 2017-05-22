@@ -27,6 +27,10 @@
 #ifndef NATIVE_JAVA_UTIL_HPP
 #define NATIVE_JAVA_UTIL_HPP
 
+#include "util/AbstractCollection.hpp"
+#include "util/AbstractList.hpp"
 #include "util/ArrayList.hpp"
+#include "util/Collection.hpp"
+#include "util/Iterable.hpp"
 
 #endif//NATIVE_JAVA_UTIL_HPP

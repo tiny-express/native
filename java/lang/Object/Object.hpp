@@ -56,6 +56,7 @@ namespace Java {
         class Object {
         protected:
             virtual String toString() const = 0;
+            unsigned long hashCode();
         };
     }
 }
