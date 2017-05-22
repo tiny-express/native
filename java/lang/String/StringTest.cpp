@@ -43,38 +43,8 @@ TEST(JavaLang, StringConstructor) {
 //    ASSERT_STR("ABC", byteString.toCharArray());
 
     // Given constant string for String constructor - Return string
-    String normalString = "Hello world";
+    String normalString ="Hello world";
     ASSERT_STR("Hello world", normalString.toCharArray());
-}
-
-TEST(JavaLang, StringOperator) {
-    // Given two strings and concatenate them - Return string
-    String textPlus1 = "Hello ";
-    String textPlus2 = "World";
-    String textResult = textPlus1 + textPlus2;
-    ASSERT_STR("Hello World", textResult.toCharArray());
-
-    // Given two string and compare equal them - Return comparable
-    String textCompare1 = "Hello";
-    String textCompare2 = "Hello";
-    int comparable = FALSE;
-    if (textCompare1 == textCompare2) {
-        comparable = TRUE;
-    }
-    ASSERT_TRUE(comparable);
-
-    // Given two Strings and compare not equal them - Return comparable
-    textCompare1 = "Hello1";
-    textCompare2 = "Hello2";
-    comparable = FALSE;
-    if (textCompare1 != textCompare2) {
-        comparable = TRUE;
-    }
-    ASSERT_TRUE(comparable);
-}
-
-TEST(JavaLang, StringSplit) {
-
 }
 
 TEST(JavaLang, StringValueOf) {
@@ -117,4 +87,81 @@ TEST(JavaLang, StringValueOf) {
     double givenDoubleNumber = (double) 456.32423423424;
     String valueOfDouble = String::valueOf(givenDoubleNumber);
     ASSERT_STR("456.32423423424", valueOfDouble.toCharArray());
+}
+
+TEST(JavaLang, StringOperator) {
+    // Given two strings and concatenate them - Return string
+    String textPlus1 = "Hello ";
+    String textPlus2 = "World";
+    String textResult = textPlus1 + textPlus2;
+    ASSERT_STR("Hello World", textResult.toCharArray());
+
+    // Given two string and compare equal them - Return comparable
+    String textCompare1 = "Hello";
+    String textCompare2 = "Hello";
+    int comparable = FALSE;
+    if (textCompare1 == textCompare2) {
+        comparable = TRUE;
+    }
+    ASSERT_TRUE(comparable);
+
+    // Given two Strings and compare not equal them - Return comparable
+    textCompare1 = "Hello1";
+    textCompare2 = "Hello2";
+    comparable = FALSE;
+    if (textCompare1 != textCompare2) {
+        comparable = TRUE;
+    }
+    ASSERT_TRUE(comparable);
+}
+
+TEST(JavaLang, StringSplit) {
+
+}
+
+TEST(JavaLang, StringIndexOf) {
+    String textPlus1 = "Hello Hello Hello ";
+
+    int result2 = textPlus1.indexOf('H');
+    ASSERT_EQUAL(0, result2);
+
+    result2 = textPlus1.indexOf('l', 4);
+    ASSERT_EQUAL(8, result2);
+
+    result2 = textPlus1.indexOf("llo");
+    ASSERT_EQUAL(2, result2);
+
+//    result2 = textPlus1.indexOf("llo", 3);
+//    ASSERT_EQUAL(14, result2);
+
+    result2 = textPlus1.lastIndexOf('H');
+    ASSERT_EQUAL(12, result2);
+
+    result2 = textPlus1.lastIndexOf('H', 2);
+    ASSERT_EQUAL(0, result2);
+}
+
+TEST(JavaLang, StringIsEmpty) {
+    String textPlus1 = "Hello Hello Hello ";
+    ASSERT_TRUE(!textPlus1.isEmpty());
+
+    textPlus1 = "";
+    ASSERT_TRUE(textPlus1.isEmpty());
+}
+
+TEST(JavaLang, StringCharAt) {
+    String textPlus1 = "Hello Hello Hello ";
+    char result = textPlus1.charAt(0);
+    ASSERT_EQUAL('H', result);
+}
+
+TEST(JavaLang, StringConcat) {
+    String textPlus1 = "Hello Hello Hello ";
+    String textPlus2 = "phuoc";
+    String result1 = textPlus1.concat(textPlus2);
+    ASSERT_STR("Hello Hello Hello phuoc", result1.toCharArray());
+
+    textPlus2 = "";
+    result1 = textPlus1.concat(textPlus2);
+    ASSERT_STR("Hello Hello Hello ", result1.toCharArray());
 }
