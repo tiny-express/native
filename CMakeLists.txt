@@ -84,7 +84,6 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 file(GLOB_RECURSE SOURCES
     common/*
     context/*
-    compress/*
     crypto/*
     datetime/*
     java/*
@@ -107,7 +106,6 @@ file(GLOB_RECURSE HEADERS
 file(GLOB_RECURSE TESTS
     common/*_test.c
     context/*_test.c
-    compress/*_test.c
     crypto/*_test.c
     datetime/*_test.c
     java/**/*Test.cpp
@@ -132,7 +130,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES} generic/chr_test.cpp generic/ord_test.cpp java/lang/AbstractCollection.h java/lang/AbstractList.h java/lang/ArrayList.cpp java/lang/ArrayList.h)
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 # Add make test
 enable_testing()

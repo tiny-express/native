@@ -27,4 +27,9 @@
 #ifndef NATIVE_JAVA_IO_HPP
 #define NATIVE_JAVA_IO_HPP
 
+#include "io/Writer/Writer.hpp"
+#include "io/Reader/Reader.hpp"
+#include "io/BufferedReader/BufferedReader.hpp"
+#include "io/IOException/IOException.hpp"
+
 #endif//NATIVE_JAVA_IO_HPP

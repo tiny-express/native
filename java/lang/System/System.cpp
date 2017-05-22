@@ -24,27 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#include "System.hpp"
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+using namespace Java::Lang;
 
-#endif//NATIVE_JAVA_LANG_HPP
+void System::out::print(String target) {
+    char *targetCharacters = target.toCharArray();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s", targetCharacters);
+    fflush(stdout);
+}
 
+void System::out::println(String target) {
+    char *targetCharacters = target.toCharArray();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s\n", targetCharacters);
+    fflush(stdout);
+}
+
+void System::exit(int status) {
+    exit(status);
+}
+
+void System::gc() {
+}

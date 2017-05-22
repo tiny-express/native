@@ -24,27 +24,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#include "Array.hpp"
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+using namespace Java::Lang;
 
-#endif//NATIVE_JAVA_LANG_HPP
+template <typename E>
+Array<E>::Array() {
+}
+
+template <typename E>
+Array<E>::Array(E *array) {
+}
+
+template <typename E>
+Array<E>::Array(int length) {
+}
+
+template <typename E>
+Array<E>::Array(const Array &target) {
+}
+
+template <typename E>
+Array<E>::~Array() {
+}
+
+//template <typename E>
+//String Array<E>::toString() const {
+//    string original = "serialize";
+//    return original;
+//}
 

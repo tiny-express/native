@@ -24,27 +24,41 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#ifndef NATIVE_JAVA_LANG_OBJECT_H
+#define NATIVE_JAVA_LANG_OBJECT_H
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+extern "C" {
+#include "../../../builtin.h"
+};
 
-#endif//NATIVE_JAVA_LANG_HPP
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
 
+typedef bool boolean;
+typedef char* string;
+typedef const char* const_string;
+
+namespace Java {
+    namespace Lang {
+
+        // Pre-declaration
+        class Object;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class Boolean;
+        class String;
+
+        class Object {
+        protected:
+            virtual String toString() const = 0;
+            unsigned long hashCode();
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_OBJECT_H

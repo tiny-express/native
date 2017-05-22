@@ -33,4 +33,8 @@
 #include "java/Util.hpp"
 #include "java/Vendor.hpp"
 
+// In Java this namespace is imported by default
+// so we do the same thing here for C++
+using namespace Java::Lang;
+
 #endif //NATIVE_LIBRARY_HPP
