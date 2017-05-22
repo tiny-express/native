@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_EXCEPTION_HPP
 #define NATIVE_JAVA_LANG_EXCEPTION_HPP
 
-#include "Object.hpp"
-#include "String.hpp"
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
 #endif//NATIVE_JAVA_LANG_EXCEPTION_HPP

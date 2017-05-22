@@ -28,8 +28,8 @@
 
 using namespace Java::Lang;
 
-void System::out::print(String *target) {
-    char *targetCharacters = target->toCharArray();
+void System::out::print(String target) {
+    char *targetCharacters = target.toCharArray();
     if (is_empty(targetCharacters)) {
         return;
     }
@@ -37,8 +37,8 @@ void System::out::print(String *target) {
     fflush(stdout);
 }
 
-void System::out::println(String *target) {
-    char *targetCharacters = target->toCharArray();
+void System::out::println(String target) {
+    char *targetCharacters = target.toCharArray();
     if (is_empty(targetCharacters)) {
         return;
     }

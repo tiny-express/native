@@ -32,27 +32,23 @@
 namespace Java {
     namespace Lang {
         class Float : public virtual Number {
+        private:
+            float original;
         public:
             Float();
             Float(float original);
             Float(const Float &target);
             ~Float();
-
         public:
-            char charValue() const override;
-            string stringValue() const override;
-            short shortValue() const override;
-            int intValue() const override;
-            long longValue() const override;
-            float floatValue() const override;
-            double doubleValue() const override;
-            String toString() const override;
-
-        public:
+            char charValue() const;
+            string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            String toString() const;
             static Float *parseFloat(String target);
-
-        private:
-            float original;
         };
     }
 }

@@ -27,8 +27,8 @@
 #ifndef NATIVE_IO_BUFFERED_READER_HPP
 #define NATIVE_IO_BUFFERED_READER_HPP
 
-#include "../Lang.hpp"
-#include "Reader.hpp"
+#include "../../Lang.hpp"
+#include "../Reader/Reader.hpp"
 
 using namespace Java::Lang;
 
