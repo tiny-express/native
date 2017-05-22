@@ -3,20 +3,20 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 
-This library provides a set of low-level and productivity library for C/C++ application.
+This library provides low-level optimization and productivity library for C/C++ application.
 
-Beside standard library, we would like to have a greater customization with main goals:
+Beside standard library, we would like to have a greater customization with some goals:
 
 - Blazing fast performance with GAS & C
-- Powerful structured programming in C++ with scalability
-- Java standard packages with productivity & maintainability
-- Third party clients support for micro-services architecture
+- Powerful structured programming in C++ for scalability
+- Java standard packages for productivity & maintainability
+- Support third party services for Food Tiny micro-services
 
 This project is also useful for new developers in practical programming.
 
 ###  Optimization
-- This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux Amd64
-- C version of that function should be delivered first
+- This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux amd64
+- C version of every function should be delivered first
 
 ### Useful References
 - [Example for GNU Assembly](http://cs.lmu.edu/~ray/notes/gasexamples)
@@ -109,6 +109,19 @@ TEST(YourTestSuite, YourTestCase) {
 - [ ] Java.Lang.System
 - [ ] Java.Lang.Throwable
 ##### Java.IO
+- [ ] Java.Lang.BufferedReader
+- [ ] Java.Lang.FileWriter
+- [ ] Java.Lang.IOException
+- [ ] Java.Lang.OutputStreamWriter
+- [ ] Java.Lang.Reader
+- [ ] Java.Lang.Writer
 ##### Java.Util
+- [ ] Java.Util.AbstractCollection
+- [ ] Java.Util.ArrayList
+- [ ] Java.Util.HashMap
+- [ ] Java.Util.LinkedList
 ##### Java.Security
+- [ ] Java.Security.MessageDigest
 ##### Java.Net
+- [ ] Java.Net.URL
+- [ ] Java.Net.HttpURLConnection
