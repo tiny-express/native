@@ -34,7 +34,7 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace IO {
-        class BufferedReader : public virtual Reader {
+        class BufferedWriter : public virtual Reader {
 
         };
     }
