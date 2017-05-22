@@ -24,33 +24,31 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef NATIVE_ABSTRACTLIST_HPP
-#define NATIVE_ABSTRACTLIST_HPP
+#ifndef NATIVE_ABSTRACT_LIST_HPP
+#define NATIVE_ABSTRACT_LIST_HPP
 
-#include "AbstractCollection.hpp"
-#include "Collection.hpp"
+#include "../AbstractCollection/AbstractCollection.hpp"
+#include "../Collection/Collection.hpp"
 
 namespace Java {
     namespace Util {
         template <class E>
-        class AbstractList: public AbstractCollection {
+        class AbstractList : public virtual AbstractCollection<E> {
             protected:
-                virtual bool add(E element);
-                virtual void add(int index, E element);
-                virtual bool addAll(Collection c);
-                virtual bool contains(E element);
+                virtual bool add(E &element);
+                virtual void add(int index, E &element);
+                virtual bool addAll(Collection<E> &c);
+                virtual bool contains(E &element);
                 virtual bool remove(int index);
-                virtual bool remove(E element);
+                virtual bool remove(E &element);
                 virtual bool removeAll();
                 virtual bool removeRange(int fromIndex, int toIndex);
                 virtual E get(int index);
-                virtual bool set(int index, E element);
+                virtual bool set(int index, E &element);
                 virtual int size();
                 virtual bool isEmpty();
         };
     }
 }
 
-
-
-#endif //NATIVE_ABSTRACTLIST_HPP
+#endif //NATIVE_ABSTRACT_LIST_HPP

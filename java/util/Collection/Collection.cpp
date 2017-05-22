@@ -24,19 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../unit_test.h"
-}
-#include "../String/String.hpp"
-
-using namespace Java::Lang;
-
-TEST(JavaLang, ArrayConstructor) {
-//    Array emptyArray;
-//    emptyArray = {1, 2 , 3, 4, 5, 6};
-//    Array array = {1, 2, 3, 4,5};
-}
-
-
-TEST(JavaLang, ArrayLength) {
-}
+#include "Collection.hpp"

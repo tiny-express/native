@@ -24,27 +24,26 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef NATIVE_COLLECTION_HPP
-#define NATIVE_COLLECTION_HPP
+#ifndef NATIVE_UTIL_COLLECTION_HPP
+#define NATIVE_UTIL_COLLECTION_HPP
 
-#include "Iterable.hpp"
+#include "../Iterable/Iterable.hpp"
 
 namespace Java {
     namespace Util {
         template <class E>
-        class Collection: virtual public Iterable {
-            virtual bool add(E e) = 0;
-            virtual bool addAll(Collection<E> c) = 0;
+        class Collection: public virtual Iterable {
+            virtual bool add(E &e) = 0;
+            virtual bool addAll(Collection<E> &c) = 0;
             virtual void clear() = 0;
-            virtual bool contains(E e) = 0;
-            virtual bool containsAll(Collection<E> c) = 0;
-            virtual bool equals(E e) = 0;
+            virtual bool contains(E &e) = 0;
+            virtual bool containsAll(Collection<E> &c) = 0;
+            virtual bool equals(E &e) = 0;
             virtual int hashCode() = 0;
             virtual bool isEmpty() = 0;
-            virtual bool remove(E e) = 0;
-            virtual bool removeAll(Collection<E> c) = 0;
+            virtual bool remove(E &e) = 0;
+            virtual bool removeAll(Collection<E> &c) = 0;
             virtual int size() = 0;
-            //toArray
         };
     }
 }

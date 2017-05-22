@@ -38,7 +38,7 @@ TEST(JavaLang, StringConstructor) {
     ASSERT_STR("Hello world", emptyString.toCharArray());
 
     // Given byte array for String constructor - Return string
-//    byte bytes[4] = {65, 66, 67, 0};
+//    Array<byte> bytes = {65, 66, 67, 0};
 //    String byteString = bytes;
 //    ASSERT_STR("ABC", byteString.toCharArray());
 
