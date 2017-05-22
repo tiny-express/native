@@ -19,7 +19,7 @@ This project is also useful for new developers in practical programming.
 - C version of every function should be delivered first
 
 ### Useful References
-- [Example for GNU Assembly](http://cs.lmu.edu/~ray/notes/gasexamples)
+- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
 - [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
 - [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
