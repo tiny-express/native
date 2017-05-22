@@ -31,16 +31,22 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(JavaLang, Integer) {
-
+TEST(Java_Lang_Integer, Constructor) {
+    // Given empty value for Integer constructor and assign value - Return integer
     Integer emptyInteger;
     emptyInteger = 3;
     ASSERT_EQUAL(3, emptyInteger.intValue());
 
+    // Given value for Integer constructor and assign value - Return string
     Integer validInteger = 3;
     ASSERT_EQUAL(3, validInteger.intValue());
+}
 
+TEST(Java_Lang_Integer, Operator) {
+}
+
+TEST(Java_Lang_Integer, ParseInt) {
+    // Given value for Integer constructor and assign value - Return integer
     Integer *validIntegerPointer = Integer::parseInt("6");
     ASSERT_EQUAL(6, validIntegerPointer->intValue());
-
 }
