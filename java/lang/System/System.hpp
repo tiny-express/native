@@ -24,12 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_LANG_SYSTEM_HPP
+#define NATIVE_JAVA_LANG_SYSTEM_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
-#endif//NATIVE_JAVA_IO_HPP
+namespace Java {
+    namespace Lang {
+        class System : public virtual Object {
+        public:
+            class in {
+            };
+            class out {
+            public:
+                static void print(String *target);
+                static void println(String *target);
+            };
+            class err {
+            };
+            static void exit(int status);
+            static void gc();
+            static String getenv(char* name);
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_SYSTEM_HPP

@@ -8,7 +8,7 @@ This library provides a set of low-level and productivity functions for C/C++ ap
 Beside standard library, we would like to have a greater customization with main goals:
 
 - Blazing fast performance of GAS & C/C++
-- Using Java packages in C++ with human readable
+- Transfer powerful Java packages into C++ for productivity and maintainability
 - Third party clients support for Food Tiny micro-components will be in java.vendor
 
 This project is also useful for new developers in practical programming.
@@ -73,82 +73,22 @@ TEST(YourTestSuite, YourTestCase) {
 - At least one contributor in this project reviews your commits (except you) before merging
 - Please read guidelines in CONTRIBUTION.md
 
-
 # Documentation
 
-### C++ Functions
+#### Data Type
+- [ ] char - java.lang.Character
+- [ ] byte - java.lang.Byte
+- [x] string - java.lang.String
+- [ ] short - java.lang.Short
+- [x] int - java.lang.Integer
+- [x] long - java.lang.Long
+- [ ] float - java.lang.Float
+- [ ] double - java.lang.Double
+- [ ] boolean - java.lang.Boolean
 
-#### Type Casting
-- [ ] Short - short
-- [x] Integer - int
-- [x] Long - long
-- [x] Float - float
-- [x] Double - double
-- [x] String - char*
-- [x] Boolean - bool
-
-#### Collections
-- [ ] ArrayList
-- [ ] LinkedList
-- [ ] HashMap
-- [ ] HashSet
-- [ ] TreeSet
-- [ ] PriorityQueue
-
-#### Builtin Functions
-- [x] empty
-- [x] len
-- [ ] copy
-- [ ] split
-- [ ] trim
-- [ ] join
-- [ ] range
-- [ ] sorted
-- [ ] reversed
-- [ ] random
-- [ ] print
-- [ ] file
-- [ ] chr
-- [ ] ord
-- [x] round
-- [x] md5
-- [x] sha1
-- [ ] type
-
-### C Library
-#### Common
-- [x] length_pointer_char
-- [x] length_pointer_pointer_char
-- [x] join_pointer_pointer_char
-- [x] linear_search
-- [x] binary_search
-- [x] quick_sort
-- [x] segment_pointer_char
-- [x] segment_pointer_pointer_char
-#### Compress
-#### Crypto
-- [x] base64_encode
-- [x] base64_decode
-- [x] md5_encode
-- [x] sha1_encode
-#### Datetime
-- [x] date
-- [x] timestamp
-#### Network
-#### Storage
-#### String
-- [x] string_copy
-- [x] string_split
-- [x] string_concat
-#### System
-#### Thread
-- [x] set_interval
-- [x] set_timeout
-#### Validator
-- [x] is_phone_number
-- [x] is_email
-- [x] is_url
-#### Vendor
-- [x] send_sms
-- [x] send_mail
-- [x] send_notification
+### Java Packages
+##### java.lang
+##### java.io
+##### java.util
+##### java.security
+##### java.net

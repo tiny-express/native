@@ -27,16 +27,16 @@
 #ifndef NATIVE_JAVA_LANG_HPP
 #define NATIVE_JAVA_LANG_HPP
 
-#include "lang/Object.hpp"
-#include "lang/String.hpp"
-#include "lang/Comparable.hpp"
-#include "lang/Character.hpp"
-#include "lang/Byte.hpp"
-#include "lang/Short.hpp"
-#include "lang/Integer.hpp"
-#include "lang/Long.hpp"
-#include "lang/Float.hpp"
-#include "lang/Double.hpp"
+#include "lang/Object/Object.hpp"
+#include "lang/String/String.hpp"
+#include "lang/Comparable/Comparable.hpp"
+#include "lang/Character/Character.hpp"
+#include "lang/Byte/Byte.hpp"
+#include "lang/Short/Short.hpp"
+#include "lang/Integer/Integer.hpp"
+#include "lang/Long/Long.hpp"
+#include "lang/Float/Float.hpp"
+#include "lang/Double/Double.hpp"
 
 #endif//NATIVE_JAVA_LANG_HPP
 

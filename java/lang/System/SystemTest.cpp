@@ -24,12 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+extern "C" {
+#include "../../../unit_test.h"
+}
+#include "../System/System.hpp"
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+using namespace Java::Lang;
 
-#endif//NATIVE_JAVA_IO_HPP
+TEST(JavaLang, System) {
+    // String *string = new String("Hello World");
+    // System::out::println(string);
+}

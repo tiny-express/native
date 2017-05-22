@@ -24,12 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_LANG_ARRAY_HPP
+#define NATIVE_JAVA_LANG_ARRAY_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+#include "../Object/Object.hpp"
 
-#endif//NATIVE_JAVA_IO_HPP
+namespace Java {
+    namespace Lang {
+        template <typename E>
+        class Array : public virtual Object {
+        public:
+            Array();
+            Array(E *array);
+            Array(int length);
+            Array(const Array &target);
+            ~Array();
+        public:
+            E at(int index) const;
+            void push(E element);
+            int length() const;
+            String toString() const;
+        private:
+            std::vector<E> container;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_ARRAY_HPP

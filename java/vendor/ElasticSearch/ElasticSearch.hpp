@@ -24,12 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
+#define NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
-
-#endif//NATIVE_JAVA_IO_HPP
+#endif//NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP

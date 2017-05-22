@@ -24,12 +24,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_HPP
-#define NATIVE_JAVA_IO_HPP
+#ifndef NATIVE_JAVA_LANG_OBJECT_H
+#define NATIVE_JAVA_LANG_OBJECT_H
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
-#include "io/BufferedReader/BufferedReader.hpp"
-#include "io/IOException/IOException.hpp"
+extern "C" {
+#include "../../../builtin.h"
+};
 
-#endif//NATIVE_JAVA_IO_HPP
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
+
+typedef bool boolean;
+typedef char* string;
+typedef const char* const_string;
+
+namespace Java {
+    namespace Lang {
+
+        // Pre-declaration
+        class Object;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class Boolean;
+        class String;
+
+        class Object {
+        protected:
+            virtual String toString() const = 0;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_OBJECT_H

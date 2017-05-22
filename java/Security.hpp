@@ -27,6 +27,6 @@
 #ifndef NATIVE_JAVA_SECURITY_HPP
 #define NATIVE_JAVA_SECURITY_HPP
 
-#include "security/MessageDigest.hpp"
+#include "security/MessageDigest/MessageDigest.hpp"
 
 #endif//NATIVE_JAVA_SECURITY_HPP
