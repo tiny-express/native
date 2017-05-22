@@ -47,4 +47,3 @@
 #include "lang/Thowable/Throwable.hpp"
 
 #endif//NATIVE_JAVA_LANG_HPP
-

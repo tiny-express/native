@@ -27,10 +27,20 @@
 #ifndef NATIVE_JAVA_UTIL_HPP
 #define NATIVE_JAVA_UTIL_HPP
 
-#include "util/AbstractCollection.hpp"
-#include "util/AbstractList.hpp"
-#include "util/ArrayList.hpp"
-#include "util/Collection.hpp"
-#include "util/Iterable.hpp"
+#include "util/AbstractCollection/AbstractCollection.hpp"
+#include "util/AbstractList/AbstractList.hpp"
+#include "util/ArrayList/ArrayList.hpp"
+#include "util/Collection/Collection.hpp"
+#include "util/HashMap/HashMap.hpp"
+#include "util/HashSet/HashSet.hpp"
+#include "util/Iterable/Iterable.hpp"
+#include "util/LinkedList/LinkedList.hpp"
+#include "util/List/List.hpp"
+#include "util/Map/Map.hpp"
+#include "util/PriorityQueue/PriorityQueue.hpp"
+#include "util/Queue/Queue.hpp"
+#include "util/Set/Set.hpp"
+#include "util/Stack/Stack.hpp"
+#include "util/TreeSet/TreeSet.hpp"
 
 #endif//NATIVE_JAVA_UTIL_HPP

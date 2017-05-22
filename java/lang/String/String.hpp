@@ -87,5 +87,4 @@ namespace Java {
     }
 }
 
-
 #endif//#ifndef NATIVE_JAVA_LANG_STRING_HPP
