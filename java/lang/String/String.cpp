@@ -114,3 +114,10 @@ String String::valueOf(float target) {
 String String::valueOf(double target) {
     return string_from_double(target);
 }
+
+boolean String::isEmpty() const {
+    if (length_pointer_char(this->original) == 0) {
+        return true;
+    }
+    return false;
+}

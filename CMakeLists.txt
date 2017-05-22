@@ -99,7 +99,7 @@ file(GLOB_RECURSE SOURCES
 
 file(GLOB_RECURSE HEADERS
     ./*.h
-        library.hpp
+    library.hpp
 )
 
 # Include all unit test cases
