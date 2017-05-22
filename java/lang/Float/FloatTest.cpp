@@ -24,23 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
+extern "C" {
+#include "../../../unit_test.h"
+}
+#include "Float.hpp"
 
-#include <stdint.h>
-#include "json.h"
+using namespace Java::Lang;
 
-char* string_default(char* target);
-double number_default(double target);
+TEST(JavaLang, FloatConstructor) {
+    Float emptyFloat;
+    emptyFloat = 3.0;
+    ASSERT_EQUAL(3, emptyFloat.intValue());
 
-#define TRUE 1
-#define FALSE 0
-#define NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
-#ifndef NULL
-#define NULL 0
-#endif
+    Float validInteger = 3;
+    ASSERT_EQUAL(3, validInteger.intValue());
 
-typedef unsigned char byte;
+    Float *validIntegerPointer = Float::parseFloat("1.345");
+    ASSERT_EQUAL(1.3, validIntegerPointer->intValue());
+}
 
-#endif
+TEST(JavaLang, FloatOperator) {
+}
+
+TEST(JavaLang, FloatParseFloat) {
+}

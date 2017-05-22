@@ -24,17 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_IO_HPP
+#define NATIVE_JAVA_IO_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "io/Writer/Writer.hpp"
+#include "io/Reader/Reader.hpp"
+#include "io/BufferedReader/BufferedReader.hpp"
+#include "io/IOException/IOException.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
-
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVA_IO_HPP

@@ -24,17 +24,32 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_LANG_FLOAT_HPP
+#define NATIVE_JAVA_LANG_FLOAT_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "../Number/Number.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
-
-#endif //NATIVE_LIBRARY_HPP
+namespace Java {
+    namespace Lang {
+        class Float : public virtual Number {
+        private:
+            float original;
+        public:
+            Float();
+            Float(float original);
+            Float(const Float &target);
+            ~Float();
+        public:
+            char charValue() const;
+            string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            String toString() const;
+            static Float *parseFloat(String target);
+        };
+    }
+}
+#endif//NATIVE_JAVA_LANG_FLOAT_HPP

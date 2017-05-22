@@ -24,17 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_LANG_SYSTEM_HPP
+#define NATIVE_JAVA_LANG_SYSTEM_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+namespace Java {
+    namespace Lang {
+        class System : public virtual Object {
+        public:
+            class in {
+            };
+            class out {
+            public:
+                static void print(String target);
+                static void println(String target);
+            };
+            class err {
+            };
+            static void exit(int status);
+            static void gc();
+            static String getenv(string name);
+        };
+    }
+}
 
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVA_LANG_SYSTEM_HPP

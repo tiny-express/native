@@ -24,17 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#ifndef NATIVE_JAVA_LANG_NUMBER_HPP
+#define NATIVE_JAVA_LANG_NUMBER_HPP
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
-#endif //NATIVE_LIBRARY_HPP
+namespace Java {
+    namespace Lang {
+        class Number: public virtual Object {
+        protected:
+            virtual char charValue() const = 0;
+            virtual string stringValue() const = 0;
+            virtual short shortValue() const = 0;
+            virtual int intValue() const = 0;
+            virtual long longValue() const = 0;
+            virtual float floatValue() const = 0;
+            virtual double doubleValue() const = 0;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_NUMBER_HPP

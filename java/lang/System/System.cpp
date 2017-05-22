@@ -24,17 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#include "System.hpp"
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
-
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
 using namespace Java::Lang;
 
-#endif //NATIVE_LIBRARY_HPP
+void System::out::print(String target) {
+    char *targetCharacters = target.toCharArray();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s", targetCharacters);
+    fflush(stdout);
+}
+
+void System::out::println(String target) {
+    char *targetCharacters = target.toCharArray();
+    if (is_empty(targetCharacters)) {
+        return;
+    }
+    printf("%s\n", targetCharacters);
+    fflush(stdout);
+}
+
+void System::exit(int status) {
+    exit(status);
+}
+
+void System::gc() {
+}

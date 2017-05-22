@@ -24,17 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_VENDOR_HPP
+#define NATIVE_JAVA_VENDOR_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "vendor/ElasticSearch/ElasticSearch.hpp"
+#include "vendor/Etcd/Etcd.hpp"
+#include "vendor/Firebase/Firebase.hpp"
+#include "vendor/SendGrid/SendGrid.hpp"
+#include "vendor/Twilio/Twilio.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
-
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVA_VENDOR_HPP

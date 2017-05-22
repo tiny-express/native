@@ -24,17 +24,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
+#define NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
+#include "../IO.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
-using namespace Java::Lang;
+using namespace Java::Net;
 
-#endif //NATIVE_LIBRARY_HPP
+namespace Java {
+    namespace Vendor {
+        class AbstractVendor {
+        private:
+
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP

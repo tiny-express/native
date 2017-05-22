@@ -24,17 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+extern "C" {
+#include "../../../unit_test.h"
+}
+#include "Integer.hpp"
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-#include "java/Vendor.hpp"
-
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
 using namespace Java::Lang;
 
-#endif //NATIVE_LIBRARY_HPP
+TEST(JavaLang, IntegerConstructor) {
+    // Given empty value for Integer constructor and assign value - Return integer
+    Integer emptyInteger;
+    emptyInteger = 3;
+    ASSERT_EQUAL(3, emptyInteger.intValue());
+
+    // Given value for Integer constructor and assign value - Return string
+    Integer validInteger = 3;
+    ASSERT_EQUAL(3, validInteger.intValue());
+}
+
+TEST(JavaLang, IntegerOperator) {
+}
+
+TEST(JavaLang, IntegerParseInt) {
+    // Given value for Integer constructor and assign value - Return integer
+    Integer *validIntegerPointer = Integer::parseInt("6");
+    ASSERT_EQUAL(6, validIntegerPointer->intValue());
+}

@@ -24,23 +24,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
+#ifndef NATIVE_ABSTRACTCOLLECTION_HPP
+#define NATIVE_ABSTRACTCOLLECTION_HPP
 
-#include <stdint.h>
-#include "json.h"
+#include "../Lang.hpp"
+#include "Collection.hpp"
 
-char* string_default(char* target);
-double number_default(double target);
+using namespace Java::Lang;
 
-#define TRUE 1
-#define FALSE 0
-#define NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
-#ifndef NULL
-#define NULL 0
-#endif
+namespace Java {
+    namespace Util {
+        class AbstractCollection: public Object, public virtual Collection {
+        protected:
+            AbstractCollection();
+            ~AbstractCollection();
 
-typedef unsigned char byte;
+            //define functions
+        };
 
-#endif
+    }
+}
+
+#endif //NATIVE_ABSTRACTCOLLECTION_HPP
