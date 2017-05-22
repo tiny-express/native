@@ -15,13 +15,14 @@ Beside standard library, we would like to have a greater customization with main
 This project is also useful for new developers in practical programming.
 
 ###  Optimization
-- This library is originally developed in C but we still can make classes go faster by optimizing methods in GAS for Linux amd64
+- This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux Amd64
 - C version of that function should be delivered first
 
-### Useful Resources
-- Debugging & Profiling with [Valgrind](http://valgrind.org/)
-- Data Race Detector with [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
-- Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
+### Useful References
+- [Example for GNU Assembly](http://cs.lmu.edu/~ray/notes/gasexamples)
+- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
+- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
+- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 ### Get Started
 
@@ -36,7 +37,7 @@ $ sudo make install
 test.cpp
 ```cpp
 #include <native/native.hpp>
-using namespace java::lang;
+using namespace Java::Lang;
 int main() {
     String string = "Hello world";
     System::out::println(output);
@@ -54,24 +55,15 @@ main_test.cpp
 ```cpp
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
-
 #include <native/unit_test.h>
-
 int main(int argc, const char *argv[]) {
    int result = ctest_main(argc, argv);
    return result;
 }
-
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
 ```
-
-### Standard Reference
-- [Example for GNU Assembly](http://cs.lmu.edu/~ray/notes/gasexamples)
-- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
-- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
-- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 ### Contributors
 - Make sure that your commits must be passed before you create pull request
@@ -80,7 +72,7 @@ TEST(YourTestSuite, YourTestCase) {
 
 # Documentation
 
-#### Data Type
+#### Data Types
 - [x] char
 - [x] byte
 - [x] string
@@ -92,18 +84,34 @@ TEST(YourTestSuite, YourTestCase) {
 - [x] boolean
 
 ### Additional features outside Java packages
-- Java.Lang.Array
-- Java.Vendor.AbstractVendor
-- Java.Vendor.ElasticSearch
-- Java.Vendor.Etcd
-- Java.Vendor.Firebase
-- Java.Vendor.SendGrid
-- Java.Vendor.Twilio
+- [x] Java.Lang.Array
+- [ ] Java.Vendor.AbstractVendor
+- [ ] Java.Vendor.ElasticSearch
+- [ ] Java.Vendor.Etcd
+- [ ] Java.Vendor.Firebase
+- [ ] Java.Vendor.SendGrid
+- [ ] Java.Vendor.Twilio
 
 ### Java Standard Packages
-##### java.lang
-
-##### java.io
-##### java.util
-##### java.security
-##### java.net
+##### Java.Lang
+- [ ] Java.Lang.Boolean
+- [ ] Java.Lang.Byte
+- [ ] Java.Lang.Character
+- [ ] Java.Lang.CharSequence
+- [ ] Java.Lang.Comparable
+- [ ] Java.Lang.Double
+- [ ] Java.Lang.Exception
+- [ ] Java.Lang.Float
+- [x] Java.Lang.Integer
+- [ ] Java.Lang.Long
+- [ ] Java.Lang.Math
+- [ ] Java.Lang.Number
+- [ ] Java.Lang.Object
+- [ ] Java.Lang.Short
+- [x] Java.Lang.String
+- [ ] Java.Lang.System
+- [ ] Java.Lang.Throwable
+##### Java.IO
+##### Java.Util
+##### Java.Security
+##### Java.Net
