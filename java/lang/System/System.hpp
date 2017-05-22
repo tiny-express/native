@@ -24,27 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#ifndef NATIVE_JAVA_LANG_SYSTEM_HPP
+#define NATIVE_JAVA_LANG_SYSTEM_HPP
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
-#endif//NATIVE_JAVA_LANG_HPP
+namespace Java {
+    namespace Lang {
+        class System : public virtual Object {
+        public:
+            class in {
+            };
+            class out {
+            public:
+                static void print(String target);
+                static void println(String target);
+            };
+            class err {
+            };
+            static void exit(int status);
+            static void gc();
+            static String getenv(string name);
+        };
+    }
+}
 
+#endif//NATIVE_JAVA_LANG_SYSTEM_HPP

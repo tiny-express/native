@@ -24,27 +24,34 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#ifndef NATIVE_JAVA_LANG_INTEGER_HPP
+#define NATIVE_JAVA_LANG_INTEGER_HPP
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+#include "../Number/Number.hpp"
 
-#endif//NATIVE_JAVA_LANG_HPP
+namespace Java {
+    namespace Lang {
+        class Integer: public virtual Number {
+        private:
+            int original;
+        public:
+            Integer();
+            Integer(int original);
+            Integer(const Integer &target);
+            ~Integer();
+        public:
+            char charValue() const;
+            string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            String toString() const;
+            static Integer *parseInt(String target);
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_INTEGER_HPP
 

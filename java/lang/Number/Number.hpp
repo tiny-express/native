@@ -24,27 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-#include "lang/Array/Array.hpp"
-#include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
-#include "lang/Character/Character.hpp"
-#include "lang/CharSequence/CharSequence.hpp"
-#include "lang/Comparable/Comparable.hpp"
-#include "lang/Double/Double.hpp"
-#include "lang/Exception/Exception.hpp"
-#include "lang/Float/Float.hpp"
-#include "lang/Integer/Integer.hpp"
-#include "lang/Long/Long.hpp"
-#include "lang/Math/Math.hpp"
-#include "lang/Number/Number.hpp"
-#include "lang/Object/Object.hpp"
-#include "lang/Short/Short.hpp"
-#include "lang/String/String.hpp"
-#include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+#ifndef NATIVE_JAVA_LANG_NUMBER_HPP
+#define NATIVE_JAVA_LANG_NUMBER_HPP
 
-#endif//NATIVE_JAVA_LANG_HPP
+#include "../Object/Object.hpp"
+#include "../String/String.hpp"
 
+namespace Java {
+    namespace Lang {
+        class Number: public virtual Object {
+        protected:
+            virtual char charValue() const = 0;
+            virtual string stringValue() const = 0;
+            virtual short shortValue() const = 0;
+            virtual int intValue() const = 0;
+            virtual long longValue() const = 0;
+            virtual float floatValue() const = 0;
+            virtual double doubleValue() const = 0;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_NUMBER_HPP
