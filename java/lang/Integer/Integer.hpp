@@ -32,12 +32,13 @@
 namespace Java {
     namespace Lang {
         class Integer: public virtual Number {
+        private:
+            int original;
         public:
             Integer();
             Integer(int original);
             Integer(const Integer &target);
             ~Integer();
-
         public:
             char charValue() const override;
             string stringValue() const override;
@@ -47,12 +48,7 @@ namespace Java {
             float floatValue() const override;
             double doubleValue() const override;
             String toString() const override;
-
-        public:
             static Integer *parseInt(String target);
-
-        private:
-            int original;
         };
     }
 }

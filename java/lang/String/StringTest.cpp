@@ -114,7 +114,7 @@ TEST(Java_Lang_String, ValueOf) {
     ASSERT_STR("5.68", valueOfFloat.toCharArray());
 
     // Value of double number
-    double givenDoubleNumber = (double) 456.324234234234234234234234234234;
+    double givenDoubleNumber = (double) 456.32423423424;
     String valueOfDouble = String::valueOf(givenDoubleNumber);
-    ASSERT_STR("456.324234234234234234234234234234", valueOfDouble.toCharArray());
+    ASSERT_STR("456.32423423424", valueOfDouble.toCharArray());
 }
