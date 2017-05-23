@@ -49,7 +49,7 @@ namespace Java {
             boolean contains(CharSequence s);
             Array<byte> getBytes();
             boolean endsWith(String suffix);
-            int indexOf(int ch) const;git 
+            int indexOf(int ch) const;
             int indexOf(int ch, int fromIndex) const;
             int indexOf(String str) const;
             int indexOf(String str, int fromIndex) const;
