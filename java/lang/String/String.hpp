@@ -49,7 +49,7 @@ namespace Java {
             boolean contains(CharSequence s);
             Array<byte> getBytes();
             boolean endsWith(String suffix);
-            int indexOf(int ch) const;
+            int indexOf(int ch) const;git 
             int indexOf(int ch, int fromIndex) const;
             int indexOf(String str) const;
             int indexOf(String str, int fromIndex) const;
@@ -65,6 +65,7 @@ namespace Java {
             String replaceFirst(String regex, String replacement) const;
             String split(String regex) const;
             String split(String regex, int limit) const;
+            boolean startsWith(String prefix) const;
             boolean startsWith(String prefix, int toffset) const;
             string toCharArray() const;
             String toLowerCase() const;
