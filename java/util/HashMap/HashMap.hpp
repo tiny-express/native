@@ -23,3 +23,32 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "../../Lang.hpp"
+
+namespace Java {
+    namespace Util {
+        template <class K, class V>
+        class HashMap {
+        private:
+            std::map<K, V> hashMap;
+        public:
+            HashMap();
+            ~HashMap();
+
+            V get(K key);
+            void put(K key, V value);
+//            boolean putAll(HashMap map);
+//            boolean containsKey(string key);
+//            boolean containsValue(V value);
+//
+//            void clear();
+//            boolean remove(K key);
+//            boolean remove(K key, V value);
+//            boolean removeAll();
+//
+//            boolean isEmpty();
+//            int size();
+        };
+    }
+}

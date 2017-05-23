@@ -51,6 +51,7 @@ namespace Java {
         public:
             E& at(const int index) const;
             void push(E element);
+            boolean isEmpty();
             int length() const;
             String toString() const;
 
