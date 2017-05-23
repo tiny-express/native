@@ -28,6 +28,7 @@
 #include <python2.7/Python.h>
 
 void *start_mock_server() {
+    system("pkill python");
     FILE* file;
     Py_SetProgramName("mock server");
     Py_Initialize();

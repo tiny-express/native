@@ -183,6 +183,21 @@ char *http_path(char *url) {
 }
 
 /**
+ * get protocol of url
+ * @param url
+ * @return HTTP or HTTPS
+ */
+char* http_protocol(char* url) {
+    char* protocol = http_schema(url);
+    if (protocol == NULL) {
+        return NULL;
+    }
+    int length_protocol = length_pointer_char(protocol);
+    protocol = string_from_to(protocol, 0, length_protocol - 4); // remove "://"
+    return protocol;
+}
+
+/**
  * Send request to server with data in request body
  * This function can be used in general case with all requests
  *
