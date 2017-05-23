@@ -42,6 +42,7 @@ namespace Java {
         public:
             E at(int index) const;
             void push(E element);
+            boolean isEmpty();
             int length() const;
             String toString() const;
         private:
