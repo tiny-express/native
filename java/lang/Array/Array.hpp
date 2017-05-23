@@ -39,7 +39,6 @@ namespace Java {
             E *array;
             int virtualSize = 4;
             int realSize = 0;
-
             inline void reallocate();
         public:
             Array();

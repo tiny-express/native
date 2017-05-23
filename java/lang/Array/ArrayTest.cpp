@@ -28,13 +28,15 @@ extern "C" {
 #include "../../../unit_test.h"
 }
 
-#include "../../Util.hpp"
+#include "Array.hpp"
 
-using namespace Java::Util;
 using namespace Java::Lang;
 
 TEST(JavaLang, ArrayConstructor) {
+    Array<byte> bytes;
+    bytes = {65, 66, 67};
 
+    Array<String> = {"hello", "world"};
 }
 
 
