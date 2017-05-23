@@ -42,6 +42,7 @@ $ sudo make install
 
 #### Test Driven Development
 ```bash
+$ sudo pip install pip --upgrade
 $ sudo pip install -r mock/requirements.txt
 $ cmake . && make unit-test
 ```
