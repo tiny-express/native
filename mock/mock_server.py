@@ -5,8 +5,12 @@ from flask import request
 from flask import make_response
 from urlparse import parse_qs
 import json
+import logging
 
-app = Flask("demo")
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+app = Flask("NATIVE MOCK SERVER")
 
 FIREBASE_AUTH_FAIL_RESPONSE = "Server-key delivered or Sender is not authorized to perform request"
 
