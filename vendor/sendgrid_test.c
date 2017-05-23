@@ -27,8 +27,8 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-#define GRID_SERVICE_URL        "https://api.sendgrid.com/v3/mail/send"
-#define GRID_SERVICE_TOKEN      "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"
+#define GRID_SERVICE_URL        "http://localhost:9999/sendgrid"
+#define GRID_SERVICE_TOKEN      "foodtiny_token"
 #define GRID_SERVICE_MAIL_FROM  "sample_mail@sample.com"
 #define GRID_SERVICE_MAIL_TO    "testmail@gmail.com"
 #define GRID_SERVICE_SUBJECT    "Hello world"

@@ -29,11 +29,18 @@
 
 #include <pthread.h>
 #include "unit_test.h"
-#include "network.h"
+#include "mock.h"
+#include "thread.h"
 
 int main(int argc, const char *argv[]) {
-//    start_mock_server();
+    pthread_t thread;
+    int error = pthread_create(&thread, NULL, start_mock_server, NULL);
+    if (error) {
+        printf("could not start mock server\n");
+        exit(error);
+    }
+    sleep_miliseconds(150); // wait to mock server start
     int result = ctest_main(argc, argv);
-//    stop_mock_server();
+    pthread_cancel(thread);
     return result;
 }

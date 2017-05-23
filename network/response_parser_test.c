@@ -39,4 +39,21 @@ TEST(Network, Parser) {
 //    ASSERT_NULL(header3);
 //    ASSERT_NULL(header4);
 //    ASSERT_NULL(result);
+
+//    char* response2 = "POST /test HTTP/1.1\n"
+//            "Connection: close\n"
+//            "Host: localhost:9999\n"
+//            "Content-Length: 3\n"
+//            "\n"
+//            "a=b";
+//    http_response *result2 = parse(response2);
+//    ASSERT_STR("POST", result2->method);
+//    ASSERT_STR("/test", result2->path);
+//    ASSERT_STR("HTTP/1.1", result2->version);
+//    ASSERT_STR("Connection", result2->headers[0]->name);
+//    ASSERT_STR("close", result2->headers[0]->value);
+//    ASSERT_STR("Host", result2->headers[1]->name);
+//    ASSERT_STR("localhost:9999", result2->headers[1]->value);
+//    ASSERT_STR("Content-Length", result2->headers[2]->name);
+//    ASSERT_STR("3", result2->headers[2]->value);
 }

@@ -27,6 +27,7 @@
 #ifndef NATIVE_TYPE_H
 #define NATIVE_TYPE_H
 
+#include <stdint.h>
 #include "json.h"
 
 char* string_default(char* target);
@@ -36,9 +37,10 @@ double number_default(double target);
 #define FALSE 0
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
-
 #ifndef NULL
 #define NULL 0
 #endif
+
+typedef unsigned char byte;
 
 #endif

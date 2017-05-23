@@ -30,7 +30,7 @@
 #include <time.h>
 #include <stdio.h>
 
-TEST(General, QuickSort) {
+TEST(Common, QuickSort) {
     srand(time(NULL));
     int *array_int = malloc(50 * sizeof(int));
     int index;
@@ -43,7 +43,7 @@ TEST(General, QuickSort) {
     ASSERT_TRUE(result);
 }
 
-TEST(General, SortString) {
+TEST(Common, SortString) {
     char *target[] = {
         (char *) "The",
         (char *) "quick",
@@ -61,7 +61,7 @@ TEST(General, SortString) {
 //    ASSERT_TRUE(result);
 }
 
-TEST(General, DistributionCountingSort) {
+TEST(Common, DistributionCountingSort) {
     int *array_int = malloc(50 * sizeof(int));
     int index;
     for (index = 0; index < 50; ++index) {

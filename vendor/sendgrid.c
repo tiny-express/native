@@ -69,8 +69,7 @@ int send_mail(
     };
 
     char *response = http_request("POST", service_url, header, body);
-
-    if (strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
+    if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
         return FALSE;
     }
 

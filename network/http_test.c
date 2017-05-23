@@ -128,12 +128,25 @@ TEST(Network, HttpRequest) {
 		'\0'
 	};
 
-	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
-	printf("response: \n%s\n", response);
-    ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
+	char *response = http_request("POST", "http://localhost:9999/test", headers, body);
+    ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
 
-    response = http_request("GET", "http://httpbin.org/get", headers, body);
-    ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
+    response = http_request("GET", "http://localhost:9999/test", headers, body);
+    ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
+}
+
+TEST(Network, HttpProtocol) {
+	char *protocol_http = http_protocol("http://google.com");
+	ASSERT_STR("http", protocol_http);
+
+	char *protocol_https = http_protocol("https://facebook.com");
+	ASSERT_STR("https", protocol_https);
+
+	char *protocol_null = http_protocol("");
+	ASSERT_EQUAL(NULL, protocol_null);
+
+	protocol_null = http_protocol("ht tp://google.com/");
+	ASSERT_EQUAL(NULL, protocol_null);
 }
 
 TEST(Network, HttpPath) {
