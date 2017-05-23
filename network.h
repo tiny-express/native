@@ -24,8 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "network/response_parser.h"
-
 #ifndef NATIVE_NETWORK_H
 #define NATIVE_NETWORK_H
 
@@ -49,12 +47,4 @@ void start_mock_server();
 void stop_mock_server();
 void send_response(int client_id, char* content);
 
-
-void on_firebase_receive_request(int client_id, http_response* content);
-
-void on_twilio_receive_request(int client_id, http_response* content);
-
-void on_sendgrid_receive_request(int client_id, http_response* content);
-
-void on_test_http_request(int client_id, http_response* content);
 #endif

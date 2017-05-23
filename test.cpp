@@ -1,4 +1,4 @@
-#include "library.hpp"
+#include <native/library.hpp>
 
 int main() {
     String text = "Hello world";

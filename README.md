@@ -26,16 +26,18 @@ This project is also useful for new developers in practical programming.
 
 ### Get Started
 
+#### Prerequisites
+- [x] CMake 2.8
+- [x] GCC 4.8.1
+- [x] OpenSSL
+- [x] Zlib
+
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
 $ cmake . && make -j && make test
 $ sudo make install
 ```
-
-#### Dependencies
-- [x] OpenSSL
-- [x] Zlib
 
 #### Usage (test.cpp)
 ```cpp
