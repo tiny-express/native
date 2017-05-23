@@ -135,6 +135,20 @@ TEST(Network, HttpRequest) {
     ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
 }
 
+TEST(Network, HttpProtocol) {
+	char *protocol_http = http_protocol("http://google.com");
+	ASSERT_STR("http", protocol_http);
+
+	char *protocol_https = http_protocol("https://facebook.com");
+	ASSERT_STR("https", protocol_https);
+
+	char *protocol_null = http_protocol("");
+	ASSERT_EQUAL(NULL, protocol_null);
+
+	protocol_null = http_protocol("ht tp://google.com/");
+	ASSERT_EQUAL(NULL, protocol_null);
+}
+
 TEST(Network, HttpPath) {
     char *target = "http://localhost/index/file1/key.pem?key1=value1&key2=value2:3000";
     char *result = http_path(target);
