@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_LONG_HPP
 #define NATIVE_JAVA_LANG_LONG_HPP
 
-#include "Number.hpp"
+#include "../Number/Number.hpp"
 
 namespace Java {
     namespace Lang {
