@@ -25,3 +25,5 @@
  */
 
 #include "HashMap.hpp"
+
+T get(string key);
