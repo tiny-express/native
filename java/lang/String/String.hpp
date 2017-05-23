@@ -40,14 +40,14 @@ namespace Java {
             String();
             String(const_string original);
             String(string original);
-            String(Array<byte> bytes);
+            //String(Array<byte> bytes);
             String(const String &target);
             ~String();
         public:
             char charAt(int index);
             String concat(String str);
             boolean contains(CharSequence s);
-            Array<byte> getBytes();
+            //Array<byte> &getBytes();
             boolean endsWith(String suffix);
             int indexOf(int ch) const;
             int indexOf(int ch, int fromIndex) const;
@@ -65,6 +65,7 @@ namespace Java {
             String replaceFirst(String regex, String replacement) const;
             String split(String regex) const;
             String split(String regex, int limit) const;
+            boolean startsWith(String prefix) const;
             boolean startsWith(String prefix, int toffset) const;
             string toCharArray() const;
             String toLowerCase() const;
@@ -86,6 +87,5 @@ namespace Java {
         };
     }
 }
-
 
 #endif//#ifndef NATIVE_JAVA_LANG_STRING_HPP

@@ -38,13 +38,122 @@ TEST(JavaLang, StringConstructor) {
     ASSERT_STR("Hello world", emptyString.toCharArray());
 
     // Given byte array for String constructor - Return string
-//    byte bytes[4] = {65, 66, 67, 0};
+//    Array<byte> bytes = {65, 66, 67, 0};
 //    String byteString = bytes;
 //    ASSERT_STR("ABC", byteString.toCharArray());
 
     // Given constant string for String constructor - Return string
     String normalString ="Hello world";
     ASSERT_STR("Hello world", normalString.toCharArray());
+}
+
+TEST(JavaLang, StringCharAt) {
+    String textPlus = "Hello Hello Hello ";
+    char result = textPlus.charAt(0);
+    ASSERT_EQUAL('H', result);
+}
+
+TEST(JavaLang, StringConcat) {
+    String textPlus1 = "Hello Hello Hello ";
+    String textPlus2 = "phuoc";
+    String result1 = textPlus1.concat(textPlus2);
+    ASSERT_STR("Hello Hello Hello phuoc", result1.toCharArray());
+
+    textPlus2 = "";
+    result1 = textPlus1.concat(textPlus2);
+    ASSERT_STR("Hello Hello Hello ", result1.toCharArray());
+}
+
+TEST(JavaLang, StringEndsWith) {
+    String textPlus = "Hello welcom to VietNam";
+
+    String String_string = "VietNam";
+    ASSERT_TRUE(textPlus.endsWith(String_string));
+}
+
+
+TEST(JavaLang, StringIndexOf) {
+    String textPlus = "Hello Hello Hello ";
+
+    int result = textPlus.indexOf('H');
+    ASSERT_EQUAL(0, result);
+
+    result = textPlus.indexOf('l', 4);
+    ASSERT_EQUAL(8, result);
+
+    result = textPlus.indexOf("llo");
+    ASSERT_EQUAL(2, result);
+
+//    result2 = textPlus1.indexOf("llo", 3);
+//    ASSERT_EQUAL(14, result2);
+
+    int result1 = textPlus.lastIndexOf('H');
+    ASSERT_EQUAL(12, result1);
+
+    result1 = textPlus.lastIndexOf('H', 2);
+    ASSERT_EQUAL(0, result1);
+}
+
+TEST(JavaLang, StringIsEmpty) {
+    String textPlus = "Hello Hello Hello ";
+    ASSERT_TRUE(!textPlus.isEmpty());
+
+    textPlus = "";
+    ASSERT_TRUE(textPlus.isEmpty());
+}
+
+
+TEST(JavaLang, StringLength) {
+    String textPlus = "Hello Hello Hello ";
+
+    ASSERT_EQUAL(18, textPlus.length());
+
+    textPlus = "";
+    ASSERT_EQUAL(0, textPlus.length());
+}
+
+TEST(JavaLang, StringReplace) {
+    String textPlus = "Hello Hello Hello ";
+
+    String result = textPlus.replace('e', 'i');
+    ASSERT_STR("Hillo Hillo Hillo ", result.toCharArray());
+
+    String String_string1 = "Hello";
+    String String_string2 = "Phuoc";
+    result = textPlus.replaceAll(String_string1, String_string2);
+    ASSERT_STR("Phuoc Phuoc Phuoc ", result.toCharArray());
+}
+
+TEST(JavaLang, StringSplit) {
+
+}
+
+TEST(JavaLang, StringStartsWith) {
+    String textPlus = "Hello Hello Hello ";
+
+    String String_string = "Hello";
+    ASSERT_TRUE(textPlus.startsWith(String_string));
+}
+
+TEST(JavaLang, StringToLowerCase) {
+    String textPlus = "Hello HELLO Hello ";
+
+    String result = textPlus.toLowerCase();
+    ASSERT_STR("hello hello hello ", result.toCharArray());
+}
+
+TEST(JavaLang, StringToUpperCase) {
+    String textPlus = "Hello HELLO Hello ";
+
+    String result = textPlus.toUpperCase();
+    ASSERT_STR("HELLO HELLO HELLO ", result.toCharArray());
+}
+
+TEST(JavaLang, StringTrim) {
+    String textPlus = " Hello HELLO Hello ";
+
+    String result = textPlus.trim();
+    ASSERT_STR("Hello HELLO Hello", result.toCharArray());
 }
 
 TEST(JavaLang, StringValueOf) {
@@ -115,53 +224,4 @@ TEST(JavaLang, StringOperator) {
     ASSERT_TRUE(comparable);
 }
 
-TEST(JavaLang, StringSplit) {
 
-}
-
-TEST(JavaLang, StringIndexOf) {
-    String textPlus1 = "Hello Hello Hello ";
-
-    int result2 = textPlus1.indexOf('H');
-    ASSERT_EQUAL(0, result2);
-
-    result2 = textPlus1.indexOf('l', 4);
-    ASSERT_EQUAL(8, result2);
-
-    result2 = textPlus1.indexOf("llo");
-    ASSERT_EQUAL(2, result2);
-
-//    result2 = textPlus1.indexOf("llo", 3);
-//    ASSERT_EQUAL(14, result2);
-
-    result2 = textPlus1.lastIndexOf('H');
-    ASSERT_EQUAL(12, result2);
-
-    result2 = textPlus1.lastIndexOf('H', 2);
-    ASSERT_EQUAL(0, result2);
-}
-
-TEST(JavaLang, StringIsEmpty) {
-    String textPlus1 = "Hello Hello Hello ";
-    ASSERT_TRUE(!textPlus1.isEmpty());
-
-    textPlus1 = "";
-    ASSERT_TRUE(textPlus1.isEmpty());
-}
-
-TEST(JavaLang, StringCharAt) {
-    String textPlus1 = "Hello Hello Hello ";
-    char result = textPlus1.charAt(0);
-    ASSERT_EQUAL('H', result);
-}
-
-TEST(JavaLang, StringConcat) {
-    String textPlus1 = "Hello Hello Hello ";
-    String textPlus2 = "phuoc";
-    String result1 = textPlus1.concat(textPlus2);
-    ASSERT_STR("Hello Hello Hello phuoc", result1.toCharArray());
-
-    textPlus2 = "";
-    result1 = textPlus1.concat(textPlus2);
-    ASSERT_STR("Hello Hello Hello ", result1.toCharArray());
-}

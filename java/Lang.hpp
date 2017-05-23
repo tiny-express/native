@@ -27,13 +27,18 @@
 #ifndef NATIVE_JAVA_LANG_HPP
 #define NATIVE_JAVA_LANG_HPP
 
+#include "lang/Appendable/Appendable.hpp"
 #include "lang/Array/Array.hpp"
+#include "lang/AutoCloseable/AutoCloseable.hpp"
 #include "lang/Boolean/Boolean.hpp"
 #include "lang/Byte/Byte.hpp"
 #include "lang/Character/Character.hpp"
 #include "lang/CharSequence/CharSequence.hpp"
+#include "lang/Cloneable/Cloneable.hpp"
 #include "lang/Comparable/Comparable.hpp"
 #include "lang/Double/Double.hpp"
+#include "lang/Enum/Enum.hpp"
+#include "lang/Error/Error.hpp"
 #include "lang/Exception/Exception.hpp"
 #include "lang/Float/Float.hpp"
 #include "lang/Integer/Integer.hpp"
@@ -41,10 +46,12 @@
 #include "lang/Math/Math.hpp"
 #include "lang/Number/Number.hpp"
 #include "lang/Object/Object.hpp"
+#include "lang/Readable/Readable.hpp"
+#include "lang/Runnable/Runnable.hpp"
 #include "lang/Short/Short.hpp"
 #include "lang/String/String.hpp"
 #include "lang/System/System.hpp"
 #include "lang/Thowable/Throwable.hpp"
+#include "lang/Thread/Thread.hpp"
 
 #endif//NATIVE_JAVA_LANG_HPP
-

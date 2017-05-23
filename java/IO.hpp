@@ -27,9 +27,25 @@
 #ifndef NATIVE_JAVA_IO_HPP
 #define NATIVE_JAVA_IO_HPP
 
-#include "io/Writer/Writer.hpp"
-#include "io/Reader/Reader.hpp"
 #include "io/BufferedReader/BufferedReader.hpp"
+#include "io/BufferedWriter/BufferedWriter.hpp"
+#include "io/CharArrayWriter/CharArrayWriter.hpp"
+#include "io/Console/Console.hpp"
+#include "io/FileDescriptor/FileDescriptor.hpp"
+#include "io/FileFilter/FileFilter.hpp"
+#include "io/FileWriter/FileWriter.hpp"
+#include "io/InputStream/InputStream.hpp"
+#include "io/IOError/IOError.hpp"
 #include "io/IOException/IOException.hpp"
+#include "io/ObjectInput/ObjectInput.hpp"
+#include "io/ObjectOutput/ObjectOutput.hpp"
+#include "io/OutputStream/OutputStream.hpp"
+#include "io/OutputStreamWriter/OutputStreamWriter.hpp"
+#include "io/PipedWriter/PipedWriter.hpp"
+#include "io/PrintWriter/PrintWriter.hpp"
+#include "io/Reader/Reader.hpp"
+#include "io/Serializable/Serializable.hpp"
+#include "io/StreamTokenizer/StreamTokenizer.hpp"
+#include "io/Writer/Writer.hpp"
 
 #endif//NATIVE_JAVA_IO_HPP

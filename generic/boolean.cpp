@@ -42,6 +42,23 @@ bool Boolean(char *target) {
  * @param target
  * @return bool
  */
+template<> bool Boolean(std::string target) {
+    return string_to_double((char*) target.c_str()); //here
+}
+template bool Boolean<std::string>(std::string target);
+
+/**
+ * Boolean value of char pointer
+ *
+ * @param target
+ * @return bool
+ */
+ 
+template<> bool Boolean(char *target) {
+    return string_to_double(target);
+}
+
+template bool Boolean<char*>(char *target);
 bool Boolean(std::string target) {
     return string_to_boolean(string_lower((char*) target.c_str()));
 }
@@ -49,7 +66,7 @@ bool Boolean(std::string target) {
 /**
  * Boolean value of integer
  *
- * @param target
+ * @param targetl
  * @return bool
  */
 bool Boolean(int target) {
@@ -66,4 +83,17 @@ bool Boolean(long target) {
     return (bool) target;
 }
 
+template bool Boolean<double>(double target);
+
+/**
+ * Boolean value of boolean
+ *
+ * @param target
+ * @return bool
+ */
+template<> bool Boolean(bool target) {
+    return (bool) floor(target);
+}
+
+template bool Boolean<bool>(bool target);
 
