@@ -27,17 +27,23 @@ This project is also useful for new developers in practical programming.
 ### Get Started
 
 #### Prerequisites
-- [x] >= CMake 2.8
-- [x] >= GCC 4.8.1 for C++11
-- [x] >= Python 2.6 for Mock Server
+- [x] CMake ~ 2.8
+- [x] GCC ~ 4.8.1
+- [x] Python ~ 2.7
 - [x] OpenSSL
 - [x] Zlib
 
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make -j && make test
+$ cmake . && make -j
 $ sudo make install
+```
+
+#### Test Driven Development
+```bash
+$ sudo pip install -r mock/requirements.txt
+$ cmake . && make unit-test
 ```
 
 #### Usage (test.cpp)

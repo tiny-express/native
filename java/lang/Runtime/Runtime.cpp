@@ -24,37 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
-
-#ifndef NATIVE_JAVA_LANG_MATH_HPP
-#define NATIVE_JAVA_LANG_MATH_HPP
-
-#include "../String/String.hpp"
-
-namespace Java {
-    namespace Lang {
-        class Math final: public virtual Object {
-        public:
-            static double abs(double a);
-            static float abs(float a);
-            static int abs(int a);
-            static long abs(long a);
-            static double floor(double a);
-            static double max(double a, double b);
-            static float max(float a, float b);
-            static int	max(int a, int b);
-            static long	max(long a, long b);
-            static double min(double a, double b);
-            static float min(float a, float b);
-            static int	min(int a, int b);
-            static double pow(double a, double b);
-            static double random();
-            static long	round(double a);
-            static int round(float a);
-            static double sqrt(double a);
-            String toString() const;
-        };
-    }
-}
-
-#endif//NATIVE_JAVA_LANG_MATH_HPP
+#include "Runtime.hpp"

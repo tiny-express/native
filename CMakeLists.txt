@@ -134,8 +134,10 @@ add_library(${PROJECT_NAME}_static ${SOURCES})
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 # Add make test
-enable_testing()
-add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
+add_custom_target(
+    unit-test
+    COMMAND ./${PROJECT_NAME}_test
+)
 
 # Add make installation - install to Unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
