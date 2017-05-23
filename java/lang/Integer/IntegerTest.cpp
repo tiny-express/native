@@ -31,13 +31,8 @@ extern "C" {
 
 using namespace Java::Lang;
 
-<<<<<<< HEAD:java/lang/IntegerTest.cpp
-TEST(JavaLang, Integer) {
-    
-=======
 TEST(JavaLang, IntegerConstructor) {
     // Given empty value for Integer constructor and assign value - Return integer
->>>>>>> 507d4403b635e482d4aad8efda05609143d06176:java/lang/Integer/IntegerTest.cpp
     Integer emptyInteger;
     emptyInteger = 3;
     ASSERT_EQUAL(3, emptyInteger.intValue());
