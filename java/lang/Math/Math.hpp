@@ -33,8 +33,13 @@
 
 namespace Java {
     namespace Lang {
-        class Math: public virtual Object {
+        class Math final: public virtual Object {
         public:
+            static double abs(double a);
+            static float abs(float a);
+            static int abs(int a);
+            static long abs(long a);
+            static double floor(double a);
             static double max(double a, double b);
             static float max(float a, float b);
             static int	max(int a, int b);
@@ -42,8 +47,11 @@ namespace Java {
             static double min(double a, double b);
             static float min(float a, float b);
             static int	min(int a, int b);
+            static double pow(double a, double b);
+            static double random();
             static long	round(double a);
-            static int	round(float a);
+            static int round(float a);
+            static double sqrt(double a);
         };
     }
 }
