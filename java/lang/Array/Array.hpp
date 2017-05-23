@@ -40,19 +40,21 @@ namespace Java {
             int virtualSize = 4;
             int realSize = 0;
             inline void reallocate();
+
         public:
             Array();
             Array(byte *bytes);
             Array(int length);
             Array(const Array<E> &target);
-            Array(int length, E defaulValue);
+            Array(int length, E defaultValue);
             ~Array();
 
         public:
             E& at(const int index) const;
             void push(E element);
-            boolean isEmpty();
+            boolean isEmpty() const;
             int length() const;
+
         public:
             E& operator[] (const int index);
         };
@@ -75,6 +77,7 @@ namespace Java {
          */
         template <typename E>
         Array<E>::Array(byte *bytes) {
+
         }
 
         /**
@@ -109,20 +112,20 @@ namespace Java {
         }
 
         /**
-         * Array initialization with length and each element is equal to defaulValue
+         * Array initialization with length and each element is equal to defaultValue
          *
          * @tparam E
          * @param length
-         * @param defaulValue
+         * @param defaultValue
          */
         template <typename E>
-        Array<E>::Array(int length, E defaulValue) {
+        Array<E>::Array(int length, E defaultValue) {
             this->virtualSize = length << 2;
             this->realSize = length;
 
             int index;
             for (index = 0; index < this->realSize; ++index) {
-                this->array[index] = defaulValue;
+                this->array[index] = defaultValue;
             }
         }
 
@@ -150,6 +153,11 @@ namespace Java {
                 delete []this->array;
                 this->array = newArray;
             }
+        }
+
+        template <typename E>
+        boolean Array<E>::isEmpty() const {
+            return (this->realSize == 0);
         }
 
         /**

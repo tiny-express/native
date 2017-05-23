@@ -25,4 +25,3 @@
  */
 
 #include "Array.hpp"
-
