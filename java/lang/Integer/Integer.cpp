@@ -73,7 +73,7 @@ Integer *Integer::parseInt(String target) {
  *
  * @return String
  */
-String Integer::toString() const  {
+String Integer::toString() const {
     return string_from_int(this->original);
 }
 
