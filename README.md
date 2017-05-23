@@ -18,13 +18,19 @@ This project is also useful for new developers in practical programming.
 - This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux amd64
 - C version of every function should be delivered first
 
-### Useful References
+### Useful resource
 - [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
 - [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
 - [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 ### Get Started
+
+#### Prerequisites
+- [x] CMake 2.8
+- [x] GCC 4.8.1
+- [x] OpenSSL
+- [x] Zlib
 
 #### Installation
 ```bash
@@ -33,7 +39,7 @@ $ cmake . && make -j && make test
 $ sudo make install
 ```
 
-#### Sample program (test.cpp)
+#### Usage (test.cpp)
 ```cpp
 #include <native/library.hpp>
 int main() {
@@ -63,7 +69,7 @@ TEST(YourTestSuite, YourTestCase) {
 ```
 
 ### Contributors
-- This library must be followed Oracle Java 8 documentation for standardization
+- This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
@@ -84,6 +90,7 @@ All data types are implemented and ready to use in C++ Application
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
+
 ##### Java.Lang
 - [ ] Java.Lang.Appendable
 - [ ] Java.Lang.Autocloseable
@@ -105,7 +112,6 @@ All Java packages are in transformation so we can have a general look about road
 - [x] Java.Lang.Object
 - [ ] Java.Lang.Readable
 - [ ] Java.Lang.Runnable
-- [ ] Java.Lang.
 - [x] Java.Lang.Short
 - [x] Java.Lang.String
 - [ ] Java.Lang.System
@@ -132,16 +138,56 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Serializable
 - [ ] Java.Lang.StreamTokenizer
 - [ ] Java.Lang.Writer
+
 ##### Java.Util
 - [ ] Java.Util.AbstractCollection
+- [ ] Java.Util.AbstractList
+- [ ] Java.Util.AbstractMap
+- [ ] Java.Util.AbstractSet
 - [ ] Java.Util.ArrayList
+- [ ] Java.Util.Arrays
+- [ ] Java.Util.BitSet
+- [ ] Java.Util.Base64
+- [ ] Java.Util.Calendar
+- [ ] Java.Util.Collection
+- [ ] Java.Util.Collections
+- [ ] Java.Util.Currency
+- [ ] Java.Util.Date
+- [ ] Java.Util.EnumMap
+- [ ] Java.Util.EnumSet
 - [ ] Java.Util.HashMap
+- [ ] Java.Util.HashSet
+- [ ] Java.Util.Iterable
+- [ ] Java.Util.LinkedListHashSet
 - [ ] Java.Util.LinkedList
+- [ ] Java.Util.List
+- [ ] Java.Util.Map
+- [ ] Java.Util.Observable
+- [ ] Java.Util.PriorityQueue
+- [ ] Java.Util.Queue
+- [ ] Java.Util.Random
+- [ ] Java.Util.Scanner
+- [ ] Java.Util.Set
+- [ ] Java.Util.SimpleTimeZone
+- [ ] Java.Util.Stack
+- [ ] Java.Util.Timer
+- [ ] Java.Util.TimerTask
+- [ ] Java.Util.TimeZone
+- [ ] Java.Util.TreeSet
+- [ ] Java.Util.UUID
+- [ ] Java.Util.Vector
+
 ##### Java.Security
+- [ ] Java.Security.Certificate
+- [ ] Java.Security.KeyFactory
+- [ ] Java.Security.KeyStore
 - [ ] Java.Security.MessageDigest
+
 ##### Java.Net
-- [ ] Java.Net.URL
 - [ ] Java.Net.HttpURLConnection
+- [ ] Java.Net.URL
+- [ ] Java.Net.URLEncoder
+- [ ] Java.Net.URLDecoder
 
 #### Additional features outside Java packages
 - [x] Java.Lang.Array

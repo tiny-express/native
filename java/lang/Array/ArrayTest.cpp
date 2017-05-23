@@ -28,8 +28,9 @@ extern "C" {
 #include "../../../unit_test.h"
 }
 
-#include "../Array/Array.hpp"
+#include "../../Util.hpp"
 
+using namespace Java::Util;
 using namespace Java::Lang;
 
 TEST(JavaLang, ArrayConstructor) {

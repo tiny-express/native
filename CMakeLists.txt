@@ -83,7 +83,6 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 # Include all C and Unix Assembly files
 file(GLOB_RECURSE SOURCES
     common/*
-    context/*
     crypto/*
     datetime/*
     java/*
@@ -105,7 +104,6 @@ file(GLOB_RECURSE HEADERS
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
     common/*_test.c
-    context/*_test.c
     crypto/*_test.c
     datetime/*_test.c
     java/**/*Test.cpp
@@ -130,13 +128,13 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} java/util/AbstractMap/AbstractMap.cpp java/util/AbstractMap/AbstractMap.h java/util/HashMap/HashMapTest.cpp)
 
 # Add make test
 enable_testing()
 add_test(${PROJECT_NAME}_test ./${PROJECT_NAME}_test)
 
-# Add make install - installation to unix system
+# Add make installation - install to Unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install (TARGETS ${PROJECT_NAME} DESTINATION lib)
 install (FILES ${HEADERS} DESTINATION include/native)
