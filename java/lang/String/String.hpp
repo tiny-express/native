@@ -40,14 +40,14 @@ namespace Java {
             String();
             String(const_string original);
             String(string original);
-            String(Array<byte> bytes);
+            //String(Array<byte> bytes);
             String(const String &target);
             ~String();
         public:
             char charAt(int index);
             String concat(String str);
             boolean contains(CharSequence s);
-            Array<byte> getBytes();
+            //Array<byte> &getBytes();
             boolean endsWith(String suffix);
             int indexOf(int ch) const;
             int indexOf(int ch, int fromIndex) const;

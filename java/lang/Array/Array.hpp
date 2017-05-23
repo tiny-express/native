@@ -29,25 +29,177 @@
 
 #include "../Object/Object.hpp"
 
+using namespace Java::Lang;
+
 namespace Java {
     namespace Lang {
         template <typename E>
         class Array : public virtual Object {
+        private:
+            E *array;
+            int virtualSize = 4;
+            int realSize = 0;
+            inline void reallocate();
         public:
             Array();
-            Array(E *array);
+            Array(byte *bytes);
             Array(int length);
-            Array(const Array &target);
+            Array(const Array<E> &target);
+            Array(int length, E defaulValue);
             ~Array();
+
         public:
-            E at(int index) const;
+            E& at(const int index) const;
             void push(E element);
             boolean isEmpty();
             int length() const;
-            String toString() const;
-        private:
-            std::vector<E> container;
+        public:
+            E& operator[] (const int index);
         };
+
+        /**
+         * Array initialization
+         *
+         * @tparam E
+         */
+        template <typename E>
+        Array<E>::Array() {
+            this->array = new E[this->virtualSize];
+        }
+
+        /**
+         * Array initialization with pointer
+         *
+         * @tparam E
+         * @param byte*
+         */
+        template <typename E>
+        Array<E>::Array(byte *bytes) {
+        }
+
+        /**
+         * Array initialization with length
+         *
+         * @tparam E
+         * @param length
+         */
+        template <typename E>
+        Array<E>::Array(int length) {
+            this->virtualSize = length << 2;
+            this->realSize = length;
+            this->array = new E[this->virtualSize];
+        }
+
+        /**
+         * Array initialization with Array
+         *
+         * @tparam E
+         * @param target
+         */
+        template <typename E>
+        Array<E>::Array(const Array<E> &target) {
+            this->virtualSize = target.realSize << 2;
+            this->realSize = target.realSize;
+            this->array = new E[this->virtualSize];
+
+            int index;
+            for (index = 0; index < this->realSize; ++index) {
+                this->array[index] = target[index];
+            }
+        }
+
+        /**
+         * Array initialization with length and each element is equal to defaulValue
+         *
+         * @tparam E
+         * @param length
+         * @param defaulValue
+         */
+        template <typename E>
+        Array<E>::Array(int length, E defaulValue) {
+            this->virtualSize = length << 2;
+            this->realSize = length;
+
+            int index;
+            for (index = 0; index < this->realSize; ++index) {
+                this->array[index] = defaulValue;
+            }
+        }
+
+        /**
+         * Array destructor
+         *
+         * @tparam E
+         */
+        template <typename E>
+        Array<E>::~Array() {
+            delete []this->array;
+        }
+
+        /**
+         * Realloc array with new sise
+         *
+         * @tparam E
+         */
+        template <typename E>
+        void Array<E>::reallocate() {
+            if (this->realSize >= this->virtualSize - 4) {
+                this->virtualSize = this->virtualSize < 2;
+                E *newArray = new E[this->virtualSize];
+                memcpy(newArray, this->array, (this->realSize * sizeof(E)));
+                delete []this->array;
+                this->array = newArray;
+            }
+        }
+
+        /**
+         * Push new element to array
+         *
+         * @tparam E
+         * @param element
+         */
+        template <typename E>
+        void Array<E>::push(E element) {
+            this->array[this->realSize] = element;
+            this->realSize++;
+            this->reallocate();
+        }
+
+        /**
+         * Returns the value of array at index
+         *
+         * @tparam E
+         * @param index
+         * @return E
+         */
+        template <typename E>
+        E& Array<E>::at(const int index) const {
+            return this->array[index];
+        }
+
+        /**
+         * Return real size of array
+         *
+         * @tparam E
+         * @return `int'
+         */
+        template <typename E>
+        int Array<E>::length() const {
+            return this->realSize;
+        }
+
+        /**
+         * Return value of array at index
+         *
+         * @tparam E
+         * @param index
+         * @return E
+         */
+        template <typename E>
+        E& Array<E>::operator[](const int index) {
+            return this->array[index];
+        }
+
     }
 }
 
