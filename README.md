@@ -63,9 +63,10 @@ TEST(YourTestSuite, YourTestCase) {
 ```
 
 ### Contributors
+- This library must be followed Oracle Java 8 documentation for standardization
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Please read guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
+- Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
 
 # Documentation
 
@@ -82,31 +83,54 @@ All data types are implemented and ready to use in C++ Application
 - [x] boolean - Java & C++ (bool)
 
 #### Java Standard Packages
-All Java packages are still in transformation so we can have a general look below
+All Java packages are in transformation so we can have a general look about road map
 ##### Java.Lang
+- [ ] Java.Lang.Appendable
+- [ ] Java.Lang.Autocloseable
 - [ ] Java.Lang.Boolean
 - [ ] Java.Lang.Byte
 - [ ] Java.Lang.Character
 - [ ] Java.Lang.CharSequence
+- [ ] Java.Lang.Cloneable
 - [ ] Java.Lang.Comparable
 - [ ] Java.Lang.Double
+- [ ] Java.Lang.Enum
+- [ ] Java.Lang.Error
 - [ ] Java.Lang.Exception
 - [ ] Java.Lang.Float
 - [x] Java.Lang.Integer
 - [ ] Java.Lang.Long
 - [ ] Java.Lang.Math
-- [ ] Java.Lang.Number
-- [ ] Java.Lang.Object
-- [ ] Java.Lang.Short
+- [x] Java.Lang.Number
+- [x] Java.Lang.Object
+- [ ] Java.Lang.Readable
+- [ ] Java.Lang.Runnable
+- [ ] Java.Lang.
+- [x] Java.Lang.Short
 - [x] Java.Lang.String
 - [ ] Java.Lang.System
 - [ ] Java.Lang.Throwable
 ##### Java.IO
 - [ ] Java.Lang.BufferedReader
+- [ ] Java.Lang.BufferedWriter
+- [ ] Java.Lang.CharArrayWriter
+- [ ] Java.Lang.Console
+- [ ] Java.Lang.FileDescriptor
+- [ ] Java.Lang.FileFilter
 - [ ] Java.Lang.FileWriter
+- [ ] Java.Lang.Flushable
+- [ ] Java.Lang.InputStream
+- [ ] Java.Lang.IOError
 - [ ] Java.Lang.IOException
+- [ ] Java.Lang.ObjectInput
+- [ ] Java.Lang.ObjectOutput
+- [ ] Java.Lang.OutputStream
 - [ ] Java.Lang.OutputStreamWriter
+- [ ] Java.Lang.PipedWriter
+- [ ] Java.Lang.PrintWriter
 - [ ] Java.Lang.Reader
+- [ ] Java.Lang.Serializable
+- [ ] Java.Lang.StreamTokenizer
 - [ ] Java.Lang.Writer
 ##### Java.Util
 - [ ] Java.Util.AbstractCollection
