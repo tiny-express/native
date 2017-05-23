@@ -18,7 +18,7 @@ This project is also useful for new developers in practical programming.
 - This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux amd64
 - C version of every function should be delivered first
 
-### Useful References
+### Useful resource
 - [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
 - [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
@@ -33,7 +33,11 @@ $ cmake . && make -j && make test
 $ sudo make install
 ```
 
-#### Sample program (test.cpp)
+#### Dependencies
+- [x] OpenSSL
+- [x] Zlib
+
+#### Usage (test.cpp)
 ```cpp
 #include <native/library.hpp>
 int main() {
