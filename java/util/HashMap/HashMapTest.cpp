@@ -46,6 +46,6 @@ TEST(JavaUtil, HashMap) {
     // Given <Integer, string> hash map - return value is exist
     HashMap<Integer, string> integerStringHashMap;
     Integer integerNumber = 1;
-//    integerStringHashMap.put(integerNumber, "Abcd");
-//    ASSERT_STR("Abcd", integerStringHashMap.get(1));
+    integerStringHashMap.put(integerNumber, "Abcd");
+    ASSERT_STR("Abcd", integerStringHashMap.get(1));
 }

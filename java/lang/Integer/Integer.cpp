@@ -181,7 +181,7 @@ boolean Integer::operator!=(const Integer& target) {
  *
  * @return bool
  */
-boolean Integer::operator<(const Integer& target) {
+boolean Integer::operator<(const Integer& target) const {
     return this->original < target.original;
 }
 
