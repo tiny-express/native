@@ -27,8 +27,9 @@ This project is also useful for new developers in practical programming.
 ### Get Started
 
 #### Prerequisites
-- [x] CMake 2.8
-- [x] GCC 4.8.1
+- [x] >= CMake 2.8
+- [x] >= GCC 4.8.1 for C++11
+- [x] >= Python 2.6 for Mock Server
 - [x] OpenSSL
 - [x] Zlib
 
