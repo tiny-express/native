@@ -139,3 +139,102 @@ float Integer::floatValue() const  {
 double Integer::doubleValue() const  {
     return (double) this->original;
 }
+
+/**
+ * Make a summation with target Integer
+ *
+ * @return Integer
+ */
+Integer Integer::operator+(const Integer &target) {
+    return this->original + target.original;
+}
+
+/**
+ * Make a subtraction with target Integer
+ *
+ * @return Integer
+ */
+Integer Integer::operator-(const Integer& target) {
+    return this->original - target.original;
+}
+
+/**
+ * Compare this Integer is equal target
+ *
+ * @return bool
+ */
+boolean Integer::operator==(const Integer& target) {
+    return this->original == target.original;
+}
+
+/**
+ * Compare this Integer is not equal target
+ *
+ * @return bool
+ */
+boolean Integer::operator!=(const Integer& target) {
+    return !this->operator==(target);
+}
+
+/**
+ * Compare this Integer is less than target
+ *
+ * @return bool
+ */
+boolean Integer::operator<(const Integer& target) const {
+    return this->original < target.original;
+}
+
+/**
+ * Compare this Integer is more than target
+ *
+ * @return bool
+ */
+boolean Integer::operator>(const Integer& target) {
+    return this->original > target.original;
+}
+
+/**
+ * Compare this Integer is equal or less than target
+ *
+ * @return bool
+ */
+boolean Integer::operator<=(const Integer& target) {
+    return this->original <= target.original;
+}
+
+/**
+ *  Compare this Integer is equal or more than target
+ *
+ * @return bool
+ */
+boolean Integer::operator>=(const Integer& target) {
+    return this->original >= target.original;
+}
+
+/**
+ *  Make a division from this Integer with target
+ *
+ * @return Integer
+ */
+Integer Integer::operator/(const Integer& target) {
+    return (this->original / target.original);
+}
+
+/**
+ * Make a multiple from this Integer with target
+ *
+ * @return Integer
+ */
+Integer Integer::operator*(const Integer& target) {
+    return (this->original * target.original);
+}
+
+/**
+ * Make a modulo from this Integer with target
+ *
+ * @return Integer
+ */
+Integer Integer::operator%(const Integer& target) {
+    return (this->original % target.original);
+}

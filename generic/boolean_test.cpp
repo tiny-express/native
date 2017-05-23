@@ -31,7 +31,22 @@ extern "C" {
 
 TEST(Generic, Boolean) {
 
+    
+    double boolean_to_boolean = Boolean(1);
+    ASSERT_EQUAL(1, boolean_to_boolean);
+        
+    double string_to_boolean = Boolean(std::string("True"));
+    ASSERT_EQUAL(1, string_to_boolean);
+
+    double string_to_boolean_not_valid = Boolean((char*) "True");
+    ASSERT_EQUAL(0, string_to_boolean_not_valid);
+    
+    double double_to_boolean = Boolean(2.3E-3);
+    ASSERT_EQUAL(0, double_to_boolean);
+
+
     char *target0 = "1";
+    
     int boolean0 = string_to_boolean(target0);
     ASSERT_TRUE(boolean0);
 
@@ -52,6 +67,7 @@ TEST(Generic, Boolean) {
 
     bool string_to_boolean_4 = Boolean((char*) "false");
     ASSERT_FALSE(string_to_boolean_4);
+
     
     double long_to_boolean = Boolean(2147483647);
     ASSERT_EQUAL(1, long_to_boolean);

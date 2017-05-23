@@ -25,4 +25,131 @@
  */
 
 #include "Math.hpp"
+#include <math.h>
+#include <stdlib.h>
 
+using namespace Java::Lang;
+
+double abs(double a) {
+    if (a >= 0) {
+        return a;
+    }
+    else {
+        return -a; 
+    }
+}
+
+float abs(float a) {
+    if (a >= 0) {
+        return a;
+    }
+    else {
+        return -a; 
+    }
+}
+
+int abs(int a) {
+    if (a >= 0) {
+        return a;
+    }
+    else {
+        return -a; 
+    }
+}
+
+long abs(long a) {
+    if (a >= 0) {
+        return a;
+    }
+    else {
+        return -a; 
+    }
+}
+
+double floor(double a) {
+    return floor(a);
+}
+
+double max(double a, double b) {
+    if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+float max(float a, float b) {
+     if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+int	max(int a, int b) {
+     if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+long max(long a, long b); {
+     if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+double min(double a, double b) {
+    if (a > b) {
+        return b;
+    }
+    else {
+        return a;
+    }
+}
+
+float min(float a, float b) {
+     if (a > b) {
+        return b;
+    }
+    else {
+        return a;
+    }
+}
+
+int	min(int a, int b) {
+     if (a > b) {
+        return b;
+    }
+    else {
+        return a;
+    }
+}
+
+double pow(double a, double b) {
+    return pow(a,b);
+}
+
+double random() {
+    srand(time(NULL));
+    return rand();
+}
+
+long round(double a) {
+    return round(a);
+}
+
+int round(float a) {
+    return round(a);
+}
+
+double sqrt(double a) {
+    return sqrt(a);
+}
