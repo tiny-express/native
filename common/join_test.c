@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(General, JoinPointerPointerChar) {
+TEST(Common, JoinPointerPointerChar) {
     char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -44,7 +44,7 @@ TEST(General, JoinPointerPointerChar) {
     ASSERT_STR(expect, join_pointer_pointer_char(target));
 }
 
-TEST(General, JoinDelimiterPointerPointerChar) {
+TEST(Common, JoinDelimiterPointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

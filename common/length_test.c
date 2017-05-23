@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(General, LengthPointerChar) {
+TEST(Common, LengthPointerChar) {
 	char *data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 
@@ -41,7 +41,7 @@ TEST(General, LengthPointerChar) {
 	ASSERT_EQUAL(0, length_pointer_char(data));
 }
 
-TEST(General, LengthPointerPointerChar) {
+TEST(Common, LengthPointerPointerChar) {
 
 	char *data_null = NULL;
 	ASSERT_EQUAL(0, length_pointer_pointer_char(data_null));
@@ -70,35 +70,35 @@ TEST(General, LengthPointerPointerChar) {
 	free(data2);
 }
 
-TEST(General, LengthShort) {
+TEST(Common, LengthShort) {
 	short input = 0;
 	ASSERT_EQUAL(1, length_short(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_short(input));
 }
 
-TEST(General, LengthInt) {
+TEST(Common, LengthInt) {
 	int input = 0;
 	ASSERT_EQUAL(1, length_int(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_int(input));
 }
 
-TEST(General, LengthLong) {
+TEST(Common, LengthLong) {
 	long input = 0;
 	ASSERT_EQUAL(1, length_long(input));
 	input = 123456;
 	ASSERT_EQUAL(6, length_long(input));
 }
 
-TEST(General, LengthDouble) {
+TEST(Common, LengthDouble) {
 	double input = 0;
 	ASSERT_EQUAL(1, length_double(input));
 	input = 123.456;
 	ASSERT_EQUAL(7, length_double(input));
 }
 
-TEST(General, LengthFloat) {
+TEST(Common, LengthFloat) {
 	float input = 1.23;
 	ASSERT_EQUAL(4, length_float(input));
 	input = 0.345;
