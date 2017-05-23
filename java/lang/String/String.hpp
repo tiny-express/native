@@ -65,6 +65,7 @@ namespace Java {
             String replaceFirst(String regex, String replacement) const;
             String split(String regex) const;
             String split(String regex, int limit) const;
+            boolean startsWith(String prefix) const;
             boolean startsWith(String prefix, int toffset) const;
             string toCharArray() const;
             String toLowerCase() const;
