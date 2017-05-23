@@ -80,7 +80,7 @@ TEST(Thread, LoopSetIntervalMutex) {
     pthread_t pthread2 = set_interval(add_for_interval_mutex, 0);
     pthread_t pthread3 = set_interval(subtract_for_interval_mutex, 0);
     while(1) {
-        sleep_miliseconds(5);
+        sleep_miliseconds(10);
         pthread_cancel(pthread3);
         pthread_cancel(pthread2);
         break;
@@ -93,7 +93,7 @@ TEST(Thread, LoopSetTimeOut) {
     set_time_out(add, 5);
     ASSERT_EQUAL(0, t);
     while (1) {
-        sleep_miliseconds(10);
+        sleep_miliseconds(50);
         break;
     }
     ASSERT_EQUAL(1, t);
