@@ -84,6 +84,7 @@ All data types are implemented and ready to use in C++ Application
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
+
 ##### Java.Lang
 - [ ] Java.Lang.Appendable
 - [ ] Java.Lang.Autocloseable
@@ -132,6 +133,7 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Serializable
 - [ ] Java.Lang.StreamTokenizer
 - [ ] Java.Lang.Writer
+
 ##### Java.Util
 - [ ] Java.Util.AbstractCollection
 - [ ] Java.Util.AbstractList
@@ -169,11 +171,18 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.TreeSet
 - [ ] Java.Util.UUID
 - [ ] Java.Util.Vector
+
 ##### Java.Security
+- [ ] Java.Security.Certificate
+- [ ] Java.Security.KeyFactory
+- [ ] Java.Security.KeyStore
 - [ ] Java.Security.MessageDigest
+
 ##### Java.Net
-- [ ] Java.Net.URL
 - [ ] Java.Net.HttpURLConnection
+- [ ] Java.Net.URL
+- [ ] Java.Net.URLEncoder
+- [ ] Java.Net.URLDecoder
 
 #### Additional features outside Java packages
 - [x] Java.Lang.Array
