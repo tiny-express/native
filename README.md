@@ -134,9 +134,40 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Writer
 ##### Java.Util
 - [ ] Java.Util.AbstractCollection
+- [ ] Java.Util.AbstractList
+- [ ] Java.Util.AbstractMap
+- [ ] Java.Util.AbstractSet
 - [ ] Java.Util.ArrayList
+- [ ] Java.Util.Arrays
+- [ ] Java.Util.BitSet
+- [ ] Java.Util.Calendar
+- [ ] Java.Util.Collection
+- [ ] Java.Util.Collections
+- [ ] Java.Util.Currency
+- [ ] Java.Util.Date
+- [ ] Java.Util.EnumMap
+- [ ] Java.Util.EnumSet
 - [ ] Java.Util.HashMap
+- [ ] Java.Util.HashSet
+- [ ] Java.Util.Iterable
+- [ ] Java.Util.LinkedListHashSet
 - [ ] Java.Util.LinkedList
+- [ ] Java.Util.List
+- [ ] Java.Util.Map
+- [ ] Java.Util.Observable
+- [ ] Java.Util.PriorityQueue
+- [ ] Java.Util.Queue
+- [ ] Java.Util.Random
+- [ ] Java.Util.Scanner
+- [ ] Java.Util.Set
+- [ ] Java.Util.SimpleTimeZone
+- [ ] Java.Util.Stack
+- [ ] Java.Util.Timer
+- [ ] Java.Util.TimerTask
+- [ ] Java.Util.TimeZone
+- [ ] Java.Util.TreeSet
+- [ ] Java.Util.UUID
+- [ ] Java.Util.Vector
 ##### Java.Security
 - [ ] Java.Security.MessageDigest
 ##### Java.Net
