@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-#define ETCD_MASTER "http://etcd.foodtiny.net"
+#define ETCD_MASTER "http://localhost:9999/etcd"
 #define ETCD_KEY "/elassandra/development/seeds/test_node"
 
 TEST(Vendor, EtcdGet) {

@@ -96,3 +96,17 @@ void *run(void *argument) {
     usleep(((thread_argument *)argument)->milliseconds*1000);
     ((void(*)())((thread_argument*)argument)->callback)();
 }
+
+/**
+ * deley miliseconds
+ * @param miliseconds
+ */
+void sleep_miliseconds(unsigned int miliseconds) {
+    unsigned long start = 0;
+    unsigned long stop = miliseconds*1000000;
+    unsigned long counter = 0;
+    unsigned long index = 0;
+    for (index = start; index < stop; index++) {
+        counter++;
+    }
+}

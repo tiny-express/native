@@ -45,8 +45,6 @@ int   http_port(char *url);
 char *http_query(char *url);
 char *http_request(char *method, char* url, char **headers, char **body);
 char *http_path(char *url);
-void start_mock_server();
-void stop_mock_server();
 void send_response(int client_id, char* content);
 
 
