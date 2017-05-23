@@ -28,26 +28,27 @@
 
 namespace Java {
     namespace Util {
-        template <class T>
+        template <class K, class V>
         class HashMap {
+        private:
+            std::map<K, V> hashMap;
         public:
             HashMap();
             ~HashMap();
-            HashMap(string key, T value);
 
-            T get(string key);
-            boolean put(string key, T value);
-            boolean putAll(HashMap map);
-            boolean containsKey(string key);
-            boolean containsValue(T value);
-
-            void clear();
-            boolean remove(string key);
-            boolean remove(string key, T value);
-            boolean removeAll();
-
-            boolean isEmpty();
-            int size();
+            V get(K key);
+            void put(K key, V value);
+//            boolean putAll(HashMap map);
+//            boolean containsKey(string key);
+//            boolean containsValue(V value);
+//
+//            void clear();
+//            boolean remove(K key);
+//            boolean remove(K key, V value);
+//            boolean removeAll();
+//
+//            boolean isEmpty();
+//            int size();
         };
     }
 }
