@@ -25,131 +25,73 @@
  */
 
 #include "Math.hpp"
-#include <math.h>
-#include <stdlib.h>
 
 using namespace Java::Lang;
 
-double abs(double a) {
-    if (a >= 0) {
-        return a;
-    }
-    else {
-        return -a; 
-    }
+double Math::abs(double a) {
+    return a >= 0 ? a : -a;
 }
 
-float abs(float a) {
-    if (a >= 0) {
-        return a;
-    }
-    else {
-        return -a; 
-    }
+float Math::abs(float a) {
+    return a >= 0 ? a : -a;
 }
 
-int abs(int a) {
-    if (a >= 0) {
-        return a;
-    }
-    else {
-        return -a; 
-    }
+int Math::abs(int a) {
+    return a >= 0 ? a : -a;
 }
 
-long abs(long a) {
-    if (a >= 0) {
-        return a;
-    }
-    else {
-        return -a; 
-    }
+long Math::abs(long a) {
+    return a >= 0 ? a : -a;
 }
 
-double floor(double a) {
+double Math::floor(double a) {
     return floor(a);
 }
 
-double max(double a, double b) {
-    if (a > b) {
-        return a;
-    }
-    else {
-        return b;
-    }
+double Math::max(double a, double b) {
+    return a > b ? a : b;
 }
 
-float max(float a, float b) {
-     if (a > b) {
-        return a;
-    }
-    else {
-        return b;
-    }
+float Math::max(float a, float b) {
+    return a > b ? a : b;
 }
 
-int	max(int a, int b) {
-     if (a > b) {
-        return a;
-    }
-    else {
-        return b;
-    }
+int	Math::max(int a, int b) {
+    return a > b ? a : b;
 }
 
-long max(long a, long b); {
-     if (a > b) {
-        return a;
-    }
-    else {
-        return b;
-    }
+long Math::max(long a, long b) {
+    return a > b ? a : b;
 }
 
-double min(double a, double b) {
-    if (a > b) {
-        return b;
-    }
-    else {
-        return a;
-    }
+double Math::min(double a, double b) {
+    return a < b ? a : b;
 }
 
-float min(float a, float b) {
-     if (a > b) {
-        return b;
-    }
-    else {
-        return a;
-    }
+float Math::min(float a, float b) {
+    return a < b ? a : b;
 }
 
-int	min(int a, int b) {
-     if (a > b) {
-        return b;
-    }
-    else {
-        return a;
-    }
+int	Math::min(int a, int b) {
+    return a < b ? a : b;
 }
 
-double pow(double a, double b) {
-    return pow(a,b);
+double Math::pow(double a, double b) {
+    return pow(a, b);
 }
 
-double random() {
-    srand(time(NULL));
+double Math::random() {
     return rand();
 }
 
-long round(double a) {
+long Math::round(double a) {
     return round(a);
 }
 
-int round(float a) {
+int Math::round(float a) {
     return round(a);
 }
 
-double sqrt(double a) {
+double Math::sqrt(double a) {
     return sqrt(a);
 }
