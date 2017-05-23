@@ -25,5 +25,23 @@
  */
 
 #include "HashMap.hpp"
+#include <utility>
 
-T get(string key);
+using namespace Java::Util;
+
+template<class K, class V>
+HashMap<K, V>::HashMap() { }
+
+template<class K, class V>
+HashMap<K, V>::~HashMap() { }
+
+template<class K, class V>
+V HashMap<K, V>::get(K key) {
+    V value = hashMap[key];
+    return value;
+}
+
+template<class K, class V>
+void HashMap<K, V>::put(K key, V value) {
+    hashMap.insert(std::make_pair(key, value));
+}
