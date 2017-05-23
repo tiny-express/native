@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <sstream>
 #include "Object.hpp"
+#include <sstream>
 
 using namespace Java::Lang;
 
@@ -36,6 +36,10 @@ unsigned long Object::hashCode() {
     ss << addr;
 
     unsigned long hashCode;
+<<<<<<< HEAD
     hashCode = std::hash<std::string>()(ss.str());
+=======
+    //hashCode = std::hash<std::string>()(ss.str());
+>>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
     return hashCode;
 }
