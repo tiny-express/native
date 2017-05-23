@@ -106,7 +106,6 @@ All Java packages are in transformation so we can have a general look about road
 - [x] Java.Lang.Object
 - [ ] Java.Lang.Readable
 - [ ] Java.Lang.Runnable
-- [ ] Java.Lang.
 - [x] Java.Lang.Short
 - [x] Java.Lang.String
 - [ ] Java.Lang.System
