@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(General, AppendPointerChar) {
+TEST(Common, AppendPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

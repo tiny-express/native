@@ -49,6 +49,12 @@ namespace Java {
             double doubleValue() const;
             String toString() const;
             static Integer *parseInt(String target);
+        public:
+            String operator+(const Integer& target2);
+            boolean operator==(const Integer& target2);
+            boolean operator!=(const Integer& target2);
+            boolean operator<(const Integer& target2);
+            boolean operator>(const Integer& target2);
         };
     }
 }

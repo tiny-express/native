@@ -40,11 +40,11 @@ String::String(string target) {
     this->original = target;
 }
 
-String::String(Array<byte> bytes) {
-//    for (byte byte: bytes) {
-//    }
-//    this->original = reinterpret_cast<string>(bytes);
-}
+//String::String(Array<byte> bytes) {
+////    for (byte byte: bytes) {
+////    }
+////    this->original = reinterpret_cast<string>(bytes);
+//}
 
 String::String(const String& target) {
     this->original = target.original;
@@ -53,32 +53,126 @@ String::String(const String& target) {
 String::~String() {
 }
 
+char String::charAt(int index) {
+    return this->original[index];
+}
+
+String String::concat(String str) {
+    return string_concat(this->original, str.original);
+}
+
+boolean String::endsWith(String suffix) {
+    return string_endswith(this->original, suffix.original);
+}
+
+int String::indexOf(int ch) const {
+    return string_index(this->original, string_from_char((char) ch), 1);
+}
+
+int String::indexOf(int ch, int fromIndex) const {
+//    return string_index(original, string_from_char((char) ch), fromIndex);
+    int length = length_pointer_char(this->original);
+    if(fromIndex > length) {
+        return -1;
+    }
+    register int index = fromIndex;
+    for(index; index < length; index++) {
+        if(this->original[index] == (char) ch) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+int String::indexOf(String str) const {
+    return string_index(this->original, str.original, 1);
+}
+
+int String::indexOf(String str, int fromIndex) const {
+//    return string_index(original, str.original, fromIndex);
+//    int length = length_pointer_char(original);
+//    if(fromIndex > length) {
+//        return -1;
+//    }
+//    int length_str = length_pointer_char(str.original);
+//    int index = 0;
+//    int temp;
+//    register int index = fromIndex;
+//    for(index; index < length; index++) {
+//       if(original[index] == str.original[index] ) {
+//
+//       }
+//    }
+//    return -1;
+}
+
+boolean String::isEmpty() const {
+    if (length_pointer_char(this->original) == 0) {
+        return true;
+    }
+    return false;
+}
+
+int String::lastIndexOf(int ch) {
+    int length = length_pointer_char(this->original);
+    register int index = length - 1;
+    for( index; index >= 0; index--) {
+        if(this->charAt(index) == (char) ch) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+int String::lastIndexOf(int ch, int fromIndex) {
+    int length = fromIndex;
+    register int index = length - 1;
+    for(index; index >= 0; index--) {
+        if(this->charAt(index) == (char) ch) {
+            return index;
+        }
+    }
+    return -1;
+}
+
 int String::length() const {
     return length_pointer_char(this->original);
+}
+
+String String::replace(char oldChar, char newChar) const {
+    return string_replace(this->original, string_from_char(oldChar), string_from_char(newChar));
+}
+
+String String::replaceAll(String regex, String replacement) const {
+    return string_replace(this->original, regex.original, replacement.original);
+}
+
+String String::split(String regex) const {
+   // return string_split(original,regex.original);
+}
+
+boolean String::startsWith(String prefix) const {
+    return string_startswith(this->original, prefix.original);
 }
 
 string String::toCharArray() const {
     return this->original;
 }
 
+String String::toLowerCase() const {
+    return string_lower(this->original);
+}
+
 String String::toString() const {
     return this->original;
 }
 
-String String::operator+(const String& target2) {
-    String result = string_concat(this->original, target2.original);
-    return result;
+String String::toUpperCase() {
+    return string_upper(this->original);
 }
 
-bool String::operator==(const String &target2) {
-    if (string_equals(this->original, target2.toCharArray())) {
-        return true;
-    }
-    return false;
-}
-
-bool String::operator!=(const String &target2) {
-    return !this->operator==(target2);
+String String::trim() {
+    return string_trim(this->original);
 }
 
 String String::valueOf(boolean target) {
@@ -115,80 +209,18 @@ String String::valueOf(double target) {
     return string_from_double(target);
 }
 
-boolean String::isEmpty() const {
-    if (length_pointer_char(this->original) == 0) {
+String String::operator+(const String& target2) {
+    String result = string_concat(this->original, target2.original);
+    return result;
+}
+
+bool String::operator==(const String &target2) {
+    if (string_equals(this->original, target2.toCharArray())) {
         return true;
     }
     return false;
 }
 
-char String::charAt(int index) {
-    return this->original[index];
-}
-
-String String::concat(String str) {
-    return string_concat(original, str.original);
-}
-
-int String::indexOf(int ch) const {
-    return string_index(original, string_from_char((char) ch), 1);
-}
-
-int String::indexOf(int ch, int fromIndex) const {
-//    return string_index(original, string_from_char((char) ch), fromIndex);
-    int length = length_pointer_char(original);
-    if(fromIndex > length) {
-        return -1;
-    }
-    register int index = fromIndex;
-    for(index; index < length; index++) {
-        if(original[index] == (char) ch) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-int String::indexOf(String str) const {
-    return string_index(original, str.original, 1);
-}
-
-int String::indexOf(String str, int fromIndex) const {
-//    return string_index(original, str.original, fromIndex);
-//    int length = length_pointer_char(original);
-//    if(fromIndex > length) {
-//        return -1;
-//    }
-//    int length_str = length_pointer_char(str.original);
-//    int index = 0;
-//    int temp;
-//    register int index = fromIndex;
-//    for(index; index < length; index++) {
-//       if(original[index] == str.original[index] ) {
-//
-//       }
-//    }
-//    return -1;
-}
-
-int String::lastIndexOf(int ch) {
-    int length = length_pointer_char(original);
-    register int index = length - 1;
-    for( index; index >= 0; index--) {
-        if(charAt(index) == (char) ch) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-int String::lastIndexOf(int ch, int fromIndex) {
-    int length = fromIndex;
-    register int index = length - 1;
-    for(index; index >= 0; index--) {
-        if(charAt(index) == (char) ch) {
-            return index;
-        }
-    }
-    return -1;
+bool String::operator!=(const String &target2) {
+    return !this->operator==(target2);
 }

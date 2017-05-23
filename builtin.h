@@ -54,6 +54,4 @@
 #include "validator.h"
 #include "vendor.h"
 
-#endif //NATIVE_BUILTIN_H
-
-
+#endif//NATIVE_BUILTIN_H
