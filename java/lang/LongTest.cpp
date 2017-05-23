@@ -25,27 +25,31 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../unit_test.h"
 }
-
-#include "HashMap.hpp"
+#include "Integer.hpp"
 
 using namespace Java::Lang;
-using namespace Java::Util;
 
-TEST(JavaUtil, HashMap) {
-    // Given empty hash map - return NULL
-    HashMap<string, string> emptyHashMap;
-    ASSERT_NULL(emptyHashMap.get("key"));
+TEST(JavaLang, Long) {
 
-    // Given <int, String> hash map - return value is exist
-    HashMap<int, String> intStringHashMap;
-    intStringHashMap.put(1, "Abcd");
-    ASSERT_TRUE(String("Abcd") == intStringHashMap.get(1));
+    // Integer emptyLong = 3;
+    // ASSERT_EQUAL(3, emptyLong.longValue());
 
-    // Given <Integer, string> hash map - return value is exist
-    HashMap<Integer, string> integerStringHashMap;
-    Integer integerNumber = 1;
-    integerStringHashMap.put(integerNumber, "Abcd");
-    ASSERT_STR("Abcd", integerStringHashMap.get(1));
+    // Long validLong = 2;
+    // ASSERT_EQUAL(2, validLong.longValue());
+    
+    Integer validFloat = 2147483647.34234;
+    ASSERT_EQUAL(2147483648, validFloat.floatValue());
+    
+    // double validDouble = -1.79E+8;
+    // ASSERT_EQUAL(-1.79E+8, validDouble.doubleValue());
+    
+    // short validShort= -32768;
+    // ASSERT_EQUAL( -32768, validShort.shortValue());
+
+    // Integer *validLongPointer = Long::parseLong("6");
+    // ASSERT_EQUAL(6, validLongPointer->longValue());
+
 }
+
