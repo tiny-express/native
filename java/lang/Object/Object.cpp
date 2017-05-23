@@ -36,6 +36,6 @@ unsigned long Object::hashCode() {
     ss << addr;
 
     unsigned long hashCode;
-//    hashCode = std::hash<string>()(ss.str()); //FIXME: should to change typealias of string
+    hashCode = std::hash<std::string>()(ss.str());
     return hashCode;
 }
