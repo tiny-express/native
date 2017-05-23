@@ -32,7 +32,7 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, Integer) {
-
+    
     Integer emptyInteger;
     emptyInteger = 3;
     ASSERT_EQUAL(3, emptyInteger.intValue());
