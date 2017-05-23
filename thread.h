@@ -39,5 +39,6 @@ void *run(void *argument);
 
 pthread_t set_interval(void *callback, unsigned int milliseconds);
 pthread_t set_time_out(void *callback, unsigned int milliseconds);
+void sleep_miliseconds(unsigned int miliseconds);
 
 #endif

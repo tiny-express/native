@@ -27,9 +27,10 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-#define FIREBASE_SERVICE_URL        "https://fcm.googleapis.com/fcm/send"
-#define FIREBASE_SERVICE_TOKEN      "AAAARs12iRs:APA91bGcaUlACTb6VdvjeUNmeQ-I3Tsr14p8Q20-egTAFu3zq2juaRYyVDSNohBjRKutx4bqpoY8BM8BxolEILw6A1A-YfBecDCzhBIDoQTwwPNADOmhulj-8NTbRIobK28EwOfZnMQd"
-#define FIREBASE_DEVICE_TOKEN       "dqs-1BBsWEE:APA91bHs7ixQativdjcIJ_3DRNWceVH8fLIriF9shRFoauodG9VXpG4D86VzAmJakgcu7mrYaQmZEwvKC124uiRUABPaBv0zrjftI9CuhoOfxOKVPBR1qSHRtQmbynsECRv6I2Y_XLQ0"
+//#define FIREBASE_SERVICE_URL        "https://fcm.googleapis.com/fcm/send"
+#define FIREBASE_SERVICE_URL        "http://localhost:9999/firebase"
+#define FIREBASE_SERVICE_TOKEN      "foodtiny_token"
+#define FIREBASE_DEVICE_TOKEN       "123456789"
 #define FIREBASE_NOTIFICATION_TITLE "Hello world"
 #define FIREBASE_NOTIFICATION_BODY  "Say hi"
 // Warning

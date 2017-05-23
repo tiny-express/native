@@ -128,11 +128,11 @@ TEST(Network, HttpRequest) {
 		'\0'
 	};
 
-	char *response = http_request("POST", "http://httpbin.org/post", headers, body);
-    ASSERT_TRUE((string_index(response, "\"data\": \"a=b\"", 1) > 0));
+	char *response = http_request("POST", "http://localhost:9999/test", headers, body);
+    ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
 
-    response = http_request("GET", "http://httpbin.org/get", headers, body);
-    ASSERT_TRUE((string_index(response, "\"a\": \"b\"", 1) > 0));
+    response = http_request("GET", "http://localhost:9999/test", headers, body);
+    ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
 }
 
 TEST(Network, HttpPath) {
