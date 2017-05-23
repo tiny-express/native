@@ -118,12 +118,15 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Math
 - [x] Java.Lang.Number
 - [x] Java.Lang.Object
+- [x] Java.Lang.Process
 - [ ] Java.Lang.Readable
 - [ ] Java.Lang.Runnable
+- [ ] Java.Lang.Runtime
 - [x] Java.Lang.Short
 - [x] Java.Lang.String
 - [ ] Java.Lang.System
 - [ ] Java.Lang.Throwable
+- [ ] Java.Lang.Thread
 ##### Java.IO
 - [ ] Java.Lang.BufferedReader
 - [ ] Java.Lang.BufferedWriter
