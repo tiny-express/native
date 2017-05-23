@@ -140,6 +140,7 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.ArrayList
 - [ ] Java.Util.Arrays
 - [ ] Java.Util.BitSet
+- [ ] Java.Util.Base64
 - [ ] Java.Util.Calendar
 - [ ] Java.Util.Collection
 - [ ] Java.Util.Collections
