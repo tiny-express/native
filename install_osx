@@ -1,2 +1,4 @@
 export HOMEBREW_NO_AUTO_UPDATE=1
 brew install libuv openssl
+brew install python python-dev
+pip install -r mock/requirements.txt

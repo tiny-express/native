@@ -27,9 +27,9 @@
 #include "../unit_test.h"
 #include "../vendor.h"
 
-#define TWILLIO_SERVICE_URL         "https://api.twilio.com/2010-04-01/Accounts/AC85ddd85dbdd4f002c799676b7ad28914/Messages.json"
-#define TWILLIO_ACCOUNT_ID          "AC85ddd85dbdd4f002c799676b7ad28914"
-#define TWILLIO_ACCOUNT_TOKEN       "87c76ffe015078c17e7080d19af46cae"
+#define TWILLIO_SERVICE_URL         "http://localhost:9999/twilio"
+#define TWILLIO_ACCOUNT_ID          "food"
+#define TWILLIO_ACCOUNT_TOKEN       "tiny"
 #define TWILLIO_FROM_PHONE_NUMBER   "15005550006"
 #define TWILLIO_TO_PHONE_NUMBER     "84909015425"
 #define TWILLIO_SMS_CONTENT         "HelloSms"
@@ -116,10 +116,6 @@ TEST(Vendor, TwilioCheckRequestToServer) {
 
     // Test success cases
     ASSERT_TRUE(send_sms(service_url, account_id, account_token, from_phone_number, to_phone_number, sms_content));
-
-    // Fail because from phone number is not exist
-    char *from_phone_number_not_exist = "84000000000";
-    ASSERT_FALSE(send_sms(service_url, account_id, account_token, from_phone_number_not_exist, to_phone_number, sms_content));
 
     // Can not check to phone number is not exist because Twilio does not validate phone number that's sent
 }

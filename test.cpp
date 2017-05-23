@@ -1,11 +1,7 @@
-#include "library.hpp"
-
-using namespace Java::Lang;
-using namespace Java::IO;
+#include <native/library.hpp>
 
 int main() {
-    String text = "Hello Native Library";
-    FileWriter file = "text.txt";
+    String text = "Hello world";
     System::out::println(text);
     return 0;
 }

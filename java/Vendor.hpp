@@ -27,10 +27,10 @@
 #ifndef NATIVE_JAVA_VENDOR_HPP
 #define NATIVE_JAVA_VENDOR_HPP
 
-#include "vendor/ElasticSearch.hpp"
-#include "vendor/Etcd.hpp"
-#include "vendor/Firebase.hpp"
-#include "vendor/SendGrid.hpp"
-#include "vendor/Twilio.hpp"
+#include "vendor/ElasticSearch/ElasticSearch.hpp"
+#include "vendor/Etcd/Etcd.hpp"
+#include "vendor/Firebase/Firebase.hpp"
+#include "vendor/SendGrid/SendGrid.hpp"
+#include "vendor/Twilio/Twilio.hpp"
 
 #endif//NATIVE_JAVA_VENDOR_HPP

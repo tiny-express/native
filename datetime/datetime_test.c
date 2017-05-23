@@ -29,7 +29,7 @@
 
 TEST(DateTime, Timestamp) {
     long first_time = timestamp();
-    int maxN = 1000000000;
+    int maxN = 10000000;
     int i = 0;
     int counter = 0;
     for (i=0; i<maxN; i++) {
@@ -37,8 +37,8 @@ TEST(DateTime, Timestamp) {
     }
     long last_time = timestamp();
     ASSERT_EQUAL(maxN, counter);
-    // Time is greater than 1000 ms
-    ASSERT_TRUE((last_time - first_time)/(1000*1000) > 1000);
+    // Time is greater than 9 ms
+    ASSERT_TRUE((last_time - first_time)/(1000*1000) > 9);
 }
 
 TEST(DateTime, Format) {
