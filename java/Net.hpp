@@ -27,7 +27,8 @@
 #ifndef NATIVE_JAVA_NET_HPP
 #define NATIVE_JAVA_NET_HPP
 
-#include "net/URL/URL.hpp"
 #include "net/HttpURLConnection/HttpURLConnection.hpp"
+#include "net/URL/URL.hpp"
+#include "net/URLEncoder/URLEncoder.hpp"
 
 #endif//NATIVE_JAVA_NET_HPP

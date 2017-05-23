@@ -60,4 +60,4 @@ int send_sms(char* service_url, char* account_id, char* account_token, char* fro
 int send_mail(char *service_url,  char *service_token, char *from_mail, char *to_mail, char *mail_subject, char *mail_content);
 int push_notification(char *service_url, char *service_token, char *device_token, char *notification_title, char *notification_body, char *notification_data);
 
-#endif
+#endif//NATIVE_VENDOR_H

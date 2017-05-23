@@ -23,3 +23,40 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_LANG_LONG_HPP
+#define NATIVE_JAVA_LANG_LONG_HPP
+
+#include "../Number/Number.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Long: public virtual Number {
+        public:
+            Long();
+            Long(long original);
+            Long(const Long &longnumber);
+            ~Long();
+
+        public:
+            char charValue() const override;
+            string stringValue() const override;
+            short shortValue() const override;
+            int intValue() const override;
+            long longValue() const override;
+            float floatValue() const override;
+            double doubleValue() const override;
+            String toString() const override;
+
+        public:
+            static Long *parseLong(String target);
+
+        private:
+            int original;
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_INTEGER_HPP
+
+    

@@ -25,32 +25,3 @@
  */
 
 #include "Array.hpp"
-
-using namespace Java::Lang;
-
-template <typename E>
-Array<E>::Array() {
-}
-
-template <typename E>
-Array<E>::Array(E *array) {
-}
-
-template <typename E>
-Array<E>::Array(int length) {
-}
-
-template <typename E>
-Array<E>::Array(const Array &target) {
-}
-
-template <typename E>
-Array<E>::~Array() {
-}
-
-//template <typename E>
-//String Array<E>::toString() const {
-//    string original = "serialize";
-//    return original;
-//}
-
