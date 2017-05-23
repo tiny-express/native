@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 /**
  * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
@@ -42,4 +39,3 @@ namespace Java {
 }
 
 #endif//NATIVE_UTIL_ABSTRACT_MAP_HPP
->>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
