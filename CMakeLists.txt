@@ -128,7 +128,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
 # Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} java/util/AbstractMap/AbstractMap.cpp java/util/AbstractMap/AbstractMap.h java/util/HashMap/HashMapTest.cpp)
 
 # Add make test
 enable_testing()

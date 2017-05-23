@@ -24,20 +24,46 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+<<<<<<< HEAD
+=======
 #ifndef NATIVE_JAVA_UTIL_HASH_MAP_HPP
 #define NATIVE_JAVA_UTIL_HASH_MAP_HPP
 
+>>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
 #include "../../Lang.hpp"
 
 namespace Java {
     namespace Util {
+<<<<<<< HEAD
+        template <class K, class V>
+=======
         template <typename K, typename V>
+>>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
         class HashMap {
         private:
             std::map<K, V> hashMap;
         public:
             HashMap();
             ~HashMap();
+<<<<<<< HEAD
+
+            V get(K key);
+            void put(K key, V value);
+//            boolean putAll(HashMap map);
+//            boolean containsKey(string key);
+//            boolean containsValue(V value);
+//
+//            void clear();
+//            boolean remove(K key);
+//            boolean remove(K key, V value);
+//            boolean removeAll();
+//
+//            boolean isEmpty();
+//            int size();
+        };
+    }
+}
+=======
             V get(K key);
             void put(K key, V value);
             boolean putAll(HashMap map);
@@ -75,3 +101,4 @@ namespace Java {
 }
 
 #endif//NATIVE_JAVA_UTIL_HASH_MAP_HPP
+>>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
