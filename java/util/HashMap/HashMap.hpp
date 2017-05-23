@@ -38,6 +38,7 @@ namespace Java {
         public:
             HashMap();
             ~HashMap();
+
             V get(K key);
             void put(K key, V value);
             boolean putAll(HashMap map);
