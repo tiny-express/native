@@ -30,6 +30,7 @@
 #define NATIVE_JAVA_LANG_MATH_HPP
 
 #include "../String/String.hpp"
+#include <cmath>
 
 namespace Java {
     namespace Lang {
