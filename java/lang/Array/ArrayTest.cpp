@@ -27,14 +27,12 @@
 extern "C" {
 #include "../../../unit_test.h"
 }
-#include "../String/String.hpp"
+
+#include "Array.hpp"
 
 using namespace Java::Lang;
 
 TEST(JavaLang, ArrayConstructor) {
-//    Array emptyArray;
-//    emptyArray = {1, 2 , 3, 4, 5, 6};
-//    Array array = {1, 2, 3, 4,5};
 }
 
 

@@ -23,3 +23,56 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_UTIL_HASH_MAP_HPP
+#define NATIVE_JAVA_UTIL_HASH_MAP_HPP
+
+#include "../../Lang.hpp"
+
+namespace Java {
+    namespace Util {
+        template <typename K, typename V>
+        class HashMap {
+        private:
+            std::map<K, V> hashMap;
+        public:
+            HashMap();
+            ~HashMap();
+
+            V get(K key);
+            void put(K key, V value);
+            boolean putAll(HashMap map);
+            boolean containsKey(string key);
+            boolean containsValue(V value);
+
+            void clear();
+            boolean remove(K key);
+            boolean remove(K key, V value);
+            boolean removeAll();
+
+            boolean isEmpty();
+            int size();
+        };
+
+        template<typename K, typename V>
+        HashMap<K, V>::HashMap() {
+        };
+
+        template<typename K, typename V>
+        HashMap<K, V>::~HashMap() {
+        }
+
+        template<typename K, typename V>
+        V HashMap<K, V>::get(K key) {
+            V value = hashMap[key];
+            return value;
+        }
+
+        template<typename K, typename V>
+        void HashMap<K, V>::put(K key, V value) {
+            hashMap.insert(std::make_pair(key, value));
+        }
+    }
+}
+
+#endif//NATIVE_JAVA_UTIL_HASH_MAP_HPP

@@ -24,4 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "HashMap.hpp"
+#ifndef NATIVE_UTIL_ABSTRACT_MAP_HPP
+#define NATIVE_UTIL_ABSTRACT_MAP_HPP
+
+#include "../../Lang.hpp"
+using namespace Java::Lang;
+
+namespace Java {
+    namespace Util {
+        class AbstractMap: public virtual Object {
+
+        };
+    }
+}
+
+#endif//NATIVE_UTIL_ABSTRACT_MAP_HPP
