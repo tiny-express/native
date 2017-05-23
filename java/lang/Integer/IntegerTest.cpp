@@ -47,7 +47,60 @@ TEST(JavaLang, IntegerConstructor) {
     ASSERT_EQUAL(3, validInteger.intValue());
 }
 
+TEST(JavaLang, IntegerComparision) {
+    //Give a valid number and make a comparision
+    Integer validNumber = 2;
+    Integer targetNumber;
+
+    // Test validNumber is equal targetNumber
+    targetNumber = 2;
+    ASSERT_TRUE(validNumber == targetNumber);
+
+    // Test validNumber is not equal targetNumber
+    targetNumber = 101;
+    ASSERT_TRUE(validNumber != targetNumber);
+
+    // Test validNumber is less than targetNumber
+    targetNumber = 3;
+    ASSERT_TRUE(validNumber < targetNumber);
+
+    // Test validNumber is equal or less than targetNumber
+    targetNumber = 3;
+    ASSERT_TRUE(validNumber <= targetNumber);
+
+    // Test validNumber is more than targetNumber
+    targetNumber = 1;
+    ASSERT_TRUE(validNumber > targetNumber);
+
+    // Test validNumber is equal or more than targetNumber
+    targetNumber = 2;
+    ASSERT_TRUE(validNumber >= targetNumber);
+}
+
 TEST(JavaLang, IntegerOperator) {
+    // Given a valid number
+    Integer validNumber = 5;
+    Integer targetNumber = 3;
+
+    // Make a summation with targetNumber
+    Integer summationNumber = 8;
+    ASSERT_TRUE(summationNumber == (validNumber + targetNumber));
+
+    // Make a subtraction with targetNumber
+    Integer subtractionNumber = 2;
+    ASSERT_TRUE(subtractionNumber == (validNumber - targetNumber));
+
+    // Make a multiplication with targetNumber
+    Integer multiplicationNumber = 15;
+    ASSERT_TRUE(multiplicationNumber == (validNumber * targetNumber));
+
+    // Make a division with targetNumber
+    Integer divisionNumber = 1;
+    ASSERT_TRUE(divisionNumber == (validNumber / targetNumber));
+
+    // Make a modulo with targetNumber
+    Integer modNumber = 2;
+    ASSERT_TRUE(modNumber == (validNumber % targetNumber));
 }
 
 TEST(JavaLang, IntegerParseInt) {
