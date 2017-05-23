@@ -39,7 +39,7 @@ int main(int argc, const char *argv[]) {
         printf("could not start mock server\n");
         exit(error);
     }
-    sleep_miliseconds(2000); // wait to mock server start
+    sleep_miliseconds(150); // wait to mock server start
     int result = ctest_main(argc, argv);
     pthread_cancel(thread);
     return result;
