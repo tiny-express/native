@@ -140,10 +140,10 @@ int String::indexOf(int ch, int fromIndex) const {
     if(fromIndex > length) {
         return -1;
     }
-    register int k = fromIndex;
-    for(k; k < length; k++) {
-        if(original[k] == (char) ch) {
-            return k;
+    register int index = fromIndex;
+    for(index; index < length; index++) {
+        if(original[index] == (char) ch) {
+            return index;
         }
     }
     return -1;
@@ -162,9 +162,9 @@ int String::indexOf(String str, int fromIndex) const {
 //    int length_str = length_pointer_char(str.original);
 //    int index = 0;
 //    int temp;
-//    register int k = fromIndex;
-//    for(k; k < length; k++) {
-//       if(original[k] == str.original[index] ) {
+//    register int index = fromIndex;
+//    for(index; index < length; index++) {
+//       if(original[index] == str.original[index] ) {
 //
 //       }
 //    }
@@ -173,10 +173,10 @@ int String::indexOf(String str, int fromIndex) const {
 
 int String::lastIndexOf(int ch) {
     int length = length_pointer_char(original);
-    register int k = length - 1;
-    for( k; k >= 0; k--) {
-        if(charAt(k) == (char) ch) {
-            return k;
+    register int index = length - 1;
+    for( index; index >= 0; index--) {
+        if(charAt(index) == (char) ch) {
+            return index;
         }
     }
     return -1;
@@ -184,10 +184,10 @@ int String::lastIndexOf(int ch) {
 
 int String::lastIndexOf(int ch, int fromIndex) {
     int length = fromIndex;
-    register int k = length - 1;
-    for(k; k >= 0; k--) {
-        if(charAt(k) == (char) ch) {
-            return k;
+    register int index = length - 1;
+    for(index; index >= 0; index--) {
+        if(charAt(index) == (char) ch) {
+            return index;
         }
     }
     return -1;
