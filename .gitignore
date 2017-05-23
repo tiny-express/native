@@ -15,5 +15,6 @@
 /test
 /libnative_static.a
 /libnative.so
+/test.o
 /test.txt
 
