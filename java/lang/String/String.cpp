@@ -40,11 +40,11 @@ String::String(string target) {
     this->original = target;
 }
 
-String::String(Array<byte> bytes) {
-//    for (byte byte: bytes) {
-//    }
-//    this->original = reinterpret_cast<string>(bytes);
-}
+//String::String(Array<byte> bytes) {
+////    for (byte byte: bytes) {
+////    }
+////    this->original = reinterpret_cast<string>(bytes);
+//}
 
 String::String(const String& target) {
     this->original = target.original;

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//
-// Created by Tu Cao on 5/23/17.
-//
-=======
 /**
  * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
@@ -28,43 +23,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
->>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
 
 extern "C" {
 #include "../../../unit_test.h"
 }
 
 #include "HashMap.hpp"
-<<<<<<< HEAD
-#include "../../Lang.hpp"
-
-using namespace Java::Util;
-
-template <class K, class V>
-class SampleClass {
-private:
-    std::map<K, V> hashMap;
-public:
-    SampleClass();
-    ~SampleClass();
-
-    V get(K key);
-    void put(K key, V value);
-};
-
-template<class K, class V>
-SampleClass<K, V>::SampleClass() { }
-
-template<class K, class V>
-SampleClass<K, V>::~SampleClass() { }
-
-TEST(JavaUtil, HashMap) {
-
-    //SampleClass<string, string> qwe = SampleClass<string, string>();
-
-    HashMap<string, string> asd = HashMap<string, string>();
-
-=======
 
 using namespace Java::Lang;
 using namespace Java::Util;
@@ -84,5 +48,4 @@ TEST(JavaUtil, HashMap) {
     Integer integerNumber = 1;
 //    integerStringHashMap.put(integerNumber, "Abcd");
 //    ASSERT_STR("Abcd", integerStringHashMap.get(1));
->>>>>>> 54cf30d6357efc69e09d2ba5cd79378e65d9f11b
 }

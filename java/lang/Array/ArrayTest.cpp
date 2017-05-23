@@ -33,10 +33,6 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, ArrayConstructor) {
-    Array<byte> bytes;
-    bytes = {65, 66, 67};
-
-    Array<String> = {"hello", "world"};
 }
 
 
