@@ -3,25 +3,26 @@
 [![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 
-This library provides a set of low-level and productivity functions for C/C++ application.
+This library provides low-level optimization and productivity library for C/C++ application.
 
-Beside standard library, we would like to have a greater customization with main goals:
+Beside standard library, we would like to have a greater customization with some goals:
 
-- Blazing fast performance of GAS & C/C++
-- Using Java packages in C++ with human readable
-- Third party clients support for Food Tiny micro-components will be in java.vendor
+- Blazing fast performance with GAS & C
+- Powerful structured programming in C++ for scalability
+- Java standard packages for productivity & maintainability
+- Support third party services for Food Tiny micro-services
 
 This project is also useful for new developers in practical programming.
 
 ###  Optimization
-- This library is originally developed in C but we still can make things go faster by optimizing in GAS for Linux amd64
-- C version of that function should be delivered first
-- Documentation for GAS can be found at here: [http://cs.lmu.edu/~ray/notes/gasexamples](http://cs.lmu.edu/~ray/notes/gasexamples)
+- This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux amd64
+- C version of every function should be delivered first
 
-### Useful Resources
-- Debugging & Profiling with [Valgrind](http://valgrind.org/)
-- Data Race Detector with [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
-- Leak Memory Detector with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
+### Useful References
+- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
+- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
+- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
+- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 ### Get Started
 
@@ -32,123 +33,97 @@ $ cmake . && make -j && make test
 $ sudo make install
 ```
 
-#### Sample program
-test.cpp
+#### Sample program (test.cpp)
 ```cpp
-#include <native/native.hpp>
-using namespace java::lang;
+#include <native/library.hpp>
 int main() {
-    String string = "Hello world";
-    System::out::println(output);
+    String text = "Hello world";
+    System::out::println(text);
     return 0;
 }
 ```
-Compilation & Run
 ```bash
-$ g++ -o test test.cpp -I/usr/local/include -L/usr/local/lib/libnative_static.a
-$ ./test
+$ g++ -c -o test.o ./test.cpp
+$ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
+$ ./native
 ```
 
 #### Unit Test with C-Unit
-main_test.cpp
 ```cpp
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
-
 #include <native/unit_test.h>
-
 int main(int argc, const char *argv[]) {
    int result = ctest_main(argc, argv);
    return result;
 }
-
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
 ```
 
 ### Contributors
-- You can reference coding standard for C in [here](https://www.gnu.org/prep/standards/html_node/Writing-C.html) and previous implementation before starting your contribution
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
-- Please read guidelines in CONTRIBUTION.md
-
+- Please read guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
 
 # Documentation
 
-### C++ Functions
+#### Data Types
+All data types are implemented and ready to use in C++ Application
+- [x] char - Java & C++
+- [x] byte - Java & C++ (unsigned char)
+- [x] string - C++ (char*)
+- [x] short - Java & C++
+- [x] int - Java & C++
+- [x] long - Java & C++
+- [x] float - Java & C++
+- [x] double - Java & C++
+- [x] boolean - Java & C++ (bool)
 
-#### Type Casting
-- [ ] Short - short
-- [x] Integer - int
-- [x] Long - long
-- [x] Float - float
-- [x] Double - double
-- [x] String - char*
-- [x] Boolean - bool
+#### Java Standard Packages
+All Java packages are still in transformation so we can have a general look below
+##### Java.Lang
+- [ ] Java.Lang.Boolean
+- [ ] Java.Lang.Byte
+- [ ] Java.Lang.Character
+- [ ] Java.Lang.CharSequence
+- [ ] Java.Lang.Comparable
+- [ ] Java.Lang.Double
+- [ ] Java.Lang.Exception
+- [ ] Java.Lang.Float
+- [x] Java.Lang.Integer
+- [ ] Java.Lang.Long
+- [ ] Java.Lang.Math
+- [ ] Java.Lang.Number
+- [ ] Java.Lang.Object
+- [ ] Java.Lang.Short
+- [x] Java.Lang.String
+- [ ] Java.Lang.System
+- [ ] Java.Lang.Throwable
+##### Java.IO
+- [ ] Java.Lang.BufferedReader
+- [ ] Java.Lang.FileWriter
+- [ ] Java.Lang.IOException
+- [ ] Java.Lang.OutputStreamWriter
+- [ ] Java.Lang.Reader
+- [ ] Java.Lang.Writer
+##### Java.Util
+- [ ] Java.Util.AbstractCollection
+- [ ] Java.Util.ArrayList
+- [ ] Java.Util.HashMap
+- [ ] Java.Util.LinkedList
+##### Java.Security
+- [ ] Java.Security.MessageDigest
+##### Java.Net
+- [ ] Java.Net.URL
+- [ ] Java.Net.HttpURLConnection
 
-#### Collections
-- [ ] ArrayList
-- [ ] LinkedList
-- [ ] HashMap
-- [ ] HashSet
-- [ ] TreeSet
-- [ ] PriorityQueue
-
-#### Builtin Functions
-- [x] empty
-- [x] len
-- [ ] copy
-- [ ] split
-- [ ] trim
-- [ ] join
-- [ ] range
-- [ ] sorted
-- [ ] reversed
-- [ ] random
-- [ ] print
-- [ ] file
-- [ ] chr
-- [ ] ord
-- [x] round
-- [x] md5
-- [x] sha1
-- [ ] type
-
-### C Library
-#### Common
-- [x] length_pointer_char
-- [x] length_pointer_pointer_char
-- [x] join_pointer_pointer_char
-- [x] linear_search
-- [x] binary_search
-- [x] quick_sort
-- [x] segment_pointer_char
-- [x] segment_pointer_pointer_char
-#### Compress
-#### Crypto
-- [x] base64_encode
-- [x] base64_decode
-- [x] md5_encode
-- [x] sha1_encode
-#### Datetime
-- [x] date
-- [x] timestamp
-#### Network
-#### Storage
-#### String
-- [x] string_copy
-- [x] string_split
-- [x] string_concat
-#### System
-#### Thread
-- [x] set_interval
-- [x] set_timeout
-#### Validator
-- [x] is_phone_number
-- [x] is_email
-- [x] is_url
-#### Vendor
-- [x] send_sms
-- [x] send_mail
-- [x] send_notification
+#### Additional features outside Java packages
+- [x] Java.Lang.Array
+- [ ] Java.Vendor.AbstractVendor
+- [ ] Java.Vendor.ElasticSearch
+- [ ] Java.Vendor.Etcd
+- [ ] Java.Vendor.Firebase
+- [ ] Java.Vendor.SendGrid
+- [ ] Java.Vendor.Twilio
