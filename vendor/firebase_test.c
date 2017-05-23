@@ -86,6 +86,9 @@ TEST(Vendor, FirebaseCheckValidation) {
 }
 
 TEST(Vendor, FirebaseCheckRequestToServer) {
+    #ifdef __APPLE__
+        return;
+    #endif
     // Initialize all parameters with valid information
     char *service_url           = FIREBASE_SERVICE_URL;
     char *service_token         = FIREBASE_SERVICE_TOKEN;
