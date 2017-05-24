@@ -104,19 +104,25 @@ void sort_string(char *array[], int left_position, int right_position) {
         while (strcmp(array[left], pivot) < 0)  left++;
         while (strcmp(array[right], pivot) > 0) right--;
         if (left <= right) {
-            char *temp = malloc(sizeof(char) * MAX_STRING_LENGTH);
-            strcpy(temp, array[left]);
-            array[left] = malloc(sizeof(char) * length_pointer_char(array[right]) + 1);
-            strcpy(array[left], array[right]);
-            array[right] = malloc(sizeof(char) * length_pointer_char(temp) + 1);
-            strcpy(array[right], temp);
-            free(temp);
+//            char *temp = malloc(sizeof(char) * MAX_STRING_LENGTH);
+//            strcpy(temp, array[left]);
+//            array[left] = malloc(sizeof(char) * length_pointer_char(array[right]) + 1);
+//            strcpy(array[left], array[right]);
+//            array[right] = malloc(sizeof(char) * length_pointer_char(temp) + 1);
+//            strcpy(array[right], temp);
+            //free(temp);
+
+            char *temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+
             left++;
             right--;
         }
     }
     if (left_position < right) sort_string(array, left_position, right);
     if (left < right_position) sort_string(array, left, right_position);
+
 }
 
 /**
