@@ -138,9 +138,7 @@ TEST(Network, HttpQuery) {
     ASSERT_STR(expect, result);
 }
 TEST(Network, HttpRequest) {
-	#ifdef __APPLE__
-		return;
-	#endif
+
 	char *headers[2] = {
 		"\0"
 	};
