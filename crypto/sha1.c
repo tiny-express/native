@@ -11,7 +11,7 @@
  */
 char *sha1_encode(unsigned char *target) {
 
-    int length_target = length_pointer_char(target);
+    int length_target = length_pointer_char((char*) target);
     unsigned char digest[SHA_DIGEST_LENGTH];
 
     SHA_CTX ctx;

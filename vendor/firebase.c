@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
+
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
@@ -93,7 +93,7 @@ int push_notification(
     );
     JSON_Value *root_value = json_parse_string(response);
     JSON_Object *root_object = json_value_get_object(root_value);
-    int status_value = (int) json_object_get_number(root_object, SUCCESS_LABEL);
+    int status_value = (int) json_object_get_number(root_object, (const char*) SUCCESS_LABEL);
     if (status_value == SUCCESS_VALUE) {
         return TRUE;
     }

@@ -25,10 +25,10 @@
  */
 
 #include "Object.hpp"
-#include <sstream>
 
 using namespace Java::Lang;
 
+/*
 unsigned long Object::hashCode() {
     void *addr = this;
 
@@ -38,3 +38,4 @@ unsigned long Object::hashCode() {
     unsigned long hashCode;
     return hashCode;
 }
+*/

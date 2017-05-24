@@ -28,6 +28,7 @@
 #include "../vendor.h"
 #include "../common.h"
 #include "../string.h"
+#include "../type.h"
 
 /**
  * Elastic Search Query

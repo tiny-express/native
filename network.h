@@ -27,6 +27,10 @@
 #ifndef NATIVE_NETWORK_H
 #define NATIVE_NETWORK_H
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
 #define HTTPS "https://"
 #define HTTP "http://"
 #define LOCALHOST "localhost"

@@ -27,7 +27,7 @@
 extern "C" {
 #include "../../../unit_test.h"
 }
-#include "Long.hpp";
+#include "Long.hpp"
 
 using namespace Java::Lang;
 
@@ -50,6 +50,4 @@ TEST(JavaLang, Long) {
 //
 //    // Integer *validLongPointer = Long::parseLong("6");
 //    // ASSERT_EQUAL(6, validLongPointer->longValue());
-
 }
-

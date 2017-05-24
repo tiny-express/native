@@ -5,6 +5,7 @@
  * copyright (c) 2014 joseph werle
 */
 #include "../crypto.h"
+#include <ctype.h>
 #include <stdlib.h>
 
 char *

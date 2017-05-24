@@ -26,6 +26,7 @@
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include "../type.h"
 #include "../common.h"
 #include "../string.h"
 #include "../network.h"
