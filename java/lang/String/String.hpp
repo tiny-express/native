@@ -85,7 +85,8 @@ namespace Java {
             static String valueOf(double target);
         public:
             String operator+(const String& target2);
-            boolean operator==(const String& target2);
+            boolean operator<(const String& target2) const;
+            boolean operator==(const String& target2) const;
             boolean operator!=(const String& target2);
         };
     }

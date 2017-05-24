@@ -416,7 +416,7 @@ String String::operator+(const String& target2) {
     return result;
 }
 
-bool String::operator==(const String &target2) {
+bool String::operator==(const String &target2) const {
     if (string_equals(this->original, target2.toString())) {
         return true;
     }
@@ -425,4 +425,12 @@ bool String::operator==(const String &target2) {
 
 bool String::operator!=(const String &target2) {
     return !this->operator==(target2);
+}
+
+bool String::operator<(const String &target2) const {
+    if (strcmp(this->original, target2.toString()) < 0) {
+        return true;
+    }
+
+    return false;
 }
