@@ -49,6 +49,10 @@ TEST(Network, HttpHostname) {
     hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
 	ASSERT_STR(LOCALHOST, hostname);
 
+
+    hostname = http_hostname("http://google.com:3000/");
+    ASSERT_STR("google.com", hostname);
+
 	hostname = http_hostname("https://");
 	ASSERT_STR(NULL, hostname);
 
@@ -96,6 +100,20 @@ TEST(Network, HttpPort) {
 
     result = http_port("https://foodtiny.com");
     ASSERT_EQUAL(443, result);
+}
+
+TEST(Network, UrlPort) {
+    int port = url_port("http://google.com");
+    ASSERT_EQUAL(-1, port);
+
+    port = url_port("http://google.com:80/");
+    ASSERT_EQUAL(80, port);
+
+    port = url_port("https://google.com/");
+    ASSERT_EQUAL(-1, port);
+
+    port = url_port("https://google.com:443");
+    ASSERT_EQUAL(443, port);
 }
 
 TEST(Network, HttpQuery) {
