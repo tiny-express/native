@@ -305,9 +305,9 @@ TEST(JavaLang, StringOperator) {
 
 TEST(JavaLang, StringMemoryCheck) {
     // Test create object String with validString and change data of validString
-    string validString = string_copy("foodtiny");
+    string validString = string_copy((char*)"foodtiny");
     String stringTest = validString;
-    validString = string_copy("");
+    validString = string_copy((char*)"");
 
     int expect = 8;
     int result = stringTest.length();
