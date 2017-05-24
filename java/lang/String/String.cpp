@@ -472,4 +472,3 @@ bool String::operator<(const String &target2) const {
 
     return false;
 }
-
