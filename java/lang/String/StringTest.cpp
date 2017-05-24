@@ -75,6 +75,13 @@ TEST(JavaLang, StringCharAt) {
     ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
 }
 
+TEST(JavaLang, StringCompareTo) {
+}
+
+TEST(JavaLang, StringCompareToIgnoreCase) {
+
+}
+
 TEST(JavaLang, StringConcat) {
     // Given two strings - Return concatenation result
     String textConcat1 = "Hello ";
