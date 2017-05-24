@@ -74,7 +74,7 @@ string URL::toString() const {
     }
 
     if (path != "/") {
-        url = url + path;
+        url += path;
     }
 
     url = url + (query.isEmpty() ? "" : "?") + query;
