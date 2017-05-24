@@ -105,7 +105,9 @@ TEST(Vendor, TwilioCheckValidation) {
 }
 
 TEST(Vendor, TwilioCheckRequestToServer) {
-
+    #ifdef __APPLE__
+        return;
+    #endif
     // Initialize all variable with valid information
     char *account_id        = TWILLIO_ACCOUNT_ID;
     char *account_token     = TWILLIO_ACCOUNT_TOKEN;
