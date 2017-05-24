@@ -39,15 +39,15 @@ namespace Java {
             HashMap();
             ~HashMap();
 
-            V get(K key);
+            V* get(K key);
             void put(K key, V value);
             boolean putAll(HashMap<K, V> map); //TODO: implement this later
             boolean containsKey(K key);
-            boolean containsValue(V value);
+            boolean containsValue(const V value);
 
             void clear();
             boolean remove(K key);
-            boolean remove(K key, V value);
+            boolean remove(K key, const V value);
             void removeAll();
 
             boolean isEmpty();
@@ -63,9 +63,14 @@ namespace Java {
         }
 
         template<typename K, typename V>
-        V HashMap<K, V>::get(K key) {
-            V value = hashMap[key];
-            return value;
+        V* HashMap<K, V>::get(K key) {
+            auto const it = hashMap.find(key);
+
+            if (it == hashMap.end()) {
+                return NULL;
+            }
+
+            return &hashMap[key];
         }
 
         template<typename K, typename V>
@@ -75,14 +80,15 @@ namespace Java {
 
         template<typename K, typename V>
         boolean HashMap<K,V>::containsKey(K key) {
-            if (NULL != hashMap[key]) {
-                return true;
+            if (NULL == get(key)) {
+                return false;
             }
-            return false;
+
+            return true;
         }
 
         template<typename K, typename V>
-        boolean HashMap<K,V>::containsValue(V value) {
+        boolean HashMap<K,V>::containsValue(const V value) {
             for (auto const &ent1 : hashMap) {
                 if (ent1.second == value) {
                     return true;
@@ -98,22 +104,22 @@ namespace Java {
 
         template<typename K, typename V>
         boolean HashMap<K,V>::remove(K key) {
-            if (NULL != hashMap[key]) {
-                hashMap.erase(key);
-                return true;
+            if (NULL == get(key)) {
+                return false ;
             }
 
-            return false;
+            hashMap.erase(key);
+            return true;
         }
 
         template<typename K, typename V>
-        boolean HashMap<K,V>::remove(K key, V value) {
-            if (NULL != hashMap[key] && value == hashMap[key]) {
-                hashMap.erase(key);
-                return true;
+        boolean HashMap<K,V>::remove(K key, const V value) {
+            if (NULL == get(key) || !containsValue(value)) {
+                return false;
             }
 
-            return false;
+            hashMap.erase(key);
+            return true;
         }
 
         template<typename K, typename V>
