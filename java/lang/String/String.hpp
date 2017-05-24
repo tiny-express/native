@@ -43,6 +43,7 @@ namespace Java {
             //String(Array<byte> bytes);
             String(const String &target);
             ~String();
+
         public:
             char charAt(int index);
             String concat(String str);

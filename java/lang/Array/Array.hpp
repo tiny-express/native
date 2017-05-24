@@ -34,7 +34,7 @@ using namespace Java::Lang;
 namespace Java {
     namespace Lang {
         template <typename E>
-        class Array : public virtual Object {
+        class Array : public Object {
         private:
             E *array;
             int virtualSize = 4;

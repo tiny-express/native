@@ -224,4 +224,57 @@ TEST(JavaLang, StringOperator) {
     ASSERT_TRUE(comparable);
 }
 
+TEST(JavaLang, StringTestFail) {
+
+    // Test delete a Object String is fail
+    String *text1 = new String("Anhkhoa");
+
+    String *text2 = new String(*text1);
+    delete text1;
+
+    puts(text1->toCharArray());
+    puts(text2->toCharArray());
+    delete text2;
+
+
+    // Test memory
+    char *givetest = new char[10];
+
+    int index;
+    for (index = 0; index < 9; ++index) {
+        givetest[index] = 'a';
+    }
+    givetest[9] = '\0';
+
+    String str1 = givetest;
+    String str2(str1);
+
+    char *resultStr1 = str1.toCharArray();
+    char *resultStr2 = str2.toCharArray();
+
+    std::cout << "To char array str1: ";
+    puts(resultStr1);
+    std::cout << "To char array str2: ";
+    puts(resultStr2);
+
+    // Change data of givetest but data of str1 and str2 also changed
+    for (index = 0; index < 9; ++index) {
+        givetest[index] = 'b';
+    }
+
+    resultStr1 = str1.toCharArray();
+    resultStr2 = str2.toCharArray();
+
+    ASSERT_STR("aaaaaaaaa\0", resultStr1);
+
+    std::cout << "To char array str1: ";
+    puts(resultStr1);
+    std::cout << "To char array str2: ";
+    puts(resultStr2);
+
+    // Delete data of givetest but str1 and str2 also deleted
+    delete givetest;
+    puts(str1.toCharArray());
+    puts(str2.toCharArray());
+}
 
