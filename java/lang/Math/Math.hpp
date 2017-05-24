@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
+// https://docs.oracle.com/javasdoublee/8/docs/api/java/lang/Math.html
 
 #ifndef NATIVE_JAVA_LANG_MATH_HPP
 #define NATIVE_JAVA_LANG_MATH_HPP

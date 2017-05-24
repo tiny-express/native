@@ -24,35 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_BUILTIN_H
-#define NATIVE_BUILTIN_H
+#ifndef NATIVE_MATH_H
+#define NATIVE_MATH_H
 
-#include <stdio.h>
 #include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <zlib.h>
-#include <ctype.h>
-#include <pthread.h>
 
-#include "compress.h"
-#include "crypto.h"
-#include "datetime.h"
-#include "common.h"
-#include "math.h"
-#include "network.h"
-#include "network.h"
-#include "storage.h"
-#include "string.h"
-#include "system.h"
-#include "thread.h"
-#include "type.h"
-#include "validator.h"
-#include "vendor.h"
+double math_pow(double a, double b);
 
-#endif//NATIVE_BUILTIN_H
+
+
+#endif

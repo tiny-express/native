@@ -25,41 +25,58 @@
  */
 
 #include "URL.hpp"
-#include <regex.h>
-#include "../../../validator.h"
 
 using namespace Java::Net;
 
-URL::URL() {
-    this->url = "";
-}
-
-URL::URL(String url) {
-    this->url = url;
+URL::URL(String spec) {
+    string url = spec.toString();
+    this->protocol = http_protocol(url);
+    this->host = http_hostname(url);
+    this->port = url_port(url);
+    this->query = http_query(url);
+    this->path = http_path(url);
 }
 
 URL::~URL() {
 }
 
-boolean URL::isURL() {
-    if (this->url.isEmpty()) {
-        return false;
-    }
-    regex_t exp;
-    int convert = regcomp(&exp, URL_PATTERN, REG_EXTENDED);
-    if (convert != 0) {
-        return false;
-    }
-    if (regexec(&exp, this->url.toString(), 0, NULL, 0) == 0) {
-        regfree(&exp);
-        return true;
-    }
-    return false;
+String URL::getHost() {
+    return this->host;
 }
 
-String URL::getURL() {
-    return this->url;
+String URL::getPath() {
+    return this->path;
 }
 
+int URL::getPort() {
+    return this->port;
+}
 
+String URL::getProtocol() {
+    return this->protocol;
+}
 
+String URL::getQuery() {
+    return this->query;
+}
+
+string URL::toString() const {
+    String protocol = this->protocol;
+    String host = this->host;
+    int port = this->port;
+    String path = this->path;
+    String query = this->query;
+
+    String url = protocol + "://" + host;
+
+    if (port > -1) {
+        url = url + ":" + String::valueOf(port);
+    }
+
+    if (path != "/") {
+        url += path;
+    }
+
+    url = url + (query.isEmpty() ? "" : "?") + query;
+    return url.toString();
+}
