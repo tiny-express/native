@@ -41,14 +41,14 @@ namespace Java {
 
             V get(K key);
             void put(K key, V value);
-            boolean putAll(HashMap map);
-            boolean containsKey(string key);
+            boolean putAll(HashMap<K, V> map); //TODO: implement this later
+            boolean containsKey(K key);
             boolean containsValue(V value);
 
             void clear();
             boolean remove(K key);
             boolean remove(K key, V value);
-            boolean removeAll();
+            void removeAll();
 
             boolean isEmpty();
             int size();
@@ -72,6 +72,66 @@ namespace Java {
         void HashMap<K, V>::put(K key, V value) {
             hashMap.insert(std::make_pair(key, value));
         }
+
+        template<typename K, typename V>
+        boolean HashMap<K,V>::containsKey(K key) {
+            if (NULL != hashMap[key]) {
+                return true;
+            }
+            return false;
+        }
+
+        template<typename K, typename V>
+        boolean HashMap<K,V>::containsValue(V value) {
+            for (auto const &ent1 : hashMap) {
+                if (ent1.second == value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        template<typename K, typename V>
+        void HashMap<K,V>::clear() {
+            hashMap.clear();
+        }
+
+        template<typename K, typename V>
+        boolean HashMap<K,V>::remove(K key) {
+            if (NULL != hashMap[key]) {
+                hashMap.erase(key);
+                return true;
+            }
+
+            return false;
+        }
+
+        template<typename K, typename V>
+        boolean HashMap<K,V>::remove(K key, V value) {
+            if (NULL != hashMap[key] && value == hashMap[key]) {
+                hashMap.erase(key);
+                return true;
+            }
+
+            return false;
+        }
+
+        template<typename K, typename V>
+        void HashMap<K,V>::removeAll() {
+            hashMap.clear();
+        }
+
+        template<typename K, typename V>
+        boolean HashMap<K,V>::isEmpty() {
+            return (hashMap.size() == 0);
+        }
+
+        template<typename K, typename V>
+        int HashMap<K,V>::size() {
+            return hashMap.size();
+        }
+
+
     }
 }
 
