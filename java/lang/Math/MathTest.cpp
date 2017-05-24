@@ -55,7 +55,7 @@ TEST(JavaLang, MathFloor) {
 }
 
 TEST(JavaLang, MathMax) {
-    return;
+    // return;
     double double_value_max_1 = 4;
     double double_value_max_2 = 2;
     ASSERT_EQUAL(4, Math::max(double_value_max_1, double_value_max_2));
@@ -88,7 +88,6 @@ TEST(JavaLang, MathMin) {
 }
 
 TEST(JavaLang, MathPow) {
-    return;
     double base = 3;
     double power = 3;
     ASSERT_EQUAL(27, Math::pow(base,power));
@@ -104,4 +103,10 @@ TEST(JavaLang, MathRound) {
 
     double double_value_sqrt = 207936;
     ASSERT_EQUAL(456, Math::sqrt(double_value_sqrt));
+}
+
+TEST(JavaLang, MathRandom) {
+    double random_value;
+    ASSERT_TRUE(Math::random() > 0);
+    
 }
