@@ -43,10 +43,10 @@ TEST(JavaNet, URLConstructor) {
 
     urlString = "http://";
     url = URL(urlString);
-    ASSERT_EQUAL("", url.getProtocol().toString());
-    ASSERT_EQUAL("", url.getHost().toString());
-    ASSERT_EQUAL("", url.getPath().toString());
-    ASSERT_EQUAL("", url.getQuery().toString());
+    ASSERT_STR("", url.getProtocol().toString());
+    ASSERT_STR("", url.getHost().toString());
+    ASSERT_STR("", url.getPath().toString());
+    ASSERT_STR("", url.getQuery().toString());
     ASSERT_EQUAL(-1, url.getPort());
 }
 
