@@ -31,7 +31,9 @@
 #define ETCD_KEY "/elassandra/development/seeds/test_node"
 
 TEST(Vendor, EtcdGet) {
-
+    #ifdef __APPLE__
+        return;
+    #endif
     char *node = etcd_get(ETCD_MASTER, "/elassandra/development/seeds/test_node");
     ASSERT_TRUE(length_pointer_char(node) > 0);
 
@@ -43,7 +45,9 @@ TEST(Vendor, EtcdGet) {
 }
 
 TEST(Vendor, EtcdSet) {
-
+    #ifdef __APPLE__
+        return;
+    #endif
     int result = etcd_set(ETCD_MASTER, ETCD_KEY, "1223");
     ASSERT_TRUE(result);
 
