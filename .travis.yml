@@ -9,7 +9,8 @@ compiler:
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
-- sudo python setup.py install
+- export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+- sudo pip install -r mock/requirements.txt
 - cmake .
 script:
 - make native_test -j
