@@ -252,9 +252,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
  * @return int
  */
 int String::length() {
-    if (this->size == 0) {
-        this->size = length_pointer_char(this->original);
-    }
+    this->size = length_pointer_char(this->original);
     return this->size;
 }
 
