@@ -1,3 +1,2 @@
 sudo apt-get install -y libuv-dev
 sudo apt-get install -y python python-pip
-sudo pip install -r mock/requirements.txt
