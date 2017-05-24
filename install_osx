@@ -1,3 +1,5 @@
 export HOMEBREW_NO_AUTO_UPDATE=1
+brew config
+brew doctor
 brew install libuv openssl
 brew install python python-dev
