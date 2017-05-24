@@ -265,7 +265,15 @@ TEST(JavaLang, StringOperator) {
     String rightString = " world";
 
     leftString += rightString;
-    ASSERT_STR(leftString.toString(), "hello world");
+    ASSERT_STR("hello world", leftString.toString());
+
+    // Given 2 Strings to check "+=" operator
+    String string = "";
+    String string1 = "Hello";
+    String string2 = " Galaxy";
+
+    string += string1 + string2 + "!";
+    ASSERT_STR("Hello Galaxy!", string.toString());
 }
 
 TEST(JavaLang, StringMemoryCheck) {
