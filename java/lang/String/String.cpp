@@ -444,9 +444,8 @@ String String::operator+(const String& target2) {
     return result;
 }
 
-String String::operator+=(const String& target2) {
-    String result = string_concat(this->original, target2.original);
-    return result;
+void String::operator+=(const String& target2) {
+    *this = string_concat(this->original, target2.original);
 }
 
 bool String::operator==(const String &target2) const {
