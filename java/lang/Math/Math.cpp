@@ -77,10 +77,11 @@ int	Math::min(int a, int b) {
 }
 
 double Math::pow(double a, double b) {
-    return pow(a, b);
+    return math_pow(a, b);
 }
 
 double Math::random() {
+    srand(time(NULL));
     return rand();
 }
 

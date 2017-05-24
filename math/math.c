@@ -23,36 +23,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+#include "../math.h"
 
-#ifndef NATIVE_BUILTIN_H
-#define NATIVE_BUILTIN_H
-
-#include <stdio.h>
-#include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <zlib.h>
-#include <ctype.h>
-#include <pthread.h>
-
-#include "compress.h"
-#include "crypto.h"
-#include "datetime.h"
-#include "common.h"
-#include "math.h"
-#include "network.h"
-#include "network.h"
-#include "storage.h"
-#include "string.h"
-#include "system.h"
-#include "thread.h"
-#include "type.h"
-#include "validator.h"
-#include "vendor.h"
-
-#endif//NATIVE_BUILTIN_H
+double math_pow(double a, double b) {
+    return pow(a,b);
+}

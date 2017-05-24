@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_LANG_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_HPP
 
+#include "../Object/Object.hpp"
 #include "../Array/Array.hpp"
-#include "../Number/Number.hpp"
 #include "../CharSequence/CharSequence.hpp"
 
 namespace Java {

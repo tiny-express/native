@@ -88,6 +88,7 @@ file(GLOB_RECURSE SOURCES
     crypto/*
     datetime/*
     java/*
+    math/*
     network/*
     server/*
     storage/*
@@ -110,6 +111,7 @@ file(GLOB_RECURSE TESTS
     crypto/*_test.c
     datetime/*_test.c
     java/**/*Test.cpp
+    math/*_test.c
     network/*_test.c
     server/*_test.c
     storage/*_test.c
