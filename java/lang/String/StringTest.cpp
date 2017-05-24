@@ -35,47 +35,62 @@ TEST(JavaLang, StringConstructor) {
     // Given empty value for String constructor and assign value - Return string
     String emptyString;
     emptyString = (string) "Hello world";
-    ASSERT_STR("Hello world", emptyString.toCharArray());
+    ASSERT_STR("Hello world", emptyString.toString());
 
     // Given byte array for String constructor - Return string
-//    Array<byte> bytes = {65, 66, 67, 0};
-//    String byteString = bytes;
-//    ASSERT_STR("ABC", byteString.toCharArray());
+    Array<byte> bytes = {65, 66, 67};
+    String byteString = bytes;
+    ASSERT_STR("ABC", byteString.toString());
 
     // Given constant string for String constructor - Return string
     String normalString ="Hello world";
-    ASSERT_STR("Hello world", normalString.toCharArray());
+    ASSERT_STR("Hello world", normalString.toString());
+}
+
+TEST(JavaLang, StringDestructor) {
+    // Given data type declaration - Destructor will be called by system
+    String text = "";
+
+    // Given memory allocation for textPointer - Cleanup memory success
+    String *textPointer = new String("Hello");
+    delete textPointer;
 }
 
 TEST(JavaLang, StringCharAt) {
-    String text = "Hello Hello Hello ";
-
+    // Given a string - Return first position is exist
+    String text = "Hello World";
     char positionIsExist = text.charAt(0);
     ASSERT_TRUE('H' == positionIsExist);
 
-    char positionIsNotExist = text.charAt(-1);
-    ASSERT_TRUE('\0' == positionIsNotExist);
+    // Given a string - Return negative position is not exist
+    char negativePositionIsNotExist = text.charAt(-1);
+    ASSERT_TRUE(negativePositionIsNotExist == '\0');
+
+    // Given a string - Return out of scope position is not exist
+    char outOfScopePositionIsNotExist = text.charAt(1000);
+    ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
 }
 
 TEST(JavaLang, StringConcat) {
-    String textPlus1 = "Hello Hello Hello ";
-    String textPlus2 = "phuoc";
-    String result1 = textPlus1.concat(textPlus2);
-    ASSERT_STR("Hello Hello Hello phuoc", result1.toCharArray());
+    // Given two strings - Return concatenation result
+    String textConcat1 = "Hello ";
+    String textConcat2 = "World";
+    String concatenationResult = textConcat1.concat(textConcat2);
+    ASSERT_STR("Hello World", concatenationResult.toString());
 
-    textPlus2 = "";
-    result1 = textPlus1.concat(textPlus2);
-    ASSERT_STR("Hello Hello Hello ", result1.toCharArray());
+    // Given three strings - Return concatenation result
+    String textConcat0 = "Food Tiny ";
+    ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2).toString());
 }
 
+// FIXME
 TEST(JavaLang, StringEndsWith) {
     String textPlus = "Hello welcom to VietNam";
-
     String String_string = "VietNam";
     ASSERT_TRUE(textPlus.endsWith(String_string));
 }
 
-
+// FIXME
 TEST(JavaLang, StringIndexOf) {
     String textPlus = "Hello Hello Hello ";
 
@@ -98,6 +113,7 @@ TEST(JavaLang, StringIndexOf) {
     ASSERT_EQUAL(0, result1);
 }
 
+// FIXME
 TEST(JavaLang, StringIsEmpty) {
     String textPlus = "Hello Hello Hello ";
     ASSERT_TRUE(!textPlus.isEmpty());
@@ -106,7 +122,7 @@ TEST(JavaLang, StringIsEmpty) {
     ASSERT_TRUE(textPlus.isEmpty());
 }
 
-
+// FIXME
 TEST(JavaLang, StringLength) {
     String textPlus = "Hello Hello Hello ";
 
@@ -116,22 +132,25 @@ TEST(JavaLang, StringLength) {
     ASSERT_EQUAL(0, textPlus.length());
 }
 
+//FIXME
 TEST(JavaLang, StringReplace) {
     String textPlus = "Hello Hello Hello ";
 
     String result = textPlus.replace('e', 'i');
-    ASSERT_STR("Hillo Hillo Hillo ", result.toCharArray());
+    ASSERT_STR("Hillo Hillo Hillo ", result.toString());
 
     String String_string1 = "Hello";
     String String_string2 = "Phuoc";
     result = textPlus.replaceAll(String_string1, String_string2);
-    ASSERT_STR("Phuoc Phuoc Phuoc ", result.toCharArray());
+    ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
 }
 
+// FIXME
 TEST(JavaLang, StringSplit) {
 
 }
 
+//FIXME
 TEST(JavaLang, StringStartsWith) {
     String textPlus = "Hello Hello Hello ";
 
@@ -139,67 +158,70 @@ TEST(JavaLang, StringStartsWith) {
     ASSERT_TRUE(textPlus.startsWith(String_string));
 }
 
+//FIXME
 TEST(JavaLang, StringToLowerCase) {
     String textPlus = "Hello HELLO Hello ";
 
     String result = textPlus.toLowerCase();
-    ASSERT_STR("hello hello hello ", result.toCharArray());
+    ASSERT_STR("hello hello hello ", result.toString());
 }
 
+//FIXME
 TEST(JavaLang, StringToUpperCase) {
     String textPlus = "Hello HELLO Hello ";
 
     String result = textPlus.toUpperCase();
-    ASSERT_STR("HELLO HELLO HELLO ", result.toCharArray());
+    ASSERT_STR("HELLO HELLO HELLO ", result.toString());
 }
 
+//FIXME
 TEST(JavaLang, StringTrim) {
     String textPlus = " Hello HELLO Hello ";
 
     String result = textPlus.trim();
-    ASSERT_STR("Hello HELLO Hello", result.toCharArray());
+    ASSERT_STR("Hello HELLO Hello", result.toString());
 }
 
 TEST(JavaLang, StringValueOf) {
     // Value of boolean
     boolean isChecked = true;
     String valueOfBoolean = String::valueOf(isChecked);
-    ASSERT_STR((string) "1", valueOfBoolean.toCharArray());
+    ASSERT_STR((string) "1", valueOfBoolean.toString());
 
     // Value of single character
     char givenChar = '\0';
     String valueOfChar = String::valueOf(givenChar);
-    ASSERT_STR((string) "\0", valueOfChar.toCharArray());
+    ASSERT_STR((string) "\0", valueOfChar.toString());
 
     // Value of string
-    string givenString = "Hello world";
+    string givenString = (string) "Hello world";
     String valueOfString = String::valueOf(givenString);
-    ASSERT_STR(givenString, valueOfString.toCharArray());
+    ASSERT_STR(givenString, valueOfString.toString());
 
     // Value of short number
     short givenShortNumber = 5;
     String valueOfShort = String::valueOf(givenShortNumber);
-    ASSERT_STR("5", valueOfShort.toCharArray());
+    ASSERT_STR("5", valueOfShort.toString());
 
     // Value of integer number
     int givenIntegerNumber = 34567;
     String valueOfInt = String::valueOf(givenIntegerNumber);
-    ASSERT_STR("34567", valueOfInt.toCharArray());
+    ASSERT_STR("34567", valueOfInt.toString());
 
     // Value of long number
     long givenLongNumber = (long) 12345678893;
     String valueOfLong = String::valueOf(givenLongNumber);
-    ASSERT_STR("12345678893", valueOfLong.toCharArray());
+    ASSERT_STR("12345678893", valueOfLong.toString());
 
     // Value of float number
     float givenFloatNumber = (float) 5.68;
     String valueOfFloat = String::valueOf(givenFloatNumber);
-    ASSERT_STR("5.68", valueOfFloat.toCharArray());
+    ASSERT_STR("5.68", valueOfFloat.toString());
 
     // Value of double number
     double givenDoubleNumber = (double) 456.32423423424;
     String valueOfDouble = String::valueOf(givenDoubleNumber);
-    ASSERT_STR("456.32423423424", valueOfDouble.toCharArray());
+    ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
 TEST(JavaLang, StringOperator) {
@@ -207,7 +229,7 @@ TEST(JavaLang, StringOperator) {
     String textPlus1 = "Hello ";
     String textPlus2 = "World";
     String textResult = textPlus1 + textPlus2;
-    ASSERT_STR("Hello World", textResult.toCharArray());
+    ASSERT_STR("Hello World", textResult.toString());
 
     // Given two string and compare equal them - Return comparable
     String textCompare1 = "Hello";
@@ -233,54 +255,54 @@ TEST(JavaLang, StringMemoryCheck) {
     if (true) {
         return;
     }
-    // Test delete a Object String is fail
-    String *text1 = new String("Anhkhoa");
-    String *text2 = new String(*text1);
-    delete text1;
-
-    // puts(text1->toCharArray()); // DO NOT PUTS IN HERE - text1 is deleted !
-    puts(text2->toCharArray());
-    delete text2;
-
-
-    // Test memory
-    char *givetest = new char[10];
-
-    int index;
-    for (index = 0; index < 9; ++index) {
-        givetest[index] = 'a';
-    }
-    givetest[9] = '\0';
-
-    String str1 = givetest;
-    String str2(str1);
-
-    char *resultStr1 = str1.toCharArray();
-    char *resultStr2 = str2.toCharArray();
-
-    std::cout << "To char array str1: ";
-    puts(resultStr1);
-    std::cout << "To char array str2: ";
-    puts(resultStr2);
-
-    // Change data of givetest but data of str1 and str2 also changed
-    for (index = 0; index < 9; ++index) {
-        givetest[index] = 'b';
-    }
-
-    resultStr1 = str1.toCharArray();
-    resultStr2 = str2.toCharArray();
-
-    ASSERT_STR("aaaaaaaaa\0", resultStr1);
-
-    std::cout << "To char array str1: ";
-    puts(resultStr1);
-    std::cout << "To char array str2: ";
-    puts(resultStr2);
-
-    // Delete data of givetest but str1 and str2 also deleted
-    delete givetest;
-    puts(str1.toCharArray());
-    puts(str2.toCharArray());
+//    // Test delete a Object String is fail
+//    String *text1 = new String("Anhkhoa");
+//    String *text2 = new String(*text1);
+//    delete text1;
+//
+//    // puts(text1->toString()); // DO NOT PUTS IN HERE - text1 is deleted !
+//    puts(text2->toString());
+//    delete text2;
+//
+//
+//    // Test memory
+//    char *givetest = new char[10];
+//
+//    int index;
+//    for (index = 0; index < 9; ++index) {
+//        givetest[index] = 'a';
+//    }
+//    givetest[9] = '\0';
+//
+//    String str1 = givetest;
+//    String str2(str1);
+//
+//    char *resultStr1 = str1.toString();
+//    char *resultStr2 = str2.toString();
+//
+//    std::cout << "To char array str1: ";
+//    puts(resultStr1);
+//    std::cout << "To char array str2: ";
+//    puts(resultStr2);
+//
+//    // Change data of givetest but data of str1 and str2 also changed
+//    for (index = 0; index < 9; ++index) {
+//        givetest[index] = 'b';
+//    }
+//
+//    resultStr1 = str1.toString();
+//    resultStr2 = str2.toString();
+//
+//    ASSERT_STR("aaaaaaaaa\0", resultStr1);
+//
+//    std::cout << "To char array str1: ";
+//    puts(resultStr1);
+//    std::cout << "To char array str2: ";
+//    puts(resultStr2);
+//
+//    // Delete data of givetest but str1 and str2 also deleted
+//    delete givetest;
+//    puts(str1.toString());
+//    puts(str2.toString());
 }
 

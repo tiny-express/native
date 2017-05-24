@@ -41,5 +41,5 @@ HttpURLConnection::~HttpURLConnection() {
 }
 
 String HttpURLConnection::getSchema(URL url) {
-
+    return "";
 }

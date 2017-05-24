@@ -35,7 +35,7 @@ using namespace Java::Lang;
 TEST(JavaNet, URLConstructor) {
     String urlString = "http://test.com";
     URL url(urlString);
-    ASSERT_STR("http://test.com", url.getURL().toCharArray());
+    ASSERT_STR("http://test.com", url.getURL().toString());
 }
 
 TEST(JavaNet, URLIsURL) {

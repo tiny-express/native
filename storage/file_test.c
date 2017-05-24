@@ -32,9 +32,9 @@ TEST(Storage, FilePutContents) {
     // Make sure file does not exist before testing
     // No need to care about delete success or not
     remove(file_path);
-	char *content = "Sample content";
+	const char *content = "Sample content";
 	// Verify write operation
-	ASSERT_TRUE(file_put_contents(file_path, content));
+	ASSERT_TRUE(file_put_contents((char*) file_path, (char*) content));
 }
 
 TEST(Storage, FileGetContents) {
@@ -43,8 +43,8 @@ TEST(Storage, FileGetContents) {
     // No need to care about delete success or not
     remove(file_path);
     char *content = "Sample content";
-    file_put_contents(file_path, content);
-    char *expect = file_get_contents(file_path);
+    file_put_contents((char*) file_path, content);
+    char *expect = file_get_contents((char*) file_path);
     // Verify read operation
     ASSERT_STR(expect, content);
 }

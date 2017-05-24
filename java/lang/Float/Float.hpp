@@ -47,7 +47,7 @@ namespace Java {
             long longValue() const;
             float floatValue() const;
             double doubleValue() const;
-            String toString() const;
+            string toString() const;
             static Float *parseFloat(String target);
         };
     }

@@ -40,7 +40,7 @@ namespace Java {
             void exit(int status);
             long freeMemory();
             void gc();
-            String toString() const;
+            string toString() const;
         };
     }
 }

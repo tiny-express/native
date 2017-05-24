@@ -118,7 +118,7 @@ double Float::doubleValue() const {
  *
  * @return String
  */
-String Float::toString() const  {
+string Float::toString() const  {
     return string_from_int(this->original);
 }
 
@@ -128,7 +128,7 @@ String Float::toString() const  {
  * @return CString
  */
 string Float::stringValue() const  {
-    return String::valueOf(this->original).toCharArray();
+    return String::valueOf(this->original).toString();
 }
 
 /**
@@ -138,5 +138,5 @@ string Float::stringValue() const  {
  * @return Float
  */
 Float *Float::parseFloat(String target) {
-    return new Float(string_to_int(target.toCharArray()));
+    return new Float(string_to_int(target.toString()));
 }

@@ -27,6 +27,9 @@
 #ifndef NATIVE_VENDOR_H
 #define NATIVE_VENDOR_H
 
+#include "type.h"
+#include <stdio.h>
+
 #define SENDGRID_RESPONSE_SUCCESS "202 Accepted"
 #define SENDGRID_REQUEST_FORMAT \
                 "{\"personalizations\":"\
@@ -38,12 +41,11 @@
                      "[{\"type\": \"text/plain\",\"value\": \"%s\"}]}"
 
 // TODO @dquang add notification 'data' to format
-#define FIREBASE_REQUEST_FORMAT \
-                "{\"to\":\"%s\","\
-                    "\"notification\":{" \
-                        "\"title\":\"%s\"," \
-                        "\"body\":\"%s\"" \
-                    "},\"priority\":10}"
+#define FIREBASE_REQUEST_FORMAT "{\"to\":\"%s\","\
+                                    "\"notification\":{" \
+                                        "\"title\":\"%s\"," \
+                                        "\"body\":\"%s\"" \
+                                    "},\"priority\":10}"
 
 #define SUCCESS_LABEL "success"
 #define SUCCESS_VALUE 1

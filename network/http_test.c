@@ -35,10 +35,10 @@ TEST(Network, HttpSchema) {
 	ASSERT_STR(HTTPS, schema_https);
 
 	char *schemaNull = http_schema("");
-	ASSERT_EQUAL(NULL, schemaNull);
+	ASSERT_NULL(schemaNull);
 
 	schemaNull = http_schema("ht tp://google.com/");
-	ASSERT_EQUAL(NULL, schemaNull);
+	ASSERT_NULL(schemaNull);
 }
 
 TEST(Network, HttpHostname) {
@@ -146,10 +146,10 @@ TEST(Network, HttpProtocol) {
 	ASSERT_STR("https", protocol_https);
 
 	char *protocol_null = http_protocol("");
-	ASSERT_EQUAL(NULL, protocol_null);
+	ASSERT_NULL(protocol_null);
 
 	protocol_null = http_protocol("ht tp://google.com/");
-	ASSERT_EQUAL(NULL, protocol_null);
+	ASSERT_NULL(protocol_null);
 }
 
 TEST(Network, HttpPath) {

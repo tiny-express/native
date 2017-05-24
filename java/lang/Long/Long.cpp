@@ -65,7 +65,7 @@ Long::~Long() {
  * @return Integer
  */
 Long *Long::parseLong(String target) {
-    return new Long(string_to_long(target.toCharArray()));
+    return new Long(string_to_long(target.toString()));
 }
 
 /**
@@ -73,7 +73,7 @@ Long *Long::parseLong(String target) {
  *
  * @return String
  */
-String Long::toString() const  {
+string Long::toString() const  {
     return string_from_long(this->original);
 }
 
@@ -92,7 +92,7 @@ char Long::charValue() const {
  * @return CString
  */
 string Long::stringValue() const  {
-    return String::valueOf(this->original).toCharArray();
+    return String::valueOf(this->original).toString();
 }
 
 /**

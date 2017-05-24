@@ -50,7 +50,7 @@ boolean URL::isURL() {
     if (convert != 0) {
         return false;
     }
-    if (regexec(&exp, this->url.toCharArray(), 0, NULL, 0) == 0) {
+    if (regexec(&exp, this->url.toString(), 0, NULL, 0) == 0) {
         regfree(&exp);
         return true;
     }
