@@ -55,7 +55,7 @@ namespace Java {
             Integer operator/(const Integer& target);
             Integer operator*(const Integer& target);
             Integer operator%(const Integer& target);
-            boolean operator==(const Integer& target);
+            boolean operator==(const Integer& target) const;
             boolean operator!=(const Integer& target);
             boolean operator<(const Integer& target) const;
             boolean operator>(const Integer& target);

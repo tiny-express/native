@@ -44,13 +44,13 @@ TEST(JavaUtil, HashMapBasic) {
     // Given <int, String> hash map - return value is exist
     HashMap<int, String> intStringHashMap;
     intStringHashMap.put(1, (String) "value");
-    ASSERT_TRUE((String) "value" == intStringHashMap.get(1));
+    ASSERT_TRUE((String) "value" == *intStringHashMap.get(1));
 
     // Given <Integer, string> hash map - return value is exist
     HashMap<Integer, string> integerStringHashMap;
     Integer integerNumber = 1;
     integerStringHashMap.put(integerNumber, (string) "value");
-    ASSERT_STR((string) "value", integerStringHashMap.get(1));
+    ASSERT_STR((string) "value", *integerStringHashMap.get(1));
 
     // Give wrong Integer to get NULL value
     HashMap<Integer, string> nullValueHashMap;
@@ -120,3 +120,43 @@ TEST(JavaUtil, HashMapAdvance) {
     // More test case
 }
 
+TEST(JavaUtil, HashMapForObjects) {
+    // Given some params for those test case below
+    String key = "key";
+    String wrongKey = "wrongKey"; // not put into validHashMap
+    Integer value = 123;
+    Integer wrongValue = 333; // not put into validHashMap
+
+    // Given validHashMap<String, Integer> to check all functions inside HashMap
+    HashMap<String, Integer> validHashMap;
+    validHashMap.put(key, value);
+
+    // Test true get() with correct key
+    ASSERT_TRUE(value == *validHashMap.get(key));
+
+    // Test null get() with wrong key
+    ASSERT_NULL(validHashMap.get(wrongKey));
+
+    // Test true containsKey() with correct key
+    ASSERT_TRUE(validHashMap.containsKey(key));
+
+    // Test false containsKey() with wrong key
+    ASSERT_FALSE(validHashMap.containsKey(wrongKey));
+
+    // Test true containsValue with correct value;
+    ASSERT_TRUE(validHashMap.containsValue(value));
+
+    // Test false containsValue with wrong value
+    ASSERT_FALSE(validHashMap.containsValue(wrongValue));
+
+    // Test false isEmpty() because validHashMap store 1 instance inside
+    ASSERT_FALSE(validHashMap.isEmpty());
+
+    // Test true size() of validHashMap
+    ASSERT_EQUAL(1, validHashMap.size());
+
+    // Test true clear() (removeAll() also works on this) through size() should to be == 0 || isEmpty() == true
+    validHashMap.clear();
+    ASSERT_TRUE(validHashMap.isEmpty());
+    ASSERT_EQUAL(0, validHashMap.size());
+}

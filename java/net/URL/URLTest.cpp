@@ -33,81 +33,46 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST(JavaNet, URLConstructor) {
-    String urlString = "http://test.com";
+    String urlString = "http://test.com:3000/file/test?param=1";
     URL url(urlString);
-    ASSERT_STR("http://test.com", url.getURL().toString());
+    ASSERT_STR("http", url.getProtocol().toString());
+    ASSERT_STR("test.com", url.getHost().toString());
+    ASSERT_EQUAL(3000, url.getPort());
+    ASSERT_STR("/file/test", url.getPath().toString());
+    ASSERT_STR("param=1", url.getQuery().toString());
+
+    urlString = "http://";
+    url = URL(urlString);
+    ASSERT_STR("", url.getProtocol().toString());
+    ASSERT_STR("", url.getHost().toString());
+    ASSERT_STR("", url.getPath().toString());
+    ASSERT_STR("", url.getQuery().toString());
+    ASSERT_EQUAL(-1, url.getPort());
 }
 
-TEST(JavaNet, URLIsURL) {
-    String urlString = "https://goo-gle.com";
+TEST(JavaNet, URLToString) {
+    // Full URL with protocol, host, port, path and query
+    String urlString = "http://test.com:80/file/test?param=1";
     URL url(urlString);
-    ASSERT_TRUE(url.isURL());
+    ASSERT_STR("http://test.com:80/file/test?param=1", url.toString());
 
-    urlString = "https://google.com.net.vn:3000";
+    // URL without port
+    urlString = "http://test.com/file/test?param=1";
     url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
+    ASSERT_STR("http://test.com/file/test?param=1", url.toString());
 
-    urlString = "http://localhost:3001";
+    // URL without path
+    urlString = "http://test.com:8080?param=1&param1=2";
     url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
+    ASSERT_STR("http://test.com:8080?param=1&param1=2", url.toString());
 
-    urlString = "https://google.com.net.vn:3000/filepath/givemeaname/";
+    // URL without query
+    urlString = "https://test.com:9200/index";
     url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
+    ASSERT_STR("https://test.com:9200/index", url.toString());
 
-    urlString = "https://google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>value3";
+    // URL with just protocol and host
+    urlString = "http://test.com";
     url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "";
-    url = URL(urlString);
-    ASSERT_FALSE(url.isURL());
-
-    urlString = "/google.com.net.vn:3334/vietnam/tphochiminh?value1+value2>";
-    url = URL(urlString);
-    ASSERT_FALSE(url.isURL());
-
-    urlString = "https://www.google.com.vn/search?site=&source=hp&q=s.com&oq=s.com&gs_l=hp.3..0i10k1l2j0j0i20k1j0l2j0i10k1j0l3.250.973.0.1195.6.6.0.0.0.0.153.612.0j5.5.0....0...1c.1.64.hp..1.4.484.0..46j35i39k1j0i131k1j0i46k1.NYmuphuoiu0";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "https://www.google.com.vn/search?q=ハンサムなE3%83%8F%E3%83%B3%E3%82%B5%E3%83%A0%E3%81%AA%E5%85%89&gs_l=serp.3...232363.232363.0.232819.1.1.0.0.0.0.137.137.0j1.1.0....0...1c.1.64.serp..0.0.0.bWmCVIHE5kI";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "https://translate.google.com.vn/#vi/ja/Quang%20%C4%91%E1%BA%B9p%20trai";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "https://foodtiny..vn";
-    url = URL(urlString);
-    ASSERT_FALSE(url.isURL());
-
-    urlString = "http://192.168.1.1";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "http://google.com/index.html";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "http://abc.xyz/";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "http://localhost/q=?xxx";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "https://foodtiny.com:1234?file/adsfasdf/aa";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
-
-    urlString = "https://";
-    url = URL(urlString);
-    ASSERT_FALSE(url.isURL());
-
-    urlString = "https://foodtiny.com:1286?file/adsfasdf/aa";
-    url = URL(urlString);
-    ASSERT_TRUE(url.isURL());
+    ASSERT_STR("http://test.com", url.toString());
 }

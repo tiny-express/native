@@ -47,6 +47,8 @@ namespace Java {
             virtual ~String();
         public:
             char charAt(int index);
+            int	compareTo(String anotherString);
+            int	compareToIgnoreCase(String str);
             String concat(String str);
             boolean contains(CharSequence s);
             Array<byte> getBytes() const;
@@ -85,7 +87,9 @@ namespace Java {
             static String valueOf(double target);
         public:
             String operator+(const String& target2);
-            boolean operator==(const String& target2);
+            void operator+=(const String& target2);
+            boolean operator<(const String& target2) const;
+            boolean operator==(const String& target2) const;
             boolean operator!=(const String& target2);
         };
     }
