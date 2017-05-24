@@ -36,6 +36,9 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     enable_language(ASM)
 endif()
 
+# For Darwin
+set(CMAKE_MACOSX_RPATH 1)
+
 # Check compiler version
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -48,8 +51,9 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-set(CMAKE_C_COMPILER ${CC})
-set(CMAKE_CXX_COMPILER ${CXX})
+set(CMAKE_C_COMPILER "gcc")
+set(CMAKE_CXX_COMPILER "g++")
+
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -w")
 set(CMAKE_CXX_FLAGS         "-w")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")

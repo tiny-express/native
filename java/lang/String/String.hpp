@@ -41,7 +41,7 @@ namespace Java {
             String();
             String(const_string original);
             String(string original);
-            //String(Array<byte> bytes);
+            String(Array<byte> &bytes);
             String(const String &target);
             ~String();
 
