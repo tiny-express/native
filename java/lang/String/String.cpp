@@ -455,6 +455,12 @@ bool String::operator==(const String &target2) const {
     return false;
 }
 
+String String::operator=(const String &target) {
+    this->original = string_copy(target.original);
+    this->length();
+    return *this;
+}
+
 bool String::operator!=(const String &target2) {
     return !this->operator==(target2);
 }
@@ -466,3 +472,4 @@ bool String::operator<(const String &target2) const {
 
     return false;
 }
+
