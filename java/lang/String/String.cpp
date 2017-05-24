@@ -444,6 +444,11 @@ String String::operator+(const String& target2) {
     return result;
 }
 
+String String::operator+=(const String& target2) {
+    String result = string_concat(this->original, target2.original);
+    return result;
+}
+
 bool String::operator==(const String &target2) const {
     if (string_equals(this->original, target2.toString())) {
         return true;
