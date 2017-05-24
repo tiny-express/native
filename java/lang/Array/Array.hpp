@@ -38,10 +38,10 @@ namespace Java {
         class Array;
 
         template<typename E>
-        class Iterator {
+        class ArrayIterator {
         public:
-            Iterator(const Array<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
-            bool operator!= (const Iterator<E>& other) const {
+            ArrayIterator(const Array<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
+            bool operator!= (const ArrayIterator<E>& other) const {
                 return _pos != other._pos;
             }
 
@@ -49,7 +49,7 @@ namespace Java {
                 return _p_vec->get(_pos);
             }
 
-            const Iterator<E>& operator++() {
+            const ArrayIterator<E>& operator++() {
                 ++_pos;
                 return *this;
             }
@@ -85,8 +85,8 @@ namespace Java {
             int length() const;
             int get (int index) const;
             void set (int index, int value);
-            Iterator<E> begin () const;
-            Iterator<E> end () const;
+            ArrayIterator<E> begin () const;
+            ArrayIterator<E> end () const;
             string toString() const;
 
         public:
@@ -187,8 +187,8 @@ namespace Java {
          * @return Iterator<E>
          */
         template <typename E>
-        Iterator<E> Array<E>::begin() const {
-            return Iterator<E>(this, 0);
+        ArrayIterator<E> Array<E>::begin() const {
+            return ArrayIterator<E>(this, 0);
         }
 
         /**
@@ -198,8 +198,8 @@ namespace Java {
          * @return Iterator
          */
         template <typename E>
-        Iterator<E> Array<E>::end() const {
-            return Iterator<E>(this, this->realSize);
+        ArrayIterator<E> Array<E>::end() const {
+            return ArrayIterator<E>(this, this->realSize);
         }
 
         /**

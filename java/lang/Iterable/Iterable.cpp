@@ -24,29 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_LIST_HPP
-#define NATIVE_JAVA_UTIL_LIST_HPP
-
-#include "../Iterator/Iterator.hpp"
-#include "../Collection/Collection.hpp"
-
-namespace Java {
-    namespace Util {
-        template <typename E>
-        class List : public virtual Collection<E> {
-        public:
-            boolean	add(E &e);
-            void add(int index, E &element);
-            boolean	addAll(Collection<E> &c);
-            void clear();
-            boolean	contains(Object o);
-            E get(int index);
-            int	indexOf(Object o);
-            boolean	isEmpty();
-            Iterator<E>	iterator();
-
-        };
-    }
-}
-
-#endif//NATIVE_JAVA_UTIL_LIST_HPP
+#include "Iterable.hpp"
