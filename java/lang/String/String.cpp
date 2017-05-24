@@ -51,6 +51,7 @@ String::String(const String& target) {
 }
 
 String::~String() {
+
 }
 
 char String::charAt(int index) {
