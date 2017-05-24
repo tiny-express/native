@@ -36,6 +36,7 @@ namespace Java {
         class String: public virtual Object {
         private:
             string original;
+            int size = 0;
         public:
             String();
             String(const_string original);
@@ -59,7 +60,7 @@ namespace Java {
             int lastIndexOf(int ch, int fromIndex);
             int lastIndexOf(String str) const;
             int lastIndexOf(String str, int fromIndex) const;
-            int length() const;
+            int length();
             boolean matches(String regex) const;
             String replace(char oldChar, char newChar) const;
             String replaceAll(String regex, String replacement) const;

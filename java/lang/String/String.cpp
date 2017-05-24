@@ -30,14 +30,17 @@ using namespace Java::Lang;
 
 String::String() {
     this->original = "";
+    this->length();
 }
 
 String::String(const_string target) {
     this->original = (string) target;
+    this->length();
 }
 
 String::String(string target) {
     this->original = target;
+    this->length();
 }
 
 //String::String(Array<byte> bytes) {
@@ -47,14 +50,17 @@ String::String(string target) {
 //}
 
 String::String(const String& target) {
-    this->original = target.original;
+    this->original = string_copy(target.original);
+    this->length();
 }
 
 String::~String() {
-
 }
 
 char String::charAt(int index) {
+    if ((index < 0) && (index > this->size)) {
+        return '\0';
+    }
     return this->original[index];
 }
 
@@ -136,8 +142,11 @@ int String::lastIndexOf(int ch, int fromIndex) {
     return -1;
 }
 
-int String::length() const {
-    return length_pointer_char(this->original);
+int String::length() {
+    if (this->size == 0) {
+        this->size = length_pointer_char(this->original);
+    }
+    return this->size;
 }
 
 String String::replace(char oldChar, char newChar) const {
