@@ -32,6 +32,10 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, StringConstructor) {
+    // Give NULL for String constructor
+    String nullString = NULL;
+    ASSERT_EQUAL("", nullString.toString());
+
     // Given empty value for String constructor and assign value - Return string
     String emptyString;
     emptyString = (string) "Hello world";
