@@ -48,9 +48,13 @@ TEST(JavaLang, StringConstructor) {
 }
 
 TEST(JavaLang, StringCharAt) {
-    String textPlus = "Hello Hello Hello ";
-    char result = textPlus.charAt(0);
-    ASSERT_EQUAL('H', result);
+    String text = "Hello Hello Hello ";
+
+    char positionIsExist = text.charAt(0);
+    ASSERT_TRUE('H' == positionIsExist);
+
+    char positionIsNotExist = text.charAt(-1);
+    ASSERT_TRUE('\0' == positionIsNotExist);
 }
 
 TEST(JavaLang, StringConcat) {
@@ -228,11 +232,10 @@ TEST(JavaLang, StringTestFail) {
 
     // Test delete a Object String is fail
     String *text1 = new String("Anhkhoa");
-
     String *text2 = new String(*text1);
     delete text1;
 
-    puts(text1->toCharArray());
+    // puts(text1->toCharArray()); // DO NOT PUTS IN HERE - text1 is deleted !
     puts(text2->toCharArray());
     delete text2;
 
