@@ -259,6 +259,13 @@ TEST(JavaLang, StringOperator) {
         comparable = TRUE;
     }
     ASSERT_TRUE(comparable);
+
+    // Given 2 Strings to check "+=" operator
+    String leftString = "hello";
+    String rightString = " world";
+
+    leftString += rightString;
+    ASSERT_STR(leftString.toString(), "hello world");
 }
 
 TEST(JavaLang, StringMemoryCheck) {
