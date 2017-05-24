@@ -32,6 +32,10 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, StringConstructor) {
+    // Give NULL for String constructor
+    String nullString = NULL;
+    ASSERT_EQUAL("", nullString.toString());
+
     // Given empty value for String constructor and assign value - Return string
     String emptyString;
     emptyString = (string) "Hello world";
@@ -69,6 +73,13 @@ TEST(JavaLang, StringCharAt) {
     // Given a string - Return out of scope position is not exist
     char outOfScopePositionIsNotExist = text.charAt(1000);
     ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
+}
+
+TEST(JavaLang, StringCompareTo) {
+}
+
+TEST(JavaLang, StringCompareToIgnoreCase) {
+
 }
 
 TEST(JavaLang, StringConcat) {
