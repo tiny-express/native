@@ -33,16 +33,23 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-        class URL {
+        class URL: public virtual Object {
         private:
-            String url;
+            String protocol;
+            String host;
+            int port;
+            String path;
+            String query;
         public:
-            URL();
-            URL(String url);
+            URL(String spec);
             ~URL();
         public:
-            boolean isURL();
-            String getURL();
+            String getHost();
+            String	getPath();
+            int	getPort();
+            String	getProtocol();
+            String	getQuery();
+            string toString() const ;
         };
     }
 }
