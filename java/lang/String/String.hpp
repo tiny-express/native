@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_LANG_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_HPP
 
+#include "../Object/Object.hpp"
 #include "../Array/Array.hpp"
-#include "../Number/Number.hpp"
 #include "../CharSequence/CharSequence.hpp"
 
 namespace Java {
@@ -47,6 +47,8 @@ namespace Java {
             virtual ~String();
         public:
             char charAt(int index);
+            int	compareTo(String anotherString);
+            int	compareToIgnoreCase(String str);
             String concat(String str);
             boolean contains(CharSequence s);
             Array<byte> getBytes() const;
@@ -85,7 +87,9 @@ namespace Java {
             static String valueOf(double target);
         public:
             String operator+(const String& target2);
-            boolean operator==(const String& target2);
+            void operator+=(const String& target2);
+            boolean operator<(const String& target2) const;
+            boolean operator==(const String& target2) const;
             boolean operator!=(const String& target2);
         };
     }

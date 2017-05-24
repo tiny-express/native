@@ -66,11 +66,39 @@ String::String(const String& target) {
 String::~String() {
 }
 
+/**
+ * String character at index
+ *
+ * @param index
+ * @return String
+ */
 char String::charAt(int index) {
     if ((index < 0) || (index >= this->size)) {
         return '\0';
     }
     return this->original[index];
+}
+
+/**
+ * String compare to another string
+ *
+ * @param anotherString
+ * @return int
+ */
+int String::compareTo(String anotherString) {
+    // TODO
+    return 0;
+}
+
+/**
+ * String compare with another string but ignore case
+ *
+ * @param str
+ * @return int
+ */
+int String::compareToIgnoreCase(String str) {
+    // TODO
+    return 0;
 }
 
 /**
@@ -416,7 +444,11 @@ String String::operator+(const String& target2) {
     return result;
 }
 
-bool String::operator==(const String &target2) {
+void String::operator+=(const String& target2) {
+    *this = string_concat(this->original, target2.original);
+}
+
+bool String::operator==(const String &target2) const {
     if (string_equals(this->original, target2.toString())) {
         return true;
     }
@@ -425,4 +457,12 @@ bool String::operator==(const String &target2) {
 
 bool String::operator!=(const String &target2) {
     return !this->operator==(target2);
+}
+
+bool String::operator<(const String &target2) const {
+    if (strcmp(this->original, target2.toString()) < 0) {
+        return true;
+    }
+
+    return false;
 }

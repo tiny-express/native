@@ -24,15 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../mock.h"
-#include <python2.7/Python.h>
 
 void *start_mock_server() {
-    system("pkill python");
-    FILE* file;
-    Py_SetProgramName("mock server");
-    Py_Initialize();
-    file = fopen("./mock/mock_server.py","r");
-    PyRun_SimpleFile(file, "./mock/mock_server.py");
-    Py_Finalize();
+    system("python mock/mock_server.py");
+//    system("pkill python");
+//    FILE* file;
+//    Py_SetProgramName("mock server");
+//    Py_Initialize();
+//    file = fopen("./mock/mock_server.py","r");
+//    PyRun_SimpleFile(file, "./mock/mock_server.py");
+//    Py_Finalize();
 }

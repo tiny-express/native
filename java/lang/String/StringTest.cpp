@@ -32,6 +32,10 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, StringConstructor) {
+    // Give NULL for String constructor
+    String nullString;
+    ASSERT_STR("", nullString.toString());
+
     // Given empty value for String constructor and assign value - Return string
     String emptyString;
     emptyString = (string) "Hello world";
@@ -69,6 +73,13 @@ TEST(JavaLang, StringCharAt) {
     // Given a string - Return out of scope position is not exist
     char outOfScopePositionIsNotExist = text.charAt(1000);
     ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
+}
+
+TEST(JavaLang, StringCompareTo) {
+}
+
+TEST(JavaLang, StringCompareToIgnoreCase) {
+
 }
 
 TEST(JavaLang, StringConcat) {
@@ -231,6 +242,22 @@ TEST(JavaLang, StringOperator) {
     String textResult = textPlus1 + textPlus2;
     ASSERT_STR("Hello World", textResult.toString());
 
+    // Concat a String with valueOf(number) - Return string
+    textPlus1 = "Hello ";
+    int aNumber = 1;
+    textResult = textPlus1 + String::valueOf(aNumber);
+    ASSERT_STR("Hello 1", textResult.toString());
+
+    // Concat a String with valueOf(number) - Return string
+    textResult = "Hello " + String::valueOf(aNumber);
+    ASSERT_STR("Hello 1", textResult.toString());
+
+    // Concat 2 Strings with valueOf(number) - Return string
+    textPlus1 = "Hello";
+    aNumber = 1;
+    textResult = textPlus1 + " Galaxy " + String::valueOf(aNumber);
+    ASSERT_STR("Hello Galaxy 1", textResult.toString());
+
     // Given two string and compare equal them - Return comparable
     String textCompare1 = "Hello";
     String textCompare2 = "Hello";
@@ -248,6 +275,32 @@ TEST(JavaLang, StringOperator) {
         comparable = TRUE;
     }
     ASSERT_TRUE(comparable);
+
+    // Given 2 Strings to check "+=" operator
+    String leftString = "hello";
+    String rightString = " world";
+
+    leftString += rightString;
+    ASSERT_STR("hello world", leftString.toString());
+
+    // Given 2 Strings to check "+=" operator
+    String stringTest = "";
+    String stringTest1 = "Hello";
+    String stringTest2 = " Galaxy";
+
+    stringTest += stringTest1 + stringTest2 + "!";
+    ASSERT_STR("Hello Galaxy!", stringTest.toString());
+
+    // Check a String concat with valueOf(number) use "+=" operator
+    aNumber = 1;
+    stringTest = "Hello ";
+    stringTest += String::valueOf(aNumber);
+    ASSERT_STR("Hello 1", stringTest.toString());
+
+    // Check a String concat with valueOf(number) use "+=" operator
+    aNumber = 1;
+    stringTest += "Hello " + String::valueOf(aNumber);
+    ASSERT_STR("Hello 1", stringTest.toString());
 }
 
 TEST(JavaLang, StringMemoryCheck) {
