@@ -10,6 +10,7 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
 - sudo pip install -r mock/requirements.txt
+- pip list
 - cmake .
 script:
 - make native_test -j
