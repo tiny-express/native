@@ -11,6 +11,8 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
 - sudo pip install -r mock/requirements.txt
 - python -m pip list
+- python -m pip install flask
+- python -m pip list
 - cmake .
 script:
 - make native_test -j
