@@ -39,6 +39,10 @@ endif()
 # For Darwin
 set(CMAKE_MACOSX_RPATH 1)
 
+# Force Linux and Darwin use GCC
+set(CMAKE_C_COMPILER "gcc")
+set(CMAKE_CXX_COMPILER "g++")
+
 # Check compiler version
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -51,14 +55,7 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
-
-set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -w")
-set(CMAKE_CXX_FLAGS         "-w")
-set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-
+# CMake Modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
 
 # Detect platform and include path for OpenSSL
