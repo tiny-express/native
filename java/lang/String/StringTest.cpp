@@ -299,13 +299,8 @@ TEST(JavaLang, StringOperator) {
 
     // Check a String concat with valueOf(number) use "+=" operator
     aNumber = 1;
-<<<<<<< HEAD
-//    stringTest += "Hello " + String::valueOf(aNumber);
-    ASSERT_STR("Hello 1", stringTest.toString());
-=======
     stringTest += "" + String::valueOf(aNumber);
     ASSERT_STR("Hello 11", stringTest.toString());
->>>>>>> 6ac40002d8a3e173e950a75715fedc3936f4234e
 }
 
 TEST(JavaLang, StringMemoryCheck) {
