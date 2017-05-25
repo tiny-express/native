@@ -86,7 +86,10 @@ char String::charAt(int index) {
  * @return int
  */
 int String::compareTo(String anotherString) {
-    // TODO
+    // string anotherStringValue = anotherString.toString();
+    // if (string_equals(this->original, anotherStringValue) {
+    //     return 0;
+    // }
     return 0;
 }
 
