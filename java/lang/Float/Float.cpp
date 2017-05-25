@@ -140,3 +140,94 @@ string Float::stringValue() const  {
 Float *Float::parseFloat(String target) {
     return new Float(string_to_int(target.toString()));
 }
+
+/**
+ * Sum of this and target
+ *
+ * @param target
+ * @return Float
+ */
+Float Float::operator+(const Float& target) {
+    return this->original + target.original;
+}
+
+/**
+ * Make a subtraction with target Float
+ *
+ * @return float
+ */
+ Float Float::operator-(const Float& target) {
+     return this->original - target.original;
+ }
+ 
+ /**
+ * Make a multiplication with target Float
+ *
+ * @return float
+ */
+ Float Float::operator*(const Float& target) {
+     return this->original * target.original;
+ }
+ 
+ /**
+ * Make a division with target Float
+ *
+ * @return float
+ */
+ Float Float::operator/(const Float& target) {
+     return this->original / target.original;
+ }
+ 
+ /**
+ * Compare this Float is equal target
+ *
+ * @return bool
+ */
+ boolean Float::operator==(const Float& target) const {
+     return this->original == target.original;
+ }
+ 
+ /**
+ * Compare this Float is not equal target
+ *
+ * @return bool
+ */
+ boolean Float::operator!=(const Float& target) const {
+     return this->original != target.original;
+ }
+ 
+ /**
+ * Compare this Float is less than target
+ *
+ * @return bool
+ */
+ boolean Float::operator<(const Float& target) const {
+     return this->original < target.original;
+ }
+ 
+ /**
+ * Compare this Float is more than target
+ *
+ * @return bool
+ */
+ boolean Float::operator>(const Float& target) const {
+     return this->original > target.original;
+ }
+ 
+ /**
+ * Compare this Float is equal or less than target
+ *
+ * @return bool
+ */
+ boolean Float::operator<=(const Float& target) const {
+     return this->original <= target.original;
+ }
+ 
+ /**
+ *  Compare this Float is equal or more than target
+ *
+ * @return bool
+ */
+boolean Float::operator>=(const Float& target) const {
+    return this->original >= target.original;
+}
