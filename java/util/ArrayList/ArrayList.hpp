@@ -27,22 +27,22 @@
 #ifndef NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
 #define NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
 
-#include "../AbstractCollection/AbstractCollection.hpp"
+#include "../AbstractList/AbstractList.hpp"
 #include "../Collection/Collection.hpp"
 #include <initializer_list>
 
 using namespace Java::Lang;
 
 namespace Java {
-    namespace UTIL {
+    namespace Util {
         template <typename E>
-        class Array;
+        class ArrayList;
 
         template<typename E>
-        class Iterator {
+        class ArrayIterator {
         public:
-            Iterator(const Array<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
-            bool operator!= (const Iterator<E>& other) const {
+            ArrayIterator(const ArrayList<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
+            bool operator!= (const ArrayIterator<E>& other) const {
                 return _pos != other._pos;
             }
 
@@ -50,60 +50,65 @@ namespace Java {
                 return _p_vec->get(_pos);
             }
 
-            const Iterator<E>& operator++() {
+            const ArrayIterator<E>& operator++() {
                 ++_pos;
                 return *this;
             }
+
         private:
             int _pos;
-            const Array<E> *_p_vec;
+            const ArrayList<E> *_p_vec;
         };
 
         template <typename E>
-        class Array : public Object {
+        class ArrayList : public virtual AbstractList<E> {
         private:
             E *array;
             int virtualSize = 4;
-            int realSize = 0;
+            int realSize;
             inline void reallocate();
 
         public:
-            Array();
-            Array(std::initializer_list<E> list);
-            Array(int length);
-            //Array(const E target);
-            Array(const Array<E> &target);
-            Array(int length, E defaultValue);
-            ~Array();
+            ArrayList();
+            ArrayList(std::initializer_list<E> list);
+            ArrayList(int length);
+            ArrayList(ArrayList<E> &target);
+            ArrayList(int length, E defaultValue);
+            ~ArrayList();
 
         public:
-            void append(std::initializer_list<E> list);
-            void append(const Array<E> &target);
-            void append(const E &target);
-            E at(const int index) const;
-            void push(E element);
-            boolean isEmpty() const;
-            int length() const;
-            int get (int index) const;
-            void set (int index, int value);
-            Iterator<E> begin () const;
-            Iterator<E> end () const;
+            ArrayIterator<E> begin() const;
+            ArrayIterator<E> end() const;
             string toString() const;
-
+            
         public:
-            E& operator[] (const int index);
-            Array<E> operator+ (const Array<E> &target);
-            Array<E> operator+=(const Array<E> &target);
-            Array<E> operator= (const Array<E> &target);
+            void add(E &e);
+            void add(int index, E &element);
+            bool addAll(Collection<E> &c);
+            void addAll(std::initializer_list<E> list);
+            void clear();
+            bool contains(E &element) const;
+            bool containsAll(Collection<E> &c) const;
+            bool equals(E &e) const;
+            E get(const int index) const;
+            int hashCode() const;
+            bool isEmpty() const;
+            bool remove(E &e);
+            bool removeAll(Collection<E> &c);
+            bool set(int index, E &value);
+            int size() const;
         };
 
+        /*
+         * CONSTRUCTOR
+         */
         /**
          * Array initialization
          *
          * @param E
          */
         template <typename E>
-        Array<E>::Array() {
+        ArrayList<E>::ArrayList() {
             this->array = new E[this->virtualSize];
         }
 
@@ -114,12 +119,16 @@ namespace Java {
          * @param byte*
          */
         template <typename E>
-        Array<E>::Array(std::initializer_list<E> list) {
+        ArrayList<E>::ArrayList(std::initializer_list<E> list) {
+            this->virtualSize = (int)list.size() << 2;
             this->array = new E[this->virtualSize];
-            this->realSize = 0;
+            this->realSize = (int)list.size();
             typename std::initializer_list<E>::iterator it;
-            for (it = list.begin(); it != list.end(); ++it) {
-                this->push(*it);
+
+            register int index = 0;
+            for (it = list.begin(); it != list.end(); ++it, ++index) {
+                this->array[index] = *it;
+                this->reallocate();
             }
         }
 
@@ -130,7 +139,7 @@ namespace Java {
          * @param length
          */
         template <typename E>
-        Array<E>::Array(int length) {
+        ArrayList<E>::ArrayList(int length) {
             this->virtualSize = length << 2;
             this->realSize = length;
             this->array = new E[this->virtualSize];
@@ -143,14 +152,14 @@ namespace Java {
          * @param target
          */
         template <typename E>
-        Array<E>::Array(const Array<E> &target) {
+        ArrayList<E>::ArrayList(ArrayList<E> &target) {
             this->virtualSize = target.realSize << 2;
             this->realSize = target.realSize;
             this->array = new E[this->virtualSize];
 
             register int index;
             for (index = 0; index < this->realSize; index++) {
-                this->array[index] = target.at(index);
+                this->array[index] = target.get(index);
             }
         }
 
@@ -162,10 +171,10 @@ namespace Java {
          * @param defaultValue
          */
         template <typename E>
-        Array<E>::Array(int length, E defaultValue) {
+        ArrayList<E>::ArrayList(int length, E defaultValue) {
             this->virtualSize = length << 2;
             this->realSize = length;
-
+            this->array = new E[this->virtualSize];
             int index;
             for (index = 0; index < this->realSize; ++index) {
                 this->array[index] = defaultValue;
@@ -178,8 +187,9 @@ namespace Java {
          * @param E
          */
         template <typename E>
-        Array<E>::~Array() {
+        ArrayList<E>::~ArrayList() {
             delete []this->array;
+            this->realSize = this->virtualSize;
         }
 
         /**
@@ -188,8 +198,8 @@ namespace Java {
          * @return Iterator<E>
          */
         template <typename E>
-        Iterator<E> Array<E>::begin() const {
-            return Iterator<E>(this, 0);
+        ArrayIterator<E> ArrayList<E>::begin() const {
+            return ArrayIterator<E>(this, 0);
         }
 
         /**
@@ -199,8 +209,8 @@ namespace Java {
          * @return Iterator
          */
         template <typename E>
-        Iterator<E> Array<E>::end() const {
-            return Iterator<E>(this, this->realSize);
+        ArrayIterator<E> ArrayList<E>::end() const {
+            return ArrayIterator<E>(this, this->realSize);
         }
 
         /**
@@ -209,7 +219,7 @@ namespace Java {
          * @param E
          */
         template <typename E>
-        void Array<E>::reallocate() {
+        void ArrayList<E>::reallocate() {
             if (this->realSize >= this->virtualSize - 4) {
                 this->virtualSize = this->virtualSize < 2;
                 E *newArray = new E[this->virtualSize];
@@ -220,14 +230,154 @@ namespace Java {
         }
 
         /**
-         * Check if array is empty or not
+         * Serialize array to string
          *
-         * @param E
-         * @return boolean
+         * @return string
          */
         template <typename E>
-        boolean Array<E>::isEmpty() const {
-            return (this->realSize == 0);
+        string ArrayList<E>::toString() const {
+            return (string) "";
+        }
+
+        /*
+         * Java standard method for ArrayList
+         */
+
+        /**
+         * Appends the specified element to the end of this list.
+         *
+         * @tparam E
+         * @param target
+         */
+        /**
+         * Push new element to array
+         *
+         * @param E
+         * @param element
+         */
+        template <typename E>
+        void ArrayList<E>::add(E &element) {
+            this->array[this->realSize] = element;
+            this->realSize++;
+            this->reallocate();
+        }
+
+        /**
+         * Inserts the specified element at the specified position in this list.
+         *
+         * @tparam E
+         * @param index
+         * @param element
+         */
+        template <typename E>
+        void ArrayList<E>::add(int position, E &element) {
+            register int index;
+            for (index = this->realSize - 1; index >= position; --index) {
+                this->array[index + 1] = this->array[index];
+            }
+
+            this->realSize++;
+            this->reallocate();
+        }
+
+        /**
+         * Append list initialization to Array
+         *
+         * @param E
+         * @param Array<E>
+         */
+        template <typename E>
+        void ArrayList<E>::addAll(std::initializer_list<E> list) {
+            typename std::initializer_list<E>::iterator it;
+            register int index = this->size();
+            for (it = list.begin(); it != list.end(); ++it, ++index) {
+                this->array[index] = *it;
+                this->realSize++;
+                this->reallocate();
+            }
+        }
+
+        /**
+         * Appends all of the elements in the specified collection to the end of this array
+         *
+         * @tparam E
+         * @param target
+         * @return
+         */
+        template <typename E>
+        bool ArrayList<E>::addAll(Collection<E> &target) {
+            register int index;
+            int length = target.size();
+            this->virtualSize = length << 2;
+            this->array = new E[this->virtualSize];
+            this->realSize =  length;
+            for (index = 0; index < length; ++index) {
+                this->array[index] = target.get(index);
+            }
+        }
+
+        /**
+         * Delete all elements of Array
+         *
+         * @tparam E
+         */
+        template <typename E>
+        void ArrayList<E>::clear() {
+            delete []this->array;
+            this->realSize = 0;
+            this->virtualSize = 4;
+            this->array = new E[this->virtualSize];
+        }
+
+        /**
+         * Returns true if this list contains the specified element
+         *
+         * @tparam E
+         * @param element
+         * @return true or false
+         */
+        template <typename E>
+        bool ArrayList<E>::contains(E &element) const {
+            register int index;
+            int size = this->size();
+            for (index = 0; index < size; ++index) {
+                if (this->get(index) == element) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Returns true if this collection contains all of the elements in the specified collection.
+         *
+         * @tparam E
+         * @param target
+         * @return
+         */
+        template <typename E>
+        bool ArrayList<E>::containsAll(Collection<E> &target) const {
+            int thisSize = this->size();
+            int targetSize = target.size();
+
+            register int indexTarget;
+            register int indexThis;
+            for (indexTarget = 0; indexTarget < targetSize; ++indexTarget) {
+                bool isExist = false;
+                for (indexThis = 0; indexThis < thisSize; ++indexThis) {
+                    if (this->get(indexThis) == target.get(indexTarget)) {
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (!isExist) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /**
@@ -237,58 +387,19 @@ namespace Java {
          * @return
          */
         template <typename E>
-        int Array<E>::get(int index) const {
-            return this->at(index);
-        }
-
-        /**
-         * Set value for index
-         *
-         * @param index
-         * @param value
-         */
-        template <typename E>
-        void Array<E>::set(int index, int value) {
-            this->array[index] = value;
-        }
-
-        /**
-         * Push new element to array
-         *
-         * @param E
-         * @param element
-         */
-        template <typename E>
-        void Array<E>::push(E element) {
-            this->array[this->realSize] = element;
-            this->realSize++;
-            this->reallocate();
-        }
-
-        /**
-         * Array from list initialization
-         *
-         * @param E
-         * @param Array<E>
-         */
-        template <typename E>
-        void Array<E>::append(std::initializer_list<E> list) {
-            typename std::initializer_list<E>::iterator it;
-            for (it = list.begin(); it != list.end(); ++it) {
-                this->push(*it);
-            }
-        }
-
-        /**
-         * Returns the value of array at index
-         *
-         * @param E
-         * @param index
-         * @return E
-         */
-        template <typename E>
-        E Array<E>::at(const int index) const {
+        E ArrayList<E>::get(const int index) const {
             return this->array[index];
+        }
+
+        /**
+         * Return true if Array is empty, return false if Array not empty
+         *
+         * @tparam E
+         * @return
+         */
+        template <typename E>
+        bool ArrayList<E>::isEmpty() const {
+            return (this->realSize == 0);
         }
 
         /**
@@ -298,90 +409,27 @@ namespace Java {
          * @return int
          */
         template <typename E>
-        int Array<E>::length() const {
+        int ArrayList<E>::size() const {
             return this->realSize;
         }
 
         /**
-         * Serialize array to string
+         * Replaces the element at the specified position in this list with the specified element.
          *
-         * @return string
-         */
-        template <typename E>
-        string Array<E>::toString() const {
-            return (string) "";
-        }
-
-        /**
-         * Return value of array at index
-         *_LIST
-         * @param E
+         * @tparam E
          * @param index
-         * @return E
+         * @param element
+         * @return true or false
          */
         template <typename E>
-        E& Array<E>::operator[](const int index) {
-            return this->array[index];
-        }
-
-        /**
-         * Make the current Array equal to target Array
-         *
-         * @tparam E
-         * @param target
-         * @return
-         */
-        template <typename E>
-        Array<E> Array<E>::operator=(const Array<E> &target) {
-            if (!this->isEmpty()) {
-                delete []this->array;
-            }
-            this->realSize = target.realSize;
-            this->virtualSize = target.virtualSize;
-            this->array = new E[this->virtualSize];
-
-            register int index = 0;
-            for (index = 0; index < this->realSize; ++index) {
-                this->push(target[index]);
-            }
-        }
-
-        /**
-         * Add Array to Array and return new Object
-         *
-         * @tparam E
-         * @param target
-         * @return Array<E>
-         */
-        template <typename E>
-        Array<E> Array<E>::operator+(const Array<E> &target) {
-            Array<E> result = *this;
-
-            register int index;
-            for (index = 0; index < target.length(); ++index) {
-                result.push(target.at(index));
+        bool ArrayList<E>::set(int index, E &element) {
+            if (index < 0 || index > this->size() - 1) {
+                return false;
             }
 
-            return result;
+            this->array[index] = element;
+            return true;
         }
-
-        /**
-         * Add a new Array to current Array
-         *
-         * @tparam E
-         * @param target
-         * @return Array<E>
-         */
-        template <typename E>
-        Array<E> Array<E>::operator+=(const Array<E> &target) {
-            register int index;
-            for (index = 0; index < target.length(); ++index) {
-                this->push(target.at(index));
-            }
-            return *this;
-        }
-
-
     }
 }
 
