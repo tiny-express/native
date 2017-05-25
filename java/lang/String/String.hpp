@@ -64,7 +64,7 @@ namespace Java {
             int lastIndexOf(String str) const;
             int lastIndexOf(String str, int fromIndex) const;
             int length();
-            boolean matches(String regex) const;
+            boolean matches(String regex) const; // T
             String replace(char oldChar, char newChar) const;
             String replaceAll(String regex, String replacement) const;
             String replaceFirst(String regex, String replacement) const;

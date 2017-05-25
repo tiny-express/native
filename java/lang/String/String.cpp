@@ -306,6 +306,32 @@ boolean String::startsWith(String prefix) const {
 }
 
 /**
+ * String starts with a prefix
+ *
+ * @param prefix
+ * @param from t
+ * @return boolean
+ */
+boolean String::startsWith(String prefix, int toffset) const {
+    if (this->original == NULL || prefix.original == NULL || toffset < 0) {
+        return FALSE;
+    }
+    int original_length = length_pointer_char(this->original);
+    int prefix_length = length_pointer_char(prefix.original);
+    if (original_length < prefix_length || toffset > (original_length - prefix_length)) {
+        return FALSE;
+    }
+    register int i = 0;
+    register int j = toffset;
+    for (i; i < prefix_length; i++) {
+        if (prefix.original[i] != this->original[j]) {
+            return FALSE;
+        }
+        j++;
+    }
+    return TRUE;
+}
+/**
  * String to char array
  *
  * @return Array<char>
