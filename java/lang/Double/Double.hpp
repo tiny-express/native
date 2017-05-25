@@ -23,3 +23,53 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_LANG_DOUBLE_HPP
+#define NATIVE_JAVA_LANG_DOUBLE_HPP
+
+#include "../Number/Number.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Double : public virtual Number {
+        private:
+            double original;
+        public:
+            Double();
+            Double(double original);
+            Double(const Double &target);
+            ~Double();
+
+        public:
+            char charValue() const;
+            string stringValue() const;
+            short shortValue() const;
+            int intValue() const;
+            long longValue() const;
+            float floatValue() const;
+            double doubleValue() const;
+            string toString() const;
+
+            static Double *parseDouble(String target);
+
+        public:
+            Double operator+(const Double& target) const;
+            Double operator-(const Double& target) const;
+            Double operator/(const Double& target) const;
+            Double operator*(const Double& target) const;
+
+            boolean operator==(const Double& target) const;
+            boolean operator!=(const Double& target) const;
+            boolean operator<(const Double& target) const;
+            boolean operator>(const Double& target) const;
+            boolean operator<=(const Double& target) const;
+            boolean operator>=(const Double& target) const;
+
+            void operator-=(const Double& target);
+            void operator+=(const Double& target);
+            void operator*=(const Double& target);
+            void operator/=(const Double& target);
+        };
+    }
+}
+#endif//NATIVE_JAVA_LANG_DOUBLE_HPP

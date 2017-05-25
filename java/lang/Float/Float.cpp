@@ -140,3 +140,14 @@ string Float::stringValue() const  {
 Float *Float::parseFloat(String target) {
     return new Float(string_to_int(target.toString()));
 }
+
+/**
+ * Sum of this and target
+ *
+ * @param target
+ * @return Float
+ */
+Float operator+(const Float& target) {
+    Float result = this->original + target.original;
+    return result;
+}

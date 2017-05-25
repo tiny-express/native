@@ -39,6 +39,7 @@ namespace Java {
             Float(float original);
             Float(const Float &target);
             ~Float();
+
         public:
             char charValue() const;
             string stringValue() const;
@@ -48,7 +49,26 @@ namespace Java {
             float floatValue() const;
             double doubleValue() const;
             string toString() const;
+
             static Float *parseFloat(String target);
+
+        public:
+            Float operator+(const Float& target) const;
+            Float operator-(const Float& target) const;
+            Float operator/(const Float& target) const;
+            Float operator*(const Float& target) const;
+
+            boolean operator==(const Float& target) const;
+            boolean operator!=(const Float& target) const;
+            boolean operator<(const Float& target) const;
+            boolean operator>(const Float& target) const;
+            boolean operator<=(const Float& target) const;
+            boolean operator>=(const Float& target) const;
+
+            void operator-=(const Float& target);
+            void operator+=(const Float& target);
+            void operator*=(const Float& target);
+            void operator/=(const Float& target);
         };
     }
 }
