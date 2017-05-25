@@ -17,6 +17,7 @@ script:
 - make unit-test
 after_script:
 - sudo pkill python
+after_success:
 - ./misc/memory_check
 notifications:
   slack:
