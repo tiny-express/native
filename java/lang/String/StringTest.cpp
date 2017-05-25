@@ -167,6 +167,10 @@ TEST(JavaLang, StringStartsWith) {
 
     String String_string = "Hello";
     ASSERT_TRUE(textPlus.startsWith(String_string));
+
+    String textPlus1 = "Welcom to VietNam";
+    String String_string1 = "to";
+    ASSERT_TRUE(textPlus1.startsWith(String_string1, 7));
 }
 
 //FIXME
