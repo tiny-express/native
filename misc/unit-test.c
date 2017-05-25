@@ -27,20 +27,9 @@
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
 
-#include <pthread.h>
 #include "unit_test.h"
-#include "mock.h"
-#include "thread.h"
 
 int main(int argc, const char *argv[]) {
-    pthread_t thread;
-    int error = pthread_create(&thread, NULL, start_mock_server, NULL);
-    if (error) {
-        printf("could not start mock server\n");
-        exit(error);
-    }
-    sleep_miliseconds(300); // wait to mock server start
     int result = ctest_main(argc, argv);
-    pthread_cancel(thread);
     return result;
 }
