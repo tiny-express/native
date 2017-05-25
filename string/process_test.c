@@ -283,7 +283,7 @@ TEST(String, ProcessFromTo) {
     to = 53;
     result = string_from_to(target, from, to);
     expect = "text/html; charset=utf-8";
-    //ASSERT_STR(expect, result);
+    ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessFrom) {
