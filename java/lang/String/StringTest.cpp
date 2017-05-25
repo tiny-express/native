@@ -72,6 +72,11 @@ TEST(JavaLang, StringCharAt) {
 }
 
 TEST(JavaLang, StringCompareTo) {
+    // String stringCompare1 = "Sawadikhap";
+    // String stringCompare2 = "Sawadikhap";
+    // int stringEquals = stringCompare1.compareTo(stringCompare2);
+    // ASSERT_EQUAL(0, stringEquals);
+   
 }
 
 TEST(JavaLang, StringCompareToIgnoreCase) {
