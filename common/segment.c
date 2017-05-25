@@ -52,7 +52,7 @@ inline TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int t
 	if (target == NULL){\
 		return "";\
 	}\
-	int len_target = length_pointer_##TYPE(target);\
+	int len_target = length_pointer_##TYPE((TYPE*) target);\
 	if (from > to || from < 0 || from > len_target || to < 0) {\
 		return "";\
 	}\
@@ -69,7 +69,7 @@ inline TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int t
 inline TYPE **segment_pointer_pointer_##TYPE(TYPE **target, int from, int to) {\
     int len_target = length_pointer_pointer_##TYPE(target);\
 	if (from > to || from < 0 || from > len_target || to < 0 || to > len_target) {\
-		return "";\
+		return NULL;\
 	}\
 	TYPE **pointer = calloc((to - from + 2), sizeof(TYPE*));\
 	memcpy(pointer, &target[from], (to - from + 1) * sizeof(TYPE*));\

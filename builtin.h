@@ -44,6 +44,7 @@
 #include "crypto.h"
 #include "datetime.h"
 #include "common.h"
+#include "math.h"
 #include "network.h"
 #include "network.h"
 #include "storage.h"

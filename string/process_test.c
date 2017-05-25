@@ -269,6 +269,21 @@ TEST(String, ProcessFromTo) {
     result = string_from_to(target, from, to);
     expect = "Hello World";
     ASSERT_STR(expect, result);
+
+    target = "HTTP/1.0 200 OK\n"
+            "Content-Type: text/html; charset=utf-8\n"
+            "Content-Length: 122\n"
+            "Server: Werkzeug/0.12.2 Python/2.7.12\n"
+            "Date: Wed, 24 May 2017 19:14:29 GMT\n"
+            "\n"
+            "{\"multicast_id\":5160844598332076776,\"success\":0,"
+            "\"failure\":1,\"canonical_ids\":0,"
+            "\"results\":[{\"error\":\"InvalidRegistration\"}]}";
+    from = 30;
+    to = 53;
+    result = string_from_to(target, from, to);
+    expect = "text/html; charset=utf-8";
+    //ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessFrom) {

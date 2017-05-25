@@ -15,7 +15,8 @@
 
 #ifndef CTEST_H
 #define CTEST_H
-#define NULL 0
+
+#include <stddef.h>
 
 #if defined _WIN32 || defined __CYGWIN__
 #ifndef WIN32

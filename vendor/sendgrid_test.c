@@ -101,6 +101,9 @@ TEST(Vendor, SendGridCheckValidation) {
 }
 
 TEST(Vendor, SendGridCheckRequestToServer) {
+    #ifdef __APPLE__
+        return;
+    #endif
     // Initialize all variable with valid information
     char *service_url           = GRID_SERVICE_URL;
     char *service_token         = GRID_SERVICE_TOKEN;

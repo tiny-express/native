@@ -42,6 +42,7 @@
 #include "lang/Exception/Exception.hpp"
 #include "lang/Float/Float.hpp"
 #include "lang/Integer/Integer.hpp"
+#include "lang/Iterable/Iterable.hpp"
 #include "lang/Long/Long.hpp"
 #include "lang/Math/Math.hpp"
 #include "lang/Number/Number.hpp"

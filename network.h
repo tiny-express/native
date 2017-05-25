@@ -27,6 +27,10 @@
 #ifndef NATIVE_NETWORK_H
 #define NATIVE_NETWORK_H
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
 #define HTTPS "https://"
 #define HTTP "http://"
 #define LOCALHOST "localhost"
@@ -44,6 +48,7 @@ char *http_query(char *url);
 char *http_request(char *method, char* url, char **headers, char **body);
 char *http_path(char *url);
 char *http_protocol(char* url);
+int url_port(char *url);
 void send_response(int client_id, char* content);
 
 #endif

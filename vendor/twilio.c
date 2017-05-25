@@ -28,7 +28,7 @@
 #include "../network.h"
 #include "../string.h"
 #include "../builtin.h"
-
+#include "../type.h"
 
 /**
  * Send mail via Twillio service

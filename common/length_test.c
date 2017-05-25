@@ -44,7 +44,7 @@ TEST(Common, LengthPointerChar) {
 TEST(Common, LengthPointerPointerChar) {
 
 	char *data_null = NULL;
-	ASSERT_EQUAL(0, length_pointer_pointer_char(data_null));
+	ASSERT_EQUAL(0, length_pointer_pointer_char((char**) data_null));
 
 	char *data_raw[] = {
 		(char*) "abc",

@@ -56,9 +56,9 @@ TEST(Common, SortString) {
         (char *) "dog",
         '\0'
     };
-//    sort_string(target, 0, 8);
-//    int result = is_increase_string_array(target, 9);
-//    ASSERT_TRUE(result);
+    sort_string(target, 0, 8);
+    int result = is_increase_string_array(target, 9);
+    ASSERT_TRUE(result);
 }
 
 TEST(Common, DistributionCountingSort) {

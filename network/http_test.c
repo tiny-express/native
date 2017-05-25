@@ -35,10 +35,10 @@ TEST(Network, HttpSchema) {
 	ASSERT_STR(HTTPS, schema_https);
 
 	char *schemaNull = http_schema("");
-	ASSERT_EQUAL(NULL, schemaNull);
+	ASSERT_NULL(schemaNull);
 
 	schemaNull = http_schema("ht tp://google.com/");
-	ASSERT_EQUAL(NULL, schemaNull);
+	ASSERT_NULL(schemaNull);
 }
 
 TEST(Network, HttpHostname) {
@@ -48,6 +48,10 @@ TEST(Network, HttpHostname) {
 
     hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
 	ASSERT_STR(LOCALHOST, hostname);
+
+
+    hostname = http_hostname("http://google.com:3000/");
+    ASSERT_STR("google.com", hostname);
 
 	hostname = http_hostname("https://");
 	ASSERT_STR(NULL, hostname);
@@ -98,6 +102,20 @@ TEST(Network, HttpPort) {
     ASSERT_EQUAL(443, result);
 }
 
+TEST(Network, UrlPort) {
+    int port = url_port("http://google.com");
+    ASSERT_EQUAL(-1, port);
+
+    port = url_port("http://google.com:80/");
+    ASSERT_EQUAL(80, port);
+
+    port = url_port("https://google.com/");
+    ASSERT_EQUAL(-1, port);
+
+    port = url_port("https://google.com:443");
+    ASSERT_EQUAL(443, port);
+}
+
 TEST(Network, HttpQuery) {
 	char *url = "http://localhost/index?key1=value1&key2=value2";
 	char *result = http_query(url);
@@ -120,6 +138,7 @@ TEST(Network, HttpQuery) {
     ASSERT_STR(expect, result);
 }
 TEST(Network, HttpRequest) {
+
 	char *headers[2] = {
 		"\0"
 	};
@@ -143,10 +162,10 @@ TEST(Network, HttpProtocol) {
 	ASSERT_STR("https", protocol_https);
 
 	char *protocol_null = http_protocol("");
-	ASSERT_EQUAL(NULL, protocol_null);
+	ASSERT_NULL(protocol_null);
 
 	protocol_null = http_protocol("ht tp://google.com/");
-	ASSERT_EQUAL(NULL, protocol_null);
+	ASSERT_NULL(protocol_null);
 }
 
 TEST(Network, HttpPath) {

@@ -14,6 +14,7 @@ int parse_uri(char* response, http_response *result);
 
 /**
  * parse header
+ * @reference how to use flexible memory: https://stackoverflow.com/questions/17344745/how-to-use-flexible-array-in-c-to-keep-several-values
  * @param response
  * @param result
  * @param index
@@ -27,26 +28,20 @@ int parse_header(char* response, http_response *result, int index);
  */
 void get_free(void** pointer);
 
+/**
+ * parse http response to
+ * @param response
+ * @return http response
+ */
 http_response *parse(char* response) {
-    printf("\nparse \n-%s-\n", response);
-    fflush(stdout);
-    http_response *result = malloc(sizeof(http_response));
-    printf("parse malloc\n");
-    fflush(stdout);
+    http_response *result = malloc(sizeof(http_response) + 4*sizeof(char*));
     int header_index = parse_uri(response, result);
-    printf("parse uri\n");
-    fflush(stdout);
     int body_index = parse_header(response, result, header_index);
-    printf("parse header\n");
     result->body = string_from_to(response, body_index, length_pointer_char(response) - 1);
-    printf("end parse\n");
     return result;
 }
 
 int parse_uri(char* response, http_response *result) {
-    result->method = malloc(sizeof(char*));
-    result->path = malloc(sizeof(char*));
-    result->version = malloc(sizeof(char*));
     register int scan_index = 0;
     register int mark_index = 0;
     register int count = 0;
@@ -54,16 +49,16 @@ int parse_uri(char* response, http_response *result) {
         if (response[scan_index] == ' ') {
             count ++;
             if (count == 1) {
-                result->method = string_from_to(response, mark_index, scan_index - 1);
+                result->version = string_from_to(response, mark_index, scan_index - 1);
                 mark_index = scan_index + 1;
             } else if (count == 2) {
-                result->path = string_from_to(response, mark_index, scan_index - 1);
+                result->status_code = string_from_to(response, mark_index, scan_index - 1);
                 mark_index = scan_index + 1;
             }
         }
         scan_index ++;
     }
-    result->version = string_from_to(response, mark_index, scan_index - 1);
+    result->status = string_from_to(response, mark_index, scan_index - 1);
     while (response[scan_index] == '\n' || response[scan_index] == '\r') {
         scan_index++;
     }
@@ -75,54 +70,52 @@ int parse_header(char* response, http_response *result, int index) {
     register int scan_index = index;
     register int mark_index = scan_index;
     while (response[scan_index - 1] != '\n' || response[scan_index] != '\n') {
-        printf("%d %d\n", scan_index, (int) response[scan_index]);
         if (response[scan_index] == ':' && response[scan_index + 1] == ' ') {
-            result->headers[result->header_quantity] = malloc(sizeof(header*));
-            result->headers[result->header_quantity]->name = malloc(sizeof(char*));
-            char* name = string_from_to(response, mark_index, scan_index - 1);
-            result->headers[result->header_quantity]->name = name;
+            result->headers[result->header_quantity] = malloc(sizeof(header));
+            char* header_name = string_from_to(response, mark_index, scan_index - 1);
+            result->headers[result->header_quantity]->name = malloc(sizeof(header_name));
+            result->headers[result->header_quantity]->name = header_name;
             scan_index++;
             mark_index = scan_index + 1;
-//            printf("header %s: ", result->headers[result->header_quantity]->name);
-//            fflush(stdout);
         } else if (response[scan_index] == '\n') {
-            result->headers[result->header_quantity]->value = string_from_to(response, mark_index, scan_index - 1);
+            char* header_value = string_from_to(response, mark_index, scan_index - 1);
+            result->headers[result->header_quantity]->value = malloc(sizeof(header_value));
+            result->headers[result->header_quantity]->value = header_value;
             mark_index = scan_index + 1;
-//            printf("%s \n", result->headers[result->header_quantity]->value);
-//            fflush(stdout);
             result->header_quantity ++;
         }
         scan_index ++;
     }
     while (response[scan_index] == '\n' || response[scan_index] == '\r') {
-        printf("%d %d\n", scan_index, (int) response[scan_index]);
         scan_index++;
     }
-    printf("%d %d\n", scan_index, (int) response[scan_index]);
-    printf("fuckkkkkkkkkkkkkkkkkkkkkkkkkkkk\n");
     return scan_index;
 }
 
 // TODO @dthongvl please help me implement this function
-http_response *free_http_response(http_response *response) {
+void free_http_response(http_response *response) {
     register int index;
     for (index = 0; index < response->header_quantity; index++) {
-        get_free(response->headers[index]->name);
-        get_free(response->headers[index]->value);
-        get_free(response->headers[index]);
+        get_free((void **) &response->headers[index]->name);
+        get_free((void **) &response->headers[index]->value);
+        get_free((void **) &response->headers[index]);
     }
-    get_free(response->method);
-    get_free(response->path);
-    get_free(response->version);
-    get_free(response->body);
-    get_free(response);
-    return response;
+    get_free((void **) &response->headers);
+    get_free((void **) &response->status_code);
+    get_free((void **) &response->status);
+    get_free((void **) &response->version);
+    get_free((void **) &response->body);
+    get_free((void **) &response);
 }
 
+/**
+ * free memory of pointer
+ * @reference: https://stackoverflow.com/questions/7608714/why-is-my-pointer-not-null-after-free
+ * @param pointer
+ */
 void get_free(void** pointer) {
     if (*pointer != NULL) {
         free(*pointer);
         *pointer = NULL;
     }
-    return;
 }

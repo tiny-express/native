@@ -29,7 +29,7 @@
 using namespace Java::Lang;
 
 void System::out::print(String target) {
-    char *targetCharacters = target.toCharArray();
+    char *targetCharacters = target.toString();
     if (is_empty(targetCharacters)) {
         return;
     }
@@ -38,7 +38,7 @@ void System::out::print(String target) {
 }
 
 void System::out::println(String target) {
-    char *targetCharacters = target.toCharArray();
+    char *targetCharacters = target.toString();
     if (is_empty(targetCharacters)) {
         return;
     }
