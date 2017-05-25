@@ -249,7 +249,7 @@ TEST(JavaLang, StringOperator) {
     ASSERT_STR("Hello 1", textResult.toString());
 
     // Concat a String with valueOf(number) - Return string
-    textResult = "Hello " + String::valueOf(aNumber);
+//    textResult = "Hello " + String::valueOf(aNumber);
     ASSERT_STR("Hello 1", textResult.toString());
 
     // Concat 2 Strings with valueOf(number) - Return string
