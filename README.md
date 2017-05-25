@@ -24,7 +24,7 @@ This project is also useful for new developers in practical programming.
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
 - [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
-### Get Started
+### Getting started
 
 #### Prerequisites
 - [x] CMake ~ 2.8
@@ -34,9 +34,10 @@ This project is also useful for new developers in practical programming.
 - [x] Zlib
 
 #### Installation
+OS X & Linux
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make -j
+$ cmake . && make
 $ sudo make install
 ```
 
