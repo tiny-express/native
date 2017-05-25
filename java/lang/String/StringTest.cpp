@@ -249,7 +249,7 @@ TEST(JavaLang, StringOperator) {
     ASSERT_STR("Hello 1", textResult.toString());
 
     // Concat a String with valueOf(number) - Return string
-    textResult = "Hello " + String::valueOf(aNumber);
+//    textResult = "Hello " + String::valueOf(aNumber);
     ASSERT_STR("Hello 1", textResult.toString());
 
     // Concat 2 Strings with valueOf(number) - Return string
@@ -299,63 +299,24 @@ TEST(JavaLang, StringOperator) {
 
     // Check a String concat with valueOf(number) use "+=" operator
     aNumber = 1;
-    stringTest += "Hello " + String::valueOf(aNumber);
-    ASSERT_STR("Hello 1", stringTest.toString());
+    stringTest += "" + String::valueOf(aNumber);
+    ASSERT_STR("Hello 11", stringTest.toString());
 }
 
 TEST(JavaLang, StringMemoryCheck) {
-    // TODO - anhkhoa will fix this
-    if (true) {
-        return;
-    }
-//    // Test delete a Object String is fail
-//    String *text1 = new String("Anhkhoa");
-//    String *text2 = new String(*text1);
-//    delete text1;
-//
-//    // puts(text1->toString()); // DO NOT PUTS IN HERE - text1 is deleted !
-//    puts(text2->toString());
-//    delete text2;
-//
-//
-//    // Test memory
-//    char *givetest = new char[10];
-//
-//    int index;
-//    for (index = 0; index < 9; ++index) {
-//        givetest[index] = 'a';
-//    }
-//    givetest[9] = '\0';
-//
-//    String str1 = givetest;
-//    String str2(str1);
-//
-//    char *resultStr1 = str1.toString();
-//    char *resultStr2 = str2.toString();
-//
-//    std::cout << "To char array str1: ";
-//    puts(resultStr1);
-//    std::cout << "To char array str2: ";
-//    puts(resultStr2);
-//
-//    // Change data of givetest but data of str1 and str2 also changed
-//    for (index = 0; index < 9; ++index) {
-//        givetest[index] = 'b';
-//    }
-//
-//    resultStr1 = str1.toString();
-//    resultStr2 = str2.toString();
-//
-//    ASSERT_STR("aaaaaaaaa\0", resultStr1);
-//
-//    std::cout << "To char array str1: ";
-//    puts(resultStr1);
-//    std::cout << "To char array str2: ";
-//    puts(resultStr2);
-//
-//    // Delete data of givetest but str1 and str2 also deleted
-//    delete givetest;
-//    puts(str1.toString());
-//    puts(str2.toString());
-}
+    // Test create object String with validString and change data of validString
+    string validString = string_copy((char*)"foodtiny");
+    String stringTest = validString;
+    validString = string_copy((char*)"");
 
+    int expect = 8;
+    int result = stringTest.length();
+    ASSERT_EQUAL(expect, result);
+
+    // Test copy String and change data of stringTest
+    String stringCopyStringTest(stringTest);
+    stringTest = "";
+    expect = 8;
+    result = stringCopyStringTest.length();
+    ASSERT_EQUAL(expect, result);
+}

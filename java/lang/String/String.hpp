@@ -86,11 +86,18 @@ namespace Java {
             static String valueOf(float target);
             static String valueOf(double target);
         public:
-            String operator+(const String& target2);
-            void operator+=(const String& target2);
-            boolean operator<(const String& target2) const;
-            boolean operator==(const String& target2) const;
-            boolean operator!=(const String& target2);
+            String operator+(const String& target);
+            String operator=(const String &target);
+            void operator+=(const String& target);
+            boolean operator<(const String& target) const;
+            boolean operator==(const String& target) const;
+            boolean operator!=(const String& target);
+            friend String operator+(const_string target1, String const &target2) {
+                String result;
+                result = target1;
+                result += target2;
+                return result;
+            };
         };
     }
 }

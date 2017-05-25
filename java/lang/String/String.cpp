@@ -252,9 +252,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
  * @return int
  */
 int String::length() {
-    if (this->size == 0) {
-        this->size = length_pointer_char(this->original);
-    }
+    this->size = length_pointer_char(this->original);
     return this->size;
 }
 
@@ -453,6 +451,12 @@ bool String::operator==(const String &target2) const {
         return true;
     }
     return false;
+}
+
+String String::operator=(const String &target) {
+    this->original = string_copy(target.original);
+    this->length();
+    return *this;
 }
 
 bool String::operator!=(const String &target2) {

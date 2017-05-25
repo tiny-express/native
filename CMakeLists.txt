@@ -154,6 +154,11 @@ add_custom_target(
     COMMAND ./${PROJECT_NAME}_test
 )
 
+add_custom_command(
+    server
+    COMMAND ./mock/mock_server.py
+)
+
 # Add make installation - install to Unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install (TARGETS ${PROJECT_NAME} DESTINATION lib)
