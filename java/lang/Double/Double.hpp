@@ -53,10 +53,10 @@ namespace Java {
             static Double *parseDouble(String target);
 
         public:
-            Double operator+(const Double& target) const;
-            Double operator-(const Double& target) const;
-            Double operator/(const Double& target) const;
-            Double operator*(const Double& target) const;
+            Double operator+(const Double& target);
+            Double operator-(const Double& target);
+            Double operator/(const Double& target);
+            Double operator*(const Double& target);
 
             boolean operator==(const Double& target) const;
             boolean operator!=(const Double& target) const;

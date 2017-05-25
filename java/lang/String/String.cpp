@@ -115,6 +115,16 @@ String String::concat(String str) {
 }
 
 /**
+ * Find substring inside
+ *
+ * @param str
+ * @return String
+ */
+boolean String::contains(CharSequence& str) {
+    return (string_index(this->original, str.toString(), 1) != NOT_FOUND);
+}
+
+/**
  * Get byte array from String
  *
  * @return Array<byte>

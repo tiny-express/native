@@ -148,7 +148,7 @@ TEST(Network, HttpRequest) {
 	};
 
 	char *response = http_request("POST", "http://localhost:9999/test", headers, body);
-    ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
+    ASSERT_TRUE((string_index(response, "a=b", 1) > 0)); 
 
     response = http_request("GET", "http://localhost:9999/test", headers, body);
     ASSERT_TRUE((string_index(response, "a=b", 1) > 0));
