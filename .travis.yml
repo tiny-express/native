@@ -9,6 +9,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
+    - gdb
     - valgrind
 compiler:
 - gcc
