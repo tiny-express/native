@@ -45,7 +45,7 @@ long Math::abs(long a) {
 }
 
 double Math::floor(double a) {
-    return floor(a);
+    return math_floor(a);
 }
 
 double Math::max(double a, double b) {
@@ -86,11 +86,11 @@ double Math::random() {
 }
 
 long Math::round(double a) {
-    return round(a);
+    return math_round(a);
 }
 
 int Math::round(float a) {
-    return round(a);
+    return math_round(a);
 }
 
 double Math::sqrt(double a) {
