@@ -6,9 +6,6 @@ os:
 - osx
 compiler:
 - gcc
-before_install:
-  - sudo apt-get install valgrind
-  - which valgrind
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
