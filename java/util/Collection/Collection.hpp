@@ -27,12 +27,16 @@
 #ifndef NATIVE_UTIL_COLLECTION_HPP
 #define NATIVE_UTIL_COLLECTION_HPP
 
-#include "../Iterable/Iterable.hpp"
+#include "../../lang/Iterable/Iterable.hpp"
+#include "../Collection/Collection.hpp"
+
+using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
-        template <class E>
-        class Collection: public virtual Iterable {
+        template <typename E>
+        class Collection : public virtual Iterable<E> {
+        public:
             virtual bool add(E &e) = 0;
             virtual bool addAll(Collection<E> &c) = 0;
             virtual void clear() = 0;

@@ -24,4 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_LANG_ITERABLE_HPP
+#define NATIVE_JAVA_LANG_ITERABLE_HPP
 
+#include "../../util/Iterator/Iterator.hpp"
+
+using namespace Java::Util;
+
+namespace Java {
+    namespace Lang {
+        template <typename T>
+        class Iterable {
+        public:
+            Iterator<T>	iterator();
+        };
+    }
+}
+
+#endif //NATIVE_JAVA_LANG_ITERABLE_HPP
