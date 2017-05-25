@@ -75,17 +75,18 @@ TEST(JavaLang, StringCharAt) {
     ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
 }
 
-TEST(JavaLang, StringCompareTo) {
-    // String stringCompare1 = "Sawadikhap";
-    // String stringCompare2 = "Sawadikhap";
-    // int stringEquals = stringCompare1.compareTo(stringCompare2);
-    // ASSERT_EQUAL(0, stringEquals);
+// TEST(JavaLang, StringCompareTo) {
+//     String stringCompare1 = "Sawadikhap";
+//     String stringCompare2 = "Sawadikhap";
+//     int stringEquals = stringCompare1.compareTo(stringCompare2);
+//     ASSERT_EQUAL(0, stringEquals);
    
-}
 
-TEST(JavaLang, StringCompareToIgnoreCase) {
+// }
 
-}
+// TEST(JavaLang, StringCompareToIgnoreCase) {
+
+// }
 
 TEST(JavaLang, StringConcat) {
     // Given two strings - Return concatenation result
@@ -97,6 +98,19 @@ TEST(JavaLang, StringConcat) {
     // Given three strings - Return concatenation result
     String textConcat0 = "Food Tiny ";
     ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2).toString());
+}
+
+TEST(JavaLang, StringContains) {
+    // Gives a valid string a sub string to find
+    String validString = "a valid string to test";
+    String subString = "valid string";
+    String invalidSubString = "text";
+
+    //Test true with correct substring inside
+    ASSERT_TRUE(validString.contains(subString));
+
+    //Test with with invalid substring inside
+    ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
 // FIXME

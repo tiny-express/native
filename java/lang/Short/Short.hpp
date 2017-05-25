@@ -53,11 +53,11 @@ namespace Java {
             static Short *parseShort(String target);
 
         public:
-            Short operator+(const Short& target) const;
-            Short operator-(const Short& target) const;
-            Short operator/(const Short& target) const;
-            Short operator*(const Short& target) const;
-            Short operator%(const Short& target) const;
+            Short operator+(const Short& target);
+            Short operator-(const Short& target);
+            Short operator/(const Short& target);
+            Short operator*(const Short& target);
+            Short operator%(const Short& target);
 
             boolean operator==(const Short& target) const;
             boolean operator!=(const Short& target) const;
