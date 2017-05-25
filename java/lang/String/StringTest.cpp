@@ -76,6 +76,7 @@ TEST(JavaLang, StringCharAt) {
 }
 
 TEST(JavaLang, StringCompareTo) {
+
 }
 
 TEST(JavaLang, StringCompareToIgnoreCase) {
@@ -92,6 +93,19 @@ TEST(JavaLang, StringConcat) {
     // Given three strings - Return concatenation result
     String textConcat0 = "Food Tiny ";
     ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2).toString());
+}
+
+TEST(JavaLang, StringContains) {
+    // Gives a valid string a sub string to find
+    String validString = "a valid string to test";
+    String subString = "valid string";
+    String invalidSubString = "text";
+
+    //Test true with correct substring inside
+    ASSERT_TRUE(validString.contains(subString));
+
+    //Test with with invalid substring inside
+    ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
 // FIXME

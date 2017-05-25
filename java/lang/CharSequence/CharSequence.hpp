@@ -33,7 +33,7 @@ namespace Java {
     namespace Lang {
         class CharSequence : public virtual Object {
         public:
-            string toString() const;
+            virtual string toString() const = 0;
         };
     }
 }

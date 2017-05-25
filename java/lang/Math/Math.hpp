@@ -52,6 +52,7 @@ namespace Java {
             static long	round(double a);
             static int round(float a);
             static double sqrt(double a);
+
             string toString() const;
         };
     }
