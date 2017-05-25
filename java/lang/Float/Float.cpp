@@ -147,7 +147,6 @@ Float *Float::parseFloat(String target) {
  * @param target
  * @return Float
  */
-Float operator+(const Float& target) {
-    Float result = this->original + target.original;
-    return result;
+Float Float::operator+(const Float& target) {
+    return this->original + target.original;
 }

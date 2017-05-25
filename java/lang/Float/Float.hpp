@@ -53,10 +53,10 @@ namespace Java {
             static Float *parseFloat(String target);
 
         public:
-            Float operator+(const Float& target) const;
-            Float operator-(const Float& target) const;
-            Float operator/(const Float& target) const;
-            Float operator*(const Float& target) const;
+            Float operator+(const Float& target);
+            Float operator-(const Float& target);
+            Float operator/(const Float& target);
+            Float operator*(const Float& target);
 
             boolean operator==(const Float& target) const;
             boolean operator!=(const Float& target) const;
