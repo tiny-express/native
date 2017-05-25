@@ -142,7 +142,7 @@ foreach(test ${TESTS})
 endforeach()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
+add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
@@ -154,10 +154,10 @@ add_custom_target(
     COMMAND ./${PROJECT_NAME}_test
 )
 
-#add_custom_command(
-#    server
-#    COMMAND ./mock/mock_server.py
-#)
+add_custom_command(
+    server
+    COMMAND ./mock/mock_server.py
+)
 
 # Add make installation - install to Unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
