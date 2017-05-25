@@ -33,7 +33,7 @@ namespace Java {
     namespace Lang {
         class Long: public virtual Number {
         private:
-            int original;
+            long original;
         public:
             Long();
             Long(long original);
@@ -48,10 +48,29 @@ namespace Java {
             float floatValue() const;
             double doubleValue() const;
             string toString() const;
-        public:
+
             static Long *parseLong(String target);
+
+        public:
+            Long operator+(const Long& target) const;
+            Long operator-(const Long& target) const;
+            Long operator/(const Long& target) const;
+            Long operator%(const Long& target) const;
+            Long operator*(const Long& target) const;
+            boolean operator==(const Long& target) const;
+            boolean operator!=(const Long& target) const;
+            boolean operator<(const Long& target) const;
+            boolean operator>(const Long& target) const;
+            boolean operator<=(const Long& target) const;
+            boolean operator>=(const Long& target) const;
+
+            void operator-=(const Long& target);
+            void operator+=(const Long& target);
+            void operator*=(const Long& target);
+            void operator/=(const Long& target);
+            void operator%=(const Long& target);
         };
     }
 }
 
-#endif//NATIVE_JAVA_LANG_INTEGER_HPP
+#endif//NATIVE_JAVA_LANG__HPP

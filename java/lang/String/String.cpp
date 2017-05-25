@@ -255,9 +255,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
  * @return int
  */
 int String::length() {
-    if (this->size == 0) {
-        this->size = length_pointer_char(this->original);
-    }
+    this->size = length_pointer_char(this->original);
     return this->size;
 }
 
@@ -310,6 +308,32 @@ boolean String::startsWith(String prefix) const {
     return string_startswith(this->original, prefix.original);
 }
 
+/**
+ * String starts with a prefix
+ *
+ * @param prefix
+ * @param from t
+ * @return boolean
+ */
+boolean String::startsWith(String prefix, int toffset) const {
+    if (this->original == NULL || prefix.original == NULL || toffset < 0) {
+        return FALSE;
+    }
+    int original_length = length_pointer_char(this->original);
+    int prefix_length = length_pointer_char(prefix.original);
+    if (original_length < prefix_length || toffset > (original_length - prefix_length)) {
+        return FALSE;
+    }
+    register int i = 0;
+    register int j = toffset;
+    for (i; i < prefix_length; i++) {
+        if (prefix.original[i] != this->original[j]) {
+            return FALSE;
+        }
+        j++;
+    }
+    return TRUE;
+}
 /**
  * String to char array
  *
@@ -447,13 +471,31 @@ String String::operator+(const String& target2) {
     return result;
 }
 
-bool String::operator==(const String &target2) {
+void String::operator+=(const String& target2) {
+    *this = string_concat(this->original, target2.original);
+}
+
+bool String::operator==(const String &target2) const {
     if (string_equals(this->original, target2.toString())) {
         return true;
     }
     return false;
 }
 
+String String::operator=(const String &target) {
+    this->original = string_copy(target.original);
+    this->length();
+    return *this;
+}
+
 bool String::operator!=(const String &target2) {
     return !this->operator==(target2);
+}
+
+bool String::operator<(const String &target2) const {
+    if (strcmp(this->original, target2.toString()) < 0) {
+        return true;
+    }
+
+    return false;
 }

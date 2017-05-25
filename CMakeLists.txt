@@ -29,15 +29,20 @@ project(native C CXX)
 
 # Only enable GNU Assembly for Linux amd64
 # Please careful when you would like to optimize any function in ASM
-# ASM implementation must be GNU Assembly for Linux 64bit
+# ASM implementation must be GNU Assembly for Linux amd x64
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     enable_language(ASM)
 endif()
 
-# For Darwin
-set(CMAKE_MACOSX_RPATH 1)
+# Enable runtime search path support for dynamic libraries on OSX
+if(APPLE)
+    set(CMAKE_MACOSX_RPATH 1)
+endif()
+
+# Adhere to GNU filesystem layout conventions
+include(GNUInstallDirs)
 
 # Force Linux and Darwin use GCC
 set(CMAKE_C_COMPILER "gcc")
@@ -45,8 +50,10 @@ set(CMAKE_CXX_COMPILER "g++")
 
 # Check C++ compiler version
 include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+
+check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
+check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+
 if(COMPILER_SUPPORTS_CXX11)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 elseif(COMPILER_SUPPORTS_CXX0X)
@@ -58,7 +65,6 @@ endif()
 add_definitions(-D_GNU_SOURCE)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wimplicit-function-declaration")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wformat-extra-args")
-
 
 # CMake Modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
@@ -72,14 +78,14 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 else()
     set(OPENSSL_ROOT_DIR "C:/Program Files (x86)/GnuWin32/include")
 endif()
+
+# Set root directory for OpenSSL
 set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
 
 # Detect installed components
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
-find_package(PythonInterp 2.7 REQUIRED)
 
 if (OPENSSL_FOUND)
     include_directories("${OPENSSL_INCLUDE_DIR}")
@@ -88,7 +94,7 @@ endif()
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
-# Include all C and Unix Assembly files
+# Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES
     common/*
     crypto/*
@@ -134,9 +140,8 @@ foreach(test ${TESTS})
 endforeach()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} main.c)
+add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
 
-# Enable native library build with Cassandra Driver
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -146,6 +151,11 @@ add_custom_target(
     unit-test
     COMMAND ./${PROJECT_NAME}_test
 )
+
+#add_custom_command(
+#    server
+#    COMMAND ./mock/mock_server.py
+#)
 
 # Add make installation - install to Unix system
 install (TARGETS ${PROJECT_NAME}_static DESTINATION lib)
@@ -157,11 +167,11 @@ install (FILES ${HEADERS} DESTINATION include/native)
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lpython2.7)
-    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lpython2.7)
-    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lpython2.7)
+    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else()
-    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt -lpython2.7)
-    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt -lpython2.7)
-    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt -lpython2.7)
+    target_link_libraries(${PROJECT_NAME}           ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}_static    ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}_test      ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif()

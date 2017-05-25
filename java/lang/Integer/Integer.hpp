@@ -39,6 +39,7 @@ namespace Java {
             Integer(int original);
             Integer(const Integer &target);
             ~Integer();
+
         public:
             char charValue() const;
             string stringValue() const;
@@ -48,19 +49,28 @@ namespace Java {
             float floatValue() const;
             double doubleValue() const;
             string toString() const;
+
             static Integer *parseInt(String target);
+
         public:
-            Integer operator+(const Integer& target);
-            Integer operator-(const Integer& target);
-            Integer operator/(const Integer& target);
-            Integer operator*(const Integer& target);
-            Integer operator%(const Integer& target);
-            boolean operator==(const Integer& target);
-            boolean operator!=(const Integer& target);
+            Integer operator+(const Integer& target) const;
+            Integer operator-(const Integer& target) const;
+            Integer operator/(const Integer& target) const;;
+            Integer operator*(const Integer& target) const;
+            Integer operator%(const Integer& target) const;
+
+            boolean operator==(const Integer& target) const;
+            boolean operator!=(const Integer& target) const;
             boolean operator<(const Integer& target) const;
-            boolean operator>(const Integer& target);
-            boolean operator<=(const Integer& target);
-            boolean operator>=(const Integer& target);
+            boolean operator>(const Integer& target) const;
+            boolean operator<=(const Integer& target) const;
+            boolean operator>=(const Integer& target) const;
+
+            void operator+=(const Integer& target);
+            void operator-=(const Integer& target);
+            void operator/=(const Integer& target);
+            void operator*=(const Integer& target);
+            void operator%=(const Integer& target);
         };
     }
 }
