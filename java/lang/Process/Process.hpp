@@ -32,7 +32,7 @@
 namespace Java {
     namespace Lang {
         class Process : public virtual Object {
-            String toString() const;
+            string toString() const;
         };
     }
 }

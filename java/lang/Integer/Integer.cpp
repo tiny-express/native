@@ -65,7 +65,7 @@ Integer::~Integer() {
  * @return Integer
  */
 Integer *Integer::parseInt(String target) {
-    return new Integer(string_to_int(target.toCharArray()));
+    return new Integer(string_to_int(target.toString()));
 }
 
 /**
@@ -73,7 +73,7 @@ Integer *Integer::parseInt(String target) {
  *
  * @return String
  */
-String Integer::toString() const {
+string Integer::toString() const {
     return string_from_int(this->original);
 }
 
@@ -92,7 +92,7 @@ char Integer::charValue() const {
  * @return CString
  */
 string Integer::stringValue() const  {
-    return String::valueOf(this->original).toCharArray();
+    return String::valueOf(this->original).toString();
 }
 
 /**
@@ -163,7 +163,7 @@ Integer Integer::operator-(const Integer& target) {
  *
  * @return bool
  */
-boolean Integer::operator==(const Integer& target) {
+boolean Integer::operator==(const Integer& target) const {
     return this->original == target.original;
 }
 

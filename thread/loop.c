@@ -39,7 +39,7 @@
  */
 pthread_t set_interval(void *callback, unsigned int milliseconds) {
     if (callback == NULL) {
-        return NULL;
+        return (pthread_t) NULL;
     }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
@@ -63,7 +63,7 @@ pthread_t set_interval(void *callback, unsigned int milliseconds) {
  */
 pthread_t set_time_out(void *callback, unsigned int milliseconds) {
     if (callback == NULL) {
-        return NULL;
+        return  (pthread_t) NULL;
     }
     pthread_t thread;
     thread_argument *argument = malloc(sizeof(thread_argument));
@@ -95,6 +95,7 @@ void *loop(void *argument) {
 void *run(void *argument) {
     usleep(((thread_argument *)argument)->milliseconds*1000);
     ((void(*)())((thread_argument*)argument)->callback)();
+    return EXIT_SUCCESS;
 }
 
 /**

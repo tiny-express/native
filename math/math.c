@@ -23,17 +23,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+#include "../math.h"
 
-
-#ifndef NATIVE_ITERABLE_H
-#define NATIVE_ITERABLE_H
-
-namespace Java {
-    namespace Util {
-        class Iterable {
-            virtual void forEach() = 0;
-        };
-    }
+double math_pow(double a, double b) {
+    return pow(a,b);
 }
-
-#endif //NATIVE_ITERABLE_H

@@ -37,8 +37,6 @@ extern "C" {
 #include <map>
 
 typedef bool boolean;
-typedef char* string;
-typedef const char* const_string;
 
 namespace Java {
     namespace Lang {
@@ -55,8 +53,7 @@ namespace Java {
 
         class Object {
         protected:
-            virtual String toString() const = 0;
-            unsigned long hashCode();
+            virtual string toString() const = 0;
         };
     }
 }

@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
+#include "../string.h"
 #include "../unit_test.h"
 
 TEST(String, ConvertFromChar) {

@@ -27,19 +27,3 @@
 #include "HttpURLConnection.hpp"
 
 using namespace Java::Net;
-
-HttpURLConnection::HttpURLConnection() {
-    URL url("");
-    this->url = url;
-}
-
-HttpURLConnection::HttpURLConnection(URL url) {
-    this->url = url;
-}
-
-HttpURLConnection::~HttpURLConnection() {
-}
-
-String HttpURLConnection::getSchema(URL url) {
-
-}

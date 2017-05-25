@@ -26,6 +26,7 @@
 
 #include "../unit_test.h"
 #include "../crypto.h"
+#include "../type.h"
 
 TEST(Crypto, Base64Encode) {
     #ifdef __APPLE__
@@ -39,18 +40,18 @@ TEST(Crypto, Base64Encode) {
 
     char *expect = "Zm9vZHRpbnk=";
     char *target = "foodtiny";
-    char *result = base64_encode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    char *result1 = base64_encode((const unsigned char*) target, (size_t) length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result1);
 
     expect = "7IKs656R7ZW0";
     target = "사랑해";
-    result = base64_encode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    char *result2 = base64_encode((const unsigned char*) target, (size_t) length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result2);
 
     expect = "4Lic4Lih4Lij4Lix4LiB4LiE4Li44LiT";
     target = "ผมรักคุณ";
-    result = base64_encode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    char *result3 = base64_encode((const unsigned char*) target, (size_t)  length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result3);
 }
 
 TEST(Crypto, Base64Decode) {
@@ -65,16 +66,16 @@ TEST(Crypto, Base64Decode) {
 
     char *expect = "foodtiny";
     char *target = "Zm9vZHRpbnk=";
-    char *result = base64_decode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    unsigned char *result1 = base64_decode((const char*) target, (size_t) length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result1);
 
     expect = "사랑해";
     target = "7IKs656R7ZW0";
-    result = base64_decode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    unsigned char *result2 = base64_decode((const char*) target, (size_t) length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result2);
 
     expect = "ผมรักคุณ";
     target = "4Lic4Lih4Lij4Lix4LiB4LiE4Li44LiT";
-    result = base64_decode(target, length_pointer_char(target));
-    ASSERT_STR(expect, result);
+    unsigned char *result3 = base64_decode((const char*) target, (size_t) length_pointer_char(target));
+    ASSERT_STR(expect, (char*) result3);
 }

@@ -23,35 +23,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef NATIVE_JAVA_LANG_LONG_HPP
-#define NATIVE_JAVA_LANG_LONG_HPP
-
-#include "../Number/Number.hpp"
-
-namespace Java {
-    namespace Lang {
-        class Long: public virtual Number {
-        private:
-            int original;
-        public:
-            Long();
-            Long(long original);
-            Long(const Long &longnumber);
-            ~Long();
-        public:
-            char charValue() const;
-            string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
-            string toString() const;
-        public:
-            static Long *parseLong(String target);
-        };
-    }
-}
-
-#endif//NATIVE_JAVA_LANG_INTEGER_HPP
+ 
+ #include "../math.h"
+ #include "../unit_test.h"

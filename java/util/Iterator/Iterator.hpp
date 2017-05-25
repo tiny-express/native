@@ -24,4 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_UTIL_ITERATOR_HPP
+#define NATIVE_JAVA_UTIL_ITERATOR_HPP
 
+#include "../../lang/Object/Object.hpp"
+
+namespace Java {
+    namespace Util {
+        template <typename E>
+        class Iterator {
+        public:
+            boolean	hasNext();
+            E next();
+            void remove();
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_UTIL_ITERATOR_HPP

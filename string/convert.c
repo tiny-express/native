@@ -59,15 +59,15 @@ inline TYPE string_to_##TYPE(char *target) {\
     return result;\
 }
 
-STR_FROM(short,  "%d\0");
-STR_FROM(int,    "%d\0");
-STR_FROM(long,   "%ld\0");
-STR_FROM(float,  "%g\0");
-STR_FROM(double, "%.16g\0");
+STR_FROM(short,  "%d");
+STR_FROM(int,    "%d");
+STR_FROM(long,   "%ld");
+STR_FROM(float,  "%g");
+STR_FROM(double, "%.16g");
 
-STR_TO(short,  "%hi\0");
-STR_TO(float,  "%g\0");
-STR_TO(double, "%lg\0");
+STR_TO(short,  "%hi");
+STR_TO(float,  "%g");
+STR_TO(double, "%lg");
 
 /**
  * String from char

@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_LANG_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_HPP
 
+#include "../Object/Object.hpp"
 #include "../Array/Array.hpp"
-#include "../Number/Number.hpp"
 #include "../CharSequence/CharSequence.hpp"
 
 namespace Java {
@@ -36,19 +36,24 @@ namespace Java {
         class String: public virtual Object {
         private:
             string original;
+            int size = 0;
         public:
             String();
             String(const_string original);
             String(string original);
-            //String(Array<byte> bytes);
+            String(Array<char> &chars);
+            String(Array<byte> &bytes);
             String(const String &target);
-            ~String();
+            virtual ~String();
         public:
             char charAt(int index);
+            int	compareTo(String anotherString);
+            int	compareToIgnoreCase(String str);
             String concat(String str);
             boolean contains(CharSequence s);
-            //Array<byte> &getBytes();
+            Array<byte> getBytes() const;
             boolean endsWith(String suffix);
+            static String fromCharArray(Array<char> &chars);
             int indexOf(int ch) const;
             int indexOf(int ch, int fromIndex) const;
             int indexOf(String str) const;
@@ -58,18 +63,18 @@ namespace Java {
             int lastIndexOf(int ch, int fromIndex);
             int lastIndexOf(String str) const;
             int lastIndexOf(String str, int fromIndex) const;
-            int length() const;
+            int length();
             boolean matches(String regex) const;
             String replace(char oldChar, char newChar) const;
             String replaceAll(String regex, String replacement) const;
             String replaceFirst(String regex, String replacement) const;
-            String split(String regex) const;
+            Array<String> split(String regex) const;
             String split(String regex, int limit) const;
             boolean startsWith(String prefix) const;
             boolean startsWith(String prefix, int toffset) const;
-            string toCharArray() const;
+            Array<char> toCharArray() const;
             String toLowerCase() const;
-            String toString() const;
+            string toString() const;
             String toUpperCase();
             String trim();
             static String valueOf(boolean target);
@@ -81,9 +86,18 @@ namespace Java {
             static String valueOf(float target);
             static String valueOf(double target);
         public:
-            String operator+(const String& target2);
-            boolean operator==(const String& target2);
-            boolean operator!=(const String& target2);
+            String operator+(const String& target);
+            String operator=(const String &target);
+            void operator+=(const String& target);
+            boolean operator<(const String& target) const;
+            boolean operator==(const String& target) const;
+            boolean operator!=(const String& target);
+            friend String operator+(const_string target1, String const &target2) {
+                String result;
+                result = target1;
+                result += target2;
+                return result;
+            };
         };
     }
 }

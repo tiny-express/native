@@ -47,7 +47,7 @@ namespace Java {
             long longValue() const;
             float floatValue() const;
             double doubleValue() const;
-            String toString() const;
+            string toString() const;
             static Integer *parseInt(String target);
         public:
             Integer operator+(const Integer& target);
@@ -55,7 +55,7 @@ namespace Java {
             Integer operator/(const Integer& target);
             Integer operator*(const Integer& target);
             Integer operator%(const Integer& target);
-            boolean operator==(const Integer& target);
+            boolean operator==(const Integer& target) const;
             boolean operator!=(const Integer& target);
             boolean operator<(const Integer& target) const;
             boolean operator>(const Integer& target);

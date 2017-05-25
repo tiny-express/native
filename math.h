@@ -24,15 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../mock.h"
-#include <python2.7/Python.h>
+#ifndef NATIVE_MATH_H
+#define NATIVE_MATH_H
 
-void *start_mock_server() {
-    system("pkill python");
-    FILE* file;
-    Py_SetProgramName("mock server");
-    Py_Initialize();
-    file = fopen("./mock/mock_server.py","r");
-    PyRun_SimpleFile(file, "./mock/mock_server.py");
-    Py_Finalize();
-}
+#include <math.h>
+
+double math_pow(double a, double b);
+
+
+
+#endif

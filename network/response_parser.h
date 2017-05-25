@@ -29,16 +29,14 @@
 
 typedef struct header {
     char* name;
-    int name_length;
     char* value;
-    int value_length;
 } header;
 
 typedef struct http_response {
-    char* body;
-    char* path;
-    char* method;
     char* version;
+    char* status_code;
+    char* status;
+    char* body;
     int header_quantity;
     header *headers[];
 } http_response;
@@ -55,6 +53,6 @@ http_response *parse(char* response);
  * @param response
  * @return
  */
-http_response *free_http_response(http_response* response);
+void free_http_response(http_response* response);
 
 #endif

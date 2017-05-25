@@ -26,6 +26,7 @@
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include "../type.h"
 #include "../common.h"
 #include "../string.h"
 #include "../network.h"
@@ -152,7 +153,7 @@ char *http_query(char *url) {
 }
 
 /**
- * return paht of URL if paht doesn't exit return "/"
+ * return path of URL if path doesn't exit return "/"
  * @param url
  * @return string path
  */
@@ -195,6 +196,25 @@ char* http_protocol(char* url) {
     int length_protocol = length_pointer_char(protocol);
     protocol = string_from_to(protocol, 0, length_protocol - 4); // remove "://"
     return protocol;
+}
+
+int url_port(char* url) {
+    int path_index = string_index(url, http_path(url), 1);
+    char* domain = url;
+    char* path = http_path(url);
+    int port = http_port(url);
+    if (port ==  -1) {
+        return -1;
+    }
+    if (strcmp(path, "/") != 0) {
+        domain = string_from_to(domain, 0, path_index - 1);
+    }
+    char* port_string;
+    asprintf(&port_string, ":%d", port);
+    if (string_index(domain, port_string, 1) == -1) {
+        return -1;
+    }
+    return port;
 }
 
 /**
