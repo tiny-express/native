@@ -86,7 +86,10 @@ char String::charAt(int index) {
  * @return int
  */
 int String::compareTo(String anotherString) {
-    // TODO
+    // string anotherStringValue = anotherString.toString();
+    // if (string_equals(this->original, anotherStringValue) {
+    //     return 0;
+    // }
     return 0;
 }
 
@@ -109,6 +112,16 @@ int String::compareToIgnoreCase(String str) {
  */
 String String::concat(String str) {
     return string_concat(this->original, str.original);
+}
+
+/**
+ * Find substring inside
+ *
+ * @param str
+ * @return String
+ */
+boolean String::contains(CharSequence& str) {
+    return (string_index(this->original, str.toString(), 1) != NOT_FOUND);
 }
 
 /**
@@ -305,6 +318,32 @@ boolean String::startsWith(String prefix) const {
     return string_startswith(this->original, prefix.original);
 }
 
+/**
+ * String starts with a prefix
+ *
+ * @param prefix
+ * @param from t
+ * @return boolean
+ */
+boolean String::startsWith(String prefix, int toffset) const {
+    if (this->original == NULL || prefix.original == NULL || toffset < 0) {
+        return FALSE;
+    }
+    int original_length = length_pointer_char(this->original);
+    int prefix_length = length_pointer_char(prefix.original);
+    if (original_length < prefix_length || toffset > (original_length - prefix_length)) {
+        return FALSE;
+    }
+    register int i = 0;
+    register int j = toffset;
+    for (i; i < prefix_length; i++) {
+        if (prefix.original[i] != this->original[j]) {
+            return FALSE;
+        }
+        j++;
+    }
+    return TRUE;
+}
 /**
  * String to char array
  *
