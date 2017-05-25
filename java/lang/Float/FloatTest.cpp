@@ -43,8 +43,60 @@ TEST(JavaLang, FloatConstructor) {
     ASSERT_EQUAL(1.3, validIntegerPointer->intValue());
 }
 
+TEST(JavaLang, FloatComparision) {
+    // Give a valid number and make a comparision
+    Float validNumber = 4.2;
+    Float targetNumber;
+    
+    // Test validNumber is equal targetNumber
+    targetNumber = 4.2;
+    ASSERT_TRUE(validNumber == targetNumber);
+    
+    // Test validNumber is not equal targetNumber
+    targetNumber = 2.1;
+    ASSERT_TRUE(validNumber != targetNumber);
+    
+    // Test validNumber is less than targetNumber
+    targetNumber = 6.8;
+    ASSERT_TRUE(validNumber < targetNumber);
+    
+    // Test validNumber is equal or less than targetNumber
+    targetNumber = 5.5;
+    ASSERT_TRUE(validNumber <= targetNumber);
+    
+    // Test valid number is more than targetNumber
+    targetNumber = 4.0;
+    ASSERT_TRUE(validNumber > targetNumber);
+    
+    // Test valid number is equal or more than targetNumber
+    targetNumber = 1.2;
+    ASSERT_TRUE(validNumber >= targetNumber);
+}
+
 TEST(JavaLang, FloatOperator) {
+    // Given a valid number
+    Float validNumber = 4.1;
+    Float targetNumber = 2.0;
+    
+    // Make a summation with targetNumber
+    Float summationNumber = 6.1;
+    ASSERT_TRUE(summationNumber == (validNumber + targetNumber));
+    
+    // Make a subtraction with targetNumber
+    Float subtractionNumber = 2.1;
+    ASSERT_TRUE(subtractionNumber == (validNumber - targetNumber));
+    
+    // Make a multiplication with targetNumber
+    Float multiplicationNumber = 8.2;
+    ASSERT_TRUE(multiplicationNumber == (validNumber * targetNumber));
+    
+    // Make a division with targetNumber
+    Float divisionNumber = 2.05;
+    ASSERT_TRUE(divisionNumber == (validNumber / targetNumber));
 }
 
 TEST(JavaLang, FloatParseFloat) {
+    // Given value for Float constructor and assign value - Return float
+    Float *validFloatPointer = Float::parseFloat("6");
+    ASSERT_EQUAL(6, validFloatPointer->floatValue());
 }

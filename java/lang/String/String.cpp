@@ -86,7 +86,10 @@ char String::charAt(int index) {
  * @return int
  */
 int String::compareTo(String anotherString) {
-    // TODO
+    // string anotherStringValue = anotherString.toString();
+    // if (string_equals(this->original, anotherStringValue) {
+    //     return 0;
+    // }
     return 0;
 }
 
@@ -109,6 +112,16 @@ int String::compareToIgnoreCase(String str) {
  */
 String String::concat(String str) {
     return string_concat(this->original, str.original);
+}
+
+/**
+ * Find substring inside
+ *
+ * @param str
+ * @return String
+ */
+boolean String::contains(CharSequence& str) {
+    return (string_index(this->original, str.toString(), 1) != NOT_FOUND);
 }
 
 /**
