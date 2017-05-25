@@ -16,13 +16,13 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./install_osx; fi
 - sudo pip install -r mock/requirements.txt
-- python mock/mock_server.py
+- sudo python mock/mock_server.py &
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j
 - make unit-test
 after_script:
-- pkill python
+- sudo pkill python
 - ./memory_check
 notifications:
   slack:
