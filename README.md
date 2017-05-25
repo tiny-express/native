@@ -24,7 +24,7 @@ This project is also useful for new developers in practical programming.
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
 - [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
-### Get Started
+### Getting started
 
 #### Prerequisites
 - [x] CMake ~ 2.8
@@ -34,16 +34,17 @@ This project is also useful for new developers in practical programming.
 - [x] Zlib
 
 #### Installation
+OS X & Linux
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make -j
+$ cmake . && make
 $ sudo make install
 ```
 
 #### Test Driven Development
 ```bash
 $ sudo pip install pip --upgrade
-$ sudo pip install -r mock/requirements.txt
+$ sudo pip install -r misc/requirements.txt
 $ cmake . && make unit-test
 ```
 
@@ -114,6 +115,7 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Exception
 - [ ] Java.Lang.Float
 - [x] Java.Lang.Integer
+- [x] Java.Lang.Iterable
 - [ ] Java.Lang.Long
 - [ ] Java.Lang.Math
 - [x] Java.Lang.Number
@@ -151,11 +153,11 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Writer
 
 ##### Java.Util
-- [ ] Java.Util.AbstractCollection
-- [ ] Java.Util.AbstractList
+- [x] Java.Util.AbstractCollection
+- [x] Java.Util.AbstractList
 - [ ] Java.Util.AbstractMap
 - [ ] Java.Util.AbstractSet
-- [ ] Java.Util.ArrayList
+- [x] Java.Util.ArrayList
 - [ ] Java.Util.Arrays
 - [ ] Java.Util.BitSet
 - [ ] Java.Util.Base64
@@ -166,9 +168,9 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.Date
 - [ ] Java.Util.EnumMap
 - [ ] Java.Util.EnumSet
-- [ ] Java.Util.HashMap
+- [x] Java.Util.HashMap
 - [ ] Java.Util.HashSet
-- [ ] Java.Util.Iterable
+- [x] Java.Util.Iterator
 - [ ] Java.Util.LinkedListHashSet
 - [ ] Java.Util.LinkedList
 - [ ] Java.Util.List

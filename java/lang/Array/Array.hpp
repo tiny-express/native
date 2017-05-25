@@ -38,16 +38,18 @@ namespace Java {
         class Array;
 
         template<typename E>
-        class Iterator {
+        class ArrayIterator {
         public:
-            Iterator(const Array<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
-            bool operator!= (const Iterator<E>& other) const {
+            ArrayIterator(const Array<E>* p_vec, int pos) : _pos( pos ), _p_vec( p_vec ) { }
+            bool operator!= (const ArrayIterator<E>& other) const {
                 return _pos != other._pos;
             }
+
             int operator*() const {
                 return _p_vec->get(_pos);
             }
-            const Iterator<E>& operator++() {
+
+            const ArrayIterator<E>& operator++() {
                 ++_pos;
                 return *this;
             }
@@ -63,26 +65,35 @@ namespace Java {
             int virtualSize = 4;
             int realSize = 0;
             inline void reallocate();
+
         public:
             Array();
             Array(std::initializer_list<E> list);
             Array(int length);
+            //Array(E target);
             Array(const Array<E> &target);
             Array(int length, E defaultValue);
             ~Array();
+
         public:
             void append(std::initializer_list<E> list);
-            E& at(const int index) const;
+            void append(const Array<E> &target);
+            void append(const E &target);
+            E at(const int index) const;
             void push(E element);
             boolean isEmpty() const;
             int length() const;
             int get (int index) const;
             void set (int index, int value);
-            Iterator<E> begin () const;
-            Iterator<E> end () const;
+            ArrayIterator<E> begin () const;
+            ArrayIterator<E> end () const;
             string toString() const;
+
         public:
             E& operator[] (const int index);
+            Array<E> operator+ (const Array<E> &target);
+            Array<E> operator+=(const Array<E> &target);
+            Array<E> operator= (const Array<E> &target);
         };
 
         /**
@@ -135,9 +146,10 @@ namespace Java {
             this->virtualSize = target.realSize << 2;
             this->realSize = target.realSize;
             this->array = new E[this->virtualSize];
+
             register int index;
             for (index = 0; index < this->realSize; index++) {
-                //this->array[index] = ;
+                this->array[index] = target.at(index);
             }
         }
 
@@ -175,8 +187,8 @@ namespace Java {
          * @return Iterator<E>
          */
         template <typename E>
-        Iterator<E> Array<E>::begin() const {
-            return Iterator<E>(this, 0);
+        ArrayIterator<E> Array<E>::begin() const {
+            return ArrayIterator<E>(this, 0);
         }
 
         /**
@@ -186,12 +198,12 @@ namespace Java {
          * @return Iterator
          */
         template <typename E>
-        Iterator<E> Array<E>::end() const {
-            return Iterator<E>(this, this->realSize);
+        ArrayIterator<E> Array<E>::end() const {
+            return ArrayIterator<E>(this, this->realSize);
         }
 
         /**
-         * Realloc array with new sise
+         * Realloc array with new size
          *
          * @param E
          */
@@ -274,7 +286,7 @@ namespace Java {
          * @return E
          */
         template <typename E>
-        E& Array<E>::at(const int index) const {
+        E Array<E>::at(const int index) const {
             return this->array[index];
         }
 
@@ -310,6 +322,65 @@ namespace Java {
         E& Array<E>::operator[](const int index) {
             return this->array[index];
         }
+
+        /**
+         * Make the current Array equal to target Array
+         *
+         * @tparam E
+         * @param target
+         * @return
+         */
+        template <typename E>
+        Array<E> Array<E>::operator=(const Array<E> &target) {
+            if (!this->isEmpty()) {
+                delete []this->array;
+            }
+            this->realSize = target.realSize;
+            this->virtualSize = target.virtualSize;
+            this->array = new E[this->virtualSize];
+
+            register int index = 0;
+            for (index = 0; index < this->realSize; ++index) {
+                this->push(target[index]);
+            }
+        }
+
+        /**
+         * Add Array to Array and return new Object
+         *
+         * @tparam E
+         * @param target
+         * @return Array<E>
+         */
+        template <typename E>
+        Array<E> Array<E>::operator+(const Array<E> &target) {
+            Array<E> result = *this;
+
+            register int index;
+            for (index = 0; index < target.length(); ++index) {
+                result.push(target.at(index));
+            }
+
+            return result;
+        }
+
+        /**
+         * Add a new Array to current Array
+         *
+         * @tparam E
+         * @param target
+         * @return Array<E>
+         */
+        template <typename E>
+        Array<E> Array<E>::operator+=(const Array<E> &target) {
+            register int index;
+            for (index = 0; index < target.length(); ++index) {
+                this->push(target.at(index));
+            }
+            return *this;
+        }
+
+
     }
 }
 

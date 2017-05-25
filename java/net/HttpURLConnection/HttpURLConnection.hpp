@@ -32,14 +32,8 @@
 namespace Java {
     namespace Net {
         class HttpURLConnection {
-        private:
-            URL url;
-        public:
             HttpURLConnection();
-            HttpURLConnection(URL url);
             ~HttpURLConnection();
-        public:
-            String getSchema(URL url);
         };
     }
 }

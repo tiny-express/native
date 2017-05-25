@@ -24,16 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
-#include "../mock.h"
+#define CTEST_MAIN
+#define CTEST_SEGFAULT
 
-void *start_mock_server() {
-    system("python mock/mock_server.py");
-//    system("pkill python");
-//    FILE* file;
-//    Py_SetProgramName("mock server");
-//    Py_Initialize();
-//    file = fopen("./mock/mock_server.py","r");
-//    PyRun_SimpleFile(file, "./mock/mock_server.py");
-//    Py_Finalize();
+#include "../unit_test.h"
+
+int main(int argc, const char *argv[]) {
+    int result = ctest_main(argc, argv);
+    return result;
 }
