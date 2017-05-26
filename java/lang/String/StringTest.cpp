@@ -192,6 +192,29 @@ TEST(JavaLang, StringLength) {
     ASSERT_EQUAL(0, textPlus.length());
 }
 
+/** This test case is made based on pattern_test.c */
+TEST(JavaLang, StringMatches) {
+    // Init params for test string matches
+    String emailPattern         = EMAIL_PATTERN;
+    String phoneNumberPattern   = PHONE_PATTERN;
+
+    // Test true with correct email format
+    String correctEmail = "neacao@gmail.com";
+    ASSERT_TRUE(correctEmail.matches(emailPattern));
+
+    // Test fail with wrong email format
+    String wrongEmail = "something@notcorrect";
+    ASSERT_FALSE(wrongEmail.matches(emailPattern));
+
+    // Test true with correct phone number format
+    String correctPhoneNumber = "+15005550006";
+    ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+
+    // Test fail with wrong email format
+    String wrongPhoneNumber = "001678080147";
+    ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
+}
+
 //FIXME
 TEST(JavaLang, StringReplace) {
     String textPlus = "Hello Hello Hello ";
