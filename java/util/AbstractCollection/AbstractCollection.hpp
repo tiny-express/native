@@ -37,8 +37,8 @@ namespace Java {
         template <typename E>
         class AbstractCollection: public virtual Object, public virtual Collection<E> {
         protected:
-            AbstractCollection();
-            ~AbstractCollection();
+            //virtual Abstractllection() = 0;
+            //virtual ~AbstractCollection() = 0;
 
             //define functions
         };

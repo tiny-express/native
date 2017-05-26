@@ -37,17 +37,19 @@ namespace Java {
         template <typename E>
         class Collection : public virtual Iterable<E> {
         public:
-            virtual bool add(E &e) = 0;
+            virtual void add(E &e) = 0;
             virtual bool addAll(Collection<E> &c) = 0;
             virtual void clear() = 0;
-            virtual bool contains(E &e) = 0;
-            virtual bool containsAll(Collection<E> &c) = 0;
-            virtual bool equals(E &e) = 0;
-            virtual int hashCode() = 0;
-            virtual bool isEmpty() = 0;
+            virtual bool contains(E &e) const = 0;
+            virtual bool containsAll(Collection<E> &c) const = 0;
+            virtual bool equals(E &e) const = 0;
+            virtual E get(const int index) = 0;
+            virtual int hashCode() const = 0;
+            virtual bool isEmpty() const = 0;
             virtual bool remove(E &e) = 0;
             virtual bool removeAll(Collection<E> &c) = 0;
-            virtual int size() = 0;
+            virtual int size() const = 0;
+            //virtual ~Collection() = 0;
         };
     }
 }
