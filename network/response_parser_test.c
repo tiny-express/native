@@ -1,12 +1,13 @@
 #include "../unit_test.h"
 #include "response_parser.h"
+#include <stdlib.h>
 
 TEST(Network, Parser) {
 
-    http_response* result3 = malloc(sizeof(http_response));
-    free(result3);
-    result3 = NULL;
-    ASSERT_NULL(result3);
+//    http_response* result3 = (http_response*) malloc(sizeof(http_response));
+//    free(result3);
+//    result3 = NULL;
+//    ASSERT_NULL(result3);
 
     char* response = "HTTP/1.0 200 OK\n"
             "Content-Type: text/html; charset=utf-8\n"
