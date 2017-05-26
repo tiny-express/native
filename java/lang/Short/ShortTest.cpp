@@ -27,58 +27,58 @@
 extern "C" {
 #include "../../../unit_test.h"
 }
-#include "Long.hpp"
+#include "Short.hpp"
 
 using namespace Java::Lang;
 
-TEST(JavaLang, LongConstructor) {
+TEST(JavaLang, ShortConstructor) {
 
-      // Given empty value for Long constructor and assign value - Return Long
-    Long emptyLong;
+      // Given empty value for Short constructor and assign value - Return Long
+    Long emptyShort;
     emptyLong = 3;
-    ASSERT_EQUAL(3, emptyLong.longValue());
+    ASSERT_EQUAL(3, emptyShort.longValue());
 
     // Given value for Integer constructor and assign value - Return string
-    Long validLong = 3;
+    Short validLong = 3;
     ASSERT_EQUAL(3, validLong.longValue());
     
-    Long test = 3;
+    Short test = 3;
     ASSERT_EQUAL(3, test.intValue());
     
     
 }
 
-TEST(JavaLang, LongComparision) {
+TEST(JavaLang, ShortComparision) {
     // Give a valid number and make a comparision
-    Long validNumber = 123000000000;
-    Long targetNumber;
+    Short validNumber = 30000;
+    Short targetNumber;
     
     // Test validNumber is equal targetNumber
-    targetNumber = 123000000000;
+    targetNumber = 30000;
     ASSERT_TRUE(validNumber == targetNumber);
     
     // Test validNumber is not equal targetNumber
-    targetNumber = 113000000000;
+    targetNumber = 13000;
     ASSERT_TRUE(validNumber != targetNumber);
     
     // Test validNumber is less than targetNumber
-    targetNumber = 124000000000;
+    targetNumber = 31000;
     ASSERT_TRUE(validNumber < targetNumber);
     
     // Test validNumber is equal or less then targetNumber
-    targetNumber = 125000000000;
+    targetNumber = 31300;
     ASSERT_TRUE(validNumber <= targetNumber);
     
     // Test validNumber is more than targetNumber
-    targetNumber = 122000000000;
+    targetNumber = 29000;
     ASSERT_TRUE(validNumber > targetNumber);
     
     // Test validNumber is equal or more than targetNumber
-    targetNumber = 121000000000;
+    targetNumber = 23777;
     ASSERT_TRUE(validNumber >= targetNumber);
 }
 
-TEST(JavaLang, LongOperator) {
+TEST(JavaLang, ShortOperator) {
     // Given a valid number
     Long validNumber = 5;
     Long targetNumber = 3;
@@ -104,8 +104,8 @@ TEST(JavaLang, LongOperator) {
     ASSERT_TRUE(modNumber == (validNumber % targetNumber));
 }
 
-TEST(JavaLang, LongParseLong) {
+TEST(JavaLang, ShortParseShort) {
     // Given value for Long constructor and assign value - Return long
-    Long *validLongPointer = Long::parseLong("6");
-    ASSERT_EQUAL(6, validLongPointer->longValue());
+    Long *validShortPointer = Short::parseShort("6");
+    ASSERT_EQUAL(6, validShortPointer->shortValue());
 }

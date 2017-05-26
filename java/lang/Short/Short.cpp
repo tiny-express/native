@@ -23,3 +23,219 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Short.hpp"
+
+using namespace Java::Lang;
+
+/**
+ * Integer initialization
+ *
+ * @param original
+ */
+Short::Short() {
+    this->original = 0;
+}
+
+/**
+ * Short initialization
+ *
+ * @param original
+ */
+Short::Short(short original) {
+   this->original = original;
+}
+
+/**
+ * Short initialization
+ *
+ * @param original
+ */
+Short::Short(const Short &shortNumber) {
+    this->original = shortNumber.original;
+}
+
+Short::~Short() {
+}
+
+/**
+ * Parse short
+ *
+ * @param target
+ * @return short
+ */
+Short *Short::parseShort(String target) {
+    return new Short(string_to_short(target.toString()));
+}
+
+/**
+ * Short to String
+ *
+ * @return String
+ */
+string Short::toString() const {
+    return string_from_short(this->original);
+}
+
+/**
+ * Short to Char
+ *
+ * @return char
+ */
+char Short::charValue() const {
+    return string_to_char(string_from_short(this->original));
+}
+
+/**
+ * Short to String
+ *
+ * @return CString
+ */
+string Short::stringValue() const  {
+    return String::valueOf(this->original).toString();
+}
+
+/**
+ * Short value of Short
+ *
+ * @return short
+ */
+short Short::shortValue() const  {
+    return this->original;
+}
+
+/**
+ * Integer value of short
+ *
+ * @return int
+ */
+int Short::intValue() const  {
+    return this->original;
+}
+
+/**
+ * Long value of short
+ *
+ * @return int
+ */
+long Short::longValue() const  {
+    return this->original;
+}
+
+/**
+ * Short value in float
+ *
+ * @return int
+ */
+float Short::floatValue() const  {
+    return (float) this->original;
+}
+
+/**
+ * Short value in double
+ *
+ * @return int
+ */
+double Short::doubleValue() const  {
+    return (double) this->original;
+}
+
+/**
+ * Make a summation with target Short
+ *
+ * @return Integer
+ */
+Short Short::operator+(const Short &target) {
+    return this->original + target.original;
+}
+
+/**
+ * Make a subtraction with target Shortr
+ *
+ * @return Short
+ */
+Short Short::operator-(const Short& target) {
+    return this->original - target.original;
+}
+
+/**
+ * Make a multiple from this Short with target
+ *
+ * @return Short
+ */
+Short Short::operator*(const Short& target) {
+    return (this->original * target.original);
+}
+
+/**
+ *  Make a division from this Short with target
+ *
+ * @return Short
+ */
+Short Short::operator/(const Short& target) {
+    return (this->original / target.original);
+}
+
+/**
+ * Make a modulo from this Short with target
+ *
+ * @return Short
+ */
+Short Short::operator%(const Short& target) {
+    return (this->original % target.original);
+}
+
+/**
+ * Compare this Long is equal target
+ *
+ * @return bool
+ */
+boolean Short::operator==(const Short& target) const {
+    return this->original == target.original;
+}
+
+/**
+ * Compare this Short is not equal target
+ *
+ * @return bool
+ */
+boolean Short::operator!=(const Short& target) const {
+    return !this->operator==(target);
+}
+
+/**
+ * Compare this Short is less than target
+ *
+ * @return bool
+ */
+boolean Short::operator<(const Short& target) const {
+    return this->original < target.original;
+}
+
+/**
+ * Compare this Short is more than target
+ *
+ * @return bool
+ */
+boolean Short::operator>(const Short& target) const {
+    return this->original > target.original;
+}
+
+/**
+ * Compare this Short is equal or less than target
+ *
+ * @return bool
+ */
+boolean Short::operator<=(const Short& target) const {
+    return this->original <= target.original;
+}
+
+/**
+ *  Compare this Short is equal or more than target
+ *
+ * @return bool
+ */
+boolean Short::operator>=(const Short& target) const {
+    return this->original >= target.original;
+}
+
