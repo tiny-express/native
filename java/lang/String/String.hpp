@@ -33,7 +33,7 @@
 
 namespace Java {
     namespace Lang {
-        class String: public virtual Object {
+        class String: public virtual CharSequence {
         private:
             string original;
             int size = 0;
@@ -50,7 +50,7 @@ namespace Java {
             int	compareTo(String anotherString);
             int	compareToIgnoreCase(String str);
             String concat(String str);
-            boolean contains(CharSequence s);
+            boolean contains(CharSequence& str);
             Array<byte> getBytes() const;
             boolean endsWith(String suffix);
             static String fromCharArray(Array<char> &chars);
@@ -74,9 +74,10 @@ namespace Java {
             boolean startsWith(String prefix, int toffset) const;
             Array<char> toCharArray() const;
             String toLowerCase() const;
-            string toString() const;
             String toUpperCase();
             String trim();
+            string toString() const;
+
             static String valueOf(boolean target);
             static String valueOf(char target);
             static String valueOf(string target);
@@ -85,6 +86,7 @@ namespace Java {
             static String valueOf(long target);
             static String valueOf(float target);
             static String valueOf(double target);
+
         public:
             String operator+(const String& target);
             String operator=(const String &target);
@@ -92,6 +94,7 @@ namespace Java {
             boolean operator<(const String& target) const;
             boolean operator==(const String& target) const;
             boolean operator!=(const String& target);
+
             friend String operator+(const_string target1, String const &target2) {
                 String result;
                 result = target1;

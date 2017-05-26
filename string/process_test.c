@@ -283,7 +283,7 @@ TEST(String, ProcessFromTo) {
     to = 53;
     result = string_from_to(target, from, to);
     expect = "text/html; charset=utf-8";
-    //ASSERT_STR(expect, result);
+    ASSERT_STR(expect, result);
 }
 
 TEST(String, ProcessFrom) {
@@ -420,6 +420,32 @@ TEST(String, ProcessEquals) {
     ASSERT_TRUE(string_equals(target1, target2));
 }
 
+TEST(String, ProcessReverse) {
+    char *target = "hello from other side";
+    char *correct_reverse = "edis rehto morf olleh";
+    char *wrong_reverse = "something here";
 
+    char *reverse_of_target = string_reverse(target);
+
+    // Test true with correct reverse string
+    ASSERT_TRUE(string_equals(correct_reverse, reverse_of_target));
+
+    // Test fail with wrong reverse string
+    ASSERT_FALSE(string_equals(wrong_reverse, reverse_of_target));
+}
+
+TEST(String, ProcessMatches) {
+    char *target = "hello from other side";
+    char *correct_reverse = "edis rehto morf olleh";
+    char *wrong_reverse = "something here";
+
+    char *reverse_of_target = string_reverse(target);
+
+    // Test true with correct reverse string
+    ASSERT_TRUE(string_equals(correct_reverse, reverse_of_target));
+
+    // Test fail with wrong reverse string
+    ASSERT_FALSE(string_equals(wrong_reverse, reverse_of_target));
+}
 
 

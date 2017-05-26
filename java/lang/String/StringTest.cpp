@@ -75,12 +75,18 @@ TEST(JavaLang, StringCharAt) {
     ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
 }
 
-TEST(JavaLang, StringCompareTo) {
-}
+// TEST(JavaLang, StringCompareTo) {
+//     String stringCompare1 = "Sawadikhap";
+//     String stringCompare2 = "Sawadikhap";
+//     int stringEquals = stringCompare1.compareTo(stringCompare2);
+//     ASSERT_EQUAL(0, stringEquals);
+   
 
-TEST(JavaLang, StringCompareToIgnoreCase) {
+// }
 
-}
+// TEST(JavaLang, StringCompareToIgnoreCase) {
+
+// }
 
 TEST(JavaLang, StringConcat) {
     // Given two strings - Return concatenation result
@@ -92,6 +98,19 @@ TEST(JavaLang, StringConcat) {
     // Given three strings - Return concatenation result
     String textConcat0 = "Food Tiny ";
     ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2).toString());
+}
+
+TEST(JavaLang, StringContains) {
+    // Gives a valid string a sub string to find
+    String validString = "a valid string to test";
+    String subString = "valid string";
+    String invalidSubString = "text";
+
+    //Test true with correct substring inside
+    ASSERT_TRUE(validString.contains(subString));
+
+    //Test with with invalid substring inside
+    ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
 // FIXME
@@ -122,7 +141,37 @@ TEST(JavaLang, StringIndexOf) {
 
     result1 = textPlus.lastIndexOf('H', 2);
     ASSERT_EQUAL(0, result1);
+
+    // Given validString check lastIndexOf(string)
+    String validString = "awesome keyword inside this awesome string";
+    String subString = "awesome";
+    String wrongString = "some thing";
+
+    // Test true first character of subString appear last in validString is position 28th
+    ASSERT_EQUAL(28, validString.lastIndexOf(subString));
+
+    // Test true first character of subString appear last in validString is position 16th
+    subString = "inside this";
+    ASSERT_EQUAL(16, validString.lastIndexOf(subString));
+
+    // Test false with wrong subString
+    ASSERT_EQUAL(NOT_FOUND, validString.lastIndexOf(wrongString));
+
+    // Given validString2 check lastIndexOf(string, fromIndex)
+    String validString2 = "sometimes you win, sometimes you learn";
+    String subString2 = "sometimes";
+    String wrongString2 = "abc xyz";
+
+    // Test true by 19th, with correct subString2 and correct fromIndex to find
+    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 18));
+
+    // Test false by -1, with correct subString2 but out of range that subString2's appeared in validString2
+    ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, 20));
+
+    // Test false by -1, with wrongString2 that's not appeared inside validString2
+    ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
 }
+
 
 // FIXME
 TEST(JavaLang, StringIsEmpty) {
@@ -141,6 +190,29 @@ TEST(JavaLang, StringLength) {
 
     textPlus = "";
     ASSERT_EQUAL(0, textPlus.length());
+}
+
+/** This test case is made based on pattern_test.c */
+TEST(JavaLang, StringMatches) {
+    // Init params for test string matches
+    String emailPattern         = EMAIL_PATTERN;
+    String phoneNumberPattern   = PHONE_PATTERN;
+
+    // Test true with correct email format
+    String correctEmail = "neacao@gmail.com";
+    ASSERT_TRUE(correctEmail.matches(emailPattern));
+
+    // Test fail with wrong email format
+    String wrongEmail = "something@notcorrect";
+    ASSERT_FALSE(wrongEmail.matches(emailPattern));
+
+    // Test true with correct phone number format
+    String correctPhoneNumber = "+15005550006";
+    ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+
+    // Test fail with wrong email format
+    String wrongPhoneNumber = "001678080147";
+    ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
 }
 
 //FIXME
@@ -167,6 +239,10 @@ TEST(JavaLang, StringStartsWith) {
 
     String String_string = "Hello";
     ASSERT_TRUE(textPlus.startsWith(String_string));
+
+    String textPlus1 = "Welcom to VietNam";
+    String String_string1 = "to";
+    ASSERT_TRUE(textPlus1.startsWith(String_string1, 7));
 }
 
 //FIXME
