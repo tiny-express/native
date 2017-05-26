@@ -420,6 +420,18 @@ TEST(String, ProcessEquals) {
     ASSERT_TRUE(string_equals(target1, target2));
 }
 
+TEST(String, ProcessReverse) {
+    char *target = "hello from other side";
+    char *correct_reverse = "edis rehto morf olleh";
+    char *wrong_reverse = "something here";
 
+    char *reverse_of_target = string_reverse(target);
+
+    // Test true with correct reverse string
+    ASSERT_TRUE(string_equals(correct_reverse, reverse_of_target));
+
+    // Test fail with wrong reverse string
+    ASSERT_FALSE(string_equals(wrong_reverse, reverse_of_target));
+}
 
 

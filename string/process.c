@@ -471,3 +471,24 @@ int string_equals(char *target1, char *target2) {
 	}
 	return FALSE;
 }
+
+/**
+ * Reverse a string
+ *
+ * @param target
+ * @return string reversed
+ */
+char *string_reverse(char *target) {
+	int target_size	= length_pointer_char(target);
+	char *result	= (char *) malloc(sizeof(char) * target_size);
+	int index;
+	int result_index = 0;
+
+	for (index = target_size - 1; index >= 0 ; --index) {
+		result[result_index] = target[index];
+		result_index++;
+	}
+
+	result[target_size] = '\0';
+	return result;
+}
