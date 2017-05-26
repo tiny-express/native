@@ -322,6 +322,17 @@ int String::length() {
 }
 
 /**
+ * String matches
+ * @params regex pattern
+ * @return TRUE | FALSE
+ */
+boolean String::matches(String regex) const {
+    int result = string_matches(this->original, regex.toString());
+    printf("Result with this: %s\n", this->original);
+    return (result == TRUE ? true : false);
+}
+
+/**
  * String replace
  *
  * @param oldChar
