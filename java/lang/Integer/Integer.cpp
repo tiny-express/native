@@ -64,8 +64,9 @@ Integer::~Integer() {
  * @param target
  * @return Integer
  */
-Integer *Integer::parseInt(String target) {
-    return new Integer(string_to_int(target.toString()));
+Integer Integer::parseInt(String target) {
+    Integer result(string_to_int(target.toString()));
+    return result;
 }
 
 /**
@@ -172,7 +173,7 @@ boolean Integer::operator==(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator!=(const Integer& target) {
+boolean Integer::operator!=(const Integer& target) const {
     return !this->operator==(target);
 }
 
@@ -190,7 +191,7 @@ boolean Integer::operator<(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator>(const Integer& target) {
+boolean Integer::operator>(const Integer& target) const {
     return this->original > target.original;
 }
 
@@ -199,7 +200,7 @@ boolean Integer::operator>(const Integer& target) {
  *
  * @return bool
  */
-boolean Integer::operator<=(const Integer& target) {
+boolean Integer::operator<=(const Integer& target) const {
     return this->original <= target.original;
 }
 
@@ -208,7 +209,7 @@ boolean Integer::operator<=(const Integer& target) {
  *
  * @return bool
  */
-boolean Integer::operator>=(const Integer& target) {
+boolean Integer::operator>=(const Integer& target) const {
     return this->original >= target.original;
 }
 

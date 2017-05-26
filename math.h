@@ -30,7 +30,8 @@
 #include <math.h>
 
 double math_pow(double a, double b);
-
+double math_floor(double a);
+long math_round(double a);
 
 
 #endif

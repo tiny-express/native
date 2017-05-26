@@ -26,6 +26,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <regex.h>
 #include "../type.h"
 #include "../string.h"
 #include "../validator.h"
@@ -364,8 +365,9 @@ char *string_copy(char *target) {
         return "\0";
     }
 	int length = length_pointer_char(target);
-	char *result = malloc((length + 1) * sizeof(char));
-	memcpy(result, target, length);
+	char *result = (char *) malloc((length + 1) * sizeof(char));
+	//memcpy(result, target, length);
+	strncpy(result, target, length);
 	result[length] = '\0';
 	return result;
 }
@@ -469,5 +471,51 @@ int string_equals(char *target1, char *target2) {
 	if (strcmp(target1, target2) == 0) {
 		return TRUE;
 	}
+	return FALSE;
+}
+
+/**
+ * Reverse a string
+ *
+ * @param target
+ * @return string reversed
+ */
+char *string_reverse(char *target) {
+	int target_size	= length_pointer_char(target);
+	char *result	= (char *) malloc(sizeof(char) * target_size);
+	int index;
+	int result_index = 0;
+
+	for (index = target_size - 1; index >= 0 ; --index) {
+		result[result_index] = target[index];
+		result_index++;
+	}
+
+	result[target_size] = '\0';
+	return result;
+}
+
+/**
+ * Match a regex in target
+ *
+ * @param target
+ * @param regex
+ * @return TRUE | FALSE
+ */
+int string_matches(char *target, char *regex) {
+	if (is_empty(target)) {
+		return FALSE;
+	}
+
+	regex_t exp;
+	int convert = regcomp(&exp, regex, REG_EXTENDED);
+	if (convert != 0) {
+		return FALSE;
+	}
+	if (regexec(&exp, target, 0, NULL, 0) == 0) {
+		regfree(&exp);
+		return TRUE;
+	}
+
 	return FALSE;
 }

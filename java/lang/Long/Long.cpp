@@ -34,11 +34,11 @@ using namespace Java::Lang;
  * @param original
  */
 Long::Long() {
-    this->original = 0;  
+    this->original = 0;
 }
 
 /**
- * Integer initialization
+ * Long initialization
  *
  * @param original
  */
@@ -47,38 +47,38 @@ Long::Long(long original) {
 }
 
 /**
- * Integer initialization
+ * Long initialization
  *
  * @param original
- */ 
-Long::Long(const Long &longnumber) {
-    this->original = longnumber.original;
+ */
+Long::Long(const Long &longNumber) {
+    this->original = longNumber.original;
 }
 
 Long::~Long() {
 }
 
 /**
- * Parse integer
+ * Parse long
  *
  * @param target
- * @return Integer
+ * @return long
  */
 Long *Long::parseLong(String target) {
     return new Long(string_to_long(target.toString()));
 }
 
 /**
- * Integer to String
+ * Long to String
  *
  * @return String
  */
-string Long::toString() const  {
+string Long::toString() const {
     return string_from_long(this->original);
 }
 
 /**
- * Integer to Char
+ * Long to Char
  *
  * @return char
  */
@@ -87,7 +87,7 @@ char Long::charValue() const {
 }
 
 /**
- * Integer to String
+ * Long to String
  *
  * @return CString
  */
@@ -96,7 +96,7 @@ string Long::stringValue() const  {
 }
 
 /**
- * Short value of Integer
+ * Short value of Long
  *
  * @return short
  */
@@ -114,7 +114,7 @@ int Long::intValue() const  {
 }
 
 /**
- * Integer value in Long
+ * Long value in Long
  *
  * @return int
  */
@@ -123,7 +123,7 @@ long Long::longValue() const  {
 }
 
 /**
- * Integer value in float
+ * Long value in float
  *
  * @return int
  */
@@ -132,10 +132,110 @@ float Long::floatValue() const  {
 }
 
 /**
- * Integer value in double
+ * Long value in double
  *
  * @return int
  */
 double Long::doubleValue() const  {
     return (double) this->original;
 }
+
+/**
+ * Make a summation with target Long
+ *
+ * @return Integer
+ */
+Long Long::operator+(const Long &target) const {
+    return this->original + target.original;
+}
+
+/**
+ * Make a subtraction with target Integer
+ *
+ * @return Integer
+ */
+Long Long::operator-(const Long& target) const {
+    return this->original - target.original;
+}
+
+/**
+ * Make a multiple from this Long with target
+ *
+ * @return Long
+ */
+Long Long::operator*(const Long& target) const {
+    return (this->original * target.original);
+}
+
+/**
+ *  Make a division from this Long with target
+ *
+ * @return Integer
+ */
+Long Long::operator/(const Long& target) const {
+    return (this->original / target.original);
+}
+
+/**
+ * Make a modulo from this Long with target
+ *
+ * @return Long
+ */
+Long Long::operator%(const Long& target) const {
+    return (this->original % target.original);
+}
+
+/**
+ * Compare this Long is equal target
+ *
+ * @return bool
+ */
+boolean Long::operator==(const Long& target) const {
+    return this->original == target.original;
+}
+
+/**
+ * Compare this Long is not equal target
+ *
+ * @return bool
+ */
+boolean Long::operator!=(const Long& target) const {
+    return !this->operator==(target);
+}
+
+/**
+ * Compare this Long is less than target
+ *
+ * @return bool
+ */
+boolean Long::operator<(const Long& target) const {
+    return this->original < target.original;
+}
+
+/**
+ * Compare this Long is more than target
+ *
+ * @return bool
+ */
+boolean Long::operator>(const Long& target) const {
+    return this->original > target.original;
+}
+
+/**
+ * Compare this Long is equal or less than target
+ *
+ * @return bool
+ */
+boolean Long::operator<=(const Long& target) const {
+    return this->original <= target.original;
+}
+
+/**
+ *  Compare this Long is equal or more than target
+ *
+ * @return bool
+ */
+boolean Long::operator>=(const Long& target) const {
+    return this->original >= target.original;
+}
+
