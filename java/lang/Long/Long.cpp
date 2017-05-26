@@ -83,7 +83,7 @@ string Long::toString() const {
  * @return char
  */
 char Long::charValue() const {
-    return string_to_char(string_from_int(this->original));
+    return string_to_char(string_from_long(this->original));
 }
 
 /**
