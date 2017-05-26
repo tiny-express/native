@@ -328,7 +328,6 @@ int String::length() {
  */
 boolean String::matches(String regex) const {
     int result = string_matches(this->original, regex.toString());
-    printf("Result with this: %s\n", this->original);
     return (result == TRUE ? true : false);
 }
 
