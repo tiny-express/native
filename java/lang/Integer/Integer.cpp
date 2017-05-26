@@ -64,8 +64,9 @@ Integer::~Integer() {
  * @param target
  * @return Integer
  */
-Integer *Integer::parseInt(String target) {
-    return new Integer(string_to_int(target.toString()));
+Integer Integer::parseInt(String target) {
+    Integer result(string_to_int(target.toString()));
+    return result;
 }
 
 /**
