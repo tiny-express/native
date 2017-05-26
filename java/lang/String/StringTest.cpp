@@ -141,7 +141,37 @@ TEST(JavaLang, StringIndexOf) {
 
     result1 = textPlus.lastIndexOf('H', 2);
     ASSERT_EQUAL(0, result1);
+
+    // Given validString check lastIndexOf(string)
+    String validString = "awesome keyword inside this awesome string";
+    String subString = "awesome";
+    String wrongString = "some thing";
+
+    // Test true first character of subString appear last in validString is position 28th
+    ASSERT_EQUAL(28, validString.lastIndexOf(subString));
+
+    // Test true first character of subString appear last in validString is position 16th
+    subString = "inside this";
+    ASSERT_EQUAL(16, validString.lastIndexOf(subString));
+
+    // Test false with wrong subString
+    ASSERT_EQUAL(NOT_FOUND, validString.lastIndexOf(wrongString));
+
+    // Given validString2 check lastIndexOf(string, fromIndex)
+    String validString2 = "sometimes you win, sometimes you learn";
+    String subString2 = "sometimes";
+    String wrongString2 = "abc xyz";
+
+    // Test true by 19th, with correct subString2 and correct fromIndex to find
+    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 18));
+
+    // Test false by -1, with correct subString2 but out of range that subString2's appeared in validString2
+    ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, 20));
+
+    // Test false by -1, with wrongString2 that's not appeared inside validString2
+    ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
 }
+
 
 // FIXME
 TEST(JavaLang, StringIsEmpty) {
