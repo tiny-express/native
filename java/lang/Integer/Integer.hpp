@@ -50,7 +50,7 @@ namespace Java {
             double doubleValue() const;
             string toString() const;
 
-            static Integer *parseInt(String target);
+            static Integer parseInt(String target);
 
         public:
             Integer operator+(const Integer& target);
