@@ -34,7 +34,7 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, ShortConstructor) {
-    
+
       // Given empty value for Short constructor and assign value - Return Long
 //    Short emptyShort;
 //    emptyLong = 3;

@@ -260,6 +260,58 @@ int String::lastIndexOf(int ch, int fromIndex) {
 }
 
 /**
+ * Last index of String inside this
+ *
+ * @param str
+ * @return int
+ */
+int String::lastIndexOf(String str) const {
+    string strReversed          = string_reverse(str.toString());
+    string currentStrReversed   = string_reverse(this->toString());
+
+    int result = string_index(currentStrReversed, strReversed, 1);
+
+    free(strReversed);
+    free(currentStrReversed);
+
+    if (result == NOT_FOUND) {
+        return result;
+    }
+
+    //Re-calculate first character of str
+    result =  this->size - (result + str.size);
+    return result;
+}
+
+/**
+ * Last index of String start fromIndex inside this
+ *
+ * @param str
+ * @param fromIndex
+ * @return int
+ */
+int String::lastIndexOf(String str, int fromIndex) const {
+    string subString = &(this->original)[fromIndex]; // get subString start fromIndex
+
+    string strReversed          = string_reverse(str.toString());
+    string currentStrReversed   = string_reverse(subString);
+
+    int result = string_index(currentStrReversed, strReversed, 1);
+
+    free(strReversed);
+    free(currentStrReversed);
+
+    if (result == NOT_FOUND) {
+        return result;
+    }
+
+    //Re-calculate first character of str
+    result =  this->size - (result + str.size);
+    return result;
+
+}
+
+/**
  * String length
  *
  * @return int
