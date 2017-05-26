@@ -23,27 +23,39 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#include "HttpURLConnection.hpp"
-
-using namespace Java::Net;
-
-HttpURLConnection::HttpURLConnection(URL url) {
-    this->url = url;
-}
-
-String HttpURLConnection::getMethod() {
-    return this->method;
-}
-
-void HttpURLConnection::setMethod(String method) {
-    this->method = method;
-}
-
-int HttpURLConnection::getResponseCode() {
-    return this->responseCode;
-}
-
-String HttpURLConnection::getResponseMessage() {
-    return this->responseMessage;
-}
+//
+//extern "C" {
+//#include "../../../unit_test.h"
+//}
+//#include "URLConnection.hpp"
+//
+//using namespace Java::Net;
+//using namespace Java::Lang;
+//namespace Java {
+//    namespace Net {
+//        class URLConnectionTest: virtual public URLConnection {
+//        public:
+//            URLConnectionTest(URL url);
+//            ~URLConnectionTest();
+//            void connect();
+//        };
+//    }
+//}
+//
+//URLConnectionTest::URLConnectionTest(URL url) {
+//    this->url = url;
+//}
+//
+//URLConnectionTest::~URLConnectionTest() {
+//}
+//
+//void URLConnectionTest::connect() {
+//    printf("Test here");
+//}
+//
+//TEST(JavaNet, URLConstructor) {
+//    String urlString = "http://test.com:3000/file/test?param=1";
+//    URL url(urlString);
+//    URLConnectionTest urlConnection = URLConnectionTest(url);
+//    ASSERT_EQUAL(url, urlConnection.getURL());
+//}

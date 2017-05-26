@@ -28,11 +28,13 @@
 #define NATIVE_JAVA_NET_URL_HPP
 
 #include "../../lang/String/String.hpp"
+#include "../URLConnection/URLConnection.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
+//        class URLConnection;
         class URL: public virtual Object {
         private:
             String protocol;
@@ -41,14 +43,16 @@ namespace Java {
             String path;
             String query;
         public:
+            URL();
             URL(String spec);
             ~URL();
         public:
             String getHost();
-            String	getPath();
+            String getPath();
             int	getPort();
-            String	getProtocol();
-            String	getQuery();
+            String getProtocol();
+            String getQuery();
+//            URLConnection openConnection();
             string toString() const ;
         };
     }

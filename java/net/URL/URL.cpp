@@ -28,6 +28,14 @@
 
 using namespace Java::Net;
 
+URL::URL() {
+    this->protocol = "";
+    this->host = "";
+    this->port = -1;
+    this->query = "";
+    this->path = "";
+}
+
 URL::URL(String spec) {
     string url = spec.toString();
     this->protocol = http_protocol(url);
@@ -59,6 +67,10 @@ String URL::getProtocol() {
 String URL::getQuery() {
     return this->query;
 }
+
+//URLConnection URL::openConnection() {
+//
+//}
 
 string URL::toString() const {
     String protocol = this->protocol;
