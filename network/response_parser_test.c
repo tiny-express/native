@@ -3,6 +3,11 @@
 
 TEST(Network, Parser) {
 
+    http_response* result3 = malloc(sizeof(http_response));
+    free(result3);
+    result3 = NULL;
+    ASSERT_NULL(result3);
+
     char* response = "HTTP/1.0 200 OK\n"
             "Content-Type: text/html; charset=utf-8\n"
             "Content-Length: 122\n"
@@ -17,7 +22,7 @@ TEST(Network, Parser) {
     ASSERT_STR("200", result->status_code);
     ASSERT_STR("OK", result->status);
     ASSERT_STR("Content-Type", result->headers[0]->name);
-//    ASSERT_STR("text/html; charset=utf-8", result->headers[0]->value);
+    ASSERT_STR("text/html; charset=utf-8", result->headers[0]->value);
     ASSERT_STR("Content-Length", result->headers[1]->name);
     ASSERT_STR("122", result->headers[1]->value);
     ASSERT_STR("Server", result->headers[2]->name);
@@ -38,7 +43,6 @@ TEST(Network, Parser) {
     ASSERT_NULL(test->body);
     ASSERT_NULL(test->version);
     ASSERT_NULL(test->status);
-//    ASSERT_NULL(result);
 
     char* response2 = "HTTP/1.0 401 UNAUTHORIZED\n"
     "Content-Type: text/html; charset=utf-8\n"
@@ -52,7 +56,7 @@ TEST(Network, Parser) {
     ASSERT_STR("401", result2->status_code);
     ASSERT_STR("UNAUTHORIZED", result2->status);
     ASSERT_STR("Content-Type", result2->headers[0]->name);
-//    ASSERT_STR("text/html; charset=utf-8", result2->headers[0]->value);
+    ASSERT_STR("text/html; charset=utf-8", result2->headers[0]->value);
     ASSERT_STR("Content-Length", result2->headers[1]->name);
     ASSERT_STR("67", result2->headers[1]->value);
     ASSERT_STR("Server", result2->headers[2]->name);
