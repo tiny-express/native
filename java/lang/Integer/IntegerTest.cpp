@@ -100,6 +100,6 @@ TEST(JavaLang, IntegerOperator) {
 
 TEST(JavaLang, IntegerParseInt) {
     // Given value for Integer constructor and assign value - Return integer
-    Integer *validIntegerPointer = Integer::parseInt("6");
-    ASSERT_EQUAL(6, validIntegerPointer->intValue());
+    Integer validIntegerPointer = Integer::parseInt("6");
+    ASSERT_EQUAL(6, validIntegerPointer.intValue());
 }
