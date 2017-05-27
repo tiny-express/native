@@ -67,6 +67,11 @@ private:
 
 template <typename E>
 class Array  {
+private:
+	E *array;
+	int virtualSize = 4;
+	int realSize;
+	inline void reallocate();
 public:
 	Array();
 	Array(std::initializer_list<E> list);
