@@ -143,7 +143,7 @@ Array<byte> String::getBytes() const {
  * @param suffix
  * @return
  */
-boolean String::endsWith(String suffix) {
+boolean String::endsWith(const String &suffix) {
 	return string_endswith(this->original, suffix.original);
 }
 

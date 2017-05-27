@@ -62,8 +62,6 @@ namespace Java {
 			static String copyValueOf(const Array<char> &data, int offset, int count);
 			boolean	endsWith(const String &suffix);
 			boolean	equals(const Object &anObject);
-			//static String	format(Locale l, String format, Object... args)
-			static String format(const String &format, Object... args);
 			Array<byte> getBytes() const;
 			//Array<byte> getBytes(const Charset &) const;
 			static String fromCharArray(Array<char> &chars);
