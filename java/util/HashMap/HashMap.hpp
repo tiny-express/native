@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_UTIL_HASH_MAP_HPP
 #define NATIVE_JAVA_UTIL_HASH_MAP_HPP
 
-#include "../../Lang.hpp"
+#include "../../lang/Object/Object.hpp"
 
 namespace Java {
 	namespace Util {

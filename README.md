@@ -42,9 +42,14 @@ $ sudo make install
 ```
 
 #### Test Driven Development
+Install & run mock server for third-party services
 ```bash
-$ sudo pip install pip --upgrade
+$ sudo apt-get install python-pip
 $ sudo pip install -r misc/requirements.txt
+$ python misc/server.py &
+```
+Open another terminal & debug with unit test
+```bash
 $ cmake . && make unit-test
 ```
 
@@ -52,7 +57,11 @@ $ cmake . && make unit-test
 ```cpp
 #include <native/library.hpp>
 int main() {
-    String text = "Hello world";
+    String text = "Sample program: ";
+    Array<byte> bytes = { 64, 65, 66, 67 };
+    for (byte number : bytes) {
+        text += (char) number;
+    }
     System::out::println(text);
     return 0;
 }

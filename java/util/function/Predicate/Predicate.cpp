@@ -24,14 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
-#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
-
-namespace Java {
-	namespace IO {
-		class Serializable {
-		};
-	}
-}
-
-#endif//NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#include "Predicate.hpp"

@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef NATIVE_UTIL_COLLECTION_HPP
-#define NATIVE_UTIL_COLLECTION_HPP
+#ifndef NATIVE_UTIL_COMPARATOR_HPP
+#define NATIVE_UTIL_COMPARATOR_HPP
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -34,26 +34,10 @@ using namespace Java::Lang;
 
 namespace Java {
 	namespace Util {
-		template <typename E>
-		class Collection;
+		class Comparator {
 		
-		template <typename E>
-		class Collection : public virtual Iterable<E> {
-		public:
-			virtual boolean add(E &e) = 0;
-			virtual boolean addAll(Collection<E> &c) = 0;
-			virtual void clear() = 0;
-			virtual boolean contains(E &e) const = 0;
-			virtual boolean containsAll(Collection<E> &c) const = 0;
-			virtual boolean equals(E &e) const = 0;
-			virtual E get(const int index) = 0;
-			virtual int hashCode() const = 0;
-			virtual boolean isEmpty() const = 0;
-			virtual boolean remove(E &e) = 0;
-			virtual boolean removeAll(Collection<E> &c) = 0;
-			virtual int size() const = 0;
 		};
 	}
 }
 
-#endif //NATIVE_COLLECTION_HPP
+#endif//NATIVE_UTIL_COMPARATOR_HPP

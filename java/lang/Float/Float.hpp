@@ -31,6 +31,9 @@
 
 namespace Java {
 	namespace Lang {
+		
+		class Float;
+		
 		class Float : public virtual Number {
 		private:
 			float original;
@@ -72,4 +75,5 @@ namespace Java {
 		};
 	}
 }
+
 #endif//NATIVE_JAVA_LANG_FLOAT_HPP

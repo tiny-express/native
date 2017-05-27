@@ -31,6 +31,9 @@
 
 namespace Java {
 	namespace Lang {
+		
+		class Long;
+		
 		class Long : public virtual Number {
 		private:
 			long original;

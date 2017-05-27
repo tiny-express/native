@@ -24,14 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
-#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#ifndef NATIVE_JAVA_UTIL_SPLITERATOR_HPP
+#define NATIVE_JAVA_UTIL_SPLITERATOR_HPP
 
 namespace Java {
-	namespace IO {
-		class Serializable {
-		};
+	namespace Util {
+		template <typename E>
+		class Spliterator;
 	}
 }
 
-#endif//NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#endif//NATIVE_JAVA_UTIL_SPLITERATOR_HPP

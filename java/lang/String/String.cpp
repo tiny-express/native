@@ -25,7 +25,6 @@
  */
 
 #include "String.hpp"
-#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
@@ -44,18 +43,14 @@ String::String(string target) {
 	this->length();
 }
 
-String::String(Array<char> &chars) {
-	this->original = String::fromCharArray(chars).toString();
-	this->size = chars.length();
-}
-
 String::String(Array<byte> &bytes) {
-	Array<char> chars;
+	ArrayList<char> listCharacters;
 	for (byte byte : bytes) {
-		chars.push((char) byte);
+		listCharacters.add((char&) byte);
 	}
+	Array<char> chars = listCharacters.toArray(chars);
 	this->original = String::fromCharArray(chars).toString();
-	this->size = chars.length();
+	this->size = chars.length;
 }
 
 String::String(const String &target) {
@@ -130,12 +125,13 @@ boolean String::contains(CharSequence &str) {
  * @return Array<byte>
  */
 Array<byte> String::getBytes() const {
-	Array<byte> bytes;
+	ArrayList<byte> byteArrayList;
 	String originalString = this->original;
 	for (char character : originalString.toCharArray()) {
-		bytes.push((byte) character);
+		byteArrayList.add(0, (byte&) character);
 	}
-	return bytes;
+	Array<byte> bytes;
+	return byteArrayList.toArray(bytes);
 }
 
 /**
@@ -154,7 +150,7 @@ boolean String::endsWith(String suffix) {
  * @return String
  */
 String String::fromCharArray(Array<char> &chars) {
-	string str = (string) malloc(( chars.length() + 1 ) * sizeof(char));
+	string str = (string) malloc(( chars.length + 1 ) * sizeof(char));
 	register int index = 0;
 	for (char character : chars) {
 		str[ index++ ] = character;
@@ -361,12 +357,13 @@ String String::replaceAll(String regex, String replacement) const {
  */
 Array<String> String::split(String regex) const {
 	char **splitStrings = string_split(this->original, regex.toString());
-	Array<String> strings;
+	ArrayList<String> stringArrayList;
 	register int index;
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
-		strings.push(splitStrings[ index ]);
+		stringArrayList.add((String&) splitStrings[ index ]);
 	}
+	Array<String> strings = stringArrayList.toArray(strings);
 	return strings;
 }
 
@@ -412,11 +409,12 @@ boolean String::startsWith(String prefix, int toffset) const {
  * @return Array<char>
  */
 Array<char> String::toCharArray() const {
-	Array<char> chars;
+	ArrayList<char> charArrayList;
 	register int index = 0;
 	while (this->original[ index ] != '\0') {
-		chars.push(this->original[ index++ ]);
+		charArrayList.add(this->original[ index++ ]);
 	}
+	Array<char> chars = charArrayList.toArray(chars);
 	return chars;
 }
 
@@ -551,7 +549,7 @@ void String::operator+=(const String &target2) {
 	*this = string_concat(this->original, target2.original);
 }
 
-bool String::operator==(const String &target2) const {
+boolean String::operator==(const String &target2) const {
 	if (string_equals(this->original, target2.toString())) {
 		return true;
 	}
@@ -564,11 +562,11 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-bool String::operator!=(const String &target2) {
+boolean String::operator!=(const String &target2) {
 	return !this->operator==(target2);
 }
 
-bool String::operator<(const String &target2) const {
+boolean String::operator<(const String &target2) const {
 	if (strcmp(this->original, target2.toString()) < 0) {
 		return true;
 	}

@@ -27,7 +27,7 @@
 #ifndef NATIVE_UTIL_ABSTRACT_MAP_HPP
 #define NATIVE_UTIL_ABSTRACT_MAP_HPP
 
-#include "../../Lang.hpp"
+#include "../../lang/Object/Object.hpp"
 
 using namespace Java::Lang;
 
