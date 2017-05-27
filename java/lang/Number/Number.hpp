@@ -36,13 +36,13 @@ namespace Java {
 	namespace Lang {
 		class Number : public virtual Object {
 		protected:
-			virtual char charValue() const;
-			virtual string stringValue() const;
-			virtual short shortValue() const;
-			virtual int intValue() const;
-			virtual long longValue() const;
-			virtual float floatValue() const;
-			virtual double doubleValue() const;
+			virtual char charValue() const = 0;
+			virtual string stringValue() const = 0;
+			virtual short shortValue() const = 0;
+			virtual int intValue() const = 0;
+			virtual long longValue() const = 0;
+			virtual float floatValue() const = 0;
+			virtual double doubleValue() const = 0;
 		};
 	}
 }
