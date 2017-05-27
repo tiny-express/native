@@ -24,80 +24,58 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../library.hpp"
+extern "C" {
+#include "../../string.h"
+}
+
+#include "../../library.hpp"
 
 /**
- * Print const pointer char to screen
+ * Double value of char pointer
+ *
  * @param target
+ * @return double
  */
-void print(const char *target) {
-	std::cout << target << std::endl;
+double Double(char *target) {
+	return string_to_double(target);
 }
 
 /**
- * Print poiter char to screen
+ * Double value of std::string
+ *
  * @param target
+ * @return double
  */
-void print(char *target) {
-	print((const char *) target);
+double Double(std::string target) {
+	return string_to_double((char *) target.c_str());
 }
 
 /**
- * Print `std::string' to screen
+ * Double value of integer
+ *
  * @param target
+ * @return double
  */
-void print(std::string target) {
-	std::cout << target << std::endl;
+double Double(int target) {
+	return target;
 }
 
 /**
- * Print `short' number to screen
+ * Double value of long
+ *
  * @param target
+ * @return 0
  */
-void print(short target) {
-	std::cout << target << std::endl;
+double Double(long target) {
+	return 0;
 }
 
 /**
- * Print `int' number to screen
+ * Double value of float
+ *
  * @param target
+ * @return double
  */
-void print(int target) {
-	std::cout << target << std::endl;
+double Double(float target) {
+	return (int) floor(target);
 }
-
-/**
- * Print `long' number to screen
- * @param target
- */
-void print(long target) {
-	std::cout << target << std::endl;
-}
-
-/**
- * Print `double' number to screen
- * @param target
- */
-void print(double target) {
-	std::cout << target << std::endl;
-}
-
-/**
- * Convert `std::vector<int>' to `char *' and print this to screen
- * @param target
- */
-void print(std::vector<int> target) {
-	const char *convertString = String(target);
-	print(convertString);
-}
-
-/**
- * Convert `std::vector<double>' to `char *' and print this to screen
- * @param target
- */
-void print(std::vector<double> target) {
-	const char *convertString = String(target);
-	print(convertString);
-}
-
-

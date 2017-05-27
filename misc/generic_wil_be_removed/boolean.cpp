@@ -24,8 +24,76 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../unit_test.h"
+#include "../../library.hpp"
+
+/**
+ * Boolean value of char pointer
+ *
+ * @param target
+ * @return bool
+ */
+bool Boolean(char *target) {
+	return string_to_boolean(string_lower(target));
 }
 
-#include "../library.hpp"
+/**
+ * Boolean value of std::string
+ *
+ * @param target
+ * @return bool
+ */
+template <> bool Boolean(std::string target) {
+	return string_to_double((char *) target.c_str()); //here
+}
+template bool Boolean<std::string>(std::string target);
+
+/**
+ * Boolean value of char pointer
+ *
+ * @param target
+ * @return bool
+ */
+
+template <> bool Boolean(char *target) {
+	return string_to_double(target);
+}
+
+template bool Boolean<char *>(char *target);
+bool Boolean(std::string target) {
+	return string_to_boolean(string_lower((char *) target.c_str()));
+}
+
+/**
+ * Boolean value of integer
+ *
+ * @param targetl
+ * @return bool
+ */
+bool Boolean(int target) {
+	return (bool) target;
+}
+
+/**
+ * Boolean value of long
+ *
+ * @param target
+ * @return 0
+ */
+bool Boolean(long target) {
+	return (bool) target;
+}
+
+template bool Boolean<double>(double target);
+
+/**
+ * Boolean value of boolean
+ *
+ * @param target
+ * @return bool
+ */
+template <> bool Boolean(bool target) {
+	return (bool) floor(target);
+}
+
+template bool Boolean<bool>(bool target);
+

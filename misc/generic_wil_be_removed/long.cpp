@@ -24,58 +24,55 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../string.h"
-}
+#include "../../library.hpp"
 
-#include "../library.hpp"
 
 /**
- * Float value of char pointer
+ * Long value of char pointer
  *
  * @param target
- * @return float
+ * @return long
  */
-float Float(char *target) {
-	return string_to_float(target);
+long Long(char *target) {
+	return string_to_long(target);
 }
 
 /**
- * Float value of std::string
+ * Long value of std::string
  *
  * @param target
- * @return float
+ * @return long
  */
-float Float(std::string target) {
-	return string_to_float((char *) target.c_str());
+long Long(std::string target) {
+	return string_to_long((char *) target.c_str());
 }
 
 /**
- * Float value of integer
+ * Long value of integer
  *
  * @param target
- * @return double
+ * @return long
  */
-float Float(int target) {
+long Long(int target) {
 	return target;
 }
 
 /**
- * Float value of long
+ * Integer value of float
  *
  * @param target
- * @return 0
+ * @return int
  */
-float Float(long target) {
-	return 0;
+long Long(float target) {
+	return (long) floor(target);
 }
 
 /**
- * Float value of double
+ * Integer value of double
  *
  * @param target
- * @return float
+ * @return long
  */
-float Float(double target) {
-	return (float) floor(target);
+long Long(double target) {
+	return (long) floor(target);
 }

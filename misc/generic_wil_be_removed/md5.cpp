@@ -25,8 +25,8 @@
  */
 
 extern "C" {
-#include "../crypto.h"
-#include "../string.h"
+#include "../../crypto.h"
+#include "../../string.h"
 }
 
 #include <iostream>

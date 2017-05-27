@@ -25,32 +25,39 @@
  */
 
 extern "C" {
-#include "../unit_test.h"
+#include "../../unit_test.h"
 }
 
-#include "../library.hpp"
+#include "../../library.hpp"
 
-TEST (Generic, Long) {
+TEST (Generic, Sha1) {
+	char *result1 = sha1(NULL);
+	const char *expect1 = "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+	ASSERT_STR(expect1, result1);
 	
-	long string_to_long = Long(std::string("123456"));
-	ASSERT_EQUAL(123456, string_to_long);
+	short shortNumber = 1234;
+	char *result2 = sha1(shortNumber);
+	const char *expect2 = "7110eda4d09e062aa5e4a390b0a572ac0d2c0220";
+	ASSERT_STR(expect2, result2);
 	
-	long string_to_long_not_valid = Long((char *) "Hello world");
-	ASSERT_EQUAL(0, string_to_long_not_valid);
+	long longNumber = 0;
+	char *result3 = sha1(longNumber);
+	const char *expect3 = "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+	ASSERT_STR(expect3, result3);
 	
-	long string_to_long_valid_1 = Long((char *) "-12345");
-	ASSERT_EQUAL(-12345, string_to_long_valid_1);
+	double doubleNumber = 132412.341234;
+	char *result4 = sha1(doubleNumber);
+	const char *expect4 = "40c745a7a3890bf3dde11e88464e20638d229ef4";
+	ASSERT_STR(expect4, result4);
 	
-	long string_to_long_valid_2 = Long((char *) "-123.45");
-	ASSERT_EQUAL(-123, string_to_long_valid_2);
+	std::string str = "happy";
+	char *result5 = sha1(str);
+	const char *expect5 = "3978d009748ef54ad6ef7bf851bd55491b1fe6bb";
+	ASSERT_STR(expect5, result5);
 	
-	long long_to_long = Long(2147483647);
-	ASSERT_EQUAL(2147483647, long_to_long);
-	
-	long integer_to_long = Long(2345);
-	ASSERT_EQUAL(2345, integer_to_long);
-	
-	long float_to_long = Long(1.234);
-	ASSERT_EQUAL(1, float_to_long);
-	
+	char *pointerChar = (char *) "";
+	char *result6 = sha1(pointerChar);
+	const char *expect6 = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
+	ASSERT_STR(expect6, result6);
 }
+

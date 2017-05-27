@@ -24,5 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../library.hpp"
-#include "../unit_test.h"
+extern "C" {
+#include "../../unit_test.h"
+}
+
+#include "../../library.hpp"
