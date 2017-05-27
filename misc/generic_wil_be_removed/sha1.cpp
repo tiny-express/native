@@ -25,31 +25,80 @@
  */
 
 extern "C" {
-#include "../unit_test.h"
+#include "../../crypto.h"
+#include "../../string.h"
 }
 
-#include "../library.hpp"
+#include <iostream>
 
-TEST (Generic, Double) {
-	
-	double string_to_double = Double(std::string("123456"));
-	ASSERT_EQUAL(123456, string_to_double);
-	
-	double string_to_double_not_valid = Double((char *) "Hello world");
-	ASSERT_EQUAL(0, string_to_double_not_valid);
-	
-	double string_to_double_valid_1 = Double((char *) "-12345");
-	ASSERT_EQUAL(-12345, string_to_double_valid_1);
-	
-	double string_to_double_valid_2 = Double((char *) "-123.45");
-	ASSERT_EQUAL(-123, string_to_double_valid_2);
-	
-	double long_to_double = Double(2147483647);
-	ASSERT_EQUAL(2147483647, long_to_double);
-	
-	double integer_to_double = Double(2345);
-	ASSERT_EQUAL(2345, integer_to_double);
-	
-	float float_to_double = Double((float) 1235.234);
-	ASSERT_EQUAL(1235.234, float_to_double);
+/**
+ * SHA1 Encode from char pointer
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(char *target) {
+	char *result = sha1_encode((unsigned char *) target);
+	return result;
 }
+
+/**
+ * SHA1 Encode from std::string
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(std::string target) {
+	char *result = sha1_encode((unsigned char *) target.c_str());
+	return result;
+}
+
+/**
+ * SHA1 Encode from short
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(short target) {
+	char *result = sha1_encode((unsigned char *) string_from_short(target));
+	return result;
+}
+
+/**
+ * SHA1 Encode from int
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(int target) {
+	char *result = sha1_encode((unsigned char *) string_from_int(target));
+	return result;
+}
+
+/**
+ * SHA1 Encode from long
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(long target) {
+	char *result = sha1_encode((unsigned char *) string_from_long(target));
+	return result;
+}
+
+/**
+ * SHA1 Encode from double
+ *
+ * @param target
+ * @return SHA1 encoded string
+ */
+char *sha1(double target) {
+	char *result = sha1_encode((unsigned char *) string_from_double(target));
+	return result;
+}
+
+
+
+
+
+

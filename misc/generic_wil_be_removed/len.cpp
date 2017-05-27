@@ -25,8 +25,8 @@
  */
 
 extern "C" {
-#include "../common.h"
-#include "../string.h"
+#include "../../common.h"
+#include "../../string.h"
 }
 
 #include <algorithm>

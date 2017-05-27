@@ -25,57 +25,57 @@
  */
 
 extern "C" {
-#include "../string.h"
+#include "../../string.h"
 }
 
-#include "../library.hpp"
+#include "../../library.hpp"
 
 /**
- * Double value of char pointer
+ * Float value of char pointer
+ *
+ * @param target
+ * @return float
+ */
+float Float(char *target) {
+	return string_to_float(target);
+}
+
+/**
+ * Float value of std::string
+ *
+ * @param target
+ * @return float
+ */
+float Float(std::string target) {
+	return string_to_float((char *) target.c_str());
+}
+
+/**
+ * Float value of integer
  *
  * @param target
  * @return double
  */
-double Double(char *target) {
-	return string_to_double(target);
-}
-
-/**
- * Double value of std::string
- *
- * @param target
- * @return double
- */
-double Double(std::string target) {
-	return string_to_double((char *) target.c_str());
-}
-
-/**
- * Double value of integer
- *
- * @param target
- * @return double
- */
-double Double(int target) {
+float Float(int target) {
 	return target;
 }
 
 /**
- * Double value of long
+ * Float value of long
  *
  * @param target
  * @return 0
  */
-double Double(long target) {
+float Float(long target) {
 	return 0;
 }
 
 /**
- * Double value of float
+ * Float value of double
  *
  * @param target
- * @return double
+ * @return float
  */
-double Double(float target) {
-	return (int) floor(target);
+float Float(double target) {
+	return (float) floor(target);
 }

@@ -24,76 +24,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../library.hpp"
+#include "../../library.hpp"
 
 /**
- * Boolean value of char pointer
+ * Split pointer char
  *
  * @param target
- * @return bool
+ * @return char pointer array
  */
-bool Boolean(char *target) {
-	return string_to_boolean(string_lower(target));
+std::vector<char *> split(char *target, char *delimiter) {
+	std::vector<char *> string_vector;
+	if (empty(target)) {
+		return string_vector;
+	}
+	if (empty(delimiter)) {
+		string_vector.push_back(target);
+		return string_vector;
+	}
+	char **string_array = string_split(target, delimiter);
+	int array_length = length_pointer_pointer_char(string_array);
+	for (int index = 0; index < array_length; index++) {
+		string_vector.push_back(string_array[ index ]);
+	}
+	return string_vector;
 }
 
 /**
- * Boolean value of std::string
+ * Split std::string
  *
  * @param target
- * @return bool
+ * @return std::string array
  */
-template <> bool Boolean(std::string target) {
-	return string_to_double((char *) target.c_str()); //here
+std::vector<char *> split(std::string target, char *delimiter) {
+	return split(String(target), delimiter);
 }
-template bool Boolean<std::string>(std::string target);
-
-/**
- * Boolean value of char pointer
- *
- * @param target
- * @return bool
- */
-
-template <> bool Boolean(char *target) {
-	return string_to_double(target);
-}
-
-template bool Boolean<char *>(char *target);
-bool Boolean(std::string target) {
-	return string_to_boolean(string_lower((char *) target.c_str()));
-}
-
-/**
- * Boolean value of integer
- *
- * @param targetl
- * @return bool
- */
-bool Boolean(int target) {
-	return (bool) target;
-}
-
-/**
- * Boolean value of long
- *
- * @param target
- * @return 0
- */
-bool Boolean(long target) {
-	return (bool) target;
-}
-
-template bool Boolean<double>(double target);
-
-/**
- * Boolean value of boolean
- *
- * @param target
- * @return bool
- */
-template <> bool Boolean(bool target) {
-	return (bool) floor(target);
-}
-
-template bool Boolean<bool>(bool target);
-

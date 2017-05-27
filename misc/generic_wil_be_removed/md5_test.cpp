@@ -25,10 +25,10 @@
  */
 
 extern "C" {
-#include "../unit_test.h"
+#include "../../unit_test.h"
 }
 
-#include "../library.hpp"
+#include "../../library.hpp"
 
 TEST (Generic, Md5) {
 	char *result1 = md5(NULL);
