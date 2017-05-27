@@ -27,28 +27,29 @@
 extern "C" {
 #include "../unit_test.h"
 }
+
 #include "../library.hpp"
 
-TEST(Generic, Float) {
-    
-    double string_to_float = Float(std::string("123456"));
-    ASSERT_EQUAL(123456.0, string_to_float);
-
-    double string_to_float_not_valid = Float((char*) "Hello world");
-    ASSERT_EQUAL(0, string_to_float_not_valid);
-
-    double string_to_float_valid_1 = Float((char*) "-12345");
-    ASSERT_EQUAL(-12345.0, string_to_float_valid_1);
-
-    double string_to_float_valid_2 = Float((char*) "-123.45");
-    ASSERT_EQUAL(-123.0, string_to_float_valid_2);
-    
-    double double_to_float = Float(0.0023);
-    ASSERT_EQUAL(0.0023, double_to_float);
-    
-    double long_to_float = Double(2147483647);
-    ASSERT_EQUAL(2147483647.0, long_to_float);
-
-    double integer_to_float = Float(2345);
-    ASSERT_EQUAL(2345.0, integer_to_float);
+TEST (Generic, Float) {
+	
+	double string_to_float = Float(std::string("123456"));
+	ASSERT_EQUAL(123456.0, string_to_float);
+	
+	double string_to_float_not_valid = Float((char *) "Hello world");
+	ASSERT_EQUAL(0, string_to_float_not_valid);
+	
+	double string_to_float_valid_1 = Float((char *) "-12345");
+	ASSERT_EQUAL(-12345.0, string_to_float_valid_1);
+	
+	double string_to_float_valid_2 = Float((char *) "-123.45");
+	ASSERT_EQUAL(-123.0, string_to_float_valid_2);
+	
+	double double_to_float = Float(0.0023);
+	ASSERT_EQUAL(0.0023, double_to_float);
+	
+	double long_to_float = Double(2147483647);
+	ASSERT_EQUAL(2147483647.0, long_to_float);
+	
+	double integer_to_float = Float(2345);
+	ASSERT_EQUAL(2345.0, integer_to_float);
 }

@@ -23,18 +23,18 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #include "../math.h"
 
 double math_pow(double a, double b) {
-    return pow(a,b);
+	return pow(a, b);
 }
 
 double math_floor(double a) {
-    return floor(a);
-} 
+	return floor(a);
+}
 
 long math_round(double a) {
-    return round(a);
+	return round(a);
 }
 

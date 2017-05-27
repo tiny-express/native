@@ -28,6 +28,7 @@ extern "C" {
 #include "../crypto.h"
 #include "../string.h"
 }
+
 #include <iostream>
 
 /**
@@ -37,8 +38,8 @@ extern "C" {
  * @return SHA1 encoded string
  */
 char *sha1(char *target) {
-    char *result = sha1_encode((unsigned char*)target);
-    return result;
+	char *result = sha1_encode((unsigned char *) target);
+	return result;
 }
 
 /**
@@ -48,8 +49,8 @@ char *sha1(char *target) {
  * @return SHA1 encoded string
  */
 char *sha1(std::string target) {
-    char *result = sha1_encode((unsigned char*)target.c_str());
-    return result;
+	char *result = sha1_encode((unsigned char *) target.c_str());
+	return result;
 }
 
 /**
@@ -59,8 +60,8 @@ char *sha1(std::string target) {
  * @return SHA1 encoded string
  */
 char *sha1(short target) {
-    char *result = sha1_encode((unsigned char*)string_from_short(target));
-    return result;
+	char *result = sha1_encode((unsigned char *) string_from_short(target));
+	return result;
 }
 
 /**
@@ -70,8 +71,8 @@ char *sha1(short target) {
  * @return SHA1 encoded string
  */
 char *sha1(int target) {
-    char *result = sha1_encode((unsigned char*) string_from_int(target));
-    return result;
+	char *result = sha1_encode((unsigned char *) string_from_int(target));
+	return result;
 }
 
 /**
@@ -81,8 +82,8 @@ char *sha1(int target) {
  * @return SHA1 encoded string
  */
 char *sha1(long target) {
-    char *result = sha1_encode((unsigned char*) string_from_long(target));
-    return result;
+	char *result = sha1_encode((unsigned char *) string_from_long(target));
+	return result;
 }
 
 /**
@@ -92,8 +93,8 @@ char *sha1(long target) {
  * @return SHA1 encoded string
  */
 char *sha1(double target) {
-    char *result = sha1_encode((unsigned char*) string_from_double(target));
-    return result;
+	char *result = sha1_encode((unsigned char *) string_from_double(target));
+	return result;
 }
 
 

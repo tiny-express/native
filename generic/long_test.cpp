@@ -27,29 +27,30 @@
 extern "C" {
 #include "../unit_test.h"
 }
+
 #include "../library.hpp"
 
-TEST(Generic, Long) {
-    
-    long string_to_long = Long(std::string("123456"));
-    ASSERT_EQUAL(123456, string_to_long);
-
-    long string_to_long_not_valid = Long((char*) "Hello world");
-    ASSERT_EQUAL(0, string_to_long_not_valid);
-
-    long string_to_long_valid_1 = Long((char*) "-12345");
-    ASSERT_EQUAL(-12345, string_to_long_valid_1);
-
-    long string_to_long_valid_2 = Long((char*) "-123.45");
-    ASSERT_EQUAL(-123, string_to_long_valid_2);
-    
-    long long_to_long = Long(2147483647);
-    ASSERT_EQUAL(2147483647, long_to_long);
-
-    long integer_to_long = Long(2345);
-    ASSERT_EQUAL(2345, integer_to_long);
-
-    long float_to_long = Long(1.234);
-    ASSERT_EQUAL(1, float_to_long);
-
+TEST (Generic, Long) {
+	
+	long string_to_long = Long(std::string("123456"));
+	ASSERT_EQUAL(123456, string_to_long);
+	
+	long string_to_long_not_valid = Long((char *) "Hello world");
+	ASSERT_EQUAL(0, string_to_long_not_valid);
+	
+	long string_to_long_valid_1 = Long((char *) "-12345");
+	ASSERT_EQUAL(-12345, string_to_long_valid_1);
+	
+	long string_to_long_valid_2 = Long((char *) "-123.45");
+	ASSERT_EQUAL(-123, string_to_long_valid_2);
+	
+	long long_to_long = Long(2147483647);
+	ASSERT_EQUAL(2147483647, long_to_long);
+	
+	long integer_to_long = Long(2345);
+	ASSERT_EQUAL(2345, integer_to_long);
+	
+	long float_to_long = Long(1.234);
+	ASSERT_EQUAL(1, float_to_long);
+	
 }

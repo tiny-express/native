@@ -1,9 +1,9 @@
 #include <native/library.hpp>
 
 int main() {
-    String text = "Hello world";
-    System::out::println(text);
-    return 0;
+	String text = "Hello world";
+	System::out::println(text);
+	return 0;
 }
 
 

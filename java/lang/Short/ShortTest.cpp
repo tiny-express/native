@@ -33,9 +33,9 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(JavaLang, ShortConstructor) {
+TEST (JavaLang, ShortConstructor) {
 
-      // Given empty value for Short constructor and assign value - Return Long
+	// Given empty value for Short constructor and assign value - Return Long
 //    Short emptyShort;
 //    emptyLong = 3;
 //    ASSERT_EQUAL(3, emptyShort.longValue());
@@ -46,12 +46,12 @@ TEST(JavaLang, ShortConstructor) {
 //
 //    Short test = 3;
 //    ASSERT_EQUAL(3, test.intValue());
-    
-    
+
+
 }
 
-TEST(JavaLang, ShortComparision) {
-    // Give a valid number and make a comparision
+TEST (JavaLang, ShortComparision) {
+	// Give a valid number and make a comparision
 //    Short validNumber = 30000;
 //    Short targetNumber;
 //
@@ -80,8 +80,8 @@ TEST(JavaLang, ShortComparision) {
 //    ASSERT_TRUE(validNumber >= targetNumber);
 }
 
-TEST(JavaLang, ShortOperator) {
-    // Given a valid number
+TEST (JavaLang, ShortOperator) {
+	// Given a valid number
 //    Long validNumber = 5;
 //    Long targetNumber = 3;
 //
@@ -106,8 +106,8 @@ TEST(JavaLang, ShortOperator) {
 //    ASSERT_TRUE(modNumber == (validNumber % targetNumber));
 }
 
-TEST(JavaLang, ShortParseShort) {
-    // Given value for Long constructor and assign value - Return long
+TEST (JavaLang, ShortParseShort) {
+	// Given value for Long constructor and assign value - Return long
 //    Long *validShortPointer = Short::parseShort("6");
 //    ASSERT_EQUAL(6, validShortPointer->shortValue());
 }

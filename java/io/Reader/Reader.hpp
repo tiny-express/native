@@ -32,11 +32,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace IO {
-        class Reader : public virtual Object {
-
-        };
-    }
+	namespace IO {
+		class Reader : public virtual Object {
+		
+		};
+	}
 }
 
 #endif//NATIVE_IO_READER_HPP

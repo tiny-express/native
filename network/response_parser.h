@@ -28,17 +28,17 @@
 #define RESPONSE_PARSER_H
 
 typedef struct header {
-    char* name;
-    char* value;
+	char *name;
+	char *value;
 } header;
 
 typedef struct http_response {
-    char* version;
-    char* status_code;
-    char* status;
-    char* body;
-    int header_quantity;
-    header *headers[];
+	char *version;
+	char *status_code;
+	char *status;
+	char *body;
+	int header_quantity;
+	header *headers[];
 } http_response;
 
 /**
@@ -46,13 +46,13 @@ typedef struct http_response {
  * @param response
  * @return http_response
  */
-http_response *parse(char* response);
+http_response *parse(char *response);
 
 /**
  * free memory allocated for http_response, avoid memory leak
  * @param response
  * @return
  */
-void free_http_response(http_response* response);
+void free_http_response(http_response *response);
 
 #endif

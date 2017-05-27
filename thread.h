@@ -30,8 +30,8 @@
 #include <pthread.h>
 
 typedef struct thread_argument {
-    void *callback;
-    unsigned int milliseconds;
+	void *callback;
+	unsigned int milliseconds;
 } thread_argument;
 
 void *loop(void *argument);

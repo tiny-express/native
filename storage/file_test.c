@@ -27,24 +27,24 @@
 #include "../storage.h"
 #include "../unit_test.h"
 
-TEST(Storage, FilePutContents) {
-    const char* file_path = "test.txt";
-    // Make sure file does not exist before testing
-    // No need to care about delete success or not
-    remove(file_path);
+TEST (Storage, FilePutContents) {
+	const char *file_path = "test.txt";
+	// Make sure file does not exist before testing
+	// No need to care about delete success or not
+	remove(file_path);
 	const char *content = "Sample content";
 	// Verify write operation
-	ASSERT_TRUE(file_put_contents((char*) file_path, (char*) content));
+	ASSERT_TRUE(file_put_contents((char *) file_path, (char *) content));
 }
 
-TEST(Storage, FileGetContents) {
-    const char* file_path = "test.txt";
-    // Make sure file does not exist before testing
-    // No need to care about delete success or not
-    remove(file_path);
-    char *content = "Sample content";
-    file_put_contents((char*) file_path, content);
-    char *expect = file_get_contents((char*) file_path);
-    // Verify read operation
-    ASSERT_STR(expect, content);
+TEST (Storage, FileGetContents) {
+	const char *file_path = "test.txt";
+	// Make sure file does not exist before testing
+	// No need to care about delete success or not
+	remove(file_path);
+	char *content = "Sample content";
+	file_put_contents((char *) file_path, content);
+	char *expect = file_get_contents((char *) file_path);
+	// Verify read operation
+	ASSERT_STR(expect, content);
 }

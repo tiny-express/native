@@ -28,7 +28,6 @@
 #include "../type.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #define SWAP(value1, value2, TYPE) { TYPE temp = value1; value1 = value2; value2 = temp; }
 
@@ -40,32 +39,35 @@
  * @param size
  */
 void distribution_counting_sort(int *array, int size) {
-
-    register int index;
-    int max_value = 0;
-    for (index = 0; index < size; ++index) {
-        if (array[index] > max_value)
-            max_value = array[index];
-    }
-
-    int * counting_array = calloc(max_value, sizeof(int));
-
-    for(index = 0; index < size; index ++){
-        counting_array[array[index]]++;
-    }
-
-    int num = 0;
-    index = 0;
-
-    while(index <= size) {
-        while(counting_array[num] > 0) {
-            array[index] = num;
-            counting_array[num]--;
-            index++;
-            if(index > size){ break; }
-        }
-        num++;
-    }
+	
+	register int index;
+	int max_value = 0;
+	for (index = 0; index < size; ++index) {
+		if (array[ index ] > max_value) {
+			max_value = array[ index ];
+		}
+	}
+	
+	int *counting_array = calloc(max_value, sizeof(int));
+	
+	for (index = 0; index < size; index++) {
+		counting_array[ array[ index ]]++;
+	}
+	
+	int num = 0;
+	index = 0;
+	
+	while (index <= size) {
+		while (counting_array[ num ] > 0) {
+			array[ index ] = num;
+			counting_array[ num ]--;
+			index++;
+			if (index > size) {
+				break;
+			}
+		}
+		num++;
+	}
 }
 
 /**
@@ -96,33 +98,39 @@ inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {   
 }
 
 void sort_string(char *array[], int left_position, int right_position) {
-    int left = left_position;
-    int right = right_position;
-    char *pivot = array[(left + right) / 2];
-
-    while (left <= right) {
-        while (strcmp(array[left], pivot) < 0)  left++;
-        while (strcmp(array[right], pivot) > 0) right--;
-        if (left <= right) {
+	int left = left_position;
+	int right = right_position;
+	char *pivot = array[ ( left + right ) / 2 ];
+	
+	while (left <= right) {
+		while (strcmp(array[ left ], pivot) < 0)
+			left++;
+		while (strcmp(array[ right ], pivot) > 0)
+			right--;
+		if (left <= right) {
 //            char *temp = malloc(sizeof(char) * MAX_STRING_LENGTH);
 //            strcpy(temp, array[left]);
 //            array[left] = malloc(sizeof(char) * length_pointer_char(array[right]) + 1);
 //            strcpy(array[left], array[right]);
 //            array[right] = malloc(sizeof(char) * length_pointer_char(temp) + 1);
 //            strcpy(array[right], temp);
-            //free(temp);
-
-            char *temp = array[left];
-            array[left] = array[right];
-            array[right] = temp;
-
-            left++;
-            right--;
-        }
-    }
-    if (left_position < right) sort_string(array, left_position, right);
-    if (left < right_position) sort_string(array, left, right_position);
-
+			//free(temp);
+			
+			char *temp = array[ left ];
+			array[ left ] = array[ right ];
+			array[ right ] = temp;
+			
+			left++;
+			right--;
+		}
+	}
+	if (left_position < right) {
+		sort_string(array, left_position, right);
+	}
+	if (left < right_position) {
+		sort_string(array, left, right_position);
+	}
+	
 }
 
 /**
@@ -133,12 +141,13 @@ void sort_string(char *array[], int left_position, int right_position) {
  * @return TRUE | FALSE
  */
 inline int is_increase_string_array(char **array, int size) {
-    register int index = 0;
-    for (index = 0; index < size - 1; index++) {
-        if (strcmp(array[index], array[index + 1]) > 0)
-            return FALSE;
-    }
-    return TRUE;
+	register int index = 0;
+	for (index = 0; index < size - 1; index++) {
+		if (strcmp(array[ index ], array[ index + 1 ]) > 0) {
+			return FALSE;
+		}
+	}
+	return TRUE;
 }
 
 /**

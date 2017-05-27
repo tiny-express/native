@@ -38,19 +38,19 @@
  * @return thread
  */
 pthread_t set_interval(void *callback, unsigned int milliseconds) {
-    if (callback == NULL) {
-        return (pthread_t) NULL;
-    }
-    pthread_t thread;
-    thread_argument *argument = malloc(sizeof(thread_argument));
-    argument->milliseconds = milliseconds;
-    argument->callback = callback;
-    int error = pthread_create(&thread, NULL, loop, (void *)argument);
-    if (error) {
-        printf("Error\n");
-        fflush(stdout);
-    }
-    return thread;
+	if (callback == NULL) {
+		return (pthread_t) NULL;
+	}
+	pthread_t thread;
+	thread_argument *argument = malloc(sizeof(thread_argument));
+	argument->milliseconds = milliseconds;
+	argument->callback = callback;
+	int error = pthread_create(&thread, NULL, loop, (void *) argument);
+	if (error) {
+		printf("Error\n");
+		fflush(stdout);
+	}
+	return thread;
 }
 
 /**
@@ -62,19 +62,19 @@ pthread_t set_interval(void *callback, unsigned int milliseconds) {
  * @return thread_t
  */
 pthread_t set_time_out(void *callback, unsigned int milliseconds) {
-    if (callback == NULL) {
-        return  (pthread_t) NULL;
-    }
-    pthread_t thread;
-    thread_argument *argument = malloc(sizeof(thread_argument));
-    argument->milliseconds = milliseconds;
-    argument->callback = callback;
-    int error = pthread_create(&thread, NULL, run, (void *)argument);
-    if (error) {
-        printf("Error\n");
-        fflush(stdout);
-    }
-    return thread;
+	if (callback == NULL) {
+		return (pthread_t) NULL;
+	}
+	pthread_t thread;
+	thread_argument *argument = malloc(sizeof(thread_argument));
+	argument->milliseconds = milliseconds;
+	argument->callback = callback;
+	int error = pthread_create(&thread, NULL, run, (void *) argument);
+	if (error) {
+		printf("Error\n");
+		fflush(stdout);
+	}
+	return thread;
 }
 
 /**
@@ -82,10 +82,10 @@ pthread_t set_time_out(void *callback, unsigned int milliseconds) {
  * @param argument
  */
 void *loop(void *argument) {
-    while(1) {
-        ((void(*)())((thread_argument*)argument)->callback)();
-        usleep(((thread_argument *)argument)->milliseconds*1000);
-    }
+	while (1) {
+		((void (*)()) ((thread_argument *) argument )->callback )();
+		usleep(((thread_argument *) argument )->milliseconds * 1000);
+	}
 }
 
 /**
@@ -93,9 +93,9 @@ void *loop(void *argument) {
  * @param argument
  */
 void *run(void *argument) {
-    usleep(((thread_argument *)argument)->milliseconds*1000);
-    ((void(*)())((thread_argument*)argument)->callback)();
-    return EXIT_SUCCESS;
+	usleep(((thread_argument *) argument )->milliseconds * 1000);
+	((void (*)()) ((thread_argument *) argument )->callback )();
+	return EXIT_SUCCESS;
 }
 
 /**
@@ -103,11 +103,11 @@ void *run(void *argument) {
  * @param miliseconds
  */
 void sleep_miliseconds(unsigned int miliseconds) {
-    unsigned long start = 0;
-    unsigned long stop = miliseconds*1000000;
-    unsigned long counter = 0;
-    unsigned long index = 0;
-    for (index = start; index < stop; index++) {
-        counter++;
-    }
+	unsigned long start = 0;
+	unsigned long stop = miliseconds * 1000000;
+	unsigned long counter = 0;
+	unsigned long index = 0;
+	for (index = start; index < stop; index++) {
+		counter++;
+	}
 }

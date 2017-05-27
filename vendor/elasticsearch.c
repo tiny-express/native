@@ -28,7 +28,6 @@
 #include "../vendor.h"
 #include "../common.h"
 #include "../string.h"
-#include "../type.h"
 
 /**
  * Elastic Search Query
@@ -40,18 +39,18 @@
  * @return result content
  */
 char *es_query(char *host, char *index, char *query) {
-    char *headers[2] = {
-        "Content-Type: application/json",
-        '\0'
-    };
-    char *body[2] = {
-        query,
-        '\0'
-    };
-    char *url;
-    asprintf(&url, "http://%s:9200/%s/_search?pretty", host, index);
-    char *http_response = http_request("POST", url, headers, body);
-    char **response = string_split(http_response, "\r\n\r\n");
-    int response_len = length_pointer_pointer_char(response);
-    return response[response_len - 1];
+	char *headers[2] = {
+		"Content-Type: application/json",
+		'\0'
+	};
+	char *body[2] = {
+		query,
+		'\0'
+	};
+	char *url;
+	asprintf(&url, "http://%s:9200/%s/_search?pretty", host, index);
+	char *http_response = http_request("POST", url, headers, body);
+	char **response = string_split(http_response, "\r\n\r\n");
+	int response_len = length_pointer_pointer_char(response);
+	return response[ response_len - 1 ];
 }

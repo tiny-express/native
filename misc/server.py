@@ -24,14 +24,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#!/usr/bin/env python
+# !/usr/bin/env python
 
-from flask import Flask
-from flask import request
-from flask import make_response
-from urlparse import parse_qs
 import json
 import logging
+from flask import Flask
+from flask import make_response
+from flask import request
+from urlparse import parse_qs
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -57,7 +57,7 @@ SENDGRID_AUTH_FAIL_RESPONSE = "{\"errors\":[{\"message\":" \
                               "\"The provided authorization grant is invalid, expired, or revoked\"," \
                               "\"field\":null,\"help\":null}]}"
 
-TWILIO_SERVICE_TOKEN = "Zm9vZDp0aW55"   # result of base64 encode string "food:tiny"
+TWILIO_SERVICE_TOKEN = "Zm9vZDp0aW55"  # result of base64 encode string "food:tiny"
 
 TWILIO_AUTH_FAIL_RESPONSE = "{\"errors\":[{\"message\":" \
                             "\"The provided authorization grant is invalid, " \

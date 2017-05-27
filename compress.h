@@ -26,5 +26,5 @@
 
 #include <zlib.h>
 
-char* zlib_encode(char* compress_content);
-char* zlib_decode(char* encoded_content);
+char *zlib_encode(char *compress_content);
+char *zlib_decode(char *encoded_content);

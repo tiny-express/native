@@ -32,12 +32,12 @@
 using namespace Java::Net;
 
 namespace Java {
-    namespace Vendor {
-        class AbstractVendor {
-        private:
-
-        };
-    }
+	namespace Vendor {
+		class AbstractVendor {
+		private:
+		
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_VENDOR_ELASTIC_SEARCH_HPP

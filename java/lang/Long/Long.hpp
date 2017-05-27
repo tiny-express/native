@@ -30,47 +30,47 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Long: public virtual Number {
-        private:
-            long original;
-        public:
-            Long();
-            Long(long original);
-            Long(const Long &longnumber);
-            ~Long();
-        public:
-            char charValue() const;
-            string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
-            string toString() const;
-
-            static Long *parseLong(String target);
-
-        public:
-            Long operator+(const Long& target) const;
-            Long operator-(const Long& target) const;
-            Long operator/(const Long& target) const;
-            Long operator%(const Long& target) const;
-            Long operator*(const Long& target) const;
-            boolean operator==(const Long& target) const;
-            boolean operator!=(const Long& target) const;
-            boolean operator<(const Long& target) const;
-            boolean operator>(const Long& target) const;
-            boolean operator<=(const Long& target) const;
-            boolean operator>=(const Long& target) const;
-
-            void operator-=(const Long& target);
-            void operator+=(const Long& target);
-            void operator*=(const Long& target);
-            void operator/=(const Long& target);
-            void operator%=(const Long& target);
-        };
-    }
+	namespace Lang {
+		class Long : public virtual Number {
+		private:
+			long original;
+		public:
+			Long();
+			Long(long original);
+			Long(const Long &longnumber);
+			~Long();
+		public:
+			char charValue() const;
+			string stringValue() const;
+			short shortValue() const;
+			int intValue() const;
+			long longValue() const;
+			float floatValue() const;
+			double doubleValue() const;
+			string toString() const;
+			
+			static Long *parseLong(String target);
+		
+		public:
+			Long operator+(const Long &target) const;
+			Long operator-(const Long &target) const;
+			Long operator/(const Long &target) const;
+			Long operator%(const Long &target) const;
+			Long operator*(const Long &target) const;
+			boolean operator==(const Long &target) const;
+			boolean operator!=(const Long &target) const;
+			boolean operator<(const Long &target) const;
+			boolean operator>(const Long &target) const;
+			boolean operator<=(const Long &target) const;
+			boolean operator>=(const Long &target) const;
+			
+			void operator-=(const Long &target);
+			void operator+=(const Long &target);
+			void operator*=(const Long &target);
+			void operator/=(const Long &target);
+			void operator%=(const Long &target);
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG__HPP

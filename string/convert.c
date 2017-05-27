@@ -40,9 +40,9 @@
  */
 #define STR_FROM(TYPE, FORMAT); \
 inline char* string_from_##TYPE(TYPE target) {\
-	char *convert;\
-	asprintf(&convert, FORMAT, target);\
-	return convert;\
+        char *convert;\
+        asprintf(&convert, FORMAT, target);\
+        return convert;\
 }
 
 /**
@@ -54,20 +54,11 @@ inline char* string_from_##TYPE(TYPE target) {\
 #define STR_TO(TYPE, FORMAT);\
 inline TYPE string_to_##TYPE(char *target) {\
     if (target == NULL || strcmp(target, "\0") == 0) return 0;\
-	TYPE result;\
+        TYPE result;\
     sscanf(target, FORMAT, &result);\
     return result;\
 }
-
-STR_FROM(short,  "%d");
-STR_FROM(int,    "%d");
-STR_FROM(long,   "%ld");
-STR_FROM(float,  "%g");
-STR_FROM(double, "%.16g");
-
-STR_TO(short,  "%hi");
-STR_TO(float,  "%g");
-STR_TO(double, "%lg");
+STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, "%g");STR_FROM(double, "%.16g");STR_TO(short, "%hi");STR_TO(float, "%g");STR_TO(double, "%lg");
 
 /**
  * String from char
@@ -76,13 +67,13 @@ STR_TO(double, "%lg");
  * @return string
  */
 char *string_from_char(char target) {
-    if (target == '\0') {
-        return (char*) "";
-    }
-    char *result = malloc(2 * sizeof(char));
-    result[0] = target;
-    result[1] = '\0';
-    return result;
+	if (target == '\0') {
+		return (char *) "";
+	}
+	char *result = malloc(2 * sizeof(char));
+	result[ 0 ] = target;
+	result[ 1 ] = '\0';
+	return result;
 }
 
 /**
@@ -91,11 +82,11 @@ char *string_from_char(char target) {
  * @param target
  * @return string
  */
-char string_to_char(char* target) {
+char string_to_char(char *target) {
 	if (is_empty(target)) {
 		return '\0';
 	}
-	return target[0];
+	return target[ 0 ];
 }
 
 /**
@@ -104,7 +95,7 @@ char string_to_char(char* target) {
  * @param target
  * @return string
  */
-int string_to_int(char* target) {
+int string_to_int(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -117,7 +108,7 @@ int string_to_int(char* target) {
  * @param target
  * @return string
  */
-long string_to_long(char* target) {
+long string_to_long(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -130,7 +121,7 @@ long string_to_long(char* target) {
  * @param target
  * @return TRUE | FALSE
  */
-int string_to_boolean(char* target) {
+int string_to_boolean(char *target) {
 	if (length_pointer_char(target) == 0) {
 		return FALSE;
 	}
@@ -138,8 +129,8 @@ int string_to_boolean(char* target) {
 	if (string_equals(boolean_value, "true")) {
 		return TRUE;
 	}
-    if (string_to_int(boolean_value) == TRUE) {
-        return TRUE;
-    }
+	if (string_to_int(boolean_value) == TRUE) {
+		return TRUE;
+	}
 	return FALSE;
 }

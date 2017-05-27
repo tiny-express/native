@@ -34,7 +34,7 @@
  * @return long
  */
 long Long(char *target) {
-    return string_to_long(target);
+	return string_to_long(target);
 }
 
 /**
@@ -44,7 +44,7 @@ long Long(char *target) {
  * @return long
  */
 long Long(std::string target) {
-    return string_to_long((char*) target.c_str());
+	return string_to_long((char *) target.c_str());
 }
 
 /**
@@ -54,7 +54,7 @@ long Long(std::string target) {
  * @return long
  */
 long Long(int target) {
-    return target;
+	return target;
 }
 
 /**
@@ -64,7 +64,7 @@ long Long(int target) {
  * @return int
  */
 long Long(float target) {
-    return (long) floor(target);
+	return (long) floor(target);
 }
 
 /**
@@ -74,5 +74,5 @@ long Long(float target) {
  * @return long
  */
 long Long(double target) {
-    return (long) floor(target);
+	return (long) floor(target);
 }

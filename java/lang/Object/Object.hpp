@@ -39,23 +39,30 @@ extern "C" {
 typedef bool boolean;
 
 namespace Java {
-    namespace Lang {
-
-        // Pre-declaration
-        class Object;
-        class Short;
-        class Integer;
-        class Long;
-        class Float;
-        class Double;
-        class Boolean;
-        class String;
-
-        class Object {
-        protected:
-            virtual string toString() const = 0;
-        };
-    }
+	namespace Lang {
+		
+		// Pre-declaration
+		class Object;
+		
+		class Short;
+		
+		class Integer;
+		
+		class Long;
+		
+		class Float;
+		
+		class Double;
+		
+		class Boolean;
+		
+		class String;
+		
+		class Object {
+		protected:
+			virtual string toString() const = 0;
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_OBJECT_H

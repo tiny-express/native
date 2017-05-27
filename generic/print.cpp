@@ -31,7 +31,7 @@
  * @param target
  */
 void print(const char *target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -39,7 +39,7 @@ void print(const char *target) {
  * @param target
  */
 void print(char *target) {
-    print((const char *)target);
+	print((const char *) target);
 }
 
 /**
@@ -47,7 +47,7 @@ void print(char *target) {
  * @param target
  */
 void print(std::string target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -55,7 +55,7 @@ void print(std::string target) {
  * @param target
  */
 void print(short target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -63,7 +63,7 @@ void print(short target) {
  * @param target
  */
 void print(int target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -71,7 +71,7 @@ void print(int target) {
  * @param target
  */
 void print(long target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -79,7 +79,7 @@ void print(long target) {
  * @param target
  */
 void print(double target) {
-    std::cout << target << std::endl;
+	std::cout << target << std::endl;
 }
 
 /**
@@ -87,8 +87,8 @@ void print(double target) {
  * @param target
  */
 void print(std::vector<int> target) {
-    const char *convertString = String(target);
-    print(convertString);
+	const char *convertString = String(target);
+	print(convertString);
 }
 
 /**
@@ -96,8 +96,8 @@ void print(std::vector<int> target) {
  * @param target
  */
 void print(std::vector<double> target) {
-    const char *convertString = String(target);
-    print(convertString);
+	const char *convertString = String(target);
+	print(convertString);
 }
 
 

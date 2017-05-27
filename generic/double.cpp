@@ -23,10 +23,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 extern "C" {
 #include "../string.h"
 }
+
 #include "../library.hpp"
 
 /**
@@ -36,7 +37,7 @@ extern "C" {
  * @return double
  */
 double Double(char *target) {
-    return string_to_double(target);
+	return string_to_double(target);
 }
 
 /**
@@ -46,7 +47,7 @@ double Double(char *target) {
  * @return double
  */
 double Double(std::string target) {
-    return string_to_double((char*) target.c_str());
+	return string_to_double((char *) target.c_str());
 }
 
 /**
@@ -56,7 +57,7 @@ double Double(std::string target) {
  * @return double
  */
 double Double(int target) {
-    return target;
+	return target;
 }
 
 /**
@@ -66,7 +67,7 @@ double Double(int target) {
  * @return 0
  */
 double Double(long target) {
-    return 0;
+	return 0;
 }
 
 /**
@@ -76,5 +77,5 @@ double Double(long target) {
  * @return double
  */
 double Double(float target) {
-    return (int) floor(target);
+	return (int) floor(target);
 }

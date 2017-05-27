@@ -53,13 +53,13 @@
 #define STRING_NOT_FOUND        -1
 #define TWILIO_RESPONSE_SUCCESS "201 CREATED"
 
-char* etcd_get(char* host, char *key);
-int etcd_set(char* host, char *key, char *value);
+char *etcd_get(char *host, char *key);
+int etcd_set(char *host, char *key, char *value);
 
 char *es_query(char *host, char *index, char *query);
 
-int send_sms(char* service_url, char* account_id, char* account_token, char* from_phone_number, char* to_phone_number, char* sms_content);
-int send_mail(char *service_url,  char *service_token, char *from_mail, char *to_mail, char *mail_subject, char *mail_content);
+int send_sms(char *service_url, char *account_id, char *account_token, char *from_phone_number, char *to_phone_number, char *sms_content);
+int send_mail(char *service_url, char *service_token, char *from_mail, char *to_mail, char *mail_subject, char *mail_content);
 int push_notification(char *service_url, char *service_token, char *device_token, char *notification_title, char *notification_body, char *notification_data);
 
 #endif//NATIVE_VENDOR_H

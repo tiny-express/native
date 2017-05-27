@@ -29,43 +29,43 @@
 using namespace Java::Net;
 
 URL::URL() {
-    this->protocol = "";
-    this->host = "";
-    this->port = -1;
-    this->query = "";
-    this->path = "";
+	this->protocol = "";
+	this->host = "";
+	this->port = -1;
+	this->query = "";
+	this->path = "";
 }
 
 URL::URL(String spec) {
-    string url = spec.toString();
-    this->protocol = http_protocol(url);
-    this->host = http_hostname(url);
-    this->port = url_port(url);
-    this->query = http_query(url);
-    this->path = http_path(url);
+	string url = spec.toString();
+	this->protocol = http_protocol(url);
+	this->host = http_hostname(url);
+	this->port = url_port(url);
+	this->query = http_query(url);
+	this->path = http_path(url);
 }
 
 URL::~URL() {
 }
 
 String URL::getHost() {
-    return this->host;
+	return this->host;
 }
 
 String URL::getPath() {
-    return this->path;
+	return this->path;
 }
 
 int URL::getPort() {
-    return this->port;
+	return this->port;
 }
 
 String URL::getProtocol() {
-    return this->protocol;
+	return this->protocol;
 }
 
 String URL::getQuery() {
-    return this->query;
+	return this->query;
 }
 
 //URLConnection URL::openConnection() {
@@ -73,22 +73,22 @@ String URL::getQuery() {
 //}
 
 string URL::toString() const {
-    String protocol = this->protocol;
-    String host = this->host;
-    int port = this->port;
-    String path = this->path;
-    String query = this->query;
-
-    String url = protocol + "://" + host;
-
-    if (port > -1) {
-        url = url + ":" + String::valueOf(port);
-    }
-
-    if (path != "/") {
-        url += path;
-    }
-
-    url = url + (query.isEmpty() ? "" : "?") + query;
-    return url.toString();
+	String protocol = this->protocol;
+	String host = this->host;
+	int port = this->port;
+	String path = this->path;
+	String query = this->query;
+	
+	String url = protocol + "://" + host;
+	
+	if (port > -1) {
+		url = url + ":" + String::valueOf(port);
+	}
+	
+	if (path != "/") {
+		url += path;
+	}
+	
+	url = url + ( query.isEmpty() ? "" : "?" ) + query;
+	return url.toString();
 }

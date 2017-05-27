@@ -27,16 +27,17 @@
 extern "C" {
 #include "../unit_test.h"
 }
+
 #include "../library.hpp"
 
-TEST(Generic, Split) {
-    std::vector<char*> null_target_delimiter = split((char*) NULL, NULL);
-    ASSERT_TRUE(empty(null_target_delimiter));
-
-    std::vector<char*> null_delimiter = split((char*) "hello", NULL);
-    ASSERT_EQUAL(1, len(null_delimiter));
-
-    char *text = "hello world";
-    std::vector<char*> strings = split(text, String(" "));
-    ASSERT_EQUAL(2, len(strings));
+TEST (Generic, Split) {
+	std::vector<char *> null_target_delimiter = split((char *) NULL, NULL);
+	ASSERT_TRUE(empty(null_target_delimiter));
+	
+	std::vector<char *> null_delimiter = split((char *) "hello", NULL);
+	ASSERT_EQUAL(1, len(null_delimiter));
+	
+	char *text = "hello world";
+	std::vector<char *> strings = split(text, String(" "));
+	ASSERT_EQUAL(2, len(strings));
 }
