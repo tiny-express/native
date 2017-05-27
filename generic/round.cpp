@@ -34,10 +34,10 @@
  * @return double
  */
 double round(double target, int precision) {
-    precision = abs(precision);
-    int value = pow(10,precision);
-    double result =  round(target * value) / value;
-    return result;
+	precision = abs(precision);
+	int value = pow(10, precision);
+	double result = round(target * value) / value;
+	return result;
 }
 
 /**
@@ -47,9 +47,9 @@ double round(double target, int precision) {
  * @return float
  */
 float round(float target, int precision) {
-    precision = abs(precision);
-    int value = pow(10,precision);
-    float result = (float) round(target * value) / value;
-    return result;
+	precision = abs(precision);
+	int value = pow(10, precision);
+	float result = (float) round(target * value) / value;
+	return result;
 }
 

@@ -33,25 +33,25 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace Util {
-        template <typename E>
-        class Collection : public virtual Iterable<E> {
-        public:
-            virtual void add(E &e) = 0;
-            virtual bool addAll(Collection<E> &c) = 0;
-            virtual void clear() = 0;
-            virtual bool contains(E &e) const = 0;
-            virtual bool containsAll(Collection<E> &c) const = 0;
-            virtual bool equals(E &e) const = 0;
-            virtual E get(const int index) = 0;
-            virtual int hashCode() const = 0;
-            virtual bool isEmpty() const = 0;
-            virtual bool remove(E &e) = 0;
-            virtual bool removeAll(Collection<E> &c) = 0;
-            virtual int size() const = 0;
-            //virtual ~Collection() = 0;
-        };
-    }
+	namespace Util {
+		template <typename E>
+		class Collection : public virtual Iterable<E> {
+		public:
+			virtual void add(E &e) = 0;
+			virtual bool addAll(Collection<E> &c) = 0;
+			virtual void clear() = 0;
+			virtual bool contains(E &e) const = 0;
+			virtual bool containsAll(Collection<E> &c) const = 0;
+			virtual bool equals(E &e) const = 0;
+			virtual E get(const int index) = 0;
+			virtual int hashCode() const = 0;
+			virtual bool isEmpty() const = 0;
+			virtual bool remove(E &e) = 0;
+			virtual bool removeAll(Collection<E> &c) = 0;
+			virtual int size() const = 0;
+			//virtual ~Collection() = 0;
+		};
+	}
 }
 
 #endif //NATIVE_COLLECTION_HPP

@@ -27,28 +27,29 @@
 extern "C" {
 #include "../unit_test.h"
 }
+
 #include "../library.hpp"
 
-TEST(Generic, Double) {
-    
-    double string_to_double = Double(std::string("123456"));
-    ASSERT_EQUAL(123456, string_to_double);
-
-    double string_to_double_not_valid = Double((char*) "Hello world");
-    ASSERT_EQUAL(0, string_to_double_not_valid);
-
-    double string_to_double_valid_1 = Double((char*) "-12345");
-    ASSERT_EQUAL(-12345, string_to_double_valid_1);
-
-    double string_to_double_valid_2 = Double((char*) "-123.45");
-    ASSERT_EQUAL(-123, string_to_double_valid_2);
-
-    double long_to_double = Double(2147483647);
-    ASSERT_EQUAL(2147483647, long_to_double);
-
-    double integer_to_double = Double(2345);
-    ASSERT_EQUAL(2345, integer_to_double);
-
-    float float_to_double = Double((float) 1235.234);
-    ASSERT_EQUAL(1235.234, float_to_double);
+TEST (Generic, Double) {
+	
+	double string_to_double = Double(std::string("123456"));
+	ASSERT_EQUAL(123456, string_to_double);
+	
+	double string_to_double_not_valid = Double((char *) "Hello world");
+	ASSERT_EQUAL(0, string_to_double_not_valid);
+	
+	double string_to_double_valid_1 = Double((char *) "-12345");
+	ASSERT_EQUAL(-12345, string_to_double_valid_1);
+	
+	double string_to_double_valid_2 = Double((char *) "-123.45");
+	ASSERT_EQUAL(-123, string_to_double_valid_2);
+	
+	double long_to_double = Double(2147483647);
+	ASSERT_EQUAL(2147483647, long_to_double);
+	
+	double integer_to_double = Double(2345);
+	ASSERT_EQUAL(2345, integer_to_double);
+	
+	float float_to_double = Double((float) 1235.234);
+	ASSERT_EQUAL(1235.234, float_to_double);
 }

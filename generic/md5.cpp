@@ -28,6 +28,7 @@ extern "C" {
 #include "../crypto.h"
 #include "../string.h"
 }
+
 #include <iostream>
 
 /**
@@ -37,8 +38,8 @@ extern "C" {
  * @return MD5 encoded string
  */
 char *md5(char *target) {
-    char *result = md5_encode((unsigned char*) target);
-    return result;
+	char *result = md5_encode((unsigned char *) target);
+	return result;
 }
 
 /**
@@ -48,8 +49,8 @@ char *md5(char *target) {
  * @return MD5 encoded string
  */
 char *md5(std::string target) {
-    char *result = md5_encode((unsigned char*) target.c_str());
-    return result;
+	char *result = md5_encode((unsigned char *) target.c_str());
+	return result;
 }
 
 /**
@@ -59,8 +60,8 @@ char *md5(std::string target) {
  * @return MD5 encoded string
  */
 char *md5(short target) {
-    char *result = md5_encode((unsigned char*)string_from_short(target));
-    return result;
+	char *result = md5_encode((unsigned char *) string_from_short(target));
+	return result;
 }
 
 /**
@@ -70,8 +71,8 @@ char *md5(short target) {
  * @return MD5 encoded string
  */
 char *md5(int target) {
-    char *result = md5_encode((unsigned char*) string_from_int(target));
-    return result;
+	char *result = md5_encode((unsigned char *) string_from_int(target));
+	return result;
 }
 
 /**
@@ -81,8 +82,8 @@ char *md5(int target) {
  * @return Pointer char md5 encoded string
  */
 char *md5(long target) {
-    char *result = md5_encode((unsigned char*) string_from_long(target));
-    return result;
+	char *result = md5_encode((unsigned char *) string_from_long(target));
+	return result;
 }
 
 /**
@@ -92,8 +93,8 @@ char *md5(long target) {
  * @return Pointer char md5 encoded string
  */
 char *md5(float target) {
-    char *result = md5_encode((unsigned char*) string_from_float(target));
-    return result;
+	char *result = md5_encode((unsigned char *) string_from_float(target));
+	return result;
 }
 
 /**
@@ -103,8 +104,8 @@ char *md5(float target) {
  * @return md5 encoded string
  */
 char *md5(double target) {
-    char *result = md5_encode((unsigned char*) string_from_double(target));
-    return result;
+	char *result = md5_encode((unsigned char *) string_from_double(target));
+	return result;
 }
 
 

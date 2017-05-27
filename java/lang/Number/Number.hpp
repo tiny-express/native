@@ -33,18 +33,18 @@
 #include "../String/String.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Number: public virtual Object {
-        protected:
-            virtual char charValue() const = 0;
-            virtual string stringValue() const = 0;
-            virtual short shortValue() const = 0;
-            virtual int intValue() const = 0;
-            virtual long longValue() const = 0;
-            virtual float floatValue() const = 0;
-            virtual double doubleValue() const = 0;
-        };
-    }
+	namespace Lang {
+		class Number : public virtual Object {
+		protected:
+			virtual char charValue() const = 0;
+			virtual string stringValue() const = 0;
+			virtual short shortValue() const = 0;
+			virtual int intValue() const = 0;
+			virtual long longValue() const = 0;
+			virtual float floatValue() const = 0;
+			virtual double doubleValue() const = 0;
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_NUMBER_HPP

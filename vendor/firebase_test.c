@@ -38,73 +38,73 @@
 // so when test cases go wrong in NULL value absolutely it will go wrong in empty string value
 // See: int is_empty(char *target);
 
-TEST(Vendor, FirebaseCheckNull) {
-    // Initialize all parameters are NULL
-    char *service_url           = NULL;
-    char *service_token         = NULL;
-    char *device_token          = NULL;
-    char *notification_title    = NULL;
-    char *notification_body     = NULL;
-    char *notification_data     = NULL;
-
-    // Re-assign service_url with valid url but fail because service_token is still NULL
-    service_url = "valid_url";
-    ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Re-assign service_token with some string but fail because device_token is still NULL
-    service_token = "some_token";
-    ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Re-assign device_token with valid string but fail because notification_title is still NULL
-    device_token = "some_device_token";
-    ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Re-assign notification_title with valid string but fail because notification_body is still NULL
-    notification_title = "some_title";
-    ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Re-assign notification_body with valid string but fail because validation does not check
-    // We will check in next test case
-    // See Vendor.FirebaseCheckValidation
-    notification_body = "some_message";
-    ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+TEST (Vendor, FirebaseCheckNull) {
+	// Initialize all parameters are NULL
+	char *service_url = NULL;
+	char *service_token = NULL;
+	char *device_token = NULL;
+	char *notification_title = NULL;
+	char *notification_body = NULL;
+	char *notification_data = NULL;
+	
+	// Re-assign service_url with valid url but fail because service_token is still NULL
+	service_url = "valid_url";
+	ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Re-assign service_token with some string but fail because device_token is still NULL
+	service_token = "some_token";
+	ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Re-assign device_token with valid string but fail because notification_title is still NULL
+	device_token = "some_device_token";
+	ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Re-assign notification_title with valid string but fail because notification_body is still NULL
+	notification_title = "some_title";
+	ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Re-assign notification_body with valid string but fail because validation does not check
+	// We will check in next test case
+	// See Vendor.FirebaseCheckValidation
+	notification_body = "some_message";
+	ASSERT_FALSE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
 }
 
-TEST(Vendor, FirebaseCheckValidation) {
-    // Initialize all parameters with valid information
-    char *service_token         = FIREBASE_DEVICE_TOKEN;
-    char *device_token          = FIREBASE_DEVICE_TOKEN;
-    char *notification_title    = FIREBASE_NOTIFICATION_TITLE;
-    char *notification_body     = FIREBASE_NOTIFICATION_BODY;
-    char *notification_data     = NULL;
-
-    // Fail because invalid service url format
-    char *invalid_service_url_format = "some_url_here_without_http";
-    ASSERT_FALSE(push_notification(invalid_service_url_format, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // More test for wrong service url
+TEST (Vendor, FirebaseCheckValidation) {
+	// Initialize all parameters with valid information
+	char *service_token = FIREBASE_DEVICE_TOKEN;
+	char *device_token = FIREBASE_DEVICE_TOKEN;
+	char *notification_title = FIREBASE_NOTIFICATION_TITLE;
+	char *notification_body = FIREBASE_NOTIFICATION_BODY;
+	char *notification_data = NULL;
+	
+	// Fail because invalid service url format
+	char *invalid_service_url_format = "some_url_here_without_http";
+	ASSERT_FALSE(push_notification(invalid_service_url_format, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// More test for wrong service url
 }
 
-TEST(Vendor, FirebaseCheckRequestToServer) {
-    #ifdef __APPLE__
-        return;
-    #endif
-    // Initialize all parameters with valid information
-    char *service_url           = FIREBASE_SERVICE_URL;
-    char *service_token         = FIREBASE_SERVICE_TOKEN;
-    char *device_token          = FIREBASE_DEVICE_TOKEN;
-    char *notification_title    = FIREBASE_NOTIFICATION_TITLE;
-    char *notification_body     = FIREBASE_NOTIFICATION_BODY;
-    char *notification_data     = NULL;
-    // Test success case
-    ASSERT_TRUE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Fail because wrong_service_token
-    char *wrong_service_token = "1312";
-    ASSERT_FALSE(push_notification(service_url, wrong_service_token, device_token, notification_title, notification_body, notification_data));
-
-    // Fail because wrong_device_token is invalid
-    char *wrong_device_token = "some device token";
-    ASSERT_FALSE(push_notification(service_url, service_token, wrong_device_token, notification_title, notification_body, notification_data));
+TEST (Vendor, FirebaseCheckRequestToServer) {
+#ifdef __APPLE__
+	return;
+#endif
+	// Initialize all parameters with valid information
+	char *service_url = FIREBASE_SERVICE_URL;
+	char *service_token = FIREBASE_SERVICE_TOKEN;
+	char *device_token = FIREBASE_DEVICE_TOKEN;
+	char *notification_title = FIREBASE_NOTIFICATION_TITLE;
+	char *notification_body = FIREBASE_NOTIFICATION_BODY;
+	char *notification_data = NULL;
+	// Test success case
+	ASSERT_TRUE(push_notification(service_url, service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Fail because wrong_service_token
+	char *wrong_service_token = "1312";
+	ASSERT_FALSE(push_notification(service_url, wrong_service_token, device_token, notification_title, notification_body, notification_data));
+	
+	// Fail because wrong_device_token is invalid
+	char *wrong_device_token = "some device token";
+	ASSERT_FALSE(push_notification(service_url, service_token, wrong_device_token, notification_title, notification_body, notification_data));
 }
 

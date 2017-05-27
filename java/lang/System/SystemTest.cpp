@@ -27,11 +27,12 @@
 extern "C" {
 #include "../../../unit_test.h"
 }
+
 #include "../System/System.hpp"
 
 using namespace Java::Lang;
 
-TEST(JavaLang, SystemOut) {
-    // String *string = new String("Hello World");
-    // System::out::println(string);
+TEST (JavaLang, SystemOut) {
+	// String *string = new String("Hello World");
+	// System::out::println(string);
 }

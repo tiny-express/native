@@ -32,7 +32,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST(JavaLang, ArrayListConstructor) {
+TEST (JavaLang, ArrayListConstructor) {
 //    // Test constructor no argument
 //    ArrayList<int> validArray = {123, 123};
 //    int expect = 0;

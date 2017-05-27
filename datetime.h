@@ -27,7 +27,9 @@
 #ifndef NATIVE_DATETIME_H
 #define NATIVE_DATETIME_H
 #ifdef __linux__
+
 #include <stdint.h>
+
 #elif __APPLE__
 #include <mach/mach_time.h>
 #elif defined _WIN32 || defined __CYGWIN__

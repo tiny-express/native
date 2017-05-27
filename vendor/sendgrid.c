@@ -28,7 +28,6 @@
 #include "../network.h"
 #include "../string.h"
 #include "../validator.h"
-#include "../type.h"
 
 /**
  * Send mail via SendGrid service
@@ -42,36 +41,36 @@
  * @return TRUE | FALSE
  */
 int send_mail(
-    char *service_url,
-    char *service_token,
-    char *mail_from,
-    char *mail_to,
-    char *mail_subject,
-    char *mail_content) {
-
-    if (!is_email(mail_from)
-            || !is_email(mail_to)
-                || !is_url(service_url)
-                    || is_empty(mail_subject)
-                        || is_empty(mail_content)
-                            || is_empty(service_token)) {
-        return FALSE;
-    }
-
-    char *body[2];
-    asprintf(&body[0], SENDGRID_REQUEST_FORMAT, mail_to, mail_subject, mail_from, mail_content);
-    body[1] = '\0';
-
-    char *header[3] = {
-        string_concat("Authorization: Bearer ", service_token),
-        "Content-Type: application/json",
-        '\0'
-    };
-
-    char *response = http_request("POST", service_url, header, body);
-    if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
-        return FALSE;
-    }
-
-    return TRUE;
+	char *service_url,
+	char *service_token,
+	char *mail_from,
+	char *mail_to,
+	char *mail_subject,
+	char *mail_content) {
+	
+	if (!is_email(mail_from)
+	    || !is_email(mail_to)
+	    || !is_url(service_url)
+	    || is_empty(mail_subject)
+	    || is_empty(mail_content)
+	    || is_empty(service_token)) {
+		return FALSE;
+	}
+	
+	char *body[2];
+	asprintf(&body[ 0 ], SENDGRID_REQUEST_FORMAT, mail_to, mail_subject, mail_from, mail_content);
+	body[ 1 ] = '\0';
+	
+	char *header[3] = {
+		string_concat("Authorization: Bearer ", service_token),
+		"Content-Type: application/json",
+		'\0'
+	};
+	
+	char *response = http_request("POST", service_url, header, body);
+	if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
+		return FALSE;
+	}
+	
+	return TRUE;
 }

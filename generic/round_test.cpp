@@ -27,46 +27,47 @@
 extern "C" {
 #include "../unit_test.h"
 }
+
 #include "../library.hpp"
 
-TEST(Generic, Round) {
-
-    double number = 1.5345;
-    double result = round(number, 2);
-    ASSERT_TRUE(result == 1.53);
-
-    result = round(number, 3);
-    ASSERT_TRUE(1.535 == result);
-
-    result = round(number, 0);
-    ASSERT_TRUE(2 == result);
-
-    number = -2.3;
-    result = round(number,0);
-    ASSERT_TRUE(-2.0 == result);
-
-    number = -3.8;
-    result = round(number,0);
-    ASSERT_TRUE(-4 == result);
-
-    number = -5.5;
-    result = round(number,0);
-    ASSERT_TRUE(-6.0 == result);
-
-    float target1 = 2.3;
-    float result1 = round(target1,0);
-    ASSERT_TRUE(2 == result1);
-
-    target1 = 3.8;
-    result1 = round(target1,0);
-    ASSERT_TRUE(4 == result1);
-
-    target1 = -2.3;
-    result1 = round(target1,0);
-    ASSERT_TRUE(-2.0 == result1);
-
-    target1 = -3.8;
-    result1 = round(target1,0);
-    ASSERT_TRUE(-4 == result1);
-
+TEST (Generic, Round) {
+	
+	double number = 1.5345;
+	double result = round(number, 2);
+	ASSERT_TRUE(result == 1.53);
+	
+	result = round(number, 3);
+	ASSERT_TRUE(1.535 == result);
+	
+	result = round(number, 0);
+	ASSERT_TRUE(2 == result);
+	
+	number = -2.3;
+	result = round(number, 0);
+	ASSERT_TRUE(-2.0 == result);
+	
+	number = -3.8;
+	result = round(number, 0);
+	ASSERT_TRUE(-4 == result);
+	
+	number = -5.5;
+	result = round(number, 0);
+	ASSERT_TRUE(-6.0 == result);
+	
+	float target1 = 2.3;
+	float result1 = round(target1, 0);
+	ASSERT_TRUE(2 == result1);
+	
+	target1 = 3.8;
+	result1 = round(target1, 0);
+	ASSERT_TRUE(4 == result1);
+	
+	target1 = -2.3;
+	result1 = round(target1, 0);
+	ASSERT_TRUE(-2.0 == result1);
+	
+	target1 = -3.8;
+	result1 = round(target1, 0);
+	ASSERT_TRUE(-4 == result1);
+	
 }

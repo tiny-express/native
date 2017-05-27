@@ -31,23 +31,26 @@
 #include "../String/String.hpp"
 
 namespace Java {
-    namespace Lang {
-        class System : public virtual Object {
-        public:
-            class in {
-            };
-            class out {
-            public:
-                static void print(String target);
-                static void println(String target);
-            };
-            class err {
-            };
-            static void exit(int status);
-            static void gc();
-            static String getenv(string name);
-        };
-    }
+	namespace Lang {
+		class System : public virtual Object {
+		public:
+			class in {
+			};
+			
+			class out {
+			public:
+				static void print(String target);
+				static void println(String target);
+			};
+			
+			class err {
+			};
+			
+			static void exit(int status);
+			static void gc();
+			static String getenv(string name);
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_SYSTEM_HPP

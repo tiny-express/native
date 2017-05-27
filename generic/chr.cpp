@@ -29,9 +29,9 @@
  * @param char
  * @return char
  */
-char chr(int target){
-    if(target < 0 || target > 255){
-        return -1;
-    }
-    return char( target );
+char chr(int target) {
+	if (target < 0 || target > 255) {
+		return -1;
+	}
+	return char(target);
 }

@@ -29,70 +29,70 @@
 using namespace Java::Lang;
 
 double Math::abs(double a) {
-    return a >= 0 ? a : -a;
+	return a >= 0 ? a : -a;
 }
 
 float Math::abs(float a) {
-    return a >= 0 ? a : -a;
+	return a >= 0 ? a : -a;
 }
 
 int Math::abs(int a) {
-    return a >= 0 ? a : -a;
+	return a >= 0 ? a : -a;
 }
 
 long Math::abs(long a) {
-    return a >= 0 ? a : -a;
+	return a >= 0 ? a : -a;
 }
 
 double Math::floor(double a) {
-    return math_floor(a);
+	return math_floor(a);
 }
 
 double Math::max(double a, double b) {
-    return a > b ? a : b;
+	return a > b ? a : b;
 }
 
 float Math::max(float a, float b) {
-    return a > b ? a : b;
+	return a > b ? a : b;
 }
 
-int	Math::max(int a, int b) {
-    return a > b ? a : b;
+int Math::max(int a, int b) {
+	return a > b ? a : b;
 }
 
 long Math::max(long a, long b) {
-    return a > b ? a : b;
+	return a > b ? a : b;
 }
 
 double Math::min(double a, double b) {
-    return a < b ? a : b;
+	return a < b ? a : b;
 }
 
 float Math::min(float a, float b) {
-    return a < b ? a : b;
+	return a < b ? a : b;
 }
 
-int	Math::min(int a, int b) {
-    return a < b ? a : b;
+int Math::min(int a, int b) {
+	return a < b ? a : b;
 }
 
 double Math::pow(double a, double b) {
-    return math_pow(a, b);
+	return math_pow(a, b);
 }
 
 double Math::random() {
-    srand(time(NULL));
-    return rand();
+	srand(time(NULL));
+	return rand();
 }
 
 long Math::round(double a) {
-    return math_round(a);
+	return math_round(a);
 }
 
 int Math::round(float a) {
-    return math_round(a);
+	return math_round(a);
 }
 
 double Math::sqrt(double a) {
-    return sqrt(a);
+	return sqrt(a);
 }

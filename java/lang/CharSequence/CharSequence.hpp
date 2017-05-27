@@ -30,12 +30,12 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class CharSequence : public virtual Object {
-        public:
-            virtual string toString() const = 0;
-        };
-    }
+	namespace Lang {
+		class CharSequence : public virtual Object {
+		public:
+			virtual string toString() const = 0;
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP

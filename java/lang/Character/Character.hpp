@@ -30,14 +30,14 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Character : public virtual Object {
-        public:
-            Character();
-            Character(char original);
-            ~Character();
-        };
-    }
+	namespace Lang {
+		class Character : public virtual Object {
+		public:
+			Character();
+			Character(char original);
+			~Character();
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_CHARACTER_HPP

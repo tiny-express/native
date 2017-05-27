@@ -27,35 +27,35 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
-TEST(DateTime, Timestamp) {
-    #ifdef __APPLE__
-    return;
-    #endif
-    long first_time = timestamp();
-    int maxN = 10000000;
-    int i = 0;
-    int counter = 0;
-    for (i=0; i<maxN; i++) {
-        counter ++;
-    }
-    long last_time = timestamp();
-    ASSERT_EQUAL(maxN, counter);
-    // Time is greater than 9 ms
-    ASSERT_TRUE((last_time - first_time)/(1000*1000) > 9);
+TEST (DateTime, Timestamp) {
+#ifdef __APPLE__
+	return;
+#endif
+	long first_time = timestamp();
+	int maxN = 10000000;
+	int i = 0;
+	int counter = 0;
+	for (i = 0; i < maxN; i++) {
+		counter++;
+	}
+	long last_time = timestamp();
+	ASSERT_EQUAL(maxN, counter);
+	// Time is greater than 9 ms
+	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
 }
 
-TEST(DateTime, Format) {
-    #ifdef __APPLE__
-        return;
-    #endif
-
-    long timestamp = 1473765499;
-    char *format = "d/m/y";
-    ASSERT_STR("13/09/2016", date(timestamp, format));
-
-    timestamp = 1511208660;
-    ASSERT_STR("20/11/2017", date(timestamp, format));
-
-    format = "y-m-d";
-    ASSERT_STR("2017-11-20", date(timestamp, format));
+TEST (DateTime, Format) {
+#ifdef __APPLE__
+	return;
+#endif
+	
+	long timestamp = 1473765499;
+	char *format = "d/m/y";
+	ASSERT_STR("13/09/2016", date(timestamp, format));
+	
+	timestamp = 1511208660;
+	ASSERT_STR("20/11/2017", date(timestamp, format));
+	
+	format = "y-m-d";
+	ASSERT_STR("2017-11-20", date(timestamp, format));
 }

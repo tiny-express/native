@@ -27,7 +27,7 @@
 #include "../type.h"
 #include <stdio.h>
 
-char* string_default(char *target) {
+char *string_default(char *target) {
 	if (target != NULL) {
 		return target;
 	}

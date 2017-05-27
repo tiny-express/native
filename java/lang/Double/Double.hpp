@@ -30,46 +30,46 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Double : public virtual Number {
-        private:
-            double original;
-        public:
-            Double();
-            Double(double original);
-            Double(const Double &target);
-            ~Double();
-
-        public:
-            char charValue() const;
-            string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
-            string toString() const;
-
-            static Double *parseDouble(String target);
-
-        public:
-            Double operator+(const Double& target);
-            Double operator-(const Double& target);
-            Double operator/(const Double& target);
-            Double operator*(const Double& target);
-
-            boolean operator==(const Double& target) const;
-            boolean operator!=(const Double& target) const;
-            boolean operator<(const Double& target) const;
-            boolean operator>(const Double& target) const;
-            boolean operator<=(const Double& target) const;
-            boolean operator>=(const Double& target) const;
-
-            void operator-=(const Double& target);
-            void operator+=(const Double& target);
-            void operator*=(const Double& target);
-            void operator/=(const Double& target);
-        };
-    }
+	namespace Lang {
+		class Double : public virtual Number {
+		private:
+			double original;
+		public:
+			Double();
+			Double(double original);
+			Double(const Double &target);
+			~Double();
+		
+		public:
+			char charValue() const;
+			string stringValue() const;
+			short shortValue() const;
+			int intValue() const;
+			long longValue() const;
+			float floatValue() const;
+			double doubleValue() const;
+			string toString() const;
+			
+			static Double *parseDouble(String target);
+		
+		public:
+			Double operator+(const Double &target);
+			Double operator-(const Double &target);
+			Double operator/(const Double &target);
+			Double operator*(const Double &target);
+			
+			boolean operator==(const Double &target) const;
+			boolean operator!=(const Double &target) const;
+			boolean operator<(const Double &target) const;
+			boolean operator>(const Double &target) const;
+			boolean operator<=(const Double &target) const;
+			boolean operator>=(const Double &target) const;
+			
+			void operator-=(const Double &target);
+			void operator+=(const Double &target);
+			void operator*=(const Double &target);
+			void operator/=(const Double &target);
+		};
+	}
 }
 #endif//NATIVE_JAVA_LANG_DOUBLE_HPP

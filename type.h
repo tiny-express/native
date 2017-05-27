@@ -30,7 +30,7 @@
 #include <stdint.h>
 #include "json.h"
 
-char* string_default(char* target);
+char *string_default(char *target);
 double number_default(double target);
 
 #define TRUE 1
@@ -41,8 +41,8 @@ double number_default(double target);
 #define NULL 0
 #endif
 
-typedef char* string;
-typedef const char* const_string;
+typedef char *string;
+typedef const char *const_string;
 typedef unsigned char byte;
 
 #endif

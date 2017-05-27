@@ -28,6 +28,7 @@ extern "C" {
 #include "../common.h"
 #include "../string.h"
 }
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -40,7 +41,7 @@ extern "C" {
  * @return int
  */
 int len(char *target) {
-    return length_pointer_char(target);
+	return length_pointer_char(target);
 }
 
 /**
@@ -50,7 +51,7 @@ int len(char *target) {
  * @return int
  */
 int len(std::string target) {
-    return target.length();
+	return target.length();
 }
 
 /**
@@ -60,7 +61,7 @@ int len(std::string target) {
  * @return int
  */
 int len(char **target) {
-    return length_pointer_pointer_char(target);
+	return length_pointer_pointer_char(target);
 }
 
 /**
@@ -70,7 +71,7 @@ int len(char **target) {
  * @return int
  */
 int len(short target) {
-    return length_pointer_char(string_from_short(target));
+	return length_pointer_char(string_from_short(target));
 }
 
 /**
@@ -80,7 +81,7 @@ int len(short target) {
  * @return int
  */
 int len(int target) {
-    return length_pointer_char(string_from_int(target));
+	return length_pointer_char(string_from_int(target));
 }
 
 /**
@@ -90,7 +91,7 @@ int len(int target) {
  * @return int
  */
 int len(long target) {
-    return length_pointer_char(string_from_long(target));
+	return length_pointer_char(string_from_long(target));
 }
 
 /**
@@ -100,7 +101,7 @@ int len(long target) {
  * @return int
  */
 int len(float target) {
-    return length_pointer_char(string_from_float(target));
+	return length_pointer_char(string_from_float(target));
 }
 
 /**
@@ -110,7 +111,7 @@ int len(float target) {
  * @return int
  */
 int len(double target) {
-    return length_pointer_char(string_from_double(target));
+	return length_pointer_char(string_from_double(target));
 }
 
 /**
@@ -119,8 +120,8 @@ int len(double target) {
  * @param target
  * @return int
  */
-int len(std::vector<char*> target) {
-    return (int) target.size();
+int len(std::vector<char *> target) {
+	return (int) target.size();
 }
 
 /**
@@ -130,7 +131,7 @@ int len(std::vector<char*> target) {
  * @return int
  */
 int len(std::vector<std::string> target) {
-    return (int) target.size();
+	return (int) target.size();
 }
 
 /**
@@ -139,8 +140,8 @@ int len(std::vector<std::string> target) {
  * @param target
  * @return int
  */
-int len(std::map<char*, char*> target) {
-    return (int) target.size();
+int len(std::map<char *, char *> target) {
+	return (int) target.size();
 }
 
 /**
@@ -150,6 +151,6 @@ int len(std::map<char*, char*> target) {
  * @return int
  */
 int len(std::map<std::string, std::string> target) {
-    return (int) target.size();
+	return (int) target.size();
 }
 
