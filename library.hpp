@@ -29,12 +29,12 @@
 
 #include "java/IO.hpp"
 #include "java/Lang.hpp"
+#include "java/Net.hpp"
 #include "java/Security.hpp"
-#include "java/Util.hpp"
 #include "java/Vendor.hpp"
+#include "java/Util.hpp"
 
-// In Java this namespace is imported by default
-// so we do the same thing here for C++
+// In Java, Java::Lang is imported by default
 using namespace Java::Lang;
 
-#endif //NATIVE_LIBRARY_HPP
+#endif//NATIVE_LIBRARY_HPP
