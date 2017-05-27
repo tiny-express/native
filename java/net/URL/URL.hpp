@@ -34,7 +34,7 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-//        class URLConnection;
+       // class URLConnection;
         class URL: public virtual Object {
         private:
             String protocol;

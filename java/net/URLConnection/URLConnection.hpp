@@ -40,17 +40,19 @@ namespace Java {
             int connectTimeout;
             int readTimeout;
         protected:
-            URL url;
+            URL *url;
             boolean doInput = true;
             boolean doOutput = false;
             boolean connected = false;
             long ifModifiedSince;
             boolean	allowUserInteraction;
             boolean	useCaches;
+
         public:
             URLConnection();
             URLConnection(URL url);
             ~URLConnection();
+
         public:
             URL getURL();
             void setDoInput(boolean doInput);
