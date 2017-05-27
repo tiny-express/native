@@ -29,7 +29,6 @@
 
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
-#include "../../util/ArrayList/ArrayList.hpp"
 
 namespace Java {
 	namespace Lang {

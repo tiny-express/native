@@ -78,6 +78,7 @@ public:
 public:
 	ArrayIterator<E> begin() const;
 	ArrayIterator<E> end() const;
+	void push(E e);
 	E get(const int index) const;
 	string toString() const;
 
