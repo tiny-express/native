@@ -59,14 +59,14 @@ TEST (Common, SortString) {
 	ASSERT_TRUE(result);
 }
 
-TEST (Common, DistributionCountingSort) {
-	int *array_int = malloc(50 * sizeof(int));
-	int index;
-	for (index = 0; index < 50; ++index) {
-		array_int[ index ] = rand() % ( 10 ) + 1;
-	}
-	distribution_counting_sort(array_int, 50);
-	int result = is_increase_int_array(array_int, 50);
-	ASSERT_TRUE(result);
-}
+//TEST (Common, DistributionCountingSort) {
+//	int *array_int = malloc(50 * sizeof(int));
+//	int index;
+//	for (index = 0; index < 50; ++index) {
+//		array_int[ index ] = rand() % ( 10 ) + 1;
+//	}
+//	distribution_counting_sort(array_int, 50);
+//	int result = is_increase_int_array(array_int, 50);
+//	ASSERT_TRUE(result);
+//}
 
