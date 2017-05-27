@@ -25,6 +25,7 @@
  */
 
 #include "String.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
@@ -43,12 +44,16 @@ String::String(string target) {
 	this->length();
 }
 
+String::String(Array<char> &chars) {
+	this->original = String::fromCharArray(chars).toString();
+	this->size = chars.length;
+}
+
 String::String(Array<byte> &bytes) {
-	ArrayList<char> listCharacters;
+	Array<char> chars;
 	for (byte byte : bytes) {
-		listCharacters.add((char&) byte);
+		chars.push((char) byte);
 	}
-	Array<char> chars = listCharacters.toArray(chars);
 	this->original = String::fromCharArray(chars).toString();
 	this->size = chars.length;
 }
@@ -125,13 +130,12 @@ boolean String::contains(CharSequence &str) {
  * @return Array<byte>
  */
 Array<byte> String::getBytes() const {
-	ArrayList<byte> byteArrayList;
+	Array<byte> bytes;
 	String originalString = this->original;
 	for (char character : originalString.toCharArray()) {
-		byteArrayList.add(0, (byte&) character);
+		bytes.push((byte) character);
 	}
-	Array<byte> bytes;
-	return byteArrayList.toArray(bytes);
+	return bytes;
 }
 
 /**
@@ -357,13 +361,12 @@ String String::replaceAll(String regex, String replacement) const {
  */
 Array<String> String::split(String regex) const {
 	char **splitStrings = string_split(this->original, regex.toString());
-	ArrayList<String> stringArrayList;
+	Array<String> strings;
 	register int index;
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
-		stringArrayList.add((String&) splitStrings[ index ]);
+		strings.push(splitStrings[ index ]);
 	}
-	Array<String> strings = stringArrayList.toArray(strings);
 	return strings;
 }
 
@@ -409,12 +412,11 @@ boolean String::startsWith(String prefix, int toffset) const {
  * @return Array<char>
  */
 Array<char> String::toCharArray() const {
-	ArrayList<char> charArrayList;
+	Array<char> chars;
 	register int index = 0;
 	while (this->original[ index ] != '\0') {
-		charArrayList.add(this->original[ index++ ]);
+		chars.push(this->original[ index++ ]);
 	}
-	Array<char> chars = charArrayList.toArray(chars);
 	return chars;
 }
 
@@ -549,7 +551,7 @@ void String::operator+=(const String &target2) {
 	*this = string_concat(this->original, target2.original);
 }
 
-boolean String::operator==(const String &target2) const {
+bool String::operator==(const String &target2) const {
 	if (string_equals(this->original, target2.toString())) {
 		return true;
 	}
@@ -562,11 +564,11 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-boolean String::operator!=(const String &target2) {
+bool String::operator!=(const String &target2) {
 	return !this->operator==(target2);
 }
 
-boolean String::operator<(const String &target2) const {
+bool String::operator<(const String &target2) const {
 	if (strcmp(this->original, target2.toString()) < 0) {
 		return true;
 	}
