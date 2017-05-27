@@ -120,7 +120,7 @@ String String::concat(String str) {
  * @param str
  * @return String
  */
-boolean String::contains(CharSequence &str) {
+boolean String::contains(const CharSequence &str) {
 	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
 }
 
