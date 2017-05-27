@@ -43,9 +43,9 @@ TEST (JavaLang, StringConstructor) {
 	ASSERT_STR("Hello world", emptyString.toString());
 	
 	// Given byte array for String constructor - Return string
-	Array<byte> bytes = { 65, 66, 67 };
-	String byteString = bytes;
-	ASSERT_STR("ABC", byteString.toString());
+	//Array<byte> bytes = { 65, 66, 67 };
+	//String byteString = bytes;
+	//ASSERT_STR("ABC", byteString.toString());
 	
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";

@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef NATIVE_UTIL_COLLECTION_HPP
-#define NATIVE_UTIL_COLLECTION_HPP
+#ifndef NATIVE_JAVA_UTIL_COLLECTION_HPP
+#define NATIVE_JAVA_UTIL_COLLECTION_HPP
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -46,10 +46,10 @@ namespace Java {
 			boolean add(E &e);
 			boolean addAll(Collection<E> &c);
 			void clear();
-			boolean contains(Object &o);
-			boolean containsAll(Collection<Object> &c);
-			boolean equals(Object &o);
-			int hashCode();
+			boolean contains(Object &o) const;
+			boolean containsAll(Collection<Object> &c) const;
+			boolean equals(Object &o) const;
+			int hashCode() const;
 			boolean isEmpty() const;
 			Iterator<E> &iterator() const;
 			Java::Util::Stream::Stream<E> &parallelStream() const;
