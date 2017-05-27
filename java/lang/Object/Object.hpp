@@ -39,8 +39,8 @@ extern "C" {
 // Define builtin types
 typedef bool boolean;
 
-template <typename E>
-class Array;
+template <typename E> class Array;
+template <typename E> class ArrayIterator;
 
 template <typename E>
 class ArrayIterator {
@@ -50,16 +50,13 @@ public:
 	boolean operator!=(const ArrayIterator<E> &other) const {
 		return _pos != other._pos;
 	}
-	
 	int operator*() const {
 		return _p_vec->get(_pos);
 	}
-	
 	const ArrayIterator<E> &operator++() {
 		++_pos;
 		return *this;
 	}
-
 private:
 	int _pos;
 	const Array<E> *_p_vec;
@@ -68,27 +65,46 @@ private:
 template <typename E>
 class Array  {
 private:
-	E *array;
-	int virtualSize = 4;
-	int realSize;
-	inline void reallocate();
+	std::vector<E> original;
 public:
-	Array();
-	Array(std::initializer_list<E> list);
-	Array(int length);
-	Array(const Array<E> &target);
-	~Array();
+	Array() {
+	}
+	Array(std::initializer_list<E> list) {
+		typename std::initializer_list<E>::iterator it;
+		for (it = list.begin(); it != list.end(); ++it) {
+			original.push_back(*it);
+		}
+		this->length = original.size();
+	}
+	~Array() {};
 	int length;
-
+	ArrayIterator<E> begin() const {
+		return ArrayIterator<E>(this, 0);
+	}
+	ArrayIterator<E> end() const {
+		return ArrayIterator<E>(this, this->length);
+	}
 public:
-	ArrayIterator<E> begin() const;
-	ArrayIterator<E> end() const;
-	void push(E e);
-	E get(const int index) const;
+	void push(E e) {
+		original.push_back(e);
+		this->length = original.size();
+	}
+	E get(const int index) const {
+		return original.at(index);
+	}
 	string toString() const;
-
 public:
-	E &operator[](const int index);
+	E &operator[](const int index) {
+		return this->original.at(index);
+	}
+	Array<E> operator+=(const std::initializer_list<E> &list) {
+		typename std::initializer_list<E>::iterator it;
+		for (it = list.begin(); it != list.end(); ++it) {
+			original.push_back(*it);
+		}
+		this->length = original.size();
+		return *this;
+	}
 };
 
 namespace Java {

@@ -120,7 +120,7 @@ namespace Java {
 			void replaceAll(UnaryOperator<E> &unaryOperator);
 			boolean retainAll(Collection<Object> &c);
 			E &set(int index, E &element);
-			int	size() const override;
+			int	size() const;
 			void sort(Comparator &c);
 			Spliterator<E>	&spliterator() const;
 			List<E>	subList(int fromIndex, int toIndex);
