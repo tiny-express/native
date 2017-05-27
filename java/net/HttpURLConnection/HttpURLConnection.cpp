@@ -29,7 +29,7 @@
 using namespace Java::Net;
 
 HttpURLConnection::HttpURLConnection(URL url) {
-    this->url = &url;
+    this->url = url;
 }
 
 String HttpURLConnection::getMethod() {
