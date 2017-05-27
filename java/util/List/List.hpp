@@ -39,12 +39,11 @@ namespace Java {
 			void add(int index, E &element);
 			boolean addAll(Collection<E> &c);
 			void clear();
-			boolean contains(Object o);
+			boolean contains(Object &o) const;
 			E get(int index);
-			int indexOf(Object o);
+			int indexOf(Object &o);
 			boolean isEmpty();
 			Iterator<E> iterator();
-			
 		};
 	}
 }

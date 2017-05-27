@@ -24,14 +24,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
-#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#ifndef NATIVE_JAVA_UTIL_ARRAY_LIST_ITERATOR_HPP
+#define NATIVE_JAVA_UTIL_ARRAY_LIST_ITERATOR_HPP
 
 namespace Java {
-	namespace IO {
-		class Serializable {
+	namespace Util {
+		template <typename E>
+		class ListIterator {
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#endif//NATIVE_JAVA_UTIL_ARRAY_LIST_ITERATOR_HPP

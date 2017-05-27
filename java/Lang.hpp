@@ -28,7 +28,6 @@
 #define NATIVE_JAVA_LANG_HPP
 
 #include "lang/Appendable/Appendable.hpp"
-#include "lang/Array/Array.hpp"
 #include "lang/AutoCloseable/AutoCloseable.hpp"
 #include "lang/Boolean/Boolean.hpp"
 #include "lang/Byte/Byte.hpp"

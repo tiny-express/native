@@ -24,14 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
-#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#ifndef NATIVE_JAVA_UTIL_FUNCTION_HPP
+#define NATIVE_JAVA_UTIL_FUNCTION_HPP
 
-namespace Java {
-	namespace IO {
-		class Serializable {
-		};
-	}
-}
+#include "function/Consumer/Consumer.hpp"
 
-#endif//NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#endif//NATIVE_JAVA_UTIL_FUNCTION_HPP

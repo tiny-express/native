@@ -36,28 +36,57 @@ extern "C" {
 #include <vector>
 #include <map>
 
+// Define builtin types
 typedef bool boolean;
+
+template <typename E>
+class Array;
+
+template <typename E>
+class ArrayIterator {
+public:
+	ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
+	}
+	boolean operator!=(const ArrayIterator<E> &other) const {
+		return _pos != other._pos;
+	}
+	
+	int operator*() const {
+		return _p_vec->get(_pos);
+	}
+	
+	const ArrayIterator<E> &operator++() {
+		++_pos;
+		return *this;
+	}
+
+private:
+	int _pos;
+	const Array<E> *_p_vec;
+};
+
+template <typename E>
+class Array  {
+public:
+	Array();
+	Array(std::initializer_list<E> list);
+	Array(int length);
+	Array(const Array<E> &target);
+	~Array();
+	int length;
+
+public:
+	ArrayIterator<E> begin() const;
+	ArrayIterator<E> end() const;
+	E get(const int index) const;
+	string toString() const;
+
+public:
+	E &operator[](const int index);
+};
 
 namespace Java {
 	namespace Lang {
-		
-		// Pre-declaration
-		class Object;
-		
-		class Short;
-		
-		class Integer;
-		
-		class Long;
-		
-		class Float;
-		
-		class Double;
-		
-		class Boolean;
-		
-		class String;
-		
 		class Object {
 		protected:
 			virtual string toString() const = 0;

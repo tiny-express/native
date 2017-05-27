@@ -24,14 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
-#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#ifndef NATIVE_JAVA_UTIL_FUNCTION_PREDICATE_HPP
+#define NATIVE_JAVA_UTIL_FUNCTION_PREDICATE_HPP
 
 namespace Java {
-	namespace IO {
-		class Serializable {
-		};
+	namespace Util {
+		namespace Function {
+			template <typename E>
+			class Predicate {
+			};
+		}
 	}
 }
 
-#endif//NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#endif//NATIVE_JAVA_UTIL_FUNCTION_PREDICATE_HPP

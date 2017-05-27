@@ -28,11 +28,14 @@
 #define NATIVE_JAVA_LANG_STRING_HPP
 
 #include "../Object/Object.hpp"
-#include "../Array/Array.hpp"
 #include "../CharSequence/CharSequence.hpp"
+#include "../../util/ArrayList/ArrayList.hpp"
 
 namespace Java {
 	namespace Lang {
+		
+		class String;
+		
 		class String : public virtual CharSequence {
 		private:
 			string original;
