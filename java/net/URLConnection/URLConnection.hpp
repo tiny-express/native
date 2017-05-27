@@ -27,59 +27,6 @@
 #ifndef NATIVE_JAVA_NET_URL_CONNECTION_HPP
 #define NATIVE_JAVA_NET_URL_CONNECTION_HPP
 
-#include "../../lang/Object/Object.hpp"
 #include "../URL/URL.hpp"
-
-using namespace Java::Lang;
-
-namespace Java {
-    namespace Net {
-        class URL;
-        class URLConnection: public virtual Object {
-        private:
-            int connectTimeout;
-            int readTimeout;
-        protected:
-            URL *url;
-            boolean doInput = true;
-            boolean doOutput = false;
-            boolean connected = false;
-            long ifModifiedSince;
-            boolean	allowUserInteraction;
-            boolean	useCaches;
-
-        public:
-            URLConnection();
-            URLConnection(URL url);
-            ~URLConnection();
-
-        public:
-            URL getURL();
-            void setDoInput(boolean doInput);
-            boolean getDoInput();
-            void setDoOutput(boolean doOutput);
-            boolean getDoOutput();
-            void setUseCaches(boolean useCaches);
-            boolean getUseCaches();
-            void setIfModifiedSince(long ifModifiedSince);
-            long getIfModifiedSince();
-            void setReadTimeout(int timeout);
-            int getReadTimeout();
-            void setAllowUserInteraction(boolean allowUserInteraction);
-            boolean	getAllowUserInteraction();
-            void setConnectTimeout(int timeout);
-            int	getConnectTimeout();
-
-            virtual void connect() = 0;
-            String getContentEncoding();
-            int getContentLength();
-            String getContentType();
-//            HashMap< String, Array<String> > getRequestProperties();
-            String getRequestProperty(String key);
-            void setRequestProperty(String key, String value);
-            string toString() const;
-        };
-    }
-}
 
 #endif//NATIVE_JAVA_NET_URL_CONNECTION_HPP

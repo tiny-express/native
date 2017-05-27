@@ -31,7 +31,7 @@
 
 namespace Java {
     namespace Net {
-        class HttpURLConnection: public URLConnection {
+        class HttpURLConnection : public URLConnection {
         protected:
             String method = "GET";
             int	responseCode;

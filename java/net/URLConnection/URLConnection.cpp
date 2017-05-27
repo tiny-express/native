@@ -26,24 +26,23 @@
 
 #include "URLConnection.hpp"
 
-
 using namespace Java::Net;
 
 URLConnection::URLConnection() {
     String urlString = "";
     URL url(urlString);
-    this->url = &url;
+    this->url = url;
 }
 
 URLConnection::URLConnection(URL url) {
-    this->url = &url;
+    this->url = url;
 }
 
 URLConnection::~URLConnection() {
 }
 
 URL URLConnection::getURL() {
-    return *this->url;
+    return this->url;
 }
 
 void URLConnection::setDoInput(boolean doInput) {
@@ -103,5 +102,5 @@ int URLConnection::getConnectTimeout() {
 }
 
 string URLConnection::toString() const {
-    return this->url->toString();
+    return this->url.toString();
 }
