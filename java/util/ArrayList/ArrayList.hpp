@@ -154,7 +154,6 @@ namespace Java {
 			this->array = new E[this->virtualSize];
 			this->realSize = (int) list.size();
 			typename std::initializer_list<E>::iterator it;
-			
 			register int index = 0;
 			for (it = list.begin(); it != list.end(); ++it, ++index) {
 				this->array[ index ] = *it;

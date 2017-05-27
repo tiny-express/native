@@ -29,6 +29,9 @@
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
+#include "../Spliterator/Spliterator.hpp"
+#include "../../util/function/Predicate/Predicate.hpp"
+#include "../../util/stream/Stream/Stream.hpp"
 
 using namespace Java::Lang;
 
@@ -40,18 +43,26 @@ namespace Java {
 		template <typename E>
 		class Collection : public virtual Iterable<E> {
 		public:
-			virtual boolean add(E &e) = 0;
-			virtual boolean addAll(Collection<E> &c) = 0;
-			virtual void clear() = 0;
-			virtual boolean contains(E &e) const = 0;
-			virtual boolean containsAll(Collection<E> &c) const = 0;
-			virtual boolean equals(E &e) const = 0;
-			virtual E get(const int index) = 0;
-			virtual int hashCode() const = 0;
-			virtual boolean isEmpty() const = 0;
-			virtual boolean remove(E &e) = 0;
-			virtual boolean removeAll(Collection<E> &c) = 0;
-			virtual int size() const = 0;
+			boolean add(E &e);
+			boolean addAll(Collection<E> &c);
+			void clear();
+			boolean contains(Object &o);
+			boolean containsAll(Collection<Object> &c);
+			boolean equals(Object &o);
+			int hashCode();
+			boolean isEmpty() const;
+			Iterator<E> &iterator() const;
+			Java::Util::Stream::Stream<E> &parallelStream() const;
+			boolean remove(Object &o);
+			boolean removeAll(Collection<Object> &c);
+			boolean removeIf(Java::Util::Function::Predicate<E> &filter);
+			boolean retainAll(Collection<Object> &c);
+			int size() const;
+			Spliterator<E> &spliterator() const;
+			Java::Util::Stream::Stream<E> &stream() const;
+			Array<Object> &toArray() const;
+			template <typename T>
+			Array<T> toArray(Array<T> &a) const;
 		};
 	}
 }
