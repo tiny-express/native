@@ -47,7 +47,7 @@ pthread_t set_interval(void *callback, unsigned int milliseconds) {
 	argument->callback = callback;
 	int error = pthread_create(&thread, NULL, loop, (void *) argument);
 	if (error) {
-		printf("Error\n");
+		printf("Error when set_interval pthread_t\n");
 		fflush(stdout);
 	}
 	return thread;

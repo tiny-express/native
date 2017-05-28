@@ -339,8 +339,12 @@ namespace Java {
 			this->realSize = target.realSize;
 			this->virtualSize = target.virtualSize;
 			this->array = new E[this->virtualSize];
-			
-			register int index = 0;
+
+			#ifdef __APPLE__
+				int index = 0;
+			#elif __linux_
+				register int index = 0;
+			#endif
 			for (index = 0; index < this->realSize; ++index) {
 				this->push(target[ index ]);
 			}

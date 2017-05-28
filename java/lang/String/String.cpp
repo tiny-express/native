@@ -155,7 +155,11 @@ boolean String::endsWith(String suffix) {
  */
 String String::fromCharArray(Array<char> &chars) {
 	string str = (string) malloc(( chars.length() + 1 ) * sizeof(char));
-	register int index = 0;
+	#ifdef __APPLE__
+		int index = 0;
+	#elif __linux_
+		register int index = 0;
+	#endif
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
@@ -413,7 +417,11 @@ boolean String::startsWith(String prefix, int toffset) const {
  */
 Array<char> String::toCharArray() const {
 	Array<char> chars;
-	register int index = 0;
+	#ifdef __APPLE__
+		int index = 0;
+	#elif __linux_
+		register int index = 0;
+	#endif
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
