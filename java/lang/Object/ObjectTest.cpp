@@ -44,6 +44,12 @@ TEST(JavaLang, DataTypeByte) {
 }
 
 TEST(JavaLang, DataTypeArray) {
+	// Array empty initialization
+	Array<String> emptyStrings;
+	emptyStrings.push("Food Tiny");
+	emptyStrings.push("Hello World");
+	ASSERT_EQUAL(2, emptyStrings.length);
+	
 	// Array from initialize list and length property
 	Array<byte> bytes = {64, 65, 66};
 	ASSERT_EQUAL(3, bytes.length);
