@@ -72,7 +72,7 @@ TEST(JavaLang, DataTypeArray) {
 	initializedStrings += {"Hello", "World"};
 	ASSERT_EQUAL(4, initializedStrings.length);
 	
-	// Retrieve an element in existig array
+	// Retrieve  elements from an existing array
 	ASSERT_STR("Food", initializedStrings.get(0).toString());
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
