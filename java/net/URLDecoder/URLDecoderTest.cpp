@@ -24,14 +24,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "URLEncoder.hpp"
-
-using namespace Java::Net;
-
-String UrlEncoder::encode(String s) {
-    return String::valueOf(url_encode(s.toString()));
+extern "C" {
+#include "../../../unit_test.h"
 }
 
-String UrlEncoder::encode(String s, String enc) {
-    return "";
+#include "URLDecoder.hpp"
+
+using namespace Java::Net;
+using namespace Java::Lang;
+
+TEST(JavaNet, URLDecodeString) {
+    String target = "Qu%c3%a1n+%c4%83n";
+    String result = URLDecoder::decode(target);
+    char *expect = "Quán ăn";
+    ASSERT_STR(expect, result.toString());
+}
+
+TEST(JavaNet, UrlDecodeStringWithCharacterEncoding) {
+
 }

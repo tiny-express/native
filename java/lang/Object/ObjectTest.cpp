@@ -75,4 +75,10 @@ TEST(JavaLang, DataTypeArray) {
 	// Retrieve  elements from an existing array
 	ASSERT_STR("Food", initializedStrings.get(0).toString());
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
+
+    length = 0;
+	for (String element : initializedStrings) {
+		length ++;
+	}
+    ASSERT_EQUAL(4, length);
 }
