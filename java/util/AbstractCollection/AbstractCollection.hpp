@@ -36,10 +36,10 @@ namespace Java {
 	namespace Util {
 		template <typename E>
 		class AbstractCollection : public virtual Object, public virtual Collection<E> {
-		//virtual Abstractllection() = 0;
-		//virtual ~AbstractCollection() = 0;
-		
-		//define functions
+		protected:
+			string toString() const final {
+				return (string) "";
+			}
 		};
 	}
 }

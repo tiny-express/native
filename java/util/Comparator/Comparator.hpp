@@ -34,8 +34,8 @@ using namespace Java::Lang;
 
 namespace Java {
 	namespace Util {
+		template <typename E>
 		class Comparator {
-		
 		};
 	}
 }

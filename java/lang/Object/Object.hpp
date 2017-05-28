@@ -109,6 +109,7 @@ public:
 
 namespace Java {
 	namespace Lang {
+		class String;
 		class Object {
 		protected:
 			virtual string toString() const = 0;
