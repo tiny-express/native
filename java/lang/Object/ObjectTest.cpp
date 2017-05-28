@@ -63,16 +63,16 @@ TEST(JavaLang, DataTypeArray) {
 	}
 	ASSERT_EQUAL(5 , length);
 	
-	// Modify element in array
+	// Modify an element in array
 	bytes[0] = 63;
 	ASSERT_EQUAL(63, bytes[0]);
 	
-	// Test merging array
+	// Merge two arrays with appendable
 	Array<String> initializedStrings = { "Food", "Tiny"};
 	initializedStrings += {"Hello", "World"};
 	ASSERT_EQUAL(4, initializedStrings.length);
 	
-	// Test get element from array
+	// Retrieve an element in existig array
 	ASSERT_STR("Food", initializedStrings.get(0).toString());
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
