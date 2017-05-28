@@ -68,7 +68,11 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_EQUAL(63, bytes[0]);
 	
 	// Test merging array
-	Array<String>strings = { "Food", "Tiny"};
-	strings += {"Hello", "World"};
-	ASSERT_EQUAL(4, strings.length);
+	Array<String> initializedStrings = { "Food", "Tiny"};
+	initializedStrings += {"Hello", "World"};
+	ASSERT_EQUAL(4, initializedStrings.length);
+	
+	// Test get element from array
+	ASSERT_STR("Food", initializedStrings.get(0).toString());
+	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
