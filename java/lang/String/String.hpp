@@ -95,7 +95,7 @@ namespace Java {
 			void operator+=(const String &target);
 			boolean operator<(const String &target) const;
 			boolean operator==(const String &target) const;
-			boolean operator!=(const String &target);
+			boolean operator!=(const String &target) const;
 			
 			friend String operator+(const_string target1, String const &target2) {
 				String result;

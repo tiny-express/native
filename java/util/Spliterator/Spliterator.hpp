@@ -30,7 +30,10 @@
 namespace Java {
 	namespace Util {
 		template <typename E>
-		class Spliterator;
+		class Spliterator {
+		public:
+			Spliterator();
+		};
 	}
 }
 

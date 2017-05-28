@@ -564,7 +564,7 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-bool String::operator!=(const String &target2) {
+bool String::operator!=(const String &target2) const {
 	return !this->operator==(target2);
 }
 
