@@ -35,13 +35,16 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ArrayListConstructor) {
-	ArrayList<String> strings;
+	// Standard declaration
+	//ArrayList<String> stringArrayList;
+	//stringArrayList.add((String&) "Food");
+	//stringArrayList.add((String&) "Tiny");
+	//stringArrayList.add((String&) "Hello");
+	//stringArrayList.add((String&) "World");
+	//ASSERT_EQUAL(4, stringArrayList.size());
 	
-//	string.
-//	strings.add((String&) "Tiny");
-//	strings.add((String&) "Hello");
-//	strings.add((String&) "World");
-//	ASSERT_EQUAL(4, strings.size());
+	// Java style declaration
+	// List *strings = new ArrayList<String>();
 }
 
 //TEST(JavaLang, ArrayListDestructor) {

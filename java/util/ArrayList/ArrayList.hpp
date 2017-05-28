@@ -71,71 +71,37 @@ namespace Java {
 		};
 		template <typename E>
 		class ArrayList :
-			//public virtual AbstractList<E>,
-			//public virtual Serializable,
-			//public virtual Cloneable,
+			public virtual AbstractList<E>,
+			public virtual Serializable,
+			public virtual Cloneable,
 			//public virtual List<E>,
 			public virtual RandomAccess {
 		private:
-			E *array;
-			int virtualSize = 4;
-			int realSize;
-			void reallocate() {
-				if (this->realSize >= this->virtualSize - 4) {
-					this->virtualSize = this->virtualSize < 2;
-					E *newArray = new E[this->virtualSize];
-					memcpy(newArray, this->array, ( this->realSize * sizeof(E)));
-					delete[]this->array;
-					this->array = newArray;
-				}
-			}
+			std::vector<E> original;
 		public:
 			ArrayList() {
-				this->array = new E[this->virtualSize];
 			}
 			ArrayList(Collection<E> &c) {
-				this->virtualSize = c.size() << 2;
-				this->realSize = c.size();
-				this->array = new E[this->virtualSize];
-				register int index;
-				Iterator<E> it = c.iterator();
-				while (it.hasNext()) {
-					this->array[index] = it;
-					it.next();
-				}
 			}
 			ArrayList(int initialCapacity) {
-				this->virtualSize = initialCapacity << 2;
-				this->realSize = initialCapacity;
-				this->array = new E[this->virtualSize];
 			}
 			~ArrayList() {
-				delete[]this->array;
-				this->realSize = this->virtualSize;
-			}
-			string toString() {
-				return AbstractCollection<E>::toString();
 			}
 		public:
 			ArrayListIterator<E> begin() const {
 				return ArrayListIterator<E>(this, 0);
 			}
 			ArrayListIterator<E> end() const {
-				return ArrayListIterator<E>(this, this->realSize);
+				return original.end();
 			}
 		public:
 			boolean add(E &e) {
-				this->array[ this->realSize ] = e;
-				this->realSize++;
-				this->reallocate();
+				original.size();
+				original.push_back(e);
+				return true;
 			}
 			void add(int index, E &element)  {
-				register int loopIndex;
-				for (loopIndex = this->realSize - 1; loopIndex >= index; --loopIndex) {
-					this->array[ loopIndex + 1 ] = this->array[ loopIndex ];
-				}
-				this->realSize++;
-				this->reallocate();
+				// TODO
 			}
 			boolean addAll(Collection<E> &c) {
 				// TODO
@@ -146,10 +112,7 @@ namespace Java {
 				return true;
 			}
 			void clear() {
-				delete[]this->array;
-				this->realSize = 0;
-				this->virtualSize = 4;
-				this->array = new E[this->virtualSize];
+				// TODO
 			}
 			Object &clone() {
 				// TODO
@@ -166,16 +129,14 @@ namespace Java {
 			void forEach(Consumer<E> &action) const {
 			}
 			E &get(int index) const {
-				// TODO
-				E *e = new E();
-				return *e;
+				return (E&) original.at(index);
 			}
 			int indexOf(Object &o) const {
 				// TODO
 				return 0;
 			}
 			boolean isEmpty() const {
-				return this->realSize == 0;
+				return original.empty();
 			}
 			Iterator<E> &iterator() const {
 				// TODO
@@ -226,8 +187,7 @@ namespace Java {
 				return *e;
 			}
 			int	size() const {
-				// TODO
-				return this->realSize;
+				return original.size();
 			}
 			void sort(Comparator<E> &c) {
 				// TODO
@@ -237,11 +197,11 @@ namespace Java {
 				Spliterator<E> *spliterator = new Spliterator<E>();
 				return *spliterator;
 			}
-			List<E> &subList(int fromIndex, int toIndex) const {
-				// TODO
-				List<E> *list = new ArrayList<E>();
-				return *list;
-			}
+//			List<E> &subList(int fromIndex, int toIndex) const {
+//				// TODO
+//				List<E> *list = new ArrayList<E>();
+//				return *list;
+//			}
 			Array<Object>	&toArray() {
 				// TODO
 				Array<Object> objects;

@@ -90,9 +90,11 @@ public:
 		this->length = original.size();
 	}
 	E get(const int index) const {
-		return original.at(index);
+		return (E) original.at(index);
 	}
-	string toString() const;
+	string toString() {
+		return (string ) "";
+	}
 public:
 	E &operator[](const int index) {
 		return this->original.at(index);
@@ -111,8 +113,8 @@ namespace Java {
 	namespace Lang {
 		class String;
 		class Object {
-		protected:
-			virtual string toString() const = 0;
+		public:
+			string toString() {}
 		};
 	}
 }

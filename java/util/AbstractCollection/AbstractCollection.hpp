@@ -36,8 +36,8 @@ namespace Java {
 	namespace Util {
 		template <typename E>
 		class AbstractCollection : public virtual Object, public virtual Collection<E> {
-		protected:
-			string toString() const final {
+		public:
+			string toString() const {
 				return (string) "";
 			}
 		};

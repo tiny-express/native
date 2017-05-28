@@ -42,25 +42,37 @@ namespace Java {
 		
 		template <typename E>
 		class Collection : public virtual Iterable<E> {
-		protected:
+		public:
 			virtual boolean add(E &e) = 0;
 			virtual boolean addAll(Collection<E> &c) = 0;
 			virtual void clear() = 0;
 			virtual boolean contains(Object &o) const = 0;
-			virtual  boolean containsAll(Collection<Object> &c) const = 0;
+			 boolean containsAll(Collection<Object> &c) {
+				return true;
+			}
 			virtual boolean equals(Object &o) const = 0;
 			virtual int hashCode() const = 0;
 			virtual boolean isEmpty() const = 0;
 			virtual Iterator<E> &iterator() const = 0;
-			virtual Java::Util::Stream::Stream<E> &parallelStream() const = 0;
+			Java::Util::Stream::Stream<E> &parallelStream() {
+			}
 			virtual boolean remove(Object &o) = 0;
 			virtual boolean removeAll(Collection<Object> &c) = 0;
 			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter) = 0;
 			virtual boolean retainAll(Collection<Object> &c) = 0;
 			virtual int size() const  = 0;
-			virtual Spliterator<E> &spliterator() const = 0;
-			virtual Java::Util::Stream::Stream<E> &stream() const = 0;
-			virtual Array<Object> &toArray() const = 0;
+			Spliterator<E> &spliterator() {
+				Spliterator<E> spliterator;
+				return spliterator;
+			}
+			Java::Util::Stream::Stream<E> &stream() {
+				Java::Util::Stream::Stream<E> *stream = new Java::Util::Stream::Stream<E>();
+				return *stream;
+			}
+			Array<Object> &toArray() {
+				Array<Object> *array = new Array<Object>();
+				return *array;
+			}
 			template <typename T>
 			Array<T> toArray(Array<T> &a) const;
 		};

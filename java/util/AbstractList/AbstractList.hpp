@@ -82,14 +82,19 @@ namespace Java {
 				ListIterator<E> *listIterator = new ListIterator<E>();
 				return *listIterator;
 			}
-			E remove(int index);
+			E remove(int index) {
+				// TODO
+				E *e = new E();
+				return *e;
+			}
 			E set(int index, E element) const {
 				// TODO
 				E *e = new E();
 				return e;
 			}
-			List<E>	&subList(int fromIndex, int toIndex) const {
-			}
+//			List<E>	&subList(int fromIndex, int toIndex) const {
+//
+//			}
 		};
 	}
 }
