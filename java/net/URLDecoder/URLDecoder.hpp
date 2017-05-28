@@ -24,14 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "URLEncoder.hpp"
+#ifndef NATIVE_JAVA_NET_URL_ENCODER_HPP
+#define NATIVE_JAVA_NET_URL_ENCODER_HPP
 
-using namespace Java::Net;
+#include "../../lang/String/String.hpp"
 
-String UrlEncoder::encode(String s) {
-    return String::valueOf(url_encode(s.toString()));
+using namespace Java::Lang;
+
+namespace Java {
+    namespace Net {
+        class URLDecoder : public virtual Object {
+        public:
+            static String decode(String s);
+            static String decode(String s, String enc);
+        };
+    }
 }
 
-String UrlEncoder::encode(String s, String enc) {
-    return "";
-}
+#endif
