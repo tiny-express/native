@@ -120,7 +120,7 @@ String String::concat(String str) {
  * @param str
  * @return String
  */
-boolean String::contains(CharSequence &str) {
+boolean String::contains(const CharSequence &str) {
 	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
 }
 
@@ -143,7 +143,7 @@ Array<byte> String::getBytes() const {
  * @param suffix
  * @return
  */
-boolean String::endsWith(String suffix) {
+boolean String::endsWith(const String &suffix) {
 	return string_endswith(this->original, suffix.original);
 }
 

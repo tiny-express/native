@@ -23,3 +23,219 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Double.hpp"
+
+using namespace Java::Lang;
+
+/**
+ * Integer initialization
+ *
+ * @param original
+ */
+Double::Double() {
+	this->original = 0;
+}
+
+/**
+ * Double initialization
+ *
+ * @param original
+ */
+Double::Double(double original) {
+	this->original = original;
+}
+
+/**
+ * Double initialization
+ *
+ * @param original
+ */
+Double::Double(const Double &doubleNumber) {
+	this->original = doubleNumber.original;
+}
+
+Double::~Double() {
+}
+
+/**
+ * Parse double
+ *
+ * @param target
+ * @return double
+ */
+Double *Double::parseDouble(String target) {
+	return new Double(string_to_double(target.toString()));
+}
+
+/**
+ * Double to String
+ *
+ * @return String
+ */
+string Double::toString() const {
+	return string_from_double(this->original);
+}
+
+/**
+ * Double to Char
+ *
+ * @return char
+ */
+char Double::charValue() const {
+	return string_to_char(string_from_double(this->original));
+}
+
+/**
+ * Double to String
+ *
+ * @return CString
+ */
+string Double::stringValue() const {
+	return String::valueOf(this->original).toString();
+}
+
+/**
+ * Short value of Double
+ *
+ * @return short
+ */
+short Double::shortValue() const {
+	return this->original;
+}
+
+/**
+ * Double value in Integer
+ *
+ * @return int
+ */
+int Double::intValue() const {
+	return this->original;
+}
+
+/**
+ * Double value in Long
+ *
+ * @return long
+ */
+long Double::longValue() const {
+	return this->original;
+}
+
+/**
+ * Double value in float
+ *
+ * @return float
+ */
+float Double::floatValue() const {
+	return (float) this->original;
+}
+
+/**
+ * Double value in double
+ *
+ * @return double
+ */
+double Double::doubleValue() const {
+	return (double) this->original;
+}
+
+/**
+ * Make a summation with target Long
+ *
+ * @return Double
+ */
+Double Double::operator+(const Double &target) {
+	return this->original + target.original;
+}
+
+/**
+ * Make a subtraction with target Double
+ *
+ * @return Double
+ */
+Double Double::operator-(const Double &target) {
+	return this->original - target.original;
+}
+
+/**
+ * Make a multiple from this Double with target
+ *
+ * @return Double
+ */
+Double Double::operator*(const Double &target) {
+	return ( this->original * target.original );
+}
+
+/**
+ *  Make a division from this Double with target
+ *
+ * @return Double
+ */
+Double Double::operator/(const Double &target) {
+	return ( this->original / target.original );
+}
+
+// /**
+//  * Make a modulo from this Double with target
+//  *
+//  * @return Double
+//  */
+// Double Double::operator%(const Double &target) {
+// 	return ( this->original % target.original );
+// }
+
+/**
+ * Compare this Double is equal target
+ *
+ * @return bool
+ */
+boolean Double::operator==(const Double &target) const {
+	return this->original == target.original;
+}
+
+/**
+ * Compare this Double is not equal target
+ *
+ * @return bool
+ */
+boolean Double::operator!=(const Double &target) const {
+	return !this->operator==(target);
+}
+
+/**
+ * Compare this Double is less than target
+ *
+ * @return bool
+ */
+boolean Double::operator<(const Double &target) const {
+	return this->original < target.original;
+}
+
+/**
+ * Compare this Double is more than target
+ *
+ * @return bool
+ */
+boolean Double::operator>(const Double &target) const {
+	return this->original > target.original;
+}
+
+/**
+ * Compare this Double is equal or less than target
+ *
+ * @return bool
+ */
+boolean Double::operator<=(const Double &target) const {
+	return this->original <= target.original;
+}
+
+/**
+ *  Compare this Double is equal or more than target
+ *
+ * @return bool
+ */
+boolean Double::operator>=(const Double &target) const {
+	return this->original >= target.original;
+}
+
