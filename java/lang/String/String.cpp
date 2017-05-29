@@ -155,11 +155,11 @@ boolean String::endsWith(const String &suffix) {
  */
 String String::fromCharArray(Array<char> &chars) {
 	string str = (string) malloc(( chars.length + 1 ) * sizeof(char));
-	#ifdef __APPLE__
-		int index = 0;
-	#elif __linux_
-		register int index = 0;
+
+    #ifndef __APPLE__
+        register
     #endif
+    int index = 0;
 
 	for (char character : chars) {
 		str[ index++ ] = character;
@@ -189,7 +189,12 @@ int String::indexOf(int ch, int fromIndex) const {
 	if (fromIndex > this->size) {
 		return -1;
 	}
-	register int index;
+
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) ch) {
 			return index;
@@ -238,7 +243,11 @@ boolean String::isEmpty() const {
  * @return int
  */
 int String::lastIndexOf(int ch) {
-	register int index;
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -255,7 +264,11 @@ int String::lastIndexOf(int ch) {
  * @return int
  */
 int String::lastIndexOf(int ch, int fromIndex) {
-	register int index;
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -367,7 +380,12 @@ String String::replaceAll(String regex, String replacement) const {
 Array<String> String::split(String regex) const {
 	char **splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
-	register int index;
+
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
@@ -401,10 +419,18 @@ boolean String::startsWith(String prefix, int toffset) const {
 	if (original_length < prefix_length || toffset > ( original_length - prefix_length )) {
 		return FALSE;
 	}
-	register int i = 0;
-	register int j = toffset;
-	for (i; i < prefix_length; i++) {
-		if (prefix.original[ i ] != this->original[ j ]) {
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
+    #ifndef __APPLE__
+        register
+    #endif
+    int j = toffset;
+
+	for (; index < prefix_length; index++) {
+		if (prefix.original[ index ] != this->original[ j ]) {
 			return FALSE;
 		}
 		j++;
@@ -418,11 +444,12 @@ boolean String::startsWith(String prefix, int toffset) const {
  */
 Array<char> String::toCharArray() const {
 	Array<char> chars;
-	#ifdef __APPLE__
-		int index = 0;
-	#elif __linux_
-		register int index = 0;
-	#endif
+
+    #ifndef __APPLE__
+        register
+    #endif
+    int index = 0;
+
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
