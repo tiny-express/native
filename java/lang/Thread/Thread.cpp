@@ -26,6 +26,8 @@
 
 #include "Thread.hpp"
 
+using namespace Java::Lang;
+
 Thread::Thread() {
     this->original = NULL;
 }
@@ -103,11 +105,4 @@ string Thread::toString() const {
  */
 pthread_t Thread::getCurrentThread() {
     return this->original;
-}
-
-/**
- * Return current Runnable inside for testing
- */
-Runnable& Thread::getTarget() {
-    return this->target;
 }

@@ -28,11 +28,14 @@
 #define NATIVE_JAVA_LANG_STRING_HPP
 
 #include "../Object/Object.hpp"
-#include "../Array/Array.hpp"
 #include "../CharSequence/CharSequence.hpp"
+
 
 namespace Java {
 	namespace Lang {
+		
+		class String;
+		
 		class String : public virtual CharSequence {
 		private:
 			string original;
@@ -44,15 +47,25 @@ namespace Java {
 			String(Array<char> &chars);
 			String(Array<byte> &bytes);
 			String(const String &target);
+
 			virtual ~String();
 		public:
 			char charAt(int index);
+			int codePoinAt();
+			int codePoinBefore();
+			int codePointCount(int beginIndex, int endIndex);
 			int compareTo(String anotherString);
 			int compareToIgnoreCase(String str);
 			String concat(String str);
-			boolean contains(CharSequence &str);
+			boolean contains(const CharSequence &str);
+			boolean contentEquals(const CharSequence &cs);
+			//boolean contentEquals(const StringBuffer &str);
+			static String copyValueOf(const Array<char> &data);
+			static String copyValueOf(const Array<char> &data, int offset, int count);
+			boolean	endsWith(const String &suffix);
+			boolean	equals(const Object &anObject);
 			Array<byte> getBytes() const;
-			boolean endsWith(String suffix);
+			//Array<byte> getBytes(const Charset &) const;
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
@@ -69,7 +82,7 @@ namespace Java {
 			String replaceAll(String regex, String replacement) const;
 			String replaceFirst(String regex, String replacement) const;
 			Array<String> split(String regex) const;
-			String split(String regex, int limit) const;
+			Array<String> split(String regex, int limit) const;
 			boolean startsWith(String prefix) const;
 			boolean startsWith(String prefix, int toffset) const;
 			Array<char> toCharArray() const;
@@ -93,7 +106,7 @@ namespace Java {
 			void operator+=(const String &target);
 			boolean operator<(const String &target) const;
 			boolean operator==(const String &target) const;
-			boolean operator!=(const String &target);
+			boolean operator!=(const String &target) const;
 			
 			friend String operator+(const_string target1, String const &target2) {
 				String result;

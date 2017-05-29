@@ -28,26 +28,23 @@ extern "C" {
 #include "../../../unit_test.h"
 }
 
+#include "../List/List.hpp"
+#include "../../lang/String/String.hpp"
 #include "ArrayList.hpp"
 
 using namespace Java::Lang;
 
 TEST (JavaLang, ArrayListConstructor) {
-//    // Test constructor no argument
-//    ArrayList<int> validArray = {123, 123};
-//    int expect = 0;
-//    int result = validArray.size();
-//    ASSERT_EQUAL(expect, result);
-
-//    // Test constructor with size
-//    ArrayList<int> validArray1(10);
-//    expect = 10;
-//    result = validArray1.size();
-//    ASSERT_EQUAL(expect, result);
-//
-//    // Test constructor with initialize list
-//    ArrayList<byte> bytes = {64, 65, 66};
-//    ASSERT_EQUAL(3, bytes.size());
+	// Standard declaration
+	//ArrayList<String> stringArrayList;
+	//stringArrayList.add((String&) "Food");
+	//stringArrayList.add((String&) "Tiny");
+	//stringArrayList.add((String&) "Hello");
+	//stringArrayList.add((String&) "World");
+	//ASSERT_EQUAL(4, stringArrayList.size());
+	
+	// Java style declaration
+	// List *strings = new ArrayList<String>();
 }
 
 //TEST(JavaLang, ArrayListDestructor) {

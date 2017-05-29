@@ -46,7 +46,7 @@ String::String(string target) {
 
 String::String(Array<char> &chars) {
 	this->original = String::fromCharArray(chars).toString();
-	this->size = chars.length();
+	this->size = chars.length;
 }
 
 String::String(Array<byte> &bytes) {
@@ -55,7 +55,7 @@ String::String(Array<byte> &bytes) {
 		chars.push((char) byte);
 	}
 	this->original = String::fromCharArray(chars).toString();
-	this->size = chars.length();
+	this->size = chars.length;
 }
 
 String::String(const String &target) {
@@ -120,7 +120,7 @@ String String::concat(String str) {
  * @param str
  * @return String
  */
-boolean String::contains(CharSequence &str) {
+boolean String::contains(const CharSequence &str) {
 	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
 }
 
@@ -143,7 +143,7 @@ Array<byte> String::getBytes() const {
  * @param suffix
  * @return
  */
-boolean String::endsWith(String suffix) {
+boolean String::endsWith(const String &suffix) {
 	return string_endswith(this->original, suffix.original);
 }
 
@@ -154,12 +154,13 @@ boolean String::endsWith(String suffix) {
  * @return String
  */
 String String::fromCharArray(Array<char> &chars) {
-	string str = (string) malloc(( chars.length() + 1 ) * sizeof(char));
+	string str = (string) malloc(( chars.length + 1 ) * sizeof(char));
 	#ifdef __APPLE__
 		int index = 0;
 	#elif __linux_
 		register int index = 0;
-	#endif
+    #endif
+
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
@@ -572,7 +573,7 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-bool String::operator!=(const String &target2) {
+bool String::operator!=(const String &target2) const {
 	return !this->operator==(target2);
 }
 

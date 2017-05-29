@@ -32,7 +32,7 @@ namespace Java {
     namespace Lang {
         class Runnable {
         public:
-            virtual void run() const;
+            virtual void run() const = 0;
         };
     }
 }

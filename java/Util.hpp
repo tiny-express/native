@@ -37,6 +37,7 @@
 #include "util/Calendar/Calendar.hpp"
 #include "util/Collection/Collection.hpp"
 #include "util/Collections/Collections.hpp"
+#include "util/Comparator/Comparator.hpp"
 #include "util/Currency/Currency.hpp"
 #include "util/Date/Date.hpp"
 #include "util/EnumMap/EnumMap.hpp"
@@ -55,6 +56,7 @@
 #include "util/Scanner/Scanner.hpp"
 #include "util/Set/Set.hpp"
 #include "util/SimpleTimeZone/SimpleTimeZone.hpp"
+#include "util/Spliterator/Spliterator.hpp"
 #include "util/Stack/Stack.hpp"
 #include "util/Timer/Timer.hpp"
 #include "util/TimerTask/TimerTask.hpp"
@@ -62,5 +64,7 @@
 #include "util/TreeSet/TreeSet.hpp"
 #include "util/UUID/UUID.hpp"
 #include "util/Vector/Vector.hpp"
+
+#include "util/Function.hpp"
 
 #endif//NATIVE_JAVA_UTIL_HPP
