@@ -37,19 +37,19 @@ TEST (JavaLang, StringConstructor) {
 	String nullString;
 	ASSERT_STR("", nullString.toString());
 	
-	// Given empty value for String constructor and assign value - Return string
-	String emptyString;
-	emptyString = (string) "Hello world";
-	ASSERT_STR("Hello world", emptyString.toString());
-	
-	// Given byte array for String constructor - Return string
-	//Array<byte> bytes = { 65, 66, 67 };
-	//String byteString = bytes;
-	//ASSERT_STR("ABC", byteString.toString());
-	
-	// Given constant string for String constructor - Return string
-	String normalString = "Hello world";
-	ASSERT_STR("Hello world", normalString.toString());
+//	// Given empty value for String constructor and assign value - Return string
+//	String emptyString;
+//	emptyString = (string) "Hello world";
+//	ASSERT_STR("Hello world", emptyString.toString());
+//
+//	// Given byte array for String constructor - Return string
+//	Array<byte> bytes = { 65, 66, 67 };
+//	String byteString = bytes;
+//	ASSERT_STR("ABC", byteString.toString());
+//
+//	// Given constant string for String constructor - Return string
+//	String normalString = "Hello world";
+//	ASSERT_STR("Hello world", normalString.toString());
 }
 
 TEST (JavaLang, StringDestructor) {
