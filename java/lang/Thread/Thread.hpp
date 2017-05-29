@@ -65,7 +65,7 @@ namespace Java {
 
             //Adds-on functions
             pthread_t getCurrentThread();
-            //Runnable& getTarget();
+            Runnable& getTarget();
         };
     }
 }

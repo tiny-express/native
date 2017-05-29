@@ -30,6 +30,7 @@ using namespace Java::Lang;
 
 Thread::Thread() {
     this->original = NULL;
+    this->target = NULL;
 }
 
 //Thread::Thread(Runnable &target2) {
@@ -97,7 +98,7 @@ void Thread::setName(string target) {
  * Returns a string representation of this thread, including the thread's name, priority, and thread group.
  */
 string Thread::toString() const {
-    //TODO
+    return "";
 }
 
 /**
