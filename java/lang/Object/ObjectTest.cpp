@@ -73,11 +73,11 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_EQUAL(4, initializedStrings.length);
 	
 	// Loop in string array
-	int totalCharacter  = 0;
+	int totalCharacters  = 0;
 	for (String element : initializedStrings) {
-		totalCharacter += element.length();
+		totalCharacters += element.length();
 	}
-	ASSERT_EQUAL(18, totalCharacter);
+	ASSERT_EQUAL(18, totalCharacters);
 	
 	// Retrieve  elements from an existing array
 	ASSERT_STR("Food", initializedStrings.get(0).toString());
