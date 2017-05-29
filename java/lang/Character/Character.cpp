@@ -23,3 +23,46 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Character.hpp"
+
+using namespace Java::Lang;
+
+Character::Character() {
+    this->original = '\0';
+}
+
+Character::Character(char original) {
+    this ->original = original;
+}
+
+Character::~Character() {
+}
+
+char Character::charValue() {
+    return this->original;
+}
+
+int Character::charCount(int codePoint) {
+    if(codePoint >= 0 && codePoint <= 255) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
+}
+
+int Character::codePointAt(Array<char> a, int index) {
+    if(index < 0 || index > a.length) {
+        return -1;
+    }
+    return (int) a[index];
+}
+
+int Character::codePointBefore(Array<char> a, int index) {
+    if(index < 1 || index > a.length) {
+        return -1;
+    }
+    return (int) a[index - 1];
+}
+
