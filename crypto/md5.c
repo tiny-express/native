@@ -10,6 +10,9 @@
  * @return md5 string
  */
 char *md5_encode(unsigned char *target) {
+	if (NULL == target) {
+		return "";
+	}
 	int length_target = length_pointer_char((char *) target);
 	unsigned char digest[16];
 	
