@@ -43,6 +43,7 @@ namespace Java {
 			char charValue();
 			static int codePointAt(Array<char> a, int index);
 			static int codePointBefore(Array<char> a, int index);
+            static int 	getNumericValue(char ch);
 		};
 	}
 }

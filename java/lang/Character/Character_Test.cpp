@@ -41,3 +41,7 @@ TEST (JavaLang, CharacterCodePointBefore) {
     ASSERT_EQUAL(97, testCharacter.codePointBefore(a,2));
 }
 
+TEST (JavaLang, CharacterGetNumericValue) {
+    Character testCharacter;
+    ASSERT_EQUAL(97, testCharacter.getNumericValue('a'));
+}
