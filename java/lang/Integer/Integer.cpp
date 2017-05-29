@@ -34,7 +34,7 @@ using namespace Java::Lang;
  * @param original
  */
 Integer::Integer() {
-    this->original = 0;
+	this->original = 0;
 }
 
 /**
@@ -43,7 +43,7 @@ Integer::Integer() {
  * @param original
  */
 Integer::Integer(int original) {
-   this->original = original;
+	this->original = original;
 }
 
 /**
@@ -52,7 +52,7 @@ Integer::Integer(int original) {
  * @param original
  */
 Integer::Integer(const Integer &integer) {
-    this->original = integer.original;
+	this->original = integer.original;
 }
 
 Integer::~Integer() {
@@ -65,8 +65,8 @@ Integer::~Integer() {
  * @return Integer
  */
 Integer Integer::parseInt(String target) {
-    Integer result(string_to_int(target.toString()));
-    return result;
+	Integer result(string_to_int(target.toString()));
+	return result;
 }
 
 /**
@@ -75,7 +75,7 @@ Integer Integer::parseInt(String target) {
  * @return String
  */
 string Integer::toString() const {
-    return string_from_int(this->original);
+	return string_from_int(this->original);
 }
 
 /**
@@ -84,7 +84,7 @@ string Integer::toString() const {
  * @return char
  */
 char Integer::charValue() const {
-    return string_to_char(string_from_int(this->original));
+	return string_to_char(string_from_int(this->original));
 }
 
 /**
@@ -92,8 +92,8 @@ char Integer::charValue() const {
  *
  * @return CString
  */
-string Integer::stringValue() const  {
-    return String::valueOf(this->original).toString();
+string Integer::stringValue() const {
+	return String::valueOf(this->original).toString();
 }
 
 /**
@@ -101,8 +101,8 @@ string Integer::stringValue() const  {
  *
  * @return short
  */
-short Integer::shortValue() const  {
-    return this->original;
+short Integer::shortValue() const {
+	return this->original;
 }
 
 /**
@@ -110,8 +110,8 @@ short Integer::shortValue() const  {
  *
  * @return int
  */
-int Integer::intValue() const  {
-    return this->original;
+int Integer::intValue() const {
+	return this->original;
 }
 
 /**
@@ -119,8 +119,8 @@ int Integer::intValue() const  {
  *
  * @return int
  */
-long Integer::longValue() const  {
-    return this->original;
+long Integer::longValue() const {
+	return this->original;
 }
 
 /**
@@ -128,8 +128,8 @@ long Integer::longValue() const  {
  *
  * @return int
  */
-float Integer::floatValue() const  {
-    return (float) this->original;
+float Integer::floatValue() const {
+	return (float) this->original;
 }
 
 /**
@@ -137,8 +137,8 @@ float Integer::floatValue() const  {
  *
  * @return int
  */
-double Integer::doubleValue() const  {
-    return (double) this->original;
+double Integer::doubleValue() const {
+	return (double) this->original;
 }
 
 /**
@@ -147,7 +147,7 @@ double Integer::doubleValue() const  {
  * @return Integer
  */
 Integer Integer::operator+(const Integer &target) {
-    return this->original + target.original;
+	return this->original + target.original;
 }
 
 /**
@@ -155,8 +155,8 @@ Integer Integer::operator+(const Integer &target) {
  *
  * @return Integer
  */
-Integer Integer::operator-(const Integer& target) {
-    return this->original - target.original;
+Integer Integer::operator-(const Integer &target) {
+	return this->original - target.original;
 }
 
 /**
@@ -164,8 +164,8 @@ Integer Integer::operator-(const Integer& target) {
  *
  * @return bool
  */
-boolean Integer::operator==(const Integer& target) const {
-    return this->original == target.original;
+boolean Integer::operator==(const Integer &target) const {
+	return this->original == target.original;
 }
 
 /**
@@ -173,8 +173,8 @@ boolean Integer::operator==(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator!=(const Integer& target) const {
-    return !this->operator==(target);
+boolean Integer::operator!=(const Integer &target) const {
+	return !this->operator==(target);
 }
 
 /**
@@ -182,8 +182,8 @@ boolean Integer::operator!=(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator<(const Integer& target) const {
-    return this->original < target.original;
+boolean Integer::operator<(const Integer &target) const {
+	return this->original < target.original;
 }
 
 /**
@@ -191,8 +191,8 @@ boolean Integer::operator<(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator>(const Integer& target) const {
-    return this->original > target.original;
+boolean Integer::operator>(const Integer &target) const {
+	return this->original > target.original;
 }
 
 /**
@@ -200,8 +200,8 @@ boolean Integer::operator>(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator<=(const Integer& target) const {
-    return this->original <= target.original;
+boolean Integer::operator<=(const Integer &target) const {
+	return this->original <= target.original;
 }
 
 /**
@@ -209,8 +209,8 @@ boolean Integer::operator<=(const Integer& target) const {
  *
  * @return bool
  */
-boolean Integer::operator>=(const Integer& target) const {
-    return this->original >= target.original;
+boolean Integer::operator>=(const Integer &target) const {
+	return this->original >= target.original;
 }
 
 /**
@@ -218,8 +218,8 @@ boolean Integer::operator>=(const Integer& target) const {
  *
  * @return Integer
  */
-Integer Integer::operator/(const Integer& target) {
-    return (this->original / target.original);
+Integer Integer::operator/(const Integer &target) {
+	return ( this->original / target.original );
 }
 
 /**
@@ -227,8 +227,8 @@ Integer Integer::operator/(const Integer& target) {
  *
  * @return Integer
  */
-Integer Integer::operator*(const Integer& target) {
-    return (this->original * target.original);
+Integer Integer::operator*(const Integer &target) {
+	return ( this->original * target.original );
 }
 
 /**
@@ -236,6 +236,6 @@ Integer Integer::operator*(const Integer& target) {
  *
  * @return Integer
  */
-Integer Integer::operator%(const Integer& target) {
-    return (this->original % target.original);
+Integer Integer::operator%(const Integer &target) {
+	return ( this->original % target.original );
 }

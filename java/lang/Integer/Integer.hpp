@@ -30,49 +30,52 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Integer: public virtual Number {
-        private:
-            int original;
-        public:
-            Integer();
-            Integer(int original);
-            Integer(const Integer &target);
-            ~Integer();
-
-        public:
-            char charValue() const;
-            string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
-            string toString() const;
-
-            static Integer parseInt(String target);
-
-        public:
-            Integer operator+(const Integer& target);
-            Integer operator-(const Integer& target);
-            Integer operator/(const Integer& target);;
-            Integer operator*(const Integer& target);
-            Integer operator%(const Integer& target);
-
-            boolean operator==(const Integer& target) const;
-            boolean operator!=(const Integer& target) const;
-            boolean operator<(const Integer& target) const;
-            boolean operator>(const Integer& target) const;
-            boolean operator<=(const Integer& target) const;
-            boolean operator>=(const Integer& target) const;
-
-            void operator+=(const Integer& target);
-            void operator-=(const Integer& target);
-            void operator/=(const Integer& target);
-            void operator*=(const Integer& target);
-            void operator%=(const Integer& target);
-        };
-    }
+	namespace Lang {
+		
+		class Integer;
+		
+		class Integer : public virtual Number {
+		private:
+			int original;
+		public:
+			Integer();
+			Integer(int original);
+			Integer(const Integer &target);
+			~Integer();
+		
+		public:
+			char charValue() const;
+			string stringValue() const;
+			short shortValue() const;
+			int intValue() const;
+			long longValue() const;
+			float floatValue() const;
+			double doubleValue() const;
+			string toString() const;
+			
+			static Integer parseInt(String target);
+		
+		public:
+			Integer operator+(const Integer &target);
+			Integer operator-(const Integer &target);
+			Integer operator/(const Integer &target);;
+			Integer operator*(const Integer &target);
+			Integer operator%(const Integer &target);
+			
+			boolean operator==(const Integer &target) const;
+			boolean operator!=(const Integer &target) const;
+			boolean operator<(const Integer &target) const;
+			boolean operator>(const Integer &target) const;
+			boolean operator<=(const Integer &target) const;
+			boolean operator>=(const Integer &target) const;
+			
+			void operator+=(const Integer &target);
+			void operator-=(const Integer &target);
+			void operator/=(const Integer &target);
+			void operator*=(const Integer &target);
+			void operator%=(const Integer &target);
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_INTEGER_HPP

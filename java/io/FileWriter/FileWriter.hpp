@@ -27,17 +27,17 @@
 #ifndef NATIVE_IO_FILE_HPP
 #define NATIVE_IO_FILE_HPP
 
-#include "../../Lang.hpp"
+#include "../../lang/Object/Object.hpp"
 #include "../OutputStreamWriter/OutputStreamWriter.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
-    namespace IO {
-        class FileWriter : public virtual OutputStreamWriter {
-
-        };
-    }
+	namespace IO {
+		class FileWriter : public virtual OutputStreamWriter {
+		
+		};
+	}
 }
 
 #endif//NATIVE_IO_FILE_HPP

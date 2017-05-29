@@ -36,13 +36,13 @@
  * @return result
  */
 int linear_search(int array[], int length, int key) {
-    register int index;
-    for (index = 0; index < length; index++) {
-        if (array[index] == key) {
-            return index;
-        }
-    }
-    return NOT_FOUND;
+	register int index;
+	for (index = 0; index < length; index++) {
+		if (array[ index ] == key) {
+			return index;
+		}
+	}
+	return NOT_FOUND;
 }
 
 /**
@@ -55,19 +55,19 @@ int linear_search(int array[], int length, int key) {
  * @return result
  */
 int binary_search(int array[], int length, int key) {
-    register int middle, left, right;
-    left = 0;
-    right = length;
-    while (left <= right) {
-        middle = (left + right ) / 2;
-        if (key == array[middle]) {
-            return middle;
-        }
-        if (key < array[middle]) {
-            right = middle - 1;
-        } else {
-            left = middle + 1;
-        }
-    }
-    return NOT_FOUND;
+	register int middle, left, right;
+	left = 0;
+	right = length;
+	while (left <= right) {
+		middle = ( left + right ) / 2;
+		if (key == array[ middle ]) {
+			return middle;
+		}
+		if (key < array[ middle ]) {
+			right = middle - 1;
+		} else {
+			left = middle + 1;
+		}
+	}
+	return NOT_FOUND;
 }

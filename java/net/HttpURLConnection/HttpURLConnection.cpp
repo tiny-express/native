@@ -27,3 +27,23 @@
 #include "HttpURLConnection.hpp"
 
 using namespace Java::Net;
+
+HttpURLConnection::HttpURLConnection(URL url) {
+	this->url = url;
+}
+
+String HttpURLConnection::getMethod() {
+	return this->method;
+}
+
+void HttpURLConnection::setMethod(String method) {
+	this->method = method;
+}
+
+int HttpURLConnection::getResponseCode() {
+	return this->responseCode;
+}
+
+String HttpURLConnection::getResponseMessage() {
+	return this->responseMessage;
+}

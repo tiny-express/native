@@ -34,7 +34,7 @@ using namespace Java::Lang;
  * @param original
  */
 Long::Long() {
-    this->original = 0;
+	this->original = 0;
 }
 
 /**
@@ -43,7 +43,7 @@ Long::Long() {
  * @param original
  */
 Long::Long(long original) {
-   this->original = original;
+	this->original = original;
 }
 
 /**
@@ -52,7 +52,7 @@ Long::Long(long original) {
  * @param original
  */
 Long::Long(const Long &longNumber) {
-    this->original = longNumber.original;
+	this->original = longNumber.original;
 }
 
 Long::~Long() {
@@ -65,7 +65,7 @@ Long::~Long() {
  * @return long
  */
 Long *Long::parseLong(String target) {
-    return new Long(string_to_long(target.toString()));
+	return new Long(string_to_long(target.toString()));
 }
 
 /**
@@ -74,7 +74,7 @@ Long *Long::parseLong(String target) {
  * @return String
  */
 string Long::toString() const {
-    return string_from_long(this->original);
+	return string_from_long(this->original);
 }
 
 /**
@@ -83,7 +83,7 @@ string Long::toString() const {
  * @return char
  */
 char Long::charValue() const {
-    return string_to_char(string_from_long(this->original));
+	return string_to_char(string_from_long(this->original));
 }
 
 /**
@@ -91,8 +91,8 @@ char Long::charValue() const {
  *
  * @return CString
  */
-string Long::stringValue() const  {
-    return String::valueOf(this->original).toString();
+string Long::stringValue() const {
+	return String::valueOf(this->original).toString();
 }
 
 /**
@@ -100,8 +100,8 @@ string Long::stringValue() const  {
  *
  * @return short
  */
-short Long::shortValue() const  {
-    return this->original;
+short Long::shortValue() const {
+	return this->original;
 }
 
 /**
@@ -109,8 +109,8 @@ short Long::shortValue() const  {
  *
  * @return int
  */
-int Long::intValue() const  {
-    return this->original;
+int Long::intValue() const {
+	return this->original;
 }
 
 /**
@@ -118,8 +118,8 @@ int Long::intValue() const  {
  *
  * @return int
  */
-long Long::longValue() const  {
-    return this->original;
+long Long::longValue() const {
+	return this->original;
 }
 
 /**
@@ -127,8 +127,8 @@ long Long::longValue() const  {
  *
  * @return int
  */
-float Long::floatValue() const  {
-    return (float) this->original;
+float Long::floatValue() const {
+	return (float) this->original;
 }
 
 /**
@@ -136,8 +136,8 @@ float Long::floatValue() const  {
  *
  * @return int
  */
-double Long::doubleValue() const  {
-    return (double) this->original;
+double Long::doubleValue() const {
+	return (double) this->original;
 }
 
 /**
@@ -146,7 +146,7 @@ double Long::doubleValue() const  {
  * @return Integer
  */
 Long Long::operator+(const Long &target) const {
-    return this->original + target.original;
+	return this->original + target.original;
 }
 
 /**
@@ -154,8 +154,8 @@ Long Long::operator+(const Long &target) const {
  *
  * @return Integer
  */
-Long Long::operator-(const Long& target) const {
-    return this->original - target.original;
+Long Long::operator-(const Long &target) const {
+	return this->original - target.original;
 }
 
 /**
@@ -163,8 +163,8 @@ Long Long::operator-(const Long& target) const {
  *
  * @return Long
  */
-Long Long::operator*(const Long& target) const {
-    return (this->original * target.original);
+Long Long::operator*(const Long &target) const {
+	return ( this->original * target.original );
 }
 
 /**
@@ -172,8 +172,8 @@ Long Long::operator*(const Long& target) const {
  *
  * @return Integer
  */
-Long Long::operator/(const Long& target) const {
-    return (this->original / target.original);
+Long Long::operator/(const Long &target) const {
+	return ( this->original / target.original );
 }
 
 /**
@@ -181,8 +181,8 @@ Long Long::operator/(const Long& target) const {
  *
  * @return Long
  */
-Long Long::operator%(const Long& target) const {
-    return (this->original % target.original);
+Long Long::operator%(const Long &target) const {
+	return ( this->original % target.original );
 }
 
 /**
@@ -190,8 +190,8 @@ Long Long::operator%(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator==(const Long& target) const {
-    return this->original == target.original;
+boolean Long::operator==(const Long &target) const {
+	return this->original == target.original;
 }
 
 /**
@@ -199,8 +199,8 @@ boolean Long::operator==(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator!=(const Long& target) const {
-    return !this->operator==(target);
+boolean Long::operator!=(const Long &target) const {
+	return !this->operator==(target);
 }
 
 /**
@@ -208,8 +208,8 @@ boolean Long::operator!=(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator<(const Long& target) const {
-    return this->original < target.original;
+boolean Long::operator<(const Long &target) const {
+	return this->original < target.original;
 }
 
 /**
@@ -217,8 +217,8 @@ boolean Long::operator<(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator>(const Long& target) const {
-    return this->original > target.original;
+boolean Long::operator>(const Long &target) const {
+	return this->original > target.original;
 }
 
 /**
@@ -226,8 +226,8 @@ boolean Long::operator>(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator<=(const Long& target) const {
-    return this->original <= target.original;
+boolean Long::operator<=(const Long &target) const {
+	return this->original <= target.original;
 }
 
 /**
@@ -235,7 +235,7 @@ boolean Long::operator<=(const Long& target) const {
  *
  * @return bool
  */
-boolean Long::operator>=(const Long& target) const {
-    return this->original >= target.original;
+boolean Long::operator>=(const Long &target) const {
+	return this->original >= target.original;
 }
 

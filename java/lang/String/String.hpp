@@ -28,81 +28,94 @@
 #define NATIVE_JAVA_LANG_STRING_HPP
 
 #include "../Object/Object.hpp"
-#include "../Array/Array.hpp"
 #include "../CharSequence/CharSequence.hpp"
 
+
 namespace Java {
-    namespace Lang {
-        class String: public virtual CharSequence {
-        private:
-            string original;
-            int size = 0;
-        public:
-            String();
-            String(const_string original);
-            String(string original);
-            String(Array<char> &chars);
-            String(Array<byte> &bytes);
-            String(const String &target);
-            virtual ~String();
-        public:
-            char charAt(int index);
-            int	compareTo(String anotherString);
-            int	compareToIgnoreCase(String str);
-            String concat(String str);
-            boolean contains(CharSequence& str);
-            Array<byte> getBytes() const;
-            boolean endsWith(String suffix);
-            static String fromCharArray(Array<char> &chars);
-            int indexOf(int ch) const;
-            int indexOf(int ch, int fromIndex) const;
-            int indexOf(String str) const;
-            int indexOf(String str, int fromIndex) const;
-            boolean isEmpty() const;
-            int lastIndexOf(int ch);
-            int lastIndexOf(int ch, int fromIndex);
-            int lastIndexOf(String str) const;
-            int lastIndexOf(String str, int fromIndex) const;
-            int length();
-            boolean matches(String regex) const;
-            String replace(char oldChar, char newChar) const;
-            String replaceAll(String regex, String replacement) const;
-            String replaceFirst(String regex, String replacement) const;
-            Array<String> split(String regex) const;
-            String split(String regex, int limit) const;
-            boolean startsWith(String prefix) const;
-            boolean startsWith(String prefix, int toffset) const;
-            Array<char> toCharArray() const;
-            String toLowerCase() const;
-            String toUpperCase();
-            String trim();
-            string toString() const;
+	namespace Lang {
+		
+		class String;
+		
+		class String : public virtual CharSequence {
+		private:
+			string original;
+			int size = 0;
+		public:
+			String();
+			String(const_string original);
+			String(string original);
+			String(Array<char> &chars);
+			String(Array<byte> &bytes);
+			String(const String &target);
 
-            static String valueOf(boolean target);
-            static String valueOf(char target);
-            static String valueOf(string target);
-            static String valueOf(short target);
-            static String valueOf(int target);
-            static String valueOf(long target);
-            static String valueOf(float target);
-            static String valueOf(double target);
-
-        public:
-            String operator+(const String& target);
-            String operator=(const String &target);
-            void operator+=(const String& target);
-            boolean operator<(const String& target) const;
-            boolean operator==(const String& target) const;
-            boolean operator!=(const String& target);
-
-            friend String operator+(const_string target1, String const &target2) {
-                String result;
-                result = target1;
-                result += target2;
-                return result;
-            };
-        };
-    }
+			virtual ~String();
+		public:
+			char charAt(int index);
+			int codePoinAt();
+			int codePoinBefore();
+			int codePointCount(int beginIndex, int endIndex);
+			int compareTo(String anotherString);
+			int compareToIgnoreCase(String str);
+			String concat(String str);
+			boolean contains(const CharSequence &str);
+			boolean contentEquals(const CharSequence &cs);
+			//boolean contentEquals(const StringBuffer &str);
+			static String copyValueOf(const Array<char> &data);
+			static String copyValueOf(const Array<char> &data, int offset, int count);
+			boolean	endsWith(const String &suffix);
+			boolean	equals(const Object &anObject);
+			Array<byte> getBytes() const;
+			//Array<byte> getBytes(const Charset &) const;
+			static String fromCharArray(Array<char> &chars);
+			int indexOf(int ch) const;
+			int indexOf(int ch, int fromIndex) const;
+			int indexOf(String str) const;
+			int indexOf(String str, int fromIndex) const;
+			boolean isEmpty() const;
+			int lastIndexOf(int ch);
+			int lastIndexOf(int ch, int fromIndex);
+			int lastIndexOf(String str) const;
+			int lastIndexOf(String str, int fromIndex) const;
+			int length();
+			boolean matches(String regex) const;
+			String replace(char oldChar, char newChar) const;
+			String replaceAll(String regex, String replacement) const;
+			String replaceFirst(String regex, String replacement) const;
+			Array<String> split(String regex) const;
+			Array<String> split(String regex, int limit) const;
+			boolean startsWith(String prefix) const;
+			boolean startsWith(String prefix, int toffset) const;
+			Array<char> toCharArray() const;
+			String toLowerCase() const;
+			String toUpperCase();
+			String trim();
+			string toString() const;
+			
+			static String valueOf(boolean target);
+			static String valueOf(char target);
+			static String valueOf(string target);
+			static String valueOf(short target);
+			static String valueOf(int target);
+			static String valueOf(long target);
+			static String valueOf(float target);
+			static String valueOf(double target);
+		
+		public:
+			String operator+(const String &target);
+			String operator=(const String &target);
+			void operator+=(const String &target);
+			boolean operator<(const String &target) const;
+			boolean operator==(const String &target) const;
+			boolean operator!=(const String &target) const;
+			
+			friend String operator+(const_string target1, String const &target2) {
+				String result;
+				result = target1;
+				result += target2;
+				return result;
+			};
+		};
+	}
 }
 
-#endif//#ifndef NATIVE_JAVA_LANG_STRING_HPP
+#endif//NATIVE_JAVA_LANG_STRING_HPP

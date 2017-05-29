@@ -29,25 +29,25 @@
 using namespace Java::Lang;
 
 void System::out::print(String target) {
-    char *targetCharacters = target.toString();
-    if (is_empty(targetCharacters)) {
-        return;
-    }
-    printf("%s", targetCharacters);
-    fflush(stdout);
+	char *targetCharacters = target.toString();
+	if (is_empty(targetCharacters)) {
+		return;
+	}
+	printf("%s", targetCharacters);
+	fflush(stdout);
 }
 
 void System::out::println(String target) {
-    char *targetCharacters = target.toString();
-    if (is_empty(targetCharacters)) {
-        return;
-    }
-    printf("%s\n", targetCharacters);
-    fflush(stdout);
+	char *targetCharacters = target.toString();
+	if (is_empty(targetCharacters)) {
+		return;
+	}
+	printf("%s\n", targetCharacters);
+	fflush(stdout);
 }
 
 void System::exit(int status) {
-    exit(status);
+	exit(status);
 }
 
 void System::gc() {

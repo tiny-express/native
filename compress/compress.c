@@ -32,47 +32,47 @@
 #define MAXLEN_STRING_COMPRESS 100000
 
 // Compress
-char* zlib_encode(char* compress_contents){
+char *zlib_encode(char *compress_contents) {
 	char char_array_temp[MAXLEN_STRING_COMPRESS];
-
+	
 	// Compressing
 	z_stream defstream;
 	defstream.zalloc = Z_NULL;
 	defstream.zfree = Z_NULL;
 	defstream.opaque = Z_NULL;
-
-	defstream.avail_in = (uInt)length_pointer_char(compress_contents) + 1;
-	defstream.next_in = (Bytef *)compress_contents;
-	defstream.avail_out = (uInt)sizeof(char_array_temp);
-	defstream.next_out = (Bytef *)char_array_temp;
-
+	
+	defstream.avail_in = (uInt) length_pointer_char(compress_contents) + 1;
+	defstream.next_in = (Bytef *) compress_contents;
+	defstream.avail_out = (uInt) sizeof(char_array_temp);
+	defstream.next_out = (Bytef *) char_array_temp;
+	
 	deflateInit(&defstream, Z_BEST_COMPRESSION);
 	deflate(&defstream, Z_FINISH);
 	deflateEnd(&defstream);
-
+	
 	// Convert to char pointer
 	return string_copy(char_array_temp);
 }
 
 // Decompress
-char *zlib_decode(char *encode_contents){
+char *zlib_decode(char *encode_contents) {
 	char char_array_temp[MAXLEN_STRING_COMPRESS];
-
+	
 	z_stream infstream;
 	infstream.zalloc = Z_NULL;
 	infstream.zfree = Z_NULL;
 	infstream.opaque = Z_NULL;
-
-	infstream.avail_in = (uInt)length_pointer_char(encode_contents) + 1;
-	infstream.next_in = (Bytef *)encode_contents;
-	infstream.avail_out = (uInt)sizeof(char_array_temp);
-	infstream.next_out = (Bytef *)char_array_temp;
-
+	
+	infstream.avail_in = (uInt) length_pointer_char(encode_contents) + 1;
+	infstream.next_in = (Bytef *) encode_contents;
+	infstream.avail_out = (uInt) sizeof(char_array_temp);
+	infstream.next_out = (Bytef *) char_array_temp;
+	
 	inflateInit(&infstream);
 	inflate(&infstream, Z_NO_FLUSH);
 	inflateEnd(&infstream);
-
+	
 	char *result = string_copy(char_array_temp);
-
+	
 	return result;
 }

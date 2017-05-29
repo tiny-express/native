@@ -32,17 +32,17 @@
 #include "../Process/Process.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Runtime : public virtual Object {
-        public:
-            Process exec(String &cmd);
-            Process exec(Array<String> &cmdarray);
-            void exit(int status);
-            long freeMemory();
-            void gc();
-            string toString() const;
-        };
-    }
+	namespace Lang {
+		class Runtime : public virtual Object {
+		public:
+			Process exec(String &cmd);
+			Process exec(Array<String> &cmdarray);
+			void exit(int status);
+			long freeMemory();
+			void gc();
+			string toString() const;
+		};
+	}
 }
 
 #endif//NATIVE_JAVA_LANG_RUNTIME_HPP

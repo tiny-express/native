@@ -64,7 +64,7 @@ inline char *join_pointer_pointer_char(char **target) {
 inline char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
-	int delimiter_length = length_pointer_char((char*) delimiter);
+	int delimiter_length = length_pointer_char((char *) delimiter);
 	char *result_tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
 		item_length = length_pointer_char(*pointer);

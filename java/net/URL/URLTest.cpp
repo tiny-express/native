@@ -27,52 +27,53 @@
 extern "C" {
 #include "../../../unit_test.h"
 }
+
 #include "URL.hpp"
 
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNet, URLConstructor) {
-    String urlString = "http://test.com:3000/file/test?param=1";
-    URL url(urlString);
-    ASSERT_STR("http", url.getProtocol().toString());
-    ASSERT_STR("test.com", url.getHost().toString());
-    ASSERT_EQUAL(3000, url.getPort());
-    ASSERT_STR("/file/test", url.getPath().toString());
-    ASSERT_STR("param=1", url.getQuery().toString());
+TEST (JavaNet, URLConstructor) {
+	String urlString = "http://test.com:3000/file/test?param=1";
+	URL url(urlString);
+	ASSERT_STR("http", url.getProtocol().toString());
+	ASSERT_STR("test.com", url.getHost().toString());
+	ASSERT_EQUAL(3000, url.getPort());
+	ASSERT_STR("/file/test", url.getPath().toString());
+	ASSERT_STR("param=1", url.getQuery().toString());
 
-    urlString = "http://";
-    url = URL(urlString);
-    ASSERT_STR("", url.getProtocol().toString());
-    ASSERT_STR("", url.getHost().toString());
-    ASSERT_STR("", url.getPath().toString());
-    ASSERT_STR("", url.getQuery().toString());
-    ASSERT_EQUAL(-1, url.getPort());
+	urlString = "http://";
+	url = URL(urlString);
+	ASSERT_STR("", url.getProtocol().toString());
+	ASSERT_STR("", url.getHost().toString());
+	ASSERT_STR("", url.getPath().toString());
+	ASSERT_STR("", url.getQuery().toString());
+	ASSERT_EQUAL(-1, url.getPort());
 }
 
-TEST(JavaNet, URLToString) {
-    // Full URL with protocol, host, port, path and query
-    String urlString = "http://test.com:80/file/test?param=1";
-    URL url(urlString);
-    ASSERT_STR("http://test.com:80/file/test?param=1", url.toString());
+TEST (JavaNet, URLToString) {
+	// Full URL with protocol, host, port, path and query
+	String urlString = "http://test.com:80/file/test?param=1";
+	URL url(urlString);
+	ASSERT_STR("http://test.com:80/file/test?param=1", url.toString());
 
-    // URL without port
-    urlString = "http://test.com/file/test?param=1";
-    url = URL(urlString);
-    ASSERT_STR("http://test.com/file/test?param=1", url.toString());
+	// URL without port
+	urlString = "http://test.com/file/test?param=1";
+	url = URL(urlString);
+	ASSERT_STR("http://test.com/file/test?param=1", url.toString());
 
-    // URL without path
-//    urlString = "http://test.com:8080?param=1&param1=2";
-//    url = URL(urlString);
-//    ASSERT_STR("http://test.com:8080?param=1&param1=2", url.toString());
+	// URL without path
+	urlString = "http://test.com:8080?param=1&param1=2";
+	url = URL(urlString);
+	ASSERT_STR("http://test.com:8080?param=1&param1=2", url.toString());
 
-    // URL without query
-    urlString = "https://test.com:9200/index";
-    url = URL(urlString);
-    ASSERT_STR("https://test.com:9200/index", url.toString());
+	// URL without query
+	urlString = "https://test.com:9200/index";
+	url = URL(urlString);
+	ASSERT_STR("https://test.com:9200/index", url.toString());
 
-    // URL with just protocol and host
-    urlString = "http://test.com";
-    url = URL(urlString);
-    ASSERT_STR("http://test.com", url.toString());
+	// URL with just protocol and host
+	urlString = "http://test.com";
+	url = URL(urlString);
+	ASSERT_STR("http://test.com", url.toString());
 }

@@ -30,46 +30,50 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Float : public virtual Number {
-        private:
-            float original;
-        public:
-            Float();
-            Float(float original);
-            Float(const Float &target);
-            ~Float();
-
-        public:
-            char charValue() const;
-            string stringValue() const;
-            short shortValue() const;
-            int intValue() const;
-            long longValue() const;
-            float floatValue() const;
-            double doubleValue() const;
-            string toString() const;
-
-            static Float *parseFloat(String target);
-
-        public:
-            Float operator+(const Float& target);
-            Float operator-(const Float& target);
-            Float operator/(const Float& target);
-            Float operator*(const Float& target);
-
-            boolean operator==(const Float& target) const;
-            boolean operator!=(const Float& target) const;
-            boolean operator<(const Float& target) const;
-            boolean operator>(const Float& target) const;
-            boolean operator<=(const Float& target) const;
-            boolean operator>=(const Float& target) const;
-
-            void operator-=(const Float& target);
-            void operator+=(const Float& target);
-            void operator*=(const Float& target);
-            void operator/=(const Float& target);
-        };
-    }
+	namespace Lang {
+		
+		class Float;
+		
+		class Float : public virtual Number {
+		private:
+			float original;
+		public:
+			Float();
+			Float(float original);
+			Float(const Float &target);
+			~Float();
+		
+		public:
+			char charValue() const;
+			string stringValue() const;
+			short shortValue() const;
+			int intValue() const;
+			long longValue() const;
+			float floatValue() const;
+			double doubleValue() const;
+			string toString() const;
+			
+			static Float *parseFloat(String target);
+		
+		public:
+			Float operator+(const Float &target);
+			Float operator-(const Float &target);
+			Float operator/(const Float &target);
+			Float operator*(const Float &target);
+			
+			boolean operator==(const Float &target) const;
+			boolean operator!=(const Float &target) const;
+			boolean operator<(const Float &target) const;
+			boolean operator>(const Float &target) const;
+			boolean operator<=(const Float &target) const;
+			boolean operator>=(const Float &target) const;
+			
+			void operator-=(const Float &target);
+			void operator+=(const Float &target);
+			void operator*=(const Float &target);
+			void operator/=(const Float &target);
+		};
+	}
 }
+
 #endif//NATIVE_JAVA_LANG_FLOAT_HPP

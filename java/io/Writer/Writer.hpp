@@ -27,16 +27,16 @@
 #ifndef NATIVE_IO_WRITER_HPP
 #define NATIVE_IO_WRITER_HPP
 
-#include "../../Lang.hpp"
+#include "../../lang/Object/Object.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
-    namespace IO {
-        class Writer : public virtual Object {
-
-        };
-    }
+	namespace IO {
+		class Writer : public virtual Object {
+		
+		};
+	}
 }
 
 #endif//NATIVE_IO_WRITER_HPP

@@ -26,8 +26,8 @@
 
 
 namespace Java {
-    namespace Util {
-        class Map {
-        };
-    }
+	namespace Util {
+		class Map {
+		};
+	}
 }

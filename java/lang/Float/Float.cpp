@@ -34,7 +34,7 @@ using namespace Java::Lang;
  * @param original
  */
 Float::Float() {
-    this->original = 0;
+	this->original = 0;
 }
 
 /**
@@ -43,7 +43,7 @@ Float::Float() {
  * @param original
  */
 Float::Float(float original) {
-    this->original = original;
+	this->original = original;
 }
 
 /**
@@ -52,7 +52,7 @@ Float::Float(float original) {
  * @param original
  */
 Float::Float(const Float &floatNumber) {
-    this->original = floatNumber.original;
+	this->original = floatNumber.original;
 }
 
 Float::~Float() {
@@ -65,7 +65,7 @@ Float::~Float() {
  * @return float
  */
 float Float::floatValue() const {
-    return this->original;
+	return this->original;
 }
 
 /**
@@ -74,7 +74,7 @@ float Float::floatValue() const {
  * @return char
  */
 char Float::charValue() const {
-    return string_to_char(string_from_int(this->original));
+	return string_to_char(string_from_int(this->original));
 }
 
 /**
@@ -83,7 +83,7 @@ char Float::charValue() const {
  * @return short
  */
 short Float::shortValue() const {
-    return (short) this->original;
+	return (short) this->original;
 }
 
 /**
@@ -92,7 +92,7 @@ short Float::shortValue() const {
  * @return int
  */
 int Float::intValue() const {
-    return (int) this->original;
+	return (int) this->original;
 }
 
 /**
@@ -101,7 +101,7 @@ int Float::intValue() const {
  * @return long
  */
 long Float::longValue() const {
-    return (long) this->original;
+	return (long) this->original;
 }
 
 /**
@@ -110,7 +110,7 @@ long Float::longValue() const {
  * @return
  */
 double Float::doubleValue() const {
-    return this->original;
+	return this->original;
 }
 
 /**
@@ -118,8 +118,8 @@ double Float::doubleValue() const {
  *
  * @return String
  */
-string Float::toString() const  {
-    return string_from_int(this->original);
+string Float::toString() const {
+	return string_from_int(this->original);
 }
 
 /**
@@ -127,8 +127,8 @@ string Float::toString() const  {
  *
  * @return CString
  */
-string Float::stringValue() const  {
-    return String::valueOf(this->original).toString();
+string Float::stringValue() const {
+	return String::valueOf(this->original).toString();
 }
 
 /**
@@ -138,7 +138,7 @@ string Float::stringValue() const  {
  * @return Float
  */
 Float *Float::parseFloat(String target) {
-    return new Float(string_to_int(target.toString()));
+	return new Float(string_to_int(target.toString()));
 }
 
 /**
@@ -147,8 +147,8 @@ Float *Float::parseFloat(String target) {
  * @param target
  * @return Float
  */
-Float Float::operator+(const Float& target) {
-    return this->original + target.original;
+Float Float::operator+(const Float &target) {
+	return this->original + target.original;
 }
 
 /**
@@ -156,78 +156,78 @@ Float Float::operator+(const Float& target) {
  *
  * @return float
  */
- Float Float::operator-(const Float& target) {
-     return this->original - target.original;
- }
- 
- /**
- * Make a multiplication with target Float
- *
- * @return float
- */
- Float Float::operator*(const Float& target) {
-     return this->original * target.original;
- }
- 
- /**
- * Make a division with target Float
- *
- * @return float
- */
- Float Float::operator/(const Float& target) {
-     return this->original / target.original;
- }
- 
- /**
- * Compare this Float is equal target
- *
- * @return bool
- */
- boolean Float::operator==(const Float& target) const {
-     return this->original == target.original;
- }
- 
- /**
- * Compare this Float is not equal target
- *
- * @return bool
- */
- boolean Float::operator!=(const Float& target) const {
-     return this->original != target.original;
- }
- 
- /**
- * Compare this Float is less than target
- *
- * @return bool
- */
- boolean Float::operator<(const Float& target) const {
-     return this->original < target.original;
- }
- 
- /**
- * Compare this Float is more than target
- *
- * @return bool
- */
- boolean Float::operator>(const Float& target) const {
-     return this->original > target.original;
- }
- 
- /**
- * Compare this Float is equal or less than target
- *
- * @return bool
- */
- boolean Float::operator<=(const Float& target) const {
-     return this->original <= target.original;
- }
- 
- /**
- *  Compare this Float is equal or more than target
- *
- * @return bool
- */
-boolean Float::operator>=(const Float& target) const {
-    return this->original >= target.original;
+Float Float::operator-(const Float &target) {
+	return this->original - target.original;
+}
+
+/**
+* Make a multiplication with target Float
+*
+* @return float
+*/
+Float Float::operator*(const Float &target) {
+	return this->original * target.original;
+}
+
+/**
+* Make a division with target Float
+*
+* @return float
+*/
+Float Float::operator/(const Float &target) {
+	return this->original / target.original;
+}
+
+/**
+* Compare this Float is equal target
+*
+* @return bool
+*/
+boolean Float::operator==(const Float &target) const {
+	return this->original == target.original;
+}
+
+/**
+* Compare this Float is not equal target
+*
+* @return bool
+*/
+boolean Float::operator!=(const Float &target) const {
+	return this->original != target.original;
+}
+
+/**
+* Compare this Float is less than target
+*
+* @return bool
+*/
+boolean Float::operator<(const Float &target) const {
+	return this->original < target.original;
+}
+
+/**
+* Compare this Float is more than target
+*
+* @return bool
+*/
+boolean Float::operator>(const Float &target) const {
+	return this->original > target.original;
+}
+
+/**
+* Compare this Float is equal or less than target
+*
+* @return bool
+*/
+boolean Float::operator<=(const Float &target) const {
+	return this->original <= target.original;
+}
+
+/**
+*  Compare this Float is equal or more than target
+*
+* @return bool
+*/
+boolean Float::operator>=(const Float &target) const {
+	return this->original >= target.original;
 }
