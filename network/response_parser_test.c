@@ -2,11 +2,14 @@
 #include "response_parser.h"
 
 TEST (Network, Parser) {
+#ifdef __APPLE__
+    return;
+#endif
 
-//    http_response* result3 = (http_response*) malloc(sizeof(http_response));
-//    free(result3);
-//    result3 = NULL;
-//    ASSERT_NULL(result3);
+    http_response* result3 = (http_response*) malloc(sizeof(http_response));
+    free(result3);
+    result3 = NULL;
+    ASSERT_NULL(result3);
 	
 	char *response = "HTTP/1.0 200 OK\n"
 		"Content-Type: text/html; charset=utf-8\n"
@@ -64,6 +67,7 @@ TEST (Network, Parser) {
 	ASSERT_STR("Date", result2->headers[ 3 ]->name);
 	ASSERT_STR("Wed, 24 May 2017 20:25:34 GMT", result2->headers[ 3 ]->value);
 	ASSERT_STR("Server-key delivered or Sender is not authorized to perform request", result2->body);
+
 	//     test free memory
 	test = result2;
 	free_http_response(result);
