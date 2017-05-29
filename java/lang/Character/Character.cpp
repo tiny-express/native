@@ -66,3 +66,6 @@ int Character::codePointBefore(Array<char> a, int index) {
     return (int) a[index - 1];
 }
 
+int Character::getNumericValue(char ch) {
+    return (int) ch;
+}
