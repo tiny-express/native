@@ -38,7 +38,7 @@ namespace Java {
             pthread_t   original;
             int         threadNumber;
             string      threadName;
-            //Runnable    target;
+            Runnable    *target;
             //FIXME: currently ignore priority to finish main process of thread first
 
         public:

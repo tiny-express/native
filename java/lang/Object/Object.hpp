@@ -114,7 +114,7 @@ namespace Java {
 		class String;
 		class Object {
 		public:
-			string toString() {}
+			string toString();
 		};
 	}
 }
