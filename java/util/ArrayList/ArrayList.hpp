@@ -95,8 +95,10 @@ namespace Java {
 				return original.end();
 			}
 		public:
+			void push_back(const E &target) {
+				this->original.push_back(target);
+			}
 			boolean add(E &e) {
-				original.size();
 				original.push_back(e);
 				return true;
 			}
