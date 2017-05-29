@@ -27,24 +27,51 @@
 #ifndef NATIVE_JAVA_UTIL_LIST_HPP
 #define NATIVE_JAVA_UTIL_LIST_HPP
 
+#include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
 #include "../Collection/Collection.hpp"
+#include "../Comparator/Comparator.hpp"
 
 namespace Java {
 	namespace Util {
 		template <typename E>
-		class List : public virtual Collection<E> {
-		public:
-			boolean add(E &e);
-			void add(int index, E &element);
-			boolean addAll(Collection<E> &c);
-			void clear();
-			boolean contains(Object o);
-			E get(int index);
-			int indexOf(Object o);
-			boolean isEmpty();
-			Iterator<E> iterator();
-			
+		class ListIterator;
+		
+		template <typename E>
+		class List;
+		
+		template <typename E>
+		class List : public virtual Collection<E>, public virtual Iterable<E> {
+		protected:
+			virtual boolean add(E &e) = 0;
+			virtual void add(int index, E &element) = 0;
+			virtual boolean addAll(Collection<E> &c) = 0;
+			virtual boolean addAll(int index, Collection<E> &c) = 0;
+			virtual void clear() = 0;
+			virtual boolean contains(Object &o) const = 0;
+			virtual boolean containsAll(Collection<Object> &c) const = 0;
+			virtual boolean equals(Object &o) const = 0;
+			virtual E &get(int index) const = 0;
+			virtual int hashCode() const = 0;
+			virtual int indexOf(Object &o) const = 0;
+			virtual boolean isEmpty() const = 0;
+			virtual Iterator<E> &iterator() const = 0;
+			virtual int lastIndexOf(Object &o) const = 0;
+			virtual ListIterator<E> &listIterator() const = 0;
+			virtual ListIterator<E> &listIterator(int index) const = 0;
+			virtual E &remove(int index) = 0;
+			virtual boolean remove(Object &o) = 0;
+			virtual boolean removeAll(Collection<Object> &c) = 0;
+			virtual void replaceAll(Java::Util::Function::UnaryOperator<E> &unaryOperator) = 0;
+			virtual boolean retainAll(Collection<Object> &c)  = 0;
+			virtual E &set(int index, E &element) = 0;
+			virtual int size() const = 0;
+			virtual void sort(Comparator<E> &c) = 0;
+			virtual Spliterator<E> &spliterator() const  = 0;
+			virtual List<E> &subList(int fromIndex, int toIndex) const = 0;
+			virtual Array<Object> &toArray() const = 0;
+			template <typename T>
+			 Array<T> toArray(Array<T> &a) const;
 		};
 	}
 }

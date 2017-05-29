@@ -31,6 +31,9 @@
 
 namespace Java {
 	namespace Lang {
+		
+		class Integer;
+		
 		class Integer : public virtual Number {
 		private:
 			int original;

@@ -35,10 +35,10 @@ namespace Java {
     namespace Lang {
         class Thread: public Object, public virtual Runnable {
         private:
-            pthread_t original;
-            int threadNumber;
-            string threadName;
-            Runnable target;
+            pthread_t   original;
+            int         threadNumber;
+            string      threadName;
+            //Runnable    target;
             //FIXME: currently ignore priority to finish main process of thread first
 
         public:
@@ -53,7 +53,6 @@ namespace Java {
             ~Thread();
 
         public:
-            //Thread& currentThread();
             void run() const;
             void start();
             void stop();
@@ -66,7 +65,7 @@ namespace Java {
 
             //Adds-on functions
             pthread_t getCurrentThread();
-            Runnable& getTarget();
+            //Runnable& getTarget();
         };
     }
 }

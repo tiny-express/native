@@ -36,31 +36,85 @@ extern "C" {
 #include <vector>
 #include <map>
 
+// Define builtin types
 typedef bool boolean;
+
+template <typename E> class Array;
+template <typename E> class ArrayIterator;
+
+template <typename E>
+class ArrayIterator {
+public:
+	ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
+	}
+	boolean operator!=(const ArrayIterator<E> &other) const {
+		return _pos != other._pos;
+	}
+	E operator*() const {
+		return _p_vec->get(_pos);
+	}
+	const ArrayIterator<E> &operator++() {
+		++_pos;
+		return *this;
+	}
+private:
+	int _pos;
+	const Array<E> *_p_vec;
+};
+
+template <typename E>
+class Array  {
+private:
+	std::vector<E> original;
+public:
+	Array() {
+	}
+	Array(std::initializer_list<E> list) {
+		typename std::initializer_list<E>::iterator it;
+		for (it = list.begin(); it != list.end(); ++it) {
+			original.push_back(*it);
+		}
+		this->length = original.size();
+	}
+	~Array() {};
+	int length;
+	ArrayIterator<E> begin() const {
+		return ArrayIterator<E>(this, 0);
+	}
+	ArrayIterator<E> end() const {
+		return ArrayIterator<E>(this, this->length);
+	}
+public:
+	void push(E e) {
+		original.push_back(e);
+		this->length = original.size();
+	}
+	E get(const int index) const {
+		return (E) original.at(index);
+	}
+	string toString() {
+		return (string ) "";
+	}
+public:
+	E &operator[](const int index) {
+		return this->original.at(index);
+	}
+	Array<E> operator+=(const std::initializer_list<E> &list) {
+		typename std::initializer_list<E>::iterator it;
+		for (it = list.begin(); it != list.end(); ++it) {
+			original.push_back(*it);
+		}
+		this->length = original.size();
+		return *this;
+	}
+};
 
 namespace Java {
 	namespace Lang {
-		
-		// Pre-declaration
-		class Object;
-		
-		class Short;
-		
-		class Integer;
-		
-		class Long;
-		
-		class Float;
-		
-		class Double;
-		
-		class Boolean;
-		
 		class String;
-		
 		class Object {
-		protected:
-			virtual string toString() const = 0;
+		public:
+			string toString() {}
 		};
 	}
 }

@@ -27,7 +27,7 @@
 #ifndef NATIVE_IO_WRITER_HPP
 #define NATIVE_IO_WRITER_HPP
 
-#include "../../Lang.hpp"
+#include "../../lang/Object/Object.hpp"
 
 using namespace Java::Lang;
 
