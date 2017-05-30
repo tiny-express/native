@@ -29,14 +29,20 @@
 
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
+#include "../../io/Serializable/Serializable.hpp"
+#include "../../lang/Comparable/Comparable.hpp"
 
+using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
 		
 		class String;
 		
-		class String : public virtual CharSequence {
+		class String :
+			public virtual Serializable,
+			public virtual Comparable<String>,
+			public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
@@ -62,8 +68,8 @@ namespace Java {
 			//boolean contentEquals(const StringBuffer &str);
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
-			boolean	endsWith(const String &suffix);
-			boolean	equals(const Object &anObject);
+			boolean endsWith(const String &suffix);
+			boolean equals(Object &anObject) const;
 			Array<byte> getBytes() const;
 			//Array<byte> getBytes(const Charset &) const;
 			static String fromCharArray(Array<char> &chars);

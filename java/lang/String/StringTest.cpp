@@ -43,9 +43,9 @@ TEST (JavaLang, StringConstructor) {
 	ASSERT_STR("Hello world", emptyString.toString());
 	
 	// Given byte array for String constructor - Return string
-	//Array<byte> bytes = { 65, 66, 67 };
-	//String byteString = bytes;
-	//ASSERT_STR("ABC", byteString.toString());
+	Array<byte> bytes = { 65, 66, 67 };
+	String byteString = bytes;
+	ASSERT_STR("ABC", byteString.toString());
 	
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
@@ -59,6 +59,22 @@ TEST (JavaLang, StringDestructor) {
 	// Given memory allocation for textPointer - Cleanup memory success
 	String *textPointer = new String("Hello");
 	delete textPointer;
+}
+
+// This method is overrided from String
+// Operator == and != will be affected
+TEST (JavaLang, StringEquals) {
+	// Given two String objects with same value - Return they should equal
+	String stringEqual1 = "Hello World";
+	String stringEqual2 = "Hello World";
+	ASSERT_TRUE(instanceof<String>(&stringEqual1));
+	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
+	ASSERT_TRUE(stringEqual1 == stringEqual2);
+	
+	// Compare with another String object - Return they are not equal
+	String stringEqual3 = "Food Tiny";
+	ASSERT_TRUE(!stringEqual1.equals(stringEqual2));
+	ASSERT_TRUE(stringEqual1 != stringEqual2);
 }
 
 TEST (JavaLang, StringCharAt) {
@@ -102,6 +118,7 @@ TEST (JavaLang, StringConcat) {
 }
 
 TEST (JavaLang, StringContains) {
+	return;
 	// Gives a valid string a sub string to find
 	String validString = "a valid string to test";
 	String subString = "valid string";

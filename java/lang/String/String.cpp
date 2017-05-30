@@ -147,6 +147,18 @@ boolean String::endsWith(const String &suffix) {
 	return string_endswith(this->original, suffix.original);
 }
 
+boolean String::equals(Object &anObject) const {
+	if (Object::equals(anObject)) {
+		return true;
+	}
+	String stringInstanceWithSameClass = "test";
+	if (instanceof<String>(&anObject)) {
+		return true;
+		//return (boolean) string_equals(original, anObject.toString());
+	}
+	return false;
+}
+
 /**
  * String from character array
  *
