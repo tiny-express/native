@@ -37,6 +37,12 @@ extern "C" {
 #include <vector>
 #include <map>
 
+// Define instanceof
+template<typename Base, typename T>
+bool instanceof(T*) {
+	return std::is_base_of<Base, T>::value;
+}
+
 // Define builtin types
 typedef bool boolean;
 
@@ -148,7 +154,7 @@ namespace Java {
 			void notifyAll() {
 				// TODO
 			}
-			string toString() {
+			string toString() const {
 				return (string) "";
 			}
 			void wait() {
@@ -162,6 +168,9 @@ namespace Java {
 			}
 			boolean operator==(const Object &target) const {
 				return this->equals( target);
+			}
+			boolean operator!=(const Object &target) const {
+				return !this->equals( target);
 			}
 		};
 	}
