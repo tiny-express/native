@@ -98,10 +98,12 @@ TEST(JavaLang, ObjectEquals) {
 	Object object1;
 	Object object2;
 	ASSERT_FALSE(object1.equals(object2));
+	ASSERT_FALSE(object1 == object2);
 	
 	// Given one instance of Object - Return equal with itself
 	Object object3;
 	ASSERT_TRUE(object3.equals(object3));
+	ASSERT_TRUE(object3 == object3);
 }
 
 TEST(JavaLang, ObjectHashCode) {
