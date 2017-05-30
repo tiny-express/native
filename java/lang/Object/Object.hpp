@@ -129,7 +129,7 @@ namespace Java {
 			Object	&clone();
 			void	finalize();
 		public:
-			boolean equals(Object &obj) {
+			boolean equals(const Object &obj) const {
 				if (this->hashCode() == obj.hashCode()) {
 					return true;
 				}
@@ -139,7 +139,7 @@ namespace Java {
 				// This method is only available in Java
 				// should not be supported in this library
 			}
-			long hashCode() {
+			long hashCode() const {
 				return (intptr_t) std::addressof(*this);
 			}
 			void notify() {
@@ -159,6 +159,9 @@ namespace Java {
 			}
 			void wait(long timeout, int nanos) {
 				// TODO
+			}
+			boolean operator==(const Object &target) const {
+				return this->equals( target);
 			}
 		};
 	}
