@@ -29,55 +29,79 @@
 using namespace Java::Lang;
 
 Thread::Thread() {
-    this->original = NULL;
     this->target = NULL;
+    this->threadName = "";
 }
 
-//Thread::Thread(Runnable &target2) {
-//}
-//
-//Thread::Thread(Runnable &target2, String &name) {
-//
-//}
-//Thread::Thread(String &name) {
-//
-//}
+Thread::Thread(Runnable &target2) {
+    this->target = &target2;
+    this->threadName = "";
+}
+
+Thread::Thread(Runnable &target2, String name) {
+    this->target = &target2;
+    this->threadName = name.toString();
+}
+
+Thread::Thread(String name) {
+    this->target = NULL;
+    this->threadName = name.toString();
+}
 
 Thread::~Thread() {
+    //TODO: reduce Thread::Thread.numberThread
 }
 
 /**
- * Call Runnable object's run method
+ * Call Runnable target's run() method
  */
 void Thread::run() const {
-
+    if (this->target != NULL) {
+        this->target->run();
+    }
 }
 
 /**
- * Call Runnable object's run method
+ * Force thread and call Runnable target's run() method
  */
 void Thread::start() {
+    this->isThreadRunning = true;
+    pthread_create(&this->original, NULL, &Thread::pthread_helper, (void *)this);
 }
 
 /**
- * Stop a thread
+ * Stop a thread if it's running
  */
 void Thread::stop() {
-
+    //FIXME: discuss about this function (Deprecated in current java)
+    if (!this->isThreadRunning) {
+        return;
+    }
 }
 
 /**
- * Waits for this thread to die.
+ * Waits for this thread to die if it's running
  */
 void Thread::join() {
+    if (!this->isThreadRunning) {
+        return;
+    }
 
+    pthread_join(this->original, NULL);
+    this->isThreadRunning = false;
 }
 
 /**
- * Waits at most millis milliseconds for this thread to die.
+ * Waits at most millis milliseconds for this thread to die if it's running
  */
 void Thread::join(long millis) {
+    if (!this->isThreadRunning) {
+        return;
+    }
 
+    usleep(millis * 1000);
+    pthread_join(this->original, NULL);
+    this->isThreadRunning = false;
 }
 
 /**
@@ -98,12 +122,5 @@ void Thread::setName(string target) {
  * Returns a string representation of this thread, including the thread's name, priority, and thread group.
  */
 string Thread::toString() const {
-    return "";
-}
-
-/**
- * Return current pthread_t inside for testing
- */
-pthread_t Thread::getCurrentThread() {
-    return this->original;
+    return this->threadName; //FIXME: change this function's likely Java doc later
 }

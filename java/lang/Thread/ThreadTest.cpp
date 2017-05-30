@@ -32,20 +32,36 @@ extern "C" {
 
 using namespace Java::Lang;
 
+class RunnableTarget: public virtual Runnable {
+public:
+    void run() const {
+        printf("Hello world");
+    }
+};
+
 TEST(JavaLang, ThreadConstructor) {
-    // Compare constructor through properties such as: target, original, name
-    string emptyStr = "";
-
-    // Test true with NULL and empty properties with default constructor
+    // Given validThread with default constructor
     Thread thread;
-    ASSERT_NULL(thread.getCurrentThread());
 
-    //TODO
+    // Test empty threadName
+    ASSERT_STR("", thread.getName());
+
+    // Test true after set new name for threadName
+    thread.setName("Some valid name");
+    ASSERT_STR("Some valid name", thread.getName());
 }
 
 TEST(JavaLang, ThreadStart) {
+    // Given validTarget and validThread to test start(), join(), join(millis) functions
+    RunnableTarget validTarget;
+    Thread thread = Thread(validTarget);
 
+    thread.start();
+    thread.join(); /// Make sure that thread has join() because if not, there will be crashed
+
+    //FIXME: please help to check this output <"Hello world"> is appeard at test case 73 or not
 }
 
 TEST(JavaLang, ThreadStop) {
+    //TODO
 }
