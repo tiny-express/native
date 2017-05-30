@@ -33,18 +33,41 @@ extern "C" {
 using namespace Java::Lang;
 
 class RunnableTarget: public virtual Runnable {
-public:
-    void run() const {
-        printf("Hello world");
-    }
+    public:
+        void run() const {
+            printf("Hello world");
+        }
+};
+
+class RunnableTarget2: public virtual Runnable {
+    public:
+        void run() const {
+            int index = 0;
+            int limit = 50;
+            for (; index <= limit ; index++) {
+                printf("Index [%d] must not equal to %d to test Thread.stop()\n", index, limit);
+            }
+        }
 };
 
 TEST(JavaLang, ThreadConstructor) {
-    // Given validThread with default constructor
+    // Given valid Thread with default constructor
     Thread thread;
 
     // Test empty threadName
     ASSERT_STR("", thread.getName());
+
+    // Given valid Thread & valid Target to test constructor with target and threadName
+    RunnableTarget target;
+    Thread thread2 = Thread(target, String("sample thread"));
+
+    // Test true after call constructor
+    ASSERT_STR("sample thread", thread2.getName());
+}
+
+TEST(JavaLang, ThreadName) {
+    // Given valid Thread to test get/set thread name
+    Thread thread;
 
     // Test true after set new name for threadName
     thread.setName("Some valid name");
@@ -52,16 +75,22 @@ TEST(JavaLang, ThreadConstructor) {
 }
 
 TEST(JavaLang, ThreadStart) {
-    // Given validTarget and validThread to test start(), join(), join(millis) functions
+    // Given valid Target and valid Thread to test start(), join(), join(millis) functions
     RunnableTarget validTarget;
     Thread thread = Thread(validTarget);
 
     thread.start();
-    thread.join(); /// Make sure that thread has join() because if not, there will be crashed
+    thread.join();  /// Make sure that thread has join() because if not
+                    /// there will be crashed because it's finished this test case before this thread's completed
 
-    //FIXME: please help to check this output <"Hello world"> is appeard at test case 73 or not
+    ///Please help to check this output <"Hello world"> is appeared at test case 74 or not
 }
 
 TEST(JavaLang, ThreadStop) {
-    //TODO
+    // Given valid RunnableTarget2's instance, valid Thread's instance, start success a Thread to test Thread.stop()
+    RunnableTarget2 target;
+    Thread thread = Thread(target);
+
+//    thread.start();
+//    thread.stop(); ///FIXME: research the way to run Thread.stop() safety
 }
