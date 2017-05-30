@@ -41,7 +41,6 @@ namespace Java {
             Runnable    *target;
 
             boolean     isThreadRunning;
-            //FIXME: currently ignore priority to finish main process of thread first
 
             ///Adds-on function to adapt pthread_create of C style
         public:

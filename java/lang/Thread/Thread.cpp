@@ -73,10 +73,11 @@ void Thread::start() {
  * Stop a thread if it's running
  */
 void Thread::stop() {
-    //FIXME: discuss about this function (Deprecated in current java)
     if (!this->isThreadRunning) {
         return;
     }
+
+    pthread_kill(this->original, SIGALRM);///WARNING: this will stop whole problem instead of only thread
 }
 
 /**
