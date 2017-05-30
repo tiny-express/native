@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_THREAD_HPP
 #define NATIVE_JAVA_LANG_THREAD_HPP
 
+#include <pthread.h>
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 #include "../Runnable/Runnable.hpp"
@@ -36,16 +37,26 @@ namespace Java {
         class Thread: public Object, public virtual Runnable {
         private:
             pthread_t   original;
-            int         threadNumber;
             string      threadName;
             Runnable    *target;
+
+            boolean     isThreadRunning;
             //FIXME: currently ignore priority to finish main process of thread first
+
+            ///Adds-on function to adapt pthread_create of C style
+        public:
+            void *pthread_run(void *context) {
+                ((Thread *)context)->target->run();
+            }
+            static void *pthread_helper(void *context) {
+                return ((Thread *)context)->pthread_run(context);
+            }
 
         public:
             Thread();
-            //Thread(Runnable &target2);
-            //Thread(Runnable &target2, String &name);
-            //Thread(String &name);
+            Thread(Runnable &target2);
+            Thread(Runnable &target2, String name);
+            Thread(String name);
             //Thread(ThreadGroup group, Runnable &target);
             //Thread(ThreadGroup group, Runnable &target, String &name);
             //Thread(ThreadGroup group, Runnable &target, String &name, long stackSize);
@@ -63,9 +74,6 @@ namespace Java {
             void setName(string target);
             string toString() const;
 
-            //Adds-on functions
-            pthread_t getCurrentThread();
-            Runnable& getTarget();
         };
     }
 }

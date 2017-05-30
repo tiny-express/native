@@ -2,9 +2,9 @@
 #include "response_parser.h"
 #include <stdlib.h>
 TEST (Network, Parser) {
-#ifdef __APPLE__
-    return;
-#endif
+    #ifdef __APPLE__
+        return;
+    #endif
 
     http_response* result3 = (http_response*) malloc(sizeof(http_response));
     free(result3);
