@@ -31,6 +31,7 @@ extern "C" {
 #include "../../../builtin.h"
 };
 
+#include <memory>
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -111,10 +112,54 @@ public:
 
 namespace Java {
 	namespace Lang {
+		template <typename E>
+		class Class;
 		class String;
-		class Object {
+		class Object;
+		
+		template <typename E>
+		class Class {
 		public:
-			string toString() {}
+			Class();
+			~Class();
+		};
+		
+		class Object {
+		protected:
+			Object	&clone();
+			void	finalize();
+		public:
+			boolean equals(Object &obj) {
+				if (this->hashCode() == obj.hashCode()) {
+					return true;
+				}
+				return false;
+			}
+			Class<Object> getClass() {
+				// This method is only available in Java
+				// should not be supported in this library
+			}
+			long hashCode() {
+				return (intptr_t) std::addressof(*this);
+			}
+			void notify() {
+				// TODO
+			}
+			void notifyAll() {
+				// TODO
+			}
+			string toString() {
+				return (string) "";
+			}
+			void wait() {
+				// TODO
+			}
+			void wait(long timeout) {
+				// TODO
+			}
+			void wait(long timeout, int nanos) {
+				// TODO
+			}
 		};
 	}
 }

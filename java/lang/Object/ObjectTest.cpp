@@ -83,3 +83,34 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_STR("Food", initializedStrings.get(0).toString());
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
+
+TEST(JavaLang, ObjectConstructor) {
+	Object objectNormalDelaration;
+	objectNormalDelaration.hashCode();
+	
+	Object *objectPointerDeclaration = new Object();
+	objectPointerDeclaration->hashCode();
+	delete objectPointerDeclaration;
+}
+
+TEST(JavaLang, ObjectEquals) {
+	// Given two difference instances of Object - Return instances are not equal
+	Object object1;
+	Object object2;
+	ASSERT_FALSE(object1.equals(object2));
+	
+	// Given one instance of Object - Return equal with itself
+	Object object3;
+	ASSERT_TRUE(object3.equals(object3));
+}
+
+TEST(JavaLang, ObjectHashCode) {
+	// Given two difference instances of Object - Return memory addresses are not equal
+	Object object;
+	Object object2;
+	ASSERT_NOT_EQUAL(object.hashCode(), object2.hashCode());
+	
+	// Given one instance of Object - Return it and itself is the same
+	Object object3;
+	ASSERT_EQUAL(object3.hashCode(), object3.hashCode());
+}
