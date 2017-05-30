@@ -42,6 +42,7 @@ double number_default(double target);
 #endif
 
 typedef char *string;
+typedef wchar_t *unicode;
 typedef const char *const_string;
 typedef unsigned char byte;
 

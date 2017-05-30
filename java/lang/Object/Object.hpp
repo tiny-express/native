@@ -50,7 +50,7 @@ public:
 	boolean operator!=(const ArrayIterator<E> &other) const {
 		return _pos != other._pos;
 	}
-	int operator*() const {
+	E operator*() const {
 		return _p_vec->get(_pos);
 	}
 	const ArrayIterator<E> &operator++() {
