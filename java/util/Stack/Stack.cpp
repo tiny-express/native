@@ -26,17 +26,20 @@
 
 #include "Stack.hpp"
 
-using namespace Java::Lang;
+using namespace Java::Util;
 
-int Stack::size() {
-    return sizeof(this->original);
+template <typename E>
+int Stack<E>::size() {
+//    return sizeof(this->original);
+    return 0;
 }
 
-boolean Stack::empty() {
-    int quantity = stack.size();
-    if (quantity == 0) {
-        return TRUE;
-    }   
+template<typename E>
+boolean Stack<E>::empty() {
+//    int quantity = stack.size();
+//    if (quantity == 0) {
+//        return TRUE;
+//    }
     return FALSE;
 }
 
