@@ -43,9 +43,10 @@ class RunnableTarget2: public virtual Runnable {
     public:
         void run() const {
             int index = 0;
-            int limit = 50;
+            int limit = 51;
             for (; index <= limit ; index++) {
                 printf("Index [%d] must not equal to %d to test Thread.stop()\n", index, limit);
+                usleep(1);
             }
         }
 };
@@ -81,7 +82,7 @@ TEST(JavaLang, ThreadStart) {
 
     thread.start();
     thread.join();  /// Make sure that thread has join() because if not
-                    /// there will be crashed because it's finished this test case before this thread's completed
+    /// there will be crashed because it's finished this test case before this thread's completed
 
     ///Please help to check this output <"Hello world"> is appeared at test case 74 or not
 }
@@ -91,6 +92,9 @@ TEST(JavaLang, ThreadStop) {
     RunnableTarget2 target;
     Thread thread = Thread(target);
 
-//    thread.start();
-//    thread.stop(); ///FIXME: research the way to run Thread.stop() safety
+    thread.start();
+    usleep(10);
+    thread.stop();
+
+    ///Please check: <"Index [%index] must not equal to %limit to test Thread.stop()"> is appeared at test case 75 or not
 }

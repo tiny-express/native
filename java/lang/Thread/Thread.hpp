@@ -41,14 +41,14 @@ namespace Java {
             Runnable    *target;
 
             boolean     isThreadRunning;
-
             ///Adds-on function to adapt pthread_create of C style
         public:
             void *pthread_run(void *context) {
                 ((Thread *)context)->target->run();
             }
+
             static void *pthread_helper(void *context) {
-                return ((Thread *)context)->pthread_run(context);
+                return ((Thread *) context)->pthread_run(context);
             }
 
         public:

@@ -65,7 +65,7 @@ void Thread::run() const {
  * Force thread and call Runnable target's run() method
  */
 void Thread::start() {
-    this->isThreadRunning = true;
+    this->isThreadRunning = TRUE;
     pthread_create(&this->original, NULL, &Thread::pthread_helper, (void *)this);
 }
 
@@ -77,7 +77,8 @@ void Thread::stop() {
         return;
     }
 
-    pthread_kill(this->original, SIGALRM);///WARNING: this will stop whole problem instead of only thread
+    pthread_cancel(this->original);
+    this->isThreadRunning = FALSE;
 }
 
 /**
@@ -89,7 +90,6 @@ void Thread::join() {
     }
 
     pthread_join(this->original, NULL);
-    this->isThreadRunning = false;
 }
 
 /**
@@ -102,7 +102,6 @@ void Thread::join(long millis) {
 
     usleep(millis * 1000);
     pthread_join(this->original, NULL);
-    this->isThreadRunning = false;
 }
 
 /**
