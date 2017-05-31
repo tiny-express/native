@@ -95,7 +95,7 @@ void Thread::join() {
 /**
  * Waits at most millis milliseconds for this thread to die if it's running
  */
-void Thread::join(long millis) {
+void Thread::join(unsigned int millis) {
     if (!this->isThreadRunning) {
         return;
     }
@@ -122,5 +122,5 @@ void Thread::setName(string target) {
  * Returns a string representation of this thread, including the thread's name, priority, and thread group.
  */
 string Thread::toString() const {
-    return this->threadName; //FIXME: change this function's likely Java doc later
+    return this->threadName;
 }
