@@ -23,3 +23,40 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_STACK_LIST_HPP
+#define NATIVE_JAVA_STACK_LIST_HPP
+
+#include "../function/UnaryOperator/UnaryOperator.hpp"
+#include "../Iterator/Iterator.hpp"
+#include "../Collection/Collection.hpp"
+#include "../Comparator/Comparator.hpp"
+
+namespace Java {
+    namespace Util {
+        template <typename E>
+        class StackIterator;
+        
+        template <typename E>
+        class Stack;
+        
+        template <typename E>
+        class Stack : public virtual Collection<E> {
+            private:
+            int original;
+            
+            public:
+            int size(const Stack &target);
+            
+            public:
+            virtual bool empty();
+            virtual E peek();
+            virtual E pop();
+            virtual E push(const E &item);
+            virtual int search(const Object &o); 
+        };
+    }
+}
+
+#endif
+
