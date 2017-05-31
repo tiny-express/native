@@ -54,6 +54,20 @@ namespace Java {
             virtual E pop();
             virtual E push(const E &item);
             virtual int search(const Object &o); 
+            
+            virtual boolean add(E &e);
+			virtual boolean addAll(Collection<E> &c);
+			virtual void clear();
+			virtual boolean contains(Object &o) const;
+			virtual boolean equals(Object &o) const;
+			virtual int hashCode() const;
+			virtual boolean isEmpty() const;
+			virtual Iterator<E> &iterator() const;
+			virtual boolean remove(Object &o);
+			virtual boolean removeAll(Collection<Object> &c);
+			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter);
+			virtual boolean retainAll(Collection<Object> &c);
+			virtual int size() const;
         };
     }
 }
