@@ -35,19 +35,14 @@
 namespace Java {
     namespace Util {
         template <typename E>
-        class StackIterator;
-        
-        template <typename E>
-        class Stack;
-        
-        template <typename E>
         class Stack : public virtual Collection<E> {
             private:
             int original;
             
             public:
-            int size(const Stack &target);
-            
+			Stack();
+			~Stack();
+
             public:
             virtual bool empty();
             virtual E peek();
@@ -68,6 +63,8 @@ namespace Java {
 			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter);
 			virtual boolean retainAll(Collection<Object> &c);
 			virtual int size() const;
+
+			int size(const Stack &target);
         };
     }
 }
