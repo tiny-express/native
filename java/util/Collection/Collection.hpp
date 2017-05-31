@@ -42,6 +42,9 @@ namespace Java {
 		
 		template <typename E>
 		class Collection : public virtual Iterable<E> {
+		private:
+			Collection();
+			~Collection();
 		public:
 			virtual boolean add(E &e) = 0;
 			virtual boolean addAll(Collection<E> &c) = 0;
