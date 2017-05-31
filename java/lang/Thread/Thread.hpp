@@ -67,7 +67,7 @@ namespace Java {
             void start();
             void stop();
             void join();
-            void join(long millis);
+            void join(unsigned int millis);
 
             string getName();
             void setName(string target);
