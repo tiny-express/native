@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
+#include <stack>
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
 #include "../Collection/Collection.hpp"
@@ -37,34 +38,39 @@ namespace Java {
         template <typename E>
         class Stack : public virtual Collection<E> {
             private:
-            int original;
+			std::stack<E> original;
             
             public:
-			Stack();
-			~Stack();
+			Stack(){}
+			~Stack(){}
 
             public:
-            virtual bool empty();
-            virtual E peek();
-            virtual E pop();
-            virtual E push(const E &item);
-            virtual int search(const Object &o); 
+            virtual bool empty() {}
+            virtual E peek(){}
+            virtual E pop(){}
+            virtual E push(const E &item){}
+            virtual int search(const Object &o){}
             
-            virtual boolean add(E &e);
-			virtual boolean addAll(Collection<E> &c);
-			virtual void clear();
-			virtual boolean contains(Object &o) const;
-			virtual boolean equals(Object &o) const;
-			virtual int hashCode() const;
-			virtual boolean isEmpty() const;
-			virtual Iterator<E> &iterator() const;
-			virtual boolean remove(Object &o);
-			virtual boolean removeAll(Collection<Object> &c);
-			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter);
-			virtual boolean retainAll(Collection<Object> &c);
-			virtual int size() const;
+            virtual boolean add(E &e) {
+				this->original.push(e);
+			}
 
-			int size(const Stack &target);
+			virtual boolean addAll(Collection<E> &c){}
+			virtual void clear(){}
+			virtual boolean contains(Object &o) const{}
+			virtual boolean equals(Object &o) const{}
+			virtual int hashCode() const{}
+			virtual boolean isEmpty() const{}
+			virtual Iterator<E> &iterator() const{}
+			virtual boolean remove(Object &o){}
+			virtual boolean removeAll(Collection<Object> &c){}
+			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter){}
+			virtual boolean retainAll(Collection<Object> &c){}
+
+			virtual int size() const {
+				return this->original.size();
+			}
+
         };
     }
 }

@@ -31,13 +31,14 @@ extern "C" {
 #include "../../lang/String/String.hpp"
 #include "Stack.hpp"
 
-using namespace Java::Lang;
+using namespace Java::Util;
 
-TEST(JavaLang, StackConstructor) {
-//    Stack<int> stack;
-//    stack.add(123);
-//
-//    ASSERT_EQUAL(1, stack.size());
+TEST(JavaUtil, StackConstructor) {
+    Stack<int> stack;
+    int temp = 123;
+    stack.add(temp);
+
+    ASSERT_EQUAL(1, stack.size());
 }
 
 TEST(JavaLang, StackDestructor) {
