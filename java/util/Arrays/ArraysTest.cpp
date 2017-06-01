@@ -23,3 +23,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+extern "C" {
+#include "../../../unit_test.h"
+}
+
+#include "Arrays.hpp"
+
+using namespace Java::Util;
+
+TEST(JavaUtil, ArraysSearch) {
+    // Given valid byte[] to test binary search
+    byte array[5] = { 1 , 2 , 3 , 5 , 4 };
+
+    // With correct key appeared inside array, return correct position
+    byte key = 3;
+    int position = 2;
+    ASSERT_EQUAL(position, Arrays::binarySearch(array, key));
+
+    // With correct key2 but not appear inside array, return -1
+    byte key2 = 101;
+    int position2 = -1;
+    ASSERT_EQUAL(position2, Arrays::binarySearch(array, key2));
+}
