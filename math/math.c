@@ -37,4 +37,3 @@ double math_floor(double a) {
 long math_round(double a) {
 	return round(a);
 }
-
