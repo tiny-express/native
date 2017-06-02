@@ -125,12 +125,12 @@ TEST(JavaUtil, ArraysSort) {
     /// Given valid arrayFloat[] to test Arrays::sort() with arrayFloatSorted[] - this test case wrapped <double> also
     float arrayFloat[5] = { 5.1 , 12.7 , 0.2 , 22.3 , 18.5 };
     float arrayFloatSorted[5] = { 0.2 , 5.1 , 12.7 , 18.5 , 22.3 };
-//    Arrays::sort0(arrayFloat, 0, 4); //FIXME: find another solution to compare float
+    Arrays::sort(arrayFloat, 0, 4);
 
     // Test true: all elements inside arrayFloat[] must be equal arrayFloatSorted[]
-//    for (int index = 0; index < 5; ++index) {
-//        ASSERT_EQUAL(arrayFloatSorted[index], arrayFloat[index]);
-//    }
+    for (int index = 0; index < 5; ++index) {
+        ASSERT_EQUAL(arrayFloatSorted[index], arrayFloat[index]);
+    }
 
 
 }
