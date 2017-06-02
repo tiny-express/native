@@ -42,66 +42,157 @@ namespace Java {
             //static <T>List asList(T...a)
 
             static int binarySearch(byte a[], byte key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
 
             static int binarySearch(byte a[], int fromIndex, int toIndex, byte key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
 
             static int binarySearch(char a[], char key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
 
             static int binarySearch(char a[], int fromIndex, int toIndex, char key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
 
             static int binarySearch(double a[], double key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
 
             static int binarySearch(double a[], int fromIndex, int toIndex, double key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
+
             static int binarySearch(float a[], float key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
+
             static int binarySearch(float a[], int fromIndex, int toIndex, float key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
+
             static int binarySearch(int a[], int key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
+
             static int binarySearch(int a[], int fromIndex, int toIndex, int key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
+
             static int binarySearch(long a[], long key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
+
             static int binarySearch(long a[], int fromIndex, int toIndex, long key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
+
             static int binarySearch(short a[], short key, int arraySize) {
-                return -1;
+                return binarySearch0(a, 0, arraySize - 1, key);
             }
+
             static int binarySearch(short a[], int fromIndex, int toIndex, short key) {
-                return -1;
+                return binarySearch0(a, fromIndex, toIndex, key);
             }
+
             static int binarySearch(Object a[], Object key, int arraySize) {
+                //return binarySearch0(a, 0, arraySize - 1, key); //FIXME: please implement >= && == of Object's operator
                 return -1;
             }
             static int binarySearch(Object a[], int fromIndex, int toIndex, Object key) {
+                //return binarySearch0(a, fromIndex, toIndex, key); //FIXME: please implement >= && == of Object's operator
                 return -1;
             }
 
             template <typename T>
             static int binarySearch(T a[], T key, int arraySize) {
-                return binarySearch(a, 0, arraySize-1, key);
+                return binarySearch0(a, 0, arraySize-1, key);
             }
 
             template <typename T>
             static int binarySearch(T a[], int fromIndex, int toIndex, T key) {
+                return binarySearch0(a, 0, toIndex, key);
+            }
+
+
+            static void sort(byte a[], int arraySize) {
+
+            }
+
+            static void sort(byte a[], int fromIndex, int toIndex) {
+
+            }
+
+            static void sort(char a[], int arraySize) {
+
+            }
+
+            static void sort(char a[], int fromIndex, int toIndex) {
+
+            }
+
+            static void sort(double a[], int arraySize) {
+
+            }
+
+            static void sort(double a[], int fromIndex, int toIndex){
+
+            }
+
+            static void sort(float a[], int arraySize) {
+
+            }
+
+            static void sort(float a[], int fromIndex, int toIndex) {
+
+            }
+
+            static void sort(int a[], int arraySize) {
+
+            }
+
+            static void sort(int a[], int fromIndex, int toIndex, int arraySize) {
+
+            }
+
+            static void sort(long a[], int arraySize) {
+
+            }
+
+            static void sort(long a[], int fromIndex, int toIndex) {
+
+            }
+
+            static void sort(short a[], int arraySize) {
+
+            }
+
+            static void sort(short a[], int fromIndex, int toIndex, int arraySize) {
+
+            }
+
+            static void sort(Object a[]) {
+
+            }
+
+            static void sort(Object a[], int fromIndex, int toIndex) {
+
+            }
+
+//            template <typename T>
+//            static void sort(T a[], T key, Comparator<? super T> c);
+//            template <typename T>
+//            static void sort(Object a[], int fromIndex, int toIndex, T key, Comparator<? super T> c);
+
+        private:
+            template <typename T>
+            static int binarySearch0(T a[], int fromIndex, int toIndex, T key) {
+                if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex) {
+                    return -1;
+                }
+
                 int left = fromIndex;
                 int right = toIndex;
 
@@ -129,60 +220,6 @@ namespace Java {
                 return -1;
             }
 
-
-            static void sort(byte a[], int arraySize) {
-
-            }
-            static void sort(byte a[], int fromIndex, int toIndex) {
-
-            }
-            static void sort(char a[], int arraySize) {
-
-            }
-            static void sort(char a[], int fromIndex, int toIndex) {
-
-            }
-            static void sort(double a[], int arraySize) {
-
-            }
-            static void sort(double a[], int fromIndex, int toIndex){
-
-            }
-            static void sort(float a[], int arraySize) {
-
-            }
-            static void sort(float a[], int fromIndex, int toIndex) {
-
-            }
-            static void sort(int a[], int arraySize) {
-
-            }
-            static void sort(int a[], int fromIndex, int toIndex, int arraySize) {
-
-            }
-            static void sort(long a[], int arraySize) {
-
-            }
-            static void sort(long a[], int fromIndex, int toIndex) {
-
-            }
-            static void sort(short a[], int arraySize) {
-
-            }
-            static void sort(short a[], int fromIndex, int toIndex, int arraySize) {
-
-            }
-            static void sort(Object a[]) {
-
-            }
-            static void sort(Object a[], int fromIndex, int toIndex) {
-
-            }
-
-//            template <typename T>
-//            static void sort(T a[], T key, Comparator<? super T> c);
-//            template <typename T>
-//            static void sort(Object a[], int fromIndex, int toIndex, T key, Comparator<? super T> c);
         };
     }
 }
