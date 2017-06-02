@@ -96,3 +96,41 @@ TEST(JavaUtil, ArraysBinarySearch) {
 //    ASSERT_EQUAL(positionObject2, Arrays::binarySearch(arrayObject, keyObject2));
 
 }
+
+TEST(JavaUtil, ArraysSort) {
+    /// Given valid arrayLong[] to test Arrays::sort() with arrayLongSorted[] - this test case wrapped <byte>, <int>, <short>
+    long arrayLong[5] = { 5 , 2 , 4 , 1 , 7};
+    long arrayLongSorted[5] = { 1 , 2 , 4 , 5 , 7 };
+    Arrays::sort(arrayLong, 0, 4);
+
+    // Test true: all elements inside arrayLong[] must be equal arrayLongSorted[]
+    for (int index = 0; index < 5; ++index) {
+        ASSERT_EQUAL(arrayLongSorted[index], arrayLong[index]);
+    }
+
+
+
+    /// Given valid arrayLong[] to test Arrays::sort() with arrayCharSorted[]
+    char arrayChar[5] = { 'b' , 'q' , 'y' , 'z' , 'u'};
+    char arrayCharSorted[5] = { 'b' , 'q' , 'u' , 'y' , 'z' };
+    Arrays::sort(arrayChar, 0, 4);
+
+    // Test true: all elements inside arrayChar[] must be equal arrayCharSorted[]
+    for (int index = 0; index < 5; ++index) {
+        ASSERT_EQUAL(arrayCharSorted[index], arrayChar[index]);
+    }
+
+
+
+    /// Given valid arrayFloat[] to test Arrays::sort() with arrayFloatSorted[] - this test case wrapped <double> also
+    float arrayFloat[5] = { 5.1 , 12.7 , 0.2 , 22.3 , 18.5 };
+    float arrayFloatSorted[5] = { 0.2 , 5.1 , 12.7 , 18.5 , 22.3 };
+//    Arrays::sort0(arrayFloat, 0, 4); //FIXME: find another solution to compare float
+
+    // Test true: all elements inside arrayFloat[] must be equal arrayFloatSorted[]
+//    for (int index = 0; index < 5; ++index) {
+//        ASSERT_EQUAL(arrayFloatSorted[index], arrayFloat[index]);
+//    }
+
+
+}
