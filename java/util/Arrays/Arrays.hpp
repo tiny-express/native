@@ -98,93 +98,98 @@ namespace Java {
             }
 
             static int binarySearch(Object a[], Object key, int arraySize) {
-                //return binarySearch0(a, 0, arraySize - 1, key); //FIXME: please implement >= && == of Object's operator
+//                return binarySearch0(a, 0, arraySize - 1, key); //FIXME: discuss about Object's operator
                 return -1;
             }
             static int binarySearch(Object a[], int fromIndex, int toIndex, Object key) {
-                //return binarySearch0(a, fromIndex, toIndex, key); //FIXME: please implement >= && == of Object's operator
+//                return binarySearch0(a, fromIndex, toIndex, key);  //FIXME: discuss about Object's operator
                 return -1;
             }
 
             template <typename T>
-            static int binarySearch(T a[], T key, int arraySize) {
+            static int binarySearch(T a[], T key, int arraySize) { //FIXME: discuss about comparator of T
                 return binarySearch0(a, 0, arraySize-1, key);
             }
 
             template <typename T>
-            static int binarySearch(T a[], int fromIndex, int toIndex, T key) {
+            static int binarySearch(T a[], int fromIndex, int toIndex, T key) { //FIXME: discuss about comparator of T
                 return binarySearch0(a, 0, toIndex, key);
             }
 
 
             static void sort(byte a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(byte a[], int fromIndex, int toIndex) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(char a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(char a[], int fromIndex, int toIndex) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(double a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
-            static void sort(double a[], int fromIndex, int toIndex){
-
+            static void sort(double a[], int fromIndex, int toIndex) {
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(float a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(float a[], int fromIndex, int toIndex) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(int a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(int a[], int fromIndex, int toIndex, int arraySize) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(long a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(long a[], int fromIndex, int toIndex) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
             static void sort(short a[], int arraySize) {
-
+                return sort0(a, 0, arraySize-1);
             }
 
             static void sort(short a[], int fromIndex, int toIndex, int arraySize) {
-
+                return sort0(a, fromIndex, toIndex);
             }
 
-            static void sort(Object a[]) {
-
+            static void sort(Object a[], int arraySize) {
+//                return sort0(a, 0, arraySize-1); //FIXME: discuss about > & < of Object's operator
             }
 
             static void sort(Object a[], int fromIndex, int toIndex) {
-
+//                return sort0(a, fromIndex, toIndex); //FIXME: discuss about > & < of Object's operator
             }
 
-//            template <typename T>
-//            static void sort(T a[], T key, Comparator<? super T> c);
-//            template <typename T>
-//            static void sort(Object a[], int fromIndex, int toIndex, T key, Comparator<? super T> c);
+            template <typename T>
+            static void sort(T a[], int arraySize) { //FIXME: discuss about comparator of T
+                return sort0(a, 0, arraySize-1);
+            }
+
+            template <typename T>
+            static void sort(T a[], int fromIndex, int toIndex) { //FIXME: discuss about comparator of T
+                return sort0(a, fromIndex, toIndex);
+            }
 
         private:
             template <typename T>
@@ -220,6 +225,44 @@ namespace Java {
                 return -1;
             }
 
+            /// Quick sort
+            template <typename T>
+            static void sort0(T a[], int fromIndex, int toIndex) {
+                std::stack<int> positionKeeper;
+
+                positionKeeper.push(fromIndex);
+                positionKeeper.push(toIndex);
+
+                while(!positionKeeper.empty()) {
+                    int right = positionKeeper.top();
+                    positionKeeper.pop();
+                    int left = positionKeeper.top();
+                    positionKeeper.pop();
+                    while (left < right) {
+                        int i = left;
+                        int j = right;
+
+                        int key = a[(i+j) / 2];
+                        while(i <= j) {
+                            while (a[i] < key) i++;
+                            while (a[j] > key) j--;
+                            if (i <= j) {
+                                int temp = a[i];
+                                a[i] = a[j];
+                                a[j] = temp;
+
+                                i++;
+                                j--;
+                            }
+                        }
+                        if (i < right) {
+                            positionKeeper.push(i);
+                            positionKeeper.push(right);
+                        }
+                        right = j;
+                    }
+                }
+            }
         };
     }
 }
