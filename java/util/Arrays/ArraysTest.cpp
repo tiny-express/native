@@ -53,36 +53,36 @@ TEST(JavaUtil, ArraysBinarySearch) {
 
 
     /// Given valid char[] to test binary search
-//    char arrayChar[5] = { 'a' , 'b' , 'c' , 'd' , 'e' };
-//
-//    // With correct key appeared inside array, return correct position
-//    char keyChar = 'b';
-//    int positionChar = 1;
-//    ASSERT_EQUAL(positionChar, Arrays::binarySearch(arrayChar, keyChar));
-//
-//    // With correct key but not appear inside array, return -1
-//    char keyChar2 = 'f';
-//    int positionChar2 = -1;
-//    ASSERT_EQUAL(positionChar2, Arrays::binarySearch(arrayChar, keyChar2));
-//
-//
-//
-//    /// Given valid double[] to test binary search - this test case wrapped <float> also
-//    double arrayDouble[5] = { 15.5 , 17.7 , 32.9 , 51.4 , 64.3 };
-//
-//    // With correct key appeared inside array, return correct position
-//    double keyDouble = 15.5;
-//    int positionDouble = 0;
-//    ASSERT_EQUAL(positionDouble, Arrays::binarySearch(arrayDouble, keyDouble));
-//
-//    // With correct key2 but not appear inside array, return -1
-//    double keyDouble2 = 65;
-//    int positionDouble2 = -1;
-//    ASSERT_EQUAL(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2));
-//
-//
-//
-//    /// Given valid Object[] to test binary search
+    char arrayChar[5] = { 'a' , 'b' , 'c' , 'd' , 'e' };
+
+    // With correct key appeared inside array, return correct position
+    char keyChar = 'b';
+    int positionChar = 1;
+    ASSERT_EQUAL(positionChar, Arrays::binarySearch(arrayChar, keyChar, 5));
+
+    // With correct key but not appear inside array, return -1
+    char keyChar2 = 'f';
+    int positionChar2 = -1;
+    ASSERT_EQUAL(positionChar2, Arrays::binarySearch(arrayChar, keyChar2, 5));
+
+
+
+    /// Given valid double[] to test binary search - this test case wrapped <float> also
+    double arrayDouble[6] = { 15.5 , 17.7 , 32.9 , 51.4 , 64.3 , 69.9};
+
+    // With correct key appeared inside array, return correct position
+    double keyDouble = 15.5;
+    int positionDouble = 0;
+    ASSERT_EQUAL(positionDouble, Arrays::binarySearch(arrayDouble, keyDouble, 6));
+
+    // With correct key2 but not appear inside array, return -1
+    double keyDouble2 = 65;
+    int positionDouble2 = -1;
+    ASSERT_EQUAL(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
+
+
+
+    /// Given valid Object[] to test binary search
 //    Object arrayObject[5] = { Integer(1) , Integer(2) , Integer(3), Integer(4) , Integer(5) };
 //
 //    // With correct key appeared inside array, return correct position
