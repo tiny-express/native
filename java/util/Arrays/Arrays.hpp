@@ -241,13 +241,14 @@ namespace Java {
                     while (left < right) {
                         int i = left;
                         int j = right;
+                        T key = a[(i+j) / 2];
 
-                        int key = a[(i+j) / 2];
                         while(i <= j) {
-                            while (a[i] < key) i++;
-                            while (a[j] > key) j--;
+                            while (a[i] < key && i <= j) i++;
+                            while (a[j] > key && j >= i) j--;
+
                             if (i <= j) {
-                                int temp = a[i];
+                                T temp = a[i];
                                 a[i] = a[j];
                                 a[j] = temp;
 
