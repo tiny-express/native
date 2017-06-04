@@ -27,11 +27,12 @@
 #ifndef NATIVE_JAVA_LANG_COMPARABLE_HPP
 #define NATIVE_JAVA_LANG_COMPARABLE_HPP
 
+#include "../Object/Object.hpp"
+
 namespace Java {
     namespace Lang {
-        template <typename T>
         class Comparable {
-            virtual int compareTo(T o) const = 0;
+            virtual int compareTo(Object* o) const = 0;
         };
     }
 }
