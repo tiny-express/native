@@ -50,8 +50,6 @@ TEST(JavaUtil, ArraysBinarySearch) {
     int positionByte2 = -1;
     ASSERT_EQUAL(positionByte2, Arrays::binarySearch(arrayByte, keyByte2, 5));
 
-
-
     /// Given valid char[] to test binary search
     char arrayChar[5] = { 'a' , 'b' , 'c' , 'd' , 'e' };
 
@@ -65,8 +63,6 @@ TEST(JavaUtil, ArraysBinarySearch) {
     int positionChar2 = -1;
     ASSERT_EQUAL(positionChar2, Arrays::binarySearch(arrayChar, keyChar2, 5));
 
-
-
     /// Given valid double[] to test binary search - this test case wrapped <float> also
     double arrayDouble[6] = { 15.5 , 17.7 , 32.9 , 51.4 , 64.3 , 69.9};
 
@@ -79,8 +75,6 @@ TEST(JavaUtil, ArraysBinarySearch) {
     double keyDouble2 = 65;
     int positionDouble2 = -1;
     ASSERT_EQUAL(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
-
-
 
     /// Given valid Object[] to test binary search
 //    Object arrayObject[5] = { Integer(1) , Integer(2) , Integer(3), Integer(4) , Integer(5) };
@@ -108,8 +102,6 @@ TEST(JavaUtil, ArraysSort) {
         ASSERT_EQUAL(arrayLongSorted[index], arrayLong[index]);
     }
 
-
-
     /// Given valid arrayLong[] to test Arrays::sort() with arrayCharSorted[]
     char arrayChar[5] = { 'b' , 'q' , 'y' , 'z' , 'u'};
     char arrayCharSorted[5] = { 'b' , 'q' , 'u' , 'y' , 'z' };
@@ -119,8 +111,6 @@ TEST(JavaUtil, ArraysSort) {
     for (int index = 0; index < 5; ++index) {
         ASSERT_EQUAL(arrayCharSorted[index], arrayChar[index]);
     }
-
-
 
     /// Given valid arrayFloat[] to test Arrays::sort() with arrayFloatSorted[] - this test case wrapped <double> also
     float arrayFloat[5] = { 5.1 , 12.7 , 0.2 , 22.3 , 18.5 };
