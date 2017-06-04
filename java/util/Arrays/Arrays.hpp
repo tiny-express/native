@@ -29,6 +29,7 @@
 
 #include <stack>
 #include "../../Lang.hpp"
+#include "../List/List.hpp"
 
 using namespace Java::Lang;
 
@@ -39,7 +40,10 @@ namespace Java {
             Arrays();
             ~Arrays();
         public:
-            //static <T>List asList(T...a)
+//            template<typename T, typename... T>
+//            static List<T> asList(T... a) {
+//                //TODO
+//            }
 
             static int binarySearch(byte a[], byte key, int arraySize) {
                 return binarySearch0(a, 0, arraySize - 1, key);
@@ -107,15 +111,296 @@ namespace Java {
             }
 
             template <typename T>
-            static int binarySearch(T a[], T key, int arraySize) { //FIXME: discuss about comparator of T
+            static int binarySearch(T a[], T key, int arraySize) {
                 return binarySearch0(a, 0, arraySize-1, key);
             }
 
             template <typename T>
-            static int binarySearch(T a[], int fromIndex, int toIndex, T key) { //FIXME: discuss about comparator of T
+            static int binarySearch(T a[], int fromIndex, int toIndex, T key) {
                 return binarySearch0(a, 0, toIndex, key);
             }
 
+            //FIXME: Discuss about return [] in C++
+            static boolean* copyOf(boolean original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static byte* copyOf(byte original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static char* copyOf(char original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static double* copyOf(double original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static float* copyOf(float original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static int* copyOf(int original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static long* copyOf(long original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            static short* copyOf(short original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            template<typename T>
+            static T* copyOf(T original[], int newLength) {
+                //TODO
+                return NULL;
+            }
+
+            template<typename T, typename U>
+            static T* copyOf(U original[], int newLength, T newType) {
+                //TODO
+                return NULL;
+            }
+
+            static boolean* copyOfRange(boolean original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static byte* copyOfRange(byte original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static char* copyOfRange(char original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static double* copyOfRange(double original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static float* copyOfRange(float original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static int* copyOfRange(int original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static long* copyOfRange(long original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            static short* copyOfRange(short original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            template<typename T>
+            static T* copyOfRange(T original[], int from, int to) {
+                //TODO
+                return NULL;
+            }
+
+            template<typename T, typename U>
+            static T* copyOfRange(U original[], int from, int to, T newType) {
+                //TODO
+                return NULL;
+            }
+
+            static boolean deepEquals(Object a1[], Object a2[]) {
+                //TODO
+                return false;
+            }
+
+            static int deepHashCode(Object a[]) {
+                //TODO
+                return -1;
+            }
+
+            static String deepToString(Object a[]) {
+                //TODO
+                return "";
+            }
+
+            static boolean equals(boolean a[], boolean a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(byte a[], byte a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(char a[], char a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(double a[], double a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(float a[], float a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(int a[], int a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(long a[], long a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(Object a[], Object a2[]) {
+                //TODO
+                return false;
+            }
+
+            static boolean equals(short a[], short a2[]) {
+                //TODO
+                return false;
+            }
+
+            static void	fill(boolean a[], boolean val) {
+                //TODO
+            }
+
+            static void	fill(boolean a[], int fromIndex, int toIndex, boolean val) {
+                //TODO
+            }
+
+            static void	fill(byte a[], byte val) {
+                //TODO
+            }
+
+            static void	fill(byte a[], int fromIndex, int toIndex, byte val) {
+                //TODO
+            }
+
+            static void	fill(char a[], char val) {
+                //TODO
+            }
+
+            static void	fill(char a[], int fromIndex, int toIndex, char val) {
+                //TODO
+            }
+
+            static void	fill(double a[], double val) {
+                //TODO
+            }
+
+            static void	fill(double a[], int fromIndex, int toIndex, double val) {
+                //TODO
+            }
+
+            static void	fill(float a[], float val) {
+                //TODO
+            }
+
+            static void	fill(float a[], int fromIndex, int toIndex, float val) {
+                //TODO
+            }
+
+            static void	fill(int a[], int val) {
+                //TODO
+            }
+
+            static void	fill(int a[], int fromIndex, int toIndex, int val) {
+                //TODO
+            }
+
+            static void	fill(long a[], long val) {
+                //TODO
+            }
+
+            static void	fill(long a[], int fromIndex, int toIndex, long val) {
+                //TODO
+            }
+
+            static void	fill(Object a[], Object val) {
+                //TODO
+            }
+
+            static void	fill(Object a[], int fromIndex, int toIndex, Object val) {
+                //TODO
+            }
+
+            static void	fill(short a[], short val) {
+                //TODO
+            }
+
+            static void	fill(short a[], int fromIndex, int toIndex, short val) {
+                //TODO
+            }
+
+            static int hashCode(boolean a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(byte a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(char a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(double a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(float a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(int a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(long a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(Object a[]) {
+                //TODO
+                return -1;
+            }
+
+            static int hashCode(short a[]) {
+                //TODO
+                return -1;
+            }
 
             static void sort(byte a[], int arraySize) {
                 return sort0(a, 0, arraySize-1);
@@ -182,12 +467,12 @@ namespace Java {
             }
 
             template <typename T>
-            static void sort(T a[], int arraySize) { //FIXME: discuss about comparator of T
+            static void sort(T a[], int arraySize) {
                 return sort0(a, 0, arraySize-1);
             }
 
             template <typename T>
-            static void sort(T a[], int fromIndex, int toIndex) { //FIXME: discuss about comparator of T
+            static void sort(T a[], int fromIndex, int toIndex) {
                 return sort0(a, fromIndex, toIndex);
             }
 
@@ -238,6 +523,7 @@ namespace Java {
                     positionKeeper.pop();
                     int left = positionKeeper.top();
                     positionKeeper.pop();
+
                     while (left < right) {
                         int i = left;
                         int j = right;
