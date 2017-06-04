@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
+
 #include <stack>
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
@@ -45,10 +46,38 @@ namespace Java {
 			~Stack(){}
 
             public:
-            virtual bool empty() {}
-            virtual E peek(){}
-            virtual E pop(){}
-            virtual E push(const E &item){}
+            
+            // Stack empty
+            virtual bool empty() {
+                int size = this->original.size();
+                if(size != 0) {
+                    return TRUE;
+                }
+                return FALSE;
+            }
+            
+            // Size of stack
+            virtual int size() {
+                return this->original.size();
+            }
+            
+            // Stack peek - return the top element
+            virtual E peek() {
+                return this->original.top();
+            }
+            
+            // Stack pop - return the top element and remove it
+            virtual E pop() {
+                E result = this->original.top();
+                this->original.pop();
+                return result;
+            }
+            
+            // Stack push - Push new element 
+            virtual E push(const E &item){
+                this->original.push(item);
+            }
+            
             virtual int search(const Object &o){}
             
             virtual boolean add(E &e) {
