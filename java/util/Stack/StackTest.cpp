@@ -97,7 +97,7 @@ TEST(JavaLang, StackPop) {
     ASSERT_EQUAL(3, result);
 }
 
-TEST(Java, StackPush) {
+TEST(JavaLang, StackPush) {
     Stack<int> pushStack;
 
     int push1 = 1;
@@ -110,4 +110,21 @@ TEST(Java, StackPush) {
     pushStack.push(push3);
     // Check size
     ASSERT_EQUAL(3, pushStack.size());
+}
+
+TEST(JavaLang, StackSearch) {
+    Stack<int> searchStack;
+
+    int push1 = 1;
+    int push2 = 2;
+    int push3 = 3;
+    
+    // Push elements to Stack
+    searchStack.push(push1);
+    searchStack.push(push2);
+    searchStack.push(push3);
+    
+    // Check size
+    ASSERT_EQUAL(2, searchStack.search(2));
+    ASSERT_EQUAL(-1, searchStack.search(5));
 }

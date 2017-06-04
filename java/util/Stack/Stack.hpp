@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
-
+#include <algorithm>
 #include <stack>
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
@@ -47,22 +47,17 @@ namespace Java {
 
             public:
             
-           
+            /**
+            * Stack empty - check the Stack is empty or not
+            *
+            * @param original
+            */
             bool empty() {
                 int size = this->original.size();
                 if(size != 0) {
                     return TRUE;
                 }
                 return FALSE;
-            }
-            
-            /**
-            * Size of Stack
-            *
-            * @param original
-            */
-            int size() {
-                return this->original.size();
             }
             
             /**
@@ -93,12 +88,35 @@ namespace Java {
             E push(const E &item){
                 this->original.push(item);
             }
-            
-            int search(const Object &o){}
+       
+            /**
+            * Stack search - search the object in Stack, return the 1-based position from the top, -1 if can not find the object in Stack 
+            *
+            * @param original
+            */
+            int search(const E &o){
+                int position = 0;
+                int i;
+                for(i = 0; i < this->original.size(); i++) {
+                    if(i == o) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
             
             boolean add(E &e) {
 				this->original.push(e);
 			}
+			
+			 /**
+            * Size of Stack
+            *
+            * @param original
+            */
+            int size() {
+                return this->original.size();
+            }
 
 			boolean addAll(Collection<E> &c){}
 			void clear(){}
