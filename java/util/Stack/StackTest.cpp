@@ -34,10 +34,12 @@ extern "C" {
 using namespace Java::Util;
 
 TEST(JavaUtil, StackConstructor) {
+    // Give a not empty Stack
     Stack<int> stack;
     int temp = 123;
     stack.add(temp);
-
+    
+    // Check size
     ASSERT_EQUAL(1, stack.size());
 }
 
@@ -45,34 +47,39 @@ TEST(JavaLang, StackDestructor) {
     
 }
 
-// Check Stack is empty or not
+
 TEST(JavaLang, StackEmpty) {
+    // Give a emtpy Stack
     Stack<int> emptyStack;
     ASSERT_FALSE(emptyStack.empty());
 
+    // Give a not empty Stack
     Stack<int> notEmptyStack;
     int temp = 123;
     notEmptyStack.add(temp);
     ASSERT_TRUE(notEmptyStack.empty());
 }
 
-// Push elements to Stack then return the top element without removing it
+
 TEST(JavaLang, StackPeek) {
+    
     Stack<int> peekStack;
     
     int push1 = 1;
     int push2 = 2;
     int push3 = 3;
     
+    // Push elements to Stack
     peekStack.push(push1);
     peekStack.push(push2);
     peekStack.push(push3);
     
+    // Return the top element without removing it
     int result = peekStack.peek();
     ASSERT_EQUAL(3, result);
 }
 
-// Push elements to Stack then return the top element and remove it
+
 TEST(JavaLang, StackPop) {
     Stack<int> popStack;
     
@@ -80,15 +87,16 @@ TEST(JavaLang, StackPop) {
     int push2 = 2;
     int push3 = 3;
     
+    // Push elements to Stack
     popStack.push(push1);
     popStack.push(push2);
     popStack.push(push3);
     
+    // Return the top element and remove it
     int result = popStack.pop();
     ASSERT_EQUAL(3, result);
 }
 
-// Push elements to Stack then check its size
 TEST(Java, StackPush) {
     Stack<int> pushStack;
 
@@ -96,9 +104,10 @@ TEST(Java, StackPush) {
     int push2 = 2;
     int push3 = 3;
     
+    // Push elements to Stack
     pushStack.push(push1);
     pushStack.push(push2);
     pushStack.push(push3);
-
+    // Check size
     ASSERT_EQUAL(3, pushStack.size());
 }
