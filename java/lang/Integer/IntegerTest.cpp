@@ -107,3 +107,13 @@ TEST (JavaLang, IntegerParseInt) {
 	Integer validIntegerPointer = Integer::parseInt("6");
 	ASSERT_EQUAL(6, validIntegerPointer.intValue());
 }
+
+TEST(JavaLang, IntegerCompareTo) {
+	/// Given valid Integer to compare with target
+	Integer validValue = 15;
+	Integer lessThanValue = 12;
+	Integer equalValue = 15;
+	Integer moreThanValue = 20;
+
+	ASSERT_EQUAL(1, validValue.compareTo(&lessThanValue));
+}
