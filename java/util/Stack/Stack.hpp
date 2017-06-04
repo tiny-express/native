@@ -47,8 +47,8 @@ namespace Java {
 
             public:
             
-            // Stack empty
-            virtual bool empty() {
+           
+            bool empty() {
                 int size = this->original.size();
                 if(size != 0) {
                     return TRUE;
@@ -56,47 +56,63 @@ namespace Java {
                 return FALSE;
             }
             
-            // Size of stack
-            virtual int size() {
+            /**
+            * Size of Stack
+            *
+            * @param original
+            */
+            int size() {
                 return this->original.size();
             }
             
-            // Stack peek - return the top element
-            virtual E peek() {
+            /**
+            * Stack peek - return the top element
+            *
+            * @param original
+            */
+            E peek() {
                 return this->original.top();
             }
             
-            // Stack pop - return the top element and remove it
-            virtual E pop() {
+            /**
+            * Stack pop - return the top element and remove it
+            *
+            * @param original
+            */
+            E pop() {
                 E result = this->original.top();
                 this->original.pop();
                 return result;
             }
             
-            // Stack push - Push new element 
-            virtual E push(const E &item){
+            /**
+            * Stack push - Push new element 
+            *
+            * @param original
+            */
+            E push(const E &item){
                 this->original.push(item);
             }
             
-            virtual int search(const Object &o){}
+            int search(const Object &o){}
             
-            virtual boolean add(E &e) {
+            boolean add(E &e) {
 				this->original.push(e);
 			}
 
-			virtual boolean addAll(Collection<E> &c){}
-			virtual void clear(){}
-			virtual boolean contains(Object &o) const{}
-			virtual boolean equals(Object &o) const{}
-			virtual int hashCode() const{}
-			virtual boolean isEmpty() const{}
-			virtual Iterator<E> &iterator() const{}
-			virtual boolean remove(Object &o){}
-			virtual boolean removeAll(Collection<Object> &c){}
-			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter){}
-			virtual boolean retainAll(Collection<Object> &c){}
+			boolean addAll(Collection<E> &c){}
+			void clear(){}
+			boolean contains(Object &o) const{}
+			boolean equals(Object &o) const{}
+			int hashCode() const{}
+			boolean isEmpty() const{}
+			Iterator<E> &iterator() const{}
+			boolean remove(Object &o){}
+			boolean removeAll(Collection<Object> &c){}
+			boolean removeIf(Java::Util::Function::Predicate<E> &filter){}
+			boolean retainAll(Collection<Object> &c){}
 
-			virtual int size() const {
+			int size() const {
 				return this->original.size();
 			}
 
