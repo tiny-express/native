@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
-#include <algorithm>
 #include <stack>
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
