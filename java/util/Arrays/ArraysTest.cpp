@@ -149,3 +149,17 @@ TEST(JavaUtil, ArraysCopyOf) {
         ASSERT_TRUE(arrayResultFloat.get(index) == arrayFloatCopy.get(index));
     }
 }
+
+TEST(JavaUtil, ArraysEquals) {
+    /// Give valid array boolean and arrayLength to test equals
+    Array<boolean> arrayBoolean = { false, false, false, false, true };
+    Array<boolean> arrayCompareBoolean = { false, false, false, false, true };
+
+    ASSERT_TRUE(Arrays::equals(arrayBoolean, arrayCompareBoolean));
+
+    /// Give valid array long and arrayLength to test equals - this test case wrapped <int>, <short>, <char> also
+    Array<long> arrayLong = { 12, 66, 16, 35, 87 };
+    Array<long> arrayCompareLong = { 12, 66, 16, 35, 87 };
+
+    ASSERT_TRUE(Arrays::equals(arrayLong, arrayCompareLong));
+}
