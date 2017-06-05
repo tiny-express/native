@@ -124,17 +124,13 @@ TEST(JavaUtil, ArraysSort) {
 }
 
 TEST(JavaUtil, ArraysCopyOf) {
-    /// Give valid arrayBoolean[] and arrayLength to test copyOf
-    boolean arrayBoolean[5] = { false, false, false, false, true };
-    int arrayLength = 5;
+    /// Give valid array boolean and arrayLength to test copyOf
+    Array<boolean> arrayBoolean = { false, false, false, false, true };
 
-    // Test with newLength that less than arrayLength
-    int newLength = 3;
-    boolean *copyArray = Arrays::copyOf(arrayBoolean, arrayLength, newLength);
+    Array<boolean> arrayCopy = Arrays::copyOf(arrayBoolean);
 
-    boolean resultArray[] = { false, false, false };
-    for (int index = 0; index < newLength; ++index) {
-        ASSERT_TRUE(resultArray[index] == copyArray[index]);
+    for (int index = 0; index < arrayBoolean.length; ++index) {
+        ASSERT_TRUE(arrayBoolean.get(index) == arrayCopy.get(index));
     }
 
 }
