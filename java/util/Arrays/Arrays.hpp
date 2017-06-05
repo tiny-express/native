@@ -118,21 +118,12 @@ namespace Java {
                 return binarySearch0(a, 0, toIndex, key);
             }
 
-            //FIXME: Discuss about return [] in C++
-            static boolean* copyOf(boolean original[], int arrayLength, int newLength) {
-                boolean array[newLength];
-                for (int index = 0; index < Math::min(arrayLength, newLength); ++index) {
-                    array[index] = original[index];
-                }
-
-                for (int index = arrayLength; index < newLength; ++index) {
-                    array[index] = false;
-                }
-
-                return &array[0];
+            static Array<boolean> copyOf(Array<boolean> original) {
+                return copyOf0(original);
             }
 
-            static byte* copyOf(byte original[], int arrayLength, int newLength) {
+            static Array<byte> copyOf(byte original[], int arrayLength, int newLength) {
+                return Array<byte>();
             }
 
             static char* copyOf(char original[], int arrayLength, int newLength) {
@@ -242,14 +233,12 @@ namespace Java {
                 return "";
             }
 
-            static boolean equals(boolean a[], boolean a2[]) {
-                //TODO
-                return false;
+            static boolean equals(boolean a[], boolean a2[], int aSize, int a2Size) {
+                return equals0(a, aSize, a2, a2Size);
             }
 
-            static boolean equals(byte a[], byte a2[]) {
-                //TODO
-                return false;
+            static boolean equals(byte a[], byte a2[], int aSize, int a2Size) {
+                return equals0(a, aSize, a2, a2Size);
             }
 
             static boolean equals(char a[], char a2[]) {
@@ -520,18 +509,18 @@ namespace Java {
                 positionKeeper.push(fromIndex);
                 positionKeeper.push(toIndex);
 
-                while(!positionKeeper.empty()) {
+                while (!positionKeeper.empty()) {
                     int right = positionKeeper.top();
                     positionKeeper.pop();
                     int left = positionKeeper.top();
                     positionKeeper.pop();
 
                     while (left < right) {
-                        int i = left;
-                        int j = right;
-                        T key = a[(i+j) / 2];
+                        int i   = left;
+                        int j   = right;
+                        T   key = a[(i + j) / 2];
 
-                        while(i <= j) {
+                        while (i <= j) {
                             while (a[i] < key && i <= j) i++;
                             while (a[j] > key && j >= i) j--;
 
@@ -553,20 +542,28 @@ namespace Java {
                 }
             }
 
-            template<typename T, typename U>
-            static T* copyOf0(T a[], int arrayLength, int newLength, U padding) {
-                T array[newLength];
-                for (int index = 0; index < Math::min(arrayLength, newLength); ++index) {
-                    array[index] = a[index];
+            template<typename T>
+            static Array<T> copyOf0(Array<T> original) {
+                Array<T> result;
+                for (T t: original) {
+                    result.push(t);
                 }
-
-                for (int index = arrayLength; index < newLength; ++index) {
-                    array[index] = padding;
-                }
-
-                return array;
+                return result;
             }
 
+            template<typename T>
+            static boolean equals0(T origin[], int originalSize, T target[], int targetSize) {
+                if (originalSize != targetSize) {
+                    return false;
+                }
+
+                for (int index = 0; index < originalSize; ++index) {
+                    if (origin[index] != target[index]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
         };
     }
 }
