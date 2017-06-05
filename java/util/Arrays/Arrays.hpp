@@ -118,104 +118,87 @@ namespace Java {
                 return binarySearch0(a, 0, toIndex, key);
             }
 
-            static Array<boolean> copyOf(Array<boolean> original) {
-                return copyOf0(original);
+
+            static Array<boolean> copyOf(Array<boolean> original, int newLength) {
+                return copyOf0(original, newLength, false);
             }
 
-            static Array<byte> copyOf(byte original[], int arrayLength, int newLength) {
-                return Array<byte>();
+            static Array<char> copyOf(Array<char> original, int newLength) {
+                return copyOf0(original, newLength, NULL);
             }
 
-            static char* copyOf(char original[], int arrayLength, int newLength) {
+            static Array<short> copyOf(Array<short> original, int newLength) {
+                return copyOf0(original, newLength, 0);
             }
 
-            static double* copyOf(double original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
+            static Array<int> copyOf(Array<int> original, int newLength) {
+                return copyOf0(original, newLength, 0);
             }
 
-            static float* copyOf(float original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
+            static Array<long> copyOf(Array<long> original, int newLength) {
+                return copyOf0(original, newLength, 0);
             }
 
-            static int* copyOf(int original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
+            static Array<float> copyOf(Array<float> original, int newLength) {
+                return copyOf0(original, newLength, 0.0);
             }
 
-            static long* copyOf(long original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
-            }
-
-            static short* copyOf(short original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
+            static Array<double> copyOf(Array<double> original, int newLength) {
+                return copyOf0(original, newLength, 0.0);
             }
 
             template<typename T>
-            static T* copyOf(T original[], int arrayLength, int newLength) {
-                //TODO
-                return NULL;
+            static Array<T> copyOf(Array<T> original, int newLength) {
+                return copyOf0(original, newLength, NULL);
             }
 
             template<typename T, typename U>
-            static T* copyOf(U original[], int arrayLength, int newLength, T newType) {
+            static Array<T> copyOf(Array<U> u, T newType) {
                 //TODO
-                return NULL;
+                return Array<T>();
             }
 
-            static boolean* copyOfRange(boolean original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<boolean> copyOfRange(Array<boolean> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static byte* copyOfRange(byte original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<byte> copyOfRange(Array<byte> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static char* copyOfRange(char original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<char> copyOfRange(Array<char> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static double* copyOfRange(double original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<short> copyOfRange(Array<short> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static float* copyOfRange(float original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<int> copyOfRange(Array<int> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static int* copyOfRange(int original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<long> copyOfRange(Array<long> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static long* copyOfRange(long original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<float> copyOfRange(Array<float> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
-            static short* copyOfRange(short original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<double> copyOfRange(Array<double> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
             template<typename T>
-            static T* copyOfRange(T original[], int from, int to) {
-                //TODO
-                return NULL;
+            static Array<T> copyOfRange(Array<T> original, int from, int to) {
+                return copyOfRange0(original, from, to);
             }
 
             template<typename T, typename U>
-            static T* copyOfRange(U original[], int from, int to, T newType) {
+            static Array<T> copyOfRange(Array<U> original, int from, int to, T newType) {
                 //TODO
-                return NULL;
+                return Array<T>();
             }
 
             static boolean deepEquals(Object a1[], Object a2[]) {
@@ -233,47 +216,41 @@ namespace Java {
                 return "";
             }
 
-            static boolean equals(boolean a[], boolean a2[], int aSize, int a2Size) {
-                return equals0(a, aSize, a2, a2Size);
+            static boolean equals(Array<boolean> a, Array<boolean> a2) {
+                return equals0(a, a2);
             }
 
-            static boolean equals(byte a[], byte a2[], int aSize, int a2Size) {
-                return equals0(a, aSize, a2, a2Size);
+            static boolean equals(Array<byte> a, Array<byte> a2) {
+                return equals0(a, a2);
             }
 
-            static boolean equals(char a[], char a2[]) {
-                //TODO
+            static boolean equals(Array<char> a, Array<char> a2) {
+                return equals0(a, a2);
+            }
+
+            static boolean equals(Array<double> a, Array<double> a2) {
+                return equals0(a, a2);
+            }
+
+            static boolean equals(Array<float> a, Array<float> a2) {
+                return equals0(a, a2);
+            }
+
+            static boolean equals(Array<int> a, Array<int> a2) {
+                return equals0(a, a2);
+            }
+
+            static boolean equals(Array<long> a, Array<long> a2) {
+                return equals0(a, a2);
+            }
+
+            static boolean equals(Array<Object> a, Array<Object> a2) {
+//                return equals0(a, a2); //TODO: Object's opreator
                 return false;
             }
 
-            static boolean equals(double a[], double a2[]) {
-                //TODO
-                return false;
-            }
-
-            static boolean equals(float a[], float a2[]) {
-                //TODO
-                return false;
-            }
-
-            static boolean equals(int a[], int a2[]) {
-                //TODO
-                return false;
-            }
-
-            static boolean equals(long a[], long a2[]) {
-                //TODO
-                return false;
-            }
-
-            static boolean equals(Object a[], Object a2[]) {
-                //TODO
-                return false;
-            }
-
-            static boolean equals(short a[], short a2[]) {
-                //TODO
-                return false;
+            static boolean equals(Array<short> a, Array<short> a2) {
+                return equals0(a, a2);
             }
 
             static void	fill(boolean a[], boolean val) {
@@ -542,26 +519,50 @@ namespace Java {
                 }
             }
 
-            template<typename T>
-            static Array<T> copyOf0(Array<T> original) {
+            template<typename T, typename U>
+            static Array<T> copyOf0(Array<T> original, int newLength, U padding) {
                 Array<T> result;
-                for (T t: original) {
-                    result.push(t);
+
+                int copyLength = Math::min(original.length, newLength);
+
+                for (int index = 0; index < copyLength; ++index) {
+                    result.push(original.get(index));
                 }
+
+                for (int index = copyLength; index < newLength; ++index) {
+                    result.push(padding);
+                }
+
                 return result;
             }
 
             template<typename T>
-            static boolean equals0(T origin[], int originalSize, T target[], int targetSize) {
-                if (originalSize != targetSize) {
+            static Array<T> copyOfRange0(Array<T> original, int fromIndex, int toIndex) {
+                Array<T> result;
+
+                if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex || toIndex > original.length - 1) {
+                    return result;
+                }
+
+                for (int index = fromIndex; index < toIndex; ++index) {
+                    result.push(original.get(index));
+                }
+
+                return result;
+            }
+
+            template<typename T>
+            static boolean equals0(Array<T> original, Array<T> target) {
+                if (original.length != target.length) {
                     return false;
                 }
 
-                for (int index = 0; index < originalSize; ++index) {
-                    if (origin[index] != target[index]) {
+                for (int index = 0; index < original.length; ++index) {
+                    if (original.get(index) != target.get(index)) {
                         return false;
                     }
                 }
+
                 return true;
             }
         };
