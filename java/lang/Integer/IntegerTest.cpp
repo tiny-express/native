@@ -115,5 +115,18 @@ TEST(JavaLang, IntegerCompareTo) {
 	Integer equalValue = 15;
 	Integer moreThanValue = 20;
 
+    // Return 1 if validValue is more than lessThanValue
 	ASSERT_EQUAL(1, validValue.compareTo(&lessThanValue));
+
+    // Return 0 if validValue is more than equalValue
+    ASSERT_EQUAL(0, validValue.compareTo(&equalValue));
+
+    // Return -1 if validValue is less than moreThanValue
+    ASSERT_EQUAL(-1, validValue.compareTo(&moreThanValue));
+
+	/// Upcast Integer to test Comparable - this test case to ensure cast type to use in Java::Util::Arrays
+	Comparable *comparable = (Comparable *)&validValue;
+	Object *lessThanObject = (Object *)&lessThanValue;
+
+	ASSERT_EQUAL(1, comparable->compareTo(lessThanObject));
 }

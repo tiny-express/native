@@ -32,6 +32,7 @@
 namespace Java {
     namespace Lang {
         class Comparable {
+        public:
             virtual int compareTo(Object* o) const = 0;
         };
     }

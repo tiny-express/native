@@ -76,18 +76,18 @@ TEST(JavaUtil, ArraysBinarySearch) {
     int positionDouble2 = -1;
     ASSERT_EQUAL(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
 
-    /// Given valid Object[] to test binary search
-//    Object arrayObject[5] = { Integer(1) , Integer(2) , Integer(3), Integer(4) , Integer(5) };
-//
-//    // With correct key appeared inside array, return correct position
-//    Object keyObject = Integer(5);
-//    int positionObject = 4;
-//    ASSERT_EQUAL(positionObject, Arrays::binarySearch(arrayObject, keyObject));
-//
-//    // With correct key2 but not appear inside array, return -1
-//    Object keyObject2 = Integer(99);
-//    int positionObject2 = -1;
-//    ASSERT_EQUAL(positionObject2, Arrays::binarySearch(arrayObject, keyObject2));
+    /// Given valid Integer[] to test binary search with Object
+    Integer arrayObject[5] = { Integer(1) , Integer(2) , Integer(3), Integer(4) , Integer(5) };
+
+    // With correct key appeared inside array, return correct position
+    Integer keyObject = Integer(5);
+    int positionObject = 4;
+    ASSERT_EQUAL(positionObject, Arrays::binarySearch(arrayObject, keyObject, 5));
+
+    // With correct key2 but not appear inside array, return -1
+    Integer keyObject2 = Integer(99);
+    int positionObject2 = -1;
+    ASSERT_EQUAL(positionObject2, Arrays::binarySearch(arrayObject, keyObject2, 5));
 
 }
 
