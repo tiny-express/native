@@ -101,7 +101,7 @@ namespace Java {
                 return binarySearch0(a, fromIndex, toIndex, key);
             }
 
-            static int binarySearch1(Object a[], Object* key, int arraySize) {
+            static int binarySearch1(Object a[], Object key, int arraySize) {
                 return -1;
             }
             static int binarySearch(Object a[], int fromIndex, int toIndex, Object key) {
@@ -119,54 +119,58 @@ namespace Java {
             }
 
             //FIXME: Discuss about return [] in C++
-            static boolean* copyOf(boolean original[], int newLength) {
+            static boolean* copyOf(boolean original[], int arrayLength, int newLength) {
+                boolean array[newLength];
+                for (int index = 0; index < Math::min(arrayLength, newLength); ++index) {
+                    array[index] = original[index];
+                }
+
+                for (int index = arrayLength; index < newLength; ++index) {
+                    array[index] = false;
+                }
+
+                return &array[0];
+            }
+
+            static byte* copyOf(byte original[], int arrayLength, int newLength) {
+            }
+
+            static char* copyOf(char original[], int arrayLength, int newLength) {
+            }
+
+            static double* copyOf(double original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
-            static byte* copyOf(byte original[], int newLength) {
+            static float* copyOf(float original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
-            static char* copyOf(char original[], int newLength) {
+            static int* copyOf(int original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
-            static double* copyOf(double original[], int newLength) {
+            static long* copyOf(long original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
-            static float* copyOf(float original[], int newLength) {
-                //TODO
-                return NULL;
-            }
-
-            static int* copyOf(int original[], int newLength) {
-                //TODO
-                return NULL;
-            }
-
-            static long* copyOf(long original[], int newLength) {
-                //TODO
-                return NULL;
-            }
-
-            static short* copyOf(short original[], int newLength) {
+            static short* copyOf(short original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
             template<typename T>
-            static T* copyOf(T original[], int newLength) {
+            static T* copyOf(T original[], int arrayLength, int newLength) {
                 //TODO
                 return NULL;
             }
 
             template<typename T, typename U>
-            static T* copyOf(U original[], int newLength, T newType) {
+            static T* copyOf(U original[], int arrayLength, int newLength, T newType) {
                 //TODO
                 return NULL;
             }
@@ -548,6 +552,21 @@ namespace Java {
                     }
                 }
             }
+
+            template<typename T, typename U>
+            static T* copyOf0(T a[], int arrayLength, int newLength, U padding) {
+                T array[newLength];
+                for (int index = 0; index < Math::min(arrayLength, newLength); ++index) {
+                    array[index] = a[index];
+                }
+
+                for (int index = arrayLength; index < newLength; ++index) {
+                    array[index] = padding;
+                }
+
+                return array;
+            }
+
         };
     }
 }
