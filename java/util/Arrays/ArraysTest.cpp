@@ -121,6 +121,20 @@ TEST(JavaUtil, ArraysSort) {
     for (int index = 0; index < 5; ++index) {
         ASSERT_EQUAL(arrayFloatSorted[index], arrayFloat[index]);
     }
+}
 
+TEST(JavaUtil, ArraysCopyOf) {
+    /// Give valid arrayBoolean[] and arrayLength to test copyOf
+    boolean arrayBoolean[5] = { false, false, false, false, true };
+    int arrayLength = 5;
+
+    // Test with newLength that less than arrayLength
+    int newLength = 3;
+    boolean *copyArray = Arrays::copyOf(arrayBoolean, arrayLength, newLength);
+
+    boolean resultArray[] = { false, false, false };
+    for (int index = 0; index < newLength; ++index) {
+        ASSERT_TRUE(resultArray[index] == copyArray[index]);
+    }
 
 }
