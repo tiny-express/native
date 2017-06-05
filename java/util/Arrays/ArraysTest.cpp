@@ -124,13 +124,28 @@ TEST(JavaUtil, ArraysSort) {
 }
 
 TEST(JavaUtil, ArraysCopyOf) {
-    /// Give valid array boolean and arrayLength to test copyOf
+    /// Give valid array boolean and arrayLength to test copyOf with equal length
     Array<boolean> arrayBoolean = { false, false, false, false, true };
 
-    Array<boolean> arrayCopy = Arrays::copyOf(arrayBoolean);
-
-    for (int index = 0; index < arrayBoolean.length; ++index) {
-        ASSERT_TRUE(arrayBoolean.get(index) == arrayCopy.get(index));
+    Array<boolean> arrayBooleanCopy = Arrays::copyOf(arrayBoolean, 5);
+    for (int index = 0; index < 5; ++index) {
+        ASSERT_TRUE(arrayBoolean.get(index) == arrayBooleanCopy.get(index));
     }
 
+    /// Give valid array char and arrayLength to test copyOf with less than length
+    Array<char> arrayChar = { 'w', 'z', 't', 'm' };
+
+    Array<char> arrayCharCopy = Arrays::copyOf(arrayChar, 3);
+    for (int index = 0; index < 3; ++index) {
+        ASSERT_EQUAL(arrayChar.get(index), arrayCharCopy.get(index));
+    }
+
+    /// Give valid array float and arrayLength to test copyOf with more than length
+    Array<float> arrayFloat = { 12.2, 65.2, 0.2, 4.3 };
+    Array<float> arrayResultFloat = { 12.2, 65.2, 0.2, 4.3, 0.0, 0.0 };
+
+    Array<float> arrayFloatCopy = Arrays::copyOf(arrayFloat, 6);
+    for (int index = 0; index < 6; ++index) {
+        ASSERT_TRUE(arrayResultFloat.get(index) == arrayFloatCopy.get(index));
+    }
 }
