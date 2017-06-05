@@ -101,13 +101,17 @@ namespace Java {
 			static String valueOf(double target);
 		
 		public:
+			boolean operator==(const String &target) const;
+			boolean operator!=(const String &target) const;
+			boolean operator<(const String &target) const;
+			boolean operator>(const String &target) const;
+			boolean operator<=(const String &target) const;
+			boolean operator>=(const String &target) const;
+
 			String operator+(const String &target);
 			String operator=(const String &target);
 			void operator+=(const String &target);
-			boolean operator<(const String &target) const;
-			boolean operator==(const String &target) const;
-			boolean operator!=(const String &target) const;
-			
+
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;

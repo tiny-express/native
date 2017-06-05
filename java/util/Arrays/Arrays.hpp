@@ -101,12 +101,10 @@ namespace Java {
                 return binarySearch0(a, fromIndex, toIndex, key);
             }
 
-            static int binarySearch(Object a[], Object key, int arraySize) {
-//                return binarySearch0(a, 0, arraySize - 1, key); //FIXME: discuss about Object's operator
+            static int binarySearch1(Object a[], Object* key, int arraySize) {
                 return -1;
             }
             static int binarySearch(Object a[], int fromIndex, int toIndex, Object key) {
-//                return binarySearch0(a, fromIndex, toIndex, key);  //FIXME: discuss about Object's operator
                 return -1;
             }
 

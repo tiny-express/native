@@ -59,7 +59,6 @@ namespace Java {
 
             int compareTo(Object* o) const {
                 Integer *target = (Integer *)o;
-
                 if (this->original < target->original) {
                     return -1;
                 } else if (this->original == target->original) {
