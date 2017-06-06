@@ -165,7 +165,7 @@ TEST(JavaUtil, ArraysEquals) {
 }
 
 TEST(JavaUtil, ArraysFill) {
-    /// Give valid array char to test fill
+    /// Given valid array char to test fill
     Array<char> arrayChar = { 'w', 'b', 'a', 'z', 'p' };
     char filledVal = 't';
 
@@ -174,7 +174,7 @@ TEST(JavaUtil, ArraysFill) {
         ASSERT_EQUAL(filledVal, arrayChar[index]);
     }
 
-    /// Give valid array float and arrayLength to test fill - this test case wrapped <int>, <short>, <long>, <double>, <byte> also
+    /// Given valid array float and arrayLength to test fill - this test case wrapped <int>, <short>, <long>, <double>, <byte> also
     Array<float> arrayFloat = { 12, 6.6, 1.6, 2.35, 15.87 };
     float filledVal2 = 3.7;
 
@@ -184,6 +184,9 @@ TEST(JavaUtil, ArraysFill) {
     }
 }
 
+/**
+ * Those hashCode() functions inside header is based on source code of native java
+ * */
 TEST(JavaUtil, ArraysHashCode) {
-
+    //TODO: Add more test case
 }

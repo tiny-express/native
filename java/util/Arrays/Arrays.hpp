@@ -197,23 +197,19 @@ namespace Java {
 
             template<typename T, typename U>
             static Array<T> copyOfRange(Array<U> original, int from, int to, T newType) {
-                //TODO
-                return Array<T>();
+                return Array<T>(); //TODO
             }
 
             static boolean deepEquals(Object a1[], Object a2[]) {
-                //TODO
-                return false;
+                return false; //TODO
             }
 
             static int deepHashCode(Object a[]) {
-                //TODO
-                return -1;
+                return -1; //TODO
             }
 
             static String deepToString(Object a[]) {
-                //TODO
-                return "";
+                return ""; //TODO
             }
 
             static boolean equals(Array<boolean> a, Array<boolean> a2) {
@@ -253,11 +249,11 @@ namespace Java {
             }
 
             static void	fill(Array<boolean> *a, boolean val) {
-                return; //TODO: can't put bool into vector
+                return; //TODO: can't modify bool inside vector
             }
 
             static void	fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {
-                return; //TODO: can't put bool into vector
+                return; //TODO: can't modify bool inside vector
             }
 
             static void	fill(Array<byte> *a, byte val) {
@@ -309,11 +305,11 @@ namespace Java {
             }
 
             static void	fill(Array<Object> *a, Object val) {
-                return;
+                return; //TODO: Object's operator =
             }
 
             static void	fill(Array<Object> *a, int fromIndex, int toIndex, Object val) {
-                return;
+                return; //TODO: Object's operator =
             }
 
             static void	fill(Array<short> *a, short val) {
@@ -324,49 +320,106 @@ namespace Java {
                 return fill0(a, fromIndex, toIndex, val);
             }
 
-            static int hashCode(boolean a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<boolean> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (boolean element : a)
+                    result = 31 * result + (element ? 1231 : 1237);
+
+                return result;
             }
 
-            static int hashCode(byte a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<byte> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (byte element : a)
+                    result = 31 * result + element;
+
+                return result;
             }
 
-            static int hashCode(char a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<char> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (char element : a)
+                    result = 31 * result + element;
+
+                return result;
             }
 
-            static int hashCode(double a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<double> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (double element : a) {
+                    long bits = long(element);
+                    result = 31 * result + (int)(bits ^ (bits >> 32));
+                }
+                return result;
             }
 
-            static int hashCode(float a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<float> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (float element : a)
+                    result = 31 * result + int(element);
+
+                return result;
             }
 
-            static int hashCode(int a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<int> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (int element : a)
+                    result = 31 * result + element;
+
+                return result;
             }
 
-            static int hashCode(long a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<long> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (long element : a) {
+                    int elementHash = (int)(element ^ (element >> 32));
+                    result = 31 * result + elementHash;
+                }
+
+                return result;
             }
 
-            static int hashCode(Object a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<Object> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (Object element : a)
+                    result = 31 * result + element.hashCode();
+
+                return result;
             }
 
-            static int hashCode(short a[]) {
-                //TODO
-                return -1;
+            static int hashCode(Array<short> a) {
+                if (a.length == 0)
+                    return 0;
+
+                int result = 1;
+                for (short element : a)
+                    result = 31 * result + element;
+
+                return result;
             }
 
             static void sort(byte a[], int arraySize) {
@@ -426,11 +479,11 @@ namespace Java {
             }
 
             static void sort(Object a[], int arraySize) {
-//                return sort0(a, 0, arraySize-1); //FIXME: discuss about > & < of Object's operator
+                return; //FIXME: dicuss about Comparable
             }
 
             static void sort(Object a[], int fromIndex, int toIndex) {
-//                return sort0(a, fromIndex, toIndex); //FIXME: discuss about > & < of Object's operator
+                return; //FIXME: dicuss about Comparable
             }
 
             template <typename T>
