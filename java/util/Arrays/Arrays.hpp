@@ -245,84 +245,83 @@ namespace Java {
             }
 
             static boolean equals(Array<Object> a, Array<Object> a2) {
-//                return equals0(a, a2); //TODO: Object's opreator
-                return false;
+                return false; //TODO: Object's opreator ==
             }
 
             static boolean equals(Array<short> a, Array<short> a2) {
                 return equals0(a, a2);
             }
 
-            static void	fill(boolean a[], boolean val) {
-                //TODO
+            static void	fill(Array<boolean> *a, boolean val) {
+                return; //TODO: can't put bool into vector
             }
 
-            static void	fill(boolean a[], int fromIndex, int toIndex, boolean val) {
-                //TODO
+            static void	fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {
+                return; //TODO: can't put bool into vector
             }
 
-            static void	fill(byte a[], byte val) {
-                //TODO
+            static void	fill(Array<byte> *a, byte val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(byte a[], int fromIndex, int toIndex, byte val) {
-                //TODO
+            static void	fill(Array<byte> *a, int fromIndex, int toIndex, byte val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(char a[], char val) {
-                //TODO
+            static void	fill(Array<char> *a, char val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(char a[], int fromIndex, int toIndex, char val) {
-                //TODO
+            static void	fill(Array<char> *a, int fromIndex, int toIndex, char val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(double a[], double val) {
-                //TODO
+            static void	fill(Array<double> *a, double val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(double a[], int fromIndex, int toIndex, double val) {
-                //TODO
+            static void	fill(Array<double> *a, int fromIndex, int toIndex, double val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(float a[], float val) {
-                //TODO
+            static void	fill(Array<float> *a, float val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(float a[], int fromIndex, int toIndex, float val) {
-                //TODO
+            static void	fill(Array<float> *a, int fromIndex, int toIndex, float val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(int a[], int val) {
-                //TODO
+            static void	fill(Array<int> *a, int val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(int a[], int fromIndex, int toIndex, int val) {
-                //TODO
+            static void	fill(Array<int> *a, int fromIndex, int toIndex, int val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(long a[], long val) {
-                //TODO
+            static void	fill(Array<long> *a, long val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(long a[], int fromIndex, int toIndex, long val) {
-                //TODO
+            static void	fill(Array<long> *a, int fromIndex, int toIndex, long val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
-            static void	fill(Object a[], Object val) {
-                //TODO
+            static void	fill(Array<Object> *a, Object val) {
+                return;
             }
 
-            static void	fill(Object a[], int fromIndex, int toIndex, Object val) {
-                //TODO
+            static void	fill(Array<Object> *a, int fromIndex, int toIndex, Object val) {
+                return;
             }
 
-            static void	fill(short a[], short val) {
-                //TODO
+            static void	fill(Array<short> *a, short val) {
+                return fill0(a, 0, (*a).length - 1, val);
             }
 
-            static void	fill(short a[], int fromIndex, int toIndex, short val) {
-                //TODO
+            static void	fill(Array<short> *a, int fromIndex, int toIndex, short val) {
+                return fill0(a, fromIndex, toIndex, val);
             }
 
             static int hashCode(boolean a[]) {
@@ -564,6 +563,17 @@ namespace Java {
                 }
 
                 return true;
+            }
+
+            template<typename T>
+            static void fill0(Array<T> *a, int fromIndex, int toIndex, T val) {
+                if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex || toIndex > (*a).length - 1) {
+                    return;
+                }
+                for (int index = fromIndex; index <= toIndex; ++index) {
+                    (*a)[index] = val;
+                }
+                return;
             }
         };
     }

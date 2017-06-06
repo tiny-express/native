@@ -151,15 +151,39 @@ TEST(JavaUtil, ArraysCopyOf) {
 }
 
 TEST(JavaUtil, ArraysEquals) {
-    /// Give valid array boolean and arrayLength to test equals
+    /// Give valid array boolean to test equals
     Array<boolean> arrayBoolean = { false, false, false, false, true };
     Array<boolean> arrayCompareBoolean = { false, false, false, false, true };
 
     ASSERT_TRUE(Arrays::equals(arrayBoolean, arrayCompareBoolean));
 
-    /// Give valid array long and arrayLength to test equals - this test case wrapped <int>, <short>, <char> also
+    /// Give valid array long to test equals - this test case wrapped <int>, <short>, <char> also
     Array<long> arrayLong = { 12, 66, 16, 35, 87 };
     Array<long> arrayCompareLong = { 12, 66, 16, 35, 87 };
 
     ASSERT_TRUE(Arrays::equals(arrayLong, arrayCompareLong));
+}
+
+TEST(JavaUtil, ArraysFill) {
+    /// Give valid array char to test fill
+    Array<char> arrayChar = { 'w', 'b', 'a', 'z', 'p' };
+    char filledVal = 't';
+
+    Arrays::fill(&arrayChar, filledVal);
+    for (int index = 0; index < arrayChar.length; ++index) {
+        ASSERT_EQUAL(filledVal, arrayChar[index]);
+    }
+
+    /// Give valid array float and arrayLength to test fill - this test case wrapped <int>, <short>, <long>, <double>, <byte> also
+    Array<float> arrayFloat = { 12, 6.6, 1.6, 2.35, 15.87 };
+    float filledVal2 = 3.7;
+
+    Arrays::fill(&arrayFloat, filledVal2);
+    for (int index = 0; index < arrayFloat.length; ++index) {
+        ASSERT_TRUE(filledVal2 == arrayFloat[index]);
+    }
+}
+
+TEST(JavaUtil, ArraysHashCode) {
+
 }
