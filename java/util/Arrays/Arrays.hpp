@@ -30,6 +30,7 @@
 #include <stack>
 #include "../../Lang.hpp"
 #include "../List/List.hpp"
+#include "../ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 
@@ -40,10 +41,10 @@ namespace Java {
             Arrays();
             ~Arrays();
         public:
-//            template<typename T, typename... T>
-//            static List<T> asList(T... a) {
-//                //TODO
-//            }
+            template<typename U, typename... T>
+            static List<U> asList(T... a) {
+                //FIXME: Please implement ArrayList<T>(a);
+            }
 
             static int binarySearch(byte a[], byte key, int arraySize) {
                 return binarySearch0(a, 0, arraySize - 1, key);
@@ -153,9 +154,8 @@ namespace Java {
             }
 
             template<typename T, typename U>
-            static Array<T> copyOf(Array<U> u, T newType) {
-                //TODO
-                return Array<T>();
+            static Array<T> copyOf(Array<U> u, int newLength, T newType) {
+                return Array<T>(); //FIXME: cast type in C++ is too dangerous
             }
 
             static Array<boolean> copyOfRange(Array<boolean> original, int from, int to) {
@@ -197,19 +197,19 @@ namespace Java {
 
             template<typename T, typename U>
             static Array<T> copyOfRange(Array<U> original, int from, int to, T newType) {
-                return Array<T>(); //TODO
+                return Array<T>(); //FIXME: cast type in C++ is too dangerous
             }
 
             static boolean deepEquals(Object a1[], Object a2[]) {
-                return false; //TODO
+                return false; /// Don't support this method
             }
 
             static int deepHashCode(Object a[]) {
-                return -1; //TODO
+                return -1; /// Don't support this method
             }
 
             static String deepToString(Object a[]) {
-                return ""; //TODO
+                return ""; /// Don't support this method
             }
 
             static boolean equals(Array<boolean> a, Array<boolean> a2) {
@@ -241,7 +241,7 @@ namespace Java {
             }
 
             static boolean equals(Array<Object> a, Array<Object> a2) {
-                return false; //TODO: Object's opreator ==
+                return false; //FIXME: Discuss about Object's Comparable
             }
 
             static boolean equals(Array<short> a, Array<short> a2) {
@@ -249,11 +249,11 @@ namespace Java {
             }
 
             static void	fill(Array<boolean> *a, boolean val) {
-                return; //TODO: can't modify bool inside vector
+                return; //FIXME: can't modify bool inside vector
             }
 
             static void	fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {
-                return; //TODO: can't modify bool inside vector
+                return; //FIXME: can't modify bool inside vector
             }
 
             static void	fill(Array<byte> *a, byte val) {
@@ -305,11 +305,11 @@ namespace Java {
             }
 
             static void	fill(Array<Object> *a, Object val) {
-                return; //TODO: Object's operator =
+                return; //FIXME: Discuss about Object's operator =
             }
 
             static void	fill(Array<Object> *a, int fromIndex, int toIndex, Object val) {
-                return; //TODO: Object's operator =
+                return; //FIXME: Discuss about Object's operator =
             }
 
             static void	fill(Array<short> *a, short val) {
@@ -479,11 +479,11 @@ namespace Java {
             }
 
             static void sort(Object a[], int arraySize) {
-                return; //FIXME: dicuss about Comparable
+                return; //FIXME: discuss about Operator's Comparable
             }
 
             static void sort(Object a[], int fromIndex, int toIndex) {
-                return; //FIXME: dicuss about Comparable
+                return; //FIXME: discuss about Operator's Comparable
             }
 
             template <typename T>
