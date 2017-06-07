@@ -38,6 +38,7 @@ extern "C" {
 
 // Define builtin types
 typedef bool boolean;
+typedef int BOOL;
 
 template <typename E> class Array;
 template <typename E> class ArrayIterator;

@@ -167,20 +167,29 @@ TEST(JavaUtil, ArraysEquals) {
 TEST(JavaUtil, ArraysFill) {
     /// Given valid array char to test fill
     Array<char> arrayChar = { 'w', 'b', 'a', 'z', 'p' };
-    char filledVal = 't';
+    char filledCharVal = 't';
 
-    Arrays::fill(&arrayChar, filledVal);
+    Arrays::fill(&arrayChar, filledCharVal);
     for (int index = 0; index < arrayChar.length; ++index) {
-        ASSERT_EQUAL(filledVal, arrayChar[index]);
+        ASSERT_EQUAL(filledCharVal, arrayChar[index]);
     }
 
     /// Given valid array float and arrayLength to test fill - this test case wrapped <int>, <short>, <long>, <double>, <byte> also
     Array<float> arrayFloat = { 12, 6.6, 1.6, 2.35, 15.87 };
-    float filledVal2 = 3.7;
+    float filledFloatVal = 3.7;
 
-    Arrays::fill(&arrayFloat, filledVal2);
+    Arrays::fill(&arrayFloat, filledFloatVal);
     for (int index = 0; index < arrayFloat.length; ++index) {
-        ASSERT_TRUE(filledVal2 == arrayFloat[index]);
+        ASSERT_TRUE(filledFloatVal == arrayFloat[index]);
+    }
+
+    /// Given valid array Boolean to test fill - BOOL is defined by <int>
+    Array<BOOL> arrayBOOL = { FALSE, FALSE, FALSE, FALSE, TRUE };
+    char filledBOOLVal = TRUE;
+
+    Arrays::fill(&arrayBOOL, filledBOOLVal);
+    for (BOOL element: arrayBOOL) {
+        ASSERT_TRUE(filledBOOLVal == element);
     }
 }
 
