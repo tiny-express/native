@@ -155,7 +155,13 @@ namespace Java {
 
             template<typename T, typename U>
             static Array<T> copyOf(Array<U> u, int newLength, T newType) {
-                return Array<T>(); //FIXME: cast type in C++ is too dangerous
+                Array<T> result;
+                for (U element: u) {
+                    T newElement = (T)u; ///T must have a constructor of U
+                    result.push(newElement);
+                }
+
+                return result;
             }
 
             static Array<boolean> copyOfRange(Array<boolean> original, int from, int to) {
@@ -197,10 +203,21 @@ namespace Java {
 
             template<typename T, typename U>
             static Array<T> copyOfRange(Array<U> original, int from, int to, T newType) {
-                return Array<T>(); //FIXME: cast type in C++ is too dangerous
+                Array<T> result;
+
+                if (from < 0 || to <= 0 || to <= from || to > original.length) {
+                    return result;
+                }
+
+                for (int index = from; index < to; ++index) {
+                    T element = (T) original[index]; ///T must have a constructor of U
+                    result.push(element);
+                }
+
+                return result;
             }
 
-            static boolean deepEquals(Object a1[], Object a2[]) {
+            static boolean  deepEquals(Object a1[], Object a2[]) {
                 return false; /// Don't support this method
             }
 
@@ -241,20 +258,24 @@ namespace Java {
             }
 
             static boolean equals(Array<Object> a, Array<Object> a2) {
-                return false; //FIXME: Discuss about Object's Comparable
+                return false; //FIXME: Discuss about Object's Comparable - use <T> instead ?
             }
 
             static boolean equals(Array<short> a, Array<short> a2) {
                 return equals0(a, a2);
             }
 
-            static void	fill(Array<boolean> *a, boolean val) {
-                return; //FIXME: can't modify bool inside vector
-            }
+            /**
+             *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
+             *  Use fill(Array<int>, int) instead
+             */
+            //static void fill(Array<boolean> *a, boolean val) {}
 
-            static void	fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {
-                return; //FIXME: can't modify bool inside vector
-            }
+            /**
+             *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
+             *  Use fill(Array<int>, int) instead
+             */
+            //static void fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {}
 
             static void	fill(Array<byte> *a, byte val) {
                 return fill0(a, 0, (*a).length - 1, val);
@@ -305,11 +326,11 @@ namespace Java {
             }
 
             static void	fill(Array<Object> *a, Object val) {
-                return; //FIXME: Discuss about Object's operator =
+                return; //FIXME: Discuss about Object's operator = or use <T> instead
             }
 
             static void	fill(Array<Object> *a, int fromIndex, int toIndex, Object val) {
-                return; //FIXME: Discuss about Object's operator =
+                return; //FIXME: Discuss about Object's operator = or use <T> instead
             }
 
             static void	fill(Array<short> *a, short val) {
@@ -479,11 +500,11 @@ namespace Java {
             }
 
             static void sort(Object a[], int arraySize) {
-                return; //FIXME: discuss about Operator's Comparable
+                return; //FIXME: discuss about Operator's Comparable or use <T> instead (if use T we just need remove this function)
             }
 
             static void sort(Object a[], int fromIndex, int toIndex) {
-                return; //FIXME: discuss about Operator's Comparable
+                return; //FIXME: discuss about Operator's Comparable or use <T> instead (if use T just need remove this function)
             }
 
             template <typename T>
