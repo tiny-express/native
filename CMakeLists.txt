@@ -144,7 +144,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES} java/util/AbstractSequentialList/AbstractSequentialList.cpp java/util/AbstractSequentialList/AbstractSequentialList.hpp)
+add_library(${PROJECT_NAME} SHARED ${SOURCES} java/util/AbstractSequentialList/AbstractSequentialList.cpp java/util/AbstractSequentialList/AbstractSequentialList.hpp java/util/Deque/Deque.cpp java/util/Deque/Deque.h)
 
 # Add make test
 add_custom_target(

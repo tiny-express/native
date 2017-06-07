@@ -31,13 +31,14 @@
 #include "../Collection/Collection.hpp"
 #include "../List/List.hpp"
 #include "../Queue/Queue.hpp"
+#include "../AbstractSequentialList/AbstractSequentialList.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
         template <typename E>
-        class LinkedList: //public AbstractSequentialList<E>,
+        class LinkedList: public AbstractSequentialList<E>,
             //public virtual Serializable,
             //public virtual Cloneable,
             public virtual Iterable<E>,
