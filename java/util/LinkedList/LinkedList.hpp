@@ -28,10 +28,11 @@
 #define NATIVE_JAVA_UTIL_LINKED_LIST_HPP
 
 #include "../../Lang.hpp"
+#include "../AbstractSequentialList/AbstractSequentialList.hpp"
 #include "../Collection/Collection.hpp"
+#include "../Deque/Deque.h"
 #include "../List/List.hpp"
 #include "../Queue/Queue.hpp"
-#include "../AbstractSequentialList/AbstractSequentialList.hpp"
 
 using namespace Java::Lang;
 
@@ -43,12 +44,57 @@ namespace Java {
             //public virtual Cloneable,
             public virtual Iterable<E>,
             public virtual Collection<E>,
-//            public virtual Deque<E>,
+            public virtual Deque<E>,
             public virtual List<E>,
-            public virtual Queue<E>
-
-        {
+            public virtual Queue<E> {
         public:
+            LinkedList();
+            LinkedList(Collection<E> c);
+            ~LinkedList();
+
+        public:
+            boolean	add(E e);
+            void	add(int index, E element);
+            boolean	addAll(Collection<E> c);
+            boolean	addAll(int index, Collection<E> c);
+            void	addFirst(E e);
+            void	addLast(E e);
+            void	clear();
+            Object	clone();
+            boolean	contains(Object o);
+            Iterator<E>	descendingIterator();
+            E	element();
+            E	get(int index);
+            E	getFirst();
+            E	getLast();
+            int	indexOf(Object o);
+            int	lastIndexOf(Object o);
+            ListIterator<E>	listIterator(int index);
+            boolean	offer(E e);
+            boolean	offerFirst(E e);
+            boolean	offerLast(E e);
+            E	peek();
+            E	peekFirst();
+            E	peekLast();
+            E	poll();
+            E	pollFirst();
+            E	pollLast();
+            E	pop();
+            void	push(E e);
+            E	remove();
+            E	remove(int index);
+            boolean	remove(Object o);
+            E	removeFirst();
+            boolean	removeFirstOccurrence(Object o);
+            E	removeLast();
+            boolean	removeLastOccurrence(Object o);
+            E	set(int index, E element);
+            int	size();
+            Array<Object>	toArray();
+
+            template<typename T>
+            Array<T> toArray(Array<T> a);
+
         };
     }
 }
