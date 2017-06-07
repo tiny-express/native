@@ -1,0 +1,21 @@
+# git rm --cached `git ls-files -i --exclude-from=.gitignore`
+.DS_Store
+/.idea
+/CMakeFiles
+/cmake-build-debug
+/cmake_install.cmake
+/CTestTestfile.cmake
+/install_manifest.txt
+/CMakeCache.txt
+/Testing
+/Makefile
+/native_test
+/native.cbp
+/native
+/libnative.a
+/libnative_static.a
+/libnative.dylib
+/libnative.so
+/test.o
+/test.txt
+
