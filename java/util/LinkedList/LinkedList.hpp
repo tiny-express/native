@@ -95,6 +95,8 @@ namespace Java {
             template<typename T>
             Array<T> toArray(Array<T> a);
 
+        private:
+
         };
     }
 }
