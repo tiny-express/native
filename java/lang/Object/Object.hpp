@@ -115,6 +115,7 @@ namespace Java {
 		class Object {
 		public:
 			string toString();
+			int hashCode();
 		};
 	}
 }
