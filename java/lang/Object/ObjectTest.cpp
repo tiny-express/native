@@ -39,7 +39,7 @@ TEST(JavaLang, JavaInstanceOf) {
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
 	ASSERT_TRUE(instanceof<String>(stringInstanceWithSameClass));
-	ASSERT_TRUE(stringInstanceWithSameClass.equals(string2));
+	ASSERT_FALSE(stringInstanceWithSameClass.equals(string2));
 	
 	// Given a String instance - Return it should be an instance of Object
 	String stringInstanceWithSameBaseClass;

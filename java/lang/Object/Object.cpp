@@ -27,15 +27,3 @@
 #include "Object.hpp"
 
 using namespace Java::Lang;
-
-/*
-unsigned long Object::hashCode() {
-    void *addr = this;
-
-    std::stringstream ss;
-    ss << addr;
-
-    unsigned long hashCode;
-    return hashCode;
-}
-*/
