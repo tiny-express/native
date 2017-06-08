@@ -23,3 +23,19 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_LANG_COMPARABLE_HPP
+#define NATIVE_JAVA_LANG_COMPARABLE_HPP
+
+#include "../Object/Object.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Comparable {
+        public:
+            virtual int compareTo(Object* o) const = 0;
+        };
+    }
+}
+
+#endif //NATIVE_JAVA_LANG_COMPARABLE_HPP
