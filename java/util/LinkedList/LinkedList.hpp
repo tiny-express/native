@@ -47,6 +47,10 @@ namespace Java {
             public virtual Deque<E>,
             public virtual List<E>,
             public virtual Queue<E> {
+
+        private:
+//            structCE
+
         public:
             LinkedList();
             LinkedList(Collection<E> c);
@@ -96,7 +100,8 @@ namespace Java {
             Array<T> toArray(Array<T> a);
 
         private:
-
+            void linkFirst();
+            void linkLast();
         };
     }
 }
