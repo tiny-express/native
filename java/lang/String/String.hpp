@@ -69,7 +69,16 @@ namespace Java {
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
 			boolean endsWith(const String &suffix);
-			boolean equals(Object &anObject) const;
+			template <class T>
+			boolean equals(T anObject) const {
+				if (Object::equals(anObject)) {
+					return true;
+				}
+				if (instanceof<String>(anObject)) {
+					return (boolean) string_equals(original, anObject.toString());
+				}
+				return true;
+			}
 			Array<byte> getBytes() const;
 			//Array<byte> getBytes(const Charset &) const;
 			static String fromCharArray(Array<char> &chars);
@@ -113,7 +122,6 @@ namespace Java {
 			boolean operator<(const String &target) const;
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;
-			
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;
