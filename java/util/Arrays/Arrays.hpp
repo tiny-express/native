@@ -257,10 +257,6 @@ namespace Java {
                 return equals0(a, a2);
             }
 
-            static boolean equals(Array<Object> a, Array<Object> a2) {
-                return false; //FIXME: Discuss about Object's Comparable - use <T> instead ?
-            }
-
             static boolean equals(Array<short> a, Array<short> a2) {
                 return equals0(a, a2);
             }
@@ -323,14 +319,6 @@ namespace Java {
 
             static void	fill(Array<long> *a, int fromIndex, int toIndex, long val) {
                 return fill0(a, fromIndex, toIndex, val);
-            }
-
-            static void	fill(Array<Object> *a, Object val) {
-                return; //FIXME: Discuss about Object's operator = or use <T> instead
-            }
-
-            static void	fill(Array<Object> *a, int fromIndex, int toIndex, Object val) {
-                return; //FIXME: Discuss about Object's operator = or use <T> instead
             }
 
             static void	fill(Array<short> *a, short val) {
@@ -497,14 +485,6 @@ namespace Java {
 
             static void sort(short a[], int fromIndex, int toIndex, int arraySize) {
                 return sort0(a, fromIndex, toIndex);
-            }
-
-            static void sort(Object a[], int arraySize) {
-                return; //FIXME: discuss about Operator's Comparable or use <T> instead (if use T we just need remove this function)
-            }
-
-            static void sort(Object a[], int fromIndex, int toIndex) {
-                return; //FIXME: discuss about Operator's Comparable or use <T> instead (if use T just need remove this function)
             }
 
             template <typename T>
