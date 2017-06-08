@@ -40,9 +40,6 @@ namespace Java {
 			string toString() const {
 				return (string) "";
 			}
-
-
-
 		};
 	}
 }

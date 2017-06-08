@@ -587,8 +587,8 @@ void String::operator+=(const String &target2) {
 	*this = string_concat(this->original, target2.original);
 }
 
-bool String::operator==(const String &target2) const {
-	if (string_equals(this->original, target2.toString())) {
+bool String::operator==(const String &target) const {
+	if (string_equals(this->original, target.toString())) {
 		return true;
 	}
 	return false;
@@ -600,14 +600,38 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-bool String::operator!=(const String &target2) const {
-	return !this->operator==(target2);
+bool String::operator!=(const String &target) const {
+	return !this->operator==(target);
 }
 
-bool String::operator<(const String &target2) const {
-	if (strcmp(this->original, target2.toString()) < 0) {
+bool String::operator<(const String &target) const {
+	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
 	}
 	
 	return false;
+}
+
+boolean String::operator>(const String &target) const {
+	if (strcmp(this->original, target.toString()) > 0) {
+		return true;
+	}
+
+	return false;
+}
+
+boolean String::operator<=(const String &target) const {
+	if (strcmp(this->original, target.toString()) > 0) {
+		return false;
+	}
+
+	return true;
+}
+
+boolean String::operator>=(const String &target) const {
+	if (strcmp(this->original, target.toString()) < 0) {
+		return false;
+	}
+
+	return true;
 }
