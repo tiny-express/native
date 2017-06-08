@@ -182,15 +182,6 @@ TEST(JavaUtil, ArraysFill) {
     for (int index = 0; index < arrayFloat.length; ++index) {
         ASSERT_TRUE(filledFloatVal == arrayFloat[index]);
     }
-
-    /// Given valid array Boolean to test fill - BOOL is defined by <int>
-    Array<BOOL> arrayBOOL = { FALSE, FALSE, FALSE, FALSE, TRUE };
-    char filledBOOLVal = TRUE;
-
-    Arrays::fill(&arrayBOOL, filledBOOLVal);
-    for (BOOL element: arrayBOOL) {
-        ASSERT_TRUE(filledBOOLVal == element);
-    }
 }
 
 /**
