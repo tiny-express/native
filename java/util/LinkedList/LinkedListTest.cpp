@@ -24,30 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_QUEUE_HPP
-#define NATIVE_JAVA_UTIL_QUEUE_HPP
-#include "../../Lang.hpp"
-#include "../Collection/Collection.hpp"
+extern "C" {
+#include "../../../unit_test.h"
+}
+
+#include "LinkedList.hpp"
 
 using namespace Java::Util;
 
-namespace Java {
-    namespace Util {
+TEST(JavaUtil, LinkedListAddGet) {
+    /// Given valid LinkedList<int> to test add(), addFirst(), addLast(), size(), getFirst(), getLast() also
+    LinkedList<int> linkedList;
+    linkedList.add(25);
 
-        template <typename E>
-        class Queue: public Collection<E> {
-        private:
-            Queue();
-            ~Queue();
+    // add(): Get very first value inside linkedList, check through getFirst()
+    ASSERT_EQUAL(25, linkedList.getFirst());
 
-        protected:
-            virtual boolean add(E &e) = 0; ///Inserts the specified element into this queue
-            virtual boolean offer(E &e) = 0; ///Inserts the specified element into this queue
-            virtual E& peek() const = 0; ///Retrieves, but does not remove, the head of this queue, or returns NULL if this queue is empty.
-            virtual E& poll() = 0; ///Retrieves and removes the head of this queue, or returns NULL if this queue is empty.
-            virtual E remove() = 0; ///Retrieves and removes the head of this queue
-        };
-    }
+    // size(): Add one more param to test
+    linkedList.addLast(30);
+    ASSERT_EQUAL(2, linkedList.size());
+
+    // addFirst(): Add one more param through this function, check through getFirst()
+    linkedList.addFirst(45);
+    ASSERT_EQUAL(45, linkedList.getFirst());
+
+    // addLast(): Add one more param through this function, check through getLast()
+    linkedList.addLast(101);
+    ASSERT_EQUAL(101, linkedList.getLast());
 }
-
-#endif //NATIVE_JAVA_UTIL_QUEUE_HPP

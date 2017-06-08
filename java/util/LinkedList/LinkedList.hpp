@@ -22,7 +22,6 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-<<<<<<< HEAD
  */
 
 #ifndef NATIVE_JAVA_UTIL_LINKED_LIST_HPP
@@ -39,75 +38,133 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
+
         template <typename E>
-        class LinkedList: public AbstractSequentialList<E>,
+        class Node {
+        public:
+            E item;
+            Node<E> *previous = NULL;
+            Node<E> *next = NULL;
+
+            Node(Node<E> *previous, E element, Node<E> *next) {
+                this->item      = element;
+                this->previous  = previous;
+                this->next      = next;
+            }
+        };
+
+        template <typename E>
+        class LinkedList {
+            //public AbstractSequentialList<E>,
             //public virtual Serializable,
             //public virtual Cloneable,
-            public virtual Iterable<E>,
-            public virtual Collection<E>,
-            public virtual Deque<E>,
-            public virtual List<E>,
-            public virtual Queue<E> {
-
+            //public virtual Deque<E>,
+            //public virtual List<E> {
         private:
-//            structCE
+            Node<E> *first = NULL;
+            Node<E> *last = NULL;
+            int nodeSize = 0;
 
         public:
-            LinkedList();
-            LinkedList(Collection<E> c);
-            ~LinkedList();
+            LinkedList() {}
+            LinkedList(Collection<E> c) {}
+            ~LinkedList() {}
 
         public:
-            boolean	add(E e);
-            void	add(int index, E element);
+            boolean	add(E e) {
+                linkLast(e);
+                return true;
+            }
+
+            void add(int index, E element);
             boolean	addAll(Collection<E> c);
             boolean	addAll(int index, Collection<E> c);
-            void	addFirst(E e);
-            void	addLast(E e);
-            void	clear();
-            Object	clone();
+            void addFirst(E e) {
+                linkFirst(e);
+                return;
+            }
+            void addLast(E e) {
+                linkLast(e);
+                return;
+            }
+            void clear();
+            Object clone();
             boolean	contains(Object o);
             Iterator<E>	descendingIterator();
-            E	element();
-            E	get(int index);
-            E	getFirst();
-            E	getLast();
+            E element();
+            E get(int index);
+
+            E getFirst() {
+                return first->item;
+            }
+
+            E getLast() {
+                return last->item;
+            }
+
             int	indexOf(Object o);
             int	lastIndexOf(Object o);
             ListIterator<E>	listIterator(int index);
             boolean	offer(E e);
             boolean	offerFirst(E e);
             boolean	offerLast(E e);
-            E	peek();
-            E	peekFirst();
-            E	peekLast();
-            E	poll();
-            E	pollFirst();
-            E	pollLast();
-            E	pop();
-            void	push(E e);
-            E	remove();
-            E	remove(int index);
+            E peek();
+            E peekFirst();
+            E peekLast();
+            E poll();
+            E pollFirst();
+            E pollLast();
+            E pop();
+            void push(E e);
+            E remove();
+            E remove(int index);
             boolean	remove(Object o);
-            E	removeFirst();
+            E removeFirst();
             boolean	removeFirstOccurrence(Object o);
-            E	removeLast();
+            E removeLast();
             boolean	removeLastOccurrence(Object o);
-            E	set(int index, E element);
-            int	size();
-            Array<Object>	toArray();
+            E set(int index, E element);
+            int	size() {
+                return this->nodeSize;
+            }
+
+            Iterator<E> &iterator();
+            Array<Object> toArray();
 
             template<typename T>
             Array<T> toArray(Array<T> a);
 
-        private:
-            void linkFirst();
-            void linkLast();
+        public:
+            void linkFirst(E e) {
+                Node<E> node = Node<E>(NULL, e, first);
+
+                Node<E> *f = first;
+                first = &node;
+
+                if (last == NULL) {
+                    last = &node;
+                } else {
+                    f->previous = &node;
+                }
+
+                nodeSize++;
+            }
+            void linkLast(E e) {
+                Node<E> node = Node<E>(last, e, NULL);
+
+                Node<E> *l = last;
+                last = &node;
+
+                if (first == NULL) {
+                    first = &node;
+                } else {
+                    l->next = &node;
+                }
+
+                nodeSize++;
+            }
         };
     }
 }
 
 #endif //NATIVE_JAVA_UTIL_LINKED_LIST_HPP
-=======
- */
->>>>>>> java.util.queue
