@@ -34,7 +34,8 @@
 
 namespace Java {
 	namespace Lang {
-		class Number : public virtual Object {
+		class Number : public Object {
+
 		protected:
 			virtual char charValue() const = 0;
 			virtual string stringValue() const = 0;
