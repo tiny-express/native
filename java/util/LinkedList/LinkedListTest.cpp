@@ -33,7 +33,7 @@ extern "C" {
 using namespace Java::Util;
 
 TEST(JavaUtil, LinkedListAddGet) {
-    /// Given valid LinkedList<int> to test add(), addFirst(), addLast(), size(), getFirst(), getLast() also
+    /// Given valid LinkedList<int> to test add(), addFirst(), addLast(), size(), getFirst(), getLast(), get(index) also
     LinkedList<int> linkedList;
     linkedList.add(25);
 
@@ -51,4 +51,10 @@ TEST(JavaUtil, LinkedListAddGet) {
     // addLast(): Add one more param through this function, check through getLast()
     linkedList.addLast(101);
     ASSERT_EQUAL(101, linkedList.getLast());
+
+    //get(index: ): Test to get correct data inside
+    ASSERT_EQUAL(45, linkedList.get(0));
+
+    //get(index: ): A throw exception for pass index that our of linkedList - this test is described how to use linkedList exception
+    //ASSERT_EQUAL(-1, linkedList.get(101));
 }
