@@ -73,7 +73,6 @@ namespace Java {
 
         public:
             boolean	add(E e) {
-                printf("Read %lf\n", e);
                 linkLast(e);
                 return true;
             }
@@ -86,12 +85,12 @@ namespace Java {
             }
 
             /**
-             * We don't support this method, use add(E e) instead because type casting problem
+             * Don't support this method, use add(E e) instead because type casting problem
              * */
             //boolean	addAll(Collection<E> c);
 
             /**
-             * We don't support this method, use add(E e) instead because type casting problem
+             * Don't support this method, use add(E e) instead because type casting problem
              * */
             //boolean	addAll(int index, Collection<E> c);
 
@@ -111,9 +110,10 @@ namespace Java {
                 }
             }
 
-            Object clone() {
-                //TODO
-            }
+            /**
+             * Don't support this method because we should return pointer of <this> if not, it will removed at runtime
+             * */
+            //Object clone();
 
             /**
              * Don't support this method, use contains(E) instead
@@ -188,7 +188,7 @@ namespace Java {
                 return -1;
             }
 
-            //Returns a list-iterator of the elements in this list (in proper sequence), starting at the specified position in the list.
+            ///Returns a list-iterator of the elements in this list (in proper sequence), starting at the specified position in the list.
             ListIterator<E>	listIterator(int index) {
                 //FIXME: Discuss about this method
             }
@@ -212,12 +212,16 @@ namespace Java {
                 return getFirst();
             }
 
-            /// We don't support nullable
+            /**
+             * Don't support nullable
+             * */
             E peekFirst() {
                 return getFirst();
             }
 
-            /// We don't support nullable
+            /**
+             * Don't support nullable
+             */
             E peekLast() {
                 return getLast();
             }
