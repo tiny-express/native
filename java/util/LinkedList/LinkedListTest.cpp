@@ -55,7 +55,10 @@ TEST(JavaUtil, LinkedListAddAndGet) {
     //get(index: ): Test to get correct data inside
     ASSERT_EQUAL(45, linkedList.get(0));
 
-    //get(index: ): A throw exception for pass index that our of linkedList - this test is described how to use linkedList exception
+    /**
+     * get(index: ): A throw exception for pass index that our of linkedList - this test is described how to use linkedList exception
+     * Remove // at the start of test case below to see exception
+     **/
     //ASSERT_EQUAL(-1, linkedList.get(101));
 
     //add(index: element: ): Add element to specific index inside linkedList (from 0 to linkedList.size), check through get(index: )
@@ -78,7 +81,7 @@ TEST(JavaUtil, LinkedListGetAndRemove) {
     //peekFirst(): return first element and must be equal to 'a'
     ASSERT_EQUAL('a', linkedList.peekFirst());
 
-    //peekLast(): return last element and must be queal to 'e'
+    //peekLast(): return last element and must be equal to 'e'
     ASSERT_EQUAL('e', linkedList.peekLast());
 
     //pool(): return first element and must be equal to 'a'
@@ -88,13 +91,13 @@ TEST(JavaUtil, LinkedListGetAndRemove) {
     ASSERT_EQUAL('a', linkedList.pollFirst());
     ASSERT_EQUAL('b', linkedList.getFirst());
 
-    //pollFirst(): return first element and must be equal to 'e', and remove that element also, so next first element must be equal to 'd'
+    //pollFirst(): return first element and must be equal to 'e', and remove that element also, so next last element must be equal to 'd'
     ASSERT_EQUAL('e', linkedList.pollLast());
     ASSERT_EQUAL('d', linkedList.getLast());
 }
 
 TEST(JavaUtil, LinkedListRemove) {
-    /// Given valid LinkList<float> to test) peek(), peek..(), poll(), poll..(), offer(), offer..(
+    /// Given valid LinkList<float> to test remove(), remove..()
     LinkedList<float> linkedList;
     linkedList.add(1.3);
     linkedList.add(52.2);
@@ -102,7 +105,7 @@ TEST(JavaUtil, LinkedListRemove) {
     linkedList.add(7.3);
     linkedList.add(10.3);
 
-    // remove(): remove first element, so next getFirst must be equal to 52 - this test case wrapped removeFirst() also
+    // remove(): remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
     linkedList.remove();
     ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
 
