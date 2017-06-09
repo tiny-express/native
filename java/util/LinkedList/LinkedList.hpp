@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_UTIL_LINKED_LIST_HPP
 #define NATIVE_JAVA_UTIL_LINKED_LIST_HPP
 
+#include <stdexcept>
 #include "../../Lang.hpp"
 #include "../AbstractSequentialList/AbstractSequentialList.hpp"
 #include "../Collection/Collection.hpp"
@@ -46,10 +47,16 @@ namespace Java {
             Node<E> *previous = NULL;
             Node<E> *next = NULL;
 
-            Node(Node<E> *previous, E element, Node<E> *next) {
+            Node(Node<E> *previous2, E element, Node<E> *next2) {
+                if (previous2 != NULL) {
+                    printf("previous before assigned: %d\n", previous2->item);
+                }
                 this->item      = element;
-                this->previous  = previous;
-                this->next      = next;
+                this->previous  = previous2;
+                this->next      = next2;
+                if (previous2 != NULL) {
+                    printf("previous after assigned: %d\n", previous2->item);
+                }
             }
         };
 
@@ -92,7 +99,10 @@ namespace Java {
             boolean	contains(Object o);
             Iterator<E>	descendingIterator();
             E element();
-            E get(int index);
+
+            E get(int index) {
+                return node(index);
+            }
 
             E getFirst() {
                 return first->item;
@@ -134,34 +144,47 @@ namespace Java {
             template<typename T>
             Array<T> toArray(Array<T> a);
 
-        public:
+        private:
             void linkFirst(E e) {
-                Node<E> node = Node<E>(NULL, e, first);
+                Node<E> *node = new Node<E>(NULL, e, first);
 
                 Node<E> *f = first;
-                first = &node;
+                first = node;
 
                 if (last == NULL) {
-                    last = &node;
+                    last = node;
                 } else {
-                    f->previous = &node;
+                    f->previous = node;
                 }
 
                 nodeSize++;
             }
+
             void linkLast(E e) {
-                Node<E> node = Node<E>(last, e, NULL);
+                Node<E> *node = new Node<E>(last, e, NULL);
 
                 Node<E> *l = last;
-                last = &node;
+                last = node;
 
                 if (first == NULL) {
-                    first = &node;
+                    first = node;
                 } else {
-                    l->next = &node;
+                    l->next = node;
                 }
 
                 nodeSize++;
+            }
+
+            E node(int index) {
+                if (index < 0 || index >= this->nodeSize) {
+                    throw std::invalid_argument( "index is out o scope" );
+                }
+
+                Node<E> *temp = this->first;
+                for (int i = 1; i < index; ++i) {
+                    temp = temp->next;
+                }
+                return temp->item;
             }
         };
     }
