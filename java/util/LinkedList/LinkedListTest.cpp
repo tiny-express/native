@@ -32,7 +32,7 @@ extern "C" {
 
 using namespace Java::Util;
 
-TEST(JavaUtil, LinkedListAddGet) {
+TEST(JavaUtil, LinkedListAddAndGet) {
     /// Given valid LinkedList<int> to test add(), addFirst(), addLast(), size(), getFirst(), getLast(), get(index) also
     LinkedList<int> linkedList;
     linkedList.add(25);
@@ -57,4 +57,56 @@ TEST(JavaUtil, LinkedListAddGet) {
 
     //get(index: ): A throw exception for pass index that our of linkedList - this test is described how to use linkedList exception
     //ASSERT_EQUAL(-1, linkedList.get(101));
+
+    //add(index: element: ): Add element to specific index inside linkedList (from 0 to linkedList.size), check through get(index: )
+    linkedList.add(2, 200);
+    ASSERT_EQUAL(200, linkedList.get(2));
+}
+
+TEST(JavaUtil, LinkedListGetAndRemove) {
+    /// Given valid LinkList<char> to test peek(), peek..(), poll(), poll..(), offer(), offer..()
+    LinkedList<char> linkedList;
+    linkedList.add('a');
+    linkedList.add('b');
+    linkedList.add('c');
+    linkedList.add('d');
+    linkedList.add('e');
+
+    //peek(): return first element and must be equal to 'a'
+    ASSERT_EQUAL('a', linkedList.peek());
+
+    //peekFirst(): return first element and must be equal to 'a'
+    ASSERT_EQUAL('a', linkedList.peekFirst());
+
+    //peekLast(): return last element and must be queal to 'e'
+    ASSERT_EQUAL('e', linkedList.peekLast());
+
+    //pool(): return first element and must be equal to 'a'
+    ASSERT_EQUAL('a', linkedList.poll());
+
+    //pollFirst(): return first element and must be equal to 'a', and remove that element also, so next first element must be equal to 'b'
+    ASSERT_EQUAL('a', linkedList.pollFirst());
+    ASSERT_EQUAL('b', linkedList.getFirst());
+
+    //pollFirst(): return first element and must be equal to 'e', and remove that element also, so next first element must be equal to 'd'
+    ASSERT_EQUAL('e', linkedList.pollLast());
+    ASSERT_EQUAL('d', linkedList.getLast());
+}
+
+TEST(JavaUtil, LinkedListRemove) {
+    /// Given valid LinkList<float> to test) peek(), peek..(), poll(), poll..(), offer(), offer..(
+    LinkedList<float> linkedList;
+    linkedList.add(1.3);
+    linkedList.add(52.2);
+    linkedList.add(0.2);
+    linkedList.add(7.3);
+    linkedList.add(10.3);
+
+    // remove(): remove first element, so next getFirst must be equal to 52 - this test case wrapped removeFirst() also
+    linkedList.remove();
+    ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
+
+    // removeLast(): remove last element, so next getLast must be equal to 7.3
+    linkedList.removeLast();
+    ASSERT_DBL_NEAR(7.3, linkedList.getLast());
 }
