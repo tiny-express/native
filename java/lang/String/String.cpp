@@ -77,7 +77,7 @@ String::~String() {
  * @return String
  */
 char String::charAt(int index) {
-	if (( index < 0 ) || ( index >= this->size )) {
+	if (( index < 0 ) || ( index > this->size - 1)) {
 		return '\0';
 	}
 	return this->original[ index ];
