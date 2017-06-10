@@ -47,4 +47,5 @@ TEST (Storage, FileGetContents) {
 	char *expect = file_get_contents((char *) file_path);
 	// Verify read operation
 	ASSERT_STR(expect, content);
+	free(expect);
 }
