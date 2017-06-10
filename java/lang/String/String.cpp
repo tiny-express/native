@@ -66,7 +66,7 @@ String::String(const String &target) {
 String::~String() {
 	if (original != NULL) {
 		//free(original);
-		original = NULL;
+        // original = NULL;
 	}
 }
 
