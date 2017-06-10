@@ -37,7 +37,7 @@ namespace Java {
         class Thread: public Object, public virtual Runnable {
         private:
             pthread_t   original;
-            string      threadName;
+            string threadName;
             Runnable    *target;
 
             boolean     isThreadRunning;
