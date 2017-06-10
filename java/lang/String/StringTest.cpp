@@ -38,7 +38,7 @@ TEST (JavaLang, StringConstructor) {
 	// Give NULL for String constructor
 	String nullString;
 	ASSERT_STR("", nullString.toString());
-	
+
 	// Given empty value for String constructor and assign value - Return string
 	String emptyString;
 	emptyString = (string) "Hello world";

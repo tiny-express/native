@@ -45,7 +45,7 @@ String::String(string target) {
 }
 
 String::String(Array<char> &chars) {
-	this->original = String::fromCharArray(chars).toString();
+	this->original = string_copy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
@@ -54,7 +54,7 @@ String::String(Array<byte> &bytes) {
 	for (byte byte : bytes) {
 		chars.push((char) byte);
 	}
-	this->original = String::fromCharArray(chars).toString();
+	this->original = string_copy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
@@ -64,6 +64,10 @@ String::String(const String &target) {
 }
 
 String::~String() {
+	if (original != NULL) {
+		//free(original);
+		original = NULL;
+	}
 }
 
 /**

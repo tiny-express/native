@@ -370,7 +370,6 @@ char *string_copy(char *target) {
 	}
 	int length = length_pointer_char(target);
 	char *result = (char *) malloc(( length + 1 ) * sizeof(char));
-	//memcpy(result, target, length);
 	strncpy(result, target, length);
 	result[ length ] = '\0';
 	return result;
