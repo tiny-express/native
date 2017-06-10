@@ -56,29 +56,28 @@ $ cmake . && make unit-test
 
 #### Usages (for Java/C++ Developers)
 ```java
-public class Main() {
-        public static void main(String[] args) {
-                 String text = "Sample program: ";
-                byte[] bytes = { 64, 65, 66, 67 };
-                for (byte number : bytes) {
-                        text += (char) number;
-                }
-                System.out.println(text);
-            }
+public class Main {
+    public static void main(String[] args) {
+        String text = "Native Library: ";
+        byte[] bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
+        for (byte number : bytes) {
+            text += (char) number;
+        }
+        System.out.println(text);
     }
 }
 ```
 ```cpp
 #include <native/library.hpp>
-#include <native/library.hpp>
+
 int main() {
-        String text = "Sample program: ";
-	    Array<byte> bytes = { 64, 65, 66, 67 };
-	    for (byte number : bytes) {
-		        text += (char) number;
-	    }
-	    System::out::println(text);
-	    return 0;
+	String text = "Native Library: ";
+	Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
+	for (byte number : bytes) {
+		text += (char) number;
+	}
+	System::out::println(text);
+	return 0;
 }
 ```
 ```bash
@@ -110,18 +109,25 @@ TEST(YourTestSuite, YourTestCase) {
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/development/CONTRIBUTION.md)
 
 # Documentation
+#### Differences
+This library provides Java classes in C++ so its syntax is friendly for
+both programming languges but we still have some issues :
+1. Array
+2. Interface
+3. Runtime
+4. Garbage Collection
 
 #### Data Types
 All data types are implemented and ready to use in C++ Application
 - [x] char - Java & C++
-- [x] byte - Java & C++ (unsigned char)
-- [x] string - C++ (char*)
+- [x] byte - Java & C++ (equivalent with `unsigned char`)
+- [x] string - C++ (equivalent with `char*`)
 - [x] short - Java & C++
 - [x] int - Java & C++
 - [x] long - Java & C++
 - [x] float - Java & C++
 - [x] double - Java & C++
-- [x] boolean - Java & C++ (bool)
+- [x] boolean - Java & C++ (equivalent with `bool`)
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
@@ -129,21 +135,21 @@ All Java packages are in transformation so we can have a general look about road
 ##### Java.Lang
 - [ ] Java.Lang.Appendable
 - [ ] Java.Lang.Autocloseable
-- [ ] Java.Lang.Boolean
-- [ ] Java.Lang.Byte
-- [ ] Java.Lang.Character
+- [x] Java.Lang.Boolean
+- [x] Java.Lang.Byte
+- [x] Java.Lang.Character
 - [ ] Java.Lang.CharSequence
 - [ ] Java.Lang.Cloneable
 - [ ] Java.Lang.Comparable
-- [ ] Java.Lang.Double
+- [x] Java.Lang.Double
 - [ ] Java.Lang.Enum
 - [ ] Java.Lang.Error
 - [ ] Java.Lang.Exception
-- [ ] Java.Lang.Float
+- [x] Java.Lang.Float
 - [x] Java.Lang.Integer
 - [x] Java.Lang.Iterable
-- [ ] Java.Lang.Long
-- [ ] Java.Lang.Math
+- [x] Java.Lang.Long
+- [x] Java.Lang.Math
 - [x] Java.Lang.Number
 - [x] Java.Lang.Object
 - [x] Java.Lang.Process
@@ -152,7 +158,7 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Runtime
 - [x] Java.Lang.Short
 - [x] Java.Lang.String
-- [ ] Java.Lang.System
+- [x] Java.Lang.System
 - [ ] Java.Lang.Throwable
 - [ ] Java.Lang.Thread
 ##### Java.IO
@@ -184,12 +190,12 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.AbstractMap
 - [ ] Java.Util.AbstractSet
 - [x] Java.Util.ArrayList
-- [ ] Java.Util.Arrays
+- [x] Java.Util.Arrays
 - [ ] Java.Util.BitSet
 - [ ] Java.Util.Base64
 - [ ] Java.Util.Calendar
-- [ ] Java.Util.Collection
-- [ ] Java.Util.Collections
+- [x] Java.Util.Collection
+- [x] Java.Util.Collections
 - [ ] Java.Util.Currency
 - [ ] Java.Util.Date
 - [ ] Java.Util.EnumMap
@@ -198,12 +204,12 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.HashSet
 - [x] Java.Util.Iterator
 - [ ] Java.Util.LinkedListHashSet
-- [ ] Java.Util.LinkedList
+- [x] Java.Util.LinkedList
 - [ ] Java.Util.List
 - [ ] Java.Util.Map
 - [ ] Java.Util.Observable
 - [ ] Java.Util.PriorityQueue
-- [ ] Java.Util.Queue
+- [x] Java.Util.Queue
 - [ ] Java.Util.Random
 - [ ] Java.Util.Scanner
 - [ ] Java.Util.Set
