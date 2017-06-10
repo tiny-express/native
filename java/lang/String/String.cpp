@@ -63,10 +63,11 @@ String::String(const String &target) {
 	this->length();
 }
 
+// TODO: This function can't retrieve memory allocated, nakhoa will fix this.
 String::~String() {
 	if (original != NULL) {
 		//free(original);
-		original = NULL;
+        original = NULL;
 	}
 }
 
