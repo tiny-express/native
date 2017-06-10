@@ -42,7 +42,7 @@ namespace Java {
             
             public:
 			Stack(){}
-			~Stack(){}
+			virtual ~Stack(){}
 
             public:
             
