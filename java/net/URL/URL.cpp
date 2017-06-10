@@ -43,7 +43,6 @@ URL::URL(String spec) {
 	this->port = number_default(url_port(url));
 	this->query = string_default(http_query(url));
 	this->path = string_default(http_path(url));
-	free(url);
 }
 
 URL::~URL() {}
@@ -90,5 +89,7 @@ string URL::toString() const {
 	}
 	
 	url = url + ( query.isEmpty() ? "" : "?" ) + query;
-	return url.toString();
+	string result = url.toString();
+	puts(result);
+	return result;
 }

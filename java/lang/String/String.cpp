@@ -31,17 +31,17 @@ using namespace Java::Lang;
 
 String::String() {
 	this->original = strdup("\0");
-	this->length();
+	this->size = 0;
 }
 
 String::String(const_string target) {
 	this->original = strdup(target);
-	this->length();
+	this->size = length_pointer_char((char*)target);
 }
 
 String::String(string target) {
 	this->original = strdup(target);
-	this->length();
+	this->size = length_pointer_char(target);
 }
 
 String::String(Array<char> &chars) {
@@ -60,11 +60,14 @@ String::String(Array<byte> &bytes) {
 
 String::String(const String &target) {
 	this->original = strdup(target.original);
-	this->length();
+	this->size = target.size;
 }
 
 String::~String() {
-	//free(original);
+	if (this->original == NULL) {
+		return;
+	}
+	free(original);
 }
 
 /**
@@ -96,7 +99,7 @@ char String::charAt(int index) {
  * @param anotherString
  * @return int
  */
-int String::compareTo(String anotherString) const {
+int String::compareTo(const String &anotherString) const {
 	string anotherStringValue = anotherString.toString();
 	if (string_equals(this->original, anotherStringValue)) {
 		return 0;
@@ -122,7 +125,10 @@ int String::compareToIgnoreCase(String str) const {
  * @return String
  */
 String String::concat(String str) {
-	return string_concat(this->original, str.original);
+	char *stringConcat = string_concat(this->original, str.original);
+    String result(stringConcat);
+    free(stringConcat);
+    return result;
 }
 
 /**
@@ -132,7 +138,7 @@ String String::concat(String str) {
  * @return String
  */
 boolean String::contains(const CharSequence &str) {
-	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
+	return (string_index(this->original, str.toString(), 1) != NOT_FOUND);
 }
 
 /**
@@ -154,8 +160,8 @@ Array<byte> String::getBytes() const {
  * @param suffix
  * @return
  */
-boolean String::endsWith(const String &suffix) {
-	return string_endswith(this->original, suffix.original);
+boolean String::endsWith(const String &suffix) const {
+    return (string_endswith(this->original, suffix.original));
 }
 
 /**
@@ -172,9 +178,9 @@ String String::fromCharArray(Array<char> &chars) {
 	int index = 0;
 	
 	for (char character : chars) {
-		str[ index++ ] = character;
+		str[index++] = character;
 	}
-	str[ index ] = '\0';
+	str[index] = '\0';
 	return str;
 }
 
@@ -345,7 +351,6 @@ int String::lastIndexOf(String str, int fromIndex) const {
  * @return int
  */
 int String::length() {
-	this->size = length_pointer_char(this->original);
 	return this->size;
 }
 
@@ -626,7 +631,7 @@ bool String::operator==(const String &target) const {
 
 String String::operator=(const String &target) {
 	this->original = strdup(target.original);
-	this->length();
+	this->size = target.size;
 	return *this;
 }
 

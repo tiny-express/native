@@ -62,7 +62,7 @@ namespace Java {
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
             String &clone();
-			virtual int compareTo(String o) const override;
+			virtual int compareTo(const String &o) const override;
 			int compareToIgnoreCase(String str) const;
 			String concat(String str);
 			boolean contains(const CharSequence &str);
@@ -70,7 +70,7 @@ namespace Java {
 			//boolean contentEquals(const StringBuffer &str);
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
-			boolean endsWith(const String &suffix);
+			boolean endsWith(const String &suffix) const;
 			template <class T>
 			boolean equals(T anObject) const {
 				if (Object::equals(anObject)) {
