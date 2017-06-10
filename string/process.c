@@ -390,8 +390,8 @@ char *string_copy(char *target) {
 		return "\0";
 	}
 	int length = length_pointer_char(target);
-	char *result = (char *) malloc(( length + 1 ) * sizeof(char));
-	strncpy(result, target, length);
+	char *result = (char *) calloc(length + 2 , sizeof(char));
+	memcpy(result, target, length);
 	result[ length ] = '\0';
 	return result;
 }
