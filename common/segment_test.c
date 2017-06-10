@@ -125,12 +125,14 @@ TEST (Common, SegmentPointerConstChar) {
 	char *result = segment_pointer_char(charArray, from, to);
 	ASSERT_EQUAL(1, length_pointer_char(result));
 	ASSERT_STR("W", result);
+	free(result);
 	
 	from = 7;
 	to = 6;
 	char *result2 = segment_pointer_char(charArray, from, to);
 	ASSERT_EQUAL(0, length_pointer_char(result2));
 	ASSERT_STR("", result2);
+	free(result2);
 }
 
 TEST (Common, SegmentPointerPointerChar) {
@@ -151,5 +153,8 @@ TEST (Common, SegmentPointerPointerChar) {
 	char **result = segment_pointer_pointer_char(target, from, to);
 	
 	ASSERT_EQUAL(4, length_pointer_pointer_char(result));
-	ASSERT_STR("brown|fox|jumps|over", string_join(result, "|"));
+	char *join = string_join(result, "|");
+	ASSERT_STR("brown|fox|jumps|over", join);
+	free(join);
+	free(result);
 }
