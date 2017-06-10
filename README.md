@@ -71,12 +71,12 @@ public class Main {
 #include <native/library.hpp>
 
 int main() {
-	String text = "Native Library: ";
-	Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
-	for (byte number : bytes) {
-		text += (char) number;
-	}
-	System::out::println(text);
+    String text = "Native Library: ";
+    Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
+    for (byte number : bytes) {
+        text += (char) number;
+    }
+    System::out::println(text);
 	return 0;
 }
 ```
@@ -112,10 +112,10 @@ TEST(YourTestSuite, YourTestCase) {
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
-1. Array
-2. Interface
-3. Runtime
-4. Garbage Collection
+- Array
+- Interface
+- Runtime
+- Garbage Collection
 
 #### Data Types
 All data types are implemented and ready to use in C++ Application
