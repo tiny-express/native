@@ -303,6 +303,27 @@ inline char *string_random(char *target, int size) {
 }
 
 /**
+ * Append a character into a string
+ *
+ * @param target
+ * @param subtarget
+ * @return string
+ */
+inline char *string_append(char *target, char subtarget) {
+	int target_length = length_pointer_char(target);
+	char *dynamic_target = strdup(target);
+	char *buffer = (char*) realloc(dynamic_target, (target_length + 2) * sizeof(char*));
+	if (buffer) {
+		dynamic_target = buffer;
+		dynamic_target[target_length] = subtarget;
+		dynamic_target[target_length + 1] = '\0';
+	} else {
+		free(buffer);
+	}
+	return dynamic_target;
+}
+
+/**
  * String concatenation
  *
  * @param target
