@@ -39,7 +39,3 @@ TEST(JavaNet, UrlEncodeString) {
     //unicode expect =  "Qu%c3%a1n+%c4%83n";
     //ASSERT_STR(expect, result.toString());
 }
-
-TEST(JavaNet, UrlEncodeStringWithCharacterEncoding) {
-
-}
