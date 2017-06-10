@@ -64,7 +64,7 @@ String::String(const String &target) {
 }
 
 String::~String() {
-	free(original);
+	//free(original);
 }
 
 /**

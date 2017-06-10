@@ -43,7 +43,7 @@ inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
                 length= length_target - from + 1;\
         }\
         TYPE *pointer = calloc(length, sizeof(TYPE));\
-        memcpy(pointer, &target[from], length- 1);\
+        memcpy(pointer, &target[from], length - 1);\
         pointer[length] = '\0';\
         return pointer;\
 }

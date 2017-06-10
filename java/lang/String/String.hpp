@@ -54,7 +54,7 @@ namespace Java {
 			String(Array<char> &chars);
 			String(Array<byte> &bytes);
 			String(const String &target);
-			virtual ~String();
+			~String();
 		public:
 			char charAt(int index);
 			int codePointAt();
