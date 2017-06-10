@@ -29,14 +29,20 @@
 
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
+#include "../../io/Serializable/Serializable.hpp"
+#include "../../lang/Comparable/Comparable.hpp"
 
+using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
 		
 		class String;
 		
-		class String : public virtual CharSequence {
+		class String :
+			public virtual Serializable,
+			public virtual Comparable<String>,
+			public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
@@ -48,25 +54,33 @@ namespace Java {
 			String(Array<char> &chars);
 			String(Array<byte> &bytes);
 			String(const String &target);
-
 			virtual ~String();
 		public:
 			char charAt(int index);
-			int codePoinAt();
-			int codePoinBefore();
+			int codePointAt();
+			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
-			int compareTo(String anotherString);
-			int compareToIgnoreCase(String str);
+			virtual int compareTo(String o) const override;
+			int compareToIgnoreCase(String str) const;
 			String concat(String str);
 			boolean contains(const CharSequence &str);
 			boolean contentEquals(const CharSequence &cs);
 			//boolean contentEquals(const StringBuffer &str);
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
-			boolean	endsWith(const String &suffix);
-			boolean	equals(const Object &anObject);
+			boolean endsWith(const String &suffix);
+			template <class T>
+			boolean equals(T anObject) const {
+				if (Object::equals(anObject)) {
+					return true;
+				}
+				if (instanceof<String>(anObject)) {
+					return (boolean) string_equals(original, anObject.toString());
+				}
+				return true;
+			}
 			Array<byte> getBytes() const;
-			//Array<byte> getBytes(const Charset &) const;
+			//Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
@@ -91,7 +105,6 @@ namespace Java {
 			String toUpperCase();
 			String trim();
 			string toString() const;
-			
 			static String valueOf(boolean target);
 			static String valueOf(char target);
 			static String valueOf(string target);
@@ -102,13 +115,15 @@ namespace Java {
 			static String valueOf(double target);
 		
 		public:
+			boolean operator==(const String &target) const;
+			boolean operator!=(const String &target) const;
+			boolean operator<(const String &target) const;
+			boolean operator>(const String &target) const;
+			boolean operator<=(const String &target) const;
+			boolean operator>=(const String &target) const;
 			String operator+(const String &target);
 			String operator=(const String &target);
 			void operator+=(const String &target);
-			boolean operator<(const String &target) const;
-			boolean operator==(const String &target) const;
-			boolean operator!=(const String &target) const;
-			
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;

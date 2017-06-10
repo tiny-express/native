@@ -491,6 +491,7 @@ namespace Java {
 		};
 	
 		template <typename E>
+
 		class SubList : public virtual AbstractList<E> {
 		private:
 			AbstractList<E> l;
