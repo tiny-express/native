@@ -42,7 +42,7 @@ namespace Java {
 		
 		template <typename E>
 		class Collection : public virtual Iterable<E> {
-		private:
+		protected:
 			Collection();
 			~Collection();
 		public:

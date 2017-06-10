@@ -54,6 +54,7 @@ namespace Java {
 			long longValue() const;
 			float floatValue() const;
 			double doubleValue() const;
+			
 			string toString() const;
 			static Integer parseInt(String target);
 			int compareTo(Integer o) const override {
