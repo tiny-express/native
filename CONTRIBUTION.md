@@ -18,11 +18,11 @@ TEST(General, distribution_sort) {
 ```c
 int array_length = 10;
 // Put loop variable in register to optimize performance
-#ifdef __APPLE__
-    int index = 0;
-#elif __linux_
-    register int index = 0;
-#endif
+// but only for Linux platform
+#ifdef __linux_
+register
+#elif
+int index = 0;
 for (index = 0; index < array_length; index++) {
     // doSomething()
 }
