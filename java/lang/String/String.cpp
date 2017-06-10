@@ -30,22 +30,22 @@
 using namespace Java::Lang;
 
 String::String() {
-	this->original = string_copy((string) "\0");
+	this->original = strdup("\0");
 	this->length();
 }
 
 String::String(const_string target) {
-	this->original = string_copy((string) target);
+	this->original = strdup(target);
 	this->length();
 }
 
 String::String(string target) {
-	this->original = string_copy(target);
+	this->original = strdup(target);
 	this->length();
 }
 
 String::String(Array<char> &chars) {
-	this->original = string_copy(String::fromCharArray(chars).toString());
+	this->original = strdup(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
@@ -54,21 +54,17 @@ String::String(Array<byte> &bytes) {
 	for (byte byte : bytes) {
 		chars.push((char) byte);
 	}
-	this->original = string_copy(String::fromCharArray(chars).toString());
+	this->original = strdup(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
 String::String(const String &target) {
-	this->original = string_copy(target.original);
+	this->original = strdup(target.original);
 	this->length();
 }
 
-// TODO: This function can't retrieve memory allocated, nakhoa will fix this.
 String::~String() {
-	if (original != NULL) {
-		//free(original);
-        original = NULL;
-	}
+	free(original);
 }
 
 /**
@@ -78,7 +74,7 @@ String::~String() {
  * @return String
  */
 char String::charAt(int index) {
-	if (( index < 0 ) || ( index > this->size - 1)) {
+	if (( index < 0 ) || ( index > this->size - 1 )) {
 		return '\0';
 	}
 	return this->original[ index ];
@@ -91,10 +87,10 @@ char String::charAt(int index) {
  * @return int
  */
 int String::compareTo(String anotherString) const {
-	 string anotherStringValue = anotherString.toString();
-	 if (string_equals(this->original, anotherStringValue)) {
-	     return 0;
-	 }
+	string anotherStringValue = anotherString.toString();
+	if (string_equals(this->original, anotherStringValue)) {
+		return 0;
+	}
 	return 0;
 }
 
@@ -160,12 +156,11 @@ boolean String::endsWith(const String &suffix) {
  */
 String String::fromCharArray(Array<char> &chars) {
 	string str = (string) malloc(( chars.length + 1 ) * sizeof(char));
-
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
@@ -195,11 +190,11 @@ int String::indexOf(int ch, int fromIndex) const {
 		return -1;
 	}
 
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) ch) {
 			return index;
@@ -248,11 +243,11 @@ boolean String::isEmpty() const {
  * @return int
  */
 int String::lastIndexOf(int ch) {
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -269,11 +264,11 @@ int String::lastIndexOf(int ch) {
  * @return int
  */
 int String::lastIndexOf(int ch, int fromIndex) {
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -386,11 +381,11 @@ Array<String> String::split(String regex) const {
 	char **splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
 
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
@@ -424,16 +419,16 @@ boolean String::startsWith(String prefix, int toffset) const {
 	if (original_length < prefix_length || toffset > ( original_length - prefix_length )) {
 		return FALSE;
 	}
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
 
-    #ifndef __APPLE__
-        register
-    #endif
-    int j = toffset;
-
+#ifdef __linux__
+	register
+#endif
+	int j = toffset;
+	
 	for (; index < prefix_length; index++) {
 		if (prefix.original[ index ] != this->original[ j ]) {
 			return FALSE;
@@ -450,11 +445,11 @@ boolean String::startsWith(String prefix, int toffset) const {
 Array<char> String::toCharArray() const {
 	Array<char> chars;
 
-    #ifndef __APPLE__
-        register
-    #endif
-    int index = 0;
-
+#ifdef __linux__
+	register
+#endif
+	int index = 0;
+	
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
@@ -467,7 +462,7 @@ Array<char> String::toCharArray() const {
  * @return string
  */
 string String::toString() const {
-	return this->original;
+	return strdup(this->original);
 }
 
 /**
@@ -615,7 +610,7 @@ bool String::operator==(const String &target) const {
 }
 
 String String::operator=(const String &target) {
-	this->original = string_copy(target.original);
+	this->original = strdup(target.original);
 	this->length();
 	return *this;
 }
@@ -636,7 +631,7 @@ boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
 	}
-
+	
 	return false;
 }
 
@@ -644,7 +639,7 @@ boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
 	}
-
+	
 	return true;
 }
 
