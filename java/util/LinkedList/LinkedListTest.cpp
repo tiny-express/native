@@ -32,84 +32,95 @@ extern "C" {
 
 using namespace Java::Util;
 
-TEST(JavaUtil, LinkedListAddAndGet) {
-    /// Given valid LinkedList<int> to test add(), addFirst(), addLast(), size(), getFirst(), getLast(), get(index) also
-    LinkedList<int> linkedList;
-    linkedList.add(25);
-
-    // add(): Get very first value inside linkedList, check through getFirst()
-    ASSERT_EQUAL(25, linkedList.getFirst());
-
-    // size(): Add one more param to test
-    linkedList.addLast(30);
-    ASSERT_EQUAL(2, linkedList.size());
-
-    // addFirst(): Add one more param through this function, check through getFirst()
-    linkedList.addFirst(45);
-    ASSERT_EQUAL(45, linkedList.getFirst());
-
-    // addLast(): Add one more param through this function, check through getLast()
-    linkedList.addLast(101);
-    ASSERT_EQUAL(101, linkedList.getLast());
-
-    //get(index: ): Test to get correct data inside
-    ASSERT_EQUAL(45, linkedList.get(0));
-
-    /**
-     * get(index: ): A throw exception for pass index that our of linkedList - this test is described how to use linkedList exception
-     * Remove // at the start of test case below to see exception
-     **/
-    //ASSERT_EQUAL(-1, linkedList.get(101));
-
-    //add(index: element: ): Add element to specific index inside linkedList (from 0 to linkedList.size), check through get(index: )
-    linkedList.add(2, 200);
-    ASSERT_EQUAL(200, linkedList.get(2));
+TEST (JavaUtil, LinkedListAdd) {
+	// Given linked list with 2 elements - Return size is 2 and added elements
+	LinkedList<int> linkedList;
+	linkedList.add(25);
+	linkedList.add(24);
+	ASSERT_EQUAL(2, linkedList.size());
+	ASSERT_EQUAL(25, linkedList.getFirst());
+	ASSERT_EQUAL(24, linkedList.getLast());
 }
 
-TEST(JavaUtil, LinkedListGetAndRemove) {
-    /// Given valid LinkList<char> to test peek(), peek..(), poll(), poll..(), offer(), offer..()
-    LinkedList<char> linkedList;
-    linkedList.add('a');
-    linkedList.add('b');
-    linkedList.add('c');
-    linkedList.add('d');
-    linkedList.add('e');
-
-    //peek(): return first element and must be equal to 'a'
-    ASSERT_EQUAL('a', linkedList.peek());
-
-    //peekFirst(): return first element and must be equal to 'a'
-    ASSERT_EQUAL('a', linkedList.peekFirst());
-
-    //peekLast(): return last element and must be equal to 'e'
-    ASSERT_EQUAL('e', linkedList.peekLast());
-
-    //pool(): return first element and must be equal to 'a'
-    ASSERT_EQUAL('a', linkedList.poll());
-
-    //pollFirst(): return first element and must be equal to 'a', and remove that element also, so next first element must be equal to 'b'
-    ASSERT_EQUAL('a', linkedList.pollFirst());
-    ASSERT_EQUAL('b', linkedList.getFirst());
-
-    //pollFirst(): return first element and must be equal to 'e', and remove that element also, so next last element must be equal to 'd'
-    ASSERT_EQUAL('e', linkedList.pollLast());
-    ASSERT_EQUAL('d', linkedList.getLast());
+TEST (JavaUtil, LinkedListGetFirst) {
+	// Given list of strings - Return first element
+	LinkedList<String> linkedList;
+	linkedList.add("Hello");
+	linkedList.add("World");
+	ASSERT_STR("Hello", linkedList.getFirst().toString());
 }
 
-TEST(JavaUtil, LinkedListRemove) {
-    /// Given valid LinkList<float> to test remove(), remove..()
-    LinkedList<float> linkedList;
-    linkedList.add(1.3);
-    linkedList.add(52.2);
-    linkedList.add(0.2);
-    linkedList.add(7.3);
-    linkedList.add(10.3);
+TEST (JavaUtil, LinkedListGetLast) {
+	// Given list of strings - Return last element
+	LinkedList<String> linkedList;
+	linkedList.add("Hello");
+	linkedList.add("World");
+	ASSERT_STR("World", linkedList.getLast().toString());
+}
 
-    // remove(): remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
-    linkedList.remove();
-    ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
+TEST (JavaUtil, LinkedListPeek) {
+	//TODO - tucao will fix this
+}
 
-    // removeLast(): remove last element, so next getLast must be equal to 7.3
-    linkedList.removeLast();
-    ASSERT_DBL_NEAR(7.3, linkedList.getLast());
+TEST (JavaUtil, LinkedListPoll) {
+	//TODO - tucao will fix this
+}
+
+TEST (JavaUtil, LinkedListGetAndRemove) {
+	/// Given valid LinkList<char> to test peek(), peek..(), poll(), poll..(), offer(), offer..()
+	LinkedList<char> linkedList;
+	linkedList.add('a');
+	linkedList.add('b');
+	linkedList.add('c');
+	linkedList.add('d');
+	linkedList.add('e');
+	
+	//peek(): return first element and must be equal to 'a'
+	ASSERT_EQUAL('a', linkedList.peek());
+	
+	//peekFirst(): return first element and must be equal to 'a'
+	ASSERT_EQUAL('a', linkedList.peekFirst());
+	
+	//peekLast(): return last element and must be equal to 'e'
+	ASSERT_EQUAL('e', linkedList.peekLast());
+	
+	//pool(): return first element and must be equal to 'a'
+	ASSERT_EQUAL('a', linkedList.poll());
+	
+	//pollFirst(): return first element and must be equal to 'a', and remove that element also, so next first element must be equal to 'b'
+	ASSERT_EQUAL('a', linkedList.pollFirst());
+	ASSERT_EQUAL('b', linkedList.getFirst());
+	
+	//pollFirst(): return first element and must be equal to 'e', and remove that element also, so next last element must be equal to 'd'
+	ASSERT_EQUAL('e', linkedList.pollLast());
+	ASSERT_EQUAL('d', linkedList.getLast());
+}
+
+TEST (JavaUtil, LinkedListRemove) {
+	/// Given valid LinkList<float> to test remove(), remove..()
+	LinkedList<float> linkedList;
+	linkedList.add(1.3);
+	linkedList.add(52.2);
+	linkedList.add(0.2);
+	linkedList.add(7.3);
+	linkedList.add(10.3);
+	
+	// remove(): remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
+	linkedList.remove();
+	ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
+	
+	// removeLast(): remove last element, so next getLast must be equal to 7.3
+	linkedList.removeLast();
+	ASSERT_DBL_NEAR(7.3, linkedList.getLast());
+}
+
+TEST (JavaUtil, LinkedListSize) {
+	// Given empty linked list - Return size of list is zero
+	LinkedList<int> linkedList;
+	ASSERT_EQUAL(0, linkedList.size());
+	
+	// Append two elements to linked list - Return two elements
+	linkedList.add(25);
+	linkedList.add(25);
+	ASSERT_EQUAL(2, linkedList.size());
 }

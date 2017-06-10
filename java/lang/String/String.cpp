@@ -583,13 +583,28 @@ String String::valueOf(double target) {
 	return string_from_double(target);
 }
 
+/**
+ * Operator plus
+ *
+ * @param target2
+ * @return String
+ */
 String String::operator+(const String &target2) {
 	String result = string_concat(this->original, target2.original);
 	return result;
 }
 
+/**
+ * Operator plus equals
+ *
+ * @param target2
+ */
 void String::operator+=(const String &target2) {
 	*this = string_concat(this->original, target2.original);
+}
+
+void String::operator+=(const char &target2) {
+	*this = string_append(this->original, target2);
 }
 
 bool String::operator==(const String &target) const {

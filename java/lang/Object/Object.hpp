@@ -31,7 +31,6 @@ extern "C" {
 #include "../../../builtin.h"
 };
 
-#include <memory>
 #include <iostream>
 #include <algorithm>
 #include <vector>
