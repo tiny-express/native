@@ -24,28 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include "../../Lang.hpp"
-#include "../Collection/Collection.hpp"
-
-using namespace Java::Util;
-
-namespace Java {
-    namespace Util {
-
-        template <typename E>
-        class Queue: public Collection<E> {
-        private:
-            Queue();
-            ~Queue();
-
-        protected:
-            virtual boolean add(E &e) = 0; ///Inserts the specified element into this queue
-            virtual E element() const = 0; ///Retrieves, but does not remove, the head of this queue.
-            virtual boolean offer(E &e) = 0; ///Inserts the specified element into this queue
-            virtual E& peek() const = 0; ///Retrieves, but does not remove, the head of this queue, or returns NULL if this queue is empty.
-            virtual E& poll() = 0; ///Retrieves and removes the head of this queue, or returns NULL if this queue is empty.
-            virtual E remove() = 0; ///Retrieves and removes the head of this queue
-        };
-    }
-}
+#include "Stack.hpp"
