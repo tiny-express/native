@@ -39,6 +39,7 @@
 #include <zlib.h>
 #include <ctype.h>
 #include <pthread.h>
+#include <memory.h>
 
 #include "compress.h"
 #include "crypto.h"
