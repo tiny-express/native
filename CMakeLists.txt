@@ -144,7 +144,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} java/lang/Character/Character_Test.cpp)
 
 # Add make test
 add_custom_target(
