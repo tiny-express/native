@@ -136,7 +136,6 @@ namespace Java {
 			void	finalize();
 		public:
 			string toString();
-			int hashCode();
 			boolean equals(const Object &obj) const {
 				if (this->hashCode() == obj.hashCode()) {
 					return true;
@@ -147,7 +146,7 @@ namespace Java {
 				// This method is only available in Java
 				// should not be supported in this library
 			}
-			long hashCode() const {
+			int hashCode() const {
 				return (intptr_t) std::addressof(*this);
 			}
 			void notify() {
