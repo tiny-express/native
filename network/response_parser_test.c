@@ -10,7 +10,7 @@ TEST (Network, Parser) {
     free(result3);
     result3 = NULL;
     ASSERT_NULL(result3);
-	
+
 	char *response = "HTTP/1.0 200 OK\n"
 		"Content-Type: text/html; charset=utf-8\n"
 		"Content-Length: 122\n"
@@ -47,7 +47,7 @@ TEST (Network, Parser) {
 	ASSERT_NULL(test->body);
 	ASSERT_NULL(test->version);
 	ASSERT_NULL(test->status);
-	
+
 	char *response2 = "HTTP/1.0 401 UNAUTHORIZED\n"
 		"Content-Type: text/html; charset=utf-8\n"
 		"Content-Length: 67\n"

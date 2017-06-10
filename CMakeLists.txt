@@ -133,13 +133,29 @@ file(GLOB_RECURSE TESTS
         validator/*_test.c
 )
 
+file(GLOB_RECURSE AHIHI
+#        common/*_test.c
+#        crypto/*_test.c
+#        datetime/*_test.c
+#        java/**/*Test.cpp
+#        math/*_test.c
+        network/*_test.c
+#        server/*_test.c
+#        storage/*_test.c
+#        string/*_test.c
+#        thread/*_test.c
+#        type/*_test.c
+#        vendor/*_test.c
+#        validator/*_test.c
+        )
+
 # Remove all test files within c files
 foreach (test ${TESTS})
     list(REMOVE_ITEM SOURCES ${test})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${AHIHI} ${SOURCES} misc/unit-test.c)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
