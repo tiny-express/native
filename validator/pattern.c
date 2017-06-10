@@ -40,8 +40,8 @@ inline int is_##TYPE(char* input) {\
         return FALSE;\
     }\
     if (regexec(&exp, input, 0, NULL, 0) == 0) {\
-        return TRUE;\
         regfree(&exp);\
+        return TRUE;\
     }\
     regfree(&exp);\
     return FALSE;\
