@@ -23,3 +23,130 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_STACK_LIST_HPP
+#define NATIVE_JAVA_STACK_LIST_HPP
+
+#include <stack>
+#include "../function/UnaryOperator/UnaryOperator.hpp"
+#include "../Iterator/Iterator.hpp"
+#include "../Collection/Collection.hpp"
+#include "../Comparator/Comparator.hpp"
+
+namespace Java {
+    namespace Util {
+        template <typename E>
+        class Stack : public virtual Collection<E> {
+            private:
+			std::stack<E> original;
+            public:
+			Stack() {
+			}
+	                ~Stack() {
+	                }
+            public:
+	
+	        /**
+		* Stack empty - check the Stack is empty or not
+		*
+		* @param original
+		*/
+	        bool empty() {
+		        int size = this->original.size();
+		        if (size != 0) {
+			        return TRUE;
+		        }
+		        return FALSE;
+	        }
+	
+	        /**
+		* Stack peek - return the top element
+		*
+		* @param original
+		*/
+	        E peek() {
+		        return this->original.top();
+	        }
+	
+	        /**
+		* Stack pop - return the top element and remove it
+		*
+		* @param original
+		*/
+	        E pop() {
+		        E result = this->original.top();
+		        this->original.pop();
+		        return result;
+	        }
+	
+	        /**
+		* Stack push - Push new element
+		*
+		* @param original
+		*/
+	        E push(const E &item) {
+		        this->original.push(item);
+	        }
+	
+	        /**
+		* Stack search - search the object in Stack, return the 1-based position from the top, -1 if can not find the object in Stack
+		*
+		* @param original
+		*/
+	        int search(const E &o) {
+		        int position = 0;
+		        int i;
+		        for (i = 0; i < this->original.size(); i++) {
+			        if (i == o) {
+				        return i;
+			        }
+		        }
+		        return -1;
+	        }
+	
+	        boolean add(E &e) {
+		        this->original.push(e);
+	        }
+	
+	        /**
+   * Size of Stack
+   *
+   * @param original
+   */
+	        int size() {
+		        return this->original.size();
+	        }
+	
+	        boolean addAll(Collection<E> &c) {
+	        }
+	        void clear() {
+	        }
+	        boolean contains(Object &o) const {
+	        }
+	        boolean equals(Object &o) const {
+	        }
+	        int hashCode() const {
+	        }
+	        boolean isEmpty() const {
+	        }
+	        Iterator<E> &iterator() const {
+	        }
+	        boolean remove(Object &o) {
+	        }
+	        boolean removeAll(Collection<Object> &c) {
+	        }
+	        boolean removeIf(Java::Util::Function::Predicate<E> &filter) {
+	        }
+	        boolean retainAll(Collection<Object> &c) {
+	        }
+	
+	        int size() const {
+		        return this->original.size();
+	        }
+
+        };
+    }
+}
+
+#endif
+
