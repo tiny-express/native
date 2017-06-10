@@ -203,7 +203,6 @@ TEST (String, ProcessIndexOf) {
 	target = "\0";
 	result = string_index(target, subtarget, -1);
 	ASSERT_EQUAL(-1, result);
-	
 }
 
 TEST (String, ProcessRandom) {
@@ -212,6 +211,16 @@ TEST (String, ProcessRandom) {
 	char *result = string_random(target, size);
 	
 	ASSERT_EQUAL(4, length_pointer_char(result));
+}
+
+TEST(String, ProcessAppend) {
+	char *target = (char*) "Hello ";
+	target = string_append(target, 'W');
+	target = string_append(target, 'o');
+	target = string_append(target, 'r');
+	target = string_append(target, 'l');
+	target = string_append(target, 'd');
+	ASSERT_STR("Hello World", target);
 }
 
 TEST (String, ProcessConcat) {
