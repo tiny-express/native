@@ -37,8 +37,9 @@ double number_default(double target);
 #define FALSE 0
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
+
 #ifndef NULL
-#define NULL 0
+ #define NULL 0
 #endif
 
 typedef char* string;
