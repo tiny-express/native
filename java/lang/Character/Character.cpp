@@ -14,12 +14,53 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * A PARTICULAR PURPOSE ARE DISCLAIMEIILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Character.hpp"
+
+using namespace Java::Lang;
+
+Character::Character() {
+    this->original = '\0';
+}
+
+Character::Character(char original) {
+    this ->original = original;
+}
+
+Character::~Character() {
+}
+
+char Character::charValue() {
+    return this->original;
+}
+
+int Character::charCount(int codePoint) {
+    if(codePoint >= 0 && codePoint <= 255) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
+}
+
+int Character::codePointAt(Array<char> a, int index) {
+    if(index < 0 || index > a.length) {
+        return -1;
+    }
+    return (int) a[index];
+}
+
+int Character::codePointBefore(Array<char> a, int index) {
+    if(index < 1 || index > a.length) {
+        return -1;
+    }
+    return (int) a[index - 1];
+}
+
+int Character::getNumericValue(char ch) {
+    return (int) ch;
+}
