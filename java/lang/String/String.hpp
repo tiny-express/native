@@ -46,6 +46,7 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
+
 		public:
 			String();
 			String(const_string original);
