@@ -32,10 +32,18 @@
 namespace Java {
 	namespace Lang {
 		class Character : public virtual Object {
+		private:
+			char original;
 		public:
-			Character();
+            Character();
 			Character(char original);
 			~Character();
+		public:
+			static int charCount(int codePoint);
+			char charValue();
+			static int codePointAt(Array<char> a, int index);
+			static int codePointBefore(Array<char> a, int index);
+            static int getNumericValue(char ch);
 		};
 	}
 }
