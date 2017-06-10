@@ -183,4 +183,13 @@ TEST (Network, HttpPath) {
 	result = http_path(target);
 	expect = "/";
 	ASSERT_STR(expect, result);
+	
+	target = "https://";
+	result = http_path(target);
+	expect = "/";
+	ASSERT_NULL(result);
+	
+	target = "http://";
+	result = http_path(target);
+	ASSERT_NULL(result);
 }

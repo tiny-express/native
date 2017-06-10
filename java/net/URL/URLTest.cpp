@@ -34,10 +34,6 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST (JavaNet, URLConstructor) {
-	#ifdef __APPPLE__
-		return;
-	#endif
-
 	String urlString = "http://test.com:3000/file/test?param=1";
 	URL url(urlString);
 	ASSERT_STR("http", url.getProtocol().toString());
@@ -45,14 +41,14 @@ TEST (JavaNet, URLConstructor) {
 	ASSERT_EQUAL(3000, url.getPort());
 	ASSERT_STR("/file/test", url.getPath().toString());
 	ASSERT_STR("param=1", url.getQuery().toString());
-
-	urlString = "http://";
-	url = URL(urlString);
-	ASSERT_STR("", url.getProtocol().toString());
-	ASSERT_STR("", url.getHost().toString());
-	ASSERT_STR("", url.getPath().toString());
-	ASSERT_STR("", url.getQuery().toString());
-	ASSERT_EQUAL(-1, url.getPort());
+	
+	String urlString2 = "http://";
+	URL url2(urlString2);
+	ASSERT_STR("", url2.getProtocol().toString());
+	ASSERT_STR("", url2.getHost().toString());
+	ASSERT_STR("", url2.getPath().toString());
+	ASSERT_STR("", url2.getQuery().toString());
+	ASSERT_EQUAL(-1, url2.getPort());
 }
 
 TEST (JavaNet, URLToString) {
