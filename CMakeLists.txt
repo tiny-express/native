@@ -163,6 +163,12 @@ add_custom_target(
     COMMAND valgrind --error-exitcode=42 --leak-check=full ./native_test
 )
 
+# Check memory leak
+add_custom_target(
+        leak-debug
+        COMMAND valgrind --gen-suppressions=yes --error-exitcode=42 --leak-check=full ./native_test
+)
+
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
