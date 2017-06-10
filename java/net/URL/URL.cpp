@@ -37,7 +37,7 @@ URL::URL() {
 }
 
 URL::URL(String spec) {
-	string url = spec.toString();
+	string url = strdup(spec.toString());
 	this->protocol = http_protocol(url);
 	this->host = http_hostname(url);
 	this->port = url_port(url);
@@ -45,8 +45,7 @@ URL::URL(String spec) {
 	this->path = http_path(url);
 }
 
-URL::~URL() {
-}
+URL::~URL() {}
 
 String URL::getHost() {
 	return this->host;

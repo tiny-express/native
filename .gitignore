@@ -18,4 +18,5 @@
 /libnative.so
 /test.o
 /test.txt
-
+/logging
+/json
