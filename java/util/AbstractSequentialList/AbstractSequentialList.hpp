@@ -24,16 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../math.h"
+#ifndef NATIVE_JAVA_UTIL_ABSTRACT_SEQUENTIAL_LIST_HPP
+#define NATIVE_JAVA_UTIL_ABSTRACT_SEQUENTIAL_LIST_HPP
 
-double math_pow(double a, double b) {
-	return pow(a, b);
+#include "../AbstractList/AbstractList.hpp"
+
+namespace Java {
+    namespace Util {
+        template <typename E>
+        class AbstractSequentialList : public AbstractList<E> {
+        protected:
+            AbstractSequentialList();
+            ~AbstractSequentialList();
+
+        public:
+            virtual void add(int index, E element);
+            virtual boolean addAll(int index, Collection<E> c);
+            virtual E get(int index);
+            virtual Iterator<E> interactor();
+            // ListIterator<E>	listIterator(int index);
+            virtual E remove(int index);
+            virtual E set(int index, E element);
+        };
+    }
 }
 
-double math_floor(double a) {
-	return floor(a);
-}
-
-long math_round(double a) {
-	return round(a);
-}
+#endif //NATIVE_JAVA_UTIL_ABSTRACT_SEQUENTIAL_LIST_HPP
