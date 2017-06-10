@@ -39,7 +39,3 @@ TEST(JavaNet, URLDecodeString) {
 //    char *expect = "Quán ăn";
 //    ASSERT_STR(expect, result.toString());
 }
-
-TEST(JavaNet, UrlDecodeStringWithCharacterEncoding) {
-
-}
