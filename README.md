@@ -19,7 +19,7 @@ This project is also useful for new developers in practical programming.
 - This library is originally developed in C/C++ so we can make classes go faster by optimizing in GAS for Linux amd64
 - C version of every function should be delivered first
 
-### Useful resource
+### Useful resources
 - [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
 - [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
 - [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
