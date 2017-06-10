@@ -94,19 +94,6 @@ TEST (JavaLang, StringCharAt) {
 	ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
 }
 
-// TEST(JavaLang, StringCompareTo) {
-//     String stringCompare1 = "Sawadikhap";
-//     String stringCompare2 = "Sawadikhap";
-//     int stringEquals = stringCompare1.compareTo(stringCompare2);
-//     ASSERT_EQUAL(0, stringEquals);
-
-
-// }
-
-// TEST(JavaLang, StringCompareToIgnoreCase) {
-
-// }
-
 TEST (JavaLang, StringConcat) {
 	// Given two strings - Return concatenation result
 	String textConcat1 = "Hello ";
@@ -331,21 +318,17 @@ TEST (JavaLang, StringValueOf) {
 	ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
-TEST (JavaLang, StringOperator) {
+TEST (JavaLang, StringOperatorPlus) {
 	// Given two strings and concatenate them - Return string
 	String textPlus1 = "Hello ";
 	String textPlus2 = "World";
 	String textResult = textPlus1 + textPlus2;
 	ASSERT_STR("Hello World", textResult.toString());
 
-	// Concat a String with valueOf(number) - Return string
+	// Concat a string with valueOf(number) - Return string
 	textPlus1 = "Hello ";
 	int aNumber = 1;
 	textResult = textPlus1 + String::valueOf(aNumber);
-	ASSERT_STR("Hello 1", textResult.toString());
-
-	// Concat a String with valueOf(number) - Return string
-//    textResult = "Hello " + String::valueOf(aNumber);
 	ASSERT_STR("Hello 1", textResult.toString());
 
 	// Concat 2 Strings with valueOf(number) - Return string
@@ -353,7 +336,9 @@ TEST (JavaLang, StringOperator) {
 	aNumber = 1;
 	textResult = textPlus1 + " Galaxy " + String::valueOf(aNumber);
 	ASSERT_STR("Hello Galaxy 1", textResult.toString());
+}
 
+TEST (JavaLang, StringOperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
 	String textCompare2 = "Hello";
@@ -362,16 +347,32 @@ TEST (JavaLang, StringOperator) {
 		comparable = TRUE;
 	}
 	ASSERT_TRUE(comparable);
+}
 
+TEST (JavaLang, StringOperatorNotEquals) {
 	// Given two Strings and compare not equal them - Return comparable
-	textCompare1 = "Hello1";
-	textCompare2 = "Hello2";
-	comparable = FALSE;
+	String textCompare1 = "Hello1";
+	String textCompare2 = "Hello2";
+	int comparable = FALSE;
 	if (textCompare1 != textCompare2) {
 		comparable = TRUE;
 	}
 	ASSERT_TRUE(comparable);
+}
 
+TEST (JavaLang, StringOperatorPlusEqualsChar) {
+	// Given a string and append a char  - Return result of the concatenation
+	String text = "Hello";
+	text += ' ';
+	text += 'W';
+	text += 'o';
+	text += 'r';
+	text += 'l';
+	text += 'd';
+	ASSERT_STR("Hello World", text.toString());
+}
+
+TEST (JavaLang, StringOperatorPlusEqualsString) {
 	// Given 2 Strings to check "+=" operator
 	String leftString = "hello";
 	String rightString = " world";
@@ -388,14 +389,14 @@ TEST (JavaLang, StringOperator) {
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
 
 	// Check a String concat with valueOf(number) use "+=" operator
-	aNumber = 1;
+	int number = 1;
 	stringTest = "Hello ";
-	stringTest += String::valueOf(aNumber);
+	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 1", stringTest.toString());
 
 	// Check a String concat with valueOf(number) use "+=" operator
-	aNumber = 1;
-	stringTest += "" + String::valueOf(aNumber);
+	number = 1;
+	stringTest += "" + String::valueOf(number);
 	ASSERT_STR("Hello 11", stringTest.toString());
 }
 
