@@ -31,10 +31,17 @@ extern "C" {
 #include "../../../builtin.h"
 };
 
+#include <memory>
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <map>
+
+// Define instanceof
+template<typename Base, typename T>
+bool instanceof(T) {
+	return std::is_base_of<Base, T>::value;
+}
 
 // Define builtin types
 typedef bool boolean;
@@ -111,11 +118,62 @@ public:
 
 namespace Java {
 	namespace Lang {
+		template <typename E>
+		class Class;
 		class String;
+		class Object;
+		
+		template <typename E>
+		class Class {
+		public:
+			Class();
+			~Class();
+		};
+		
 		class Object {
+		protected:
+			Object	&clone();
+			void	finalize();
 		public:
 			string toString();
 			int hashCode();
+			boolean equals(const Object &obj) const {
+				if (this->hashCode() == obj.hashCode()) {
+					return true;
+				}
+				return false;
+			}
+			Class<Object> getClass() {
+				// This method is only available in Java
+				// should not be supported in this library
+			}
+			long hashCode() const {
+				return (intptr_t) std::addressof(*this);
+			}
+			void notify() {
+				// TODO
+			}
+			void notifyAll() {
+				// TODO
+			}
+			string toString() const {
+				return (string) "";
+			}
+			void wait() {
+				// TODO
+			}
+			void wait(long timeout) {
+				// TODO
+			}
+			void wait(long timeout, int nanos) {
+				// TODO
+			}
+			boolean operator==(const Object &target) const {
+				return this->equals( target);
+			}
+			boolean operator!=(const Object &target) const {
+				return !this->equals( target);
+			}
 		};
 	}
 }
