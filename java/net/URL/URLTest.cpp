@@ -34,7 +34,7 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST (JavaNet, URLConstructor) {
-	#ifdef __APPPLE__
+	#ifdef __APPLE__
 		return;
 	#endif
 
