@@ -47,11 +47,11 @@ Install & run mock server for third-party services
 ```bash
 $ sudo apt-get install python-pip
 $ sudo pip install -r misc/requirements.txt
-$ python misc/server.py &
+$ make server
 ```
 Open another terminal & debug with unit test
 ```bash
-$ cmake . && make unit-test
+$ cmake . && make unit-test -j8
 ```
 
 #### Usages (for Java/C++ Developers)
@@ -85,6 +85,20 @@ $ g++ -c -o test.o ./test.cpp
 $ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
 $ ./native
 ```
+
+#### Mock Server
+To test third parties we need to setup a server to mock http request from them.
+By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
+```bash
+$ make server
+```
+
+#### Memory Leak
+Valgrind helps us in checking memory leak, you've just need to run
+```
+$ make leak
+```
+It will tell you issues relate to memory.
 
 #### Unit Test with C-Unit
 ```cpp

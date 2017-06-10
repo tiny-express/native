@@ -41,7 +41,7 @@ if (APPLE)
     set(CMAKE_MACOSX_RPATH 1)
 endif ()
 
-# Adhere to GNU filesystem layout conventions
+# GNU filesystem layout conventions
 include(GNUInstallDirs)
 
 # Force Linux and Darwin use GCC
@@ -109,13 +109,12 @@ file(GLOB_RECURSE SOURCES
         type/*
         vendor/*
         validator/*
-        mock/*.c
-        )
+)
 
 file(GLOB_RECURSE HEADERS
         ./*.h
         library.hpp
-        )
+)
 
 # Include all unit test cases
 file(GLOB_RECURSE TESTS
@@ -132,7 +131,7 @@ file(GLOB_RECURSE TESTS
         type/*_test.c
         vendor/*_test.c
         validator/*_test.c
-        )
+)
 
 # Remove all test files within c files
 foreach (test ${TESTS})
