@@ -30,12 +30,13 @@
 #include "../Object/Object.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Comparable {
-        public:
-            virtual int compareTo(Object* o) const = 0;
-        };
-    }
+	namespace Lang {
+		template <typename T>
+		class Comparable {
+		public:
+			virtual int compareTo(T o) const = 0;
+		};
+	}
 }
 
-#endif //NATIVE_JAVA_LANG_COMPARABLE_HPP
+#endif//NATIVE_JAVA_LANG_COMPARABLE_HPP

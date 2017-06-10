@@ -35,9 +35,9 @@ using namespace Java::Lang;
 namespace Java {
 	namespace Lang {
 		class Integer;
-
-		class Integer : public Number, public virtual Comparable {
-
+		
+		class Integer : public virtual Number,
+		                          public virtual Comparable<Integer> {
 		private:
 			int original;
 		public:
@@ -54,21 +54,23 @@ namespace Java {
 			long longValue() const;
 			float floatValue() const;
 			double doubleValue() const;
+			
 			string toString() const;
-
 			static Integer parseInt(String target);
-
-            int compareTo(Object* o) const {
-                Integer *target = (Integer *)o;
-                if (this->original < target->original) {
-                    return -1;
-                } else if (this->original == target->original) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-
+			int compareTo(Integer o) const override {
+				if (hashCode() == o.hashCode()) {
+					return 0;
+				}
+				if (instanceof<Integer>(o)) {
+					if (original < o.original) {
+						return -1;
+					} else if (original == o.original) {
+						return 0;
+					}
+				}
+				return 1;
+			}
+		
 		public:
 			Integer operator+(const Integer &target);
 			Integer operator-(const Integer &target);
@@ -93,4 +95,3 @@ namespace Java {
 }
 
 #endif//NATIVE_JAVA_LANG_INTEGER_HPP
-

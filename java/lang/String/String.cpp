@@ -45,7 +45,7 @@ String::String(string target) {
 }
 
 String::String(Array<char> &chars) {
-	this->original = String::fromCharArray(chars).toString();
+	this->original = string_copy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
@@ -54,7 +54,7 @@ String::String(Array<byte> &bytes) {
 	for (byte byte : bytes) {
 		chars.push((char) byte);
 	}
-	this->original = String::fromCharArray(chars).toString();
+	this->original = string_copy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 }
 
@@ -64,6 +64,10 @@ String::String(const String &target) {
 }
 
 String::~String() {
+	if (original != NULL) {
+		//free(original);
+		original = NULL;
+	}
 }
 
 /**
@@ -85,11 +89,11 @@ char String::charAt(int index) {
  * @param anotherString
  * @return int
  */
-int String::compareTo(String anotherString) {
-	// string anotherStringValue = anotherString.toString();
-	// if (string_equals(this->original, anotherStringValue) {
-	//     return 0;
-	// }
+int String::compareTo(String anotherString) const {
+	 string anotherStringValue = anotherString.toString();
+	 if (string_equals(this->original, anotherStringValue)) {
+	     return 0;
+	 }
 	return 0;
 }
 
@@ -99,7 +103,7 @@ int String::compareTo(String anotherString) {
  * @param str
  * @return int
  */
-int String::compareToIgnoreCase(String str) {
+int String::compareToIgnoreCase(String str) const {
 	// TODO
 	return 0;
 }
@@ -632,6 +636,5 @@ boolean String::operator>=(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return false;
 	}
-
 	return true;
 }
