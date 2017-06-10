@@ -111,7 +111,7 @@ TEST(YourTestSuite, YourTestCase) {
 # Copyright & license
 Copyright © 2014-2016 Food Tiny. All rights reserved, except as follows. Code is released under the Apache 2.0 license.
 You may obtain a duplicate copy of the same license, titled CC-BY-SA-4.0, at http://creativecommons.org/licenses/by/4.0/.
-Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md).
+Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/LICENSE.docs).
 
 # Documentation
 #### Differences
