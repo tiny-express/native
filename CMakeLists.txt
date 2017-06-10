@@ -152,10 +152,17 @@ add_custom_target(
         COMMAND ./${PROJECT_NAME}_test
 )
 
-#add_custom_command(
-#    server
-#    COMMAND ./mock/mock_server.py
-#)
+# Run mock server
+add_custom_target(
+        server
+        COMMAND python ./misc/server.py
+)
+
+# Check memory leak
+add_custom_target(
+    leak
+    COMMAND valgrind --error-exitcode=42 --leak-check=full ./native_test
+)
 
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
