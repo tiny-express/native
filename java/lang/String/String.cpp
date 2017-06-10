@@ -68,6 +68,16 @@ String::~String() {
 }
 
 /**
+ * Clone to new object
+ *
+ * @return String
+ */
+String &String::clone() {
+    String *result = new String(this->original);
+    return *result;
+}
+
+/**
  * String character at index
  *
  * @param index
@@ -341,12 +351,13 @@ int String::length() {
 
 /**
  * String matches
+ *
  * @params regex pattern
  * @return TRUE | FALSE
  */
 boolean String::matches(String regex) const {
 	int result = string_matches(this->original, regex.toString());
-	return ( result == TRUE ? true : false );
+	return result == TRUE ;
 }
 
 /**
@@ -462,7 +473,7 @@ Array<char> String::toCharArray() const {
  * @return string
  */
 string String::toString() const {
-	return strdup(this->original);
+	return this->original;
 }
 
 /**
@@ -594,12 +605,16 @@ String String::operator+(const String &target2) {
  *
  * @param target2
  */
-void String::operator+=(const String &target2) {
-	*this = string_concat(this->original, target2.original);
+void String::operator+=(const String &target) {
+    char *result = string_concat(this->original, target.original);
+    free(this->original);
+    *this = result;
 }
 
-void String::operator+=(const char &target2) {
-	*this = string_append(this->original, target2);
+void String::operator+=(const char &target) {
+    char *result = string_append(this->original, target);
+    free(this->original);
+    *this = result;
 }
 
 bool String::operator==(const String &target) const {

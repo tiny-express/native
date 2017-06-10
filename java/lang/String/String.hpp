@@ -57,9 +57,11 @@ namespace Java {
 			~String();
 		public:
 			char charAt(int index);
+
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
+            String &clone();
 			virtual int compareTo(String o) const override;
 			int compareToIgnoreCase(String str) const;
 			String concat(String str);

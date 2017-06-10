@@ -417,3 +417,20 @@ TEST (JavaLang, StringMemoryCheck) {
 	result = stringCopyStringTest.length();
 	ASSERT_EQUAL(expect, result);
 }
+
+TEST(JavaLang, StringCloneObject) {
+    // Given two string and compare - Should equal
+    String validString("Hello world");
+    String cloneString = validString.clone();
+    ASSERT_STR(validString.toString(), cloneString.toString());
+
+    // Give two empty string and compare - Should equal
+    String emptyString;
+    String cloneEmptyString = emptyString.clone();
+    ASSERT_STR(emptyString.toString(), cloneEmptyString.toString());
+
+    // Clone new data for cloneEmptyString
+    // Give two string and compare - Should equal
+    cloneEmptyString = validString.clone();
+    ASSERT_STR(validString.toString(), cloneEmptyString.toString());
+}
