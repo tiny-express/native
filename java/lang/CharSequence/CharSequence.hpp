@@ -32,8 +32,6 @@
 namespace Java {
 	namespace Lang {
 		class CharSequence : public virtual Object {
-		public:
-			virtual string toString() const = 0;
 		};
 	}
 }
