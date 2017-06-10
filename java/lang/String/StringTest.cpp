@@ -29,6 +29,8 @@ extern "C" {
 }
 
 #include "../String/String.hpp"
+#include "../Long/Long.hpp"
+#include "../Integer/Integer.hpp"
 
 using namespace Java::Lang;
 
@@ -36,20 +38,20 @@ TEST (JavaLang, StringConstructor) {
 	// Give NULL for String constructor
 	String nullString;
 	ASSERT_STR("", nullString.toString());
+
+	// Given empty value for String constructor and assign value - Return string
+	String emptyString;
+	emptyString = (string) "Hello world";
+	ASSERT_STR("Hello world", emptyString.toString());
 	
-//	// Given empty value for String constructor and assign value - Return string
-//	String emptyString;
-//	emptyString = (string) "Hello world";
-//	ASSERT_STR("Hello world", emptyString.toString());
-//
-//	// Given byte array for String constructor - Return string
-//	Array<byte> bytes = { 65, 66, 67 };
-//	String byteString = bytes;
-//	ASSERT_STR("ABC", byteString.toString());
-//
-//	// Given constant string for String constructor - Return string
-//	String normalString = "Hello world";
-//	ASSERT_STR("Hello world", normalString.toString());
+	// Given byte array for String constructor - Return string
+	Array<byte> bytes = { 65, 66, 67 };
+	String byteString = bytes;
+	ASSERT_STR("ABC", byteString.toString());
+	
+	// Given constant string for String constructor - Return string
+	String normalString = "Hello world";
+	ASSERT_STR("Hello world", normalString.toString());
 }
 
 TEST (JavaLang, StringDestructor) {
@@ -59,6 +61,22 @@ TEST (JavaLang, StringDestructor) {
 	// Given memory allocation for textPointer - Cleanup memory success
 	String *textPointer = new String("Hello");
 	delete textPointer;
+}
+
+// This method is overrided from String
+// Operator == and != will be affected
+TEST (JavaLang, StringEquals) {
+	// Given two String objects with same value - Return they should equal
+	String stringEqual1 = "Hello World";
+	String stringEqual2 = "Hello World";
+	ASSERT_TRUE(instanceof<String>(stringEqual1));
+	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
+	ASSERT_TRUE(stringEqual1 == stringEqual2);
+	
+	// Compare with another String object - Return they are not equal
+	String stringEqual3 = "Food Tiny";
+	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
+	ASSERT_TRUE(stringEqual1 != stringEqual3);
 }
 
 TEST (JavaLang, StringCharAt) {
@@ -102,6 +120,7 @@ TEST (JavaLang, StringConcat) {
 }
 
 TEST (JavaLang, StringContains) {
+	return;
 	// Gives a valid string a sub string to find
 	String validString = "a valid string to test";
 	String subString = "valid string";
