@@ -1,7 +1,6 @@
 sudo rm -rf /usr/local/lib/libnative*
 sudo rm -rf /usr/local/include/native
-cmake . && make && sudo make install
-rm -rf ../native
-g++ -c -std=c++11 -o ../test.o ./test.cpp
-gcc -static -o ../native ../test.o -L/usr/local/lib libnative_static.a -lstdc++
-../native
+cd ../ && rm -rf native && cmake . && make native -j8 && sudo make install
+g++ -c -std=c++11 -o test.o ./misc/test.cpp
+gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
+./native

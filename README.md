@@ -5,17 +5,18 @@
 
 This library provides low-level optimization and productivity library for C/C++ application.
 
-Beside standard library, we would like to have a greater customization with some goals:
+Beside standard library, we would like to have a greater customization with important goals:
 
-- Blazing fast performance with GAS & C
+- Blazing fast performance and low-level access with GAS & C
 - Powerful structured programming in C++ for scalability
+- Awesome syntactically enhancement with C++ customization
 - Java standard packages for productivity & maintainability
-- Support third party services for Food Tiny micro-services
+- Support third-party services for business features
 
 This project is also useful for new developers in practical programming.
 
 ###  Optimization
-- This library is originally developed in C but we can make classes go faster by optimizing in GAS for Linux amd64
+- This library is originally developed in C/C++ so we can make classes go faster by optimizing in GAS for Linux amd64
 - C version of every function should be delivered first
 
 ### Useful resource
@@ -53,17 +54,31 @@ Open another terminal & debug with unit test
 $ cmake . && make unit-test
 ```
 
-#### Usage (test.cpp)
+#### Usages (for Java/C++ Developers)
+```java
+public class Main() {
+        public static void main(String[] args) {
+                 String text = "Sample program: ";
+                byte[] bytes = { 64, 65, 66, 67 };
+                for (byte number : bytes) {
+                        text += (char) number;
+                }
+                System.out.println(text);
+            }
+    }
+}
+```
 ```cpp
 #include <native/library.hpp>
+#include <native/library.hpp>
 int main() {
-    String text = "Sample program: ";
-    Array<byte> bytes = { 64, 65, 66, 67 };
-    for (byte number : bytes) {
-        text += (char) number;
-    }
-    System::out::println(text);
-    return 0;
+        String text = "Sample program: ";
+	    Array<byte> bytes = { 64, 65, 66, 67 };
+	    for (byte number : bytes) {
+		        text += (char) number;
+	    }
+	    System::out::println(text);
+	    return 0;
 }
 ```
 ```bash
@@ -77,10 +92,12 @@ $ ./native
 #define CTEST_MAIN
 #define CTEST_SEGFAULT
 #include <native/unit_test.h>
+
 int main(int argc, const char *argv[]) {
    int result = ctest_main(argc, argv);
    return result;
 }
+
 TEST(YourTestSuite, YourTestCase) {
     ASSERT_STR("me", "you");
 }
