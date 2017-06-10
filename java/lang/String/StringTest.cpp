@@ -418,7 +418,7 @@ TEST (JavaLang, StringMemoryCheck) {
 	ASSERT_EQUAL(expect, result);
 }
 
-TEST(JavaLang, StringCloneObject) {
+TEST(JavaLang, StringClone) {
     // Given two string and compare - Should equal
     String validString("Hello world");
     String cloneString = validString.clone();
