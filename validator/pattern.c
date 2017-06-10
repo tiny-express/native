@@ -43,6 +43,7 @@ inline int is_##TYPE(char* input) {\
         return TRUE;\
         regfree(&exp);\
     }\
+    regfree(&exp);\
     return FALSE;\
 }
 IS(url, URL_PATTERN);IS(phone_number, PHONE_PATTERN);IS(email, EMAIL_PATTERN);

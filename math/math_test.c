@@ -24,3 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "../unit_test.h"
+#include "../math.h"
+
+TEST(Math, Pow) {
+    double base = 3;
+    double power = 3;
+    ASSERT_TRUE(math_pow(base, power) == 27);
+}

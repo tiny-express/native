@@ -38,14 +38,20 @@
  */
 char *date(long timestamp, char *format) {
 	char *date_format = string_replace(format, "D", "%d");
-	date_format = string_replace(date_format, "d", "%d");
-	date_format = string_replace(date_format, "M", "%m");
-	date_format = string_replace(date_format, "m", "%m");
-	date_format = string_replace(date_format, "Y", "%Y");
-	date_format = string_replace(date_format, "y", "%Y");
+	char *date_format2 = string_replace(date_format, "d", "%d");
+	free(date_format);
+	char *date_format3 = string_replace(date_format2, "M", "%m");
+	free(date_format2);
+	char *date_format4 = string_replace(date_format3, "m", "%m");
+	free(date_format3);
+	char *date_format5 = string_replace(date_format4, "Y", "%Y");
+	free(date_format4);
+	char *date_format6 = string_replace(date_format5, "y", "%Y");
+    free(date_format5);
 	
 	char *result = malloc(11 * sizeof(char));
-	strftime(result, 11, date_format, gmtime(&timestamp));
+	strftime(result, 11, date_format6, gmtime(&timestamp));
+	free(date_format6);
 	
 	return result;
 }

@@ -27,7 +27,7 @@
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
-#include "../builtin.h"
+#include "../validator.h"
 
 /**
  * Send mail via Twillio service
@@ -85,31 +85,45 @@ int send_sms(
 	}
 	
 	// Remove all spaces from 'to phone number'
-	to_phone_number_with_prefix = string_replace(to_phone_number_with_prefix, " ", "");
-	
-	char *body_string;
+	char *to_phone_number_with_prefix_no_space = string_replace(to_phone_number_with_prefix, " ", "");
+    free(to_phone_number_with_prefix);
+
+    char *from_phone_number_with_prefix_encoded = url_encode(from_phone_number_with_prefix);
+    char *to_phone_number_with_prefix_encoded = url_encode(to_phone_number_with_prefix_no_space);
+    free(to_phone_number_with_prefix_no_space);
+	char *url_content_encoded = url_encode(sms_content);
+    char *body_string;
 	asprintf(
 		&body_string,
 		"From=%s&To=%s&Body=%s",
-		url_encode(from_phone_number_with_prefix),
-		url_encode(to_phone_number_with_prefix),
-		url_encode(sms_content)
+        from_phone_number_with_prefix_encoded,
+        to_phone_number_with_prefix_encoded,
+		url_content_encoded
 	);
+    free(from_phone_number_with_prefix_encoded);
+    free(to_phone_number_with_prefix_encoded);
+    free(url_content_encoded);
 	
 	char *body[3] = {
 		body_string,
 		'\0'
 	};
-	
+
+    char *auth_basic_header = string_concat("Authorization: Basic ", token);
 	char *headers[3] = {
 		"Content-Type: application/x-www-form-urlencoded",
-		string_concat("Authorization: Basic ", token),
+		auth_basic_header,
 		'\0'
 	};
+	free(token);
 	
 	char *response = http_request("POST", service_url, headers, body);
+    free(auth_basic_header);
+    free(body_string);
 	if (string_index(response, TWILIO_RESPONSE_SUCCESS, 1) != STRING_NOT_FOUND) {
+        free(response);
 		return TRUE;
 	}
+    free(response);
 	return FALSE;
 }
