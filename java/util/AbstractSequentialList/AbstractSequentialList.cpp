@@ -24,16 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../math.h"
-
-double math_pow(double a, double b) {
-	return pow(a, b);
-}
-
-double math_floor(double a) {
-	return floor(a);
-}
-
-long math_round(double a) {
-	return round(a);
-}
+#include "AbstractSequentialList.hpp"
