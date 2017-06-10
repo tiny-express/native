@@ -95,4 +95,3 @@ namespace Java {
 }
 
 #endif//NATIVE_JAVA_LANG_INTEGER_HPP
-

@@ -124,6 +124,7 @@ TEST (JavaLang, IntegerCompareTo) {
 	// Return -1 if validValue is less than moreThanValue
 	ASSERT_EQUAL(-1, validValue.compareTo(moreThanValue));
 	
+  // TODO - loint@foodtiny.com will review this case again
 	Integer integer = 1;
 	Comparable<Integer> *comparable = &validValue;
 	ASSERT_EQUAL(1, comparable->compareTo(integer));

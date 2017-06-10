@@ -638,4 +638,3 @@ boolean String::operator>=(const String &target) const {
 	}
 	return true;
 }
-
