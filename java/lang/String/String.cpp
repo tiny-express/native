@@ -85,11 +85,11 @@ char String::charAt(int index) {
  * @param anotherString
  * @return int
  */
-int String::compareTo(String anotherString) {
-	// string anotherStringValue = anotherString.toString();
-	// if (string_equals(this->original, anotherStringValue) {
-	//     return 0;
-	// }
+int String::compareTo(String anotherString) const {
+	 string anotherStringValue = anotherString.toString();
+	 if (string_equals(this->original, anotherStringValue)) {
+	     return 0;
+	 }
 	return 0;
 }
 
@@ -99,7 +99,7 @@ int String::compareTo(String anotherString) {
  * @param str
  * @return int
  */
-int String::compareToIgnoreCase(String str) {
+int String::compareToIgnoreCase(String str) const {
 	// TODO
 	return 0;
 }
@@ -632,6 +632,6 @@ boolean String::operator>=(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return false;
 	}
-
 	return true;
 }
+

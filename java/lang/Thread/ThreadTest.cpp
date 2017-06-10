@@ -71,7 +71,7 @@ TEST(JavaLang, ThreadName) {
     Thread thread;
 
     // Test true after set new name for threadName
-    thread.setName("Some valid name");
+    thread.setName((string) "Some valid name");
     ASSERT_STR("Some valid name", thread.getName());
 }
 
