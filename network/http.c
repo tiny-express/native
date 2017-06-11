@@ -293,14 +293,12 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 		         body_string);
 	}
 	free(path);
-    free(host);
     free(body_string);
     free(header_content);
 
 	BIO *bio;
 	SSL *ssl;
 	SSL_CTX *ctx;
-	char *response = malloc(100000 * sizeof(char));
 	int received = 0;
 	
 	if (is_https) {
@@ -315,14 +313,14 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 		const SSL_METHOD *method = TLSv1_2_client_method();        /* SSLv3 but can rollback to v2 */
 		if (!method) {
 			fprintf(stderr, "SSL client method failed\n");
-			return "";
+			return strdup("");
 		}
 		
 		ctx = SSL_CTX_new(method);
 		if (!ctx) {
 			fprintf(stderr, "SSL context is NULL\n");
 			ERR_print_errors_fp(stderr);
-			return "";
+			return strdup("");
 		}
 		
 		/* Setup the connection */
@@ -341,19 +339,20 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 			printf("%s\n", ERR_error_string(ERR_get_error(), NULL));
 			BIO_free_all(bio);
 			SSL_CTX_free(ctx);
-			return "";
+			return strdup("");
 		}
 	} else {
 		bio = BIO_new_connect(host);
 		if (bio == NULL) {
 			fprintf(stderr, "BIO is null\n");
-			return "";
+			return strdup("");
 		}
 		
 		if (BIO_do_connect(bio) <= 0) {
+            fprintf(stderr, "Error attempting to connect\n");
 			ERR_print_errors_fp(stderr);
 			BIO_free_all(bio);
-			return "";
+			return strdup("");
 		}
 	}
 	
@@ -361,12 +360,14 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 	BIO_write(bio, request, length_pointer_char(request));
 	
 	/* Read in the response */
+	char *response = malloc(100000 * sizeof(char));
 	int bytes;
 	for (;;) {
 		bytes = BIO_read(bio, response + received, 1023);
 		if (bytes < 0) {
 			printf("ERROR received");
-			return "";
+			free(response);
+			return strdup("");
 		}
 		if (bytes == 0) {
 			break;
