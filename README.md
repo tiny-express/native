@@ -89,14 +89,15 @@ $ ./native
 #### Mock Server
 To test third parties we need to setup a server to mock http request from them.
 By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
-```bash
+Please keep this terminal running during your development.
+```bash 
 $ make server
 ```
 
 #### Memory Leak
 Valgrind helps us in checking memory leak, you've just need to run
 ```
-$ make leak
+$ cmake . && make native_test && make leak
 ```
 It will tell you issues relate to memory.
 
