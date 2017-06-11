@@ -45,15 +45,14 @@ TEST (JavaNet, URLConstructor) {
 	ASSERT_EQUAL(3000, url.getPort());
 	ASSERT_STR("/file/test", url.getPath().toString());
 	ASSERT_STR("param=1", url.getQuery().toString());
-	
-	String urlString2 = "http://";
-	URL url2(urlString2);
-	ASSERT_STR("", url2.getProtocol().toString());
-	ASSERT_STR("", url2.getHost().toString());
-	ASSERT_STR("", url2.getPath().toString());
-	ASSERT_STR("", url2.getQuery().toString());
-	ASSERT_EQUAL(-1, url2.getPort());
-}
+
+	urlString = "http://";
+	url = URL(urlString);
+	ASSERT_STR("", url.getProtocol().toString());
+	ASSERT_STR("", url.getHost().toString());
+	ASSERT_STR("", url.getPath().toString());
+	ASSERT_STR("", url.getQuery().toString());
+	ASSERT_EQUAL(-1, url.getPort());
 
 TEST (JavaNet, URLToString) {
 	// Full URL with protocol, host, port, path and query
