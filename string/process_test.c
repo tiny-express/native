@@ -29,16 +29,43 @@
 
 TEST (String, ProcessReplace) {
 	char *target = "Hello World";
-	char *find = "World";
-	char *replace_with = "Foodship";
-	char *expect = "Hello Foodship";
-	char *result = string_replace(target, find, replace_with);
+	char *find_string = "World";
+	char *replace_with = "Food Tiny";
+	char *expect = "Hello Food Tiny";
+	char *result = string_replace(target, find_string, replace_with);
 	ASSERT_STR(expect, result);
+	free(result);
 	
-	char *find1 = "Nothing";
-	char *expect1 = "Hello World";
-	char *result1 = string_replace(target, find1, replace_with);
-	ASSERT_STR(expect1, result1);
+	char *target2 = "Hello World";
+	char *find_string2 = "Nothing";
+	char *replace_with2 = "Food Tiny";
+	char *expect2 = "Hello World";
+	char *result2 = string_replace(target2, find_string2, replace_with2);
+	ASSERT_STR(expect2, result2);
+	free(result2);
+	
+	char *target3 = "aaa bbededeb cccccc de dd eeeede";
+	char *find_string3 = "de";
+	char *replace_with3 = "ff";
+	char *expect3 = "aaa bbeffffb cccccc ff dd eeeeff";
+	char *result3 = string_replace(target3, find_string3, replace_with3);
+	ASSERT_STR(expect3, result3);
+	free(result3);
+	
+	char *target4 = "aaaaaaaaaaaffffffffffffffffff";
+	char *find_string4 = "aa";
+	char *replace_with4 = "o";
+	char *expect4 = "oooooaffffffffffffffffff";
+	char *result4 = string_replace(target4, find_string4, replace_with4);
+	ASSERT_STR(expect4, result4);
+	free(result4);
+	
+	char *target5 = "a";
+	char *find_string5 = "aaaaaaaaaaaaaaaaaaaa";
+	char *replace_with5 = "o";
+	char *result5 = string_replace(target5, find_string5, replace_with5);
+	ASSERT_NULL(result5);
+	free(result5);
 }
 
 TEST (String, ProcessTrim) {

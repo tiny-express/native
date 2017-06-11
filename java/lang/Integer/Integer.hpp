@@ -57,7 +57,7 @@ namespace Java {
 			
 			string toString() const;
 			static Integer parseInt(String target);
-			int compareTo(Integer o) const override {
+			int compareTo(const Integer &o) const override {
 				if (hashCode() == o.hashCode()) {
 					return 0;
 				}
