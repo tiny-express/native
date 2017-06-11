@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
@@ -70,6 +71,7 @@ int send_mail(
 	
 	char *response = http_request("POST", service_url, header, body);
 	free(auth_bearer_header);
+	free(body[0]);
 	if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
 		free(response);
 		return FALSE;

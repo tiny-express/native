@@ -24,10 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
 #include "../validator.h"
+#include "../crypto.h"
+#include "../common.h"
 
 /**
  * Send mail via Twillio service
@@ -70,12 +73,13 @@ int send_sms(
 	
 	char *token;
 	asprintf(&token, "%s:%s", account_id, account_token);
-	token = base64_encode(token, length_pointer_char(token));
+	token = base64_encode((const unsigned char*) token, (size_t) length_pointer_char(token));
 	
 	char *from_phone_number_with_prefix = from_phone_number;
 	if (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND) {
 		from_phone_number_with_prefix = string_concat("+", from_phone_number);
 	}
+	free(from_phone_number_with_prefix);
 	// Remove all space from 'from phone number'
 	from_phone_number_with_prefix = string_replace(from_phone_number_with_prefix, " ", "");
 	
@@ -90,7 +94,6 @@ int send_sms(
 
     char *from_phone_number_with_prefix_encoded = url_encode(from_phone_number_with_prefix);
     char *to_phone_number_with_prefix_encoded = url_encode(to_phone_number_with_prefix_no_space);
-    free(to_phone_number_with_prefix_no_space);
 	char *url_content_encoded = url_encode(sms_content);
     char *body_string;
 	asprintf(
@@ -100,6 +103,8 @@ int send_sms(
         to_phone_number_with_prefix_encoded,
 		url_content_encoded
 	);
+
+	free(to_phone_number_with_prefix_no_space);
     free(from_phone_number_with_prefix_encoded);
     free(to_phone_number_with_prefix_encoded);
     free(url_content_encoded);
