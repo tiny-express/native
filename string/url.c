@@ -79,11 +79,14 @@ char *url_decode(char *target) {
 
 char *find_param(char *name, char *params) {
 	if (strcmp(params, "") == 0) {
-		return "";
+		return strdup("");
 	}
 	char **query_pairs = string_split(params, "&");
 	int length_pairs = length_pointer_pointer_char(query_pairs);
-	register int i;
+#ifdef __linux__
+	register
+#endif
+	int i;
 	for (i = 0; i < length_pairs; i++) {
 		char **pair = string_split(query_pairs[ i ], "=");
 		if (length_pointer_pointer_char(pair) == 2) {
@@ -97,7 +100,7 @@ char *find_param(char *name, char *params) {
 		free(pair);
 	}
 	free(query_pairs);
-	return "";
+	return strdup("");
 }
 
 char *find_param_from_url(char *name, char *url) {

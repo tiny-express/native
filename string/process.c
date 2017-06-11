@@ -87,18 +87,17 @@ inline char **string_split(char *target, char *delimiter) {
 	int length_delimiter = length_pointer_char(delimiter);
 	int distance = length_target - length_delimiter + 1;
 	int length_item = 0;
-	char *segment = calloc(length_delimiter, sizeof(char));
-	char **data = calloc(MAX_STRING_LENGTH, sizeof(char *));
+	char *segment = calloc(length_delimiter + 1, sizeof(char));
+	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
 	while (to <= distance) {
-		memcpy(segment, &target[ to ], length_delimiter);
+		strncpy(segment, &target[ to ], length_delimiter);
 		if (strcmp(segment, delimiter) == 0) {
 			if (to - from > 0) {
 				length_item = to - from;
 				char *item = calloc(length_item + 1, sizeof(char));
-				memcpy(item, &target[ from ], length_item);
-				item[ length_item ] = '\0';
+				strncpy(item, &target[ from ], length_item);
 				// Append element to result
 				data[ count++ ] = item;
 				from = to + length_delimiter;
@@ -113,8 +112,7 @@ inline char **string_split(char *target, char *delimiter) {
 	if (to - from > 0) {
 		length_item = length_target - from;
 		char *item = calloc(length_item + 1, sizeof(char));
-		memcpy(item, &target[ from ], length_item);
-		item[ length_item ] = '\0';
+		strncpy(item, &target[ from ], length_item);
 		// Append element to result
 		data[ count++ ] = item;
 	}
@@ -185,8 +183,8 @@ inline char *string_trim(char *target) {
 	while (target[ right ] == ' ')
 		right--;
 	len = right - left + 1;
-	char *result = calloc(len, sizeof(char));
-	memcpy(result, &target[ left ], len);
+	char *result = calloc(len + 1, sizeof(char));
+	strncpy(result, &target[ left ], len);
 	return result;
 }
 
@@ -505,17 +503,16 @@ int string_equals(char *target1, char *target2) {
  * @return string reversed
  */
 char *string_reverse(char *target) {
-	int target_size = length_pointer_char(target);
-	char *result = (char *) calloc(target_size, sizeof(char));
+	int target_length = length_pointer_char(target);
+	char *result = (char *) calloc(target_length + 1, sizeof(char));
+#ifdef __linux__
+	register
+#endif
 	int index;
-	int result_index = 0;
-	
-	for (index = target_size - 1; index >= 0; --index) {
-		result[ result_index ] = target[ index ];
-		result_index++;
+	for (index=0; index < target_length; index++) {
+		result[index] = target[target_length - index - 1];
 	}
-	
-	result[ target_size ] = '\0';
+	result[target_length] = '\0';
 	return result;
 }
 

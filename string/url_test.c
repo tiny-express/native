@@ -27,21 +27,21 @@
 #include "../unit_test.h"
 #include "../string.h"
 
-TEST (String, UrlEncode) {
+TEST (Url, Encode) {
 	char *target = "Quán ăn";
 	char *result = url_encode(target);
 	char *expect = "Qu%c3%a1n+%c4%83n";
 	ASSERT_STR(expect, result);
 }
 
-TEST (String, UrlDecode) {
+TEST (Url, Decode) {
 	char *target = "Qu%c3%a1n+%c4%83n";
 	char *result = url_decode(target);
 	char *expect = "Quán ăn";
 	ASSERT_STR(expect, result);
 }
 
-TEST (Context, FindParam) {
+TEST (Url, FindParam) {
 	char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	ASSERT_STR("loint", find_param("username", params));
 	ASSERT_STR("Loi AbC", find_param("firstName", params));
@@ -60,7 +60,7 @@ TEST (Context, FindParam) {
 	ASSERT_STR("", find_param("lastName", params3));
 }
 
-TEST (Context, FindParamFromUrl) {
+TEST (Url, FindParamFromUrl) {
 	char *url = "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	ASSERT_STR("loint", find_param_from_url("username", url));
 	ASSERT_STR("Loi AbC", find_param_from_url("firstName", url));

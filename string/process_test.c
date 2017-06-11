@@ -73,14 +73,17 @@ TEST (String, ProcessTrim) {
 	char *target = "  Hello World  ";
 	char *result = string_trim(target);
 	ASSERT_STR(expect, result);
+	free(result);
 	
 	char *target1 = "  Hello World";
 	char *result1 = string_trim(target1);
 	ASSERT_STR(expect, result1);
+	free(result1);
 	
 	char *target2 = "Hello World  ";
 	char *result2 = string_trim(target2);
 	ASSERT_STR(expect, result2);
+	free(result2);
 }
 
 TEST (String, ProcessJoin) {
@@ -462,6 +465,7 @@ TEST (String, ProcessReverse) {
 	char *wrong_reverse = "something here";
 	
 	char *reverse_of_target = string_reverse(target);
+	
 	
 	// Test true with correct reverse string
 	ASSERT_TRUE(string_equals(correct_reverse, reverse_of_target));
