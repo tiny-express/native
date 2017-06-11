@@ -25,13 +25,13 @@
  */
 
 #include "../type.h"
-#include <stdio.h>
+#include <string.h>
 
 char *string_default(char *target) {
 	if (target != NULL) {
 		return target;
 	}
-	return " ";
+	return strdup("");
 }
 
 double number_default(double target) {

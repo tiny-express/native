@@ -37,12 +37,12 @@ URL::URL() {
 }
 
 URL::URL(String spec) {
-	string url = strdup(spec.toString());
-	this->protocol = http_protocol(url);
-	this->host = http_hostname(url);
-	this->port = url_port(url);
-	this->query = http_query(url);
-	this->path = http_path(url);
+	string url = spec.toString();
+	this->protocol = string_default(http_protocol(url));
+	this->host = string_default(http_hostname(url));
+	this->port = number_default(url_port(url));
+	this->query = string_default(http_query(url));
+	this->path = string_default(http_path(url));
 }
 
 URL::~URL() {}
@@ -88,6 +88,7 @@ string URL::toString() const {
 		url += path;
 	}
 	
-	url = url + ( query.isEmpty() ? "" : "?" ) + query;
-	return url.toString();
+	url = url + (query.isEmpty() ? "" : "?" ) + query;
+	string result = strdup(url.toString());
+	return result;
 }

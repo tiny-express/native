@@ -159,17 +159,14 @@ char *http_query(char *url) {
  */
 char *http_path(char *url) {
 	int is_url_result = is_url(url);
-	
 	if (is_url_result == 0) {
 		return NULL;
 	}
-	
 	int len_url = length_pointer_char(url);
 	int begin_pos = string_index(url, "/", 3);
 	if (begin_pos == -1) {
 		return "/";
 	}
-	
 	int end_pos = len_url;
 	int index;
 	for (index = begin_pos; index < len_url; index++) {
@@ -178,7 +175,6 @@ char *http_path(char *url) {
 			break;
 		}
 	}
-	
 	char *result = string_from_to(url, begin_pos, end_pos - 1);
 	return result;
 }
