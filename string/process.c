@@ -43,9 +43,33 @@
  */
 inline char *string_replace(char *target, char *find_string, char *replace_with) {
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
-		return NULL;
+		return strdup("");
 	}
-	return strdup("");
+	char *result;
+	int i, count = 0;
+	int new_len = length_pointer_char(replace_with);
+	int old_len = length_pointer_char(find_string);
+
+	for (i = 0; target[i] != '\0'; i++) {
+		if (strstr(&target[i], find_string) == &target[i]) {
+			count++;
+			i += old_len - 1;
+		}
+	}
+    result = malloc(i + 1 + count * (new_len - old_len));
+
+	i = 0;
+	while (*target) {
+		if (strstr(target, find_string) == target) {
+			strcpy(&result[i], replace_with);
+			i += new_len;
+            target += old_len;
+		} else
+            result[i++] = *target++;
+	}
+    result[i] = '\0';
+
+	return result;
 }
 
 /**

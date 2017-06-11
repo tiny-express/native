@@ -64,7 +64,7 @@ TEST (String, ProcessReplace) {
 	char *find_string5 = "aaaaaaaaaaaaaaaaaaaa";
 	char *replace_with5 = "o";
 	char *result5 = string_replace(target5, find_string5, replace_with5);
-	ASSERT_NULL(result5);
+	ASSERT_STR("a", result5);
 	free(result5);
 }
 
