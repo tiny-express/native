@@ -62,11 +62,11 @@ char *http_schema(char *url) {
 char *http_hostname(char *url) {
 	
 	if (is_url(url) == 0) {
-		return NULL;
+		return strdup("");
 	}
 	
 	if (string_index(url, "127.0.0.1", 1) != -1) {
-		return LOCALHOST;
+		return strdup(LOCALHOST);
 	}
 	
 	int length_url = length_pointer_char(url);

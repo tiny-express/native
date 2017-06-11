@@ -73,13 +73,11 @@ int parse_header(char *response, http_response *result, int index) {
 		if (response[ scan_index ] == ':' && response[ scan_index + 1 ] == ' ') {
 			result->headers[ result->header_quantity ] = malloc(sizeof(header));
 			char *header_name = string_from_to(response, mark_index, scan_index - 1);
-			result->headers[ result->header_quantity ]->name = malloc(sizeof(header_name));
 			result->headers[ result->header_quantity ]->name = header_name;
 			scan_index++;
 			mark_index = scan_index + 1;
 		} else if (response[ scan_index ] == '\n') {
 			char *header_value = string_from_to(response, mark_index, scan_index - 1);
-			result->headers[ result->header_quantity ]->value = malloc(sizeof(header_value));
 			result->headers[ result->header_quantity ]->value = header_value;
 			mark_index = scan_index + 1;
 			result->header_quantity++;
@@ -92,30 +90,17 @@ int parse_header(char *response, http_response *result, int index) {
 	return scan_index;
 }
 
-// TODO @dthongvl please help me implement this function
 void free_http_response(http_response *response) {
 	register int index;
 	for (index = 0; index < response->header_quantity; index++) {
-		get_free((void **) &response->headers[ index ]->name);
-		get_free((void **) &response->headers[ index ]->value);
-		get_free((void **) &response->headers[ index ]);
+		free(response->headers[ index ]->name);
+		free(response->headers[ index ]->value);
+		free(response->headers[ index ]);
 	}
-	get_free((void **) &response->headers);
-	get_free((void **) &response->status_code);
-	get_free((void **) &response->status);
-	get_free((void **) &response->version);
-	get_free((void **) &response->body);
-	get_free((void **) &response);
-}
-
-/**
- * free memory of pointer
- * @reference: https://stackoverflow.com/questions/7608714/why-is-my-pointer-not-null-after-free
- * @param pointer
- */
-void get_free(void **pointer) {
-	if (*pointer != NULL) {
-		free(*pointer);
-		*pointer = NULL;
-	}
+	free(response->headers);
+	free(response->status_code);
+	free(response->status);
+	free(response->version);
+	free(response->body);
+	free(response);
 }
