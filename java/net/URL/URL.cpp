@@ -43,6 +43,7 @@ URL::URL(String spec) {
 	this->port = number_default(url_port(url));
 	this->query = string_default(http_query(url));
 	this->path = string_default(http_path(url));
+	free(url);
 }
 
 URL::~URL() {}
