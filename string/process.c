@@ -64,7 +64,7 @@ inline char **string_split(char *target, char *delimiter) {
 	int distance = length_target - length_delimiter + 1;
 	int length_item = 0;
 	char *segment = calloc(length_delimiter, sizeof(char));
-	char **data = malloc(MAX_STRING_LENGTH * sizeof(char *));
+	char **data = calloc(MAX_STRING_LENGTH, sizeof(char *));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
 	while (to <= distance) {
@@ -72,7 +72,7 @@ inline char **string_split(char *target, char *delimiter) {
 		if (strcmp(segment, delimiter) == 0) {
 			if (to - from > 0) {
 				length_item = to - from;
-				char *item = malloc(( length_item + 1 ) * sizeof(char));
+				char *item = calloc(length_item + 1, sizeof(char));
 				memcpy(item, &target[ from ], length_item);
 				item[ length_item ] = '\0';
 				// Append element to result
@@ -88,14 +88,14 @@ inline char **string_split(char *target, char *delimiter) {
 	}
 	if (to - from > 0) {
 		length_item = length_target - from;
-		char *item = malloc(( length_item + 1 ) * sizeof(char));
+		char *item = calloc(length_item + 1, sizeof(char));
 		memcpy(item, &target[ from ], length_item);
 		item[ length_item ] = '\0';
 		// Append element to result
 		data[ count++ ] = item;
 	}
 	// Saving memory
-	char **result = malloc(( count + 1 ) * sizeof(char *));
+	char **result = calloc(count + 1, sizeof(char *));
 	memcpy(result, data, count * sizeof(char *));
 	// End array
 	result[ count ] = '\0';
@@ -269,7 +269,7 @@ inline char *string_random(char *target, int size) {
 		return NULL;
 	}
 	int target_length = length_pointer_char(target);
-	char *result = malloc(( size + 1 ) * sizeof(char));
+	char *result = calloc(size + 1, sizeof(char));
 	register int i;
 	for (i = 0; i < size; i++) {
 		result[ i ] = target[ rand() % target_length ];
@@ -315,7 +315,7 @@ inline char *string_concat(char *target, char *subtarget) {
 	}
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
-	char *result = malloc(( target_length + subtarget_length + 1 ) * sizeof(char));
+	char *result = calloc(target_length + subtarget_length + 1, sizeof(char));
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
 	result[ target_length + subtarget_length ] = '\0';
@@ -482,7 +482,7 @@ int string_equals(char *target1, char *target2) {
  */
 char *string_reverse(char *target) {
 	int target_size = length_pointer_char(target);
-	char *result = (char *) malloc(sizeof(char) * target_size);
+	char *result = (char *) calloc(target_size, sizeof(char));
 	int index;
 	int result_index = 0;
 	

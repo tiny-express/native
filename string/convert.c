@@ -70,7 +70,7 @@ char *string_from_char(char target) {
 	if (target == '\0') {
 		return (char *) "";
 	}
-	char *result = malloc(2 * sizeof(char));
+	char *result = calloc(2, sizeof(char));
 	result[ 0 ] = target;
 	result[ 1 ] = '\0';
 	return result;

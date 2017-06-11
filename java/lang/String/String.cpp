@@ -171,7 +171,7 @@ boolean String::endsWith(const String &suffix) const {
  * @return String
  */
 String String::fromCharArray(Array<char> &chars) {
-	string str = (string) malloc(( chars.length + 1 ) * sizeof(char));
+	string str = (string) calloc(chars.length + 1, sizeof(char));
 #ifdef __linux__
 	register
 #endif

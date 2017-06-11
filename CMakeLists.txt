@@ -176,13 +176,13 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
     leak
-    COMMAND valgrind --error-exitcode=42 --leak-check=full ./native_test
+    COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
 )
 
 # Check memory leak
 add_custom_target(
         leak-debug
-        COMMAND valgrind --gen-suppressions=yes --error-exitcode=42 --leak-check=full ./native_test
+        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
 )
 
 # Add make installation - install to Unix system

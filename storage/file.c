@@ -51,7 +51,7 @@ inline char *file_get_contents(char *file_name) {
 	}
 	fseek(input_file, 0, SEEK_END);
 	size_t file_size = ftell(input_file);
-	char *result = (char *) malloc(( file_size + 1 ) * sizeof(char));
+	char *result = (char *) calloc(file_size + 1, sizeof(char));
 	rewind(input_file);
 	fread(result, 1, file_size, input_file);
 	fclose(input_file);
