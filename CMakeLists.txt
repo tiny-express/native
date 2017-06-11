@@ -133,21 +133,6 @@ file(GLOB_RECURSE TESTS
         validator/*_test.c
 )
 
-file(GLOB_RECURSE DEBUG
-#        common/*_test.c
-#        crypto/*_test.c
-#        datetime/*_test.c
-#        java/**/*Test.cpp
-#        math/*_test.c
-#        network/*_test.c
-#        server/*_test.c
-#        storage/*_test.c
-#        string/*_test.c
-#        thread/*_test.c
-#        type/*_test.c
-        vendor/*_test.c
-#        validator/*_test.c
-        )
 
 # Remove all test files within c files
 foreach (test ${TESTS})
