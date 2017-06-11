@@ -45,31 +45,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
 		return NULL;
 	}
-	int old_length = length_pointer_char(find_string);
-	int new_length = length_pointer_char(replace_with);
-	register int i, count = 0;
-	for (i = 0; target[ i ] != '\0'; i++) {
-		if (strstr(&target[ i ], find_string) == &target[ i ]) {
-			count++;
-			i += old_length - 1;
-		}
-	}
-	char *result = (char *) malloc(i + count * ( new_length - old_length ));
-	if (result == NULL) {
-		return NULL;
-	}
-	i = 0;
-	while (*target) {
-		if (strstr(target, find_string) == target) {
-			strcpy(&result[ i ], replace_with);
-			i += new_length;
-			target += old_length;
-		} else {
-			result[ i++ ] = *target++;
-		}
-	}
-	result[ i ] = '\0';
-	return result;
+	return "";
 }
 
 /**
