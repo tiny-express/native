@@ -34,9 +34,9 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST (JavaNet, URLConstructor) {
-	#ifdef __APPPLE__
-		return;
-	#endif
+#ifdef __APPPLE__
+	return;
+#endif
 
 	String urlString = "http://test.com:3000/file/test?param=1";
 	URL url(urlString);
@@ -53,6 +53,7 @@ TEST (JavaNet, URLConstructor) {
 	ASSERT_STR("", url.getPath().toString());
 	ASSERT_STR("", url.getQuery().toString());
 	ASSERT_EQUAL(-1, url.getPort());
+}
 
 TEST (JavaNet, URLToString) {
 	// Full URL with protocol, host, port, path and query
