@@ -53,16 +53,19 @@ TEST (Network, HttpHostname) {
 
 	hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
 	ASSERT_STR(LOCALHOST, hostname);
+    free(hostname);
 
 	hostname = http_hostname("http://google.com:3000/");
 	ASSERT_STR("google.com", hostname);
 	free(hostname);
 
 	hostname = http_hostname("https://");
-	ASSERT_STR(NULL, hostname);
+	ASSERT_STR("", hostname);
+    free(hostname);
 
 	hostname = http_hostname("");
-	ASSERT_STR(NULL, hostname);
+	ASSERT_STR("", hostname);
+    free(hostname);
 }
 
 TEST (Network, HttpPort) {
