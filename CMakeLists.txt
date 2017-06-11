@@ -25,7 +25,16 @@
 #
 
 cmake_minimum_required(VERSION 2.8)
-project(native ASM C CXX)
+project(native C CXX)
+
+# Only enable GNU Assembly for Linux amd64
+# Please careful when you would like to optimize any function in ASM
+# ASM implementation must be GNU Assembly for Linux amd x64
+# C implementation must be implemented first for __APPLE__
+# Keep human readable for __APPLE__ - no need to optimize for testing
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    enable_language(ASM)
+endif ()
 
 # Enable runtime search path support for dynamic libraries on OSX
 if (APPLE)

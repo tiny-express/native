@@ -90,7 +90,7 @@ $ ./native
 To test third parties we need to setup a server to mock http request from them.
 By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
 Please keep this terminal running during your development.
-```bash 
+```bash
 $ make server
 ```
 
