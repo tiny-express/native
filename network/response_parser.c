@@ -93,14 +93,13 @@ int parse_header(char *response, http_response *result, int index) {
 void free_http_response(http_response *response) {
 	register int index;
 	for (index = 0; index < response->header_quantity; index++) {
-		free(response->headers[ index ]->name);
-		free(response->headers[ index ]->value);
-		free(response->headers[ index ]);
+        if (response->headers[ index ]->name) free(response->headers[ index ]->name);
+		if (response->headers[ index ]->value) free(response->headers[ index ]->value);
+		if (response->headers[ index ]) free(response->headers[ index ]);
 	}
-	free(response->headers);
-	free(response->status_code);
-	free(response->status);
-	free(response->version);
-	free(response->body);
-	free(response);
+	if (response->status_code) free(response->status_code);
+    if (response->status) free(response->status);
+    if (response->version) free(response->version);
+    if (response->body) free(response->body);
+    free(response);
 }
