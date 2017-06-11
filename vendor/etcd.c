@@ -100,7 +100,7 @@ int etcd_set(char *url, char *key, char *value) {
 		response,
 		response_body_begin_index,
 		response_length - 1);
-    
+
     free(path_to_key);
     free(body_message);
     free(connection_url);
