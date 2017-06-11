@@ -45,7 +45,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
 		return NULL;
 	}
-	return "";
+	return strdup("");
 }
 
 /**

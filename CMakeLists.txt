@@ -133,7 +133,7 @@ file(GLOB_RECURSE TESTS
         validator/*_test.c
 )
 
-file(GLOB_RECURSE AHIHI
+file(GLOB_RECURSE DEBUG
 #        common/*_test.c
 #        crypto/*_test.c
 #        datetime/*_test.c
@@ -155,7 +155,7 @@ foreach (test ${TESTS})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${AHIHI} ${SOURCES} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES})
