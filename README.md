@@ -131,6 +131,7 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
+
 - Namespace - Package
 ```java
 // Java
