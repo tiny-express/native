@@ -61,7 +61,7 @@ char *etcd_get(char *url, char *key) {
 	free(result);
 	json_value_free(root_value);
 
-	return value_result;
+	return strdup(value_result);
 }
 
 /**
@@ -96,12 +96,13 @@ int etcd_set(char *url, char *key, char *value) {
 	char *response = http_request("PUT", connection_url, header, body);
 	int response_body_begin_index = string_index(response, "{", 1);
 	int response_length = length_pointer_char(response);
-	char *result = string_from_to(
+    char *result = string_from_to(
 		response,
 		response_body_begin_index,
 		response_length - 1);
-
+    
     free(path_to_key);
+    free(body_message);
     free(connection_url);
     free(response);
 
@@ -112,9 +113,10 @@ int etcd_set(char *url, char *key, char *value) {
 	JSON_Value *root_value = json_parse_string(result);
 	JSON_Object *root_object = json_value_get_object(root_value);
 	JSON_Object *node_object = json_object_get_object(root_object, NODE);
-	const char *value_result = json_object_get_string(node_object, VALUE);
-	const char *key_result = json_object_get_string(node_object, KEY);
-    json_value_free(root_value);
+	string value_result = (string) json_object_get_string(node_object, VALUE);
+	string key_result = (string) json_object_get_string(node_object, KEY);
+    int return_value = !(strcmp(value_result, value) != 0 || strcmp(key_result, key) != 0);
     free(result);
-	return (strcmp(value_result, value) != 0 || strcmp(key_result, key) != 0);
+    json_value_free(root_value);
+	return return_value;
 }

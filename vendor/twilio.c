@@ -71,10 +71,10 @@ int send_sms(
 		return FALSE;
 	}
 	
-	char *token;
-	asprintf(&token, "%s:%s", account_id, account_token);
-	token = base64_encode((const unsigned char*) token, (size_t) length_pointer_char(token));
-	
+	char *username_password;
+	asprintf(&username_password, "%s:%s", account_id, account_token);
+    char *token = base64_encode((const unsigned char*) username_password, (size_t) length_pointer_char(username_password));
+    free(username_password);
 	char *from_phone_number_with_prefix = from_phone_number;
 	if (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND) {
 		from_phone_number_with_prefix = string_concat("+", from_phone_number);
@@ -104,6 +104,7 @@ int send_sms(
 		url_content_encoded
 	);
 
+    free(from_phone_number_with_prefix);
 	free(to_phone_number_with_prefix_no_space);
     free(from_phone_number_with_prefix_encoded);
     free(to_phone_number_with_prefix_encoded);
