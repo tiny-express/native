@@ -30,6 +30,7 @@
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
+#include "../type.h"
 
 /**
  * Retrieve url schema
@@ -41,14 +42,14 @@
 char *http_schema(char *url) {
 	
 	if (!is_url(url)) {
-		return NULL;
+		return strdup("");
 	}
 	
 	if (string_startswith(url, HTTPS)) {
-		return HTTPS;
+		return strdup(HTTPS);
 	}
 	
-	return HTTP;
+	return strdup(HTTP);
 }
 
 /**
@@ -61,11 +62,11 @@ char *http_schema(char *url) {
 char *http_hostname(char *url) {
 	
 	if (is_url(url) == 0) {
-		return NULL;
+		return strdup("");
 	}
 	
 	if (string_index(url, "127.0.0.1", 1) != -1) {
-		return LOCALHOST;
+		return strdup(LOCALHOST);
 	}
 	
 	int length_url = length_pointer_char(url);
@@ -96,7 +97,8 @@ int http_port(char *url) {
 	
 	char *schema = http_schema(url);
 	
-	if (schema == NULL) {
+	if (strcmp(schema, "") == 0) {
+		free(schema);
 		return -1;
 	}
 	
@@ -110,13 +112,18 @@ int http_port(char *url) {
 		port_index_end = url_without_prefix_length - 1;
 	}
 	char *port_string = string_from_to(url_without_prefix, port_index_begin, port_index_end);
+	free(url_without_prefix);
 	int port = string_to_int(port_string);
+	free(port_string);
 	if (port == 0) {
-		if (schema == HTTPS) {
+		if (strcmp(schema, HTTPS) == 0) {
+			free(schema);
 			return HTTPS_PORT;
 		}
+		free(schema);
 		return HTTP_PORT;
 	}
+	free(schema);
 	return port;
 }
 
@@ -130,14 +137,14 @@ int http_port(char *url) {
 char *http_query(char *url) {
 	
 	if (!is_url(url)) {
-		return NULL;
+		return strdup("");
 	}
 	
 	int length_url = length_pointer_char(url);
 	int begin_position = string_index(url, "?", 1) + 1;
 	
 	if (begin_position == 0) {
-		return "";
+		return strdup("");
 	}
 	
 	int end_position = begin_position;
@@ -160,12 +167,12 @@ char *http_query(char *url) {
 char *http_path(char *url) {
 	int is_url_result = is_url(url);
 	if (is_url_result == 0) {
-		return NULL;
+		return strdup("");
 	}
 	int len_url = length_pointer_char(url);
 	int begin_pos = string_index(url, "/", 3);
 	if (begin_pos == -1) {
-		return "/";
+		return strdup("/");
 	}
 	int end_pos = len_url;
 	int index;
@@ -185,31 +192,45 @@ char *http_path(char *url) {
  * @return HTTP or HTTPS
  */
 char *http_protocol(char *url) {
-	char *protocol = http_schema(url);
-	if (protocol == NULL) {
-		return NULL;
+	char *schema = http_schema(url);
+	if (strcmp(schema, "") == 0) {
+		free(schema);
+		return strdup("");
 	}
-	int length_protocol = length_pointer_char(protocol);
-	protocol = string_from_to(protocol, 0, length_protocol - 4); // remove "://"
+	int length_schema = length_pointer_char(schema);
+	char *protocol = string_from_to(schema, 0, length_schema - 4); // remove "://"
+	free(schema);
 	return protocol;
 }
 
 int url_port(char *url) {
-	int path_index = string_index(url, http_path(url), 1);
-	char *domain = url;
 	char *path = http_path(url);
+	int path_index = string_index(url, path, 1);
+	char *domain = url;
 	int port = http_port(url);
 	if (port == -1) {
 		return -1;
 	}
+	int isDynamic = FALSE;
 	if (strcmp(path, "/") != 0) {
 		domain = string_from_to(domain, 0, path_index - 1);
+		isDynamic = TRUE;
 	}
+	free(path);
+	
 	char *port_string;
 	asprintf(&port_string, ":%d", port);
 	if (string_index(domain, port_string, 1) == -1) {
+		if (isDynamic) {
+			free(domain);
+		}
+		free(port_string);
 		return -1;
 	}
+	if (isDynamic) {
+		free(domain);
+	}
+	free(port_string);
 	return port;
 }
 
@@ -223,11 +244,16 @@ int url_port(char *url) {
 char *http_request(char *method, char *url, char **headers, char **body) {
 	// Parse URL
 	int port = http_port(url);
-	char *host = http_hostname(url);
-	asprintf(&host, "%s:%s", host, string_from_int(port));
+	char *host_no_port = http_hostname(url);
+	char *port_string = string_from_int(port);
+	char *host;
+	asprintf(&host, "%s:%s", host_no_port, port_string);
+	free(host_no_port);
+	free(port_string);
 	char *path = http_path(url);
 	char *schema = http_schema(url);
 	int is_https = strcmp(schema, HTTPS) ? 0 : 1;
+	free(schema);
 	int is_get_method = strcmp(method, "GET") ? 0 : 1;
 	
 	// Prepare request message
@@ -240,7 +266,10 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 	char *body_string = string_join(body, "&");
 	if (!is_get_method) {
 		int body_size = length_pointer_char(body_string);
-		asprintf(&header_content, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0 ? "\r\n" : "", body_size);
+		char *header_post;
+		asprintf(&header_post, "%s%sContent-Length: %d", header_content, length_pointer_char(header_content) > 0 ? "\r\n" : "", body_size);
+		free(header_content);
+		header_content = header_post;
 	}
 	
 	char *request;
@@ -263,11 +292,13 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 		         header_content,
 		         body_string);
 	}
+	free(path);
+	free(body_string);
+	free(header_content);
 	
 	BIO *bio;
 	SSL *ssl;
 	SSL_CTX *ctx;
-	char *response = malloc(100000 * sizeof(char));
 	int received = 0;
 	
 	if (is_https) {
@@ -282,14 +313,14 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 		const SSL_METHOD *method = TLSv1_2_client_method();        /* SSLv3 but can rollback to v2 */
 		if (!method) {
 			fprintf(stderr, "SSL client method failed\n");
-			return "";
+			return strdup("");
 		}
 		
 		ctx = SSL_CTX_new(method);
 		if (!ctx) {
 			fprintf(stderr, "SSL context is NULL\n");
 			ERR_print_errors_fp(stderr);
-			return "";
+			return strdup("");
 		}
 		
 		/* Setup the connection */
@@ -308,32 +339,38 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 			printf("%s\n", ERR_error_string(ERR_get_error(), NULL));
 			BIO_free_all(bio);
 			SSL_CTX_free(ctx);
-			return "";
+			free(host);
+			return strdup("");
 		}
 	} else {
 		bio = BIO_new_connect(host);
 		if (bio == NULL) {
 			fprintf(stderr, "BIO is null\n");
-			return "";
+			free(host);
+			return strdup("");
 		}
 		
 		if (BIO_do_connect(bio) <= 0) {
+			fprintf(stderr, "Error attempting to connect\n");
 			ERR_print_errors_fp(stderr);
 			BIO_free_all(bio);
-			return "";
+			free(host);
+			return strdup("");
 		}
 	}
-	
+	free(host);
 	/* Send the request */
 	BIO_write(bio, request, length_pointer_char(request));
 	
 	/* Read in the response */
+	char *response = calloc(100000, sizeof(char));
 	int bytes;
 	for (;;) {
 		bytes = BIO_read(bio, response + received, 1023);
 		if (bytes < 0) {
 			printf("ERROR received");
-			return "";
+			free(response);
+			return strdup("");
 		}
 		if (bytes == 0) {
 			break;

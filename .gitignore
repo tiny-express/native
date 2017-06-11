@@ -10,6 +10,8 @@
 /Testing
 /Makefile
 /native_test
+/native_test_c
+/native_test_cpp
 /native.cbp
 /native
 /libnative.a

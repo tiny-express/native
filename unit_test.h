@@ -399,7 +399,7 @@ static void color_print(const char* color, const char* text) {
 static void *find_symbol(struct ctest *test, const char *fname)
 {
     size_t len = strlen(test->ssname) + 1 + strlen(fname);
-    char *symbol_name = (char *) malloc(len + 1);
+    char *symbol_name = (char *) calloc(len + 1, sizeof(char));
     memset(symbol_name, 0, len + 1);
     snprintf(symbol_name, len + 1, "%s_%s", test->ssname, fname);
 

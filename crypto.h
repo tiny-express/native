@@ -29,6 +29,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <openssl/md5.h>
 
 /**
  * Base64 index table.
