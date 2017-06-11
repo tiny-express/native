@@ -145,9 +145,8 @@ System::out::println("C++");
 // Java
 byte[] byes = {};
 ```
-// C++
-C++ Syntax
 ```cpp
+// C++
 Array<byte> bytes = {};
 ```
 - Interface
