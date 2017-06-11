@@ -133,26 +133,35 @@ This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
 - Namespace - Package
 ```java
+// Java
 System.out.println("Java");
 ```
 ```cpp
+// C++
 System::out::println("C++");
 ```
 - Array
-Java syntax
 ```java
+// Java
 byte[] byes = {};
 ```
+// C++
 C++ Syntax
 ```cpp
 Array<byte> bytes = {};
 ```
 - Interface
+```
 Comming soon
+```
 - Runtime
+```
 Comming soon
+```
 - Garbage Collection
+```
 Comming soon
+```
 
 #### Data Types
 All data types are implemented and ready to use in C++ Application
