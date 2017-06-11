@@ -25,16 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8)
-project(native C CXX)
-
-# Only enable GNU Assembly for Linux amd64
-# Please careful when you would like to optimize any function in ASM
-# ASM implementation must be GNU Assembly for Linux amd x64
-# C implementation must be implemented first for __APPLE__
-# Keep human readable for __APPLE__ - no need to optimize for testing
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    enable_language(ASM)
-endif ()
+project(native ASM C CXX)
 
 # Enable runtime search path support for dynamic libraries on OSX
 if (APPLE)
@@ -94,8 +85,14 @@ endif ()
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
+# Only header files
+file(GLOB_RECURSE HEADERS
+        ./*.h
+        library.hpp
+)
+
 # Include all C/C++ and Unix Assembly files
-file(GLOB_RECURSE SOURCES
+file(GLOB_RECURSE SOURCES_C
         common/*
         crypto/*
         datetime/*
@@ -111,17 +108,11 @@ file(GLOB_RECURSE SOURCES
         validator/*
 )
 
-file(GLOB_RECURSE HEADERS
-        ./*.h
-        library.hpp
-)
-
-# Include all unit test cases
-file(GLOB_RECURSE TESTS
+# Include all C unit test cases
+file(GLOB_RECURSE TESTS_C
         common/*_test.c
         crypto/*_test.c
         datetime/*_test.c
-        java/**/*Test.cpp
         math/*_test.c
         network/*_test.c
         server/*_test.c
@@ -133,18 +124,33 @@ file(GLOB_RECURSE TESTS
         validator/*_test.c
 )
 
-
 # Remove all test files within c files
-foreach (test ${TESTS})
-    list(REMOVE_ITEM SOURCES ${test})
+foreach (test_c_file ${TESTS_C})
+    list(REMOVE_ITEM SOURCES_C ${test_c_file})
+endforeach ()
+
+# Only C++ unit test files
+file(GLOB_RECURSE SOURCES_CPP
+        java/**/*Test.cpp
+)
+
+# Only C++ unit test files
+file(GLOB_RECURSE TESTS_CPP
+        java/**/*Test.cpp
+)
+
+# Remove all test files within cpp files
+foreach (test_cpp_file ${TESTS_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C}  misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES} java/lang/Character/Character_Test.cpp)
+add_library(${PROJECT_NAME}_static ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -160,14 +166,26 @@ add_custom_target(
 
 # Check memory leak
 add_custom_target(
-    leak
-    COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+        leak
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
 )
 
 # Check memory leak
 add_custom_target(
         leak-debug
         COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+)
+
+# Check memory leak
+add_custom_target(
+    leak-c
+    COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+)
+
+# Check memory leak
+add_custom_target(
+        leak-c-debug
+        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
 )
 
 # Add make installation - install to Unix system
@@ -183,8 +201,10 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
 else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
 endif ()
