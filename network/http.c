@@ -339,12 +339,14 @@ char *http_request(char *method, char *url, char **headers, char **body) {
 			printf("%s\n", ERR_error_string(ERR_get_error(), NULL));
 			BIO_free_all(bio);
 			SSL_CTX_free(ctx);
+			free(host);
 			return strdup("");
 		}
 	} else {
 		bio = BIO_new_connect(host);
 		if (bio == NULL) {
 			fprintf(stderr, "BIO is null\n");
+			free(host);
 			return strdup("");
 		}
 		
@@ -352,10 +354,11 @@ char *http_request(char *method, char *url, char **headers, char **body) {
             fprintf(stderr, "Error attempting to connect\n");
 			ERR_print_errors_fp(stderr);
 			BIO_free_all(bio);
+			free(host);
 			return strdup("");
 		}
 	}
-	
+	free(host);
 	/* Send the request */
 	BIO_write(bio, request, length_pointer_char(request));
 	

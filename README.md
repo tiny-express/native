@@ -131,22 +131,50 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
+
+- Namespace - Package
+```java
+// Java
+System.out.println("Java");
+```
+```cpp
+// C++
+System::out::println("C++");
+```
 - Array
+```java
+// Java
+byte[] byes = {};
+```
+```cpp
+// C++
+Array<byte> bytes = {};
+```
 - Interface
+```
+Comming soon
+```
 - Runtime
+```
+Comming soon
+```
 - Garbage Collection
+```
+Comming soon
+```
 
 #### Data Types
 All data types are implemented and ready to use in C++ Application
-- [x] char - Java & C++
-- [x] byte - Java & C++ (equivalent with `unsigned char`)
-- [x] string - C++ (equivalent with `char*`)
-- [x] short - Java & C++
-- [x] int - Java & C++
-- [x] long - Java & C++
-- [x] float - Java & C++
-- [x] double - Java & C++
-- [x] boolean - Java & C++ (equivalent with `bool`)
+- [x] char - Java.Lang.Character
+- [x] byte - Java.Lang.Byte (equivalent with `unsigned char`)
+- [x] string - Java.Lang.String (equivalent with `char*`, Java does not have data type `string`)
+- [x] short - Java.Lang.Short
+- [x] int - Java.Lang.Integer
+- [x] long - Java.Lang.Long
+- [x] float - Java.Lang.Float
+- [x] double - Java.Lang.Double
+- [x] boolean - Java.Lang.Boolean (equivalent with `bool`)
+- [ ] enum - Java.Lang.Enum
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
