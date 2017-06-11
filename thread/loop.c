@@ -42,7 +42,7 @@ pthread_t set_interval(void *callback, unsigned int milliseconds) {
 		return (pthread_t) NULL;
 	}
 	pthread_t thread;
-	thread_argument *argument = calloc(1, sizeof(thread_argument));
+	thread_argument *argument = calloc(2, sizeof(thread_argument));
 	argument->milliseconds = milliseconds;
 	argument->callback = callback;
 	int error = pthread_create(&thread, NULL, loop, (void *) argument);
@@ -66,7 +66,7 @@ pthread_t set_time_out(void *callback, unsigned int milliseconds) {
 		return (pthread_t) NULL;
 	}
 	pthread_t thread;
-	thread_argument *argument = calloc(1, sizeof(thread_argument));
+	thread_argument *argument = calloc(2, sizeof(thread_argument));
 	argument->milliseconds = milliseconds;
 	argument->callback = callback;
 	int error = pthread_create(&thread, NULL, run, (void *) argument);
