@@ -45,6 +45,7 @@ namespace Java {
 			int port;
 			String path;
 			String query;
+
 		public:
 			URL();
 			URL(String spec);
@@ -75,6 +76,7 @@ namespace Java {
 			URLConnection();
 			URLConnection(URL url);
 			~URLConnection();
+
 		public:
 			URL getURL();
 			void setDoInput(boolean doInput);

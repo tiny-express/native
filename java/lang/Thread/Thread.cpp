@@ -30,26 +30,29 @@ using namespace Java::Lang;
 
 Thread::Thread() {
 	this->target = NULL;
-	this->threadName = (string) "";
+	this->threadName = strdup("");
 }
 
 Thread::Thread(Runnable &target2) {
 	this->target = &target2;
-	this->threadName = (string) "";
+	this->threadName = strdup("");
 }
 
 Thread::Thread(Runnable &target2, String name) {
 	this->target = &target2;
-	this->threadName = name.toString();
+	this->threadName = strdup(name.toString());
 }
 
 Thread::Thread(String name) {
 	this->target = NULL;
-	this->threadName = name.toString();
+	this->threadName = strdup(name.toString());
 }
 
 Thread::~Thread() {
 	//TODO: reduce Thread::Thread.numberThread
+	if (this->threadName != NULL) {
+		free(this->threadName);
+	}
 }
 
 /**
@@ -115,7 +118,7 @@ string Thread::getName() {
  * Set this thread's name
  */
 void Thread::setName(string target) {
-	this->threadName = target;
+	this->threadName = strdup(target);
 }
 
 /**
