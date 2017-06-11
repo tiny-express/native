@@ -71,6 +71,7 @@ namespace Java {
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
 			boolean endsWith(const String &suffix) const;
+
 			template <class T>
 			boolean equals(T anObject) const {
 				if (Object::equals(anObject)) {

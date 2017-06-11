@@ -76,8 +76,8 @@ String::~String() {
  * @return String
  */
 String &String::clone() {
-    String *result = new String(this->original);
-    return *result;
+	String *result = new String(this->original);
+	return *result;
 }
 
 /**
@@ -478,7 +478,7 @@ Array<char> String::toCharArray() const {
  * @return string
  */
 string String::toString() const {
-	return this->original;
+	return strdup(this->original);
 }
 
 /**
