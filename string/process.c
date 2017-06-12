@@ -81,13 +81,14 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-		return NULL;
+        char **result = calloc(0, sizeof(char*));;
+		return result;
 	}
 	int length_target = length_pointer_char(target);
 	int length_delimiter = length_pointer_char(delimiter);
 	int distance = length_target - length_delimiter + 1;
 	int length_item = 0;
-	char *segment = calloc(length_delimiter + 1, sizeof(char));
+	char *segment = calloc((size_t) length_delimiter + 1, sizeof(char));
 	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
@@ -101,6 +102,7 @@ inline char **string_split(char *target, char *delimiter) {
 				// Append element to result
 				data[ count++ ] = item;
 				from = to + length_delimiter;
+
 			} else {
 				from += length_delimiter;
 			}
