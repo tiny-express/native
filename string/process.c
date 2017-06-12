@@ -385,7 +385,7 @@ inline char *string_to(char *target, int to) {
  */
 char *string_copy(char *target) {
 	if (is_empty(target)) {
-		return "\0";
+		return strdup("");
 	}
 	int length = length_pointer_char(target);
 	char *result = (char *) calloc(length + 1 , sizeof(char));

@@ -30,7 +30,7 @@
 #include "type.h"
 #include <stdio.h>
 
-#define SENDGRID_RESPONSE_SUCCESS "202 Accepted"
+#define SENDGRID_RESPONSE_SUCCESS "202 ACCEPTED"
 #define SENDGRID_REQUEST_FORMAT \
                 "{\"personalizations\":"\
                      "[{\"to\": [{\"email\": \"%s\"}],"\

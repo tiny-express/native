@@ -70,12 +70,14 @@ int send_mail(
 	};
 	
 	char *response = http_request("POST", service_url, header, body);
+    char *response_upper = string_upper(response);
+    free(response);
 	free(auth_bearer_header);
 	free(body[0]);
-	if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
-		free(response);
+	if (string_index(response_upper, SENDGRID_RESPONSE_SUCCESS, 1) < 0) {
+        free(response_upper);
 		return FALSE;
 	}
-	free(response);
+	free(response_upper);
 	return TRUE;
 }

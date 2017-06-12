@@ -54,14 +54,14 @@ char *etcd_get(char *url, char *key) {
 	JSON_Value *root_value = json_parse_string(result);
 	JSON_Object *root_object = json_value_get_object(root_value);
 	JSON_Object *node_object = json_object_get_object(root_object, NODE);
-	string value_result = (string) json_object_get_string(node_object, VALUE);
+    char* value_result = string_copy((char*) json_object_get_string(node_object, VALUE));
 
-	free(connection_url);
-	free(response);
-	free(result);
 	json_value_free(root_value);
+    free(connection_url);
+    free(response);
+    free(result);
 
-	return strdup(value_result);
+	return value_result;
 }
 
 /**
@@ -116,7 +116,9 @@ int etcd_set(char *url, char *key, char *value) {
 	string value_result = (string) json_object_get_string(node_object, VALUE);
 	string key_result = (string) json_object_get_string(node_object, KEY);
     int return_value = !(strcmp(value_result, value) != 0 || strcmp(key_result, key) != 0);
+
     free(result);
     json_value_free(root_value);
+
 	return return_value;
 }
