@@ -1,6 +1,6 @@
 # Native Library
 
-[![Build Status](https://travis-ci.org/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
+[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()&nbsp;&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
 
 **Native Library** provides low-level optimization and productivity for C/C++ application.
@@ -89,6 +89,7 @@ $ ./native
 #### Mock Server
 To test third parties we need to setup a server to mock http request from them.
 By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
+Please keep this terminal running during your development.
 ```bash
 $ make server
 ```
@@ -96,7 +97,7 @@ $ make server
 #### Memory Leak
 Valgrind helps us in checking memory leak, you've just need to run
 ```
-$ make leak
+$ cmake . && make native_test && make leak
 ```
 It will tell you issues relate to memory.
 
@@ -131,6 +132,7 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
+
 - Namespace - Package
 ```java
 // Java

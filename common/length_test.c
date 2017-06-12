@@ -31,6 +31,8 @@ TEST (Common, LengthPointerChar) {
 	char *data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 	
+	ASSERT_EQUAL(11, length_pointer_char("Hello world"));
+	
 	data = "";
 	ASSERT_EQUAL(0, length_pointer_char(data));
 	
@@ -39,6 +41,11 @@ TEST (Common, LengthPointerChar) {
 	
 	data = NULL;
 	ASSERT_EQUAL(0, length_pointer_char(data));
+
+	//  Please use calloc instead of malloc because it is dangerous
+	//  data = malloc(10);
+	//  ASSERT_EQUAL(0, length_pointer_char(data));
+	//  free(data);
 }
 
 TEST (Common, LengthPointerPointerChar) {

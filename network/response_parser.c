@@ -23,12 +23,6 @@ int parse_uri(char *response, http_response *result);
 int parse_header(char *response, http_response *result, int index);
 
 /**
- * free memory of a pointer
- * @param pointer
- */
-void get_free(void **pointer);
-
-/**
  * parse http response to
  * @param response
  * @return http response

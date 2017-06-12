@@ -25,6 +25,6 @@ char *sha1_encode(unsigned char *target) {
 		sprintf(&mdString[ index * 2 ], "%02x", (unsigned int) digest[ index ]);
 	}
 	
-	char *result = string_copy(mdString);
+	char *result = strdup(mdString);
 	return result;
 }

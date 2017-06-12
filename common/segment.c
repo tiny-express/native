@@ -42,7 +42,7 @@ inline char *segment_pointer_char(char *target_param, int from, int to) {
         if (to >= length_target) {
                 length = length_target - from + 1;
         }
-	    char *pointer = calloc(length + 2, sizeof(char));
+	    char *pointer = calloc(length + 1, sizeof(char));
         memcpy(pointer, &target[from], length);
         free(target);
         pointer[length] = '\0';
