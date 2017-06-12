@@ -27,6 +27,7 @@
 #include "../string.h"
 #include "../common.h"
 #include "../type.h"
+#include <stdlib.h>
 
 #define P_LEN(TYPE); \
 inline int length_pointer_##TYPE(TYPE *target) {\
@@ -49,7 +50,9 @@ inline int length_pointer_pointer_##TYPE(TYPE **target) {\
 #define NUM_LEN(TYPE); \
 inline int length_##TYPE(TYPE target) {\
         char *result = string_from_##TYPE(target);\
-        return length_pointer_char(result);\
+        int len = length_pointer_char(result); \
+        free(result); \
+        return len; \
 }
 
 #ifdef __APPLE__
@@ -59,5 +62,5 @@ P_P_LEN(char);
 NUM_LEN(short);
 NUM_LEN(int);
 NUM_LEN(long);
-NUM_LEN(double)
-;NUM_LEN(float);
+NUM_LEN(double);
+NUM_LEN(float);

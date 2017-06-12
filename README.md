@@ -1,6 +1,6 @@
 # Native Library
 
-[![Build Status](https://travis-ci.com/foodtiny/native.svg?token=p64HTBqDyw43Lh5iDLxP&branch=master)](https://travis-ci.com/foodtiny/native)
+[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()&nbsp;&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
 
 **Native Library** provides low-level optimization and productivity for C/C++ application.
@@ -89,6 +89,7 @@ $ ./native
 #### Mock Server
 To test third parties we need to setup a server to mock http request from them.
 By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
+Please keep this terminal running during your development.
 ```bash
 $ make server
 ```
@@ -96,7 +97,7 @@ $ make server
 #### Memory Leak
 Valgrind helps us in checking memory leak, you've just need to run
 ```
-$ make leak
+$ cmake . && make native_test && make leak
 ```
 It will tell you issues relate to memory.
 
@@ -122,7 +123,7 @@ TEST(YourTestSuite, YourTestCase) {
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
 
-# Copyright & license
+### Copyright & license
 Copyright © 2014-2016 Food Tiny. All rights reserved, except as follows. Code is released under the Apache 2.0 license.
 You may obtain a duplicate copy of the same license, titled CC-BY-SA-4.0, at http://creativecommons.org/licenses/by/4.0/.
 Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/LICENSE.docs).
@@ -131,22 +132,50 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
 both programming languges but we still have some issues :
+
+- Namespace - Package
+```java
+// Java
+System.out.println("Java");
+```
+```cpp
+// C++
+System::out::println("C++");
+```
 - Array
+```java
+// Java
+byte[] byes = {};
+```
+```cpp
+// C++
+Array<byte> bytes = {};
+```
 - Interface
+```
+Comming soon
+```
 - Runtime
+```
+Comming soon
+```
 - Garbage Collection
+```
+Comming soon
+```
 
 #### Data Types
 All data types are implemented and ready to use in C++ Application
-- [x] char - Java & C++
-- [x] byte - Java & C++ (equivalent with `unsigned char`)
-- [x] string - C++ (equivalent with `char*`)
-- [x] short - Java & C++
-- [x] int - Java & C++
-- [x] long - Java & C++
-- [x] float - Java & C++
-- [x] double - Java & C++
-- [x] boolean - Java & C++ (equivalent with `bool`)
+- [x] char - Java.Lang.Character
+- [x] byte - Java.Lang.Byte (equivalent with `unsigned char`)
+- [x] string - Java.Lang.String (equivalent with `char*`, Java does not have data type `string`)
+- [x] short - Java.Lang.Short
+- [x] int - Java.Lang.Integer
+- [x] long - Java.Lang.Long
+- [x] float - Java.Lang.Float
+- [x] double - Java.Lang.Double
+- [x] boolean - Java.Lang.Boolean (equivalent with `bool`)
+- [ ] enum - Java.Lang.Enum
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map

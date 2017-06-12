@@ -34,10 +34,6 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST (JavaNet, URLConstructor) {
-	#ifdef __APPPLE__
-		return;
-	#endif
-
 	String urlString = "http://test.com:3000/file/test?param=1";
 	URL url(urlString);
 	ASSERT_STR("http", url.getProtocol().toString());

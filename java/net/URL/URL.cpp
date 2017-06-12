@@ -89,6 +89,7 @@ string URL::toString() const {
 		url += path;
 	}
 	
-	url = url + ( query.isEmpty() ? "" : "?" ) + query;
-	return url.toString();
+	url = url + (query.isEmpty() ? "" : "?" ) + query;
+	string result = strdup(url.toString());
+	return result;
 }
