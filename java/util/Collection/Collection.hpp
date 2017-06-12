@@ -43,38 +43,141 @@ namespace Java {
 		template <typename E>
 		class Collection : public virtual Iterable<E> {
 		public:
+			/**
+			 * Add a element to this collection
+			 * @param e
+			 * @return boolean
+			 */
 			virtual boolean add(E &e) = 0;
+
+			/**
+			 * Add a Collection element to this collection
+			 * @param c
+			 * @return boealn
+			 */
 			virtual boolean addAll(Collection<E> &c) = 0;
+
+			/**
+			 * Clear all element inside this collection
+			 * @return
+			 */
 			virtual void clear() = 0;
+
+			/**
+			 * Search for specified object, return true if it occurs
+			 * @param o
+			 * @return boolean
+			 */
 			virtual boolean contains(Object &o) const = 0;
-			 boolean containsAll(Collection<Object> &c) {
+
+			/**
+			 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
+			 * @param c
+			 * @return booealeam
+			 */
+			boolean containsAll(Collection<Object> &c) {
 				return true;
 			}
+
+			/**
+			 * Compare object <o> with this collection through hashCode(), return true if it is equal
+			 * @param o
+			 * @return boolean
+			 */
 			virtual boolean equals(Object &o) const = 0;
+
+			/**
+			 * Make a hashcode through this virtual address on memory
+			 * @return int
+			 */
 			virtual int hashCode() const = 0;
+
+			/**
+			 * A hash code value for this object.
+			 * @return int
+			 */
 			virtual boolean isEmpty() const = 0;
+
+			/**
+			 * Return an iterator at the start of this object
+			 * @return
+			 */
 			virtual Iterator<E> &iterator() const = 0;
-			Java::Util::Stream::Stream<E> &parallelStream() {
-			}
+
+			/**
+			 * Don't support this method
+			 * @return
+			 */
+//			Java::Util::Stream::Stream<E> &parallelStream();
+
+			/**
+			 * Remove a specified object inside this collection, return true if it exits and be removed also
+			 * @param o
+			 * @return boolean
+			 */
 			virtual boolean remove(Object &o) = 0;
+
+			/**
+			 * Remove a collection of object inside this collection, return true if it exits and be removed all also
+			 * @param c
+			 * @return
+			 */
 			virtual boolean removeAll(Collection<Object> &c) = 0;
-			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter) = 0;
-			virtual boolean retainAll(Collection<Object> &c) = 0;
+
+			/**
+			 * Don't support this method
+			 * @param filter
+			 * @return
+			 */
+//			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter) = 0;
+
+			/**
+			 * Don't support this method
+			 * @return
+			 */
+//			virtual boolean retainAll(Collection<Object> &c) = 0;
+
+			/**
+			 * Return number of element inside this collection
+			 * @return
+			 */
 			virtual int size() const  = 0;
-			Spliterator<E> &spliterator() {
-				Spliterator<E> spliterator;
-				return spliterator;
-			}
-			Java::Util::Stream::Stream<E> &stream() {
-				Java::Util::Stream::Stream<E> *stream = new Java::Util::Stream::Stream<E>();
-				return *stream;
-			}
-			Array<Object> &toArray() {
-				Array<Object> *array = new Array<Object>();
-				return *array;
-			}
-			template <typename T>
-			Array<T> toArray(Array<T> &a) const;
+
+			/**
+			 * Don't support this method
+			 * @return
+			 */
+//			Spliterator<E> &spliterator() {
+//				Spliterator<E> spliterator;
+//				return spliterator;
+//			}
+
+			/**
+		 	* Don't support this method
+		 	* @return
+		 	*/
+//			Java::Util::Stream::Stream<E> &stream() {
+//				Java::Util::Stream::Stream<E> *stream = new Java::Util::Stream::Stream<E>();
+//				return *stream;
+//			}
+
+			/**
+			 * Don't support this method
+			 * @return
+			 */
+//			Array<Object> &toArray() {
+//				Array<Object> *array = new Array<Object>();
+//				return *array;
+//			}
+
+			/**
+			 * Don't suppor this method
+			 * @param a
+			 * @return
+			 */
+//			template <typename T>
+//			Array<T> toArray(Array<T> &a) const;
+
 		};
 	}
 }

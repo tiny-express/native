@@ -205,10 +205,20 @@ namespace Java {
 			 */
 //			void wait(long timeout, int nanos);
 
+            /**
+             * Compare two object is equal or not
+             * @param target
+             * @return boolean
+             */
 			boolean operator==(const Object &target) const {
 				return this->equals(target);
 			}
 
+            /**
+             * Compare two object is not equal or not
+             * @param target
+             * @return boolean
+             */
 			boolean operator!=(const Object &target) const {
 				return !this->equals(target);
 			}
