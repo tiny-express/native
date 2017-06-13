@@ -36,18 +36,18 @@ namespace Java {
         template <typename E>
         class Deque: public virtual Queue<E> {
         public:
-            virtual boolean	add(E e) = 0;
-            virtual void addFirst(E e) = 0;
-            virtual void addLast(E e) = 0;
-            virtual boolean	contains(Object o) = 0;
-            virtual Iterator<E>	descendingIterator() = 0;
+            virtual boolean	add(E &e) = 0;
+            virtual void addFirst(E &e) = 0;
+            virtual void addLast(E &e) = 0;
+            virtual boolean	contains(Object &o) = 0;
+//            virtual Iterator<E>	descendingIterator() = 0;
             virtual E element() = 0;
             virtual E getFirst() = 0;
             virtual E getLast() = 0;
-            virtual Iterator<E>	iterator() = 0;
-            virtual boolean	offer(E e) = 0;
-            virtual boolean	offerFirst(E e) = 0;
-            virtual boolean	offerLast(E e) = 0;
+//            virtual Iterator<E>	iterator() = 0;
+            virtual boolean	offer(E &e) = 0;
+            virtual boolean	offerFirst(E &e) = 0;
+            virtual boolean	offerLast(E &e) = 0;
             virtual E peek() = 0;
             virtual E peekFirst() = 0;
             virtual E peekLast() = 0;
@@ -57,11 +57,13 @@ namespace Java {
             virtual E pop() = 0;
             virtual void push(E e) = 0;
             virtual E remove() = 0;
-            virtual boolean	remove(Object o) = 0;
+            virtual boolean	remove(Object &o) = 0;
             virtual E removeFirst() = 0;
-            virtual boolean	removeFirstOccurrence(Object o) = 0;
+//            virtual boolean removeFirstOccurrence(Object &o) = 0;
+            virtual boolean removeFirstOccurrence(E &e) = 0;
             virtual E removeLast() = 0;
-            virtual boolean	removeLastOccurrence(Object o) = 0;
+//            virtual boolean removeLastOccurrence(Object &o) = 0;
+            virtual boolean removeLastOccurrence(E &e) = 0;
             virtual int	size() = 0;
         };
     }

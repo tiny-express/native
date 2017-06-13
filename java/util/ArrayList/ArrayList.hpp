@@ -431,11 +431,11 @@ namespace Java {
 				return *spliterator;
 			}
 
-	//			List<E> &subList(int fromIndex, int toIndex) const {
-	//				// TODO
-	//				List<E> *list = new ArrayList<E>();
-	//				return *list;
-	//			}
+//            List<E> &subList(int fromIndex, int toIndex) const {
+//                // TODO
+//                List<E> *list = new ArrayList<E>();
+//                return *list;
+//            }
 
 			/**
 			 * Returns an array containing all of the elements in this
