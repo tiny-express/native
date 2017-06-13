@@ -118,28 +118,29 @@ TEST (String, ProcessSplit) {
 	ASSERT_STR("the", result[ 6 ]);
 	ASSERT_STR("lazy", result[ 7 ]);
 	ASSERT_STR("dog", result[ 8 ]);
-	free(result);
+    free_pointer_pointer_char(result);
 
-//	target = "Nothing to split";
-//	result = string_split(target, delimiter);
-//	ASSERT_STR("Nothing to split", result[ 0 ]);
-//	free(result);
-//
-//	char *url = "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
-//	char **urlComponents = string_split(url, "?");
-//	ASSERT_EQUAL(2, length_pointer_pointer_char(urlComponents));
-//	ASSERT_STR("/abc", urlComponents[ 0 ]);
-//	ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", urlComponents[ 1 ]);
-//
-//	target = "HTTP/1.1 200 OK\n"
-//		"Content-Type: application/json; charset=UTF-8\n"
-//		"Content-Length: 1498\r\n"
-//		"\r\n"
-//		"{\"took\":26,\"timed_out\":false,\"_shards\":{\"total\":2,\"successful\":2,\"failed\":0},\"hits\":{\"total\":1,\"max_score\":4.495634,\"hits\":[{\"_index\":\"db_foodtiny_test\",\"_type\":\"food_with_shop\",\"_id\":\"[\\\"ebc0aa50-3a26-11e7-9d38-8f725678c689\\\",\\\"05b05ff0-3a27-11e7-9d38-8f725678c689\\\"]\",\"_score\":4.495634,\"_source\":{\"food_discount\":0.0,\"food_name\":{\"en_EN\":\"Noodles with deep fried tofu, shrimp paste\",\"vi_VN\":\"Bún đậu mắm tôm\"},\"food_menu_name\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_shop_online_status\":false,\"food_shop_type\":{\"en_EN\":\"Diner\",\"vi_VN\":\"Quán Ăn\"},\"food_shop_id\":\"ebc0aa50-3a26-11e7-9d38-8f725678c689\",\"food_shop_rating\":4.0,\"food_id\":\"05b05ff0-3a27-11e7-9d38-8f725678c689\",\"food_image\":\"http://healthplus.vn/Images/Uploaded/Share/2013/08/25/e9020130521111500eP8Qt3fV2.jpg\",\"food_shop_logo\":\"http://thpt.daytot.vn/files/thpt/chi-pheo.jpg\",\"food_shop_phone_number\":\"0112\",\"food_ingredient_1\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_price\":45000.0,\"food_shop_address\":{\"en_EN\":\"818 Nguyen Kiem, Ward 3, Go Vap District, HCMC\",\"vi_VN\":\"818 Nguyễn Kiệm, Phường 3, Gò Vấp, Hồ Chí Minh\"},\"food_ingredient_2\":{\"en_EN\":\"tofu\",\"vi_VN\":\"Đậu hũ\"},\"food_ingredient_3\":{\"en_EN\":\"Shrimp paste\",\"vi_VN\":\"Mắm tôm\"},\"food_shop_name\":\"Bún đậu Thị Nở\",\"food_shop_start_time\":\"08:00\",\"location\":\"10.817053, 106.678834\",\"food_shop_delivery_status\":false,\"food_cooking_method\":{\"en_EN\":\"None\",\"vi_VN\":\"None\"},\"food_shop_quota_shipping\":100000.0,\"food_shop_finish_time\":\"21:00\"}}]}}";
-//
-//	result = string_split(target, "\r\n\r\n");
-//	ASSERT_EQUAL(1498, length_pointer_char(result[ 1 ]));
-//	free(result);
+	target = "Nothing to split";
+	result = string_split(target, delimiter);
+	ASSERT_STR("Nothing to split", result[ 0 ]);
+    free_pointer_pointer_char(result);
+
+	char *url = "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
+	char **url_components = string_split(url, "?");
+	ASSERT_EQUAL(2, length_pointer_pointer_char(url_components));
+	ASSERT_STR("/abc", url_components[ 0 ]);
+	ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", url_components[ 1 ]);
+    free_pointer_pointer_char(url_components);
+
+	target = "HTTP/1.1 200 OK\n"
+		"Content-Type: application/json; charset=UTF-8\n"
+		"Content-Length: 1498\r\n"
+		"\r\n"
+		"{\"took\":26,\"timed_out\":false,\"_shards\":{\"total\":2,\"successful\":2,\"failed\":0},\"hits\":{\"total\":1,\"max_score\":4.495634,\"hits\":[{\"_index\":\"db_foodtiny_test\",\"_type\":\"food_with_shop\",\"_id\":\"[\\\"ebc0aa50-3a26-11e7-9d38-8f725678c689\\\",\\\"05b05ff0-3a27-11e7-9d38-8f725678c689\\\"]\",\"_score\":4.495634,\"_source\":{\"food_discount\":0.0,\"food_name\":{\"en_EN\":\"Noodles with deep fried tofu, shrimp paste\",\"vi_VN\":\"Bún đậu mắm tôm\"},\"food_menu_name\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_shop_online_status\":false,\"food_shop_type\":{\"en_EN\":\"Diner\",\"vi_VN\":\"Quán Ăn\"},\"food_shop_id\":\"ebc0aa50-3a26-11e7-9d38-8f725678c689\",\"food_shop_rating\":4.0,\"food_id\":\"05b05ff0-3a27-11e7-9d38-8f725678c689\",\"food_image\":\"http://healthplus.vn/Images/Uploaded/Share/2013/08/25/e9020130521111500eP8Qt3fV2.jpg\",\"food_shop_logo\":\"http://thpt.daytot.vn/files/thpt/chi-pheo.jpg\",\"food_shop_phone_number\":\"0112\",\"food_ingredient_1\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_price\":45000.0,\"food_shop_address\":{\"en_EN\":\"818 Nguyen Kiem, Ward 3, Go Vap District, HCMC\",\"vi_VN\":\"818 Nguyễn Kiệm, Phường 3, Gò Vấp, Hồ Chí Minh\"},\"food_ingredient_2\":{\"en_EN\":\"tofu\",\"vi_VN\":\"Đậu hũ\"},\"food_ingredient_3\":{\"en_EN\":\"Shrimp paste\",\"vi_VN\":\"Mắm tôm\"},\"food_shop_name\":\"Bún đậu Thị Nở\",\"food_shop_start_time\":\"08:00\",\"location\":\"10.817053, 106.678834\",\"food_shop_delivery_status\":false,\"food_cooking_method\":{\"en_EN\":\"None\",\"vi_VN\":\"None\"},\"food_shop_quota_shipping\":100000.0,\"food_shop_finish_time\":\"21:00\"}}]}}";
+
+	result = string_split(target, "\r\n\r\n");
+	ASSERT_EQUAL(1498, length_pointer_char(result[ 1 ]));
+	free_pointer_pointer_char(result);
 }
 //
 //TEST (String, ProcessStartsWith) {

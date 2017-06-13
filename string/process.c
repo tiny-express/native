@@ -81,7 +81,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-        char **result = calloc(0, sizeof(char*));;
+        char **result = calloc(MAX_STRING_LENGTH, sizeof(char*));;
 		return result;
 	}
 	int length_target = length_pointer_char(target);
@@ -127,6 +127,22 @@ inline char **string_split(char *target, char *delimiter) {
 	free(segment);
 	free(data);
 	return result;
+}
+
+/**
+ * free char**
+ * @param char_array
+ */
+void  free_pointer_pointer_char(char** char_array) {
+    if (char_array == NULL) {
+        return;
+    }
+    int length = length_pointer_pointer_char(char_array);
+    register int index;
+    for (index = length - 1; index >= 0; index --) {
+        free(char_array[index]);
+    }
+    free(char_array);
 }
 
 /**
