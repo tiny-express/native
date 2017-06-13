@@ -83,7 +83,7 @@ public:
 		}
 		this->length = original.size();
 	}
-	~Array() {};
+	~Array() {}
 	int length;
 	ArrayIterator<E> begin() const {
 		return ArrayIterator<E>(this, 0);
