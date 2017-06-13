@@ -110,6 +110,7 @@ file(GLOB_RECURSE SOURCES_C
         server/*
         storage/*
         string/*
+        system/*
         thread/*
         type/*
         vendor/*
@@ -126,6 +127,7 @@ file(GLOB_RECURSE TESTS_C
         server/*_test.c
         storage/*_test.c
         string/*_test.c
+        system/*_test.c
         thread/*_test.c
         type/*_test.c
         vendor/*_test.c

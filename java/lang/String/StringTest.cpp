@@ -31,6 +31,7 @@ extern "C" {
 #include "../String/String.hpp"
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
@@ -61,22 +62,6 @@ TEST (JavaLang, StringDestructor) {
 	// Given memory allocation for textPointer - Cleanup memory success
 	String *textPointer = new String("Hello");
 	delete textPointer;
-}
-
-// This method is overrided from String
-// Operator == and != will be affected
-TEST (JavaLang, StringEquals) {
-	// Given two String objects with same value - Return they should equal
-	String stringEqual1 = "Hello World";
-	String stringEqual2 = "Hello World";
-	ASSERT_TRUE(instanceof<String>(stringEqual1));
-	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
-	ASSERT_TRUE(stringEqual1 == stringEqual2);
-
-	// Compare with another String object - Return they are not equal
-	String stringEqual3 = "Food Tiny";
-	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
-	ASSERT_TRUE(stringEqual1 != stringEqual3);
 }
 
 TEST (JavaLang, StringCharAt) {
@@ -127,7 +112,28 @@ TEST (JavaLang, StringEndsWith) {
 	ASSERT_TRUE(textPlus.endsWith(String_string));
 }
 
-// FIXME
+// This method is overrided from String
+// Operator == and != will be affected
+TEST (JavaLang, StringEquals) {
+	// Given two String objects with same value - Return they should equal
+	String stringEqual1 = "Hello World";
+	String stringEqual2 = "Hello World";
+	ASSERT_TRUE(instanceof<String>(stringEqual1));
+	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
+	ASSERT_TRUE(stringEqual1 == stringEqual2);
+	
+	// Compare with another String object - Return they are not equal
+	String stringEqual3 = "Food Tiny";
+	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
+	ASSERT_TRUE(stringEqual1 != stringEqual3);
+}
+
+TEST(JavaLang, StringGetBytes) {
+	String text = "Sample Text";
+	Array<byte> bytes = text.getBytes();
+	ASSERT_STR(text.toString(), bytes.toString());
+}
+
 TEST (JavaLang, StringIndexOf) {
 	String textPlus = "Hello Hello Hello ";
 

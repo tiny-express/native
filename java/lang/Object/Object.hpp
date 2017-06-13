@@ -35,6 +35,7 @@ extern "C" {
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <type_traits>
 
 // Define instanceof
 template<typename Base, typename T>
@@ -99,7 +100,14 @@ public:
 		return (E) original.at(index);
 	}
 	string toString() {
-		return (string ) "";
+		string result = strdup("");
+		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
+			for (char element : *this) {
+				result = string_append(result, element);
+			}
+			return result;
+		}
+		return (string ) "This type is not available for serialize";
 	}
 public:
 	E &operator[](const int index) {
