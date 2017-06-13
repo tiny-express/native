@@ -55,7 +55,7 @@ namespace Java {
 			 * @param c
 			 * @return boealn
 			 */
-			virtual boolean addAll(Collection<E> &c) = 0;
+//			virtual boolean addAll(Collection<E> &c) = 0;//FIXME: should to implement foreach first
 
 			/**
 			 * Clear all element inside this collection
@@ -68,16 +68,14 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean contains(Object &o) const = 0;
+			virtual boolean contains(E &e) const = 0;
 
 			/**
 			 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
 			 * @param c
 			 * @return booealeam
 			 */
-			boolean containsAll(Collection<Object> &c) {
-				return true;
-			}
+//			boolean containsAll(Collection<Object> &c);//FIXME: should to implement foreach first
 
 			/**
 			 * Compare object <o> with this collection through hashCode(), return true if it is equal
@@ -97,12 +95,6 @@ namespace Java {
 			 * @return int
 			 */
 			virtual boolean isEmpty() const = 0;
-
-			/**
-			 * Return an iterator at the start of this object
-			 * @return
-			 */
-			virtual Iterator<E> &iterator() const = 0;
 
 			/**
 			 * Don't support this method

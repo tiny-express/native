@@ -64,7 +64,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			virtual boolean addAll(Collection<E> &c) = 0;
+//			virtual boolean addAll(Collection<E> &c) = 0; //FIXME: should to implement foreach first
 
 			/**
 			 * Inserts all of the elements in the specified collection
@@ -73,7 +73,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			virtual boolean addAll(int index, Collection<E> &c) = 0;
+//			virtual boolean addAll(int index, Collection<E> &c) = 0; //FIXME: should to implement foreach first
 
 			/**
 			 * Removes all of the elements from this list (optional operation).
@@ -85,14 +85,14 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean contains(Object &o) const = 0;
+			virtual boolean contains(E &e) const = 0;
 
 			/**
 			 * Returns true if this list contains all of the elements of the specified collection.
 			 * @param c
 			 * @return
 			 */
-			virtual boolean containsAll(Collection<Object> &c) const = 0;
+//			virtual boolean containsAll(Collection<Object> &c) const = 0; //FIXME: implement foreach this first
 
 			/**
 			 * Compares the specified object with this list for equality.
@@ -120,7 +120,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int indexOf(Object &o) const = 0;
+			virtual int indexOf(E &e) const = 0;
 
 			/**
 			 * Returns true if this list contains no elements.
@@ -140,7 +140,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int lastIndexOf(Object &o) const = 0;
+			virtual int lastIndexOf(E &e) const = 0;
 
 			/**
 			 * Don't support this method
@@ -157,7 +157,7 @@ namespace Java {
 			 * @param index
 			 * @return E
 			 */
-			virtual E remove(int index) = 0;
+//			virtual E remove(int index) = 0; //Note: duplicate function, just implement at derived class
 
 			/**
 			 * Removes the first occurrence of the specified element from this list,
@@ -165,7 +165,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean remove(Object &o) = 0;
+//			virtual boolean remove(Object &o) = 0; //Note: duplicate function, just implement at derived class
 
 			/**
 			 * Removes from this list all of its elements that are contained in the specified collection
@@ -173,12 +173,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			virtual boolean removeAll(Collection<Object> &c) = 0;
-
-			/**
-			 * Don't support this method
-			 */
-//			virtual boolean retainAll(Collection<Object> &c)  = 0;
+//			virtual boolean removeAll(Collection<Object> &c) = 0; //FIXME: implement foreach this first
 
 			/**
 			 * Replaces the element at the specified position in this list with the specified element
@@ -187,7 +182,7 @@ namespace Java {
 			 * @param element
 			 * @return E
 			 */
-			virtual E set(int index, E &element) = 0;
+			virtual E set(int index, E &e) = 0;
 
 			/**
 			 * Returns the number of elements in this list.

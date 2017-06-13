@@ -207,7 +207,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			boolean contains(Object &o) const {
+			boolean contains(E &e) const {
 				// TODO
 				return true;
 			}
@@ -261,7 +261,7 @@ namespace Java {
 			 * @param o
 			 * @return int
 			 */
-			int indexOf(Object &o) const {
+			int indexOf(E &e) const {
 				return 0;
 			}
 
@@ -292,7 +292,7 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(Object &object) const {
+			int lastIndexOf(E &e) const {
 				// TODO
 				return 0;
 			}
