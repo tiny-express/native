@@ -32,111 +32,137 @@
 namespace Java {
 	namespace Util {
 		template <typename K, typename V>
-		class HashMap {
+		class HashMap
+//					public HashMap
+//					, public virtual Map
+//					, public virtual Cloneable
+//					, public virtual Serializable
+		{
 		private:
 			std::map<K, V> hashMap;
+
 		public:
-			HashMap();
-			~HashMap();
-			
-			V *get(K key);
-			void put(K key, V value);
-			boolean putAll(HashMap<K, V> map); //TODO: implement this later
-			boolean containsKey(K key);
-			boolean containsValue(const V value);
-			
-			void clear();
-			boolean remove(K key);
-			boolean remove(K key, const V value);
-			void removeAll();
-			
-			boolean isEmpty();
-			int size();
-		};
-		
-		template <typename K, typename V>
-		HashMap<K, V>::HashMap() {
-		};
-		
-		template <typename K, typename V>
-		HashMap<K, V>::~HashMap() {
-		}
-		
-		template <typename K, typename V>
-		V *HashMap<K, V>::get(K key) {
-			auto const it = hashMap.find(key);
-			
-			if (it == hashMap.end()) {
-				return NULL;
-			}
-			
-			return &hashMap[ key ];
-		}
-		
-		template <typename K, typename V>
-		void HashMap<K, V>::put(K key, V value) {
-			hashMap.insert(std::make_pair(key, value));
-		}
-		
-		template <typename K, typename V>
-		boolean HashMap<K, V>::containsKey(K key) {
-			if (NULL == get(key)) {
-				return false;
-			}
-			
-			return true;
-		}
-		
-		template <typename K, typename V>
-		boolean HashMap<K, V>::containsValue(const V value) {
-			for (auto const &ent1 : hashMap) {
-				if (ent1.second == value) {
-					return true;
+			HashMap(){}
+			~HashMap(){}
+
+		public:
+			/**
+			 * Removes all of the mappings from this map.
+			 * @param key
+			 * @return V
+			 */
+			V *get(K key) {
+				auto const it = hashMap.find(key);
+
+				if (it == hashMap.end()) {
+					return NULL;
 				}
+
+				return &hashMap[key];
 			}
-			return false;
-		}
-		
-		template <typename K, typename V>
-		void HashMap<K, V>::clear() {
-			hashMap.clear();
-		}
-		
-		template <typename K, typename V>
-		boolean HashMap<K, V>::remove(K key) {
-			if (NULL == get(key)) {
+
+			/**
+			 * Returns a shallow copy of this HashMap instance: the keys and values themselves are not cloned.
+			 * @param key
+			 * @param value
+			 */
+			void put(K key, V value) {
+				hashMap.insert(std::make_pair(key, value));
+			}
+
+			/**
+			 *C opies all of the mappings from the specified map to this map.
+			 * @param key
+			 * @return boolean
+			 */
+//			boolean putAll(HashMap<K, V> map); //FIXME: implement foreach this first
+
+			/**
+			 * Returns true if this map contains a mapping for the specified key
+			 * @param key
+			 * @return boolean
+			 */
+			boolean containsKey(K key) {
+				if (NULL == get(key)) {
+					return false;
+				}
+
+				return true;
+			}
+
+			/**
+			 * Returns true if this map maps one or more keys to the specified value.
+			 * @param value
+			 * @return
+			 */
+			boolean containsValue(const V value) {
+				for (auto const &ent1 : hashMap) {
+					if (ent1.second == value) {
+						return true;
+					}
+				}
 				return false;
 			}
-			
-			hashMap.erase(key);
-			return true;
-		}
-		
-		template <typename K, typename V>
-		boolean HashMap<K, V>::remove(K key, const V value) {
-			if (NULL == get(key) || !containsValue(value)) {
-				return false;
+
+			/**
+			 * Removes all of the mappings from this map.
+			 */
+			void clear() {
+				hashMap.clear();
 			}
-			
-			hashMap.erase(key);
-			return true;
-		}
-		
-		template <typename K, typename V>
-		void HashMap<K, V>::removeAll() {
-			hashMap.clear();
-		}
-		
-		template <typename K, typename V>
-		boolean HashMap<K, V>::isEmpty() {
-			return ( hashMap.size() == 0 );
-		}
-		
-		template <typename K, typename V>
-		int HashMap<K, V>::size() {
-			return hashMap.size();
-		}
-		
+
+			/**
+			 * Removes the mapping for the specified key from this map if present.
+			 * @param key
+			 * @return boolean
+			 */
+			boolean remove(K key) {
+				if (NULL == get(key)) {
+					return false;
+				}
+
+				hashMap.erase(key);
+				return true;
+			}
+
+			/**
+			 * Removes the mapping for the specified key & value from this map if present.
+			 * @param key
+			 * @param value
+			 * @return
+			 */
+			boolean remove(K key, const V value) {
+				if (NULL == get(key) || !containsValue(value)) {
+					return false;
+				}
+
+				hashMap.erase(key);
+				return true;
+			}
+
+			/**
+			 * Removes all of the mappings from this map.
+			 */
+			void removeAll() {
+				hashMap.clear();
+			}
+
+			/**
+			 * Returns true if this map contains no key-value mappings.
+			 * @return boolean
+			 */
+			boolean isEmpty() {
+				return ( hashMap.size() == 0 );
+			}
+
+			/**
+			 * Returns the number of key-value mappings in this map.
+			 * @return int
+			 */
+			int size() {
+				return hashMap.size();
+			}
+		};
 		
 	}
 }
