@@ -48,44 +48,26 @@ using namespace Java::Util::Function;
 namespace Java {
 	namespace Util {
 		template <typename E>
-		class ArrayList;
-		
-		template <typename E>
-		class ArrayListIterator {
-		public:
-			ArrayListIterator(const ArrayList<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
-
-			}
-
-			boolean operator!=(const ArrayListIterator<E> &other) const {
-				return _pos != other._pos;
-			}
-
-			int operator*() const {
-				return _p_vec->get(_pos);
-			}
-
-			const ArrayListIterator<E> &operator++() {
-				++_pos;
-				return *this;
-			}
-
-		private:
-			int _pos;
-			const ArrayList<E> *_p_vec;
-		};
-		template <typename E>
 		class ArrayList :
 			public virtual AbstractList<E>,
 			public virtual Serializable,
 			public virtual Cloneable,
-			// public virtual List<E>,
+//			 public virtual List<E>,
 			public virtual RandomAccess {
 		private:
 			std::vector<E> original;
+            typedef E* _iterator;
+            typedef const E* _const_iterator;
+
 
 		public:
-			/**
+
+            _iterator begin() { return &this->original[0]; };
+            _const_iterator begin() const { return &this->original[0]; };
+            _iterator end() { return &this->original[this->original.size()]; };
+            _const_iterator end() const { return &this->original[this->original.size()]; };
+
+            /**
 			 * Constructs an empty list
 			 */
 			ArrayList() {
@@ -115,22 +97,6 @@ namespace Java {
 			 */
 			~ArrayList() {
 
-			}
-
-		public:
-			/**
-			 * @return
-			 */
-			ArrayListIterator<E> begin() const {
-				return ArrayListIterator<E>(this, 0);
-			}
-
-			/**
-			 *
-			 * @return
-			 */
-			ArrayListIterator<E> end() const {
-				return original.end();
 			}
 
 		public:
