@@ -41,37 +41,180 @@ namespace Java {
 		class List;
 		
 		template <typename E>
-		class List : public virtual Collection<E>, public virtual Iterable<E> {
-		protected:
+		class List : public virtual Collection<E> {
+		public:
+			/**
+			 * Appends the specified element to the end of this list (optional operation).
+			 * @param e
+			 * @return boolean
+			 */
 			virtual boolean add(E &e) = 0;
+
+			/**
+			 * Inserts the specified element at the specified position in this list (optional operation).
+			 * @param index
+			 * @param element
+			 * @return
+			 */
 			virtual void add(int index, E &element) = 0;
+
+			/**
+			 * Appends all of the elements in the specified collection to the end of this list,
+			 * in the order that they are returned by the specified collection's iterator (optional operation).
+			 * @param c
+			 * @return boolean
+			 */
 			virtual boolean addAll(Collection<E> &c) = 0;
+
+			/**
+			 * Inserts all of the elements in the specified collection
+			 * into this list at the specified position (optional operation).
+			 * @param index
+			 * @param c
+			 * @return boolean
+			 */
 			virtual boolean addAll(int index, Collection<E> &c) = 0;
+
+			/**
+			 * Removes all of the elements from this list (optional operation).
+			 */
 			virtual void clear() = 0;
+
+			/**
+			 * Returns true if this list contains the specified element.
+			 * @param o
+			 * @return boolean
+			 */
 			virtual boolean contains(Object &o) const = 0;
+
+			/**
+			 * Returns true if this list contains all of the elements of the specified collection.
+			 * @param c
+			 * @return
+			 */
 			virtual boolean containsAll(Collection<Object> &c) const = 0;
-			virtual boolean equals(Object &o) const = 0;
-			virtual E &get(int index) const = 0;
+
+			/**
+			 * Compares the specified object with this list for equality.
+			 * @param o
+			 * @return
+			 */
+			virtual boolean equals(const Object &o) const = 0;
+
+			/**
+			 * Returns the element at the specified position in this list.
+			 * @param index
+			 * @return E
+			 */
+			virtual E get(int index) const = 0;
+
+			/**
+			 * Returns the hash code value for this list.
+			 * @return
+			 */
 			virtual int hashCode() const = 0;
+
+			/**
+			 * Returns the index of the first occurrence of the specified element in this list,
+			 * or -1 if this list does not contain the element.
+			 * @param o
+			 * @return
+			 */
 			virtual int indexOf(Object &o) const = 0;
+
+			/**
+			 * Returns true if this list contains no elements.
+			 * @return boolean
+			 */
 			virtual boolean isEmpty() const = 0;
-			virtual Iterator<E> &iterator() const = 0;
+
+			/**
+			 * Don't support this method
+			 * @return
+			 */
+//			virtual Iterator<E> &iterator() const = 0;
+
+			/**
+			 * Returns the index of the last occurrence of the specified element in this list,
+			 * or -1 if this list does not contain the element.
+			 * @param o
+			 * @return
+			 */
 			virtual int lastIndexOf(Object &o) const = 0;
-			virtual ListIterator<E> &listIterator() const = 0;
-			virtual ListIterator<E> &listIterator(int index) const = 0;
-			virtual E &remove(int index) = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual ListIterator<E> &listIterator() const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual ListIterator<E> &listIterator(int index) const = 0;
+
+			/**
+			 * Removes the element at the specified position in this list (optional operation).
+			 * @param index
+			 * @return E
+			 */
+			virtual E remove(int index) = 0;
+
+			/**
+			 * Removes the first occurrence of the specified element from this list,
+			 * if it is present (optional operation).
+			 * @param o
+			 * @return boolean
+			 */
 			virtual boolean remove(Object &o) = 0;
+
+			/**
+			 * Removes from this list all of its elements that are contained in the specified collection
+			 * (optional operation).
+			 * @param c
+			 * @return boolean
+			 */
 			virtual boolean removeAll(Collection<Object> &c) = 0;
-			virtual void replaceAll(Java::Util::Function::UnaryOperator<E> &unaryOperator) = 0;
-			virtual boolean retainAll(Collection<Object> &c)  = 0;
-			virtual E &set(int index, E &element) = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual boolean retainAll(Collection<Object> &c)  = 0;
+
+			/**
+			 * Replaces the element at the specified position in this list with the specified element
+			 * (optional operation).
+			 * @param index
+			 * @param element
+			 * @return E
+			 */
+			virtual E set(int index, E &element) = 0;
+
+			/**
+			 * Returns the number of elements in this list.
+			 * @return int
+			 */
 			virtual int size() const = 0;
-			virtual void sort(Comparator<E> &c) = 0;
-			virtual Spliterator<E> &spliterator() const  = 0;
-			virtual List<E> &subList(int fromIndex, int toIndex) const = 0;
-			virtual Array<Object> &toArray() const = 0;
-			template <typename T>
-			 Array<T> toArray(Array<T> &a) const;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual Spliterator<E> &spliterator() const  = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual List<E> &subList(int fromIndex, int toIndex) const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual Array<Object> &toArray() const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			template <typename T>
+//			Array<T> toArray(Array<T> &a) const;
 		};
 	}
 }

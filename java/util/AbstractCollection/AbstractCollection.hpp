@@ -36,6 +36,11 @@ namespace Java {
 	namespace Util {
 		template <typename E>
 		class AbstractCollection : public Object, public virtual Collection<E> {
+
+		protected:
+			AbstractCollection() {}
+			virtual ~AbstractCollection() {}
+
 		};
 	}
 }

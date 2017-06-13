@@ -84,7 +84,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean equals(Object &o) const = 0;
+			virtual boolean equals(const Object &o) const = 0;
 
 			/**
 			 * Make a hashcode through this virtual address on memory

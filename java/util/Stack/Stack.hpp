@@ -37,28 +37,28 @@ namespace Java {
     namespace Util {
         template <typename E>
         class Stack : public virtual Collection<E> {
-            private:
+
+		private:
 			std::stack<E> original;
-            public:
-			Stack() {
-			}
-	                ~Stack() {
-	                }
-            public:
-	
-	        /**
-		* Stack empty - check the Stack is empty or not
-		*
-		* @param original
-		*/
-	        bool empty() {
-		        int size = this->original.size();
-		        if (size != 0) {
-			        return TRUE;
-		        }
-		        return FALSE;
+
+		public:
+			Stack() {}
+			~Stack() {}
+
+		public:
+			/**
+			 * Tests if this stack is empty.
+			 * @return boolean
+			 */
+			boolean empty() {
+				int size = this->original.size();
+
+				if (size != 0) {
+					return TRUE;
+				}
+				return FALSE;
 	        }
-	
+
 	        /**
 		* Stack peek - return the top element
 		*
@@ -67,7 +67,7 @@ namespace Java {
 	        E peek() {
 		        return this->original.top();
 	        }
-	
+
 	        /**
 		* Stack pop - return the top element and remove it
 		*
@@ -78,7 +78,7 @@ namespace Java {
 		        this->original.pop();
 		        return result;
 	        }
-	
+
 	        /**
 		* Stack push - Push new element
 		*
@@ -87,7 +87,7 @@ namespace Java {
 	        E push(const E &item) {
 		        this->original.push(item);
 	        }
-	
+
 	        /**
 		* Stack search - search the object in Stack, return the 1-based position from the top, -1 if can not find the object in Stack
 		*
@@ -103,27 +103,27 @@ namespace Java {
 		        }
 		        return -1;
 	        }
-	
+
 	        boolean add(E &e) {
 		        this->original.push(e);
 	        }
-	
-	        /**
-   * Size of Stack
-   *
-   * @param original
-   */
+
+			/**
+		   	* Size of Stack
+		   	*
+		   	* @param original
+		   	*/
 	        int size() {
 		        return this->original.size();
 	        }
-	
+
 	        boolean addAll(Collection<E> &c) {
 	        }
 	        void clear() {
 	        }
 	        boolean contains(Object &o) const {
 	        }
-	        boolean equals(Object &o) const {
+	        boolean equals(const Object &o) const {
 	        }
 	        int hashCode() const {
 	        }
@@ -139,7 +139,7 @@ namespace Java {
 	        }
 	        boolean retainAll(Collection<Object> &c) {
 	        }
-	
+
 	        int size() const {
 		        return this->original.size();
 	        }

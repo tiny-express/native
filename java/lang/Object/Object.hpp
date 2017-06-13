@@ -157,8 +157,8 @@ namespace Java {
 			 * @param obj
 			 * @return
 			 */
-			virtual boolean equals(const Object &obj) const {
-				if (this->hashCode() == obj.hashCode()) {
+			virtual boolean equals(const Object &o) const {
+				if (this->hashCode() == o.hashCode()) {
 					return true;
 				}
 				return false;
@@ -173,7 +173,7 @@ namespace Java {
 			 * A hash code value for this object.
 			 * @return int
 			 */
-			int hashCode() const {
+            virtual int hashCode() const {
 				long element = (intptr_t) std::addressof(*this);
 				int elementHash = (int)(element ^ (element >> 32));
 
