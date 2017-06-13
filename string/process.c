@@ -549,12 +549,13 @@ int string_matches(char *target, char *regex) {
 	regex_t exp;
 	int convert = regcomp(&exp, regex, REG_EXTENDED);
 	if (convert != 0) {
+        regfree(&exp);
 		return FALSE;
 	}
 	if (regexec(&exp, target, 0, NULL, 0) == 0) {
 		regfree(&exp);
 		return TRUE;
 	}
-	
+    regfree(&exp);
 	return FALSE;
 }
