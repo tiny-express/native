@@ -83,9 +83,18 @@ namespace Java {
 					 public virtual RandomAccess {
 		private:
 			std::vector<E> original;
+            typedef E* _iterator;
+            typedef const E* _const_iterator;
+
 
 		public:
-			/**
+
+            _iterator begin() { return &this->original[0]; };
+            _const_iterator begin() const { return &this->original[0]; };
+            _iterator end() { return &this->original[this->original.size()]; };
+            _const_iterator end() const { return &this->original[this->original.size()]; };
+
+            /**
 			 * Constructs an empty list
 			 */
 			ArrayList() {
@@ -113,22 +122,6 @@ namespace Java {
 			 */
 			~ArrayList() {
 
-			}
-
-		public:
-			/**
-			 * @return
-			 */
-			ArrayListIterator<E> begin() const {
-				return ArrayListIterator<E>(this, 0);
-			}
-
-			/**
-			 *
-			 * @return
-			 */
-			ArrayListIterator<E> end() const {
-				return original.end();
 			}
 
 		public:
