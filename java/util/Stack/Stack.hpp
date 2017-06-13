@@ -36,7 +36,7 @@
 namespace Java {
     namespace Util {
         template <typename E>
-        class Stack : public virtual Collection<E> {
+        class Stack {
 
 		private:
 			std::stack<E> original;
@@ -51,99 +51,51 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean empty() {
-				int size = this->original.size();
-
-				if (size != 0) {
-					return TRUE;
+				if (this->original.size() == 0) {
+					return false;
 				}
-				return FALSE;
+				return true;
 	        }
 
 	        /**
-		* Stack peek - return the top element
-		*
-		* @param original
-		*/
-	        E peek() {
-		        return this->original.top();
-	        }
+	         *Looks at the object at the top of this stack without removing it from the stack.
+	         * @return E
+	         */
+			E peek() {
+				E e;
+				if (this->original.size() > 0) {
+					e = this->original.top();
+				}
+				return e;
+			}
 
-	        /**
-		* Stack pop - return the top element and remove it
-		*
-		* @param original
-		*/
+			/**
+			 * Removes the object at the top of this stack and returns that object as the value of this function.
+			 * @return E
+			 */
 	        E pop() {
-		        E result = this->original.top();
-		        this->original.pop();
-		        return result;
-	        }
-
-	        /**
-		* Stack push - Push new element
-		*
-		* @param original
-		*/
-	        E push(const E &item) {
-		        this->original.push(item);
-	        }
-
-	        /**
-		* Stack search - search the object in Stack, return the 1-based position from the top, -1 if can not find the object in Stack
-		*
-		* @param original
-		*/
-	        int search(const E &o) {
-		        int position = 0;
-		        int i;
-		        for (i = 0; i < this->original.size(); i++) {
-			        if (i == o) {
-				        return i;
-			        }
-		        }
-		        return -1;
-	        }
-
-	        boolean add(E &e) {
-		        this->original.push(e);
+		        E e;
+				if (this->original.size() > 0) {
+					e = this->original.top();
+					this->original.pop();
+				}
+				return e;
 	        }
 
 			/**
-		   	* Size of Stack
-		   	*
-		   	* @param original
-		   	*/
-	        int size() {
-		        return this->original.size();
+			 * Pushes an item onto the top of this stack
+			 * @param item
+			 * @return E
+			 */
+	        E push(const E &item) {
+		        this->original.push(item);
+				return item;
 	        }
 
-	        boolean addAll(Collection<E> &c) {
-	        }
-	        void clear() {
-	        }
-	        boolean contains(Object &o) const {
-	        }
-	        boolean equals(const Object &o) const {
-	        }
-	        int hashCode() const {
-	        }
-	        boolean isEmpty() const {
-	        }
-	        Iterator<E> &iterator() const {
-	        }
-	        boolean remove(Object &o) {
-	        }
-	        boolean removeAll(Collection<Object> &c) {
-	        }
-	        boolean removeIf(Java::Util::Function::Predicate<E> &filter) {
-	        }
-	        boolean retainAll(Collection<Object> &c) {
-	        }
-
-	        int size() const {
-		        return this->original.size();
-	        }
-
+			/**
+			 * Don't support this method
+			 */
+//	        int search(Object &o);
         };
     }
 }
