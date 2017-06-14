@@ -40,8 +40,8 @@ TEST (JavaLang, FloatConstructor) {
 	Float validInteger = 3;
 	ASSERT_EQUAL(3, validInteger.intValue());
 
-	Float *validIntegerPointer = Float::parseFloat("1.345");
-	ASSERT_EQUAL(1.3, validIntegerPointer->intValue());
+	Float validIntegerPointer = Float::parseFloat("1.345");
+	ASSERT_EQUAL(1.3, validIntegerPointer.intValue());
 }
 
 TEST (JavaLang, FloatComparision) {
@@ -101,6 +101,7 @@ TEST (JavaLang, FloatParseFloat) {
 		return;
 	#endif
 	// Given value for Float constructor and assign value - Return float
-	Float *validFloatPointer = Float::parseFloat("6");
-	ASSERT_EQUAL(6, validFloatPointer->floatValue());
+	Float validFloatPointer = Float::parseFloat("6");
+	float expect = 6;
+	ASSERT_EQUAL(expect, validFloatPointer.floatValue());
 }

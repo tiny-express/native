@@ -137,8 +137,8 @@ string Float::stringValue() const {
  * @param target
  * @return Float
  */
-Float *Float::parseFloat(String target) {
-	return new Float(string_to_int(target.toString()));
+Float Float::parseFloat(String target) {
+	return Float(string_to_int(target.toString()));
 }
 
 /**
