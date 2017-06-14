@@ -177,7 +177,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
 )
 
 # Check memory leak
@@ -189,7 +189,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
 )
 
 # Check memory leak
