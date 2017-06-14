@@ -95,3 +95,19 @@ TEST(Javalang, ArrayListFunction) {
     ASSERT_EQUAL(0 ,intArray.get(-1));
     ASSERT_EQUAL(5 ,intArray.get(intArray.size()));
 }
+
+TEST(JavaLang, ArrayListForEach) {
+    //
+    ArrayList<int> validArrayList;
+
+    int index;
+    for (index = 0; index < 100; ++index) {
+        validArrayList.add(index);
+    }
+
+    int expect = 0;
+    for (int element : validArrayList) {
+        ASSERT_EQUAL(expect, element);
+        expect++;
+    }
+}

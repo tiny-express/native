@@ -24,10 +24,108 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "../../Lang.hpp"
 
 namespace Java {
 	namespace Util {
+
+		template <typename K, typename V>
 		class Map {
+
+		protected:
+			Map() {};
+			~Map() {};
+
+		public:
+			/**
+			 * Removes all of the mappings from this map (optional operation).
+			 */
+			virtual void clear() = 0;
+
+			/**
+			 * Returns true if this map contains a mapping for the specified key.
+			 * @param key
+			 * @return boolean
+			 */
+			virtual boolean	containsKey(Object key) const = 0;
+
+			/**
+			 * Returns true if this map maps one or more keys to the specified value.
+			 * @param value
+			 * @return boolean
+			 */
+			virtual boolean	containsValue(Object value) const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			Set<Map.Entry<K,V>>	entrySet();
+
+			/**
+			 * Compares the specified object with this map for equality.
+			 * @param o
+			 * @return boolean
+			 */
+			virtual boolean	equals(Object o) const = 0;
+
+			/**
+			 * Returns the value to which the specified key is mapped,
+			 * or null if this map contains no mapping for the key.
+			 * @param key
+			 * @return
+			 */
+			virtual V get(Object key) const = 0;
+
+			/**
+			 * Returns the hash code value for this map.
+			 * @return int
+			 */
+			virtual int	hashCode() const = 0;
+
+			/**
+			 * Returns true if this map contains no key-value mappings.
+			 * @return boolean
+			 */
+			virtual boolean	isEmpty() const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			Set<K> keySet();
+
+			/**
+			 * Associates the specified value with the specified key in this map (optional operation).
+			 * @param key
+			 * @param value
+			 * @return V
+			 */
+			virtual V put(K key, V value) = 0;
+
+			/**
+			 * Copies all of the mappings from the specified map to this map (optional operation).
+			 * @param
+			 */
+			virtual void putAll(Map<K,V> m) = 0;
+
+			/**
+			 * Removes the mapping for a key from this map if it is present (optional operation).
+			 * @param key
+			 * @return V
+			 */
+			virtual V remove(Object key) = 0;
+
+			/**
+			 * Returns the number of key-value mappings in this map.
+			 * @return int
+			 */
+			virtual int	size() const = 0;
+
+			/**
+			 * Don't support this method
+			 */
+//			virtual Collection<V> values();
+
+
 		};
 	}
 }

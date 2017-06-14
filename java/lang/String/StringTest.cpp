@@ -125,22 +125,6 @@ TEST (JavaLang, StringEndsWith) {
 	ASSERT_TRUE(textPlus.endsWith(String_string));
 }
 
-// This method is overrided from String
-// Operator == and != will be affected
-TEST (JavaLang, StringEquals) {
-	// Given two String objects with same value - Return they should equal
-	String stringEqual1 = "Hello World";
-	String stringEqual2 = "Hello World";
-	ASSERT_TRUE(instanceof<String>(stringEqual1));
-	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
-	ASSERT_TRUE(stringEqual1 == stringEqual2);
-	
-	// Compare with another String object - Return they are not equal
-	String stringEqual3 = "Food Tiny";
-	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
-	ASSERT_TRUE(stringEqual1 != stringEqual3);
-}
-
 TEST(JavaLang, StringGetBytes) {
 	String text = "Sample Text";
 	Array<byte> bytes = text.getBytes();

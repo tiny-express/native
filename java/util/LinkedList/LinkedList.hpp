@@ -54,32 +54,40 @@ namespace Java {
 		};
 		
 		template <typename E>
-		class LinkedList {
-			//public AbstractSequentialList<E>,
-			//public virtual Serializable,
-			//public virtual Cloneable,
-			//public virtual Deque<E>,
-			//public virtual List<E> {
+		class LinkedList
+//						public AbstractSequentialList<E>
+//						, public virtual List<E>
+//						, public virtual Deque<E>
+//						, public virtual Cloneable
+//						, public virtual Serializable
+		{
 		private:
 			Node<E> *first = NULL;
 			Node<E> *last = NULL;
 			int nodeSize = 0;
 		
 		public:
-			LinkedList() {
-			}
-			LinkedList(Collection<E> c) {
-			}
-			~LinkedList() {
-			}
+			LinkedList() {}
+			LinkedList(Collection<E> c) {}
+			~LinkedList() {}
 		
 		public:
-			boolean add(E e) {
+			/**
+			 * Appends the specified element to the end of this list.
+			 * @param e
+			 * @return boolean
+			 */
+			boolean add(const E &e) {
 				linkLast(e);
 				return true;
 			}
-			
-			void add(int index, E element) {
+
+			/**
+			 * Inserts the specified element at the specified position in this list.
+			 * @param index
+			 * @param element
+			 */
+			void add(int index, const E &element) {
 				Node<E> *temp = node0(index);
 				
 				Node<E> *newNode = new Node<E>(temp->previous, element, temp);
@@ -87,25 +95,37 @@ namespace Java {
 			}
 			
 			/**
-			 * Don't support this method, use add(E e) instead because type casting problem
+			 * Don't support this method
 			 */
-			boolean addAll(Collection<E> c);
-			
+//			boolean addAll(Collection<E> c);
+
 			/**
-			 * Don't support this method, use add(E e) instead because type casting problem
+			 * Don't support this method
 			 */
-			boolean addAll(int index, Collection<E> c);
-			
-			void addFirst(E e) {
+//			boolean addAll(int index, Collection<E> c);
+
+
+			/**
+			 *Inserts the specified element at the beginning of this list.
+			 * @param e
+			 */
+			void addFirst(E &e) {
 				linkFirst(e);
 				return;
 			}
-			
-			void addLast(E e) {
+
+			/**
+			 * Appends the specified element to the end of this list.
+			 * @param e
+			 */
+			void addLast(E &e) {
 				linkLast(e);
 				return;
 			}
-			
+
+			/**
+			 * Removes all of the elements from this list.
+			 */
 			void clear() {
 				for (int i = 0; i < nodeSize; ++i) {
 					remove();
@@ -113,15 +133,16 @@ namespace Java {
 			}
 			
 			/**
-			 * Don't support this method because we should return pointer of <this> if not, it will removed at runtime
+			 * Don't support this method
 			 */
-			Object clone();
+//			Object clone();
+
 			/**
-			 * Don't support this method, use contains(E) instead
+			 * Returns true if this list contains the specified element.
+			 * @param e
+			 * @return boolean
 			 */
-			boolean contains(Object o);
-			
-			boolean contains(E e) {
+			boolean contains(E &e) const {
 				if (node1(e) == NULL) {
 					return false;
 				}
@@ -129,44 +150,57 @@ namespace Java {
 				return true;
 			}
 			
-			///Returns an iterator over the elements in this deque in reverse sequential order.
-			Iterator<E> descendingIterator() {
-				//FIXME: discuss about this method
-			}
-			
+			/**
+			 * Don't support this method
+			 */
+//			Iterator<E> descendingIterator();
+
+			/**
+			 * Retrieves, but does not remove, the head (first element) of this list.
+			 * @return E
+			 */
 			E element() {
 				return getFirst();
 			}
-			
+
+			/**
+			 * Returns the element at the specified position in this list.
+			 * @param index
+			 * @return E
+			 */
 			E get(int index) {
 				return node0(index)->element;
 			}
-			
+
+			/**
+			 * Returns the first element in this list.
+			 * @return E
+			 */
 			E getFirst() {
 				if (first == NULL) {
 					exception();
 				}
 				return first->element;
 			}
-			
+
+			/**
+			 * Returns the last element in this list.
+			 * @return E
+			 */
 			E getLast() {
 				if (last == NULL) {
 					exception();
 				}
 				return last->element;
 			}
-			
+
 			/**
-			 * Don't support this method - use indexOf(E) instead
-			 * */
-			int indexOf(Object o);
-			
-			/**
-			 * Don't support this method - use use lastIndexOf(E) instead
+			 * Returns the index of the first occurrence of the specified element in this list,
+			 * or -1 if this list does not contain the element.
+			 * @param e
+			 * @return int
 			 */
-			int lastIndexOf(Object o);
-			
-			int indexOf(E e) {
+			int indexOf(E &e) const {
 				Node<E> *temp = this->first;
 				for (int i = 0; i < nodeSize; ++i) {
 					if (temp->element == e) {
@@ -176,8 +210,14 @@ namespace Java {
 				}
 				return -1;
 			}
-			
-			int lastIndexOf(E e) {
+
+			/**
+			 * Returns the index of the last occurrence of the specified element in this list,
+			 * or -1 if this list does not contain the element.
+			 * @param e
+			 * @return int
+			 */
+			int lastIndexOf(E &e) const {
 				Node<E> *temp = last;
 				for (int i = 0; i < nodeSize; ++i) {
 					if (temp->element == e) {
@@ -189,78 +229,114 @@ namespace Java {
 			}
 			
 			/**
-			 *  Returns a list-iterator of the elements in this list (in proper sequence)
-			 *  starting at the specified position in the list.
-			 *
-			 * @param index
-			 * @return
+			 * Don't support this method
 			 */
-			ListIterator<E> listIterator(int index) {
-				//FIXME: Discuss about this method
-			}
-			
+//			ListIterator<E> listIterator(int index);
+
+			/**
+			 * Adds the specified element as the tail (last element) of this list.
+			 * @param e
+			 * @return boolean
+			 */
 			boolean offer(E e) {
 				linkLast(e);
 				return true;
 			}
-			
+
+			/**
+			 * Inserts the specified element at the front of this list.
+			 * @param e
+			 * @return boolean
+			 */
 			boolean offerFirst(E e) {
 				linkFirst(e);
 				return true;
 			}
-			
+
+			/**
+			 * Inserts the specified element at the end of this list.
+			 * @param e
+			 * @return boolean
+			 */
 			boolean offerLast(E e) {
 				linkLast(e);
 				return true;
 			}
-			
+
+			/**
+			 * Retrieves, but does not remove, the head (first element) of this list.
+			 * @return E
+			 */
 			E peek() {
 				return getFirst();
 			}
-			
+
 			/**
-			 * Don't support nullable
-			 * */
+			 * Retrieves, but does not remove, the first element of this list, or returns default E if this list is empty.
+			 * @return E
+			 */
 			E peekFirst() {
 				return getFirst();
 			}
 			
 			/**
-			 * Don't support nullable
+			 * Retrieves, but does not remove, the last element of this list, or returns default E if this list is empty.
+			 * @return E
 			 */
 			E peekLast() {
 				return getLast();
 			}
-			
+
+			/**
+			 * Retrieves and removes the head (first element) of this list.
+			 * @return
+			 */
 			E poll() {
 				return getFirst();
 			}
-			
+
+			/**
+			 * Retrieves and removes the first element of this list, or returns default E if this list is empty.
+			 * @return E
+			 */
 			E pollFirst() {
 				return unlinkFirst();
 			}
-			
+
+			/**
+			 * Retrieves and removes the last element of this list, or returns default E if this list is empty
+			 * @return E
+			 */
 			E pollLast() {
 				return unlinkLast();
 			}
-			
+
+			/**
+			 * Pops an element from the stack represented by this list.
+			 * @return
+			 */
 			E pop() {
 				return unlinkFirst();
 			}
-			
+
+			/**
+			 * Pushes an element onto the stack represented by this list.
+			 * @param e
+			 */
 			void push(E e) {
 				addFirst(e);
 			}
-			
+
+			/**
+			 * Retrieves and removes the head (first element) of this list.
+			 * @return E
+			 */
 			E remove() {
 				return unlinkFirst();
 			}
 			
 			/**
-			 * Remove an element at index position
-			 *
-			 * @param index
-			 * @return E
+			 * Don't support this method, use boolean remove(E e) instead
 			 */
 //			E remove(int index) {
 //				Node<E> *nodeIndex = node0(index);
@@ -312,27 +388,21 @@ namespace Java {
 			}
 			
 			/**
-			 * Remove first occurrence
-			 *
-			 * @param Object o
-			 * @return boolean
+			 * Don't support this method, use removeFirstOccurrence(E &e) instead
 			 */
-			boolean	removeFirstOccurrence(Object o);
+//			boolean	removeFirstOccurrence(Object o);
 			
 			/**
-			 * Remove last occurrence
-			 *
-			 * @param Object o
-			 * @return boolean
+			 * Don't support this method, use removeLastOccurrence(E &e) instead
 			 */
-			boolean	removeLastOccurrence(Object o);
+//			boolean	removeLastOccurrence(Object o);
 			
 			/**
-			 * Remove First
+			 * Removes the first occurrence of the specified element in this list (when traversing the list from head to tail).
 			 * @param e
 			 * @return
 			 */
-			boolean removeFirstOccurrence(E e) {
+			boolean removeFirstOccurrence(E &e) {
 				Node<E> *temp = first;
 				
 				for (int i = 0; i < nodeSize; ++i) {
@@ -343,8 +413,13 @@ namespace Java {
 				}
 				return false;
 			}
-			
-			boolean removeLastOccurrrence(E e) {
+
+			/**
+			 * Removes the last occurrence of the specified element in this list (when traversing the list from head to tail).
+			 * @param e
+			 * @return
+			 */
+			boolean removeLastOccurrrence(E &e) {
 				Node<E> *temp = last;
 				
 				for (int i = nodeSize; i > 0; ++i) {
@@ -355,14 +430,24 @@ namespace Java {
 				}
 				return false;
 			}
-			
-			E set(int index, E element) {
+
+			/**
+			 * Replaces the element at the specified position in this list with the specified element.
+			 * @param index
+			 * @param element
+			 * @return E
+			 */
+			E set(int index, E &element) {
 				Node<E> *temp = node0(index);
 				
 				temp->element = element;
 				return temp->element;
 			}
-			
+
+			/**
+			 * Returns the number of elements in this list.
+			 * @return
+			 */
 			int size() {
 				return this->nodeSize;
 			}
@@ -370,16 +455,24 @@ namespace Java {
 			Iterator<E> &iterator() {
 				//TODO
 			}
-			
+
 			/**
-			 * Don't support this method, use <E> toArray() instead
-			 * */
-			//Array<Object> toArray();
-			
-			Array<E> toArray() {
-				//TODO
+			 * Don't support this method
+			 */
+//			Array<Object> toArray();
+
+			/**
+			 * Don't support this method
+			 */
+//			Array<E> toArray(Array<E> a);
+
+			boolean equals(const Object &o) {
+
 			}
-		
+
+
+
+
 		private:
 			void linkFirst(E e) {
 				Node<E> *node = new Node<E>(NULL, e, first);
@@ -422,7 +515,7 @@ namespace Java {
 				return temp;
 			}
 			
-			Node<E> *node1(E e) {
+			Node<E> *node1(E e) const {
 				Node<E> *temp = this->first;
 				for (int i = 0; i < nodeSize; ++i) {
 					if (temp->element == e) {
