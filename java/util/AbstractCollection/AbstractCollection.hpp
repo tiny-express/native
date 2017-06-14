@@ -35,11 +35,12 @@ using namespace Java::Lang;
 namespace Java {
 	namespace Util {
 		template <typename E>
-		class AbstractCollection : public virtual Object, public virtual Collection<E> {
-		public:
-			string toString() const {
-				return (string) "";
-			}
+		class AbstractCollection : public Object, public virtual Collection<E> {
+
+		protected:
+			AbstractCollection() {}
+			virtual ~AbstractCollection() {}
+
 		};
 	}
 }

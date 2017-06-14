@@ -50,70 +50,70 @@ template <typename E> class ArrayIterator;
 
 template <typename E>
 class ArrayIterator {
-public:
-	ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
-	}
-	boolean operator!=(const ArrayIterator<E> &other) const {
-		return _pos != other._pos;
-	}
-	E operator*() const {
-		return _p_vec->get(_pos);
-	}
-	const ArrayIterator<E> &operator++() {
-		++_pos;
-		return *this;
-	}
-private:
-	int _pos;
-	const Array<E> *_p_vec;
-};
+	public:
+		ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
+		}
+		boolean operator!=(const ArrayIterator<E> &other) const {
+			return _pos != other._pos;
+		}
+		E operator*() const {
+			return _p_vec->get(_pos);
+		}
+		const ArrayIterator<E> &operator++() {
+			++_pos;
+			return *this;
+		}
+	private:
+		int _pos;
+		const Array<E> *_p_vec;
+	};
 
 template <typename E>
 class Array  {
-private:
-	std::vector<E> original;
-public:
-	Array() {
-	}
-	Array(std::initializer_list<E> list) {
-		typename std::initializer_list<E>::iterator it;
-		for (it = list.begin(); it != list.end(); ++it) {
-			original.push_back(*it);
-		}
-		this->length = original.size();
-	}
-	~Array() {};
-	int length;
-	ArrayIterator<E> begin() const {
-		return ArrayIterator<E>(this, 0);
-	}
-	ArrayIterator<E> end() const {
-		return ArrayIterator<E>(this, this->length);
-	}
-public:
-	void push(E e) {
-		original.push_back(e);
-		this->length = original.size();
-	}
-	E get(const int index) const {
-		return (E) original.at(index);
-	}
-	string toString() {
-		return (string ) "";
-	}
-public:
-	E &operator[](const int index) {
-		return this->original.at(index);
-	}
-	Array<E> operator+=(const std::initializer_list<E> &list) {
-		typename std::initializer_list<E>::iterator it;
-		for (it = list.begin(); it != list.end(); ++it) {
-			original.push_back(*it);
-		}
-		this->length = original.size();
-		return *this;
-	}
-};
+    private:
+        std::vector<E> original;
+    public:
+        Array() {
+        }
+        Array(std::initializer_list<E> list) {
+            typename std::initializer_list<E>::iterator it;
+            for (it = list.begin(); it != list.end(); ++it) {
+                original.push_back(*it);
+            }
+            this->length = original.size();
+        }
+        ~Array() {};
+        int length;
+        ArrayIterator<E> begin() const {
+            return ArrayIterator<E>(this, 0);
+        }
+        ArrayIterator<E> end() const {
+            return ArrayIterator<E>(this, this->length);
+        }
+    public:
+        void push(E e) {
+            original.push_back(e);
+            this->length = original.size();
+        }
+        E get(const int index) const {
+            return (E) original.at(index);
+        }
+        string toString() {
+            return (string ) "";
+        }
+    public:
+        E &operator[](const int index) {
+            return this->original.at(index);
+        }
+        Array<E> operator+=(const std::initializer_list<E> &list) {
+            typename std::initializer_list<E>::iterator it;
+            for (it = list.begin(); it != list.end(); ++it) {
+                original.push_back(*it);
+            }
+            this->length = original.size();
+            return *this;
+        }
+    };
 
 namespace Java {
 	namespace Lang {
@@ -131,46 +131,96 @@ namespace Java {
 		
 		class Object {
 		protected:
-			Object	&clone();
-			void	finalize();
+			/**
+			 * Return a copy of this Object
+			 * Not support this function yet
+			 * @return
+			 */
+//			Object &clone();
+
+			/**
+			 * Not support this function yet
+			 */
+//			void finalize();
+
 		public:
-			string toString();
-			boolean equals(const Object &obj) const {
-				if (this->hashCode() == obj.hashCode()) {
+			/**
+			 * A string representation of the object.
+			 * @return string
+			 */
+			virtual string toString() const {
+				return string_from_int(this->hashCode());
+			}
+
+			/**
+			 * Support compare two Object through hashCode()
+			 * @param obj
+			 * @return
+			 */
+			virtual boolean equals(const Object &o) const {
+				if (this->hashCode() == o.hashCode()) {
 					return true;
 				}
 				return false;
 			}
-			Class<Object> getClass() {
-				// This method is only available in Java
-				// should not be supported in this library
+
+			/**
+			 * Not support this function yet
+			 */
+//			Class<Object> getClass();
+
+			/**
+			 * A hash code value for this object.
+			 * @return int
+			 */
+            virtual int hashCode() const {
+				long element = (intptr_t) std::addressof(*this);
+				int elementHash = (int)(element ^ (element >> 32));
+
+				return elementHash;
 			}
-			int hashCode() const {
-				return (intptr_t) std::addressof(*this);
-			}
-			void notify() {
-				// TODO
-			}
-			void notifyAll() {
-				// TODO
-			}
-			string toString() const {
-				return (string) "";
-			}
-			void wait() {
-				// TODO
-			}
-			void wait(long timeout) {
-				// TODO
-			}
-			void wait(long timeout, int nanos) {
-				// TODO
-			}
+
+			/**
+			 * Not support this function yet
+			 */
+//			void notify()
+
+			/**
+			 * Not support this function yet
+			 */
+//			void notifyAll();
+
+			/**
+			 * Not support this function yet
+			 */
+//			void wait();
+
+			/**
+			 * Not support this function yet
+			 */
+//			void wait(long timeout);
+
+			/**
+			 * Not support this function yet
+			 */
+//			void wait(long timeout, int nanos);
+
+            /**
+             * Compare two object is equal or not
+             * @param target
+             * @return boolean
+             */
 			boolean operator==(const Object &target) const {
-				return this->equals( target);
+				return this->equals(target);
 			}
+
+            /**
+             * Compare two object is not equal or not
+             * @param target
+             * @return boolean
+             */
 			boolean operator!=(const Object &target) const {
-				return !this->equals( target);
+				return !this->equals(target);
 			}
 		};
 	}
