@@ -68,7 +68,7 @@ STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, 
  */
 char *string_from_char(char target) {
 	if (target == '\0') {
-		return (char *) "";
+		return strdup("");
 	}
 	char *result = calloc(2, sizeof(char));
 	result[ 0 ] = target;
