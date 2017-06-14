@@ -37,13 +37,12 @@ URL::URL() {
 }
 
 URL::URL(String spec) {
-	string url = spec.toString();
-	this->protocol = string_default(http_protocol(url));
-	this->host = string_default(http_hostname(url));
-	this->port = number_default(url_port(url));
-	this->query = string_default(http_query(url));
-	this->path = string_default(http_path(url));
-	free(url);
+	String url = spec.toString();
+	this->protocol = string_default(http_protocol(url.toString()));
+	this->host = string_default(http_hostname(url.toString()));
+	this->port = number_default(url_port(url.toString()));
+	this->query = string_default(http_query(url.toString()));
+	this->path = string_default(http_path(url.toString()));
 }
 
 URL::~URL() {}
@@ -90,6 +89,5 @@ string URL::toString() const {
 	}
 	
 	url = url + (query.isEmpty() ? "" : "?" ) + query;
-	string result = strdup(url.toString());
-	return result;
+	return url.toString();
 }

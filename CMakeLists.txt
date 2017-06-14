@@ -110,6 +110,7 @@ file(GLOB_RECURSE SOURCES_C
         server/*
         storage/*
         string/*
+        system/*
         thread/*
         type/*
         vendor/*
@@ -126,6 +127,7 @@ file(GLOB_RECURSE TESTS_C
         server/*_test.c
         storage/*_test.c
         string/*_test.c
+        system/*_test.c
         thread/*_test.c
         type/*_test.c
         vendor/*_test.c
@@ -175,7 +177,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
 )
 
 # Check memory leak
@@ -187,7 +189,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
 )
 
 # Check memory leak

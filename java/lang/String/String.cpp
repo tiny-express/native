@@ -36,7 +36,7 @@ String::String() {
 
 String::String(const_string target) {
 	this->original = strdup(target);
-	this->size = length_pointer_char((char*)target);
+	this->size = length_pointer_char((char *) target);
 }
 
 String::String(string target) {
@@ -124,9 +124,9 @@ int String::compareToIgnoreCase(String str) const {
  */
 String String::concat(String str) {
 	char *stringConcat = string_concat(this->original, str.original);
-    String result(stringConcat);
-    free(stringConcat);
-    return result;
+	String result(stringConcat);
+	free(stringConcat);
+	return result;
 }
 
 /**
@@ -136,7 +136,7 @@ String String::concat(String str) {
  * @return String
  */
 boolean String::contains(const CharSequence &str) {
-	return (string_index(this->original, str.toString(), 1) != NOT_FOUND);
+	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
 }
 
 /**
@@ -159,7 +159,7 @@ Array<byte> String::getBytes() const {
  * @return
  */
 boolean String::endsWith(const String &suffix) const {
-    return (string_endswith(this->original, suffix.original));
+	return ( string_endswith(this->original, suffix.original));
 }
 
 /**
@@ -176,7 +176,7 @@ String String::fromCharArray(Array<char> &chars) {
 	int index = 0;
 
 	for (char character : chars) {
-		str[index++] = character;
+		str[ index++ ] = character;
 	}
 	str[index] = '\0';
     String result = str;
@@ -359,7 +359,7 @@ int String::length() {
  */
 boolean String::matches(String regex) const {
 	int result = string_matches(this->original, regex.toString());
-	return result == TRUE ;
+	return result == TRUE;
 }
 
 /**
@@ -617,15 +617,15 @@ String String::operator+(const String &target2) {
  * @param target2
  */
 void String::operator+=(const String &target) {
-    char *result = string_concat(this->original, target.original);
-    free(this->original);
-    *this = result;
+	char *result = string_concat(this->original, target.original);
+	free(this->original);
+	*this = result;
 }
 
 void String::operator+=(const char &target) {
-    char *result = string_append(this->original, target);
-    free(this->original);
-    *this = result;
+	char *result = string_append(this->original, target);
+	free(this->original);
+	*this = result;
 }
 
 bool String::operator==(const String &target) const {

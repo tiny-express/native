@@ -64,8 +64,8 @@ Short::~Short() {
  * @param target
  * @return short
  */
-Short *Short::parseShort(String target) {
-	return new Short(string_to_short(target.toString()));
+Short Short::parseShort(String target) {
+	return Short(string_to_short(target.toString()));
 }
 
 /**
