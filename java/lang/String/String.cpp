@@ -478,7 +478,8 @@ Array<char> String::toCharArray() const {
  * @return string
  */
 string String::toString() const {
-	return strdup(this->original);
+	const string result = this->original;
+	return result;
 }
 
 /**

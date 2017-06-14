@@ -98,7 +98,7 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 file(GLOB_RECURSE HEADERS
         ./*.h
         library.hpp
-)
+        )
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
@@ -114,7 +114,7 @@ file(GLOB_RECURSE SOURCES_C
         type/*
         vendor/*
         validator/*
-)
+        )
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
@@ -130,7 +130,7 @@ file(GLOB_RECURSE TESTS_C
         type/*_test.c
         vendor/*_test.c
         validator/*_test.c
-)
+        )
 
 # Remove all test files within c files
 foreach (test_c_file ${TESTS_C})
@@ -140,12 +140,12 @@ endforeach ()
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
         java/**/*.cpp
-)
+        )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         java/**/*Test.cpp
-)
+        )
 
 # Remove all test files within cpp files
 foreach (test_cpp_file ${TESTS_CPP})
@@ -186,8 +186,8 @@ add_custom_target(
 
 # Check memory leak
 add_custom_target(
-    leak-c
-    COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+        leak-c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
 )
 
 # Check memory leak

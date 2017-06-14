@@ -81,13 +81,14 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-		return NULL;
+        char **result = calloc(MAX_STRING_LENGTH, sizeof(char*));;
+		return result;
 	}
 	int length_target = length_pointer_char(target);
 	int length_delimiter = length_pointer_char(delimiter);
 	int distance = length_target - length_delimiter + 1;
 	int length_item = 0;
-	char *segment = calloc(length_delimiter + 1, sizeof(char));
+	char *segment = calloc((size_t) length_delimiter + 1, sizeof(char));
 	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
 	register int count = 0, from = 0, to = 0;
 	// Compare delimiter per target segment
@@ -101,6 +102,7 @@ inline char **string_split(char *target, char *delimiter) {
 				// Append element to result
 				data[ count++ ] = item;
 				from = to + length_delimiter;
+
 			} else {
 				from += length_delimiter;
 			}
@@ -125,6 +127,22 @@ inline char **string_split(char *target, char *delimiter) {
 	free(segment);
 	free(data);
 	return result;
+}
+
+/**
+ * free char**
+ * @param char_array
+ */
+void  free_pointer_pointer_char(char** char_array) {
+    if (char_array == NULL) {
+        return;
+    }
+    int length = length_pointer_pointer_char(char_array);
+    register int index;
+    for (index = length - 1; index >= 0; index --) {
+        free(char_array[index]);
+    }
+    free(char_array);
 }
 
 /**
@@ -531,12 +549,13 @@ int string_matches(char *target, char *regex) {
 	regex_t exp;
 	int convert = regcomp(&exp, regex, REG_EXTENDED);
 	if (convert != 0) {
+        regfree(&exp);
 		return FALSE;
 	}
 	if (regexec(&exp, target, 0, NULL, 0) == 0) {
 		regfree(&exp);
 		return TRUE;
 	}
-	
+    regfree(&exp);
 	return FALSE;
 }
