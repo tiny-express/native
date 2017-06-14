@@ -35,6 +35,7 @@ extern "C" {
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <type_traits>
 
 // Define instanceof
 template<typename Base, typename T>
@@ -82,7 +83,7 @@ public:
 		}
 		this->length = original.size();
 	}
-	~Array() {};
+	~Array() {}
 	int length;
 	ArrayIterator<E> begin() const {
 		return ArrayIterator<E>(this, 0);
@@ -99,7 +100,16 @@ public:
 		return (E) original.at(index);
 	}
 	string toString() {
-		return (string ) "";
+		string result = strdup("");
+		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
+			for (char element : *this) {
+				char *result_holder = result;
+				result = string_append(result, element);
+				free(result_holder);
+			}
+			return result;
+		}
+		return (string ) "This type is not available for serialize";
 	}
 public:
 	E &operator[](const int index) {
