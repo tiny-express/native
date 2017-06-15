@@ -61,7 +61,7 @@ namespace Java {
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
-            String &clone();
+                        String clone();
 			virtual int compareTo(const String &o) const override;
 			int compareToIgnoreCase(String str) const;
 			String concat(String str);
@@ -123,6 +123,7 @@ namespace Java {
 			boolean operator>(const String &target) const;
 			boolean operator<=(const String &target) const;
 			boolean operator>=(const String &target) const;
+			String operator+(const string &target);
 			String operator+(const String &target);
 			String operator=(const String &target);
 			void operator+=(const String &target);

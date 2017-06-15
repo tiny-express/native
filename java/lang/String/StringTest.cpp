@@ -312,7 +312,7 @@ TEST (JavaLang, StringValueOf) {
 	ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
-TEST (JavaLang, StringOperatorPlus) {
+TEST (JavaLang, StringOperatorPlusStringObject) {
 	// Given two strings and concatenate them - Return string
 	String textPlus1 = "Hello ";
 	String textPlus2 = "World";
@@ -328,8 +328,20 @@ TEST (JavaLang, StringOperatorPlus) {
 	// Concat 2 Strings with valueOf(number) - Return string
 	textPlus1 = "Hello";
 	aNumber = 1;
-	textResult = textPlus1 + " Galaxy " + String::valueOf(aNumber);
+	textResult = textPlus1 + (string) " Galaxy " + String::valueOf(aNumber);
 	ASSERT_STR("Hello Galaxy 1", textResult.toString());
+}
+
+TEST (JavaLang, StringOperatorPlusStringDataType) {
+	string world = (string) " World";
+	String hello = "Hello";
+	hello += world;
+	ASSERT_STR("Hello World", hello.toString());
+	
+	String food = "Food";
+	string tiny = (string) " Tiny";
+	String foodTiny = food + tiny;
+	ASSERT_STR("Food Tiny", foodTiny.toString());
 }
 
 TEST (JavaLang, StringOperatorEquals) {
@@ -379,7 +391,7 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 	String stringTest1 = "Hello";
 	String stringTest2 = " Galaxy";
 	
-	stringTest += stringTest1 + stringTest2 + "!";
+	stringTest += stringTest1 + stringTest2 + (string) "!";
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
 	
 	// Check a String concat with valueOf(number) use "+=" operator

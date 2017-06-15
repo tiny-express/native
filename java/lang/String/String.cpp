@@ -75,9 +75,8 @@ String::~String() {
  *
  * @return String
  */
-String &String::clone() {
-	String *result = new String(this->original);
-	return *result;
+String String::clone() {
+	return strdup(this->original);
 }
 
 /**
@@ -596,7 +595,18 @@ String String::valueOf(double target) {
 }
 
 /**
- * Operator plus
+ * Operator plus for string
+ *
+ * @param target2
+ * @return String
+ */
+String String::operator+(const string &target2) {
+	String result = string_concat(this->original, target2);
+	return result;
+}
+
+/**
+ * Operator plus for String
  *
  * @param target2
  * @return String
