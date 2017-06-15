@@ -88,7 +88,7 @@ namespace Java {
 			 * Make a hashcode through this virtual address on memory
 			 * @return int
 			 */
-			virtual int hashCode() const = 0;
+			virtual long hashCode() const = 0;
 
 			/**
 			 * A hash code value for this object.
