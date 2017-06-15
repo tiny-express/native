@@ -50,7 +50,7 @@ namespace Java {
 			double doubleValue() const;
 			string toString() const;
 			
-			static Double *parseDouble(String target);
+			static Double parseDouble(String target);
 		
 		public:
 			Double operator+(const Double &target);

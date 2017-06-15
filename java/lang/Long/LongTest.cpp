@@ -108,6 +108,6 @@ TEST (JavaLang, LongParseLong) {
 		return;
 	#endif
 	// Given value for Long constructor and assign value - Return long
-	Long *validLongPointer = Long::parseLong("6");
-	ASSERT_EQUAL(6, validLongPointer->longValue());
+	Long validLongPointer = Long::parseLong("6");
+	ASSERT_EQUAL(6, validLongPointer.longValue());
 }

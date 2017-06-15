@@ -36,7 +36,7 @@ namespace Java {
 		template <typename T>
 		class Iterable {
 		public:
-			virtual Iterator<T> &iterator() const = 0;
+			//virtual Iterator<T> &iterator() const = 0;
 		};
 	}
 }

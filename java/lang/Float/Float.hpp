@@ -53,7 +53,7 @@ namespace Java {
 			double doubleValue() const;
 			string toString() const;
 			
-			static Float *parseFloat(String target);
+			static Float parseFloat(String target);
 		
 		public:
 			Float operator+(const Float &target);

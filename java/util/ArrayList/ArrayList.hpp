@@ -74,22 +74,30 @@ namespace Java {
 			int _pos;
 			const ArrayList<E> *_p_vec;
 		};
-		template <typename E>
-		class ArrayList :
-			public virtual AbstractList<E>,
-			public virtual Serializable,
-			public virtual Cloneable,
-			// public virtual List<E>,
-			public virtual RandomAccess {
+
+	template <typename E>
+	class ArrayList: public AbstractList<E>,
+					 public virtual List<E>,
+					 public virtual Serializable,
+					 public virtual Cloneable,
+					 public virtual RandomAccess {
 		private:
 			std::vector<E> original;
+            typedef E* _iterator;
+            typedef const E* _const_iterator;
+
 
 		public:
-			/**
+
+            _iterator begin() { return &this->original[0]; };
+            _const_iterator begin() const { return &this->original[0]; };
+            _iterator end() { return &this->original[this->original.size()]; };
+            _const_iterator end() const { return &this->original[this->original.size()]; };
+
+            /**
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-
 			}
 
 			/**
@@ -98,7 +106,6 @@ namespace Java {
 			 * @param c
 			 */
 			ArrayList(Collection<E> &c) {
-
 			}
 
 			/**
@@ -115,22 +122,6 @@ namespace Java {
 			 */
 			~ArrayList() {
 
-			}
-
-		public:
-			/**
-			 * @return
-			 */
-			ArrayListIterator<E> begin() const {
-				return ArrayListIterator<E>(this, 0);
-			}
-
-			/**
-			 *
-			 * @return
-			 */
-			ArrayListIterator<E> end() const {
-				return original.end();
 			}
 
 		public:
@@ -197,7 +188,7 @@ namespace Java {
 			 *
 			 * @return Object
 			 */
-			Object &clone() {
+			Object clone() {
 				// TODO
 				Object c;
 				return c;
@@ -209,10 +200,19 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			boolean contains(Object &o) const {
+			boolean contains(E &e) const {
 				// TODO
 				return true;
 			}
+
+            /**
+             *
+             * @param c
+             * @return
+             */
+            virtual boolean containsAll(Collection<Object> &c) const {
+                //TODO
+            }
 
 			/**
 			 * Increases the capacity of this ArrayList instance, if necessary,
@@ -241,10 +241,10 @@ namespace Java {
 			 * @param index
 			 * @return
 			 */
-			E &get(int index) const {
+			E get(int index) const {
 				if (index < 0) return (E&)this->original.at(0);
 				if (index > this->size() - 1) return (E&)this->original.at(this->size() - 1);
-				return (E&) original.at(index);
+				return original.at(index);
 			}
 
 			/**
@@ -254,7 +254,7 @@ namespace Java {
 			 * @param o
 			 * @return int
 			 */
-			int indexOf(Object &o) const {
+			int indexOf(E &e) const {
 				return 0;
 			}
 
@@ -285,7 +285,7 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(Object &object) const {
+			int lastIndexOf(E &e) const {
 				// TODO
 				return 0;
 			}
@@ -296,7 +296,6 @@ namespace Java {
 			 * @return Address of ListIterator<E>
 			 */
 			ListIterator<E> &listIterator() const {
-				// TODO
 				ListIterator<E> *listIterator = new ListIterator<E>();
 				return *listIterator;
 			}
@@ -309,7 +308,6 @@ namespace Java {
 			 * @return Address of ListIterator<E>
 			 */
 			ListIterator<E> &listIterator(int index) const {
-				// TODO
 				ListIterator<E> *listIterator = new ListIterator<E>();
 				return *listIterator;
 			}
@@ -320,10 +318,11 @@ namespace Java {
 			 * @param index
 			 * @return Address of element
 			 */
-			E &remove(int index) {
-				// TODO
-				E *e = new E();
-				return *e;
+			E remove(int index) {
+				if (index < 0 || index >= this->size()) {
+					//FIXME: throw exception
+				}
+
 			}
 
 			/**
@@ -391,10 +390,9 @@ namespace Java {
 			 * @param element
 			 * @return Adress of E
 			 */
-			E &set(int index, E &element) {
-				// TODO
-				E *e = new E();
-				return *e;
+			E set(int index, E &element) {
+				E e;
+                return e;
 			}
 
 			/**
@@ -426,11 +424,11 @@ namespace Java {
 				return *spliterator;
 			}
 
-//			List<E> &subList(int fromIndex, int toIndex) const {
-//				// TODO
-//				List<E> *list = new ArrayList<E>();
-//				return *list;
-//			}
+//            List<E> &subList(int fromIndex, int toIndex) const {
+//                // TODO
+//                List<E> *list = new ArrayList<E>();
+//                return *list;
+//            }
 
 			/**
 			 * Returns an array containing all of the elements in this
@@ -438,7 +436,7 @@ namespace Java {
 			 *
 			 * @return Array<Object>
 			 */
-			Array<Object>	&toArray() {
+			Array<Object> toArray() {
 				// TODO
 				Array<Object> objects;
 				return objects;
@@ -476,7 +474,15 @@ namespace Java {
 				return (string) "" ;
 			}
 
-		protected:
+            int hashCode() const {
+                //TODO
+            }
+
+             boolean equals(const Object &o) const {
+                //TODO
+             }
+
+        protected:
 			/**
 			 * Removes from this list all of the elements
 			 * whose index is between fromIndex, inclusive, and toIndex, exclusive.
@@ -489,9 +495,8 @@ namespace Java {
 				// TODO
 			}
 		};
-	
-		template <typename E>
 
+		template <typename E>
 		class SubList : public virtual AbstractList<E> {
 		private:
 			AbstractList<E> l;
