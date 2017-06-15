@@ -1,5 +1,6 @@
 # git rm --cached `git ls-files -i --exclude-from=.gitignore`
 .DS_Store
+bin
 /.idea
 /CMakeFiles
 /cmake-build-debug
