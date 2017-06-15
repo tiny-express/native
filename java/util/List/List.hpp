@@ -112,7 +112,7 @@ namespace Java {
 			 * Returns the hash code value for this list.
 			 * @return
 			 */
-			virtual int hashCode() const = 0;
+			virtual long hashCode() const = 0;
 
 			/**
 			 * Returns the index of the first occurrence of the specified element in this list,

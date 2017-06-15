@@ -74,16 +74,21 @@ string URL::toString() const {
 	String path = this->path;
 	String query = this->query;
 	
-	String url = protocol + "://" + host;
+	String url = protocol + (string) "://" + host;
 	
 	if (port > -1) {
-		url = url + ":" + String::valueOf(port);
+		url = url + (string) ":" + String::valueOf(port);
 	}
+	return url.toString();
 	
 	if (path != "/") {
 		url += path;
 	}
 	
-	url = url + (query.isEmpty() ? "" : "?" ) + query;
+	if (!query.isEmpty()) {
+		url += "?";
+	}
+	
+	url += query;
 	return url.toString();
 }
