@@ -33,18 +33,11 @@ namespace Java {
     namespace Util {
         template <typename E>
         class AbstractSequentialList : public AbstractList<E> {
-        protected:
-            AbstractSequentialList();
-            ~AbstractSequentialList();
 
-        public:
-            virtual void add(int index, E element);
-            virtual boolean addAll(int index, Collection<E> c);
-            virtual E get(int index);
-            virtual Iterator<E> interactor();
-            // ListIterator<E>	listIterator(int index);
-            virtual E remove(int index);
-            virtual E set(int index, E element);
+        protected:
+            AbstractSequentialList() {}
+            virtual ~AbstractSequentialList() {}
+
         };
     }
 }

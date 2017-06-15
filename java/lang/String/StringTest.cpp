@@ -39,17 +39,17 @@ TEST (JavaLang, StringConstructor) {
 	// Give NULL for String constructor
 	String nullString;
 	ASSERT_STR("", nullString.toString());
+
+	// Given empty value for String constructor and assign value - Return string
+	String simpleString;
+	simpleString = (string) "Hello world";
+	ASSERT_STR("Hello world", simpleString.toString());
 	
 	// Given empty value for String constructor and assign value - Return string
 	String emptyString;
 	emptyString = (string) "Hello world";
 	ASSERT_STR("Hello world", emptyString.toString());
-	
-	// Given byte array for String constructor - Return string
-	Array<byte> bytes = { 65, 66, 67 };
-	String byteString = bytes;
-	ASSERT_STR("ABC", byteString.toString());
-	
+
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
 	ASSERT_STR("Hello world", normalString.toString());
@@ -58,10 +58,24 @@ TEST (JavaLang, StringConstructor) {
 TEST (JavaLang, StringDestructor) {
 	// Given data type declaration - Destructor will be called by system
 	String text = "";
-	
+
 	// Given memory allocation for textPointer - Cleanup memory success
 	String *textPointer = new String("Hello");
 	delete textPointer;
+}
+
+TEST (JavaLang, StringEquals) {
+	// Given two String objects with same value - Return they should equal
+	String stringEqual1 = "Hello World";
+	String stringEqual2 = "Hello World";
+	ASSERT_TRUE(instanceof<String>(stringEqual1));
+	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
+	ASSERT_TRUE(stringEqual1 == stringEqual2);
+
+	// Compare with another String object - Return they are not equal
+	String stringEqual3 = "Food Tiny";
+	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
+	ASSERT_TRUE(stringEqual1 != stringEqual3);
 }
 
 TEST (JavaLang, StringCharAt) {
@@ -69,11 +83,11 @@ TEST (JavaLang, StringCharAt) {
 	String text = "Hello World";
 	char positionIsExist = text.charAt(0);
 	ASSERT_TRUE('H' == positionIsExist);
-	
+
 	// Given a string - Return negative position is not exist
 	char negativePositionIsNotExist = text.charAt(-1);
 	ASSERT_TRUE(negativePositionIsNotExist == '\0');
-	
+
 	// Given a string - Return out of scope position is not exist
 	char outOfScopePositionIsNotExist = text.charAt(1000);
 	ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
@@ -85,7 +99,7 @@ TEST (JavaLang, StringConcat) {
 	String textConcat2 = "World";
 	String concatenationResult = textConcat1.concat(textConcat2);
 	ASSERT_STR("Hello World", concatenationResult.toString());
-	
+
 	// Given three strings - Return concatenation result
 	String textConcat0 = "Food Tiny ";
 	ASSERT_STR("Food Tiny Hello World", ( textConcat0 + textConcat1 + textConcat2 ).toString());
@@ -97,10 +111,9 @@ TEST (JavaLang, StringContains) {
 	String validString = "a valid string to test";
 	String subString = "valid string";
 	String invalidSubString = "text";
-	
+
 	//Test true with correct substring inside
 	ASSERT_TRUE(validString.contains(subString));
-	
 	//Test with with invalid substring inside
 	ASSERT_FALSE(validString.contains(invalidSubString));
 }
@@ -110,22 +123,6 @@ TEST (JavaLang, StringEndsWith) {
 	String textPlus = "Hello welcom to VietNam";
 	String String_string = "VietNam";
 	ASSERT_TRUE(textPlus.endsWith(String_string));
-}
-
-// This method is overrided from String
-// Operator == and != will be affected
-TEST (JavaLang, StringEquals) {
-	// Given two String objects with same value - Return they should equal
-	String stringEqual1 = "Hello World";
-	String stringEqual2 = "Hello World";
-	ASSERT_TRUE(instanceof<String>(stringEqual1));
-	ASSERT_TRUE(stringEqual1.equals(stringEqual2));
-	ASSERT_TRUE(stringEqual1 == stringEqual2);
-	
-	// Compare with another String object - Return they are not equal
-	String stringEqual3 = "Food Tiny";
-	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
-	ASSERT_TRUE(stringEqual1 != stringEqual3);
 }
 
 TEST(JavaLang, StringGetBytes) {
@@ -151,11 +148,12 @@ TEST (JavaLang, StringIndexOf) {
 	
 	result1 = textPlus.lastIndexOf('H', 2);
 	ASSERT_EQUAL(0, result1);
-	
+
 	// Given validString check lastIndexOf(string)
 	String validString = "awesome keyword inside this awesome string";
 	String subString = "awesome";
 	String wrongString = "some thing";
+
 	
 	// Test true first character of subString appear last in validString is position 28th
 	ASSERT_EQUAL(28, validString.lastIndexOf(subString));
@@ -166,7 +164,7 @@ TEST (JavaLang, StringIndexOf) {
 	
 	// Test false with wrong subString
 	ASSERT_EQUAL(NOT_FOUND, validString.lastIndexOf(wrongString));
-	
+
 	// Given validString2 check lastIndexOf(string, fromIndex)
 	String validString2 = "sometimes you win, sometimes you learn";
 	String subString2 = "sometimes";
@@ -177,7 +175,7 @@ TEST (JavaLang, StringIndexOf) {
 	
 	// Test false by -1, with correct subString2 but out of range that subString2's appeared in validString2
 	ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, 20));
-	
+
 	// Test false by -1, with wrongString2 that's not appeared inside validString2
 	ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
 }
@@ -312,7 +310,7 @@ TEST (JavaLang, StringValueOf) {
 	ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
-TEST (JavaLang, StringOperatorPlus) {
+TEST (JavaLang, StringOperatorPlusStringObject) {
 	// Given two strings and concatenate them - Return string
 	String textPlus1 = "Hello ";
 	String textPlus2 = "World";
@@ -328,8 +326,20 @@ TEST (JavaLang, StringOperatorPlus) {
 	// Concat 2 Strings with valueOf(number) - Return string
 	textPlus1 = "Hello";
 	aNumber = 1;
-	textResult = textPlus1 + " Galaxy " + String::valueOf(aNumber);
+	textResult = textPlus1 + (string) " Galaxy " + String::valueOf(aNumber);
 	ASSERT_STR("Hello Galaxy 1", textResult.toString());
+}
+
+TEST (JavaLang, StringOperatorPlusStringDataType) {
+	string world = (string) " World";
+	String hello = "Hello";
+	hello += world;
+	ASSERT_STR("Hello World", hello.toString());
+	
+	String food = "Food";
+	string tiny = (string) " Tiny";
+	String foodTiny = food + tiny;
+	ASSERT_STR("Food Tiny", foodTiny.toString());
 }
 
 TEST (JavaLang, StringOperatorEquals) {
@@ -379,7 +389,7 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 	String stringTest1 = "Hello";
 	String stringTest2 = " Galaxy";
 	
-	stringTest += stringTest1 + stringTest2 + "!";
+	stringTest += stringTest1 + stringTest2 + (string) "!";
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
 	
 	// Check a String concat with valueOf(number) use "+=" operator
@@ -428,3 +438,4 @@ TEST(JavaLang, StringClone) {
 	cloneEmptyString = validString.clone();
 	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
 }
+

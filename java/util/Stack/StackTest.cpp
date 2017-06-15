@@ -33,98 +33,98 @@ extern "C" {
 
 using namespace Java::Util;
 
-TEST(JavaUtil, StackConstructor) {
-    // Give a not empty Stack
-    Stack<int> stack;
-    int temp = 123;
-    stack.add(temp);
-    
-    // Check size
-    ASSERT_EQUAL(1, stack.size());
-}
-
-TEST(JavaLang, StackDestructor) {
-    
-}
-
-
-TEST(JavaLang, StackEmpty) {
-    // Give a emtpy Stack
-    Stack<int> emptyStack;
-    ASSERT_FALSE(emptyStack.empty());
-
-    // Give a not empty Stack
-    Stack<int> notEmptyStack;
-    int temp = 123;
-    notEmptyStack.add(temp);
-    ASSERT_TRUE(notEmptyStack.empty());
-}
-
-
-TEST(JavaLang, StackPeek) {
-    
-    Stack<int> peekStack;
-    
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
-    // Push elements to Stack
-    peekStack.push(push1);
-    peekStack.push(push2);
-    peekStack.push(push3);
-    
-    // Return the top element without removing it
-    int result = peekStack.peek();
-    ASSERT_EQUAL(3, result);
-}
-
-
-TEST(JavaLang, StackPop) {
-    Stack<int> popStack;
-    
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
-    // Push elements to Stack
-    popStack.push(push1);
-    popStack.push(push2);
-    popStack.push(push3);
-    
-    // Return the top element and remove it
-    int result = popStack.pop();
-    ASSERT_EQUAL(3, result);
-}
-
-TEST(JavaLang, StackPush) {
-    Stack<int> pushStack;
-
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
-    // Push elements to Stack
-    pushStack.push(push1);
-    pushStack.push(push2);
-    pushStack.push(push3);
-    // Check size
-    ASSERT_EQUAL(3, pushStack.size());
-}
-
-TEST(JavaLang, StackSearch) {
-    Stack<int> searchStack;
-
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
-    // Push elements to Stack
-    searchStack.push(push1);
-    searchStack.push(push2);
-    searchStack.push(push3);
-    
-    // Check size
-    ASSERT_EQUAL(2, searchStack.search(2));
-    ASSERT_EQUAL(-1, searchStack.search(5));
-}
+//TEST(JavaUtil, StackConstructor) {
+//    // Give a not empty Stack
+//    Stack<int> stack;
+//    int temp = 123;
+//    stack.add(temp);
+//
+//    // Check size
+//    ASSERT_EQUAL(1, stack.size());
+//}
+//
+//TEST(JavaLang, StackDestructor) {
+//
+//}
+//
+//
+//TEST(JavaLang, StackEmpty) {
+//    // Give a emtpy Stack
+//    Stack<int> emptyStack;
+//    ASSERT_FALSE(emptyStack.empty());
+//
+//    // Give a not empty Stack
+//    Stack<int> notEmptyStack;
+//    int temp = 123;
+//    notEmptyStack.add(temp);
+//    ASSERT_TRUE(notEmptyStack.empty());
+//}
+//
+//
+//TEST(JavaLang, StackPeek) {
+//
+//    Stack<int> peekStack;
+//
+//    int push1 = 1;
+//    int push2 = 2;
+//    int push3 = 3;
+//
+//    // Push elements to Stack
+//    peekStack.push(push1);
+//    peekStack.push(push2);
+//    peekStack.push(push3);
+//
+//    // Return the top element without removing it
+//    int result = peekStack.peek();
+//    ASSERT_EQUAL(3, result);
+//}
+//
+//
+//TEST(JavaLang, StackPop) {
+//    Stack<int> popStack;
+//
+//    int push1 = 1;
+//    int push2 = 2;
+//    int push3 = 3;
+//
+//    // Push elements to Stack
+//    popStack.push(push1);
+//    popStack.push(push2);
+//    popStack.push(push3);
+//
+//    // Return the top element and remove it
+//    int result = popStack.pop();
+//    ASSERT_EQUAL(3, result);
+//}
+//
+//TEST(JavaLang, StackPush) {
+//    Stack<int> pushStack;
+//
+//    int push1 = 1;
+//    int push2 = 2;
+//    int push3 = 3;
+//
+//    // Push elements to Stack
+//    pushStack.push(push1);
+//    pushStack.push(push2);
+//    pushStack.push(push3);
+//    // Check size
+//    ASSERT_EQUAL(3, pushStack.size());
+//}
+//
+//TEST(JavaLang, StackSearch) {
+//    Stack<int> searchStack;
+//
+//    int push1 = 1;
+//    int push2 = 2;
+//    int push3 = 3;
+//
+//    // Push elements to Stack
+//    searchStack.push(push1);
+//    searchStack.push(push2);
+//    searchStack.push(push3);
+//
+//    // Check size
+//    ASSERT_EQUAL(2, searchStack.search(2));
+//    ASSERT_EQUAL(-1, searchStack.search(5));
+//}
