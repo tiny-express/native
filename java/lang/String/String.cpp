@@ -45,7 +45,7 @@ String::String(string target) {
 }
 
 String::String(Array<char> &chars) {
-    free(original);
+        free(original);
 	this->original = String::fromCharArray(chars).toString();
 	this->size = chars.length;
 }
@@ -628,14 +628,13 @@ String String::operator+(const String &target2) {
  */
 void String::operator+=(const String &target) {
 	char *result = string_concat(this->original, target.original);
-	free(this->original);
 	*this = result;
 }
 
 void String::operator+=(const char &target) {
 	char *result = string_append(this->original, target);
-	free(this->original);
 	*this = result;
+	free(result);
 }
 
 bool String::operator==(const String &target) const {
