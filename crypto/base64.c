@@ -18,7 +18,7 @@ base64_encode(const unsigned char *src, size_t len) {
 	unsigned char tmp[3];
 	
 	// alloc
-	enc = (char *) malloc(0);
+	enc = (char *) calloc(0, sizeof(char));
 	if (NULL == enc) {
 		return NULL;
 	}
@@ -105,7 +105,7 @@ base64_decode_ex(const char *src, size_t len, size_t *decsize) {
 	unsigned char tmp[4];
 	
 	// alloc
-	dec = (unsigned char *) malloc(0);
+	dec = (unsigned char *) calloc(0, sizeof(unsigned char));
 	if (NULL == dec) {
 		return NULL;
 	}

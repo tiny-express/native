@@ -612,7 +612,7 @@ typedef unsigned char mz_validate_uint64[sizeof(mz_uint64) == 8 ? 1 : -1];
   #define MZ_FREE(x) x, ((void)0)
   #define MZ_REALLOC(p, x) NULL
 #else
-#define MZ_MALLOC(x) malloc(x)
+#define MZ_MALLOC(x) calloc(x, sizeof(char))
 #define MZ_FREE(x) free(x)
 #define MZ_REALLOC(p, x) realloc(p, x)
 #endif

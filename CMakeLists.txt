@@ -199,7 +199,7 @@ add_custom_target(
 )
 
 # Add make installation - install to Unix system
-install(TARGETS ${PROJECT_NAME}_static DESTINATION lib CONFIGURATIONS Release)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native)

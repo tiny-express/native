@@ -36,15 +36,12 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-		
-		class String;
-		
 		class String :
 			public virtual Serializable,
 			public virtual Comparable<String>,
 			public virtual CharSequence {
 		private:
-			string original;
+			string original = strdup("");
 			int size = 0;
 
 		public:

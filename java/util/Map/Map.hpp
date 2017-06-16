@@ -28,8 +28,6 @@
 
 namespace Java {
 	namespace Util {
-		template <class K, class V>
-		class Map;
 		
 		template <class K, class V>
 		class Map {
@@ -107,13 +105,13 @@ namespace Java {
 			 * @param value
 			 * @return V
 			 */
-			V put(K, V);
+			V put(K, V) {}
 
 			/**
 			 * Copies all of the mappings from the specified map to this map (optional operation).
 			 * @param
 			 */
-			void putAll(Map<K,V>);
+			void putAll(Map<K,V>&);
 
 			/**
 			 * Removes the mapping for a key from this map if it is present (optional operation).

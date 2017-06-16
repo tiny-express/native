@@ -160,7 +160,7 @@ void assert_dbl_far(double exp, double real, double tol, const char *caller, int
 #define ASSERT_DBL_FAR(exp, real) assert_dbl_far(exp, real, 1e-4, __FILE__, __LINE__)
 #define ASSERT_DBL_FAR_TOL(exp, real, tol) assert_dbl_far(exp, real, tol, __FILE__, __LINE__)
 
-#ifdef CTEST_MAIN
+#ifdef TESTING
 
 #include <setjmp.h>
 #include <stdarg.h>
@@ -416,7 +416,7 @@ static void *find_symbol(struct ctest *test, const char *fname)
 }
 #endif
 
-#ifdef CTEST_SEGFAULT
+#ifdef TESTING
 #ifndef __APPLE__
 #include <signal.h>
 #endif

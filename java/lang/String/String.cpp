@@ -30,7 +30,7 @@
 using namespace Java::Lang;
 
 String::String() {
-	this->original = strdup("\0");
+	this->original = strdup("");
 	this->size = 0;
 }
 

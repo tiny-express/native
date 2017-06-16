@@ -1,5 +1,8 @@
 #include <native/library.hpp>
-
-int main() {
-
+#include "Person.hpp"
+int main()
+{
+	Person person;
+	person.setFirstName("First name");
+	return 0;
 }
