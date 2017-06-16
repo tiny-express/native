@@ -190,7 +190,10 @@ String String::fromCharArray(Array<char> &chars) {
  * @return int
  */
 int String::indexOf(int ch) const {
-	return string_index(this->original, string_from_char((char) ch), 1);
+	string holdPointer = string_from_char((char) ch);
+	int result = string_index(this->original, holdPointer, 1);
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -374,6 +377,8 @@ String String::replace(char oldChar, char newChar) const {
     string holdPointer = string_replace(this->original, oldString, newString);
     String result = holdPointer;
     free(holdPointer);
+    free(oldString);
+    free(newString);
     return result;
 }
 
@@ -490,7 +495,10 @@ string String::toString() const {
  * @return String
  */
 String String::toLowerCase() const {
-	return string_lower(this->original);
+    string hodlPointer = string_lower(this->original);
+	String result = hodlPointer;
+    free(hodlPointer);
+    return result;
 }
 
 /**
@@ -499,7 +507,10 @@ String String::toLowerCase() const {
  * @return String
  */
 String String::toUpperCase() {
-	return string_upper(this->original);
+    string hodlPointer = string_upper(this->original);
+    String result = hodlPointer;
+    free(hodlPointer);
+    return result;
 }
 
 /**
@@ -508,7 +519,10 @@ String String::toUpperCase() {
  * @return String
  */
 String String::trim() {
-	return string_trim(this->original);
+    string hodlPointer = string_trim(this->original);
+    String result = hodlPointer;
+    free(hodlPointer);
+    return result;
 }
 
 /**
@@ -531,7 +545,10 @@ String String::valueOf(boolean target) {
  * @return String
  */
 String String::valueOf(char target) {
-	return string_from_char(target);
+    string holdPointer = string_from_char(target);
+	String result = holdPointer;
+    free(holdPointer);
+    return result;
 }
 
 /**
@@ -554,7 +571,10 @@ String String::valueOf(string target) {
  * @return String
  */
 String String::valueOf(short target) {
-	return string_from_short(target);
+    string holdPointer = string_from_short(target);
+    String result = holdPointer;
+    free(holdPointer);
+    return result;
 }
 
 /**
@@ -577,7 +597,10 @@ String String::valueOf(int target) {
  * @return String
  */
 String String::valueOf(long target) {
-	return string_from_long(target);
+    string holdPointer = string_from_long(target);
+    String result = holdPointer;
+    free(holdPointer);
+    return result;
 }
 
 /**
@@ -587,7 +610,10 @@ String String::valueOf(long target) {
  * @return String
  */
 String String::valueOf(float target) {
-	return string_from_float(target);
+    string holdPointer = string_from_float(target);
+    String result = holdPointer;
+    free(holdPointer);
+    return result;
 }
 
 /**
@@ -597,7 +623,10 @@ String String::valueOf(float target) {
  * @return String
  */
 String String::valueOf(double target) {
-	return string_from_double(target);
+    string holdPointer = string_from_double(target);
+    String result = holdPointer;
+    free(holdPointer);
+    return result;
 }
 
 /**

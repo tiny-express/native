@@ -102,6 +102,7 @@ public:
 	E get(const int index) const {
 		return (E) original.at(index);
 	}
+
 	string toString() {
 		string result = strdup("");
 		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
@@ -114,6 +115,7 @@ public:
 		}
 		return (string ) "This type is not available for serialize";
 	}
+
 public:
 	E &operator[](const int index) {
 		return this->original.at(index);
