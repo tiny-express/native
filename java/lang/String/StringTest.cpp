@@ -44,7 +44,7 @@ TEST (JavaLang, StringConstructor) {
 	String simpleString;
 	simpleString = (string) "Hello world";
 	ASSERT_STR("Hello world", simpleString.toString());
-	
+
 	// Given empty value for String constructor and assign value - Return string
 	String emptyString;
 	emptyString = (string) "Hello world";
@@ -390,17 +390,16 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 	String stringTest = "";
 	String stringTest1 = "Hello";
 	String stringTest2 = " Galaxy";
-
 	stringTest += stringTest1 + stringTest2 + (string) "!";
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
 
 	// Check a String concat with valueOf(number) use "+=" operator
 	int number = 1;
-	stringTest = "Hello ";
+    stringTest = "Hello ";
 	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 1", stringTest.toString());
 
-	// Check a String concat with valueOf(number) use "+=" operator
+//	// Check a String concat with valueOf(number) use "+=" operator
 	number = 1;
 	stringTest += "" + String::valueOf(number);
 	ASSERT_STR("Hello 11", stringTest.toString());
@@ -410,7 +409,7 @@ TEST (JavaLang, StringMemoryCheck) {
 	// Test create object String with validString and change data of validString
 	string validString = strdup("foodtiny");
 	String stringTest = validString;
-	validString = strdup("");
+    free(validString);
 
 	int expect = 8;
 	int result = stringTest.length();
@@ -440,4 +439,3 @@ TEST(JavaLang, StringClone) {
 	cloneEmptyString = validString.clone();
 	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
 }
-

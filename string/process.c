@@ -348,10 +348,10 @@ inline char *string_append(char *target, char subtarget) {
  */
 inline char *string_concat(char *target, char *subtarget) {
 	if (is_empty(target)) {
-		return subtarget;
+		return strdup(subtarget);
 	}
 	if (is_empty(subtarget)) {
-		return target;
+		return strdup(target);
 	}
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);

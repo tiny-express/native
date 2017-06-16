@@ -56,7 +56,7 @@ TEST(JavaLang, ArrayListDestructor) {
     ASSERT_NULL(intArray);
 }
 
-TEST(JavaLang, ArrayListsize) {
+TEST(JavaLang, ArrayListSize) {
     // Test size of empty Array
     ArrayList<int> emptyArray;
     int expect = 0;

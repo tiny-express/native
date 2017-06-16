@@ -74,7 +74,10 @@ String::~String() {
  * @return String
  */
 String String::clone() {
-	return strdup(this->original);
+    string holdPointer = strdup(this->original);
+    String result = holdPointer;
+	free(holdPointer);
+    return result;
 }
 
 /**
@@ -660,15 +663,17 @@ String String::operator+(const String &target) {
  *
  * @param target2
  */
-String& String::operator+=(const String &target) {
+String String::operator+=(const String &target) {
 	char *result = string_concat(this->original, target.original);
 	*this = result;
+    free(result);
     return *this;
 }
 
-String& String::operator+=(const char &target) {
+String String::operator+=(const char &target) {
 	char *result = string_append(this->original, target);
 	*this = result;
+    free(result);
     return *this;
 }
 
@@ -680,7 +685,9 @@ bool String::operator==(const String &target) const {
 }
 
 String String::operator=(const String &target) {
-    free(this->original);
+    if (this->original != NULL) {
+        free(this->original);
+    }
 	this->original = strdup(target.original);
 	this->size = target.size;
 	return *this;
