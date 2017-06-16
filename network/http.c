@@ -175,9 +175,6 @@ char *http_path(char *url) {
 		return strdup("/");
 	}
 	int end_pos = len_url;
-#ifndef __linux__
-    register
-#endif
 	int index;
 	for (index = begin_pos; index < len_url; index++) {
 		if (url[ index ] == ':' || url[ index ] == '?') {
