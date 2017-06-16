@@ -226,10 +226,10 @@ TEST (JavaLang, StringReplace) {
 	String result = textPlus.replace('e', 'i');
 	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
 	
-	String String_string1 = "Hello";
-	String String_string2 = "Phuoc";
-	result = textPlus.replaceAll(String_string1, String_string2);
-	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+//	String String_string1 = "Hello";
+//	String String_string2 = "Phuoc";
+//	result = textPlus.replaceAll(String_string1, String_string2);
+//	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
 }
 
 TEST (JavaLang, StringSplit) {

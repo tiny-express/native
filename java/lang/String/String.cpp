@@ -564,6 +564,9 @@ String String::valueOf(short target) {
  * @return String
  */
 String String::valueOf(int target) {
+    string holdPointer = string_from_int(target);
+    String result = holdPointer;
+    free(holdPointer);
 	return string_from_int(target);
 }
 
@@ -603,8 +606,10 @@ String String::valueOf(double target) {
  * @param target2
  * @return String
  */
-String String::operator+(const string &target2) {
-	String result = string_concat(this->original, target2);
+String String::operator+(const string &target) {
+    string holdPointer = string_concat(this->original, target);
+    String result = holdPointer;
+    free(holdPointer);
 	return result;
 }
 
@@ -614,8 +619,8 @@ String String::operator+(const string &target2) {
  * @param target2
  * @return String
  */
-String String::operator+(const String &target2) {
-    string holdPointer = string_concat(this->original, target2.original);
+String String::operator+(const String &target) {
+    string holdPointer = string_concat(this->original, target.original);
 	String result = holdPointer;
     free(holdPointer);
 	return result;
@@ -626,15 +631,16 @@ String String::operator+(const String &target2) {
  *
  * @param target2
  */
-void String::operator+=(const String &target) {
+String& String::operator+=(const String &target) {
 	char *result = string_concat(this->original, target.original);
 	*this = result;
+    return *this;
 }
 
-void String::operator+=(const char &target) {
+String& String::operator+=(const char &target) {
 	char *result = string_append(this->original, target);
 	*this = result;
-	free(result);
+    return *this;
 }
 
 bool String::operator==(const String &target) const {
