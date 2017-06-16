@@ -45,11 +45,12 @@ namespace Java {
 			int port;
 			String path;
 			String query;
-
 		public:
 			URL();
 			URL(String spec);
+			URL(const URL &target);
 			~URL();
+
 		public:
 			String getHost();
 			String getPath();

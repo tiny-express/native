@@ -41,7 +41,7 @@ TEST (JavaNet, URLConstructor) {
 	ASSERT_EQUAL(3000, url.getPort());
 	ASSERT_STR("/file/test", url.getPath().toString());
 	ASSERT_STR("param=1", url.getQuery().toString());
-	
+
 	String urlString2 = "http://";
 	URL url2(urlString2);
 	ASSERT_STR("", url2.getProtocol().toString());
@@ -59,7 +59,9 @@ TEST (JavaNet, URLToString) {
 	ASSERT_EQUAL(80, url.getPort());
 	ASSERT_STR("http", url.getProtocol().toString());
 	ASSERT_STR("param=1", url.getQuery().toString());
-	ASSERT_STR("http://test.com:80/file/test?param=1", url.toString());
+    string result = url.toString();
+	ASSERT_STR("http://test.com:80/file/test?param=1", result);
+    free(result);
 
 //
 //	// URL without port

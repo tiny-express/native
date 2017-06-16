@@ -124,8 +124,8 @@ namespace Java {
 			String operator+(const string &target);
 			String operator+(const String &target);
 			String operator=(const String &target);
-			void operator+=(const String &target);
-			void operator+=(const char &target);
+			String& operator+=(const String &target);
+			String& operator+=(const char &target);
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;
