@@ -30,7 +30,7 @@
 using namespace Java::Lang;
 
 String::String() {
-	this->original = strdup("");
+	this->original = strdup("\0");
 	this->size = 0;
 }
 
@@ -45,7 +45,7 @@ String::String(string target) {
 }
 
 String::String(Array<char> &chars) {
-        free(original);
+	free(original);
 	this->original = String::fromCharArray(chars).toString();
 	this->size = chars.length;
 }
@@ -74,10 +74,10 @@ String::~String() {
  * @return String
  */
 String String::clone() {
-    string holdPointer = strdup(this->original);
-    String result = holdPointer;
+	string holdPointer = strdup(this->original);
+	String result = holdPointer;
 	free(holdPointer);
-    return result;
+	return result;
 }
 
 /**
@@ -176,13 +176,13 @@ String String::fromCharArray(Array<char> &chars) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
 	str[index] = '\0';
-    String result = str;
-    free(str);
+	String result = str;
+	free(str);
 	return result;
 }
 
@@ -215,7 +215,7 @@ int String::indexOf(int ch, int fromIndex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) ch) {
 			return index;
@@ -251,7 +251,7 @@ int String::indexOf(String str, int fromIndex) const {
  * @return boolean
  */
 boolean String::isEmpty() const {
-    return (boolean) is_empty(this->original);
+	return (boolean) is_empty(this->original);
 }
 
 /**
@@ -265,7 +265,7 @@ int String::lastIndexOf(int ch) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -286,7 +286,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -304,16 +304,16 @@ int String::lastIndexOf(int ch, int fromIndex) {
 int String::lastIndexOf(String str) const {
 	string strReversed = string_reverse(str.toString());
 	string currentStrReversed = string_reverse(this->toString());
-
+	
 	int result = string_index(currentStrReversed, strReversed, 1);
-
+	
 	free(strReversed);
 	free(currentStrReversed);
-
+	
 	if (result == NOT_FOUND) {
 		return result;
 	}
-
+	
 	//Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
@@ -328,23 +328,23 @@ int String::lastIndexOf(String str) const {
  */
 int String::lastIndexOf(String str, int fromIndex) const {
 	string subString = &( this->original )[ fromIndex ]; // get subString start fromIndex
-
+	
 	string strReversed = string_reverse(str.toString());
 	string currentStrReversed = string_reverse(subString);
-
+	
 	int result = string_index(currentStrReversed, strReversed, 1);
-
+	
 	free(strReversed);
 	free(currentStrReversed);
-
+	
 	if (result == NOT_FOUND) {
 		return result;
 	}
-
+	
 	//Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
-
+	
 }
 
 /**
@@ -375,14 +375,14 @@ boolean String::matches(String regex) const {
  * @return String
  */
 String String::replace(char oldChar, char newChar) const {
-    string oldString = string_from_char(oldChar);
-    string newString = string_from_char(newChar);
-    string holdPointer = string_replace(this->original, oldString, newString);
-    String result = holdPointer;
-    free(holdPointer);
-    free(oldString);
-    free(newString);
-    return result;
+	string oldString = string_from_char(oldChar);
+	string newString = string_from_char(newChar);
+	string holdPointer = string_replace(this->original, oldString, newString);
+	String result = holdPointer;
+	free(holdPointer);
+	free(oldString);
+	free(newString);
+	return result;
 }
 
 /**
@@ -394,7 +394,7 @@ String String::replace(char oldChar, char newChar) const {
  */
 String String::replaceAll(String regex, String replacement) const {
 	// TODO fix this later
-    return "";
+	return "";
 }
 
 /**
@@ -411,7 +411,7 @@ Array<String> String::split(String regex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
@@ -454,7 +454,7 @@ boolean String::startsWith(String prefix, int toffset) const {
 	register
 #endif
 	int j = toffset;
-
+	
 	for (; index < prefix_length; index++) {
 		if (prefix.original[ index ] != this->original[ j ]) {
 			return FALSE;
@@ -475,7 +475,7 @@ Array<char> String::toCharArray() const {
 	register
 #endif
 	int index = 0;
-
+	
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
@@ -498,10 +498,10 @@ string String::toString() const {
  * @return String
  */
 String String::toLowerCase() const {
-    string hodlPointer = string_lower(this->original);
+	string hodlPointer = string_lower(this->original);
 	String result = hodlPointer;
-    free(hodlPointer);
-    return result;
+	free(hodlPointer);
+	return result;
 }
 
 /**
@@ -510,10 +510,10 @@ String String::toLowerCase() const {
  * @return String
  */
 String String::toUpperCase() {
-    string hodlPointer = string_upper(this->original);
-    String result = hodlPointer;
-    free(hodlPointer);
-    return result;
+	string hodlPointer = string_upper(this->original);
+	String result = hodlPointer;
+	free(hodlPointer);
+	return result;
 }
 
 /**
@@ -522,10 +522,10 @@ String String::toUpperCase() {
  * @return String
  */
 String String::trim() {
-    string hodlPointer = string_trim(this->original);
-    String result = hodlPointer;
-    free(hodlPointer);
-    return result;
+	string hodlPointer = string_trim(this->original);
+	String result = hodlPointer;
+	free(hodlPointer);
+	return result;
 }
 
 /**
@@ -548,10 +548,10 @@ String String::valueOf(boolean target) {
  * @return String
  */
 String String::valueOf(char target) {
-    string holdPointer = string_from_char(target);
+	string holdPointer = string_from_char(target);
 	String result = holdPointer;
-    free(holdPointer);
-    return result;
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -574,10 +574,10 @@ String String::valueOf(string target) {
  * @return String
  */
 String String::valueOf(short target) {
-    string holdPointer = string_from_short(target);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+	string holdPointer = string_from_short(target);
+	String result = holdPointer;
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -587,9 +587,9 @@ String String::valueOf(short target) {
  * @return String
  */
 String String::valueOf(int target) {
-    string holdPointer = string_from_int(target);
-    String result = holdPointer;
-    free(holdPointer);
+	string holdPointer = string_from_int(target);
+	String result = holdPointer;
+	free(holdPointer);
 	return string_from_int(target);
 }
 
@@ -600,10 +600,10 @@ String String::valueOf(int target) {
  * @return String
  */
 String String::valueOf(long target) {
-    string holdPointer = string_from_long(target);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+	string holdPointer = string_from_long(target);
+	String result = holdPointer;
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -613,10 +613,10 @@ String String::valueOf(long target) {
  * @return String
  */
 String String::valueOf(float target) {
-    string holdPointer = string_from_float(target);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+	string holdPointer = string_from_float(target);
+	String result = holdPointer;
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -626,10 +626,10 @@ String String::valueOf(float target) {
  * @return String
  */
 String String::valueOf(double target) {
-    string holdPointer = string_from_double(target);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+	string holdPointer = string_from_double(target);
+	String result = holdPointer;
+	free(holdPointer);
+	return result;
 }
 
 /**
@@ -639,9 +639,9 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::operator+(const string &target) {
-    string holdPointer = string_concat(this->original, target);
-    String result = holdPointer;
-    free(holdPointer);
+	string holdPointer = string_concat(this->original, target);
+	String result = holdPointer;
+	free(holdPointer);
 	return result;
 }
 
@@ -652,9 +652,9 @@ String String::operator+(const string &target) {
  * @return String
  */
 String String::operator+(const String &target) {
-    string holdPointer = string_concat(this->original, target.original);
+	string holdPointer = string_concat(this->original, target.original);
 	String result = holdPointer;
-    free(holdPointer);
+	free(holdPointer);
 	return result;
 }
 
@@ -666,15 +666,15 @@ String String::operator+(const String &target) {
 String String::operator+=(const String &target) {
 	char *result = string_concat(this->original, target.original);
 	*this = result;
-    free(result);
-    return *this;
+	free(result);
+	return *this;
 }
 
 String String::operator+=(const char &target) {
 	char *result = string_append(this->original, target);
 	*this = result;
-    free(result);
-    return *this;
+	free(result);
+	return *this;
 }
 
 bool String::operator==(const String &target) const {
@@ -685,9 +685,9 @@ bool String::operator==(const String &target) const {
 }
 
 String String::operator=(const String &target) {
-    if (this->original != NULL) {
-        free(this->original);
-    }
+	if (this->original != NULL) {
+		free(this->original);
+	}
 	this->original = strdup(target.original);
 	this->size = target.size;
 	return *this;
@@ -701,7 +701,7 @@ bool String::operator<(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
 	}
-
+	
 	return false;
 }
 
@@ -709,7 +709,7 @@ boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
 	}
-
+	
 	return false;
 }
 
@@ -717,7 +717,7 @@ boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
 	}
-
+	
 	return true;
 }
 

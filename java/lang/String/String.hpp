@@ -36,14 +36,17 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
+		
+		class String;
+		
 		class String :
 			public virtual Serializable,
 			public virtual Comparable<String>,
 			public virtual CharSequence {
 		private:
-			string original = strdup("");
+			string original;
 			int size = 0;
-
+		
 		public:
 			String();
 			String(const_string original);
@@ -52,14 +55,14 @@ namespace Java {
 			String(Array<byte> &bytes);
 			String(const String &target);
 			~String();
-
+		
 		public:
 			char charAt(int index);
-
+			
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
-                        String clone();
+			String clone();
 			virtual int compareTo(const String &o) const override;
 			int compareToIgnoreCase(String str) const;
 			String concat(String str);
