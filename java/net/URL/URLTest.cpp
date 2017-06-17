@@ -62,6 +62,7 @@ TEST (JavaNet, URLToString) {
 
     string result = url.toString();
 	ASSERT_STR("http://test.com:80/file/test?param=1", result);
+	free(result);
 
 //
 //	// URL without port
