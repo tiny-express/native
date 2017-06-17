@@ -57,6 +57,7 @@ char *etcd_get(char *url, char *key) {
 	JSON_Object *node_object = json_object_get_object(root_object, NODE);
 	char *value_result = strdup((char*) json_object_get_string(node_object, VALUE));
 	json_value_free(root_value);
+	free(result);
 	return value_result;
 }
 

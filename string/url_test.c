@@ -33,6 +33,7 @@ TEST (Url, Encode) {
 	char *result = url_encode(target);
 	char *expect = "Qu%c3%a1n+%c4%83n";
 	ASSERT_STR(expect, result);
+	free(result);
 }
 
 TEST (Url, Decode) {
@@ -40,6 +41,7 @@ TEST (Url, Decode) {
 	char *result = url_decode(target);
 	char *expect = "Quán ăn";
 	ASSERT_STR(expect, result);
+	free(result);
 }
 
 TEST (Url, FindParam) {

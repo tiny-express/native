@@ -127,10 +127,13 @@ int string_to_boolean(char *target) {
 	}
 	char *boolean_value = string_lower(target);
 	if (string_equals(boolean_value, "true")) {
+		free(boolean_value);
 		return TRUE;
 	}
 	if (string_to_int(boolean_value) == TRUE) {
+		free(boolean_value);
 		return TRUE;
 	}
+	free(boolean_value);
 	return FALSE;
 }

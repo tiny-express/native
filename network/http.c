@@ -210,6 +210,7 @@ int url_port(char *url) {
 	char *domain = url;
 	int port = http_port(url);
 	if (port == -1) {
+		free(path);
 		return -1;
 	}
 	int isDynamic = FALSE;
@@ -224,6 +225,7 @@ int url_port(char *url) {
 		if (isDynamic) {
 			free(domain);
 		}
+		free(path);
 		free(port_string);
 		return -1;
 	}

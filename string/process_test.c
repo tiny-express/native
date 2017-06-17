@@ -490,6 +490,7 @@ TEST (String, ProcessMatches) {
 
 	// Test fail with wrong reverse string
 	ASSERT_FALSE(string_equals(wrong_reverse, reverse_of_target));
+	free(reverse_of_target);
 }
 
 

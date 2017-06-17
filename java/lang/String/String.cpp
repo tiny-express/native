@@ -590,7 +590,7 @@ String String::valueOf(int target) {
 	string holdPointer = string_from_int(target);
 	String result = holdPointer;
 	free(holdPointer);
-	return string_from_int(target);
+	return result;
 }
 
 /**
