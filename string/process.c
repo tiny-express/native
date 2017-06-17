@@ -80,52 +80,21 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  * @return array char pointer
  */
 inline char **string_split(char *target, char *delimiter) {
+    char **result = calloc(MAX_STRING_LENGTH, sizeof(char*));
 	if (target == NULL || delimiter == NULL) {
-        char **result = calloc(MAX_STRING_LENGTH, sizeof(char*));;
 		return result;
 	}
-	int length_target = length_pointer_char(target);
-	int length_delimiter = length_pointer_char(delimiter);
-	int distance = length_target - length_delimiter + 1;
-	int length_item = 0;
-	char *segment = calloc((size_t) length_delimiter + 1, sizeof(char));
-	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
-	register int count = 0, from = 0, to = 0;
-	// Compare delimiter per target segment
-	while (to <= distance) {
-		strncpy(segment, &target[ to ], length_delimiter);
-		if (strcmp(segment, delimiter) == 0) {
-			if (to - from > 0) {
-				length_item = to - from;
-				char *item = calloc(length_item + 1, sizeof(char));
-				strncpy(item, &target[ from ], length_item);
-				// Append element to result
-				data[ count++ ] = item;
-				from = to + length_delimiter;
-
-			} else {
-				from += length_delimiter;
-			}
-			to = from;
-			continue;
-		}
-		++to;
-	}
-	if (to - from > 0) {
-		length_item = length_target - from;
-		char *item = calloc(length_item + 1, sizeof(char));
-		strncpy(item, &target[ from ], length_item);
-		// Append element to result
-		data[ count++ ] = item;
-	}
-	// Saving memory
-	char **result = calloc(count + 1, sizeof(char *));
-	memcpy(result, data, count * sizeof(char *));
-	// End array
-	result[ count ] = '\0';
-	// Deallocate memory
-	free(segment);
-	free(data);
+    const int target_length = length_pointer_char(target);
+    char const_target[target_length + 1];
+    strncpy(const_target, target, target_length);
+    const_target[target_length] = '\0';
+    char* item = strtok(const_target, delimiter);
+    register int count = 0;
+    while (item != NULL) {
+        result[count ++] = strdup(item);
+        item = strtok(NULL, delimiter);
+    }
+    result[count] = '\0';
 	return result;
 }
 
