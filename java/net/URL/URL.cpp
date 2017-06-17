@@ -112,6 +112,9 @@ string URL::toString() const {
 	}
 
 	url += query;
-	return strdup(url.toString());
+
+	string result = url.toString();
+
+	return result;
 }
 

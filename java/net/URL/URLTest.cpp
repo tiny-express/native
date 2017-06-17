@@ -59,9 +59,9 @@ TEST (JavaNet, URLToString) {
 	ASSERT_EQUAL(80, url.getPort());
 	ASSERT_STR("http", url.getProtocol().toString());
 	ASSERT_STR("param=1", url.getQuery().toString());
+
     string result = url.toString();
 	ASSERT_STR("http://test.com:80/file/test?param=1", result);
-    free(result);
 
 //
 //	// URL without port
