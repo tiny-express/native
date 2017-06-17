@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../string.h"
 #include "../unit_test.h"
 
@@ -32,7 +33,9 @@ TEST (String, ConvertFromChar) {
 	ASSERT_STR("6", string_from_char(number_character));
 	
 	char null_character = '\0';
-	ASSERT_STR("", string_from_char(null_character));
+	char *result = string_from_char(null_character);
+	ASSERT_STR("", result);
+	free(result);
 }
 
 TEST (String, ConvertFromShort) {
