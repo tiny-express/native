@@ -1,7 +1,6 @@
 #include "../crypto.h"
-#include <openssl/md5.h>
-#include "../common.h"
 #include "../string.h"
+#include "../common.h"
 
 /**
  * MD5 Encode
@@ -27,7 +26,7 @@ char *md5_encode(unsigned char *target) {
 		sprintf(&mdString[ index * 2 ], "%02x", (unsigned int) digest[ index ]);
 	}
 	
-	char *result = string_copy(mdString);
+	char *result = strdup(mdString);
 	return result;
 }
 

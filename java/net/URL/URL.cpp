@@ -36,17 +36,39 @@ URL::URL() {
 	this->path = "";
 }
 
-URL::URL(String spec) {
-	string url = spec.toString();
-	this->protocol = string_default(http_protocol(url));
-	this->host = string_default(http_hostname(url));
-	this->port = number_default(url_port(url));
-	this->query = string_default(http_query(url));
-	this->path = string_default(http_path(url));
-	free(url);
+URL::URL(const URL &target) {
+	this->protocol = target.protocol;
+	this->port = target.port;
+	this->host = target.host;
+	this->path = target.path;
+	this->query = target.query;
 }
 
-URL::~URL() {}
+URL::URL(String spec) {
+	String url = spec.toString();
+
+    string _protocol = http_protocol(url.toString());
+	this->protocol = string_default(_protocol);
+    free(_protocol);
+
+    string _host = http_hostname(url.toString());
+	this->host = string_default(_host);
+    free(_host);
+
+	this->port = number_default(url_port(url.toString()));
+
+    string _query = http_query(url.toString());
+	this->query = string_default(_query);
+    free(_query);
+
+    string _path = http_path(url.toString());
+	this->path = string_default(_path);
+    free(_path);
+}
+
+URL::~URL() {
+
+}
 
 String URL::getHost() {
 	return this->host;
@@ -68,28 +90,30 @@ String URL::getQuery() {
 	return this->query;
 }
 
-//URLConnection URL::openConnection() {
-//
-//}
-
 string URL::toString() const {
 	String protocol = this->protocol;
 	String host = this->host;
 	int port = this->port;
 	String path = this->path;
 	String query = this->query;
-	
-	String url = protocol + "://" + host;
-	
+
+	String url = protocol + (string) "://" + host;
+
 	if (port > -1) {
-		url = url + ":" + String::valueOf(port);
+		url = url + (string) ":" + String::valueOf(port);
 	}
-	
+
 	if (path != "/") {
 		url += path;
 	}
-	
-	url = url + (query.isEmpty() ? "" : "?" ) + query;
-	string result = strdup(url.toString());
-	return result;
+
+	if (!query.isEmpty()) {
+		url += "?";
+	}
+
+	url += query;
+
+	string result = url.toString();
+	return strdup(result);
 }
+

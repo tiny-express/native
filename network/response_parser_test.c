@@ -6,11 +6,6 @@ TEST (Network, Parser) {
         return;
     #endif
 
-    http_response* result3 = (http_response*) malloc(sizeof(http_response));
-    free(result3);
-    result3 = NULL;
-    ASSERT_NULL(result3);
-	
 	char *response = "HTTP/1.0 200 OK\n"
 		"Content-Type: text/html; charset=utf-8\n"
 		"Content-Length: 122\n"
@@ -37,17 +32,8 @@ TEST (Network, Parser) {
 		           "\"failure\":1,\"canonical_ids\":0,"
 		           "\"results\":[{\"error\":\"InvalidRegistration\"}]}", result->body);
 
-//     test free memory
-	http_response *test = result;
 	free_http_response(result);
-	ASSERT_NULL(test->headers[ 0 ]);
-	ASSERT_NULL(test->headers[ 1 ]);
-	ASSERT_NULL(test->headers[ 2 ]);
-	ASSERT_NULL(test->headers[ 3 ]);
-	ASSERT_NULL(test->body);
-	ASSERT_NULL(test->version);
-	ASSERT_NULL(test->status);
-	
+
 	char *response2 = "HTTP/1.0 401 UNAUTHORIZED\n"
 		"Content-Type: text/html; charset=utf-8\n"
 		"Content-Length: 67\n"
@@ -70,12 +56,5 @@ TEST (Network, Parser) {
 	ASSERT_STR("Wed, 24 May 2017 20:25:34 GMT", result2->headers[ 3 ]->value);
 	ASSERT_STR("Server-key delivered or Sender is not authorized to perform request", result2->body);
 
-	//     test free memory
-	test = result2;
-	free_http_response(result);
-	ASSERT_NULL(test->headers[ 0 ]);
-	ASSERT_NULL(test->headers[ 1 ]);
-	ASSERT_NULL(test->headers[ 2 ]);
-	ASSERT_NULL(test->headers[ 3 ]);
-//    ASSERT_NULL(result);
+	free_http_response(result2);
 }

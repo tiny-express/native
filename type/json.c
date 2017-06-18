@@ -527,7 +527,7 @@ static char *process_string(const char *input, size_t len) {
 	const char *input_ptr = input;
 	size_t initial_size = ( len + 1 ) * sizeof(char);
 	size_t final_size = 0;
-	char *output = (char *) parson_malloc(initial_size);
+	char *output = (char *) calloc(initial_size, sizeof(char));
 	char *output_ptr = output;
 	char *resized_output = NULL;
 	while (( *input_ptr != '\0' ) && (size_t) ( input_ptr - input ) < len) {
@@ -577,7 +577,7 @@ static char *process_string(const char *input, size_t len) {
 	*output_ptr = '\0';
 	/* resize to new length */
 	final_size = (size_t) ( output_ptr - output ) + 1;
-	resized_output = (char *) parson_malloc(final_size);
+	resized_output = (char *) calloc(final_size, sizeof(char));
 	if (resized_output == NULL) {
 		goto error;
 	}
@@ -1200,7 +1200,7 @@ void json_value_free(JSON_Value *value) {
 }
 
 JSON_Value *json_value_init_object(void) {
-	JSON_Value *new_value = (JSON_Value *) parson_malloc(sizeof(JSON_Value));
+	JSON_Value *new_value = (JSON_Value *) calloc(1, sizeof(JSON_Value));
 	if (!new_value) {
 		return NULL;
 	}
@@ -1214,7 +1214,7 @@ JSON_Value *json_value_init_object(void) {
 }
 
 JSON_Value *json_value_init_array(void) {
-	JSON_Value *new_value = (JSON_Value *) parson_malloc(sizeof(JSON_Value));
+	JSON_Value *new_value = (JSON_Value *) calloc(1, sizeof(JSON_Value));
 	if (!new_value) {
 		return NULL;
 	}
@@ -1260,7 +1260,7 @@ JSON_Value *json_value_init_number(double number) {
 }
 
 JSON_Value *json_value_init_boolean(int boolean) {
-	JSON_Value *new_value = (JSON_Value *) parson_malloc(sizeof(JSON_Value));
+	JSON_Value *new_value = (JSON_Value *) calloc(1, sizeof(JSON_Value));
 	if (!new_value) {
 		return NULL;
 	}
@@ -1270,7 +1270,7 @@ JSON_Value *json_value_init_boolean(int boolean) {
 }
 
 JSON_Value *json_value_init_null(void) {
-	JSON_Value *new_value = (JSON_Value *) parson_malloc(sizeof(JSON_Value));
+	JSON_Value *new_value = (JSON_Value *) calloc(1, sizeof(JSON_Value));
 	if (!new_value) {
 		return NULL;
 	}
@@ -1402,7 +1402,7 @@ char *json_serialize_to_string(const JSON_Value *value) {
 	if (buf_size_bytes == 0) {
 		return NULL;
 	}
-	buf = (char *) parson_malloc(buf_size_bytes);
+	buf = (char *) calloc(buf_size_bytes, sizeof(char));
 	if (buf == NULL) {
 		return NULL;
 	}
@@ -1462,7 +1462,7 @@ char *json_serialize_to_string_pretty(const JSON_Value *value) {
 	if (buf_size_bytes == 0) {
 		return NULL;
 	}
-	buf = (char *) parson_malloc(buf_size_bytes);
+	buf = (char *) calloc(1, buf_size_bytes);
 	if (buf == NULL) {
 		return NULL;
 	}

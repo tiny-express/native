@@ -50,7 +50,7 @@ namespace Java {
 			double doubleValue() const;
 			string toString() const;
 			
-			static Short *parseShort(String target);
+			static Short parseShort(String target);
 		
 		public:
 			Short operator+(const Short &target);

@@ -46,7 +46,7 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
-
+		
 		public:
 			String();
 			String(const_string original);
@@ -55,13 +55,14 @@ namespace Java {
 			String(Array<byte> &bytes);
 			String(const String &target);
 			~String();
+		
 		public:
 			char charAt(int index);
-
+			
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
-            String &clone();
+			String clone();
 			virtual int compareTo(const String &o) const override;
 			int compareToIgnoreCase(String str) const;
 			String concat(String str);
@@ -71,7 +72,6 @@ namespace Java {
 			static String copyValueOf(const Array<char> &data);
 			static String copyValueOf(const Array<char> &data, int offset, int count);
 			boolean endsWith(const String &suffix) const;
-
 			template <class T>
 			boolean equals(T anObject) const {
 				if (Object::equals(anObject)) {
@@ -124,10 +124,11 @@ namespace Java {
 			boolean operator>(const String &target) const;
 			boolean operator<=(const String &target) const;
 			boolean operator>=(const String &target) const;
+			String operator+(const string &target);
 			String operator+(const String &target);
 			String operator=(const String &target);
-			void operator+=(const String &target);
-			void operator+=(const char &target);
+			String operator+=(const String &target);
+			String operator+=(const char &target);
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;

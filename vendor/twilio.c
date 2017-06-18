@@ -24,10 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
-#include "../builtin.h"
+#include "../validator.h"
+#include "../crypto.h"
+#include "../common.h"
 
 /**
  * Send mail via Twillio service
@@ -68,48 +71,66 @@ int send_sms(
 		return FALSE;
 	}
 	
-	char *token;
-	asprintf(&token, "%s:%s", account_id, account_token);
-	token = base64_encode(token, length_pointer_char(token));
-	
-	char *from_phone_number_with_prefix = from_phone_number;
-	if (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND) {
-		from_phone_number_with_prefix = string_concat("+", from_phone_number);
-	}
+	char *username_password;
+	asprintf(&username_password, "%s:%s", account_id, account_token);
+    char *token = base64_encode((const unsigned char*) username_password, (size_t) length_pointer_char(username_password));
+	char *standard_phone_number;
+    char *phone_number_with_prefix;
+    char *phone_number_sign = (string_index(from_phone_number, "+", 1) == STRING_NOT_FOUND)? "+" : "";
+    asprintf(&phone_number_with_prefix, "%s%s", phone_number_sign, from_phone_number);
 	// Remove all space from 'from phone number'
-	from_phone_number_with_prefix = string_replace(from_phone_number_with_prefix, " ", "");
-	
+	standard_phone_number = string_replace(phone_number_with_prefix, " ", "");
+
 	char *to_phone_number_with_prefix = to_phone_number;
 	if (string_index(to_phone_number, "+", 1) == STRING_NOT_FOUND) {
 		to_phone_number_with_prefix = string_concat("+", to_phone_number);
 	}
 	
 	// Remove all spaces from 'to phone number'
-	to_phone_number_with_prefix = string_replace(to_phone_number_with_prefix, " ", "");
-	
-	char *body_string;
+	char *to_phone_number_with_prefix_no_space = string_replace(to_phone_number_with_prefix, " ", "");
+
+    char *from_phone_number_with_prefix_encoded = url_encode(standard_phone_number);
+    char *to_phone_number_with_prefix_encoded = url_encode(to_phone_number_with_prefix_no_space);
+	char *url_content_encoded = url_encode(sms_content);
+    char *body_string;
 	asprintf(
 		&body_string,
 		"From=%s&To=%s&Body=%s",
-		url_encode(from_phone_number_with_prefix),
-		url_encode(to_phone_number_with_prefix),
-		url_encode(sms_content)
+        from_phone_number_with_prefix_encoded,
+        to_phone_number_with_prefix_encoded,
+		url_content_encoded
 	);
-	
+
 	char *body[3] = {
 		body_string,
 		'\0'
 	};
-	
+
+    char *auth_basic_header = string_concat("Authorization: Basic ", token);
 	char *headers[3] = {
 		"Content-Type: application/x-www-form-urlencoded",
-		string_concat("Authorization: Basic ", token),
+		auth_basic_header,
 		'\0'
 	};
 	
 	char *response = http_request("POST", service_url, headers, body);
+
+    free(phone_number_with_prefix);
+    free(to_phone_number_with_prefix);
+    free(username_password);
+    free(token);
+    free(auth_basic_header);
+    free(body_string);
+    free(standard_phone_number);
+    free(to_phone_number_with_prefix_no_space);
+    free(from_phone_number_with_prefix_encoded);
+    free(to_phone_number_with_prefix_encoded);
+    free(url_content_encoded);
+
 	if (string_index(response, TWILIO_RESPONSE_SUCCESS, 1) != STRING_NOT_FOUND) {
+        free(response);
 		return TRUE;
 	}
+    free(response);
 	return FALSE;
 }

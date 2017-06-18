@@ -54,53 +54,68 @@ namespace Java {
 		class ArrayListIterator {
 		public:
 			ArrayListIterator(const ArrayList<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
-
+			
 			}
-
+			
 			boolean operator!=(const ArrayListIterator<E> &other) const {
 				return _pos != other._pos;
 			}
-
+			
 			int operator*() const {
 				return _p_vec->get(_pos);
 			}
-
+			
 			const ArrayListIterator<E> &operator++() {
 				++_pos;
 				return *this;
 			}
-
+		
 		private:
 			int _pos;
 			const ArrayList<E> *_p_vec;
 		};
+		
 		template <typename E>
-		class ArrayList :
-			public virtual AbstractList<E>,
-			public virtual Serializable,
-			public virtual Cloneable,
-			// public virtual List<E>,
-			public virtual RandomAccess {
+		class ArrayList : public AbstractList<E>,
+		                  public virtual List<E>,
+		                  public virtual Serializable,
+		                  public virtual Cloneable,
+		                  public virtual RandomAccess {
 		private:
 			std::vector<E> original;
-
+			typedef E *_iterator;
+			typedef const E *_const_iterator;
+		
+		
 		public:
+			
+			_iterator begin() {
+				return &this->original[ 0 ];
+			};
+			_const_iterator begin() const {
+				return &this->original[ 0 ];
+			};
+			_iterator end() {
+				return &this->original[ this->original.size() ];
+			};
+			_const_iterator end() const {
+				return &this->original[ this->original.size() ];
+			};
+			
 			/**
-			 * Constructs an empty list
-			 */
+				     * Constructs an empty list
+				     */
 			ArrayList() {
-
 			}
-
+			
 			/**
 			 * Constructs a list containing the elements of the specified collection
 			 *
 			 * @param c
 			 */
 			ArrayList(Collection<E> &c) {
-
 			}
-
+			
 			/**
 			 * Constructs an empty list with the specified initial capacity.
 			 *
@@ -109,32 +124,16 @@ namespace Java {
 			ArrayList(int initialCapacity) {
 				this->original.resize(initialCapacity);
 			}
-
+			
 			/**
 			 * Destructor ArrayList
 			 */
 			~ArrayList() {
-
+			
 			}
-
+		
 		public:
-			/**
-			 * @return
-			 */
-			ArrayListIterator<E> begin() const {
-				return ArrayListIterator<E>(this, 0);
-			}
-
-			/**
-			 *
-			 * @return
-			 */
-			ArrayListIterator<E> end() const {
-				return original.end();
-			}
-
-		public:
-
+			
 			/**
 			 * Appends the specified element to the end of this list.
 			 *
@@ -145,20 +144,20 @@ namespace Java {
 				this->original.push_back(e);
 				return true;
 			}
-
+			
 			/**
 			 * Inserts the specified element at the specified position in this list.
 			 *
 			 * @param index
 			 * @param element
 			 */
-			void add(int index, E &element)  {
+			void add(int index, E &element) {
 				if (index < 0 || index > this->original.size() - 1) {
 					return;
 				}
 				this->original.insert(this->original.begin() + index, element);
 			}
-
+			
 			/**
 			 * Appends all of the elements in the specified collection to the end of this list,
 			 * in the order that they are returned by the specified collection's Iterator.
@@ -170,7 +169,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Inserts all of the elements in the specified collection into this list,
 			 * starting at the specified position.
@@ -183,7 +182,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Removes all of the elements from this list.
 			 *
@@ -191,29 +190,38 @@ namespace Java {
 			void clear() {
 				this->original.clear();
 			}
-
+			
 			/**
 			 * Returns a shallow copy of this ArrayList instance.
 			 *
 			 * @return Object
 			 */
-			Object &clone() {
+			Object clone() {
 				// TODO
 				Object c;
 				return c;
 			}
-
+			
 			/**
 			 * Returns true if this list contains the specified element.
 			 *
 			 * @param o
 			 * @return boolean
 			 */
-			boolean contains(Object &o) const {
+			boolean contains(E &e) const {
 				// TODO
 				return true;
 			}
-
+			
+			/**
+			 *
+			 * @param c
+			 * @return
+			 */
+			virtual boolean containsAll(Collection<Object> &c) const {
+				//TODO
+			}
+			
 			/**
 			 * Increases the capacity of this ArrayList instance, if necessary,
 			 * to ensure that it can hold at least the number of elements specified by
@@ -224,7 +232,7 @@ namespace Java {
 			void ensureCapacity(int minCapacity) const {
 				this->original.reserve(minCapacity);
 			}
-
+			
 			/**
 			 *  Performs the given action for each element of the Iterable until all elements
 			 *  have been processed or the action throws an exception.
@@ -234,19 +242,25 @@ namespace Java {
 			void forEach(Consumer<E> &action) const {
 				// TODO
 			}
-
+			
 			/**
 			 * Returns the element at the specified position in this list.
 			 *
 			 * @param index
 			 * @return
 			 */
-			E &get(int index) const {
-				if (index < 0) return (E&)this->original.at(0);
-				if (index > this->size() - 1) return (E&)this->original.at(this->size() - 1);
-				return (E&) original.at(index);
+			E get(int index) const {
+				if (index < 0) {
+					return ( E & )
+					this->original.at(0);
+				}
+				if (index > this->size() - 1) {
+					return ( E & )
+					this->original.at(this->size() - 1);
+				}
+				return original.at(index);
 			}
-
+			
 			/**
 			 * Returns the index of the first occurrence of the specified element in this list,
 			 * or -1 if this list does not contain the element.
@@ -254,10 +268,10 @@ namespace Java {
 			 * @param o
 			 * @return int
 			 */
-			int indexOf(Object &o) const {
+			int indexOf(E &e) const {
 				return 0;
 			}
-
+			
 			/**
 			 * Returns true if this list contains no elements.
 			 *
@@ -266,7 +280,7 @@ namespace Java {
 			boolean isEmpty() const {
 				return original.empty();
 			}
-
+			
 			/**
 			 * Returns an iterator over the elements in this list in proper sequence.
 			 *
@@ -277,7 +291,7 @@ namespace Java {
 				Iterator<E> *it = new Iterator<E>();
 				return *it;
 			}
-
+			
 			/**
 			 * Returns the index of the last occurrence of the specified element in this list,
 			 * or -1 if this list does not contain the element.
@@ -285,22 +299,21 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(Object &object) const {
+			int lastIndexOf(E &e) const {
 				// TODO
 				return 0;
 			}
-
+			
 			/**
 			 * Returns a list iterator over the elements in this list (in proper sequence).
 			 *
 			 * @return Address of ListIterator<E>
 			 */
 			ListIterator<E> &listIterator() const {
-				// TODO
 				ListIterator<E> *listIterator = new ListIterator<E>();
 				return *listIterator;
 			}
-
+			
 			/**
 			 * Returns a list iterator over the elements in this list (in proper sequence),
 			 * starting at the specified position in the list.
@@ -309,23 +322,23 @@ namespace Java {
 			 * @return Address of ListIterator<E>
 			 */
 			ListIterator<E> &listIterator(int index) const {
-				// TODO
 				ListIterator<E> *listIterator = new ListIterator<E>();
 				return *listIterator;
 			}
-
+			
 			/**
 			 * Removes the element at the specified position in this list.
 			 *
 			 * @param index
 			 * @return Address of element
 			 */
-			E &remove(int index) {
-				// TODO
-				E *e = new E();
-				return *e;
+			E remove(int index) {
+				if (index < 0 || index >= this->size()) {
+					//FIXME: throw exception
+				}
+				
 			}
-
+			
 			/**
 			 * Removes the first occurrence of the specified element
 			 * from this list, if it is present.
@@ -337,7 +350,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Removes from this list all of its elements that are
 			 * contained in the specified collection.
@@ -349,7 +362,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Removes all of the elements of this collection that satisfy the given predicate.
 			 *
@@ -360,7 +373,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Replaces each element of this list with the result of applying
 			 * the operator to that element.
@@ -370,7 +383,7 @@ namespace Java {
 			void replaceAll(UnaryOperator<E> &unaryOperator) {
 				// TODO
 			}
-
+			
 			/**
 			 * Retains only the elements in this list that are contained
 			 * in the specified collection.
@@ -382,7 +395,7 @@ namespace Java {
 				// TODO
 				return true;
 			}
-
+			
 			/**
 			 * Replaces the element at the specified position in this list with
 			 * the specified element.
@@ -391,21 +404,20 @@ namespace Java {
 			 * @param element
 			 * @return Adress of E
 			 */
-			E &set(int index, E &element) {
-				// TODO
-				E *e = new E();
-				return *e;
+			E set(int index, E &element) {
+				E e;
+				return e;
 			}
-
+			
 			/**
 			 * Return the number of the all element of this list
 			 *
 			 * @return int
 			 */
-			int	size() const {
+			int size() const {
 				return original.size();
 			}
-
+			
 			/**
 			 * Sorts this list according to the order induced by the specified Comparator.
 			 *
@@ -414,36 +426,36 @@ namespace Java {
 			void sort(Comparator<E> &cmp) {
 				// TODO
 			}
-
+			
 			/**
 			 * Creates a late-binding and fail-fast Spliterator over the elements in this list.
 			 *
 			 * @return Spliterator<E>
 			 */
-			Spliterator<E>	&spliterator() const {
+			Spliterator<E> &spliterator() const {
 				// TODO
 				Spliterator<E> *spliterator = new Spliterator<E>();
 				return *spliterator;
 			}
 
-//			List<E> &subList(int fromIndex, int toIndex) const {
-//				// TODO
-//				List<E> *list = new ArrayList<E>();
-//				return *list;
-//			}
-
+//            List<E> &subList(int fromIndex, int toIndex) const {
+//                // TODO
+//                List<E> *list = new ArrayList<E>();
+//                return *list;
+//            }
+			
 			/**
 			 * Returns an array containing all of the elements in this
 			 * list in proper sequence (from first to last element).
 			 *
 			 * @return Array<Object>
 			 */
-			Array<Object>	&toArray() {
+			Array<Object> toArray() {
 				// TODO
 				Array<Object> objects;
 				return objects;
 			}
-
+			
 			/**
 			 * Returns an array containing all of the elements in this list
 			 * in proper sequence (from first to last element);the runtime type of
@@ -458,7 +470,7 @@ namespace Java {
 				// TODO
 				return a;
 			}
-
+			
 			/**
 			 * Trims the capacity of this ArrayList instance to be the list's current size.
 			 *
@@ -466,16 +478,24 @@ namespace Java {
 			void trimToSize() {
 				// TODO
 			}
-
+			
 			/**
 			 * Convert ArrayList to string
 			 *
 			 * @return string
 			 */
 			string toString() const {
-				return (string) "" ;
+				return (string) "";
 			}
-
+			
+			virtual long hashCode() const {
+				//TODO
+			}
+			
+			boolean equals(const Object &o) const {
+				//TODO
+			}
+		
 		protected:
 			/**
 			 * Removes from this list all of the elements
@@ -489,9 +509,8 @@ namespace Java {
 				// TODO
 			}
 		};
-	
+		
 		template <typename E>
-
 		class SubList : public virtual AbstractList<E> {
 		private:
 			AbstractList<E> l;

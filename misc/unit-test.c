@@ -24,9 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define CTEST_MAIN
-#define CTEST_SEGFAULT
-
+#define TESTING
 #include "../unit_test.h"
 
 int main(int argc, const char *argv[]) {

@@ -64,8 +64,8 @@ Long::~Long() {
  * @param target
  * @return long
  */
-Long *Long::parseLong(String target) {
-	return new Long(string_to_long(target.toString()));
+Long Long::parseLong(String target) {
+	return Long(string_to_long(target.toString()));
 }
 
 /**

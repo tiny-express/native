@@ -31,7 +31,7 @@
 
 namespace Java {
 	namespace Lang {
-		class CharSequence : public virtual Object {
+		class CharSequence : public Object {
 		};
 	}
 }

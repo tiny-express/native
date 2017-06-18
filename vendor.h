@@ -30,7 +30,7 @@
 #include "type.h"
 #include <stdio.h>
 
-#define SENDGRID_RESPONSE_SUCCESS "202 Accepted"
+#define SENDGRID_RESPONSE_SUCCESS "202 ACCEPTED"
 #define SENDGRID_REQUEST_FORMAT \
                 "{\"personalizations\":"\
                      "[{\"to\": [{\"email\": \"%s\"}],"\
@@ -52,6 +52,11 @@
 
 #define STRING_NOT_FOUND        -1
 #define TWILIO_RESPONSE_SUCCESS "201 CREATED"
+
+#define NODE "node"
+#define VALUE "value"
+#define KEY "key"
+#define ETCD_PATH "/v2/keys"
 
 char *etcd_get(char *host, char *key);
 int etcd_set(char *host, char *key, char *value);

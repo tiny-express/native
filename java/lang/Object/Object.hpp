@@ -31,13 +31,13 @@ extern "C" {
 #include "../../../builtin.h"
 };
 
-#include <iostream>
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <type_traits>
 
 // Define instanceof
-template<typename Base, typename T>
+template <typename Base, typename T>
 bool instanceof(T) {
 	return std::is_base_of<Base, T>::value;
 }
@@ -45,8 +45,11 @@ bool instanceof(T) {
 // Define builtin types
 typedef bool boolean;
 
-template <typename E> class Array;
-template <typename E> class ArrayIterator;
+template <typename E>
+class Array;
+
+template <typename E>
+class ArrayIterator;
 
 template <typename E>
 class ArrayIterator {
@@ -82,7 +85,7 @@ public:
 		}
 		this->length = original.size();
 	}
-	~Array() {};
+	~Array() {}
 	int length;
 	ArrayIterator<E> begin() const {
 		return ArrayIterator<E>(this, 0);
@@ -98,9 +101,20 @@ public:
 	E get(const int index) const {
 		return (E) original.at(index);
 	}
+
 	string toString() {
-		return (string ) "";
+		string result = strdup("");
+		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
+			for (char element : *this) {
+				string result_holder = result;
+				result = string_append(&result, element);
+				free(result_holder);
+			}
+			return result;
+		}
+		return (string ) "This type is not available for serialize";
 	}
+
 public:
 	E &operator[](const int index) {
 		return this->original.at(index);
@@ -119,7 +133,9 @@ namespace Java {
 	namespace Lang {
 		template <typename E>
 		class Class;
+		
 		class String;
+		
 		class Object;
 		
 		template <typename E>
@@ -131,46 +147,95 @@ namespace Java {
 		
 		class Object {
 		protected:
-			Object	&clone();
-			void	finalize();
+			/**
+			 * Return a copy of this Object
+			 * Not support this function yet
+			 * @return
+			 */
+			Object &clone();
+			
+			/**
+			 * Not support this function yet
+			 */
+			void finalize();
+		
 		public:
-			string toString();
-			boolean equals(const Object &obj) const {
-				if (this->hashCode() == obj.hashCode()) {
+			/**
+			 * A string representation of the object.
+			 * @return string
+			 */
+			virtual string toString() const {
+				return string_from_int(this->hashCode());
+			}
+			
+			/**
+			 * Support compare two Object through hashCode()
+			 *
+			 * @param obj
+			 * @return boolean
+			 */
+			virtual boolean equals(const Object &o) const {
+				if (this->hashCode() == o.hashCode()) {
 					return true;
 				}
 				return false;
 			}
-			Class<Object> getClass() {
-				// This method is only available in Java
-				// should not be supported in this library
+			
+			/**
+			 * Not support this function yet
+			 */
+			Class<Object> getClass();
+			
+			/**
+			 * A hash code value for this object.
+			 *
+			 * @return long
+			 */
+			virtual long hashCode() const {
+				return  (intptr_t) std::addressof(*this);
 			}
-			int hashCode() const {
-				return (intptr_t) std::addressof(*this);
-			}
-			void notify() {
-				// TODO
-			}
-			void notifyAll() {
-				// TODO
-			}
-			string toString() const {
-				return (string) "";
-			}
-			void wait() {
-				// TODO
-			}
-			void wait(long timeout) {
-				// TODO
-			}
-			void wait(long timeout, int nanos) {
-				// TODO
-			}
+			
+			/**
+			 * Not support this function yet
+			 */
+			void notify();
+			
+			/**
+			 * Not support this function yet
+			 */
+			void notifyAll();
+			
+			/**
+			 * Not support this function yet
+			 */
+			void wait();
+			
+			/**
+			 * Not support this function yet
+			 */
+			void wait(long timeout);
+			
+			/**
+			 * Not support this function yet
+			 */
+			void wait(long timeout, int nanos);
+			
+			/**
+			 * Compare two object is equal or not
+			 * @param target
+			 * @return boolean
+			 */
 			boolean operator==(const Object &target) const {
-				return this->equals( target);
+				return this->equals(target);
 			}
+			
+			/**
+			 * Compare two object is not equal or not
+			 * @param target
+			 * @return boolean
+			 */
 			boolean operator!=(const Object &target) const {
-				return !this->equals( target);
+				return !this->equals(target);
 			}
 		};
 	}

@@ -40,7 +40,7 @@ char to_hex(char code) {
 
 char *url_encode(char *target) {
 	char *target_index = target;
-	char *result = malloc(length_pointer_char(target) * 3 + 1);
+	char *result = calloc(length_pointer_char(target) * 3 + 1, sizeof(char));
 	char *result_index = result;
 	while (*target_index) {
 		if (isalnum(*target_index) || *target_index == '-' || *target_index == '_' || *target_index == '.' || *target_index == '~') {
@@ -58,7 +58,7 @@ char *url_encode(char *target) {
 
 char *url_decode(char *target) {
 	char *target_index = target;
-	char *result = malloc(length_pointer_char(target) + 1);
+	char *result = calloc(length_pointer_char(target) + 1, sizeof(char));
 	char *result_index = result;
 	while (*target_index) {
 		if (*target_index == '%') {
@@ -79,54 +79,66 @@ char *url_decode(char *target) {
 
 char *find_param(char *name, char *params) {
 	if (strcmp(params, "") == 0) {
-		return "";
+		return strdup("");
 	}
+
 	char **query_pairs = string_split(params, "&");
 	int length_pairs = length_pointer_pointer_char(query_pairs);
-	register int i;
+
+	#ifdef __linux__
+		register
+	#endif
+	int i;
 	for (i = 0; i < length_pairs; i++) {
 		char **pair = string_split(query_pairs[ i ], "=");
 		if (length_pointer_pointer_char(pair) == 2) {
 			if (strcmp(pair[ 0 ], name) == 0) {
-				char *result = malloc(sizeof(char));
-				result = pair[ 1 ];
-				free(pair);
-				free(query_pairs);
+				char *result = strdup(pair[1]);
+                free_pointer_pointer_char(pair);
+				free_pointer_pointer_char(query_pairs);
 				return result;
 			}
 		}
-		free(pair);
+        free_pointer_pointer_char(pair);
 	}
-	free(query_pairs);
-	return "";
+
+    free_pointer_pointer_char(query_pairs);
+	return strdup("");
 }
 
 char *find_param_from_url(char *name, char *url) {
 	char **url_components = string_split(url, "?");
+
 	if (length_pointer_pointer_char(url_components) < 2) {
-		return "";
+		free_pointer_pointer_char(url_components);
+		return strdup("");
 	}
+
 	char *query_url = url_components[ 1 ];
 	char **query_pairs = string_split(query_url, "&");
 	int length_pairs = length_pointer_pointer_char(query_pairs);
-	register int i;
+
+	#ifdef __linux__
+    	register
+	#endif
+	int i;
 	for (i = 0; i < length_pairs; i++) {
 		char **pair = string_split(query_pairs[ i ], "=");
 		if (length_pointer_pointer_char(pair) == 2) {
 			if (strcmp(pair[ 0 ], name) == 0) {
-				char *result = malloc(sizeof(char));
-				result = pair[ 1 ];
-				free(pair);
-				free(url_components);
-				free(query_url);
-				free(query_pairs);
+				char *result = strdup(pair[1]);
+				free_pointer_pointer_char(url_components);
+				free_pointer_pointer_char(query_pairs);
+				free_pointer_pointer_char(pair);
+
 				return result;
 			}
 		}
-		free(pair);
+		free_pointer_pointer_char(pair);
 	}
-	free(query_url);
-	free(url_components);
-	free(query_pairs);
-	return "";
+
+	free_pointer_pointer_char(url_components);
+	free_pointer_pointer_char(query_pairs);
+
+	return strdup("");
 }

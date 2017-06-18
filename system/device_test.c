@@ -27,14 +27,14 @@
 #include "../system.h"
 #include "../unit_test.h"
 
-TEST (System, DeviceGetCpuUsage) {
-	ASSERT_TRUE(get_cpu_usage() > 0);
-}
-
-TEST (System, DeviceGetRamUsage) {
-	ASSERT_TRUE(get_ram_usage() > 0);
-}
-
-TEST (System, DeviceGetDiskAvailable) {
-	ASSERT_TRUE(get_disk_available() > 0);
-}
+//TEST (System, DeviceGetCpuUsage) {
+//	ASSERT_TRUE(get_cpu_usage() > 0);
+//}
+//
+//TEST (System, DeviceGetRamUsage) {
+//	ASSERT_TRUE(get_ram_usage() > 0);
+//}
+//
+//TEST (System, DeviceGetDiskAvailable) {
+//	ASSERT_TRUE(get_disk_available() > 0);
+//}

@@ -14,11 +14,8 @@ before_script:
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
-- make unit-test
+- ./misc/memory_check
 after_script:
 - sudo pkill python
-after_success:
-- ./misc/memory_check
 notifications:
-  slack:
-    secure: o9QdIW3+j/aNslgHg11smJ1lDraArvCx+WT0ySqp6bXW0OYrQgG/JX6AxMhtNieGq7DnSFVKJgZFLr9B8VyqjiKRK6pseNXF0XhcxtS2fMsx/1kHYYmkzaiQZgntG0ZqMCvHbvRHucfzLHAyMGX0W8/E2BHnFvNXE9zXNLMzNTIZbigIV3BUcPvM/hkxw9DJ1KLJtm94uoszqFn10Y2joWQqJ6HAlGJrirLzgLSuUjE9mvKDBk9udnOpHFE22FPaj8aICYAJRTKtSvM4t8JO1W78bnuPjZf/GzHnkKC/O2EpE8L1WVOevJxJw889mLmTjWMICNVmB7wF14UOQpDTwQeDyvuDUtxx5V9TU0AuhfPO6TpThcymnHh/6CFjtJHmtHCTMLfR2HXCu3F6dv4C/OJeKVtjcoxbKn+mvyHOmiuU8dxc+BdbEfJngQj7jskJVssGbNZJ/3dlWmkzcw99l4t4MSNPTICWXw4Di2UwL8knpDwYvjPIlotU1uJH9YpaVO7ub8bClX9p75ajLac8bEE42rL1722vthMqVlD+3bIxJVuXG/Ri5dhKUoBciEKcBNMzOEs4x3yKSFvKc7NF9Fwwl1OL+L47HpJ2NceCrSKwCO9qKBDS9Ck1CHzs8ikl6UMp+Gpd1h7veBV7atIhyaXubIVDdthzoD3+U1gFT/0=
+  slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

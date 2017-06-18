@@ -27,6 +27,7 @@
 #ifndef NATIVE_MATH_H
 #define NATIVE_MATH_H
 
+#include <stdio.h>
 #include <math.h>
 
 double math_pow(double a, double b);

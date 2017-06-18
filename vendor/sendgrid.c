@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
@@ -60,17 +61,23 @@ int send_mail(
 	char *body[2];
 	asprintf(&body[ 0 ], SENDGRID_REQUEST_FORMAT, mail_to, mail_subject, mail_from, mail_content);
 	body[ 1 ] = '\0';
-	
+
+	char *auth_bearer_header = string_concat("Authorization: Bearer ", service_token);
 	char *header[3] = {
-		string_concat("Authorization: Bearer ", service_token),
+		auth_bearer_header,
 		"Content-Type: application/json",
 		'\0'
 	};
 	
 	char *response = http_request("POST", service_url, header, body);
-	if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
+    char *response_upper = string_upper(response);
+    free(response);
+	free(auth_bearer_header);
+	free(body[0]);
+	if (string_index(response_upper, SENDGRID_RESPONSE_SUCCESS, 1) < 0) {
+        free(response_upper);
 		return FALSE;
 	}
-	
+	free(response_upper);
 	return TRUE;
 }
