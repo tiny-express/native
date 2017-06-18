@@ -14,10 +14,8 @@ before_script:
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
-- make unit-test
+- ./misc/memory_check
 after_script:
 - sudo pkill python
-after_success:
-- ./misc/memory_check
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
