@@ -36,7 +36,7 @@ String::String() {
 
 String::String(const_string target) {
 	this->original = strdup(target);
-	this->size = length_pointer_char((char *) target);
+	this->size = length_pointer_char((string ) target);
 }
 
 String::String(string target) {
@@ -125,7 +125,7 @@ int String::compareToIgnoreCase(String str) const {
  * @return String
  */
 String String::concat(String str) {
-	char *stringConcat = string_concat(this->original, str.original);
+	string stringConcat = string_concat(this->original, str.original);
 	String result(stringConcat);
 	free(stringConcat);
 	return result;
@@ -404,7 +404,7 @@ String String::replaceAll(String regex, String replacement) const {
  * @return Array<String>
  */
 Array<String> String::split(String regex) const {
-	char **splitStrings = string_split(this->original, regex.toString());
+	string *splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
 
 #ifdef __linux__
@@ -664,14 +664,14 @@ String String::operator+(const String &target) {
  * @param target2
  */
 String String::operator+=(const String &target) {
-	char *result = string_concat(this->original, target.original);
+	string result = string_concat(this->original, target.original);
 	*this = result;
 	free(result);
 	return *this;
 }
 
 String String::operator+=(const char &target) {
-	void* holdPointer = this->original;
+	string holdPointer = this->original;
 	string_append(&this->original, target);
 	free(holdPointer);
 	return *this;

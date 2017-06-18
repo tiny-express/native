@@ -36,6 +36,6 @@ using namespace Java::Lang;
 TEST(JavaNet, URLDecodeString) {
 //    String target = "Qu%c3%a1n+%c4%83n";
 //    String result = URLDecoder::decode(target);
-//    char *expect = "Quán ăn";
+//    string expect = "Quán ăn";
 //    ASSERT_STR(expect, result.toString());
 }
