@@ -36,7 +36,7 @@ String::String() {
 
 String::String(const_string target) {
 	this->original = strdup(target);
-	this->size = length_pointer_char((string ) target);
+	this->size = length_pointer_char((string) target);
 }
 
 String::String(string target) {
@@ -74,9 +74,9 @@ String::~String() {
  * @return String
  */
 String String::clone() {
-	string holdPointer = strdup(this->original);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = strdup(this->original);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -193,9 +193,9 @@ String String::fromCharArray(Array<char> &chars) {
  * @return int
  */
 int String::indexOf(int ch) const {
-	string holdPointer = string_from_char((char) ch);
-	int result = string_index(this->original, holdPointer, 1);
-	free(holdPointer);
+	string pointerHolder = string_from_char((char) ch);
+	int result = string_index(this->original, pointerHolder, 1);
+	free(pointerHolder);
 	return result;
 }
 
@@ -377,9 +377,9 @@ boolean String::matches(String regex) const {
 String String::replace(char oldChar, char newChar) const {
 	string oldString = string_from_char(oldChar);
 	string newString = string_from_char(newChar);
-	string holdPointer = string_replace(this->original, oldString, newString);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_replace(this->original, oldString, newString);
+	String result = pointerHolder;
+	free(pointerHolder);
 	free(oldString);
 	free(newString);
 	return result;
@@ -548,9 +548,9 @@ String String::valueOf(boolean target) {
  * @return String
  */
 String String::valueOf(char target) {
-	string holdPointer = string_from_char(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_char(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -574,9 +574,9 @@ String String::valueOf(string target) {
  * @return String
  */
 String String::valueOf(short target) {
-	string holdPointer = string_from_short(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_short(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -587,9 +587,9 @@ String String::valueOf(short target) {
  * @return String
  */
 String String::valueOf(int target) {
-	string holdPointer = string_from_int(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_int(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -600,9 +600,9 @@ String String::valueOf(int target) {
  * @return String
  */
 String String::valueOf(long target) {
-	string holdPointer = string_from_long(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_long(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -613,9 +613,9 @@ String String::valueOf(long target) {
  * @return String
  */
 String String::valueOf(float target) {
-	string holdPointer = string_from_float(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_float(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -626,9 +626,9 @@ String String::valueOf(float target) {
  * @return String
  */
 String String::valueOf(double target) {
-	string holdPointer = string_from_double(target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_from_double(target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -639,9 +639,9 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::operator+(const string &target) {
-	string holdPointer = string_concat(this->original, target);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_concat(this->original, target);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -652,9 +652,9 @@ String String::operator+(const string &target) {
  * @return String
  */
 String String::operator+(const String &target) {
-	string holdPointer = string_concat(this->original, target.original);
-	String result = holdPointer;
-	free(holdPointer);
+	string pointerHolder = string_concat(this->original, target.original);
+	String result = pointerHolder;
+	free(pointerHolder);
 	return result;
 }
 
@@ -671,9 +671,9 @@ String String::operator+=(const String &target) {
 }
 
 String String::operator+=(const char &target) {
-	string holdPointer = this->original;
+	string pointerHolder = this->original;
 	string_append(&this->original, target);
-	free(holdPointer);
+	free(pointerHolder);
 	return *this;
 }
 
