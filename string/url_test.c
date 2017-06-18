@@ -46,18 +46,39 @@ TEST (Url, Decode) {
 
 TEST (Url, FindParam) {
 	char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
-	ASSERT_STR("loint", find_param("username", params));
-	ASSERT_STR("Loi AbC", find_param("firstName", params));
-	ASSERT_STR("1234", find_param("password", params));
+
+	char* result = find_param("username", params);
+	ASSERT_STR("loint", result);
+	free(result);
+
+	result = find_param("firstName", params);
+	ASSERT_STR("Loi AbC", result);
+	free(result);
+
+	result = find_param("password", params);
+	ASSERT_STR("1234", result);
+	free(result);
 	
 	char *params2 = "username=&password=&firstName=Loi&&lastName=Nguyen";
-	ASSERT_STR("", find_param("username", params2));
-	ASSERT_STR("Loi", find_param("firstName", params2));
-	ASSERT_STR("", find_param("password", params2));
-    ASSERT_STR("Nguyen", find_param("lastName", params2));
-	
+
+	result = find_param("username", params2);
+	ASSERT_STR("", result);
+	free(result);
+
+	result = find_param("firstName", params2);
+	ASSERT_STR("Loi", result);
+	free(result);
+
+    result = find_param("password", params2);
+	ASSERT_STR("", result);
+    free(result);
+
+    result = find_param("lastName", params2);
+    ASSERT_STR("Nguyen", result);
+    free(result);
+
 	char *params3 = "";
-    char *result = find_param("username", params3);
+    result = find_param("username", params3);
 	ASSERT_STR("", result);
 	free(result);
 

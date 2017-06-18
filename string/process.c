@@ -80,21 +80,25 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  * @return array char pointer
  */
 inline char **string_split(char *target, char *delimiter) {
-    char **result = calloc(MAX_STRING_LENGTH, sizeof(char*));
 	if (target == NULL || delimiter == NULL) {
+		char **result = calloc(0, sizeof(char*));
 		return result;
 	}
+	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
     const int target_length = length_pointer_char(target);
     char const_target[target_length + 1];
-    strncpy(const_target, target, target_length);
+    strncpy(const_target, target, (size_t) target_length);
     const_target[target_length] = '\0';
     char* item = strtok(const_target, delimiter);
     register int count = 0;
     while (item != NULL) {
-        result[count ++] = strdup(item);
+        data[count ++] = strdup(item);
         item = strtok(NULL, delimiter);
     }
+	char** result = calloc((size_t) count + 1, sizeof(char*));
+	memcpy(result, data, count * sizeof(char*));
     result[count] = '\0';
+	free(data);
 	return result;
 }
 
@@ -294,18 +298,9 @@ inline char *string_random(char *target, int size) {
  * @param subtarget
  * @return string
  */
-inline char *string_append(char *target, char subtarget) {
-	int target_length = length_pointer_char(target);
-	char *dynamic_target = strdup(target);
-	char *buffer = (char*) realloc(dynamic_target, (target_length + 2) * sizeof(char*));
-	if (buffer) {
-		dynamic_target = buffer;
-		dynamic_target[target_length] = subtarget;
-		dynamic_target[target_length + 1] = '\0';
-	} else {
-		free(buffer);
-	}
-	return dynamic_target;
+inline char *string_append(char **target, char subtarget) {
+    asprintf(target, "%s%c", *target, subtarget);
+	return *target;
 }
 
 /**
@@ -459,7 +454,8 @@ char *string_standardized(char *target) {
 	}
 	char **segments = string_split(target, " ");
 	char *result = string_join(segments, " ");
-	result[ strlen(result) - 1 ] = '\0';
+	result[strlen(result)] = '\0';
+	free_pointer_pointer_char(segments);
 	return result;
 }
 

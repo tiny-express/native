@@ -51,7 +51,7 @@ char *string_trim(char *target);
 int string_startswith(char *target, char *prefix);
 int string_endswith(char *target, char *suffix);
 char *string_random(char *target, int size);
-char *string_append(char *target, char subtarget);
+char *string_append(char **target, char subtarget);
 char *string_concat(char *target, char *subtarget);
 int string_equals(char *target1, char *target2);
 char *string_concat_asm(char *target, char *subtarget);

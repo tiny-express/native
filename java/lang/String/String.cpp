@@ -671,9 +671,9 @@ String String::operator+=(const String &target) {
 }
 
 String String::operator+=(const char &target) {
-	char *result = string_append(this->original, target);
-	*this = result;
-	free(result);
+	void* holdPointer = this->original;
+	string_append(&this->original, target);
+	free(holdPointer);
 	return *this;
 }
 

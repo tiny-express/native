@@ -94,6 +94,7 @@ char *find_param(char *name, char *params) {
 		if (length_pointer_pointer_char(pair) == 2) {
 			if (strcmp(pair[ 0 ], name) == 0) {
 				char *result = strdup(pair[1]);
+                free_pointer_pointer_char(pair);
 				free_pointer_pointer_char(query_pairs);
 				return result;
 			}

@@ -107,7 +107,7 @@ public:
 		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
 			for (char element : *this) {
 				char *result_holder = result;
-				result = string_append(result, element);
+				result = string_append(&result, element);
 				free(result_holder);
 			}
 			return result;
