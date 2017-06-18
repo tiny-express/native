@@ -52,7 +52,7 @@ namespace Java {
 			double doubleValue() const;
 			string toString() const;
 			
-			static Long *parseLong(String target);
+			static Long parseLong(String target);
 		
 		public:
 			Long operator+(const Long &target) const;

@@ -31,6 +31,7 @@ extern "C" {
 #include "../String/String.hpp"
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
@@ -40,14 +41,14 @@ TEST (JavaLang, StringConstructor) {
 	ASSERT_STR("", nullString.toString());
 
 	// Given empty value for String constructor and assign value - Return string
+	String simpleString;
+	simpleString = (string) "Hello world";
+	ASSERT_STR("Hello world", simpleString.toString());
+
+	// Given empty value for String constructor and assign value - Return string
 	String emptyString;
 	emptyString = (string) "Hello world";
 	ASSERT_STR("Hello world", emptyString.toString());
-
-	// Given byte array for String constructor - Return string
-	Array<byte> bytes = { 65, 66, 67 };
-	String byteString = bytes;
-	ASSERT_STR("ABC", byteString.toString());
 
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
@@ -63,8 +64,6 @@ TEST (JavaLang, StringDestructor) {
 	delete textPointer;
 }
 
-// This method is overrided from String
-// Operator == and != will be affected
 TEST (JavaLang, StringEquals) {
 	// Given two String objects with same value - Return they should equal
 	String stringEqual1 = "Hello World";
@@ -115,7 +114,6 @@ TEST (JavaLang, StringContains) {
 
 	//Test true with correct substring inside
 	ASSERT_TRUE(validString.contains(subString));
-
 	//Test with with invalid substring inside
 	ASSERT_FALSE(validString.contains(invalidSubString));
 }
@@ -127,7 +125,14 @@ TEST (JavaLang, StringEndsWith) {
 	ASSERT_TRUE(textPlus.endsWith(String_string));
 }
 
-// FIXME
+TEST(JavaLang, StringGetBytes) {
+	String text = "Sample Text";
+	Array<byte> bytes = text.getBytes();
+	string result = bytes.toString();
+	ASSERT_STR(text.toString(), result);
+	free(result);
+}
+
 TEST (JavaLang, StringIndexOf) {
 	String textPlus = "Hello Hello Hello ";
 
@@ -140,9 +145,6 @@ TEST (JavaLang, StringIndexOf) {
 	result = textPlus.indexOf("llo");
 	ASSERT_EQUAL(2, result);
 
-//    result2 = textPlus1.indexOf("llo", 3);
-//    ASSERT_EQUAL(14, result2);
-
 	int result1 = textPlus.lastIndexOf('H');
 	ASSERT_EQUAL(12, result1);
 
@@ -153,6 +155,7 @@ TEST (JavaLang, StringIndexOf) {
 	String validString = "awesome keyword inside this awesome string";
 	String subString = "awesome";
 	String wrongString = "some thing";
+
 
 	// Test true first character of subString appear last in validString is position 28th
 	ASSERT_EQUAL(28, validString.lastIndexOf(subString));
@@ -179,8 +182,6 @@ TEST (JavaLang, StringIndexOf) {
 	ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
 }
 
-
-// FIXME
 TEST (JavaLang, StringIsEmpty) {
 	String textPlus = "Hello Hello Hello ";
 	ASSERT_TRUE(!textPlus.isEmpty());
@@ -189,7 +190,6 @@ TEST (JavaLang, StringIsEmpty) {
 	ASSERT_TRUE(textPlus.isEmpty());
 }
 
-// FIXME
 TEST (JavaLang, StringLength) {
 	String textPlus = "Hello Hello Hello ";
 
@@ -222,25 +222,22 @@ TEST (JavaLang, StringMatches) {
 	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
 }
 
-//FIXME
 TEST (JavaLang, StringReplace) {
 	String textPlus = "Hello Hello Hello ";
 
 	String result = textPlus.replace('e', 'i');
 	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
 
-	String String_string1 = "Hello";
-	String String_string2 = "Phuoc";
-	result = textPlus.replaceAll(String_string1, String_string2);
-	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+//	String String_string1 = "Hello";
+//	String String_string2 = "Phuoc";
+//	result = textPlus.replaceAll(String_string1, String_string2);
+//	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
 }
 
-// FIXME
 TEST (JavaLang, StringSplit) {
 
 }
 
-//FIXME
 TEST (JavaLang, StringStartsWith) {
 	String textPlus = "Hello Hello Hello ";
 
@@ -252,7 +249,6 @@ TEST (JavaLang, StringStartsWith) {
 	ASSERT_TRUE(textPlus1.startsWith(String_string1, 7));
 }
 
-//FIXME
 TEST (JavaLang, StringToLowerCase) {
 	String textPlus = "Hello HELLO Hello ";
 
@@ -260,7 +256,6 @@ TEST (JavaLang, StringToLowerCase) {
 	ASSERT_STR("hello hello hello ", result.toString());
 }
 
-//FIXME
 TEST (JavaLang, StringToUpperCase) {
 	String textPlus = "Hello HELLO Hello ";
 
@@ -268,7 +263,6 @@ TEST (JavaLang, StringToUpperCase) {
 	ASSERT_STR("HELLO HELLO HELLO ", result.toString());
 }
 
-//FIXME
 TEST (JavaLang, StringTrim) {
 	String textPlus = " Hello HELLO Hello ";
 
@@ -318,7 +312,7 @@ TEST (JavaLang, StringValueOf) {
 	ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
-TEST (JavaLang, StringOperatorPlus) {
+TEST (JavaLang, StringOperatorPlusStringObject) {
 	// Given two strings and concatenate them - Return string
 	String textPlus1 = "Hello ";
 	String textPlus2 = "World";
@@ -334,8 +328,20 @@ TEST (JavaLang, StringOperatorPlus) {
 	// Concat 2 Strings with valueOf(number) - Return string
 	textPlus1 = "Hello";
 	aNumber = 1;
-	textResult = textPlus1 + " Galaxy " + String::valueOf(aNumber);
+	textResult = textPlus1 + (string) " Galaxy " + String::valueOf(aNumber);
 	ASSERT_STR("Hello Galaxy 1", textResult.toString());
+}
+
+TEST (JavaLang, StringOperatorPlusStringDataType) {
+	string world = (string) " World";
+	String hello = "Hello";
+	hello += world;
+	ASSERT_STR("Hello World", hello.toString());
+
+	String food = "Food";
+	string tiny = (string) " Tiny";
+	String foodTiny = food + tiny;
+	ASSERT_STR("Food Tiny", foodTiny.toString());
 }
 
 TEST (JavaLang, StringOperatorEquals) {
@@ -384,17 +390,16 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 	String stringTest = "";
 	String stringTest1 = "Hello";
 	String stringTest2 = " Galaxy";
-
-	stringTest += stringTest1 + stringTest2 + "!";
+	stringTest += stringTest1 + stringTest2 + (string) "!";
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
 
 	// Check a String concat with valueOf(number) use "+=" operator
 	int number = 1;
-	stringTest = "Hello ";
+    stringTest = "Hello ";
 	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 1", stringTest.toString());
 
-	// Check a String concat with valueOf(number) use "+=" operator
+//	// Check a String concat with valueOf(number) use "+=" operator
 	number = 1;
 	stringTest += "" + String::valueOf(number);
 	ASSERT_STR("Hello 11", stringTest.toString());
@@ -404,7 +409,7 @@ TEST (JavaLang, StringMemoryCheck) {
 	// Test create object String with validString and change data of validString
 	string validString = strdup("foodtiny");
 	String stringTest = validString;
-	validString = strdup("");
+    free(validString);
 
 	int expect = 8;
 	int result = stringTest.length();
@@ -419,18 +424,18 @@ TEST (JavaLang, StringMemoryCheck) {
 }
 
 TEST(JavaLang, StringClone) {
-    // Given two string and compare - Should equal
-    String validString("Hello world");
-    String cloneString = validString.clone();
-    ASSERT_STR(validString.toString(), cloneString.toString());
+	// Given two string and compare - Should equal
+	String validString("Hello world");
+	String cloneString = validString.clone();
+	ASSERT_STR(validString.toString(), cloneString.toString());
 
-    // Give two empty string and compare - Should equal
-    String emptyString;
-    String cloneEmptyString = emptyString.clone();
-    ASSERT_STR(emptyString.toString(), cloneEmptyString.toString());
+	// Give two empty string and compare - Should equal
+	String emptyString;
+	String cloneEmptyString = emptyString.clone();
+	ASSERT_STR(emptyString.toString(), cloneEmptyString.toString());
 
-    // Clone new data for cloneEmptyString
-    // Give two string and compare - Should equal
-    cloneEmptyString = validString.clone();
-    ASSERT_STR(validString.toString(), cloneEmptyString.toString());
+	// Clone new data for cloneEmptyString
+	// Give two string and compare - Should equal
+	cloneEmptyString = validString.clone();
+	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
 }

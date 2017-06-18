@@ -182,6 +182,7 @@ char *http_path(char *url) {
 			break;
 		}
 	}
+
 	char *result = string_from_to(url, begin_pos, end_pos - 1);
 	return result;
 }
@@ -209,6 +210,7 @@ int url_port(char *url) {
 	char *domain = url;
 	int port = http_port(url);
 	if (port == -1) {
+		free(path);
 		return -1;
 	}
 	int isDynamic = FALSE;
@@ -216,21 +218,23 @@ int url_port(char *url) {
 		domain = string_from_to(domain, 0, path_index - 1);
 		isDynamic = TRUE;
 	}
-	free(path);
-	
+
 	char *port_string;
 	asprintf(&port_string, ":%d", port);
 	if (string_index(domain, port_string, 1) == -1) {
 		if (isDynamic) {
 			free(domain);
 		}
+		free(path);
 		free(port_string);
 		return -1;
 	}
 	if (isDynamic) {
 		free(domain);
 	}
+
 	free(port_string);
+	free(path);
 	return port;
 }
 

@@ -64,8 +64,8 @@ Double::~Double() {
  * @param target
  * @return double
  */
-Double *Double::parseDouble(String target) {
-	return new Double(string_to_double(target.toString()));
+Double Double::parseDouble(String target) {
+	return Double(string_to_double(target.toString()));
 }
 
 /**

@@ -98,7 +98,7 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 file(GLOB_RECURSE HEADERS
         ./*.h
         library.hpp
-)
+        )
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
@@ -110,11 +110,12 @@ file(GLOB_RECURSE SOURCES_C
         server/*
         storage/*
         string/*
+        system/*
         thread/*
         type/*
         vendor/*
         validator/*
-)
+        )
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
@@ -126,11 +127,12 @@ file(GLOB_RECURSE TESTS_C
         server/*_test.c
         storage/*_test.c
         string/*_test.c
+        system/*_test.c
         thread/*_test.c
         type/*_test.c
         vendor/*_test.c
         validator/*_test.c
-)
+        )
 
 # Remove all test files within c files
 foreach (test_c_file ${TESTS_C})
@@ -140,12 +142,12 @@ endforeach ()
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
         java/**/*.cpp
-)
+        )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         java/**/*Test.cpp
-)
+        )
 
 # Remove all test files within cpp files
 foreach (test_cpp_file ${TESTS_CPP})
@@ -175,7 +177,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
 )
 
 # Check memory leak
@@ -186,8 +188,8 @@ add_custom_target(
 
 # Check memory leak
 add_custom_target(
-    leak-c
-    COMMAND valgrind --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+        leak-c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
 )
 
 # Check memory leak
@@ -202,6 +204,13 @@ install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native)
 install(FILES ${HEADERS} DESTINATION include/native)
+
+# Add uninstall
+add_custom_target(
+        uninstall
+        COMMAND rm -rf /usr/local/include/native
+        COMMAND rm -rf /usr/local/lib/libnative*
+)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)

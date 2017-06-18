@@ -51,6 +51,12 @@ namespace Java {
 				this->previous = previous2;
 				this->next = next2;
 			}
+
+            Node(const Node<E> &target) {
+                this->element = target.element;
+                this->next = target.next;
+                this->previous = target.previous;
+            }
 		};
 		
 		template <typename E>
@@ -78,7 +84,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean add(const E &e) {
-				linkLast(e);
+				this->linkLast(e);
 				return true;
 			}
 
@@ -470,37 +476,35 @@ namespace Java {
 
 			}
 
-
-
-
 		private:
-			void linkFirst(E e) {
+			void linkFirst(const E &e) {
 				Node<E> *node = new Node<E>(NULL, e, first);
 				
-				Node<E> *f = first;
-				first = node;
+				Node<E> *f = this->first;
+				this->first = node;
 				
-				if (last == NULL) {
-					last = node;
+				if (this->last == NULL) {
+					this->last = node;
 				} else {
 					f->previous = node;
 				}
 				
-				nodeSize++;
+				this->nodeSize++;
 			}
 			
-			void linkLast(E e) {
-				Node<E> *node = new Node<E>(last, e, NULL);
+			void linkLast(const E &e) {
+				Node<E> *node = new Node<E>(this->last, e, NULL);
 				
-				Node<E> *l = last;
-				last = node;
+				Node<E> *l = this->last;
+				this->last = node;
 				
 				if (first == NULL) {
 					first = node;
 				} else {
 					l->next = node;
 				}
-				nodeSize++;
+
+                this->nodeSize++;
 			}
 			
 			Node<E> *node0(int index) {
@@ -531,7 +535,7 @@ namespace Java {
 				if (first == NULL) {
 					exception();
 				}
-				
+
 				Node<E> *temp = first;
 				first = temp->next;
 				
@@ -545,7 +549,7 @@ namespace Java {
 				if (last == NULL) {
 					exception();
 				}
-				
+
 				Node<E> *temp = last;
 				last = temp->previous;
 				

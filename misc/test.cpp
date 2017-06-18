@@ -8,4 +8,3 @@ int main() {
 	System::out::println(text);
 	return 0;
 }
-

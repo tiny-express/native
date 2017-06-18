@@ -38,7 +38,7 @@ inline char *segment_pointer_char(char *target_param, int from, int to) {
                 return strdup("");
         }
         char *target = strdup(target_param);
-        int length= to - from + 1;
+        int length = to - from + 1;
         if (to >= length_target) {
                 length = length_target - from + 1;
         }

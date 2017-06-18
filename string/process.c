@@ -81,50 +81,41 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-		return NULL;
+		char **result = calloc(0, sizeof(char*));
+		return result;
 	}
-	int length_target = length_pointer_char(target);
-	int length_delimiter = length_pointer_char(delimiter);
-	int distance = length_target - length_delimiter + 1;
-	int length_item = 0;
-	char *segment = calloc(length_delimiter + 1, sizeof(char));
 	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
-	register int count = 0, from = 0, to = 0;
-	// Compare delimiter per target segment
-	while (to <= distance) {
-		strncpy(segment, &target[ to ], length_delimiter);
-		if (strcmp(segment, delimiter) == 0) {
-			if (to - from > 0) {
-				length_item = to - from;
-				char *item = calloc(length_item + 1, sizeof(char));
-				strncpy(item, &target[ from ], length_item);
-				// Append element to result
-				data[ count++ ] = item;
-				from = to + length_delimiter;
-			} else {
-				from += length_delimiter;
-			}
-			to = from;
-			continue;
-		}
-		++to;
-	}
-	if (to - from > 0) {
-		length_item = length_target - from;
-		char *item = calloc(length_item + 1, sizeof(char));
-		strncpy(item, &target[ from ], length_item);
-		// Append element to result
-		data[ count++ ] = item;
-	}
-	// Saving memory
-	char **result = calloc(count + 1, sizeof(char *));
-	memcpy(result, data, count * sizeof(char *));
-	// End array
-	result[ count ] = '\0';
-	// Deallocate memory
-	free(segment);
+    const int target_length = length_pointer_char(target);
+    char const_target[target_length + 1];
+    strncpy(const_target, target, (size_t) target_length);
+    const_target[target_length] = '\0';
+    char* item = strtok(const_target, delimiter);
+    register int count = 0;
+    while (item != NULL) {
+        data[count ++] = strdup(item);
+        item = strtok(NULL, delimiter);
+    }
+	char** result = calloc((size_t) count + 1, sizeof(char*));
+	memcpy(result, data, count * sizeof(char*));
+    result[count] = '\0';
 	free(data);
 	return result;
+}
+
+/**
+ * free char**
+ * @param char_array
+ */
+void  free_pointer_pointer_char(char** char_array) {
+    if (char_array == NULL) {
+        return;
+    }
+    int length = length_pointer_pointer_char(char_array);
+    register int index;
+    for (index = length - 1; index >= 0; index --) {
+        free(char_array[index]);
+    }
+    free(char_array);
 }
 
 /**
@@ -307,18 +298,9 @@ inline char *string_random(char *target, int size) {
  * @param subtarget
  * @return string
  */
-inline char *string_append(char *target, char subtarget) {
-	int target_length = length_pointer_char(target);
-	char *dynamic_target = strdup(target);
-	char *buffer = (char*) realloc(dynamic_target, (target_length + 2) * sizeof(char*));
-	if (buffer) {
-		dynamic_target = buffer;
-		dynamic_target[target_length] = subtarget;
-		dynamic_target[target_length + 1] = '\0';
-	} else {
-		free(buffer);
-	}
-	return dynamic_target;
+inline char *string_append(char **target, char subtarget) {
+    asprintf(target, "%s%c", *target, subtarget);
+	return *target;
 }
 
 /**
@@ -330,10 +312,10 @@ inline char *string_append(char *target, char subtarget) {
  */
 inline char *string_concat(char *target, char *subtarget) {
 	if (is_empty(target)) {
-		return subtarget;
+		return strdup(subtarget);
 	}
 	if (is_empty(subtarget)) {
-		return target;
+		return strdup(target);
 	}
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
@@ -385,7 +367,7 @@ inline char *string_to(char *target, int to) {
  */
 char *string_copy(char *target) {
 	if (is_empty(target)) {
-		return "\0";
+		return strdup("");
 	}
 	int length = length_pointer_char(target);
 	char *result = (char *) calloc(length + 1 , sizeof(char));
@@ -472,7 +454,8 @@ char *string_standardized(char *target) {
 	}
 	char **segments = string_split(target, " ");
 	char *result = string_join(segments, " ");
-	result[ strlen(result) - 1 ] = '\0';
+	result[strlen(result)] = '\0';
+	free_pointer_pointer_char(segments);
 	return result;
 }
 
@@ -531,12 +514,13 @@ int string_matches(char *target, char *regex) {
 	regex_t exp;
 	int convert = regcomp(&exp, regex, REG_EXTENDED);
 	if (convert != 0) {
+        regfree(&exp);
 		return FALSE;
 	}
 	if (regexec(&exp, target, 0, NULL, 0) == 0) {
 		regfree(&exp);
 		return TRUE;
 	}
-	
+    regfree(&exp);
 	return FALSE;
 }
