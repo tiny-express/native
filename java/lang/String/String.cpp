@@ -302,18 +302,14 @@ int String::lastIndexOf(int ch, int fromIndex) {
  * @return int
  */
 int String::lastIndexOf(String str) const {
-	string strReversed = string_reverse(str.toString());
-	string currentStrReversed = string_reverse(this->toString());
-	
-	int result = string_index(currentStrReversed, strReversed, 1);
-	
-	free(strReversed);
-	free(currentStrReversed);
-	
+	string reversedString = string_reverse(str.toString());
+	string currentReversedString = string_reverse(this->toString());
+	int result = string_index(currentReversedString, reversedString, 1);
+	free(reversedString);
+	free(currentReversedString);
 	if (result == NOT_FOUND) {
 		return result;
 	}
-	
 	//Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
@@ -328,20 +324,15 @@ int String::lastIndexOf(String str) const {
  */
 int String::lastIndexOf(String str, int fromIndex) const {
 	string subString = &( this->original )[ fromIndex ]; // get subString start fromIndex
-	
-	string strReversed = string_reverse(str.toString());
-	string currentStrReversed = string_reverse(subString);
-	
-	int result = string_index(currentStrReversed, strReversed, 1);
-	
-	free(strReversed);
-	free(currentStrReversed);
-	
+	string reversedString = string_reverse(str.toString());
+	string currentReversedString = string_reverse(subString);
+	int result = string_index(currentReversedString, reversedString, 1);
+	free(reversedString);
+	free(currentReversedString);
 	if (result == NOT_FOUND) {
 		return result;
 	}
-	
-	//Re-calculate first character of str
+	// Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
 	
