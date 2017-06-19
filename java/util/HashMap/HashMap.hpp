@@ -33,7 +33,7 @@ namespace Java {
 	namespace Util {
 		template <typename K, typename V>
 		class HashMap
-//					public HashMap
+//					: public HashMap
 //					, public virtual Map
 //					, public virtual Cloneable
 //					, public virtual Serializable
@@ -52,13 +52,13 @@ namespace Java {
 			 * @return V
 			 */
 			V *get(K key) {
-				auto const it = hashMap.find(key);
+				auto const it = this->hashMap.find(key);
 
-				if (it == hashMap.end()) {
+				if (it == this->hashMap.end()) {
 					return NULL;
 				}
 
-				return &hashMap[key];
+				return &(this->hashMap[key]);
 			}
 
 			/**
@@ -67,7 +67,7 @@ namespace Java {
 			 * @param value
 			 */
 			void put(K key, V value) {
-				hashMap.insert(std::make_pair(key, value));
+				this->hashMap.insert(std::make_pair(key, value));
 			}
 
 			/**
@@ -96,7 +96,7 @@ namespace Java {
 			 * @return
 			 */
 			boolean containsValue(const V value) {
-				for (auto const &ent1 : hashMap) {
+				for (auto const &ent1 : this->hashMap) {
 					if (ent1.second == value) {
 						return true;
 					}
@@ -108,7 +108,7 @@ namespace Java {
 			 * Removes all of the mappings from this map.
 			 */
 			void clear() {
-				hashMap.clear();
+				this->hashMap.clear();
 			}
 
 			/**
@@ -121,7 +121,7 @@ namespace Java {
 					return false;
 				}
 
-				hashMap.erase(key);
+				this->hashMap.erase(key);
 				return true;
 			}
 
@@ -136,7 +136,7 @@ namespace Java {
 					return false;
 				}
 
-				hashMap.erase(key);
+				this->hashMap.erase(key);
 				return true;
 			}
 
@@ -144,7 +144,7 @@ namespace Java {
 			 * Removes all of the mappings from this map.
 			 */
 			void removeAll() {
-				hashMap.clear();
+				this->hashMap.clear();
 			}
 
 			/**
@@ -152,7 +152,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean isEmpty() {
-				return ( hashMap.size() == 0 );
+				return ( this->hashMap.size() == 0 );
 			}
 
 			/**
@@ -160,7 +160,7 @@ namespace Java {
 			 * @return int
 			 */
 			int size() {
-				return hashMap.size();
+				return this->hashMap.size();
 			}
 		};
 		
