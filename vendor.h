@@ -30,7 +30,7 @@
 #include "type.h"
 #include <stdio.h>
 
-#define SENDGRID_RESPONSE_SUCCESS "202 ACCEPTED"
+#define SENDGRID_RESPONSE_ACCEPTED 202
 #define SENDGRID_REQUEST_FORMAT \
                 "{\"personalizations\":"\
                      "[{\"to\": [{\"email\": \"%s\"}],"\
@@ -51,7 +51,7 @@
 #define SUCCESS_VALUE 1
 
 #define STRING_NOT_FOUND        -1
-#define TWILIO_RESPONSE_SUCCESS "201 CREATED"
+#define TWILIO_RESPONSE_CREATED 201
 
 #define NODE "node"
 #define VALUE "value"

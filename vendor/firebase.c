@@ -32,6 +32,7 @@
 #include "../type.h"
 #include "../common.h"
 #include "../vendor.h"
+#include "../network/response_parser.h"
 
 /**
  * Push Notification via Google FireBase service
@@ -90,20 +91,13 @@ int push_notification(
 		return FALSE;
 	}
 	
-	// Firebase reponse has format
-	// {"success": 1}
-	// So we need to parse this response to get the success value
-	// TODO: @dquang replace by http_parser
-	char* json = string_from_to(
-		response,
-		string_index(response, "{", 1),
-		length_pointer_char(response) - 1
-	);
+	http_response *response_parser = parse(response);
+	char* json = response_parser->body;
 	JSON_Value *root_value = json_parse_string(json);
 	JSON_Object *root_object = json_value_get_object(root_value);
 	int status_value = (int) json_object_get_number(root_object, (const char *) SUCCESS_LABEL);
 	free(response);
-	free(json);
+    free_http_response(response_parser);
 	json_value_free(root_value);
 	return status_value == SUCCESS_VALUE;
 }
