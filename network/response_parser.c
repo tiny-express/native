@@ -4,25 +4,44 @@
 #include "../string.h"
 #include "../builtin.h"
 
+/**
+ * init result
+ * @reference how to use flexible memory: https://stackoverflow.com/questions/17344745/how-to-use-flexible-array-in-c-to-keep-several-values
+ * @return an empty http_response
+ */
+http_response *init_result();
+
+/**
+ * count header quantity from response
+ * @param response
+ * @return header quantity
+ */
 int count_header(char* response);
 
 /**
- * parse uri: method(GET, POST, PUT, PATCH ..), path and HTTP version
+ * parse version, status, status code into result
  * @param response
  * @param result
- * @return index of header start in response
+ * @return false if could not parse uri, else return true
  */
-int parse_uri(char *line, http_response *result);
+int parse_uri(char **response_split, http_response *result);
 
 /**
- * parse header
- * @reference how to use flexible memory: https://stackoverflow.com/questions/17344745/how-to-use-flexible-array-in-c-to-keep-several-values
+ * parse header to result
  * @param response
  * @param result
  * @param index
- * @return index of body start in response
+ * @return false if could not parse header, else return true
  */
-int parse_header(char *line, http_response *result, int index);
+int parse_header(char **response_split, http_response *result, int header_quantity);
+
+/**
+ * parse response body to result
+ * @param response_split
+ * @param result
+ * @return true
+ */
+int parse_body(char **response_split, http_response *result);
 
 /**
  * parse http response to
@@ -31,45 +50,42 @@ int parse_header(char *line, http_response *result, int index);
  */
 http_response *parse(char *response) {
     char** response_split = string_split(response, "\r\n");
-    int response_split_length = length_pointer_pointer_char(response_split);
-    http_response *result = malloc(sizeof(http_response) + 4 * sizeof(char *));
-    result->header_quantity = count_header(response);
-    if (response_split_length < 2) {
-        free_pointer_pointer_char(response_split);
-        return result;
+    http_response *result = init_result();
+    const int header_quantity = count_header(response);
+
+    if (!(parse_uri(response_split, result) &&
+            parse_header(response_split, result, header_quantity) &&
+            parse_body(response_split, result))) {
+        free_http_response(result);
+        result = init_result();
     }
 
-    if (result->header_quantity == 0 || !parse_uri(response_split[0], result)) {
-        return result;
-    }
-    register int index;
-    for (index = 0; index < result->header_quantity; index ++) {
-        if (!parse_header(response_split[index + 1], result, index)) {
-            return result;
-        }
-    }
-
-    result->body = strdup("");
-    if (result->header_quantity + 1 < response_split_length) {
-        char* pointer_holder;
-        free(result->body);
-        result->body = strdup(response_split[result->header_quantity + 1]);
-        for (index = result->header_quantity + 2; index < response_split_length; index ++) {
-            pointer_holder = result->body;
-            asprintf(&result->body, "%s\r\n%s", result->body, response_split[index]); // append all data remain to body
-            free(pointer_holder);
-        }
-    }
     free_pointer_pointer_char(response_split);
     return result;
 }
 
-int parse_uri(char *line, http_response *result) {
-    char** uri_split = string_split(line, " ");
+
+http_response *init_result() {
+    http_response *result = calloc(1, sizeof(http_response) + 4 * sizeof(char *));
+    result->header_quantity = 0;
+    result->version = strdup("");
+    result->status_code = strdup("");
+    result->status = strdup("");
+    result->body = strdup("");
+    return result;
+}
+
+int parse_uri(char **response_split, http_response *result) {
+    char** uri_split = string_split(response_split[0], " ");
     int uri_split_length = length_pointer_pointer_char(uri_split);
     if (uri_split_length < 3) {
+        free_pointer_pointer_char(uri_split);
         return FALSE;
     }
+    free(result->status);
+    free(result->version);
+    free(result->status_code);
+
     result->version = strdup(uri_split[0]);
     result->status_code = strdup(uri_split[1]);
     result->status = strdup(uri_split[2]);
@@ -84,28 +100,41 @@ int parse_uri(char *line, http_response *result) {
 	return TRUE;
 }
 
-int parse_header(char *line, http_response *result, int index) {
-    const int colon_index = string_index(line, ":", 1);
-    result->headers[index] = malloc(sizeof(header));
-    char* header_name = string_from_to(line, 0, colon_index - 1);
-    char* header_value = string_from_to(line, colon_index + 2, length_pointer_char(line) - 1);
-    result->headers[index]->name = header_name;
-    result->headers[index]->value = header_value;
+header* get_header(char **response_split, int index) {
+    char* line = response_split[index + 1];
+    int colon_index = string_index(line, ":", 1);
+    header* result = calloc(1, sizeof(header));
+    result->name = string_from_to(line, 0, colon_index - 1);
+    result->value = string_from_to(line, colon_index + 2, length_pointer_char(line) - 1);
+    return result;
+}
+
+int parse_header(char **response_split, http_response *result, int header_quantity) {
+    if (header_quantity == 0) {
+        return FALSE;
+    }
+    result->header_quantity = header_quantity;
+    register int index;
+    for (index = 0; index < header_quantity; index ++) {
+        result->headers[index] = get_header(response_split, index);
+    }
     return TRUE;
 }
 
-void free_http_response(http_response *response) {
-	register int index;
-	for (index = 0; index < response->header_quantity; index++) {
-        free(response->headers[ index ]->name);
-		free(response->headers[ index ]->value);
-		free(response->headers[ index ]);
-	}
-    free(response->status);
-	free(response->status_code);
-    free(response->version);
-    free(response->body);
-    free(response);
+int parse_body(char **response_split, http_response* result) {
+    const int response_split_length = length_pointer_pointer_char(response_split);
+    if (result->header_quantity + 1 < response_split_length) {
+        free(result->body);
+        char* pointer_holder;
+        register int index;
+        result->body = strdup(response_split[result->header_quantity + 1]);
+        for (index = result->header_quantity + 2; index < response_split_length; index ++) {
+            pointer_holder = result->body;
+            asprintf(&result->body, "%s\r\n%s", result->body, response_split[index]); // append all data remain to body
+            free(pointer_holder);
+        }
+    }
+    return TRUE;
 }
 
 int count_header(char* response) {
@@ -118,4 +147,18 @@ int count_header(char* response) {
         }
     }
     return count;
+}
+
+void free_http_response(http_response *response) {
+    register int index;
+    for (index = 0; index < response->header_quantity; index++) {
+        free(response->headers[ index ]->name);
+        free(response->headers[ index ]->value);
+        free(response->headers[ index ]);
+    }
+    free(response->status);
+    free(response->status_code);
+    free(response->version);
+    free(response->body);
+    free(response);
 }

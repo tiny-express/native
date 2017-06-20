@@ -79,5 +79,11 @@ TEST (Network, Parser) {
             "<p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>";
     http_response *result4 = parse(response4);
     ASSERT_STR("NOT FOUND",result4->status);
+	ASSERT_STR("404", result4->status_code);
     free_http_response(result4);
+
+    // This case test free an empty http_response, no ASSERT here
+	char* response5 = "";
+	http_response *result5 = parse(response5);
+	free_http_response(result5);
 }
