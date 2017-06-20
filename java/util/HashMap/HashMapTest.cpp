@@ -35,129 +35,68 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 /**
- *  Basic funtions such as constructor, get, put
- * */
-TEST (JavaUtil, HashMapBasic) {
-	// Given empty hash map - return NULL
-	HashMap<string, string> emptyHashMap;
-	ASSERT_NULL(emptyHashMap.get((string) "key"));
+ * All test cases use put(), so we don't need to test this function, if it wrong, will cause all test cases wrong
+ */
 
-	// Given <int, String> hash map - return value is exist
-	HashMap<int, String> intStringHashMap;
-	intStringHashMap.put(1, (String) "value");
-	ASSERT_TRUE((String) "value" == *intStringHashMap.get(1));
+TEST (JavaUtil, HashMapGet) {
+	// Given valid hash map to test get()
+	HashMap<String, String> hashMap;
+	hashMap.put("key", "value");
 
-	// Given <Integer, string> hash map - return value is exist
-	HashMap<Integer, string> integerStringHashMap;
-	Integer integerNumber = 1;
-	integerStringHashMap.put(integerNumber, (string) "value");
-	ASSERT_STR((string) "value", *integerStringHashMap.get(1));
+	String *result = hashMap.get("key");
+	String expectedValue = "value";
+	ASSERT_NOT_NULL(result);
+	ASSERT_STR(expectedValue.toString(), (*result).toString());
+	ASSERT_STR(expectedValue.toString(), result->toString()); //another way to deal
 
-	// Give wrong Integer to get NULL value
-	HashMap<Integer, string> nullValueHashMap;
-	ASSERT_NULL(nullValueHashMap.get(123));
-
-	// More test cases
+	String *nullableResult = hashMap.get("wrong_key");
+	ASSERT_NULL(nullableResult);
 }
 
-/**
- *  Basic funtions such as constains, size, remove, clear, empty ..
- * */
-TEST (JavaUtil, HashMapAdvance) {
-	// Give some params to run test case below
-	string key = (string) "key";
-	string wrongKey = (string) "wrongKey";
-	string removeKey = (string) "removeKey";
-	string value = (string) "value";
-	string wrongValue = (string) "wrongValue";
-	string removeValue = (string) "removeValue";
+TEST (JavaUtil, HashMapContainsKey) {
+	// Given valid hash map to test containsKey()
+	HashMap<Integer, String> hashMap;
+	hashMap.put(3, "three");
+	hashMap.put(17, "seven teen");
+	hashMap.put(-52, "negative fifty two");
 
-	// Given valid HashMap<string, string> to check contains
-	HashMap<string, string> containsHashMap;
-	containsHashMap.put(key, value);
+	boolean exist = hashMap.containsKey(-52);
+	ASSERT_TRUE(exist);
 
-	// Test true containsKey with correct key
-	ASSERT_TRUE(containsHashMap.containsKey(key));
-
-	// Test false containsKey with wrong key
-	ASSERT_FALSE(containsHashMap.containsKey(wrongKey));
-
-	// Test true containsValue with correct value
-	ASSERT_TRUE(containsHashMap.containsValue(value));
-
-	// Test false containsValue with wrong key
-	ASSERT_FALSE(containsHashMap.containsValue(wrongValue));
-
-	// Given valid removeHashMap<string, string> to check remove
-	HashMap<string, string> removeHashMap;
-	removeHashMap.put(key, value);
-	removeHashMap.put(removeKey, removeValue);
-
-	// Test true remove with correct key
-	ASSERT_TRUE(removeHashMap.remove(key));
-
-	// Test false remove through recall remove function with same key
-	ASSERT_FALSE(removeHashMap.remove(key));
-
-	// Test true remove with correct removeKey and removeValue
-	ASSERT_TRUE(removeHashMap.remove(removeKey, removeValue));
-
-	// Given valid clearHashMap<string, string> to check clear (removeAll() also works on clear())
-	HashMap<string, string> clearHashMap;
-	clearHashMap.put(key, value);
-
-	// Test true clear() with clearHashMap's size should be 0 after (isEmpty() also works on size() == 0)
-	clearHashMap.clear();
-	ASSERT_EQUAL(0, clearHashMap.size());
-
-	// Given valid sizeHashMap<string, string> to test size
-	HashMap<string, string> sizeHashMap;
-	sizeHashMap.put(key, value);
-	sizeHashMap.put(wrongKey, wrongValue);
-
-	// Test true size() with those data putted into sizeHashMap above
-	ASSERT_EQUAL(2, sizeHashMap.size());
-
-	// More test case
+	boolean notFound = hashMap.containsKey(100);
+	ASSERT_FALSE(notFound);
 }
 
-TEST (JavaUtil, HashMapForObjects) {
-	// Given some params for those test case below
-	String key = "key";
-	String wrongKey = "wrongKey"; // not put into validHashMap
-	Integer value = 123;
-	Integer wrongValue = 333; // not put into validHashMap
+TEST (JavaUtil, HashMapContainsValue) {
+	// Given valid hash map to test containsValue()
+	HashMap<String, Double> hashMap;
+	hashMap.put("15.3", 15.3);
+	hashMap.put("30.111", 30.111);
 
-	// Given validHashMap<String, Integer> to check all functions inside HashMap
-	HashMap<String, Integer> validHashMap;
-	validHashMap.put(key, value);
+	boolean exist = hashMap.containsValue(15.3);
+	ASSERT_TRUE(exist);
 
-	// Test true get() with correct key
-	ASSERT_TRUE(value == *validHashMap.get(key));
+	boolean notFound = hashMap.containsValue(30.22);
+	ASSERT_FALSE(notFound);
+}
 
-	// Test null get() with wrong key
-	ASSERT_NULL(validHashMap.get(wrongKey));
+TEST (JavaUtil, HashMapSize) {
+	// Given valid hash map to test size()
+	HashMap<Double, String> hashMap;
+	hashMap.put(15.22222, "15.22222");
+	hashMap.put(-50.2222, "50");
 
-	// Test true containsKey() with correct key
-	ASSERT_TRUE(validHashMap.containsKey(key));
+	int expectedSize = 2;
+	ASSERT_EQUAL(expectedSize, hashMap.size());
+}
 
-	// Test false containsKey() with wrong key
-	ASSERT_FALSE(validHashMap.containsKey(wrongKey));
+TEST (JavaUtil, HashMapClear) {
+	// Given valid hashMap to test clear()
+	HashMap<Long, Integer> hashMap;
+	hashMap.put(100, 25);
+	hashMap.put(500, 123);
 
-	// Test true containsValue with correct value;
-	ASSERT_TRUE(validHashMap.containsValue(value));
-
-	// Test false containsValue with wrong value
-	ASSERT_FALSE(validHashMap.containsValue(wrongValue));
-
-	// Test false isEmpty() because validHashMap store 1 instance inside
-	ASSERT_FALSE(validHashMap.isEmpty());
-
-	// Test true size() of validHashMap
-	ASSERT_EQUAL(1, validHashMap.size());
-
-	// Test true clear() (removeAll() also works on this) through size() should to be == 0 || isEmpty() == true
-	validHashMap.clear();
-	ASSERT_TRUE(validHashMap.isEmpty());
-	ASSERT_EQUAL(0, validHashMap.size());
+	hashMap.clear();
+	int expectedSizeAfterClear = 0;
+	ASSERT_EQUAL(expectedSizeAfterClear, hashMap.size());
 }
