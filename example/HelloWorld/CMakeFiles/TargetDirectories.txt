@@ -1,0 +1,3 @@
+/home/feeder/workspace/native/example/HelloWorld/CMakeFiles/edit_cache.dir
+/home/feeder/workspace/native/example/HelloWorld/CMakeFiles/rebuild_cache.dir
+/home/feeder/workspace/native/example/HelloWorld/CMakeFiles/HelloWorld.dir

@@ -27,4 +27,46 @@
 #ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
 #define NATIVE_JAVA_LANG_BOOLEAN_HPP
 
+#include "../Object/Object.hpp"
+#include "../../io/Serializable/Serializable.hpp"
+#include "../../lang/Comparable/Comparable.hpp"
+#include "../../lang/String/String.hpp"
+
+using namespace Java::Lang;
+using namespace Java::IO;
+
+namespace Java {
+    namespace Lang {
+        class Boolean :
+                public Object,
+                public Comparable<Boolean>,
+                public Serializable
+        {
+        private:
+            bool original;
+
+        public:
+            const static boolean True = true;
+            const static boolean False = false;
+
+        public:
+            Boolean(const boolean &target);
+            Boolean(const_string target);
+            ~Boolean();
+
+        public:
+            boolean booleanValue() const;
+            static int compare(const boolean &target1, const boolean &target2);
+            int compareTo(const Boolean &target) const;
+            static boolean getBoolean(const_string target);
+            long hashCode() const;
+            static boolean parseBoolean(const_string target);
+            string toString() const;
+            static string toString(const boolean &target);
+            static Boolean valueOf(boolean target);
+            static boolean valueOf(const_string target);
+        };
+
+    }
+}
 #endif//NATIVE_JAVA_LANG_BOOLEAN_HPP

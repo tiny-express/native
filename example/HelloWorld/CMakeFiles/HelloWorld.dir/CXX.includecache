@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/feeder/workspace/native/example/HelloWorld/Main.cpp
+Person.hpp
+/home/feeder/workspace/native/example/HelloWorld/Person.hpp
+
+/home/feeder/workspace/native/example/HelloWorld/Person.hpp
+native/library.hpp
+-
+iostream
+-
+

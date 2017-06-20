@@ -23,3 +23,159 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "Boolean.hpp"
+
+/**
+ * Boolean Constructor
+ * Allocates a Boolean object representing the value argument.
+ *
+ * @param target
+ */
+Boolean::Boolean(const boolean &target) {
+    this->original = target;
+}
+
+/**
+ * Boolean Constructor
+ * Allocates a Boolean object representing the value true
+ * if the string argument is not null and is equal,
+ * ignoring case, to the string "true".
+ * Otherwise, allocate a Boolean object representing the value false.
+ *
+ * @param target
+ */
+Boolean::Boolean(const_string target) {
+    if (strcmp(target, "True") == 0) {
+        this->original = true;
+    } else {
+        this->original = false;
+    }
+}
+
+/**
+ * Boolean Destructor
+ */
+Boolean::~Boolean() {
+
+}
+
+/**
+ * Returns the value of this Boolean object as a boolean primitive.
+ *
+ * @return `true' or `false'
+ */
+boolean Boolean::booleanValue() const {
+    return this->original;
+}
+
+/**
+ * Compare tow boolean values
+ *
+ * @param target1
+ * @param target2
+ * @return Return 0 if this object represents the same boolean
+ * value as the argument; a positive value if this object represents
+ * true and the argument represents false; and a negative value if this
+ * object represents false and the argument represents true
+ */
+int Boolean::compare(const boolean &target1, const boolean &target2) {
+    return (target1 - target2);
+}
+
+/**
+ * Compares this Boolean instance with another.
+ *
+ * @param target
+ * @return Return 0 if this object represents the same boolean
+ * value as the argument; a positive value if this object represents
+ * true and the argument represents false; and a negative value if this
+ * object represents false and the argument represents true
+ */
+int Boolean::compareTo(const Boolean &target) const {
+    return Boolean::compare(this->original, target.original);
+}
+
+/**
+ * Returns true if and only if the system property named
+ * by the argument exists and is equal to the string "true".
+ *
+ * @param target
+ * @return boolean
+ */
+boolean Boolean::getBoolean(const_string target) {
+    if (strcmp(target, "True") == 0) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * A hash code value for this object.
+ *
+ * @return long
+ */
+long Boolean::hashCode() const {
+    return Object::hashCode();
+}
+
+/**
+ * Parses the string argument as a boolean.
+ * The boolean returned represents the value true
+ * if the string argument is not null and is equal,
+ * ignoring case, to the string "true".
+ *
+ * @param target
+ * @return
+ */
+boolean Boolean::parseBoolean(const_string target) {
+    return Boolean::getBoolean(target);
+}
+
+/**
+ * Returns a String object representing the specified boolean.
+ *
+ * @return string
+ */
+string Boolean::toString() const {
+    if (this->original == 1) {
+        return (string)"True";
+    }
+
+    return (string)"False";
+}
+
+/**
+ * Returns a String object representing the specified boolean.
+ *
+ * @param target
+ * @return
+ */
+string Boolean::toString(const boolean &target) {
+    if (target == 1) {
+        return (string)"True";
+    }
+
+    return (string)"False";
+}
+
+/**
+ * Returns a Boolean instance representing the specified boolean value.
+ *
+ * @param target
+ * @return Boolean
+ */
+Boolean Boolean::valueOf(boolean target) {
+    return target;
+}
+
+/**
+ * Returns a Boolean with a value represented by the specified string.
+ *
+ * @param target
+ * @return boolean
+ */
+boolean Boolean::valueOf(const_string target) {
+    return Boolean::parseBoolean(target);
+}
