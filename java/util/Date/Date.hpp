@@ -48,14 +48,15 @@ namespace Java {
         {
         private:
             time_t original;
-            tm *timePresenter;
+            tm *localTimer;
+            boolean refreshFlag;
 
             /**
              * Refresh orignal whenever function in this class is called except Date(long date)
              */
             void refreshTime() {
                 this->original = time(0);
-                this->timePresenter = localtime(&this->original);
+                this->localTimer = localtime(&this->original);
             }
 
         public:
@@ -251,7 +252,14 @@ namespace Java {
              * @return long
              */
             static long	parse(String s) {
+                tm localTimer;
+                string timeString = s.toString();
+                strptime(timeString, "%a %b %d %Y %H:%M:%S", &localTimer);
 
+                long result = Date::UTC(localTimer.tm_year, localTimer.tm_mon, localTimer.tm_mday,
+                                        localTimer.tm_hour, localTimer.tm_min, localTimer.tm_sec);
+
+                return result;
             }
 
             /**
@@ -335,7 +343,17 @@ namespace Java {
              * @return long
              */
             static long	UTC(int year, int month, int date, int hrs, int min, int sec) {
-                return 0;
+                tm localTimer = {0};
+                localTimer.tm_year = year;
+                localTimer.tm_mon = month;
+                localTimer.tm_mday = date;
+                localTimer.tm_hour = hrs;
+                localTimer.tm_min = min;
+                localTimer.tm_sec = sec;
+
+                time_t result = mktime(&localTimer);
+
+                return result;
             }
 
 

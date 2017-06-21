@@ -36,7 +36,7 @@ TEST (JavaUtil, DateConstructor) {
     // Given valid timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-    int expectedYear = currentTime->tm_year;
+    int expectedYear = currentTime->tm_year + 1900; // This class return since 1900
 
     // Given valid constructor and test
     Date date;
@@ -55,13 +55,13 @@ TEST (JavaUtil, DateConstructor) {
     ASSERT_EQUAL(expectedYear, date.getYear());
 
     expectedYear = 2017;
-    date = Date(1498028643); //2017
+    date = Date(1498042091); //2017
     ASSERT_EQUAL(expectedYear, date.getYear());
 
-    expectedYear = 2021;
-    String dateString = "Wed Jun 21 14:05:43 2021"; //2021
+    expectedYear = 2014;
+    String dateString = "Thu Jan 9 2014 12:35:34";
     date = Date(dateString);
-    ASSERT_EQUAL(expectedYear, date.getDate());
+    ASSERT_EQUAL(expectedYear, date.getYear());
 
     Date sameDate = date;
     ASSERT_EQUAL(sameDate.getYear(), date.getYear());
