@@ -46,7 +46,7 @@ namespace Java {
 			Node<E> *previous = NULL;
 			Node<E> *next = NULL;
 			
-			Node(Node<E> *previous2, E element, Node<E> *next2) {
+			Node(Node<E> *previous2, const E &element, Node<E> *next2) {
 				this->element = element;
 				this->previous = previous2;
 				this->next = next2;
@@ -61,7 +61,7 @@ namespace Java {
 		
 		template <typename E>
 		class LinkedList
-//						public AbstractSequentialList<E>
+//						: public AbstractSequentialList<E>
 //						, public virtual List<E>
 //						, public virtual Deque<E>
 //						, public virtual Cloneable
@@ -133,6 +133,7 @@ namespace Java {
 			 * Removes all of the elements from this list.
 			 */
 			void clear() {
+                int nodeSize = this->nodeSize;
 				for (int i = 0; i < nodeSize; ++i) {
 					remove();
 				}
@@ -149,7 +150,9 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean contains(E &e) const {
-				if (node1(e) == NULL) {
+                Node<E> *node = node1(e);
+
+				if (NULL == node) {
 					return false;
 				}
 				
@@ -183,10 +186,10 @@ namespace Java {
 			 * @return E
 			 */
 			E getFirst() {
-				if (first == NULL) {
+				if (this->first == NULL) {
 					exception();
 				}
-				return first->element;
+				return this->first->element;
 			}
 
 			/**
@@ -194,10 +197,10 @@ namespace Java {
 			 * @return E
 			 */
 			E getLast() {
-				if (last == NULL) {
+				if (this->last == NULL) {
 					exception();
 				}
-				return last->element;
+				return this->last->element;
 			}
 
 			/**
@@ -208,7 +211,7 @@ namespace Java {
 			 */
 			int indexOf(E &e) const {
 				Node<E> *temp = this->first;
-				for (int i = 0; i < nodeSize; ++i) {
+				for (int i = 0; i < this->nodeSize; ++i) {
 					if (temp->element == e) {
 						return i;
 					}
@@ -224,8 +227,8 @@ namespace Java {
 			 * @return int
 			 */
 			int lastIndexOf(E &e) const {
-				Node<E> *temp = last;
-				for (int i = 0; i < nodeSize; ++i) {
+				Node<E> *temp = this->last;
+				for (int i = 0; i < this->nodeSize; ++i) {
 					if (temp->element == e) {
 						return i;
 					}
@@ -298,11 +301,11 @@ namespace Java {
 			 * @return
 			 */
 			E poll() {
-				return getFirst();
+                return unlinkFirst();
 			}
 
 			/**
-			 * Retrieves and removes the first element of this list, or returns default E if this list is empty.
+			 * Retrieves and removes the first element of this list, or throw an exception if this->first is NULL
 			 * @return E
 			 */
 			E pollFirst() {
@@ -310,7 +313,7 @@ namespace Java {
 			}
 
 			/**
-			 * Retrieves and removes the last element of this list, or returns default E if this list is empty
+			 * Retrieves and removes the last element of this list, or throw an exception if this->last is NULL
 			 * @return E
 			 */
 			E pollLast() {
@@ -361,7 +364,7 @@ namespace Java {
 			 * @param E e
 			 * @return boolean
 			 */
-			boolean remove(E e) {
+			boolean remove(E &e) {
 				Node<E> *nodeIndex = node1(e);
 				
 				if (nodeIndex == NULL) {
@@ -370,8 +373,8 @@ namespace Java {
 				
 				Node<E> *temp = nodeIndex;
 				temp->previous = nodeIndex->next;
-				
-				delete ( nodeIndex );
+
+				deleteNode(nodeIndex);
 				return true;
 			}
 			
@@ -409,9 +412,9 @@ namespace Java {
 			 * @return
 			 */
 			boolean removeFirstOccurrence(E &e) {
-				Node<E> *temp = first;
+				Node<E> *temp = this->first;
 				
-				for (int i = 0; i < nodeSize; ++i) {
+				for (int i = 0; i < this->nodeSize; ++i) {
 					if (temp->element == e) {
 						return remove(i);
 					}
@@ -426,9 +429,9 @@ namespace Java {
 			 * @return
 			 */
 			boolean removeLastOccurrrence(E &e) {
-				Node<E> *temp = last;
+				Node<E> *temp = this->last;
 				
-				for (int i = nodeSize; i > 0; ++i) {
+				for (int i = this->nodeSize; i > 0; ++i) {
 					if (temp->element == e) {
 						return remove(i);
 					}
@@ -457,10 +460,12 @@ namespace Java {
 			int size() {
 				return this->nodeSize;
 			}
-			
-			Iterator<E> &iterator() {
-				//TODO
-			}
+
+            /**
+             * Don't support this method at this time
+             * @return
+             */
+//			Iterator<E> &iterator();
 
 			/**
 			 * Don't support this method
@@ -472,21 +477,22 @@ namespace Java {
 			 */
 //			Array<E> toArray(Array<E> a);
 
-			boolean equals(const Object &o) {
-
-			}
+            /**
+             * Don't support this method
+             */
+//			boolean equals(const Object &o);
 
 		private:
 			void linkFirst(const E &e) {
-				Node<E> *node = new Node<E>(NULL, e, first);
+				Node<E> *node = new Node<E>(NULL, e, this->first);
 				
-				Node<E> *f = this->first;
+				Node<E> *first = this->first;
 				this->first = node;
 				
 				if (this->last == NULL) {
 					this->last = node;
 				} else {
-					f->previous = node;
+					first->previous = node;
 				}
 				
 				this->nodeSize++;
@@ -494,14 +500,14 @@ namespace Java {
 			
 			void linkLast(const E &e) {
 				Node<E> *node = new Node<E>(this->last, e, NULL);
-				
-				Node<E> *l = this->last;
+
+				Node<E> *last = this->last;
 				this->last = node;
-				
-				if (first == NULL) {
-					first = node;
+
+				if (this->first == NULL) {
+					this->first = node;
 				} else {
-					l->next = node;
+					last->next = node;
 				}
 
                 this->nodeSize++;
@@ -519,9 +525,9 @@ namespace Java {
 				return temp;
 			}
 			
-			Node<E> *node1(E e) const {
+			Node<E> *node1(E &e) const {
 				Node<E> *temp = this->first;
-				for (int i = 0; i < nodeSize; ++i) {
+				for (int i = 0; i < this->nodeSize; ++i) {
 					if (temp->element == e) {
 						return temp;
 					}
@@ -532,13 +538,13 @@ namespace Java {
 			}
 			
 			E unlinkFirst() {
-				if (first == NULL) {
+				if (this->first == NULL) {
 					exception();
 				}
 
-				Node<E> *temp = first;
-				first = temp->next;
-				
+				Node<E> *temp = this->first;
+				this->first = temp->next;
+
 				E element = temp->element;
 				deleteNode(temp);
 				
@@ -546,12 +552,12 @@ namespace Java {
 			}
 			
 			E unlinkLast() {
-				if (last == NULL) {
+				if (this->last == NULL) {
 					exception();
 				}
 
-				Node<E> *temp = last;
-				last = temp->previous;
+				Node<E> *temp = this->last;
+				this->last = temp->previous;
 				
 				E element = temp->element;
 				
@@ -561,8 +567,8 @@ namespace Java {
 			
 			void deleteNode(Node<E> *node) {
 				delete ( node );
-				nodeSize--;
-			}
+				this->nodeSize--;
+            }
 			
 			void exception() {
 				throw std::invalid_argument("[ERROR]: index is out o scope");
