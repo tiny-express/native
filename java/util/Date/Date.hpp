@@ -1,0 +1,325 @@
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#ifndef NATIVE_JAVA_UTIL_DATE_HPP
+#define NATIVE_JAVA_UTIL_DATE_HPP
+
+#include <ctime>
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+namespace Java {
+    namespace Util {
+        class Date: public Object
+//        , public virtual Serializable
+//        , public virtual Cloneable
+//        , public virtual Comparable<Date>
+        {
+        private:
+            time_t original;
+
+            /**
+             * Refresh orignal whenever function in this class is called except Date(long date)
+             */
+            void refreshTime() {
+                this->original = time(0);
+            }
+
+        public:
+            /**
+             * Allocates a Date object and initializes it so that it represents the time at
+             * which it was allocated,measured to the nearest millisecond.
+             * @return
+             */
+            Date();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(year + 1900, month, date)
+             * or GregorianCalendar(year + 1900, month, date).
+             * @param year
+             * @param month
+             * @param date
+             * @return
+             */
+//            Date(int year, int month, int date);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(year + 1900, month, date, hrs, min)
+             * or GregorianCalendar(year + 1900, month, date, hrs, min).
+             * @param year
+             * @param month
+             * @param date
+             * @param hrs
+             * @param min
+             * @return
+             */
+//            Date(int year, int month, int date, int hrs, int min);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(year + 1900, month, date, hrs, min, sec)
+             * or GregorianCalendar(year + 1900, month, date, hrs, min, sec).
+             * @param year
+             * @param month
+             * @param date
+             * @param hrs
+             * @param min
+             * @param sec
+             * @return
+             */
+//            Date(int year, int month, int date, int hrs, int min, int sec);
+
+            /**
+             * Allocates a Date object and initializes it to represent the specified number of milliseconds
+             * since the standard base time known as "the epoch", namely January 1, 1970, 00:00:00 GMT.
+             * @param date
+             * @return
+             */
+            Date(long date);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by DateFormat.parse(String s).
+             * @param s
+             * @return
+             */
+//            Date(String s);
+
+            /**
+             * Alloc a new object have sample orginal as target
+             * @param target
+             * @return
+             */
+            Date(const Date &target);
+
+        public:
+            /**
+             * Tests if this date is after the specified date.
+             * @param when: Date
+             * @return boolean
+             */
+            boolean	after(Date when);
+
+            /**
+             * Tests if this date is before the specified date.
+             * @param when
+             * @return boolean
+             */
+            boolean	before(Date when);
+
+            /**
+             * We can hide function clone() on Object later
+             * Return a copy of this object.
+             * @return Object
+             */
+            template<typename E>
+            E clone() {
+                Date clone = *this;
+                return clone;
+            }
+
+            /**
+             * Compares two Dates for ordering.
+             * @param anotherDate
+             * @return
+             */
+            int	compareTo(Date anotherDate);
+
+            /**
+             * Compares two dates for equality.
+             * @param obj
+             * @return
+             */
+            boolean	equals(Object obj);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.DAY_OF_MONTH).
+             * @return
+             */
+            int	getDate();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.DAY_OF_WEEK).
+             * @return
+             */
+            int	getDay();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.HOUR_OF_DAY).
+             * @return
+             */
+            int	getHours();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.MINUTE).
+             * @return
+             */
+            int	getMinutes();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.MONTH).
+             * @return
+             */
+            int	getMonth();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.SECOND).
+             * @return
+             */
+            int	getSeconds();
+
+            /**
+             * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object.
+             * @return
+             */
+            long getTime();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1,
+             * replaced by -(Calendar.get(Calendar.ZONE_OFFSET) + Calendar.get(Calendar.DST_OFFSET)) / (60 * 1000).
+             * @return
+             */
+            int	getTimezoneOffset();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.get(Calendar.YEAR) - 1900.
+             * @return
+             */
+            int	getYear();
+
+            /**
+             * Returns a hash code value for this object.
+             * @return
+             */
+            int	hashCode();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by DateFormat.parse(String s).
+             * @param s
+             * @return
+             */
+            static long	parse(String s);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.DAY_OF_MONTH, int date).
+             * @param date
+             */
+            void setDate(int date);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.HOUR_OF_DAY, int hours).
+             * @param hours
+             */
+            void setHours(int hours);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.MINUTE, int minutes).
+             * @param minutes
+             */
+            void setMinutes(int minutes);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.MONTH, int month).
+             * @param month
+             */
+            void setMonth(int month);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.SECOND, int seconds).
+             * @param seconds
+             */
+            void setSeconds(int seconds);
+
+            /**
+             * Sets this Date object to represent a point in time that is time milliseconds after January 1, 1970 00:00:00 GMT.
+             * @param time
+             */
+            void setTime(long time);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by Calendar.set(Calendar.YEAR, year + 1900).
+             * @param year
+             */
+            void setYear(int year);
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by DateFormat.format(Date date), using a GMT TimeZone.
+             * @return
+             */
+            String toGMTString();
+
+            /**
+             * Deprecated.
+             * As of JDK version 1.1, replaced by DateFormat.format(Date date).
+             * @return
+             */
+            String toLocaleString();
+
+            /**
+             * Converts this Date object to a String of the form:
+             * @return
+             */
+            String toString();
+
+            /**
+             * As of JDK version 1.1, replaced by Calendar.set(year + 1900, month, date, hrs, min, sec)
+             * or GregorianCalendar(year + 1900, month, date, hrs, min, sec),
+             * using a UTC TimeZone, followed by Calendar.getTime().getTime().
+             * @param year
+             * @param month
+             * @param date
+             * @param hrs
+             * @param min
+             * @param sec
+             * @return
+             */
+            static long	UTC(int year, int month, int date, int hrs, int min, int sec);
+
+
+        };
+    }
+}
+
+#endif //NATIVE_JAVA_UTIL_DATE_HPP
