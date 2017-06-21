@@ -27,6 +27,13 @@
 #ifndef NATIVE_JAVA_UTIL_DATE_HPP
 #define NATIVE_JAVA_UTIL_DATE_HPP
 
+#define SECOND_YEAR     31556926
+#define SECOND_MONTH    2629743
+#define SECOND_WEEK     604800
+#define SECOND_DAY      86400
+#define SECOND_HOUR     3600
+#define SECOND_MINUTE   60
+
 #include <ctime>
 #include "../../Lang.hpp"
 
@@ -41,12 +48,14 @@ namespace Java {
         {
         private:
             time_t original;
+            tm *timePresenter;
 
             /**
              * Refresh orignal whenever function in this class is called except Date(long date)
              */
             void refreshTime() {
                 this->original = time(0);
+                this->timePresenter = localtime(&this->original);
             }
 
         public:
@@ -66,7 +75,7 @@ namespace Java {
              * @param date
              * @return
              */
-//            Date(int year, int month, int date);
+            Date(int year, int month, int date);
 
             /**
              * Deprecated.
@@ -79,7 +88,7 @@ namespace Java {
              * @param min
              * @return
              */
-//            Date(int year, int month, int date, int hrs, int min);
+            Date(int year, int month, int date, int hrs, int min);
 
             /**
              * Deprecated.
@@ -93,7 +102,7 @@ namespace Java {
              * @param sec
              * @return
              */
-//            Date(int year, int month, int date, int hrs, int min, int sec);
+            Date(int year, int month, int date, int hrs, int min, int sec);
 
             /**
              * Allocates a Date object and initializes it to represent the specified number of milliseconds
@@ -109,7 +118,7 @@ namespace Java {
              * @param s
              * @return
              */
-//            Date(String s);
+            Date(String s);
 
             /**
              * Alloc a new object have sample orginal as target
@@ -117,6 +126,11 @@ namespace Java {
              * @return
              */
             Date(const Date &target);
+
+            /**
+             *  Destructor
+             */
+            ~Date();
 
         public:
             /**
@@ -136,7 +150,7 @@ namespace Java {
             /**
              * We can hide function clone() on Object later
              * Return a copy of this object.
-             * @return Object
+             * @return E
              */
             template<typename E>
             E clone() {
@@ -147,62 +161,64 @@ namespace Java {
             /**
              * Compares two Dates for ordering.
              * @param anotherDate
-             * @return
+             * @return int
              */
             int	compareTo(Date anotherDate);
 
             /**
+             * This function was implement on Object, no need to define again
              * Compares two dates for equality.
              * @param obj
-             * @return
+             * @return int
              */
-            boolean	equals(Object obj);
+//            boolean equals(Object obj);
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.DAY_OF_MONTH).
-             * @return
+             * @return int
              */
             int	getDate();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.DAY_OF_WEEK).
-             * @return
+             * (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
+             * @return int
              */
             int	getDay();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.HOUR_OF_DAY).
-             * @return
+             * @return int
              */
             int	getHours();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.MINUTE).
-             * @return
+             * @return int
              */
             int	getMinutes();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.MONTH).
-             * @return
+             * @return int
              */
             int	getMonth();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.SECOND).
-             * @return
+             * @return int
              */
             int	getSeconds();
 
             /**
              * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object.
-             * @return
+             * @return long
              */
             long getTime();
 
@@ -210,30 +226,33 @@ namespace Java {
              * Deprecated.
              * As of JDK version 1.1,
              * replaced by -(Calendar.get(Calendar.ZONE_OFFSET) + Calendar.get(Calendar.DST_OFFSET)) / (60 * 1000).
-             * @return
+             * @return int
              */
             int	getTimezoneOffset();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by Calendar.get(Calendar.YEAR) - 1900.
-             * @return
+             * @return int
              */
             int	getYear();
 
             /**
+             * This function was implemented on Object, no need to define again
              * Returns a hash code value for this object.
              * @return
              */
-            int	hashCode();
+//            int	hashCode();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by DateFormat.parse(String s).
              * @param s
-             * @return
+             * @return long
              */
-            static long	parse(String s);
+            static long	parse(String s) {
+
+            }
 
             /**
              * Deprecated.
@@ -286,20 +305,20 @@ namespace Java {
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by DateFormat.format(Date date), using a GMT TimeZone.
-             * @return
+             * @return String
              */
             String toGMTString();
 
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by DateFormat.format(Date date).
-             * @return
+             * @return String
              */
             String toLocaleString();
 
             /**
-             * Converts this Date object to a String of the form:
-             * @return
+             * Return toLocaleString()
+             * @return String
              */
             String toString();
 
@@ -313,9 +332,11 @@ namespace Java {
              * @param hrs
              * @param min
              * @param sec
-             * @return
+             * @return long
              */
-            static long	UTC(int year, int month, int date, int hrs, int min, int sec);
+            static long	UTC(int year, int month, int date, int hrs, int min, int sec) {
+                return 0;
+            }
 
 
         };

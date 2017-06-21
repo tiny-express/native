@@ -34,17 +34,34 @@ Date::Date(const Date &target) {
     this->original = target.original;
 }
 
-//Date::Date(int year, int month, int date) {}
+Date::Date(int year, int month, int date) {
+    this->original = Date::UTC(year, month, date, 0, 0, 0);
+}
 
-//Date::Date(int year, int month, int date, int hrs, int min) {}
+Date::Date(int year, int month, int date, int hrs, int min) {
+    this->original = Date::UTC(year, month, date, hrs, min, 0);
+}
 
-//Date::Date(int year, int month, int date, int hrs, int min, int sec) {}
+Date::Date(int year, int month, int date, int hrs, int min, int sec) {
+    this->original = Date::UTC(year, month, date, hrs, min, sec);
+}
 
 Date::Date(long date) {
     this->original = date;
 }
 
-//Date::Date(String s) {}
+Date::Date(String s) {
+    //Sample: Thu Jan 9 2014 12:35:34
+    tm timePresenter;
+    string timeString = s.toString();
+
+    strptime(timeString, "%a %b %d %Y %H:%M:%S", &timePresenter);
+
+    this->original = Date::UTC(timePresenter.tm_year, timePresenter.tm_mon, timePresenter.tm_mday, timePresenter.tm_hour, timePresenter.tm_min, timePresenter.tm_sec);
+}
+
+Date::~Date() {
+}
 
 boolean Date::after(Date when) {
 
@@ -58,21 +75,12 @@ int Date::compareTo(Date anotherDate) {
 
 }
 
-boolean Date::equals(Object obj) {
-
-}
-
 int Date::getDate() {
 
 }
 
 int Date::getDay() {
-    refreshTime();
 
-    tm *local = localtime(&this->original);
-    int day = local->tm_mday;
-
-    return day;
 }
 
 int	Date::getHours() {
@@ -96,20 +104,15 @@ long Date::getTime() {
 }
 
 int	Date::getTimezoneOffset() {
-
+    // return Locale.hours - GMT.hours
 }
 
 int	Date::getYear() {
+    refreshTime();
 
+    int result = this->timePresenter->tm_year;
+    return result;
 }
-
-int	Date::hashCode() {
-
-}
-//
-//static long	Date::parse(String s) {
-//
-//}
 
 void Date::setDate(int date) {
 
@@ -148,9 +151,5 @@ String Date::toLocaleString() {
 }
 
 String Date::toString() {
-
+    return this->toLocaleString();
 }
-
-//static long	Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
-//
-//}
