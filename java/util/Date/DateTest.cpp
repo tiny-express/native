@@ -94,7 +94,7 @@ TEST (JavaUtil, DateGetDayOfMonth) {
 TEST (JavaUtil, DateGetDayOfWeek) {
     // Given valid date to test getDay()
     int expectedDayOfWeek = 2; // Tuesday
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2017, 06, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
 }

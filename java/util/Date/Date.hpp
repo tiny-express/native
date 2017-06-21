@@ -27,13 +27,6 @@
 #ifndef NATIVE_JAVA_UTIL_DATE_HPP
 #define NATIVE_JAVA_UTIL_DATE_HPP
 
-#define SECOND_YEAR     31556926
-#define SECOND_MONTH    2629743
-#define SECOND_WEEK     604800
-#define SECOND_DAY      86400
-#define SECOND_HOUR     3600
-#define SECOND_MINUTE   60
-
 #include <ctime>
 #include "../../Lang.hpp"
 
@@ -352,7 +345,7 @@ namespace Java {
                 localTimer.tm_sec = sec;
 
                 time_t result = mktime(&localTimer);
-
+                printf("Create %ld\nFrom %d %d %D", result, year, month, date);
                 return result;
             }
 
