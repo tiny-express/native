@@ -52,6 +52,17 @@ namespace Java {
                 this->localTimer = localtime(&this->original);
             }
 
+            String toString0(tm *timePresenter) {
+                char buffer[80];
+
+                strftime(buffer, sizeof(buffer), "%a %b %d %Y %H:%M:%S", timePresenter);
+
+                String result = &buffer[0];
+                printf("=> toString0 : %s\n", result.toString());
+
+                return result;
+            }
+
         public:
             /**
              * Allocates a Date object and initializes it so that it represents the time at

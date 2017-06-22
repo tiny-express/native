@@ -243,6 +243,12 @@ String Date::toGMTString() {
         refreshTime();
     }
 
+    tm *gmTimer = gmtime(&this->original);
+    printf("=GMT time: %s\n", asctime(gmTimer));
+    printf("=Local time: %s\n", asctime(this->localTimer));
+
+    String result = this->toString0(gmTimer);
+    return result;
 }
 
 String Date::toLocaleString() {
@@ -250,6 +256,8 @@ String Date::toLocaleString() {
         refreshTime();
     }
 
+    String result = this->toString0(this->localTimer);
+    return result;
 }
 
 String Date::toString() {
