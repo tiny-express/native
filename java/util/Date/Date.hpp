@@ -245,13 +245,12 @@ namespace Java {
              * @return long
              */
             static long	parse(String s) {
-                tm localTimer;
+                tm timer;
                 string timeString = s.toString();
-                strptime(timeString, "%a %b %d %Y %H:%M:%S", &localTimer);
 
-                long result = Date::UTC(localTimer.tm_year, localTimer.tm_mon, localTimer.tm_mday,
-                                        localTimer.tm_hour, localTimer.tm_min, localTimer.tm_sec);
-
+                strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
+                long result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
+                                        timer.tm_hour, timer.tm_min, timer.tm_sec);
                 return result;
             }
 
@@ -337,15 +336,14 @@ namespace Java {
              */
             static long	UTC(int year, int month, int date, int hrs, int min, int sec) {
                 tm localTimer = {0};
-                localTimer.tm_year = year;
-                localTimer.tm_mon = month;
-                localTimer.tm_mday = date;
-                localTimer.tm_hour = hrs;
-                localTimer.tm_min = min;
-                localTimer.tm_sec = sec;
+                localTimer.tm_year  = year % 1900;
+                localTimer.tm_mon   = month;
+                localTimer.tm_mday  = date;
+                localTimer.tm_hour  = hrs;
+                localTimer.tm_min   = min;
+                localTimer.tm_sec   = sec;
 
                 time_t result = mktime(&localTimer);
-                printf("Create %ld\nFrom %d %d %D", result, year, month, date);
                 return result;
             }
 

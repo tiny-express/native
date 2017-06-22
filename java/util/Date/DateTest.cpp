@@ -43,23 +43,23 @@ TEST (JavaUtil, DateConstructor) {
     ASSERT_EQUAL(expectedYear, date.getYear());
 
     expectedYear = 2018;
-    date = Date(2018, 06, 20);
+    date = Date(2018, 05, 20);
     ASSERT_EQUAL(expectedYear, date.getYear());
 
     expectedYear = 2019;
-    date = Date(2019, 06, 21, 06, 22);
+    date = Date(2019, 05, 21, 05, 22);
     ASSERT_EQUAL(expectedYear, date.getYear());
 
     expectedYear = 2200;
-    date = Date(2200, 06, 21, 06, 50, 58);
+    date = Date(2200, 05, 21, 05, 50, 58);
     ASSERT_EQUAL(expectedYear, date.getYear());
 
     expectedYear = 2017;
     date = Date(1498042091); //2017
     ASSERT_EQUAL(expectedYear, date.getYear());
 
-    expectedYear = 2014;
-    String dateString = "Thu Jan 9 2014 12:35:34";
+    expectedYear = 2017;
+    String dateString = "Thu Jun 22 2017 12:35:34";
     date = Date(dateString);
     ASSERT_EQUAL(expectedYear, date.getYear());
 
@@ -70,15 +70,15 @@ TEST (JavaUtil, DateConstructor) {
 TEST (JavaUtil, DateGetYear) {
     // Given valid date to test getYear()
     int expectedYear = 2018;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedYear, date.getYear());
 }
 
 TEST (JavaUtil, DateGetMonth) {
     // Given valid date to test getMonth()
-    int expectedMonth = 06;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    int expectedMonth = 05;
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedMonth, date.getMonth());
 }
@@ -86,15 +86,15 @@ TEST (JavaUtil, DateGetMonth) {
 TEST (JavaUtil, DateGetDayOfMonth) {
     // Given valid date to test getDate()
     int expectedDayOfMonth = 20;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
 }
 
 TEST (JavaUtil, DateGetDayOfWeek) {
     // Given valid date to test getDay()
-    int expectedDayOfWeek = 2; // Tuesday
-    Date date = Date(2017, 06, 20, 20, 50, 58);
+    int expectedDayOfWeek = 4; // Thursday
+    Date date = Date(2017, 05, 22, 20, 50, 58);
 
     ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
 }
@@ -102,7 +102,7 @@ TEST (JavaUtil, DateGetDayOfWeek) {
 TEST (JavaUtil, DateGetHour) {
     // Given valid date to test getHours()
     int expectedHour = 20;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedHour, date.getHours());
 }
@@ -110,7 +110,7 @@ TEST (JavaUtil, DateGetHour) {
 TEST (JavaUtil, DateGetMinutes) {
     // Given valid date to test getMinutes()
     int expectedMinutes = 50;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedMinutes, date.getMinutes());
 }
@@ -118,7 +118,7 @@ TEST (JavaUtil, DateGetMinutes) {
 TEST (JavaUtil, DateGetSeconds) {
     // Given valid date to test getSeconds()
     int expectedSecond = 58;
-    Date date = Date(2018, 06, 20, 20, 50, 58);
+    Date date = Date(2018, 05, 20, 20, 50, 58);
 
     ASSERT_EQUAL(expectedSecond, date.getSeconds());
 }
@@ -126,7 +126,7 @@ TEST (JavaUtil, DateGetSeconds) {
 TEST (JavaUtil, DateGetTime) {
     // Given valid date to test getTime()
     int expectedTime = 1498057810;
-    Date date = Date(2017, 06, 21, 15, 10, 10);
+    Date date = Date(2017, 05, 21, 15, 10, 10);
 
     ASSERT_EQUAL(expectedTime, date.getTime());
 }
@@ -196,45 +196,45 @@ TEST (JavaUtil, DateSetYear) {
 
 TEST (JavaUtil, DateGMTString) {
     // Given valid date to test GMT time, this test case is based on Vietnam GMT+7
-    Date date = Date(2017, 06, 21, 14, 05, 43);
-    String expectedGMTString = "Wed Jun  8 21:05:43";
+    Date date = Date(2017, 05, 22, 19, 35, 34);
+    String expectedGMTString = "Thu Jun 22 2017 12:35:34";
 
     ASSERT_STR(expectedGMTString.toString(), date.toGMTString().toString());
 }
 
 TEST (JavaUtil, DateLocaleString) {
     // Given valid date to test local time
-    Date date = Date(2017, 06, 21, 14, 05, 43);
-    String expectedLocaleString = "Wed Jun  8 14:05:43";
+    Date date = Date(2017, 05, 22, 12, 35, 34);
+    String expectedLocaleString = "Thu Jun 22 2017 12:35:34";
 
     ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
 }
 
 TEST (JavaUtil, DateAfter) {
     // Given valid date to test another date is after this day or not
-    Date date = Date(2017, 06, 21, 14, 05, 43);
+    Date date = Date(2017, 05, 21, 14, 05, 43);
 
-    Date dateBefore = Date(2017, 06, 21, 14, 05, 40);
+    Date dateBefore = Date(2017, 05, 21, 14, 05, 40);
     ASSERT_TRUE(date.after(dateBefore));
 
-    Date dateAfter = Date(2017, 06, 21, 14, 05, 45);
+    Date dateAfter = Date(2017, 05, 21, 14, 05, 45);
     ASSERT_FALSE(date.after(dateAfter));
 }
 
 TEST (JavaUtil, DateBefore) {
     // Given valid date to test another date is before this day or not
-    Date date = Date(2017, 06, 21, 14, 05, 43);
+    Date date = Date(2017, 05, 21, 14, 05, 43);
 
-    Date dateBefore = Date(2017, 06, 21, 14, 05, 40);
+    Date dateBefore = Date(2017, 05, 21, 14, 05, 40);
     ASSERT_FALSE(date.before(dateBefore));
 
-    Date dateAfter = Date(2017, 06, 21, 14, 05, 45);
-    ASSERT_TRUE(date.after(dateAfter));
+    Date dateAfter = Date(2017, 05, 21, 14, 05, 45);
+    ASSERT_TRUE(date.before(dateAfter));
 }
 
 TEST (JavaUtil, DateClone) {
     // Given valid date and make a copy of this date
-    Date date = Date(2017, 06, 21, 14, 05, 43);
+    Date date = Date(2017, 05, 21, 14, 05, 43);
 
     Date target = date;
     ASSERT_EQUAL(date.getSeconds(), target.getSeconds());
@@ -242,11 +242,11 @@ TEST (JavaUtil, DateClone) {
 
 TEST (JavaUtil, DateCompare) {
     // Given valid date to test compareTo() with dateBefore, dateAfter, dateEqual
-    Date date = Date(2017, 06, 21, 14, 05, 43);
+    Date date = Date(2017, 05, 21, 14, 05, 43);
 
-    Date dateBefore = Date(2017, 06, 21, 14, 05, 25);
-    Date dateAfter = Date(2017, 06, 21, 14, 05, 50);
-    Date dateEqual = Date(2017, 06, 21, 14, 05, 43);
+    Date dateBefore = Date(2017, 05, 21, 14, 05, 25);
+    Date dateAfter = Date(2017, 05, 21, 14, 05, 50);
+    Date dateEqual = Date(2017, 05, 21, 14, 05, 43);
 
     int expectedResult = 1;
     ASSERT_EQUAL(expectedResult, date.compareTo(dateBefore));
@@ -260,7 +260,7 @@ TEST (JavaUtil, DateCompare) {
 
 TEST (JavaUtil, DateUTC) {
     // Given valid date tot est Date::UTC - should to return correct epoch value
-    long result = Date::UTC(2017, 06, 21, 14, 05, 43);
+    long result = Date::UTC(2017, 05, 21, 14, 05, 43);
 
     long expectedTime = 1498053943;
     ASSERT_EQUAL(expectedTime, result);

@@ -26,6 +26,11 @@
 
 #include "Date.hpp"
 
+/**
+ * Only default constructor can refresh new time
+ * Every single set value to this class will remove refreshFlag - mean this class will be not available to refresh new time
+ * @return
+ */
 Date::Date() {
     this->refreshFlag = true;
     refreshTime();
@@ -59,7 +64,6 @@ Date::Date(long date) {
     this->refreshFlag = false;
     this->original = date;
     this->localTimer = localtime(&this->original);
-    this->localTimer->tm_year += 1900;
 }
 
 Date::Date(String s) {
@@ -67,7 +71,6 @@ Date::Date(String s) {
     this->refreshFlag = false;
     this->original = Date::parse(s);
     this->localTimer = localtime(&this->original);
-    this->localTimer->tm_year += 1900;
 }
 
 Date::~Date() {
@@ -174,11 +177,7 @@ int	Date::getYear() {
         refreshTime();
     }
 
-    int result = this->localTimer->tm_year;
-
-    if (this->refreshFlag) {
-        result += 1900;
-    }
+    int result = this->localTimer->tm_year + 1900;
 
     return result;
 }
