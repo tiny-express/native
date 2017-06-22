@@ -45,28 +45,39 @@ namespace Java {
             boolean refreshFlag;
 
             /**
-             * Refresh orignal whenever function in this class is called except Date(long date)
+             * This function just work only by default constructor, every case call set() to this class
+             * will make this function disable
              */
             void refreshTime() {
                 this->original = time(0);
                 this->localTimer = localtime(&this->original);
             }
 
-            String toString0(tm *timePresenter) {
-                char buffer[80];
+            /**
+             * An alternative function for ctime(), asctime() of C++
+             * @param timePresenter
+             * @return String
+             */
+            string toString0(tm *timePresenter) {
+                char *result = (char *) malloc(80 * sizeof(char));
 
-                strftime(buffer, sizeof(buffer), "%a %b %d %Y %H:%M:%S", timePresenter);
+                strftime(result, 80, "%a %b %d %Y %H:%M:%S", timePresenter);
 
-                String result = &buffer[0];
                 return result;
             }
 
+            /**
+             * Update this->original whenever user set value to this class
+             */
             void updateOriginal() {
                 tm *timePresenter = this->localTimer;
                 this->original = Date::UTC(timePresenter->tm_year, timePresenter->tm_mon, timePresenter->tm_mday,
                                            timePresenter->tm_hour, timePresenter->tm_min, timePresenter->tm_sec);
             }
 
+            /**
+             * Update this->localTimer whenever user set new value for this->original through setTime()
+             */
             void updateLocalTimer() {
                 this->localTimer = localtime(&this->original);
             }
@@ -260,6 +271,8 @@ namespace Java {
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by DateFormat.parse(String s).
+             * FORMAT: <Day of week> <Month of year> <Day of month> <Year> <Hours>:<Minutes>:<Second>
+             * SAMPLE: Thu Jan 9 2014 12:35:34
              * @param s
              * @return long
              */

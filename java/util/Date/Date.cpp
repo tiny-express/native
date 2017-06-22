@@ -67,7 +67,6 @@ Date::Date(long date) {
 }
 
 Date::Date(String s) {
-    //Thu Jan 9 2014 12:35:34
     this->refreshFlag = false;
     this->original = Date::parse(s);
     this->localTimer = localtime(&this->original);
@@ -250,26 +249,33 @@ void Date::setYear(int year) {
 }
 
 String Date::toGMTString() {
-    if (this->refreshFlag == true) {
+    if (this->refreshFlag) {
         refreshTime();
     }
 
     tm *gmTimer = gmtime(&this->original);
-    String result = this->toString0(gmTimer);
+
+    string timeString = this->toString0(gmTimer);
+    String result = timeString;
+
+    free(timeString);
     return result;
 }
 
 String Date::toLocaleString() {
-    if (this->refreshFlag == true) {
+    if (this->refreshFlag) {
         refreshTime();
     }
 
-    String result = this->toString0(this->localTimer);
+    string timeString = this->toString0(this->localTimer);
+    String result = timeString;
+
+    free(timeString);
     return result;
 }
 
 String Date::toString() {
-    if (this->refreshFlag == true) {
+    if (this->refreshFlag) {
         refreshTime();
     }
 
