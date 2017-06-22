@@ -58,9 +58,17 @@ namespace Java {
                 strftime(buffer, sizeof(buffer), "%a %b %d %Y %H:%M:%S", timePresenter);
 
                 String result = &buffer[0];
-                printf("=> toString0 : %s\n", result.toString());
-
                 return result;
+            }
+
+            void updateOriginal() {
+                tm *timePresenter = this->localTimer;
+                this->original = Date::UTC(timePresenter->tm_year, timePresenter->tm_mon, timePresenter->tm_mday,
+                                           timePresenter->tm_hour, timePresenter->tm_min, timePresenter->tm_sec);
+            }
+
+            void updateLocalTimer() {
+                this->localTimer = localtime(&this->original);
             }
 
         public:

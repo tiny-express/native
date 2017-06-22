@@ -260,7 +260,7 @@ TEST (JavaUtil, DateCompare) {
 
 TEST (JavaUtil, DateUTC) {
     // Given valid date tot est Date::UTC - should to return correct epoch value
-    long result = Date::UTC(2017, 05, 21, 14, 05, 43);
+    long result = Date::UTC(2017, 05, 21, 21, 05, 43);
 
     long expectedTime = 1498053943;
     ASSERT_EQUAL(expectedTime, result);

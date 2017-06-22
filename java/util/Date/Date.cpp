@@ -177,7 +177,7 @@ int	Date::getYear() {
         refreshTime();
     }
 
-    int result = this->localTimer->tm_year + 1900;
+    int result = this->localTimer->tm_year + 1900; //LocalTimer just keep tm_year since 1900
 
     return result;
 }
@@ -187,9 +187,7 @@ long Date::getTime() {
         refreshTime();
     }
 
-    tm *timer = this->localTimer;
-
-    long result = Date::UTC(timer->tm_year, timer->tm_mon, timer->tm_mday, timer->tm_hour, timer->tm_min, timer->tm_sec);
+    long result = this->original;
     return result;
 }
 
@@ -206,36 +204,49 @@ int	Date::getTimezoneOffset() {
 void Date::setDate(int date) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_mday = date;
 }
 
 void Date::setHours(int hours) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_hour = hours;
+    this->updateOriginal();
 }
 
 void Date::setMinutes(int minutes) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_min = minutes;
+    this->updateOriginal();
 }
 
 void Date::setMonth(int month) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_mon = month;
+    this->updateOriginal();
 }
 
 void Date::setSeconds(int seconds) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_sec = seconds;
+    this->updateOriginal();
 }
 
 void Date::setTime(long time) {
     this->refreshFlag = false;
 
+    this->original = time;
+    this->updateLocalTimer();
 }
 
 void Date::setYear(int year) {
     this->refreshFlag = false;
 
+    this->localTimer->tm_year = year % 1900; //LocalTimer just keep year since 1900
+    this->updateOriginal();
 }
 
 String Date::toGMTString() {
@@ -244,9 +255,6 @@ String Date::toGMTString() {
     }
 
     tm *gmTimer = gmtime(&this->original);
-    printf("=GMT time: %s\n", asctime(gmTimer));
-    printf("=Local time: %s\n", asctime(this->localTimer));
-
     String result = this->toString0(gmTimer);
     return result;
 }
