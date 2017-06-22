@@ -125,7 +125,7 @@ TEST (JavaUtil, DateGetSeconds) {
 
 TEST (JavaUtil, DateGetTime) {
     // Given valid date to test getTime()
-    int expectedTime = 1498057810;
+    int expectedTime = 1498032610; //local time zone - Wednesday, June 21, 2017 3:10:10 PM
     Date date = Date(2017, 05, 21, 15, 10, 10);
 
     ASSERT_EQUAL(expectedTime, date.getTime());
