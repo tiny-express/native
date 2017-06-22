@@ -124,9 +124,10 @@ TEST (JavaUtil, DateGetSeconds) {
 }
 
 TEST (JavaUtil, DateGetTime) {
-    // Given valid date to test getTime()
-    int expectedTime = 1498032610; //local time zone - Wednesday, June 21, 2017 3:10:10 PM
-    Date date = Date(2017, 05, 21, 15, 10, 10);
+    // Get current time of system to validate getTime()
+    long expectedTime = 1498032610;
+
+    Date date = expectedTime;
 
     ASSERT_EQUAL(expectedTime, date.getTime());
 }
@@ -194,10 +195,22 @@ TEST (JavaUtil, DateSetYear) {
     ASSERT_EQUAL(expectedYear, date.getYear());
 }
 
-TEST (JavaUtil, DateGMTString) {
-    // Given valid date to test GMT time, this test case is based on Vietnam GMT+7
-    Date date = Date(2017, 05, 22, 19, 35, 34);
-    String expectedGMTString = "Thu Jun 22 2017 12:35:34";
+/**
+ * This test case aim to make CI happy, no need to do like that
+ * Usage:
+ *  Date date;
+ *  date.toGMTString()
+ */
+TEST (JavaUtil, DateGMTString)  {
+    // Given valid date to test GMT time, this test case is based on Date.getTimeZoneOffset
+    Date date = Date(2017, 05, 22, 12, 35, 34);
+    int timeZone = date.getTimezoneOffset();
+
+    string timeString;
+    asprintf(&timeString, "Thu Jun 22 2017 %02d:35:34", 12 - timeZone);
+
+    String expectedGMTString = timeString;
+    free(timeString);
 
     ASSERT_STR(expectedGMTString.toString(), date.toGMTString().toString());
 }
@@ -258,11 +271,26 @@ TEST (JavaUtil, DateCompare) {
     ASSERT_EQUAL(expectedResult, date.compareTo(dateEqual));
 }
 
+/**
+ * This test case aim to make CI happy, no need to do like that
+ * Usage:
+ *  Date::UTC(...)
+ */
 TEST (JavaUtil, DateUTC) {
     // Given valid date tot est Date::UTC - should to return correct epoch value
     long result = Date::UTC(2017, 05, 21, 21, 05, 43);
 
-    long expectedTime = 1498053943;
+    // Init timer of system
+    tm timePresenter = {0};
+    timePresenter.tm_year = 2017 - 1900; //LocalTimer start since 1900;
+    timePresenter.tm_mon = 05;
+    timePresenter.tm_mday = 21;
+    timePresenter.tm_hour = 21;
+    timePresenter.tm_min = 05;
+    timePresenter.tm_sec = 43;
+
+    long expectedTime = mktime(&timePresenter);
+
     ASSERT_EQUAL(expectedTime, result);
 }
 

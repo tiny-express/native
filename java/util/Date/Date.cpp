@@ -191,10 +191,6 @@ long Date::getTime() {
 }
 
 int	Date::getTimezoneOffset() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
     tm *globalTimer = gmtime(&this->original);
     int result = this->localTimer->tm_hour - globalTimer->tm_hour;
     return result;
