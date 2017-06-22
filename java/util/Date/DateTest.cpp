@@ -298,6 +298,9 @@ TEST (JavaUtil, DateGetTimeZone) {
     // Given valid date to test current time zone, this test case is based on Vietnam GMT+7
     Date date;
 
-    int expectedTimeZone = 7; //Vietnam GMT
+    // Init timer of system to test time zone
+    time_t now = time(0);
+    int expectedTimeZone = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
+
     ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 }
