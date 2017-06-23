@@ -29,6 +29,7 @@
 #include "../network.h"
 #include "../string.h"
 #include "../validator.h"
+#include "../network/response_parser.h"
 
 /**
  * Send mail via SendGrid service
@@ -70,14 +71,11 @@ int send_mail(
 	};
 	
 	char *response = http_request("POST", service_url, header, body);
-    char *response_upper = string_upper(response);
+    http_response *response_parser = parse(response);
+    int result = string_to_int(response_parser->status_code);
     free(response);
+    free_http_response(response_parser);
 	free(auth_bearer_header);
 	free(body[0]);
-	if (string_index(response_upper, SENDGRID_RESPONSE_SUCCESS, 1) < 0) {
-        free(response_upper);
-		return FALSE;
-	}
-	free(response_upper);
-	return TRUE;
+	return result == SENDGRID_RESPONSE_ACCEPTED;
 }

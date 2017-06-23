@@ -152,7 +152,8 @@ namespace Java {
 			 * Not support this function yet
 			 * @return
 			 */
-			Object &clone();
+			template<typename E>
+			E clone();
 			
 			/**
 			 * Not support this function yet
