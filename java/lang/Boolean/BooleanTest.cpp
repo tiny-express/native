@@ -101,7 +101,7 @@ TEST(JavaLang, BooleanGetBoolean) {
     boolean result = Boolean::getBoolean("True");
     ASSERT_EQUAL(expect, result);
 
-    // Give two value boolean (true - true) - Should equal
+    // Give two value boolean (false - false) - Should equal
     expect = false;
     result = Boolean::getBoolean("False");
     ASSERT_EQUAL(expect, result);
@@ -113,7 +113,7 @@ TEST(JavaLang, BooleanParseBoolean) {
     boolean result = Boolean::parseBoolean("True");
     ASSERT_EQUAL(expect, result);
 
-    // Give two value boolean (true - true) - Should equal
+    // Give two value boolean (false - false) - Should equal
     expect = false;
     result = Boolean::parseBoolean("False");
     ASSERT_EQUAL(expect, result);
@@ -144,7 +144,7 @@ TEST(JavaLang, BooleanStaticValueOf) {
     boolean result = Boolean::valueOf("True");
     ASSERT_EQUAL(expect, result);
 
-    // Give two value boolean (true - true) - Should equal
+    // Give two value boolean (false - false) - Should equal
     expect = false;
     result = Boolean::valueOf("False");
     ASSERT_EQUAL(expect, result);
