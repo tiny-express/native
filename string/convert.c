@@ -137,3 +137,8 @@ int string_to_boolean(char *target) {
 	free(boolean_value);
 	return FALSE;
 }
+
+// TODO: @thoangminh
+char *string_from_boolean(int target) {
+
+}
