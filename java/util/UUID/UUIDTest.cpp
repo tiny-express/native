@@ -65,7 +65,7 @@ TEST (JavaUtil, UUIDCompare) {
     UUID targetMoreThan = UUID(345, 345);
 
     long result = uuid.compareTo(targetLessThan);
-    long expectedValue = -1;
+    long expectedValue = 1;
     ASSERT_EQUAL(expectedValue, result);
 
     result = uuid.compareTo(targetEqual);
@@ -73,7 +73,7 @@ TEST (JavaUtil, UUIDCompare) {
     ASSERT_EQUAL(expectedValue, result);
 
     result = uuid.compareTo(targetMoreThan);
-    expectedValue = 1;
+    expectedValue = -1;
     ASSERT_EQUAL(expectedValue, result);
 }
 
@@ -93,15 +93,6 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
     ASSERT_EQUAL(expectedMost, uuid.getMostSignificantBits());
 
     ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
-}
-
-TEST (JavaUtil, UUIDNode) {
-    // Given valid UUID to test node value
-    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
-
-    long result = uuid.node();
-    long expectedValue = 18388605661197;
-    ASSERT_EQUAL(expectedValue, result);
 }
 
 TEST (JavaUtil, UUIDToString) {

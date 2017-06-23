@@ -126,7 +126,19 @@ namespace Java {
              * @return
              */
             static UUID	randomUUID() {
+                Array<byte> randomBytes = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+                //FIXME: will replace by Java.Util.Random after it was implemented
+                srand(time(0));
+                for (int i = 0; i < 16; ++i) {
+                    randomBytes[i] = (byte)(random()%100);
+                }
+
+                randomBytes[6]  &= 0x0f;  /* clear version        */
+                randomBytes[6]  |= 0x40;  /* set to version 4     */
+                randomBytes[8]  &= 0x3f;  /* clear variant        */
+                randomBytes[8]  |= 0x80;  /* set to IETF variant  */
+                return UUID(randomBytes);
             }
 
             /**
@@ -141,6 +153,18 @@ namespace Java {
              * @return
              */
             static UUID	fromString(String name) {
+                Array<String> components = name.split("-");
+
+                if (components.length != 5) {
+                    //FIXME: through an exception
+                }
+
+                for (int i = 0; i < 5; ++i) {
+                    components[i] = "0x"+components[i];
+                }
+
+//                long mostSignBits = components[0]
+
 
             }
 

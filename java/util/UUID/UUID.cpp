@@ -78,5 +78,5 @@ long UUID::node() {
 }
 
 String UUID::toString() {
-    return "";
+    return ""; //FIXME: implement correct this function
 }
