@@ -57,32 +57,77 @@ TEST (JavaUtil, UUIDConstructor) {
 
 TEST (JavaUtil, UUIDCompare) {
     // Given valid 2 UUIDs, both of them will never be equal if different instance
+
+    UUID uuid = UUID::randomUUID();
+    UUID target = UUID::randomUUID();
+
+    String uuidString = uuid.toString();
+    String targetString = target.toString();
+
+    ASSERT_TRUE(uuidString != targetString);
 }
 
 TEST (JavaUtil, UUIDEquals) {
-    // Given valid 1 instance of UUID, test equals with ifself
+    // Given valid an instance of UUID, test equals with ifself
+    UUID uuid = UUID::randomUUID();
+
+    ASSERT_TRUE(uuid.toString() == uuid.toString());
 }
 
 TEST (JavaUtil, UUIDGetSignificantBits) {
     // Given valid UUID to test getLeast and getMost of significant bits inside this class
+    long expectedMost = 100000000;
+    long expectedLeast = 5000000;
+    UUID uuid = UUID(expectedMost, expectedLeast);
+
+    ASSERT_EQUAL(expectedMost, uuid.getMostSignificantBits());
+
+    ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtil, UUIDNode) {
     // Given valid UUID to test node value
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+    long result = uuid.node();
+    long expectedValue = 18388605661197;
+    ASSERT_EQUAL(expectedValue, result);
 }
 
 TEST (JavaUtil, UUIDTimeStamps) {
     // Given valid UUID to test time stamps value
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+    long result = uuid.timestamp();
+    long expectedValue = 125411328000000000;
+    ASSERT_EQUAL(expectedValue, result);
 }
 
 TEST (JavaUtil, UUIDToString) {
     // Given valid UUID to test toString()
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+    UUID target = UUID(4053239666997989821, 5603022497796657139);
+
+    String uuidString = uuid.toString();
+    String targetString = target.toString();
+
+    ASSERT_STR(uuidString.toString(), targetString.toString());
 }
 
 TEST (JavaUtil, UUIDVariant) {
     // Given valid UUID to test variant value
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+    long result = uuid.variant();
+    long expectedValue = 2;
+    ASSERT_EQUAL(expectedValue, result);
 }
 
 TEST (JavaUtil, UUIDVersion) {
     // Given valid UUID to test version value
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+    long result = uuid.version();
+    long expectedValue = uuid.version();
+    ASSERT_EQUAL(expectedValue, result);
 }
