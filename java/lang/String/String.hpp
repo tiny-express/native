@@ -39,7 +39,7 @@ namespace Java {
 		
 		class String;
 		
-		class String :
+		class String : public Object,
 			public virtual Serializable,
 			public virtual Comparable<String>,
 			public virtual CharSequence {
