@@ -38,24 +38,29 @@ namespace Java {
 //        , public virtual Serializable
 //        , public virtual Comparable<UUID>
         {
+        private:
+            UUID(Array<byte> data);
+            long mostSigBits;
+            long leastSigBits;
+
         public:
-            UUID();
             UUID(long mostSigBits, long leastSigBits);
             ~UUID();
 
         public:
             /**
+             * Don't support this method
              * The clock sequence value associated with this UUID.
              * @return
              */
-            int	clockSequence();
+//            int	clockSequence();
 
             /**
              * Compares this UUID with the specified UUID.
              * @param val
              * @return
              */
-            int	compareTo(UUID val);
+            int	compareTo(UUID target);
 
             /**
              * Compares this object to the specified object.
@@ -122,11 +127,10 @@ namespace Java {
             }
 
             /**
+             * Don't support this method
              *  Static factory to retrieve a type 3 (name based) UUID based on the specified byte array.
              */
-            static UUID	nameUUIDFromBytes(Array<byte> name) {
-
-            }
+//            static UUID	nameUUIDFromBytes(Array<byte> name);
 
             /**
              * Creates a UUID from the string standard representation as described in the toString() method.
