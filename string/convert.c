@@ -138,7 +138,10 @@ int string_to_boolean(char *target) {
 	return FALSE;
 }
 
-// TODO: @thoangminh
 char *string_from_boolean(int target) {
+    if (target == 1) {
+        return strdup("TRUE");
+    }
 
+    return strdup("FALSE");
 }

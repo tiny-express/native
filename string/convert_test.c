@@ -237,3 +237,23 @@ TEST (String, ConvertToBoolean) {
 	int boolean6 = string_to_boolean(target6);
 	ASSERT_FALSE(boolean6);
 }
+
+TEST (String, ConvertFromBoolean) {
+	int input = 0;
+	char *expect = "FALSE";
+	char *result = string_from_boolean(input);
+	ASSERT_STR(expect, result);
+	free(result);
+
+	input = 1;
+	expect = "TRUE";
+	result= string_from_boolean(input);
+	ASSERT_STR(expect, result);
+	free(result);
+
+	input = 10;
+	expect = "FALSE";
+	result = string_from_boolean(input);
+	ASSERT_STR(expect, result);
+	free(result);
+}
