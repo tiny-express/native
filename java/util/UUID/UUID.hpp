@@ -95,10 +95,11 @@ namespace Java {
             long node();
 
             /**
+             * Don't support this method - don't have >>> operator in C++
              * The timestamp value associated with this UUID.
              * @return
              */
-            long timestamp();
+//            long timestamp();
 
             /**
              * Returns a String object representing this UUID.
@@ -107,16 +108,18 @@ namespace Java {
             String toString();
 
             /**
+             * Don't support this method - don't have >>> operator in C++
              * The variant number associated with this UUID.
              * @return
              */
-            int	variant();
+//            int	variant();
 
             /**
+             * Don't support this method - don't have >>> operator in C++
              * The version number associated with this UUID.
              * @return
              */
-            int	version();
+//            int	version();
 
             /**
              * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.

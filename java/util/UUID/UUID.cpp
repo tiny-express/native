@@ -27,49 +27,56 @@
 #include "UUID.hpp"
 
 UUID::UUID(Array<byte> data) {
+    long msb = 0;
+    long lsb = 0;
 
+    for (int i = 0; i < 8; ++i) {
+        msb = (msb << 8) | (data[i] & 0xff);
+    }
+
+    for (int j = 8; j < 16; ++j) {
+        lsb = (lsb << 8) | (data[j] & 0xff);
+    }
+
+    this->mostSigBits = msb;
+    this->leastSigBits = lsb;
 }
 
 UUID::UUID(long mostSigBits, long leastSigBits) {
-
+    this->mostSigBits = mostSigBits;
+    this->leastSigBits = leastSigBits;
 }
 
 UUID::~UUID() {
-
 }
 
 int	UUID::compareTo(UUID target) {
-
+    return  (this->mostSigBits < target.mostSigBits ? -1 :
+              (this->mostSigBits > target.mostSigBits ? 1 :
+               (this->leastSigBits < target.leastSigBits ? -1 :
+                (this->leastSigBits > target.leastSigBits ? 1 : 0)
+               )
+              )
+            );
 }
 
 boolean	UUID::equals(UUID target) {
-
+    return (this->mostSigBits == target.mostSigBits &&
+            this->leastSigBits == target.leastSigBits);
 }
 
 long UUID::getLeastSignificantBits() {
-
+    return this->leastSigBits;
 }
 
 long UUID::getMostSignificantBits() {
-
+    return this->mostSigBits;
 }
 
 long UUID::node() {
-
-}
-
-long UUID::timestamp() {
-
+    return (this->leastSigBits & 0x0000FFFFFFFFFFFFL);
 }
 
 String UUID::toString() {
-
-}
-
-int	UUID::variant() {
-
-}
-
-int	UUID::version() {
-
+    return "";
 }
