@@ -42,6 +42,7 @@ namespace Java {
             UUID(Array<byte> data);
             long mostSigBits;
             long leastSigBits;
+            long timestamp;
 
         public:
             UUID(long mostSigBits, long leastSigBits);
@@ -95,11 +96,10 @@ namespace Java {
             long node();
 
             /**
-             * Don't support this method - don't have >>> operator in C++
              * The timestamp value associated with this UUID.
              * @return
              */
-//            long timestamp();
+            long getTimestamp();
 
             /**
              * Returns a String object representing this UUID.
@@ -148,25 +148,12 @@ namespace Java {
 //            static UUID	nameUUIDFromBytes(Array<byte> name);
 
             /**
+             * Don't support this method
              * Creates a UUID from the string standard representation as described in the toString() method.
              * @param name
              * @return
              */
-            static UUID	fromString(String name) {
-                Array<String> components = name.split("-");
-
-                if (components.length != 5) {
-                    //FIXME: through an exception
-                }
-
-                for (int i = 0; i < 5; ++i) {
-                    components[i] = "0x"+components[i];
-                }
-
-//                long mostSignBits = components[0]
-
-
-            }
+//            static UUID	fromString(String name);
 
         };
     }

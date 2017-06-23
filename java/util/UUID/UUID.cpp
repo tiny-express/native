@@ -40,11 +40,13 @@ UUID::UUID(Array<byte> data) {
 
     this->mostSigBits = msb;
     this->leastSigBits = lsb;
+    this->timestamp = time(0);
 }
 
 UUID::UUID(long mostSigBits, long leastSigBits) {
     this->mostSigBits = mostSigBits;
     this->leastSigBits = leastSigBits;
+    this->timestamp = time(0);
 }
 
 UUID::~UUID() {
@@ -73,8 +75,8 @@ long UUID::getMostSignificantBits() {
     return this->mostSigBits;
 }
 
-long UUID::node() {
-    return (this->leastSigBits & 0x0000FFFFFFFFFFFFL);
+long UUID::getTimestamp() {
+    return this->timestamp;
 }
 
 String UUID::toString() {
