@@ -67,7 +67,7 @@ char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
 int string_to_boolean(char *target);
-
+char *string_from_boolean(int target);
 char *url_encode(char *target);
 char *url_decode(char *target);
 
