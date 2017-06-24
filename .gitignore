@@ -25,3 +25,8 @@ a.out
 /logging
 /json
 /native.iml
+/example/HelloWorld/CMakeFiles
+/example/HelloWorld/cmake_install.cmake
+/example/HelloWorld/HelloWorld
+/example/HelloWorld/Makefile
+/example/HelloWorld/CMakeCache.txt
