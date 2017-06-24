@@ -138,6 +138,12 @@ int string_to_boolean(char *target) {
 	return FALSE;
 }
 
+/**
+ * String from boolean
+ *
+ * @param target
+ * @return string
+ */
 char *string_from_boolean(int target) {
     if (target == 1) {
         return strdup("TRUE");
