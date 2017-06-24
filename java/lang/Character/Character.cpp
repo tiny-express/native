@@ -65,318 +65,310 @@ int Character::getNumericValue(char ch) {
     return (int) ch;
 }
 
-int codePointAt(Array<char> a, int index, int limit) {
+int Character::codePointAt(Array<char> a, int index, int limit) {
 
 }
 
-int codePointAt(CharSequence seq, int index) {
+int Character::codePointAt(CharSequence seq, int index) {
 
 }
 
-int codePointBefore(Array<char> a, int index) {
+int Character::codePointBefore(Array<char> a, int index, int start) {
 
 }
 
-int codePointBefore(Array<char> a, int index, int start) {
+int Character::codePointBefore(CharSequence seq, int index) {
 
 }
 
-int codePointBefore(CharSequence seq, int index) {
+int Character::codePointCount(Array<char> a, int offset, int count) {
 
 }
 
-static int codePointCount(Array<char> a, int offset, int count) {
+int Character::codePointCount(CharSequence seq, int beginIndex, int endIndex) {
 
 }
 
-static int codePointCount(CharSequence seq, int beginIndex, int endIndex) {
+int Character::compare(char x, char y) {
 
 }
 
-static int compare(char x, char y) {
+int	Character::compareTo(Character anotherCharacter) {
 
 }
 
-int	compareTo(Character anotherCharacter) {
+int Character::digit(char ch, int radix) {
 
 }
 
-static int digit(char ch, int radix) {
+int Character::digit(int codePoint, int radix) {
 
 }
 
-static int digit(int codePoint, int radix) {
+boolean	Character::equals(Character target) {
 
 }
 
-boolean	equals(Character target) {
+char Character::forDigit(int digit, int radix) {
 
 }
 
-static char	forDigit(int digit, int radix) {
+byte Character::getDirectionality(char ch) {
 
 }
 
-static byte	getDirectionality(char ch) {
+byte Character::getDirectionality(int codePoint) {
 
 }
 
-static byte	getDirectionality(int codePoint) {
+String Character::getName(int codePoint) {
 
 }
 
-static String getName(int codePoint) {
+int Character::getNumericValue(int codePoint) {
 
 }
 
-static int getNumericValue(char ch) {
+int Character::getType(char ch) {
 
 }
 
-static int getNumericValue(int codePoint) {
+int Character::getType(int codePoint) {
 
 }
 
-static int getType(char ch) {
+int	Character::hashCode() {
 
 }
 
-static int getType(int codePoint) {
+char Character::highSurrogate(int codePoint) {
 
 }
 
-int	hashCode() {
+boolean Character::isAlphabetic(int codePoint) {
 
 }
 
-static char	highSurrogate(int codePoint) {
+boolean Character::isBmpCodePoint(int codePoint) {
 
 }
 
-static boolean isAlphabetic(int codePoint) {
+boolean Character::isDefined(char ch) {
 
 }
 
-static boolean isBmpCodePoint(int codePoint) {
+boolean Character::isDefined(int codePoint) {
 
 }
 
-static boolean isDefined(char ch) {
+boolean Character::isDigit(char ch) {
 
 }
 
-static boolean isDefined(int codePoint) {
+boolean Character::isDigit(int codePoint) {
 
 }
 
-static boolean isDigit(char ch) {
+boolean Character::isHighSurrogate(char ch) {
 
 }
 
-static boolean isDigit(int codePoint) {
+boolean Character::isIdentifierIgnorable(char ch) {
 
 }
 
-static boolean isHighSurrogate(char ch) {
+boolean Character::isIdentifierIgnorable(int codePoint) {
 
 }
 
-static boolean isIdentifierIgnorable(char ch) {
+boolean Character::isIdeographic(int codePoint) {
 
 }
 
-static boolean isIdentifierIgnorable(int codePoint) {
+boolean Character::isISOControl(char ch) {
 
 }
 
-static boolean isIdeographic(int codePoint) {
+boolean Character::isISOControl(int codePoint) {
 
 }
 
-static boolean isISOControl(char ch) {
+boolean Character::isJavaIdentifierPart(char ch) {
 
 }
 
-static boolean isISOControl(int codePoint) {
+boolean Character::isJavaIdentifierPart(int codePoint) {
 
 }
 
-static boolean isJavaIdentifierPart(char ch) {
+boolean Character::isJavaIdentifierStart(char ch) {
 
 }
 
-static boolean isJavaIdentifierPart(int codePoint) {
+boolean Character::isJavaIdentifierStart(int codePoint) {
 
 }
 
-static boolean isJavaIdentifierStart(char ch) {
+boolean Character::isLetter(char ch) {
 
 }
 
-static boolean isJavaIdentifierStart(int codePoint) {
+boolean Character::isLetter(int codePoint) {
 
 }
 
-static boolean isLetter(char ch) {
+boolean Character::isLetterOrDigit(char ch) {
 
 }
 
-static boolean isLetter(int codePoint) {
+boolean Character::isLetterOrDigit(int codePoint) {
 
 }
 
-static boolean isLetterOrDigit(char ch) {
+boolean Character::isLowerCase(char ch) {
 
 }
 
-static boolean isLetterOrDigit(int codePoint) {
+boolean Character::isLowerCase(int codePoint) {
 
 }
 
-static boolean isLowerCase(char ch) {
+boolean Character::isLowSurrogate(char ch) {
 
 }
 
-static boolean isLowerCase(int codePoint) {
+boolean Character::isMirrored(char ch) {
 
 }
 
-static boolean isLowSurrogate(char ch) {
+boolean Character::isMirrored(int codePoint) {
 
 }
 
-static boolean isMirrored(char ch) {
+boolean Character::isSpaceChar(char ch) {
 
 }
 
-static boolean isMirrored(int codePoint) {
+boolean Character::isSpaceChar(int codePoint) {
 
 }
 
-static boolean isSpaceChar(char ch) {
+boolean Character::isSupplementaryCodePoint(int codePoint) {
 
 }
 
-static boolean isSpaceChar(int codePoint) {
+boolean Character::isSurrogate(char ch) {
 
 }
 
-static boolean isSupplementaryCodePoint(int codePoint) {
+boolean Character::isSurrogatePair(char high, char low) {
 
 }
 
-static boolean isSurrogate(char ch) {
+boolean Character::isTitleCase(char ch) {
 
 }
 
-static boolean isSurrogatePair(char high, char low) {
+boolean Character::isTitleCase(int codePoint) {
 
 }
 
-static boolean isTitleCase(char ch) {
+boolean Character::isUnicodeIdentifierPart(char ch) {
 
 }
 
-static boolean isTitleCase(int codePoint) {
+boolean Character::isUnicodeIdentifierPart(int codePoint) {
 
 }
 
-static boolean isUnicodeIdentifierPart(char ch) {
+boolean Character::isUnicodeIdentifierStart(char ch) {
 
 }
 
-static boolean isUnicodeIdentifierPart(int codePoint) {
+boolean Character::isUnicodeIdentifierStart(int codePoint) {
 
 }
 
-static boolean isUnicodeIdentifierStart(char ch) {
+boolean Character::isUpperCase(char ch) {
 
 }
 
-static boolean isUnicodeIdentifierStart(int codePoint) {
+boolean Character::isUpperCase(int codePoint) {
 
 }
 
-static boolean isUpperCase(char ch) {
+boolean Character::isValidCodePoint(int codePoint) {
 
 }
 
-static boolean isUpperCase(int codePoint) {
+boolean Character::isWhitespace(char ch) {
 
 }
 
-static boolean isValidCodePoint(int codePoint) {
+boolean Character::isWhitespace(int codePoint) {
 
 }
 
-static boolean isWhitespace(char ch) {
+char Character::lowSurrogate(int codePoint) {
 
 }
 
-static boolean isWhitespace(int codePoint) {
+int Character::offsetByCodePoints(Array<char> a, int start, int count, int index, int codePointOffset) {
 
 }
 
-static char	lowSurrogate(int codePoint) {
+int Character::offsetByCodePoints(CharSequence seq, int index, int codePointOffset) {
 
 }
 
-static int offsetByCodePoints(Array<char> a, int start, int count, int index, int codePointOffset) {
+char Character::reverseBytes(char ch) {
 
 }
 
-static int offsetByCodePoints(CharSequence seq, int index, int codePointOffset) {
+Array<char> Character::toChars(int codePoint) {
 
 }
 
-static char	reverseBytes(char ch) {
+int Character::toChars(int codePoint, Array<char> dst, int dstIndex) {
 
 }
 
-static Array<char> toChars(int codePoint) {
+int Character::toCodePoint(char high, char low) {
 
 }
 
-static int toChars(int codePoint, Array<char> dst, int dstIndex) {
+char Character::toLowerCase(char ch) {
 
 }
 
-static int toCodePoint(char high, char low) {
+int Character::toLowerCase(int codePoint) {
 
 }
 
-static char	toLowerCase(char ch) {
+String Character::toString() {
 
 }
 
-static int toLowerCase(int codePoint) {
+String Character::toString(char c) {
 
 }
 
-String toString() {
+char Character::toTitleCase(char ch) {
 
 }
 
-static String toString(char c) {
+int Character::toTitleCase(int codePoint) {
 
 }
 
-static char	toTitleCase(char ch) {
+char Character::toUpperCase(char ch) {
 
 }
 
-static int toTitleCase(int codePoint) {
+int Character::toUpperCase(int codePoint) {
 
 }
 
-static char	toUpperCase(char ch) {
-
-}
-
-static int toUpperCase(int codePoint) {
-
-}
-
-static Character valueOf(char c) {
+Character Character::valueOf(char c) {
 
 }
