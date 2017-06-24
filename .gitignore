@@ -29,5 +29,4 @@ a.out
 /example/HelloWorld/cmake_install.cmake
 /example/HelloWorld/HelloWorld
 /example/HelloWorld/Makefile
-/example/HelloWorld/bin
 /example/HelloWorld/CMakeCache.txt
