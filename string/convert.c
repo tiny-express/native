@@ -145,9 +145,9 @@ int string_to_boolean(char *target) {
  * @return string
  */
 char *string_from_boolean(int target) {
-    if (target == FALSE) {
-        return strdup("FALSE");
+    if (target == TRUE) {
+        return strdup("True");
     }
 
-    return strdup("TRUE");
+    return strdup("False");
 }

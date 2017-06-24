@@ -141,13 +141,8 @@ boolean Boolean::parseBoolean(const_string target) {
  *
  * @return string
  */
-// TODO: @thoangminh will replace this function
 string Boolean::toString() const {
-    if (this->original == 1) {
-        return (string) "True";
-    }
-
-    return (string) "False";
+    return string_from_boolean(this->original);
 }
 
 /**
@@ -158,11 +153,7 @@ string Boolean::toString() const {
  * @return String
  */
 string Boolean::toString(const boolean &target) {
-    if (target == 1) {
-        return (string) "True";
-    }
-
-    return (string) "False";
+    return string_from_boolean(target);
 }
 
 /**

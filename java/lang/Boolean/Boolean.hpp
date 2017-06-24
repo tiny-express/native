@@ -27,6 +27,10 @@
 #ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
 #define NATIVE_JAVA_LANG_BOOLEAN_HPP
 
+extern "C" {
+#include "../../../string.h"
+};
+
 #include "../Object/Object.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
