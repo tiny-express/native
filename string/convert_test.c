@@ -401,4 +401,5 @@ TEST (String, ConvertFromBoolean) {
 	result = string_from_boolean(value);
 	ASSERT_STR(expect, result);
 	free(result);
+
 }
