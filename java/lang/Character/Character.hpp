@@ -74,7 +74,7 @@ namespace Java {
 			 * @param index
 			 * @return int
 			 */
-			static int codePointAt(CharSequence seq, int index);
+			static int codePointAt(CharSequence &seq, int index);
 
 			/**
 			 * Returns the code point preceding the given index of the char array.
@@ -98,7 +98,7 @@ namespace Java {
 			 * @param index
 			 * @return int
 			 */
-			static int codePointBefore(CharSequence seq, int index);
+			static int codePointBefore(CharSequence &seq, int index);
 
 			/**
 			 * Returns the number of Unicode code points in a subarray of the char array argument.
@@ -115,7 +115,7 @@ namespace Java {
 			 * @param endIndex
 			 * @return int
 			 */
-			static int codePointCount(CharSequence seq, int beginIndex, int endIndex);
+			static int codePointCount(CharSequence &seq, int beginIndex, int endIndex);
 
 			/**
 			 * Compares two char values numerically.
@@ -540,7 +540,7 @@ namespace Java {
 			 * @param codePointOffset
 			 * @return int
 			 */
-			static int offsetByCodePoints(CharSequence seq, int index, int codePointOffset);
+			static int offsetByCodePoints(CharSequence &seq, int index, int codePointOffset);
 
 			/**
 			 * Returns the value obtained by reversing the order of the bytes in the specified char value.

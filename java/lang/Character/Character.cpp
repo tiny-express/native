@@ -69,7 +69,7 @@ int Character::codePointAt(Array<char> a, int index, int limit) {
 
 }
 
-int Character::codePointAt(CharSequence seq, int index) {
+int Character::codePointAt(CharSequence &seq, int index) {
 
 }
 
@@ -77,7 +77,7 @@ int Character::codePointBefore(Array<char> a, int index, int start) {
 
 }
 
-int Character::codePointBefore(CharSequence seq, int index) {
+int Character::codePointBefore(CharSequence &seq, int index) {
 
 }
 
@@ -85,7 +85,7 @@ int Character::codePointCount(Array<char> a, int offset, int count) {
 
 }
 
-int Character::codePointCount(CharSequence seq, int beginIndex, int endIndex) {
+int Character::codePointCount(CharSequence &seq, int beginIndex, int endIndex) {
 
 }
 
@@ -317,7 +317,7 @@ int Character::offsetByCodePoints(Array<char> a, int start, int count, int index
 
 }
 
-int Character::offsetByCodePoints(CharSequence seq, int index, int codePointOffset) {
+int Character::offsetByCodePoints(CharSequence &seq, int index, int codePointOffset) {
 
 }
 
