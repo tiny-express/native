@@ -79,6 +79,28 @@ long UUID::getTimestamp() {
     return this->timestamp;
 }
 
+int UUID::hashCode() {
+    long hilo = this->mostSigBits ^ this->leastSigBits;
+    return ((int)(hilo >> 32)) ^ (int) hilo;
+}
+
+long UUID::node() {
+    if (this->version() != 1) {
+        //FIXME: throw an exception here - "Not a time-based UUID"
+    }
+
+    return this->leastSigBits & 0x0000FFFFFFFFFFFFL;
+}
+
+int UUID::variant() {
+    return (int) ((this->leastSigBits >> (64 - (this->leastSigBits >> 62)))
+                  & (this->leastSigBits >> 63));
+}
+
+int UUID::version() {
+    return (int)((this->mostSigBits >> 12) & 0x0f);
+}
+
 String UUID::toString() {
     return ""; //FIXME: implement correct this function
 }

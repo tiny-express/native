@@ -58,68 +58,65 @@ namespace Java {
 
             /**
              * Compares this UUID with the specified UUID.
-             * @param val
-             * @return
+             * @param target
+             * @return int
              */
             int	compareTo(UUID target);
 
             /**
              * Compares this object to the specified object.
-             * @param obj
-             * @return
+             * @param target
+             * @return boolean
              */
             boolean	equals(UUID target);
 
             /**
              * Returns the least significant 64 bits of this UUID's 128 bit value.
-             * @return
+             * @return long
              */
             long getLeastSignificantBits();
 
             /**
              * Returns the most significant 64 bits of this UUID's 128 bit value.
-             * @return
+             * @return long
              */
             long getMostSignificantBits();
 
             /**
-             * This method was implemented on Object, no need to define again
              * Returns a hash code for this UUID.
              * @return
              */
-//            int	hashCode();
+            int	hashCode();
 
             /**
              * The node value associated with this UUID.
-             * @return
+             * @return long
              */
             long node();
 
             /**
              * The timestamp value associated with this UUID.
-             * @return
+             * @return long
              */
             long getTimestamp();
 
             /**
              * Returns a String object representing this UUID.
-             * @return
+             * @return String
              */
             String toString();
 
             /**
-             * Don't support this method - don't have >>> operator in C++
              * The variant number associated with this UUID.
              * @return
              */
-//            int	variant();
+            int	variant();
 
             /**
-             * Don't support this method - don't have >>> operator in C++
              * The version number associated with this UUID.
              * @return
              */
-//            int	version();
+            int	version();
 
             /**
              * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
@@ -128,7 +125,7 @@ namespace Java {
             static UUID	randomUUID() {
                 Array<byte> randomBytes = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-                //FIXME: will replace by Java.Util.Random after it was implemented
+                //FIXME: will be replaced by Java.Util.Random after it was implemented
                 srand(time(0));
                 for (int i = 0; i < 16; ++i) {
                     randomBytes[i] = (byte)(random()%100);
