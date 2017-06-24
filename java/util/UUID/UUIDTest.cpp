@@ -92,3 +92,9 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
 
     ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
 }
+
+TEST(JavaUtil, UUIDTrap) {
+    UUID uuid = UUID::fromString("trap");
+    String result = uuid.toString();
+    ASSERT_STR("trap", result.toString());
+}

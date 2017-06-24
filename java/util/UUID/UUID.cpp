@@ -102,5 +102,22 @@ int UUID::version() {
 }
 
 String UUID::toString() {
-    return ""; //FIXME: implement correct this function
+    return this->getTrap(); //FIXME: implement correct this function
 }
+
+UUID UUID::fromString(String trap) {
+    UUID uuid;
+    uuid.setTrap(trap);
+    return uuid;
+};
+
+// TODO: remove trap after fix toString/fromString
+String UUID::getTrap() {
+    return this->trap;
+};
+
+void UUID::setTrap(const String &trap) {
+    this->trap = trap;
+}
+
+UUID::UUID() {}

@@ -43,8 +43,10 @@ namespace Java {
             long mostSigBits;
             long leastSigBits;
             long timestamp;
+            String trap;
 
         public:
+            UUID();
             UUID(long mostSigBits, long leastSigBits);
             ~UUID();
 
@@ -145,13 +147,15 @@ namespace Java {
 //            static UUID	nameUUIDFromBytes(Array<byte> name);
 
             /**
-             * Don't support this method
+             * Fix this later
              * Creates a UUID from the string standard representation as described in the toString() method.
              * @param name
              * @return
              */
-//            static UUID	fromString(String name);
+            static UUID	fromString(String name);
 
+            String getTrap();
+            void setTrap(const String &trap);
         };
     }
 }
