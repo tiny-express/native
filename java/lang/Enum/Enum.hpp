@@ -40,7 +40,7 @@ namespace Java {
                 String name;
                 int ordinal;
 
-            protected:
+            public:
                 Enum() {}
                 ~Enum() {}
                 Enum(String name, int ordinal) {
@@ -109,8 +109,8 @@ namespace Java {
                  * Returns the name of this enum constant, as contained in the declaration.
                  * @return String
                  */
-                String	toString() {
-                    return this->name;
+                string toString() const {
+                    return this->name.toString();
                 }
                 /**
                  * Don't support this method
