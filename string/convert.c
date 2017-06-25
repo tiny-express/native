@@ -145,9 +145,17 @@ int string_to_boolean(char *target) {
  * @return string
  */
 char *string_from_boolean(int target) {
+<<<<<<< HEAD
     if (target == FALSE) {
         return strdup("false");
     }
 
     return strdup("true");
+=======
+    if (target == TRUE) {
+        return strdup("True");
+    }
+
+    return strdup("False");
+>>>>>>> b32e9b249ea532ce121617a5e98a3bcbc4589342
 }

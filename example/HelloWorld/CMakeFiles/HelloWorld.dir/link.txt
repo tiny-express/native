@@ -1,1 +1,0 @@
-g++    -std=c++11   CMakeFiles/HelloWorld.dir/Main.cpp.o  -o HelloWorld -rdynamic -lpthread -lz -lssl -lcrypto -L/usr/local/lib -lnative -lcrypto -lm -lrt 
