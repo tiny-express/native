@@ -235,7 +235,12 @@ TEST (JavaLang, StringReplace) {
 }
 
 TEST (JavaLang, StringSplit) {
-
+    // Give an Array<String> then asert each element - Should equal
+    String stringToSplit = "Hello Hello Hello";
+    Array<String> strings = stringToSplit.split(" ");
+    for (String item : strings) {
+        ASSERT_STR("Hello", item.toString());
+    }
 }
 
 TEST (JavaLang, StringStartsWith) {
