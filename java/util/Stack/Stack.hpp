@@ -36,7 +36,7 @@
 namespace Java {
     namespace Util {
         template <typename E>
-        class Stack : public virtual Collection<E> {
+        class Stack {
             private:
 			std::stack<E> original;
             
@@ -117,21 +117,6 @@ namespace Java {
                 return this->original.size();
             }
 
-			boolean addAll(Collection<E> &c){}
-			void clear(){}
-			boolean contains(Object &o) const{}
-			boolean equals(Object &o) const{}
-			int hashCode() const{}
-			boolean isEmpty() const{}
-			Iterator<E> &iterator() const{}
-			boolean remove(Object &o){}
-			boolean removeAll(Collection<Object> &c){}
-			boolean removeIf(Java::Util::Function::Predicate<E> &filter){}
-			boolean retainAll(Collection<Object> &c){}
-
-			int size() const {
-				return this->original.size();
-			}
 
         };
     }
