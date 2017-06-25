@@ -31,6 +31,7 @@
 #include "../validator.h"
 #include "../crypto.h"
 #include "../common.h"
+#include "../network/response_parser.h"
 
 /**
  * Send mail via Twillio service
@@ -114,6 +115,9 @@ int send_sms(
 	};
 	
 	char *response = http_request("POST", service_url, headers, body);
+	http_response *response_parser = parse(response);
+
+	int result = string_to_int(response_parser->status_code);
 
     free(phone_number_with_prefix);
     free(to_phone_number_with_prefix);
@@ -126,11 +130,7 @@ int send_sms(
     free(from_phone_number_with_prefix_encoded);
     free(to_phone_number_with_prefix_encoded);
     free(url_content_encoded);
-
-	if (string_index(response, TWILIO_RESPONSE_SUCCESS, 1) != STRING_NOT_FOUND) {
-        free(response);
-		return TRUE;
-	}
     free(response);
-	return FALSE;
+	free_http_response(response_parser);
+	return result == TWILIO_RESPONSE_CREATED;
 }

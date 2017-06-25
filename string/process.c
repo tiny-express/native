@@ -81,7 +81,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-		char **result = calloc(0, sizeof(char*));
+		char **result = calloc(1, sizeof(char*));
 		return result;
 	}
 	char **data = calloc(MAX_STRING_LENGTH, sizeof(char*));
@@ -103,7 +103,8 @@ inline char **string_split(char *target, char *delimiter) {
 }
 
 /**
- * free char**
+ * Free pointer pointer char
+ *
  * @param char_array
  */
 void  free_pointer_pointer_char(char** char_array) {
@@ -327,6 +328,7 @@ inline char *string_concat(char *target, char *subtarget) {
 }
 
 /**
+ * String from to
  *
  * @param target
  * @param from

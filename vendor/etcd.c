@@ -29,6 +29,7 @@
 #include "../common.h"
 #include "../vendor.h"
 #include "../builtin.h"
+#include "../network/response_parser.h"
 
 /**
  * ETCD Get
@@ -47,17 +48,19 @@ char *etcd_get(char *url, char *key) {
 	char *headers[2] = { "\0" };
 	char *body[2] = { "\0" };
 	char *response = http_request("GET", connection_url, headers, body);
-	int response_body_begin_index = string_index(response, (string) "{", 1);
-	int response_length = length_pointer_char(response);
-	char *result = string_from_to(response, response_body_begin_index, response_length - 1);
+	http_response *response_parser = parse(response);
 	free(connection_url);
 	free(response);
-	JSON_Value *root_value = json_parse_string(result);
+    if (string_to_int(response_parser->status_code) != 200) {
+        free_http_response(response_parser);
+        return strdup("");
+    }
+	JSON_Value *root_value = json_parse_string(response_parser->body);
 	JSON_Object *root_object = json_value_get_object(root_value);
 	JSON_Object *node_object = json_object_get_object(root_object, NODE);
 	char *value_result = strdup((char*) json_object_get_string(node_object, VALUE));
 	json_value_free(root_value);
-	free(result);
+    free_http_response(response_parser);
 	return value_result;
 }
 
