@@ -53,13 +53,19 @@ UUID::~UUID() {
 }
 
 int	UUID::compareTo(UUID target) {
-    return  (this->mostSigBits < target.mostSigBits ? -1 :
-              (this->mostSigBits > target.mostSigBits ? 1 :
-               (this->leastSigBits < target.leastSigBits ? -1 :
-                (this->leastSigBits > target.leastSigBits ? 1 : 0)
-               )
-              )
-            );
+    if (this->mostSigBits < target.mostSigBits) {
+        return -1;
+    }
+    if (this->mostSigBits > target.mostSigBits) {
+        return 1;
+    }
+    if (this->leastSigBits < target.leastSigBits) {
+        return -1;
+    }
+    if (this->leastSigBits > target.leastSigBits) {
+        return 1;
+    }
+    return 0;
 }
 
 boolean	UUID::equals(UUID target) {
