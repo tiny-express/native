@@ -63,32 +63,6 @@ namespace Java {
                 }
 
                 /**
-                 * Check this is equal to other or not
-                 * This method was implement on Object, no need to define again
-                 * @param other
-                 * @return boolean
-                 */
-    //            boolean	equals(E e);
-
-                /**
-                 * Don't support this method
-                 */
-    //            protected void finalize();
-
-                /**
-                 * Don't support this method
-                 * @return
-                 */
-    //            Class<E>	getDeclaringClass();
-
-                /**
-                 * Returns a hash code for this enum constant.
-                 * This method was implement on Object, no need to define again
-                 * @return int
-                 */
-    //            int hashCode();
-
-                /**
                  * Returns the name of this enum constant, exactly as declared in its enum declaration.
                  * @return String
                  */
