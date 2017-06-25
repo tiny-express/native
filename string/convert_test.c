@@ -377,11 +377,8 @@ TEST (String, ConvertFromBoolean) {
 	int value = 0;
 
     // The expected result
-<<<<<<< HEAD
+
 	char *expect = "false";
-=======
-	char *expect = "False";
->>>>>>> b32e9b249ea532ce121617a5e98a3bcbc4589342
 
     // The real result of string_from_boolean
 	char *result = string_from_boolean(value);
@@ -393,24 +390,16 @@ TEST (String, ConvertFromBoolean) {
     // Input value 1 to convert from Boolean to String
     // Than make a comparison between the expected result and the real result
     value = 1;
-<<<<<<< HEAD
 	expect = "true";
 	result = string_from_boolean(value);
-=======
-	expect = "True";
-	result= string_from_boolean(value);
->>>>>>> b32e9b249ea532ce121617a5e98a3bcbc4589342
 	ASSERT_STR(expect, result);
 	free(result);
 
     // Input a difference value like 10 to convert from Boolean to String
     // Than make a comparison between the expected result and the real result
     value = 10;
-<<<<<<< HEAD
+
 	expect = "true";
-=======
-	expect = "False";
->>>>>>> b32e9b249ea532ce121617a5e98a3bcbc4589342
 	result = string_from_boolean(value);
 	ASSERT_STR(expect, result);
 	free(result);
