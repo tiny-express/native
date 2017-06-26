@@ -23,3 +23,57 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+// #ifndef NATIVE_JAVA_LANG_BYTE_HPP
+#define NATIVE_JAVA_LANG_BYTE_HPP
+
+#include "../Number/Number.hpp"
+
+
+namespace Java {
+    namespace Lang {
+        
+        class Byte;
+        
+        class Byte : public virtual Number {
+        private:
+            // typedef unsigned char byte;
+            byte original; 
+        public:
+            Byte();
+            Byte(byte original);
+            Byte(const byte &byteNumber);
+            ~Byte();
+        public:
+            char charValue() const;
+			string stringValue() const;
+			short shortValue() const;
+			int intValue() const;
+			long longValue() const;
+			float floatValue() const;
+			double doubleValue() const;
+			string toString() const;
+
+			static Byte parseByte(String target);
+		
+		public:
+			byte operator+(const byte &target) const;
+			byte operator-(const byte &target) const;
+			byte operator/(const byte &target) const;
+			byte operator%(const byte &target) const;
+			byte operator*(const byte &target) const;
+			boolean operator==(const byte &target) const;
+			boolean operator!=(const byte &target) const;
+			boolean operator<(const byte &target) const;
+			boolean operator>(const byte &target) const;
+			boolean operator<=(const byte &target) const;
+			boolean operator>=(const byte &target) const;
+			
+			void operator-=(const byte &target);
+			void operator+=(const byte &target);
+			void operator*=(const byte &target);
+			void operator/=(const byte &target);
+			void operator%=(const byte &target);
+        };
+    }
+}
