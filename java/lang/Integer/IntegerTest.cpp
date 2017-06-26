@@ -168,3 +168,38 @@ TEST (JavaLang, IntegerToString) {
     ASSERT_STR(expect, result4);
     free(result4);
 }
+
+TEST (JavaLang, IntegerCharValue) {
+    // Input different values of type int to compare to the result of Integer::charValue
+    Integer zeroInteger = 0;
+    Integer oneInteger = 1;
+    Integer positiveInteger = 10;
+    Integer maxInteger = 2147483647;
+    Integer minInteger = -2147483647;
+
+    // Make a comparison between expected result and the real result
+    char expect = '0';
+    char result = zeroInteger.charValue();
+    ASSERT_EQUAL(expect, result);
+
+
+    // Make a comparison between expected result and the real result
+    expect = '1';
+    result = oneInteger.charValue();
+    ASSERT_EQUAL(expect, result);
+
+    // Make a comparison between expected result and the real result
+    expect = '1';
+    result = positiveInteger.charValue();
+    ASSERT_EQUAL(expect, result);
+
+    // Make a comparison between expected result and the real result
+    expect = '2';
+    result = maxInteger.charValue();
+    ASSERT_EQUAL(expect, result);
+
+    // Make a comparison between expected result and the real result
+    expect = '-';
+    result = minInteger.charValue();
+    ASSERT_EQUAL(expect, result);
+}
