@@ -241,3 +241,19 @@ TEST (JavaLang, IntegerStringValue) {
     ASSERT_STR(expect, result4);
     free(result4);
 }
+
+TEST (JavaLang, IntegerShortValue) {
+    // Input different values of type int to compare to the result of Integer::shortValue
+    Integer positiveInteger = 1302;
+    Integer negativeInteger = -1302;
+
+    // Make a comparison between expected result and the real result
+    int expectedResult = 1302;
+    int realResult = positiveInteger.shortValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected result and the real result
+    expectedResult = -1302;
+    realResult = negativeInteger.shortValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+}
