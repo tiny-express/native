@@ -292,4 +292,17 @@ TEST (JavaLang, IntegerIntValue) {
 
 }
 
+TEST (JavaLang, IntegerLongValue) {
+    // Input different values of type int to compare to the realResult of Integer::longValue
+
+    Integer positiveInteger = 2147483647;
+    int expectedResult = 2147483647;
+    int realResult = positiveInteger.longValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    positiveInteger = -2147483647;
+    expectedResult = -2147483647;
+    realResult = positiveInteger.longValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+}
 
