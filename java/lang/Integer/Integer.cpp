@@ -84,7 +84,10 @@ string Integer::toString() const {
  * @return char
  */
 char Integer::charValue() const {
-	return string_to_char(string_from_int(this->original));
+	char *convertResult = string_from_int(this->original);
+	char result = string_to_char(convertResult);
+	free(convertResult);
+	return result;
 }
 
 /**
