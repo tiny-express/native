@@ -34,7 +34,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ArrayListConstructor) {
+TEST (JavaUtil, ArrayListConstructor) {
     // Standard declaration
 	ArrayList<int> stringArrayList;
     int value = 1324;
@@ -48,7 +48,7 @@ TEST (JavaLang, ArrayListConstructor) {
     ASSERT_EQUAL(0, intArrayList.size());
 }
 
-TEST(JavaLang, ArrayListDestructor) {
+TEST(JavaUtil, ArrayListDestructor) {
     // Test destructor
     ArrayList<int> *intArray = new ArrayList<int>(10);
     delete intArray;
@@ -56,7 +56,7 @@ TEST(JavaLang, ArrayListDestructor) {
     ASSERT_NULL(intArray);
 }
 
-TEST(JavaLang, ArrayListSize) {
+TEST(JavaUtil, ArrayListSize) {
     // Test size of empty Array
     ArrayList<int> emptyArray;
     int expect = 0;
@@ -78,7 +78,7 @@ TEST(JavaLang, ArrayListSize) {
     ASSERT_FALSE(notEmpty);
 }
 
-TEST(Javalang, ArrayListFunction) {
+TEST(JavaUtil, ArrayListFunction) {
     // Test function add with
     ArrayList<int> intArray;
 
@@ -96,7 +96,7 @@ TEST(Javalang, ArrayListFunction) {
     ASSERT_EQUAL(5 ,intArray.get(intArray.size()));
 }
 
-TEST(JavaLang, ArrayListForEach) {
+TEST(JavaUtil, ArrayListForEach) {
     //
     ArrayList<int> validArrayList;
 
@@ -109,5 +109,32 @@ TEST(JavaLang, ArrayListForEach) {
     for (int element : validArrayList) {
         ASSERT_EQUAL(expect, element);
         expect++;
+    }
+}
+
+TEST (JavaUtil, ArrayListToString) {
+    // Given valid array list of Object to test toString
+    ArrayList<Object> validArray;
+
+    // Init multi types to add into validArray
+    Integer validNumber = 25;
+    String validString = "Some valid 123 String #@ !..";
+    Float validFloat = 12.36;
+    Double validDouble = 2.444444444;
+    Long validLong = 12345678901;
+    Short validShort = 123;
+    Character validChar = 'a';
+
+    validArray.add(validNumber);
+    validArray.add(validString);
+    validArray.add(validFloat);
+    validArray.add(validDouble);
+    validArray.add(validLong);
+    validArray.add(validShort);
+    validArray.add(validChar);
+
+    Array<String> expectedResultArray = {"25", "Some valid 123 String #@ !..", "12.36", "2.444444444", "12345678901", "123", "a"};
+    for (int i = 0; i < expectedResultArray.length; ++i) {
+        ASSERT_STR(expectedResultArray[i].toString(), validArray.get(i).toString());
     }
 }

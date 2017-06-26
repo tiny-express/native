@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
 #define NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
 
-#include "../../lang/Cloneable/Cloneable.hpp"
+#include "../../Lang.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../AbstractList/AbstractList.hpp"
 #include "../Collection/Collection.hpp"
