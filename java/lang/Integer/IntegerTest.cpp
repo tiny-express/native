@@ -256,3 +256,40 @@ TEST (JavaLang, IntegerShortValue) {
     realResult = negativeInteger.shortValue();
     ASSERT_EQUAL(expectedResult, realResult);
 }
+
+TEST (JavaLang, IntegerIntValue) {
+    // Input different values of type int to compare to the realResult of Integer::intValue
+    Integer zeroInteger = 0;
+    Integer oneInteger = 1;
+    Integer positiveInteger = 10;
+    Integer maxInteger = 2147483647;
+    Integer minInteger = -2147483647;
+
+    // Make a comparison between expected realResult and the real result
+    int expectedResult= 0;
+    int realResult = zeroInteger.intValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected realResult and the real result
+    expectedResult= 1;
+    realResult = oneInteger.intValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected realResult and the real result
+    expectedResult= 10;
+    realResult = positiveInteger.intValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected realResult and the real result
+    expectedResult= 2147483647;
+    realResult = maxInteger.intValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected realResult and the real result
+    expectedResult= -2147483647;
+    realResult = minInteger.intValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+}
+
+
