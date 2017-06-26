@@ -129,31 +129,37 @@ TEST (JavaLang, IntegerToString) {
     Integer positiveInteger = 10;
     Integer maxInteger = 2147483647;
     Integer minInteger = -2147483647;
+
     // Make a comparison between expected realResult and the real result
     string expectedResult= "0";
     string realResult = zeroInteger.toString();
     ASSERT_STR(expectedResult, realResult);
     free(realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= "1";
     realResult = oneInteger.toString();
     ASSERT_STR(expectedResult, realResult);
     free(realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= "10";
     realResult = positiveInteger.toString();
     ASSERT_STR(expectedResult, realResult);
     free(realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= "2147483647";
     realResult = maxInteger.toString();
     ASSERT_STR(expectedResult, realResult);
     free(realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= "-2147483647";
     realResult = minInteger.toString();
     ASSERT_STR(expectedResult, realResult);
     free(realResult);
+
 }
 TEST (JavaLang, IntegerCharValue) {
     // Input different values of type int to compare to the result of Integer::charValue
@@ -162,26 +168,32 @@ TEST (JavaLang, IntegerCharValue) {
     Integer positiveInteger = 10;
     Integer maxInteger = 2147483647;
     Integer minInteger = -2147483647;
+
     // Make a comparison between expected result and the real result
-    char expect = '0';
-    char result = zeroInteger.charValue();
-    ASSERT_EQUAL(expect, result);
+    char expectedResult = '0';
+    char realResult = zeroInteger.charValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected result and the real result
-    expect = '1';
-    result = oneInteger.charValue();
-    ASSERT_EQUAL(expect, result);
+    expectedResult= '1';
+    realResult = oneInteger.charValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected result and the real result
-    expect = '1';
-    result = positiveInteger.charValue();
-    ASSERT_EQUAL(expect, result);
+    expectedResult = '1';
+    realResult = positiveInteger.charValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected result and the real result
-    expect = '2';
-    result = maxInteger.charValue();
-    ASSERT_EQUAL(expect, result);
+    expectedResult = '2';
+    realResult = maxInteger.charValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected result and the real result
-    expect = '-';
-    result = minInteger.charValue();
-    ASSERT_EQUAL(expect, result);
+    expectedResult = '-';
+    realResult = minInteger.charValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
 }
 TEST (JavaLang, IntegerStringValue) {
     // Input different values of type int to compare to the result of Integer::stringValue
@@ -190,44 +202,59 @@ TEST (JavaLang, IntegerStringValue) {
     Integer positiveInteger = 10;
     Integer maxInteger = 2147483647;
     Integer minInteger = -2147483647;
+
     // Make a comparison between expected result and the real result
-    string expect = "0";
-    string result = zeroInteger.stringValue();
-    ASSERT_STR(expect, result);
-    free(result);
+    string expectedResult = "0";
+    string realResult = zeroInteger.stringValue();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
+
     // Make a comparison between expected result and the real result
-    expect = "1";
-    string result1 = oneInteger.stringValue();
-    ASSERT_STR(expect, result1);
-    free(result1);
+    expectedResult = "1";
+    realResult  = oneInteger.stringValue();
+    ASSERT_STR(expectedResult, realResult );
+    free(realResult);
+
     // Make a comparison between expected result and the real result
-    expect = "10";
-    string result2 = positiveInteger.stringValue();
-    ASSERT_STR(expect, result2);
-    free(result2);
+    expectedResult = "10";
+    realResult = positiveInteger.stringValue();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
+
     // Make a comparison between expected result and the real result
-    expect = "2147483647";
-    string result3 = maxInteger.stringValue();
-    ASSERT_STR(expect, result3);
-    free(result3);
+    expectedResult = "2147483647";
+    realResult = maxInteger.stringValue();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
+
     // Make a comparison between expected result and the real result
-    expect = "-2147483647";
-    string result4 = minInteger.stringValue();
-    ASSERT_STR(expect, result4);
-    free(result4);
+    expectedResult = "-2147483647";
+    realResult = minInteger.stringValue();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
+
+
 }
 TEST (JavaLang, IntegerShortValue) {
     // Input different values of type int to compare to the result of Integer::shortValue
     Integer positiveInteger = 1302;
     Integer negativeInteger = -1302;
+    Integer notExpectedInteger = 9999;
+
     // Make a comparison between expected result and the real result
     short expectedResult = 1302;
     short realResult = positiveInteger.shortValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected result and the real result
     expectedResult = -1302;
     realResult = negativeInteger.shortValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected result and the real result
+    short notExpectedResult = -1111;
+    realResult = notExpectedInteger.shortValue();
+    ASSERT_NOT_EQUAL(notExpectedResult, realResult);
 }
 TEST (JavaLang, IntegerIntValue) {
     // Input different values of type int to compare to the realResult of Integer::intValue
@@ -236,52 +263,76 @@ TEST (JavaLang, IntegerIntValue) {
     Integer positiveInteger = 10;
     Integer maxInteger = 2147483647;
     Integer minInteger = -2147483647;
+    Integer notExpectedInteger = 1111;
+
     // Make a comparison between expected realResult and the real result
     int expectedResult= 0;
     int realResult = zeroInteger.intValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= 1;
     realResult = oneInteger.intValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= 10;
     realResult = positiveInteger.intValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= 2147483647;
     realResult = maxInteger.intValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
     // Make a comparison between expected realResult and the real result
     expectedResult= -2147483647;
     realResult = minInteger.intValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between expected realResult and the real result
+    int notExpectedResult= 9999;
+    realResult = minInteger.intValue();
+    ASSERT_NOT_EQUAL(notExpectedResult, realResult);
 }
 TEST (JavaLang, IntegerLongValue) {
     // Input different values of type int to compare to the realResult of Integer::longValue
     Integer positiveInteger = 1302321013;
+    Integer negativeInteger = -1302321013;
+    Integer notExpectedInteger = -12345;
+
+    // Make a comparison between expected realResult and the real result
     long expectedResult = 1302321013;
     long realResult = positiveInteger.longValue();
     ASSERT_EQUAL(expectedResult, realResult);
-    positiveInteger = -1302321013;
+
+    // Make a comparison between expected realResult and the real result
     expectedResult = -1302321013;
-    realResult = positiveInteger.longValue();
+    realResult = negativeInteger.longValue();
     ASSERT_EQUAL(expectedResult, realResult);
+
+    // Make a comparison between the not expected realResult and the real result
+    long notExpectedResult = -11111;
+    realResult = notExpectedInteger.longValue();
+    ASSERT_FALSE(notExpectedResult == realResult);
 }
 TEST (JavaLang, IntegerFloatValue) {
     // Input different values of type int to compare to the realResult of Integer::floatValue
-    // Make a comparison between expected realResult and the real result
     Integer positiveInteger = 12345;
+    Integer negativeInteger = -12345;
+    Integer notExpectedInteger = -12345;
+
+    // Make a comparison between expected realResult and the real result
     float expectedResult = 12345.00;
     float realResult = positiveInteger.floatValue();
     ASSERT_TRUE(expectedResult == realResult);
+
     // Make a comparison between expected realResult and the real result
-    Integer negativeInteger = -12345;
     expectedResult = -12345.00;
     realResult = negativeInteger.floatValue();
     ASSERT_TRUE(expectedResult == realResult);
+
     // Make a comparison between the not expected realResult and the real result
-    Integer notExpectedInteger = -12345;
     float notExpectedResult = -12345.10;
     realResult = negativeInteger.floatValue();
     ASSERT_FALSE(notExpectedResult == realResult);
@@ -289,16 +340,20 @@ TEST (JavaLang, IntegerFloatValue) {
 TEST (JavaLang, IntegerDoubleValue) {
     // Input different values of type int to compare to the realResult of Integer::doubleValue
     Integer positiveInteger = 123456789;
+    Integer negativeInteger = -123456789;
+    Integer notExpectedInteger = -12345;
+
+    // Make a comparison between expected realResult and the real result
     double expectedResult = 123456789.0000000;
     double realResult = positiveInteger.doubleValue();
     ASSERT_TRUE(expectedResult == realResult);
+
     // Make a comparison between expected realResult and the real result
-    Integer negativeInteger = -123456789;
     expectedResult = -123456789.0000000;
     realResult = negativeInteger.doubleValue();
     ASSERT_TRUE(expectedResult == realResult);
+
     // Make a comparison between the not expected realResult and the real result
-    Integer notExpectedInteger = -12345;
     double notExpectedResult = -12345.10;
     realResult = negativeInteger.floatValue();
     ASSERT_FALSE(notExpectedResult == realResult);
