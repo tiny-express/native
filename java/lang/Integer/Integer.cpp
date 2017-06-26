@@ -96,7 +96,9 @@ char Integer::charValue() const {
  * @return CString
  */
 string Integer::stringValue() const {
-	return String::valueOf(this->original).toString();
+    return string_from_int(this->original);
+    // Check it
+	//return String::valueOf(this->original).toString();
 }
 
 /**

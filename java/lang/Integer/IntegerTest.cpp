@@ -202,3 +202,42 @@ TEST (JavaLang, IntegerCharValue) {
     result = minInteger.charValue();
     ASSERT_EQUAL(expect, result);
 }
+
+TEST (JavaLang, IntegerStringValue) {
+    // Input different values of type int to compare to the result of Integer::stringValue
+    Integer zeroInteger = 0;
+    Integer oneInteger = 1;
+    Integer positiveInteger = 10;
+    Integer maxInteger = 2147483647;
+    Integer minInteger = -2147483647;
+
+    // Make a comparison between expected result and the real result
+    char *expect = "0";
+    char *result = zeroInteger.stringValue();
+    ASSERT_STR(expect, result);
+    free(result);
+
+    // Make a comparison between expected result and the real result
+    expect = "1";
+    char *result1 = oneInteger.stringValue();
+    ASSERT_STR(expect, result1);
+    free(result1);
+
+    // Make a comparison between expected result and the real result
+    expect = "10";
+    char *result2 = positiveInteger.stringValue();
+    ASSERT_STR(expect, result2);
+    free(result2);
+
+    // Make a comparison between expected result and the real result
+    expect = "2147483647";
+    char *result3 = maxInteger.stringValue();
+    ASSERT_STR(expect, result3);
+    free(result3);
+
+    // Make a comparison between expected result and the real result
+    expect = "-2147483647";
+    char *result4 = minInteger.stringValue();
+    ASSERT_STR(expect, result4);
+    free(result4);
+}
