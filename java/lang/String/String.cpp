@@ -407,6 +407,8 @@ Array<String> String::split(String regex) const {
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
 	}
+
+    free_pointer_pointer_char(splitStrings);
 	return strings;
 }
 
