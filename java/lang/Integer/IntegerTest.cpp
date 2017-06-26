@@ -247,8 +247,8 @@ TEST (JavaLang, IntegerShortValue) {
     Integer negativeInteger = -1302;
 
     // Make a comparison between expected result and the real result
-    int expectedResult = 1302;
-    int realResult = positiveInteger.shortValue();
+    short expectedResult = 1302;
+    short realResult = positiveInteger.shortValue();
     ASSERT_EQUAL(expectedResult, realResult);
 
     // Make a comparison between expected result and the real result
@@ -296,8 +296,8 @@ TEST (JavaLang, IntegerLongValue) {
     // Input different values of type int to compare to the realResult of Integer::longValue
 
     Integer positiveInteger = 1302321013;
-    int expectedResult = 1302321013;
-    int realResult = positiveInteger.longValue();
+    long expectedResult = 1302321013;
+    long realResult = positiveInteger.longValue();
     ASSERT_EQUAL(expectedResult, realResult);
 
     positiveInteger = -1302321013;

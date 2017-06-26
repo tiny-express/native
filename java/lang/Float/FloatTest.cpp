@@ -108,8 +108,7 @@ TEST (JavaLang, FloatParseFloat) {
 
 
 TEST (JavaLang, FloatToString) {
-	// Input different values of t-
-    // ype float to compare to the result of Float::toString
+	// Input different values of type float to compare to the result of Float::toString
 	Float positiveFloat = 13.02;
 	char *expectedResult = "13.02";
 	char *realResult = positiveFloat.toString();
