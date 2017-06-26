@@ -33,14 +33,18 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, IntegerConstructor) {
-	// Given empty value for Integer constructor and assign value - Return integer
+	// Input an empty value to Integer constructor and assign value - Return integer
 	Integer emptyInteger;
 	emptyInteger = 3;
 	ASSERT_EQUAL(3, emptyInteger.intValue());
 	
-	// Given value for Integer constructor and assign value - Return string
+	// Given value for Integer constructor and assign value - Return integer
 	Integer validInteger = 3;
 	ASSERT_EQUAL(3, validInteger.intValue());
+
+    // Given string value for Integer constructor and assign value - Return integer
+    Integer validIntegerPointer = Integer::parseInt("13");
+    ASSERT_EQUAL(13, validIntegerPointer.intValue());
 }
 
 TEST (JavaLang, IntegerComparision) {
