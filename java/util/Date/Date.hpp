@@ -59,7 +59,7 @@ namespace Java {
              * @return String
              */
             string toString0(tm *timePresenter) {
-                char *result = (char *) malloc(80 * sizeof(char));
+                string result = (string) malloc(80 * sizeof(char));
 
                 strftime(result, 80, "%a %b %d %Y %H:%M:%S", timePresenter);
 
