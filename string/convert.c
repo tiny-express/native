@@ -137,3 +137,18 @@ int string_to_boolean(char *target) {
 	free(boolean_value);
 	return FALSE;
 }
+
+/**
+ * String from boolean
+ *
+ * @param target
+ * @return string
+ */
+char *string_from_boolean(int target) {
+    if (target == FALSE) {
+        return strdup("false");
+    }
+
+    return strdup("true");
+
+}
