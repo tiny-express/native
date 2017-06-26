@@ -308,26 +308,27 @@ TEST (JavaLang, IntegerLongValue) {
 
 TEST (JavaLang, IntegerFloatValue) {
     // Input different values of type int to compare to the realResult of Integer::floatValue
-    Integer positiveInteger = 1302321013;
-    float expectedResult = 1302321013;
+    Integer positiveInteger = 12345;
+    float expectedResult = 12345.00;
     float realResult = positiveInteger.floatValue();
-    ASSERT_EQUAL(expectedResult, realResult);
+    ASSERT_TRUE(expectedResult == realResult);
 
-    positiveInteger = -1302321013;
-    expectedResult = -1302321013;
-    realResult = positiveInteger.floatValue();
-    ASSERT_EQUAL(expectedResult, realResult);
+
+    Integer negativeInteger = -12345;
+    expectedResult = -12345.00;
+    realResult = negativeInteger.floatValue();
+    ASSERT_TRUE(expectedResult == realResult);
 }
 
 TEST (JavaLang, IntegerDoubleValue) {
     // Input different values of type int to compare to the realResult of Integer::doubleValue
-    Integer positiveInteger = 1302321013;
-    double expectedResult = 1302321013;
+    Integer positiveInteger = 123456789;
+    double expectedResult = 123456789.0000000;
     double realResult = positiveInteger.doubleValue();
-    ASSERT_EQUAL(expectedResult, realResult);
+    ASSERT_TRUE(expectedResult == realResult);
 
-    Integer negativeInteger = -1302321013;
-    expectedResult = -1302321013;
+    Integer negativeInteger = -123456789;
+    expectedResult = -123456789.0000000;
     realResult = negativeInteger.doubleValue();
-    ASSERT_EQUAL(expectedResult, realResult);
+    ASSERT_TRUE(expectedResult == realResult);
 }
