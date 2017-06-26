@@ -295,14 +295,26 @@ TEST (JavaLang, IntegerIntValue) {
 TEST (JavaLang, IntegerLongValue) {
     // Input different values of type int to compare to the realResult of Integer::longValue
 
-    Integer positiveInteger = 2147483647;
-    int expectedResult = 2147483647;
+    Integer positiveInteger = 1302321013;
+    int expectedResult = 1302321013;
     int realResult = positiveInteger.longValue();
     ASSERT_EQUAL(expectedResult, realResult);
 
-    positiveInteger = -2147483647;
-    expectedResult = -2147483647;
+    positiveInteger = -1302321013;
+    expectedResult = -1302321013;
     realResult = positiveInteger.longValue();
     ASSERT_EQUAL(expectedResult, realResult);
 }
 
+TEST (String, ConvertFromFloat) {
+    // Input different values of type int to compare to the realResult of Integer::floatValue
+    Integer positiveInteger = 1302321013;
+    float expectedResult = 1302321013;
+    int realResult = positiveInteger.floatValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    positiveInteger = -1302321013;
+    expectedResult = -1302321013;
+    realResult = positiveInteger.floatValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+}
