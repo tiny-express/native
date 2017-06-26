@@ -131,42 +131,41 @@ TEST (JavaLang, IntegerCompareTo) {
 }
 
 TEST (JavaLang, IntegerToString) {
-    // Input different values of type int to compare to the result of Integer::toString
+    // Input different values of type int to compare to the realResultof Integer::toString
     Integer zeroInteger = 0;
     Integer oneInteger = 1;
     Integer positiveInteger = 10;
     Integer maxInteger = 2147483647;
     Integer minInteger = -2147483647;
+    // Make a comparison between expected realResultand the real result
+    char *expectedResult= "0";
+    char *realResult = zeroInteger.toString();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
 
-    // Make a comparison between expected result and the real result
-    char *expect = "0";
-    char *result = zeroInteger.toString();
-    ASSERT_STR(expect, result);
-    free(result);
+    // Make a comparison between expected realResultand the real result
+    expectedResult= "1";
+    realResult = oneInteger.toString();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
 
-    // Make a comparison between expected result and the real result
-    expect = "1";
-    char *result1 = oneInteger.toString();
-    ASSERT_STR(expect, result1);
-    free(result1);
+    // Make a comparison between expected realResultand the real result
+    expectedResult= "10";
+    realResult = positiveInteger.toString();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
 
-    // Make a comparison between expected result and the real result
-    expect = "10";
-    char *result2 = positiveInteger.toString();
-    ASSERT_STR(expect, result2);
-    free(result2);
+    // Make a comparison between expected realResultand the real result
+    expectedResult= "2147483647";
+    realResult = maxInteger.toString();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
 
-    // Make a comparison between expected result and the real result
-    expect = "2147483647";
-    char *result3 = maxInteger.toString();
-    ASSERT_STR(expect, result3);
-    free(result3);
-
-    // Make a comparison between expected result and the real result
-    expect = "-2147483647";
-    char *result4 = minInteger.toString();
-    ASSERT_STR(expect, result4);
-    free(result4);
+    // Make a comparison between expected realResultand the real result
+    expectedResult= "-2147483647";
+    realResult = minInteger.toString();
+    ASSERT_STR(expectedResult, realResult);
+    free(realResult);
 }
 
 TEST (JavaLang, IntegerCharValue) {
