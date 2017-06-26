@@ -182,7 +182,6 @@ TEST (JavaLang, IntegerCharValue) {
     char result = zeroInteger.charValue();
     ASSERT_EQUAL(expect, result);
 
-
     // Make a comparison between expected result and the real result
     expect = '1';
     result = oneInteger.charValue();
