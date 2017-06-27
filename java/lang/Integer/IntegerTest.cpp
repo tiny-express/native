@@ -334,7 +334,7 @@ TEST (JavaLang, IntegerFloatValue) {
 
     // Make a comparison between the not expected realResult and the real result
     float notExpectedResult = -12345.10;
-    realResult = negativeInteger.floatValue();
+    realResult = notExpectedInteger.floatValue();
     ASSERT_FALSE(notExpectedResult == realResult);
 }
 TEST (JavaLang, IntegerDoubleValue) {
@@ -355,6 +355,6 @@ TEST (JavaLang, IntegerDoubleValue) {
 
     // Make a comparison between the not expected realResult and the real result
     double notExpectedResult = -12345.10;
-    realResult = negativeInteger.floatValue();
+    realResult = notExpectedInteger.floatValue();
     ASSERT_FALSE(notExpectedResult == realResult);
 }
