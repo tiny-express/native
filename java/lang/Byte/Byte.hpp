@@ -46,7 +46,7 @@ namespace Java {
             ~Bytes();
             
         public:
-            char charValue();
+	        char charValue();
 			string stringValue();
 			short shortValue();
 			int intValue();
@@ -55,7 +55,6 @@ namespace Java {
 			double doubleValue();
 			string toString();
 			byte byteValue();
-
 			static byte parseByte(String target);
 		
 		public:

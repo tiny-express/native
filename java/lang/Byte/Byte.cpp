@@ -64,10 +64,10 @@ Bytes::~Bytes() {
  * @param target
  * @return Byte
  */
-byte Bytes::parseByte(String target) {
-	byte result(string_to_char(target.toString()));
-	return result;
-}
+// byte Bytes::parseByte(String target) {
+// 	byte result(string_to_byte(target.toString()));
+// 	return result;
+// }
 
 
 /**
@@ -82,7 +82,7 @@ char Bytes::charValue() {
 /**
  * Byte to String
  *
- * @return CString
+ * @return String
  */
 string Bytes::stringValue() {
 	return String::valueOf(this->original).toString();
