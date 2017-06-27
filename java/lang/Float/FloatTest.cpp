@@ -33,80 +33,70 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, FloatConstructor) {
-    // Create an empty variable. Assign value to it.
-    // Than make a comparison bettween the expected result and the real result
-	Float emptyFloat;
-	emptyFloat = 3.0;
-    float expectedResult = 3.0;
-    float realResult = emptyFloat.floatValue();
-	ASSERT_TRUE(expectedResult == realResult);
+    // Create variable variableFloatConstructor to test Float::floatValue().
+	Float variableFloatConstructor;
 
-    // Create an empty variable. Assign value to it.
-    // Than make a comparison bettween the NOT expected result and the real result
-    Float notExpectedEmptyFloat;
-    notExpectedEmptyFloat = 3.0;
-    float notExpectedResult = 3.6;
-    realResult = notExpectedEmptyFloat.floatValue();
-    ASSERT_FALSE(notExpectedResult == realResult);
+    // Create variable expectedFloatConstructorResult represent the target we want when use Float::floatValue
+    // In case TRUE
+    float expectedFloatConstructorResult ;
 
-    // Input a value of type float to variableFloat.
-    // Than make a comparison bettween the expected result and the real result
-    Float variableFloat = 9.0;
-    expectedResult = 9.0;
-    realResult = variableFloat.floatValue();
-    ASSERT_EQUAL(expectedResult, realResult);
+    // Create variable notExpectedFloatConstructorResult represent the target we want when use Float::floatValue
+    // In case FALSE
+    float notExpectedFloatConstructorResult;
 
-    // Input a value of type float to variableFloat.
-    // Than make a comparison bettween the NOT expected result and the real result
-    Float notVariableFloat = 9.0;
-    notExpectedResult = 9.9;
-    realResult = notVariableFloat.floatValue();
-    ASSERT_EQUAL(notExpectedResult , realResult);
+    // Create variable expectedFloatConstructorResult represent the real result when use Float::floatValue
+    float realFloatConstructorResult ;
 
-    // Use Float::parseFLoat to convert from string to float
-    // Than make a comparison bettween the expected result and the real result
-	Float testParseFloat = Float::parseFloat("13.02");
-    expectedResult = 13.02;
-    realResult = testParseFloat.floatValue();
-	ASSERT_EQUAL(expectedResult, realResult);
+    // Test Float::floatValue.  Case TRUE
+    // Assign value to variableFloatConstructor.
+    // Than make a comparison with expectedFloatConstructorResult.
+    variableFloatConstructor = 13.02;
+    expectedFloatConstructorResult = 13.02;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+	ASSERT_TRUE(expectedFloatConstructorResult == realFloatConstructorResult);
 
-    // Use Float::parseFLoat to convert from string to float
-    // Than make a comparison bettween the NOT expected result and the real result
-    testParseFloat = Float::parseFloat("13.02");
-    notExpectedResult = 130.2;
-    realResult = testParseFloat.floatValue();
-    ASSERT_NOT_EQUAL(notExpectedResult, realResult);
+    // Test Float::floatValue.  Case FALSE
+    // Assign value to variableFloatConstructor.
+    // Than make a comparison with expectedFloatConstructorResult.
+    variableFloatConstructor = 13.02;
+    notExpectedFloatConstructorResult = 1302.000;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+    ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
+
+    // Test Float::floatValue.  Immediately . Case TRUE
+    // Create a variableFloatConstructorImmediate and assign value to it immediately.
+    // Than make a comparison with expectedFloatConstructorResult.
+    Float variableFloatConstructorImmediate = 130.2;
+    expectedFloatConstructorResult = 130.2;
+    realFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
+    ASSERT_TRUE(expectedFloatConstructorResult == realFloatConstructorResult);
+
+    // Test Float::floatValue.  Immediately . Case FALSE
+    // Create a variableFloatConstructorImmediate and assign value to it immediately.
+    // Than make a comparison with expectedFloatConstructorResult.
+    variableFloatConstructorImmediate = 130.2;
+    notExpectedFloatConstructorResult = 1.302;
+    realFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
+    ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
+
+    // Test Float::parseFLoat to convert from string to float. Case TRUE
+    // Use Float::parseFloat to assign float value to variableFloatConstructor
+    // Than make a comparison with expectedFloatConstructor
+	variableFloatConstructor = Float::parseFloat("13.02");
+    expectedFloatConstructorResult = 13.02;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+	ASSERT_TRUE(expectedFloatConstructorResult == realFloatConstructorResult);
+
+    // Test Float::parseFLoat to convert from string to float. Case FALSE
+    // Use Float::parseFloat to assign float value to variableFloatConstructor
+    // Than make a comparison with notExpectedFloatConstructor
+    variableFloatConstructor = Float::parseFloat("13.02");
+    notExpectedFloatConstructorResult = 130.2;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+    ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
 }
 
-TEST (JavaLang, FloatComparision) {
-	// Give a valid number and make a comparision
-	Float validNumber = 4.2;
-	Float targetNumber;
 
-	// Test validNumber is equal targetNumber
-	targetNumber = 4.2;
-	ASSERT_TRUE(validNumber == targetNumber);
-
-	// Test validNumber is not equal targetNumber
-	targetNumber = 2.1;
-	ASSERT_TRUE(validNumber != targetNumber);
-
-	// Test validNumber is less than targetNumber
-	targetNumber = 6.8;
-	ASSERT_TRUE(validNumber < targetNumber);
-
-	// Test validNumber is equal or less than targetNumber
-	targetNumber = 5.5;
-	ASSERT_TRUE(validNumber <= targetNumber);
-
-	// Test valid number is more than targetNumber
-	targetNumber = 4.0;
-	ASSERT_TRUE(validNumber > targetNumber);
-
-	// Test valid number is equal or more than targetNumber
-	targetNumber = 1.2;
-	ASSERT_TRUE(validNumber >= targetNumber);
-}
 
 TEST (JavaLang, FloatOperator) {
 	// Given a valid number
@@ -142,8 +132,7 @@ TEST (JavaLang, FloatParseFloat) {
 
 
 TEST (JavaLang, FloatToString) {
-	// Input different values of t-
-    // ype float to compare to the result of Float::toString
+	// Input different values of type float to compare to the result of Float::toString
 	Float positiveFloat = 13.02;
 	char *expectedResult = "13.02";
 	char *realResult = positiveFloat.toString();
