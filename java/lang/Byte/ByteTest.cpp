@@ -24,18 +24,54 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// extern "C" {
-// #include "../../../unit_test.h"
-// }
+extern "C" {
+#include "../../../unit_test.h"
+}
 
-// #include "Byte.hpp"
+#include "Byte.hpp"
 
-// using namespace Java::Lang;
+using namespace Java::Lang;
 
-// TEST (JavaLang, ByteConstructor) {
+TEST (JavaLang, ByteConstructor) {
+	// TODO
+	// Given empty value for Long constructor and assign value - Return Long
+	// byte emptyByte = 3;;
+	// ASSERT_EQUAL(0, emptyByte.byteValue());
+}
 
-// 	// Given empty value for Long constructor and assign value - Return Long
-// 	byte emptyByte;
-// 	emptyByte = 3;
-// 	ASSERT_EQUAL(3, emptyByte.intvalue());
-// }
+TEST (JavaLang, ByteOperator) {
+	// Given a valid number
+	byte validNumber = 5;
+	byte targetNumber = 3;
+	
+	// Make a summation with targetNumber
+	byte summationNumber = 8;
+	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
+	
+	// Make a subtraction with targetNumber
+	byte subtractionNumber = 2;
+	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
+	
+	// Make a multiplication with targetNumber
+	byte multiplicationNumber = 15;
+	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
+	
+	// Make a division with targetNumber
+	byte divisionNumber = 1;
+	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
+	
+	// Make a modulo with targetNumber
+	byte modNumber = 2;
+	ASSERT_TRUE(modNumber == ( validNumber % targetNumber ));
+}
+
+TEST (JavaLang, ByteParseByte) {
+#ifdef __APPLE__
+	return;
+#endif
+	// Given value for Integer constructor and assign value - Return integer
+	byte validBytePointer = Bytes::parseByte("6");
+	ASSERT_EQUAL(6, (byte)validBytePointer);
+}
+
+

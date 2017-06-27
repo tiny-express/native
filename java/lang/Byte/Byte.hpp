@@ -45,30 +45,31 @@ namespace Java {
             Bytes(const Bytes &byteNumber);
             ~Bytes();
             
-//         public:
-//             char charValue() const;
-// 			string stringValue() const;
-// 			short shortValue() const;
-// 			int intValue() const;
-// 			long longValue() const;
-// 			float floatValue() const;
-// 			double doubleValue() const;
-// 			string toString() const;
+        public:
+            char charValue();
+			string stringValue();
+			short shortValue();
+			int intValue();
+			long longValue();
+			float floatValue();
+			double doubleValue();
+			string toString();
+			byte byteValue();
 
-// 			static byte parseByte(String target);
+			static byte parseByte(String target);
 		
 		public:
-			byte operator+(const byte &target) const;
-			byte operator-(const byte &target) const;
-			byte operator/(const byte &target) const;
-			byte operator%(const byte &target) const;
-			byte operator*(const byte &target) const;
-			boolean operator==(const byte &target) const;
-			boolean operator!=(const byte &target) const;
-			boolean operator<(const byte &target) const;
-			boolean operator>(const byte &target) const;
-			boolean operator<=(const byte &target) const;
-			boolean operator>=(const byte &target) const;
+			byte operator+(const byte &target);
+			byte operator-(const byte &target);
+			byte operator/(const byte &target);
+			byte operator%(const byte &target);
+			byte operator*(const byte &target);
+			boolean operator==(const byte &target);
+			boolean operator!=(const byte &target);
+			boolean operator<(const byte &target);
+			boolean operator>(const byte &target);
+			boolean operator<=(const byte &target);
+			boolean operator>=(const byte &target);
 			
 			void operator-=(const byte &target);
 			void operator+=(const byte &target);

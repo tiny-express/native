@@ -58,3 +58,195 @@ Bytes::Bytes(const Bytes &byteNumber) {
 Bytes::~Bytes() {
 }
 
+/**
+ * Parse byte
+ *
+ * @param target
+ * @return Byte
+ */
+byte Bytes::parseByte(String target) {
+	byte result(string_to_char(target.toString()));
+	return result;
+}
+
+
+/**
+ * Byte to Char
+ *
+ * @return char
+ */
+char Bytes::charValue() {
+	return string_to_char(string_from_char(this->original));
+}
+
+/**
+ * Byte to String
+ *
+ * @return CString
+ */
+string Bytes::stringValue() {
+	return String::valueOf(this->original).toString();
+}
+
+/**
+ * Short value of Byte
+ *
+ * @return short
+ */
+short Bytes::shortValue() {
+	return (short)this->original;
+}
+
+/**
+ * Integer value of Byte
+ *
+ * @return int
+ */
+int Bytes::intValue() {
+	return (int)this->original;
+}
+
+/**
+ * Long value of Byte
+ *
+ * @return long
+ */
+long Bytes::longValue() {
+	return (long)this->original;
+}
+
+/**
+ * Float value of Byte
+ *
+ * @return float
+ */
+float Bytes::floatValue() {
+	return (float) this->original;
+}
+
+/**
+ * Double value of Byte
+ *
+ * @return double
+ */
+double Bytes::doubleValue() {
+	return (double) this->original;
+}
+
+/**
+ * Byte value
+ *
+ * @return byte
+ */
+byte Bytes::byteValue() {
+	return (byte) this->original;
+}
+
+
+
+/**
+ * Make a summation with target Byte
+ *
+ * @return Byte
+ */
+byte Bytes::operator+(const byte &target) {
+	return this->original + target;
+}
+
+/**
+ * Make a subtraction with target Byte
+ *
+ * @return Byte
+ */
+byte Bytes::operator-(const byte &target) {
+	return this->original - target;
+}
+
+/**
+ *  Make a division from this Byte with target
+ *
+ * @return Byte
+ */
+byte Bytes::operator/(const byte &target) {
+	return  this->original / target;
+}
+
+/**
+ * Make a modulo from this Byte with target
+ *
+ * @return Byte
+ */
+byte Bytes::operator%(const byte &target) {
+	return this->original % target;
+}
+
+/**
+ * Make a multiple from this Byte with target
+ *
+ * @return Byte
+ */
+byte Bytes::operator*(const byte &target) {
+	return this->original * target;
+}
+
+/**
+ * Compare this Byte is equal target
+ *
+ * @return bool
+ */
+boolean Bytes::operator==(const byte &target) {
+	return this->original == target;
+}
+
+/**
+ * Compare this Byte is not equal target
+ *
+ * @return bool
+ */
+boolean Bytes::operator!=(const byte &target) {
+	return this->original != target;
+}
+
+/**
+ * Compare this Byte is less than target
+ *
+ * @return bool
+ */
+boolean Bytes::operator<(const byte &target) {
+	return this->original < target;
+}
+
+/**
+ * Compare this Byte is more than target
+ *
+ * @return bool
+ */
+boolean Bytes::operator>(const byte &target) {
+	return this->original > target;
+}
+
+/**
+ * Compare this Byte is equal or less than target
+ *
+ * @return bool
+ */
+boolean Bytes::operator<=(const byte &target) {
+	return this->original <= target;
+}
+
+/**
+ *  Compare this Byte is equal or more than target
+ *
+ * @return bool
+ */
+boolean Bytes::operator>=(const  byte &target) {
+	return this->original >= target;
+}
+
+
+
+
+
+
+
+
