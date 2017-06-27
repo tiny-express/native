@@ -33,7 +33,8 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, FloatConstructor) {
-    // Create variable variableFloatConstructor to test Float::floatValue().
+    // Create comparisonFloat contains value of type float.
+    // We use this variable to test FloatConstructor
 	Float variableFloatConstructor;
 
     // Create variable expectedFloatConstructorResult represent the target we want when use Float::floatValue
@@ -97,7 +98,8 @@ TEST (JavaLang, FloatConstructor) {
 }
 
 TEST (JavaLang, FloatComparison) {
-    // Create a value of type float to make a comparison.
+    // Create comparisonFloat contains value of type float.
+    // We use this variable to test FloatComparison
     Float comparisonFloat = 13.02;
 
     // Create a variable to test case TRUE of FloatComparison
@@ -170,25 +172,61 @@ TEST (JavaLang, FloatComparison) {
 }
 
 TEST (JavaLang, FloatOperator) {
-	// Given a valid number
-	Float validNumber = 4.1;
-	Float targetNumber = 2.0;
+	// Create variableFloatOperatorA, variableFloatOperatorB and assign value of type float to them.
+    // We use this variable to test FloatOperator.
+	Float variableFloatOperatorA = 33.00;
+    Float variableFloatOperatorB = 11.00;
 
-	// Make a summation with targetNumber
-	Float summationNumber = 6.1;
-	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
+    // Create realFloatOperatorResult contains real result of the function we want to test
+    Float realFloatOperatorResult ;
 
-	// Make a subtraction with targetNumber
-	Float subtractionNumber = 2.1;
-	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
+    // Create expectedFloatOperatorResult contains the expected result . To test case TRUE of FloatOperator
+    // We will use that variable to make a comparison with realFloatOperatorResult
+    Float expectedFloatOperatorResult;
 
-	// Make a multiplication with targetNumber
-	Float multiplicationNumber = 8.2;
-	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
+    // Create notExpectedFloatOperatorResult contains the not expected result . To test case FALSE of FloatOperator
+    // We will use that variable to make a comparison with realFloatOperatorResult
+    Float notExpectedFloatOperatorResult;
 
-	// Make a division with targetNumber
-	Float divisionNumber = 2.05;
-	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
+	// Test Float::operator     +   . Case TRUE
+	realFloatOperatorResult = variableFloatOperatorA + variableFloatOperatorB;
+    expectedFloatOperatorResult = 44.00;
+	ASSERT_TRUE(expectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     +   . Case FALSE
+    realFloatOperatorResult = variableFloatOperatorA + variableFloatOperatorB;
+    notExpectedFloatOperatorResult = 555.666 ;
+    ASSERT_FALSE(notExpectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     -   . Case TRUE
+    realFloatOperatorResult = variableFloatOperatorA - variableFloatOperatorB;
+    expectedFloatOperatorResult = 22.00 ;
+    ASSERT_TRUE(expectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     -   . Case FALSE
+    realFloatOperatorResult = variableFloatOperatorA - variableFloatOperatorB;
+    notExpectedFloatOperatorResult = 123.321 ;
+    ASSERT_FALSE(notExpectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     *   . Case TRUE
+    realFloatOperatorResult = variableFloatOperatorA * variableFloatOperatorB;
+    expectedFloatOperatorResult = 363.00 ;
+    ASSERT_TRUE(expectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     *   . Case FALSE
+    realFloatOperatorResult = variableFloatOperatorA * variableFloatOperatorB;
+    notExpectedFloatOperatorResult = 5678.123 ;
+    ASSERT_FALSE(notExpectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     /   . Case TRUE
+    realFloatOperatorResult = variableFloatOperatorA / variableFloatOperatorB;
+    expectedFloatOperatorResult = 3.00 ;
+    ASSERT_TRUE(expectedFloatOperatorResult == realFloatOperatorResult);
+
+    // Test Float::operator     /   . Case FALSE
+    realFloatOperatorResult = variableFloatOperatorA / variableFloatOperatorB;
+    notExpectedFloatOperatorResult = 123.321 ;
+    ASSERT_FALSE(notExpectedFloatOperatorResult == realFloatOperatorResult);
 }
 
 TEST (JavaLang, FloatParseFloat) {
