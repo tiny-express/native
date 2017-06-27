@@ -45,7 +45,6 @@ namespace Java {
 			~Stack(){}
 
             public:
-            
             /**
             * Stack empty - check the Stack is empty or not
             *
@@ -84,8 +83,9 @@ namespace Java {
             *
             * @param original
             */
-            E push(const E &item){
+            E push(const E &item) {
                 this->original.push(item);
+                return item;
             }
        
             /**
@@ -93,7 +93,7 @@ namespace Java {
             *
             * @param original
             */
-            int search(const E &o){
+            int search(const E &o) {
                 int position = 0;
                 int i;
                 for(i = 0; i < this->original.size(); i++) {
@@ -106,9 +106,10 @@ namespace Java {
             
             boolean add(E &e) {
 				this->original.push(e);
+				return e;
 			}
 			
-			 /**
+			/**
             * Size of Stack
             *
             * @param original
@@ -116,8 +117,6 @@ namespace Java {
             int size() {
                 return this->original.size();
             }
-
-
         };
     }
 }

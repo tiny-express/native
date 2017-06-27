@@ -43,26 +43,21 @@ TEST(JavaUtil, StackConstructor) {
     ASSERT_EQUAL(1, stack.size());
 }
 
-TEST(JavaLang, StackDestructor) {
-    
-}
-
-
 TEST(JavaLang, StackEmpty) {
-    // Give a emtpy Stack
+    // Give an emtpy Stack
     Stack<int> emptyStack;
     ASSERT_FALSE(emptyStack.empty());
 
-    // Give a not empty Stack
+    // Give an not empty Stack
     Stack<int> notEmptyStack;
+    
     int temp = 123;
     notEmptyStack.add(temp);
+    
     ASSERT_TRUE(notEmptyStack.empty());
 }
 
-
 TEST(JavaLang, StackPeek) {
-    
     Stack<int> peekStack;
     
     int push1 = 1;
@@ -78,7 +73,6 @@ TEST(JavaLang, StackPeek) {
     int result = peekStack.peek();
     ASSERT_EQUAL(3, result);
 }
-
 
 TEST(JavaLang, StackPop) {
     Stack<int> popStack;
@@ -108,6 +102,7 @@ TEST(JavaLang, StackPush) {
     pushStack.push(push1);
     pushStack.push(push2);
     pushStack.push(push3);
+    
     // Check size
     ASSERT_EQUAL(3, pushStack.size());
 }
@@ -124,7 +119,7 @@ TEST(JavaLang, StackSearch) {
     searchStack.push(push2);
     searchStack.push(push3);
     
-    // Check size
+    // Search elements in Stack
     ASSERT_EQUAL(2, searchStack.search(2));
     ASSERT_EQUAL(-1, searchStack.search(5));
 }
