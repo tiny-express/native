@@ -96,7 +96,78 @@ TEST (JavaLang, FloatConstructor) {
     ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
 }
 
+TEST (JavaLang, FloatComparison) {
+    // Create a value of type float to make a comparison.
+    Float comparisonFloat = 13.02;
 
+    // Create a variable to test case TRUE of FloatComparison
+    // We will use that variable to make a comparison between it and comparisonFloat
+    Float expectedFloatComparisonResult;
+
+    // Create a variable to test case FALSE of FloatComparison
+    // We will use that variable to make a comparison between it and comparisonFloat
+    Float notExpectedFloatComparisonResult;
+
+    // Test operator == . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 13.02;
+    ASSERT_TRUE(expectedFloatComparisonResult  == comparisonFloat);
+
+    // Test operator == . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 130.02;
+    ASSERT_FALSE(notExpectedFloatComparisonResult == comparisonFloat);
+
+    // Test operator != . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 111.333;
+    ASSERT_TRUE(expectedFloatComparisonResult != comparisonFloat);
+
+    // Test operator != . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 13.02;
+    ASSERT_FALSE(notExpectedFloatComparisonResult != comparisonFloat);
+
+    // Test operator < . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 1.302;
+    ASSERT_TRUE(expectedFloatComparisonResult < comparisonFloat);
+
+    // Test operator < . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 100.302;
+    ASSERT_FALSE(notExpectedFloatComparisonResult < comparisonFloat);
+
+    // Test operator <= . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 13.00;
+    ASSERT_TRUE(expectedFloatComparisonResult <= comparisonFloat);
+
+    // Test operator <= . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 130.00;
+    ASSERT_FALSE(notExpectedFloatComparisonResult <= comparisonFloat);
+
+    // Test operator > . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 100.1302;
+    ASSERT_TRUE(expectedFloatComparisonResult > comparisonFloat);
+
+    // Test operator > . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 1.1302;
+    ASSERT_FALSE(notExpectedFloatComparisonResult > comparisonFloat);
+
+    // Test operator >= . Case TRUE
+    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
+    expectedFloatComparisonResult = 130.02;
+    ASSERT_TRUE(expectedFloatComparisonResult >= comparisonFloat);
+
+    // Test operator >= . Case FALSE
+    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
+    notExpectedFloatComparisonResult = 1.1302;
+    ASSERT_FALSE(notExpectedFloatComparisonResult >= comparisonFloat);
+}
 
 TEST (JavaLang, FloatOperator) {
 	// Given a valid number
