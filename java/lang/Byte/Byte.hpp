@@ -33,28 +33,29 @@
 namespace Java {
     namespace Lang {
         
-        class Byte;
+        class Bytes;
         
-        class Byte : public virtual Number {
+        class Bytes : public virtual Number {
         private:
             // typedef unsigned char byte;
             byte original; 
         public:
-            Byte();
-            Byte(byte original);
-            Byte(const byte &byteNumber);
-            ~Byte();
-        public:
-            char charValue() const;
-			string stringValue() const;
-			short shortValue() const;
-			int intValue() const;
-			long longValue() const;
-			float floatValue() const;
-			double doubleValue() const;
-			string toString() const;
+            Bytes();
+            Bytes(byte original);
+            Bytes(const Bytes &byteNumber);
+            ~Bytes();
+            
+//         public:
+//             char charValue() const;
+// 			string stringValue() const;
+// 			short shortValue() const;
+// 			int intValue() const;
+// 			long longValue() const;
+// 			float floatValue() const;
+// 			double doubleValue() const;
+// 			string toString() const;
 
-			static Byte parseByte(String target);
+// 			static byte parseByte(String target);
 		
 		public:
 			byte operator+(const byte &target) const;
@@ -74,6 +75,7 @@ namespace Java {
 			void operator*=(const byte &target);
 			void operator/=(const byte &target);
 			void operator%=(const byte &target);
+
         };
     }
 }

@@ -33,7 +33,7 @@ using namespace Java::Lang;
  *
  * @param original
  */
-Byte::Byte() {
+Bytes::Bytes() {
 	this->original = 0;
 }
 
@@ -42,7 +42,7 @@ Byte::Byte() {
  *
  * @param original
  */
-Byte::Byte(byte original) {
+Bytes::Bytes(byte original) {
 	this->original = original;
 }
 
@@ -51,191 +51,10 @@ Byte::Byte(byte original) {
  *
  * @param original
  */
-Byte::Byte(const Byte &byteNumber) {
+Bytes::Bytes(const Bytes &byteNumber) {
 	this->original = byteNumber.original;
 }
 
-Byte::~Byte() {
-}
-
-/**
- * Parse long
- *
- * @param target
- * @return long
- */
-long Byte::parseByte(String target) {
-	return Byte(string_to_long(target.toString()));
-}
-
-/**
- * Byte to String
- *
- * @return String
- */
-string Byte::toString() const {
-	return string_from_char(this->original);
-}
-
-/**
- * Byte to Char
- *
- * @return char
- */
-char Byte::charValue() const {
-	return string_to_char(string_from_long(this->original));
-}
-
-/**
- * Long to String
- *
- * @return CString
- */
-string Byte::stringValue() const {
-	return Byte::valueOf(this->original).toString();
-}
-
-/**
- * Short value of Byte
- *
- * @return short
- */
-short Byte::shortValue() const {
-	return this->original;
-}
-
-/**
- * Integer value
- *
- * @return int
- */
-int Byte::intValue() const {
-	return this->original;
-}
-
-/**
- * Long value in Long
- *
- * @return int
- */
-long Byte::longValue() const {
-	return this->original;
-}
-
-/**
- * Long value of Byte
- *
- * @return int
- */
-float Byte::floatValue() const {
-	return (float) this->original;
-}
-
-/**
- * Double value of byte
- *
- * @return int
- */
-double Byte::doubleValue() const {
-	return (double) this->original;
-}
-
-/**
- * Make a summation with target Byte
- *
- * @return Byte
- */
-Byte Byte::operator+(const byte &target) const {
-	return this->original + target.original;
-}
-
-/**
- * Make a subtraction with target Byte
- *
- * @return Byte
- */
-Byte Byte::operator-(const byte &target) const {
-	return this->original - target.original;
-}
-
-/**
- * Make a multiple from this Byte with target
- *
- * @return Byte
- */
-Byte Byte::operator*(const byte &target) const {
-	return ( this->original * target.original );
-}
-
-/**
- *  Make a division from this Byte with target
- *
- * @return Byte
- */
-Byte Byte::operator/(const byte &target) const {
-	return ( this->original / target.original );
-}
-
-/**
- * Make a modulo from this Byte with target
- *
- * @return Byte
- */
-Byte Byte::operator%(const byte &target) const {
-	return ( this->original % target.original );
-}
-
-/**
- * Compare this Byte is equal target
- *
- * @return bool
- */
-boolean Byte::operator==(const byte &target) const {
-	return this->original == target.original;
-}
-
-/**
- * Compare this Byte is not equal target
- *
- * @return bool
- */
-boolean Byte::operator!=(const byte &target) const {
-	return !this->operator==(target);
-}
-
-/**
- * Compare this Byte is less than target
- *
- * @return bool
- */
-boolean Byte::operator<(const byte &target) const {
-	return this->original < target.original;
-}
-
-/**
- * Compare this Byte is more than target
- *
- * @return bool
- */
-boolean Byte::operator>(const byte &target) const {
-	return this->original > target.original;
-}
-
-/**
- * Compare this Byte is equal or less than target
- *
- * @return bool
- */
-boolean Byte::operator<=(const byte &target) const {
-	return this->original <= target.original;
-}
-
-/**
- *  Compare this Byte is equal or more than target
- *
- * @return bool
- */
-boolean Byte::operator>=(const byte &target) const {
-	return this->original >= target.original;
+Bytes::~Bytes() {
 }
 
