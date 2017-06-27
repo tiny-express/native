@@ -33,15 +33,49 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, FloatConstructor) {
+    // Create an empty variable. Assign value to it.
+    // Than make a comparison bettween the expected result and the real result
 	Float emptyFloat;
 	emptyFloat = 3.0;
-	ASSERT_EQUAL(3, emptyFloat.intValue());
+    float expectedResult = 3.0;
+    float realResult = emptyFloat.floatValue();
+	ASSERT_TRUE(expectedResult == realResult);
 
-	Float validInteger = 3;
-	ASSERT_EQUAL(3, validInteger.intValue());
+    // Create an empty variable. Assign value to it.
+    // Than make a comparison bettween the NOT expected result and the real result
+    Float notExpectedEmptyFloat;
+    notExpectedEmptyFloat = 3.0;
+    float notExpectedResult = 3.6;
+    realResult = notExpectedEmptyFloat.floatValue();
+    ASSERT_FALSE(notExpectedResult == realResult);
 
-	Float validIntegerPointer = Float::parseFloat("1.345");
-	ASSERT_EQUAL(1.3, validIntegerPointer.intValue());
+    // Input a value of type float to variableFloat.
+    // Than make a comparison bettween the expected result and the real result
+    Float variableFloat = 9.0;
+    expectedResult = 9.0;
+    realResult = variableFloat.floatValue();
+    ASSERT_EQUAL(expectedResult, realResult);
+
+    // Input a value of type float to variableFloat.
+    // Than make a comparison bettween the NOT expected result and the real result
+    Float notVariableFloat = 9.0;
+    notExpectedResult = 9.9;
+    realResult = notVariableFloat.floatValue();
+    ASSERT_EQUAL(notExpectedResult , realResult);
+
+    // Use Float::parseFLoat to convert from string to float
+    // Than make a comparison bettween the expected result and the real result
+	Float testParseFloat = Float::parseFloat("13.02");
+    expectedResult = 13.02;
+    realResult = testParseFloat.floatValue();
+	ASSERT_EQUAL(expectedResult, realResult);
+
+    // Use Float::parseFLoat to convert from string to float
+    // Than make a comparison bettween the NOT expected result and the real result
+    testParseFloat = Float::parseFloat("13.02");
+    notExpectedResult = 130.2;
+    realResult = testParseFloat.floatValue();
+    ASSERT_NOT_EQUAL(notExpectedResult, realResult);
 }
 
 TEST (JavaLang, FloatComparision) {
