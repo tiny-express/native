@@ -232,11 +232,30 @@ TEST (JavaLang, FloatOperator) {
 TEST (JavaLang, FloatParseFloat) {
 	#ifdef __APPLE__
 		return;
-	#endif
-	// Given value for Float constructor and assign value - Return float
-	Float validFloatPointer = Float::parseFloat("6");
-	float expect = 6;
-	ASSERT_EQUAL(expect, validFloatPointer.floatValue());
+    #endif
+
+    // Create variable to test Float::parseFloat
+    Float variableFloatConstructor;
+
+    float expectedFloatConstructorResult ;
+    float notExpectedFloatConstructorResult;
+    float realFloatConstructorResult ;
+
+    // Test Float::parseFLoat to convert from string to float. Case TRUE
+    // Use Float::parseFloat to assign float value to variableFloatConstructor
+    // Than make a comparison with expectedFloatConstructor
+    variableFloatConstructor = Float::parseFloat("13.02");
+    expectedFloatConstructorResult = 13.02;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+    ASSERT_TRUE(expectedFloatConstructorResult == realFloatConstructorResult);
+
+    // Test Float::parseFLoat to convert from string to float. Case FALSE
+    // Use Float::parseFloat to assign float value to variableFloatConstructor
+    // Than make a comparison with notExpectedFloatConstructor
+    variableFloatConstructor = Float::parseFloat("13.02");
+    notExpectedFloatConstructorResult = 130.2;
+    realFloatConstructorResult = variableFloatConstructor.floatValue();
+    ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
 }
 
 
