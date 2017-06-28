@@ -119,7 +119,7 @@ double Float::doubleValue() const {
  * @return String
  */
 string Float::toString() const {
-	return string_from_int(this->original);
+	return string_from_float(this->original);
 }
 
 /**
