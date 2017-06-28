@@ -97,11 +97,49 @@ int	Character::compareTo(Character anotherCharacter) {
 
 }
 
-int Character::digit(char ch, int radix) {
-
-}
-
 int Character::digit(int codePoint, int radix) {
+    //FIXME: Currently support for radix 16 to work with UUID
+    //@thoangminh: please help to implement whole rest things
+    if (radix != 16) {
+        return -1;
+    }
+
+    switch (codePoint) {
+        case (int)'0':
+            return 0;
+        case (int)'1':
+            return 1;
+        case (int)'2':
+            return 2;
+        case (int)'3':
+            return 3;
+        case (int)'4':
+            return 4;
+        case (int)'5':
+            return 5;
+        case (int)'6':
+            return 6;
+        case (int)'7':
+            return 7;
+        case (int)'8':
+            return 8;
+        case (int)'9':
+            return 9;
+        case (int)'a':
+            return 10;
+        case (int)'b':
+            return 11;
+        case (int)'c':
+            return 12;
+        case (int)'d':
+            return 13;
+        case (int)'e':
+            return 14;
+        case (int)'f':
+            return 15;
+        default:
+            return -1;
+    }
 
 }
 

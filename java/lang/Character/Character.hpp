@@ -133,14 +133,6 @@ namespace Java {
 			int	compareTo(Character anotherCharacter);
 
 			/**
-			 * Returns the numeric value of the character ch in the specified radix.
-			 * @param ch
-			 * @param radix
-			 * @return int
-			 */
-			static int digit(char ch, int radix);
-
-			/**
 			 * Returns the numeric value of the specified character (Unicode code point) in the specified radix.
 			 * @param codePoint
 			 * @param radix
