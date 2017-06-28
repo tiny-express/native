@@ -69,6 +69,29 @@ Long Long::parseLong(String target) {
 }
 
 /**
+ * Parse long with the target and radix
+ *
+ * @param target
+ * @param radix
+ * @return long
+ */
+Long Long::parseLong(String target, int radix) {
+	//FIXME: @tucao will correct this with radix after finish radix 16 for UUID
+    //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
+
+    long result = 0;
+    int index = 0;
+    int length = target.length();
+    int digit;
+
+    if (length > 0) {
+//        char firstChar =
+    }
+
+	return 0;
+}
+
+/**
  * Long to String
  *
  * @return String
