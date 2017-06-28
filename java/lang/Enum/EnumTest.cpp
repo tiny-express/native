@@ -24,19 +24,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+extern "C" {
+#include "../../../unit_test.h"
+}
 
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Vendor.hpp"
-#include "java/Util.hpp"
+#include "Enum.hpp"
 
-#define self (*this)
-
-// In Java, Java::Lang is imported by default
 using namespace Java::Lang;
 
-#endif//NATIVE_LIBRARY_HPP
+TEST (JavaLang, EnumGetName) {
+    // Given valid enum and name to test getName()
+    Enum<int> validEnum = Enum<int>("validName", 7);
+
+    String expectedValue = "validName";
+    ASSERT_STR(expectedValue.toString(), validEnum.getName().toString());
+}
+
+TEST (JavaLang, EnumGetOrdinal) {
+    // Given valid enum and name to test getOrdinal()
+    Enum<int> validEnum = Enum<int>("validName", 18);
+
+    int expectedValue = 18;
+    ASSERT_EQUAL(expectedValue, validEnum.getOrdinal());
+}
