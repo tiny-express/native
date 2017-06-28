@@ -109,13 +109,13 @@ TEST (JavaLang, LongParseLong) {
 	ASSERT_EQUAL(6, validLongPointer.longValue());
 
     // Given valid string to test parseLong with radix 16
-    String validNumberString = "0x1b";
+    String validNumberString = "1b";
     Long result = Long::parseLong(validNumberString, 16);
 
     long expectedResult = 27;
     ASSERT_EQUAL(expectedResult, result.longValue());
 
-	String invalidNumbeString = "0x122q3";
+	String invalidNumbeString = "122q3";
 	result = Long::parseLong(invalidNumbeString, 16);
 
 	expectedResult = -1;

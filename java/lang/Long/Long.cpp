@@ -25,6 +25,7 @@
  */
 
 #include "Long.hpp"
+#include "../Character/Character.hpp"
 
 using namespace Java::Lang;
 
@@ -78,17 +79,62 @@ Long Long::parseLong(String target) {
 Long Long::parseLong(String target, int radix) {
 	//FIXME: @tucao will correct this with radix after finish radix 16 for UUID
     //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
+    if (radix != 16) {
+        return -1;
+    }
+
+    static long maxValue = 0x7fffffffffffffffL;
+    static long minValue = 0x8000000000000000L;
 
     long result = 0;
+    boolean negative = false;
     int index = 0;
     int length = target.length();
+    long limit = -maxValue;
+    long multmin;
     int digit;
 
     if (length > 0) {
-//        char firstChar =
-    }
+        char firstChar = target.charAt(0);
+        if (firstChar < '0') { // Possible leading "+" or "-"
+            if (firstChar == '-') {
+                negative = true;
+                limit = minValue;
+            } else if (firstChar != '+') {
+                //FIXME: exception
+                return -1;
+            }
+            if (length == 1) { // Cannot have lone "+" or "-"
+                //FIXME: exception
+                return -1;
+            }
 
-	return 0;
+            index++;
+        }
+        multmin = limit / radix;
+        while (index < length) {
+            // Accumulating negatively avoids surprises near MAX_VALUE
+            digit = Character::digit(target.charAt(index++), radix);
+            if (digit < 0) {
+                //FIXME: exception
+                return -1;
+            }
+            if (result < multmin) {
+                //FIXME: exception
+                return -1;
+            }
+            result *= radix;
+            if (result < limit + digit) {
+                //FIXME: exception
+                return -1;
+            }
+            result -= digit;
+        }
+    } else {
+        //FIXME: exception
+        return -1;
+    }
+    return negative ? result : -result;
 }
 
 /**
