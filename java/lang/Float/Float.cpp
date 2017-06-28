@@ -75,9 +75,9 @@ float Float::floatValue() const {
  * @return char
  */
 char Float::charValue() const {
-    string stringFromIntResult = string_from_int(this->original);
-    char floatCharValueResult = string_to_char(stringFromIntResult);
-    free(stringFromIntResult);
+    string stringFromFloatResult = string_from_float(this->original);
+    char floatCharValueResult = string_to_char(stringFromFloatResult);
+    free(stringFromFloatResult);
 	return floatCharValueResult;
 
 }

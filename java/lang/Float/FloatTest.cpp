@@ -389,8 +389,8 @@ TEST (JavaLang, FloatShortValue) {
 TEST (JavaLang, FloatIntValue) {
     // Create variables to test Float::intValue.
     Float variableFloatIntValue  ;
-    short expectedFloatIntValue;
-    short actualFloatIntValue;
+    int expectedFloatIntValue;
+    int actualFloatIntValue;
 
     // Test value NULL .
     variableFloatIntValue = NULL;
@@ -426,8 +426,8 @@ TEST (JavaLang, FloatIntValue) {
 TEST (JavaLang, FloatLongValue) {
     // Create variables to test Float::longValue.
     Float variableFloatLongValue ;
-    short expectedFloatLongValue;
-    short actualFloatLongValue;
+    long expectedFloatLongValue;
+    long actualFloatLongValue;
 
     // Test value NULL .
     variableFloatLongValue = NULL;
@@ -462,8 +462,8 @@ TEST (JavaLang, FloatLongValue) {
 TEST (JavaLang, FloatFloatValue) {
     // Create variables to test Float::floatValue.
     Float variableFloatFloatValue ;
-    short expectedFloatFloatValue;
-    short actualFloatFloatValue;
+    float expectedFloatFloatValue;
+    float actualFloatFloatValue;
 
     // Test value NULL .
     variableFloatFloatValue = NULL;
@@ -498,8 +498,8 @@ TEST (JavaLang, FloatFloatValue) {
 TEST (JavaLang, FloatDoubleValue) {
     // Create variables to test Float::doubleValue.
     Float variableFloatDoubleValue ;
-    short expectedFloatDoubleValue;
-    short actualFloatDoubleValue;
+    double expectedFloatDoubleValue;
+    double actualFloatDoubleValue;
 
     // Test value NULL .
     variableFloatDoubleValue = NULL;
