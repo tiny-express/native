@@ -111,10 +111,28 @@ String UUID::toString() {
     return this->getTrap(); //FIXME: implement correct this function
 }
 
-UUID UUID::fromString(String trap) {
-    UUID uuid;
-    uuid.setTrap(trap);
-    return uuid;
+UUID UUID::fromString(String name) {
+    Array<String> components = name.split("-");
+    if (components.length != 5) {
+        //FIXME: an exception
+        return UUID();
+    }
+
+    for (int i=0; i<5; i++)
+        components[i] = "0x"+components[i];
+
+    long mostSigBits = Long::decode(components[0]).longValue();
+    mostSigBits <<= 16;
+    mostSigBits |= Long::decode(components[1]).longValue();
+    mostSigBits <<= 16;
+    mostSigBits |= Long::decode(components[2]).longValue();
+
+    long leastSigBits = Long::decode(components[3]).longValue();
+    leastSigBits <<= 48;
+    leastSigBits |= Long::decode(components[4]).longValue();
+
+    UUID result = UUID(mostSigBits, leastSigBits);
+    return result;
 };
 
 // TODO: remove trap after fix toString/fromString

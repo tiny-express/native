@@ -49,8 +49,13 @@ TEST (JavaUtil, UUIDConstructor) {
      */
 
     // Given valid static constructor with randomUUID
-    uuid = UUID::randomUUID();
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    uuid = UUID::fromString(expectedString);
+    long expectedMostSigBits = 4053239666997989821;
+    long expectedLeastSigBits = -5603022497796657139;
 
+    ASSERT_EQUAL(expectedMostSigBits, uuid.getMostSignificantBits());
+    ASSERT_EQUAL(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtil, UUIDCompare) {
@@ -91,10 +96,4 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
     ASSERT_EQUAL(expectedMost, uuid.getMostSignificantBits());
 
     ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
-}
-
-TEST(JavaUtil, UUIDTrap) {
-    UUID uuid = UUID::fromString("trap");
-    String result = uuid.toString();
-    ASSERT_STR("trap", result.toString());
 }
