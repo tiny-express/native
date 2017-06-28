@@ -106,7 +106,7 @@ namespace Java {
             
             boolean add(E &e) {
 				this->original.push(e);
-				return e;
+				return TRUE;
 			}
 			
 			/**
