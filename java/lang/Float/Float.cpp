@@ -28,7 +28,6 @@
 
 using namespace Java::Lang;
 
-#define string char*
 
 /**
  * Float initialization
@@ -134,7 +133,7 @@ string Float::toString() const {
  * @return CString
  */
 string Float::stringValue() const {
-	return String::valueOf(this->original).toString();
+	return string_from_float(this->original);
 }
 
 /**

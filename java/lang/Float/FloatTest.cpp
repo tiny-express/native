@@ -35,64 +35,49 @@ using namespace Java::Lang;
 #define string char*
 
 TEST (JavaLang, FloatConstructor) {
-    // Create comparisonFloat contains value of type float.
-    // We use this variable to test FloatConstructor
+    // Create comparisonFloat contains value of type float. We use this variable to test FloatConstructor
 	Float variableFloatConstructor;
 
-    // Create variable expectedFloatConstructorResult represent the target we want when use Float::floatValue
-    // In case TRUE
+    // Create expectedFloatConstructorResult to test Float::floatValueIn case TRUE
     float expectedFloatConstructorResult ;
 
-    // Create variable notExpectedFloatConstructorResult represent the target we want when use Float::floatValue
-    // In case FALSE
+    // Create expectedFloatConstructorResult to test Float::floatValueIn case FALSE
     float notExpectedFloatConstructorResult;
 
     // Create variable expectedFloatConstructorResult represent the actual result when use Float::floatValue
     float actualFloatConstructorResult ;
 
-    // Test Float::floatValue.  Case TRUE
-    // Assign value to variableFloatConstructor.
-    // Than make a comparison with expectedFloatConstructorResult.
+    // Test Float::floatValue.  Case TRUE.
     variableFloatConstructor = 13.02;
     expectedFloatConstructorResult = 13.02;
     actualFloatConstructorResult = variableFloatConstructor.floatValue();
 	ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
 
     // Test Float::floatValue.  Case FALSE
-    // Assign value to variableFloatConstructor.
-    // Than make a comparison with expectedFloatConstructorResult.
     variableFloatConstructor = 13.02;
     notExpectedFloatConstructorResult = 1302.000;
     actualFloatConstructorResult = variableFloatConstructor.floatValue();
     ASSERT_DBL_FAR(notExpectedFloatConstructorResult , actualFloatConstructorResult);
 
     // Test Float::floatValue.  Immediately . Case TRUE
-    // Create a variableFloatConstructorImmediate and assign value to it immediately.
-    // Than make a comparison with expectedFloatConstructorResult.
     Float variableFloatConstructorImmediate = 130.2;
     expectedFloatConstructorResult = 130.2;
     actualFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
     ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
 
     // Test Float::floatValue.  Immediately . Case FALSE
-    // Create a variableFloatConstructorImmediate and assign value to it immediately.
-    // Than make a comparison with expectedFloatConstructorResult.
     variableFloatConstructorImmediate = 130.2;
     notExpectedFloatConstructorResult = 1.302;
     actualFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
     ASSERT_DBL_FAR(notExpectedFloatConstructorResult , actualFloatConstructorResult);
 
     // Test Float::parseFLoat to convert from string to float. Case TRUE
-    // Use Float::parseFloat to assign float value to variableFloatConstructor
-    // Than make a comparison with expectedFloatConstructor
 	variableFloatConstructor = Float::parseFloat("13.02");
     expectedFloatConstructorResult = 13.02;
     actualFloatConstructorResult = variableFloatConstructor.floatValue();
 	ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
 
     // Test Float::parseFLoat to convert from string to float. Case FALSE
-    // Use Float::parseFloat to assign float value to variableFloatConstructor
-    // Than make a comparison with notExpectedFloatConstructor
     variableFloatConstructor = Float::parseFloat("13.02");
     notExpectedFloatConstructorResult = 130.2;
     actualFloatConstructorResult = variableFloatConstructor.floatValue();
@@ -101,94 +86,76 @@ TEST (JavaLang, FloatConstructor) {
 
 
 TEST (JavaLang, FloatComparison) {
-    // Create comparisonFloat contains value of type float.
-    // We use this variable to test FloatComparison
+    // Create comparisonFloat to test FloatComparison
     Float comparisonFloat = 13.02;
 
     // Create a variable to test case TRUE of FloatComparison
-    // We will use that variable to make a comparison between it and comparisonFloat
     Float expectedFloatComparisonResult;
 
     // Create a variable to test case FALSE of FloatComparison
-    // We will use that variable to make a comparison between it and comparisonFloat
     Float notExpectedFloatComparisonResult;
 
     // Test operator == . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 13.02;
     ASSERT_TRUE(expectedFloatComparisonResult  == comparisonFloat);
 
     // Test operator == . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 130.02;
     ASSERT_FALSE(notExpectedFloatComparisonResult == comparisonFloat);
 
     // Test operator != . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 111.333;
     ASSERT_TRUE(expectedFloatComparisonResult != comparisonFloat);
 
     // Test operator != . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 13.02;
     ASSERT_FALSE(notExpectedFloatComparisonResult != comparisonFloat);
 
     // Test operator < . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 1.302;
     ASSERT_TRUE(expectedFloatComparisonResult < comparisonFloat);
 
     // Test operator < . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 100.302;
     ASSERT_FALSE(notExpectedFloatComparisonResult < comparisonFloat);
 
     // Test operator <= . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 13.00;
     ASSERT_TRUE(expectedFloatComparisonResult <= comparisonFloat);
 
     // Test operator <= . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 130.00;
     ASSERT_FALSE(notExpectedFloatComparisonResult <= comparisonFloat);
 
     // Test operator > . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 100.1302;
     ASSERT_TRUE(expectedFloatComparisonResult > comparisonFloat);
 
     // Test operator > . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 1.1302;
     ASSERT_FALSE(notExpectedFloatComparisonResult > comparisonFloat);
 
     // Test operator >= . Case TRUE
-    // Make a comparison between the comparisonFloat and the expectedFloatComparisonResult
     expectedFloatComparisonResult = 130.02;
     ASSERT_TRUE(expectedFloatComparisonResult >= comparisonFloat);
 
     // Test operator >= . Case FALSE
-    // Make a comparison between the comparisonFloat and the notExpectedFloatComparisonResult
     notExpectedFloatComparisonResult = 1.1302;
     ASSERT_FALSE(notExpectedFloatComparisonResult >= comparisonFloat);
 }
 
 TEST (JavaLang, FloatOperator) {
-	// Create variableFloatOperatorA, variableFloatOperatorB and assign value of type float to them.
-    // We use this variable to test FloatOperator.
+	// Create variableFloatOperatorA, variableFloatOperatorB to test FloatOperator.
 	Float variableFloatOperatorA = 33.00;
     Float variableFloatOperatorB = 11.00;
 
     // Create actualFloatOperatorResult contains actual result of the function we want to test
     Float actualFloatOperatorResult ;
 
-    // Create expectedFloatOperatorResult contains the expected result . To test case TRUE of FloatOperator
-    // We will use that variable to make a comparison with actualFloatOperatorResult
+    // Create expectedFloatOperatorResult to test case TRUE of FloatOperator
     Float expectedFloatOperatorResult;
 
-    // Create notExpectedFloatOperatorResult contains the not expected result . To test case FALSE of FloatOperator
-    // We will use that variable to make a comparison with actualFloatOperatorResult
+    // Create notExpectedFloatOperatorResult to test case FALSE of FloatOperator
     Float notExpectedFloatOperatorResult;
 
 	// Test Float::operator     +   . Case TRUE
@@ -245,14 +212,12 @@ TEST (JavaLang, FloatParseFloat) {
     float actualParseFloatResult ;
 
     // Test Float::parseFLoat . Case TRUE
-    // Make a comparison with expectedFloatConstructor
     variableFloatConstructor = Float::parseFloat("13.02");
     expectedParseFloatResult = 13.02;
     actualParseFloatResult = variableFloatConstructor.floatValue();
     ASSERT_DBL_NEAR(expectedParseFloatResult , actualParseFloatResult);
 
     // Test Float::parseFLoat . Case FALSE
-    // Make a comparison with expectedFloatConstructor
     variableFloatConstructor = Float::parseFloat("13.02");
     notExpectedParseFloatResult = 130.2;
     actualParseFloatResult = variableFloatConstructor.floatValue();
@@ -264,16 +229,24 @@ TEST (JavaLang, FloatToString) {
     // Create variables to test Float::toString.
     Float variableFloatToString ;
     string expectedFloatToStringResult;
+    string notExpectedFloatToStringResult;
     string actualFloatToStringResult;
 
-    // Test value 0 .
+    // Test value 0 . Case TRUE
     variableFloatToString = 0.0;
     expectedFloatToStringResult = "0";
     actualFloatToStringResult = variableFloatToString.toString();
     ASSERT_STR(expectedFloatToStringResult, actualFloatToStringResult);
     free(actualFloatToStringResult);
 
-    // Test positive value  .
+//    // Test value 0 . Case FALSE
+//    variableFloatToString = 0.0;
+//    notExpectedFloatToStringResult = "1302.1";
+//    actualFloatToStringResult = variableFloatToString.toString();
+//    ASSERT_STR(notExpectedFloatToStringResult, actualFloatToStringResult);
+//    free(actualFloatToStringResult);
+
+    // Test positive value  . Case TRUE
     variableFloatToString = 1302.13;
     expectedFloatToStringResult = "1302.13";
     actualFloatToStringResult = variableFloatToString.toString();
@@ -315,33 +288,34 @@ TEST (JavaLang, FloatCharValue) {
 
 }
 
-TEST (JavaLang, FloatStringValue) {
-    // Create variables to test Float::StringValue.
-    Float variableFloatStringValue ;
-    string expectedFloatStringValueResult;
-    string actualFloatStringValueResult;
-
-    // Test value 0 .
-    variableFloatStringValue = 0.0;
-    expectedFloatStringValueResult = "0";
-    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-    free(actualFloatStringValueResult);
-
-    // Test positive value  .
-    variableFloatStringValue = 1302.13;
-    expectedFloatStringValueResult = "1302.13";
-    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-    free(actualFloatStringValueResult);
-
-    // Test negative value  .
-    variableFloatStringValue = -1302.13;
-    expectedFloatStringValueResult = "-1302.13";
-    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-    free(actualFloatStringValueResult);
-}
+// TODO waiting for java.lang.string
+//TEST (JavaLang, FloatStringValue) {
+//    // Create variables to test Float::StringValue.
+//    Float variableFloatStringValue ;
+//    string expectedFloatStringValueResult;
+//    string actualFloatStringValueResult;
+//
+//    // Test value 0 .
+//    variableFloatStringValue = 0.0;
+//    expectedFloatStringValueResult = "0";
+//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+//    free(actualFloatStringValueResult);
+//
+//    // Test positive value  .
+//    variableFloatStringValue = 1302.13;
+//    expectedFloatStringValueResult = "1302.13";
+//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+//    free(actualFloatStringValueResult);
+//
+//    // Test negative value  .
+//    variableFloatStringValue = -1302.13;
+//    expectedFloatStringValueResult = "-1302.13";
+//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+//    free(actualFloatStringValueResult);
+//}
 
 //TEST (JavaLang, FloatShortValue) {
 //    // Input different values of type int to compare to the result of Float::shortValue
