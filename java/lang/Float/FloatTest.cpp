@@ -105,3 +105,19 @@ TEST (JavaLang, FloatParseFloat) {
 	float expect = 6;
 	ASSERT_EQUAL(expect, validFloatPointer.floatValue());
 }
+
+
+TEST (JavaLang, FloatToString) {
+	// Input different values of type float to compare to the result of Float::toString
+	Float positiveFloat = 13.02;
+	char *expectedResult = "13.02";
+	char *realResult = positiveFloat.toString();
+	ASSERT_STR(expectedResult,realResult);
+	free(realResult);
+
+    Float negativeFloat = -13.02;
+    expectedResult = "-13.02";
+    realResult = negativeFloat.toString();
+    ASSERT_STR(expectedResult,realResult);
+    free(realResult);
+}
