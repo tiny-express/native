@@ -143,7 +143,7 @@ string Float::stringValue() const {
  * @return Float
  */
 Float Float::parseFloat(String target) {
-	return string_to_float(target.toString());
+	return Float(string_to_float(target.toString()));
 }
 
 /**
