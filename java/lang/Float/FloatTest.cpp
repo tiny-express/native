@@ -32,6 +32,8 @@ extern "C" {
 
 using namespace Java::Lang;
 
+#define string char*
+
 TEST (JavaLang, FloatConstructor) {
     // Create comparisonFloat contains value of type float.
     // We use this variable to test FloatConstructor
@@ -96,6 +98,7 @@ TEST (JavaLang, FloatConstructor) {
     realFloatConstructorResult = variableFloatConstructor.floatValue();
     ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
 }
+
 
 TEST (JavaLang, FloatComparison) {
     // Create comparisonFloat contains value of type float.
@@ -237,39 +240,175 @@ TEST (JavaLang, FloatParseFloat) {
     // Create variable to test Float::parseFloat
     Float variableFloatConstructor;
 
-    float expectedFloatConstructorResult ;
-    float notExpectedFloatConstructorResult;
-    float realFloatConstructorResult ;
+    float expectedParseFloatResult ;
+    float notExpectedParseFloatResult;
+    float realParseFloatResult ;
 
-    // Test Float::parseFLoat to convert from string to float. Case TRUE
-    // Use Float::parseFloat to assign float value to variableFloatConstructor
-    // Than make a comparison with expectedFloatConstructor
+    // Test Float::parseFLoat . Case TRUE
+    // Make a comparison with expectedFloatConstructor
     variableFloatConstructor = Float::parseFloat("13.02");
-    expectedFloatConstructorResult = 13.02;
-    realFloatConstructorResult = variableFloatConstructor.floatValue();
-    ASSERT_TRUE(expectedFloatConstructorResult == realFloatConstructorResult);
+    expectedParseFloatResult = 13.02;
+    realParseFloatResult = variableFloatConstructor.floatValue();
+    ASSERT_DBL_NEAR(expectedParseFloatResult , realParseFloatResult);
 
-    // Test Float::parseFLoat to convert from string to float. Case FALSE
-    // Use Float::parseFloat to assign float value to variableFloatConstructor
-    // Than make a comparison with notExpectedFloatConstructor
+    // Test Float::parseFLoat . Case FALSE
+    // Make a comparison with expectedFloatConstructor
     variableFloatConstructor = Float::parseFloat("13.02");
-    notExpectedFloatConstructorResult = 130.2;
-    realFloatConstructorResult = variableFloatConstructor.floatValue();
-    ASSERT_FALSE(notExpectedFloatConstructorResult == realFloatConstructorResult);
+    notExpectedParseFloatResult = 130.2;
+    realParseFloatResult = variableFloatConstructor.floatValue();
+    ASSERT_DBL_FAR(notExpectedParseFloatResult , realParseFloatResult);
 }
 
 
-TEST (JavaLang, FloatToString) {
-	// Input different values of type float to compare to the result of Float::toString
-	Float positiveFloat = 13.02;
-	char *expectedResult = "13.02";
-	char *realResult = positiveFloat.toString();
-	ASSERT_STR(expectedResult,realResult);
-	free(realResult);
+//TEST (JavaLang, FloatToString) {
+//    // Input different values of type int to compare to the realResult of Float::toString
+//    Float zeroFloat = 0;
+//    Float oneFloat = 1;
+//    Float positiveFloat = 10;
+//
+//    // Make a comparison between expected realResult and the real result
+//    char *expectedResult= "0";
+//    char *realResult = zeroFloat.toString();
+//    ASSERT_STR(expectedResult, realResult);
+//    free(realResult);
+//    // Make a comparison between expected realResult and the real result
+//    expectedResult= "1";
+//    realResult = oneFloat.toString();
+//    ASSERT_STR(expectedResult, realResult);
+//    free(realResult);
+//    // Make a comparison between expected realResult and the real result
+//    expectedResult= "10";
+//    realResult = positiveFloat.toString();
+//    ASSERT_STR(expectedResult, realResult);
+//    free(realResult);
+//
+//}
+//TEST (JavaLang, FloatCharValue) {
+//    // Input different values of type int to compare to the result of Float::charValue
+//    Float zeroFloat = 0;
+//    Float oneFloat = 1;
+//    Float positiveFloat = 10;
+//    Float maxFloat = 2147483647;
+//    Float minFloat = -2147483647;
+//    // Make a comparison between expected result and the real result
+//    char expect = '0';
+//    char result = zeroFloat.charValue();
+//    ASSERT_EQUAL(expect, result);
+//    // Make a comparison between expected result and the real result
+//    expect = '1';
+//    result = oneFloat.charValue();
+//    ASSERT_EQUAL(expect, result);
+//    // Make a comparison between expected result and the real result
+//    expect = '1';
+//    result = positiveFloat.charValue();
+//    ASSERT_EQUAL(expect, result);
+//    // Make a comparison between expected result and the real result
+//    expect = '2';
+//    result = maxFloat.charValue();
+//    ASSERT_EQUAL(expect, result);
+//    // Make a comparison between expected result and the real result
+//    expect = '-';
+//    result = minFloat.charValue();
+//    ASSERT_EQUAL(expect, result);
+//}
+//TEST (JavaLang, FloatStringValue) {
+//    // Input different values of type int to compare to the result of Float::stringValue
+//    Float zeroFloat = 0;
+//    Float oneFloat = 1;
+//    Float positiveFloat = 10;
+//    Float maxFloat = 2147483647;
+//    Float minFloat = -2147483647;
+//    // Make a comparison between expected result and the real result
+//    char *expect = "0";
+//    char *result = zeroFloat.stringValue();
+//    ASSERT_STR(expect, result);
+//    free(result);
+//    // Make a comparison between expected result and the real result
+//    expect = "1";
+//    char *result1 = oneFloat.stringValue();
+//    ASSERT_STR(expect, result1);
+//    free(result1);
+//    // Make a comparison between expected result and the real result
+//    expect = "10";
+//    char *result2 = positiveFloat.stringValue();
+//    ASSERT_STR(expect, result2);
+//    free(result2);
+//    // Make a comparison between expected result and the real result
+//    expect = "2147483647";
+//    char *result3 = maxFloat.stringValue();
+//    ASSERT_STR(expect, result3);
+//    free(result3);
+//    // Make a comparison between expected result and the real result
+//    expect = "-2147483647";
+//    char *result4 = minFloat.stringValue();
+//    ASSERT_STR(expect, result4);
+//    free(result4);
+//}
+//TEST (JavaLang, FloatShortValue) {
+//    // Input different values of type int to compare to the result of Float::shortValue
+//    Float positiveFloat = 1302;
+//    Float negativeFloat = -1302;
+//    // Make a comparison between expected result and the real result
+//    int expectedResult = 1302;
+//    int realResult = positiveFloat.shortValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//    // Make a comparison between expected result and the real result
+//    expectedResult = -1302;
+//    realResult = negativeFloat.shortValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//}
+//TEST (JavaLang, FloatIntValue) {
+//    // Input different values of type int to compare to the realResult of Float::intValue
+//    Float zeroFloat = 0;
+//    Float oneFloat = 1;
+//    Float positiveFloat = 10;
+//
+//    // Make a comparison between expected realResult and the real result
+//    int expectedResult= 0;
+//    int realResult = zeroFloat.intValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//    // Make a comparison between expected realResult and the real result
+//    expectedResult= 1;
+//    realResult = oneFloat.intValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//    // Make a comparison between expected realResult and the real result
+//    expectedResult= 10;
+//    realResult = positiveFloat.intValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//
+//}
+//TEST (JavaLang, FloatLongValue) {
+//    // Input different values of type int to compare to the realResult of Float::longValue
+//    Float positiveFloat = 1302.00;
+//    int expectedResult = 1302.00;
+//    int realResult = positiveFloat.longValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//    positiveFloat = -1302.00;
+//    expectedResult = -1302.00;
+//    realResult = positiveFloat.longValue();
+//    ASSERT_EQUAL(expectedResult, realResult);
+//}
+//TEST (JavaLang, FloatFloatValue) {
+//    // Input different values of type int to compare to the realResult of Float::floatValue
+//    Float positiveFloat = 12345;
+//    float expectedResult = 12345.00;
+//    float realResult = positiveFloat.floatValue();
+//    ASSERT_TRUE(expectedResult == realResult);
+//    Float negativeFloat = -12345;
+//    expectedResult = -12345.00;
+//    realResult = negativeFloat.floatValue();
+//    ASSERT_TRUE(expectedResult == realResult);
+//}
+//TEST (JavaLang, FloatDoubleValue) {
+//    // Input different values of type int to compare to the realResult of Float::doubleValue
+//    Float positiveFloat = 123456.00;
+//    double expectedResult = 123456.00;
+//    double realResult = positiveFloat.doubleValue();
+//    ASSERT_TRUE(expectedResult == realResult);
+//    Float negativeFloat = -123456.00;
+//    expectedResult = -123456.00;
+//    realResult = negativeFloat.doubleValue();
+//    ASSERT_TRUE(expectedResult == realResult);
+//}
 
-    Float negativeFloat = -13.02;
-    expectedResult = "-13.02";
-    realResult = negativeFloat.toString();
-    ASSERT_STR(expectedResult,realResult);
-    free(realResult);
-}
+
