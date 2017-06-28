@@ -24,7 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <exception>
 #include "Long.hpp"
+#include "../Character/Character.hpp"
 
 using namespace Java::Lang;
 
@@ -59,6 +61,60 @@ Long::~Long() {
 }
 
 /**
+ * Decode a long value in a string
+ * Just support for 0x (16) this time
+ * @param target
+ * @return
+ */
+Long Long::decode(String target) {
+    //FIXME: @tucao implement correct this function after finish UUID.fromString
+
+    int radix = 10;
+    int index = 0;
+    boolean negative = false;
+    Long result;
+
+    if (target.length() == 0) {
+        //FIXME: exception
+        return -1;
+    }
+
+    char firstChar = target.charAt(0);
+    // Handle sign, if present
+    if (firstChar == '-') {
+        negative = true;
+        index++;
+    } else if (firstChar == '+')
+        index++;
+
+    // Handle radix specifier, if present
+    if (target.startsWith("0x", index) || target.startsWith("0X", index)) {
+        index += 2;
+        radix = 16;
+    }
+    else if (target.startsWith("#", index)) {
+        index ++;
+        radix = 16;
+    }
+    else if (target.startsWith("0", index) && target.length() > 1 + index) {
+        index ++;
+        radix = 8;
+    }
+
+    if (target.startsWith("-", index) || target.startsWith("+", index)) {
+        //FIXME: exception
+        return -1;
+    }
+
+    result = Long::parseLong(target.subString(index), radix);
+    if (negative == true) {
+        result = -result.longValue();
+    }
+
+    return result;
+}
+
+/**
  * Parse long
  *
  * @param target
@@ -66,6 +122,74 @@ Long::~Long() {
  */
 Long Long::parseLong(String target) {
 	return Long(string_to_long(target.toString()));
+}
+
+/**
+ * Parse long with the target and radix
+ *
+ * @param target
+ * @param radix
+ * @return long
+ */
+Long Long::parseLong(String target, int radix) {
+	//FIXME: @tucao will correct this with radix after finish radix 16 for UUID
+    //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
+    if (radix != 16) {
+        return -1;
+    }
+
+    static long maxValue = 0x7fffffffffffffffL;
+    static long minValue = 0x8000000000000000L;
+
+    long result = 0;
+    boolean negative = false;
+    int index = 0;
+    int length = target.length();
+    long limit = -maxValue;
+    long multmin;
+    int digit;
+
+    if (length > 0) {
+        char firstChar = target.charAt(0);
+        if (firstChar < '0') { // Possible leading "+" or "-"
+            if (firstChar == '-') {
+                negative = true;
+                limit = minValue;
+            } else if (firstChar != '+') {
+                //FIXME: exception
+                return -1;
+            }
+            if (length == 1) { // Cannot have lone "+" or "-"
+                //FIXME: exception
+                return -1;
+            }
+
+            index++;
+        }
+        multmin = limit / radix;
+        while (index < length) {
+            // Accumulating negatively avoids surprises near MAX_VALUE
+            digit = Character::digit(target.charAt(index++), radix);
+            if (digit < 0) {
+                //FIXME: exception
+                return -1;
+            }
+            if (result < multmin) {
+                //FIXME: exception
+                return -1;
+            }
+            result *= radix;
+            if (result < limit + digit) {
+                //FIXME: exception
+                return -1;
+            }
+            result -= digit;
+        }
+    } else {
+        //FIXME: exception
+        return -1;
+    }
+    return negative ? result : -result;
 }
 
 /**
