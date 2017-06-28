@@ -288,34 +288,34 @@ TEST (JavaLang, FloatCharValue) {
 
 }
 
-// TODO waiting for java.lang.string
-//TEST (JavaLang, FloatStringValue) {
-//    // Create variables to test Float::StringValue.
-//    Float variableFloatStringValue ;
-//    string expectedFloatStringValueResult;
-//    string actualFloatStringValueResult;
-//
-//    // Test value 0 .
-//    variableFloatStringValue = 0.0;
-//    expectedFloatStringValueResult = "0";
-//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-//    free(actualFloatStringValueResult);
-//
-//    // Test positive value  .
-//    variableFloatStringValue = 1302.13;
-//    expectedFloatStringValueResult = "1302.13";
-//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-//    free(actualFloatStringValueResult);
-//
-//    // Test negative value  .
-//    variableFloatStringValue = -1302.13;
-//    expectedFloatStringValueResult = "-1302.13";
-//    actualFloatStringValueResult = variableFloatStringValue.stringValue();
-//    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
-//    free(actualFloatStringValueResult);
-//}
+
+TEST (JavaLang, FloatStringValue) {
+    // Create variables to test Float::StringValue.
+    Float variableFloatStringValue ;
+    string expectedFloatStringValueResult;
+    string actualFloatStringValueResult;
+
+    // Test value 0 .
+    variableFloatStringValue = 0.0;
+    expectedFloatStringValueResult = "0";
+    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+    free(actualFloatStringValueResult);
+
+    // Test positive value  .
+    variableFloatStringValue = 1302.13;
+    expectedFloatStringValueResult = "1302.13";
+    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+    free(actualFloatStringValueResult);
+
+    // Test negative value  .
+    variableFloatStringValue = -1302.13;
+    expectedFloatStringValueResult = "-1302.13";
+    actualFloatStringValueResult = variableFloatStringValue.stringValue();
+    ASSERT_STR(expectedFloatStringValueResult, actualFloatStringValueResult);
+    free(actualFloatStringValueResult);
+}
 
 //TEST (JavaLang, FloatShortValue) {
 //    // Input different values of type int to compare to the result of Float::shortValue
