@@ -289,31 +289,31 @@ TEST (JavaLang, FloatToString) {
 
 }
 
-//TEST (JavaLang, FloatCharValue) {
-//    // Create variables to test Float::charValue.
-//    Float variableFloatCharValue ;
-//    char expectedFloatCharValueResult;
-//    char actualFloatCharValueResult;
-//
-//    // Test value 0 .
-//    variableFloatCharValue = 0.0;
-//    expectedFloatCharValueResult = '0';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test positive value  .
-//    variableFloatCharValue = 1302.13;
-//    expectedFloatCharValueResult = '1';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test negative value  .
-//    variableFloatCharValue = -1302.13;
-//    expectedFloatCharValueResult = '-';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//}
+TEST (JavaLang, FloatCharValue) {
+    // Create variables to test Float::charValue.
+    Float variableFloatCharValue ;
+    char expectedFloatCharValueResult;
+    char actualFloatCharValueResult;
+
+    // Test value 0 .
+    variableFloatCharValue = 0.0;
+    expectedFloatCharValueResult = '0';
+    actualFloatCharValueResult = variableFloatCharValue.charValue();
+    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
+
+    // Test positive value  .
+    variableFloatCharValue = 1302.13;
+    expectedFloatCharValueResult = '1';
+    actualFloatCharValueResult = variableFloatCharValue.charValue();
+    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
+
+    // Test negative value  .
+    variableFloatCharValue = -1302.13;
+    expectedFloatCharValueResult = '-';
+    actualFloatCharValueResult = variableFloatCharValue.charValue();
+    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
+
+}
 
 //TEST (JavaLang, FloatStringValue) {
 //    // Input different values of type int to compare to the result of Float::stringValue
