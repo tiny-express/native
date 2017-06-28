@@ -55,6 +55,7 @@ namespace Java {
 			
 			static Long parseLong(String target);
 			static Long parseLong(String target, int radix);
+            static Long decode(String nm);
 
 		public:
 			Long operator+(const Long &target) const;

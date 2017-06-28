@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <exception>
 #include "Long.hpp"
 #include "../Character/Character.hpp"
 
@@ -57,6 +58,60 @@ Long::Long(const Long &longNumber) {
 }
 
 Long::~Long() {
+}
+
+/**
+ * Decode a long value in a string
+ * Just support for 0x (16) this time
+ * @param target
+ * @return
+ */
+Long Long::decode(String target) {
+    //FIXME: @tucao implement correct this function after finish UUID.fromString
+
+    int radix = 10;
+    int index = 0;
+    boolean negative = false;
+    Long result;
+
+    if (target.length() == 0) {
+        //FIXME: exception
+        return -1;
+    }
+
+    char firstChar = target.charAt(0);
+    // Handle sign, if present
+    if (firstChar == '-') {
+        negative = true;
+        index++;
+    } else if (firstChar == '+')
+        index++;
+
+    // Handle radix specifier, if present
+    if (target.startsWith("0x", index) || target.startsWith("0X", index)) {
+        index += 2;
+        radix = 16;
+    }
+    else if (target.startsWith("#", index)) {
+        index ++;
+        radix = 16;
+    }
+    else if (target.startsWith("0", index) && target.length() > 1 + index) {
+        index ++;
+        radix = 8;
+    }
+
+    if (target.startsWith("-", index) || target.startsWith("+", index)) {
+        //FIXME: exception
+        return -1;
+    }
+
+    result = Long::parseLong(target.subString(index), radix);
+    if (negative == true) {
+        result = -result.longValue();
+    }
+
+    return result;
 }
 
 /**

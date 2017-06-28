@@ -120,5 +120,19 @@ TEST (JavaLang, LongParseLong) {
 
 	expectedResult = -1;
 	ASSERT_EQUAL(expectedResult, result.longValue());
+}
 
+TEST (JavaLang, LongDecode) {
+	// Given valid numberString to test decode value
+	String validNumberString = "0x1b";
+	Long result = Long::decode(validNumberString);
+
+	long expectedResult = 27;
+	ASSERT_EQUAL(expectedResult, result.longValue());
+
+	String invalidNumbeString = "0x23xx";
+	result = Long::decode(invalidNumbeString);
+
+	expectedResult = -1;
+	ASSERT_EQUAL(expectedResult, result.longValue());
 }
