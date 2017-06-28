@@ -288,42 +288,31 @@ TEST (JavaLang, FloatToString) {
     free(actualFloatToStringResult);
 
 }
-//
+
 //TEST (JavaLang, FloatCharValue) {
-//    // Create variables to test Float::toString.
+//    // Create variables to test Float::charValue.
 //    Float variableFloatCharValue ;
-//    string expectedFloatCharValueResult;
-//    string actualFloatCharValueResult;
+//    char expectedFloatCharValueResult;
+//    char actualFloatCharValueResult;
 //
+//    // Test value 0 .
+//    variableFloatCharValue = 0.0;
+//    expectedFloatCharValueResult = '0';
+//    actualFloatCharValueResult = variableFloatCharValue.charValue();
+//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
 //
+//    // Test positive value  .
+//    variableFloatCharValue = 1302.13;
+//    expectedFloatCharValueResult = '1';
+//    actualFloatCharValueResult = variableFloatCharValue.charValue();
+//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
 //
-//    // Input different values of type int to compare to the result of Float::charValue
-//    Float zeroFloat = 0;
-//    Float oneFloat = 1;
-//    Float positiveFloat = 10;
-//    Float maxFloat = 2147483647;
-//    Float minFloat = -2147483647;
+//    // Test negative value  .
+//    variableFloatCharValue = -1302.13;
+//    expectedFloatCharValueResult = '-';
+//    actualFloatCharValueResult = variableFloatCharValue.charValue();
+//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
 //
-//    // Make a comparison between expected result and the actual result
-//    char expect = '0';
-//    char result = zeroFloat.charValue();
-//    ASSERT_EQUAL(expect, result);
-//    // Make a comparison between expected result and the actual result
-//    expect = '1';
-//    result = oneFloat.charValue();
-//    ASSERT_EQUAL(expect, result);
-//    // Make a comparison between expected result and the actual result
-//    expect = '1';
-//    result = positiveFloat.charValue();
-//    ASSERT_EQUAL(expect, result);
-//    // Make a comparison between expected result and the actual result
-//    expect = '2';
-//    result = maxFloat.charValue();
-//    ASSERT_EQUAL(expect, result);
-//    // Make a comparison between expected result and the actual result
-//    expect = '-';
-//    result = minFloat.charValue();
-//    ASSERT_EQUAL(expect, result);
 //}
 
 //TEST (JavaLang, FloatStringValue) {

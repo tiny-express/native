@@ -28,6 +28,8 @@
 
 using namespace Java::Lang;
 
+#define string char*
+
 /**
  * Float initialization
  *
@@ -74,7 +76,11 @@ float Float::floatValue() const {
  * @return char
  */
 char Float::charValue() const {
-	return string_to_char(string_from_int(this->original));
+    string stringFromIntResult = string_from_int(this->original);
+    char floatCharValueResult = string_to_char(stringFromIntResult);
+    free(stringFromIntResult);
+	return floatCharValueResult;
+
 }
 
 /**
