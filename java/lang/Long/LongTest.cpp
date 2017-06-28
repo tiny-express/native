@@ -104,10 +104,35 @@ TEST (JavaLang, LongOperator) {
 }
 
 TEST (JavaLang, LongParseLong) {
-	#ifdef __APPLE__
-		return;
-	#endif
 	// Given value for Long constructor and assign value - Return long
 	Long validLongPointer = Long::parseLong("6");
 	ASSERT_EQUAL(6, validLongPointer.longValue());
+
+    // Given valid string to test parseLong with radix 16
+    String validNumberString = "1b";
+    Long result = Long::parseLong(validNumberString, 16);
+
+    long expectedResult = 27;
+    ASSERT_EQUAL(expectedResult, result.longValue());
+
+	String invalidNumbeString = "122q3";
+	result = Long::parseLong(invalidNumbeString, 16);
+
+	expectedResult = -1;
+	ASSERT_EQUAL(expectedResult, result.longValue());
+}
+
+TEST (JavaLang, LongDecode) {
+	// Given valid numberString to test decode value
+	String validNumberString = "0x1b";
+	Long result = Long::decode(validNumberString);
+
+	long expectedResult = 27;
+	ASSERT_EQUAL(expectedResult, result.longValue());
+
+	String invalidNumbeString = "0x23xx";
+	result = Long::decode(invalidNumbeString);
+
+	expectedResult = -1;
+	ASSERT_EQUAL(expectedResult, result.longValue());
 }

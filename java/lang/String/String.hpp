@@ -135,6 +135,15 @@ namespace Java {
 				result += target2;
 				return result;
 			};
+
+            //FIXME: Temporary
+            String subString(int fromIndex) {
+                if (fromIndex < 0 || fromIndex >= this->length()) {
+                    return "";
+                }
+
+                return &(this->original[fromIndex]);
+            }
 		};
 	}
 }

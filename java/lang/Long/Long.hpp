@@ -42,6 +42,7 @@ namespace Java {
 			Long(long original);
 			Long(const Long &longnumber);
 			~Long();
+
 		public:
 			char charValue() const;
 			string stringValue() const;
@@ -53,7 +54,9 @@ namespace Java {
 			string toString() const;
 			
 			static Long parseLong(String target);
-		
+			static Long parseLong(String target, int radix);
+            static Long decode(String nm);
+
 		public:
 			Long operator+(const Long &target) const;
 			Long operator-(const Long &target) const;
