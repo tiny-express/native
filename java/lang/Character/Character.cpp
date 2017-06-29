@@ -24,6 +24,36 @@
 using namespace Java::Lang;
 
 /**
+ * The minimum value of a Unicode high-surrogate code unit
+ * in the UTF-16 encoding, constant {@code '\u005CuD800'}.
+ */
+static wchar_t MIN_HIGH_SURROGATE = '\u000D800';
+
+
+/**
+ * The maximum value of a Unicode high-surrogate code unit
+ * in the UTF-16 encoding, constant {@code '\u005CuDBFF'}.
+ */
+static wchar_t MAX_HIGH_SURROGATE = '\u000DBFF';
+
+/**
+ * The minimum value of a Unicode low-surrogate code unit
+ * in the UTF-16 encoding, constant {@code '\u005CuDC00'}.
+ */
+static wchar_t MIN_LOW_SURROGATE  = '\u000DC00';
+
+/**
+ * The maximum value of a Unicode low-surrogate code unit
+ * in the UTF-16 encoding, constant {@code '\u005CuDFFF'}.
+ */
+static wchar_t MAX_LOW_SURROGATE  = '\u000DFFF';
+
+/**
+* The minimum value of a Unicode supplementary code point</a>, constant {@code U+10000}.
+*/
+static int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
+
+/**
  * Character initialization
  *
  * @param original
@@ -71,12 +101,103 @@ int Character::charCount(int codePoint) {
     return 1;
 }
 
-int Character::codePointAt(Array<char> a, int index) {
-    if(index < 0 || index > a.length) {
-        return -1;
-    }
-    return (int) a[index];
+/**
+ * Determines if the given {@code char} value is a
+ * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+ * Unicode high-surrogate code unit</a>
+ * (also known as <i>leading-surrogate code unit</i>).
+ *
+ * <p>Such values do not represent characters by themselves,
+ * but are used in the representation of
+ * <a href="#supplementary">supplementary characters</a>
+ * in the UTF-16 encoding.
+ *
+ * @param  ch the {@code char} value to be tested.
+ * @return {@code true} if the {@code char} value is between
+ *         {@link #MIN_HIGH_SURROGATE} and
+ *         {@link #MAX_HIGH_SURROGATE} inclusive;
+ *         {@code false} otherwise.
+ * @see    Character::isLowSurrogate(char)
+ * @see    Character.UnicodeBlock#of(int)
+ */
+
+boolean Character::isHighSurrogate(wchar_t ch) {
+    // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
+    return (ch >= MIN_HIGH_SURROGATE) && (ch < (MAX_HIGH_SURROGATE + 1));
 }
+
+/**
+ * Determines if the given {@code char} value is a
+ * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+ * Unicode low-surrogate code unit</a>
+ * (also known as <i>trailing-surrogate code unit</i>).
+ *
+ * <p>Such values do not represent characters by themselves,
+ * but are used in the representation of
+ * <a href="#supplementary">supplementary characters</a>
+ * in the UTF-16 encoding.
+ *
+ * @param  ch the {@code char} value to be tested.
+ * @return {@code true} if the {@code char} value is between
+ *         {@link #MIN_LOW_SURROGATE} and
+ *         {@link #MAX_LOW_SURROGATE} inclusive;
+ *         {@code false} otherwise.
+ * @see    Character#isHighSurrogate(char)
+ */
+
+boolean Character::isLowSurrogate(wchar_t ch) {
+    return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
+}
+
+/**
+ * Converts the specified surrogate pair to its supplementary code
+ * point value. This method does not validate the specified
+ * surrogate pair. The caller must validate it using {@link
+ * #isSurrogatePair(char, char) isSurrogatePair} if necessary.
+ *
+ * @param  high the high-surrogate code unit
+ * @param  low the low-surrogate code unit
+ * @return the supplementary code point composed from the
+ *         specified surrogate pair.
+ */
+
+int Character::toCodePoint(wchar_t high, wchar_t low) {
+    return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT - (MIN_HIGH_SURROGATE << 10) - MIN_LOW_SURROGATE);
+}
+
+/**
+ * Returns the code point at the given index of the
+ * {@code CharSequence}. If the {@code char} value at
+ * the given index in the {@code CharSequence} is in the
+ * high-surrogate range, the following index is less than the
+ * length of the {@code CharSequence}, and the
+ * {@code char} value at the following index is in the
+ * low-surrogate range, then the supplementary code point
+ * corresponding to this surrogate pair is returned. Otherwise,
+ * the {@code char} value at the given index is returned.
+ *
+ * @param seq a sequence of {@code char} values (Unicode code
+ * units)
+ * @param index the index to the {@code char} values (Unicode
+ * code units) in {@code seq} to be converted
+ * @return the Unicode code point at the given index
+ * @exception NullPointerException if {@code seq} is null.
+ * @exception IndexOutOfBoundsException if the value
+ * {@code index} is negative or not less than
+ * {@link CharSequence#length() seq.length()}.
+ */
+
+// TODO check leak error
+//int Character::codePointAt(Array<char> seq, int index) {
+//    char c1 = seq[index];
+//    if (isHighSurrogate(c1) && ++index < seq.length) {
+//        char c2 = seq[index];
+//        if (isLowSurrogate(c2)) {
+//            return toCodePoint(c1, c2);
+//        }
+//    }
+//    return c1;
+//}
 
 
 int Character::codePointBefore(Array<char> a, int index) {
@@ -232,9 +353,7 @@ boolean Character::isDigit(int codePoint) {
 
 }
 
-boolean Character::isHighSurrogate(char ch) {
 
-}
 
 boolean Character::isIdentifierIgnorable(char ch) {
 
@@ -296,9 +415,7 @@ boolean Character::isLowerCase(int codePoint) {
 
 }
 
-boolean Character::isLowSurrogate(char ch) {
 
-}
 
 boolean Character::isMirrored(char ch) {
 
@@ -393,10 +510,6 @@ Array<char> Character::toChars(int codePoint) {
 }
 
 int Character::toChars(int codePoint, Array<char> dst, int dstIndex) {
-
-}
-
-int Character::toCodePoint(char high, char low) {
 
 }
 

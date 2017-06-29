@@ -265,7 +265,7 @@ namespace Java {
 			 * @param ch
 			 * @return boolean
 			 */
-			static boolean isHighSurrogate(char ch);
+			static boolean isHighSurrogate(wchar_t ch);
 
 			/**
 			 * Determines if the specified character should be regarded as an ignorable character in a Java identifier or a Unicode identifier.
@@ -378,7 +378,7 @@ namespace Java {
 			 * @param ch
 			 * @return boolean
 			 */
-			static boolean isLowSurrogate(char ch);
+			static boolean isLowSurrogate(wchar_t ch);
 
 			/**
 			 * Determines whether the character is mirrored according to the Unicode specification.
@@ -562,7 +562,7 @@ namespace Java {
 			 * @param low
 			 * @return int
 			 */
-			static int toCodePoint(char high, char low);
+			static int toCodePoint(wchar_t high, wchar_t low);
 
 			/**
 			 * Converts the character argument to lowercase using case mapping information from the UnicodeData file.
