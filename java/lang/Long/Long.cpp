@@ -210,7 +210,7 @@ String Long::toHexString(long target) {
  * @param len
  * @return int
  */
-int Long::formatUnsignedLong(long val, int shift, Array<char> buf, int offset, int len) {
+int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
     int charPos = len;
     int radix = 1 << shift;
     int mask = radix - 1;
@@ -273,8 +273,8 @@ String Long::toUnsignedString0(long val, int shift) {
     }
 
     formatUnsignedLong(val, shift, buff, 0, chars);
-    String result = buff;
 
+    String result = String::fromCharArray(buff);
     return result;
 }
 

@@ -58,7 +58,7 @@ namespace Java {
             static Long decode(String nm);
 			static String toHexString(long target);
 			static int numberOfLeadingZeros(long target);
-			static int formatUnsignedLong(long val, int shift, Array<char> buf, int offset, int len);
+			static int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
 
 		private:
 			static String toUnsignedString0(long val, int shift);
