@@ -11,13 +11,41 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, CharacterConstructor) {
-    Character nullCharacter;
-    ASSERT_TRUE(nullCharacter.charValue() == '\0');
+    // Create variable to test on CharacterConstructor
+    Character variableTest;
+
+    // Test NULL value
+    ASSERT_TRUE(variableTest.charValue() == '\0');
+
+    // Test valid case
+    variableTest = 'M';
+    ASSERT_TRUE(variableTest.charValue() == 'M');
+
+    // Test invalid case
+    variableTest= 'M';
+    ASSERT_FALSE(variableTest.charValue() == 'm');
 }
 
 TEST (JavaLang, CharacterCharCount) {
-    Character testCharacter;
-    ASSERT_EQUAL(2, testCharacter.charCount('p'));
+    // Create variable to test on CharacterCharCount
+    Character variableTest;
+    int expectedRes;
+
+    // Test LATIN CAPITAL LETTER A :  UTF-32 (hex)	0x00000041 (0041)
+    expectedRes =1;
+    ASSERT_EQUAL(expectedRes, variableTest.charCount(0x00000041));
+
+    // Test Unicode Han Data 香 : UTF-32 (hex)	0x00009999 (9999)
+    expectedRes =1;
+    ASSERT_EQUAL(expectedRes, variableTest.charCount(0x00009999));
+
+    // Test LINEAR B SYLLABLE B008 A : UTF-32 (hex)	0x00010000 (10000)
+    expectedRes =2;
+    ASSERT_EQUAL(expectedRes, variableTest.charCount(0x00010000));
+
+    // Test AEGEAN WORD SEPARATOR LINE : UTF-32 (hex)	0x00010100 (10100)
+    expectedRes =2;
+    ASSERT_EQUAL(expectedRes, variableTest.charCount(0x00010100));
 }
 
 TEST (JavaLang, CharacterCharValue) {

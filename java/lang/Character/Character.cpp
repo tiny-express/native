@@ -23,10 +23,20 @@
 
 using namespace Java::Lang;
 
+/**
+ * Character initialization
+ *
+ * @param original
+ */
 Character::Character() {
     this->original = '\0';
 }
 
+/**
+ * Character initialization
+ *
+ * @param original
+ */
 Character::Character(char original) {
     this ->original = original;
 }
@@ -34,17 +44,31 @@ Character::Character(char original) {
 Character::~Character() {
 }
 
+/**
+ * Returns the value of this {@code Character} object.
+ * @return  the primitive {@code char} value represented by
+ *          this object.
+ */
 char Character::charValue() {
     return this->original;
 }
 
+/**
+ * Determines the number of {@code char} values needed to
+ * represent the specified character (Unicode code point). If the
+ * specified character is equal to or greater than 0x10000, then
+ * the method returns 2. Otherwise, the method returns 1.
+ *
+ * @param   codePoint the character (Unicode code point) to be tested.
+ * @return  2 if the character is a valid supplementary character; 1 otherwise.
+ */
 int Character::charCount(int codePoint) {
-    if(codePoint >= 0 && codePoint <= 255) {
+    // The minimum value of Unicode supplementary code point, constant {@code U+10000}.
+    int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
+    if(codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
         return 2;
     }
-    else {
-        return 1;
-    }
+    return 1;
 }
 
 int Character::codePointAt(Array<char> a, int index) {
@@ -53,6 +77,7 @@ int Character::codePointAt(Array<char> a, int index) {
     }
     return (int) a[index];
 }
+
 
 int Character::codePointBefore(Array<char> a, int index) {
     if(index < 1 || index > a.length) {
