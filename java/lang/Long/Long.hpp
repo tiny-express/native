@@ -56,6 +56,12 @@ namespace Java {
 			static Long parseLong(String target);
 			static Long parseLong(String target, int radix);
             static Long decode(String nm);
+			static String toHexString(long target);
+			static int numberOfLeadingZeros(long target);
+			static int formatUnsignedLong(long val, int shift, Array<char> buf, int offset, int len);
+
+		private:
+			static String toUnsignedString0(long val, int shift);
 
 		public:
 			Long operator+(const Long &target) const;

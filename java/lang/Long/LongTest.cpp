@@ -136,3 +136,33 @@ TEST (JavaLang, LongDecode) {
 	expectedResult = -1;
 	ASSERT_EQUAL(expectedResult, result.longValue());
 }
+
+TEST (JavaLang, LongNumberOfLeadingZeros) {
+	// Given valid long number to test leading - this test case was confirmed by java source code
+	long validValue = 4053239666997989821L;
+	int result = Long::numberOfLeadingZeros(validValue);
+
+	int expectedResult = 2;
+	ASSERT_EQUAL(expectedResult, result);
+
+	validValue = 40532396L;
+	result = Long::numberOfLeadingZeros(validValue);
+
+	expectedResult = 38;
+	ASSERT_EQUAL(expectedResult, result);
+}
+
+TEST (JavaLang, LongToHexString) {
+	// Given valid long value to test toHexString() - this test case was confirm by java source code
+	long validValue = 4053239666997989821;
+	String result = Long::toHexString(validValue);
+
+	String expectedString = "384000008cf011bd";
+	ASSERT_STR(expectedString.toString(), result.toString());
+
+	validValue = -5603022497796657139;
+	result = Long::toHexString(validValue);
+
+	expectedString = "b23e10b96e4ef00d";
+	ASSERT_STR(expectedString.toString(), result.toString());
+}

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <exception>
 #include "Long.hpp"
+#include "../Math/Math.hpp"
 #include "../Character/Character.hpp"
 
 using namespace Java::Lang;
@@ -190,6 +190,92 @@ Long Long::parseLong(String target, int radix) {
         return -1;
     }
     return negative ? result : -result;
+}
+
+/**
+ * Long to hex string
+ * @param target
+ * @return String
+ */
+String Long::toHexString(long target) {
+    return toUnsignedString0(target, 4);
+}
+
+/**
+ * Format unsigned long
+ * @param val
+ * @param shift
+ * @param buf
+ * @param offset
+ * @param len
+ * @return int
+ */
+int Long::formatUnsignedLong(long val, int shift, Array<char> buf, int offset, int len) {
+    int charPos = len;
+    int radix = 1 << shift;
+    int mask = radix - 1;
+
+    //FIXME: move this to Integer.digits
+    static char digits[] = {
+            '0' , '1' , '2' , '3' , '4' , '5' ,
+            '6' , '7' , '8' , '9' , 'a' , 'b' ,
+            'c' , 'd' , 'e' , 'f' , 'g' , 'h' ,
+            'i' , 'j' , 'k' , 'l' , 'm' , 'n' ,
+            'o' , 'p' , 'q' , 'r' , 's' , 't' ,
+            'u' , 'v' , 'w' , 'x' , 'y' , 'z'
+    };
+
+    do {
+        buf[offset + --charPos] = digits[((int) val) & mask];
+        val >>= shift;
+    } while (val != 0 && charPos > 0);
+
+    return charPos;
+}
+
+
+/**
+ * Returns the number of zero bits
+ * @param target
+ * @return int
+ */
+int Long::numberOfLeadingZeros(long target) {
+    // HD, Figure 5-6
+    if (target == 0)
+        return 64;
+    int n = 1;
+    long x = (target >> 32);
+    if (x == 0) { n += 32; x = (int)target; }
+    if (x >> 16 == 0) { n += 16; x <<= 16; }
+    if (x >> 24 == 0) { n +=  8; x <<=  8; }
+    if (x >> 28 == 0) { n +=  4; x <<=  4; }
+    if (x >> 30 == 0) { n +=  2; x <<=  2; }
+    n -= x >> 31;
+    return n;
+}
+
+/**
+ * Format a long (treated as unsigned) into a String.
+ * @param val
+ * @param shift
+ * @return String
+ */
+String Long::toUnsignedString0(long val, int shift) {
+    // assert shift > 0 && shift <=5 : "Illegal shift value";
+    static int SIZE = 64;
+
+    int mag = SIZE - Long::numberOfLeadingZeros(val);
+    int chars = Math::max(((mag + (shift - 1)) / shift), 1);
+
+    Array<char> buff;
+    for (int i = 0; i < chars; ++i) { //Set empty array
+        buff.push('0');
+    }
+
+    formatUnsignedLong(val, shift, buff, 0, chars);
+    String result = buff;
+
+    return result;
 }
 
 /**
