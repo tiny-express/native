@@ -94,7 +94,7 @@ namespace Java {
 			 * Returns the value of this Long as a byte.
 			 * @return byte
 			 */
-			byte byteValue() const ;
+			int byteValue() const ;
 
 			/**
 			 * Compares two long values numerically.
@@ -125,11 +125,11 @@ namespace Java {
 			double doubleValue() const;
 
 			/**
-			 * Compares this object to the specified object.
-			 * @param Object obj
+			 * Compares this object to the specified Long.
+			 * @param Long target
 			 * @return boolean
 			 */
-			boolean	equals(Object obj);
+			boolean	equals(Long target);
 
 			/**
 			 * Returns the value of this Long as a float.
@@ -305,14 +305,6 @@ namespace Java {
 			 * @return String
 			 */
 			static String toString(long i);
-
-			/**
-			 * Returns a string representation of the first argument in the radix specified by the second argument.
-			 * @param int i
-			 * @param int radix
-			 * @return String
-			 */
-			static String toString(long i, int radix);
 
 			/**
 			 * Returns a Long instance representing the specified long value.

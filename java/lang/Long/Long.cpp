@@ -78,15 +78,22 @@ Long::~Long() {
 }
 
 int Long::bitCount(long i) {
-    return -1;
+    i = i - ((i >> 1) & 0x5555555555555555L);
+    i = (i & 0x3333333333333333L) + ((i>> 2) & 0x3333333333333333L);
+    i = (i + (i >> 4)) & 0x0f0f0f0f0f0f0f0fL;
+    i = i + (i >> 8);
+    i = i + (i >> 16);
+    i = i + (i >> 32);
+    return (int)i & 0x7f;
 }
 
 /**
  * Returns the value of this Long as a byte.
  * @return byte
  */
-byte Long::byteValue() const {
-    return 0;
+int Long::byteValue() const {
+    //FIXME: please change `byte` to `char` as detail of java instead of `unsigned char`
+    return (char)this->original;;
 }
 
 /**
@@ -96,7 +103,13 @@ byte Long::byteValue() const {
  * @return int
  */
 int Long::compare(long x, long y) {
-    return -1;
+    if (x < y) {
+        return -1;
+    }
+    if (x == y) {
+        return 0;
+    }
+    return 1;
 }
 
 /**
@@ -105,7 +118,8 @@ int Long::compare(long x, long y) {
  * @return int
  */
 int	Long::compareTo(Long anotherLong) {
-    return -1;
+    int result = compare(this->original, anotherLong.original);
+    return result;
 }
 
 /**
@@ -114,8 +128,6 @@ int	Long::compareTo(Long anotherLong) {
  * @return Long
  */
 Long Long::decode(String target) {
-    //FIXME: @tucao implement correct this function after finish UUID.fromString
-
     int radix = 10;
     int index = 0;
     boolean negative = false;
@@ -131,8 +143,9 @@ Long Long::decode(String target) {
     if (firstChar == '-') {
         negative = true;
         index++;
-    } else if (firstChar == '+')
+    } else if (firstChar == '+') {
         index++;
+    }
 
     // Handle radix specifier, if present
     if (target.startsWith("0x", index) || target.startsWith("0X", index)) {
@@ -166,15 +179,18 @@ Long Long::decode(String target) {
  * @return double
  */
 double Long::doubleValue() const {
-    return 0;
+    return (double)this->original;
 }
 
 /**
- * Compares this object to the specified object.
- * @param Object obj
+ * Compares this object to the specified Long.
+ * @param Long target
  * @return boolean
  */
-boolean	Long::equals(Object obj) {
+boolean	Long::equals(Long target) {
+    if (this->original == target.original) {
+        return true;
+    }
     return false;
 }
 
@@ -183,7 +199,7 @@ boolean	Long::equals(Object obj) {
  * @return float
  */
 float Long::floatValue() const {
-    return 0;
+    return (float)this->original;
 }
 
 /**
@@ -192,7 +208,8 @@ float Long::floatValue() const {
  * @return Long
  */
 Long Long::getLong(String nm) {
-    return Long();
+    Long result = decode(nm);
+    return result;
 }
 
 /**
@@ -220,7 +237,7 @@ Long Long::getLong(String nm, Long val) {
  * @return int
  */
 int	Long::hashCode() {
-    return -1;
+    return (int)(this->original ^ (this->original >> 32));
 }
 
 /**
@@ -230,7 +247,13 @@ int	Long::hashCode() {
  * @return long
  */
 long Long::highestOneBit(long i) {
-    return -1;
+    i |= (i >>  1);
+    i |= (i >>  2);
+    i |= (i >>  4);
+    i |= (i >>  8);
+    i |= (i >> 16);
+    i |= (i >> 32);
+    return (i - (i >> 1));
 }
 
 /**
@@ -238,7 +261,7 @@ long Long::highestOneBit(long i) {
  * @return int
  */
 int	Long::intValue() const {
-    return -1;
+    return (int)this->original;
 }
 
 /**
@@ -246,7 +269,7 @@ int	Long::intValue() const {
  * @return long
  */
 long Long::longValue() const {
-    return -1;
+    return this->original;
 }
 
 /**
@@ -256,7 +279,7 @@ long Long::longValue() const {
  * @return long
  */
 long Long::lowestOneBit(long i) {
-    return -1;
+    return (i & -i);
 }
 
 /**
@@ -266,9 +289,10 @@ long Long::lowestOneBit(long i) {
  * @return int
  */
 int Long::numberOfLeadingZeros(long i) {
-    // HD, Figure 5-6
-    if (i == 0)
+    if (i == 0) {
         return 64;
+    }
+
     int n = 1;
     long x = (i >> 32);
     if (x == 0) { n += 32; x = (int)i; }
@@ -287,7 +311,18 @@ int Long::numberOfLeadingZeros(long i) {
  * @return int
  */
 int Long::numberOfTrailingZeros(long i) {
-    return -1;
+    long x, y;
+    if (i == 0) {
+        return 64;
+    }
+
+    int n = 63;
+    y = (int)i; if (y != 0) { n = n -32; x = y; } else {  x = (int)(i>>32); }
+    y = x <<16; if (y != 0) { n = n -16; x = y; }
+    y = x << 8; if (y != 0) { n = n - 8; x = y; }
+    y = x << 4; if (y != 0) { n = n - 4; x = y; }
+    y = x << 2; if (y != 0) { n = n - 2; x = y; }
+    return (int)(n - ((x << 1) >> 31));
 }
 
 /**
@@ -296,7 +331,7 @@ int Long::numberOfTrailingZeros(long i) {
  * @return long
  */
 long Long::parseLong(String s) {
-    long result = string_to_long(s.toString());
+    long result = parseLong(s, 10);
     return result;
 }
 
@@ -307,11 +342,7 @@ long Long::parseLong(String s) {
  * @return long
  */
 long Long::parseLong(String s, int radix) {
-    //FIXME: @tucao will correct this with radix after finish radix 16 for UUID
     //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
-    if (radix != 16) {
-        return -1;
-    }
 
     static long maxValue = 0x7fffffffffffffffL;
     static long minValue = 0x8000000000000000L;
@@ -341,6 +372,7 @@ long Long::parseLong(String s, int radix) {
 
             index++;
         }
+
         multmin = limit / radix;
         while (index < length) {
             // Accumulating negatively avoids surprises near MAX_VALUE
@@ -374,7 +406,13 @@ long Long::parseLong(String s, int radix) {
  * @return long
  */
 long Long::reverse(long i) {
-    return -1;
+    i = (i & 0x5555555555555555L) << 1 | (i >> 1) & 0x5555555555555555L;
+    i = (i & 0x3333333333333333L) << 2 | (i >> 2) & 0x3333333333333333L;
+    i = (i & 0x0f0f0f0f0f0f0f0fL) << 4 | (i >> 4) & 0x0f0f0f0f0f0f0f0fL;
+    i = (i & 0x00ff00ff00ff00ffL) << 8 | (i >> 8) & 0x00ff00ff00ff00ffL;
+    i = (i << 48) | ((i & 0xffff0000L) << 16) |
+        ((i >> 16) & 0xffff0000L) | (i >> 48);
+    return i;
 }
 
 /**
@@ -384,7 +422,8 @@ long Long::reverse(long i) {
  * @return long
  */
 long Long::reverseBytes(long i) {
-    return -1;
+    i = (i & 0x00ff00ff00ff00ffL) << 8 | (i >> 8) & 0x00ff00ff00ff00ffL;
+    return ((i << 48) | ((i & 0xffff0000L) << 16) | ((i >> 16) & 0xffff0000L) | (i >> 48));
 }
 
 /**
@@ -395,7 +434,7 @@ long Long::reverseBytes(long i) {
  * @return long
  */
 long Long::rotateLeft(long i, int distance) {
-    return -1;
+    return ((i << distance) | (i >> -distance));
 }
 
 /**
@@ -406,7 +445,7 @@ long Long::rotateLeft(long i, int distance) {
  * @return long
  */
 long Long::rotateRight(long i, int distance) {
-    return -1;
+    return ((i >> distance) | (i << -distance));
 }
 
 /**
@@ -414,7 +453,7 @@ long Long::rotateRight(long i, int distance) {
  * @return short
  */
 short Long::shortValue() const {
-    return -1;
+    return (short)this->original;
 }
 
 /**
@@ -423,7 +462,7 @@ short Long::shortValue() const {
  * @return int
  */
 int Long::signum(long i) {
-    return -1;
+    return (int) ((i >> 63) | (-i >> 63));
 }
 
 /**
@@ -432,7 +471,8 @@ int Long::signum(long i) {
  * @return String
  */
 String Long::toBinaryString(long i) {
-    return String();
+    String result = toUnsignedString0(i, 1);
+    return result;
 }
 
 /**
@@ -441,7 +481,8 @@ String Long::toBinaryString(long i) {
  * @return String
  */
 String Long::toHexString(long i) {
-    return toUnsignedString0(i, 4);
+    String result = toUnsignedString0(i, 4);
+    return result;
 }
 
 /**
@@ -450,7 +491,8 @@ String Long::toHexString(long i) {
  * @return String
  */
 String Long::toOctalString(long i) {
-    return String();
+    String result = toUnsignedString0(i, 3);
+    return result;
 }
 
 /**
@@ -458,7 +500,8 @@ String Long::toOctalString(long i) {
  * @return String
  */
 String Long::toString() {
-    return string_from_long(this->original);
+    String result = toString(this->original);
+    return result;
 }
 
 /**
@@ -467,17 +510,8 @@ String Long::toString() {
  * @return String
  */
 String Long::toString(long i) {
-    return String();
-}
-
-/**
- * Returns a string representation of the first argument in the radix specified by the second argument.
- * @param int i
- * @param int radix
- * @return String
- */
-String Long::toString(long i, int radix) {
-    return String();
+    String result = string_from_long(i);
+    return result;
 }
 
 /**
@@ -486,7 +520,8 @@ String Long::toString(long i, int radix) {
  * @return Long
  */
 Long Long::valueOf(long l) {
-    return Long();
+    Long result = l;
+    return result;
 }
 
 /**
@@ -495,7 +530,8 @@ Long Long::valueOf(long l) {
  * @return Long
  */
 Long Long::valueOf(String s) {
-    return Long();
+    Long result = decode(s);
+    return result;
 }
 
 /**
@@ -506,17 +542,8 @@ Long Long::valueOf(String s) {
  * @return Long
  */
 Long Long::valueOf(String s, int radix) {
-    return Long();
-}
-
-/**
- * Format a long (treated as unsigned) into a String.
- * @param long val
- * @param int shift
- * @return String
- */
-String toUnsignedString0(long val, int shift) {
-    return String();
+    Long result = parseLong(s, radix);
+    return result;
 }
 
 /**
