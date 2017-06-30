@@ -62,6 +62,7 @@ TEST (JavaLang, LongBitCount) {
 }
 
 TEST (JavaLang, LongByteValue) {
+    // Given valid long value to test byteValue() based on java source code result
 	Long validValue = 393239259234023474L;
     int result = validValue.byteValue();
 
@@ -76,6 +77,7 @@ TEST (JavaLang, LongByteValue) {
 }
 
 TEST (JavaLang, LongCompare) {
+    // Given valid long value to test compare()
 	long validValue = 79473043431L;
 	long lessValue = 7947304343L;
 	long equalValue = 79473043431L;
@@ -95,6 +97,7 @@ TEST (JavaLang, LongCompare) {
 }
 
 TEST (JavaLang, LongCompareTo) {
+    // Given valid Long value to test compareTo()
 	Long validValue = 857503832954L;
 	Long lessValue = 23932827534L;
 	Long equalValue = 857503832954L;
@@ -190,6 +193,7 @@ TEST (JavaLang, LongParseLong) {
 }
 
 TEST (JavaLang, LongEquals) {
+    // Given valid Long value to test equals()
 	Long validValue = 1231372934234234L;
 	Long anotherValue = 2434234234234L;
 
@@ -199,6 +203,8 @@ TEST (JavaLang, LongEquals) {
 }
 
 TEST (JavaLang, LongGetLong) {
+    // Given valid hexString and decimalString to test getLong through those String
+    // The result is based on java code result
 	String hexString = "0x23";
 	String decimalString = "123";
 
@@ -227,7 +233,8 @@ TEST (JavaLang, LongDecode) {
 }
 
 TEST (JavaLang, LongNumberOfLeadingZeros) {
-	// Given valid long number to test leading - this test case was confirmed by java source code
+	// Given valid long number to test leading
+    // The result is based on java code result
 	long validValue = 4053239666997989821L;
 	int result = Long::numberOfLeadingZeros(validValue);
 
@@ -242,7 +249,8 @@ TEST (JavaLang, LongNumberOfLeadingZeros) {
 }
 
 TEST (JavaLang, LongToHexString) {
-	// Given valid long value to test toHexString() - this test case was confirm by java source code
+	// Given valid long value to test toHexString()
+    // The result is based on java code result
 	long validValue = 4053239666997989821;
 	String result = Long::toHexString(validValue);
 
