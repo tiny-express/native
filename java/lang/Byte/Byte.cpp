@@ -64,10 +64,10 @@ Bytes::~Bytes() {
  * @param target
  * @return Byte
  */
-// byte Bytes::parseByte(String target) {
-// 	byte result(string_to_byte(target.toString()));
-// 	return result;
-// }
+byte Bytes::parseByte(String target) {
+	byte result(string_to_int(target.toString()));
+	return result;
+}
 
 
 /**
@@ -103,7 +103,7 @@ short Bytes::shortValue() {
  * @return int
  */
 int Bytes::intValue() {
-	return (int)this->original;
+	return this->original;
 }
 
 /**

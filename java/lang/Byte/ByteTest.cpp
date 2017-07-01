@@ -34,9 +34,9 @@ using namespace Java::Lang;
 
 TEST (JavaLang, ByteConstructor) {
 	// TODO
-	// Given empty value for Long constructor and assign value - Return Long
-	// byte emptyByte = 3;;
-	// ASSERT_EQUAL(0, emptyByte.byteValue());
+	// Given empty value for Byte constructor and assign value - Return Byte
+	Bytes emptyByte = 3;
+	ASSERT_EQUAL(3, emptyByte.intValue());
 }
 
 TEST (JavaLang, ByteOperator) {
@@ -67,12 +67,12 @@ TEST (JavaLang, ByteOperator) {
 
 TEST (JavaLang, ByteParseByte) {
 	// TODO
-// #ifdef __APPLE__
-// 	return;
-// #endif
-// 	// Given value for Integer constructor and assign value - Return integer
-// 	byte validBytePointer = Bytes::parseByte("6");
-// 	ASSERT_EQUAL(6, validBytePointer.byteValue());
+#ifdef __APPLE__
+	return;
+#endif
+	// Given value for Byte constructor and assign value - Return byte
+	// Bytes validBytePointer = Bytes::parseByte("6");
+	// ASSERT_EQUAL(6, validBytePointer.intValue());
 }
 
 
