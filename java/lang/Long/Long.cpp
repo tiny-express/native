@@ -47,6 +47,7 @@ int Long::SIZE = 64;
 
 /**
  * Default constructor
+ *
  * @return
  */
 Long::Long() {
@@ -55,6 +56,7 @@ Long::Long() {
 
 /**
  * Create new instance with an long value
+ *
  * @param long value
  * @return Long
  */
@@ -64,6 +66,7 @@ Long::Long(long value) {
 
 /**
  * Create new instance with a copy of target
+ *
  * @param Long target
  * @return Long
  */
@@ -77,6 +80,13 @@ Long::Long(const Long &target) {
 Long::~Long() {
 }
 
+/**
+ * Returns the number of one-bits in the two's
+ * complement binary representation of the specified long value.
+ *
+ * @param long i
+ * @return int
+ */
 int Long::bitCount(long i) {
     i = i - ((i >> 1) & 0x5555555555555555L);
     i = (i & 0x3333333333333333L) + ((i>> 2) & 0x3333333333333333L);
@@ -89,6 +99,7 @@ int Long::bitCount(long i) {
 
 /**
  * Returns the value of this Long as a byte.
+ *
  * @return int
  */
 int Long::byteValue() {
@@ -98,6 +109,7 @@ int Long::byteValue() {
 
 /**
  * Compares two long values numerically.
+ *
  * @param long x
  * @param long y
  * @return int
@@ -114,6 +126,7 @@ int Long::compare(long x, long y) {
 
 /**
  * Compares two Long objects numerically.
+ *
  * @param Long anotherLong
  * @return int
  */
@@ -124,6 +137,7 @@ int	Long::compareTo(Long anotherLong) {
 
 /**
  * Decodes a String into a Long.
+ *
  * @param String nm
  * @return Long
  */
@@ -176,6 +190,7 @@ Long Long::decode(String target) {
 
 /**
  * Returns the value of this Long as a double.
+ *
  * @return double
  */
 double Long::doubleValue() const {
@@ -184,6 +199,7 @@ double Long::doubleValue() const {
 
 /**
  * Compares this object to the specified Long.
+ *
  * @param Long target
  * @return boolean
  */
@@ -196,6 +212,7 @@ boolean	Long::equals(Long target) {
 
 /**
  * Returns the value of this Long as a float.
+ *
  * @return float
  */
 float Long::floatValue() const {
@@ -204,6 +221,7 @@ float Long::floatValue() const {
 
 /**
  * Determines the long value of the system property with the specified name.
+ *
  * @param String nm
  * @return Long
  */
@@ -214,6 +232,7 @@ Long Long::getLong(String nm) {
 
 /**
  * Determines the long value of the system property with the specified name.
+ *
  * @param String nm
  * @param long val
  * @return Long
@@ -224,6 +243,7 @@ Long Long::getLong(String nm, long val) {
 
 /**
  * Returns the long value of the system property with the specified name.
+ *
  * @param String nm
  * @param Long val
  * @return Long
@@ -234,6 +254,7 @@ Long Long::getLong(String nm, Long val) {
 
 /**
  * Returns a hash code for this Long.
+ *
  * @return int
  */
 int	Long::hashCode() {
@@ -243,6 +264,7 @@ int	Long::hashCode() {
 /**
  * Returns a long value with at most a single one-bit, in the position of the highest-order ("leftmost")
  * one-bit in the specified long value.
+ *
  * @param long i
  * @return long
  */
@@ -258,6 +280,7 @@ long Long::highestOneBit(long i) {
 
 /**
  * Returns the value of this Long as an int.
+ *
  * @return int
  */
 int	Long::intValue() const {
@@ -266,6 +289,7 @@ int	Long::intValue() const {
 
 /**
  * Returns the value of this Long as a long value.
+ *
  * @return long
  */
 long Long::longValue() const {
@@ -275,6 +299,7 @@ long Long::longValue() const {
 /**
  * Returns a long value with at most a single one-bit, in the position of the lowest-order ("rightmost")
  * one-bit in the specified long value.
+ *
  * @param long i
  * @return long
  */
@@ -285,6 +310,7 @@ long Long::lowestOneBit(long i) {
 /**
  * Returns the number of zero bits preceding the highest-order ("leftmost") one-bit
  * in the two's complement binary representation of the specified long value.
+ *
  * @param long i
  * @return int
  */
@@ -307,6 +333,7 @@ int Long::numberOfLeadingZeros(long i) {
 /**
  * Returns the number of zero bits following the lowest-order ("rightmost") one-bit
  * in the two's complement binary representation of the specified long value.
+ *
  * @param long i
  * @return int
  */
@@ -317,7 +344,9 @@ int Long::numberOfTrailingZeros(long i) {
     }
 
     int n = 63;
-    y = (int)i; if (y != 0) { n = n -32; x = y; } else {  x = (int)(i>>32); }
+    y = (int)i;
+    n = n -32;
+    x = y;
     y = x <<16; if (y != 0) { n = n -16; x = y; }
     y = x << 8; if (y != 0) { n = n - 8; x = y; }
     y = x << 4; if (y != 0) { n = n - 4; x = y; }
@@ -327,6 +356,7 @@ int Long::numberOfTrailingZeros(long i) {
 
 /**
  * Parses the string argument as a signed decimal long.
+ *
  * @param String s
  * @return long
  */
@@ -337,6 +367,7 @@ long Long::parseLong(String s) {
 
 /**
  * Parses the string argument as a signed long in the radix specified by the second argument.
+ *
  * @param String s
  * @param int radix
  * @return long
@@ -344,14 +375,11 @@ long Long::parseLong(String s) {
 long Long::parseLong(String s, int radix) {
     //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
 
-    static long maxValue = 0x7fffffffffffffffL;
-    static long minValue = 0x8000000000000000L;
-
     long result = 0;
     boolean negative = false;
     int index = 0;
     int length = s.length();
-    long limit = -maxValue;
+    long limit = -Long::MAX_VALUE;
     long multmin;
     int digit;
 
@@ -360,7 +388,7 @@ long Long::parseLong(String s, int radix) {
         if (firstChar < '0') { // Possible leading "+" or "-"
             if (firstChar == '-') {
                 negative = true;
-                limit = minValue;
+                limit = Long::MIN_VALUE;
             } else if (firstChar != '+') {
                 //FIXME: exception
                 return -1;
@@ -402,6 +430,7 @@ long Long::parseLong(String s, int radix) {
 /**
  * Returns the value obtained by reversing the order of the bits
  * in the two's complement binary representation of the specified long value.
+ *
  * @param long i
  * @return long
  */
@@ -418,6 +447,7 @@ long Long::reverse(long i) {
 /**
  * Returns the value obtained by reversing the order of the bytes
  * in the two's complement representation of the specified long value.
+ *
  * @param long i
  * @return long
  */
@@ -429,6 +459,7 @@ long Long::reverseBytes(long i) {
 /**
  * Returns the value obtained by rotating the two's complement binary representation
  * of the specified long value left by the specified number of bits.
+ *
  * @param long i
  * @param int distance
  * @return long
@@ -440,6 +471,7 @@ long Long::rotateLeft(long i, int distance) {
 /**
  * Returns the value obtained by rotating the two's complement binary representation
  * of the specified long value right by the specified number of bits.
+ *
  * @param long i
  * @param int distance
  * @return long
@@ -450,6 +482,7 @@ long Long::rotateRight(long i, int distance) {
 
 /**
  * Returns the value of this Long as a short.
+ *
  * @return short
  */
 short Long::shortValue() const {
@@ -458,6 +491,7 @@ short Long::shortValue() const {
 
 /**
  * Returns the signum function of the specified long value.
+ *
  * @param long i
  * @return int
  */
@@ -467,6 +501,7 @@ int Long::signum(long i) {
 
 /**
  * Returns a string representation of the long argument as an unsigned integer in base 2.
+ *
  * @param long i
  * @return String
  */
@@ -477,6 +512,7 @@ String Long::toBinaryString(long i) {
 
 /**
  * Returns a string representation of the long argument as an unsigned integer in base 16.
+ *
  * @param long i
  * @return String
  */
@@ -487,6 +523,7 @@ String Long::toHexString(long i) {
 
 /**
  * Returns a string representation of the long argument as an unsigned integer in base 8.
+ *
  * @param long i
  * @return String
  */
@@ -497,6 +534,7 @@ String Long::toOctalString(long i) {
 
 /**
  * Returns a String object representing this Long's value.
+ *
  * @return String
  */
 String Long::toString() {
@@ -506,6 +544,7 @@ String Long::toString() {
 
 /**
  * Returns a String object representing the specified long.
+ *
  * @param long i
  * @return String
  */
@@ -516,6 +555,7 @@ String Long::toString(long i) {
 
 /**
  * Returns a Long instance representing the specified long value.
+ *
  * @param long l
  * @return Long
  */
@@ -526,6 +566,7 @@ Long Long::valueOf(long l) {
 
 /**
  * Returns a Long object holding the value of the specified String.
+ *
  * @param String s
  * @return Long
  */
@@ -537,6 +578,7 @@ Long Long::valueOf(String s) {
 /**
  * Returns a Long object holding the value extracted from the specified String
  * when parsed with the radix given by the second argument.
+ *
  * @param String s
  * @param int radix
  * @return Long
@@ -548,6 +590,7 @@ Long Long::valueOf(String s, int radix) {
 
 /**
  * Format a long (treated as unsigned) into a character buffer.
+ *
  * @param long val
  * @param int shift
  * @param Array<char> buf
@@ -580,6 +623,7 @@ int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, 
 
 /**
  * Format a long (treated as unsigned) into a String.
+ *
  * @param long val
  * @param int shift
  * @return String
@@ -604,6 +648,7 @@ String Long::toUnsignedString0(long val, int shift) {
 
 /**
  * Sum two Long
+ *
  * @param Long target
  * @return Long
  */
@@ -614,6 +659,7 @@ Long Long::operator+(const Long &target) const {
 
 /**
  * Subtract two Long
+ *
  * @param Long target
  * @return
  */
@@ -624,6 +670,7 @@ Long Long::operator-(const Long &target) const {
 
 /**
  * Divide two Long
+ *
  * @param Long target
  * @return
  */
@@ -634,6 +681,7 @@ Long Long::operator/(const Long &target) const {
 
 /**
  * Modulo two Long
+ *
  * @param Long target
  * @return
  */
@@ -644,6 +692,7 @@ Long Long::operator%(const Long &target) const {
 
 /**
  * Multiply two Long
+ *
  * @param Long target
  * @return
  */
@@ -654,6 +703,7 @@ Long Long::operator*(const Long &target) const {
 
 /**
  * Compare equal
+ *
  * @param Long target
  * @return boolean
  */
@@ -667,6 +717,7 @@ boolean Long::operator==(const Long &target) const {
 
 /**
  * Compare not equal
+ *
  * @param Long target
  * @return boolean
  */
@@ -680,6 +731,7 @@ boolean Long::operator!=(const Long &target) const {
 
 /**
  * Compare less than
+ *
  * @param Long target
  * @return boolean
  */
@@ -693,6 +745,7 @@ boolean Long::operator<(const Long &target) const {
 
 /**
  * Compare more than
+ *
  * @param Long target
  * @return boolean
  */
@@ -706,6 +759,7 @@ boolean Long::operator>(const Long &target) const {
 
 /**
  * Compare less than or equal
+ *
  * @param Long target
  * @return boolean
  */
@@ -719,6 +773,7 @@ boolean Long::operator<=(const Long &target) const {
 
 /**
  * Compare more than or equal
+ *
  * @param Long target
  * @return boolean
  */
@@ -732,6 +787,7 @@ boolean Long::operator>=(const Long &target) const {
 
 /**
  * Subtract this with target
+ *
  * @param target
  */
 void Long::operator-=(const Long &target) {
@@ -740,6 +796,7 @@ void Long::operator-=(const Long &target) {
 
 /**
  * Sum this with target
+ *
  * @param target
  */
 void Long::operator+=(const Long &target) {
@@ -748,6 +805,7 @@ void Long::operator+=(const Long &target) {
 
 /**
  * Multiply this with target
+ *
  * @param target
  */
 void Long::operator*=(const Long &target) {
@@ -756,6 +814,7 @@ void Long::operator*=(const Long &target) {
 
 /**
  * Devide this with target
+ *
  * @param target
  */
 void Long::operator/=(const Long &target) {
@@ -764,6 +823,7 @@ void Long::operator/=(const Long &target) {
 
 /**
  * Modulo this with target
+ *
  * @param target
  */
 void Long::operator%=(const Long &target) {
