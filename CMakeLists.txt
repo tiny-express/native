@@ -225,3 +225,8 @@ else ()
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
 endif ()
+
+add_custom_target(
+        checkstyle
+        COMMAND ./checkstyle.sh $(root)
+)
