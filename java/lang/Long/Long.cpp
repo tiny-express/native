@@ -89,11 +89,11 @@ int Long::bitCount(long i) {
 
 /**
  * Returns the value of this Long as a byte.
- * @return byte
+ * @return int
  */
-int Long::byteValue() const {
-    //FIXME: please change `byte` to `char` as detail of java instead of `unsigned char`
-    return (char)this->original;;
+int Long::byteValue() {
+    int result = (int)(char)this->original;
+    return result;
 }
 
 /**

@@ -84,17 +84,20 @@ namespace Java {
 
 		public:
 			/**
-			 * Returns the number of one-bits in the two's complement binary representation of the specified long value.
+			 * Returns the number of one-bits in the two's
+			 * complement binary representation of the specified long value.
 			 * @param long i
 			 * @return int
 			 */
 			static int bitCount(long i);
 
 			/**
-			 * Returns the value of this Long as a byte.
-			 * @return byte
+			 *
+			 * Returns the value of this Long as a int
+			 * There's not correct byte in C++, should to convert to int to make this function same as Java
+			 * @return int
 			 */
-			int byteValue() const ;
+			int byteValue();
 
 			/**
 			 * Compares two long values numerically.
