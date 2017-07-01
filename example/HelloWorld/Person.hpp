@@ -1,5 +1,5 @@
-#ifndef NATIVE_EXAMPLE_PERSON_HPP
-#define NATIVE_EXAMPLE_PERSON_HPP
+#ifndef NATIVE_EXAMPLE_PERSON_HPP_
+#define NATIVE_EXAMPLE_PERSON_HPP_
 
 #include <native/library.hpp>
 
@@ -28,4 +28,4 @@ public:
 //	}
 };
 
-#endif //NATIVE_EXAMPLE_PERSON_HPP
+#endif //NATIVE_EXAMPLE_PERSON_HPP_

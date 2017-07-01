@@ -1,0 +1,1 @@
+g++    -std=c++11   CMakeFiles/App.dir/Main.cpp.o  -o App -rdynamic -lpthread -lz -lssl -lcrypto -lnative -lcrypto -lm -lrt 

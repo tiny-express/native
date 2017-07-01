@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_LIBRARY_HPP_
+#define NATIVE_LIBRARY_HPP_
 
 #include "java/IO.hpp"
 #include "java/Lang.hpp"
@@ -39,4 +39,4 @@
 // In Java, Java::Lang is imported by default
 using namespace Java::Lang;
 
-#endif//NATIVE_LIBRARY_HPP
+#endif//NATIVE_LIBRARY_HPP_

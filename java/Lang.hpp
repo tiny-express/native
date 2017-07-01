@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_HPP
-#define NATIVE_JAVA_LANG_HPP
+#ifndef JAVA_LANG_HPP_
+#define JAVA_LANG_HPP_
 
 #include "lang/Appendable/Appendable.hpp"
 #include "lang/AutoCloseable/AutoCloseable.hpp"
@@ -54,4 +54,4 @@
 #include "lang/Thowable/Throwable.hpp"
 #include "lang/Thread/Thread.hpp"
 
-#endif//NATIVE_JAVA_LANG_HPP
+#endif  // JAVA_LANG_HPP_
