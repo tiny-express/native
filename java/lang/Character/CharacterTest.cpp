@@ -124,34 +124,27 @@ TEST (JavaLang, CharactertoCodePoint){
     ASSERT_NOT_EQUAL(expectedRes , actualRes);
 }
 
-// TODO wait for checking leak error
-//TEST (JavaLang, CharacterCodePointAt) {
-//    // Create variable to test
-//    Array<char> seq;
-//    int index;
-//    int expectedRes;
-//    int actualRes;
-//
-//    // Test NULL case
-//    index  = 1;
-//    actualRes = Character::codePointAt(seq, index);
-//    expectedRes = 0;
-//    ASSERT_EQUAL(expectedRes,actualRes);
-//
-//    // Test valid case
-//    seq.push('a');
-//    index  = 1;
-//    actualRes = Character::codePointAt(seq, index);
-//    expectedRes = 97;
-//    ASSERT_EQUAL(expectedRes,actualRes);
-//
-//    // Test invalid case
-//    seq.push('w');
-//    index  = 2;
-//    actualRes = Character::codePointAt(seq, index);
-//    expectedRes = 456;
-//    ASSERT_NOT_EQUAL(expectedRes,actualRes);
-//}
+TEST (JavaLang, CharacterCodePointAt) {
+    // Create variable to test
+    Array<char> seq;
+    int index;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+    seq.push('a');
+    index  = 0;
+    actualRes = Character::codePointAt(seq, index);
+    expectedRes = 97;
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test invalid case
+    seq.push('w');
+    index  = 1;
+    actualRes = Character::codePointAt(seq, index);
+    expectedRes = 456;
+    ASSERT_NOT_EQUAL(expectedRes,actualRes);
+}
 
 TEST (JavaLang, CharacterCodePointBefore) {
     Character testCharacter;

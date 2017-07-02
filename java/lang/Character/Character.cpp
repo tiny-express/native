@@ -120,7 +120,6 @@ int Character::charCount(int codePoint) {
  * @see    Character::isLowSurrogate(char)
  * @see    Character.UnicodeBlock#of(int)
  */
-
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return (ch >= MIN_HIGH_SURROGATE) && (ch < (MAX_HIGH_SURROGATE + 1));
@@ -144,7 +143,6 @@ boolean Character::isHighSurrogate(wchar_t ch) {
  *         {@code false} otherwise.
  * @see    Character#isHighSurrogate(char)
  */
-
 boolean Character::isLowSurrogate(wchar_t ch) {
     return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
 }
@@ -160,9 +158,10 @@ boolean Character::isLowSurrogate(wchar_t ch) {
  * @return the supplementary code point composed from the
  *         specified surrogate pair.
  */
-
 int Character::toCodePoint(wchar_t high, wchar_t low) {
-    return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT - (MIN_HIGH_SURROGATE << 10) - MIN_LOW_SURROGATE);
+    return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
+                                   - (MIN_HIGH_SURROGATE << 10)
+                                   - MIN_LOW_SURROGATE);
 }
 
 /**
@@ -186,18 +185,16 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
  * {@code index} is negative or not less than
  * {@link CharSequence#length() seq.length()}.
  */
-
-// TODO check leak error
-//int Character::codePointAt(Array<char> seq, int index) {
-//    char c1 = seq[index];
-//    if (isHighSurrogate(c1) && ++index < seq.length) {
-//        char c2 = seq[index];
-//        if (isLowSurrogate(c2)) {
-//            return toCodePoint(c1, c2);
-//        }
-//    }
-//    return c1;
-//}
+int Character::codePointAt(Array<char> seq, int index) {
+    char c1 = seq[index];
+    if (isHighSurrogate(c1) && ++index < seq.length) {
+        char c2 = seq[index];
+        if (isLowSurrogate(c2)) {
+            return toCodePoint(c1, c2);
+        }
+    }
+    return c1;
+}
 
 
 int Character::codePointBefore(Array<char> a, int index) {

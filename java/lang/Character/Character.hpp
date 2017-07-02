@@ -40,17 +40,86 @@ namespace Java {
 			~Character();
 		public:
 			/**
-			 * Determines the number of char values needed to represent the specified character (Unicode code point).
-			 * @param codePoint
-			 * @return int
-			 */
-			static int charCount(int codePoint);
-
-			/**
-			 * Returns the value of this Character object.
-			 * @return char
+			 * Returns the value of this {@code Character} object.
+			 * @return  the primitive {@code char} value represented by
+			 *          this object.
 			 */
 			char charValue();
+
+			/**
+			 * Determines the number of {@code char} values needed to
+			 * represent the specified character (Unicode code point). If the
+			 * specified character is equal to or greater than 0x10000, then
+			 * the method returns 2. Otherwise, the method returns 1.
+			 *
+			 * @param   codePoint the character (Unicode code point) to be tested.
+			 * @return  2 if the character is a valid supplementary character; 1 otherwise.
+			 */
+			int charCount(int codePoint);
+
+            /**
+             * Determines if the given {@code char} value is a
+             * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+             * Unicode high-surrogate code unit</a>
+             * (also known as <i>leading-surrogate code unit</i>).
+             *
+             * <p>Such values do not represent characters by themselves,
+             * but are used in the representation of
+             * <a href="#supplementary">supplementary characters</a>
+             * in the UTF-16 encoding.
+             *
+             * @param  ch the {@code char} value to be tested.
+             * @return {@code true} if the {@code char} value is between
+             *         {@link #MIN_HIGH_SURROGATE} and
+             *         {@link #MAX_HIGH_SURROGATE} inclusive;
+             *         {@code false} otherwise.
+             * @see    Character::isLowSurrogate(char)
+             * @see    Character.UnicodeBlock#of(int)
+             */
+            static boolean isHighSurrogate(wchar_t ch);
+
+            /**
+              * Determines if the given {@code char} value is a
+              * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+              * Unicode low-surrogate code unit</a>
+              * (also known as <i>trailing-surrogate code unit</i>).
+              *
+              * <p>Such values do not represent characters by themselves,
+              * but are used in the representation of
+              * <a href="#supplementary">supplementary characters</a>
+              * in the UTF-16 encoding.
+              *
+              * @param  ch the {@code char} value to be tested.
+              * @return {@code true} if the {@code char} value is between
+              *         {@link #MIN_LOW_SURROGATE} and
+              *         {@link #MAX_LOW_SURROGATE} inclusive;
+              *         {@code false} otherwise.
+              * @see    Character#isHighSurrogate(char)
+              */
+            static boolean isLowSurrogate(wchar_t ch);
+
+            /**
+              * Returns the code point at the given index of the
+              * {@code CharSequence}. If the {@code char} value at
+              * the given index in the {@code CharSequence} is in the
+              * high-surrogate range, the following index is less than the
+              * length of the {@code CharSequence}, and the
+              * {@code char} value at the following index is in the
+              * low-surrogate range, then the supplementary code point
+              * corresponding to this surrogate pair is returned. Otherwise,
+              * the {@code char} value at the given index is returned.
+              *
+              * @param seq a sequence of {@code char} values (Unicode code
+              * units)
+              * @param index the index to the {@code char} values (Unicode
+              * code units) in {@code seq} to be converted
+              * @return the Unicode code point at the given index
+              * @exception NullPointerException if {@code seq} is null.
+              * @exception IndexOutOfBoundsException if the value
+              * {@code index} is negative or not less than
+              * {@link CharSequence#length() seq.length()}.
+              */
+            static int toCodePoint(wchar_t high, wchar_t low);
 
 			/**
 			 * Returns the code point at the given index of the char array.
@@ -261,13 +330,6 @@ namespace Java {
 			static boolean isDigit(int codePoint);
 
 			/**
-			 * Determines if the given char value is a Unicode high-surrogate code unit (also known as leading-surrogate code unit).
-			 * @param ch
-			 * @return boolean
-			 */
-			static boolean isHighSurrogate(wchar_t ch);
-
-			/**
 			 * Determines if the specified character should be regarded as an ignorable character in a Java identifier or a Unicode identifier.
 			 * @param ch
 			 * @return boolean
@@ -373,12 +435,7 @@ namespace Java {
 			 */
 			static boolean isLowerCase(int codePoint);
 
-			/**
-			 * Determines if the given char value is a Unicode low-surrogate code unit (also known as trailing-surrogate code unit).
-			 * @param ch
-			 * @return boolean
-			 */
-			static boolean isLowSurrogate(wchar_t ch);
+
 
 			/**
 			 * Determines whether the character is mirrored according to the Unicode specification.
@@ -555,14 +612,6 @@ namespace Java {
 			 * @return int
 			 */
 			static int toChars(int codePoint, Array<char> dst, int dstIndex);
-
-			/**
-			 * Converts the specified surrogate pair to its supplementary code point value.
-			 * @param high
-			 * @param low
-			 * @return int
-			 */
-			static int toCodePoint(wchar_t high, wchar_t low);
 
 			/**
 			 * Converts the character argument to lowercase using case mapping information from the UnicodeData file.
