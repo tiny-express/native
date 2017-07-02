@@ -122,7 +122,7 @@ namespace Java {
               */
             static boolean isLowSurrogate(wchar_t ch);
 
-            /**
+             /**
               * Returns the code point at the given index of the
               * {@code CharSequence}. If the {@code char} value at
               * the given index in the {@code CharSequence} is in the
@@ -295,7 +295,79 @@ namespace Java {
             // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
             static int codePointBeforeImpl(char a[], int index, int start);
 
+            /**
+             * Returns the number of Unicode code points in the text range of
+             * the specified char sequence. The text range begins at the
+             * specified {@code beginIndex} and extends to the
+             * {@code char} at index {@code endIndex - 1}. Thus the
+             * length (in {@code char}s) of the text range is
+             * {@code endIndex-beginIndex}. Unpaired surrogates within
+             * the text range count as one code point each.
+             *
+             * @param seq the char sequence
+             * @param beginIndex the index to the first {@code char} of
+             * the text range.
+             * @param endIndex the index after the last {@code char} of
+             * the text range.
+             * @return the number of Unicode code points in the specified text
+             * range
+             * @exception NullPointerException if {@code seq} is null.
+             * @exception IndexOutOfBoundsException if the
+             * {@code beginIndex} is negative, or {@code endIndex}
+             * is larger than the length of the given sequence, or
+             * {@code beginIndex} is larger than {@code endIndex}.
+             * @since  1.5
+             */
+            static int codePointCount(Array<char> seq, int beginIndex,
+                                         int endIndex) ;
 
+            /**
+             * Returns the numeric value of the specified character (Unicode
+             * code point) in the specified radix.
+             *
+             * <p>If the radix is not in the range {@code MIN_RADIX} &le;
+             * {@code radix} &le; {@code MAX_RADIX} or if the
+             * character is not a valid digit in the specified
+             * radix, {@code -1} is returned. A character is a valid digit
+             * if at least one of the following is true:
+             * <ul>
+             * <li>The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
+             *     and the Unicode decimal digit value of the character (or its
+             *     single-character decomposition) is less than the specified radix.
+             *     In this case the decimal digit value is returned.
+             * <li>The character is one of the uppercase Latin letters
+             *     {@code 'A'} through {@code 'Z'} and its code is less than
+             *     {@code radix + 'A' - 10}.
+             *     In this case, {@code codePoint - 'A' + 10}
+             *     is returned.
+             * <li>The character is one of the lowercase Latin letters
+             *     {@code 'a'} through {@code 'z'} and its code is less than
+             *     {@code radix + 'a' - 10}.
+             *     In this case, {@code codePoint - 'a' + 10}
+             *     is returned.
+             * <li>The character is one of the fullwidth uppercase Latin letters A
+             *     ({@code '\u005CuFF21'}) through Z ({@code '\u005CuFF3A'})
+             *     and its code is less than
+             *     {@code radix + '\u005CuFF21' - 10}.
+             *     In this case,
+             *     {@code codePoint - '\u005CuFF21' + 10}
+             *     is returned.
+             * <li>The character is one of the fullwidth lowercase Latin letters a
+             *     ({@code '\u005CuFF41'}) through z ({@code '\u005CuFF5A'})
+             *     and its code is less than
+             *     {@code radix + '\u005CuFF41'- 10}.
+             *     In this case,
+             *     {@code codePoint - '\u005CuFF41' + 10}
+             *     is returned.
+             * </ul>
+             *
+             * @param   codePoint the character (Unicode code point) to be converted.
+             * @param   radix   the radix.
+             * @return  the numeric value represented by the character in the
+             *          specified radix.
+             * @see     Character#forDigit(int, int)
+             * @see     Character#isDigit(int)
+             */
 			static int digit(int codePoint, int radix);
 
 			/**

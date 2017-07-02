@@ -661,6 +661,46 @@ int Character::codePointBeforeImpl(char a[], int index, int start) {
  * @see    Character#isLowSurrogate(char)
  * @see    Character.UnicodeBlock#of(int)
  */
+
+/**
+ * Returns the number of Unicode code points in the text range of
+ * the specified char sequence. The text range begins at the
+ * specified {@code beginIndex} and extends to the
+ * {@code char} at index {@code endIndex - 1}. Thus the
+ * length (in {@code char}s) of the text range is
+ * {@code endIndex-beginIndex}. Unpaired surrogates within
+ * the text range count as one code point each.
+ *
+ * @param seq the char sequence
+ * @param beginIndex the index to the first {@code char} of
+ * the text range.
+ * @param endIndex the index after the last {@code char} of
+ * the text range.
+ * @return the number of Unicode code points in the specified text
+ * range
+ * @exception NullPointerException if {@code seq} is null.
+ * @exception IndexOutOfBoundsException if the
+ * {@code beginIndex} is negative, or {@code endIndex}
+ * is larger than the length of the given sequence, or
+ * {@code beginIndex} is larger than {@code endIndex}.
+ */
+int Character::codePointCount(Array<char> seq, int beginIndex,
+                                 int endIndex) {
+    int length = seq.length;
+    if (beginIndex < 0 || endIndex > length || beginIndex > endIndex) {
+        return -1;
+    }
+    int n = endIndex - beginIndex;
+    for (int i = beginIndex; i < endIndex;) {
+        if (isHighSurrogate(seq[i++]) && i < endIndex
+            && isLowSurrogate(seq[i])) {
+            n--;
+            i++;
+        }
+    }
+    return n;
+}
+
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);

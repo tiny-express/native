@@ -378,6 +378,64 @@ TEST (JavaLang, CharacterCodePointBeforeImpl){
     ASSERT_NOT_EQUAL(expectedRes , actualRes);
 }
 
+// TEST int Character::codePointCount(Array<char> seq, int beginIndex,
+// int endIndex).
+TEST (JavaLang,CharacterCodePointCount ){
+    // Create variable to test
+    Array<char> seq;
+    int beginIndex;
+    int endIndex;
+    int expectedRes;
+    int actualRes;
+
+    // Assign value to seq
+    seq.push('a');
+    seq.push('b');
+    seq.push('c');
+
+    // Test valid case
+    beginIndex = 0;
+    endIndex = 1;
+    expectedRes = 1;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test valid case
+    beginIndex = 0;
+    endIndex = 2;
+    expectedRes = 2;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test valid case
+    beginIndex = 0;
+    endIndex = 3;
+    expectedRes = 3;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception start < 0
+    beginIndex = -1;
+    endIndex = 3;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception endIndex > length
+    beginIndex = 0;
+    endIndex = 4;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception beginIndex > endIndex
+    beginIndex = 2;
+    endIndex = 1;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(seq,beginIndex,endIndex);
+    ASSERT_EQUAL(expectedRes, actualRes);
+}
+
 TEST (JavaLang, CharactertoCodePoint){
     // Create variable to test
     wchar_t variableTest1;
