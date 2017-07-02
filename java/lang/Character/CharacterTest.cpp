@@ -533,6 +533,79 @@ TEST (JavaLang,CharacterCodePointCountImpl ){
     ASSERT_NOT_EQUAL(expectedRes, actualRes);
 }
 
+// TEST int Character::compare(char x, char y).
+TEST (JavaLang, CharacterCompare){
+    // Create variable to test
+    char x;
+    char y;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+    x='d';
+    y='d';
+    expectedRes= 0;
+    actualRes = Character::compare(x,y);
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test valid case
+    x='d';
+    y='a';
+    expectedRes= 3;
+    actualRes = Character::compare(x,y);
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test valid case
+    x='d';
+    y='e';
+    expectedRes= -1;
+    actualRes = Character::compare(x,y);
+    ASSERT_EQUAL(expectedRes,actualRes);
+}
+
+// TEST int Character::compareTo(Character anotherCharacter).
+TEST (JavaLang, CharacterCompareTo){
+    // Create variable to test
+    Character variableTest;
+    Character anotherCharacter;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+    variableTest = 'd';
+    anotherCharacter='d';
+    expectedRes=0;
+    actualRes= variableTest.compareTo(anotherCharacter);
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test valid case
+    variableTest = 'd';
+    anotherCharacter='a';
+    expectedRes=3;
+    actualRes= variableTest.compareTo(anotherCharacter);
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test valid case
+    variableTest = 'd';
+    anotherCharacter='e';
+    expectedRes=-1;
+    actualRes= variableTest.compareTo(anotherCharacter);
+    ASSERT_EQUAL(expectedRes,actualRes);
+}
+
+// TEST sample
+TEST (JavaLang, CharacterTestSample){
+    // Create variable to test
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+
+    // Test invalid case
+
+    // Test exception
+}
+
 TEST (JavaLang, CharactertoCodePoint){
     // Create variable to test
     wchar_t variableTest1;

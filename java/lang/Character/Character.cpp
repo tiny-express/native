@@ -740,6 +740,41 @@ int Character::codePointCountImpl(char a[], int offset, int count) {
     return n;
 }
 
+/**
+ * Compares two {@code char} values numerically.
+ * The value returned is identical to what would be returned by:
+ * <pre>
+ *    Character.valueOf(x).compareTo(Character.valueOf(y))
+ * </pre>
+ *
+ * @param  x the first {@code char} to compare
+ * @param  y the second {@code char} to compare
+ * @return the value {@code 0} if {@code x == y};
+ *         a value less than {@code 0} if {@code x < y}; and
+ *         a value greater than {@code 0} if {@code x > y}
+ */
+int Character::compare(char x, char y) {
+    return x - y;
+}
+
+/**
+ * Compares two {@code Character} objects numerically.
+ *
+ * @param   anotherCharacter   the {@code Character} to be compared.
+
+ * @return  the value {@code 0} if the argument {@code Character}
+ *          is equal to this {@code Character}; a value less than
+ *          {@code 0} if this {@code Character} is numerically less
+ *          than the {@code Character} argument; and a value greater than
+ *          {@code 0} if this {@code Character} is numerically greater
+ *          than the {@code Character} argument (unsigned comparison).
+ *          Note that this is strictly a numerical comparison; it is not
+ *          locale-dependent.
+ */
+int Character::compareTo(Character anotherCharacter) {
+    return compare(this->charValue(), anotherCharacter.charValue());
+}
+
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
