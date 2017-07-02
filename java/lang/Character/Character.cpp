@@ -701,6 +701,45 @@ int Character::codePointCount(Array<char> seq, int beginIndex,
     return n;
 }
 
+/**
+ * Returns the number of Unicode code points in a subarray of the
+ * {@code char} array argument. The {@code offset}
+ * argument is the index of the first {@code char} of the
+ * subarray and the {@code count} argument specifies the
+ * length of the subarray in {@code char}s. Unpaired
+ * surrogates within the subarray count as one code point each.
+ *
+ * @param a the {@code char} array
+ * @param offset the index of the first {@code char} in the
+ * given {@code char} array
+ * @param count the length of the subarray in {@code char}s
+ * @return the number of Unicode code points in the specified subarray
+ * @exception NullPointerException if {@code a} is null.
+ * @exception IndexOutOfBoundsException if {@code offset} or
+ * {@code count} is negative, or if {@code offset +
+ * count} is larger than the length of the given array.
+ */
+int Character::codePointCount(char a[], int offset, int count) {
+    int aLength = strlen(a);
+    if (count > aLength - offset || offset < 0 || count < 0) {
+        return -1;
+    }
+    return codePointCountImpl(a, offset, count);
+}
+
+int Character::codePointCountImpl(char a[], int offset, int count) {
+    int endIndex = offset + count;
+    int n = count;
+    for (int i = offset; i < endIndex;) {
+        if (isHighSurrogate(a[i++]) && i < endIndex
+            && isLowSurrogate(a[i])) {
+            n--;
+            i++;
+        }
+    }
+    return n;
+}
+
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);

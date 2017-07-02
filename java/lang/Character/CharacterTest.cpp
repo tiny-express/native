@@ -407,12 +407,12 @@ TEST (JavaLang,CharacterCodePointCount ){
     actualRes = Character::codePointCount(seq,beginIndex,endIndex);
     ASSERT_EQUAL(expectedRes, actualRes);
 
-    // Test valid case
+    // Test invalid case
     beginIndex = 0;
     endIndex = 3;
-    expectedRes = 3;
+    expectedRes = 2;
     actualRes = Character::codePointCount(seq,beginIndex,endIndex);
-    ASSERT_EQUAL(expectedRes, actualRes);
+    ASSERT_NOT_EQUAL(expectedRes, actualRes);
 
     // Test exception start < 0
     beginIndex = -1;
@@ -434,6 +434,103 @@ TEST (JavaLang,CharacterCodePointCount ){
     expectedRes = -1;
     actualRes = Character::codePointCount(seq,beginIndex,endIndex);
     ASSERT_EQUAL(expectedRes, actualRes);
+}
+
+// TEST int Character::codePointCount(char a[], int offset, int count).
+TEST (JavaLang,CharacterCodePointCount2 ){
+    // Create variable to test
+    char a[30];
+    int offset;
+    int count;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 1;
+    expectedRes = 1;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test valid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 2;
+    expectedRes = 2;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test invalid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 2;
+    expectedRes = 3;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_NOT_EQUAL(expectedRes, actualRes);
+
+    // Test exception NULL
+    strcpy(a,"");
+    offset = 0;
+    count = 1;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception offset < 0
+    offset = -1;
+    count = 3;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception count > length
+    offset = 0;
+    count = 4;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test exception offset > count
+    offset = 2;
+    count = 1;
+    expectedRes = -1;
+    actualRes = Character::codePointCount(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+}
+
+// TEST int Character::codePointCountImpl(char a[], int offset, int count).
+TEST (JavaLang,CharacterCodePointCountImpl ){
+    // Create variable to test
+    char a[30];
+    int offset;
+    int count;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 1;
+    expectedRes = 1;
+    actualRes = Character::codePointCountImpl(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test valid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 2;
+    expectedRes = 2;
+    actualRes = Character::codePointCountImpl(a,offset,count);
+    ASSERT_EQUAL(expectedRes, actualRes);
+
+    // Test invalid case
+    strcpy(a,"abc");
+    offset = 0;
+    count = 2;
+    expectedRes = 3;
+    actualRes = Character::codePointCountImpl(a,offset,count);
+    ASSERT_NOT_EQUAL(expectedRes, actualRes);
 }
 
 TEST (JavaLang, CharactertoCodePoint){

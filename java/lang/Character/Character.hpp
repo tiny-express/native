@@ -322,6 +322,28 @@ namespace Java {
                                          int endIndex) ;
 
             /**
+             * Returns the number of Unicode code points in a subarray of the
+             * {@code char} array argument. The {@code offset}
+             * argument is the index of the first {@code char} of the
+             * subarray and the {@code count} argument specifies the
+             * length of the subarray in {@code char}s. Unpaired
+             * surrogates within the subarray count as one code point each.
+             *
+             * @param a the {@code char} array
+             * @param offset the index of the first {@code char} in the
+             * given {@code char} array
+             * @param count the length of the subarray in {@code char}s
+             * @return the number of Unicode code points in the specified subarray
+             * @exception NullPointerException if {@code a} is null.
+             * @exception IndexOutOfBoundsException if {@code offset} or
+             * {@code count} is negative, or if {@code offset +
+             * count} is larger than the length of the given array.
+             */
+            static int codePointCount(char a[], int offset, int count);
+
+            static int codePointCountImpl(char a[], int offset, int count);
+
+            /**
              * Returns the numeric value of the specified character (Unicode
              * code point) in the specified radix.
              *
