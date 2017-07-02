@@ -461,7 +461,7 @@ char Character::charValue() {
 int Character::codePointAt(Array<char> seq, int index) {
 
     if (index < 0 || index >= seq.length)
-        return 0;
+        return -1;
     char c1 = seq[index];
     if (isHighSurrogate(c1) && ++index < seq.length) {
         char c2 = seq[index];
@@ -541,6 +541,126 @@ int Character::codePointAtImpl(char a[], int index, int limit) {
     return c1;
 }
 
+/**
+ * Returns the code point preceding the given index of the
+ * {@code CharSequence}. If the {@code char} value at
+ * {@code (index - 1)} in the {@code CharSequence} is in
+ * the low-surrogate range, {@code (index - 2)} is not
+ * negative, and the {@code char} value at {@code (index - 2)}
+ * in the {@code CharSequence} is in the
+ * high-surrogate range, then the supplementary code point
+ * corresponding to this surrogate pair is returned. Otherwise,
+ * the {@code char} value at {@code (index - 1)} is
+ * returned.
+ *
+ * @param seq the {@code CharSequence} instance
+ * @param index the index following the code point that should be returned
+ * @return the Unicode code point value before the given index.
+ * @exception NullPointerException if {@code seq} is null.
+ * @exception IndexOutOfBoundsException if the {@code index}
+ * argument is less than 1 or greater than {@link
+ * CharSequence#length() seq.length()}.
+ */
+int Character::codePointBefore(Array<char> seq, int index) {
+    char c2 = seq[--index];
+    if (isLowSurrogate(c2) && index > 0) {
+        char c1 = seq[--index];
+        if (isHighSurrogate(c1)) {
+            return toCodePoint(c1, c2);
+        }
+    }
+    return c2;
+}
+
+/**
+   * Returns the code point preceding the given index of the
+   * {@code char} array. If the {@code char} value at
+   * {@code (index - 1)} in the {@code char} array is in
+   * the low-surrogate range, {@code (index - 2)} is not
+   * negative, and the {@code char} value at {@code (index - 2)}
+   * in the {@code char} array is in the
+   * high-surrogate range, then the supplementary code point
+   * corresponding to this surrogate pair is returned. Otherwise,
+   * the {@code char} value at {@code (index - 1)} is
+   * returned.
+   *
+   * @param a the {@code char} array
+   * @param index the index following the code point that should be returned
+   * @return the Unicode code point value before the given index.
+   * @exception NullPointerException if {@code a} is null.
+   * @exception IndexOutOfBoundsException if the {@code index}
+   * argument is less than 1 or greater than the length of the
+   * {@code char} array
+   */
+int Character::codePointBefore(char a[], int index) {
+    return codePointBeforeImpl(a, index, 0);
+}
+
+/**
+ * Returns the code point preceding the given index of the
+ * {@code char} array, where only array elements with
+ * {@code index} greater than or equal to {@code start}
+ * can be used. If the {@code char} value at {@code (index - 1)}
+ * in the {@code char} array is in the
+ * low-surrogate range, {@code (index - 2)} is not less than
+ * {@code start}, and the {@code char} value at
+ * {@code (index - 2)} in the {@code char} array is in
+ * the high-surrogate range, then the supplementary code point
+ * corresponding to this surrogate pair is returned. Otherwise,
+ * the {@code char} value at {@code (index - 1)} is
+ * returned.
+ *
+ * @param a the {@code char} array
+ * @param index the index following the code point that should be returned
+ * @param start the index of the first array element in the
+ * {@code char} array
+ * @return the Unicode code point value before the given index.
+ * @exception NullPointerException if {@code a} is null.
+ * @exception IndexOutOfBoundsException if the {@code index}
+ * argument is not greater than the {@code start} argument or
+ * is greater than the length of the {@code char} array, or
+ * if the {@code start} argument is negative or not less than
+ * the length of the {@code char} array.
+ */
+int Character::codePointBefore(char a[], int index, int start) {
+    int aLength = strlen(a);
+    if (index <= start || start < 0 || start >= aLength) {
+        return -1;
+    }
+    return codePointBeforeImpl(a, index, start);
+}
+
+// throws ArrayIndexOutOfBoundsException if index-1 out of bounds
+int Character::codePointBeforeImpl(char a[], int index, int start) {
+    char c2 = a[--index];
+    if (isLowSurrogate(c2) && index > start) {
+        char c1 = a[--index];
+        if (isHighSurrogate(c1)) {
+            return toCodePoint(c1, c2);
+        }
+    }
+    return c2;
+}
+
+/**
+ * Determines if the given {@code char} value is a
+ * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+ * Unicode high-surrogate code unit</a>
+ * (also known as <i>leading-surrogate code unit</i>).
+ *
+ * <p>Such values do not represent characters by themselves,
+ * but are used in the representation of
+ * <a href="#supplementary">supplementary characters</a>
+ * in the UTF-16 encoding.
+ *
+ * @param  ch the {@code char} value to be tested.
+ * @return {@code true} if the {@code char} value is between
+ *         {@link #MIN_HIGH_SURROGATE} and
+ *         {@link #MAX_HIGH_SURROGATE} inclusive;
+ *         {@code false} otherwise.
+ * @see    Character#isLowSurrogate(char)
+ * @see    Character.UnicodeBlock#of(int)
+ */
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
@@ -584,62 +704,7 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
                                    - (MIN_HIGH_SURROGATE << 10)
                                    - MIN_LOW_SURROGATE);
 }
-// TODO the next beginning
-/**
- * Returns the code point at the given index of the
- * {@code CharSequence}. If the {@code char} value at
- * the given index in the {@code CharSequence} is in the
- * high-surrogate range, the following index is less than the
- * length of the {@code CharSequence}, and the
- * {@code char} value at the following index is in the
- * low-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at the given index is returned.
- *
- * @param seq a sequence of {@code char} values (Unicode code
- * units)
- * @param index the index to the {@code char} values (Unicode
- * code units) in {@code seq} to be converted
- * @return the Unicode code point at the given index
- * @exception NullPointerException if {@code seq} is null.
- * @exception IndexOutOfBoundsException if the value
- * {@code index} is negative or not less than
- * {@link CharSequence#length() seq.length()}.
- */
-int Character::codePointBefore(Array<char> a, int index) {
-    if(index < 1 || index > a.length) {
-        return -1;
-    }
-    return (int) a[index - 1];
-}
 
-int Character::getNumericValue(char ch) {
-    return (int) ch;
-}
-
-int Character::codePointBefore(Array<char> a, int index, int start) {
-
-}
-
-int Character::codePointBefore(CharSequence &seq, int index) {
-
-}
-
-int Character::codePointCount(Array<char> a, int offset, int count) {
-
-}
-
-int Character::codePointCount(CharSequence &seq, int beginIndex, int endIndex) {
-
-}
-
-int Character::compare(char x, char y) {
-
-}
-
-int	Character::compareTo(Character anotherCharacter) {
-
-}
 
 int Character::digit(int codePoint, int radix) {
     //FIXME: Currently support for radix 16 to work with UUID
@@ -684,265 +749,5 @@ int Character::digit(int codePoint, int radix) {
         default:
             return -1;
     }
-
-}
-
-boolean	Character::equals(Character target) {
-
-}
-
-char Character::forDigit(int digit, int radix) {
-
-}
-
-byte Character::getDirectionality(char ch) {
-
-}
-
-byte Character::getDirectionality(int codePoint) {
-
-}
-
-String Character::getName(int codePoint) {
-
-}
-
-int Character::getNumericValue(int codePoint) {
-
-}
-
-int Character::getType(char ch) {
-
-}
-
-int Character::getType(int codePoint) {
-
-}
-
-int	Character::hashCode() {
-
-}
-
-char Character::highSurrogate(int codePoint) {
-
-}
-
-boolean Character::isAlphabetic(int codePoint) {
-
-}
-
-boolean Character::isBmpCodePoint(int codePoint) {
-
-}
-
-boolean Character::isDefined(char ch) {
-
-}
-
-boolean Character::isDefined(int codePoint) {
-
-}
-
-boolean Character::isDigit(char ch) {
-
-}
-
-boolean Character::isDigit(int codePoint) {
-
-}
-
-
-
-boolean Character::isIdentifierIgnorable(char ch) {
-
-}
-
-boolean Character::isIdentifierIgnorable(int codePoint) {
-
-}
-
-boolean Character::isIdeographic(int codePoint) {
-
-}
-
-boolean Character::isISOControl(char ch) {
-
-}
-
-boolean Character::isISOControl(int codePoint) {
-
-}
-
-boolean Character::isJavaIdentifierPart(char ch) {
-
-}
-
-boolean Character::isJavaIdentifierPart(int codePoint) {
-
-}
-
-boolean Character::isJavaIdentifierStart(char ch) {
-
-}
-
-boolean Character::isJavaIdentifierStart(int codePoint) {
-
-}
-
-boolean Character::isLetter(char ch) {
-
-}
-
-boolean Character::isLetter(int codePoint) {
-
-}
-
-boolean Character::isLetterOrDigit(char ch) {
-
-}
-
-boolean Character::isLetterOrDigit(int codePoint) {
-
-}
-
-boolean Character::isLowerCase(char ch) {
-
-}
-
-boolean Character::isLowerCase(int codePoint) {
-
-}
-
-
-
-boolean Character::isMirrored(char ch) {
-
-}
-
-boolean Character::isMirrored(int codePoint) {
-
-}
-
-boolean Character::isSpaceChar(char ch) {
-
-}
-
-boolean Character::isSpaceChar(int codePoint) {
-
-}
-
-boolean Character::isSupplementaryCodePoint(int codePoint) {
-
-}
-
-boolean Character::isSurrogate(char ch) {
-
-}
-
-boolean Character::isSurrogatePair(char high, char low) {
-
-}
-
-boolean Character::isTitleCase(char ch) {
-
-}
-
-boolean Character::isTitleCase(int codePoint) {
-
-}
-
-boolean Character::isUnicodeIdentifierPart(char ch) {
-
-}
-
-boolean Character::isUnicodeIdentifierPart(int codePoint) {
-
-}
-
-boolean Character::isUnicodeIdentifierStart(char ch) {
-
-}
-
-boolean Character::isUnicodeIdentifierStart(int codePoint) {
-
-}
-
-boolean Character::isUpperCase(char ch) {
-
-}
-
-boolean Character::isUpperCase(int codePoint) {
-
-}
-
-boolean Character::isValidCodePoint(int codePoint) {
-
-}
-
-boolean Character::isWhitespace(char ch) {
-
-}
-
-boolean Character::isWhitespace(int codePoint) {
-
-}
-
-char Character::lowSurrogate(int codePoint) {
-
-}
-
-int Character::offsetByCodePoints(Array<char> a, int start, int count, int index, int codePointOffset) {
-
-}
-
-int Character::offsetByCodePoints(CharSequence &seq, int index, int codePointOffset) {
-
-}
-
-char Character::reverseBytes(char ch) {
-
-}
-
-Array<char> Character::toChars(int codePoint) {
-
-}
-
-int Character::toChars(int codePoint, Array<char> dst, int dstIndex) {
-
-}
-
-char Character::toLowerCase(char ch) {
-
-}
-
-int Character::toLowerCase(int codePoint) {
-
-}
-
-String Character::toString() {
-
-}
-
-String Character::toString(char c) {
-
-}
-
-char Character::toTitleCase(char ch) {
-
-}
-
-int Character::toTitleCase(int codePoint) {
-
-}
-
-char Character::toUpperCase(char ch) {
-
-}
-
-int Character::toUpperCase(int codePoint) {
-
-}
-
-Character Character::valueOf(char c) {
 
 }

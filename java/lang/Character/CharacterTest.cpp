@@ -66,7 +66,7 @@ TEST (JavaLang, CharacterCharValue) {
     ASSERT_FALSE(variableTest.charValue() == 'm');
 }
 
-// TEST int Character::codePointAt(Array<char> seq, int index).
+// TEST int Character::codePointBefore(Array<char> seq, int index).
 TEST (JavaLang, CharacterCodePointAt) {
     // Create variable to test
     Array<char> seq;
@@ -91,17 +91,17 @@ TEST (JavaLang, CharacterCodePointAt) {
     // Test exception index < 0
     index  = -1;
     actualRes = Character::codePointAt(seq, index);
-    expectedRes = 0;
+    expectedRes = -1;
     ASSERT_EQUAL(expectedRes,actualRes);
 
     // Test exception index >= len
     index  = 5;
     actualRes = Character::codePointAt(seq, index);
-    expectedRes = 0;
+    expectedRes = -1;
     ASSERT_EQUAL(expectedRes,actualRes);
 }
 
-// TEST int Character::codePointAt(char a[], int index).
+// TEST int Character::codePointBefore(char a[], int index).
 TEST (JavaLang, CharacterCodePointAt2){
     // Create variable to test
     char a[30];
@@ -224,29 +224,161 @@ TEST (JavaLang, CharacterCodePointAtImpl){
     ASSERT_NOT_EQUAL(expectedRes , actualRes);
 }
 
-TEST (JavaLang, CharactertoCodePoint){
+// TEST int Character::codePointBefore(Array<char> seq, int index).
+TEST (JavaLang, CharacterCodePointBefore){
     // Create variable to test
-    wchar_t variableTest1;
-    wchar_t variableTest2;
+    Array<char> seq;
+    int index;
+    int expectedRes;
+    int actualRes;
+    seq.push('a');
+    seq.push('b');
+    seq.push('c');
+
+    // Test valid case
+    index  = 2;
+    actualRes = Character::codePointBefore(seq, index);
+    expectedRes = 'b';
+    ASSERT_EQUAL(expectedRes,actualRes);
+
+    // Test invalid case
+    index  = 2;
+    actualRes = Character::codePointBefore(seq, index);
+    expectedRes = 'c';
+    ASSERT_NOT_EQUAL(expectedRes,actualRes);
+}
+
+// TEST int Character::codePointBefore(char a[], int index).
+TEST (JavaLang, CharacterCodePointBefore2){
+    // Create variable to test
+    char a[30];
+    int index;
     int expectedRes;
     int actualRes;
 
-    // Test valid case
-    variableTest1 = '\u000D800' ;
-    variableTest2 = '\u000DC00' ;
-    expectedRes= 65536 ;
-    actualRes = Character::toCodePoint(variableTest1, variableTest2);
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 1 ;
+    expectedRes= 'a';
+    actualRes = Character::codePointBefore(a,index);
     ASSERT_EQUAL(expectedRes , actualRes);
 
-    // Test invalid case
-    variableTest1 = '\u000d800' ;
-    variableTest2 = '\u000dc11' ;
-    expectedRes= 60000 ;
-    actualRes = Character::toCodePoint(variableTest1, variableTest2);
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 2 ;
+    expectedRes= 'b';
+    actualRes = Character::codePointBefore(a,index);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test invalid case.
+    strcpy(a,"abc");
+    index = 2;
+    expectedRes= 'c';
+    actualRes = Character::codePointBefore(a,index);
     ASSERT_NOT_EQUAL(expectedRes , actualRes);
 }
 
-TEST (JavaLang, CharacterToCodePoint){
+// TEST int Character::codePointBefore(char a[], int index, int start).
+TEST (JavaLang, CharacterCodePointBefore3){
+    // Create variable to test
+    char a[30];
+    int index;
+    int start;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 1 ;
+    start = 0 ;
+    expectedRes= 'a';
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 2 ;
+    start = 0 ;
+    expectedRes= 'b';
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test invalid case.
+    strcpy(a,"abc");
+    index = 3;
+    start = 0 ;
+    expectedRes= 'b';
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_NOT_EQUAL(expectedRes , actualRes);
+
+    // Test exception NULL.
+    strcpy(a,"");
+    index = 1;
+    start = 0 ;
+    expectedRes= -1;
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test exception index < start.
+    strcpy(a,"abc");
+    index = 0;
+    start = 1 ;
+    expectedRes= -1;
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test exception start > length.
+    strcpy(a,"abc");
+    index = 2;
+    start = 4 ;
+    expectedRes= -1;
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test exception start < 0.
+    strcpy(a,"abc");
+    index = 2;
+    start = -1 ;
+    expectedRes= -1;
+    actualRes = Character::codePointBefore(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+}
+
+// TEST int Character::codePointBeforeImpl(char a[], int index, int start).
+TEST (JavaLang, CharacterCodePointBeforeImpl){
+    // Create variable to test
+    char a[30];
+    int index;
+    int start;
+    int expectedRes;
+    int actualRes;
+
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 1 ;
+    start = 0 ;
+    expectedRes= 'a';
+    actualRes = Character::codePointBeforeImpl(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test valid case.
+    strcpy(a,"abc");
+    index = 2 ;
+    start = 0 ;
+    expectedRes= 'b';
+    actualRes = Character::codePointBeforeImpl(a,index,start);
+    ASSERT_EQUAL(expectedRes , actualRes);
+
+    // Test invalid case.
+    strcpy(a,"abc");
+    index = 3;
+    start = 0 ;
+    expectedRes= 'b';
+    actualRes = Character::codePointBeforeImpl(a,index,start);
+    ASSERT_NOT_EQUAL(expectedRes , actualRes);
+}
+
+TEST (JavaLang, CharactertoCodePoint){
     // Create variable to test
     wchar_t variableTest1;
     wchar_t variableTest2;
@@ -304,19 +436,6 @@ TEST (JavaLang, CharacterisLowSurrogate){
     expectedRes= 0 ;
     actualRes = Character::isLowSurrogate(variableTest);
     ASSERT_TRUE(expectedRes == actualRes);
-}
-
-TEST (JavaLang, CharacterCodePointBefore) {
-    Character testCharacter;
-    Array<char> a;
-    a.push('w');
-    a.push('a');
-    ASSERT_EQUAL(97, testCharacter.codePointBefore(a,2));
-}
-
-TEST (JavaLang, CharacterGetNumericValue) {
-    Character testCharacter;
-    ASSERT_EQUAL(97, testCharacter.getNumericValue('a'));
 }
 
 TEST (JavaLang, CharacterDigit) {
