@@ -39,12 +39,6 @@ namespace Java {
 			Character(char original);
 			~Character();
 		public:
-			/**
-			 * Returns the value of this {@code Character} object.
-			 * @return  the primitive {@code char} value represented by
-			 *          this object.
-			 */
-			char charValue();
 
 			/**
 			 * Determines the number of {@code char} values needed to
@@ -56,6 +50,36 @@ namespace Java {
 			 * @return  2 if the character is a valid supplementary character; 1 otherwise.
 			 */
 			int charCount(int codePoint);
+
+            /**
+			 * Returns the value of this {@code Character} object.
+			 * @return  the primitive {@code char} value represented by
+			 *          this object.
+			 */
+            char charValue();
+
+            /**
+             * Returns the code point at the given index of the
+             * {@code CharSequence}. If the {@code char} value at
+             * the given index in the {@code CharSequence} is in the
+             * high-surrogate range, the following index is less than the
+             * length of the {@code CharSequence}, and the
+             * {@code char} value at the following index is in the
+             * low-surrogate range, then the supplementary code point
+             * corresponding to this surrogate pair is returned. Otherwise,
+             * the {@code char} value at the given index is returned.
+             *
+             * @param seq a sequence of {@code char} values (Unicode code
+             * units)
+             * @param index the index to the {@code char} values (Unicode
+             * code units) in {@code seq} to be converted
+             * @return the Unicode code point at the given index
+             * @exception NullPointerException if {@code seq} is null.
+             * @exception IndexOutOfBoundsException if the value
+             * {@code index} is negative or not less than
+             * {@link CharSequence#length() seq.length()}.
+             */
+            static int codePointAt(Array<char> a, int index);
 
             /**
              * Determines if the given {@code char} value is a
@@ -121,29 +145,80 @@ namespace Java {
               */
             static int toCodePoint(wchar_t high, wchar_t low);
 
-			/**
-			 * Returns the code point at the given index of the char array.
-			 * @param index
-			 * @return int
-			 */
-			static int codePointAt(Array<char> a, int index);
-
-			/**
-			 * Returns the code point at the given index of the char array,
-			 * where only array elements with index less than limit can be used.
-			 * @param index
-			 * @param limit
-			 * @return int
-			 */
+            /**
+             * Returns the code point at the given index of the
+             * {@code char} array. If the {@code char} value at
+             * the given index in the {@code char} array is in the
+             * high-surrogate range, the following index is less than the
+             * length of the {@code char} array, and the
+             * {@code char} value at the following index is in the
+             * low-surrogate range, then the supplementary code point
+             * corresponding to this surrogate pair is returned. Otherwise,
+             * the {@code char} value at the given index is returned.
+             *
+             * @param a the {@code char} array
+             * @param index the index to the {@code char} values (Unicode
+             * code units) in the {@code char} array to be converted
+             * @return the Unicode code point at the given index
+             * @exception NullPointerException if {@code a} is null.
+             * @exception IndexOutOfBoundsException if the value
+             * {@code index} is negative or not less than
+             * the length of the {@code char} array.
+             */
 			static int codePointAt(Array<char> a, int index, int limit);
 
-			/**
-			 * Returns the code point at the given index of the CharSequence.
-			 * @param seq
-			 * @param index
-			 * @return int
-			 */
-			static int codePointAt(CharSequence &seq, int index);
+            /**
+             * Returns the code point at the given index of the
+             * {@code char} array. If the {@code char} value at
+             * the given index in the {@code char} array is in the
+             * high-surrogate range, the following index is less than the
+             * length of the {@code char} array, and the
+             * {@code char} value at the following index is in the
+             * low-surrogate range, then the supplementary code point
+             * corresponding to this surrogate pair is returned. Otherwise,
+             * the {@code char} value at the given index is returned.
+             *
+             * @param a the {@code char} array
+             * @param index the index to the {@code char} values (Unicode
+             * code units) in the {@code char} array to be converted
+             * @return the Unicode code point at the given index
+             * @exception NullPointerException if {@code a} is null.
+             * @exception IndexOutOfBoundsException if the value
+             * {@code index} is negative or not less than
+             * the length of the {@code char} array.
+             * @since  1.5
+             */
+            static int codePointAt(char a[], int index);
+
+            /**
+             * Returns the code point at the given index of the
+             * {@code char} array, where only array elements with
+             * {@code index} less than {@code limit} can be used. If
+             * the {@code char} value at the given index in the
+             * {@code char} array is in the high-surrogate range, the
+             * following index is less than the {@code limit}, and the
+             * {@code char} value at the following index is in the
+             * low-surrogate range, then the supplementary code point
+             * corresponding to this surrogate pair is returned. Otherwise,
+             * the {@code char} value at the given index is returned.
+             *
+             * @param a the {@code char} array
+             * @param index the index to the {@code char} values (Unicode
+             * code units) in the {@code char} array to be converted
+             * @param limit the index after the last array element that
+             * can be used in the {@code char} array
+             * @return the Unicode code point at the given index
+             * @exception NullPointerException if {@code a} is null.
+             * @exception IndexOutOfBoundsException if the {@code index}
+             * argument is negative or not less than the {@code limit}
+             * argument, or if the {@code limit} argument is negative or
+             * greater than the length of the {@code char} array.
+             * @since  1.5
+             */
+            static int codePointAt(char a[], int index, int limit);
+
+            // throws ArrayIndexOutOfBoundsException if index out of bounds
+            static int codePointAtImpl(char a[], int index, int limit);
 
 			/**
 			 * Returns the code point preceding the given index of the char array.
