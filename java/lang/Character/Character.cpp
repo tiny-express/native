@@ -665,7 +665,7 @@ int Character::codePointBeforeImpl(char a[], int index, int start) {
  * {@code beginIndex} is larger than {@code endIndex}.
  */
 int Character::codePointCount(Array<char> seq, int beginIndex,
-                                 int endIndex) {
+                              int endIndex) {
     int length = seq.length;
     if (beginIndex < 0 || endIndex > length || beginIndex > endIndex) {
         return -1;
@@ -818,46 +818,116 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
                                    - MIN_LOW_SURROGATE);
 }
 
-// TODO FIXME Currently support for radix 16 to work with UUID
+/**
+ * Returns the numeric value of the specified character (Unicode
+ * code point) in the specified radix.
+ *
+ * <p>If the radix is not in the range {@code MIN_RADIX} &le;
+ * {@code radix} &le; {@code MAX_RADIX} or if the
+ * character is not a valid digit in the specified
+ * radix, {@code -1} is returned. A character is a valid digit
+ * if at least one of the following is true:
+ * <ul>
+ * <li>The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
+ *     and the Unicode decimal digit value of the character (or its
+ *     single-character decomposition) is less than the specified radix.
+ *     In this case the decimal digit value is returned.
+ * <li>The character is one of the uppercase Latin letters
+ *     {@code 'A'} through {@code 'Z'} and its code is less than
+ *     {@code radix + 'A' - 10}.
+ *     In this case, {@code codePoint - 'A' + 10}
+ *     is returned.
+ * <li>The character is one of the lowercase Latin letters
+ *     {@code 'a'} through {@code 'z'} and its code is less than
+ *     {@code radix + 'a' - 10}.
+ *     In this case, {@code codePoint - 'a' + 10}
+ *     is returned.
+ * <li>The character is one of the fullwidth uppercase Latin letters A
+ *     ({@code '\u005CuFF21'}) through Z ({@code '\u005CuFF3A'})
+ *     and its code is less than
+ *     {@code radix + '\u005CuFF21' - 10}.
+ *     In this case,
+ *     {@code codePoint - '\u005CuFF21' + 10}
+ *     is returned.
+ * <li>The character is one of the fullwidth lowercase Latin letters a
+ *     ({@code '\u005CuFF41'}) through z ({@code '\u005CuFF5A'})
+ *     and its code is less than
+ *     {@code radix + '\u005CuFF41'- 10}.
+ *     In this case,
+ *     {@code codePoint - '\u005CuFF41' + 10}
+ *     is returned.
+ * </ul>
+ *
+ * @param   codePoint the character (Unicode code point) to be converted.
+ * @param   radix   the radix.
+ * @return  the numeric value represented by the character in the
+ *          specified radix.
+ * @see     Character#forDigit(int, int)
+ * @see     Character#isDigit(int)
+ */
 int Character::digit(int codePoint, int radix) {
-    if (radix != 16) {
-        return -1;
+    if (radix == 10) {
+        switch (codePoint) {
+            case (int)'0':
+                return 0;
+            case (int)'1':
+                return 1;
+            case (int)'2':
+                return 2;
+            case (int)'3':
+                return 3;
+            case (int)'4':
+                return 4;
+            case (int)'5':
+                return 5;
+            case (int)'6':
+                return 6;
+            case (int)'7':
+                return 7;
+            case (int)'8':
+                return 8;
+            case (int)'9':
+                return 9;
+            default:
+                return -1;
+        }
     }
-
-    switch (codePoint) {
-        case (int)'0':
-            return 0;
-        case (int)'1':
-            return 1;
-        case (int)'2':
-            return 2;
-        case (int)'3':
-            return 3;
-        case (int)'4':
-            return 4;
-        case (int)'5':
-            return 5;
-        case (int)'6':
-            return 6;
-        case (int)'7':
-            return 7;
-        case (int)'8':
-            return 8;
-        case (int)'9':
-            return 9;
-        case (int)'a':
-            return 10;
-        case (int)'b':
-            return 11;
-        case (int)'c':
-            return 12;
-        case (int)'d':
-            return 13;
-        case (int)'e':
-            return 14;
-        case (int)'f':
-            return 15;
-        default:
-            return -1;
+    if (radix == 16) {
+        switch (codePoint) {
+            case (int)'0':
+                return 0;
+            case (int)'1':
+                return 1;
+            case (int)'2':
+                return 2;
+            case (int)'3':
+                return 3;
+            case (int)'4':
+                return 4;
+            case (int)'5':
+                return 5;
+            case (int)'6':
+                return 6;
+            case (int)'7':
+                return 7;
+            case (int)'8':
+                return 8;
+            case (int)'9':
+                return 9;
+            case (int)'a':
+                return 10;
+            case (int)'b':
+                return 11;
+            case (int)'c':
+                return 12;
+            case (int)'d':
+                return 13;
+            case (int)'e':
+                return 14;
+            case (int)'f':
+                return 15;
+            default:
+                return -1;
+        }
     }
 }
