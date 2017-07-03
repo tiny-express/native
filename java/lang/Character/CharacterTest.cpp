@@ -31,22 +31,27 @@ TEST (JavaLang, CharacterCharCount) {
     // Create variable to test Character::charCount(int codePoint).
     Character variableTest;
     int expectedResult;
+    int actualResult;
 
     // Test LATIN CAPITAL LETTER A :  UTF-32 (hex)	0x00000041 (0041)
     expectedResult =1;
-    ASSERT_EQUAL(expectedResult, variableTest.charCount(0x00000041));
+    actualResult = variableTest.charCount(0x00000041);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
     // Test Unicode Han Data 香 : UTF-32 (hex)	0x00009999 (9999)
     expectedResult =1;
-    ASSERT_EQUAL(expectedResult, variableTest.charCount(0x00009999));
+    actualResult = variableTest.charCount(0x00009999);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
     // Test LINEAR B SYLLABLE B008 A : UTF-32 (hex)	0x00010000 (10000)
     expectedResult =2;
-    ASSERT_EQUAL(expectedResult, variableTest.charCount(0x00010000));
+    actualResult = variableTest.charCount(0x00010000);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
     // Test AEGEAN WORD SEPARATOR LINE : UTF-32 (hex)	0x00010100 (10100)
     expectedResult =2;
-    ASSERT_EQUAL(expectedResult, variableTest.charCount(0x00010100));
+    actualResult = variableTest.charCount(0x00010100);
+    ASSERT_EQUAL(expectedResult, actualResult);
 }
 
 // TEST char Character::charValue().
@@ -666,6 +671,7 @@ TEST (JavaLang, CharacterisLowSurrogate){
     ASSERT_TRUE(expectedResult == actualResult);
 }
 
+// TODO FIXME
 TEST (JavaLang, CharacterDigit) {
     //Given valid and invalid value to test with digit(char char, int radix)
     char hexValue = 'b';

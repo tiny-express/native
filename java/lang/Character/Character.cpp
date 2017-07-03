@@ -25,17 +25,17 @@
 using namespace Java::Lang;
 
 /**
-     * The minimum radix available for conversion to and from strings.
-     * The constant value of this field is the smallest value permitted
-     * for the radix argument in radix-conversion methods such as the
-     * {@code digit} method, the {@code forDigit} method, and the
-     * {@code toString} method of class {@code Integer}.
-     *
-     * @see     Character#digit(char, int)
-     * @see     Character#forDigit(int, int)
-     * @see     Integer#toString(int, int)
-     * @see     Integer#valueOf(String)
-     */
+ * The minimum radix available for conversion to and from strings.
+ * The constant value of this field is the smallest value permitted
+ * for the radix argument in radix-conversion methods such as the
+ * {@code digit} method, the {@code forDigit} method, and the
+ * {@code toString} method of class {@code Integer}.
+ *
+ * @see     Character#digit(char, int)
+ * @see     Character#forDigit(int, int)
+ * @see     Integer#toString(int, int)
+ * @see     Integer#valueOf(String)
+ */
 static int MIN_RADIX = 2;
 
 /**
@@ -643,26 +643,6 @@ int Character::codePointBeforeImpl(char a[], int index, int start) {
 }
 
 /**
- * Determines if the given {@code char} value is a
- * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
- * Unicode high-surrogate code unit</a>
- * (also known as <i>leading-surrogate code unit</i>).
- *
- * <p>Such values do not represent characters by themselves,
- * but are used in the representation of
- * <a href="#supplementary">supplementary characters</a>
- * in the UTF-16 encoding.
- *
- * @param  ch the {@code char} value to be tested.
- * @return {@code true} if the {@code char} value is between
- *         {@link #MIN_HIGH_SURROGATE} and
- *         {@link #MAX_HIGH_SURROGATE} inclusive;
- *         {@code false} otherwise.
- * @see    Character#isLowSurrogate(char)
- * @see    Character.UnicodeBlock#of(int)
- */
-
-/**
  * Returns the number of Unicode code points in the text range of
  * the specified char sequence. The text range begins at the
  * specified {@code beginIndex} and extends to the
@@ -775,6 +755,25 @@ int Character::compareTo(Character anotherCharacter) {
     return compare(this->charValue(), anotherCharacter.charValue());
 }
 
+/**
+ * Determines if the given {@code char} value is a
+ * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+ * Unicode high-surrogate code unit</a>
+ * (also known as <i>leading-surrogate code unit</i>).
+ *
+ * <p>Such values do not represent characters by themselves,
+ * but are used in the representation of
+ * <a href="#supplementary">supplementary characters</a>
+ * in the UTF-16 encoding.
+ *
+ * @param  ch the {@code char} value to be tested.
+ * @return {@code true} if the {@code char} value is between
+ *         {@link #MIN_HIGH_SURROGATE} and
+ *         {@link #MAX_HIGH_SURROGATE} inclusive;
+ *         {@code false} otherwise.
+ * @see    Character#isLowSurrogate(char)
+ * @see    Character.UnicodeBlock#of(int)
+ */
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
@@ -819,10 +818,8 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
                                    - MIN_LOW_SURROGATE);
 }
 
-
+// TODO FIXME Currently support for radix 16 to work with UUID
 int Character::digit(int codePoint, int radix) {
-    //FIXME: Currently support for radix 16 to work with UUID
-
     if (radix != 16) {
         return -1;
     }
@@ -863,5 +860,4 @@ int Character::digit(int codePoint, int radix) {
         default:
             return -1;
     }
-
 }
