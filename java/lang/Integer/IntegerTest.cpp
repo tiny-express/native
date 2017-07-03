@@ -30,15 +30,20 @@ extern "C" {
 using namespace Java::Lang;
 #define string char*
 TEST (JavaLang, IntegerConstructor) {
-    // Given empty value for Integer constructor and assign value - Return integer
-    Integer emptyInteger;
-    emptyInteger = 3;
-    ASSERT_EQUAL(3, emptyInteger.intValue());
+	// Input an empty value to Integer constructor and assign value - Return integer
+	Integer emptyInteger;
+	emptyInteger = 3;
+	ASSERT_EQUAL(3, emptyInteger.intValue());
+	
+	// Given value for Integer constructor and assign value - Return integer
+	Integer validInteger = 3;
+	ASSERT_EQUAL(3, validInteger.intValue());
 
-    // Given value for Integer constructor and assign value - Return string
-    Integer validInteger = 3;
-    ASSERT_EQUAL(3, validInteger.intValue());
+    // Given string value for Integer constructor and assign value - Return integer
+    Integer validIntegerPointer = Integer::parseInt("13");
+    ASSERT_EQUAL(13, validIntegerPointer.intValue());
 }
+
 TEST (JavaLang, IntegerComparision) {
     //Give a valid number and make a comparision
     Integer validNumber = 2;
@@ -303,45 +308,30 @@ TEST (JavaLang, IntegerLongValue) {
     realResult = notExpectedInteger.longValue();
     ASSERT_FALSE(notExpectedResult == realResult);
 }
+
 TEST (JavaLang, IntegerFloatValue) {
     // Input different values of type int to compare to the realResult of Integer::floatValue
     Integer positiveInteger = 12345;
-    Integer negativeInteger = -12345;
-    Integer notExpectedInteger = -12345;
-
-    // Make a comparison between expected realResult and the real result
     float expectedResult = 12345.00;
     float realResult = positiveInteger.floatValue();
     ASSERT_TRUE(expectedResult == realResult);
 
-    // Make a comparison between expected realResult and the real result
+
+    Integer negativeInteger = -12345;
     expectedResult = -12345.00;
     realResult = negativeInteger.floatValue();
     ASSERT_TRUE(expectedResult == realResult);
-
-    // Make a comparison between the not expected realResult and the real result
-    float notExpectedResult = -12345.10;
-    realResult = notExpectedInteger.floatValue();
-    ASSERT_FALSE(notExpectedResult == realResult);
 }
+
 TEST (JavaLang, IntegerDoubleValue) {
     // Input different values of type int to compare to the realResult of Integer::doubleValue
     Integer positiveInteger = 123456789;
-    Integer negativeInteger = -123456789;
-    Integer notExpectedInteger = -12345;
-
-    // Make a comparison between expected realResult and the real result
     double expectedResult = 123456789.0000000;
     double realResult = positiveInteger.doubleValue();
     ASSERT_TRUE(expectedResult == realResult);
 
-    // Make a comparison between expected realResult and the real result
+    Integer negativeInteger = -123456789;
     expectedResult = -123456789.0000000;
     realResult = negativeInteger.doubleValue();
     ASSERT_TRUE(expectedResult == realResult);
-
-    // Make a comparison between the not expected realResult and the real result
-    double notExpectedResult = -12345.10;
-    realResult = notExpectedInteger.floatValue();
-    ASSERT_FALSE(notExpectedResult == realResult);
 }
