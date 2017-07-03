@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP
 #define NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP
 
-#include "../Number/Number.hpp"
+#include "../Object/Object.hpp"
 
 namespace Java {
 	namespace Lang {
@@ -53,6 +53,14 @@ namespace Java {
              *          length()
              */
             virtual char charAt(int index) const = 0;
+
+            /**
+             * Returns the length of this character sequence.  The length is the number
+             * of 16-bit <code>char</code>s in the sequence.
+             *
+             * @return  the number of <code>char</code>s in this sequence
+             */
+            virtual int length() const = 0;
 		};
 	}
 }

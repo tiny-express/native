@@ -343,7 +343,7 @@ int String::lastIndexOf(String str, int fromIndex) const {
  *
  * @return int
  */
-int String::length() {
+int String::length() const {
 	return this->size;
 }
 

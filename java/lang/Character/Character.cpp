@@ -412,19 +412,6 @@ Character::~Character() {
 }
 
 /**
- * String character at index
- *
- * @param index
- * @return String
- */
-char Character::charAt(int index) {
-    if (( index < 0 ) || ( index > this->size - 1 )) {
-        return '\0';
-    }
-    return this->original[ index ];
-}
-
-/**
  * Determines the number of {@code char} values needed to
  * represent the specified character (Unicode code point). If the
  * specified character is equal to or greater than 0x10000, then
@@ -447,40 +434,6 @@ int Character::charCount(int codePoint) {
  */
 char Character::charValue() {
     return this->original;
-}
-
-/**
- * Returns the code point at the given index of the
- * {@code char} array. If the {@code char} value at
- * the given index in the {@code char} array is in the
- * high-surrogate range, the following index is less than the
- * length of the {@code char} array, and the
- * {@code char} value at the following index is in the
- * low-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at the given index is returned.
- *
- * @param a the {@code char} array
- * @param index the index to the {@code char} values (Unicode
- * code units) in the {@code char} array to be converted
- * @return the Unicode code point at the given index
- * @exception NullPointerException if {@code a} is null.
- * @exception IndexOutOfBoundsException if the value
- * {@code index} is negative or not less than
- * the length of the {@code char} array.
- */
-int Character::codePointAt(CharSequence seq, int index) {
-
-    if (index < 0 || index >= seq.length())
-        return -1;
-    char c1 = seq.charAt(index);
-    if (isHighSurrogate(c1) && ++index < seq.length()) {
-        char c2 = seq.charAt(index);
-        if (isLowSurrogate(c2)) {
-            return toCodePoint(c1, c2);
-        }
-    }
-    return c1;
 }
 
 /**
@@ -532,8 +485,7 @@ int Character::codePointAt(Array<char> a, int index) {
  * greater than the length of the {@code char} array.
  */
 int Character::codePointAt(Array<char> a, int index, int limit) {
-    int aLength = length_pointer_char(a);
-    if (index >= limit || limit < 0 || limit > aLength) {
+    if (index >= limit || limit < 0 || limit > a.length) {
         return -1;
     }
     return codePointAtImpl(a, index, limit);
@@ -549,37 +501,6 @@ int Character::codePointAtImpl(Array<char> a, int index, int limit) {
         }
     }
     return c1;
-}
-
-/**
- * Returns the code point preceding the given index of the
- * {@code CharSequence}. If the {@code char} value at
- * {@code (index - 1)} in the {@code CharSequence} is in
- * the low-surrogate range, {@code (index - 2)} is not
- * negative, and the {@code char} value at {@code (index - 2)}
- * in the {@code CharSequence} is in the
- * high-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at {@code (index - 1)} is
- * returned.
- *
- * @param seq the {@code CharSequence} instance
- * @param index the index following the code point that should be returned
- * @return the Unicode code point value before the given index.
- * @exception NullPointerException if {@code seq} is null.
- * @exception IndexOutOfBoundsException if the {@code index}
- * argument is less than 1 or greater than {@link
- * CharSequence#length() seq.length()()}.
- */
-int Character::codePointBefore(CharSequence seq, int index) {
-    char c2 = seq.charAt(--index);
-    if (isLowSurrogate(c2) && index > 0) {
-        char c1 = seq.charAt(--index);
-        if (isHighSurrogate(c1)) {
-            return toCodePoint(c1, c2);
-        }
-    }
-    return c2;
 }
 
 /**
@@ -649,45 +570,6 @@ int Character::codePointBeforeImpl(Array<char> a, int index, int start) {
         }
     }
     return c2;
-}
-
-/**
- * Returns the number of Unicode code points in the text range of
- * the specified char sequence. The text range begins at the
- * specified {@code beginIndex} and extends to the
- * {@code char} at index {@code endIndex - 1}. Thus the
- * length (in {@code char}s) of the text range is
- * {@code endIndex-beginIndex}. Unpaired surrogates within
- * the text range count as one code point each.
- *
- * @param seq the char sequence
- * @param beginIndex the index to the first {@code char} of
- * the text range.
- * @param endIndex the index after the last {@code char} of
- * the text range.
- * @return the number of Unicode code points in the specified text
- * range
- * @exception NullPointerException if {@code seq} is null.
- * @exception IndexOutOfBoundsException if the
- * {@code beginIndex} is negative, or {@code endIndex}
- * is larger than the length of the given sequence, or
- * {@code beginIndex} is larger than {@code endIndex}.
- */
-int Character::codePointCount(CharSequence seq, int beginIndex,
-                              int endIndex) {
-    int length = seq.length();
-    if (beginIndex < 0 || endIndex > length || beginIndex > endIndex) {
-        return -1;
-    }
-    int n = endIndex - beginIndex;
-    for (int i = beginIndex; i < endIndex;) {
-        if (isHighSurrogate(seq.charAt(i++)) && i < endIndex
-            && isLowSurrogate(seq.charAt(i))) {
-            n--;
-            i++;
-        }
-    }
-    return n;
 }
 
 /**
