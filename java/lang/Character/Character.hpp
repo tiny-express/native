@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_CHARACTER_HPP
 #define NATIVE_JAVA_LANG_CHARACTER_HPP
 
-#include "../Number/Number.hpp"
+#include "../CharSequence/CharSequence.hpp"
 
 namespace Java {
 	namespace Lang {
@@ -39,6 +39,26 @@ namespace Java {
 			Character(char original);
 			~Character();
 		public:
+
+            /**
+             * Returns the char value at the specified index.  An index ranges from zero
+             * to length() - 1.  The first char value of the sequence is at
+             * index zero, the next at index one, and so on, as for array
+             * indexing.
+             *
+             * If the char value specified by the index is a
+             * "{@docRoot}/java/lang/Character.html#unicode">surrogate, the surrogate
+             * value is returned.
+             *
+             * @param   index   the index of the char value to be returned
+             *
+             * @return  the specified char value
+             *
+             * @throws  IndexOutOfBoundsException
+             *          if the index argument is negative or not less than
+             *          length()
+             */
+            char charAt(int index);
 
 			/**
 			 * Determines the number of {@code char} values needed to
@@ -165,7 +185,7 @@ namespace Java {
              * {@code index} is negative or not less than
              * the length of the {@code char} array.
              */
-			static int codePointAt(Array<char> a, int index, int limit);
+			static int codePointAt(CharSequence seq, int index, int limit);
 
             /**
              * Returns the code point at the given index of the
@@ -188,7 +208,7 @@ namespace Java {
              * the length of the {@code char} array.
              * @since  1.5
              */
-            static int codePointAt(char a[], int index);
+            static int codePointAt(Array<char> a, int index);
 
             /**
              * Returns the code point at the given index of the
@@ -215,10 +235,10 @@ namespace Java {
              * greater than the length of the {@code char} array.
              * @since  1.5
              */
-            static int codePointAt(char a[], int index, int limit);
+            static int codePointAt(Array<char> a, int index, int limit);
 
             // throws ArrayIndexOutOfBoundsException if index out of bounds
-            static int codePointAtImpl(char a[], int index, int limit);
+            static int codePointAtImpl(Array<char> a, int index, int limit);
 
             /**
             * Returns the code point preceding the given index of the
@@ -240,7 +260,7 @@ namespace Java {
             * argument is less than 1 or greater than {@link
             * CharSequence#length() seq.length()}.
             */
-            static int codePointBefore(Array<char> seq, int index);
+            static int codePointBefore(CharSequence seq, int index);
 
             /**
             * Returns the code point preceding the given index of the
@@ -262,7 +282,7 @@ namespace Java {
             * argument is less than 1 or greater than the length of the
             * {@code char} array
             */
-            static int codePointBefore(char a[], int index);
+            static int codePointBefore(Array<char> a, int index);
 
             /**
             * Returns the code point preceding the given index of the
@@ -290,10 +310,10 @@ namespace Java {
             * if the {@code start} argument is negative or not less than
             * the length of the {@code char} array.
             */
-            static int codePointBefore(char a[], int index, int start);
+            static int codePointBefore(Array<char> a, int index, int start);
 
             // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
-            static int codePointBeforeImpl(char a[], int index, int start);
+            static int codePointBeforeImpl(Array<char> a, int index, int start);
 
             /**
              * Returns the number of Unicode code points in the text range of
@@ -318,7 +338,7 @@ namespace Java {
              * {@code beginIndex} is larger than {@code endIndex}.
              * @since  1.5
              */
-            static int codePointCount(Array<char> seq, int beginIndex,
+            static int codePointCount(CharSequence seq, int beginIndex,
                                          int endIndex) ;
 
             /**
@@ -339,9 +359,9 @@ namespace Java {
              * {@code count} is negative, or if {@code offset +
              * count} is larger than the length of the given array.
              */
-            static int codePointCount(char a[], int offset, int count);
+            static int codePointCount(Array<char> a, int offset, int count);
 
-            static int codePointCountImpl(char a[], int offset, int count);
+            static int codePointCountImpl(Array<char> a, int offset, int count);
 
             /**
              * Compares two {@code char} values numerically.
@@ -422,13 +442,6 @@ namespace Java {
              * @see     Character#isDigit(int)
              */
 			static int digit(int codePoint, int radix);
-
-			/**
-			 * Compares this object against the specified object.
-			 * @param target
-			 * @return boolean
-			 */
-
 		};
 	}
 }

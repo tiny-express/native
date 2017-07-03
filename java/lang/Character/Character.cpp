@@ -322,37 +322,37 @@ static byte DIRECTIONALITY_POP_DIRECTIONAL_FORMAT = 18;
 
 /**
  * The minimum value of a
- * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
- * Unicode high-surrogate code unit</a>
+ * "http://www.unicode.org/glossary/#high_surrogate_code_unit"
+ * Unicode high-surrogate code unit
  * in the UTF-16 encoding, constant {@code '\u005CuD800'}.
- * A high-surrogate is also known as a <i>leading-surrogate</i>.
+ * A high-surrogate is also known as a leading-surrogate.
  */
 static wchar_t MIN_HIGH_SURROGATE = '\u000D800';
 
 /**
  * The maximum value of a
- * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
- * Unicode high-surrogate code unit</a>
+ * "http://www.unicode.org/glossary/#high_surrogate_code_unit"
+ * Unicode high-surrogate code unit
  * in the UTF-16 encoding, constant {@code '\u005CuDBFF'}.
- * A high-surrogate is also known as a <i>leading-surrogate</i>.
+ * A high-surrogate is also known as a leading-surrogate.
  */
 static wchar_t MAX_HIGH_SURROGATE = '\u000DBFF';
 
 /**
  * The minimum value of a
- * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
- * Unicode low-surrogate code unit</a>
+ * "http://www.unicode.org/glossary/#low_surrogate_code_unit"
+ * Unicode low-surrogate code unit
  * in the UTF-16 encoding, constant {@code '\u005CuDC00'}.
- * A low-surrogate is also known as a <i>trailing-surrogate</i>.
+ * A low-surrogate is also known as a trailing-surrogate.
  */
 static wchar_t MIN_LOW_SURROGATE = '\u000DC00';
 
 /**
  * The maximum value of a
- * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
- * Unicode low-surrogate code unit</a>
+ * "http://www.unicode.org/glossary/#low_surrogate_code_unit
+ * Unicode low-surrogate code unit
  * in the UTF-16 encoding, constant {@code '\u005CuDFFF'}.
- * A low-surrogate is also known as a <i>trailing-surrogate</i>.
+ * A low-surrogate is also known as a trailing-surrogate.
  */
 static wchar_t MAX_LOW_SURROGATE = '\u000DFFF';
 
@@ -370,22 +370,22 @@ static wchar_t MAX_SURROGATE = MAX_LOW_SURROGATE;
 
 /**
  * The minimum value of a
- * <a href="http://www.unicode.org/glossary/#supplementary_code_point">
- * Unicode supplementary code point</a>, constant {@code U+10000}.
+ * "http://www.unicode.org/glossary/#supplementary_code_point
+ * Unicode supplementary code point, constant {@code U+10000}.
  */
 static int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
 
 /**
  * The minimum value of a
- * <a href="http://www.unicode.org/glossary/#code_point">
- * Unicode code point</a>, constant {@code U+0000}.
+ * "http://www.unicode.org/glossary/#code_point
+ * Unicode code point, constant {@code U+0000}.
  */
 static int MIN_CODE_POINT = 0x000000;
 
 /**
  * The maximum value of a
- * <a href="http://www.unicode.org/glossary/#code_point">
- * Unicode code point</a>, constant {@code U+10FFFF}.
+ * "http://www.unicode.org/glossary/#code_point
+ * Unicode code point, constant {@code U+10FFFF}.
  */
 static int MAX_CODE_POINT = 0X10FFFF;
 
@@ -412,6 +412,19 @@ Character::~Character() {
 }
 
 /**
+ * String character at index
+ *
+ * @param index
+ * @return String
+ */
+char Character::charAt(int index) {
+    if (( index < 0 ) || ( index > this->size - 1 )) {
+        return '\0';
+    }
+    return this->original[ index ];
+}
+
+/**
  * Determines the number of {@code char} values needed to
  * represent the specified character (Unicode code point). If the
  * specified character is equal to or greater than 0x10000, then
@@ -421,8 +434,6 @@ Character::~Character() {
  * @return  2 if the character is a valid supplementary character; 1 otherwise.
  */
 int Character::charCount(int codePoint) {
-    // The minimum value of Unicode supplementary code point, constant {@code U+10000}.
-    int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
     if(codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
         return 2;
     }
@@ -458,13 +469,13 @@ char Character::charValue() {
  * {@code index} is negative or not less than
  * the length of the {@code char} array.
  */
-int Character::codePointAt(Array<char> seq, int index) {
+int Character::codePointAt(CharSequence seq, int index) {
 
-    if (index < 0 || index >= seq.length)
+    if (index < 0 || index >= seq.length())
         return -1;
-    char c1 = seq[index];
-    if (isHighSurrogate(c1) && ++index < seq.length) {
-        char c2 = seq[index];
+    char c1 = seq.charAt(index);
+    if (isHighSurrogate(c1) && ++index < seq.length()) {
+        char c2 = seq.charAt(index);
         if (isLowSurrogate(c2)) {
             return toCodePoint(c1, c2);
         }
@@ -492,9 +503,8 @@ int Character::codePointAt(Array<char> seq, int index) {
  * {@code index} is negative or not less than
  * the length of the {@code char} array.
  */
-int Character::codePointAt(char a[], int index) {
-    int aLength = strlen(a);
-    return codePointAtImpl(a, index, aLength);
+int Character::codePointAt(Array<char> a, int index) {
+    return codePointAtImpl(a, index, a.length);
 }
 
 /**
@@ -521,8 +531,8 @@ int Character::codePointAt(char a[], int index) {
  * argument, or if the {@code limit} argument is negative or
  * greater than the length of the {@code char} array.
  */
-int Character::codePointAt(char a[], int index, int limit) {
-    int aLength = strlen(a);
+int Character::codePointAt(Array<char> a, int index, int limit) {
+    int aLength = length_pointer_char(a);
     if (index >= limit || limit < 0 || limit > aLength) {
         return -1;
     }
@@ -530,7 +540,7 @@ int Character::codePointAt(char a[], int index, int limit) {
 }
 
 // throws ArrayIndexOutOfBoundsException if index out of bounds
-int Character::codePointAtImpl(char a[], int index, int limit) {
+int Character::codePointAtImpl(Array<char> a, int index, int limit) {
     char c1 = a[index];
     if (isHighSurrogate(c1) && ++index < limit) {
         char c2 = a[index];
@@ -559,12 +569,12 @@ int Character::codePointAtImpl(char a[], int index, int limit) {
  * @exception NullPointerException if {@code seq} is null.
  * @exception IndexOutOfBoundsException if the {@code index}
  * argument is less than 1 or greater than {@link
- * CharSequence#length() seq.length()}.
+ * CharSequence#length() seq.length()()}.
  */
-int Character::codePointBefore(Array<char> seq, int index) {
-    char c2 = seq[--index];
+int Character::codePointBefore(CharSequence seq, int index) {
+    char c2 = seq.charAt(--index);
     if (isLowSurrogate(c2) && index > 0) {
-        char c1 = seq[--index];
+        char c1 = seq.charAt(--index);
         if (isHighSurrogate(c1)) {
             return toCodePoint(c1, c2);
         }
@@ -592,7 +602,7 @@ int Character::codePointBefore(Array<char> seq, int index) {
    * argument is less than 1 or greater than the length of the
    * {@code char} array
    */
-int Character::codePointBefore(char a[], int index) {
+int Character::codePointBefore(Array<char> a, int index) {
     return codePointBeforeImpl(a, index, 0);
 }
 
@@ -622,16 +632,15 @@ int Character::codePointBefore(char a[], int index) {
  * if the {@code start} argument is negative or not less than
  * the length of the {@code char} array.
  */
-int Character::codePointBefore(char a[], int index, int start) {
-    int aLength = strlen(a);
-    if (index <= start || start < 0 || start >= aLength) {
+int Character::codePointBefore(Array<char> a, int index, int start) {
+    if (index <= start || start < 0 || start >= a.length) {
         return -1;
     }
     return codePointBeforeImpl(a, index, start);
 }
 
 // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
-int Character::codePointBeforeImpl(char a[], int index, int start) {
+int Character::codePointBeforeImpl(Array<char> a, int index, int start) {
     char c2 = a[--index];
     if (isLowSurrogate(c2) && index > start) {
         char c1 = a[--index];
@@ -664,16 +673,16 @@ int Character::codePointBeforeImpl(char a[], int index, int start) {
  * is larger than the length of the given sequence, or
  * {@code beginIndex} is larger than {@code endIndex}.
  */
-int Character::codePointCount(Array<char> seq, int beginIndex,
+int Character::codePointCount(CharSequence seq, int beginIndex,
                               int endIndex) {
-    int length = seq.length;
+    int length = seq.length();
     if (beginIndex < 0 || endIndex > length || beginIndex > endIndex) {
         return -1;
     }
     int n = endIndex - beginIndex;
     for (int i = beginIndex; i < endIndex;) {
-        if (isHighSurrogate(seq[i++]) && i < endIndex
-            && isLowSurrogate(seq[i])) {
+        if (isHighSurrogate(seq.charAt(i++)) && i < endIndex
+            && isLowSurrogate(seq.charAt(i))) {
             n--;
             i++;
         }
@@ -699,15 +708,14 @@ int Character::codePointCount(Array<char> seq, int beginIndex,
  * {@code count} is negative, or if {@code offset +
  * count} is larger than the length of the given array.
  */
-int Character::codePointCount(char a[], int offset, int count) {
-    int aLength = strlen(a);
-    if (count > aLength - offset || offset < 0 || count < 0) {
+int Character::codePointCount(Array<char> a, int offset, int count) {
+    if (count > a.length - offset || offset < 0 || count < 0) {
         return -1;
     }
     return codePointCountImpl(a, offset, count);
 }
 
-int Character::codePointCountImpl(char a[], int offset, int count) {
+int Character::codePointCountImpl(Array<char> a, int offset, int count) {
     int endIndex = offset + count;
     int n = count;
     for (int i = offset; i < endIndex;) {
@@ -723,9 +731,7 @@ int Character::codePointCountImpl(char a[], int offset, int count) {
 /**
  * Compares two {@code char} values numerically.
  * The value returned is identical to what would be returned by:
- * <pre>
  *    Character.valueOf(x).compareTo(Character.valueOf(y))
- * </pre>
  *
  * @param  x the first {@code char} to compare
  * @param  y the second {@code char} to compare
@@ -757,13 +763,13 @@ int Character::compareTo(Character anotherCharacter) {
 
 /**
  * Determines if the given {@code char} value is a
- * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
- * Unicode high-surrogate code unit</a>
- * (also known as <i>leading-surrogate code unit</i>).
+ * "http://www.unicode.org/glossary/#high_surrogate_code_unit"
+ * Unicode high-surrogate code unit
+ * (also known as leading-surrogate code unit).
  *
- * <p>Such values do not represent characters by themselves,
+ * Such values do not represent characters by themselves,
  * but are used in the representation of
- * <a href="#supplementary">supplementary characters</a>
+ * "#supplementarysupplementary characters"
  * in the UTF-16 encoding.
  *
  * @param  ch the {@code char} value to be tested.
@@ -781,13 +787,13 @@ boolean Character::isHighSurrogate(wchar_t ch) {
 
 /**
  * Determines if the given {@code char} value is a
- * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
- * Unicode low-surrogate code unit</a>
- * (also known as <i>trailing-surrogate code unit</i>).
+ * "http://www.unicode.org/glossary/#low_surrogate_code_unit"
+ * Unicode low-surrogate code unit
+ * (also known as trailing-surrogate code unit).
  *
- * <p>Such values do not represent characters by themselves,
+ * Such values do not represent characters by themselves,
  * but are used in the representation of
- * <a href="#supplementary">supplementary characters</a>
+ * "#supplementarysupplementary characters"
  * in the UTF-16 encoding.
  *
  * @param  ch the {@code char} value to be tested.
@@ -822,41 +828,39 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
  * Returns the numeric value of the specified character (Unicode
  * code point) in the specified radix.
  *
- * <p>If the radix is not in the range {@code MIN_RADIX} &le;
+ * If the radix is not in the range {@code MIN_RADIX} &le;
  * {@code radix} &le; {@code MAX_RADIX} or if the
  * character is not a valid digit in the specified
  * radix, {@code -1} is returned. A character is a valid digit
  * if at least one of the following is true:
- * <ul>
- * <li>The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
+ * The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
  *     and the Unicode decimal digit value of the character (or its
  *     single-character decomposition) is less than the specified radix.
  *     In this case the decimal digit value is returned.
- * <li>The character is one of the uppercase Latin letters
+ * The character is one of the uppercase Latin letters
  *     {@code 'A'} through {@code 'Z'} and its code is less than
  *     {@code radix + 'A' - 10}.
  *     In this case, {@code codePoint - 'A' + 10}
  *     is returned.
- * <li>The character is one of the lowercase Latin letters
+ * The character is one of the lowercase Latin letters
  *     {@code 'a'} through {@code 'z'} and its code is less than
  *     {@code radix + 'a' - 10}.
  *     In this case, {@code codePoint - 'a' + 10}
  *     is returned.
- * <li>The character is one of the fullwidth uppercase Latin letters A
+ * The character is one of the fullwidth uppercase Latin letters A
  *     ({@code '\u005CuFF21'}) through Z ({@code '\u005CuFF3A'})
  *     and its code is less than
  *     {@code radix + '\u005CuFF21' - 10}.
  *     In this case,
  *     {@code codePoint - '\u005CuFF21' + 10}
  *     is returned.
- * <li>The character is one of the fullwidth lowercase Latin letters a
+ * The character is one of the fullwidth lowercase Latin letters a
  *     ({@code '\u005CuFF41'}) through z ({@code '\u005CuFF5A'})
  *     and its code is less than
  *     {@code radix + '\u005CuFF41'- 10}.
  *     In this case,
  *     {@code codePoint - '\u005CuFF41' + 10}
  *     is returned.
- * </ul>
  *
  * @param   codePoint the character (Unicode code point) to be converted.
  * @param   radix   the radix.
