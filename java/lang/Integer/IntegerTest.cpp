@@ -160,6 +160,7 @@ TEST (JavaLang, IntegerToString) {
     realResult = minInteger.toString();
     ASSERT_STR(expectedResult, realResult);
 }
+
 TEST (JavaLang, IntegerCharValue) {
     // Input different values of type int to compare to the result of Integer::charValue
     Integer zeroInteger = 0;
