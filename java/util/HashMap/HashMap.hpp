@@ -186,17 +186,21 @@ namespace Java {
 						string key = (string)it->first;
 						string value = ((Object *)this->get(key))->toString();
 
-						string holder = builder;
-						asprintf(&builder, "%s%s=%s\0", builder, key, value);
-                        free(holder);
-
+                        string addCharacter = "";
                         if (sizeCounter > 0) {
-                            builder = strcat(builder, ", ");
+                            addCharacter = ", ";
                         }
+
+						string holder = builder;
+						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
+                        free(holder);
 					}
 				}
 
-				builder = strcat(builder, "}");
+                string holder = builder;
+                asprintf(&builder, "%s%c\0", builder, '}');
+                free(holder);
+
 				return builder;
             }
 		};
