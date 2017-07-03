@@ -33,8 +33,8 @@ namespace Java {
 		class Map {
 
 		protected:
-			Map() {};
-			~Map() {};
+			Map();
+			virtual ~Map() = 0;
 
 		public:
 			/**
@@ -57,11 +57,6 @@ namespace Java {
 			 * @return boolean
 			 */
 			virtual boolean containsValue(Object) const = 0;
-
-			/**
-			 * Don't support this method
-			 */
-			//Set<Map::Entry<K,V>> entrySet();
 
 			/**
 			 * Compares the specified object with this map for equality.
@@ -95,12 +90,8 @@ namespace Java {
 			virtual boolean isEmpty() const = 0;
 
 			/**
-			 * Don't support this method
-			 */
-//			Set<K> keySet();
-
-			/**
 			 * Associates the specified value with the specified key in this map (optional operation).
+			 *
 			 * @param key
 			 * @param value
 			 * @return V
@@ -109,12 +100,14 @@ namespace Java {
 
 			/**
 			 * Copies all of the mappings from the specified map to this map (optional operation).
+			 *
 			 * @param
 			 */
 			void putAll(Map<K,V>&);
 
 			/**
 			 * Removes the mapping for a key from this map if it is present (optional operation).
+			 *
 			 * @param key
 			 * @return V
 			 */
@@ -122,14 +115,11 @@ namespace Java {
 
 			/**
 			 * Returns the number of key-value mappings in this map.
+			 *
 			 * @return int
 			 */
 			virtual int size() const = 0;
 
-			/**
-			 * Don't support this method
-			 */
-//			virtual Collection<V> values();
 		};
 	}
 }

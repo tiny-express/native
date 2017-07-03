@@ -33,9 +33,9 @@ namespace Java {
 	namespace Util {
 		template <typename K, typename V>
 		class HashMap
-//					, public virtual Map
-//					, public virtual Cloneable
-//					, public virtual Serializable
+					: public virtual Map
+					, public virtual Cloneable
+					, public virtual Serializable
 		{
 		private:
 			std::map<K, V> hashMap;
@@ -63,8 +63,8 @@ namespace Java {
 
 			/**
 			 * Returns a shallow copy of this HashMap instance: the keys and values themselves are not cloned.
-			 * @param key
-			 * @param value
+			 * @param K key
+			 * @param V value
 			 */
 			void put(const K &key, const V &value) {
 				this->hashMap.insert(std::make_pair(key, value));
@@ -72,7 +72,8 @@ namespace Java {
 
 			/**
 			 *C opies all of the mappings from the specified map to this map.
-			 * @param key
+			 *
+			 * @param hashMap<K, V> map
 			 * @return boolean
 			 */
 			boolean putAll(HashMap<K, V> map) {
@@ -81,7 +82,8 @@ namespace Java {
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key
-			 * @param key
+			 *
+			 * @param K key
 			 * @return boolean
 			 */
 			boolean containsKey(K key) {
@@ -94,8 +96,9 @@ namespace Java {
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
+			 *
 			 * @param value
-			 * @return
+			 * @return boolean
 			 */
 			boolean containsValue(const V value) {
 				for (auto const &ent1 : this->hashMap) {
@@ -115,6 +118,7 @@ namespace Java {
 
 			/**
 			 * Removes the mapping for the specified key from this map if present.
+			 *
 			 * @param key
 			 * @return boolean
 			 */
@@ -129,9 +133,10 @@ namespace Java {
 
 			/**
 			 * Removes the mapping for the specified key & value from this map if present.
+			 *
 			 * @param key
 			 * @param value
-			 * @return
+			 * @return boolean
 			 */
 			boolean remove(K key, const V value) {
 				if (NULL == get(key) || !containsValue(value)) {
@@ -151,6 +156,7 @@ namespace Java {
 
 			/**
 			 * Returns true if this map contains no key-value mappings.
+			 *
 			 * @return boolean
 			 */
 			boolean isEmpty() {
@@ -159,6 +165,7 @@ namespace Java {
 
 			/**
 			 * Returns the number of key-value mappings in this map.
+			 *
 			 * @return int
 			 */
 			int size() {
@@ -176,9 +183,9 @@ namespace Java {
 				}
 
 				string builder = strdup("{");
+				int sizeCounter = this->size();
 				typename std::map<K, V>::iterator it;
 
-                int sizeCounter = this->size();
 				for (it = this->hashMap.begin();  it != this->hashMap.end() ; ++it) {
 					sizeCounter--;
 
