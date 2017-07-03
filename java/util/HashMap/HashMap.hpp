@@ -33,7 +33,6 @@ namespace Java {
 	namespace Util {
 		template <typename K, typename V>
 		class HashMap
-//					: public HashMap
 //					, public virtual Map
 //					, public virtual Cloneable
 //					, public virtual Serializable
@@ -48,8 +47,9 @@ namespace Java {
 		public:
 			/**
 			 * Removes all of the mappings from this map.
-			 * @param key
-			 * @return V
+			 *
+			 * @param K key
+			 * @return V value
 			 */
 			V *get(K key) {
 				auto const it = this->hashMap.find(key);
@@ -66,7 +66,7 @@ namespace Java {
 			 * @param key
 			 * @param value
 			 */
-			void put(K key, V value) {
+			void put(const K &key, const V &value) {
 				this->hashMap.insert(std::make_pair(key, value));
 			}
 
@@ -75,7 +75,9 @@ namespace Java {
 			 * @param key
 			 * @return boolean
 			 */
-//			boolean putAll(HashMap<K, V> map); //FIXME: implement foreach this first
+			boolean putAll(HashMap<K, V> map) {
+
+            }
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key
@@ -162,6 +164,41 @@ namespace Java {
 			int size() {
 				return this->hashMap.size();
 			}
+
+            /**
+             * Return a presentation of this object
+             *
+             * @return string
+             */
+            string toString() {
+				if (this->size() == 0) {
+					return strdup("{}");
+				}
+
+				string builder = strdup("{");
+				typename std::map<K, V>::iterator it;
+
+                int sizeCounter = this->size();
+				for (it = this->hashMap.begin();  it != this->hashMap.end() ; ++it) {
+					sizeCounter--;
+
+					if (instanceof<Object>(it->second)) {
+						string key = (string)it->first;
+						string value = ((Object *)this->get(key))->toString();
+
+						string holder = builder;
+						asprintf(&builder, "%s%s=%s\0", builder, key, value);
+                        free(holder);
+
+                        if (sizeCounter > 0) {
+                            builder = strcat(builder, ", ");
+                        }
+					}
+				}
+
+				builder = strcat(builder, "}");
+				return builder;
+            }
 		};
 		
 	}

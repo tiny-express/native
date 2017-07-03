@@ -100,3 +100,34 @@ TEST (JavaUtil, HashMapClear) {
 	int expectedSizeAfterClear = 0;
 	ASSERT_EQUAL(expectedSizeAfterClear, hashMap.size());
 }
+
+TEST (JavaUtil, HashMapToString) {
+	// Given some valid key/value to test toString()
+	HashMap<string, String> hashMap;
+	hashMap.put((string)"key1", "value1");
+	hashMap.put((string)"key16", "value16");
+	hashMap.put((string)"key02", "value02");
+
+	string expectedResult = (string)"{key1=value1, key16=value16, key02=value02}";
+	string result = hashMap.toString();
+	ASSERT_STR(expectedResult, result);
+    free(result);
+
+    // Given another hash map type to test
+    HashMap<string, Integer> anotherHashMap;
+    anotherHashMap.put((string)"some key", 12313);
+    anotherHashMap.put((string)"anotherKey", 76767);
+
+    expectedResult = (string)"{some key=12313, anotherKey=76767}";
+    result = anotherHashMap.toString();
+    ASSERT_STR(expectedResult, result);
+    free(result);
+
+    // Given empty hash map to test default toString()
+    HashMap<string, Float> emptyHashMap;
+
+    expectedResult = (string)"{}";
+    result = emptyHashMap.toString();
+    ASSERT_STR(expectedResult, result);
+    free(result);
+}
