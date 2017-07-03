@@ -43,11 +43,6 @@ TEST (JavaUtil, UUIDConstructor) {
     expectedValue = 456;
     ASSERT_EQUAL(expectedValue, result);
 
-    /**
-     * All test cases with static constructor are very hard to test,
-     * just give sample to call instead
-     */
-
     // Given valid static constructor with randomUUID
     String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
     uuid = UUID::fromString(expectedString);
@@ -96,4 +91,12 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
     ASSERT_EQUAL(expectedMost, uuid.getMostSignificantBits());
 
     ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
+}
+
+TEST (JavaUtil, UUIDToString) {
+    // Given valid uuid to test toString() - this test case was based on java's result
+    UUID uuid = UUID(4053239666997989821, -5603022497796657139);
+
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    ASSERT_STR(expectedString.toString(), uuid.toString().toString());
 }
