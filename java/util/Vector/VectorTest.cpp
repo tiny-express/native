@@ -61,9 +61,27 @@ TEST(JavaUtil, VectorClear) {
     vector.add("Vector");
     ASSERT_EQUAL(3, vector.size());
 
-    // Clear all element of vector - return size of vector is 0.
+    // Clear all elements of vector - return size of vector is 0.
     vector.clear();
     ASSERT_EQUAL(0, vector.size());
+}
+
+TEST(JavaUtil, VectorClone) {
+    // Given an empty vector, check size of cloned vector.
+    Vector<int> vector;
+    Vector<int> clonedVector1 = vector.clone();
+    ASSERT_EQUAL(0, clonedVector1.size());
+
+    // Given a valid vector, check size of cloned vector; check first-last element.7
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    Vector<int> clonedVector2 = vector.clone();
+    ASSERT_EQUAL(5,clonedVector2.size());
+    ASSERT_EQUAL(1, clonedVector2.firstElement());
+    ASSERT_EQUAL(5, clonedVector2.lastElement());
 }
 
 TEST(JavaUtil, VectorFirstElement) {
@@ -117,6 +135,18 @@ TEST(JavaUtil, VectorLastElement) {
     ASSERT_STR("Vector", vector.lastElement().toString());
 }
 
+TEST(JavaUtil, VectorLastIndexOf) {
+    // Given an valid vector - check last index of some elements.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(2);
+    vector.add(2);
+    vector.add(5);
+    ASSERT_EQUAL(0, vector.lastIndexOf(1));
+    ASSERT_EQUAL(3, vector.lastIndexOf(2));
+}
+
 TEST(JavaUtil, VectorSize) {
     // Given a empty vector, then add an element - return size.
     Vector<int> vector;
@@ -149,4 +179,40 @@ TEST(JavaUtil, VectorRemove) {
     ASSERT_EQUAL(1, vector.remove(0));
     // Check size of vector.
     ASSERT_EQUAL(0, vector.size());
+}
+
+TEST(JavaUtil, VectorRemoveAllElements) {
+    // Given empty vector - return size of vector is 0.
+    Vector<String> vector;
+    ASSERT_EQUAL(0, vector.size());
+
+    // Add three elements into vector - return size of vector is 3.
+    vector.add("Hello");
+    vector.add("World");
+    vector.add("Vector");
+    ASSERT_EQUAL(3, vector.size());
+
+    // Remove all elements of vector - return size of vector is 0.
+    vector.clear();
+    ASSERT_EQUAL(0, vector.size());
+}
+
+TEST(JavaUtil, VectorRemoveRange) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1); // 0
+    vector.add(2); // 1
+    vector.add(3); // 2
+    vector.add(4); // 3
+    vector.add(5);
+    vector.add(6);
+    vector.add(7);
+    vector.add(8);
+    // index: 0 1 2 3 4 5 6 7
+    // value: 1 2 3 4 5 6 7 8
+    vector.removeRange(1, 3); // Removes elements at index: {1, 2}
+    // index: 0 1 2 3 4 5
+    // value: 1 4 5 6 7 8
+    ASSERT_EQUAL(1, vector.get(0));
+    ASSERT_EQUAL(4, vector.get(1));
 }

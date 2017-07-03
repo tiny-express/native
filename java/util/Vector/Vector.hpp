@@ -50,6 +50,7 @@ namespace Java {
         public:
             /**
              * Constructs an empty Vector.
+             *
              */
             Vector() { }
 
@@ -60,7 +61,8 @@ namespace Java {
 
         public:
             /**
-             * Add an element to the end of this Vector.
+             * Adds an element to the end of this Vector.
+             *
              * @param e
              * @return boolean
              */
@@ -70,9 +72,10 @@ namespace Java {
             }
 
             /**
-             * Insert a new element to specified index in this Vector.
+             * Inserts a new element to specified index in this Vector.
+             *
              * @param index
-             * @param element<E>
+             * @param <E>
              */
             void add(int index, const E &element) {
                 if (index < 0 || index >= this->original.size()) {
@@ -83,6 +86,7 @@ namespace Java {
 
             /**
              * Return capacity (current number of slots allocated for this Vector).
+             *
              * @return int
              */
             int capacity() const {
@@ -90,15 +94,41 @@ namespace Java {
             }
 
             /**
-             * Clear all element inside this Vector.
+             * Clears all element inside this Vector.
+             *
              */
             void clear() {
                 this->original.clear();
             }
 
             /**
-             * Return the first element (index = 0) of this Vector.
-             * @return element<E>
+             * Returns a clone of this Vector.
+             *
+             * @return Vector<E>
+             */
+            Vector<E> clone() const {
+                Vector<E> clonedVector;
+                E const *vectorData = this->original.data();
+                for (int i = 0; i < this->original.size(); i++) {
+                    clonedVector.add(vectorData[i]);
+                }
+                return clonedVector;
+            }
+
+            /**
+             * Gets an element at specified index.
+             *
+             * @param index
+             * @return <E>
+             */
+            E elementAt(int index) const {
+                return this->get(index);
+            }
+
+            /**
+             * Returns the first element (index = 0) of this Vector.
+             *
+             * @return <E>
              */
             E firstElement() {
                 if (this->original.empty()) {
@@ -108,16 +138,18 @@ namespace Java {
             }
 
             /**
-             * Get an element at specified index.
+             * Gets an element at specified index.
+             *
              * @param index
-             * @return element<E>
+             * @return <E>
              */
             E get(int index) const {
                 return this->original.at(index);
             }
 
             /**
-             * Check this Vector is empty or not.
+             * Checks this Vector is empty or not.
+             *
              * @return boolean
              */
             boolean isEmpty() const {
@@ -125,13 +157,14 @@ namespace Java {
             }
 
             /**
+             * Returns index of an element in this Vector.
              *
-             * @param e
+             * @param e             *
              * @return int
              */
             int indexOf(const E &e) const {
-                int cur_size = this->original.size();
-                for (int i = 0; i < cur_size; i++) {
+                int currentSize = this->original.size();
+                for (int i = 0; i < currentSize; i++) {
                     if (this->original[i] == e) {
                         return i;
                     }
@@ -140,8 +173,9 @@ namespace Java {
             }
 
             /**
-             * Return the last element of this Vector.
-             * @return element<E>
+             * Returns the last element of this Vector.
+             *
+             * @return <E>
              */
             E lastElement() const {
                 if (this->original.empty()) {
@@ -151,6 +185,25 @@ namespace Java {
             }
 
             /**
+             * The last index of an element.
+             * This function returns the index of the last occurrence of the specified element in this Vector.
+             * If this Vector doesn't contain the element, returns -1.
+             *
+             * @param e
+             * @return int
+             */
+            int lastIndexOf(const E &e) const {
+                int index = -1;
+                for (int i = 0; i < this->original.size(); i++) {
+                    if (e == this->original[i]) {
+                        index = i;
+                    }
+                }
+                return index;
+            }
+
+            /**
+             * Returns size (number of elements) of this Vector.
              *
              * @return int
              */
@@ -159,17 +212,46 @@ namespace Java {
             }
 
             /**
-             * Remove an element at specified index in this Vector.
+             * Removes an element at specified index in this Vector.
+             *
              * @param index
-             * @return element<E>
+             * @return <E>
              */
             E remove(int index) {
                 if (index < 0 || index >= this->original.size()) {
                     throw std::invalid_argument("index is out of range");
                 }
-                E rm_item = this->original.at(index);
+                E removedItem = this->original.at(index);
                 this->original.erase(this->original.begin() + index);
-                return rm_item;
+                return removedItem;
+            }
+
+            /**
+             * Removes all elements of this Vector.
+             */
+            void removeAllElements() {
+                this->clear();
+            }
+
+            /**
+             * Removes all elements have index between fromIndex (inclusive) and toIndex (exclusive).
+             *
+             * @param fromIndex
+             * @param toIndex
+             */
+            void removeRange(int fromIndex, int toIndex) {
+                if (fromIndex >= toIndex) {
+                    return;
+                }
+
+                int currentSize = this->original.size();
+                if (fromIndex < 0 || fromIndex >= currentSize || toIndex < 0 || toIndex >= currentSize) {
+                    return;
+                }
+
+                for (int i = fromIndex + (toIndex - fromIndex) - 1; i >= fromIndex; i--) {
+                    this->remove(i);
+                }
             }
         };
     }
