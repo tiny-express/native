@@ -148,14 +148,14 @@ namespace Java {
              *
              * @return int
              */
-            int	variant();
+            int variant();
 
             /**
              * The version number associated with this UUID.
              *
-             * @return
+             * @return int
              */
-            int	version();
+            int version();
 
             /**
              * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.

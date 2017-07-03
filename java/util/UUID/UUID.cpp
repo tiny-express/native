@@ -55,19 +55,19 @@ String UUID::digits(long value, int digit) {
  * @return UUID
  */
 UUID::UUID(Array<byte> data) {
-    long msb = 0;
-    long lsb = 0;
+    long mostSigBits = 0;
+    long leastSigBits = 0;
 
     for (int i = 0; i < 8; ++i) {
-        msb = (msb << 8) | (data[i] & 0xff);
+        mostSigBits = (mostSigBits << 8) | (data[i] & 0xff);
     }
 
     for (int j = 8; j < 16; ++j) {
-        lsb = (lsb << 8) | (data[j] & 0xff);
+        leastSigBits = (leastSigBits << 8) | (data[j] & 0xff);
     }
 
-    this->mostSigBits = msb;
-    this->leastSigBits = lsb;
+    this->mostSigBits = mostSigBits;
+    this->leastSigBits = leastSigBits;
     this->timestamp = time(0);
 }
 
@@ -199,7 +199,7 @@ int UUID::variant() {
 /**
  * The version number associated with this UUID.
  *
- * @return
+ * @return int
  */
 int UUID::version() {
     return (int)((this->mostSigBits >> 12) & 0x0f);
@@ -229,7 +229,7 @@ UUID UUID::randomUUID() {
  * Creates a UUID from the string standard representation as described in the toString() method.
  *
  * @param name
- * @return
+ * @return UUID
  */
 UUID UUID::fromString(String name) {
     Array<String> components = name.split("-");
