@@ -822,7 +822,7 @@ int Character::toCodePoint(wchar_t high, wchar_t low) {
 
 int Character::digit(int codePoint, int radix) {
     //FIXME: Currently support for radix 16 to work with UUID
-    //@thoangminh: please help to implement whole rest things
+
     if (radix != 16) {
         return -1;
     }
