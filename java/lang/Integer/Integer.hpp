@@ -37,9 +37,11 @@ namespace Java {
 		class Integer;
 		
 		class Integer : public virtual Number,
-		                          public virtual Comparable<Integer> {
+		                public virtual Comparable<Integer> {
 		private:
 			int original;
+			string string_original;
+
 		public:
 			Integer();
 			Integer(int original);
@@ -72,6 +74,7 @@ namespace Java {
 			}
 		
 		public:
+			Integer operator=(const Integer &target);
 			Integer operator+(const Integer &target);
 			Integer operator-(const Integer &target);
 			Integer operator/(const Integer &target);;
