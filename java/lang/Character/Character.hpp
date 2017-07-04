@@ -190,10 +190,7 @@ namespace Java {
              */
             static int codePointAt(Array<char> a, int index, int limit);
 
-            // throws ArrayIndexOutOfBoundsException if index out of bounds
-            static int codePointAtImpl(Array<char> a, int index, int limit);
-
-           /**
+            /**
             * Returns the code point preceding the given index of the
             * {@code char} array. If the {@code char} value at
             * {@code (index - 1)} in the {@code char} array is in
@@ -243,9 +240,6 @@ namespace Java {
             */
             static int codePointBefore(Array<char> a, int index, int start);
 
-            // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
-            static int codePointBeforeImpl(Array<char> a, int index, int start);
-
             /**
              * Returns the number of Unicode code points in a subarray of the
              * {@code char} array argument. The {@code offset}
@@ -265,8 +259,6 @@ namespace Java {
              * count} is larger than the length of the given array.
              */
             static int codePointCount(Array<char> a, int offset, int count);
-
-            static int codePointCountImpl(Array<char> a, int offset, int count);
 
             /**
              * Compares two {@code char} values numerically.
@@ -347,6 +339,16 @@ namespace Java {
              * @see     Character#isDigit(int)
              */
 			static int digit(int codePoint, int radix);
+
+        private:
+
+            // throws ArrayIndexOutOfBoundsException if index out of bounds
+            static int codePointAtImpl(Array<char> a, int index, int limit);
+
+            // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
+            static int codePointBeforeImpl(Array<char> a, int index, int start);
+
+            static int codePointCountImpl(Array<char> a, int offset, int count);
 		};
 	}
 }
