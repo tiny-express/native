@@ -138,13 +138,13 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean putAll(const HashMap<K, V> &map) {
-                typename std::map<K, V>::iterator it;
-                for (it = map.hashMap.begin(); it < map.hashMap.end(); ++it) {
-                    K key = it->first;
-                    V value = it->value;
+				typename std::map<K, V>::iterator it;
+				for (it = map.hashMap.begin(); it < map.hashMap.end(); ++it) {
+					K key = it->first;
+					V value = it->value;
 
-                    this->put(key, value);
-                }
+					this->put(key, value);
+				}
             }
 
 			/**
@@ -208,20 +208,20 @@ namespace Java {
 						string key = (string)it->first;
 						string value = ((Object *)this->get(key))->toString();
 
-                        string addCharacter = "";
-                        if (sizeCounter > 0) {
-                            addCharacter = ", ";
-                        }
+						string addCharacter = "";
+						if (sizeCounter > 0) {
+							addCharacter = ", ";
+						}
 
 						string holder = builder;
 						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
-                        free(holder);
+						free(holder);
 					}
 				}
 
-                string holder = builder;
-                asprintf(&builder, "%s%c\0", builder, '}');
-                free(holder);
+				string holder = builder;
+				asprintf(&builder, "%s%c\0", builder, '}');
+				free(holder);
 
 				return builder;
             }
