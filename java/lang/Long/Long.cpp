@@ -52,6 +52,7 @@ int Long::SIZE = 64;
  */
 Long::Long() {
     this->original = 0;
+    this->string_original = string_from_long(this->original);
 }
 
 /**
@@ -61,7 +62,9 @@ Long::Long() {
  * @return Long
  */
 Long::Long(long value) {
+    printf("Assign constructor\n");
     this->original = value;
+    this->string_original = string_from_long(this->original);
 }
 
 /**
@@ -72,12 +75,18 @@ Long::Long(long value) {
  */
 Long::Long(const Long &target) {
     this->original = target.original;
+    this->string_original = string_from_long(this->original);
 }
 
 /**
  * Default destructor
  */
 Long::~Long() {
+    printf("Call destructor\n");
+    if (this->string_original != NULL) {
+        printf("=>%ld %s\n", this->original, this->string_original);
+        free(this->string_original);
+    }
 }
 
 /**
@@ -537,9 +546,8 @@ String Long::toOctalString(long i) {
  *
  * @return String
  */
-String Long::toString() {
-    String result = toString(this->original);
-    return result;
+string Long::toString() const {
+    return this->string_original;
 }
 
 /**
@@ -548,9 +556,9 @@ String Long::toString() {
  * @param long i
  * @return String
  */
-String Long::toString(long i) {
-    String result = string_from_long(i);
-    return result;
+string Long::toString(long i) {
+    Long result = i;
+    return result.toString();
 }
 
 /**
@@ -647,6 +655,21 @@ String Long::toUnsignedString0(long val, int shift) {
 }
 
 /**
+ * Assign value of this object same as value of target object
+ *
+ * @param target
+ * @return Long
+ */
+Long Long::operator=(const Long &target) {
+    this->original = target.original;
+//    if (this->string_original != NULL) {
+//        free(this->string_original);
+//    }
+    this->string_original = string_from_long(this->original);
+    printf("%ld %s\n", this->original, this->string_original);
+}
+
+/**
  * Sum two Long
  *
  * @param Long target
@@ -711,7 +734,6 @@ boolean Long::operator==(const Long &target) const {
     if (this->original == target.original) {
         return true;
     }
-
     return false;
 }
 
@@ -781,7 +803,6 @@ boolean Long::operator>=(const Long &target) const {
     if (this->original < target.original) {
         return false;
     }
-
     return true;
 }
 
