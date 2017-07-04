@@ -68,9 +68,9 @@ STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, 
  */
 char *string_from_char(char target) {
 	if (target == '\0') {
-		return (char *) "";
+		return strdup("");
 	}
-	char *result = malloc(2 * sizeof(char));
+	char *result = calloc(2, sizeof(char));
 	result[ 0 ] = target;
 	result[ 1 ] = '\0';
 	return result;
@@ -127,10 +127,28 @@ int string_to_boolean(char *target) {
 	}
 	char *boolean_value = string_lower(target);
 	if (string_equals(boolean_value, "true")) {
+		free(boolean_value);
 		return TRUE;
 	}
 	if (string_to_int(boolean_value) == TRUE) {
+		free(boolean_value);
 		return TRUE;
 	}
+	free(boolean_value);
 	return FALSE;
+}
+
+/**
+ * String from boolean
+ *
+ * @param target
+ * @return string
+ */
+char *string_from_boolean(int target) {
+    if (target == FALSE) {
+        return strdup("false");
+    }
+
+    return strdup("true");
+
 }

@@ -48,7 +48,9 @@ namespace Java {
 		public:
 			URL();
 			URL(String spec);
+			URL(const URL &target);
 			~URL();
+
 		public:
 			String getHost();
 			String getPath();
@@ -75,6 +77,7 @@ namespace Java {
 			URLConnection();
 			URLConnection(URL url);
 			~URLConnection();
+
 		public:
 			URL getURL();
 			void setDoInput(boolean doInput);

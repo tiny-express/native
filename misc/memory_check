@@ -14,4 +14,6 @@ env | sort
 if [ "$TRAVIS_OS_NAME" != "osx" ]
 then
     valgrind --error-exitcode=42 --leak-check=full ./native_test
+else
+    ./native_test
 fi

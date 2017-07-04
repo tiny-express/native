@@ -30,7 +30,7 @@
 
 TEST (Common, QuickSort) {
 	srand(time(NULL));
-	int *array_int = malloc(50 * sizeof(int));
+	int *array_int = calloc(50, sizeof(int));
 	int index;
 	for (index = 0; index < 50; ++index) {
 		array_int[ index ] = rand();

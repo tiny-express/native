@@ -41,7 +41,7 @@ if (APPLE)
     set(CMAKE_MACOSX_RPATH 1)
 endif ()
 
-# Adhere to GNU filesystem layout conventions
+# GNU filesystem layout conventions
 include(GNUInstallDirs)
 
 # Force Linux and Darwin use GCC
@@ -94,40 +94,40 @@ endif ()
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
-# Include all C/C++ and Unix Assembly files
-file(GLOB_RECURSE SOURCES
-        common/*
-        crypto/*
-        datetime/*
-        java/*
-        math/*
-        network/*
-        server/*
-        storage/*
-        string/*
-        thread/*
-        type/*
-        vendor/*
-        validator/*
-        mock/*.c
-        )
-
+# Only header files
 file(GLOB_RECURSE HEADERS
         ./*.h
         library.hpp
         )
 
-# Include all unit test cases
-file(GLOB_RECURSE TESTS
+# Include all C/C++ and Unix Assembly files
+file(GLOB_RECURSE SOURCES_C
+        common/*
+        crypto/*
+        datetime/*
+        math/*
+        network/*
+        server/*
+        storage/*
+        string/*
+        system/*
+        thread/*
+        type/*
+        vendor/*
+        validator/*
+        )
+
+# Include all C unit test cases
+file(GLOB_RECURSE TESTS_C
         common/*_test.c
         crypto/*_test.c
         datetime/*_test.c
-        java/**/*Test.cpp
         math/*_test.c
         network/*_test.c
         server/*_test.c
         storage/*_test.c
         string/*_test.c
+        system/*_test.c
         thread/*_test.c
         type/*_test.c
         vendor/*_test.c
@@ -135,16 +135,32 @@ file(GLOB_RECURSE TESTS
         )
 
 # Remove all test files within c files
-foreach (test ${TESTS})
-    list(REMOVE_ITEM SOURCES ${test})
+foreach (test_c_file ${TESTS_C})
+    list(REMOVE_ITEM SOURCES_C ${test_c_file})
+endforeach ()
+
+# Only C++ unit test files
+file(GLOB_RECURSE SOURCES_CPP
+        java/**/*.cpp
+        )
+
+# Only C++ unit test files
+file(GLOB_RECURSE TESTS_CPP
+        java/**/*Test.cpp
+        )
+
+# Remove all test files within cpp files
+foreach (test_cpp_file ${TESTS_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS} ${SOURCES} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C}  misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME}_static ${SOURCES})
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME}_static ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -152,10 +168,35 @@ add_custom_target(
         COMMAND ./${PROJECT_NAME}_test
 )
 
-#add_custom_command(
-#    server
-#    COMMAND ./mock/mock_server.py
-#)
+# Run mock server
+add_custom_target(
+        server
+        COMMAND python ./misc/server.py
+)
+
+# Check memory leak
+add_custom_target(
+        leak
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
+)
+
+# Check memory leak
+add_custom_target(
+        leak-debug
+        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
+)
+
+# Check memory leak
+add_custom_target(
+        leak-c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
+)
+
+# Check memory leak
+add_custom_target(
+        leak-c-debug
+        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
+)
 
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
@@ -164,14 +205,23 @@ install(FILES ${HEADERS} DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native)
 install(FILES ${HEADERS} DESTINATION include/native)
 
+# Add uninstall
+add_custom_target(
+        uninstall
+        COMMAND rm -rf /usr/local/include/native
+        COMMAND rm -rf /usr/local/lib/libnative*
+)
+
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
-    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm)
+    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm)
+    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm)
 else ()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
-    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lrt)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
+    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
+    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} -lcrypto -lm -lrt)
 endif ()

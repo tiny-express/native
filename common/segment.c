@@ -26,58 +26,35 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "../string.h"
 #include "../common.h"
 
-#define P_SEG(TYPE);\
-inline TYPE *segment_pointer_##TYPE(TYPE *target, int from, int to) {\
-        if (target == NULL){\
-                return "";\
-        }\
-        int length_target = length_pointer_##TYPE(target);\
-        if (from > to || from < 0 || from > length_target || to < 0) {\
-                return "";\
-        }\
-        int length= to - from + 2;\
-        if (to >= length_target) {\
-                length= length_target - from + 1;\
-        }\
-        TYPE *pointer = calloc(length, sizeof(TYPE));\
-        memcpy(pointer, &target[from], length- 1);\
-        pointer[length] = '\0';\
-        return pointer;\
+inline char *segment_pointer_char(char *target_param, int from, int to) {
+        if (target_param == NULL) {
+                return strdup("");
+        }
+        int length_target = length_pointer_char(target_param);
+        if (from > to || from < 0 || from > length_target || to < 0) {
+                return strdup("");
+        }
+        char *target = strdup(target_param);
+        int length = to - from + 1;
+        if (to >= length_target) {
+                length = length_target - from + 1;
+        }
+	    char *pointer = calloc(length + 1, sizeof(char));
+        memcpy(pointer, &target[from], length);
+        free(target);
+        pointer[length] = '\0';
+        return pointer;
 }
 
-#define P_C_SEG(TYPE);\
-inline TYPE *segment_pointer_constant_##TYPE(const TYPE *target, int from, int to) {\
-        if (target == NULL){\
-                return "";\
-        }\
-        int length_target = length_pointer_##TYPE((TYPE*) target);\
-        if (from > to || from < 0 || from > length_target || to < 0) {\
-                return "";\
-        }\
-        int length= to - from + 2;\
-        if (to >= length_target) {\
-                length= length_target - from + 1;\
-        }\
-        TYPE *pointer = calloc(length, sizeof(TYPE));\
-        memcpy(pointer, &target[from], length- 1);\
-    pointer[length] = '\0';\
-        return pointer;\
+inline char **segment_pointer_pointer_char(char **target, int from, int to) {
+    int length_target = length_pointer_pointer_char(target);
+        if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
+                return NULL;
+        }
+        char **pointer = calloc((to - from + 2), sizeof(char*));
+        memcpy(pointer, &target[from], (to - from + 1) * sizeof(char*));
+        return pointer;
 }
-
-#define P_P_SEG(TYPE);\
-inline TYPE **segment_pointer_pointer_##TYPE(TYPE **target, int from, int to) {\
-    int length_target = length_pointer_pointer_##TYPE(target);\
-        if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {\
-                return NULL;\
-        }\
-        TYPE **pointer = calloc((to - from + 2), sizeof(TYPE*));\
-        memcpy(pointer, &target[from], (to - from + 1) * sizeof(TYPE*));\
-        return pointer;\
-}
-
-P_SEG(char);
-P_C_SEG(char);
-P_P_SEG(char);

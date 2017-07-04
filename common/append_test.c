@@ -53,8 +53,10 @@ TEST (Common, AppendPointerChar) {
 	ASSERT_STR("lazy", result[ 7 ]);
 	ASSERT_STR("dog", result[ 8 ]);
 	append = "";
+	free(result);
 	result = append_pointer_char(target, append);
 	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
+	free(result);
 }
 
 

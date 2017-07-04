@@ -32,88 +32,84 @@
 #include "../Iterator/Iterator.hpp"
 #include "../Collection/Collection.hpp"
 #include "../Comparator/Comparator.hpp"
+#include "../Vector/Vector.hpp"
+
 
 namespace Java {
     namespace Util {
         template <typename E>
         class Stack {
-            private:
-			std::stack<E> original;
-            
-            public:
-			Stack(){}
-			~Stack(){}
+            // TODO - extend Vector<E>, implement Serializable,
+            // Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess
 
-            public:
+		private:
+
+			std::stack<E> original;
+
+        public:
+
+            Stack(){}
+
             /**
-            * Stack empty - check the Stack is empty or not
+            * Stack empty - check whether the Stack is empty or not
             *
-            * @param original
+            * @return true only if this stack has no item; false otherwise
             */
             bool empty() {
-                int size = this->original.size();
-                if(size != 0) {
-                    return TRUE;
-                }
-                return FALSE;
+                return this->original.size() == 0;
             }
             
             /**
-            * Stack peek - return the top element
-            *
-            * @param original
-            */
+             * Stack peek - return the top element
+             *
+             * @return E
+             */
             E peek() {
                 return this->original.top();
             }
             
             /**
-            * Stack pop - return the top element and remove it
-            *
-            * @param original
-            */
+             * Stack pop - return the top element and remove it
+             *
+             * @return E
+             */
             E pop() {
                 E result = this->original.top();
                 this->original.pop();
                 return result;
             }
             
-            /**
-            * Stack push - Push new element 
+           /**
+            * Stack push - Push new element
             *
-            * @param original
+            * @param element
+            * @return E
             */
-            E push(const E &item) {
-                this->original.push(item);
-                return item;
+            E push(const E &element) {
+                this->original.push(element);
+                return element;
             }
        
-            /**
-            * Stack search - search the object in Stack, return the 1-based position from the top, -1 if can not find the object in Stack 
+           /**
+            * Stack search - search the object in Stack
             *
-            * @param original
+            * @param object
+            * @return the 1-based position from the top, -1 if can not find the object in Stack
             */
-            int search(const E &o) {
-                int position = 0;
-                int i;
-                for(i = 0; i < this->original.size(); i++) {
-                    if(i == o) {
-                        return i;
-                    }
-                }
-                return -1;
+            int search(const E &object) {
+               //TODO when Vector is done
+               //int index = lastIndexOf(Object);
+               //if(index>=0) {
+               //    return index;
+               //}
+               //return -1;
             }
-            
-            boolean add(E &e) {
-				this->original.push(e);
-				return TRUE;
-			}
-			
+
 			/**
-            * Size of Stack
-            *
-            * @param original
-            */
+			 * Size of Stack
+			 *
+			 * @return size of stack
+			 */
             int size() {
                 return this->original.size();
             }

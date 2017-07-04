@@ -30,74 +30,82 @@
 TEST (Network, HttpSchema) {
 	char *schema_http = http_schema("http://google.com");
 	ASSERT_STR(HTTP, schema_http);
+    free(schema_http);
 	
 	char *schema_https = http_schema("https://facebook.com");
 	ASSERT_STR(HTTPS, schema_https);
+    free(schema_https);
 	
-	char *schemaNull = http_schema("");
-	ASSERT_NULL(schemaNull);
-	
-	schemaNull = http_schema("ht tp://google.com/");
-	ASSERT_NULL(schemaNull);
+	char *schema_null = http_schema("");
+	ASSERT_STR("", schema_null);
+    free(schema_null);
+
+    schema_null = http_schema("ht tp://google.com/");
+    ASSERT_STR("", schema_null);
+    free(schema_null);
 }
 
 TEST (Network, HttpHostname) {
 	char *hostname = "foodtiny.com.vn";
 	char *foodtiny = http_hostname("https://foodtiny.com.vn/home/bundaumamtom/");
 	ASSERT_STR(hostname, foodtiny);
-	
+	free(foodtiny);
+
 	hostname = http_hostname("https://127.0.0.1/fanpage/bundaumamtom");
 	ASSERT_STR(LOCALHOST, hostname);
-	
-	
+    free(hostname);
+
 	hostname = http_hostname("http://google.com:3000/");
 	ASSERT_STR("google.com", hostname);
-	
+	free(hostname);
+
 	hostname = http_hostname("https://");
-	ASSERT_STR(NULL, hostname);
-	
+	ASSERT_STR("", hostname);
+    free(hostname);
+
 	hostname = http_hostname("");
-	ASSERT_STR(NULL, hostname);
+	ASSERT_STR("", hostname);
+    free(hostname);
 }
 
 TEST (Network, HttpPort) {
-	
+
 	int result = http_port("http://localhost:3001");
 	ASSERT_EQUAL(3001, result);
-	
+
 	result = http_port("https://localhost:5000/fanpage/bundaumamtom");
 	ASSERT_EQUAL(5000, result);
-	
+
 	result = http_port("https://foodtiny.com");
 	ASSERT_EQUAL(443, result);
-	
+
 	result = http_port("http://foodtiny.com");
 	ASSERT_EQUAL(80, result);
-	
+
 	result = http_port("http://foodtiny.com/asdfasdf:3241243");
 	ASSERT_EQUAL(80, result);
-	
+
 	result = http_port("http://foodtiny.com:3000/asdfasdf:3241243");
 	ASSERT_EQUAL(3000, result);
-	
+
 	result = http_port("https://foodtiny.com/");
 	ASSERT_EQUAL(443, result);
-	
+
 	result = http_port("https://foodtiny.com:1234?file/adsfasdf/aa");
 	ASSERT_EQUAL(1234, result);
-	
+
 	result = http_port("http://foodtiny.com");
 	ASSERT_EQUAL(80, result);
-	
+
 	result = http_port("alksdjsad");
 	ASSERT_EQUAL(-1, result);
-	
+
 	result = http_port(NULL);
 	ASSERT_EQUAL(-1, result);
-	
+
 	result = http_port("1");
 	ASSERT_EQUAL(-1, result);
-	
+
 	result = http_port("https://foodtiny.com");
 	ASSERT_EQUAL(443, result);
 }
@@ -105,13 +113,13 @@ TEST (Network, HttpPort) {
 TEST (Network, UrlPort) {
 	int port = url_port("http://google.com");
 	ASSERT_EQUAL(-1, port);
-	
+
 	port = url_port("http://google.com:80/");
 	ASSERT_EQUAL(80, port);
-	
+
 	port = url_port("https://google.com/");
 	ASSERT_EQUAL(-1, port);
-	
+
 	port = url_port("https://google.com:443");
 	ASSERT_EQUAL(443, port);
 }
@@ -121,24 +129,30 @@ TEST (Network, HttpQuery) {
 	char *result = http_query(url);
 	char *expect = "key1=value1&key2=value2";
 	ASSERT_STR(expect, result);
-	
+    free(result);
+
 	result = http_query("http://localhost/index?key1=value1&key2=value2:3000");
 	ASSERT_STR("key1=value1&key2=value2", result);
-	
+    free(result);
+
 	result = http_query("http://localhost/index");
 	expect = "";
 	ASSERT_STR(expect, result);
-	
+    free(result);
+
 	result = http_query("http://localhost/index?");
 	expect = "";
 	ASSERT_STR(expect, result);
-	
+    free(result);
+
 	result = http_query("http://localhost/index?");
 	expect = "";
 	ASSERT_STR(expect, result);
+    free(result);
 }
+
 TEST (Network, HttpRequest) {
-	
+
 	char *headers[2] = {
 		"\0"
 	};
@@ -146,26 +160,32 @@ TEST (Network, HttpRequest) {
 		"a=b",
 		'\0'
 	};
-	
+
 	char *response = http_request("POST", "http://localhost:9999/test", headers, body);
 	ASSERT_TRUE(( string_index(response, "a=b", 1) > 0 ));
-	
+    free(response);
+
 	response = http_request("GET", "http://localhost:9999/test", headers, body);
 	ASSERT_TRUE(( string_index(response, "a=b", 1) > 0 ));
+    free(response);
 }
 
 TEST (Network, HttpProtocol) {
 	char *protocol_http = http_protocol("http://google.com");
 	ASSERT_STR("http", protocol_http);
-	
+    free(protocol_http);
+
 	char *protocol_https = http_protocol("https://facebook.com");
 	ASSERT_STR("https", protocol_https);
-	
+    free(protocol_https);
+
 	char *protocol_null = http_protocol("");
-	ASSERT_NULL(protocol_null);
-	
+	ASSERT_STR("", protocol_null);
+    free(protocol_null);
+
 	protocol_null = http_protocol("ht tp://google.com/");
-	ASSERT_NULL(protocol_null);
+    ASSERT_STR("", protocol_null);
+    free(protocol_null);
 }
 
 TEST (Network, HttpPath) {
@@ -173,14 +193,28 @@ TEST (Network, HttpPath) {
 	char *result = http_path(target);
 	char *expect = "/index/file1/key.pem";
 	ASSERT_STR(expect, result);
-	
+    free(result);
+
 	target = "http://localhost:3000?key1=value1&key2=value2:3000";
 	result = http_path(target);
 	expect = "/";
 	ASSERT_STR(expect, result);
-	
+    free(result);
+
 	target = "https://google.com";
 	result = http_path(target);
 	expect = "/";
 	ASSERT_STR(expect, result);
+    free(result);
+
+	target = "https://";
+	result = http_path(target);
+	expect = "/";
+	ASSERT_STR("", result);
+    free(result);
+
+	target = "http://";
+	result = http_path(target);
+	ASSERT_STR("", result);
+    free(result);
 }

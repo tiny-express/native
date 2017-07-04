@@ -30,6 +30,10 @@
 namespace Java {
 	namespace Lang {
 		class Cloneable {
+
+		protected:
+			Cloneable() {};
+			virtual ~Cloneable() {};
 		};
 	}
 }

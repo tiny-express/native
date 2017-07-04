@@ -48,7 +48,7 @@ void distribution_counting_sort(int *array, int size) {
 		}
 	}
 	
-	int *counting_array = calloc(max_value, sizeof(int));
+	int *counting_array = calloc(2, sizeof(int));
 	
 	for (index = 0; index < size; index++) {
 		counting_array[ array[ index ]]++;

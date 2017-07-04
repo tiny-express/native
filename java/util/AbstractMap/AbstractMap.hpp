@@ -33,7 +33,14 @@ using namespace Java::Lang;
 
 namespace Java {
 	namespace Util {
-		class AbstractMap : public virtual Object {
+		class AbstractMap :
+			public Object
+			// public virtual Map
+			{
+
+		protected:
+			AbstractMap() {}
+			virtual ~AbstractMap() {}
 		
 		};
 	}

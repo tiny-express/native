@@ -28,15 +28,20 @@
 #define NATIVE_JAVA_LANG_INTEGER_HPP
 
 #include "../Number/Number.hpp"
+#include "../Comparable/Comparable.hpp"
+
+using namespace Java::Lang;
 
 namespace Java {
 	namespace Lang {
-		
 		class Integer;
 		
-		class Integer : public virtual Number {
+		class Integer : public virtual Number,
+		                public virtual Comparable<Integer> {
 		private:
 			int original;
+			string string_original;
+
 		public:
 			Integer();
 			Integer(int original);
@@ -51,11 +56,25 @@ namespace Java {
 			long longValue() const;
 			float floatValue() const;
 			double doubleValue() const;
-			string toString() const;
 			
+			string toString() const;
 			static Integer parseInt(String target);
+			int compareTo(const Integer &o) const override {
+				if (hashCode() == o.hashCode()) {
+					return 0;
+				}
+				if (instanceof<Integer>(o)) {
+					if (original < o.original) {
+						return -1;
+					} else if (original == o.original) {
+						return 0;
+					}
+				}
+				return 1;
+			}
 		
 		public:
+			Integer operator=(const Integer &target);
 			Integer operator+(const Integer &target);
 			Integer operator-(const Integer &target);
 			Integer operator/(const Integer &target);;
@@ -79,4 +98,3 @@ namespace Java {
 }
 
 #endif//NATIVE_JAVA_LANG_INTEGER_HPP
-

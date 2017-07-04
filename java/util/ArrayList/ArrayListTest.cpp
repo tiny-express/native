@@ -35,86 +35,79 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ArrayListConstructor) {
-	// Standard declaration
-	//ArrayList<String> stringArrayList;
-	//stringArrayList.add((String&) "Food");
-	//stringArrayList.add((String&) "Tiny");
-	//stringArrayList.add((String&) "Hello");
-	//stringArrayList.add((String&) "World");
-	//ASSERT_EQUAL(4, stringArrayList.size());
-	
-	// Java style declaration
-	// List *strings = new ArrayList<String>();
+    // Standard declaration
+	ArrayList<int> stringArrayList;
+    int value = 1324;
+	stringArrayList.add(value);
+	stringArrayList.add(value);
+	stringArrayList.add(value);
+	stringArrayList.add(value);
+	ASSERT_EQUAL(4, stringArrayList.size());
+
+    ArrayList<int> intArrayList;
+    ASSERT_EQUAL(0, intArrayList.size());
 }
 
-//TEST(JavaLang, ArrayListDestructor) {
-//    // Test destructor
-//    ArrayList<int> *intArray = new ArrayList<int>(10, 10);
-//    ArrayList<int> *pointerIntArray = intArray;
-//    delete intArray;
-//    ASSERT_EQUAL(0, pointerIntArray->size());
-//
-//    ArrayList<float> *floatArray = new ArrayList<float>(10);
-//    ArrayList<float> *pointerFloatArray = floatArray;
-//    delete floatArray;
-//    ASSERT_EQUAL(0, pointerFloatArray->size());
-//
-//    intArray = new ArrayList<int>;
-//    delete intArray;
-//
-//    intArray = new ArrayList<int>({1, 2, 3, 4});
-//    delete  intArray;
-//}
+TEST(JavaLang, ArrayListDestructor) {
+    // Test destructor
+    ArrayList<int> *intArray = new ArrayList<int>(10);
+    delete intArray;
+    intArray = NULL;
+    ASSERT_NULL(intArray);
+}
 
-//TEST(JavaLang, ArrayListsize) {
-//    // Test size of empty Array
-//    ArrayList<int> emptyArray;
-//    int expect = 0;
-//    int result = emptyArray.size();
-//    ASSERT_EQUAL(expect, result);
-//
-//    // Test is empty
-//    boolean isEmpty = emptyArray.isEmpty();
-//    ASSERT_TRUE(isEmpty);
-//
-//    // Test size of empty Array
-//    int size = 10;
-//    ArrayList<int> validArray(size);
-//    result = validArray.size();
-//    ASSERT_EQUAL(size, result);
-//
-//    // Test is not empty
-//    boolean notEmpty = validArray.isEmpty();
-//    ASSERT_FALSE(notEmpty);
-//
-//}
-//
-//TEST(Javalang, ArrayListFunction) {
-//    // Test function add with std::initializer_list
-//    ArrayList<byte> byteArray = {12, 13, 14};
-//    byteArray.addAll({15, 16, 17});
-//    int expect = 6;
-//    int result = byteArray.size();
-//    ASSERT_EQUAL(expect, result);
-//
-//    //
-//    ArrayList<byte> copyArray = byteArray;
-//    expect = 6;
-//    result = byteArray.size();
-//    ASSERT_EQUAL(expect, result);
-//
-//    // Create new Array from two Array
-//    ArrayList<byte> totalArray;
-//    totalArray.addAll(byteArray);
-//    totalArray.addAll(copyArray);
-//    expect = 12;
-//    result = totalArray.size();
-//    ASSERT_EQUAL(expect, result);
-//
-//    // Get value out of Array
-//    int resultNull = totalArray.get(-1);
-//    ASSERT_NULL(resultNull);
-//
-//    resultNull = totalArray.get(totalArray.size());
-//    ASSERT_NULL(resultNull);
-//}
+TEST(JavaLang, ArrayListSize) {
+    // Test size of empty Array
+    ArrayList<int> emptyArray;
+    int expect = 0;
+    int result = emptyArray.size();
+    ASSERT_EQUAL(expect, result);
+
+    // Test is empty
+    boolean isEmpty = emptyArray.isEmpty();
+    ASSERT_TRUE(isEmpty);
+
+    // Test size of empty Array
+    int size = 10;
+    ArrayList<int> validArray(size);
+    result = validArray.size();
+    ASSERT_EQUAL(size, result);
+
+    // Test is not empty
+    boolean notEmpty = validArray.isEmpty();
+    ASSERT_FALSE(notEmpty);
+}
+
+TEST(Javalang, ArrayListFunction) {
+    // Test function add with
+    ArrayList<int> intArray;
+
+    register int index;
+    for (index = 0; index < 6; ++index) {
+        intArray.add(index);
+    }
+    int expect = 6;
+    int result = intArray.size();
+    ASSERT_EQUAL(expect, result);
+
+    // Get value out of Array
+    intArray.get(-1);
+    ASSERT_EQUAL(0 ,intArray.get(-1));
+    ASSERT_EQUAL(5 ,intArray.get(intArray.size()));
+}
+
+TEST(JavaLang, ArrayListForEach) {
+    //
+    ArrayList<int> validArrayList;
+
+    int index;
+    for (index = 0; index < 100; ++index) {
+        validArrayList.add(index);
+    }
+
+    int expect = 0;
+    for (int element : validArrayList) {
+        ASSERT_EQUAL(expect, element);
+        expect++;
+    }
+}

@@ -24,10 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
 #include "../vendor.h"
 #include "../network.h"
 #include "../string.h"
 #include "../validator.h"
+#include "../network/response_parser.h"
 
 /**
  * Send mail via SendGrid service
@@ -60,17 +62,20 @@ int send_mail(
 	char *body[2];
 	asprintf(&body[ 0 ], SENDGRID_REQUEST_FORMAT, mail_to, mail_subject, mail_from, mail_content);
 	body[ 1 ] = '\0';
-	
+
+	char *auth_bearer_header = string_concat("Authorization: Bearer ", service_token);
 	char *header[3] = {
-		string_concat("Authorization: Bearer ", service_token),
+		auth_bearer_header,
 		"Content-Type: application/json",
 		'\0'
 	};
 	
 	char *response = http_request("POST", service_url, header, body);
-	if (strstr(response, "202 ACCEPTED") == NULL && strstr(response, SENDGRID_RESPONSE_SUCCESS) == NULL) {
-		return FALSE;
-	}
-	
-	return TRUE;
+    http_response *response_parser = parse(response);
+    int result = string_to_int(response_parser->status_code);
+    free(response);
+    free_http_response(response_parser);
+	free(auth_bearer_header);
+	free(body[0]);
+	return result == SENDGRID_RESPONSE_ACCEPTED;
 }

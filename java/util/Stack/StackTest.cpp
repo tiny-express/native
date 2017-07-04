@@ -30,96 +30,323 @@ extern "C" {
 
 #include "../../lang/String/String.hpp"
 #include "Stack.hpp"
+#include "../../lang/Integer/Integer.hpp"
 
 using namespace Java::Util;
 
-TEST(JavaUtil, StackConstructor) {
-    // Give a not empty Stack
-    Stack<int> stack;
-    int temp = 123;
-    stack.add(temp);
-    
+
+TEST(JavaLang, StackPush) {
+    // int
+    Stack<int> pushIntStack;
+
+    int pushInt1 = 1;
+    int pushInt2 = 2;
+    int pushInt3 = 3;
+
+    // Push elements to Stack
+    pushIntStack.push(pushInt1);
+    pushIntStack.push(pushInt2);
+    pushIntStack.push(pushInt3);
+
     // Check size
-    ASSERT_EQUAL(1, stack.size());
+    ASSERT_EQUAL(3, pushIntStack.size());
+
+    // Integer
+    Stack<Integer> pushIntegerStack;
+
+    Integer pushInteger1 = 1;
+    Integer pushInteger2 = 2;
+    Integer pushInteger3 = 3;
+
+    // Push elements to Stack
+    pushIntegerStack.push(pushInteger1);
+    pushIntegerStack.push(pushInteger2);
+    pushIntegerStack.push(pushInteger3);
+
+    // Check size
+    ASSERT_EQUAL(3, pushIntegerStack.size());
+
+    // string
+    Stack<String> pushStringStack;
+
+    String pushString1 = "1";
+    String pushString2 = "2";
+    String pushString3 = "3";
+
+    // Push elements to Stack
+    pushStringStack.push(pushString1);
+    pushStringStack.push(pushString2);
+    pushStringStack.push(pushString3);
+
+    // Check size
+    ASSERT_EQUAL(3, pushStringStack.size());
+
+    // Object
+    Stack<Object> pushObjectStack;
+
+    Object pushObject1;
+    Object pushObject2;
+    Object pushObject3;
+
+    // Push elements to Stack
+    pushObjectStack.push(pushObject1);
+    pushObjectStack.push(pushObject2);
+    pushObjectStack.push(pushObject3);
+
+    // Check size
+    ASSERT_EQUAL(3, pushObjectStack.size());
+
 }
 
 TEST(JavaLang, StackEmpty) {
     // Give an emtpy Stack
-    Stack<int> emptyStack;
-    ASSERT_FALSE(emptyStack.empty());
+
+    // int
+    Stack<int> emptyIntStack;
+    ASSERT_TRUE(emptyIntStack.empty());
+
+    // Integer
+    Stack<Integer> emptyIntegerStack;
+    ASSERT_TRUE(emptyIntegerStack.empty());
+
+    // string
+    Stack<String> emptyStringStack;
+    ASSERT_TRUE(emptyStringStack.empty());
+
+    // Object
+    Stack<Object> emptyObjectStack;
+    ASSERT_TRUE(emptyObjectStack.empty());
 
     // Give an not empty Stack
-    Stack<int> notEmptyStack;
-    
-    int temp = 123;
-    notEmptyStack.add(temp);
-    
-    ASSERT_TRUE(notEmptyStack.empty());
+
+    // int
+    Stack<int> notEmptyIntStack;
+    int intTemp = 123;
+    notEmptyIntStack.push(intTemp);
+    ASSERT_FALSE(notEmptyIntStack.empty());
+
+    // Integer
+    Stack<Integer> notEmptyIntegerStack;
+    Integer integerTemp = 123;
+    notEmptyIntegerStack.push(integerTemp);
+    ASSERT_FALSE(notEmptyIntegerStack.empty());
+
+    // string
+    Stack<String> notEmptyStringStack;
+    String stringTemp = "123";
+    notEmptyStringStack.push(stringTemp);
+    ASSERT_FALSE(notEmptyStringStack.empty());
+
+    // Object
+    Stack<Object> notEmptyObjectStack;
+    Object objectTemp;
+    notEmptyObjectStack.push(objectTemp);
+    ASSERT_FALSE(notEmptyObjectStack.empty());
 }
 
 TEST(JavaLang, StackPeek) {
-    Stack<int> peekStack;
-    
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
+    //int
+    Stack<int> peekIntStack;
+
+    int pushInt1 = 1;
+    int pushInt2 = 2;
+    int pushInt3 = 3;
+
     // Push elements to Stack
-    peekStack.push(push1);
-    peekStack.push(push2);
-    peekStack.push(push3);
-    
+    peekIntStack.push(pushInt1);
+    peekIntStack.push(pushInt2);
+    peekIntStack.push(pushInt3);
+
     // Return the top element without removing it
-    int result = peekStack.peek();
-    ASSERT_EQUAL(3, result);
+    int intResult = peekIntStack.peek();
+    ASSERT_TRUE(intResult == peekIntStack.peek());
+    ASSERT_EQUAL(3,peekIntStack.size());
+
+    // Integer
+    Stack<Integer> peekIntegerStack;
+
+    Integer pushInteger1 = 1;
+    Integer pushInteger2 = 2;
+    Integer pushInteger3 = 3;
+
+    // Push elements to Stack
+    peekIntegerStack.push(pushInteger1);
+    peekIntegerStack.push(pushInteger2);
+    peekIntegerStack.push(pushInteger3);
+
+    // Return the top element without removing it
+    Integer integerResult = peekIntegerStack.peek();
+    ASSERT_TRUE(integerResult == peekIntegerStack.peek());
+    ASSERT_EQUAL(3,peekIntegerStack.size());
+
+    // string
+    Stack<String> peekStringStack;
+
+    String pushString1 = "1";
+    String pushString2 = "2";
+    String pushString3 = "3";
+
+    // Push elements to Stack
+    peekStringStack.push(pushString1);
+    peekStringStack.push(pushString2);
+    peekStringStack.push(pushString3);
+
+    // Return the top element without removing it
+    String stringResult = peekStringStack.peek();
+    ASSERT_TRUE(stringResult == pushString3);
+    ASSERT_EQUAL(3,peekStringStack.size());
+
+    // Object - can't compare 2 objects
+    /*Stack<Object> peekObjectStack;
+
+    Object pushObject1;
+    Object pushObject2;
+    Object pushObject3;
+
+    // Push elements to Stack
+    peekObjectStack.push(pushObject1);
+    peekObjectStack.push(pushObject2);
+    peekObjectStack.push(pushObject3);
+
+    // Return the top element without removing it
+    ASSERT_TRUE( pushObject3 == peekObjectStack.peek());
+    ASSERT_EQUAL(3, peekObjectStack.size());*/
 }
 
 TEST(JavaLang, StackPop) {
-    Stack<int> popStack;
-    
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
+    //int
+    Stack<int> popIntStack;
+
+    int pushInt1 = 1;
+    int pushInt2 = 2;
+    int pushInt3 = 3;
+
     // Push elements to Stack
-    popStack.push(push1);
-    popStack.push(push2);
-    popStack.push(push3);
-    
+    popIntStack.push(pushInt1);
+    popIntStack.push(pushInt2);
+    popIntStack.push(pushInt3);
+
     // Return the top element and remove it
-    int result = popStack.pop();
-    ASSERT_EQUAL(3, result);
+    int intResult = popIntStack.pop();
+    ASSERT_TRUE(intResult == pushInt3);
+    ASSERT_EQUAL(2, popIntStack.size());
+
+    // Integer
+    Stack<Integer> popIntegerStack;
+
+    Integer pushInteger1 = 1;
+    Integer pushInteger2 = 2;
+    Integer pushInteger3 = 3;
+
+    // Push elements to Stack
+    popIntegerStack.push(pushInteger1);
+    popIntegerStack.push(pushInteger2);
+    popIntegerStack.push(pushInteger3);
+
+    // Return the top element and remove it
+    Integer integerResult = popIntegerStack.pop();
+    ASSERT_TRUE(integerResult == pushInteger3);
+    ASSERT_EQUAL(2, popIntegerStack.size());
+
+    // string
+    Stack<String> popStringStack;
+
+    String pushString1 = "1";
+    String pushString2 = "2";
+    String pushString3 = "3";
+
+    // Push elements to Stack
+    popStringStack.push(pushString1);
+    popStringStack.push(pushString2);
+    popStringStack.push(pushString3);
+
+    // Return the top element and remove it
+    String stringResult = popStringStack.pop();
+    ASSERT_TRUE(stringResult.equals(pushString3));
+    ASSERT_EQUAL(2, popStringStack.size());
+
+    // Object - can't compare 2 objects
+    /*Stack<Object> popObjectStack;
+
+    Object pushObject1;
+    Object pushObject2;
+    Object pushObject3;
+
+    // Push elements to Stack
+    popObjectStack.push(pushObject1);
+    popObjectStack.push(pushObject2);
+    popObjectStack.push(pushObject3);
+
+    // Return the top element and remove it
+    Object objectResult = popObjectStack.pop();
+    ASSERT_TRUE(pushObject3.equals(objectResult));
+    ASSERT_EQUAL(2, popObjectStack.size());*/
 }
 
-TEST(JavaLang, StackPush) {
-    Stack<int> pushStack;
+//TODO when Vector is done
+/*TEST(JavaLang, StackSearch) {
+    //int
+    Stack<int> searchIntStack;
 
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
+    int pushInt1 = 1;
+    int pushInt2 = 2;
+    int pushInt3 = 3;
+
     // Push elements to Stack
-    pushStack.push(push1);
-    pushStack.push(push2);
-    pushStack.push(push3);
-    
-    // Check size
-    ASSERT_EQUAL(3, pushStack.size());
-}
+    searchIntStack.push(pushInt1);
+    searchIntStack.push(pushInt2);
+    searchIntStack.push(pushInt3);
 
-TEST(JavaLang, StackSearch) {
-    Stack<int> searchStack;
-
-    int push1 = 1;
-    int push2 = 2;
-    int push3 = 3;
-    
-    // Push elements to Stack
-    searchStack.push(push1);
-    searchStack.push(push2);
-    searchStack.push(push3);
-    
     // Search elements in Stack
-    ASSERT_EQUAL(2, searchStack.search(2));
-    ASSERT_EQUAL(-1, searchStack.search(5));
-}
+    ASSERT_EQUAL(2, searchIntStack.search(pushInt2));
+    ASSERT_EQUAL(-1, searchIntStack.search(5));
+
+    // Integer
+    Stack<Integer> searchIntegerStack;
+
+    Integer pushInteger1 = 1;
+    Integer pushInteger2 = 2;
+    Integer pushInteger3 = 3;
+
+    // Push elements to Stack
+    searchIntegerStack.push(pushInteger1);
+    searchIntegerStack.push(pushInteger2);
+    searchIntegerStack.push(pushInteger3);
+
+    // Search elements in Stack
+    ASSERT_EQUAL(2, searchIntegerStack.search(pushInteger2));
+    ASSERT_EQUAL(-1, searchIntegerStack.search(5));
+
+    // string
+    Stack<String> searchStringStack;
+
+    String pushString1 = "1";
+    String pushString2 = "2";
+    String pushString3 = "3";
+
+    // Push elements to Stack
+    searchStringStack.push(pushString1);
+    searchStringStack.push(pushString2);
+    searchStringStack.push(pushString3);
+
+    // Search elements in Stack
+    ASSERT_EQUAL(2, searchStringStack.search(pushString2));
+    ASSERT_EQUAL(-1, searchStringStack.search("5"));
+
+    // Object
+    Stack<Object> searchObjectStack;
+
+    Object pushObject1;
+    Object pushObject2;
+    Object pushObject3;
+    Object pushObject5;
+
+    // Push elements to Stack
+    searchObjectStack.push(pushObject1);
+    searchObjectStack.push(pushObject2);
+    searchObjectStack.push(pushObject3);
+
+    // Search elements in Stack
+    ASSERT_EQUAL(2, searchObjectStack.search(pushObject2));
+    ASSERT_EQUAL(-1, searchObjectStack.search(pushObject5));
+}*/

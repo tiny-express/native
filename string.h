@@ -51,6 +51,7 @@ char *string_trim(char *target);
 int string_startswith(char *target, char *prefix);
 int string_endswith(char *target, char *suffix);
 char *string_random(char *target, int size);
+char *string_append(char **target, char subtarget);
 char *string_concat(char *target, char *subtarget);
 int string_equals(char *target1, char *target2);
 char *string_concat_asm(char *target, char *subtarget);
@@ -66,12 +67,14 @@ char *string_lower(char *target);
 char *string_title(char *target);
 char *string_standardized(char *target);
 int string_to_boolean(char *target);
-
+char *string_from_boolean(int target);
 char *url_encode(char *target);
 char *url_decode(char *target);
 
 char *find_param(char *name, char *params);
 char *find_param_from_url(char *name, char *url);
+
+void free_pointer_pointer_char(char** char_array);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

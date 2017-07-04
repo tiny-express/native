@@ -34,14 +34,17 @@ TEST (Vendor, EtcdGet) {
 #ifdef __APPLE__
 	return;
 #endif
-	char *node = etcd_get(ETCD_MASTER, "/elassandra/development/seeds/test_node");
+	char *node = etcd_get(ETCD_MASTER, ETCD_KEY);
 	ASSERT_TRUE(length_pointer_char(node) > 0);
-	
+	free(node);
+
 	node = etcd_get("", "/elassandra/development/seeds/test_node");
 	ASSERT_FALSE(length_pointer_char(node) > 0);
-	
+	free(node);
+
 	node = etcd_get(ETCD_MASTER, "");
 	ASSERT_FALSE(length_pointer_char(node) > 0);
+	free(node);
 }
 
 TEST (Vendor, EtcdSet) {

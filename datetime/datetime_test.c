@@ -48,14 +48,20 @@ TEST (DateTime, Format) {
 #ifdef __APPLE__
 	return;
 #endif
-	
+
 	long timestamp = 1473765499;
 	char *format = "d/m/y";
-	ASSERT_STR("13/09/2016", date(timestamp, format));
-	
+	char *result1 = date(timestamp, format);
+	ASSERT_STR("13/09/2016", result1);
+	free(result1);
+
 	timestamp = 1511208660;
-	ASSERT_STR("20/11/2017", date(timestamp, format));
-	
+	char *result2 = date(timestamp, format);
+	ASSERT_STR("20/11/2017", result2);
+	free(result2);
+
 	format = "y-m-d";
-	ASSERT_STR("2017-11-20", date(timestamp, format));
+	char *result3 = date(timestamp, format);
+	ASSERT_STR("2017-11-20", result3);
+	free(result3);
 }

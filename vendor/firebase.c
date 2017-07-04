@@ -25,12 +25,14 @@
  */
 
 
+#include <stdlib.h>
 #include "../string.h"
 #include "../network.h"
 #include "../validator.h"
 #include "../type.h"
 #include "../common.h"
 #include "../vendor.h"
+#include "../network/response_parser.h"
 
 /**
  * Push Notification via Google FireBase service
@@ -68,35 +70,34 @@ int push_notification(
 	}
 	
 	char *request_body[2];
-	asprintf(&request_body[ 0 ], FIREBASE_REQUEST_FORMAT, device_token, notification_title, notification_body, notification_data);
-	request_body[ 1 ] = '\0';
-	
+	asprintf(&request_body[0], FIREBASE_REQUEST_FORMAT, device_token, notification_title, notification_body, notification_data);
+	request_body[1] = '\0';
+
+	char* authorization_string = string_concat("Authorization: key=", service_token);
+
 	char *request_header[3] = {
-		string_concat("Authorization: key=", service_token),
+		authorization_string,
 		"Content-Type: application/json",
 		'\0'
 	};
 	
 	char *response = http_request("POST", service_url, request_header, request_body);
+    
+	free(request_body[0]);
+	free(authorization_string);
+
 	if (is_empty(response)) {
+		free(response);
 		return FALSE;
 	}
 	
-	// Firebase reponse has format
-	// {"success": 1}
-	// So we need to parse this response to get the success value
-	// TODO: @dquang replace by http_parser
-	response = string_from_to(
-		response,
-		string_index(response, "{", 1),
-		length_pointer_char(response) - 1
-	);
-	JSON_Value *root_value = json_parse_string(response);
+	http_response *response_parser = parse(response);
+	char* json = response_parser->body;
+	JSON_Value *root_value = json_parse_string(json);
 	JSON_Object *root_object = json_value_get_object(root_value);
 	int status_value = (int) json_object_get_number(root_object, (const char *) SUCCESS_LABEL);
-	if (status_value == SUCCESS_VALUE) {
-		return TRUE;
-	}
-	
-	return FALSE;
+	free(response);
+    free_http_response(response_parser);
+	json_value_free(root_value);
+	return status_value == SUCCESS_VALUE;
 }
