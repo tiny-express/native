@@ -85,6 +85,15 @@ namespace Java {
             }
 
             /**
+             * Adds an element to the end of this Vector.
+             *
+             * @param element
+             */
+            void addElement(const E &element) {
+                this->add(element);
+            }
+
+            /**
              * Return capacity (current number of slots allocated for this Vector).
              *
              * @return int
@@ -211,6 +220,16 @@ namespace Java {
             }
 
             /**
+             * Inserts the specified element at the specified index in this Vector.
+             *
+             * @param element
+             * @param index
+             */
+            void insertElementAt(const E &element, int index) {
+                this->add(index, element);
+            }
+
+            /**
              * Returns the last element of this Vector.
              *
              * @return <E>
@@ -258,6 +277,16 @@ namespace Java {
             }
 
             /**
+             * Sets the element at the specified index of this Vector to be the specified element.
+             *
+             * @param element
+             * @param index
+             */
+            void setElementAt(const E &element, int index) {
+                this->set(index, element);
+            }
+
+            /**
              * Returns size (number of elements) of this Vector.
              *
              * @return int
@@ -279,6 +308,24 @@ namespace Java {
                 E removedItem = this->original.at(index);
                 this->original.erase(this->original.begin() + index);
                 return removedItem;
+            }
+
+            /**
+             * Removes the first occurrence of the specified element in this Vector.
+             *
+             * @param element
+             * @return boolean
+             */
+            boolean remove(const Object &element) {
+                E *referenceToElement = (E *)&element;
+                register int index;
+                for (index = 0; index < this->original.size(); index++) {
+                    if ((*referenceToElement) == this->original[index]) {
+                        this->remove(index);
+                        return true;
+                    }
+                }
+                return false;
             }
 
             /**

@@ -50,6 +50,17 @@ TEST(JavaUtil, VectorAdd) {
     ASSERT_EQUAL(4, vector.get(4));
 }
 
+TEST(JavaUtil, VectorAddElement) {
+    Vector<int> vector;
+    vector.addElement(1);
+    vector.addElement(2);
+    vector.addElement(3);
+    vector.addElement(4);
+    vector.addElement(5);
+    ASSERT_EQUAL(1, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+}
+
 TEST(JavaUtil, VectorClear) {
     // Given empty vector - return size of vector is 0.
     Vector<String> vector;
@@ -146,6 +157,22 @@ TEST(JavaUtil, VectorIndexOf) {
     ASSERT_EQUAL(2, vector.indexOf(4, 0));
 }
 
+TEST(JavaUtil, VectorInsertElementAt) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    ASSERT_EQUAL(1, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+    // Inserts an element.
+    vector.insertElementAt(0, 0);
+    // Checks that element after added.
+    ASSERT_EQUAL(0, vector.get(0));
+}
+
 TEST(JavaUtil, VectorLastElement) {
     // Given a valid vector, contains three elements are string - return the last element.
     Vector<String> vector;
@@ -185,6 +212,24 @@ TEST(JavaUtil, VectorSet) {
     ASSERT_EQUAL(0, vector.get(4));
 }
 
+TEST(JavaUtil, VectorSetElementAt) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Change element at index 0.
+    vector.setElementAt(10, 0);
+    // Check element at index 0.
+    ASSERT_EQUAL(10, vector.get(0));
+    // Change element at index 4.
+    vector.setElementAt(0, 4);
+    // Check element at index 4.
+    ASSERT_EQUAL(0, vector.get(4));
+}
+
 TEST(JavaUtil, VectorSize) {
     // Given a empty vector, then add an element - return size.
     Vector<int> vector;
@@ -208,15 +253,26 @@ TEST(JavaUtil, VectorSize) {
 TEST(JavaUtil, VectorRemove) {
     // Given empty vector, add three elements, remove at index 1 twice times, then remove at index 0.
     // Result is element that removed from vector.
-    Vector<int> vector;
-    vector.add(1);
-    vector.add(2);
-    vector.add(3);
-    ASSERT_EQUAL(2, vector.remove(1));
-    ASSERT_EQUAL(3, vector.remove(1));
-    ASSERT_EQUAL(1, vector.remove(0));
+    Vector<int> vector1;
+    vector1.add(1);
+    vector1.add(2);
+    vector1.add(3);
+    ASSERT_EQUAL(2, vector1.remove(1));
+    ASSERT_EQUAL(3, vector1.remove(1));
+    ASSERT_EQUAL(1, vector1.remove(0));
     // Check size of vector.
-    ASSERT_EQUAL(0, vector.size());
+    ASSERT_EQUAL(0, vector1.size());
+
+    // Given a valid vector, removes specified elements.
+    Vector<String> vector2;
+    vector2.add(String("1"));
+    vector2.add(String("2"));
+    vector2.add(String("3"));
+    vector2.add(String("4"));
+    vector2.add(String("5"));
+
+    ASSERT_FALSE(vector2.remove(String("10"))); // This element doesn't exists.
+    ASSERT_TRUE(vector2.remove(String("5")));
 }
 
 TEST(JavaUtil, VectorRemoveAllElements) {
@@ -235,7 +291,7 @@ TEST(JavaUtil, VectorRemoveAllElements) {
     ASSERT_EQUAL(0, vector.size());
 }
 
-// This class use to call some protected method in Vector class to run in test cases.
+// This class use to call some protected methods in Vector class to run in test cases.
 template <typename E>
 class VectorFriend : public Vector<E> {
 public:
