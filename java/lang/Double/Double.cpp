@@ -84,7 +84,10 @@ string Double::toString() const {
  * @return char
  */
 char Double::charValue() const {
-    return string_to_char(string_from_double(this->original));
+    string convertResult = string_from_double(this->original);
+    char charValueResult = string_to_char(convertResult);
+    free(convertResult);
+    return charValueResult;
 }
 
 /**

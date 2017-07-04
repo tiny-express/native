@@ -202,6 +202,49 @@ TEST (JavaLang, DoubleToString){
     free(actualResultToString);
 }
 
+TEST (JavaLang, DoubleCharValue){
+    // Create variable to test
+    Double variableTestCharValue;
+    char expectedResultCharValue;
+    char actualResultCharValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestCharValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultCharValue = 'i';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestCharValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultCharValue = '-';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test NaN_DOUBLE
+    variableTestCharValue = NaN_DOUBLE;
+    expectedResultCharValue = '-';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MAX_VALUE_DOUBLE
+    variableTestCharValue = MAX_VALUE_DOUBLE;
+    expectedResultCharValue = '1';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MIN_NORMAL_DOUBLE
+    variableTestCharValue = MIN_NORMAL_DOUBLE;
+    expectedResultCharValue = '2';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MIN_VALUE_DOUBLE
+    variableTestCharValue = MIN_VALUE_DOUBLE;
+    expectedResultCharValue = '4';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+}
+
 TEST (JavaLang, DoubleTestSample){
     // Create variable to test
     //variableTestTestSample;
