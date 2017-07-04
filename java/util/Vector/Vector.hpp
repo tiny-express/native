@@ -66,8 +66,8 @@ namespace Java {
              * @param e
              * @return boolean
              */
-            boolean add(const E &e) {
-                this->original.push_back(e);
+            boolean add(const E &element) {
+                this->original.push_back(element);
                 return true;
             }
 
@@ -109,8 +109,9 @@ namespace Java {
             Vector<E> clone() const {
                 Vector<E> clonedVector;
                 E const *vectorData = this->original.data();
-                for (int i = 0; i < this->original.size(); i++) {
-                    clonedVector.add(vectorData[i]);
+                register int index;
+                for (index = 0; index < this->original.size(); index++) {
+                    clonedVector.add(vectorData[index]);
                 }
                 return clonedVector;
             }
@@ -121,8 +122,8 @@ namespace Java {
              * @param e
              * @return boolean
              */
-            boolean contains(const E &e) const {
-                if (this->indexOf(e) == -1) {
+            boolean contains(const E &element) const {
+                if (this->indexOf(element) == -1) {
                     return false;
                 }
                 return true;
@@ -175,11 +176,12 @@ namespace Java {
              * @param e             *
              * @return int
              */
-            int indexOf(const E &e) const {
+            int indexOf(const E &element) const {
                 int currentSize = this->original.size();
-                for (int i = 0; i < currentSize; i++) {
-                    if (this->original[i] == e) {
-                        return i;
+                register int index;
+                for (index = 0; index < currentSize; index++) {
+                    if (element == this->original[index]) {
+                        return index;
                     }
                 }
                 return -1;
@@ -193,14 +195,14 @@ namespace Java {
              * @param index
              * @return int
              */
-            int indexOf(const E &e, int index) {
+            int indexOf(const E &element, int index) {
                 if (index < 0) {
                     throw std::invalid_argument("index is negative");
                 }
 
                 register int position;
                 for (position = index; position < this->original.size(); position++) {
-                    if (e == this->original[position]) {
+                    if (element == this->original[position]) {
                         return position;
                     }
                 }
@@ -228,14 +230,15 @@ namespace Java {
              * @param e
              * @return int
              */
-            int lastIndexOf(const E &e) const {
-                int index = -1;
-                for (int i = 0; i < this->original.size(); i++) {
-                    if (e == this->original[i]) {
-                        index = i;
+            int lastIndexOf(const E &element) const {
+                int lastIndexOfElement = -1;
+                register int index;
+                for (index = 0; index < this->original.size(); index++) {
+                    if (element == this->original[index]) {
+                        lastIndexOfElement = index;
                     }
                 }
-                return index;
+                return lastIndexOfElement;
             }
 
             /**
@@ -245,12 +248,12 @@ namespace Java {
              * @param e
              * @return the element previously at the specified index.
              */
-            E set(int index, const E &e) {
+            E set(int index, const E &element) {
                 if (index < 0 || index >= this->original.size()) {
                     throw std::invalid_argument("index is out of range");
                 }
                 E removedElement = this->get(index);
-                this->original[index] = e;
+                this->original[index] = element;
                 return removedElement;
             }
 

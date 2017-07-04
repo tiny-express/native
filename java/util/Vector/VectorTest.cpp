@@ -245,7 +245,6 @@ public:
 };
 
 TEST(JavaUtil, VectorRemoveRange) {
-
     // Given a valid vector.
     VectorFriend<int> vector;
     vector.add(1); // 0
