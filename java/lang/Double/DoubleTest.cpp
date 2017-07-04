@@ -32,6 +32,54 @@ extern "C" {
 
 using namespace Java::Lang;
 
+/**
+ * A constant holding the positive infinity of type
+ * {@code double}. It is equal to the value returned by
+ * {@code Double.longBitsToDouble(0x7ff0000000000000L)}.
+ */
+static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0;
+
+/**
+ * A constant holding the negative infinity of type
+ * {@code double}. It is equal to the value returned by
+ * {@code Double.longBitsToDouble(0xfff0000000000000L)}.
+ */
+static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0;
+
+/**
+ * A constant holding a Not-a-Number (NaN) value of type
+ * {@code double}. It is equivalent to the value returned by
+ * {@code Double.longBitsToDouble(0x7ff8000000000000L)}.
+ */
+static double NaN_DOUBLE = 0.0d / 0.0;
+
+/**
+ * A constant holding the largest positive finite value of type
+ * {@code double},
+ * (2-2<sup>-52</sup>)&middot;2<sup>1023</sup>.  It is equal to
+ * the hexadecimal floating-point literal
+ * {@code 0x1.fffffffffffffP+1023} and also equal to
+ * {@code Double.longBitsToDouble(0x7fefffffffffffffL)}.
+ */
+static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.7976931348623157e+308
+
+/**
+ * A constant holding the smallest positive normal value of type
+ * {@code double}, 2<sup>-1022</sup>.  It is equal to the
+ * hexadecimal floating-point literal {@code 0x1.0p-1022} and also
+ * equal to {@code Double.longBitsToDouble(0x0010000000000000L)}.
+ */
+static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.2250738585072014E-308
+
+/**
+ * A constant holding the smallest positive nonzero value of type
+ * {@code double}, 2<sup>-1074</sup>. It is equal to the
+ * hexadecimal floating-point literal
+ * {@code 0x0.0000000000001P-1022} and also equal to
+ * {@code Double.longBitsToDouble(0x1L)}.
+ */
+static double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.9e-324
+
 TEST (JavaLang, DoubleConstructor) {
 	// Given empty value for Double constructor and assign value - Return Double
 	Double emptyDouble;
@@ -103,4 +151,63 @@ TEST (JavaLang, DoubleParseDouble) {
 	// Given value for Double constructor and assign value - Return double
 	Double validDoublePointer = Double::parseDouble("6");
 	ASSERT_EQUAL(6, validDoublePointer.doubleValue());
+}
+
+TEST (JavaLang, DoubleToString){
+//	// Create variable to test
+//	Double variableTestToString;
+//	string expectedResultToString;
+//	string actualResultToString;
+//
+//	// Test POSITIVE_INFINITY_DOUBLE
+//	variableTestToString = POSITIVE_INFINITY_DOUBLE;
+//	expectedResultToString = "inf";
+//	actualResultToString = variableTestToString.toString();
+//	ASSERT_STR(expectedResultToString , actualResultToString);
+//    free(actualResultToString);
+
+//	// Test NEGATIVE_INFINITY_DOUBLE
+//	variableTestToString = NEGATIVE_INFINITY_DOUBLE;
+//	expectedResultToString = "-inf";
+//	actualResultToString = variableTestToString.toString();
+//	ASSERT_STR(expectedResultToString , actualResultToString);
+//
+//	// Test NaN_DOUBLE
+//    variableTestToString = NaN_DOUBLE;
+//    expectedResultToString = "-nan";
+//    actualResultToString = variableTestToString.toString();
+//    ASSERT_STR(expectedResultToString , actualResultToString);
+//
+//	// Test MAX_VALUE_DOUBLE
+//    variableTestToString = MAX_VALUE_DOUBLE;
+//    expectedResultToString = "1.797693134862316e+308";
+//    actualResultToString = variableTestToString.toString();
+//    ASSERT_STR(expectedResultToString , actualResultToString);
+//
+//	// Test MIN_NORMAL_DOUBLE
+//    variableTestToString = MIN_NORMAL_DOUBLE;
+//    expectedResultToString = "2.2250738585072014E-308";
+//    actualResultToString = variableTestToString.toString();
+//    ASSERT_STR(expectedResultToString , actualResultToString);
+
+	// Test MIN_VALUE_DOUBLE
+}
+
+TEST (JavaLang, DoubleTestSample){
+	// Create variable to test
+	//variableTestTestSample;
+	//expectedResultTestSample;
+	//actualResultTestSample;
+
+	// Test POSITIVE_INFINITY
+
+	// Test NEGATIVE_INFINITY
+
+	// Test NaN
+
+	// Test MAX_VALUE
+
+	// Test MIN_NORMAL
+
+	// Test MIN_VALUE
 }
