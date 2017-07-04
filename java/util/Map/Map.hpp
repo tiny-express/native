@@ -28,13 +28,12 @@
 
 namespace Java {
 	namespace Util {
-		
 		template <class K, class V>
 		class Map {
 
 		protected:
-			Map();
-			virtual ~Map() = 0;
+			Map() {};
+			virtual ~Map() {};
 
 		public:
 			/**
@@ -45,80 +44,41 @@ namespace Java {
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
 			 *
-			 * @param key
+			 * @param K key
 			 * @return boolean
 			 */
-			virtual boolean containsKey(Object) const = 0;
+			virtual boolean containsKey(K key) = 0;
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
 			 *
-			 * @param value
+			 * @param V value
 			 * @return boolean
 			 */
-			virtual boolean containsValue(Object) const = 0;
-
-			/**
-			 * Compares the specified object with this map for equality.
-			 *
-			 * @param o
-			 * @return boolean
-			 */
-			virtual boolean equals(Object) const = 0;
+			virtual boolean containsValue(V value) = 0;
 
 			/**
 			 * Returns the value to which the specified key is mapped,
 			 * or null if this map contains no mapping for the key.
 			 *
 			 * @param key
-			 * @return
+			 * @return V
 			 */
-			virtual V get(Object key) const = 0;
-
-			/**
-			 * Returns the hash code value for this map.
-			 *
-			 * @return int
-			 */
-			virtual long hashCode() const = 0;
+			virtual V *get(K key) = 0;
 
 			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
 			 * @return boolean
 			 */
-			virtual boolean isEmpty() const = 0;
-
-			/**
-			 * Associates the specified value with the specified key in this map (optional operation).
-			 *
-			 * @param key
-			 * @param value
-			 * @return V
-			 */
-			V put(K, V) {}
-
-			/**
-			 * Copies all of the mappings from the specified map to this map (optional operation).
-			 *
-			 * @param
-			 */
-			void putAll(Map<K,V>&);
-
-			/**
-			 * Removes the mapping for a key from this map if it is present (optional operation).
-			 *
-			 * @param key
-			 * @return V
-			 */
-			V remove(Object);
+			virtual boolean isEmpty() = 0;
 
 			/**
 			 * Returns the number of key-value mappings in this map.
 			 *
 			 * @return int
 			 */
-			virtual int size() const = 0;
+			virtual int size() = 0;
 
 		};
 	}
