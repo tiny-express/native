@@ -26,7 +26,6 @@ TEST (JavaLang, CharacterConstructor) {
     ASSERT_FALSE(variableTestConstructor.charValue() == 'm');
 }
 
-// TEST int Character::charCount(int codePoint).
 TEST (JavaLang, CharacterCharCount) {
     // Create variable to test Character::charCount(int codePoint).
     Character variableTestCharCount;
@@ -54,7 +53,6 @@ TEST (JavaLang, CharacterCharCount) {
     ASSERT_EQUAL(expectedResultCharCount, actualResultCharCount);
 }
 
-// TEST char Character::charValue().
 TEST (JavaLang, CharacterCharValue) {
     // Create variable to test Character::charValue().
     Character variableTestCharValue;
@@ -71,7 +69,6 @@ TEST (JavaLang, CharacterCharValue) {
     ASSERT_FALSE(variableTestCharValue.charValue() == 'm');
 }
 
-// TEST int Character::codePointBefore(Array<char> a, int index).
 TEST (JavaLang, CharacterCodePointAt) {
     // Create variable to test
     Array<char> arrayCodePointAt;
@@ -96,7 +93,6 @@ TEST (JavaLang, CharacterCodePointAt) {
     ASSERT_NOT_EQUAL(expectedResultCodePointAt,actualResultCodePointAt);
 }
 
-// TEST int Character::codePointAt(Array<char>, int index, int limit);
 TEST (JavaLang, CharacterCodePointAt2){
     // Create variable to test
     Array<char> arrayCodePointAt2;
@@ -153,43 +149,6 @@ TEST (JavaLang, CharacterCodePointAt2){
     ASSERT_EQUAL(expectedResultCodePointAt2 , actualResultCodePointAt2);
 }
 
-// TEST int Character::codePointAtImpl(char a[], int index, int limit).
-TEST (JavaLang, CharacterCodePointAtImpl){
-    // Create variable to test
-    Array<char> arrayCodePointAtImpl;
-    int indexCodePointAtImpl;
-    int limitCodePointAtImpl;
-    int expectedResultCodePointAtImpl;
-    int actualResultCodePointAtImpl;
-
-    // Assign value to arrayCodePointAtImpl
-    arrayCodePointAtImpl.push('a');
-    arrayCodePointAtImpl.push('b');
-    arrayCodePointAtImpl.push('c');
-
-    // Test valid case.
-    indexCodePointAtImpl = 0 ;
-    limitCodePointAtImpl = 3 ;
-    expectedResultCodePointAtImpl= 'a';
-    actualResultCodePointAtImpl = Character::codePointAtImpl(arrayCodePointAtImpl,indexCodePointAtImpl,limitCodePointAtImpl);
-    ASSERT_EQUAL(expectedResultCodePointAtImpl , actualResultCodePointAtImpl);
-
-    // Test valid case.
-    indexCodePointAtImpl = 1 ;
-    limitCodePointAtImpl = 3 ;
-    expectedResultCodePointAtImpl= 'b';
-    actualResultCodePointAtImpl = Character::codePointAtImpl(arrayCodePointAtImpl,indexCodePointAtImpl,limitCodePointAtImpl);
-    ASSERT_EQUAL(expectedResultCodePointAtImpl , actualResultCodePointAtImpl);
-
-    // Test invalid case.
-    indexCodePointAtImpl = 1;
-    limitCodePointAtImpl = 3 ;
-    expectedResultCodePointAtImpl= 'c';
-    actualResultCodePointAtImpl = Character::codePointAtImpl(arrayCodePointAtImpl,indexCodePointAtImpl,limitCodePointAtImpl);
-    ASSERT_NOT_EQUAL(expectedResultCodePointAtImpl , actualResultCodePointAtImpl);
-}
-
-// TEST int Character::codePointBefore(Array<char> a, int index).
 TEST (JavaLang, CharacterCodePointBefore){
     // Create variable to test
     Array<char> arrayCodePointBefore;
@@ -213,7 +172,6 @@ TEST (JavaLang, CharacterCodePointBefore){
     ASSERT_NOT_EQUAL(expectedResultCodePointBefore,actualResultCodePointBefore);
 }
 
-// TEST int Character::codePointBefore(Array<char> a, int index, int start).
 TEST (JavaLang, CharacterCodePointBefore2){
     // Create variable to test
     Array<char> arrayCodePointBefore2;
@@ -270,43 +228,6 @@ TEST (JavaLang, CharacterCodePointBefore2){
     ASSERT_EQUAL(expectedResultCodePointBefore2 , actualResultCodePointBefore2);
 }
 
-// TEST int Character::codePointBeforeImpl(char a[], int index, int start).
-TEST (JavaLang, CharacterCodePointBeforeImpl){
-    // Create variable to test
-    Array<char> arrayCodePointBeforeImpl;
-    int indexCodePointBeforeImpl;
-    int startCodePointBeforeImpl;
-    int expectedResultCodePointBeforeImpl;
-    int actualResultCodePointBeforeImpl;
-
-    // Assign value to a
-    arrayCodePointBeforeImpl.push('a');
-    arrayCodePointBeforeImpl.push('b');
-    arrayCodePointBeforeImpl.push('c');
-
-    // Test valid case.
-    indexCodePointBeforeImpl = 1 ;
-    startCodePointBeforeImpl = 0 ;
-    expectedResultCodePointBeforeImpl= 'a';
-    actualResultCodePointBeforeImpl = Character::codePointBeforeImpl(arrayCodePointBeforeImpl,indexCodePointBeforeImpl,startCodePointBeforeImpl);
-    ASSERT_EQUAL(expectedResultCodePointBeforeImpl , actualResultCodePointBeforeImpl);
-
-    // Test valid case.
-    indexCodePointBeforeImpl = 2 ;
-    startCodePointBeforeImpl = 0 ;
-    expectedResultCodePointBeforeImpl= 'b';
-    actualResultCodePointBeforeImpl = Character::codePointBeforeImpl(arrayCodePointBeforeImpl,indexCodePointBeforeImpl,startCodePointBeforeImpl);
-    ASSERT_EQUAL(expectedResultCodePointBeforeImpl , actualResultCodePointBeforeImpl);
-
-    // Test invalid case.
-    indexCodePointBeforeImpl = 3;
-    startCodePointBeforeImpl = 0 ;
-    expectedResultCodePointBeforeImpl= 'b';
-    actualResultCodePointBeforeImpl = Character::codePointBeforeImpl(arrayCodePointBeforeImpl,indexCodePointBeforeImpl,startCodePointBeforeImpl);
-    ASSERT_NOT_EQUAL(expectedResultCodePointBeforeImpl , actualResultCodePointBeforeImpl);
-}
-
-// TEST int Character::codePointCount(Array<char> a, int offset, int count).
 TEST (JavaLang,CharacterCodePointCount ){
     // Create variable to test
     Array<char> arrayCodePointCount;
@@ -363,43 +284,6 @@ TEST (JavaLang,CharacterCodePointCount ){
     ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
 }
 
-// TEST int Character::codePointCountImpl(char a[], int offset, int count).
-TEST (JavaLang,CharacterCodePointCountImpl ){
-    // Create variable to test
-    Array<char> arrayCodePointCountImpl;
-    int offsetCodePointCountImpl;
-    int countCodePointCountImpl;
-    int expectedResultCodePointCountImpl;
-    int actualResultCodePointCountImpl;
-
-    // Assign value to a
-    arrayCodePointCountImpl.push('a');
-    arrayCodePointCountImpl.push('b');
-    arrayCodePointCountImpl.push('c');
-
-    // Test valid case
-    offsetCodePointCountImpl = 0;
-    countCodePointCountImpl = 1;
-    expectedResultCodePointCountImpl = 1;
-    actualResultCodePointCountImpl = Character::codePointCountImpl(arrayCodePointCountImpl,offsetCodePointCountImpl,countCodePointCountImpl);
-    ASSERT_EQUAL(expectedResultCodePointCountImpl, actualResultCodePointCountImpl);
-
-    // Test valid case
-    offsetCodePointCountImpl = 0;
-    countCodePointCountImpl = 2;
-    expectedResultCodePointCountImpl = 2;
-    actualResultCodePointCountImpl = Character::codePointCountImpl(arrayCodePointCountImpl,offsetCodePointCountImpl,countCodePointCountImpl);
-    ASSERT_EQUAL(expectedResultCodePointCountImpl, actualResultCodePointCountImpl);
-
-    // Test invalid case
-    offsetCodePointCountImpl = 0;
-    countCodePointCountImpl = 2;
-    expectedResultCodePointCountImpl = 3;
-    actualResultCodePointCountImpl = Character::codePointCountImpl(arrayCodePointCountImpl,offsetCodePointCountImpl,countCodePointCountImpl);
-    ASSERT_NOT_EQUAL(expectedResultCodePointCountImpl, actualResultCodePointCountImpl);
-}
-
-// TEST int Character::compare(char x, char y).
 TEST (JavaLang, CharacterCompare){
     // Create variable to test
     char xCompare;
@@ -429,7 +313,6 @@ TEST (JavaLang, CharacterCompare){
     ASSERT_EQUAL(expectedResultCompare,actualResultCompare);
 }
 
-// TEST int Character::compareTo(Character anotherCharacter).
 TEST (JavaLang, CharacterCompareTo){
     // Create variable to test
     Character variableTestCompareTo;
@@ -472,8 +355,6 @@ TEST (JavaLang, CharacterTestSample){
     // Test exception
 }
 
-
-// TEST int Character::toCodePoint(wchar_t high, wchar_t low).
 TEST (JavaLang, CharacterToCodePoint){
     // Create variable to test
     wchar_t variableTest1ToCodePoint;
@@ -496,7 +377,6 @@ TEST (JavaLang, CharacterToCodePoint){
     ASSERT_NOT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
 }
 
-// TEST boolean Character::isHighSurrogate(wchar_t ch).
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
     wchar_t variableTestIsHighSurrogate;
@@ -516,7 +396,6 @@ TEST (JavaLang, CharacterIsHighSurrogate){
     ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
 }
 
-// TEST boolean Character::isLowSurrogate(wchar_t ch).
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
     wchar_t variableTestisLowSurrogate;
@@ -536,7 +415,6 @@ TEST (JavaLang, CharacterisLowSurrogate){
     ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
 }
 
-// TEST int Character::digit(int codePoint, int radix).
 TEST (JavaLang, CharacterDigit) {
     //Given valid and invalid value to test with digit(char char, int radix)
     char hexValueDigit = 'b';

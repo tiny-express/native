@@ -31,7 +31,6 @@ extern "C" {
 
 using namespace Java::Lang;
 
-/// TEST IntegerConstructor
 TEST (JavaLang, IntegerConstructor) {
     // Input an empty value to Integer constructor and assign value - Return integer
     Integer emptyIntegerConstructor;
@@ -47,7 +46,6 @@ TEST (JavaLang, IntegerConstructor) {
     ASSERT_EQUAL(13, validIntegerPointerConstructor.intValue());
 }
 
-/// TEST IntegerComparision
 TEST (JavaLang, IntegerComparision) {
     //Give a valid number and make a comparision
     Integer validNumberComparision = 2;
@@ -78,7 +76,6 @@ TEST (JavaLang, IntegerComparision) {
     ASSERT_TRUE(validNumberComparision >= targetNumberComparision);
 }
 
-/// TEST IntegerOperator
 TEST (JavaLang, IntegerOperator) {
     // Given a valid number
     Integer validNumberOperator = 5;
@@ -105,7 +102,6 @@ TEST (JavaLang, IntegerOperator) {
     ASSERT_TRUE(modNumberOperator == ( validNumberOperator % targetNumberOperator ));
 }
 
-/// TEST IntegerParseInt
 TEST (JavaLang, IntegerParseInt) {
 #ifdef __APPLE__
     return;
@@ -115,7 +111,6 @@ TEST (JavaLang, IntegerParseInt) {
     ASSERT_EQUAL(6, validIntegerPointerParseInt.intValue());
 }
 
-/// TEST IntegerCompareTo
 TEST (JavaLang, IntegerCompareTo) {
     /// Given valid Integer to compare with target
     Integer validValueCompareTo = 15;
@@ -138,7 +133,6 @@ TEST (JavaLang, IntegerCompareTo) {
     ASSERT_EQUAL(1, comparable->compareTo(integerCompareTo));
 }
 
-/// TEST IntegerToString
 TEST (JavaLang, IntegerToString) {
     // Input different values of type int to compare to the realResult of Integer::toString
     Integer zeroIntegerToString = 0;
@@ -173,7 +167,6 @@ TEST (JavaLang, IntegerToString) {
     ASSERT_STR(expectedResultToString, realResultToString);
 }
 
-/// TEST IntegerCharValue
 TEST (JavaLang, IntegerCharValue) {
     // Input different values of type int to compare to the result of Integer::charValue
     Integer zeroIntegerCharValue = 0;
@@ -209,7 +202,6 @@ TEST (JavaLang, IntegerCharValue) {
 
 }
 
-/// TEST IntegerStringValue
 TEST (JavaLang, IntegerStringValue) {
     // Input different values of type int to compare to the result of Integer::stringValue
     Integer zeroIntegerStringValue = 0;
@@ -244,7 +236,6 @@ TEST (JavaLang, IntegerStringValue) {
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 }
 
-/// TEST IntegerShortValue
 TEST (JavaLang, IntegerShortValue) {
     // Input different values of type int to compare to the result of Integer::shortValue
     Integer positiveIntegerShortValue = 1302;
@@ -267,7 +258,6 @@ TEST (JavaLang, IntegerShortValue) {
     ASSERT_NOT_EQUAL(notExpectedResultShortValue, realResultShortValue);
 }
 
-/// TEST IntegerIntValue
 TEST (JavaLang, IntegerIntValue) {
     // Input different values of type int to compare to the realResult of Integer::intValue
     Integer zeroIntegerIntValue = 0;
@@ -308,7 +298,6 @@ TEST (JavaLang, IntegerIntValue) {
     ASSERT_NOT_EQUAL(notExpectedResult, realResultIntValue);
 }
 
-/// TEST IntegerLongValue
 TEST (JavaLang, IntegerLongValue) {
     // Input different values of type int to compare to the realResult of Integer::longValue
     Integer positiveIntegerLongValue = 1302321013;
@@ -331,7 +320,6 @@ TEST (JavaLang, IntegerLongValue) {
     ASSERT_FALSE(notExpectedResult == realResultLongValue);
 }
 
-/// TEST IntegerFloatValue
 TEST (JavaLang, IntegerFloatValue) {
     // Input different values of type int to compare to the realResult of Integer::floatValue
     Integer positiveIntegerFloatValue = 12345;
@@ -346,7 +334,6 @@ TEST (JavaLang, IntegerFloatValue) {
     ASSERT_TRUE(expectedResultFloatValue == realResultFloatValue);
 }
 
-/// TEST IntegerDoubleValue
 TEST (JavaLang, IntegerDoubleValue) {
     // Input different values of type int to compare to the realResult of Integer::doubleValue
     Integer positiveIntegerDoubleValue = 123456789;
