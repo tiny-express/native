@@ -74,8 +74,8 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-	string result = string_from_double(this->original);
-	return result;
+	string resultToString = string_from_double(this->original);
+	return resultToString;
 }
 
 /**
@@ -96,7 +96,8 @@ char Double::charValue() const {
  * @return CString
  */
 string Double::stringValue() const {
-	return String::valueOf(this->original).toString();
+    string resultStringValue = string_from_double(this->original);
+    return resultStringValue;
 }
 
 /**
