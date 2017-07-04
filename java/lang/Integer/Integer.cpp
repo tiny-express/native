@@ -93,7 +93,7 @@ string Integer::toString() const {
  * @return char
  */
 char Integer::charValue() const {
-	char *convertResult = string_from_int(this->original);
+	string convertResult = string_from_int(this->original);
 	char result = string_to_char(convertResult);
 	free(convertResult);
 	return result;

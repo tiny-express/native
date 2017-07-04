@@ -86,7 +86,7 @@ String String::clone() {
  * @param index
  * @return String
  */
-char String::charAt(int index) {
+char String::charAt(int index) const{
 	if (( index < 0 ) || ( index > this->size - 1 )) {
 		return '\0';
 	}
@@ -343,7 +343,7 @@ int String::lastIndexOf(String str, int fromIndex) const {
  *
  * @return int
  */
-int String::length() {
+int String::length() const {
 	return this->size;
 }
 
