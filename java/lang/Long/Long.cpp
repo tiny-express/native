@@ -62,7 +62,6 @@ Long::Long() {
  * @return Long
  */
 Long::Long(long value) {
-    printf("Assign constructor\n");
     this->original = value;
     this->string_original = string_from_long(this->original);
 }
@@ -82,9 +81,7 @@ Long::Long(const Long &target) {
  * Default destructor
  */
 Long::~Long() {
-    printf("Call destructor\n");
     if (this->string_original != NULL) {
-        printf("=>%ld %s\n", this->original, this->string_original);
         free(this->string_original);
     }
 }
@@ -557,6 +554,9 @@ string Long::toString() const {
  * @return String
  */
 string Long::toString(long i) {
+    /*
+     * TODO: Fix this method because object result will be delete before return
+     */
     Long result = i;
     return result.toString();
 }
@@ -662,11 +662,11 @@ String Long::toUnsignedString0(long val, int shift) {
  */
 Long Long::operator=(const Long &target) {
     this->original = target.original;
-//    if (this->string_original != NULL) {
-//        free(this->string_original);
-//    }
+    if (this->string_original != NULL) {
+        free(this->string_original);
+    }
     this->string_original = string_from_long(this->original);
-    printf("%ld %s\n", this->original, this->string_original);
+    return *this;
 }
 
 /**

@@ -127,10 +127,10 @@ TEST (String, ConvertFromInt) {
 
 TEST (String, ConvertFromLong) {
     // Input the maximum value of type long to convert from long to string
-    long input = 393239259234023474L;
+    long input = 393239259234023474;
 
     // The expected result
-	char *expect = "393239259234023474L";
+	char *expect = "393239259234023474";
 
     // The real result
 	char *result = string_from_long(input);
@@ -138,7 +138,6 @@ TEST (String, ConvertFromLong) {
     // Than make a comparison between the expect result and the real result
 	ASSERT_STR(expect, result);
 	free(result);
-
 
     // Input the minimum value of type long to convert from long to string
     // Than make a comparison between the expect result and the real result
