@@ -51,7 +51,7 @@ static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0;
  * {@code double}. It is equivalent to the value returned by
  * {@code Double.longBitsToDouble(0x7ff8000000000000L)}.
  */
-static double NaN_DOUBLE = 0.0d / 0.0;
+static double NaN_DOUBLE = 0.0 / 0.0;
 
 /**
  * A constant holding the largest positive finite value of type
@@ -154,41 +154,45 @@ TEST (JavaLang, DoubleParseDouble) {
 }
 
 TEST (JavaLang, DoubleToString){
-//	// Create variable to test
-//	Double variableTestToString;
-//	string expectedResultToString;
-//	string actualResultToString;
-//
-//	// Test POSITIVE_INFINITY_DOUBLE
-//	variableTestToString = POSITIVE_INFINITY_DOUBLE;
-//	expectedResultToString = "inf";
-//	actualResultToString = variableTestToString.toString();
-//	ASSERT_STR(expectedResultToString , actualResultToString);
-//    free(actualResultToString);
+	// Create variable to test
+	Double variableTestToString;
+	string expectedResultToString;
+	string actualResultToString;
 
-//	// Test NEGATIVE_INFINITY_DOUBLE
-//	variableTestToString = NEGATIVE_INFINITY_DOUBLE;
-//	expectedResultToString = "-inf";
-//	actualResultToString = variableTestToString.toString();
-//	ASSERT_STR(expectedResultToString , actualResultToString);
-//
-//	// Test NaN_DOUBLE
+	// Test POSITIVE_INFINITY_DOUBLE
+	variableTestToString = POSITIVE_INFINITY_DOUBLE;
+	expectedResultToString = "inf";
+	actualResultToString = variableTestToString.toString();
+	ASSERT_STR(expectedResultToString , actualResultToString);
+    free(actualResultToString);
+
+	// Test NEGATIVE_INFINITY_DOUBLE
+	variableTestToString = NEGATIVE_INFINITY_DOUBLE;
+	expectedResultToString = "-inf";
+	actualResultToString = variableTestToString.toString();
+	ASSERT_STR(expectedResultToString , actualResultToString);
+	free(actualResultToString);
+
+	// Test NaN_DOUBLE
 //    variableTestToString = NaN_DOUBLE;
 //    expectedResultToString = "-nan";
 //    actualResultToString = variableTestToString.toString();
 //    ASSERT_STR(expectedResultToString , actualResultToString);
-//
-//	// Test MAX_VALUE_DOUBLE
+//	free(actualResultToString);
+
+	// Test MAX_VALUE_DOUBLE
 //    variableTestToString = MAX_VALUE_DOUBLE;
 //    expectedResultToString = "1.797693134862316e+308";
 //    actualResultToString = variableTestToString.toString();
 //    ASSERT_STR(expectedResultToString , actualResultToString);
-//
-//	// Test MIN_NORMAL_DOUBLE
+//	free(actualResultToString);
+
+	// Test MIN_NORMAL_DOUBLE
 //    variableTestToString = MIN_NORMAL_DOUBLE;
 //    expectedResultToString = "2.2250738585072014E-308";
 //    actualResultToString = variableTestToString.toString();
 //    ASSERT_STR(expectedResultToString , actualResultToString);
+//	free(actualResultToString);
 
 	// Test MIN_VALUE_DOUBLE
 }
