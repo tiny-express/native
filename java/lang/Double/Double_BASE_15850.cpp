@@ -74,8 +74,10 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-	string result = string_from_double(this->original);
-	return result;
+	string convertResult = string_from_double(this->original);
+	string toStringResult = convertResult;
+	free(convertResult);
+	return toStringResult;
 }
 
 /**
@@ -84,10 +86,7 @@ string Double::toString() const {
  * @return char
  */
 char Double::charValue() const {
-    string convertResult = string_from_double(this->original);
-    char charValueResult = string_to_char(convertResult);
-    free(convertResult);
-    return charValueResult;
+	return string_to_char(string_from_double(this->original));
 }
 
 /**

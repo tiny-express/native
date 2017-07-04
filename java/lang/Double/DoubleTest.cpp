@@ -245,6 +245,7 @@ TEST (JavaLang, DoubleCharValue){
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 }
 
+
 TEST (JavaLang, DoubleTestSample){
     // Create variable to test
     //variableTestTestSample;
