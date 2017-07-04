@@ -34,7 +34,7 @@ using namespace Java::Lang;
  * @param original
  */
 Double::Double() {
-	this->original = 0;
+    this->original = 0;
 }
 
 /**
@@ -43,7 +43,7 @@ Double::Double() {
  * @param original
  */
 Double::Double(double original) {
-	this->original = original;
+    this->original = original;
 }
 
 /**
@@ -52,7 +52,7 @@ Double::Double(double original) {
  * @param original
  */
 Double::Double(const Double &doubleNumber) {
-	this->original = doubleNumber.original;
+    this->original = doubleNumber.original;
 }
 
 Double::~Double() {
@@ -65,7 +65,7 @@ Double::~Double() {
  * @return double
  */
 Double Double::parseDouble(String target) {
-	return Double(string_to_double(target.toString()));
+    return Double(string_to_double(target.toString()));
 }
 
 /**
@@ -74,7 +74,8 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-	return string_from_double(this->original);
+    string result = string_from_double(this->original);
+    return result;
 }
 
 /**
@@ -83,7 +84,7 @@ string Double::toString() const {
  * @return char
  */
 char Double::charValue() const {
-	return string_to_char(string_from_double(this->original));
+    return string_to_char(string_from_double(this->original));
 }
 
 /**
@@ -92,7 +93,7 @@ char Double::charValue() const {
  * @return CString
  */
 string Double::stringValue() const {
-	return String::valueOf(this->original).toString();
+    return String::valueOf(this->original).toString();
 }
 
 /**
@@ -101,7 +102,7 @@ string Double::stringValue() const {
  * @return short
  */
 short Double::shortValue() const {
-	return this->original;
+    return this->original;
 }
 
 /**
@@ -110,7 +111,7 @@ short Double::shortValue() const {
  * @return int
  */
 int Double::intValue() const {
-	return this->original;
+    return this->original;
 }
 
 /**
@@ -119,7 +120,7 @@ int Double::intValue() const {
  * @return long
  */
 long Double::longValue() const {
-	return this->original;
+    return this->original;
 }
 
 /**
@@ -128,7 +129,7 @@ long Double::longValue() const {
  * @return float
  */
 float Double::floatValue() const {
-	return (float) this->original;
+    return (float) this->original;
 }
 
 /**
@@ -137,7 +138,7 @@ float Double::floatValue() const {
  * @return double
  */
 double Double::doubleValue() const {
-	return (double) this->original;
+    return (double) this->original;
 }
 
 /**
@@ -146,7 +147,7 @@ double Double::doubleValue() const {
  * @return Double
  */
 Double Double::operator+(const Double &target) {
-	return this->original + target.original;
+    return this->original + target.original;
 }
 
 /**
@@ -155,7 +156,7 @@ Double Double::operator+(const Double &target) {
  * @return Double
  */
 Double Double::operator-(const Double &target) {
-	return this->original - target.original;
+    return this->original - target.original;
 }
 
 /**
@@ -164,7 +165,7 @@ Double Double::operator-(const Double &target) {
  * @return Double
  */
 Double Double::operator*(const Double &target) {
-	return ( this->original * target.original );
+    return ( this->original * target.original );
 }
 
 /**
@@ -173,7 +174,7 @@ Double Double::operator*(const Double &target) {
  * @return Double
  */
 Double Double::operator/(const Double &target) {
-	return ( this->original / target.original );
+    return ( this->original / target.original );
 }
 
 // /**
@@ -191,7 +192,7 @@ Double Double::operator/(const Double &target) {
  * @return bool
  */
 boolean Double::operator==(const Double &target) const {
-	return this->original == target.original;
+    return this->original == target.original;
 }
 
 /**
@@ -200,7 +201,7 @@ boolean Double::operator==(const Double &target) const {
  * @return bool
  */
 boolean Double::operator!=(const Double &target) const {
-	return !this->operator==(target);
+    return !this->operator==(target);
 }
 
 /**
@@ -209,7 +210,7 @@ boolean Double::operator!=(const Double &target) const {
  * @return bool
  */
 boolean Double::operator<(const Double &target) const {
-	return this->original < target.original;
+    return this->original < target.original;
 }
 
 /**
@@ -218,7 +219,7 @@ boolean Double::operator<(const Double &target) const {
  * @return bool
  */
 boolean Double::operator>(const Double &target) const {
-	return this->original > target.original;
+    return this->original > target.original;
 }
 
 /**
@@ -227,7 +228,7 @@ boolean Double::operator>(const Double &target) const {
  * @return bool
  */
 boolean Double::operator<=(const Double &target) const {
-	return this->original <= target.original;
+    return this->original <= target.original;
 }
 
 /**
@@ -236,6 +237,5 @@ boolean Double::operator<=(const Double &target) const {
  * @return bool
  */
 boolean Double::operator>=(const Double &target) const {
-	return this->original >= target.original;
+    return this->original >= target.original;
 }
-
