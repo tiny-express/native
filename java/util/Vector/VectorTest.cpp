@@ -115,7 +115,6 @@ TEST(JavaUtil, VectorIsEmpty) {
     ASSERT_FALSE(vector.isEmpty());
 }
 
-
 TEST(JavaUtil, VectorIndexOf) {
     // Given a valid vector - return index of an element in vector.
     Vector<int> vector;
@@ -124,6 +123,15 @@ TEST(JavaUtil, VectorIndexOf) {
     vector.add(3);
     ASSERT_EQUAL(0, vector.indexOf(1));
     ASSERT_EQUAL(2, vector.indexOf(3));
+
+    vector.clear();
+    vector.add(1);
+    vector.add(2);
+    vector.add(4);
+    vector.add(4);
+    vector.add(5);
+    ASSERT_EQUAL(-1, vector.indexOf(4, 4));
+    ASSERT_EQUAL(2, vector.indexOf(4, 0));
 }
 
 TEST(JavaUtil, VectorLastElement) {

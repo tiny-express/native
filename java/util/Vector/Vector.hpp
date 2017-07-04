@@ -173,6 +173,29 @@ namespace Java {
             }
 
             /**
+             * Returns the index of the first occurrence of the specified element in this Vector,
+             * searching forwards from index, or returns -1 if the element is not found.
+             *
+             * @param e
+             * @param index
+             * @return int
+             */
+            int indexOf(const E &e, int index) {
+                if (index < 0) {
+                    throw std::invalid_argument("index is negative");
+                }
+
+                register int position;
+                for (position = index; position < this->original.size(); position++) {
+                    if (e == this->original[position]) {
+                        return position;
+                    }
+                }
+
+                return -1;
+            }
+
+            /**
              * Returns the last element of this Vector.
              *
              * @return <E>
