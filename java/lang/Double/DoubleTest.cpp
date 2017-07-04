@@ -32,52 +32,22 @@ extern "C" {
 
 using namespace Java::Lang;
 
-/**
- * A constant holding the positive infinity of type
- * {@code double}. It is equal to the value returned by
- * {@code Double.longBitsToDouble(0x7ff0000000000000L)}.
- */
+/// A constant holding the positive infinity of type
 static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
 
-/**
- * A constant holding the negative infinity of type
- * {@code double}. It is equal to the value returned by
- * {@code Double.longBitsToDouble(0xfff0000000000000L)}.
- */
+/// A constant holding the negative infinity of type
 static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
 
-/**
- * A constant holding a Not-a-Number (NaN) value of type
- * {@code double}. It is equivalent to the value returned by
- * {@code Double.longBitsToDouble(0x7ff8000000000000L)}.
- */
+/// A constant holding a Not-a-Number (NaN) value of type
 static double NaN_DOUBLE = 0.0 / 0.0; // -nan
 
-/**
- * A constant holding the largest positive finite value of type
- * {@code double},
- * (2-2<sup>-52</sup>)&middot;2<sup>1023</sup>.  It is equal to
- * the hexadecimal floating-point literal
- * {@code 0x1.fffffffffffffP+1023} and also equal to
- * {@code Double.longBitsToDouble(0x7fefffffffffffffL)}.
- */
+/// A constant holding the largest positive finite value of type
 static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
 
-/**
- * A constant holding the smallest positive normal value of type
- * {@code double}, 2<sup>-1022</sup>.  It is equal to the
- * hexadecimal floating-point literal {@code 0x1.0p-1022} and also
- * equal to {@code Double.longBitsToDouble(0x0010000000000000L)}.
- */
+/// A constant holding the smallest positive normal value of type
 static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
 
-/**
- * A constant holding the smallest positive nonzero value of type
- * {@code double}, 2<sup>-1074</sup>. It is equal to the
- * hexadecimal floating-point literal
- * {@code 0x0.0000000000001P-1022} and also equal to
- * {@code Double.longBitsToDouble(0x1L)}.
- */
+/// A constant holding the smallest positive nonzero value of type
 static double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
 
 TEST (JavaLang, DoubleConstructor) {
@@ -294,21 +264,307 @@ TEST (JavaLang, DoubleStringValue){
     free(actualResultStringValue);
 }
 
-TEST (JavaLang, DoubleTestSample){
+TEST (JavaLang, DoubleShortValue){
     // Create variable to test
-    //variableTestTestSample;
-    //expectedResultTestSample;
-    //actualResultTestSample;
+    Double variableTestShortValue;
+    short expectedResultShortValue;
+    short actualResultShortValue;
 
-    // Test POSITIVE_INFINITY
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestShortValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test NEGATIVE_INFINITY
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestShortValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test NaN
+    // Test NaN_DOUBLE
+    variableTestShortValue = NaN_DOUBLE;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MAX_VALUE
+    // Test MAX_VALUE_DOUBLE
+    variableTestShortValue = MAX_VALUE_DOUBLE;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MIN_NORMAL
+    // Test MIN_NORMAL_DOUBLE
+    variableTestShortValue = MIN_NORMAL_DOUBLE;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MIN_VALUE
+    // Test MIN_VALUE_DOUBLE
+    variableTestShortValue = MIN_VALUE_DOUBLE;
+    expectedResultShortValue= 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test valid case
+    variableTestShortValue = 5.9;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test valid case
+    variableTestShortValue = 5.4;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test invalid case
+    variableTestShortValue = 6;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_NOT_EQUAL(expectedResultShortValue , actualResultShortValue);
+}
+
+TEST (JavaLang, DoubleIntValue){
+    // Create variable to test
+    Double variableTestIntValue;
+    int expectedResultIntValue;
+    int actualResultIntValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestIntValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestIntValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test NaN_DOUBLE
+    variableTestIntValue = NaN_DOUBLE;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MAX_VALUE_DOUBLE
+    variableTestIntValue = MAX_VALUE_DOUBLE;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MIN_NORMAL_DOUBLE
+    variableTestIntValue = MIN_NORMAL_DOUBLE;
+    expectedResultIntValue = 0;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MIN_VALUE_DOUBLE
+    variableTestIntValue = MIN_VALUE_DOUBLE;
+    expectedResultIntValue= 0;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test valid case
+    variableTestIntValue = 5.9;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test valid case
+    variableTestIntValue = 5.4;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test invalid case
+    variableTestIntValue = 6;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_NOT_EQUAL(expectedResultIntValue , actualResultIntValue);
+}
+
+TEST (JavaLang, DoubleLongValue){
+    // Create variable to test
+    Double variableTestLongValue;
+    long expectedResultLongValue;
+    long actualResultLongValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestLongValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestLongValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test NaN_DOUBLE
+    variableTestLongValue = NaN_DOUBLE;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MAX_VALUE_DOUBLE
+    variableTestLongValue = MAX_VALUE_DOUBLE;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MIN_NORMAL_DOUBLE
+    variableTestLongValue = MIN_NORMAL_DOUBLE;
+    expectedResultLongValue = 0;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MIN_VALUE_DOUBLE
+    variableTestLongValue = MIN_VALUE_DOUBLE;
+    expectedResultLongValue= 0;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test valid case
+    variableTestLongValue = 5.9;
+    expectedResultLongValue= 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test valid case
+    variableTestLongValue = 5.4;
+    expectedResultLongValue= 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test invalid case
+    variableTestLongValue = 6;
+    expectedResultLongValue= 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_NOT_EQUAL(expectedResultLongValue , actualResultLongValue);
+}
+
+TEST (JavaLang, DoubleFloatValue){
+    // Create variable to test
+    Double variableTestFloatValue;
+    float expectedResultFloatValue;
+    float actualResultFloatValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestFloatValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultFloatValue = 1.0 / 0.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestFloatValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultFloatValue = -1.0/0.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test NaN_DOUBLE
+    variableTestFloatValue = NaN_DOUBLE;
+    expectedResultFloatValue = 0.0/0.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MAX_VALUE_DOUBLE
+    variableTestFloatValue = MAX_VALUE_DOUBLE;
+    expectedResultFloatValue = 1.0/0.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MIN_NORMAL_DOUBLE
+    variableTestFloatValue = MIN_NORMAL_DOUBLE;
+    expectedResultFloatValue = 0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MIN_VALUE_DOUBLE
+    variableTestFloatValue = MIN_VALUE_DOUBLE;
+    expectedResultFloatValue = 0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test valid case
+    variableTestFloatValue = 13.02;
+    expectedResultFloatValue = 13.02;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test valid case
+    variableTestFloatValue = 1.302;
+    expectedResultFloatValue = 1.302;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test invalid case
+    variableTestFloatValue = 130.2;
+    expectedResultFloatValue = 130.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_DBL_FAR(expectedResultFloatValue , actualResultFloatValue);
+}
+
+TEST (JavaLang, DoubleDoubleValue){
+    // Create variable to test
+    Double variableTestDoubleValue;
+    double expectedResultDoubleValue;
+    double actualResultDoubleValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestDoubleValue = POSITIVE_INFINITY_DOUBLE;
+    expectedResultDoubleValue = POSITIVE_INFINITY_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test NEGATIVE_INFINITY_DOUBLE
+    variableTestDoubleValue = NEGATIVE_INFINITY_DOUBLE;
+    expectedResultDoubleValue = NEGATIVE_INFINITY_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test NaN_DOUBLE
+    variableTestDoubleValue = NaN_DOUBLE;
+    expectedResultDoubleValue = NaN_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test MAX_VALUE_DOUBLE
+    variableTestDoubleValue = MAX_VALUE_DOUBLE;
+    expectedResultDoubleValue = MAX_VALUE_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test MIN_NORMAL_DOUBLE
+    variableTestDoubleValue = MIN_NORMAL_DOUBLE;
+    expectedResultDoubleValue = MIN_NORMAL_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test MIN_VALUE_DOUBLE
+    variableTestDoubleValue = MIN_VALUE_DOUBLE;
+    expectedResultDoubleValue = MIN_VALUE_DOUBLE;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test valid case
+    variableTestDoubleValue = 13.02;
+    expectedResultDoubleValue = 13.02;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test valid case
+    variableTestDoubleValue = 1.302;
+    expectedResultDoubleValue = 1.302;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
+
+    // Test invalid case
+    variableTestDoubleValue = 130.2;
+    expectedResultDoubleValue = 130.0;
+    actualResultDoubleValue = variableTestDoubleValue.doubleValue();
+    ASSERT_DBL_FAR(expectedResultDoubleValue , actualResultDoubleValue);
 }
