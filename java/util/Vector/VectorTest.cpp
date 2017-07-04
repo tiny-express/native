@@ -147,6 +147,24 @@ TEST(JavaUtil, VectorLastIndexOf) {
     ASSERT_EQUAL(3, vector.lastIndexOf(2));
 }
 
+TEST(JavaUtil, VectorSet) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Change element at index 0.
+    ASSERT_EQUAL(1, vector.set(0, 10));
+    // Check element at index 0.
+    ASSERT_EQUAL(10, vector.get(0));
+    // Change element at index 4.
+    ASSERT_EQUAL(5, vector.set(4, 0));
+    // Check element at index 4.
+    ASSERT_EQUAL(0, vector.get(4));
+}
+
 TEST(JavaUtil, VectorSize) {
     // Given a empty vector, then add an element - return size.
     Vector<int> vector;

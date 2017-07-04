@@ -203,6 +203,22 @@ namespace Java {
             }
 
             /**
+             * Replaces the element at the specified index with the specified element.
+             *
+             * @param index
+             * @param e
+             * @return the element previously at the specified index.
+             */
+            E set(int index, const E &e) {
+                if (index < 0 || index >= this->original.size()) {
+                    throw std::invalid_argument("index is out of range");
+                }
+                E removedElement = this->get(index);
+                this->original[index] = e;
+                return removedElement;
+            }
+
+            /**
              * Returns size (number of elements) of this Vector.
              *
              * @return int
