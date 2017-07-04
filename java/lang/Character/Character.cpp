@@ -411,15 +411,6 @@ Character::Character(char original) {
 Character::~Character() {
 }
 
-/**
- * Determines the number of {@code char} values needed to
- * represent the specified character (Unicode code point). If the
- * specified character is equal to or greater than 0x10000, then
- * the method returns 2. Otherwise, the method returns 1.
- *
- * @param   codePoint the character (Unicode code point) to be tested.
- * @return  2 if the character is a valid supplementary character; 1 otherwise.
- */
 int Character::charCount(int codePoint) {
     if(codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
         return 2;
@@ -427,63 +418,14 @@ int Character::charCount(int codePoint) {
     return 1;
 }
 
-/**
- * Returns the value of this {@code Character} object.
- * @return  the primitive {@code char} value represented by
- *          this object.
- */
 char Character::charValue() {
     return this->original;
 }
 
-/**
- * Returns the code point at the given index of the
- * {@code char} array. If the {@code char} value at
- * the given index in the {@code char} array is in the
- * high-surrogate range, the following index is less than the
- * length of the {@code char} array, and the
- * {@code char} value at the following index is in the
- * low-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at the given index is returned.
- *
- * @param a the {@code char} array
- * @param index the index to the {@code char} values (Unicode
- * code units) in the {@code char} array to be converted
- * @return the Unicode code point at the given index
- * @exception NullPointerException if {@code a} is null.
- * @exception IndexOutOfBoundsException if the value
- * {@code index} is negative or not less than
- * the length of the {@code char} array.
- */
 int Character::codePointAt(Array<char> a, int index) {
     return codePointAtImpl(a, index, a.length);
 }
 
-/**
- * Returns the code point at the given index of the
- * {@code char} array, where only array elements with
- * {@code index} less than {@code limit} can be used. If
- * the {@code char} value at the given index in the
- * {@code char} array is in the high-surrogate range, the
- * following index is less than the {@code limit}, and the
- * {@code char} value at the following index is in the
- * low-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at the given index is returned.
- *
- * @param a the {@code char} array
- * @param index the index to the {@code char} values (Unicode
- * code units) in the {@code char} array to be converted
- * @param limit the index after the last array element that
- * can be used in the {@code char} array
- * @return the Unicode code point at the given index
- * @exception NullPointerException if {@code a} is null.
- * @exception IndexOutOfBoundsException if the {@code index}
- * argument is negative or not less than the {@code limit}
- * argument, or if the {@code limit} argument is negative or
- * greater than the length of the {@code char} array.
- */
 int Character::codePointAt(Array<char> a, int index, int limit) {
     if (index >= limit || limit < 0 || limit > a.length) {
         return -1;
@@ -503,56 +445,10 @@ int Character::codePointAtImpl(Array<char> a, int index, int limit) {
     return c1;
 }
 
-/**
-   * Returns the code point preceding the given index of the
-   * {@code char} array. If the {@code char} value at
-   * {@code (index - 1)} in the {@code char} array is in
-   * the low-surrogate range, {@code (index - 2)} is not
-   * negative, and the {@code char} value at {@code (index - 2)}
-   * in the {@code char} array is in the
-   * high-surrogate range, then the supplementary code point
-   * corresponding to this surrogate pair is returned. Otherwise,
-   * the {@code char} value at {@code (index - 1)} is
-   * returned.
-   *
-   * @param a the {@code char} array
-   * @param index the index following the code point that should be returned
-   * @return the Unicode code point value before the given index.
-   * @exception NullPointerException if {@code a} is null.
-   * @exception IndexOutOfBoundsException if the {@code index}
-   * argument is less than 1 or greater than the length of the
-   * {@code char} array
-   */
 int Character::codePointBefore(Array<char> a, int index) {
     return codePointBeforeImpl(a, index, 0);
 }
 
-/**
- * Returns the code point preceding the given index of the
- * {@code char} array, where only array elements with
- * {@code index} greater than or equal to {@code start}
- * can be used. If the {@code char} value at {@code (index - 1)}
- * in the {@code char} array is in the
- * low-surrogate range, {@code (index - 2)} is not less than
- * {@code start}, and the {@code char} value at
- * {@code (index - 2)} in the {@code char} array is in
- * the high-surrogate range, then the supplementary code point
- * corresponding to this surrogate pair is returned. Otherwise,
- * the {@code char} value at {@code (index - 1)} is
- * returned.
- *
- * @param a the {@code char} array
- * @param index the index following the code point that should be returned
- * @param start the index of the first array element in the
- * {@code char} array
- * @return the Unicode code point value before the given index.
- * @exception NullPointerException if {@code a} is null.
- * @exception IndexOutOfBoundsException if the {@code index}
- * argument is not greater than the {@code start} argument or
- * is greater than the length of the {@code char} array, or
- * if the {@code start} argument is negative or not less than
- * the length of the {@code char} array.
- */
 int Character::codePointBefore(Array<char> a, int index, int start) {
     if (index <= start || start < 0 || start >= a.length) {
         return -1;
@@ -572,24 +468,6 @@ int Character::codePointBeforeImpl(Array<char> a, int index, int start) {
     return c2;
 }
 
-/**
- * Returns the number of Unicode code points in a subarray of the
- * {@code char} array argument. The {@code offset}
- * argument is the index of the first {@code char} of the
- * subarray and the {@code count} argument specifies the
- * length of the subarray in {@code char}s. Unpaired
- * surrogates within the subarray count as one code point each.
- *
- * @param a the {@code char} array
- * @param offset the index of the first {@code char} in the
- * given {@code char} array
- * @param count the length of the subarray in {@code char}s
- * @return the number of Unicode code points in the specified subarray
- * @exception NullPointerException if {@code a} is null.
- * @exception IndexOutOfBoundsException if {@code offset} or
- * {@code count} is negative, or if {@code offset +
- * count} is larger than the length of the given array.
- */
 int Character::codePointCount(Array<char> a, int offset, int count) {
     if (count > a.length - offset || offset < 0 || count < 0) {
         return -1;
@@ -610,147 +488,29 @@ int Character::codePointCountImpl(Array<char> a, int offset, int count) {
     return n;
 }
 
-/**
- * Compares two {@code char} values numerically.
- * The value returned is identical to what would be returned by:
- *    Character.valueOf(x).compareTo(Character.valueOf(y))
- *
- * @param  x the first {@code char} to compare
- * @param  y the second {@code char} to compare
- * @return the value {@code 0} if {@code x == y};
- *         a value less than {@code 0} if {@code x < y}; and
- *         a value greater than {@code 0} if {@code x > y}
- */
 int Character::compare(char x, char y) {
     return x - y;
 }
 
-/**
- * Compares two {@code Character} objects numerically.
- *
- * @param   anotherCharacter   the {@code Character} to be compared.
-
- * @return  the value {@code 0} if the argument {@code Character}
- *          is equal to this {@code Character}; a value less than
- *          {@code 0} if this {@code Character} is numerically less
- *          than the {@code Character} argument; and a value greater than
- *          {@code 0} if this {@code Character} is numerically greater
- *          than the {@code Character} argument (unsigned comparison).
- *          Note that this is strictly a numerical comparison; it is not
- *          locale-dependent.
- */
 int Character::compareTo(Character anotherCharacter) {
     return compare(this->charValue(), anotherCharacter.charValue());
 }
 
-/**
- * Determines if the given {@code char} value is a
- * "http://www.unicode.org/glossary/#high_surrogate_code_unit"
- * Unicode high-surrogate code unit
- * (also known as leading-surrogate code unit).
- *
- * Such values do not represent characters by themselves,
- * but are used in the representation of
- * "#supplementarysupplementary characters"
- * in the UTF-16 encoding.
- *
- * @param  ch the {@code char} value to be tested.
- * @return {@code true} if the {@code char} value is between
- *         {@link #MIN_HIGH_SURROGATE} and
- *         {@link #MAX_HIGH_SURROGATE} inclusive;
- *         {@code false} otherwise.
- * @see    Character#isLowSurrogate(char)
- * @see    Character.UnicodeBlock#of(int)
- */
 boolean Character::isHighSurrogate(wchar_t ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
 }
 
-/**
- * Determines if the given {@code char} value is a
- * "http://www.unicode.org/glossary/#low_surrogate_code_unit"
- * Unicode low-surrogate code unit
- * (also known as trailing-surrogate code unit).
- *
- * Such values do not represent characters by themselves,
- * but are used in the representation of
- * "#supplementarysupplementary characters"
- * in the UTF-16 encoding.
- *
- * @param  ch the {@code char} value to be tested.
- * @return {@code true} if the {@code char} value is between
- *         {@link #MIN_LOW_SURROGATE} and
- *         {@link #MAX_LOW_SURROGATE} inclusive;
- *         {@code false} otherwise.
- * @see    Character#isHighSurrogate(char)
- */
 boolean Character::isLowSurrogate(wchar_t ch) {
     return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
 }
 
-/**
- * Converts the specified surrogate pair to its supplementary code
- * point value. This method does not validate the specified
- * surrogate pair. The caller must validate it using {@link
- * #isSurrogatePair(char, char) isSurrogatePair} if necessary.
- *
- * @param  high the high-surrogate code unit
- * @param  low the low-surrogate code unit
- * @return the supplementary code point composed from the
- *         specified surrogate pair.
- */
 int Character::toCodePoint(wchar_t high, wchar_t low) {
     return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
                                    - (MIN_HIGH_SURROGATE << 10)
                                    - MIN_LOW_SURROGATE);
 }
 
-/**
- * Returns the numeric value of the specified character (Unicode
- * code point) in the specified radix.
- *
- * If the radix is not in the range {@code MIN_RADIX} &le;
- * {@code radix} &le; {@code MAX_RADIX} or if the
- * character is not a valid digit in the specified
- * radix, {@code -1} is returned. A character is a valid digit
- * if at least one of the following is true:
- * The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
- *     and the Unicode decimal digit value of the character (or its
- *     single-character decomposition) is less than the specified radix.
- *     In this case the decimal digit value is returned.
- * The character is one of the uppercase Latin letters
- *     {@code 'A'} through {@code 'Z'} and its code is less than
- *     {@code radix + 'A' - 10}.
- *     In this case, {@code codePoint - 'A' + 10}
- *     is returned.
- * The character is one of the lowercase Latin letters
- *     {@code 'a'} through {@code 'z'} and its code is less than
- *     {@code radix + 'a' - 10}.
- *     In this case, {@code codePoint - 'a' + 10}
- *     is returned.
- * The character is one of the fullwidth uppercase Latin letters A
- *     ({@code '\u005CuFF21'}) through Z ({@code '\u005CuFF3A'})
- *     and its code is less than
- *     {@code radix + '\u005CuFF21' - 10}.
- *     In this case,
- *     {@code codePoint - '\u005CuFF21' + 10}
- *     is returned.
- * The character is one of the fullwidth lowercase Latin letters a
- *     ({@code '\u005CuFF41'}) through z ({@code '\u005CuFF5A'})
- *     and its code is less than
- *     {@code radix + '\u005CuFF41'- 10}.
- *     In this case,
- *     {@code codePoint - '\u005CuFF41' + 10}
- *     is returned.
- *
- * @param   codePoint the character (Unicode code point) to be converted.
- * @param   radix   the radix.
- * @return  the numeric value represented by the character in the
- *          specified radix.
- * @see     Character#forDigit(int, int)
- * @see     Character#isDigit(int)
- */
 int Character::digit(int codePoint, int radix) {
     if (radix == 10) {
         switch (codePoint) {
