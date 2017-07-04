@@ -61,7 +61,7 @@ namespace Java {
 			HashMap<K, V> clone() {
 				HashMap<K, V> result;
 				for (auto const &element: this->hashMap) {
-					result.put(element->first, element.first);
+					result.put(element->first, element->second);
 				}
 
 				return result;

@@ -34,9 +34,16 @@ extern "C" {
 using namespace Java::Lang;
 using namespace Java::Util;
 
-/**
- * All test cases use put(), so we don't need to test this function, if it wrong, will cause all test cases wrong
- */
+TEST(JavaUtil, HashMapClone) {
+	// Given valid hash map to test clone()
+	HashMap<String, Double> hashMap;
+	hashMap.put("some key", 123.55);
+	hashMap.put("another thing and key", -44444.44444);
+
+	HashMap<String, Double> anotherMap = hashMap.clone();
+
+
+}
 
 TEST (JavaUtil, HashMapGet) {
 	// Given valid hash map to test get()
