@@ -84,6 +84,18 @@ TEST(JavaUtil, VectorClone) {
     ASSERT_EQUAL(5, clonedVector2.lastElement());
 }
 
+TEST(JavaUtil, VectorContains) {
+    // Given a valid vector - checks element exists or not.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    ASSERT_FALSE(vector.contains(0));
+    ASSERT_TRUE(vector.contains(5));
+}
+
 TEST(JavaUtil, VectorFirstElement) {
     // Given a valid vector, contains three elements are string - return the first element.
     Vector<String> vector;

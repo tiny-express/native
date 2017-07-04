@@ -116,6 +116,19 @@ namespace Java {
             }
 
             /**
+             * Returns true if this Vector contains the specified element.
+             *
+             * @param e
+             * @return boolean
+             */
+            boolean contains(const E &e) const {
+                if (this->indexOf(e) == -1) {
+                    return false;
+                }
+                return true;
+            }
+
+            /**
              * Gets an element at specified index.
              *
              * @param index
