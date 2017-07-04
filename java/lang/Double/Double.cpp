@@ -74,10 +74,7 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-	string convertResult = string_from_double(this->original);
-	string toStringResult = convertResult;
-	free(convertResult);
-	return toStringResult;
+	return string_from_double(this->original);
 }
 
 /**
