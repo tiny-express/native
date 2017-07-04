@@ -233,6 +233,7 @@ namespace Java {
                 this->clear();
             }
 
+        protected:
             /**
              * Removes all elements have index between fromIndex (inclusive) and toIndex (exclusive).
              *
@@ -249,8 +250,12 @@ namespace Java {
                     return;
                 }
 
-                for (int i = fromIndex + (toIndex - fromIndex) - 1; i >= fromIndex; i--) {
-                    this->remove(i);
+                // startPosition is the index of the last element in removed range [fromIndex .. startPosition].
+                // We need to reduce 1 because the element at toIndex will not be removed.
+                int startPosition = fromIndex + (toIndex - fromIndex) - 1;
+                register int position;
+                for (position = startPosition; position >= fromIndex; position--) {
+                    this->remove(position);
                 }
             }
         };

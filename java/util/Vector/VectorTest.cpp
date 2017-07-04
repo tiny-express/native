@@ -197,9 +197,19 @@ TEST(JavaUtil, VectorRemoveAllElements) {
     ASSERT_EQUAL(0, vector.size());
 }
 
+// This class use to call some protected method in Vector class to run in test cases.
+template <typename E>
+class VectorFriend : public Vector<E> {
+public:
+    void removeRange(int fromIndex, int toIndex) {
+        Vector<E>::removeRange(fromIndex, toIndex);
+    }
+};
+
 TEST(JavaUtil, VectorRemoveRange) {
+
     // Given a valid vector.
-    Vector<int> vector;
+    VectorFriend<int> vector;
     vector.add(1); // 0
     vector.add(2); // 1
     vector.add(3); // 2
