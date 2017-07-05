@@ -372,3 +372,20 @@ TEST(JavaUtil, VectorRemoveRange) {
     ASSERT_EQUAL(1, vector.get(0));
     ASSERT_EQUAL(4, vector.get(1));
 }
+
+TEST(JavaUtil, VectorTrimToSize) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    vector.add(6);
+    vector.trimToSize(); // Trims the capacity to be the current size.
+    ASSERT_EQUAL(vector.size(), vector.capacity());
+    vector.remove(0); // After removing an element, capacity is not equal with size.
+    ASSERT_NOT_EQUAL(vector.size(), vector.capacity());
+    vector.trimToSize();
+    ASSERT_EQUAL(vector.size(), vector.capacity());
+}

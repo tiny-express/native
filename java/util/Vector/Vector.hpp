@@ -410,6 +410,15 @@ namespace Java {
                     this->remove(position);
                 }
             }
+
+        public:
+            /**
+             * Trims the capacity of this Vector to be the Vector's current size.
+             *
+             */
+            void trimToSize() {
+                this->original.shrink_to_fit();
+            }
         };
     }
 }
