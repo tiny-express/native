@@ -39,6 +39,24 @@ TEST (JavaLang, ByteConstructor) {
 	ASSERT_EQUAL(3, emptyByte.intValue());
 }
 
+TEST (JavaLang, ByteEquals){
+    //Given 3 Bytes
+    Bytes firstBytes = 1;
+    Bytes secondBytes = 1;
+    Bytes thirdBytes = 3;
+
+    //Given an object not a Bytes
+
+    Object object;
+    //Test Bytes and Bytes
+//    ASSERT_TRUE(firstBytes.equals(secondBytes));
+    ASSERT_FALSE(firstBytes.equals(thirdBytes));
+
+    //Test Byte
+    ASSERT_FALSE(firstBytes.equals(object));
+
+}
+
 TEST (JavaLang, ByteOperator) {
 	// Given a valid number
 	byte validNumber = 5;
@@ -74,5 +92,7 @@ TEST (JavaLang, ByteParseByte) {
 	// Bytes validBytePointer = Bytes::parseByte("6");
 	// ASSERT_EQUAL(6, validBytePointer.intValue());
 }
+
+
 
 

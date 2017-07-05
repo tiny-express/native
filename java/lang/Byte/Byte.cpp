@@ -47,6 +47,15 @@ Bytes::Bytes(byte original) {
 }
 
 /**
+ * Construct a new Byte with the value of string
+ *
+ * @param string
+ */
+Bytes::Bytes(String string) {
+	this->original = parseByte(string);
+}
+
+/**
  * Byte initialization
  *
  * @param original
@@ -59,78 +68,12 @@ Bytes::~Bytes() {
 }
 
 /**
- * Parse byte
+ *Return the value of this Byte as a char
  *
- * @param target
- * @return Byte
+ * @return
  */
-byte Bytes::parseByte(String target) {
-	byte result(string_to_int(target.toString()));
-	return result;
-}
-
-
-/**
- * Byte to Char
- *
- * @return char
- */
-char Bytes::charValue() {
-	return string_to_char(string_from_char(this->original));
-}
-
-/**
- * Byte to String
- *
- * @return String
- */
-string Bytes::stringValue() {
-	return String::valueOf(this->original).toString();
-}
-
-/**
- * Short value of Byte
- *
- * @return short
- */
-short Bytes::shortValue() {
-	return (short)this->original;
-}
-
-/**
- * Integer value of Byte
- *
- * @return int
- */
-int Bytes::intValue() {
-	return this->original;
-}
-
-/**
- * Long value of Byte
- *
- * @return long
- */
-long Bytes::longValue() {
-	return (long)this->original;
-}
-
-/**
- * Float value of Byte
- *
- * @return float
- */
-float Bytes::floatValue() {
-	return (float) this->original;
-}
-
-/**
- * Double value of Byte
- *
- * @return double
- */
-double Bytes::doubleValue() {
-	return (double) this->original;
+char Bytes::charValue() const {
+    return string_to_char(string_from_char(this->original));
 }
 
 /**
@@ -139,109 +82,335 @@ double Bytes::doubleValue() {
  * @return byte
  */
 byte Bytes::byteValue() {
-	return (byte) this->original;
+	return this->original;
 }
 
+/**
+ * Compares two Byte objects numerically
+ *
+ * @return int
+ */
+int Bytes::compareTo(const Bytes &anotherByte) const {
+	return this->original-anotherByte.original;
+}
 
+/**
+ *
+ *
+ * @return
+ */
+Bytes Bytes::decode(String) {
+	return *this;
+}
+
+/**
+ * Double value of Byte
+ *
+ * @return double
+ */
+double Bytes::doubleValue() const{
+	return (double) this->original;
+}
+
+/**
+ * Compare this Byte to another Byte object
+ *
+ * @param object
+ * @return
+ */
+boolean Bytes::equals(Object object) {
+	if (instanceof<Bytes>(object)){
+        return this->original == parseByte(object.toString());
+    }
+	return false;
+}
+
+/**
+ * Returns the value of this Byte as an float.
+ *
+ * @return float
+ */
+float Bytes::floatValue() const {
+    return (float) this->original;
+}
+
+/**
+ * Returns a hash code for this Byte
+ *
+ * @return int
+ */
+int Bytes::hashCode() {
+    return (int) this->original;
+}
+
+/**
+ * Returns the value of this Byte as an int.
+ *
+ * @return int
+ */
+int Bytes::intValue() const {
+    return (int) this->original;
+}
+
+/**
+ * Returns the value of this Byte as an long.
+ *
+ * @return long
+ */
+long Bytes::longValue() const{
+    return (long) this->original;
+}
+
+/**
+ * Parse the parameter string as a byte
+ *
+ * @param target
+ * @return Byte
+ */
+byte Bytes::parseByte(String target) {
+	int value = string_to_int(target.toString());
+	if( value < MIN_VALUE || value > MAX_VALUE)
+	{
+		//TODO throw numberFormatException
+	}
+	return (byte)value;
+}
+
+/**
+ * Returns the value of this Byte as an short.
+ *
+ * @return short
+ */
+short Bytes::shortValue() const {
+    return (short) this->original;
+}
+/**
+ * Returns the value of this Byte as an String.
+ *
+ * @return
+ */
+string Bytes::stringValue() const {
+    return String::valueOf(this->original).toString();
+}
+
+/**
+ * Returns a String object representing this Byte's value
+ *
+ * @return
+ */
+String Bytes::toString() {
+    return String::valueOf((int)this->original);
+}
+
+/**
+ * Returns a new String object representing the specified byte with radix = 10
+ *
+ * @param byte
+ * @return
+ */
+String Bytes::toString(byte specifiedByte) {
+    return String::valueOf((int) specifiedByte);
+}
+
+/**
+ * Returns a Byte instance representing the specified byte value.
+ *
+ * @param targetByte
+ * @return
+ */
+Bytes Bytes::valueOf(byte targetByte) {
+	const int offset = 128;
+	return ByteCache::cache[(int)targetByte + offset];
+}
+
+/**
+ * Returns a Byte instance representing the specified String value.
+ *
+ * @param targetString
+ * @return
+ */
+Bytes Bytes::valueOf(String targetString) {
+    return Bytes(parseByte(targetString));
+}
 
 /**
  * Make a summation with target Byte
  *
+ * @param target
  * @return Byte
  */
-byte Bytes::operator+(const byte &target) {
-	return this->original + target;
+Bytes Bytes::operator+(const Bytes &target) {
+	return this->original + target.original;
 }
 
 /**
  * Make a subtraction with target Byte
  *
+ * @param target
  * @return Byte
  */
-byte Bytes::operator-(const byte &target) {
-	return this->original - target;
+Bytes Bytes::operator-(const Bytes &target) {
+	return this->original - target.original;
 }
 
 /**
  *  Make a division from this Byte with target
  *
+ * @param target
  * @return Byte
  */
-byte Bytes::operator/(const byte &target) {
-	return  this->original / target;
+Bytes Bytes::operator/(const Bytes &target) {
+	return  this->original / target.original;
 }
 
 /**
  * Make a modulo from this Byte with target
  *
+ * @param target
  * @return Byte
  */
-byte Bytes::operator%(const byte &target) {
-	return this->original % target;
+Bytes Bytes::operator%(const Bytes &target) {
+	return this->original % target.original;
 }
 
 /**
  * Make a multiple from this Byte with target
  *
+ * @param target
  * @return Byte
  */
-byte Bytes::operator*(const byte &target) {
-	return this->original * target;
+Bytes Bytes::operator*(const Bytes &target) {
+	return this->original * target.original;
 }
 
 /**
  * Compare this Byte is equal target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator==(const byte &target) {
-	return this->original == target;
+boolean Bytes::operator==(const Bytes &target) {
+	return this->original == target.original;
 }
 
 /**
  * Compare this Byte is not equal target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator!=(const byte &target) {
-	return this->original != target;
+boolean Bytes::operator!=(const Bytes &target) {
+	return this->original != target.original;
 }
 
 /**
  * Compare this Byte is less than target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator<(const byte &target) {
-	return this->original < target;
+boolean Bytes::operator<(const Bytes &target) {
+	return this->original < target.original;
 }
 
 /**
  * Compare this Byte is more than target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator>(const byte &target) {
-	return this->original > target;
+boolean Bytes::operator>(const Bytes &target) {
+	return this->original > target.original;
 }
 
 /**
  * Compare this Byte is equal or less than target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator<=(const byte &target) {
-	return this->original <= target;
+boolean Bytes::operator<=(const Bytes &target) {
+	return this->original <= target.original;
 }
 
 /**
- *  Compare this Byte is equal or more than target
+ * Compare this Byte is equal or more than target
  *
+ * @param target
  * @return bool
  */
-boolean Bytes::operator>=(const  byte &target) {
-	return this->original >= target;
+boolean Bytes::operator>=(const  Bytes &target) {
+	return this->original >= target.original;
 }
+
+/**
+ *
+ * @param target
+ * @return
+ */
+Bytes Bytes::operator-=(const Bytes &target) {
+    this->original -= target.original;
+    return *this;
+}
+
+/**
+ * Make a add from this Byte with target and assign the result value to this Byte
+ *
+ * @param target
+ * @return
+ */
+Bytes Bytes::operator+=(const Bytes &target) {
+    this->original += target.original;
+    return *this;
+}
+/**
+ * Make a multiple from this Byte with target and assign the result value to this Byte
+ *
+ * @param target
+ * @return
+ */
+Bytes Bytes::operator*=(const Bytes &target) {
+    this->original *= target.original;
+    return *this;
+}
+/**
+ * Make a division from this Byte with target and assign the result value to this Byte
+ *
+ * @param target
+ * @return
+ */
+Bytes Bytes::operator/=(const Bytes &target) {
+    this->original /= target.original;
+    return *this;
+}
+/**
+ * Make a modulo from this Byte with target and assign the result value to this Byte
+ *
+ * @param target
+ * @return
+ */
+Bytes Bytes::operator%=(const Bytes &target) {
+    this->original %= target.original;
+    return *this;
+}
+
+/**
+ *  Assign the value of target to this Byte
+ *
+ * @param target
+ * @return
+ */
+Bytes &Bytes::operator=(const Bytes &target) {
+    this->original = target.original;
+    return *this;
+}
+
+
+
+
+
+
+
 
 
 

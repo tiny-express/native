@@ -24,58 +24,120 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-// #ifndef NATIVE_JAVA_LANG_BYTE_HPP
+#ifndef NATIVE_JAVA_LANG_BYTE_HPP
 #define NATIVE_JAVA_LANG_BYTE_HPP
 
 #include "../Number/Number.hpp"
+#include "../Integer/Integer.hpp"
 
 
 namespace Java {
-    namespace Lang {
-        
-        class Bytes;
-        
-        class Bytes : public virtual Number {
-        private:
-            // typedef unsigned char byte;
-            byte original; 
-        public:
-            Bytes();
-            Bytes(byte original);
-            Bytes(const Bytes &byteNumber);
-            ~Bytes();
-            
-        public:
-	        char charValue();
-			string stringValue();
-			short shortValue();
-			int intValue();
-			long longValue();
-			float floatValue();
-			double doubleValue();
-			string toString();
-			byte byteValue();
-			static byte parseByte(String target);
-		
-		public:
-			byte operator+(const byte &target);
-			byte operator-(const byte &target);
-			byte operator/(const byte &target);
-			byte operator%(const byte &target);
-			byte operator*(const byte &target);
-			boolean operator==(const byte &target);
-			boolean operator!=(const byte &target);
-			boolean operator<(const byte &target);
-			boolean operator>(const byte &target);
-			boolean operator<=(const byte &target);
-			boolean operator>=(const byte &target);
-			
-			void operator-=(const byte &target);
-			void operator+=(const byte &target);
-			void operator*=(const byte &target);
-			void operator/=(const byte &target);
-			void operator%=(const byte &target);
+	namespace Lang {
 
+
+
+        class Bytes;
+
+        class ByteCache;
+
+        class ByteCache{
+        public:
+            ByteCache(){
+                int index =0;
+                for(index;index< 256;index++)
+                    cache.[index]=(byte)(index - 128);
+            };
+            static Array<Bytes> cache;
         };
-    }
+
+		class Bytes : public virtual Number,
+            public virtual Comparable<Bytes>{
+
+		private:
+			byte original;
+			static const byte MIN_VALUE = -128;
+			static const byte MAX_VALUE = 127;
+			static const int SIZE = 8;
+
+
+		public:
+			Bytes();
+			Bytes(byte original);
+			Bytes(String string);
+			Bytes(const Bytes &byteNumber);
+			~Bytes();
+
+		public:
+			char charValue() const;
+
+			string stringValue() const;
+
+            byte byteValue ();
+
+			int compareTo(const Bytes & ) const;
+
+			Bytes decode(String);
+
+			double doubleValue() const;
+
+			boolean equals(Object );
+
+			float floatValue() const;
+
+			int hashCode();
+
+			int intValue() const;
+
+			long longValue() const ;
+
+			static byte parseByte(String);
+            
+			short shortValue() const;
+
+			String toString();
+
+			static String toString(byte);
+
+			Bytes valueOf(byte);
+
+			Bytes valueOf(String);
+            
+		public:
+			Bytes operator+(const Bytes &target);
+
+			Bytes operator-(const Bytes &target);
+
+			Bytes operator/(const Bytes &target);
+
+			Bytes operator%(const Bytes &target);
+
+			Bytes operator*(const Bytes &target);
+
+            Bytes &operator=(const Bytes &target);
+
+			boolean operator==(const Bytes &target);
+
+			boolean operator!=(const Bytes &target);
+
+			boolean operator<(const Bytes &target);
+
+			boolean operator>(const Bytes &target);
+
+			boolean operator<=(const Bytes &target);
+
+			boolean operator>=(const Bytes &target);
+
+			Bytes operator-=(const Bytes &target);
+
+			Bytes operator+=(const Bytes &target);
+
+			Bytes operator*=(const Bytes &target);
+
+			Bytes operator/=(const Bytes &target);
+
+			Bytes operator%=(const Bytes &target);
+
+		};
+	}
 }
+#endif
