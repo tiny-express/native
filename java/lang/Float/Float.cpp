@@ -28,7 +28,6 @@
 
 using namespace Java::Lang;
 
-
 /**
  * Float initialization
  *
@@ -36,6 +35,7 @@ using namespace Java::Lang;
  */
 Float::Float() {
 	this->original = 0;
+	this->string_original = string_from_float(this->original);
 }
 
 /**
@@ -45,6 +45,7 @@ Float::Float() {
  */
 Float::Float(float original) {
 	this->original = original;
+	this->string_original = string_from_float(this->original);
 }
 
 /**
@@ -54,10 +55,13 @@ Float::Float(float original) {
  */
 Float::Float(const Float &floatNumber) {
 	this->original = floatNumber.original;
+	this->string_original = string_from_float(this->original);
 }
 
 Float::~Float() {
-
+	if (this->string_original != NULL) {
+		free(this->string_original);
+	}
 }
 
 /**
@@ -124,16 +128,7 @@ double Float::doubleValue() const {
  * @return String
  */
 string Float::toString() const {
-	return string_from_float(this->original);
-}
-
-/**
- * Float to String
- *
- * @return CString
- */
-string Float::stringValue() const {
-	return string_from_float(this->original);
+	return this->string_original;
 }
 
 /**
@@ -143,7 +138,21 @@ string Float::stringValue() const {
  * @return Float
  */
 Float Float::parseFloat(String target) {
-	return Float(string_to_float(target.toString()));
+	Float result = string_to_float(target.toString());
+	return result;
+}
+
+/**
+ * Assign value of this object same as target value
+ *
+ * @param target
+ * @return Float
+ */
+Float Float::operator=(const Float &target) {
+	this->original = target.original;
+	free(this->string_original);
+	this->string_original = string_from_float(this->original);
+	return *this;
 }
 
 /**

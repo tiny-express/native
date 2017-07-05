@@ -29,12 +29,13 @@
 using namespace Java::Lang;
 
 /**
- * Integer initialization
+ * Double initialization
  *
  * @param original
  */
 Double::Double() {
-    this->original = 0;
+	this->original = 0;
+	this->string_original = string_from_double(this->original);
 }
 
 /**
@@ -43,7 +44,8 @@ Double::Double() {
  * @param original
  */
 Double::Double(double original) {
-    this->original = original;
+	this->original = original;
+	this->string_original = string_from_double(this->original);
 }
 
 /**
@@ -52,10 +54,17 @@ Double::Double(double original) {
  * @param original
  */
 Double::Double(const Double &doubleNumber) {
-    this->original = doubleNumber.original;
+	this->original = doubleNumber.original;
+	this->string_original = string_from_double(this->original);
 }
 
+/**
+ * Double Destructor
+ */
 Double::~Double() {
+	if (this->string_original != NULL) {
+		free(this->string_original);
+	}
 }
 
 /**
@@ -74,8 +83,7 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-    string result = string_from_double(this->original);
-    return result;
+	return this->string_original;
 }
 
 /**
@@ -109,7 +117,7 @@ short Double::shortValue() const {
 }
 
 /**
- * Double value in Integer
+ * Double value in Double
  *
  * @return int
  */
@@ -142,6 +150,19 @@ float Double::floatValue() const {
  */
 double Double::doubleValue() const {
     return (double) this->original;
+}
+
+/**
+ * Assign value of this object same as target value
+ *
+ * @param target
+ * @return Double
+ */
+Double Double::operator=(const Double &target) {
+	this->original = target.original;
+	free(this->string_original);
+	this->string_original = string_from_double(this->original);
+	return *this;
 }
 
 /**

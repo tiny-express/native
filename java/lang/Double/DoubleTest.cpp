@@ -29,7 +29,6 @@ extern "C" {
 }
 
 #include "Double.hpp"
-
 using namespace Java::Lang;
 
 /**
@@ -164,42 +163,36 @@ TEST (JavaLang, DoubleToString){
     expectedResultToString = "inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-    free(actualResultToString);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestToString = NEGATIVE_INFINITY_DOUBLE;
     expectedResultToString = "-inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-    free(actualResultToString);
 
     // Test NaN_DOUBLE
     variableTestToString = NaN_DOUBLE;
     expectedResultToString = "-nan";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-	free(actualResultToString);
 
     // Test MAX_VALUE_DOUBLE
     variableTestToString = MAX_VALUE_DOUBLE;
     expectedResultToString = "1.797693134862316e+308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-	free(actualResultToString);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestToString = MIN_NORMAL_DOUBLE;
     expectedResultToString = "2.225073858507201e-308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-	free(actualResultToString);
 
     // Test MIN_VALUE_DOUBLE
     variableTestToString = MIN_VALUE_DOUBLE;
     expectedResultToString = "4.940656458412465e-324";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
-    free(actualResultToString);
 }
 
 TEST (JavaLang, DoubleCharValue){

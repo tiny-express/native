@@ -34,6 +34,8 @@ namespace Java {
 		class Double : public virtual Number {
 		private:
 			double original;
+            string string_original;
+
 		public:
 			Double();
 			Double(double original);
@@ -53,6 +55,7 @@ namespace Java {
 			static Double parseDouble(String target);
 		
 		public:
+            Double operator=(const Double &target);
 			Double operator+(const Double &target);
 			Double operator-(const Double &target);
 			Double operator/(const Double &target);
