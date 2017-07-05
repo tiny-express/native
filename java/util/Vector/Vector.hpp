@@ -81,11 +81,8 @@ namespace Java {
              *
              * @param list
              */
-            Vector(const std::initializer_list<E> list) {
-                typename std::initializer_list<E>::iterator listIterator;
-                for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
-                    this->original.push_back(*listIterator);
-                }
+            Vector(const std::initializer_list<E> &list) {
+                this->addAll(list);
             }
 
             /**
@@ -132,6 +129,17 @@ namespace Java {
                 }
                 this->ensureCapacity(size + 1);
                 this->original.insert(this->original.begin() + index, element);
+            }
+
+            /**
+             * Appends all of the elements in the specified initializer list to the end of this Vector.
+             * @param list
+             */
+            void addAll(const std::initializer_list<E> &list) {
+                typename std::initializer_list<E>::iterator listIterator;
+                for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
+                    this->original.push_back(*listIterator);
+                }
             }
 
             /**

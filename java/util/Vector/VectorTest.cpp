@@ -104,6 +104,18 @@ TEST(JavaUtil, VectorAdd) {
     ASSERT_EQUAL(4, vector.get(4));
 }
 
+TEST(JavaUtil, VectorAddAll) {
+    // Given an empty vector.
+    Vector<int> vector;
+    // Add all elements from initializer list.
+    vector.addAll({1, 2, 3, 4 , 5});
+    // Checks size.
+    ASSERT_EQUAL(5, vector.size());
+    // Check the first-last elements.
+    ASSERT_EQUAL(1, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+}
+
 TEST(JavaUtil, VectorAddElement) {
     Vector<int> vector;
     vector.addElement(1);
