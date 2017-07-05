@@ -86,7 +86,7 @@ namespace Java {
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
                     capacity = capacity + 1;
-                    this->ensureCapacity(capacity);
+                    this->original.reserve(capacity);
                     this->original.push_back(*listIterator);
                 }
             }
