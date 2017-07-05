@@ -102,6 +102,7 @@ namespace Java {
              * @return boolean
              */
             boolean add(const E &element) {
+                this->ensureCapacity(this->original.size() + 1);
                 this->original.push_back(element);
                 return true;
             }
@@ -113,9 +114,11 @@ namespace Java {
              * @param <E>
              */
             void add(int index, const E &element) {
-                if (index < 0 || index >= this->original.size()) {
+                int size = this->original.size();
+                if (index < 0 || index >= size) {
                     throw std::invalid_argument("index is out of range");
                 }
+                this->ensureCapacity(size + 1);
                 this->original.insert(this->original.begin() + index, element);
             }
 

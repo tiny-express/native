@@ -38,8 +38,27 @@ TEST(JavaUtil, VectorDefaultConstructor) {
 }
 
 TEST(JavaUtil, VectorCustomConstructor) {
+    // Checks initial capacity.
     Vector<int> vector1(30);
     ASSERT_EQUAL(30, vector1.capacity());
+
+    // Checks initial capacity and capacity increment.
+    Vector<int> vector2(3, 2);
+    ASSERT_EQUAL(0, vector2.size());
+    ASSERT_EQUAL(3, vector2.capacity());
+    vector2.add(1);
+    ASSERT_EQUAL(1, vector2.size());
+    ASSERT_EQUAL(3, vector2.capacity());
+    vector2.add(2);
+    ASSERT_EQUAL(2, vector2.size());
+    ASSERT_EQUAL(3, vector2.capacity());
+    vector2.add(3);
+    ASSERT_EQUAL(3, vector2.size());
+    ASSERT_EQUAL(3, vector2.capacity());
+    // new capacity = old capacity + capacity increment.
+    vector2.add(4);
+    ASSERT_EQUAL(4, vector2.size());
+    ASSERT_EQUAL(5, vector2.capacity());
 }
 
 TEST(JavaUtil, VectorCopyConstructor) {
