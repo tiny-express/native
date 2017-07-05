@@ -44,8 +44,8 @@ UUID::UUID() {
  * @return String
  */
 String UUID::digits(long value, int digit) {
-    long hi = 1L << (digit * 4);
-    return Long::toHexString(hi | (value & (hi - 1))).subString(1);
+    long longValue = 1L << (digit * 4);
+    return Long::toHexString(longValue | (value & (longValue - 1))).subString(1);
 }
 
 /**
@@ -58,12 +58,13 @@ UUID::UUID(Array<byte> data) {
     long mostSigBits = 0;
     long leastSigBits = 0;
 
-    for (int i = 0; i < 8; ++i) {
-        mostSigBits = (mostSigBits << 8) | (data[i] & 0xff);
+    int index;
+    for (index = 0; index < 8; ++index) {
+        mostSigBits = (mostSigBits << 8) | (data[index] & 0xff);
     }
 
-    for (int j = 8; j < 16; ++j) {
-        leastSigBits = (leastSigBits << 8) | (data[j] & 0xff);
+    for (index = 8; index < 16; ++index) {
+        leastSigBits = (leastSigBits << 8) | (data[index] & 0xff);
     }
 
     this->mostSigBits = mostSigBits;
@@ -95,6 +96,9 @@ UUID::~UUID() {
  *
  * @param UUID target
  * @return int
+ *  -1 : if this object less than target either mostSigBits or leastSigBits
+ *  0 : if this object equal both of mostSigBits and leastSigBits
+ *  1 : if this object more than target either mostSigBits or leastSigBits
  */
 int	UUID::compareTo(UUID target) {
     if (this->mostSigBits < target.mostSigBits) {
@@ -117,6 +121,8 @@ int	UUID::compareTo(UUID target) {
  *
  * @param UUID target
  * @return boolean
+ * true : if the target are same mostSigBits and leastSigBits
+ * false : otherwise
  */
 boolean	UUID::equals(UUID target) {
     return (this->mostSigBits == target.mostSigBits &&
@@ -147,8 +153,8 @@ long UUID::getMostSignificantBits() {
  * @return int
  */
 int UUID::hashCode() {
-    long hilo = this->mostSigBits ^ this->leastSigBits;
-    return ((int)(hilo >> 32)) ^ (int) hilo;
+    long xorValue = this->mostSigBits ^ this->leastSigBits;
+    return ((int)(xorValue >> 32)) ^ (int) xorValue;
 }
 
 /**
@@ -192,8 +198,7 @@ String UUID::toString() {
  * @return int
  */
 int UUID::variant() {
-    return (int) ((this->leastSigBits >> (64 - (this->leastSigBits >> 62)))
-                  & (this->leastSigBits >> 63));
+    return (int) ((this->leastSigBits >> (64 - (this->leastSigBits >> 62))) & (this->leastSigBits >> 63));
 }
 
 /**
@@ -215,7 +220,7 @@ UUID UUID::randomUUID() {
 
     srand(time(0));
     for (int i = 0; i < 16; ++i) {
-        randomBytes[i] = (byte)(random()%1000000); //TODO: Improve this random
+        randomBytes[i] = (byte)(random()%1000000);
     }
 
     randomBytes[6]  &= 0x0f;  /* clear version        */
@@ -238,8 +243,9 @@ UUID UUID::fromString(String name) {
         return UUID();
     }
 
-    for (int i=0; i<5; i++)
-        components[i] = "0x"+components[i];
+    int index;
+    for (index = 0; index < 5; ++index)
+        components[index] = "0x"+components[index];
 
     long mostSigBits = Long::decode(components[0]).longValue();
     mostSigBits <<= 16;

@@ -33,10 +33,9 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace  Util {
-        class UUID
-        : public Object
-//        , public virtual Serializable
-//        , public virtual Comparable<UUID>
+        class UUID : public Object
+//                , public virtual Serializable
+//                , public virtual Comparable<UUID>
         {
 
         private:
@@ -90,6 +89,9 @@ namespace Java {
              *
              * @param UUID target
              * @return int
+             *  -1 : if this object less than target either mostSigBits or leastSigBits
+             *  0 : if this object equal both of mostSigBits and leastSigBits
+             *  1 : if this object more than target either mostSigBits or leastSigBits
              */
             int	compareTo(UUID target);
 
@@ -98,6 +100,8 @@ namespace Java {
              *
              * @param UUID target
              * @return boolean
+             * true : if the target are same mostSigBits and leastSigBits
+             * false : otherwise
              */
             boolean	equals(UUID target);
 
