@@ -51,7 +51,6 @@ namespace Java {
         public:
             /**
              * Construct an empty Vector with initial capacity is 10.
-             *
              */
             Vector() : Vector(10) { }
 
@@ -142,7 +141,6 @@ namespace Java {
 
             /**
              * Clears all element inside this Vector.
-             *
              */
             void clear() {
                 this->original.clear();
@@ -187,7 +185,7 @@ namespace Java {
             }
 
             /**
-             * Increases the capacity of this vector,
+             * Increases the capacity of this Vector,
              * if necessary, to ensure that it can hold at least the number of elements specified by
              * the minimum capacity argument.
              *
@@ -317,7 +315,7 @@ namespace Java {
             }
 
             /**
-             * Returns the index of the last occurrence of the specified element in this vector,
+             * Returns the index of the last occurrence of the specified element in this Vector,
              * searching backwards from index, or returns -1 if the element is not found.
              *
              * @param element
@@ -425,14 +423,13 @@ namespace Java {
 
             /**
              * Removes all elements of this Vector.
-             *
              */
             void removeAllElements() {
                 this->clear();
             }
 
             /**
-             * Removes the first (lowest-indexed) occurrence of the argument from this vector.
+             * Removes the first (lowest-indexed) occurrence of the argument from this ector.
              *
              * @param element
              * @return boolean
@@ -479,7 +476,6 @@ namespace Java {
         public:
             /**
              * Trims the capacity of this Vector to be the Vector's current size.
-             *
              */
             void trimToSize() {
                 this->original.shrink_to_fit();
