@@ -44,15 +44,37 @@ namespace Java {
 //                public virtual Cloneable,
 //                public virtual Serializable
         {
-        private:
+        protected:
             std::vector<E> original;
+            int capacityIncrement;
 
         public:
             /**
-             * Constructs an empty Vector.
+             * Construct an empty Vector with initial capacity is 10.
              *
              */
-            Vector() { }
+            Vector() : Vector(10) { }
+
+            /**
+             * Construct an empty Vector with custom initial capacity.
+             *
+             * @param initialCapacity
+             */
+            Vector(int initialCapacity) : Vector(initialCapacity, 0) { }
+
+            /**
+             * Construct an empty Vector with custom initial capacity and capacity increment.
+             *
+             * @param initialCapacity
+             * @param capacityIncrement
+             */
+            Vector(int initialCapacity, int capacityIncrement) {
+                if (initialCapacity < 0) {
+                    throw std::invalid_argument("initial capacity is negative");
+                }
+                this->original.reserve(initialCapacity);
+                this->capacityIncrement = capacityIncrement;
+            }
 
             /**
              * Constructs a Vector from a Vector.

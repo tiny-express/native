@@ -32,7 +32,17 @@ extern "C" {
 
 using namespace Java::Util;
 
-TEST(JavaUtil, VectorConstructor) {
+TEST(JavaUtil, VectorDefaultConstructor) {
+    Vector<int> vector;
+    ASSERT_EQUAL(10, vector.capacity());
+}
+
+TEST(JavaUtil, VectorCustomConstructor) {
+    Vector<int> vector1(30);
+    ASSERT_EQUAL(30, vector1.capacity());
+}
+
+TEST(JavaUtil, VectorCopyConstructor) {
     // Given a valid vector.
     Vector<int> target;
     target.add(1);
