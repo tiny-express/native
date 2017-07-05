@@ -106,14 +106,30 @@ TEST(JavaUtil, VectorAdd) {
 
 TEST(JavaUtil, VectorAddAll) {
     // Given an empty vector.
-    Vector<int> vector;
+    Vector<int> vector1;
     // Add all elements from initializer list.
-    vector.addAll({1, 2, 3, 4 , 5});
+    ASSERT_TRUE(vector1.addAll({1, 2, 3, 4 , 5}));
     // Checks size.
-    ASSERT_EQUAL(5, vector.size());
+    ASSERT_EQUAL(5, vector1.size());
     // Check the first-last elements.
-    ASSERT_EQUAL(1, vector.firstElement());
-    ASSERT_EQUAL(5, vector.lastElement());
+    ASSERT_EQUAL(1, vector1.firstElement());
+    ASSERT_EQUAL(5, vector1.lastElement());
+
+    // Given a valid vector.
+    Vector<int> vector2;
+    vector2.add(1);
+    vector2.add(2);
+    vector2.add(3);
+    vector2.add(4);
+    vector2.add(5);
+    // Add initializer list at index 2.
+    ASSERT_TRUE(vector2.addAll(2, {7, 8, 9}));
+    // Check the first-last element.
+    ASSERT_EQUAL(8, vector2.size());
+    ASSERT_EQUAL(1, vector2.firstElement());
+    ASSERT_EQUAL(5, vector2.lastElement());
+    // Check element at index 2.
+    ASSERT_EQUAL(7, vector2.get(2));
 }
 
 TEST(JavaUtil, VectorAddElement) {

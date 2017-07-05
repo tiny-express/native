@@ -124,7 +124,7 @@ namespace Java {
              */
             void add(int index, const E &element) {
                 int size = this->original.size();
-                if (index < 0 || index >= size) {
+                if (index < 0 || index > size) {
                     throw std::invalid_argument("index is out of range");
                 }
                 this->ensureCapacity(size + 1);
@@ -133,13 +133,30 @@ namespace Java {
 
             /**
              * Appends all of the elements in the specified initializer list to the end of this Vector.
+             *
              * @param list
+             * @return boolean
              */
-            void addAll(const std::initializer_list<E> &list) {
+            boolean addAll(const std::initializer_list<E> &list) {
+                return this->addAll(0, list);
+            }
+
+            /**
+             * Inserts all of the elements in the specified initializer list into this Vector at the specified index.
+             *
+             * @param index
+             * @param list
+             * @return boolean
+             */
+            boolean addAll(int index, const std::initializer_list<E> &list) {
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
-                    this->original.push_back(*listIterator);
+                    this->add(index, (*listIterator));
+                    // We increase index by 1, because we must insert next element
+                    // after element we have inserted before.
+                    index = index + 1;
                 }
+                return (list.size() != 0); // If original Vector has changes (list is not empty), return true.
             }
 
             /**
