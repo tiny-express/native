@@ -83,7 +83,7 @@ Double Double::parseDouble(String target) {
  * @return String
  */
 string Double::toString() const {
-	return this->string_original;
+	return (string) this->string_original;
 }
 
 /**
@@ -104,8 +104,7 @@ char Double::charValue() const {
  * @return CString
  */
 string Double::stringValue() const {
-    string resultStringValue = string_from_double(this->original);
-    return resultStringValue;
+        return (string) this->toString();
 }
 
 /**
@@ -114,7 +113,7 @@ string Double::stringValue() const {
  * @return short
  */
 short Double::shortValue() const {
-    return this->original;
+    return (short) this->original;
 }
 
 /**
@@ -123,7 +122,7 @@ short Double::shortValue() const {
  * @return int
  */
 int Double::intValue() const {
-    return this->original;
+    return (int) this->original;
 }
 
 /**
@@ -132,7 +131,7 @@ int Double::intValue() const {
  * @return long
  */
 long Double::longValue() const {
-    return this->original;
+    return (long) this->original;
 }
 
 /**
@@ -150,7 +149,7 @@ float Double::floatValue() const {
  * @return double
  */
 double Double::doubleValue() const {
-    return (double) this->original;
+    return this->original;
 }
 
 /**

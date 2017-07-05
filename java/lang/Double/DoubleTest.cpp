@@ -220,14 +220,12 @@ TEST (JavaLang, DoubleStringValue){
     expectedResultStringValue = "inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
-    free(actualResultStringValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestStringValue = NEGATIVE_INFINITY_DOUBLE;
     expectedResultStringValue = "-inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
-    free(actualResultStringValue);
 
 //    // Test NaN_DOUBLE
 //    variableTestStringValue = NaN_DOUBLE;
@@ -241,21 +239,18 @@ TEST (JavaLang, DoubleStringValue){
     expectedResultStringValue = "1.797693134862316e+308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
-    free(actualResultStringValue);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestStringValue = MIN_NORMAL_DOUBLE;
     expectedResultStringValue = "2.225073858507201e-308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
-    free(actualResultStringValue);
 
     // Test MIN_VALUE_DOUBLE
     variableTestStringValue = MIN_VALUE_DOUBLE;
     expectedResultStringValue = "4.940656458412465e-324";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
-    free(actualResultStringValue);
 }
 
 TEST (JavaLang, DoubleShortValue){
