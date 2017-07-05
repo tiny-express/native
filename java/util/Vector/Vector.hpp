@@ -366,6 +366,22 @@ namespace Java {
             }
 
             /**
+             * Sets the size of this Vector.
+             *
+             * @param newSize
+             */
+            void setSize(int newSize) {
+                if (newSize < 0) {
+                    throw std::invalid_argument("new size is negative");
+                }
+                // If new size is greater than current capacity, run ensureCapacity to increase capacity.
+                if (newSize > this->original.size()) {
+                    this->ensureCapacity(newSize);
+                }
+                this->original.resize(newSize);
+            }
+
+            /**
              * Returns size (number of elements) of this Vector.
              *
              * @return int
