@@ -132,6 +132,40 @@ TEST(JavaUtil, VectorContains) {
     ASSERT_TRUE(vector.contains(5));
 }
 
+TEST(JavaUtil, VectorElementAt) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Get element at the first and the last position.
+    ASSERT_EQUAL(vector.firstElement(), vector.elementAt(0));
+    ASSERT_EQUAL(vector.lastElement(), vector.elementAt(4));
+}
+
+TEST(JavaUtil, VectorEnsureCapacity) {
+    // Given an empty vector with initial capacity is 10 and capacity increment is 5.
+    Vector<int> vector1(10, 5);
+    ASSERT_EQUAL(10, vector1.capacity());
+    // New capacity = old capacity + capacity increment.
+    vector1.ensureCapacity(12);
+    ASSERT_EQUAL(15, vector1.capacity());
+    // New capacity = min capacity (because old capacity + capacity increment < min capacity).
+    vector1.ensureCapacity(25);
+    ASSERT_EQUAL(25, vector1.capacity());
+
+    // Given an empty vector with initial capacity is 10 and capacity increment is 0.
+    Vector<int> vector2(10, 0);
+    // New capacity = old capacity * 2 (because capacity increment is zero).
+    vector2.ensureCapacity(15);
+    ASSERT_EQUAL(20, vector2.capacity());
+    // New capacity = min capacity (because old capacity * 2 < min capacity).
+    vector2.ensureCapacity(100);
+    ASSERT_EQUAL(100, vector2.capacity());
+}
+
 TEST(JavaUtil, VectorFirstElement) {
     // Given a valid vector, contains three elements are string - return the first element.
     Vector<String> vector;

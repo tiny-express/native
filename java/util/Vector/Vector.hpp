@@ -184,6 +184,30 @@ namespace Java {
             }
 
             /**
+             * Increases the capacity of this vector,
+             * if necessary, to ensure that it can hold at least the number of elements specified by
+             * the minimum capacity argument.
+             *
+             * @param minCapacity
+             */
+            void ensureCapacity(int minCapacity) {
+                int oldCapacity = this->capacity();
+                if ((minCapacity > 0) && (minCapacity > oldCapacity)) {
+                    // The new capacity will be the old capacity plus capacityIncrement,
+                    // unless the value of capacityIncrement is less than or equal to zero,
+                    // in which case the new capacity will be twice the old capacity.
+                    int newCapacity = (this->capacityIncrement > 0) ?
+                                      (oldCapacity + this->capacityIncrement) : (oldCapacity * 2);
+                    // If this new capacity is still smaller than minCapacity, then the new capacity will be minCapacity.
+                    if (newCapacity < minCapacity) {
+                        newCapacity = minCapacity;
+                    }
+
+                    this->original.reserve(newCapacity);
+                }
+            }
+
+            /**
              * Returns the first element (index = 0) of this Vector.
              *
              * @return <E>
