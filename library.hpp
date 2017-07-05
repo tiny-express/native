@@ -33,7 +33,6 @@
 #include "java/Security.hpp"
 #include "java/Vendor.hpp"
 #include "java/Util.hpp"
-#include "unit_test.h"
 
 #define self (*this)
 

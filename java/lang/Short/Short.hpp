@@ -34,6 +34,8 @@ namespace Java {
 		class Short : public virtual Number {
 		private:
 			short original;
+			string string_original;
+
 		public:
 			Short();
 			Short(short original);
@@ -42,7 +44,6 @@ namespace Java {
 		
 		public:
 			char charValue() const;
-			string stringValue() const;
 			short shortValue() const;
 			int intValue() const;
 			long longValue() const;
@@ -53,6 +54,7 @@ namespace Java {
 			static Short parseShort(String target);
 		
 		public:
+			Short operator=(const Short &target);
 			Short operator+(const Short &target);
 			Short operator-(const Short &target);
 			Short operator/(const Short &target);
