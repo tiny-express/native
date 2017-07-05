@@ -33,10 +33,13 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ByteConstructor) {
-	// TODO
 	// Given empty value for Byte constructor and assign value - Return Byte
-	Bytes emptyByte = 3;
-	ASSERT_EQUAL(3, emptyByte.intValue());
+	Bytes byte1 = Bytes(3);
+	ASSERT_EQUAL(3, byte1.intValue());
+    // TODO need parseByte(string, int)
+    /*Bytes byte2 = Bytes("3");
+    ASSERT_EQUAL(3, byte2.intValue());*/
+
 }
 
 TEST (JavaLang, ByteEquals){
@@ -49,7 +52,8 @@ TEST (JavaLang, ByteEquals){
 
     Object object;
     //Test Bytes and Bytes
-//    ASSERT_TRUE(firstBytes.equals(secondBytes));
+    //Object instanceof return false
+    //ASSERT_TRUE(firstBytes.equals(secondBytes));
     ASSERT_FALSE(firstBytes.equals(thirdBytes));
 
     //Test Byte
@@ -59,27 +63,27 @@ TEST (JavaLang, ByteEquals){
 
 TEST (JavaLang, ByteOperator) {
 	// Given a valid number
-	byte validNumber = 5;
-	byte targetNumber = 3;
+	Bytes validNumber = 5;
+	Bytes targetNumber = 3;
 	
 	// Make a summation with targetNumber
-	byte summationNumber = 8;
+	Bytes summationNumber = 8;
 	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
 	
 	// Make a subtraction with targetNumber
-	byte subtractionNumber = 2;
+	Bytes subtractionNumber = 2;
 	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
 	
 	// Make a multiplication with targetNumber
-	byte multiplicationNumber = 15;
+	Bytes multiplicationNumber = 15;
 	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
 	
 	// Make a division with targetNumber
-	byte divisionNumber = 1;
+	Bytes divisionNumber = 1;
 	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
 	
 	// Make a modulo with targetNumber
-	byte modNumber = 2;
+	Bytes modNumber = 2;
 	ASSERT_TRUE(modNumber == ( validNumber % targetNumber ));
 }
 

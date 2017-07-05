@@ -38,33 +38,41 @@ namespace Java {
 
         class Bytes;
 
-        class ByteCache;
-
-        class ByteCache{
-        public:
-            ByteCache(){
-                int index =0;
-                for(index;index< 256;index++)
-                    cache.[index]=(byte)(index - 128);
-            };
-            static Array<Bytes> cache;
-        };
-
 		class Bytes : public virtual Number,
             public virtual Comparable<Bytes>{
 
-		private:
+        private:
 			byte original;
 			static const byte MIN_VALUE = -128;
 			static const byte MAX_VALUE = 127;
 			static const int SIZE = 8;
 
+        private:
+            //TODO ByteCache
+            /*static class ByteCache{
 
-		public:
-			Bytes();
+                static ByteCache ByteCache;
+            public:
+                Array<Bytes> cache ;
+                const void cacheInit(){
+                    //Array<Bytes> result;
+                    int index =0;
+                    for(index;index< 256;index++)
+                        cache[index]=(byte)(index - 128);
+                    //return result;
+                }
+
+            public:
+                static ByteCache getInstance(){
+                    return ByteCache;
+                }
+            };*/
+
+
+        public:
+            Bytes();
 			Bytes(byte original);
 			Bytes(String string);
-			Bytes(const Bytes &byteNumber);
 			~Bytes();
 
 		public:
@@ -91,6 +99,8 @@ namespace Java {
 			long longValue() const ;
 
 			static byte parseByte(String);
+
+            static byte parseByte(String, int);
             
 			short shortValue() const;
 
@@ -113,8 +123,6 @@ namespace Java {
 
 			Bytes operator*(const Bytes &target);
 
-            Bytes &operator=(const Bytes &target);
-
 			boolean operator==(const Bytes &target);
 
 			boolean operator!=(const Bytes &target);
@@ -127,15 +135,17 @@ namespace Java {
 
 			boolean operator>=(const Bytes &target);
 
-			Bytes operator-=(const Bytes &target);
+			void operator-=(const Bytes &target);
 
-			Bytes operator+=(const Bytes &target);
+			void operator+=(const Bytes &target);
 
-			Bytes operator*=(const Bytes &target);
+			void operator*=(const Bytes &target);
 
-			Bytes operator/=(const Bytes &target);
+			void operator/=(const Bytes &target);
 
-			Bytes operator%=(const Bytes &target);
+			void operator%=(const Bytes &target);
+
+            void operator=(const Bytes &target);
 
 		};
 	}

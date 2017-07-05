@@ -33,15 +33,6 @@ using namespace Java::Lang;
  *
  * @param original
  */
-Bytes::Bytes() {
-	this->original = 0;
-}
-
-/**
- * Byte initialization
- *
- * @param original
- */
 Bytes::Bytes(byte original) {
 	this->original = original;
 }
@@ -52,16 +43,10 @@ Bytes::Bytes(byte original) {
  * @param string
  */
 Bytes::Bytes(String string) {
-	this->original = parseByte(string);
+	this->original = parseByte(string,10);
 }
 
-/**
- * Byte initialization
- *
- * @param original
- */
-Bytes::Bytes(const Bytes &byteNumber) {
-	this->original = byteNumber.original;
+Bytes::Bytes() {
 }
 
 Bytes::~Bytes() {
@@ -70,7 +55,7 @@ Bytes::~Bytes() {
 /**
  *Return the value of this Byte as a char
  *
- * @return
+ * @return char
  */
 char Bytes::charValue() const {
     return string_to_char(string_from_char(this->original));
@@ -88,6 +73,7 @@ byte Bytes::byteValue() {
 /**
  * Compares two Byte objects numerically
  *
+ * @param anotherByte
  * @return int
  */
 int Bytes::compareTo(const Bytes &anotherByte) const {
@@ -95,12 +81,19 @@ int Bytes::compareTo(const Bytes &anotherByte) const {
 }
 
 /**
+ * Decodes a String into a Byte. Accepts decimal, hexadecimal, and octal numbers
  *
- *
+ * @param stringToDecode
  * @return
  */
-Bytes Bytes::decode(String) {
-	return *this;
+Bytes Bytes::decode(String stringToDecode) {
+    //TODO need Integer.decode(string)
+    /*int value = Integer.decode(stringToDecode);
+    if (i < MIN_VALUE || i > MAX_VALUE)
+        //TODO throw NumberFormatException
+     return (byte)value;
+     */
+    return 0;//temporarily
 }
 
 /**
@@ -116,10 +109,11 @@ double Bytes::doubleValue() const{
  * Compare this Byte to another Byte object
  *
  * @param object
- * @return
+ * @return true if object is a Byte and has the same value as this Bytes; false otherwise
  */
 boolean Bytes::equals(Object object) {
-	if (instanceof<Bytes>(object)){
+    boolean isByte =instanceof<Bytes>(object);
+	if (isByte){
         return this->original == parseByte(object.toString());
     }
 	return false;
@@ -164,17 +158,30 @@ long Bytes::longValue() const{
 /**
  * Parse the parameter string as a byte
  *
- * @param target
+ * @param stringToParse
  * @return Byte
  */
-byte Bytes::parseByte(String target) {
-	int value = string_to_int(target.toString());
-	if( value < MIN_VALUE || value > MAX_VALUE)
-	{
-		//TODO throw numberFormatException
-	}
-	return (byte)value;
+byte Bytes::parseByte(String stringToParse) {
+	return parseByte(stringToParse,10);
 }
+/**
+ * Parse the parameter string as a byte with radix =10
+ *
+ * @param stringToParse
+ * @param radix
+ * @return
+ */
+byte Bytes::parseByte(String stringToParse, int radix) {
+    //TODO need Integer::parseInt(string, int)
+    /*int value = Integer::parseInt(stringToParse, radix);
+    if( value < MIN_VALUE || value > MAX_VALUE)
+    {
+        //TODO throw numberFormatException
+    }
+    return (byte)value;*/
+    return 0;//temporarily
+}
+
 
 /**
  * Returns the value of this Byte as an short.
@@ -187,7 +194,7 @@ short Bytes::shortValue() const {
 /**
  * Returns the value of this Byte as an String.
  *
- * @return
+ * @return string
  */
 string Bytes::stringValue() const {
     return String::valueOf(this->original).toString();
@@ -196,7 +203,7 @@ string Bytes::stringValue() const {
 /**
  * Returns a String object representing this Byte's value
  *
- * @return
+ * @return String
  */
 String Bytes::toString() {
     return String::valueOf((int)this->original);
@@ -206,28 +213,30 @@ String Bytes::toString() {
  * Returns a new String object representing the specified byte with radix = 10
  *
  * @param byte
- * @return
+ * @return String
  */
 String Bytes::toString(byte specifiedByte) {
-    return String::valueOf((int) specifiedByte);
+    //TODO need Integer.toString(int,radix)
+    //return Integer::toString((int)specifiedByte, 10);
 }
 
 /**
  * Returns a Byte instance representing the specified byte value.
  *
  * @param targetByte
- * @return
+ * @return Bytes
  */
 Bytes Bytes::valueOf(byte targetByte) {
 	const int offset = 128;
-	return ByteCache::cache[(int)targetByte + offset];
+    //TODO ByteCache
+	return 0;
 }
 
 /**
  * Returns a Byte instance representing the specified String value.
  *
  * @param targetString
- * @return
+ * @return Bytes
  */
 Bytes Bytes::valueOf(String targetString) {
     return Bytes(parseByte(targetString));
@@ -274,7 +283,7 @@ Bytes Bytes::operator%(const Bytes &target) {
 }
 
 /**
- * Make a multiple from this Byte with target
+ * Make a multiplication from this Byte with target
  *
  * @param target
  * @return Byte
@@ -344,66 +353,62 @@ boolean Bytes::operator>=(const  Bytes &target) {
 }
 
 /**
+ * Make a subtraction from this Byte with target and assign the result value to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes Bytes::operator-=(const Bytes &target) {
+void Bytes::operator-=(const Bytes &target) {
     this->original -= target.original;
-    return *this;
 }
 
 /**
- * Make a add from this Byte with target and assign the result value to this Byte
+ * Make an sumation from this Byte with target and assign the result value to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes Bytes::operator+=(const Bytes &target) {
+void Bytes::operator+=(const Bytes &target) {
     this->original += target.original;
-    return *this;
 }
 /**
- * Make a multiple from this Byte with target and assign the result value to this Byte
+ * Make a multiplication from this Byte with target and assign the result value to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes Bytes::operator*=(const Bytes &target) {
+void Bytes::operator*=(const Bytes &target) {
     this->original *= target.original;
-    return *this;
 }
 /**
  * Make a division from this Byte with target and assign the result value to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes Bytes::operator/=(const Bytes &target) {
+void Bytes::operator/=(const Bytes &target) {
     this->original /= target.original;
-    return *this;
 }
 /**
  * Make a modulo from this Byte with target and assign the result value to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes Bytes::operator%=(const Bytes &target) {
+void Bytes::operator%=(const Bytes &target) {
     this->original %= target.original;
-    return *this;
 }
 
 /**
  *  Assign the value of target to this Byte
  *
  * @param target
- * @return
+ * @return Byte
  */
-Bytes &Bytes::operator=(const Bytes &target) {
+void Bytes::operator=(const Bytes &target) {
     this->original = target.original;
-    return *this;
 }
+
 
 
 
