@@ -82,9 +82,11 @@ namespace Java {
              * @param list
              */
             Vector(const std::initializer_list<E> &list) {
-                this->ensureCapacity(list.size());
+                int capacity = 0;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
+                    capacity = capacity + 1;
+                    this->ensureCapacity(capacity);
                     this->original.push_back(*listIterator);
                 }
             }
