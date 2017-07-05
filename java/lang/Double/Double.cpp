@@ -171,7 +171,7 @@ Double Double::operator=(const Double &target) {
  * @return Double
  */
 Double Double::operator+(const Double &target) {
-    return this->original + target.original;
+    return Double(this->original + target.original);
 }
 
 /**
@@ -180,7 +180,7 @@ Double Double::operator+(const Double &target) {
  * @return Double
  */
 Double Double::operator-(const Double &target) {
-    return this->original - target.original;
+    return Double(this->original - target.original);
 }
 
 /**
@@ -189,7 +189,7 @@ Double Double::operator-(const Double &target) {
  * @return Double
  */
 Double Double::operator*(const Double &target) {
-    return ( this->original * target.original );
+    return Double( this->original * target.original );
 }
 
 /**
@@ -198,7 +198,7 @@ Double Double::operator*(const Double &target) {
  * @return Double
  */
 Double Double::operator/(const Double &target) {
-    return ( this->original / target.original );
+    return Double( this->original / target.original );
 }
 
 // /**
@@ -216,7 +216,7 @@ Double Double::operator/(const Double &target) {
  * @return bool
  */
 boolean Double::operator==(const Double &target) const {
-    return this->original == target.original;
+    return (boolean) (this->original == target.original);
 }
 
 /**
@@ -225,7 +225,7 @@ boolean Double::operator==(const Double &target) const {
  * @return bool
  */
 boolean Double::operator!=(const Double &target) const {
-    return !this->operator==(target);
+    return (boolean ) (!this->operator==(target));
 }
 
 /**
@@ -234,7 +234,7 @@ boolean Double::operator!=(const Double &target) const {
  * @return bool
  */
 boolean Double::operator<(const Double &target) const {
-    return this->original < target.original;
+    return (boolean) (this->original < target.original);
 }
 
 /**
@@ -243,7 +243,7 @@ boolean Double::operator<(const Double &target) const {
  * @return bool
  */
 boolean Double::operator>(const Double &target) const {
-    return this->original > target.original;
+    return (boolean ) (this->original > target.original);
 }
 
 /**
@@ -252,7 +252,7 @@ boolean Double::operator>(const Double &target) const {
  * @return bool
  */
 boolean Double::operator<=(const Double &target) const {
-    return this->original <= target.original;
+    return (boolean) (this->original <= target.original);
 }
 
 /**
@@ -261,5 +261,5 @@ boolean Double::operator<=(const Double &target) const {
  * @return bool
  */
 boolean Double::operator>=(const Double &target) const {
-    return this->original >= target.original;
+    return (boolean) (this->original >= target.original);
 }
