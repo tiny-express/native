@@ -48,6 +48,7 @@ namespace Java {
         {
         private:
             bool original;
+            string string_original;
 
         public:
             const static boolean True = true;
@@ -69,6 +70,8 @@ namespace Java {
             static string toString(const boolean &target);
             static Boolean valueOf(boolean target);
             static boolean valueOf(const_string target);
+
+            Boolean operator=(const Boolean &target);
         };
 
     }
