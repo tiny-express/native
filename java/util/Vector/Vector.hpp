@@ -317,7 +317,7 @@ namespace Java {
              * @return boolean
              */
             boolean remove(const Object &element) {
-                E *referenceToElement = (E *)&element;
+                const E *referenceToElement = dynamic_cast<const E *>(&element);
                 register int index;
                 for (index = 0; index < this->original.size(); index++) {
                     if ((*referenceToElement) == this->original[index]) {
