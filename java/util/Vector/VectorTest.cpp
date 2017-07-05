@@ -61,6 +61,16 @@ TEST(JavaUtil, VectorCustomConstructor) {
     ASSERT_EQUAL(5, vector2.capacity());
 }
 
+TEST(JavaUtil, VectorInitializerListConstructor) {
+    // Given a vector construct from a std::initializer_list.
+    Vector<int> vector {1, 2, 3, 4 , 5};
+    // Checks size.
+    ASSERT_EQUAL(5, vector.size());
+    // Check the first-last elements.
+    ASSERT_EQUAL(1, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+}
+
 TEST(JavaUtil, VectorCopyConstructor) {
     // Given a valid vector.
     Vector<int> target;

@@ -31,6 +31,7 @@
 #include "../AbstractSequentialList/AbstractSequentialList.hpp"
 #include "../Collection/Collection.hpp"
 #include "../RandomAccess/RandomAccess.hpp"
+#include <initializer_list>
 
 using namespace Java::Lang;
 
@@ -73,6 +74,18 @@ namespace Java {
                 }
                 this->original.reserve(initialCapacity);
                 this->capacityIncrement = capacityIncrement;
+            }
+
+            /**
+             * Constructs a Vector containing the elements of the initializer list.
+             *
+             * @param list
+             */
+            Vector(std::initializer_list<E> list) {
+                typename std::initializer_list<E>::iterator listIterator;
+                for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
+                    this->original.push_back(*listIterator);
+                }
             }
 
             /**
