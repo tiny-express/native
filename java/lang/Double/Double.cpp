@@ -28,69 +28,35 @@
 
 using namespace Java::Lang;
 
-/**
- * Double initialization
- *
- * @param original
- */
 Double::Double() {
 	this->original = 0;
 	this->string_original = string_from_double(this->original);
 }
 
-/**
- * Double initialization
- *
- * @param original
- */
 Double::Double(double original) {
 	this->original = original;
 	this->string_original = string_from_double(this->original);
 }
 
-/**
- * Double initialization
- *
- * @param original
- */
 Double::Double(const Double &doubleNumber) {
 	this->original = doubleNumber.original;
 	this->string_original = string_from_double(this->original);
 }
 
-/**
- * Double Destructor
- */
 Double::~Double() {
 	if (this->string_original != NULL) {
 		free(this->string_original);
 	}
 }
 
-/**
- * Parse double
- *
- * @param target
- * @return double
- */
 Double Double::parseDouble(String target) {
     return Double(string_to_double(target.toString()));
 }
 
-/**
- * Double to String
- *
- * @return String
- */
 string Double::toString() const {
 	return (string) this->string_original;
 }
 
-/**
- * Double to Char
- *
- * @return char
- */
 char Double::charValue() const {
     string convertResult = string_from_double(this->original);
     char charValueResult = string_to_char(convertResult);
@@ -98,105 +64,48 @@ char Double::charValue() const {
     return charValueResult;
 }
 
-/**
- * Double to String
- *
- * @return CString
- */
 string Double::stringValue() const {
         return (string) this->toString();
 }
 
-/**
- * Short value of Double
- *
- * @return short
- */
 short Double::shortValue() const {
     return (short) this->original;
 }
 
-/**
- * Double value in Double
- *
- * @return int
- */
 int Double::intValue() const {
     return (int) this->original;
 }
 
-/**
- * Double value in Long
- *
- * @return long
- */
 long Double::longValue() const {
     return (long) this->original;
 }
 
-/**
- * Double value in float
- *
- * @return float
- */
 float Double::floatValue() const {
     return (float) this->original;
 }
 
-/**
- * Double value in double
- *
- * @return double
- */
 double Double::doubleValue() const {
     return this->original;
 }
 
-/**
- * Assign value of this object same as target value
- *
- * @param target
- * @return Double
- */
-Double Double::operator=(const Double &target) {
-	this->original = target.original;
-	free(this->string_original);
-	this->string_original = string_from_double(this->original);
-	return *this;
+byte Double::byteValue() const {
+    return (byte) this->original;
 }
 
-/**
- * Make a summation with target Long
- *
- * @return Double
- */
+/// ---------- Arithmetic Operators ----------
+
 Double Double::operator+(const Double &target) {
     return Double(this->original + target.original);
 }
 
-/**
- * Make a subtraction with target Double
- *
- * @return Double
- */
 Double Double::operator-(const Double &target) {
     return Double(this->original - target.original);
 }
 
-/**
- * Make a multiple from this Double with target
- *
- * @return Double
- */
 Double Double::operator*(const Double &target) {
     return Double( this->original * target.original );
 }
 
-/**
- *  Make a division from this Double with target
- *
- * @return Double
- */
 Double Double::operator/(const Double &target) {
     return Double( this->original / target.original );
 }
@@ -210,56 +119,64 @@ Double Double::operator/(const Double &target) {
 // 	return ( this->original % target.original );
 // }
 
-/**
- * Compare this Double is equal target
- *
- * @return bool
- */
+/// ---------- Relational Operators ----------
+
 boolean Double::operator==(const Double &target) const {
     return (boolean) (this->original == target.original);
 }
 
-/**
- * Compare this Double is not equal target
- *
- * @return bool
- */
 boolean Double::operator!=(const Double &target) const {
     return (boolean ) (!this->operator==(target));
 }
 
-/**
- * Compare this Double is less than target
- *
- * @return bool
- */
 boolean Double::operator<(const Double &target) const {
     return (boolean) (this->original < target.original);
 }
 
-/**
- * Compare this Double is more than target
- *
- * @return bool
- */
 boolean Double::operator>(const Double &target) const {
     return (boolean ) (this->original > target.original);
 }
 
-/**
- * Compare this Double is equal or less than target
- *
- * @return bool
- */
+boolean Double::operator>=(const Double &target) const {
+    return (boolean) (this->original >= target.original);
+}
+
 boolean Double::operator<=(const Double &target) const {
     return (boolean) (this->original <= target.original);
 }
 
-/**
- *  Compare this Double is equal or more than target
- *
- * @return bool
- */
-boolean Double::operator>=(const Double &target) const {
-    return (boolean) (this->original >= target.original);
+/// ---------- Logical Operators ----------
+
+boolean Double::operator&&(const Double &target) const {
+    return (boolean) (this->original && target.original);
+}
+
+boolean Double::operator||(const Double &target) const {
+    return (boolean) (this->original || target.original);
+}
+
+/// ---------- Assignment Operators ----------
+
+
+Double Double::operator=(const Double &target) {
+    this->original = target.original;
+    free(this->string_original);
+    this->string_original = string_from_double(this->original);
+    return *this;
+}
+
+Double Double::operator+=(const Double &target) const {
+    return (Double) (this->original + target.original);
+}
+
+Double Double::operator-=(const Double &target) const {
+    return (Double) (this->original - target.original);
+}
+
+Double Double::operator*=(const Double &target) const {
+    return (Double) (this->original * target.original);
+}
+
+Double Double::operator/=(const Double &target) const {
+    return (Double) (this->original / target.original);
 }
