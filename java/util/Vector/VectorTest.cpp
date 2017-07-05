@@ -32,6 +32,21 @@ extern "C" {
 
 using namespace Java::Util;
 
+TEST(JavaUtil, VectorConstructor) {
+    // Given a valid vector.
+    Vector<int> target;
+    target.add(1);
+    target.add(2);
+    target.add(3);
+    target.add(4);
+    target.add(5);
+    // Use copy-constructor.
+    Vector<int> vector(target);
+    ASSERT_EQUAL(target.size(), vector.size());
+    ASSERT_EQUAL(target.firstElement(), vector.firstElement());
+    ASSERT_EQUAL(target.lastElement(), vector.lastElement());
+}
+
 TEST(JavaUtil, VectorAdd) {
     // Given a valid vector - check size and check the first - last element.
     Vector<int> vector;
@@ -192,6 +207,9 @@ TEST(JavaUtil, VectorLastIndexOf) {
     vector.add(5);
     ASSERT_EQUAL(0, vector.lastIndexOf(1));
     ASSERT_EQUAL(3, vector.lastIndexOf(2));
+
+    ASSERT_EQUAL(3, vector.lastIndexOf(2, 4));
+    ASSERT_EQUAL(1, vector.lastIndexOf(2, 1));
 }
 
 TEST(JavaUtil, VectorSet) {
@@ -297,6 +315,33 @@ TEST(JavaUtil, VectorRemoveAllElements) {
     // Remove all elements of vector - return size of vector is 0.
     vector.clear();
     ASSERT_EQUAL(0, vector.size());
+}
+
+TEST(JavaUtil, VectorRemoveElement) {
+    Vector<Integer> vector;
+    vector.add(Integer(1));
+    vector.add(Integer(2));
+    vector.add(Integer(3));
+    vector.add(Integer(4));
+    vector.add(Integer(5));
+
+    vector.removeElement(Integer(3));
+    ASSERT_EQUAL(4, vector.size());
+    ASSERT_FALSE(vector.contains(Integer(3)));
+}
+
+TEST(JavaUtil, VectorRemoveElementAt) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Removes element at index = 2.
+    vector.removeElementAt(2);
+    // Checks element value at index = 2.
+    ASSERT_EQUAL(4, vector.get(2));
 }
 
 // This class use to call some protected methods in Vector class to run in test cases.

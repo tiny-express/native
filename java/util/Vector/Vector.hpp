@@ -55,6 +55,19 @@ namespace Java {
             Vector() { }
 
             /**
+             * Constructs a Vector from a Vector.
+             *
+             * @param target
+             */
+            Vector(const Vector<E> &target) {
+                const E *targetData = target.original.data();
+                register int index;
+                for (index = 0; index < target.original.size(); index++) {
+                    this->original.push_back(targetData[index]);
+                }
+            }
+
+            /**
              * Destructor.
              */
             virtual ~Vector() { }
@@ -63,7 +76,7 @@ namespace Java {
             /**
              * Adds an element to the end of this Vector.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
             boolean add(const E &element) {
@@ -117,7 +130,7 @@ namespace Java {
              */
             Vector<E> clone() const {
                 Vector<E> clonedVector;
-                E const *vectorData = this->original.data();
+                const E *vectorData = this->original.data();
                 register int index;
                 for (index = 0; index < this->original.size(); index++) {
                     clonedVector.add(vectorData[index]);
@@ -128,7 +141,7 @@ namespace Java {
             /**
              * Returns true if this Vector contains the specified element.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
             boolean contains(const E &element) const {
@@ -182,7 +195,7 @@ namespace Java {
             /**
              * Returns index of an element in this Vector.
              *
-             * @param e             *
+             * @param element
              * @return int
              */
             int indexOf(const E &element) const {
@@ -200,7 +213,7 @@ namespace Java {
              * Returns the index of the first occurrence of the specified element in this Vector,
              * searching forwards from index, or returns -1 if the element is not found.
              *
-             * @param e
+             * @param element
              * @param index
              * @return int
              */
@@ -246,25 +259,42 @@ namespace Java {
              * This function returns the index of the last occurrence of the specified element in this Vector.
              * If this Vector doesn't contain the element, returns -1.
              *
-             * @param e
+             * @param element
              * @return int
              */
             int lastIndexOf(const E &element) const {
-                int lastIndexOfElement = -1;
-                register int index;
-                for (index = 0; index < this->original.size(); index++) {
-                    if (element == this->original[index]) {
-                        lastIndexOfElement = index;
+                int maxIndex = this->original.size() - 1;
+                return this->lastIndexOf(element, maxIndex);
+            }
+
+            /**
+             * Returns the index of the last occurrence of the specified element in this vector,
+             * searching backwards from index, or returns -1 if the element is not found.
+             *
+             * @param element
+             * @param index
+             * @return
+             */
+            int lastIndexOf(const E &element, int index) const {
+                if (index >= this->original.size()) {
+                    throw std::invalid_argument("index is greater than or equal to the current size of this vector");
+                }
+
+                register int position;
+                for (position = index; position >= 0; position--) {
+                    if (element == this->original[position]) {
+                        return position;
                     }
                 }
-                return lastIndexOfElement;
+
+                return -1;
             }
 
             /**
              * Replaces the element at the specified index with the specified element.
              *
              * @param index
-             * @param e
+             * @param element
              * @return the element previously at the specified index.
              */
             E set(int index, const E &element) {
@@ -330,9 +360,29 @@ namespace Java {
 
             /**
              * Removes all elements of this Vector.
+             *
              */
             void removeAllElements() {
                 this->clear();
+            }
+
+            /**
+             * Removes the first (lowest-indexed) occurrence of the argument from this vector.
+             *
+             * @param element
+             * @return boolean
+             */
+            boolean removeElement(const Object &element) {
+                return this->remove(element);
+            }
+
+            /**
+             * Deletes the element at the specified index.
+             *
+             * @param index
+             */
+            void removeElementAt(int index) {
+                this->remove(index);
             }
 
         protected:
