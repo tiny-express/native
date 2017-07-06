@@ -60,7 +60,7 @@ Bytes::~Bytes() {
  * @return char
  */
 char Bytes::charValue() const {
-    return string_to_char(string_from_char(this->original));
+    return (char)this->original;
 }
 
 /**
