@@ -28,6 +28,8 @@
 
 using namespace Java::Lang;
 
+ByteCache *ByteCache::instance =0;
+
 /**
  * Byte initialization
  *
@@ -74,7 +76,9 @@ byte Bytes::byteValue() {
  * Compares two Byte objects numerically
  *
  * @param anotherByte
- * @return int
+ * @return the value 0 if this Byte is equal to anotherByte;
+ * a value less than 0 if this Byte is numerically less than anotherByte;
+ * and a value greater than 0 if this Byte is numerically greater than anotherByte
  */
 int Bytes::compareTo(const Bytes &anotherByte) const {
 	return this->original-anotherByte.original;
@@ -87,8 +91,8 @@ int Bytes::compareTo(const Bytes &anotherByte) const {
  * @return
  */
 Bytes Bytes::decode(String stringToDecode) {
-    //TODO need Integer.decode(string)
-    /*int value = Integer.decode(stringToDecode);
+    //TODO need Integer::decode(string)
+    /*int value = Integer::decode(stringToDecode);
     if (i < MIN_VALUE || i > MAX_VALUE)
         //TODO throw NumberFormatException
      return (byte)value;
@@ -112,6 +116,7 @@ double Bytes::doubleValue() const{
  * @return true if object is a Byte and has the same value as this Bytes; false otherwise
  */
 boolean Bytes::equals(Object object) {
+    //instanceof return false with Byte object, need to fix
     boolean isByte =instanceof<Bytes>(object);
 	if (isByte){
         return this->original == parseByte(object.toString());
@@ -228,8 +233,7 @@ String Bytes::toString(byte specifiedByte) {
  */
 Bytes Bytes::valueOf(byte targetByte) {
 	const int offset = 128;
-    //TODO ByteCache
-	return 0;
+    return  ByteCache::getInstance()->cache.get((int)targetByte+offset);
 }
 
 /**
@@ -240,6 +244,17 @@ Bytes Bytes::valueOf(byte targetByte) {
  */
 Bytes Bytes::valueOf(String targetString) {
     return Bytes(parseByte(targetString));
+}
+
+/**
+ * Returns a Byte instance representing the specified String value with radix
+ *
+ * @param targetString
+ * @param radix
+ * @return
+ */
+Bytes Bytes::valueOf(String targetString, int radix) {
+    return Bytes(parseByte(targetString, radix));
 }
 
 /**
@@ -293,60 +308,60 @@ Bytes Bytes::operator*(const Bytes &target) {
 }
 
 /**
- * Compare this Byte is equal target
+ * Compare 2 Byte
  *
  * @param target
- * @return bool
+ * @return true if target Byte is equal to this Byte; false otherwise
  */
 boolean Bytes::operator==(const Bytes &target) {
 	return this->original == target.original;
 }
 
 /**
- * Compare this Byte is not equal target
+ * Compare 2 Byte
  *
  * @param target
- * @return bool
+ * @return true if target Byte is not equal to this Byte; false otherwise
  */
 boolean Bytes::operator!=(const Bytes &target) {
 	return this->original != target.original;
 }
 
 /**
- * Compare this Byte is less than target
+ * Determine if this Byte is smaller than target
  *
  * @param target
- * @return bool
+ * @return true if this Byte is smaller than target; false otherwise
  */
 boolean Bytes::operator<(const Bytes &target) {
 	return this->original < target.original;
 }
 
 /**
- * Compare this Byte is more than target
+ * Determine if this Byte is bigger than target
  *
  * @param target
- * @return bool
+ * @return true if this Byte is bigger than target; false otherwise
  */
 boolean Bytes::operator>(const Bytes &target) {
 	return this->original > target.original;
 }
 
 /**
- * Compare this Byte is equal or less than target
+ * Determine if this Byte is equal or less than target
  *
  * @param target
- * @return bool
+ * @return true if this Byte is equal or less than target; false otherwise
  */
 boolean Bytes::operator<=(const Bytes &target) {
 	return this->original <= target.original;
 }
 
 /**
- * Compare this Byte is equal or more than target
+ * Determine if this Byte is equal or bigger than target
  *
  * @param target
- * @return bool
+ * @return true if this Byte is equal or bigger than target; false otherwise
  */
 boolean Bytes::operator>=(const  Bytes &target) {
 	return this->original >= target.original;
@@ -408,6 +423,8 @@ void Bytes::operator%=(const Bytes &target) {
 void Bytes::operator=(const Bytes &target) {
     this->original = target.original;
 }
+
+
 
 
 

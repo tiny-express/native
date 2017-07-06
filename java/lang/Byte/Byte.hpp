@@ -34,9 +34,10 @@
 namespace Java {
 	namespace Lang {
 
-
-
         class Bytes;
+
+
+
 
 		class Bytes : public virtual Number,
             public virtual Comparable<Bytes>{
@@ -48,26 +49,6 @@ namespace Java {
 			static const int SIZE = 8;
 
         private:
-            //TODO ByteCache
-            /*static class ByteCache{
-
-                static ByteCache ByteCache;
-            public:
-                Array<Bytes> cache ;
-                const void cacheInit(){
-                    //Array<Bytes> result;
-                    int index =0;
-                    for(index;index< 256;index++)
-                        cache[index]=(byte)(index - 128);
-                    //return result;
-                }
-
-            public:
-                static ByteCache getInstance(){
-                    return ByteCache;
-                }
-            };*/
-
 
         public:
             Bytes();
@@ -84,7 +65,7 @@ namespace Java {
 
 			int compareTo(const Bytes & ) const;
 
-			Bytes decode(String);
+			static Bytes decode(String);
 
 			double doubleValue() const;
 
@@ -108,9 +89,11 @@ namespace Java {
 
 			static String toString(byte);
 
-			Bytes valueOf(byte);
+			static Bytes valueOf(byte);
 
-			Bytes valueOf(String);
+			static Bytes valueOf(String);
+
+            static Bytes valueOf(String,int);
             
 		public:
 			Bytes operator+(const Bytes &target);
@@ -148,6 +131,29 @@ namespace Java {
             void operator=(const Bytes &target);
 
 		};
+        class ByteCache {
+            static ByteCache *instance;
+        public:
+            ByteCache(){
+                cache=cacheInit();
+            };
+            Array<Bytes> cache;
+            Array<Bytes> cacheInit() {
+                Array<Bytes> cache1;
+                int index = 0;
+                for (index; index < 256; index++)
+                    cache1.push((Bytes((byte) (index - 128))));
+                return cache1;
+            }
+            static ByteCache *getInstance()
+            {
+                if (!instance)
+                    instance = new ByteCache();
+                return instance;
+            }
+
+
+        };
 	}
 }
 #endif
