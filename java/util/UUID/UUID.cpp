@@ -92,6 +92,20 @@ UUID::~UUID() {
 }
 
 /**
+ * The clock sequence value associated with this UUID.
+ *
+ * @return int - The clock sequence of this UUID
+ */
+int UUID::clockSequence() {
+    if (version() != 1) {
+        //FIXME: exception ("Not a time-based UUID");
+        return -1;
+    }
+
+    return (int)((this->leastSigBits & 0x3FFF000000000000L) >> 48);
+};
+
+/**
  * Compares this UUID with the specified UUID.
  *
  * @param UUID target
@@ -219,8 +233,9 @@ UUID UUID::randomUUID() {
     Array<byte> randomBytes = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     srand(time(0));
-    for (int i = 0; i < 16; ++i) {
-        randomBytes[i] = (byte)(random()%1000000);
+    int index;
+    for (index = 0;index < 16; ++index) {
+        randomBytes[index] = (byte)(random()%1000000);
     }
 
     randomBytes[6]  &= 0x0f;  /* clear version        */

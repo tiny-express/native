@@ -84,6 +84,13 @@ namespace Java {
             ~UUID();
 
         public:
+
+            /**
+             * The clock sequence value associated with this UUID.
+             *
+             * @return int - The clock sequence of this UUID
+             */
+            int clockSequence();
             /**
              * Compares this UUID with the specified UUID.
              *
