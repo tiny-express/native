@@ -33,129 +33,155 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace  Util {
-        class UUID
-        : public Object
-//        , public virtual Serializable
-//        , public virtual Comparable<UUID>
+        class UUID : public Object
+//                , public virtual Serializable
+//                , public virtual Comparable<UUID>
         {
+
         private:
-            UUID(Array<byte> data);
             long mostSigBits;
             long leastSigBits;
             long timestamp;
-            String trap;
+
+        private:
+            /**
+             * Private constructor which uses a byte array to construct the new UUID.
+             *
+             * @param Array<byte> data
+             * @return UUID
+             */
+            UUID(Array<byte> data);
+
+            /**
+             * Returns val represented by the specified number of hex digits
+             *
+             * @param long value
+             * @param int digit
+             * @return String
+             */
+            static String digits(long value, int digit);
 
         public:
+            /**
+             * Default constructor
+             *
+             * @return UUID
+             */
             UUID();
+
+            /**
+             * Create new instance this object through most && least significant bits
+             *
+             * @param mostSigBits
+             * @param leastSigBits
+             * @return UUID
+             */
             UUID(long mostSigBits, long leastSigBits);
+
+            /**
+             * Default destructor
+             */
             ~UUID();
 
         public:
-            /**
-             * Don't support this method
-             * The clock sequence value associated with this UUID.
-             * @return
-             */
-//            int	clockSequence();
 
             /**
+             * The clock sequence value associated with this UUID.
+             *
+             * @return int - The clock sequence of this UUID
+             */
+            int clockSequence();
+            /**
              * Compares this UUID with the specified UUID.
-             * @param target
+             *
+             * @param UUID target
              * @return int
+             *  -1 : if this object less than target either mostSigBits or leastSigBits
+             *  0 : if this object equal both of mostSigBits and leastSigBits
+             *  1 : if this object more than target either mostSigBits or leastSigBits
              */
             int	compareTo(UUID target);
 
             /**
              * Compares this object to the specified object.
-             * @param target
+             *
+             * @param UUID target
              * @return boolean
+             * true : if the target are same mostSigBits and leastSigBits
+             * false : otherwise
              */
             boolean	equals(UUID target);
 
             /**
              * Returns the least significant 64 bits of this UUID's 128 bit value.
+             *
              * @return long
              */
             long getLeastSignificantBits();
 
             /**
              * Returns the most significant 64 bits of this UUID's 128 bit value.
+             *
              * @return long
              */
             long getMostSignificantBits();
 
             /**
              * Returns a hash code for this UUID.
-             * @return
+             *
+             * @return int
              */
             int	hashCode();
 
             /**
              * The node value associated with this UUID.
+             *
              * @return long
              */
             long node();
 
             /**
              * The timestamp value associated with this UUID.
+             *
              * @return long
              */
             long getTimestamp();
 
             /**
              * Returns a String object representing this UUID.
+             *
              * @return String
              */
             String toString();
 
             /**
              * The variant number associated with this UUID.
-             * @return
+             *
+             * @return int
              */
-            int	variant();
+            int variant();
 
             /**
              * The version number associated with this UUID.
-             * @return
+             *
+             * @return int
              */
-            int	version();
+            int version();
 
             /**
              * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
-             * @return
+             *
+             * @return UUID
              */
-            static UUID	randomUUID() {
-                Array<byte> randomBytes = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-                //FIXME: will be replaced by Java.Util.Random after it was implemented
-                srand(time(0));
-                for (int i = 0; i < 16; ++i) {
-                    randomBytes[i] = (byte)(random()%100);
-                }
-
-                randomBytes[6]  &= 0x0f;  /* clear version        */
-                randomBytes[6]  |= 0x40;  /* set to version 4     */
-                randomBytes[8]  &= 0x3f;  /* clear variant        */
-                randomBytes[8]  |= 0x80;  /* set to IETF variant  */
-                return UUID(randomBytes);
-            }
+            static UUID	randomUUID();
 
             /**
-             * Don't support this method
-             *  Static factory to retrieve a type 3 (name based) UUID based on the specified byte array.
-             */
-//            static UUID	nameUUIDFromBytes(Array<byte> name);
-
-            /**
-             * Fix this later
              * Creates a UUID from the string standard representation as described in the toString() method.
-             * @param name
-             * @return
+             *
+             * @param String name
+             * @return UUID
              */
             static UUID	fromString(String name);
-
-            String getTrap();
-            void setTrap(const String &trap);
         };
     }
 }
