@@ -410,6 +410,14 @@ namespace Java {
             }
 
             /**
+             * Returns an iterator over the elements in this list in proper sequence.
+             * @return Iterator<E>
+             */
+//          Iterator<E> iterator() const {
+//              // TODO
+//          }
+
+            /**
              * Returns the last element of this Vector.
              *
              * @return E
@@ -455,6 +463,26 @@ namespace Java {
                 }
 
                 return -1;
+            }
+
+            /**
+             * Returns a list iterator over the elements in this list (in proper sequence).
+             *
+             * @return ListIterator<E>
+             */
+            ListIterator<E> listIterator() const {
+                // TODO
+            }
+
+            /**
+             * Returns a list iterator over the elements in this list (in proper sequence),
+             * starting at the specified position in the list.
+             *
+             * @param index
+             * @return ListIterator<E>
+             */
+            ListIterator<E> listIterator(int index) {
+                // TODO
             }
 
             /**
@@ -573,6 +601,15 @@ namespace Java {
             }
 
         public:
+            /**
+             * Removes all of the elements of this collection that satisfy the given predicate.
+             *
+             * @param filter
+             * @return boolean
+             */
+//          boolean	removeIf(Predicate<E> filter) {
+//              // TODO
+//          }
 
             /**
              * Replaces each element of this list with the result of applying the operator to that element.
@@ -660,6 +697,50 @@ namespace Java {
              * @param comparator
              */
             void sort(Comparator<E> comparator) {
+                // TODO
+            }
+
+            /**
+             * Creates a late-binding and fail-fast Spliterator over the elements in this list.
+             *
+             * @return Spliterator<E>
+             */
+            Spliterator<E> spliterator() const {
+
+            }
+
+            /**
+             * Returns a view of the portion of this List between fromIndex, inclusive, and toIndex, exclusive.
+             *
+             * @param fromIndex
+             * @param toIndex
+             * @return List<E>
+             */
+            List<E> subList(int fromIndex, int toIndex) const {
+               // TODO
+            }
+
+            /**
+             * Returns an array containing all of the elements in this Vector in the correct order.
+             *
+             * @return Array<E>
+             */
+			Array<E> toArray() const {
+                Array<E> anArray;
+                for (E element : *this) {
+                    anArray.push(element);
+                }
+                return anArray;
+            }
+
+            /**
+             * Returns an array containing all of the elements in this Vector in the correct order;
+             * the runtime type of the returned array is that of the specified array.
+             *
+             * @param anArray
+             * @return Array<E>
+             */
+			Array<E> toArray(Array<E> &anArray) const {
                 // TODO
             }
 

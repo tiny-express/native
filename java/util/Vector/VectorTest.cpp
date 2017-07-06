@@ -539,6 +539,18 @@ TEST(JavaUtil, VectorSize) {
     ASSERT_EQUAL(5, vector.size());
 }
 
+TEST(JavaUtil, VectorToArray) {
+    // Given a valid vector.
+    Vector<int> vector {1, 2, 3, 4, 5};
+    // Copies vector to an array.
+    Array<int> anArray = vector.toArray();
+    // Check elements of vector and array at same order.
+    register int index;
+    for (index = 0; index < vector.size(); index++) {
+        ASSERT_EQUAL(vector[index], anArray[index]);
+    }
+}
+
 TEST(JavaUtil, VectorTrimToSize) {
     // Given a valid vector.
     Vector<int> vector;
