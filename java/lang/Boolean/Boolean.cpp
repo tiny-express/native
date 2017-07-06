@@ -160,7 +160,6 @@ string Boolean::toString(const boolean &target) {
     if (target == True) {
         return (string) "true";
     }
-
     return (string) "false";
 }
 
@@ -188,7 +187,7 @@ boolean Boolean::valueOf(const_string target) {
  * Assign value of this object same as target value
  *
  * @param target
- * @return
+ * @return Boolean
  */
 Boolean Boolean::operator=(const Boolean &target) {
     this->original = target.original;
