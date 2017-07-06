@@ -108,14 +108,14 @@ namespace Java {
 			 *
 			 * @param K key - The key whose presence in this map is to be tested
 			 * @return boolean
-			 * 	true if this map contains a mapping for the specified key.
+			 * 	true : if this map contains a mapping for the specified key.
 			 * 	false: otherwise
 			 */
 			boolean containsKey(K key) {
 				V value = get(key);
 				boolean isNull = ((Nullable *)&value)->isNull();
 
-                if (isNull == true) {
+                if (isNull) {
                     return false;
                 }
 
@@ -155,7 +155,7 @@ namespace Java {
 					return result;
 				}
 
-				result = this->original[key];
+				result = it->second;
                 ((Nullable *)&result)->setNullable(false);
 
 				return result;
@@ -171,12 +171,17 @@ namespace Java {
 			 * or defaultValue if this map contains no mapping for the key
 			 */
 			V getOrDefault(K key, V defaultValue) {
-				V *result = get(key);
-				if (NULL == result) {
-					return defaultValue;
-				}
+                V result;
+                auto const it = this->original.find(key);
 
-				return *result;
+                if (it == this->original.end()) {
+                    result = defaultValue;
+                } else {
+                    result = it->second;
+                }
+                ((Nullable *)&result)->setNullable(false);
+
+                return result;
 			}
 
 			/**
@@ -229,8 +234,8 @@ namespace Java {
 					return result;
 				}
 
-				((Nullable *)&result)->setNullable(false);
-				result = this->original[key];
+				result = it->second;
+                ((Nullable *)&result)->setNullable(false);
 
 				this->original.erase(key);
 				return result;
@@ -275,7 +280,7 @@ namespace Java {
 					return result;
 				}
 
-				result = this->original[key];
+				result = it->second;
 				((Nullable *)&result)->setNullable(false);
 
 				this->original[key] = value;
@@ -294,8 +299,10 @@ namespace Java {
              * false: if otherwise
              */
             boolean replace(K key, V oldValue, V newValue) {
-                V *result = get(key);
-                if (NULL == result || *result != oldValue) {
+                V result;
+                auto const it = this->original.find(key);
+
+                if (it == this->original.end() || it->second != oldValue) {
                     return false;
                 }
 

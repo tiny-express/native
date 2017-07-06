@@ -304,7 +304,7 @@ TEST (JavaUtil, HashMapReplace) {
     hashMap.put("key !@#", "1000");
     hashMap.put(".;;',", "ab232");
 
-    // Valid data before replace
+    // Valid data inside before replace
     String expectedKey = ".;;',";
     String expectedValue = "ab232";
     String result = hashMap.get(expectedKey);
@@ -328,6 +328,51 @@ TEST (JavaUtil, HashMapReplace) {
     // Result must not be null and equal to newValue
     ASSERT_FALSE(result.isNull());
     ASSERT_STR(expectedValue.toString(), result.toString());
+}
+
+TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
+    // Given valid hash map to test
+    HashMap<String, String> hashMap;
+    hashMap.put("some key", "123");
+    hashMap.put("key123", "!@#");
+
+    // Valid size before replace
+    int expectedSize = 2;
+    ASSERT_EQUAL(expectedSize, hashMap.size());
+
+    // Valid data inside before replace
+    String expectedKey = "key123";
+    String expectedValue = "!@#";
+    String getResult = hashMap.get(expectedKey);
+
+    ASSERT_FALSE(getResult.isNull());
+    ASSERT_STR(expectedValue.toString(), getResult.toString());
+
+    // Replace with correct key/oldValue - result must equal to TRUE
+    String key = "key123";
+    String oldValue = "!@#";
+    String newValue = "456";
+    boolean replaceResult = hashMap.replace(key, oldValue, newValue);
+    ASSERT_TRUE(replaceResult);
+
+    // Valid data inside after replace succeed - key must be mapped with newValue
+    String valueAfterReplaced = hashMap.get(key);
+    ASSERT_STR(newValue.toString(), valueAfterReplaced.toString());
+
+    // Replace with incorrect key/oldValue - result must equal to FALSE
+    key = "some key";
+    oldValue = "wrong value";
+    newValue = "newValue";
+    replaceResult = hashMap.replace(key, oldValue, newValue);
+    ASSERT_FALSE(replaceResult);
+
+    // Valid data inside after replace failed - key must be mapped previous value before replace
+    key = "some key";
+    oldValue = "123";
+    getResult = hashMap.get(key);
+
+    ASSERT_FALSE(key.isNull());
+    ASSERT_STR(oldValue.toString(), getResult.toString());
 }
 
 TEST (JavaUtil, HashMapSize) {
