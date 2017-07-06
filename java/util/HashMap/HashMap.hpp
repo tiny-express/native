@@ -27,6 +27,8 @@
 #ifndef NATIVE_JAVA_UTIL_HASH_MAP_HPP
 #define NATIVE_JAVA_UTIL_HASH_MAP_HPP
 
+#include <initializer_list>
+#include <iostream>
 #import "../AbstractMap/AbstractMap.hpp"
 #import "../Map/Map.hpp"
 
@@ -39,18 +41,52 @@ namespace Java {
 					, public virtual Serializable
 		{
 		private:
-			std::map<K, V> hashMap;
-
-		public:
-			HashMap(){}
-			~HashMap(){}
+			std::map<K, V> original;
+            typedef typename std::map<K, V>::iterator _iterator;
+            typedef typename std::map<K, V>::const_iterator _const_iterator;
 
 		public:
 			/**
-			 * Removes all of the mappings from this map.
+			 * Constructs an empty HashMap
+			 */
+			HashMap(){}
+
+			/**
+			 * Constructs a new HashMap with the same mappings as the specified Map.
+			 *
+			 * @param const HashMap<K, V> &target - the map whose mappings are to be placed in this map
+			 * @throw if the specified map is null
+			 */
+			HashMap(const HashMap<K, V> &target) {
+				this->putAll(target);
+			}
+
+			/**
+			 * Destructor HashMap
+			 */
+			~HashMap(){}
+
+		public:
+			_iterator begin() {
+				return this->original.begin();
+			};
+			_const_iterator begin() const {
+				return this->original.begin();
+			};
+			_iterator end() {
+				return this->original.end();
+			};
+			_const_iterator end() const {
+				return this->original.end();
+			};
+
+
+		public:
+			/**
+			 * Removes all of the mappings from this map. The map will be empty after this call returns.
 			 */
 			void clear() {
-				this->hashMap.clear();
+				this->original.clear();
 			}
 
 			/***
@@ -60,18 +96,20 @@ namespace Java {
 			 */
 			HashMap<K, V> clone() {
 				HashMap<K, V> result;
-				for (auto const &element: this->hashMap) {
-					result.put(element->first, element->second);
+				for (auto const &element: this->original) {
+					result.put(element.first, element.second);
 				}
 
 				return result;
 			};
 
 			/**
-			 * Returns true if this map contains a mapping for the specified key
+			 * Returns true if this map contains a mapping for the specified key.
 			 *
-			 * @param K key
+			 * @param K key - The key whose presence in this map is to be tested
 			 * @return boolean
+			 * 	true if this map contains a mapping for the specified key.
+			 * 	false: otherwise
 			 */
 			boolean containsKey(K key) {
 				if (NULL == get(key)) {
@@ -82,29 +120,15 @@ namespace Java {
 			}
 
 			/**
-			 * Removes all of the mappings from this map.
-			 *
-			 * @param K key
-			 * @return V value
-			 */
-			V *get(K key) {
-				auto const it = this->hashMap.find(key);
-
-				if (it == this->hashMap.end()) {
-					return NULL;
-				}
-
-				return &(this->hashMap[key]);
-			}
-
-			/**
 			 * Returns true if this map maps one or more keys to the specified value.
 			 *
-			 * @param V value
+			 * @param V value - value whose presence in this map is to be tested
 			 * @return boolean
+			 *  true : if this map maps one or more keys to the specified value
+			 *  false: otherwise
 			 */
 			boolean containsValue(V value) {
-				for (auto const &ent1 : this->hashMap) {
+				for (auto const &ent1 : this->original) {
 					if (ent1.second == value) {
 						return true;
 					}
@@ -113,12 +137,48 @@ namespace Java {
 			}
 
 			/**
+			 * Returns the value to which the specified key is mapped,
+			 * or null if this map contains no mapping for the key
+			 *
+			 * @param K key - the key whose associated value is to be returned
+			 * @return V value - the value to which the specified key is mapped, or null if no mapping with key
+			 */
+			V *get(K key) {
+				auto const it = this->original.find(key);
+
+				if (it == this->original.end()) {
+					return NULL;
+				}
+
+				return &(this->original[key]);
+			}
+
+			/**
+			 *  Returns the value to which the specified key is mapped,
+			 *  or defaultValue if this map contains no mapping for the key.
+			 *
+			 * @param K key - the key whose associated value is to be returned
+			 * @param V defaultValue - the default mapping of the key
+			 * @return V the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key
+			 */
+			V getOrDefault(K key, V defaultValue) {
+				V *result = get(key);
+				if (NULL == result) {
+					return defaultValue;
+				}
+
+				return *result;
+			}
+
+			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
 			 * @return boolean
+			 *  true : true if this map contains no key-value mappings
+			 *  false: otherwise
 			 */
 			boolean isEmpty() {
-				return ( this->hashMap.size() == 0 );
+				return ( this->original.size() == 0 );
 			}
 
 			/**
@@ -128,55 +188,101 @@ namespace Java {
 			 * @param const V &value
 			 */
 			void put(const K &key, const V &value) {
-				this->hashMap.insert(std::make_pair(key, value));
+				this->original.insert(std::make_pair(key, value));
 			}
 
 			/**
 			 * Copies all of the mappings from the specified map to this map.
 			 *
 			 * @param const hashMap<K, V> &map
-			 * @return boolean
 			 */
-			boolean putAll(const HashMap<K, V> &map) {
-				typename std::map<K, V>::iterator it;
-				for (it = map.hashMap.begin(); it < map.hashMap.end(); ++it) {
-					K key = it->first;
-					V value = it->value;
-
-					this->put(key, value);
+			void putAll(const HashMap<K, V> &map) {
+				for (auto const &element: map) {
+                    K key = element.first;
+                    V value = element.second;
+                    this->original.insert(std::make_pair(key, value));
 				}
             }
 
 			/**
 			 * Removes the mapping for the specified key from this map if present.
 			 *
-			 * @param K key
-			 * @return boolean
+			 * @param K key - key whose mapping is to be removed from the map
+			 * @return V - the previous value associated with key, or null if there was no mapping for key.
+			 * (A null return can also indicate that the map previously associated null with key.)
 			 */
-			boolean remove(K key) {
-				if (NULL == get(key)) {
-					return false;
+			V *remove(K key) {
+                V *result = get(key);
+				if (NULL == result) {
+					return NULL;
 				}
 
-				this->hashMap.erase(key);
-				return true;
+				V *data = new V;
+				*data = this->original[key];
+				this->original.erase(key);
+
+				return data;
 			}
 
 			/**
-			 * Removes the mapping for the specified key & value from this map if present.
+			 * Removes the entry for the specified key only if it is currently mapped to the specified value.
 			 *
-			 * @param K key
-			 * @param V value
+			 * @param K key - key with which the specified value is associated
+			 * @param V value - value expected to be associated with the specified key
 			 * @return boolean
+			 * true : if the value was removed
+			 * false: if otherwise
 			 */
 			boolean remove(K key, V value) {
-				if (NULL == get(key) || !containsValue(value)) {
+				V *valueMapped = get(key);
+				if (NULL == valueMapped || (*valueMapped) != value) {
 					return false;
 				}
 
-				this->hashMap.erase(key);
+				this->original.erase(key);
 				return true;
 			}
+
+            /**
+             * Replaces the entry for the specified key only if it is currently mapped to some value.
+             *
+             * @param key - key with which the specified value is associated
+             * @param value - value to be associated with the specified key
+             * @return V* - the previous value associated with the specified key,
+             * or null if there was no mapping for the key.
+             * (A null return can also indicate that the map previously associated null with the key,
+             * if the implementation supports null values.)
+             */
+            V* replace(K key, V value) {
+                V *result = get(key);
+                if (NULL == result) {
+                    return NULL;
+                }
+
+				V data = *result;
+                this->original.erase(key);
+                return &data;
+            }
+
+            /**
+             * Replaces the entry for the specified key only if currently mapped to the specified value.
+             *
+             * @param key - key with which the specified value is associated
+             * @param oldValue - value expected to be associated with the specified key
+             * @param newValue - value to be associated with the specified key
+             * @return boolean
+             * true : if the value was replaced
+             * false: if otherwise
+             */
+            boolean replace(K key, V oldValue, V newValue) {
+                V *result = get(key);
+                if (NULL == result || *result != oldValue) {
+                    return false;
+                }
+
+                this->original[key] = newValue;
+                return true;
+            }
 
 			/**
 			 * Returns the number of key-value mappings in this map.
@@ -184,7 +290,7 @@ namespace Java {
 			 * @return int
 			 */
 			int size() {
-				return this->hashMap.size();
+				return this->original.size();
 			}
 
             /**
@@ -198,10 +304,10 @@ namespace Java {
 				}
 
 				string builder = strdup("{");
+
 				int sizeCounter = this->size();
 				typename std::map<K, V>::iterator it;
-
-				for (it = this->hashMap.begin();  it != this->hashMap.end() ; ++it) {
+				for (it = this->original.begin();  it != this->original.end() ; ++it) {
 					sizeCounter--;
 
 					if (instanceof<Object>(it->second)) {
