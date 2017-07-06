@@ -189,6 +189,17 @@ TEST(JavaUtil, VectorContains) {
     ASSERT_TRUE(vector.contains(5));
 }
 
+TEST(JavaUtil, VectorCopyInto) {
+    Vector<int> vector {1, 2, 3, 4, 5};
+    Array<int> anArray;
+    vector.copyInto(anArray);
+    ASSERT_EQUAL(vector.size(), anArray.length);
+    register int index;
+    for (index = 0; index < vector.size(); index++) {
+        ASSERT_EQUAL(vector.get(index), anArray.get(index));
+    }
+}
+
 TEST(JavaUtil, VectorElementAt) {
     // Given a valid vector.
     Vector<int> vector;

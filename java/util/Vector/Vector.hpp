@@ -225,6 +225,17 @@ namespace Java {
             }
 
             /**
+             * Copies the components of this vector into the specified array.
+             *
+             * @param anArray
+             */
+            void copyInto(Array<E> &anArray) {
+                for (E element : *this) {
+                    anArray.push(element);
+                }
+            }
+
+            /**
              * Gets an element at specified index.
              *
              * @param index
@@ -233,6 +244,15 @@ namespace Java {
             E elementAt(int index) const {
                 return this->get(index);
             }
+
+            /**
+             * Returns an enumeration of the components of this Vector.
+             *
+             * @return Enumeration<E>
+             */
+//          Enumeration<E> elements() const {
+//              // TODO
+//          }
 
             /**
              * Increases the capacity of this Vector,
@@ -256,6 +276,18 @@ namespace Java {
 
                     this->original.reserve(newCapacity);
                 }
+            }
+
+            /**
+             * Compares the specified Object with this Vector for equality.
+             * Returns true if and only if the specified Object is also a List, both Lists have the same size,
+             * and all corresponding pairs of elements in the two Lists are equal.
+             *
+             * @param target
+             * @return
+             */
+            boolean equals(const Object &target) const {
+                // TODO
             }
 
             /**
@@ -284,12 +316,12 @@ namespace Java {
             }
 
             /**
-             * Checks this Vector is empty or not.
+             * Returns the hash code value for this Vector.
              *
-             * @return boolean
+             * @return int
              */
-            boolean isEmpty() const {
-                return this->original.empty();
+            int hashCode() const {
+                // TODO
             }
 
             /**
@@ -340,6 +372,15 @@ namespace Java {
              */
             void insertElementAt(const E &element, int index) {
                 this->add(index, element);
+            }
+
+            /**
+             * Checks this Vector is empty or not.
+             *
+             * @return boolean
+             */
+            boolean isEmpty() const {
+                return this->original.empty();
             }
 
             /**
