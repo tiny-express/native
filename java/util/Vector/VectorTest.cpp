@@ -313,79 +313,6 @@ TEST(JavaUtil, VectorLastIndexOf) {
     ASSERT_EQUAL(1, vector.lastIndexOf(2, 1));
 }
 
-TEST(JavaUtil, VectorSet) {
-    // Given a valid vector.
-    Vector<int> vector;
-    vector.add(1);
-    vector.add(2);
-    vector.add(3);
-    vector.add(4);
-    vector.add(5);
-    // Change element at index 0.
-    ASSERT_EQUAL(1, vector.set(0, 10));
-    // Check element at index 0.
-    ASSERT_EQUAL(10, vector.get(0));
-    // Change element at index 4.
-    ASSERT_EQUAL(5, vector.set(4, 0));
-    // Check element at index 4.
-    ASSERT_EQUAL(0, vector.get(4));
-}
-
-TEST(JavaUtil, VectorSetElementAt) {
-    // Given a valid vector.
-    Vector<int> vector;
-    vector.add(1);
-    vector.add(2);
-    vector.add(3);
-    vector.add(4);
-    vector.add(5);
-    // Change element at index 0.
-    vector.setElementAt(10, 0);
-    // Check element at index 0.
-    ASSERT_EQUAL(10, vector.get(0));
-    // Change element at index 4.
-    vector.setElementAt(0, 4);
-    // Check element at index 4.
-    ASSERT_EQUAL(0, vector.get(4));
-}
-
-TEST(JavaUtil, VectorSetSize) {
-    // Given a valid vector.
-    Vector<int> vector;
-    vector.add(1);
-    vector.add(2);
-    vector.add(3);
-    vector.add(4);
-    vector.add(5);
-    vector.add(6);
-    vector.add(7);
-    vector.add(8);
-    vector.add(9);
-    // Sets size and checks size.
-    vector.setSize(5);
-    ASSERT_EQUAL(5, vector.size());
-}
-
-TEST(JavaUtil, VectorSize) {
-    // Given a empty vector, then add an element - return size.
-    Vector<int> vector;
-    vector.add(0);
-    ASSERT_EQUAL(1, vector.size());
-
-    // Remove the element at index 0 - return size.
-    vector.remove(0);
-    ASSERT_EQUAL(0, vector.size());
-
-    // Add five elements into vector - return size.
-    vector.add(1);
-    vector.add(2);
-    vector.add(3);
-    vector.add(4);
-    vector.add(5);
-    ASSERT_EQUAL(5, vector.size());
-}
-
-
 TEST(JavaUtil, VectorRemove) {
     // Given empty vector, add three elements, remove at index 1 twice times, then remove at index 0.
     // Result is element that removed from vector.
@@ -489,6 +416,86 @@ TEST(JavaUtil, VectorRemoveRange) {
     // value: 1 4 5 6 7 8
     ASSERT_EQUAL(1, vector.get(0));
     ASSERT_EQUAL(4, vector.get(1));
+}
+
+TEST(JavaUtil, VectorRetainAll) {
+    Vector<int> vector {1, 2, 3, 4, 5};
+    ASSERT_TRUE(vector.retainAll({4, 5, 6}));
+    ASSERT_EQUAL(2, vector.size());
+    ASSERT_EQUAL(4, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+}
+
+TEST(JavaUtil, VectorSet) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Change element at index 0.
+    ASSERT_EQUAL(1, vector.set(0, 10));
+    // Check element at index 0.
+    ASSERT_EQUAL(10, vector.get(0));
+    // Change element at index 4.
+    ASSERT_EQUAL(5, vector.set(4, 0));
+    // Check element at index 4.
+    ASSERT_EQUAL(0, vector.get(4));
+}
+
+TEST(JavaUtil, VectorSetElementAt) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    // Change element at index 0.
+    vector.setElementAt(10, 0);
+    // Check element at index 0.
+    ASSERT_EQUAL(10, vector.get(0));
+    // Change element at index 4.
+    vector.setElementAt(0, 4);
+    // Check element at index 4.
+    ASSERT_EQUAL(0, vector.get(4));
+}
+
+TEST(JavaUtil, VectorSetSize) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    vector.add(6);
+    vector.add(7);
+    vector.add(8);
+    vector.add(9);
+    // Sets size and checks size.
+    vector.setSize(5);
+    ASSERT_EQUAL(5, vector.size());
+}
+
+TEST(JavaUtil, VectorSize) {
+    // Given a empty vector, then add an element - return size.
+    Vector<int> vector;
+    vector.add(0);
+    ASSERT_EQUAL(1, vector.size());
+
+    // Remove the element at index 0 - return size.
+    vector.remove(0);
+    ASSERT_EQUAL(0, vector.size());
+
+    // Add five elements into vector - return size.
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    vector.add(5);
+    ASSERT_EQUAL(5, vector.size());
 }
 
 TEST(JavaUtil, VectorTrimToSize) {

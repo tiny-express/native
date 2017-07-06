@@ -391,77 +391,6 @@ namespace Java {
             }
 
             /**
-             * Returns a list iterator over the elements in this list (in proper sequence).
-             *
-             * @return ListIterator<E>
-             */
-            ListIterator<E> listIterator() {
-                // TODO
-            }
-
-            /**
-             * Returns a list iterator over the elements in this list (in proper sequence),
-             * starting at the specified position in the list.
-             *
-             * @param index
-             * @return ListIterator<E>
-             */
-            ListIterator<E> listIterator(int index) {
-                // TODO
-            }
-
-            /**
-             * Replaces the element at the specified index with the specified element.
-             *
-             * @param index
-             * @param element
-             * @return E
-             */
-            E set(int index, const E &element) {
-                if (index < 0 || index >= this->original.size()) {
-                    throw std::invalid_argument("index is out of range");
-                }
-                E removedElement = this->get(index);
-                this->original[index] = element;
-                return removedElement;
-            }
-
-            /**
-             * Sets the element at the specified index of this Vector to be the specified element.
-             *
-             * @param element
-             * @param index
-             */
-            void setElementAt(const E &element, int index) {
-                this->set(index, element);
-            }
-
-            /**
-             * Sets the size of this Vector.
-             *
-             * @param newSize
-             */
-            void setSize(int newSize) {
-                if (newSize < 0) {
-                    throw std::invalid_argument("new size is negative");
-                }
-                // If new size is greater than current capacity, run ensureCapacity to increase capacity.
-                if (newSize > this->original.size()) {
-                    this->ensureCapacity(newSize);
-                }
-                this->original.resize(newSize);
-            }
-
-            /**
-             * Returns size (number of elements) of this Vector.
-             *
-             * @return int
-             */
-            int size() const {
-                return this->original.size();
-            }
-
-            /**
              * Removes an element at specified index in this Vector.
              *
              * @param index
@@ -547,6 +476,87 @@ namespace Java {
             }
 
         public:
+
+            /**
+             * Retains only the elements in this Vector that are contained in the specified initializer list.
+             *
+             * @param list
+             * @return boolean
+             */
+            boolean retainAll(const std::initializer_list<E> &list) {
+                int oldSize = this->original.size();
+                typename std::vector<E>::iterator vectorIterator;
+                for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
+                    if (std::find(list.begin(), list.end(), *vectorIterator) == list.end()) {
+                        this->original.erase(vectorIterator);
+                    }
+                    else {
+                        vectorIterator++;
+                    }
+                }
+                return (oldSize != this->original.size());
+            }
+
+            /**
+             * Replaces the element at the specified index with the specified element.
+             *
+             * @param index
+             * @param element
+             * @return E
+             */
+            E set(int index, const E &element) {
+                if (index < 0 || index >= this->original.size()) {
+                    throw std::invalid_argument("index is out of range");
+                }
+                E removedElement = this->get(index);
+                this->original[index] = element;
+                return removedElement;
+            }
+
+            /**
+             * Sets the element at the specified index of this Vector to be the specified element.
+             *
+             * @param element
+             * @param index
+             */
+            void setElementAt(const E &element, int index) {
+                this->set(index, element);
+            }
+
+            /**
+             * Sets the size of this Vector.
+             *
+             * @param newSize
+             */
+            void setSize(int newSize) {
+                if (newSize < 0) {
+                    throw std::invalid_argument("new size is negative");
+                }
+                // If new size is greater than current capacity, run ensureCapacity to increase capacity.
+                if (newSize > this->original.size()) {
+                    this->ensureCapacity(newSize);
+                }
+                this->original.resize(newSize);
+            }
+
+            /**
+             * Returns size (number of elements) of this Vector.
+             *
+             * @return int
+             */
+            int size() const {
+                return this->original.size();
+            }
+
+            /**
+             * Sorts this list according to the order induced by the specified Comparator.
+             *
+             * @param comparator
+             */
+            void sort(Comparator<E> comparator) {
+                // TODO
+            }
+
             /**
              * Trims the capacity of this Vector to be the Vector's current size.
              */
