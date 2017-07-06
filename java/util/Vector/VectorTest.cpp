@@ -234,6 +234,17 @@ TEST(JavaUtil, VectorEnsureCapacity) {
     ASSERT_EQUAL(100, vector2.capacity());
 }
 
+TEST(JavaUtil, VectorEquals) {
+    // Given two valid vectors, check they are equals or not.
+    Vector<int> vector1 {1, 2, 3, 4, 5};
+    Vector<int> target1 {1, 2, 3, 5, 4};
+    ASSERT_FALSE(vector1.equals(target1));
+    // Given two valid vector, check they are equals or not.
+    Vector<int> vector2 {1, 2, 3, 4, 5, 6, 7};
+    Vector<int> target2 {1, 2, 3, 4, 5, 6, 7};
+    ASSERT_TRUE(vector2.equals(target2));
+}
+
 TEST(JavaUtil, VectorFirstElement) {
     // Given a valid vector, contains three elements are string - return the first element.
     Vector<String> vector;

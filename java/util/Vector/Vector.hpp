@@ -279,15 +279,25 @@ namespace Java {
             }
 
             /**
-             * Compares the specified Object with this Vector for equality.
-             * Returns true if and only if the specified Object is also a List, both Lists have the same size,
-             * and all corresponding pairs of elements in the two Lists are equal.
+             * Compares the specified Vector with this Vector for equality.
              *
              * @param target
-             * @return
+             * @return boolean
              */
-            boolean equals(const Object &target) const {
-                // TODO
+            boolean equals(const Vector<E> &target) const {
+                int size = this->size();
+                if (size != target.size()) {
+                    return false;
+                }
+
+                register int index;
+                for (index = 0; index < size; index++) {
+                    if ( (*this)[index]!= target[index]) {
+                        return false;
+                    }
+                }
+
+                return true;
             }
 
             /**
@@ -723,6 +733,14 @@ namespace Java {
                     throw std::invalid_argument("index is out of range");
                 }
                 E *vectorData = this->original.data();
+                return *(vectorData + index);
+            }
+
+            E operator[](const int index) const {
+                if (index < 0 || index >= this->original.size()) {
+                    throw std::invalid_argument("index is out of range");
+                }
+                const E *vectorData = this->original.data();
                 return *(vectorData + index);
             }
 
