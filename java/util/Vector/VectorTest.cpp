@@ -540,3 +540,24 @@ TEST(JavaUtil, VectorArrayOperator) {
     vector[0] = -1;
     ASSERT_EQUAL(-1, vector.get(0));
 }
+
+TEST(JavaUtil, VectorAssignmentOperator) {
+    // Given an empty vector and add an element to it.
+    Vector<int> vector;
+    vector.add(-1);
+    // Assigns with an initializer list.
+    vector = {1, 2, 3, 4, 5};
+    // Checks size and the first-last element.
+    ASSERT_EQUAL(5, vector.size());
+    ASSERT_EQUAL(1, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+
+    // Given an target vector with some elements inside.
+    Vector<int> target {10, 11, 12};
+    // Assigns target to vector.
+    vector = target;
+    // Checks size and the first-last element.
+    ASSERT_EQUAL(3, vector.size());
+    ASSERT_EQUAL(10, vector.firstElement());
+    ASSERT_EQUAL(12, vector.lastElement());
+}

@@ -621,6 +621,13 @@ namespace Java {
                 return this->original.cend();
             }
 
+            /**
+             * Array operator.
+             * Uses this operator to access an element at the specified index.
+             *
+             * @param index
+             * @return E
+             */
             E &operator[](const int index) {
                 if (index < 0 || index >= this->original.size()) {
                     throw std::invalid_argument("index is out of range");
@@ -629,6 +636,38 @@ namespace Java {
                 return *(vectorData + index);
             }
 
+            /**
+             * Assignment operator.
+             * Assigns values from right side operands to left side operand.
+             *
+             * @param target
+             * @return Vector<E>
+             */
+            Vector<E> &operator=(const Vector<E> &target) {
+                this->clear();
+                this->ensureCapacity(target.size());
+                const E *targetData = target.original.data();
+                register int index;
+                for (index = 0; index < target.size(); index++) {
+                    this->original.push_back(targetData[index]);
+                }
+            }
+
+            /**
+             * Assignment operator.
+             * Assigns values from right side operands to left side operand.
+             *
+             * @param list
+             * @return Vector<E>
+             */
+            Vector<E> &operator=(const std::initializer_list<E> &list) {
+                this->clear();
+                this->ensureCapacity(list.size());
+                typename std::initializer_list<E>::iterator listIterator;
+                for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
+                    this->original.push_back(*listIterator);
+                }
+            }
         };
     }
 }
