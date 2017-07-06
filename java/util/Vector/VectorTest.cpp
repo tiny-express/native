@@ -510,20 +510,15 @@ TEST(JavaUtil, VectorTrimToSize) {
 
 TEST(JavaUtil, VectorRangeBasedForLoop) {
     Vector<int> vector;
+    vector.add(0);
     vector.add(1);
     vector.add(2);
     vector.add(3);
     vector.add(4);
-    vector.add(5);
 
     int index = 0;
     for (int element : vector) {
-        if (index == 0) {
-            ASSERT_EQUAL(1, element);
-        }
-        if (index == 4) {
-            ASSERT_EQUAL(5, element);
-        }
+        ASSERT_EQUAL(index, element);
         index++;
     }
 }
