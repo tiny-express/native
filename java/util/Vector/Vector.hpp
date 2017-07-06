@@ -277,6 +277,9 @@ namespace Java {
              * @return E
              */
             E get(int index) const {
+                if (index < 0 || index >= this->original.size()) {
+                    throw std::invalid_argument("index is out of range");
+                }
                 return this->original.at(index);
             }
 
@@ -385,6 +388,26 @@ namespace Java {
                 }
 
                 return -1;
+            }
+
+            /**
+             * Returns a list iterator over the elements in this list (in proper sequence).
+             *
+             * @return ListIterator<E>
+             */
+            ListIterator<E> listIterator() {
+                // TODO
+            }
+
+            /**
+             * Returns a list iterator over the elements in this list (in proper sequence),
+             * starting at the specified position in the list.
+             *
+             * @param index
+             * @return ListIterator<E>
+             */
+            ListIterator<E> listIterator(int index) {
+                // TODO
             }
 
             /**
@@ -531,6 +554,15 @@ namespace Java {
                 this->original.shrink_to_fit();
             }
 
+            /**
+             * Returns a string representation of this Vector, containing the String representation of each element.
+             *
+             * @return String
+             */
+            String toString() const {
+                // TODO
+            }
+
         public:
             typedef typename std::vector<E>::iterator iterator;
             typedef typename std::vector<E>::const_iterator const_iterator;
@@ -588,6 +620,15 @@ namespace Java {
             const_iterator cend() const {
                 return this->original.cend();
             }
+
+            E &operator[](const int index) {
+                if (index < 0 || index >= this->original.size()) {
+                    throw std::invalid_argument("index is out of range");
+                }
+                E *vectorData = this->original.data();
+                return *(vectorData + index);
+            }
+
         };
     }
 }

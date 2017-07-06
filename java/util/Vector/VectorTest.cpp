@@ -509,16 +509,34 @@ TEST(JavaUtil, VectorTrimToSize) {
 }
 
 TEST(JavaUtil, VectorRangeBasedForLoop) {
+    // Given a valid vector.
     Vector<int> vector;
     vector.add(0);
     vector.add(1);
     vector.add(2);
     vector.add(3);
     vector.add(4);
-
+    // Using range-base-for-loop and checks element value.
     int index = 0;
     for (int element : vector) {
         ASSERT_EQUAL(index, element);
         index++;
     }
+}
+
+TEST(JavaUtil, VectorArrayOperator) {
+    // Given a valid vector.
+    Vector<int> vector;
+    vector.add(0);
+    vector.add(1);
+    vector.add(2);
+    vector.add(3);
+    vector.add(4);
+    // Accesses element value using array operator.
+    int index;
+    for (index = 0; index < vector.size(); index++) {
+        ASSERT_EQUAL(index, vector[index]);
+    }
+    vector[0] = -1;
+    ASSERT_EQUAL(-1, vector.get(0));
 }
