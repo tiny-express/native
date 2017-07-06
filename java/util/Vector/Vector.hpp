@@ -225,6 +225,22 @@ namespace Java {
             }
 
             /**
+             * Returns true if this Vector contains all of the elements in the specified initializer list.
+             *
+             * @param list
+             * @return boolean
+             */
+            boolean containsAll(const std::initializer_list<E> &list) {
+                typename std::initializer_list<E>::iterator listIterator;
+                for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
+                    if (std::find(this->original.begin(), this->original.end(), *listIterator) == this->original.end()) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            /**
              * Copies the components of this vector into the specified array.
              *
              * @param anArray
@@ -736,7 +752,7 @@ namespace Java {
                 return *(vectorData + index);
             }
 
-            E operator[](const int index) const {
+            const E &operator[](const int index) const {
                 if (index < 0 || index >= this->original.size()) {
                     throw std::invalid_argument("index is out of range");
                 }

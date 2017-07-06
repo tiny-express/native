@@ -189,6 +189,14 @@ TEST(JavaUtil, VectorContains) {
     ASSERT_TRUE(vector.contains(5));
 }
 
+TEST(JavaUtil, VectorContainsAll) {
+    // Given a valid vector.
+    Vector<int> vector {1, 2, 3, 4, 5};
+    // Checks vector for having all elements in a list.
+    ASSERT_FALSE(vector.containsAll({1, 2, 3, 4, 6}));
+    ASSERT_TRUE(vector.containsAll({1, 2, 3, 4, 5}));
+}
+
 TEST(JavaUtil, VectorCopyInto) {
     Vector<int> vector {1, 2, 3, 4, 5};
     Array<int> anArray;
