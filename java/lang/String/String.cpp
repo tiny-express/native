@@ -32,22 +32,26 @@ using namespace Java::Lang;
 String::String() {
 	this->original = strdup("\0");
 	this->size = 0;
+	this->null = false;
 }
 
 String::String(const_string target) {
 	this->original = strdup(target);
 	this->size = length_pointer_char((string) target);
+	this->null = false;
 }
 
 String::String(string target) {
 	this->original = strdup(target);
 	this->size = length_pointer_char(target);
+	this->null = false;
 }
 
 String::String(Array<char> &chars) {
 	free(original);
 	this->original = String::fromCharArray(chars).toString();
 	this->size = chars.length;
+	this->null = false;
 }
 
 String::String(Array<byte> &bytes) {
@@ -57,11 +61,13 @@ String::String(Array<byte> &bytes) {
 	}
 	this->original = strdup(String::fromCharArray(chars).toString());
 	this->size = chars.length;
+	this->null = false;
 }
 
 String::String(const String &target) {
 	this->original = strdup(target.original);
 	this->size = target.size;
+	this->null = target.isNull();
 }
 
 String::~String() {
@@ -683,6 +689,7 @@ String String::operator=(const String &target) {
 	}
 	this->original = strdup(target.original);
 	this->size = target.size;
+    this->null = target.isNull();
 	return *this;
 }
 

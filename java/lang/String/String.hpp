@@ -28,6 +28,7 @@
 #define NATIVE_JAVA_LANG_STRING_HPP
 
 #include "../Object/Object.hpp"
+#include "../Nullable/Nullable.h"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
@@ -42,7 +43,8 @@ namespace Java {
 		class String : public Object,
 					   public virtual Serializable,
 					   public virtual Comparable<String>,
-					   public virtual CharSequence {
+					   public virtual CharSequence,
+                       public virtual Nullable {
 		private:
 			string original;
 			int size = 0;
@@ -144,6 +146,16 @@ namespace Java {
 
 				return &(this->original[fromIndex]);
 			}
+
+            //FIXME: Temporary for HashMap
+            virtual void setNullable(const boolean &value) {
+                this->null = value;
+            }
+
+            virtual boolean isNull() const {
+                return this->null;
+            }
+
 		};
 	}
 }

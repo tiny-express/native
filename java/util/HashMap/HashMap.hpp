@@ -36,9 +36,9 @@ namespace Java {
 	namespace Util {
 		template <typename K, typename V>
 		class HashMap : public AbstractMap
-                    , public virtual Map<K, V>
-					, public virtual Cloneable
-					, public virtual Serializable
+                    //, public virtual Map<K, V>
+					//, public virtual Cloneable
+					//, public virtual Serializable
 		{
 		private:
 			std::map<K, V> original;
@@ -112,11 +112,14 @@ namespace Java {
 			 * 	false: otherwise
 			 */
 			boolean containsKey(K key) {
-				if (NULL == get(key)) {
-					return false;
-				}
+				V value = get(key);
+				boolean isNull = ((Nullable *)&value)->isNull();
 
-				return true;
+                if (isNull == true) {
+                    return false;
+                }
+
+                return true;
 			}
 
 			/**
@@ -143,14 +146,19 @@ namespace Java {
 			 * @param K key - the key whose associated value is to be returned
 			 * @return V value - the value to which the specified key is mapped, or null if no mapping with key
 			 */
-			V *get(K key) {
+			V get(K key) {
+				V result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end()) {
-					return NULL;
+                    ((Nullable *)&result)->setNullable(true);
+					return result;
 				}
 
-				return &(this->original[key]);
+				result = this->original[key];
+                ((Nullable *)&result)->setNullable(false);
+
+				return result;
 			}
 
 			/**
@@ -159,7 +167,8 @@ namespace Java {
 			 *
 			 * @param K key - the key whose associated value is to be returned
 			 * @param V defaultValue - the default mapping of the key
-			 * @return V the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key
+			 * @return V the value to which the specified key is mapped,
+			 * or defaultValue if this map contains no mapping for the key
 			 */
 			V getOrDefault(K key, V defaultValue) {
 				V *result = get(key);
@@ -211,17 +220,20 @@ namespace Java {
 			 * @return V - the previous value associated with key, or null if there was no mapping for key.
 			 * (A null return can also indicate that the map previously associated null with key.)
 			 */
-			V *remove(K key) {
-                V *result = get(key);
-				if (NULL == result) {
-					return NULL;
+			V remove(K key) {
+				V result;
+				auto const it = this->original.find(key);
+
+				if (it == this->original.end()) {
+					((Nullable *)&result)->setNullable(true);
+					return result;
 				}
 
-				V *data = new V;
-				*data = this->original[key];
-				this->original.erase(key);
+				((Nullable *)&result)->setNullable(false);
+				result = this->original[key];
 
-				return data;
+				this->original.erase(key);
+				return result;
 			}
 
 			/**
@@ -234,8 +246,9 @@ namespace Java {
 			 * false: if otherwise
 			 */
 			boolean remove(K key, V value) {
-				V *valueMapped = get(key);
-				if (NULL == valueMapped || (*valueMapped) != value) {
+				auto const it = this->original.find(key);
+
+				if (it == this->original.end() || it->second != value) {
 					return false;
 				}
 
@@ -248,20 +261,26 @@ namespace Java {
              *
              * @param key - key with which the specified value is associated
              * @param value - value to be associated with the specified key
-             * @return V* - the previous value associated with the specified key,
+             * @return V - the previous value associated with the specified key,
              * or null if there was no mapping for the key.
              * (A null return can also indicate that the map previously associated null with the key,
              * if the implementation supports null values.)
              */
-            V* replace(K key, V value) {
-                V *result = get(key);
-                if (NULL == result) {
-                    return NULL;
-                }
+            V replace(K key, V value) {
+				V result;
+				auto const it = this->original.find(key);
 
-				V data = *result;
-                this->original.erase(key);
-                return &data;
+				if (it == this->original.end()) {
+					((Nullable *)&result)->setNullable(true);
+					return result;
+				}
+
+				result = this->original[key];
+				((Nullable *)&result)->setNullable(false);
+
+				this->original[key] = value;
+
+				return result;
             }
 
             /**
@@ -312,7 +331,7 @@ namespace Java {
 
 					if (instanceof<Object>(it->second)) {
 						string key = (string)it->first;
-						string value = ((Object *)this->get(key))->toString();
+						string value = ((Object *)&it->second)->toString();
 
 						string addCharacter = "";
 						if (sizeCounter > 0) {
