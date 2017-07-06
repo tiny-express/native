@@ -155,7 +155,6 @@ string Double::toString() const {
 //    return FloatingDecimal.toJavaFormatString(d);
 //}
 
-/// ---------- Method Value ----------
 char Double::charValue() const {
     string convertResult = string_from_double(this->original);
     char charValueResult = string_to_char(convertResult);
@@ -191,8 +190,6 @@ byte Double::byteValue() const {
     return (byte) this->original;
 }
 
-/// ---------- Arithmetic Operators ----------
-
 Double Double::operator+(const Double &target) {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
 //        return -1;
@@ -226,8 +223,6 @@ Double Double::operator/(const Double &target) {
 // 	return ( this->original % target.original );
 // }
 
-/// ---------- Relational Operators ----------
-
 boolean Double::operator==(const Double &target) const {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
 //        return -1;
@@ -237,7 +232,7 @@ boolean Double::operator==(const Double &target) const {
 boolean Double::operator!=(const Double &target) const {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
 //        return -1;
-    return (boolean ) (!this->operator==(target));
+    return (boolean) (!this->operator==(target));
 }
 
 boolean Double::operator<(const Double &target) const {
@@ -249,7 +244,7 @@ boolean Double::operator<(const Double &target) const {
 boolean Double::operator>(const Double &target) const {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
 //        return -1;
-    return (boolean ) (this->original > target.original);
+    return (boolean) (this->original > target.original);
 }
 
 boolean Double::operator>=(const Double &target) const {
@@ -264,8 +259,6 @@ boolean Double::operator<=(const Double &target) const {
     return (boolean) (this->original <= target.original);
 }
 
-/// ---------- Logical Operators ----------
-
 boolean Double::operator&&(const Double &target) const {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
 //        return -1;
@@ -277,9 +270,6 @@ boolean Double::operator||(const Double &target) const {
 //        return -1;
     return (boolean) (this->original || target.original);
 }
-
-/// ---------- Assignment Operators ----------
-
 
 Double Double::operator=(const Double &target) {
 //    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
@@ -313,8 +303,6 @@ Double Double::operator/=(const Double &target) const {
 //        return -1;
     return (Double) (this->original / target.original);
 }
-
-/// ---------- Method ----------
 
 int Double::compare(double double1, double double2) {
     if (isNaN(double1) || isInfinite(double1))
@@ -360,13 +348,19 @@ long Double::doubleToLongBits(double valueDouble) {
 
     // Check for NaN based on values of bit fields, maximum
     // exponent and nonzero significand.
-    long condition1 = doubleToLongBitsResult & EXP_BIT_MASK;
-    long condition2 = doubleToLongBitsResult & SIGNIF_BIT_MASK;
 
-    boolean condition3 = (condition1 == EXP_BIT_MASK);
-    boolean condition4 = (condition2 != 0L);
+    long andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK
+            = doubleToLongBitsResult & EXP_BIT_MASK;
 
-    if (condition3 && condition4 )
+    long andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK
+            = doubleToLongBitsResult & SIGNIF_BIT_MASK;
+
+    boolean isEqualEXP_BIT_MASK
+            = (andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK == EXP_BIT_MASK);
+
+    boolean isNotEqual0L = (andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK != 0L);
+
+    if (isEqualEXP_BIT_MASK && isNotEqual0L )
         doubleToLongBitsResult = 0x7ff8000000000000L;
 
     return doubleToLongBitsResult;

@@ -64,8 +64,6 @@ namespace Java {
 			~Double();
 
         public:
-            /// ---------- Arithmetic Operators ----------
-
             /**
              * Adds two operands
              *
@@ -119,12 +117,9 @@ namespace Java {
 //             */
 //            Double operator--(const Double &target) const;
 
-            /// ---------- Relational Operators ----------
-
             /**
              * Checks if the values of two operands
              * are equal or not,
-             * if yes then condition becomes true.
              *
              * @return boolean
              */
@@ -133,8 +128,6 @@ namespace Java {
             /**
              * Checks if the values of two operands
              * are equal or not,
-             * if values are not equal
-             * then condition becomes true
              *
              * @return boolean
              */
@@ -142,8 +135,7 @@ namespace Java {
 
             /**
              * Checks if the value of left operand
-             * is greater than the value of right operand,
-             * if yes then condition becomes true.
+             * is greater than the value of right operand
              *
              * @return boolean
              */
@@ -152,7 +144,6 @@ namespace Java {
             /**
              * Checks if the value of left operand
              * is less than the value of right operand,
-             * if yes then condition becomes true.
              *
              * @return boolean
              */
@@ -161,7 +152,6 @@ namespace Java {
             /**
              * Checks if the value of left operand
              * is greater than or equal to the value of right operand,
-             * if yes then condition becomes true.
              *
              * @return boolean
              */
@@ -170,18 +160,14 @@ namespace Java {
             /**
              *  Checks if the value of left operand
              *  is less than or equal to the value of right operand,
-             *  if yes then condition becomes true.
              *
              * @return boolean
              */
             boolean operator<=(const Double &target) const;
 
-            /// ---------- Logical Operators ----------
-
             /**
              *  Called Logical AND operator.
-             *  If both the operands are non-zero,
-             *  then condition becomes true.
+             *  If both the operands are non-zero
              *
              * @return boolean
              */
@@ -189,8 +175,7 @@ namespace Java {
 
             /**
              *  Called Logical OR Operator.
-             *  If any of the two operands is non-zero,
-             *  then condition becomes true.
+             *  If any of the two operands is non-zero
              *
              * @return boolean
              */
@@ -207,7 +192,7 @@ namespace Java {
 //            boolean operator!(const Double &target) const;
 
 
-//            /// ---------- Bitwise Operators ---------- // For Integer, Long, Short ...
+//            // For Integer, Long, Short ...
 //
 //            /**
 //             *  Binary AND Operator copies a bit
@@ -258,8 +243,6 @@ namespace Java {
 //             * @return Double
 //             */
 //            Double operator>>(const Double &target) const;
-
-            /// ---------- Assignment Operators ----------
 
             /**
              * Simple assignment operator,
@@ -362,8 +345,6 @@ namespace Java {
 //             */
 //            Double operator|=(const Double &target) const;
 
-            /// ---------- Method Value ----------
-
             /**
              * Double to Char
              *
@@ -423,57 +404,6 @@ namespace Java {
             /**
              * Returns a string representation of the {@code double}
              * argument. All characters mentioned below are ASCII characters.
-             * If the argument is NaN, the result is the string
-             *     "{@code NaN}".
-             * Otherwise, the result is a string that represents the sign and
-             * magnitude (absolute value) of the argument. If the sign is negative,
-             * the first character of the result is '{@code -}'
-             * ({@code '\u005Cu002D'}); if the sign is positive, no sign character
-             * appears in the result. As for the magnitude m:
-             * If m is infinity, it is represented by the characters
-             * {@code "Infinity"}; thus, positive infinity produces the result
-             * {@code "Infinity"} and negative infinity produces the result
-             * {@code "-Infinity"}.
-             *
-             * If m is zero, it is represented by the characters
-             * {@code "0.0"}; thus, negative zero produces the result
-             * {@code "-0.0"} and positive zero produces the result
-             * {@code "0.0"}.
-             *
-             * If m is greater than or equal to 10-3 but less
-             * than 107, then it is represented as the integer part of
-             * m, in decimal form with no leading zeroes, followed by
-             * '{@code .}' ({@code '\u005Cu002E'}), followed by one or
-             * more decimal digits representing the fractional part of m.
-             *
-             * If m is less than 10-3 or greater than or
-             * equal to 107, then it is represented in so-called
-             * "computerized scientific notation." Let n be the unique
-             * integer such that 10n &le; m {@literal <}
-             * 10n+1; then let a be the
-             * mathematically exact quotient of m and
-             * 10n so that 1 &le; a {@literal <} 10. The
-             * magnitude is then represented as the integer part of a,
-             * as a single decimal digit, followed by '{@code .}'
-             * ({@code '\u005Cu002E'}), followed by decimal digits
-             * representing the fractional part of a, followed by the
-             * letter '{@code E}' ({@code '\u005Cu0045'}), followed
-             * by a representation of n as a decimal integer, as
-             * produced by the method {@link Integer#toString(int)}.
-             * How many digits must be printed for the fractional part of
-             * m or a? There must be at least one digit to represent
-             * the fractional part, and beyond that as many, but only as many, more
-             * digits as are needed to uniquely distinguish the argument value from
-             * adjacent values of type {@code double}. That is, suppose that
-             * x is the exact mathematical value represented by the decimal
-             * representation produced by this method for a finite nonzero argument
-             * d. Then d must be the {@code double} value nearest
-             * to x; or if two {@code double} values are equally close
-             * to x, then d must be one of them and the least
-             * significant bit of the significand of d must be {@code 0}.
-             *
-             * To create localized string representations of a floating-point
-             * value, use subclasses of {@link java.text.NumberFormat}.
              *
              * @param   d   the {@code double} to be converted.
              * @return a string representation of the argument.
@@ -487,6 +417,7 @@ namespace Java {
              * @return double
              */
             static Double parseDouble(String target);
+
             /**
              * Returns the value of this {@code Double} as a {@code byte}
              * after a narrowing primitive conversion.
@@ -495,8 +426,6 @@ namespace Java {
              *          converted to type {@code byte}
              */
             byte byteValue() const ;
-
-            /// ---------- Method ----------
 
             /**
              * Compares the two specified {@code double} values. The sign
@@ -516,23 +445,7 @@ namespace Java {
             static int compare(double double1, double double2);
 
             /**
-             * Compares two {@code Double} objects numerically.  There
-             * are two ways in which comparisons performed by this method
-             * differ from those performed by the Java language numerical
-             * comparison operators ({@code <, <=, ==, >=, >})
-             * when applied to primitive {@code double} values:
-             *
-             *          {@code Double.NaN} is considered by this method
-             *          to be equal to itself and greater than all other
-             *          {@code double} values (including
-             *          {@code Double.POSITIVE_INFINITY}).
-             * 
-             *          {@code 0.0d} is considered by this method to be greater
-             *          than {@code -0.0d}.
-             * 
-             * This ensures that the natural ordering of
-             * {@code Double} objects imposed by this method is consistent
-             * with equals.
+             * Compares two {@code Double} objects numerically.
              *
              * @param   anotherDouble   the {@code Double} to be compared.
              * @return  the value {@code 0} if {@code anotherDouble} is
@@ -550,30 +463,6 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout.
              *
-             * Bit 63 (the bit that is selected by the mask
-             * {@code 0x8000000000000000L}) represents the sign of the
-             * floating-point number. Bits
-             * 62-52 (the bits that are selected by the mask
-             * {@code 0x7ff0000000000000L}) represent the exponent. Bits 51-0
-             * (the bits that are selected by the mask
-             * {@code 0x000fffffffffffffL}) represent the significand
-             * (sometimes called the mantissa) of the floating-point number.
-             *
-             * If the argument is positive infinity, the result is
-             * {@code 0x7ff0000000000000L}.
-             *
-             * If the argument is negative infinity, the result is
-             * {@code 0xfff0000000000000L}.
-             *
-             * If the argument is NaN, the result is
-             * {@code 0x7ff8000000000000L}.
-             *
-             * In all cases, the result is a {@code long} integer that, when
-             * given to the {@link #longBitsToDouble(long)} method, will produce a
-             * floating-point value the same as the argument to
-             * {@code doubleToLongBits} (except all NaN values are
-             * collapsed to a single "canonical" NaN value).
-             *
              * @param   value   a {@code double} precision floating-point number.
              * @return the bits that represent the floating-point number.
              */
@@ -584,33 +473,6 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
-             * Bit 63 (the bit that is selected by the mask
-             * {@code 0x8000000000000000L}) represents the sign of the
-             * floating-point number. Bits
-             * 62-52 (the bits that are selected by the mask
-             * {@code 0x7ff0000000000000L}) represent the exponent. Bits 51-0
-             * (the bits that are selected by the mask
-             * {@code 0x000fffffffffffffL}) represent the significand
-             * (sometimes called the mantissa) of the floating-point number.
-             *
-             * If the argument is positive infinity, the result is
-             * {@code 0x7ff0000000000000L}.
-             *
-             * If the argument is negative infinity, the result is
-             * {@code 0xfff0000000000000L}.
-             *
-             * If the argument is NaN, the result is the {@code long}
-             * integer representing the actual NaN value.  Unlike the
-             * {@code doubleToLongBits} method,
-             * {@code doubleToRawLongBits} does not collapse all the bit
-             * patterns encoding a NaN to a single "canonical" NaN
-             * value.
-             *
-             * In all cases, the result is a {@code long} integer that,
-             * when given to the {@link #longBitsToDouble(long)} method, will
-             * produce a floating-point value the same as the argument to
-             * {@code doubleToRawLongBits}.
-             *
              * @param   value   a {@code double} precision floating-point number.
              * @return the bits that represent the floating-point number.
              * @since 1.3
@@ -618,39 +480,8 @@ namespace Java {
             static long doubleToRawLongBits(double value);
 
             /**
-             * Compares this object against the specified object.  The result
-             * is {@code true} if and only if the argument is not
-             * {@code null} and is a {@code Double} object that
-             * represents a {@code double} that has the same value as the
-             * {@code double} represented by this object. For this
-             * purpose, two {@code double} values are considered to be
-             * the same if and only if the method {@link
-             * #doubleToLongBits(double)} returns the identical
-             * {@code long} value when applied to each.
+             * Compares this object against the specified object.
              *
-             * Note that in most cases, for two instances of class
-             * {@code Double}, {@code d1} and {@code d2}, the
-             * value of {@code d1.equals(d2)} is {@code true} if and
-             * only if
-             *
-             * 
-             *  {@code d1.doubleValue() == d2.doubleValue()}
-             * 
-             *
-             * also has the value {@code true}. However, there are two
-             * exceptions:
-             * 
-             * If {@code d1} and {@code d2} both represent
-             *     {@code Double.NaN}, then the {@code equals} method
-             *     returns {@code true}, even though
-             *     {@code Double.NaN==Double.NaN} has the value
-             *     {@code false}.
-             * If {@code d1} represents {@code +0.0} while
-             *     {@code d2} represents {@code -0.0}, or vice versa,
-             *     the {@code equal} test has the value {@code false},
-             *     even though {@code +0.0==-0.0} has the value {@code true}.
-             * </ul>
-             * This definition allows hash tables to operate properly.
              * @param   obj   the object to compare with.
              * @return  {@code true} if the objects are the same;
              *          {@code false} otherwise.
@@ -659,19 +490,7 @@ namespace Java {
             boolean equals(const Double &object);
 
             /**
-             * Returns a hash code for this {@code Double} object. The
-             * result is the exclusive OR of the two halves of the
-             * {@code long} integer bit representation, exactly as
-             * produced by the method {@link #doubleToLongBits(double)}, of
-             * the primitive {@code double} value represented by this
-             * {@code Double} object. That is, the hash code is the value
-             * of the expression:
-             *
-             *  {@code (int)(v^(v>>>32))}
-             *
-             * where {@code v} is defined by:
-             *
-             *  {@code long v = Double.doubleToLongBits(this.doubleValue());}
+             * Returns a hash code for this {@code Double} object.
              *
              * @return  a {@code hash code} value for this object.
              */
@@ -739,59 +558,6 @@ namespace Java {
             /**
              * Returns the {@code double} value corresponding to a given
              * bit representation.
-             * The argument is considered to be a representation of a
-             * floating-point value according to the IEEE 754 floating-point
-             * "double format" bit layout.
-             *
-             * If the argument is {@code 0x7ff0000000000000L}, the result
-             * is positive infinity.
-             *
-             * If the argument is {@code 0xfff0000000000000L}, the result
-             * is negative infinity.
-             *
-             * If the argument is any value in the range
-             * {@code 0x7ff0000000000001L} through
-             * {@code 0x7fffffffffffffffL} or in the range
-             * {@code 0xfff0000000000001L} through
-             * {@code 0xffffffffffffffffL}, the result is a NaN.  No IEEE
-             * 754 floating-point operation provided by Java can distinguish
-             * between two NaN values of the same type with different bit
-             * patterns.  Distinct values of NaN are only distinguishable by
-             * use of the {@code Double.doubleToRawLongBits} method.
-             *
-             * In all other cases, let s, e, and m be three
-             * values that can be computed from the argument:
-             *
-             * {@code
-             * int s = ((bits >> 63) == 0) ? 1 : -1;
-             * int e = (int)((bits >> 52) & 0x7ffL);
-             * long m = (e == 0) ?
-             *                 (bits & 0xfffffffffffffL) << 1 :
-             *                 (bits & 0xfffffffffffffL) | 0x10000000000000L;
-             * }
-             *
-             * Then the floating-point result equals the value of the mathematical
-             * expression s&middot;m&middot;2e-1075.
-             *
-             * Note that this method may not be able to return a
-             * {@code double} NaN with exactly same bit pattern as the
-             * {@code long} argument.  IEEE 754 distinguishes between two
-             * kinds of NaNs, quiet NaNs and signaling NaNs.  The
-             * differences between the two kinds of NaN are generally not
-             * visible in Java.  Arithmetic operations on signaling NaNs turn
-             * them into quiet NaNs with a different, but often similar, bit
-             * pattern.  However, on some processors merely copying a
-             * signaling NaN also performs that conversion.  In particular,
-             * copying a signaling NaN to return it to the calling method
-             * may perform this conversion.  So {@code longBitsToDouble}
-             * may not be able to return a {@code double} with a
-             * signaling NaN bit pattern.  Consequently, for some
-             * {@code long} values,
-             * {@code doubleToRawLongBits(longBitsToDouble(start))} may
-             * not equal {@code start}.  Moreover, which
-             * particular bit patterns represent signaling NaNs is platform
-             * dependent; although all NaN bit patterns, quiet or signaling,
-             * must be in the NaN range identified above.
              *
              * @param   bits   any {@code long} integer.
              * @return  the {@code double} floating-point value with the same
