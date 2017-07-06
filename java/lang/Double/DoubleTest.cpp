@@ -29,7 +29,6 @@ extern "C" {
 }
 
 #include "Double.hpp"
-
 using namespace Java::Lang;
 
 TEST (JavaLang, DoubleConstructor) {
@@ -93,14 +92,18 @@ TEST (JavaLang, DoubleOperator) {
 	// Make a division with targetNumber
 	Double divisionNumber = 2;
 	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
-
 }
 
 TEST (JavaLang, DoubleParseDouble) {
-    #ifdef __APPLE__
-        return;
-    #endif
 	// Given value for Double constructor and assign value - Return double
 	Double validDoublePointer = Double::parseDouble("6");
 	ASSERT_EQUAL(6, validDoublePointer.doubleValue());
+}
+
+TEST(JavaLang, DoubleToString) {
+	// Give a valid object Double - Should be equal
+	Double validDouble = 134.123434;
+	string expect = (string) "134.123434";
+	string result = validDouble.toString();
+	ASSERT_STR(expect, result);
 }

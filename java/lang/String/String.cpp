@@ -86,7 +86,7 @@ String String::clone() {
  * @param index
  * @return String
  */
-char String::charAt(int index) {
+char String::charAt(int index) const{
 	if (( index < 0 ) || ( index > this->size - 1 )) {
 		return '\0';
 	}
@@ -343,7 +343,7 @@ int String::lastIndexOf(String str, int fromIndex) const {
  *
  * @return int
  */
-int String::length() {
+int String::length() const {
 	return this->size;
 }
 
@@ -481,8 +481,7 @@ Array<char> String::toCharArray() const {
  * @return string
  */
 string String::toString() const {
-	const string result = this->original;
-	return result;
+	return this->original;
 }
 
 /**
@@ -491,9 +490,9 @@ string String::toString() const {
  * @return String
  */
 String String::toLowerCase() const {
-	string hodlPointer = string_lower(this->original);
-	String result = hodlPointer;
-	free(hodlPointer);
+	string holdPointer = string_lower(this->original);
+	String result = holdPointer;
+	free(holdPointer);
 	return result;
 }
 
@@ -503,9 +502,9 @@ String String::toLowerCase() const {
  * @return String
  */
 String String::toUpperCase() {
-	string hodlPointer = string_upper(this->original);
-	String result = hodlPointer;
-	free(hodlPointer);
+	string holdPointer = string_upper(this->original);
+	String result = holdPointer;
+	free(holdPointer);
 	return result;
 }
 
@@ -515,9 +514,9 @@ String String::toUpperCase() {
  * @return String
  */
 String String::trim() {
-	string hodlPointer = string_trim(this->original);
-	String result = hodlPointer;
-	free(hodlPointer);
+	string holdPointer = string_trim(this->original);
+	String result = holdPointer;
+	free(holdPointer);
 	return result;
 }
 
@@ -641,7 +640,7 @@ String String::operator+(const string &target) {
 /**
  * Operator plus for String
  *
- * @param target2
+ * @param target
  * @return String
  */
 String String::operator+(const String &target) {
@@ -654,7 +653,8 @@ String String::operator+(const String &target) {
 /**
  * Operator plus equals
  *
- * @param target2
+ * @param target
+ * @return String
  */
 String String::operator+=(const String &target) {
 	string result = string_concat(this->original, target.original);
@@ -663,6 +663,12 @@ String String::operator+=(const String &target) {
 	return *this;
 }
 
+/**
+ * Append target String to this String
+ *
+ * @param target
+ * @return String
+ */
 String String::operator+=(const char &target) {
 	string pointerHolder = this->original;
 	string_append(&this->original, target);
@@ -670,13 +676,25 @@ String String::operator+=(const char &target) {
 	return *this;
 }
 
-bool String::operator==(const String &target) const {
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return String
+ */
+boolean String::operator==(const String &target) const {
 	if (string_equals(this->original, target.toString())) {
 		return true;
 	}
 	return false;
 }
 
+/**
+ * Assign value of this object String same as value of target object
+ *
+ * @param target
+ * @return String
+ */
 String String::operator=(const String &target) {
 	if (this->original != NULL) {
 		free(this->original);
@@ -686,11 +704,23 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-bool String::operator!=(const String &target) const {
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return boolean
+ */
+boolean String::operator!=(const String &target) const {
 	return !this->operator==(target);
 }
 
-bool String::operator<(const String &target) const {
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return boolean
+ */
+boolean String::operator<(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
 	}
@@ -698,6 +728,12 @@ bool String::operator<(const String &target) const {
 	return false;
 }
 
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return boolean
+ */
 boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
@@ -706,6 +742,12 @@ boolean String::operator>(const String &target) const {
 	return false;
 }
 
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return boolean
+ */
 boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
@@ -714,6 +756,12 @@ boolean String::operator<=(const String &target) const {
 	return true;
 }
 
+/**
+ * Compare two object String
+ *
+ * @param target
+ * @return boolean
+ */
 boolean String::operator>=(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return false;
