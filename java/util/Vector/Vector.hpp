@@ -51,22 +51,27 @@ namespace Java {
 
         public:
             /**
-             * Construct an empty Vector with initial capacity is 10.
+             * Vector Constructor
+             * Constructs an empty vector so that its internal data array has size 10 and its standard capacity increment is zero.
              */
             Vector() : Vector(10) { }
 
             /**
-             * Construct an empty Vector with custom initial capacity.
+             * Vector Constructor
+             * Constructs an empty vector with the specified initial capacity and with its capacity increment equal to zero.
              *
              * @param initialCapacity
+             * @throw - if the specified initial capacity is negative
              */
             Vector(int initialCapacity) : Vector(initialCapacity, 0) { }
 
             /**
-             * Construct an empty Vector with custom initial capacity and capacity increment.
+             * Vector Constructor
+             * Constructs an empty vector with the specified initial capacity and capacity increment.
              *
              * @param initialCapacity
              * @param capacityIncrement
+             * @throw - if the specified initial capacity is negative
              */
             Vector(int initialCapacity, int capacityIncrement) {
                 if (initialCapacity < 0) {
@@ -77,6 +82,7 @@ namespace Java {
             }
 
             /**
+             * Vector Constructor
              * Constructs a Vector containing the elements of the initializer list.
              *
              * @param list
@@ -92,6 +98,7 @@ namespace Java {
             }
 
             /**
+             * Vector Constructor
              * Constructs a Vector from a Vector.
              *
              * @param target
@@ -105,7 +112,7 @@ namespace Java {
             }
 
             /**
-             * Destructor.
+             * Vector Destructor
              */
             virtual ~Vector() { }
 
@@ -117,16 +124,17 @@ namespace Java {
              * @return boolean
              */
             boolean add(const E &element) {
-                this->ensureCapacity(this->original.size() + 1);
+                int oldSize = this->original.size();
+                this->ensureCapacity(oldSize + 1);
                 this->original.push_back(element);
-                return true;
+                return (oldSize != this->original.size());
             }
 
             /**
-             * Inserts a new element to specified index in this Vector.
+             * Inserts a new element to the specified index in this Vector.
              *
              * @param index
-             * @param <E>
+             * @param element
              */
             void add(int index, const E &element) {
                 int size = this->original.size();
@@ -162,7 +170,7 @@ namespace Java {
                     // after element we have inserted before.
                     index = index + 1;
                 }
-                return (list.size() != 0); // If original Vector has changes (list is not empty), return true.
+                return (list.size() != 0);
             }
 
             /**
@@ -222,7 +230,7 @@ namespace Java {
              * Gets an element at specified index.
              *
              * @param index
-             * @return <E>
+             * @return E
              */
             E elementAt(int index) const {
                 return this->get(index);
@@ -255,7 +263,7 @@ namespace Java {
             /**
              * Returns the first element (index = 0) of this Vector.
              *
-             * @return <E>
+             * @return E
              */
             E firstElement() {
                 if (this->original.empty()) {
@@ -268,7 +276,7 @@ namespace Java {
              * Gets an element at specified index.
              *
              * @param index
-             * @return <E>
+             * @return E
              */
             E get(int index) const {
                 return this->original.at(index);
@@ -284,7 +292,7 @@ namespace Java {
             }
 
             /**
-             * Returns index of an element in this Vector.
+             * Returns index of an element in this Vector or returns -1 if the element is not found.
              *
              * @param element
              * @return int
@@ -336,7 +344,7 @@ namespace Java {
             /**
              * Returns the last element of this Vector.
              *
-             * @return <E>
+             * @return E
              */
             E lastElement() const {
                 if (this->original.empty()) {
@@ -364,7 +372,7 @@ namespace Java {
              *
              * @param element
              * @param index
-             * @return
+             * @return int
              */
             int lastIndexOf(const E &element, int index) const {
                 if (index >= this->original.size()) {
@@ -386,7 +394,7 @@ namespace Java {
              *
              * @param index
              * @param element
-             * @return the element previously at the specified index.
+             * @return E
              */
             E set(int index, const E &element) {
                 if (index < 0 || index >= this->original.size()) {
@@ -436,7 +444,7 @@ namespace Java {
              * Removes an element at specified index in this Vector.
              *
              * @param index
-             * @return <E>
+             * @return E
              */
             E remove(int index) {
                 if (index < 0 || index >= this->original.size()) {
@@ -523,6 +531,64 @@ namespace Java {
              */
             void trimToSize() {
                 this->original.shrink_to_fit();
+            }
+
+        public:
+            typedef typename std::vector<E>::iterator iterator;
+            typedef typename std::vector<E>::const_iterator const_iterator;
+
+            /**
+             * Returns an iterator pointing to the first element in the Vector.
+             *
+             * @return iterator
+             */
+            iterator begin() {
+                return this->original.begin();
+            }
+
+            /**
+             * Returns a const_iterator pointing to the first element in the Vector.
+             *
+             * @return const_iterator
+             */
+            const_iterator begin() const {
+                return this->original.begin();
+            }
+
+            /**
+             * Returns a const_iterator pointing to the first element in the Vector.
+             *
+             * @return const_iterator
+             */
+            const_iterator cbegin() const {
+                return this->original.cbein();
+            }
+
+            /**
+             * Returns an iterator referring to the past-the-end element in the Vector.
+             *
+             * @return iterator
+             */
+            iterator end() {
+                return this->original.end();
+            }
+
+            /**
+             * Returns a const_iterator referring to the past-the-end element in the Vector.
+             *
+             * @return const_iterator
+             */
+            const_iterator end() const {
+                return this->original.end();
+            }
+
+            /**
+             * Returns a const_iterator pointing to the past-the-end element in the Vector.
+             *
+             * @return const_iterator
+             */
+            const_iterator cend() const {
+                return this->original.cend();
             }
         };
     }
