@@ -392,28 +392,28 @@ TEST (JavaUtil, HashMapSize) {
 
 TEST (JavaUtil, HashMapToString) {
 	// Given some valid key/value to test toString()
-	HashMap<string, String> hashMap;
-	hashMap.put((string)"key1", "value1");
-	hashMap.put((string)"key16", "value16");
-	hashMap.put((string)"key02", "value02");
+	HashMap<String, String> hashMap;
+	hashMap.put("key1", "value1");
+	hashMap.put("key16", "value16");
+	hashMap.put("key02", "value02");
 
-	string expectedResult = (string)"{key1=value1, key16=value16, key02=value02}";
+	string expectedResult = (string)"{key02=value02, key1=value1, key16=value16}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
     free(result);
 
     // Given another hash map type to test
-    HashMap<string, Integer> anotherHashMap;
-    anotherHashMap.put((string)"some key", 12313);
-    anotherHashMap.put((string)"anotherKey", 76767);
+    HashMap<String, Integer> anotherHashMap;
+    anotherHashMap.put("some key", 12313);
+    anotherHashMap.put("anotherKey", 76767);
 
-    expectedResult = (string)"{some key=12313, anotherKey=76767}";
+    expectedResult = (string)"{anotherKey=76767, some key=12313}";
     result = anotherHashMap.toString();
     ASSERT_STR(expectedResult, result);
     free(result);
 
     // Given empty hash map to test default toString()
-    HashMap<string, Float> emptyHashMap;
+    HashMap<String, Float> emptyHashMap;
 
     expectedResult = (string)"{}";
     result = emptyHashMap.toString();

@@ -36,9 +36,9 @@ namespace Java {
 	namespace Util {
 		template <typename K, typename V>
 		class HashMap : public AbstractMap
-                    //, public virtual Map<K, V>
-					//, public virtual Cloneable
-					//, public virtual Serializable
+                    , public virtual Map<K, V>
+					, public virtual Cloneable
+					, public virtual Serializable
 		{
 		private:
 			std::map<K, V> original;
@@ -94,7 +94,7 @@ namespace Java {
 			 *
 			 * @return HashMap<K, V>
 			 */
-			HashMap<K, V> clone() {
+			HashMap<K, V> clone() const {
 				HashMap<K, V> result;
 				for (auto const &element: this->original) {
 					result.put(element.first, element.second);
@@ -111,7 +111,7 @@ namespace Java {
 			 * 	true : if this map contains a mapping for the specified key.
 			 * 	false: otherwise
 			 */
-			boolean containsKey(K key) {
+			boolean containsKey(const K &key) const {
 				V value = get(key);
 				boolean isNull = ((Nullable *)&value)->isNull();
 
@@ -130,7 +130,7 @@ namespace Java {
 			 *  true : if this map maps one or more keys to the specified value
 			 *  false: otherwise
 			 */
-			boolean containsValue(V value) {
+			boolean containsValue(const V &value) const {
 				for (auto const &ent1 : this->original) {
 					if (ent1.second == value) {
 						return true;
@@ -146,7 +146,7 @@ namespace Java {
 			 * @param K key - the key whose associated value is to be returned
 			 * @return V value - the value to which the specified key is mapped, or null if no mapping with key
 			 */
-			V get(K key) {
+			V get(const K &key) const {
 				V result;
 				auto const it = this->original.find(key);
 
@@ -170,7 +170,7 @@ namespace Java {
 			 * @return V the value to which the specified key is mapped,
 			 * or defaultValue if this map contains no mapping for the key
 			 */
-			V getOrDefault(K key, V defaultValue) {
+			V getOrDefault(const K &key, const V &defaultValue) const {
                 V result;
                 auto const it = this->original.find(key);
 
@@ -191,7 +191,7 @@ namespace Java {
 			 *  true : true if this map contains no key-value mappings
 			 *  false: otherwise
 			 */
-			boolean isEmpty() {
+			boolean isEmpty() const {
 				return ( this->original.size() == 0 );
 			}
 
@@ -225,7 +225,7 @@ namespace Java {
 			 * @return V - the previous value associated with key, or null if there was no mapping for key.
 			 * (A null return can also indicate that the map previously associated null with key.)
 			 */
-			V remove(K key) {
+			V remove(const K &key) {
 				V result;
 				auto const it = this->original.find(key);
 
@@ -250,7 +250,7 @@ namespace Java {
 			 * true : if the value was removed
 			 * false: if otherwise
 			 */
-			boolean remove(K key, V value) {
+			boolean remove(const K &key, const V &value) {
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end() || it->second != value) {
@@ -271,7 +271,7 @@ namespace Java {
              * (A null return can also indicate that the map previously associated null with the key,
              * if the implementation supports null values.)
              */
-            V replace(K key, V value) {
+            V replace(const K &key, const V &value) {
 				V result;
 				auto const it = this->original.find(key);
 
@@ -298,7 +298,7 @@ namespace Java {
              * true : if the value was replaced
              * false: if otherwise
              */
-            boolean replace(K key, V oldValue, V newValue) {
+            boolean replace(const K &key, const V &oldValue, const V &newValue) {
                 V result;
                 auto const it = this->original.find(key);
 
@@ -315,7 +315,7 @@ namespace Java {
 			 *
 			 * @return int
 			 */
-			int size() {
+			int size() const {
 				return this->original.size();
 			}
 
@@ -324,7 +324,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() {
+            string toString() const {
 				if (this->size() == 0) {
 					return strdup("{}");
 				}
@@ -332,17 +332,18 @@ namespace Java {
 				string builder = strdup("{");
 
 				int sizeCounter = this->size();
-				typename std::map<K, V>::iterator it;
+				typename std::map<K, V>::const_iterator it;
 				for (it = this->original.begin();  it != this->original.end() ; ++it) {
 					sizeCounter--;
 
-					if (instanceof<Object>(it->second)) {
-						string key = (string)it->first;
+					if (instanceof<Object>(it->first) && instanceof<Object>(it->second)) {
+
+						string key = ((Object *)&it->first)->toString();
 						string value = ((Object *)&it->second)->toString();
 
-						string addCharacter = "";
+						string addCharacter = (string)"";
 						if (sizeCounter > 0) {
-							addCharacter = ", ";
+							addCharacter = (string)", ";
 						}
 
 						string holder = builder;

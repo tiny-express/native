@@ -47,7 +47,7 @@ namespace Java {
 			 * @param K key
 			 * @return boolean
 			 */
-			virtual boolean containsKey(K key) = 0;
+			virtual boolean containsKey(const K &key) const = 0;
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
@@ -55,7 +55,7 @@ namespace Java {
 			 * @param V value
 			 * @return boolean
 			 */
-			virtual boolean containsValue(V value) = 0;
+			virtual boolean containsValue(const V &value) const = 0;
 
 			/**
 			 * Returns the value to which the specified key is mapped,
@@ -64,21 +64,21 @@ namespace Java {
 			 * @param key
 			 * @return V
 			 */
-			virtual V *get(K key) = 0;
+			virtual V get(const K &key) const = 0;
 
 			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
 			 * @return boolean
 			 */
-			virtual boolean isEmpty() = 0;
+			virtual boolean isEmpty() const = 0;
 
 			/**
 			 * Returns the number of key-value mappings in this map.
 			 *
 			 * @return int
 			 */
-			virtual int size() = 0;
+			virtual int size() const = 0;
 
 		};
 	}
