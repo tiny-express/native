@@ -346,6 +346,17 @@ TEST(JavaUtil, VectorRemove) {
     ASSERT_FALSE(vector3.contains(Integer(3)));
 }
 
+TEST(JavaUtil, VectorRemoveAll) {
+    // Given a valid vector.
+    Vector<int> vector({1, 2, 3, 4, 5});
+    // Removes element appearing in the specified list.
+    ASSERT_TRUE(vector.removeAll({1, 2, 3}));
+    // Checks size and the first-last element.
+    ASSERT_EQUAL(2, vector.size());
+    ASSERT_EQUAL(4, vector.firstElement());
+    ASSERT_EQUAL(5, vector.lastElement());
+}
+
 TEST(JavaUtil, VectorRemoveAllElements) {
     // Given empty vector - return size of vector is 0.
     Vector<String> vector;

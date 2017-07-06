@@ -424,6 +424,26 @@ namespace Java {
             }
 
             /**
+             * Removes from this Vector all of its elements that are contained in the specified initializer list.
+             *
+             * @param list
+             * @return boolean
+             */
+            boolean removeAll(const std::initializer_list<E> &list) {
+                int oldSize = this->original.size();
+                typename std::vector<E>::iterator vectorIterator;
+                for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
+                    if (std::find(list.begin(), list.end(), *vectorIterator) != list.end()) {
+                        this->original.erase(vectorIterator);
+                    }
+                    else {
+                        vectorIterator++;
+                    }
+                }
+                return (oldSize != this->original.size());
+            }
+
+            /**
              * Removes all elements of this Vector.
              */
             void removeAllElements() {
@@ -448,6 +468,16 @@ namespace Java {
             void removeElementAt(int index) {
                 this->remove(index);
             }
+
+            /**
+             * Removes all of the elements of this Vector that satisfy the given predicate.
+             *
+             * @param filter
+             * @return boolean
+             */
+//          boolean removeIf(Predicate<E> filter) {
+//              // TODO
+//          }
 
         protected:
             /**
@@ -476,6 +506,15 @@ namespace Java {
             }
 
         public:
+
+            /**
+             * Replaces each element of this list with the result of applying the operator to that element.
+             *
+             * @param unaryOperator
+             */
+//          void replaceAll(UnaryOperator<E> unaryOperator) {
+//              // TODO
+//          }
 
             /**
              * Retains only the elements in this Vector that are contained in the specified initializer list.
