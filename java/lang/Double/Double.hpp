@@ -421,6 +421,66 @@ namespace Java {
             string toString() const;
 
             /**
+             * Returns a string representation of the {@code double}
+             * argument. All characters mentioned below are ASCII characters.
+             * If the argument is NaN, the result is the string
+             *     "{@code NaN}".
+             * Otherwise, the result is a string that represents the sign and
+             * magnitude (absolute value) of the argument. If the sign is negative,
+             * the first character of the result is '{@code -}'
+             * ({@code '\u005Cu002D'}); if the sign is positive, no sign character
+             * appears in the result. As for the magnitude m:
+             * If m is infinity, it is represented by the characters
+             * {@code "Infinity"}; thus, positive infinity produces the result
+             * {@code "Infinity"} and negative infinity produces the result
+             * {@code "-Infinity"}.
+             *
+             * If m is zero, it is represented by the characters
+             * {@code "0.0"}; thus, negative zero produces the result
+             * {@code "-0.0"} and positive zero produces the result
+             * {@code "0.0"}.
+             *
+             * If m is greater than or equal to 10-3 but less
+             * than 107, then it is represented as the integer part of
+             * m, in decimal form with no leading zeroes, followed by
+             * '{@code .}' ({@code '\u005Cu002E'}), followed by one or
+             * more decimal digits representing the fractional part of m.
+             *
+             * If m is less than 10-3 or greater than or
+             * equal to 107, then it is represented in so-called
+             * "computerized scientific notation." Let n be the unique
+             * integer such that 10n &le; m {@literal <}
+             * 10n+1; then let a be the
+             * mathematically exact quotient of m and
+             * 10n so that 1 &le; a {@literal <} 10. The
+             * magnitude is then represented as the integer part of a,
+             * as a single decimal digit, followed by '{@code .}'
+             * ({@code '\u005Cu002E'}), followed by decimal digits
+             * representing the fractional part of a, followed by the
+             * letter '{@code E}' ({@code '\u005Cu0045'}), followed
+             * by a representation of n as a decimal integer, as
+             * produced by the method {@link Integer#toString(int)}.
+             * How many digits must be printed for the fractional part of
+             * m or a? There must be at least one digit to represent
+             * the fractional part, and beyond that as many, but only as many, more
+             * digits as are needed to uniquely distinguish the argument value from
+             * adjacent values of type {@code double}. That is, suppose that
+             * x is the exact mathematical value represented by the decimal
+             * representation produced by this method for a finite nonzero argument
+             * d. Then d must be the {@code double} value nearest
+             * to x; or if two {@code double} values are equally close
+             * to x, then d must be one of them and the least
+             * significant bit of the significand of d must be {@code 0}.
+             *
+             * To create localized string representations of a floating-point
+             * value, use subclasses of {@link java.text.NumberFormat}.
+             *
+             * @param   d   the {@code double} to be converted.
+             * @return a string representation of the argument.
+             */
+            static String toString(double d);
+
+            /**
              * Parse double
              *
              * @param target
@@ -711,7 +771,7 @@ namespace Java {
              * }
              *
              * Then the floating-point result equals the value of the mathematical
-             * expression s&middot;m&middot;2<sup>e-1075</sup>.
+             * expression s&middot;m&middot;2e-1075.
              *
              * Note that this method may not be able to return a
              * {@code double} NaN with exactly same bit pattern as the

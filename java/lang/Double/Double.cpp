@@ -93,7 +93,7 @@ static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
 /**
  * A constant holding a Not-a-Number (NaN) value of type
  */
-static double NaN_DOUBLE = 0.0 / 0.0; // -nan
+static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
 
 /**
  * A constant holding the largest positive finite value of type
@@ -123,11 +123,15 @@ Double::Double() {
 }
 
 Double::Double(double original) {
+//    if (isNaN(original) || isInfinite(original))
+//        return -1;
 	this->original = original;
 	this->string_original = string_from_double(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
+//    if (isNaN(original) || isInfinite(original))
+//        return -1;
 	this->original = doubleNumber.original;
 	this->string_original = string_from_double(this->original);
 }
@@ -145,6 +149,11 @@ Double Double::parseDouble(String target) {
 string Double::toString() const {
 	return (string) this->string_original;
 }
+
+// TODO waiting for FloatingDecimal.toJavaFormatString()
+//String Double::toString(double d) {
+//    return FloatingDecimal.toJavaFormatString(d);
+//}
 
 /// ---------- Method Value ----------
 char Double::charValue() const {
@@ -185,18 +194,26 @@ byte Double::byteValue() const {
 /// ---------- Arithmetic Operators ----------
 
 Double Double::operator+(const Double &target) {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return Double(this->original + target.original);
 }
 
 Double Double::operator-(const Double &target) {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return Double(this->original - target.original);
 }
 
 Double Double::operator*(const Double &target) {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return Double( this->original * target.original );
 }
 
 Double Double::operator/(const Double &target) {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return Double( this->original / target.original );
 }
 
@@ -212,36 +229,52 @@ Double Double::operator/(const Double &target) {
 /// ---------- Relational Operators ----------
 
 boolean Double::operator==(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original == target.original);
 }
 
 boolean Double::operator!=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean ) (!this->operator==(target));
 }
 
 boolean Double::operator<(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original < target.original);
 }
 
 boolean Double::operator>(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean ) (this->original > target.original);
 }
 
 boolean Double::operator>=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original >= target.original);
 }
 
 boolean Double::operator<=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original <= target.original);
 }
 
 /// ---------- Logical Operators ----------
 
 boolean Double::operator&&(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original && target.original);
 }
 
 boolean Double::operator||(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (boolean) (this->original || target.original);
 }
 
@@ -249,6 +282,8 @@ boolean Double::operator||(const Double &target) const {
 
 
 Double Double::operator=(const Double &target) {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     this->original = target.original;
     free(this->string_original);
     this->string_original = string_from_double(this->original);
@@ -256,27 +291,42 @@ Double Double::operator=(const Double &target) {
 }
 
 Double Double::operator+=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (Double) (this->original + target.original);
 }
 
 Double Double::operator-=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (Double) (this->original - target.original);
 }
 
 Double Double::operator*=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (Double) (this->original * target.original);
 }
 
 Double Double::operator/=(const Double &target) const {
+//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
+//        return -1;
     return (Double) (this->original / target.original);
 }
 
 /// ---------- Method ----------
 
 int Double::compare(double double1, double double2) {
+    if (isNaN(double1) || isInfinite(double1))
+        return -9999;
+
+    if (isNaN(double2) || isInfinite(double2))
+        return -9999;
+
     if (double1 < double2)
         // Neither value is NaN, thisValue is smaller
         return -1;
+
     if (double1 > double2)
         // Neither value is NaN, thisValue is larger
         return 1;
@@ -304,6 +354,8 @@ int Double::compareTo(Double anotherDouble) {
 }
 
 long Double::doubleToLongBits(double valueDouble) {
+    if (isNaN(valueDouble) || isInfinite(valueDouble))
+        return -9999;
     long doubleToLongBitsResult = doubleToRawLongBits(valueDouble);
 
     // Check for NaN based on values of bit fields, maximum
@@ -320,12 +372,17 @@ long Double::doubleToLongBits(double valueDouble) {
     return doubleToLongBitsResult;
 }
 
+// TODO waiting for implement
 long Double::doubleToRawLongBits(double valueDouble) {
+    if (isNaN(valueDouble) || isInfinite(valueDouble))
+        return -9999;
 
 }
 
-// TODO Waiting for instanceof
+// TODO Waiting for instanceof , doubleToRawLongBits
 boolean Double::equals(const Double &object) {
+    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
+        return -1;
     boolean isDouble = instanceof<Double>(object);
     Double* castObjectToDouble = (Double*)&object;
     long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
@@ -334,10 +391,12 @@ boolean Double::equals(const Double &object) {
     return (isDouble && isEqual);
 }
 
+// TODO waiting for doubleToRawLongBits
 long Double::hashCode() {
     return Double::hashCode(this->original);
 }
 
+// TODO waiting for doubleToRawLongBits
 long Double::hashCode(double valuehashCode) {
     long bits = doubleToLongBits(valuehashCode);
     unsigned long rightShiftBits = (unsigned long)bits >> 32;
@@ -366,7 +425,7 @@ boolean Double::isNaN() {
     return isNaN(this->original);
 }
 
-// native class of java
+// TODO waiting for implement
 double Double::longBitsToDouble(long bits){
 
 }
@@ -375,7 +434,7 @@ double Double::min(double doubleA, double doubleB) {
     return Math::min(doubleA, doubleB);
 }
 
-// TODO Implement Later
+// TODO waiting for implement
 //String Double::toHexString(double doubleValue) {
 //    /*
 //     * Modeled after the "a" conversion specifier in C99, section
