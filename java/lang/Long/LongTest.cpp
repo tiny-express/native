@@ -225,8 +225,8 @@ TEST (JavaLang, LongDecode) {
     long expectedResult = 27;
     ASSERT_EQUAL(expectedResult, result.longValue());
 
-    String invalidNumbeString = "0x23xx";
-    result = Long::decode(invalidNumbeString);
+    String invalidNumberString = "0x23xx";
+    result = Long::decode(invalidNumberString);
 
     expectedResult = -1;
     ASSERT_EQUAL(expectedResult, result.longValue());
@@ -249,21 +249,24 @@ TEST (JavaLang, LongNumberOfLeadingZeros) {
 }
 
 TEST (JavaLang, LongToHexString) {
-	// Given valid long value to test toHexString()
-    // The result is based on java code result
-	long validValue = 4053239666997989821;
-	Long validLong = validValue;
+    // Given valid long value to test toHexString() - this test case was confirm by java source code
+    long validValue = 4053239666997989821;
+    String result = Long::toHexString(validValue);
 
-	string expectedString = (string) "4053239666997989821";
-	ASSERT_STR(expectedString, validLong.toString());
+    String expectedString = "384000008cf011bd";
+    ASSERT_STR(expectedString.toString(), result.toString());
 
-	validValue = -5603022497796657139;
-	validLong = validValue;
+    validValue = -5603022497796657139;
+    result = Long::toHexString(validValue);
 
-	expectedString = (string) "-5603022497796657139";
-	ASSERT_STR(expectedString, validLong.toString());
+    expectedString = "b23e10b96e4ef00d";
+    ASSERT_STR(expectedString.toString(), result.toString());
+}
 
-    // TODO: Fix static function Long::toString()
-//    expectedString = (string) "405323966699";
-//    ASSERT_STR(expectedString, Long::toString(405323966699));
+TEST(JavaLang, LongStaticToString) {
+    // Give valid string covert from static function toString of class Long - Should equal
+    long longNumber = 999738373833883736;
+    string expect = (string) "999738373833883736";
+    string result = Long::toString(longNumber);
+    ASSERT_STR(expect, result);
 }
