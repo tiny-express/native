@@ -312,7 +312,9 @@ namespace Java {
 
                 register int index;
                 for (index = 0; index < size; index++) {
-                    if ((*this)[index]!= target[index]) {
+                    E elementOfVector = this->original[index];
+                    E elementOfTarget = target.original[index];
+                    if ( elementOfVector != elementOfTarget) {
                         return false;
                     }
                 }
