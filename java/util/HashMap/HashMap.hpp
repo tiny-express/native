@@ -179,17 +179,14 @@ namespace Java {
 			/**
 			 * //TODO
 			 *
-			 * Returns a Set view of the mappings contained in this map
+			 * Returns a Set view of the mappings contained in this map.
+			 * @return Set<Map.Entry<K,V>> - a set view of the mappings contained in this map
 			 */
 			//Set<Map.Entry<K,V>> entrySet();
 
 			/**
-			 * //TODO
-			 *
-			 * Performs the given action for each entry in this map
-			 * until all entries have been processed or the action throws an exception
-			 *
-			 * @param BiConsume action - The action to be performed for each entry
+			 * Don't support this method
+			 * Instead use: for (auto const &element: hashMap) {}
 			 */
 			//void forEach(BiConsumer<? super K,? super V> action);
 
@@ -412,17 +409,21 @@ namespace Java {
             }
 
 			/**
-			 * //TODO
-			 *
-			 * Replaces each entry's value with the result of invoking the given function on that entry
-			 * until all entries have been processed or the function throws an exception.
-			 * Exceptions thrown by the function are relayed to the caller.
-			 *
-			 * @param BiFunction function - the function to apply to each entry
+			 * Don't support this method
+			 * Instead use: void replaceAll(const V &value)
 			 */
-//			void replaceAll(BiFunction<? super K,? super V,? extends V> function) {
-//
-//			}
+			//void replaceAll(BiFunction<? super K,? super V,? extends V> function);
+
+			/**
+			 * Replace all key inside this instance with the spcified value
+			 *
+			 * @param V value - value that will be assigned for all key
+			 */
+			void replaceAll(const V &value) {
+				for (auto &element: this->original) {
+					element.second = value;
+				}
+			}
 
 			/**
 			 * Returns the number of key-value mappings in this map.
@@ -434,7 +435,7 @@ namespace Java {
 			}
 
 			/**
-			 * Don't support this method
+			 * //TODO
 			 *
 			 * Returns a Collection view of the values contained in this map
 			 * @return Collection<V> - a view of the values contained in this map

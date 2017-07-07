@@ -410,6 +410,39 @@ TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
     ASSERT_STR(oldValue.toString(), getResult.toString());
 }
 
+TEST (JavaUtil, HashMapReplaceAll) {
+    // Given valid hash map
+    HashMap<String, String> hashMap;
+    hashMap.put("key1", "1000");
+    hashMap.put("key2", "2000");
+
+    // Valid data inside before replace
+    String expectedValue = "1000";
+    String result = hashMap.get("key1");
+
+    ASSERT_FALSE(result.isNull());
+    ASSERT_STR(expectedValue.toString(), result.toString());
+
+    expectedValue = "2000";
+    result = hashMap.get("key2");
+
+    ASSERT_FALSE(result.isNull());
+    ASSERT_STR(expectedValue.toString(), result.toString());
+
+    // Replace all value inside hash map that mapped with key to newValue
+    String newValue = "3000";
+    hashMap.replaceAll(newValue);
+
+    // Valid data after replaced, all value inside must equal to newValue
+    result = hashMap.get("key1");
+    ASSERT_FALSE(result.isNull());
+    ASSERT_STR(newValue.toString(), result.toString());
+
+    result = hashMap.get("key2");
+    ASSERT_FALSE(result.isNull());
+    ASSERT_STR(newValue.toString(), result.toString());
+}
+
 TEST (JavaUtil, HashMapSize) {
 	// Given valid hash map to test size()
 	HashMap<Double, String> hashMap;
