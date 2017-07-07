@@ -37,9 +37,6 @@ namespace Java {
             IOException(String message);
             IOException(String message, Throwable *cause);
             IOException(Throwable *cause);
-
-        public:
-            void static sampleIOException();
         };
     }
 }

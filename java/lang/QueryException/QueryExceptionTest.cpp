@@ -51,3 +51,11 @@ TEST (JavaLang, QueryExceptionConstructor) {
     ASSERT_STR("QueryException with the specified message and cause", queryExceptionWithCause.getCause()->getMessage().toString());
     ASSERT_STR("QueryException with the specified message", queryExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
+
+TEST (JavaLang, QueryExceptionTryCatch) {
+    try {
+        throw QueryException("Throw QueryException");
+    } catch (Exception e) {
+        ASSERT_STR("Throw QueryException", e.getMessage().toString());
+    }
+}

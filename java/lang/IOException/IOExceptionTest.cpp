@@ -54,7 +54,7 @@ TEST (JavaLang, IOExceptionConstructor) {
 
 TEST (JavaLang, IOExceptionTryCatch) {
     try {
-        IOException::sampleIOException();
+        throw IOException("Throw IOException");
     } catch (Exception e) {
         ASSERT_STR("Throw IOException", e.getMessage().toString());
     }

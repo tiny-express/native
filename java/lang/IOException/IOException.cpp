@@ -40,7 +40,3 @@ IOException::IOException(String message, Throwable *cause) : Exception::Exceptio
 
 IOException::IOException(Throwable *cause) : Exception::Exception(cause) {
 }
-
-void IOException::sampleIOException() {
-    throw IOException("Throw IOException");
-}
