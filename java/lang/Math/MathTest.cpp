@@ -46,6 +46,25 @@ TEST (JavaLang, MathAbs) {
 	ASSERT_EQUAL(1233453453, Math::abs(long_value));
 }
 
+TEST (JavaLang, MathAcosAndCos){
+    // Given a variable radian which is equal to PI
+    double radian = Math::PI / 2;
+    double cos=Math::cos(radian);
+    ASSERT_TRUE(radian == Math::acos(cos));
+}
+
+TEST (JavaLang, MathToRadian){
+    // Given a variable radian which is equal to PI
+    double radian = Math::PI;
+    ASSERT_TRUE(radian == Math::toRadians(180));
+}
+
+TEST (JavaLang, MathToDegree){
+    // Given a variable degree which is equal to PI
+    double degree = 180;
+    ASSERT_TRUE(degree == Math::toDegrees(Math::PI));
+}
+
 TEST (JavaLang, MathFloor) {
 	return;
 	double floor_value = 2.3;

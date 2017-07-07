@@ -30,19 +30,26 @@
 #define NATIVE_JAVA_LANG_MATH_HPP
 
 #include "../Object/Object.hpp"
+#include "../Double/Double.hpp"
+#include "../Float/Float.hpp"
 
 namespace Java {
 	namespace Lang {
 		class Math final : public virtual Object {
 		private:
+            //
 			//static Random randomNumberGenerator;
-			static long negativeZeroDoubleBits;
-			static long negativeZeroFloatBits;
+            //an Zero number < 0
+			//static long negativeZeroFloatBits=  Float::floatToLongBits(-0.0f)
+			//static long negativeZeroDoubleBits = Double::doubleToLongBits(-0.0d);;
+
 		private:
 			Math(){}
 			static void initRGN();
 		public:
+            // e number
 			static constexpr double E = 2.7182818284590452354;
+            // pi number
 			static constexpr double PI = 3.14159265358979323846;
 		public:
 			static int abs(int a);
@@ -52,11 +59,11 @@ namespace Java {
 			static double acos(double a);
 			static double asin(double a);
 			static double atan(double a);
-			static double atan2(double a, double b);
+			static double atan2(double corX, double corY);
 			static double cbrt(double a);
 			static double ceil(double a);
-			static double copySign(double a, double b);
-			static float copySign(float a, float b);
+			static double copySign(double magnitude, double sign);
+			static float copySign(float magnitude, float sign);
 			static double cos(double a);
 			static double cosh(double a);
 			static double exp(double a);
@@ -65,7 +72,7 @@ namespace Java {
 			static int getExponent(double a);
 			static int getExponent(float a);
 			static double hypot(double a, double b);
-			static double IEEEremainder(double a, double b);
+			static double IEEEremainder(double devidend, double devisor);
 			static double log(double a);
 			static double log10(double a);
 			static double log1p(double a);
@@ -77,17 +84,17 @@ namespace Java {
 			static float min(float a, float b);
 			static long min(long a, long b);
 			static double min(double a, double b);
-			static double nextAfter(double a, double b);
-			static float nextAfter(float a, double b);
+			static double nextAfter(double start, double direction);
+			static float nextAfter(float start, double direction);
 			static float nextUp(float a);
 			static double nextUp(double a);
-			static double pow(double a, double b);
+			static double pow(double base, double exponent);
 			static double random();
 			static double rint(double a);
 			static int round(float a);
 			static long round(double a);
-			static float scalb(float a, int b);
-			static double scalb(double a, int b);
+			static float scalb(float a, int scaleFactor);
+			static double scalb(double a, int scaleFactor);
 			static double signum(double a);
 			static float signum(float a);
 			static double sin(double a);
@@ -95,8 +102,8 @@ namespace Java {
 			static double sqrt(double a);
 			static double tan(double a);
 			static double tanh(double a);
-			static double toDegrees(double a);
-			static double toRadians(double a);
+			static double toDegrees(double angleRadian);
+			static double toRadians(double angleDegree);
 			static float ulp(float a);
 			static double ulp(double a);
 		};

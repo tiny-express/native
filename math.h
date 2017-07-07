@@ -32,7 +32,28 @@
 
 double math_pow(double a, double b);
 double math_floor(double a);
-long math_round(double a);
+double math_round(double a);
+double math_sqrt(double a);
+double math_cbrt(double a);
+double math_ceil(double a);
+double math_exp(double a);
+double math_expm1(double a);
+double math_hypot(double a, double b);
+double math_log(double a);
+double math_log10(double a);
+double math_log1p(double a);
+double math_remainder(double a, double b);
+double math_rint(double a);
+double math_acos(double a);
+double math_cos(double a);
+double math_cosh(double a);
+double math_sin(double a);
+double math_asin(double a);
+double math_sinh(double a);
+double math_atan(double a);
+double math_atan2(double a, double b);
+double math_tan(double a);
+double math_tanh(double a);
 
 
 #endif

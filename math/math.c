@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <ieee754.h>
 #include "../math.h"
 
 double math_pow(double a, double b) {
@@ -34,6 +35,90 @@ double math_floor(double a) {
 	return floor(a);
 }
 
-long math_round(double a) {
+double math_round(double a) {
 	return round(a);
 }
+
+double math_sqrt(double a) {
+    return sqrt(a);
+}
+
+double math_cbrt(double a) {
+    return cbrt(a);
+}
+
+double math_ceil(double a){
+    return ceil(a);
+}
+
+double math_exp(double a){
+    return exp(a);
+}
+
+double math_expm1(double a){
+    return expm1(a);
+}
+
+double math_log(double a){
+    return log(a);
+}
+
+double math_log10(double a){
+    return log10(a);
+}
+
+double math_log1p(double a){
+    return log1p(a);
+}
+
+double math_remainder(double a, double b){
+    return remainder(a,b);
+}
+
+double math_rint(double a){
+    return rint(a);
+}
+
+double math_hypot(double a, double b){
+    return hypot(a,b);
+}
+
+double math_acos(double a){
+    return acos(a);
+}
+
+double math_cos(double a){
+    return cos(a);
+}
+
+double math_cosh(double a){
+    return cosh(a);
+}
+
+double math_asin(double a){
+    return asin(a);
+}
+
+double math_sin(double a){
+    return sin(a);
+}
+
+double math_sinh(double a){
+    return sinh(a);
+}
+
+double math_atan(double a){
+    return atan(a);
+}
+
+double math_atan2(double a, double b){
+    return atan2(a,b);
+}
+
+double math_tan(double a){
+    return tan(a);
+}
+double math_tanh(double a){
+    return tanh(a);
+}
+
