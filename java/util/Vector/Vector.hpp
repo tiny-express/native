@@ -637,8 +637,10 @@ namespace Java {
             boolean retainAll(const std::initializer_list<E> &list) {
                 int oldSize = this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
+                typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
-                    if (std::find(list.begin(), list.end(), *vectorIterator) == list.end()) {
+                    listIterator = std::find(list.begin(), list.end(), *vectorIterator);
+                    if (listIterator == list.end()) {
                         this->original.erase(vectorIterator);
                     }
                     else {
