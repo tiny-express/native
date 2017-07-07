@@ -232,10 +232,10 @@ namespace Java {
              */
             boolean containsAll(const std::initializer_list<E> &list) {
                 typename std::initializer_list<E>::iterator listIterator;
-                typename std::vector<E>::iterator elementOfVectorIterator;
+                typename std::vector<E>::iterator vectorIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
-                    elementOfVectorIterator = std::find(this->original.begin(), this->original.end(), *listIterator);
-                    if (elementOfVectorIterator == this->original.end()) {
+                    vectorIterator = std::find(this->original.begin(), this->original.end(), *listIterator);
+                    if (vectorIterator == this->original.end()) {
                         return false;
                     }
                 }
@@ -533,8 +533,10 @@ namespace Java {
             boolean removeAll(const std::initializer_list<E> &list) {
                 int oldSize = this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
+                typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
-                    if (std::find(list.begin(), list.end(), *vectorIterator) != list.end()) {
+                    listIterator = std::find(list.begin(), list.end(), *vectorIterator);
+                    if (listIterator != list.end()) {
                         this->original.erase(vectorIterator);
                     }
                     else {
