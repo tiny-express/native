@@ -314,7 +314,7 @@ namespace Java {
                 for (index = 0; index < size; index++) {
                     E elementOfVector = this->original[index];
                     E elementOfTarget = target.original[index];
-                    if ( elementOfVector != elementOfTarget) {
+                    if (elementOfVector != elementOfTarget) {
                         return false;
                     }
                 }
