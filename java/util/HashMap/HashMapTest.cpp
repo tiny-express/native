@@ -240,6 +240,41 @@ TEST (JavaUtil, HashMapPutAll) {
     ASSERT_TRUE(targetValue.isNull());
 }
 
+TEST (JavaUtil, HashMapPutIfAbsent) {
+    // Given valid hashMap
+    HashMap<String, String> hashMap;
+    hashMap.put("abc", "123");
+
+    // Valid data inside before run putIfAbsent
+    String expectedKey = "abc";
+    String expectedValue = "123";
+    String actualValue = hashMap.get(expectedKey);
+
+    ASSERT_FALSE(actualValue.isNull());
+    ASSERT_STR(expectedValue.toString(), actualValue.toString());
+
+    // Make putIfAbsent with correct key, result's returned must equal to old value
+    String oldValue = "123";
+    String newValue = "other value";
+    String putResult = hashMap.putIfAbsent(expectedKey, newValue);
+
+    ASSERT_FALSE(putResult.isNull());
+    ASSERT_STR(oldValue.toString(), putResult.toString());
+
+    // Valid data inside after putted
+    String getResult = hashMap.get(expectedKey);
+
+    ASSERT_FALSE(getResult.isNull());
+    ASSERT_STR(newValue.toString(), getResult.toString());
+
+    // Make putIfAbsent with incorrect key, result's returned must be null
+    String wrongKey = "wrong key";
+    newValue = "something here";
+    putResult = hashMap.putIfAbsent(wrongKey, newValue);
+
+    ASSERT_TRUE(putResult.isNull());
+}
+
 TEST (JavaUtil, HashMapRemoveKey) {
     // Given valid hash map
     HashMap<String, String> hashMap;
