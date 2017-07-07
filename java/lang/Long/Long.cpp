@@ -554,10 +554,7 @@ string Long::toString() const {
  * @return String
  */
 string Long::toString(long i) {
-    /*
-     * TODO: Fix this method because object result will be delete before return
-     */
-    Long result = i;
+    static Long result = i;
     return result.toString();
 }
 
