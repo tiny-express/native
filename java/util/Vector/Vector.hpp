@@ -232,9 +232,9 @@ namespace Java {
              */
             boolean containsAll(const std::initializer_list<E> &list) {
                 typename std::initializer_list<E>::iterator listIterator;
+                typename std::vector<E>::iterator elementOfVectorIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
-                    typename std::vector<E>::iterator elementOfVectorIterator =
-                            std::find(this->original.begin(), this->original.end(), *listIterator);
+                    elementOfVectorIterator = std::find(this->original.begin(), this->original.end(), *listIterator);
                     if (elementOfVectorIterator == this->original.end()) {
                         return false;
                     }
