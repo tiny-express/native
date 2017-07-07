@@ -59,7 +59,7 @@ namespace Java {
 			/**
 			 * Default constructor
 			 *
-			 * @return
+			 * @return Long
 			 */
 			Long();
 
