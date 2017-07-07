@@ -282,12 +282,14 @@ namespace Java {
             void ensureCapacity(int minCapacity) {
                 int oldCapacity = this->capacity();
                 if ((minCapacity > 0) && (minCapacity > oldCapacity)) {
-                    // The new capacity will be the old capacity plus capacityIncrement,
-                    // unless the value of capacityIncrement is less than or equal to zero,
-                    // in which case the new capacity will be twice the old capacity.
-                    int newCapacity = (this->capacityIncrement > 0) ?
-                                      (oldCapacity + this->capacityIncrement) : (oldCapacity * 2);
-                    // If this new capacity is still smaller than minCapacity, then the new capacity will be minCapacity.
+                    int newCapacity;
+                    if (this->capacityIncrement > 0) {
+                        newCapacity = oldCapacity + this->capacityIncrement;
+                    }
+                    else {
+                        newCapacity = oldCapacity * 2;
+                    }
+
                     if (newCapacity < minCapacity) {
                         newCapacity = minCapacity;
                     }
@@ -310,7 +312,7 @@ namespace Java {
 
                 register int index;
                 for (index = 0; index < size; index++) {
-                    if ( (*this)[index]!= target[index]) {
+                    if ((*this)[index]!= target[index]) {
                         return false;
                     }
                 }
