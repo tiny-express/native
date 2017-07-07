@@ -233,7 +233,9 @@ namespace Java {
             boolean containsAll(const std::initializer_list<E> &list) {
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
-                    if (std::find(this->original.begin(), this->original.end(), *listIterator) == this->original.end()) {
+                    typename std::vector<E>::iterator elementOfVectorIterator =
+                            std::find(this->original.begin(), this->original.end(), *listIterator);
+                    if (elementOfVectorIterator == this->original.end()) {
                         return false;
                     }
                 }
