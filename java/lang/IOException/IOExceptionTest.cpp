@@ -51,3 +51,11 @@ TEST (JavaLang, IOExceptionConstructor) {
     ASSERT_STR("IOException with the specified message and cause", ioExceptionWithCause.getCause()->getMessage().toString());
     ASSERT_STR("IOException with the specified message", ioExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
+
+TEST (JavaLang, IOExceptionTryCatch) {
+    try {
+        IOException::sampleIOException();
+    } catch (Exception e) {
+        ASSERT_STR("Throw IOException", e.getMessage().toString());
+    }
+}
