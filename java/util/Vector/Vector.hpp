@@ -601,7 +601,7 @@ namespace Java {
 
                 int numberOfElementsWillBeDeleted = toIndex - fromIndex; // Excluding element at toIndex;
                 int numberOfElementsDeleted;
-                for (numberOfElementDeleted = 0; numberOfElementDeleted < numberOfElementsWillBeDeleted; numberOfElementDeleted++) {
+                for (numberOfElementsDeleted = 0; numberOfElementsDeleted < numberOfElementsWillBeDeleted; numberOfElementsDeleted++) {
                     this->remove(fromIndex);
                 }
             }
