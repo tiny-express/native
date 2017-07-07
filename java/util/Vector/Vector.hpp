@@ -599,12 +599,10 @@ namespace Java {
                     return;
                 }
 
-                // startPosition is the index of the last element in removed range [fromIndex .. startPosition].
-                // We need to reduce 1 because the element at toIndex will not be removed.
-                int startPosition = fromIndex + (toIndex - fromIndex) - 1;
-                register int position;
-                for (position = startPosition; position >= fromIndex; position--) {
-                    this->remove(position);
+                int numberOfElementsWillBeDeleted = toIndex - fromIndex; // Excluding element at toIndex;
+                int numberOfElementsDeleted;
+                for (numberOfElementDeleted = 0; numberOfElementDeleted < numberOfElementsWillBeDeleted; numberOfElementDeleted++) {
+                    this->remove(fromIndex);
                 }
             }
 
@@ -685,7 +683,6 @@ namespace Java {
                 if (newSize < 0) {
                     throw std::invalid_argument("new size is negative");
                 }
-                // If new size is greater than current capacity, run ensureCapacity to increase capacity.
                 if (newSize > this->original.size()) {
                     this->ensureCapacity(newSize);
                 }
@@ -737,8 +734,9 @@ namespace Java {
              */
 			Array<E> toArray() const {
                 Array<E> anArray;
-                for (E element : *this) {
-                    anArray.push(element);
+                typename std::vector<E>::const_iterator vectorIterator;
+                for (vectorIterator = this->original.cbegin(); vectorIterator != this->original.cend(); vectorIterator++) {
+                    anArray.push(*vectorIterator);
                 }
                 return anArray;
             }
@@ -866,6 +864,7 @@ namespace Java {
                 for (index = 0; index < target.size(); index++) {
                     this->original.push_back(targetData[index]);
                 }
+                return *this;
             }
 
             /**
@@ -882,6 +881,7 @@ namespace Java {
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
                     this->original.push_back(*listIterator);
                 }
+                return *this;
             }
         };
     }
