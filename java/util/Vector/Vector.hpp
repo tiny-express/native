@@ -218,7 +218,7 @@ namespace Java {
              * @return boolean
              */
             boolean contains(const E &element) const {
-                return (this->indexOf(element) == -1);
+                return (this->indexOf(element) != -1);
             }
 
             /**
