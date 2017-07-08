@@ -90,7 +90,7 @@ TEST (JavaLang, DoubleValue){
     //Given a Double and a Byte with the same value
     double aDouble = 5;
     Bytes byteToGetValue = 5;
-    ASSERT_EQUAL(aDouble,byteToGetValue.doubleValue());
+    ASSERT_EQUAL(aDouble, byteToGetValue.doubleValue());
 
 }
 
@@ -108,7 +108,7 @@ TEST (JavaLang, ByteEquals){
     //ASSERT_TRUE(firstBytes.equals(secondBytes));
     ASSERT_FALSE(firstBytes.equals(thirdBytes));
 
-    //Test Byte
+    //Test Bytes and Object
     ASSERT_FALSE(firstBytes.equals(object));
 
 }
@@ -117,13 +117,13 @@ TEST (JavaLang, FloatValue){
     //Given a float and a Byte with the same value
     float aFloat = 5;
     Bytes byteToGetValue = 5;
-    ASSERT_EQUAL(aFloat,byteToGetValue.floatValue());
+    ASSERT_EQUAL(aFloat, byteToGetValue.floatValue());
 }
 
 TEST (JavaLang, HashCode ){
     //Given a Byte
     Bytes byteToGetValue = 5;
-    ASSERT_EQUAL(5,byteToGetValue.hashCode());
+    ASSERT_EQUAL(5, byteToGetValue.hashCode());
 
 }
 
@@ -131,7 +131,7 @@ TEST (JavaLang, IntValue){
     //Given a int and a Byte with the same value
     int anInt = 5;
     Bytes byteToGetValue = 5;
-    ASSERT_EQUAL(anInt,byteToGetValue.intValue());
+    ASSERT_EQUAL(anInt, byteToGetValue.intValue());
 
 }
 
@@ -139,7 +139,7 @@ TEST (JavaLang, LongValue){
     //Given a int and a Byte with the same value
     long aLong = 5;
     Bytes byteToGetValue = 5;
-    ASSERT_EQUAL(aLong,byteToGetValue.longValue());
+    ASSERT_EQUAL(aLong, byteToGetValue.longValue());
 
 }
 
@@ -157,8 +157,8 @@ TEST (JavaLang, ParseByteWithRadix){
     byte resultByte;
     //Assign value 20 to resultByte from a String using parseByte with radix =10
     resultByte = Bytes::parseByte("20", 10);
-    //need parseByte(string,radix)
-    //ASSERT_EQUAL(20,resultByte);
+    //need parseByte(string, radix)
+    //ASSERT_EQUAL(20, resultByte);
 }
 
 TEST (JavaLang, ShortValue){
@@ -268,41 +268,31 @@ TEST (JavaLang, ByteOperator) {
     ASSERT_FALSE(validByte <= targetByte);
 
     //Make a sumation from validByte with targetByte and assign the result value to this Byte
-    validByte+=targetByte;
+    validByte += targetByte;
     ASSERT_TRUE( summationByte == validByte );
-    validByte=5;
+    validByte = 5;
 
     //Make a subtraction from validByte with targetByte and assign the result value to this Byte
-    validByte-=targetByte;
+    validByte -= targetByte;
     ASSERT_TRUE( subtractionByte == validByte );
-    validByte=5;
+    validByte = 5;
 
     //Make a multiplication from validByte with targetByte and assign the result value to this Byte
-    validByte*=targetByte;
+    validByte *= targetByte;
     ASSERT_TRUE( multiplicationByte == validByte );
-    validByte=5;
+    validByte = 5;
 
     //Make a division from validByte with targetByte and assign the result value to this Byte
-    validByte/=targetByte;
+    validByte /= targetByte;
     ASSERT_TRUE( divisionByte == validByte );
-    validByte=5;
+    validByte = 5;
 
     //Make a modulo from validByte with targetByte and assign the result value to this Byte
-    validByte%=targetByte;
+    validByte %= targetByte;
     ASSERT_TRUE( modByte == validByte );
-    validByte=5;
+    validByte = 5;
 
 
-}
-
-TEST (JavaLang, ByteParseByte) {
-	// TODO
-#ifdef __APPLE__
-	return;
-#endif
-	// Given value for Byte constructor and assign value - Return byte
-	// Bytes validBytePointer = Bytes::parseByte("6");
-	// ASSERT_EQUAL(6, validBytePointer.intValue());
 }
 
 

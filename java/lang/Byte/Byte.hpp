@@ -36,15 +36,14 @@ namespace Java {
 
         class Bytes;
 
-
-
-
 		class Bytes : public virtual Number,
             public virtual Comparable<Bytes>{
 
         private:
 			byte original;
+			//Min value of a byte
 			static const byte MIN_VALUE = -128;
+			//Max value of a byte
 			static const byte MAX_VALUE = 127;
 			static const int SIZE = 8;
 
@@ -131,13 +130,17 @@ namespace Java {
             void operator=(const Bytes &target);
 
 		};
+
         class ByteCache {
             static ByteCache *instance;
+
         public:
             ByteCache(){
                 cache=cacheInit();
             };
+
             Array<Bytes> cache;
+
             Array<Bytes> cacheInit() {
                 Array<Bytes> cache1;
                 int index = 0;
@@ -145,14 +148,13 @@ namespace Java {
                     cache1.push((Bytes((byte) (index - 128))));
                 return cache1;
             }
+
             static ByteCache *getInstance()
             {
                 if (!instance)
                     instance = new ByteCache();
                 return instance;
             }
-
-
         };
 	}
 }

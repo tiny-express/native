@@ -60,7 +60,7 @@ Bytes::~Bytes() {
  * @return char
  */
 char Bytes::charValue() const {
-    return (char)this->original;
+    return (char) this->original;
 }
 
 /**
@@ -81,7 +81,7 @@ byte Bytes::byteValue() {
  * and a value greater than 0 if this Byte is numerically greater than anotherByte
  */
 int Bytes::compareTo(const Bytes &anotherByte) const {
-	return this->original-anotherByte.original;
+	return this->original - anotherByte.original;
 }
 
 /**
@@ -90,8 +90,8 @@ int Bytes::compareTo(const Bytes &anotherByte) const {
  * @param stringToDecode
  * @return
  */
+//TODO need Integer::decode(string)
 Bytes Bytes::decode(String stringToDecode) {
-    //TODO need Integer::decode(string)
     /*int value = Integer::decode(stringToDecode);
     if (i < MIN_VALUE || i > MAX_VALUE)
         //TODO throw NumberFormatException
@@ -115,9 +115,10 @@ double Bytes::doubleValue() const{
  * @param object
  * @return true if object is a Byte and has the same value as this Bytes; false otherwise
  */
+//TODO need instanceof
 boolean Bytes::equals(Object object) {
-    //instanceof return false with Byte object, need to fix
-    boolean isByte =instanceof<Bytes>(object);
+
+    boolean isByte = instanceof<Bytes>(object);
 	if (isByte){
         return this->original == parseByte(object.toString());
     }
@@ -167,7 +168,7 @@ long Bytes::longValue() const{
  * @return Byte
  */
 byte Bytes::parseByte(String stringToParse) {
-	return parseByte(stringToParse,10);
+	return parseByte(stringToParse, 10);
 }
 /**
  * Parse the parameter string as a byte with radix =10
@@ -176,8 +177,8 @@ byte Bytes::parseByte(String stringToParse) {
  * @param radix
  * @return
  */
+//TODO need Integer::parseInt(string, int)
 byte Bytes::parseByte(String stringToParse, int radix) {
-    //TODO need Integer::parseInt(string, int)
     /*int value = Integer::parseInt(stringToParse, radix);
     if( value < MIN_VALUE || value > MAX_VALUE)
     {
@@ -211,7 +212,7 @@ string Bytes::stringValue() const {
  * @return String
  */
 String Bytes::toString() {
-    return String::valueOf((int)this->original);
+    return String::valueOf((int) this->original);
 }
 
 /**
@@ -221,7 +222,7 @@ String Bytes::toString() {
  * @return String
  */
 String Bytes::toString(byte specifiedByte) {
-    //TODO need Integer.toString(int,radix)
+    //TODO need Integer.toString(int, radix)
     //return Integer::toString((int)specifiedByte, 10);
 }
 
@@ -233,7 +234,7 @@ String Bytes::toString(byte specifiedByte) {
  */
 Bytes Bytes::valueOf(byte targetByte) {
 	const int offset = 128;
-    return  ByteCache::getInstance()->cache.get((int)targetByte+offset);
+    return  ByteCache::getInstance()->cache.get((int) targetByte+offset);
 }
 
 /**
