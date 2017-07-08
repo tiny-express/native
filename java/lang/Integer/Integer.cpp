@@ -35,6 +35,7 @@ using namespace Java::Lang;
  */
 Integer::Integer() {
 	this->original = 0;
+	this->string_original = string_from_int(this->original);
 }
 
 /**
@@ -44,6 +45,7 @@ Integer::Integer() {
  */
 Integer::Integer(int original) {
 	this->original = original;
+	this->string_original = string_from_int(this->original);
 }
 
 /**
@@ -53,9 +55,16 @@ Integer::Integer(int original) {
  */
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
+	this->string_original = string_from_int(this->original);
 }
 
+/**
+ * Integer Destructor
+ */
 Integer::~Integer() {
+	if (this->string_original != NULL)  {
+		free(this->string_original);
+	}
 }
 
 /**
@@ -75,7 +84,7 @@ Integer Integer::parseInt(String target) {
  * @return String
  */
 string Integer::toString() const {
-	return string_from_int(this->original);
+	return this->string_original;
 }
 
 /**
@@ -84,7 +93,7 @@ string Integer::toString() const {
  * @return char
  */
 char Integer::charValue() const {
-	char *convertResult = string_from_int(this->original);
+	string convertResult = string_from_int(this->original);
 	char result = string_to_char(convertResult);
 	free(convertResult);
 	return result;
@@ -96,9 +105,7 @@ char Integer::charValue() const {
  * @return CString
  */
 string Integer::stringValue() const {
-    return string_from_int(this->original);
-    // Check it
-	//return String::valueOf(this->original).toString();
+    return this->string_original;
 }
 
 /**
@@ -144,6 +151,19 @@ float Integer::floatValue() const {
  */
 double Integer::doubleValue() const {
 	return (double) this->original;
+}
+
+/**
+ * Assign value of this object same as target value
+ *
+ * @param target
+ * @return Integer
+ */
+Integer Integer::operator=(const Integer &target) {
+	this->original = target.original;
+	free(this->string_original);
+	this->string_original = string_from_int(this->original);
+    return *this;
 }
 
 /**

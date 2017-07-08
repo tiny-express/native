@@ -26,64 +26,156 @@
 
 #include "UUID.hpp"
 
+/**
+ * Default constructor
+ *
+ * @return UUID
+ */
+UUID::UUID() {
+    this->mostSigBits = 0;
+    this->leastSigBits = 0;
+}
+
+/**
+ * Returns val represented by the specified number of hex digits
+ *
+ * @param long value
+ * @param int digit
+ * @return String
+ */
+String UUID::digits(long value, int digit) {
+    long longValue = 1L << (digit * 4);
+    return Long::toHexString(longValue | (value & (longValue - 1))).subString(1);
+}
+
+/**
+ * Private constructor which uses a byte array to construct the new UUID.
+ *
+ * @param Array<byte> data
+ * @return UUID
+ */
 UUID::UUID(Array<byte> data) {
-    long msb = 0;
-    long lsb = 0;
+    long mostSigBits = 0;
+    long leastSigBits = 0;
 
-    for (int i = 0; i < 8; ++i) {
-        msb = (msb << 8) | (data[i] & 0xff);
+    int index;
+    for (index = 0; index < 8; ++index) {
+        mostSigBits = (mostSigBits << 8) | (data[index] & 0xff);
     }
 
-    for (int j = 8; j < 16; ++j) {
-        lsb = (lsb << 8) | (data[j] & 0xff);
+    for (index = 8; index < 16; ++index) {
+        leastSigBits = (leastSigBits << 8) | (data[index] & 0xff);
     }
 
-    this->mostSigBits = msb;
-    this->leastSigBits = lsb;
+    this->mostSigBits = mostSigBits;
+    this->leastSigBits = leastSigBits;
     this->timestamp = time(0);
 }
 
+/**
+ * Create new instance this object through most && least significant bits
+ *
+ * @param mostSigBits
+ * @param leastSigBits
+ * @return UUID
+ */
 UUID::UUID(long mostSigBits, long leastSigBits) {
     this->mostSigBits = mostSigBits;
     this->leastSigBits = leastSigBits;
     this->timestamp = time(0);
 }
 
+/**
+ * Default destructor
+ */
 UUID::~UUID() {
 }
 
+/**
+ * The clock sequence value associated with this UUID.
+ *
+ * @return int - The clock sequence of this UUID
+ */
+int UUID::clockSequence() {
+    if (version() != 1) {
+        //FIXME: exception ("Not a time-based UUID");
+        return -1;
+    }
+
+    return (int)((this->leastSigBits & 0x3FFF000000000000L) >> 48);
+};
+
+/**
+ * Compares this UUID with the specified UUID.
+ *
+ * @param UUID target
+ * @return int
+ *  -1 : if this object less than target either mostSigBits or leastSigBits
+ *  0 : if this object equal both of mostSigBits and leastSigBits
+ *  1 : if this object more than target either mostSigBits or leastSigBits
+ */
 int	UUID::compareTo(UUID target) {
-    return  (this->mostSigBits < target.mostSigBits ? -1 :
-              (this->mostSigBits > target.mostSigBits ? 1 :
-               (this->leastSigBits < target.leastSigBits ? -1 :
-                (this->leastSigBits > target.leastSigBits ? 1 : 0)
-               )
-              )
-            );
+    if (this->mostSigBits < target.mostSigBits) {
+        return -1;
+    }
+    if (this->mostSigBits > target.mostSigBits) {
+        return 1;
+    }
+    if (this->leastSigBits < target.leastSigBits) {
+        return -1;
+    }
+    if (this->leastSigBits > target.leastSigBits) {
+        return 1;
+    }
+    return 0;
 }
 
+/**
+ * Compares this object to the specified object.
+ *
+ * @param UUID target
+ * @return boolean
+ * true : if the target are same mostSigBits and leastSigBits
+ * false : otherwise
+ */
 boolean	UUID::equals(UUID target) {
     return (this->mostSigBits == target.mostSigBits &&
             this->leastSigBits == target.leastSigBits);
 }
 
+/**
+ * Returns the least significant 64 bits of this UUID's 128 bit value.
+ *
+ * @return long
+ */
 long UUID::getLeastSignificantBits() {
     return this->leastSigBits;
 }
 
+/**
+ * Returns the most significant 64 bits of this UUID's 128 bit value.
+ *
+ * @return long
+ */
 long UUID::getMostSignificantBits() {
     return this->mostSigBits;
 }
 
-long UUID::getTimestamp() {
-    return this->timestamp;
-}
-
+/**
+ * Returns a hash code for this UUID.
+ *
+ * @return int
+ */
 int UUID::hashCode() {
-    long hilo = this->mostSigBits ^ this->leastSigBits;
-    return ((int)(hilo >> 32)) ^ (int) hilo;
+    long xorValue = this->mostSigBits ^ this->leastSigBits;
+    return ((int)(xorValue >> 32)) ^ (int) xorValue;
 }
 
+/**
+ * The node value associated with this UUID.
+ *
+ * @return long
+ */
 long UUID::node() {
     if (this->version() != 1) {
         //FIXME: throw an exception here - "Not a time-based UUID"
@@ -92,32 +184,94 @@ long UUID::node() {
     return this->leastSigBits & 0x0000FFFFFFFFFFFFL;
 }
 
-int UUID::variant() {
-    return (int) ((this->leastSigBits >> (64 - (this->leastSigBits >> 62)))
-                  & (this->leastSigBits >> 63));
+/**
+ * The timestamp value associated with this UUID.
+ *
+ * @return long
+ */
+long UUID::getTimestamp() {
+    return this->timestamp;
 }
 
+/**
+ * Returns a String object representing this UUID.
+ *
+ * @return String
+ */
+String UUID::toString() {
+    return (digits(mostSigBits >> 32, 8) + "-" +
+            digits(mostSigBits >> 16, 4) + "-" +
+            digits(mostSigBits, 4) + "-" +
+            digits(leastSigBits >> 48, 4) + "-" +
+            digits(leastSigBits, 12));
+}
+
+/**
+ * The variant number associated with this UUID.
+ *
+ * @return int
+ */
+int UUID::variant() {
+    return (int) ((this->leastSigBits >> (64 - (this->leastSigBits >> 62))) & (this->leastSigBits >> 63));
+}
+
+/**
+ * The version number associated with this UUID.
+ *
+ * @return int
+ */
 int UUID::version() {
     return (int)((this->mostSigBits >> 12) & 0x0f);
 }
 
-String UUID::toString() {
-    return this->getTrap(); //FIXME: implement correct this function
+/**
+ * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
+ *
+ * @return UUID
+ */
+UUID UUID::randomUUID() {
+    Array<byte> randomBytes = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    srand(time(0));
+    int index;
+    for (index = 0;index < 16; ++index) {
+        randomBytes[index] = (byte)(random()%1000000);
+    }
+
+    randomBytes[6]  &= 0x0f;  /* clear version        */
+    randomBytes[6]  |= 0x40;  /* set to version 4     */
+    randomBytes[8]  &= 0x3f;  /* clear variant        */
+    randomBytes[8]  |= 0x80;  /* set to IETF variant  */
+    return UUID(randomBytes);
 }
 
-UUID UUID::fromString(String trap) {
-    UUID uuid;
-    uuid.setTrap(trap);
-    return uuid;
+/**
+ * Creates a UUID from the string standard representation as described in the toString() method.
+ *
+ * @param name
+ * @return UUID
+ */
+UUID UUID::fromString(String name) {
+    Array<String> components = name.split("-");
+    if (components.length != 5) {
+        //FIXME: an exception
+        return UUID();
+    }
+
+    int index;
+    for (index = 0; index < 5; ++index)
+        components[index] = "0x"+components[index];
+
+    long mostSigBits = Long::decode(components[0]).longValue();
+    mostSigBits <<= 16;
+    mostSigBits |= Long::decode(components[1]).longValue();
+    mostSigBits <<= 16;
+    mostSigBits |= Long::decode(components[2]).longValue();
+
+    long leastSigBits = Long::decode(components[3]).longValue();
+    leastSigBits <<= 48;
+    leastSigBits |= Long::decode(components[4]).longValue();
+
+    UUID result = UUID(mostSigBits, leastSigBits);
+    return result;
 };
-
-// TODO: remove trap after fix toString/fromString
-String UUID::getTrap() {
-    return this->trap;
-};
-
-void UUID::setTrap(const String &trap) {
-    this->trap = trap;
-}
-
-UUID::UUID() {}
