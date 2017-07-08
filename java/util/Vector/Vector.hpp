@@ -247,9 +247,10 @@ namespace Java {
              *
              * @param anArray
              */
-            void copyInto(Array<E> &anArray) {
-                for (E element : *this) {
-                    anArray.push(element);
+            void copyInto(Array<E> &anArray) const {
+                typename std::vector<E>::const_iterator vectorIterator;
+                for (vectorIterator = this->original.cbegin(); vectorIterator != this->original.cend(); vectorIterator++) {
+                    anArray.push(*vectorIterator);
                 }
             }
 
