@@ -71,7 +71,7 @@ double math_log1p(double a){
 }
 
 double math_remainder(double a, double b){
-    return a-(trunc(a / b) * b);
+    return a - (trunc(a / b) * b);
 }
 
 double math_rint(double a){

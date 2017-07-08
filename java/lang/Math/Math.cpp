@@ -106,7 +106,7 @@ double Math::atan(double a) {
  * @return Principal arc tangent of y/x, in the interval [-pi,+pi] radians.
  */
 double Math::atan2(double corX, double corY) {
-    return math_atan2(corX,corY);
+    return math_atan2(corX, corY);
 }
 
 /**
@@ -235,7 +235,7 @@ int Math::getExponent(float a) {
  * @return
  */
 double Math::hypot(double a, double b) {
-    return math_hypot(a,b);
+    return math_hypot(a, b);
 }
 
 /**
