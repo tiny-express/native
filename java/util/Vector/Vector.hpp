@@ -746,8 +746,25 @@ namespace Java {
              * @param anArray
              * @return Array<E>
              */
-			Array<E> toArray(Array<E> &anArray) const {
-                // TODO
+			Array<E> toArray(const Array<E> &anArray) const {
+                int arrayLength = anArray.length;
+                int vectorLength = (int)this->original.size();
+                if (arrayLength < vectorLength) {
+                    return toArray();
+                }
+
+                typename std::vector<E>::iterator vectorIterator;
+                int arrayIndex = 0;
+                for (vectorIterator = this->original.begin(); vectorIterator != this->original; vectorIterator++) {
+                    anArray[arrayIndex] = *vectorIterator;
+                    arrayIndex++;
+                }
+
+                if (arrayLength > vectorLength) {
+                    // anArray[vectorLength] = nullptr; // FIXME: Can't assign null value.
+                }
+
+                return anArray;
             }
 
             /**
