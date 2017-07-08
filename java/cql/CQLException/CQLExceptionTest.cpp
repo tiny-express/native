@@ -39,7 +39,7 @@ TEST (JavaLang, CQLExceptionConstructor) {
 
     // Constructs a new CQLException with the specified detail message.
     CQLException cqlExceptionWithMessage = CQLException("CQLException with the specified message");
-    ASSERT_STR("CQLException with the specified message", CQLExceptionWithMessage.getMessage().toString());
+    ASSERT_STR("CQLException with the specified message", cqlExceptionWithMessage.getMessage().toString());
 
     // Constructs a new CQLException with the specified detail message and cause.
     CQLException cqlExceptionWithMessageAndCause = CQLException("CQLException with the specified message and cause", &cqlExceptionWithMessage);
