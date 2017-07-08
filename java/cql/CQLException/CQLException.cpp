@@ -24,21 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_QUERY_EXCEPTION_HPP
-#define NATIVE_JAVA_LANG_QUERY_EXCEPTION_HPP
+#include "CQLException.hpp"
+#include "../../Lang.hpp"
 
-#include "../Exception/Exception.hpp"
+using namespace Java::Lang;
 
-namespace Java {
-    namespace Lang {
-        class QueryException : public Exception {
-        public:
-            QueryException();
-            QueryException(String message);
-            QueryException(String message, Throwable *cause);
-            QueryException(Throwable *cause);
-        };
-    }
+CQLException::CQLException() : Exception::Exception() {
 }
 
-#endif//NATIVE_JAVA_LANG_QUERY_EXCEPTION_HPP
+CQLException::CQLException(String message) : Exception::Exception(message) {
+}
+
+CQLException::CQLException(String message, Throwable *cause) : Exception::Exception(message, cause) {
+}
+
+CQLException::CQLException(Throwable *cause) : Exception::Exception(cause) {
+}
