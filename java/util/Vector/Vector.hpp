@@ -122,7 +122,7 @@ namespace Java {
              * @return boolean
              */
             boolean add(const E &element) {
-                int oldSize = this->original.size();
+                int oldSize = (int)this->original.size();
                 this->ensureCapacity(oldSize + 1);
                 this->original.push_back(element);
                 return (oldSize != this->original.size());
@@ -135,7 +135,7 @@ namespace Java {
              * @param element
              */
             void add(int index, const E &element) {
-                int size = this->original.size();
+                int size = (int)this->original.size();
                 if (index < 0 || index > size) {
                     throw std::invalid_argument("index is out of range");
                 }
@@ -186,7 +186,7 @@ namespace Java {
              * @return int
              */
             int capacity() const {
-                return this->original.capacity();
+                return (int)this->original.capacity();
             }
 
             /**
@@ -218,10 +218,7 @@ namespace Java {
              * @return boolean
              */
             boolean contains(const E &element) const {
-                if (this->indexOf(element) == -1) {
-                    return false;
-                }
-                return true;
+                return (this->indexOf(element) == -1);
             }
 
             /**
@@ -364,7 +361,7 @@ namespace Java {
              * @return int
              */
             int indexOf(const E &element) const {
-                int currentSize = this->original.size();
+                int currentSize = (int)this->original.size();
                 register int index;
                 for (index = 0; index < currentSize; index++) {
                     if (element == this->original[index]) {
@@ -445,7 +442,7 @@ namespace Java {
              * @return int
              */
             int lastIndexOf(const E &element) const {
-                int maxIndex = this->original.size() - 1;
+                int maxIndex = (int)this->original.size() - 1;
                 return this->lastIndexOf(element, maxIndex);
             }
 
@@ -532,7 +529,7 @@ namespace Java {
              * @return boolean
              */
             boolean removeAll(const std::initializer_list<E> &list) {
-                int oldSize = this->original.size();
+                int oldSize = (int)this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
@@ -595,7 +592,7 @@ namespace Java {
                     return;
                 }
 
-                int currentSize = this->original.size();
+                int currentSize = (int)this->original.size();
                 if (fromIndex < 0 || fromIndex >= currentSize || toIndex < 0 || toIndex >= currentSize) {
                     return;
                 }
@@ -634,7 +631,7 @@ namespace Java {
              * @return boolean
              */
             boolean retainAll(const std::initializer_list<E> &list) {
-                int oldSize = this->original.size();
+                int oldSize = (int)this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin(); vectorIterator != this->original.end(); ) {
@@ -696,7 +693,7 @@ namespace Java {
              * @return int
              */
             int size() const {
-                return this->original.size();
+                return (int)this->original.size();
             }
 
             /**
@@ -797,7 +794,7 @@ namespace Java {
              * @return const_iterator
              */
             const_iterator cbegin() const {
-                return this->original.cbein();
+                return this->original.cbegin();
             }
 
             /**
@@ -877,7 +874,7 @@ namespace Java {
              */
             Vector<E> &operator=(const std::initializer_list<E> &list) {
                 this->clear();
-                this->ensureCapacity(list.size());
+                this->ensureCapacity((int)list.size());
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin(); listIterator != list.end(); listIterator++) {
                     this->original.push_back(*listIterator);
