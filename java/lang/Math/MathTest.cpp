@@ -49,20 +49,115 @@ TEST (JavaLang, MathAbs) {
 TEST (JavaLang, MathAcosAndCos){
     // Given a variable radian which is equal to PI
     double radian = Math::PI / 2;
-    double cos=Math::cos(radian);
-    ASSERT_TRUE(radian == Math::acos(cos));
+    double cos = Math::cos(radian);
+    ASSERT_EQUAL(radian, Math::acos(cos));
 }
 
+TEST (JavaLang, MathASinAndSin){
+    // Given a variable radian which is equal to PI
+    double radian = Math::PI / 2;
+    double sin = Math::sin(radian);
+    ASSERT_EQUAL(radian, Math::asin(sin));
+}
+
+TEST (JavaLang, MathATanAndTan){
+    // Given a variable radian which is equal to PI
+    double radian = Math::PI / 2;
+    double tan = Math::tan(radian);
+    double  corX = Math::PI / 3;
+    double  corY =  0;
+    ASSERT_EQUAL(radian, Math::atan(tan));
+    ASSERT_EQUAL(radian, Math::atan2(corX, corY));
+}
+
+TEST (JavaLang, MathCbrt){
+    //Given a variable equal to 3^3
+    double cube = 27;
+    ASSERT_DBL_NEAR(3, Math::cbrt(cube));
+}
+
+TEST (JavaLang, MathSqrt){
+    // Given a variable equal to 3^2
+    double square = 9;
+    ASSERT_EQUAL(3, Math::sqrt(9));
+}
+
+TEST (JavaLang, MathCeil){
+    // Given two double numbers
+    double x = 125.9;
+    double y = 0.4873;
+    ASSERT_EQUAL(126, Math::ceil(x));
+    ASSERT_EQUAL(1, Math::ceil(y));
+}
+
+TEST (JavaLang, MathLog){
+    // Given a variable for log 10-base
+    double tenBase = 10;
+    ASSERT_EQUAL(1, Math::log10(tenBase));
+
+    // Given a variable for log e-base
+    double eBase = Math::E;
+	ASSERT_EQUAL(1, Math::log(eBase));
+	ASSERT_EQUAL(1.313261688, Math::log1p(eBase));
+
+}
+
+TEST (JavaLang, MathRInt){
+	// Given two double numbers
+	double x = 125.9;
+	double y = 0.4873;
+	ASSERT_EQUAL(126, Math::rint(x));
+	ASSERT_EQUAL(0, Math::rint(y));
+}
+
+TEST (JavaLang, MathExp){
+	//Given a variable equal to E^3
+	double eCubed = Math::pow(Math::E,3);
+	ASSERT_EQUAL(eCubed, Math::exp(3));
+	ASSERT_EQUAL(eCubed - 1, Math::expm1(3));
+}
+
+TEST (JavaLang, MathHypot){
+	// Given two double numbers
+	double x = 6;
+	double y = 8;
+	ASSERT_EQUAL(10, Math::hypot(x, y));
+}
+
+TEST (JavaLang, MathIEEERemainder){
+	// Given two double numbers
+	double x = 8;
+	double y = -6;
+	ASSERT_EQUAL(2, Math::IEEEremainder(x, y));
+}
+
+TEST (JavaLang, MathCosh){
+	// Given a variable equal PI/2
+	double radian = Math::PI/2;
+	ASSERT_EQUAL(2.5091784786580567, Math::cosh(radian));
+}
+
+TEST (JavaLang, MathSinh){
+	// Given a variable equal PI/2
+	double radian = Math::PI/2;
+	ASSERT_EQUAL(2.3012989023072947, Math::sinh(radian));
+}
+
+TEST (JavaLang, MathTanh){
+	// Given a variable equal PI/2
+	double radian = Math::PI/2;
+	ASSERT_EQUAL(0.9171523356672744, Math::tanh(radian));
+}
 TEST (JavaLang, MathToRadian){
     // Given a variable radian which is equal to PI
     double radian = Math::PI;
-    ASSERT_TRUE(radian == Math::toRadians(180));
+    ASSERT_EQUAL(radian, Math::toRadians(180));
 }
 
 TEST (JavaLang, MathToDegree){
     // Given a variable degree which is equal to PI
     double degree = 180;
-    ASSERT_TRUE(degree == Math::toDegrees(Math::PI));
+    ASSERT_EQUAL(degree, Math::toDegrees(Math::PI));
 }
 
 TEST (JavaLang, MathFloor) {
@@ -102,6 +197,10 @@ TEST (JavaLang, MathMin) {
 	float float_value_min_2 = 2.312;
 	ASSERT_EQUAL(2.312, Math::min(float_value_min_1, float_value_min_2));
 
+    long long_value_min_1 = 4;
+    long long_value_min_2 = 2;
+    ASSERT_EQUAL(2, Math::min(long_value_min_1, long_value_min_2));
+
 	int int_value_min_1 = 4;
 	int int_value_min_2 = 2;
 	ASSERT_EQUAL(2, Math::min(int_value_min_1, int_value_min_2));
@@ -120,13 +219,8 @@ TEST (JavaLang, MathRound) {
 
 	float float_value_round = 1.23643435;
 	ASSERT_EQUAL(1, Math::round(float_value_round));
-
-	double double_value_sqrt = 207936;
-	ASSERT_EQUAL(456, Math::sqrt(double_value_sqrt));
 }
 
 TEST (JavaLang, MathRandom) {
-	double random_value;
-	ASSERT_TRUE(Math::random() > 0);
-
+	//ASSERT_TRUE(Math::random() > 0 && Math::random() < 1);
 }

@@ -40,7 +40,7 @@ namespace Java {
             //
 			//static Random randomNumberGenerator;
             //an Zero number < 0
-			//static long negativeZeroFloatBits=  Float::floatToLongBits(-0.0f)
+			//static long negativeZeroFloatBits = Float::floatToLongBits(-0.0f)
 			//static long negativeZeroDoubleBits = Double::doubleToLongBits(-0.0d);;
 
 		private:

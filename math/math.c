@@ -24,7 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <ieee754.h>
 #include "../math.h"
 
 double math_pow(double a, double b) {
@@ -72,7 +71,7 @@ double math_log1p(double a){
 }
 
 double math_remainder(double a, double b){
-    return remainder(a,b);
+    return a-(trunc(a / b) * b);
 }
 
 double math_rint(double a){

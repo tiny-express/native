@@ -257,106 +257,268 @@ void Math::initRGN() {
 
 }
 
+/**
+ * Returns the natural logarithm (base e) of a double value
+ *
+ * @param a
+ * @return double
+ */
 double Math::log(double a) {
     return math_log(a);
 }
 
+/**
+ * Returns the base 10 logarithm of a double value
+ *
+ * @param a
+ * @return double
+ */
 double Math::log10(double a) {
     return math_log10(a);
 }
 
+/**
+ * Returns the natural logarithm of the sum of the argument and 1
+ *
+ * @param a
+ * @return double
+ */
 double Math::log1p(double a) {
     return math_log1p(a);
 }
 
+/**
+ * Returns the greater of two int values.
+ *
+ * @param a
+ * @param b
+ * @return a if a>b; else b
+ */
 int Math::max(int a, int b) {
     return a > b ? a : b;
 }
 
+/**
+ * Returns the greater of two float values.
+ *
+ * @param a
+ * @param b
+ * @return a if a>b; else b
+ */
 float Math::max(float a, float b) {
     return a > b ? a : b;
 }
 
+/**
+ * Returns the greater of two long values.
+ *
+ * @param a
+ * @param b
+ * @return a if a>b; else b
+ */
 long Math::max(long a, long b) {
     return a > b ? a : b;
 }
 
+/**
+ * Returns the greater of two double values.
+ *
+ * @param a
+ * @param b
+ * @return a if a>b; else b
+ */
 double Math::max(double a, double b) {
 	return a > b ? a : b;
 }
 
+/**
+ * Returns the smaller of two int values.
+ *
+ * @param a
+ * @param b
+ * @return a if a<b; else b
+ */
 int Math::min(int a, int b) {
     return a < b ? a : b;
 }
 
+/**
+ * Returns the greater of two float values.
+ *
+ * @param a
+ * @param b
+ * @return a if a<b; else b
+ */
 float Math::min(float a, float b) {
 	return a < b ? a : b;
 }
 
+/**
+ * Returns the greater of two long values.
+ *
+ * @param a
+ * @param b
+ * @return a if a<b; else b
+ */
 long Math::min(long a, long b) {
     return a < b ? a : b;
 }
 
+/**
+ * Returns the greater of two double values.
+ *
+ * @param a
+ * @param b
+ * @return a if a<b; else b
+ */
 double Math::min(double a, double b) {
     return a < b ? a : b;
 }
 
+/**
+ * Returns the floating-point number adjacent to the first argument in the direction
+ * of the second argument.If both arguments compare as equal the second argument is returned.
+ *
+ * @param start
+ * @param direction
+ * @return double
+ */
 //TODO need sun.misc.FpUtils
 double Math::nextAfter(double start, double direction) {
     return 0;
 }
 
+/**
+ * Returns the floating-point number adjacent to the first argument in the direction
+ * of the second argument.If both arguments compare as equal the second argument is returned.
+ *
+ * @param start
+ * @param direction
+ * @return float
+ */
 //TODO need sun.misc.FpUtils
 float Math::nextAfter(float start, double direction) {
     return 0;
 }
 
+/**
+ * Returns the floating-point value adjacent to f in the direction of positive infinity.
+ *
+ * @param a
+ * @return float
+ */
 //TODO need sun.misc.FpUtils
 float Math::nextUp(float a) {
     return 0;
 }
 
+/**
+ * Returns the floating-point value adjacent to f in the direction of positive infinity.
+ *
+ * @param a
+ * @return double
+ */
 //TODO need sun.misc.FpUtils
 double Math::nextUp(double a) {
     return 0;
 }
 
+/**
+ * Returns the value of the first argument raised to the power of the second argument
+ *
+ * @param base
+ * @param exponent
+ * @return double
+ */
 double Math::pow(double base, double exponent) {
     return math_pow(base, exponent);
 }
 
+/**
+ * Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0
+ *
+ * @return double
+ */
+//TODO need Random
 double Math::random() {
-	srand(time(NULL));
-	return rand();
+    //if (randomNumberGenerator == null) initRNG();
+    //return randomNumberGenerator.nextDouble();
 }
 
+/**
+ * Returns the double value that is closest in value to the argument
+ * and is equal to a mathematical integer
+ *
+ * @param a
+ * @return
+ */
 double Math::rint(double a) {
     return math_rint(a);
 }
 
+/**
+ * Returns the closest int to the argument.
+ *
+ * @param a
+ * @return
+ */
 int Math::round(float a) {
     return (int) math_round(a);
 }
 
+/**
+ * Returns the closest long to the argument.
+ *
+ * @param a
+ * @return
+ */
 long Math::round(double a) {
 	return (long) math_round(a);
 }
 
+/**
+ * Return a × 2^scaleFactor rounded
+ *
+ * @param a
+ * @param scaleFactor
+ * @return float
+ */
 //TODO need sun.misc.FpUtils
 float Math::scalb(float a, int scaleFactor) {
     return 0;
 }
 
+/**
+ * Return a × 2^scaleFactor rounded
+ *
+ * @param a
+ * @param scaleFactor
+ * @return double
+ */
 //TODO need sun.misc.FpUtils
 double Math::scalb(double a, int scaleFactor) {
     return 0;
 }
 
+/**
+ * Returns the signum function of the argument
+ *
+ * @param a
+ * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
+ * -1.0 if the argument is less than zero.
+ */
 //TODO need sun.misc.FpUtils
 double Math::signum(double a) {
     return 0;
 }
 
+/**
+ * Returns the signum function of the argument
+ *
+ * @param a
+ * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
+ * -1.0 if the argument is less than zero.
+ */
 //TODO need sun.misc.FpUtils
 float Math::signum(float a) {
     return 0;
@@ -382,6 +544,12 @@ double Math::sinh(double a) {
     return math_sinh(a);
 }
 
+/**
+ * Returns the correctly rounded positive square root of a double value
+ *
+ * @param a
+ * @return double
+ */
 double Math::sqrt(double a) {
 	return math_sqrt(a);
 }
@@ -406,19 +574,43 @@ double Math::tanh(double a) {
     return math_tanh(a);
 }
 
+/**
+ * Converts an angle measured in radians to an approximately equivalent angle measured in degrees.
+ *
+ * @param angleRadian
+ * @return double
+ */
 double Math::toDegrees(double angleRadian) {
     return angleRadian * 180.0 / PI;
 }
 
+/**
+ * Converts an angle measured in degrees to an approximately equivalent angle measured in radians.
+ *
+ * @param angleDegree
+ * @return
+ */
 double Math::toRadians(double angleDegree) {
     return angleDegree / 180.0 * PI;
 }
 
+/**
+ * Returns the size of an ulp of the argument.
+ *
+ * @param a
+ * @return float
+ */
 //TODO need sun.misc.FpUtils
 float Math::ulp(float a) {
     return 0;
 }
 
+/**
+ * Returns the size of an ulp of the argument.
+ *
+ * @param a
+ * @return double
+ */
 //TODO need sun.misc.FpUtils
 double Math::ulp(double a) {
     return 0;
