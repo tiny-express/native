@@ -410,6 +410,7 @@ double Double::min(double doubleA, double doubleB) {
 //    }
 //}
 
+// TODO Fix error leak, and pass all test case
 /**
  * Convert double to binary 32 bit
  * (Single-precision floating-point format
@@ -458,28 +459,28 @@ string Double::doubleToBinary32StringType(double doubleInput)
     if(doubleInput == 0){
         free(integerPartNormalizeForm);
         free(fractionPartNormalizeForm);
-//        free(resultDoubleToBinary32StringType);
-        return  resultDoubleToBinary32StringType;
+        free(doubleInputNormalizeForm);
+        return  strdup(resultDoubleToBinary32StringType);
     }
 
     /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
     if(doubleInput == POSITIVE_INFINITY_DOUBLE){
         free(integerPartNormalizeForm);
         free(fractionPartNormalizeForm);
-//        free(resultDoubleToBinary32StringType);
+        free(doubleInputNormalizeForm);
         resultDoubleToBinary32StringType
                 = (string) "01111111100000000000000000000000";
-        return  resultDoubleToBinary32StringType;
+        return  strdup(resultDoubleToBinary32StringType);
     }
 
     /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
     if(doubleInput == NEGATIVE_INFINITY_DOUBLE){
         free(integerPartNormalizeForm);
         free(fractionPartNormalizeForm);
-//        free(resultDoubleToBinary32StringType);
+        free(doubleInputNormalizeForm);
         resultDoubleToBinary32StringType
                 = (string) "11111111100000000000000000000000";
-        return  resultDoubleToBinary32StringType;
+        return  strdup(resultDoubleToBinary32StringType);
     }
 
     /** Get size of integerPartNormalizeForm  */
@@ -653,5 +654,8 @@ string Double::doubleToBinary32StringType(double doubleInput)
     }
 
     /** Return resultDoubleToBinary32StringType */
-    return  resultDoubleToBinary32StringType;
+    free(integerPartNormalizeForm);
+    free(fractionPartNormalizeForm);
+    free(doubleInputNormalizeForm);
+    return  strdup(resultDoubleToBinary32StringType);
 }
