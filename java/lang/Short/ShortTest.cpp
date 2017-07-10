@@ -103,10 +103,16 @@ TEST (JavaLang, ShortOperator) {
 }
 
 TEST (JavaLang, ShortParseShort) {
-    #ifdef __APPLE__
-        return;
-    #endif
 	// Given value for Long constructor and assign value - Return long
     Short validShortPointer = Short::parseShort("6");
     ASSERT_EQUAL(6, validShortPointer.shortValue());
+}
+
+TEST(JavaLang, ShortToString) {
+    // Give a valid Short object then compare result of method toString - Should be equals
+    Short validShort = 12344;
+
+    string expect = (string) "12344";
+    string result = validShort.toString();
+    ASSERT_STR(expect, result);
 }

@@ -24,3 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "CQLException.hpp"
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+CQLException::CQLException() : Exception::Exception() {
+}
+
+CQLException::CQLException(String message) : Exception::Exception(message) {
+}
+
+CQLException::CQLException(String message, Throwable *cause) : Exception::Exception(message, cause) {
+}
+
+CQLException::CQLException(Throwable *cause) : Exception::Exception(cause) {
+}

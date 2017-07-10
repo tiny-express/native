@@ -24,3 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "IOException.hpp"
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+IOException::IOException() : Exception::Exception() {
+}
+
+IOException::IOException(String message) : Exception::Exception(message) {
+}
+
+IOException::IOException(String message, Throwable *cause) : Exception::Exception(message, cause) {
+}
+
+IOException::IOException(Throwable *cause) : Exception::Exception(cause) {
+}

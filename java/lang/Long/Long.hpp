@@ -33,12 +33,11 @@
 namespace Java {
 	namespace Lang {
 
-		class Long;
-
-		class Long : public virtual Number {
+		class Long : public Number {
 
 		private:
 			long original;
+            string string_original;
 
 		public:
 			/**
@@ -60,7 +59,7 @@ namespace Java {
 			/**
 			 * Default constructor
 			 *
-			 * @return
+			 * @return Long
 			 */
 			Long();
 
@@ -332,7 +331,7 @@ namespace Java {
 			 *
 			 * @return String
 			 */
-			String toString();
+			string toString() const;
 
 			/**
 			 * Returns a String object representing the specified long.
@@ -340,7 +339,7 @@ namespace Java {
 			 * @param long i
 			 * @return String
 			 */
-			static String toString(long i);
+			static string toString(long i);
 
 			/**
 			 * Returns a Long instance representing the specified long value.
@@ -391,6 +390,15 @@ namespace Java {
 			static int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
 
 		public:
+
+            /**
+             * Assign value of this object same as value of target object
+             *
+             * @param target
+             * @return Long
+             */
+            Long operator=(const Long &target);
+
 			/**
 			 * Sum two Long
 			 *

@@ -24,3 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_LANG_IO_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_IO_EXCEPTION_HPP
+
+#include "../Exception/Exception.hpp"
+
+namespace Java {
+    namespace Lang {
+        class IOException : public Exception {
+        public:
+            IOException();
+            IOException(String message);
+            IOException(String message, Throwable *cause);
+            IOException(Throwable *cause);
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_IO_EXCEPTION_HPP
