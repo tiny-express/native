@@ -26,8 +26,8 @@
 
 #include "../math.h"
 
-double math_pow(double a, double b) {
-	return pow(a, b);
+double math_pow(double base, double exponent) {
+	return pow(base, exponent);
 }
 
 double math_floor(double a) {
@@ -70,8 +70,8 @@ double math_log1p(double a){
     return log1p(a);
 }
 
-double math_remainder(double a, double b){
-    return a - (trunc(a / b) * b);
+double math_ieeeremainder(double a, double b){
+    return a - (round(a / b) * b);
 }
 
 double math_rint(double a){
@@ -117,7 +117,32 @@ double math_atan2(double a, double b){
 double math_tan(double a){
     return tan(a);
 }
+
 double math_tanh(double a){
     return tanh(a);
+}
+
+double math_copysign(double a, double b){
+    return copysign( a, b);
+}
+
+float math_copysignf(float a, float b){
+    return copysignf( a, b);
+}
+
+double math_nexttoward(double a, double b){
+    return nexttoward(a,b);
+}
+
+double math_nexttowardf(float a, double b){
+    return nexttowardf(a,b);
+}
+
+double math_ldexp(double a, int exp){
+    return ldexp(a, exp);
+}
+
+double math_ldexpf(float a, int exp){
+    return ldexpf(a, exp);
 }
 

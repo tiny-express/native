@@ -28,6 +28,7 @@
 
 using namespace Java::Lang;
 
+
 /**
  * Float initialization
  *

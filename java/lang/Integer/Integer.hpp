@@ -43,6 +43,17 @@ namespace Java {
 			string string_original;
 
 		public:
+			/**
+			 *A constant holding the minimum value an int can have, -2^31.
+			 */
+			static const int MIN_VALUE = 0x80000000;
+
+			/**
+			 * A constant holding the maximum value an int can have, 2^31-1.
+			 */
+			static const int MAX_VALUE = 0x7fffffff;
+
+		public:
 			Integer();
 			Integer(int original);
 			Integer(const Integer &target);

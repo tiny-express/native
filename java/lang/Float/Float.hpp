@@ -40,6 +40,54 @@ namespace Java {
 			string string_original;
 
 		public:
+			/**
+ 			* A constant holding the smallest positive normal value of type float, 2-126.
+ 			*/
+			static constexpr float MIN_NORMAL = 1.17549435E-38f;
+
+			/**
+			 * The number of logical bits in the significand of a float number,
+			 * including the implicit bit.
+			 */
+			static constexpr int SIGNIFICAND_WIDTH = 24;
+
+			/**
+			 * Maximum exponent a finite float number may have.
+			 */
+			static const int MAX_EXPONENT = 127;
+
+			/**
+			 * Minimum exponent a normalized float number may have.
+			 */
+			static const int MIN_EXPONENT = -126;
+
+			/**
+			 * The exponent the smallest positive float subnormal value would have
+			 * if it could be normalized.
+			 */
+			static const int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
+
+			/**
+			 * Bias used in representing a float exponent.
+			 */
+			static const int EXP_BIAS = 127;
+
+			/**
+			 * Bit mask to isolate the sign bit of a float.
+			 */
+			static const int SIGN_BIT_MASK = 0x80000000;
+
+			/**
+			 * Bit mask to isolate the exponent field of a float.
+			 */
+			static const int EXP_BIT_MASK = 0x7F800000;
+
+			/**
+			 * Bit mask to isolate the significand field of a float.
+			 */
+			static const int SIGNIF_BIT_MASK = 0x007FFFFF;
+
+		public:
 			Float();
 			Float(float original);
 			Float(const Float &target);

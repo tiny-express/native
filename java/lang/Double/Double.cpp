@@ -68,55 +68,6 @@ using namespace Java::Lang;
      */
 static long doubleToRawLongBits(double value);
 
-/**
- * Bit mask to isolate the exponent field of a
- * double.
- */
-static long	EXP_BIT_MASK	= 0x7FF0000000000000L;
-
-/**
- * Bit mask to isolate the significand field of a
- * double
- */
-static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
-
-/**
- * A constant holding the positive infinity of type
- */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
-
-/**
- * A constant holding the negative infinity of type
- */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
-
-/**
- * A constant holding a Not-a-Number (NaN) value of type
- */
-static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
-
-/**
- * A constant holding the largest positive finite value of type
- */
-static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
-
-/**
- * A constant holding the smallest positive normal value of type
- */
-static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
-
-/**
- * A constant holding the smallest positive nonzero value of type
- */
-static double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
-
-/**
- * Minimum exponent a normalized <code>double</code> number may
- * have.  It is equal to the value returned by
- * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
- */
-static int	MIN_EXPONENT	= -1022;
-
 Double::Double() {
 	this->original = 0;
 	this->string_original = string_from_double(this->original);

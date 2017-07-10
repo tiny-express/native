@@ -29,6 +29,7 @@ extern "C" {
 }
 
 #include "Math.hpp"
+#include "../Integer/Integer.hpp"
 
 using namespace Java::Lang;
 
@@ -127,7 +128,7 @@ TEST (JavaLang, MathHypot){
 TEST (JavaLang, MathIEEERemainder){
 	// Given two double numbers
 	double x = 8;
-	double y = -6;
+	double y = 6;
 	ASSERT_EQUAL(2, Math::IEEEremainder(x, y));
 }
 
@@ -223,4 +224,10 @@ TEST (JavaLang, MathRound) {
 
 TEST (JavaLang, MathRandom) {
 	//ASSERT_TRUE(Math::random() > 0 && Math::random() < 1);
+}
+
+TEST (JavaLang, MathMultipleExact){
+    int base = Integer::MAX_VALUE;
+    int power = 2;
+    //ASSERT_EQUAL(4294967294, Math::multiplyExact(base,power));
 }

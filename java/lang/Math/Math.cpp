@@ -25,8 +25,16 @@
  */
 
 #include "Math.hpp"
+#include "../Long/Long.hpp"
+#include "../Integer/Integer.hpp"
 
 using namespace Java::Lang;
+
+RandomNumberGeneratorHolder *RandomNumberGeneratorHolder::instance =0;
+
+long Math::negativeZeroDoubleBits = Double::doubleToRawLongBits(-0.0d);
+
+//long Math::negativeZeroFloatBits = Float::floatToRawIntBits(-0.0f);
 
 /**
  * Returns the absolute value of an int value
@@ -110,6 +118,37 @@ double Math::atan2(double corX, double corY) {
 }
 
 /**
+ * Returns the sum of its arguments, throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @param b
+ * @return long
+ */
+long Math::addExact(long a, long b) {
+    long result = a + b;
+    if (((a ^ result) & (b ^ result)) < 0) {
+        //TODO throw new ArithmeticException("long overflow");
+
+    }
+    return result;
+}
+
+/**
+ * Returns the sum of its arguments, throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @param b
+ * @return int
+ */
+int Math::addExact(int a, int b) {
+    int result = a + b;
+    if (((a ^ result) & (b ^ result)) < 0) {
+        //TODO throw new ArithmeticException("integer overflow");
+    }
+    return result;
+}
+
+/**
  * Returns the cube root of a double value.
  *
  * @param a
@@ -175,6 +214,32 @@ double Math::cosh(double a) {
 }
 
 /**
+ * Returns the argument decremented by one, throwing an exception if the result overflows an long.
+ *
+ * @param a
+ * @return long
+ */
+long Math::decrementExact(long a) {
+    if(Long::MIN_VALUE == a){
+        //TODO throw new ArithmeticException("long overflow");
+    }
+    return a - 1;
+}
+
+/**
+ * Returns the argument decremented by one, throwing an exception if the result overflows an long.
+ *
+ * @param a
+ * @return int
+ */
+int Math::decrementExact(int a) {
+    if(Integer::MIN_VALUE == a){
+        //TODO throw new ArithmeticException("integer overflow");
+    }
+    return a - 1;
+}
+
+/**
  * Returns Euler's number e raised to the power of a double value
  *
  * @param a
@@ -206,14 +271,70 @@ double Math::floor(double a) {
 }
 
 /**
+ * Returns the largest (closest to positive infinity)
+ * int value that is less than or equal to the algebraic quotient
+ *
+ * @param a
+ * @param b
+ * @return int
+ */
+int Math::floorDiv(int a, int b) {
+    int result = a / b;
+    // if the signs are different and modulo not zero, round down
+    if ((a ^ b) < 0 && (result * b != a)) {
+        result--;
+    }
+    return result;
+}
+
+/**
+ * Returns the largest (closest to positive infinity)
+ * int value that is less than or equal to the algebraic quotient
+ *
+ * @param a
+ * @param b
+ * @return long
+ */
+long Math::floorDiv(long a, long b) {
+    long result = a / b;
+    // if the signs are different and modulo not zero, round down
+    if ((a ^ b) < 0 && (result * b != a)) {
+        result--;
+    }
+    return result;
+}
+
+/**
+ * Returns the floor modulus of the int arguments.
+ *
+ * @param a
+ * @param b
+ * @return int
+ */
+int Math::floorMod(int a, int b) {
+    return a - (floorDiv(a, b) * b);
+}
+
+/**
+ * Returns the floor modulus of the int arguments.
+ *
+ * @param a
+ * @param b
+ * @return long
+ */
+long Math::floorMod(long a, long b) {
+    return a - (floorDiv(a, b) * b);
+}
+
+/**
  * Returns the unbiased exponent used in the representation of a double
  *
  * @param a
  * @return int
  */
-//TODO need sun.misc.FpUtils
 int Math::getExponent(double a) {
-    return 0;
+    //return ((Double::floatToRawIntBits(a) & Double::EXP_BIT_MASK)
+    //        >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS;
 }
 
 /**
@@ -222,9 +343,9 @@ int Math::getExponent(double a) {
  * @param a
  * @return int
  */
-//TODO need sun.misc.FpUtils
 int Math::getExponent(float a) {
-    return 0;
+    //return ((Float::floatToRawIntBits(a) & Float::EXP_BIT_MASK)
+    //        >> (Float::SIGNIFICAND_WIDTH - 1)) - Float::EXP_BIAS;
 }
 
 /**
@@ -246,8 +367,38 @@ double Math::hypot(double a, double b) {
  * @return the remainder when dividend is divided by divisor.
  */
 double Math::IEEEremainder(double dividend, double divisor) {
-    return math_remainder(dividend,divisor);
+    return math_ieeeremainder(dividend,divisor);
 }
+
+/**
+ * Returns the argument incremented by one,
+ * throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @return int
+ */
+int Math::incrementExact(int a) {
+    if (a == Integer::MAX_VALUE) {
+        //TODO throw new ArithmeticException("long overflow");
+    }
+    return a + 1;
+}
+
+/**
+ * Returns the argument incremented by one,
+ * throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @return long
+ */
+long Math::incrementExact(long a) {
+    if (a == Long::MAX_VALUE) {
+        //TODO throw new ArithmeticException("long overflow");
+    }
+    return a + 1L;
+}
+
+
 
 /**
  * initialize the randomNumberGenerator
@@ -376,6 +527,42 @@ double Math::min(double a, double b) {
 }
 
 /**
+ * Returns the product of the arguments,
+ * throwing an exception if the result overflows an int.
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int Math::multiplyExact(int a, int b) {
+    long result = (long)a * (long)b;
+    if ((int)result != result) {
+        //TODO throw new ArithmeticException("integer overflow");
+        return 0;
+    }
+    return (int)result;
+}
+
+long Math::multiplyExact(long a, long b) {
+    long result = a * b;
+    long absA = (unsigned) abs(a);
+    long absB = (unsigned) abs(b);
+
+    if (((absA | absB) >> 31 != 0)) {
+
+        // Some bits greater than 2^31 that might cause overflow
+        // Check the result using the divide operator
+        // and check for the special case of Long.MIN_VALUE * -1
+
+        if (((b != 0) && (result / b != a)) || (a == Long::MIN_VALUE && b == -1)) {
+            //TODO throw new ArithmeticException("long overflow");
+        }
+    }
+    return result;
+}
+
+
+/**
  * Returns the floating-point number adjacent to the first argument in the direction
  * of the second argument.If both arguments compare as equal the second argument is returned.
  *
@@ -383,7 +570,6 @@ double Math::min(double a, double b) {
  * @param direction
  * @return double
  */
-//TODO need sun.misc.FpUtils
 double Math::nextAfter(double start, double direction) {
     return 0;
 }
@@ -407,7 +593,6 @@ float Math::nextAfter(float start, double direction) {
  * @param a
  * @return float
  */
-//TODO need sun.misc.FpUtils
 float Math::nextUp(float a) {
     return 0;
 }
@@ -418,7 +603,6 @@ float Math::nextUp(float a) {
  * @param a
  * @return double
  */
-//TODO need sun.misc.FpUtils
 double Math::nextUp(double a) {
     return 0;
 }
@@ -483,7 +667,6 @@ long Math::round(double a) {
  * @param scaleFactor
  * @return float
  */
-//TODO need sun.misc.FpUtils
 float Math::scalb(float a, int scaleFactor) {
     return 0;
 }
@@ -495,7 +678,6 @@ float Math::scalb(float a, int scaleFactor) {
  * @param scaleFactor
  * @return double
  */
-//TODO need sun.misc.FpUtils
 double Math::scalb(double a, int scaleFactor) {
     return 0;
 }
@@ -519,7 +701,6 @@ double Math::signum(double a) {
  * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
  * -1.0 if the argument is less than zero.
  */
-//TODO need sun.misc.FpUtils
 float Math::signum(float a) {
     return 0;
 }
@@ -600,7 +781,6 @@ double Math::toRadians(double angleDegree) {
  * @param a
  * @return float
  */
-//TODO need sun.misc.FpUtils
 float Math::ulp(float a) {
     return 0;
 }
@@ -611,10 +791,16 @@ float Math::ulp(float a) {
  * @param a
  * @return double
  */
-//TODO need sun.misc.FpUtils
 double Math::ulp(double a) {
     return 0;
 }
+
+
+
+
+
+
+
 
 
 

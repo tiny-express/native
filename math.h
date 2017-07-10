@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <math.h>
 
-double math_pow(double a, double b);
+double math_pow(double base, double exponent);
 double math_floor(double a);
 double math_round(double a);
 double math_sqrt(double a);
@@ -42,7 +42,7 @@ double math_hypot(double a, double b);
 double math_log(double a);
 double math_log10(double a);
 double math_log1p(double a);
-double math_remainder(double a, double b);
+double math_ieeeremainder(double a, double b);
 double math_rint(double a);
 double math_acos(double a);
 double math_cos(double a);
@@ -54,6 +54,14 @@ double math_atan(double a);
 double math_atan2(double a, double b);
 double math_tan(double a);
 double math_tanh(double a);
+double math_copysign(double a, double b);
+float math_copysignf(float a, float b);
+double math_nexttoward(double a, double b);
+double math_nexttowardf(float a, double b);
+double math_ldexp(double a, int exp);
+double math_ldexpf(float a, int exp);
+
+
 
 
 #endif
