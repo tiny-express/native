@@ -28,94 +28,21 @@
 #include "../Object/Object.hpp"
 #include "../Math/Math.hpp"
 #include "../Long/Long.hpp"
+#include <stdio.h>
+#include <cstdlib>
+
 
 using namespace Java::Lang;
 
 /**
-     * Returns a representation of the specified floating-point value
-     * according to the IEEE 754 floating-point "double
-     * format" bit layout, preserving Not-a-Number (NaN) values.
-     *
-     * Bit 63 (the bit that is selected by the mask
-     * {@code 0x8000000000000000L}) represents the sign of the
-     * floating-point number. Bits
-     * 62-52 (the bits that are selected by the mask
-     * {@code 0x7ff0000000000000L}) represent the exponent. Bits 51-0
-     * (the bits that are selected by the mask
-     * {@code 0x000fffffffffffffL}) represent the significand
-     * (sometimes called the mantissa) of the floating-point number.
-     *
-     * If the argument is positive infinity, the result is
-     * {@code 0x7ff0000000000000L}.
-     *
-     * If the argument is negative infinity, the result is
-     * {@code 0xfff0000000000000L}.
-     *
-     * If the argument is NaN, the result is the {@code long}
-     * integer representing the actual NaN value.  Unlike the
-     * {@code doubleToLongBits} method,
-     * {@code doubleToRawLongBits} does not collapse all the bit
-     * patterns encoding a NaN to a single "canonical" NaN
-     * value.
-     *
-     * In all cases, the result is a {@code long} integer that,
-     * when given to the {@link #longBitsToDouble(long)} method, will
-     * produce a floating-point value the same as the argument to
-     * {@code doubleToRawLongBits}.
-     *
-     * @param   value   a {@code double} precision floating-point number.
-     * @return the bits that represent the floating-point number.
-     */
+ * Returns a representation of the specified floating-point value
+ * according to the IEEE 754 floating-point "double
+ * format" bit layout
+ *
+ * @param   value   a {@code double} precision floating-point number.
+ * @return the bits that represent the floating-point number.
+ */
 static long doubleToRawLongBits(double value);
-
-/**
- * Bit mask to isolate the exponent field of a
- * double.
- */
-static long	EXP_BIT_MASK	= 0x7FF0000000000000L;
-
-/**
- * Bit mask to isolate the significand field of a
- * double
- */
-static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
-
-/**
- * A constant holding the positive infinity of type
- */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
-
-/**
- * A constant holding the negative infinity of type
- */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
-
-/**
- * A constant holding a Not-a-Number (NaN) value of type
- */
-static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
-
-/**
- * A constant holding the largest positive finite value of type
- */
-static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
-
-/**
- * A constant holding the smallest positive normal value of type
- */
-static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
-
-/**
- * A constant holding the smallest positive nonzero value of type
- */
-static double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
-
-/**
- * Minimum exponent a normalized <code>double</code> number may
- * have.  It is equal to the value returned by
- * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
- */
-static int	MIN_EXPONENT	= -1022;
 
 Double::Double() {
 	this->original = 0;
@@ -482,3 +409,249 @@ double Double::min(double doubleA, double doubleB) {
 //        return answer.toString();
 //    }
 //}
+
+/**
+ * Convert double to binary 32 bit
+ * (Single-precision floating-point format
+ * In IEEE 754-2008)
+ *
+ * @param double
+ * @return string binary 32 bit of input
+ */
+string Double::doubleToBinary32StringType(double doubleInput)
+{
+    string integerPartNormalizeForm = (string) malloc (31*sizeof(char));
+    string fractionPartNormalizeForm = (string) malloc (31*sizeof(char));
+    string doubleInputNormalizeForm = (string) malloc (31*sizeof(char));
+    string resultDoubleToBinary32StringType = (string) malloc (31*sizeof(char));
+
+    int powerExponentBase2;
+    int integerPartDoubleInput;
+    
+    int sizeOfIntegerPartNormalizeForm;
+    int sizeOfFractionPartNormalizeForm;
+    int sizeOfDoubleInputNormalizeForm;
+
+    int sizeOfExponentPartBinary32 = 8;
+
+    int i;
+    int index;
+    int indexOfDotDoubleInputNormalizeForm;
+    int indexFirstBit1DoubleInputNormalizeForm;
+    int indexBeginFractionPartResultDoubleToBinary32StringType;
+
+    int exponentBiasBinary32 = 127;
+    int exponentDoubleInput;
+
+    double fractionPartDoubleInput;
+
+    /** Assign value '0' to integerPartNormalizeForm */
+    for (int i = 0 ; i<= 31; i++) {
+        integerPartNormalizeForm[i] = '0';
+        fractionPartNormalizeForm[i] = '0';
+        doubleInputNormalizeForm[i] = '0';
+        resultDoubleToBinary32StringType[i] = '0';
+    }
+    resultDoubleToBinary32StringType[32] = '\0';
+
+    /** Check if doubleInput == 0 */
+    if(doubleInput == 0){
+        free(integerPartNormalizeForm);
+        free(fractionPartNormalizeForm);
+//        free(resultDoubleToBinary32StringType);
+        return  resultDoubleToBinary32StringType;
+    }
+
+    /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
+    if(doubleInput == POSITIVE_INFINITY_DOUBLE){
+        free(integerPartNormalizeForm);
+        free(fractionPartNormalizeForm);
+//        free(resultDoubleToBinary32StringType);
+        resultDoubleToBinary32StringType
+                = (string) "01111111100000000000000000000000";
+        return  resultDoubleToBinary32StringType;
+    }
+
+    /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
+    if(doubleInput == NEGATIVE_INFINITY_DOUBLE){
+        free(integerPartNormalizeForm);
+        free(fractionPartNormalizeForm);
+//        free(resultDoubleToBinary32StringType);
+        resultDoubleToBinary32StringType
+                = (string) "11111111100000000000000000000000";
+        return  resultDoubleToBinary32StringType;
+    }
+
+    /** Get size of integerPartNormalizeForm  */
+    integerPartDoubleInput = abs((int) floor(doubleInput));
+    sizeOfIntegerPartNormalizeForm = 0;
+
+    if (integerPartDoubleInput == 0) {
+        sizeOfIntegerPartNormalizeForm = 1;
+    }
+
+    if (integerPartDoubleInput != 0) {
+        while (integerPartDoubleInput != 0) {
+            sizeOfIntegerPartNormalizeForm++;
+            integerPartDoubleInput = integerPartDoubleInput >> 1;
+        }
+    }
+
+    /** Assign value to integerPartNormalizeForm */
+    integerPartDoubleInput = abs((int) floor(doubleInput));
+    index = sizeOfIntegerPartNormalizeForm -1;
+
+    while (integerPartDoubleInput != 0) {
+
+        if ( (integerPartDoubleInput & 1) == 1) {
+            integerPartNormalizeForm[index] = '1';
+        }
+
+        if ( (integerPartDoubleInput & 1) == 0) {
+            integerPartNormalizeForm[index] = '0';
+        }
+
+        index--;
+        integerPartDoubleInput = integerPartDoubleInput >> 1;
+    }
+
+    /** Assign value to fractionPartNormalizeForm */
+    fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
+    index = 0;
+
+    while (fractionPartDoubleInput != 0) {
+        fractionPartDoubleInput = fractionPartDoubleInput * 2;
+
+        int integerPart = (int) floor(fractionPartDoubleInput);
+
+        if (integerPart == 1) {
+            fractionPartNormalizeForm[index] = '1';
+        }
+
+        if (integerPart == 0) {
+            fractionPartNormalizeForm[index] = '0';
+        }
+
+        index++;
+        fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
+    }
+
+    /** Assign value to sizeOfFractionPartNormalizeForm */
+    sizeOfFractionPartNormalizeForm = index;
+
+    /** Assign value to doubleInputNormalizeForm */
+
+        /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
+        for(int i = 0; i < sizeOfIntegerPartNormalizeForm; i++) {
+            doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
+        }
+
+        /** Assign value to indexOfDotDoubleInputNormalizeForm */
+        indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
+
+        /** Assign '.' between integerPart and fractionPart */
+        doubleInputNormalizeForm [indexOfDotDoubleInputNormalizeForm] = '.';
+
+        /** Copy value from fractionPartNormalizeForm
+         * to doubleInputNormalizeForm
+         */
+        index = indexOfDotDoubleInputNormalizeForm +1;
+        for(int i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++) {
+            doubleInputNormalizeForm[index]
+                    = fractionPartNormalizeForm[i];
+        }
+
+    /** Assign value to sizeOfDoubleInputNormalizeForm */
+    sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
+                                    + sizeOfFractionPartNormalizeForm;
+
+    /** Assign value to indexFirstBit1DoubleInputNormalizeForm */
+    indexFirstBit1DoubleInputNormalizeForm = 1;
+    for (int i = 0; i <= sizeOfDoubleInputNormalizeForm; i++) {
+        if (doubleInputNormalizeForm[i] == '1') {
+            indexFirstBit1DoubleInputNormalizeForm = i;
+            break;
+        }
+    }
+
+    /** Assign value to powerExponentBase2 */
+    integerPartDoubleInput =  abs((int) floor(doubleInput));
+    if (integerPartDoubleInput != 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm -1;
+    }
+
+    if (integerPartDoubleInput == 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm;
+    }
+
+    /** Assign value to resultDoubleToBinary32StringType */
+
+        /** Assign value to resultDoubleToBinary32StringType[0] */
+        if (doubleInput >= 0) {
+            resultDoubleToBinary32StringType[0] = '0';
+        }
+
+        if (doubleInput < 0) {
+            resultDoubleToBinary32StringType[0] = '1';
+        }
+
+        /** Assign value to exponentDoubleInput */
+        exponentDoubleInput = powerExponentBase2 + exponentBiasBinary32;
+
+        /** Assign value to resultDoubleToBinary32StringType[8 -> 1] */
+        index = sizeOfExponentPartBinary32;
+
+        while (exponentDoubleInput != 0) {
+
+            if ( (exponentDoubleInput & 1) == 1) {
+                resultDoubleToBinary32StringType[index] = '1';
+            }
+
+            if ( (exponentDoubleInput & 1) == 0) {
+                resultDoubleToBinary32StringType[index] = '0';
+            }
+
+            index--;
+            exponentDoubleInput = exponentDoubleInput >> 1;
+        }
+
+        /** Assign value to indexBeginFractionPartResultDoubleToBinary32StringType */
+        if (powerExponentBase2 >= 0) {
+           indexBeginFractionPartResultDoubleToBinary32StringType
+                   = sizeOfExponentPartBinary32 + 1;
+        }
+
+        if (powerExponentBase2 < 0) {
+            indexBeginFractionPartResultDoubleToBinary32StringType
+                    = sizeOfExponentPartBinary32 + powerExponentBase2 +1;
+        }
+
+    /** Assign value to resultDoubleToBinary32StringType[8 -> 31] */
+
+    if (powerExponentBase2 >= 0) {
+        i = indexFirstBit1DoubleInputNormalizeForm + 1;
+
+    }
+
+    if (powerExponentBase2 < 0) {
+        i = indexOfDotDoubleInputNormalizeForm + 1;
+    }
+
+    index = indexBeginFractionPartResultDoubleToBinary32StringType;
+
+    for (i ; i < sizeOfDoubleInputNormalizeForm; i++) {
+
+        if (i == indexOfDotDoubleInputNormalizeForm) {
+            i++;
+        }
+
+        resultDoubleToBinary32StringType[index]
+                = doubleInputNormalizeForm[i];
+        index++;
+    }
+
+    /** Return resultDoubleToBinary32StringType */
+    return  resultDoubleToBinary32StringType;
+}
