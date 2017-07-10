@@ -63,8 +63,6 @@ else ()
 endif ()
 
 add_definitions(-D_GNU_SOURCE)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wimplicit-function-declaration")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wformat-extra-args")
 
 # CMake Modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})

@@ -1,0 +1,3 @@
+/home/loint/Project/native/example/Person/CMakeFiles/rebuild_cache.dir
+/home/loint/Project/native/example/Person/CMakeFiles/edit_cache.dir
+/home/loint/Project/native/example/Person/CMakeFiles/App.dir
