@@ -24,4 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Vector.hpp"
+#ifndef NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP
+
+#include "../../lang/Exception/Exception.hpp"
+
+namespace Java {
+    namespace Lang {
+        class CQLException : public Exception {
+        public:
+            CQLException();
+            CQLException(String message);
+            CQLException(String message, Throwable *cause);
+            CQLException(Throwable *cause);
+        };
+    }
+}
+
+#endif//NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP

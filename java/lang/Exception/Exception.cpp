@@ -24,4 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Vector.hpp"
+#include "Exception.hpp"
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+Exception::Exception() : Throwable::Throwable() {
+}
+
+Exception::Exception(String message) : Throwable::Throwable(message) {
+}
+
+Exception::Exception(String message, Throwable *cause) : Throwable::Throwable(message, cause) {
+}
+
+Exception::Exception(Throwable *cause) : Throwable::Throwable(cause) {
+}
