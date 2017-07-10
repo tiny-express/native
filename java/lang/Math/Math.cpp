@@ -32,7 +32,7 @@ using namespace Java::Lang;
 
 RandomNumberGeneratorHolder *RandomNumberGeneratorHolder::instance =0;
 
-long Math::negativeZeroDoubleBits = Double::doubleToRawLongBits(-0.0d);
+long Math::negativeZeroDoubleBits = Double::doubleToRawLongBits(-0.0);
 
 //long Math::negativeZeroFloatBits = Float::floatToRawIntBits(-0.0f);
 
