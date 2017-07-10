@@ -134,7 +134,7 @@ double math_nexttoward(double a, double b){
     return nexttoward(a,b);
 }
 
-double math_nexttowardf(float a, double b){
+float math_nexttowardf(float a, double b){
     return nexttowardf(a,b);
 }
 
@@ -142,7 +142,7 @@ double math_ldexp(double a, int exp){
     return ldexp(a, exp);
 }
 
-double math_ldexpf(float a, int exp){
+float math_ldexpf(float a, int exp){
     return ldexpf(a, exp);
 }
 

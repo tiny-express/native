@@ -159,6 +159,10 @@ namespace Java {
 
 			static double pow(double base, double exponent);
 
+            static double powerOfTwoD(int n);
+
+            static float powerOfTwoF(int n);
+
 			static double random();
 
 			static double rint(double a);
@@ -190,6 +194,8 @@ namespace Java {
 			static double tanh(double a);
 
 			static double toDegrees(double angleRadian);
+
+            static int toIntExact(long a);
 
 			static double toRadians(double angleDegree);
 

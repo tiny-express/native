@@ -353,8 +353,8 @@ boolean Double::isFinite(double valueDouble) {
 }
 
 boolean Double::isInfinite(double valueDouble) {
-    boolean condition1 = (valueDouble == POSITIVE_INFINITY_DOUBLE);
-    boolean condition2 = (valueDouble == NEGATIVE_INFINITY_DOUBLE);
+    boolean condition1 = (valueDouble == POSITIVE_INFINITY);
+    boolean condition2 = (valueDouble == NEGATIVE_INFINITY);
     return ( condition1 || condition2 ) ;
 }
 

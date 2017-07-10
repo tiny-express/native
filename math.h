@@ -57,9 +57,9 @@ double math_tanh(double a);
 double math_copysign(double a, double b);
 float math_copysignf(float a, float b);
 double math_nexttoward(double a, double b);
-double math_nexttowardf(float a, double b);
+float math_nexttowardf(float a, double b);
 double math_ldexp(double a, int exp);
-double math_ldexpf(float a, int exp);
+float math_ldexpf(float a, int exp);
 
 
 

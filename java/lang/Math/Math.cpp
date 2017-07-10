@@ -34,6 +34,7 @@ RandomNumberGeneratorHolder *RandomNumberGeneratorHolder::instance =0;
 
 long Math::negativeZeroDoubleBits = Double::doubleToRawLongBits(-0.0);
 
+//TODO need Float::floatToRawIntBits
 //long Math::negativeZeroFloatBits = Float::floatToRawIntBits(-0.0f);
 
 /**
@@ -81,6 +82,7 @@ double Math::abs(double a) {
  *
  * @param value
  * @return principal arc cosine of x, in the interval [0,pi] radians.
+ * If the argument is NaN or its absolute value is greater than 1, then the result is NaN.
  */
 double Math::acos(double value) {
     return math_acos(value);
@@ -91,6 +93,8 @@ double Math::acos(double value) {
  *
  * @param value
  * @return principal arc sine of x, in the interval [-pi/2,+pi/2]] radians.
+ * If the argument is NaN or its absolute value is greater than 1, then the result is NaN.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
  */
 double Math::asin(double a) {
     return math_asin(a);
@@ -152,18 +156,29 @@ int Math::addExact(int a, int b) {
  * Returns the cube root of a double value.
  *
  * @param a
- * @return double
+ * @return
+ *  If the argument is NaN, then the result is NaN.
+ *  If the argument is infinite, then the result is an
+ *  infinity with the same sign as the argument.
+ *  If the argument is zero, then the result is a zero
+ *  with the same sign as the argument.
  */
 double Math::cbrt(double a) {
     return math_cbrt(a);
 }
 
 /**
- * Returns the smallest (closest to negative infinity) double value that is greater than or equal
- * to the argument and is equal to a mathematical integer.
+ * Returns the smallest (closest to negative infinity) double value
+ * that is greater than or equal to the argument and is equal to a mathematical integer.
  *
  * @param a
  * @return double
+ * If the argument value is already equal to a mathematical integer,
+ * then the result is the same as the argument.
+ * If the argument is NaN or an infinity or positive zero or negative zero,
+ * then the result is the same as the argument.
+ * If the argument value is less than zero but greater than -1.0,
+ * then the result is negative zero.
  */
 double Math::ceil(double a) {
     return math_ceil(a);
@@ -178,7 +193,7 @@ double Math::ceil(double a) {
  */
 //TODO need sun.misc.FpUtils
 double Math::copySign(double magnitude, double sign) {
-    return 0;
+    return math_copysign(magnitude, sign);
 }
 
 /**
@@ -190,7 +205,7 @@ double Math::copySign(double magnitude, double sign) {
  */
 //TODO need sun.misc.FpUtils
 float Math::copySign(float magnitude, float sign) {
-    return 0;
+    return math_copysignf(magnitude, sign);
 }
 
 /**
@@ -198,6 +213,7 @@ float Math::copySign(float magnitude, float sign) {
  *
  * @param a
  * @return the cosine of the argument
+ * If the argument is NaN or an infinity, then the result is NaN.
  */
 double Math::cos(double a) {
     return math_cos(a);
@@ -208,13 +224,17 @@ double Math::cos(double a) {
  *
  * @param a
  * @return the hyperbolic cosine of a
+ *  If the argument is NaN, then the result is NaN.
+ *  If the argument is infinite, then the result is positive infinity.
+ *  If the argument is zero, then the result is 1.0.
  */
 double Math::cosh(double a) {
     return math_cosh(a);
 }
 
 /**
- * Returns the argument decremented by one, throwing an exception if the result overflows an long.
+ * Returns the argument decremented by one,
+ * throwing an exception if the result overflows an long.
  *
  * @param a
  * @return long
@@ -227,7 +247,8 @@ long Math::decrementExact(long a) {
 }
 
 /**
- * Returns the argument decremented by one, throwing an exception if the result overflows an long.
+ * Returns the argument decremented by one,
+ * throwing an exception if the result overflows an long.
  *
  * @param a
  * @return int
@@ -243,7 +264,10 @@ int Math::decrementExact(int a) {
  * Returns Euler's number e raised to the power of a double value
  *
  * @param a
- * @return the value e^a,
+ * @return the value (e^a),
+ * If the argument is NaN, the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is negative infinity, then the result is positive zero.
  */
 double Math::exp(double a) {
     return math_exp(a);
@@ -253,18 +277,26 @@ double Math::exp(double a) {
  * Returns Euler's number e raised to the power of a double value then subtract 1.
  *
  * @param a
- * @return the value (e^a)-1,
+ * @return the value (e^a)-1
+ * If the argument is NaN, the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is negative infinity, then the result is positive zero.
  */
 double Math::expm1(double a) {
     return math_expm1(a);
 }
 
 /**
- * Returns the largest (closest to positive infinity) double value that is less than or equal
+ * Returns the largest (closest to positive infinity) double value
+ * that is less than or equal
  * to the argument and is equal to a mathematical integer.
  *
  * @param a
  * @return double
+ * If the argument value is already equal to a mathematical integer,
+ * then the result is the same as the argument.
+ * If the argument is NaN or an infinity or positive zero or negative zero,
+ * then the result is the same as the argument.
  */
 double Math::floor(double a) {
 	return math_floor(a);
@@ -310,6 +342,9 @@ long Math::floorDiv(long a, long b) {
  * @param a
  * @param b
  * @return int
+ * If the signs of the arguments are the same, the results of floorMod
+ * and the % operator are the same.
+ * If the signs of the arguments are different, the results differ from the % operator.
  */
 int Math::floorMod(int a, int b) {
     return a - (floorDiv(a, b) * b);
@@ -321,6 +356,9 @@ int Math::floorMod(int a, int b) {
  * @param a
  * @param b
  * @return long
+ * If the signs of the arguments are the same, the results of floorMod
+ * and the % operator are the same.
+ * If the signs of the arguments are different, the results differ from the % operator.
  */
 long Math::floorMod(long a, long b) {
     return a - (floorDiv(a, b) * b);
@@ -331,10 +369,13 @@ long Math::floorMod(long a, long b) {
  *
  * @param a
  * @return int
+ * If the argument is NaN or infinite, then the result is Double::MAX_EXPONENT + 1.
+ * If the argument is zero or subnormal, then the result is Double::MIN_EXPONENT -1.
  */
 int Math::getExponent(double a) {
     //return ((Double::floatToRawIntBits(a) & Double::EXP_BIT_MASK)
     //        >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS;
+    return 0;
 }
 
 /**
@@ -342,10 +383,13 @@ int Math::getExponent(double a) {
  *
  * @param a
  * @return int
+ * If the argument is NaN or infinite, then the result is Float::MAX_EXPONENT + 1.
+ * If the argument is zero or subnormal, then the result is Float::MIN_EXPONENT -1.
  */
 int Math::getExponent(float a) {
     //return ((Float::floatToRawIntBits(a) & Float::EXP_BIT_MASK)
     //        >> (Float::SIGNIFICAND_WIDTH - 1)) - Float::EXP_BIAS;
+    return 0;
 }
 
 /**
@@ -353,7 +397,10 @@ int Math::getExponent(float a) {
  *
  * @param a
  * @param b
- * @return
+ * @return double
+ *
+ * If either argument is infinite, then the result is positive infinity.
+ * If either argument is NaN and neither argument is infinite, then the result is NaN.
  */
 double Math::hypot(double a, double b) {
     return math_hypot(a, b);
@@ -365,6 +412,10 @@ double Math::hypot(double a, double b) {
  * @param dividend
  * @param divisor
  * @return the remainder when dividend is divided by divisor.
+ * If either argument is NaN, or the first argument is infinite,
+ * or the second argument is positive zero or negative zero, then the result is NaN.
+ * If the first argument is finite and the second argument is infinite,
+ * then the result is the same as the first argument.
  */
 double Math::IEEEremainder(double dividend, double divisor) {
     return math_ieeeremainder(dividend,divisor);
@@ -413,6 +464,9 @@ void Math::initRGN() {
  *
  * @param a
  * @return double
+ * If the argument is NaN or less than zero, then the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is positive zero or negative zero, then the result is negative infinity.
  */
 double Math::log(double a) {
     return math_log(a);
@@ -423,6 +477,10 @@ double Math::log(double a) {
  *
  * @param a
  * @return double
+ * If the argument is NaN or less than zero, then the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is positive zero or negative zero, then the result is negative infinity.
+ * If the argument is equal to 10n for integer n, then the result is n.
  */
 double Math::log10(double a) {
     return math_log10(a);
@@ -433,6 +491,10 @@ double Math::log10(double a) {
  *
  * @param a
  * @return double
+ * If the argument is NaN or less than -1, then the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is negative one, then the result is negative infinity.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
  */
 double Math::log1p(double a) {
     return math_log1p(a);
@@ -561,6 +623,34 @@ long Math::multiplyExact(long a, long b) {
     return result;
 }
 
+/**
+ * Returns the negation of the argument,
+ * throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @return int
+ */
+int Math::negateExact(int a) {
+    if (a == Integer::MIN_VALUE) {
+        //TODO throw new ArithmeticException("integer overflow");
+    }
+    return -a;
+}
+
+/**
+ * Returns the negation of the argument,
+ * throwing an exception if the result overflows a long.
+ *
+ * @param a
+ * @return long
+ */
+long Math::negateExact(long a) {
+    if (a == Long::MIN_VALUE) {
+        //TODO throw new ArithmeticException("long overflow");
+    }
+    return -a;
+}
+
 
 /**
  * Returns the floating-point number adjacent to the first argument in the direction
@@ -569,9 +659,17 @@ long Math::multiplyExact(long a, long b) {
  * @param start
  * @param direction
  * @return double
+ * If either argument is a NaN, then NaN is returned.
+ * If both arguments are signed zeros, a value equivalent to direction is returned.
+ * If start is ±Double.MIN_VALUE and direction has a value such that the result should
+ *  have a smaller magnitude, then a zero with the same sign as start is returned.
+ * If start is infinite and direction has a value such that the result should have
+ *  a smaller magnitude, Double.MAX_VALUE with the same sign as start is returned.
+ * If start is equal to ± Double.MAX_VALUE and direction has a value such that the
+ *  result should have a larger magnitude, an infinity with same sign as start is returned.
  */
 double Math::nextAfter(double start, double direction) {
-    return 0;
+    return math_nexttoward(start, direction);
 }
 
 /**
@@ -581,20 +679,83 @@ double Math::nextAfter(double start, double direction) {
  * @param start
  * @param direction
  * @return float
+ * If either argument is a NaN, then NaN is returned.
+ * If both arguments are signed zeros, a value equivalent to direction is returned.
+ * If start is ±Float.MIN_VALUE and direction has a value such that the result should
+ *  have a smaller magnitude, then a zero with the same sign as start is returned.
+ * If start is infinite and direction has a value such that the result should have
+ *  a smaller magnitude, Float.MAX_VALUE with the same sign as start is returned.
+ * If start is equal to ± Float.MAX_VALUE and direction has a value such that the
+ *  result should have a larger magnitude, an infinity with same sign as start is returned.
  */
 //TODO need sun.misc.FpUtils
 float Math::nextAfter(float start, double direction) {
-    return 0;
+    return math_nexttowardf(start, direction);
 }
+
+/**
+ * Returns the floating-point value adjacent to f in the direction of negative infinity.
+ *
+ * @param a
+ * @return double
+ *  If the argument is NaN, the result is NaN.
+ *  If the argument is negative infinity, the result is negative infinity.
+ *  If the argument is zero, the result is -Double.MIN_VALUE
+ */
+//TODO need Double::longBitsToDouble, Double::doubleToRawLongBits
+double Math::nextDown(double a) {
+    if (Double::isNaN(a) || a == Double::NEGATIVE_INFINITY)
+        return a;
+    else {
+        if (a == 0.0)
+            return -Double::MIN_VALUE;
+  /*      else
+            return Double::longBitsToDouble(Double::doubleToRawLongBits(a)
+                                           + ((a > 0.0)?-1L:+1L));*/
+    }
+}
+
+/**
+ * Returns the floating-point value adjacent to f in the direction of negative infinity.
+ *
+ * @param a
+ * @return float
+ *  If the argument is NaN, the result is NaN.
+ *  If the argument is negative infinity, the result is negative infinity.
+ *  If the argument is zero, the result is -Double.MIN_VALUE
+ */
+//TODO need Float.intBitsToFloat, Float.floatToRawIntBits
+float Math::nextDown(float a) {
+    if (Float::isNaN(a) || a == Float::NEGATIVE_INFINITY)
+        return a;
+    else {
+        if (a == 0.0)
+            return -Float::MIN_VALUE;
+        /*else
+               return Float.intBitsToFloat(Float.floatToRawIntBits(f) +
+                                            ((f > 0.0f)?-1:+1));*/
+    }
+}
+
 
 /**
  * Returns the floating-point value adjacent to f in the direction of positive infinity.
  *
  * @param a
  * @return float
+ * If the argument is NaN, the result is NaN.
+ * If the argument is positive infinity, the result is positive infinity.
+ * If the argument is zero, the result is Float.MIN_VALUE
  */
+ //TODO need Float::intBitsToFloat, Float::floatToRawIntBits
 float Math::nextUp(float a) {
-    return 0;
+    if( Float::isNaN(a) || a == Float::POSITIVE_INFINITY)
+        return a;
+ /*   else {
+        a += 0.0f;
+        return Float::intBitsToFloat(Float::floatToRawIntBits(a) +
+                                            ((a >= 0.0)?+1:-1));
+    }*/
 }
 
 /**
@@ -602,9 +763,19 @@ float Math::nextUp(float a) {
  *
  * @param a
  * @return double
+ * If the argument is NaN, the result is NaN.
+ * If the argument is positive infinity, the result is positive infinity.
+ * If the argument is zero, the result is Double.MIN_VALUE
  */
+//TODO need Double::longBitsToDouble, Double::doubleToRawLongBits
 double Math::nextUp(double a) {
-    return 0;
+    if( Double::isNaN(a) || a == Double::POSITIVE_INFINITY)
+        return a;
+       else {
+           a += 0.0f;
+           return Double::longBitsToDouble(Double::doubleToRawLongBits(a) +
+                                               ((a >= 0.0)?+1:-1));
+       }
 }
 
 /**
@@ -619,7 +790,40 @@ double Math::pow(double base, double exponent) {
 }
 
 /**
- * Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0
+ * Returns a floating-point power of two in the normal range.
+ *
+ * @param n
+ * @return double
+ */
+//TODO need Double::longBitsToDouble
+double Math::powerOfTwoD(int n) {
+    if(n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT);
+        //TODO throw Assertion error
+    else
+        return Double::longBitsToDouble((((long)n + (long)Double::EXP_BIAS) <<
+               (Double::SIGNIFICAND_WIDTH-1)) & Double::EXP_BIT_MASK);
+}
+
+/**
+ * Returns a floating-point power of two in the normal range.
+ *
+ * @param n
+ * @return float
+ */
+//TODO need Float::intBitsToFloat
+float Math::powerOfTwoF(int n) {
+    if(n >= Float::MIN_EXPONENT && n <= Float::MAX_EXPONENT)
+        //TODO throw Assertion error
+        return 0;
+    else
+   /* return Float::intBitsToFloat(((n + Float::EXP_BIAS) <<
+           (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
+        return 1;
+}
+
+/**
+ * Returns a double value with a positive sign, greater than or equal to 0.0
+ * and less than 1.0
  *
  * @return double
  */
@@ -627,6 +831,7 @@ double Math::pow(double base, double exponent) {
 double Math::random() {
     //if (randomNumberGenerator == null) initRNG();
     //return randomNumberGenerator.nextDouble();
+    return 0;
 }
 
 /**
@@ -634,7 +839,11 @@ double Math::random() {
  * and is equal to a mathematical integer
  *
  * @param a
- * @return
+ * @return double
+ * If the argument value is already equal to a mathematical integer,
+ * then the result is the same as the argument.
+ * If the argument is NaN or an infinity or positive zero or negative zero,
+ * then the result is the same as the argument.
  */
 double Math::rint(double a) {
     return math_rint(a);
@@ -644,7 +853,12 @@ double Math::rint(double a) {
  * Returns the closest int to the argument.
  *
  * @param a
- * @return
+ * @return int
+ * If the argument is NaN, the result is 0.
+ * If the argument is negative infinity or any value less than or equal
+ * to the value of Integer.MIN_VALUE, the result is equal to the value of Integer.MIN_VALUE.
+ * If the argument is positive infinity or any value greater than or equal
+ * to the value of Integer.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
  */
 int Math::round(float a) {
     return (int) math_round(a);
@@ -654,7 +868,12 @@ int Math::round(float a) {
  * Returns the closest long to the argument.
  *
  * @param a
- * @return
+ * @return long
+ * If the argument is NaN, the result is 0.
+ * If the argument is negative infinity or any value less than or equal
+ * to the value of Long.MIN_VALUE, the result is equal to the value of Integer.MIN_VALUE.
+ * If the argument is positive infinity or any value greater than or equal
+ * to the value of Long.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
  */
 long Math::round(double a) {
 	return (long) math_round(a);
@@ -666,9 +885,12 @@ long Math::round(double a) {
  * @param a
  * @param scaleFactor
  * @return float
+ * If the first argument is NaN, NaN is returned.
+ * If the first argument is infinite, then an infinity of the same sign is returned.
+ * If the first argument is zero, then a zero of the same sign is returned.
  */
 float Math::scalb(float a, int scaleFactor) {
-    return 0;
+    return math_ldexpf(a, scaleFactor);
 }
 
 /**
@@ -677,9 +899,12 @@ float Math::scalb(float a, int scaleFactor) {
  * @param a
  * @param scaleFactor
  * @return double
+ * If the first argument is NaN, NaN is returned.
+ * If the first argument is infinite, then an infinity of the same sign is returned.
+ * If the first argument is zero, then a zero of the same sign is returned.
  */
 double Math::scalb(double a, int scaleFactor) {
-    return 0;
+    return math_ldexp(a, scaleFactor);
 }
 
 /**
@@ -688,10 +913,13 @@ double Math::scalb(double a, int scaleFactor) {
  * @param a
  * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
  * -1.0 if the argument is less than zero.
+ * If the argument is NaN, then the result is NaN.
+ * If the argument is positive zero or negative zero, then the result
+ * is the same as the argument.
  */
 //TODO need sun.misc.FpUtils
 double Math::signum(double a) {
-    return 0;
+    return (a == 0.0 || Double::isNaN(a)) ? a: copySign(1.0, a);
 }
 
 /**
@@ -700,9 +928,12 @@ double Math::signum(double a) {
  * @param a
  * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
  * -1.0 if the argument is less than zero.
+ * If the argument is NaN, then the result is NaN.
+ * If the argument is positive zero or negative zero, then the result
+ * is the same as the argument.
  */
 float Math::signum(float a) {
-    return 0;
+    return (a == 0.0f || Float::isNaN(a)) ? a : copySign(1.0f, a);
 }
 
 /**
@@ -710,6 +941,8 @@ float Math::signum(float a) {
  *
  * @param a
  * @return the sine of the a
+ * If the argument is NaN or an infinity, then the result is NaN.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
  */
 double Math::sin(double a) {
     return math_sin(a);
@@ -720,6 +953,9 @@ double Math::sin(double a) {
  *
  * @param a
  * @return the hyperbolic sine of a
+ * If the argument is NaN, then the result is NaN.
+ * If the argument is infinite, then the result is an infinity with the same sign as the argument.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
  */
 double Math::sinh(double a) {
     return math_sinh(a);
@@ -730,9 +966,47 @@ double Math::sinh(double a) {
  *
  * @param a
  * @return double
+ * If the argument is NaN or less than zero, then the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is positive zero or negative zero, then the result is
+ * the same as the argument.
  */
 double Math::sqrt(double a) {
 	return math_sqrt(a);
+}
+
+/**
+ * Returns the difference of the arguments,
+ * throwing an exception if the result overflows an long.
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+long Math::subtractExact(long a, long b) {
+    long result = a - b;
+    if (((a ^ b) & (a ^ result)) < 0) {
+        //TODO throw new ArithmeticException("long overflow");
+        return 0;
+    }
+    return result;
+}
+
+/**
+ * Returns the difference of the arguments,
+ * throwing an exception if the result overflows an int.
+ *
+ * @param a
+ * @param b
+ * @return int
+ */
+int Math::subtractExact(int a, int b) {
+    int result = a - b;
+    if (((a ^ b) & (a ^ result)) < 0) {
+        //TODO throw new ArithmeticException("integer overflow");
+        return 0;
+    }
+    return result;
 }
 
 /**
@@ -740,6 +1014,8 @@ double Math::sqrt(double a) {
  *
  * @param a
  * @return the tangent of the a
+ * If the argument is NaN or an infinity, then the result is NaN.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
  */
 double Math::tan(double a) {
     return math_tan(a);
@@ -750,23 +1026,48 @@ double Math::tan(double a) {
  *
  * @param a
  * @return the hyperbolic tangent of a
+ * If the argument is NaN, then the result is NaN.
+ * If the argument is zero, then the result is a zero with the same sign as the argument.
+ * If the argument is positive infinity, then the result is +1.0.
+ * If the argument is negative infinity, then the result is -1.0.
  */
 double Math::tanh(double a) {
     return math_tanh(a);
 }
 
 /**
- * Converts an angle measured in radians to an approximately equivalent angle measured in degrees.
+ * Converts an angle measured in radians to an approximately equivalent angle
+ * measured in degrees.
  *
  * @param angleRadian
  * @return double
+ * If the argument is NaN, the result is NaN.
+ * If the argument is positive infinity, then the result is positive infinity.
+ * If the argument is negative infinity, then the result is positive zero.
  */
 double Math::toDegrees(double angleRadian) {
     return angleRadian * 180.0 / PI;
 }
 
 /**
+ * Returns the value of the long argument;
+ * throwing an exception if the value overflows an int.
+ *
+ * @param a
+ * @return
+ */
+int Math::toIntExact(long a) {
+    if ((int)a != a) {
+        //TODO throw new ArithmeticException("integer overflow")
+        return 0;
+    }
+    return (int) a;
+}
+
+/**
  * Converts an angle measured in degrees to an approximately equivalent angle measured in radians.
+ * The conversion from radians to degrees is generally inexact;
+ * users should not expect cos(toRadians(90.0)) to exactly equal 0.0.
  *
  * @param angleDegree
  * @return
@@ -779,21 +1080,76 @@ double Math::toRadians(double angleDegree) {
  * Returns the size of an ulp of the argument.
  *
  * @param a
- * @return float
+ * @return
+ *  If the argument is NaN, then the result is NaN.
+ *  If the argument is positive or negative infinity, then the result is positive infinity.
+ *  If the argument is positive or negative zero, then the result is Float::MIN_VALUE.
+ *  If the argument is ±Float::MAX_VALUE, then the result is equal to 2^104.
  */
 float Math::ulp(float a) {
-    return 0;
+    int exp = getExponent(a);
+    switch(exp) {
+        case Float::MAX_EXPONENT+1:        // NaN or infinity
+            return Math::abs(a);
+        case Float::MIN_EXPONENT-1:        // zero or subnormal
+            return Float::MIN_VALUE;
+        default:
+            if(exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT)
+                //TODO Throw Assertion error
+                return 0;
+            else {
+                exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
+                if (exp >= Float::MIN_EXPONENT) {
+                    return powerOfTwoF(exp);
+                }
+                /*else {
+                    return Float::intBitsToFloat(1 <<
+                    (exp - (Float::MIN_EXPONENT - (Float::SIGNIFICAND_WIDTH-1)) ));
+                }*/
+            }
+    }
 }
 
 /**
  * Returns the size of an ulp of the argument.
  *
  * @param a
- * @return double
+ * @return
+ *  If the argument is NaN, then the result is NaN.
+ *  If the argument is positive or negative infinity, then the result is positive infinity.
+ *  If the argument is positive or negative zero, then the result is Double.MIN_VALUE.
+ *  If the argument is ±Double.MAX_VALUE, then the result is equal to 2^971.
  */
 double Math::ulp(double a) {
-    return 0;
+    int exp = getExponent(a);
+    switch(exp) {
+        case Double::MAX_EXPONENT+1:        // NaN or infinity
+            return Math::abs(a);
+        case Double::MIN_EXPONENT-1:        // zero or subnormal
+            return Double::MIN_VALUE;
+        default:
+            if(exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT)
+                return 0;
+            else {
+                exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
+                if (exp >= Double::MIN_EXPONENT)
+                    return powerOfTwoD(exp);
+                else {
+                    return Double::longBitsToDouble(1 <<
+                    (exp - (Double::MIN_EXPONENT - (Double::SIGNIFICAND_WIDTH-1)) ));
+                }
+            }
+    }
 }
+
+
+
+
+
+
+
+
+
 
 
 

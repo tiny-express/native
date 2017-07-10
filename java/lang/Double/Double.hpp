@@ -87,12 +87,12 @@ namespace Java {
             /**
              * A constant holding the positive infinity of type
              */
-            static constexpr double POSITIVE_INFINITY_DOUBLE = INFINITY; // inf
+            static constexpr double POSITIVE_INFINITY = INFINITY; // inf
 
             /**
              * A constant holding the negative infinity of type
              */
-            static constexpr double NEGATIVE_INFINITY_DOUBLE = -INFINITY; // -inf
+            static constexpr double NEGATIVE_INFINITY = -INFINITY; // -inf
 
             /**
              * A constant holding a Not-a-Number (NaN) value of type
@@ -112,7 +112,7 @@ namespace Java {
             /**
              * A constant holding the smallest positive nonzero value of type
              */
-            static constexpr double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
+            static constexpr double MIN_VALUE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
 
         public:
             /**
