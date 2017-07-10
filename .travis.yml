@@ -11,10 +11,9 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
 - sudo pip install -r misc/requirements.txt
 - sudo python misc/server.py &
-- chmod +x checkstyle.sh
+- chmod +x misc/checkstyle.sh
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
-- make checkstyle
 - make native_test -j8
 - ./misc/memory_check
 after_script:
