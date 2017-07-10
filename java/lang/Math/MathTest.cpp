@@ -30,6 +30,7 @@ extern "C" {
 
 #include "Math.hpp"
 #include "../Integer/Integer.hpp"
+#include "../Long/Long.hpp"
 
 using namespace Java::Lang;
 
@@ -47,28 +48,185 @@ TEST (JavaLang, MathAbs) {
 	ASSERT_EQUAL(1233453453, Math::abs(long_value));
 }
 
-TEST (JavaLang, MathAcosAndCos){
-    // Given a variable radian which is equal to PI
-    double radian = Math::PI / 2;
-    double cos = Math::cos(radian);
-    ASSERT_EQUAL(radian, Math::acos(cos));
+TEST (JavaLang, MathAddExactInt){
+    //Given 2 int
+    int a = 1;
+    int b = 2;
+    int expectResult = 3;
+    int actualResult = Math::addExact(a, b);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::addExact(Integer::MAX_VALUE, b);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
 }
 
-TEST (JavaLang, MathASinAndSin){
-    // Given a variable radian which is equal to PI
-    double radian = Math::PI / 2;
-    double sin = Math::sin(radian);
-    ASSERT_EQUAL(radian, Math::asin(sin));
+TEST (JavaLang, MathAddExactLong){
+    //Given 2 long
+    long a = 1;
+    long b = 2;
+    long expectResult = 3;
+    long actualResult = Math::addExact(a, b);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    long expectOverFlowResult = 0;
+    long actualOverFlowResult = Math::addExact(Long::MAX_VALUE, b);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
 }
 
-TEST (JavaLang, MathATanAndTan){
-    // Given a variable radian which is equal to PI
-    double radian = Math::PI / 2;
-    double tan = Math::tan(radian);
-    double  corX = Math::PI / 3;
-    double  corY =  0;
-    ASSERT_EQUAL(radian, Math::atan(tan));
-    ASSERT_EQUAL(radian, Math::atan2(corX, corY));
+TEST (JavaLang, MathCos){
+    // Given an angle equal to PI/ 2
+    double angle = Math::PI / 2;
+    double actualResult = Math::cos(angle);
+    double expectResult = 0;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given an angle equal to NAN
+    double nanAngle = NAN;
+    double actualNaNResult = Math::cos(nanAngle);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given an angle equal to INFINITE
+    double infAngle = INFINITY;
+    double actualINFResult = Math::cos(infAngle);
+    double expectINFResult = NAN;
+    ASSERT_EQUAL(expectINFResult, actualINFResult);
+}
+
+TEST (JavaLang, MathAcos){
+    // Given a cosine equal to 0
+    double cos = 0;
+    double actualResult = Math::acos(cos);
+    double expectResult = Math::PI/2;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given a cosine equal to NAN
+    double nanCos = NAN;
+    double actualNaNResult = Math::acos(nanCos);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a cosine > 1
+    double biggerThanOneCos = 2;
+    double actualBiggerThanOneResult = Math::acos(biggerThanOneCos);
+    double expectBiggerThanOneResult = NAN;
+    ASSERT_EQUAL(expectBiggerThanOneResult, actualBiggerThanOneResult);
+}
+
+TEST (JavaLang, MathSin){
+    // Given an angle equal to PI/ 2
+    double angle = Math::PI / 2;
+    double actualResult = Math::sin(angle);
+    double expectResult = 1;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given an angle equal to NAN
+    double nanAngle = NAN;
+    double actualNaNResult = Math::sin(nanAngle);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given an angle equal to -0.0
+    double negativeZeroAngle = -0.0;
+    double actualnegativeZeroAngleResult = Math::sin(negativeZeroAngle);
+    double expectnegativeZeroAngleResult = -0.0;
+    ASSERT_EQUAL(expectnegativeZeroAngleResult, actualnegativeZeroAngleResult);
+
+    // Given an angle equal to 0.0
+    double positiveZeroAngle = 0.0;
+    double actualpositiveZeroAngleResult = Math::sin(negativeZeroAngle);
+    double expectpositiveZeroAngleResult = 0.0;
+    ASSERT_EQUAL(expectpositiveZeroAngleResult, actualpositiveZeroAngleResult);
+}
+
+TEST (JavaLang, MathAsin){
+
+    // Given a sine equal to 1
+    double sin = 1;
+    double actualResult = Math::asin(sin);
+    double expectResult = Math::PI/2;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given a sine equal to NAN
+    double nanSin = NAN;
+    double actualNaNResult = Math::asin(nanSin);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a cosine > 1
+    double biggerThanOneSin = 2;
+    double actualBiggerThanOneResult = Math::asin(biggerThanOneSin);
+    double expectBiggerThanOneResult = NAN;
+    ASSERT_EQUAL(expectBiggerThanOneResult, actualBiggerThanOneResult);
+
+    // Given a sine value equal to -0.0
+    double negativeZeroSin = -0.0;
+    double actualnegativeZeroAngleResult = Math::asin(negativeZeroSin);
+    double expectnegativeZeroAngleResult = -0.0;
+    ASSERT_EQUAL(expectnegativeZeroAngleResult, actualnegativeZeroAngleResult);
+
+    // Given a sine value equal to 0.0
+    double positiveZeroSin = 0.0;
+    double actualpositiveZeroAngleResult = Math::sin(negativeZeroSin);
+    double expectpositiveZeroAngleResult = 0.0;
+    ASSERT_EQUAL(expectpositiveZeroAngleResult, actualpositiveZeroAngleResult);
+}
+
+TEST (JavaLang, MathTan){
+    // Given an angle equal to PI/ 4
+    double angle = Math::PI / 4;
+    double actualResult = Math::tan(angle);
+    double expectResult = 1;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given an angle equal to NAN
+    double nanAngle = NAN;
+    double actualNaNResult = Math::tan(nanAngle);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given an angle equal to -0.0
+    double negativeZeroAngle = -0.0;
+    double actualnegativeZeroAngleResult = Math::tan(negativeZeroAngle);
+    double expectnegativeZeroAngleResult = -0.0;
+    ASSERT_EQUAL(expectnegativeZeroAngleResult, actualnegativeZeroAngleResult);
+
+    // Given an angle equal to 0.0
+    double positiveZeroAngle = 0.0;
+    double actualpositiveZeroAngleResult = Math::tan(negativeZeroAngle);
+    double expectpositiveZeroAngleResult = 0.0;
+    ASSERT_EQUAL(expectpositiveZeroAngleResult, actualpositiveZeroAngleResult);
+}
+
+TEST (JavaLang, MathAtan){
+    // Given a tangen equal to 1
+    double tan = 1;
+    double actualResult = Math::atan(tan);
+    double expectResult = Math::PI/4;
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given a sine equal to NAN
+    double nanTan = NAN;
+    double actualNaNResult = Math::atan(nanTan);
+    double expectNaNResult = NAN;
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a sine value equal to -0.0
+    double negativeZeroSin = -0.0;
+    double actualnegativeZeroAngleResult = Math::atan(negativeZeroSin);
+    double expectnegativeZeroAngleResult = -0.0;
+    ASSERT_EQUAL(expectnegativeZeroAngleResult, actualnegativeZeroAngleResult);
+
+    // Given a sine value equal to 0.0
+    double positiveZeroSin = 0.0;
+    double actualpositiveZeroAngleResult = Math::atan(negativeZeroSin);
+    double expectpositiveZeroAngleResult = 0.0;
+    ASSERT_EQUAL(expectpositiveZeroAngleResult, actualpositiveZeroAngleResult);
+}
+
+TEST (JavaLang, MathAtan2){
+
 }
 
 TEST (JavaLang, MathCbrt){
@@ -81,6 +239,7 @@ TEST (JavaLang, MathSqrt){
     // Given a variable equal to 3^2
     double square = 9;
     ASSERT_EQUAL(3, Math::sqrt(9));
+    //
 }
 
 TEST (JavaLang, MathCeil){

@@ -132,7 +132,7 @@ long Math::addExact(long a, long b) {
     long result = a + b;
     if (((a ^ result) & (b ^ result)) < 0) {
         //TODO throw new ArithmeticException("long overflow");
-
+        return 0;
     }
     return result;
 }
@@ -148,6 +148,7 @@ int Math::addExact(int a, int b) {
     int result = a + b;
     if (((a ^ result) & (b ^ result)) < 0) {
         //TODO throw new ArithmeticException("integer overflow");
+        return 0;
     }
     return result;
 }
