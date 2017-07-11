@@ -228,97 +228,126 @@ Double Double::operator/=(const Double &target) const {
     return (Double) (this->original / target.original);
 }
 
-int Double::compare(double double1, double double2) {
-    if (isNaN(double1) || isInfinite(double1))
-        return -9999;
+// TODO Wait for build
+//int Double::compare(double double1, double double2) {
+//    if (isNaN(double1) || isInfinite(double1))
+//        return -9999;
+//
+//    if (isNaN(double2) || isInfinite(double2))
+//        return -9999;
+//
+//    if (double1 < double2)
+//        // Neither value is NaN, thisValue is smaller
+//        return -1;
+//
+//    if (double1 > double2)
+//        // Neither value is NaN, thisValue is larger
+//        return 1;
+//
+//    // Cannot use doubleToRawLongBits because of possibility of NaNs.
+//    long thisBits = Double::doubleToLongBits(double1);
+//    long anotherBits = Double::doubleToLongBits(double2);
+//
+//    if (thisBits == anotherBits) {
+//            // Values are equal
+//            return 0;
+//
+//    } else if (thisBits < anotherBits) {
+//            // (-0.0, 0.0) or (!NaN, NaN)
+//            return -1;
+//
+//    } else {
+//            // (0.0, -0.0) or (NaN, !NaN)
+//            return 1;
+//    }
+//}
 
-    if (isNaN(double2) || isInfinite(double2))
-        return -9999;
+// TODO Wait for build
+//int Double::compareTo(Double anotherDouble) {
+//    return Double::compare(this->original, anotherDouble.original);
+//}
 
-    if (double1 < double2)
-        // Neither value is NaN, thisValue is smaller
-        return -1;
+// TODO Wait for build
+//long Double::doubleToLongBits(double valueDouble) {
+//    if (isNaN(valueDouble) || isInfinite(valueDouble))
+//        return -9999;
+//    long doubleToLongBitsResult = doubleToRawLongBits(valueDouble);
+//
+//    // Check for NaN based on values of bit fields, maximum
+//    // exponent and nonzero significand.
+//
+//    long andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK
+//            = doubleToLongBitsResult & EXP_BIT_MASK;
+//
+//    long andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK
+//            = doubleToLongBitsResult & SIGNIF_BIT_MASK;
+//
+//    boolean isEqualEXP_BIT_MASK
+//            = (andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK == EXP_BIT_MASK);
+//
+//    boolean isNotEqual0L = (andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK != 0L);
+//
+//    if (isEqualEXP_BIT_MASK && isNotEqual0L )
+//        doubleToLongBitsResult = 0x7ff8000000000000L;
+//
+//    return doubleToLongBitsResult;
+//}
 
-    if (double1 > double2)
-        // Neither value is NaN, thisValue is larger
-        return 1;
+// TODO Wait for build
+//unsigned_long_long Double::binary64ToLong (string binary64Input) {
+//    unsigned long long int resultBinary64ToLong;
+//    int tempValue ;
+//    int exponent;
+//
+//    exponent = 63;
+//    tempValue =0;
+//    resultBinary64ToLong = 0;
+//
+//    for (int i=1; i<=63; i++) {
+//        if (binary64Input [0] == '1') {
+//            tempValue = 1;
+//        }
+//
+//        if (binary64Input [0] == '0') {
+//            tempValue = 0;
+//        }
+//        resultBinary64ToLong = resultBinary64ToLong + tempValue * (long) pow(2,exponent);
+//        exponent --;
+//    }
+//
+//    return resultBinary64ToLong;
+//}
 
-    // Cannot use doubleToRawLongBits because of possibility of NaNs.
-    long thisBits = Double::doubleToLongBits(double1);
-    long anotherBits = Double::doubleToLongBits(double2);
+// TODO Wait for build
+//unsigned_long_long Double::doubleToRawLongBits(double valueDouble) {
+//    string resultDoubleToBinary64StringType = doubleToBinary64StringType(valueDouble);
+//    unsigned_long_long resultDoubleToRawLongBits = binary64ToLong(resultDoubleToBinary64StringType);
+//    return resultDoubleToRawLongBits;
+//}
 
-    if (thisBits == anotherBits) {
-            // Values are equal
-            return 0;
+// TODO Wait for build
+//boolean Double::equals(const Double &object) {
+//    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
+//        return -1;
+//    boolean isDouble = instanceof<Double>(object);
+//    Double* castObjectToDouble = (Double*)&object;
+//    long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
+//    long doubleToLongBitsThis = doubleToLongBits(this->original);
+//    boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
+//    return (isDouble && isEqual);
+//}
 
-    } else if (thisBits < anotherBits) {
-            // (-0.0, 0.0) or (!NaN, NaN)
-            return -1;
+// TODO Wait for build
+//unsigned_long_long Double::hashCode() {
+//    return Double::hashCode(this->original);
+//}
 
-    } else {
-            // (0.0, -0.0) or (NaN, !NaN)
-            return 1;
-    }
-}
-
-int Double::compareTo(Double anotherDouble) {
-    return Double::compare(this->original, anotherDouble.original);
-}
-
-long Double::doubleToLongBits(double valueDouble) {
-    if (isNaN(valueDouble) || isInfinite(valueDouble))
-        return -9999;
-    long doubleToLongBitsResult = doubleToRawLongBits(valueDouble);
-
-    // Check for NaN based on values of bit fields, maximum
-    // exponent and nonzero significand.
-
-    long andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK
-            = doubleToLongBitsResult & EXP_BIT_MASK;
-
-    long andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK
-            = doubleToLongBitsResult & SIGNIF_BIT_MASK;
-
-    boolean isEqualEXP_BIT_MASK
-            = (andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK == EXP_BIT_MASK);
-
-    boolean isNotEqual0L = (andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK != 0L);
-
-    if (isEqualEXP_BIT_MASK && isNotEqual0L )
-        doubleToLongBitsResult = 0x7ff8000000000000L;
-
-    return doubleToLongBitsResult;
-}
-
-// TODO waiting for implement
-long Double::doubleToRawLongBits(double valueDouble) {
-    if (isNaN(valueDouble) || isInfinite(valueDouble))
-        return -9999;
-}
-
-// TODO Waiting for instanceof , doubleToRawLongBits
-boolean Double::equals(const Double &object) {
-    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
-        return -1;
-    boolean isDouble = instanceof<Double>(object);
-    Double* castObjectToDouble = (Double*)&object;
-    long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
-    long doubleToLongBitsThis = doubleToLongBits(this->original);
-    boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
-    return (isDouble && isEqual);
-}
-
-// TODO waiting for doubleToRawLongBits
-long Double::hashCode() {
-    return Double::hashCode(this->original);
-}
-
-// TODO waiting for doubleToRawLongBits
-long Double::hashCode(double valuehashCode) {
-    long bits = doubleToLongBits(valuehashCode);
-    unsigned long rightShiftBits = (unsigned long)bits >> 32;
-    return  (bits ^ rightShiftBits);
-}
+// TODO Wait for build
+//unsigned_long_long Double::hashCode(double valuehashCode) {
+//    unsigned_long_long bits = doubleToLongBits(valuehashCode);
+//    unsigned_long_long rightShiftBits = bits >> 32;
+//    return  (bits ^ rightShiftBits);
+//}
 
 boolean Double::isFinite(double valueDouble) {
     return (Math::abs(valueDouble) <= MAX_VALUE_DOUBLE);
@@ -342,16 +371,16 @@ boolean Double::isNaN() {
     return isNaN(this->original);
 }
 
-// TODO waiting for implement
-double Double::longBitsToDouble(long bits){
-
-}
+// TODO Wait for build
+//double Double::longBitsToDouble(long bits){
+//
+//}
 
 double Double::min(double doubleA, double doubleB) {
     return Math::min(doubleA, doubleB);
 }
 
-// TODO waiting for implement
+// TODO Wait for build
 //String Double::toHexString(double doubleValue) {
 //    /*
 //     * Modeled after the "a" conversion specifier in C99, section

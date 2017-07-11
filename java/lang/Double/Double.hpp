@@ -29,6 +29,14 @@
 
 #include "../Number/Number.hpp"
 
+#ifdef WIN32
+    #define unsigned_long_long unsigned __int64
+    #define long_long __int64
+#else // gcc. Might not work on other compilers!
+    #define unsigned_long_long unsigned long long
+    #define long_long long long
+#endif
+
 /**
  * Bit mask to isolate the exponent field of a
  * double.
@@ -526,7 +534,7 @@ namespace Java {
              * @return the bits that represent the floating-point number.
              * @since 1.3
              */
-            static long doubleToRawLongBits(double value);
+            static unsigned long long int doubleToRawLongBits(double value);
 
             /**
              * Compares this object against the specified object.
@@ -543,7 +551,7 @@ namespace Java {
              *
              * @return  a {@code hash code} value for this object.
              */
-            long hashCode();
+            unsigned long long int hashCode();
 
             /**
              * Returns a hash code for a {@code double} value; compatible with
@@ -552,7 +560,7 @@ namespace Java {
              * @param value the value to hash
              * @return a hash code value for a {@code double} value.
              */
-            static long hashCode(double value);
+            static unsigned long long int hashCode(double value);
 
             /**
              * Returns {@code true} if the argument is a finite floating-point
@@ -714,6 +722,8 @@ namespace Java {
             * @return string binary 64 bit of input
             */
             static string doubleToBinary64StringType(double doubleInput );
+
+            static unsigned long long int binary64ToLong (string banary64Input);
 		};
 	}
 }
