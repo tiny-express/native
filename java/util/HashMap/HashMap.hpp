@@ -97,7 +97,6 @@ namespace Java {
 				for (auto const &element: this->original) {
 					result.put(element.first, element.second);
 				}
-				
 				return result;
 			}
 			
@@ -229,7 +228,7 @@ namespace Java {
 			 *  false: otherwise
 			 */
 			boolean isEmpty() const {
-				return ( this->original.size() == 0 );
+				return this->original.size() == 0;
 			}
 			
 			/**
@@ -292,10 +291,9 @@ namespace Java {
 				auto const it = this->original.find(key);
 				
 				if (it == this->original.end()) {
-					//(( Nullable * ) & result )->setNullable(true);
+					return result;
 				} else {
 					result = it->second;
-					//(( Nullable * ) & result )->setNullable(false);
 				}
 				
 				this->original[ key ] = value;
@@ -314,13 +312,10 @@ namespace Java {
 				auto const it = this->original.find(key);
 				
 				if (it == this->original.end()) {
-					//(( Nullable * ) & result )->setNullable(true);
 					return result;
 				}
 				
 				result = it->second;
-				//(( Nullable * ) & result )->setNullable(false);
-				
 				this->original.erase(key);
 				return result;
 			}
@@ -336,11 +331,9 @@ namespace Java {
 			 */
 			boolean remove(const K &key, const V &value) {
 				auto const it = this->original.find(key);
-				
 				if (it == this->original.end() || it->second != value) {
 					return false;
 				}
-				
 				this->original.erase(key);
 				return true;
 			}
@@ -358,17 +351,11 @@ namespace Java {
 			V replace(const K &key, const V &value) {
 				V result;
 				auto const it = this->original.find(key);
-				
 				if (it == this->original.end()) {
-					//(( Nullable * ) & result )->setNullable(true);
 					return result;
 				}
-				
 				result = it->second;
-				//(( Nullable * ) & result )->setNullable(false);
-				
 				this->original[ key ] = value;
-				
 				return result;
 			}
 			
@@ -385,11 +372,9 @@ namespace Java {
 			boolean replace(const K &key, const V &oldValue, const V &newValue) {
 				V result;
 				auto const it = this->original.find(key);
-				
 				if (it == this->original.end() || it->second != oldValue) {
 					return false;
 				}
-				
 				this->original[ key ] = newValue;
 				return true;
 			}
@@ -446,15 +431,12 @@ namespace Java {
 					sizeCounter--;
 					
 					if (instanceof<Object>(it->first) && instanceof<Object>(it->second)) {
-						
 						string key = ((Object *) &it->first )->toString();
 						string value = ((Object *) &it->second )->toString();
-						
 						string addCharacter = (string) "";
 						if (sizeCounter > 0) {
 							addCharacter = (string) ", ";
 						}
-						
 						string holder = builder;
 						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
 						free(holder);
@@ -464,7 +446,6 @@ namespace Java {
 				string holder = builder;
 				asprintf(&builder, "%s%c\0", builder, '}');
 				free(holder);
-				
 				return builder;
 			}
 		};
