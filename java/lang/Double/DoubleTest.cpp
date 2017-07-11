@@ -992,7 +992,9 @@ TEST (JavaLang, DoubleByteValue){
 //    unsigned_long_long actualResult;
 //
 //    inputBinary64ToLong = (string) "010110101010";
-//    expectedResult
+//    expectedResult = 213;
+//    actualResult = Double::binary64ToLong((string)"");
+//    ASSERT_EQUAL_ULL(expectedResult,actualResult);
 //}
 
 // TODO Wait for build

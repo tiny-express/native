@@ -30,6 +30,14 @@
 #define WEAK
 #endif
 
+#ifdef WIN32
+    #define unsigned_long_long unsigned __int64
+    #define long_long __int64
+#else // gcc. Might not work on other compilers!
+    #define unsigned_long_long unsigned long long
+    #define long_long long long
+#endif
+
 #include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
 #include <stddef.h> /* size_t */
 #include <signal.h>
@@ -127,6 +135,12 @@ void assert_equal(intmax_t exp, intmax_t real, const char *caller, int line);
 
 void assert_equal_u(uintmax_t exp, uintmax_t real, const char *caller, int line);
 #define ASSERT_EQUAL_U(exp, real) assert_equal_u(exp, real, __FILE__, __LINE__)
+
+void assert_equal_ll(long_long exp, long_long real, const char *caller, int line);
+#define ASSERT_EQUAL_LL(exp, real) assert_equal_ll(exp, real, __FILE__, __LINE__)
+
+void assert_equal_ull(unsigned_long_long exp, unsigned_long_long real, const char *caller, int line);
+#define ASSERT_EQUAL_ULL(exp, real) assert_equal_ull(exp, real, __FILE__, __LINE__)
 
 void assert_not_equal(intmax_t exp, intmax_t real, const char *caller, int line);
 #define ASSERT_NOT_EQUAL(exp, real) assert_not_equal(exp, real, __FILE__, __LINE__)
