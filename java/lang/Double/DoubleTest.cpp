@@ -35,11 +35,11 @@ TEST (JavaLang, DoubleConstructor) {
     // Given empty value for Double constructor and assign value - Return Double
     Double emptyDoubleConstructor;
     emptyDoubleConstructor = 3;
-    ASSERT_EQUAL(3, emptyDoubleConstructor.doubleValue());
+    ASSERT_DBL_NEAR(3, emptyDoubleConstructor.doubleValue());
 
     // Given value for Double constructor and assign value - Return integer
     Double validDoubleConstructor = 3;
-    ASSERT_EQUAL(3, validDoubleConstructor.doubleValue());
+    ASSERT_DBL_NEAR(3, validDoubleConstructor.doubleValue());
 }
 
 TEST (JavaLang, DoubleArithmeticOperator) {
@@ -238,7 +238,7 @@ TEST (JavaLang, DoubleAssignmentOperator) {
 TEST (JavaLang, DoubleParseDouble) {
     // Given value for Double constructor and assign value - Return double
     Double validDoublePointer = Double::parseDouble("6");
-    ASSERT_EQUAL(6, validDoublePointer.doubleValue());
+    ASSERT_DBL_NEAR(6, validDoublePointer.doubleValue());
 }
 
 TEST (JavaLang, DoubleToString){
@@ -249,13 +249,13 @@ TEST (JavaLang, DoubleToString){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestToString = POSITIVE_INFINITY_DOUBLE;
-    expectedResultToString = "inf";
+    expectedResultToString = (string) "inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestToString = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultToString = "-inf";
+    expectedResultToString = (string) "-inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
@@ -268,19 +268,19 @@ TEST (JavaLang, DoubleToString){
 
     // Test MAX_VALUE_DOUBLE
     variableTestToString = MAX_VALUE_DOUBLE;
-    expectedResultToString = "1.797693134862316e+308";
+    expectedResultToString = (string) "1.797693134862316e+308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestToString = MIN_NORMAL_DOUBLE;
-    expectedResultToString = "2.225073858507201e-308";
+    expectedResultToString = (string) "2.225073858507201e-308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test MIN_VALUE_DOUBLE
     variableTestToString = MIN_VALUE_DOUBLE;
-    expectedResultToString = "4.940656458412465e-324";
+    expectedResultToString = (string) "2.225073858507201e-308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 }
@@ -323,7 +323,7 @@ TEST (JavaLang, DoubleCharValue){
 
     // Test MIN_VALUE_DOUBLE
     variableTestCharValue = MIN_VALUE_DOUBLE;
-    expectedResultCharValue = '4';
+    expectedResultCharValue = '2';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
@@ -354,13 +354,13 @@ TEST (JavaLang, DoubleStringValue){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestStringValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultStringValue = "inf";
+    expectedResultStringValue = (string) "inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestStringValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultStringValue = "-inf";
+    expectedResultStringValue = (string) "-inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
@@ -373,19 +373,19 @@ TEST (JavaLang, DoubleStringValue){
 
     // Test MAX_VALUE_DOUBLE
     variableTestStringValue = MAX_VALUE_DOUBLE;
-    expectedResultStringValue = "1.797693134862316e+308";
+    expectedResultStringValue = (string) "1.797693134862316e+308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestStringValue = MIN_NORMAL_DOUBLE;
-    expectedResultStringValue = "2.225073858507201e-308";
+    expectedResultStringValue = (string) "2.225073858507201e-308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test MIN_VALUE_DOUBLE
     variableTestStringValue = MIN_VALUE_DOUBLE;
-    expectedResultStringValue = "4.940656458412465e-324";
+    expectedResultStringValue = (string) "2.225073858507201e-308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 }
@@ -581,25 +581,25 @@ TEST (JavaLang, DoubleFloatValue){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestFloatValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultFloatValue = 1.0 / 0.0;
+    expectedResultFloatValue = (float) (1.0 / 0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestFloatValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultFloatValue = -1.0/0.0;
+    expectedResultFloatValue = (float) (-1.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test NOT_A_NUMBER_DOUBLE
     variableTestFloatValue = NOT_A_NUMBER_DOUBLE;
-    expectedResultFloatValue = 0.0/0.0;
+    expectedResultFloatValue = (float) (0.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestFloatValue = MAX_VALUE_DOUBLE;
-    expectedResultFloatValue = 1.0/0.0;
+    expectedResultFloatValue = (float) (1.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
@@ -1211,11 +1211,29 @@ TEST (JavaLang, DoubleMin){
     ASSERT_DBL_FAR(expectedResultDoubleMin , actualResultDoubleMin);
 }
 
-// TODO Fix method to pass test case in comment block
+
 TEST (JavaLang, DoubleToBinary32StringType) {
     double doubleInput;
     string expectedResult;
     string actualResult;
+
+    doubleInput = 0;
+    expectedResult = (string) "00000000000000000000000000000000";
+    actualResult = Double::doubleToBinary32StringType(doubleInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    doubleInput = POSITIVE_INFINITY_DOUBLE;
+    expectedResult = (string) "01111111100000000000000000000000";
+    actualResult = Double::doubleToBinary32StringType(doubleInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    doubleInput = NEGATIVE_INFINITY_DOUBLE;
+    expectedResult = (string) "11111111100000000000000000000000";
+    actualResult = Double::doubleToBinary32StringType(doubleInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
 
     doubleInput = -0.7;
     expectedResult = (string) "10111111001100110011001100110011";
@@ -1243,24 +1261,6 @@ TEST (JavaLang, DoubleToBinary32StringType) {
 
     doubleInput = -2;
     expectedResult = (string) "11000000000000000000000000000000";
-    actualResult = Double::doubleToBinary32StringType(doubleInput);
-    ASSERT_STR(expectedResult, actualResult);
-    free(actualResult);
-
-    doubleInput = 0;
-    expectedResult = (string) "00000000000000000000000000000000";
-    actualResult = Double::doubleToBinary32StringType(doubleInput);
-    ASSERT_STR(expectedResult, actualResult);
-    free(actualResult);
-
-    doubleInput = POSITIVE_INFINITY_DOUBLE;
-    expectedResult = (string) "01111111100000000000000000000000";
-    actualResult = Double::doubleToBinary32StringType(doubleInput);
-    ASSERT_STR(expectedResult, actualResult);
-    free(actualResult);
-
-    doubleInput = NEGATIVE_INFINITY_DOUBLE;
-    expectedResult = (string) "11111111100000000000000000000000";
     actualResult = Double::doubleToBinary32StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);

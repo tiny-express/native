@@ -28,9 +28,6 @@
 #include "../Object/Object.hpp"
 #include "../Math/Math.hpp"
 #include "../Long/Long.hpp"
-#include <stdio.h>
-#include <cstdlib>
-
 
 using namespace Java::Lang;
 
@@ -409,15 +406,6 @@ double Double::min(double doubleA, double doubleB) {
 //    }
 //}
 
-// TODO Fix error leak, and pass all test case
-/**
- * Convert double to binary 32 bit
- * (Single-precision floating-point format
- * In IEEE 754-2008)
- *
- * @param double
- * @return string binary 32 bit of input
- */
 string Double::doubleToBinary32StringType(double doubleInput)
 {
     string integerPartNormalizeForm = (string) malloc (25*sizeof(char));
