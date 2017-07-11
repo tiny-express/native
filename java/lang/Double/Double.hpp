@@ -64,7 +64,7 @@ static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+
 /**
  * A constant holding the smallest positive normal value of type
  */
-static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
+static double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::min(); //0x1.0p-1022; // 2.225073858507201e-308
 
 /**
  * A constant holding the smallest positive nonzero value of type
