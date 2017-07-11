@@ -1,6 +1,5 @@
-# Native Library
  ![Library Structure](misc/native.png)
-
+# Native Library
 [![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
