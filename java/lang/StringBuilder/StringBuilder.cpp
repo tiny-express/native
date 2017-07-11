@@ -70,6 +70,25 @@ StringBuilder::StringBuilder(const StringBuilder &target) {
     this->currentCapacity = target.currentCapacity;
 }
 
+StringBuilder::~StringBuilder() {
+    free(original);
+}
+
+StringBuilder StringBuilder::append(const Array<Character> &target) {
+    int newLength = this->currentLength + target.length;
+    this->ensureCapacity(newLength);
+#ifdef __linux__
+    register
+#endif
+    int indexOfOriginal = this->currentLength;
+    for (Character character : target) {
+        this->original[indexOfOriginal] = character.charValue();
+        indexOfOriginal = indexOfOriginal + 1;
+    }
+    this->currentLength = newLength;
+    return *this;
+}
+
 StringBuilder StringBuilder::append(const string target) {
     int stringLength = (int)strlen(target);
     int newLength = this->currentLength + stringLength;
@@ -106,8 +125,8 @@ StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     return *this;
 }
 
-StringBuilder::~StringBuilder() {
-    free(original);
+StringBuilder StringBuilder::append(const String &target) {
+    return this->append(target.toString());
 }
 
 int StringBuilder::capacity() const {

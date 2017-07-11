@@ -159,6 +159,12 @@ namespace Java {
 
             StringBuilder append(const Object &target);
 
+            /**
+             * Appends the specified string to this character sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const String &target);
 
 //          StringBuilder append(const StringBuffer &target);

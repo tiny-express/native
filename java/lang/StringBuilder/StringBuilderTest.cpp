@@ -66,6 +66,22 @@ TEST(JavaLang, StringBuilderDestructor) {
     delete pStringBuilder;
 }
 
+TEST(JavaLang, StringBuilderAppend) {
+    int numberOfCharacters = 0;
+    StringBuilder stringBuilder;
+    Array<Character> arrayOfCharacters({'1', '2', '3'});
+    numberOfCharacters = numberOfCharacters + arrayOfCharacters.length;
+    stringBuilder.append(arrayOfCharacters);
+    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
+    String aString = "123";
+    stringBuilder.append(aString);
+    numberOfCharacters = numberOfCharacters + aString.length();
+    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
+    stringBuilder.append(aString.toString());
+    numberOfCharacters = numberOfCharacters + aString.length();
+    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
+}
+
 TEST(JavaLang, StringBuilderCapacity) {
     StringBuilder stringBuilder(100);
     ASSERT_EQUAL(100, stringBuilder.capacity());
