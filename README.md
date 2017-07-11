@@ -7,12 +7,14 @@
 
 Beside standard library, we would like to have a greater customization with important goals:
 
-- Blazing fast performance with small footprint and low-level access with GAS & C
+- Blazing fast performance, small footprint and low-level access with GAS & C
 - Powerful structured programming in C++ for scalability
-- Awesome syntactically enhancement with C++ customization
-- Java standard packages for productivity & maintainability
-- Reduce memory leak via automatic storage and object oriented instead of pointer
-- Support third-party services for business features
+- Syntactically enhancement with C++ operators & walk through
+- Provide rich Java standard packages for productivity & maintainability
+- Zero memory leak via automatic storage and avoid NullPointerException
+
+Of course, C++ has weakness about runtime and reflection so some concepts are
+ignored includes Interface, Annotation.
 
 This project is also useful for new developers in practical programming.
 

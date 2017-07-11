@@ -59,7 +59,6 @@ namespace Java {
 		
 		public:
 			char charAt(int index) const;
-			
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
@@ -84,7 +83,7 @@ namespace Java {
 				return true;
 			}
 			Array<byte> getBytes() const;
-			//Array<byte> getBytes(const Charset &);
+			// Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
@@ -137,19 +136,12 @@ namespace Java {
 				return result;
 			};
 			
-			//FIXME: Temporary
 			String subString(int fromIndex) {
 				if (fromIndex < 0 || fromIndex >= this->length()) {
 					return "";
 				}
-				
 				return &( this->original[ fromIndex ] );
 			}
-			
-//			virtual boolean isNull() const {
-//				return this->null;
-//			}
-			
 		};
 	}
 }
