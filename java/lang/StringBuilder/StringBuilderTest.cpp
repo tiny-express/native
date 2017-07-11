@@ -103,3 +103,13 @@ TEST(JavaLang, StringBuilderToString) {
     ASSERT_TRUE(aString == String(cString));
     free(cString);
 }
+
+TEST(JavaLang, StringBuilderTrimToSize) {
+    StringBuilder stringBuilder(100);
+    ASSERT_EQUAL(100, stringBuilder.capacity());
+    stringBuilder.trimToSize();
+    ASSERT_EQUAL(0, stringBuilder.capacity());
+    stringBuilder.append({'1', '2', '3'});
+    stringBuilder.trimToSize();
+    ASSERT_EQUAL(3, stringBuilder.capacity());
+}

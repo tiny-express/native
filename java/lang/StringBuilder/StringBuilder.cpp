@@ -151,3 +151,11 @@ string StringBuilder::toString() const {
     content[this->currentLength] = '\0';
     return content;
 }
+
+void StringBuilder::trimToSize() {
+    if (this->currentCapacity > this->currentLength) {
+        int numberOfBytesForCapacity = this->currentLength * sizeof(char);
+        this->original = (string)realloc(this->original, (size_t)numberOfBytesForCapacity);
+        this->currentCapacity = this->currentLength;
+    }
+}

@@ -123,10 +123,22 @@ namespace Java {
 
             StringBuilder append(const Array<char> &target, int offset, int length);
 
-            StringBuilder append(const CharSequence &target);
+//          StringBuilder append(const CharSequence &target);
 
+            /**
+             * Appends the specified initializer list of char to this character sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const std::initializer_list<char> &target);
 
+            /**
+             * Appends the specified string to this character sequence.
+             *
+             * @param target
+             * @return
+             */
             StringBuilder append(const string target);
 
             StringBuilder append(const Double &target);
@@ -266,6 +278,12 @@ namespace Java {
              */
             string toString() const;
 
+            /**
+             * Attempts to reduce storage used for the character sequence.
+             * If the buffer is larger than necessary to hold its current sequence of characters,
+             * then it may be resized to become more space efficient.
+             * Calling this method may, but is not required to, affect the value returned by a subsequent call to the capacity() method.
+             */
             void trimToSize();
         };
     }
