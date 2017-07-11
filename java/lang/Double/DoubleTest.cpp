@@ -49,7 +49,7 @@ static double Double::NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
 *//**
  * A constant holding the largest positive finite value of type
  *//*
-static double Double::MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
+static double Double::MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
 
 *//**
  * A constant holding the smallest positive normal value of type
@@ -296,8 +296,8 @@ TEST (JavaLang, DoubleToString){
 //    ASSERT_STR(expectedResultToString , actualResultToString);
 //	free(actualResultToString);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestToString = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestToString = Double::MAX_VALUE;
     expectedResultToString = "1.797693134862316e+308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
@@ -339,8 +339,8 @@ TEST (JavaLang, DoubleCharValue){
 //    actualResultCharValue = variableTestCharValue.charValue();
 //    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestCharValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestCharValue = Double::MAX_VALUE;
     expectedResultCharValue = '1';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
@@ -401,8 +401,8 @@ TEST (JavaLang, DoubleStringValue){
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //    free(actualResultStringValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestStringValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestStringValue = Double::MAX_VALUE;
     expectedResultStringValue = "1.797693134862316e+308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
@@ -444,8 +444,8 @@ TEST (JavaLang, DoubleShortValue){
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestShortValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestShortValue = Double::MAX_VALUE;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
@@ -505,8 +505,8 @@ TEST (JavaLang, DoubleIntValue){
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestIntValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestIntValue = Double::MAX_VALUE;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
@@ -566,8 +566,8 @@ TEST (JavaLang, DoubleLongValue){
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestLongValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestLongValue = Double::MAX_VALUE;
     expectedResultLongValue = -9223372036854775808;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
@@ -627,8 +627,8 @@ TEST (JavaLang, DoubleFloatValue){
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestFloatValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestFloatValue = Double::MAX_VALUE;
     expectedResultFloatValue = 1.0/0.0;
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
@@ -688,9 +688,9 @@ TEST (JavaLang, DoubleDoubleValue){
     actualResultDoubleValue = variableTestDoubleValue.doubleValue();
     ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestDoubleValue = Double::MAX_VALUE_DOUBLE;
-    expectedResultDoubleValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestDoubleValue = Double::MAX_VALUE;
+    expectedResultDoubleValue = Double::MAX_VALUE;
     actualResultDoubleValue = variableTestDoubleValue.doubleValue();
     ASSERT_DBL_NEAR(expectedResultDoubleValue , actualResultDoubleValue);
 
@@ -750,8 +750,8 @@ TEST (JavaLang, DoubleByteValue){
 //    actualResultByteValue = variableTestByteValue.byteValue();
 //    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableTestByteValue = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableTestByteValue = Double::MAX_VALUE;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
     ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
@@ -792,12 +792,12 @@ TEST (JavaLang, DoubleCompare){
     // Test Double::NOT_A_NUMBER_DOUBLE
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, 1.2) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, 0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, -0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, -1.2) == -9999);
-    ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, -Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, -Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::NOT_A_NUMBER_DOUBLE, Double::NEGATIVE_INFINITY) == -9999);
 
     // Test Double::POSITIVE_INFINITY
@@ -805,84 +805,84 @@ TEST (JavaLang, DoubleCompare){
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY,
                               Double::POSITIVE_INFINITY) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY,
-                              Double::MAX_VALUE_DOUBLE) == -9999);
+                              Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY, 1.2) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY, 0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY, -0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY, -1.2) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY,
-                              -Double::MAX_VALUE_DOUBLE) == -9999);
+                              -Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::POSITIVE_INFINITY,
                               Double::NEGATIVE_INFINITY) == -9999);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, Double::NOT_A_NUMBER_DOUBLE) == -9999);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE,
+    // Test Double::MAX_VALUE
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, Double::NOT_A_NUMBER_DOUBLE) == -9999);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE,
                               Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, Double::MAX_VALUE_DOUBLE) == 0);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, 1.2) == +1);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, 0.0) == +1);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, -0.0) == +1);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, -1.2) == +1);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE, -Double::MAX_VALUE_DOUBLE) == +1);
-    ASSERT_TRUE(Double::compare(Double::MAX_VALUE_DOUBLE,
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, Double::MAX_VALUE) == 0);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, 1.2) == +1);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, 0.0) == +1);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, -0.0) == +1);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, -1.2) == +1);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE, -Double::MAX_VALUE) == +1);
+    ASSERT_TRUE(Double::compare(Double::MAX_VALUE,
                               Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value 1.2
     ASSERT_TRUE(Double::compare(1.2, Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(Double::compare(1.2, Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(1.2, Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(Double::compare(1.2, Double::MAX_VALUE) == -1);
     ASSERT_TRUE(Double::compare(1.2, 1.2) == 0);
     ASSERT_TRUE(Double::compare(1.2, 0.0) == +1);
     ASSERT_TRUE(Double::compare(1.2, -0.0) == +1);
     ASSERT_TRUE(Double::compare(1.2, -1.2) == +1);
-    ASSERT_TRUE(Double::compare(1.2, -Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(Double::compare(1.2, -Double::MAX_VALUE) == +1);
     ASSERT_TRUE(Double::compare(1.2, Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value 0.0
     ASSERT_TRUE(Double::compare(0.0, Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(Double::compare(0.0, Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(0.0, Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(Double::compare(0.0, Double::MAX_VALUE) == -1);
     ASSERT_TRUE(Double::compare(0.0, 1.2) == -1);
     ASSERT_TRUE(Double::compare(0.0, 0.0) == 0);
 //    ASSERT_TRUE(Double::compare(0.0, -0.0) == 0);  // error in OSX
     ASSERT_TRUE(Double::compare(0.0, -1.2) == +1);
-    ASSERT_TRUE(Double::compare(0.0, -Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(Double::compare(0.0, -Double::MAX_VALUE) == +1);
     ASSERT_TRUE(Double::compare(0.0, Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value -0.0
     ASSERT_TRUE(Double::compare(-0.0, Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(Double::compare(-0.0, Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(-0.0, Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(Double::compare(-0.0, Double::MAX_VALUE) == -1);
     ASSERT_TRUE(Double::compare(-0.0, 1.2) == -1);
 //    ASSERT_TRUE(Double::compare(-0.0, 0.0) == 0); // error in OSX
 //    ASSERT_TRUE(Double::compare(-0.0, -0.0) == 0);  // error in OSX
     ASSERT_TRUE(Double::compare(-0.0, -1.2) == +1);
-    ASSERT_TRUE(Double::compare(-0.0, -Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(Double::compare(-0.0, -Double::MAX_VALUE) == +1);
     ASSERT_TRUE(Double::compare(-0.0, Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value -1.2
     ASSERT_TRUE(Double::compare(-1.2, Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(Double::compare(-1.2, Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(-1.2, Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(Double::compare(-1.2, Double::MAX_VALUE) == -1);
     ASSERT_TRUE(Double::compare(-1.2, 1.2) == -1);
     ASSERT_TRUE(Double::compare(-1.2, 0.0) == -1);
     ASSERT_TRUE(Double::compare(-1.2, -0.0) == -1);
     ASSERT_TRUE(Double::compare(-1.2, -1.2) == 0);
-    ASSERT_TRUE(Double::compare(-1.2, -Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(Double::compare(-1.2, -Double::MAX_VALUE) == +1);
     ASSERT_TRUE(Double::compare(-1.2, Double::NEGATIVE_INFINITY) == -9999);
 
-    // Test -Double::MAX_VALUE_DOUBLE
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, Double::NOT_A_NUMBER_DOUBLE) == -9999);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE,
+    // Test -Double::MAX_VALUE
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, Double::NOT_A_NUMBER_DOUBLE) == -9999);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE,
                               Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, Double::MAX_VALUE_DOUBLE) == -1);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, 1.2) == -1);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, 0.0) == -1);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, -0.0) == -1);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, -1.2) == -1);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE, -Double::MAX_VALUE_DOUBLE) == 0);
-    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE_DOUBLE,
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, Double::MAX_VALUE) == -1);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, 1.2) == -1);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, 0.0) == -1);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, -0.0) == -1);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, -1.2) == -1);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE, -Double::MAX_VALUE) == 0);
+    ASSERT_TRUE(Double::compare(-Double::MAX_VALUE,
                               Double::NEGATIVE_INFINITY) == -9999);
 
     // Test Double::NEGATIVE_INFINITY
@@ -890,13 +890,13 @@ TEST (JavaLang, DoubleCompare){
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY,
                               Double::POSITIVE_INFINITY) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY,
-                              Double::MAX_VALUE_DOUBLE) == -9999);
+                              Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY, 1.2) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY, 0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY, -0.0) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY, -1.2) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY,
-                              -Double::MAX_VALUE_DOUBLE) == -9999);
+                              -Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(Double::compare(Double::NEGATIVE_INFINITY,
                               Double::NEGATIVE_INFINITY) == -9999);
 }
@@ -908,108 +908,108 @@ TEST (JavaLang, DoubleCompareTo){
     variableCompareTo = Double::NOT_A_NUMBER_DOUBLE;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test Double::POSITIVE_INFINITY
     variableCompareTo = Double::POSITIVE_INFINITY;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo( Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo( Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
-    // Test Double::MAX_VALUE_DOUBLE
-    variableCompareTo = Double::MAX_VALUE_DOUBLE;
+    // Test Double::MAX_VALUE
+    variableCompareTo = Double::MAX_VALUE;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == 0);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == 0);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == +1);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value 1.2
     variableCompareTo = 1.2;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == 0);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == +1);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value 0.0
     variableCompareTo = 0.0;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == 0);
 //    ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == 0); // error in OSX
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == +1);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value -0.0
     variableCompareTo = -0.0;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -1);
 //    ASSERT_TRUE(variableCompareTo.compareTo(0.0) == 0); // error in OSX
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == 0);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == +1);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test value -1.2
     variableCompareTo = -1.2;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == 0);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == +1);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == +1);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
-    // Test -Double::MAX_VALUE_DOUBLE
-    variableCompareTo = -Double::MAX_VALUE_DOUBLE;
+    // Test -Double::MAX_VALUE
+    variableCompareTo = -Double::MAX_VALUE;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -1);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == -1);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == -1);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == 0);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == 0);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 
     // Test Double::NEGATIVE_INFINITY
     variableCompareTo = Double::NEGATIVE_INFINITY;
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NOT_A_NUMBER_DOUBLE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::POSITIVE_INFINITY) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo(Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(1.2) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-0.0) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(-1.2) == -9999);
-    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE_DOUBLE) == -9999);
+    ASSERT_TRUE(variableCompareTo.compareTo(-Double::MAX_VALUE) == -9999);
     ASSERT_TRUE(variableCompareTo.compareTo(Double::NEGATIVE_INFINITY) == -9999);
 }
 
@@ -1054,8 +1054,8 @@ TEST (JavaLang, DoubleCompareTo){
 //    Double DOUBLE_NaN = Double::NOT_A_NUMBER_DOUBLE;
 //    Double DOUBLE_POSITIVE_INFINITY = Double::POSITIVE_INFINITY;
 //    Double DOUBLE_NEGATIVE_INFINITY = Double::NEGATIVE_INFINITY;
-//    Double DOUBLE_MAX_VALUE= Double::MAX_VALUE_DOUBLE;
-//    Double DOUBLE_NEGATIVE_MAX_VALUE = -Double::MAX_VALUE_DOUBLE;
+//    Double DOUBLE_MAX_VALUE= Double::MAX_VALUE;
+//    Double DOUBLE_NEGATIVE_MAX_VALUE = -Double::MAX_VALUE;
 //
 //    // Test Double::NOT_A_NUMBER_DOUBLE
 //    variableCompareTo = Double::NOT_A_NUMBER_DOUBLE;

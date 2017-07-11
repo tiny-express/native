@@ -349,7 +349,7 @@ long Double::hashCode(double valuehashCode) {
 }
 
 boolean Double::isFinite(double valueDouble) {
-    return (Math::abs(valueDouble) <= MAX_VALUE_DOUBLE);
+    return (Math::abs(valueDouble) <= MAX_VALUE);
 }
 
 boolean Double::isInfinite(double valueDouble) {

@@ -32,7 +32,6 @@
 #include "../Object/Object.hpp"
 #include "../Double/Double.hpp"
 #include "../Float/Float.hpp"
-#include "cmath"
 
 namespace Java {
 	namespace Lang {

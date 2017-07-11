@@ -102,7 +102,7 @@ namespace Java {
             /**
              * A constant holding the largest positive finite value of type
              */
-            static constexpr double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
+            static constexpr double MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
 
             /**
              * A constant holding the smallest positive normal value of type

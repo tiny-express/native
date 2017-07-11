@@ -49,28 +49,32 @@ TEST (JavaLang, MathAbs) {
 }
 
 TEST (JavaLang, MathAddExactInt){
-    //Given 2 int
+    // Given 2 int
     int a = 1;
     int b = 2;
     int expectResult = 3;
     int actualResult = Math::addExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
-
+    
+    // Given an int equal to Integer::MAX_VALUE
+    int c = Integer::MAX_VALUE;
     int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::addExact(Integer::MAX_VALUE, b);
+    int actualOverFlowResult = Math::addExact(c, b);
     ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
 }
 
 TEST (JavaLang, MathAddExactLong){
-    //Given 2 long
+    // Given 2 long
     long a = 1;
     long b = 2;
     long expectResult = 3;
     long actualResult = Math::addExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
-
+    
+    // Given an int equal to Long::MAX_VALUE
+    long c = Long::MAX_VALUE;
     long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::addExact(Long::MAX_VALUE, b);
+    long actualOverFlowResult = Math::addExact(c, b);
     ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
 }
 
@@ -141,7 +145,6 @@ TEST (JavaLang, MathSin){
 }
 
 TEST (JavaLang, MathAsin){
-
     // Given a sine equal to 1
     double sin = 1;
     double actualResult = Math::asin(sin);
@@ -230,103 +233,1030 @@ TEST (JavaLang, MathAtan2){
 }
 
 TEST (JavaLang, MathCbrt){
-    //Given a variable equal to 3^3
+    // Given a variable equal to 3^3 =27
     double cube = 27;
-    ASSERT_DBL_NEAR(3, Math::cbrt(cube));
+    double expectResult = 3;
+    double actualResult = Math::cbrt(cube);
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nanCube = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::cbrt(nanCube);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double positiveInfCube = INFINITY;
+    double expectPositiveInfResult = INFINITY;
+    double actualPositiveInfResult = Math::cbrt(positiveInfCube);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to -INFINITE
+    double negativeInfCube = -INFINITY;
+    double expectNegativeInfResult = INFINITY;
+    double actualNegativeInfResult = Math::cbrt(negativeInfCube);
+    ASSERT_EQUAL(expectNegativeInfResult, actualNegativeInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZeroCube = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::cbrt(positiveZeroCube);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZeroCube = -0.0;
+    double expectNegativeZeroResult = 0.0;
+    double actualNegativeZeroResult = Math::cbrt(negativeZeroCube);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 
 TEST (JavaLang, MathSqrt){
-    // Given a variable equal to 3^2
+    // Given a variable equal to 3^2 = 9
     double square = 9;
-    ASSERT_EQUAL(3, Math::sqrt(9));
-    //
+    double expectResult = 3;
+    double actualResult = Math::sqrt(square);
+    ASSERT_DBL_NEAR(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nanSquare = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::sqrt(nanSquare);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double positiveInfSquare = INFINITY;
+    double expectPositiveInfResult = INFINITY;
+    double actualPositiveInfResult = Math::sqrt(positiveInfSquare);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to -INFINITE
+    double negativeInfSquare = -INFINITY;
+    double expectNegativeInfResult = INFINITY;
+    double actualNegativeInfResult = Math::sqrt(negativeInfSquare);
+    ASSERT_EQUAL(expectNegativeInfResult, actualNegativeInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZeroSquare = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::sqrt(positiveZeroSquare);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZeroSquare = -0.0;
+    double expectNegativeZeroResult = 0.0;
+    double actualNegativeZeroResult = Math::sqrt(negativeZeroSquare);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 
 TEST (JavaLang, MathCeil){
-    // Given two double numbers
+    // Given a double to
     double x = 125.9;
-    double y = 0.4873;
-    ASSERT_EQUAL(126, Math::ceil(x));
-    ASSERT_EQUAL(1, Math::ceil(y));
+    double expectResult = 126;
+    double actualResult = Math::ceil(x);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a double value equal to a mathematical integer
+    double equalInt = 100;
+    double expectEqualIntResult = 100;
+    double actualEqualIntResult = Math::ceil(equalInt);
+    ASSERT_EQUAL(expectEqualIntResult, actualEqualIntResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::ceil(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::ceil(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::ceil(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::ceil(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+
+    // Given a value > -1 and < 0
+    double between = -0.4;
+    double expectBetweenResult = -0.0;
+    double actualBetweenResult = Math::ceil(between);
+    ASSERT_EQUAL(expectBetweenResult, actualBetweenResult);
+}
+
+TEST (JavaLang, MathDecrementExactInt){
+    // Given 2 int
+    int a = 5;
+    int expectResult = 4;
+    int actualResult = Math::decrementExact(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+    
+    // Given an int equal to Integer::MIN_VALUE
+    int c = Integer::MIN_VALUE;
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::decrementExact(c);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathDecrementExactLong){
+    // Given 2 int
+    long a = 5;
+    long expectResult = 4;
+    long actualResult = Math::decrementExact(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+    
+    // Given an int equal to Long::MIN_VALUE
+    long c = Long::MIN_VALUE;
+    long expectOverFlowResult = 0;
+    long actualOverFlowResult = Math::decrementExact(c);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathIncrementExactInt){
+    // Given 2 int
+    int a = 5;
+    int expectResult = 6;
+    int actualResult = Math::incrementExact(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+    
+    // Given an int equal to Integer::MAX_VALUE
+    int c = Integer::MAX_VALUE;
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::incrementExact(c);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathIncrementExactLong){
+    // Given 2 int
+    long a = 5;
+    long expectResult = 6;
+    long actualResult = Math::incrementExact(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+    
+    // Given an int equal to Long::MAX_VALUE
+    long c = Long::MAX_VALUE;
+    long expectOverFlowResult = 0;
+    long actualOverFlowResult = Math::incrementExact(c);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathMultiplyExact){
+    // Given 2 int which multiply result overflow an integer
+    int x = Integer::MAX_VALUE;
+    int y = 2;
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::multiplyExact(x,y);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+
+    // Given 2 int
+    int a = 10;
+    int b = 20;
+    int expectResult = 200;
+    int actualResult = Math::multiplyExact(a,b);
+    ASSERT_EQUAL(expectResult, actualResult);
+}
+
+TEST (JavaLang, MathMultiplyExactLong){
+    // Given 2 int
+    long a = 5;
+    long b = 6;
+    long expectResult = 30;
+    long actualResult = Math::multiplyExact(a,b);
+    ASSERT_EQUAL(expectResult, actualResult);
+    
+    // Given an int equal to Long::MAX_VALUE
+    long c = Long::MAX_VALUE;
+    long expectOverFlowResult = 0;
+    long actualOverFlowResult = Math::multiplyExact(c, 2L);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    
+    // Given an int equal to Long::MIN_VALUE
+    long d = Long::MIN_VALUE;
+    long actualOverFlowResult1 = Math::multiplyExact(d, -1L);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult1);
+
+}
+
+TEST (JavaLang, MathNegateExactInt){
+    // Given an int
+    int x = 100;
+    int expectResult = -100;
+    int actualResult = Math::negateExact(x);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given an int equal to Integer::MIN_VALUE
+    int y = Integer::MIN_VALUE;
+    int expectOverFlowResult = 0;
+    int actuanOverFlowResult = Math::negateExact(y);
+    ASSERT_EQUAL(expectOverFlowResult, actuanOverFlowResult);
+}
+
+TEST (JavaLang, MathNegateExactLong){
+    // Given an int
+    long x = 100;
+    long expectResult = -100;
+    long actualResult = Math::negateExact(x);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given an long equal to Long::MIN_VALUE
+    long y = Long::MIN_VALUE;
+    long expectOverFlowResult = 0;
+    long actuanOverFlowResult = Math::negateExact(y);
+    ASSERT_EQUAL(expectOverFlowResult, actuanOverFlowResult);
 }
 
 TEST (JavaLang, MathLog){
-    // Given a variable for log 10-base
+    // Given a variable equal to E
+    double natural = Math::E;
+    double expectNaturalResult = 1;
+    double actualNaturalResult = Math::log(natural);
+    ASSERT_EQUAL(expectNaturalResult, expectNaturalResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::log(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::log(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = INFINITY;
+    double actualPositiveZeroResult = Math::log(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult =INFINITY;
+    double actualNegativeZeroResult = Math::log(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+
+    // Given a value > 0
+    double lessThanZero = - 1;
+    double expectlessThanZeroResult = NAN;
+    double actuallessThanZeroResult = Math::log(lessThanZero);
+    ASSERT_EQUAL(expectlessThanZeroResult, actuallessThanZeroResult);
+}
+
+TEST (JavaLang, MathNextAfterDouble){
+    // Given 2 double
+    double start = 98759.765;
+    double direction = 154.28764;
+    double expectResult = 98759.76499999998;
+    double actualResult = Math::nextAfter(start, direction);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::nextAfter(nan, direction);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = -INFINITY;
+    double expectInfResult = -Double::MAX_VALUE;
+    double actualInfResult = Math::nextAfter(inf, direction);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a start value equal to -Double::MIN_VALUE
+    double startMinValue = -Double::MIN_VALUE;
+    double expectMinValueResult = -0.0;
+    double actualMinValueResult = Math::nextAfter(startMinValue, -1);
+    ASSERT_EQUAL(expectMinValueResult, actualMinValueResult);
+
+    // Given a start value equal to Double::MAX_VALUE
+    double startMaxValue = Double::MAX_VALUE;
+    double expectMaxValueResult = INFINITY;
+    double actualMaxValueResult = Math::nextAfter(startMaxValue, 1);
+    ASSERT_EQUAL(expectMaxValueResult, actualMaxValueResult);
+
+    // Given 2 value equal to two sign ZERO
+    double positiveZero = 0.0;
+    double negativeZero = -0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::nextAfter(negativeZero, positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::nextAfter(positiveZero, negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathNextAfterFloat){
+    // Given 2 double
+    float start = 98759.765;
+    double direction = 154.28764;
+    double expectResult = 98759.76499999998;
+    double actualResult = Math::nextAfter(start, direction);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    float nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::nextAfter(nan, direction);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = -INFINITY;
+    double expectInfResult = -Float::MAX_VALUE;
+    double actualInfResult = Math::nextAfter(inf, direction);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a start value equal to -Float::MIN_VALUE
+    float startMinValue = -Float::MIN_VALUE;
+    double expectMinValueResult = -0.0;
+    double actualMinValueResult = Math::nextAfter(startMinValue, -1);
+    ASSERT_EQUAL(expectMinValueResult, actualMinValueResult);
+
+    // Given a start value equal to Float::MAX_VALUE
+    float startMaxValue = Float::MAX_VALUE;
+    double expectMaxValueResult = INFINITY;
+    double actualMaxValueResult = Math::nextAfter(startMaxValue, 1);
+    ASSERT_EQUAL(expectMaxValueResult, actualMaxValueResult);
+
+    // Given 2 value equal to two sign ZERO
+    float positiveZero = 0.0;
+    float negativeZero = -0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::nextAfter(negativeZero, positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::nextAfter(positiveZero, negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathScalbFloat){
+    // Given a float an a scalefator
+    float a = 50.14;
+    int scaleFactor = 4;
+    float expectResult = 802.24;
+    float actualResult = Math::scalb(a, scaleFactor);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    float nan = NAN;
+    float expectNaNResult = NAN;
+    float actualNaNResult = Math::scalb(nan, scaleFactor);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    float positiveInf = INFINITY;
+    float expectPositiveInfResult = INFINITY;
+    float actualPositiveInfResult = Math::scalb(positiveInf, scaleFactor);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to -INFINITE
+    float negativeInf = -INFINITY;
+    float expectNegativeInfResult = -INFINITY;
+    float actualNegativeInfResult = Math::scalb(negativeInf, scaleFactor);
+    ASSERT_EQUAL(expectNegativeInfResult, actualNegativeInfResult);
+
+    // Given a value equal to ZERO
+    float positiveZero = 0.0;
+    float expectPositiveZeroResult = 0.0;
+    float actualPositiveZeroResult = Math::scalb(positiveZero, scaleFactor);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    float negativeZero = -0.0;
+    float expectNegativeZeroResult = -0.0;
+    float actualNegativeZeroResult = Math::scalb(negativeZero, scaleFactor);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathScalbDouble){
+    // Given a float an a scalefator
+    double a = 50.14;
+    int scaleFactor = 4;
+    double expectResult = 802.24;
+    double actualResult = Math::scalb(a, scaleFactor);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::scalb(nan, scaleFactor);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double positiveInf = INFINITY;
+    double expectPositiveInfResult = INFINITY;
+    double actualPositiveInfResult = Math::scalb(positiveInf, scaleFactor);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to -INFINITE
+    double negativeInf = -INFINITY;
+    double expectNegativeInfResult = -INFINITY;
+    double actualNegativeInfResult = Math::scalb(negativeInf, scaleFactor);
+    ASSERT_EQUAL(expectNegativeInfResult, actualNegativeInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::scalb(positiveZero, scaleFactor);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::scalb(negativeZero, scaleFactor);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathLog10){
+    // Given a variable equal to 10
     double tenBase = 10;
-    ASSERT_EQUAL(1, Math::log10(tenBase));
+    double expectTenBaseResult = 1;
+    double actualTenBaseResult = Math::log10(tenBase);
+    ASSERT_EQUAL(expectTenBaseResult, actualTenBaseResult);
 
-    // Given a variable for log e-base
-    double eBase = Math::E;
-	ASSERT_EQUAL(1, Math::log(eBase));
-	ASSERT_EQUAL(1.313261688, Math::log1p(eBase));
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::log10(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
 
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::log10(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = INFINITY;
+    double actualPositiveZeroResult = Math::log10(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = INFINITY;
+    double actualNegativeZeroResult = Math::log10(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+
+    // Given a value > 0
+    double lessThanZero = - 1;
+    double expectlessThanZeroResult = NAN;
+    double actuallessThanZeroResult = Math::log10(lessThanZero);
+    ASSERT_EQUAL(expectlessThanZeroResult, actuallessThanZeroResult);
+}
+
+TEST (JavaLang, MathLog1p){
+    // Given a variable equal to E-1
+    double natural = Math::E - 1;
+    double expectnaturalResult = 1;
+    double actualnaturalResult = Math::log1p(natural);
+    ASSERT_EQUAL(expectnaturalResult, actualnaturalResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::log1p(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to -1;
+    double negativeOne = -1;
+    double expectnegativeOneResult = -INFINITY;
+    double actualnegativeOneResult = Math::log1p(negativeOne);
+    ASSERT_EQUAL(expectnegativeOneResult, actualnegativeOneResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::log1p(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::log1p(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::log1p(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+
+    // Given a value > -1
+    double lessThanZero = - 2;
+    double expectlessThanZeroResult = NAN;
+    double actuallessThanZeroResult = Math::log1p(lessThanZero);
+    ASSERT_EQUAL(expectlessThanZeroResult, actuallessThanZeroResult);
 }
 
 TEST (JavaLang, MathRInt){
-	// Given two double numbers
+	// Given a double number
 	double x = 125.9;
-	double y = 0.4873;
-	ASSERT_EQUAL(126, Math::rint(x));
-	ASSERT_EQUAL(0, Math::rint(y));
+    double actualXResult = 126;
+    double expectXResult = Math::rint(x);
+    ASSERT_EQUAL(expectXResult, Math::rint(x));
+
+    // Given a double number
+    double y = 0.4873;
+    double actualYResult = 0;
+    double expectYResult = Math::rint(y);
+	ASSERT_EQUAL(expectYResult, actualYResult);
+
+    // Given a double value equal to a mathematical integer
+    double equalInt = 100;
+    double expectEqualIntResult = 100;
+    double actualEqualIntResult = Math::rint(equalInt);
+    ASSERT_EQUAL(expectEqualIntResult, actualEqualIntResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::rint(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::rint(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::rint(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::rint(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 
 TEST (JavaLang, MathExp){
-	//Given a variable equal to E^3
-	double eCubed = Math::pow(Math::E,3);
-	ASSERT_EQUAL(eCubed, Math::exp(3));
-	ASSERT_EQUAL(eCubed - 1, Math::expm1(3));
+	// Given a variable equal to E^3
+	double eCubed = 3;
+    double expectResult = Math::pow(Math::E,3);
+    double actualResult = Math::exp(eCubed);
+	ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::exp(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::exp(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to INFINITY
+    double positiveInf = -INFINITY;
+    double expectPositiveInfResult = 0.0;
+    double actualPositiveInfResult = Math::exp(positiveInf);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+}
+
+TEST (JavaLang, MathExpm1){
+    // Given a variable equal to E^3
+    double eCubed = 3;
+    double expectResult = Math::pow(Math::E,3) - 1;
+    double actualResult = Math::expm1(eCubed);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::expm1(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITY
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::expm1(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to INFINITY
+    double positiveInf = -INFINITY;
+    double expectPositiveInfResult = -1.0;
+    double actualPositiveInfResult = Math::expm1(positiveInf);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::expm1(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::expm1(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 
 TEST (JavaLang, MathHypot){
 	// Given two double numbers
 	double x = 6;
 	double y = 8;
-	ASSERT_EQUAL(10, Math::hypot(x, y));
+    double expectResult = 10;
+    double actualResult = Math::hypot(x, y);
+	ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given two double with one number equal INFINITY
+    double z = 6;
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::hypot(z, inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given two double with one number equal INFINITY
+    double a = 6;
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::hypot(a, nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given two double with one number equal INFINITY
+    double inf1 = INFINITY;
+    double inf2 = INFINITY;
+    double expectBothInfResult = NAN;
+    double actualBothInfResult = Math::hypot(inf1, inf2);
+    ASSERT_EQUAL(expectBothInfResult, actualBothInfResult);
 }
 
 TEST (JavaLang, MathIEEERemainder){
 	// Given two double numbers
 	double x = 8;
 	double y = 6;
-	ASSERT_EQUAL(2, Math::IEEEremainder(x, y));
+	double expectResult = 2;
+    double actualResult = Math::IEEEremainder(x, y);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given two double with First number equal INFINITY
+    double z = 6;
+    double inf = INFINITY;
+    double expectFirstInfResult = NAN;
+    double actualFirstInfResult = Math::IEEEremainder(inf, z);
+    ASSERT_EQUAL(expectFirstInfResult, actualFirstInfResult);
+
+    // Given two double with one number equal NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::IEEEremainder(z, nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given two double with the second number is 0.0
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = NAN;
+    double actualPositiveZeroResult = Math::IEEEremainder(z, positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given two double with the second number is -0.0
+    double negativeZero = 0.0;
+    double expectNegativeZeroResult = NAN;
+    double actualNegativeZeroResult = Math::IEEEremainder(z, negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+
+    // Given two double with one number equal INFINITY
+    double expectSecondInfResult = NAN;
+    double actualSecondInfResult = Math::IEEEremainder(z, inf);
+    ASSERT_EQUAL(expectSecondInfResult, actualSecondInfResult);
 }
 
 TEST (JavaLang, MathCosh){
 	// Given a variable equal PI/2
 	double radian = Math::PI/2;
-	ASSERT_EQUAL(2.5091784786580567, Math::cosh(radian));
+    double expectResult = 2.5091784786580567;
+    double actualResult = Math::cosh(radian);
+	ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::cosh(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITY
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::cosh(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double zero = 0.0;
+    double expectZeroResult = 1.0;
+    double actualZeroResult = Math::cosh(zero);
+    ASSERT_EQUAL(expectZeroResult, actualZeroResult);
 }
 
 TEST (JavaLang, MathSinh){
 	// Given a variable equal PI/2
-	double radian = Math::PI/2;
-	ASSERT_EQUAL(2.3012989023072947, Math::sinh(radian));
+    double radian = Math::PI/2;
+    double expectResult = 2.3012989023072947;
+    double actualResult = Math::sinh(radian);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::sinh(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITY
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::sinh(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::sinh(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::sinh(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 
 TEST (JavaLang, MathTanh){
-	// Given a variable equal PI/2
-	double radian = Math::PI/2;
-	ASSERT_EQUAL(0.9171523356672744, Math::tanh(radian));
+
+    // Given a variable equal PI/2
+    double radian = Math::PI/2;
+    double expectResult = 0.9171523356672744;
+    double actualResult = Math::tanh(radian);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::tanh(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITY
+    double positiveInf = INFINITY;
+    double expectPositiveInfResult = 1.0;
+    double actualPositiveInfResult = Math::tanh(positiveInf);
+    ASSERT_EQUAL(expectPositiveInfResult, actualPositiveInfResult);
+
+    // Given a value equal to -INFINITY
+    double negtiveInf = -INFINITY;
+    double expectNegtiveInfResult = -1.0;
+    double actualNegtiveInfResult = Math::tanh(negtiveInf);
+    ASSERT_EQUAL(expectNegtiveInfResult, actualNegtiveInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::tanh(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::tanh(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
 }
 TEST (JavaLang, MathToRadian){
-    // Given a variable radian which is equal to PI
-    double radian = Math::PI;
-    ASSERT_EQUAL(radian, Math::toRadians(180));
+    // Given a variable degree which is equal to PI
+    double degree = 180;
+    double expectResult = Math::PI;
+    double actualResult = Math::toRadians(degree);
+    ASSERT_EQUAL(expectResult, actualResult);
 }
 
 TEST (JavaLang, MathToDegree){
     // Given a variable degree which is equal to PI
-    double degree = 180;
-    ASSERT_EQUAL(degree, Math::toDegrees(Math::PI));
+    double radian = Math::PI;
+    double expectResult = 180;
+    double actualResult = Math::toDegrees(radian);
+    ASSERT_EQUAL(expectResult, actualResult);
 }
 
 TEST (JavaLang, MathFloor) {
-	return;
 	double floor_value = 2.3;
-	ASSERT_EQUAL(2, Math::floor(floor_value));
+    double expectResult = 2;
+    double actualResult = Math::floor(floor_value);
+	ASSERT_EQUAL(expectResult, actualResult);
 
-	double floor_value_1 = -2.3;
-	ASSERT_EQUAL(-2, Math::floor(floor_value_1));
+    // Given a double value equal to a mathematical integer
+    double equalInt = 100;
+    double expectEqualIntResult = 100;
+    double actualEqualIntResult = Math::floor(equalInt);
+    ASSERT_EQUAL(expectEqualIntResult, actualEqualIntResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::floor(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to INFINITE
+    double inf = INFINITY;
+    double expectInfResult = INFINITY;
+    double actualInfResult = Math::floor(inf);
+    ASSERT_EQUAL(expectInfResult, actualInfResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::floor(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::floor(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathFloorDivInt){
+    // Given 2 int
+    int dividend1 = 10;
+    int divisor1 = 5;
+    int expectResult1 = 2;
+    int actualResult1 = Math::floorDiv(dividend1, divisor1);
+    ASSERT_EQUAL(expectResult1, actualResult1);
+
+    // Given 2 int
+    int dividend2 = 11;
+    int divisor2 = -5;
+    int expectResult2 = -3;
+    int actualResult2 = Math::floorDiv(dividend2, divisor2);
+    ASSERT_EQUAL(expectResult2, actualResult2);
+
+    // Given 2 int
+    int dividend3 = 11;
+    int divisor3 = 0;
+    int expectResult3 = 0;
+    int actualResult3 = Math::floorDiv(dividend3, divisor3);
+    ASSERT_EQUAL(expectResult3, actualResult3);
+}
+
+TEST (JavaLang, MathSignNumDouble){
+    // Given a double
+    double a = 50.14;
+    double expectResult = 1.0;
+    double actualResult = Math::signum(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    double nan = NAN;
+    double expectNaNResult = NAN;
+    double actualNaNResult = Math::signum(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to ZERO
+    double positiveZero = 0.0;
+    double expectPositiveZeroResult = 0.0;
+    double actualPositiveZeroResult = Math::signum(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    double negativeZero = -0.0;
+    double expectNegativeZeroResult = -0.0;
+    double actualNegativeZeroResult = Math::signum(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathSignNumFloat){
+    // Given a float
+    float a = 50.14;
+    float expectResult = 1.0;
+    float actualResult = Math::signum(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to NAN
+    float nan = NAN;
+    float expectNaNResult = NAN;
+    float actualNaNResult = Math::signum(nan);
+    ASSERT_EQUAL(expectNaNResult, actualNaNResult);
+
+    // Given a value equal to ZERO
+    float positiveZero = 0.0;
+    float expectPositiveZeroResult = 0.0;
+    float actualPositiveZeroResult = Math::signum(positiveZero);
+    ASSERT_EQUAL(expectPositiveZeroResult, actualPositiveZeroResult);
+
+    // Given a value equal to -ZERO
+    float negativeZero = -0.0;
+    float expectNegativeZeroResult = -0.0;
+    float actualNegativeZeroResult = Math::signum(negativeZero);
+    ASSERT_EQUAL(expectNegativeZeroResult, actualNegativeZeroResult);
+}
+
+TEST (JavaLang, MathSubtractExactInt){
+    // Given 2 int
+    int a = 10;
+    int b = 20;
+    int expectResult = -10;
+    int actualResult = Math::subtractExact(a, b);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to Integer::MIN_VALUE
+    int minValue = Integer::MIN_VALUE;
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::subtractExact(minValue, b);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathSubtractExactLong){
+    // Given 2 long
+    long a = 10;
+    long b = 20;
+    long expectResult = -10;
+    long actualResult = Math::subtractExact(a, b);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a value equal to Integer::MIN_VALUE
+    long minValue = Long::MIN_VALUE;
+    long expectOverFlowResult = 0;
+    long actualOverFlowResult = Math::subtractExact(minValue, b);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathToIntExact){
+    // Given a long
+    long a = 100;
+    int expectResult = 100;
+    int actualResult = Math::toIntExact(a);
+    ASSERT_EQUAL(expectResult, actualResult);
+
+    // Given a long > Long::MAX_VALUE
+    long b = Long::MAX_VALUE;
+    int expectOverFlowResult = 0;
+    int actualOverFlowResult = Math::toIntExact(b);
+    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+}
+
+TEST (JavaLang, MathFloorDivLong) {
+    // Given 2 int
+    long dividend1 = 10;
+    long divisor1 = 5;
+    long expectResult1 = 2;
+    long actualResult1 = Math::floorDiv(dividend1, divisor1);
+    ASSERT_EQUAL(expectResult1, actualResult1);
+
+    // Given 2 long
+    long dividend2 = 11;
+    long divisor2 = -5;
+    long expectResult2 = -3;
+    long actualResult2 = Math::floorDiv(dividend2, divisor2);
+    ASSERT_EQUAL(expectResult2, actualResult2);
+
+    // Given 2 long
+    long dividend3 = 11;
+    long divisor3 = 0;
+    long expectResult3 = 0;
+    long actualResult3 = Math::floorDiv(dividend3, divisor3);
+    ASSERT_EQUAL(expectResult3, actualResult3);
+}
+
+TEST (JavaLang, MathFloorModInt){
+    // Given 2 int
+    int dividend1 = 10;
+    int divisor1 = 5;
+    int expectResult1 = 0;
+    int actualResult1 = Math::floorMod(dividend1, divisor1);
+    ASSERT_EQUAL(expectResult1, actualResult1);
+
+    // Given 2 int
+    int dividend2 = 11;
+    int divisor2 = -5;
+    int expectResult2 = -4;
+    int actualResult2 = Math::floorMod(dividend2, divisor2);
+    ASSERT_EQUAL(expectResult2, actualResult2);
+}
+
+TEST (JavaLang, MathFloorModLong){
+    // Given 2 int
+    long dividend1 = 10;
+    long divisor1 = 5;
+    long expectResult1 = 0;
+    long actualResult1 = Math::floorMod(dividend1, divisor1);
+    ASSERT_EQUAL(expectResult1, actualResult1);
+
+    // Given 2 long
+    long dividend2 = 11;
+    long divisor2 = -5;
+    long expectResult2 = -4;
+    long actualResult2 = Math::floorMod(dividend2, divisor2);
+    ASSERT_EQUAL(expectResult2, actualResult2);
 }
 
 TEST (JavaLang, MathMax) {
@@ -373,7 +1303,6 @@ TEST (JavaLang, MathPow) {
 }
 
 TEST (JavaLang, MathRound) {
-	return;
 	double double_value_round = 1.23643435;
 	ASSERT_EQUAL(1, Math::round(double_value_round));
 
@@ -385,8 +1314,3 @@ TEST (JavaLang, MathRandom) {
 	//ASSERT_TRUE(Math::random() > 0 && Math::random() < 1);
 }
 
-TEST (JavaLang, MathMultipleExact){
-    int base = Integer::MAX_VALUE;
-    int power = 2;
-    //ASSERT_EQUAL(4294967294, Math::multiplyExact(base,power));
-}

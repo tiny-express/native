@@ -27,6 +27,7 @@
 #include "Math.hpp"
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
+#include "exception"
 
 using namespace Java::Lang;
 
@@ -241,8 +242,9 @@ double Math::cosh(double a) {
  * @return long
  */
 long Math::decrementExact(long a) {
-    if(Long::MIN_VALUE == a){
+    if(a == Long::MIN_VALUE){
         //TODO throw new ArithmeticException("long overflow");
+        return 0;
     }
     return a - 1;
 }
@@ -255,8 +257,9 @@ long Math::decrementExact(long a) {
  * @return int
  */
 int Math::decrementExact(int a) {
-    if(Integer::MIN_VALUE == a){
+    if(a == Integer::MIN_VALUE){
         //TODO throw new ArithmeticException("integer overflow");
+        return 0;
     }
     return a - 1;
 }
@@ -312,6 +315,9 @@ double Math::floor(double a) {
  * @return int
  */
 int Math::floorDiv(int a, int b) {
+    if(b == 0)
+        //TODO throw ArithmeticException
+        return 0;
     int result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -329,6 +335,9 @@ int Math::floorDiv(int a, int b) {
  * @return long
  */
 long Math::floorDiv(long a, long b) {
+    if(b == 0)
+        //TODO throw ArithmeticException
+        return 0;
     long result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -419,7 +428,7 @@ double Math::hypot(double a, double b) {
  * then the result is the same as the first argument.
  */
 double Math::IEEEremainder(double dividend, double divisor) {
-    return math_ieeeremainder(dividend,divisor);
+    return math_ieeeremainder(dividend, divisor);
 }
 
 /**
@@ -432,6 +441,7 @@ double Math::IEEEremainder(double dividend, double divisor) {
 int Math::incrementExact(int a) {
     if (a == Integer::MAX_VALUE) {
         //TODO throw new ArithmeticException("long overflow");
+        return 0;
     }
     return a + 1;
 }
@@ -446,6 +456,7 @@ int Math::incrementExact(int a) {
 long Math::incrementExact(long a) {
     if (a == Long::MAX_VALUE) {
         //TODO throw new ArithmeticException("long overflow");
+        return 0;
     }
     return a + 1L;
 }
@@ -608,20 +619,26 @@ int Math::multiplyExact(int a, int b) {
 
 long Math::multiplyExact(long a, long b) {
     long result = a * b;
-    long absA = (unsigned) abs(a);
-    long absB = (unsigned) abs(b);
+    unsigned long absA = abs(a);
+    unsigned long absB = abs(b);
 
-    if (((absA | absB) >> 31 != 0)) {
+    if (((absA | absB) >> 31) != 0) {
 
         // Some bits greater than 2^31 that might cause overflow
         // Check the result using the divide operator
         // and check for the special case of Long.MIN_VALUE * -1
 
-        if (((b != 0) && (result / b != a)) || (a == Long::MIN_VALUE && b == -1)) {
-            //TODO throw new ArithmeticException("long overflow");
+        try {
+            if(a == Long::MIN_VALUE && b == -1)
+                throw std::overflow_error("long overflow");
+            if((b != 0) && (result / b != a))
+                throw std::overflow_error("long overflow");
+        }
+        catch (std::overflow_error e){
+            return 0;
         }
     }
-    return result;
+    return (long) result;
 }
 
 /**
@@ -634,6 +651,7 @@ long Math::multiplyExact(long a, long b) {
 int Math::negateExact(int a) {
     if (a == Integer::MIN_VALUE) {
         //TODO throw new ArithmeticException("integer overflow");
+        return 0;
     }
     return -a;
 }
@@ -648,6 +666,7 @@ int Math::negateExact(int a) {
 long Math::negateExact(long a) {
     if (a == Long::MIN_VALUE) {
         //TODO throw new ArithmeticException("long overflow");
+        return 0;
     }
     return -a;
 }
@@ -802,7 +821,7 @@ double Math::powerOfTwoD(int n) {
         //TODO throw Assertion error
     else
         return Double::longBitsToDouble((((long)n + (long)Double::EXP_BIAS) <<
-               (Double::SIGNIFICAND_WIDTH-1)) & Double::EXP_BIT_MASK);
+               (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
 }
 
 /**
@@ -1090,9 +1109,9 @@ double Math::toRadians(double angleDegree) {
 float Math::ulp(float a) {
     int exp = getExponent(a);
     switch(exp) {
-        case Float::MAX_EXPONENT+1:        // NaN or infinity
+        case Float::MAX_EXPONENT + 1:        // NaN or infinity
             return Math::abs(a);
-        case Float::MIN_EXPONENT-1:        // zero or subnormal
+        case Float::MIN_EXPONENT - 1:        // zero or subnormal
             return Float::MIN_VALUE;
         default:
             if(exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT)
@@ -1105,7 +1124,7 @@ float Math::ulp(float a) {
                 }
                 /*else {
                     return Float::intBitsToFloat(1 <<
-                    (exp - (Float::MIN_EXPONENT - (Float::SIGNIFICAND_WIDTH-1)) ));
+                    (exp - (Float::MIN_EXPONENT - (Float::SIGNIFICAND_WIDTH - 1)) ));
                 }*/
             }
     }
@@ -1124,9 +1143,9 @@ float Math::ulp(float a) {
 double Math::ulp(double a) {
     int exp = getExponent(a);
     switch(exp) {
-        case Double::MAX_EXPONENT+1:        // NaN or infinity
+        case Double::MAX_EXPONENT + 1:        // NaN or infinity
             return Math::abs(a);
-        case Double::MIN_EXPONENT-1:        // zero or subnormal
+        case Double::MIN_EXPONENT - 1:        // zero or subnormal
             return Double::MIN_VALUE;
         default:
             if(exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT)
@@ -1137,7 +1156,7 @@ double Math::ulp(double a) {
                     return powerOfTwoD(exp);
                 else {
                     return Double::longBitsToDouble(1 <<
-                    (exp - (Double::MIN_EXPONENT - (Double::SIGNIFICAND_WIDTH-1)) ));
+                    (exp - (Double::MIN_EXPONENT - (Double::SIGNIFICAND_WIDTH - 1)) ));
                 }
             }
     }
