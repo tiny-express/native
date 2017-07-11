@@ -32,3 +32,74 @@ extern "C" {
 
 using namespace Java::Lang;
 
+TEST(JavaLang, StringBuilderConstructor) {
+    const int defaultOriginalCapacity = 16;
+    StringBuilder defaultStringBuilder;
+    ASSERT_EQUAL(0, defaultStringBuilder.length());
+    ASSERT_EQUAL(defaultOriginalCapacity, defaultStringBuilder.capacity());
+
+    StringBuilder customCapacityStringBuilder(20);
+    ASSERT_EQUAL(0, customCapacityStringBuilder.length());
+    ASSERT_EQUAL(20, customCapacityStringBuilder.capacity());
+
+    String aString = "Hello! Welcome to VietNam!";
+    int aStringLength = aString.length();
+    StringBuilder nullTerminatedStringStringBuilder(aString.toString());
+    StringBuilder stringStringBuilder(aString);
+    int newCapacity = defaultOriginalCapacity + aStringLength;
+    ASSERT_EQUAL(aStringLength, nullTerminatedStringStringBuilder.length());
+    ASSERT_EQUAL(newCapacity, nullTerminatedStringStringBuilder.capacity());
+    ASSERT_EQUAL(aStringLength, stringStringBuilder.length());
+    ASSERT_EQUAL(newCapacity, stringStringBuilder.capacity());
+
+    StringBuilder initializerListStringBuilder({'a', 'b', 'c'});
+    ASSERT_EQUAL(3, initializerListStringBuilder.length());
+    ASSERT_EQUAL(defaultOriginalCapacity + initializerListStringBuilder.length(), initializerListStringBuilder.capacity());
+}
+
+TEST(JavaLang, StringBuilderDestructor) {
+    // Destructor will be called automatically.
+    StringBuilder stringBuilder;
+
+    // Destructor will be called by delete operator.
+    StringBuilder *pStringBuilder = new StringBuilder();
+    delete pStringBuilder;
+}
+
+TEST(JavaLang, StringBuilderCapacity) {
+    StringBuilder stringBuilder(100);
+    ASSERT_EQUAL(100, stringBuilder.capacity());
+}
+
+TEST(JavaLang, StringBuilderCharAt) {
+    StringBuilder stringBuilder({'a', 'b', 'c'});
+    ASSERT_EQUAL('a', stringBuilder.charAt(0));
+    ASSERT_EQUAL('b', stringBuilder.charAt(1));
+    ASSERT_EQUAL('c', stringBuilder.charAt(2));
+}
+
+TEST(JavaLang, StringBuilderEnsureCapacity) {
+    StringBuilder stringBuilder;
+    ASSERT_EQUAL(0, stringBuilder.length());
+    ASSERT_EQUAL(16, stringBuilder.capacity());
+    stringBuilder.ensureCapacity(10);
+    ASSERT_EQUAL(16, stringBuilder.capacity());
+    stringBuilder.ensureCapacity(17);
+    ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
+    stringBuilder.ensureCapacity(100);
+    ASSERT_EQUAL(100, stringBuilder.capacity());
+}
+
+TEST(JavaLang, StringBuilderLength) {
+    String aString("Hello! I'm a String");
+    StringBuilder stringBuilder(aString);
+    ASSERT_EQUAL(aString.length(), stringBuilder.length());
+}
+
+TEST(JavaLang, StringBuilderToString) {
+    String aString = "Hello!";
+    StringBuilder stringBuilder(aString.toString());
+    string cString = stringBuilder.toString();
+    ASSERT_TRUE(aString == String(cString));
+    free(cString);
+}

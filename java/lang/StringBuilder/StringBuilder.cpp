@@ -24,3 +24,130 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "../StringBuilder/StringBuilder.hpp"
+
+using namespace Java::Lang;
+
+StringBuilder::StringBuilder() : StringBuilder(16) { }
+
+StringBuilder::StringBuilder(int capacity) {
+    int numberOfBytesForCapacity = capacity * sizeof(char);
+    this->original = (string)malloc((size_t)numberOfBytesForCapacity);
+    this->currentLength = 0;
+    this->currentCapacity = capacity;
+}
+
+StringBuilder::StringBuilder(const string target) {
+    int stringLength = (int)strlen(target);
+    int newCapacity = 16 + stringLength;
+    this->ensureCapacity(newCapacity);
+    this->append(target);
+}
+
+StringBuilder::StringBuilder(const String &target) {
+    int newCapacity = 16 + target.length();
+    this->ensureCapacity(newCapacity);
+    this->append(target.toString());
+}
+
+StringBuilder::StringBuilder(const std::initializer_list<char> &target) {
+    int newCapacity = 16 + (int)target.size();
+    this->ensureCapacity(newCapacity);
+    this->append(target);
+}
+
+StringBuilder::StringBuilder(const StringBuilder &target) {
+    int numberOfBytesOfCapacity = target.currentCapacity * sizeof(char);
+    this->original = (string)malloc((size_t)numberOfBytesOfCapacity);
+    #ifdef __linux__
+    register
+#endif
+    int index;
+    for (index = 0; index < target.currentLength; index++) {
+        this->original[index] = target.original[index];
+    }
+    this->currentLength = target.currentLength;
+    this->currentCapacity = target.currentCapacity;
+}
+
+StringBuilder StringBuilder::append(const string target) {
+    int stringLength = (int)strlen(target);
+    int newLength = this->currentLength + stringLength;
+    this->ensureCapacity(newLength);
+#ifdef __linux__
+    register
+#endif
+    int indexOfOriginal;
+#ifdef __linux__
+    register
+#endif
+    int indexOfString = 0;
+    for (indexOfOriginal = this->currentLength; indexOfOriginal < newLength; indexOfOriginal++) {
+        this->original[indexOfOriginal] = target[indexOfString];
+        indexOfString = indexOfString + 1;
+    }
+    this->currentLength = newLength;
+    return *this;
+}
+
+StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
+    int newLength = this->currentLength + (int)target.size();
+    this->ensureCapacity(newLength);
+#ifndef __linux__
+    register
+#endif
+    int index = this->currentLength;
+    std::initializer_list<char>::const_iterator listIterator;
+    for (listIterator = target.begin(); listIterator != target.end(); listIterator++) {
+        this->original[index] = *listIterator;
+        index = index + 1;
+    }
+    this->currentLength = newLength;
+    return *this;
+}
+
+StringBuilder::~StringBuilder() {
+    free(original);
+}
+
+int StringBuilder::capacity() const {
+    return this->currentCapacity;
+}
+
+char StringBuilder::charAt(int index) const {
+    if (index < 0 || index >= this->currentLength) {
+        throw std::invalid_argument("index is out of range");
+    }
+
+    return this->original[index];
+}
+
+void StringBuilder::ensureCapacity(int minimumCapacity) {
+    if ((minimumCapacity > 0) && (minimumCapacity > this->currentCapacity)) {
+        int newCapacity = this->currentCapacity * 2 + 2;
+        if (newCapacity < minimumCapacity) {
+            newCapacity = minimumCapacity;
+        }
+        int numberOfBytes = newCapacity * sizeof(char);
+        this->original = (string)realloc(this->original, (size_t)numberOfBytes);
+        this->currentCapacity = newCapacity;
+    }
+}
+
+int StringBuilder::length() const {
+    return this->currentLength;
+}
+
+string StringBuilder::toString() const {
+    int numberOfBytes = (this->currentLength + 1) * sizeof(char); // increases by 1 for null terminator.
+    string content = (string)malloc((size_t)numberOfBytes);
+#ifdef __linux__
+    register
+#endif
+    int index;
+    for (index = 0; index < this->currentLength; index++) {
+        content[index] = this->original[index];
+    }
+    content[this->currentLength] = '\0';
+    return content;
+}
