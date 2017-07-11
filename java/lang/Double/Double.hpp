@@ -54,7 +54,7 @@ static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
 /**
  * A constant holding a Not-a-Number (NaN) value of type
  */
-static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
+static double NaN_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
 
 /**
  * A constant holding the largest positive finite value of type
@@ -704,6 +704,16 @@ namespace Java {
             * @return string binary 32 bit of input
             */
             static string doubleToBinary32StringType(double doubleInput );
+
+            /**
+            * Convert double to binary 64 bit
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+            *
+            * @param double
+            * @return string binary 64 bit of input
+            */
+            static string doubleToBinary64StringType(double doubleInput );
 		};
 	}
 }
