@@ -29,28 +29,25 @@
 
 #include <initializer_list>
 #include <iostream>
-#import "../AbstractMap/AbstractMap.hpp"
-#import "../Map/Map.hpp"
+#include "../AbstractMap/AbstractMap.hpp"
+#include "../Map/Map.hpp"
 
 namespace Java {
 	namespace Util {
 		template <typename K, typename V>
-		class HashMap : public AbstractMap
-                    , public virtual Map<K, V>
-					, public virtual Cloneable
-					, public virtual Serializable
-		{
+		class HashMap : public AbstractMap, public virtual Map<K, V>, public virtual Cloneable, public virtual Serializable {
 		private:
 			std::map<K, V> original;
-            typedef typename std::map<K, V>::iterator _iterator;
-            typedef typename std::map<K, V>::const_iterator _const_iterator;
-
+			typedef typename std::map<K, V>::iterator _iterator;
+			typedef typename std::map<K, V>::const_iterator _const_iterator;
+		
 		public:
 			/**
 			 * Constructs an empty HashMap
 			 */
-			HashMap(){}
-
+			HashMap() {
+			}
+			
 			/**
 			 * Constructs a new HashMap with the same mappings as the specified Map.
 			 *
@@ -60,12 +57,13 @@ namespace Java {
 			HashMap(const HashMap<K, V> &target) {
 				this->putAll(target);
 			}
-
+			
 			/**
 			 * Destructor HashMap
 			 */
-			~HashMap(){}
-
+			~HashMap() {
+			}
+		
 		public:
 			_iterator begin() {
 				return this->original.begin();
@@ -79,8 +77,8 @@ namespace Java {
 			_const_iterator end() const {
 				return this->original.end();
 			};
-
-
+		
+		
 		public:
 			/**
 			 * Removes all of the mappings from this map. The map will be empty after this call returns.
@@ -88,7 +86,7 @@ namespace Java {
 			void clear() {
 				this->original.clear();
 			}
-
+			
 			/***
 			 * Returns a shallow copy of this HashMap instance: the keys and values themselves are not cloned.
 			 *
@@ -99,10 +97,10 @@ namespace Java {
 				for (auto const &element: this->original) {
 					result.put(element.first, element.second);
 				}
-
+				
 				return result;
 			}
-
+			
 			/**
 			 * //TODO
 			 *
@@ -114,7 +112,7 @@ namespace Java {
 			 * @return V - the new value associated with the specified key, or null if none
 			 */
 			//V compute(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);
-
+			
 			/**
 			 * //TODO
 			 *
@@ -127,7 +125,7 @@ namespace Java {
 			 * or null if the computed value is null
 			 */
 			//V computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction);
-
+			
 			/**
 			 * //TODO
 			 *
@@ -139,7 +137,7 @@ namespace Java {
 			 * @return V - the new value associated with the specified key, or null if none
 			 */
 			//V computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);
-
+			
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
 			 *
@@ -149,16 +147,9 @@ namespace Java {
 			 * 	false: otherwise
 			 */
 			boolean containsKey(const K &key) const {
-				V value = get(key);
-				boolean isNull = ((Nullable *)&value)->isNull();
-
-                if (isNull) {
-                    return false;
-                }
-
-                return true;
+				return this->original.find(key) != this->original.end();
 			}
-
+			
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
 			 *
@@ -168,14 +159,14 @@ namespace Java {
 			 *  false: otherwise
 			 */
 			boolean containsValue(const V &value) const {
-				for (auto const &ent1 : this->original) {
-					if (ent1.second == value) {
+				for (auto const &pair : this->original) {
+					if (pair.second == value) {
 						return true;
 					}
 				}
 				return false;
 			}
-
+			
 			/**
 			 * //TODO
 			 *
@@ -183,13 +174,13 @@ namespace Java {
 			 * @return Set<Map.Entry<K,V>> - a set view of the mappings contained in this map
 			 */
 			//Set<Map.Entry<K,V>> entrySet();
-
+			
 			/**
 			 * Don't support this method
 			 * Instead use: for (auto const &element: hashMap) {}
 			 */
 			//void forEach(BiConsumer<? super K,? super V> action);
-
+			
 			/**
 			 * Returns the value to which the specified key is mapped,
 			 * or null if this map contains no mapping for the key
@@ -200,18 +191,15 @@ namespace Java {
 			V get(const K &key) const {
 				V result;
 				auto const it = this->original.find(key);
-
+				
 				if (it == this->original.end()) {
-                    ((Nullable *)&result)->setNullable(true);
 					return result;
 				}
-
+				
 				result = it->second;
-                ((Nullable *)&result)->setNullable(false);
-
 				return result;
 			}
-
+			
 			/**
 			 *  Returns the value to which the specified key is mapped,
 			 *  or defaultValue if this map contains no mapping for the key.
@@ -222,19 +210,17 @@ namespace Java {
 			 * or defaultValue if this map contains no mapping for the key
 			 */
 			V getOrDefault(const K &key, const V &defaultValue) const {
-                V result;
-                auto const it = this->original.find(key);
-
-                if (it == this->original.end()) {
-                    result = defaultValue;
-                } else {
-                    result = it->second;
-                }
-                ((Nullable *)&result)->setNullable(false);
-
-                return result;
+				V result;
+				auto const it = this->original.find(key);
+				
+				if (it == this->original.end()) {
+					result = defaultValue;
+				} else {
+					result = it->second;
+				}
+				return result;
 			}
-
+			
 			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
@@ -245,7 +231,7 @@ namespace Java {
 			boolean isEmpty() const {
 				return ( this->original.size() == 0 );
 			}
-
+			
 			/**
 			 * //TODO
 			 *
@@ -253,7 +239,7 @@ namespace Java {
 			 * @return Set<K> - a set view of the keys contained in this map
 			 */
 			//Set<K> keySet();
-
+			
 			/**
 			 * Don't support this method
 			 *
@@ -267,7 +253,7 @@ namespace Java {
 			 * @return V - the new value associated with the specified key, or null if no value is associated with the key
 			 */
 			//V merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction);
-
+			
 			/**
 			 * Returns a shallow copy of this HashMap instance: the keys and values themselves are not cloned.
 			 *
@@ -277,7 +263,7 @@ namespace Java {
 			void put(const K &key, const V &value) {
 				this->original.insert(std::make_pair(key, value));
 			}
-
+			
 			/**
 			 * Copies all of the mappings from the specified map to this map.
 			 *
@@ -285,12 +271,12 @@ namespace Java {
 			 */
 			void putAll(const HashMap<K, V> &map) {
 				for (auto const &element: map) {
-                    K key = element.first;
-                    V value = element.second;
-                    this->original.insert(std::make_pair(key, value));
+					K key = element.first;
+					V value = element.second;
+					this->original.insert(std::make_pair(key, value));
 				}
-            }
-
+			}
+			
 			/**
 			 * If the specified key is not already associated with a value (or is mapped to null)
 			 * associates it with the given value and returns null, else returns the current value.
@@ -302,20 +288,20 @@ namespace Java {
 			 * that the map previously associated null with the key, if the implementation supports null values.)
 			 */
 			V putIfAbsent(K key, V value) {
-                V result;
-                auto const it = this->original.find(key);
-
-                if (it == this->original.end()) {
-                    ((Nullable *)&result)->setNullable(true);
-                } else {
-                    result = it->second;
-                    ((Nullable *) &result)->setNullable(false);
-                }
-
-                this->original[key] = value;
-                return result;
+				V result;
+				auto const it = this->original.find(key);
+				
+				if (it == this->original.end()) {
+					//(( Nullable * ) & result )->setNullable(true);
+				} else {
+					result = it->second;
+					//(( Nullable * ) & result )->setNullable(false);
+				}
+				
+				this->original[ key ] = value;
+				return result;
 			}
-
+			
 			/**
 			 * Removes the mapping for the specified key from this map if present.
 			 *
@@ -326,19 +312,19 @@ namespace Java {
 			V remove(const K &key) {
 				V result;
 				auto const it = this->original.find(key);
-
+				
 				if (it == this->original.end()) {
-					((Nullable *)&result)->setNullable(true);
+					//(( Nullable * ) & result )->setNullable(true);
 					return result;
 				}
-
+				
 				result = it->second;
-                ((Nullable *)&result)->setNullable(false);
-
+				//(( Nullable * ) & result )->setNullable(false);
+				
 				this->original.erase(key);
 				return result;
 			}
-
+			
 			/**
 			 * Removes the entry for the specified key only if it is currently mapped to the specified value.
 			 *
@@ -350,70 +336,70 @@ namespace Java {
 			 */
 			boolean remove(const K &key, const V &value) {
 				auto const it = this->original.find(key);
-
+				
 				if (it == this->original.end() || it->second != value) {
 					return false;
 				}
-
+				
 				this->original.erase(key);
 				return true;
 			}
-
-            /**
-             * Replaces the entry for the specified key only if it is currently mapped to some value.
-             *
-             * @param key - key with which the specified value is associated
-             * @param value - value to be associated with the specified key
-             * @return V - the previous value associated with the specified key,
-             * or null if there was no mapping for the key.
-             * (A null return can also indicate that the map previously associated null with the key,
-             * if the implementation supports null values.)
-             */
-            V replace(const K &key, const V &value) {
+			
+			/**
+			 * Replaces the entry for the specified key only if it is currently mapped to some value.
+			 *
+			 * @param key - key with which the specified value is associated
+			 * @param value - value to be associated with the specified key
+			 * @return V - the previous value associated with the specified key,
+			 * or null if there was no mapping for the key.
+			 * (A null return can also indicate that the map previously associated null with the key,
+			 * if the implementation supports null values.)
+			 */
+			V replace(const K &key, const V &value) {
 				V result;
 				auto const it = this->original.find(key);
-
+				
 				if (it == this->original.end()) {
-					((Nullable *)&result)->setNullable(true);
+					//(( Nullable * ) & result )->setNullable(true);
 					return result;
 				}
-
+				
 				result = it->second;
-				((Nullable *)&result)->setNullable(false);
-
-				this->original[key] = value;
-
+				//(( Nullable * ) & result )->setNullable(false);
+				
+				this->original[ key ] = value;
+				
 				return result;
-            }
-
-            /**
-             * Replaces the entry for the specified key only if currently mapped to the specified value.
-             *
-             * @param key - key with which the specified value is associated
-             * @param oldValue - value expected to be associated with the specified key
-             * @param newValue - value to be associated with the specified key
-             * @return boolean
-             * true : if the value was replaced
-             * false: if otherwise
-             */
-            boolean replace(const K &key, const V &oldValue, const V &newValue) {
-                V result;
-                auto const it = this->original.find(key);
-
-                if (it == this->original.end() || it->second != oldValue) {
-                    return false;
-                }
-
-                this->original[key] = newValue;
-                return true;
-            }
-
+			}
+			
+			/**
+			 * Replaces the entry for the specified key only if currently mapped to the specified value.
+			 *
+			 * @param key - key with which the specified value is associated
+			 * @param oldValue - value expected to be associated with the specified key
+			 * @param newValue - value to be associated with the specified key
+			 * @return boolean
+			 * true : if the value was replaced
+			 * false: if otherwise
+			 */
+			boolean replace(const K &key, const V &oldValue, const V &newValue) {
+				V result;
+				auto const it = this->original.find(key);
+				
+				if (it == this->original.end() || it->second != oldValue) {
+					return false;
+				}
+				
+				this->original[ key ] = newValue;
+				return true;
+			}
+			
 			/**
 			 * Don't support this method
 			 * Instead use: void replaceAll(const V &value)
 			 */
 			//void replaceAll(BiFunction<? super K,? super V,? extends V> function);
-
+			
 			/**
 			 * Replace all key inside this instance with the spcified value
 			 *
@@ -424,7 +410,7 @@ namespace Java {
 					element.second = value;
 				}
 			}
-
+			
 			/**
 			 * Returns the number of key-value mappings in this map.
 			 *
@@ -433,7 +419,7 @@ namespace Java {
 			int size() const {
 				return this->original.size();
 			}
-
+			
 			/**
 			 * //TODO
 			 *
@@ -441,46 +427,46 @@ namespace Java {
 			 * @return Collection<V> - a view of the values contained in this map
 			 */
 			//Collection<V> values();
-
-            /**
-             * Return a presentation of all key/value in this object
-             *
-             * @return string
-             */
-            string toString() const {
+			
+			/**
+			 * Return a presentation of all key/value in this object
+			 *
+			 * @return string
+			 */
+			string toString() const {
 				if (this->size() == 0) {
 					return strdup("{}");
 				}
-
+				
 				string builder = strdup("{");
-
+				
 				int sizeCounter = this->size();
 				typename std::map<K, V>::const_iterator it;
-				for (it = this->original.begin();  it != this->original.end() ; ++it) {
+				for (it = this->original.begin(); it != this->original.end(); ++it) {
 					sizeCounter--;
-
+					
 					if (instanceof<Object>(it->first) && instanceof<Object>(it->second)) {
-
-						string key = ((Object *)&it->first)->toString();
-						string value = ((Object *)&it->second)->toString();
-
-						string addCharacter = (string)"";
+						
+						string key = ((Object *) &it->first )->toString();
+						string value = ((Object *) &it->second )->toString();
+						
+						string addCharacter = (string) "";
 						if (sizeCounter > 0) {
-							addCharacter = (string)", ";
+							addCharacter = (string) ", ";
 						}
-
+						
 						string holder = builder;
 						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
 						free(holder);
 					}
 				}
-
+				
 				string holder = builder;
 				asprintf(&builder, "%s%c\0", builder, '}');
 				free(holder);
-
+				
 				return builder;
-            }
+			}
 		};
 		
 	}

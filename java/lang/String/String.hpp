@@ -28,7 +28,6 @@
 #define NATIVE_JAVA_LANG_STRING_HPP
 
 #include "../Object/Object.hpp"
-#include "../Nullable/Nullable.h"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
@@ -37,18 +36,18 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-
+		
 		class String;
-
-		class String : public Object,
-					   public virtual Serializable,
-					   public virtual Comparable<String>,
-					   public virtual CharSequence,
-                       public virtual Nullable {
+		
+		class String :
+				public Object,
+		                public virtual Serializable,
+				public virtual Comparable<String>,
+		                public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
-
+		
 		public:
 			String();
 			String(const_string original);
@@ -57,10 +56,10 @@ namespace Java {
 			String(Array<byte> &bytes);
 			String(const String &target);
 			~String();
-
+		
 		public:
 			char charAt(int index) const;
-
+			
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
@@ -118,7 +117,7 @@ namespace Java {
 			static String valueOf(long target);
 			static String valueOf(float target);
 			static String valueOf(double target);
-
+		
 		public:
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;
@@ -137,25 +136,20 @@ namespace Java {
 				result += target2;
 				return result;
 			};
-
+			
 			//FIXME: Temporary
 			String subString(int fromIndex) {
 				if (fromIndex < 0 || fromIndex >= this->length()) {
 					return "";
 				}
-
-				return &(this->original[fromIndex]);
+				
+				return &( this->original[ fromIndex ] );
 			}
-
-            //FIXME: Temporary for HashMap
-            virtual void setNullable(const boolean &value) {
-                this->null = value;
-            }
-
-            virtual boolean isNull() const {
-                return this->null;
-            }
-
+			
+//			virtual boolean isNull() const {
+//				return this->null;
+//			}
+			
 		};
 	}
 }
