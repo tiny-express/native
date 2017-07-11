@@ -3,7 +3,7 @@
  &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
  &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
  &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
- ![Library Structure](misc/native.png)
+ ![Library Structure](misc/native-library.png)
 
 **Native Library** provides a low-level optimization with productivity for C/C++ application.
 
