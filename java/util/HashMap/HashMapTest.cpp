@@ -227,30 +227,22 @@ TEST (JavaUtil, HashMapPutIfAbsent) {
 	String expectedKey = "abc";
 	String expectedValue = "123";
 	String actualValue = hashMap.get(expectedKey);
-
-//    ASSERT_FALSE(actualValue.isNull());
 	ASSERT_STR(expectedValue.toString(), actualValue.toString());
 	
 	// Make putIfAbsent with correct key, result's returned must equal to old value
 	String oldValue = "123";
 	String newValue = "other value";
 	String putResult = hashMap.putIfAbsent(expectedKey, newValue);
-
-//    ASSERT_FALSE(putResult.isNull());
 	ASSERT_STR(oldValue.toString(), putResult.toString());
 	
 	// Valid data inside after putted
 	String getResult = hashMap.get(expectedKey);
-
-//    ASSERT_FALSE(getResult.isNull());
 	ASSERT_STR(newValue.toString(), getResult.toString());
 	
 	// Make putIfAbsent with incorrect key, result's returned must be null
 	String wrongKey = "wrong key";
 	newValue = "something here";
 	putResult = hashMap.putIfAbsent(wrongKey, newValue);
-
-//    ASSERT_TRUE(putResult.isNull());
 }
 
 TEST (JavaUtil, HashMapRemoveKey) {
@@ -265,15 +257,11 @@ TEST (JavaUtil, HashMapRemoveKey) {
 	
 	String expectedResult = "1111";
 	String result = hashMap.get("another thing");
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedResult.toString(), result.toString());
 	
 	// Test valid data return after removed
 	String removeResult = hashMap.remove("another thing");
 	expectedResult = "1111";
-
-//    ASSERT_FALSE(removeResult.isNull());
 	ASSERT_STR(expectedResult.toString(), removeResult.toString());
 	
 	// Test size after removed
@@ -282,7 +270,7 @@ TEST (JavaUtil, HashMapRemoveKey) {
 	
 	// Test old key must not be in hash map
 	String getOldKeyResult = hashMap.get("another thing");
-//    ASSERT_TRUE(getOldKeyResult.isNull());
+	ASSERT_TRUE(getOldKeyResult.isEmpty());
 }
 
 TEST (JavaUtil, HashMapRemoveKeyValue) {
@@ -297,8 +285,6 @@ TEST (JavaUtil, HashMapRemoveKeyValue) {
 	// Valid data before remove
 	String expectedResult = "123";
 	String result = hashMap.get("some key");
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedResult.toString(), result.toString());
 	
 	// Test remove fail by key is not mapped to the correct value.
@@ -321,25 +307,17 @@ TEST (JavaUtil, HashMapReplace) {
 	String expectedKey = ".;;',";
 	String expectedValue = "ab232";
 	String result = hashMap.get(expectedKey);
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Test replace(expectedKey, value)
 	String oldValue = "ab232";
 	String newValue = "250008";
 	String replaceResult = hashMap.replace(expectedKey, newValue);
-	
-	// Result replace must not be null and equal to old value
-//    ASSERT_FALSE(replaceResult.isNull());
 	ASSERT_STR(oldValue.toString(), replaceResult.toString());
 	
 	// Valid new data inside mapped expectedKey
 	expectedValue = newValue;
 	result = hashMap.get(expectedKey);
-	
-	// Result must not be null and equal to newValue
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 }
 
@@ -357,8 +335,6 @@ TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
 	String expectedKey = "key123";
 	String expectedValue = "!@#";
 	String getResult = hashMap.get(expectedKey);
-
-//    ASSERT_FALSE(getResult.isNull());
 	ASSERT_STR(expectedValue.toString(), getResult.toString());
 	
 	// Replace with correct key/oldValue - result must equal to TRUE
@@ -383,8 +359,6 @@ TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
 	key = "some key";
 	oldValue = "123";
 	getResult = hashMap.get(key);
-
-//    ASSERT_FALSE(key.isNull());
 	ASSERT_STR(oldValue.toString(), getResult.toString());
 }
 
@@ -397,14 +371,10 @@ TEST (JavaUtil, HashMapReplaceAll) {
 	// Valid data inside before replace
 	String expectedValue = "1000";
 	String result = hashMap.get("key1");
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	expectedValue = "2000";
 	result = hashMap.get("key2");
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Replace all value inside hash map that mapped with key to newValue
@@ -413,11 +383,9 @@ TEST (JavaUtil, HashMapReplaceAll) {
 	
 	// Valid data after replaced, all value inside must equal to newValue
 	result = hashMap.get("key1");
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(newValue.toString(), result.toString());
 	
 	result = hashMap.get("key2");
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(newValue.toString(), result.toString());
 }
 
