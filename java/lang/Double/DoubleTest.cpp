@@ -274,7 +274,7 @@ TEST (JavaLang, DoubleToString){
 
     // Test MIN_NORMAL_DOUBLE
     variableTestToString = MIN_NORMAL_DOUBLE;
-    expectedResultToString = (string) "2.225073858507201e-308";
+    expectedResultToString = (string) "4.940656458412465e-324";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
@@ -317,7 +317,7 @@ TEST (JavaLang, DoubleCharValue){
 
     // Test MIN_NORMAL_DOUBLE
     variableTestCharValue = MIN_NORMAL_DOUBLE;
-    expectedResultCharValue = '2';
+    expectedResultCharValue = '4';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
@@ -379,7 +379,7 @@ TEST (JavaLang, DoubleStringValue){
 
     // Test MIN_NORMAL_DOUBLE
     variableTestStringValue = MIN_NORMAL_DOUBLE;
-    expectedResultStringValue = (string) "2.225073858507201e-308";
+    expectedResultStringValue = (string) "4.940656458412465e-324";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 

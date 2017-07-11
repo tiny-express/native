@@ -59,12 +59,12 @@ static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
 /**
  * A constant holding the largest positive finite value of type
  */
-static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
+static double MAX_VALUE_DOUBLE = std::numeric_limits<double>::max(); // 1.797693134862316e+308
 
 /**
  * A constant holding the smallest positive normal value of type
  */
-static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
+static double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min(); // 4.940656458412465e-324
 
 /**
  * A constant holding the smallest positive nonzero value of type
@@ -76,7 +76,7 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min(); //2.2250738
  * have.  It is equal to the value returned by
  * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
  */
-static int	MIN_EXPONENT	= -1022;
+static int	MIN_EXPONENT_DOUBLE	= -1022;
 
 namespace Java {
 	namespace Lang {
