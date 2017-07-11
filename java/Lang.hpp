@@ -51,7 +51,7 @@
 #include "lang/Short/Short.hpp"
 #include "lang/String/String.hpp"
 #include "lang/System/System.hpp"
-#include "lang/Thowable/Throwable.hpp"
+#include "lang/Throwable/Throwable.hpp"
 #include "lang/Thread/Thread.hpp"
 
 #endif//NATIVE_JAVA_LANG_HPP

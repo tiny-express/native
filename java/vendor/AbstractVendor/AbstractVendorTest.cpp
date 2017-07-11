@@ -24,4 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Vector.hpp"
+extern "C" {
+#include "../../../unit_test.h"
+}
+
+#include "../../lang/String/String.hpp"
+#include "../../lang/Long/Long.hpp"
+#include "../../lang/Integer/Integer.hpp"
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+TEST (JavaVendor, AbstractVendor) {
+	ASSERT_EQUAL(1, 1);
+}

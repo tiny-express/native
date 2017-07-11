@@ -24,4 +24,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Vector.hpp"
+#include "AbstractVendor.hpp"

@@ -24,4 +24,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Vector.hpp"
+#ifndef NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+#define NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+namespace Java {
+	namespace Vendor {
+		class AbstractVendor {
+		private:
+			String url;
+			String method;
+			String headers;
+		};
+	}
+}
+
+#endif//NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP

@@ -29,5 +29,18 @@
 
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
+#include "../Throwable/Throwable.hpp"
+
+namespace Java {
+    namespace Lang {
+        class Exception : public Throwable {
+        public:
+            Exception();
+            Exception(String message);
+            Exception(String message, Throwable *cause);
+            Exception(Throwable *cause);
+        };
+    }
+}
 
 #endif//NATIVE_JAVA_LANG_EXCEPTION_HPP
