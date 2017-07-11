@@ -1,18 +1,22 @@
 # Native Library
 
 [![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
-&nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()&nbsp;&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
+&nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
+&nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
+&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
 
 **Native Library** provides low-level optimization and productivity for C/C++ application.
 
 Beside standard library, we would like to have a greater customization with important goals:
 
-- Blazing fast performance with small footprint and low-level access with GAS & C
+- Blazing fast performance, small footprint and low-level access with GAS & C
 - Powerful structured programming in C++ for scalability
-- Awesome syntactically enhancement with C++ customization
-- Java standard packages for productivity & maintainability
-- Reduce memory leak via automatic storage and object oriented instead of pointer
-- Support third-party services for business features
+- Syntactically enhancement with C++ operators & walk through
+- Provide rich Java standard packages for productivity & maintainability
+- Zero memory leak via automatic storage and avoid NullPointerException
+
+Of course, C++ has limitation about runtime so some concepts are
+ignored includes Interface, Annotation, Reflection.
 
 This project is also useful for new developers in practical programming.
 
@@ -44,18 +48,11 @@ $ sudo make install
 ```
 
 #### Test Driven Development
-Install & run mock server for third-party services
 ```bash
-$ sudo apt-get install python-pip
-$ sudo pip install -r misc/requirements.txt
-$ make server
-```
-Open another terminal & debug with unit test
-```bash
-$ cmake . && make unit-test -j8
+$ cmake . && make native_test && make leak
 ```
 
-#### Usages (for Java/C++ Developers)
+#### Hello World Program
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -87,25 +84,15 @@ $ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
 $ ./native
 ```
 
-#### Mock Server
-To test third parties we need to setup a server to mock http request from them.
-By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
-Please keep this terminal running during your development.
-```bash
-$ make server
-```
-
 #### Memory Leak
 Valgrind helps us in checking memory leak, you've just need to run
 ```
 $ cmake . && make native_test && make leak
 ```
-It will tell you issues relate to memory.
 
 #### Unit Test with C-Unit
 ```cpp
-#define CTEST_MAIN
-#define CTEST_SEGFAULT
+#define TESTING
 #include <native/unit_test.h>
 
 int main(int argc, const char *argv[]) {
@@ -132,7 +119,7 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 # Documentation
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
-both programming languges but we still have some issues :
+both programming languages but we still have some issues :
 
 - Namespace - Package
 ```java
@@ -154,15 +141,15 @@ Array<byte> bytes = {};
 ```
 - Interface
 ```
-Comming soon
+Coming soon
 ```
 - Runtime
 ```
-Comming soon
+Coming soon
 ```
 - Garbage Collection
 ```
-Comming soon
+Coming soon
 ```
 
 #### Data Types
@@ -176,14 +163,14 @@ All data types are implemented and ready to use in C++ Application
 - [x] float - Java.Lang.Float
 - [x] double - Java.Lang.Double
 - [x] boolean - Java.Lang.Boolean (equivalent with `bool`)
-- [ ] enum - Java.Lang.Enum
+- [x] enum - Java.Lang.Enum
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
 
 ##### Java.Lang
 - [ ] Java.Lang.Appendable
-- [ ] Java.Lang.Autocloseable
+- [ ] Java.Lang.AutoCloseable
 - [x] Java.Lang.Boolean
 - [x] Java.Lang.Byte
 - [x] Java.Lang.Character
@@ -282,12 +269,3 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Net.URL
 - [ ] Java.Net.URLEncoder
 - [ ] Java.Net.URLDecoder
-
-#### Additional features outside Java packages
-- [x] Java.Lang.Array
-- [ ] Java.Vendor.AbstractVendor
-- [ ] Java.Vendor.ElasticSearch
-- [ ] Java.Vendor.Etcd
-- [ ] Java.Vendor.Firebase
-- [ ] Java.Vendor.SendGrid
-- [ ] Java.Vendor.Twilio
