@@ -1,41 +1,26 @@
 # Native Library
-
+ ![Library Structure](misc/native.png)
+ 
 [![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
 &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
 &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
 
-**Native Library** provides low-level optimization and productivity for C/C++ application.
+**Native Library** provides a low-level optimization with productivity for C/C++ application.
 
 Beside standard library, we would like to have a greater customization with important goals:
 
-- Blazing fast performance, small footprint and low-level access with GAS & C
+- Blazing fast performance, small footprint & low-level access with GAS & C
 - Powerful structured programming in C++ for scalability
 - Syntactically enhancement with C++ operators & walk through
 - Provide rich Java standard packages for productivity & maintainability
-- Zero memory leak via automatic storage and avoid NullPointerException
-
-Of course, C++ has limitation about runtime so some concepts are
-ignored includes Interface, Annotation, Reflection.
+- Zero memory leak with automatic storage and avoid NullPointerException
 
 This project is also useful for new developers in practical programming.
 
-###  Optimization
-- This library is originally developed in C/C++ so we can make classes go faster by optimizing in GAS for Linux amd64
-- C version of every function should be delivered first
-
-### Useful resources
-- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
-- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
-- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
-- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
-
 ### Getting started
 
-#### Prerequisites
-- [x] CMake ~ 2.8
-- [x] GCC ~ 4.8.1
-- [x] Python ~ 2.7
+#### Dependencies
 - [x] OpenSSL
 - [x] Zlib
 
@@ -84,12 +69,6 @@ $ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
 $ ./native
 ```
 
-#### Memory Leak
-Valgrind helps us in checking memory leak, you've just need to run
-```
-$ cmake . && make native_test && make leak
-```
-
 #### Unit Test with C-Unit
 ```cpp
 #define TESTING
@@ -115,6 +94,12 @@ TEST(YourTestSuite, YourTestCase) {
 Copyright © 2014-2016 Food Tiny. All rights reserved, except as follows. Code is released under the Apache 2.0 license.
 You may obtain a duplicate copy of the same license, titled CC-BY-SA-4.0, at http://creativecommons.org/licenses/by/4.0/.
 Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/LICENSE.docs).
+
+### Useful resources
+- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
+- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
+- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
+- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 # Documentation
 #### Differences
