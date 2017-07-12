@@ -65,7 +65,7 @@ namespace Java {
             E peek() {
                 int len = this->size();
                 if (len == 0) {
-                    //TODO Throw new EmptyStackException();
+                    throw std::invalid_argument("index is out of range");
                 }
                 return this->elementAt(len - 1);
             }
@@ -99,7 +99,6 @@ namespace Java {
             * @return the 1-based position from the top, -1 if can not find the object in Stack
             */
             int search(const E &object) {
-               //TODO when Vector is done
                int index = this->lastIndexOf(object);
                if(index>=0) {
                    return index;
