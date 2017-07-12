@@ -38,6 +38,7 @@ namespace Java {
             StringIndexOutOfBoundsException(String message);
             StringIndexOutOfBoundsException(Throwable *cause);
             StringIndexOutOfBoundsException(String message, Throwable *cause);
+            StringIndexOutOfBoundsException(int index);
         };
     }
 }

@@ -43,3 +43,7 @@ StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(Throwable *caus
 StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(String message, Throwable *cause) : IndexOutOfBoundsException(message, cause) {
 
 }
+
+StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(int index) : IndexOutOfBoundsException(String("String index out of range: ") + String::valueOf(index)){
+
+}

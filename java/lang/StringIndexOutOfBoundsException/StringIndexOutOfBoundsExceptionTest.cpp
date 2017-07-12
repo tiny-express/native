@@ -50,6 +50,10 @@ TEST (JavaLang, StringIndexOutOfBoundsExceptionConstructor) {
     StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithCause = StringIndexOutOfBoundsException(&stringIndexOutOfBoundsExceptionWithMessageAndCause);
     ASSERT_STR("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
     ASSERT_STR("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
+
+    // Constructs a new StringIndexOutOfBoundsException class with an argument indicating the illegal index.
+    StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithIllegalIndex = StringIndexOutOfBoundsException(999);
+    ASSERT_STR("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage().toString());
 }
 
 TEST(JavaLang, StringIndexOutOfBoundsExceptionTryCatch) {
