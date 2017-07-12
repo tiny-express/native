@@ -122,6 +122,12 @@ TEST(JavaLang, StringBuilderSubString) {
     StringBuilder stringBuilder((const string)"Hello Vietnam");
     ASSERT_STR("Vietnam", stringBuilder.substring(6).toString());
     ASSERT_STR("llo", stringBuilder.substring(2, 5).toString());
+    try {
+        stringBuilder.substring(-999);
+    }
+    catch (Exception e) {
+        ASSERT_STR("String index out of range: -999", e.getMessage().toString());
+    }
 }
 
 TEST(JavaLang, StringBuilderToString) {
@@ -137,7 +143,7 @@ TEST(JavaLang, StringBuilderTrimToSize) {
     ASSERT_EQUAL(100, stringBuilder.capacity());
     stringBuilder.trimToSize();
     ASSERT_EQUAL(0, stringBuilder.capacity());
-    stringBuilder.append({'1', '2', '3'});
+    stringBuilder.append((const string)"123");
     stringBuilder.trimToSize();
     ASSERT_EQUAL(3, stringBuilder.capacity());
 }

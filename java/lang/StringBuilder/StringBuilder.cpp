@@ -26,6 +26,7 @@
 
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -144,19 +145,23 @@ int StringBuilder::length() const {
 }
 
 String StringBuilder::substring(int start) const {
-    int numberOfBytesForSubString = (this->currentLength - start + 1) * sizeof(char);
-    string copyOfSubString = (string)malloc((size_t)numberOfBytesForSubString);
-    int indexOfOriginal;
-    int indexOfSubString = 0;
-    for (indexOfOriginal = start; indexOfOriginal < this->currentLength; indexOfOriginal++) {
-        copyOfSubString[indexOfSubString] = this->original[indexOfOriginal];
-        indexOfSubString = indexOfSubString + 1;
-    }
-    copyOfSubString[indexOfSubString] = '\0';
-    return String(copyOfSubString);
+    return this->substring(start, this->currentLength);
 }
 
 String StringBuilder::substring(int start, int end) const {
+    if (start < 0) {
+        throw StringIndexOutOfBoundsException(start);
+    }
+    if (end < 0) {
+        throw StringIndexOutOfBoundsException(end);
+    }
+    if (end > this->currentLength) {
+        throw StringIndexOutOfBoundsException(end);
+    }
+    if (start > end) {
+        throw StringIndexOutOfBoundsException(end - start);
+    }
+
     int numberOfBytesForSubString = (end - start + 1) * sizeof(char);
     string copyOfSubString = (string)malloc((size_t)numberOfBytesForSubString);
     int indexOfOriginal;
