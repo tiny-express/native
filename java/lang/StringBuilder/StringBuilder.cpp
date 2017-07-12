@@ -122,7 +122,7 @@ int StringBuilder::capacity() const {
 
 char StringBuilder::charAt(int index) const {
     if (index < 0 || index >= this->currentLength) {
-        throw IndexOutOfBoundsException("index is out of range");
+        throw StringIndexOutOfBoundsException(index);
     }
 
     return this->original[index];

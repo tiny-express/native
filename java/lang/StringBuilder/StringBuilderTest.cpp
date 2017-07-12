@@ -96,7 +96,7 @@ TEST(JavaLang, StringBuilderCharAt) {
         stringBuilder.charAt(999);
     }
     catch (Exception e) {
-        ASSERT_STR("index is out of range", e.getMessage().toString());
+        ASSERT_STR("String index out of range: 999", e.getMessage().toString());
     }
 }
 
