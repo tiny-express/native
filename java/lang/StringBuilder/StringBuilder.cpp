@@ -149,13 +149,10 @@ String StringBuilder::substring(int start) const {
 }
 
 String StringBuilder::substring(int start, int end) const {
-    if (start < 0) {
+    if (start < 0 || start > this->currentLength) {
         throw StringIndexOutOfBoundsException(start);
     }
-    if (end < 0) {
-        throw StringIndexOutOfBoundsException(end);
-    }
-    if (end > this->currentLength) {
+    if (end < 0 || end > this->currentLength) {
         throw StringIndexOutOfBoundsException(end);
     }
     if (start > end) {

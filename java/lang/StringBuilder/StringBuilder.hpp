@@ -278,9 +278,19 @@ namespace Java {
              *
              * @param start
              * @return String
+             * @throw StringIndexOutOfBoundsException - if start is less than zero, or greater than the length of this object.
              */
             String substring(int start) const;
 
+            /**
+             * Returns a new String that contains a subsequence of characters currently contained in this sequence.
+             * The substring begins at the specified start and extends to the character at index end - 1.
+             *
+             * @param start
+             * @param end
+             * @return String
+             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(), or start is greater than end.
+             */
             String substring(int start, int end) const;
 
             /**
