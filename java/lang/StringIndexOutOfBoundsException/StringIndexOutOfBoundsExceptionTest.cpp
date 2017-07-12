@@ -39,7 +39,7 @@ TEST (JavaLang, StringIndexOutOfBoundsExceptionConstructor) {
 
     // Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message.
     StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessage = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message");
-    ASSERT_STR("IndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage().toString());
+    ASSERT_STR("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage().toString());
 
     // Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message and cause.
     StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessageAndCause = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message and cause", &stringIndexOutOfBoundsExceptionWithMessage);
