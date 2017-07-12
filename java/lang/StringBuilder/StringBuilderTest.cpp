@@ -92,6 +92,12 @@ TEST(JavaLang, StringBuilderCharAt) {
     ASSERT_EQUAL('a', stringBuilder.charAt(0));
     ASSERT_EQUAL('b', stringBuilder.charAt(1));
     ASSERT_EQUAL('c', stringBuilder.charAt(2));
+    try {
+        stringBuilder.charAt(999);
+    }
+    catch (Exception e) {
+        ASSERT_STR("index is out of range", e.getMessage().toString());
+    }
 }
 
 TEST(JavaLang, StringBuilderEnsureCapacity) {

@@ -25,6 +25,7 @@
  */
 
 #include "../StringBuilder/StringBuilder.hpp"
+#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -135,7 +136,7 @@ int StringBuilder::capacity() const {
 
 char StringBuilder::charAt(int index) const {
     if (index < 0 || index >= this->currentLength) {
-        throw std::invalid_argument("index is out of range");
+        throw IndexOutOfBoundsException("index is out of range");
     }
 
     return this->original[index];
