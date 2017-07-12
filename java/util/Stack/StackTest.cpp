@@ -30,7 +30,6 @@ extern "C" {
 
 #include "../../lang/String/String.hpp"
 #include "Stack.hpp"
-#include "../../lang/Integer/Integer.hpp"
 
 using namespace Java::Util;
 
@@ -160,7 +159,7 @@ TEST(JavaLang, StackPeek) {
     // Return the top element without removing it
     int intResult = peekIntStack.peek();
     ASSERT_TRUE(intResult == peekIntStack.peek());
-    ASSERT_EQUAL(3,peekIntStack.size());
+    ASSERT_EQUAL(3,peekIntStack.size());// check size to make sure the top element is not removed
 
     // Integer
     Stack<Integer> peekIntegerStack;
@@ -177,7 +176,7 @@ TEST(JavaLang, StackPeek) {
     // Return the top element without removing it
     Integer integerResult = peekIntegerStack.peek();
     ASSERT_TRUE(integerResult == peekIntegerStack.peek());
-    ASSERT_EQUAL(3,peekIntegerStack.size());
+    ASSERT_EQUAL(3,peekIntegerStack.size()); // check size to make sure the top element is not removed
 
     // string
     Stack<String> peekStringStack;
@@ -194,7 +193,7 @@ TEST(JavaLang, StackPeek) {
     // Return the top element without removing it
     String stringResult = peekStringStack.peek();
     ASSERT_TRUE(stringResult == pushString3);
-    ASSERT_EQUAL(3,peekStringStack.size());
+    ASSERT_EQUAL(3,peekStringStack.size());// check size to make sure the top element is not removed
 
     // Object - can't compare 2 objects
     /*Stack<Object> peekObjectStack;
@@ -229,7 +228,7 @@ TEST(JavaLang, StackPop) {
     // Return the top element and remove it
     int intResult = popIntStack.pop();
     ASSERT_TRUE(intResult == pushInt3);
-    ASSERT_EQUAL(2, popIntStack.size());
+    ASSERT_EQUAL(2, popIntStack.size()); // check size to make sure the top element is removed
 
     // Integer
     Stack<Integer> popIntegerStack;
@@ -246,7 +245,7 @@ TEST(JavaLang, StackPop) {
     // Return the top element and remove it
     Integer integerResult = popIntegerStack.pop();
     ASSERT_TRUE(integerResult == pushInteger3);
-    ASSERT_EQUAL(2, popIntegerStack.size());
+    ASSERT_EQUAL(2, popIntegerStack.size());// check size to make sure the top element is removed
 
     // string
     Stack<String> popStringStack;
@@ -263,7 +262,7 @@ TEST(JavaLang, StackPop) {
     // Return the top element and remove it
     String stringResult = popStringStack.pop();
     ASSERT_TRUE(stringResult.equals(pushString3));
-    ASSERT_EQUAL(2, popStringStack.size());
+    ASSERT_EQUAL(2, popStringStack.size());// check size to make sure the top element is removed
 
     // Object - can't compare 2 objects
     /*Stack<Object> popObjectStack;

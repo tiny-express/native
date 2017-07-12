@@ -27,11 +27,6 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
-#include <stack>
-#include "../function/UnaryOperator/UnaryOperator.hpp"
-#include "../Iterator/Iterator.hpp"
-#include "../Collection/Collection.hpp"
-#include "../Comparator/Comparator.hpp"
 #include "../Vector/Vector.hpp"
 
 
@@ -39,9 +34,6 @@ namespace Java {
     namespace Util {
         template <typename E>
         class Stack : public Vector<E>{
-            // TODO - extend Vector<E>, implement Serializable,
-            // Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess
-
         public:
             /**
              * Constructor
@@ -54,7 +46,7 @@ namespace Java {
             * @return true only if this stack has no item; false otherwise
             */
             bool empty() {
-                return this->original.size() == 0;
+                return this->size() == 0;
             }
             
             /**
@@ -76,8 +68,9 @@ namespace Java {
              * @return E
              */
             E pop() {
+                int len = this->size();
                 E result = this->peek();
-                this->removeElementAt(this->size()-1);
+                this->removeElementAt(len - 1);
                 return result;
             }
             
@@ -100,7 +93,7 @@ namespace Java {
             */
             int search(const E &object) {
                int index = this->lastIndexOf(object);
-               if(index>=0) {
+               if(index >= 0) {
                    return index;
                }
                return -1;
