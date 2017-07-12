@@ -171,7 +171,9 @@ String StringBuilder::substring(int start, int end) const {
         indexOfSubString = indexOfSubString + 1;
     }
     copyOfSubString[indexOfSubString] = '\0';
-    return String(copyOfSubString);
+    String result(copyOfSubString);
+    free(copyOfSubString);
+    return result;
 }
 
 string StringBuilder::toString() const {
