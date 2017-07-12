@@ -158,6 +158,19 @@ int StringBuilder::length() const {
     return this->currentLength;
 }
 
+String StringBuilder::substring(int start) const {
+    int numberOfBytesForSubString = (this->currentLength - start + 1) * sizeof(char);
+    string copyOfSubString = (string)malloc((size_t)numberOfBytesForSubString);
+    int indexOfOriginal;
+    int indexOfSubString = 0;
+    for (indexOfOriginal = start; indexOfOriginal < this->currentLength; indexOfOriginal++) {
+        copyOfSubString[indexOfSubString] = this->original[indexOfOriginal];
+        indexOfSubString = indexOfSubString + 1;
+    }
+    copyOfSubString[indexOfSubString] = '\0';
+    return String(copyOfSubString);
+}
+
 string StringBuilder::toString() const {
     int numberOfBytes = (this->currentLength + 1) * sizeof(char); // increases by 1 for null terminator.
     string content = (string)malloc((size_t)numberOfBytes);

@@ -118,6 +118,11 @@ TEST(JavaLang, StringBuilderLength) {
     ASSERT_EQUAL(aString.length(), stringBuilder.length());
 }
 
+TEST(JavaLang, StringBuilderSubString) {
+    StringBuilder stringBuilder((const string)"Hello Vietnam");
+    ASSERT_STR("Vietnam", stringBuilder.substring(6).toString());
+}
+
 TEST(JavaLang, StringBuilderToString) {
     String aString = "Hello!";
     StringBuilder stringBuilder(aString.toString());

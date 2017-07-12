@@ -271,6 +271,14 @@ namespace Java {
             void setLength(int newLength);
 
 //          CharSequence subSequence(int start, int end) const;
+
+            /**
+             * Returns a new String that contains a subsequence of characters currently contained in this character sequence.
+             * The substring begins at the specified index and extends to the end of this sequence.
+             *
+             * @param start
+             * @return String
+             */
             String substring(int start) const;
 
             String substring(int start, int end) const;
