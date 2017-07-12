@@ -73,6 +73,18 @@ byte Bytes::byteValue() {
 }
 
 /**
+ * Compares two byte values numerically.
+ *
+ * @param a
+ * @param b
+ * @return  the value 0 if x == y; a value less than 0 if x < y; and a value greater than 0 if x > y
+ */
+int Bytes::compare(byte a, byte b) {
+    return a - b;
+}
+
+
+/**
  * Compares two Byte objects numerically
  *
  * @param anotherByte
@@ -144,6 +156,16 @@ int Bytes::hashCode() {
 }
 
 /**
+ * Returns a hash code for this Byte
+ *
+ * @param value
+ * @return int
+ */
+int Bytes::hashCode(byte value) {
+    return (int) value;
+}
+
+/**
  * Returns the value of this Byte as an int.
  *
  * @return int
@@ -187,8 +209,6 @@ byte Bytes::parseByte(String stringToParse, int radix) {
     return (byte)value;*/
     return 0;//temporarily
 }
-
-
 /**
  * Returns the value of this Byte as an short.
  *
@@ -227,6 +247,26 @@ String Bytes::toString(byte specifiedByte) {
 }
 
 /**
+ * Converts the argument to an int by an unsigned conversion.
+ *
+ * @param value
+ * @return int
+ */
+int Bytes::toUnsignedInt(byte value) {
+    return ((int) value) & 0xff;
+}
+
+/**
+ * Converts the argument to an int by an unsigned conversion.
+ *
+ * @param value
+ * @return long
+ */
+long Bytes::toUnsignedLong(byte value) {
+    return ((long) value) & 0xffL;
+}
+
+/**
  * Returns a Byte instance representing the specified byte value.
  *
  * @param targetByte
@@ -234,7 +274,7 @@ String Bytes::toString(byte specifiedByte) {
  */
 Bytes Bytes::valueOf(byte targetByte) {
 	const int offset = 128;
-    return  ByteCache::getInstance()->cache.get((int) targetByte+offset);
+    return  ByteCache::getInstance()->cache[((int) targetByte+offset)];
 }
 
 /**
@@ -387,6 +427,7 @@ void Bytes::operator-=(const Bytes &target) {
 void Bytes::operator+=(const Bytes &target) {
     this->original += target.original;
 }
+
 /**
  * Make a multiplication from this Byte with target and assign the result value to this Byte
  *
@@ -396,6 +437,7 @@ void Bytes::operator+=(const Bytes &target) {
 void Bytes::operator*=(const Bytes &target) {
     this->original *= target.original;
 }
+
 /**
  * Make a division from this Byte with target and assign the result value to this Byte
  *
@@ -424,6 +466,9 @@ void Bytes::operator%=(const Bytes &target) {
 void Bytes::operator=(const Bytes &target) {
     this->original = target.original;
 }
+
+
+
 
 
 

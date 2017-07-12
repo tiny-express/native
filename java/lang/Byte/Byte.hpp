@@ -62,6 +62,8 @@ namespace Java {
 
             byte byteValue ();
 
+			static int compare(byte, byte);
+
 			int compareTo(const Bytes & ) const;
 
 			static Bytes decode(String);
@@ -73,6 +75,8 @@ namespace Java {
 			float floatValue() const;
 
 			int hashCode();
+
+            static int hashCode(byte );
 
 			int intValue() const;
 
@@ -87,6 +91,10 @@ namespace Java {
 			String toString();
 
 			static String toString(byte);
+
+			static int toUnsignedInt(byte);
+
+			static long toUnsignedLong(byte);
 
 			static Bytes valueOf(byte);
 

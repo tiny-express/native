@@ -36,17 +36,17 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-		
+
 		class String;
-		
+
 		class String : public Object,
-			public virtual Serializable,
-			public virtual Comparable<String>,
-			public virtual CharSequence {
+					   public virtual Serializable,
+					   public virtual Comparable<String>,
+					   public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
-		
+
 		public:
 			String();
 			String(const_string original);
@@ -55,10 +55,10 @@ namespace Java {
 			String(Array<byte> &bytes);
 			String(const String &target);
 			~String();
-		
+
 		public:
-			char charAt(int index);
-			
+			char charAt(int index) const;
+
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
@@ -94,7 +94,7 @@ namespace Java {
 			int lastIndexOf(int ch, int fromIndex);
 			int lastIndexOf(String str) const;
 			int lastIndexOf(String str, int fromIndex) const;
-			int length();
+			int length() const;
 			boolean matches(String regex) const;
 			String replace(char oldChar, char newChar) const;
 			String replaceAll(String regex, String replacement) const;
@@ -116,7 +116,7 @@ namespace Java {
 			static String valueOf(long target);
 			static String valueOf(float target);
 			static String valueOf(double target);
-		
+
 		public:
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;
@@ -135,6 +135,15 @@ namespace Java {
 				result += target2;
 				return result;
 			};
+
+			//FIXME: Temporary
+			String subString(int fromIndex) {
+				if (fromIndex < 0 || fromIndex >= this->length()) {
+					return "";
+				}
+
+				return &(this->original[fromIndex]);
+			}
 		};
 	}
 }
