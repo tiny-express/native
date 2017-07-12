@@ -74,7 +74,10 @@ char *http_hostname(char *url) {
 	int end_position = length_url;
 	
 	// Find end position to cut, if meet ':', '?' or '/'
-	register int index;
+#ifdef __linux__
+	register
+#endif
+	int index;
 	for (index = begin_position; index < length_url; index++) {
 		if (url[ index ] == ':' || url[ index ] == '/' || url[ index ] == '?') {
 			end_position = index;
@@ -135,7 +138,6 @@ int http_port(char *url) {
  * @return string
  */
 char *http_query(char *url) {
-	
 	if (!is_url(url)) {
 		return strdup("");
 	}
@@ -148,7 +150,6 @@ char *http_query(char *url) {
 	}
 	
 	int end_position = begin_position;
-	
 	for (end_position; end_position < length_url; end_position++) {
 		if (url[ end_position ] == '/' || url[ end_position ] == ':') {
 			break;
@@ -213,23 +214,23 @@ int url_port(char *url) {
 		free(path);
 		return -1;
 	}
-	int isDynamic = FALSE;
+	int is_dynamic = FALSE;
 	if (strcmp(path, "/") != 0) {
 		domain = string_from_to(domain, 0, path_index - 1);
-		isDynamic = TRUE;
+		is_dynamic = TRUE;
 	}
 
 	char *port_string;
 	asprintf(&port_string, ":%d", port);
 	if (string_index(domain, port_string, 1) == -1) {
-		if (isDynamic) {
+		if (is_dynamic) {
 			free(domain);
 		}
 		free(path);
 		free(port_string);
 		return -1;
 	}
-	if (isDynamic) {
+	if (is_dynamic) {
 		free(domain);
 	}
 

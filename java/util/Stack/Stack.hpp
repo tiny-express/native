@@ -38,16 +38,14 @@
 namespace Java {
     namespace Util {
         template <typename E>
-        class Stack {
+        class Stack : public Vector<E>{
             // TODO - extend Vector<E>, implement Serializable,
             // Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess
 
-		private:
-
-			std::stack<E> original;
-
         public:
-
+            /**
+             * Constructor
+             */
             Stack(){}
 
             /**
@@ -65,7 +63,11 @@ namespace Java {
              * @return E
              */
             E peek() {
-                return this->original.top();
+                int len = this->size();
+                if (len == 0) {
+                    //TODO Throw new EmptyStackException();
+                }
+                return this->elementAt(len - 1);
             }
             
             /**
@@ -74,8 +76,8 @@ namespace Java {
              * @return E
              */
             E pop() {
-                E result = this->original.top();
-                this->original.pop();
+                E result = this->peek();
+                this->removeElementAt(this->size()-1);
                 return result;
             }
             
@@ -86,8 +88,8 @@ namespace Java {
             * @return E
             */
             E push(const E &element) {
-                this->original.push(element);
-                return element;
+               this->addElement(element);
+               return element;
             }
        
            /**
@@ -98,20 +100,11 @@ namespace Java {
             */
             int search(const E &object) {
                //TODO when Vector is done
-               //int index = lastIndexOf(Object);
-               //if(index>=0) {
-               //    return index;
-               //}
-               //return -1;
-            }
-
-			/**
-			 * Size of Stack
-			 *
-			 * @return size of stack
-			 */
-            int size() {
-                return this->original.size();
+               int index = this->lastIndexOf(object);
+               if(index>=0) {
+                   return index;
+               }
+               return -1;
             }
         };
     }

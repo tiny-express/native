@@ -37,6 +37,8 @@ namespace Java {
 		class Float : public virtual Number {
 		private:
 			float original;
+			string string_original;
+
 		public:
 			Float();
 			Float(float original);
@@ -45,7 +47,6 @@ namespace Java {
 		
 		public:
 			char charValue() const;
-			string stringValue() const;
 			short shortValue() const;
 			int intValue() const;
 			long longValue() const;
@@ -56,6 +57,7 @@ namespace Java {
 			static Float parseFloat(String target);
 		
 		public:
+			Float operator=(const Float &target);
 			Float operator+(const Float &target);
 			Float operator-(const Float &target);
 			Float operator/(const Float &target);

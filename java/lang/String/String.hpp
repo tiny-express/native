@@ -39,10 +39,11 @@ namespace Java {
 		
 		class String;
 		
-		class String : public Object,
-			public virtual Serializable,
-			public virtual Comparable<String>,
-			public virtual CharSequence {
+		class String :
+				public Object,
+		                public virtual Serializable,
+				public virtual Comparable<String>,
+		                public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
@@ -57,8 +58,7 @@ namespace Java {
 			~String();
 		
 		public:
-			char charAt(int index);
-			
+			char charAt(int index) const;
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
@@ -83,7 +83,7 @@ namespace Java {
 				return true;
 			}
 			Array<byte> getBytes() const;
-			//Array<byte> getBytes(const Charset &);
+			// Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
@@ -94,7 +94,7 @@ namespace Java {
 			int lastIndexOf(int ch, int fromIndex);
 			int lastIndexOf(String str) const;
 			int lastIndexOf(String str, int fromIndex) const;
-			int length();
+			int length() const;
 			boolean matches(String regex) const;
 			String replace(char oldChar, char newChar) const;
 			String replaceAll(String regex, String replacement) const;
@@ -135,15 +135,13 @@ namespace Java {
 				result += target2;
 				return result;
 			};
-
-            //FIXME: Temporary
-            String subString(int fromIndex) {
-                if (fromIndex < 0 || fromIndex >= this->length()) {
-                    return "";
-                }
-
-                return &(this->original[fromIndex]);
-            }
+			
+			String subString(int fromIndex) {
+				if (fromIndex < 0 || fromIndex >= this->length()) {
+					return "";
+				}
+				return &( this->original[ fromIndex ] );
+			}
 		};
 	}
 }
