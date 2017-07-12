@@ -121,6 +121,7 @@ TEST(JavaLang, StringBuilderLength) {
 TEST(JavaLang, StringBuilderSubString) {
     StringBuilder stringBuilder((const string)"Hello Vietnam");
     ASSERT_STR("Vietnam", stringBuilder.substring(6).toString());
+    ASSERT_STR("llo", stringBuilder.substring(2, 5).toString());
 }
 
 TEST(JavaLang, StringBuilderToString) {
