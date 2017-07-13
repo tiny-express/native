@@ -984,7 +984,6 @@ TEST (JavaLang, DoubleByteValue){
 //    ASSERT_TRUE(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE) == -9999);
 //}
 
-// TODO Wait for build
 TEST (JavaLang, DoubleToRawLongBits){
     // Create variable to test
     double input;
@@ -1071,69 +1070,90 @@ TEST (JavaLang, DoubleToRawLongBits){
 }
 
 // TODO Wait for build
-//TEST (JavaLang, DoubleToRawLongBits) {
-//    // Create variable to test
-//    Double variableDoubleToRawLongBits;
-//    long expectedResultDoubleToRawLongBits;
-//    long actualResultDoubleToRawLongBits;
-//
-//    variableDoubleToRawLongBits = 1.35;
-//    expectedResultDoubleToRawLongBits = 4608758678669597082;
-//    actualResultDoubleToRawLongBits = Double::doubleToRawLongBits(variableDoubleToRawLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToRawLongBits,actualResultDoubleToRawLongBits);
-//
-//    // Test NaN_NUMBER_DOUBLE
-//    variableDoubleToRawLongBits = NaN_NUMBER_DOUBLE;
-//    expectedResultDoubleToRawLongBits = 9221120237041090560;
-//    actualResultDoubleToRawLongBits = Double::doubleToRawLongBits(variableDoubleToRawLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToRawLongBits,actualResultDoubleToRawLongBits);
-//
-//    // Test POSITIVE_INFINITY_DOUBLE
-//    variableDoubleToRawLongBits = POSITIVE_INFINITY_DOUBLE;
-//    expectedResultDoubleToRawLongBits = 9218868437227405312;
-//    actualResultDoubleToRawLongBits = Double::doubleToRawLongBits(variableDoubleToRawLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToRawLongBits,actualResultDoubleToRawLongBits);
-//
-//    // Test NEGATIVE_INFINITY_DOUBLE
-//    variableDoubleToRawLongBits = NEGATIVE_INFINITY_DOUBLE;
-//    expectedResultDoubleToRawLongBits = -4503599627370496;
-//    actualResultDoubleToRawLongBits = Double::doubleToRawLongBits(variableDoubleToRawLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToRawLongBits,actualResultDoubleToRawLongBits);
-//}
+TEST (JavaLang, DoubleToLongBits){
+    // Create variable to test
+    double input;
+    long expectedResult;
+    long actualResult;
 
-// TODO Wait for build
-//TEST (JavaLang, DoubleToLongBits){
-//    // Create variable to test
-//    Double variableDoubleToLongBits;
-//    long expectedResultDoubleToLongBits;
-//    long actualResultDoubleToLongBits;
-//
-//    /// Error in OSX
-//    // Test 100.25
-//    variableDoubleToLongBits = 100.25;
-//    expectedResultDoubleToLongBits = 4636754883540680704;
-//    actualResultDoubleToLongBits = Double::doubleToLongBits(variableDoubleToLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToLongBits,actualResultDoubleToLongBits);
-//
-//    // Get error with NaN_NUMBER_DOUBLE in OSX
-//    // Test NaN_NUMBER_DOUBLE
-//    variableDoubleToLongBits = NaN_NUMBER_DOUBLE;
-//    expectedResultDoubleToLongBits = 9221120237041090560;
-//    actualResultDoubleToLongBits = Double::doubleToLongBits(variableDoubleToLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToLongBits,actualResultDoubleToLongBits);
-//
-//    // Test POSITIVE_INFINITY_DOUBLE
-//    variableDoubleToLongBits = POSITIVE_INFINITY_DOUBLE;
-//    expectedResultDoubleToLongBits = 9218868437227405312;
-//    actualResultDoubleToLongBits = Double::doubleToLongBits(variableDoubleToLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToLongBits,actualResultDoubleToLongBits);
-//
-//    // Test NEGATIVE_INFINITY_DOUBLE
-//    variableDoubleToLongBits = NEGATIVE_INFINITY_DOUBLE;
-//    expectedResultDoubleToLongBits = -4503599627370496;
-//    actualResultDoubleToLongBits = Double::doubleToLongBits(variableDoubleToLongBits.doubleValue());
-//    ASSERT_EQUAL(expectedResultDoubleToLongBits,actualResultDoubleToLongBits);
-//}
+    // Input 0.0
+    input = 0.0;
+    expectedResult = 0;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY_DOUBLE
+    input = POSITIVE_INFINITY_DOUBLE;
+    expectedResult = 9218868437227405312;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY_DOUBLE
+    input = NEGATIVE_INFINITY_DOUBLE;
+    expectedResult = -9218868437227405312;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NaN_NUMBER_DOUBLE
+    input = NaN_NUMBER_DOUBLE;
+    expectedResult = 9221120237041090560;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -0.7
+    input = -0.7;
+    expectedResult =  -4604480259023595110;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 12.375
+    input = 12.375;
+    expectedResult = 4623156123728347136;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 1.0
+    input = 1.0;
+    expectedResult = 4607182418800017408;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.375
+    input = 0.375;
+    expectedResult = 4600427019358961664;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2
+    input = -2;
+    expectedResult = -4611686018427387904;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 83
+    input = 83;
+    expectedResult = 4635541022703616000;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2625
+    input = -2625;
+    expectedResult = -4657990851119546368;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.5
+    input = 0.5;
+    expectedResult = 4602678819172646912;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    input = -1302.12345678;
+    expectedResult = -4653441614972469831;
+    actualResult = Double::doubleToLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+}
 
 // TODO Wait for build
 //TEST (JavaLang, DoubleEquals){

@@ -267,31 +267,9 @@ Double Double::operator/=(const Double &target) const {
 //    return Double::compare(this->original, anotherDouble.original);
 //}
 
-// TODO Wait for build
-//long Double::doubleToLongBits(double valueDouble) {
-//    if (isNaN(valueDouble) || isInfinite(valueDouble))
-//        return -9999;
-//    long doubleToLongBitsResult = doubleToRawLongBits(valueDouble);
-//
-//    // Check for NaN based on values of bit fields, maximum
-//    // exponent and nonzero significand.
-//
-//    long andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK
-//            = doubleToLongBitsResult & EXP_BIT_MASK;
-//
-//    long andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK
-//            = doubleToLongBitsResult & SIGNIF_BIT_MASK;
-//
-//    boolean isEqualEXP_BIT_MASK
-//            = (andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK == EXP_BIT_MASK);
-//
-//    boolean isNotEqual0L = (andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK != 0L);
-//
-//    if (isEqualEXP_BIT_MASK && isNotEqual0L )
-//        doubleToLongBitsResult = 0x7ff8000000000000L;
-//
-//    return doubleToLongBitsResult;
-//}
+long Double::doubleToLongBits(double valueDouble) {
+    return doubleToRawLongBits(valueDouble);
+}
 
 // TODO Wait for build
 long Double::doubleToRawLongBits(double doubleInput) {
