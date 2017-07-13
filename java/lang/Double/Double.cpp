@@ -295,7 +295,7 @@ Double Double::operator/=(const Double &target) const {
 
 // TODO Wait for build
 //unsigned_long_long Double::binary64ToLong (string binary64Input) {
-//    unsigned long long int resultBinary64ToLong;
+//    unsigned_long_long resultBinary64ToLong;
 //    int tempValue ;
 //    int exponent;
 //
