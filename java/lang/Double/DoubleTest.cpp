@@ -985,17 +985,90 @@ TEST (JavaLang, DoubleByteValue){
 //}
 
 // TODO Wait for build
-//TEST (JavaLang, Binary64ToLong) {
-//    // Create variable to test
-//    string inputBinary64ToLong;
-//    unsigned_long_long expectedResult;
-//    unsigned_long_long actualResult;
-//
-//    inputBinary64ToLong = (string) "010110101010";
-//    expectedResult = 213;
-//    actualResult = Double::binary64ToLong((string)"");
-//    ASSERT_EQUAL_ULL(expectedResult,actualResult);
-//}
+TEST (JavaLang, DoubleToRawLongBits){
+    // Create variable to test
+    double input;
+    long expectedResult;
+    long actualResult;
+
+    // Input 0.0
+    input = 0.0;
+    expectedResult = 0;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY_DOUBLE
+    input = POSITIVE_INFINITY_DOUBLE;
+    expectedResult = 9218868437227405312;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY_DOUBLE
+    input = NEGATIVE_INFINITY_DOUBLE;
+    expectedResult = -9218868437227405312;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NaN_NUMBER_DOUBLE
+    input = NaN_NUMBER_DOUBLE;
+    expectedResult = 9221120237041090560;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -0.7
+    input = -0.7;
+    expectedResult =  -4604480259023595110;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 12.375
+    input = 12.375;
+    expectedResult = 4623156123728347136;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 1.0
+    input = 1.0;
+    expectedResult = 4607182418800017408;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.375
+    input = 0.375;
+    expectedResult = 4600427019358961664;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2
+    input = -2;
+    expectedResult = -4611686018427387904;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 83
+    input = 83;
+    expectedResult = 4635541022703616000;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2625
+    input = -2625;
+    expectedResult = -4657990851119546368;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.5
+    input = 0.5;
+    expectedResult = 4602678819172646912;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    input = -1302.12345678;
+    expectedResult = -4653441614972469831;
+    actualResult = Double::doubleToRawLongBits(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+}
 
 // TODO Wait for build
 //TEST (JavaLang, DoubleToRawLongBits) {

@@ -294,29 +294,36 @@ Double Double::operator/=(const Double &target) const {
 //}
 
 // TODO Wait for build
-//unsigned_long_long Double::binary64ToLong (string binary64Input) {
-//    unsigned_long_long resultBinary64ToLong;
-//    int tempValue ;
-//    int exponent;
-//
-//    exponent = 63;
-//    tempValue =0;
-//    resultBinary64ToLong = 0;
-//
-//    for (int i=1; i<=63; i++) {
-//        if (binary64Input [0] == '1') {
-//            tempValue = 1;
-//        }
-//
-//        if (binary64Input [0] == '0') {
-//            tempValue = 0;
-//        }
-//        resultBinary64ToLong = resultBinary64ToLong + tempValue * (long) pow(2,exponent);
-//        exponent --;
-//    }
-//
-//    return resultBinary64ToLong;
-//}
+long Double::doubleToRawLongBits(double doubleInput) {
+    string doubleInputToBinary64StringType;
+    long resultDoubleToRawLongBits;
+    int tempValue ;
+    int exponent;
+
+    doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
+
+    exponent = 62;
+    tempValue =0;
+    resultDoubleToRawLongBits = 0;
+
+    for (int i=1; i<=63; i++) {
+        if (doubleInputToBinary64StringType [i] == '1') {
+            tempValue = 1;
+        }
+
+        if (doubleInputToBinary64StringType [i] == '0') {
+            tempValue = 0;
+        }
+        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2,exponent);
+        exponent --;
+    }
+    if (doubleInputToBinary64StringType[0] == '1') {
+        resultDoubleToRawLongBits =  (-1) * resultDoubleToRawLongBits;
+    }
+
+    free(doubleInputToBinary64StringType);
+    return resultDoubleToRawLongBits;
+}
 
 // TODO Wait for build
 //unsigned_long_long Double::doubleToRawLongBits(double valueDouble) {

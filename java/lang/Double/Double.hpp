@@ -534,7 +534,7 @@ namespace Java {
              * @return the bits that represent the floating-point number.
              * @since 1.3
              */
-            static unsigned long long int doubleToRawLongBits(double value);
+            static long doubleToRawLongBits(double doubleInput);
 
             /**
              * Compares this object against the specified object.
@@ -723,8 +723,7 @@ namespace Java {
             */
             static string doubleToBinary64StringType(double doubleInput );
 
-            static unsigned long long int binary64ToLong (string banary64Input);
-		};
+        };
 	}
 }
 #endif//NATIVE_JAVA_LANG_DOUBLE_HPP
