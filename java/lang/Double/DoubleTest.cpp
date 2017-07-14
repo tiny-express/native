@@ -1144,124 +1144,124 @@ TEST (JavaLang, DoubleToLongBits){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 }
 
-// TODO Wait for build
-//TEST (JavaLang, DoubleEquals){
-//    // Create variable to test
-//    Double variableCompareTo;
-//    Double DOUBLE_NaN = NaN_NUMBER_DOUBLE;
-//    Double DOUBLE_POSITIVE_INFINITY = POSITIVE_INFINITY_DOUBLE;
-//    Double DOUBLE_NEGATIVE_INFINITY = NEGATIVE_INFINITY_DOUBLE;
-//    Double DOUBLE_MAX_VALUE= MAX_VALUE_DOUBLE;
-//    Double DOUBLE_NEGATIVE_MAX_VALUE = MIN_VALUE_DOUBLE;
-//
-//    // Test NaN_NUMBER_DOUBLE
-//    variableCompareTo = NaN_NUMBER_DOUBLE;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test DOUBLE_POSITIVE_INFINITY
-//    variableCompareTo = DOUBLE_POSITIVE_INFINITY;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals( DOUBLE_MAX_VALUE) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == -9999);
-//
+// TODO Wait for instanceof <> , check later: max, min , -0
+TEST (JavaLang, DoubleEquals){
+    // Create variable to test
+    Double variableDoubleEquals;
+    Double DOUBLE_NaN = NaN_NUMBER_DOUBLE;
+    Double DOUBLE_POSITIVE_INFINITY = POSITIVE_INFINITY_DOUBLE;
+    Double DOUBLE_NEGATIVE_INFINITY = NEGATIVE_INFINITY_DOUBLE;
+    Double DOUBLE_MAX_VALUE= MAX_VALUE_DOUBLE;
+    Double DOUBLE_MIN_VALUE = MIN_VALUE_DOUBLE;
+
+    // Test NaN_NUMBER_DOUBLE
+    variableDoubleEquals = NaN_NUMBER_DOUBLE;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 1);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == -1);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == -1);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
+    // Test DOUBLE_POSITIVE_INFINITY
+    variableDoubleEquals = DOUBLE_POSITIVE_INFINITY;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals( DOUBLE_MAX_VALUE) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
 //    // Test DOUBLE_MAX_VALUE
-//    variableCompareTo = DOUBLE_MAX_VALUE;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+//    variableDoubleEquals = DOUBLE_MAX_VALUE;
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
 //
-//    // Test value (Double)1.2
-//    variableCompareTo = (Double)1.2;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test value (Double)0.0
-//    variableCompareTo = (Double)0.0;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == +0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test value (Double)-0.0
-//    variableCompareTo = (Double)-0.0;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test value (Double)-1.2
-//    variableCompareTo = (Double)-1.2;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test DOUBLE_NEGATIVE_MAX_VALUE
-//    variableCompareTo = DOUBLE_NEGATIVE_MAX_VALUE;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == -1);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == 0);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == 1);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
-//
-//    // Test DOUBLE_NEGATIVE_INFINITY
-//    variableCompareTo = DOUBLE_NEGATIVE_INFINITY;
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NaN) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_POSITIVE_INFINITY) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_MAX_VALUE) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)1.2) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)0.0) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-0.0) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals((Double)-1.2) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_MAX_VALUE) == -9999);
-//    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == -9999);
-//}
+//    // Test DOUBLE_MIN_VALUE
+//    variableDoubleEquals = DOUBLE_MIN_VALUE;
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == -9999);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == -9999);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == -1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == -1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == -1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == -1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
+    // Test DOUBLE_NEGATIVE_INFINITY
+    variableDoubleEquals = DOUBLE_NEGATIVE_INFINITY;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == -9999);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 1);
+    
+    // Test value (Double)1.2
+    variableDoubleEquals = (Double)1.2;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 1);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
+    // Test value (Double)0.0
+    variableDoubleEquals = (Double)0.0;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == +0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
+    // Test value (Double)-0.0
+//    variableDoubleEquals = (Double)-0.0;
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+
+    // Test value (Double)-1.2
+    variableDoubleEquals = (Double)-1.2;
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NaN) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MAX_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)1.2) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)0.0) == 0);
+//    ASSERT_TRUE(variableDoubleEquals.equals((Double)-0.0) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals((Double)-1.2) == 1);
+//    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_MIN_VALUE) == 0);
+    ASSERT_TRUE(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY) == 0);
+}
 
 TEST (JavaLang , DoubleHashCode){
     // Create variable to test

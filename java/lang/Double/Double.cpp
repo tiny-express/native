@@ -274,16 +274,15 @@ long Double::doubleToRawLongBits(double doubleInput) {
 }
 
 // TODO Wait for instanceof<>
-//boolean Double::equals(const Double &object) {
-//    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
-//        return -1;
-//    boolean isDouble = instanceof<Double>(object);
-//    Double* castObjectToDouble = (Double*)&object;
-//    long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
-//    long doubleToLongBitsThis = doubleToLongBits(this->original);
-//    boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
-//    return (isDouble && isEqual);
-//}
+boolean Double::equals(const Double &object) {
+    boolean isDouble = instanceof<Double>(object);
+    Double* castObjectToDouble = (Double*)&object;
+    long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
+    long doubleToLongBitsThis = doubleToLongBits(this->original);
+    boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
+    return isEqual;
+    //return (isDouble && isEqual);
+}
 
 long Double::hashCode() {
     return Double::hashCode(this->original);
