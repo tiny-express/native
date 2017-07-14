@@ -108,20 +108,82 @@ namespace Java {
             virtual ~StringBuilder();
 
         public:
+            /**
+             * Appends the string representation of the Boolean argument to the sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Boolean &target);
 
+            /**
+             * Appends the string representation of the boolean argument to the sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(boolean target);
 
+            /**
+             * Appends the string representation of the Character argument to this sequence.
+             * The argument is appended to the contents of this sequence. The length of this sequence increases by 1.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Character &target);
 
+            /**
+             * Appends the string representation of the char argument to this sequence.
+             * The argument is appended to the contents of this sequence. The length of this sequence increases by 1.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(char target);
 
+            /**
+             * Appends the string representation of the Character array argument to this sequence.
+             * The characters of the array argument are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the length of the argument.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Array<Character> &target);
 
+            /**
+             * Appends the string representation of the char array argument to this sequence.
+             * The characters of the array argument are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the length of the argument.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Array<char> &target);
 
+            /**
+             * Appends the string representation of a subarray of the Character array argument to this sequence.
+             * Characters of the char array 'target', starting at index 'offset', are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the value of 'length'.
+             *
+             * @param target
+             * @param offset
+             * @param length
+             * @return StringBuilder
+             */
             StringBuilder append(const Array<Character> &target, int offset, int length);
 
+            /**
+             * Appends the string representation of a subarray of the char array argument to this sequence.
+             * Characters of the char array 'target', starting at index 'offset', are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the value of 'length'.
+             *
+             * @param target
+             * @param offset
+             * @param length
+             * @return StringBuilder
+             */
             StringBuilder append(const Array<char> &target, int offset, int length);
 
 //          StringBuilder append(const CharSequence &target);
@@ -216,7 +278,8 @@ namespace Java {
              * @param target
              * @return
              */
-//           StringBuilder append(const StringBuffer &target); // FIXME: StringBuffer is not implemented.
+//          StringBuilder append(const StringBuffer &target); // FIXME: StringBuffer doesn't implemented.
+
             StringBuilder appendCodePoint(int codePoint);
 
             /**

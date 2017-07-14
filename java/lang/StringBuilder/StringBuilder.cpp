@@ -118,6 +118,14 @@ StringBuilder StringBuilder::append(const Array<char> &target) {
     return *this;
 }
 
+StringBuilder StringBuilder::append(const Array<Character> &target, int offset, int length) {
+    return this->insert(this->currentLength, target, offset, length);
+}
+
+StringBuilder StringBuilder::append(const Array<char> &target, int offset, int length) {
+    return this->insert(this->currentLength, target, offset, length);
+}
+
 StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     int newLength = this->currentLength + (int)target.size();
     this->ensureCapacity(newLength);
