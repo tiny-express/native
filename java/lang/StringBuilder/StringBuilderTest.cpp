@@ -193,6 +193,13 @@ TEST(JavaLang, StringBuilderInsert) {
     ASSERT_STR("axbc", stringBuilder5.toString().toString());
     stringBuilder5.insert(1, Character('y'));
     ASSERT_STR("ayxbc", stringBuilder5.toString().toString());
+
+    // Array<Character> and Array<char>
+    StringBuilder stringBuilder6((const string)"abc");
+    stringBuilder6.insert(0, Array<char>{'1','2','3'});
+    ASSERT_STR("123abc", stringBuilder6.toString().toString());
+    stringBuilder6.insert(1, Array<Character> {Character('x'), Character('y'), Character('z')});
+    ASSERT_STR("1xyz23abc", stringBuilder6.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderLength) {

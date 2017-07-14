@@ -236,6 +236,50 @@ StringBuilder StringBuilder::insert(int offset, const Character &target) {
     return this->insert(offset, pointerToTarget->charValue());
 }
 
+StringBuilder StringBuilder::insert(int offset, const Array<char> &target) {
+    if (offset < 0 || offset > this->currentLength) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+
+    int newLength = this->currentLength + target.length;
+    this->ensureCapacity(newLength);
+
+    string newShiftPosition = this->original + offset + target.length;
+    string oldShiftPosition = this->original + offset;
+    int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
+    memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
+    int indexOfOriginal = offset;
+    for (char element : target) {
+        this->original[indexOfOriginal] = element;
+        indexOfOriginal = indexOfOriginal + 1;
+    }
+    this->currentLength = newLength;
+
+    return *this;
+}
+
+StringBuilder StringBuilder::insert(int offset, const Array<Character> &target) {
+    if (offset < 0 || offset > this->currentLength) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+
+    int newLength = this->currentLength + target.length;
+    this->ensureCapacity(newLength);
+
+    string newShiftPosition = this->original + offset + target.length;
+    string oldShiftPosition = this->original + offset;
+    int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
+    memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
+    int indexOfOriginal = offset;
+    for (Character element : target) {
+        this->original[indexOfOriginal] = element.charValue();
+        indexOfOriginal = indexOfOriginal + 1;
+    }
+    this->currentLength = newLength;
+
+    return *this;
+}
+
 StringBuilder StringBuilder::insert(int offset, const Double &target) {
     return this->insert(offset, target.toString());
 }
