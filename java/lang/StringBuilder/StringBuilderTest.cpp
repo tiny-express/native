@@ -154,6 +154,8 @@ TEST(JavaLang, StringBuilderInsert) {
     StringBuilder stringBuilder1((const string)"123");
     stringBuilder1.insert(1, (const string)"xxx");
     ASSERT_STR("1xxx23", stringBuilder1.toString().toString());
+    stringBuilder1.insert(1, String("yyy"));
+    ASSERT_STR("1yyyxxx23", stringBuilder1.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderLength) {

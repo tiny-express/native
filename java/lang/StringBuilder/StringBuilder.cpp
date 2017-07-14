@@ -205,6 +205,10 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
     }
 }
 
+StringBuilder StringBuilder::insert(int offset, const String &target) {
+    return this->insert(offset, target.toString());
+}
+
 StringBuilder StringBuilder::insert(int offset, const string target) {
     if (offset < 0 || offset > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
@@ -216,7 +220,8 @@ StringBuilder StringBuilder::insert(int offset, const string target) {
 
     string newShiftPosition = this->original + offset + targetLength;
     string oldShiftPosition = this->original + offset;
-    int sizeOfShiftMemory = sizeof(char) * targetLength;
+    // Number of bytes of memory will be to shift = size of char type multiple with number of character begin from the offset to the end.
+    int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
     memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
 
     int indexOfOriginal = offset;

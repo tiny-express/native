@@ -295,6 +295,13 @@ namespace Java {
 
             StringBuilder insert(int offset, const Object &target);
 
+            /**
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+
             StringBuilder insert(int offset, const String &target);
 
             /**
