@@ -213,6 +213,22 @@ StringBuilder StringBuilder::insert(int offset, const Boolean &target) {
     return this->insert(offset, target.toString());
 }
 
+StringBuilder StringBuilder::insert(int offset, const Double &target) {
+    return this->insert(offset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int offset, double target) {
+    return this->insert(offset, Double(target));
+}
+
+StringBuilder StringBuilder::insert(int offset, const Float &target) {
+    return this->insert(offset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int offset, float target) {
+    return this->insert(offset, Float(target));
+}
+
 StringBuilder StringBuilder::insert(int offset, const Integer &target) {
     return this->insert(offset, target.toString());
 }

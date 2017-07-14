@@ -289,12 +289,38 @@ namespace Java {
 
             StringBuilder insert(int destinationOffset, const CharSequence &target, int start, int end);
 
+            /**
+             * Inserts the string representation of the Double argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return
+             */
             StringBuilder insert(int offset, const Double &target);
 
+            /**
+             * Inserts the string representation of the double argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return
+             */
             StringBuilder insert(int offset, double target);
 
+            /**
+             * Inserts the string representation of the Float argument into this sequence.
+             * @param offset
+             * @param target
+             * @return
+             */
             StringBuilder insert(int offset, const Float &target);
 
+            /**
+             * Inserts the string representation of the float argument into this sequence.
+             * @param offset
+             * @param target
+             * @return
+             */
             StringBuilder insert(int offset, float target);
 
             /**

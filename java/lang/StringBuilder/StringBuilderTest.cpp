@@ -175,6 +175,17 @@ TEST(JavaLang, StringBuilderInsert) {
     ASSERT_STR("100101000", stringBuilder3.toString().toString());
     stringBuilder3.insert(0, Integer(100));
     ASSERT_STR("100100101000", stringBuilder3.toString().toString());
+
+    // Float and float, Double and double
+    StringBuilder stringBuilder4((const string)"abc");
+    stringBuilder4.insert(1, 0.8f);
+    ASSERT_STR("a0.8bc", stringBuilder4.toString().toString());
+    stringBuilder4.insert(0, 0.7f);
+    ASSERT_STR("0.7a0.8bc", stringBuilder4.toString().toString());
+    stringBuilder4.insert(0, 0.1);
+    ASSERT_STR("0.10.7a0.8bc", stringBuilder4.toString().toString());
+    stringBuilder4.insert(1, Double(0.2));
+    ASSERT_STR("00.2.10.7a0.8bc", stringBuilder4.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderLength) {
