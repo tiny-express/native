@@ -219,38 +219,21 @@ Double Double::operator/=(const Double &target) const {
 }
 
 // TODO Wait for build
-//int Double::compare(double double1, double double2) {
-//    if (isNaN(double1) || isInfinite(double1))
-//        return -9999;
-//
-//    if (isNaN(double2) || isInfinite(double2))
-//        return -9999;
-//
-//    if (double1 < double2)
-//        // Neither value is NaN, thisValue is smaller
-//        return -1;
-//
-//    if (double1 > double2)
-//        // Neither value is NaN, thisValue is larger
-//        return 1;
-//
-//    // Cannot use doubleToRawLongBits because of possibility of NaNs.
-//    long thisBits = Double::doubleToLongBits(double1);
-//    long anotherBits = Double::doubleToLongBits(double2);
-//
-//    if (thisBits == anotherBits) {
-//            // Values are equal
-//            return 0;
-//
-//    } else if (thisBits < anotherBits) {
-//            // (-0.0, 0.0) or (!NaN, NaN)
-//            return -1;
-//
-//    } else {
-//            // (0.0, -0.0) or (NaN, !NaN)
-//            return 1;
-//    }
-//}
+int Double::compare(double double1, double double2) {
+
+    long thisBits = Double::doubleToLongBits(double1);
+    long anotherBits = Double::doubleToLongBits(double2);
+
+    if (thisBits == anotherBits) {
+             return 0;
+    }
+    if (thisBits < anotherBits) {
+            return -1;
+    }
+    if (thisBits > anotherBits){
+            return 1;
+    }
+}
 
 // TODO Wait for build
 //int Double::compareTo(Double anotherDouble) {
@@ -484,7 +467,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
 
     /** Check if doubleInput == NaN_NUMBER_DOUBLE */
     if(isNaN(doubleInput) == 1){
-    strcpy (resultDoubleToBinary32StringType, "01111111111111111111111111111111");
+    strcpy (resultDoubleToBinary32StringType,     "01111111111111111111111111111111");
 
     goto outPut;
 }
@@ -725,7 +708,7 @@ string Double::doubleToBinary64StringType(double doubleInput)
     /** Check if doubleInput == NaN_DOUBLE */
     if(isNaN(doubleInput) == 1){
         strcpy (resultDoubleToBinary64StringType,
-                "0111111111111000000000000000000000000000000000000000000000000000");
+                "0111111111111111111111111111111111111111111111111111111111111111");
 
         goto outPut;
     }
