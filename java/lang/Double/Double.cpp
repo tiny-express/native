@@ -218,7 +218,6 @@ Double Double::operator/=(const Double &target) const {
     return (Double) (this->original / target.original);
 }
 
-// TODO Wait for build
 int Double::compare(double double1, double double2) {
 
     long thisBits = Double::doubleToLongBits(double1);
@@ -235,10 +234,9 @@ int Double::compare(double double1, double double2) {
     }
 }
 
-// TODO Wait for build
-//int Double::compareTo(Double anotherDouble) {
-//    return Double::compare(this->original, anotherDouble.original);
-//}
+int Double::compareTo(Double anotherDouble) {
+    return Double::compare(this->original, anotherDouble.original);
+}
 
 long Double::doubleToLongBits(double valueDouble) {
     return doubleToRawLongBits(valueDouble);
