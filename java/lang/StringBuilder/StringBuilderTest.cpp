@@ -150,6 +150,12 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
     ASSERT_EQUAL(100, stringBuilder.capacity());
 }
 
+TEST(JavaLang, StringBuilderInsert) {
+    StringBuilder stringBuilder1((const string)"123");
+    stringBuilder1.insert(1, (const string)"xxx");
+    ASSERT_STR("1xxx23", stringBuilder1.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderLength) {
     String aString("Hello! I'm a String");
     StringBuilder stringBuilder(aString);

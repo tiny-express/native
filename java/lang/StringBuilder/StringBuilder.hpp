@@ -297,6 +297,17 @@ namespace Java {
 
             StringBuilder insert(int offset, const String &target);
 
+            /**
+             * Inserts the string representation of the string argument into this sequence.
+             * The characters of the string argument are inserted into the contents of this sequence at the position indicated by offset.
+             * The length of this sequence increases by the length of the argument.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder insert(int offset, const string target);
+
             StringBuilder lastIndexOf(const String &target);
 
             StringBuilder lastIndexOf(const String &target, int fromIndex);
