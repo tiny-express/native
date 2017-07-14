@@ -316,10 +316,17 @@ boolean Double::isNaN() {
     return isNaN(this->original);
 }
 
-// TODO Wait for build
-//double Double::longBitsToDouble(long bits){
-//
-//}
+double Double::longBitsToDouble(long longBitsInput){
+    double resultLongBitsToDouble;
+    string convertLongBitsToBinary64StringType;
+
+    convertLongBitsToBinary64StringType = longBitsToBinary64StringType(longBitsInput);
+
+    resultLongBitsToDouble = binary64StringTypeToDouble(convertLongBitsToBinary64StringType);
+
+    free(convertLongBitsToBinary64StringType);
+    return  resultLongBitsToDouble;
+}
 
 double Double::min(double doubleA, double doubleB) {
     return Math::min(doubleA, doubleB);

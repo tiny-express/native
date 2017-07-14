@@ -1028,19 +1028,19 @@ TEST (JavaLang, DoubleToRawLongBits){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2
-    input = -2;
+    input = -2.0;
     expectedResult = -4611686018427387904;
     actualResult = Double::doubleToRawLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input 83
-    input = 83;
+    input = 83.0;
     expectedResult = 4635541022703616000;
     actualResult = Double::doubleToRawLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2625
-    input = -2625;
+    input = -2625.0;
     expectedResult = -4657990851119546368;
     actualResult = Double::doubleToRawLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
@@ -1058,7 +1058,6 @@ TEST (JavaLang, DoubleToRawLongBits){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 }
 
-// TODO Wait for build
 TEST (JavaLang, DoubleToLongBits){
     // Create variable to test
     double input;
@@ -1114,19 +1113,19 @@ TEST (JavaLang, DoubleToLongBits){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2
-    input = -2;
+    input = -2.0;
     expectedResult = -4611686018427387904;
     actualResult = Double::doubleToLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input 83
-    input = 83;
+    input = 83.0;
     expectedResult = 4635541022703616000;
     actualResult = Double::doubleToLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2625
-    input = -2625;
+    input = -2625.0;
     expectedResult = -4657990851119546368;
     actualResult = Double::doubleToLongBits(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
@@ -1318,19 +1317,19 @@ TEST (JavaLang , DoubleHashCode){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2
-    input = -2;
+    input = -2.0;
     expectedResult = 4611686017353646080;
     actualResult = Double::hashCode(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input 83
-    input = 83;
+    input = 83.0;
     expectedResult = 4635541023782912000;
     actualResult = Double::hashCode(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 
     // Input -2625
-    input = -2625;
+    input = -2625.0;
     expectedResult = 4657990850035023360;
     actualResult = Double::hashCode(input);
     ASSERT_EQUAL_LL(expectedResult, actualResult);
@@ -1403,19 +1402,19 @@ TEST (JavaLang , DoubleHashCodeNotInput){
         ASSERT_EQUAL_LL(expectedResult, actualResult);
 
         // Input -2
-        variableDouble = -2;
+        variableDouble = -2.0;
         expectedResult = 4611686017353646080;
         actualResult = variableDouble.hashCode();
         ASSERT_EQUAL_LL(expectedResult, actualResult);
 
         // Input 83
-        variableDouble = 83;
+        variableDouble = 83.0;
         expectedResult = 4635541023782912000;
         actualResult = variableDouble.hashCode();
         ASSERT_EQUAL_LL(expectedResult, actualResult);
 
         // Input -2625
-        variableDouble = -2625;
+        variableDouble = -2625.0;
         expectedResult = 4657990850035023360;
         actualResult = variableDouble.hashCode();
         ASSERT_EQUAL_LL(expectedResult, actualResult);
@@ -1557,19 +1556,19 @@ TEST (JavaLang, DoubleToBinary32StringType) {
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = -2;
+    doubleInput = -2.0;
     expectedResult = (string) "11000000000000000000000000000000";
     actualResult = Double::doubleToBinary32StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = 83;
+    doubleInput = 83.0;
     expectedResult = (string) "01000010101001100000000000000000";
     actualResult = Double::doubleToBinary32StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = -2625;
+    doubleInput = -2625.0;
     expectedResult = (string) "11000101001001000001000000000000";
     actualResult = Double::doubleToBinary32StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
@@ -1641,19 +1640,19 @@ TEST (JavaLang, DoubleToBinary64StringType) {
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = -2;
+    doubleInput = -2.0;
     expectedResult = (string) "1100000000000000000000000000000000000000000000000000000000000000";
     actualResult = Double::doubleToBinary64StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = 83;
+    doubleInput = 83.0;
     expectedResult = (string) "0100000001010100110000000000000000000000000000000000000000000000";
     actualResult = Double::doubleToBinary64StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 
-    doubleInput = -2625;
+    doubleInput = -2625.0;
     expectedResult = (string) "1100000010100100100000100000000000000000000000000000000000000000";
     actualResult = Double::doubleToBinary64StringType(doubleInput);
     ASSERT_STR(expectedResult, actualResult);
@@ -1726,17 +1725,17 @@ TEST (JavaLang, Binary64StringTypeToDouble) {
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     Binary64StringTypeInput = (string) "1100000000000000000000000000000000000000000000000000000000000000";
-    expectedResult = -2;
+    expectedResult = -2.0;
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     Binary64StringTypeInput = (string) "0100000001010100110000000000000000000000000000000000000000000000";
-    expectedResult = 83;
+    expectedResult = 83.0;
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     Binary64StringTypeInput = (string) "1100000010100100100000100000000000000000000000000000000000000000";
-    expectedResult = -2625;
+    expectedResult = -2625.0;
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
@@ -1846,6 +1845,91 @@ TEST (JavaLang, LongBitsToBinary64StringType) {
     actualResult = Double::longBitsToBinary64StringType(longBitsInput);
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
+}
+
+TEST (JavaLang, LongBitsToDouble){
+    // Create variable to test
+    long longBitsInput;
+    double expectedResult;
+    double actualResult;
+
+    // Input 0.0
+    longBitsInput = 0;
+    expectedResult = 0.0;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY_DOUBLE
+    longBitsInput = 9218868437227405312;
+    expectedResult = POSITIVE_INFINITY_DOUBLE;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY_DOUBLE
+    longBitsInput = -9218868437227405312;
+    expectedResult = NEGATIVE_INFINITY_DOUBLE;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input NaN_NUMBER_DOUBLE
+    longBitsInput = 9223372036854775807;
+    expectedResult = NaN_NUMBER_DOUBLE;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input -0.7
+    longBitsInput = -4604480259023595110;
+    expectedResult = -0.7;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input 12.375
+    longBitsInput = 4623156123728347136;
+    expectedResult = 12.375;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input 1.0
+    longBitsInput = 4607182418800017408;
+    expectedResult = 1.0;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input 0.375
+    longBitsInput = 4600427019358961664;
+    expectedResult = 0.375;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input -2
+    longBitsInput = -4611686018427387904;
+    expectedResult = -2.0;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input 83
+    longBitsInput = 4635541022703616000;
+    expectedResult = 83.0;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input -2625
+    longBitsInput = -4657990851119546368;
+    expectedResult = -2625.0;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input 0.5
+    longBitsInput = 4602678819172646912;
+    expectedResult = 0.5;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    longBitsInput = -4653441614972469831;
+    expectedResult = -1302.12345678;
+    actualResult = Double::longBitsToDouble(longBitsInput);
+    Double::compare(expectedResult, actualResult);
 }
 
 // TODO  Check later all value of Java ( Double Format IEEE 754) in C++:
