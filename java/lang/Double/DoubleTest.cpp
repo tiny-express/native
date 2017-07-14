@@ -1700,7 +1700,7 @@ TEST (JavaLang, Binary64StringTypeToDouble) {
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
-    Binary64StringTypeInput = (string) "0111111111111000000000000000000000000000000000000000000000000000";
+    Binary64StringTypeInput = (string) "0111111111111111111111111111111111111111111111111111111111111111";
     expectedResult = NaN_NUMBER_DOUBLE;
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
@@ -1749,6 +1749,103 @@ TEST (JavaLang, Binary64StringTypeToDouble) {
     expectedResult = -1302.12345678;
     actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
+}
+
+TEST (JavaLang, LongBitsToBinary64StringType) {
+    long longBitsInput;
+    string expectedResult;
+    string actualResult;
+
+    // LongBits of 0
+    longBitsInput = 0;
+    expectedResult = (string) "0000000000000000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of POSITIVE_INFINITY_DOUBLE;
+    longBitsInput = 9218868437227405312;
+    expectedResult = (string) "0111111111110000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of NEGATIVE_INFINITY_DOUBLE
+    longBitsInput = -9218868437227405312;
+    expectedResult = (string) "1111111111110000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of NaN_NUMBER_DOUBLE
+    longBitsInput = 9223372036854775807;
+    expectedResult = (string) "0111111111111111111111111111111111111111111111111111111111111111";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of -0.7
+    longBitsInput = -4604480259023595110;
+    expectedResult = (string) "1011111111100110011001100110011001100110011001100110011001100110";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of 12.375
+    longBitsInput = 4623156123728347136;
+    expectedResult = (string) "0100000000101000110000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of 1.0
+    longBitsInput = 4607182418800017408;
+    expectedResult = (string) "0011111111110000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of 0.375
+    longBitsInput = 4600427019358961664;
+    expectedResult = (string) "0011111111011000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of -2
+    longBitsInput = -4611686018427387904;
+    expectedResult = (string) "1100000000000000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of 83
+    longBitsInput = 4635541022703616000;
+    expectedResult = (string) "0100000001010100110000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of -2625
+    longBitsInput = -4657990851119546368;
+    expectedResult = (string) "1100000010100100100000100000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of 0.5
+    longBitsInput = 4602678819172646912;
+    expectedResult = (string) "0011111111100000000000000000000000000000000000000000000000000000";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // LongBits of -1302.12345678
+    longBitsInput = -4653441614972469831;
+    expectedResult = (string) "1100000010010100010110000111111001101011011101000100001001000111";
+    actualResult = Double::longBitsToBinary64StringType(longBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
 }
 
 // TODO  Check later all value of Java ( Double Format IEEE 754) in C++:

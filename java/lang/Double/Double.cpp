@@ -918,3 +918,36 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
 
     return resultBinary64StringTypeToDouble;
 }
+
+string Double::longBitsToBinary64StringType(long longBitsInput) {
+    string resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
+    int index;
+
+    for (int i= 0 ; i<=63; i++) {
+        resultLongBitsToBinary64StringType[i] = '0';
+    }
+
+    resultLongBitsToBinary64StringType[64] = '\0';
+
+    if (longBitsInput < 0) {
+        resultLongBitsToBinary64StringType[0] = '1';
+        longBitsInput = -longBitsInput;
+    }
+
+    index = 63;
+    while ( (longBitsInput != 0) || (index > 1)) {
+
+        if ( (longBitsInput & 1) ==1 ) {
+            resultLongBitsToBinary64StringType[index] = '1';
+        }
+
+        if ( (longBitsInput & 1) == 0 ) {
+            resultLongBitsToBinary64StringType[index] = '0';
+        }
+
+        index--;
+        longBitsInput = longBitsInput >> 1;
+    }
+
+    return resultLongBitsToBinary64StringType;
+}
