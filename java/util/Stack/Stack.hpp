@@ -93,7 +93,7 @@ namespace Java {
             */
             int search(const E &object) {
                int index = this->lastIndexOf(object);
-               if(index >= 0) {
+               if (index >= 0) {
                    return index;
                }
                return -1;
