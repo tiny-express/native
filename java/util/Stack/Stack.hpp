@@ -27,75 +27,77 @@
 #ifndef NATIVE_JAVA_STACK_LIST_HPP
 #define NATIVE_JAVA_STACK_LIST_HPP
 
-#include <stack>
-#include "../function/UnaryOperator/UnaryOperator.hpp"
-#include "../Iterator/Iterator.hpp"
-#include "../Collection/Collection.hpp"
-#include "../Comparator/Comparator.hpp"
+#include "../Vector/Vector.hpp"
+
 
 namespace Java {
     namespace Util {
         template <typename E>
-        class Stack {
+        class Stack : public Vector<E>{
+        public:
+            /**
+             * Constructor
+             */
+            Stack(){}
 
-		private:
-			std::stack<E> original;
-
-		public:
-			Stack() {}
-			~Stack() {}
-
-		public:
-			/**
-			 * Tests if this stack is empty.
-			 * @return boolean
-			 */
-			boolean empty() {
-				if (this->original.size() == 0) {
-					return false;
-				}
-				return true;
-	        }
-
-	        /**
-	         *Looks at the object at the top of this stack without removing it from the stack.
-	         * @return E
-	         */
-			E peek() {
-				E e;
-				if (this->original.size() > 0) {
-					e = this->original.top();
-				}
-				return e;
-			}
-
-			/**
-			 * Removes the object at the top of this stack and returns that object as the value of this function.
-			 * @return E
-			 */
-	        E pop() {
-		        E e;
-				if (this->original.size() > 0) {
-					e = this->original.top();
-					this->original.pop();
-				}
-				return e;
-	        }
-
-			/**
-			 * Pushes an item onto the top of this stack
-			 * @param item
-			 * @return E
-			 */
-	        E push(const E &item) {
-		        this->original.push(item);
-				return item;
-	        }
-
-			/**
-			 * Don't support this method
-			 */
-//	        int search(Object &o);
+            /**
+            * Stack empty - check whether the Stack is empty or not
+            *
+            * @return true only if this stack has no item; false otherwise
+            */
+            bool empty() {
+                return this->size() == 0;
+            }
+            
+            /**
+             * Stack peek - return the top element
+             *
+             * @return E
+             */
+            E peek() {
+                int len = this->size();
+                if (len == 0) {
+                    throw std::invalid_argument("index is out of range");
+                }
+                return this->elementAt(len - 1);
+            }
+            
+            /**
+             * Stack pop - return the top element and remove it
+             *
+             * @return E
+             */
+            E pop() {
+                int len = this->size();
+                E result = this->peek();
+                this->removeElementAt(len - 1);
+                return result;
+            }
+            
+           /**
+            * Stack push - Push new element
+            *
+            * @param element
+            * @return E
+            */
+            E push(const E &element) {
+               this->addElement(element);
+               return element;
+            }
+       
+           /**
+            * Stack search - search the object in Stack
+            *
+            * @param object
+            * @return the 1-based position from the top, -1 if can not find the object in Stack
+            */
+            int search(const E &object) {
+               int index = this->lastIndexOf(object);
+               if (index >= 0) {
+                   return index;
+               }
+               return -1;
+            }
         };
     }
 }
