@@ -67,11 +67,13 @@ TEST(JavaLang, StringBuilderDestructor) {
 }
 
 TEST(JavaLang, StringBuilderAppend) {
+    // Array of character
     StringBuilder stringBuilder1;
     Array<Character> arrayOfCharacters({'1', '2', '3'});
     stringBuilder1.append(arrayOfCharacters);
     ASSERT_STR("123", stringBuilder1.toString().toString());
 
+    // String and string (const string)
     StringBuilder stringBuilder2;
     String aString = "123";
     stringBuilder2.append(aString);
@@ -79,12 +81,14 @@ TEST(JavaLang, StringBuilderAppend) {
     stringBuilder2.append((const string)"456");
     ASSERT_STR("123456", stringBuilder2.toString().toString());
 
+    // Double and double
     StringBuilder stringBuilder3;
     stringBuilder3.append(Double(0.8));
     ASSERT_STR("0.8", stringBuilder3.toString().toString());
     stringBuilder3.append(0.8);
     ASSERT_STR("0.80.8", stringBuilder3.toString().toString());
 
+    // Boolean and boolean
     StringBuilder stringBuilder4;
     stringBuilder4.append(Boolean(true));
     ASSERT_STR("true", stringBuilder4.toString().toString());
@@ -94,6 +98,11 @@ TEST(JavaLang, StringBuilderAppend) {
     ASSERT_STR("truefalsetrue", stringBuilder4.toString().toString());
     stringBuilder4.append(false);
     ASSERT_STR("truefalsetruefalse", stringBuilder4.toString().toString());
+
+    StringBuilder stringBuilder5;
+    stringBuilder5.append(Character('a'));
+    stringBuilder5.append('b');
+    ASSERT_STR("ab", stringBuilder5.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderCapacity) {

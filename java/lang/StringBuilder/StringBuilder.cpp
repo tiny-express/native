@@ -82,11 +82,16 @@ StringBuilder StringBuilder::append(boolean target) {
 }
 
 StringBuilder StringBuilder::append(const Character &target) {
-    return append(target.toString());
+    Character *pointerToTarget = (Character *)&target; // Avoid 'calling a const function from a non-const object'
+    return append(pointerToTarget->charValue());
 }
 
 StringBuilder StringBuilder::append(char target) {
-    return append(Character(target));
+    int newLength = this->currentLength + 1;
+    this->ensureCapacity(newLength);
+    this->original[this->currentLength] = target;
+    this->currentLength = newLength;
+    return *this;
 }
 
 StringBuilder StringBuilder::append(const Array<Character> &target) {
@@ -96,28 +101,6 @@ StringBuilder StringBuilder::append(const Array<Character> &target) {
     for (Character character : target) {
         this->original[indexOfOriginal] = character.charValue();
         indexOfOriginal = indexOfOriginal + 1;
-    }
-    this->currentLength = newLength;
-    return *this;
-}
-
-StringBuilder StringBuilder::append(const Double &target) {
-    return append(target.toString());
-}
-
-StringBuilder StringBuilder::append(double target) {
-    return append(Double(target));
-}
-
-StringBuilder StringBuilder::append(const string target) {
-    int stringLength = (int)strlen(target);
-    int newLength = this->currentLength + stringLength;
-    this->ensureCapacity(newLength);
-    int indexOfOriginal;
-    int indexOfString = 0;
-    for (indexOfOriginal = this->currentLength; indexOfOriginal < newLength; indexOfOriginal++) {
-        this->original[indexOfOriginal] = target[indexOfString];
-        indexOfString = indexOfString + 1;
     }
     this->currentLength = newLength;
     return *this;
@@ -134,6 +117,28 @@ StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     }
     this->currentLength = newLength;
     return *this;
+}
+
+StringBuilder StringBuilder::append(const string target) {
+    int stringLength = (int)strlen(target);
+    int newLength = this->currentLength + stringLength;
+    this->ensureCapacity(newLength);
+    int indexOfOriginal;
+    int indexOfString = 0;
+    for (indexOfOriginal = this->currentLength; indexOfOriginal < newLength; indexOfOriginal++) {
+        this->original[indexOfOriginal] = target[indexOfString];
+        indexOfString = indexOfString + 1;
+    }
+    this->currentLength = newLength;
+    return *this;
+}
+
+StringBuilder StringBuilder::append(const Double &target) {
+    return append(target.toString());
+}
+
+StringBuilder StringBuilder::append(double target) {
+    return append(Double(target));
 }
 
 StringBuilder StringBuilder::append(const String &target) {
