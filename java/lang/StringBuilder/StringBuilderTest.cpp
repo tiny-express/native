@@ -70,20 +70,30 @@ TEST(JavaLang, StringBuilderAppend) {
     StringBuilder stringBuilder1;
     Array<Character> arrayOfCharacters({'1', '2', '3'});
     stringBuilder1.append(arrayOfCharacters);
-    ASSERT_EQUAL(arrayOfCharacters.length, stringBuilder1.length());
+    ASSERT_STR("123", stringBuilder1.toString().toString());
 
     StringBuilder stringBuilder2;
     String aString = "123";
     stringBuilder2.append(aString);
-    ASSERT_EQUAL(aString.length(), stringBuilder2.length());
+    ASSERT_STR("123", stringBuilder2.toString().toString());
+    stringBuilder2.append((const string)"456");
+    ASSERT_STR("123456", stringBuilder2.toString().toString());
 
     StringBuilder stringBuilder3;
-    stringBuilder3.append(aString.toString());
-    ASSERT_EQUAL(aString.length(), stringBuilder3.length());
+    stringBuilder3.append(Double(0.8));
+    ASSERT_STR("0.8", stringBuilder3.toString().toString());
+    stringBuilder3.append(0.8);
+    ASSERT_STR("0.80.8", stringBuilder3.toString().toString());
 
     StringBuilder stringBuilder4;
-    stringBuilder4.append(Double(0.8));
-    ASSERT_STR("0.8", stringBuilder4.toString().toString());
+    stringBuilder4.append(Boolean(true));
+    ASSERT_STR("true", stringBuilder4.toString().toString());
+    stringBuilder4.append(Boolean(false));
+    ASSERT_STR("truefalse", stringBuilder4.toString().toString());
+    stringBuilder4.append(true);
+    ASSERT_STR("truefalsetrue", stringBuilder4.toString().toString());
+    stringBuilder4.append(false);
+    ASSERT_STR("truefalsetruefalse", stringBuilder4.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderCapacity) {

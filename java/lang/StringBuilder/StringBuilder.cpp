@@ -73,6 +73,22 @@ StringBuilder::~StringBuilder() {
     free(original);
 }
 
+StringBuilder StringBuilder::append(const Boolean &target) {
+    return append(target.toString());
+}
+
+StringBuilder StringBuilder::append(boolean target) {
+    return append(Boolean(target));
+}
+
+StringBuilder StringBuilder::append(const Character &target) {
+    return append(target.toString());
+}
+
+StringBuilder StringBuilder::append(char target) {
+    return append(Character(target));
+}
+
 StringBuilder StringBuilder::append(const Array<Character> &target) {
     int newLength = this->currentLength + target.length;
     this->ensureCapacity(newLength);
@@ -87,6 +103,10 @@ StringBuilder StringBuilder::append(const Array<Character> &target) {
 
 StringBuilder StringBuilder::append(const Double &target) {
     return append(target.toString());
+}
+
+StringBuilder StringBuilder::append(double target) {
+    return append(Double(target));
 }
 
 StringBuilder StringBuilder::append(const string target) {
