@@ -67,11 +67,14 @@ TEST(JavaLang, StringBuilderDestructor) {
 }
 
 TEST(JavaLang, StringBuilderAppend) {
-    // Array of character
+    // Array of Character or char
     StringBuilder stringBuilder1;
-    Array<Character> arrayOfCharacters({'1', '2', '3'});
-    stringBuilder1.append(arrayOfCharacters);
+    Array<char> arrayOfChar({'1','2','3'});
+    stringBuilder1.append(arrayOfChar);
     ASSERT_STR("123", stringBuilder1.toString().toString());
+    Array<Character> arrayOfCharacter({Character('4'), Character('5'), Character('6')});
+    stringBuilder1.append(arrayOfCharacter);
+    ASSERT_STR("123456", stringBuilder1.toString().toString());
 
     // String and string (const string)
     StringBuilder stringBuilder2;

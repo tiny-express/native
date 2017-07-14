@@ -106,6 +106,18 @@ StringBuilder StringBuilder::append(const Array<Character> &target) {
     return *this;
 }
 
+StringBuilder StringBuilder::append(const Array<char> &target) {
+    int newLength = this->currentLength + target.length;
+    this->ensureCapacity(newLength);
+    int indexOfOriginal = this->currentLength;
+    for (char character: target) {
+        this->original[indexOfOriginal] = character;
+        indexOfOriginal = indexOfOriginal + 1;
+    }
+    this->currentLength = newLength;
+    return *this;
+}
+
 StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     int newLength = this->currentLength + (int)target.size();
     this->ensureCapacity(newLength);
