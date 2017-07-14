@@ -1525,3 +1525,17 @@ TEST (JavaLang, DoubleToBinary64StringType) {
 //    free(actualResult);
 }
 
+// TODO  Check later all value of Java ( Double Format IEEE 754) in C++:
+//TABLE 2-5   Bit Patterns in Double-Storage Format and their IEEE Values
+//        Common Name	    Bit Pattern (Hex)	    Decimal Value
+//+ 0	00000000 00000000	0.0
+//- 0	80000000 00000000	-0.0
+//1	3ff00000 00000000	1.0
+//2	40000000 00000000	2.0
+//max normal number	7fefffff ffffffff	1.7976931348623157e+308
+//min positive normal number	00100000 00000000	2.2250738585072014e-308
+//max subnormal number	000fffff ffffffff	2.2250738585072009e-308
+//min positive subnormal number	00000000 00000001	4.9406564584124654e-324
+//+inf	7ff00000 00000000	Infinity
+//-inf	fff00000 00000000	-Infinity
+//Not-a-Number	7ff80000 00000000	NaN
