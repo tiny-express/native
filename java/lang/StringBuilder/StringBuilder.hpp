@@ -204,8 +204,20 @@ namespace Java {
              */
             StringBuilder append(const string target);
 
+            /**
+             * Appends the string representation of the Double argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Double &target);
 
+            /**
+             * Appends the string representation of the double argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(double target);
 
             /**
