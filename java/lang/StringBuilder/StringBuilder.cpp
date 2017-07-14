@@ -205,6 +205,30 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
     }
 }
 
+StringBuilder StringBuilder::insert(int offset, boolean target) {
+    return this->insert(offset, Boolean(target));
+}
+
+StringBuilder StringBuilder::insert(int offset, const Boolean &target) {
+    return this->insert(offset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int offset, const Integer &target) {
+    return this->insert(offset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int offset, int target) {
+    return this->insert(offset, Integer(target));
+}
+
+StringBuilder StringBuilder::insert(int offset, const Long &target) {
+    return this->insert(offset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int offset, long target) {
+    return this->insert(offset, Long(target));
+};
+
 StringBuilder StringBuilder::insert(int offset, const String &target) {
     return this->insert(offset, target.toString());
 }

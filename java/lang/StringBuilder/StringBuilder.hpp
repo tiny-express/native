@@ -257,8 +257,20 @@ namespace Java {
 
             int indexOf(const String &target, int fromIndex);
 
+            /**
+             * Inserts the string representation of the boolean argument into this sequence.
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int offset, boolean target);
 
+            /**
+             * Inserts the string representation of the Boolean argument into this sequence.
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int offset, const Boolean &target);
 
             StringBuilder insert(int offset, char target);
@@ -285,23 +297,59 @@ namespace Java {
 
             StringBuilder insert(int offset, float target);
 
-            StringBuilder insert(int offset, const Integer &target);
-
-            StringBuilder insert(int offset, int target);
-
-            StringBuilder insert(int offset, const Long &target);
-
-            StringBuilder insert(int offset, long target);
-
-            StringBuilder insert(int offset, const Object &target);
-
             /**
+             * Inserts the string representation of the second int argument into this sequence.
              *
              * @param offset
              * @param target
              * @return StringBuilder
              */
+            StringBuilder insert(int offset, const Integer &target);
 
+            /**
+             * Inserts the string representation of the second int argument into this sequence.
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder insert(int offset, int target);
+
+            /**
+             * Inserts the string representation of the Long argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder insert(int offset, const Long &target);
+
+            /**
+             * Inserts the string representation of the long argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder insert(int offset, long target);
+
+            /**
+             * Inserts the string representation of the Object argument into this character sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+//          StringBuilder insert(int offset, const Object &target); // FIXME: String::valueOf(Object) doesn't exist.
+
+            /**
+             * Inserts the string into this character sequence.
+             * The characters of the String argument are inserted, in order, into this sequence at the indicated offset,
+             * moving up any characters originally above that position and increasing the length of this sequence by the length of the argument.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int offset, const String &target);
 
             /**
@@ -312,6 +360,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw if the offset is invalid.
              */
             StringBuilder insert(int offset, const string target);
 

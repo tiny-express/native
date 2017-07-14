@@ -151,11 +151,30 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
 }
 
 TEST(JavaLang, StringBuilderInsert) {
+    // String and string
     StringBuilder stringBuilder1((const string)"123");
     stringBuilder1.insert(1, (const string)"xxx");
     ASSERT_STR("1xxx23", stringBuilder1.toString().toString());
     stringBuilder1.insert(1, String("yyy"));
     ASSERT_STR("1yyyxxx23", stringBuilder1.toString().toString());
+
+    // Boolean and boolean
+    StringBuilder stringBuilder2((const string)"1 = 1 is ");
+    stringBuilder2.insert(stringBuilder2.length(), Boolean(true));
+    ASSERT_STR("1 = 1 is true", stringBuilder2.toString().toString());
+    stringBuilder2.insert(0, false);
+    ASSERT_STR("false1 = 1 is true", stringBuilder2.toString().toString());
+
+    // Long and long, Integer and int,
+    StringBuilder stringBuilder3((const string)"0");
+    stringBuilder3.insert(1, 1000l);
+    ASSERT_STR("01000", stringBuilder3.toString().toString());
+    stringBuilder3.insert(1, Long(10l));
+    ASSERT_STR("0101000", stringBuilder3.toString().toString());
+    stringBuilder3.insert(0, 10);
+    ASSERT_STR("100101000", stringBuilder3.toString().toString());
+    stringBuilder3.insert(0, Integer(100));
+    ASSERT_STR("100100101000", stringBuilder3.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderLength) {
