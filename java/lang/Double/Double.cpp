@@ -285,13 +285,12 @@ long Double::doubleToRawLongBits(double doubleInput) {
 //    return (isDouble && isEqual);
 //}
 
-// TODO Wait for build
-//unsigned_long_long Double::hashCode() {
-//    return Double::hashCode(this->original);
-//}
+long Double::hashCode() {
+    return Double::hashCode(this->original);
+}
 
-long Double::hashCode(double valuehashCode) {
-    long bits = doubleToLongBits(valuehashCode);
+long Double::hashCode(double doubleInput) {
+    long bits = doubleToLongBits(doubleInput);
     long rightShiftBits = bits >> 32;
     return  (bits ^ rightShiftBits);
 }

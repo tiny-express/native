@@ -551,7 +551,7 @@ namespace Java {
              *
              * @return  a {@code hash code} value for this object.
              */
-            unsigned long long int hashCode();
+            long hashCode();
 
             /**
              * Returns a hash code for a {@code double} value; compatible with
@@ -560,7 +560,7 @@ namespace Java {
              * @param value the value to hash
              * @return a hash code value for a {@code double} value.
              */
-            static long hashCode(double value);
+            static long hashCode(double doubleInput);
 
             /**
              * Returns {@code true} if the argument is a finite floating-point

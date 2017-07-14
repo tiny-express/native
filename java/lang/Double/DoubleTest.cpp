@@ -1348,6 +1348,91 @@ TEST (JavaLang , DoubleHashCode){
     ASSERT_EQUAL_LL(expectedResult, actualResult);
 }
 
+TEST (JavaLang , DoubleHashCodeNotInput){
+        // Create variable to test
+        Double variableDouble;
+        long expectedResult;
+        long actualResult;
+
+        // Input 0.0
+        variableDouble = 0.0;
+        expectedResult = 0;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input POSITIVE_INFINITY_DOUBLE
+        variableDouble = POSITIVE_INFINITY_DOUBLE;
+        expectedResult = 9218868439373840384;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input NEGATIVE_INFINITY_DOUBLE
+        variableDouble = NEGATIVE_INFINITY_DOUBLE;
+        expectedResult = 9218868435080970240;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input NaN_NUMBER_DOUBLE
+        variableDouble = NaN_NUMBER_DOUBLE;
+        expectedResult = 9223372034707292160;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input -0.7
+        variableDouble = -0.7;
+        expectedResult =  4604480258807169027;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input 12.375
+        variableDouble = 12.375;
+        expectedResult = 4623156124804759552;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input 1.0
+        variableDouble = 1.0;
+        expectedResult = 4607182419872710656;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input 0.375
+        variableDouble = 0.375;
+        expectedResult = 4600427020430082048;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input -2
+        variableDouble = -2;
+        expectedResult = 4611686017353646080;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input 83
+        variableDouble = 83;
+        expectedResult = 4635541023782912000;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input -2625
+        variableDouble = -2625;
+        expectedResult = 4657990850035023360;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input 0.5
+        variableDouble = 0.5;
+        expectedResult = 4602678820244291584;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+        // Input -1302.12345678
+        variableDouble = -1302.12345678;
+        expectedResult = 4653441613905795640;
+        actualResult = variableDouble.hashCode();
+        ASSERT_EQUAL_LL(expectedResult, actualResult);
+}
+
 TEST (JavaLang , DoubleIsFinite) {
 
     ASSERT_TRUE(Double::isFinite(13.02));
