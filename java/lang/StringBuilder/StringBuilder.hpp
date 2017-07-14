@@ -146,19 +146,61 @@ namespace Java {
 
             StringBuilder append(double target);
 
+            /**
+             * Appends the string representation of the Float argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Float &target);
 
+            /**
+             * Appends the string representation of the float argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(float target);
 
+            /**
+             * Appends the string representation of the Integer argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Integer &target);
 
+            /**
+             * Appends the string representation of the int argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(int target);
 
+            /**
+             * Appends the string representation of the Long argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(const Long &target);
 
+            /**
+             * Appends the string representation of the long argument to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder append(long target);
 
-            StringBuilder append(const Object &target);
+            /**
+             * Appends the string representation of the Object argument.
+             *
+             * @param target
+             * @return StringBuilder
+             */
+//           StringBuilder append(const Object &target); // FIXME: Object.toString() return hashcode and it changes every time (can not test).
 
             /**
              * Appends the specified string to this character sequence.
@@ -168,7 +210,13 @@ namespace Java {
              */
             StringBuilder append(const String &target);
 
-//          StringBuilder append(const StringBuffer &target);
+            /**
+             * Appends the specified StringBuffer to this sequence.
+             *
+             * @param target
+             * @return
+             */
+//           StringBuilder append(const StringBuffer &target); // FIXME: StringBuffer is not implemented.
             StringBuilder appendCodePoint(int codePoint);
 
             /**
