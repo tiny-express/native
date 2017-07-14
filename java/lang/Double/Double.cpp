@@ -958,3 +958,8 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
 
     return resultLongBitsToBinary64StringType;
 }
+
+// TODO Throw exception
+Double Double::valueOf(String stringInput) {
+        return Double::parseDouble(stringInput);
+}

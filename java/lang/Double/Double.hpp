@@ -723,9 +723,37 @@ namespace Java {
             */
             static string doubleToBinary64StringType(double doubleInput );
 
+            /**
+            * Convert binary64StringType To Double
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+            * To Double
+             *
+            * @param  string
+            * @return double
+            */
             static double binary64StringTypeToDouble(string Binary64StringTypeInput);
 
+            /**
+            * Convert longBits To Binary64StringType
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+             *
+            * @param  long
+            * @return string
+            */
             static string longBitsToBinary64StringType(long longBitsInput);
+
+            /**
+            * Convert from string to double
+            *
+            * @param      s   the string to be parsed.
+            * @return     a {@code Double} object holding the value
+            *             represented by the {@code String} argument.
+            * @throws     NumberFormatException  if the string does not contain a
+            *             parsable number.
+            */
+            static Double valueOf(String s);
         };
 	}
 }

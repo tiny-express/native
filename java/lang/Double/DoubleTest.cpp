@@ -237,9 +237,35 @@ TEST (JavaLang, DoubleAssignmentOperator) {
 }
 
 TEST (JavaLang, DoubleParseDouble) {
-    // Given value for Double constructor and assign value - Return double
-    Double validDoublePointer = Double::parseDouble("6");
-    ASSERT_DBL_NEAR(6, validDoublePointer.doubleValue());
+    string stringInput;
+    Double expectedResult;
+    Double actualResult;
+
+    stringInput = (string) "1302.12345678";
+    expectedResult = 1302.12345678;
+    actualResult = Double::parseDouble(stringInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+
+    stringInput = (string) "-1302.12345678";
+    expectedResult = -1302.12345678;
+    actualResult = Double::parseDouble(stringInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+}
+
+TEST (JavaLang, DoubleValueOf) {
+    string stringInput;
+    Double expectedResult;
+    Double actualResult;
+
+    stringInput = (string) "1302.12345678";
+    expectedResult = 1302.12345678;
+    actualResult = Double::valueOf(stringInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+
+    stringInput = (string) "-1302.12345678";
+    expectedResult = -1302.12345678;
+    actualResult = Double::valueOf(stringInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
 TEST (JavaLang, DoubleToString){
