@@ -84,12 +84,24 @@ TEST(JavaLang, StringBuilderAppend) {
     stringBuilder2.append((const string)"456");
     ASSERT_STR("123456", stringBuilder2.toString().toString());
 
-    // Double and double
+    // Double and double, Float and float, Integer and int, Long and long
     StringBuilder stringBuilder3;
     stringBuilder3.append(Double(0.8));
     ASSERT_STR("0.8", stringBuilder3.toString().toString());
     stringBuilder3.append(0.8);
     ASSERT_STR("0.80.8", stringBuilder3.toString().toString());
+    stringBuilder3.append(Float(0.7f));
+    ASSERT_STR("0.80.80.7", stringBuilder3.toString().toString());
+    stringBuilder3.append(0.7f);
+    ASSERT_STR("0.80.80.70.7", stringBuilder3.toString().toString());
+    stringBuilder3.append(Integer(10));
+    ASSERT_STR("0.80.80.70.710", stringBuilder3.toString().toString());
+    stringBuilder3.append(100);
+    ASSERT_STR("0.80.80.70.710100", stringBuilder3.toString().toString());
+    stringBuilder3.append(Long(1000l));
+    ASSERT_STR("0.80.80.70.7101001000", stringBuilder3.toString().toString());
+    stringBuilder3.append(1001L);
+    ASSERT_STR("0.80.80.70.71010010001001", stringBuilder3.toString().toString());
 
     // Boolean and boolean
     StringBuilder stringBuilder4;

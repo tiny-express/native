@@ -74,16 +74,16 @@ StringBuilder::~StringBuilder() {
 }
 
 StringBuilder StringBuilder::append(const Boolean &target) {
-    return append(target.toString());
+    return this->append(target.toString());
 }
 
 StringBuilder StringBuilder::append(boolean target) {
-    return append(Boolean(target));
+    return this->append(Boolean(target));
 }
 
 StringBuilder StringBuilder::append(const Character &target) {
     Character *pointerToTarget = (Character *)&target; // Avoid 'calling a const function from a non-const object'
-    return append(pointerToTarget->charValue());
+    return this->append(pointerToTarget->charValue());
 }
 
 StringBuilder StringBuilder::append(char target) {
@@ -146,11 +146,35 @@ StringBuilder StringBuilder::append(const string target) {
 }
 
 StringBuilder StringBuilder::append(const Double &target) {
-    return append(target.toString());
+    return this->append(target.toString());
 }
 
 StringBuilder StringBuilder::append(double target) {
-    return append(Double(target));
+    return this->append(Double(target));
+}
+
+StringBuilder StringBuilder::append(const Float &target) {
+    return this->append(target.toString());
+}
+
+StringBuilder StringBuilder::append(float target) {
+    return this->append(Float(target));
+}
+
+StringBuilder StringBuilder::append(const Integer &target) {
+    return this->append(target.toString());
+}
+
+StringBuilder StringBuilder::append(int target) {
+    return this->append(Integer(target));
+}
+
+StringBuilder StringBuilder::append(const Long &target) {
+    return this->append(target.toString());
+}
+
+StringBuilder StringBuilder::append(long target) {
+    return this->append(Long(target));
 }
 
 StringBuilder StringBuilder::append(const String &target) {
