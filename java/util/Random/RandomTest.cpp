@@ -24,59 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+extern "C" {
+#include "../../../unit_test.h"
+}
 
-#include <chrono>
 #include "Random.hpp"
 
-Random::Random() : Random(seedUniquifier() ^ nanoTime()) {
+TEST (JavaUtil, RandomConstructor){
+    Random random1;
+    ASSERT_TRUE(random1.getSeed() != 0);
+
+    /*long seed = 60;
+    Random random2 = Random(seed);
+    ASSERT_TRUE(random2.getSeed() != 0);*/
 }
 
-/**
- * Get system time in nanoseconds
- *
- * @return long
- */
-long Random::nanoTime(){
-    auto now = std::chrono::system_clock::now();
-    auto duration = now.time_since_epoch();
-    auto nanosecond = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
-    return nanosecond;
-}
-
-/**
- * Constructor
- *
- * @param seed
- */
-Random::Random(long seed) {
-    this->seed.store(initialScramble(seed));
-}
-
-/**
- * Return a scramble for Construtor
- *
- * @param seed
- * @return
- */
-long Random::initialScramble(long seed) {
-    return (seed ^ multiplier) & mask;
-}
-
-/**
- * Sets the seedUniquifierField of the random number generator.
- *
- * @return
- */
-long Random::seedUniquifier() {
-    for (;;) {
-        long current = seedUniquifierField.load();
-        long next = current * 181783497276652981L;
-        if(seedUniquifierField.compare_exchange_weak(current, next)){
-            return next;
-        }
-    }
-}
-
-void Random::resetSeed(long seedVal) {
+TEST (JavaUtil, InitialScramble){
 
 }

@@ -28,15 +28,16 @@
 #define NATIVE_JAVA_UTIL_RANDOM_HPP
 
 #include <atomic>
+#include "random"
 #include "../../Lang.hpp"
 
 namespace Java {
     namespace Util {
-        class Random :public Object {
+        class Random{
 
-        private:
-            std::atomic<long> seed;
-            const std::atomic<long> seedUniquifierField = 8682522807148012L;
+        protected:
+            std::atomic_long seed{0};
+            std::atomic_long seedUniquifierField{8682522807148012L};
             static const long multiplier = 0x5DEECE66DL;
             static const long addend = 0xBL;
             static constexpr long mask = (1L << 48) - 1;
@@ -51,16 +52,18 @@ namespace Java {
             const String BadRange = "bound must be greater than origin";
             const String BadSize  = "size must be non-negative";
 
-        private:
-            static long initialScramble(long seed);
+        protected:
+            long initialScramble(long seed);
 
             //void readObject(ObjectInputStream s);
 
             void resetSeed(long seedVal);
 
-            static long seedUniquifier();
+            long seedUniquifier();
 
             //void writeObject(ObjectOutputStream s)
+
+            long nanoTime();
 
         protected:
             int next(int bits);
@@ -78,11 +81,11 @@ namespace Java {
 
             //DoubleStream doubles(long streamSize, double randomNumberOrigin,double randomNumberBound);
 
-            double internalNextDouble(double origin, double bound) final;
+            double internalNextDouble(double origin, double bound);
 
-            int internalNextInt(int origin, int bound) final;
+            int internalNextInt(int origin, int bound);
 
-            long internalNextLong(long origin, long bound) final;
+            long internalNextLong(long origin, long bound);
 
             //IntStream ints();
 
@@ -118,6 +121,10 @@ namespace Java {
 
             void setSeed(long seed);
 
+            //For test
+            long getSeed(){
+                return (long) seed.load();
+            }
         };
     }
 }
