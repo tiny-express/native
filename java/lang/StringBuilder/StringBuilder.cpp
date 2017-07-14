@@ -213,6 +213,29 @@ StringBuilder StringBuilder::insert(int offset, const Boolean &target) {
     return this->insert(offset, target.toString());
 }
 
+StringBuilder StringBuilder::insert(int offset, char target) {
+    if (offset < 0 || offset > this->currentLength) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+
+    int newLength = this->currentLength + 1;
+    this->ensureCapacity(newLength);
+
+    string newShiftPosition = this->original + offset + 1;
+    string oldShiftPosition = this->original + offset;
+    int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
+    memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
+    this->original[offset] = target;
+    this->currentLength = newLength;
+
+    return *this;
+}
+
+StringBuilder StringBuilder::insert(int offset, const Character &target) {
+    Character *pointerToTarget = const_cast<Character *>(&target);
+    return this->insert(offset, pointerToTarget->charValue());
+}
+
 StringBuilder StringBuilder::insert(int offset, const Double &target) {
     return this->insert(offset, target.toString());
 }

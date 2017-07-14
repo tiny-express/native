@@ -186,6 +186,13 @@ TEST(JavaLang, StringBuilderInsert) {
     ASSERT_STR("0.10.7a0.8bc", stringBuilder4.toString().toString());
     stringBuilder4.insert(1, Double(0.2));
     ASSERT_STR("00.2.10.7a0.8bc", stringBuilder4.toString().toString());
+
+    // Character and char
+    StringBuilder stringBuilder5((const string)"abc");
+    stringBuilder5.insert(1, 'x');
+    ASSERT_STR("axbc", stringBuilder5.toString().toString());
+    stringBuilder5.insert(1, Character('y'));
+    ASSERT_STR("ayxbc", stringBuilder5.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderLength) {

@@ -273,9 +273,23 @@ namespace Java {
              */
             StringBuilder insert(int offset, const Boolean &target);
 
+            /**
+             * Inserts the string representation of the char argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int offset, char target);
 
-            StringBuilder insert(int offset, const Character &character);
+            /**
+             * Inserts the string representation of the Character argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder insert(int offset, const Character &target);
 
             StringBuilder insert(int offset, const Array<char> &target);
 
