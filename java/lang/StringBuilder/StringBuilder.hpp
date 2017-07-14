@@ -292,17 +292,51 @@ namespace Java {
             StringBuilder insert(int offset, const Character &target);
 
             /**
+             * Inserts the string representation of the char array argument into this sequence.
              *
              * @param offset
              * @param target
-             * @return
+             * @return StringBuilder
              */
             StringBuilder insert(int offset, const Array<char> &target);
 
+            /**
+             * Inserts the string representation of the Character array argument into this sequence.
+             *
+             * @param offset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int offset, const Array<Character> &target);
 
+            /**
+             * Inserts the string representation of a subarray of the 'target' array argument into this sequence.
+             * The subarray begins at the specified 'offset' and extends 'length' chars.
+             * The characters of the subarray are inserted into this sequence at the position indicated by 'index'.
+             * The length of this sequence increases by 'length' chars.
+             *
+             * @param index
+             * @param target
+             * @param offset
+             * @param length
+             * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length
+             */
             StringBuilder insert(int index, const Array<char> &target, int offset, int length);
 
+            /**
+             * Inserts the string representation of a subarray of the 'target' array argument into this sequence.
+             * The subarray begins at the specified 'offset' and extends 'length' chars.
+             * The characters of the subarray are inserted into this sequence at the position indicated by 'index'.
+             * The length of this sequence increases by 'length' chars.
+             *
+             * @param index
+             * @param target
+             * @param offset
+             * @param length
+             * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length
+             */
             StringBuilder insert(int index, const Array<Character> &target, int offset, int length);
 
             StringBuilder insert(int destinationOffset, const CharSequence &target);
@@ -314,7 +348,7 @@ namespace Java {
              *
              * @param offset
              * @param target
-             * @return
+             * @return StringBuilder
              */
             StringBuilder insert(int offset, const Double &target);
 
@@ -323,23 +357,25 @@ namespace Java {
              *
              * @param offset
              * @param target
-             * @return
+             * @return StringBuilder
              */
             StringBuilder insert(int offset, double target);
 
             /**
              * Inserts the string representation of the Float argument into this sequence.
+             *
              * @param offset
              * @param target
-             * @return
+             * @return StringBuilder
              */
             StringBuilder insert(int offset, const Float &target);
 
             /**
              * Inserts the string representation of the float argument into this sequence.
+             *
              * @param offset
              * @param target
-             * @return
+             * @return StringBuilder
              */
             StringBuilder insert(int offset, float target);
 
@@ -406,7 +442,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
-             * @throw if the offset is invalid.
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const string target);
 
