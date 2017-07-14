@@ -82,7 +82,7 @@ StringBuilder StringBuilder::append(boolean target) {
 }
 
 StringBuilder StringBuilder::append(const Character &target) {
-    Character *pointerToTarget = (Character *)&target; // Avoid 'calling a const function from a non-const object'
+    Character *pointerToTarget = const_cast<Character *>(&target);
     return this->append(pointerToTarget->charValue());
 }
 
