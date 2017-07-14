@@ -753,7 +753,15 @@ namespace Java {
             * @throws     NumberFormatException  if the string does not contain a
             *             parsable number.
             */
-            static Double valueOf(String s);
+            static Double valueOf(String stringInput);
+
+            /**
+            * Assign value to Double variable
+            *
+            * @param  d a double value.
+            * @return a {@code Double} instance representing {@code d}.
+            */
+            static Double valueOf(double doubleInput);
         };
 	}
 }

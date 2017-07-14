@@ -963,3 +963,7 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
 Double Double::valueOf(String stringInput) {
         return Double::parseDouble(stringInput);
 }
+
+Double Double::valueOf(double doubleInput) {
+    return Double(doubleInput);
+}

@@ -252,7 +252,7 @@ TEST (JavaLang, DoubleParseDouble) {
     Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
-TEST (JavaLang, DoubleValueOf) {
+TEST (JavaLang, DoubleValueOfWithStringInput) {
     string stringInput;
     Double expectedResult;
     Double actualResult;
@@ -265,6 +265,22 @@ TEST (JavaLang, DoubleValueOf) {
     stringInput = (string) "-1302.12345678";
     expectedResult = -1302.12345678;
     actualResult = Double::valueOf(stringInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+}
+
+TEST (JavaLang, DoubleValueOfWithDoubleInput) {
+    double doubleInput;
+    Double expectedResult;
+    Double actualResult;
+
+    doubleInput = 1302.12345678;
+    expectedResult = 1302.12345678;
+    actualResult = Double::valueOf(doubleInput);
+    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+
+    doubleInput = -1302.12345678;
+    expectedResult = -1302.12345678;
+    actualResult = Double::valueOf(doubleInput);
     Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
