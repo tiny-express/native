@@ -1525,6 +1525,78 @@ TEST (JavaLang, DoubleToBinary64StringType) {
 //    free(actualResult);
 }
 
+// TODO Must replace ASSERT_DBL_NEAR by Double::compare(double double1, double double2);
+TEST (JavaLang, Binary64StringTypeToDouble) {
+    string Binary64StringTypeInput;
+    double expectedResult;
+    double actualResult;
+
+    Binary64StringTypeInput = (string) "0000000000000000000000000000000000000000000000000000000000000000";
+    expectedResult = 0;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0111111111110000000000000000000000000000000000000000000000000000";
+    expectedResult = POSITIVE_INFINITY_DOUBLE;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "1111111111110000000000000000000000000000000000000000000000000000";
+    expectedResult = NEGATIVE_INFINITY_DOUBLE;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0111111111111000000000000000000000000000000000000000000000000000";
+    expectedResult = NaN_NUMBER_DOUBLE;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "1011111111100110011001100110011001100110011001100110011001100110";
+    expectedResult = -0.7;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0100000000101000110000000000000000000000000000000000000000000000";
+    expectedResult = 12.375;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0011111111110000000000000000000000000000000000000000000000000000";
+    expectedResult = 1.0;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0011111111011000000000000000000000000000000000000000000000000000";
+    expectedResult = 0.375;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "1100000000000000000000000000000000000000000000000000000000000000";
+    expectedResult = -2;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0100000001010100110000000000000000000000000000000000000000000000";
+    expectedResult = 83;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "1100000010100100100000100000000000000000000000000000000000000000";
+    expectedResult = -2625;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "0011111111100000000000000000000000000000000000000000000000000000";
+    expectedResult = 0.5;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+
+    Binary64StringTypeInput = (string) "1100000010010100010110000111111001101011011101000100001001000111";
+    expectedResult = -1302.12345678;
+    actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
+}
+
 // TODO  Check later all value of Java ( Double Format IEEE 754) in C++:
 //TABLE 2-5   Bit Patterns in Double-Storage Format and their IEEE Values
 //        Common Name	    Bit Pattern (Hex)	    Decimal Value

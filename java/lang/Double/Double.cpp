@@ -31,16 +31,6 @@
 
 using namespace Java::Lang;
 
-/**
- * Returns a representation of the specified floating-point value
- * according to the IEEE 754 floating-point "double
- * format" bit layout
- *
- * @param   value   a {@code double} precision floating-point number.
- * @return the bits that represent the floating-point number.
- */
-static long doubleToRawLongBits(double value);
-
 Double::Double() {
 	this->original = 0;
 	this->string_original = string_from_double(this->original);
@@ -897,4 +887,64 @@ string Double::doubleToBinary64StringType(double doubleInput)
     free(fractionPartNormalizeForm);
     free(doubleInputNormalizeForm);
     return  resultDoubleToBinary64StringType;
+}
+
+double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
+    // Create variable
+    int signOfResultbinary64StringTypeToDouble;
+    double exponent;
+    double exponentAdjusted;
+    double mantisaBase10;
+    double resultBinary64StringTypeToDouble;
+
+    int tempValue;
+    int tempExponent;
+
+    // 1. Find signOfResultbinary64StringTypeToDouble
+    signOfResultbinary64StringTypeToDouble = 1;
+
+    if (Binary64StringTypeInput[0] == '1') {
+        signOfResultbinary64StringTypeToDouble = -1;
+    }
+
+    // 2. Convert the exponent from base 2 -> base 10
+    exponent = 0;
+    tempExponent = 10;
+    for (int i = 1; i<=11; i++) {
+        if (Binary64StringTypeInput [i] == '1') {
+            tempValue = 1;
+        }
+
+        if (Binary64StringTypeInput [i] == '0') {
+            tempValue = 0;
+        }
+
+        exponent = exponent + tempValue * pow(2,tempExponent);
+        tempExponent--;
+    }
+    // 3. Find exponentAdjusted
+    exponentAdjusted = exponent - 1023;
+
+    // 4. Convert the mantissa from base 2 -> base 10
+    mantisaBase10 = 0;
+    tempExponent = -1;
+    for (int i = 12; i<=63; i++) {
+        if (Binary64StringTypeInput [i] == '1') {
+            tempValue = 1;
+        }
+
+        if (Binary64StringTypeInput [i] == '0') {
+            tempValue = 0;
+        }
+
+        mantisaBase10 = mantisaBase10 + tempValue * pow(2,tempExponent);
+        tempExponent--;
+    }
+
+    // 5. Find the Double precision floating point decimal value
+    resultBinary64StringTypeToDouble
+            = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
+              * pow(2,exponentAdjusted);
+
+    return resultBinary64StringTypeToDouble;
 }

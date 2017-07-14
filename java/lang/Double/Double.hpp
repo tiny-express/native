@@ -723,6 +723,7 @@ namespace Java {
             */
             static string doubleToBinary64StringType(double doubleInput );
 
+            static double binary64StringTypeToDouble(string Binary64StringTypeInput);
         };
 	}
 }
