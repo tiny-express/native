@@ -35,9 +35,10 @@ using namespace Java::IO;
 namespace Java {
     namespace Lang {
         class StringBuilder :
-                public Object,
-                public virtual Serializable,
-                public virtual CharSequence {
+//              public Object,
+                public virtual Serializable//,
+//              public virtual CharSequence
+        {
         private:
             string original = NULL;
             int currentLength = 0;
@@ -186,6 +187,7 @@ namespace Java {
              *
              * @param index
              * @return char
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length()
              */
             char charAt(int index) const;
 
@@ -300,7 +302,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const;
+            String toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.

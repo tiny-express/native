@@ -67,19 +67,23 @@ TEST(JavaLang, StringBuilderDestructor) {
 }
 
 TEST(JavaLang, StringBuilderAppend) {
-    int numberOfCharacters = 0;
-    StringBuilder stringBuilder;
+    StringBuilder stringBuilder1;
     Array<Character> arrayOfCharacters({'1', '2', '3'});
-    numberOfCharacters = numberOfCharacters + arrayOfCharacters.length;
-    stringBuilder.append(arrayOfCharacters);
-    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
+    stringBuilder1.append(arrayOfCharacters);
+    ASSERT_EQUAL(arrayOfCharacters.length, stringBuilder1.length());
+
+    StringBuilder stringBuilder2;
     String aString = "123";
-    stringBuilder.append(aString);
-    numberOfCharacters = numberOfCharacters + aString.length();
-    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
-    stringBuilder.append(aString.toString());
-    numberOfCharacters = numberOfCharacters + aString.length();
-    ASSERT_EQUAL(numberOfCharacters, stringBuilder.length());
+    stringBuilder2.append(aString);
+    ASSERT_EQUAL(aString.length(), stringBuilder2.length());
+
+    StringBuilder stringBuilder3;
+    stringBuilder3.append(aString.toString());
+    ASSERT_EQUAL(aString.length(), stringBuilder3.length());
+
+    StringBuilder stringBuilder4;
+    stringBuilder4.append(Double(0.8));
+    ASSERT_STR("0.8", stringBuilder4.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderCapacity) {
@@ -133,9 +137,7 @@ TEST(JavaLang, StringBuilderSubString) {
 TEST(JavaLang, StringBuilderToString) {
     String aString = "Hello!";
     StringBuilder stringBuilder(aString.toString());
-    string cString = stringBuilder.toString();
-    ASSERT_TRUE(aString == String(cString));
-    free(cString);
+    ASSERT_TRUE(aString == stringBuilder.toString());
 }
 
 TEST(JavaLang, StringBuilderTrimToSize) {

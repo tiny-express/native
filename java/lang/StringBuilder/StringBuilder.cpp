@@ -85,6 +85,10 @@ StringBuilder StringBuilder::append(const Array<Character> &target) {
     return *this;
 }
 
+StringBuilder StringBuilder::append(const Double &target) {
+    return append(target.toString());
+}
+
 StringBuilder StringBuilder::append(const string target) {
     int stringLength = (int)strlen(target);
     int newLength = this->currentLength + stringLength;
@@ -173,7 +177,7 @@ String StringBuilder::substring(int start, int end) const {
     return result;
 }
 
-string StringBuilder::toString() const {
+String StringBuilder::toString() const {
     int numberOfBytes = (this->currentLength + 1) * sizeof(char); // increases by 1 for null terminator.
     string content = (string)malloc((size_t)numberOfBytes);
     int index;
@@ -181,7 +185,9 @@ string StringBuilder::toString() const {
         content[index] = this->original[index];
     }
     content[this->currentLength] = '\0';
-    return content;
+    String result(content);
+    free(content);
+    return result;
 }
 
 void StringBuilder::trimToSize() {
