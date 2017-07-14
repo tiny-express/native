@@ -28,6 +28,8 @@
 #include <chrono>
 #include "Random.hpp"
 
+std::atomic_long Random::seedUniquifierField{8682522807148012L};
+
 Random::Random() : Random(seedUniquifier() ^ nanoTime()) {
 }
 
@@ -68,15 +70,19 @@ long Random::initialScramble(long seed) {
  * @return
  */
 long Random::seedUniquifier() {
-    for (;;) {
+    long current = 0;
+    long next = 0;
+    do{
         long current = seedUniquifierField.load();
         long next = current * 181783497276652981L;
-        if(seedUniquifierField.compare_exchange_weak(current, next)){
-            return next;
-        }
-    }
+    }while(!seedUniquifierField.compare_exchange_strong(current, next));
+    return next;
 }
 
 void Random::resetSeed(long seedVal) {
 
+}
+
+Random::Random(const Random &other) {
+    this->seed.store(other.seed.load());
 }

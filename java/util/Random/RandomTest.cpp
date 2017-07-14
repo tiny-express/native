@@ -34,9 +34,9 @@ TEST (JavaUtil, RandomConstructor){
     Random random1;
     ASSERT_TRUE(random1.getSeed() != 0);
 
-    /*long seed = 60;
+    long seed = 60;
     Random random2 = Random(seed);
-    ASSERT_TRUE(random2.getSeed() != 0);*/
+    ASSERT_TRUE(random2.getSeed() != 0);
 }
 
 TEST (JavaUtil, InitialScramble){

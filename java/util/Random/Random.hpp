@@ -31,13 +31,17 @@
 #include "random"
 #include "../../Lang.hpp"
 
+
 namespace Java {
     namespace Util {
         class Random{
 
-        protected:
+        private:
+            std::mt19937 mt();
+            std::uniform_real_distribution<double> dist(double a, double b);
+
             std::atomic_long seed{0};
-            std::atomic_long seedUniquifierField{8682522807148012L};
+            static std::atomic_long seedUniquifierField;
             static const long multiplier = 0x5DEECE66DL;
             static const long addend = 0xBL;
             static constexpr long mask = (1L << 48) - 1;
@@ -52,14 +56,14 @@ namespace Java {
             const String BadRange = "bound must be greater than origin";
             const String BadSize  = "size must be non-negative";
 
-        protected:
+        private:
             long initialScramble(long seed);
 
             //void readObject(ObjectInputStream s);
 
             void resetSeed(long seedVal);
 
-            long seedUniquifier();
+            static long seedUniquifier();
 
             //void writeObject(ObjectOutputStream s)
 
@@ -73,6 +77,7 @@ namespace Java {
 
             Random(long seed);
 
+            Random(const Random& other);
             //DoubleStream doubles();
 
             //DoubleStream doubles(long streamSize);
@@ -121,9 +126,13 @@ namespace Java {
 
             void setSeed(long seed);
 
+            void operator=(const Random& a){
+                this->seed.store(a.seed.load());
+            }
+
             //For test
             long getSeed(){
-                return (long) seed.load();
+                return seed;
             }
         };
     }
