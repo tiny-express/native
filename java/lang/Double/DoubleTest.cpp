@@ -1263,10 +1263,90 @@ TEST (JavaLang, DoubleToLongBits){
 //    ASSERT_TRUE(variableCompareTo.equals(DOUBLE_NEGATIVE_INFINITY) == -9999);
 //}
 
-//TEST (JavaLang , DoubleHashCode){
-//    Double variableDoubleHashCode = 3.08;
-//    ASSERT_DBL_NEAR(1245041523, variableDoubleHashCode.hashCode());
-//}
+TEST (JavaLang , DoubleHashCode){
+    // Create variable to test
+    double input;
+    long expectedResult;
+    long actualResult;
+
+    // Input 0.0
+    input = 0.0;
+    expectedResult = 0;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY_DOUBLE
+    input = POSITIVE_INFINITY_DOUBLE;
+    expectedResult = 9218868439373840384;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY_DOUBLE
+    input = NEGATIVE_INFINITY_DOUBLE;
+    expectedResult = 9218868435080970240;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input NaN_NUMBER_DOUBLE
+    input = NaN_NUMBER_DOUBLE;
+    expectedResult = 9223372034707292160;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -0.7
+    input = -0.7;
+    expectedResult =  4604480258807169027;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 12.375
+    input = 12.375;
+    expectedResult = 4623156124804759552;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 1.0
+    input = 1.0;
+    expectedResult = 4607182419872710656;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.375
+    input = 0.375;
+    expectedResult = 4600427020430082048;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2
+    input = -2;
+    expectedResult = 4611686017353646080;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 83
+    input = 83;
+    expectedResult = 4635541023782912000;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -2625
+    input = -2625;
+    expectedResult = 4657990850035023360;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input 0.5
+    input = 0.5;
+    expectedResult = 4602678820244291584;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    input = -1302.12345678;
+    expectedResult = 4653441613905795640;
+    actualResult = Double::hashCode(input);
+    ASSERT_EQUAL_LL(expectedResult, actualResult);
+}
 
 TEST (JavaLang , DoubleIsFinite) {
 

@@ -242,7 +242,6 @@ long Double::doubleToLongBits(double valueDouble) {
     return doubleToRawLongBits(valueDouble);
 }
 
-// TODO Wait for build
 long Double::doubleToRawLongBits(double doubleInput) {
     string doubleInputToBinary64StringType;
     long resultDoubleToRawLongBits;
@@ -274,14 +273,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
     return resultDoubleToRawLongBits;
 }
 
-// TODO Wait for build
-//unsigned_long_long Double::doubleToRawLongBits(double valueDouble) {
-//    string resultDoubleToBinary64StringType = doubleToBinary64StringType(valueDouble);
-//    unsigned_long_long resultDoubleToRawLongBits = binary64ToLong(resultDoubleToBinary64StringType);
-//    return resultDoubleToRawLongBits;
-//}
-
-// TODO Wait for build
+// TODO Wait for instanceof<>
 //boolean Double::equals(const Double &object) {
 //    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
 //        return -1;
@@ -298,12 +290,11 @@ long Double::doubleToRawLongBits(double doubleInput) {
 //    return Double::hashCode(this->original);
 //}
 
-// TODO Wait for build
-//unsigned_long_long Double::hashCode(double valuehashCode) {
-//    unsigned_long_long bits = doubleToLongBits(valuehashCode);
-//    unsigned_long_long rightShiftBits = bits >> 32;
-//    return  (bits ^ rightShiftBits);
-//}
+long Double::hashCode(double valuehashCode) {
+    long bits = doubleToLongBits(valuehashCode);
+    long rightShiftBits = bits >> 32;
+    return  (bits ^ rightShiftBits);
+}
 
 boolean Double::isFinite(double valueDouble) {
     return (Math::abs(valueDouble) <= MAX_VALUE_DOUBLE);

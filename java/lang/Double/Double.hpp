@@ -560,7 +560,7 @@ namespace Java {
              * @param value the value to hash
              * @return a hash code value for a {@code double} value.
              */
-            static unsigned long long int hashCode(double value);
+            static long hashCode(double value);
 
             /**
              * Returns {@code true} if the argument is a finite floating-point
