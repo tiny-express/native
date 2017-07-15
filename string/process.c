@@ -26,7 +26,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <regex.h>
+//#include <regex.h>
 #include "../type.h"
 #include "../string.h"
 #include "../validator.h"
@@ -509,20 +509,20 @@ char *string_reverse(char *target) {
  * @return TRUE | FALSE
  */
 int string_matches(char *target, char *regex) {
-	if (is_empty(target)) {
-		return FALSE;
-	}
-	
-	regex_t exp;
-	int convert = regcomp(&exp, regex, REG_EXTENDED);
-	if (convert != 0) {
-        regfree(&exp);
-		return FALSE;
-	}
-	if (regexec(&exp, target, 0, NULL, 0) == 0) {
-		regfree(&exp);
-		return TRUE;
-	}
-    regfree(&exp);
+//	if (is_empty(target)) {
+//		return FALSE;
+//	}
+//
+//	regex_t exp;
+//	int convert = regcomp(&exp, regex, REG_EXTENDED);
+//	if (convert != 0) {
+//        regfree(&exp);
+//		return FALSE;
+//	}
+//	if (regexec(&exp, target, 0, NULL, 0) == 0) {
+//		regfree(&exp);
+//		return TRUE;
+//	}
+//    regfree(&exp);
 	return FALSE;
 }

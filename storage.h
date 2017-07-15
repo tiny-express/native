@@ -33,8 +33,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <resolv.h>
+//#include <sys/socket.h>
+//#include <resolv.h>
 #include <errno.h>
 
 char *file_get_contents(char *file_name);

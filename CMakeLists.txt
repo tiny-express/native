@@ -69,25 +69,26 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
 
 # Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl")
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(OPENSSL_ROOT_DIR "/usr/include/openssl")
-else ()
-    set(OPENSSL_ROOT_DIR "C:/Program Files (x86)/GnuWin32/include")
-endif ()
+
+#if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#    set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl")
+#elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+#    set(OPENSSL_ROOT_DIR "/usr/include/openssl")
+#else ()
+#    set(OPENSSL_ROOT_DIR "C:/Program Files (x86)/GnuWin32/include")
+#endif ()
 
 # Set root directory for OpenSSL
-set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
+#set(OPENSSL_ROOT_DIR "${OPENSSL_ROOT_DIR}")
 
 # Detect installed components
-find_package(ZLIB REQUIRED)
-find_package(OpenSSL REQUIRED)
-find_package(Threads REQUIRED)
+#find_package(ZLIB REQUIRED)
+#find_package(OpenSSL REQUIRED)
+#find_package(Threads REQUIRED)
 
-if (OPENSSL_FOUND)
-    include_directories("${OPENSSL_INCLUDE_DIR}")
-endif ()
+#if (OPENSSL_FOUND)
+#    include_directories("${OPENSSL_INCLUDE_DIR}")
+#endif ()
 
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
@@ -95,41 +96,40 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 # Only header files
 file(GLOB_RECURSE HEADERS
         ./*.h
-        library.hpp
-        )
+        library.hpp)
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
         common/*
-        crypto/*
+       #crypto/*
         datetime/*
         math/*
-        network/*
+       #network/*
         server/*
         storage/*
         string/*
         system/*
-        thread/*
+       #thread/*
         type/*
-        vendor/*
-        validator/*
+       #vendor/*
+       #validator/*
         )
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
         common/*_test.c
-        crypto/*_test.c
+       #crypto/*_test.c
         datetime/*_test.c
         math/*_test.c
-        network/*_test.c
-        server/*_test.c
+       #network/*_test.c
+        server/*_ .test.c
         storage/*_test.c
         string/*_test.c
         system/*_test.c
-        thread/*_test.c
+       #thread/*_test.c
         type/*_test.c
-        vendor/*_test.c
-        validator/*_test.c
+       #vendor/*_test.c
+       #validator/*_test.c
         )
 
 # Remove all test files within c files

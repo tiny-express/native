@@ -26,17 +26,19 @@
 
 #ifndef NATIVE_DATETIME_H
 #define NATIVE_DATETIME_H
+
 #ifdef __linux__
-
 #include <stdint.h>
+#endif
 
-#elif __APPLE__
+#ifdef __APPLE__
 #include <mach/mach_time.h>
-#elif defined _WIN32 || defined __CYGWIN__
+#endif
+
+#if defined _WIN32 || defined __CYGWIN__
 typedef __int32 int32_t;
 typedef unsigned __int32 uint32_t;
 #endif
 
 long timestamp();
 char *date(long timestamp, char *format);
-#endif

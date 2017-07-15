@@ -54,7 +54,7 @@ char *date(long timestamp, char *format) {
 	free(date_format5);
 	
 	char *result = calloc(11, sizeof(char));
-	strftime(result, 11, date_format6, gmtime(&timestamp));
+	//strftime(result, 11, date_format6, gmtime(&timestamp));
 	free(date_format6);
 	
 	return result;
@@ -81,4 +81,5 @@ long timestamp() {
 	clock_gettime(0, &tsp);
 	return (long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
 #endif
+    return 0;
 }
