@@ -34,7 +34,7 @@ extern "C" {
 using namespace Java::Util;
 
 
-TEST(JavaLang, StackPush) {
+TEST(JavaUtil, StackPush) {
     // int
     Stack<int> pushIntStack;
 
@@ -97,7 +97,7 @@ TEST(JavaLang, StackPush) {
 
 }
 
-TEST(JavaLang, StackEmpty) {
+TEST(JavaUtil, StackEmpty) {
     // Give an emtpy Stack
 
     // int
@@ -143,7 +143,7 @@ TEST(JavaLang, StackEmpty) {
     ASSERT_FALSE(notEmptyObjectStack.empty());
 }
 
-TEST(JavaLang, StackPeek) {
+TEST(JavaUtil, StackPeek) {
     //int
     Stack<int> peekIntStack;
 
@@ -197,16 +197,16 @@ TEST(JavaLang, StackPeek) {
 
     // Given an empty stack
     Stack<int> emptyStack;
-    // Test if peek() throw IOException("index is out of range")
-    try{
+    // Test if peek() throw EmptyStackException
+    try {
         emptyStack.peek();
     }
-    catch (Exception e){
-        ASSERT_STR("index is out of range", e.getMessage().toString());
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
     }
 }
 
-TEST(JavaLang, StackPop) {
+TEST(JavaUtil, StackPop) {
     //int
     Stack<int> popIntStack;
 
@@ -260,16 +260,16 @@ TEST(JavaLang, StackPop) {
 
     // Given an empty stack
     Stack<int> emptyStack;
-    // Test if peek() throw IOException("index is out of range")
-    try{
-        emptyStack.pop();
+    // Test if peek() throw EmptyStackException
+    try {
+        emptyStack.peek();
     }
-    catch (Exception e){
-        ASSERT_STR("index is out of range", e.getMessage().toString());
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
     }
 }
 
-TEST(JavaLang, StackSearch) {
+TEST(JavaUtil, StackSearch) {
     //int
     Stack<int> searchIntStack;
 

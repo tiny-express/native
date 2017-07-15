@@ -29,8 +29,9 @@
 
 #include "../Vector/Vector.hpp"
 #include "../../lang/IOException/IOException.hpp"
+#include "../EmptyStackException/EmptyStackException.hpp"
 
-using namespace Java::Lang;
+using namespace Java::Util;
 
 namespace Java {
     namespace Util {
@@ -59,7 +60,7 @@ namespace Java {
             E peek() {
                 int len = this->size();
                 if (len == 0) {
-                    throw IOException("index is out of range");
+                    throw EmptyStackException();
                 }
                 return this->elementAt(len - 1);
             }

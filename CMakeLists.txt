@@ -158,7 +158,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURC
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES_C} ${SOURCES_CPP})
-add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP} java/util/EmptyStackException/EmptyStackException.cpp java/util/EmptyStackException/EmptyStackException.hpp java/util/EmptyStackException/EmptyStackExceptionTest.cpp)
 
 # Add make test
 add_custom_target(
