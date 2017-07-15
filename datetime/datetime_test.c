@@ -27,10 +27,8 @@
 #include "../builtin.h"
 #include "../unit_test.h"
 
+#ifdef __linux__
 TEST (DateTime, Timestamp) {
-#ifdef __APPLE__
-	return;
-#endif
 	long first_time = timestamp();
 	int maxN = 10000000;
 	int i = 0;
@@ -43,11 +41,10 @@ TEST (DateTime, Timestamp) {
 	// Time is greater than 9 ms
 	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
 }
-
-TEST (DateTime, Format) {
-#ifdef __APPLE__
-	return;
 #endif
+
+#ifdef __linux__
+TEST (DateTime, Format) {
 
 	long timestamp = 1473765499;
 	char *format = "d/m/y";
@@ -65,3 +62,4 @@ TEST (DateTime, Format) {
 	ASSERT_STR("2017-11-20", result3);
 	free(result3);
 }
+#endif

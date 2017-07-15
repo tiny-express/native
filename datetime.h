@@ -35,10 +35,17 @@
 #include <mach/mach_time.h>
 #endif
 
-#if defined _WIN32 || defined __CYGWIN__
+#if defined _WIN32
 typedef __int32 int32_t;
 typedef unsigned __int32 uint32_t;
 #endif
 
+#if defined _WIN64
+typedef __int64 int32_t;
+typedef unsigned __int64 uint32_t;
+#endif
+
 long timestamp();
 char *date(long timestamp, char *format);
+
+#endif

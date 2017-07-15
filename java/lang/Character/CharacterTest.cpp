@@ -377,6 +377,7 @@ TEST (JavaLang, CharacterToCodePoint){
     ASSERT_NOT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
 }
 
+#ifdef __linux__
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
     wchar_t variableTestIsHighSurrogate;
@@ -395,7 +396,9 @@ TEST (JavaLang, CharacterIsHighSurrogate){
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
     ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
 }
+#endif
 
+#ifdef __linux__
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
     wchar_t variableTestisLowSurrogate;
@@ -414,6 +417,7 @@ TEST (JavaLang, CharacterisLowSurrogate){
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
     ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
 }
+#endif
 
 TEST (JavaLang, CharacterDigit) {
     //Given valid and invalid value to test with digit(char char, int radix)

@@ -1,6 +1,6 @@
  # Native Library
  [![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
- &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
+ &nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
  &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
  &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
  ![Library Structure](misc/native.png)
@@ -19,17 +19,25 @@ This project is also useful for new developers in practical programming.
 
 ### Getting started
 
-#### Dependencies
-- [x] OpenSSL
-- [x] Zlib
-
 #### Installation
-OS X & Linux
 ```bash
 $ git clone https://github.com/foodtiny/native.git
 $ cmake . && make
 $ sudo make install
 ```
+
+
+### Setup for development
+#### Windows
+Install CgyWin64 with dependencies below:
+- CMake
+- Makefile
+- GCC
+- G++
+
+#### Linux and Mac
+Install with apt-get or brew with dependencies below:
+- Cmake
 
 #### Test Driven Development
 ```bash
