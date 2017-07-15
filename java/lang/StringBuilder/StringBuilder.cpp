@@ -27,6 +27,7 @@
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 
 using namespace Java::Lang;
 
@@ -56,6 +57,12 @@ StringBuilder::StringBuilder(const std::initializer_list<char> &target) {
     int newCapacity = 16 + (int)target.size();
     this->ensureCapacity(newCapacity);
     this->append(target);
+}
+
+StringBuilder::StringBuilder(const CharSequence &charSequence) {
+    int newCapaity = 16 + charSequence.length();
+    this->ensureCapacity(newCapaity);
+    this->append(charSequence);
 }
 
 StringBuilder::StringBuilder(const StringBuilder &target) {
@@ -126,6 +133,31 @@ StringBuilder StringBuilder::append(const Array<char> &target, int offset, int l
     return this->insert(this->currentLength, target, offset, length);
 }
 
+StringBuilder StringBuilder::append(const CharSequence &target) {
+    string targetString = target.toString();
+    return this->append(targetString);
+}
+
+StringBuilder StringBuilder::append(const CharSequence &target, int start, int end) {
+    string targetString = target.toString();
+    int lengthOfTarget = (int)strlen(targetString);
+    if (start < 0 || start > end || end > lengthOfTarget) {
+        throw IndexOutOfBoundsException();
+    }
+
+    int numberOfCharacter = end - start;
+    int newLength = currentLength + numberOfCharacter;
+    this->ensureCapacity(newLength);
+    int indexOfTarget;
+    int indexOfOrginal;
+    for (indexOfTarget = start, indexOfOrginal = this->currentLength; indexOfTarget < end; indexOfTarget++, indexOfOrginal++) {
+        this->original[indexOfOrginal] = targetString[indexOfTarget];
+    }
+
+    this->currentLength = newLength;
+    return *this;
+}
+
 StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     int newLength = this->currentLength + (int)target.size();
     this->ensureCapacity(newLength);
@@ -189,6 +221,10 @@ StringBuilder StringBuilder::append(const String &target) {
     return this->append(target.toString());
 }
 
+StringBuilder StringBuilder::appendCodePoint(int codePoint) {
+    // TODO
+}
+
 int StringBuilder::capacity() const {
     return this->currentCapacity;
 }
@@ -199,6 +235,43 @@ char StringBuilder::charAt(int index) const {
     }
 
     return this->original[index];
+}
+
+int StringBuilder::codePointAt(int index) const {
+    if (index < 0 || index >= this->currentLength) {
+        throw StringIndexOutOfBoundsException(index);
+    }
+
+    Array<char> *pOriginalArray = new Array<char>();
+    int indexOfOriginal;
+    for (indexOfOriginal = 0; indexOfOriginal < this->currentLength; indexOfOriginal++) {
+        pOriginalArray->push(this->original[indexOfOriginal]);
+    }
+    int result = Character::codePointAt(*pOriginalArray, index);
+    delete pOriginalArray;
+    return result;
+}
+
+int StringBuilder::codePointBefore(int index) const {
+    int beforeOfIndex = index - 1;
+    return this->codePointAt(beforeOfIndex);
+}
+
+int StringBuilder::codePointCount(int beginIndex, int endIndex) {
+    if (beginIndex < 0 || endIndex > this->currentLength || beginIndex > endIndex) {
+        throw IndexOutOfBoundsException();
+    }
+
+    Array<char> *pOriginalArray = new Array<char>();
+    int numberOfCharacters = endIndex - beginIndex;
+    int index;
+    int stopIndex = beginIndex + numberOfCharacters;
+    for (index = 0; index < stopIndex; index++) {
+        pOriginalArray->push(this->original[index]);
+    }
+    int result = Character::codePointCount(*pOriginalArray, 0, numberOfCharacters);
+    delete pOriginalArray;
+    return result;
 }
 
 StringBuilder StringBuilder::deleteRange(int start, int end) {
@@ -246,6 +319,21 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
         this->original = (string)realloc(this->original, (size_t)numberOfBytes);
         this->currentCapacity = newCapacity;
     }
+}
+
+void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const {
+    if (sourceBegin < 0) {
+        throw StringIndexOutOfBoundsException(sourceBegin);
+    }
+    if (sourceEnd < 0 || sourceEnd > this->currentLength) {
+        throw StringIndexOutOfBoundsException(sourceEnd);
+    }
+    if (sourceBegin > sourceEnd) {
+        throw StringIndexOutOfBoundsException("sourceBegin > sourceEnd");
+    }
+
+    // TODO: copyOfRange method for Array is not implemented.
+    throw UnsupportedOperationException();
 }
 
 int StringBuilder::indexOf(const String &target) const{
@@ -473,6 +561,14 @@ int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
 
 int StringBuilder::length() const {
     return this->currentLength;
+}
+
+int StringBuilder::offsetByCodePoints(int index, int codePointOffset) const {
+    if (index < 0 || index > this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+    // TODO: Waiting for Character::offsetByCodePoints
+    throw UnsupportedOperationException();
 }
 
 StringBuilder StringBuilder::replace(int start, int end, const String &target) {

@@ -92,7 +92,7 @@ namespace Java {
              *
              * @param charSequence
              */
-//          StringBuilder(const CharSequence &charSequence);
+            StringBuilder(const CharSequence &charSequence);
 
             /**
              * StringBuilder Constructor
@@ -186,7 +186,23 @@ namespace Java {
              */
             StringBuilder append(const Array<char> &target, int offset, int length);
 
-//          StringBuilder append(const CharSequence &target);
+            /**
+             * Appends the specified character sequence to this sequence.
+             *
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder append(const CharSequence &target);
+
+            /**
+             * Appends a subsequence of the specified CharSequence to this sequence.
+             *
+             * @param target
+             * @param start
+             * @param end
+             * @return StringBuilder
+             */
+            StringBuilder append(const CharSequence &target, int start, int end);
 
             /**
              * Appends the specified initializer list of char to this character sequence.
@@ -292,6 +308,12 @@ namespace Java {
              */
 //          StringBuilder append(const StringBuffer &target); // FIXME: StringBuffer doesn't implemented.
 
+            /**
+             * Appends the string representation of the codePoint argument to this sequence.
+             *
+             * @param codePoint
+             * @return StringBuilder
+             */
             StringBuilder appendCodePoint(int codePoint);
 
             /**
@@ -314,10 +336,46 @@ namespace Java {
              */
             char charAt(int index) const;
 
+            /**
+             * Returns the character (Unicode code point) at the specified index.
+             * The index refers to char values (Unicode code units) and ranges from 0 to {@code length() - 1}.
+             * If the char value specified at the given index is in the high-surrogate range,
+             * the following index is less than the length of this sequence,
+             * and the char value at the following index is in the low-surrogate range,
+             * then the supplementary code point corresponding to this surrogate pair is returned.
+             * Otherwise, the char value at the given index is returned.
+             *
+             * @param index - the index to the char values.
+             * @return int - the code point value of the character at the index.
+             * @throw IndexOutOfBoundsException - if the index argument is negative or not less than the length of this sequence.
+             */
             int codePointAt(int index) const;
 
+            /**
+             * Returns the character (Unicode code point) before the specified index.
+             * The index refers to char values (Unicode code units) and ranges from 1 to {@code length()}.
+             * If the char value at {@code (index - 1)} is in the low-surrogate range, {@code (index - 2)} is not negative,
+             * and the char value at {@code (index - 2)} is in the high-surrogate range,
+             * then the supplementary code point value of the surrogate pair is returned.
+             * If the char value at {@code index - 1} is an unpaired low-surrogate or a high-surrogate, the surrogate value is returned.
+             *
+             * @param index - the index following the code point that should be returned.
+             * @return int - the Unicode code point value before the given index.
+             * @throw IndexOutOfBoundsException - if the index argument is less than 1 or greater than the length of this sequence.
+             */
             int codePointBefore(int index) const;
 
+            /**
+             * Returns the number of Unicode code points in the specified text range of this sequence.
+             * The text range begins at the specified {@code beginIndex} and extends to the char at index {@code endIndex - 1}.
+             * Thus the length (in chars) of the text range is {@code endIndex - beginIndex}.
+             * Unpaired surrogates within this sequence count as one code point each.
+             *
+             * @param beginIndex - the index to the first char of the text range.
+             * @param endIndex - the index after the last char of the text range.
+             * @return int - the number of Unicode code points in the specified text range
+             * @throw IndexOutOfBoundsException - if the {@code beginIndex} is negative, or {@code endIndex} is larger than the length of this sequence, or {@code beginIndex} is larger than {@code endIndex}.
+             */
             int codePointCount(int beginIndex, int endIndex);
 
             /**
@@ -349,7 +407,19 @@ namespace Java {
              */
             void ensureCapacity(int minimumCapacity);
 
-            void getChars(int sourceBegin, int sourceEnd, Array<char> &target, int targetBegin);
+            /**
+             * Characters are copied from this sequence into the destination character array {@code target}.
+             * The first character to be copied is at index {@code sourceBegin}; the last character to be copied is at index {@code sourceEnd - 1}.
+             * The total number of characters to be copied is {@code sourceEnd - sourceBegin}
+             * The characters are copied into the subarray of {@code target} starting at index {@code targetBegin}
+             * and ending at index {@code targetBegin + (sourceEnd-sourceBegin) - 1}.
+             *
+             * @param sourceBegin
+             * @param sourceEnd
+             * @param target
+             * @param targetBegin
+             */
+            void getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring.
@@ -647,6 +717,14 @@ namespace Java {
              */
             int length() const;
 
+            /**
+             * Returns the index within this sequence that is offset from the given index by codePointOffset code points.
+             * Unpaired surrogates within the text range given by index and codePointOffset count as one code point each.
+             *
+             * @param index
+             * @param codePointOffset
+             * @return int
+             */
             int offsetByCodePoints(int index, int codePointOffset) const;
 
             /**
@@ -712,6 +790,14 @@ namespace Java {
              */
             void setLength(int newLength);
 
+            /**
+             * Returns a new String that contains a subsequence of characters currently contained in this sequence.
+             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}.
+             *
+             * @param start
+             * @param end
+             * @return
+             */
 //          CharSequence subSequence(int start, int end) const;
 
             /**

@@ -55,6 +55,12 @@ TEST(JavaLang, StringBuilderConstructor) {
     StringBuilder initializerListStringBuilder({'a', 'b', 'c'});
     ASSERT_EQUAL(3, initializerListStringBuilder.length());
     ASSERT_EQUAL(defaultOriginalCapacity + initializerListStringBuilder.length(), initializerListStringBuilder.capacity());
+
+    CharSequence *charSequence = new String("Hello!");
+    StringBuilder charSequenceStringBuilder(*charSequence);
+    ASSERT_STR("Hello!", charSequenceStringBuilder.toString().toString());
+    String *charSequenceString = dynamic_cast<String *>(charSequence);
+    delete charSequenceString;
 }
 
 TEST(JavaLang, StringBuilderDestructor) {
@@ -114,16 +120,33 @@ TEST(JavaLang, StringBuilderAppend) {
     stringBuilder4.append(false);
     ASSERT_STR("truefalsetruefalse", stringBuilder4.toString().toString());
 
+    // Character and char
     StringBuilder stringBuilder5;
     stringBuilder5.append(Character('a'));
     stringBuilder5.append('b');
     ASSERT_STR("ab", stringBuilder5.toString().toString());
 
+    // Array<Character> and Array<char>
     StringBuilder stringBuilder6((const string)"abc");
     stringBuilder6.append(Array<Character> {'1', '2', '3'}, 1, 2);
     ASSERT_STR("abc23", stringBuilder6.toString().toString());
     stringBuilder6.append(Array<char> {'x', 'y', 'z'}, 0, 2);
     ASSERT_STR("abc23xy", stringBuilder6.toString().toString());
+
+    // CharSequence
+    CharSequence *charSequence = new String("Hello!");
+    StringBuilder stringBuilder7((const string)"123");
+    ASSERT_STR("123", stringBuilder7.toString().toString());
+    stringBuilder7.append(*charSequence);
+    ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
+    stringBuilder7.append(*charSequence, 1, 3);
+    ASSERT_STR("123Hello!el", stringBuilder7.toString().toString());
+    String *charSequenceString = dynamic_cast<String *>(charSequence);
+    delete charSequenceString;
+}
+
+TEST(JavaLang, StringBuilderAppendCodePoint) {
+    // TODO
 }
 
 TEST(JavaLang, StringBuilderCapacity) {
@@ -142,6 +165,18 @@ TEST(JavaLang, StringBuilderCharAt) {
     catch (Exception e) {
         ASSERT_STR("String index out of range: 999", e.getMessage().toString());
     }
+}
+
+TEST(JavaLang, StringBuilderCodePointAt) {
+    // TODO
+}
+
+TEST(JavaLang, StringBuilderCodePointBefore) {
+    // TODO
+}
+
+TEST(JavaLang, StringBuilderCodePointCount) {
+    // TODO
 }
 
 TEST(JavaLang, StringBuilderDeleteRange) {
@@ -174,6 +209,10 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
     ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
     stringBuilder.ensureCapacity(100);
     ASSERT_EQUAL(100, stringBuilder.capacity());
+}
+
+TEST(JavaLang, StringBuilderGetChars) {
+    // TODO
 }
 
 TEST(JavaLang, StringBuilderIndexOf) {
