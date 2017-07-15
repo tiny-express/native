@@ -465,6 +465,10 @@ int *StringBuilder::initializeNextTable(const string pattern) const{
     int sizeOfNextTable = lengthOfPattern * sizeof(int);
     int *nextTable = (int *)malloc((size_t)sizeOfNextTable);
 
+    if (nextTable == NULL) {
+        return NULL;
+    }
+
     nextTable[0] = -1;
     if (lengthOfPattern == 1) {
         return nextTable;
@@ -499,10 +503,29 @@ int StringBuilder::stringMatches(const string target, const string pattern, int 
     int lengthOfPattern = (int)strlen(pattern);
     int lengthOfTarget = (int)strlen(target);
 
+    if (startIndex > lengthOfTarget) {
+        if (lengthOfPattern == 0) {
+            return lengthOfTarget;
+        }
+        return -1;
+    }
+
+    if (startIndex < 0) {
+        startIndex = 0;
+    }
+
+    // Empty string always matches.
+    if (lengthOfPattern == 0) {
+        return startIndex;
+    }
+
+    // KMP algorithm.
     int *nextTable = this->initializeNextTable(target);
+    if (nextTable == NULL) {
+        return -1;
+    }
 
     int position = 0;
-
     while (startIndex + position < lengthOfTarget) {
         if (pattern[position] == target[startIndex + position]) {
             if (position == lengthOfPattern - 1) {
@@ -531,10 +554,27 @@ int StringBuilder::stringMatchesReverse(const string target, const string patter
     int lengthOfPattern = (int)strlen(pattern);
     int lengthOfTarget = (int)strlen(target);
 
+    int rightIndex = lengthOfTarget - lengthOfPattern;
+    if (startIndex < 0) {
+        return -1;
+    }
+
+    if (startIndex > rightIndex) {
+        startIndex = rightIndex;
+    }
+
+    // Empty string always matches.
+    if (lengthOfPattern == 0) {
+        return startIndex;
+    }
+
+    // KMP algorithm.
     int *nextTable = this->initializeNextTable(pattern);
+    if (nextTable == NULL) {
+        return -1;
+    }
 
     int position = 0;
-
     while (startIndex - position >= 0) {
         if (pattern[lengthOfPattern - position - 1] == target[startIndex - position]) {
             if (position == lengthOfPattern - 1) {
