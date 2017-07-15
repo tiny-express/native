@@ -240,6 +240,8 @@ TEST(JavaLang, StringBuilderLastIndexOf) {
     ASSERT_STR("Welcome to Vietnam", stringBuilder.toString().toString());
     ASSERT_EQUAL(11, stringBuilder.lastIndexOf((const string)"Vietnam"));
     ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam")));
+    ASSERT_EQUAL(0, stringBuilder.lastIndexOf((const string)"Welcome"));
+    ASSERT_EQUAL(0, stringBuilder.lastIndexOf(String("Welcome")));
     ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 11));
     ASSERT_EQUAL(-1, stringBuilder.lastIndexOf(String("Vietnam"), 11));
     ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 12));
