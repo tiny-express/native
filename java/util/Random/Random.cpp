@@ -27,6 +27,7 @@
 
 #include <chrono>
 #include "Random.hpp"
+#include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 std::atomic_long Random::seedUniquifierField{8682522807148012L};
 
@@ -134,13 +135,29 @@ boolean Random::nextBoolean() {
  * Returns the next pseudorandom,
  * uniformly distributed int value from this random number generator's sequence
  *
- * @return
+ * @return int
  */
 int Random::nextInt() {
     return next(32);
 }
 
+/**
+ * Returns a pseudorandom, uniformly distributed int value between 0 (inclusive)
+ * and the specified value (exclusive), drawn from this random number generator's sequence.
+ *
+ * @param bound
+ * @return
+ */
 int Random::nextInt(int bound) {
-    return 0;
+    if (bound <= 0)
+        throw IllegalArgumentException("bound must be positive");
 
+    if (bound & (bound - 1) == 0)
+        return (int)((bound * (long)next(31)) >> 31);
+    int bits, val;
+    do {
+        bits = next(31);
+        val = bits % bound;
+    } while (bits - val + (bound-1) < 0);
+    return val;
 }

@@ -40,15 +40,35 @@ TEST (JavaUtil, RandomConstructor) {
 }
 
 TEST (JavaUtil, nextInt) {
+    // Given a random number generator
     Random random1;
     int intMax = 0x7fffffff;
     int intMin = 0x80000000;
+
+    // Test 10 number
     for(int index = 0; index < 10; index ++){
         int a = random1.nextInt();
-        ASSERT_TRUE( a >= intMin && a <= intMax);
+        ASSERT_TRUE( a >= intMin && a <= intMax); // Check if the return value is in Integer range
     }
 }
 
 TEST (JavaUtil, nextIntWithBound) {
+    // Given a random number generator
+    Random random1;
 
+    // Test nextInt(bound) with bound < 0,
+    // will throw illegalArguementException("bound must be positive")
+    try {
+        random1.nextInt(-10);
+    }
+    catch (Exception e) {
+        ASSERT_STR("bound must be positive", e.getMessage().toString());
+    }
+
+    // Test nextInt(bound) with bound = 100
+    int bound = 100;
+    for(int index = 0; index < 10; index ++){
+        int a = random1.nextInt(bound);
+        ASSERT_TRUE( a >= 0 && a < bound); // Check if the return value is in [0, bound)
+    }
 }
