@@ -27,7 +27,7 @@
 #ifndef NATIVE_EMPTY_STACK_EXCEPTION_H
 #define NATIVE_EMPTY_STACK_EXCEPTION_H
 
-#include "/home/razor/native/java/lang/Exception/Exception.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
