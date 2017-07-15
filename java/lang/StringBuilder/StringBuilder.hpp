@@ -450,7 +450,8 @@ namespace Java {
              * @param offset
              * @param length
              * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
+             *        or offset or length are negative, or (offset+length) is greater than target.length
              */
             StringBuilder insert(int index, const Array<char> &target, int offset, int length);
 
@@ -465,12 +466,34 @@ namespace Java {
              * @param offset
              * @param length
              * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
+             *        or offset or length are negative, or (offset+length) is greater than target.length
              */
             StringBuilder insert(int index, const Array<Character> &target, int offset, int length);
 
+            /**
+             * Inserts the specified CharSequence into this sequence.
+             * The characters of the CharSequence argument are inserted, in order, into this sequence at the indicated offset,
+             * moving up any characters originally above that position and increasing the length of this sequence by the length of the argument {@code target}.
+             *
+             * @param destinationOffset
+             * @param target
+             * @return StringBuilder
+             */
             StringBuilder insert(int destinationOffset, const CharSequence &target);
 
+            /**
+             * Inserts a subsequence of the specified CharSequence into this sequence.
+             * The subsequence of the argument {@code target} specified by {@code start} and {@code end} are inserted,
+             * in order, into this sequence at the specified destination offset, moving up any characters originally above that position.
+             * The length of this sequence is increased by {@code end - start}.
+             *
+             * @param destinationOffset
+             * @param target
+             * @param start
+             * @param end
+             * @return StringBuilder
+             */
             StringBuilder insert(int destinationOffset, const CharSequence &target, int start, int end);
 
             /**

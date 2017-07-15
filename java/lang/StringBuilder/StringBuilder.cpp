@@ -359,6 +359,40 @@ StringBuilder StringBuilder::insert(int index, const Array<Character> &target, i
     return *this;
 }
 
+StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &target) {
+    return this->insert(destinationOffset, target.toString());
+}
+
+StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &target, int start, int end) {
+    if (destinationOffset < 0 || destinationOffset > this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+    string targetString = target.toString();
+    int lengthOfTarget = target.length();
+    if (start < 0 || end < 0 || start > end || end > lengthOfTarget){
+        throw IndexOutOfBoundsException();
+    }
+
+    int lengthOfSubStringOfTarget = end - start;
+    int newLength = this->currentLength + lengthOfSubStringOfTarget;
+    this->ensureCapacity(newLength);
+
+    string newShiftPosition = this->original + destinationOffset + lengthOfSubStringOfTarget;
+    string oldShiftPosition = this->original + destinationOffset;
+    int sizeOfShiftMemory = sizeof(char) * (this->currentLength - destinationOffset);
+    memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
+
+    int indexOfOriginal = destinationOffset;
+    int indexOfTarget;
+    for (indexOfTarget = start; indexOfTarget < end; indexOfTarget++) {
+        this->original[indexOfOriginal] = targetString[indexOfTarget];
+        indexOfOriginal = indexOfOriginal + 1;
+    }
+
+    this->currentLength = newLength;
+    return *this;
+}
+
 StringBuilder StringBuilder::insert(int offset, const Double &target) {
     return this->insert(offset, target.toString());
 }

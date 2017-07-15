@@ -253,6 +253,19 @@ TEST(JavaLang, StringBuilderInsert) {
     ASSERT_STR("a23bc", stringBuilder7.toString().toString());
     stringBuilder7.insert(1, Array<Character> {Character('x'), Character('y'), Character('z')}, 1, 1);
     ASSERT_STR("ay23bc", stringBuilder7.toString().toString());
+
+    StringBuilder stringBuilder8((const string)"abc");
+    CharSequence *charSequence = (CharSequence *)new String("xyz");
+    stringBuilder8.insert(1, *charSequence);
+    ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    stringBuilder8.insert(1, *charSequence, 1, 1);
+    ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    stringBuilder8.insert(1, *charSequence, 1, 2);
+    ASSERT_STR("ayxyzbc", stringBuilder8.toString().toString());
+    stringBuilder8.insert(1, *charSequence, 1, 3);
+    ASSERT_STR("ayzyxyzbc", stringBuilder8.toString().toString());
+    String *charSequenceString = dynamic_cast<String *>(charSequence); // FIXME: Must use this 'dynamic_cast' operator because CharSequence class doesn't have virtual destructor.
+    delete charSequenceString;
 }
 
 TEST(JavaLang, StringBuilderLastIndexOf) {
