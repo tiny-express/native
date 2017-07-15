@@ -256,6 +256,15 @@ TEST(JavaLang, StringBuilderLength) {
     ASSERT_EQUAL(aString.length(), stringBuilder.length());
 }
 
+TEST(JavaLang, StringBuilderReplace) {
+    StringBuilder stringBuilder((const string)"ABCXYZ");
+    ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    stringBuilder.replace(1, 2, (const string)"123");
+    ASSERT_STR("A123CXYZ", stringBuilder.toString().toString());
+    stringBuilder.replace(0, 100, String("Clear!"));
+    ASSERT_STR("Clear!", stringBuilder.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderReverse) {
     StringBuilder stringBuilder1((const string)"ABCXYZ");
     stringBuilder1.reverse();

@@ -201,6 +201,10 @@ char StringBuilder::charAt(int index) const {
     return this->original[index];
 }
 
+StringBuilder StringBuilder::deleteRange(int start, int end) {
+
+}
+
 void StringBuilder::ensureCapacity(int minimumCapacity) {
     if ((minimumCapacity > 0) && (minimumCapacity > this->currentCapacity)) {
         int newCapacity = this->currentCapacity * 2 + 2;
@@ -404,6 +408,42 @@ int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
 
 int StringBuilder::length() const {
     return this->currentLength;
+}
+
+StringBuilder StringBuilder::replace(int start, int end, const String &target) {
+    return this->replace(start, end, target.toString());
+}
+
+StringBuilder StringBuilder::replace(int start, int end, const string target) {
+    if (start < 0) {
+        throw StringIndexOutOfBoundsException(start);
+    }
+    if (start > this->currentLength) {
+        throw StringIndexOutOfBoundsException("start > length()");
+    }
+    if (start > end) {
+        throw StringIndexOutOfBoundsException("start > end");
+    }
+    if (end > this->currentLength) {
+        end = this->currentLength;
+    }
+
+    int lengthOfTarget = (int)strlen(target);
+    int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
+    int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
+    this->ensureCapacity(newLength);
+
+    string newPositionOfTailPart = this->original + end + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
+    string oldPositionOfTailPart = this->original + end;
+    int memorySizeOfTailPart = (this->currentLength - end) * sizeof(char);
+    memmove(newPositionOfTailPart, oldPositionOfTailPart, (size_t)memorySizeOfTailPart);
+
+    string insertPosition = this->original + start;
+    int memorySizeForTarget = lengthOfTarget * sizeof(char);
+    memcpy(insertPosition, target, (size_t)memorySizeForTarget);
+
+    this->currentLength = newLength;
+    return *this;
 }
 
 StringBuilder StringBuilder::reverse() {

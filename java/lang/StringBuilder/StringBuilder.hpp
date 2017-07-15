@@ -320,6 +320,16 @@ namespace Java {
 
             int codePointCount(int beginIndex, int endIndex);
 
+            /**
+             * Removes the characters in a substring of this sequence.
+             * The substring begins at the specified start and extends to the character at index end - 1
+             * or to the end of the sequence if no such character exists.
+             * If start is equal to end, no changes are made.
+             *
+             * @param start
+             * @param end
+             * @return StringBuilder
+             */
             StringBuilder deleteRange(int start, int end);
 
             StringBuilder deleteCharAt(int index);
@@ -603,7 +613,33 @@ namespace Java {
 
             int offsetByCodePoints(int index, int codePointOffset) const;
 
-            StringBuilder replace(int start, int end, const String &str);
+            /**
+             * Replaces the characters in a substring of this sequence with characters in the specified String.
+             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}
+             * or to the end of the sequence if no such character exists.
+             * First the characters in the substring are removed and then the specified String is inserted at {@code start}.
+             * (This sequence will be lengthened to accommodate the specified String if necessary.)
+             *
+             * @param start
+             * @param end
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder replace(int start, int end, const String &target);
+
+            /**
+             * Replaces the characters in a substring of this sequence with characters in the specified string.
+             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}
+             * or to the end of the sequence if no such character exists.
+             * First the characters in the substring are removed and then the specified string is inserted at {@code start}.
+             * (This sequence will be lengthened to accommodate the specified string if necessary.)
+             *
+             * @param start
+             * @param end
+             * @param target
+             * @return StringBuilder
+             */
+            StringBuilder replace(int start, int end, const string target);
 
             /**
              * Causes this character sequence to be replaced by the reverse of the sequence.
