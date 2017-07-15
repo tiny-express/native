@@ -332,8 +332,21 @@ namespace Java {
              */
             StringBuilder deleteRange(int start, int end);
 
+            /**
+             * Removes the char at the specified position in this sequence.
+             * This sequence is shortened by one char.
+             *
+             * @param index
+             * @return StringBuilder
+             */
             StringBuilder deleteCharAt(int index);
 
+            /**
+             * Ensures that the capacity is at least equal to the specified minimum.
+             * If the current capacity is less than the argument, then a new internal array is allocated with greater capacity.
+             *
+             * @param minimumCapacity
+             */
             void ensureCapacity(int minimumCapacity);
 
             void getChars(int sourceBegin, int sourceEnd, Array<char> &target, int targetBegin);

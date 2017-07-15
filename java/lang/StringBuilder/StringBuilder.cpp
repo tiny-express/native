@@ -222,6 +222,20 @@ StringBuilder StringBuilder::deleteRange(int start, int end) {
     return *this;
 }
 
+StringBuilder StringBuilder::deleteCharAt(int index) {
+    if (index < 0 || index >= this->currentLength) {
+        throw StringIndexOutOfBoundsException(index);
+    }
+
+    string newPositionOfTail = this->original + index;
+    string oldPositionOfTail = this->original + index + 1;
+    int memorySizeOfTailPart = this->currentLength - (index + 1);
+    memmove(newPositionOfTail, oldPositionOfTail, (size_t)memorySizeOfTailPart);
+
+    this->currentLength = this->currentLength - 1;
+    return *this;
+}
+
 void StringBuilder::ensureCapacity(int minimumCapacity) {
     if ((minimumCapacity > 0) && (minimumCapacity > this->currentCapacity)) {
         int newCapacity = this->currentCapacity * 2 + 2;

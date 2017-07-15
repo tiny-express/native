@@ -155,6 +155,15 @@ TEST(JavaLang, StringBuilderDeleteRange) {
     ASSERT_STR("", stringBuilder.toString().toString());
 }
 
+TEST(JavaLang, StringBuilderDeleteCharAt) {
+    StringBuilder stringBuilder((const string)"ABCXYZ");
+    ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    stringBuilder.deleteCharAt(0);
+    ASSERT_STR("BCXYZ", stringBuilder.toString().toString());
+    stringBuilder.deleteCharAt(1);
+    ASSERT_STR("BXYZ", stringBuilder.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderEnsureCapacity) {
     StringBuilder stringBuilder;
     ASSERT_EQUAL(0, stringBuilder.length());
