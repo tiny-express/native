@@ -42,7 +42,11 @@
 
 // Platform Library
 #ifdef WIN32
-//#include <windows.h>
+#include <windows.h>
+#endif
+
+#ifdef __linux__
+#include <pthread.h>
 #endif
 
 

@@ -24,42 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
-#include "../unit_test.h"
-
-#ifdef __linux__
-TEST (DateTime, Timestamp) {
-	long first_time = timestamp();
-	int maxN = 10000000;
-	int i = 0;
-	int counter = 0;
-	for (i = 0; i < maxN; i++) {
-		counter++;
-	}
-	long last_time = timestamp();
-	ASSERT_EQUAL(maxN, counter);
-	// Time is greater than 9 ms
-	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
-}
-#endif
-
-#ifdef __linux__
-TEST (DateTime, Format) {
-
-	long timestamp = 1473765499;
-	char *format = "d/m/y";
-	char *result1 = date(timestamp, format);
-	ASSERT_STR("13/09/2016", result1);
-	free(result1);
-
-	timestamp = 1511208660;
-	char *result2 = date(timestamp, format);
-	ASSERT_STR("20/11/2017", result2);
-	free(result2);
-
-	format = "y-m-d";
-	char *result3 = date(timestamp, format);
-	ASSERT_STR("2017-11-20", result3);
-	free(result3);
-}
-#endif
+//#include "../builtin.h"
+//#include "../unit_test.h"
+//
+//TEST (DateTime, Timestamp) {
+//	long first_time = timestamp();
+//	int maxN = 10000000;
+//	int i = 0;
+//	int counter = 0;
+//	for (i = 0; i < maxN; i++) {
+//		counter++;
+//	}
+//	long last_time = timestamp();
+//	ASSERT_EQUAL(maxN, counter);
+//	// Time is greater than 9 ms
+//	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
+//}
+//#endif
+//
+//TEST (DateTime, Format) {
+//
+//	long timestamp = 1473765499;
+//	char *format = "d/m/y";
+//	char *result1 = date(timestamp, format);
+//	ASSERT_STR("13/09/2016", result1);
+//	free(result1);
+//
+//	timestamp = 1511208660;
+//	char *result2 = date(timestamp, format);
+//	ASSERT_STR("20/11/2017", result2);
+//	free(result2);
+//
+//	format = "y-m-d";
+//	char *result3 = date(timestamp, format);
+//	ASSERT_STR("2017-11-20", result3);
+//	free(result3);
+//}
