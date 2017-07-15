@@ -613,8 +613,24 @@ namespace Java {
              */
             StringBuilder reverse();
 
+            /**
+             * The character at the specified {@code index} is set to {@code target}.
+             * This sequence is altered to represent a new character sequence that is identical to the old character sequence,
+             * except that it contains the character {@code target} at position {@code index}.
+             *
+             * @param index
+             * @param target
+             */
             void setCharAt(int index, char target);
 
+            /**
+             * The character at the specified {@code index} is set to {@code target}.
+             * This sequence is altered to represent a new character sequence that is identical to the old character sequence,
+             * except that it contains the character {@code target} at position {@code index}.
+             *
+             * @param index
+             * @param target
+             */
             void setCharAt(int index, const Character &target);
 
             /**

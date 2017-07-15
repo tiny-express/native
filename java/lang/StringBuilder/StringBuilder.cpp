@@ -427,6 +427,19 @@ StringBuilder StringBuilder::reverse() {
     return *this;
 }
 
+void StringBuilder::setCharAt(int index, char target) {
+    if (index < 0 || index >= this->currentLength) {
+        throw StringIndexOutOfBoundsException(index);
+    }
+
+    this->original[index] = target;
+}
+
+void StringBuilder::setCharAt(int index, const Character &target) {
+    Character *pointerToTarget = const_cast<Character *>(&target);
+    this->setCharAt(index, pointerToTarget->charValue());
+}
+
 void StringBuilder::setLength(int newLength) {
     if (newLength < 0) {
         throw StringIndexOutOfBoundsException(newLength);

@@ -268,6 +268,15 @@ TEST(JavaLang, StringBuilderReverse) {
     ASSERT_STR("\u000DC00\u000D800", stringBuilder2.toString().toString());
 }
 
+TEST(JavaLang, StringBuilderSetCharAt) {
+    StringBuilder stringBuilder((const string)"ABCXYZ");
+    ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    stringBuilder.setCharAt(0, 'T');
+    ASSERT_STR("TBCXYZ", stringBuilder.toString().toString());
+    stringBuilder.setCharAt(1, Character('V'));
+    ASSERT_STR("TVCXYZ", stringBuilder.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderSetLength) {
     StringBuilder stringBuilder((const string)"Hello! I'm a StringBuilder");
     ASSERT_STR("Hello! I'm a StringBuilder", stringBuilder.toString().toString());
