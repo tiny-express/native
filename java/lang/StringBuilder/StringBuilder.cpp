@@ -202,7 +202,24 @@ char StringBuilder::charAt(int index) const {
 }
 
 StringBuilder StringBuilder::deleteRange(int start, int end) {
+    if (start < 0) {
+        throw StringIndexOutOfBoundsException(start);
+    }
+    if (end > this->currentLength) {
+        end = this->currentLength;
+    }
+    if (start > end) {
+        throw StringIndexOutOfBoundsException("start > end");
+    }
 
+    int lengthOfSubStringWillBeRemoved = end - start;
+    string newPositionOfTail = this->original + start;
+    string oldPositionOfTail = this->original + end;
+    int memorySizeOfTailPart = this->currentLength - end;
+    memmove(newPositionOfTail, oldPositionOfTail, (size_t)memorySizeOfTailPart);
+
+    this->currentLength = this->currentLength - lengthOfSubStringWillBeRemoved;
+    return *this;
 }
 
 void StringBuilder::ensureCapacity(int minimumCapacity) {

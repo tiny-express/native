@@ -144,6 +144,17 @@ TEST(JavaLang, StringBuilderCharAt) {
     }
 }
 
+TEST(JavaLang, StringBuilderDeleteRange) {
+    StringBuilder stringBuilder((const string)"ABCXYZ");
+    ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    stringBuilder.deleteRange(1, 3);
+    ASSERT_STR("AXYZ", stringBuilder.toString().toString());
+    stringBuilder.deleteRange(0, 0);
+    ASSERT_STR("AXYZ", stringBuilder.toString().toString());
+    stringBuilder.deleteRange(0, 999);
+    ASSERT_STR("", stringBuilder.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderEnsureCapacity) {
     StringBuilder stringBuilder;
     ASSERT_EQUAL(0, stringBuilder.length());
