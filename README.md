@@ -37,7 +37,7 @@ Install CgyWin64 with dependencies below:
 
 #### Linux and Mac
 Install with apt-get or brew with dependencies below:
-- Cmake
+- CMake
 
 #### Test Driven Development
 Note: `make leak` is ONLY available for Linux - production environment
