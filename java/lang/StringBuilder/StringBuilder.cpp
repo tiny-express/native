@@ -370,6 +370,22 @@ StringBuilder StringBuilder::insert(int offset, const string target) {
     return *this;
 }
 
+int StringBuilder::lastIndexOf(const String &target) {
+    this->toString().startsWith("");
+}
+
+int StringBuilder::lastIndexOf(const string target) {
+
+}
+
+int StringBuilder::lastIndexOf(const String &target, int fromIndex) {
+
+}
+
+int StringBuilder::lastIndexOf(const string target, int fromIndex) {
+
+}
+
 int StringBuilder::length() const {
     return this->currentLength;
 }
@@ -422,4 +438,62 @@ void StringBuilder::trimToSize() {
         this->original = (string)realloc(this->original, (size_t)numberOfBytesForCapacity);
         this->currentCapacity = this->currentLength;
     }
+}
+
+int *StringBuilder::initializeNextTable(const string pattern) {
+    int lengthOfPattern = (int)strlen(pattern);
+    int sizeOfNextTable = sizeof(int) * lengthOfPattern;
+    int *nextTable = (int *)malloc((size_t)sizeOfNextTable);
+
+    int indexOfNextTable = 0;
+    int nextValue = -1;
+    nextTable[indexOfNextTable] = nextValue;
+
+    while (indexOfNextTable < lengthOfPattern - 1) {
+        if (nextValue == -1 || pattern[indexOfNextTable] == pattern[nextValue]) {
+            indexOfNextTable = indexOfNextTable + 1;
+            nextValue = nextValue + 1;
+            if (pattern[indexOfNextTable] != pattern[nextValue]) {
+                nextTable[indexOfNextTable] = nextValue;
+            }
+            else
+            {
+                nextTable[indexOfNextTable] = nextTable[nextValue];
+            }
+        }
+        else {
+            nextValue = nextTable[nextValue];
+        }
+    }
+
+    return nextTable;
+}
+
+int StringBuilder::stringMatches(const string target, const string pattern) {
+    int lengthOfTarget = (int)strlen(target);
+    int lengthOfPattern = (int)strlen(target);
+
+    int *nextTable = this->initializeNextTable(pattern);
+    int indexOfPattern = 0;
+    int indexOfTarget = 0;
+    int sumOfIndexes = 0;
+    while (sumOfIndexes < lengthOfTarget) {
+        if (pattern[indexOfPattern] == target[sumOfIndexes]) {
+            indexOfPattern = indexOfPattern + 1;
+            if (indexOfPattern == lengthOfPattern) {
+                free(nextTable);
+                return indexOfTarget;
+            }
+        }
+        else {
+            indexOfTarget = indexOfTarget + (indexOfPattern - nextTable[indexOfPattern]);
+            if (nextTable[indexOfPattern] > -1) {
+                indexOfPattern = nextTable[indexOfPattern];
+            }
+        }
+        sumOfIndexes = indexOfPattern + indexOfTarget;
+    }
+
+    free(nextTable);
+    return -1;
 }

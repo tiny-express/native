@@ -328,12 +328,43 @@ namespace Java {
 
             void getChars(int sourceBegin, int sourceEnd, Array<char> &target, int targetBegin);
 
+            /**
+             * Returns the index within this string of the first occurrence of the specified substring.
+             *
+             * @param target
+             * @return int
+             */
             int indexOf(const String &target);
 
+            /**
+             * Returns the index within this string of the first occurrence of the specified substring.
+             *
+             * @param target
+             * @return int
+             */
+            int indexOf(const string target);
+
+            /**
+             * Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
+             *
+             * @param target
+             * @param fromIndex
+             * @return int
+             */
             int indexOf(const String &target, int fromIndex);
 
             /**
+             * Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
+             *
+             * @param target
+             * @param fromIndex
+             * @return
+             */
+            int indexOf(const string target, int fromIndex);
+
+            /**
              * Inserts the string representation of the boolean argument into this sequence.
+             *
              * @param offset
              * @param target
              * @return StringBuilder
@@ -342,6 +373,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the Boolean argument into this sequence.
+             *
              * @param offset
              * @param target
              * @return StringBuilder
@@ -465,6 +497,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the second int argument into this sequence.
+             *
              * @param offset
              * @param target
              * @return StringBuilder
@@ -521,9 +554,41 @@ namespace Java {
              */
             StringBuilder insert(int offset, const string target);
 
-            StringBuilder lastIndexOf(const String &target);
+            /**
+             * Returns the index within this string of the rightmost occurrence of the specified substring.
+             * The rightmost empty string "" is considered to occur at the index value 'length()'.
+             *
+             * @param target
+             * @return int
+             */
+            int lastIndexOf(const String &target);
 
-            StringBuilder lastIndexOf(const String &target, int fromIndex);
+            /**
+             * Returns the index within this string of the rightmost occurrence of the specified substring.
+             * The rightmost empty string "" is considered to occur at the index value 'length()'.
+             *
+             * @param target
+             * @return int
+             */
+            int lastIndexOf(const string target);
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified substring.
+             *
+             * @param target
+             * @param fromIndex
+             * @return int
+             */
+            int lastIndexOf(const String &target, int fromIndex);
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified substring.
+             *
+             * @param target
+             * @param fromIndex
+             * @return int
+             */
+            int lastIndexOf(const string target, int fromIndex);
 
             /**
              * Returns the length (character count).
@@ -583,6 +648,25 @@ namespace Java {
              * Calling this method may, but is not required to, affect the value returned by a subsequent call to the capacity() method.
              */
             void trimToSize();
+
+        private:
+
+            /**
+             * This function builds a "Next Table" that depending on a specified 'pattern'.
+             *
+             * @param pattern
+             * @return int *
+             */
+            int *initializeNextTable(const string pattern);
+
+            /**
+             * This function finds the first starting index in the 'target' that matches the 'pattern' by using Knuth-Morris-Pratt algorithm.
+             *
+             * @param target
+             * @param pattern
+             * @return int
+             */
+            int stringMatches(const string target, const string pattern);
         };
     }
 }
