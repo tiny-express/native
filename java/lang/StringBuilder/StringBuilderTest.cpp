@@ -159,8 +159,21 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
 TEST(JavaLang, StringBuilderIndexOf) {
     StringBuilder stringBuilder((const string)"Welcome to Vietnam");
     ASSERT_EQUAL(0, stringBuilder.indexOf((const string)"Welcome"));
+    ASSERT_EQUAL(0, stringBuilder.indexOf(String("Welcome")));
     ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam"));
+    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam")));
     ASSERT_EQUAL(-1, stringBuilder.indexOf((const string)"Hello"));
+    ASSERT_EQUAL(-1, stringBuilder.indexOf(String("Hello")));
+    stringBuilder.append((const string)" Vietnam");
+    ASSERT_STR("Welcome to Vietnam Vietnam", stringBuilder.toString().toString());
+    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam", 10));
+    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam"), 10));
+    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam", 11));
+    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam"), 11));
+    ASSERT_EQUAL(19, stringBuilder.indexOf((const string)"Vietnam", 12));
+    ASSERT_EQUAL(19, stringBuilder.indexOf(String("Vietnam"), 12));
+    ASSERT_EQUAL(-1, stringBuilder.indexOf((const string)"Vietnam", 20));
+    ASSERT_EQUAL(-1, stringBuilder.indexOf(String("Vietnam"), 20));
 }
 
 TEST(JavaLang, StringBuilderInsert) {

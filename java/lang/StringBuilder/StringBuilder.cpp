@@ -221,6 +221,14 @@ int StringBuilder::indexOf(const string target) const {
     return this->stringMatches(this->toString().toString(), target, 0);
 }
 
+int StringBuilder::indexOf(const String &target, int fromIndex) const {
+    return this->indexOf(target.toString(), fromIndex);
+}
+
+int StringBuilder::indexOf(const string target, int fromIndex) const {
+    return  this->stringMatches(this->toString().toString(), target, fromIndex);
+}
+
 StringBuilder StringBuilder::insert(int offset, boolean target) {
     return this->insert(offset, Boolean(target));
 }

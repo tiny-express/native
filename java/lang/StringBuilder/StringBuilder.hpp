@@ -351,7 +351,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int indexOf(const String &target, int fromIndex);
+            int indexOf(const String &target, int fromIndex) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
@@ -360,7 +360,7 @@ namespace Java {
              * @param fromIndex
              * @return
              */
-            int indexOf(const string target, int fromIndex);
+            int indexOf(const string target, int fromIndex) const;
 
             /**
              * Inserts the string representation of the boolean argument into this sequence.
