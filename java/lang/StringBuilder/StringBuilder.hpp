@@ -605,6 +605,12 @@ namespace Java {
 
             StringBuilder replace(int start, int end, const String &str);
 
+            /**
+             * Causes this character sequence to be replaced by the reverse of the sequence.
+             * If there are any surrogate pairs included in the sequence, these are treated as single characters for the reverse operation.
+             *
+             * @return StringBuilder
+             */
             StringBuilder reverse();
 
             void setCharAt(int index, char target);
@@ -690,6 +696,11 @@ namespace Java {
              * @return int
              */
             int stringMatchesReverse(const string target, const string pattern, int startIndex) const;
+
+            /**
+             * This method helps reverses all valid surrogate pairs are produced by {@code reverse}.
+             */
+            void reverseAllValidSurrogatePairs();
         };
     }
 }

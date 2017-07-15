@@ -406,6 +406,27 @@ int StringBuilder::length() const {
     return this->currentLength;
 }
 
+StringBuilder StringBuilder::reverse() {
+    boolean hasSurrogates = false;
+    int index;
+    int oppositeIndex;
+    int stopIndex = this->currentLength / 2;
+    char temp;
+    for (index = 0; index < stopIndex; index++) {
+        oppositeIndex = (this->currentLength - 1) - index;
+        temp = this->original[index];
+        this->original[index] = this->original[oppositeIndex];
+        this->original[oppositeIndex] = temp;
+        if (Character::isSurrogate((this->original[index])) || Character::isSurrogate(this->original[oppositeIndex])) {
+            hasSurrogates = true;
+        }
+    }
+    if (hasSurrogates) {
+        this->reverseAllValidSurrogatePairs();
+    }
+    return *this;
+}
+
 void StringBuilder::setLength(int newLength) {
     if (newLength < 0) {
         throw StringIndexOutOfBoundsException(newLength);
@@ -612,4 +633,22 @@ int StringBuilder::stringMatchesReverse(const string target, const string patter
 
     free(nextTable);
     return - 1;
+}
+
+void StringBuilder::reverseAllValidSurrogatePairs() {
+    int stopIndex = this->currentLength - 1;
+    int index;
+    char ch1;
+    char ch2;
+    for (index = 0; index < stopIndex; index++) {
+        ch2 = this->original[index];
+        if (Character::isLowSurrogate(ch2)) {
+            ch1 = this->original[index + 1];
+            if (Character::isHighSurrogate(ch1)) {
+                this->original[index] = ch1;
+                index = index + 1;
+                this->original[index] = ch2;
+            }
+        }
+    }
 }

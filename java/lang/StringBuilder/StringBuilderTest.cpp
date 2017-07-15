@@ -256,6 +256,18 @@ TEST(JavaLang, StringBuilderLength) {
     ASSERT_EQUAL(aString.length(), stringBuilder.length());
 }
 
+TEST(JavaLang, StringBuilderReverse) {
+    StringBuilder stringBuilder1((const string)"ABCXYZ");
+    stringBuilder1.reverse();
+    ASSERT_STR("ZYXCBA", stringBuilder1.toString().toString());
+
+    // Reverses all valid surrogate pairs are produced in reverse process.
+    StringBuilder stringBuilder2((const string)"\u000DC00\u000D800");
+    ASSERT_STR("\u000DC00\u000D800", stringBuilder2.toString().toString());
+    stringBuilder1.reverse();
+    ASSERT_STR("\u000DC00\u000D800", stringBuilder2.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderSetLength) {
     StringBuilder stringBuilder((const string)"Hello! I'm a StringBuilder");
     ASSERT_STR("Hello! I'm a StringBuilder", stringBuilder.toString().toString());

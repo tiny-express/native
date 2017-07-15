@@ -415,6 +415,25 @@ TEST (JavaLang, CharacterisLowSurrogate){
     ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
 }
 
+TEST(JavaLang, CharacterIsSurrogate) {
+    // Create variable to test
+    wchar_t variableTestIsSurrogate;
+    boolean expectedResultIsSurrogate;
+    boolean actualResultIsSurrogate;
+
+    // Test valid case
+    variableTestIsSurrogate = '\u000DC00' ;
+    expectedResultIsSurrogate = true;
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_TRUE(expectedResultIsSurrogate == actualResultIsSurrogate);
+
+    // Test invalid case
+    variableTestIsSurrogate = L'A';
+    expectedResultIsSurrogate = false;
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_TRUE(expectedResultIsSurrogate == actualResultIsSurrogate);
+}
+
 TEST (JavaLang, CharacterDigit) {
     //Given valid and invalid value to test with digit(char char, int radix)
     char hexValueDigit = 'b';
