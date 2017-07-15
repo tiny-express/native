@@ -1721,7 +1721,7 @@ TEST (JavaLang, DoubleToBinary64StringType) {
 }
 
 // TODO Must replace ASSERT_DBL_NEAR by Double::compare(double double1, double double2);
-TEST (JavaLang, Binary64StringTypeToDouble) {
+TEST (JavaLang, DoubleBinary64StringTypeToDouble) {
     string Binary64StringTypeInput;
     double expectedResult;
     double actualResult;
@@ -1792,7 +1792,7 @@ TEST (JavaLang, Binary64StringTypeToDouble) {
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 }
 
-TEST (JavaLang, LongBitsToBinary64StringType) {
+TEST (JavaLang, DoubleLongBitsToBinary64StringType) {
     long longBitsInput;
     string expectedResult;
     string actualResult;
@@ -1889,7 +1889,7 @@ TEST (JavaLang, LongBitsToBinary64StringType) {
     free(actualResult);
 }
 
-TEST (JavaLang, LongBitsToDouble){
+TEST (JavaLang, DoubleLongBitsToDouble){
     // Create variable to test
     long longBitsInput;
     double expectedResult;
