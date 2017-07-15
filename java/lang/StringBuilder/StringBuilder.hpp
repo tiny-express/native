@@ -611,6 +611,11 @@ namespace Java {
 
             void setCharAt(int index, const Character &target);
 
+            /**
+             * Sets the length of the character sequence.
+             *
+             * @param newLength
+             */
             void setLength(int newLength);
 
 //          CharSequence subSequence(int start, int end) const;

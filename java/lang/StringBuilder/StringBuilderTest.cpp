@@ -256,6 +256,18 @@ TEST(JavaLang, StringBuilderLength) {
     ASSERT_EQUAL(aString.length(), stringBuilder.length());
 }
 
+TEST(JavaLang, StringBuilderSetLength) {
+    StringBuilder stringBuilder((const string)"Hello! I'm a StringBuilder");
+    ASSERT_STR("Hello! I'm a StringBuilder", stringBuilder.toString().toString());
+    ASSERT_EQUAL(26, stringBuilder.length());
+    stringBuilder.setLength(30);
+    ASSERT_EQUAL(30, stringBuilder.length());
+    ASSERT_STR("Hello! I'm a StringBuilder", stringBuilder.toString().toString());
+    stringBuilder.setLength(6);
+    ASSERT_EQUAL(6, stringBuilder.length());
+    ASSERT_STR("Hello!", stringBuilder.toString().toString());
+}
+
 TEST(JavaLang, StringBuilderSubString) {
     StringBuilder stringBuilder((const string)"Hello Vietnam");
     ASSERT_STR("Vietnam", stringBuilder.substring(6).toString());

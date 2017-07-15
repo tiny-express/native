@@ -406,6 +406,21 @@ int StringBuilder::length() const {
     return this->currentLength;
 }
 
+void StringBuilder::setLength(int newLength) {
+    if (newLength < 0) {
+        throw StringIndexOutOfBoundsException(newLength);
+    }
+
+    this->ensureCapacity(newLength);
+    if (this->currentLength < newLength) {
+        int index;
+        for (index = this->currentLength; index < newLength; index++) {
+            this->original[index] = '\0';
+        }
+    }
+    this->currentLength = newLength;
+}
+
 String StringBuilder::substring(int start) const {
     return this->substring(start, this->currentLength);
 }
