@@ -129,3 +129,18 @@ int Random::next(int bits) {
 boolean Random::nextBoolean() {
     return next(1) != 0;
 }
+
+/**
+ * Returns the next pseudorandom,
+ * uniformly distributed int value from this random number generator's sequence
+ *
+ * @return
+ */
+int Random::nextInt() {
+    return next(32);
+}
+
+int Random::nextInt(int bound) {
+    return 0;
+
+}

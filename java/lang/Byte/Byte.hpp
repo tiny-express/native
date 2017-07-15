@@ -1,4 +1,5 @@
-/**
+/**The method nextInt is implemented by class Random as if by:
+
  * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

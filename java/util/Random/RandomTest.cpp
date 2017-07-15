@@ -39,7 +39,12 @@ TEST (JavaUtil, RandomConstructor){
     ASSERT_TRUE(random2.getSeed() != 0);
 }
 
-TEST (JavaUtil, Boolean){
+TEST (JavaUtil, nextInt){
     Random random1;
-    //ASSERT_TRUE(random1.nextBoolean());
+    int intMax = 0x7fffffff;
+    int intMin = 0x80000000;
+    for(int index = 0; index < 10; index ++){
+        int a = random1.nextInt();
+        ASSERT_TRUE( a >= intMin && a <= intMax);
+    }
 }
