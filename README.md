@@ -40,6 +40,7 @@ Install with apt-get or brew with dependencies below:
 - Cmake
 
 #### Test Driven Development
+Note: `make leak` is ONLY available for Linux - production environment
 ```bash
 $ cmake . && make native_test && make leak
 ```

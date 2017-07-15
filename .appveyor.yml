@@ -13,4 +13,4 @@ build_script:
     - git submodule update --init
     - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER && cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true;"
 test_script:
-    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; native_test.exe"
+    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; make native_test -j8 && ./native_test.exe"
