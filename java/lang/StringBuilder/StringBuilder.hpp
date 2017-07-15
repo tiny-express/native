@@ -334,7 +334,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int indexOf(const String &target);
+            int indexOf(const String &target) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring.
@@ -342,7 +342,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int indexOf(const string target);
+            int indexOf(const string target) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
@@ -657,7 +657,7 @@ namespace Java {
              * @param pattern
              * @return int *
              */
-            int *initializeNextTable(const string pattern);
+            int *initializeNextTable(const string pattern) const;
 
             /**
              * This function finds the first starting index in the 'target' that matches the 'pattern' by using Knuth-Morris-Pratt algorithm.
@@ -666,7 +666,7 @@ namespace Java {
              * @param pattern
              * @return int
              */
-            int stringMatches(const string target, const string pattern);
+            int stringMatches(const string target, const string pattern, int startIndex) const;
         };
     }
 }

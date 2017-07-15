@@ -213,6 +213,14 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
     }
 }
 
+int StringBuilder::indexOf(const String &target) const{
+    return this->indexOf(target.toString());
+}
+
+int StringBuilder::indexOf(const string target) const {
+    return this->stringMatches(this->toString().toString(), target, 0);
+}
+
 StringBuilder StringBuilder::insert(int offset, boolean target) {
     return this->insert(offset, Boolean(target));
 }
@@ -371,7 +379,7 @@ StringBuilder StringBuilder::insert(int offset, const string target) {
 }
 
 int StringBuilder::lastIndexOf(const String &target) {
-    this->toString().startsWith("");
+
 }
 
 int StringBuilder::lastIndexOf(const string target) {
@@ -440,60 +448,72 @@ void StringBuilder::trimToSize() {
     }
 }
 
-int *StringBuilder::initializeNextTable(const string pattern) {
+int *StringBuilder::initializeNextTable(const string pattern) const{
     int lengthOfPattern = (int)strlen(pattern);
-    int sizeOfNextTable = sizeof(int) * lengthOfPattern;
+    if (pattern == NULL || lengthOfPattern == 0) {
+        return NULL;
+    }
+
+    int sizeOfNextTable = lengthOfPattern * sizeof(int);
     int *nextTable = (int *)malloc((size_t)sizeOfNextTable);
 
-    int indexOfNextTable = 0;
-    int nextValue = -1;
-    nextTable[indexOfNextTable] = nextValue;
+    nextTable[0] = -1;
+    if (lengthOfPattern == 1) {
+        return nextTable;
+    }
+    nextTable[1] = 0;
+    if (lengthOfPattern == 2) {
+        return nextTable;
+    }
 
-    while (indexOfNextTable < lengthOfPattern - 1) {
-        if (nextValue == -1 || pattern[indexOfNextTable] == pattern[nextValue]) {
-            indexOfNextTable = indexOfNextTable + 1;
-            nextValue = nextValue + 1;
-            if (pattern[indexOfNextTable] != pattern[nextValue]) {
-                nextTable[indexOfNextTable] = nextValue;
-            }
-            else
-            {
-                nextTable[indexOfNextTable] = nextTable[nextValue];
-            }
+    int position = 2;
+    int cnd = 0;
+
+    while (position < lengthOfPattern) {
+        if (pattern[position - 1] == pattern[cnd]) {
+            cnd = cnd + 1;
+            nextTable[position] = cnd;
+            position = position + 1;
+        }
+        else if (cnd > 0) {
+            cnd = nextTable[cnd];
         }
         else {
-            nextValue = nextTable[nextValue];
+            nextTable[position] = 0;
+            position = position + 1;
         }
     }
 
     return nextTable;
 }
 
-int StringBuilder::stringMatches(const string target, const string pattern) {
+int StringBuilder::stringMatches(const string target, const string pattern, int startIndex) const {
+    int lengthOfPattern = (int)strlen(pattern);
     int lengthOfTarget = (int)strlen(target);
-    int lengthOfPattern = (int)strlen(target);
 
-    int *nextTable = this->initializeNextTable(pattern);
-    int indexOfPattern = 0;
-    int indexOfTarget = 0;
-    int sumOfIndexes = 0;
-    while (sumOfIndexes < lengthOfTarget) {
-        if (pattern[indexOfPattern] == target[sumOfIndexes]) {
-            indexOfPattern = indexOfPattern + 1;
-            if (indexOfPattern == lengthOfPattern) {
+    int *nextTable = this->initializeNextTable(target);
+
+    int position = 0;
+
+    while (startIndex + position < lengthOfTarget) {
+        if (pattern[position] == target[startIndex + position]) {
+            if (position == lengthOfPattern - 1) {
                 free(nextTable);
-                return indexOfTarget;
+                return startIndex;
             }
+            position = position + 1;
         }
         else {
-            indexOfTarget = indexOfTarget + (indexOfPattern - nextTable[indexOfPattern]);
-            if (nextTable[indexOfPattern] > -1) {
-                indexOfPattern = nextTable[indexOfPattern];
+            if (nextTable[position] > -1) {
+                startIndex = startIndex + position;
+                position = nextTable[position];
+            }
+            else {
+                startIndex = startIndex + 1;
+                position = 0;
             }
         }
-        sumOfIndexes = indexOfPattern + indexOfTarget;
     }
 
-    free(nextTable);
     return -1;
 }

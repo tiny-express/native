@@ -156,6 +156,13 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
     ASSERT_EQUAL(100, stringBuilder.capacity());
 }
 
+TEST(JavaLang, StringBuilderIndexOf) {
+    StringBuilder stringBuilder((const string)"Welcome to Vietnam");
+    ASSERT_EQUAL(0, stringBuilder.indexOf((const string)"Welcome"));
+    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam"));
+    ASSERT_EQUAL(-1, stringBuilder.indexOf((const string)"Hello"));
+}
+
 TEST(JavaLang, StringBuilderInsert) {
     // String and string
     StringBuilder stringBuilder1((const string)"123");
