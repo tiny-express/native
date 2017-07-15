@@ -515,5 +515,38 @@ int StringBuilder::stringMatches(const string target, const string pattern, int 
         }
     }
 
+    free(nextTable);
     return -1;
+}
+
+int StringBuilder::stringMatchesReverse(const string target, const string pattern, int startIndex) const {
+    int lengthOfPattern = (int)strlen(pattern);
+    int lengthOfTarget = (int)strlen(target);
+
+    int *nextTable = this->initializeNextTable(pattern);
+
+    int position = 0;
+
+    while (startIndex - position >= 0) {
+        if (pattern[lengthOfPattern - position - 1] == target[startIndex - position]) {
+            if (position == lengthOfPattern - 1) {
+                free(nextTable);
+                return startIndex - lengthOfPattern + 1;
+            }
+            position = position + 1;
+        }
+        else {
+            if (nextTable[position]> -1) {
+                startIndex = startIndex - position;
+                position = nextTable[position];
+            }
+            else {
+                startIndex = startIndex - 1;
+                position = 0;
+            }
+        }
+    }
+
+    free(nextTable);
+    return - 1;
 }

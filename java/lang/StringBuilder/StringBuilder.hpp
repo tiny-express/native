@@ -664,9 +664,20 @@ namespace Java {
              *
              * @param target
              * @param pattern
+             * @param startIndex
              * @return int
              */
             int stringMatches(const string target, const string pattern, int startIndex) const;
+
+            /**
+             * This function finds the last starting index in the 'target' that matches the 'pattern' by using Knuth-Morris-Pratt algorithm.
+             *
+             * @param target
+             * @param pattern
+             * @param startIndex
+             * @return int
+             */
+            int stringMatchesReverse(const string target, const string pattern, int startIndex) const;
         };
     }
 }
