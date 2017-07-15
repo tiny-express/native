@@ -30,6 +30,11 @@
 
 std::atomic_long Random::seedUniquifierField{8682522807148012L};
 
+long Random::seedOffset = setSeedOffset();
+
+/**
+ * Constructor
+ */
 Random::Random() : Random(seedUniquifier() ^ nanoTime()) {
 }
 
@@ -79,10 +84,48 @@ long Random::seedUniquifier() {
     return next;
 }
 
+/**
+ *
+ *
+ * @param seedVal
+ */
 void Random::resetSeed(long seedVal) {
-
+    char *base = (char *)this;
+    long *seed = (long *)(base+seedOffset);
+    *seed = std::atomic_long{seedVal};
 }
 
+/**
+ * Copy constructor, std::atomic has it's copy constructor deleted, so a copy constructor is require
+ *
+ * @param other
+ */
 Random::Random(const Random &other) {
     this->seed.store(other.seed.load());
+}
+
+/**
+ * Generates the next pseudorandom number
+ *
+ * @param bits
+ * @return the next pseudorandom value from this random number generator's sequence
+ */
+int Random::next(int bits) {
+    long oldSeed = 0;
+    long nextSeed = 0;
+    do {
+        oldSeed = seed.load();
+        nextSeed = ((oldSeed * multiplier + addend) & mask);
+    } while (!seed.compare_exchange_weak(oldSeed, nextSeed));
+    return (int) (nextSeed >> (48 - bits));
+}
+
+/**
+ * Returns the next pseudorandom,
+ * uniformly distributed boolean value from this random number generator's sequence.
+ *
+ * @return true if next(1) return a pseudorandom != 0, false otherwise
+ */
+boolean Random::nextBoolean() {
+    return next(1) != 0;
 }

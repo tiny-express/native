@@ -37,10 +37,7 @@ namespace Java {
         class Random{
 
         private:
-            std::mt19937 mt();
-            std::uniform_real_distribution<double> dist(double a, double b);
-
-            std::atomic_long seed{0};
+            std::atomic_long seed;
             static std::atomic_long seedUniquifierField;
             static const long multiplier = 0x5DEECE66DL;
             static const long addend = 0xBL;
@@ -49,7 +46,6 @@ namespace Java {
             boolean haveNextGaussian = false;
             double nextNextGaussian;
             static long seedOffset;
-
         public:
             // IllegalArgumentException messages
             const String BadBound = "bound must be positive";
@@ -68,6 +64,10 @@ namespace Java {
             //void writeObject(ObjectOutputStream s)
 
             long nanoTime();
+
+            static long setSeedOffset() {
+                return offsetof(Random, seed);
+            }
 
         protected:
             int next(int bits);

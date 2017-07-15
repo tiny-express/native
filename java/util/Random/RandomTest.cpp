@@ -39,6 +39,7 @@ TEST (JavaUtil, RandomConstructor){
     ASSERT_TRUE(random2.getSeed() != 0);
 }
 
-TEST (JavaUtil, InitialScramble){
-
+TEST (JavaUtil, Boolean){
+    Random random1;
+    //ASSERT_TRUE(random1.nextBoolean());
 }
