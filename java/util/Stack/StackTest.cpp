@@ -194,6 +194,16 @@ TEST(JavaLang, StackPeek) {
     String stringResult = peekStringStack.peek();
     ASSERT_STR(stringResult.toString(), pushString3.toString());
     ASSERT_EQUAL(3, peekStringStack.size());// check size to make sure the top element is not removed
+
+    // Given an empty stack
+    Stack<int> emptyStack;
+    // Test if peek() throw IOException("index is out of range")
+    try{
+        emptyStack.peek();
+    }
+    catch (Exception e){
+        ASSERT_STR("index is out of range", e.getMessage().toString());
+    }
 }
 
 TEST(JavaLang, StackPop) {
@@ -247,6 +257,16 @@ TEST(JavaLang, StackPop) {
     String stringResult = popStringStack.pop();
     ASSERT_STR(stringResult.toString(), pushString3.toString());
     ASSERT_EQUAL(2, popStringStack.size());// check size to make sure the top element is removed
+
+    // Given an empty stack
+    Stack<int> emptyStack;
+    // Test if peek() throw IOException("index is out of range")
+    try{
+        emptyStack.pop();
+    }
+    catch (Exception e){
+        ASSERT_STR("index is out of range", e.getMessage().toString());
+    }
 }
 
 TEST(JavaLang, StackSearch) {

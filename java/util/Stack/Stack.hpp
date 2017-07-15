@@ -28,7 +28,9 @@
 #define NATIVE_JAVA_STACK_LIST_HPP
 
 #include "../Vector/Vector.hpp"
+#include "../../lang/IOException/IOException.hpp"
 
+using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
@@ -57,7 +59,7 @@ namespace Java {
             E peek() {
                 int len = this->size();
                 if (len == 0) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IOException("index is out of range");
                 }
                 return this->elementAt(len - 1);
             }
