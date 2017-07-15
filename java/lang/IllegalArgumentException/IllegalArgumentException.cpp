@@ -24,31 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../unit_test.h"
+#include "IllegalArgumentException.hpp"
+#include "../../Lang.hpp"
+
+using namespace Java::Lang;
+
+IllegalArgumentException::IllegalArgumentException() : Exception::Exception() {
 }
 
-#include "Random.hpp"
-
-TEST (JavaUtil, RandomConstructor) {
-    Random random1;
-    ASSERT_TRUE(random1.getSeed() != 0);
-
-    long seed = 60;
-    Random random2 = Random(seed);
-    ASSERT_TRUE(random2.getSeed() != 0);
+IllegalArgumentException::IllegalArgumentException(String message) : Exception::Exception(message) {
 }
 
-TEST (JavaUtil, nextInt) {
-    Random random1;
-    int intMax = 0x7fffffff;
-    int intMin = 0x80000000;
-    for(int index = 0; index < 10; index ++){
-        int a = random1.nextInt();
-        ASSERT_TRUE( a >= intMin && a <= intMax);
-    }
+IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause) : Exception::Exception(message, cause) {
 }
 
-TEST (JavaUtil, nextIntWithBound) {
-
+IllegalArgumentException::IllegalArgumentException(Throwable *cause) : Exception::Exception(cause) {
 }

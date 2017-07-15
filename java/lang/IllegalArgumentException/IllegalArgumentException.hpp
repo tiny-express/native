@@ -24,31 +24,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../unit_test.h"
-}
+#ifndef NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
+#define NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
 
-#include "Random.hpp"
 
-TEST (JavaUtil, RandomConstructor) {
-    Random random1;
-    ASSERT_TRUE(random1.getSeed() != 0);
+#include "../Exception/Exception.hpp"
 
-    long seed = 60;
-    Random random2 = Random(seed);
-    ASSERT_TRUE(random2.getSeed() != 0);
-}
-
-TEST (JavaUtil, nextInt) {
-    Random random1;
-    int intMax = 0x7fffffff;
-    int intMin = 0x80000000;
-    for(int index = 0; index < 10; index ++){
-        int a = random1.nextInt();
-        ASSERT_TRUE( a >= intMin && a <= intMax);
+namespace Java {
+    namespace Lang {
+        //TODO change to RuntimeException when merge from string builder
+        class IllegalArgumentException : public Exception {
+        public:
+            IllegalArgumentException();
+            IllegalArgumentException(String message);
+            IllegalArgumentException(String message, Throwable *cause);
+            IllegalArgumentException(Throwable *cause);
+        };
     }
 }
 
-TEST (JavaUtil, nextIntWithBound) {
 
-}
+#endif //NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
