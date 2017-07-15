@@ -386,19 +386,19 @@ StringBuilder StringBuilder::insert(int offset, const string target) {
     return *this;
 }
 
-int StringBuilder::lastIndexOf(const String &target) {
+int StringBuilder::lastIndexOf(const String &target) const {
     return this->lastIndexOf(target.toString());
 }
 
-int StringBuilder::lastIndexOf(const string target) {
+int StringBuilder::lastIndexOf(const string target) const {
     return this->stringMatchesReverse(this->toString().toString(), target, this->currentLength);
 }
 
-int StringBuilder::lastIndexOf(const String &target, int fromIndex) {
+int StringBuilder::lastIndexOf(const String &target, int fromIndex) const {
     return this->lastIndexOf(target.toString(), fromIndex);
 }
 
-int StringBuilder::lastIndexOf(const string target, int fromIndex) {
+int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
     return this->stringMatchesReverse(this->toString().toString(), target, fromIndex);
 }
 

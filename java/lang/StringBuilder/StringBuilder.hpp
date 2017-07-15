@@ -562,7 +562,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int lastIndexOf(const String &target);
+            int lastIndexOf(const String &target) const;
 
             /**
              * This method accepts a string as an argument, if the string argument occurs one or more times as a substring within this object,
@@ -572,7 +572,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int lastIndexOf(const string target);
+            int lastIndexOf(const string target) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -582,7 +582,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int lastIndexOf(const String &target, int fromIndex);
+            int lastIndexOf(const String &target, int fromIndex) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -592,7 +592,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int lastIndexOf(const string target, int fromIndex);
+            int lastIndexOf(const string target, int fromIndex) const;
 
             /**
              * Returns the length (character count).
