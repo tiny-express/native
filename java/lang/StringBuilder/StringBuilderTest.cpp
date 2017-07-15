@@ -235,6 +235,19 @@ TEST(JavaLang, StringBuilderInsert) {
     ASSERT_STR("ay23bc", stringBuilder7.toString().toString());
 }
 
+TEST(JavaLang, StringBuilderLastIndexOf) {
+    StringBuilder stringBuilder((const string)"Welcome to Vietnam");
+    ASSERT_STR("Welcome to Vietnam", stringBuilder.toString().toString());
+    ASSERT_EQUAL(11, stringBuilder.lastIndexOf((const string)"Vietnam"));
+    ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam")));
+    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 11));
+    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf(String("Vietnam"), 11));
+    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 12));
+    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf(String("Vietnam"), 12));
+    ASSERT_EQUAL(11, stringBuilder.lastIndexOf((const string)"Vietnam", stringBuilder.length()));
+    ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
+}
+
 TEST(JavaLang, StringBuilderLength) {
     String aString("Hello! I'm a String");
     StringBuilder stringBuilder(aString);

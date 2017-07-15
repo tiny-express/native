@@ -555,8 +555,9 @@ namespace Java {
             StringBuilder insert(int offset, const string target);
 
             /**
-             * Returns the index within this string of the rightmost occurrence of the specified substring.
-             * The rightmost empty string "" is considered to occur at the index value 'length()'.
+             * This method accepts a String as an argument, if the string argument occurs one or more times as a substring within this object,
+             * then it returns the index of the first character of the last such substring is returned.
+             * If it does not occur as a substring, -1 is returned.
              *
              * @param target
              * @return int
@@ -564,8 +565,9 @@ namespace Java {
             int lastIndexOf(const String &target);
 
             /**
-             * Returns the index within this string of the rightmost occurrence of the specified substring.
-             * The rightmost empty string "" is considered to occur at the index value 'length()'.
+             * This method accepts a string as an argument, if the string argument occurs one or more times as a substring within this object,
+             * then it returns the index of the first character of the last such substring is returned.
+             * If it does not occur as a substring, -1 is returned.
              *
              * @param target
              * @return int
@@ -573,7 +575,8 @@ namespace Java {
             int lastIndexOf(const string target);
 
             /**
-             * Returns the index within this string of the last occurrence of the specified substring.
+             * This method returns the index within this string of the last occurrence of the specified substring,
+             * searching backward starting at the specified index.
              *
              * @param target
              * @param fromIndex
@@ -582,7 +585,8 @@ namespace Java {
             int lastIndexOf(const String &target, int fromIndex);
 
             /**
-             * Returns the index within this string of the last occurrence of the specified substring.
+             * This method returns the index within this string of the last occurrence of the specified substring,
+             * searching backward starting at the specified index.
              *
              * @param target
              * @param fromIndex
@@ -652,7 +656,8 @@ namespace Java {
         private:
 
             /**
-             * This function builds a "Next Table" that depending on a specified 'pattern'.
+             * This method builds a "Next Table" that depending on a specified 'pattern'.
+             * "Next Table" is a friendly name of "partial match" table (also known as "failure function") in Knuth-Morris-Pratt algorithm.
              *
              * @param pattern
              * @return int *
@@ -660,7 +665,8 @@ namespace Java {
             int *initializeNextTable(const string pattern) const;
 
             /**
-             * This function finds the first starting index in the 'target' that matches the 'pattern' by using Knuth-Morris-Pratt algorithm.
+             * This method returns the index within this string of the first occurrence of the specified substring,
+             * starting at the specified index by using Knuth-Morris-Pratt algorithm.
              *
              * @param target
              * @param pattern
@@ -670,7 +676,8 @@ namespace Java {
             int stringMatches(const string target, const string pattern, int startIndex) const;
 
             /**
-             * This function finds the last starting index in the 'target' that matches the 'pattern' by using Knuth-Morris-Pratt algorithm.
+             * This method returns the index within this string of the last occurrence of the specified substring,
+             * searching backward starting at the specified index by using Knuth-Morris-Pratt algorithm.
              *
              * @param target
              * @param pattern

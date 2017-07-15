@@ -387,19 +387,19 @@ StringBuilder StringBuilder::insert(int offset, const string target) {
 }
 
 int StringBuilder::lastIndexOf(const String &target) {
-
+    return this->lastIndexOf(target.toString());
 }
 
 int StringBuilder::lastIndexOf(const string target) {
-
+    return this->stringMatchesReverse(this->toString().toString(), target, this->currentLength);
 }
 
 int StringBuilder::lastIndexOf(const String &target, int fromIndex) {
-
+    return this->lastIndexOf(target.toString(), fromIndex);
 }
 
 int StringBuilder::lastIndexOf(const string target, int fromIndex) {
-
+    return this->stringMatchesReverse(this->toString().toString(), target, fromIndex);
 }
 
 int StringBuilder::length() const {
@@ -554,12 +554,12 @@ int StringBuilder::stringMatchesReverse(const string target, const string patter
     int lengthOfPattern = (int)strlen(pattern);
     int lengthOfTarget = (int)strlen(target);
 
-    int rightIndex = lengthOfTarget - lengthOfPattern;
     if (startIndex < 0) {
         return -1;
     }
 
-    if (startIndex > rightIndex) {
+    int rightIndex = lengthOfTarget - lengthOfPattern;
+    if (startIndex < rightIndex) {
         startIndex = rightIndex;
     }
 
