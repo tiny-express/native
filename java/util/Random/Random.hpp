@@ -43,14 +43,13 @@ namespace Java {
             static const long addend = 0xBL;
             static constexpr long mask = (1L << 48) - 1;
             static constexpr double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53)
-            boolean haveNextGaussian = false;
+            boolean haveNextNextGaussian = false;
             double nextNextGaussian;
             static long seedOffset;
+
         public:
             // IllegalArgumentException messages
             const String BadBound = "bound must be positive";
-            const String BadRange = "bound must be greater than origin";
-            const String BadSize  = "size must be non-negative";
 
         private:
             long initialScramble(long seed);
@@ -78,6 +77,7 @@ namespace Java {
             Random(long seed);
 
             Random(const Random& other);
+
             //DoubleStream doubles();
 
             //DoubleStream doubles(long streamSize);
@@ -86,11 +86,11 @@ namespace Java {
 
             //DoubleStream doubles(long streamSize, double randomNumberOrigin,double randomNumberBound);
 
-            double internalNextDouble(double origin, double bound);
+            //double internalNextDouble(double origin, double bound);
 
-            int internalNextInt(int origin, int bound);
+            //int internalNextInt(int origin, int bound);
 
-            long internalNextLong(long origin, long bound);
+            //long internalNextLong(long origin, long bound);
 
             //IntStream ints();
 
@@ -125,10 +125,6 @@ namespace Java {
             long nextLong();
 
             void setSeed(long seed);
-
-            void operator=(const Random& a){
-                this->seed.store(a.seed.load());
-            }
 
             //For test
             long getSeed(){

@@ -42,11 +42,13 @@ TEST (JavaUtil, RandomConstructor) {
 TEST (JavaUtil, nextInt) {
     // Given a random number generator
     Random random1;
+
+    //TODO change to Integer::MAX_VALUE and Integer::MIN_VALUE
     int intMax = 0x7fffffff;
     int intMin = 0x80000000;
 
     // Test 10 number
-    for (int index = 0; index < 10; index ++) {
+    for (int index = 0; index < 100; index++) {
         int a = random1.nextInt();
         ASSERT_TRUE( a >= intMin && a <= intMax); // Check if the return value is in Integer range
     }
@@ -67,7 +69,7 @@ TEST (JavaUtil, nextIntWithBound) {
 
     // Test nextInt(bound) with bound = 100
     int bound = 100;
-    for (int index = 0; index < 10; index ++) {
+    for (int index = 0; index < 100; index++) {
         int a = random1.nextInt(bound);
         ASSERT_TRUE( a >= 0 && a < bound); // Check if the return value is in [0, bound)
     }
@@ -91,8 +93,41 @@ TEST (JavaUtil, NextDouble) {
     // Given a random number generator
     Random random1;
     // Test if every generated double is in [0, 1) range
-    for (int index = 0; index < 10; index ++) {
+    for (int index = 0; index < 100; index ++) {
         double generatedDouble = random1.nextDouble();
         ASSERT_TRUE(generatedDouble >= 0 && generatedDouble < 1.0);
     }
+}
+
+TEST (JavaUtil, NextLong) {
+    // Given a random number generator
+    Random random1;
+    // Test if every generated long is in long range
+    //TODO change to Long::MAX_VALUE and Long::MIN_VALUE
+    long longMax = 0x7fffffffffffffffL;
+    long longMin = 0x8000000000000000L;
+    for (int index = 0; index < 100; index++) {
+        double generatedLong = random1.nextLong();
+        ASSERT_TRUE(generatedLong >= longMin && generatedLong <= longMax);
+    }
+}
+
+TEST (JavaUtil, NextFloat) {
+    // Given a random number generator
+    Random random1;
+    // Test if every generated float is in [0, 1) range
+    for (int index = 0; index < 100; index++) {
+        double generatedFloat = random1.nextFloat();
+        ASSERT_TRUE(generatedFloat >= 0 && generatedFloat < 1.0);
+    }
+}
+
+TEST (JavaUtil, SetSeed) {
+    // Given a random number generator
+    Random random1;
+    // Test
+    random1.setSeed(100);
+    long expectResult = 25214903817; //(seed ^ 0x5DEECE66DL) & ((1L << 48) - 1)
+    long actualResult = random1.getSeed();
+    ASSERT_EQUAL(expectResult, actualResult);
 }

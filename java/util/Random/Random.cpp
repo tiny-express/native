@@ -26,11 +26,18 @@
 
 
 #include <chrono>
+#include <functional>
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
-std::atomic_long Random::seedUniquifierField{8682522807148012L};
+/**
+ * Set seedUniquifierField
+ */
+std::atomic_long Random::seedUniquifierField {8682522807148012L};
 
+/**
+ * Set seed offset;
+ */
 long Random::seedOffset = setSeedOffset();
 
 /**
@@ -44,7 +51,7 @@ Random::Random() : Random(seedUniquifier() ^ nanoTime()) {
  *
  * @return long
  */
-long Random::nanoTime(){
+long Random::nanoTime() {
     auto now = std::chrono::system_clock::now();
     auto duration = now.time_since_epoch();
     auto nanosecond = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
@@ -86,14 +93,14 @@ long Random::seedUniquifier() {
 }
 
 /**
- *
+ * Reset the seed to a long seed value
  *
  * @param seedVal
  */
 void Random::resetSeed(long seedVal) {
-    char *base = (char *)this;
-    long *seed = (long *)(base+seedOffset);
-    *seed = std::atomic_long{seedVal};
+    char *base = (char *) this;
+    long *seed = (long *) (base+seedOffset);
+    *seed = std::atomic_long {seedVal};
 }
 
 /**
@@ -146,19 +153,20 @@ int Random::nextInt() {
  * and the specified value (exclusive), drawn from this random number generator's sequence.
  *
  * @param bound
- * @return
+ * @return int
+ * @throw IllegalArgumentException("bound must be positive");
  */
 int Random::nextInt(int bound) {
     if (bound <= 0)
-        throw IllegalArgumentException("bound must be positive");
+        throw IllegalArgumentException(BadBound);
 
     if (bound & (bound - 1) == 0)
-        return (int)((bound * (long)next(31)) >> 31);
+        return (int) ((bound * (long) next(31)) >> 31);
     int bits, val;
     do {
         bits = next(31);
         val = bits % bound;
-    } while (bits - val + (bound-1) < 0);
+    } while (bits - val + (bound - 1) < 0);
     return val;
 }
 
@@ -170,19 +178,80 @@ int Random::nextInt(int bound) {
  */
 void Random::nextBytes(Array<byte> *bytes) {
     int len = bytes->length;
-    int index =0;
+    int index = 0;
     while (index < len) {
         int randomNumber = nextInt();
         //TODO change to Math::min when merge Math, change 4 = Integer::SIZE/BYTE::SIZE
         int n = (len - index) <= 4 ? (len - index) : 4;
-        for (n; n > 0; --n){
+        for (n; n >= 1; n--){
             index++;
-            randomNumber >>=8;
+            //TODO change to BYTE::SIZE
+            randomNumber >>= 8;
             bytes->push((byte)randomNumber);
         }
     }
 }
 
+/**
+ * Returns the next pseudorandom,
+ * uniformly distributed double value between 0.0 and 1.0 from this random number generator's sequence.
+ *
+ * @return double
+ */
 double Random::nextDouble() {
-    return (((long)(next(26)) << 27) + next(27)) * DOUBLE_UNIT;
+    return (((long) (next(26)) << 27) + next(27)) * DOUBLE_UNIT;
+}
+
+/**
+ * Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence.
+ *
+ * @return long
+ */
+long Random::nextLong() {
+    return ((long) (next(32)) << 32) + next(32);
+}
+
+/**
+ * Returns the next pseudorandom,
+ * uniformly distributed double value between 0.0 and 1.0 from this random number generator's sequence.
+ *
+ * @return float
+ */
+float Random::nextFloat() {
+    return next(24) / ((float) (1 << 24));
+}
+
+/**
+ * the next pseudorandom, Gaussian ("normally") distributed double value
+ * with mean 0.0 and standard deviation 1.0 from this random number generator's sequence
+ *
+ * @return double
+ */
+double Random::nextGaussian() {
+    if (haveNextNextGaussian) {
+        haveNextNextGaussian = false;
+        return nextNextGaussian;
+        }
+    else {
+        double v1, v2, s;
+        do {
+            v1 = 2 * nextDouble() - 1; // between -1 and 1
+            v2 = 2 * nextDouble() - 1; // between -1 and 1
+            s = v1 * v1 + v2 * v2;
+        } while (s >= 1 || s == 0);
+        double multiplier = sqrt(-2 * log(s) / s);
+        nextNextGaussian = v2 * multiplier;
+        haveNextNextGaussian = true;
+        return v1 * multiplier;
+    }
+}
+
+/**
+ * Sets the seed of this random number generator using a single long seed.
+ *
+ * @param seed
+ */
+void Random::setSeed(long seed) {
+    this->seed.store(initialScramble(seed));
+    haveNextNextGaussian = false;
 }
