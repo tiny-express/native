@@ -42,7 +42,7 @@ void System::out::println(String target) {
 	if (targetCharacters.isEmpty()) {
 		return;
 	}
-	printf("%s\n", targetCharacters);
+	printf("%s\n", targetCharacters.toString());
 	fflush(stdout);
 }
 
