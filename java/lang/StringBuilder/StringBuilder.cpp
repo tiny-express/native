@@ -25,15 +25,19 @@
  */
 
 #include "../StringBuilder/StringBuilder.hpp"
+#include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
-
 using namespace Java::Lang;
 
 StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
 
 StringBuilder::StringBuilder(int capacity) {
+    if (capacity < 0) {
+        throw NegativeArraySizeException();
+    }
+
     this->original = (string)calloc((size_t)capacity, sizeof(char));
     this->currentLength = 0;
     this->currentCapacity = capacity;

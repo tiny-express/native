@@ -59,6 +59,7 @@ namespace Java {
              * Constructs a string builder with no characters in it and an initial capacity specified by the capacity argument.
              *
              * @param capacity
+             * @throw NegativeArraySizeException - if the capacity argument is less than 0.
              */
             StringBuilder(int capacity);
 
