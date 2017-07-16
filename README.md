@@ -1,6 +1,6 @@
  # Native Library
- [![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
- &nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()
+ [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
+ &nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
  &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
  &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
  ![Library Structure](misc/native.png)
@@ -19,19 +19,28 @@ This project is also useful for new developers in practical programming.
 
 ### Getting started
 
-#### Dependencies
-- [x] OpenSSL
-- [x] Zlib
-
 #### Installation
-OS X & Linux
 ```bash
 $ git clone https://github.com/foodtiny/native.git
 $ cmake . && make
 $ sudo make install
 ```
 
+
+### Setup for development
+#### Windows
+Install CgyWin64 with dependencies below:
+- CMake
+- Makefile
+- GCC
+- G++
+
+#### Linux and Mac
+Install with apt-get or brew with dependencies below:
+- CMake
+
 #### Test Driven Development
+Note: `make leak` is ONLY available for Linux - production environment
 ```bash
 $ cmake . && make native_test && make leak
 ```
@@ -141,6 +150,7 @@ All data types are implemented and ready to use in C++ Application
 - [x] char - Java.Lang.Character
 - [x] byte - Java.Lang.Byte (equivalent with `unsigned char`)
 - [x] string - Java.Lang.String (equivalent with `char*`, Java does not have data type `string`)
+- [x] unicode - java.lang.Character (equivalent with `wchar_t`)
 - [x] short - Java.Lang.Short
 - [x] int - Java.Lang.Integer
 - [x] long - Java.Lang.Long

@@ -26,17 +26,70 @@
 
 #ifndef NATIVE_DATETIME_H
 #define NATIVE_DATETIME_H
-#ifdef __linux__
 
+#include "platform.h"
+
+#ifdef LINUX
 #include <stdint.h>
-
-#elif __APPLE__
-#include <mach/mach_time.h>
-#elif defined _WIN32 || defined __CYGWIN__
-typedef __int32 int32_t;
-typedef unsigned __int32 uint32_t;
 #endif
 
-long timestamp();
-char *date(long timestamp, char *format);
+#ifdef DARWIN
+#include <mach/mach_time.h>
+#endif
+
+#include "type.h"
+#include <time.h>
+
+#define SEC_PER_MIN         60
+#define SEC_PER_HOUR        3600
+#define SEC_PER_DAY         86400
+#define MOS_PER_YEAR        12
+#define EPOCH_YEAR          1970
+#define IS_LEAP_YEAR(year)  ( (((year)%4 == 0) && ((year)%100 != 0)) || ((year)%400 == 0) )
+
+static int days_per_month[2][MOS_PER_YEAR] = {
+        { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
+        { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+};
+
+static int days_per_year[2] = {
+        365, 366
+};
+
+/**
+ *  Unix time in seconds
+ *
+ * @param sec
+ * @param min
+ * @param hrs
+ * @param day
+ * @param mon
+ * @param year
+ * @return
+ */
+unsigned long unix_time_in_milliseconds(
+    unsigned int millisecond,
+    unsigned int second,
+    unsigned int minute,
+    unsigned int hour,
+    unsigned int day,
+    unsigned int month,
+    unsigned int year
+);
+
+/**
+ * Get unix timestamp
+ *
+ * @return unsigned long
+ */
+unsigned long timestamp();
+
+/**
+ *
+ * @param timestamp
+ * @param format
+ * @return
+ */
+string date(unsigned long timestamp, char *format);
+
 #endif

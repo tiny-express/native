@@ -8,13 +8,9 @@ compiler:
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
-- sudo pip install -r misc/requirements.txt
-- sudo python misc/server.py &
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
 - ./misc/memory_check
-after_script:
-- sudo pkill python
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
