@@ -229,9 +229,8 @@ int Double::compare(double double1, double double2) {
     if (thisBits < anotherBits) {
             return -1;
     }
-    if (thisBits > anotherBits){
-            return 1;
-    }
+
+    return 1;
 }
 
 int Double::compareTo(Double anotherDouble) {
@@ -245,16 +244,17 @@ long Double::doubleToLongBits(double valueDouble) {
 long Double::doubleToRawLongBits(double doubleInput) {
     string doubleInputToBinary64StringType;
     long resultDoubleToRawLongBits;
-    int tempValue ;
+    int tempValue;
     int exponent;
 
     doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
 
     exponent = 62;
-    tempValue =0;
+    tempValue = 0;
     resultDoubleToRawLongBits = 0;
 
-    for (int i=1; i<=63; i++) {
+    for (int i = 1; i <= 63; i++) {
+
         if (doubleInputToBinary64StringType [i] == '1') {
             tempValue = 1;
         }
@@ -265,6 +265,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
         resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2,exponent);
         exponent --;
     }
+
     if (doubleInputToBinary64StringType[0] == '1') {
         resultDoubleToRawLongBits =  (-1) * resultDoubleToRawLongBits;
     }
@@ -394,7 +395,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
     string doubleInputNormalizeForm = (string) malloc (280*sizeof(char));
     string resultDoubleToBinary32StringType = (string) malloc (33*sizeof(char));
 
-    int powerExponentBase2 =0;
+    int powerExponentBase2 = 0;
     int integerPartDoubleInput;
 
     int sizeOfIntegerPartNormalizeForm;
@@ -407,7 +408,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
     int index;
     int indexOfDotDoubleInputNormalizeForm;
     int indexFirstBit1DoubleInputNormalizeForm;
-    int indexBeginFractionPartResultDoubleToBinary32StringType =0;
+    int indexBeginFractionPartResultDoubleToBinary32StringType = 0;
 
     int exponentBiasBinary32 = 127;
     int exponentDoubleInput;
@@ -470,7 +471,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
     doubleInput = fabs(doubleInput);
 
     /** Get size of integerPartNormalizeForm  */
-    integerPartDoubleInput = (int) floor(doubleInput);
+    integerPartDoubleInput = (int) floor(doubleInput); // TODO replace by java.lang.Math when it is completed.
     sizeOfIntegerPartNormalizeForm = 0;
 
     if (integerPartDoubleInput == 0) {
