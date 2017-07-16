@@ -174,6 +174,7 @@ namespace Java {
              * @param offset
              * @param length
              * @return StringBuilder
+             * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
              */
             StringBuilder append(const Array<Character> &target, int offset, int length);
 
@@ -186,6 +187,7 @@ namespace Java {
              * @param offset
              * @param length
              * @return StringBuilder
+             * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
              */
             StringBuilder append(const Array<char> &target, int offset, int length);
 
@@ -204,6 +206,7 @@ namespace Java {
              * @param start
              * @param end
              * @return StringBuilder
+             * @throw IndexOutOfBoundsException - if start is negative, or start is greater than end or end is greater than target.length()
              */
             StringBuilder append(const CharSequence &target, int start, int end);
 
@@ -390,6 +393,7 @@ namespace Java {
              * @param start
              * @param end
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
              */
             StringBuilder deleteRange(int start, int end);
 
@@ -399,6 +403,7 @@ namespace Java {
              *
              * @param index
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the index is negative or greater than or equal to length().
              */
             StringBuilder deleteCharAt(int index);
 
@@ -421,6 +426,12 @@ namespace Java {
              * @param sourceEnd
              * @param target
              * @param targetBegin
+             * @throw IndexOutOfBoundsException - if any of the following is true:
+             *        sourceBegin is negative;
+             *        targetBegin is negative;
+             *        the sourceBegin argument is greater than the sourceEnd argument;
+             *        srcEnd is greater than this.length();
+             *        targetBegin+sourceEnd-sourceBegin is greater than target.length.
              */
             void getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const;
 
@@ -454,7 +465,7 @@ namespace Java {
              *
              * @param target
              * @param fromIndex
-             * @return
+             * @return int
              */
             int indexOf(const string target, int fromIndex) const;
 
@@ -464,6 +475,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, boolean target);
 
@@ -473,6 +485,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Boolean &target);
 
@@ -482,6 +495,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, char target);
 
@@ -491,6 +505,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Character &target);
 
@@ -500,6 +515,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Array<char> &target);
 
@@ -509,6 +525,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Array<Character> &target);
 
@@ -539,7 +556,7 @@ namespace Java {
              * @param length
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
-             *        or offset or length are negative, or (offset+length) is greater than target.length
+             * or offset or length are negative, or (offset+length) is greater than target.length
              */
             StringBuilder insert(int index, const Array<Character> &target, int offset, int length);
 
@@ -551,6 +568,7 @@ namespace Java {
              * @param destinationOffset
              * @param target
              * @return StringBuilder
+             * @throw IndexOutOfBoundsException - if the destinationOffset is invalid.
              */
             StringBuilder insert(int destinationOffset, const CharSequence &target);
 
@@ -565,6 +583,8 @@ namespace Java {
              * @param start
              * @param end
              * @return StringBuilder
+             * @throw IndexOutOfBoundsException - if destinationOffset is negative or greater than length(),
+             * or start or end are negative, or start is greater than end or end is greater than target.length()
              */
             StringBuilder insert(int destinationOffset, const CharSequence &target, int start, int end);
 
@@ -574,6 +594,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Double &target);
 
@@ -583,6 +604,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, double target);
 
@@ -592,6 +614,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Float &target);
 
@@ -601,6 +624,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, float target);
 
@@ -610,6 +634,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Integer &target);
 
@@ -619,6 +644,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, int target);
 
@@ -628,6 +654,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const Long &target);
 
@@ -637,6 +664,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, long target);
 
@@ -646,6 +674,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
 //          StringBuilder insert(int offset, const Object &target); // FIXME: String::valueOf(Object) doesn't exist.
 
@@ -657,6 +686,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder insert(int offset, const String &target);
 
@@ -726,6 +756,9 @@ namespace Java {
              * @param index
              * @param codePointOffset
              * @return int
+             * @throw IndexOutOfBoundsException - if index is negative or larger then the length of this sequence,
+             * or if codePointOffset is positive and the subsequence starting with index has fewer than codePointOffset code points,
+             * or if codePointOffset is negative and the subsequence before index has fewer than the absolute value of codePointOffset code points.
              */
             int offsetByCodePoints(int index, int codePointOffset) const;
 
@@ -754,6 +787,7 @@ namespace Java {
              * @param end
              * @param target
              * @return StringBuilder
+             * @throw StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
              */
             StringBuilder replace(int start, int end, const string target);
 
@@ -772,6 +806,7 @@ namespace Java {
              *
              * @param index
              * @param target
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
              */
             void setCharAt(int index, char target);
 
@@ -782,6 +817,7 @@ namespace Java {
              *
              * @param index
              * @param target
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
              */
             void setCharAt(int index, const Character &target);
 
@@ -789,6 +825,7 @@ namespace Java {
              * Sets the length of the character sequence.
              *
              * @param newLength
+             * @throw IndexOutOfBoundsException - if the newLength argument is negative.
              */
             void setLength(int newLength);
 
@@ -798,7 +835,8 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @return
+             * @return CharSequence
+             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(), or if start is greater than end.
              */
 //          CharSequence subSequence(int start, int end) const;
 
