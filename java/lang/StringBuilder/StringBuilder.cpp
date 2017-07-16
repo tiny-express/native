@@ -242,13 +242,12 @@ int StringBuilder::codePointAt(int index) const {
         throw StringIndexOutOfBoundsException(index);
     }
 
-    Array<char> *pOriginalArray = new Array<char>();
+    Array<char> originalArray;
     int indexOfOriginal;
     for (indexOfOriginal = 0; indexOfOriginal < this->currentLength; indexOfOriginal++) {
-        pOriginalArray->push(this->original[indexOfOriginal]);
+        originalArray.push(this->original[indexOfOriginal]);
     }
-    int result = Character::codePointAt(*pOriginalArray, index);
-    delete pOriginalArray;
+    int result = Character::codePointAt(originalArray, index);
     return result;
 }
 
