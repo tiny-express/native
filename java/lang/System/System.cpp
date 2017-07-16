@@ -47,7 +47,8 @@ void System::out::println(String target) {
 }
 
 long System::currentTimeMillis() {
-	return timestamp();
+	unsigned long timestampInNanoSeconds = timestamp();
+	return (long) timestampInNanoSeconds / 1000;
 }
 
 void System::exit(int status) {
