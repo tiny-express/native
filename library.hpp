@@ -34,8 +34,6 @@
 #include "java/Vendor.hpp"
 #include "java/Util.hpp"
 
-#define self (*this)
-
 // In Java, Java::Lang is imported by default
 using namespace Java::Lang;
 

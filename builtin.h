@@ -40,30 +40,12 @@
 #include <ctype.h>
 #include <memory.h>
 
-// Platform Library
-#ifdef WIN32
-//#include <windows.h>
-#endif
-
-#ifdef __linux__
-#include <pthread.h>
-#endif
-
-
 // Native Library
-//#include "compress.h"
-//#include "crypto.h"
 #include "datetime.h"
 #include "common.h"
 #include "math.h"
-//#include "network.h"
-//#include "network.h"
-#include "storage.h"
 #include "string.h"
 #include "system.h"
-//#include "thread.h"
 #include "type.h"
-//#include "validator.h"
-//#include "vendor.h"
 
 #endif//NATIVE_BUILTIN_H
