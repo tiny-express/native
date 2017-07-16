@@ -26,5 +26,5 @@
 #include "EmptyStackException.hpp"
 
 //TODO change to RuntimeException when merge from StringBuilder
-Java::Util::EmptyStackException::EmptyStackException() : Exception::Exception() {
+EmptyStackException::EmptyStackException() : Exception::Exception() {
 }
