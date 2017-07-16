@@ -110,7 +110,7 @@ namespace Java {
 
             boolean nextBoolean();
 
-            void nextBytes(byte bytes[]);
+            void nextBytes(Array<byte> *bytes);
 
             double nextDouble();
 

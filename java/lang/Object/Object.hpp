@@ -85,6 +85,10 @@ public:
 		}
 		this->length = original.size();
 	}
+
+    Array(int length) {
+        this->length = length;
+    }
 	~Array() {}
 	int length;
 	ArrayIterator<E> begin() const {

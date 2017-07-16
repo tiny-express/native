@@ -161,3 +161,24 @@ int Random::nextInt(int bound) {
     } while (bits - val + (bound-1) < 0);
     return val;
 }
+
+/**
+ * Generates random bytes and places them into a user-supplied byte array.
+ * The number of random bytes produced is equal to the length of the byte array.
+ *
+ * @param bytes
+ */
+void Random::nextBytes(Array<byte> *bytes) {
+    int len = bytes->length;
+    int index =0;
+    while (index < len) {
+        int randomNumber = nextInt();
+        //TODO change to Math::min when merge Math, change 4 = Integer::SIZE/BYTE::SIZE
+        int n = (len - index) <= 4 ? (len - index) : 4;
+        for (n; n > 0; --n){
+            index++;
+            randomNumber >>=8;
+            bytes->push((byte)randomNumber);
+        }
+    }
+}
