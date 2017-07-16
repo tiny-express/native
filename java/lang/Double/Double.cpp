@@ -31,8 +31,6 @@
 
 using namespace Java::Lang;
 
-int i;
-
 Double::Double() {
 	this->original = 0;
 	this->string_original = string_from_double(this->original);
@@ -218,6 +216,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
     long resultDoubleToRawLongBits;
     int tempValue;
     int exponent;
+    int i;
 
     doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
 
@@ -849,6 +848,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
 
     int tempValue;
     int tempExponent;
+    int i;
 
     // 1. Find signOfResultbinary64StringTypeToDouble
     signOfResultbinary64StringTypeToDouble = 1;
@@ -902,8 +902,9 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
 string Double::longBitsToBinary64StringType(long longBitsInput) {
     string resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
     int index;
+    int i;
 
-    for (i = 0 ; i<=63; i++) {
+    for (i = 0; i<=63; i++) {
         resultLongBitsToBinary64StringType[i] = '0';
     }
 
