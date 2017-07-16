@@ -456,7 +456,7 @@ StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &t
         throw IndexOutOfBoundsException();
     }
     string targetString = target.toString();
-    int lengthOfTarget = target.length();
+    int lengthOfTarget = length_pointer_char(targetString);
     if (start < 0 || end < 0 || start > end || end > lengthOfTarget){
         throw IndexOutOfBoundsException();
     }
