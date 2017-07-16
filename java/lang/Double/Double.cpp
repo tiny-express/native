@@ -361,10 +361,10 @@ double Double::min(double doubleA, double doubleB) {
 
 string Double::doubleToBinary32StringType(double doubleInput)
 {
-    string integerPartNormalizeForm = (string) malloc (25*sizeof(char));
-    string fractionPartNormalizeForm = (string) malloc (25*sizeof(char));
-    string doubleInputNormalizeForm = (string) malloc (280*sizeof(char));
-    string resultDoubleToBinary32StringType = (string) malloc (33*sizeof(char));
+    string integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    string fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    string doubleInputNormalizeForm = (string) malloc (280 * sizeof(char));
+    string resultDoubleToBinary32StringType = (string) malloc (33 * sizeof(char));
 
     int powerExponentBase2 = 0;
     int integerPartDoubleInput;
@@ -386,7 +386,6 @@ string Double::doubleToBinary32StringType(double doubleInput)
 
     double fractionPartDoubleInput;
 
-    /** Assign value '0' to string value */
     for (i = 0 ; i <= 31; i++) {
         doubleInputNormalizeForm[i] = '0';
         resultDoubleToBinary32StringType[i] = '0';
@@ -403,7 +402,6 @@ string Double::doubleToBinary32StringType(double doubleInput)
     doubleInputNormalizeForm[279] = '\0';
     resultDoubleToBinary32StringType[32] = '\0';
 
-    /** Assign value to resultDoubleToBinary32StringType[0] */
     if (doubleInput >= 0) {
         resultDoubleToBinary32StringType[0] = '0';
     }
@@ -412,26 +410,22 @@ string Double::doubleToBinary32StringType(double doubleInput)
         resultDoubleToBinary32StringType[0] = '1';
     }
 
-    /** Check if doubleInput == 0 */
     if(doubleInput == 0){
         goto outPut;
     }
 
-    /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
     if(doubleInput == POSITIVE_INFINITY_DOUBLE){
         strcpy (resultDoubleToBinary32StringType, "01111111100000000000000000000000");
 
         goto outPut;
     }
 
-    /** Check if doubleInput == NEGATIVE_INFINITY_DOUBLE */
     if(doubleInput == NEGATIVE_INFINITY_DOUBLE){
         strcpy (resultDoubleToBinary32StringType, "11111111100000000000000000000000");
 
         goto outPut;
     }
 
-    /** Check if doubleInput == NaN_NUMBER_DOUBLE */
     if(isNaN(doubleInput) == 1){
     strcpy (resultDoubleToBinary32StringType,     "01111111111111111111111111111111");
 
@@ -456,7 +450,6 @@ string Double::doubleToBinary32StringType(double doubleInput)
         }
     }
 
-    /** Assign value to integerPartNormalizeForm */
     integerPartDoubleInput = (int) floor(doubleInput);
     index = sizeOfIntegerPartNormalizeForm -1;
 
@@ -474,7 +467,6 @@ string Double::doubleToBinary32StringType(double doubleInput)
         integerPartDoubleInput = integerPartDoubleInput >> 1;
     }
 
-    /** Assign value to fractionPartNormalizeForm */
     fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
     index = 0;
 
@@ -495,20 +487,15 @@ string Double::doubleToBinary32StringType(double doubleInput)
         fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
     }
 
-    /** Assign value to sizeOfFractionPartNormalizeForm */
     sizeOfFractionPartNormalizeForm = index;
-
-    /** Assign value to doubleInputNormalizeForm */
 
     /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
     for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++) {
         doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
     }
 
-    /** Assign value to indexOfDotDoubleInputNormalizeForm */
     indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
 
-    /** Assign '.' between integerPart and fractionPart */
     doubleInputNormalizeForm [indexOfDotDoubleInputNormalizeForm] = '.';
 
     /** Copy value from fractionPartNormalizeForm
@@ -520,11 +507,9 @@ string Double::doubleToBinary32StringType(double doubleInput)
                 = fractionPartNormalizeForm[i];
     }
 
-    /** Assign value to sizeOfDoubleInputNormalizeForm */
     sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
                                      + sizeOfFractionPartNormalizeForm;
 
-    /** Assign value to indexFirstBit1DoubleInputNormalizeForm */
     indexFirstBit1DoubleInputNormalizeForm = 1;
     for ( i = 0; i <= sizeOfDoubleInputNormalizeForm; i++) {
         if (doubleInputNormalizeForm[i] == '1') {
@@ -533,7 +518,6 @@ string Double::doubleToBinary32StringType(double doubleInput)
         }
     }
 
-    /** Assign value to powerExponentBase2 */
     integerPartDoubleInput =  (int) floor(doubleInput);
     if (integerPartDoubleInput != 0) {
         powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
@@ -545,12 +529,8 @@ string Double::doubleToBinary32StringType(double doubleInput)
                              - indexFirstBit1DoubleInputNormalizeForm;
     }
 
-    /** Assign value to resultDoubleToBinary32StringType */
-
-    /** Assign value to exponentDoubleInput */
     exponentDoubleInput = powerExponentBase2 + exponentBiasBinary32;
 
-    /** Assign value to resultDoubleToBinary32StringType[8 -> 1] */
     index = sizeOfExponentPartBinary32;
 
     while (exponentDoubleInput != 0) {
@@ -567,11 +547,9 @@ string Double::doubleToBinary32StringType(double doubleInput)
         exponentDoubleInput = exponentDoubleInput >> 1;
     }
 
-    /** Assign value to indexBeginFractionPartResultDoubleToBinary32StringType */
     indexBeginFractionPartResultDoubleToBinary32StringType
             = sizeOfExponentPartBinary32 + 1;
 
-    /** Assign value to resultDoubleToBinary32StringType[8 -> 31] */
     index = indexBeginFractionPartResultDoubleToBinary32StringType;
     i = indexFirstBit1DoubleInputNormalizeForm + 1;
 
@@ -599,10 +577,10 @@ string Double::doubleToBinary32StringType(double doubleInput)
 
 string Double::doubleToBinary64StringType(double doubleInput)
 {
-    string integerPartNormalizeForm = (string) malloc (2048*sizeof(char));
-    string fractionPartNormalizeForm = (string) malloc (54*sizeof(char));
-    string doubleInputNormalizeForm = (string) malloc (2102*sizeof(char));
-    string resultDoubleToBinary64StringType = (string) malloc (65*sizeof(char));
+    string integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
+    string fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
+    string doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
+    string resultDoubleToBinary64StringType = (string) malloc (65 * sizeof(char));
 
     int powerExponentBase2 =0;
     int integerPartDoubleInput;
@@ -624,7 +602,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
 
     double fractionPartDoubleInput;
 
-    /** Assign value '0' to string value */
     for (i = 0 ; i<= 63; i++) {
         doubleInputNormalizeForm[i] = '0';
         resultDoubleToBinary64StringType[i] = '0';
@@ -641,7 +618,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
     doubleInputNormalizeForm[2101] = '\0';
     resultDoubleToBinary64StringType[64] = '\0';
 
-    /** Assign value to resultDoubleToBinary64StringType[0] */
     if (doubleInput >= 0) {
         resultDoubleToBinary64StringType[0] = '0';
     }
@@ -650,12 +626,10 @@ string Double::doubleToBinary64StringType(double doubleInput)
         resultDoubleToBinary64StringType[0] = '1';
     }
 
-    /** Check if doubleInput == 0 */
     if(doubleInput == 0){
         goto outPut;
     }
 
-    /** Check if doubleInput == POSITIVE_INFINITY_DOUBLE */
     if(doubleInput == POSITIVE_INFINITY_DOUBLE){
         strcpy (resultDoubleToBinary64StringType,
                 "0111111111110000000000000000000000000000000000000000000000000000");
@@ -663,7 +637,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
         goto outPut;
     }
 
-    /** Check if doubleInput == NEGATIVE_INFINITY_DOUBLE */
     if(doubleInput == NEGATIVE_INFINITY_DOUBLE){
         strcpy (resultDoubleToBinary64StringType,
                 "1111111111110000000000000000000000000000000000000000000000000000");
@@ -671,7 +644,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
         goto outPut;
     }
 
-    /** Check if doubleInput == NaN_DOUBLE */
     if(isNaN(doubleInput) == 1){
         strcpy (resultDoubleToBinary64StringType,
                 "0111111111111111111111111111111111111111111111111111111111111111");
@@ -697,7 +669,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
         }
     }
 
-    /** Assign value to integerPartNormalizeForm */
     integerPartDoubleInput = (int) floor(doubleInput);
     index = sizeOfIntegerPartNormalizeForm -1;
 
@@ -715,7 +686,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
         integerPartDoubleInput = integerPartDoubleInput >> 1;
     }
 
-    /** Assign value to fractionPartNormalizeForm */
     fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
     index = 0;
 
@@ -736,20 +706,15 @@ string Double::doubleToBinary64StringType(double doubleInput)
         fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
     }
 
-    /** Assign value to sizeOfFractionPartNormalizeForm */
     sizeOfFractionPartNormalizeForm = index;
-
-    /** Assign value to doubleInputNormalizeForm */
 
     /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
     for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++) {
         doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
     }
 
-    /** Assign value to indexOfDotDoubleInputNormalizeForm */
     indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
 
-    /** Assign '.' between integerPart and fractionPart */
     doubleInputNormalizeForm [indexOfDotDoubleInputNormalizeForm] = '.';
 
     /** Copy value from fractionPartNormalizeForm
@@ -761,7 +726,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
                 = fractionPartNormalizeForm[i];
     }
 
-    /** Assign value to sizeOfDoubleInputNormalizeForm */
     sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
                                      + sizeOfFractionPartNormalizeForm;
 
@@ -774,7 +738,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
         }
     }
 
-    /** Assign value to powerExponentBase2 */
     integerPartDoubleInput =  (int) floor(doubleInput);
     if (integerPartDoubleInput != 0) {
         powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
@@ -786,12 +749,8 @@ string Double::doubleToBinary64StringType(double doubleInput)
                              - indexFirstBit1DoubleInputNormalizeForm;
     }
 
-    /** Assign value to resultDoubleToBinary64StringType */
-
-    /** Assign value to exponentDoubleInput */
     exponentDoubleInput = powerExponentBase2 + exponentBiasBinary64;
 
-    /** Assign value to resultDoubleToBinary64StringType[11 -> 1] */
     index = sizeOfExponentPartBinary64;
 
     while (exponentDoubleInput != 0) {
@@ -808,11 +767,9 @@ string Double::doubleToBinary64StringType(double doubleInput)
         exponentDoubleInput = exponentDoubleInput >> 1;
     }
 
-    /** Assign value to indexBeginFractionPartResultDoubleToBinary64StringType */
     indexBeginFractionPartResultDoubleToBinary64StringType
             = sizeOfExponentPartBinary64 + 1;
 
-    /** Assign value to resultDoubleToBinary64StringType[11 -> 63] */
     index = indexBeginFractionPartResultDoubleToBinary64StringType;
     i = indexFirstBit1DoubleInputNormalizeForm + 1;
 
@@ -933,7 +890,6 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
     return resultLongBitsToBinary64StringType;
 }
 
-// TODO Throw exception
 Double Double::valueOf(String stringInput) {
         return Double::parseDouble(stringInput);
 }

@@ -459,10 +459,10 @@ namespace Java {
             string toString() const;
 
             /**
-             * Returns a string representation of the {@code double}
+             * Returns a string representation of the {double}
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param   d   the {@code double} to be converted.
+             * @param   d   the {double} to be converted.
              * @return a string representation of the argument.
              */
             static String toString(double d);
@@ -476,42 +476,42 @@ namespace Java {
             static Double parseDouble(String target);
 
             /**
-             * Returns the value of this {@code Double} as a {@code byte}
+             * Returns the value of this {Double} as a {byte}
              * after a narrowing primitive conversion.
              *
-             * @return  the {@code double} value represented by this object
-             *          converted to type {@code byte}
+             * @return  the {double} value represented by this object
+             *          converted to type {byte}
              */
             byte byteValue() const ;
 
             /**
-             * Compares the two specified {@code double} values. The sign
+             * Compares the two specified {double} values. The sign
              * of the integer value returned is the same as that of the
              * integer that would be returned by the call:
              *    Double(double1).compareTo(Double(d2))
              *
-             * @param   double1        the first {@code double} to compare
-             * @param   double2        the second {@code double} to compare
-             * @return  the value {@code 0} if {@code double1} is
-             *          numerically equal to {@code double2}; a value less than
-             *          {@code 0} if {@code double1} is numerically less than
-             *          {@code double2}; and a value greater than {@code 0}
-             *          if {@code double1} is numerically greater than
-             *          {@code double2}.
+             * @param   double1        the first {double} to compare
+             * @param   double2        the second {double} to compare
+             * @return  the value {0} if {double1} is
+             *          numerically equal to {double2}; a value less than
+             *          {0} if {double1} is numerically less than
+             *          {double2}; and a value greater than {0}
+             *          if {double1} is numerically greater than
+             *          {double2}.
              */
             static int compare(double double1, double double2);
 
             /**
-             * Compares two {@code Double} objects numerically.
+             * Compares two {Double} objects numerically.
              *
-             * @param   anotherDouble   the {@code Double} to be compared.
-             * @return  the value {@code 0} if {@code anotherDouble} is
-             *          numerically equal to this {@code Double}; a value
-             *          less than {@code 0} if this {@code Double}
-             *          is numerically less than {@code anotherDouble};
-             *          and a value greater than {@code 0} if this
-             *          {@code Double} is numerically greater than
-             *          {@code anotherDouble}.
+             * @param   anotherDouble   the {Double} to be compared.
+             * @return  the value {0} if {anotherDouble} is
+             *          numerically equal to this {Double}; a value
+             *          less than {0} if this {Double}
+             *          is numerically less than {anotherDouble};
+             *          and a value greater than {0} if this
+             *          {Double} is numerically greater than
+             *          {anotherDouble}.
              */
             int compareTo(Double anotherDouble);
 
@@ -520,7 +520,7 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout.
              *
-             * @param   value   a {@code double} precision floating-point number.
+             * @param   value   a {double} precision floating-point number.
              * @return the bits that represent the floating-point number.
              */
             static long doubleToLongBits(double valueDouble);
@@ -530,9 +530,8 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
-             * @param   value   a {@code double} precision floating-point number.
+             * @param   value   a {double} precision floating-point number.
              * @return the bits that represent the floating-point number.
-             * @since 1.3
              */
             static long doubleToRawLongBits(double doubleInput);
 
@@ -540,165 +539,164 @@ namespace Java {
              * Compares this object against the specified object.
              *
              * @param   obj   the object to compare with.
-             * @return  {@code true} if the objects are the same;
-             *          {@code false} otherwise.
+             * @return  {true} if the objects are the same;
+             *          {false} otherwise.
              * @see java.lang.Double#doubleToLongBits(double)
              */
             boolean equals(const Double &object) const;
 
             /**
-             * Returns a hash code for this {@code Double} object.
+             * Returns a hash code for this {Double} object.
              *
-             * @return  a {@code hash code} value for this object.
+             * @return  a {hash code} value for this object.
              */
             long hashCode();
 
             /**
-             * Returns a hash code for a {@code double} value; compatible with
-             * {@code Double.hashCode()}.
+             * Returns a hash code for a {double} value; compatible with
+             * {Double.hashCode()}.
              *
              * @param value the value to hash
-             * @return a hash code value for a {@code double} value.
+             * @return a hash code value for a {double} value.
              */
             static long hashCode(double doubleInput);
 
             /**
-             * Returns {@code true} if the argument is a finite floating-point
-             * value; returns {@code false} otherwise (for NaN and infinity
+             * Returns {true} if the argument is a finite floating-point
+             * value; returns {false} otherwise (for NaN and infinity
              * arguments).
              *
-             * @param d the {@code double} value to be tested
-             * @return {@code true} if the argument is a finite
-             * floating-point value, {@code false} otherwise.
+             * @param d the {double} value to be tested
+             * @return {true} if the argument is a finite
+             * floating-point value, {false} otherwise.
              */
             static boolean isFinite(double d);
 
             /**
-             * Returns {@code true} if the specified number is infinitely
-             * large in magnitude, {@code false} otherwise.
+             * Returns {true} if the specified number is infinitely
+             * large in magnitude, {false} otherwise.
              *
              * @param   v   the value to be tested.
-             * @return  {@code true} if the value of the argument is positive
-             *          infinity or negative infinity; {@code false} otherwise.
+             * @return  {true} if the value of the argument is positive
+             *          infinity or negative infinity; {false} otherwise.
              */
             static boolean isInfinite(double v);
 
             /**
-            * Returns {@code true} if this {@code Double} value is
-            * infinitely large in magnitude, {@code false} otherwise.
+            * Returns {true} if this {Double} value is
+            * infinitely large in magnitude, {false} otherwise.
             *
-            * @return  {@code true} if the value represented by this object is
+            * @return  {true} if the value represented by this object is
             *          positive infinity or negative infinity;
-            *          {@code false} otherwise.
+            *          {false} otherwise.
             */
             boolean isInfinite();
 
             /**
-             * Returns {@code true} if the specified number is a
-             * Not-a-Number (NaN) value, {@code false} otherwise.
+             * Returns {true} if the specified number is a
+             * Not-a-Number (NaN) value, {false} otherwise.
              *
              * @param   v   the value to be tested.
-             * @return  {@code true} if the value of the argument is NaN;
-             *          {@code false} otherwise.
+             * @return  {true} if the value of the argument is NaN;
+             *          {false} otherwise.
              */
             static boolean isNaN(double v);
 
             /**
-             * Returns {@code true} if this {@code Double} value is
-             * a Not-a-Number (NaN), {@code false} otherwise.
+             * Returns {true} if this {Double} value is
+             * a Not-a-Number (NaN), {false} otherwise.
              *
-             * @return  {@code true} if the value represented by this object is
-             *          NaN; {@code false} otherwise.
+             * @return  {true} if the value represented by this object is
+             *          NaN; {false} otherwise.
              */
             boolean isNaN() ;
 
             /**
-             * Returns the {@code double} value corresponding to a given
+             * Returns the {double} value corresponding to a given
              * bit representation.
              *
-             * @param   bits   any {@code long} integer.
-             * @return  the {@code double} floating-point value with the same
+             * @param   bits   any {long} integer.
+             * @return  the {double} floating-point value with the same
              *          bit pattern.
              */
             static double longBitsToDouble(long bits);
 
             /**
-             * Returns the smaller of two {@code double} values
+             * Returns the smaller of two {double} values
              * as if by calling {@link Math#min(double, double) Math.min}.
              *
              * @param a the first operand
              * @param b the second operand
-             * @return the smaller of {@code a} and {@code b}.
+             * @return the smaller of {a} and {b}.
              * @see java.util.function.BinaryOperator
-             * @since 1.8
              */
             static double min(double a, double b);
 
             // TODO FIXME
 //            /**
 //             * Returns a hexadecimal string representation of the
-//             * {@code double} argument. All characters mentioned below
+//             * {double} argument. All characters mentioned below
 //             * are ASCII characters.
 //             *
 //             * If the argument is NaN, the result is the string
-//             *     "{@code NaN}".
+//             *     "{NaN}".
 //             * Otherwise, the result is a string that represents the sign
 //             * and magnitude of the argument. If the sign is negative, the
-//             * first character of the result is '{@code -}'
-//             * ({@code '\u005Cu002D'}); if the sign is positive, no sign
+//             * first character of the result is '{-}'
+//             * ({'\u005Cu002D'}); if the sign is positive, no sign
 //             * character appears in the result. As for the magnitude m:
 //             *
 //             *
 //             * If m is infinity, it is represented by the string
-//             * {@code "Infinity"}; thus, positive infinity produces the
-//             * result {@code "Infinity"} and negative infinity produces
-//             * the result {@code "-Infinity"}.
+//             * {"Infinity"}; thus, positive infinity produces the
+//             * result {"Infinity"} and negative infinity produces
+//             * the result {"-Infinity"}.
 //             *
 //             * If m is zero, it is represented by the string
-//             * {@code "0x0.0p0"}; thus, negative zero produces the result
-//             * {@code "-0x0.0p0"} and positive zero produces the result
-//             * {@code "0x0.0p0"}.
+//             * {"0x0.0p0"}; thus, negative zero produces the result
+//             * {"-0x0.0p0"} and positive zero produces the result
+//             * {"0x0.0p0"}.
 //             *
-//             * If m is a {@code double} value with a
+//             * If m is a {double} value with a
 //             * normalized representation, substrings are used to represent the
 //             * significand and exponent fields.  The significand is
-//             * represented by the characters {@code "0x1."}
+//             * represented by the characters {"0x1."}
 //             * followed by a lowercase hexadecimal representation of the rest
 //             * of the significand as a fraction.  Trailing zeros in the
 //             * hexadecimal representation are removed unless all the digits
 //             * are zero, in which case a single zero is used. Next, the
-//             * exponent is represented by {@code "p"} followed
+//             * exponent is represented by {"p"} followed
 //             * by a decimal string of the unbiased exponent as if produced by
 //             * a call to {@link Integer#toString(int) Integer.toString} on the
 //             * exponent value.
 //             *
-//             * If m is a {@code double} value with a subnormal
+//             * If m is a {double} value with a subnormal
 //             * representation, the significand is represented by the
-//             * characters {@code "0x0."} followed by a
+//             * characters {"0x0."} followed by a
 //             * hexadecimal representation of the rest of the significand as a
 //             * fraction.  Trailing zeros in the hexadecimal representation are
 //             * removed. Next, the exponent is represented by
-//             * {@code "p-1022"}.  Note that there must be at
+//             * {"p-1022"}.  Note that there must be at
 //             * least one nonzero digit in a subnormal significand.
 //             *
 //             * Examples
 //             * Floating-point Value<th>Hexadecimal String
-//             * {@code 1.0} {@code 0x1.0p0}
-//             * {@code -1.0}        {@code -0x1.0p0}
-//             * {@code 2.0} {@code 0x1.0p1}
-//             * {@code 3.0} {@code 0x1.8p1}
-//             * {@code 0.5} {@code 0x1.0p-1}
-//             * {@code 0.25}        {@code 0x1.0p-2}
-//             * {@code Double.MAX_VALUE}
-//             *     {@code 0x1.fffffffffffffp1023}
-//             * {@code Minimum Normal Value}
-//             *     {@code 0x1.0p-1022}
-//             * {@code Maximum Subnormal Value}
-//             *     {@code 0x0.fffffffffffffp-1022}
-//             * {@code Double.MIN_VALUE}
-//             *     {@code 0x0.0000000000001p-1022}
+//             * {1.0} {0x1.0p0}
+//             * {-1.0}        {-0x1.0p0}
+//             * {2.0} {0x1.0p1}
+//             * {3.0} {0x1.8p1}
+//             * {0.5} {0x1.0p-1}
+//             * {0.25}        {0x1.0p-2}
+//             * {Double.MAX_VALUE}
+//             *     {0x1.fffffffffffffp1023}
+//             * {Minimum Normal Value}
+//             *     {0x1.0p-1022}
+//             * {Maximum Subnormal Value}
+//             *     {0x0.fffffffffffffp-1022}
+//             * {Double.MIN_VALUE}
+//             *     {0x0.0000000000001p-1022}
 //             *
-//             * @param   d   the {@code double} to be converted.
+//             * @param   d   the {double} to be converted.
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
@@ -748,8 +746,8 @@ namespace Java {
             * Convert from string to double
             *
             * @param      s   the string to be parsed.
-            * @return     a {@code Double} object holding the value
-            *             represented by the {@code String} argument.
+            * @return     a {Double} object holding the value
+            *             represented by the {String} argument.
             * @throws     NumberFormatException  if the string does not contain a
             *             parsable number.
             */
@@ -759,7 +757,7 @@ namespace Java {
             * Assign value to Double variable
             *
             * @param  d a double value.
-            * @return a {@code Double} instance representing {@code d}.
+            * @return a {Double} instance representing {d}.
             */
             static Double valueOf(double doubleInput);
         };
