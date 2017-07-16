@@ -396,39 +396,33 @@ TEST (JavaLang, CharacterIsHighSurrogate){
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
     wchar_t variableTestisLowSurrogate;
-    boolean expectedResultisLowSurrogate;
     boolean actualResultisLowSurrogate;
 
     // Test valid case
     variableTestisLowSurrogate = '\u000DC00' ;
-    expectedResultisLowSurrogate= 1 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_TRUE(actualResultisLowSurrogate);
 
     // Test invalid case
     variableTestisLowSurrogate = '\u000DB00' ;
-    expectedResultisLowSurrogate= 0 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_FALSE(actualResultisLowSurrogate);
 }
 
 TEST(JavaLang, CharacterIsSurrogate) {
     // Create variable to test
     wchar_t variableTestIsSurrogate;
-    boolean expectedResultIsSurrogate;
     boolean actualResultIsSurrogate;
 
     // Test valid case
     variableTestIsSurrogate = '\u000DC00' ;
-    expectedResultIsSurrogate = true;
     actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
-    ASSERT_TRUE(expectedResultIsSurrogate == actualResultIsSurrogate);
+    ASSERT_TRUE(actualResultIsSurrogate);
 
     // Test invalid case
     variableTestIsSurrogate = L'A';
-    expectedResultIsSurrogate = false;
     actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
-    ASSERT_TRUE(expectedResultIsSurrogate == actualResultIsSurrogate);
+    ASSERT_FALSE(actualResultIsSurrogate);
 }
 
 TEST (JavaLang, CharacterDigit) {
