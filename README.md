@@ -150,6 +150,7 @@ All data types are implemented and ready to use in C++ Application
 - [x] char - Java.Lang.Character
 - [x] byte - Java.Lang.Byte (equivalent with `unsigned char`)
 - [x] string - Java.Lang.String (equivalent with `char*`, Java does not have data type `string`)
+- [x] unicode - java.lang.Character (equivalent with `wchar_t`)
 - [x] short - Java.Lang.Short
 - [x] int - Java.Lang.Integer
 - [x] long - Java.Lang.Long
