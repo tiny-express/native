@@ -56,6 +56,7 @@ namespace Java {
              * Stack peek - return the top element
              *
              * @return E
+             * @throw EmptyStackException
              */
             E peek() {
                 int len = this->size();
@@ -69,6 +70,7 @@ namespace Java {
              * Stack pop - return the top element and remove it
              *
              * @return E
+             * @throw EmptyStackException
              */
             E pop() {
                 int len = this->size();
