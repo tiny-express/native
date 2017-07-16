@@ -34,8 +34,7 @@ using namespace Java::Lang;
 StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
 
 StringBuilder::StringBuilder(int capacity) {
-    int numberOfBytesForCapacity = capacity * sizeof(char);
-    this->original = (string)malloc((size_t)numberOfBytesForCapacity);
+    this->original = (string)calloc((size_t)capacity, sizeof(char));
     this->currentLength = 0;
     this->currentCapacity = capacity;
 }
@@ -66,8 +65,7 @@ StringBuilder::StringBuilder(const CharSequence &charSequence) {
 }
 
 StringBuilder::StringBuilder(const StringBuilder &target) {
-    int numberOfBytesOfCapacity = target.currentCapacity * sizeof(char);
-    this->original = (string)malloc((size_t)numberOfBytesOfCapacity);
+    this->original = (string)calloc((size_t)target.currentCapacity, sizeof(char));
     int index;
     for (index = 0; index < target.currentLength; index++) {
         this->original[index] = target.original[index];
@@ -669,8 +667,8 @@ String StringBuilder::substring(int start, int end) const {
         throw StringIndexOutOfBoundsException(end - start);
     }
 
-    int numberOfBytesForSubString = (end - start + 1) * sizeof(char);
-    string copyOfSubString = (string)malloc((size_t)numberOfBytesForSubString);
+    int lengthOfSubString = end - start + 1;
+    string copyOfSubString = (string)calloc((size_t)lengthOfSubString, sizeof(char));
     int indexOfOriginal;
     int indexOfSubString = 0;
     for (indexOfOriginal = start; indexOfOriginal < end;indexOfOriginal++) {
@@ -684,8 +682,8 @@ String StringBuilder::substring(int start, int end) const {
 }
 
 String StringBuilder::toString() const {
-    int numberOfBytes = (this->currentLength + 1) * sizeof(char); // increases by 1 for null terminator.
-    string content = (string)malloc((size_t)numberOfBytes);
+    int numberOfElementIncludeNullTerminator = this->currentLength + 1;
+    string content = (string)calloc((size_t)numberOfElementIncludeNullTerminator, sizeof(char));
     int index;
     for (index = 0; index < this->currentLength; index++) {
         content[index] = this->original[index];
@@ -710,8 +708,7 @@ int *StringBuilder::initializeNextTable(const string pattern) const{
         return NULL;
     }
 
-    int sizeOfNextTable = lengthOfPattern * sizeof(int);
-    int *nextTable = (int *)malloc((size_t)sizeOfNextTable);
+    int *nextTable = (int *)calloc((size_t)lengthOfPattern, sizeof(int));
 
     if (nextTable == NULL) {
         return NULL;
