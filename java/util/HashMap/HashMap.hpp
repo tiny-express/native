@@ -438,13 +438,13 @@ namespace Java {
 							addCharacter = (string) ", ";
 						}
 						string holder = builder;
-						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
+						asprintf(&builder, "%s%s=%s%s%c", builder, key, value, addCharacter, '\0');
 						free(holder);
 					}
 				}
 				
 				string holder = builder;
-				asprintf(&builder, "%s%c\0", builder, '}');
+				asprintf(&builder, "%s%c%c", builder, '}', '\0');
 				free(holder);
 				return builder;
 			}
