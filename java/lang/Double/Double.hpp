@@ -544,7 +544,7 @@ namespace Java {
              *          {@code false} otherwise.
              * @see java.lang.Double#doubleToLongBits(double)
              */
-            boolean equals(const Double &object);
+            boolean equals(const Double &object) const;
 
             /**
              * Returns a hash code for this {@code Double} object.

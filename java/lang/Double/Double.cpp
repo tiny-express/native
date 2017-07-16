@@ -37,15 +37,11 @@ Double::Double() {
 }
 
 Double::Double(double original) {
-//    if (isNaN(original) || isInfinite(original))
-//        return -1;
-	this->original = original;
-	this->string_original = string_from_double(this->original);
+    this->original = original;
+    this->string_original = string_from_double(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
-//    if (isNaN(original) || isInfinite(original))
-//        return -1;
 	this->original = doubleNumber.original;
 	this->string_original = string_from_double(this->original);
 }
@@ -105,72 +101,60 @@ byte Double::byteValue() const {
 }
 
 Double Double::operator+(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double(this->original + target.original);
 }
 
 Double Double::operator-(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double(this->original - target.original);
 }
 
 Double Double::operator*(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double( this->original * target.original );
 }
 
 Double Double::operator/(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double( this->original / target.original );
 }
 
-// /**
-//  * Make a modulo from this Double with target
-//  *
-//  * @return Double
-//  */
-// Double Double::operator%(const Double &target) {
-// 	return ( this->original % target.original );
-// }
-
 boolean Double::operator==(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original == target.original);
+    return (boolean) equals(target.original);
 }
 
 boolean Double::operator!=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (!this->operator==(target));
+    return (boolean) !equals(target.original);
 }
 
 boolean Double::operator<(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original < target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+        return 1;
+    }
+    return 0;
 }
 
 boolean Double::operator>(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original > target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+        return 1;
+    }
+    return 0;
 }
 
 boolean Double::operator>=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original >= target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == 1
+            || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return 1;
+    }
+    return 0;
 }
 
 boolean Double::operator<=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original <= target.original);
+
+    if (compare(this->doubleValue(), target.doubleValue()) == -1
+        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return 1;
+    }
+    return 0;
 }
 
 boolean Double::operator&&(const Double &target) const {
@@ -275,7 +259,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
 }
 
 // TODO Wait for instanceof<>
-boolean Double::equals(const Double &object) {
+boolean Double::equals(const Double &object) const{
     boolean isDouble = instanceof<Double>(object);
     Double* castObjectToDouble = (Double*)&object;
     long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
