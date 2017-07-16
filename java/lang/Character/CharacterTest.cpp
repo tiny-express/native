@@ -1,6 +1,23 @@
-//
-// Created by huuphuoc on 28/05/2017.
-//
+/**
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMEIILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 extern "C" {
 #include "../../../unit_test.h"
@@ -357,21 +374,21 @@ TEST (JavaLang, CharacterTestSample){
 
 TEST (JavaLang, CharacterToCodePoint){
     // Create variable to test
-    wchar_t variableTest1ToCodePoint;
-    wchar_t variableTest2ToCodePoint;
+    unicode variableTest1ToCodePoint;
+    unicode variableTest2ToCodePoint;
     int expectedResultToCodePoint;
     int actualResultToCodePoint;
 
     // Test valid case
-    variableTest1ToCodePoint = '\u000D800' ;
-    variableTest2ToCodePoint = '\u000DC00' ;
+    variableTest1ToCodePoint = (unicode) '\u000D800' ;
+    variableTest2ToCodePoint = (unicode) '\u000DC00' ;
     expectedResultToCodePoint= 65536 ;
     actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
     ASSERT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
 
     // Test invalid case
-    variableTest1ToCodePoint = '\u000d800' ;
-    variableTest2ToCodePoint = '\u000dc11' ;
+    variableTest1ToCodePoint = (unicode) '\u000d800' ;
+    variableTest2ToCodePoint = (unicode) '\u000dc11' ;
     expectedResultToCodePoint= 60000 ;
     actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
     ASSERT_NOT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
@@ -380,7 +397,7 @@ TEST (JavaLang, CharacterToCodePoint){
 #ifdef __linux__
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
-    wchar_t variableTestIsHighSurrogate;
+    unicode variableTestIsHighSurrogate;
     boolean expectedResultIsHighSurrogate;
     boolean actualResultIsHighSurrogate;
 
@@ -401,7 +418,7 @@ TEST (JavaLang, CharacterIsHighSurrogate){
 #ifdef __linux__
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
-    wchar_t variableTestisLowSurrogate;
+    unicode variableTestisLowSurrogate;
     boolean expectedResultisLowSurrogate;
     boolean actualResultisLowSurrogate;
 

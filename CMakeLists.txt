@@ -55,7 +55,7 @@ check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
 # Set GCC ignore warning Multi-character constant
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow" )
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 if (COMPILER_SUPPORTS_CXX11)

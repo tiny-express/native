@@ -40,7 +40,7 @@
 #include <wchar.h>
 
 typedef char *string;
-typedef wchar_t *unicode;
+typedef wchar_t unicode;
 typedef const char *const_string;
 typedef unsigned char byte;
 
