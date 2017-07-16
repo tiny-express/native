@@ -52,3 +52,11 @@ TEST (JavaLang, RuntimeExceptionConstructor) {
     ASSERT_STR("RuntimeException with the specified message and cause", runtimeExceptionWithCause.getCause()->getMessage().toString());
     ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
+
+TEST (JavaLang, RuntimeExceptionTryCatch) {
+    try {
+        throw RuntimeException("Throw RuntimeException");
+    } catch (Exception e) {
+        ASSERT_STR("Throw RuntimeException", e.getMessage().toString());
+    }
+}
