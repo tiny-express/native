@@ -46,7 +46,7 @@ TEST (JavaUtil, nextInt) {
     int intMin = 0x80000000;
 
     // Test 10 number
-    for(int index = 0; index < 10; index ++){
+    for (int index = 0; index < 10; index ++) {
         int a = random1.nextInt();
         ASSERT_TRUE( a >= intMin && a <= intMax); // Check if the return value is in Integer range
     }
@@ -67,13 +67,13 @@ TEST (JavaUtil, nextIntWithBound) {
 
     // Test nextInt(bound) with bound = 100
     int bound = 100;
-    for(int index = 0; index < 10; index ++){
+    for (int index = 0; index < 10; index ++) {
         int a = random1.nextInt(bound);
         ASSERT_TRUE( a >= 0 && a < bound); // Check if the return value is in [0, bound)
     }
 }
 
-TEST (JavaUtil, NextBytes){
+TEST (JavaUtil, NextBytes) {
     // Given a random number generator
     Random random1;
     // Given a byte array
@@ -85,4 +85,14 @@ TEST (JavaUtil, NextBytes){
     byte byteMin = -128;
     for (int index = 0; index < byteArray.length; index ++)
         ASSERT_TRUE(byteArray[index] >= byteMin && byteArray[index] <= byteMax);
+}
+
+TEST (JavaUtil, NextDouble) {
+    // Given a random number generator
+    Random random1;
+    // Test if every generated double is in [0, 1) range
+    for (int index = 0; index < 10; index ++) {
+        double generatedDouble = random1.nextDouble();
+        ASSERT_TRUE(generatedDouble >= 0 && generatedDouble < 1.0);
+    }
 }

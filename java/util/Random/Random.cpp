@@ -182,3 +182,7 @@ void Random::nextBytes(Array<byte> *bytes) {
         }
     }
 }
+
+double Random::nextDouble() {
+    return (((long)(next(26)) << 27) + next(27)) * DOUBLE_UNIT;
+}
