@@ -119,6 +119,9 @@ TEST(JavaLang, ArrayConstructorWithSize) {
     int index;
     for(index = 0; index < 10; index++) {
         validArray.push(index);
+        expect = index + 1;
+        result = validArray.length;
+        ASSERT_EQUAL(expect, result);
     }
 
     result = validArray.length;
