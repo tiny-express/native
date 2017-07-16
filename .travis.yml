@@ -12,7 +12,5 @@ before_script:
 script:
 - make native_test -j8
 - ./misc/memory_check
-after_script:
-- sudo pkill python
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

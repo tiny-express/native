@@ -24,39 +24,62 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//#include "../builtin.h"
-//#include "../unit_test.h"
-//
-//TEST (DateTime, Timestamp) {
-//	long first_time = timestamp();
-//	int maxN = 10000000;
-//	int i = 0;
-//	int counter = 0;
-//	for (i = 0; i < maxN; i++) {
-//		counter++;
-//	}
-//	long last_time = timestamp();
-//	ASSERT_EQUAL(maxN, counter);
-//	// Time is greater than 9 ms
-//	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
-//}
-//#endif
-//
-//TEST (DateTime, Format) {
-//
-//	long timestamp = 1473765499;
-//	char *format = "d/m/y";
-//	char *result1 = date(timestamp, format);
-//	ASSERT_STR("13/09/2016", result1);
-//	free(result1);
-//
-//	timestamp = 1511208660;
-//	char *result2 = date(timestamp, format);
-//	ASSERT_STR("20/11/2017", result2);
-//	free(result2);
-//
-//	format = "y-m-d";
-//	char *result3 = date(timestamp, format);
-//	ASSERT_STR("2017-11-20", result3);
-//	free(result3);
-//}
+#include "../datetime.h"
+#include "../unit_test.h"
+
+TEST (DateTime, UnixTimestamp) {
+#ifdef WINDOWS
+    unsigned int millisecond = 123;
+    unsigned int second = 3;
+    unsigned int minute = 20;
+    unsigned int hour = 17;
+    unsigned int day  = 16;
+    unsigned int month = 7;
+    unsigned int year = 2017;
+    unsigned long timestamp = unix_time_in_milliseconds(
+            millisecond,
+            second,
+            minute,
+            hour,
+            day,
+            month,
+            year
+    );
+    ASSERT_EQUAL(timestamp, 1500225603123);
+#endif
+}
+
+TEST (DateTime, Timestamp) {
+	long first_time = timestamp();
+	ASSERT_TRUE(first_time > 1500198318489000);
+	int maxN = 50000000;
+	int i = 0;
+	int counter = 0;
+	for (i = 0; i < maxN; i++) {
+		counter++;
+		counter--;
+		counter++;
+	}
+	long last_time = timestamp();
+	ASSERT_EQUAL(maxN, counter);
+    unsigned int delta = (last_time - first_time) / 1000;
+    ASSERT_TRUE(delta > 100);
+}
+
+TEST (DateTime, Format) {
+	long timestamp = 1473765499;
+	char *format = "d/m/y";
+	char *result1 = date(timestamp, format);
+	ASSERT_STR("13/09/2016", result1);
+	free(result1);
+
+	timestamp = 1511208660;
+	char *result2 = date(timestamp, format);
+	ASSERT_STR("20/11/2017", result2);
+	free(result2);
+
+	format = "y-m-d";
+	char *result3 = date(timestamp, format);
+	ASSERT_STR("2017-11-20", result3);
+	free(result3);
+}

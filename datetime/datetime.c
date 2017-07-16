@@ -23,9 +23,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include "../platform.h"
 
-#include <time.h>
-#include <stdlib.h>
+#ifdef WINDOWS
+#include <windows.h>
+#endif
+
 #include "../datetime.h"
 #include "../string.h"
 
@@ -36,7 +39,7 @@
  * @param format
  * @return
  */
-char *date(long timestamp, char *format) {
+string date(unsigned long timestamp, string format) {
 	char *date_format = string_replace(format, "D", "%d");
 	char *date_format2 = string_replace(date_format, "d", "%d");
 	free(date_format);
@@ -54,11 +57,61 @@ char *date(long timestamp, char *format) {
 	free(date_format5);
 	
 	char *result = calloc(11, sizeof(char));
-	//strftime(result, 11, date_format6, gmtime(&timestamp));
+	strftime(result, 11, date_format6, gmtime(&timestamp));
 	free(date_format6);
 	
 	return result;
 }
+
+#ifdef WINDOWS
+/**
+ *
+ * @param millisecond
+ * @param second
+ * @param minute
+ * @param hour
+ * @param day
+ * @param month
+ * @param year
+ * @return
+ */
+unsigned long unix_time_in_milliseconds(
+        unsigned int millisecond,
+        unsigned int second,
+        unsigned int minute,
+        unsigned int hour,
+        unsigned int day,
+        unsigned int month,
+        unsigned int year)
+{
+    unsigned long ts = 0;
+    //  Add up the seconds from all prev years, up until this year.
+    unsigned int years = 0;
+    unsigned int leap_years = 0;
+    int y_k;
+    for (y_k  = EPOCH_YEAR; y_k<year; y_k++ ) {
+        if( IS_LEAP_YEAR( y_k ) ) {
+            leap_years++;
+        } else {
+            years++;
+        }
+    }
+    ts += ( (years*days_per_year[0]) + (leap_years*days_per_year[1]) ) * SEC_PER_DAY;
+    //  Add up the seconds from all prev days this year, up until today.
+    unsigned int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
+    int mo_k;
+    for (mo_k = 0; mo_k<(month - 1); mo_k++ ) { //  days from previous months this year
+        ts += days_per_month[ year_index ][ mo_k ] * SEC_PER_DAY;
+    }
+    ts += (day-1) * SEC_PER_DAY; // days from this month
+    //  Calculate seconds elapsed just today.
+    ts += hour * SEC_PER_HOUR;
+    ts += minute * SEC_PER_MIN;
+    ts += second;
+    ts = ts * 1000 + millisecond;
+    return ts;
+}
+#endif
 
 /**
  * Return timestamp from 1970
@@ -66,8 +119,8 @@ char *date(long timestamp, char *format) {
  *
  * @return long
  */
-long timestamp() {
-#ifdef __APPLE__
+unsigned long timestamp() {
+#ifdef OSX
 	double timebase = 0.0;
 	mach_timebase_info_data_t tb = { 0 };
 	mach_timebase_info(&tb);
@@ -76,10 +129,25 @@ long timestamp() {
 	uint64_t current = mach_absolute_time() * timebase;
 	return (long) current;
 #endif
-#ifdef __linux__
+#ifdef LINUX
 	struct timespec tsp;
 	clock_gettime(0, &tsp);
 	return (long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
+#endif
+#ifdef WINDOWS
+    SYSTEMTIME current_time;
+    GetSystemTime(&current_time);
+    unsigned long timestamp_in_millisecond = unix_time_in_milliseconds(
+            current_time.wMilliseconds,
+            current_time.wSecond,
+            current_time.wMinute,
+            current_time.wHour,
+            current_time.wDay,
+            current_time.wMonth,
+            current_time.wYear
+    );
+    // Timestamp should be in nano seconds
+    return timestamp_in_millisecond * 1000;
 #endif
     return 0;
 }

@@ -27,6 +27,9 @@
 #ifndef NATIVE_BUILTIN_H
 #define NATIVE_BUILTIN_H
 
+// Platform Macros
+#include "platform.h"
+
 // C Standard Library
 #include <stdio.h>
 #include <math.h>

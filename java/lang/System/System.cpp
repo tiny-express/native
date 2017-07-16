@@ -38,12 +38,16 @@ void System::out::print(String target) {
 }
 
 void System::out::println(String target) {
-	string targetCharacters = target.toString();
-	if (is_empty(targetCharacters)) {
+	String targetCharacters = target.toString();
+	if (targetCharacters.isEmpty()) {
 		return;
 	}
 	printf("%s\n", targetCharacters);
 	fflush(stdout);
+}
+
+long System::currentTimeMillis() {
+	return timestamp();
 }
 
 void System::exit(int status) {

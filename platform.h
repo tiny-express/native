@@ -24,20 +24,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../unit_test.h"
-}
+#ifndef NATIVE_PLATFORM_H
+#define NATIVE_PLATFORM_H
 
-#include "../../library.hpp"
+#if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
+#ifndef WINDOWS
+#define WINDOWS
+#endif
+#endif
 
-TEST (Generic, Split) {
-	std::vector<char *> null_target_delimiter = split((char *) NULL, NULL);
-	ASSERT_TRUE(empty(null_target_delimiter));
-	
-	std::vector<char *> null_delimiter = split((char *) "hello", NULL);
-	ASSERT_EQUAL(1, len(null_delimiter));
-	
-	char *text = "hello world";
-	std::vector<char *> strings = split(text, String(" "));
-	ASSERT_EQUAL(2, len(strings));
-}
+#if defined __linux__
+#ifndef LINUX
+#define LINUX
+#endif
+#endif
+
+#if defined __APPLE__
+#ifndef OSX
+#define OSX
+#endif
+#endif
+
+#endif//NATIVE_PLATFORM_H
