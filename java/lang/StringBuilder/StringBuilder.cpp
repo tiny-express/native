@@ -727,16 +727,16 @@ int *StringBuilder::initializeNextTable(const string pattern) const{
     }
 
     int position = 2;
-    int cnd = 0;
+    int lengthOfTheLongestPrefixSuffix = 0;
 
     while (position < lengthOfPattern) {
-        if (pattern[position - 1] == pattern[cnd]) {
-            cnd = cnd + 1;
-            nextTable[position] = cnd;
+        if (pattern[position - 1] == pattern[lengthOfTheLongestPrefixSuffix]) {
+            lengthOfTheLongestPrefixSuffix = lengthOfTheLongestPrefixSuffix + 1;
+            nextTable[position] = lengthOfTheLongestPrefixSuffix;
             position = position + 1;
         }
-        else if (cnd > 0) {
-            cnd = nextTable[cnd];
+        else if (lengthOfTheLongestPrefixSuffix > 0) {
+            lengthOfTheLongestPrefixSuffix = nextTable[lengthOfTheLongestPrefixSuffix];
         }
         else {
             nextTable[position] = 0;
