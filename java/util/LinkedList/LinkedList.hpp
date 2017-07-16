@@ -95,6 +95,7 @@ namespace Java {
         public:
             /**
              * Appends the specified element to the end of this list.
+             *
              * @param e
              * @return boolean
              */
@@ -105,6 +106,7 @@ namespace Java {
 
             /**
              * Inserts the specified element at the specified position in this list.
+             *
              * @param index
              * @param element
              */
@@ -128,6 +130,7 @@ namespace Java {
 
             /**
              *Inserts the specified element at the beginning of this list.
+             *
              * @param e
              */
             void addFirst(E &e) {
@@ -137,6 +140,7 @@ namespace Java {
 
             /**
              * Appends the specified element to the end of this list.
+             *
              * @param e
              */
             void addLast(E &e) {
@@ -161,6 +165,7 @@ namespace Java {
 
             /**
              * Returns true if this list contains the specified element.
+             *
              * @param e
              * @return boolean
              */
@@ -181,6 +186,7 @@ namespace Java {
 
             /**
              * Retrieves, but does not remove, the head (first element) of this list.
+             *
              * @return E
              */
             E element() {
@@ -189,6 +195,7 @@ namespace Java {
 
             /**
              * Returns the element at the specified position in this list.
+             *
              * @param index
              * @return E
              */
@@ -198,6 +205,7 @@ namespace Java {
 
             /**
              * Returns the first element in this list.
+             *
              * @return E
              */
             E getFirst() {
@@ -209,6 +217,7 @@ namespace Java {
 
             /**
              * Returns the last element in this list.
+             *
              * @return E
              */
             E getLast() {
@@ -221,6 +230,7 @@ namespace Java {
             /**
              * Returns the index of the first occurrence of the specified element in this list,
              * or -1 if this list does not contain the element.
+             *
              * @param e
              * @return int
              */
@@ -238,6 +248,7 @@ namespace Java {
             /**
              * Returns the index of the last occurrence of the specified element in this list,
              * or -1 if this list does not contain the element.
+             *
              * @param e
              * @return int
              */
@@ -259,6 +270,7 @@ namespace Java {
 
             /**
              * Adds the specified element as the tail (last element) of this list.
+             *
              * @param e
              * @return boolean
              */
@@ -269,6 +281,7 @@ namespace Java {
 
             /**
              * Inserts the specified element at the front of this list.
+             *
              * @param e
              * @return boolean
              */
@@ -279,6 +292,7 @@ namespace Java {
 
             /**
              * Inserts the specified element at the end of this list.
+             *
              * @param e
              * @return boolean
              */
@@ -289,6 +303,7 @@ namespace Java {
 
             /**
              * Retrieves, but does not remove, the head (first element) of this list.
+             *
              * @return E
              */
             E peek() {
@@ -305,6 +320,7 @@ namespace Java {
 
             /**
              * Retrieves, but does not remove, the last element of this list, or returns default E if this list is empty.
+             *
              * @return E
              */
             E peekLast() {
@@ -313,6 +329,7 @@ namespace Java {
 
             /**
              * Retrieves and removes the head (first element) of this list.
+             *
              * @return
              */
             E poll() {
@@ -321,6 +338,7 @@ namespace Java {
 
             /**
              * Retrieves and removes the first element of this list, or throw an exception if this->first is NULL
+             *
              * @return E
              */
             E pollFirst() {
@@ -329,6 +347,7 @@ namespace Java {
 
             /**
              * Retrieves and removes the last element of this list, or throw an exception if this->last is NULL
+             *
              * @return E
              */
             E pollLast() {
@@ -337,6 +356,7 @@ namespace Java {
 
             /**
              * Pops an element from the stack represented by this list.
+             *
              * @return
              */
             E pop() {
@@ -345,6 +365,7 @@ namespace Java {
 
             /**
              * Pushes an element onto the stack represented by this list.
+             *
              * @param e
              */
             void push(E e) {
@@ -353,6 +374,7 @@ namespace Java {
 
             /**
              * Retrieves and removes the head (first element) of this list.
+             *
              * @return E
              */
             E remove() {
@@ -423,6 +445,7 @@ namespace Java {
 
             /**
              * Removes the first occurrence of the specified element in this list (when traversing the list from head to tail).
+             *
              * @param e
              * @return
              */
@@ -440,6 +463,7 @@ namespace Java {
 
             /**
              * Removes the last occurrence of the specified element in this list (when traversing the list from head to tail).
+             *
              * @param e
              * @return
              */
@@ -457,6 +481,7 @@ namespace Java {
 
             /**
              * Replaces the element at the specified position in this list with the specified element.
+             *
              * @param index
              * @param element
              * @return E
@@ -470,6 +495,7 @@ namespace Java {
 
             /**
              * Returns the number of elements in this list.
+             *
              * @return
              */
             int size() {
@@ -478,6 +504,7 @@ namespace Java {
 
             /**
              * Don't support this method at this time
+             *
              * @return
              */
 //			Iterator<E> &iterator();
@@ -497,7 +524,7 @@ namespace Java {
              */
 //			boolean equals(const Object &o);
 
-        private:
+        private:        
             void linkFirst(const E &e) {
                 Node<E> *node = new Node<E>(NULL, e, this->first);
 
