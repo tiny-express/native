@@ -31,6 +31,8 @@
 
 using namespace Java::Lang;
 
+int i;
+
 Double::Double() {
 	this->original = 0;
 	this->string_original = string_from_double(this->original);
@@ -126,25 +128,25 @@ boolean Double::operator!=(const Double &target) const {
 
 boolean Double::operator<(const Double &target) const {
     if (compare(this->doubleValue(), target.doubleValue()) == -1) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 boolean Double::operator>(const Double &target) const {
     if (compare(this->doubleValue(), target.doubleValue()) == 1) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 boolean Double::operator>=(const Double &target) const {
     if (compare(this->doubleValue(), target.doubleValue()) == 1
             || compare(this->doubleValue(), target.doubleValue()) == 0) {
 
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 boolean Double::operator<=(const Double &target) const {
@@ -152,9 +154,9 @@ boolean Double::operator<=(const Double &target) const {
     if (compare(this->doubleValue(), target.doubleValue()) == -1
         || compare(this->doubleValue(), target.doubleValue()) == 0) {
 
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 boolean Double::operator&&(const Double &target) const {
@@ -223,7 +225,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
     tempValue = 0;
     resultDoubleToRawLongBits = 0;
 
-    for (int i = 1; i <= 63; i++) {
+    for (i = 1; i <= 63; i++) {
 
         if (doubleInputToBinary64StringType [i] == '1') {
             tempValue = 1;
@@ -232,7 +234,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
         if (doubleInputToBinary64StringType [i] == '0') {
             tempValue = 0;
         }
-        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2,exponent);
+        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2, exponent);
         exponent --;
     }
 
@@ -858,7 +860,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     // 2. Convert the exponent from base 2 -> base 10
     exponent = 0;
     tempExponent = 10;
-    for (int i = 1; i<=11; i++) {
+    for (i = 1; i<=11; i++) {
         if (Binary64StringTypeInput [i] == '1') {
             tempValue = 1;
         }
@@ -867,7 +869,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
             tempValue = 0;
         }
 
-        exponent = exponent + tempValue * pow(2,tempExponent);
+        exponent = exponent + tempValue * pow(2, tempExponent);
         tempExponent--;
     }
     // 3. Find exponentAdjusted
@@ -876,7 +878,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     // 4. Convert the mantissa from base 2 -> base 10
     mantisaBase10 = 0;
     tempExponent = -1;
-    for (int i = 12; i<=63; i++) {
+    for (i = 12; i<=63; i++) {
         if (Binary64StringTypeInput [i] == '1') {
             tempValue = 1;
         }
@@ -885,14 +887,14 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
             tempValue = 0;
         }
 
-        mantisaBase10 = mantisaBase10 + tempValue * pow(2,tempExponent);
+        mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);
         tempExponent--;
     }
 
     // 5. Find the Double precision floating point decimal value
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
-              * pow(2,exponentAdjusted);
+              * pow(2, exponentAdjusted);
 
     return resultBinary64StringTypeToDouble;
 }
@@ -901,7 +903,7 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
     string resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
     int index;
 
-    for (int i= 0 ; i<=63; i++) {
+    for (i = 0 ; i<=63; i++) {
         resultLongBitsToBinary64StringType[i] = '0';
     }
 
