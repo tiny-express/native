@@ -387,12 +387,12 @@ string Double::doubleToBinary32StringType(double doubleInput)
     double fractionPartDoubleInput;
 
     /** Assign value '0' to string value */
-    for (i = 0 ; i<= 31; i++) {
+    for (i = 0 ; i <= 31; i++) {
         doubleInputNormalizeForm[i] = '0';
         resultDoubleToBinary32StringType[i] = '0';
     }
 
-    for (i = 0 ; i<= 23; i++) {
+    for (i = 0 ; i <= 23; i++) {
         integerPartNormalizeForm[i] = '0';
         fractionPartNormalizeForm[i] = '0';
     }
@@ -575,7 +575,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
     index = indexBeginFractionPartResultDoubleToBinary32StringType;
     i = indexFirstBit1DoubleInputNormalizeForm + 1;
 
-    for (index ; index <=31; index++) {
+    for (index ; index <= 31; index++) {
         if (i == sizeOfDoubleInputNormalizeForm) {
             break;
         }
@@ -816,7 +816,7 @@ string Double::doubleToBinary64StringType(double doubleInput)
     index = indexBeginFractionPartResultDoubleToBinary64StringType;
     i = indexFirstBit1DoubleInputNormalizeForm + 1;
 
-    for (index ; index <=63; index++) {
+    for (index ; index <= 63; index++) {
         if (i == sizeOfDoubleInputNormalizeForm) {
             break;
         }
@@ -860,7 +860,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     // 2. Convert the exponent from base 2 -> base 10
     exponent = 0;
     tempExponent = 10;
-    for (i = 1; i<=11; i++) {
+    for (i = 1; i <= 11; i++) {
         if (Binary64StringTypeInput [i] == '1') {
             tempValue = 1;
         }
@@ -878,7 +878,7 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     // 4. Convert the mantissa from base 2 -> base 10
     mantisaBase10 = 0;
     tempExponent = -1;
-    for (i = 12; i<=63; i++) {
+    for (i = 12; i <= 63; i++) {
         if (Binary64StringTypeInput [i] == '1') {
             tempValue = 1;
         }
@@ -904,7 +904,7 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
     int index;
     int i;
 
-    for (i = 0; i<=63; i++) {
+    for (i = 0; i <= 63; i++) {
         resultLongBitsToBinary64StringType[i] = '0';
     }
 
