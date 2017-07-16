@@ -384,7 +384,7 @@ TEST(JavaLang, StringBuilderSubString) {
 TEST(JavaLang, StringBuilderToString) {
     String aString = "Hello!";
     StringBuilder stringBuilder(aString.toString());
-    ASSERT_TRUE(aString == stringBuilder.toString());
+    ASSERT_STR(aString.toString(), stringBuilder.toString().toString());
 }
 
 TEST(JavaLang, StringBuilderTrimToSize) {
