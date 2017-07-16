@@ -54,6 +54,10 @@ include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
+# Set GCC ignore warning Multi-character constant
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar")
+add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+
 if (COMPILER_SUPPORTS_CXX11)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 elseif (COMPILER_SUPPORTS_CXX0X)
