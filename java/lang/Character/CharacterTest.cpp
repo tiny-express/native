@@ -380,20 +380,17 @@ TEST (JavaLang, CharacterToCodePoint){
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
     wchar_t variableTestIsHighSurrogate;
-    boolean expectedResultIsHighSurrogate;
     boolean actualResultIsHighSurrogate;
 
     // Test valid case
     variableTestIsHighSurrogate = '\u000D800' ;
-    expectedResultIsHighSurrogate= 1 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_TRUE(actualResultIsHighSurrogate);
 
     // Test invalid case
     variableTestIsHighSurrogate = '\u000D777' ;
-    expectedResultIsHighSurrogate= 0 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_FALSE(actualResultIsHighSurrogate);
 }
 
 TEST (JavaLang, CharacterisLowSurrogate){
