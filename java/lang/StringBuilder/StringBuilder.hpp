@@ -167,8 +167,8 @@ namespace Java {
 
             /**
              * Appends the string representation of a subarray of the Character array argument to this sequence.
-             * Characters of the char array 'target', starting at index 'offset', are appended, in order, to the contents of this sequence.
-             * The length of this sequence increases by the value of 'length'.
+             * Characters of the char array target, starting at index offset, are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the value of length.
              *
              * @param target
              * @param offset
@@ -179,8 +179,8 @@ namespace Java {
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
-             * Characters of the char array 'target', starting at index 'offset', are appended, in order, to the contents of this sequence.
-             * The length of this sequence increases by the value of 'length'.
+             * Characters of the char array target, starting at index offset, are appended, in order, to the contents of this sequence.
+             * The length of this sequence increases by the value of length.
              *
              * @param target
              * @param offset
@@ -341,7 +341,7 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) at the specified index.
-             * The index refers to char values (Unicode code units) and ranges from 0 to {@code length() - 1}.
+             * The index refers to char values (Unicode code units) and ranges from 0 to length() - 1.
              * If the char value specified at the given index is in the high-surrogate range,
              * the following index is less than the length of this sequence,
              * and the char value at the following index is in the low-surrogate range,
@@ -356,11 +356,11 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) before the specified index.
-             * The index refers to char values (Unicode code units) and ranges from 1 to {@code length()}.
-             * If the char value at {@code (index - 1)} is in the low-surrogate range, {@code (index - 2)} is not negative,
-             * and the char value at {@code (index - 2)} is in the high-surrogate range,
+             * The index refers to char values (Unicode code units) and ranges from 1 to length().
+             * If the char value at (index - 1) is in the low-surrogate range, (index - 2) is not negative,
+             * and the char value at (index - 2) is in the high-surrogate range,
              * then the supplementary code point value of the surrogate pair is returned.
-             * If the char value at {@code index - 1} is an unpaired low-surrogate or a high-surrogate, the surrogate value is returned.
+             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate, the surrogate value is returned.
              *
              * @param index - the index following the code point that should be returned.
              * @return int - the Unicode code point value before the given index.
@@ -370,14 +370,14 @@ namespace Java {
 
             /**
              * Returns the number of Unicode code points in the specified text range of this sequence.
-             * The text range begins at the specified {@code beginIndex} and extends to the char at index {@code endIndex - 1}.
-             * Thus the length (in chars) of the text range is {@code endIndex - beginIndex}.
+             * The text range begins at the specified beginIndex and extends to the char at index endIndex - 1.
+             * Thus the length (in chars) of the text range is endIndex - beginIndex.
              * Unpaired surrogates within this sequence count as one code point each.
              *
              * @param beginIndex - the index to the first char of the text range.
              * @param endIndex - the index after the last char of the text range.
              * @return int - the number of Unicode code points in the specified text range
-             * @throw IndexOutOfBoundsException - if the {@code beginIndex} is negative, or {@code endIndex} is larger than the length of this sequence, or {@code beginIndex} is larger than {@code endIndex}.
+             * @throw IndexOutOfBoundsException - if the beginIndex is negative, or endIndex is larger than the length of this sequence, or beginIndex is larger than endIndex.
              */
             int codePointCount(int beginIndex, int endIndex);
 
@@ -411,11 +411,11 @@ namespace Java {
             void ensureCapacity(int minimumCapacity);
 
             /**
-             * Characters are copied from this sequence into the destination character array {@code target}.
-             * The first character to be copied is at index {@code sourceBegin}; the last character to be copied is at index {@code sourceEnd - 1}.
-             * The total number of characters to be copied is {@code sourceEnd - sourceBegin}
-             * The characters are copied into the subarray of {@code target} starting at index {@code targetBegin}
-             * and ending at index {@code targetBegin + (sourceEnd-sourceBegin) - 1}.
+             * Characters are copied from this sequence into the destination character array target.
+             * The first character to be copied is at index sourceBegin; the last character to be copied is at index sourceEnd - 1.
+             * The total number of characters to be copied is sourceEnd - sourceBegin
+             * The characters are copied into the subarray of target starting at index targetBegin
+             * and ending at index targetBegin + (sourceEnd-sourceBegin) - 1.
              *
              * @param sourceBegin
              * @param sourceEnd
@@ -513,18 +513,17 @@ namespace Java {
             StringBuilder insert(int offset, const Array<Character> &target);
 
             /**
-             * Inserts the string representation of a subarray of the 'target' array argument into this sequence.
-             * The subarray begins at the specified 'offset' and extends 'length' chars.
-             * The characters of the subarray are inserted into this sequence at the position indicated by 'index'.
-             * The length of this sequence increases by 'length' chars.
+             * Inserts the string representation of a subarray of the target array argument into this sequence.
+             * The subarray begins at the specified offset and extends length chars.
+             * The characters of the subarray are inserted into this sequence at the position indicated by index.
+             * The length of this sequence increases by length chars.
              *
              * @param index
              * @param target
              * @param offset
              * @param length
              * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
-             *        or offset or length are negative, or (offset+length) is greater than target.length
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length().
              */
             StringBuilder insert(int index, const Array<char> &target, int offset, int length);
 
@@ -547,7 +546,7 @@ namespace Java {
             /**
              * Inserts the specified CharSequence into this sequence.
              * The characters of the CharSequence argument are inserted, in order, into this sequence at the indicated offset,
-             * moving up any characters originally above that position and increasing the length of this sequence by the length of the argument {@code target}.
+             * moving up any characters originally above that position and increasing the length of this sequence by the length of the argument target.
              *
              * @param destinationOffset
              * @param target
@@ -557,9 +556,9 @@ namespace Java {
 
             /**
              * Inserts a subsequence of the specified CharSequence into this sequence.
-             * The subsequence of the argument {@code target} specified by {@code start} and {@code end} are inserted,
+             * The subsequence of the argument target specified by start and end are inserted,
              * in order, into this sequence at the specified destination offset, moving up any characters originally above that position.
-             * The length of this sequence is increased by {@code end - start}.
+             * The length of this sequence is increased by end - start.
              *
              * @param destinationOffset
              * @param target
@@ -732,9 +731,9 @@ namespace Java {
 
             /**
              * Replaces the characters in a substring of this sequence with characters in the specified String.
-             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}
+             * The substring begins at the specified start and extends to the character at index end - 1
              * or to the end of the sequence if no such character exists.
-             * First the characters in the substring are removed and then the specified String is inserted at {@code start}.
+             * First the characters in the substring are removed and then the specified String is inserted at start.
              * (This sequence will be lengthened to accommodate the specified String if necessary.)
              *
              * @param start
@@ -746,9 +745,9 @@ namespace Java {
 
             /**
              * Replaces the characters in a substring of this sequence with characters in the specified string.
-             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}
+             * The substring begins at the specified start and extends to the character at index end - 1
              * or to the end of the sequence if no such character exists.
-             * First the characters in the substring are removed and then the specified string is inserted at {@code start}.
+             * First the characters in the substring are removed and then the specified string is inserted at start.
              * (This sequence will be lengthened to accommodate the specified string if necessary.)
              *
              * @param start
@@ -767,9 +766,9 @@ namespace Java {
             StringBuilder reverse();
 
             /**
-             * The character at the specified {@code index} is set to {@code target}.
+             * The character at the specified index is set to target.
              * This sequence is altered to represent a new character sequence that is identical to the old character sequence,
-             * except that it contains the character {@code target} at position {@code index}.
+             * except that it contains the character target at position index.
              *
              * @param index
              * @param target
@@ -777,9 +776,9 @@ namespace Java {
             void setCharAt(int index, char target);
 
             /**
-             * The character at the specified {@code index} is set to {@code target}.
+             * The character at the specified index is set to target.
              * This sequence is altered to represent a new character sequence that is identical to the old character sequence,
-             * except that it contains the character {@code target} at position {@code index}.
+             * except that it contains the character target at position index.
              *
              * @param index
              * @param target
@@ -795,7 +794,7 @@ namespace Java {
 
             /**
              * Returns a new String that contains a subsequence of characters currently contained in this sequence.
-             * The substring begins at the specified {@code start} and extends to the character at index {@code end - 1}.
+             * The substring begins at the specified start and extends to the character at index end - 1.
              *
              * @param start
              * @param end
@@ -875,7 +874,7 @@ namespace Java {
             int stringMatchesReverse(const string target, const string pattern, int startIndex) const;
 
             /**
-             * This method helps reverses all valid surrogate pairs are produced by {@code reverse}.
+             * This method helps reverses all valid surrogate pairs are produced by reverse method.
              */
             void reverseAllValidSurrogatePairs();
         };
