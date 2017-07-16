@@ -76,6 +76,27 @@ TEST (JavaLang, DoubleArithmeticOperator) {
     expectedResultOperator = 13.02;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . POSITIVE_INFINITY_DOUBLE
+    variableArithmeticOperator1 = 26.04 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = POSITIVE_INFINITY_DOUBLE;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . NEGATIVE_INFINITY_DOUBLE
+    variableArithmeticOperator1 = -26.04 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = NEGATIVE_INFINITY_DOUBLE;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . NaN_NUMBER_DOUBLE
+    variableArithmeticOperator1 = 0 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = NaN_NUMBER_DOUBLE;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
 }
 
 TEST (JavaLang, DoubleRelationalOperator) {
