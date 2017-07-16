@@ -33,10 +33,9 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, StringBuilderConstructor) {
-    const int defaultOriginalCapacity = 16;
     StringBuilder defaultStringBuilder;
     ASSERT_EQUAL(0, defaultStringBuilder.length());
-    ASSERT_EQUAL(defaultOriginalCapacity, defaultStringBuilder.capacity());
+    ASSERT_EQUAL(StringBuilder::defaultCapacity, defaultStringBuilder.capacity());
 
     StringBuilder customCapacityStringBuilder(20);
     ASSERT_EQUAL(0, customCapacityStringBuilder.length());
@@ -46,7 +45,7 @@ TEST(JavaLang, StringBuilderConstructor) {
     int aStringLength = aString.length();
     StringBuilder nullTerminatedStringStringBuilder(aString.toString());
     StringBuilder stringStringBuilder(aString);
-    int newCapacity = defaultOriginalCapacity + aStringLength;
+    int newCapacity = StringBuilder::defaultCapacity + aStringLength;
     ASSERT_EQUAL(aStringLength, nullTerminatedStringStringBuilder.length());
     ASSERT_EQUAL(newCapacity, nullTerminatedStringStringBuilder.capacity());
     ASSERT_EQUAL(aStringLength, stringStringBuilder.length());
@@ -54,7 +53,7 @@ TEST(JavaLang, StringBuilderConstructor) {
 
     StringBuilder initializerListStringBuilder({'a', 'b', 'c'});
     ASSERT_EQUAL(3, initializerListStringBuilder.length());
-    ASSERT_EQUAL(defaultOriginalCapacity + initializerListStringBuilder.length(), initializerListStringBuilder.capacity());
+    ASSERT_EQUAL(StringBuilder::defaultCapacity + initializerListStringBuilder.length(), initializerListStringBuilder.capacity());
 
     CharSequence *charSequence = new String("Hello!");
     StringBuilder charSequenceStringBuilder(*charSequence);

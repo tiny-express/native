@@ -45,6 +45,9 @@ namespace Java {
             int currentCapacity = 0;
 
         public:
+            static const int defaultCapacity = 16;
+
+        public:
             /**
              * StringBuilder Constructor
              * Constructs a string builder with no characters in it and an initial capacity of 16 characters.

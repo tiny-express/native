@@ -31,7 +31,7 @@
 
 using namespace Java::Lang;
 
-StringBuilder::StringBuilder() : StringBuilder(16) { }
+StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
 
 StringBuilder::StringBuilder(int capacity) {
     int numberOfBytesForCapacity = capacity * sizeof(char);
@@ -42,25 +42,25 @@ StringBuilder::StringBuilder(int capacity) {
 
 StringBuilder::StringBuilder(const string target) {
     int stringLength = length_pointer_char(target);
-    int newCapacity = 16 + stringLength;
+    int newCapacity = defaultCapacity + stringLength;
     this->ensureCapacity(newCapacity);
     this->append(target);
 }
 
 StringBuilder::StringBuilder(const String &target) {
-    int newCapacity = 16 + target.length();
+    int newCapacity = defaultCapacity + target.length();
     this->ensureCapacity(newCapacity);
     this->append(target.toString());
 }
 
 StringBuilder::StringBuilder(const std::initializer_list<char> &target) {
-    int newCapacity = 16 + (int)target.size();
+    int newCapacity = defaultCapacity + (int)target.size();
     this->ensureCapacity(newCapacity);
     this->append(target);
 }
 
 StringBuilder::StringBuilder(const CharSequence &charSequence) {
-    int newCapaity = 16 + charSequence.length();
+    int newCapaity = defaultCapacity + charSequence.length();
     this->ensureCapacity(newCapaity);
     this->append(charSequence);
 }
@@ -261,15 +261,14 @@ int StringBuilder::codePointCount(int beginIndex, int endIndex) {
         throw IndexOutOfBoundsException();
     }
 
-    Array<char> *pOriginalArray = new Array<char>();
+    Array<char> originalArray;
     int numberOfCharacters = endIndex - beginIndex;
     int index;
     int stopIndex = beginIndex + numberOfCharacters;
     for (index = 0; index < stopIndex; index++) {
-        pOriginalArray->push(this->original[index]);
+        originalArray.push(this->original[index]);
     }
-    int result = Character::codePointCount(*pOriginalArray, 0, numberOfCharacters);
-    delete pOriginalArray;
+    int result = Character::codePointCount(originalArray, 0, numberOfCharacters);
     return result;
 }
 
