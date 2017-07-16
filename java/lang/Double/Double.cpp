@@ -158,20 +158,14 @@ boolean Double::operator<=(const Double &target) const {
 }
 
 boolean Double::operator&&(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (boolean) (this->original && target.original);
 }
 
 boolean Double::operator||(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (boolean) (this->original || target.original);
 }
 
 Double Double::operator=(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     this->original = target.original;
     free(this->string_original);
     this->string_original = string_from_double(this->original);
@@ -179,26 +173,18 @@ Double Double::operator=(const Double &target) {
 }
 
 Double Double::operator+=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original + target.original);
 }
 
 Double Double::operator-=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original - target.original);
 }
 
 Double Double::operator*=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original * target.original);
 }
 
 Double Double::operator/=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original / target.original);
 }
 
