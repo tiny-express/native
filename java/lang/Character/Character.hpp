@@ -119,6 +119,16 @@ namespace Java {
               */
             static boolean isLowSurrogate(unicode ch);
 
+            /**
+             * Determines if the given char value is a Unicode surrogate code unit.
+             * Such values do not represent characters by themselves,
+             * but are used in the representation of supplementary characters in the UTF-16 encoding.
+             *
+             * @param target
+             * @return boolean
+             */
+            static boolean isSurrogate(unicode target);
+
              /**
               * Returns the code point at the given index of the
               * {@code CharSequence}. If the {@code char} value at
