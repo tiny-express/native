@@ -29,6 +29,41 @@
 
 #include "../Number/Number.hpp"
 
+/**
+ * A constant holding the positive infinity of type
+ */
+static float POSITIVE_INFINITY_FLOAT = float(1.0 / 0.0); // inf
+
+/**
+ * A constant holding the negative infinity of type
+ */
+static float NEGATIVE_INFINITY_FLOAT = float(-1.0 / 0.0); // -inf
+
+/**
+ * A constant holding a Not-a-Number (NaN) value of type
+ */
+static float NaN_NUMBER_FLOAT = float(0.0 / 0.0); // -nan
+
+/**
+ * A constant holding the largest positive finite value of type
+ */
+static float MAX_VALUE_FLOAT = std::numeric_limits<float>::max(); // 1.797693134862316e+308
+
+/**
+ * A constant holding the smallest positive normal value of type
+ */
+static float MIN_NORMAL_FLOAT = std::numeric_limits<float>::denorm_min(); // 4.940656458412465e-324
+
+/**
+ * A constant holding the smallest positive nonzero value of type
+ */
+static float MIN_VALUE_FLOAT = std::numeric_limits<float>::min(); //2.225073858507201e-308
+
+/**
+ * Minimum exponent a normalized double number may have
+ */
+static int	MIN_EXPONENT_FLOAT	= -126;
+
 namespace Java {
 	namespace Lang {
 		
@@ -67,6 +102,154 @@ namespace Java {
 			~Float();
 		
 		public:
+            /**
+             * Adds two operands
+             *
+             * @return Float
+             */
+            Float operator+(const Float &target);
+
+            /**
+             * Subtracts second operand from the first
+             *
+             * @return Float
+             */
+            Float operator-(const Float &target);
+
+            /**
+             *  Multiplies both operands
+             *
+             * @return Float
+             */
+            Float operator*(const Float &target);
+
+            /**
+             * Divides numerator by de-numerator
+             *
+             * @return Float
+             */
+            Float operator/(const Float &target);
+
+            /**
+             * Checks if the values of two operands
+             * are equal or not,
+             *
+             * @return boolean
+             */
+            boolean operator==(const Float &target) const;
+
+            /**
+             * Checks if the values of two operands
+             * are equal or not,
+             *
+             * @return boolean
+             */
+            boolean operator!=(const Float &target) const;
+
+            /**
+             * Checks if the value of left operand
+             * is greater than the value of right operand
+             *
+             * @return boolean
+             */
+            boolean operator>(const Float &target) const;
+
+            /**
+             * Checks if the value of left operand
+             * is less than the value of right operand,
+             *
+             * @return boolean
+             */
+            boolean operator<(const Float &target) const;
+
+            /**
+             * Checks if the value of left operand
+             * is greater than or equal to the value of right operand,
+             *
+             * @return boolean
+             */
+            boolean operator>=(const Float &target) const;
+
+            /**
+             *  Checks if the value of left operand
+             *  is less than or equal to the value of right operand,
+             *
+             * @return boolean
+             */
+            boolean operator<=(const Float &target) const;
+
+            /**
+             *  Called Logical AND operator.
+             *  If both the operands are non-zero
+             *
+             * @return boolean
+             */
+            boolean operator&&(const Float &target) const;
+
+            /**
+             *  Called Logical OR Operator.
+             *  If any of the two operands is non-zero
+             *
+             * @return boolean
+             */
+            boolean operator||(const Float &target) const;
+
+
+            /**
+             * Simple assignment operator,
+             * Assigns values from right side operands
+             * to left side operand
+             *
+             * @param target
+             * @return Float
+             */
+            Float operator=(const Float &target);
+
+            /**
+             * Add AND assignment operator,
+             * It adds right operand to the left operand
+             * and assign the result to left operand
+             *
+             * @param target
+             * @return Float
+             */
+            Float operator+=(const Float &target) const;
+
+            /**
+             * Subtract AND assignment operator,
+             * It subtracts right operand from the left operand
+             * and assign the result to left operand
+             *
+             * @param target
+             * @return Float
+             */
+            Float operator-=(const Float &target) const;
+
+            /**
+             * Multiply AND assignment operator,
+             * It multiplies right operand with the left operand
+             * and assign the result to left operand
+             *
+             * @param target
+             * @return Float
+             */
+            Float operator*=(const Float &target) const;
+
+            /**
+             * Divide AND assignment operator,
+             * It divides left operand with the right operand
+             * and assign the result to left operand
+             *
+             * @param target
+             * @return Float
+             */
+            Float operator/=(const Float &target) const;
+
+            /**
+             * Float to Char
+             *
+             * @return char
+             */
 			char charValue() const;
 			short shortValue() const;
 			int intValue() const;
@@ -76,25 +259,7 @@ namespace Java {
 			string toString() const;
 			
 			static Float parseFloat(String target);
-		
-		public:
-			Float operator=(const Float &target);
-			Float operator+(const Float &target);
-			Float operator-(const Float &target);
-			Float operator/(const Float &target);
-			Float operator*(const Float &target);
-			
-			boolean operator==(const Float &target) const;
-			boolean operator!=(const Float &target) const;
-			boolean operator<(const Float &target) const;
-			boolean operator>(const Float &target) const;
-			boolean operator<=(const Float &target) const;
-			boolean operator>=(const Float &target) const;
-			
-			void operator-=(const Float &target);
-			void operator+=(const Float &target);
-			void operator*=(const Float &target);
-			void operator/=(const Float &target);
+
 		};
 	}
 }

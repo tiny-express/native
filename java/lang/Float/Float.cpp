@@ -49,6 +49,22 @@ Float::~Float() {
     }
 }
 
+Float Float::operator+(const Float &target) {
+    return Float(this->original + target.original);
+}
+
+Float Float::operator-(const Float &target) {
+    return Float(this->original - target.original);
+}
+
+Float Float::operator*(const Float &target) {
+    return Float( this->original * target.original );
+}
+
+Float Float::operator/(const Float &target) {
+    return Float( this->original / target.original );
+}
+
 /**
  * Float value
  *
@@ -138,43 +154,6 @@ Float Float::operator=(const Float &target) {
 	free(this->string_original);
 	this->string_original = string_from_float(this->original);
 	return *this;
-}
-
-/**
- * Sum of this and target
- *
- * @param target
- * @return Float
- */
-Float Float::operator+(const Float &target) {
-	return this->original + target.original;
-}
-
-/**
- * Make a subtraction with target Float
- *
- * @return float
- */
-Float Float::operator-(const Float &target) {
-	return this->original - target.original;
-}
-
-/**
-* Make a multiplication with target Float
-*
-* @return float
-*/
-Float Float::operator*(const Float &target) {
-	return this->original * target.original;
-}
-
-/**
-* Make a division with target Float
-*
-* @return float
-*/
-Float Float::operator/(const Float &target) {
-	return this->original / target.original;
 }
 
 /**
