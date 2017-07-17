@@ -33,6 +33,7 @@
 #include "../Deque/Deque.h"
 #include "../List/List.hpp"
 #include "../Queue/Queue.hpp"
+#include "../../lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 
@@ -209,7 +210,7 @@ namespace Java {
              */
             E get(int index) {
                 if(index < 0 || index > this->nodeSize - 1) {
-                    throw std::invalid_argument("[ERROR]: index is out o scope");
+                    throw Java::Lang::Exception("Index is out of bounds!");
                 }
                 return node0(index)->element;
             }
@@ -221,7 +222,7 @@ namespace Java {
              */
             E getFirst() {
                 if (this->first == NULL) {
-                    throw std::invalid_argument("[ERROR]: list is empty");
+                    throw Java::Lang::Exception("List is empty!");
                 }
                 return this->first->element;
             }
@@ -233,7 +234,7 @@ namespace Java {
              */
             E getLast() {
                 if (this->last == NULL) {
-                    throw std::invalid_argument("[ERROR]: list is empty");
+                    throw Java::Lang::Exception("List is empty!");
                 }
                 return this->last->element;
             }
@@ -598,7 +599,7 @@ namespace Java {
 
             E unlinkFirst() {
                 if (this->first == NULL) {
-                    throw std::invalid_argument("[ERROR]: index is out o scope");
+                    throw Java::Lang::Exception("List is empty");
                 }
 
                 Node<E> *temp = this->first;
@@ -612,7 +613,7 @@ namespace Java {
 
             E unlinkLast() {
                 if (this->last == NULL) {
-                    throw std::invalid_argument("[ERROR]: index is out o scope");
+                    throw Java::Lang::Exception("List is empty");
                 }
 
                 Node<E> *temp = this->last;
