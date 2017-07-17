@@ -30,14 +30,6 @@
 #define WEAK
 #endif
 
-#ifdef WIN32
-    #define unsigned_long_long unsigned __int64
-    #define long_long __int64
-#else // gcc. Might not work on other compilers!
-    #define unsigned_long_long unsigned long long
-    #define long_long long long
-#endif
-
 #include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
 #include <stddef.h> /* size_t */
 #include <signal.h>
@@ -48,16 +40,16 @@ typedef void (*SetupFunc)(void *);
 typedef void (*TearDownFunc)(void *);
 
 struct ctest {
-	const char *ssname;  // suite name
-	const char *ttname;  // test name
-	void (*run)();
-	int skip;
-	
-	void *data;
-	SetupFunc setup;
-	TearDownFunc teardown;
-	
-	unsigned int magic;
+    const char *ssname;  // suite name
+    const char *ttname;  // test name
+    void (*run)();
+    int skip;
+
+    void *data;
+    SetupFunc setup;
+    TearDownFunc teardown;
+
+    unsigned int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run
@@ -125,21 +117,21 @@ void assert_str(const char *exp, const char *real, const char *caller, int line)
 #define ASSERT_STR(exp, real) assert_str(exp, real, __FILE__, __LINE__)
 
 void assert_data(const unsigned char *exp, size_t expsize,
-	const unsigned char *real, size_t realsize,
-	const char *caller, int line);
+                 const unsigned char *real, size_t realsize,
+                 const char *caller, int line);
 #define ASSERT_DATA(exp, expsize, real, realsize) \
     assert_data(exp, expsize, real, realsize, __FILE__, __LINE__)
 
-void assert_equal(long_long exp, long_long real, const char *caller, int line);
+void assert_equal(intmax_t exp, intmax_t real, const char *caller, int line);
 #define ASSERT_EQUAL(exp, real) assert_equal(exp, real, __FILE__, __LINE__)
 
-void assert_equal_u(unsigned_long_long exp, unsigned_long_long real, const char *caller, int line);
+void assert_equal_u(uintmax_t exp, uintmax_t real, const char *caller, int line);
 #define ASSERT_EQUAL_U(exp, real) assert_equal_u(exp, real, __FILE__, __LINE__)
 
-void assert_not_equal(long_long exp, long_long real, const char *caller, int line);
+void assert_not_equal(intmax_t exp, intmax_t real, const char *caller, int line);
 #define ASSERT_NOT_EQUAL(exp, real) assert_not_equal(exp, real, __FILE__, __LINE__)
 
-void assert_not_equal_u(unsigned_long_long exp, unsigned_long_long real, const char *caller, int line);
+void assert_not_equal_u(uintmax_t exp, uintmax_t real, const char *caller, int line);
 #define ASSERT_NOT_EQUAL_U(exp, real) assert_not_equal_u(exp, real, __FILE__, __LINE__)
 
 void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const char *caller, int line);
@@ -296,27 +288,27 @@ void assert_data(const unsigned char* exp, size_t expsize,
     }
 }
 
-void assert_equal(long_long exp, long_long real, const char* caller, int line) {
+void assert_equal(intmax_t exp, intmax_t real, const char* caller, int line) {
     if (exp != real) {
-	CTEST_ERR("%s:%d  expected %lld , got %lld" , caller, line, exp, real);
+	CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX, caller, line, exp, real);
     }
 }
 
-void assert_equal_u(unsigned_long_long exp, unsigned_long_long real, const char* caller, int line) {
+void assert_equal_u(uintmax_t exp, uintmax_t real, const char* caller, int line) {
     if (exp != real) {
-	CTEST_ERR("%s:%d  expected %ull , got %ull" PRIuMAX, caller, line, exp, real);
+	CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX, caller, line, exp, real);
     }
 }
 
-void assert_not_equal(long_long exp, long_long real, const char* caller, int line) {
+void assert_not_equal(intmax_t exp, intmax_t real, const char* caller, int line) {
     if ((exp) == (real)) {
-	CTEST_ERR("%s:%d  should not be %lld" , caller, line, real);
+	CTEST_ERR("%s:%d  should not be %" PRIdMAX, caller, line, real);
     }
 }
 
-void assert_not_equal_u(unsigned_long_long exp, unsigned_long_long real, const char* caller, int line) {
+void assert_not_equal_u(uintmax_t exp, uintmax_t real, const char* caller, int line) {
     if ((exp) == (real)) {
-	CTEST_ERR("%s:%d  should not be %ull" , caller, line, real);
+	CTEST_ERR("%s:%d  should not be %" PRIuMAX, caller, line, real);
     }
 }
 
