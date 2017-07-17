@@ -28,6 +28,7 @@
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
 #include "exception"
+#include "../ArithmeticException/ArithmeticException.hpp"
 
 using namespace Java::Lang;
 
@@ -132,8 +133,7 @@ double Math::atan2(double corX, double corY) {
 long Math::addExact(long a, long b) {
     long result = a + b;
     if (((a ^ result) & (b ^ result)) < 0) {
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("long overflow");
     }
     return result;
 }
@@ -148,8 +148,7 @@ long Math::addExact(long a, long b) {
 int Math::addExact(int a, int b) {
     int result = a + b;
     if (((a ^ result) & (b ^ result)) < 0) {
-        //TODO throw new ArithmeticException("integer overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return result;
 }
@@ -193,7 +192,6 @@ double Math::ceil(double a) {
  * @param sign
  * @return double
  */
-//TODO need sun.misc.FpUtils
 double Math::copySign(double magnitude, double sign) {
     return math_copysign(magnitude, sign);
 }
@@ -205,7 +203,6 @@ double Math::copySign(double magnitude, double sign) {
  * @param sign
  * @return float
  */
-//TODO need sun.misc.FpUtils
 float Math::copySign(float magnitude, float sign) {
     return math_copysignf(magnitude, sign);
 }
@@ -243,8 +240,7 @@ double Math::cosh(double a) {
  */
 long Math::decrementExact(long a) {
     if(a == Long::MIN_VALUE){
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("long overflow");
     }
     return a - 1;
 }
@@ -258,8 +254,7 @@ long Math::decrementExact(long a) {
  */
 int Math::decrementExact(int a) {
     if(a == Integer::MIN_VALUE){
-        //TODO throw new ArithmeticException("integer overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return a - 1;
 }
@@ -316,8 +311,7 @@ double Math::floor(double a) {
  */
 int Math::floorDiv(int a, int b) {
     if(b == 0)
-        //TODO throw ArithmeticException
-        return 0;
+        throw ArithmeticException();
     int result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -336,8 +330,7 @@ int Math::floorDiv(int a, int b) {
  */
 long Math::floorDiv(long a, long b) {
     if(b == 0)
-        //TODO throw ArithmeticException
-        return 0;
+        throw ArithmeticException();
     long result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -440,8 +433,7 @@ double Math::IEEEremainder(double dividend, double divisor) {
  */
 int Math::incrementExact(int a) {
     if (a == Integer::MAX_VALUE) {
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return a + 1;
 }
@@ -455,8 +447,7 @@ int Math::incrementExact(int a) {
  */
 long Math::incrementExact(long a) {
     if (a == Long::MAX_VALUE) {
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("long overflow");
     }
     return a + 1L;
 }
@@ -611,8 +602,7 @@ double Math::min(double a, double b) {
 int Math::multiplyExact(int a, int b) {
     long result = (long)a * (long)b;
     if ((int)result != result) {
-        //TODO throw new ArithmeticException("integer overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return (int)result;
 }
@@ -623,22 +613,10 @@ long Math::multiplyExact(long a, long b) {
     unsigned long absB = abs(b);
 
     if (((absA | absB) >> 31) != 0) {
-
-        // Some bits greater than 2^31 that might cause overflow
-        // Check the result using the divide operator
-        // and check for the special case of Long.MIN_VALUE * -1
-
-        try {
-            if(a == Long::MIN_VALUE && b == -1)
-                throw std::overflow_error("long overflow");
-            if((b != 0) && (result / b != a))
-                throw std::overflow_error("long overflow");
-        }
-        catch (std::overflow_error e){
-            return 0;
-        }
+        if((a == Long::MIN_VALUE && b == -1) || ((b != 0) && (result / b != a)))
+            throw ArithmeticException("long overflow");
     }
-    return (long) result;
+    return result;
 }
 
 /**
@@ -650,8 +628,7 @@ long Math::multiplyExact(long a, long b) {
  */
 int Math::negateExact(int a) {
     if (a == Integer::MIN_VALUE) {
-        //TODO throw new ArithmeticException("integer overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return -a;
 }
@@ -665,8 +642,7 @@ int Math::negateExact(int a) {
  */
 long Math::negateExact(long a) {
     if (a == Long::MIN_VALUE) {
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("long overflow");
     }
     return -a;
 }
@@ -817,8 +793,9 @@ double Math::pow(double base, double exponent) {
  */
 //TODO need Double::longBitsToDouble
 double Math::powerOfTwoD(int n) {
-    if(n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT);
+    if(n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT)
         //TODO throw Assertion error
+        return 0;
     else
         return Double::longBitsToDouble((((long)n + (long)Double::EXP_BIAS) <<
                (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
@@ -937,7 +914,6 @@ double Math::scalb(double a, int scaleFactor) {
  * If the argument is positive zero or negative zero, then the result
  * is the same as the argument.
  */
-//TODO need sun.misc.FpUtils
 double Math::signum(double a) {
     return (a == 0.0 || Double::isNaN(a)) ? a: copySign(1.0, a);
 }
@@ -1006,8 +982,7 @@ double Math::sqrt(double a) {
 long Math::subtractExact(long a, long b) {
     long result = a - b;
     if (((a ^ b) & (a ^ result)) < 0) {
-        //TODO throw new ArithmeticException("long overflow");
-        return 0;
+        throw ArithmeticException("long overflow");
     }
     return result;
 }
@@ -1023,8 +998,7 @@ long Math::subtractExact(long a, long b) {
 int Math::subtractExact(int a, int b) {
     int result = a - b;
     if (((a ^ b) & (a ^ result)) < 0) {
-        //TODO throw new ArithmeticException("integer overflow");
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return result;
 }
@@ -1078,8 +1052,7 @@ double Math::toDegrees(double angleRadian) {
  */
 int Math::toIntExact(long a) {
     if ((int)a != a) {
-        //TODO throw new ArithmeticException("integer overflow")
-        return 0;
+        throw ArithmeticException("integer overflow");
     }
     return (int) a;
 }

@@ -31,6 +31,7 @@ extern "C" {
 #include "Math.hpp"
 #include "../Integer/Integer.hpp"
 #include "../Long/Long.hpp"
+#include "../Exception/Exception.hpp"
 
 using namespace Java::Lang;
 
@@ -56,11 +57,15 @@ TEST (JavaLang, MathAddExactInt){
     int actualResult = Math::addExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
     
-    // Given an int equal to Integer::MAX_VALUE
+    // Given an int equal to Integer::MAX_VALUE,
+    // test if addExact throw ArithmeticException("integer overflow")
     int c = Integer::MAX_VALUE;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::addExact(c, b);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        int overFlowResult = Math::addExact(c, b);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathAddExactLong){
@@ -70,12 +75,16 @@ TEST (JavaLang, MathAddExactLong){
     long expectResult = 3;
     long actualResult = Math::addExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Long::MAX_VALUE
+
+    // Given an int equal to Long::MAX_VALUE,
+    // test if addExact throw ArithmeticException("long overflow")
     long c = Long::MAX_VALUE;
-    long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::addExact(c, b);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        long overFlowResult = Math::addExact(c, b);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathCos){
@@ -358,12 +367,16 @@ TEST (JavaLang, MathDecrementExactInt){
     int expectResult = 4;
     int actualResult = Math::decrementExact(a);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Integer::MIN_VALUE
+
+    // Given an int equal to Integer::MIN_VALUE,
+    // test if decrementExact throw ArithmeticException("integer overflow")
     int c = Integer::MIN_VALUE;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::decrementExact(c);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        int overFlowResult = Math::decrementExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathDecrementExactLong){
@@ -372,12 +385,15 @@ TEST (JavaLang, MathDecrementExactLong){
     long expectResult = 4;
     long actualResult = Math::decrementExact(a);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Long::MIN_VALUE
+
+    // Given an int equal to Long::MIN_VALUE, test if decrementExact throw ArithmeticException("long overflow")
     long c = Long::MIN_VALUE;
-    long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::decrementExact(c);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        long overFlowResult = Math::decrementExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathIncrementExactInt){
@@ -386,12 +402,16 @@ TEST (JavaLang, MathIncrementExactInt){
     int expectResult = 6;
     int actualResult = Math::incrementExact(a);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Integer::MAX_VALUE
+
+    // Given an int equal to Integer::MAX_VALUE,
+    // test if incrementExact throw ArithmeticException("integer overflow")
     int c = Integer::MAX_VALUE;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::incrementExact(c);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        int overFlowResult = Math::incrementExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathIncrementExactLong){
@@ -400,27 +420,36 @@ TEST (JavaLang, MathIncrementExactLong){
     long expectResult = 6;
     long actualResult = Math::incrementExact(a);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Long::MAX_VALUE
+
+    // Given an int equal to Long::MAX_VALUE,
+    // test if incrementExact throw ArithmeticException("long overflow")
     long c = Long::MAX_VALUE;
-    long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::incrementExact(c);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        long overFlowResult = Math::incrementExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathMultiplyExact){
     // Given 2 int which multiply result overflow an integer
+    // test if multiplyExact throw ArithmeticException("integer overflow")
     int x = Integer::MAX_VALUE;
     int y = 2;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::multiplyExact(x,y);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    try {
+        int overFlowResult = Math::multiplyExact(x, y);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
+
 
     // Given 2 int
     int a = 10;
     int b = 20;
     int expectResult = 200;
-    int actualResult = Math::multiplyExact(a,b);
+    int actualResult = Math::multiplyExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
@@ -429,19 +458,28 @@ TEST (JavaLang, MathMultiplyExactLong){
     long a = 5;
     long b = 6;
     long expectResult = 30;
-    long actualResult = Math::multiplyExact(a,b);
+    long actualResult = Math::multiplyExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
-    
-    // Given an int equal to Long::MAX_VALUE
+
+    // Given an int equal to Long::MAX_VALUE,
+    // test if multiplyExact throw ArithmeticException("long overflow")
     long c = Long::MAX_VALUE;
-    long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::multiplyExact(c, 2L);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
-    
-    // Given an int equal to Long::MIN_VALUE
+    try {
+        long overFlowResult = Math::multiplyExact(c, 2L);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
+
+    // Given an int equal to Long::MIN_VALUE, multiply with -1
+    // test if multiplyExact throw ArithmeticException("long overflow")
     long d = Long::MIN_VALUE;
-    long actualOverFlowResult1 = Math::multiplyExact(d, -1L);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult1);
+    try {
+        long overFlowResult = Math::multiplyExact(d, -1L);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 
 }
 
@@ -452,11 +490,15 @@ TEST (JavaLang, MathNegateExactInt){
     int actualResult = Math::negateExact(x);
     ASSERT_EQUAL(expectResult, actualResult);
 
-    // Given an int equal to Integer::MIN_VALUE
-    int y = Integer::MIN_VALUE;
-    int expectOverFlowResult = 0;
-    int actuanOverFlowResult = Math::negateExact(y);
-    ASSERT_EQUAL(expectOverFlowResult, actuanOverFlowResult);
+    // Given an int equal to Integer::MIN_VALUE,
+    // test if negateExact throw ArithmeticException("integer overflow")
+    int c = Integer::MIN_VALUE;
+    try {
+        int overFlowResult = Math::negateExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathNegateExactLong){
@@ -466,11 +508,15 @@ TEST (JavaLang, MathNegateExactLong){
     long actualResult = Math::negateExact(x);
     ASSERT_EQUAL(expectResult, actualResult);
 
-    // Given an long equal to Long::MIN_VALUE
-    long y = Long::MIN_VALUE;
-    long expectOverFlowResult = 0;
-    long actuanOverFlowResult = Math::negateExact(y);
-    ASSERT_EQUAL(expectOverFlowResult, actuanOverFlowResult);
+    // Given an int equal to Long::MIN_VALUE,
+    // test if negateExact throw ArithmeticException("long overflow")
+    long c = Long::MIN_VALUE;
+    try {
+        long overFlowResult = Math::negateExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathLog){
@@ -806,7 +852,7 @@ TEST (JavaLang, MathRInt){
 TEST (JavaLang, MathExp){
 	// Given a variable equal to E^3
 	double eCubed = 3;
-    double expectResult = Math::pow(Math::E,3);
+    double expectResult = Math::pow(Math::E, 3);
     double actualResult = Math::exp(eCubed);
 	ASSERT_EQUAL(expectResult, actualResult);
 
@@ -832,7 +878,7 @@ TEST (JavaLang, MathExp){
 TEST (JavaLang, MathExpm1){
     // Given a variable equal to E^3
     double eCubed = 3;
-    double expectResult = Math::pow(Math::E,3) - 1;
+    double expectResult = Math::pow(Math::E, 3) - 1;
     double actualResult = Math::expm1(eCubed);
     ASSERT_EQUAL(expectResult, actualResult);
 
@@ -1103,9 +1149,12 @@ TEST (JavaLang, MathFloorDivInt){
     // Given 2 int
     int dividend3 = 11;
     int divisor3 = 0;
-    int expectResult3 = 0;
-    int actualResult3 = Math::floorDiv(dividend3, divisor3);
-    ASSERT_EQUAL(expectResult3, actualResult3);
+    try {
+        int devideByZero = Math::floorDiv(dividend3, divisor3);
+    }
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathSignNumDouble){
@@ -1168,11 +1217,15 @@ TEST (JavaLang, MathSubtractExactInt){
     int actualResult = Math::subtractExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
 
-    // Given a value equal to Integer::MIN_VALUE
-    int minValue = Integer::MIN_VALUE;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::subtractExact(minValue, b);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    // Given an int equal to Integer::MIN_VALUE,
+    // test if subtractExact throw ArithmeticException("integer overflow")
+    int c = Integer::MIN_VALUE;
+    try {
+        int overFlowResult = Math::subtractExact(c, b);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathSubtractExactLong){
@@ -1183,11 +1236,15 @@ TEST (JavaLang, MathSubtractExactLong){
     long actualResult = Math::subtractExact(a, b);
     ASSERT_EQUAL(expectResult, actualResult);
 
-    // Given a value equal to Integer::MIN_VALUE
-    long minValue = Long::MIN_VALUE;
-    long expectOverFlowResult = 0;
-    long actualOverFlowResult = Math::subtractExact(minValue, b);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    // Given an int equal to Long::MIN_VALUE,
+    // test if subtractExact throw ArithmeticException("long overflow")
+    long c = Long::MIN_VALUE;
+    try {
+        long overFlowResult = Math::subtractExact(c, b);
+    }
+    catch (Exception e) {
+        ASSERT_STR("long overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathToIntExact){
@@ -1197,11 +1254,15 @@ TEST (JavaLang, MathToIntExact){
     int actualResult = Math::toIntExact(a);
     ASSERT_EQUAL(expectResult, actualResult);
 
-    // Given a long > Long::MAX_VALUE
-    long b = Long::MAX_VALUE;
-    int expectOverFlowResult = 0;
-    int actualOverFlowResult = Math::toIntExact(b);
-    ASSERT_EQUAL(expectOverFlowResult, actualOverFlowResult);
+    // Given an int equal to Long::MAX_VALUE,
+    // test if toIntExact throw ArithmeticException("integer overflow")
+    long c = Long::MAX_VALUE;
+    try {
+        int overFlowResult = Math::toIntExact(c);
+    }
+    catch (Exception e) {
+        ASSERT_STR("integer overflow", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathFloorDivLong) {
@@ -1222,9 +1283,12 @@ TEST (JavaLang, MathFloorDivLong) {
     // Given 2 long
     long dividend3 = 11;
     long divisor3 = 0;
-    long expectResult3 = 0;
-    long actualResult3 = Math::floorDiv(dividend3, divisor3);
-    ASSERT_EQUAL(expectResult3, actualResult3);
+    try {
+        long devideByZero = Math::floorDiv(dividend3, divisor3);
+    }
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
 }
 
 TEST (JavaLang, MathFloorModInt){
