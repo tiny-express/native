@@ -27,6 +27,10 @@
 #ifndef NATIVE_BUILTIN_H
 #define NATIVE_BUILTIN_H
 
+// Platform Macros
+#include "platform.h"
+
+// C Standard Library
 #include <stdio.h>
 #include <math.h>
 #include <stddef.h>
@@ -36,24 +40,15 @@
 #include <getopt.h>
 #include <limits.h>
 #include <stdarg.h>
-#include <zlib.h>
 #include <ctype.h>
-#include <pthread.h>
 #include <memory.h>
 
-#include "compress.h"
-#include "crypto.h"
+// Native Library
 #include "datetime.h"
 #include "common.h"
 #include "math.h"
-#include "network.h"
-#include "network.h"
-#include "storage.h"
 #include "string.h"
 #include "system.h"
-#include "thread.h"
 #include "type.h"
-#include "validator.h"
-#include "vendor.h"
 
 #endif//NATIVE_BUILTIN_H

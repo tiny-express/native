@@ -56,13 +56,13 @@ static int MAX_RADIX = 36;
  * The constant value of this field is the smallest value of type
  * {@code char}, {@code '\u005Cu0000'}.
  */
-static wchar_t MIN_VALUE = '\u0000000';
+static unicode MIN_VALUE = (unicode) '\u0000000';
 
 /**
  * The constant value of this field is the largest value of type
- * {@code wchar_t}, {@code '\u005CuFFFF'}.
+ * {@code unicode}, {@code '\u005CuFFFF'}.
  */
-static wchar_t MAX_VALUE = '\u000FFFF';
+static unicode MAX_VALUE = (unicode) '\u000FFFF';
 
 /**
  * General category "Cn" in the Unicode specification.
@@ -327,7 +327,7 @@ static byte DIRECTIONALITY_POP_DIRECTIONAL_FORMAT = 18;
  * in the UTF-16 encoding, constant {@code '\u005CuD800'}.
  * A high-surrogate is also known as a leading-surrogate.
  */
-static wchar_t MIN_HIGH_SURROGATE = '\u000D800';
+static unicode MIN_HIGH_SURROGATE = (unicode) '\u000D800';
 
 /**
  * The maximum value of a
@@ -336,7 +336,7 @@ static wchar_t MIN_HIGH_SURROGATE = '\u000D800';
  * in the UTF-16 encoding, constant {@code '\u005CuDBFF'}.
  * A high-surrogate is also known as a leading-surrogate.
  */
-static wchar_t MAX_HIGH_SURROGATE = '\u000DBFF';
+static unicode MAX_HIGH_SURROGATE = (unicode) '\u000DBFF';
 
 /**
  * The minimum value of a
@@ -345,7 +345,7 @@ static wchar_t MAX_HIGH_SURROGATE = '\u000DBFF';
  * in the UTF-16 encoding, constant {@code '\u005CuDC00'}.
  * A low-surrogate is also known as a trailing-surrogate.
  */
-static wchar_t MIN_LOW_SURROGATE = '\u000DC00';
+static unicode MIN_LOW_SURROGATE = (unicode) '\u000DC00';
 
 /**
  * The maximum value of a
@@ -354,19 +354,19 @@ static wchar_t MIN_LOW_SURROGATE = '\u000DC00';
  * in the UTF-16 encoding, constant {@code '\u005CuDFFF'}.
  * A low-surrogate is also known as a trailing-surrogate.
  */
-static wchar_t MAX_LOW_SURROGATE = '\u000DFFF';
+static unicode MAX_LOW_SURROGATE = (unicode) '\u000DFFF';
 
 /**
  * The minimum value of a Unicode surrogate code unit in the
  * UTF-16 encoding, constant {@code '\u005CuD800'}.
  */
-static wchar_t MIN_SURROGATE = MIN_HIGH_SURROGATE;
+static unicode MIN_SURROGATE = MIN_HIGH_SURROGATE;
 
 /**
  * The maximum value of a Unicode surrogate code unit in the
  * UTF-16 encoding, constant {@code '\u005CuDFFF'}.
  */
-static wchar_t MAX_SURROGATE = MAX_LOW_SURROGATE;
+static unicode MAX_SURROGATE = MAX_LOW_SURROGATE;
 
 /**
  * The minimum value of a
@@ -435,14 +435,14 @@ int Character::codePointAt(Array<char> a, int index, int limit) {
 
 // throws ArrayIndexOutOfBoundsException if index out of bounds
 int Character::codePointAtImpl(Array<char> a, int index, int limit) {
-    char c1 = a[index];
+    unicode c1 = (unicode) a[index];
     if (isHighSurrogate(c1) && ++index < limit) {
-        char c2 = a[index];
+        unicode c2 = (unicode) a[index];
         if (isLowSurrogate(c2)) {
             return toCodePoint(c1, c2);
         }
     }
-    return c1;
+    return (int) c1;
 }
 
 int Character::codePointBefore(Array<char> a, int index) {
@@ -496,20 +496,20 @@ int Character::compareTo(Character anotherCharacter) {
     return compare(this->charValue(), anotherCharacter.charValue());
 }
 
-boolean Character::isHighSurrogate(wchar_t ch) {
+boolean Character::isHighSurrogate(unicode ch) {
     // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
     return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
 }
 
-boolean Character::isLowSurrogate(wchar_t ch) {
+boolean Character::isLowSurrogate(unicode ch) {
     return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
 }
 
-boolean Character::isSurrogate(wchar_t ch) {
+boolean Character::isSurrogate(unicode ch) {
     return ch >= MIN_SURROGATE && ch < (MAX_SURROGATE + 1);
 }
 
-int Character::toCodePoint(wchar_t high, wchar_t low) {
+int Character::toCodePoint(unicode high, unicode low) {
     return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
                                    - (MIN_HIGH_SURROGATE << 10)
                                    - MIN_LOW_SURROGATE);

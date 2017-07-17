@@ -97,7 +97,7 @@ namespace Java {
              * @see    Character::isLowSurrogate(char)
              * @see    Character.UnicodeBlock#of(int)
              */
-            static boolean isHighSurrogate(wchar_t ch);
+            static boolean isHighSurrogate(unicode ch);
 
             /**
               * Determines if the given {@code char} value is a
@@ -117,7 +117,7 @@ namespace Java {
               *         {@code false} otherwise.
               * @see    Character#isHighSurrogate(char)
               */
-            static boolean isLowSurrogate(wchar_t ch);
+            static boolean isLowSurrogate(unicode ch);
 
             /**
              * Determines if the given char value is a Unicode surrogate code unit.
@@ -127,7 +127,7 @@ namespace Java {
              * @param target
              * @return boolean
              */
-            static boolean isSurrogate(wchar_t target);
+            static boolean isSurrogate(unicode target);
 
              /**
               * Returns the code point at the given index of the
@@ -150,7 +150,7 @@ namespace Java {
               * {@code index} is negative or not less than
               * {@link CharSequence#length() seq.length()}.
               */
-            static int toCodePoint(wchar_t high, wchar_t low);
+            static int toCodePoint(unicode high, unicode low);
 
             /**
              * Returns the code point at the given index of the
