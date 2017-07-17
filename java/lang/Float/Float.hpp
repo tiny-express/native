@@ -47,17 +47,18 @@ static float NaN_NUMBER_FLOAT = float(0.0 / 0.0); // -nan
 /**
  * A constant holding the largest positive finite value of type
  */
-static float MAX_VALUE_FLOAT = std::numeric_limits<float>::max(); // 1.797693134862316e+308
+static float MAX_VALUE_FLOAT = std::numeric_limits<float>::max(); // 3.403e+38
 
 /**
- * A constant holding the smallest positive normal value of type
+ * The smallest subnormal value has sign bit = 0, exponent = 0
+ * and only the least significant bit of the fraction is 1
  */
-static float MIN_NORMAL_FLOAT = std::numeric_limits<float>::denorm_min(); // 4.940656458412465e-324
+static float MIN_NORMAL_FLOAT = std::numeric_limits<float>::denorm_min(); // 1.401e-45
 
 /**
- * A constant holding the smallest positive nonzero value of type
+ * A constant holding the smallest value of type
  */
-static float MIN_VALUE_FLOAT = std::numeric_limits<float>::min(); //2.225073858507201e-308
+static float MIN_VALUE_FLOAT = std::numeric_limits<float>::min(); // 1.175e-38
 
 /**
  * Minimum exponent a normalized double number may have
@@ -245,15 +246,306 @@ namespace Java {
              */
             Float operator/=(const Float &target) const;
 
-			char charValue() const;
-			short shortValue() const;
-			int intValue() const;
-			long longValue() const;
-			float floatValue() const;
-			double doubleValue() const;
-			string toString() const;
-			
-			static Float parseFloat(String target);
+            /**
+             * Float to Char
+             *
+             * @return char
+             */
+            char charValue() const;
+
+            /**
+             * Float to String
+             *
+             * @return CString
+             */
+            string stringValue() const;
+
+            /**
+             * Short value of Float
+             *
+             * @return short
+             */
+            short shortValue() const;
+
+            /**
+             * Float value in Float
+             *
+             * @return int
+             */
+            int intValue() const;
+
+            /**
+             * Float value in Long
+             *
+             * @return long
+             */
+            long longValue() const;
+
+            /**
+             * Float value in float
+             *
+             * @return float
+             */
+            float floatValue() const;
+
+            /**
+             * Float value in double
+             *
+             * @return double
+             */
+            double doubleValue() const;
+
+            /**
+             * Float to String
+             *
+             * @return String
+             */
+            string toString() const;
+
+            /**
+             * Returns a string representation of the {double}
+             * argument. All characters mentioned below are ASCII characters.
+             *
+             * @param   d   the {double} to be converted.
+             * @return a string representation of the argument.
+             */
+            static String toString(float d);
+
+            /**
+             * Parse float
+             *
+             * @param target
+             * @return float
+             */
+            static Float parseFloat(String target);
+
+            /**
+             * Returns the value of this {Float} as a {byte}
+             * after a narrowing primitive conversion.
+             *
+             * @return  the {float} value represented by this object
+             *          converted to type {byte}
+             */
+            byte byteValue() const ;
+
+            /**
+             * Compares the two specified {float} values. The sign
+             * of the integer value returned is the same as that of the
+             * integer that would be returned by the call:
+             *    Float(float1).compareTo(Float(d2))
+             *
+             * @param   float1        the first {float} to compare
+             * @param   float2        the second {float} to compare
+             * @return  the value {0} if {float1} is
+             *          numerically equal to {float2}; a value less than
+             *          {0} if {float1} is numerically less than
+             *          {float2}; and a value greater than {0}
+             *          if {float1} is numerically greater than
+             *          {float2}.
+             */
+            static int compare(float float1, float float2);
+
+            /**
+             * Compares two {Float} objects numerically.
+             *
+             * @param   anotherFloat   the {Float} to be compared.
+             * @return  the value {0} if {anotherFloat} is
+             *          numerically equal to this {Float}; a value
+             *          less than {0} if this {Float}
+             *          is numerically less than {anotherFloat};
+             *          and a value greater than {0} if this
+             *          {Float} is numerically greater than
+             *          {anotherFloat}.
+             */
+            int compareTo(Float anotherFloat);
+
+            /**
+             * Returns a representation of the specified floating-point value
+             * according to the IEEE 754 floating-point "float
+             * format" bit layout.
+             *
+             * @param   value   a {float} precision floating-point number.
+             * @return the bits that represent the floating-point number.
+             */
+            static long floatToLongBits(float valueFloat);
+
+            /**
+             * Returns a representation of the specified floating-point value
+             * according to the IEEE 754 floating-point "float
+             * format" bit layout, preserving Not-a-Number (NaN) values.
+             *
+             * @param   value   a {float} precision floating-point number.
+             * @return the bits that represent the floating-point number.
+             */
+            static long floatToRawLongBits(float floatInput);
+
+            /**
+             * Compares this object against the specified object.
+             *
+             * @param   obj   the object to compare with.
+             * @return  {true} if the objects are the same;
+             *          {false} otherwise.
+             * @see java.lang.Float#floatToLongBits(float)
+             */
+            boolean equals(const Float &object) const;
+
+            /**
+             * Returns a hash code for this {Float} object.
+             *
+             * @return  a {hash code} value for this object.
+             */
+            long hashCode();
+
+            /**
+             * Returns a hash code for a {float} value; compatible with
+             * {Float.hashCode()}.
+             *
+             * @param value the value to hash
+             * @return a hash code value for a {float} value.
+             */
+            static long hashCode(float floatInput);
+
+            /**
+             * Returns {true} if the argument is a finite floating-point
+             * value; returns {false} otherwise (for NaN and infinity
+             * arguments).
+             *
+             * @param d the {float} value to be tested
+             * @return {true} if the argument is a finite
+             * floating-point value, {false} otherwise.
+             */
+            static boolean isFinite(float d);
+
+            /**
+             * Returns {true} if the specified number is infinitely
+             * large in magnitude, {false} otherwise.
+             *
+             * @param   v   the value to be tested.
+             * @return  {true} if the value of the argument is positive
+             *          infinity or negative infinity; {false} otherwise.
+             */
+            static boolean isInfinite(float v);
+
+            /**
+            * Returns {true} if this {Float} value is
+            * infinitely large in magnitude, {false} otherwise.
+            *
+            * @return  {true} if the value represented by this object is
+            *          positive infinity or negative infinity;
+            *          {false} otherwise.
+            */
+            boolean isInfinite();
+
+            /**
+             * Returns {true} if the specified number is a
+             * Not-a-Number (NaN) value, {false} otherwise.
+             *
+             * @param   v   the value to be tested.
+             * @return  {true} if the value of the argument is NaN;
+             *          {false} otherwise.
+             */
+            static boolean isNaN(float v);
+
+            /**
+             * Returns {true} if this {Float} value is
+             * a Not-a-Number (NaN), {false} otherwise.
+             *
+             * @return  {true} if the value represented by this object is
+             *          NaN; {false} otherwise.
+             */
+            boolean isNaN() ;
+
+            /**
+             * Returns the {float} value corresponding to a given
+             * bit representation.
+             *
+             * @param   bits   any {long} integer.
+             * @return  the {float} floating-point value with the same
+             *          bit pattern.
+             */
+            static float longBitsToFloat(long bits);
+
+            /**
+             * Returns the smaller of two {float} values
+             * as if by calling {@link Math#min(float, float) Math.min}.
+             *
+             * @param a the first operand
+             * @param b the second operand
+             * @return the smaller of {a} and {b}.
+             * @see java.util.function.BinaryOperator
+             */
+            static float min(float a, float b);
+
+            // TODO FIXME
+//            /**
+//             * Returns a hexadecimal string representation of the
+//             * {float} argument. All characters mentioned below
+//             * are ASCII characters.
+//             *
+//             * @param   d   the {float} to be converted.
+//             * @return a hex string representation of the argument.
+//             */
+//            static String toHexString(float d);
+
+            /**
+            * Convert float to binary 32 bit
+            * (Single-precision floating-point format
+            * In IEEE 754-2008)
+            *
+            * @param float
+            * @return string binary 32 bit of input
+            */
+            static string floatToBinary32StringType(float floatInput );
+
+            /**
+            * Convert float to binary 64 bit
+            * (Float-precision floating-point format
+            * In IEEE 754-2008)
+            *
+            * @param float
+            * @return string binary 64 bit of input
+            */
+            static string floatToBinary64StringType(float floatInput );
+
+            /**
+            * Convert binary64StringType To Float
+            * (Float-precision floating-point format
+            * In IEEE 754-2008)
+            * To Float
+             *
+            * @param  string
+            * @return float
+            */
+            static float binary64StringTypeToFloat(string Binary64StringTypeInput);
+
+            /**
+            * Convert longBits To Binary64StringType
+            * (Float-precision floating-point format
+            * In IEEE 754-2008)
+             *
+            * @param  long
+            * @return string
+            */
+            static string longBitsToBinary64StringType(long longBitsInput);
+
+            /**
+            * Convert from string to float
+            *
+            * @param      s   the string to be parsed.
+            * @return     a {Float} object holding the value
+            *             represented by the {String} argument.
+            * @throws     NumberFormatException  if the string does not contain a
+            *             parsable number.
+            */
+            static Float valueOf(String stringInput);
+
+            /**
+            * Assign value to Float variable
+            *
+            * @param  d a float value.
+            * @return a {Float} instance representing {d}.
+            */
+            static Float valueOf(float floatInput);
 
 		};
 	}

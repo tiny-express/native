@@ -62,49 +62,49 @@ TEST (JavaLang, FloatArithmeticOperator) {
     variableArithmeticOperator2 = 22.22;
     expectedResultOperator = 33.33;
     actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator -
     variableArithmeticOperator1 = 33.33 ;
     variableArithmeticOperator2 = 22.22 ;
     expectedResultOperator = 11.11;
     actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator *
     variableArithmeticOperator1 =  2.0;
     variableArithmeticOperator2 =  13.02;
     expectedResultOperator = 26.04;
     actualResultOperator = variableArithmeticOperator1 * variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /
     variableArithmeticOperator1 = 26.04 ;
     variableArithmeticOperator2 = 2.0 ;
     expectedResultOperator = 13.02;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . POSITIVE_INFINITY_FLOAT
     variableArithmeticOperator1 = 26.04 ;
     variableArithmeticOperator2 = 0 ;
     expectedResultOperator = POSITIVE_INFINITY_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . NEGATIVE_INFINITY_FLOAT
     variableArithmeticOperator1 = -26.04 ;
     variableArithmeticOperator2 = 0 ;
     expectedResultOperator = NEGATIVE_INFINITY_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . NaN_NUMBER_FLOAT
     variableArithmeticOperator1 = 0 ;
     variableArithmeticOperator2 = 0 ;
     expectedResultOperator = NaN_NUMBER_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
 //TODO enable after finish method equals , compare
@@ -235,35 +235,96 @@ TEST (JavaLang, FloatAssignmentOperator) {
     variableAssignmentOperator2 = 1.1;
     expectedResultOperator = 1.1;
     actualResultOperator = (variableAssignmentOperator1 = variableAssignmentOperator2);
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator +=
     variableAssignmentOperator1 = 11.11 ;
     variableAssignmentOperator2 = 22.22 ;
     expectedResultOperator = 33.33;
     actualResultOperator = (variableAssignmentOperator1 += variableAssignmentOperator2);
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator -=
     variableAssignmentOperator1 =  33.33;
     variableAssignmentOperator2 =  11.11;
     expectedResultOperator = 22.22;
     actualResultOperator = (variableAssignmentOperator1 -= variableAssignmentOperator2);
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator *=
     variableAssignmentOperator1 = 13.02 ;
     variableAssignmentOperator2 = 2.0 ;
     expectedResultOperator = 26.04;
     actualResultOperator = (variableAssignmentOperator1 *= variableAssignmentOperator2);
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /=
     variableAssignmentOperator1 = 26.04 ;
     variableAssignmentOperator2 = 2.0 ;
     expectedResultOperator = 13.02;
     actualResultOperator = (variableAssignmentOperator1 /= variableAssignmentOperator2);
-    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+}
+
+TEST (JavaLang, FloatCharValue){
+    // Create variable to test
+    Float variableTestCharValue;
+    char expectedResultCharValue;
+    char actualResultCharValue;
+
+    // Test POSITIVE_INFINITY_FLOAT
+    variableTestCharValue = POSITIVE_INFINITY_FLOAT;
+    expectedResultCharValue = 'i';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test NEGATIVE_INFINITY_FLOAT
+    variableTestCharValue = NEGATIVE_INFINITY_FLOAT;
+    expectedResultCharValue = '-';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+//    // Test NaN_NUMBER_FLOAT
+//    variableTestCharValue = NaN_NUMBER_FLOAT;
+//    expectedResultCharValue = 45;  // 110 in MacOS
+//    actualResultCharValue = variableTestCharValue.charValue();
+//    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MAX_VALUE_FLOAT
+    variableTestCharValue = MAX_VALUE_FLOAT;
+    expectedResultCharValue = '3';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MIN_NORMAL_FLOAT
+    variableTestCharValue = MIN_NORMAL_FLOAT;
+    expectedResultCharValue = '1';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test MIN_VALUE_FLOAT
+    variableTestCharValue = MIN_VALUE_FLOAT;
+    expectedResultCharValue = '1';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test valid case
+    variableTestCharValue = 13.02;
+    expectedResultCharValue = '1';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test valid case
+    variableTestCharValue = 20.31;
+    expectedResultCharValue = '2';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+
+    // Test invalid case
+    variableTestCharValue = 13.02;
+    expectedResultCharValue = '5';
+    actualResultCharValue = variableTestCharValue.charValue();
+    ASSERT_NOT_EQUAL(expectedResultCharValue , actualResultCharValue);
 }
 
 //TEST (JavaLang, FloatParseFloat) {
@@ -513,45 +574,45 @@ TEST (JavaLang, FloatAssignmentOperator) {
 //    ASSERT_DBL_FAR(expectedFloatFloatValue, actualFloatFloatValue);
 //}
 //TEST (JavaLang, FloatDoubleValue) {
-//    // Create variables to test Float::doubleValue.
+//    // Create variables to test Float::floatValue.
 //    Float variableFloatDoubleValue;
-//    double expectedFloatDoubleValue = 0;
-//    double actualFloatDoubleValue = 0;
+//    float expectedFloatDoubleValue = 0;
+//    float actualFloatDoubleValue = 0;
 //
 //    // Test value NULL .
 //    variableFloatDoubleValue = 0;
 //    expectedFloatDoubleValue = 0;
-//    actualFloatDoubleValue = variableFloatDoubleValue .doubleValue();
+//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
 //    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //
 //    // Test value 0 .
 //    variableFloatDoubleValue = 0.0;
 //    expectedFloatDoubleValue = 0;
-//    actualFloatDoubleValue = variableFloatDoubleValue .doubleValue();
+//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
 //    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //
 //    // Test positive value  .
 //    variableFloatDoubleValue = 1302.13;
 //    expectedFloatDoubleValue = 1302.13;
-//    actualFloatDoubleValue = variableFloatDoubleValue .doubleValue();
+//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
 //    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //
 //    // Test negative value  .
 //    variableFloatDoubleValue = -1302.13;
 //    expectedFloatDoubleValue = -1302.13;
-//    actualFloatDoubleValue = variableFloatDoubleValue .doubleValue();
+//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
 //    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //
 //    // Test case FALSE  .
 //    variableFloatDoubleValue = -1300.132;
 //    expectedFloatDoubleValue = -1302.555;
-//    actualFloatDoubleValue = variableFloatDoubleValue .doubleValue();
+//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
 //    ASSERT_DBL_FAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //
 //    // TODO Check it
 ////    // Test case FALSE  .
 ////    variableFloatDoubleValue = -1302.15;
 ////    expectedFloatDoubleValue= -1302.1;
-////    actualFloatDoubleValue= variableFloatDoubleValue .doubleValue();
+////    actualFloatDoubleValue= variableFloatDoubleValue .floatValue();
 ////    ASSERT_DBL_FAR(expectedFloatDoubleValue, actualFloatDoubleValue);
 //}

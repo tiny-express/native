@@ -142,26 +142,20 @@ Float Float::operator/=(const Float &target) const {
     return (Float) (this->original / target.original);
 }
 
+char Float::charValue() const {
+    string convertResult = string_from_float(this->original);
+    char charValueResult = string_to_char(convertResult);
+    free(convertResult);
+    return charValueResult;
+}
+
 /**
  * Float value
  *
  * @return float
  */
 float Float::floatValue() const {
-	return this->original;
-}
-
-/**
- * Char value
- *
- * @return char
- */
-char Float::charValue() const {
-    string stringFromFloatResult = string_from_float(this->original);
-    char floatCharValueResult = string_to_char(stringFromFloatResult);
-    free(stringFromFloatResult);
-	return floatCharValueResult;
-
+    return this->original;
 }
 
 /**
@@ -170,7 +164,7 @@ char Float::charValue() const {
  * @return short
  */
 short Float::shortValue() const {
-	return (short) this->original;
+    return (short) this->original;
 }
 
 /**
@@ -179,7 +173,7 @@ short Float::shortValue() const {
  * @return int
  */
 int Float::intValue() const {
-	return (int) this->original;
+    return (int) this->original;
 }
 
 /**
@@ -188,7 +182,7 @@ int Float::intValue() const {
  * @return long
  */
 long Float::longValue() const {
-	return (long) this->original;
+    return (long) this->original;
 }
 
 /**
@@ -197,7 +191,7 @@ long Float::longValue() const {
  * @return
  */
 double Float::doubleValue() const {
-	return this->original;
+    return this->original;
 }
 
 /**
@@ -206,7 +200,7 @@ double Float::doubleValue() const {
  * @return String
  */
 string Float::toString() const {
-	return this->string_original;
+    return this->string_original;
 }
 
 /**
@@ -216,6 +210,6 @@ string Float::toString() const {
  * @return Float
  */
 Float Float::parseFloat(String target) {
-	Float result = string_to_float(target.toString());
-	return result;
+    Float result = string_to_float(target.toString());
+    return result;
 }
