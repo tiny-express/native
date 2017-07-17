@@ -398,20 +398,17 @@ TEST (JavaLang, CharacterToCodePoint){
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
     unicode variableTestIsHighSurrogate;
-    boolean expectedResultIsHighSurrogate;
     boolean actualResultIsHighSurrogate;
 
     // Test valid case
     variableTestIsHighSurrogate = '\u000D800' ;
-    expectedResultIsHighSurrogate= 1 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_TRUE(actualResultIsHighSurrogate);
 
     // Test invalid case
     variableTestIsHighSurrogate = '\u000D777' ;
-    expectedResultIsHighSurrogate= 0 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_FALSE(actualResultIsHighSurrogate);
 }
 #endif
 
@@ -419,20 +416,33 @@ TEST (JavaLang, CharacterIsHighSurrogate){
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
     unicode variableTestisLowSurrogate;
-    boolean expectedResultisLowSurrogate;
     boolean actualResultisLowSurrogate;
 
     // Test valid case
     variableTestisLowSurrogate = '\u000DC00' ;
-    expectedResultisLowSurrogate= 1 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_TRUE(actualResultisLowSurrogate);
 
     // Test invalid case
     variableTestisLowSurrogate = '\u000DB00' ;
-    expectedResultisLowSurrogate= 0 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_FALSE(actualResultisLowSurrogate);
+}
+
+TEST(JavaLang, CharacterIsSurrogate) {
+    // Create variable to test
+    unicode variableTestIsSurrogate;
+    boolean actualResultIsSurrogate;
+
+    // Test valid case
+    variableTestIsSurrogate = '\u000DC00' ;
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_TRUE(actualResultIsSurrogate);
+
+    // Test invalid case
+    variableTestIsSurrogate = L'A';
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_FALSE(actualResultIsSurrogate);
 }
 #endif
 
