@@ -27,8 +27,8 @@ Testing
 /logging
 /json
 /native.iml
-/example/HelloWorld/CMakeFiles
-/example/HelloWorld/cmake_install.cmake
-/example/HelloWorld/HelloWorld
-/example/HelloWorld/Makefile
-/example/HelloWorld/CMakeCache.txt
+/kernel/example/HelloWorld/CMakeFiles
+/kernel/example/HelloWorld/cmake_install.cmake
+/kernel/example/HelloWorld/HelloWorld
+/kernel/example/HelloWorld/Makefile
+/kernel/example/HelloWorld/CMakeCache.txt

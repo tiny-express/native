@@ -34,7 +34,7 @@
 #include <stddef.h> /* size_t */
 #include <signal.h>
 //#include <sys/resource.h>
-#include "common.h"
+#include "kernel/common.h"
 
 typedef void (*SetupFunc)(void *);
 typedef void (*TearDownFunc)(void *);

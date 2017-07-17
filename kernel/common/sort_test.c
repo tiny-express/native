@@ -24,17 +24,49 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../system.h"
-#include "../unit_test.h"
+#include "../../unit_test.h"
+#include <stdlib.h>
+#include <time.h>
 
-//TEST (System, DeviceGetCpuUsage) {
-//	ASSERT_TRUE(get_cpu_usage() > 0);
+TEST (Common, QuickSort) {
+	srand(time(NULL));
+	int *array_int = calloc(50, sizeof(int));
+	int index;
+	for (index = 0; index < 50; ++index) {
+		array_int[ index ] = rand();
+	}
+	sort_int(array_int, 0, 49);
+	int result = is_increase_int_array(array_int, 50);
+	free(array_int);
+	ASSERT_TRUE(result);
+}
+
+TEST (Common, SortString) {
+	char *target[] = {
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		(char *) "dog",
+		'\0'
+	};
+	sort_string(target, 0, 8);
+	int result = is_increase_string_array(target, 9);
+	ASSERT_TRUE(result);
+}
+
+//TEST (Common, DistributionCountingSort) {
+//	int *array_int = malloc(50 * sizeof(int));
+//	int index;
+//	for (index = 0; index < 50; ++index) {
+//		array_int[ index ] = rand() % ( 10 ) + 1;
+//	}
+//	distribution_counting_sort(array_int, 50);
+//	int result = is_increase_int_array(array_int, 50);
+//	ASSERT_TRUE(result);
 //}
-//
-//TEST (System, DeviceGetRamUsage) {
-//	ASSERT_TRUE(get_ram_usage() > 0);
-//}
-//
-//TEST (System, DeviceGetDiskAvailable) {
-//	ASSERT_TRUE(get_disk_available() > 0);
-//}
+

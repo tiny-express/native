@@ -24,11 +24,45 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../unit_test.h"
-#include "../math.h"
+#include "../builtin.h"
+#include "../../unit_test.h"
 
-TEST(Math, Pow) {
-    double base = 3;
-    double power = 3;
-    ASSERT_TRUE(math_pow(base, power) == 27);
+TEST (Common, JoinPointerPointerChar) {
+	char *target[] = {
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		(char *) "dog",
+		'\0'
+	};
+	char *expect = "Thequickbrownfoxjumpsoverthelazydog";
+	char *result = join_pointer_pointer_char(target);
+	ASSERT_STR(expect, result);
+	free(result);
+}
+
+TEST (Common, JoinDelimiterPointerPointerChar) {
+	char *target[] = {
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		(char *) "dog",
+		'\0'
+	};
+	
+	char *delimiter = "|";
+	char *expect = "The|quick|brown|fox|jumps|over|the|lazy|dog";
+	char *result = join_delimiter_pointer_pointer_char(target, delimiter);
+	ASSERT_STR(expect, result);
+	free(result);
 }

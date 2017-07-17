@@ -84,24 +84,22 @@ file(GLOB_RECURSE HEADERS
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
-        common/*
-        datetime/*
-        math/*
-        server/*
-        string/*
-        system/*
-        type/*
+        kernel/common/*
+        kernel/datetime/*
+        kernel/math/*
+        kernel/string/*
+        kernel/system/*
+        kernel/type/*
         )
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
-        common/*_test.c
-        datetime/*_test.c
-        math/*_test.c
-        server/*_ .test.c
-        string/*_test.c
-        system/*_test.c
-        type/*_test.c
+        kernel/common/*_test.c
+        kernel/datetime/*_test.c
+        kernel/math/*_test.c
+        kernel/string/*_test.c
+        kernel/system/*_test.c
+        kernel/type/*_test.c
         )
 
 # Remove all test files within c files
