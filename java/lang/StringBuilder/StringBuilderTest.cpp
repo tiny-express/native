@@ -169,7 +169,6 @@ TEST(JavaLang, StringBuilderAppend) {
         ASSERT_STR("", ex.getMessage().toString());
         ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
     }
-    // valid start, valid end.
     stringBuilder7.append(*charSequence, 1, 3);
     ASSERT_STR("123Hello!el", stringBuilder7.toString().toString());
     String *charSequenceString = dynamic_cast<String *>(charSequence);
@@ -278,6 +277,21 @@ TEST(JavaLang, StringBuilderIndexOf) {
 TEST(JavaLang, StringBuilderInsert) {
     // String and string
     StringBuilder stringBuilder1((const string)"123");
+    ASSERT_STR("123", stringBuilder1.toString().toString());
+    try {
+        // offset is negative.
+        stringBuilder1.insert(-1, (const string)"xxx");
+    }
+    catch (Exception ex) {
+        ASSERT_STR("123", stringBuilder1.toString().toString());
+    }
+    try {
+        // offset is larger than length of StringBuilder
+        stringBuilder1.insert(999, (const string)"xxx");
+    }
+    catch (Exception ex) {
+        ASSERT_STR("123", stringBuilder1.toString().toString());
+    }
     stringBuilder1.insert(1, (const string)"xxx");
     ASSERT_STR("1xxx23", stringBuilder1.toString().toString());
     stringBuilder1.insert(1, String("yyy"));
@@ -314,8 +328,37 @@ TEST(JavaLang, StringBuilderInsert) {
 
     // Character and char
     StringBuilder stringBuilder5((const string)"abc");
+    ASSERT_STR("abc", stringBuilder5.toString().toString());
+    try {
+        // offset < 0
+        stringBuilder5.insert(-1, 'x');
+    }
+    catch (Exception ex) {
+        ASSERT_STR("abc", stringBuilder5.toString().toString());
+    }
+    try {
+        // offset > length of StringBuilder
+        stringBuilder5.insert(999, 'x');
+    }
+    catch (Exception ex) {
+        ASSERT_STR("abc", stringBuilder5.toString().toString());
+    }
     stringBuilder5.insert(1, 'x');
     ASSERT_STR("axbc", stringBuilder5.toString().toString());
+    try {
+        // offset < 0
+        stringBuilder5.insert(-1, Character('y'));
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axbc", stringBuilder5.toString().toString());
+    }
+    try {
+        // offset > length of StringBuilder
+        stringBuilder5.insert(999, Character('y'));
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axbc", stringBuilder5.toString().toString());
+    }
     stringBuilder5.insert(1, Character('y'));
     ASSERT_STR("ayxbc", stringBuilder5.toString().toString());
 
@@ -328,15 +371,133 @@ TEST(JavaLang, StringBuilderInsert) {
 
     // Sub array of Array<Character> and Array<char>
     StringBuilder stringBuilder7((const string)"abc");
-    stringBuilder7.insert(1, Array<char>{'1', '2', '3'}, 1, 2);
+    Array<char> anArray1 {'1', '2', '3'};
+    ASSERT_STR("abc", stringBuilder7.toString().toString());
+    try {
+        // index < 0
+        stringBuilder7.insert(-1, anArray1, 1, 2);
+    }
+    catch (Exception ex){
+        ASSERT_STR("abc", stringBuilder7.toString().toString());
+    }
+    try {
+        // index > currentLength
+        stringBuilder7.insert(999, anArray1, 1, 2);
+    }
+    catch (Exception ex){
+        ASSERT_STR("abc", stringBuilder7.toString().toString());
+    }
+    try {
+        // offset < 0
+        stringBuilder7.insert(1, anArray1, -1, 2);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("abc", stringBuilder7.toString().toString());
+    }
+    try {
+        // length < 0
+        stringBuilder7.insert(1, anArray1, 1, -1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("abc", stringBuilder7.toString().toString());
+    }
+    try {
+        // offset + length > lengthOfArray
+        stringBuilder7.insert(1, anArray1, 1, 100);
+    }
+    catch (Exception ex){
+        ASSERT_STR("abc", stringBuilder7.toString().toString());
+    }
+    stringBuilder7.insert(1, anArray1, 1, 2); // valid index, offset, length
     ASSERT_STR("a23bc", stringBuilder7.toString().toString());
-    stringBuilder7.insert(1, Array<Character> {Character('x'), Character('y'), Character('z')}, 1, 1);
+    Array<Character> anArray2 {Character('x'), Character('y'), Character('z')};
+    try {
+        // index < 0
+        stringBuilder7.insert(-1, anArray2 , 1, 1);
+    }
+    catch (Exception ex){
+        ASSERT_STR("a23bc", stringBuilder7.toString().toString());
+    }
+    try {
+        // index > currentLength
+        stringBuilder7.insert(999, anArray2 , 1, 1);
+    }
+    catch (Exception ex){
+        ASSERT_STR("a23bc", stringBuilder7.toString().toString());
+    }
+    try {
+        // offset < 0
+        stringBuilder7.insert(1, anArray2 , -1, 1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("a23bc", stringBuilder7.toString().toString());
+    }
+    try {
+        // length < 0
+        stringBuilder7.insert(1, anArray2 , 1, -1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("a23bc", stringBuilder7.toString().toString());
+    }
+    try {
+        // offset + length > lengthOfArray
+        stringBuilder7.insert(1, anArray2 , 1, 999);
+    }
+    catch (Exception ex){
+        ASSERT_STR("a23bc", stringBuilder7.toString().toString());
+    }
+    stringBuilder7.insert(1, anArray2 , 1, 1); // valid index, offset, length
     ASSERT_STR("ay23bc", stringBuilder7.toString().toString());
 
+    // CharSequence
     StringBuilder stringBuilder8((const string)"abc");
+    ASSERT_STR("abc", stringBuilder8.toString().toString());
     CharSequence *charSequence = (CharSequence *)new String("xyz");
     stringBuilder8.insert(1, *charSequence);
     ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+
+    try {
+        // destinationOffset < 0
+        stringBuilder8.insert(-1, *charSequence, 1, 1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
+    try {
+        // destinationOffset > length of this StringBuilder
+        stringBuilder8.insert(999, *charSequence, 1, 1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
+    try {
+        // start < 0
+        stringBuilder8.insert(1, *charSequence, -1, 1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
+    try {
+        // end < 0
+        stringBuilder8.insert(1, *charSequence, 1, -1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
+    try {
+        // start > end
+        stringBuilder8.insert(1, *charSequence, 2, 1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
+    try {
+        // end > length of target (charSequence)
+        stringBuilder8.insert(1, *charSequence, 1, 999);
+    }
+    catch (Exception ex){
+        ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
+    }
     stringBuilder8.insert(1, *charSequence, 1, 1);
     ASSERT_STR("axyzbc", stringBuilder8.toString().toString());
     stringBuilder8.insert(1, *charSequence, 1, 2);
