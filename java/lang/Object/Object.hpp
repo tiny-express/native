@@ -162,7 +162,7 @@ public:
 	}
 
     /**
-     * Convert Array to String
+     * Convert Array to string
      *
      * @return string
      */
