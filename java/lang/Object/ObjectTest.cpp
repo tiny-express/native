@@ -123,9 +123,6 @@ TEST(JavaLang, ArrayConstructorWithSize) {
         result = validArray.length;
         ASSERT_EQUAL(expect, result);
     }
-
-    result = validArray.length;
-    ASSERT_EQUAL(expect, result);
 }
 
 TEST(JavaLang, ObjectConstructor) {
