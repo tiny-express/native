@@ -149,31 +149,6 @@ namespace Java {
              */
             Double operator/(const Double &target);
 
-//             For Integer, Long, Short ...
-//            /**
-//             * Modulus Operator and remainder
-//             * of after an integer division
-//             *
-//             * @return Double
-//             */
-//            Double operator%(const Double &target) const;
-
-//            /**
-//             * Increment operator,
-//             * increases integer value by one
-//             *
-//             * @return Double
-//             */
-//            Double operator++(const Double &target) const;
-
-//            /**
-//             * Decrement operator,
-//             * decreases integer value by one
-//             *
-//             * @return Double
-//             */
-//            Double operator--(const Double &target) const;
-
             /**
              * Checks if the values of two operands
              * are equal or not,
@@ -238,68 +213,6 @@ namespace Java {
              */
             boolean operator||(const Double &target) const;
 
-//            /**
-//             *  Called Logical NOT Operator.
-//             *  Use to reverses the logical state of its operand.
-//             *  If a condition is true,
-//             *  then Logical NOT operator will make false.
-//             *
-//             * @return boolean
-//             */
-//            boolean operator!(const Double &target) const;
-
-
-//            // For Integer, Long, Short ...
-//
-//            /**
-//             *  Binary AND Operator copies a bit
-//             *  to the result if it exists in both operands.
-//             *
-//             * @return boolean
-//             */
-//            boolean operator&(const Double &target) const;
-//
-//            /**
-//             *  Binary OR Operator copies a bit
-//             *  if it exists in either operand.
-//             *
-//             * @return boolean
-//             */
-//            boolean operator|(const Double &target) const;
-//
-//            /**
-//             *  Binary XOR Operator copies the bit
-//             *  if it is set in one operand but not both.
-//             *
-//             * @return boolean
-//             */
-//            boolean operator^(const Double &target) const;
-//
-//            /**
-//             *  Binary Ones Complement Operator
-//             *  is unary and has the effect of 'flipping' bits.
-//             *
-//             * @return Double
-//             */
-//            Double operator~(const Double &target);
-//
-//            /**
-//             *  Binary Left Shift Operator.
-//             *  The left operands value is moved left
-//             *  by the number of bits specified by the right operand.
-//             *
-//             * @return Double
-//             */
-//            Double operator<<(const Double &target) const;
-//
-//            /**
-//             *  Binary Right Shift Operator.
-//             *  The left operands value is moved right
-//             *  by the number of bits specified by the right operand.
-//             *
-//             * @return Double
-//             */
-//            Double operator>>(const Double &target) const;
 
             /**
              * Simple assignment operator,
@@ -350,57 +263,6 @@ namespace Java {
              * @return Double
              */
             Double operator/=(const Double &target) const;
-
-            /**
-             * Modulus AND assignment operator,
-             * It takes modulus using two operands
-             * and assign the result to left operand
-             *
-             * @param target
-             * @return Double
-             */
-//              For ingeger , long , short ... only
-//            Double operator%=(const Double &target) const;
-//
-//            /**
-//             * Left shift AND assignment operator
-//             *
-//             * @param target
-//             * @return Double
-//             */
-//            Double operator<<=(const Double &target) const;
-//
-//            /**
-//             * Right shift AND assignment operator
-//             *
-//             * @param target
-//             * @return Double
-//             */
-//            Double operator>>=(const Double &target) const;
-//
-//            /**
-//             * Bitwise AND assignment operator
-//             *
-//             * @param target
-//             * @return Double
-//             */
-//            Double operator&=(const Double &target) const;
-//
-//            /**
-//             * bitwise exclusive OR and assignment operator
-//             *
-//             * @param target
-//             * @return Double
-//             */
-//            Double operator^=(const Double &target) const;
-//
-//            /**
-//             * bitwise inclusive OR and assignment operator
-//             *
-//             * @param target
-//             * @return Double
-//             */
-//            Double operator|=(const Double &target) const;
 
             /**
              * Double to Char
@@ -637,64 +499,6 @@ namespace Java {
 //             * Returns a hexadecimal string representation of the
 //             * {double} argument. All characters mentioned below
 //             * are ASCII characters.
-//             *
-//             * If the argument is NaN, the result is the string
-//             *     "{NaN}".
-//             * Otherwise, the result is a string that represents the sign
-//             * and magnitude of the argument. If the sign is negative, the
-//             * first character of the result is '{-}'
-//             * ({'\u005Cu002D'}); if the sign is positive, no sign
-//             * character appears in the result. As for the magnitude m:
-//             *
-//             *
-//             * If m is infinity, it is represented by the string
-//             * {"Infinity"}; thus, positive infinity produces the
-//             * result {"Infinity"} and negative infinity produces
-//             * the result {"-Infinity"}.
-//             *
-//             * If m is zero, it is represented by the string
-//             * {"0x0.0p0"}; thus, negative zero produces the result
-//             * {"-0x0.0p0"} and positive zero produces the result
-//             * {"0x0.0p0"}.
-//             *
-//             * If m is a {double} value with a
-//             * normalized representation, substrings are used to represent the
-//             * significand and exponent fields.  The significand is
-//             * represented by the characters {"0x1."}
-//             * followed by a lowercase hexadecimal representation of the rest
-//             * of the significand as a fraction.  Trailing zeros in the
-//             * hexadecimal representation are removed unless all the digits
-//             * are zero, in which case a single zero is used. Next, the
-//             * exponent is represented by {"p"} followed
-//             * by a decimal string of the unbiased exponent as if produced by
-//             * a call to {@link Integer#toString(int) Integer.toString} on the
-//             * exponent value.
-//             *
-//             * If m is a {double} value with a subnormal
-//             * representation, the significand is represented by the
-//             * characters {"0x0."} followed by a
-//             * hexadecimal representation of the rest of the significand as a
-//             * fraction.  Trailing zeros in the hexadecimal representation are
-//             * removed. Next, the exponent is represented by
-//             * {"p-1022"}.  Note that there must be at
-//             * least one nonzero digit in a subnormal significand.
-//             *
-//             * Examples
-//             * Floating-point Value<th>Hexadecimal String
-//             * {1.0} {0x1.0p0}
-//             * {-1.0}        {-0x1.0p0}
-//             * {2.0} {0x1.0p1}
-//             * {3.0} {0x1.8p1}
-//             * {0.5} {0x1.0p-1}
-//             * {0.25}        {0x1.0p-2}
-//             * {Double.MAX_VALUE}
-//             *     {0x1.fffffffffffffp1023}
-//             * {Minimum Normal Value}
-//             *     {0x1.0p-1022}
-//             * {Maximum Subnormal Value}
-//             *     {0x0.fffffffffffffp-1022}
-//             * {Double.MIN_VALUE}
-//             *     {0x0.0000000000001p-1022}
 //             *
 //             * @param   d   the {double} to be converted.
 //             * @return a hex string representation of the argument.
