@@ -32,14 +32,19 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, DoubleConstructor) {
-    // Given empty value for Double constructor and assign value - Return Double
-    Double emptyDoubleConstructor;
-    emptyDoubleConstructor = 3;
-    ASSERT_DBL_NEAR(3, emptyDoubleConstructor.doubleValue());
 
-    // Given value for Double constructor and assign value - Return integer
-    Double validDoubleConstructor = 3;
-    ASSERT_DBL_NEAR(3, validDoubleConstructor.doubleValue());
+    // Test Double::Double()
+    Double emptyDoubleConstructor;
+    emptyDoubleConstructor = 13.02;
+    ASSERT_DBL_NEAR(13.02, emptyDoubleConstructor.doubleValue());
+
+    // Test Double::Double(double original)
+    Double validDoubleConstructor = 13.02;
+    ASSERT_DBL_NEAR(13.02, validDoubleConstructor.doubleValue());
+
+    // Test Double::Double(const Double &doubleNumber)
+    Double DoubleConstructor(validDoubleConstructor);
+    ASSERT_DBL_NEAR(13.02, validDoubleConstructor.doubleValue());
 }
 
 TEST (JavaLang, DoubleArithmeticOperator) {
