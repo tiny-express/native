@@ -25,18 +25,17 @@
  */
 
 #include "IllegalArgumentException.hpp"
-#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
-IllegalArgumentException::IllegalArgumentException() : Exception::Exception() {
+IllegalArgumentException::IllegalArgumentException() : RuntimeException::RuntimeException() {
 }
 
-IllegalArgumentException::IllegalArgumentException(String message) : Exception::Exception(message) {
+IllegalArgumentException::IllegalArgumentException(String message) : RuntimeException::RuntimeException(message) {
 }
 
-IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause) : Exception::Exception(message, cause) {
+IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause) : RuntimeException::RuntimeException(message, cause) {
 }
 
-IllegalArgumentException::IllegalArgumentException(Throwable *cause) : Exception::Exception(cause) {
+IllegalArgumentException::IllegalArgumentException(Throwable *cause) : RuntimeException::RuntimeException(cause) {
 }

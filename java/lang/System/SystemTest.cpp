@@ -32,7 +32,15 @@ extern "C" {
 
 using namespace Java::Lang;
 
+TEST (JavaLang, SystemIn) {
+    // TODO
+}
+
 TEST (JavaLang, SystemOut) {
-	// String *string = new String("Hello World");
-	// System::out::println(string);
+    // TODO
+}
+
+TEST (JavaLang, SystemCurrentTimeMillis) {
+    long currentMilliSeconds = System::currentTimeMillis();
+    ASSERT_TRUE(currentMilliSeconds > 1500199237190);
 }

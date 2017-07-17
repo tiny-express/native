@@ -29,11 +29,11 @@
 
 
 #include "../Exception/Exception.hpp"
+#include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
     namespace Lang {
-        //TODO change to RuntimeException when merge from string builder
-        class IllegalArgumentException : public Exception {
+        class IllegalArgumentException : public RuntimeException {
         public:
             IllegalArgumentException();
             IllegalArgumentException(String message);

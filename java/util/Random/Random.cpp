@@ -85,10 +85,10 @@ long Random::initialScramble(long seed) {
 long Random::seedUniquifier() {
     long current = 0;
     long next = 0;
-    do{
-        long current = seedUniquifierField.load();
-        long next = current * 181783497276652981L;
-    }while(!seedUniquifierField.compare_exchange_strong(current, next));
+    do {
+        current = seedUniquifierField.load();
+        next = current * 181783497276652981L;
+    } while (!seedUniquifierField.compare_exchange_strong(current, next));
     return next;
 }
 
@@ -159,7 +159,6 @@ int Random::nextInt() {
 int Random::nextInt(int bound) {
     if (bound <= 0)
         throw IllegalArgumentException(BadBound);
-
     if (bound & (bound - 1) == 0)
         return (int) ((bound * (long) next(31)) >> 31);
     int bits, val;
@@ -183,7 +182,7 @@ void Random::nextBytes(Array<byte> *bytes) {
         int randomNumber = nextInt();
         //TODO change to Math::min when merge Math, change 4 = Integer::SIZE/BYTE::SIZE
         int n = (len - index) <= 4 ? (len - index) : 4;
-        for (n; n >= 1; n--){
+        for (n; n >= 1; n--) {
             index++;
             //TODO change to BYTE::SIZE
             randomNumber >>= 8;
@@ -231,7 +230,7 @@ double Random::nextGaussian() {
     if (haveNextNextGaussian) {
         haveNextNextGaussian = false;
         return nextNextGaussian;
-        }
+    }
     else {
         double v1, v2, s;
         do {
