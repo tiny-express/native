@@ -145,6 +145,31 @@ TEST(JavaLang, StringBuilderAppend) {
     ASSERT_STR("123", stringBuilder7.toString().toString());
     stringBuilder7.append(*charSequence);
     ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
+    try {
+        // start < 0
+        stringBuilder7.append(*charSequence, -1, 3);
+    }
+    catch (Exception ex){
+        ASSERT_STR("", ex.getMessage().toString());
+        ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
+    }
+    try {
+        // start > end
+        stringBuilder7.append(*charSequence, 4, 3);
+    }
+    catch (Exception ex){
+        ASSERT_STR("", ex.getMessage().toString());
+        ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
+    }
+    try {
+        // end > current length of StringBuilder instance.
+        stringBuilder7.append(*charSequence, 4, 999);
+    }
+    catch (Exception ex){
+        ASSERT_STR("", ex.getMessage().toString());
+        ASSERT_STR("123Hello!", stringBuilder7.toString().toString());
+    }
+    // valid start, valid end.
     stringBuilder7.append(*charSequence, 1, 3);
     ASSERT_STR("123Hello!el", stringBuilder7.toString().toString());
     String *charSequenceString = dynamic_cast<String *>(charSequence);
