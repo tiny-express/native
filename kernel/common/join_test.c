@@ -25,7 +25,7 @@
  */
 
 #include "../builtin.h"
-#include "../../unit_test.h"
+#include "../../misc/test.h"
 
 TEST (Common, JoinPointerPointerChar) {
 	char *target[] = {

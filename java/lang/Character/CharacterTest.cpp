@@ -20,7 +20,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../misc/test.h"
 }
 
 #include "../Character/Character.hpp"

@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 #include "../datetime.h"
-#include "../../unit_test.h"
+#include "../../misc/test.h"
 
 TEST (DateTime, UnixTimestampInMilliseconds) {
 #ifdef WINDOWS

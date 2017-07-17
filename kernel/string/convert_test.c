@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 #include "../string.h"
-#include "../../unit_test.h"
+#include "../../misc/test.h"
 
 TEST (String, ConvertFromChar) {
     // Input a number character to convert from char to string

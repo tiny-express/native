@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../misc/test.h"
 };
 
 #include "IOException.hpp"

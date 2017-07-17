@@ -25,7 +25,7 @@
  */
 
 #include <stdlib.h>
-#include "../../unit_test.h"
+#include "../../misc/test.h"
 #include "../string.h"
 
 TEST (Url, Encode) {

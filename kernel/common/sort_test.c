@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../unit_test.h"
+#include "../../misc/test.h"
 #include <stdlib.h>
 #include <time.h>
 
