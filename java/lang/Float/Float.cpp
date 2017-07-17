@@ -126,6 +126,22 @@ Float Float::operator=(const Float &target) {
     return *this;
 }
 
+Float Float::operator+=(const Float &target) const {
+    return (Float) (this->original + target.original);
+}
+
+Float Float::operator-=(const Float &target) const {
+    return (Float) (this->original - target.original);
+}
+
+Float Float::operator*=(const Float &target) const {
+    return (Float) (this->original * target.original);
+}
+
+Float Float::operator/=(const Float &target) const {
+    return (Float) (this->original / target.original);
+}
+
 /**
  * Float value
  *
