@@ -127,7 +127,7 @@ TEST (String, ConvertFromInt) {
 
 TEST (String, ConvertFromLong) {
     // Input the maximum value of type long to convert from long to string
-    long input = 393239259234023474;
+    long input = (long) 393239259234023474;
 
     // The expected result
 	char *expect = "393239259234023474";

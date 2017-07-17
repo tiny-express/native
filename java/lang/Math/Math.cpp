@@ -81,7 +81,6 @@ double Math::pow(double a, double b) {
 }
 
 double Math::random() {
-	srand(time(NULL));
 	return rand();
 }
 

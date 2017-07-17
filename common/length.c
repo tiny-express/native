@@ -55,7 +55,7 @@ inline int length_##TYPE(TYPE target) {\
         return len; \
 }
 
-#ifdef __APPLE__
+#ifndef __linux__
 P_LEN(char);
 #endif
 P_P_LEN(char);
@@ -64,3 +64,16 @@ NUM_LEN(int);
 NUM_LEN(long);
 NUM_LEN(double);
 NUM_LEN(float);
+
+/**
+ * Is string empty ?
+ *
+ * @param input
+ * @return TRUE or FALSE
+ */
+int is_empty(char *input) {
+    if (length_pointer_char(input) == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}

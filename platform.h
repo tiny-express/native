@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,7 +24,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_VENDOR_FIREBASE_HPP_
-#define JAVA_VENDOR_FIREBASE_HPP_
+#ifndef NATIVE_PLATFORM_H
+#define NATIVE_PLATFORM_H
 
-#endif  // JAVA_VENDOR_FIREBASE_HPP_
+#if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
+#ifndef WINDOWS
+#define WINDOWS
+#endif
+#endif
+
+#if defined __linux__
+#ifndef LINUX
+#define LINUX
+#endif
+#endif
+
+#if defined __APPLE__
+#ifndef OSX
+#define OSX
+#endif
+#endif
+
+#endif//NATIVE_PLATFORM_H
+

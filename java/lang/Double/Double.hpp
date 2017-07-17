@@ -29,7 +29,7 @@
 
 #include "../Number/Number.hpp"
 
-namespace Java {
+namespace Java { 
 	namespace Lang {
 		class Double : public Number {
 		private:

@@ -163,6 +163,7 @@ namespace Java {
 		public:
 			/**
 			 * A string representation of the object.
+			 *
 			 * @return string
 			 */
 			virtual string toString() const {

@@ -65,6 +65,7 @@ char *join_pointer_pointer_char(char **target);
 char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter);
 
 int length_pointer_char(char *target);
+int is_empty(char *input);
 int length_pointer_pointer_char(char **target);
 
 int length_short(short target);

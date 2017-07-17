@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,12 +34,12 @@ using namespace Java::Lang;
 /**
  * A constant holding the positive infinity of type
  */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
+static double POSITIVE_INFINITY_DOUBLE = (double) 1 / (double) 0; // inf
 
 /**
  * A constant holding the negative infinity of type
  */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
+static double NEGATIVE_INFINITY_DOUBLE = (double) -1 / (double) 0; // -inf
 
 /**
  * A constant holding a Not-a-Number (NaN) value of type
@@ -279,38 +279,38 @@ TEST (JavaLang, DoubleToString){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestToString = POSITIVE_INFINITY_DOUBLE;
-    expectedResultToString = "inf";
+    expectedResultToString = (string) "inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestToString = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultToString = "-inf";
+    expectedResultToString = (string) "-inf";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
 //    // Test NOT_A_NUMBER_DOUBLE
 //    variableTestToString = NOT_A_NUMBER_DOUBLE;
-//    expectedResultToString = "-nan"; // "nan" in MacOS
+//    expectedResultToString = (string) "-nan"; // "nan" in MacOS
 //    actualResultToString = variableTestToString.toString();
 //    ASSERT_STR(expectedResultToString , actualResultToString);
 //	free(actualResultToString);
 
     // Test MAX_VALUE_DOUBLE
     variableTestToString = MAX_VALUE_DOUBLE;
-    expectedResultToString = "1.797693134862316e+308";
+    expectedResultToString = (string) "1.797693134862316e+308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestToString = MIN_NORMAL_DOUBLE;
-    expectedResultToString = "2.225073858507201e-308";
+    expectedResultToString = (string) "2.225073858507201e-308";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
     // Test MIN_VALUE_DOUBLE
     variableTestToString = MIN_VALUE_DOUBLE;
-    expectedResultToString = "4.940656458412465e-324";
+    expectedResultToString = (string) "4.940656458412465e-324";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 }
@@ -384,38 +384,38 @@ TEST (JavaLang, DoubleStringValue){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestStringValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultStringValue = "inf";
+    expectedResultStringValue = (string) "inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestStringValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultStringValue = "-inf";
+    expectedResultStringValue = (string) "-inf";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
 //    // Test NOT_A_NUMBER_DOUBLE
 //    variableTestStringValue = NOT_A_NUMBER_DOUBLE;
-//    expectedResultStringValue = "-nan"; // "nan" in MacOS
+//    expectedResultStringValue = (string) "-nan"; // "nan" in MacOS
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //    free(actualResultStringValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestStringValue = MAX_VALUE_DOUBLE;
-    expectedResultStringValue = "1.797693134862316e+308";
+    expectedResultStringValue = (string) "1.797693134862316e+308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestStringValue = MIN_NORMAL_DOUBLE;
-    expectedResultStringValue = "2.225073858507201e-308";
+    expectedResultStringValue = (string) "2.225073858507201e-308";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
     // Test MIN_VALUE_DOUBLE
     variableTestStringValue = MIN_VALUE_DOUBLE;
-    expectedResultStringValue = "4.940656458412465e-324";
+    expectedResultStringValue = (string) "4.940656458412465e-324";
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 }
@@ -550,25 +550,25 @@ TEST (JavaLang, DoubleLongValue){
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestLongValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = long((double) -1 / (double) 0);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestLongValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = long((double) -1 / (double) 0);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NOT_A_NUMBER_DOUBLE
     variableTestLongValue = NOT_A_NUMBER_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = long((double) -1 / (double) 0);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestLongValue = MAX_VALUE_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = long((double) -1 / (double) 0);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 

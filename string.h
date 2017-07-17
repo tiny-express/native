@@ -27,7 +27,9 @@
 #ifndef NATIVE_STRING_H
 #define NATIVE_STRING_H
 
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 char *string_from_char(char target);
 char *string_from_short(short target);

@@ -24,34 +24,53 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
+#include <stdlib.h>
+#include "../datetime.h"
 #include "../unit_test.h"
 
-TEST (DateTime, Timestamp) {
-#ifdef __APPLE__
-	return;
+TEST (DateTime, UnixTimestampInMilliseconds) {
+#ifdef WINDOWS
+    unsigned int millisecond = 123;
+    unsigned int second = 3;
+    unsigned int minute = 20;
+    unsigned int hour = 17;
+    unsigned int day  = 16;
+    unsigned int month = 7;
+    unsigned int year = 2017;
+    unsigned long timestamp = unix_time_in_milliseconds(
+            millisecond,
+            second,
+            minute,
+            hour,
+            day,
+            month,
+            year
+    );
+    ASSERT_EQUAL(timestamp, 1500225603123);
 #endif
+}
+
+TEST (DateTime, TimestampInNanoSeconds) {
 	long first_time = timestamp();
-	int maxN = 10000000;
+	ASSERT_TRUE(first_time > 1500198318489000);
+	int maxN = 20000000;
 	int i = 0;
 	int counter = 0;
 	for (i = 0; i < maxN; i++) {
 		counter++;
+		counter--;
+		counter++;
 	}
 	long last_time = timestamp();
 	ASSERT_EQUAL(maxN, counter);
-	// Time is greater than 9 ms
-	ASSERT_TRUE(( last_time - first_time ) / ( 1000 * 1000 ) > 9);
+    unsigned int delta = (last_time - first_time) / 1000;
+    ASSERT_TRUE(delta > 50);
 }
 
 TEST (DateTime, Format) {
-#ifdef __APPLE__
-	return;
-#endif
-
 	long timestamp = 1473765499;
-	char *format = "d/m/y";
-	char *result1 = date(timestamp, format);
+	string format = "d/m/y";
+	string result1 = date(timestamp, format);
 	ASSERT_STR("13/09/2016", result1);
 	free(result1);
 

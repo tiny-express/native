@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Food Tiny Project. All rights reserved.
+=======
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+>>>>>>> development
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -14,12 +18,16 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+<<<<<<< HEAD
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
  * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+=======
+ * A PARTICULAR PURPOSE ARE DISCLAIMEIILITY, OR TORT
+>>>>>>> development
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -379,29 +387,30 @@ TEST (JavaLang, CharacterTestSample){
 
 TEST (JavaLang, CharacterToCodePoint){
     // Create variable to test
-    wchar_t variableTest1ToCodePoint;
-    wchar_t variableTest2ToCodePoint;
+    unicode variableTest1ToCodePoint;
+    unicode variableTest2ToCodePoint;
     int expectedResultToCodePoint;
     int actualResultToCodePoint;
 
     // Test valid case
-    variableTest1ToCodePoint = '\u000D800' ;
-    variableTest2ToCodePoint = '\u000DC00' ;
+    variableTest1ToCodePoint = (unicode) '\u000D800' ;
+    variableTest2ToCodePoint = (unicode) '\u000DC00' ;
     expectedResultToCodePoint= 65536 ;
     actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
     ASSERT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
 
     // Test invalid case
-    variableTest1ToCodePoint = '\u000d800' ;
-    variableTest2ToCodePoint = '\u000dc11' ;
+    variableTest1ToCodePoint = (unicode) '\u000d800' ;
+    variableTest2ToCodePoint = (unicode) '\u000dc11' ;
     expectedResultToCodePoint= 60000 ;
     actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
     ASSERT_NOT_EQUAL(expectedResultToCodePoint , actualResultToCodePoint);
 }
 
+#ifdef __linux__
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
-    wchar_t variableTestIsHighSurrogate;
+    unicode variableTestIsHighSurrogate;
     boolean expectedResultIsHighSurrogate;
     boolean actualResultIsHighSurrogate;
 
@@ -417,10 +426,12 @@ TEST (JavaLang, CharacterIsHighSurrogate){
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
     ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
 }
+#endif
 
+#ifdef __linux__
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
-    wchar_t variableTestisLowSurrogate;
+    unicode variableTestisLowSurrogate;
     boolean expectedResultisLowSurrogate;
     boolean actualResultisLowSurrogate;
 
@@ -436,6 +447,7 @@ TEST (JavaLang, CharacterisLowSurrogate){
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
     ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
 }
+#endif
 
 TEST (JavaLang, CharacterDigit) {
     //Given valid and invalid value to test with digit(char char, int radix)
