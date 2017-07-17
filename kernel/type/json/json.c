@@ -26,8 +26,8 @@
 #endif /* _CRT_SECURE_NO_WARNINGS */
 #endif /* _MSC_VER */
 
-#include "../common.h"
-#include "../type.h"
+#include "../../common.h"
+#include "../../type.h"
 
 #include <stdio.h>
 #include <stdlib.h>

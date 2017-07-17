@@ -48,7 +48,6 @@
 #include "common.h"
 #include "math.h"
 #include "string.h"
-#include "system.h"
 #include "type.h"
 
 #endif//NATIVE_BUILTIN_H

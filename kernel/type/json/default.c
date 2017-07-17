@@ -24,11 +24,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_SYSTEM_H
-#define NATIVE_SYSTEM_H
+#include "../../type.h"
+#include <string.h>
 
-float get_cpu_usage();
-float get_ram_usage();
-float get_disk_available();
+char *string_default(char *target) {
+	if (target != NULL) {
+		return target;
+	}
+	return strdup("");
+}
 
-#endif
+double number_default(double target) {
+	if (target) {
+		return target;
+	}
+	return 0;
+}
