@@ -181,7 +181,7 @@ public:
 
 public:
     /**
-    * Get and get value of element in Array at index
+    * Set and get value of element at the specified position in this Array
     *
     * @param index
     * @return E
