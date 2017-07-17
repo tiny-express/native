@@ -152,7 +152,7 @@ public:
 	}
 
     /**
-     * Get value of element in Array at index
+     * Returns the element at the specified position in this Array
      *
      * @param index
      * @return E
