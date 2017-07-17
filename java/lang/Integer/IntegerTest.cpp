@@ -142,27 +142,27 @@ TEST (JavaLang, IntegerToString) {
     Integer minIntegerToString = -2147483647;
 
     // Make a comparison between expected realResult and the real result
-    string expectedResultToString= "0";
+    string expectedResultToString = (string) "0";
     string realResultToString = zeroIntegerToString.toString();
     ASSERT_STR(expectedResultToString, realResultToString);
 
     // Make a comparison between expected realResult and the real result
-    expectedResultToString= "1";
+    expectedResultToString = (string) "1";
     realResultToString = oneIntegerToString.toString();
     ASSERT_STR(expectedResultToString, realResultToString);
 
     // Make a comparison between expected realResult and the real result
-    expectedResultToString= "10";
+    expectedResultToString = (string) "10";
     realResultToString = positiveIntegerToString.toString();
     ASSERT_STR(expectedResultToString, realResultToString);
 
     // Make a comparison between expected realResult and the real result
-    expectedResultToString= "2147483647";
+    expectedResultToString = (string) "2147483647";
     realResultToString = maxIntegerToString.toString();
     ASSERT_STR(expectedResultToString, realResultToString);
 
     // Make a comparison between expected realResult and the real result
-    expectedResultToString= "-2147483647";
+    expectedResultToString = (string) "-2147483647";
     realResultToString = minIntegerToString.toString();
     ASSERT_STR(expectedResultToString, realResultToString);
 }
@@ -211,27 +211,27 @@ TEST (JavaLang, IntegerStringValue) {
     Integer minIntegerStringValue = -2147483647;
 
     // Make a comparison between expected result and the real result
-    string expectedResultStringValue = "0";
+    string expectedResultStringValue = (string) "0";
     string realResultStringValue = zeroIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 
     // Make a comparison between expected result and the real result
-    expectedResultStringValue = "1";
+    expectedResultStringValue = (string) "1";
     realResultStringValue  = oneIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue );
 
     // Make a comparison between expected result and the real result
-    expectedResultStringValue = "10";
+    expectedResultStringValue = (string) "10";
     realResultStringValue = positiveIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 
     // Make a comparison between expected result and the real result
-    expectedResultStringValue = "2147483647";
+    expectedResultStringValue = (string) "2147483647";
     realResultStringValue = maxIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 
     // Make a comparison between expected result and the real result
-    expectedResultStringValue = "-2147483647";
+    expectedResultStringValue = (string) "-2147483647";
     realResultStringValue = minIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 }
