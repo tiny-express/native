@@ -35,53 +35,19 @@ using namespace Java::Lang;
 #define string char*
 
 TEST (JavaLang, FloatConstructor) {
-    // Create comparisonFloat contains value of type float. We use this variable to test FloatConstructor
-	Float variableFloatConstructor;
 
-    // Create expectedFloatConstructorResult to test Float::floatValueIn case TRUE
-    float expectedFloatConstructorResult ;
+    // Test Double::Double()
+    Float emptyFloatConstructor;
+    emptyFloatConstructor = 13.02;
+    ASSERT_DBL_NEAR(13.02, emptyFloatConstructor.floatValue());
 
-    // Create expectedFloatConstructorResult to test Float::floatValueIn case FALSE
-    float notExpectedFloatConstructorResult;
+    // Test Float::Float(float original)
+    Float validFloatConstructor = 13.02;
+    ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());
 
-    // Create variable expectedFloatConstructorResult represent the actual result when use Float::floatValue
-    float actualFloatConstructorResult ;
-
-    // Test Float::floatValue.  Case TRUE.
-    variableFloatConstructor = 13.02;
-    expectedFloatConstructorResult = 13.02;
-    actualFloatConstructorResult = variableFloatConstructor.floatValue();
-	ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
-
-    // Test Float::floatValue.  Case FALSE
-    variableFloatConstructor = 13.02;
-    notExpectedFloatConstructorResult = 1302.000;
-    actualFloatConstructorResult = variableFloatConstructor.floatValue();
-    ASSERT_DBL_FAR(notExpectedFloatConstructorResult , actualFloatConstructorResult);
-
-    // Test Float::floatValue.  Immediately . Case TRUE
-    Float variableFloatConstructorImmediate = 130.2;
-    expectedFloatConstructorResult = 130.2;
-    actualFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
-    ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
-
-    // Test Float::floatValue.  Immediately . Case FALSE
-    variableFloatConstructorImmediate = 130.2;
-    notExpectedFloatConstructorResult = 1.302;
-    actualFloatConstructorResult = variableFloatConstructorImmediate.floatValue();
-    ASSERT_DBL_FAR(notExpectedFloatConstructorResult , actualFloatConstructorResult);
-
-    // Test Float::parseFLoat to convert from string to float. Case TRUE
-	variableFloatConstructor = Float::parseFloat("13.02");
-    expectedFloatConstructorResult = 13.02;
-    actualFloatConstructorResult = variableFloatConstructor.floatValue();
-	ASSERT_DBL_NEAR(expectedFloatConstructorResult , actualFloatConstructorResult);
-
-    // Test Float::parseFLoat to convert from string to float. Case FALSE
-    variableFloatConstructor = Float::parseFloat("13.02");
-    notExpectedFloatConstructorResult = 130.2;
-    actualFloatConstructorResult = variableFloatConstructor.floatValue();
-    ASSERT_DBL_FAR(notExpectedFloatConstructorResult , actualFloatConstructorResult);
+    // Test Float::Float(const Float &floatNumber)
+    Float FloatConstructor(validFloatConstructor);
+    ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());
 }
 
 

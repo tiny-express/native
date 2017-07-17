@@ -40,9 +40,30 @@ namespace Java {
 			string string_original;
 
 		public:
+			/**
+             * Float initialization
+             *
+             * @param original
+             */
 			Float();
+
+			/**
+             * Float initialization
+             *
+             * @param original
+             */
 			Float(float original);
+
+			/**
+             * Float initialization
+             *
+             * @param original
+             */
 			Float(const Float &target);
+
+			/**
+             * Float Destructor
+             */
 			~Float();
 		
 		public:

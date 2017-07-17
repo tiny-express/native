@@ -28,40 +28,25 @@
 
 using namespace Java::Lang;
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float() {
-	this->original = 0;
-	this->string_original = string_from_float(this->original);
+    this->original = 0;
+    this->string_original = string_from_float(this->original);
 }
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float(float original) {
-	this->original = original;
-	this->string_original = string_from_float(this->original);
+    this->original = original;
+    this->string_original = string_from_float(this->original);
 }
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float(const Float &floatNumber) {
-	this->original = floatNumber.original;
-	this->string_original = string_from_float(this->original);
+    this->original = floatNumber.original;
+    this->string_original = string_from_float(this->original);
 }
 
 Float::~Float() {
-	if (this->string_original != NULL) {
-		free(this->string_original);
-	}
+    if (this->string_original != NULL) {
+        free(this->string_original);
+    }
 }
 
 /**
@@ -114,7 +99,7 @@ long Float::longValue() const {
 }
 
 /**
- * Double value
+ * Float value
  *
  * @return
  */
