@@ -455,7 +455,7 @@ char *string_standardized(char *target) {
 	}
 	char **segments = string_split(target, " ");
 	char *result = string_join(segments, " ");
-	result[strlen(result)] = '\0';
+	result[length_pointer_char(result)] = '\0';
 	free_pointer_pointer_char(segments);
 	return result;
 }
