@@ -2,11 +2,8 @@
 .DS_Store
 bin
 a.out
-<<<<<<< HEAD
 .idea
-=======
 /.idea
->>>>>>> development
 CMakeFiles
 cmake-build-debug
 cmake_install.cmake
