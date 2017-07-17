@@ -50,62 +50,62 @@ TEST (JavaLang, FloatConstructor) {
     ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());
 }
 
-//TEST (JavaLang, FloatArithmeticOperator) {
-//    // Create variable to test
-//    Float variableArithmeticOperator1;
-//    Float variableArithmeticOperator2;
-//    Float expectedResultOperator;
-//    Float actualResultOperator;
-//
-//    // Test Operator +
-//    variableArithmeticOperator1 = 11.11  ;
-//    variableArithmeticOperator2 = 22.22;
-//    expectedResultOperator = 33.33;
-//    actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator -
-//    variableArithmeticOperator1 = 33.33 ;
-//    variableArithmeticOperator2 = 22.22 ;
-//    expectedResultOperator = 11.11;
-//    actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator *
-//    variableArithmeticOperator1 =  2.0;
-//    variableArithmeticOperator2 =  13.02;
-//    expectedResultOperator = 26.04;
-//    actualResultOperator = variableArithmeticOperator1 * variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator /
-//    variableArithmeticOperator1 = 26.04 ;
-//    variableArithmeticOperator2 = 2.0 ;
-//    expectedResultOperator = 13.02;
-//    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator / . POSITIVE_INFINITY_FLOAT
-//    variableArithmeticOperator1 = 26.04 ;
-//    variableArithmeticOperator2 = 0 ;
-//    expectedResultOperator = POSITIVE_INFINITY_FLOAT;
-//    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator / . NEGATIVE_INFINITY_FLOAT
-//    variableArithmeticOperator1 = -26.04 ;
-//    variableArithmeticOperator2 = 0 ;
-//    expectedResultOperator = NEGATIVE_INFINITY_FLOAT;
-//    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//
-//    // Test Operator / . NaN_NUMBER_FLOAT
-//    variableArithmeticOperator1 = 0 ;
-//    variableArithmeticOperator2 = 0 ;
-//    expectedResultOperator = NaN_NUMBER_FLOAT;
-//    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
-//}
+TEST (JavaLang, FloatArithmeticOperator) {
+    // Create variable to test
+    Float variableArithmeticOperator1;
+    Float variableArithmeticOperator2;
+    Float expectedResultOperator;
+    Float actualResultOperator;
+
+    // Test Operator +
+    variableArithmeticOperator1 = 11.11  ;
+    variableArithmeticOperator2 = 22.22;
+    expectedResultOperator = 33.33;
+    actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator -
+    variableArithmeticOperator1 = 33.33 ;
+    variableArithmeticOperator2 = 22.22 ;
+    expectedResultOperator = 11.11;
+    actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator *
+    variableArithmeticOperator1 =  2.0;
+    variableArithmeticOperator2 =  13.02;
+    expectedResultOperator = 26.04;
+    actualResultOperator = variableArithmeticOperator1 * variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator /
+    variableArithmeticOperator1 = 26.04 ;
+    variableArithmeticOperator2 = 2.0 ;
+    expectedResultOperator = 13.02;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . POSITIVE_INFINITY_FLOAT
+    variableArithmeticOperator1 = 26.04 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = POSITIVE_INFINITY_FLOAT;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . NEGATIVE_INFINITY_FLOAT
+    variableArithmeticOperator1 = -26.04 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = NEGATIVE_INFINITY_FLOAT;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+
+    // Test Operator / . NaN_NUMBER_FLOAT
+    variableArithmeticOperator1 = 0 ;
+    variableArithmeticOperator2 = 0 ;
+    expectedResultOperator = NaN_NUMBER_FLOAT;
+    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
+}
 
 TEST (JavaLang, FloatOperator) {
 	// Create variableFloatOperatorA, variableFloatOperatorB to test FloatOperator.
