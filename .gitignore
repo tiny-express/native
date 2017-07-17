@@ -12,10 +12,12 @@ CMakeCache.txt
 Testing
 /Makefile
 /native_test
+/native_test.exe
 /native_test_c
 /native_test_cpp
 /native.cbp
 /native
+/gdb.exe.stackdump
 /libnative.a
 /libnative_static.a
 /libnative.dylib
