@@ -212,7 +212,28 @@ TEST(JavaLang, StringBuilderCodePointCount) {
 TEST(JavaLang, StringBuilderDeleteRange) {
     StringBuilder stringBuilder((const string)"ABCXYZ");
     ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
-    stringBuilder.deleteRange(1, 3);
+    try {
+        // start < 0
+        stringBuilder.deleteRange(-1, 3);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    }
+    try {
+        // end < 0
+        stringBuilder.deleteRange(1, -1);
+    }
+    catch (Exception ex) {
+        ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    }
+    try {
+        // start > end
+        stringBuilder.deleteRange(3, 1);
+    }
+    catch (Exception ex){
+        ASSERT_STR("ABCXYZ", stringBuilder.toString().toString());
+    }
+    stringBuilder.deleteRange(1, 3); // valid start, valid end
     ASSERT_STR("AXYZ", stringBuilder.toString().toString());
     stringBuilder.deleteRange(0, 0);
     ASSERT_STR("AXYZ", stringBuilder.toString().toString());
@@ -279,7 +300,7 @@ TEST(JavaLang, StringBuilderInsert) {
     StringBuilder stringBuilder1((const string)"123");
     ASSERT_STR("123", stringBuilder1.toString().toString());
     try {
-        // offset is negative.
+        // offset is negative
         stringBuilder1.insert(-1, (const string)"xxx");
     }
     catch (Exception ex) {
@@ -304,7 +325,7 @@ TEST(JavaLang, StringBuilderInsert) {
     stringBuilder2.insert(0, false);
     ASSERT_STR("false1 = 1 is true", stringBuilder2.toString().toString());
 
-    // Long and long, Integer and int,
+    // Long and long, Integer and int
     StringBuilder stringBuilder3((const string)"0");
     stringBuilder3.insert(1, 1000l);
     ASSERT_STR("01000", stringBuilder3.toString().toString());
