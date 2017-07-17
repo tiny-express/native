@@ -505,6 +505,10 @@ boolean Character::isLowSurrogate(unicode ch) {
     return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
 }
 
+boolean Character::isSurrogate(unicode ch) {
+    return ch >= MIN_SURROGATE && ch < (MAX_SURROGATE + 1);
+}
+
 int Character::toCodePoint(unicode high, unicode low) {
     return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
                                    - (MIN_HIGH_SURROGATE << 10)
