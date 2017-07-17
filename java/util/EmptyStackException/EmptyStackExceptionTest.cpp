@@ -41,7 +41,7 @@ TEST (JavaUtil, EmptyStackExceptionTryCatch) {
     try {
         throw EmptyStackException();
     }
-    catch (Exception e) {
+    catch (EmptyStackException e) {
         ASSERT_STR("", e.getMessage().toString());
     }
 }
