@@ -104,7 +104,7 @@ void Random::resetSeed(long seedVal) {
 }
 
 /**
- * Copy constructor, std::atomic has it's copy constructor deleted, so a copy constructor is require
+ * Copy constructor, std::atomic has it's copy constructor deleted, so a copy constructor is required
  *
  * @param other
  */
