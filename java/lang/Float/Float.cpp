@@ -65,6 +65,67 @@ Float Float::operator/(const Float &target) {
     return Float( this->original / target.original );
 }
 
+boolean Float::operator==(const Float &target) const {
+    return (boolean) (this->original == target.original);
+}
+
+//TODO enable after finish method equals , compare
+//boolean Float::operator==(const Float &target) const {
+//    return (boolean) equals(target.original);
+//}
+//
+//boolean Float::operator!=(const Float &target) const {
+//    return (boolean) !equals(target.original);
+//}
+//
+//boolean Float::operator<(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator>(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator>=(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == 1
+//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+//
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator<=(const Float &target) const {
+//
+//    if (compare(this->doubleValue(), target.doubleValue()) == -1
+//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+//
+//        return true;
+//    }
+//    return false;
+//}
+
+boolean Float::operator&&(const Float &target) const {
+    return (boolean) (this->original && target.original);
+}
+
+boolean Float::operator||(const Float &target) const {
+    return (boolean) (this->original || target.original);
+}
+
+Float Float::operator=(const Float &target) {
+    this->original = target.original;
+    free(this->string_original);
+    this->string_original = string_from_float(this->original);
+    return *this;
+}
+
 /**
  * Float value
  *
@@ -141,71 +202,4 @@ string Float::toString() const {
 Float Float::parseFloat(String target) {
 	Float result = string_to_float(target.toString());
 	return result;
-}
-
-/**
- * Assign value of this object same as target value
- *
- * @param target
- * @return Float
- */
-Float Float::operator=(const Float &target) {
-	this->original = target.original;
-	free(this->string_original);
-	this->string_original = string_from_float(this->original);
-	return *this;
-}
-
-/**
-* Compare this Float is equal target
-*
-* @return bool
-*/
-boolean Float::operator==(const Float &target) const {
-	return this->original == target.original;
-}
-
-/**
-* Compare this Float is not equal target
-*
-* @return bool
-*/
-boolean Float::operator!=(const Float &target) const {
-	return this->original != target.original;
-}
-
-/**
-* Compare this Float is less than target
-*
-* @return bool
-*/
-boolean Float::operator<(const Float &target) const {
-	return this->original < target.original;
-}
-
-/**
-* Compare this Float is more than target
-*
-* @return bool
-*/
-boolean Float::operator>(const Float &target) const {
-	return this->original > target.original;
-}
-
-/**
-* Compare this Float is equal or less than target
-*
-* @return bool
-*/
-boolean Float::operator<=(const Float &target) const {
-	return this->original <= target.original;
-}
-
-/**
-*  Compare this Float is equal or more than target
-*
-* @return bool
-*/
-boolean Float::operator>=(const Float &target) const {
-	return this->original >= target.original;
 }

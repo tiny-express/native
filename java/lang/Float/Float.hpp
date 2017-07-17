@@ -245,11 +245,6 @@ namespace Java {
              */
             Float operator/=(const Float &target) const;
 
-            /**
-             * Float to Char
-             *
-             * @return char
-             */
 			char charValue() const;
 			short shortValue() const;
 			int intValue() const;

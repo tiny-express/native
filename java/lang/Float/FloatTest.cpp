@@ -107,59 +107,120 @@ TEST (JavaLang, FloatArithmeticOperator) {
     ASSERT_DBL_NEAR(expectedResultOperator.doubleValue(), actualResultOperator.doubleValue());
 }
 
-TEST (JavaLang, FloatOperator) {
-	// Create variableFloatOperatorA, variableFloatOperatorB to test FloatOperator.
-	Float variableFloatOperatorA = 33.00;
-    Float variableFloatOperatorB = 11.00;
+//TODO enable after finish method equals , compare
+//TEST (JavaLang, FloatRelationalOperator) {
+//    // Create variable to test
+//    Float variableRelationalOperator1;
+//    Float variableRelationalOperator2;
+//    boolean expectedResultOperator;
+//    boolean actualResultOperator;
+//
+//    ASSERT_DBL_NEAR(1.123,1.123);
+//    // Test Operator ==
+//    variableRelationalOperator1 = 13.12;
+//    variableRelationalOperator2 = 13.12;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//
+//    // Test Operator !=
+//    variableRelationalOperator1 = 13.02;
+//    variableRelationalOperator2 = 99.02;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//
+//    // Test Operator >
+//    variableRelationalOperator1 = 13.02;
+//    variableRelationalOperator2 = 11.11;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//
+//    // Test Operator <
+//    variableRelationalOperator1 = 1.11;
+//    variableRelationalOperator2 = 13.02;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//
+//    // Test Operator >=
+//    variableRelationalOperator1 = 15.00;
+//    variableRelationalOperator2 = 13.02;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//
+//    // Test Operator <=
+//    variableRelationalOperator1 = 1.11;
+//    variableRelationalOperator2 = 13.02;
+//    expectedResultOperator = TRUE;
+//    actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
+//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//}
 
-    // Create actualFloatOperatorResult contains actual result of the function we want to test
-    Float actualFloatOperatorResult ;
+TEST (JavaLang, FloatLogicalOperator) {
+    // Create variable to test
+    Float variableLogicalOperator1;
+    Float variableLogicalOperator2;
+    boolean expectedResultOperator;
+    boolean actualResultOperator;
 
-    // Create expectedFloatOperatorResult to test case TRUE of FloatOperator
-    Float expectedFloatOperatorResult;
+    // Test Operator && . Case 0   0
+    variableLogicalOperator1 = 0;
+    variableLogicalOperator2 = 0;
+    expectedResultOperator = FALSE;
+    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Create notExpectedFloatOperatorResult to test case FALSE of FloatOperator
-    Float notExpectedFloatOperatorResult;
+    // Test Operator && . Case 0   1
+    variableLogicalOperator1 = 0;
+    variableLogicalOperator2 = 1;
+    expectedResultOperator = FALSE;
+    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-	// Test Float::operator     +   . Case TRUE
-	actualFloatOperatorResult = variableFloatOperatorA + variableFloatOperatorB;
-    expectedFloatOperatorResult = 44.00;
-	ASSERT_DBL_NEAR(expectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator && . Case 1   0
+    variableLogicalOperator1 = 1;
+    variableLogicalOperator2 = 0;
+    expectedResultOperator = FALSE;
+    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Test Float::operator     +   . Case FALSE
-    actualFloatOperatorResult = variableFloatOperatorA + variableFloatOperatorB;
-    notExpectedFloatOperatorResult = 555.666 ;
-    ASSERT_DBL_FAR(notExpectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator && . Case 1   1
+    variableLogicalOperator1 = 1;
+    variableLogicalOperator2 = 1;
+    expectedResultOperator = TRUE;
+    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Test Float::operator     -   . Case TRUE
-    actualFloatOperatorResult = variableFloatOperatorA - variableFloatOperatorB;
-    expectedFloatOperatorResult = 22.00 ;
-    ASSERT_DBL_NEAR(expectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator || . Case 0   0
+    variableLogicalOperator1 = 0;
+    variableLogicalOperator2 = 0;
+    expectedResultOperator = FALSE;
+    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Test Float::operator     -   . Case FALSE
-    actualFloatOperatorResult = variableFloatOperatorA - variableFloatOperatorB;
-    notExpectedFloatOperatorResult = 123.321 ;
-    ASSERT_DBL_FAR(notExpectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator || . Case 0   1
+    variableLogicalOperator1 = 0;
+    variableLogicalOperator2 = 1;
+    expectedResultOperator = TRUE;
+    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Test Float::operator     *   . Case TRUE
-    actualFloatOperatorResult = variableFloatOperatorA * variableFloatOperatorB;
-    expectedFloatOperatorResult = 363.00 ;
-    ASSERT_DBL_NEAR(expectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator || . Case 1   0
+    variableLogicalOperator1 = 1;
+    variableLogicalOperator2 = 0;
+    expectedResultOperator = TRUE;
+    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 
-    // Test Float::operator     *   . Case FALSE
-    actualFloatOperatorResult = variableFloatOperatorA * variableFloatOperatorB;
-    notExpectedFloatOperatorResult = 5678.123 ;
-    ASSERT_DBL_FAR(notExpectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
-
-    // Test Float::operator     /   . Case TRUE
-    actualFloatOperatorResult = variableFloatOperatorA / variableFloatOperatorB;
-    expectedFloatOperatorResult = 3.00 ;
-    ASSERT_DBL_NEAR(expectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
-
-    // Test Float::operator     /   . Case FALSE
-    actualFloatOperatorResult = variableFloatOperatorA / variableFloatOperatorB;
-    notExpectedFloatOperatorResult = 123.321 ;
-    ASSERT_DBL_FAR(notExpectedFloatOperatorResult.floatValue() , actualFloatOperatorResult.floatValue());
+    // Test Operator || . Case 1   1
+    variableLogicalOperator1 = 1;
+    variableLogicalOperator2 = 1;
+    expectedResultOperator = TRUE;
+    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
+    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 }
 
 TEST (JavaLang, FloatParseFloat) {
