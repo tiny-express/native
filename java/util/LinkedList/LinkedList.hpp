@@ -34,6 +34,8 @@
 #include "../List/List.hpp"
 #include "../Queue/Queue.hpp"
 #include "../../lang/Exception/Exception.hpp"
+#include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../../lang/NoSuchElementException/NoSuchElementException.hpp"
 
 using namespace Java::Lang;
 
@@ -210,7 +212,7 @@ namespace Java {
              */
             E get(int index) {
                 if(index < 0 || index > this->nodeSize - 1) {
-                    throw Java::Lang::Exception("Index is out of bounds!");
+                    throw IndexOutOfBoundsException("Index is out of bounds!");
                 }
                 return node0(index)->element;
             }
@@ -222,7 +224,7 @@ namespace Java {
              */
             E getFirst() {
                 if (this->first == NULL) {
-                    throw Java::Lang::Exception("List is empty!");
+                    throw NoSuchElementException();
                 }
                 return this->first->element;
             }
@@ -234,7 +236,7 @@ namespace Java {
              */
             E getLast() {
                 if (this->last == NULL) {
-                    throw Java::Lang::Exception("List is empty!");
+                    throw NoSuchElementException();
                 }
                 return this->last->element;
             }
@@ -599,7 +601,7 @@ namespace Java {
 
             E unlinkFirst() {
                 if (this->first == NULL) {
-                    throw Java::Lang::Exception("List is empty");
+                    throw NoSuchElementException();
                 }
 
                 Node<E> *temp = this->first;
@@ -613,7 +615,7 @@ namespace Java {
 
             E unlinkLast() {
                 if (this->last == NULL) {
-                    throw Java::Lang::Exception("List is empty");
+                    throw NoSuchElementException();
                 }
 
                 Node<E> *temp = this->last;
