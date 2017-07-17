@@ -27,21 +27,13 @@
 #ifndef NATIVE_UTIL_ABSTRACT_MAP_HPP
 #define NATIVE_UTIL_ABSTRACT_MAP_HPP
 
-#include "../../lang/Object/Object.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
 	namespace Util {
-		class AbstractMap :
-			public Object
-			// public virtual Map
-			{
-
-		protected:
-			AbstractMap() {}
-			virtual ~AbstractMap() {}
-		
+		class AbstractMap : public Object {
 		};
 	}
 }

@@ -30,7 +30,6 @@
 #include "../common.h"
 #include "../type.h"
 #include "../string.h"
-#include "../validator.h"
 
 /**
  * Convert generic types to string

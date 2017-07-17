@@ -280,7 +280,8 @@ namespace Java {
                 tm timer;
                 string timeString = s.toString();
 
-                strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
+                // TODO - Fix for WIN32
+                // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
                 long result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
                                         timer.tm_hour, timer.tm_min, timer.tm_sec);
                 return result;

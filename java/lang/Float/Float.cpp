@@ -84,7 +84,6 @@ char Float::charValue() const {
     char floatCharValueResult = string_to_char(stringFromFloatResult);
     free(stringFromFloatResult);
 	return floatCharValueResult;
-
 }
 
 /**

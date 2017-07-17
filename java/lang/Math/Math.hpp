@@ -201,9 +201,6 @@ namespace Java {
 			static float ulp(float a);
 
 			static double ulp(double a);
-
-
-
 		};
 
         class RandomNumberGeneratorHolder {

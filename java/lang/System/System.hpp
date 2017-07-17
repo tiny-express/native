@@ -42,10 +42,10 @@ namespace Java {
 				static void print(String target);
 				static void println(String target);
 			};
-			
+
 			class err {
 			};
-			
+			static long currentTimeMillis();
 			static void exit(int status);
 			static void gc();
 			static String getenv(string name);

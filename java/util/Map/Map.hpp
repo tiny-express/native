@@ -24,17 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef NATIVE_JAVA_UTIL_MAP_HPP
+#define NATIVE_JAVA_UTIL_MAP_HPP
 #include "../../Lang.hpp"
 
 namespace Java {
 	namespace Util {
-		
 		template <class K, class V>
 		class Map {
 
 		protected:
 			Map() {};
-			~Map() {};
+			virtual ~Map() {};
 
 		public:
 			/**
@@ -45,47 +46,27 @@ namespace Java {
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
 			 *
-			 * @param key
+			 * @param K key
 			 * @return boolean
 			 */
-			virtual boolean containsKey(Object) const = 0;
+			virtual boolean containsKey(const K &key) const = 0;
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
 			 *
-			 * @param value
+			 * @param V value
 			 * @return boolean
 			 */
-			virtual boolean containsValue(Object) const = 0;
-
-			/**
-			 * Don't support this method
-			 */
-			//Set<Map::Entry<K,V>> entrySet();
-
-			/**
-			 * Compares the specified object with this map for equality.
-			 *
-			 * @param o
-			 * @return boolean
-			 */
-			virtual boolean equals(Object) const = 0;
+			virtual boolean containsValue(const V &value) const = 0;
 
 			/**
 			 * Returns the value to which the specified key is mapped,
 			 * or null if this map contains no mapping for the key.
 			 *
 			 * @param key
-			 * @return
+			 * @return V
 			 */
-			virtual V get(Object key) const = 0;
-
-			/**
-			 * Returns the hash code value for this map.
-			 *
-			 * @return int
-			 */
-			virtual long hashCode() const = 0;
+			virtual V get(const K &key) const = 0;
 
 			/**
 			 * Returns true if this map contains no key-value mappings.
@@ -95,41 +76,14 @@ namespace Java {
 			virtual boolean isEmpty() const = 0;
 
 			/**
-			 * Don't support this method
-			 */
-//			Set<K> keySet();
-
-			/**
-			 * Associates the specified value with the specified key in this map (optional operation).
-			 * @param key
-			 * @param value
-			 * @return V
-			 */
-			V put(K, V) {}
-
-			/**
-			 * Copies all of the mappings from the specified map to this map (optional operation).
-			 * @param
-			 */
-			void putAll(Map<K,V>&);
-
-			/**
-			 * Removes the mapping for a key from this map if it is present (optional operation).
-			 * @param key
-			 * @return V
-			 */
-			V remove(Object);
-
-			/**
 			 * Returns the number of key-value mappings in this map.
+			 *
 			 * @return int
 			 */
 			virtual int size() const = 0;
 
-			/**
-			 * Don't support this method
-			 */
-//			virtual Collection<V> values();
 		};
 	}
 }
+
+#endif //NATIVE_JAVA_UTIL_MAP_HPP
