@@ -40,16 +40,16 @@ typedef void (*SetupFunc)(void *);
 typedef void (*TearDownFunc)(void *);
 
 struct ctest {
-    const char *ssname;  // suite name
-    const char *ttname;  // test name
-    void (*run)();
-    int skip;
-
-    void *data;
-    SetupFunc setup;
-    TearDownFunc teardown;
-
-    unsigned int magic;
+	const char *ssname;  // suite name
+	const char *ttname;  // test name
+	void (*run)();
+	int skip;
+	
+	void *data;
+	SetupFunc setup;
+	TearDownFunc teardown;
+	
+	unsigned int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run
@@ -117,8 +117,8 @@ void assert_str(const char *exp, const char *real, const char *caller, int line)
 #define ASSERT_STR(exp, real) assert_str(exp, real, __FILE__, __LINE__)
 
 void assert_data(const unsigned char *exp, size_t expsize,
-                 const unsigned char *real, size_t realsize,
-                 const char *caller, int line);
+	const unsigned char *real, size_t realsize,
+	const char *caller, int line);
 #define ASSERT_DATA(exp, expsize, real, realsize) \
     assert_data(exp, expsize, real, realsize, __FILE__, __LINE__)
 
