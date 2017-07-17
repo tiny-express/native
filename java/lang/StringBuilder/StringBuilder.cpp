@@ -35,7 +35,7 @@ StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
 
 StringBuilder::StringBuilder(int capacity) {
     if (capacity < 0) {
-        throw NegativeArraySizeException();
+        throw NegativeArraySizeException("capacity is negative");
     }
 
     this->original = (string)calloc((size_t)capacity, sizeof(char));

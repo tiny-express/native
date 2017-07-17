@@ -41,6 +41,13 @@ TEST(JavaLang, StringBuilderConstructor) {
     ASSERT_EQUAL(0, customCapacityStringBuilder.length());
     ASSERT_EQUAL(20, customCapacityStringBuilder.capacity());
 
+    try {
+        StringBuilder negativeCapacityStringBuilder(-1);
+    }
+    catch (Exception e) {
+        ASSERT_STR("capacity is negative", e.getMessage().toString());
+    }
+
     String aString = "Hello! Welcome to VietNam!";
     int aStringLength = aString.length();
     StringBuilder nullTerminatedStringStringBuilder(aString.toString());
