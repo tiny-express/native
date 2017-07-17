@@ -130,7 +130,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURC
 
 # Create native library for static linking
 add_library(${PROJECT_NAME}_static ${SOURCES_C} ${SOURCES_CPP})
-add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP} java/util/Random/RandomTest.cpp java/lang/IllegalArgumentException/IllegalArgumentException.cpp java/lang/IllegalArgumentException/IllegalArgumentException.hpp java/lang/IllegalArgumentException/IllegalArgumentExceptionTest.cpp)
+add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
