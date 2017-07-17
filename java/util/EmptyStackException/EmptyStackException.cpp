@@ -25,6 +25,5 @@
  */
 #include "EmptyStackException.hpp"
 
-//TODO change to RuntimeException when merge from StringBuilder
-EmptyStackException::EmptyStackException() : Exception::Exception() {
+EmptyStackException::EmptyStackException() : RuntimeException::RuntimeException() {
 }

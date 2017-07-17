@@ -28,13 +28,13 @@
 #define NATIVE_EMPTY_STACK_EXCEPTION_H
 
 #include "../../Lang.hpp"
+#include "../../lang/RuntimeException/RuntimeException.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
-        //TODO change to RuntimeException when merge from StringBuilder
-        class EmptyStackException : public Exception {
+        class EmptyStackException : public RuntimeException {
         public:
             EmptyStackException();
         };
