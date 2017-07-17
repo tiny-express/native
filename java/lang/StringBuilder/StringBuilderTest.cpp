@@ -199,13 +199,22 @@ TEST(JavaLang, StringBuilderDeleteCharAt) {
 }
 
 TEST(JavaLang, StringBuilderEnsureCapacity) {
+    // Default capacity.
     StringBuilder stringBuilder;
     ASSERT_EQUAL(0, stringBuilder.length());
     ASSERT_EQUAL(16, stringBuilder.capacity());
+    // New capacity is not positive.
+    stringBuilder.ensureCapacity(-1);
+    ASSERT_EQUAL(16, stringBuilder.capacity());
+    stringBuilder.ensureCapacity(0);
+    ASSERT_EQUAL(16, stringBuilder.capacity());
+    // New capacity less than current capacity.
     stringBuilder.ensureCapacity(10);
     ASSERT_EQUAL(16, stringBuilder.capacity());
+    // New capacity larger than current capacity but less than (2 * current + 2).
     stringBuilder.ensureCapacity(17);
     ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
+    // New capacity larget than current capacity but larger than (2 * current + 2).
     stringBuilder.ensureCapacity(100);
     ASSERT_EQUAL(100, stringBuilder.capacity());
 }

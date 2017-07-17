@@ -310,15 +310,17 @@ StringBuilder StringBuilder::deleteCharAt(int index) {
 }
 
 void StringBuilder::ensureCapacity(int minimumCapacity) {
-    if ((minimumCapacity > 0) && (minimumCapacity > this->currentCapacity)) {
-        int newCapacity = this->currentCapacity * 2 + 2;
-        if (newCapacity < minimumCapacity) {
-            newCapacity = minimumCapacity;
-        }
-        int numberOfBytes = newCapacity * sizeof(char);
-        this->original = (string)realloc(this->original, (size_t)numberOfBytes);
-        this->currentCapacity = newCapacity;
+    if (minimumCapacity <= 0 || minimumCapacity <= this->currentCapacity) {
+        return;
     }
+
+    int newCapacity = this->currentCapacity * 2 + 2;
+    if (newCapacity < minimumCapacity) {
+        newCapacity = minimumCapacity;
+    }
+    int numberOfBytes = newCapacity * sizeof(char);
+    this->original = (string)realloc(this->original, (size_t)numberOfBytes);
+    this->currentCapacity = newCapacity;
 }
 
 void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const {
