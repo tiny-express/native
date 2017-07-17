@@ -75,7 +75,7 @@ namespace Java {
 			const ArrayList<E> *_p_vec;
 		};
 		
-		template <typename E>
+		template <class E>
 		class ArrayList : public AbstractList<E>,
 		                  public virtual List<E>,
 		                  public virtual Serializable,
@@ -85,8 +85,7 @@ namespace Java {
 			std::vector<E> original;
 			typedef E *_iterator;
 			typedef const E *_const_iterator;
-		
-		
+			
 		public:
 			
 			_iterator begin() {
@@ -465,7 +464,7 @@ namespace Java {
 			 * @param a
 			 * @return Array<T>
 			 */
-			template <typename T>
+			template <class T>
 			Array<T> &toArray(Array<T> &a) const {
 				// TODO
 				return a;
@@ -510,7 +509,7 @@ namespace Java {
 			}
 		};
 		
-		template <typename E>
+		template <class E>
 		class SubList : public virtual AbstractList<E> {
 		private:
 			AbstractList<E> l;

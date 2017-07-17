@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef CTEST_H
-#define CTEST_H
+#ifndef NATIVE_KERNEL_TEST_H
+#define NATIVE_KERNEL_TEST_H
 
 #include <stddef.h>
 
@@ -34,7 +34,7 @@
 #include <stddef.h> /* size_t */
 #include <signal.h>
 //#include <sys/resource.h>
-#include "../kernel/common.h"
+#include "common.h"
 
 typedef void (*SetupFunc)(void *);
 typedef void (*TearDownFunc)(void *);
@@ -536,6 +536,6 @@ int ctest_main(int argc, const char *argv[])
 
 #endif
 
-#endif
+#endif//NATIVE_KERNEL_TEST_H
 
 #define TEST CTEST

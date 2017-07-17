@@ -25,7 +25,7 @@
  */
 
 #include "../builtin.h"
-#include "../../misc/test.h"
+#include "../test.h"
 
 TEST (String, ProcessReplace) {
 	char *target = "Hello World";

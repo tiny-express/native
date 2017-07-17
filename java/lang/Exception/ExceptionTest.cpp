@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../misc/test.h"
+#include "../../../kernel/test.h"
 };
 
 #include "Exception.hpp"

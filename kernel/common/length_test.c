@@ -25,7 +25,7 @@
  */
 
 #include "../builtin.h"
-#include "../../misc/test.h"
+#include "../test.h"
 
 TEST (Common, LengthPointerChar) {
 	char *data = "Hello world";

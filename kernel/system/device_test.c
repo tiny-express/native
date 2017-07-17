@@ -25,7 +25,7 @@
  */
 
 #include "../system.h"
-#include "../../misc/test.h"
+#include "../test.h"
 
 //TEST (System, DeviceGetCpuUsage) {
 //	ASSERT_TRUE(get_cpu_usage() > 0);

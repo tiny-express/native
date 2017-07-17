@@ -25,7 +25,7 @@
  */
 
 #include "../builtin.h"
-#include "../../misc/test.h"
+#include "../test.h"
 
 TEST (Common, SegmentPointerChar) {
 	char *charArray = "Hello World";

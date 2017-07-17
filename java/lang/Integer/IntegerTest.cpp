@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 extern "C" {
-#include "../../../misc/test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "Integer.hpp"
