@@ -77,6 +77,17 @@ namespace Java {
              * LinkedList default constructor
              */
             LinkedList() {}
+            
+            /**
+             * LinkedList with std::initializer_list
+             * 
+             * @param target 
+             */
+            LinkedList(const std::initializer_list<E> &target) {
+                for(E item : target) {
+                    this->add(item);
+                }
+            }
 
             /**
              * LinkedList constructor with Collection<E>
@@ -96,11 +107,11 @@ namespace Java {
             /**
              * Appends the specified element to the end of this list.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
-            boolean add(const E &e) {
-                this->linkLast(e);
+            boolean add(const E &element) {
+                this->linkLast(element);
                 return true;
             }
 
@@ -112,7 +123,6 @@ namespace Java {
              */
             void add(int index, const E &element) {
                 Node<E> *temp = node0(index);
-
                 Node<E> *newNode = new Node<E>(temp->previous, element, temp);
                 temp->previous->next = newNode;
             }
@@ -131,20 +141,19 @@ namespace Java {
             /**
              *Inserts the specified element at the beginning of this list.
              *
-             * @param e
+             * @param element
              */
-            void addFirst(E &e) {
-                linkFirst(e);
-                return;
+            void addFirst(const E &element) {
+                linkFirst(element);
             }
 
             /**
              * Appends the specified element to the end of this list.
              *
-             * @param e
+             * @param element
              */
-            void addLast(E &e) {
-                linkLast(e);
+            void addLast(const E &element) {
+                linkLast(element);
                 return;
             }
 
@@ -153,7 +162,8 @@ namespace Java {
              */
             void clear() {
                 int nodeSize = this->nodeSize;
-                for (int i = 0; i < nodeSize; ++i) {
+                int index;
+                for (index = 0; index < nodeSize; ++index) {
                     remove();
                 }
             }
@@ -166,16 +176,14 @@ namespace Java {
             /**
              * Returns true if this list contains the specified element.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
-            boolean contains(E &e) const {
-                Node<E> *node = node1(e);
-
-                if (NULL == node) {
+            boolean contains(const E &element) const {
+                Node<E> *node = node1(element);
+                if (node == NULL) {
                     return false;
                 }
-
                 return true;
             }
 
@@ -200,6 +208,9 @@ namespace Java {
              * @return E
              */
             E get(int index) {
+                if(index < 0 || index > this->nodeSize - 1) {
+                    throw std::invalid_argument("[ERROR]: index is out o scope");
+                }
                 return node0(index)->element;
             }
 
@@ -210,7 +221,7 @@ namespace Java {
              */
             E getFirst() {
                 if (this->first == NULL) {
-                    exception();
+                    throw std::invalid_argument("[ERROR]: list is empty");
                 }
                 return this->first->element;
             }
@@ -222,7 +233,7 @@ namespace Java {
              */
             E getLast() {
                 if (this->last == NULL) {
-                    exception();
+                    throw std::invalid_argument("[ERROR]: list is empty");
                 }
                 return this->last->element;
             }
@@ -231,14 +242,15 @@ namespace Java {
              * Returns the index of the first occurrence of the specified element in this list,
              * or -1 if this list does not contain the element.
              *
-             * @param e
+             * @param element
              * @return int
              */
-            int indexOf(E &e) const {
+            int indexOf(const E &element) const {
                 Node<E> *temp = this->first;
-                for (int i = 0; i < this->nodeSize; ++i) {
-                    if (temp->element == e) {
-                        return i;
+                int index;
+                for (index = 0; index < this->nodeSize; ++index) {
+                    if (temp->element == element) {
+                        return index;
                     }
                     temp = temp->next;
                 }
@@ -249,14 +261,15 @@ namespace Java {
              * Returns the index of the last occurrence of the specified element in this list,
              * or -1 if this list does not contain the element.
              *
-             * @param e
+             * @param element
              * @return int
              */
-            int lastIndexOf(E &e) const {
+            int lastIndexOf(const E &element) const {
                 Node<E> *temp = this->last;
-                for (int i = 0; i < this->nodeSize; ++i) {
-                    if (temp->element == e) {
-                        return i;
+                int index;
+                for (index = 0; index < this->nodeSize; ++index) {
+                    if (temp->element == element) {
+                        return index;
                     }
                     temp = temp->previous;
                 }
@@ -271,33 +284,33 @@ namespace Java {
             /**
              * Adds the specified element as the tail (last element) of this list.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
-            boolean offer(E e) {
-                linkLast(e);
+            boolean offer(const E &element) {
+                linkLast(element);
                 return true;
             }
 
             /**
              * Inserts the specified element at the front of this list.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
-            boolean offerFirst(E e) {
-                linkFirst(e);
+            boolean offerFirst(const E &element) {
+                linkFirst(element);
                 return true;
             }
 
             /**
              * Inserts the specified element at the end of this list.
              *
-             * @param e
+             * @param element
              * @return boolean
              */
-            boolean offerLast(E e) {
-                linkLast(e);
+            boolean offerLast(const E &element) {
+                linkLast(element);
                 return true;
             }
 
@@ -366,10 +379,10 @@ namespace Java {
             /**
              * Pushes an element onto the stack represented by this list.
              *
-             * @param e
+             * @param element
              */
-            void push(E e) {
-                addFirst(e);
+            void push(const E &element) {
+                addFirst(element);
             }
 
             /**
@@ -398,11 +411,11 @@ namespace Java {
             /**
              * Remove a specific element
              *
-             * @param E e
+             * @param element e
              * @return boolean
              */
-            boolean remove(E &e) {
-                Node<E> *nodeIndex = node1(e);
+            boolean remove(const E &element) {
+                Node<E> *nodeIndex = node1(element);
 
                 if (nodeIndex == NULL) {
                     return false;
@@ -434,27 +447,28 @@ namespace Java {
             }
 
             /**
-             * Don't support this method, use removeFirstOccurrence(E &e) instead
+             * Don't support this method, use removeFirstOccurrence(const E &element) instead
              */
 //			boolean	removeFirstOccurrence(Object o);
 
             /**
-             * Don't support this method, use removeLastOccurrence(E &e) instead
+             * Don't support this method, use removeLastOccurrence(const E &element) instead
              */
 //			boolean	removeLastOccurrence(Object o);
 
             /**
              * Removes the first occurrence of the specified element in this list (when traversing the list from head to tail).
              *
-             * @param e
+             * @param element
              * @return
              */
-            boolean removeFirstOccurrence(E &e) {
+            boolean removeFirstOccurrence(const E &element) {
                 Node<E> *temp = this->first;
 
-                for (int i = 0; i < this->nodeSize; ++i) {
-                    if (temp->element == e) {
-                        return remove(i);
+                int index;
+                for (index = 0; index < this->nodeSize; ++index) {
+                    if (temp->element == element) {
+                        return remove(index);
                     }
                     temp = temp->next;
                 }
@@ -464,15 +478,16 @@ namespace Java {
             /**
              * Removes the last occurrence of the specified element in this list (when traversing the list from head to tail).
              *
-             * @param e
-             * @return
+             * @param element
+             * @return boolean
              */
-            boolean removeLastOccurrrence(E &e) {
+            boolean removeLastOccurrrence(const E &element) {
                 Node<E> *temp = this->last;
 
-                for (int i = this->nodeSize; i > 0; ++i) {
-                    if (temp->element == e) {
-                        return remove(i);
+                int index;
+                for (index = this->nodeSize; index > 0; ++index) {
+                    if (temp->element == element) {
+                        return remove(index);
                     }
                     temp = temp->previous;
                 }
@@ -524,7 +539,7 @@ namespace Java {
              */
 //			boolean equals(const Object &o);
 
-        private:        
+        private:
             void linkFirst(const E &e) {
                 Node<E> *node = new Node<E>(NULL, e, this->first);
 
@@ -557,20 +572,22 @@ namespace Java {
 
             Node<E> *node0(int index) {
                 if (index < 0 || index >= this->nodeSize) {
-                    exception();
+
                 }
 
                 Node<E> *temp = this->first;
-                for (int i = 1; i < index; ++i) {
+                int _index;
+                for (_index = 1; _index < index; ++_index) {
                     temp = temp->next;
                 }
                 return temp;
             }
 
-            Node<E> *node1(E &e) const {
+            Node<E> *node1(const E &element) const {
                 Node<E> *temp = this->first;
-                for (int i = 0; i < this->nodeSize; ++i) {
-                    if (temp->element == e) {
+                int index;
+                for (index = 0; index < this->nodeSize; ++index) {
+                    if (temp->element == element) {
                         return temp;
                     }
                     temp = temp->next;
@@ -581,7 +598,7 @@ namespace Java {
 
             E unlinkFirst() {
                 if (this->first == NULL) {
-                    exception();
+                    throw std::invalid_argument("[ERROR]: index is out o scope");
                 }
 
                 Node<E> *temp = this->first;
@@ -595,7 +612,7 @@ namespace Java {
 
             E unlinkLast() {
                 if (this->last == NULL) {
-                    exception();
+                    throw std::invalid_argument("[ERROR]: index is out o scope");
                 }
 
                 Node<E> *temp = this->last;
@@ -610,10 +627,6 @@ namespace Java {
             void deleteNode(Node<E> *node) {
                 delete ( node );
                 this->nodeSize--;
-            }
-
-            void exception() {
-                throw std::invalid_argument("[ERROR]: index is out o scope");
             }
         };
     }
