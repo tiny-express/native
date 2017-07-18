@@ -105,117 +105,51 @@ TEST(JavaLang, DoubleArithmeticOperator) {
 }
 
 TEST(JavaLang, DoubleRelationalOperator) {
-    // Create variable to test
-    Double variableRelationalOperator1;
-    Double variableRelationalOperator2;
-    boolean expectedResultOperator;
-    boolean actualResultOperator;
-
     // Test Operator ==
-    variableRelationalOperator1 = 13.12;
-    variableRelationalOperator2 = 13.12;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)13.02 == (Double)13.02);
 
     // Test Operator !=
-    variableRelationalOperator1 = 13.02;
-    variableRelationalOperator2 = 99.02;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)13.02 != (Double)20.31);
 
     // Test Operator >
-    variableRelationalOperator1 = 13.02;
-    variableRelationalOperator2 = 11.11;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)20.31 > (Double)13.02);
 
     // Test Operator <
-    variableRelationalOperator1 = 1.11;
-    variableRelationalOperator2 = 13.02;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)13.02 < (Double)20.31);
 
     // Test Operator >=
-    variableRelationalOperator1 = 15.00;
-    variableRelationalOperator2 = 13.02;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)33.33 >= (Double)22.22);
+    ASSERT_TRUE((Double)33.33 >= (Double)33.33);
 
     // Test Operator <=
-    variableRelationalOperator1 = 1.11;
-    variableRelationalOperator2 = 13.02;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)22.22 <= (Double)33.33);
+    ASSERT_TRUE((Double)22.22 <= (Double)22.22);
 }
 
 TEST(JavaLang, DoubleLogicalOperator) {
-    // Create variable to test
-    Double variableLogicalOperator1;
-    Double variableLogicalOperator2;
-    boolean expectedResultOperator;
-    boolean actualResultOperator;
-
     // Test Operator && . Case 0   0
-    variableLogicalOperator1 = 0;
-    variableLogicalOperator2 = 0;
-    expectedResultOperator = FALSE;
-    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_FALSE((Double)0 && (Double)0);
 
     // Test Operator && . Case 0   1
-    variableLogicalOperator1 = 0;
-    variableLogicalOperator2 = 1;
-    expectedResultOperator = FALSE;
-    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_FALSE((Double)0 && (Double)1);
 
     // Test Operator && . Case 1   0
-    variableLogicalOperator1 = 1;
-    variableLogicalOperator2 = 0;
-    expectedResultOperator = FALSE;
-    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_FALSE((Double)1 && (Double)0);
 
     // Test Operator && . Case 1   1
-    variableLogicalOperator1 = 1;
-    variableLogicalOperator2 = 1;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)1 && (Double)1);
 
     // Test Operator || . Case 0   0
-    variableLogicalOperator1 = 0;
-    variableLogicalOperator2 = 0;
-    expectedResultOperator = FALSE;
-    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_FALSE((Double)0 || (Double)0);
 
     // Test Operator || . Case 0   1
-    variableLogicalOperator1 = 0;
-    variableLogicalOperator2 = 1;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)0 || (Double)1);
 
     // Test Operator || . Case 1   0
-    variableLogicalOperator1 = 1;
-    variableLogicalOperator2 = 0;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)1 || (Double)0);
 
     // Test Operator || . Case 1   1
-    variableLogicalOperator1 = 1;
-    variableLogicalOperator2 = 1;
-    expectedResultOperator = TRUE;
-    actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
+    ASSERT_TRUE((Double)1 || (Double)1);
 }
 
 TEST(JavaLang, DoubleAssignmentOperator) {
