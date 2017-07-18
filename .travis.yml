@@ -14,6 +14,5 @@ script:
 - ./misc/memory_check
 - make native && sudo make install
 - cd examples/Collection && make
-- cd examples/Nullable && make
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
