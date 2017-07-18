@@ -28,7 +28,10 @@
 #define JAVA_STACK_LIST_HPP_
 
 #include "../Vector/Vector.hpp"
+#include "../../lang/IOException/IOException.hpp"
+#include "../EmptyStackException/EmptyStackException.hpp"
 
+using namespace Java::Util;
 
 namespace Java {
     namespace Util {
@@ -53,11 +56,12 @@ namespace Java {
              * Stack peek - return the top element
              *
              * @return E
+             * @throw EmptyStackException
              */
             E peek() {
                 int len = this->size();
                 if (len == 0) {
-                    throw std::invalid_argument("index is out of range");
+                    throw EmptyStackException();
                 }
                 return this->elementAt(len - 1);
             }
@@ -66,6 +70,7 @@ namespace Java {
              * Stack pop - return the top element and remove it
              *
              * @return E
+             * @throw EmptyStackException
              */
             E pop() {
                 int len = this->size();
