@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,22 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
-#define NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+#include <zlib.h>
 
-#include "../../Lang.hpp"
-
-using namespace Java::Lang;
-
-namespace Java {
-	namespace Vendor {
-		class AbstractVendor {
-		private:
-			String url;
-			String method;
-			String headers;
-		};
-	}
-}
-
-#endif//NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+char *zlib_encode(char *compress_content);
+char *zlib_decode(char *encoded_content);

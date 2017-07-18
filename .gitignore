@@ -2,6 +2,7 @@
 .DS_Store
 bin
 a.out
+.idea
 /.idea
 CMakeFiles
 cmake-build-debug
@@ -27,8 +28,3 @@ Testing
 /logging
 /json
 /native.iml
-/example/HelloWorld/CMakeFiles
-/example/HelloWorld/cmake_install.cmake
-/example/HelloWorld/HelloWorld
-/example/HelloWorld/Makefile
-/example/HelloWorld/CMakeCache.txt

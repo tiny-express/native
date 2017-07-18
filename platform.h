@@ -46,3 +46,4 @@
 #endif
 
 #endif//NATIVE_PLATFORM_H
+

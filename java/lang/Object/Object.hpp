@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_OBJECT_H
-#define NATIVE_JAVA_LANG_OBJECT_H
+#ifndef JAVA_LANG_OBJECT_H
+#define JAVA_LANG_OBJECT_H
 
 extern "C" {
 #include "../../../builtin.h"
@@ -320,4 +320,4 @@ namespace Java {
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_OBJECT_H
+#endif  // JAVA_LANG_OBJECT_H
