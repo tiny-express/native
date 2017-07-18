@@ -45,6 +45,7 @@ namespace Java {
 		public:
 			/**
 			 * Appends the specified element to the end of this list (optional operation).
+			 *
 			 * @param e
 			 * @return boolean
 			 */
@@ -52,6 +53,7 @@ namespace Java {
 
 			/**
 			 * Inserts the specified element at the specified position in this list (optional operation).
+			 *
 			 * @param index
 			 * @param element
 			 * @return
@@ -61,6 +63,7 @@ namespace Java {
 			/**
 			 * Appends all of the elements in the specified collection to the end of this list,
 			 * in the order that they are returned by the specified collection's iterator (optional operation).
+			 *
 			 * @param c
 			 * @return boolean
 			 */
@@ -69,6 +72,7 @@ namespace Java {
 			/**
 			 * Inserts all of the elements in the specified collection
 			 * into this list at the specified position (optional operation).
+			 *
 			 * @param index
 			 * @param c
 			 * @return boolean
@@ -82,6 +86,7 @@ namespace Java {
 
 			/**
 			 * Returns true if this list contains the specified element.
+			 *
 			 * @param o
 			 * @return boolean
 			 */
@@ -99,7 +104,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			boolean equals(const Object o);
+			virtual boolean equals(const Object o);
 
 			/**
 			 * Returns the element at the specified position in this list.
