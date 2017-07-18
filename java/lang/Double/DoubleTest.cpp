@@ -111,48 +111,47 @@ TEST(JavaLang, DoubleRelationalOperator) {
     boolean expectedResultOperator;
     boolean actualResultOperator;
 
-    ASSERT_DBL_NEAR(1.123,1.123);
     // Test Operator ==
     variableRelationalOperator1 = 13.12;
     variableRelationalOperator2 = 13.12;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator !=
     variableRelationalOperator1 = 13.02;
     variableRelationalOperator2 = 99.02;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator >
     variableRelationalOperator1 = 13.02;
     variableRelationalOperator2 = 11.11;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator <
     variableRelationalOperator1 = 1.11;
     variableRelationalOperator2 = 13.02;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator >=
     variableRelationalOperator1 = 15.00;
     variableRelationalOperator2 = 13.02;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator <=
     variableRelationalOperator1 = 1.11;
     variableRelationalOperator2 = 13.02;
     expectedResultOperator = TRUE;
     actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 }
 
 TEST(JavaLang, DoubleLogicalOperator) {
@@ -167,56 +166,56 @@ TEST(JavaLang, DoubleLogicalOperator) {
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator && . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator && . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator && . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator || . Case 0   0
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator || . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator || . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 
     // Test Operator || . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_TRUE(expectedResultOperator == actualResultOperator);
 }
 
 TEST(JavaLang, DoubleAssignmentOperator) {
@@ -270,12 +269,12 @@ TEST(JavaLang, DoubleParseDouble) {
     stringInput = (string) "1302.12345678";
     expectedResult = 1302.12345678;
     actualResult = Double::parseDouble(stringInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 
     stringInput = (string) "-1302.12345678";
     expectedResult = -1302.12345678;
     actualResult = Double::parseDouble(stringInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
 TEST(JavaLang, DoubleValueOfWithStringInput) {
@@ -286,12 +285,12 @@ TEST(JavaLang, DoubleValueOfWithStringInput) {
     stringInput = (string) "1302.12345678";
     expectedResult = 1302.12345678;
     actualResult = Double::valueOf(stringInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 
     stringInput = (string) "-1302.12345678";
     expectedResult = -1302.12345678;
     actualResult = Double::valueOf(stringInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
 TEST(JavaLang, DoubleValueOfWithDoubleInput) {
@@ -302,12 +301,12 @@ TEST(JavaLang, DoubleValueOfWithDoubleInput) {
     doubleInput = 1302.12345678;
     expectedResult = 1302.12345678;
     actualResult = Double::valueOf(doubleInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 
     doubleInput = -1302.12345678;
     expectedResult = -1302.12345678;
     actualResult = Double::valueOf(doubleInput);
-    Double::compare(expectedResult.doubleValue(), actualResult.doubleValue());
+    ASSERT_DBL_NEAR(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
 TEST(JavaLang, DoubleToString) {
@@ -1925,79 +1924,79 @@ TEST(JavaLang, DoubleLongBitsToDouble) {
     longBitsInput = 0;
     expectedResult = 0.0;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input POSITIVE_INFINITY_DOUBLE
     longBitsInput = 9218868437227405312;
     expectedResult = POSITIVE_INFINITY_DOUBLE;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input NEGATIVE_INFINITY_DOUBLE
     longBitsInput = -9218868437227405312;
     expectedResult = NEGATIVE_INFINITY_DOUBLE;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input NaN_NUMBER_DOUBLE
     longBitsInput = 9223372036854775807;
     expectedResult = NaN_NUMBER_DOUBLE;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input -0.7
     longBitsInput = -4604480259023595110;
     expectedResult = -0.7;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input 12.375
     longBitsInput = 4623156123728347136;
     expectedResult = 12.375;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input 1.0
     longBitsInput = 4607182418800017408;
     expectedResult = 1.0;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input 0.375
     longBitsInput = 4600427019358961664;
     expectedResult = 0.375;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input -2
     longBitsInput = -4611686018427387904;
     expectedResult = -2.0;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input 83
     longBitsInput = 4635541022703616000;
     expectedResult = 83.0;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input -2625
     longBitsInput = -4657990851119546368;
     expectedResult = -2625.0;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input 0.5
     longBitsInput = 4602678819172646912;
     expectedResult = 0.5;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input -1302.12345678
     longBitsInput = -4653441614972469831;
     expectedResult = -1302.12345678;
     actualResult = Double::longBitsToDouble(longBitsInput);
-    Double::compare(expectedResult, actualResult);
+    ASSERT_DBL_NEAR(expectedResult, actualResult);
 }
 
 // TODO(thoangminh):  Check later all value of Java ( Double Format IEEE 754) in C++:
