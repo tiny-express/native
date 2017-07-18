@@ -13,5 +13,8 @@ before_script:
 script:
 - make native_test -j8
 - ./misc/memory_check
+- make native && sudo make install
+#- cd examples/HashMap && make
+#- cd examples/Nullable && make
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

@@ -28,13 +28,14 @@
 #define JAVA_LANG_OBJECT_H
 
 extern "C" {
-#include "../../../builtin.h"
+#include "../../../kernel/builtin.h"
 };
 
 #include <algorithm>
 #include <vector>
 #include <map>
 #include <type_traits>
+#include <iostream>
 
 // Define instanceof
 template <typename Base, typename T>

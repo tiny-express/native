@@ -29,6 +29,7 @@
 
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
+#include <iostream>
 
 namespace Java {
 	namespace Lang {
@@ -40,7 +41,11 @@ namespace Java {
 			class out {
 			public:
 				static void print(String target);
-				static void println(String target);
+
+				template <typename T>
+				static void println(T target) {
+					std::cout << target;
+				}
 			};
 
 			class err {
