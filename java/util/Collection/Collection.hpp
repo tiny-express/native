@@ -48,7 +48,7 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			virtual boolean add(E &e) = 0;
+			virtual boolean add(E e) = 0;
 
 			/**
 			 * Add a Collection element to this collection

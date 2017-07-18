@@ -676,6 +676,12 @@ String String::operator+=(const char &target) {
 	return *this;
 }
 
+String String::operator+=(const_string target) {
+	String appendString = target;
+	*this += appendString;
+	return *this;
+}
+
 /**
  * Compare two object String
  *

@@ -41,9 +41,9 @@ namespace Java {
 		
 		class String :
 				public Object,
-		                public virtual Serializable,
+		        public virtual Serializable,
 				public virtual Comparable<String>,
-		                public virtual CharSequence {
+		        public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
@@ -129,6 +129,7 @@ namespace Java {
 			String operator=(const String &target);
 			String operator+=(const String &target);
 			String operator+=(const char &target);
+			String operator+=(const_string target);
 			String subString(int fromIndex) {
 				if (fromIndex < 0 || fromIndex >= this->length()) {
 					return "";

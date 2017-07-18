@@ -39,6 +39,7 @@
 #include "../function/Consumer/Consumer.hpp"
 #include "../function/Predicate/Predicate.hpp"
 #include "../function/UnaryOperator/UnaryOperator.hpp"
+#include "../../lang/String/String.hpp"
 #include <initializer_list>
 #include <iostream>
 
@@ -77,11 +78,12 @@ namespace Java {
 		};
 		
 		template <class E>
-		class ArrayList : public AbstractList<E>,
-		                  public virtual List<E>,
-		                  public virtual Serializable,
-		                  public virtual Cloneable,
-		                  public virtual RandomAccess {
+		class ArrayList
+                : public AbstractList<E>,
+		          public virtual List<E>,
+		          public virtual Serializable,
+		          public virtual Cloneable,
+		          public virtual RandomAccess {
 		private:
 			std::vector<E> original;
 			typedef E *_iterator;
@@ -103,11 +105,18 @@ namespace Java {
 			};
 			
 			/**
-				     * Constructs an empty list
-				     */
+			 * Constructs an empty list
+			 */
 			ArrayList() {
+
 			}
-			
+
+            ArrayList(const std::initializer_list<E> &target) {
+                for (E item : target) {
+                    this->add(item);
+                }
+            }
+
 			/**
 			 * Constructs a list containing the elements of the specified collection
 			 *
@@ -140,7 +149,7 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			boolean add(E &e) {
+			boolean add(E e) {
 				this->original.push_back(e);
 				return true;
 			}
@@ -485,9 +494,40 @@ namespace Java {
 			 * @return string
 			 */
 			string toString() const {
-				return (string) "";
+                String mainString = "[";
+                String commaAndSpace = ", ";
+                String endString = "]";
+                int index;
+                for (index = 0; index < this->size() - 1; ++index) {
+                    String appendString = this->original[index].toString();
+                    appendString += commaAndSpace;
+                    mainString += appendString;
+                }
+                mainString += this->original[this->size() - 1].toString();
+                mainString += endString;
+
+                string stringResult = mainString.toString();
+                return strdup(stringResult);
 			}
-			
+
+            std::string toStdString() const {
+                String mainString = "[";
+                String commaAndSpace = ", ";
+                String endString = "]";
+                int index;
+                for (index = 0; index < this->size() - 1; ++index) {
+                    String appendString = this->original[index].toString();
+                    appendString += commaAndSpace;
+                    mainString += appendString;
+                }
+                mainString += this->original[this->size() - 1].toString();
+                mainString += endString;
+
+                std::string stringResult = mainString.toString();
+                std::cout << stringResult << std::endl;
+                return stringResult;
+            }
+
 			virtual long hashCode() const {
 				//TODO
 			}
@@ -499,10 +539,14 @@ namespace Java {
 			friend std::ostream &operator<<(std::ostream &os, const ArrayList &target) {
 				for (E item : target) {
 					os << item << " ";
-				}
+                }
 				os << std::endl;
 				return os;
 			}
+
+            E &operator[](int index) {
+                return this->original[index];
+            }
 		protected:
 			/**
 			 * Removes from this list all of the elements
