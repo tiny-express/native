@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,6 @@ TEST (JavaUtil, LinkedListAdd) {
 	ASSERT_EQUAL(2, linkedList.size());
 	ASSERT_EQUAL(25, linkedList.getFirst());
 	ASSERT_EQUAL(24, linkedList.getLast());
-    linkedList.clear();
 }
 
 TEST(JavaUtil, LinkedListContains) {
@@ -56,7 +55,6 @@ TEST(JavaUtil, LinkedListContains) {
 
     char unexpectedValue = '5';
     ASSERT_FALSE(linkedList.contains(unexpectedValue));
-    linkedList.clear();
 }
 
 TEST (JavaUtil, LinkedListGetFirst) {
@@ -65,7 +63,6 @@ TEST (JavaUtil, LinkedListGetFirst) {
 	linkedList.add("Hello");
 	linkedList.add("World");
 	ASSERT_STR("Hello", linkedList.getFirst().toString());
-    linkedList.clear();
 }
 
 TEST (JavaUtil, LinkedListGetLast) {
@@ -74,7 +71,6 @@ TEST (JavaUtil, LinkedListGetLast) {
 	linkedList.add("Hello");
 	linkedList.add("World");
 	ASSERT_STR("World", linkedList.getLast().toString());
-    linkedList.clear();
 }
 
 TEST (JavaUtil, LinkedListPeek) {
@@ -94,8 +90,6 @@ TEST (JavaUtil, LinkedListPeek) {
     result = linkedList.peekLast();
     expectedValue = "sample 3";
     ASSERT_STR(expectedValue.toString(), result.toString());
-    linkedList.clear();
-
 }
 
 TEST (JavaUtil, LinkedListPoll) {
@@ -143,7 +137,6 @@ TEST (JavaUtil, LinkedListRemove) {
 	// Remove last element, so next getLast must be equal to 7.3
 	linkedList.removeLast();
 	ASSERT_DBL_NEAR(7.3, linkedList.getLast());
-    linkedList.clear();
 }
 
 TEST (JavaUtil, LinkedListSize) {
@@ -155,5 +148,4 @@ TEST (JavaUtil, LinkedListSize) {
 	linkedList.add(25);
 	linkedList.add(25);
 	ASSERT_EQUAL(2, linkedList.size());
-    linkedList.clear();
 }

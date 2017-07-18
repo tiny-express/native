@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
+ * Copyright 2017 Food Tiny Project. All rights reserved.
+=======
  * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+>>>>>>> development
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -14,7 +18,16 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+<<<<<<< HEAD
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+=======
  * A PARTICULAR PURPOSE ARE DISCLAIMEIILITY, OR TORT
+>>>>>>> development
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -398,20 +411,17 @@ TEST (JavaLang, CharacterToCodePoint){
 TEST (JavaLang, CharacterIsHighSurrogate){
     // Create variable to test
     unicode variableTestIsHighSurrogate;
-    boolean expectedResultIsHighSurrogate;
     boolean actualResultIsHighSurrogate;
 
     // Test valid case
     variableTestIsHighSurrogate = '\u000D800' ;
-    expectedResultIsHighSurrogate= 1 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_TRUE(actualResultIsHighSurrogate);
 
     // Test invalid case
     variableTestIsHighSurrogate = '\u000D777' ;
-    expectedResultIsHighSurrogate= 0 ;
     actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-    ASSERT_TRUE(expectedResultIsHighSurrogate == actualResultIsHighSurrogate);
+    ASSERT_FALSE(actualResultIsHighSurrogate);
 }
 #endif
 
@@ -419,20 +429,33 @@ TEST (JavaLang, CharacterIsHighSurrogate){
 TEST (JavaLang, CharacterisLowSurrogate){
     // Create variable to test
     unicode variableTestisLowSurrogate;
-    boolean expectedResultisLowSurrogate;
     boolean actualResultisLowSurrogate;
 
     // Test valid case
     variableTestisLowSurrogate = '\u000DC00' ;
-    expectedResultisLowSurrogate= 1 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_TRUE(actualResultisLowSurrogate);
 
     // Test invalid case
     variableTestisLowSurrogate = '\u000DB00' ;
-    expectedResultisLowSurrogate= 0 ;
     actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-    ASSERT_TRUE(expectedResultisLowSurrogate == actualResultisLowSurrogate);
+    ASSERT_FALSE(actualResultisLowSurrogate);
+}
+
+TEST(JavaLang, CharacterIsSurrogate) {
+    // Create variable to test
+    unicode variableTestIsSurrogate;
+    boolean actualResultIsSurrogate;
+
+    // Test valid case
+    variableTestIsSurrogate = '\u000DC00' ;
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_TRUE(actualResultIsSurrogate);
+
+    // Test invalid case
+    variableTestIsSurrogate = L'A';
+    actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
+    ASSERT_FALSE(actualResultIsSurrogate);
 }
 #endif
 

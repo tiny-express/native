@@ -24,22 +24,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
-#define NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+extern "C" {
+#include "../../../unit_test.h"
+};
 
-#include "../../Lang.hpp"
+#include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
 
 using namespace Java::Lang;
 
-namespace Java {
-	namespace Vendor {
-		class AbstractVendor {
-		private:
-			String url;
-			String method;
-			String headers;
-		};
-	}
+TEST (JavaLang, NegativeArraySizeExceptionConstructor) {
+// Constructs a new NegativeArraySizeException with null as its detail message.
+    NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
+    ASSERT_STR("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
+
+// Constructs a new NegativeArraySizeException with the specified detail message.
+    NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException("NegativeArraySizeException with the specified message");
+    ASSERT_STR("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
 }
 
-#endif//NATIVE_JAVA_VENDOR_ABSTRACT_VENDOR_HPP
+TEST (JavaLang, NegativeArraySizeExceptionTryCatch) {
+    try {
+        throw RuntimeException("Throw NegativeArraySizeException");
+    } catch (Exception e) {
+        ASSERT_STR("Throw NegativeArraySizeException", e.getMessage().toString());
+    }
+}

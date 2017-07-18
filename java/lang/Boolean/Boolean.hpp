@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
-#define NATIVE_JAVA_LANG_BOOLEAN_HPP
+#ifndef JAVA_LANG_BOOLEAN_HPP_
+#define JAVA_LANG_BOOLEAN_HPP_
 
 extern "C" {
 #include "../../../string.h"
@@ -75,4 +75,4 @@ namespace Java {
 
     }
 }
-#endif//NATIVE_JAVA_LANG_BOOLEAN_HPP
+#endif  // JAVA_LANG_BOOLEAN_HPP_

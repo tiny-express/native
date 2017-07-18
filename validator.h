@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,17 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../unit_test.h"
-}
+#ifndef NATIVE_VALIDATOR_H
+#define NATIVE_VALIDATOR_H
 
-#include "../../lang/String/String.hpp"
-#include "../../lang/Long/Long.hpp"
-#include "../../lang/Integer/Integer.hpp"
-#include "../../Lang.hpp"
+#define EMAIL_PATTERN "^[a-zA-Z0-9](([.]{1}|[_]{1})?[a-zA-Z0-9])*[@]([a-z0-9]+([.]{1}|-)?)*[a-zA-Z0-9]+[.]{1}[a-z]{2,253}$"
+#define URL_PATTERN   "^http(s)?://([a-z0-9]+([-.]{1}[a-z0-9]+)*[.]{1}([a-z]{2,5}|[1-9]{1,3})|localhost)(:[0-9]{1,5})?(/.*)?([?]{1}[a-z0-9]*)*"
+#define PHONE_PATTERN "^[+]{0,1}[1-9]{1,2}([0-9]){5,13}$"
 
-using namespace Java::Lang;
+int is_email(char *email);
+int is_phone_number(char *phone_number);
+int is_url(char *url);
+int is_empty(char *string);
 
-TEST (JavaVendor, AbstractVendor) {
-	ASSERT_EQUAL(1, 1);
-}
+#endif //NATIVE_VALIDATOR_H

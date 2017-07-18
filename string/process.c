@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -455,7 +455,7 @@ char *string_standardized(char *target) {
 	}
 	char **segments = string_split(target, " ");
 	char *result = string_join(segments, " ");
-	result[strlen(result)] = '\0';
+	result[length_pointer_char(result)] = '\0';
 	free_pointer_pointer_char(segments);
 	return result;
 }
