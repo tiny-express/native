@@ -27,6 +27,7 @@ extern "C" {
 #include "../../../kernel/test.h"
 }
 
+#include <iostream>
 #include "Integer.hpp"
 
 using namespace Java::Lang;

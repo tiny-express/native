@@ -29,6 +29,7 @@
 
 #include "../Number/Number.hpp"
 #include "../Comparable/Comparable.hpp"
+#include "iostream"
 
 using namespace Java::Lang;
 
@@ -93,6 +94,11 @@ namespace Java {
 			void operator/=(const Integer &target);
 			void operator*=(const Integer &target);
 			void operator%=(const Integer &target);
+
+			friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
+				std::cout << target.original;
+				return os;
+			}
 		};
 	}
 }
