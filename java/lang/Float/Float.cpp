@@ -69,7 +69,7 @@ boolean Float::operator==(const Float &target) const {
     return (boolean) (this->original == target.original);
 }
 
-//TODO enable after finish method equals , compare
+// TODO(thoangminh): enable after finish method equals , compare
 //boolean Float::operator==(const Float &target) const {
 //    return (boolean) equals(target.original);
 //}
@@ -148,13 +148,13 @@ char Float::charValue() const {
     free(convertResult);
     return charValueResult;
 }
-//TODO enable after finish toString()
+// TODO(thoangminh): enable after finish toString()
 //string Float::stringValue() const {
 //    return (string) this->toString();
 //}
 
 float Float::floatValue() const {
-    return (float) this->original;
+    return this->original;
 }
 
 short Float::shortValue() const {

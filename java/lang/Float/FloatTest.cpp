@@ -34,8 +34,7 @@ using namespace Java::Lang;
 
 #define string char*
 
-TEST (JavaLang, FloatConstructor) {
-
+TEST(JavaLang, FloatConstructor) {
     // Test Float::Float()
     Float emptyFloatConstructor;
     emptyFloatConstructor = 13.02;
@@ -50,7 +49,7 @@ TEST (JavaLang, FloatConstructor) {
     ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());
 }
 
-TEST (JavaLang, FloatArithmeticOperator) {
+TEST(JavaLang, FloatArithmeticOperator) {
     // Create variable to test
     Float variableArithmeticOperator1;
     Float variableArithmeticOperator2;
@@ -58,15 +57,15 @@ TEST (JavaLang, FloatArithmeticOperator) {
     Float actualResultOperator;
 
     // Test Operator +
-    variableArithmeticOperator1 = 11.11  ;
+    variableArithmeticOperator1 = 11.11;
     variableArithmeticOperator2 = 22.22;
     expectedResultOperator = 33.33;
     actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator -
-    variableArithmeticOperator1 = 33.33 ;
-    variableArithmeticOperator2 = 22.22 ;
+    variableArithmeticOperator1 = 33.33;
+    variableArithmeticOperator2 = 22.22;
     expectedResultOperator = 11.11;
     actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
@@ -79,35 +78,35 @@ TEST (JavaLang, FloatArithmeticOperator) {
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /
-    variableArithmeticOperator1 = 26.04 ;
-    variableArithmeticOperator2 = 2.0 ;
+    variableArithmeticOperator1 = 26.04;
+    variableArithmeticOperator2 = 2.0;
     expectedResultOperator = 13.02;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . POSITIVE_INFINITY_FLOAT
-    variableArithmeticOperator1 = 26.04 ;
-    variableArithmeticOperator2 = 0 ;
+    variableArithmeticOperator1 = 26.04;
+    variableArithmeticOperator2 = 0;
     expectedResultOperator = POSITIVE_INFINITY_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . NEGATIVE_INFINITY_FLOAT
-    variableArithmeticOperator1 = -26.04 ;
-    variableArithmeticOperator2 = 0 ;
+    variableArithmeticOperator1 = -26.04;
+    variableArithmeticOperator2 = 0;
     expectedResultOperator = NEGATIVE_INFINITY_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . NaN_NUMBER_FLOAT
-    variableArithmeticOperator1 = 0 ;
-    variableArithmeticOperator2 = 0 ;
+    variableArithmeticOperator1 = 0;
+    variableArithmeticOperator2 = 0;
     expectedResultOperator = NaN_NUMBER_FLOAT;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
-//TODO enable after finish method equals , compare
+// TODO(thoangminh): enable after finish method equals , compare
 //TEST (JavaLang, FloatRelationalOperator) {
 //    // Create variable to test
 //    Float variableRelationalOperator1;
@@ -159,7 +158,7 @@ TEST (JavaLang, FloatArithmeticOperator) {
 //    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 //}
 
-TEST (JavaLang, FloatLogicalOperator) {
+TEST(JavaLang, FloatLogicalOperator) {
     // Create variable to test
     Float variableLogicalOperator1;
     Float variableLogicalOperator2;
@@ -223,7 +222,7 @@ TEST (JavaLang, FloatLogicalOperator) {
     ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
 }
 
-TEST (JavaLang, FloatAssignmentOperator) {
+TEST(JavaLang, FloatAssignmentOperator) {
     // Create variable to test
     Float variableAssignmentOperator1;
     Float variableAssignmentOperator2;
@@ -238,8 +237,8 @@ TEST (JavaLang, FloatAssignmentOperator) {
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator +=
-    variableAssignmentOperator1 = 11.11 ;
-    variableAssignmentOperator2 = 22.22 ;
+    variableAssignmentOperator1 = 11.11;
+    variableAssignmentOperator2 = 22.22;
     expectedResultOperator = 33.33;
     actualResultOperator = (variableAssignmentOperator1 += variableAssignmentOperator2);
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
@@ -252,21 +251,21 @@ TEST (JavaLang, FloatAssignmentOperator) {
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator *=
-    variableAssignmentOperator1 = 13.02 ;
-    variableAssignmentOperator2 = 2.0 ;
+    variableAssignmentOperator1 = 13.02;
+    variableAssignmentOperator2 = 2.0;
     expectedResultOperator = 26.04;
     actualResultOperator = (variableAssignmentOperator1 *= variableAssignmentOperator2);
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /=
-    variableAssignmentOperator1 = 26.04 ;
-    variableAssignmentOperator2 = 2.0 ;
+    variableAssignmentOperator1 = 26.04;
+    variableAssignmentOperator2 = 2.0;
     expectedResultOperator = 13.02;
     actualResultOperator = (variableAssignmentOperator1 /= variableAssignmentOperator2);
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
-TEST (JavaLang, FloatCharValue){
+TEST(JavaLang, FloatCharValue) {
     // Create variable to test
     Float variableTestCharValue;
     char expectedResultCharValue;
@@ -326,7 +325,7 @@ TEST (JavaLang, FloatCharValue){
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_NOT_EQUAL(expectedResultCharValue , actualResultCharValue);
 }
-//TODO enable after finish toString()
+// TODO(thoangminh): enable after finish toString()
 //TEST (JavaLang, FloatStringValue){
 //    // Create variable to test
 //    Float variableTestStringValue;
@@ -371,7 +370,7 @@ TEST (JavaLang, FloatCharValue){
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //}
 
-TEST (JavaLang, FloatShortValue){
+TEST(JavaLang, FloatShortValue) {
     // Create variable to test
     Float variableTestShortValue;
     short expectedResultShortValue;
@@ -409,30 +408,30 @@ TEST (JavaLang, FloatShortValue){
 
     // Test MIN_VALUE_FLOAT
     variableTestShortValue = MIN_VALUE_FLOAT;
-    expectedResultShortValue= 0;
+    expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
     // Test valid case
     variableTestShortValue = 5.9;
-    expectedResultShortValue= 5;
+    expectedResultShortValue = 5;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
     // Test valid case
     variableTestShortValue = 5.4;
-    expectedResultShortValue= 5;
+    expectedResultShortValue = 5;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
     // Test invalid case
     variableTestShortValue = 6;
-    expectedResultShortValue= 5;
+    expectedResultShortValue = 5;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_NOT_EQUAL(expectedResultShortValue , actualResultShortValue);
 }
 
-TEST (JavaLang, FloatIntValue){
+TEST(JavaLang, FloatIntValue) {
     // Create variable to test
     Float variableTestIntValue;
     int expectedResultIntValue;
@@ -470,25 +469,87 @@ TEST (JavaLang, FloatIntValue){
 
     // Test MIN_VALUE_FLOAT
     variableTestIntValue = MIN_VALUE_FLOAT;
-    expectedResultIntValue= 0;
+    expectedResultIntValue = 0;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
     // Test valid case
     variableTestIntValue = 5.9;
-    expectedResultIntValue= 5;
+    expectedResultIntValue = 5;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
     // Test valid case
     variableTestIntValue = 5.4;
-    expectedResultIntValue= 5;
+    expectedResultIntValue = 5;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
     // Test invalid case
     variableTestIntValue = 6;
-    expectedResultIntValue= 5;
+    expectedResultIntValue = 5;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_NOT_EQUAL(expectedResultIntValue , actualResultIntValue);
+}
+
+TEST(JavaLang, FloatLongValue) {
+    // Create variable to test
+    Float variableTestLongValue;
+    long expectedResultLongValue;
+    long actualResultLongValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestLongValue = POSITIVE_INFINITY_FLOAT;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test NEGATIVE_INFINITY_FLOAT
+    variableTestLongValue = NEGATIVE_INFINITY_FLOAT;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test NaN_NUMBER_FLOAT
+    variableTestLongValue = NaN_NUMBER_FLOAT;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MAX_VALUE_FLOAT
+    variableTestLongValue = MAX_VALUE_FLOAT;
+    expectedResultLongValue = -9223372036854775808;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MIN_NORMAL_FLOAT
+    variableTestLongValue = MIN_NORMAL_FLOAT;
+    expectedResultLongValue = 0;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test MIN_VALUE_FLOAT
+    variableTestLongValue = MIN_VALUE_FLOAT;
+    expectedResultLongValue = 0;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test valid case
+    variableTestLongValue = 5.9;
+    expectedResultLongValue = 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test valid case
+    variableTestLongValue = 5.4;
+    expectedResultLongValue = 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
+    // Test invalid case
+    variableTestLongValue = 6;
+    expectedResultLongValue = 5;
+    actualResultLongValue = variableTestLongValue.longValue();
+    ASSERT_NOT_EQUAL(expectedResultLongValue , actualResultLongValue);
+
 }
