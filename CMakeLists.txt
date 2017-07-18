@@ -139,11 +139,13 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+#        java/lang/Float/Float.cpp
         java/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
+#        java/lang/Float/FloatTest.cpp
         java/**/*Test.cpp
         )
 

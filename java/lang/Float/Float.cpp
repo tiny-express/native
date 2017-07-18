@@ -148,21 +148,15 @@ char Float::charValue() const {
     free(convertResult);
     return charValueResult;
 }
+//TODO enable after finish toString()
+//string Float::stringValue() const {
+//    return (string) this->toString();
+//}
 
-/**
- * Float value
- *
- * @return float
- */
 float Float::floatValue() const {
-    return this->original;
+    return (float) this->original;
 }
 
-/**
- * Short value
- *
- * @return short
- */
 short Float::shortValue() const {
     return (short) this->original;
 }
@@ -209,7 +203,7 @@ string Float::toString() const {
  * @param target
  * @return Float
  */
-Float Float::parseFloat(String target) {
-    Float result = string_to_float(target.toString());
-    return result;
-}
+//Float Float::parseFloat(String target) {
+//    Float result = string_to_float(target.toString());
+//    return result;
+//}

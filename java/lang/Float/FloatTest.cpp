@@ -326,293 +326,108 @@ TEST (JavaLang, FloatCharValue){
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_NOT_EQUAL(expectedResultCharValue , actualResultCharValue);
 }
+//TODO enable after finish toString()
+//TEST (JavaLang, FloatStringValue){
+//    // Create variable to test
+//    Float variableTestStringValue;
+//    string expectedResultStringValue;
+//    string actualResultStringValue;
+//
+//    // Test POSITIVE_INFINITY_FLOAT
+//    variableTestStringValue = POSITIVE_INFINITY_FLOAT;
+//    expectedResultStringValue = (string) "inf";
+//    actualResultStringValue = variableTestStringValue.stringValue();
+//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//
+//    // Test NEGATIVE_INFINITY_FLOAT
+//    variableTestStringValue = NEGATIVE_INFINITY_FLOAT;
+//    expectedResultStringValue = (string) "-inf";
+//    actualResultStringValue = variableTestStringValue.stringValue();
+//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//
+////    // Test NaN_NUMBER_FLOAT
+////    variableTestStringValue = NaN_NUMBER_FLOAT;
+////    expectedResultStringValue = "-nan"; // "nan" in MacOS
+////    actualResultStringValue = variableTestStringValue.stringValue();
+////    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+////    free(actualResultStringValue);
+//
+//    // Test MAX_VALUE_FLOAT
+//    variableTestStringValue = MAX_VALUE_FLOAT;
+//    expectedResultStringValue = (string) "1.797693134862316e+308";
+//    actualResultStringValue = variableTestStringValue.stringValue();
+//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//
+//    // Test MIN_NORMAL_FLOAT
+//    variableTestStringValue = MIN_NORMAL_FLOAT;
+//    expectedResultStringValue = (string) "4.940656458412465e-324";
+//    actualResultStringValue = variableTestStringValue.stringValue();
+//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//
+//    // Test MIN_VALUE_FLOAT
+//    variableTestStringValue = MIN_VALUE_FLOAT;
+//    expectedResultStringValue = (string) "2.225073858507201e-308";
+//    actualResultStringValue = variableTestStringValue.stringValue();
+//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//}
 
-//TEST (JavaLang, FloatParseFloat) {
-//	#ifdef __APPLE__
-//		return;
-//    #endif
-//
-//    // Create variable to test Float::parseFloat
-//    Float variableFloatConstructor;
-//
-//    float expectedParseFloatResult ;
-//    float notExpectedParseFloatResult;
-//    float actualParseFloatResult ;
-//
-//    // Test Float::parseFloat . Case TRUE
-//    variableFloatConstructor = Float::parseFloat("13.02");
-//    expectedParseFloatResult = 13.02;
-//    actualParseFloatResult = variableFloatConstructor.floatValue();
-//    ASSERT_DBL_NEAR(expectedParseFloatResult , actualParseFloatResult);
-//
-//    // Test Float::parseFloat . Case FALSE
-//    variableFloatConstructor = Float::parseFloat("13.02");
-//    notExpectedParseFloatResult = 130.2;
-//    actualParseFloatResult = variableFloatConstructor.floatValue();
-//    ASSERT_DBL_FAR(notExpectedParseFloatResult , actualParseFloatResult);
-//}
-//
-//
-//TEST (JavaLang, FloatToString) {
-//    // Create variables to test Float::toString.
-//    Float variableFloatToString ;
-//    string expectedFloatToStringResult;
-//    string notExpectedFloatToStringResult;
-//    string actualFloatToStringResult;
-//
-//    // Test value NULL
-//    variableFloatToString;
-//    expectedFloatToStringResult = (string) "0";
-//    actualFloatToStringResult = variableFloatToString.toString();
-//    ASSERT_STR(expectedFloatToStringResult, actualFloatToStringResult);
-//
-//    // Test value 0
-//    variableFloatToString = 0.0;
-//    expectedFloatToStringResult = (string) "0";
-//    actualFloatToStringResult = variableFloatToString.toString();
-//    ASSERT_STR(expectedFloatToStringResult, actualFloatToStringResult);
-//
-//    // Test positive value  .
-//    variableFloatToString = 1302.13;
-//    expectedFloatToStringResult = (string) "1302.13";
-//    actualFloatToStringResult = variableFloatToString.toString();
-//    ASSERT_STR(expectedFloatToStringResult, actualFloatToStringResult);
-//
-//    // Test negative value  .
-//    variableFloatToString = -1302.13;
-//    expectedFloatToStringResult = (string) "-1302.13";
-//    actualFloatToStringResult = variableFloatToString.toString();
-//    ASSERT_STR(expectedFloatToStringResult, actualFloatToStringResult);
-//
-//    // Test Case FALSE
-//    variableFloatToString = 1.302;
-//    notExpectedFloatToStringResult = (string) "1302.1";
-//    actualFloatToStringResult = variableFloatToString.toString();
-//    ASSERT_FALSE(notExpectedFloatToStringResult == actualFloatToStringResult);
-//}
-//
-//TEST (JavaLang, FloatCharValue) {
-//    // Create variables to test Float::charValue.
-//    Float variableFloatCharValue ;
-//    char expectedFloatCharValueResult;
-//    char actualFloatCharValueResult;
-//
-//    // Test value NULL .
-//    variableFloatCharValue;
-//    expectedFloatCharValueResult = '0';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test value 0 .
-//    variableFloatCharValue = 0.0;
-//    expectedFloatCharValueResult = '0';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test positive value  .
-//    variableFloatCharValue = 1302.13;
-//    expectedFloatCharValueResult = '1';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test negative value  .
-//    variableFloatCharValue = -1302.13;
-//    expectedFloatCharValueResult = '-';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//
-//    // Test case FALSE  .
-//    variableFloatCharValue = -1302.13;
-//    expectedFloatCharValueResult = '-13.023';
-//    actualFloatCharValueResult = variableFloatCharValue.charValue();
-//    ASSERT_NOT_EQUAL(expectedFloatCharValueResult, actualFloatCharValueResult);
-//}
-//
-//TEST (JavaLang, FloatShortValue) {
-//    // Create variables to test Float::shortValue.
-//    Float variableFloatShortValue ;
-//    short expectedFloatShortValue = 0;
-//    short actualFloatShortValue = 0;
-//
-//    // Test value NULL .
-//    variableFloatShortValue = 0;
-//    expectedFloatShortValue = 0;
-//    actualFloatShortValue = variableFloatShortValue .shortValue();
-//    ASSERT_DBL_NEAR(expectedFloatShortValue, actualFloatShortValue);
-//
-//    // Test value 0 .
-//    variableFloatShortValue = 0.0;
-//    expectedFloatShortValue = 0;
-//    actualFloatShortValue = variableFloatShortValue .shortValue();
-//    ASSERT_DBL_NEAR(expectedFloatShortValue, actualFloatShortValue);
-//
-//    // Test positive value  .
-//    variableFloatShortValue = 1302.13;
-//    expectedFloatShortValue = 1302;
-//    actualFloatShortValue = variableFloatShortValue .shortValue();
-//    ASSERT_DBL_NEAR(expectedFloatShortValue, actualFloatShortValue);
-//
-//    // Test negative value  .
-//    variableFloatShortValue = -1302.13;
-//    expectedFloatShortValue = -1302;
-//    actualFloatShortValue = variableFloatShortValue .shortValue();
-//    ASSERT_DBL_NEAR(expectedFloatShortValue, actualFloatShortValue);
-//
-//    // Test case FALSE  .
-//    variableFloatShortValue = -1302.13;
-//    expectedFloatShortValue = -130;
-//    actualFloatShortValue = variableFloatShortValue .shortValue();
-//    ASSERT_DBL_FAR(expectedFloatShortValue, actualFloatShortValue);
-//}
-//TEST (JavaLang, FloatIntValue) {
-//    // Create variables to test Float::intValue.
-//    Float variableFloatIntValue;
-//    int expectedFloatIntValue = 0;
-//    int actualFloatIntValue = 0;
-//
-//    // Test value NULL .
-//    variableFloatIntValue = 0;
-//    expectedFloatIntValue = 0;
-//    actualFloatIntValue = variableFloatIntValue .intValue();
-//    ASSERT_DBL_NEAR(expectedFloatIntValue, actualFloatIntValue);
-//
-//    // Test value 0 .
-//    variableFloatIntValue = 0.0;
-//    expectedFloatIntValue = 0;
-//    actualFloatIntValue = variableFloatIntValue  .intValue();
-//    ASSERT_DBL_NEAR(expectedFloatIntValue, actualFloatIntValue);
-//
-//    // Test positive value  .
-//    variableFloatIntValue = 1302.13;
-//    expectedFloatIntValue = 1302;
-//    actualFloatIntValue = variableFloatIntValue  .intValue();
-//    ASSERT_DBL_NEAR(expectedFloatIntValue, actualFloatIntValue);
-//
-//    // Test negative value  .
-//    variableFloatIntValue = -1302.13;
-//    expectedFloatIntValue = -1302;
-//    actualFloatIntValue = variableFloatIntValue  .intValue();
-//    ASSERT_DBL_NEAR(expectedFloatIntValue, actualFloatIntValue);
-//
-//    // Test case FALSE .
-//    variableFloatIntValue = -1302.13;
-//    expectedFloatIntValue = -130;
-//    actualFloatIntValue = variableFloatIntValue  .intValue();
-//    ASSERT_DBL_FAR(expectedFloatIntValue, actualFloatIntValue);
-//
-//}
-//TEST (JavaLang, FloatLongValue) {
-//    // Create variables to test Float::longValue.
-//    Float variableFloatLongValue;
-//    long expectedFloatLongValue = 0;
-//    long actualFloatLongValue = 0;
-//
-//    // Test value NULL .
-//    variableFloatLongValue = 0;
-//    expectedFloatLongValue = 0;
-//    actualFloatLongValue= variableFloatLongValue .longValue();
-//    ASSERT_DBL_NEAR(expectedFloatLongValue, actualFloatLongValue);
-//
-//    // Test value 0 .
-//    variableFloatLongValue = 0.0;
-//    expectedFloatLongValue = 0;
-//    actualFloatLongValue = variableFloatLongValue .longValue();
-//    ASSERT_DBL_NEAR(expectedFloatLongValue, actualFloatLongValue);
-//
-//    // Test positive value  .
-//    variableFloatLongValue = 1302.13;
-//    expectedFloatLongValue = 1302;
-//    actualFloatLongValue = variableFloatLongValue .longValue();
-//    ASSERT_DBL_NEAR(expectedFloatLongValue, actualFloatLongValue);
-//
-//    // Test negative value  .
-//    variableFloatLongValue = -1302.13;
-//    expectedFloatLongValue = -1302;
-//    actualFloatLongValue = variableFloatLongValue .longValue();
-//    ASSERT_DBL_NEAR(expectedFloatLongValue, actualFloatLongValue);
-//
-//    // Test case FALSE .
-//    variableFloatLongValue = -1302.13;
-//    expectedFloatLongValue = -130;
-//    actualFloatLongValue = variableFloatLongValue .longValue();
-//    ASSERT_DBL_FAR(expectedFloatLongValue, actualFloatLongValue);
-//}
-//TEST (JavaLang, FloatFloatValue) {
-//    // Create variables to test Float::floatValue.
-//    Float variableFloatFloatValue;
-//    float expectedFloatFloatValue = 0;
-//    float actualFloatFloatValue = 0;
-//
-//    // Test value NULL .
-//    variableFloatFloatValue = 0;
-//    expectedFloatFloatValue = 0;
-//    actualFloatFloatValue = variableFloatFloatValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatFloatValue, actualFloatFloatValue);
-//
-//    // Test value 0 .
-//    variableFloatFloatValue = 0.0;
-//    expectedFloatFloatValue = 0;
-//    actualFloatFloatValue = variableFloatFloatValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatFloatValue, actualFloatFloatValue);
-//
-//    // Test positive value  .
-//    variableFloatFloatValue = 1302.13;
-//    expectedFloatFloatValue = 1302.13;
-//    actualFloatFloatValue = variableFloatFloatValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatFloatValue, actualFloatFloatValue);
-//
-//    // Test negative value  .
-//    variableFloatFloatValue = -1302.13;
-//    expectedFloatFloatValue = -1302.13;
-//    actualFloatFloatValue = variableFloatFloatValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatFloatValue, actualFloatFloatValue);
-//
-//    // Test case FALSE .
-//    variableFloatFloatValue = -1355.132;
-//    expectedFloatFloatValue = -1302.1;
-//    actualFloatFloatValue = variableFloatFloatValue .floatValue();
-//    ASSERT_DBL_FAR(expectedFloatFloatValue, actualFloatFloatValue);
-//}
-//TEST (JavaLang, FloatDoubleValue) {
-//    // Create variables to test Float::floatValue.
-//    Float variableFloatDoubleValue;
-//    float expectedFloatDoubleValue = 0;
-//    float actualFloatDoubleValue = 0;
-//
-//    // Test value NULL .
-//    variableFloatDoubleValue = 0;
-//    expectedFloatDoubleValue = 0;
-//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//
-//    // Test value 0 .
-//    variableFloatDoubleValue = 0.0;
-//    expectedFloatDoubleValue = 0;
-//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//
-//    // Test positive value  .
-//    variableFloatDoubleValue = 1302.13;
-//    expectedFloatDoubleValue = 1302.13;
-//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//
-//    // Test negative value  .
-//    variableFloatDoubleValue = -1302.13;
-//    expectedFloatDoubleValue = -1302.13;
-//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
-//    ASSERT_DBL_NEAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//
-//    // Test case FALSE  .
-//    variableFloatDoubleValue = -1300.132;
-//    expectedFloatDoubleValue = -1302.555;
-//    actualFloatDoubleValue = variableFloatDoubleValue .floatValue();
-//    ASSERT_DBL_FAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//
-//    // TODO Check it
-////    // Test case FALSE  .
-////    variableFloatDoubleValue = -1302.15;
-////    expectedFloatDoubleValue= -1302.1;
-////    actualFloatDoubleValue= variableFloatDoubleValue .floatValue();
-////    ASSERT_DBL_FAR(expectedFloatDoubleValue, actualFloatDoubleValue);
-//}
+TEST (JavaLang, FloatShortValue){
+    // Create variable to test
+    Float variableTestShortValue;
+    short expectedResultShortValue;
+    short actualResultShortValue;
+
+    // Test POSITIVE_INFINITY_FLOAT
+    variableTestShortValue = POSITIVE_INFINITY_FLOAT;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test NEGATIVE_INFINITY_FLOAT
+    variableTestShortValue = NEGATIVE_INFINITY_FLOAT;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test NaN_NUMBER_FLOAT
+    variableTestShortValue = NaN_NUMBER_FLOAT;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test MAX_VALUE_FLOAT
+    variableTestShortValue = MAX_VALUE_FLOAT;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test MIN_NORMAL_FLOAT
+    variableTestShortValue = MIN_NORMAL_FLOAT;
+    expectedResultShortValue = 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test MIN_VALUE_FLOAT
+    variableTestShortValue = MIN_VALUE_FLOAT;
+    expectedResultShortValue= 0;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test valid case
+    variableTestShortValue = 5.9;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test valid case
+    variableTestShortValue = 5.4;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+
+    // Test invalid case
+    variableTestShortValue = 6;
+    expectedResultShortValue= 5;
+    actualResultShortValue = variableTestShortValue.shortValue();
+    ASSERT_NOT_EQUAL(expectedResultShortValue , actualResultShortValue);
+}
