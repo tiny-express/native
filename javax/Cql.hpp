@@ -24,23 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP
-#define NATIVE_LIBRARY_HPP
+#ifndef NATIVE_JAVAX_CQL_HPP
+#define NATIVE_JAVAX_CQL_HPP
 
-// Java Core Packages
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
-
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
-
-// In Java, Java::Lang is imported by default
-using namespace Java::Lang;
-
-#endif//NATIVE_LIBRARY_HPP
+#endif//NATIVE_JAVAX_CQL_HPP
