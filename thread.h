@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,17 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../unit_test.h"
-}
+#ifndef NATIVE_THREAD_H
+#define NATIVE_THREAD_H
 
-#include "../../lang/String/String.hpp"
-#include "../../lang/Long/Long.hpp"
-#include "../../lang/Integer/Integer.hpp"
-#include "../../Lang.hpp"
+#include <pthread.h>
 
-using namespace Java::Lang;
+typedef struct thread_argument {
+	void *callback;
+	unsigned int milliseconds;
+} thread_argument;
 
-TEST (JavaVendor, AbstractVendor) {
-	ASSERT_EQUAL(1, 1);
-}
+void *loop(void *argument);
+void *run(void *argument);
+
+pthread_t set_interval(void *callback, unsigned int milliseconds);
+pthread_t set_time_out(void *callback, unsigned int milliseconds);
+void sleep_miliseconds(unsigned int miliseconds);
+
+#endif
