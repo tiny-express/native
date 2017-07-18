@@ -1,0 +1,4 @@
+/home/nakhoadl/ide/clion-2017.1.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" /home/nakhoadl/workspace/foodtiny/native
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/nakhoadl/workspace/foodtiny/native

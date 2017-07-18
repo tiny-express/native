@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="native" targetName="leak-c" />
+      <config projectName="native" targetName="leak-c-debug" />
+      <config projectName="native" targetName="unit-test" />
+      <config projectName="native" targetName="native_test" />
+      <config projectName="native" targetName="server" />
+      <config projectName="native" targetName="leak" />
+      <config projectName="native" targetName="uninstall" />
+      <config projectName="native" targetName="leak-debug" />
+      <config projectName="native" targetName="native_test_c" />
+      <config projectName="native" targetName="native" />
+      <config projectName="native" targetName="native_static" />
+      <config projectName="native" targetName="checkstyle" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration GENERATION_DIR="." />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a1a48728-62b1-4722-ad8c-e3b54fac46cf" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/Person/App" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/StringLoop/App" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/HelloWorld/Person.hpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/HelloWorld/Teacher.hpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/KeyValue/HashMap.hpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/Person/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/StringLoop/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example/install" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementExceptionTest.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/misc/checkstyle.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/misc/cpplint.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/misc/server.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/IO.hpp" afterPath="$PROJECT_DIR$/java/IO.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/Lang.hpp" afterPath="$PROJECT_DIR$/java/Lang.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/Net.hpp" afterPath="$PROJECT_DIR$/java/Net.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/Security.hpp" afterPath="$PROJECT_DIR$/java/Security.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/Util.hpp" afterPath="$PROJECT_DIR$/java/Util.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/Vendor.hpp" afterPath="$PROJECT_DIR$/java/Vendor.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/BufferedReader/BufferedReader.hpp" afterPath="$PROJECT_DIR$/java/io/BufferedReader/BufferedReader.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/BufferedWriter/BufferedWriter.hpp" afterPath="$PROJECT_DIR$/java/io/BufferedWriter/BufferedWriter.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/FileWriter/FileWriter.cpp" afterPath="$PROJECT_DIR$/java/io/FileWriter/FileWriter.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/FileWriter/FileWriter.hpp" afterPath="$PROJECT_DIR$/java/io/FileWriter/FileWriter.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/OutputStreamWriter/OutputStreamWriter.hpp" afterPath="$PROJECT_DIR$/java/io/OutputStreamWriter/OutputStreamWriter.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/Reader/Reader.hpp" afterPath="$PROJECT_DIR$/java/io/Reader/Reader.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/Serializable/Serializable.hpp" afterPath="$PROJECT_DIR$/java/io/Serializable/Serializable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/Writer/Writer.hpp" afterPath="$PROJECT_DIR$/java/io/Writer/Writer.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Appendable/Appendable.cpp" afterPath="$PROJECT_DIR$/java/lang/Appendable/Appendable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Appendable/Appendable.hpp" afterPath="$PROJECT_DIR$/java/lang/Appendable/Appendable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/AutoCloseable/AutoCloseable.cpp" afterPath="$PROJECT_DIR$/java/lang/AutoCloseable/AutoCloseable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/AutoCloseable/AutoCloseable.hpp" afterPath="$PROJECT_DIR$/java/lang/AutoCloseable/AutoCloseable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Boolean/Boolean.cpp" afterPath="$PROJECT_DIR$/java/lang/Boolean/Boolean.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Boolean/Boolean.hpp" afterPath="$PROJECT_DIR$/java/lang/Boolean/Boolean.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Boolean/BooleanTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Boolean/BooleanTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Byte/Byte.cpp" afterPath="$PROJECT_DIR$/java/lang/Byte/Byte.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Byte/Byte.hpp" afterPath="$PROJECT_DIR$/java/lang/Byte/Byte.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/CharSequence/CharSequence.cpp" afterPath="$PROJECT_DIR$/java/lang/CharSequence/CharSequence.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/CharSequence/CharSequence.hpp" afterPath="$PROJECT_DIR$/java/lang/CharSequence/CharSequence.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Character/Character.cpp" afterPath="$PROJECT_DIR$/java/lang/Character/Character.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Character/Character.hpp" afterPath="$PROJECT_DIR$/java/lang/Character/Character.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Character/CharacterTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Character/CharacterTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Cloneable/Cloneable.cpp" afterPath="$PROJECT_DIR$/java/lang/Cloneable/Cloneable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Cloneable/Cloneable.hpp" afterPath="$PROJECT_DIR$/java/lang/Cloneable/Cloneable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Comparable/Comparable.cpp" afterPath="$PROJECT_DIR$/java/lang/Comparable/Comparable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Comparable/Comparable.hpp" afterPath="$PROJECT_DIR$/java/lang/Comparable/Comparable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Double/Double.cpp" afterPath="$PROJECT_DIR$/java/lang/Double/Double.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Double/Double.hpp" afterPath="$PROJECT_DIR$/java/lang/Double/Double.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Enum/Enum.hpp" afterPath="$PROJECT_DIR$/java/lang/Enum/Enum.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Enum/EnumTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Enum/EnumTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Exception/Exception.cpp" afterPath="$PROJECT_DIR$/java/lang/Exception/Exception.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Exception/Exception.hpp" afterPath="$PROJECT_DIR$/java/lang/Exception/Exception.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Float/Float.cpp" afterPath="$PROJECT_DIR$/java/lang/Float/Float.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Float/Float.hpp" afterPath="$PROJECT_DIR$/java/lang/Float/Float.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Float/FloatTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Float/FloatTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Integer/Integer.cpp" afterPath="$PROJECT_DIR$/java/lang/Integer/Integer.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Integer/Integer.hpp" afterPath="$PROJECT_DIR$/java/lang/Integer/Integer.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Integer/IntegerTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Integer/IntegerTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Iterable/Iterable.cpp" afterPath="$PROJECT_DIR$/java/lang/Iterable/Iterable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Iterable/Iterable.hpp" afterPath="$PROJECT_DIR$/java/lang/Iterable/Iterable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Long/Long.cpp" afterPath="$PROJECT_DIR$/java/lang/Long/Long.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Long/Long.hpp" afterPath="$PROJECT_DIR$/java/lang/Long/Long.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Long/LongTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Long/LongTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Math/Math.cpp" afterPath="$PROJECT_DIR$/java/lang/Math/Math.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Math/Math.hpp" afterPath="$PROJECT_DIR$/java/lang/Math/Math.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Math/MathTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Math/MathTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.cpp" afterPath="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.hpp" afterPath="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Number/Number.cpp" afterPath="$PROJECT_DIR$/java/lang/Number/Number.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Number/Number.hpp" afterPath="$PROJECT_DIR$/java/lang/Number/Number.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Object/Object.cpp" afterPath="$PROJECT_DIR$/java/lang/Object/Object.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Object/Object.hpp" afterPath="$PROJECT_DIR$/java/lang/Object/Object.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Object/ObjectTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Object/ObjectTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Process/Process.cpp" afterPath="$PROJECT_DIR$/java/lang/Process/Process.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Process/Process.hpp" afterPath="$PROJECT_DIR$/java/lang/Process/Process.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Runnable/Runnable.cpp" afterPath="$PROJECT_DIR$/java/lang/Runnable/Runnable.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Runnable/Runnable.hpp" afterPath="$PROJECT_DIR$/java/lang/Runnable/Runnable.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Runtime/Runtime.cpp" afterPath="$PROJECT_DIR$/java/lang/Runtime/Runtime.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Runtime/Runtime.hpp" afterPath="$PROJECT_DIR$/java/lang/Runtime/Runtime.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Short/Short.cpp" afterPath="$PROJECT_DIR$/java/lang/Short/Short.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Short/Short.hpp" afterPath="$PROJECT_DIR$/java/lang/Short/Short.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Short/ShortTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Short/ShortTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/String/String.cpp" afterPath="$PROJECT_DIR$/java/lang/String/String.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/String/String.hpp" afterPath="$PROJECT_DIR$/java/lang/String/String.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/String/StringTest.cpp" afterPath="$PROJECT_DIR$/java/lang/String/StringTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/System/System.cpp" afterPath="$PROJECT_DIR$/java/lang/System/System.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/System/System.hpp" afterPath="$PROJECT_DIR$/java/lang/System/System.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/System/SystemTest.cpp" afterPath="$PROJECT_DIR$/java/lang/System/SystemTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Thread/Thread.hpp" afterPath="$PROJECT_DIR$/java/lang/Thread/Thread.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/Thread/ThreadTest.cpp" afterPath="$PROJECT_DIR$/java/lang/Thread/ThreadTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/HttpURLConnection/HttpURLConnection.cpp" afterPath="$PROJECT_DIR$/java/net/HttpURLConnection/HttpURLConnection.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/HttpURLConnection/HttpURLConnection.hpp" afterPath="$PROJECT_DIR$/java/net/HttpURLConnection/HttpURLConnection.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URL/URL.cpp" afterPath="$PROJECT_DIR$/java/net/URL/URL.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URL/URL.hpp" afterPath="$PROJECT_DIR$/java/net/URL/URL.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URL/URLTest.cpp" afterPath="$PROJECT_DIR$/java/net/URL/URLTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLConnection/URLConnection.cpp" afterPath="$PROJECT_DIR$/java/net/URLConnection/URLConnection.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLConnection/URLConnection.hpp" afterPath="$PROJECT_DIR$/java/net/URLConnection/URLConnection.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLConnection/URLConnectionTest.cpp" afterPath="$PROJECT_DIR$/java/net/URLConnection/URLConnectionTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoder.cpp" afterPath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoder.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoder.hpp" afterPath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoder.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoderTest.cpp" afterPath="$PROJECT_DIR$/java/net/URLDecoder/URLDecoderTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoder.cpp" afterPath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoder.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoder.hpp" afterPath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoder.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoderTest.cpp" afterPath="$PROJECT_DIR$/java/net/URLEncoder/URLEncoderTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/Certificate/Certificate.cpp" afterPath="$PROJECT_DIR$/java/security/Certificate/Certificate.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/Certificate/Certificate.hpp" afterPath="$PROJECT_DIR$/java/security/Certificate/Certificate.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/KeyFactory/KeyFactory.cpp" afterPath="$PROJECT_DIR$/java/security/KeyFactory/KeyFactory.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/KeyFactory/KeyFactory.hpp" afterPath="$PROJECT_DIR$/java/security/KeyFactory/KeyFactory.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/KeyStore/KeyStore.cpp" afterPath="$PROJECT_DIR$/java/security/KeyStore/KeyStore.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/KeyStore/KeyStore.hpp" afterPath="$PROJECT_DIR$/java/security/KeyStore/KeyStore.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigest.cpp" afterPath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigest.hpp" afterPath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigest.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigestTest.cpp" afterPath="$PROJECT_DIR$/java/security/MessageDigest/MessageDigestTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractCollection/AbstractCollection.cpp" afterPath="$PROJECT_DIR$/java/util/AbstractCollection/AbstractCollection.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractCollection/AbstractCollection.hpp" afterPath="$PROJECT_DIR$/java/util/AbstractCollection/AbstractCollection.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractList/AbstractList.cpp" afterPath="$PROJECT_DIR$/java/util/AbstractList/AbstractList.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractList/AbstractList.hpp" afterPath="$PROJECT_DIR$/java/util/AbstractList/AbstractList.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractMap/AbstractMap.hpp" afterPath="$PROJECT_DIR$/java/util/AbstractMap/AbstractMap.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractSequentialList/AbstractSequentialList.cpp" afterPath="$PROJECT_DIR$/java/util/AbstractSequentialList/AbstractSequentialList.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/AbstractSequentialList/AbstractSequentialList.hpp" afterPath="$PROJECT_DIR$/java/util/AbstractSequentialList/AbstractSequentialList.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/ArrayList/ArrayList.cpp" afterPath="$PROJECT_DIR$/java/util/ArrayList/ArrayList.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/ArrayList/ArrayList.hpp" afterPath="$PROJECT_DIR$/java/util/ArrayList/ArrayList.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/ArrayList/ArrayListTest.cpp" afterPath="$PROJECT_DIR$/java/util/ArrayList/ArrayListTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Arrays/Arrays.cpp" afterPath="$PROJECT_DIR$/java/util/Arrays/Arrays.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Arrays/Arrays.hpp" afterPath="$PROJECT_DIR$/java/util/Arrays/Arrays.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Arrays/ArraysTest.cpp" afterPath="$PROJECT_DIR$/java/util/Arrays/ArraysTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Collection/Collection.cpp" afterPath="$PROJECT_DIR$/java/util/Collection/Collection.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Collection/Collection.hpp" afterPath="$PROJECT_DIR$/java/util/Collection/Collection.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Comparator/Comparator.hpp" afterPath="$PROJECT_DIR$/java/util/Comparator/Comparator.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Date/Date.cpp" afterPath="$PROJECT_DIR$/java/util/Date/Date.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Date/Date.hpp" afterPath="$PROJECT_DIR$/java/util/Date/Date.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Date/DateTest.cpp" afterPath="$PROJECT_DIR$/java/util/Date/DateTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Deque/Deque.cpp" afterPath="$PROJECT_DIR$/java/util/Deque/Deque.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Deque/Deque.h" afterPath="$PROJECT_DIR$/java/util/Deque/Deque.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Function.hpp" afterPath="$PROJECT_DIR$/java/util/Function.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/HashMap/HashMap.hpp" afterPath="$PROJECT_DIR$/java/util/HashMap/HashMap.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/HashMap/HashMapTest.cpp" afterPath="$PROJECT_DIR$/java/util/HashMap/HashMapTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/HashSet/HashSet.cpp" afterPath="$PROJECT_DIR$/java/util/HashSet/HashSet.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/HashSet/HashSet.hpp" afterPath="$PROJECT_DIR$/java/util/HashSet/HashSet.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Iterator/Iterator.cpp" afterPath="$PROJECT_DIR$/java/util/Iterator/Iterator.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Iterator/Iterator.hpp" afterPath="$PROJECT_DIR$/java/util/Iterator/Iterator.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/LinkedList/LinkedList.cpp" afterPath="$PROJECT_DIR$/java/util/LinkedList/LinkedList.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/LinkedList/LinkedList.hpp" afterPath="$PROJECT_DIR$/java/util/LinkedList/LinkedList.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/LinkedList/LinkedListTest.cpp" afterPath="$PROJECT_DIR$/java/util/LinkedList/LinkedListTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/List/List.cpp" afterPath="$PROJECT_DIR$/java/util/List/List.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/List/List.hpp" afterPath="$PROJECT_DIR$/java/util/List/List.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/ListIterator/ListIterator.hpp" afterPath="$PROJECT_DIR$/java/util/ListIterator/ListIterator.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Map/Map.cpp" afterPath="$PROJECT_DIR$/java/util/Map/Map.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Map/Map.hpp" afterPath="$PROJECT_DIR$/java/util/Map/Map.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/PriorityQueue/PriorityQueue.cpp" afterPath="$PROJECT_DIR$/java/util/PriorityQueue/PriorityQueue.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/PriorityQueue/PriorityQueue.hpp" afterPath="$PROJECT_DIR$/java/util/PriorityQueue/PriorityQueue.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Queue/Queue.cpp" afterPath="$PROJECT_DIR$/java/util/Queue/Queue.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Queue/Queue.hpp" afterPath="$PROJECT_DIR$/java/util/Queue/Queue.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/RandomAccess/RandomAccess.hpp" afterPath="$PROJECT_DIR$/java/util/RandomAccess/RandomAccess.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Set/Set.cpp" afterPath="$PROJECT_DIR$/java/util/Set/Set.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Spliterator/Spliterator.hpp" afterPath="$PROJECT_DIR$/java/util/Spliterator/Spliterator.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Stack/Stack.cpp" afterPath="$PROJECT_DIR$/java/util/Stack/Stack.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Stack/Stack.hpp" afterPath="$PROJECT_DIR$/java/util/Stack/Stack.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/Stack/StackTest.cpp" afterPath="$PROJECT_DIR$/java/util/Stack/StackTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/TreeSet/TreeSet.cpp" afterPath="$PROJECT_DIR$/java/util/TreeSet/TreeSet.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/TreeSet/TreeSet.hpp" afterPath="$PROJECT_DIR$/java/util/TreeSet/TreeSet.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/UUID/UUID.cpp" afterPath="$PROJECT_DIR$/java/util/UUID/UUID.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/UUID/UUID.hpp" afterPath="$PROJECT_DIR$/java/util/UUID/UUID.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/UUID/UUIDTest.cpp" afterPath="$PROJECT_DIR$/java/util/UUID/UUIDTest.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/function/Consumer/Consumer.hpp" afterPath="$PROJECT_DIR$/java/util/function/Consumer/Consumer.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/function/Predicate/Predicate.cpp" afterPath="$PROJECT_DIR$/java/util/function/Predicate/Predicate.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/function/Predicate/Predicate.hpp" afterPath="$PROJECT_DIR$/java/util/function/Predicate/Predicate.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/function/UnaryOperator/UnaryOperator.cpp" afterPath="$PROJECT_DIR$/java/util/function/UnaryOperator/UnaryOperator.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/function/UnaryOperator/UnaryOperator.hpp" afterPath="$PROJECT_DIR$/java/util/function/UnaryOperator/UnaryOperator.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/util/stream/Stream/Stream.hpp" afterPath="$PROJECT_DIR$/java/util/stream/Stream/Stream.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/builtin.h" afterPath="$PROJECT_DIR$/kernel/builtin.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common.h" afterPath="$PROJECT_DIR$/kernel/common.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/append.c" afterPath="$PROJECT_DIR$/kernel/common/append.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/append_test.c" afterPath="$PROJECT_DIR$/kernel/common/append_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/join.c" afterPath="$PROJECT_DIR$/kernel/common/join.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/join_test.c" afterPath="$PROJECT_DIR$/kernel/common/join_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/length.c" afterPath="$PROJECT_DIR$/kernel/common/length.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/length.s" afterPath="$PROJECT_DIR$/kernel/common/length.s" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/length_test.c" afterPath="$PROJECT_DIR$/kernel/common/length_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/search.c" afterPath="$PROJECT_DIR$/kernel/common/search.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/search_test.c" afterPath="$PROJECT_DIR$/kernel/common/search_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/segment.c" afterPath="$PROJECT_DIR$/kernel/common/segment.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/segment_test.c" afterPath="$PROJECT_DIR$/kernel/common/segment_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/sort.c" afterPath="$PROJECT_DIR$/kernel/common/sort.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/common/sort_test.c" afterPath="$PROJECT_DIR$/kernel/common/sort_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/datetime.h" afterPath="$PROJECT_DIR$/kernel/datetime.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/datetime/datetime.c" afterPath="$PROJECT_DIR$/kernel/datetime/datetime.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/datetime/datetime_test.c" afterPath="$PROJECT_DIR$/kernel/datetime/datetime_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/datetime/timezone.c" afterPath="$PROJECT_DIR$/kernel/datetime/timezone.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/datetime/timezone_test.c" afterPath="$PROJECT_DIR$/kernel/datetime/timezone_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/math.h" afterPath="$PROJECT_DIR$/kernel/math.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/math/math.c" afterPath="$PROJECT_DIR$/kernel/math/math.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/math/math_test.c" afterPath="$PROJECT_DIR$/kernel/math/math_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/network.h" afterPath="$PROJECT_DIR$/kernel/network.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/platform.h" afterPath="$PROJECT_DIR$/kernel/platform.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string.h" afterPath="$PROJECT_DIR$/kernel/string.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/convert.c" afterPath="$PROJECT_DIR$/kernel/string/convert.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/convert_test.c" afterPath="$PROJECT_DIR$/kernel/string/convert_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/process.c" afterPath="$PROJECT_DIR$/kernel/string/process.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/process.s" afterPath="$PROJECT_DIR$/kernel/string/process.s" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/process_test.c" afterPath="$PROJECT_DIR$/kernel/string/process_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/url.c" afterPath="$PROJECT_DIR$/kernel/string/url.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/string/url_test.c" afterPath="$PROJECT_DIR$/kernel/string/url_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/type.h" afterPath="$PROJECT_DIR$/kernel/type.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kernel/type/json/default.c" afterPath="$PROJECT_DIR$/kernel/type/json/default.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library.hpp" afterPath="$PROJECT_DIR$/library.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc/unit-test.c" afterPath="$PROJECT_DIR$/misc/unit-test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/device.c" afterPath="$PROJECT_DIR$/system/device.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/device_test.c" afterPath="$PROJECT_DIR$/system/device_test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/type/json_test.c" afterPath="$PROJECT_DIR$/type/json_test.c" />
+    </list>
+    <ignored path="$PROJECT_DIR$/CMakeFiles/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="native" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="install_manifest.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/install_manifest.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort_test.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kernel/common/sort_test.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#1363#1383#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kernel/common/sort.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#1363#1385#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="url.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kernel/string/url.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#1363#1381#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="json_test.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/type/json_test.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vendor.hpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/Vendor.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-410">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoSuchElementException.hpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+              <folding>
+                <element signature="e#1448#1499#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoSuchElementExceptionTest.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementExceptionTest.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DoubleTest.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-16409">
+              <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>bool</find>
+      <find>insta</find>
+      <find>hex</find>
+      <find>toStri</find>
+      <find>Ope</find>
+      <find>operator=</find>
+      <find>ELASTIC</find>
+      <find>value = &quot;</find>
+      <find>String = &quot;</find>
+      <find>Value = &quot;</find>
+      <find>expectedFloatCharValueResult</find>
+      <find>-922337203</find>
+      <find>-9223372036854775808</find>
+      <find>ArrayConstructorWithSize</find>
+      <find>()</find>
+      <find>(e)</find>
+      <find>exception</find>
+      <find>node1</find>
+      <find>int i</find>
+      <find>(E e) {</find>
+      <find>@return</find>
+      <find>@param e</find>
+      <find>error</find>
+      <find>ArrayListRemove</find>
+      <find>IndexOutOfBoundsException</find>
+      <find>NoSuchElementExceptionConstructor</find>
+      <find>throw</find>
+      <find>install</find>
+      <find>NoSuchElementException</find>
+      <find>Get</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Float</replace>
+      <replace>Double</replace>
+      <replace>= 0;</replace>
+      <replace>boolean</replace>
+      <replace>String = (string) &quot;</replace>
+      <replace>Value = (string) &quot;</replace>
+      <replace>-922337203</replace>
+      <replace>-9223372036854775808</replace>
+      <replace>-9223372036854775807</replace>
+      <replace>(element)</replace>
+      <replace>(const E &amp;element) {</replace>
+      <replace>@param element</replace>
+      <replace>NoSuchElementException</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Boolean/BooleanTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Long/LongTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Math/MathTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Short/ShortTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Throwable/ThrowableTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/String/StringTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Enum/EnumTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/IOException/IOExceptionTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/System/SystemTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Object/ObjectTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Exception/ExceptionTest.cpp" />
+        <option value="$PROJECT_DIR$/java/cql/CQLException/CQLExceptionTest.cpp" />
+        <option value="$PROJECT_DIR$/java/net/URLEncoder/URLEncoderTest.cpp" />
+        <option value="$PROJECT_DIR$/java/net/URL/URLTest.cpp" />
+        <option value="$PROJECT_DIR$/java/net/URLDecoder/URLDecoderTest.cpp" />
+        <option value="$PROJECT_DIR$/java/vendor/AbstractVendor/AbstractVendorTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/UUID/UUIDTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/Arrays/ArraysTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/ArrayList/ArrayListTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/Vector/VectorTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/Stack/StackTest.cpp" />
+        <option value="$PROJECT_DIR$/java/util/LinkedList/LinkedList.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/System/System.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Integer/Integer.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Integer/IntegerTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/System/System.hpp" />
+        <option value="$PROJECT_DIR$/examples/HashMap/Makefile" />
+        <option value="$PROJECT_DIR$/examples/HashMap/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/java/lang/Boolean/Boolean.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Character/Character.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Double/Double.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Enum/Enum.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Float/FloatTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Float/Float.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Long/Long.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Short/Short.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/String/String.hpp" />
+        <option value="$PROJECT_DIR$/java/util/ArrayList/ArrayList.hpp" />
+        <option value="$PROJECT_DIR$/java/lang/Object/Object.hpp" />
+        <option value="$PROJECT_DIR$/java/util/HashMap/HashMapTest.cpp" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/examples/HashMap/main.cpp" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/kernel/common/sort_test.c" />
+        <option value="$PROJECT_DIR$/kernel/common/sort.c" />
+        <option value="$PROJECT_DIR$/kernel/string/url.c" />
+        <option value="$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementExceptionTest.cpp" />
+        <option value="$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="30" />
+    <option name="width" value="1366" />
+    <option name="height" value="738" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="native" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="native" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../worker-service" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/misc" />
+      <recent name="$PROJECT_DIR$/kernel" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/kennel" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.native_test">
+    <configuration default="true" type="CLion_Remote" factoryName="GDB Remote Debug" remoteCommand="" symbolFile="" sysroot="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType" factoryName="Compound Run Configuration">
+      <method />
+    </configuration>
+    <configuration default="true" type="FirefoxRemoteDebugType" factoryName="Firefox Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeWebKit" factoryName="NW.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="ReactNative" factoryName="React Native">
+      <node-interpreter value="project" />
+      <platform value="ANDROID" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="native" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Default" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="checkstyle" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="checkstyle" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="leak" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="leak" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="leak-c" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="leak-c" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="leak-c-debug" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="leak-c-debug" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="leak-debug" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="leak-debug" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="native" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="native" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="native_static" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="native_static" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="native_test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="native_test" CONFIG_NAME="Default" RUN_TARGET_PROJECT_NAME="native" RUN_TARGET_NAME="native_test">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="native_test_c" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="native_test_c" CONFIG_NAME="Default" RUN_TARGET_PROJECT_NAME="native" RUN_TARGET_NAME="native_test_c">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="server" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="server" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="uninstall" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="uninstall" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="unit-test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="native" TARGET_NAME="unit-test" CONFIG_NAME="Default">
+      <envs />
+      <method />
+    </configuration>
+    <list size="13">
+      <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
+      <item index="1" class="java.lang.String" itemvalue="Application.checkstyle" />
+      <item index="2" class="java.lang.String" itemvalue="Application.leak" />
+      <item index="3" class="java.lang.String" itemvalue="Application.leak-c" />
+      <item index="4" class="java.lang.String" itemvalue="Application.leak-c-debug" />
+      <item index="5" class="java.lang.String" itemvalue="Application.leak-debug" />
+      <item index="6" class="java.lang.String" itemvalue="Application.native" />
+      <item index="7" class="java.lang.String" itemvalue="Application.native_static" />
+      <item index="8" class="java.lang.String" itemvalue="Application.native_test" />
+      <item index="9" class="java.lang.String" itemvalue="Application.native_test_c" />
+      <item index="10" class="java.lang.String" itemvalue="Application.server" />
+      <item index="11" class="java.lang.String" itemvalue="Application.uninstall" />
+      <item index="12" class="java.lang.String" itemvalue="Application.unit-test" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="30" width="1366" height="738" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16515152" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22272727" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47704917" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/java/lang/Long/Long.hpp</url>
+          <line>63</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/kernel/misc/test.cpp</url>
+          <line>8</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp</url>
+          <line>749</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/java/util/UUID/UUIDTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/Arrays/ArraysTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/ArrayList/ArrayListTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/Vector/VectorTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/Stack/StackTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/LinkedList/LinkedList.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1150">
+          <caret line="416" column="16" lean-forward="false" selection-start-line="416" selection-start-column="16" selection-end-line="416" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/misc/test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.appveyor.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/misc/unit-test.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/System/System.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Integer/IntegerTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="349" column="0" lean-forward="false" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/System/System.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/HashMap/Makefile" />
+    <entry file="file://$PROJECT_DIR$/examples/HashMap/CMakeLists.txt" />
+    <entry file="file://$PROJECT_DIR$/java/lang/Boolean/BooleanTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1214">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Boolean/Boolean.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="147" column="16" lean-forward="false" selection-start-line="147" selection-start-column="16" selection-end-line="147" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Boolean/Boolean.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="76" column="26" lean-forward="true" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Byte/Byte.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-106">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Character/Character.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="365" column="26" lean-forward="false" selection-start-line="365" selection-start-column="26" selection-end-line="365" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Enum/EnumTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Double/Double.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14904">
+          <caret line="648" column="43" lean-forward="false" selection-start-line="648" selection-start-column="43" selection-end-line="648" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Enum/Enum.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2254">
+          <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Float/FloatTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Float/Float.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1771">
+          <caret line="77" column="8" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="81" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Integer/Integer.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2231">
+          <caret line="97" column="33" lean-forward="false" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Long/LongTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Short/ShortTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Long/Long.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12052">
+          <caret line="524" column="8" lean-forward="false" selection-start-line="524" selection-start-column="8" selection-end-line="528" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Short/Short.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1771">
+          <caret line="77" column="73" lean-forward="false" selection-start-line="77" selection-start-column="73" selection-end-line="77" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/String/String.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="149" column="13" lean-forward="false" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+          <folding>
+            <marker date="1500388940877" expanded="true" signature="0:17" ph="/**...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/ArrayList/ArrayList.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-435">
+          <caret line="105" column="12" lean-forward="false" selection-start-line="105" selection-start-column="12" selection-end-line="105" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Object/Object.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="183" column="9" lean-forward="false" selection-start-line="183" selection-start-column="6" selection-end-line="183" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/HashMap/HashMap.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1173">
+          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/util/HashMap/HashMapTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9011">
+          <caret line="424" column="34" lean-forward="false" selection-start-line="424" selection-start-column="34" selection-end-line="424" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding>
+            <marker date="1500388941181" expanded="true" signature="70:256" ph="before_script: &lt;3 items&gt;" />
+            <marker date="1500388941181" expanded="true" signature="225:256" ph="cmake . -…EFILE=true" />
+            <marker date="1500388941181" expanded="true" signature="371:526" ph="notifications: &lt;1 key&gt;" />
+            <marker date="1500388941181" expanded="true" signature="493:526" ph="foodtiny:…ctqwdQ034S" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/HashMap/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compress.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crypto.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1518">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="29" column="3" lean-forward="false" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install_manifest.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kernel/common/sort_test.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1363#1383#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kernel/common/sort.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1363#1385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kernel/string/url.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1363#1381#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/type/json_test.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/Vendor.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementException.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+          <folding>
+            <element signature="e#1448#1499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/NoSuchElementException/NoSuchElementExceptionTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/lang/Double/DoubleTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16409">
+          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

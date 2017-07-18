@@ -1,0 +1,17 @@
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/rebuild_cache.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/edit_cache.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/install/local.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/install.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/checkstyle.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/native_test_c.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/native_static.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/leak-c.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/native.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/unit-test.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/uninstall.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/server.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/leak.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/native_test.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/leak-c-debug.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/list_install_components.dir
+/home/nakhoadl/workspace/foodtiny/native/CMakeFiles/leak-debug.dir
