@@ -42,7 +42,13 @@
 typedef char *string;
 typedef wchar_t unicode;
 typedef const char *const_string;
+
+#if defined __linux__
 typedef signed char byte;
+#endif
+#if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
+typedef unsigned char byte;
+#endif
 
 string string_default(string target);
 
