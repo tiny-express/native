@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../../lang/String/String.hpp"
@@ -34,7 +34,7 @@ extern "C" {
 using namespace Java::Util;
 
 
-TEST(JavaLang, StackPush) {
+TEST(JavaUtil, StackPush) {
     // int
     Stack<int> pushIntStack;
 
@@ -97,7 +97,7 @@ TEST(JavaLang, StackPush) {
 
 }
 
-TEST(JavaLang, StackEmpty) {
+TEST(JavaUtil, StackEmpty) {
     // Give an emtpy Stack
 
     // int
@@ -143,7 +143,7 @@ TEST(JavaLang, StackEmpty) {
     ASSERT_FALSE(notEmptyObjectStack.empty());
 }
 
-TEST(JavaLang, StackPeek) {
+TEST(JavaUtil, StackPeek) {
     //int
     Stack<int> peekIntStack;
 
@@ -194,9 +194,19 @@ TEST(JavaLang, StackPeek) {
     String stringResult = peekStringStack.peek();
     ASSERT_STR(stringResult.toString(), pushString3.toString());
     ASSERT_EQUAL(3, peekStringStack.size());// check size to make sure the top element is not removed
+
+    // Given an empty stack
+    Stack<int> emptyStack;
+    // Test if peek() throw EmptyStackException
+    try {
+        emptyStack.peek();
+    }
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
 }
 
-TEST(JavaLang, StackPop) {
+TEST(JavaUtil, StackPop) {
     //int
     Stack<int> popIntStack;
 
@@ -247,9 +257,19 @@ TEST(JavaLang, StackPop) {
     String stringResult = popStringStack.pop();
     ASSERT_STR(stringResult.toString(), pushString3.toString());
     ASSERT_EQUAL(2, popStringStack.size());// check size to make sure the top element is removed
+
+    // Given an empty stack
+    Stack<int> emptyStack;
+    // Test if peek() throw EmptyStackException
+    try {
+        emptyStack.peek();
+    }
+    catch (Exception e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
 }
 
-TEST(JavaLang, StackSearch) {
+TEST(JavaUtil, StackSearch) {
     //int
     Stack<int> searchIntStack;
 

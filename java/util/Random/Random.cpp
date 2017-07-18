@@ -99,8 +99,8 @@ long Random::seedUniquifier() {
  */
 void Random::resetSeed(long seedVal) {
     char *base = (char *) this;
-    long *seed = (long *) (base+seedOffset);
-    *seed = std::atomic_long {seedVal};
+    long *seed = (long *) (base + seedOffset);
+    *seed = std::atomic_long{seedVal};
 }
 
 /**

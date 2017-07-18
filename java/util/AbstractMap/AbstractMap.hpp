@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_UTIL_ABSTRACT_MAP_HPP
-#define NATIVE_UTIL_ABSTRACT_MAP_HPP
+#ifndef JAVA_UTIL_ABSTRACT_MAP_HPP_
+#define JAVA_UTIL_ABSTRACT_MAP_HPP_
 
 #include "../../Lang.hpp"
 
@@ -38,4 +38,4 @@ namespace Java {
 	}
 }
 
-#endif//NATIVE_UTIL_ABSTRACT_MAP_HPP
+#endif  // JAVA_UTIL_ABSTRACT_MAP_HPP_
