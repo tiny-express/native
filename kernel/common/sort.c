@@ -192,4 +192,3 @@ DECREASE(double);
 QUICK_SORT(short);
 QUICK_SORT(int);
 QUICK_SORT(long);
-

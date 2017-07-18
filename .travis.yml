@@ -8,6 +8,7 @@ compiler:
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
+- chmod +x misc/checkstyle.sh
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
