@@ -55,7 +55,7 @@ TEST (JavaLang, NoSuchElementExceptionConstructor) {
 TEST (JavaLang, NoSuchElementExceptionTryCatch) {
     try {
         throw NoSuchElementException("Throw NoSuchElementException");
-    } catch (Exception e) {
-        ASSERT_STR("Throw NoSuchElementException", e.getMessage().toString());
+    } catch (NoSuchElementException exception) {
+        ASSERT_STR("Throw NoSuchElementException", exception.getMessage().toString());
     }
 }
