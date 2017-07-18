@@ -359,6 +359,12 @@ namespace Java {
             static int codePointBeforeImpl(Array<char> a, int index, int start);
 
             static int codePointCountImpl(Array<char> a, int offset, int count);
+
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const Character &target) {
+                os << target.original;
+                return os;
+            }
 		};
 	}
 }

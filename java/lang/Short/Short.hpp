@@ -73,6 +73,12 @@ namespace Java {
 			void operator*=(const Short &target);
 			void operator/=(const Short &target);
 			void operator%=(const Short &target);
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const Short &target) {
+				os << target.original;
+				return os;
+			}
 		};
 	}
 }

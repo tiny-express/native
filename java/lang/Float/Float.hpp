@@ -74,6 +74,12 @@ namespace Java {
 			void operator+=(const Float &target);
 			void operator*=(const Float &target);
 			void operator/=(const Float &target);
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const Float &target) {
+				os << target.original;
+				return os;
+			}
 		};
 	}
 }

@@ -645,7 +645,11 @@ namespace Java {
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
-
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const Double &target) {
+                os << target.original;
+                return os;
+            }
 		};
 	}
 }

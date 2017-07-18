@@ -35,6 +35,7 @@ extern "C" {
 #include <vector>
 #include <map>
 #include <type_traits>
+#include <iostream>
 
 // Define instanceof
 template <typename Base, typename T>

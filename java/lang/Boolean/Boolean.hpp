@@ -71,6 +71,11 @@ namespace Java {
             static Boolean valueOf(boolean target);
             static boolean valueOf(const_string target);
             Boolean operator=(const Boolean &target);
+
+            friend std::ostream &operator<<(std::ostream &os, const Boolean &target) {
+                os << target.toString();
+                return os;
+            }
         };
 
     }
