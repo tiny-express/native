@@ -94,6 +94,12 @@ namespace Java {
             string toString() const {
                 return this->name.toString();
             }
+
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const Enum &target) {
+                os << target.toString();
+                return os;
+            }
         };
     }
 }

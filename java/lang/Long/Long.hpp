@@ -521,6 +521,12 @@ namespace Java {
 			 * @param target
 			 */
 			void operator%=(const Long &target);
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const Long &target) {
+				os << target.original;
+				return os;
+			}
 		};
 	}
 }

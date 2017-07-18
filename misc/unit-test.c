@@ -25,7 +25,7 @@
  */
 
 #define TESTING
-#include "../unit_test.h"
+#include "../kernel/test.h"
 
 int main(int argc, const char *argv[]) {
 	int result = ctest_main(argc, argv);

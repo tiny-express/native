@@ -37,15 +37,6 @@ void System::out::print(String target) {
 	fflush(stdout);
 }
 
-void System::out::println(String target) {
-	String targetCharacters = target.toString();
-	if (targetCharacters.isEmpty()) {
-		return;
-	}
-	printf("%s\n", targetCharacters.toString());
-	fflush(stdout);
-}
-
 long System::currentTimeMillis() {
 	unsigned long timestampInNanoSeconds = timestamp();
 	return (long) timestampInNanoSeconds / 1000;

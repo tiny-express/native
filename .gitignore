@@ -2,7 +2,6 @@
 .DS_Store
 bin
 a.out
-.idea
 /.idea
 CMakeFiles
 cmake-build-debug
@@ -13,12 +12,10 @@ CMakeCache.txt
 Testing
 /Makefile
 /native_test
-/native_test.exe
 /native_test_c
 /native_test_cpp
 /native.cbp
 /native
-/gdb.exe.stackdump
 /libnative.a
 /libnative_static.a
 /libnative.dylib
@@ -28,3 +25,8 @@ Testing
 /logging
 /json
 /native.iml
+/example/HelloWorld/CMakeFiles
+/example/HelloWorld/cmake_install.cmake
+/example/HelloWorld/HelloWorld
+/example/HelloWorld/Makefile
+/example/HelloWorld/CMakeCache.txt

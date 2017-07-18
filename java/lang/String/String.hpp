@@ -129,18 +129,24 @@ namespace Java {
 			String operator=(const String &target);
 			String operator+=(const String &target);
 			String operator+=(const char &target);
-			friend String operator+(const_string target1, String const &target2) {
-				String result;
-				result = target1;
-				result += target2;
-				return result;
-			};
-			
 			String subString(int fromIndex) {
 				if (fromIndex < 0 || fromIndex >= this->length()) {
 					return "";
 				}
 				return &( this->original[ fromIndex ] );
+			}
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const String &target) {
+				os << target.original;
+				return os;
+			}
+
+			friend String operator+(const_string target1, String const &target2) {
+				String result;
+				result = target1;
+				result += target2;
+				return result;
 			}
 		};
 	}

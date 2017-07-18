@@ -31,7 +31,6 @@
 #include "java/Lang.hpp"
 #include "java/Net.hpp"
 #include "java/Security.hpp"
-#include "java/Vendor.hpp"
 #include "java/Util.hpp"
 
 // In Java, Java::Lang is imported by default
