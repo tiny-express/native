@@ -431,3 +431,64 @@ TEST (JavaLang, FloatShortValue){
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_NOT_EQUAL(expectedResultShortValue , actualResultShortValue);
 }
+
+TEST (JavaLang, FloatIntValue){
+    // Create variable to test
+    Float variableTestIntValue;
+    int expectedResultIntValue;
+    int actualResultIntValue;
+
+    // Test POSITIVE_INFINITY_DOUBLE
+    variableTestIntValue = POSITIVE_INFINITY_FLOAT;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test NEGATIVE_INFINITY_FLOAT
+    variableTestIntValue = NEGATIVE_INFINITY_FLOAT;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test NaN_NUMBER_FLOAT
+    variableTestIntValue = NaN_NUMBER_FLOAT;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MAX_VALUE_FLOAT
+    variableTestIntValue = MAX_VALUE_FLOAT;
+    expectedResultIntValue = -2147483648;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MIN_NORMAL_FLOAT
+    variableTestIntValue = MIN_NORMAL_FLOAT;
+    expectedResultIntValue = 0;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test MIN_VALUE_FLOAT
+    variableTestIntValue = MIN_VALUE_FLOAT;
+    expectedResultIntValue= 0;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test valid case
+    variableTestIntValue = 5.9;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test valid case
+    variableTestIntValue = 5.4;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+
+    // Test invalid case
+    variableTestIntValue = 6;
+    expectedResultIntValue= 5;
+    actualResultIntValue = variableTestIntValue.intValue();
+    ASSERT_NOT_EQUAL(expectedResultIntValue , actualResultIntValue);
+}

@@ -161,11 +161,6 @@ short Float::shortValue() const {
     return (short) this->original;
 }
 
-/**
- * Int value
- *
- * @return int
- */
 int Float::intValue() const {
     return (int) this->original;
 }
