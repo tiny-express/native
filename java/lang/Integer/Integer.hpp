@@ -37,8 +37,9 @@ namespace Java {
 	namespace Lang {
 		class Integer;
 		
-		class Integer : public virtual Number,
-		                public virtual Comparable<Integer> {
+		class Integer :
+			public virtual Number,
+			public virtual Comparable<Integer> {
 		private:
 			int original;
 			string string_original;

@@ -24,6 +24,8 @@ Testing
 /test.txt
 /logging
 /json
+main
+main.o
 /native.iml
 /example/HelloWorld/CMakeFiles
 /example/HelloWorld/cmake_install.cmake
