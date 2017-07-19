@@ -43,9 +43,9 @@ typedef char *string;
 typedef wchar_t unicode;
 typedef const char *const_string;
 
-#if defined __linux__
+//#if defined __linux__
 typedef signed char byte;
-#endif
+//#endif
 
 string string_default(string target);
 
