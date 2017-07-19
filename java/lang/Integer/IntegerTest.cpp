@@ -366,12 +366,7 @@ TEST(JavaLang, IntegerDoubleValue) {
 TEST(JavaLang, IntegerBitCount) {
     int intInput;
     int expectedResult;
-    int actualResult;
-
-    intInput = 13;  // 0000 1101
-    expectedResult = 3;
-    actualResult = Integer::bitCount(intInput);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    int actualResult;    
 
     intInput = 0;
     expectedResult = 0;
@@ -388,6 +383,11 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(intInput);
     ASSERT_EQUAL(expectedResult, actualResult);
 
+    intInput = 13;  // 0000 1101
+    expectedResult = 3;
+    actualResult = Integer::bitCount(intInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
     intInput = MAX_VALUE_INTEGER; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
     expectedResult = 31;
     actualResult = Integer::bitCount(intInput);
@@ -401,6 +401,38 @@ TEST(JavaLang, IntegerBitCount) {
 }
 
 TEST(JavaLang, IntegerByteValue) {
+    // Integer integerInput;
+    // int expectedResult;
+    // int actualResult;
 
+    // integerInput = 0;  
+    // expectedResult = 0;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
+
+    // integerInput = 1;  
+    // expectedResult = 1;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
+
+    // integerInput = -1;  
+    // expectedResult = -1;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
+
+    // integerInput = 13;  
+    // expectedResult = 13;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
+
+    // integerInput = MAX_VALUE_INTEGER;  
+    // expectedResult = 0;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
+
+    // integerInput = MIN_VALUE_INTEGER;  
+    // expectedResult = 0;
+    // actualResult = integerInput.byteValue();
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
 }
