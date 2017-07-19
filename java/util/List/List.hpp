@@ -34,24 +34,26 @@
 
 namespace Java {
 	namespace Util {
-		template <typename E>
+		template <class E>
 		class ListIterator;
 		
-		template <typename E>
+		template <class E>
 		class List;
 		
-		template <typename E>
+		template <class E>
 		class List : public virtual Collection<E> {
 		public:
 			/**
 			 * Appends the specified element to the end of this list (optional operation).
+			 *
 			 * @param e
 			 * @return boolean
 			 */
-			virtual boolean add(E &e) = 0;
+			virtual boolean add(E element);
 
 			/**
 			 * Inserts the specified element at the specified position in this list (optional operation).
+			 *
 			 * @param index
 			 * @param element
 			 * @return
@@ -61,6 +63,7 @@ namespace Java {
 			/**
 			 * Appends all of the elements in the specified collection to the end of this list,
 			 * in the order that they are returned by the specified collection's iterator (optional operation).
+			 *
 			 * @param c
 			 * @return boolean
 			 */
@@ -69,6 +72,7 @@ namespace Java {
 			/**
 			 * Inserts all of the elements in the specified collection
 			 * into this list at the specified position (optional operation).
+			 *
 			 * @param index
 			 * @param c
 			 * @return boolean
@@ -78,14 +82,15 @@ namespace Java {
 			/**
 			 * Removes all of the elements from this list (optional operation).
 			 */
-			virtual void clear() = 0;
+			virtual void clear();
 
 			/**
 			 * Returns true if this list contains the specified element.
+			 *
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean contains(E &e) const = 0;
+			virtual boolean contains(E element);
 
 			/**
 			 * Returns true if this list contains all of the elements of the specified collection.
@@ -99,20 +104,20 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual boolean equals(const Object &o) const = 0;
+			virtual boolean equals(const Object object);
 
 			/**
 			 * Returns the element at the specified position in this list.
 			 * @param index
 			 * @return E
 			 */
-			virtual E get(int index) const = 0;
+			virtual E get(int index);
 
 			/**
 			 * Returns the hash code value for this list.
 			 * @return
 			 */
-			virtual long hashCode() const = 0;
+			virtual long hashCode();
 
 			/**
 			 * Returns the index of the first occurrence of the specified element in this list,
@@ -120,13 +125,13 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int indexOf(E &e) const = 0;
+			virtual int indexOf(E element);
 
 			/**
 			 * Returns true if this list contains no elements.
 			 * @return boolean
 			 */
-			virtual boolean isEmpty() const = 0;
+			virtual boolean isEmpty();
 
 			/**
 			 * Don't support this method
@@ -140,7 +145,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int lastIndexOf(E &e) const = 0;
+			virtual int lastIndexOf(E element);
 
 			/**
 			 * Don't support this method
@@ -182,13 +187,13 @@ namespace Java {
 			 * @param element
 			 * @return E
 			 */
-			virtual E set(int index, E &e) = 0;
+			virtual E set(int index, E element);
 
 			/**
 			 * Returns the number of elements in this list.
 			 * @return int
 			 */
-			virtual int size() const = 0;
+			virtual int size();
 
 			/**
 			 * Don't support this method
