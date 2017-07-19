@@ -45,7 +45,7 @@ namespace Java {
             static constexpr double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53)
             boolean haveNextGaussianNumber = false;
             double nextGaussianNumber;
-            static long seedOffset;
+            //static long seedOffset;
 
         public:
             // IllegalArgumentException messages
@@ -56,7 +56,7 @@ namespace Java {
 
             //void readObject(ObjectInputStream s);
 
-            void resetSeed(long seedVal);
+            //void resetSeed(long seedVal);
 
             static long seedUniquifier();
 
@@ -64,9 +64,9 @@ namespace Java {
 
             long nanoTime();
 
-            static long setSeedOffset() {
+            /*static long setSeedOffset() {
                 return offsetof(Random, seed);
-            }
+            }*/
 
         protected:
             int next(int bits);
