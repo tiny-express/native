@@ -107,15 +107,16 @@ TEST (JavaLang, ArrayListForEach) {
 TEST(JavaUtil, ArrayListToString) {
     // Give an ArrayList<Integer> then compare toString() - Should equal
 	ArrayList<Integer> validArraylistInteger = {1, 2, 4, 5};
-//	string result = (string) validArraylistInteger.toStdString().c_str();
-//	string expect = (string) "[1, 2, 4, 5]";
-//	ASSERT_STR(result, expect);
+	string result = (string) validArraylistInteger.toStdString().c_str();
+	string expect = (string) "[1, 2, 4, 5]";
+	ASSERT_STR(result, expect);
 
     // Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
     ArrayList<ArrayList<Integer>> arrayListInArrayList;
     arrayListInArrayList.add(validArraylistInteger);
     arrayListInArrayList.add(validArraylistInteger);
-    string result = (string) arrayListInArrayList.toStdString().c_str();
-    string expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5]]";
+    result = strdup((string) arrayListInArrayList.toStdString().c_str());
+    expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5]]";
     ASSERT_STR(expect, result);
+    free(result);
 }
