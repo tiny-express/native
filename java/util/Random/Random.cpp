@@ -59,7 +59,7 @@ long Random::nanoTime() {
 }
 
 /**
- * Constructor
+ * Constructor with specified seed
  *
  * @param seed
  */
@@ -74,7 +74,7 @@ Random::Random(long seed) {
  * @return
  */
 long Random::initialScramble(long seed) {
-    return (seed ^ multiplier) & mask;
+    return (seed ^ MULTIPLIER) & MASK;
 }
 
 /**
@@ -123,7 +123,7 @@ int Random::next(int bits) {
     long nextSeed = 0;
     do {
         oldSeed = seed.load();
-        nextSeed = ((oldSeed * multiplier + addend) & mask);
+        nextSeed = ((oldSeed * MULTIPLIER + ADDEND) & MASK);
     } while (!seed.compare_exchange_weak(oldSeed, nextSeed));
     return (int) (nextSeed >> (48 - bits));
 }
@@ -157,16 +157,20 @@ int Random::nextInt() {
  * @throw IllegalArgumentException("bound must be positive");
  */
 int Random::nextInt(int bound) {
-    if (bound <= 0)
-        throw IllegalArgumentException(BadBound);
-    if (bound & (bound - 1) == 0)
+    if (bound <= 0) {
+        throw IllegalArgumentException(BADBOUND);
+    }
+
+    if (bound & (bound - 1) == 0) {
         return (int) ((bound * (long) next(31)) >> 31);
-    int bits, val;
+    }
+
+    int bits, value;
     do {
         bits = next(31);
-        val = bits % bound;
-    } while (bits - val + (bound - 1) < 0);
-    return val;
+        value = bits % bound;
+    } while (bits - value + (bound - 1) < 0);
+    return value;
 }
 
 /**
@@ -178,18 +182,11 @@ int Random::nextInt(int bound) {
 void Random::nextBytes(Array<byte> *bytes) {
     int len = bytes->length;
     int index = 0;
-    while (index < len) {
+    for (index; index < len; index++) {
         int randomNumber = nextInt();
-        if (randomNumber < 0) {
-        //TODO change to Math::min when merge Math, change 4 = Integer::SIZE/BYTE::SIZE
-            int n = (len - index) <= 4 ? (len - index) : 4;
-            for (n; n >= 1; n--) {
-                index++;
-                //TODO change to BYTE::SIZE
-                randomNumber >>= 8;
-                bytes->push((byte)randomNumber);
-            }
-        }
+        //TODO change to BYTE::SIZE
+        randomNumber >>= 8;
+        bytes->push((byte) randomNumber);
     }
 }
 
@@ -234,16 +231,16 @@ double Random::nextGaussian() {
         return nextNextGaussian;
     }
     else {
-        double v1, v2, s;
+        double value1, value2, squareSum;
         do {
-            v1 = 2 * nextDouble() - 1; // between -1 and 1
-            v2 = 2 * nextDouble() - 1; // between -1 and 1
-            s = v1 * v1 + v2 * v2;
-        } while (s >= 1 || s == 0);
-        double multiplier = sqrt(-2 * log(s) / s);
-        nextNextGaussian = v2 * multiplier;
+            value1 = 2 * nextDouble() - 1; // between -1 and 1
+            value2 = 2 * nextDouble() - 1; // between -1 and 1
+            squareSum = value1 * value1 + value2 * value2;
+        } while (squareSum >= 1 || squareSum == 0);
+        double multiplier = sqrt(-2 * log(squareSum) / squareSum);
+        nextNextGaussian = value2 * multiplier;
         haveNextNextGaussian = true;
-        return v1 * multiplier;
+        return value1 * multiplier;
     }
 }
 

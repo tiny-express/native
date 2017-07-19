@@ -39,9 +39,9 @@ namespace Java {
         private:
             std::atomic_long seed;
             static std::atomic_long seedUniquifierField;
-            static const long multiplier = 0x5DEECE66DL;
-            static const long addend = 0xBL;
-            static constexpr long mask = (1L << 48) - 1;
+            static const long MULTIPLIER = 0x5DEECE66DL;
+            static const long ADDEND = 0xBL;
+            static constexpr long MASK = (1L << 48) - 1;
             static constexpr double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53)
             boolean haveNextNextGaussian = false;
             double nextNextGaussian;
@@ -49,7 +49,7 @@ namespace Java {
 
         public:
             // IllegalArgumentException messages
-            const String BadBound = "bound must be positive";
+            const String BADBOUND = "bound must be positive";
 
         private:
             long initialScramble(long seed);
@@ -125,11 +125,6 @@ namespace Java {
             long nextLong();
 
             void setSeed(long seed);
-
-            //For test
-            long getSeed(){
-                return seed;
-            }
         };
     }
 }

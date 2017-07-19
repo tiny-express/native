@@ -31,15 +31,6 @@ extern "C" {
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
-TEST (JavaUtil, RandomConstructor) {
-    Random random1;
-    ASSERT_TRUE(random1.getSeed() != 0);
-
-    long seed = 60;
-    Random random2 = Random(seed);
-    ASSERT_TRUE(random2.getSeed() != 0);
-}
-
 TEST (JavaUtil, nextInt) {
     // Given a random number generator
     Random random1;
@@ -48,7 +39,7 @@ TEST (JavaUtil, nextInt) {
     int intMax = 0x7fffffff;
     int intMin = 0x80000000;
 
-    // Test 10 number
+    // Test 100 number
     for (int index = 0; index < 100; index++) {
         int a = random1.nextInt();
         ASSERT_TRUE( a >= intMin && a <= intMax); // Check if the return value is in Integer range
@@ -127,15 +118,4 @@ TEST (JavaUtil, NextFloat) {
         double generatedFloat = random1.nextFloat();
         ASSERT_TRUE(generatedFloat >= 0 && generatedFloat < 1.0);
     }
-}
-
-TEST (JavaUtil, SetSeed) {
-    // Given a random number generator
-    Random random1;
-
-    // Test
-    random1.setSeed(100);
-    long expectResult = 25214903817; // = (seed ^ 0x5DEECE66DL) & ((1L << 48) - 1)
-    long actualResult = random1.getSeed();
-    ASSERT_EQUAL(expectResult, actualResult);
 }
