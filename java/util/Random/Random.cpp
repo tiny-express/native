@@ -180,13 +180,15 @@ void Random::nextBytes(Array<byte> *bytes) {
     int index = 0;
     while (index < len) {
         int randomNumber = nextInt();
+        if (randomNumber < 0) {
         //TODO change to Math::min when merge Math, change 4 = Integer::SIZE/BYTE::SIZE
-        int n = (len - index) <= 4 ? (len - index) : 4;
-        for (n; n >= 1; n--) {
-            index++;
-            //TODO change to BYTE::SIZE
-            randomNumber >>= 8;
-            bytes->push((byte)randomNumber);
+            int n = (len - index) <= 4 ? (len - index) : 4;
+            for (n; n >= 1; n--) {
+                index++;
+                //TODO change to BYTE::SIZE
+                randomNumber >>= 8;
+                bytes->push((byte)randomNumber);
+            }
         }
     }
 }
