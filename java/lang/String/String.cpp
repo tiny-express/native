@@ -26,11 +26,17 @@
 
 #include "String.hpp"
 #include "../../Lang.hpp"
+#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
 String::String() {
 	this->original = strdup("\0");
+	this->size = 0;
+}
+
+String::String(char target) {
+	this->original = strdup((string) &target);
 	this->size = 0;
 }
 
@@ -65,8 +71,8 @@ String::String(const String &target) {
 }
 
 String::String(const std::string &target) {
-    this->original = (string) strdup(target.c_str());
-    this->size = (int) target.size();
+	this->original = (string) strdup(target.c_str());
+	this->size = (int) target.size();
 }
 
 String::~String() {
@@ -79,7 +85,7 @@ String::~String() {
  * @return
  */
 int String::getSize() const {
-    return this->size;
+	return this->size;
 }
 
 /**
@@ -101,10 +107,10 @@ String String::clone() {
  * @return String
  */
 char String::charAt(int index) const{
-	if (( index < 0 ) || ( index > this->size - 1 )) {
-		return '\0';
+	if(index < 0 || index > this->size - 1) {
+		throw IndexOutOfBoundsException();
 	}
-	return this->original[ index ];
+	return (this->original[index]);
 }
 
 /**
@@ -169,6 +175,13 @@ Array<byte> String::getBytes() const {
 	return bytes;
 }
 
+String String::getCharToString(int index) {
+	if (index < 0 || index > this->size - 1) {
+		throw IndexOutOfBoundsException();
+	}
+	return &(this->original[index]);
+}
+
 /**
  * String endswith a suffix
  * @param suffix
@@ -190,7 +203,7 @@ String String::fromCharArray(Array<char> &chars) {
 	register
 #endif
 	int index = 0;
-	
+
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
@@ -229,7 +242,7 @@ int String::indexOf(int ch, int fromIndex) const {
 	register
 #endif
 	int index = 0;
-	
+
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) ch) {
 			return index;
@@ -279,7 +292,7 @@ int String::lastIndexOf(int ch) {
 	register
 #endif
 	int index = 0;
-	
+
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -300,7 +313,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
 	register
 #endif
 	int index = 0;
-	
+
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -349,7 +362,7 @@ int String::lastIndexOf(String str, int fromIndex) const {
 	// Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
-	
+
 }
 
 /**
@@ -416,13 +429,13 @@ Array<String> String::split(String regex) const {
 	register
 #endif
 	int index = 0;
-	
+
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
 	}
 
-    free_pointer_pointer_char(splitStrings);
+	free_pointer_pointer_char(splitStrings);
 	return strings;
 }
 
@@ -461,7 +474,7 @@ boolean String::startsWith(String prefix, int toffset) const {
 	register
 #endif
 	int j = toffset;
-	
+
 	for (; index < prefix_length; index++) {
 		if (prefix.original[ index ] != this->original[ j ]) {
 			return FALSE;
@@ -482,7 +495,7 @@ Array<char> String::toCharArray() const {
 	register
 #endif
 	int index = 0;
-	
+
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
@@ -647,8 +660,10 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::subString(int from, int to) {
-    String result = string_from_to(this->original, from, to);
-    return result;
+	string holder = string_from_to(this->original, from, to);
+	String result = holder;
+	free(holder);
+	return result;
 }
 
 /**
@@ -757,7 +772,7 @@ boolean String::operator<(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -771,7 +786,7 @@ boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -785,7 +800,7 @@ boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
 	}
-	
+
 	return true;
 }
 

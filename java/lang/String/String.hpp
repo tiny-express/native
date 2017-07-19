@@ -36,20 +36,21 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-		
+
 		class String;
-		
+
 		class String :
 				public Object,
-		        public virtual Serializable,
+				public virtual Serializable,
 				public virtual Comparable<String>,
-		        public virtual CharSequence {
+				public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
-		
+
 		public:
 			String();
+			String(char target);
 			String(const_string original);
 			String(string original);
 			String(Array<char> &chars);
@@ -57,9 +58,9 @@ namespace Java {
 			String(const String &target);
 			String(const std::string &target);
 			~String();
-		
+
 		public:
-            int getSize() const;
+			int getSize() const;
 			char charAt(int index) const;
 			int codePointAt();
 			int codePointBefore();
@@ -85,6 +86,7 @@ namespace Java {
 				return true;
 			}
 			Array<byte> getBytes() const;
+			String getCharToString(int index);
 			// Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
@@ -118,7 +120,7 @@ namespace Java {
 			static String valueOf(long target);
 			static String valueOf(float target);
 			static String valueOf(double target);
-		
+
 		public:
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;

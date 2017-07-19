@@ -45,7 +45,7 @@ UUID::UUID() {
  */
 String UUID::digits(long value, int digit) {
 	long longValue = 1L << ( digit * 4 );
-	return Long::toHexString(longValue | ( value & ( longValue - 1 ))).subString(1, 2);
+	return Long::toHexString(longValue | ( value & ( longValue - 1 ))).getCharToString(1);
 }
 
 /**
