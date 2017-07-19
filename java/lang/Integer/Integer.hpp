@@ -36,12 +36,12 @@ using namespace Java::Lang;
 /**
  * A constant holding the maximum value of type int
  */
-static int MAX_VALUE_INTEGER = std::numeric_limits<int>::max(); // 
+static int MAX_VALUE_INTEGER = std::numeric_limits<int>::max(); // 2,147,483,647   2147483647
 
 /**
  * A constant holding the minimum value of type int
  */
-static int MIN_VALUE_INTEGER = std::numeric_limits<int>::min(); // 
+static int MIN_VALUE_INTEGER = std::numeric_limits<int>::min(); // –2,147,483,648  –2147483648
 
 namespace Java {
 	namespace Lang {
@@ -196,13 +196,16 @@ namespace Java {
            //  */
            // static int compareUnsigned(int intInput_1, int intInput_2);
 
-           // /**
-           //  * Decodes a String into an Integer .
-           //  *
-           //  * @param target
-           //  * @return Integer
-           //  */
-           // static Integer decode(String nm);
+           /**
+            * Decodes a String into an Integer .
+            *
+            * @param target
+			* @exception NumberFormatException  if the String does not
+    	    *            contain a parsable integer.
+			*
+            * @return Integer
+            */
+           // static Integer decode(String stringInput);
 
            // /**
            //  * Returns the unsigned quotient of dividing

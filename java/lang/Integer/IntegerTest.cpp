@@ -581,8 +581,45 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerDecode) {
+//     String stringInput;
+//     Integer expectedResult;
+//     Integer actualResult;
 
+//     stringInput = (String) "0";
+//     expectedResult = 0;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "1";
+//     expectedResult = 1;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "-1";
+//     expectedResult = -1;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "13";
+//     expectedResult = 13;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
+//     expectedResult = 2147483647;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "-2147483647"; // MIN_VALUE_INTEGER
+//     expectedResult = -2147483647;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "Not a Number";
+//     expectedResult = ;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
 
 // }
 
