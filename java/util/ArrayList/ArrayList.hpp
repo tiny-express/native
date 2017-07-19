@@ -88,7 +88,7 @@ namespace Java {
 			std::vector<E> original;
 			typedef E *_iterator;
 			typedef const E *_const_iterator;
-			String backup = "[]";
+			String backup;
 
 		public:
 			
@@ -109,11 +109,10 @@ namespace Java {
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-                this->backup = "[]";
+
 			}
 
             ArrayList(const std::initializer_list<E> &target) {
-                this->backup = "[]";
                 for (E item : target) {
                     this->add(item);
                 }
@@ -125,7 +124,7 @@ namespace Java {
 			 * @param c
 			 */
 			ArrayList(Collection<E> &c) {
-                this->backup = "[]";
+
 			}
 			
 			/**
@@ -134,7 +133,6 @@ namespace Java {
 			 * @param initialCapacity
 			 */
 			ArrayList(int initialCapacity) {
-                this->backup = "[]";
 				this->original.resize(initialCapacity);
 			}
 			

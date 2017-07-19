@@ -105,6 +105,7 @@ TEST (JavaLang, ArrayListForEach) {
 }
 
 TEST(JavaUtil, ArrayListToString) {
+    //Give an empty ArrayList<Integer> then compare toString() - Should equal
     ArrayList<Integer> inValidArrayListInteger;
     string result = inValidArrayListInteger.toString();
     string expect = (string) "[]";
