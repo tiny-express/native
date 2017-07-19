@@ -43,10 +43,38 @@ namespace Java {
 			int original;
 			string string_original;
 
-		public:
-			Integer();
+		public:            
+			/**
+             * Integer initialization
+             *
+             * @param original
+             */
+            Integer();
+
+            /**
+             * Integer initialization
+             *
+             * @param original
+             */
 			Integer(int original);
+
+            /**
+             * Integer initialization
+             *
+             * @param string_original
+             */
+            Integer(String stringInput);
+
+            /**
+             * Integer initialization
+             *
+             * @param original
+             */
 			Integer(const Integer &target);
+
+            /**
+             * Integer Destructor
+             */
 			~Integer();
 		
 		public:

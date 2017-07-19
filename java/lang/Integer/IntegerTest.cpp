@@ -32,23 +32,20 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, IntegerConstructor) {
-    // Input an empty value to Integer constructor and assign value - Return integer
-    Integer emptyIntegerConstructor;
-    emptyIntegerConstructor = 3;
-    ASSERT_EQUAL(3, emptyIntegerConstructor.intValue());
+TEST(JavaLang, IntegerConstructor) {
+    // Test Integer::Integer()
+    Integer integerConstructorNoneParameter = 13;
+    ASSERT_EQUAL(13, integerConstructorNoneParameter.intValue() );
 
-    // Given value for Integer constructor and assign value - Return integer
-    Integer validIntegerConstructor = 3;
-    ASSERT_EQUAL(3, validIntegerConstructor.intValue());
+    // Test Integer::Integer(int original)
 
-    // Given string value for Integer constructor and assign value - Return integer
-    Integer validIntegerPointerConstructor = Integer::parseInt("13");
-    ASSERT_EQUAL(13, validIntegerPointerConstructor.intValue());
+    // Test Integer::Integer(String stringInput)
+
+    // Test Integer::Integer(const Integer &integer)
 }
 
-TEST (JavaLang, IntegerComparision) {
-    //Give a valid number and make a comparision
+TEST(JavaLang, IntegerComparision) {
+    // Give a valid number and make a comparision
     Integer validNumberComparision = 2;
     Integer targetNumberComparision;
 
@@ -77,14 +74,14 @@ TEST (JavaLang, IntegerComparision) {
     ASSERT_TRUE(validNumberComparision >= targetNumberComparision);
 }
 
-TEST (JavaLang, IntegerOperator) {
+TEST(JavaLang, IntegerOperator) {
     // Given a valid number
     Integer validNumberOperator = 5;
     Integer targetNumberOperator = 3;
 
     // Make a summation with targetNumber
     Integer summationNumberOperator = 8;
-    ASSERT_TRUE(summationNumberOperator == ( validNumberOperator + targetNumberOperator ));
+    ASSERT_TRUE(summationNumberOperator == (validNumberOperator + targetNumberOperator));
 
     // Make a subtraction with targetNumber
     Integer subtractionNumberOperator = 2;
