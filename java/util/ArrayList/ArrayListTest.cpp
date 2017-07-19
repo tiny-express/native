@@ -107,9 +107,10 @@ TEST (JavaLang, ArrayListForEach) {
 TEST(JavaUtil, ArrayListToString) {
     // Give an ArrayList<Integer> then compare toString() - Should equal
 	ArrayList<Integer> validArraylistInteger = {1, 2, 4, 5};
-	string result = (string) validArraylistInteger.toStdString().c_str();
+	string result = strdup((string) validArraylistInteger.toStdString().c_str());
 	string expect = (string) "[1, 2, 4, 5]";
 	ASSERT_STR(result, expect);
+	free(result);
 
     // Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
     ArrayList<ArrayList<Integer>> arrayListInArrayList;
