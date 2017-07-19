@@ -59,6 +59,7 @@ namespace Java {
 			~String();
 		
 		public:
+            int getSize() const;
 			char charAt(int index) const;
 			int codePointAt();
 			int codePointBefore();
@@ -131,12 +132,7 @@ namespace Java {
 			String operator+=(const String &target);
 			String operator+=(const char &target);
 			String operator+=(const_string target);
-			String subString(int fromIndex) {
-				if (fromIndex < 0 || fromIndex >= this->length()) {
-					return "";
-				}
-				return &( this->original[ fromIndex ] );
-			}
+			String subString(int from, int to);
 
 		public:
 			friend std::ostream &operator<<(std::ostream &os, const String &target) {

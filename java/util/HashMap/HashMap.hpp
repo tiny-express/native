@@ -29,6 +29,7 @@
 
 #include <initializer_list>
 #include <iostream>
+#include "../../lang/String/String.hpp"
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 
@@ -38,6 +39,7 @@ namespace Java {
 		class HashMap : public AbstractMap, public virtual Map<K, V>, public virtual Cloneable, public virtual Serializable {
 		private:
 			std::map<K, V> original;
+			String backup;
 			typedef typename std::map<K, V>::iterator _iterator;
 			typedef typename std::map<K, V>::const_iterator _const_iterator;
 		
@@ -418,35 +420,31 @@ namespace Java {
 			 *
 			 * @return string
 			 */
-			string toString() const {
+			string toString() {
 				if (this->size() == 0) {
-					return strdup("{}");
+					this->backup = "{}";
+					return this->backup.toString();
 				}
-				
-				string builder = strdup("{");
-				
-				int sizeCounter = this->size();
+
+				String mainString = "{";
+				String commaAndSpace = ", ";
+				String colonAndSpace = ": ";
+				String endString = "}";
+				String totalString;
+
 				typename std::map<K, V>::const_iterator it;
 				for (it = this->original.begin(); it != this->original.end(); ++it) {
-					sizeCounter--;
-					
-					if (instanceof<Object>(it->first) && instanceof<Object>(it->second)) {
-						string key = ((Object *) &it->first )->toString();
-						string value = ((Object *) &it->second )->toString();
-						string addCharacter = (string) "";
-						if (sizeCounter > 0) {
-							addCharacter = (string) ", ";
-						}
-						string holder = builder;
-						asprintf(&builder, "%s%s=%s%s%c", builder, key, value, addCharacter, '\0');
-						free(holder);
-					}
+					totalString = it->first.toString();
+					totalString += colonAndSpace;
+					totalString += it->second.toString();
+					totalString += commaAndSpace;
+					mainString += totalString;
 				}
-				
-				string holder = builder;
-				asprintf(&builder, "%s%c%c", builder, '}', '\0');
-				free(holder);
-				return builder;
+
+				mainString = mainString.subString(0, mainString.getSize() - 3);
+				mainString += endString;
+				this->backup = mainString;
+				return this->backup.toString();
 			}
 		};
 		

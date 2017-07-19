@@ -74,6 +74,15 @@ String::~String() {
 }
 
 /**
+ * Return size of String
+ *
+ * @return
+ */
+int String::getSize() const {
+    return this->size;
+}
+
+/**
  * Clone to new object
  *
  * @return String
@@ -627,6 +636,19 @@ String String::valueOf(double target) {
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
+}
+
+/**
+ * Returns a newly constructed string object with its value
+ * initialized to a copy of a substring of this object.
+ *
+ * @param from
+ * @param to
+ * @return String
+ */
+String String::subString(int from, int to) {
+    String result = string_from_to(this->original, from, to);
+    return result;
 }
 
 /**

@@ -411,26 +411,23 @@ TEST (JavaUtil, HashMapToString) {
 	hashMap.put("key16", "value16");
 	hashMap.put("key02", "value02");
 	
-	string expectedResult = (string) "{key02=value02, key1=value1, key16=value16}";
+	string expectedResult = (string) "{key02: value02, key1: value1, key16: value16}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
-	
+
 	// Given another hash map type to test
 	HashMap<String, Integer> anotherHashMap;
 	anotherHashMap.put("some key", 12313);
 	anotherHashMap.put("anotherKey", 76767);
 	
-	expectedResult = (string) "{anotherKey=76767, some key=12313}";
+	expectedResult = (string) "{anotherKey: 76767, some key: 12313}";
 	result = anotherHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
 	
 	// Given empty hash map to test default toString()
 	HashMap<String, Float> emptyHashMap;
-	
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
 }
+
