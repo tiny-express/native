@@ -271,12 +271,17 @@ int Integer::bitCount(int intInput) {
 	return resultBitCount;
 }
 
-byte Integer::byteValue() {
+// byte Integer::byteValue() {
 
+// 	return ;
+// }
 
-}
+// int Integer::compare(int intInput_1, int intInput_2) {
+// 	return ;
 
-boolean Integer::compare(int intInput_1, int intInput_2) {
+// }
 
-	
-}
+// int Integer::compareTo(Integer anotherInteger) {
+
+// 	return ;
+// }
