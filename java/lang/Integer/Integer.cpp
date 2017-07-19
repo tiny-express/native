@@ -25,6 +25,7 @@
  */
 
 #include "Integer.hpp"
+#include "../Math/Math.hpp"
 
 using namespace Java::Lang;
 
@@ -249,4 +250,24 @@ Integer Integer::operator*(const Integer &target) {
  */
 Integer Integer::operator%(const Integer &target) {
 	return ( this->original % target.original );
+}
+
+int Integer::bitCount(int intInput) {
+	int resultBitCount = 0;
+	
+	if ( intInput < 0 ) {
+		resultBitCount = 1;
+		intInput = fabs(intInput);
+	}
+
+	while(intInput != 0) {
+
+		if( (intInput & 1) == 1) {
+			resultBitCount++;
+		}
+
+		intInput = intInput >> 1;
+	}
+
+	return resultBitCount;
 }

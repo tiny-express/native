@@ -137,6 +137,16 @@ namespace Java {
 				std::cout << target.original;
 				return os;
 			}
+
+			/**
+            * Returns the number of one-bits in the
+            * two's complement binary representation
+            * of the specified int value.
+            *
+            * @param int intInput
+            * @return int
+            */
+           static int bitCount(int intInput);
 		};
 	}
 }
