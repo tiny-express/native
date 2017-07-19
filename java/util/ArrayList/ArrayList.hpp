@@ -88,7 +88,8 @@ namespace Java {
 			std::vector<E> original;
 			typedef E *_iterator;
 			typedef const E *_const_iterator;
-			
+			String backup = "[]";
+
 		public:
 			
 			_iterator begin() {
@@ -108,10 +109,11 @@ namespace Java {
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-
+                this->backup = "[]";
 			}
 
             ArrayList(const std::initializer_list<E> &target) {
+                this->backup = "[]";
                 for (E item : target) {
                     this->add(item);
                 }
@@ -123,6 +125,7 @@ namespace Java {
 			 * @param c
 			 */
 			ArrayList(Collection<E> &c) {
+                this->backup = "[]";
 			}
 			
 			/**
@@ -131,6 +134,7 @@ namespace Java {
 			 * @param initialCapacity
 			 */
 			ArrayList(int initialCapacity) {
+                this->backup = "[]";
 				this->original.resize(initialCapacity);
 			}
 			
@@ -138,7 +142,7 @@ namespace Java {
 			 * Destructor ArrayList
 			 */
 			~ArrayList() {
-			
+
 			}
 		
 		public:
@@ -260,8 +264,7 @@ namespace Java {
 			 */
 			E get(int index) const {
 				if (index < 0) {
-					return ( E & )
-					this->original.at(0);
+					return (E &) this->original.at(0);
 				}
 				if (index > this->size() - 1) {
 					return ( E & )
@@ -493,7 +496,11 @@ namespace Java {
 			 *
 			 * @return string
 			 */
-			string toString() const {
+			string toString() {
+                if(this->size() == 0) {
+                    this->backup = "[]";
+                    return this->backup.toString();
+                }
                 String mainString = "[";
                 String commaAndSpace = ", ";
                 String endString = "]";
@@ -505,27 +512,9 @@ namespace Java {
                 }
                 mainString += this->original[this->size() - 1].toString();
                 mainString += endString;
-
-                string stringResult = mainString.toString();
-                return strdup(stringResult);
+                this->backup = mainString;
+                return this->backup.toString();
 			}
-
-            std::string toStdString() {
-                String mainString = "[";
-                String commaAndSpace = ", ";
-                String endString = "]";
-                int index;
-                for (index = 0; index < this->size() - 1; ++index) {
-                    String appendString = this->original[index].toStdString();
-                    appendString += commaAndSpace;
-                    mainString += appendString;
-                }
-                mainString += this->original[this->size() - 1].toStdString();
-                mainString += endString;
-
-                std::string stringResult = mainString.toString();
-                return stringResult;
-            }
 
 			virtual long hashCode() const {
 				//TODO

@@ -59,8 +59,7 @@ namespace Java {
 			double doubleValue() const;
 			
 			string toString() const;
-            std::string toStdString();
-			static Integer parseInt(String target);
+            static Integer parseInt(String target);
 			int compareTo(const Integer &o) const;
 		
 		public:

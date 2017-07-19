@@ -108,15 +108,6 @@ string Integer::toString() const {
 }
 
 /**
- * Integer to std::string
- *
- * @return std::string
- */
-std::string Integer::toStdString() {
-	return this->string_original;
-}
-
-/**
  * Integer to Char
  *
  * @return char
