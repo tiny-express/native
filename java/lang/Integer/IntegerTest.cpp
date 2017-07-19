@@ -373,29 +373,34 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(intInput);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    // intInput = 0;
-    // expectedResult = 0;
-    // actualResult = Integer::bitCount(intInput);
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    intInput = 0;
+    expectedResult = 0;
+    actualResult = Integer::bitCount(intInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
-    // intInput = 1; // 01
-    // expectedResult = 1;
-    // actualResult = Integer::bitCount(intInput);
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    intInput = 1; // 01
+    expectedResult = 1;
+    actualResult = Integer::bitCount(intInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
-    // intInput = -1; // 11
-    // expectedResult = 2;
-    // actualResult = Integer::bitCount(intInput);
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    intInput = -1; // 11
+    expectedResult = 2;
+    actualResult = Integer::bitCount(intInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
 
-    // intInput = MAX_VALUE_INTEGER; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
-    // expectedResult = 31;
-    // actualResult = Integer::bitCount(intInput);
-    // ASSERT_EQUAL(expectedResult, actualResult);
-
+    intInput = MAX_VALUE_INTEGER; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
+    expectedResult = 31;
+    actualResult = Integer::bitCount(intInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
+// TODO(thoangminh): Check the case below:
     // intInput = MIN_VALUE_INTEGER; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
     // expectedResult = 33;
     // actualResult = Integer::bitCount(intInput);
     // ASSERT_EQUAL(expectedResult, actualResult);
+
+}
+
+TEST(JavaLang, IntegerByteValue) {
+
 
 }

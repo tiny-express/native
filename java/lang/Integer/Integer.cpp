@@ -25,7 +25,6 @@
  */
 
 #include "Integer.hpp"
-#include "../Math/Math.hpp"
 
 using namespace Java::Lang;
 
@@ -257,10 +256,10 @@ int Integer::bitCount(int intInput) {
 	
 	if ( intInput < 0 ) {
 		resultBitCount = 1;
-		intInput = fabs(intInput);
+		intInput = -intInput;
 	}
 
-	while(intInput != 0) {
+	while( (intInput != 0) || resultBitCount == 32) {
 
 		if( (intInput & 1) == 1) {
 			resultBitCount++;
@@ -270,4 +269,9 @@ int Integer::bitCount(int intInput) {
 	}
 
 	return resultBitCount;
+}
+
+byte Integer::byteValue() {
+
+	
 }
