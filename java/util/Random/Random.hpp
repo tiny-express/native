@@ -43,8 +43,8 @@ namespace Java {
             static const long ADDEND = 0xBL;
             static constexpr long MASK = (1L << 48) - 1;
             static constexpr double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53)
-            boolean haveNextNextGaussian = false;
-            double nextNextGaussian;
+            boolean haveNextGaussianNumber = false;
+            double nextGaussianNumber;
             static long seedOffset;
 
         public:

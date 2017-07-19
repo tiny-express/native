@@ -226,9 +226,9 @@ float Random::nextFloat() {
  * @return double
  */
 double Random::nextGaussian() {
-    if (haveNextNextGaussian) {
-        haveNextNextGaussian = false;
-        return nextNextGaussian;
+    if (haveNextGaussianNumber) {
+        haveNextGaussianNumber = false;
+        return nextGaussianNumber;
     }
     else {
         double value1, value2, squareSum;
@@ -238,8 +238,8 @@ double Random::nextGaussian() {
             squareSum = value1 * value1 + value2 * value2;
         } while (squareSum >= 1 || squareSum == 0);
         double multiplier = sqrt(-2 * log(squareSum) / squareSum);
-        nextNextGaussian = value2 * multiplier;
-        haveNextNextGaussian = true;
+        nextGaussianNumber = value2 * multiplier;
+        haveNextGaussianNumber = true;
         return value1 * multiplier;
     }
 }
@@ -251,5 +251,5 @@ double Random::nextGaussian() {
  */
 void Random::setSeed(long seed) {
     this->seed.store(initialScramble(seed));
-    haveNextNextGaussian = false;
+    haveNextGaussianNumber = false;
 }
