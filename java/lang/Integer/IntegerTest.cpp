@@ -623,8 +623,71 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerDivideUnsigned) {
+//     int dividend;
+//     int divisor;
+//     int expectedResult;
+//     int actualResult;
 
+//     dividend = 10;
+//     divisor = 2;
+//     expectedResult = 5;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = -10;
+//     divisor = 5;
+//     expectedResult = 2;
+//     actualResult = ;
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = 10;
+//     divisor = -5;
+//     expectedResult = 2;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = -10;
+//     divisor = -5;
+//     expectedResult = 2;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = -10.7;
+//     divisor = 5.6;
+//     expectedResult = 2;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = MAX_VALUE_INTEGER;
+//     divisor = -2;
+//     expectedResult = MAX_VALUE_INTEGER / 2;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = MIN_VALUE_INTEGER;
+//     divisor = 2;
+//     expectedResult = -MIN_VALUE_INTEGER / 2;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = 10;
+//     divisor = 0;
+//     expectedResult = ;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = -10;
+//     divisor = 0;
+//     expectedResult = ;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     dividend = 0;
+//     divisor = 0;
+//     expectedResult = 0;
+//     actualResult = Integer::divideUnsigned(dividend, divisor);
+//     ASSERT_EQUAL(expectedResult, actualResult);
 
 // }
 
