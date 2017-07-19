@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../String/String.hpp"
@@ -109,6 +109,22 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
 
+TEST(JavaLang, ArrayConstructorWithSize) {
+    // Give an Array use constructor with contain size then assert size - Should equal
+	Array<int> validArray(10);
+	int expect = 10;
+	int result = validArray.length;
+	ASSERT_EQUAL(expect, result);
+
+    int index;
+    for(index = 0; index < 10; index++) {
+        validArray.push(index);
+        expect = index + 1;
+        result = validArray.length;
+        ASSERT_EQUAL(expect, result);
+    }
+}
+
 TEST(JavaLang, ObjectConstructor) {
 	// Normal declaration
 	Object objectNormalDeclaration;
@@ -128,7 +144,7 @@ TEST(JavaLang, ObjectEquals) {
 	// Supported for == & != operator
 	ASSERT_FALSE(object1 == object2);
 	ASSERT_TRUE(object1 != object2);
-	
+
 	// Given one instance of Object - Return equal with itself
 	Object object3;
 	ASSERT_TRUE(object3.equals(object3));

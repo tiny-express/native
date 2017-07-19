@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../String/String.hpp"
@@ -201,32 +201,32 @@ TEST (JavaLang, StringLength) {
 
 /** This test case is made based on pattern_test.c */
 TEST (JavaLang, StringMatches) {
-	// Init params for test string matches
-	String emailPattern = EMAIL_PATTERN;
-	String phoneNumberPattern = PHONE_PATTERN;
-
-	// Test true with correct email format
-	String correctEmail = "neacao@gmail.com";
-	ASSERT_TRUE(correctEmail.matches(emailPattern));
-
-	// Test fail with wrong email format
-	String wrongEmail = "something@notcorrect";
-	ASSERT_FALSE(wrongEmail.matches(emailPattern));
-
-	// Test true with correct phone number format
-	String correctPhoneNumber = "+15005550006";
-	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
-
-	// Test fail with wrong email format
-	String wrongPhoneNumber = "001678080147";
-	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
-}
-
-TEST (JavaLang, StringReplace) {
-	String textPlus = "Hello Hello Hello ";
-
-	String result = textPlus.replace('e', 'i');
-	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
+//	// Init params for test string matches
+//	String emailPattern = EMAIL_PATTERN;
+//	String phoneNumberPattern = PHONE_PATTERN;
+//
+//	// Test true with correct email format
+//	String correctEmail = "neacao@gmail.com";
+//	ASSERT_TRUE(correctEmail.matches(emailPattern));
+//
+//	// Test fail with wrong email format
+//	String wrongEmail = "something@notcorrect";
+//	ASSERT_FALSE(wrongEmail.matches(emailPattern));
+//
+//	// Test true with correct phone number format
+//	String correctPhoneNumber = "+15005550006";
+//	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+//
+//	// Test fail with wrong email format
+//	String wrongPhoneNumber = "001678080147";
+//	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
+//}
+//
+//TEST (JavaLang, StringReplace) {
+//	String textPlus = "Hello Hello Hello ";
+//
+//	String result = textPlus.replace('e', 'i');
+//	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
 
 //	String String_string1 = "Hello";
 //	String String_string2 = "Phuoc";

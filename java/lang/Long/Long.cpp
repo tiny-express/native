@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -554,10 +554,7 @@ string Long::toString() const {
  * @return String
  */
 string Long::toString(long i) {
-    /*
-     * TODO: Fix this method because object result will be delete before return
-     */
-    Long result = i;
+    static Long result = i;
     return result.toString();
 }
 

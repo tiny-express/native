@@ -1,61 +1,51 @@
-# Native Library
+ # Native Library
+ [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
+ &nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
+ &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
+ &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
+ ![Library Structure](misc/native.png)
 
-[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
-&nbsp;[![Support Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-blue.svg)]()&nbsp;&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
-
-**Native Library** provides low-level optimization and productivity for C/C++ application.
+**Native Library** provides a low-level optimization with productivity for C/C++ application.
 
 Beside standard library, we would like to have a greater customization with important goals:
 
-- Blazing fast performance with small footprint and low-level access with GAS & C
+- Blazing fast performance, small footprint & low-level access with GAS & C
 - Powerful structured programming in C++ for scalability
-- Awesome syntactically enhancement with C++ customization
-- Java standard packages for productivity & maintainability
-- Reduce memory leak via automatic storage and object oriented instead of pointer
-- Support third-party services for business features
+- Syntactically enhancement with C++ operators & walk through
+- Provide rich Java standard packages for productivity & maintainability
+- Zero memory leak with automatic storage and avoid NullPointerException
 
 This project is also useful for new developers in practical programming.
 
-###  Optimization
-- This library is originally developed in C/C++ so we can make classes go faster by optimizing in GAS for Linux amd64
-- C version of every function should be delivered first
-
-### Useful resources
-- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
-- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
-- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
-- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
-
 ### Getting started
 
-#### Prerequisites
-- [x] CMake ~ 2.8
-- [x] GCC ~ 4.8.1
-- [x] Python ~ 2.7
-- [x] OpenSSL
-- [x] Zlib
-
 #### Installation
-OS X & Linux
 ```bash
 $ git clone https://github.com/foodtiny/native.git
 $ cmake . && make
 $ sudo make install
 ```
 
+
+### Setup for development
+#### Windows
+Install CgyWin64 with dependencies below:
+- CMake
+- Makefile
+- GCC
+- G++
+
+#### Linux and Mac
+Install with apt-get or brew with dependencies below:
+- CMake
+
 #### Test Driven Development
-Install & run mock server for third-party services
+Note: `make leak` is ONLY available for Linux - production environment
 ```bash
-$ sudo apt-get install python-pip
-$ sudo pip install -r misc/requirements.txt
-$ make server
-```
-Open another terminal & debug with unit test
-```bash
-$ cmake . && make unit-test -j8
+$ cmake . && make native_test && make leak
 ```
 
-#### Usages (for Java/C++ Developers)
+#### Hello World Program
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -87,25 +77,9 @@ $ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
 $ ./native
 ```
 
-#### Mock Server
-To test third parties we need to setup a server to mock http request from them.
-By running `make server`, it will serve in http://localhost:9999. You will see `Hi guys!` in there.
-Please keep this terminal running during your development.
-```bash
-$ make server
-```
-
-#### Memory Leak
-Valgrind helps us in checking memory leak, you've just need to run
-```
-$ cmake . && make native_test && make leak
-```
-It will tell you issues relate to memory.
-
 #### Unit Test with C-Unit
 ```cpp
-#define CTEST_MAIN
-#define CTEST_SEGFAULT
+#define TESTING
 #include <native/unit_test.h>
 
 int main(int argc, const char *argv[]) {
@@ -129,10 +103,16 @@ Copyright © 2014-2016 Food Tiny. All rights reserved, except as follows. Code i
 You may obtain a duplicate copy of the same license, titled CC-BY-SA-4.0, at http://creativecommons.org/licenses/by/4.0/.
 Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/LICENSE.docs).
 
+### Useful resources
+- [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
+- [GNU Coding Style for C](https://www.gnu.org/prep/standards/html_node/Writing-C.html)
+- [GNU Coding Style for C++](https://gcc.gnu.org/wiki/CppConventions)
+- [Oracle Java 8 API Documentation](https://docs.oracle.com/javase/8/docs/api/)
+
 # Documentation
 #### Differences
 This library provides Java classes in C++ so its syntax is friendly for
-both programming languges but we still have some issues :
+both programming languages but we still have some issues :
 
 - Namespace - Package
 ```java
@@ -154,15 +134,15 @@ Array<byte> bytes = {};
 ```
 - Interface
 ```
-Comming soon
+Coming soon
 ```
 - Runtime
 ```
-Comming soon
+Coming soon
 ```
 - Garbage Collection
 ```
-Comming soon
+Coming soon
 ```
 
 #### Data Types
@@ -170,20 +150,21 @@ All data types are implemented and ready to use in C++ Application
 - [x] char - Java.Lang.Character
 - [x] byte - Java.Lang.Byte (equivalent with `unsigned char`)
 - [x] string - Java.Lang.String (equivalent with `char*`, Java does not have data type `string`)
+- [x] unicode - java.lang.Character (equivalent with `wchar_t`)
 - [x] short - Java.Lang.Short
 - [x] int - Java.Lang.Integer
 - [x] long - Java.Lang.Long
 - [x] float - Java.Lang.Float
 - [x] double - Java.Lang.Double
 - [x] boolean - Java.Lang.Boolean (equivalent with `bool`)
-- [ ] enum - Java.Lang.Enum
+- [x] enum - Java.Lang.Enum
 
 #### Java Standard Packages
 All Java packages are in transformation so we can have a general look about road map
 
 ##### Java.Lang
 - [ ] Java.Lang.Appendable
-- [ ] Java.Lang.Autocloseable
+- [ ] Java.Lang.AutoCloseable
 - [x] Java.Lang.Boolean
 - [x] Java.Lang.Byte
 - [x] Java.Lang.Character
@@ -282,12 +263,3 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Net.URL
 - [ ] Java.Net.URLEncoder
 - [ ] Java.Net.URLDecoder
-
-#### Additional features outside Java packages
-- [x] Java.Lang.Array
-- [ ] Java.Vendor.AbstractVendor
-- [ ] Java.Vendor.ElasticSearch
-- [ ] Java.Vendor.Etcd
-- [ ] Java.Vendor.Firebase
-- [ ] Java.Vendor.SendGrid
-- [ ] Java.Vendor.Twilio

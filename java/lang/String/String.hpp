@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_STRING_HPP
-#define NATIVE_JAVA_LANG_STRING_HPP
+#ifndef JAVA_LANG_STRING_STRING_HPP_
+#define JAVA_LANG_STRING_STRING_HPP_
 
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
@@ -36,17 +36,18 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-
+		
 		class String;
-
-		class String : public Object,
-					   public virtual Serializable,
-					   public virtual Comparable<String>,
-					   public virtual CharSequence {
+		
+		class String :
+				public Object,
+		                public virtual Serializable,
+				public virtual Comparable<String>,
+		                public virtual CharSequence {
 		private:
 			string original;
 			int size = 0;
-
+		
 		public:
 			String();
 			String(const_string original);
@@ -55,10 +56,9 @@ namespace Java {
 			String(Array<byte> &bytes);
 			String(const String &target);
 			~String();
-
+		
 		public:
 			char charAt(int index) const;
-
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);
@@ -83,7 +83,7 @@ namespace Java {
 				return true;
 			}
 			Array<byte> getBytes() const;
-			//Array<byte> getBytes(const Charset &);
+			// Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
@@ -116,7 +116,7 @@ namespace Java {
 			static String valueOf(long target);
 			static String valueOf(float target);
 			static String valueOf(double target);
-
+		
 		public:
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;
@@ -129,23 +129,27 @@ namespace Java {
 			String operator=(const String &target);
 			String operator+=(const String &target);
 			String operator+=(const char &target);
+			String subString(int fromIndex) {
+				if (fromIndex < 0 || fromIndex >= this->length()) {
+					return "";
+				}
+				return &( this->original[ fromIndex ] );
+			}
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const String &target) {
+				os << target.original;
+				return os;
+			}
+
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;
 				result += target2;
 				return result;
-			};
-
-			//FIXME: Temporary
-			String subString(int fromIndex) {
-				if (fromIndex < 0 || fromIndex >= this->length()) {
-					return "";
-				}
-
-				return &(this->original[fromIndex]);
 			}
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_STRING_HPP
+#endif  // JAVA_LANG_STRING_STRING_HPP_
