@@ -79,11 +79,40 @@ Integer Integer::parseInt(String target) {
 }
 
 /**
+ * Compare with Integer
+ *
+ * @param o
+ * @return int
+ */
+int Integer::compareTo(const Integer &o) const {
+	if (hashCode() == o.hashCode()) {
+		return 0;
+	}
+	if (instanceof<Integer>(o)) {
+		if (original < o.original) {
+			return -1;
+		} else if (original == o.original) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/**
  * Integer to String
  *
  * @return String
  */
 string Integer::toString() const {
+	return this->string_original;
+}
+
+/**
+ * Integer to std::string
+ *
+ * @return std::string
+ */
+std::string Integer::toStdString() {
 	return this->string_original;
 }
 

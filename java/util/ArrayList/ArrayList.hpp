@@ -510,17 +510,17 @@ namespace Java {
                 return strdup(stringResult);
 			}
 
-            std::string toStdString() const {
+            std::string toStdString() {
                 String mainString = "[";
                 String commaAndSpace = ", ";
                 String endString = "]";
                 int index;
                 for (index = 0; index < this->size() - 1; ++index) {
-                    String appendString = this->original[index].toString();
+                    String appendString = this->original[index].toStdString();
                     appendString += commaAndSpace;
                     mainString += appendString;
                 }
-                mainString += this->original[this->size() - 1].toString();
+                mainString += this->original[this->size() - 1].toStdString();
                 mainString += endString;
 
                 std::string stringResult = mainString.toString();

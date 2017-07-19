@@ -64,6 +64,11 @@ String::String(const String &target) {
 	this->size = target.size;
 }
 
+String::String(const std::string &target) {
+    this->original = (string) strdup(target.c_str());
+    this->size = (int) target.size();
+}
+
 String::~String() {
 	free(original);
 }

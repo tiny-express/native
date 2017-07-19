@@ -55,6 +55,7 @@ namespace Java {
 			String(Array<char> &chars);
 			String(Array<byte> &bytes);
 			String(const String &target);
+			String(const std::string &target);
 			~String();
 		
 		public:
