@@ -49,7 +49,7 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			virtual boolean add(E e);
+			virtual boolean add(E element);
 
 			/**
 			 * Inserts the specified element at the specified position in this list (optional operation).
@@ -90,7 +90,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean contains(E e);
+			virtual boolean contains(E element);
 
 			/**
 			 * Returns true if this list contains all of the elements of the specified collection.
@@ -104,7 +104,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual boolean equals(const Object o);
+			virtual boolean equals(const Object object);
 
 			/**
 			 * Returns the element at the specified position in this list.
@@ -125,7 +125,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int indexOf(E e);
+			virtual int indexOf(E element);
 
 			/**
 			 * Returns true if this list contains no elements.
@@ -145,7 +145,7 @@ namespace Java {
 			 * @param o
 			 * @return
 			 */
-			virtual int lastIndexOf(E e);
+			virtual int lastIndexOf(E element);
 
 			/**
 			 * Don't support this method
@@ -187,7 +187,7 @@ namespace Java {
 			 * @param element
 			 * @return E
 			 */
-			virtual E set(int index, E e);
+			virtual E set(int index, E element);
 
 			/**
 			 * Returns the number of elements in this list.

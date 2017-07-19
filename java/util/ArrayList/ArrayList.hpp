@@ -114,7 +114,7 @@ namespace Java {
 			 *
 			 * @param c
 			 */
-			ArrayList(Collection<E> c) {
+			ArrayList(Collection<E> collection) {
 			}
 			
 			/**
@@ -141,8 +141,8 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			boolean add(E e) {
-				this->original.push_back(e);
+			boolean add(E element) {
+				this->original.push_back(element);
 				return true;
 			}
 			
@@ -166,7 +166,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(Collection<E> c) {
+			boolean addAll(Collection<E> collection) {
 				// TODO
 				return true;
 			}
@@ -179,7 +179,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(int index, Collection<E> c) {
+			boolean addAll(int index, Collection<E> collection) {
 				// TODO
 				return true;
 			}
@@ -209,7 +209,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			boolean contains(E e) const {
+			boolean contains(E element) const {
 				// TODO
 				return true;
 			}
@@ -219,7 +219,7 @@ namespace Java {
 			 * @param c
 			 * @return
 			 */
-			boolean containsAll(Collection<Object> c) const {
+			boolean containsAll(Collection<Object> collection) const {
 				return true;
 			}
 			
@@ -267,7 +267,7 @@ namespace Java {
 			 * @param o
 			 * @return int
 			 */
-			int indexOf(E e) const {
+			int indexOf(E element) const {
 				return 0;
 			}
 			
@@ -298,7 +298,7 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(E e) const {
+			int lastIndexOf(E element) const {
 				// TODO
 				return 0;
 			}
@@ -390,7 +390,7 @@ namespace Java {
 			 * @param c
 			 * @return
 			 */
-			boolean retainAll(Collection<Object> c) {
+			boolean retainAll(Collection<Object> collection) {
 				// TODO
 				return true;
 			}
@@ -465,9 +465,9 @@ namespace Java {
 			 * @return Array<T>
 			 */
 			template <class T>
-			Array<T> &toArray(Array<T> a) const {
+			Array<T> &toArray(Array<T> array) const {
 				// TODO
-				return a;
+				return array;
 			}
 			
 			/**
@@ -491,7 +491,7 @@ namespace Java {
 				return 0;
 			}
 			
-			boolean equals(const Object o) const {
+			boolean equals(const Object object) const {
 				return true;
 			}
 
