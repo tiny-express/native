@@ -194,7 +194,7 @@ namespace Java {
            //  * @param target
            //  * @return boolean
            //  */
-           // static boolean compareUnsigned(int x, int y);
+           // static int compareUnsigned(int intInput_1, int intInput_2);
 
            // /**
            //  * Decodes a String into an Integer .
