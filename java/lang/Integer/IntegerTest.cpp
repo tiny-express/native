@@ -436,3 +436,124 @@ TEST(JavaLang, IntegerByteValue) {
     // ASSERT_EQUAL(expectedResult, actualResult);
 
 }
+
+TEST(JavaLang, IntegerCompare) {
+
+    // ASSERT_EQUAL(compare(0 ,0 ) , 0);
+    // ASSERT_EQUAL(compare(0 ,1 ) , -1);
+    // ASSERT_EQUAL(compare(0 ,-1 ) , 1);
+    // ASSERT_EQUAL(compare(0 ,13 ) , -1);
+    // ASSERT_EQUAL(compare(0 ,MAX_VALUE_INTEGER ) , -1);
+    // ASSERT_EQUAL(compare(0 ,MIN_VALUE_INTEGER ) , 1);
+
+    // ASSERT_EQUAL(compare(1 ,0 ) , 1);
+    // ASSERT_EQUAL(compare(1 ,1 ) , 0);
+    // ASSERT_EQUAL(compare(1 ,-1 ) ,1 );
+    // ASSERT_EQUAL(compare(1 ,13 ) , -1);
+    // ASSERT_EQUAL(compare(1 ,MAX_VALUE_INTEGER ) , -1);
+    // ASSERT_EQUAL(compare(1 ,MIN_VALUE_INTEGER ) , 1);
+
+    // ASSERT_EQUAL(compare(-1 ,0 ) , -1);
+    // ASSERT_EQUAL(compare(-1 ,1 ) , -1);
+    // ASSERT_EQUAL(compare(-1 ,-1 ) , 0);
+    // ASSERT_EQUAL(compare(-1 ,13 ) , -1);
+    // ASSERT_EQUAL(compare(-1 ,MAX_VALUE_INTEGER ) , -1);
+    // ASSERT_EQUAL(compare(-1 ,MIN_VALUE_INTEGER ) , 1);
+
+    // ASSERT_EQUAL(compare(13 ,0 ) , 1);
+    // ASSERT_EQUAL(compare(13 ,1 ) , 1);
+    // ASSERT_EQUAL(compare(13 ,-1 ) ,1 );
+    // ASSERT_EQUAL(compare(13 ,13 ) , 0);
+    // ASSERT_EQUAL(compare(13 ,MAX_VALUE_INTEGER ) , -1);
+    // ASSERT_EQUAL(compare(13 ,MIN_VALUE_INTEGER ) , 1);
+
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,0 ) , 1);
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,1 ) , 1);
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,-1 ) , 1);
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,13 ) , 1);
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,MAX_VALUE_INTEGER ) , 0);
+    // ASSERT_EQUAL(compare(MAX_VALUE_INTEGER ,MIN_VALUE_INTEGER ) , 1);
+
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,0 ) , -1);
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,1 ) , -1);
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,-1 ) , -1);
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,13 ) , -1);
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,MAX_VALUE_INTEGER ) , -1);
+    // ASSERT_EQUAL(compare(MIN_VALUE_INTEGER ,MIN_VALUE_INTEGER ) , 0);
+
+}
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }

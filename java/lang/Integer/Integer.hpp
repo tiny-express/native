@@ -171,13 +171,13 @@ namespace Java {
             */
            static byte byteValue();
 
-           // /**
-           //  * Compares two int values numerically.
-           //  *
-           //  * @param target
-           //  * @return boolean
-           //  */
-           // static boolean compare(int x, int y);
+           /**
+            * Compares two int values numerically.
+            *
+            * @param target
+            * @return boolean
+            */
+           static boolean compare(int intInput_1, int intInput_2);
 
            // /**
            //  * Compares two Integer objects numerically.

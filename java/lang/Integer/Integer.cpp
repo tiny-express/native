@@ -273,5 +273,10 @@ int Integer::bitCount(int intInput) {
 
 byte Integer::byteValue() {
 
+
+}
+
+boolean Integer::compare(int intInput_1, int intInput_2) {
+
 	
 }
