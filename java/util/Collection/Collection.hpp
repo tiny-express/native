@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 Food Tiny Project. All rights reserved.
+* Copyright 2017 Food Tiny Project. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef NATIVE_JAVA_UTIL_COLLECTION_HPP
-#define NATIVE_JAVA_UTIL_COLLECTION_HPP
+#ifndef JAVA_UTIL_COLLECTION_HPP_
+#define JAVA_UTIL_COLLECTION_HPP_
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -37,10 +37,10 @@ using namespace Java::Lang;
 
 namespace Java {
 	namespace Util {
-		template <typename E>
+		template <class E>
 		class Collection;
 		
-		template <typename E>
+		template <class E>
 		class Collection : public virtual Iterable<E> {
 		public:
 			/**
@@ -48,7 +48,7 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			virtual boolean add(E &e) = 0;
+			virtual boolean add(E element);
 
 			/**
 			 * Add a Collection element to this collection
@@ -61,19 +61,19 @@ namespace Java {
 			 * Clear all element inside this collection
 			 * @return
 			 */
-			virtual void clear() = 0;
+			virtual void clear();
 
 			/**
 			 * Search for specified object, return true if it occurs
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean contains(E &e) const = 0;
+			virtual boolean contains(E element);
 
 			/**
 			 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
 			 * @param c
-			 * @return booealeam
+			 * @return boolean
 			 */
 //			boolean containsAll(Collection<Object> &c);//FIXME: should to implement foreach first
 
@@ -82,19 +82,19 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean equals(const Object &o) const = 0;
+			virtual boolean equals(const Object object);
 
 			/**
 			 * Make a hashcode through this virtual address on memory
 			 * @return int
 			 */
-			virtual long hashCode() const = 0;
+			virtual long hashCode();
 
 			/**
 			 * A hash code value for this object.
 			 * @return int
 			 */
-			virtual boolean isEmpty() const = 0;
+			virtual boolean isEmpty();
 
 			/**
 			 * Don't support this method
@@ -107,14 +107,14 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			virtual boolean remove(Object &o) = 0;
+			virtual boolean remove(Object object);
 
 			/**
 			 * Remove a collection of object inside this collection, return true if it exits and be removed all also
 			 * @param c
 			 * @return
 			 */
-			virtual boolean removeAll(Collection<Object> &c) = 0;
+			virtual boolean removeAll(Collection<Object> collection);
 
 			/**
 			 * Don't support this method
@@ -133,7 +133,7 @@ namespace Java {
 			 * Return number of element inside this collection
 			 * @return
 			 */
-			virtual int size() const  = 0;
+			virtual int size();
 
 			/**
 			 * Don't support this method
@@ -174,4 +174,4 @@ namespace Java {
 	}
 }
 
-#endif //NATIVE_COLLECTION_HPP
+#endif //JAVA_COLLECTION_HPP_

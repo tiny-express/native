@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_CHARACTER_HPP
-#define NATIVE_JAVA_LANG_CHARACTER_HPP
+#ifndef JAVA_LANG_CHARACTER_HPP_
+#define JAVA_LANG_CHARACTER_HPP_
 
 #include "../CharSequence/CharSequence.hpp"
 
@@ -97,7 +97,7 @@ namespace Java {
              * @see    Character::isLowSurrogate(char)
              * @see    Character.UnicodeBlock#of(int)
              */
-            static boolean isHighSurrogate(wchar_t ch);
+            static boolean isHighSurrogate(unicode ch);
 
             /**
               * Determines if the given {@code char} value is a
@@ -117,7 +117,17 @@ namespace Java {
               *         {@code false} otherwise.
               * @see    Character#isHighSurrogate(char)
               */
-            static boolean isLowSurrogate(wchar_t ch);
+            static boolean isLowSurrogate(unicode ch);
+
+            /**
+             * Determines if the given char value is a Unicode surrogate code unit.
+             * Such values do not represent characters by themselves,
+             * but are used in the representation of supplementary characters in the UTF-16 encoding.
+             *
+             * @param target
+             * @return boolean
+             */
+            static boolean isSurrogate(unicode target);
 
              /**
               * Returns the code point at the given index of the
@@ -140,7 +150,7 @@ namespace Java {
               * {@code index} is negative or not less than
               * {@link CharSequence#length() seq.length()}.
               */
-            static int toCodePoint(wchar_t high, wchar_t low);
+            static int toCodePoint(unicode high, unicode low);
 
             /**
              * Returns the code point at the given index of the
@@ -349,8 +359,14 @@ namespace Java {
             static int codePointBeforeImpl(Array<char> a, int index, int start);
 
             static int codePointCountImpl(Array<char> a, int offset, int count);
+
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const Character &target) {
+                os << target.original;
+                return os;
+            }
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_CHARACTER_HPP
+#endif  // JAVA_LANG_CHARACTER_HPP_

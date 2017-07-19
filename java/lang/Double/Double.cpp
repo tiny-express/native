@@ -28,94 +28,8 @@
 #include "../Object/Object.hpp"
 #include "../Math/Math.hpp"
 #include "../Long/Long.hpp"
-
+#include <algorithm>
 using namespace Java::Lang;
-
-/**
-     * Returns a representation of the specified floating-point value
-     * according to the IEEE 754 floating-point "double
-     * format" bit layout, preserving Not-a-Number (NaN) values.
-     *
-     * Bit 63 (the bit that is selected by the mask
-     * {@code 0x8000000000000000L}) represents the sign of the
-     * floating-point number. Bits
-     * 62-52 (the bits that are selected by the mask
-     * {@code 0x7ff0000000000000L}) represent the exponent. Bits 51-0
-     * (the bits that are selected by the mask
-     * {@code 0x000fffffffffffffL}) represent the significand
-     * (sometimes called the mantissa) of the floating-point number.
-     *
-     * If the argument is positive infinity, the result is
-     * {@code 0x7ff0000000000000L}.
-     *
-     * If the argument is negative infinity, the result is
-     * {@code 0xfff0000000000000L}.
-     *
-     * If the argument is NaN, the result is the {@code long}
-     * integer representing the actual NaN value.  Unlike the
-     * {@code doubleToLongBits} method,
-     * {@code doubleToRawLongBits} does not collapse all the bit
-     * patterns encoding a NaN to a single "canonical" NaN
-     * value.
-     *
-     * In all cases, the result is a {@code long} integer that,
-     * when given to the {@link #longBitsToDouble(long)} method, will
-     * produce a floating-point value the same as the argument to
-     * {@code doubleToRawLongBits}.
-     *
-     * @param   value   a {@code double} precision floating-point number.
-     * @return the bits that represent the floating-point number.
-     */
-static long doubleToRawLongBits(double value);
-
-/**
- * Bit mask to isolate the exponent field of a
- * double.
- */
-static long	EXP_BIT_MASK	= 0x7FF0000000000000L;
-
-/**
- * Bit mask to isolate the significand field of a
- * double
- */
-static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
-
-/**
- * A constant holding the positive infinity of type
- */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
-
-/**
- * A constant holding the negative infinity of type
- */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
-
-/**
- * A constant holding a Not-a-Number (NaN) value of type
- */
-static double NOT_A_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
-
-/**
- * A constant holding the largest positive finite value of type
- */
-static double MAX_VALUE_DOUBLE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
-
-/**
- * A constant holding the smallest positive normal value of type
- */
-static double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
-
-/**
- * A constant holding the smallest positive nonzero value of type
- */
-static double MIN_VALUE_DOUBLE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
-
-/**
- * Minimum exponent a normalized <code>double</code> number may
- * have.  It is equal to the value returned by
- * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
- */
-static int	MIN_EXPONENT	= -1022;
 
 Double::Double() {
 	this->original = 0;
@@ -123,15 +37,11 @@ Double::Double() {
 }
 
 Double::Double(double original) {
-//    if (isNaN(original) || isInfinite(original))
-//        return -1;
-	this->original = original;
-	this->string_original = string_from_double(this->original);
+    this->original = original;
+    this->string_original = string_from_double(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
-//    if (isNaN(original) || isInfinite(original))
-//        return -1;
 	this->original = doubleNumber.original;
 	this->string_original = string_from_double(this->original);
 }
@@ -150,7 +60,7 @@ string Double::toString() const {
 	return (string) this->string_original;
 }
 
-// TODO waiting for FloatingDecimal.toJavaFormatString()
+// TODO(thoangminh): waiting for FloatingDecimal.toJavaFormatString()
 //String Double::toString(double d) {
 //    return FloatingDecimal.toJavaFormatString(d);
 //}
@@ -191,89 +101,71 @@ byte Double::byteValue() const {
 }
 
 Double Double::operator+(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double(this->original + target.original);
 }
 
 Double Double::operator-(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double(this->original - target.original);
 }
 
 Double Double::operator*(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double( this->original * target.original );
 }
 
 Double Double::operator/(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return Double( this->original / target.original );
 }
 
-// /**
-//  * Make a modulo from this Double with target
-//  *
-//  * @return Double
-//  */
-// Double Double::operator%(const Double &target) {
-// 	return ( this->original % target.original );
-// }
-
 boolean Double::operator==(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original == target.original);
+    return (boolean) equals(target.original);
 }
 
 boolean Double::operator!=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (!this->operator==(target));
+    return (boolean) !equals(target.original);
 }
 
 boolean Double::operator<(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original < target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator>(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original > target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator>=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original >= target.original);
+    if (compare(this->doubleValue(), target.doubleValue()) == 1
+            || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator<=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
-    return (boolean) (this->original <= target.original);
+
+    if (compare(this->doubleValue(), target.doubleValue()) == -1
+        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator&&(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (boolean) (this->original && target.original);
 }
 
 boolean Double::operator||(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (boolean) (this->original || target.original);
 }
 
 Double Double::operator=(const Double &target) {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     this->original = target.original;
     free(this->string_original);
     this->string_original = string_from_double(this->original);
@@ -281,60 +173,34 @@ Double Double::operator=(const Double &target) {
 }
 
 Double Double::operator+=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original + target.original);
 }
 
 Double Double::operator-=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original - target.original);
 }
 
 Double Double::operator*=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original * target.original);
 }
 
 Double Double::operator/=(const Double &target) const {
-//    if (isNaN(target.doubleValue()) || isInfinite(target.doubleValue()))
-//        return -1;
     return (Double) (this->original / target.original);
 }
 
 int Double::compare(double double1, double double2) {
-    if (isNaN(double1) || isInfinite(double1))
-        return -9999;
 
-    if (isNaN(double2) || isInfinite(double2))
-        return -9999;
-
-    if (double1 < double2)
-        // Neither value is NaN, thisValue is smaller
-        return -1;
-
-    if (double1 > double2)
-        // Neither value is NaN, thisValue is larger
-        return 1;
-
-    // Cannot use doubleToRawLongBits because of possibility of NaNs.
     long thisBits = Double::doubleToLongBits(double1);
     long anotherBits = Double::doubleToLongBits(double2);
 
     if (thisBits == anotherBits) {
-            // Values are equal
-            return 0;
-
-    } else if (thisBits < anotherBits) {
-            // (-0.0, 0.0) or (!NaN, NaN)
-            return -1;
-
-    } else {
-            // (0.0, -0.0) or (NaN, !NaN)
-            return 1;
+             return 0;
     }
+    if (thisBits < anotherBits) {
+            return -1;
+    }
+
+    return 1;
 }
 
 int Double::compareTo(Double anotherDouble) {
@@ -342,58 +208,60 @@ int Double::compareTo(Double anotherDouble) {
 }
 
 long Double::doubleToLongBits(double valueDouble) {
-    if (isNaN(valueDouble) || isInfinite(valueDouble))
-        return -9999;
-    long doubleToLongBitsResult = doubleToRawLongBits(valueDouble);
-
-    // Check for NaN based on values of bit fields, maximum
-    // exponent and nonzero significand.
-
-    long andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK
-            = doubleToLongBitsResult & EXP_BIT_MASK;
-
-    long andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK
-            = doubleToLongBitsResult & SIGNIF_BIT_MASK;
-
-    boolean isEqualEXP_BIT_MASK
-            = (andOperatorBetweendoubleToLongBitsResultAndEXP_BIT_MASK == EXP_BIT_MASK);
-
-    boolean isNotEqual0L = (andOperatorBetweendoubleToLongBitsResultAndSIGNIF_BIT_MASK != 0L);
-
-    if (isEqualEXP_BIT_MASK && isNotEqual0L )
-        doubleToLongBitsResult = 0x7ff8000000000000L;
-
-    return doubleToLongBitsResult;
+    return doubleToRawLongBits(valueDouble);
 }
 
-// TODO waiting for implement
-long Double::doubleToRawLongBits(double valueDouble) {
-    if (isNaN(valueDouble) || isInfinite(valueDouble))
-        return -9999;
+long Double::doubleToRawLongBits(double doubleInput) {
+    string doubleInputToBinary64StringType;
+    long resultDoubleToRawLongBits;
+    int tempValue;
+    int exponent;
+    int i;
 
+    doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
+
+    exponent = 62;
+    tempValue = 0;
+    resultDoubleToRawLongBits = 0;
+
+    for (i = 1; i <= 63; i++) {
+        if (doubleInputToBinary64StringType[i] == '1') {
+            tempValue = 1;
+       }
+
+        if (doubleInputToBinary64StringType[i] == '0') {
+            tempValue = 0;
+        }
+        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2, exponent);
+        exponent--;
+    }
+
+    if (doubleInputToBinary64StringType[0] == '1') {
+        resultDoubleToRawLongBits =  (-1) * resultDoubleToRawLongBits;
+    }
+
+    free(doubleInputToBinary64StringType);
+    return resultDoubleToRawLongBits;
 }
 
-// TODO Waiting for instanceof , doubleToRawLongBits
-boolean Double::equals(const Double &object) {
-    if (isNaN(object.doubleValue()) || isInfinite(object.doubleValue()))
-        return -1;
+// TODO(thoangminh): Wait for instanceof<>
+boolean Double::equals(const Double &object) const {
     boolean isDouble = instanceof<Double>(object);
     Double* castObjectToDouble = (Double*)&object;
     long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
     long doubleToLongBitsThis = doubleToLongBits(this->original);
     boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
-    return (isDouble && isEqual);
+    return isEqual;
+    //return (isDouble && isEqual);
 }
 
-// TODO waiting for doubleToRawLongBits
 long Double::hashCode() {
     return Double::hashCode(this->original);
 }
 
-// TODO waiting for doubleToRawLongBits
-long Double::hashCode(double valuehashCode) {
-    long bits = doubleToLongBits(valuehashCode);
-    unsigned long rightShiftBits = (unsigned long)bits >> 32;
+long Double::hashCode(double doubleInput) {
+    long bits = doubleToLongBits(doubleInput);
+    long rightShiftBits = bits >> 32;
     return  (bits ^ rightShiftBits);
 }
 
@@ -402,9 +270,9 @@ boolean Double::isFinite(double valueDouble) {
 }
 
 boolean Double::isInfinite(double valueDouble) {
-    boolean condition1 = (valueDouble == POSITIVE_INFINITY_DOUBLE);
-    boolean condition2 = (valueDouble == NEGATIVE_INFINITY_DOUBLE);
-    return ( condition1 || condition2 ) ;
+    boolean isPOSITIVE_INFINITY_DOUBLE = (valueDouble == POSITIVE_INFINITY_DOUBLE);
+    boolean isNEGATIVE_INFINITY_DOUBLE = (valueDouble == NEGATIVE_INFINITY_DOUBLE);
+    return( isPOSITIVE_INFINITY_DOUBLE || isNEGATIVE_INFINITY_DOUBLE ) ;
 }
 
 boolean Double::isInfinite() {
@@ -419,16 +287,23 @@ boolean Double::isNaN() {
     return isNaN(this->original);
 }
 
-// TODO waiting for implement
-double Double::longBitsToDouble(long bits){
+double Double::longBitsToDouble(long longBitsInput) {
+    double resultLongBitsToDouble;
+    string convertLongBitsToBinary64StringType;
 
+    convertLongBitsToBinary64StringType = longBitsToBinary64StringType(longBitsInput);
+
+    resultLongBitsToDouble = binary64StringTypeToDouble(convertLongBitsToBinary64StringType);
+
+    free(convertLongBitsToBinary64StringType);
+    return  resultLongBitsToDouble;
 }
 
 double Double::min(double doubleA, double doubleB) {
     return Math::min(doubleA, doubleB);
 }
 
-// TODO waiting for implement
+// TODO(thoangminh): Wait for build
 //String Double::toHexString(double doubleValue) {
 //    /*
 //     * Modeled after the "a" conversion specifier in C99, section
@@ -482,3 +357,540 @@ double Double::min(double doubleA, double doubleB) {
 //        return answer.toString();
 //    }
 //}
+
+string Double::doubleToBinary32StringType(double doubleInput)
+{
+    string integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    string fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    string doubleInputNormalizeForm = (string) malloc (280 * sizeof(char));
+    string resultDoubleToBinary32StringType = (string) malloc (33 * sizeof(char));
+
+    int powerExponentBase2 = 0;
+    int integerPartDoubleInput;
+
+    int sizeOfIntegerPartNormalizeForm;
+    int sizeOfFractionPartNormalizeForm;
+    int sizeOfDoubleInputNormalizeForm;
+
+    int sizeOfExponentPartBinary32 = 8;
+
+    int i;
+    int index;
+    int indexOfDotDoubleInputNormalizeForm;
+    int indexFirstBit1DoubleInputNormalizeForm;
+    int indexBeginFractionPartResultDoubleToBinary32StringType = 0;
+
+    int exponentBiasBinary32 = 127;
+    int exponentDoubleInput;
+
+    double fractionPartDoubleInput;
+
+    for (i = 0 ; i <= 31; i++) {
+        doubleInputNormalizeForm[i] = '0';
+        resultDoubleToBinary32StringType[i] = '0';
+    }
+
+    for (i = 0 ; i <= 23; i++) {
+        integerPartNormalizeForm[i] = '0';
+        fractionPartNormalizeForm[i] = '0';
+    }
+
+    /** Set end point for string type */
+    integerPartNormalizeForm[24] = '\0';
+    fractionPartNormalizeForm[24] = '\0';
+    doubleInputNormalizeForm[279] = '\0';
+    resultDoubleToBinary32StringType[32] = '\0';
+
+    if (doubleInput >= 0) {
+        resultDoubleToBinary32StringType[0] = '0';
+    }
+
+    if (doubleInput < 0) {
+         resultDoubleToBinary32StringType[0] = '1';
+    }
+
+    if( doubleInput == 0 ) {
+        goto outPut;
+    }
+
+    if( doubleInput == POSITIVE_INFINITY_DOUBLE ) {
+        strcpy(resultDoubleToBinary32StringType, "01111111100000000000000000000000");
+        goto outPut;
+    }
+
+    if( doubleInput == NEGATIVE_INFINITY_DOUBLE ) {
+        strcpy(resultDoubleToBinary32StringType, "11111111100000000000000000000000");
+        goto outPut;
+    }
+
+    if( isNaN(doubleInput) == 1 ){
+    strcpy (resultDoubleToBinary32StringType,     "01111111111111111111111111111111");
+
+    goto outPut;
+}
+
+    /** Get |doubleInput| */
+    doubleInput = fabs(doubleInput);
+
+    /** Get size of integerPartNormalizeForm  */
+    integerPartDoubleInput = (int) floor(doubleInput); // TODO(thoangminh): replace by java.lang.Math when it is completed.
+    sizeOfIntegerPartNormalizeForm = 0;
+
+    if (integerPartDoubleInput == 0) {
+        sizeOfIntegerPartNormalizeForm = 1;
+    }
+
+    if (integerPartDoubleInput != 0) {
+        while (integerPartDoubleInput != 0) {
+            sizeOfIntegerPartNormalizeForm++;
+            integerPartDoubleInput = integerPartDoubleInput >> 1;
+        }
+    }
+
+    integerPartDoubleInput = (int) floor(doubleInput);
+    index = sizeOfIntegerPartNormalizeForm -1;
+    while( integerPartDoubleInput != 0 ) {
+
+        if( (integerPartDoubleInput & 1) == 1 ) {
+            integerPartNormalizeForm[index] = '1';
+        }
+
+        if ( (integerPartDoubleInput & 1) == 0) {
+            integerPartNormalizeForm[index] = '0';
+        }
+
+        index--;
+        integerPartDoubleInput = integerPartDoubleInput >> 1;
+    }
+
+    fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
+    index = 0;
+
+    while ((fractionPartDoubleInput != 0) && (index < 24)) {
+        fractionPartDoubleInput = fractionPartDoubleInput * 2;
+
+        int integerPart = (int) floor(fractionPartDoubleInput);
+
+        if (integerPart == 1) {
+            fractionPartNormalizeForm[index] = '1';
+        }
+
+        if (integerPart == 0) {
+            fractionPartNormalizeForm[index] = '0';
+        }
+
+        index++;
+        fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
+    }
+
+    sizeOfFractionPartNormalizeForm = index;
+
+    /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
+    for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++ ) {
+        doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
+    }
+
+    indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
+
+    doubleInputNormalizeForm[indexOfDotDoubleInputNormalizeForm] = '.';
+
+    /** Copy value from fractionPartNormalizeForm
+     * to doubleInputNormalizeForm
+     */
+    index = indexOfDotDoubleInputNormalizeForm +1;
+    for( i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++ ) {
+        doubleInputNormalizeForm[index]
+                = fractionPartNormalizeForm[i];
+    }
+
+    sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
+                                     + sizeOfFractionPartNormalizeForm;
+
+    indexFirstBit1DoubleInputNormalizeForm = 1;
+    for ( i = 0; i <= sizeOfDoubleInputNormalizeForm; i++ ) {
+        if (doubleInputNormalizeForm[i] == '1') {
+            indexFirstBit1DoubleInputNormalizeForm = i;
+            break;
+        }
+    }
+
+    integerPartDoubleInput =  (int) floor(doubleInput);
+    if (integerPartDoubleInput != 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm -1;
+    }
+
+    if (integerPartDoubleInput == 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm;
+    }
+
+    exponentDoubleInput = powerExponentBase2 + exponentBiasBinary32;
+
+    index = sizeOfExponentPartBinary32;
+
+    while (exponentDoubleInput != 0) {
+        if ( (exponentDoubleInput & 1 ) == 1) {
+            resultDoubleToBinary32StringType[index] = '1';
+        }
+
+        if ( (exponentDoubleInput & 1 ) == 0) {
+            resultDoubleToBinary32StringType[index] = '0';
+        }
+
+        index--;
+        exponentDoubleInput = exponentDoubleInput >> 1;
+    }
+
+    indexBeginFractionPartResultDoubleToBinary32StringType
+            = sizeOfExponentPartBinary32 + 1;
+
+    index = indexBeginFractionPartResultDoubleToBinary32StringType;
+    i = indexFirstBit1DoubleInputNormalizeForm + 1;
+
+    for (index ; index <= 31; index++) {
+        if (i == sizeOfDoubleInputNormalizeForm) {
+            break;
+        }
+
+        if (i == indexOfDotDoubleInputNormalizeForm) {
+            i++;
+        }
+
+        resultDoubleToBinary32StringType[index]
+                = doubleInputNormalizeForm[i];
+        i++;
+    }
+
+    outPut:
+    /** Return resultDoubleToBinary32StringType */
+    free(integerPartNormalizeForm);
+    free(fractionPartNormalizeForm);
+    free(doubleInputNormalizeForm);
+    return  resultDoubleToBinary32StringType;
+
+}
+
+string Double::doubleToBinary64StringType(double doubleInput)
+{
+    string integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
+    string fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
+    string doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
+    string resultDoubleToBinary64StringType = (string) malloc (65 * sizeof(char));
+
+    int powerExponentBase2 = 0;
+    int integerPartDoubleInput;
+
+    int sizeOfIntegerPartNormalizeForm;
+    int sizeOfFractionPartNormalizeForm;
+    int sizeOfDoubleInputNormalizeForm;
+
+    int sizeOfExponentPartBinary64 = 11;
+
+    int i;
+    int index;
+    int indexOfDotDoubleInputNormalizeForm;
+    int indexFirstBit1DoubleInputNormalizeForm;
+    int indexBeginFractionPartResultDoubleToBinary64StringType = 0;
+
+    int exponentBiasBinary64 = 1023;
+    int exponentDoubleInput;
+
+    double fractionPartDoubleInput;
+
+    for (i = 0 ; i<= 63; i++) {
+        doubleInputNormalizeForm[i] = '0';
+        resultDoubleToBinary64StringType[i] = '0';
+    }
+
+    for (i = 0 ; i<= 52; i++) {
+        integerPartNormalizeForm[i] = '0';
+        fractionPartNormalizeForm[i] = '0';
+    }
+
+    /** Set end point for string type */
+    integerPartNormalizeForm[2047] = '\0';
+    fractionPartNormalizeForm[53] = '\0';
+    doubleInputNormalizeForm[2101] = '\0';
+    resultDoubleToBinary64StringType[64] = '\0';
+
+    if ( doubleInput >= 0 ) {
+        resultDoubleToBinary64StringType[0] = '0';
+    }
+
+    if ( doubleInput < 0 ) {
+        resultDoubleToBinary64StringType[0] = '1';
+    }
+
+    if( doubleInput == 0 ) {
+        goto outPut;
+    }
+
+    if( doubleInput == POSITIVE_INFINITY_DOUBLE ) {
+        strcpy (resultDoubleToBinary64StringType,
+                "0111111111110000000000000000000000000000000000000000000000000000");
+
+        goto outPut;
+    }
+
+    if( doubleInput == NEGATIVE_INFINITY_DOUBLE ) {
+        strcpy (resultDoubleToBinary64StringType,
+                "1111111111110000000000000000000000000000000000000000000000000000");
+
+        goto outPut;
+    }
+
+    if( isNaN(doubleInput) == 1 ) {
+        strcpy (resultDoubleToBinary64StringType,
+                "0111111111111111111111111111111111111111111111111111111111111111");
+
+        goto outPut;
+    }
+
+    /** Get |doubleInput| */
+    doubleInput = fabs(doubleInput);
+
+    /** Get size of integerPartNormalizeForm  */
+    integerPartDoubleInput = (int) floor(doubleInput);
+    sizeOfIntegerPartNormalizeForm = 0;
+
+    if (integerPartDoubleInput == 0) {
+        sizeOfIntegerPartNormalizeForm = 1;
+    }
+
+    if (integerPartDoubleInput != 0) {
+        while (integerPartDoubleInput != 0) {
+            sizeOfIntegerPartNormalizeForm++;
+            integerPartDoubleInput = integerPartDoubleInput >> 1;
+        }
+    }
+
+    integerPartDoubleInput = (int) floor(doubleInput);
+    index = sizeOfIntegerPartNormalizeForm -1;
+
+    while ( integerPartDoubleInput != 0 ) {
+
+        if ( (integerPartDoubleInput & 1 ) == 1) {
+            integerPartNormalizeForm[index] = '1';
+        }
+
+        if ( ( integerPartDoubleInput & 1 ) == 0) {
+            integerPartNormalizeForm[index] = '0';
+        }
+
+        index--;
+        integerPartDoubleInput = integerPartDoubleInput >> 1;
+    }
+
+    fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
+    index = 0;
+
+    while ((fractionPartDoubleInput != 0) && (index < 53)) {
+        fractionPartDoubleInput = fractionPartDoubleInput * 2;
+
+        int integerPart = (int) floor(fractionPartDoubleInput);
+
+        if (integerPart == 1) {
+            fractionPartNormalizeForm[index] = '1';
+        }
+
+        if (integerPart == 0) {
+            fractionPartNormalizeForm[index] = '0';
+        }
+
+        index++;
+        fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
+    }
+
+    sizeOfFractionPartNormalizeForm = index;
+
+    /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
+    for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++ ) {
+        doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
+    }
+
+    indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
+
+    doubleInputNormalizeForm[indexOfDotDoubleInputNormalizeForm] = '.';
+
+    /** Copy value from fractionPartNormalizeForm
+     * to doubleInputNormalizeForm
+     */
+    index = indexOfDotDoubleInputNormalizeForm +1;
+    for( i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++ ) {
+        doubleInputNormalizeForm[index]
+                = fractionPartNormalizeForm[i];
+    }
+
+    sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
+                                     + sizeOfFractionPartNormalizeForm;
+
+    /** Assign value to indexFirstBit1DoubleInputNormalizeForm */
+    indexFirstBit1DoubleInputNormalizeForm = 1;
+    for ( i = 0; i <= sizeOfDoubleInputNormalizeForm; i++ ) {
+        if (doubleInputNormalizeForm[i] == '1') {
+            indexFirstBit1DoubleInputNormalizeForm = i;
+            break;
+        }
+    }
+
+    integerPartDoubleInput =  (int) floor(doubleInput);
+    if (integerPartDoubleInput != 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm -1;
+    }
+
+    if (integerPartDoubleInput == 0) {
+        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
+                             - indexFirstBit1DoubleInputNormalizeForm;
+    }
+
+    exponentDoubleInput = powerExponentBase2 + exponentBiasBinary64;
+
+    index = sizeOfExponentPartBinary64;
+
+    while ( exponentDoubleInput != 0 ) {
+
+        if ( (exponentDoubleInput & 1) == 1 ) {
+            resultDoubleToBinary64StringType[index] = '1';
+        }
+
+        if ( (exponentDoubleInput & 1) == 0) {
+            resultDoubleToBinary64StringType[index] = '0';
+        }
+
+        index--;
+        exponentDoubleInput = exponentDoubleInput >> 1;
+    }
+
+    indexBeginFractionPartResultDoubleToBinary64StringType
+            = sizeOfExponentPartBinary64 + 1;
+
+    index = indexBeginFractionPartResultDoubleToBinary64StringType;
+    i = indexFirstBit1DoubleInputNormalizeForm + 1;
+
+    for (index ; index <= 63; index++) {
+        if (i == sizeOfDoubleInputNormalizeForm) {
+            break;
+        }
+
+        if (i == indexOfDotDoubleInputNormalizeForm) {
+            i++;
+        }
+
+        resultDoubleToBinary64StringType[index]
+                = doubleInputNormalizeForm[i];
+        i++;
+    }
+
+    outPut:
+    /** Return resultDoubleToBinary64StringType */
+    free(integerPartNormalizeForm);
+    free(fractionPartNormalizeForm);
+    free(doubleInputNormalizeForm);
+    return  resultDoubleToBinary64StringType;
+}
+
+double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
+    // Create variable
+    int signOfResultbinary64StringTypeToDouble;
+    double exponent;
+    double exponentAdjusted;
+    double mantisaBase10;
+    double resultBinary64StringTypeToDouble;
+
+    int tempValue;
+    int tempExponent;
+    int i;
+
+    // 1. Find signOfResultbinary64StringTypeToDouble
+    signOfResultbinary64StringTypeToDouble = 1;
+
+    if (Binary64StringTypeInput[0] == '1') {
+        signOfResultbinary64StringTypeToDouble = -1;
+    }
+
+    // 2. Convert the exponent from base 2 -> base 10
+    exponent = 0;
+    tempExponent = 10;
+    for (i = 1; i <= 11; i++) {
+        if (Binary64StringTypeInput[i] == '1') {
+            tempValue = 1;
+        }
+
+        if (Binary64StringTypeInput[i] == '0') {
+            tempValue = 0;
+        }
+
+        exponent = exponent + tempValue * pow(2, tempExponent);
+        tempExponent--;
+    }
+    // 3. Find exponentAdjusted
+    exponentAdjusted = exponent - 1023;
+
+    // 4. Convert the mantissa from base 2 -> base 10
+    mantisaBase10 = 0;
+    tempExponent = -1;
+    for (i = 12; i <= 63; i++) {
+        if (Binary64StringTypeInput[i] == '1') {
+            tempValue = 1;
+        }
+
+        if (Binary64StringTypeInput[i] == '0') {
+            tempValue = 0;
+        }
+
+        mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);
+        tempExponent--;
+    }
+
+    // 5. Find the Double precision floating point decimal value
+    resultBinary64StringTypeToDouble
+            = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
+              * pow(2, exponentAdjusted);
+
+    return resultBinary64StringTypeToDouble;
+}
+
+string Double::longBitsToBinary64StringType(long longBitsInput) {
+    string resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
+    int index;
+    int i;
+
+    for (i = 0; i <= 63; i++) {
+        resultLongBitsToBinary64StringType[i] = '0';
+    }
+
+    resultLongBitsToBinary64StringType[64] = '\0';
+
+    if (longBitsInput < 0) {
+        resultLongBitsToBinary64StringType[0] = '1';
+        longBitsInput = -longBitsInput;
+    }
+
+    index = 63;
+    while ( (longBitsInput != 0) || (index > 1)) {
+
+        if ( (longBitsInput & 1) ==1 ) {
+            resultLongBitsToBinary64StringType[index] = '1';
+        }
+
+        if ( (longBitsInput & 1) == 0 ) {
+            resultLongBitsToBinary64StringType[index] = '0';
+        }
+
+        index--;
+        longBitsInput = longBitsInput >> 1;
+    }
+
+    return resultLongBitsToBinary64StringType;
+}
+
+Double Double::valueOf(String stringInput) {
+        return Double::parseDouble(stringInput);
+}
+
+Double Double::valueOf(double doubleInput) {
+    return Double(doubleInput);
+
+}
