@@ -524,7 +524,6 @@ namespace Java {
                 mainString += endString;
 
                 std::string stringResult = mainString.toString();
-                std::cout << stringResult << std::endl;
                 return stringResult;
             }
 
