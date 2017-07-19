@@ -28,39 +28,26 @@
 
 using namespace Java::Lang;
 
-/**
- * Integer initialization
- *
- * @param original
- */
 Integer::Integer() {
 	this->original = 0;
 	this->string_original = string_from_int(this->original);
 }
 
-/**
- * Integer initialization
- *
- * @param original
- */
 Integer::Integer(int original) {
 	this->original = original;
 	this->string_original = string_from_int(this->original);
 }
+// TODO(thoangminh): Enable after finish parseInt(String s, int radix)
+// Integer::Integer(String stringInput) {
+// 	this->original = string_to_int(stringInput.toString());
+// 	this->string_original = stringInput.toString();
+// }
 
-/**
- * Integer initialization
- *
- * @param original
- */
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
 	this->string_original = string_from_int(this->original);
 }
 
-/**
- * Integer Destructor
- */
 Integer::~Integer() {
 	if (this->string_original != NULL)  {
 		free(this->string_original);
@@ -73,9 +60,8 @@ Integer::~Integer() {
  * @param target
  * @return Integer
  */
-Integer Integer::parseInt(String target) {
-	Integer result(string_to_int(target.toString()));
-	return result;
+int Integer::parseInt(String target) {
+	return string_to_int(target.toString());
 }
 
 /**

@@ -33,6 +33,16 @@
 
 using namespace Java::Lang;
 
+/**
+ * A constant holding the maximum value of type int
+ */
+static int MAX_VALUE_INTEGER = std::numeric_limits<int>::max(); // 
+
+/**
+ * A constant holding the minimum value of type int
+ */
+static int MIN_VALUE_INTEGER = std::numeric_limits<int>::min(); // 
+
 namespace Java {
 	namespace Lang {
 		class Integer;
@@ -87,7 +97,7 @@ namespace Java {
 			double doubleValue() const;
 			
 			string toString() const;
-			static Integer parseInt(String target);
+			static int parseInt(String target);
 			int compareTo(const Integer &o) const override {
 				if (hashCode() == o.hashCode()) {
 					return 0;
