@@ -25,10 +25,11 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../StringBuilder/StringBuilder.hpp"
+
 
 using namespace Java::Lang;
 

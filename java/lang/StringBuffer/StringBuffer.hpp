@@ -32,9 +32,10 @@ namespace Java {
     namespace Lang {
         class StringBuffer { //: public CharSequence {
         private:
-            string value;
-            int count;
-            string toStringCache;
+            string value = NULL;
+            string toStringCache = NULL;
+            int currentlength = 0;
+            int currentcapacity = 0;
 
         private:
             //void readObject(ObjectInputStream);
@@ -46,7 +47,9 @@ namespace Java {
 
             StringBuffer(CharSequence *seq);
 
-            StringBuffer(int capacity);
+            explicit StringBuffer(int capacity);
+
+            StringBuffer(String str);
 
             StringBuffer append(Object obj);
 

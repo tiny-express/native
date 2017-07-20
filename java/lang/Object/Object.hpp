@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,17 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_OBJECT_H
-#define NATIVE_JAVA_LANG_OBJECT_H
+#ifndef JAVA_LANG_OBJECT_H
+#define JAVA_LANG_OBJECT_H
 
 extern "C" {
-#include "../../../builtin.h"
+#include "../../../kernel/builtin.h"
 };
 
 #include <algorithm>
 #include <vector>
 #include <map>
 #include <type_traits>
+#include <iostream>
 
 // Define instanceof
 template <typename Base, typename T>
@@ -76,8 +77,19 @@ class Array  {
 private:
 	std::vector<E> original;
 public:
+
+    /**
+     * Array default constructor
+     */
 	Array() {
-	}
+        this->length = 0;
+    }
+
+    /**
+     * Array constructor with std::initializer_list
+     *
+     * @param list
+     */
 	Array(std::initializer_list<E> list) {
 		typename std::initializer_list<E>::iterator it;
 		for (it = list.begin(); it != list.end(); ++it) {
@@ -85,23 +97,76 @@ public:
 		}
 		this->length = original.size();
 	}
-	~Array() {}
+
+    /**
+     *  Array constructor with contain size
+     *
+     * @param containerSize
+     */
+	Array(int containerSize) {
+		this->original.reserve(containerSize);
+        this->length = containerSize;
+	}
+
+    /**
+     * Array destructor
+     */
+	~Array() {
+
+    }
+
+    /**
+     * Property length of Array
+     *
+     * Don't set this property when you coding
+     */
 	int length;
+
+    /**
+     * Get the first element in Array
+     *
+     * @return ArrayIterator<E>
+     */
 	ArrayIterator<E> begin() const {
 		return ArrayIterator<E>(this, 0);
 	}
+
+    /**
+     * Get the final element in Array
+     *
+     * @return ArrayIterator<E>
+     */
 	ArrayIterator<E> end() const {
 		return ArrayIterator<E>(this, this->length);
 	}
+
 public:
+
+    /**
+     * Push new element to end of Array
+     *
+     * @param e
+     */
 	void push(E e) {
 		original.push_back(e);
 		this->length = original.size();
 	}
+
+    /**
+     * Returns the element at the specified position in this Array
+     *
+     * @param index
+     * @return E
+     */
 	E get(const int index) const {
 		return (E) original.at(index);
 	}
 
+    /**
+     * Convert Array to string
+     *
+     * @return string
+     */
 	string toString() {
 		string result = strdup("");
 		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
@@ -116,9 +181,22 @@ public:
 	}
 
 public:
+    /**
+    * Set and get value of element at the specified position in this Array
+    *
+    * @param index
+    * @return E
+    */
 	E &operator[](const int index) {
 		return this->original.at(index);
 	}
+
+    /**
+     * Append a std::initializer_list<E> to this array
+     *
+     * @param list
+     * @return Array<E>
+     */
 	Array<E> operator+=(const std::initializer_list<E> &list) {
 		typename std::initializer_list<E>::iterator it;
 		for (it = list.begin(); it != list.end(); ++it) {
@@ -243,4 +321,4 @@ namespace Java {
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_OBJECT_H
+#endif  // JAVA_LANG_OBJECT_H
