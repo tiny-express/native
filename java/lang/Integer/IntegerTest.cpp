@@ -1273,12 +1273,12 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerLowestOneBit) {
-//     ASSERT_EQUAL(0, Integer::lowestOneBit(0));
-//     ASSERT_EQUAL(1, Integer::lowestOneBit(1));
-//     ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
-//     ASSERT_EQUAL(1, Integer::lowestOneBit(13));
-//     ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE_INTEGER));
-//     ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE_INTEGER));
+    // ASSERT_EQUAL(0, Integer::lowestOneBit(0));
+    // ASSERT_EQUAL(1, Integer::lowestOneBit(1));
+    // ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
+    // ASSERT_EQUAL(1, Integer::lowestOneBit(13));
+    // ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE_INTEGER));
+    // ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE_INTEGER));
 
 // }
 
@@ -1369,6 +1369,31 @@ TEST(JavaLang, IntegerBitCount) {
 //     ASSERT_EQUAL(Integer::min(MIN_VALUE_INTEGER ,13), MIN_VALUE_INTEGER);
 //     ASSERT_EQUAL(Integer::min(MIN_VALUE_INTEGER ,MAX_VALUE_INTEGER), MIN_VALUE_INTEGER);
 //     ASSERT_EQUAL(Integer::min(MIN_VALUE_INTEGER ,MIN_VALUE_INTEGER), MIN_VALUE_INTEGER);
+
+// }
+
+// TEST(JavaLang, IntegerNumberOfLeadingZeros) {
+//     ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
+//     ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
+//     ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
+//     ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
+//     ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE_INTEGER));
+//     ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE_INTEGER));
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
 
 // }
 

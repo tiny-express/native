@@ -355,3 +355,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// int Integer::numberOfLeadingZeros(int i) {
+
+
+// }
