@@ -316,12 +316,12 @@ int Integer::bitCount(int intInput) {
 
 // }
 
-// Integer getInteger(String inputString, int inputInt) {
+// Integer Integer::getInteger(String inputString, int inputInt) {
 
 
 // }
 
-// Integer getInteger(String inputString, Integer inputInteger) {
+// Integer Integer::getInteger(String inputString, Integer inputInteger) {
 
 
 // }
