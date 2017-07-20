@@ -335,3 +335,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// int Integer::highestOneBit(int inputInt)  {
+
+	
+// }
