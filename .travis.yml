@@ -15,7 +15,7 @@ script:
 - ./misc/memory_check
 - make native && sudo make install && sudo ldconfig
 - cd examples/Collection/ArrayList && make
-- cd examples/Collection/HashMap && make
-- cd examples/Collection/Arrays && make
+- cd ../HashMap && make
+- cd ../Arrays && make
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
