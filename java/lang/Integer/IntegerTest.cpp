@@ -586,6 +586,7 @@ TEST(JavaLang, IntegerBitCount) {
 //     Integer expectedResult;
 //     Integer actualResult;
 
+//     // Cast all case of inputing a string of type decimal number
 //     stringInput = (String) "0";
 //     expectedResult = 0;
 //     actualResult = Integer:decode(stringInput);
@@ -607,17 +608,95 @@ TEST(JavaLang, IntegerBitCount) {
 //     ASSERT_TRUE(expectedResult == actualResult);
 
 //     stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
-//     expectedResult = 2147483647;
+//     expectedResult = MAX_VALUE_INTEGER;
 //     actualResult = Integer:decode(stringInput);
 //     ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "-2147483647"; // MIN_VALUE_INTEGER
-//     expectedResult = -2147483647;
+//     stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
+//     expectedResult = MIN_VALUE_INTEGER;
 //     actualResult = Integer:decode(stringInput);
 //     ASSERT_TRUE(expectedResult == actualResult);
 
 //     stringInput = (String) "Not a Number";
 //     expectedResult = ;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+
+//     // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+//     stringInput = (String) "00";
+//     expectedResult = 0;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "01";
+//     expectedResult = 1;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "00001101";
+//     expectedResult = 13;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE_INTEGER
+//     expectedResult = 2147483647;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "0111111111111111111111111111111111111111111";
+//     expectedResult = ; // out of range 
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "011111111111111111111111111111111112222222";
+//     expectedResult = ; // wrong type
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     // Cast all case of inputing a string of type hexadecimal number
+//     stringInput = (String) "0x00";
+//     expectedResult = 0;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#1";
+//     expectedResult = 1;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#FFFFFFFFFFFFFFFF";
+//     expectedResult = -1;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "0xD";
+//     expectedResult = 13;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE_INTEGER
+//     expectedResult = 2147483647;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE_INTEGER
+//     expectedResult = -2147483647;
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#Not a Number";
+//     expectedResult = ; // Not a number
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#213546546";
+//     expectedResult = ; // Wrong type
+//     actualResult = Integer:decode(stringInput);
+//     ASSERT_TRUE(expectedResult == actualResult);
+
+//     stringInput = (String) "#1111FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+//     expectedResult = ; // Out of range
 //     actualResult = Integer:decode(stringInput);
 //     ASSERT_TRUE(expectedResult == actualResult);
 
@@ -844,3 +923,5 @@ TEST(JavaLang, IntegerBitCount) {
 
 
 // }
+
+// TODO(thoangminh): check out of range input for all method later.
