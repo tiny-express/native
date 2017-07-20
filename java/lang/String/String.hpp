@@ -37,8 +37,6 @@ using namespace Java::IO;
 namespace Java {
 	namespace Lang {
 
-		class String;
-
 		class String :
 				public Object,
 				public virtual Serializable,
@@ -134,6 +132,7 @@ namespace Java {
 			String operator+=(const String &target);
 			String operator+=(const char &target);
 			String operator+=(const_string target);
+            String subString(int beginIndex);
 			String subString(int from, int to);
 
 		public:

@@ -175,6 +175,13 @@ Array<byte> String::getBytes() const {
 	return bytes;
 }
 
+/**
+ * Get char to String
+ * This function use for class UUID and Long
+ *
+ * @param index
+ * @return String
+ */
 String String::getCharToString(int index) {
 	if (index < 0 || index > this->size - 1) {
 		throw IndexOutOfBoundsException();
@@ -649,6 +656,17 @@ String String::valueOf(double target) {
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
+}
+
+/**
+ * Returns a newly constructed string object with its value
+ * initialized to a copy of a substring of this object.
+ *
+ * @param beginIndex
+ * @return String
+ */
+String String::subString(int beginIndex) {
+   return this->subString(0, this->size);
 }
 
 /**
