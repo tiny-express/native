@@ -29,6 +29,7 @@
 
 #include "../Collection/Collection.hpp"
 #include "../Comparator/Comparator.hpp"
+#include "../../lang/Exception/Exception.hpp"
 #include <vector>
 
 namespace Java {
@@ -106,7 +107,22 @@ namespace Java {
             virtual ~PriorityQueue() { }
 
         public:
-            
+            /**
+             *
+             * @param target
+             * @return
+             */
+            boolean add(const E &target) {
+                this->original.push_back(target);
+                try {
+                    std::make_heap(this->original.begin(), this->original.end());
+                }
+                catch (Exception ex){
+                    throw "";
+                    // TODO: throw ClassCastException
+                }
+                return true;
+            }
         };
     }
 }
