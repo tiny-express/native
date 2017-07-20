@@ -364,3 +364,8 @@ int Integer::bitCount(int intInput) {
 int Integer::parseInt(String inputString) {
 	return string_to_int(inputString.toString());
 }
+
+// int Integer::parseUnsignedInt(String inputString, int radix) {
+
+
+// }

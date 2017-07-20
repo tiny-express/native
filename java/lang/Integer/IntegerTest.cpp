@@ -1387,23 +1387,25 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test Integer::parseInt(String inputString, int radix)
 // TEST(JavaLang, IntegerParseInt) {
-//     ASSERT_EQUAL(Integer::parseInt((String)"0", 10), 0);
-//     ASSERT_EQUAL(Integer::parseInt((String)"473", 10), 473);
-//     ASSERT_EQUAL(Integer::parseInt((String)"+42", 10), 42);
-//     ASSERT_EQUAL(Integer::parseInt((String)"-0", 10), 0);
-//     ASSERT_EQUAL(Integer::parseInt((String)"-FF", 16), -255);
-//     ASSERT_EQUAL(Integer::parseInt((String)"1100110", 2), 102);
-//     ASSERT_EQUAL(Integer::parseInt((String)"2147483647", 10), 2147483647);
-//     ASSERT_EQUAL(Integer::parseInt((String)"-2147483648", 10), -2147483648);
-//     ASSERT_EQUAL(Integer::parseInt((String)"2147483648", 10) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseInt((String)"99", 8) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseInt((String)"Kona", 10) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseInt((String)"Kona", 27), 411787);
+    // ASSERT_EQUAL(Integer::parseInt((String)"0", 10), 0);
+    // ASSERT_EQUAL(Integer::parseInt((String)"473", 10), 473);
+    // ASSERT_EQUAL(Integer::parseInt((String)"+42", 10), 42);
+    // ASSERT_EQUAL(Integer::parseInt((String)"-0", 10), 0);
+    // ASSERT_EQUAL(Integer::parseInt((String)"-FF", 16), -255);
+    // ASSERT_EQUAL(Integer::parseInt((String)"1100110", 2), 102);
+    // ASSERT_EQUAL(Integer::parseInt((String)"2147483647", 10), 2147483647);
+    // ASSERT_EQUAL(Integer::parseInt((String)"-2147483648", 10), -2147483648);
+    // ASSERT_EQUAL(Integer::parseInt((String)"2147483648", 10) throws a NumberFormatException);
+    // ASSERT_EQUAL(Integer::parseInt((String)"99", 8) throws a NumberFormatException);
+    // ASSERT_EQUAL(Integer::parseInt((String)"Kona", 10) throws a NumberFormatException);
+    // ASSERT_EQUAL(Integer::parseInt((String)"Kona", 27), 411787);
 
 // }
 
-// TEST(JavaLang, IntegerParseInt) {
+// Test Integer::parseInt(String inputString)
+// TEST(JavaLang, IntegerParseInt2) {
 //     String stringInput;
 //     int expectedResult;
 //     int actualResult;
@@ -1451,8 +1453,19 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerParseUnsignedInt) {
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"0", 10), 0);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"473", 10), 473);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"+42", 10), 42);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-0", 10), 0);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-FF", 16), -255); throws a NumberFormatException
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"1100110", 2), 102);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"2147483647", 10), 2147483647);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-2147483648", 10), -2147483648); throws a NumberFormatException
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"2147483648", 10) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"99", 8) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"Kona", 10) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"Kona", 27), 411787);
 
 // }
 
