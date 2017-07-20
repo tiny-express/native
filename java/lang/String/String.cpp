@@ -182,7 +182,7 @@ Array<byte> String::getBytes() const {
  * @param index
  * @return String
  */
-String String::getCharToString(int index) {
+String String::getStringFromIndex(int index) {
 	if (index < 0 || index > this->size - 1) {
 		throw IndexOutOfBoundsException();
 	}

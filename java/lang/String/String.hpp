@@ -84,7 +84,7 @@ namespace Java {
 				return true;
 			}
 			Array<byte> getBytes() const;
-			String getCharToString(int index);
+			String getStringFromIndex(int index);
 			// Array<byte> getBytes(const Charset &);
 			static String fromCharArray(Array<char> &chars);
 			int indexOf(int ch) const;
