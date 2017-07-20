@@ -73,7 +73,7 @@ namespace Java {
              *
              * @param string_original
              */
-            Integer(String stringInput);
+            Integer(String inputStringtringInput);
 
             /**
              * Integer initialization
@@ -205,7 +205,7 @@ namespace Java {
 			*
             * @return Integer
             */
-           // static Integer decode(String stringInput);
+           // static Integer decode(String inputStringtringInput);
 
            // /**
            //  * Returns the unsigned quotient of dividing
@@ -374,7 +374,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int parseInt(String s, int radix);
+           // static int parseInt(String inputString, int radix);
 
            // *
            //  * Parses the string argument as an unsigned
@@ -383,7 +383,7 @@ namespace Java {
            //  * @param target
            //  * @return int
             
-           // static int parseUnsignedInt(String s, int radix);
+           // static int parseUnsignedInt(String inputString, int radix);
 
            // /**
            //  * Parses the string argument as
@@ -392,7 +392,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int parseUnsignedInt(String s);
+           // static int parseUnsignedInt(String inputString);
 
            // /**
            //  * Returns the unsigned remainder from dividing
@@ -558,7 +558,7 @@ namespace Java {
            //  * @param target
            //  * @return Integer
            //  */
-           // static Integer valueOf(String s);
+           // static Integer valueOf(String inputString);
 
            // /**
            //  * Returns an Integer instance representing
@@ -574,10 +574,10 @@ namespace Java {
            //  * holding the value extracted from the specified String
            //  * when parsed with the radix given by the second argument.
            //  *
-           //  * @param String stringInput, int radixIntInput
+           //  * @param String inputStringtringInput, int radixIntInput
            //  * @return Integer
            //  */
-           // static Integer valueOf(String stringInput, int radixIntInput);
+           // static Integer valueOf(String inputStringtringInput, int radixIntInput);
 		};
 	}
 }

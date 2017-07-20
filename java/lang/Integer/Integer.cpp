@@ -37,8 +37,8 @@ Integer::Integer(int original) {
 	this->original = original;
 	this->string_original = string_from_int(this->original);
 }
-// TODO(thoangminh): Enable after finish parseInt(String s, int radix)
-// Integer::Integer(String stringInput) {
+// TODO(thoangminh): Enable after finish parseInt(String inputString, int radix)
+// Integer::Integer(String inputStringtringInput) {
 // 	this->original = string_to_int(stringInput.toString());
 // 	this->string_original = stringInput.toString();
 // }
@@ -291,7 +291,7 @@ int Integer::bitCount(int intInput) {
 // 	return ;
 // }
 
-// Integer Integer::decode(String stringInput) {
+// Integer Integer::decode(String inputStringtringInput) {
 
 
 // }
@@ -362,6 +362,11 @@ int Integer::bitCount(int intInput) {
 // }
 
 // int Integer::numberOfTrailingZeros(int i) {
+
+
+// }
+
+// int Integer::parseInt(String inputString, int radix) {
 
 
 // }

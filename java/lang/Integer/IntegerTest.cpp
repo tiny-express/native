@@ -1,27 +1,27 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ Copyright 2017 Food Tiny Project. All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above
- * copyright notice, this list of conditions and the following disclaimer
- * in the documentation and/or other materials provided with the
- * distribution.
+ Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 extern "C" {
 #include "../../../kernel/test.h"
@@ -106,16 +106,6 @@ TEST(JavaLang, IntegerOperator) {
     // Make a modulo with targetNumber
     Integer modNumberOperator = 2;
     ASSERT_TRUE(modNumberOperator == ( validNumberOperator % targetNumberOperator ));
-
-}
-
-TEST(JavaLang, IntegerParseInt) {
-#ifdef __APPLE__
-    return;
-#endif
-    // Given value for Integer constructor and assign value - Return integer
-    Integer validIntegerPointerParseInt = Integer::parseInt("6");
-    ASSERT_EQUAL(6, validIntegerPointerParseInt.intValue());
 
 }
 
@@ -586,41 +576,46 @@ TEST(JavaLang, IntegerBitCount) {
 //     Integer expectedResult;
 //     Integer actualResult;
 
-//     // Cast all case of inputing a string of type decimal number
-//     stringInput = (String) "0";
-//     expectedResult = 0;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // // Cast all case of inputing a string of type decimal number
+    // stringInput = (String) "0";
+    // expectedResult = 0;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "1";
-//     expectedResult = 1;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "1";
+    // expectedResult = 1;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "-1";
-//     expectedResult = -1;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "-1";
+    // expectedResult = -1;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "13";
-//     expectedResult = 13;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "13";
+    // expectedResult = 13;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
-//     expectedResult = MAX_VALUE_INTEGER;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
+    // expectedResult = MAX_VALUE_INTEGER;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
-//     expectedResult = MIN_VALUE_INTEGER;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
+    // expectedResult = MIN_VALUE_INTEGER;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
-//     stringInput = (String) "Not a Number";
-//     expectedResult = ;
-//     actualResult = Integer:decode(stringInput);
-//     ASSERT_TRUE(expectedResult == actualResult);
+    // stringInput = (String) "Not a Number";
+    // expectedResult = ;
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
+
+    // stringInput = (String) "12345678901234567890123456789";
+    // expectedResult = ; // out of range
+    // actualResult = Integer:decode(stringInput);
+    // ASSERT_TRUE(expectedResult == actualResult);
 
 
 //     // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
@@ -1392,8 +1387,19 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerParseInt) {
+//     ASSERT_EQUAL(Integer::parseInt((String)"0", 10), 0);
+//     ASSERT_EQUAL(Integer::parseInt((String)"473", 10), 473);
+//     ASSERT_EQUAL(Integer::parseInt((String)"+42", 10), 42);
+//     ASSERT_EQUAL(Integer::parseInt((String)"-0", 10), 0);
+//     ASSERT_EQUAL(Integer::parseInt((String)"-FF", 16), -255);
+//     ASSERT_EQUAL(Integer::parseInt((String)"1100110", 2), 102);
+//     ASSERT_EQUAL(Integer::parseInt((String)"2147483647", 10), 2147483647);
+//     ASSERT_EQUAL(Integer::parseInt((String)"-2147483648", 10), -2147483648);
+//     ASSERT_EQUAL(Integer::parseInt((String)"2147483648", 10) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseInt((String)"99", 8) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseInt((String)"Kona", 10) throws a NumberFormatException);
+//     ASSERT_EQUAL(Integer::parseInt((String)"Kona", 27), 411787);
 
 // }
 
