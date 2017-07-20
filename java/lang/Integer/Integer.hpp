@@ -61,7 +61,7 @@ namespace Java {
 			
 			string toString() const;
             static Integer parseInt(String target);
-			int compareTo(const Integer &o) const;
+			int compareTo(const Integer &target) const;
 		
 		public:
 			Integer operator=(const Integer &target);

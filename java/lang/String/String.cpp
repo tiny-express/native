@@ -26,7 +26,7 @@
 
 #include "String.hpp"
 #include "../../Lang.hpp"
-#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -108,7 +108,7 @@ String String::clone() {
  */
 char String::charAt(int index) const{
 	if(index < 0 || index > this->size - 1) {
-		throw IndexOutOfBoundsException();
+		throw StringIndexOutOfBoundsException("String index out of range");
 	}
 	return (this->original[index]);
 }
@@ -184,7 +184,7 @@ Array<byte> String::getBytes() const {
  */
 String String::getStringFromIndex(int index) {
 	if (index < 0 || index > this->size - 1) {
-		throw IndexOutOfBoundsException();
+		throw StringIndexOutOfBoundsException("String index out of range");
 	}
 	return &(this->original[index]);
 }
@@ -467,26 +467,25 @@ boolean String::startsWith(String prefix, int toffset) const {
 	if (this->original == NULL || prefix.original == NULL || toffset < 0) {
 		return FALSE;
 	}
-	int original_length = length_pointer_char(this->original);
-	int prefix_length = length_pointer_char(prefix.original);
-	if (original_length < prefix_length || toffset > ( original_length - prefix_length )) {
+	int originalLength = length_pointer_char(this->original);
+	int prefixLength = length_pointer_char(prefix.original);
+	if (originalLength < prefixLength || toffset > ( originalLength - prefixLength )) {
 		return FALSE;
 	}
 #ifdef __linux__
 	register
 #endif
-	int index = 0;
+	int firstIndex = 0;
 
 #ifdef __linux__
 	register
 #endif
-	int j = toffset;
-
-	for (; index < prefix_length; index++) {
-		if (prefix.original[ index ] != this->original[ j ]) {
+	int secondIndex = toffset;
+	for (; firstIndex < prefixLength; firstIndex++) {
+		if (prefix.original[ firstIndex ] != this->original[ secondIndex ]) {
 			return FALSE;
 		}
-		j++;
+		secondIndex++;
 	}
 	return TRUE;
 }
@@ -666,7 +665,7 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::subString(int beginIndex) {
-   return this->subString(0, this->size);
+   return this->subString(beginIndex, this->size);
 }
 
 /**
@@ -678,7 +677,7 @@ String String::subString(int beginIndex) {
  * @return String
  */
 String String::subString(int from, int to) {
-	string holder = string_from_to(this->original, from, to);
+	string holder = string_from_to(this->original, from, to + 1);
 	String result = holder;
 	free(holder);
 	return result;

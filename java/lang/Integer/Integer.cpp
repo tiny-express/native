@@ -81,17 +81,17 @@ Integer Integer::parseInt(String target) {
 /**
  * Compare with Integer
  *
- * @param o
+ * @param target
  * @return int
  */
-int Integer::compareTo(const Integer &o) const {
-	if (hashCode() == o.hashCode()) {
+int Integer::compareTo(const Integer &target) const {
+	if (hashCode() == target.hashCode()) {
 		return 0;
 	}
-	if (instanceof<Integer>(o)) {
-		if (original < o.original) {
+	if (instanceof<Integer>(target)) {
+		if (original < target.original) {
 			return -1;
-		} else if (original == o.original) {
+		} else if (original == target.original) {
 			return 0;
 		}
 	}

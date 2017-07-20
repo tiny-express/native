@@ -426,7 +426,7 @@ namespace Java {
 					return this->backup.toString();
 				}
 
-				String mainString = "{";
+				String startHashMap = "{";
 				String commaAndSpace = ", ";
 				String colonAndSpace = ": ";
 				String endString = "}";
@@ -438,12 +438,12 @@ namespace Java {
 					totalString += colonAndSpace;
 					totalString += it->second.toString();
 					totalString += commaAndSpace;
-					mainString += totalString;
+					startHashMap += totalString;
 				}
 
-				mainString = mainString.subString(0, mainString.getSize() - 3);
-				mainString += endString;
-				this->backup = mainString;
+				startHashMap = startHashMap.subString(0, startHashMap.getSize() - 4);
+				startHashMap += endString;
+				this->backup = startHashMap;
 				return this->backup.toString();
 			}
 		};

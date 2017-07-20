@@ -500,18 +500,18 @@ namespace Java {
                     this->backup = "[]";
                     return this->backup.toString();
                 }
-                String mainString = "[";
+                String startArrayList = "[";
                 String commaAndSpace = ", ";
                 String endString = "]";
                 int index;
                 for (index = 0; index < this->size() - 1; ++index) {
                     String appendString = this->original[index].toString();
                     appendString += commaAndSpace;
-                    mainString += appendString;
+                    startArrayList += appendString;
                 }
-                mainString += this->original[this->size() - 1].toString();
-                mainString += endString;
-                this->backup = mainString;
+                startArrayList += this->original[this->size() - 1].toString();
+                startArrayList += endString;
+                this->backup = startArrayList;
                 return this->backup.toString();
 			}
 			

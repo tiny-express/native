@@ -32,7 +32,7 @@ extern "C" {
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
 #include "../../Lang.hpp"
-#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -88,15 +88,15 @@ TEST (JavaLang, StringCharAt) {
 	// Given a string - Return negative position is not exist
 	try {
 		char negativePositionIsNotExist = text.charAt(-1);
-	} catch (IndexOutOfBoundsException exception) {
-		ASSERT_TRUE(true);
+	} catch (StringIndexOutOfBoundsException exception) {
+		ASSERT_STR("String index out of range", exception.getMessage().toString());
 	}
 
 	// Given a string - Return out of scope position is not exist
 	try {
 		char outOfScopePositionIsNotExist = text.charAt(1000);
-	} catch (IndexOutOfBoundsException exception) {
-		ASSERT_TRUE(true);
+	} catch (StringIndexOutOfBoundsException exception) {
+		ASSERT_STR("String index out of range", exception.getMessage().toString());
 	}
 }
 
@@ -450,4 +450,17 @@ TEST(JavaLang, StringClone) {
 	// Give two string and compare - Should equal
 	cloneEmptyString = validString.clone();
 	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
+}
+
+TEST(JavaLang, StringSubString) {
+	String validString = "Hello world";
+	String subString = validString.subString(6);
+	string result = subString.toString();
+	string expect = (string) "world";
+	ASSERT_STR(expect, result);
+
+	subString = validString.subString(1, 5);
+	result = subString.toString();
+	expect = (string) "ello w";
+	ASSERT_STR(expect, result);
 }
