@@ -55,16 +55,6 @@ Integer::~Integer() {
 }
 
 /**
- * Parse integer
- *
- * @param target
- * @return Integer
- */
-int Integer::parseInt(String target) {
-	return string_to_int(target.toString());
-}
-
-/**
  * Integer to String
  *
  * @return String
@@ -370,3 +360,7 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+int Integer::parseInt(String inputString) {
+	return string_to_int(inputString.toString());
+}

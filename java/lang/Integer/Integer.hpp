@@ -105,14 +105,6 @@ namespace Java {
             */
 			string toString() const;
 
-			/**
-            * Parses the string argument as
-            * a signed decimal integer.
-            *
-            * @param target
-            * @return int
-            */
-			static int parseInt(String target);
 			int compareTo(const Integer &o) const override {
 				if (hashCode() == o.hashCode()) {
 					return 0;
@@ -376,6 +368,15 @@ namespace Java {
            //  */
            // static int parseInt(String inputString, int radix);
 
+           /**
+            * Parses the string argument as
+            * a signed decimal integer.
+            *
+            * @param target
+            * @return int
+            */  
+            
+          static int parseInt(String inputString);
            // *
            //  * Parses the string argument as an unsigned
            //  * integer in the radix specified by the second argument.
