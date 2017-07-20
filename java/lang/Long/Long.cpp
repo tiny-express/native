@@ -186,7 +186,7 @@ Long Long::decode(String target) {
         return -1;
     }
 
-    result = Long::parseLong(target.subString(index), radix);
+    result = Long::parseLong(target.getStringFromIndex(index), radix);
     if (negative) {
         result = -result.longValue();
     }

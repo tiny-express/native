@@ -79,6 +79,26 @@ Integer Integer::parseInt(String target) {
 }
 
 /**
+ * Compare with Integer
+ *
+ * @param target
+ * @return int
+ */
+int Integer::compareTo(const Integer &target) const {
+	if (hashCode() == target.hashCode()) {
+		return 0;
+	}
+	if (instanceof<Integer>(target)) {
+		if (original < target.original) {
+			return -1;
+		} else if (original == target.original) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/**
  * Integer to String
  *
  * @return String
