@@ -232,7 +232,7 @@ namespace Java {
            //  * @param target
            //  * @return boolean
            //  */
-           // static boolean equals(Object obj);
+           // static boolean equals(Integer obj);
 
            // /**
            //  * Returns the value of this Integer as

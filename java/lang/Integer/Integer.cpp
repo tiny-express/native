@@ -302,6 +302,11 @@ int Integer::bitCount(int intInput) {
 // }
 
 // double Integer::doubleValue() {
-	
+
+
+// }
+
+// boolean Integer::equals(Integer obj) {
+
 
 // }
