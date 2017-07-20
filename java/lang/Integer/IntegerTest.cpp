@@ -767,6 +767,21 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// TEST(JavaLang, IntegerGetInteger1) {
+
+
+// }
+
+// TEST(JavaLang, IntegerGetInteger2) {
+
+
+// }
+
+// TEST(JavaLang, IntegerGetInteger3) {
+
+
+// }
+
 // TEST(JavaLang, IntegerHashCode) {
 //     Integer inputInteger;
 
@@ -790,18 +805,13 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
-
-
-// }
-
-// TEST(JavaLang, Integer) {
-
-
-// }
-
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerHashCode2) {
+//     ASSERT_EQUAL(0, Integer::hashCode(0));
+//     ASSERT_EQUAL(1, Integer::hashCode(1));
+//     ASSERT_EQUAL(-1, Integer::hashCode(-1));
+//     ASSERT_EQUAL(13, Integer::hashCode(13));
+//     ASSERT_EQUAL(MAX_VALUE_INTEGER, Integer::hashCode(MAX_VALUE_INTEGER));
+//     ASSERT_EQUAL(MIN_VALUE_INTEGER, Integer::hashCode(MIN_VALUE_INTEGER));
 
 // }
 

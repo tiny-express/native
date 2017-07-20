@@ -330,3 +330,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// int Integer::hashCode(int inputInt) {
+
+
+// }

@@ -285,7 +285,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int hashCode(int value);
+           // static int hashCode(int inputInt);
 
            // /**
            //  * Returns an int value with at most
@@ -296,7 +296,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int highestOneBit(int i);
+           // static int highestOneBit(int inputInt);
 
            // /**
            //  * Returns the value of
