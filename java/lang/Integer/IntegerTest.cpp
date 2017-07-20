@@ -1406,53 +1406,54 @@ TEST(JavaLang, IntegerBitCount) {
 
 // Test Integer::parseInt(String inputString)
 // TEST(JavaLang, IntegerParseInt2) {
-//     String stringInput;
-//     int expectedResult;
-//     int actualResult;
+    // String stringInput;
+    // int expectedResult;
+    // int actualResult;
 
-//     // Cast all case of inputing a string of type decimal number
-//     stringInput = (String) "0";
-//     expectedResult = 0;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // // Cast all case of inputing a string of type decimal number
+    // stringInput = (String) "0";
+    // expectedResult = 0;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "1";
-//     expectedResult = 1;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "1";
+    // expectedResult = 1;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "-1";
-//     expectedResult = -1;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "-1";
+    // expectedResult = -1;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "13";
-//     expectedResult = 13;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "13";
+    // expectedResult = 13;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
-//     expectedResult = MAX_VALUE_INTEGER;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
+    // expectedResult = MAX_VALUE_INTEGER;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
-//     expectedResult = MIN_VALUE_INTEGER;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
+    // expectedResult = MIN_VALUE_INTEGER;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "Not a Number";
-//     expectedResult = ;
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "Not a Number";
+    // expectedResult = ;
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "12345678901234567890123456789";
-//     expectedResult = ; // out of range
-//     actualResult = Integer::parseInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    // stringInput = (String) "12345678901234567890123456789";
+    // expectedResult = ; // out of range
+    // actualResult = Integer::parseInt(stringInput);
+    // ASSERT_EQUAL(expectedResult, actualResult);
 
 // }
 
+// Test int Integer::parseUnsignedInt(String inputString, int radix)
 // TEST(JavaLang, IntegerParseUnsignedInt) {
 //     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"0", 10), 0);
 //     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"473", 10), 473);
@@ -1469,4 +1470,147 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test int Integer::parseUnsignedInt(String inputString)
+// TEST(JavaLang, IntegerParseUnsignedInt2) {
+//     String stringInput;
+//     int expectedResult;
+//     int actualResult;
+
+//     // Cast all case of inputing a string of type decimal number
+//     stringInput = (String) "0";
+//     expectedResult = 0;
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "1";
+//     expectedResult = 1;
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "-1";
+//     expectedResult = -1; throws a NumberFormatException
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "13";
+//     expectedResult = 13;
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
+//     expectedResult = MAX_VALUE_INTEGER;
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
+//     expectedResult = MIN_VALUE_INTEGER; throws a NumberFormatException
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "Not a Number";
+//     expectedResult = ; throws a NumberFormatException
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+//     stringInput = (String) "12345678901234567890123456789";
+//     expectedResult = ; // out of range throws a NumberFormatException
+//     actualResult = Integer::parseUnsignedInt(stringInput);
+//     ASSERT_EQUAL(expectedResult, actualResult);
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
+
+// TEST(JavaLang, Integer) {
+
+
+// }
 // TODO(thoangminh): check out of range input for all method later.
