@@ -15,12 +15,12 @@ void ArraysSearch()
 	Arrays::binarySearch(arrayLongNormal, 4, 5);
 
 	Array<long> arrayLongArray = { 3 , -2 , 4 , 0 , -1 };
-	Arrays::binarySearch(arrayLongArray, 4, 5);
+	Arrays::binarySearch(arrayLongArray, 4L, 5);
 }
 
 int main()
 {
 	ArraysSort();
-	ArraysSearch();
+	//ArraysSearch();
 	return 0;
 }
