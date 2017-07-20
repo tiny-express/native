@@ -38,7 +38,7 @@ std::atomic_long Random::seedUniquifierField {8682522807148012L};
 /**
  * Set seed offset;
  */
-long Random::seedOffset = setSeedOffset();
+//long Random::seedOffset = setSeedOffset();
 
 /**
  * Constructor
@@ -97,11 +97,13 @@ long Random::seedUniquifier() {
  *
  * @param seedVal
  */
+/*
 void Random::resetSeed(long seedVal) {
     char *base = (char *) this;
     long *seed = (long *) (base + seedOffset);
     *seed = std::atomic_long{seedVal};
 }
+*/
 
 /**
  * Copy constructor, std::atomic has it's copy constructor deleted, so a copy constructor is required
