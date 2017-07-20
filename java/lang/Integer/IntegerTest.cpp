@@ -1373,17 +1373,22 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerNumberOfLeadingZeros) {
-//     ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
-//     ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
-//     ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
-//     ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
-//     ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE_INTEGER));
-//     ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE_INTEGER));
+    // ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
+    // ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
+    // ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
+    // ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
+    // ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE_INTEGER));
+    // ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE_INTEGER));
 
 // }
 
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerNumberOfTrailingZeros) {
+//     ASSERT_EQUAL(32, Integer::numberOfTrailingZeros(0));
+//     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(1));
+//     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(-1));
+//     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(13));
+//     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(MAX_VALUE_INTEGER));
+//     ASSERT_EQUAL(31, Integer::numberOfTrailingZeros(MIN_VALUE_INTEGER));
 
 // }
 

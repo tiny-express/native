@@ -360,3 +360,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// int Integer::numberOfTrailingZeros(int i) {
+
+
+// }
