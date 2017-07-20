@@ -30,6 +30,7 @@ extern "C" {
 
 #include "../../Lang.hpp"
 #include "HashMap.hpp"
+#include "../ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Util;
@@ -428,6 +429,15 @@ TEST (JavaUtil, HashMapToString) {
 	HashMap<String, Float> emptyHashMap;
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
+	ASSERT_STR(expectedResult, result);
+
+    ArrayList<Integer> validArrayListInteger1 = {1, 2, 3, 4, 5};
+	ArrayList<Integer> validArrayListInteger2 = {100, 100, 100, 100, 1};
+	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
+	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
+	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
+	expectedResult = (string) "{ArrayList1: [1, 2, 3, 4, 5], ArrayList2: [100, 100, 100, 100, 1]}";
+	result = arrayListInHashMap.toString();
 	ASSERT_STR(expectedResult, result);
 }
 

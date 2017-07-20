@@ -432,7 +432,7 @@ namespace Java {
 				String endString = "}";
 				String totalString;
 
-				typename std::map<K, V>::const_iterator it;
+				typename std::map<K, V>::iterator it;
 				for (it = this->original.begin(); it != this->original.end(); ++it) {
 					totalString = it->first.toString();
 					totalString += colonAndSpace;
