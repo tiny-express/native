@@ -1227,6 +1227,7 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test Integer::hashCode()
 // TEST(JavaLang, IntegerHashCode) {
 //     Integer inputInteger;
 
@@ -1250,6 +1251,7 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test Integer::hashCode(int inputInt)
 // TEST(JavaLang, IntegerHashCode2) {
 //     ASSERT_EQUAL(0, Integer::hashCode(0));
 //     ASSERT_EQUAL(1, Integer::hashCode(1));
@@ -1261,17 +1263,22 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerHighestOneBit) {
-//     ASSERT_EQUAL(0, Integer::highestOneBit(0));
-//     ASSERT_EQUAL(1, Integer::highestOneBit(1));
-//     ASSERT_EQUAL(-2147483648, Integer::highestOneBit(-1));
-//     ASSERT_EQUAL(8, Integer::highestOneBit(13));
-//     ASSERT_EQUAL(1073741824, Integer::highestOneBit(MAX_VALUE_INTEGER));
-//     ASSERT_EQUAL(-2147483648, Integer::highestOneBit(MIN_VALUE_INTEGER)); 
+    // ASSERT_EQUAL(0, Integer::highestOneBit(0));
+    // ASSERT_EQUAL(1, Integer::highestOneBit(1));
+    // ASSERT_EQUAL(-2147483648, Integer::highestOneBit(-1));
+    // ASSERT_EQUAL(8, Integer::highestOneBit(13));
+    // ASSERT_EQUAL(1073741824, Integer::highestOneBit(MAX_VALUE_INTEGER));
+    // ASSERT_EQUAL(-2147483648, Integer::highestOneBit(MIN_VALUE_INTEGER)); 
 
 // }
 
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerLowestOneBit) {
+//     ASSERT_EQUAL(0, Integer::lowestOneBit(0));
+//     ASSERT_EQUAL(1, Integer::lowestOneBit(1));
+//     ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
+//     ASSERT_EQUAL(1, Integer::lowestOneBit(13));
+//     ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE_INTEGER));
+//     ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE_INTEGER));
 
 // }
 
