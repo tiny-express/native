@@ -30,6 +30,7 @@
 #include "../Collection/Collection.hpp"
 #include "../Comparator/Comparator.hpp"
 #include "../../lang/Exception/Exception.hpp"
+#include "../../lang/ClassCastException/ClassCastException.hpp"
 #include <vector>
 
 namespace Java {
@@ -45,29 +46,38 @@ namespace Java {
 
         public:
             /**
-             *
+             * Constructor
+             * Creates a empty PriorityQueue.
              */
             PriorityQueue() { };
 
             /**
+             * Constructor
+             * Creates a PriorityQueue containing the elements in the specified collection.
              *
              * @param target
              */
 //          PriorityQueue(const Collection<E> &target);
 
             /**
+             * Constructor
+             * Creates a PriorityQueue whose elements are ordered according to the specified comparator.
              *
              * @param target
              */
 //          PriorityQueue(const Comparator<E> &target);
 
             /**
+             * Constructor
+             * Creates a PriorityQueue with the specified initial capacity.
              *
              * @param initialCapacity
              */
 //          PriorityQueue(int initialCapacity);
 
             /**
+             * Constructor
+             * Creates a PriorityQueue with the specified initial capacity that orders its elements according to the specified comparator.
              *
              * @param initialCapacity
              * @param target
@@ -75,6 +85,8 @@ namespace Java {
 //          PriorityQueue(int initialCapacity, const Comparator<E> &target);
 
             /**
+             * Constructor
+             * Creates a PriorityQueue containing the elements in the specified priority queue.
              *
              * @param target
              */
@@ -87,17 +99,21 @@ namespace Java {
             };
 
             /**
+             * Constructor
+             * Creates a PriorityQueue containing the elements in the specified sorted set.
              *
              * @param target
              */
 //          PriorityQueue(const SortedSet<E> &target);
 
             /**
+             * Constructor
+             * Creates a PriorityQueue containing the elements in the specified initializer list.
              *
              * @param target
              */
             PriorityQueue(const std::initializer_list<E> &target) {
-                std::initializer_list<E>::const_iterator targetIterator;
+                typename std::initializer_list<E>::const_iterator targetIterator;
                 for (targetIterator = target.begin(); targetIterator != target.end(); targetIterator++) {
                     this->original.push_back(*targetIterator);
                 }
@@ -108,20 +124,48 @@ namespace Java {
 
         public:
             /**
+             * Inserts the specified element into this priority queue.
              *
              * @param target
-             * @return
+             * @return boolean
+             * @throw ClassCastException - if the specified element cannot be compared with elements currently in this priority queue according to the priority queue's ordering
              */
             boolean add(const E &target) {
+                int oldSize = (int)this->original.size();
                 this->original.push_back(target);
+
                 try {
                     std::make_heap(this->original.begin(), this->original.end());
                 }
                 catch (Exception ex){
-                    throw "";
-                    // TODO: throw ClassCastException
+                    throw ClassCastException();
                 }
-                return true;
+
+                int newSize = (int)this->original.size();
+                return (newSize != oldSize);
+            }
+
+            /**
+             * Removes all of the elements from this priority queue.
+             */
+            void clear() {
+                this->original.clear();
+            }
+
+            /**
+             * Returns the comparator used to order the elements in this queue.
+             *
+             * @return Comparator<E>
+             */
+//          Comparator<E> comparator() const;
+
+            /**
+             * Returns the number of elements in this collection.
+             *
+             * @return int
+             */
+            int size() const {
+                return (int)this->original.size();
             }
         };
     }
