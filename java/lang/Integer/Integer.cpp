@@ -345,3 +345,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// int Integer::max(int a, int b); {
+
+
+// }
