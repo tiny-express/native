@@ -300,3 +300,8 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// double Integer::doubleValue() {
+	
+
+// }

@@ -691,8 +691,26 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerDoubleValue) {
+//     Integer integerInput;
 
+//     integerInput = 0;
+//     ASSERT_DBL_NEAR(0.0, integerInput.doubleValue());
+
+//     integerInput = 1;
+//     ASSERT_DBL_NEAR(1.0, integerInput.doubleValue());
+
+//     integerInput = -1;
+//     ASSERT_DBL_NEAR(-1.0, integerInput.doubleValue());
+
+//     integerInput = 13;
+//     ASSERT_DBL_NEAR(13.0, integerInput.doubleValue());
+
+//     integerInput = MAX_VALUE_INTEGER;
+//     ASSERT_DBL_NEAR((double)MAX_VALUE_INTEGER, integerInput.doubleValue());
+
+//     integerInput = MIN_VALUE_INTEGER;
+//     ASSERT_DBL_NEAR((double)MIN_VALUE_INTEGER, integerInput.doubleValue());
 
 // }
 
