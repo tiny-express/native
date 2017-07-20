@@ -53,9 +53,6 @@ TEST (JavaLang, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	ASSERT_EQUAL(4, stringArrayList.size());
-	
-	ArrayList<Integer> intArrayList;
-	ASSERT_EQUAL(0, intArrayList.size());
 }
 
 TEST (JavaLang, ArrayListDestructor) {
@@ -88,8 +85,25 @@ TEST (JavaLang, ArrayListSize) {
 	ASSERT_FALSE(notEmpty);
 }
 
+TEST (Javalang, ArrayListFunction) {
+	// Test function add with
+	ArrayList<Integer> intArray;
+	
+	register int index;
+	for (index = 0; index < 6; ++index) {
+		intArray.add(index);
+	}
+	int expect = 6;
+	int result = intArray.size();
+	ASSERT_EQUAL(expect, result);
+	
+	// Get value out of Array
+	intArray.get(-1);
+	ASSERT_EQUAL(0, intArray.get(-1).intValue());
+	ASSERT_EQUAL(5, intArray.get(intArray.size()).intValue());
+}
+
 TEST (JavaLang, ArrayListForEach) {
-	//
 	ArrayList<Integer> validArrayList;
 	
 	int index;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,23 +24,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#ifndef NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
+#define NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
 
-// Java Core Packages
-#include "java/IO.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
 
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
+#include "../Exception/Exception.hpp"
+#include "../RuntimeException/RuntimeException.hpp"
 
-// In Java, Java::Lang is imported by default
-using namespace Java::Lang;
+namespace Java {
+    namespace Lang {
+        class IllegalArgumentException : public RuntimeException {
+        public:
+            IllegalArgumentException();
+            IllegalArgumentException(String message);
+            IllegalArgumentException(String message, Throwable *cause);
+            IllegalArgumentException(Throwable *cause);
+        };
+    }
+}
 
-#endif//NATIVE_LIBRARY_HPP_
+
+#endif //NATIVE_ILLEGAL_ARGUMENT_EXCEPTION_H
