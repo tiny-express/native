@@ -21,6 +21,6 @@ void ArraysSearch()
 int main()
 {
 	ArraysSort();
-	//ArraysSearch();
+	ArraysSearch();
 	return 0;
 }
