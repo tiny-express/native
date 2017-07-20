@@ -23,3 +23,92 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef JAVA_UTIL_PRIORITY_QUEUE_HPP
+#define JAVA_UTIL_PRIORITY_QUEUE_HPP
+
+#include "../Collection/Collection.hpp"
+#include "../Comparator/Comparator.hpp"
+#include <vector>
+
+namespace Java {
+    namespace Util {
+        template <typename E>
+        class PriorityQueue
+//      :
+//      public Serializable
+//      public AbstractQueue<E>
+        {
+        private:
+            std::vector<E> original;
+
+        public:
+            /**
+             *
+             */
+            PriorityQueue() { };
+
+            /**
+             *
+             * @param target
+             */
+//          PriorityQueue(const Collection<E> &target);
+
+            /**
+             *
+             * @param target
+             */
+//          PriorityQueue(const Comparator<E> &target);
+
+            /**
+             *
+             * @param initialCapacity
+             */
+//          PriorityQueue(int initialCapacity);
+
+            /**
+             *
+             * @param initialCapacity
+             * @param target
+             */
+//          PriorityQueue(int initialCapacity, const Comparator<E> &target);
+
+            /**
+             *
+             * @param target
+             */
+            PriorityQueue(const PriorityQueue<E> &target) {
+                int targetSize = (int)target.original.size();
+                int index;
+                for (index = 0; index < targetSize; index++) {
+                    this->original.push_back(target.original[index]);
+                }
+            };
+
+            /**
+             *
+             * @param target
+             */
+//          PriorityQueue(const SortedSet<E> &target);
+
+            /**
+             *
+             * @param target
+             */
+            PriorityQueue(const std::initializer_list<E> &target) {
+                std::initializer_list<E>::const_iterator targetIterator;
+                for (targetIterator = target.begin(); targetIterator != target.end(); targetIterator++) {
+                    this->original.push_back(*targetIterator);
+                }
+                std::make_heap(this->original.begin(), this->original.end());
+            }
+
+            virtual ~PriorityQueue() { }
+
+        public:
+            
+        };
+    }
+}
+
+#endif // JAVA_UTIL_PRIORITY_QUEUE_HPP
