@@ -310,3 +310,23 @@ int Integer::bitCount(int intInput) {
 
 
 // }
+
+// Integer Integer::getInteger(String inputString) {
+
+
+// }
+
+// Integer getInteger(String inputString, int inputInt) {
+
+
+// }
+
+// Integer getInteger(String inputString, Integer inputInteger) {
+
+
+// }
+
+// int Integer::hashCode() {
+
+
+// }

@@ -250,16 +250,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int getInteger(String nm, int val);
-
-           // /**
-           //  * Returns the integer value of the system
-           //  * property with the specified name.
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int getInteger(String nm, Integer val);
+           // static Integer getInteger(String inputString); // TODO(thoangminh): research it
 
            // /**
            //  * Determines the integer value of the
@@ -268,7 +259,16 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int getInteger(String nm);
+           // static Integer getInteger(String inputString, int inputInt); 
+
+           // /**
+           //  * Returns the integer value of the system
+           //  * property with the specified name.
+           //  *
+           //  * @param target
+           //  * @return int
+           //  */
+           // static Integer getInteger(String inputString, Integer inputInteger);
 
            // /**
            //  * Returns a hash code for this Integer.

@@ -767,8 +767,26 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerHashCode) {
+//     Integer inputInteger;
 
+//     inputInteger = 0;
+//     ASSERT_EQUAL(0, inputInteger.hashCode());
+
+//     inputInteger = 1;
+//     ASSERT_EQUAL(1, inputInteger.hashCode());
+
+//     inputInteger = -1;
+//     ASSERT_EQUAL(-1, inputInteger.hashCode());
+
+//     inputInteger = 13;
+//     ASSERT_EQUAL(13, inputInteger.hashCode());
+
+//     inputInteger = MAX_VALUE_INTEGER;
+//     ASSERT_EQUAL(MAX_VALUE_INTEGER, inputInteger.hashCode());
+
+//     inputInteger = MIN_VALUE_INTEGER;
+//     ASSERT_EQUAL(MIN_VALUE_INTEGER, inputInteger.hashCode());
 
 // }
 
