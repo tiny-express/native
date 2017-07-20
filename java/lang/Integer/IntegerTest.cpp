@@ -1100,8 +1100,130 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test Integer::getInteger(String inputString, Integer inputInteger)
 // TEST(JavaLang, IntegerGetInteger3) {
+    // String stringInput;
+    // Integer expectedResult;
+    // Integer actualResult;
 
+    // // Cast all case of inputing a string of type decimal number
+    // stringInput = (String) "";
+    // expectedResult = 9999; // NULL string
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "0";
+    // expectedResult = 0;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "1";
+    // expectedResult = 1;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "-1";
+    // expectedResult = -1;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "13";
+    // expectedResult = 13;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "2147483647"; // MAX_VALUE_INTEGER
+    // expectedResult = MAX_VALUE_INTEGER;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "-2147483648"; // MIN_VALUE_INTEGER
+    // expectedResult = MIN_VALUE_INTEGER;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "Not a Number";
+    // expectedResult = ;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+
+    // // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    // stringInput = (String) "00";
+    // expectedResult = 0;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "01";
+    // expectedResult = 1;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "00001101";
+    // expectedResult = 13;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE_INTEGER
+    // expectedResult = 2147483647;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "0111111111111111111111111111111111111111111";
+    // expectedResult = ; // out of range 
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "011111111111111111111111111111111112222222";
+    // expectedResult = ; // wrong type
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // // Cast all case of inputing a string of type hexadecimal number
+    // stringInput = (String) "0x00";
+    // expectedResult = 0;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#1";
+    // expectedResult = 1;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#FFFFFFFFFFFFFFFF";
+    // expectedResult = -1;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "0xD";
+    // expectedResult = 13;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE_INTEGER
+    // expectedResult = 2147483647;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE_INTEGER
+    // expectedResult = -2147483647;
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#Not a Number";
+    // expectedResult = ; // Not a number
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#213546546";
+    // expectedResult = ; // Wrong type
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // stringInput = (String) "#1111FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+    // expectedResult = ; // Out of range
+    // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
+    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 // }
 
