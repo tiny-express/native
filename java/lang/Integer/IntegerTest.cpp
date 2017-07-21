@@ -1652,54 +1652,54 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerRotateRight) {
-//     ASSERT_EQUAL(Integer::rotateRight(0, 0), 0);
-//     ASSERT_EQUAL(Integer::rotateRight(0, 1), 0);
-//     ASSERT_EQUAL(Integer::rotateRight(0, -1), 0);
-//     ASSERT_EQUAL(Integer::rotateRight(0, 13), 0);
-//     ASSERT_EQUAL(Integer::rotateRight(0, MAX_VALUE), 0);
-//     ASSERT_EQUAL(Integer::rotateRight(0, MIN_VALUE), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, 0), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, 1), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, -1), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, 13), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, MAX_VALUE), 0);
+    // ASSERT_EQUAL(Integer::rotateRight(0, MIN_VALUE), 0);
 
-//     ASSERT_EQUAL(Integer::rotateRight(1, 0), 1);
-//     ASSERT_EQUAL(Integer::rotateRight(1, 1), -2147483648);
-//     ASSERT_EQUAL(Integer::rotateRight(1, -1), 2);
-//     ASSERT_EQUAL(Integer::rotateRight(1, 13), 524288);
-//     ASSERT_EQUAL(Integer::rotateRight(1, MAX_VALUE), 2);
-//     ASSERT_EQUAL(Integer::rotateRight(1, MIN_VALUE), 1);
+    // ASSERT_EQUAL(Integer::rotateRight(1, 0), 1);
+    // ASSERT_EQUAL(Integer::rotateRight(1, 1), -2147483648);
+    // ASSERT_EQUAL(Integer::rotateRight(1, -1), 2);
+    // ASSERT_EQUAL(Integer::rotateRight(1, 13), 524288);
+    // ASSERT_EQUAL(Integer::rotateRight(1, MAX_VALUE), 2);
+    // ASSERT_EQUAL(Integer::rotateRight(1, MIN_VALUE), 1);
 
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , 0), -1);
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , 1), -1);
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , -1), -1);
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , 13), -1);
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , MAX_VALUE), -1);
-//     ASSERT_EQUAL(Integer::rotateRight(-1 , MIN_VALUE), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , 0), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , 1), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , -1), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , 13), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , MAX_VALUE), -1);
+    // ASSERT_EQUAL(Integer::rotateRight(-1 , MIN_VALUE), -1);
 
-//     ASSERT_EQUAL(Integer::rotateRight(13 , 0), 13);
-//     ASSERT_EQUAL(Integer::rotateRight(13 , 1), -2147483642);
-//     ASSERT_EQUAL(Integer::rotateRight(13 , -1), 26);
-//     ASSERT_EQUAL(Integer::rotateRight(13 , 13), 6815744);
-//     ASSERT_EQUAL(Integer::rotateRight(13 , MAX_VALUE), 26);
-//     ASSERT_EQUAL(Integer::rotateRight(13 , MIN_VALUE), 13);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , 0), 13);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , 1), -2147483642);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , -1), 26);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , 13), 6815744);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , MAX_VALUE), 26);
+    // ASSERT_EQUAL(Integer::rotateRight(13 , MIN_VALUE), 13);
 
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 0), 2147483647);
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 1), -1073741825);
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , -1), -2);
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 13), -262145);
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MAX_VALUE), -2);
-//     ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MIN_VALUE), 2147483647);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 0), 2147483647);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 1), -1073741825);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , -1), -2);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 13), -262145);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MAX_VALUE), -2);
+    // ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MIN_VALUE), 2147483647);
 
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 0), -2147483648);
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 1), 1073741824);
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , -1), 1);
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 13), 262144);
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MAX_VALUE), 1);
-//     ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MIN_VALUE), -2147483648);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 0), -2147483648);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 1), 1073741824);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , -1), 1);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 13), 262144);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MAX_VALUE), 1);
+    // ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MIN_VALUE), -2147483648);
 
-//     System.out.println(Integer.rotateRight(0, 0));
-//     System.out.println(Integer.rotateRight(0, 1));
-//     System.out.println(Integer.rotateRight(0, -1));
-//     System.out.println(Integer.rotateRight(0, 13));
-//     System.out.println(Integer.rotateRight(0,Integer.MAX_VALUE));
-//     System.out.println(Integer.rotateRight(0,Integer.MIN_VALUE));
+    // System.out.println(Integer.rotateRight(0, 0));
+    // System.out.println(Integer.rotateRight(0, 1));
+    // System.out.println(Integer.rotateRight(0, -1));
+    // System.out.println(Integer.rotateRight(0, 13));
+    // System.out.println(Integer.rotateRight(0,Integer.MAX_VALUE));
+    // System.out.println(Integer.rotateRight(0,Integer.MIN_VALUE));
 
 // }
 
@@ -1720,8 +1720,55 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerSum) {
+//     ASSERT_EQUAL(Integer::sum(0, 0), 0);
+//     ASSERT_EQUAL(Integer::sum(0, 1), 1);
+//     ASSERT_EQUAL(Integer::sum(0, -1), -1);
+//     ASSERT_EQUAL(Integer::sum(0, 13), 13);
+//     ASSERT_EQUAL(Integer::sum(0, MAX_VALUE), MAX_VALUE);
+//     ASSERT_EQUAL(Integer::sum(0, MIN_VALUE), MIN_VALUE);
 
+//     ASSERT_EQUAL(Integer::sum(1, 0), 1);
+//     ASSERT_EQUAL(Integer::sum(1, 1), 1);
+//     ASSERT_EQUAL(Integer::sum(1, -1), 0);
+//     ASSERT_EQUAL(Integer::sum(1, 13), 14);
+//     ASSERT_EQUAL(Integer::sum(1, MAX_VALUE), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(1, MIN_VALUE), -2147483647);
+
+//     ASSERT_EQUAL(Integer::sum(-1 , 0), -1);
+//     ASSERT_EQUAL(Integer::sum(-1 , 1), 0);
+//     ASSERT_EQUAL(Integer::sum(-1 , -1), -2);
+//     ASSERT_EQUAL(Integer::sum(-1 , 13), 12);
+//     ASSERT_EQUAL(Integer::sum(-1 , MAX_VALUE), 2147483646);
+//     ASSERT_EQUAL(Integer::sum(-1 , MIN_VALUE), 2147483647);
+
+//     ASSERT_EQUAL(Integer::sum(13 , 0), 13);
+//     ASSERT_EQUAL(Integer::sum(13 , 1), 14);
+//     ASSERT_EQUAL(Integer::sum(13 , -1), 12);
+//     ASSERT_EQUAL(Integer::sum(13 , 13), 26);
+//     ASSERT_EQUAL(Integer::sum(13 , MAX_VALUE), -2147483636);
+//     ASSERT_EQUAL(Integer::sum(13 , MIN_VALUE), -2147483635);
+
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 0), 2147483647);
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 1), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , -1), 2147483646);
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 13), -2147483636);
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , MAX_VALUE), -2);
+//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , MIN_VALUE), -1);
+
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 0), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 1), -2147483647);
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , -1), 2147483647);
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 13), -2147483635);
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MAX_VALUE), -1);
+//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MIN_VALUE), 0);
+    
+//     System.out.println(Integer.sum(Integer.MIN_VALUE, 0));
+//     System.out.println(Integer.sum(Integer.MIN_VALUE, 1));
+//     System.out.println(Integer.sum(Integer.MIN_VALUE, -1));
+//     System.out.println(Integer.sum(Integer.MIN_VALUE, 13));
+//     System.out.println(Integer.sum(Integer.MIN_VALUE,Integer.MAX_VALUE));
+//     System.out.println(Integer.sum(Integer.MIN_VALUE,Integer.MIN_VALUE));
 
 // }
 

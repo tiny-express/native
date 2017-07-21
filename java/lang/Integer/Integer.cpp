@@ -404,3 +404,13 @@ int Integer::parseInt(String inputString) {
 
 
 // }
+
+// int Integer::stringSize(int x) {
+
+
+// }
+
+// int Integer::sum(int a, int b) {
+
+
+// }

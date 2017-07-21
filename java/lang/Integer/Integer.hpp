@@ -86,7 +86,15 @@ namespace Java {
              * Integer Destructor
              */
 			~Integer();
-		
+		private:
+      /**
+      * return size of a string
+      *
+      * @param int
+      * @return int
+      */
+     int stringSize(int x);
+
 		public:
 			char charValue() const;
 			string stringValue() const;
@@ -462,14 +470,7 @@ namespace Java {
            //  * @return int
            //  */
            // static int signum(int i);
-
-           // /**
-           //  * return size of a string
-           //  *
-           //  * @param int
-           //  * @return string
-           //  */
-           // static string stringSize(int x);
+           
            // /**
            //  * Adds two integers together as per the + operator.
            //  *
