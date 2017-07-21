@@ -52,3 +52,11 @@ TEST(JavaUtil, PriorityQueueDestructor) {
     delete priorityQueue2;
 }
 
+TEST(JavaUtil, PriorityQueueAdd) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.peek());
+    priorityQueue.add(10);
+    ASSERT_EQUAL(6, priorityQueue.size());
+    ASSERT_EQUAL(10, priorityQueue.peek());
+}
