@@ -107,7 +107,9 @@ StringBuffer StringBuffer::append(string str, int offset, int len) {
 
     ensureCapacity(this->length() + length_pointer_char(str));
     std::string string(this->original);
-    string.append(getString(str, offset, len));
+    std::string stringToAdd(str);
+    stringToAdd = stringToAdd.substr(offset, len);
+    string.append(stringToAdd);
     strcpy(this->original, string.c_str());
     this->currentlength += len;
     return *this;
@@ -128,24 +130,6 @@ StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
 
 }
 
-string StringBuffer::getString(string str, int offset, int len) {
-    string result;
-    int end = offset + len;
-    int begin = offset;
-    for (begin; begin < end; begin++) {
-        result[begin - offset] = str[begin];
-    }
-    return result;
-}
-
-StringBuffer StringBuffer::append(string destination, string str) {
-    int strLen = length_pointer_char(str);
-    for (int index = 0; index < strLen; ++index) {
-        int originalIndex = currentlength +index;
-        char character = str[index];
-        destination[originalIndex] = character;
-    }
-}
 
 StringBuffer::StringBuffer(const StringBuffer &other) {
     this->original = (string) calloc((size_t) other.currentcapacity, sizeof(char));

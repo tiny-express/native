@@ -96,9 +96,9 @@ TEST (JavaLang, StringBufferGetValue) {
 TEST (JavaLang, StringBufferAppend) {
     StringBuffer stringAppend = StringBuffer("please");
 
-    string stringToAppend = "don't add more";
+    string stringToAppend = (string)("don't add more");
     stringAppend.append(stringToAppend, 5, 9);
-    string expectString = "please add more";
+    string expectString = (string)"please add more";
     ASSERT_STR(expectString, stringAppend.getValue());
 
     try {
@@ -126,9 +126,9 @@ TEST (JavaLang, StringBufferAppend) {
 TEST (JavaLang, StringBufferInsert) {
     StringBuffer stringInsert = StringBuffer("please more");
 
-    string stringToInsert = "don't insert";
+    string stringToInsert = (string)"don't insert";
     stringInsert.insert(6, stringToInsert, 5, 7);
-    string expectString = "please insert more";
+    string expectString = (string)"please insert more";
     ASSERT_STR(expectString, stringInsert.getValue());
 
     try {

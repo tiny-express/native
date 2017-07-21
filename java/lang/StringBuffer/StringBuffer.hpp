@@ -77,8 +77,6 @@ namespace Java {
 
             StringBuffer append(StringBuffer stringBuffer);
 
-            StringBuffer append(string destination, string str);
-
             StringBuffer append(string str, int offset, int len);
 
             StringBuffer append(CharSequence *seq, int start, int end);
@@ -165,9 +163,6 @@ namespace Java {
 
             ~StringBuffer();
 
-            string getString(string str, int offset, int len);
-
-            //StringBuffer operator=(const StringBuffer &other);
         };
     }
 }
