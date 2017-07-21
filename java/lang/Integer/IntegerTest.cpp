@@ -1981,12 +1981,28 @@ TEST(JavaLang, IntegerToString) {
 // }
 // Test Integer::valueOf(String inputString)
 // TEST(JavaLang, IntegerValueOf) {
-//     ASSERT_EQUAL(0, Integer::valueOf((String) "0").intValue());
-//     ASSERT_EQUAL(1, Integer::valueOf((String) "1").intValue());
-//     ASSERT_EQUAL(-1, Integer::valueOf((String) "-1").intValue());
-//     ASSERT_EQUAL(13, Integer::valueOf((String) "13").intValue());
-//     ASSERT_EQUAL(2147483647, Integer::valueOf((String) "2147483647").intValue());
-//     ASSERT_EQUAL(-2147483648, Integer::valueOf((String) "-2147483648").intValue());
+    // ASSERT_EQUAL(0, Integer::valueOf((String) "0").intValue());
+    // ASSERT_EQUAL(1, Integer::valueOf((String) "1").intValue());
+    // ASSERT_EQUAL(-1, Integer::valueOf((String) "-1").intValue());
+    // ASSERT_EQUAL(13, Integer::valueOf((String) "13").intValue());
+    // ASSERT_EQUAL(2147483647, Integer::valueOf((String) "2147483647").intValue());
+    // ASSERT_EQUAL(-2147483648, Integer::valueOf((String) "-2147483648").intValue());
+
+    // System.out.println(Integer.valueOf("0"));
+    // System.out.println(Integer.valueOf( "1"));
+    // System.out.println(Integer.valueOf( "-1"));
+    // System.out.println(Integer.valueOf( "13"));
+    // System.out.println(Integer.valueOf( "2147483647"));
+    // System.out.println(Integer.valueOf( "-2147483648"));
+// }
+// Test Integer::valueOf(int inputInt)
+// TEST(JavaLang, IntegerValueOf2) {
+//     ASSERT_EQUAL(0, Integer::valueOf(0));
+//     ASSERT_EQUAL(1, Integer::valueOf(1));
+//     ASSERT_EQUAL(-1, Integer::valueOf(-1));
+//     ASSERT_EQUAL(13, Integer::valueOf(13));
+//     ASSERT_EQUAL(2147483647, Integer::valueOf(2147483647));
+//     ASSERT_EQUAL(-2147483648, Integer::valueOf(-2147483648));
 
 //     System.out.println(Integer.valueOf("0"));
 //     System.out.println(Integer.valueOf( "1"));
@@ -1994,10 +2010,6 @@ TEST(JavaLang, IntegerToString) {
 //     System.out.println(Integer.valueOf( "13"));
 //     System.out.println(Integer.valueOf( "2147483647"));
 //     System.out.println(Integer.valueOf( "-2147483648"));
-// }
-
-// TEST(JavaLang, Integer) {
-
 
 // }
 
