@@ -60,3 +60,11 @@ TEST(JavaUtil, PriorityQueueAdd) {
     ASSERT_EQUAL(6, priorityQueue.size());
     ASSERT_EQUAL(10, priorityQueue.peek());
 }
+
+TEST(JavaUtil, PriorityQueueClear) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    priorityQueue.clear();
+    ASSERT_EQUAL(0, priorityQueue.size());
+}
+
