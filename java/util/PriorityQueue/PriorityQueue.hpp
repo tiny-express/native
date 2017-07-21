@@ -131,18 +131,7 @@ namespace Java {
              * @throw ClassCastException - if the specified element cannot be compared with elements currently in this priority queue according to the priority queue's ordering
              */
             boolean add(const E &target) {
-                int oldSize = (int)this->original.size();
-                this->original.push_back(target);
-
-                try {
-                    std::make_heap(this->original.begin(), this->original.end());
-                }
-                catch (Exception ex){
-                    throw ClassCastException();
-                }
-
-                int newSize = (int)this->original.size();
-                return (newSize != oldSize);
+                return this->offer(target);
             }
 
             /**
@@ -169,6 +158,34 @@ namespace Java {
                 std::vector<E>::const_iterator targetIterator;
                 targetIterator = std::find(this->original.begin(), this->original.end(), target);
                 return (targetIterator != this->original.end());
+            }
+
+            /**
+             * Returns an iterator over the elements in this queue.
+             *
+             * @return Iterator<E>
+             */
+//          Iterator<E>	iterator() const;
+
+            /**
+             * Inserts the specified element into this priority queue.
+             *
+             * @param target
+             * @return boolean
+             */
+            boolean offer(const E &target) {
+                int oldSize = (int)this->original.size();
+                this->original.push_back(target);
+
+                try {
+                    std::make_heap(this->original.begin(), this->original.end());
+                }
+                catch (Exception ex){
+                    throw ClassCastException();
+                }
+
+                int newSize = (int)this->original.size();
+                return (newSize != oldSize);
             }
 
             /**
