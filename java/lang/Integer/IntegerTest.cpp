@@ -1520,7 +1520,15 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerRemainderUnsigned) {
-//     ASSERT_EQUAL(Integer::remainderUnsigned(0 ,0), 9999); // java.lang.ArithmeticException: / by zero
+    // // TODO(thoangminh): check these cases
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,aaaa), 9999); // error: cannot find symbol
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,123456789132456789123456), 9999); // integer number too large
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,MAX_VALUE +1), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,MAX_VALUE + 2), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,MIN_VALUE -1), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,MIN_VALUE -2), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0 ,"MIN_VALUE -2"), 9999); // error: incompatible types: String cannot be converted to int
+
 //     ASSERT_EQUAL(Integer::remainderUnsigned(0 ,1), 0);
 //     ASSERT_EQUAL(Integer::remainderUnsigned(0 ,-1), 0);
 //     ASSERT_EQUAL(Integer::remainderUnsigned(0 ,13), 0);
@@ -1564,8 +1572,13 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
-
+// TEST(JavaLang, IntegerReverse) {
+//     ASSERT_EQUAL(0, Integer::reverse(0));
+//     ASSERT_EQUAL(-2147483648, Integer::reverse(1));
+//     ASSERT_EQUAL(-1, Integer::reverse(-1));
+//     ASSERT_EQUAL(-1342177280, Integer::reverse(13));
+//     ASSERT_EQUAL(-2, Integer::reverse(MAX_VALUE));
+//     ASSERT_EQUAL(-1, Integer::reverse(MIN_VALUE));
 
 // }
 
