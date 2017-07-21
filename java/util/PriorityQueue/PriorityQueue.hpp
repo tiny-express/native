@@ -261,6 +261,30 @@ namespace Java {
                 }
                 return result;
             }
+
+            /**
+             * Returns an array containing all of the elements in this queue.
+             *
+             * @param anArray
+             * @return Array<E>
+             */
+            Array<E> &toArray(Array<E> &anArray) const {
+                int originalSize = (int)this->original.size();
+                typename std::vector<E>::const_iterator originalIterator;
+                if (anArray.length < originalSize) {
+                    Array<E> result;
+                    for (originalIterator = this->original.begin(); originalIterator != this->original.end(); originalIterator++) {
+                        result.push(*originalIterator);
+                    }
+                    return result;
+                }
+                int indexOfArray = 0;
+                for (originalIterator = this->original.begin(); originalIterator != this->original.end(); originalIterator++) {
+                    anArray[indexOfArray] = *originalIterator;
+                    indexOfArray = indexOfArray + 1;
+                }
+                return anArray;
+            }
         };
     }
 }
