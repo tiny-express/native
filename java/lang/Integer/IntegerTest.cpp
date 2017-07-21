@@ -1582,8 +1582,20 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerReverseBytes) {
+//     ASSERT_EQUAL(0, Integer::reverseBytes(0));
+//     ASSERT_EQUAL(16777216, Integer::reverseBytes(1));
+//     ASSERT_EQUAL(-1, Integer::reverseBytes(-1));
+//     ASSERT_EQUAL(218103808, Integer::reverseBytes(13));
+//     ASSERT_EQUAL(-129, Integer::reverseBytes(MAX_VALUE));
+//     ASSERT_EQUAL(128, Integer::reverseBytes(MIN_VALUE));
 
+//     System.out.println(Integer.reverseBytes(0));
+//     System.out.println(Integer.reverseBytes(1));
+//     System.out.println(Integer.reverseBytes(-1));
+//     System.out.println(Integer.reverseBytes(13));
+//     System.out.println(Integer.reverseBytes(Integer.MAX_VALUE));
+//     System.out.println(Integer.reverseBytes(Integer.MIN_VALUE));
 
 // }
 
