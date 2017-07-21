@@ -196,7 +196,7 @@ namespace Java {
              */
             E peek() const {
                 E defaultOfE;
-                if (this->isEmpty()) {
+                if (this->original.empty()) {
                     return defaultOfE;
                 }
                 return this->original[0];
