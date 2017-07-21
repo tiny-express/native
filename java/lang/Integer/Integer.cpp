@@ -390,7 +390,12 @@ int Integer::parseInt(String inputString) {
 
 // }
 
-int Integer::rotateLeft(int inputInt, int distance) {
+// int Integer::rotateLeft(int inputInt, int distance) {
 
 
-}
+// }
+
+// int Integer::rotateRight(int inputInt, int distance) {
+
+
+// }
