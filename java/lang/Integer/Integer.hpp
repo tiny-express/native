@@ -324,7 +324,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int lowestOneBit(int i);
+           // static int lowestOneBit(int inputInt);
 
            // /**
            //  * Returns the greater of two int values
@@ -353,7 +353,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int numberOfLeadingZeros(int i);
+           // static int numberOfLeadingZeros(int inputInt);
 
            // /**
            //  * Returns the number of zero bits
@@ -364,7 +364,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int numberOfTrailingZeros(int i);
+           // static int numberOfTrailingZeros(int inputInt);
 
            // /**
            //  * Parses the string argument as
@@ -421,7 +421,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int reverse(int i);
+           // static int reverse(int inputInt);
 
            // /**
            //  * Returns the value obtained by reversing
@@ -431,7 +431,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int reverseBytes(int i);
+           // static int reverseBytes(int inputInt);
 
            // /**
            //  * Returns the value obtained by rotating the
@@ -469,7 +469,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int signum(int i);
+           // static int signum(int inputInt);
            
            // /**
            //  * Adds two integers together as per the + operator.
@@ -486,7 +486,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toBinaryString(int i);
+           // static string toBinaryString(int inputInt);
 
            // /**
            //  * Returns a string representation of
@@ -495,7 +495,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toHexString(int i);
+           // static string toHexString(int inputInt);
 
            // /**
            //  * Returns a string representation of
@@ -504,7 +504,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toOctalString(int i);
+           // static string toOctalString(int inputInt);
 
            // /**
            //  * Returns a String object representing
@@ -551,7 +551,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toUnsignedString(int i);
+           // static string toUnsignedString(int inputInt);
 
            // /**
            //  * Returns an Integer object holding
@@ -569,7 +569,7 @@ namespace Java {
            //  * @param target
            //  * @return Integer
            //  */
-           // static Integer valueOf(int i);
+           // static Integer valueOf(int inputInt);
 
            // /**
            //  * Returns an Integer object

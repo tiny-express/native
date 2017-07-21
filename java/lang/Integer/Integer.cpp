@@ -331,7 +331,7 @@ int Integer::bitCount(int intInput) {
 	
 // }
 
-// int Integer::lowestOneBit(int i) {
+// int Integer::lowestOneBit(int inputInt) {
 
 
 // }
@@ -346,12 +346,12 @@ int Integer::bitCount(int intInput) {
 
 // }
 
-// int Integer::numberOfLeadingZeros(int i) {
+// int Integer::numberOfLeadingZeros(int inputInt) {
 
 
 // }
 
-// int Integer::numberOfTrailingZeros(int i) {
+// int Integer::numberOfTrailingZeros(int inputInt) {
 
 
 // }
@@ -380,12 +380,12 @@ int Integer::parseInt(String inputString) {
 
 // }
 
-// int Integer::reverse(int i) {
+// int Integer::reverse(int inputInt) {
 
 
 // }
 
-// int Integer::reverseBytes(int i) {
+// int Integer::reverseBytes(int inputInt) {
 
 
 // }
@@ -400,7 +400,7 @@ int Integer::parseInt(String inputString) {
 
 // }
 
-// int Integer::signum(int i) {
+// int Integer::signum(int inputInt) {
 
 
 // }
@@ -411,6 +411,11 @@ int Integer::parseInt(String inputString) {
 // }
 
 // int Integer::sum(int a, int b) {
+
+
+// }
+
+// string Integer::toBinaryString(int inputInt) {
 
 
 // }

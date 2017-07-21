@@ -1762,7 +1762,7 @@ TEST(JavaLang, IntegerBitCount) {
 //     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 13), -2147483635);
 //     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MAX_VALUE), -1);
 //     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MIN_VALUE), 0);
-    
+
 //     System.out.println(Integer.sum(Integer.MIN_VALUE, 0));
 //     System.out.println(Integer.sum(Integer.MIN_VALUE, 1));
 //     System.out.println(Integer.sum(Integer.MIN_VALUE, -1));
@@ -1772,8 +1772,20 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerToBinaryString) {
+//     ASSERT_STR((string) "0", Integer::toBinaryString(0));
+//     ASSERT_STR((string) "1", Integer::toBinaryString(1));
+//     ASSERT_STR((string) "11111111111111111111111111111111", Integer::toBinaryString(-1));
+//     ASSERT_STR((string) "1101", Integer::toBinaryString(13));
+//     ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(MAX_VALUE));
+//     ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(MIN_VALUE));
 
+//     System.out.println(Integer.toBinaryString(0));
+//     System.out.println(Integer.toBinaryString(1));
+//     System.out.println(Integer.toBinaryString(-1));
+//     System.out.println(Integer.toBinaryString(13));
+//     System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+//     System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
 
 // }
 
