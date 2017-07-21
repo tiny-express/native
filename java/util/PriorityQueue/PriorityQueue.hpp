@@ -266,7 +266,7 @@ namespace Java {
              * @param anArray
              * @return Array<E>
              */
-            Array<E> &toArray(Array<E> &anArray) const {
+            Array<E> toArray(Array<E> &anArray) const {
                 int originalSize = (int)this->original.size();
                 typename std::vector<E>::const_iterator originalIterator;
                 if (anArray.length < originalSize) {
@@ -280,6 +280,11 @@ namespace Java {
                 for (originalIterator = this->original.begin(); originalIterator != this->original.end(); originalIterator++) {
                     anArray[indexOfArray] = *originalIterator;
                     indexOfArray = indexOfArray + 1;
+                }
+                // Add "null" terminator (but must use default value).
+                if (anArray.length > originalSize) {
+                    E defaultOfE;
+                    anArray[indexOfArray] = defaultOfE;
                 }
                 return anArray;
             }

@@ -98,7 +98,7 @@ TEST(JavaUtil, PriorityQueuePeek) {
 
     PriorityQueue<Integer> integerPriorityQueue;
     ASSERT_EQUAL(0, integerPriorityQueue.size());
-    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
+    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
 }
 
 TEST(JavaUtil, PriorityQueuePoll) {
@@ -134,4 +134,29 @@ TEST(JavaUtil, PriorityQueueSize) {
     ASSERT_EQUAL(0, priorityQueue.size());
     priorityQueue.add(-1);
     ASSERT_EQUAL(1, priorityQueue.size());
+}
+
+TEST(JavaUtil, PriorityQueueToArray) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.peek());
+    Array<int> arrayResult1 = priorityQueue.toArray();
+    ASSERT_TRUE(arrayResult1.length == priorityQueue.size());
+
+    PriorityQueue<Integer> integerPriorityQueue {Integer(1), Integer(2)};
+    ASSERT_EQUAL(2, integerPriorityQueue.size());
+    ASSERT_TRUE(Integer(2) == integerPriorityQueue.peek());
+
+    // if length of array is larger than queue size.
+    Array<Integer> integerArray1 = {Integer(), Integer(), Integer(), Integer(4)};
+    ASSERT_EQUAL(4, integerArray1.length);
+    integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
+    ASSERT_TRUE(Integer() != integerArray1[0]);
+    ASSERT_TRUE(Integer().intValue() == integerArray1[2].intValue()); // default Integer value (same as null).
+
+    // if length of array is less than queue size.
+    Array<Integer> integerArray2;
+    ASSERT_EQUAL(0, integerArray2.length);
+    Array<Integer> arrayResult2 = integerPriorityQueue.toArray(integerArray2); // new array will be created.
+    ASSERT_EQUAL(2, arrayResult2.length);
 }
