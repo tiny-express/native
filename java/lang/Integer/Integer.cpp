@@ -254,13 +254,11 @@ int Integer::bitCount(int intInput) {
 
 byte Integer::byteValue() {
 	return (byte) this->original;
-
 }
 
 int Integer::compare(int inputInt_1, int inputInt_2) {
 	if(inputInt_1 < inputInt_2) {
 		return -1;
-
 	}
 
 	if(inputInt_1 > inputInt_2) {
@@ -268,7 +266,6 @@ int Integer::compare(int inputInt_1, int inputInt_2) {
 	}
 
 	return 0;
-
 }
 
 // int Integer::compareTo(Integer anotherInteger) {
@@ -276,8 +273,7 @@ int Integer::compare(int inputInt_1, int inputInt_2) {
 // }
 
 int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
-
-	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);
+	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);	
 }
 
 // Integer Integer::decode(String inputStringtringInput) {
@@ -286,8 +282,7 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 // }
 
 // int Integer::divideUnsigned(int dividend, int divisor) {
-
-
+// 	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
 // }
 
 // double Integer::doubleValue() {
@@ -443,10 +438,9 @@ string Integer::toString() const {
 
 // }
 
-// long Integer::toUnsignedLong(int x) {
-
-
-// }
+long Integer::toUnsignedLong(int inputInt) {
+	return ((long) inputInt) & 0xffffffffL;
+}
 
 // string Integer::toUnsignedString(int inputInt, int radix) {
 

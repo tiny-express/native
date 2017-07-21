@@ -1889,22 +1889,22 @@ TEST(JavaLang, IntegerToString) {
 
 // }
 
-// TEST(JavaLang, IntegerToUnsignedLong) {
-//     ASSERT_EQUAL(0, Integer::toUnsignedLong(0));
-//     ASSERT_EQUAL(1, Integer::toUnsignedLong(1));
-//     ASSERT_EQUAL(4294967295, Integer::toUnsignedLong(-1));
-//     ASSERT_EQUAL(13, Integer::toUnsignedLong(13));
-//     ASSERT_EQUAL(2147483647, Integer::toUnsignedLong(MAX_VALUE));
-//     ASSERT_EQUAL(2147483648, Integer::toUnsignedLong(MIN_VALUE));
+TEST(JavaLang, IntegerToUnsignedLong) {
+    ASSERT_EQUAL(0, Integer::toUnsignedLong(0));
+    ASSERT_EQUAL(1, Integer::toUnsignedLong(1));
+    ASSERT_EQUAL(4294967295, Integer::toUnsignedLong(-1));
+    ASSERT_EQUAL(13, Integer::toUnsignedLong(13));
+    ASSERT_EQUAL(2147483647, Integer::toUnsignedLong(MAX_VALUE));
+    ASSERT_EQUAL(2147483648, Integer::toUnsignedLong(MIN_VALUE));
 
-//     System.out.println(Integer.toUnsignedLong(0));
-//     System.out.println(Integer.toUnsignedLong(1));
-//     System.out.println(Integer.toUnsignedLong(-1));
-//     System.out.println(Integer.toUnsignedLong(13));
-//     System.out.println(Integer.toUnsignedLong(Integer.MAX_VALUE));
-//     System.out.println(Integer.toUnsignedLong(Integer.MIN_VALUE));
+    // System.out.println(Integer.toUnsignedLong(0));
+    // System.out.println(Integer.toUnsignedLong(1));
+    // System.out.println(Integer.toUnsignedLong(-1));
+    // System.out.println(Integer.toUnsignedLong(13));
+    // System.out.println(Integer.toUnsignedLong(Integer.MAX_VALUE));
+    // System.out.println(Integer.toUnsignedLong(Integer.MIN_VALUE));
 
-// }
+}
 
 // TEST(JavaLang, IntegerToUnsignedString) {
 //     // TODO(thoangminh): check these cases

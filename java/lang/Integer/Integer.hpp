@@ -200,21 +200,21 @@ namespace Java {
             * Decodes a String into an Integer .
             *
             * @param target
-			* @exception NumberFormatException  if the String does not
-    	    *            contain a parsable integer.
-			*
+			      * @exception NumberFormatException  if the String does not
+    	      *            contain a parsable integer.
+			      *
             * @return Integer
             */
            // static Integer decode(String inputStringtringInput);
 
-           // /**
-           //  * Returns the unsigned quotient of dividing
-           //  * the first argument by the second where each
-           //  * argument and the result is interpreted as an unsigned value. ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
+           /**
+            * Returns the unsigned quotient of dividing
+            * the first argument by the second where each
+            * argument and the result is interpreted as an unsigned value. ...
+            *
+            * @param target
+            * @return int
+            */
            // static int divideUnsigned(int dividend, int divisor);
 
            // /**
@@ -531,14 +531,14 @@ namespace Java {
            //  */
            // static string toString(int inputInt, int radix);
 
-           // /**
-           //  * Converts the argument to a long
-           //  * by an unsigned conversion.
-           //  *
-           //  * @param target
-           //  * @return long
-           //  */
-           // static long toUnsignedLong(int x);
+           /**
+            * Converts the argument to a long
+            * by an unsigned conversion.
+            *
+            * @param target
+            * @return long
+            */
+           static long toUnsignedLong(int x);
 
            // /**
            //  * Returns a string representation of
