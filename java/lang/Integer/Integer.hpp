@@ -60,20 +60,8 @@ namespace Java {
 			double doubleValue() const;
 			
 			string toString() const;
-			static Integer parseInt(String target);
-			int compareTo(const Integer &o) const override {
-				if (hashCode() == o.hashCode()) {
-					return 0;
-				}
-				if (instanceof<Integer>(o)) {
-					if (original < o.original) {
-						return -1;
-					} else if (original == o.original) {
-						return 0;
-					}
-				}
-				return 1;
-			}
+            static Integer parseInt(String target);
+			int compareTo(const Integer &target) const;
 		
 		public:
 			Integer operator=(const Integer &target);
