@@ -46,7 +46,7 @@ TEST(JavaLang, ClassCastExceptionTryCatch) {
     try {
         throw ClassCastException("Throw ClassCastException");
     }
-    catch (Exception ex) {
+    catch (ClassCastException ex) {
         ASSERT_STR("Throw ClassCastException", ex.getMessage().toString());
     }
 }
