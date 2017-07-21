@@ -199,7 +199,21 @@ namespace Java {
                 if (this->original.empty()) {
                     return defaultOfE;
                 }
-                return this->original[0];
+                return this->original.front();
+            }
+
+            /**
+             * Retrieves and removes the head of this queue.
+             *
+             * @return E
+             */
+            E poll() {
+                E defaultOfE;
+                if (this->original.empty()) {
+                    return defaultOfE;
+                }
+                std::pop_heap(this->original.begin(), this->original.end());
+                return this->original.pop_back();
             }
 
             /**
