@@ -215,7 +215,7 @@ namespace Java {
             * @param target
             * @return int
             */
-           // static int divideUnsigned(int dividend, int divisor);
+           static int divideUnsigned(int dividend, int divisor);
 
            // /**
            //  * Returns the value of this Integer as a

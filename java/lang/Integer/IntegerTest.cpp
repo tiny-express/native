@@ -649,71 +649,47 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 // }
 
 // TEST(JavaLang, IntegerDivideUnsigned) {
-//     int dividend;
-//     int divisor;
-//     int expectedResult;
-//     int actualResult;
+//     // ASSERT_EQUAL(Integer::divideUnsigned(0, 0), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, 1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, 13), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, MIN_VALUE), 0);
 
-//     dividend = 10;
-//     divisor = 2;
-//     expectedResult = 5;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(1, 0), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, 1), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, 13), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, MIN_VALUE), 0);
 
-//     dividend = -10;
-//     divisor = 5;
-//     expectedResult = 2;
-//     actualResult = ;
-//     ASSERT_EQUAL(expectedResult, actualResult);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(-1 , 0), -1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , 1), -1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , -1), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , 13), 330382099);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , MAX_VALUE), 2);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , MIN_VALUE), 1);
 
-//     dividend = 10;
-//     divisor = -5;
-//     expectedResult = 2;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(13 , 0), 13);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , 1), 13);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , 13), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , MIN_VALUE), 0);
 
-//     dividend = -10;
-//     divisor = -5;
-//     expectedResult = 2;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 0), 2147483647);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 1), 2147483647);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 13), 165191049);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , MAX_VALUE), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , MIN_VALUE), 0);
 
-//     dividend = -10.7;
-//     divisor = 5.6;
-//     expectedResult = 2;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
-//     dividend = MAX_VALUE;
-//     divisor = -2;
-//     expectedResult = MAX_VALUE / 2;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
-//     dividend = MIN_VALUE;
-//     divisor = 2;
-//     expectedResult = -MIN_VALUE / 2;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
-//     dividend = 10;
-//     divisor = 0;
-//     expectedResult = ;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
-//     dividend = -10;
-//     divisor = 0;
-//     expectedResult = ;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
-//     dividend = 0;
-//     divisor = 0;
-//     expectedResult = 0;
-//     actualResult = Integer::divideUnsigned(dividend, divisor);
-//     ASSERT_EQUAL(expectedResult, actualResult);
-
+//     // ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 0), -2147483648);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 1), -2147483648);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 13), 165191049);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , MAX_VALUE), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , MIN_VALUE), 1);
 // }
 
 // TEST(JavaLang, IntegerDoubleValue) {
@@ -1896,14 +1872,6 @@ TEST(JavaLang, IntegerToUnsignedLong) {
     ASSERT_EQUAL(13, Integer::toUnsignedLong(13));
     ASSERT_EQUAL(2147483647, Integer::toUnsignedLong(MAX_VALUE));
     ASSERT_EQUAL(2147483648, Integer::toUnsignedLong(MIN_VALUE));
-
-    // System.out.println(Integer.toUnsignedLong(0));
-    // System.out.println(Integer.toUnsignedLong(1));
-    // System.out.println(Integer.toUnsignedLong(-1));
-    // System.out.println(Integer.toUnsignedLong(13));
-    // System.out.println(Integer.toUnsignedLong(Integer.MAX_VALUE));
-    // System.out.println(Integer.toUnsignedLong(Integer.MIN_VALUE));
-
 }
 
 // TEST(JavaLang, IntegerToUnsignedString) {

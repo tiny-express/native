@@ -281,9 +281,9 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 
 // }
 
-// int Integer::divideUnsigned(int dividend, int divisor) {
-// 	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
-// }
+int Integer::divideUnsigned(int dividend, int divisor) {
+	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
+}
 
 // double Integer::doubleValue() {
 
