@@ -155,7 +155,7 @@ namespace Java {
              * @return boolean
              */
             boolean contains(const E &target) const {
-                std::vector<E>::const_iterator targetIterator;
+                typename std::vector<E>::const_iterator targetIterator;
                 targetIterator = std::find(this->original.begin(), this->original.end(), target);
                 return (targetIterator != this->original.end());
             }
