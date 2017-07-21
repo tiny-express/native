@@ -217,6 +217,22 @@ namespace Java {
             }
 
             /**
+             * Removes a single instance of the specified element from this queue, if it is present.
+             *
+             * @param target
+             * @return boolean
+             */
+            boolean remove(const E &target) {
+                typename std::vector<E>::iterator targetIterator;
+                targetIterator = std::find(this->original.begin(), this->original.end(), target);
+                if (targetIterator != this->original.end()) {
+                    this->original.erase(targetIterator);
+                    return true;
+                }
+                return false;
+            }
+
+            /**
              * Returns the number of elements in this collection.
              *
              * @return int
