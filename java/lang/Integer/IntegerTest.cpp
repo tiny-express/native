@@ -378,51 +378,51 @@ TEST(JavaLang, IntegerByteValue) {
 
 }
 
-// TEST(JavaLang, IntegerCompare) {
+TEST(JavaLang, IntegerCompare) {
 
-    // ASSERT_EQUAL(Integer::compare(0, 0), 0);
-    // ASSERT_EQUAL(Integer::compare(0, 1), -1);
-    // ASSERT_EQUAL(Integer::compare(0, -1), 1);
-    // ASSERT_EQUAL(Integer::compare(0, 13), -1);
-    // ASSERT_EQUAL(Integer::compare(0, MAX_VALUE), -1);
-    // ASSERT_EQUAL(Integer::compare(0, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(0, 0), 0);
+    ASSERT_EQUAL(Integer::compare(0, 1), -1);
+    ASSERT_EQUAL(Integer::compare(0, -1), 1);
+    ASSERT_EQUAL(Integer::compare(0, 13), -1);
+    ASSERT_EQUAL(Integer::compare(0, MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(0, MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::compare(1, 0), 1);
-    // ASSERT_EQUAL(Integer::compare(1, 1), 0);
-    // ASSERT_EQUAL(Integer::compare(1, -1),1 );
-    // ASSERT_EQUAL(Integer::compare(1, 13), -1);
-    // ASSERT_EQUAL(Integer::compare(1, MAX_VALUE), -1);
-    // ASSERT_EQUAL(Integer::compare(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(1, 0), 1);
+    ASSERT_EQUAL(Integer::compare(1, 1), 0);
+    ASSERT_EQUAL(Integer::compare(1, -1),1 );
+    ASSERT_EQUAL(Integer::compare(1, 13), -1);
+    ASSERT_EQUAL(Integer::compare(1, MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(1, MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::compare(-1 , 0), -1);
-    // ASSERT_EQUAL(Integer::compare(-1 , 1), -1);
-    // ASSERT_EQUAL(Integer::compare(-1 , -1), 0);
-    // ASSERT_EQUAL(Integer::compare(-1 , 13), -1);
-    // ASSERT_EQUAL(Integer::compare(-1 , MAX_VALUE), -1);
-    // ASSERT_EQUAL(Integer::compare(-1 , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(-1 , 0), -1);
+    ASSERT_EQUAL(Integer::compare(-1 , 1), -1);
+    ASSERT_EQUAL(Integer::compare(-1 , -1), 0);
+    ASSERT_EQUAL(Integer::compare(-1 , 13), -1);
+    ASSERT_EQUAL(Integer::compare(-1 , MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(-1 , MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::compare(13 , 0), 1);
-    // ASSERT_EQUAL(Integer::compare(13 , 1), 1);
-    // ASSERT_EQUAL(Integer::compare(13 , -1),1 );
-    // ASSERT_EQUAL(Integer::compare(13 , 13), 0);
-    // ASSERT_EQUAL(Integer::compare(13 , MAX_VALUE), -1);
-    // ASSERT_EQUAL(Integer::compare(13 , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(13 , 0), 1);
+    ASSERT_EQUAL(Integer::compare(13 , 1), 1);
+    ASSERT_EQUAL(Integer::compare(13 , -1),1 );
+    ASSERT_EQUAL(Integer::compare(13 , 13), 0);
+    ASSERT_EQUAL(Integer::compare(13 , MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(13 , MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , 0), 1);
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , 1), 1);
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , -1), 1);
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , 13), 1);
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , MAX_VALUE), 0);
-    // ASSERT_EQUAL(Integer::compare(MAX_VALUE , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 0), 1);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , -1), 1);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 13), 1);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::compare(MAX_VALUE , MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , 0), -1);
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , 1), -1);
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , -1), -1);
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , 13), -1);
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , MAX_VALUE), -1);
-    // ASSERT_EQUAL(Integer::compare(MIN_VALUE , MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 0), -1);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 1), -1);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 13), -1);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(MIN_VALUE , MIN_VALUE), 0);
 
-// }
+}
 
 // TEST(JavaLang, IntegerCompareTo) {
     // Integer thisInteger;

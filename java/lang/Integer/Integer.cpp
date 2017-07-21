@@ -257,17 +257,26 @@ byte Integer::byteValue() {
 
 }
 
-// int Integer::compare(int intInput_1, int intInput_2) {
-// 	return ;
+int Integer::compare(int inputInt_1, int inputInt_2) {
+	if(inputInt_1 < inputInt_2) {
+		return -1;
 
-// }
+	}
+
+	if(inputInt_1 > inputInt_2) {
+		return 1;
+	}
+
+	return 0;
+	
+}
 
 // int Integer::compareTo(Integer anotherInteger) {
 
 // 	return ;
 // }
 
-// int Integer::compareUnsigned(int intInput_1, int intInput_2) {
+// int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 
 // 	return ;
 // }
