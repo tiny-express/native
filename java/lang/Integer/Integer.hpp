@@ -169,7 +169,7 @@ namespace Java {
             *
             * @return byte
             */
-           static byte byteValue();
+           byte byteValue();
 
            // /**
            //  * Compares two int values numerically.

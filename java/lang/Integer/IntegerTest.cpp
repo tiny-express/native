@@ -355,42 +355,28 @@ TEST(JavaLang, IntegerBitCount) {
 
 }
 
-// TEST(JavaLang, IntegerByteValue) {
-    // Integer integerInput;
-    // int expectedResult;
-    // int actualResult;
+TEST(JavaLang, IntegerByteValue) {
+    Integer integerInput;
 
-    // integerInput = 0;  
-    // expectedResult = 0;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = 0;  
+    ASSERT_EQUAL((byte) 0, integerInput.byteValue());
 
-    // integerInput = 1;  
-    // expectedResult = 1;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = 1;  
+    ASSERT_EQUAL((byte) 1, integerInput.byteValue());
 
-    // integerInput = -1;  
-    // expectedResult = -1;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = -1;  
+    ASSERT_EQUAL((byte) -1, integerInput.byteValue());
 
-    // integerInput = 13;  
-    // expectedResult = 13;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = 13;  
+    ASSERT_EQUAL((byte) 13, integerInput.byteValue());
 
-    // integerInput = MAX_VALUE;  
-    // expectedResult = 0;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = MAX_VALUE;  
+    ASSERT_EQUAL((byte) -1, integerInput.byteValue());
 
-    // integerInput = MIN_VALUE;  
-    // expectedResult = 0;
-    // actualResult = integerInput.byteValue();
-    // ASSERT_EQUAL(expectedResult, actualResult);
+    integerInput = MIN_VALUE;  
+    ASSERT_EQUAL((byte) 0, integerInput.byteValue());
 
-// }
+}
 
 // TEST(JavaLang, IntegerCompare) {
 
