@@ -35,7 +35,7 @@
 namespace Java {
 	namespace Util {
 		template <class E>
-		class AbstractList : public AbstractCollection<E>, public virtual List<E> {
+		class AbstractList : public virtual AbstractCollection<E>, public virtual List<E> {
 
         protected:
             AbstractList() {}
