@@ -172,6 +172,7 @@ namespace Java {
              *
              * @param target
              * @return boolean
+             * @throw ClassCastException - if the specified element cannot be compared with elements currently in this priority queue according to the priority queue's ordering.
              */
             boolean offer(const E &target) {
                 int oldSize = (int)this->original.size();
@@ -186,6 +187,19 @@ namespace Java {
 
                 int newSize = (int)this->original.size();
                 return (newSize != oldSize);
+            }
+
+            /**
+             * Retrieves, but does not remove, the head of this queue.
+             *
+             * @return E
+             */
+            E peek() const {
+                E defaultOfE;
+                if (this->isEmpty()) {
+                    return defaultOfE;
+                }
+                return this->original[0];
             }
 
             /**
