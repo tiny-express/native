@@ -433,7 +433,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int rotateLeft(int i, int distance);
+           // static int rotateLeft(int inputInt, int distance);
 
            // /**
            //  * Returns the value obtained by rotating the
@@ -443,7 +443,7 @@ namespace Java {
            //  * @param target
            //  * @return int
            //  */
-           // static int rotateRight(int i, int distance);
+           // static int rotateRight(int inputInt, int distance);
 
            // /**
            //  * Returns the value of this Integer as
@@ -522,7 +522,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toString(int i, int radix);
+           // static string toString(int inputInt, int radix);
 
            // /**
            //  * Converts the argument to a long
@@ -541,7 +541,7 @@ namespace Java {
            //  * @param target
            //  * @return string
            //  */
-           // static string toUnsignedString(int i, int radix);
+           // static string toUnsignedString(int inputInt, int radix);
 
            // /**
            //  * Returns a string representation of
