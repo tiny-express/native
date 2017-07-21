@@ -27,6 +27,8 @@
 
 #include "../../Lang.hpp"
 #include "StringBuffer.hpp"
+#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 extern "C" {
 #include "../../../kernel/test.h"
@@ -43,9 +45,9 @@ TEST (JavaLang, StringBufferConstructor) {
     // Init a StringBuffer with specific capacity;
     StringBuffer capacityConstructor = StringBuffer(10);
     int expectSpecificCapacity = 10;
-    ASSERT_EQUAL(expectSpecificCapacity, defaultConstructor.capacity());
+    ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
 
-/*    // Init a StringBuffer with a charsequence
+   /* // Init a StringBuffer with a charsequence
     CharSequence seq;
     StringBuffer charSequenceConstructor =  StringBuffer(&seq);
     int expectSequenceCapacity = seq.length() + 16;
@@ -54,6 +56,7 @@ TEST (JavaLang, StringBufferConstructor) {
     ASSERT_EQUAL(expectSequenceCapacity, charSequenceConstructor.capacity());
     ASSERT_EQUAL(expectSequenceLength, charSequenceConstructor.length());
     ASSERT_STR(expectSequenceValue, charSequenceConstructor.getValue());*/
+
 
     // Init a StringBuffer with a String
     String aString = "A string to test";
@@ -74,10 +77,110 @@ TEST (JavaLang, StringBufferCapacity) {
     ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
 }
 
+TEST (JavaLang, StringBufferLength) {
+    // Init a StringBuffer with a String
+    String aString = "A string to test";
+    StringBuffer stringConstructor = StringBuffer(aString);
+    int expectLength = 16;
+    ASSERT_EQUAL(expectLength, stringConstructor.length());
+}
+
 TEST (JavaLang, StringBufferGetValue) {
     // Init a StringBuffer with specific capacity
     String aString = "A string to test";
     StringBuffer stringBuffer = StringBuffer(aString);
     string expectValue = aString.toString();
     ASSERT_STR(expectValue, stringBuffer.getValue());
+}
+
+TEST (JavaLang, StringBufferAppend) {
+    StringBuffer stringAppend = StringBuffer("please");
+
+    string stringToAppend = "don't add more";
+    stringAppend.append(stringToAppend, 5, 9);
+    string expectString = "please add more";
+    ASSERT_STR(expectString, stringAppend.getValue());
+
+    try {
+        stringAppend.append(stringToAppend, 20, 2);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+
+    try {
+        stringAppend.append(stringToAppend, -1, 5);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+
+    try {
+        stringAppend.append(stringToAppend, 5, -1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+}
+
+TEST (JavaLang, StringBufferInsert) {
+    StringBuffer stringInsert = StringBuffer("please more");
+
+    string stringToInsert = "don't insert";
+    stringInsert.insert(6, stringToInsert, 5, 7);
+    string expectString = "please insert more";
+    ASSERT_STR(expectString, stringInsert.getValue());
+
+    try {
+        stringInsert.insert(-1, stringToInsert, 6, 6);
+    }
+    catch (StringIndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringInsert.getValue());
+    }
+
+    try {
+        stringInsert.insert(stringInsert.length() + 1, stringToInsert, 6, 6);
+    }
+    catch (StringIndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringInsert.getValue());
+    }
+
+    try {
+        stringInsert.insert(7, stringToInsert, -6, 6);
+    }
+    catch (StringIndexOutOfBoundsException  e) {
+        ASSERT_STR(expectString, stringInsert.getValue());
+    }
+
+    try {
+        stringInsert.insert(7, stringToInsert, 6, -1);
+    }
+    catch (StringIndexOutOfBoundsException  e) {
+        ASSERT_STR(expectString, stringInsert.getValue());
+    }
+
+    try {
+        stringInsert.insert(7, stringToInsert, 20, 10);
+    }
+    catch (StringIndexOutOfBoundsException  e) {
+        ASSERT_STR(expectString, stringInsert.getValue());
+    }
+
+}
+
+TEST (JavaLang, StringBufferEnsureCapacity) {
+    StringBuffer stringBuffer;
+
+    int expectMinTwentyCapacity = 34;
+    stringBuffer.ensureCapacity(20);
+    ASSERT_EQUAL(expectMinTwentyCapacity, stringBuffer.capacity());
+
+    int expectMinEightyCapacity = 142;
+    stringBuffer.ensureCapacity(80);
+    ASSERT_EQUAL(expectMinEightyCapacity, stringBuffer.capacity());
+
+    int expectMinNonPositiveCapacity = 142;
+    stringBuffer.ensureCapacity(-1);
+    ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
+
 }

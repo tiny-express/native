@@ -89,7 +89,7 @@ TEST (JavaUtil, NextDouble) {
     Random random1;
 
     // Test if every generated double is in [0, 1) range
-    for (int index = 0; index < 100; index ++) {
+    for (int index = 0; index < 100; index++) {
         double generatedDouble = random1.nextDouble();
         ASSERT_TRUE(generatedDouble >= 0 && generatedDouble < 1.0);
     }

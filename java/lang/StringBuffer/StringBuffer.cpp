@@ -24,21 +24,32 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "StringBuffer.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
+
+using namespace Java::Lang;
 
 StringBuffer::StringBuffer() : StringBuffer(16){
 }
 
 StringBuffer::StringBuffer(int capacity) {
+    if (capacity < 0) {
+        throw NegativeArraySizeException();
+    }
+
     this->currentcapacity = capacity;
+    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
 }
 
 StringBuffer::StringBuffer(String str) {
     this->currentcapacity = str.length() + 16;
+    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
     append(str);
 }
 
 StringBuffer::StringBuffer(CharSequence *seq) {
     this->currentcapacity = seq->length() + 16;
+    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
     append(seq);
 }
 
@@ -47,7 +58,106 @@ int StringBuffer::capacity() {
 }
 
 string StringBuffer::getValue() {
-    return value;
+    return original;
 }
+
+StringBuffer StringBuffer::append(CharSequence *seq) {
+    this->original = seq->toString();
+}
+
+StringBuffer StringBuffer::append(CharSequence *seq, int start, int end) {
+
+}
+
+void StringBuffer::ensureCapacity(int minimumCapacity) {
+    if (minimumCapacity <= 0) {
+        return;
+    }
+
+    if (minimumCapacity <= capacity()) {
+        return;
+    }
+
+    int newCapacity = 0;
+    do {
+        newCapacity = capacity() * 2 + 2;
+        currentcapacity = newCapacity;
+    } while (newCapacity < minimumCapacity);
+
+    int newSize = newCapacity * sizeof(char);
+    original = (string)(realloc(original, (size_t)(newSize)));
+}
+
+StringBuffer::~StringBuffer() {
+    free(original);
+}
+
+StringBuffer StringBuffer::append(String str) {
+    return this->append(str.toString(), 0, str.length());
+}
+
+int StringBuffer::length() {
+    return currentlength;
+}
+
+StringBuffer StringBuffer::append(string str, int offset, int len) {
+    if (offset < 0 || len < 0 || (offset + len) > length_pointer_char(str)) {
+        throw IndexOutOfBoundsException();
+    }
+
+    ensureCapacity(this->length() + length_pointer_char(str));
+    std::string string(this->original);
+    string.append(getString(str, offset, len));
+    strcpy(this->original, string.c_str());
+    this->currentlength += len;
+    return *this;
+}
+
+StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
+    if (index < 0 || index > length() || offset < 0
+        || len < 0 || (offset + len) > length_pointer_char(str)) {
+        throw StringIndexOutOfBoundsException();
+    }
+
+    ensureCapacity(this->length() + length_pointer_char(str));
+    std::string string(original);
+    string.insert(index, str, offset, len);
+    strcpy(original, string.c_str());
+    currentlength += len;
+    return *this;
+
+}
+
+string StringBuffer::getString(string str, int offset, int len) {
+    string result;
+    int end = offset + len;
+    int begin = offset;
+    for (begin; begin < end; begin++) {
+        result[begin - offset] = str[begin];
+    }
+    return result;
+}
+
+StringBuffer StringBuffer::append(string destination, string str) {
+    int strLen = length_pointer_char(str);
+    for (int index = 0; index < strLen; ++index) {
+        int originalIndex = currentlength +index;
+        char character = str[index];
+        destination[originalIndex] = character;
+    }
+}
+
+StringBuffer::StringBuffer(const StringBuffer &other) {
+    this->original = (string) calloc((size_t) other.currentcapacity, sizeof(char));
+    int index;
+    for (index = 0; index < other.currentlength; index++) {
+        this->original[index] = other.original[index];
+    }
+    this->currentlength = other.currentlength;
+    this->currentcapacity = other.currentcapacity;
+}
+
+
+
 
 

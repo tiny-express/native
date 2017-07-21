@@ -32,7 +32,7 @@ namespace Java {
     namespace Lang {
         class StringBuffer { //: public CharSequence {
         private:
-            string value = NULL;
+            string original = NULL;
             string toStringCache = NULL;
             int currentlength = 0;
             int currentcapacity = 0;
@@ -49,7 +49,9 @@ namespace Java {
 
             explicit StringBuffer(int capacity);
 
-            StringBuffer(String str);
+            explicit StringBuffer(String str);
+
+            StringBuffer(const StringBuffer &other);
 
             StringBuffer append(Object obj);
 
@@ -74,6 +76,8 @@ namespace Java {
             StringBuffer append(long longValue);
 
             StringBuffer append(StringBuffer stringBuffer);
+
+            StringBuffer append(string destination, string str);
 
             StringBuffer append(string str, int offset, int len);
 
@@ -159,6 +163,11 @@ namespace Java {
 
             void trimToSize();
 
+            ~StringBuffer();
+
+            string getString(string str, int offset, int len);
+
+            //StringBuffer operator=(const StringBuffer &other);
         };
     }
 }
