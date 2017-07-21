@@ -114,3 +114,17 @@ TEST(JavaUtil, PriorityQueuePoll) {
     ASSERT_EQUAL(0, integerPriorityQueue.size());
     ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
 }
+
+TEST(JavaUtil, PriorityQueueRemove) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.peek());
+
+    ASSERT_TRUE(priorityQueue.remove(5));
+    ASSERT_EQUAL(4, priorityQueue.size());
+    ASSERT_EQUAL(4, priorityQueue.peek());
+
+    ASSERT_FALSE(priorityQueue.remove(10));
+    ASSERT_EQUAL(4, priorityQueue.size());
+    ASSERT_EQUAL(4, priorityQueue.peek());
+}
