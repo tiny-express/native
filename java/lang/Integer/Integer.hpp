@@ -36,12 +36,12 @@ using namespace Java::Lang;
 /**
  * A constant holding the maximum value of type int
  */
-static int MAX_VALUE_INTEGER = std::numeric_limits<int>::max(); // 2,147,483,647   2147483647
+static int MAX_VALUE = std::numeric_limits<int>::max(); // 2,147,483,647   2147483647
 
 /**
  * A constant holding the minimum value of type int
  */
-static int MIN_VALUE_INTEGER = std::numeric_limits<int>::min(); // –2,147,483,648  –2147483648
+static int MIN_VALUE = std::numeric_limits<int>::min(); // –2,147,483,648  –2147483648
 
 namespace Java {
 	namespace Lang {
