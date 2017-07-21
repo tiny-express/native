@@ -28,9 +28,9 @@ extern "C" {
 #include "../../../kernel/test.h"
 }
 
+#include "../../Lang.hpp"
 #include "../PriorityQueue/PriorityQueue.hpp"
 #include "../Vector/Vector.hpp"
-#include "../../Lang.hpp"
 
 using namespace Java::Util;
 
@@ -45,6 +45,13 @@ TEST(JavaUtil, PriorityQueueConstructor) {
     PriorityQueue<int> copyConstructor(initializerListConstructor);
     ASSERT_EQUAL(5, copyConstructor.size());
     ASSERT_EQUAL(5, copyConstructor.peek());
+
+    try {
+        PriorityQueue<int> customCapacityConstructor(-1);
+    }
+    catch (IllegalArgumentException ex) {
+        ASSERT_STR("initialCapacity < 1", ex.getMessage().toString());
+    }
 }
 
 TEST(JavaUtil, PriorityQueueAdd) {

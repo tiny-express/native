@@ -30,6 +30,7 @@
 #include "../Collection/Collection.hpp"
 #include "../Comparator/Comparator.hpp"
 #include "../../lang/Exception/Exception.hpp"
+#include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 #include "../../lang/ClassCastException/ClassCastException.hpp"
 #include <vector>
 
@@ -72,8 +73,14 @@ namespace Java {
              * Creates a PriorityQueue with the specified initial capacity.
              *
              * @param initialCapacity
+             * @throw IllegalArgumentException - if initialCapacity is less than 1
              */
-//          PriorityQueue(int initialCapacity);
+            PriorityQueue(int initialCapacity) {
+                if (initialCapacity < 1) {
+                    throw IllegalArgumentException("initialCapacity < 1");
+                }
+                this->original.reserve(initialCapacity);
+            }
 
             /**
              * Constructor
