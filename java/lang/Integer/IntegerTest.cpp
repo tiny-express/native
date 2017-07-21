@@ -1703,8 +1703,20 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerSignum) {
+//     ASSERT_EQUAL(0, Integer::signum(0));
+//     ASSERT_EQUAL(1, Integer::signum(1));
+//     ASSERT_EQUAL(-1, Integer::signum(-1));
+//     ASSERT_EQUAL(1, Integer::signum(13));
+//     ASSERT_EQUAL(1, Integer::signum(MAX_VALUE));
+//     ASSERT_EQUAL(-1, Integer::signum(MIN_VALUE));
 
+//     System.out.println(Integer.signum(0));
+//     System.out.println(Integer.signum(1));
+//     System.out.println(Integer.signum(-1));
+//     System.out.println(Integer.signum(13));
+//     System.out.println(Integer.signum(Integer.MAX_VALUE));
+//     System.out.println(Integer.signum(Integer.MIN_VALUE));
 
 // }
 
