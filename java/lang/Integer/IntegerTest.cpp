@@ -1184,15 +1184,15 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 
 // }
 
-// TEST(JavaLang, IntegerHighestOneBit) {
-    // ASSERT_EQUAL(0, Integer::highestOneBit(0));
-    // ASSERT_EQUAL(1, Integer::highestOneBit(1));
-    // ASSERT_EQUAL(-2147483648, Integer::highestOneBit(-1));
-    // ASSERT_EQUAL(8, Integer::highestOneBit(13));
-    // ASSERT_EQUAL(1073741824, Integer::highestOneBit(MAX_VALUE));
-    // ASSERT_EQUAL(-2147483648, Integer::highestOneBit(MIN_VALUE)); 
+TEST(JavaLang, IntegerHighestOneBit) {
+    ASSERT_EQUAL(0, Integer::highestOneBit(0));
+    ASSERT_EQUAL(1, Integer::highestOneBit(1));
+    ASSERT_EQUAL(-2147483648, Integer::highestOneBit(-1));
+    ASSERT_EQUAL(8, Integer::highestOneBit(13));
+    ASSERT_EQUAL(1073741824, Integer::highestOneBit(MAX_VALUE));
+    ASSERT_EQUAL(-2147483648, Integer::highestOneBit(MIN_VALUE)); 
 
-// }
+}
 
 // TEST(JavaLang, IntegerLowestOneBit) {
     // ASSERT_EQUAL(0, Integer::lowestOneBit(0));

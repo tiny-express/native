@@ -316,14 +316,17 @@ int Integer::divideUnsigned(int dividend, int divisor) {
 // }
 
 // int Integer::hashCode(int inputInt) {
-
-
+// 	return inputInt;
 // }
 
-// int Integer::highestOneBit(int inputInt)  {
-
-	
-// }
+int Integer::highestOneBit(int inputInt)  {
+		inputInt |= (inputInt >> 1);
+        inputInt |= (inputInt >> 2);
+        inputInt |= (inputInt >> 4);
+        inputInt |= (inputInt >> 8);
+        inputInt |= (inputInt >> 16);
+        return inputInt - ((unsigned int) inputInt >> 1);	
+}
 
 // int Integer::lowestOneBit(int inputInt) {
 

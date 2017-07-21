@@ -287,16 +287,16 @@ namespace Java {
            //  */
            // static int hashCode(int inputInt);
 
-           // /**
-           //  * Returns an int value with at most
-           //  * a single one-bit, in the position of
-           //  * the highest-order ("leftmost") one-bit
-           //  * in the specified int value.
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int highestOneBit(int inputInt);
+           /**
+            * Returns an int value with at most
+            * a single one-bit, in the position of
+            * the highest-order ("leftmost") one-bit
+            * in the specified int value.
+            *
+            * @param target
+            * @return int
+            */
+           static int highestOneBit(int inputInt);
 
            // /**
            //  * Returns the value of
