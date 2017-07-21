@@ -179,22 +179,22 @@ namespace Java {
             */
            static int compare(int intInput_1, int intInput_2);
 
-           // /**
-           //  * Compares two Integer objects numerically.
-           //  *
-           //  * @param target
-           //  * @return boolean
-           //  */
-           // static int compareTo(Integer anotherInteger);
+           /**
+            * Compares two Integer objects numerically.
+            *
+            * @param target
+            * @return boolean
+            */
+           // int compareTo(Integer anotherInteger);
 
-           // /**
-           //  * Compares two int values numerically
-           //  * treating the values as unsigned.
-           //  *
-           //  * @param target
-           //  * @return boolean
-           //  */
-           // static int compareUnsigned(int intInput_1, int intInput_2);
+           /**
+            * Compares two int values numerically
+            * treating the values as unsigned.
+            *
+            * @param target
+            * @return boolean
+            */
+           static int compareUnsigned(int intInput_1, int intInput_2);
 
            /**
             * Decodes a String into an Integer .

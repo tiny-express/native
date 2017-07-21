@@ -268,18 +268,17 @@ int Integer::compare(int inputInt_1, int inputInt_2) {
 	}
 
 	return 0;
-	
+
 }
 
 // int Integer::compareTo(Integer anotherInteger) {
-
-// 	return ;
+// 	return compare(this->original, anotherInteger.intValue());
 // }
 
-// int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
+int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 
-// 	return ;
-// }
+	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);
+}
 
 // Integer Integer::decode(String inputStringtringInput) {
 
