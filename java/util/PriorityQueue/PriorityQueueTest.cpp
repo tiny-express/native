@@ -30,6 +30,7 @@ extern "C" {
 
 #include "../PriorityQueue/PriorityQueue.hpp"
 #include "../Vector/Vector.hpp"
+#include "../../Lang.hpp"
 
 using namespace Java::Util;
 
@@ -92,6 +93,24 @@ TEST(JavaUtil, PriorityQueuePeek) {
     ASSERT_EQUAL(5, priorityQueue.peek());
     ASSERT_EQUAL(5, priorityQueue.size());
     priorityQueue.add(10);
-    ASSERT_EQUAL(6, priorityQueue.size());
     ASSERT_EQUAL(10, priorityQueue.peek());
+    ASSERT_EQUAL(6, priorityQueue.size());
+
+    PriorityQueue<Integer> integerPriorityQueue;
+    ASSERT_EQUAL(0, integerPriorityQueue.size());
+    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
+}
+
+TEST(JavaUtil, PriorityQueuePoll) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.poll());
+    ASSERT_EQUAL(4, priorityQueue.size());
+    priorityQueue.add(10);
+    ASSERT_EQUAL(10, priorityQueue.poll());
+    ASSERT_EQUAL(4, priorityQueue.size());
+
+    PriorityQueue<Integer> integerPriorityQueue;
+    ASSERT_EQUAL(0, integerPriorityQueue.size());
+    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
 }

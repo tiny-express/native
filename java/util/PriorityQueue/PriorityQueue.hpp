@@ -208,12 +208,10 @@ namespace Java {
              * @return E
              */
             E poll() {
-                E defaultOfE;
-                if (this->original.empty()) {
-                    return defaultOfE;
-                }
+                E result = this->peek();
                 std::pop_heap(this->original.begin(), this->original.end());
-                return this->original.pop_back();
+                this->original.pop_back();
+                return result;
             }
 
             /**
