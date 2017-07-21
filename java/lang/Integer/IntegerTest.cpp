@@ -2012,9 +2012,26 @@ TEST(JavaLang, IntegerToString) {
 //     System.out.println(Integer.valueOf( "-2147483648"));
 
 // }
+// Test Integer::valueOf(String inputStringtringInput, int radixIntInput)
+// TEST(JavaLang, IntegerValueOf3) {    
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", 0)); // java.lang.NumberFormatException: radix 0 less than Character.MIN_RADIX
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", 1)); // java.lang.NumberFormatException: radix 1 less than Character.MIN_RADIX 
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", -1)); // java.lang.NumberFormatException: radix -1 less than Character.MIN_RADIX 
+//     ASSERT_EQUAL(0, Integer::valueOf((String) "0", 13)); 
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", MAX_VALUE)); // java.lang.NumberFormatException: radix 2147483647 greater than Character.MAX_RADIX
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", MIN_VALUE)); // java.lang.NumberFormatException: radix -2147483648 less than Character.MIN_RADIX
 
-// TEST(JavaLang, Integer) {
+//     ASSERT_EQUAL(1, Integer::valueOf((String) "1", 13));
+//     ASSERT_EQUAL(-1, Integer::valueOf((String) "-1", 13));
+//     ASSERT_EQUAL(16, Integer::valueOf((String) "13", 13));
+//     ASSERT_EQUAL(, Integer::valueOf((String) "2147483647", 13)); // java.lang.NumberFormatException: For input string: "2147483647" 
+//     ASSERT_EQUAL(, Integer::valueOf((String) "-2147483648", 13)); // java.lang.NumberFormatException: For input string: "-2147483648"    
 
+//     System.out.println(Integer.valueOf("1", 13));
+//     System.out.println(Integer.valueOf("-1", 13));
+//     System.out.println(Integer.valueOf("13", 13));
+//     System.out.println(Integer.valueOf("2147483647", 13));
+//     System.out.println(Integer.valueOf("-2147483648", 13));
 
 // }
 
