@@ -28,7 +28,8 @@ extern "C" {
 #include "../../../kernel/test.h"
 }
 
-#include "PriorityQueue.hpp"
+#include "../PriorityQueue/PriorityQueue.hpp"
+#include "../Vector/Vector.hpp"
 
 using namespace Java::Util;
 
@@ -74,4 +75,13 @@ TEST(JavaUtil, PriorityQueueContains) {
     ASSERT_EQUAL(5, priorityQueue.peek());
     ASSERT_TRUE(priorityQueue.contains(1));
     ASSERT_FALSE(priorityQueue.contains(7));
+}
+
+TEST(JavaUtil, PriorityQueueOffer) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.peek());
+    priorityQueue.offer(10);
+    ASSERT_EQUAL(6, priorityQueue.size());
+    ASSERT_EQUAL(10, priorityQueue.peek());
 }
