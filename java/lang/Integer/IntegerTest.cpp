@@ -1773,24 +1773,36 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerToBinaryString) {
-//     ASSERT_STR((string) "0", Integer::toBinaryString(0));
-//     ASSERT_STR((string) "1", Integer::toBinaryString(1));
-//     ASSERT_STR((string) "11111111111111111111111111111111", Integer::toBinaryString(-1));
-//     ASSERT_STR((string) "1101", Integer::toBinaryString(13));
-//     ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(MAX_VALUE));
-//     ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(MIN_VALUE));
+    // ASSERT_STR((string) "0", Integer::toBinaryString(0));
+    // ASSERT_STR((string) "1", Integer::toBinaryString(1));
+    // ASSERT_STR((string) "11111111111111111111111111111111", Integer::toBinaryString(-1));
+    // ASSERT_STR((string) "1101", Integer::toBinaryString(13));
+    // ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(MAX_VALUE));
+    // ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(MIN_VALUE));
 
-//     System.out.println(Integer.toBinaryString(0));
-//     System.out.println(Integer.toBinaryString(1));
-//     System.out.println(Integer.toBinaryString(-1));
-//     System.out.println(Integer.toBinaryString(13));
-//     System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
-//     System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
+    // System.out.println(Integer.toBinaryString(0));
+    // System.out.println(Integer.toBinaryString(1));
+    // System.out.println(Integer.toBinaryString(-1));
+    // System.out.println(Integer.toBinaryString(13));
+    // System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+    // System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerToHexString) {
+//     ASSERT_STR((string) "0", Integer::toHexString(0));
+//     ASSERT_STR((string) "1", Integer::toHexString(1));
+//     ASSERT_STR((string) "ffffffff", Integer::toHexString(-1));
+//     ASSERT_STR((string) "d", Integer::toHexString(13));
+//     ASSERT_STR((string) "7fffffff", Integer::toHexString(MAX_VALUE));
+//     ASSERT_STR((string) "80000000", Integer::toHexString(MIN_VALUE));
 
+//     System.out.println(Integer.toHexString(0));
+//     System.out.println(Integer.toHexString(1));
+//     System.out.println(Integer.toHexString(-1));
+//     System.out.println(Integer.toHexString(13));
+//     System.out.println(Integer.toHexString(Integer.MAX_VALUE));
+//     System.out.println(Integer.toHexString(Integer.MIN_VALUE));
 
 // }
 

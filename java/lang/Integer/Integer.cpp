@@ -419,3 +419,8 @@ int Integer::parseInt(String inputString) {
 
 
 // }
+
+// string Integer::toHexString(int inputInt) {
+
+
+// }
