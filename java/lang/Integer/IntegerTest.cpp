@@ -1790,24 +1790,36 @@ TEST(JavaLang, IntegerBitCount) {
 // }
 
 // TEST(JavaLang, IntegerToHexString) {
-//     ASSERT_STR((string) "0", Integer::toHexString(0));
-//     ASSERT_STR((string) "1", Integer::toHexString(1));
-//     ASSERT_STR((string) "ffffffff", Integer::toHexString(-1));
-//     ASSERT_STR((string) "d", Integer::toHexString(13));
-//     ASSERT_STR((string) "7fffffff", Integer::toHexString(MAX_VALUE));
-//     ASSERT_STR((string) "80000000", Integer::toHexString(MIN_VALUE));
+    // ASSERT_STR((string) "0", Integer::toHexString(0));
+    // ASSERT_STR((string) "1", Integer::toHexString(1));
+    // ASSERT_STR((string) "ffffffff", Integer::toHexString(-1));
+    // ASSERT_STR((string) "d", Integer::toHexString(13));
+    // ASSERT_STR((string) "7fffffff", Integer::toHexString(MAX_VALUE));
+    // ASSERT_STR((string) "80000000", Integer::toHexString(MIN_VALUE));
 
-//     System.out.println(Integer.toHexString(0));
-//     System.out.println(Integer.toHexString(1));
-//     System.out.println(Integer.toHexString(-1));
-//     System.out.println(Integer.toHexString(13));
-//     System.out.println(Integer.toHexString(Integer.MAX_VALUE));
-//     System.out.println(Integer.toHexString(Integer.MIN_VALUE));
+    // System.out.println(Integer.toHexString(0));
+    // System.out.println(Integer.toHexString(1));
+    // System.out.println(Integer.toHexString(-1));
+    // System.out.println(Integer.toHexString(13));
+    // System.out.println(Integer.toHexString(Integer.MAX_VALUE));
+    // System.out.println(Integer.toHexString(Integer.MIN_VALUE));
 
 // }
 
-// TEST(JavaLang, Integer) {
+// TEST(JavaLang, IntegerToOctalString) {
+//     ASSERT_STR((string) "0", Integer::toOctalString(0));
+//     ASSERT_STR((string) "1", Integer::toOctalString(1));
+//     ASSERT_STR((string) "37777777777", Integer::toOctalString(-1));
+//     ASSERT_STR((string) "15", Integer::toOctalString(13));
+//     ASSERT_STR((string) "17777777777", Integer::toOctalString(MAX_VALUE));
+//     ASSERT_STR((string) "20000000000", Integer::toOctalString(MIN_VALUE));
 
+//     System.out.println(Integer.toOctalString(0));
+//     System.out.println(Integer.toOctalString(1));
+//     System.out.println(Integer.toOctalString(-1));
+//     System.out.println(Integer.toOctalString(13));
+//     System.out.println(Integer.toOctalString(Integer.MAX_VALUE));
+//     System.out.println(Integer.toOctalString(Integer.MIN_VALUE));
 
 // }
 
