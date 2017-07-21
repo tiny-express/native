@@ -1788,6 +1788,7 @@ TEST(JavaLang, IntegerBitCount) {
 
 // }
 
+// Test Integer::toString() const
 TEST(JavaLang, IntegerToString) {
     // Input different values of type int to compare to the realResult of Integer::toString
     Integer zeroIntegerToString = 0;
@@ -1823,7 +1824,26 @@ TEST(JavaLang, IntegerToString) {
 
 }
 
-// TEST(JavaLang, IntegerToString) {
+// Test String Integer::toString(int i)
+// TEST(JavaLang, IntegerToString2) {
+//     ASSERT_STR((string) "0", Integer::toString(0));
+//     ASSERT_STR((string) "1", Integer::toString(1));
+//     ASSERT_STR((string) "-1", Integer::toString(-1));
+//     ASSERT_STR((string) "13", Integer::toString(13));
+//     ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE));
+//     ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE));
+
+//     System.out.println(Integer.toString(0));
+//     System.out.println(Integer.toString(1));
+//     System.out.println(Integer.toString(-1));
+//     System.out.println(Integer.toString(13));
+//     System.out.println(Integer.toString(Integer.MAX_VALUE));
+//     System.out.println(Integer.toString(Integer.MIN_VALUE));
+
+// }
+
+// Test Integer::toString(int inputInt, int radix)
+// TEST(JavaLang, IntegerToString3) {
 //     // TODO(thoangminh): check these cases
 //     ASSERT_STR((string) "9999", Integer::toString(0,aaaa)); // error: cannot find symbol
 //     ASSERT_STR((string) "9999", Integer::toString(0,123456789132456789123456)); // integer number too large
@@ -1899,8 +1919,8 @@ TEST(JavaLang, IntegerToString) {
 //     System.out.println(Integer.toUnsignedLong(Integer.MIN_VALUE));
 
 // }
-
-// TEST(JavaLang, Integer) {
+// string Integer::toUnsignedString(int inputInt, int radix)
+// TEST(JavaLang, IntegerToUnsignedString) {
 
 
 // }

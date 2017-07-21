@@ -55,15 +55,6 @@ Integer::~Integer() {
 }
 
 /**
- * Integer to String
- *
- * @return String
- */
-string Integer::toString() const {
-	return this->string_original;
-}
-
-/**
  * Integer to Char
  *
  * @return char
@@ -430,12 +421,26 @@ int Integer::parseInt(String inputString) {
 
 // }
 
+string Integer::toString() const {
+	return this->string_original;
+}
+
+// String Integer::toString(int i) {
+
+
+// }
+
 // string Integer::toString(int inputInt, int radix) {
 
 
 // }
 
 // long Integer::toUnsignedLong(int x) {
+
+
+// }
+
+// string Integer::toUnsignedString(int inputInt, int radix) {
 
 
 // }

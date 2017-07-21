@@ -515,6 +515,12 @@ namespace Java {
            //  */
            // static String toString();
 
+          /**
+           * Returns a String object 
+           * representing the specified integer.
+           */
+          // static String toString(int i);
+
            // /**
            //  * Returns a string representation of
            //  * the first argument in the radix
