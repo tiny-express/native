@@ -47,13 +47,6 @@ TEST(JavaUtil, PriorityQueueConstructor) {
     ASSERT_EQUAL(5, copyConstructor.peek());
 }
 
-TEST(JavaUtil, PriorityQueueDestructor) {
-    PriorityQueue<int> priorityQueue1;
-
-    PriorityQueue<int> *priorityQueue2 = new PriorityQueue<int>();
-    delete priorityQueue2;
-}
-
 TEST(JavaUtil, PriorityQueueAdd) {
     PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
     ASSERT_EQUAL(5, priorityQueue.size());
