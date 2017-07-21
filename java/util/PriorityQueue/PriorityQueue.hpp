@@ -160,6 +160,18 @@ namespace Java {
 //          Comparator<E> comparator() const;
 
             /**
+             * Returns true if this queue contains the specified element.
+             *
+             * @param target
+             * @return boolean
+             */
+            boolean contains(const E &target) const {
+                std::vector<E>::const_iterator targetIterator;
+                targetIterator = std::find(this->original.begin(), this->original.end(), target);
+                return (targetIterator != this->original.end());
+            }
+
+            /**
              * Returns the number of elements in this collection.
              *
              * @return int
