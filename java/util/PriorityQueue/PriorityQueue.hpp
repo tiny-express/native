@@ -240,6 +240,27 @@ namespace Java {
             int size() const {
                 return (int)this->original.size();
             }
+
+            /**
+             * Creates a late-binding and fail-fast Spliterator over the elements in this queue.
+             *
+             * @return Spliterator<E>
+             */
+//          Spliterator<E> spliterator() const;
+
+            /**
+             * Returns an array containing all of the elements in this queue.
+             *
+             * @return Array<E>
+             */
+            Array<E> toArray() const {
+                Array<E> result;
+                typename std::vector<E>::const_iterator originalIterator;
+                for (originalIterator = this->original.begin(); originalIterator != this->original.end(); originalIterator++) {
+                    result.push(*originalIterator);
+                }
+                return result;
+            }
         };
     }
 }
