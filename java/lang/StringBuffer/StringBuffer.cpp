@@ -29,46 +29,123 @@
 
 using namespace Java::Lang;
 
+/**
+ * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
+ *
+ */
 StringBuffer::StringBuffer() : StringBuffer(16){
 }
 
+/**
+ * Constructs a string buffer with no characters in it and the specified initial capacity.
+ *
+ * @param capacity
+ * @throw NegativeArraySizeException if capacity is negative
+ */
 StringBuffer::StringBuffer(int capacity) {
     if (capacity < 0) {
         throw NegativeArraySizeException();
     }
 
-    this->currentcapacity = capacity;
-    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
+    this->currentCapacity = capacity;
+    this->original = (string)(calloc((size_t)(currentCapacity), sizeof(char)));
 }
 
+/**
+ * Constructs a string buffer initialized to the contents of the specified string.
+ *
+ * @param str
+ */
 StringBuffer::StringBuffer(String str) {
-    this->currentcapacity = str.length() + 16;
-    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
+    this->currentCapacity = str.length() + 16;
+    this->original = (string)(calloc((size_t)(currentCapacity), sizeof(char)));
     append(str);
 }
 
+/**
+ * Constructs a string buffer that contains the same characters as the specified CharSequence.
+ *
+ * @param seq
+ */
 StringBuffer::StringBuffer(CharSequence *seq) {
-    this->currentcapacity = seq->length() + 16;
-    this->original = (string)(calloc((size_t)(currentcapacity), sizeof(char)));
+    if (seq == NULL) {
+        this->currentCapacity = 20;
+    }
+    else {
+        this->currentCapacity = seq->length() + 16;
+    }
+    this->original = (string)(calloc((size_t)(currentCapacity), sizeof(char)));
     append(seq);
 }
 
+/**
+ * Return current capacity of this StringBuffer
+ *
+ * @return int
+ */
 int StringBuffer::capacity() {
-    return currentcapacity;
+    return this->currentCapacity;
 }
 
+/**
+ * Return the string value of this StringBuffer
+ *
+ * @return string
+ */
 string StringBuffer::getValue() {
-    return original;
+    return this->original;
 }
 
+/**
+ * Appends the specified CharSequence to this sequence.
+ *
+ * @param seq
+ * @return StringBuffer
+ */
 StringBuffer StringBuffer::append(CharSequence *seq) {
-    this->original = seq->toString();
+    int sequenceLength;
+    if (seq == NULL) {
+        sequenceLength = 4;
+    }
+    else {
+        sequenceLength = seq->length();
+    }
+    return this->append(seq, 0, sequenceLength);
 }
 
+/**
+ * Appends a subsequence of the specified CharSequence to this sequence.
+ * starting at index start, are appended, in order,
+ * to the contents of this sequence up to the (exclusive) index end.
+ * If start is negative or bigger than end or bigger than seq's length,
+ * throw IndexOutOfBoundException
+ *
+ * @param seq
+ * @param start
+ * @param end
+ * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
+ * @return StringBuffer
+ */
 StringBuffer StringBuffer::append(CharSequence *seq, int start, int end) {
-
+    if (seq == NULL) {
+        return this->append((string) "null");
+    }
+    else {
+        if (start < 0 || start > end || start > seq->length()) {
+            throw IndexOutOfBoundsException();
+        }
+        string sequence = seq->toString();
+        return append(sequence, start, end - start);
+    }
 }
 
+/**
+ * Ensures that the capacity is at least equal to the specified minimum.
+ * The new capacity is the larger than the minimumCapacity argument and twice the old capacity plus 2.
+ * If minimumCapacity is non-positive or less or equal to this capacity, return
+ *
+ * @param minimumCapacity
+ */
 void StringBuffer::ensureCapacity(int minimumCapacity) {
     if (minimumCapacity <= 0) {
         return;
@@ -81,25 +158,51 @@ void StringBuffer::ensureCapacity(int minimumCapacity) {
     int newCapacity = 0;
     do {
         newCapacity = capacity() * 2 + 2;
-        currentcapacity = newCapacity;
+        this->currentCapacity = newCapacity;
     } while (newCapacity < minimumCapacity);
 
     int newSize = newCapacity * sizeof(char);
-    original = (string)(realloc(original, (size_t)(newSize)));
+    this->original = (string)(realloc(this->original, (size_t)(newSize)));
 }
 
+/**
+ * Destructor, free memory alocated for original
+ */
 StringBuffer::~StringBuffer() {
-    free(original);
+    free(this->original);
 }
 
+/**
+ * Appends the string representation of char array argument to this sequence.
+ *
+ * @param str
+ * @throw IndexOutOfBoundsException
+ * @return StringBuffer
+ */
 StringBuffer StringBuffer::append(String str) {
     return this->append(str.toString(), 0, str.length());
 }
 
+/**
+ * Return the current munber of used char of this sequence
+ *
+ * @return int
+ */
 int StringBuffer::length() {
-    return currentlength;
+    return this->currentLength;
 }
 
+/**
+ * Appends the string representation of a subarray of the char array argument to this sequence.
+ * Characters of the char array str, starting at index offset, are appended, in order,
+ * the length of subarray is equal to len
+ *
+ * @param str
+ * @param offset
+ * @param len
+ * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
+ * @return
+ */
 StringBuffer StringBuffer::append(string str, int offset, int len) {
     if (offset < 0 || len < 0 || (offset + len) > length_pointer_char(str)) {
         throw IndexOutOfBoundsException();
@@ -111,10 +214,23 @@ StringBuffer StringBuffer::append(string str, int offset, int len) {
     stringToAdd = stringToAdd.substr(offset, len);
     string.append(stringToAdd);
     strcpy(this->original, string.c_str());
-    this->currentlength += len;
+    this->currentLength += len;
     return *this;
 }
 
+/**
+ * Inserts the string representation of a subarray of the str array argument into this sequence.
+ * The subarray begins at the specified offset and extends len chars.
+ * The subarray is insert at position index
+ *
+ * @param index
+ * @param str
+ * @param offset
+ * @param len
+ * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
+ * or offset or len are negative, or (offset+len) is greater than str.length.
+ * @return
+ */
 StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
     if (index < 0 || index > length() || offset < 0
         || len < 0 || (offset + len) > length_pointer_char(str)) {
@@ -122,23 +238,36 @@ StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
     }
 
     ensureCapacity(this->length() + length_pointer_char(str));
-    std::string string(original);
+    std::string string(this->original);
     string.insert(index, str, offset, len);
-    strcpy(original, string.c_str());
-    currentlength += len;
+    strcpy(this->original, string.c_str());
+    this->currentLength += len;
     return *this;
-
 }
 
-
+/**
+ * Copy constructor
+ *
+ * @param other
+ */
 StringBuffer::StringBuffer(const StringBuffer &other) {
-    this->original = (string) calloc((size_t) other.currentcapacity, sizeof(char));
+    this->original = (string) calloc((size_t) other.currentCapacity, sizeof(char));
     int index;
-    for (index = 0; index < other.currentlength; index++) {
+    for (index = 0; index < other.currentLength; index++) {
         this->original[index] = other.original[index];
     }
-    this->currentlength = other.currentlength;
-    this->currentcapacity = other.currentcapacity;
+    this->currentLength = other.currentLength;
+    this->currentCapacity = other.currentCapacity;
+}
+
+/**
+ * Appends the string representation of the char array argument to this sequence.
+ *
+ * @param str
+ * @return StringBuffer
+ */
+StringBuffer StringBuffer::append(string str) {
+    return this->append(str, 0, length_pointer_char(str));
 }
 
 

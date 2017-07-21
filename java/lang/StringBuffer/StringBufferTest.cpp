@@ -47,16 +47,27 @@ TEST (JavaLang, StringBufferConstructor) {
     int expectSpecificCapacity = 10;
     ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
 
-   /* // Init a StringBuffer with a charsequence
-    CharSequence seq;
-    StringBuffer charSequenceConstructor =  StringBuffer(&seq);
-    int expectSequenceCapacity = seq.length() + 16;
-    int expectSequenceLength = seq.length();
-    string expectSequenceValue = seq.toString();
+    // Init a StringBuffer with a charsequence
+    CharSequence *sequence = new String("A string to test");
+    StringBuffer charSequenceConstructor =  StringBuffer(sequence);
+    int expectSequenceCapacity = sequence->length() + 16;
+    int expectSequenceLength = sequence->length();
+    string expectSequenceValue = sequence->toString();
     ASSERT_EQUAL(expectSequenceCapacity, charSequenceConstructor.capacity());
     ASSERT_EQUAL(expectSequenceLength, charSequenceConstructor.length());
-    ASSERT_STR(expectSequenceValue, charSequenceConstructor.getValue());*/
+    ASSERT_STR(expectSequenceValue, charSequenceConstructor.getValue());
+    String *charSequenceString = dynamic_cast<String *>(sequence);
+    delete charSequenceString;
 
+    // Init a StringBuffer with a charsequence
+    CharSequence *nullSequence = NULL;
+    StringBuffer nullSequenceConstructor =  StringBuffer(nullSequence);
+    int expectNullSequenceCapacity = 20;
+    int expectNullSequenceLength = 4;
+    string expectNullSequenceValue = (string)("null");
+    ASSERT_EQUAL(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
+    ASSERT_EQUAL(expectNullSequenceLength, nullSequenceConstructor.length());
+    ASSERT_STR(expectNullSequenceValue, nullSequenceConstructor.getValue());
 
     // Init a StringBuffer with a String
     String aString = "A string to test";
@@ -93,11 +104,41 @@ TEST (JavaLang, StringBufferGetValue) {
     ASSERT_STR(expectValue, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferAppend) {
+TEST (JavaLang, StringBufferAppendBase) {
     StringBuffer stringAppend = StringBuffer("please");
 
     string stringToAppend = (string)("don't add more");
     stringAppend.append(stringToAppend, 5, 9);
+    string expectString = (string)"please add more";
+    ASSERT_STR(expectString, stringAppend.getValue());
+
+    try {
+        stringAppend.append(stringToAppend, 20, 2);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+
+    try {
+        stringAppend.append(stringToAppend, -1, 5);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+
+    try {
+        stringAppend.append(stringToAppend, 5, -1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectString, stringAppend.getValue());
+    }
+}
+
+TEST (JavaLang, StringBufferAppend) {
+    StringBuffer stringAppend = StringBuffer("please");
+
+    string stringToAppend = (string)(" add more");
+    stringAppend.append(stringToAppend);
     string expectString = (string)"please add more";
     ASSERT_STR(expectString, stringAppend.getValue());
 

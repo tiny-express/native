@@ -34,8 +34,8 @@ namespace Java {
         private:
             string original = NULL;
             string toStringCache = NULL;
-            int currentlength = 0;
-            int currentcapacity = 0;
+            int currentLength = 0;
+            int currentCapacity = 0;
 
         private:
             //void readObject(ObjectInputStream);
