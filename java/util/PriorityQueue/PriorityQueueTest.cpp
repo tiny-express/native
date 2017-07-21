@@ -128,3 +128,10 @@ TEST(JavaUtil, PriorityQueueRemove) {
     ASSERT_EQUAL(4, priorityQueue.size());
     ASSERT_EQUAL(4, priorityQueue.peek());
 }
+
+TEST(JavaUtil, PriorityQueueSize) {
+    PriorityQueue<int> priorityQueue;
+    ASSERT_EQUAL(0, priorityQueue.size());
+    priorityQueue.add(-1);
+    ASSERT_EQUAL(1, priorityQueue.size());
+}
