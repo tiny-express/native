@@ -68,3 +68,10 @@ TEST(JavaUtil, PriorityQueueClear) {
     ASSERT_EQUAL(0, priorityQueue.size());
 }
 
+TEST(JavaUtil, PriorityQueueContains) {
+    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
+    ASSERT_EQUAL(5, priorityQueue.size());
+    ASSERT_EQUAL(5, priorityQueue.peek());
+    ASSERT_TRUE(priorityQueue.contains(1));
+    ASSERT_FALSE(priorityQueue.contains(7));
+}
