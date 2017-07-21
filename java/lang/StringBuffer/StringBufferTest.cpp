@@ -29,6 +29,7 @@
 #include "StringBuffer.hpp"
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
 
 extern "C" {
 #include "../../../kernel/test.h"
@@ -47,6 +48,15 @@ TEST (JavaLang, StringBufferConstructor) {
     int expectSpecificCapacity = 10;
     ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
 
+    // Init a StringBuffer with negative specific capacity;
+    try {
+        StringBuffer negetiveCapacityConstructor = StringBuffer(-1);
+    }
+    catch (NegativeArraySizeException e) {
+        ASSERT_STR("Capacity must be non-negative", e.getMessage().toString());
+    }
+
+
     // Init a StringBuffer with a charsequence
     CharSequence *sequence = new String("A string to test");
     StringBuffer charSequenceConstructor =  StringBuffer(sequence);
@@ -60,7 +70,7 @@ TEST (JavaLang, StringBufferConstructor) {
     delete charSequenceString;
 
     // Init a StringBuffer with a charsequence
-    CharSequence *nullSequence = NULL;
+    CharSequence *nullSequence = nullptr;
     StringBuffer nullSequenceConstructor =  StringBuffer(nullSequence);
     int expectNullSequenceCapacity = 20;
     int expectNullSequenceLength = 4;
@@ -104,7 +114,7 @@ TEST (JavaLang, StringBufferGetValue) {
     ASSERT_STR(expectValue, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferAppendBase) {
+TEST (JavaLang, StringBufferAppendSubCharArray) {
     StringBuffer stringAppend = StringBuffer("please");
 
     string stringToAppend = (string)("don't add more");
@@ -135,33 +145,64 @@ TEST (JavaLang, StringBufferAppendBase) {
 }
 
 TEST (JavaLang, StringBufferAppend) {
-    StringBuffer stringAppend = StringBuffer("please");
+    // Test string
+    StringBuffer charArrayAppendStringBuffer = StringBuffer("please");
 
     string stringToAppend = (string)(" add more");
-    stringAppend.append(stringToAppend);
+    charArrayAppendStringBuffer.append(stringToAppend);
     string expectString = (string)"please add more";
-    ASSERT_STR(expectString, stringAppend.getValue());
+    ASSERT_STR(expectString, charArrayAppendStringBuffer.getValue());
 
-    try {
-        stringAppend.append(stringToAppend, 20, 2);
-    }
-    catch (IndexOutOfBoundsException e) {
-        ASSERT_STR(expectString, stringAppend.getValue());
-    }
+    // Test String
+    StringBuffer stringAppendStringBuffer = StringBuffer("please");
+    stringAppendStringBuffer.append(stringToAppend);
+    ASSERT_STR(expectString, stringAppendStringBuffer.getValue());
 
-    try {
-        stringAppend.append(stringToAppend, -1, 5);
-    }
-    catch (IndexOutOfBoundsException e) {
-        ASSERT_STR(expectString, stringAppend.getValue());
-    }
+    // Test Object
+    StringBuffer objectAppendStringBuffer = StringBuffer();
 
-    try {
-        stringAppend.append(stringToAppend, 5, -1);
-    }
-    catch (IndexOutOfBoundsException e) {
-        ASSERT_STR(expectString, stringAppend.getValue());
-    }
+    Object *objToAppend = new String("object");
+    objectAppendStringBuffer.append(objToAppend);
+    string objString = objToAppend->toString();
+    ASSERT_STR(objString, objectAppendStringBuffer.getValue());
+    String *objToAppendString = dynamic_cast<String *>(objToAppend);
+    delete objToAppendString;
+
+    // Test Null object
+    StringBuffer nullObjectAppendStringBuffer = StringBuffer();
+
+    Object *nullObjToAppend = nullptr;
+    nullObjectAppendStringBuffer.append(nullObjToAppend);
+    string nullObjString = (string)"null";
+    ASSERT_STR(nullObjString, nullObjectAppendStringBuffer.getValue());
+
+    // Test number
+    StringBuffer numberAppendStringBuffer = StringBuffer("100");
+
+    // float
+    float floatToAppend = 9.0;
+    numberAppendStringBuffer.append(floatToAppend);
+    string expectFloatAppend = (string)"1009";
+    ASSERT_STR(expectFloatAppend, numberAppendStringBuffer.getValue());
+
+    // double
+    double doubleToAppend = 100.0;
+    numberAppendStringBuffer.append(doubleToAppend);
+    string expectDoubleAppend = (string)"1009100";
+    ASSERT_STR(expectDoubleAppend, numberAppendStringBuffer.getValue());
+
+    // int
+    int intToAppend = 9;
+    numberAppendStringBuffer.append(intToAppend);
+    string expectIntAppend = (string)"10091009";
+    ASSERT_STR(expectIntAppend, numberAppendStringBuffer.getValue());
+
+    // long
+    long longToAppend = 900L;
+    numberAppendStringBuffer.append(longToAppend);
+    string expectLongAppend = (string)"10091009900";
+    ASSERT_STR(expectLongAppend, numberAppendStringBuffer.getValue());
+
 }
 
 TEST (JavaLang, StringBufferInsert) {

@@ -32,8 +32,8 @@ namespace Java {
     namespace Lang {
         class StringBuffer { //: public CharSequence {
         private:
-            string original = NULL;
-            string toStringCache = NULL;
+            string original = nullptr;
+            string toStringCache = nullptr;
             int currentLength = 0;
             int currentCapacity = 0;
 
@@ -45,7 +45,7 @@ namespace Java {
         public:
             StringBuffer();
 
-            StringBuffer(CharSequence *seq);
+            explicit StringBuffer(CharSequence *seq);
 
             explicit StringBuffer(int capacity);
 
@@ -53,7 +53,7 @@ namespace Java {
 
             StringBuffer(const StringBuffer &other);
 
-            StringBuffer append(Object obj);
+            StringBuffer append(Object *obj);
 
             StringBuffer append(float floatValue);
 

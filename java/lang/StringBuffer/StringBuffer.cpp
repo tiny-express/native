@@ -44,7 +44,7 @@ StringBuffer::StringBuffer() : StringBuffer(16){
  */
 StringBuffer::StringBuffer(int capacity) {
     if (capacity < 0) {
-        throw NegativeArraySizeException();
+        throw NegativeArraySizeException("Capacity must be non-negative");
     }
 
     this->currentCapacity = capacity;
@@ -68,7 +68,7 @@ StringBuffer::StringBuffer(String str) {
  * @param seq
  */
 StringBuffer::StringBuffer(CharSequence *seq) {
-    if (seq == NULL) {
+    if (seq == nullptr) {
         this->currentCapacity = 20;
     }
     else {
@@ -100,11 +100,11 @@ string StringBuffer::getValue() {
  * Appends the specified CharSequence to this sequence.
  *
  * @param seq
- * @return StringBuffer
+ * @return reference to this StringBuffer
  */
 StringBuffer StringBuffer::append(CharSequence *seq) {
     int sequenceLength;
-    if (seq == NULL) {
+    if (seq == nullptr) {
         sequenceLength = 4;
     }
     else {
@@ -124,18 +124,17 @@ StringBuffer StringBuffer::append(CharSequence *seq) {
  * @param start
  * @param end
  * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
- * @return StringBuffer
+ * @return reference to this StringBuffer
  */
 StringBuffer StringBuffer::append(CharSequence *seq, int start, int end) {
-    if (seq == NULL) {
+    if (seq == nullptr) {
         return this->append((string) "null");
     }
     else {
         if (start < 0 || start > end || start > seq->length()) {
             throw IndexOutOfBoundsException();
         }
-        string sequence = seq->toString();
-        return append(sequence, start, end - start);
+        return append(seq->toString(), start, end - start);
     }
 }
 
@@ -176,8 +175,7 @@ StringBuffer::~StringBuffer() {
  * Appends the string representation of char array argument to this sequence.
  *
  * @param str
- * @throw IndexOutOfBoundsException
- * @return StringBuffer
+ * @return reference to this StringBuffer
  */
 StringBuffer StringBuffer::append(String str) {
     return this->append(str.toString(), 0, str.length());
@@ -264,10 +262,64 @@ StringBuffer::StringBuffer(const StringBuffer &other) {
  * Appends the string representation of the char array argument to this sequence.
  *
  * @param str
- * @return StringBuffer
+ * @return reference to this StringBuffer
  */
 StringBuffer StringBuffer::append(string str) {
     return this->append(str, 0, length_pointer_char(str));
+}
+
+/**
+ * Appends the string representation of the Object argument.
+ *
+ * @param obj
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(Object *obj) {
+    if (obj == nullptr) {
+        return this->append((string)"null");    }
+    else {
+        return this->append(obj->toString());
+    }
+}
+
+/**
+ * Appends the string representation of the float argument
+ *
+ * @param floatValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(float floatValue) {
+    return this->append(String::valueOf(floatValue).toString());
+}
+
+/**
+ * Appends the string representation of the double argument
+ *
+ * @param doubleValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(double doubleValue) {
+    return this->append(String::valueOf(doubleValue).toString());
+}
+
+/**
+ * Appends the string representation of the int argument
+ *
+ * @param intValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(int intValue) {
+    return this->append(String::valueOf(intValue).toString());
+}
+
+/**
+ * Appends the string representation of the long argument
+ *
+ * @param longValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(long longValue) {
+    return this->append(String::valueOf(longValue).toString());
 }
 
 
