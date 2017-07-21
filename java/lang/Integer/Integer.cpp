@@ -232,21 +232,21 @@ Integer Integer::operator%(const Integer &target) {
 	return ( this->original % target.original );
 }
 
-int Integer::bitCount(int intInput) {
+int Integer::bitCount(int inputInt) {
 	int resultBitCount = 0;
 	
-	if ( intInput < 0 ) {
+	if ( inputInt < 0 ) {
 		resultBitCount = 1;
-		intInput = -intInput;
+		inputInt = -inputInt;
 	}
 
-	while( (intInput != 0) || resultBitCount == 32) {
+	while( (inputInt != 0) || resultBitCount == 32) {
 
-		if( (intInput & 1) == 1) {
+		if( (inputInt & 1) == 1) {
 			resultBitCount++;
 		}
 
-		intInput = intInput >> 1;
+		inputInt = inputInt >> 1;
 	}
 
 	return resultBitCount;
@@ -320,18 +320,18 @@ int Integer::divideUnsigned(int dividend, int divisor) {
 // }
 
 int Integer::highestOneBit(int inputInt)  {
-		inputInt |= (inputInt >> 1);
-        inputInt |= (inputInt >> 2);
-        inputInt |= (inputInt >> 4);
-        inputInt |= (inputInt >> 8);
-        inputInt |= (inputInt >> 16);
-        return inputInt - ((unsigned int) inputInt >> 1);	
+	inputInt |= (inputInt >> 1);
+    inputInt |= (inputInt >> 2);
+    inputInt |= (inputInt >> 4);
+    inputInt |= (inputInt >> 8);
+    inputInt |= (inputInt >> 16);
+
+    return inputInt - ((unsigned int) inputInt >> 1);	
 }
 
-// int Integer::lowestOneBit(int inputInt) {
-
-
-// }
+int Integer::lowestOneBit(int inputInt) {
+	return inputInt & -inputInt;
+}
 
 // int Integer::max(int a, int b); {
 

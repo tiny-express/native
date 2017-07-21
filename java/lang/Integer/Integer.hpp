@@ -158,10 +158,10 @@ namespace Java {
             * two's complement binary representation
             * of the specified int value.
             *
-            * @param int intInput
+            * @param int inputInt
             * @return int
             */
-           static int bitCount(int intInput);
+           static int bitCount(int inputInt);
 
            /**
             * Returns the value of this Integer as a byte
@@ -177,7 +177,7 @@ namespace Java {
             * @param target
             * @return boolean
             */
-           static int compare(int intInput_1, int intInput_2);
+           static int compare(int inputInt_1, int inputInt_2);
 
            /**
             * Compares two Integer objects numerically.
@@ -194,7 +194,7 @@ namespace Java {
             * @param target
             * @return boolean
             */
-           static int compareUnsigned(int intInput_1, int intInput_2);
+           static int compareUnsigned(int inputInt_1, int inputInt_2);
 
            /**
             * Decodes a String into an Integer .
@@ -316,15 +316,15 @@ namespace Java {
            //  */
            // long longValue();
 
-           // /**
-           //  * Returns an int value with at most
-           //  * a single one-bit, in the position of
-           //  * the lowest-order ("rightmost") one-bit in the specified int value.
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int lowestOneBit(int inputInt);
+           /**
+            * Returns an int value with at most
+            * a single one-bit, in the position of
+            * the lowest-order ("rightmost") one-bit in the specified int value.
+            *
+            * @param target
+            * @return int
+            */
+           static int lowestOneBit(int inputInt);
 
            // /**
            //  * Returns the greater of two int values

@@ -319,38 +319,38 @@ TEST(JavaLang, IntegerDoubleValue) {
 }
 
 TEST(JavaLang, IntegerBitCount) {
-    int intInput;
+    int inputInt;
     int expectedResult;
     int actualResult;    
 
-    intInput = 0;
+    inputInt = 0;
     expectedResult = 0;
-    actualResult = Integer::bitCount(intInput);
+    actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    intInput = 1; // 01
+    inputInt = 1; // 01
     expectedResult = 1;
-    actualResult = Integer::bitCount(intInput);
+    actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    intInput = -1; // 11
+    inputInt = -1; // 11
     expectedResult = 2;
-    actualResult = Integer::bitCount(intInput);
+    actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    intInput = 13;  // 0000 1101
+    inputInt = 13;  // 0000 1101
     expectedResult = 3;
-    actualResult = Integer::bitCount(intInput);
+    actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    intInput = MAX_VALUE; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
+    inputInt = MAX_VALUE; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
     expectedResult = 31;
-    actualResult = Integer::bitCount(intInput);
+    actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 // TODO(thoangminh): Check the case below:
-    // intInput = MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
+    // inputInt = MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
     // expectedResult = 33;
-    // actualResult = Integer::bitCount(intInput);
+    // actualResult = Integer::bitCount(inputInt);
     // ASSERT_EQUAL(expectedResult, actualResult);
 
 }
@@ -1194,15 +1194,15 @@ TEST(JavaLang, IntegerHighestOneBit) {
 
 }
 
-// TEST(JavaLang, IntegerLowestOneBit) {
-    // ASSERT_EQUAL(0, Integer::lowestOneBit(0));
-    // ASSERT_EQUAL(1, Integer::lowestOneBit(1));
-    // ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
-    // ASSERT_EQUAL(1, Integer::lowestOneBit(13));
-    // ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE));
-    // ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE));
+TEST(JavaLang, IntegerLowestOneBit) {
+    ASSERT_EQUAL(0, Integer::lowestOneBit(0));
+    ASSERT_EQUAL(1, Integer::lowestOneBit(1));
+    ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
+    ASSERT_EQUAL(1, Integer::lowestOneBit(13));
+    ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE));
+    ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE));
 
-// }
+}
 
 // TEST(JavaLang, IntegerMax) {
     // ASSERT_EQUAL(Integer::max(0, 0), 0);
