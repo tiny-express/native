@@ -524,10 +524,9 @@ int Integer::rotateLeft(int inputInt, int distance) {
 	return inputInt;
 }
 
-// int Integer::rotateRight(int inputInt, int distance) {
-
-
-// }
+int Integer::rotateRight(int inputInt, int distance) {
+	return ((unsigned int) inputInt >> distance) | (inputInt << -distance);
+}
 
 // int Integer::signum(int inputInt) {
 

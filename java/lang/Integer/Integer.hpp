@@ -443,15 +443,15 @@ namespace Java {
             */
            static int rotateLeft(int inputInt, int distance);
 
-           // /**
-           //  * Returns the value obtained by rotating the
-           //  * two's complement binary representation of
-           //  * the specified int value right by the specified number of ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int rotateRight(int inputInt, int distance);
+           /**
+            * Returns the value obtained by rotating the
+            * two's complement binary representation of
+            * the specified int value right by the specified number of ...
+            *
+            * @param target
+            * @return int
+            */
+           static int rotateRight(int inputInt, int distance);
 
            // /**
            //  * Returns the value of this Integer as
