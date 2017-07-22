@@ -375,10 +375,43 @@ int Integer::numberOfLeadingZeros(int inputInt) {
 
 }
 
-// int Integer::numberOfTrailingZeros(int inputInt) {
+int Integer::numberOfTrailingZeros(int inputInt) {
+	int y;
 
+    if (inputInt == 0)
+        return 32;
 
-// }
+    int n = 31;   
+    y = inputInt << 16;
+
+    if (y != 0) {
+        n = n - 16;
+        inputInt = y;
+    }
+
+    y = inputInt << 8;
+
+    if (y != 0) {
+        n = n - 8;
+        inputInt = y;
+    }
+
+    y = inputInt << 4;
+
+    if (y != 0) {
+        n = n - 4;
+        inputInt = y;
+    }
+
+    y = inputInt << 2;
+
+    if (y != 0) {
+        n = n - 2;
+        inputInt = y;
+    }
+
+    return n - ((unsigned int) (inputInt << 1) >> 31);
+}
 
 // int Integer::parseInt(String inputString, int radix) {
 

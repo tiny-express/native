@@ -355,16 +355,16 @@ namespace Java {
             */
            static int numberOfLeadingZeros(int inputInt);
 
-           // /**
-           //  * Returns the number of zero bits
-           //  * following the lowest-order ("rightmost")
-           //  * one-bit in the two's complement binary
-           //  * representation of the specified ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int numberOfTrailingZeros(int inputInt);
+           /**
+            * Returns the number of zero bits
+            * following the lowest-order ("rightmost")
+            * one-bit in the two's complement binary
+            * representation of the specified ...
+            *
+            * @param target
+            * @return int
+            */
+           static int numberOfTrailingZeros(int inputInt);
 
            // /**
            //  * Parses the string argument as
