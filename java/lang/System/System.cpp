@@ -28,15 +28,6 @@
 
 using namespace Java::Lang;
 
-void System::out::print(String target) {
-	string targetCharacters = target.toString();
-	if (is_empty(targetCharacters)) {
-		return;
-	}
-	printf("%s", targetCharacters);
-	fflush(stdout);
-}
-
 long System::currentTimeMillis() {
 	unsigned long timestampInNanoSeconds = timestamp();
 	return (long) timestampInNanoSeconds / 1000;
