@@ -1440,8 +1440,8 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
 
 // }
 
-// TEST(JavaLang, IntegerRemainderUnsigned) {
-    // // TODO(thoangminh): check these cases
+TEST(JavaLang, IntegerRemainderUnsigned) {
+    // TODO(thoangminh): throw exception these cases later
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,aaaa), 9999); // error: cannot find symbol
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,123456789132456789123456), 9999); // integer number too large
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,MAX_VALUE +1), 9999); // out of range
@@ -1449,49 +1449,44 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,MIN_VALUE -1), 9999); // out of range
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,MIN_VALUE -2), 9999); // out of range
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,"MIN_VALUE -2"), 9999); // error: incompatible types: String cannot be converted to int
-
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0, 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0, -1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0, 13), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0, MAX_VALUE), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0, MIN_VALUE), 0);
-
     // ASSERT_EQUAL(Integer::remainderUnsigned(1, 0), 9999);// java.lang.ArithmeticException: / by zero
-    // ASSERT_EQUAL(Integer::remainderUnsigned(1, 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(1, -1), 1);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(1, 13), 1);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(1, MAX_VALUE), 1);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(1, MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 0), 9999);// java.lang.ArithmeticException: / by zero
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , -1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 13), 8);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MAX_VALUE), 1);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, -1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, 13), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, MIN_VALUE), 0);
+    
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, -1), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, 13), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, MIN_VALUE), 1);
 
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , 0), 9999);// java.lang.ArithmeticException: / by zero
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , -1), 13);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , 13), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , MAX_VALUE), 13);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(13 , MIN_VALUE), 13);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , -1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 13), 8);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MIN_VALUE), 2147483647);
 
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 0), 9999);// java.lang.ArithmeticException: / by zero
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , -1), 2147483647);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 13), 10);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MAX_VALUE), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , -1), 13);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , 13), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , MAX_VALUE), 13);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , MIN_VALUE), 13);
 
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 0), 9999);// java.lang.ArithmeticException: / by zero
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 1), 0);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , -1), -2147483648);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 13), 11);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MAX_VALUE), 1);
-    // ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , -1), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 13), 10);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MIN_VALUE), 2147483647);
 
-// }
+    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , -1), -2147483648);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 13), 11);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MIN_VALUE), 0);
+}
 
 // TEST(JavaLang, IntegerReverse) {
 //     ASSERT_EQUAL(0, Integer::reverse(0));

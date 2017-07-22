@@ -403,15 +403,15 @@ namespace Java {
            //  */
            // static int parseUnsignedInt(String inputString);
 
-           // /**
-           //  * Returns the unsigned remainder from dividing
-           //  * the first argument by the second where each
-           //  * argument and the result is interpreted as an unsigned ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int remainderUnsigned(int dividend, int divisor);
+           /**
+            * Returns the unsigned remainder from dividing
+            * the first argument by the second where each
+            * argument and the result is interpreted as an unsigned ...
+            *
+            * @param target
+            * @return int
+            */
+           static int remainderUnsigned(int dividend, int divisor);
 
            // /**
            //  * Returns the value obtained by reversing the order
