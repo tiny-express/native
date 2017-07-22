@@ -24,14 +24,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
-
 #ifndef JAVA_LANG_MATH_HPP_
 #define JAVA_LANG_MATH_HPP_
 
+#include "../../util/Random/Random.hpp"
 #include "../Object/Object.hpp"
 #include "../Double/Double.hpp"
 #include "../Float/Float.hpp"
+
+using namespace Java::Util;
 
 namespace Java {
 	namespace Lang {
@@ -39,17 +40,16 @@ namespace Java {
 
         private:
 			Math(){}
-			static void initRGN();
 		public:
-            // e number
+            /**
+             * e number
+             */
 			static constexpr double E = 2.7182818284590452354;
-            // pi number
+
+            /**
+             * pi number
+             */
 			static constexpr double PI = 3.14159265358979323846;
-
-            static long negativeZeroFloatBits;
-
-            static long negativeZeroDoubleBits;
-
 
 		public:
             /**
@@ -873,27 +873,6 @@ namespace Java {
              */
 			static double ulp(double a);
 		};
-
-		/**
-		 * Class to hold a random number generator for Math::random
-		 */
-        class RandomNumberGeneratorHolder {
-            static RandomNumberGeneratorHolder *instance;
-
-        public:
-            RandomNumberGeneratorHolder(){
-                //randomNumberGenerator.Random();
-            };
-
-            //Random randomNumberGenerator;
-
-            static RandomNumberGeneratorHolder *getInstance()
-            {
-                if (!instance)
-                    instance = new RandomNumberGeneratorHolder();
-                return instance;
-            }
-        };
 	}
 }
 

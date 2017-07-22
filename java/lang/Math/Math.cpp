@@ -25,19 +25,9 @@
  */
 
 #include "Math.hpp"
-#include "../Long/Long.hpp"
-#include "../Integer/Integer.hpp"
-#include "exception"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
 using namespace Java::Lang;
-
-RandomNumberGeneratorHolder *RandomNumberGeneratorHolder::instance =0;
-
-long Math::negativeZeroDoubleBits = Double::doubleToRawLongBits(-0.0);
-
-//TODO need Float::floatToRawIntBits
-//long Math::negativeZeroFloatBits = Float::floatToRawIntBits(-0.0f);
 
 int Math::abs(int a) {
     return a >= 0 ? a : -a;
@@ -112,14 +102,14 @@ double Math::cosh(double a) {
 }
 
 long Math::decrementExact(long a) {
-    if(a == Long::MIN_VALUE){
+    if (a == Long::MIN_VALUE) {
         throw ArithmeticException("long overflow");
     }
     return a - 1;
 }
 
 int Math::decrementExact(int a) {
-    if(a == Integer::MIN_VALUE){
+    if (a == Integer::MIN_VALUE) {
         throw ArithmeticException("integer overflow");
     }
     return a - 1;
@@ -138,8 +128,9 @@ double Math::floor(double a) {
 }
 
 int Math::floorDiv(int a, int b) {
-    if(b == 0)
+    if (b == 0) {
         throw ArithmeticException();
+    }
     int result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -149,8 +140,9 @@ int Math::floorDiv(int a, int b) {
 }
 
 long Math::floorDiv(long a, long b) {
-    if(b == 0)
+    if (b == 0) {
         throw ArithmeticException();
+    }
     long result = a / b;
     // if the signs are different and modulo not zero, round down
     if ((a ^ b) < 0 && (result * b != a)) {
@@ -168,9 +160,8 @@ long Math::floorMod(long a, long b) {
 }
 
 int Math::getExponent(double a) {
-    //return ((Double::floatToRawIntBits(a) & Double::EXP_BIT_MASK)
-    //        >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS;
-    return 0;
+    return static_cast<int>(((Double::doubleToRawLongBits(a) & Double::EXP_BIT_MASK)
+                >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS);
 }
 
 int Math::getExponent(float a) {
@@ -199,16 +190,6 @@ long Math::incrementExact(long a) {
         throw ArithmeticException("long overflow");
     }
     return a + 1L;
-}
-
-
-
-/**
- * initialize the randomNumberGenerator
- */
-//TODO need Random
-void Math::initRGN() {
-
 }
 
 double Math::log(double a) {
@@ -269,8 +250,9 @@ long Math::multiplyExact(long a, long b) {
     unsigned long absB = abs(b);
 
     if (((absA | absB) >> 31) != 0) {
-        if((a == Long::MIN_VALUE && b == -1) || ((b != 0) && (result / b != a)))
+        if ((a == Long::MIN_VALUE && b == -1) || ((b != 0) && (result / b != a))) {
             throw ArithmeticException("long overflow");
+        }
     }
     return result;
 }
@@ -293,89 +275,94 @@ double Math::nextAfter(double start, double direction) {
     return math_nexttoward(start, direction);
 }
 
-//TODO need sun.misc.FpUtils
 float Math::nextAfter(float start, double direction) {
     return math_nexttowardf(start, direction);
 }
 
-//TODO need Double::longBitsToDouble, Double::doubleToRawLongBits
 double Math::nextDown(double a) {
-    if (Double::isNaN(a) || a == Double::NEGATIVE_INFINITY)
+    if (Double::isNaN(a) || a == Double::NEGATIVE_INFINITY) {
         return a;
+    }
     else {
-        if (a == 0.0)
+        if (a == 0.0) {
             return -Double::MIN_VALUE;
-  /*      else
-            return Double::longBitsToDouble(Double::doubleToRawLongBits(a)
-                                           + ((a > 0.0)?-1L:+1L));*/
+        }
+        else {
+            return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a > 0.0) ? -1L : +1L));
+        }
+
     }
 }
 
 //TODO need Float.intBitsToFloat, Float.floatToRawIntBits
 float Math::nextDown(float a) {
-    if (Float::isNaN(a) || a == Float::NEGATIVE_INFINITY)
+    if (Float::isNaN(a) || a == Float::NEGATIVE_INFINITY) {
         return a;
+    }
     else {
-        if (a == 0.0)
+        if (a == 0.0) {
             return -Float::MIN_VALUE;
-        /*else
-               return Float.intBitsToFloat(Float.floatToRawIntBits(f) +
-                                            ((f > 0.0f)?-1:+1));*/
+        }
+        /*else {
+               return Float.intBitsToFloat(Float.floatToRawIntBits(f) + ((f > 0.0f) ? -1 : +1));
+        }*/
     }
 }
 
  //TODO need Float::intBitsToFloat, Float::floatToRawIntBits
 float Math::nextUp(float a) {
-    if( Float::isNaN(a) || a == Float::POSITIVE_INFINITY)
+    if ( Float::isNaN(a) || a == Float::POSITIVE_INFINITY) {
         return a;
+    }
  /*   else {
         a += 0.0f;
-        return Float::intBitsToFloat(Float::floatToRawIntBits(a) +
-                                            ((a >= 0.0)?+1:-1));
+        return Float::intBitsToFloat(Float::floatToRawIntBits(a) + ((a >= 0.0) ? +1 : -1));
     }*/
 }
 
-//TODO need Double::longBitsToDouble, Double::doubleToRawLongBits
 double Math::nextUp(double a) {
-    if( Double::isNaN(a) || a == Double::POSITIVE_INFINITY)
+    if ( Double::isNaN(a) || a == Double::POSITIVE_INFINITY) {
         return a;
-       else {
-           a += 0.0f;
-           return Double::longBitsToDouble(Double::doubleToRawLongBits(a) +
-                                               ((a >= 0.0)?+1:-1));
-       }
+    }
+    else {
+       a += 0.0f;
+       return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a >= 0.0) ? +1 : -1));
+    }
 }
 
 double Math::pow(double base, double exponent) {
     return math_pow(base, exponent);
 }
 
-//TODO need Double::longBitsToDouble
 double Math::powerOfTwoD(int n) {
-    if(n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT)
+    if (n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT) {
         //TODO throw Assertion error
         return 0;
-    else
-        return Double::longBitsToDouble((((long)n + (long)Double::EXP_BIAS) <<
-               (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
+    }
+    else {
+        return Double::longBitsToDouble((((long) n + (long) Double::EXP_BIAS)
+                << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
+    }
+
 }
 
 //TODO need Float::intBitsToFloat
 float Math::powerOfTwoF(int n) {
-    if(n >= Float::MIN_EXPONENT && n <= Float::MAX_EXPONENT)
+    if (n >= Float::MIN_EXPONENT && n <= Float::MAX_EXPONENT) {
         //TODO throw Assertion error
         return 0;
-    else
-   /* return Float::intBitsToFloat(((n + Float::EXP_BIAS) <<
-           (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
+    }
+    else {
+      /*  return Float::intBitsToFloat(((n + Float::EXP_BIAS)
+                << (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
         return 1;
+    }
+
 }
 
-//TODO need Random
 double Math::random() {
-    //if (randomNumberGenerator == null) initRNG();
-    //return randomNumberGenerator.nextDouble();
-    return 0;
+    Random random1 = Random();
+    return random1.nextDouble();
 }
 
 double Math::rint(double a) {
@@ -457,7 +444,11 @@ double Math::toRadians(double angleDegree) {
     return angleDegree / 180.0 * PI;
 }
 
+//TODO need Float::intBitsToFloat
 float Math::ulp(float a) {
+    if (a == Float::MAX_VALUE || a == -Float::MAX_VALUE) {
+        return static_cast<float>(Math::pow(2, 104));
+    }
     int exp = getExponent(a);
     switch(exp) {
         case Float::MAX_EXPONENT + 1:        // NaN or infinity
@@ -465,23 +456,27 @@ float Math::ulp(float a) {
         case Float::MIN_EXPONENT - 1:        // zero or subnormal
             return Float::MIN_VALUE;
         default:
-            if(exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT)
+            if (exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT) {
                 //TODO Throw Assertion error
                 return 0;
+            }
             else {
                 exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
                 if (exp >= Float::MIN_EXPONENT) {
                     return powerOfTwoF(exp);
                 }
-                /*else {
-                    return Float::intBitsToFloat(1 <<
-                    (exp - (Float::MIN_EXPONENT - (Float::SIGNIFICAND_WIDTH - 1)) ));
-                }*/
+                else {
+                 /*   return Float::intBitsToFloat(1 << (exp - (Float::MIN_EXPONENT
+                                                              - (Float::SIGNIFICAND_WIDTH - 1)) ));*/
+                }
             }
     }
 }
 
 double Math::ulp(double a) {
+    if (a == Double::MAX_VALUE || a == -Double::MAX_VALUE) {
+        return Math::pow(2, 971);
+    }
     int exp = getExponent(a);
     switch(exp) {
         case Double::MAX_EXPONENT + 1:        // NaN or infinity
@@ -489,15 +484,18 @@ double Math::ulp(double a) {
         case Double::MIN_EXPONENT - 1:        // zero or subnormal
             return Double::MIN_VALUE;
         default:
-            if(exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT)
+            if (exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT) {
+                //TODO Throw Assertion error
                 return 0;
+            }
             else {
                 exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
-                if (exp >= Double::MIN_EXPONENT)
+                if (exp >= Double::MIN_EXPONENT) {
                     return powerOfTwoD(exp);
+                }
                 else {
-                    return Double::longBitsToDouble(1 <<
-                    (exp - (Double::MIN_EXPONENT - (Double::SIGNIFICAND_WIDTH - 1)) ));
+                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
+                                                                 - (Double::SIGNIFICAND_WIDTH - 1))));
                 }
             }
     }
