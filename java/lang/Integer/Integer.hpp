@@ -413,15 +413,15 @@ namespace Java {
             */
            static int remainderUnsigned(int dividend, int divisor);
 
-           // /**
-           //  * Returns the value obtained by reversing the order
-           //  * of the bits in the two's complement binary representation
-           //  * of the specified int value.
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int reverse(int inputInt);
+           /**
+            * Returns the value obtained by reversing the order
+            * of the bits in the two's complement binary representation
+            * of the specified int value.
+            *
+            * @param target
+            * @return int
+            */
+           static int reverse(int inputInt);
 
            // /**
            //  * Returns the value obtained by reversing

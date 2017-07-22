@@ -1488,15 +1488,14 @@ TEST(JavaLang, IntegerRemainderUnsigned) {
     ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MIN_VALUE), 0);
 }
 
-// TEST(JavaLang, IntegerReverse) {
-//     ASSERT_EQUAL(0, Integer::reverse(0));
-//     ASSERT_EQUAL(-2147483648, Integer::reverse(1));
-//     ASSERT_EQUAL(-1, Integer::reverse(-1));
-//     ASSERT_EQUAL(-1342177280, Integer::reverse(13));
-//     ASSERT_EQUAL(-2, Integer::reverse(MAX_VALUE));
-//     ASSERT_EQUAL(-1, Integer::reverse(MIN_VALUE));
-
-// }
+TEST(JavaLang, IntegerReverse) {
+    ASSERT_EQUAL(0, Integer::reverse(0));
+    ASSERT_EQUAL(-2147483648, Integer::reverse(1));
+    ASSERT_EQUAL(-1, Integer::reverse(-1));
+    ASSERT_EQUAL(-1342177280, Integer::reverse(13));
+    ASSERT_EQUAL(-2, Integer::reverse(MAX_VALUE));
+    ASSERT_EQUAL(1, Integer::reverse(MIN_VALUE));
+}
 
 // TEST(JavaLang, IntegerReverseBytes) {
     // ASSERT_EQUAL(0, Integer::reverseBytes(0));

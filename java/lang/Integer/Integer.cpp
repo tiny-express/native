@@ -491,10 +491,22 @@ int Integer::remainderUnsigned(int dividend, int divisor) {
 	return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
 }
 
-// int Integer::reverse(int inputInt) {
+int Integer::reverse(int inputInt) {
+	inputInt = (inputInt & 0x55555555) << 1 
+				| ((unsigned int) inputInt >> 1) & 0x55555555;
 
+    inputInt = (inputInt & 0x33333333) << 2 
+    			| ((unsigned int) inputInt >> 2) & 0x33333333;
 
-// }
+    inputInt = (inputInt & 0x0f0f0f0f) << 4 
+    			| ((unsigned int) inputInt >> 4) & 0x0f0f0f0f;
+
+    inputInt = (inputInt << 24) | ((inputInt & 0xff00) << 8) 
+    			| (((unsigned int) inputInt >> 8) & 0xff00) 
+    			| ((unsigned int) inputInt >> 24);
+
+    return inputInt;
+}
 
 // int Integer::reverseBytes(int inputInt) {
 
