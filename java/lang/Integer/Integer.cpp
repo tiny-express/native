@@ -508,10 +508,14 @@ int Integer::reverse(int inputInt) {
     return inputInt;
 }
 
-// int Integer::reverseBytes(int inputInt) {
+int Integer::reverseBytes(int inputInt) {
+	inputInt = (((unsigned int) inputInt >> 24)) 
+				| ((inputInt >> 8) & 0xFF00) 
+				| ((inputInt << 8) & 0xFF0000)       
+				| ((inputInt << 24));
 
-
-// }
+	return inputInt;
+}
 
 // int Integer::rotateLeft(int inputInt, int distance) {
 

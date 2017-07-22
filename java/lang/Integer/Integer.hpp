@@ -423,15 +423,15 @@ namespace Java {
             */
            static int reverse(int inputInt);
 
-           // /**
-           //  * Returns the value obtained by reversing
-           //  * the order of the bytes in the two's complement
-           //  * representation of the specified int value.
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int reverseBytes(int inputInt);
+           /**
+            * Returns the value obtained by reversing
+            * the order of the bytes in the two's complement
+            * representation of the specified int value.
+            *
+            * @param target
+            * @return int
+            */
+           static int reverseBytes(int inputInt);
 
            // /**
            //  * Returns the value obtained by rotating the
