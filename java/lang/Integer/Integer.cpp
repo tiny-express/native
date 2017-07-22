@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -76,6 +76,26 @@ Integer::~Integer() {
 Integer Integer::parseInt(String target) {
 	Integer result(string_to_int(target.toString()));
 	return result;
+}
+
+/**
+ * Compare with Integer
+ *
+ * @param target
+ * @return int
+ */
+int Integer::compareTo(const Integer &target) const {
+	if (hashCode() == target.hashCode()) {
+		return 0;
+	}
+	if (instanceof<Integer>(target)) {
+		if (original < target.original) {
+			return -1;
+		} else if (original == target.original) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_ARRAYS_HPP
-#define NATIVE_JAVA_UTIL_ARRAYS_HPP
+#ifndef JAVA_UTIL_ARRAYS_HPP_
+#define JAVA_UTIL_ARRAYS_HPP_
 
 #include <stack>
 #include "../../Lang.hpp"
@@ -119,6 +119,15 @@ namespace Java {
                 return binarySearch0(a, 0, toIndex, key);
             }
 
+            template <typename T>
+            static int binarySearch(Array<T> a, T key, int arraySize) {
+                return binarySearch0(a, 0, arraySize-1, key);
+            }
+
+            template <typename T>
+            static int binarySearch(Array<T> a, int fromIndex, int toIndex, T key) {
+                return binarySearch0(a, 0, toIndex, key);
+            }
 
             static Array<boolean> copyOf(Array<boolean> original, int newLength) {
                 return copyOf0(original, newLength, false);
@@ -497,9 +506,53 @@ namespace Java {
                 return sort0(a, fromIndex, toIndex);
             }
 
+            template <typename T>
+            static void sort(Array<T> *a, int arraySize) {
+                return sort0(a, 0, arraySize-1);
+            }
+
+            template <typename T>
+            static void sort(Array<T> *a, int fromIndex, int toIndex) {
+                return sort0(a, fromIndex, toIndex);
+            }
+
         private:
             template <typename T>
             static int binarySearch0(T a[], int fromIndex, int toIndex, T key) {
+                if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex) {
+                    return -1;
+                }
+
+                int left = fromIndex;
+                int right = toIndex;
+
+                while (left < right) {
+                    int mid = (left + right) / 2;
+
+                    if (a[mid] >= key) {
+                        right = mid;
+                    } else {
+                        left = mid + 1;
+                    }
+
+                    if (left == right - 1) { /// Get very first left postition in array
+                        if (a[left] == key) {
+                            return left;
+                        }
+                        if (a[right] == key) {
+                            return right;
+                        }
+
+                        break;
+                    }
+                }
+
+                return -1;
+            }
+
+            /// Support Array<E>
+            template <typename T>
+            static int binarySearch0(Array<T> a, int fromIndex, int toIndex, T key) {
                 if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex) {
                     return -1;
                 }
@@ -558,6 +611,47 @@ namespace Java {
                                 T temp = a[i];
                                 a[i] = a[j];
                                 a[j] = temp;
+
+                                i++;
+                                j--;
+                            }
+                        }
+                        if (i < right) {
+                            positionKeeper.push(i);
+                            positionKeeper.push(right);
+                        }
+                        right = j;
+                    }
+                }
+            }
+
+            /// Support Array<T>
+            template <typename T>
+            static void sort0(Array<T> *a, int fromIndex, int toIndex) {
+                std::stack<int> positionKeeper;
+
+                positionKeeper.push(fromIndex);
+                positionKeeper.push(toIndex);
+
+                while (!positionKeeper.empty()) {
+                    int right = positionKeeper.top();
+                    positionKeeper.pop();
+                    int left = positionKeeper.top();
+                    positionKeeper.pop();
+
+                    while (left < right) {
+                        int i   = left;
+                        int j   = right;
+                        T   key = a->get((i + j) / 2);
+
+                        while (i <= j) {
+                            while (a->get(i) < key && i <= j) i++;
+                            while (a->get(j) > key && j >= i) j--;
+
+                            if (i <= j) {
+                                T temp = a->get(i);
+                                a->operator[](i) = a->get(j);
+                                a->operator[](j) = temp;
 
                                 i++;
                                 j--;
@@ -633,4 +727,4 @@ namespace Java {
     }
 }
 
-#endif //NATIVE_JAVA_UTIL_ARRAYS_HPP
+#endif //JAVA_UTIL_ARRAYS_HPP_
