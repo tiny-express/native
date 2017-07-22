@@ -517,10 +517,12 @@ int Integer::reverseBytes(int inputInt) {
 	return inputInt;
 }
 
-// int Integer::rotateLeft(int inputInt, int distance) {
+int Integer::rotateLeft(int inputInt, int distance) {
+	inputInt = (inputInt << distance) 
+				| ((unsigned int) inputInt >> -distance);
 
-
-// }
+	return inputInt;
+}
 
 // int Integer::rotateRight(int inputInt, int distance) {
 

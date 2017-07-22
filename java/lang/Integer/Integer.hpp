@@ -433,15 +433,15 @@ namespace Java {
             */
            static int reverseBytes(int inputInt);
 
-           // /**
-           //  * Returns the value obtained by rotating the
-           //  * two's complement binary representation of
-           //  * the specified int value left by the specified number of ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int rotateLeft(int inputInt, int distance);
+           /**
+            * Returns the value obtained by rotating the
+            * two's complement binary representation of
+            * the specified int value left by the specified number of ...
+            *
+            * @param target
+            * @return int
+            */
+           static int rotateLeft(int inputInt, int distance);
 
            // /**
            //  * Returns the value obtained by rotating the
