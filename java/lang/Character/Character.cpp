@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -503,6 +503,10 @@ boolean Character::isHighSurrogate(unicode ch) {
 
 boolean Character::isLowSurrogate(unicode ch) {
     return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
+}
+
+boolean Character::isSurrogate(unicode ch) {
+    return ch >= MIN_SURROGATE && ch < (MAX_SURROGATE + 1);
 }
 
 int Character::toCodePoint(unicode high, unicode low) {

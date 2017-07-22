@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,13 +25,14 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../String/String.hpp"
 #include "../Long/Long.hpp"
 #include "../Integer/Integer.hpp"
 #include "../../Lang.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -85,12 +86,18 @@ TEST (JavaLang, StringCharAt) {
 	ASSERT_TRUE('H' == positionIsExist);
 
 	// Given a string - Return negative position is not exist
-	char negativePositionIsNotExist = text.charAt(-1);
-	ASSERT_TRUE(negativePositionIsNotExist == '\0');
+	try {
+		char negativePositionIsNotExist = text.charAt(-1);
+	} catch (StringIndexOutOfBoundsException exception) {
+		ASSERT_STR("String index out of range", exception.getMessage().toString());
+	}
 
 	// Given a string - Return out of scope position is not exist
-	char outOfScopePositionIsNotExist = text.charAt(1000);
-	ASSERT_TRUE(outOfScopePositionIsNotExist == '\0');
+	try {
+		char outOfScopePositionIsNotExist = text.charAt(1000);
+	} catch (StringIndexOutOfBoundsException exception) {
+		ASSERT_STR("String index out of range", exception.getMessage().toString());
+	}
 }
 
 TEST (JavaLang, StringConcat) {
@@ -235,12 +242,12 @@ TEST (JavaLang, StringMatches) {
 }
 
 TEST (JavaLang, StringSplit) {
-    // Give an Array<String> then asert each element - Should equal
-    String stringToSplit = "Hello Hello Hello";
-    Array<String> strings = stringToSplit.split(" ");
-    for (String item : strings) {
-        ASSERT_STR("Hello", item.toString());
-    }
+	// Give an Array<String> then asert each element - Should equal
+	String stringToSplit = "Hello Hello Hello";
+	Array<String> strings = stringToSplit.split(" ");
+	for (String item : strings) {
+		ASSERT_STR("Hello", item.toString());
+	}
 }
 
 TEST (JavaLang, StringStartsWith) {
@@ -400,7 +407,7 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 
 	// Check a String concat with valueOf(number) use "+=" operator
 	int number = 1;
-    stringTest = "Hello ";
+	stringTest = "Hello ";
 	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 1", stringTest.toString());
 
@@ -414,7 +421,7 @@ TEST (JavaLang, StringMemoryCheck) {
 	// Test create object String with validString and change data of validString
 	string validString = strdup("foodtiny");
 	String stringTest = validString;
-    free(validString);
+	free(validString);
 
 	int expect = 8;
 	int result = stringTest.length();
@@ -443,4 +450,17 @@ TEST(JavaLang, StringClone) {
 	// Give two string and compare - Should equal
 	cloneEmptyString = validString.clone();
 	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
+}
+
+TEST(JavaLang, StringSubString) {
+	String validString = "Hello world";
+	String subString = validString.subString(6);
+	string result = subString.toString();
+	string expect = (string) "world";
+	ASSERT_STR(expect, result);
+
+	subString = validString.subString(1, 5);
+	result = subString.toString();
+	expect = (string) "ello w";
+	ASSERT_STR(expect, result);
 }

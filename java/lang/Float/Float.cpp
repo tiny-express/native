@@ -28,7 +28,6 @@
 
 using namespace Java::Lang;
 
-
 /**
  * Float initialization
  *
@@ -246,13 +245,6 @@ boolean Float::operator>=(const Float &target) const {
 	return this->original >= target.original;
 }
 
-
-
-/**
- * Returns true if the specified number is a Not-a-Number (NaN) value, false otherwise.
- * @param v
- * @return true if the specified number is a Not-a-Number (NaN) value, false otherwise.
- */
 boolean Float::isNaN(float v) {
-    return (v != v);
+    return v != v;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,15 +34,6 @@ void System::out::print(String target) {
 		return;
 	}
 	printf("%s", targetCharacters);
-	fflush(stdout);
-}
-
-void System::out::println(String target) {
-	String targetCharacters = target.toString();
-	if (targetCharacters.isEmpty()) {
-		return;
-	}
-	printf("%s\n", targetCharacters.toString());
 	fflush(stdout);
 }
 
