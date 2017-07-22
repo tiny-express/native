@@ -335,14 +335,14 @@ namespace Java {
             */
            static int max(int inputInt_1, int inputInt_2);
 
-           // /**
-           //  * Returns the smaller of two int values
-           //  * as if by calling Math#min(int,int) Math.min .
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int min(int a, int b);
+           /**
+            * Returns the smaller of two int values
+            * as if by calling Math#min(int,int) Math.min .
+            *
+            * @param target
+            * @return int
+            */
+           static int min(int inputInt_1, int inputInt_2);
 
            // /**
            //  * Returns the number of zero bits

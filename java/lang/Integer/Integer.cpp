@@ -338,10 +338,9 @@ int Integer::max(int inputInt_1, int inputInt_2) {
 	return Math::max(inputInt_1, inputInt_2);
 }
 
-// int Integer::min(int a, int b) {
-
-
-// }
+int Integer::min(int inputInt_1, int inputInt_2) {
+	return Math::min(inputInt_1, inputInt_2);
+}
 
 // int Integer::numberOfLeadingZeros(int inputInt) {
 

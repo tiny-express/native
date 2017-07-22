@@ -1246,50 +1246,49 @@ TEST(JavaLang, IntegerMax) {
     ASSERT_EQUAL(Integer::max(MIN_VALUE , MIN_VALUE), MIN_VALUE);
 }
 
-// TEST(JavaLang, IntegerMin) {
-//     ASSERT_EQUAL(Integer::min(0, 0), 0);
-//     ASSERT_EQUAL(Integer::min(0, 1), 0);
-//     ASSERT_EQUAL(Integer::min(0, -1), -1);
-//     ASSERT_EQUAL(Integer::min(0, 13), 0);
-//     ASSERT_EQUAL(Integer::min(0, MAX_VALUE), 0);
-//     ASSERT_EQUAL(Integer::min(0, MIN_VALUE), MIN_VALUE);
+TEST(JavaLang, IntegerMin) {
+    ASSERT_EQUAL(Integer::min(0, 0), 0);
+    ASSERT_EQUAL(Integer::min(0, 1), 0);
+    ASSERT_EQUAL(Integer::min(0, -1), -1);
+    ASSERT_EQUAL(Integer::min(0, 13), 0);
+    ASSERT_EQUAL(Integer::min(0, MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::min(0, MIN_VALUE), MIN_VALUE);
 
-//     ASSERT_EQUAL(Integer::min(1, 0), 0);
-//     ASSERT_EQUAL(Integer::min(1, 1), 1);
-//     ASSERT_EQUAL(Integer::min(1, -1), -1);
-//     ASSERT_EQUAL(Integer::min(1, 13), 1);
-//     ASSERT_EQUAL(Integer::min(1, MAX_VALUE), 1);
-//     ASSERT_EQUAL(Integer::min(1, MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(1, 0), 0);
+    ASSERT_EQUAL(Integer::min(1, 1), 1);
+    ASSERT_EQUAL(Integer::min(1, -1), -1);
+    ASSERT_EQUAL(Integer::min(1, 13), 1);
+    ASSERT_EQUAL(Integer::min(1, MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::min(1, MIN_VALUE), MIN_VALUE);
 
-//     ASSERT_EQUAL(Integer::min(-1 , 0), -1);
-//     ASSERT_EQUAL(Integer::min(-1 , 1), -1);
-//     ASSERT_EQUAL(Integer::min(-1 , -1), -1);
-//     ASSERT_EQUAL(Integer::min(-1 , 13), -1);
-//     ASSERT_EQUAL(Integer::min(-1 , MAX_VALUE), -1);
-//     ASSERT_EQUAL(Integer::min(-1 , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(-1 , 0), -1);
+    ASSERT_EQUAL(Integer::min(-1 , 1), -1);
+    ASSERT_EQUAL(Integer::min(-1 , -1), -1);
+    ASSERT_EQUAL(Integer::min(-1 , 13), -1);
+    ASSERT_EQUAL(Integer::min(-1 , MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::min(-1 , MIN_VALUE), MIN_VALUE);
 
-//     ASSERT_EQUAL(Integer::min(13 , 0), 0);
-//     ASSERT_EQUAL(Integer::min(13 , 1), 1);
-//     ASSERT_EQUAL(Integer::min(13 , -1), -1);
-//     ASSERT_EQUAL(Integer::min(13 , 13), 13);
-//     ASSERT_EQUAL(Integer::min(13 , MAX_VALUE), 13);
-//     ASSERT_EQUAL(Integer::min(13 , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(13 , 0), 0);
+    ASSERT_EQUAL(Integer::min(13 , 1), 1);
+    ASSERT_EQUAL(Integer::min(13 , -1), -1);
+    ASSERT_EQUAL(Integer::min(13 , 13), 13);
+    ASSERT_EQUAL(Integer::min(13 , MAX_VALUE), 13);
+    ASSERT_EQUAL(Integer::min(13 , MIN_VALUE), MIN_VALUE);
 
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , 0), 0);
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , 1), 1);
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , -1), -1);
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , 13), 13);
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , MAX_VALUE), MAX_VALUE);
-//     ASSERT_EQUAL(Integer::min(MAX_VALUE , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , 0), 0);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , 13), 13);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , MAX_VALUE), MAX_VALUE);
+    ASSERT_EQUAL(Integer::min(MAX_VALUE , MIN_VALUE), MIN_VALUE);
 
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , 0), MIN_VALUE);
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , 1), MIN_VALUE);
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , -1), MIN_VALUE);
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , 13), MIN_VALUE);
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , MAX_VALUE), MIN_VALUE);
-//     ASSERT_EQUAL(Integer::min(MIN_VALUE , MIN_VALUE), MIN_VALUE);
-
-// }
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , 0), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , 1), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , -1), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , 13), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , MAX_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(MIN_VALUE , MIN_VALUE), MIN_VALUE);
+}
 
 // TEST(JavaLang, IntegerNumberOfLeadingZeros) {
     // ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
