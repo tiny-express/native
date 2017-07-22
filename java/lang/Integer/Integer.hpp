@@ -326,14 +326,14 @@ namespace Java {
             */
            static int lowestOneBit(int inputInt);
 
-           // /**
-           //  * Returns the greater of two int values
-           //  * as if by calling Math#max(int,int) Math.max .
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int max(int a, int b);
+           /**
+            * Returns the greater of two int values
+            * as if by calling Math#max(int,int) Math.max .
+            *
+            * @param target
+            * @return int
+            */
+           static int max(int inputInt_1, int inputInt_2);
 
            // /**
            //  * Returns the smaller of two int values

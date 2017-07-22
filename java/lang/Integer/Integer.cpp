@@ -25,6 +25,7 @@
  */
 
 #include "Integer.hpp"
+#include "../Math/Math.hpp"
 
 using namespace Java::Lang;
 
@@ -333,10 +334,9 @@ int Integer::lowestOneBit(int inputInt) {
 	return inputInt & -inputInt;
 }
 
-// int Integer::max(int a, int b); {
-
-
-// }
+int Integer::max(int inputInt_1, int inputInt_2) {
+	return Math::max(inputInt_1, inputInt_2);
+}
 
 // int Integer::min(int a, int b) {
 
