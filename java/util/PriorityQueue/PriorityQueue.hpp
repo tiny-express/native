@@ -179,19 +179,11 @@ namespace Java {
              *
              * @param target
              * @return boolean
-             * @throw ClassCastException - if the specified element cannot be compared with elements currently in this priority queue according to the priority queue's ordering.
              */
             boolean offer(const E &target) {
                 int oldSize = (int)this->original.size();
                 this->original.push_back(target);
-
-                try {
-                    std::make_heap(this->original.begin(), this->original.end());
-                }
-                catch (Exception ex){
-                    throw ClassCastException();
-                }
-
+                std::make_heap(this->original.begin(), this->original.end());
                 int newSize = (int)this->original.size();
                 return (newSize != oldSize);
             }
