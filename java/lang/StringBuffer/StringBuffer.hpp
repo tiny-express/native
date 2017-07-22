@@ -75,7 +75,7 @@ namespace Java {
 
             StringBuffer append(long longValue);
 
-            StringBuffer append(StringBuffer stringBuffer);
+            StringBuffer append(StringBuffer *stringBuffer);
 
             StringBuffer append(string str, int offset, int len);
 

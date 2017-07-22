@@ -203,6 +203,39 @@ TEST (JavaLang, StringBufferAppend) {
     string expectLongAppend = (string)"10091009900";
     ASSERT_STR(expectLongAppend, numberAppendStringBuffer.getValue());
 
+    // Test boolean
+    StringBuffer boolAppendStringBuffer = StringBuffer("bool ");
+
+    boolean boolToAppend = true;
+    boolAppendStringBuffer.append(boolToAppend);
+    string expectBoolAppend = (string)"bool true";
+    ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
+
+    // Test boolean
+    StringBuffer charAppendStringBuffer = StringBuffer("Character is : ");
+
+    char charToAppend = 'A';
+    charAppendStringBuffer.append(charToAppend);
+    string expectCharAppend = (string)"Character is : A";
+    ASSERT_STR(expectCharAppend, charAppendStringBuffer.getValue());
+
+    // Test StringBuffer
+    StringBuffer stringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
+
+    StringBuffer *stringBufferToAppend = new StringBuffer("not null");
+    stringBufferAppendStringBuffer.append(stringBufferToAppend);
+    string expectStringBufferAppend = (string)"StringBuffer is : not null";
+    ASSERT_STR(expectStringBufferAppend, stringBufferAppendStringBuffer.getValue());
+    delete stringBufferToAppend;
+
+    // Test null StringBuffer
+    StringBuffer nullStringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
+
+    StringBuffer *nullStringBufferToAppend = nullptr;
+    nullStringBufferAppendStringBuffer.append(nullStringBufferToAppend);
+    string expectNullStringBufferAppend = (string)"StringBuffer is : null";
+    ASSERT_STR(expectNullStringBufferAppend, nullStringBufferAppendStringBuffer.getValue());
+
 }
 
 TEST (JavaLang, StringBufferInsert) {

@@ -322,6 +322,47 @@ StringBuffer StringBuffer::append(long longValue) {
     return this->append(String::valueOf(longValue).toString());
 }
 
+/**
+ * Appends the string representation of the boolean argument
+ *
+ * @param boolValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(boolean boolValue) {
+    if (boolValue) {
+        return this->append((string)"true");
+    }
+    else {
+        return this->append((string)"false");
+    }
+}
+
+/**
+ * Appends the string representation of the char argument
+ *
+ * @param charValue
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(char charValue) {
+    return this->append(String::valueOf(charValue).toString());
+}
+
+/**
+ * Appends the specified StringBuffer to this sequence.
+ *
+ * @param stringBuffer
+ * @return reference to this StringBuffer
+ */
+StringBuffer StringBuffer::append(StringBuffer *stringBuffer) {
+    if (stringBuffer == nullptr) {
+        return this->append((string)"null");
+    }
+    else {
+        return this->append(stringBuffer->getValue());
+    }
+
+}
+
 
 
 
