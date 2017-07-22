@@ -94,7 +94,7 @@ int json_value_equals(const JSON_Value *a, const JSON_Value *b);
 /* Validation
    This is *NOT* JSON Schema. It validates json by checking if object have identically
    named fields with matching types.
-   For example schema {"name":"", "age":0} will validate
+   For run schema {"name":"", "age":0} will validate
    {"name":"Joe", "age":25} and {"name":"Joe", "age":25, "gender":"m"},
    but not {"name":"Joe"} or {"name":"Joe", "age":"Cucumber"}.
    In case of arrays, only first value in schema is checked against all values in tested array.

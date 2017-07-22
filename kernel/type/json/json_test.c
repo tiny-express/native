@@ -34,7 +34,7 @@ TEST(Type, JsonSerialize) {
 	json_object_set_string(root_object, "name", "John Smith");
 	json_object_set_number(root_object, "age", 25);
 	json_object_dotset_string(root_object, "address.city", "Cupertino");
-	json_object_dotset_value(root_object, "contact.emails", json_parse_string("[\"email@example.com\",\"email2@example.com\"]"));
+	json_object_dotset_value(root_object, "contact.emails", json_parse_string("[\"email@run.com\",\"email2@run.com\"]"));
 	serialized_string = json_serialize_to_string_pretty(root_value);
 	/*
 	 {
@@ -45,8 +45,8 @@ TEST(Type, JsonSerialize) {
 	    },
 	    "contact": {
 	        "emails": [
-	            "email@example.com",
-	            "email2@example.com"
+	            "email@run.com",
+	            "email2@run.com"
 	        ]
 	    }
 	}
@@ -59,8 +59,8 @@ TEST(Type, JsonSerialize) {
 	   "    },\n"
 	   "    \"contact\": {\n"
 	   "        \"emails\": [\n"
-	   "            \"email@example.com\",\n"
-	   "            \"email2@example.com\"\n"
+	   "            \"email@run.com\",\n"
+	   "            \"email2@run.com\"\n"
 	   "        ]\n"
 	   "    }\n"
 	   "}", serialized_string);
@@ -87,8 +87,8 @@ TEST(Type, JsonSerialize) {
 //					   "    },\n"
 //					   "    \"contact\": {\n"
 //					   "        \"emails\": [\n"
-//					   "            \"email@example.com\",\n"
-//					   "            \"email2@example.com\"\n"
+//					   "            \"email@run.com\",\n"
+//					   "            \"email2@run.com\"\n"
 //					   "        ]\n"
 //					   "    }\n"
 //					   "}";
@@ -125,6 +125,6 @@ TEST(Type, JsonSerialize) {
 //	ASSERT_STR("John Smith", json.name);
 //	ASSERT_STR("Cupertino", json.address.city);
 //    ASSERT_EQUAL(2, length_pointer_pointer_char(json.contact.emails));
-//    ASSERT_STR("email@example.com", json.contact.emails[0]);
-//    ASSERT_STR("email2@example.com", json.contact.emails[1]);
+//    ASSERT_STR("email@run.com", json.contact.emails[0]);
+//    ASSERT_STR("email2@run.com", json.contact.emails[1]);
 //}

@@ -40,6 +40,7 @@
 #include "../function/Predicate/Predicate.hpp"
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../../lang/String/String.hpp"
+#include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include <initializer_list>
 #include <iostream>
 
@@ -263,12 +264,9 @@ namespace Java {
 			 * @return
 			 */
 			E get(int index) const {
-				if (index < 0) {
-					return (E) this->original.at(0);
-				}
-				if (index > this->size() - 1) {
-					return (E) this->original.at(this->size() - 1);
-				}
+				if (index < 0 || index >= this->size()) {
+                    throw IndexOutOfBoundsException("Index out of range");
+                }
 				return original.at(index);
 			}
 			
