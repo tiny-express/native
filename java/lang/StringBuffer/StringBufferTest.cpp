@@ -280,7 +280,6 @@ TEST (JavaLang, StringBufferInsert) {
     catch (StringIndexOutOfBoundsException  e) {
         ASSERT_STR(expectString, stringInsert.getValue());
     }
-
 }
 
 TEST (JavaLang, StringBufferEnsureCapacity) {
@@ -297,5 +296,4 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
     int expectMinNonPositiveCapacity = 142;
     stringBuffer.ensureCapacity(-1);
     ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
-
 }

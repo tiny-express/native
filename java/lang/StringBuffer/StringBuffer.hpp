@@ -43,46 +43,167 @@ namespace Java {
             //void writeObject(ObjectOutputStream);
 
         public:
+
+            /**
+             * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
+             *
+             */
             StringBuffer();
 
+            /**
+             * Constructs a string buffer that contains the same characters as the specified CharSequence.
+             *
+             * @param seq
+             */
             explicit StringBuffer(CharSequence *seq);
 
+            /**
+             * Constructs a string buffer with no characters in it and the specified initial capacity.
+             *
+             * @param capacity
+             * @throw NegativeArraySizeException if capacity is negative
+             */
             explicit StringBuffer(int capacity);
 
+            /**
+             * Constructs a string buffer initialized to the contents of the specified string.
+             *
+             * @param str
+             */
             explicit StringBuffer(String str);
 
+            /**
+             * Copy constructor
+             *
+             * @param other
+             */
             StringBuffer(const StringBuffer &other);
 
+            /**
+             * Appends the string representation of the Object argument.
+             *
+             * @param obj
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(Object *obj);
 
+            /**
+             * Appends the string representation of the float argument
+             *
+             * @param floatValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(float floatValue);
 
             //StringBuffer append(AbstractStringBuilder abs);
 
+            /**
+             * Appends the string representation of the char array argument to this sequence.
+             *
+             * @param str
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(string str);
 
+            /**
+             * Appends the string representation of the boolean argument
+             *
+             * @param boolValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(boolean boolValue);
 
+            /**
+             * Appends the specified CharSequence to this sequence.
+             *
+             * @param seq
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(CharSequence *seq);
 
+            /**
+             * Appends the string representation of the double argument
+             *
+             * @param doubleValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(double doubleValue);
 
+            /**
+             * Appends the string representation of the char argument
+             *
+             * @param charValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(char charValue);
 
+            /**
+             * Appends the string representation of char array argument to this sequence.
+             *
+             * @param str
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(String str);
 
+            /**
+             * Appends the string representation of the int argument
+             *
+             * @param intValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(int intValue);
 
+            /**
+             * Appends the string representation of the long argument
+             *
+             * @param longValue
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(long longValue);
 
+            /**
+             * Appends the specified StringBuffer to this sequence.
+             *
+             * @param stringBuffer
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(StringBuffer *stringBuffer);
 
+            /**
+             * Appends the string representation of a subarray of the char array argument to this sequence.
+             * Characters of the char array str, starting at index offset, are appended, in order,
+             * the length of subarray is equal to len
+             *
+             * @param str
+             * @param offset
+             * @param len
+             * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
+             * @return
+             */
             StringBuffer append(string str, int offset, int len);
 
+            /**
+             * Appends a subsequence of the specified CharSequence to this sequence.
+             * starting at index start, are appended, in order,
+             * to the contents of this sequence up to the (exclusive) index end.
+             * If start is negative or bigger than end or bigger than seq's length,
+             * throw IndexOutOfBoundException
+             *
+             * @param seq
+             * @param start
+             * @param end
+             * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
+             * @return reference to this StringBuffer
+             */
             StringBuffer append(CharSequence *seq, int start, int end);
 
             StringBuffer appendCodePoint(int codePoint);
 
+            /**
+             * Return current capacity of this StringBuffer
+             *
+             * @return int
+             */
             int capacity();
 
             char charAt(int index);
@@ -101,12 +222,24 @@ namespace Java {
 
             StringBuffer deleteCharAt(int index);
 
+            /**
+             * Ensures that the capacity is at least equal to the specified minimum.
+             * The new capacity is the larger than the minimumCapacity argument and twice the old capacity plus 2.
+             * If minimumCapacity is non-positive or less or equal to this capacity, return
+             *
+             * @param minimumCapacity
+             */
             void ensureCapacity(int minimumCapacity);
 
             void expandCapacity(int minimumCapacity);
 
             void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
 
+            /**
+             * Return the string value of this StringBuffer
+             *
+             * @return string
+             */
             string getValue();
 
             int indexOf(String str);
@@ -133,12 +266,30 @@ namespace Java {
 
             StringBuffer insert(int dstOffset, CharSequence *seq, int start, int end);
 
+            /**
+             * Inserts the string representation of a subarray of the str array argument into this sequence.
+             * The subarray begins at the specified offset and extends len chars.
+             * The subarray is insert at position index
+             *
+             * @param index
+             * @param str
+             * @param offset
+             * @param len
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
+             * or offset or len are negative, or (offset+len) is greater than str.length.
+             * @return
+             */
             StringBuffer insert(int index, string str, int offset, int len);
 
             int lastIndexOf(String str);
 
             int lastIndexOf(String str, int fromIndex);
 
+            /**
+             * Return the current munber of used char of this sequence
+             *
+             * @return int
+             */
             int length();
 
             int offsetByCodePoints(int index, int codePointOffset);
@@ -161,6 +312,9 @@ namespace Java {
 
             void trimToSize();
 
+            /**
+             * Destructor, free memory alocated for original
+             */
             ~StringBuffer();
 
         };
