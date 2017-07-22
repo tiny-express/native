@@ -6,7 +6,6 @@ void ArrayListSetGet() {
 	arrayList.add("hello");
 	arrayList.add("world");
 	System::out::println(arrayList.get(0).toString());
-	std::cout << std::endl;
 }
 
 void ArrayListException() {
@@ -18,7 +17,6 @@ void ArrayListException() {
 	} catch (Exception e) {
 		System::out::println(e.getMessage());
 	}
-	std::cout << std::endl;
 }
 
 void ArrayListForeach() {
@@ -29,7 +27,6 @@ void ArrayListForeach() {
 	for (String item : arrayList) {
 		System::out::println(item.toString());
 	}
-	std::cout << std::endl;
 }
 
 void ArrayListSerialize() {
@@ -38,7 +35,6 @@ void ArrayListSerialize() {
 	arrayList.add("hello");
 	arrayList.add("world");
 	System::out::println(arrayList.toString());
-	std::cout << std::endl;
 }
 
 int main() {

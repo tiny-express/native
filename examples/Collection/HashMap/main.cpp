@@ -1,16 +1,15 @@
 #include "../../../library.hpp"
 
 void HashMapAddGet() {
-	std::cout << __func__ << ": ";
+	System::out::println(__func__);
 	HashMap<String, String> hashMap;
 	hashMap.put("key", "value");
 	System::out::println(hashMap.get("key").toString());
 	System::out::println(hashMap.get("non-key").toString());
-	std::cout << std::endl;
 }
 
 void HashMapToString() {
-	std::cout << __func__ << ": ";
+	System::out::println(__func__);
 	HashMap<String, Integer> hashMapStringInteger;
 	hashMapStringInteger.put("String1", 1);
 	hashMapStringInteger.put("String2", 2);
