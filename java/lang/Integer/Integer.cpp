@@ -342,10 +342,38 @@ int Integer::min(int inputInt_1, int inputInt_2) {
 	return Math::min(inputInt_1, inputInt_2);
 }
 
-// int Integer::numberOfLeadingZeros(int inputInt) {
+int Integer::numberOfLeadingZeros(int inputInt) {
+	if (inputInt == 0) {
+        return 32;
+	}
 
+    int n = 1;
 
-// }
+    if ((unsigned int) inputInt >> 16 == 0) {
+        n += 16;
+        inputInt <<= 16;
+    }
+
+    if ((unsigned int) inputInt >> 24 == 0) {
+        n += 8;
+        inputInt <<= 8;
+    }
+
+    if ((unsigned int) inputInt >> 28 == 0) {
+        n += 4;
+        inputInt <<= 4;
+    }
+
+    if ((unsigned int) inputInt >> 30 == 0) {
+        n += 2;
+        inputInt <<= 2;
+    }
+
+    n -= (unsigned int) inputInt >> 31;
+
+    return n;
+
+}
 
 // int Integer::numberOfTrailingZeros(int inputInt) {
 

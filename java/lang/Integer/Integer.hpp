@@ -344,16 +344,16 @@ namespace Java {
             */
            static int min(int inputInt_1, int inputInt_2);
 
-           // /**
-           //  * Returns the number of zero bits
-           //  * preceding the highest-order
-           //  * ("leftmost") one-bit in the two's complement
-           //  * binary representation of the specified ...
-           //  *
-           //  * @param target
-           //  * @return int
-           //  */
-           // static int numberOfLeadingZeros(int inputInt);
+           /**
+            * Returns the number of zero bits
+            * preceding the highest-order
+            * ("leftmost") one-bit in the two's complement
+            * binary representation of the specified ...
+            *
+            * @param target
+            * @return int
+            */
+           static int numberOfLeadingZeros(int inputInt);
 
            // /**
            //  * Returns the number of zero bits

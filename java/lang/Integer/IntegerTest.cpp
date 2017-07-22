@@ -1290,15 +1290,14 @@ TEST(JavaLang, IntegerMin) {
     ASSERT_EQUAL(Integer::min(MIN_VALUE , MIN_VALUE), MIN_VALUE);
 }
 
-// TEST(JavaLang, IntegerNumberOfLeadingZeros) {
-    // ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
-    // ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
-    // ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
-    // ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
-    // ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE));
-    // ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE));
-
-// }
+TEST(JavaLang, IntegerNumberOfLeadingZeros) {
+    ASSERT_EQUAL(32, Integer::numberOfLeadingZeros(0));
+    ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
+    ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
+    ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
+    ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE));
+    ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE));
+}
 
 // TEST(JavaLang, IntegerNumberOfTrailingZeros) {
 //     ASSERT_EQUAL(32, Integer::numberOfTrailingZeros(0));
