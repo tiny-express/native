@@ -96,11 +96,6 @@ TEST (Javalang, ArrayListFunction) {
 	int expect = 6;
 	int result = intArray.size();
 	ASSERT_EQUAL(expect, result);
-	
-	// Get value out of Array
-	intArray.get(-1);
-	ASSERT_EQUAL(0, intArray.get(-1).intValue());
-	ASSERT_EQUAL(5, intArray.get(intArray.size()).intValue());
 }
 
 TEST (JavaLang, ArrayListForEach) {
