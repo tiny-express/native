@@ -223,8 +223,32 @@ namespace Java {
 
             //IntStream codePoint();
 
+            /**
+             * Returns the character (Unicode code point) at the specified index.
+             * If the char value specified at the given index is in the high-surrogate range,
+             * the following index is less than the length of this sequence,
+             * and the char value at the following index is in the low-surrogate range,
+             * then the supplementary code point corresponding to this surrogate pair is returned.
+             * Otherwise, the char value at the given index is returned.
+             *
+             * @param index
+             * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
+             * @return
+             */
             int codePointAt(int index);
 
+            /**
+             * Returns the character (Unicode code point) before the specified index.
+             * If the char value at (index - 1) is in the low-surrogate range,
+             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range,
+             * then the supplementary code point value of the surrogate pair is returned.
+             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate,
+             * the surrogate value is returned.
+             *
+             * @param index
+             * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
+             * @return the character (Unicode code point) before the specified index
+             */
             int codePointBefore(int index);
 
             int codePointCount(int beginIndex);
@@ -243,8 +267,6 @@ namespace Java {
              * @param minimumCapacity
              */
             void ensureCapacity(int minimumCapacity);
-
-            void expandCapacity(int minimumCapacity);
 
             void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
 

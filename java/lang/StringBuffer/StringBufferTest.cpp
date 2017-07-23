@@ -302,15 +302,27 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
 TEST (JavaLang, StringBufferAppendCodePoint) {
     StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
 
-    string expectAppendCodePointResult = (string) "Codepoint is : P";
+    string expectBmpCodePointResult = (string) "Codepoint is : P";
     stringBuffer.appendCodePoint(80);
-    ASSERT_STR(expectAppendCodePointResult, stringBuffer.getValue());
+    ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
+
+   /* StringBuilder expectValidCodePointResultBuilder("Codepoint is : P");
+    unicode MIN_HIGH_SURROGATE = (unicode) '\u000D800';
+    unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
+    unicode MIN_LOW_SURROGATE = (unicode) '\u000DC00';
+    char lowSurrogate = (char) ((800000 & 0x3ff) + MIN_LOW_SURROGATE);
+    char highSurrogate = (char) ((((unsigned)800000) >> 10) + (MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >> 10)));
+    expectValidCodePointResultBuilder.append(highSurrogate);
+    expectValidCodePointResultBuilder.append(lowSurrogate);
+
+    stringBuffer.appendCodePoint(800000);
+    ASSERT_STR(expectValidCodePointResultBuilder.toString().toString(), stringBuffer.getValue());*/
 
     try {
         stringBuffer.appendCodePoint(80000000);
     }
     catch (IllegalArgumentException e) {
-        ASSERT_STR(expectAppendCodePointResult, stringBuffer.getValue());
+        ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
     }
 }
 
@@ -336,6 +348,60 @@ TEST (JavaLang, StringBufferCharAt) {
 
     try {
         char expectGreaterThanLengthIndex = stringBuffer.charAt(stringBuffer.length() + 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferCodePointAt) {
+    StringBuffer stringBuffer = StringBuffer("CodePointAt");
+    char expectCodePointAtResult = 'A';
+    ASSERT_EQUAL(expectCodePointAtResult, stringBuffer.codePointAt(9));
+
+    try {
+        char expectNegativeIndex = stringBuffer.codePointAt(-1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
+
+    try {
+        char expectEqualToLengthIndex = stringBuffer.codePointAt(stringBuffer.length());
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    try {
+        char expectGreaterThanLengthIndex = stringBuffer.codePointAt(stringBuffer.length() + 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferCodePointBefore) {
+    StringBuffer stringBuffer = StringBuffer("CodePointAt");
+    char expectCodePointBeforeResult = 'A';
+    ASSERT_EQUAL(expectCodePointBeforeResult, stringBuffer.codePointBefore(11));
+
+    try {
+        char expectNegativeIndex = stringBuffer.codePointBefore(-1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
+
+    try {
+        char expectEqualToLengthIndex = stringBuffer.codePointBefore(stringBuffer.length());
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    try {
+        char expectGreaterThanLengthIndex = stringBuffer.codePointBefore(stringBuffer.length() + 1);
     }
     catch (IndexOutOfBoundsException e) {
         ASSERT_STR("", e.getMessage().toString());

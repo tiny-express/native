@@ -217,14 +217,22 @@ StringBuffer StringBuffer::appendCodePoint(int codePoint) {
     boolean isValidCodePoint = (plane < (((unsigned) (0X10FFFF + 1)) >> 16));
 
     if (isBmpCodePoint) {
-        return this->append((char) codePoint);
+        this->append((char) codePoint);
     }
     else if (isValidCodePoint) {
-        //TODO append lowSurrogate and highSurrogate
+        unicode MIN_HIGH_SURROGATE = (unicode) '\u000D800';
+        unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
+        unicode MIN_LOW_SURROGATE = (unicode) '\u000DC00';
+
+        char lowSurrogate = (char) ((codePoint & 0x3ff) + MIN_LOW_SURROGATE);
+        char highSurrogate = (char) ((((unsigned)codePoint) >> 10) + (MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >> 10)));
+        this->append(highSurrogate);
+        this->append(lowSurrogate);
     }
     else {
         throw IllegalArgumentException();
     }
+    return *this;
 }
 
 char StringBuffer::charAt(int index) {
@@ -238,6 +246,32 @@ char StringBuffer::charAt(int index) {
 
     return this->original[index];
 }
+
+int StringBuffer::codePointAt(int index) {
+    if (index < 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+    }
+
+    if (index >= currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+
+    char charAtIndex = this->original[index];
+    int followingIndex = index + 1;
+    if (Character::isHighSurrogate(charAtIndex) && (followingIndex < currentLength)) {
+        char charAtFollowingIndex = this->original[followingIndex];
+        if (Character::isLowSurrogate(charAtFollowingIndex)) {
+            return Character::toCodePoint(charAtIndex, charAtFollowingIndex);
+        }
+    }
+    return charAtIndex;
+}
+
+int StringBuffer::codePointBefore(int index) {
+   return codePointAt(index - 2);
+}
+
+
 
 
 
