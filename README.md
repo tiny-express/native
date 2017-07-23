@@ -41,7 +41,7 @@ public:
         ArrayList<HashMap<String, String>> arrayList;
         arrayList.add(hashMap);
         System::out::println(arrayList.toString());
-	}
+    }
 };
 
 int main(int argc, char **argv) {
