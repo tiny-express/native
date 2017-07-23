@@ -55,11 +55,6 @@ Integer::~Integer() {
 	}
 }
 
-/**
- * Integer to Char
- *
- * @return char
- */
 char Integer::charValue() const {
 	string convertResult = string_from_int(this->original);
 	char result = string_to_char(convertResult);
@@ -67,66 +62,30 @@ char Integer::charValue() const {
 	return result;
 }
 
-/**
- * Integer to String
- *
- * @return CString
- */
 string Integer::stringValue() const {
     return this->string_original;
 }
 
-/**
- * Short value of Integer
- *
- * @return short
- */
 short Integer::shortValue() const {
-	return this->original;
+	return static_cast<short> (this->original);
 }
 
-/**
- * Integer value
- *
- * @return int
- */
 int Integer::intValue() const {
 	return this->original;
 }
 
-/**
- * Integer value in Long
- *
- * @return int
- */
 long Integer::longValue() const {
 	return this->original;
 }
 
-/**
- * Integer value in float
- *
- * @return int
- */
 float Integer::floatValue() const {
 	return (float) this->original;
 }
 
-/**
- * Integer value in double
- *
- * @return int
- */
 double Integer::doubleValue() const {
 	return (double) this->original;
 }
 
-/**
- * Assign value of this object same as target value
- *
- * @param target
- * @return Integer
- */
 Integer Integer::operator=(const Integer &target) {
 	this->original = target.original;
 	free(this->string_original);
@@ -134,101 +93,46 @@ Integer Integer::operator=(const Integer &target) {
     return *this;
 }
 
-/**
- * Make a summation with target Integer
- *
- * @return Integer
- */
 Integer Integer::operator+(const Integer &target) {
 	return this->original + target.original;
 }
 
-/**
- * Make a subtraction with target Integer
- *
- * @return Integer
- */
 Integer Integer::operator-(const Integer &target) {
 	return this->original - target.original;
 }
 
-/**
- * Compare this Integer is equal target
- *
- * @return bool
- */
 boolean Integer::operator==(const Integer &target) const {
 	return this->original == target.original;
 }
 
-/**
- * Compare this Integer is not equal target
- *
- * @return bool
- */
 boolean Integer::operator!=(const Integer &target) const {
 	return !this->operator==(target);
 }
 
-/**
- * Compare this Integer is less than target
- *
- * @return bool
- */
 boolean Integer::operator<(const Integer &target) const {
 	return this->original < target.original;
 }
 
-/**
- * Compare this Integer is more than target
- *
- * @return bool
- */
 boolean Integer::operator>(const Integer &target) const {
 	return this->original > target.original;
 }
 
-/**
- * Compare this Integer is equal or less than target
- *
- * @return bool
- */
 boolean Integer::operator<=(const Integer &target) const {
 	return this->original <= target.original;
 }
 
-/**
- *  Compare this Integer is equal or more than target
- *
- * @return bool
- */
 boolean Integer::operator>=(const Integer &target) const {
 	return this->original >= target.original;
 }
 
-/**
- *  Make a division from this Integer with target
- *
- * @return Integer
- */
 Integer Integer::operator/(const Integer &target) {
 	return ( this->original / target.original );
 }
 
-/**
- * Make a multiple from this Integer with target
- *
- * @return Integer
- */
 Integer Integer::operator*(const Integer &target) {
 	return ( this->original * target.original );
 }
 
-/**
- * Make a modulo from this Integer with target
- *
- * @return Integer
- */
 Integer Integer::operator%(const Integer &target) {
 	return ( this->original % target.original );
 }
@@ -241,9 +145,9 @@ int Integer::bitCount(int inputInt) {
 		inputInt = -inputInt;
 	}
 
-	while( (inputInt != 0) || resultBitCount == 32) {
+	while( (inputInt != 0) || resultBitCount == 32 ) {
 
-		if( (inputInt & 1) == 1) {
+		if( (inputInt & 1) == 1 ) {
 			resultBitCount++;
 		}
 
@@ -283,7 +187,7 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 // }
 
 int Integer::divideUnsigned(int dividend, int divisor) {
-	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
+	return static_cast<int> (toUnsignedLong(dividend) / toUnsignedLong(divisor));
 }
 
 // double Integer::doubleValue() {
@@ -488,7 +392,7 @@ int Integer::parseInt(String inputString) {
 // }
 
 int Integer::remainderUnsigned(int dividend, int divisor) {
-	return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
+	return static_cast<int> (toUnsignedLong(dividend) % toUnsignedLong(divisor));
 }
 
 int Integer::reverse(int inputInt) {

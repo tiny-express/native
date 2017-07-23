@@ -86,7 +86,8 @@ namespace Java {
              * Integer Destructor
              */
 			~Integer();
-		private:
+
+	private:
       /**
       * return size of a string
       *
@@ -96,12 +97,53 @@ namespace Java {
      int stringSize(int x);
 
 		public:
+            /**
+             * Integer to Char
+             *
+             * @return char
+             */
 			char charValue() const;
+
+            /**
+             * Integer to String
+             *
+             * @return CString
+             */
 			string stringValue() const;
+
+            /**
+             * Short value of Integer
+             *
+             * @return short
+             */
 			short shortValue() const;
+
+            /**
+             * Integer value
+             *
+             * @return int
+             */
 			int intValue() const;
+
+            /**
+             * Integer value in Long
+             *
+             * @return int
+             */
 			long longValue() const;
+
+            /**
+             * Integer value in float
+             *
+             * @return int
+             */
 			float floatValue() const;
+
+            /**
+             * Integer value in double
+             *
+             * @return int
+             */
 			double doubleValue() const;		
 
            /**
@@ -128,18 +170,90 @@ namespace Java {
 			}
 		
 		public:
+
+            /**
+             * Assign value of this object same as target value
+             *
+             * @param target
+             * @return Integer
+             */
 			Integer operator=(const Integer &target);
+
+            /**
+             * Make a summation with target Integer
+             *
+             * @return Integer
+             */
 			Integer operator+(const Integer &target);
+
+            /**
+             * Make a subtraction with target Integer
+             *
+             * @return Integer
+             */
 			Integer operator-(const Integer &target);
-			Integer operator/(const Integer &target);;
+
+            /**
+             *  Make a division from this Integer with target
+             *
+             * @return Integer
+             */
+			Integer operator/(const Integer &target);
+
+            /**
+             * Make a multiple from this Integer with target
+             *
+             * @return Integer
+             */
 			Integer operator*(const Integer &target);
+
+            /**
+             * Make a modulo from this Integer with target
+             *
+             * @return Integer
+             */
 			Integer operator%(const Integer &target);
-			
+
+            /**
+             * Compare this Integer is equal target
+             *
+             * @return bool
+             */
 			boolean operator==(const Integer &target) const;
+
+            /**
+             * Compare this Integer is not equal target
+             *
+             * @return bool
+             */
 			boolean operator!=(const Integer &target) const;
+
+            /**
+             * Compare this Integer is less than target
+             *
+             * @return bool
+             */
 			boolean operator<(const Integer &target) const;
+
+            /**
+             * Compare this Integer is more than target
+             *
+             * @return bool
+             */
 			boolean operator>(const Integer &target) const;
+
+            /**
+             * Compare this Integer is equal or less than target
+             *
+             * @return bool
+             */
 			boolean operator<=(const Integer &target) const;
+
+            /**
+             *  Compare this Integer is equal or more than target
+             *
+             * @return bool
+             */
 			boolean operator>=(const Integer &target) const;
 			
 			void operator+=(const Integer &target);
