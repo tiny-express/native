@@ -117,12 +117,13 @@ TEST (JavaLang, StringBufferGetValue) {
 
 TEST (JavaLang, StringBufferAppendSubCharArray) {
     StringBuffer stringAppend = StringBuffer("please");
-
+    // Append "add more" to stringAppend
     string stringToAppend = (string)("don't add more");
     stringAppend.append(stringToAppend, 5, 9);
     string expectString = (string)"please add more";
     ASSERT_STR(expectString, stringAppend.getValue());
 
+    // Test (offset + len) > stringBuffer.length()
     try {
         stringAppend.append(stringToAppend, 20, 2);
     }
@@ -130,6 +131,7 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
         ASSERT_STR(expectString, stringAppend.getValue());
     }
 
+    // Test negative offset
     try {
         stringAppend.append(stringToAppend, -1, 5);
     }
@@ -137,6 +139,7 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
         ASSERT_STR(expectString, stringAppend.getValue());
     }
 
+    // Test negative len
     try {
         stringAppend.append(stringToAppend, 5, -1);
     }
@@ -247,6 +250,7 @@ TEST (JavaLang, StringBufferInsert) {
     string expectString = (string)"please insert more";
     ASSERT_STR(expectString, stringInsert.getValue());
 
+
     try {
         stringInsert.insert(-1, stringToInsert, 6, 6);
     }
@@ -286,15 +290,18 @@ TEST (JavaLang, StringBufferInsert) {
 TEST (JavaLang, StringBufferEnsureCapacity) {
     StringBuffer stringBuffer;
 
+    // Test minimum capacity = 20
     int expectMinimumTwentyCapacity = 34;
     stringBuffer.ensureCapacity(20);
     ASSERT_EQUAL(expectMinimumTwentyCapacity, stringBuffer.capacity());
 
-    int expectMinimumEightyCapacity = 142;
-    stringBuffer.ensureCapacity(80);
+    // Tets minimum capacity < current capacity
+    int expectMinimumEightyCapacity = 34;
+    stringBuffer.ensureCapacity(30);
     ASSERT_EQUAL(expectMinimumEightyCapacity, stringBuffer.capacity());
 
-    int expectMinNonPositiveCapacity = 142;
+    // Test negative minimum capacity
+    int expectMinNonPositiveCapacity = 34;
     stringBuffer.ensureCapacity(-1);
     ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
 }
@@ -302,6 +309,7 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
 TEST (JavaLang, StringBufferAppendCodePoint) {
     StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
 
+    // Test normal codePoint
     string expectBmpCodePointResult = (string) "Codepoint is : P";
     stringBuffer.appendCodePoint(80);
     ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
@@ -318,6 +326,7 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
     stringBuffer.appendCodePoint(800000);
     ASSERT_STR(expectValidCodePointResultBuilder.toString().toString(), stringBuffer.getValue());*/
 
+    // Test not a codePoint
     try {
         stringBuffer.appendCodePoint(80000000);
     }
@@ -329,9 +338,11 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
 TEST (JavaLang, StringBufferCharAt) {
     StringBuffer stringBuffer = StringBuffer("CharAt");
 
+    // Test vaild index
     char expectCharAtResult = 'A';
     ASSERT_EQUAL(expectCharAtResult, stringBuffer.charAt(4));
 
+    // Test negative index
     try {
         char expectNegativeIndex = stringBuffer.charAt(-1);
     }
@@ -339,6 +350,7 @@ TEST (JavaLang, StringBufferCharAt) {
         ASSERT_STR("index must be positive", e.getMessage().toString());
     }
 
+    // Test equal to length index
     try {
         char expectEqualToLengthIndex = stringBuffer.charAt(stringBuffer.length());
     }
@@ -346,6 +358,7 @@ TEST (JavaLang, StringBufferCharAt) {
         ASSERT_STR("", e.getMessage().toString());
     }
 
+    // Test greater than length index
     try {
         char expectGreaterThanLengthIndex = stringBuffer.charAt(stringBuffer.length() + 1);
     }
@@ -356,9 +369,12 @@ TEST (JavaLang, StringBufferCharAt) {
 
 TEST (JavaLang, StringBufferCodePointAt) {
     StringBuffer stringBuffer = StringBuffer("CodePointAt");
+
+    // Test vaild index
     char expectCodePointAtResult = 'A';
     ASSERT_EQUAL(expectCodePointAtResult, stringBuffer.codePointAt(9));
 
+    // Test negative index
     try {
         char expectNegativeIndex = stringBuffer.codePointAt(-1);
     }
@@ -366,6 +382,7 @@ TEST (JavaLang, StringBufferCodePointAt) {
         ASSERT_STR("index must be positive", e.getMessage().toString());
     }
 
+    // Test equal to length index
     try {
         char expectEqualToLengthIndex = stringBuffer.codePointAt(stringBuffer.length());
     }
@@ -373,6 +390,7 @@ TEST (JavaLang, StringBufferCodePointAt) {
         ASSERT_STR("", e.getMessage().toString());
     }
 
+    // Test greater than length index
     try {
         char expectGreaterThanLengthIndex = stringBuffer.codePointAt(stringBuffer.length() + 1);
     }
@@ -383,9 +401,12 @@ TEST (JavaLang, StringBufferCodePointAt) {
 
 TEST (JavaLang, StringBufferCodePointBefore) {
     StringBuffer stringBuffer = StringBuffer("CodePointAt");
+
+    // Test vaild index
     char expectCodePointBeforeResult = 'A';
     ASSERT_EQUAL(expectCodePointBeforeResult, stringBuffer.codePointBefore(11));
 
+    // Test negative index
     try {
         char expectNegativeIndex = stringBuffer.codePointBefore(-1);
     }
@@ -393,6 +414,7 @@ TEST (JavaLang, StringBufferCodePointBefore) {
         ASSERT_STR("index must be positive", e.getMessage().toString());
     }
 
+    // Test equal to length index
     try {
         char expectEqualToLengthIndex = stringBuffer.codePointBefore(stringBuffer.length());
     }
@@ -400,10 +422,127 @@ TEST (JavaLang, StringBufferCodePointBefore) {
         ASSERT_STR("", e.getMessage().toString());
     }
 
+    // Test greater than length index
     try {
         char expectGreaterThanLengthIndex = stringBuffer.codePointBefore(stringBuffer.length() + 1);
     }
     catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferCodePointCount) {
+    StringBuffer stringBuffer = StringBuffer("CodePointCount");
+
+    // Test vaild beginIndex, endIndex
+    int expectCodePointCount = 8;
+    ASSERT_EQUAL(expectCodePointCount, stringBuffer.codePointCount(1, 9));
+
+    // Test negative beginIndex
+    try {
+        char expectNegativeBegin = stringBuffer.codePointCount(-1, 9);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test equal to length endIndex
+    try {
+        char expectEqualToLengthEnd = stringBuffer.codePointCount(1, stringBuffer.length());
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test beginIndex greather than endIndex
+    try {
+        char expectBeginGreaterThanEnd = stringBuffer.codePointCount(10, 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferDeleteCharAt) {
+    StringBuffer stringBuffer = StringBuffer("Delete char at");
+
+    // Test vaild index
+    string expectDeleteCharResult = (string) "Delete cha at";
+    stringBuffer.deleteCharAt(10);
+    ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+
+    // Test negative index
+    try {
+        stringBuffer.deleteCharAt(-1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
+
+    // Test equal to length index
+    try {
+        stringBuffer.deleteCharAt(stringBuffer.length());
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+    }
+
+    // Test greater than length index
+    try {
+        stringBuffer.deleteCharAt(stringBuffer.length() + 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+    }
+}
+
+TEST (JavaLang, StringBufferDelete) {
+    StringBuffer stringBuffer = StringBuffer("Delete char at");
+
+    // Test vaild start, end
+    string expectDeleteCharResult = (string) "Delete at";
+    stringBuffer.deletes(7, 12);
+    ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+
+    // Test start equal to end
+    stringBuffer.deletes(7, 7);
+    ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
+
+    // Test end greater than length
+    string expectEndGreaterThanLengthResult = (string) "Delete";
+    stringBuffer.deletes(6, 12);
+    ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
+
+    // Test start equal to length
+    stringBuffer.deletes(6, 10);
+    ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
+
+    // Test negative start
+    try {
+        stringBuffer.deletes(-1, 9);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+        ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
+    }
+
+    // Test start greater than length
+    try {
+        stringBuffer.deletes(7, 10);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+        ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
+
+    }
+
+    // Test startIndex greather than endIndex
+    try {
+        stringBuffer.deletes(5, 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
         ASSERT_STR("", e.getMessage().toString());
     }
 }

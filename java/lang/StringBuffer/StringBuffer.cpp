@@ -271,6 +271,72 @@ int StringBuffer::codePointBefore(int index) {
    return codePointAt(index - 2);
 }
 
+int StringBuffer::codePointCount(int beginIndex, int endIndex) {
+    if (beginIndex < 0 || endIndex > currentLength || beginIndex > endIndex) {
+        throw IndexOutOfBoundsException();
+    }
+
+    int codePointCount = endIndex - beginIndex;
+    for (int index = beginIndex; index < endIndex; index++ ) {
+        if (Character::isHighSurrogate(this->original[index + 1]) && index < endIndex
+            && Character::isLowSurrogate(this->original[index])) {
+            codePointCount--;
+            index++;
+        }
+    }
+    return codePointCount;
+}
+
+StringBuffer StringBuffer::deletes(int start, int end) {
+    if (start < 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+
+    }
+
+    if (start > end || start > this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+
+    if (start == end || start == currentLength) {
+        return *this;
+    }
+
+    char *fromPosition;
+    int memorySizeToMove;
+
+    if (end > this->currentLength) {
+        fromPosition = this->original + this-> currentLength;
+        memorySizeToMove = this->currentLength * sizeof(char);
+        this->currentLength = start;
+    }
+    else {
+        fromPosition = this->original + end;
+        memorySizeToMove = (this->currentLength - start) * sizeof(char);
+        this->currentLength -= (end - start);
+    }
+    char *toPosition = this->original + start;
+    memmove(toPosition, fromPosition, (size_t) memorySizeToMove);
+    return *this;
+}
+
+StringBuffer StringBuffer::deleteCharAt(int index) {
+    if (index < 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+    }
+
+    if (index >= currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+
+    // move block of memory from index + 1 to index
+    char *fromPosition = this->original + index + 1;
+    char *toPosition = this->original + index;
+    int memorySizeToMove = (this->currentLength - index) * sizeof(char);
+    memmove(toPosition, fromPosition, (size_t) memorySizeToMove);
+    this->currentLength--;
+    return *this;
+}
+
 
 
 

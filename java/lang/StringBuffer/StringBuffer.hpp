@@ -251,12 +251,37 @@ namespace Java {
              */
             int codePointBefore(int index);
 
-            int codePointCount(int beginIndex);
+            /**
+             * Returns the number of Unicode code points in the specified text range of this sequence.
+             * The text range begins at the specified beginIndex and extends to the char at index endIndex - 1
+             *
+             * @param beginIndex
+             * @param endIndex
+             * @return Returns the number of Unicode code points in the specified text range of this sequence
+             */
+            int codePointCount(int beginIndex, int endIndex);
 
             //IntStream codePoint();
 
+            /**
+             * Removes the characters in a substring of this sequence.
+             * The substring begins at the specified start and extends to the character at index end - 1 or
+             * to the end of the sequence if no such character exists. If start is equal to end, no changes are made.
+             *
+             * @param start, inclusive
+             * @param end, exclusive
+             * @throw StringIndexOutOfBound -  if start is negative, greater than length(), or greater than end.
+             * @return a reference to this StringBuffer
+             */
             StringBuffer deletes(int start, int end);
 
+            /**
+             * Removes the char at the specified position in this sequence.
+             *
+             * @param index
+             * @throw StringIndexOutOfBoundsException - if the index is negative or greater than or equal to length().
+             * @return a reference to this StringBuffer
+             */
             StringBuffer deleteCharAt(int index);
 
             /**
