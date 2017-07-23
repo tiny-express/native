@@ -48,6 +48,4 @@ string string_default(string target);
 
 double number_default(double target);
 
-#include "json.h"
-
 #endif

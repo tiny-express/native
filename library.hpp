@@ -27,11 +27,18 @@
 #ifndef NATIVE_LIBRARY_HPP_
 #define NATIVE_LIBRARY_HPP_
 
+// Java Core Packages
 #include "java/IO.hpp"
 #include "java/Lang.hpp"
 #include "java/Net.hpp"
 #include "java/Security.hpp"
 #include "java/Util.hpp"
+
+// Java Modules
+#include "javax/Cql.hpp"
+#include "javax/Json.hpp"
+#include "javax/Net.hpp"
+#include "javax/Sql.hpp"
 
 // In Java, Java::Lang is imported by default
 using namespace Java::Lang;

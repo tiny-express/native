@@ -39,6 +39,8 @@
 #include "../function/Consumer/Consumer.hpp"
 #include "../function/Predicate/Predicate.hpp"
 #include "../function/UnaryOperator/UnaryOperator.hpp"
+#include "../../lang/String/String.hpp"
+#include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include <initializer_list>
 #include <iostream>
 
@@ -48,10 +50,10 @@ using namespace Java::Util::Function;
 
 namespace Java {
 	namespace Util {
-		template <typename E>
+		template <class E>
 		class ArrayList;
 		
-		template <typename E>
+		template <class E>
 		class ArrayListIterator {
 		public:
 			ArrayListIterator(const ArrayList<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
@@ -77,16 +79,19 @@ namespace Java {
 		};
 		
 		template <class E>
-		class ArrayList : public AbstractList<E>,
-		                  public virtual List<E>,
-		                  public virtual Serializable,
-		                  public virtual Cloneable,
-		                  public virtual RandomAccess {
+		class ArrayList :
+			//public virtual AbstractList<E>,
+			//public virtual List<E>,
+			public virtual Serializable,
+			public virtual Cloneable,
+			public virtual RandomAccess {
+		
 		private:
 			std::vector<E> original;
 			typedef E *_iterator;
 			typedef const E *_const_iterator;
-			
+			String backup;
+		
 		public:
 			
 			_iterator begin() {
@@ -103,9 +108,16 @@ namespace Java {
 			};
 			
 			/**
-				     * Constructs an empty list
-				     */
+			 * Constructs an empty list
+			 */
 			ArrayList() {
+			
+			}
+			
+			ArrayList(const std::initializer_list<E> &target) {
+				for (E item : target) {
+					this->add(item);
+				}
 			}
 			
 			/**
@@ -113,7 +125,9 @@ namespace Java {
 			 *
 			 * @param c
 			 */
-			ArrayList(Collection<E> &c) {
+			
+			ArrayList(Collection<E> collection) {
+			
 			}
 			
 			/**
@@ -140,8 +154,8 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			boolean add(E &e) {
-				this->original.push_back(e);
+			boolean add(E element) {
+				this->original.push_back(element);
 				return true;
 			}
 			
@@ -151,7 +165,7 @@ namespace Java {
 			 * @param index
 			 * @param element
 			 */
-			void add(int index, E &element) {
+			void add(int index, E element) {
 				if (index < 0 || index > this->original.size() - 1) {
 					return;
 				}
@@ -165,7 +179,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(Collection<E> &c) {
+			boolean addAll(Collection<E> collection) {
 				// TODO
 				return true;
 			}
@@ -178,7 +192,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(int index, Collection<E> &c) {
+			boolean addAll(int index, Collection<E> collection) {
 				// TODO
 				return true;
 			}
@@ -208,7 +222,7 @@ namespace Java {
 			 * @param o
 			 * @return boolean
 			 */
-			boolean contains(E &e) const {
+			boolean contains(E element) const {
 				// TODO
 				return true;
 			}
@@ -218,8 +232,8 @@ namespace Java {
 			 * @param c
 			 * @return
 			 */
-			virtual boolean containsAll(Collection<Object> &c) const {
-				//TODO
+			boolean containsAll(Collection<Object> collection) const {
+				return true;
 			}
 			
 			/**
@@ -239,7 +253,7 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach(Consumer<E> &action) const {
+			void forEach(Consumer<E> action) const {
 				// TODO
 			}
 			
@@ -250,13 +264,8 @@ namespace Java {
 			 * @return
 			 */
 			E get(int index) const {
-				if (index < 0) {
-					return ( E & )
-					this->original.at(0);
-				}
-				if (index > this->size() - 1) {
-					return ( E & )
-					this->original.at(this->size() - 1);
+				if (index < 0 || index >= this->size()) {
+					throw IndexOutOfBoundsException("Index out of range");
 				}
 				return original.at(index);
 			}
@@ -268,7 +277,7 @@ namespace Java {
 			 * @param o
 			 * @return int
 			 */
-			int indexOf(E &e) const {
+			int indexOf(E element) const {
 				return 0;
 			}
 			
@@ -299,7 +308,7 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(E &e) const {
+			int lastIndexOf(E element) const {
 				// TODO
 				return 0;
 			}
@@ -346,7 +355,7 @@ namespace Java {
 			 * @param object
 			 * @return boolean
 			 */
-			boolean remove(Object &object) {
+			boolean remove(Object object) {
 				// TODO
 				return true;
 			}
@@ -358,7 +367,7 @@ namespace Java {
 			 * @param target
 			 * @return boolean
 			 */
-			boolean removeAll(Collection<Object> &target) {
+			boolean removeAll(Collection<Object> target) {
 				// TODO
 				return true;
 			}
@@ -369,7 +378,7 @@ namespace Java {
 			 * @param filter
 			 * @return boolean
 			 */
-			boolean removeIf(Predicate<E> &filter) {
+			boolean removeIf(Predicate<E> filter) {
 				// TODO
 				return true;
 			}
@@ -380,7 +389,7 @@ namespace Java {
 			 *
 			 * @param unaryOperator
 			 */
-			void replaceAll(UnaryOperator<E> &unaryOperator) {
+			void replaceAll(UnaryOperator<E> unaryOperator) {
 				// TODO
 			}
 			
@@ -391,7 +400,7 @@ namespace Java {
 			 * @param c
 			 * @return
 			 */
-			boolean retainAll(Collection<Object> &c) {
+			boolean retainAll(Collection<Object> collection) {
 				// TODO
 				return true;
 			}
@@ -404,7 +413,7 @@ namespace Java {
 			 * @param element
 			 * @return Adress of E
 			 */
-			E set(int index, E &element) {
+			E set(int index, E element) {
 				E e;
 				return e;
 			}
@@ -423,7 +432,7 @@ namespace Java {
 			 *
 			 * @param cmp
 			 */
-			void sort(Comparator<E> &cmp) {
+			void sort(Comparator<E> cmp) {
 				// TODO
 			}
 			
@@ -466,9 +475,9 @@ namespace Java {
 			 * @return Array<T>
 			 */
 			template <class T>
-			Array<T> &toArray(Array<T> &a) const {
+			Array<T> &toArray(Array<T> array) const {
 				// TODO
-				return a;
+				return array;
 			}
 			
 			/**
@@ -484,24 +493,44 @@ namespace Java {
 			 *
 			 * @return string
 			 */
-			string toString() const {
-				return (string) "";
+			string toString() {
+				if (this->size() == 0) {
+					this->backup = "[]";
+					return this->backup.toString();
+				}
+				String startArrayList = "[";
+				String commaAndSpace = ", ";
+				String endArrayList = "]";
+				int index;
+				for (index = 0; index < this->size() - 1; ++index) {
+					String appendString = this->original[index ].toString();
+					appendString += commaAndSpace;
+					startArrayList += appendString;
+				}
+				startArrayList += this->original[ this->size() - 1 ].toString();
+				startArrayList += endArrayList;
+				this->backup = startArrayList;
+				return this->backup.toString();
 			}
 			
-			virtual long hashCode() const {
-				//TODO
+			long hashCode() const {
+				return 0;
 			}
 			
-			boolean equals(const Object &o) const {
-				//TODO
+			boolean equals(const Object object) const {
+				return true;
 			}
-
+			
 			friend std::ostream &operator<<(std::ostream &os, const ArrayList &target) {
 				for (E item : target) {
 					os << item << " ";
 				}
 				os << std::endl;
 				return os;
+			}
+			
+			E &operator[](int index) {
+				return this->original[ index ];
 			}
 		protected:
 			/**

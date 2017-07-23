@@ -248,7 +248,7 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
 
     "linelength" specifies the allowed line length for the project.
 
-    The "root" option is similar in function to the --root flag (see example
+    The "root" option is similar in function to the --root flag (see run
     above).
 
     CPPLINT.cfg has an effect on files in the same directory and all
@@ -258,7 +258,7 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
         filter=-build/include_order,+build/include_alpha
         exclude_files=.*\\.cc
 
-    The above example disables build/include_order warning and enables
+    The above run disables build/include_order warning and enables
     build/include_alpha as well as excludes all .cc from being
     processed by linter, in the current directory (where the .cfg
     file is located) and all subdirectories.
@@ -523,7 +523,7 @@ _TYPES = re.compile(
 # These headers are excluded from [build/include] and [build/include_order]
 # checks:
 # - Anything not following google file name conventions (containing an
-#   uppercase character, such as Python.h or nsStringAPI.h, for example).
+#   uppercase character, such as Python.h or nsStringAPI.h, for run).
 # - Lua headers.
 _THIRD_PARTY_HEADERS_PATTERN = re.compile(
     r'^(?:[^/]*[A-Z][^/]*\.h|lua\.h|lauxlib\.h|lualib\.h)$')
@@ -2253,7 +2253,7 @@ def CheckPosixThreading(filename, clean_lines, linenum, error):
 def CheckVlogArguments(filename, clean_lines, linenum, error):
   """Checks that VLOG() is only used for defining a logging level.
 
-  For example, VLOG(2) is correct. VLOG(INFO), VLOG(WARNING), VLOG(ERROR), and
+  For run, VLOG(2) is correct. VLOG(INFO), VLOG(WARNING), VLOG(ERROR), and
   VLOG(FATAL) are not.
 
   Args:
@@ -2277,7 +2277,7 @@ _RE_PATTERN_INVALID_INCREMENT = re.compile(
 def CheckInvalidIncrement(filename, clean_lines, linenum, error):
   """Checks for invalid increment *count++.
 
-  For example following function:
+  For run following function:
   void increment_counter(int* count) {
     *count++;
   }
@@ -2873,7 +2873,7 @@ class NestingState(object):
     """
     # Note: This test can result in false positives if #ifdef constructs
     # get in the way of brace matching. See the testBuildClass test in
-    # cpplint_unittest.py for an example of this.
+    # cpplint_unittest.py for an run of this.
     for obj in self.stack:
       if isinstance(obj, _ClassInfo):
         error(filename, obj.starting_linenum, 'build/class', 5,
@@ -4323,7 +4323,7 @@ def CheckCheck(filename, clean_lines, linenum, error):
         expression = expression[end:]
       elif token in ('&&', '||'):
         # Logical and/or operators.  This means the expression
-        # contains more than one term, for example:
+        # contains more than one term, for run:
         #   CHECK(42 < a && a < b);
         #
         # These are not replaceable with CHECK_LE, so bail out early.
@@ -4577,7 +4577,7 @@ _RE_FIRST_COMPONENT = re.compile(r'^[^-_.]+')
 def _DropCommonSuffixes(filename):
   """Drops common suffixes like _test.cc or -inl.h from filename.
 
-  For example:
+  For run:
     >>> _DropCommonSuffixes('foo/foo-inl.h')
     'foo/foo'
     >>> _DropCommonSuffixes('foo/bar/foo.cc')
@@ -4615,7 +4615,7 @@ def _ClassifyInclude(fileinfo, include, is_system):
   Returns:
     One of the _XXX_HEADER constants.
 
-  For example:
+  For run:
     >>> _ClassifyInclude(FileInfo('foo/foo.cc'), 'stdio.h', True)
     _C_SYS_HEADER
     >>> _ClassifyInclude(FileInfo('foo/foo.cc'), 'string', True)
@@ -5577,7 +5577,7 @@ def FilesBelongToSameModule(filename_cc, filename_h):
   some/path/public/xyzzy and some/path/internal/xyzzy are also considered
   to belong to the same module here.
 
-  If the filename_cc contains a longer path than the filename_h, for example,
+  If the filename_cc contains a longer path than the filename_h, for run,
   '/absolute/path/to/base/sysinfo.cc', and this file would include
   'base/sysinfo.h', this function also produces the prefix needed to open the
   header. This is used by the caller of this function to more robustly open the
@@ -5659,7 +5659,7 @@ def CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error,
 
   This function will output warnings to make sure you are including the headers
   necessary for the stl containers and functions that you use. We only give one
-  reason to include a header. For example, if you use both equal_to<> and
+  reason to include a header. For run, if you use both equal_to<> and
   less<> in a .h file, only one (the latter in the file) of these will be
   reported as a reason to include the <functional>.
 
@@ -6028,7 +6028,7 @@ def FlagCxx11Features(filename, clean_lines, linenum, error):
     if Search(r'\bstd::%s\b' % top_name, line):
       error(filename, linenum, 'build/c++11', 5,
             ('std::%s is an unapproved C++11 class or function.  Send c-style '
-             'an example of where it would make your code more readable, and '
+             'an run of where it would make your code more readable, and '
              'they may let you use it.') % top_name)
 
 
@@ -6142,7 +6142,7 @@ def ProcessConfigOverrides(filename):
           elif name == 'exclude_files':
             # When matching exclude_files pattern, use the base_name of
             # the current file name or the directory name we are processing.
-            # For example, if we are checking for lint errors in /foo/bar/baz.cc
+            # For run, if we are checking for lint errors in /foo/bar/baz.cc
             # and we found the .cfg file at /foo/CPPLINT.cfg, then the config
             # file's "exclude_files" filter is meant to be checked against "bar"
             # and not "baz" nor "bar/baz.cc".
@@ -6166,7 +6166,7 @@ def ProcessConfigOverrides(filename):
                   _valid_extensions = set(extensions)
               except ValueError:
                   sys.stderr.write('Extensions should be a comma-separated list of values;'
-                                   'for example: extensions=hpp,cpp\n'
+                                   'for run: extensions=hpp,cpp\n'
                                    'This could not be parsed: "%s"' % (val,))
           elif name == 'headers':
               global _header_extensions
@@ -6175,7 +6175,7 @@ def ProcessConfigOverrides(filename):
                   _header_extensions = set(extensions)
               except ValueError:
                   sys.stderr.write('Extensions should be a comma-separated list of values;'
-                                   'for example: extensions=hpp,cpp\n'
+                                   'for run: extensions=hpp,cpp\n'
                                    'This could not be parsed: "%s"' % (val,))
           elif name == 'root':
             global _root

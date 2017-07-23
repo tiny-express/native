@@ -13,8 +13,9 @@ before_script:
 script:
 - make native_test -j8
 - ./misc/memory_check
-- make native && sudo make install
-#- cd examples/HashMap && make
-#- cd examples/Nullable && make
+- make native && sudo make install && sudo ldconfig
+- cd examples/Collection/ArrayList && make
+- cd ../HashMap && make
+- cd ../Arrays && make
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

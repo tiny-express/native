@@ -53,14 +53,11 @@ TEST (JavaLang, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	ASSERT_EQUAL(4, stringArrayList.size());
-	
-	ArrayList<int> intArrayList;
-	ASSERT_EQUAL(0, intArrayList.size());
 }
 
 TEST (JavaLang, ArrayListDestructor) {
 	// Test destructor
-	ArrayList<int> *intArray = new ArrayList<int>(10);
+	ArrayList<Integer> *intArray = new ArrayList<Integer>(10);
 	delete intArray;
 	intArray = NULL;
 	ASSERT_NULL(intArray);
@@ -68,7 +65,7 @@ TEST (JavaLang, ArrayListDestructor) {
 
 TEST (JavaLang, ArrayListSize) {
 	// Test size of empty Array
-	ArrayList<int> emptyArray;
+	ArrayList<Integer> emptyArray;
 	int expect = 0;
 	int result = emptyArray.size();
 	ASSERT_EQUAL(expect, result);
@@ -79,7 +76,7 @@ TEST (JavaLang, ArrayListSize) {
 	
 	// Test size of empty Array
 	int size = 10;
-	ArrayList<int> validArray(size);
+	ArrayList<Integer> validArray(size);
 	result = validArray.size();
 	ASSERT_EQUAL(size, result);
 	
@@ -90,7 +87,7 @@ TEST (JavaLang, ArrayListSize) {
 
 TEST (Javalang, ArrayListFunction) {
 	// Test function add with
-	ArrayList<int> intArray;
+	ArrayList<Integer> intArray;
 	
 	register int index;
 	for (index = 0; index < 6; ++index) {
@@ -99,16 +96,10 @@ TEST (Javalang, ArrayListFunction) {
 	int expect = 6;
 	int result = intArray.size();
 	ASSERT_EQUAL(expect, result);
-	
-	// Get value out of Array
-	intArray.get(-1);
-	ASSERT_EQUAL(0, intArray.get(-1));
-	ASSERT_EQUAL(5, intArray.get(intArray.size()));
 }
 
 TEST (JavaLang, ArrayListForEach) {
-	//
-	ArrayList<int> validArrayList;
+	ArrayList<Integer> validArrayList;
 	
 	int index;
 	for (index = 0; index < 100; ++index) {
@@ -116,8 +107,31 @@ TEST (JavaLang, ArrayListForEach) {
 	}
 	
 	int expect = 0;
-	for (int element : validArrayList) {
-		ASSERT_EQUAL(expect, element);
+	for (Integer element : validArrayList) {
+		ASSERT_EQUAL(expect, element.intValue());
 		expect++;
 	}
+}
+
+TEST(JavaUtil, ArrayListToString) {
+    //Give an empty ArrayList<Integer> then compare toString() - Should equal
+    ArrayList<Integer> inValidArrayListInteger;
+    string result = inValidArrayListInteger.toString();
+    string expect = (string) "[]";
+    ASSERT_STR(result, expect);
+
+    //Give an ArrayList<Integer> then compare toString() - Should equal
+	ArrayList<Integer> validArrayListInteger = {1, 2, 4, 5};
+	result = validArrayListInteger.toString();
+	expect = (string) "[1, 2, 4, 5]";
+	ASSERT_STR(result, expect);
+
+    // Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
+    ArrayList<ArrayList<Integer>> arrayListInArrayList;
+    arrayListInArrayList.add(validArrayListInteger);
+    arrayListInArrayList.add(validArrayListInteger);
+    arrayListInArrayList.add(inValidArrayListInteger);
+    result = arrayListInArrayList.toString();
+    expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5], []]";
+    ASSERT_STR(expect, result);
 }

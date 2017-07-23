@@ -47,8 +47,9 @@ namespace Java {
 	namespace Lang {
 		class Integer;
 		
-		class Integer : public virtual Number,
-		                public virtual Comparable<Integer> {
+		class Integer :
+			public virtual Number,
+			public virtual Comparable<Integer> {
 		private:
 			int original;
 			string string_original;
@@ -80,21 +81,21 @@ namespace Java {
              *
              * @param original
              */
-			Integer(const Integer &target);
+			      Integer(const Integer &target);
 
             /**
              * Integer Destructor
              */
-			~Integer();
+			      ~Integer();
 
-	private:
-      /**
-      * return size of a string
-      *
-      * @param int
-      * @return int
-      */
-     int stringSize(int x);
+    private:
+            /**
+            * return size of a string
+            *
+            * @param int
+            * @return int
+            */
+           int stringSize(int x);
 
 		public:
             /**
@@ -102,49 +103,49 @@ namespace Java {
              *
              * @return char
              */
-			char charValue() const;
+			      char charValue() const;
 
             /**
              * Integer to String
              *
              * @return CString
              */
-			string stringValue() const;
+			      string stringValue() const;
 
             /**
              * Short value of Integer
              *
              * @return short
              */
-			short shortValue() const;
+			      short shortValue() const;
 
             /**
              * Integer value
              *
              * @return int
              */
-			int intValue() const;
+			      int intValue() const;
 
             /**
              * Integer value in Long
              *
              * @return int
              */
-			long longValue() const;
+			      long longValue() const;
 
             /**
              * Integer value in float
              *
              * @return int
              */
-			float floatValue() const;
+			      float floatValue() const;
 
             /**
              * Integer value in double
              *
              * @return int
              */
-			double doubleValue() const;		
+			      double doubleValue() const;		
 
            /**
             * Returns a String object representing
@@ -153,21 +154,7 @@ namespace Java {
             * @param target
             * @return String
             */
-			string toString() const;
-
-			int compareTo(const Integer &o) const override {
-				if (hashCode() == o.hashCode()) {
-					return 0;
-				}
-				if (instanceof<Integer>(o)) {
-					if (original < o.original) {
-						return -1;
-					} else if (original == o.original) {
-						return 0;
-					}
-				}
-				return 1;
-			}
+			      string toString() const;
 		
 		public:
 
@@ -177,97 +164,97 @@ namespace Java {
              * @param target
              * @return Integer
              */
-			Integer operator=(const Integer &target);
+		      	Integer operator=(const Integer &target);
 
             /**
              * Make a summation with target Integer
              *
              * @return Integer
              */
-			Integer operator+(const Integer &target);
+			      Integer operator+(const Integer &target);
 
             /**
              * Make a subtraction with target Integer
              *
              * @return Integer
              */
-			Integer operator-(const Integer &target);
+			      Integer operator-(const Integer &target);
 
             /**
              *  Make a division from this Integer with target
              *
              * @return Integer
              */
-			Integer operator/(const Integer &target);
+			      Integer operator/(const Integer &target);
 
             /**
              * Make a multiple from this Integer with target
              *
              * @return Integer
              */
-			Integer operator*(const Integer &target);
+			      Integer operator*(const Integer &target);
 
             /**
              * Make a modulo from this Integer with target
              *
              * @return Integer
              */
-			Integer operator%(const Integer &target);
+			      Integer operator%(const Integer &target);
 
             /**
              * Compare this Integer is equal target
              *
              * @return bool
              */
-			boolean operator==(const Integer &target) const;
+			      boolean operator==(const Integer &target) const;
 
             /**
              * Compare this Integer is not equal target
              *
              * @return bool
              */
-			boolean operator!=(const Integer &target) const;
+		      	boolean operator!=(const Integer &target) const;
 
             /**
              * Compare this Integer is less than target
              *
              * @return bool
              */
-			boolean operator<(const Integer &target) const;
+		      	boolean operator<(const Integer &target) const;
 
             /**
              * Compare this Integer is more than target
              *
              * @return bool
              */
-			boolean operator>(const Integer &target) const;
+		      	boolean operator>(const Integer &target) const;
 
             /**
              * Compare this Integer is equal or less than target
              *
              * @return bool
              */
-			boolean operator<=(const Integer &target) const;
+		      	boolean operator<=(const Integer &target) const;
 
             /**
              *  Compare this Integer is equal or more than target
              *
              * @return bool
              */
-			boolean operator>=(const Integer &target) const;
+			      boolean operator>=(const Integer &target) const;
 			
-			void operator+=(const Integer &target);
-			void operator-=(const Integer &target);
-			void operator/=(const Integer &target);
-			void operator*=(const Integer &target);
-			void operator%=(const Integer &target);
+            void operator+=(const Integer &target);
+            void operator-=(const Integer &target);
+            void operator/=(const Integer &target);
+            void operator*=(const Integer &target);
+            void operator%=(const Integer &target);
 
-			friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
-				std::cout << target.original;
-				return os;
-			}
-
-			/**
+            friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
+              std::cout << target.original;
+              return os;
+            }
+  
+			      /**
             * Returns the number of one-bits in the
             * two's complement binary representation
             * of the specified int value.
