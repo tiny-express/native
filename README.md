@@ -31,15 +31,16 @@ $ sudo ldconfig
 
 class MainApplication {
 public:
-	static void main(Array<string> args) {
-		ArrayList<String> stringList;
-		stringList.add("hello");
-		stringList.add("word");
-		try {
-			System::out::println(stringList.get(5));
-		} catch (IndexOutOfBoundsException e) {
-			System::out::println(e.getMessage());
+	static void main(Array<String> arguments) {
+		HashMap<String, String> hashMap;
+		int counter = 0;
+		for (String argument : arguments) {
+			hashMap.put("argument " + String::valueOf(counter), argument);
+			counter++;
 		}
+		ArrayList<HashMap<String, String>> arrayList;
+		arrayList.add(hashMap);
+		System::out::println(arrayList.toString());
 	}
 };
 
@@ -48,10 +49,17 @@ int main(int argc, char **argv) {
 	return 0;
 }
 ```
+
+Compile your source and link with native library
 ```bash
 $ g++ -c -o main.o HelloWorld.cpp
 $ gcc -o main main.o -lnative -lstdc++
-$ ./main
+$ ./main one two three
+```
+
+Output:
+```javascript
+[{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
 
 ### Contributors

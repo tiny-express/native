@@ -2,15 +2,16 @@
 
 class MainApplication {
 public:
-	static void main(Array<string> args) {
-		ArrayList<String> stringList;
-		stringList.add("hello");
-		stringList.add("word");
-		try {
-			System::out::println(stringList.get(5));
-		} catch (IndexOutOfBoundsException e) {
-			System::out::println(e.getMessage());
+	static void main(Array<String> arguments) {
+		HashMap<String, String> hashMap;
+		int counter = 0;
+		for (String argument : arguments) {
+			hashMap.put("argument " + String::valueOf(counter), argument);
+			counter++;
 		}
+		ArrayList<HashMap<String, String>> arrayList;
+		arrayList.add(hashMap);
+		System::out::println(arrayList.toString());
 	}
 };
 
