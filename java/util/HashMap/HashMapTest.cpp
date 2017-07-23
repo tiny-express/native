@@ -412,7 +412,7 @@ TEST (JavaUtil, HashMapToString) {
 	hashMap.put("key16", "value16");
 	hashMap.put("key02", "value02");
 	
-	string expectedResult = (string) "{key02: value02, key1: value1, key16: value16}";
+	string expectedResult = (string) "{\"key02\": \"value02\", \"key1\": \"value1\", \"key16\": \"value16\"}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
 
@@ -421,7 +421,7 @@ TEST (JavaUtil, HashMapToString) {
 	anotherHashMap.put("some key", 12313);
 	anotherHashMap.put("anotherKey", 76767);
 	
-	expectedResult = (string) "{anotherKey: 76767, some key: 12313}";
+	expectedResult = (string) "{\"anotherKey\": 76767, \"some key\": 12313}";
 	result = anotherHashMap.toString();
 	ASSERT_STR(expectedResult, result);
 	
@@ -436,7 +436,7 @@ TEST (JavaUtil, HashMapToString) {
 	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
 	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
 	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
-	expectedResult = (string) "{ArrayList1: [1, 2, 3, 4, 5], ArrayList2: [100, 100, 100, 100, 1]}";
+	expectedResult = (string) "{\"ArrayList1\": [1, 2, 3, 4, 5], \"ArrayList2\": [100, 100, 100, 100, 1]}";
 	result = arrayListInHashMap.toString();
 	ASSERT_STR(expectedResult, result);
 }
