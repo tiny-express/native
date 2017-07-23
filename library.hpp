@@ -43,4 +43,9 @@
 // In Java, Java::Lang is imported by default
 using namespace Java::Lang;
 
+template <class T>
+void Boot() {
+	T::main();
+}
+
 #endif//NATIVE_LIBRARY_HPP_

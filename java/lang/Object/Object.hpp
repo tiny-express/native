@@ -73,23 +73,23 @@ private:
 };
 
 template <typename E>
-class Array  {
+class Array {
 private:
 	std::vector<E> original;
 public:
-
-    /**
-     * Array default constructor
-     */
+	
+	/**
+	 * Array default constructor
+	 */
 	Array() {
-        this->length = 0;
-    }
-
-    /**
-     * Array constructor with std::initializer_list
-     *
-     * @param list
-     */
+		this->length = 0;
+	}
+	
+	/**
+	 * Array constructor with std::initializer_list
+	 *
+	 * @param list
+	 */
 	Array(std::initializer_list<E> list) {
 		typename std::initializer_list<E>::iterator it;
 		for (it = list.begin(); it != list.end(); ++it) {
@@ -97,76 +97,88 @@ public:
 		}
 		this->length = original.size();
 	}
-
-    /**
-     *  Array constructor with contain size
-     *
-     * @param containerSize
-     */
+	
+	Array(char** charPointerArray) {
+		int size = length_pointer_pointer_char(charPointerArray);
+#ifdef LINUX
+		register
+#endif
+		int index;
+		for (index = 0; index < size; index++) {
+			original.push_back(charPointerArray[index]);
+		}
+		this->length = original.size();
+	}
+	
+	/**
+	 *  Array constructor with contain size
+	 *
+	 * @param containerSize
+	 */
 	Array(int containerSize) {
 		this->original.reserve(containerSize);
-        this->length = containerSize;
+		this->length = containerSize;
 	}
-
-    /**
-     * Array destructor
-     */
+	
+	/**
+	 * Array destructor
+	 */
 	~Array() {
-
-    }
-
-    /**
-     * Property length of Array
-     *
-     * Don't set this property when you coding
-     */
+	
+	}
+	
+	/**
+	 * Property length of Array
+	 *
+	 * Don't set this property when you coding
+	 */
 	int length;
-
-    /**
-     * Get the first element in Array
-     *
-     * @return ArrayIterator<E>
-     */
+	
+	/**
+	 * Get the first element in Array
+	 *
+	 * @return ArrayIterator<E>
+	 */
 	ArrayIterator<E> begin() const {
 		return ArrayIterator<E>(this, 0);
 	}
-
-    /**
-     * Get the final element in Array
-     *
-     * @return ArrayIterator<E>
-     */
+	
+	/**
+	 * Get the final element in Array
+	 *
+	 * @return ArrayIterator<E>
+	 */
 	ArrayIterator<E> end() const {
 		return ArrayIterator<E>(this, this->length);
 	}
 
 public:
-
-    /**
-     * Push new element to end of Array
-     *
-     * @param e
-     */
+	
+	/**
+	 * Push new element to end of Array
+	 *
+	 * @param e
+	 */
 	void push(E e) {
 		original.push_back(e);
 		this->length = original.size();
 	}
-
-    /**
-     * Returns the element at the specified position in this Array
-     *
-     * @param index
-     * @return E
-     */
+	
+	/**
+	 * Returns the element at the specified position in this Array
+	 *
+	 * @param index
+	 * @return E
+	 */
 	E get(const int index) const {
 		return (E) original.at(index);
 	}
-
-    /**
-     * Convert Array to string
-     *
-     * @return string
-     */
+	
+	/**
+	 * Convert Array to string
+	 *
+	 * @return string
+	 */
 	string toString() {
 		string result = strdup("");
 		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
@@ -177,26 +189,26 @@ public:
 			}
 			return result;
 		}
-		return (string ) "This type is not available for serialize";
+		return (string) "This type is not available for serialize";
 	}
 
 public:
-    /**
-    * Set and get value of element at the specified position in this Array
-    *
-    * @param index
-    * @return E
-    */
+	/**
+	* Set and get value of element at the specified position in this Array
+	*
+	* @param index
+	* @return E
+	*/
 	E &operator[](const int index) {
 		return this->original.at(index);
 	}
-
-    /**
-     * Append a std::initializer_list<E> to this array
-     *
-     * @param list
-     * @return Array<E>
-     */
+	
+	/**
+	 * Append a std::initializer_list<E> to this array
+	 *
+	 * @param list
+	 * @return Array<E>
+	 */
 	Array<E> operator+=(const std::initializer_list<E> &list) {
 		typename std::initializer_list<E>::iterator it;
 		for (it = list.begin(); it != list.end(); ++it) {
@@ -230,7 +242,7 @@ namespace Java {
 			 * Not support this function yet
 			 * @return
 			 */
-			template<typename E>
+			template <typename E>
 			E clone();
 			
 			/**
@@ -272,7 +284,7 @@ namespace Java {
 			 * @return long
 			 */
 			virtual long hashCode() const {
-				return  (intptr_t) std::addressof(*this);
+				return (intptr_t) std::addressof(*this);
 			}
 			
 			/**

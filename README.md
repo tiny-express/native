@@ -7,13 +7,11 @@
 
 **Native Library** provides a low-level optimization with productivity for C/C++ application.
 
-Beside standard library, we would like to have a greater customization with important goals:
+- Blazing fast performance, small footprint, low-level access with GAS & C
+- Provide rich Java core packages for productivity & maintainability
+- Zero memory leak with automatic storage
+- Prevents segfaults and no null pointer anymore
 
-- Blazing fast performance, small footprint & low-level access with GAS & C
-- Powerful structured programming in C++ for scalability
-- Syntactically enhancement with C++ operators & walk through
-- Provide rich Java standard packages for productivity & maintainability
-- Zero memory leak with automatic storage and avoid NullPointerException
 
 This project is also useful for new developers in practical programming.
 
@@ -22,74 +20,38 @@ This project is also useful for new developers in practical programming.
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make
+$ cmake . && make -j4
 $ sudo make install
+$ sudo ldconfig
 ```
 
-
-### Setup for development
-#### Windows
-Install CgyWin64 with dependencies below:
-- CMake
-- Makefile
-- GCC
-- G++
-
-#### Linux and Mac
-Install with apt-get or brew with dependencies below:
-- CMake
-
-#### Test Driven Development
-Note: `make leak` is ONLY available for Linux - production environment
-```bash
-$ cmake . && make native_test && make leak
-```
-
-#### Hello World Program
-```java
-public class Main {
-    public static void main(String[] args) {
-        String text = "Native Library: ";
-        byte[] bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
-        for (byte number : bytes) {
-            text += (char) number;
-        }
-        System.out.println(text);
-    }
-}
-```
+#### HelloWorld.cpp
 ```cpp
 #include <native/library.hpp>
 
-int main() {
-    String text = "Native Library: ";
-    Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
-    for (byte number : bytes) {
-        text += (char) number;
-    }
-    System::out::println(text);
-    return 0;
+class MainApplication {
+public:
+	static void main(Array<string> args) {
+		ArrayList<String> stringList;
+		stringList.add("hello");
+		stringList.add("word");
+		try {
+			System::out::println(stringList.get(5));
+		} catch (IndexOutOfBoundsException e) {
+			System::out::println(e.getMessage());
+		}
+	}
+};
+
+int main(int argc, char **argv) {
+	MainApplication::main(argv);
+	return 0;
 }
 ```
 ```bash
-$ g++ -c -o test.o ./test.cpp
-$ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
-$ ./native
-```
-
-#### Unit Test with C-Unit
-```cpp
-#define TESTING
-#include <native/unit_test.h>
-
-int main(int argc, const char *argv[]) {
-   int result = ctest_main(argc, argv);
-   return result;
-}
-
-TEST(YourTestSuite, YourTestCase) {
-    ASSERT_STR("me", "you");
-}
+$ g++ -c -o main.o HelloWorld.cpp
+$ gcc -o main main.o -lnative -lstdc++
+$ ./main
 ```
 
 ### Contributors
