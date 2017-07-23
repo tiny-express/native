@@ -26,6 +26,7 @@
 #include "StringBuffer.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
+#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
 
@@ -208,6 +209,22 @@ StringBuffer StringBuffer::append(StringBuffer *stringBuffer) {
         return this->append(stringBuffer->getValue());
     }
 
+}
+
+StringBuffer StringBuffer::appendCodePoint(int codePoint) {
+    int plane = ((unsigned) codePoint) >> 16;
+    boolean isBmpCodePoint = (plane == 0);
+    boolean isValidCodePoint = (plane < (((unsigned) (0X10FFFF + 1)) >> 16));
+
+    if (isBmpCodePoint) {
+        return this->append((char) codePoint);
+    }
+    else if (isValidCodePoint) {
+        //TODO append lowSurrogate and highSurrogate
+    }
+    else {
+        throw IllegalArgumentException();
+    }
 }
 
 

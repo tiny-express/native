@@ -30,6 +30,7 @@
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
+#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 extern "C" {
 #include "../../../kernel/test.h"
@@ -285,15 +286,30 @@ TEST (JavaLang, StringBufferInsert) {
 TEST (JavaLang, StringBufferEnsureCapacity) {
     StringBuffer stringBuffer;
 
-    int expectMinTwentyCapacity = 34;
+    int expectMinimumTwentyCapacity = 34;
     stringBuffer.ensureCapacity(20);
-    ASSERT_EQUAL(expectMinTwentyCapacity, stringBuffer.capacity());
+    ASSERT_EQUAL(expectMinimumTwentyCapacity, stringBuffer.capacity());
 
-    int expectMinEightyCapacity = 142;
+    int expectMinimumEightyCapacity = 142;
     stringBuffer.ensureCapacity(80);
-    ASSERT_EQUAL(expectMinEightyCapacity, stringBuffer.capacity());
+    ASSERT_EQUAL(expectMinimumEightyCapacity, stringBuffer.capacity());
 
     int expectMinNonPositiveCapacity = 142;
     stringBuffer.ensureCapacity(-1);
     ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
+}
+
+TEST (JavaLang, StringBufferAppendCodePoint) {
+    StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
+
+    string expectAppendCodePointResult = (string) "Codepoint is : P";
+    stringBuffer.appendCodePoint(80);
+    ASSERT_STR(expectAppendCodePointResult, stringBuffer.getValue());
+
+    try {
+        stringBuffer.appendCodePoint(80000000);
+    }
+    catch (IllegalArgumentException e) {
+        ASSERT_STR(expectAppendCodePointResult, stringBuffer.getValue());
+    }
 }

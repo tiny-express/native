@@ -197,6 +197,12 @@ namespace Java {
              */
             StringBuffer append(CharSequence *seq, int start, int end);
 
+            /**
+             * Appends the string representation of the codePoint argument to this sequence.             *
+             *
+             * @param codePoint
+             * @return reference to this StringBuffer
+             */
             StringBuffer appendCodePoint(int codePoint);
 
             /**
