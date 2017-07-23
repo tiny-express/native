@@ -313,3 +313,31 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
         ASSERT_STR(expectAppendCodePointResult, stringBuffer.getValue());
     }
 }
+
+TEST (JavaLang, StringBufferCharAt) {
+    StringBuffer stringBuffer = StringBuffer("CharAt");
+
+    char expectCharAtResult = 'A';
+    ASSERT_EQUAL(expectCharAtResult, stringBuffer.charAt(4));
+
+    try {
+        char expectNegativeIndex = stringBuffer.charAt(-1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
+
+    try {
+        char expectEqualToLengthIndex = stringBuffer.charAt(stringBuffer.length());
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    try {
+        char expectGreaterThanLengthIndex = stringBuffer.charAt(stringBuffer.length() + 1);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}

@@ -212,6 +212,13 @@ namespace Java {
              */
             int capacity();
 
+            /**
+             * Return character ai specified index
+             *
+             * @param index
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
+             * @return character at specified index
+             */
             char charAt(int index);
 
             //IntStream codePoint();

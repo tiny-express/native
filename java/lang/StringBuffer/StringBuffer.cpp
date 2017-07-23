@@ -227,6 +227,18 @@ StringBuffer StringBuffer::appendCodePoint(int codePoint) {
     }
 }
 
+char StringBuffer::charAt(int index) {
+    if (index < 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+    }
+
+    if (index >= currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+
+    return this->original[index];
+}
+
 
 
 
