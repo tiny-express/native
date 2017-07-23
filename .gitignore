@@ -9,6 +9,7 @@ cmake_install.cmake
 CTestTestfile.cmake
 install_manifest.txt
 CMakeCache.txt
+DartConfiguration.tcl
 Testing
 /Makefile
 /native_test
