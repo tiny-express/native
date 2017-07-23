@@ -434,9 +434,17 @@ namespace Java {
 
 				typename std::map<K, V>::iterator it;
 				for (it = this->original.begin(); it != this->original.end(); ++it) {
-					totalString = it->first.toString();
+					if (instanceof<String>(it->first)) {
+						totalString = String("\"") + it->first.toString() + String("\"");
+					} else {
+						totalString = it->first.toString();
+					}
 					totalString += colonAndSpace;
-					totalString += it->second.toString();
+					if (instanceof<String>(it->second)) {
+						totalString += String("\"") + it->second.toString() + String("\"");
+					} else {
+						totalString += it->second.toString();
+					}
 					totalString += commaAndSpace;
 					startHashMap += totalString;
 				}
