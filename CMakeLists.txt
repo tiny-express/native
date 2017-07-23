@@ -54,10 +54,11 @@ include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
-# Set GCC ignore warning Multi-character constant
+# Set GCC ignore warning multi-characters constants
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow" )
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
+# Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 elseif (COMPILER_SUPPORTS_CXX0X)
@@ -66,10 +67,21 @@ else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
 
+# GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
 
 # CMake Modules
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
+
+# Support flag coverage for codecov
+set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+
+# Enable coverage by cmake modules
+if(CMAKE_COMPILER_IS_GNUCXX)
+    include(CodeCoverage)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
+endif()
 
 # Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -88,8 +100,6 @@ file(GLOB_RECURSE SOURCES_C
         kernel/datetime/*
         kernel/math/*
         kernel/string/*
-        kernel/system/*
-        kernel/type/*
         )
 
 # Include all C unit test cases
@@ -98,8 +108,6 @@ file(GLOB_RECURSE TESTS_C
         kernel/datetime/*_test.c
         kernel/math/*_test.c
         kernel/string/*_test.c
-        kernel/system/*_test.c
-        kernel/type/*_test.c
         )
 
 # Remove all test files within c files
@@ -166,6 +174,10 @@ add_custom_target(
         COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
 )
 
+# Enable testing
+include(CTest)
+enable_testing()
+
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
@@ -198,7 +210,3 @@ else()
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif()
-add_custom_target(
-checkstyle
-COMMAND ./misc/checkstyle.sh $(root)
-)
