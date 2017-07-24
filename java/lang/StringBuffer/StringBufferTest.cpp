@@ -57,7 +57,6 @@ TEST (JavaLang, StringBufferConstructor) {
         ASSERT_STR("Capacity must be non-negative", e.getMessage().toString());
     }
 
-
     // Init a StringBuffer with a charsequence
     CharSequence *sequence = new String("A string to test");
     StringBuffer charSequenceConstructor =  StringBuffer(sequence);
@@ -89,7 +88,6 @@ TEST (JavaLang, StringBufferConstructor) {
     ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
     ASSERT_EQUAL(expectStringLength, stringConstructor.length());
     ASSERT_STR(expectStringValue, stringConstructor.getValue());
-
 }
 
 TEST (JavaLang, StringBufferCapacity) {
@@ -239,7 +237,6 @@ TEST (JavaLang, StringBufferAppend) {
     nullStringBufferAppendStringBuffer.append(nullStringBufferToAppend);
     string expectNullStringBufferAppend = (string)"StringBuffer is : null";
     ASSERT_STR(expectNullStringBufferAppend, nullStringBufferAppendStringBuffer.getValue());
-
 }
 
 TEST (JavaLang, StringBufferInsert) {
@@ -249,7 +246,6 @@ TEST (JavaLang, StringBufferInsert) {
     stringInsert.insert(6, stringToInsert, 5, 7);
     string expectString = (string)"please insert more";
     ASSERT_STR(expectString, stringInsert.getValue());
-
 
     try {
         stringInsert.insert(-1, stringToInsert, 6, 6);

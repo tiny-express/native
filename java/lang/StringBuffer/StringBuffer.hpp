@@ -31,360 +31,360 @@
 
 namespace Java {
     namespace Lang {
-        class StringBuffer {
+        class StringBufferUnSafe { //: public CharSequence {
+        protected:
+            string original = nullptr;
+            int currentLength = 0;
+            int currentCapacity = 0;
+
         private:
-            class StringBufferUnSafe { //: public CharSequence {
-            private:
-                string original = nullptr;
-                int currentLength = 0;
-                int currentCapacity = 0;
-
-            private:
-                //void readObject(ObjectInputStream);
-
-                //void writeObject(ObjectOutputStream);
-
-            public:
-
-                /**
-                 * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
-                 *
-                 */
-                StringBufferUnSafe();
-
-                /**
-                 * Constructs a string buffer that contains the same characters as the specified CharSequence.
-                 *
-                 * @param seq
-                 */
-                explicit StringBufferUnSafe(CharSequence *seq);
-
-                /**
-                 * Constructs a string buffer with no characters in it and the specified initial capacity.
-                 *
-                 * @param capacity
-                 * @throw NegativeArraySizeException if capacity is negative
-                 */
-                explicit StringBufferUnSafe(int capacity);
-
-                /**
-                 * Constructs a string buffer initialized to the contents of the specified string.
-                 *
-                 * @param str
-                 */
-                explicit StringBufferUnSafe(String str);
-
-                /**
-                 * Copy constructor
-                 *
-                 * @param other
-                 */
-                StringBufferUnSafe(const StringBufferUnSafe &other);
-
-                /**
-                 * Appends the string representation of the Object argument.
-                 *
-                 * @param obj
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(Object *obj);
-
-                /**
-                 * Appends the string representation of the float argument
-                 *
-                 * @param floatValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(float floatValue);
-
-                //StringBuffer append(AbstractStringBuilder abs);
-
-                /**
-                 * Appends the string representation of the char array argument to this sequence.
-                 *
-                 * @param str
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(string str);
-
-                /**
-                 * Appends the string representation of the boolean argument
-                 *
-                 * @param boolValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(boolean boolValue);
-
-                /**
-                 * Appends the specified CharSequence to this sequence.
-                 *
-                 * @param seq
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(CharSequence *seq);
-
-                /**
-                 * Appends the string representation of the double argument
-                 *
-                 * @param doubleValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(double doubleValue);
-
-                /**
-                 * Appends the string representation of the char argument
-                 *
-                 * @param charValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(char charValue);
-
-                /**
-                 * Appends the string representation of char array argument to this sequence.
-                 *
-                 * @param str
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(String str);
-
-                /**
-                 * Appends the string representation of the int argument
-                 *
-                 * @param intValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(int intValue);
-
-                /**
-                 * Appends the string representation of the long argument
-                 *
-                 * @param longValue
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(long longValue);
-
-                /**
-                 * Appends the specified StringBuffer to this sequence.
-                 *
-                 * @param stringBuffer
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(StringBufferUnSafe *stringBuffer);
-
-                /**
-                 * Appends the string representation of a subarray of the char array argument to this sequence.
-                 * Characters of the char array str, starting at index offset, are appended, in order,
-                 * the length of subarray is equal to len
-                 *
-                 * @param str
-                 * @param offset
-                 * @param len
-                 * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
-                 * @return
-                 */
-                StringBufferUnSafe append(string str, int offset, int len);
-
-                /**
-                 * Appends a subsequence of the specified CharSequence to this sequence.
-                 * starting at index start, are appended, in order,
-                 * to the contents of this sequence up to the (exclusive) index end.
-                 * If start is negative or bigger than end or bigger than seq's length,
-                 * throw IndexOutOfBoundException
-                 *
-                 * @param seq
-                 * @param start
-                 * @param end
-                 * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe append(CharSequence *seq, int start, int end);
-
-                /**
-                 * Appends the string representation of the codePoint argument to this sequence.             *
-                 *
-                 * @param codePoint
-                 * @return reference to this StringBuffer
-                 */
-                StringBufferUnSafe appendCodePoint(int codePoint);
-
-                /**
-                 * Return current capacity of this StringBuffer
-                 *
-                 * @return int
-                 */
-                int capacity();
-
-                /**
-                 * Return character ai specified index
-                 *
-                 * @param index
-                 * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
-                 * @return character at specified index
-                 */
-                char charAt(int index);
-
-                //IntStream codePoint();
-
-                /**
-                 * Returns the character (Unicode code point) at the specified index.
-                 * If the char value specified at the given index is in the high-surrogate range,
-                 * the following index is less than the length of this sequence,
-                 * and the char value at the following index is in the low-surrogate range,
-                 * then the supplementary code point corresponding to this surrogate pair is returned.
-                 * Otherwise, the char value at the given index is returned.
-                 *
-                 * @param index
-                 * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
-                 * @return
-                 */
-                int codePointAt(int index);
-
-                /**
-                 * Returns the character (Unicode code point) before the specified index.
-                 * If the char value at (index - 1) is in the low-surrogate range,
-                 * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range,
-                 * then the supplementary code point value of the surrogate pair is returned.
-                 * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate,
-                 * the surrogate value is returned.
-                 *
-                 * @param index
-                 * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
-                 * @return the character (Unicode code point) before the specified index
-                 */
-                int codePointBefore(int index);
-
-                /**
-                 * Returns the number of Unicode code points in the specified text range of this sequence.
-                 * The text range begins at the specified beginIndex and extends to the char at index endIndex - 1
-                 *
-                 * @param beginIndex
-                 * @param endIndex
-                 * @return Returns the number of Unicode code points in the specified text range of this sequence
-                 */
-                int codePointCount(int beginIndex, int endIndex);
-
-                //IntStream codePoint();
-
-                /**
-                 * Removes the characters in a substring of this sequence.
-                 * The substring begins at the specified start and extends to the character at index end - 1 or
-                 * to the end of the sequence if no such character exists. If start is equal to end, no changes are made.
-                 *
-                 * @param start, inclusive
-                 * @param end, exclusive
-                 * @throw StringIndexOutOfBound -  if start is negative, greater than length(), or greater than end.
-                 * @return a reference to this StringBuffer
-                 */
-                StringBufferUnSafe deletes(int start, int end);
-
-                /**
-                 * Removes the char at the specified position in this sequence.
-                 *
-                 * @param index
-                 * @throw StringIndexOutOfBoundsException - if the index is negative or greater than or equal to length().
-                 * @return a reference to this StringBuffer
-                 */
-                StringBufferUnSafe deleteCharAt(int index);
-
-                /**
-                 * Ensures that the capacity is at least equal to the specified minimum.
-                 * The new capacity is the larger than the minimumCapacity argument and twice the old capacity plus 2.
-                 * If minimumCapacity is non-positive or less or equal to this capacity, return
-                 *
-                 * @param minimumCapacity
-                 */
-                void ensureCapacity(int minimumCapacity);
-
-                void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
-
-                /**
-                 * Return the string value of this StringBuffer
-                 *
-                 * @return string
-                 */
-                string getValue();
-
-                int indexOf(String str);
-
-                int indexOf(String str, int fromIndex);
-
-                StringBufferUnSafe insert(int offset, float floatValue);
-
-                StringBufferUnSafe insert(int offset, boolean boolValue);
-
-                StringBufferUnSafe insert(int offset, string str);
-
-                StringBufferUnSafe insert(int offset, char charValue);
-
-                StringBufferUnSafe insert(int offset, String str);
-
-                StringBufferUnSafe insert(int offset, long longValue);
-
-                StringBufferUnSafe insert(int offset, Object obj);
-
-                StringBufferUnSafe insert(int offset, int intValue);
-
-                StringBufferUnSafe insert(int offset, double doubleValue);
-
-                StringBufferUnSafe insert(int dstOffset, CharSequence *seq, int start, int end);
-
-                /**
-                 * Inserts the string representation of a subarray of the str array argument into this sequence.
-                 * The subarray begins at the specified offset and extends len chars.
-                 * The subarray is insert at position index
-                 *
-                 * @param index
-                 * @param str
-                 * @param offset
-                 * @param len
-                 * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
-                 * or offset or len are negative, or (offset+len) is greater than str.length.
-                 * @return
-                 */
-                StringBufferUnSafe insert(int index, string str, int offset, int len);
-
-                int lastIndexOf(String str);
-
-                int lastIndexOf(String str, int fromIndex);
-
-                /**
-                 * Return the current munber of used char of this sequence
-                 *
-                 * @return int
-                 */
-                int length();
-
-                int offsetByCodePoints(int index, int codePointOffset);
-
-                StringBufferUnSafe replace(int start, int end, String str);
-
-                StringBufferUnSafe reverse();
-
-                void setCharAt(int index, char charValue);
-
-                void setLength(int newLength);
-
-                CharSequence *subSequence(int start, int end);
-
-                String subString(int start);
-
-                String subString(int start, int end);
-
-                String toString();
-
-                void trimToSize();
-
-                void freeMemory();
-
-                /**
-                 * Destructor, free memory alocated for original
-                 */
-                ~StringBufferUnSafe();
-
-            };
+            //void readObject(ObjectInputStream);
+
+            //void writeObject(ObjectOutputStream);
+
+        public:
+
+            /**
+             * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
+             *
+             */
+            StringBufferUnSafe();
+
+            /**
+             * Constructs a string buffer that contains the same characters as the specified CharSequence.
+             *
+             * @param seq
+             */
+            explicit StringBufferUnSafe(CharSequence *seq);
+
+            /**
+             * Constructs a string buffer with no characters in it and the specified initial capacity.
+             *
+             * @param capacity
+             * @throw NegativeArraySizeException if capacity is negative
+             */
+            explicit StringBufferUnSafe(int capacity);
+
+            /**
+             * Constructs a string buffer initialized to the contents of the specified string.
+             *
+             * @param str
+             */
+            explicit StringBufferUnSafe(String str);
+
+            /**
+             * Copy constructor
+             *
+             * @param other
+             */
+            StringBufferUnSafe(const StringBufferUnSafe &other);
+
+            /**
+             * Appends the string representation of the Object argument.
+             *
+             * @param obj
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(Object *obj);
+
+            /**
+             * Appends the string representation of the float argument
+             *
+             * @param floatValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(float floatValue);
+
+            //StringBuffer append(AbstractStringBuilder abs);
+
+            /**
+             * Appends the string representation of the char array argument to this sequence.
+             *
+             * @param str
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(string str);
+
+            /**
+             * Appends the string representation of the boolean argument
+             *
+             * @param boolValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(boolean boolValue);
+
+            /**
+             * Appends the specified CharSequence to this sequence.
+             *
+             * @param seq
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(CharSequence *seq);
+
+            /**
+             * Appends the string representation of the double argument
+             *
+             * @param doubleValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(double doubleValue);
+
+            /**
+             * Appends the string representation of the char argument
+             *
+             * @param charValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(char charValue);
+
+            /**
+             * Appends the string representation of char array argument to this sequence.
+             *
+             * @param str
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(String str);
+
+            /**
+             * Appends the string representation of the int argument
+             *
+             * @param intValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(int intValue);
+
+            /**
+             * Appends the string representation of the long argument
+             *
+             * @param longValue
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(long longValue);
+
+            /**
+             * Appends the specified StringBuffer to this sequence.
+             *
+             * @param stringBuffer
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(StringBufferUnSafe *stringBuffer);
+
+            /**
+             * Appends the string representation of a subarray of the char array argument to this sequence.
+             * Characters of the char array str, starting at index offset, are appended, in order,
+             * the length of subarray is equal to len
+             *
+             * @param str
+             * @param offset
+             * @param len
+             * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
+             * @return
+             */
+            StringBufferUnSafe append(string str, int offset, int len);
+
+            /**
+             * Appends a subsequence of the specified CharSequence to this sequence.
+             * starting at index start, are appended, in order,
+             * to the contents of this sequence up to the (exclusive) index end.
+             * If start is negative or bigger than end or bigger than seq's length,
+             * throw IndexOutOfBoundException
+             *
+             * @param seq
+             * @param start
+             * @param end
+             * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe append(CharSequence *seq, int start, int end);
+
+            /**
+             * Appends the string representation of the codePoint argument to this sequence.             *
+             *
+             * @param codePoint
+             * @return reference to this StringBuffer
+             */
+            StringBufferUnSafe appendCodePoint(int codePoint);
+
+            /**
+             * Return current capacity of this StringBuffer
+             *
+             * @return int
+             */
+            int capacity();
+
+            /**
+             * Return character ai specified index
+             *
+             * @param index
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
+             * @return character at specified index
+             */
+            char charAt(int index);
+
+            //IntStream codePoint();
+
+            /**
+             * Returns the character (Unicode code point) at the specified index.
+             * If the char value specified at the given index is in the high-surrogate range,
+             * the following index is less than the length of this sequence,
+             * and the char value at the following index is in the low-surrogate range,
+             * then the supplementary code point corresponding to this surrogate pair is returned.
+             * Otherwise, the char value at the given index is returned.
+             *
+             * @param index
+             * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
+             * @return
+             */
+            int codePointAt(int index);
+
+            /**
+             * Returns the character (Unicode code point) before the specified index.
+             * If the char value at (index - 1) is in the low-surrogate range,
+             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range,
+             * then the supplementary code point value of the surrogate pair is returned.
+             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate,
+             * the surrogate value is returned.
+             *
+             * @param index
+             * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
+             * @return the character (Unicode code point) before the specified index
+             */
+            int codePointBefore(int index);
+
+            /**
+             * Returns the number of Unicode code points in the specified text range of this sequence.
+             * The text range begins at the specified beginIndex and extends to the char at index endIndex - 1
+             *
+             * @param beginIndex
+             * @param endIndex
+             * @return Returns the number of Unicode code points in the specified text range of this sequence
+             */
+            int codePointCount(int beginIndex, int endIndex);
+
+            //IntStream codePoint();
+
+            /**
+             * Removes the characters in a substring of this sequence.
+             * The substring begins at the specified start and extends to the character at index end - 1 or
+             * to the end of the sequence if no such character exists. If start is equal to end, no changes are made.
+             *
+             * @param start, inclusive
+             * @param end, exclusive
+             * @throw StringIndexOutOfBound -  if start is negative, greater than length(), or greater than end.
+             * @return a reference to this StringBuffer
+             */
+            StringBufferUnSafe deletes(int start, int end);
+
+            /**
+             * Removes the char at the specified position in this sequence.
+             *
+             * @param index
+             * @throw StringIndexOutOfBoundsException - if the index is negative or greater than or equal to length().
+             * @return a reference to this StringBuffer
+             */
+            StringBufferUnSafe deleteCharAt(int index);
+
+            /**
+             * Ensures that the capacity is at least equal to the specified minimum.
+             * The new capacity is the larger than the minimumCapacity argument and twice the old capacity plus 2.
+             * If minimumCapacity is non-positive or less or equal to this capacity, return
+             *
+             * @param minimumCapacity
+             */
+            void ensureCapacity(int minimumCapacity);
+
+            void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
+
+            /**
+             * Return the string value of this StringBuffer
+             *
+             * @return string
+             */
+            string getValue();
+
+            int indexOf(String str);
+
+            int indexOf(String str, int fromIndex);
+
+            StringBufferUnSafe insert(int offset, float floatValue);
+
+            StringBufferUnSafe insert(int offset, boolean boolValue);
+
+            StringBufferUnSafe insert(int offset, string str);
+
+            StringBufferUnSafe insert(int offset, char charValue);
+
+            StringBufferUnSafe insert(int offset, String str);
+
+            StringBufferUnSafe insert(int offset, long longValue);
+
+            StringBufferUnSafe insert(int offset, Object obj);
+
+            StringBufferUnSafe insert(int offset, int intValue);
+
+            StringBufferUnSafe insert(int offset, double doubleValue);
+
+            StringBufferUnSafe insert(int dstOffset, CharSequence *seq, int start, int end);
+
+            /**
+             * Inserts the string representation of a subarray of the str array argument into this sequence.
+             * The subarray begins at the specified offset and extends len chars.
+             * The subarray is insert at position index
+             *
+             * @param index
+             * @param str
+             * @param offset
+             * @param len
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
+             * or offset or len are negative, or (offset+len) is greater than str.length.
+             * @return
+             */
+            StringBufferUnSafe insert(int index, string str, int offset, int len);
+
+            int lastIndexOf(String str);
+
+            int lastIndexOf(String str, int fromIndex);
+
+            /**
+             * Return the current munber of used char of this sequence
+             *
+             * @return int
+             */
+            int length();
+
+            int offsetByCodePoints(int index, int codePointOffset);
+
+            StringBufferUnSafe replace(int start, int end, String str);
+
+            StringBufferUnSafe reverse();
+
+            void setCharAt(int index, char charValue);
+
+            void setLength(int newLength);
+
+            CharSequence *subSequence(int start, int end);
+
+            String subString(int start);
+
+            String subString(int start, int end);
+
+            String toString();
+
+            void trimToSize();
+
+            void freeMemory();
+
+            /**
+             * Destructor, free memory alocated for original
+             */
+            ~StringBufferUnSafe();
+
+        };
+
+        class StringBuffer : public StringBufferUnSafe{
         private:
             std::mutex mutex;
-            StringBufferUnSafe stringBufferUnSafe;
+            //StringBufferUnSafe stringBufferUnSafe;
         public:
             StringBuffer();
 
