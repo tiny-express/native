@@ -94,12 +94,12 @@ file(GLOB_RECURSE SOURCES_C
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
-        kernel/common/*_test.c
-        kernel/datetime/*_test.c
-        kernel/math/*_test.c
-        kernel/string/*_test.c
-        kernel/system/*_test.c
-        kernel/type/*_test.c
+         kernel/common/*_test.c
+         kernel/datetime/*_test.c
+         kernel/math/*_test.c
+         kernel/string/*_test.c
+         kernel/system/*_test.c
+         kernel/type/*_test.c
         )
 
 # Remove all test files within c files
@@ -109,12 +109,12 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
-        java/**/*.cpp
+         java/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-        java/**/*Test.cpp
+         java/**/*Test.cpp
         )
 
 # Remove all test files within cpp files
@@ -134,12 +134,6 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
 add_custom_target(
         unit-test
         COMMAND ./${PROJECT_NAME}_test
-)
-
-# Run mock server
-add_custom_target(
-        server
-        COMMAND python ./misc/server.py
 )
 
 # Check memory leak
@@ -198,7 +192,8 @@ else()
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif()
+
 add_custom_target(
-checkstyle
-COMMAND ./misc/checkstyle.sh $(root)
+    checkstyle
+    COMMAND ./misc/checkstyle.sh $(root)
 )
