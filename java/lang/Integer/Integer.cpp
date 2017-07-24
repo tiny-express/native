@@ -158,15 +158,15 @@ int Integer::bitCount(int inputInt) {
 }
 
 byte Integer::byteValue() {
-	return (byte) this->original;
+	return static_cast<byte> (this->original);
 }
 
-int Integer::compare(int inputInt_1, int inputInt_2) {
-	if(inputInt_1 < inputInt_2) {
+int Integer::compare(int inputInt1, int inputInt2) {
+	if(inputInt1 < inputInt2) {
 		return -1;
 	}
 
-	if(inputInt_1 > inputInt_2) {
+	if(inputInt1 > inputInt2) {
 		return 1;
 	}
 

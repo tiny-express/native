@@ -80,29 +80,36 @@ TEST(JavaLang, IntegerComparision) {
 }
 
 TEST(JavaLang, IntegerOperator) {
-    // Given a valid number
+    // Create variable
     Integer validNumberOperator = 5;
     Integer targetNumberOperator = 3;
+    Integer expectedResult;
+    Integer actualResult;
 
     // Make a summation with targetNumber
-    Integer summationNumberOperator = 8;
-    ASSERT_TRUE(summationNumberOperator == (validNumberOperator + targetNumberOperator));
+    expectedResult = 8;
+    actualResult = validNumberOperator + targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
     // Make a subtraction with targetNumber
-    Integer subtractionNumberOperator = 2;
-    ASSERT_TRUE(subtractionNumberOperator == (validNumberOperator - targetNumberOperator));
+    expectedResult = 2;
+    actualResult = validNumberOperator - targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
     // Make a multiplication with targetNumber
-    Integer multiplicationNumberOperator = 15;
-    ASSERT_TRUE(multiplicationNumberOperator == (validNumberOperator * targetNumberOperator));
+    expectedResult = 15;
+    actualResult = validNumberOperator * targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
     // Make a division with targetNumber
-    Integer divisionNumberOperator = 1;
-    ASSERT_TRUE(divisionNumberOperator == (validNumberOperator / targetNumberOperator));
+    expectedResult = 1;
+    actualResult = validNumberOperator / targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
     // Make a modulo with targetNumber
-    Integer modNumberOperator = 2;
-    ASSERT_TRUE(modNumberOperator == (validNumberOperator % targetNumberOperator));
+    expectedResult = 2;
+    actualResult = validNumberOperator % targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 }
 
 TEST(JavaLang, IntegerCompareTo) {

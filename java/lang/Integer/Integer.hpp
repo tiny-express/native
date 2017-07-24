@@ -58,7 +58,6 @@ namespace Java {
             /**
              * Integer initialization
              *
-             * @param original
              */
             Integer();
 
@@ -74,12 +73,12 @@ namespace Java {
              *
              * @param string_original
              */
-            Integer(String inputStringtringInput);
+            Integer(String string_original);
 
             /**
              * Integer initialization
              *
-             * @param original
+             * @param Integer &target
              */
             Integer(const Integer &target);
 
@@ -90,7 +89,7 @@ namespace Java {
 
          private:
             /**
-            * return size of a string
+            * Return size of a string
             *
             * @param int
             * @return int
@@ -106,7 +105,7 @@ namespace Java {
             char charValue() const;
 
             /**
-             * Integer to String
+             * integer to String
              *
              * @return CString
              */
@@ -129,7 +128,7 @@ namespace Java {
             /**
              * Integer value in Long
              *
-             * @return int
+             * @return long
              */
             long longValue() const;
 
@@ -152,7 +151,7 @@ namespace Java {
             * the specified integer.
             *
             * @param target
-            * @return String
+            * @return string
             */
             string toString() const;
 		
@@ -202,7 +201,7 @@ namespace Java {
             /**
              * Compare this Integer is equal target
              *
-             * @return bool
+             * @return boolean
              */
             boolean operator==(const Integer &target) const;
 
@@ -235,7 +234,8 @@ namespace Java {
             boolean operator<=(const Integer &target) const;
 
             /**
-             *  Compare this Integer is equal or more than target
+             * Compare this Integer is equal 
+             * or greater than target
              *
              * @return bool
              */
@@ -276,13 +276,13 @@ namespace Java {
             * @param target
             * @return boolean
             */
-           static int compare(int inputInt_1, int inputInt_2);
+           static int compare(int inputInt1, int inputInt2);
 
            /**
             * Compares two Integer objects numerically.
             *
-            * @param target
-            * @return boolean
+            * @param  Integer anotherInteger
+            * @return int
             */
            int compareTo(Integer anotherInteger);
 
@@ -311,19 +311,12 @@ namespace Java {
             * the first argument by the second where each
             * argument and the result is interpreted as an unsigned value. ...
             *
-            * @param target
-            * @return int
+            * @param    int dividend
+            *           int divisor
+            *
+            * @return   int
             */
            static int divideUnsigned(int dividend, int divisor);
-
-           // /**
-           //  * Returns the value of this Integer as a
-           //  * double after a widening primitive conversion.
-           //  *
-           //  * @param target
-           //  * @return double
-           //  */
-           // double doubleValue();
 
            // /**
            //  * Compares this object to the specified object.
