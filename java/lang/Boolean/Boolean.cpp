@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,6 +34,7 @@
  */
 Boolean::Boolean(const boolean &target) {
     this->original = target;
+    this->string_original = string_from_boolean(this->original);
 }
 
 /**
@@ -51,13 +52,16 @@ Boolean::Boolean(const_string target) {
     } else {
         this->original = false;
     }
+    this->string_original = string_from_boolean(this->original);
 }
 
 /**
  * Boolean Destructor
  */
 Boolean::~Boolean() {
-
+    if (this->string_original != NULL) {
+        free(this->string_original);
+    }
 }
 
 /**
@@ -142,7 +146,7 @@ boolean Boolean::parseBoolean(const_string target) {
  * @return string
  */
 string Boolean::toString() const {
-    return string_from_boolean(this->original);
+    return this->string_original;
 }
 
 /**
@@ -153,7 +157,10 @@ string Boolean::toString() const {
  * @return String
  */
 string Boolean::toString(const boolean &target) {
-    return string_from_boolean(target);
+    if (target == True) {
+        return (string) "true";
+    }
+    return (string) "false";
 }
 
 /**
@@ -174,4 +181,18 @@ Boolean Boolean::valueOf(boolean target) {
  */
 boolean Boolean::valueOf(const_string target) {
     return Boolean::parseBoolean(target);
+}
+
+/**
+ * Assign value of this object same as target value
+ *
+ * @param target
+ * @return Boolean
+ */
+Boolean Boolean::operator=(const Boolean &target) {
+    this->original = target.original;
+    if (this->string_original != NULL) {
+        free(this->string_original);
+    }
+    this->string_original = string_from_boolean(this->original);
 }

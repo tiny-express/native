@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,6 +35,7 @@ using namespace Java::Lang;
  */
 Integer::Integer() {
 	this->original = 0;
+	this->string_original = string_from_int(this->original);
 }
 
 /**
@@ -44,6 +45,7 @@ Integer::Integer() {
  */
 Integer::Integer(int original) {
 	this->original = original;
+	this->string_original = string_from_int(this->original);
 }
 
 /**
@@ -53,9 +55,16 @@ Integer::Integer(int original) {
  */
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
+	this->string_original = string_from_int(this->original);
 }
 
+/**
+ * Integer Destructor
+ */
 Integer::~Integer() {
+	if (this->string_original != NULL)  {
+		free(this->string_original);
+	}
 }
 
 /**
@@ -70,12 +79,32 @@ Integer Integer::parseInt(String target) {
 }
 
 /**
+ * Compare with Integer
+ *
+ * @param target
+ * @return int
+ */
+int Integer::compareTo(const Integer &target) const {
+	if (hashCode() == target.hashCode()) {
+		return 0;
+	}
+	if (instanceof<Integer>(target)) {
+		if (original < target.original) {
+			return -1;
+		} else if (original == target.original) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/**
  * Integer to String
  *
  * @return String
  */
 string Integer::toString() const {
-	return string_from_int(this->original);
+	return this->string_original;
 }
 
 /**
@@ -84,7 +113,10 @@ string Integer::toString() const {
  * @return char
  */
 char Integer::charValue() const {
-	return string_to_char(string_from_int(this->original));
+	string convertResult = string_from_int(this->original);
+	char result = string_to_char(convertResult);
+	free(convertResult);
+	return result;
 }
 
 /**
@@ -93,7 +125,7 @@ char Integer::charValue() const {
  * @return CString
  */
 string Integer::stringValue() const {
-	return String::valueOf(this->original).toString();
+    return this->string_original;
 }
 
 /**
@@ -139,6 +171,19 @@ float Integer::floatValue() const {
  */
 double Integer::doubleValue() const {
 	return (double) this->original;
+}
+
+/**
+ * Assign value of this object same as target value
+ *
+ * @param target
+ * @return Integer
+ */
+Integer Integer::operator=(const Integer &target) {
+	this->original = target.original;
+	free(this->string_original);
+	this->string_original = string_from_int(this->original);
+    return *this;
 }
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -26,19 +26,17 @@
 
 // https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-#ifndef NATIVE_JAVA_LANG_NUMBER_HPP
-#define NATIVE_JAVA_LANG_NUMBER_HPP
+#ifndef JAVA_LANG_NUMBER_HPP_
+#define JAVA_LANG_NUMBER_HPP_
 
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 
 namespace Java {
 	namespace Lang {
-		class Number : public Object {
-
+		class Number : public Object
+		{
 		protected:
-			virtual char charValue() const = 0;
-			virtual string stringValue() const = 0;
 			virtual short shortValue() const = 0;
 			virtual int intValue() const = 0;
 			virtual long longValue() const = 0;
@@ -48,4 +46,4 @@ namespace Java {
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_NUMBER_HPP
+#endif  // JAVA_LANG_NUMBER_HPP_

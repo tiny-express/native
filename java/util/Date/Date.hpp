@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_DATE_HPP
-#define NATIVE_JAVA_UTIL_DATE_HPP
+#ifndef JAVA_UTIL_DATE_HPP_
+#define JAVA_UTIL_DATE_HPP_
 
 #include <ctime>
 #include "../../Lang.hpp"
@@ -59,7 +59,7 @@ namespace Java {
              * @return String
              */
             string toString0(tm *timePresenter) {
-                char *result = (char *) malloc(80 * sizeof(char));
+                string result = (string) malloc(80 * sizeof(char));
 
                 strftime(result, 80, "%a %b %d %Y %H:%M:%S", timePresenter);
 
@@ -280,7 +280,8 @@ namespace Java {
                 tm timer;
                 string timeString = s.toString();
 
-                strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
+                // TODO - Fix for WIN32
+                // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
                 long result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
                                         timer.tm_hour, timer.tm_min, timer.tm_sec);
                 return result;
@@ -384,4 +385,4 @@ namespace Java {
     }
 }
 
-#endif //NATIVE_JAVA_UTIL_DATE_HPP
+#endif //JAVA_UTIL_DATE_HPP_

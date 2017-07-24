@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "Short.hpp"
@@ -103,10 +103,16 @@ TEST (JavaLang, ShortOperator) {
 }
 
 TEST (JavaLang, ShortParseShort) {
-    #ifdef __APPLE__
-        return;
-    #endif
 	// Given value for Long constructor and assign value - Return long
     Short validShortPointer = Short::parseShort("6");
     ASSERT_EQUAL(6, validShortPointer.shortValue());
+}
+
+TEST(JavaLang, ShortToString) {
+    // Give a valid Short object then compare result of method toString - Should be equals
+    Short validShort = 12344;
+
+    string expect = (string) "12344";
+    string result = validShort.toString();
+    ASSERT_STR(expect, result);
 }

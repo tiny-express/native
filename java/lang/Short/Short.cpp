@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,6 +35,7 @@ using namespace Java::Lang;
  */
 Short::Short() {
 	this->original = 0;
+	this->string_original = string_from_short(this->original);
 }
 
 /**
@@ -44,6 +45,7 @@ Short::Short() {
  */
 Short::Short(short original) {
 	this->original = original;
+	this->string_original = string_from_short(this->original);
 }
 
 /**
@@ -53,9 +55,13 @@ Short::Short(short original) {
  */
 Short::Short(const Short &shortNumber) {
 	this->original = shortNumber.original;
+	this->string_original = string_from_short(this->original);
 }
 
 Short::~Short() {
+	if (this->string_original != NULL) {
+		free(this->string_original);
+	}
 }
 
 /**
@@ -74,7 +80,7 @@ Short Short::parseShort(String target) {
  * @return String
  */
 string Short::toString() const {
-	return string_from_short(this->original);
+	return this->string_original;
 }
 
 /**
@@ -84,15 +90,6 @@ string Short::toString() const {
  */
 char Short::charValue() const {
 	return string_to_char(string_from_short(this->original));
-}
-
-/**
- * Short to String
- *
- * @return CString
- */
-string Short::stringValue() const {
-	return String::valueOf(this->original).toString();
 }
 
 /**
@@ -138,6 +135,19 @@ float Short::floatValue() const {
  */
 double Short::doubleValue() const {
 	return (double) this->original;
+}
+
+/**
+ * Assign value of this object same as value of target object
+ *
+ * @param target
+ * @return Short
+ */
+Short Short::operator=(const Short &target) {
+	this->original = target.original;
+	free(this->string_original);
+	this->string_original = string_from_short(this->original);
+	return *this;
 }
 
 /**

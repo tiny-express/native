@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,11 +25,18 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "UUID.hpp"
 
+TEST (JavaUtil, UUIDClockSequence) {
+    // Given valid uuid and expectedResult based on result of java code
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+    int expectedResult = 12862;
+
+    ASSERT_EQUAL(expectedResult, uuid.clockSequence());
+}
 
 TEST (JavaUtil, UUIDConstructor) {
     // Given valid construct to test
@@ -43,14 +50,14 @@ TEST (JavaUtil, UUIDConstructor) {
     expectedValue = 456;
     ASSERT_EQUAL(expectedValue, result);
 
-    /**
-     * All test cases with static constructor are very hard to test,
-     * just give sample to call instead
-     */
-
     // Given valid static constructor with randomUUID
-    uuid = UUID::randomUUID();
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    uuid = UUID::fromString(expectedString);
+    long expectedMostSigBits = 4053239666997989821;
+    long expectedLeastSigBits = -5603022497796657139;
 
+    ASSERT_EQUAL(expectedMostSigBits, uuid.getMostSignificantBits());
+    ASSERT_EQUAL(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtil, UUIDCompare) {
@@ -93,8 +100,10 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
     ASSERT_EQUAL(expectedLeast, uuid.getLeastSignificantBits());
 }
 
-TEST(JavaUtil, UUIDTrap) {
-    UUID uuid = UUID::fromString("trap");
-    String result = uuid.toString();
-    ASSERT_STR("trap", result.toString());
+TEST (JavaUtil, UUIDToString) {
+    // Given valid uuid to test toString() - this test case was based on java's result
+    UUID uuid = UUID(4053239666997989821, -5603022497796657139);
+
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    ASSERT_STR(expectedString.toString(), uuid.toString().toString());
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 #include "Boolean.hpp"
 
@@ -125,20 +125,17 @@ TEST(JavaLang, BooleanToString) {
     string expect = (string) "true";
     string result = objectBooleanTrue.toString();
     ASSERT_STR(expect, result);
-    free(result);
 
     // Give two string - Should equal
     Boolean objectBooleanFalse(false);
     expect = (string) "false";
     result = objectBooleanFalse.toString();
     ASSERT_STR(expect, result);
-    free(result);
 
     // Give two string - Should equal
     expect = (string) "true";
     result = Boolean::toString(true);
     ASSERT_STR(expect, result);
-    free(result);
 }
 
 TEST(JavaLang, BooleanStaticValueOf) {
