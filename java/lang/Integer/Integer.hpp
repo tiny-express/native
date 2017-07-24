@@ -47,15 +47,15 @@ namespace Java {
 	namespace Lang {
 		class Integer;
 		
-		class Integer :
-			public virtual Number,
-			public virtual Comparable<Integer> {
-		private:
+		class Integer:
+			public Number {
+
+		 private:
 			int original;
 			string string_original;
 
-		public:            
-			/**
+		 public:
+            /**
              * Integer initialization
              *
              * @param original
@@ -67,7 +67,7 @@ namespace Java {
              *
              * @param original
              */
-			Integer(int original);
+            Integer(int original);
 
             /**
              * Integer initialization
@@ -81,14 +81,14 @@ namespace Java {
              *
              * @param original
              */
-			      Integer(const Integer &target);
+            Integer(const Integer &target);
 
             /**
              * Integer Destructor
              */
-			      ~Integer();
+            ~Integer();
 
-    private:
+         private:
             /**
             * return size of a string
             *
@@ -97,55 +97,55 @@ namespace Java {
             */
            int stringSize(int x);
 
-		public:
+         public:
             /**
              * Integer to Char
              *
              * @return char
              */
-			      char charValue() const;
+            char charValue() const;
 
             /**
              * Integer to String
              *
              * @return CString
              */
-			      string stringValue() const;
+            string stringValue() const;
 
             /**
              * Short value of Integer
              *
              * @return short
              */
-			      short shortValue() const;
+            short shortValue() const;
 
             /**
              * Integer value
              *
              * @return int
              */
-			      int intValue() const;
+            int intValue() const;
 
             /**
              * Integer value in Long
              *
              * @return int
              */
-			      long longValue() const;
+            long longValue() const;
 
             /**
              * Integer value in float
              *
              * @return int
              */
-			      float floatValue() const;
+            float floatValue() const;
 
             /**
              * Integer value in double
              *
              * @return int
              */
-			      double doubleValue() const;		
+            double doubleValue() const;
 
            /**
             * Returns a String object representing
@@ -154,94 +154,92 @@ namespace Java {
             * @param target
             * @return String
             */
-			      string toString() const;
+            string toString() const;
 		
-		public:
-
             /**
              * Assign value of this object same as target value
              *
              * @param target
              * @return Integer
              */
-		      	Integer operator=(const Integer &target);
+            Integer operator=(const Integer &target);
 
             /**
              * Make a summation with target Integer
              *
              * @return Integer
              */
-			      Integer operator+(const Integer &target);
+            Integer operator+(const Integer &target);
 
             /**
              * Make a subtraction with target Integer
              *
              * @return Integer
              */
-			      Integer operator-(const Integer &target);
+            Integer operator-(const Integer &target);
 
             /**
              *  Make a division from this Integer with target
              *
              * @return Integer
              */
-			      Integer operator/(const Integer &target);
+            Integer operator/(const Integer &target);
 
             /**
              * Make a multiple from this Integer with target
              *
              * @return Integer
              */
-			      Integer operator*(const Integer &target);
+            Integer operator*(const Integer &target);
 
             /**
              * Make a modulo from this Integer with target
              *
              * @return Integer
              */
-			      Integer operator%(const Integer &target);
+            Integer operator%(const Integer &target);
 
             /**
              * Compare this Integer is equal target
              *
              * @return bool
              */
-			      boolean operator==(const Integer &target) const;
+            boolean operator==(const Integer &target) const;
 
             /**
              * Compare this Integer is not equal target
              *
              * @return bool
              */
-		      	boolean operator!=(const Integer &target) const;
+            boolean operator!=(const Integer &target) const;
 
             /**
              * Compare this Integer is less than target
              *
              * @return bool
              */
-		      	boolean operator<(const Integer &target) const;
+            boolean operator<(const Integer &target) const;
 
             /**
              * Compare this Integer is more than target
              *
              * @return bool
              */
-		      	boolean operator>(const Integer &target) const;
+            boolean operator>(const Integer &target) const;
 
             /**
              * Compare this Integer is equal or less than target
              *
              * @return bool
              */
-		      	boolean operator<=(const Integer &target) const;
+            boolean operator<=(const Integer &target) const;
 
             /**
              *  Compare this Integer is equal or more than target
              *
              * @return bool
              */
-			      boolean operator>=(const Integer &target) const;
+            boolean operator>=(const Integer &target) const;
 			
             void operator+=(const Integer &target);
             void operator-=(const Integer &target);
@@ -286,7 +284,7 @@ namespace Java {
             * @param target
             * @return boolean
             */
-           // int compareTo(Integer anotherInteger);
+           int compareTo(Integer anotherInteger);
 
            /**
             * Compares two int values numerically

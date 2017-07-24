@@ -75,15 +75,15 @@ int Integer::intValue() const {
 }
 
 long Integer::longValue() const {
-	return this->original;
+	return static_cast<long> (this->original);
 }
 
 float Integer::floatValue() const {
-	return (float) this->original;
+	return static_cast<float> (this->original);
 }
 
 double Integer::doubleValue() const {
-	return (double) this->original;
+	return static_cast<double> (this->original);
 }
 
 Integer Integer::operator=(const Integer &target) {
@@ -173,12 +173,12 @@ int Integer::compare(int inputInt_1, int inputInt_2) {
 	return 0;
 }
 
-// int Integer::compareTo(Integer anotherInteger) {
-// 	return compare(this->original, anotherInteger.intValue());
-// }
+int Integer::compareTo(Integer anotherInteger) {
+	return compare(this->original, anotherInteger.intValue());
+}
 
 int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
-	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);	
+	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);
 }
 
 // Integer Integer::decode(String inputStringtringInput) {
@@ -231,7 +231,7 @@ int Integer::highestOneBit(int inputInt)  {
     inputInt |= (inputInt >> 8);
     inputInt |= (inputInt >> 16);
 
-    return inputInt - ((unsigned int) inputInt >> 1);	
+    return inputInt - ((unsigned int) inputInt >> 1);
 }
 
 int Integer::lowestOneBit(int inputInt) {
@@ -276,7 +276,6 @@ int Integer::numberOfLeadingZeros(int inputInt) {
     n -= (unsigned int) inputInt >> 31;
 
     return n;
-
 }
 
 int Integer::numberOfTrailingZeros(int inputInt) {
@@ -285,7 +284,7 @@ int Integer::numberOfTrailingZeros(int inputInt) {
     if (inputInt == 0)
         return 32;
 
-    int n = 31;   
+    int n = 31;
     y = inputInt << 16;
 
     if (y != 0) {
@@ -377,7 +376,8 @@ int Integer::numberOfTrailingZeros(int inputInt) {
 
 int Integer::parseInt(String inputString) {
 	return string_to_int(inputString.toString());
-	// TODO(thoanggminh): enable it after finish Integer::parseInt(String inputString, int radix)
+	// TODO(thoanggminh): enable it after finish
+    // Integer::parseInt(String inputString, int radix)
 	// return parseInt(inputString,10);
 }
 
@@ -405,17 +405,17 @@ int Integer::reverse(int inputInt) {
     inputInt = (inputInt & 0x0f0f0f0f) << 4 
     			| ((unsigned int) inputInt >> 4) & 0x0f0f0f0f;
 
-    inputInt = (inputInt << 24) | ((inputInt & 0xff00) << 8) 
-    			| (((unsigned int) inputInt >> 8) & 0xff00) 
+    inputInt = (inputInt << 24) | ((inputInt & 0xff00) << 8)
+    			| (((unsigned int) inputInt >> 8) & 0xff00)
     			| ((unsigned int) inputInt >> 24);
 
     return inputInt;
 }
 
 int Integer::reverseBytes(int inputInt) {
-	inputInt = (((unsigned int) inputInt >> 24)) 
-				| ((inputInt >> 8) & 0xFF00) 
-				| ((inputInt << 8) & 0xFF0000)       
+	inputInt = (((unsigned int) inputInt >> 24))
+				| ((inputInt >> 8) & 0xFF00)
+				| ((inputInt << 8) & 0xFF0000)
 				| ((inputInt << 24));
 
 	return inputInt;
