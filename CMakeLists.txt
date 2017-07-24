@@ -136,12 +136,6 @@ add_custom_target(
         COMMAND ./${PROJECT_NAME}_test
 )
 
-# Run mock server
-add_custom_target(
-        server
-        COMMAND python ./misc/server.py
-)
-
 # Check memory leak
 add_custom_target(
         leak
@@ -198,7 +192,8 @@ else()
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif()
+
 add_custom_target(
-checkstyle
-COMMAND ./misc/checkstyle.sh $(root)
+    checkstyle
+    COMMAND ./misc/checkstyle.sh $(root)
 )
