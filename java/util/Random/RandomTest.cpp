@@ -31,7 +31,7 @@ extern "C" {
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
-TEST (JavaUtil, nextInt) {
+TEST (JavaUtil, RandomNextInt) {
     // Given a random number generator
     Random random1;
 
@@ -46,7 +46,7 @@ TEST (JavaUtil, nextInt) {
     }
 }
 
-TEST (JavaUtil, nextIntWithBound) {
+TEST (JavaUtil, RandomNextIntWithBound) {
     // Given a random number generator
     Random random1;
 
@@ -67,7 +67,7 @@ TEST (JavaUtil, nextIntWithBound) {
     }
 }
 
-TEST (JavaUtil, NextBytes) {
+TEST (JavaUtil, RandomNextBytes) {
     // Given a random number generator
     Random random1;
 
@@ -84,7 +84,7 @@ TEST (JavaUtil, NextBytes) {
         ASSERT_TRUE(byteArray[index] >= byteMin && byteArray[index] <= byteMax);
 }
 
-TEST (JavaUtil, NextDouble) {
+TEST (JavaUtil, RandomNextDouble) {
     // Given a random number generator
     Random random1;
 
@@ -95,7 +95,7 @@ TEST (JavaUtil, NextDouble) {
     }
 }
 
-TEST (JavaUtil, NextLong) {
+TEST (JavaUtil, RandomNextLong) {
     // Given a random number generator
     Random random1;
 
@@ -109,7 +109,7 @@ TEST (JavaUtil, NextLong) {
     }
 }
 
-TEST (JavaUtil, NextFloat) {
+TEST (JavaUtil, RandomNextFloat) {
     // Given a random number generator
     Random random1;
 
