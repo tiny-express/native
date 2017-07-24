@@ -247,7 +247,7 @@ namespace Java {
 			 * Returns the element at the specified position in this list.
 			 *
 			 * @param index
-			 * @return
+			 * @return E
 			 */
 			E get(int index) const {
 				if (index < 0 || index >= this->size()) {
@@ -262,11 +262,17 @@ namespace Java {
 			 * Returns the index of the first occurrence of the specified element in this list,
 			 * or -1 if this list does not contain the element.
 			 *
-			 * @param o
+			 * @param element
 			 * @return int
 			 */
 			int indexOf(E element) const {
-				return 0;
+				int index;
+                for (index = 0; index < this->size(); ++index) {
+                    if (this->get(index) == element) {
+                        return index;
+                    }
+                }
+                return -1;
 			}
 			
 			/**
@@ -297,8 +303,13 @@ namespace Java {
 			 * @return int
 			 */
 			int lastIndexOf(E element) const {
-				// TODO
-				return 0;
+                int index;
+                for (index = this->size() - 1; index >= 0; --index) {
+                    if (this->get(index) == element) {
+                        return index;
+                    }
+                }
+                return -1;
 			}
 			
 			/**
@@ -329,10 +340,16 @@ namespace Java {
 			 * @param index
 			 * @return Address of element
 			 */
-			E remove(int index) {
+            E remove(int index) {
 				if (index < 0 || index >= this->size()) {
-					//FIXME: throw exception
+                    String message = "Index out of range: ";
+                    message += Integer(index).stringValue();
+                    throw IndexOutOfBoundsException(message);
 				}
+
+                E holder = this->get(index);
+                this->original.erase(this->original.begin() + index);
+                return holder;
 			}
 			
 			/**

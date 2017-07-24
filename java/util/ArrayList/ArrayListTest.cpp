@@ -132,6 +132,7 @@ TEST(JavaUtil, ArrayListClear) {
 }
 
 TEST(JavaUtil, ArrayListClone) {
+    // Give a valid ArrayList then clone this to new object - Should equal
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	ArrayList<String> cloneArrayList = validArrayList.clone();
 
@@ -159,6 +160,7 @@ TEST(JavaUtil, ArrayListForEach) {
 }
 
 TEST(JavaUtil, ArrayListGet) {
+    // Give a valid ArrayList and get value some index
 	ArrayList<Integer> validArrayList = {1, 2, 3};
 	int expect = 1;
 	int result = validArrayList.get(0).intValue();
@@ -179,6 +181,42 @@ TEST(JavaUtil, ArrayListGet) {
 		string stringResult = exception.toString();
         ASSERT_STR(stringExpect, stringResult);
 	}
+}
+
+TEST(JavaUtil, ArrayListIndexOf) {
+    // Give a valid ArrayList then test method indexOf - Should equal
+    ArrayList<Integer> validArrayList = {1, 2, 3};
+    int expect = 2;
+    int result = validArrayList.indexOf(3);
+    ASSERT_EQUAL(expect, result);
+
+    expect = -1;
+    result = validArrayList.indexOf(31);
+    ASSERT_EQUAL(expect, result);
+}
+
+TEST(JavaUtil, ArrayListLastIndexOf) {
+    // Give a valid ArrayList then test method indexOf - Should equal
+    ArrayList<Integer> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
+    int expect = 7;
+    int result = validArrayList.lastIndexOf(3);
+    ASSERT_EQUAL(expect, result);
+
+    expect = -1;
+    result = validArrayList.indexOf(31);
+    ASSERT_EQUAL(expect, result);
+}
+
+TEST(JavaUtil, ArrayListRemove) {
+    // Give a valid ArrayList then test method remove - Should equal
+    ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
+    int expect = 3;
+    int result = validArrayList.remove(7).intValue();
+    ASSERT_EQUAL(expect, result);
+
+    string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
+    string stringResult = validArrayList.toString();
+    ASSERT_STR(stringExpect, stringResult);
 }
 
 TEST(JavaUtil, ArrayListToString) {
