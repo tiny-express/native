@@ -169,6 +169,7 @@ TEST(JavaUtil, ArrayListGet) {
 	} catch (IndexOutOfBoundsException exception) {
 		string stringExpect = (string) "Index out of range: -1";
 		string stringResult = exception.toString();
+        ASSERT_STR(stringExpect, stringResult);
 	}
 
 	try {
@@ -176,6 +177,7 @@ TEST(JavaUtil, ArrayListGet) {
 	} catch (IndexOutOfBoundsException exception) {
 		string stringExpect = (string) "Index out of range: 1000";
 		string stringResult = exception.toString();
+        ASSERT_STR(stringExpect, stringResult);
 	}
 }
 
