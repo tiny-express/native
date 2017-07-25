@@ -96,6 +96,15 @@ TEST(JavaUtil, ArrayListAdd) {
 	ASSERT_STR(stringExpect, stringResult);
 }
 
+TEST(JavaUtil, ArrayListContains) {
+    // Give a valid ArrayList then test method contains - Should equal
+    ArrayList<String> validArrayList = {"nakhoadl", "thuydung", "loint", "dthongvl", "dquang"};
+    boolean result = validArrayList.contains("loint");
+    ASSERT_TRUE(result);
+    result = validArrayList.contains("huuphuoc");
+    ASSERT_FALSE(result);
+}
+
 TEST(JavaUtil, ArrayListIsEmpty) {
 	// Give an empty ArrayList - Should equal
 	ArrayList<Long> emptyArrayList;
@@ -207,14 +216,40 @@ TEST(JavaUtil, ArrayListLastIndexOf) {
     ASSERT_EQUAL(expect, result);
 }
 
-TEST(JavaUtil, ArrayListRemove) {
-    // Give a valid ArrayList then test method remove - Should equal
+TEST(JavaUtil, ArrayListRemoveIndex) {
+    // Give a valid ArrayList then test method with index remove - Should equal
     ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
     int expect = 3;
     int result = validArrayList.remove(7).intValue();
     ASSERT_EQUAL(expect, result);
 
     string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
+    string stringResult = validArrayList.toString();
+    ASSERT_STR(stringExpect, stringResult);
+}
+
+TEST(JavaUtil, ArrayListRemoveElement) {
+    // Give a valid ArrayList then test method remove with element - Should equal
+    ArrayList<String> validArrayList = {"123", "456", "789"};
+    boolean result = validArrayList.remove("456");
+    string stringExpect = (string) "[123, 789]";
+    string stringResult = validArrayList.toString();
+    ASSERT_TRUE(result);
+    ASSERT_STR(stringExpect, stringResult);
+
+    // Test case false
+    result = validArrayList.remove("012");
+    stringExpect = (string) "[123, 789]";
+    stringResult = validArrayList.toString();
+    ASSERT_FALSE(result);
+    ASSERT_STR(stringExpect, stringResult);
+}
+
+TEST(JavaUtil, ArrayListSet) {
+    // Give a valid ArrayList then test method set - Should equal
+    ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
+    validArrayList.set(2, "String");
+    string stringExpect = (string) "[String, String, String, String]";
     string stringResult = validArrayList.toString();
     ASSERT_STR(stringExpect, stringResult);
 }

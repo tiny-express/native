@@ -171,7 +171,7 @@ namespace Java {
 			 * starting at the specified position.
 			 *
 			 * @param index
-			 * @param c
+			 * @param collection
 			 * @return boolean
 			 */
 			boolean addAll(int index, Collection<E> collection) {
@@ -356,11 +356,15 @@ namespace Java {
 			 * Removes the first occurrence of the specified element
 			 * from this list, if it is present.
 			 *
-			 * @param object
+			 * @param element
 			 * @return boolean
 			 */
-			boolean remove(Object object) {
-				// TODO
+			boolean remove(E element) {
+				int position = this->indexOf(element);
+				if (position == -1) {
+					return false;
+				}
+				this->remove(position);
 				return true;
 			}
 			
@@ -418,8 +422,13 @@ namespace Java {
 			 * @return E
 			 */
 			E set(int index, E element) {
-				E e;
-				return e;
+				if (index < 0 || index >= this->size()) {
+					String message = "Index out of range: ";
+					message += Integer(index).stringValue();
+					throw IndexOutOfBoundsException(message);
+				}
+				this->original[index] = element;
+				return this->original[index];
 			}
 			
 			/**
@@ -428,7 +437,7 @@ namespace Java {
 			 * @return int
 			 */
 			int size() const {
-				return original.size();
+				return (int) this->original.size();
 			}
 			
 			/**
@@ -463,32 +472,34 @@ namespace Java {
 			 *
 			 * @return Array<Object>
 			 */
-			Array<Object> toArray() {
-				// TODO
-				Array<Object> objects;
-				return objects;
+			Array<E> toArray() {
+				Array<E> resultArray;
+				for (E item : *this) {
+					resultArray.push(item);
+				}
+				return resultArray;
 			}
 			
-			/**
-			 * Returns an array containing all of the elements in this list
-			 * in proper sequence (from first to last element);the runtime type of
-			 * the returned array is that of the specified array.
-			 *
-			 * @tparam T
-			 * @param a
-			 * @return Array<T>
-			 */
-			template <class T>
-			Array<T> &toArray(Array<T> array) const {
-				// TODO
-				return array;
-			}
+//			/**
+//			 * Returns an array containing all of the elements in this list
+//			 * in proper sequence (from first to last element);the runtime type of
+//			 * the returned array is that of the specified array.
+//			 *
+//			 * @tparam T
+//			 * @param a
+//			 * @return Array<T>
+//			 */
+//			template <class T>
+//			Array<T> &toArray(Array<T> array) const {
+//				// TODO
+//				return array;
+//			}
 			
 			/**
 			 * Trims the capacity of this ArrayList instance to be the list's current size.
 			 */
 			void trimToSize() {
-				// TODO
+				this->original.shrink_to_fit();
 			}
 			
 			/**
@@ -515,15 +526,28 @@ namespace Java {
 				this->backup = startArrayList;
 				return this->backup.toString();
 			}
-			
+
+			/**
+			 * A hash code value for this object.
+			 *
+			 * @return long
+			 */
 			long hashCode() const {
-				return 0;
+				return Object::hashCode();
 			}
-			
-			boolean equals(const Object object) const {
-				return true;
-			}
-			
+
+			// TODO: method instanceof not work
+//			boolean equals(const Object object) const {
+//				return true;
+//			}
+
+			/**
+			 * Print ArrayList to screen
+			 *
+			 * @param os
+			 * @param target
+			 * @return std::ostream
+			 */
 			friend std::ostream &operator<<(std::ostream &os, const ArrayList &target) {
 				for (E item : target) {
 					os << item << " ";
@@ -531,10 +555,17 @@ namespace Java {
 				os << std::endl;
 				return os;
 			}
-			
+
+			/**
+			 * Get and set element at index in ArrayList
+			 *
+			 * @param index
+			 * @return
+			 */
 			E &operator[](int index) {
 				return this->original[index];
 			}
+
 		protected:
 			/**
 			 * Removes from this list all of the elements
