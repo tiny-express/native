@@ -436,7 +436,7 @@ namespace Java {
 			 * @return int
 			 */
 			int size() const {
-				return (int) this->original.size();
+				return static_cast<int>(this->original.size());
 			}
 			
 			/**

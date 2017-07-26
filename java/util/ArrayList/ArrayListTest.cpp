@@ -102,7 +102,8 @@ TEST(JavaUtil, ArrayListAdd) {
 
 TEST(JavaUtil, ArrayListContains) {
     // Give a valid ArrayList then test method contains - Should equal
-    ArrayList<String> validArrayList = {"nakhoadl", "thuydung", "loint", "dthongvl", "dquang"};
+    ArrayList<String> validArrayList = {"nakhoadl", "thuydung",
+                                        "loint", "dthongvl", "dquang"};
     boolean result = validArrayList.contains("loint");
     ASSERT_TRUE(result);
     result = validArrayList.contains("huuphuoc");
@@ -145,7 +146,8 @@ TEST(JavaUtil, ArrayListClear) {
 }
 
 TEST(JavaUtil, ArrayListClone) {
-    // Give a valid ArrayList then clone this to new object - Should equal
+    // Give a valid ArrayList
+    // then clone this to new object - Should equal
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	ArrayList<String> cloneArrayList = validArrayList.clone();
 
@@ -197,7 +199,8 @@ TEST(JavaUtil, ArrayListGet) {
 }
 
 TEST(JavaUtil, ArrayListIndexOf) {
-    // Give a valid ArrayList then test method indexOf - Should equal
+    // Give a valid ArrayList
+    // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3};
     int expect = 2;
     int result = validArrayList.indexOf(3);
@@ -209,7 +212,8 @@ TEST(JavaUtil, ArrayListIndexOf) {
 }
 
 TEST(JavaUtil, ArrayListLastIndexOf) {
-    // Give a valid ArrayList then test method indexOf - Should equal
+    // Give a valid ArrayList
+    // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
     int expect = 7;
     int result = validArrayList.lastIndexOf(3);
@@ -221,7 +225,8 @@ TEST(JavaUtil, ArrayListLastIndexOf) {
 }
 
 TEST(JavaUtil, ArrayListRemoveIndex) {
-    // Give a valid ArrayList then test method with index remove - Should equal
+    // Give a valid ArrayList
+    // then test method with index remove - Should equal
     ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
     int expect = 3;
     int result = validArrayList.remove(7).intValue();
@@ -233,7 +238,8 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
 }
 
 TEST(JavaUtil, ArrayListRemoveElement) {
-    // Give a valid ArrayList then test method remove with element - Should equal
+    // Give a valid ArrayList
+    // then test method remove with element - Should equal
     ArrayList<String> validArrayList = {"123", "456", "789"};
     boolean result = validArrayList.remove("456");
     string stringExpect = (string) "[123, 789]";
@@ -250,7 +256,8 @@ TEST(JavaUtil, ArrayListRemoveElement) {
 }
 
 TEST(JavaUtil, ArrayListSet) {
-    // Give a valid ArrayList then test method set - Should equal
+    // Give a valid ArrayList
+    // then test method set - Should equal
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
     validArrayList.set(2, "String");
     string stringExpect = (string) "[String, String, String, String]";
@@ -259,19 +266,22 @@ TEST(JavaUtil, ArrayListSet) {
 }
 
 TEST(JavaUtil, ArrayListToString) {
-    //Give an empty ArrayList<Integer> then compare toString() - Should equal
+    // Give an empty ArrayList<Integer>
+    // then compare toString() - Should equal
     ArrayList<Integer> inValidArrayListInteger;
     string result = inValidArrayListInteger.toString();
     string expect = (string) "[]";
     ASSERT_STR(result, expect);
 
-    //Give an ArrayList<Integer> then compare toString() - Should equal
+    // Give an ArrayList<Integer>
+    // then compare toString() - Should equal
 	ArrayList<Integer> validArrayListInteger = {1, 2, 4, 5};
 	result = validArrayListInteger.toString();
 	expect = (string) "[1, 2, 4, 5]";
 	ASSERT_STR(result, expect);
 
-    // Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
+    // Give an ArrayList<ArrayList<Integer>>
+    // then compare toString() - Should equal
     ArrayList<ArrayList<Integer>> arrayListInArrayList;
     arrayListInArrayList.add(validArrayListInteger);
     arrayListInArrayList.add(validArrayListInteger);
