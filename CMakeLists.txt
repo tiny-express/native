@@ -115,6 +115,7 @@ file(GLOB_RECURSE SOURCES_CPP
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
+        javax/**/*Test.cpp
         java/**/*Test.cpp
         )
 
