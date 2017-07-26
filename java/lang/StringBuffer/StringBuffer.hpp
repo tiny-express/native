@@ -337,7 +337,18 @@ namespace Java {
              */
             int indexOf(String str, int fromIndex);
 
+            /**
+             * Inserts the string representation of the float argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             * @param offset
+             * @param floatValue
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, float floatValue);
+
+            StringBufferUnSafe insert(int offset, CharSequence *charSequence);
 
             StringBufferUnSafe insert(int offset, boolean boolValue);
 
@@ -349,7 +360,7 @@ namespace Java {
 
             StringBufferUnSafe insert(int offset, long longValue);
 
-            StringBufferUnSafe insert(int offset, Object obj);
+            StringBufferUnSafe insert(int offset, Object *obj);
 
             StringBufferUnSafe insert(int offset, int intValue);
 
@@ -409,8 +420,6 @@ namespace Java {
             String toString();
 
             void trimToSize();
-
-            void freeMemory();
 
             /**
              * Destructor, free memory alocated for original
@@ -504,11 +513,13 @@ namespace Java {
 
             StringBuffer insert(int offset, long longValue);
 
-            StringBuffer insert(int offset, Object obj);
+            StringBuffer insert(int offset, Object *obj);
 
             StringBuffer insert(int offset, int intValue);
 
             StringBuffer insert(int offset, double doubleValue);
+
+            StringBuffer insert(int offset, CharSequence *charSequence);
 
             StringBuffer insert(int dstOffset, CharSequence *seq, int start, int end);
 
