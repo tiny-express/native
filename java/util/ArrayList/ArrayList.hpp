@@ -55,8 +55,8 @@ namespace Java {
 		
 		template <class E>
 		class ArrayList :
-			//public virtual AbstractList<E>,
-			//public virtual List<E>,
+			// public virtual AbstractList<E>,
+			// public virtual List<E>,
 			public virtual Serializable,
 			public virtual Cloneable,
 			public virtual RandomAccess {
@@ -68,22 +68,21 @@ namespace Java {
 			String backup;
 		
 		public:
-			
 			_iterator begin() {
 				return &this->original[ 0 ];
-			};
+			}
 
 			_const_iterator begin() const {
 				return &this->original[ 0 ];
-			};
+			}
 
 			_iterator end() {
 				return &this->original[ this->original.size() ];
-			};
+			}
 
 			_const_iterator end() const {
 				return &this->original[ this->original.size() ];
-			};
+			}
 			
 			/**
 			 * Constructs an empty list
@@ -162,7 +161,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean addAll(Collection<E> collection) {
-				// TODO
+				// TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -175,7 +174,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean addAll(int index, Collection<E> collection) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -218,7 +217,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean containsAll(Collection<Object> collection) const {
-				// TODO:
+                // TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -240,7 +239,7 @@ namespace Java {
 			 * @param action
 			 */
 			void forEach(Consumer<E> action) const {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 			}
 			
 			/**
@@ -290,7 +289,7 @@ namespace Java {
 			 * @return Address of Iterator<E>
 			 */
 			Iterator<E> &iterator() const {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				Iterator<E> *it = new Iterator<E>();
 				return *it;
 			}
@@ -376,7 +375,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean removeAll(Collection<Object> target) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -387,7 +386,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean removeIf(Predicate<E> filter) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -398,7 +397,7 @@ namespace Java {
 			 * @param unaryOperator
 			 */
 			void replaceAll(UnaryOperator<E> unaryOperator) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 			}
 			
 			/**
@@ -409,7 +408,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean retainAll(Collection<Object> collection) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				return true;
 			}
 			
@@ -446,7 +445,7 @@ namespace Java {
 			 * @param cmp
 			 */
 			void sort(Comparator<E> cmp) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 			}
 			
 			/**
@@ -455,13 +454,13 @@ namespace Java {
 			 * @return Spliterator<E>
 			 */
 			Spliterator<E> &spliterator() const {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 				Spliterator<E> *spliterator = new Spliterator<E>();
 				return *spliterator;
 			}
 
 //            List<E> &subList(int fromIndex, int toIndex) const {
-//                // TODO
+//                // TODO(@nakhoadl): Stuff
 //                List<E> *list = new ArrayList<E>();
 //                return *list;
 //            }
@@ -491,7 +490,7 @@ namespace Java {
 //			 */
 //			template <class T>
 //			Array<T> &toArray(Array<T> array) const {
-//				// TODO
+//				// TODO(@nakhoadl): Stuff
 //				return array;
 //			}
 			
@@ -536,7 +535,7 @@ namespace Java {
 				return Object::hashCode();
 			}
 
-			// TODO: method instanceof not work
+            // TODO(@nakhoadl): Stuff
 //			boolean equals(const Object object) const {
 //				return true;
 //			}
@@ -576,7 +575,7 @@ namespace Java {
 			 * @param toIndex
 			 */
 			void removeRange(int fromIndex, int toIndex) {
-				// TODO
+                // TODO(@nakhoadl): Stuff
 			}
 		};
 		
@@ -585,7 +584,7 @@ namespace Java {
 		private:
 			AbstractList<E> l;
 		};
-	}
-}
+	} // namespace Util
+} // namespace Java
 
 #endif  // JAVA_UTIL_ARRAY_LIST_HPP_

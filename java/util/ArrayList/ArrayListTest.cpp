@@ -56,19 +56,22 @@ TEST(JavaUtil, ArrayListConstructor) {
 }
 
 TEST(JavaUtil, ArrayListDestructor) {
-	// Give a pointer ArrayList was allocated then delete this pointer - Should not leak memory
+	// Give a pointer ArrayList was allocated
+    // then delete this pointer - Should not leak memory
 	ArrayList<Integer> *intArray = new ArrayList<Integer>(10);
 	delete intArray;
 }
 
 TEST(JavaUtil, ArrayListSize) {
-	// Give an empty ArrayList then compare size of this list - Should equal
+	// Give an empty ArrayList
+    // then compare size of this list - Should equal
 	ArrayList<Integer> emptyArray;
 	int expect = 0;
 	int result = emptyArray.size();
 	ASSERT_EQUAL(expect, result);
 
-	// Give an valid ArrayList then compare size of this list - Should equal
+	// Give an valid ArrayList
+    // then compare size of this list - Should equal
 	int size = 10;
 	ArrayList<Integer> validArray(size);
 	expect = size;
@@ -77,7 +80,8 @@ TEST(JavaUtil, ArrayListSize) {
 }
 
 TEST(JavaUtil, ArrayListAdd) {
-	// Give an valid ArrayList then add one element - Should equal
+	// Give an valid ArrayList
+    // then add one element - Should equal
 	ArrayList<Integer> validArrayList = {1, 2, 3};
 	validArrayList.add(4);
 	int sizeExpect = 4;
