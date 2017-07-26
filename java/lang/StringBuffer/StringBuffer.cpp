@@ -336,6 +336,30 @@ StringBufferUnSafe::~StringBufferUnSafe() {
     free(this->original);
 }
 
+void StringBufferUnSafe::getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin) {
+    if (sourceBegin < 0 || destinationBegin < 0 || sourceBegin > sourceEnd
+        || (destinationBegin + sourceEnd - sourceEnd) > this->currentLength
+        || sourceEnd > this->currentLength ) {
+
+        throw IndexOutOfBoundsException();
+    }
+     // TODO need arrayCopy
+}
+
+int StringBufferUnSafe::indexOf(String str) {
+    return string_index(this->original, str.toString(), 1);
+}
+
+int StringBufferUnSafe::indexOf(String str, int fromIndex) {
+    int time = 0;
+    int indexOfString = 0;
+    do {
+        time++;
+        indexOfString = string_index(this->original, str.toString(), time);
+    } while (indexOfString < fromIndex && indexOfString != -1);
+    return indexOfString;
+}
+
 StringBuffer::StringBuffer() : StringBufferUnSafe() {
 
 }
@@ -494,4 +518,18 @@ int StringBuffer::length() {
 
 StringBuffer::~StringBuffer() {
 
+}
+
+void StringBuffer::getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin) {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::getChars(sourceBegin, sourceEnd, destination, destinationBegin);
+}
+
+int StringBuffer::indexOf(String str) {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::indexOf(str);
+}
+
+int StringBuffer::indexOf(String str, int fromIndex) {
+    return StringBufferUnSafe::indexOf(str, fromIndex);
 }

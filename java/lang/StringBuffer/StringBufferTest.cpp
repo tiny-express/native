@@ -530,7 +530,6 @@ TEST (JavaLang, StringBufferDelete) {
     catch (IndexOutOfBoundsException e) {
         ASSERT_STR("", e.getMessage().toString());
         ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
-
     }
 
     // Test startIndex greather than endIndex
@@ -541,4 +540,93 @@ TEST (JavaLang, StringBufferDelete) {
         ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
         ASSERT_STR("", e.getMessage().toString());
     }
+}
+
+/*
+TEST (JavaLang, StringBufferGetChar) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("StringBuffer");
+    // Destination string
+    string destinationString = (string)"Copy from : !!!";
+
+    // Test vaild param
+    string expectGetCharResult = (string)"Copy from : StringBuffer !!!";
+    stringBuffer.getChars(0, 12, destinationString, 11);
+    ASSERT_STR(expectGetCharResult, destinationString);
+
+    // Test negative sourceBegin
+    try {
+        stringBuffer.getChars(-1, 1, destinationString, 6);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectGetCharResult, destinationString);
+    }
+
+    // Test negative destinationBegin
+    try {
+        stringBuffer.getChars(1, 1, destinationString, -6);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectGetCharResult, destinationString);
+    }
+
+    // Test sourceBegin greater than sourceEnd
+    try {
+        stringBuffer.getChars(5, 1, destinationString, 6);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectGetCharResult, destinationString);
+    }
+
+    // Test sourceEnd greater than length
+    try {
+        stringBuffer.getChars(1, stringBuffer.length() + 1, destinationString, 6);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectGetCharResult, destinationString);
+    }
+
+    // Test destinationBegin + sourceEnd - sourceBegin greater than destination.length
+    try {
+        stringBuffer.getChars(1, 10, destinationString, 6);
+    }
+    catch (IndexOutOfBoundsException e) {
+        ASSERT_STR(expectGetCharResult, destinationString);
+    }
+}*/
+
+TEST (JavaLang, StringBufferIndexOf) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+    // Given 2 subString
+    String isSubString = "is a";
+    String notSubString = "is not";
+
+    // Test isSubString
+    int expectIsSubStringResult = 5;
+    int actualIsSubStringResult = stringBuffer.indexOf(isSubString);
+    ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+
+    // Test notSubString
+    int expectNotSubStringResult = -1;
+    int actualNotSubStringResult = stringBuffer.indexOf(notSubString);
+    ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+}
+
+TEST (JavaLang, StringBufferIndexOfFromIndex) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer");
+    // Given 2 subString
+    String isSubString = "is a";
+    String notSubString = "is not";
+
+    // Test isSubString
+    int expectIsSubStringResult = 29;
+    int actualIsSubStringResult = stringBuffer.indexOf(isSubString, 10);
+    ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+
+    // Test notSubString
+    int expectNotSubStringResult = -1;
+    int actualNotSubStringResult = stringBuffer.indexOf(notSubString, 10);
+    ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }

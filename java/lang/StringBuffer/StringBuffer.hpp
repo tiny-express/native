@@ -38,9 +38,9 @@ namespace Java {
             int currentCapacity = 0;
 
         private:
-            //void readObject(ObjectInputStream);
-
-            //void writeObject(ObjectOutputStream);
+             //void readObject(ObjectInputStream);
+             //virtual void hideClass() = 0;
+             //void writeObject(ObjectOutputStream);
 
         public:
 
@@ -293,7 +293,21 @@ namespace Java {
              */
             void ensureCapacity(int minimumCapacity);
 
-            void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
+            /**
+             * Characters are copied from this sequence into the destination character array.
+             *
+             * @param sourceBegin
+             * @param sourceEnd
+             * @param destination
+             * @param destinationBegin
+             * @throw IndexOutOfBoundsException - if :
+             * sourceBegin is negative
+             * destinationBegin is negative
+             * the sourceBegin argument is greater than the sourceEnd argument.
+             * sourceEnd is greater than this.length().
+             * destinationBegin+sourceEnd-sourceBegin is greater than dst.length
+             */
+            void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
 
             /**
              * Return the string value of this StringBuffer
@@ -302,8 +316,25 @@ namespace Java {
              */
             string getValue();
 
+            /**
+             * Returns the index within this string of the first occurrence of the specified substring.
+             * The integer returned is the smallest value
+             *
+             * @param str
+             * @return the index of the first character of the first such substring is returned;
+             * if it does not occur as a substring, -1 is returned.
+             */
             int indexOf(String str);
 
+            /**
+             * Returns the index within this string of the first occurrence of the specified substring,
+             * starting at the specified index. The integer returned is the smallest value
+             *
+             * @param str
+             * @param fromIndex
+             * @return the index within this string of the first occurrence of the specified substring,
+             * starting at the specified index. -1 if str is not a substring
+             */
             int indexOf(String str, int fromIndex);
 
             StringBufferUnSafe insert(int offset, float floatValue);
@@ -358,6 +389,13 @@ namespace Java {
 
             StringBufferUnSafe reverse();
 
+            /**
+             * Set the character at the specified index to charValue.
+             *
+             * @param index
+             * @param charValue
+             * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
+             */
             void setCharAt(int index, char charValue);
 
             void setLength(int newLength);
@@ -446,7 +484,7 @@ namespace Java {
 
             void ensureCapacity(int minimumCapacity);
 
-            void getChars(int srcBegin, int srcEnd, string dts, int dstBgin);
+            void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
 
             string getValue();
 
