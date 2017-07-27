@@ -283,12 +283,11 @@ int StringBufferUnSafe::codePointCount(int beginIndex, int endIndex) {
 
 StringBufferUnSafe StringBufferUnSafe::deletes(int start, int end) {
     if (start < 0) {
-        throw IndexOutOfBoundsException("index must be positive");
-
+        throw StringIndexOutOfBoundsException("index must be positive");
     }
 
     if (start > end || start > this->currentLength) {
-        throw IndexOutOfBoundsException();
+        throw StringIndexOutOfBoundsException();
     }
 
     if (start == end || start == currentLength) {
@@ -315,11 +314,11 @@ StringBufferUnSafe StringBufferUnSafe::deletes(int start, int end) {
 
 StringBufferUnSafe StringBufferUnSafe::deleteCharAt(int index) {
     if (index < 0) {
-        throw IndexOutOfBoundsException("index must be positive");
+        throw StringIndexOutOfBoundsException("index must be positive");
     }
 
     if (index >= currentLength) {
-        throw IndexOutOfBoundsException();
+        throw StringIndexOutOfBoundsException();
     }
 
     // move block of memory from index + 1 to index
@@ -366,8 +365,12 @@ StringBufferUnSafe StringBufferUnSafe::insert(int offset, float floatValue) {
 }
 
 StringBufferUnSafe StringBufferUnSafe::insert(int offset, CharSequence *charSequence) {
+    if (offset < 0) {
+        throw IndexOutOfBoundsException("offset must be positive");
+    }
+
     if (charSequence == nullptr) {
-        return this->insert(offset, "null", 0, 4);
+        return this->insert(offset, const_cast<string>("null"), 0, 4);
     }
 
     return this->insert(offset, charSequence->toString(), 0, charSequence->length());
@@ -378,7 +381,7 @@ StringBufferUnSafe StringBufferUnSafe::insert(int offset, boolean boolValue) {
         return this->insert(offset, const_cast<string>("true"), 0, 4);
     }
 
-    return this->insert(offset, "false", 0, 5);
+    return this->insert(offset, const_cast<string>("false"), 0, 5);
 }
 
 StringBufferUnSafe StringBufferUnSafe::insert(int offset, string str) {
@@ -401,7 +404,7 @@ StringBufferUnSafe StringBufferUnSafe::insert(int offset, long longValue) {
 
 StringBufferUnSafe StringBufferUnSafe::insert(int offset, Object *obj) {
     if (obj == nullptr) {
-        return this->insert(offset, "null", 0, 4);
+        return this->insert(offset, const_cast<string>("null"), 0, 4);
     }
 
     return this->insert(offset, obj->toString(), 0, length_pointer_char(obj->toString()));
@@ -418,11 +421,46 @@ StringBufferUnSafe StringBufferUnSafe::insert(int offset, double doubleValue) {
 }
 
 StringBufferUnSafe StringBufferUnSafe::insert(int dstOffset, CharSequence *seq, int start, int end) {
+
+    if (dstOffset < 0) {
+        throw IndexOutOfBoundsException("offset must be positive");
+    }
+
     if (seq == nullptr) {
-        return this->insert(dstOffset, seq->toString(), start, end - start);
+        return this->insert(dstOffset, const_cast<string>("null"), 0, 4);
+    }
+
+    if (dstOffset > this->currentLength || start < 0 || end < 0
+            || start > end || end > seq->length()) {
+
+        throw IndexOutOfBoundsException();
     }
 
     return this->insert(dstOffset, seq->toString(), start, end - start);
+}
+
+int StringBufferUnSafe::lastIndexOf(String str) {
+    int time = 0;
+    int index = -1;
+    int lastIndex;
+    do {
+        time++;
+        lastIndex = index;
+        index = string_index(this->original, str.toString(), time);
+    } while (index != -1);
+    return lastIndex;
+}
+
+int StringBufferUnSafe::lastIndexOf(String str, int fromIndex) {
+    int time = 0;
+    int index = -1;
+    int lastIndex;
+    do {
+        time++;
+        lastIndex = index;
+        index = string_index(this->original, str.toString(), time);
+    } while (index != -1 && index <= fromIndex);
+    return lastIndex;
 }
 
 
@@ -670,4 +708,12 @@ StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
     std::lock_guard<std::mutex> guard(mutex);
     StringBufferUnSafe::insert(index, str, offset, len);
     return *this;
+}
+
+int StringBuffer::lastIndexOf(String str) {
+    return StringBufferUnSafe::lastIndexOf(str);
+}
+
+int StringBuffer::lastIndexOf(String str, int fromIndex) {
+    return StringBufferUnSafe::lastIndexOf(str, fromIndex);
 }

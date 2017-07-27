@@ -178,7 +178,7 @@ namespace Java {
              * @param offset
              * @param len
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
-             * @return
+             * @return reference to this StringBuffer
              */
             StringBufferUnSafe append(string str, int offset, int len);
 
@@ -348,24 +348,134 @@ namespace Java {
              */
             StringBufferUnSafe insert(int offset, float floatValue);
 
+            /**
+             * Inserts the specified CharSequence into this sequence.
+             * The characters of the CharSequence argument are inserted, in order,
+             * into this sequence at the indicated offset, moving up any characters originally above that position
+             * If charSequence is null, then the four characters "null" are inserted into this sequence.
+             *
+             * @param offset
+             * @param charSequence
+             * @throw IndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, CharSequence *charSequence);
 
+            /**
+             * Inserts the string representation of the bool argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param boolValue
+             * @throw IndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, boolean boolValue);
 
+            /**
+             * Inserts the string representation of the char array argument into this sequence.
+             * The characters of the array argument are inserted into the contents of this sequence
+             * at the position indicated by offset.
+             * The length of this sequence increases by the length of the argument.
+             *
+             * @param offset
+             * @param str
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, string str);
 
+            /**
+             * Inserts the string representation of the char argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param charValue
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, char charValue);
 
+            /**
+             * Inserts the string into this character sequence.
+             * The characters of the String argument are inserted, in order,
+             * into this sequence at the indicated offset, moving up any
+             * characters originally above that position and increasing
+             * the length of this sequence by the length of the argument.
+             * If str is null, then the four characters "null" are inserted into this sequence.
+             *
+             * @param offset
+             * @param str
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, String str);
 
+            /**
+             * Inserts the string representation of the long argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param longValue
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, long longValue);
 
+            /**
+             * Inserts the string representation of the Object argument into this character sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param obj
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, Object *obj);
 
+            /**
+             * Inserts the string representation of the int argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param intValue
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, int intValue);
 
+            /**
+             * Inserts the string representation of the double argument into this sequence.
+             * The offset argument must be greater than or equal to 0,
+             * and less than or equal to the length of this sequence.
+             *
+             * @param offset
+             * @param doubleValue
+             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int offset, double doubleValue);
 
+            /**
+             *  The subsequence of the argument s specified by start and end are inserted, in order, into this sequence
+             * at the specified destination offset, moving up any characters originally above that position.
+             * The dstOffset argument must be greater than or equal to 0, and less than or equal to the length of this sequence.
+             * The start argument must be nonnegative, and not greater than end.
+             * The end argument must be greater than or equal to start, and less than or equal to the length of s.
+             * If s is null, four characters "null" will be inserted
+             *
+             * @param dstOffset
+             * @param seq
+             * @param start
+             * @param end
+             * @throw IndexOutOfBoundsException - if the offset is invalid.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe insert(int dstOffset, CharSequence *seq, int start, int end);
 
             /**
@@ -379,16 +489,36 @@ namespace Java {
              * @param len
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
              * or offset or len are negative, or (offset+len) is greater than str.length.
-             * @return
+             * @return a reference to this StringBuffer
              */
+
             StringBufferUnSafe insert(int index, string str, int offset, int len);
 
+            /**
+             * Returns the index within this string of the rightmost occurrence of the specified substring.
+             * The rightmost empty string "" is considered to occur at the index value this.length(). T
+             * he returned index is the largest value
+             * If no such value of k exists, then -1 is returned.
+             *
+             * @param str
+             * @return Returns the index within this string of the rightmost occurrence of the specified substring.
+             */
             int lastIndexOf(String str);
 
+            /**
+             * Returns the index within this string of the last occurrence of the specified substring.
+             * The integer returned is the largest value
+             * If no such value of k exists, then -1 is returned.
+             *
+             * @param str
+             * @param fromIndex
+             * @return Returns the index within this string of the rightmost occurrence of
+             * the specified substring start fromIndex
+             */
             int lastIndexOf(String str, int fromIndex);
 
             /**
-             * Return the current munber of used char of this sequence
+             * Return the current number of used char of this sequence
              *
              * @return int
              */

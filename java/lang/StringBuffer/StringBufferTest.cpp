@@ -591,7 +591,7 @@ TEST (JavaLang, StringBufferDeleteCharAt) {
     try {
         stringBuffer.deleteCharAt(-1);
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
         ASSERT_STR("index must be positive", e.getMessage().toString());
     }
@@ -600,7 +600,7 @@ TEST (JavaLang, StringBufferDeleteCharAt) {
     try {
         stringBuffer.deleteCharAt(stringBuffer.length());
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
     }
 
@@ -608,7 +608,7 @@ TEST (JavaLang, StringBufferDeleteCharAt) {
     try {
         stringBuffer.deleteCharAt(stringBuffer.length() + 1);
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR(expectDeleteCharResult, stringBuffer.getValue());
     }
 }
@@ -638,7 +638,7 @@ TEST (JavaLang, StringBufferDelete) {
     try {
         stringBuffer.deletes(-1, 9);
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR("index must be positive", e.getMessage().toString());
         ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
     }
@@ -647,7 +647,7 @@ TEST (JavaLang, StringBufferDelete) {
     try {
         stringBuffer.deletes(7, 10);
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR("", e.getMessage().toString());
         ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
     }
@@ -656,7 +656,7 @@ TEST (JavaLang, StringBufferDelete) {
     try {
         stringBuffer.deletes(5, 1);
     }
-    catch (IndexOutOfBoundsException &e) {
+    catch (StringIndexOutOfBoundsException &e) {
         ASSERT_STR(expectEndGreaterThanLengthResult, stringBuffer.getValue());
         ASSERT_STR("", e.getMessage().toString());
     }
@@ -748,5 +748,46 @@ TEST (JavaLang, StringBufferIndexOfFromIndex) {
     // Test notSubString
     int expectNotSubStringResult = -1;
     int actualNotSubStringResult = stringBuffer.indexOf(notSubString, 10);
+    ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+}
+
+TEST (JavaLang, StringBufferLastIndexOf) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
+    // Given 2 subString
+    String isSubString = "is a";
+    String notSubString = "is not";
+
+    // Test isSubString
+    int expectIsSubStringResult = 53;
+    int actualIsSubStringResult = stringBuffer.lastIndexOf(isSubString);
+    ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+
+    // Test notSubString
+    int expectNotSubStringResult = -1;
+    int actualNotSubStringResult = stringBuffer.lastIndexOf(notSubString);
+    ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+}
+
+TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
+    // Given 2 subString
+    String isSubString = "is a";
+    String notSubString = "is not";
+
+    // Test isSubString
+    int expectIsSubStringFromIndexResult = 29;
+    int actualIsSubStringFromIndexResult = stringBuffer.lastIndexOf(isSubString, 29);
+    ASSERT_EQUAL(expectIsSubStringFromIndexResult, actualIsSubStringFromIndexResult);
+
+    // Test isSubString
+    int expectNotSubStringFromIndexResult = -1;
+    int actualNotSubStringFromIndexResult = stringBuffer.lastIndexOf(isSubString, 4);
+    ASSERT_EQUAL(expectNotSubStringFromIndexResult, actualNotSubStringFromIndexResult);
+
+    // Test notSubString
+    int expectNotSubStringResult = -1;
+    int actualNotSubStringResult = stringBuffer.lastIndexOf(notSubString, 30);
     ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
