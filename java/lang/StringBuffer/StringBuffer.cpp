@@ -499,6 +499,115 @@ StringBufferUnSafe StringBufferUnSafe::replace(int start, int end, String str) {
     return *this;
 }
 
+StringBufferUnSafe StringBufferUnSafe::reverse() {
+    boolean hasSurrogates = false;
+    int index;
+    int oppositeIndex;
+    int stopIndex = this->currentLength / 2;
+    char temp;
+    for (index = 0; index < stopIndex; index++) {
+        oppositeIndex = (this->currentLength - 1) - index;
+        temp = this->original[index];
+        this->original[index] = this->original[oppositeIndex];
+        this->original[oppositeIndex] = temp;
+        if (Character::isSurrogate((this->original[index])) || Character::isSurrogate(this->original[oppositeIndex])) {
+            hasSurrogates = true;
+        }
+    }
+    if (hasSurrogates) {
+        stopIndex = this->currentLength - 1;
+        index;
+        char ch1;
+        char ch2;
+        for (index = 0; index < stopIndex; index++) {
+            ch2 = this->original[index];
+            if (Character::isLowSurrogate(ch2)) {
+                ch1 = this->original[index + 1];
+                if (Character::isHighSurrogate(ch1)) {
+                    this->original[index] = ch1;
+                    index = index + 1;
+                    this->original[index] = ch2;
+                }
+            }
+        }
+    }
+    return *this;
+}
+
+void StringBufferUnSafe::setCharAt(int index, char charValue) {
+    if (index < 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+    }
+    if (index >= this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+
+    this->original[index] = charValue;
+}
+
+void StringBufferUnSafe::setLength(int newLength) {
+    if (newLength < 0) {
+        throw IndexOutOfBoundsException("newLength must be positive");
+    }
+
+    int oldLength = this->currentLength;
+    if (newLength > this->currentLength) {
+        ensureCapacity(newLength);
+        for (oldLength; oldLength <= newLength; oldLength++) {
+            this->original[oldLength] = '\0';
+        }
+    } else {
+        for (oldLength; oldLength >= newLength; oldLength--) {
+            this->original[oldLength] = '\0';
+        }
+    }
+    this->currentLength = newLength;
+}
+
+CharSequence *StringBufferUnSafe::subSequence(int start, int end) {
+    if (start < 0 || end < 0) {
+        throw IndexOutOfBoundsException("start and end must be positive");
+    }
+
+    if (start >= this->currentLength || end > this->currentLength || start > end) {
+        throw IndexOutOfBoundsException();
+    }
+
+    String *result = new String(this->subString(start, end));
+    return result;
+}
+
+String StringBufferUnSafe::subString(int start) {
+    return this->subString(start, this->currentLength);
+}
+
+String StringBufferUnSafe::subString(int start, int end) {
+    if (start < 0 || end < 0) {
+        throw StringIndexOutOfBoundsException("start and end must be positive");
+    }
+
+    if (start >= this->currentLength || end > this->currentLength || start > end) {
+        throw StringIndexOutOfBoundsException();
+    }
+
+    std::string string(this->original);
+    string = string.substr(start, end - start);
+    String result = String(string.c_str());
+    return result;
+}
+
+String StringBufferUnSafe::toString() {
+    return String(this->original);
+}
+
+void StringBufferUnSafe::trimToSize() {
+    if (this->currentCapacity > this->currentLength) {
+        int newSize = this->currentLength * sizeof(char);
+        this->original = (string)realloc(this->original, (size_t)newSize);
+        this->currentCapacity = this->currentLength;
+    }
+}
+
 
 // StringBuffer
 StringBuffer::StringBuffer() : StringBufferUnSafe() {
@@ -765,4 +874,45 @@ StringBuffer StringBuffer::replace(int start, int end, String str) {
     std::lock_guard<std::mutex> guard(mutex);
     StringBufferUnSafe::replace(start, end, str);
     return *this;
+}
+
+StringBuffer StringBuffer::reverse() {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::reverse();
+    return *this;
+}
+
+void StringBuffer::setCharAt(int index, char charValue) {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::setCharAt(index, charValue);
+}
+
+void StringBuffer::setLength(int newLength) {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::setLength(newLength);
+}
+
+CharSequence *StringBuffer::subSequence(int start, int end) {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::subSequence(start, end);
+}
+
+String StringBuffer::subString(int start) {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::subString(start);
+}
+
+String StringBuffer::subString(int start, int end) {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::subString(start, end);
+}
+
+String StringBuffer::toString() {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::toString();
+}
+
+void StringBuffer::trimToSize() {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::trimToSize();
 }

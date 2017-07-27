@@ -462,11 +462,11 @@ namespace Java {
             StringBufferUnSafe insert(int offset, double doubleValue);
 
             /**
-             *  The subsequence of the argument s specified by start and end are inserted, in order, into this sequence
+             * The subsequence of the argument s specified by start and end are inserted, in order, into this sequence
              * at the specified destination offset, moving up any characters originally above that position.
-             * The dstOffset argument must be greater than or equal to 0, and less than or equal to the length of this sequence.
+             * The dstOffset argument must be greater than or equal to 0, and less than or equal to length
              * The start argument must be nonnegative, and not greater than end.
-             * The end argument must be greater than or equal to start, and less than or equal to the length of s.
+             * The end argument must be greater than or equal to start, and less than or equal to the length of seq.
              * If s is null, four characters "null" will be inserted
              *
              * @param dstOffset
@@ -549,6 +549,13 @@ namespace Java {
              */
             StringBufferUnSafe replace(int start, int end, String str);
 
+            /**
+             * Causes this character sequence to be replaced by the reverse of the sequence.
+             * If there are any surrogate pairs included in the sequence,
+             * these are treated as single characters for the reverse operation.
+             *
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe reverse();
 
             /**
@@ -560,16 +567,64 @@ namespace Java {
              */
             void setCharAt(int index, char charValue);
 
+            /**
+             * Sets the length of the character sequence.
+             * The sequence is changed to a new character sequence whose length is specified by the argument.
+             *
+             * @param newLength
+             */
             void setLength(int newLength);
 
+            /**
+             * Returns a new character sequence that is a subsequence of this sequence.
+             * An invocation of this method of the form
+             *
+             * @param start
+             * @param end
+             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(),
+             * or if start is greater than end
+             * @return the specified subsequence.
+             */
             CharSequence *subSequence(int start, int end);
 
+            /**
+             * Returns a new String that contains a subsequence of characters currently
+             * contained in this character sequence. The substring begins at the specified i
+             * ndex and extends to the end of this sequence.
+             *
+             * @param start
+             * @throw StringIndexOutOfBoundsException - if start is less than zero,
+             * or greater than the length of this object.
+             * @return the specified String
+             */
             String subString(int start);
 
+            /**
+             * Returns a new String that contains a subsequence of characters currently contained in this sequence.
+             * The substring begins at the specified start and extends to the character at index end - 1.
+             *
+             * @param start
+             * @param end
+             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(),
+             * or start is greater than end.
+             * @return
+             */
             String subString(int start, int end);
 
+            /**
+             * Returns a string representing the data in this sequence.
+             * A new String object is allocated and initialized to contain the character represented by this object.
+             *
+             * @return a string representing the data in this sequence
+             */
             String toString();
 
+            /**
+             * Attempts to reduce storage used for the character sequence.
+             * If the buffer is larger than necessary to hold its current sequence of characters,
+             * then it may be resized to become more space efficient.
+             *
+             */
             void trimToSize();
 
             /**

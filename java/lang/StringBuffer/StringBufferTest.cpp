@@ -874,3 +874,214 @@ TEST (JavaLang, StringBufferReplace) {
         ASSERT_STR(expectNotChangeResult, stringBuffer.getValue());
     }
 }
+
+TEST (JavaLang, StringBufferReverse) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+
+    // Test nomal string
+    stringBuffer.reverse();
+    string expectNomalStringReverse = const_cast<string>("HGFEDCBA");
+    ASSERT_STR(expectNomalStringReverse, stringBuffer.getValue());
+
+    /*// Test surrogate string
+    StringBuffer surrogateStringBuffer = StringBuffer("\u000DC00\u000D800");
+    surrogateStringBuffer.reverse();
+    string expectSurrogateStringReverse = const_cast<string>("\u000D800\u000DC00");
+    ASSERT_STR(expectSurrogateStringReverse, surrogateStringBuffer.getValue());*/
+}
+
+TEST (JavaLang, StringBufferSetCharAt) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+
+    // Test vaild index
+    stringBuffer.setCharAt(3, 'd');
+    string expectSetCharAtResult = const_cast<string>("ABCdEFGH");
+    ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+
+    // Test negative Index
+    try {
+        stringBuffer.setCharAt(-1, 'd');
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
+
+    // Test index greater than length
+    try {
+        stringBuffer.setCharAt(stringBuffer.length() + 1, 'd');
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test index equal to length
+    try {
+        stringBuffer.setCharAt(stringBuffer.length(), 'd');
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferSetLength) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+
+    // Test new length < current length
+    stringBuffer.setLength(6);
+    string expectSetCharAtResult = const_cast<string>("ABCDEF");
+    ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+
+    // Test new length < current length
+    stringBuffer.setLength(10);
+    ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+
+    // Test negative newLength
+    try {
+        stringBuffer.setLength(-1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSetCharAtResult, stringBuffer.getValue());
+        ASSERT_STR("newLength must be positive", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferSubString) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+
+    // Test valid param
+    string expectSubStringResult = const_cast<string>("a String");
+    String result = stringBuffer.subString(8, 16);
+    ASSERT_STR(expectSubStringResult, result.toString());
+
+    // Test negative start
+    try {
+        result = stringBuffer.subString(-1, 16);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result.toString());
+        ASSERT_STR("start and end must be positive", e.getMessage().toString());
+    }
+
+    // Test negative end
+    try {
+        result = stringBuffer.subString(8, -15);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result.toString());
+        ASSERT_STR("start and end must be positive", e.getMessage().toString());
+    }
+
+    // Test start greater than length
+    try {
+        result = stringBuffer.subString(stringBuffer.length() + 1, 15);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result.toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test end greater than length
+    try {
+        result = stringBuffer.subString(1, stringBuffer.length() + 1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result.toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start greater than end
+    try {
+        result = stringBuffer.subString(10, 7);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result.toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test subString(start)
+    string expectSubStringStartResult = const_cast<string>("a StringBuffer");
+    result = stringBuffer.subString(8);
+    ASSERT_STR(expectSubStringStartResult, result.toString());
+}
+
+TEST (JavaLang, StringBufferSubSequence) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+
+    // Test valid param
+    string expectSubStringResult = const_cast<string>("a String");
+    CharSequence *result = stringBuffer.subSequence(8, 16);
+    ASSERT_STR(expectSubStringResult, result->toString());
+
+  /*  // Test negative start
+    try {
+        result = stringBuffer.subSequence(-1, 16);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result->toString());
+        ASSERT_STR("start and end must be positive", e.getMessage().toString());
+    }
+
+    // Test negative end
+    try {
+        result = stringBuffer.subSequence(8, -15);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result->toString());
+        ASSERT_STR("start and end must be positive", e.getMessage().toString());
+    }
+
+    // Test start greater than length
+    try {
+        result = stringBuffer.subSequence(stringBuffer.length() + 1, 15);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result->toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test end greater than length
+    try {
+        result = stringBuffer.subSequence(1, stringBuffer.length() + 1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result->toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start greater than end
+    try {
+        result = stringBuffer.subSequence(10, 7);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectSubStringResult, result->toString());
+        ASSERT_STR("", e.getMessage().toString());
+    }*/
+    String *charSequenceString = dynamic_cast<String *>(result);
+    delete charSequenceString;
+}
+
+TEST (JavaLang, StringBufferToString) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+    string expectSubStringResult = const_cast<string>("This is a StringBuffer");
+    String result = stringBuffer.toString();
+    ASSERT_STR(expectSubStringResult, result.toString());
+}
+
+TEST (JavaLang, StringBufferTrimToSize) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer(50);
+    string stringToAppend = const_cast<string>("This is a StringBuffer");
+    stringBuffer.append(stringToAppend);
+    int expectCapacity = 22;
+    stringBuffer.trimToSize();
+    ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
+}
