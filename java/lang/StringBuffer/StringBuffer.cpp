@@ -294,7 +294,7 @@ StringBufferUnSafe StringBufferUnSafe::deletes(int start, int end) {
         return *this;
     }
 
-    char *fromPosition;
+    string fromPosition;
     int memorySizeToMove;
 
     if (end > this->currentLength) {
@@ -307,7 +307,7 @@ StringBufferUnSafe StringBufferUnSafe::deletes(int start, int end) {
         this->currentLength -= (end - start);
     }
 
-    char *toPosition = this->original + start;
+    string toPosition = this->original + start;
     memmove(toPosition, fromPosition, (size_t) memorySizeToMove);
     return *this;
 }
@@ -322,8 +322,8 @@ StringBufferUnSafe StringBufferUnSafe::deleteCharAt(int index) {
     }
 
     // move block of memory from index + 1 to index
-    char *fromPosition = this->original + index + 1;
-    char *toPosition = this->original + index;
+    string fromPosition = this->original + index + 1;
+    string toPosition = this->original + index;
     int memorySizeToMove = (this->currentLength - index) * sizeof(char);
     memmove(toPosition, fromPosition, (size_t) memorySizeToMove);
     this->currentLength--;
@@ -461,6 +461,42 @@ int StringBufferUnSafe::lastIndexOf(String str, int fromIndex) {
         index = string_index(this->original, str.toString(), time);
     } while (index != -1 && index <= fromIndex);
     return lastIndex;
+}
+
+int StringBufferUnSafe::offsetByCodePoints(int index, int codePointOffset) {
+    if (index < 0 || index > this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+    // TODO need Character::offsetByCodePoints
+    // return Character::offsetByCodePoints(this->original, 0, this->currentLength, index, codePointOffset);
+    return 0;
+}
+
+StringBufferUnSafe StringBufferUnSafe::replace(int start, int end, String str) {
+    if (start < 0) {
+        throw StringIndexOutOfBoundsException("start must be positive");
+    }
+    if (start > this->currentLength || start > end) {
+        throw StringIndexOutOfBoundsException();
+    }
+
+    if (end > this->currentLength) {
+        end = this->currentLength;
+    }
+
+    int newLength = currentLength + str.length() - end + start;
+    ensureCapacity(newLength);
+    this->currentLength = newLength;
+
+    string fromPosition = this->original + end;
+    string toPosition = this->original + start +str.length();
+    int memorySizeToMove = str.length() * sizeof(char);
+    memmove(toPosition, fromPosition, static_cast<size_t>(memorySizeToMove));
+
+    string insertPosition = this->original + start;
+    memcpy(insertPosition, str.toString(), static_cast<size_t>(memorySizeToMove));
+
+    return *this;
 }
 
 
@@ -711,9 +747,22 @@ StringBuffer StringBuffer::insert(int index, string str, int offset, int len) {
 }
 
 int StringBuffer::lastIndexOf(String str) {
+    std::lock_guard<std::mutex> guard(mutex);
     return StringBufferUnSafe::lastIndexOf(str);
 }
 
 int StringBuffer::lastIndexOf(String str, int fromIndex) {
+    std::lock_guard<std::mutex> guard(mutex);
     return StringBufferUnSafe::lastIndexOf(str, fromIndex);
+}
+
+int StringBuffer::offsetByCodePoints(int index, int codePointOffset) {
+    std::lock_guard<std::mutex> guard(mutex);
+    return StringBufferUnSafe::offsetByCodePoints(index, codePointOffset);
+}
+
+StringBuffer StringBuffer::replace(int start, int end, String str) {
+    std::lock_guard<std::mutex> guard(mutex);
+    StringBufferUnSafe::replace(start, end, str);
+    return *this;
 }

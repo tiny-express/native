@@ -791,3 +791,86 @@ TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
     int actualNotSubStringResult = stringBuffer.lastIndexOf(notSubString, 30);
     ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
+
+TEST (JavaLang, StringBufferOffSetByCodePoint) {
+    // Given a StringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a string buffer");
+
+    // Test vaild param
+    int expectOffsetByCodePointsReault = 0; // 5
+    int actualOffsetByCodePointsResult = stringBuffer.offsetByCodePoints(1, 4);
+    ASSERT_EQUAL(expectOffsetByCodePointsReault, actualOffsetByCodePointsResult);
+
+    // Test index < 0
+    try {
+        int negativeIndexResult = stringBuffer.offsetByCodePoints(-1, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test index > length()
+    try {
+        int greaterThanLengthIndexResult = stringBuffer.offsetByCodePoints(stringBuffer.length() + 1, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+}
+
+TEST (JavaLang, StringBufferReplace) {
+    // Given a stringBuffer
+    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+
+    // Given a string
+    String stringToReplace = const_cast<string>("Butter");
+
+    // Test vaild param
+    string expectReplaceResult = const_cast<string>("This is a StringButter");
+    stringBuffer.replace(16, 22, stringToReplace);
+    ASSERT_STR(expectReplaceResult, stringBuffer.getValue());
+
+    // Test end greater than length
+    string expectEndGreaterThanLength = const_cast<string>("This is a StringButButter");
+    stringBuffer.replace(19, 30, stringToReplace);
+    ASSERT_STR(expectEndGreaterThanLength, stringBuffer.getValue());
+
+    // Test end - start > str length
+    string expectReplaceRangeGreaterThanStringLength = const_cast<string>("This is a StringButter");
+    stringBuffer.replace(16, 25, stringToReplace);
+    ASSERT_STR(expectReplaceRangeGreaterThanStringLength, stringBuffer.getValue());
+
+    // Test end - start < str length
+    string expectReplaceRangeSmallerThanStringLength = const_cast<string>("This is a StringButterutter");
+    stringBuffer.replace(16, 17, stringToReplace);
+    ASSERT_STR(expectReplaceRangeSmallerThanStringLength, stringBuffer.getValue());
+
+    string expectNotChangeResult = const_cast<string>("This is a StringButterutter");
+
+    // Test negative start
+    try {
+        stringBuffer.replace(-1, 10, stringToReplace);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("start must be positive", e.getMessage().toString());
+        ASSERT_STR(expectNotChangeResult, stringBuffer.getValue());
+    }
+
+    // Test start greater than length
+    try {
+        stringBuffer.replace(stringBuffer.length() + 1, 10, stringToReplace);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+        ASSERT_STR(expectNotChangeResult, stringBuffer.getValue());
+    }
+
+    // Test start greater than end
+    try {
+        stringBuffer.replace(10, 1, stringToReplace);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+        ASSERT_STR(expectNotChangeResult, stringBuffer.getValue());
+    }
+}

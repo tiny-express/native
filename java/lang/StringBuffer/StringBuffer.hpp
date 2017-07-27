@@ -524,8 +524,29 @@ namespace Java {
              */
             int length();
 
+            /**
+             * Returns the index within this sequence that is offset from the given index by codePointOffset code points.
+             * Unpaired surrogates within the text range given by index and codePointOffset count as one code point each.
+             *
+             * @param index
+             * @param codePointOffset
+             * @throw IndexOutOfBoundsException
+             * @return the index within this sequence
+             */
             int offsetByCodePoints(int index, int codePointOffset);
 
+            /**
+             * Replaces the characters in a substring of this sequence with characters in the specified String.
+             * The substring begins at the specified start and extends to the character at index end - 1
+             * or to the end of the sequence if no such character exists. First the characters in the substring
+             * are removed and then the specified String is inserted at start.
+             *
+             * @param start
+             * @param end
+             * @param str
+             * @throw StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
+             * @return a reference to this StringBuffer
+             */
             StringBufferUnSafe replace(int start, int end, String str);
 
             StringBufferUnSafe reverse();
