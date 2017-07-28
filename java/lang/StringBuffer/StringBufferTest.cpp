@@ -663,6 +663,7 @@ TEST (JavaLang, StringBufferDelete) {
     }
 }
 
+// TODO need getChar
 /*
 TEST (JavaLang, StringBufferGetChar) {
     // Given a StringBuffer
@@ -885,6 +886,7 @@ TEST (JavaLang, StringBufferReverse) {
     string expectNomalStringReverse = const_cast<string>("HGFEDCBA");
     ASSERT_STR(expectNomalStringReverse, stringBuffer.getValue());
 
+    // TODO handle surrogate as one char
     /*// Test surrogate string
     StringBuffer surrogateStringBuffer = StringBuffer("\u000DC00\u000D800");
     surrogateStringBuffer.reverse();
@@ -1012,6 +1014,7 @@ TEST (JavaLang, StringBufferSubString) {
     ASSERT_STR(expectSubStringStartResult, result.toString());
 }
 
+// TODO need subSequence
 /*TEST (JavaLang, StringBufferSubSequence) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");

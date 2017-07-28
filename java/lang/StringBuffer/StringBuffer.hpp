@@ -38,8 +38,11 @@ namespace Java {
             int currentCapacity = 0;
 
         private:
-             // void readObject(ObjectInputStream);
-             // void writeObject(ObjectOutputStream);
+            // TODO need ObjectInputStream
+            // void readObject(ObjectInputStream);
+
+            // TODO need ObjectOutPutStream
+            // void writeObject(ObjectOutputStream);
 
         public:
 
@@ -222,6 +225,7 @@ namespace Java {
              */
             char charAt(int index);
 
+            // TODO need IntStream
             // IntStream codePoint();
 
             /**
@@ -306,6 +310,7 @@ namespace Java {
              * sourceEnd is greater than this.length().
              * destinationBegin+sourceEnd-sourceBegin is greater than dst.length
              */
+            // TODO need arrayCopy
             // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
 
             /**
@@ -639,7 +644,7 @@ namespace Java {
         class StringBuffer : public StringBufferUnSafe{
         private:
             std::mutex mutex;
-            // StringBufferUnSafe stringBufferUnSafe;
+
         public:
             /**
              * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
@@ -691,8 +696,6 @@ namespace Java {
              * @return reference to this StringBuffer
              */
             StringBuffer append(float floatValue);
-
-            // StringBuffer append(AbstractStringBuilder abs);
 
             /**
              * Appends the string representation of the char array argument to this sequence.
@@ -818,6 +821,7 @@ namespace Java {
              */
             char charAt(int index);
 
+            // TODO need IntStream
             // IntStream codePoint();
 
             /**
@@ -904,7 +908,8 @@ namespace Java {
              * sourceEnd is greater than this.length().
              * destinationBegin+sourceEnd-sourceBegin is greater than dst.length
              */
-            void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
+            // TODO need arrayCopy
+            // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
 
             /**
              * Return the string value of this StringBuffer
@@ -1183,6 +1188,7 @@ namespace Java {
              * or if start is greater than end
              * @return the specified subsequence.
              */
+            // TODO
             // CharSequence *subSequence(int start, int end);
 
             /**
