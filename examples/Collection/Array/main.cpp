@@ -36,7 +36,8 @@ void ArraySerialize() {
 	Array<String> arrayString;
 	arrayString.push("hello");
 	arrayString.push("world");
-	System::out::println(arrayString.toString());
+	// ERROR - Does not work
+	// System::out::println(arrayString.toString());
 }
 
 int main() {
