@@ -25,9 +25,8 @@
  */
 
 #include "CQLException.hpp"
-#include "../../../java/Lang.hpp"
 
-using namespace Java::Lang;
+using namespace Javax::Cql;
 
 CQLException::CQLException() : Exception::Exception() {
 }

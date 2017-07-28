@@ -28,9 +28,10 @@
 #define NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP
 
 #include "../../../java/lang/Exception/Exception.hpp"
+#include "../../../java/Lang.hpp"
 
-namespace Java {
-    namespace Lang {
+namespace Javax {
+    namespace Cql {
         class CQLException : public Exception {
         public:
             CQLException();

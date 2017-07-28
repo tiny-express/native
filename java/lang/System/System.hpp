@@ -40,11 +40,14 @@ namespace Java {
 			
 			class out {
 			public:
-				static void print(String target);
+				template <typename T>
+				static void print(T target) {
+					std::cout << target;
+				}
 
 				template <typename T>
 				static void println(T target) {
-					std::cout << target;
+					std::cout << target<<std::endl;
 				}
 			};
 
