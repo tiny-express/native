@@ -31,7 +31,7 @@
 
 namespace Java {
     namespace Lang {
-        class StringBufferUnSafe { //: public CharSequence {
+        class StringBufferUnSafe : public Object{ //: public CharSequence {
         protected:
             string original = nullptr;
             int currentLength = 0;
@@ -52,9 +52,9 @@ namespace Java {
             /**
              * Constructs a string buffer that contains the same characters as the specified CharSequence.
              *
-             * @param seq
+             * @param sequence
              */
-            explicit StringBufferUnSafe(CharSequence *seq);
+            explicit StringBufferUnSafe(CharSequence *sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -67,9 +67,9 @@ namespace Java {
             /**
              * Constructs a string buffer initialized to the contents of the specified string.
              *
-             * @param str
+             * @param originalString
              */
-            explicit StringBufferUnSafe(String str);
+            explicit StringBufferUnSafe(String originalString);
 
             /**
              * Copy constructor
@@ -82,10 +82,10 @@ namespace Java {
              * Appends the string representation of the Object argument.
              * If seq is null then four character "null" will be append
              *
-             * @param obj
+             * @param object
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(Object *obj);
+            StringBufferUnSafe append(Object *object);
 
             /**
              * Appends the string representation of the float argument
@@ -100,10 +100,10 @@ namespace Java {
             /**
              * Appends the string representation of the char array argument to this sequence.
              *
-             * @param str
+             * @param stringToAppend
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(string str);
+            StringBufferUnSafe append(string stringToAppend);
 
             /**
              * Appends the string representation of the boolean argument
@@ -117,10 +117,10 @@ namespace Java {
              * Appends the specified CharSequence to this sequence.
              * If seq is null then four character "null" will be append
              *
-             * @param seq
+             * @param sequence
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(CharSequence *seq);
+            StringBufferUnSafe append(CharSequence *sequence);
 
             /**
              * Appends the string representation of the double argument
@@ -141,10 +141,10 @@ namespace Java {
             /**
              * Appends the string representation of char array argument to this sequence.
              *
-             * @param str
+             * @param stringToAppend
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(String str);
+            StringBufferUnSafe append(String stringToAppend);
 
             /**
              * Appends the string representation of the int argument
@@ -173,30 +173,30 @@ namespace Java {
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
-             * Characters of the char array str, starting at index offset, are appended, in order, 
+             * Characters of the char array str, starting at index offset, are appended, in order,
              * the length of subarray is equal to len
              *
-             * @param str
+             * @param string
              * @param offset
              * @param len
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(string str, int offset, int len);
+            StringBufferUnSafe append(string stringToAppend, int offset, int len);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
-             * starting at index start, are appended, in order, 
+             * starting at index start, are appended, in order,
              * to the contents of this sequence up to the (exclusive) index end.
              * If seq is null then four character "null" will be append
              *
-             * @param seq
+             * @param sequence
              * @param start
              * @param end
              * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe append(CharSequence *seq, int start, int end);
+            StringBufferUnSafe append(CharSequence *sequence, int start, int end);
 
             /**
              * Appends the string representation of the codePoint argument to this sequence.             *
@@ -226,9 +226,9 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) at the specified index.
-             * If the char value specified at the given index is in the high-surrogate range, 
-             * the following index is less than the length of this sequence, 
-             * and the char value at the following index is in the low-surrogate range, 
+             * If the char value specified at the given index is in the high-surrogate range,
+             * the following index is less than the length of this sequence,
+             * and the char value at the following index is in the low-surrogate range,
              * then the supplementary code point corresponding to this surrogate pair is returned.
              * Otherwise, the char value at the given index is returned.
              *
@@ -240,10 +240,10 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) before the specified index.
-             * If the char value at (index - 1) is in the low-surrogate range, 
-             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range, 
+             * If the char value at (index - 1) is in the low-surrogate range,
+             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range,
              * then the supplementary code point value of the surrogate pair is returned.
-             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate, 
+             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate,
              * the surrogate value is returned.
              *
              * @param index
@@ -319,26 +319,26 @@ namespace Java {
              * Returns the index within this string of the first occurrence of the specified substring.
              * The integer returned is the smallest value
              *
-             * @param str
+             * @param stringToGetIndex
              * @return the index of the first character of the first such substring is returned;
              * if it does not occur as a substring, -1 is returned.
              */
-            int indexOf(String str);
+            int indexOf(String stringToGetIndex);
 
             /**
-             * Returns the index within this string of the first occurrence of the specified substring, 
+             * Returns the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. The integer returned is the smallest value
              *
-             * @param str
+             * @param string
              * @param fromIndex
-             * @return the index within this string of the first occurrence of the specified substring, 
+             * @return the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. -1 if str is not a substring
              */
-            int indexOf(String str, int fromIndex);
+            int indexOf(String stringToGetIndex, int fromIndex);
 
             /**
              * Inserts the string representation of the float argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              * @param offset
              * @param floatValue
@@ -349,7 +349,7 @@ namespace Java {
 
             /**
              * Inserts the specified CharSequence into this sequence.
-             * The characters of the CharSequence argument are inserted, in order, 
+             * The characters of the CharSequence argument are inserted, in order,
              * into this sequence at the indicated offset, moving up any characters originally above that position
              * If charSequence is null, then the four characters "null" are inserted into this sequence.
              *
@@ -362,7 +362,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the bool argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -379,15 +379,15 @@ namespace Java {
              * The length of this sequence increases by the length of the argument.
              *
              * @param offset
-             * @param str
+             * @param string
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe insert(int offset, string str);
+            StringBufferUnSafe insert(int offset, string string);
 
             /**
              * Inserts the string representation of the char argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -399,22 +399,22 @@ namespace Java {
 
             /**
              * Inserts the string into this character sequence.
-             * The characters of the String argument are inserted, in order, 
+             * The characters of the String argument are inserted, in order,
              * into this sequence at the indicated offset, moving up any
              * characters originally above that position and increasing
              * the length of this sequence by the length of the argument.
              * If str is null, then the four characters "null" are inserted into this sequence.
              *
              * @param offset
-             * @param str
+             * @param stringToInsert
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe insert(int offset, String str);
+            StringBufferUnSafe insert(int offset, String stringToInsert);
 
             /**
              * Inserts the string representation of the long argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -426,19 +426,19 @@ namespace Java {
 
             /**
              * Inserts the string representation of the Object argument into this character sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
-             * @param obj
+             * @param object
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe insert(int offset, Object *obj);
+            StringBufferUnSafe insert(int offset, Object *object);
 
             /**
              * Inserts the string representation of the int argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -450,7 +450,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the double argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -469,13 +469,13 @@ namespace Java {
              * If s is null, four characters "null" will be inserted
              *
              * @param dstOffset
-             * @param seq
+             * @param sequence
              * @param start
              * @param end
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe insert(int dstOffset, CharSequence *seq, int start, int end);
+            StringBufferUnSafe insert(int dstOffset, CharSequence *sequence, int start, int end);
 
             /**
              * Inserts the string representation of a subarray of the str array argument into this sequence.
@@ -483,15 +483,15 @@ namespace Java {
              * The subarray is insert at position index
              *
              * @param index
-             * @param str
+             * @param string
              * @param offset
              * @param len
-             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), 
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
              * or offset or len are negative, or (offset+len) is greater than str.length.
              * @return a reference to this StringBufferUnSafe
              */
 
-            StringBufferUnSafe insert(int index, string str, int offset, int len);
+            StringBufferUnSafe insert(int index, string stringToInsert, int offset, int len);
 
             /**
              * Returns the index within this string of the rightmost occurrence of the specified substring.
@@ -499,22 +499,22 @@ namespace Java {
              * he returned index is the largest value
              * If no such value of k exists, then -1 is returned.
              *
-             * @param str
+             * @param stringToGetIndex
              * @return Returns the index within this string of the rightmost occurrence of the specified substring.
              */
-            int lastIndexOf(String str);
+            int lastIndexOf(String stringToGetIndex);
 
             /**
              * Returns the index within this string of the last occurrence of the specified substring.
              * The integer returned is the largest value
              * If no such value of k exists, then -1 is returned.
              *
-             * @param str
+             * @param string
              * @param fromIndex
              * @return Returns the index within this string of the rightmost occurrence of
              * the specified substring start fromIndex
              */
-            int lastIndexOf(String str, int fromIndex);
+            int lastIndexOf(String stringToGetIndex, int fromIndex);
 
             /**
              * Return the current number of used char of this sequence
@@ -542,15 +542,15 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @param str
+             * @param stringToReplace
              * @throw StringIndexOutOfBoundsException - if start is negative greater than length(), or greater than end.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe replace(int start, int end, String str);
+            StringBufferUnSafe replace(int start, int end, String stringToReplace);
 
             /**
              * Causes this character sequence to be replaced by the reverse of the sequence.
-             * If there are any surrogate pairs included in the sequence, 
+             * If there are any surrogate pairs included in the sequence,
              * these are treated as single characters for the reverse operation.
              *
              * @return a reference to this StringBufferUnSafe
@@ -580,7 +580,7 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(), 
+             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(),
              * or if start is greater than end
              * @return the specified subsequence.
              */
@@ -592,7 +592,7 @@ namespace Java {
              * index and extends to the end of this sequence.
              *
              * @param start
-             * @throw StringIndexOutOfBoundsException - if start is less than zero, 
+             * @throw StringIndexOutOfBoundsException - if start is less than zero,
              * or greater than the length of this object.
              * @return the specified String
              */
@@ -604,7 +604,7 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(), 
+             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(),
              * or start is greater than end.
              * @return
              */
@@ -620,7 +620,7 @@ namespace Java {
 
             /**
              * Attempts to reduce storage used for the character sequence.
-             * If the buffer is larger than necessary to hold its current sequence of characters, 
+             * If the buffer is larger than necessary to hold its current sequence of characters,
              * then it may be resized to become more space efficient.
              *
              */
@@ -650,9 +650,9 @@ namespace Java {
             /**
              * Constructs a string buffer that contains the same characters as the specified CharSequence.
              *
-             * @param seq
+             * @param sequence
              */
-            explicit StringBuffer(CharSequence *seq);
+            explicit StringBuffer(CharSequence *sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -665,9 +665,9 @@ namespace Java {
             /**
              * Constructs a string buffer initialized to the contents of the specified string.
              *
-             * @param str
+             * @param originalString
              */
-            explicit StringBuffer(String str);
+            explicit StringBuffer(String originalString);
 
             /**
              * Copy constructor
@@ -679,10 +679,10 @@ namespace Java {
             /**
              * Appends the string representation of the Object argument.
              *
-             * @param obj
+             * @param object
              * @return reference to this StringBuffer
              */
-            StringBuffer append(Object *obj);
+            StringBuffer append(Object *object);
 
             /**
              * Appends the string representation of the float argument
@@ -697,10 +697,10 @@ namespace Java {
             /**
              * Appends the string representation of the char array argument to this sequence.
              *
-             * @param str
+             * @param stringToAppend
              * @return reference to this StringBuffer
              */
-            StringBuffer append(string str);
+            StringBuffer append(string stringToAppend);
 
             /**
              * Appends the string representation of the boolean argument
@@ -713,10 +713,10 @@ namespace Java {
             /**
              * Appends the specified CharSequence to this sequence.
              *
-             * @param seq
+             * @param sequence
              * @return reference to this StringBuffer
              */
-            StringBuffer append(CharSequence *seq);
+            StringBuffer append(CharSequence *sequence);
 
             /**
              * Appends the string representation of the double argument
@@ -737,10 +737,10 @@ namespace Java {
             /**
              * Appends the string representation of char array argument to this sequence.
              *
-             * @param str
+             * @param stringToAppend
              * @return reference to this StringBuffer
              */
-            StringBuffer append(String str);
+            StringBuffer append(String stringToAppend);
 
             /**
              * Appends the string representation of the int argument
@@ -768,31 +768,31 @@ namespace Java {
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
-             * Characters of the char array str, starting at index offset, are appended, in order, 
+             * Characters of the char array str, starting at index offset, are appended, in order,
              * the length of subarray is equal to len
              *
-             * @param str
+             * @param string
              * @param offset
              * @param len
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
              * @return reference to this StringBuffer
              */
-            StringBuffer append(string str, int offset, int len);
+            StringBuffer append(string stringToAppend, int offset, int len);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
-             * starting at index start, are appended, in order, 
+             * starting at index start, are appended, in order,
              * to the contents of this sequence up to the (exclusive) index end.
-             * If start is negative or bigger than end or bigger than seq's length, 
+             * If start is negative or bigger than end or bigger than seq's length,
              * throw IndexOutOfBoundException
              *
-             * @param seq
+             * @param sequence
              * @param start
              * @param end
              * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
              * @return reference to this StringBuffer
              */
-            StringBuffer append(CharSequence *seq, int start, int end);
+            StringBuffer append(CharSequence *sequence, int start, int end);
 
             /**
              * Appends the string representation of the codePoint argument to this sequence.             *
@@ -822,9 +822,9 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) at the specified index.
-             * If the char value specified at the given index is in the high-surrogate range, 
-             * the following index is less than the length of this sequence, 
-             * and the char value at the following index is in the low-surrogate range, 
+             * If the char value specified at the given index is in the high-surrogate range,
+             * the following index is less than the length of this sequence,
+             * and the char value at the following index is in the low-surrogate range,
              * then the supplementary code point corresponding to this surrogate pair is returned.
              * Otherwise, the char value at the given index is returned.
              *
@@ -836,10 +836,10 @@ namespace Java {
 
             /**
              * Returns the character (Unicode code point) before the specified index.
-             * If the char value at (index - 1) is in the low-surrogate range, 
-             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range, 
+             * If the char value at (index - 1) is in the low-surrogate range,
+             * (index - 2) is not negative, and the char value at (index - 2) is in the high-surrogate range,
              * then the supplementary code point value of the surrogate pair is returned.
-             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate, 
+             * If the char value at index - 1 is an unpaired low-surrogate or a high-surrogate,
              * the surrogate value is returned.
              *
              * @param index
@@ -917,26 +917,26 @@ namespace Java {
              * Returns the index within this string of the first occurrence of the specified substring.
              * The integer returned is the smallest value
              *
-             * @param str
+             * @param stringToGetIndex
              * @return the index of the first character of the first such substring is returned;
              * if it does not occur as a substring, -1 is returned.
              */
-            int indexOf(String str);
+            int indexOf(String stringToGetIndex);
 
             /**
-             * Returns the index within this string of the first occurrence of the specified substring, 
+             * Returns the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. The integer returned is the smallest value
              *
-             * @param str
+             * @param string
              * @param fromIndex
-             * @return the index within this string of the first occurrence of the specified substring, 
+             * @return the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. -1 if str is not a substring
              */
-            int indexOf(String str, int fromIndex);
+            int indexOf(String stringToGetIndex, int fromIndex);
 
             /**
              * Inserts the string representation of the float argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -948,7 +948,7 @@ namespace Java {
 
             /**
              * Inserts the specified CharSequence into this sequence.
-             * The characters of the CharSequence argument are inserted, in order, 
+             * The characters of the CharSequence argument are inserted, in order,
              * into this sequence at the indicated offset, moving up any characters originally above that position
              * If charSequence is null, then the four characters "null" are inserted into this sequence.
              *
@@ -961,7 +961,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the bool argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -978,15 +978,15 @@ namespace Java {
              * The length of this sequence increases by the length of the argument.
              *
              * @param offset
-             * @param str
+             * @param stringToInsert
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer insert(int offset, string str);
+            StringBuffer insert(int offset, string stringToInsert);
 
             /**
              * Inserts the string representation of the char argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -998,22 +998,22 @@ namespace Java {
 
             /**
              * Inserts the string into this character sequence.
-             * The characters of the String argument are inserted, in order, 
+             * The characters of the String argument are inserted, in order,
              * into this sequence at the indicated offset, moving up any
              * characters originally above that position and increasing
              * the length of this sequence by the length of the argument.
              * If str is null, then the four characters "null" are inserted into this sequence.
              *
              * @param offset
-             * @param str
+             * @param stringToInsert
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer insert(int offset, String str);
+            StringBuffer insert(int offset, String stringToInsert);
 
             /**
              * Inserts the string representation of the long argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -1025,19 +1025,19 @@ namespace Java {
 
             /**
              * Inserts the string representation of the Object argument into this character sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
-             * @param obj
+             * @param object
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer insert(int offset, Object *obj);
+            StringBuffer insert(int offset, Object *object);
 
             /**
              * Inserts the string representation of the int argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -1049,7 +1049,7 @@ namespace Java {
 
             /**
              * Inserts the string representation of the double argument into this sequence.
-             * The offset argument must be greater than or equal to 0, 
+             * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
              * @param offset
@@ -1068,13 +1068,13 @@ namespace Java {
              * If s is null, four characters "null" will be inserted
              *
              * @param dstOffset
-             * @param seq
+             * @param sequence
              * @param start
              * @param end
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer insert(int dstOffset, CharSequence *seq, int start, int end);
+            StringBuffer insert(int dstOffset, CharSequence *sequence, int start, int end);
 
             /**
              * Inserts the string representation of a subarray of the str array argument into this sequence.
@@ -1082,15 +1082,15 @@ namespace Java {
              * The subarray is insert at position index
              *
              * @param index
-             * @param str
+             * @param string
              * @param offset
              * @param len
-             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), 
+             * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
              * or offset or len are negative, or (offset+len) is greater than str.length.
              * @return a reference to this StringBuffer
              */
 
-            StringBuffer insert(int index, string str, int offset, int len);
+            StringBuffer insert(int index, string stringToInsert, int offset, int len);
 
             /**
              * Returns the index within this string of the rightmost occurrence of the specified substring.
@@ -1098,22 +1098,22 @@ namespace Java {
              * he returned index is the largest value
              * If no such value of k exists, then -1 is returned.
              *
-             * @param str
+             * @param stringToGetIndex
              * @return Returns the index within this string of the rightmost occurrence of the specified substring.
              */
-            int lastIndexOf(String str);
+            int lastIndexOf(String stringToGetIndex);
 
             /**
              * Returns the index within this string of the last occurrence of the specified substring.
              * The integer returned is the largest value
              * If no such value of k exists, then -1 is returned.
              *
-             * @param str
+             * @param string
              * @param fromIndex
              * @return Returns the index within this string of the rightmost occurrence of
              * the specified substring start fromIndex
              */
-            int lastIndexOf(String str, int fromIndex);
+            int lastIndexOf(String stringToGetIndex, int fromIndex);
 
             /**
              * Return the current number of used char of this sequence
@@ -1141,15 +1141,15 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @param str
+             * @param stringToReplace
              * @throw StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
              * @return a reference to this StringBuffer
              */
-            StringBuffer replace(int start, int end, String str);
+            StringBuffer replace(int start, int end, String stringToReplace);
 
             /**
              * Causes this character sequence to be replaced by the reverse of the sequence.
-             * If there are any surrogate pairs included in the sequence, 
+             * If there are any surrogate pairs included in the sequence,
              * these are treated as single characters for the reverse operation.
              *
              * @return a reference to this StringBuffer
@@ -1179,7 +1179,7 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(), 
+             * @throw IndexOutOfBoundsException - if start or end are negative, if end is greater than length(),
              * or if start is greater than end
              * @return the specified subsequence.
              */
@@ -1191,7 +1191,7 @@ namespace Java {
              * ndex and extends to the end of this sequence.
              *
              * @param start
-             * @throw StringIndexOutOfBoundsException - if start is less than zero, 
+             * @throw StringIndexOutOfBoundsException - if start is less than zero,
              * or greater than the length of this object.
              * @return the specified String
              */
@@ -1203,7 +1203,7 @@ namespace Java {
              *
              * @param start
              * @param end
-             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(), 
+             * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(),
              * or start is greater than end.
              * @return
              */
