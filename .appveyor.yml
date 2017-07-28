@@ -5,10 +5,10 @@ cache:
 environment:
     matrix:
         - cygwin_url: https://cygwin.com/setup-x86_64.exe
-          build_with: mk
+          build_with: cmake
 install:
     - ps: Invoke-WebRequest $env:cygwin_url -OutFile c:\cygwin-setup.exe
-    - c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages gcc-g++,make,openssl-devel,zlib-devel,mk
+    - c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages gcc-g++,make,openssl-devel,zlib-devel,cmake
 build_script:
     - git submodule update --init
     - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER && cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true;"
