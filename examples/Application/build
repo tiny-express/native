@@ -1,4 +1,6 @@
 echo "-------------------------------"
+cd Inheritance && make && cd ..
+echo "-------------------------------"
 cd Builder && make && cd ..
 echo "-------------------------------"
 cd Main && make && cd ..
