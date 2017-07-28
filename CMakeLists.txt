@@ -55,7 +55,7 @@ check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
 # Set GCC ignore warning multi-characters constants
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow" )
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 # Check CXX version
@@ -70,18 +70,18 @@ endif ()
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
 
-# CMake Modules
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    # CMake Modules
+    set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
+    set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
 
-# Support flag coverage for codecov
-set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-
-# Enable coverage by cmake modules
-if(CMAKE_COMPILER_IS_GNUCXX)
-    include(CodeCoverage)
-    setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
-endif()
+    # Enable coverage by cmake modules
+    if (CMAKE_COMPILER_IS_GNUCXX)
+        include(CodeCoverage)
+        setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
+    endif ()
+endif ()
 
 # Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -133,7 +133,7 @@ foreach (test_cpp_file ${TESTS_CPP})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C}  misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
 add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
@@ -167,7 +167,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test_c
 )
 
 # Check memory leak
@@ -206,9 +206,9 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-else()
+else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT}-lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
-endif()
+endif ()
