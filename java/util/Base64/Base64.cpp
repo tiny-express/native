@@ -236,8 +236,8 @@ const Array<int> Base64::Decoder::fromBase64Url = []() -> Array<int> {
     Array<int> result(256);
     Arrays::fill(&result, -1);
     int index;
-    for (index = 0; index < Encoder::toBase64.length; index++) {
-        result[Encoder::toBase64[index]] = index;
+    for (index = 0; index < Encoder::toBase64Url.length; index++) {
+        result[Encoder::toBase64Url[index]] = index;
     }
     result['='] = -2;
     return result;
