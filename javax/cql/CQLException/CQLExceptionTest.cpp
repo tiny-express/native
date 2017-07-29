@@ -30,9 +30,9 @@ extern "C" {
 
 #include "CQLException.hpp"
 
-using namespace Java::Lang;
+using namespace Javax::Cql;
 
-TEST (JavaLang, CQLExceptionConstructor) {
+TEST (JavaxCql, CQLExceptionConstructor) {
     // Constructs a new CQLException with null as its detail message.
     CQLException cqlExceptionWithNullMessage;
     ASSERT_STR("", cqlExceptionWithNullMessage.getMessage().toString());
@@ -52,10 +52,10 @@ TEST (JavaLang, CQLExceptionConstructor) {
     ASSERT_STR("CQLException with the specified message", cqlExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, CQLExceptionTryCatch) {
+TEST (JavaxCql, CQLExceptionTryCatch) {
     try {
         throw CQLException("Throw CQLException");
-    } catch (Exception e) {
+    } catch (CQLException &e) {
         ASSERT_STR("Throw CQLException", e.getMessage().toString());
     }
 }
