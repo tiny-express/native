@@ -302,7 +302,7 @@ namespace Java {
                  */
 //              InputStream wrap(const InputStream &source) const;
                 // TODO (truongchauhien): Waiting for InputStream class.
-            }; // class Decoder
+            };  // class Decoder
 
         public:
             /**
@@ -356,7 +356,6 @@ namespace Java {
              * @return Decoder
              */
             static Decoder getUrlDecoder();
-
-        }; // class Base64
-    } // namespace Util
-} // namespace Java
+        };  // class Base64
+    }  // namespace Util
+}  // namespace Java

@@ -40,7 +40,7 @@ TEST(JavaUtil, Base64BasicEncoder) {
     Array<byte> input2Bytes = {'M', 'a'};
     Array<byte> input1Byte = {'M'};
 
-    Base64::Encoder basicEncoder = Base64::getEncoder(); // RFC4648
+    Base64::Encoder basicEncoder = Base64::getEncoder();  // RFC4648
 
     Array<byte> expectedResultFromInput3Bytes = {'T', 'W', 'F', 'u'};
     Array<byte> expectedResultFromInput2Bytes = {'T', 'W', 'E', '='};
@@ -50,9 +50,12 @@ TEST(JavaUtil, Base64BasicEncoder) {
     Array<byte> resultFromInput2Bytes = basicEncoder.encode(input2Bytes);
     Array<byte> resultFromInput1Byte = basicEncoder.encode(input1Byte);
 
-    ASSERT_TRUE(Arrays::equals(expectedResultFromInput3Bytes, resultFromInput3Bytes));
-    ASSERT_TRUE(Arrays::equals(expectedResultFromInput2Bytes, resultFromInput2Bytes));
-    ASSERT_TRUE(Arrays::equals(expectedResultFromInput1Byte, resultFromInput1Byte));
+    ASSERT_TRUE(Arrays::equals(expectedResultFromInput3Bytes,
+                               resultFromInput3Bytes));
+    ASSERT_TRUE(Arrays::equals(expectedResultFromInput2Bytes,
+                               resultFromInput2Bytes));
+    ASSERT_TRUE(Arrays::equals(expectedResultFromInput1Byte,
+                               resultFromInput1Byte));
 
     // Without padding character ('=') in result.
     Base64::Encoder basicEncoderWithoutPadding = basicEncoder.withoutPadding();
@@ -74,7 +77,7 @@ TEST(JavaUtil, Base64BasicEncoder) {
     ASSERT_STR(expectedStringResult.toString(), stringResult.toString());
 
     // Passing output Array<byte> by reference.
-    Array<byte> outputByteArrayIsNotEnoughSize(10); // Not enough size.
+    Array<byte> outputByteArrayIsNotEnoughSize(10);  // Not enough size.
     try {
         basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
     } catch (IllegalArgumentException ex) {
@@ -83,7 +86,8 @@ TEST(JavaUtil, Base64BasicEncoder) {
     }
     Array<byte> outputByteArray(100);
     int index;
-    for (index = 0; index < outputByteArray.length; index++) { // Filling with '*' character.
+    // Filling with '*' character.
+    for (index = 0; index < outputByteArray.length; index++) {
         outputByteArray[index] = '*';
     }
     int realLength = basicEncoder.encode(stringInputToArrayOfByte, outputByteArray);
@@ -108,7 +112,7 @@ TEST(JavaUtil, Base64UrlSafeEncoder) {
                             'f', 'o', 'o', 'd', 't', 'i', 'n', 'y', '.',
                             'v', 'n', '/',
                             '~'};
-    Base64::Encoder urlEncoder = Base64::getUrlEncoder(); // RFC4648_URLSAFE
+    Base64::Encoder urlEncoder = Base64::getUrlEncoder();  // RFC4648_URLSAFE
     Array<byte> expectedResultFromUrlInput =
             {'a', 'H', 'R', '0', 'c', 'D', 'o', 'v', 'L',
              '3', 'd', '3', 'd', 'y', '5', 'm', 'b', '2',
@@ -196,7 +200,7 @@ TEST(JavaUtil, Base64BasicDecoder) {
                                resultFromInput4BytesWith2BytesPadding));
 
     // Basic decoder without padding character '=' in input.
-    Array<byte> inputWithoutPadding = {'T', 'W', 'E'}; // ... with padding {'T', 'W', 'E', '='}
+    Array<byte> inputWithoutPadding = {'T', 'W', 'E'};  // ... with padding {'T', 'W', 'E', '='}
     Array<byte> resultFromInputWithoutPadding =
             basicDecoder.decode(inputWithoutPadding);
     Array<byte> expectedResultFromInputWithoutPadding = {'M', 'a'};
@@ -250,7 +254,7 @@ TEST(JavaUtil, Base64UrlSafeDecoder) {
                             '3', 'd', '3', 'd', 'y', '5', 'm', 'b', '2',
                             '9', 'k', 'd', 'G', 'l', 'u', 'e', 'S', '5',
                             '2', 'b',  'i', '9', '-'};
-    Base64::Decoder urlDecoder = Base64::getUrlDecoder(); // RFC4648_URLSAFE
+    Base64::Decoder urlDecoder = Base64::getUrlDecoder();  // RFC4648_URLSAFE
     Array<byte> expectedResultFromUrlInput = {'h', 't', 't', 'p', ':', '/', '/',
                                               'w', 'w', 'w', '.',
                                               'f', 'o', 'o', 'd', 't', 'i', 'n', 'y', '.',
@@ -290,7 +294,7 @@ TEST(JavaUtil, Base64MimeDecoder) {
              'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
              'E', '='};
 
-    Base64::Decoder mimeDecoder = Base64::getMimeDecoder(); // RFC2045
+    Base64::Decoder mimeDecoder = Base64::getMimeDecoder();  // RFC2045
     Array<byte> expectedResultFromMimeInput =
             { 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
               'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',

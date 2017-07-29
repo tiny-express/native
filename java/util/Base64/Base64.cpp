@@ -88,7 +88,8 @@ int Base64::Encoder::encode(const Array<byte> &source,
                             Array<byte> &destination) const {
     int length = this->outLength(source.length);
     if (destination.length < length) {
-        throw IllegalArgumentException("Output byte array is too small for encoding all input bytes");
+        throw IllegalArgumentException(
+                "Output byte array is too small for encoding all input bytes");
     }
     return this->encoding(source, 0, source.length, destination);
 }
@@ -275,7 +276,8 @@ int Base64::Decoder::decode(const Array<byte> &source,
                             Array<byte> &destination) const {
     int length = this->outLength(source, 0, source.length);
     if (destination.length < length) {
-        throw IllegalArgumentException("Output byte array is too small for decoding all input bytes");
+        throw IllegalArgumentException(
+                "Output byte array is too small for decoding all input bytes");
     }
     return this->decoding(source, 0, source.length, destination);
 }
@@ -304,7 +306,8 @@ int Base64::Decoder::outLength(const Array<byte> &source,
         if (this->isMime && fromBase64Table[0] == -1) {
             return 0;
         }
-        throw IllegalArgumentException("Input byte[] should at least have 2 bytes for based64 bytes");
+        throw IllegalArgumentException(
+                "Input byte[] should at least have 2 bytes for based64 bytes");
     }
     if (this->isMime) {
         int nonAlphabet = 0;
@@ -356,8 +359,8 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
     while (sourcePosition < sourceStopPosition) {
         currentByte = source[sourcePosition++] & 0xff;
         currentByteDecoded = fromBase64Table[currentByte];
-        if (currentByteDecoded < 0) { // Means non-Alphabet (CRLF or line separator) or padding '='.
-            if (currentByteDecoded == -2) { // Current byte is '=': padding byte
+        if (currentByteDecoded < 0) {  // Means non-Alphabet (CRLF or line separator) or padding '='.
+            if (currentByteDecoded == -2) {  // Current byte is '=': padding byte
                 if (shiftTo == 6
                     && (sourcePosition == sourceStopPosition || source[sourcePosition++] != '=')
                     || shiftTo == 18) {
@@ -385,7 +388,7 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
             shiftTo = 18;
             groupBits = 0;
         }
-    } // end while
+    }  // end while
 
     // Reach to end of source array or hit padding '=' character.
     if (shiftTo == 6) {
@@ -403,7 +406,9 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
         if (this->isMime && fromBase64Table[source[sourcePosition++]] < 0) {
             continue;
         }
-        throw IllegalArgumentException("Input byte array has incorrect ending byte at " + sourcePosition);
+        throw IllegalArgumentException(
+                "Input byte array has incorrect ending byte at " +
+                        sourcePosition);
     }
 
     return destinationPosition;
