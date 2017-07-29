@@ -5,6 +5,12 @@ os:
 - linux
 compiler:
 - gcc
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - lcov
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
@@ -14,8 +20,12 @@ script:
 - make native_test -j8
 - ./misc/memory_check
 - make native && sudo make install && sudo ldconfig
-- cd examples/Collection/ArrayList && make
-- cd ../HashMap && make
-- cd ../Arrays && make
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cd examples && ./build; fi
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - lcov --directory . --capture --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+  - lcov --list coverage.info
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
