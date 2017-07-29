@@ -799,9 +799,9 @@ TEST (JavaLang, StringBufferOffSetByCodePoint) {
     StringBuffer stringBuffer = StringBuffer("This is a string buffer");
 
     // Test vaild param
-    int expectOffsetByCodePointsReault = 0; // 5
+    int expectOffsetByCodePointsResult = 0; // 5
     int actualOffsetByCodePointsResult = stringBuffer.offsetByCodePoints(1, 4);
-    ASSERT_EQUAL(expectOffsetByCodePointsReault, actualOffsetByCodePointsResult);
+    ASSERT_EQUAL(expectOffsetByCodePointsResult, actualOffsetByCodePointsResult);
 
     // Test index < 0
     try {
@@ -887,7 +887,7 @@ TEST (JavaLang, StringBufferReverse) {
     ASSERT_STR(expectNomalStringReverse, stringBuffer.getValue());
 
     // TODO handle surrogate as one char
-    /*// Test surrogate string
+   /* // Test surrogate string
     StringBuffer surrogateStringBuffer = StringBuffer("\u000DC00\u000D800");
     surrogateStringBuffer.reverse();
     string expectSurrogateStringReverse = const_cast<string>("\u000D800\u000DC00");
