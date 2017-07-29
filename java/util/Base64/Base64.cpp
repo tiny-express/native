@@ -425,7 +425,8 @@ Base64::Decoder Base64::getMimeDecoder() {
     return Decoder::RFC2045;
 }
 
-Base64::Encoder Base64::getMimeEncoder(int lineLength, const Array<byte> &lineSeparator) {
+Base64::Encoder Base64::getMimeEncoder(int lineLength,
+                                       const Array<byte> &lineSeparator) {
     Array<int> fromBase64Table = Decoder::fromBase64;
     for (byte currentByte : lineSeparator) {
         if (fromBase64Table[currentByte & 0xff] != -1) {

@@ -40,7 +40,6 @@ TEST(JavaUtil, Base64BasicEncoder) {
     Array<byte> input2Bytes = {'M', 'a'};
     Array<byte> input1Byte = {'M'};
 
-
     Base64::Encoder basicEncoder = Base64::getEncoder(); // RFC4648
 
     Array<byte> expectedResultFromInput3Bytes = {'T', 'W', 'F', 'u'};
@@ -58,8 +57,10 @@ TEST(JavaUtil, Base64BasicEncoder) {
     // Without padding character ('=') in result.
     Base64::Encoder basicEncoderWithoutPadding = basicEncoder.withoutPadding();
     Array<byte> expectedResultWithoutPaddingFromInput1Byte = {'T', 'Q'};
-    Array<byte> resultWithoutPaddingFromInput1Byte = basicEncoderWithoutPadding.encode(input1Byte);
-    ASSERT_TRUE(Arrays::equals(expectedResultWithoutPaddingFromInput1Byte, resultWithoutPaddingFromInput1Byte));
+    Array<byte> resultWithoutPaddingFromInput1Byte =
+            basicEncoderWithoutPadding.encode(input1Byte);
+    ASSERT_TRUE(Arrays::equals(expectedResultWithoutPaddingFromInput1Byte,
+                               resultWithoutPaddingFromInput1Byte));
 
     // Result as a String, not an Array<byte>.
     String stringInput = "Welcome to Vietnam!";
@@ -196,12 +197,17 @@ TEST(JavaUtil, Base64BasicDecoder) {
 
     // Basic decoder without padding character '=' in input.
     Array<byte> inputWithoutPadding = {'T', 'W', 'E'}; // ... with padding {'T', 'W', 'E', '='}
-    Array<byte> resultFromInputWithoutPadding = basicDecoder.decode(inputWithoutPadding);
+    Array<byte> resultFromInputWithoutPadding =
+            basicDecoder.decode(inputWithoutPadding);
     Array<byte> expectedResultFromInputWithoutPadding = {'M', 'a'};
-    ASSERT_TRUE(Arrays::equals(expectedResultFromInputWithoutPadding, resultFromInputWithoutPadding));
+    ASSERT_TRUE(Arrays::equals(expectedResultFromInputWithoutPadding,
+                               resultFromInputWithoutPadding));
 
     // Passing output Array<byte> by reference.
-    Array<byte> inputArray = {'V', '2', 'V', 's', 'Y', '2', '9', 't', 'Z', 'S', 'B', '0', 'b', 'y', 'B', 'W', 'a', 'W', 'V', '0', 'b', 'm', 'F', 't', 'I', 'Q', '=', '='};
+    Array<byte> inputArray =
+            {'V', '2', 'V', 's', 'Y', '2', '9', 't', 'Z', 'S',
+             'B', '0', 'b', 'y', 'B', 'W', 'a', 'W', 'V', '0',
+             'b', 'm', 'F', 't', 'I', 'Q', '=', '='};
     Array<byte> outputArrayNotEnoughSize(10);
     try {
         basicDecoder.decode(inputArray, outputArrayNotEnoughSize);
