@@ -23,6 +23,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 extern "C" {
 #include "../../../kernel/test.h"
 }
@@ -338,12 +339,12 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    inputInt = MAX_VALUE; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
+    inputInt = Integer::MAX_VALUE; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
     expectedResult = 31;
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 // TODO(thoangminh): Check the case below:
-    // inputInt = MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
+    // inputInt = Integer::MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
     // expectedResult = 33;
     // actualResult = Integer::bitCount(inputInt);
     // ASSERT_EQUAL(expectedResult, actualResult);
@@ -364,10 +365,10 @@ TEST(JavaLang, IntegerByteValue) {
     integerInput = 13;  
     ASSERT_EQUAL((byte) 13, integerInput.byteValue());
 
-    integerInput = MAX_VALUE;  
+    integerInput = Integer::MAX_VALUE;  
     ASSERT_EQUAL((byte) -1, integerInput.byteValue());
 
-    integerInput = MIN_VALUE;  
+    integerInput = Integer::MIN_VALUE;  
     ASSERT_EQUAL((byte) 0, integerInput.byteValue());
 }
 
@@ -376,43 +377,43 @@ TEST(JavaLang, IntegerCompare) {
     ASSERT_EQUAL(Integer::compare(0, 1), -1);
     ASSERT_EQUAL(Integer::compare(0, -1), 1);
     ASSERT_EQUAL(Integer::compare(0, 13), -1);
-    ASSERT_EQUAL(Integer::compare(0, MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compare(0, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(0, Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(0, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::compare(1, 0), 1);
     ASSERT_EQUAL(Integer::compare(1, 1), 0);
     ASSERT_EQUAL(Integer::compare(1, -1), 1);
     ASSERT_EQUAL(Integer::compare(1, 13), -1);
-    ASSERT_EQUAL(Integer::compare(1, MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compare(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(1, Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(1, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::compare(-1 , 0), -1);
     ASSERT_EQUAL(Integer::compare(-1 , 1), -1);
     ASSERT_EQUAL(Integer::compare(-1 , -1), 0);
     ASSERT_EQUAL(Integer::compare(-1 , 13), -1);
-    ASSERT_EQUAL(Integer::compare(-1 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compare(-1 , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(-1 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(-1 , Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::compare(13 , 0), 1);
     ASSERT_EQUAL(Integer::compare(13 , 1), 1);
     ASSERT_EQUAL(Integer::compare(13 , -1), 1);
     ASSERT_EQUAL(Integer::compare(13 , 13), 0);
-    ASSERT_EQUAL(Integer::compare(13 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compare(13 , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(13 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(13 , Integer::MIN_VALUE), 1);
 
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 0), 1);
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , -1), 1);
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , 13), 1);
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::compare(MAX_VALUE , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , 0), 1);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , -1), 1);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , 13), 1);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::compare(Integer::MAX_VALUE , Integer::MIN_VALUE), 1);
 
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 0), -1);
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 1), -1);
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , -1), -1);
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , 13), -1);
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compare(MIN_VALUE , MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , 0), -1);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , 1), -1);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , 13), -1);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , Integer::MIN_VALUE), 0);
 }
 
 // TEST(JavaLang, IntegerCompareTo) {
@@ -423,48 +424,48 @@ TEST(JavaLang, IntegerCompare) {
 //     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
 
 //     thisInteger = 1;
 //     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(1), 0);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), 1 );
 //     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
 
 //     thisInteger = -1;
 //     ASSERT_EQUAL(thisInteger.compareTo(0), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), 0);
 //     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
 
 //     thisInteger = 13;
 //     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(1), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(13), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
 
-//     thisInteger = MAX_VALUE;
+//     thisInteger = Integer::MAX_VALUE;
 //     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(1), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
 //     ASSERT_EQUAL(thisInteger.compareTo(13), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), 0);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
 
-//     thisInteger = MIN_VALUE;
+//     thisInteger = Integer::MIN_VALUE;
 //     ASSERT_EQUAL(thisInteger.compareTo(0), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(-1), -1);
 //     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(MIN_VALUE), 0);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 0);
 
 // }
 
@@ -473,213 +474,221 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     ASSERT_EQUAL(Integer::compareUnsigned(0, 1), -1);
     ASSERT_EQUAL(Integer::compareUnsigned(0, -1), -1);
     ASSERT_EQUAL(Integer::compareUnsigned(0, 13), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(0, MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(0, MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(0, Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(0, Integer::MIN_VALUE), -1);
 
     ASSERT_EQUAL(Integer::compareUnsigned(1, 0), 1);
     ASSERT_EQUAL(Integer::compareUnsigned(1, 1), 0);
     ASSERT_EQUAL(Integer::compareUnsigned(1, -1), -1);
     ASSERT_EQUAL(Integer::compareUnsigned(1, 13), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(1, MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(1, MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(1, Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(1, Integer::MIN_VALUE), -1);
 
     ASSERT_EQUAL(Integer::compareUnsigned(-1 , 0), 1);
     ASSERT_EQUAL(Integer::compareUnsigned(-1 , 1), 1);
     ASSERT_EQUAL(Integer::compareUnsigned(-1 , -1), 0);
     ASSERT_EQUAL(Integer::compareUnsigned(-1 , 13), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(-1 , MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(-1 , MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(-1 , Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(-1 , Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::compareUnsigned(13 , 0), 1);
     ASSERT_EQUAL(Integer::compareUnsigned(13 , 1), 1);
     ASSERT_EQUAL(Integer::compareUnsigned(13 , -1), -1);
     ASSERT_EQUAL(Integer::compareUnsigned(13 , 13), 0);
-    ASSERT_EQUAL(Integer::compareUnsigned(13 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(13 , MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(13 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(13 , Integer::MIN_VALUE), -1);
 
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , 0), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , -1), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , 13), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::compareUnsigned(MAX_VALUE , MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , 0), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , 13), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MAX_VALUE , Integer::MIN_VALUE), -1);
 
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , 0), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , -1), -1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , 13), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::compareUnsigned(MIN_VALUE , MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , 0), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , 13), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::compareUnsigned(Integer::MIN_VALUE , Integer::MIN_VALUE), 0);
 }
 
-// TEST(JavaLang, IntegerDecode) {
-    // String stringInput;
-    // Integer expectedResult;
-    // Integer actualResult;
-
-    // // Cast all case of inputing a string of type decimal number
-    // stringInput = (String) "0";
-    // expectedResult = 0;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "1";
-    // expectedResult = 1;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "-1";
-    // expectedResult = -1;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "13";
-    // expectedResult = 13;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "2147483647"; // MAX_VALUE
-    // expectedResult = MAX_VALUE;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "-2147483648"; // MIN_VALUE
-    // expectedResult = MIN_VALUE;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "Not a Number";
-    // expectedResult = ;
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-    // stringInput = (String) "12345678901234567890123456789";
-    // expectedResult = ; // out of range
-    // actualResult = Integer:decode(stringInput);
-    // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-
+TEST(JavaLang, IntegerDecode) {
+//     String stringInput;
+//     Integer expectedResult;
+//     Integer actualResult;
+//
+//     // Cast all case of inputing a string of type decimal number
+//     stringInput = "0";
+//     expectedResult = 0;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "1";
+//     expectedResult = 1;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "-1";
+//     expectedResult = -1;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "13.12";
+//     expectedResult = 13;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//    // Test out of range
+//     stringInput = (String) "2147483650"; // Integer::MAX_VALUE
+//  /*  try {
+//        actualResult = Integer::decode(stringInput);
+//    }
+//    catch (NumberFormatExeption &e) {
+//
+//    }*/
+//
+//    expectedResult = Integer::MAX_VALUE;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+//     expectedResult = Integer::MIN_VALUE;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "Not a Number";
+//     expectedResult = 1;
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//     stringInput = (String) "12345678901234567890123456789";
+//     expectedResult = 1; // out of range
+//     actualResult = Integer::decode(stringInput);
+//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+//
+//
 //     // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
 //     stringInput = (String) "00";
 //     expectedResult = 0;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
+//
 //     stringInput = (String) "01";
 //     expectedResult = 1;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
+//
 //     stringInput = (String) "00001101";
 //     expectedResult = 13;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
-//     stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE
+//
+//     stringInput = (String) "01111111111111111111111111111111"; // Integer::MAX_VALUE
 //     expectedResult = 2147483647;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-
+//
 //     stringInput = (String) "0111111111111111111111111111111111111111111";
-//     expectedResult = ; // out of range 
-//     actualResult = Integer:decode(stringInput);
+//    // expectedResult = ; // out of range
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "011111111111111111111111111111111112222222";
 //     expectedResult = ; // wrong type
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     // Cast all case of inputing a string of type hexadecimal number
 //     stringInput = (String) "0x00";
 //     expectedResult = 0;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "#1";
 //     expectedResult = 1;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "#FFFFFFFFFFFFFFFF";
 //     expectedResult = -1;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "0xD";
 //     expectedResult = 13;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE
+//     stringInput = (String) "0x7FFFFFFF"; // Integer::MAX_VALUE
 //     expectedResult = 2147483647;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE
+//     stringInput = (String) "#FFFFFFFF80000000"; // Integer::MIN_VALUE
 //     expectedResult = -2147483647;
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "#Not a Number";
 //     expectedResult = ; // Not a number
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "#213546546";
 //     expectedResult = ; // Wrong type
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 //     stringInput = (String) "#1111FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
 //     expectedResult = ; // Out of range
-//     actualResult = Integer:decode(stringInput);
+//     actualResult = Integer::decode(stringInput);
 //     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-// }
+}
 
 // TEST(JavaLang, IntegerDivideUnsigned) {
 //     // ASSERT_EQUAL(Integer::divideUnsigned(0, 0), 0);
 //     ASSERT_EQUAL(Integer::divideUnsigned(0, 1), 0);
 //     ASSERT_EQUAL(Integer::divideUnsigned(0, -1), 0);
 //     ASSERT_EQUAL(Integer::divideUnsigned(0, 13), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(0, MAX_VALUE), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(0, MIN_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, Integer::MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(0, Integer::MIN_VALUE), 0);
 
 //     // ASSERT_EQUAL(Integer::divideUnsigned(1, 0), 1);
 //     ASSERT_EQUAL(Integer::divideUnsigned(1, 1), 1);
 //     ASSERT_EQUAL(Integer::divideUnsigned(1, -1), 0);
 //     ASSERT_EQUAL(Integer::divideUnsigned(1, 13), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(1, MAX_VALUE), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(1, MIN_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, Integer::MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(1, Integer::MIN_VALUE), 0);
 
 //     // ASSERT_EQUAL(Integer::divideUnsigned(-1 , 0), -1);
 //     ASSERT_EQUAL(Integer::divideUnsigned(-1 , 1), -1);
 //     ASSERT_EQUAL(Integer::divideUnsigned(-1 , -1), 1);
 //     ASSERT_EQUAL(Integer::divideUnsigned(-1 , 13), 330382099);
-//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , MAX_VALUE), 2);
-//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , MIN_VALUE), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , Integer::MAX_VALUE), 2);
+//     ASSERT_EQUAL(Integer::divideUnsigned(-1 , Integer::MIN_VALUE), 1);
 
 //     // ASSERT_EQUAL(Integer::divideUnsigned(13 , 0), 13);
 //     ASSERT_EQUAL(Integer::divideUnsigned(13 , 1), 13);
 //     ASSERT_EQUAL(Integer::divideUnsigned(13 , -1), 0);
 //     ASSERT_EQUAL(Integer::divideUnsigned(13 , 13), 1);
-//     ASSERT_EQUAL(Integer::divideUnsigned(13 , MAX_VALUE), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(13 , MIN_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , Integer::MAX_VALUE), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(13 , Integer::MIN_VALUE), 0);
 
-//     // ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 0), 2147483647);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 1), 2147483647);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , -1), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , 13), 165191049);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , MAX_VALUE), 1);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MAX_VALUE , MIN_VALUE), 0);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , 0), 2147483647);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , 1), 2147483647);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , 13), 165191049);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , Integer::MAX_VALUE), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MAX_VALUE , Integer::MIN_VALUE), 0);
 
-//     // ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 0), -2147483648);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 1), -2147483648);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , -1), 0);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , 13), 165191049);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , MAX_VALUE), 1);
-//     ASSERT_EQUAL(Integer::divideUnsigned(MIN_VALUE , MIN_VALUE), 1);
+//     // ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , 0), -2147483648);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , 1), -2147483648);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , -1), 0);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , 13), 165191049);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
+//     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , Integer::MIN_VALUE), 1);
 // }
 
 // TEST(JavaLang, IntegerDoubleValue) {
@@ -697,11 +706,11 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 //     integerInput = 13;
 //     ASSERT_DBL_NEAR(13.0, integerInput.doubleValue());
 
-//     integerInput = MAX_VALUE;
-//     ASSERT_DBL_NEAR((double)MAX_VALUE, integerInput.doubleValue());
+//     integerInput = Integer::MAX_VALUE;
+//     ASSERT_DBL_NEAR((double)Integer::MAX_VALUE, integerInput.doubleValue());
 
-//     integerInput = MIN_VALUE;
-//     ASSERT_DBL_NEAR((double)MIN_VALUE, integerInput.doubleValue());
+//     integerInput = Integer::MIN_VALUE;
+//     ASSERT_DBL_NEAR((double)Integer::MIN_VALUE, integerInput.doubleValue());
 
 // }
 
@@ -713,48 +722,48 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 //     ASSERT_FALSE(thisInteger.equals(1));
 //     ASSERT_FALSE(thisInteger.equals(-1));
 //     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
 //     thisInteger = 1;
 //     ASSERT_FALSE(thisInteger.equals(0));
 //     ASSERT_TRUE(thisInteger.equals(1));
 //     ASSERT_FALSE(thisInteger.equals(-1));
 //     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
 //     thisInteger = -1;
 //     ASSERT_FALSE(thisInteger.equals(0));
 //     ASSERT_FALSE(thisInteger.equals(1));
 //     ASSERT_TRUE(thisInteger.equals(-1));
 //     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
 //     thisInteger = 13;
 //     ASSERT_FALSE(thisInteger.equals(0));
 //     ASSERT_FALSE(thisInteger.equals(1));
 //     ASSERT_FALSE(thisInteger.equals(-1));
 //     ASSERT_TRUE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = MAX_VALUE;
+//     thisInteger = Integer::MAX_VALUE;
 //     ASSERT_FALSE(thisInteger.equals(0));
 //     ASSERT_FALSE(thisInteger.equals(1));
 //     ASSERT_FALSE(thisInteger.equals(-1));
 //     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_TRUE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_TRUE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = MIN_VALUE;
+//     thisInteger = Integer::MIN_VALUE;
 //     ASSERT_FALSE(thisInteger.equals(0));
 //     ASSERT_FALSE(thisInteger.equals(1));
 //     ASSERT_FALSE(thisInteger.equals(-1));
 //     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(MAX_VALUE));
-//     ASSERT_TRUE(thisInteger.equals(MIN_VALUE));
+//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+//     ASSERT_TRUE(thisInteger.equals(Integer::MIN_VALUE));
 
 // }
 
@@ -790,13 +799,13 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "2147483647"; // MAX_VALUE
-    // expectedResult = MAX_VALUE;
+    // stringInput = (String) "2147483647"; // Integer::MAX_VALUE
+    // expectedResult = Integer::MAX_VALUE;
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "-2147483648"; // MIN_VALUE
-    // expectedResult = MIN_VALUE;
+    // stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+    // expectedResult = Integer::MIN_VALUE;
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
@@ -822,7 +831,7 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE
+    // stringInput = (String) "01111111111111111111111111111111"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -858,12 +867,12 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE
+    // stringInput = (String) "0x7FFFFFFF"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE
+    // stringInput = (String) "#FFFFFFFF80000000"; // Integer::MIN_VALUE
     // expectedResult = -2147483647;
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -917,13 +926,13 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "2147483647"; // MAX_VALUE
-    // expectedResult = MAX_VALUE;
+    // stringInput = (String) "2147483647"; // Integer::MAX_VALUE
+    // expectedResult = Integer::MAX_VALUE;
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "-2147483648"; // MIN_VALUE
-    // expectedResult = MIN_VALUE;
+    // stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+    // expectedResult = Integer::MIN_VALUE;
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
@@ -949,7 +958,7 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE
+    // stringInput = (String) "01111111111111111111111111111111"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -985,12 +994,12 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE
+    // stringInput = (String) "0x7FFFFFFF"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE
+    // stringInput = (String) "#FFFFFFFF80000000"; // Integer::MIN_VALUE
     // expectedResult = -2147483647;
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -1044,13 +1053,13 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "2147483647"; // MAX_VALUE
-    // expectedResult = MAX_VALUE;
+    // stringInput = (String) "2147483647"; // Integer::MAX_VALUE
+    // expectedResult = Integer::MAX_VALUE;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "-2147483648"; // MIN_VALUE
-    // expectedResult = MIN_VALUE;
+    // stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+    // expectedResult = Integer::MIN_VALUE;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
@@ -1076,7 +1085,7 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "01111111111111111111111111111111"; // MAX_VALUE
+    // stringInput = (String) "01111111111111111111111111111111"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -1112,12 +1121,12 @@ TEST(JavaLang, IntegerCompareUnsigned) {
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "0x7FFFFFFF"; // MAX_VALUE
+    // stringInput = (String) "0x7FFFFFFF"; // Integer::MAX_VALUE
     // expectedResult = 2147483647;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // stringInput = (String) "#FFFFFFFF80000000"; // MIN_VALUE
+    // stringInput = (String) "#FFFFFFFF80000000"; // Integer::MIN_VALUE
     // expectedResult = -2147483647;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
@@ -1155,11 +1164,11 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 //     inputInteger = 13;
 //     ASSERT_EQUAL(13, inputInteger.hashCode());
 
-//     inputInteger = MAX_VALUE;
-//     ASSERT_EQUAL(MAX_VALUE, inputInteger.hashCode());
+//     inputInteger = Integer::MAX_VALUE;
+//     ASSERT_EQUAL(Integer::MAX_VALUE, inputInteger.hashCode());
 
-//     inputInteger = MIN_VALUE;
-//     ASSERT_EQUAL(MIN_VALUE, inputInteger.hashCode());
+//     inputInteger = Integer::MIN_VALUE;
+//     ASSERT_EQUAL(Integer::MIN_VALUE, inputInteger.hashCode());
 
 // }
 
@@ -1169,8 +1178,8 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 //     ASSERT_EQUAL(1, Integer::hashCode(1));
 //     ASSERT_EQUAL(-1, Integer::hashCode(-1));
 //     ASSERT_EQUAL(13, Integer::hashCode(13));
-//     ASSERT_EQUAL(MAX_VALUE, Integer::hashCode(MAX_VALUE));
-//     ASSERT_EQUAL(MIN_VALUE, Integer::hashCode(MIN_VALUE));
+//     ASSERT_EQUAL(Integer::MAX_VALUE, Integer::hashCode(Integer::MAX_VALUE));
+//     ASSERT_EQUAL(Integer::MIN_VALUE, Integer::hashCode(Integer::MIN_VALUE));
 
 // }
 
@@ -1179,8 +1188,8 @@ TEST(JavaLang, IntegerHighestOneBit) {
     ASSERT_EQUAL(1, Integer::highestOneBit(1));
     ASSERT_EQUAL(-2147483648, Integer::highestOneBit(-1));
     ASSERT_EQUAL(8, Integer::highestOneBit(13));
-    ASSERT_EQUAL(1073741824, Integer::highestOneBit(MAX_VALUE));
-    ASSERT_EQUAL(-2147483648, Integer::highestOneBit(MIN_VALUE)); 
+    ASSERT_EQUAL(1073741824, Integer::highestOneBit(Integer::MAX_VALUE));
+    ASSERT_EQUAL(-2147483648, Integer::highestOneBit(Integer::MIN_VALUE)); 
 }
 
 TEST(JavaLang, IntegerLowestOneBit) {
@@ -1188,8 +1197,8 @@ TEST(JavaLang, IntegerLowestOneBit) {
     ASSERT_EQUAL(1, Integer::lowestOneBit(1));
     ASSERT_EQUAL(1, Integer::lowestOneBit(-1));
     ASSERT_EQUAL(1, Integer::lowestOneBit(13));
-    ASSERT_EQUAL(1, Integer::lowestOneBit(MAX_VALUE));
-    ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(MIN_VALUE));
+    ASSERT_EQUAL(1, Integer::lowestOneBit(Integer::MAX_VALUE));
+    ASSERT_EQUAL(-2147483648, Integer::lowestOneBit(Integer::MIN_VALUE));
 }
 
 TEST(JavaLang, IntegerMax) {
@@ -1197,43 +1206,43 @@ TEST(JavaLang, IntegerMax) {
     ASSERT_EQUAL(Integer::max(0, 1), 1);
     ASSERT_EQUAL(Integer::max(0, -1), 0);
     ASSERT_EQUAL(Integer::max(0, 13), 13);
-    ASSERT_EQUAL(Integer::max(0, MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(0, MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::max(0, Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(0, Integer::MIN_VALUE), 0);
 
     ASSERT_EQUAL(Integer::max(1, 0), 1);
     ASSERT_EQUAL(Integer::max(1, 1), 1);
     ASSERT_EQUAL(Integer::max(1, -1), 1);
     ASSERT_EQUAL(Integer::max(1, 13), 13);
-    ASSERT_EQUAL(Integer::max(1, MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::max(1, Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(1, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::max(-1 , 0), 0);
     ASSERT_EQUAL(Integer::max(-1 , 1), 1);
     ASSERT_EQUAL(Integer::max(-1 , -1), -1);
     ASSERT_EQUAL(Integer::max(-1 , 13), 13);
-    ASSERT_EQUAL(Integer::max(-1 , MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(-1 , MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::max(-1 , Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(-1 , Integer::MIN_VALUE), -1);
 
     ASSERT_EQUAL(Integer::max(13 , 0), 13);
     ASSERT_EQUAL(Integer::max(13 , 1), 13);
     ASSERT_EQUAL(Integer::max(13 , -1), 13);
     ASSERT_EQUAL(Integer::max(13 , 13), 13);
-    ASSERT_EQUAL(Integer::max(13 , MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(13 , MIN_VALUE), 13);
+    ASSERT_EQUAL(Integer::max(13 , Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(13 , Integer::MIN_VALUE), 13);
 
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , 0), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , 1), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , -1), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , 13), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MAX_VALUE , MIN_VALUE), MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , 0), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , 1), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , -1), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , 13), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MAX_VALUE , Integer::MIN_VALUE), Integer::MAX_VALUE);
 
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , 0), 0);
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , -1), -1);
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , 13), 13);
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::max(MIN_VALUE , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , 0), 0);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , 13), 13);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::max(Integer::MIN_VALUE , Integer::MIN_VALUE), Integer::MIN_VALUE);
 }
 
 TEST(JavaLang, IntegerMin) {
@@ -1241,43 +1250,43 @@ TEST(JavaLang, IntegerMin) {
     ASSERT_EQUAL(Integer::min(0, 1), 0);
     ASSERT_EQUAL(Integer::min(0, -1), -1);
     ASSERT_EQUAL(Integer::min(0, 13), 0);
-    ASSERT_EQUAL(Integer::min(0, MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::min(0, MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(0, Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::min(0, Integer::MIN_VALUE), Integer::MIN_VALUE);
 
     ASSERT_EQUAL(Integer::min(1, 0), 0);
     ASSERT_EQUAL(Integer::min(1, 1), 1);
     ASSERT_EQUAL(Integer::min(1, -1), -1);
     ASSERT_EQUAL(Integer::min(1, 13), 1);
-    ASSERT_EQUAL(Integer::min(1, MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::min(1, MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(1, Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::min(1, Integer::MIN_VALUE), Integer::MIN_VALUE);
 
     ASSERT_EQUAL(Integer::min(-1 , 0), -1);
     ASSERT_EQUAL(Integer::min(-1 , 1), -1);
     ASSERT_EQUAL(Integer::min(-1 , -1), -1);
     ASSERT_EQUAL(Integer::min(-1 , 13), -1);
-    ASSERT_EQUAL(Integer::min(-1 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::min(-1 , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(-1 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::min(-1 , Integer::MIN_VALUE), Integer::MIN_VALUE);
 
     ASSERT_EQUAL(Integer::min(13 , 0), 0);
     ASSERT_EQUAL(Integer::min(13 , 1), 1);
     ASSERT_EQUAL(Integer::min(13 , -1), -1);
     ASSERT_EQUAL(Integer::min(13 , 13), 13);
-    ASSERT_EQUAL(Integer::min(13 , MAX_VALUE), 13);
-    ASSERT_EQUAL(Integer::min(13 , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(13 , Integer::MAX_VALUE), 13);
+    ASSERT_EQUAL(Integer::min(13 , Integer::MIN_VALUE), Integer::MIN_VALUE);
 
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , 0), 0);
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , -1), -1);
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , 13), 13);
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , MAX_VALUE), MAX_VALUE);
-    ASSERT_EQUAL(Integer::min(MAX_VALUE , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , 0), 0);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , -1), -1);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , 13), 13);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , Integer::MAX_VALUE), Integer::MAX_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MAX_VALUE , Integer::MIN_VALUE), Integer::MIN_VALUE);
 
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , 0), MIN_VALUE);
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , 1), MIN_VALUE);
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , -1), MIN_VALUE);
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , 13), MIN_VALUE);
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , MAX_VALUE), MIN_VALUE);
-    ASSERT_EQUAL(Integer::min(MIN_VALUE , MIN_VALUE), MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , 0), Integer::MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , 1), Integer::MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , -1), Integer::MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , 13), Integer::MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , Integer::MAX_VALUE), Integer::MIN_VALUE);
+    ASSERT_EQUAL(Integer::min(Integer::MIN_VALUE , Integer::MIN_VALUE), Integer::MIN_VALUE);
 }
 
 TEST(JavaLang, IntegerNumberOfLeadingZeros) {
@@ -1285,8 +1294,8 @@ TEST(JavaLang, IntegerNumberOfLeadingZeros) {
     ASSERT_EQUAL(31, Integer::numberOfLeadingZeros(1));
     ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(-1));
     ASSERT_EQUAL(28, Integer::numberOfLeadingZeros(13));
-    ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(MAX_VALUE));
-    ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(MIN_VALUE));
+    ASSERT_EQUAL(1, Integer::numberOfLeadingZeros(Integer::MAX_VALUE));
+    ASSERT_EQUAL(0, Integer::numberOfLeadingZeros(Integer::MIN_VALUE));
 }
 
 TEST(JavaLang, IntegerNumberOfTrailingZeros) {
@@ -1294,8 +1303,8 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(1));
     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(-1));
     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(13));
-    ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(MAX_VALUE));
-    ASSERT_EQUAL(31, Integer::numberOfTrailingZeros(MIN_VALUE));
+    ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(Integer::MAX_VALUE));
+    ASSERT_EQUAL(31, Integer::numberOfTrailingZeros(Integer::MIN_VALUE));
 }
 
 // Test Integer::parseInt(String inputString, int radix)
@@ -1342,13 +1351,13 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
     // actualResult = Integer::parseInt(stringInput);
     // ASSERT_EQUAL(expectedResult, actualResult);
 
-    // stringInput = (String) "2147483647"; // MAX_VALUE
-    // expectedResult = MAX_VALUE;
+    // stringInput = (String) "2147483647"; // Integer::MAX_VALUE
+    // expectedResult = Integer::MAX_VALUE;
     // actualResult = Integer::parseInt(stringInput);
     // ASSERT_EQUAL(expectedResult, actualResult);
 
-    // stringInput = (String) "-2147483648"; // MIN_VALUE
-    // expectedResult = MIN_VALUE;
+    // stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+    // expectedResult = Integer::MIN_VALUE;
     // actualResult = Integer::parseInt(stringInput);
     // ASSERT_EQUAL(expectedResult, actualResult);
 
@@ -1408,13 +1417,13 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
 //     actualResult = Integer::parseUnsignedInt(stringInput);
 //     ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "2147483647"; // MAX_VALUE
-//     expectedResult = MAX_VALUE;
+//     stringInput = (String) "2147483647"; // Integer::MAX_VALUE
+//     expectedResult = Integer::MAX_VALUE;
 //     actualResult = Integer::parseUnsignedInt(stringInput);
 //     ASSERT_EQUAL(expectedResult, actualResult);
 
-//     stringInput = (String) "-2147483648"; // MIN_VALUE
-//     expectedResult = MIN_VALUE; throws a NumberFormatException
+//     stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
+//     expectedResult = Integer::MIN_VALUE; throws a NumberFormatException
 //     actualResult = Integer::parseUnsignedInt(stringInput);
 //     ASSERT_EQUAL(expectedResult, actualResult);
 
@@ -1434,48 +1443,48 @@ TEST(JavaLang, IntegerRemainderUnsigned) {
     // TODO(thoangminh): throw exception these cases later
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,aaaa), 9999); // error: cannot find symbol
     // ASSERT_EQUAL(Integer::remainderUnsigned(0,123456789132456789123456), 9999); // integer number too large
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0,MAX_VALUE +1), 9999); // out of range
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0,MAX_VALUE + 2), 9999); // out of range
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0,MIN_VALUE -1), 9999); // out of range
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0,MIN_VALUE -2), 9999); // out of range
-    // ASSERT_EQUAL(Integer::remainderUnsigned(0,"MIN_VALUE -2"), 9999); // error: incompatible types: String cannot be converted to int
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0,Integer::MAX_VALUE +1), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0,Integer::MAX_VALUE + 2), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0,Integer::MIN_VALUE -1), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0,Integer::MIN_VALUE -2), 9999); // out of range
+    // ASSERT_EQUAL(Integer::remainderUnsigned(0,"Integer::MIN_VALUE -2"), 9999); // error: incompatible types: String cannot be converted to int
     // ASSERT_EQUAL(Integer::remainderUnsigned(1, 0), 9999);// java.lang.ArithmeticException: / by zero
 
     ASSERT_EQUAL(Integer::remainderUnsigned(0, 1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(0, -1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(0, 13), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(0, MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(0, MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(0, Integer::MIN_VALUE), 0);
     
     ASSERT_EQUAL(Integer::remainderUnsigned(1, 1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(1, -1), 1);
     ASSERT_EQUAL(Integer::remainderUnsigned(1, 13), 1);
-    ASSERT_EQUAL(Integer::remainderUnsigned(1, MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::remainderUnsigned(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(1, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(-1 , -1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(-1 , 13), 8);
-    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(-1 , Integer::MIN_VALUE), 2147483647);
 
     ASSERT_EQUAL(Integer::remainderUnsigned(13 , 1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(13 , -1), 13);
     ASSERT_EQUAL(Integer::remainderUnsigned(13 , 13), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(13 , MAX_VALUE), 13);
-    ASSERT_EQUAL(Integer::remainderUnsigned(13 , MIN_VALUE), 13);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , Integer::MAX_VALUE), 13);
+    ASSERT_EQUAL(Integer::remainderUnsigned(13 , Integer::MIN_VALUE), 13);
 
-    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 1), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , -1), 2147483647);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , 13), 10);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MAX_VALUE , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MAX_VALUE , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MAX_VALUE , -1), 2147483647);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MAX_VALUE , 13), 10);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MAX_VALUE , Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MAX_VALUE , Integer::MIN_VALUE), 2147483647);
 
-    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 1), 0);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , -1), -2147483648);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , 13), 11);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::remainderUnsigned(MIN_VALUE , MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MIN_VALUE , 1), 0);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MIN_VALUE , -1), -2147483648);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MIN_VALUE , 13), 11);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::remainderUnsigned(Integer::MIN_VALUE , Integer::MIN_VALUE), 0);
 }
 
 TEST(JavaLang, IntegerReverse) {
@@ -1483,8 +1492,8 @@ TEST(JavaLang, IntegerReverse) {
     ASSERT_EQUAL(-2147483648, Integer::reverse(1));
     ASSERT_EQUAL(-1, Integer::reverse(-1));
     ASSERT_EQUAL(-1342177280, Integer::reverse(13));
-    ASSERT_EQUAL(-2, Integer::reverse(MAX_VALUE));
-    ASSERT_EQUAL(1, Integer::reverse(MIN_VALUE));
+    ASSERT_EQUAL(-2, Integer::reverse(Integer::MAX_VALUE));
+    ASSERT_EQUAL(1, Integer::reverse(Integer::MIN_VALUE));
 }
 
 TEST(JavaLang, IntegerReverseBytes) {
@@ -1492,8 +1501,8 @@ TEST(JavaLang, IntegerReverseBytes) {
     ASSERT_EQUAL(16777216, Integer::reverseBytes(1));
     ASSERT_EQUAL(-1, Integer::reverseBytes(-1));
     ASSERT_EQUAL(218103808, Integer::reverseBytes(13));
-    ASSERT_EQUAL(-129, Integer::reverseBytes(MAX_VALUE));
-    ASSERT_EQUAL(128, Integer::reverseBytes(MIN_VALUE));
+    ASSERT_EQUAL(-129, Integer::reverseBytes(Integer::MAX_VALUE));
+    ASSERT_EQUAL(128, Integer::reverseBytes(Integer::MIN_VALUE));
 }
 
 TEST(JavaLang, IntegerRotateLeft) {
@@ -1501,43 +1510,43 @@ TEST(JavaLang, IntegerRotateLeft) {
     ASSERT_EQUAL(Integer::rotateLeft(0, 1), 0);
     ASSERT_EQUAL(Integer::rotateLeft(0, -1), 0);
     ASSERT_EQUAL(Integer::rotateLeft(0, 13), 0);
-    ASSERT_EQUAL(Integer::rotateLeft(0, MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::rotateLeft(0, MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::rotateLeft(0, Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::rotateLeft(0, Integer::MIN_VALUE), 0);
 
     ASSERT_EQUAL(Integer::rotateLeft(1, 0), 1);
     ASSERT_EQUAL(Integer::rotateLeft(1, 1), 2);
     ASSERT_EQUAL(Integer::rotateLeft(1, -1), -2147483648);
     ASSERT_EQUAL(Integer::rotateLeft(1, 13), 8192);
-    ASSERT_EQUAL(Integer::rotateLeft(1, MAX_VALUE), -2147483648);
-    ASSERT_EQUAL(Integer::rotateLeft(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::rotateLeft(1, Integer::MAX_VALUE), -2147483648);
+    ASSERT_EQUAL(Integer::rotateLeft(1, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::rotateLeft(-1 , 0), -1);
     ASSERT_EQUAL(Integer::rotateLeft(-1 , 1), -1);
     ASSERT_EQUAL(Integer::rotateLeft(-1 , -1), -1);
     ASSERT_EQUAL(Integer::rotateLeft(-1 , 13), -1);
-    ASSERT_EQUAL(Integer::rotateLeft(-1 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::rotateLeft(-1 , MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::rotateLeft(-1 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::rotateLeft(-1 , Integer::MIN_VALUE), -1);
 
     ASSERT_EQUAL(Integer::rotateLeft(13 , 0), 13);
     ASSERT_EQUAL(Integer::rotateLeft(13 , 1), 26);
     ASSERT_EQUAL(Integer::rotateLeft(13 , -1), -2147483642);
     ASSERT_EQUAL(Integer::rotateLeft(13 , 13), 106496);
-    ASSERT_EQUAL(Integer::rotateLeft(13 , MAX_VALUE), -2147483642);
-    ASSERT_EQUAL(Integer::rotateLeft(13 , MIN_VALUE), 13);
+    ASSERT_EQUAL(Integer::rotateLeft(13 , Integer::MAX_VALUE), -2147483642);
+    ASSERT_EQUAL(Integer::rotateLeft(13 , Integer::MIN_VALUE), 13);
 
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , 0), 2147483647);
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , 1), -2);
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , -1), -1073741825);
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , 13), -4097);
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , MAX_VALUE), -1073741825);
-    ASSERT_EQUAL(Integer::rotateLeft(MAX_VALUE , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , 0), 2147483647);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , 1), -2);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , -1), -1073741825);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , 13), -4097);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , Integer::MAX_VALUE), -1073741825);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MAX_VALUE , Integer::MIN_VALUE), 2147483647);
 
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , 0), -2147483648);
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , 1), 1);
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , -1), 1073741824);
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , 13), 4096);
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , MAX_VALUE), 1073741824);
-    ASSERT_EQUAL(Integer::rotateLeft(MIN_VALUE , MIN_VALUE), -2147483648);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , 0), -2147483648);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , 1), 1);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , -1), 1073741824);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , 13), 4096);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , Integer::MAX_VALUE), 1073741824);
+    ASSERT_EQUAL(Integer::rotateLeft(Integer::MIN_VALUE , Integer::MIN_VALUE), -2147483648);
 }
 
 TEST(JavaLang, IntegerRotateRight) {
@@ -1545,50 +1554,50 @@ TEST(JavaLang, IntegerRotateRight) {
     ASSERT_EQUAL(Integer::rotateRight(0, 1), 0);
     ASSERT_EQUAL(Integer::rotateRight(0, -1), 0);
     ASSERT_EQUAL(Integer::rotateRight(0, 13), 0);
-    ASSERT_EQUAL(Integer::rotateRight(0, MAX_VALUE), 0);
-    ASSERT_EQUAL(Integer::rotateRight(0, MIN_VALUE), 0);
+    ASSERT_EQUAL(Integer::rotateRight(0, Integer::MAX_VALUE), 0);
+    ASSERT_EQUAL(Integer::rotateRight(0, Integer::MIN_VALUE), 0);
 
     ASSERT_EQUAL(Integer::rotateRight(1, 0), 1);
     ASSERT_EQUAL(Integer::rotateRight(1, 1), -2147483648);
     ASSERT_EQUAL(Integer::rotateRight(1, -1), 2);
     ASSERT_EQUAL(Integer::rotateRight(1, 13), 524288);
-    ASSERT_EQUAL(Integer::rotateRight(1, MAX_VALUE), 2);
-    ASSERT_EQUAL(Integer::rotateRight(1, MIN_VALUE), 1);
+    ASSERT_EQUAL(Integer::rotateRight(1, Integer::MAX_VALUE), 2);
+    ASSERT_EQUAL(Integer::rotateRight(1, Integer::MIN_VALUE), 1);
 
     ASSERT_EQUAL(Integer::rotateRight(-1 , 0), -1);
     ASSERT_EQUAL(Integer::rotateRight(-1 , 1), -1);
     ASSERT_EQUAL(Integer::rotateRight(-1 , -1), -1);
     ASSERT_EQUAL(Integer::rotateRight(-1 , 13), -1);
-    ASSERT_EQUAL(Integer::rotateRight(-1 , MAX_VALUE), -1);
-    ASSERT_EQUAL(Integer::rotateRight(-1 , MIN_VALUE), -1);
+    ASSERT_EQUAL(Integer::rotateRight(-1 , Integer::MAX_VALUE), -1);
+    ASSERT_EQUAL(Integer::rotateRight(-1 , Integer::MIN_VALUE), -1);
 
     ASSERT_EQUAL(Integer::rotateRight(13 , 0), 13);
     ASSERT_EQUAL(Integer::rotateRight(13 , 1), -2147483642);
     ASSERT_EQUAL(Integer::rotateRight(13 , -1), 26);
     ASSERT_EQUAL(Integer::rotateRight(13 , 13), 6815744);
-    ASSERT_EQUAL(Integer::rotateRight(13 , MAX_VALUE), 26);
-    ASSERT_EQUAL(Integer::rotateRight(13 , MIN_VALUE), 13);
+    ASSERT_EQUAL(Integer::rotateRight(13 , Integer::MAX_VALUE), 26);
+    ASSERT_EQUAL(Integer::rotateRight(13 , Integer::MIN_VALUE), 13);
 
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 0), 2147483647);
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 1), -1073741825);
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , -1), -2);
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , 13), -262145);
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MAX_VALUE), -2);
-    ASSERT_EQUAL(Integer::rotateRight(MAX_VALUE , MIN_VALUE), 2147483647);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , 0), 2147483647);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , 1), -1073741825);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , -1), -2);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , 13), -262145);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , Integer::MAX_VALUE), -2);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MAX_VALUE , Integer::MIN_VALUE), 2147483647);
 
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 0), -2147483648);
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 1), 1073741824);
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , -1), 1);
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , 13), 262144);
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MAX_VALUE), 1);
-    ASSERT_EQUAL(Integer::rotateRight(MIN_VALUE , MIN_VALUE), -2147483648);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , 0), -2147483648);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , 1), 1073741824);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , -1), 1);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , 13), 262144);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
+    ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , Integer::MIN_VALUE), -2147483648);
 
     // System.out.println(Integer.rotateRight(0, 0));
     // System.out.println(Integer.rotateRight(0, 1));
     // System.out.println(Integer.rotateRight(0, -1));
     // System.out.println(Integer.rotateRight(0, 13));
-    // System.out.println(Integer.rotateRight(0,Integer.MAX_VALUE));
-    // System.out.println(Integer.rotateRight(0,Integer.MIN_VALUE));
+    // System.out.println(Integer.rotateRight(0,Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.rotateRight(0,Integer.Integer::MIN_VALUE));
 }
 
 // TEST(JavaLang, IntegerSignum) {
@@ -1596,15 +1605,15 @@ TEST(JavaLang, IntegerRotateRight) {
     // ASSERT_EQUAL(1, Integer::signum(1));
     // ASSERT_EQUAL(-1, Integer::signum(-1));
     // ASSERT_EQUAL(1, Integer::signum(13));
-    // ASSERT_EQUAL(1, Integer::signum(MAX_VALUE));
-    // ASSERT_EQUAL(-1, Integer::signum(MIN_VALUE));
+    // ASSERT_EQUAL(1, Integer::signum(Integer::MAX_VALUE));
+    // ASSERT_EQUAL(-1, Integer::signum(Integer::MIN_VALUE));
 
     // System.out.println(Integer.signum(0));
     // System.out.println(Integer.signum(1));
     // System.out.println(Integer.signum(-1));
     // System.out.println(Integer.signum(13));
-    // System.out.println(Integer.signum(Integer.MAX_VALUE));
-    // System.out.println(Integer.signum(Integer.MIN_VALUE));
+    // System.out.println(Integer.signum(Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.signum(Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1613,50 +1622,50 @@ TEST(JavaLang, IntegerRotateRight) {
 //     ASSERT_EQUAL(Integer::sum(0, 1), 1);
 //     ASSERT_EQUAL(Integer::sum(0, -1), -1);
 //     ASSERT_EQUAL(Integer::sum(0, 13), 13);
-//     ASSERT_EQUAL(Integer::sum(0, MAX_VALUE), MAX_VALUE);
-//     ASSERT_EQUAL(Integer::sum(0, MIN_VALUE), MIN_VALUE);
+//     ASSERT_EQUAL(Integer::sum(0, Integer::MAX_VALUE), Integer::MAX_VALUE);
+//     ASSERT_EQUAL(Integer::sum(0, Integer::MIN_VALUE), Integer::MIN_VALUE);
 
 //     ASSERT_EQUAL(Integer::sum(1, 0), 1);
 //     ASSERT_EQUAL(Integer::sum(1, 1), 1);
 //     ASSERT_EQUAL(Integer::sum(1, -1), 0);
 //     ASSERT_EQUAL(Integer::sum(1, 13), 14);
-//     ASSERT_EQUAL(Integer::sum(1, MAX_VALUE), -2147483648);
-//     ASSERT_EQUAL(Integer::sum(1, MIN_VALUE), -2147483647);
+//     ASSERT_EQUAL(Integer::sum(1, Integer::MAX_VALUE), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(1, Integer::MIN_VALUE), -2147483647);
 
 //     ASSERT_EQUAL(Integer::sum(-1 , 0), -1);
 //     ASSERT_EQUAL(Integer::sum(-1 , 1), 0);
 //     ASSERT_EQUAL(Integer::sum(-1 , -1), -2);
 //     ASSERT_EQUAL(Integer::sum(-1 , 13), 12);
-//     ASSERT_EQUAL(Integer::sum(-1 , MAX_VALUE), 2147483646);
-//     ASSERT_EQUAL(Integer::sum(-1 , MIN_VALUE), 2147483647);
+//     ASSERT_EQUAL(Integer::sum(-1 , Integer::MAX_VALUE), 2147483646);
+//     ASSERT_EQUAL(Integer::sum(-1 , Integer::MIN_VALUE), 2147483647);
 
 //     ASSERT_EQUAL(Integer::sum(13 , 0), 13);
 //     ASSERT_EQUAL(Integer::sum(13 , 1), 14);
 //     ASSERT_EQUAL(Integer::sum(13 , -1), 12);
 //     ASSERT_EQUAL(Integer::sum(13 , 13), 26);
-//     ASSERT_EQUAL(Integer::sum(13 , MAX_VALUE), -2147483636);
-//     ASSERT_EQUAL(Integer::sum(13 , MIN_VALUE), -2147483635);
+//     ASSERT_EQUAL(Integer::sum(13 , Integer::MAX_VALUE), -2147483636);
+//     ASSERT_EQUAL(Integer::sum(13 , Integer::MIN_VALUE), -2147483635);
 
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 0), 2147483647);
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 1), -2147483648);
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , -1), 2147483646);
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , 13), -2147483636);
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , MAX_VALUE), -2);
-//     ASSERT_EQUAL(Integer::sum(MAX_VALUE , MIN_VALUE), -1);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , 0), 2147483647);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , 1), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , -1), 2147483646);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , 13), -2147483636);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , Integer::MAX_VALUE), -2);
+//     ASSERT_EQUAL(Integer::sum(Integer::MAX_VALUE , Integer::MIN_VALUE), -1);
 
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 0), -2147483648);
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 1), -2147483647);
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , -1), 2147483647);
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , 13), -2147483635);
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MAX_VALUE), -1);
-//     ASSERT_EQUAL(Integer::sum(MIN_VALUE , MIN_VALUE), 0);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , 0), -2147483648);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , 1), -2147483647);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , -1), 2147483647);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , 13), -2147483635);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , Integer::MAX_VALUE), -1);
+//     ASSERT_EQUAL(Integer::sum(Integer::MIN_VALUE , Integer::MIN_VALUE), 0);
 
-//     System.out.println(Integer.sum(Integer.MIN_VALUE, 0));
-//     System.out.println(Integer.sum(Integer.MIN_VALUE, 1));
-//     System.out.println(Integer.sum(Integer.MIN_VALUE, -1));
-//     System.out.println(Integer.sum(Integer.MIN_VALUE, 13));
-//     System.out.println(Integer.sum(Integer.MIN_VALUE,Integer.MAX_VALUE));
-//     System.out.println(Integer.sum(Integer.MIN_VALUE,Integer.MIN_VALUE));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE, 0));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE, 1));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE, -1));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE, 13));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE,Integer.Integer::MAX_VALUE));
+//     System.out.println(Integer.sum(Integer.Integer::MIN_VALUE,Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1665,15 +1674,15 @@ TEST(JavaLang, IntegerRotateRight) {
     // ASSERT_STR((string) "1", Integer::toBinaryString(1));
     // ASSERT_STR((string) "11111111111111111111111111111111", Integer::toBinaryString(-1));
     // ASSERT_STR((string) "1101", Integer::toBinaryString(13));
-    // ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(MAX_VALUE));
-    // ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(MIN_VALUE));
+    // ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(Integer::MAX_VALUE));
+    // ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(Integer::MIN_VALUE));
 
     // System.out.println(Integer.toBinaryString(0));
     // System.out.println(Integer.toBinaryString(1));
     // System.out.println(Integer.toBinaryString(-1));
     // System.out.println(Integer.toBinaryString(13));
-    // System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
-    // System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
+    // System.out.println(Integer.toBinaryString(Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.toBinaryString(Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1682,15 +1691,15 @@ TEST(JavaLang, IntegerRotateRight) {
     // ASSERT_STR((string) "1", Integer::toHexString(1));
     // ASSERT_STR((string) "ffffffff", Integer::toHexString(-1));
     // ASSERT_STR((string) "d", Integer::toHexString(13));
-    // ASSERT_STR((string) "7fffffff", Integer::toHexString(MAX_VALUE));
-    // ASSERT_STR((string) "80000000", Integer::toHexString(MIN_VALUE));
+    // ASSERT_STR((string) "7fffffff", Integer::toHexString(Integer::MAX_VALUE));
+    // ASSERT_STR((string) "80000000", Integer::toHexString(Integer::MIN_VALUE));
 
     // System.out.println(Integer.toHexString(0));
     // System.out.println(Integer.toHexString(1));
     // System.out.println(Integer.toHexString(-1));
     // System.out.println(Integer.toHexString(13));
-    // System.out.println(Integer.toHexString(Integer.MAX_VALUE));
-    // System.out.println(Integer.toHexString(Integer.MIN_VALUE));
+    // System.out.println(Integer.toHexString(Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.toHexString(Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1699,15 +1708,15 @@ TEST(JavaLang, IntegerRotateRight) {
 //     ASSERT_STR((string) "1", Integer::toOctalString(1));
 //     ASSERT_STR((string) "37777777777", Integer::toOctalString(-1));
 //     ASSERT_STR((string) "15", Integer::toOctalString(13));
-//     ASSERT_STR((string) "17777777777", Integer::toOctalString(MAX_VALUE));
-//     ASSERT_STR((string) "20000000000", Integer::toOctalString(MIN_VALUE));
+//     ASSERT_STR((string) "17777777777", Integer::toOctalString(Integer::MAX_VALUE));
+//     ASSERT_STR((string) "20000000000", Integer::toOctalString(Integer::MIN_VALUE));
 
     // System.out.println(Integer.toOctalString(0));
     // System.out.println(Integer.toOctalString(1));
     // System.out.println(Integer.toOctalString(-1));
     // System.out.println(Integer.toOctalString(13));
-    // System.out.println(Integer.toOctalString(Integer.MAX_VALUE));
-    // System.out.println(Integer.toOctalString(Integer.MIN_VALUE));
+    // System.out.println(Integer.toOctalString(Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.toOctalString(Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1752,15 +1761,15 @@ TEST(JavaLang, IntegerToString) {
 //     ASSERT_STR((string) "1", Integer::toString(1));
 //     ASSERT_STR((string) "-1", Integer::toString(-1));
 //     ASSERT_STR((string) "13", Integer::toString(13));
-//     ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE));
-//     ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE));
+//     ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE));
+//     ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE));
 
 //     System.out.println(Integer.toString(0));
 //     System.out.println(Integer.toString(1));
 //     System.out.println(Integer.toString(-1));
 //     System.out.println(Integer.toString(13));
-//     System.out.println(Integer.toString(Integer.MAX_VALUE));
-//     System.out.println(Integer.toString(Integer.MIN_VALUE));
+//     System.out.println(Integer.toString(Integer.Integer::MAX_VALUE));
+//     System.out.println(Integer.toString(Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1769,59 +1778,59 @@ TEST(JavaLang, IntegerToString) {
     // // TODO(thoangminh): check these cases
     // ASSERT_STR((string) "9999", Integer::toString(0,aaaa)); // error: cannot find symbol
     // ASSERT_STR((string) "9999", Integer::toString(0,123456789132456789123456)); // integer number too large
-    // ASSERT_STR((string) "9999", Integer::toString(0,MAX_VALUE +1)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,MAX_VALUE + 2)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,MIN_VALUE -1)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,MIN_VALUE -2)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,"MIN_VALUE -2")); // error: incompatible types: String cannot be converted to int
+    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MAX_VALUE +1)); // out of range
+    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MAX_VALUE + 2)); // out of range
+    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MIN_VALUE -1)); // out of range
+    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MIN_VALUE -2)); // out of range
+    // ASSERT_STR((string) "9999", Integer::toString(0,"Integer::MIN_VALUE -2")); // error: incompatible types: String cannot be converted to int
 
     // ASSERT_STR((string) "0", (string) "", Integer::toString(0, 1));
     // ASSERT_STR((string) "0", Integer::toString(0, -1));
     // ASSERT_STR((string) "0", Integer::toString(0, 13));
-    // ASSERT_STR((string) "0", Integer::toString(0, MAX_VALUE));
-    // ASSERT_STR((string) "0", Integer::toString(0, MIN_VALUE));
+    // ASSERT_STR((string) "0", Integer::toString(0, Integer::MAX_VALUE));
+    // ASSERT_STR((string) "0", Integer::toString(0, Integer::MIN_VALUE));
 
     // ASSERT_STR((string) "1", Integer::toString(1, 0));// java.lang.ArithmeticException: / by zero
     // ASSERT_STR((string) "1", Integer::toString(1, 1));
     // ASSERT_STR((string) "1", Integer::toString(1, -1));
     // ASSERT_STR((string) "1", Integer::toString(1, 13));
-    // ASSERT_STR((string) "1", Integer::toString(1, MAX_VALUE));
-    // ASSERT_STR((string) "1", Integer::toString(1, MIN_VALUE));
+    // ASSERT_STR((string) "1", Integer::toString(1, Integer::MAX_VALUE));
+    // ASSERT_STR((string) "1", Integer::toString(1, Integer::MIN_VALUE));
 
     // ASSERT_STR((string) "-1", Integer::toString(-1 , 0));// java.lang.ArithmeticException: / by zero
     // ASSERT_STR((string) "-1", Integer::toString(-1 , 1));
     // ASSERT_STR((string) "-1", Integer::toString(-1 , -1));
     // ASSERT_STR((string) "-1", Integer::toString(-1 , 13));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , MAX_VALUE));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , MIN_VALUE));
+    // ASSERT_STR((string) "-1", Integer::toString(-1 , Integer::MAX_VALUE));
+    // ASSERT_STR((string) "-1", Integer::toString(-1 , Integer::MIN_VALUE));
 
     // ASSERT_STR((string) "13", Integer::toString(13 , 0));// java.lang.ArithmeticException: / by zero
     // ASSERT_STR((string) "13", Integer::toString(13 , 1));
     // ASSERT_STR((string) "13", Integer::toString(13 , -1));
     // ASSERT_STR((string) "10", Integer::toString(13 , 13));
-    // ASSERT_STR((string) "13", Integer::toString(13 , MAX_VALUE));
-    // ASSERT_STR((string) "13", Integer::toString(13 , MIN_VALUE));
+    // ASSERT_STR((string) "13", Integer::toString(13 , Integer::MAX_VALUE));
+    // ASSERT_STR((string) "13", Integer::toString(13 , Integer::MIN_VALUE));
 
-    // ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE , 1));
-    // ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE , -1));
-    // ASSERT_STR((string) "282ba4aaa", Integer::toString(MAX_VALUE , 13));
-    // ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE , MAX_VALUE));
-    // ASSERT_STR((string) "2147483647", Integer::toString(MAX_VALUE , MIN_VALUE));
+    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , 0));// java.lang.ArithmeticException: / by zero
+    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , 1));
+    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , -1));
+    // ASSERT_STR((string) "282ba4aaa", Integer::toString(Integer::MAX_VALUE , 13));
+    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , Integer::MAX_VALUE));
+    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , Integer::MIN_VALUE));
 
-    // ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE , 1));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE , -1));
-    // ASSERT_STR((string) "-282ba4aab", Integer::toString(MIN_VALUE , 13));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE , MAX_VALUE));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(MIN_VALUE , MIN_VALUE));
+    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , 0));// java.lang.ArithmeticException: / by zero
+    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , 1));
+    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , -1));
+    // ASSERT_STR((string) "-282ba4aab", Integer::toString(Integer::MIN_VALUE , 13));
+    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , Integer::MAX_VALUE));
+    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , Integer::MIN_VALUE));
 
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  0));
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  1));
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  -1));
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  13));
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  Integer.MAX_VALUE));
-    // System.out.println(Integer.toString(Integer.MIN_VALUE,  Integer.MIN_VALUE));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  0));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  1));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  -1));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  13));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  Integer.Integer::MAX_VALUE));
+    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  Integer.Integer::MIN_VALUE));
 
 // }
 
@@ -1830,67 +1839,67 @@ TEST(JavaLang, IntegerToUnsignedLong) {
     ASSERT_EQUAL(1, Integer::toUnsignedLong(1));
     ASSERT_EQUAL(4294967295, Integer::toUnsignedLong(-1));
     ASSERT_EQUAL(13, Integer::toUnsignedLong(13));
-    ASSERT_EQUAL(2147483647, Integer::toUnsignedLong(MAX_VALUE));
-    ASSERT_EQUAL(2147483648, Integer::toUnsignedLong(MIN_VALUE));
+    ASSERT_EQUAL(2147483647, Integer::toUnsignedLong(Integer::MAX_VALUE));
+    ASSERT_EQUAL(2147483648, Integer::toUnsignedLong(Integer::MIN_VALUE));
 }
 
 // TEST(JavaLang, IntegerToUnsignedString) {
 //     // TODO(thoangminh): check these cases
 //     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,aaaa)); // error: cannot find symbol
 //     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,123456789132456789123456)); // integer number too large
-//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,MAX_VALUE +1)); // out of range
-//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,MAX_VALUE + 2)); // out of range
-//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,MIN_VALUE -1)); // out of range
-//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,MIN_VALUE -2)); // out of range
-//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,"MIN_VALUE -2")); // error: incompatible types: String cannot be converted to int
+//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,Integer::MAX_VALUE +1)); // out of range
+//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,Integer::MAX_VALUE + 2)); // out of range
+//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,Integer::MIN_VALUE -1)); // out of range
+//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,Integer::MIN_VALUE -2)); // out of range
+//     ASSERT_STR((string) "9999", Integer::toUnsignedString(0,"Integer::MIN_VALUE -2")); // error: incompatible types: String cannot be converted to int
 
 //     ASSERT_STR((string) "0", (string) "", Integer::toUnsignedString(0, 1));
 //     ASSERT_STR((string) "0", Integer::toUnsignedString(0, -1));
 //     ASSERT_STR((string) "0", Integer::toUnsignedString(0, 13));
-//     ASSERT_STR((string) "0", Integer::toUnsignedString(0, MAX_VALUE));
-//     ASSERT_STR((string) "0", Integer::toUnsignedString(0, MIN_VALUE));
+//     ASSERT_STR((string) "0", Integer::toUnsignedString(0, Integer::MAX_VALUE));
+//     ASSERT_STR((string) "0", Integer::toUnsignedString(0, Integer::MIN_VALUE));
 
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(1, 0));// java.lang.ArithmeticException: / by zero
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(1, 1));
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(1, -1));
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(1, 13));
-//     ASSERT_STR((string) "1", Integer::toUnsignedString(1, MAX_VALUE));
-//     ASSERT_STR((string) "1", Integer::toUnsignedString(1, MIN_VALUE));
+//     ASSERT_STR((string) "1", Integer::toUnsignedString(1, Integer::MAX_VALUE));
+//     ASSERT_STR((string) "1", Integer::toUnsignedString(1, Integer::MIN_VALUE));
 
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , 0));// java.lang.ArithmeticException: / by zero
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , 1));
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , -1));
 //     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , 13));
-//     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , MAX_VALUE));
-//     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , MIN_VALUE));
+//     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , Integer::MAX_VALUE));
+//     ASSERT_STR((string) "1", Integer::toUnsignedString(-1 , Integer::MIN_VALUE));
 
 //     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , 0));// java.lang.ArithmeticException: / by zero
 //     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , 1));
 //     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , -1));
 //     ASSERT_STR((string) "10", Integer::toUnsignedString(13 , 13));
-//     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , MAX_VALUE));
-//     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , MIN_VALUE));
+//     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , Integer::MAX_VALUE));
+//     ASSERT_STR((string) "13", Integer::toUnsignedString(13 , Integer::MIN_VALUE));
 
-//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(MAX_VALUE , 0));// java.lang.ArithmeticException: / by zero
-//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(MAX_VALUE , 1));
-//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(MAX_VALUE , -1));
-//     ASSERT_STR((string) "282ba4aaa", Integer::toUnsignedString(MAX_VALUE , 13));
-//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(MAX_VALUE , MAX_VALUE));
-//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(MAX_VALUE , MIN_VALUE));
+//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(Integer::MAX_VALUE , 0));// java.lang.ArithmeticException: / by zero
+//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(Integer::MAX_VALUE , 1));
+//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(Integer::MAX_VALUE , -1));
+//     ASSERT_STR((string) "282ba4aaa", Integer::toUnsignedString(Integer::MAX_VALUE , 13));
+//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(Integer::MAX_VALUE , Integer::MAX_VALUE));
+//     ASSERT_STR((string) "2147483647", Integer::toUnsignedString(Integer::MAX_VALUE , Integer::MIN_VALUE));
 
-//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(MIN_VALUE , 0));// java.lang.ArithmeticException: / by zero
-//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(MIN_VALUE , 1));
-//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(MIN_VALUE , -1));
-//     ASSERT_STR((string) "282ba4aab", Integer::toUnsignedString(MIN_VALUE , 13));
-//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(MIN_VALUE , MAX_VALUE));
-//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(MIN_VALUE , MIN_VALUE));
+//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(Integer::MIN_VALUE , 0));// java.lang.ArithmeticException: / by zero
+//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(Integer::MIN_VALUE , 1));
+//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(Integer::MIN_VALUE , -1));
+//     ASSERT_STR((string) "282ba4aab", Integer::toUnsignedString(Integer::MIN_VALUE , 13));
+//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(Integer::MIN_VALUE , Integer::MAX_VALUE));
+//     ASSERT_STR((string) "2147483648", Integer::toUnsignedString(Integer::MIN_VALUE , Integer::MIN_VALUE));
 
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  0));
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  1));
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  -1));
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  13));
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  Integer.MAX_VALUE));
-//     System.out.println(Integer.toUnsignedString(Integer.MIN_VALUE,  Integer.MIN_VALUE));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  0));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  1));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  -1));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  13));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  Integer.Integer::MAX_VALUE));
+//     System.out.println(Integer.toUnsignedString(Integer.Integer::MIN_VALUE,  Integer.Integer::MIN_VALUE));
 
 // }
 // Test Integer::valueOf(String inputString)
@@ -1932,8 +1941,8 @@ TEST(JavaLang, IntegerToUnsignedLong) {
 //     ASSERT_EQUAL(, Integer::valueOf((String) "0", 1)); // java.lang.NumberFormatException: radix 1 less than Character.MIN_RADIX 
 //     ASSERT_EQUAL(, Integer::valueOf((String) "0", -1)); // java.lang.NumberFormatException: radix -1 less than Character.MIN_RADIX 
 //     ASSERT_EQUAL(0, Integer::valueOf((String) "0", 13)); 
-//     ASSERT_EQUAL(, Integer::valueOf((String) "0", MAX_VALUE)); // java.lang.NumberFormatException: radix 2147483647 greater than Character.MAX_RADIX
-//     ASSERT_EQUAL(, Integer::valueOf((String) "0", MIN_VALUE)); // java.lang.NumberFormatException: radix -2147483648 less than Character.MIN_RADIX
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", Integer::MAX_VALUE)); // java.lang.NumberFormatException: radix 2147483647 greater than Character.MAX_RADIX
+//     ASSERT_EQUAL(, Integer::valueOf((String) "0", Integer::MIN_VALUE)); // java.lang.NumberFormatException: radix -2147483648 less than Character.MIN_RADIX
 
 //     ASSERT_EQUAL(1, Integer::valueOf((String) "1", 13));
 //     ASSERT_EQUAL(-1, Integer::valueOf((String) "-1", 13));

@@ -26,6 +26,7 @@
 
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
+#include "../Character/Character.hpp"
 
 using namespace Java::Lang;
 
@@ -181,10 +182,9 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);
 }
 
-// Integer Integer::decode(String inputStringtringInput) {
+Integer Integer::decode(String inputString) {
 
-
-// }
+}
 
 int Integer::divideUnsigned(int dividend, int divisor) {
 	return static_cast<int> (toUnsignedLong(dividend) / toUnsignedLong(divisor));
