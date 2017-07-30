@@ -118,7 +118,7 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 	ASSERT_EQUAL(expect, result);
 	
 	int index;
-	for (index = 0; index < 10; index++) {
+	for (index = 10; index < 20; index++) {
 		validArray.push(index);
 		expect = index + 1;
 		result = validArray.length;
@@ -131,7 +131,7 @@ TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
 	char *stringArray[3] = {
 		(char*) "hello",
 		(char*) "world",
-	        '\0'
+				nullptr
 	};
 	char **stringList = (char**) stringArray;
 	Array<String> arrayString = stringList;
