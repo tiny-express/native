@@ -27,6 +27,7 @@
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
 #include "../Character/Character.hpp"
+#include "../NumberFormatException/NumberFormatException.h"
 
 using namespace Java::Lang;
 
@@ -183,6 +184,66 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 }
 
 Integer Integer::decode(String inputString) {
+    if (inputString.charAt(0) == '0' && inputString.length() == 1) {
+        return 0;
+    }
+
+
+    boolean notANumber = false;
+    boolean isNegative = false;
+    int base = 10;
+    int index = 0;
+    char sign = inputString.charAt(0);
+    if (sign == '-' && !isdigit(sign)) {
+        isNegative = true;
+        inputString = inputString.getStringFromIndex(1);
+    }
+
+
+    if (inputString.charAt(0) == '0') {
+        if (inputString.charAt(1) == 'x' || inputString.charAt(1) == 'X') {
+            base = 16;
+            index = 2;
+        } else {
+            base = 8;
+            index = 1;
+        }
+
+    } else {
+        base = 10;
+        index = 0;
+    }
+
+    for (index; index < inputString.length(); index++) {
+        if (!isdigit(inputString.charAt(index)) && base != 16) {
+            notANumber = true;
+            break;
+        }
+    }
+
+    if (notANumber) {
+        throw NumberFormatException("Not a number");
+    }
+
+    unsigned long unsignedResult = 0;
+    try {
+         unsignedResult = std::stoul(inputString.toString(), nullptr, base);
+    }
+    catch (const std::out_of_range &e) {
+        throw NumberFormatException("Integer out of range");
+    }
+
+    long result = unsignedResult;
+
+    if (isNegative) {
+        result = -unsignedResult;
+    }
+
+    if (result > Integer::MAX_VALUE || result < Integer::MIN_VALUE) {
+        throw NumberFormatException("Integer out of range");
+    }
+
+    return static_cast<Integer>(result);
 
 }
 

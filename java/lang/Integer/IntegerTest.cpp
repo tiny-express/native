@@ -29,6 +29,7 @@ extern "C" {
 }
 
 #include "Integer.hpp"
+#include "../NumberFormatException/NumberFormatException.h"
 
 using namespace Java::Lang;
 
@@ -514,136 +515,142 @@ TEST(JavaLang, IntegerCompareUnsigned) {
 }
 
 TEST(JavaLang, IntegerDecode) {
-//     String stringInput;
-//     Integer expectedResult;
-//     Integer actualResult;
-//
-//     // Cast all case of inputing a string of type decimal number
-//     stringInput = "0";
-//     expectedResult = 0;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "1";
-//     expectedResult = 1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "-1";
-//     expectedResult = -1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "13.12";
-//     expectedResult = 13;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//    // Test out of range
-//     stringInput = (String) "2147483650"; // Integer::MAX_VALUE
-//  /*  try {
-//        actualResult = Integer::decode(stringInput);
-//    }
-//    catch (NumberFormatExeption &e) {
-//
-//    }*/
-//
-//    expectedResult = Integer::MAX_VALUE;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
-//     expectedResult = Integer::MIN_VALUE;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "Not a Number";
-//     expectedResult = 1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "12345678901234567890123456789";
-//     expectedResult = 1; // out of range
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//
-//     // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
-//     stringInput = (String) "00";
-//     expectedResult = 0;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "01";
-//     expectedResult = 1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "00001101";
-//     expectedResult = 13;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "01111111111111111111111111111111"; // Integer::MAX_VALUE
-//     expectedResult = 2147483647;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
-//
-//     stringInput = (String) "0111111111111111111111111111111111111111111";
-//    // expectedResult = ; // out of range
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    String stringInput;
+    Integer expectedResult;
+    Integer actualResult;
 
-//     stringInput = (String) "011111111111111111111111111111111112222222";
-//     expectedResult = ; // wrong type
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    // Cast all case of inputing a string of type decimal number
+    stringInput = "0";
+    expectedResult = 0;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     // Cast all case of inputing a string of type hexadecimal number
-//     stringInput = (String) "0x00";
-//     expectedResult = 0;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "1";
+    expectedResult = 1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "#1";
-//     expectedResult = 1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "-1";
+    expectedResult = -1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "#FFFFFFFFFFFFFFFF";
-//     expectedResult = -1;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "13";
+    expectedResult = 13;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "0xD";
-//     expectedResult = 13;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    // Test out of range
+    stringInput = (String) "2147483650";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "0x7FFFFFFF"; // Integer::MAX_VALUE
-//     expectedResult = 2147483647;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "-2147483650";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "#FFFFFFFF80000000"; // Integer::MIN_VALUE
-//     expectedResult = -2147483647;
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "#Not a Number";
-//     expectedResult = ; // Not a number
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "Not a Number";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "#213546546";
-//     expectedResult = ; // Wrong type
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    stringInput = "0";
+    expectedResult = 0;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-//     stringInput = (String) "#1111FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-//     expectedResult = ; // Out of range
-//     actualResult = Integer::decode(stringInput);
-//     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    stringInput = (String) "01";
+    expectedResult = 1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "-01";
+    expectedResult = -1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "015";
+    expectedResult = 13;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // Test out of range
+    stringInput = (String) "020000000002";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    stringInput = (String) "-020000000002";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    // Cast all case of inputing a string of type hexadecimal number
+    stringInput = "0x0";
+    expectedResult = 0;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "0x1";
+    expectedResult = 1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "-0x1";
+    expectedResult = -1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "0X1";
+    expectedResult = 1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "-0X1";
+    expectedResult = -1;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    stringInput = (String) "0xD";
+    expectedResult = 13;
+    actualResult = Integer::decode(stringInput);
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // Test out of range
+    stringInput = (String) "0x80000002";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    stringInput = (String) "-0x80000002";
+    try {
+        actualResult = Integer::decode(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
 
 }
 
