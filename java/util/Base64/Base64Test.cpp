@@ -86,8 +86,8 @@ TEST(JavaUtil, Base64BasicEncoder) {
     }
     Array<byte> outputByteArray(100);
     int index;
-    // Filling with '*' character.
     for (index = 0; index < outputByteArray.length; index++) {
+        // Filling with '*' character.
         outputByteArray[index] = '*';
     }
     int realLength = basicEncoder.encode(stringInputToArrayOfByte, outputByteArray);
@@ -132,7 +132,7 @@ TEST(JavaUitl, Base64MimeEncoder) {
               'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
               'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
               'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'};
-    Base64::Encoder mimeEncoder = Base64::getMimeEncoder(); // RFC2045
+    Base64::Encoder mimeEncoder = Base64::getMimeEncoder();  // RFC2045
     Array<byte> expectedResultFromMimeInput =
             {'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
              'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h',
@@ -148,7 +148,7 @@ TEST(JavaUitl, Base64MimeEncoder) {
              'E', '='};
     Array<byte> resultFromMimeInput = mimeEncoder.encode(mimeInput);
 
-    int maximumNumberOfCharacterOnALine = 76; // don't sum length of line separator.
+    int maximumNumberOfCharacterOnALine = 76;  // Doesn't sum length of line separator.
     Array<byte> lineSeparator = {'@', '#'};
     Base64::Encoder mimeDecoderWithCustomNewLineSeparator =
             Base64::getMimeEncoder(maximumNumberOfCharacterOnALine, lineSeparator);
@@ -160,7 +160,7 @@ TEST(JavaUitl, Base64MimeEncoder) {
              'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
              'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h',
              'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
-             'F', 'h', 'Y', 'W', 'F', 'h', '@', '#', // '@' as 77, '#' as 88.
+             'F', 'h', 'Y', 'W', 'F', 'h', '@', '#',  // '@' at 77, '#' at 88.
              'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
              'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h',
              'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',
@@ -179,7 +179,7 @@ TEST(JavaUtil, Base64BasicDecoder) {
     Array<byte> input4BytesWith1BytePadding = {'T', 'W', 'E', '='};
     Array<byte> input4BytesWith2BytesPadding = {'T', 'Q', '=', '='};
 
-    Base64::Decoder basicDecoder = Base64::getDecoder(); // RFC4648
+    Base64::Decoder basicDecoder = Base64::getDecoder();  // RFC4648
 
     Array<byte> expectedResultFromInput4BytesWith0BytePadding = {'M', 'a', 'n'};
     Array<byte> expectedResultFromInput4BytesWith1BytePadding = {'M', 'a'};
@@ -221,7 +221,8 @@ TEST(JavaUtil, Base64BasicDecoder) {
     }
     Array<byte> outputArray(100);
     int index;
-    for (index = 0; index < outputArray.length; index++) { // Filling with '*'.
+    for (index = 0; index < outputArray.length; index++) {
+        // Filling with '*'.
         outputArray[index] = '*';
     }
     int realLength = basicDecoder.decode(inputArray, outputArray);
@@ -236,7 +237,7 @@ TEST(JavaUtil, Base64BasicDecoder) {
              '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
              '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
              '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
-             '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'}; // "Welcome to Vietnam!"
+             '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'};  // "Welcome to Vietnam!"
     ASSERT_EQUAL(expectedOutputAsString.length(), realLength);
     ASSERT_TRUE(Arrays::equals(expectedOutputArray, outputArray));
 
@@ -245,8 +246,9 @@ TEST(JavaUtil, Base64BasicDecoder) {
     Array<byte> resultOfInputAsString = basicDecoder.decode(inputAsString);
     Array<byte> expectedResultOfInputAsString =
             {'W', 'e', 'l', 'c', 'o', 'm', 'e', ' ', 't', 'o',
-             ' ', 'V', 'i', 'e', 't', 'n', 'a', 'm', '!'}; // "Welcome to Vietnam!"
-    ASSERT_TRUE(Arrays::equals(expectedResultOfInputAsString, resultOfInputAsString));
+             ' ', 'V', 'i', 'e', 't', 'n', 'a', 'm', '!'};  // "Welcome to Vietnam!"
+    ASSERT_TRUE(Arrays::equals(expectedResultOfInputAsString,
+                               resultOfInputAsString));
 }
 
 TEST(JavaUtil, Base64UrlSafeDecoder) {

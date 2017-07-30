@@ -146,7 +146,7 @@ namespace Java {
                  * @return ByteBuffer
                  */
 //              ByteBuffer encode(const ByteBuffer &source) const;
-                // TODO (truongchauhien): Waiting for ByteBuffer class.
+                // TODO(truongchauhien): Waiting for ByteBuffer class.
 
                 /**
                  * Encodes the specified byte array into a String using the Base64 encoding scheme.
@@ -175,7 +175,7 @@ namespace Java {
                  * @return OutputStream
                  */
 //              OutputStream wrap(const OutputStream &source) const;
-                // TODO (truongchauhien): Waiting for OutputStream class.
+                // TODO(truongchauhien): Waiting for OutputStream class.
             }; // class Encoder
 
             /**
@@ -283,7 +283,7 @@ namespace Java {
                  * @return ByteBuffer
                  */
 //              ByteBuffer decode(const ByteBuffer &source) const;
-                // TODO (truongchauhien): Waiting for ByteBuffer class.
+                // TODO(truongchauhien): Waiting for ByteBuffer class.
 
                 /**
                  * Decodes a Base64 encoded String into a newly-allocated byte array
@@ -301,7 +301,7 @@ namespace Java {
                  * @return InputStream
                  */
 //              InputStream wrap(const InputStream &source) const;
-                // TODO (truongchauhien): Waiting for InputStream class.
+                // TODO(truongchauhien): Waiting for InputStream class.
             };  // class Decoder
 
         public:

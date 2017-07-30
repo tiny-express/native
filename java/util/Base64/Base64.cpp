@@ -147,7 +147,7 @@ int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
     // 4 Base64 digits present for 3 bytes of data.
     int base64LineMaxToEquivalentSourceLength = this->lineMax / 4 * 3;
     // Length of source will be encoded into ONE line of base64 "string" (depending on Base64 scheme).
-    int chunksOfSourceLength = sourceLength; // Don't have linemax condition.
+    int chunksOfSourceLength = sourceLength;  // Doesn't have linemax condition.
     if (this->lineMax > 0 && sourceLength > base64LineMaxToEquivalentSourceLength) {
         chunksOfSourceLength = base64LineMaxToEquivalentSourceLength;
     }
@@ -244,11 +244,14 @@ const Array<int> Base64::Decoder::fromBase64Url = []() -> Array<int> {
     return result;
 }();
 
-Base64::Decoder Base64::Decoder::RFC4648 = Base64::Decoder(false, false);
+Base64::Decoder Base64::Decoder::RFC4648 =
+        Base64::Decoder(false, false);
 
-Base64::Decoder Base64::Decoder::RFC4648_URLSAFE = Base64::Decoder(true,  false);
+Base64::Decoder Base64::Decoder::RFC4648_URLSAFE =
+        Base64::Decoder(true,  false);
 
-Base64::Decoder Base64::Decoder::RFC2045 = Base64::Decoder(false, true);
+Base64::Decoder Base64::Decoder::RFC2045 =
+        Base64::Decoder(false, true);
 
 Base64::Decoder::Decoder(boolean isUrl, boolean isMime) {
     this->isUrl = isUrl;
@@ -364,9 +367,12 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
                 if (shiftTo == 6
                     && (sourcePosition == sourceStopPosition || source[sourcePosition++] != '=')
                     || shiftTo == 18) {
-                    // shiftTo == 18 ........................................ => '=' at wrong position.
-                    // shiftTo == 6 && sourcePosition == sourceStopPosition . => Second '=' is missing.
-                    // shiftTo == 6 && source[sourcePosition++] != '=' ...... => Byte after first '=' doesn't present for '='.
+                    // shiftTo == 18
+                    // => '=' at wrong position.
+                    // shiftTo == 6 && sourcePosition == sourceStopPosition
+                    // => Second '=' is missing.
+                    // shiftTo == 6 && source[sourcePosition++] != '='
+                    // => Byte after first '=' doesn't present for '='.
                     throw IllegalArgumentException("Input byte array has wrong 4-byte ending unit");
                 }
                 break;
