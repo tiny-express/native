@@ -364,9 +364,10 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
         currentByteDecoded = fromBase64Table[currentByte];
         if (currentByteDecoded < 0) {  // Means non-Alphabet (CRLF or line separator) or padding '='.
             if (currentByteDecoded == -2) {  // Current byte is '=': padding byte
-                if (shiftTo == 6
-                    && (sourcePosition == sourceStopPosition || source[sourcePosition++] != '=')
-                    || shiftTo == 18) {
+                if ((shiftTo == 6)
+                    && ((sourcePosition == sourceStopPosition) ||
+                        (source[sourcePosition++] != '='))
+                    || (shiftTo == 18)) {
                     // shiftTo == 18
                     // => '=' at wrong position.
                     // shiftTo == 6 && sourcePosition == sourceStopPosition
