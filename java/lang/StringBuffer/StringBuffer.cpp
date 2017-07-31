@@ -68,19 +68,15 @@ string StringBufferUnSafe::getValue() {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(CharSequence *sequence) {
-    int sequenceLength;
     if (sequence == nullptr) {
-        sequenceLength = 4;
-    } else {
-        sequenceLength = sequence->length();
+        return this->append(sequence, 0, 4);
     }
-
-    return this->append(sequence, 0, sequenceLength);
+    return this->append(sequence, 0, sequence->length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(CharSequence *sequence, int start, int end) {
     if (sequence == nullptr) {
-        return this->append(const_cast<string>("null"));
+        return this->append(const_cast<string>("null"), 0, 4);
     }
 
     if (start < 0 || start > end || start > sequence->length()) {
@@ -165,7 +161,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend) {
 
 StringBufferUnSafe &StringBufferUnSafe::append(Object *object) {
     if (object == nullptr) {
-        return this->append(const_cast<string>("null"));
+        return this->append(const_cast<string>("null"), 0, 4);
     }
 
     return this->append(object->toString());
@@ -201,7 +197,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(char charValue) {
 
 StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe *stringBuffer) {
     if (stringBuffer == nullptr) {
-        return this->append(const_cast<string>("null"));
+        return this->append(const_cast<string>("null"), 0, 4);
     }
 
     return this->append(stringBuffer->getValue());
