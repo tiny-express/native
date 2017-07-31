@@ -180,8 +180,8 @@ public:
 	 * @return string
 	 */
 	string toString() {
-		string result = strdup("");
 		if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
+			string result = strdup("");
 			for (char element : *this) {
 				string result_holder = result;
 				result = string_append(&result, element);

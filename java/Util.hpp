@@ -33,6 +33,7 @@
 #include "util/AbstractSet/AbstractSet.hpp"
 #include "util/ArrayList/ArrayList.hpp"
 #include "util/Arrays/Arrays.hpp"
+#include "util/Base64/Base64.hpp"
 #include "util/BitSet/BitSet.hpp"
 #include "util/Calendar/Calendar.hpp"
 #include "util/Collection/Collection.hpp"

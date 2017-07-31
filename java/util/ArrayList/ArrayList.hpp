@@ -111,10 +111,25 @@ namespace Java {
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-			
 			}
 			
+			/**
+			 * ArrayList copy constructor from initializer list
+			 *
+			 * @param target
+			 */
 			ArrayList(const std::initializer_list<E> &target) {
+				for (E item : target) {
+					this->add(item);
+				}
+			}
+			
+			/**
+			 * Array copy constructor for basic array
+			 *
+			 * @param target
+			 */
+			ArrayList(const Array<E> &target) {
 				for (E item : target) {
 					this->add(item);
 				}
@@ -125,7 +140,6 @@ namespace Java {
 			 *
 			 * @param c
 			 */
-			
 			ArrayList(Collection<E> collection) {
 			
 			}
@@ -503,7 +517,7 @@ namespace Java {
 				String endArrayList = "]";
 				int index;
 				for (index = 0; index < this->size() - 1; ++index) {
-					String appendString = this->original[index ].toString();
+					String appendString = this->original[ index ].toString();
 					appendString += commaAndSpace;
 					startArrayList += appendString;
 				}
