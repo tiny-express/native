@@ -188,63 +188,31 @@ Integer Integer::decode(String inputString) {
         return 0;
     }
 
-
-    boolean notANumber = false;
     boolean isNegative = false;
     int base = 10;
-    int index = 0;
     char sign = inputString.charAt(0);
-    if (sign == '-' && !isdigit(sign)) {
+    if (sign == '-' && !(isdigit(sign))) {
         isNegative = true;
         inputString = inputString.getStringFromIndex(1);
     }
 
-
     if (inputString.charAt(0) == '0') {
         if (inputString.charAt(1) == 'x' || inputString.charAt(1) == 'X') {
             base = 16;
-            index = 2;
         } else {
             base = 8;
-            index = 1;
         }
 
     } else {
         base = 10;
-        index = 0;
     }
 
-    for (index; index < inputString.length(); index++) {
-        if (!isdigit(inputString.charAt(index)) && base != 16) {
-            notANumber = true;
-            break;
-        }
-    }
-
-    if (notANumber) {
-        throw NumberFormatException("Not a number");
-    }
-
-    unsigned long unsignedResult = 0;
-    try {
-         unsignedResult = std::stoul(inputString.toString(), nullptr, base);
-    }
-    catch (const std::out_of_range &e) {
-        throw NumberFormatException("Integer out of range");
-    }
-
-    long result = unsignedResult;
-
+    int result = parseInt(inputString, base);
     if (isNegative) {
-        result = -unsignedResult;
-    }
-
-    if (result > Integer::MAX_VALUE || result < Integer::MIN_VALUE) {
-        throw NumberFormatException("Integer out of range");
+        result = -result;
     }
 
     return static_cast<Integer>(result);
-
 }
 
 int Integer::divideUnsigned(int dividend, int divisor) {
@@ -377,63 +345,50 @@ int Integer::numberOfTrailingZeros(int inputInt) {
     return n - ((unsigned int) (inputInt << 1) >> 31);
 }
 
-// TODO(thoangminh): Need class NumberFormatException, Character
-// int Integer::parseInt(String inputString, int radix) {
-	// if (s == null) {
- //        throw new NumberFormatException("null");
- //    }
 
- //    if (radix < Character.MIN_RADIX) {
- //        throw new NumberFormatException("radix " + radix
- //                + " less than Character.MIN_RADIX");
- //    }
+int Integer::parseInt(String inputString, int radix) {
+	if (inputString.length() == 0) {
+        throw NumberFormatException("input string is null");
+    }
 
- //    if (radix > Character.MAX_RADIX) {
- //        throw new NumberFormatException("radix " + radix
- //                + " greater than Character.MAX_RADIX");
- //    }
+    if (radix > 32 || radix < 2) {
+        throw NumberFormatException("radix out of range");
+    }
 
- //    int result = 0;
- //    boolean negative = false;
- //    int i = 0, len = s.length();
- //    int limit = -Integer.MAX_VALUE;
- //    int multmin;
- //    int digit;
+    if (inputString.charAt(0) == '0' && inputString.length() == 1) {
+        return 0;
+    }
 
- //    if (len > 0) {
- //        char firstChar = s.charAt(0);
- //        if (firstChar < '0') { // Possible leading "+" or "-"
- //            if (firstChar == '-') {
- //                negative = true;
- //                limit = Integer.MIN_VALUE;
- //            } else if (firstChar != '+')
- //                throw NumberFormatException.forInputString(s);
+    boolean isNegative = false;
+    char sign = inputString.charAt(0);
+    if (sign == '-' && !(isdigit(sign))) {
+        isNegative = true;
+        inputString = inputString.getStringFromIndex(1);
+    }
 
- //            if (len == 1) // Cannot have lone "+" or "-"
- //                throw NumberFormatException.forInputString(s);
- //            i++;
- //        }
- //        multmin = limit / radix;
- //        while (i < len) {
- //            // Accumulating negatively avoids surprises near MAX_VALUE
- //            digit = Character.digit(s.charAt(i++), radix);
- //            if (digit < 0) {
- //                throw NumberFormatException.forInputString(s);
- //            }
- //            if (result < multmin) {
- //                throw NumberFormatException.forInputString(s);
- //            }
- //            result *= radix;
- //            if (result < limit + digit) {
- //                throw NumberFormatException.forInputString(s);
- //            }
- //            result -= digit;
- //        }
- //    } else {
- //        throw NumberFormatException.forInputString(s);
- //    }
- //    return negative ? result : -result;
-// }
+    unsigned long unsignedResult = 0;
+    try {
+        unsignedResult = std::stoul(inputString.toString(), nullptr, radix);
+    }
+    catch (const std::invalid_argument &e) {
+        throw NumberFormatException("Not a number");
+    }
+    catch (const std::out_of_range &e) {
+        throw NumberFormatException("Integer out of range");
+    }
+
+    long result = unsignedResult;
+
+    if (isNegative) {
+        result = -unsignedResult;
+    }
+
+    if (result > Integer::MAX_VALUE || result < Integer::MIN_VALUE) {
+        throw NumberFormatException("Integer out of range");
+    }
+
+    return (int) result;
+}
 
 int Integer::parseInt(String inputString) {
 	return string_to_int(inputString.toString());

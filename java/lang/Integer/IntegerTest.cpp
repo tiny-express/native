@@ -1,27 +1,27 @@
 /**
- Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- Redistributions of source code must retain the above copyright
- notice, this list of conditions and the following disclaimer.
- Redistributions in binary form must reproduce the above
- copyright notice, this list of conditions and the following disclaimer
- in the documentation and/or other materials provided with the
- distribution.
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
  *
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 extern "C" {
@@ -1314,22 +1314,61 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
     ASSERT_EQUAL(31, Integer::numberOfTrailingZeros(Integer::MIN_VALUE));
 }
 
-// Test Integer::parseInt(String inputString, int radix)
-// TEST(JavaLang, IntegerParseInt) {
-    // ASSERT_EQUAL(Integer::parseInt((String)"0", 10), 0);
-    // ASSERT_EQUAL(Integer::parseInt((String)"473", 10), 473);
-    // ASSERT_EQUAL(Integer::parseInt((String)"+42", 10), 42);
-    // ASSERT_EQUAL(Integer::parseInt((String)"-0", 10), 0);
-    // ASSERT_EQUAL(Integer::parseInt((String)"-FF", 16), -255);
-    // ASSERT_EQUAL(Integer::parseInt((String)"1100110", 2), 102);
-    // ASSERT_EQUAL(Integer::parseInt((String)"2147483647", 10), 2147483647);
-    // ASSERT_EQUAL(Integer::parseInt((String)"-2147483648", 10), -2147483648);
-    // ASSERT_EQUAL(Integer::parseInt((String)"2147483648", 10) throws a NumberFormatException);
-    // ASSERT_EQUAL(Integer::parseInt((String)"99", 8) throws a NumberFormatException);
-    // ASSERT_EQUAL(Integer::parseInt((String)"Kona", 10) throws a NumberFormatException);
-    // ASSERT_EQUAL(Integer::parseInt((String)"Kona", 27), 411787);
 
-// }
+TEST(JavaLang, IntegerParseIntWithRadix) {
+    ASSERT_EQUAL(Integer::parseInt((String)"0", 10), 0);
+    ASSERT_EQUAL(Integer::parseInt((String)"473", 10), 473);
+    ASSERT_EQUAL(Integer::parseInt((String)"+42", 10), 42);
+    ASSERT_EQUAL(Integer::parseInt((String)"-0", 10), 0);
+    ASSERT_EQUAL(Integer::parseInt((String)"-FF", 16), -255);
+    ASSERT_EQUAL(Integer::parseInt((String)"1100110", 2), 102);
+    ASSERT_EQUAL(Integer::parseInt((String)"2147483647", 10), 2147483647);
+    ASSERT_EQUAL(Integer::parseInt((String)"-2147483648", 10), -2147483648);
+    Integer exceptionResult;
+    try {
+        exceptionResult = Integer::parseInt((String) "2147483648", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::parseInt((String) "99", 8);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::parseInt((String) "Kona", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    ASSERT_EQUAL(Integer::parseInt((String)"Kona", 27), 411787);
+
+    try {
+        exceptionResult = Integer::parseInt((String) "Kona", 33);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::parseInt((String) "Kona", 1);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::parseInt((String) "", 2);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("input string is null", e.getMessage().toString());
+    }
+}
 
 // Test Integer::parseInt(String inputString)
 // TEST(JavaLang, IntegerParseInt2) {

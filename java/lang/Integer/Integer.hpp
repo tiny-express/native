@@ -445,6 +445,11 @@ namespace Java {
              * specified by the second argument.
              *
              * @param target
+             * @throw NumberFormatException if
+             * The first argument is null or is a string of length zero.
+             * The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX.
+             * Any character of the string is not a digit of the specified radix,
+             * The value represented by the string is not a value of type int.
              * @return int
              */
             static int parseInt(String inputString, int radix);
