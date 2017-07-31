@@ -185,10 +185,10 @@ StringBufferUnSafe &StringBufferUnSafe::append(long longValue) {
 
 StringBufferUnSafe &StringBufferUnSafe::append(boolean boolValue) {
     if (boolValue) {
-        return this->append((string) "true");
+        return this->append((string) "true", 0, 4);
     }
 
-    return this->append((string) "false");
+    return this->append((string) "false", 0, 5);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(char charValue) {
@@ -203,7 +203,6 @@ StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe *stringBuffer)
     return this->append(stringBuffer->getValue());
 }
 
-// Can't append valid code point yet
 StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
     int unicodePlane = ((unsigned) codePoint) >> 16;
     boolean isBmpCodePoint = (unicodePlane == 0);
@@ -212,12 +211,12 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
     if (isBmpCodePoint) {
         this->append((char) codePoint);
     } else if (isValidCodePoint) {
-        unicode MIN_HIGH_SURROGATE = (unicode) '\u000D800';
+        int MIN_HIGH_SURROGATE = 0xD800;
         unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
-        unicode MIN_LOW_SURROGATE = (unicode) '\u000DC00';
+        int MIN_LOW_SURROGATE = 0xDC00;
 
-        char lowSurrogate = (char) ((codePoint & 0x3ff) + MIN_LOW_SURROGATE);
-        char highSurrogate = (char) ((((unsigned)codePoint) >> 10)
+        auto lowSurrogate = (char) ((codePoint & 0x3ff) + MIN_LOW_SURROGATE);
+        auto highSurrogate = (char) ((((unsigned)codePoint) >> 10)
                                      + (MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >> 10)));
         this->append(highSurrogate);
         this->append(lowSurrogate);

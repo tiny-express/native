@@ -438,7 +438,7 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
 TEST (JavaLang, StringBufferAppendCodePoint) {
     StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
 
-    // Test normal codePoint
+    // Test Bmp codePoint
     string expectBmpCodePointResult = (string)("Codepoint is : P");
     stringBuffer.appendCodePoint(80);
     ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
@@ -450,6 +450,9 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
     catch (IllegalArgumentException &e) {
         ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
     }
+
+    // TODO Test Valid codePoint
+
 }
 
 TEST (JavaLang, StringBufferCharAt) {
