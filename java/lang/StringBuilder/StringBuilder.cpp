@@ -343,7 +343,7 @@ int StringBuilder::indexOf(const String &target) const{
 }
 
 int StringBuilder::indexOf(const string target) const {
-    return this->stringMatches(this->toString().toString(), target, 0);
+    return this->stringMatches(this->toString(), target, 0);
 }
 
 int StringBuilder::indexOf(const String &target, int fromIndex) const {
@@ -351,7 +351,7 @@ int StringBuilder::indexOf(const String &target, int fromIndex) const {
 }
 
 int StringBuilder::indexOf(const string target, int fromIndex) const {
-    return  this->stringMatches(this->toString().toString(), target, fromIndex);
+    return  this->stringMatches(this->toString(), target, fromIndex);
 }
 
 StringBuilder StringBuilder::insert(int offset, boolean target) {
@@ -550,7 +550,7 @@ int StringBuilder::lastIndexOf(const String &target) const {
 }
 
 int StringBuilder::lastIndexOf(const string target) const {
-    return this->stringMatchesReverse(this->toString().toString(), target, this->currentLength);
+    return this->stringMatchesReverse(this->toString(), target, this->currentLength);
 }
 
 int StringBuilder::lastIndexOf(const String &target, int fromIndex) const {
@@ -558,7 +558,7 @@ int StringBuilder::lastIndexOf(const String &target, int fromIndex) const {
 }
 
 int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
-    return this->stringMatchesReverse(this->toString().toString(), target, fromIndex);
+    return this->stringMatchesReverse(this->toString(), target, fromIndex);
 }
 
 int StringBuilder::length() const {
@@ -687,7 +687,7 @@ String StringBuilder::substring(int start, int end) const {
     return result;
 }
 
-String StringBuilder::toString() const {
+string StringBuilder::toString() const {
     int numberOfElementIncludeNullTerminator = this->currentLength + 1;
     string content = (string)calloc((size_t)numberOfElementIncludeNullTerminator, sizeof(char));
     int index;
@@ -695,9 +695,9 @@ String StringBuilder::toString() const {
         content[index] = this->original[index];
     }
     content[this->currentLength] = '\0';
-    String result(content);
+    this->backupOriginalForToString = String(content);
     free(content);
-    return result;
+    return this->backupOriginalForToString.toString();
 }
 
 void StringBuilder::trimToSize() {
