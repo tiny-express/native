@@ -31,19 +31,42 @@ extern "C" {
 #include "../BitSet/BitSet.hpp"
 
 TEST(JavaUtil, BitSetConstructor) {
-    BitSet bitSet();
-    ASSERT_EQUAL(0, bitSet.length());
-    ASSERT_EQUAL(1, bitSet.size());
+    BitSet defaultBitSet;
+    ASSERT_EQUAL(0, defaultBitSet.length());
+    ASSERT_EQUAL(64, defaultBitSet.size());
+
+    BitSet initialSizeBitSet(100);
+    ASSERT_EQUAL(0, initialSizeBitSet.length());
+    ASSERT_EQUAL(128, initialSizeBitSet.size());
+}
+
+TEST(JavaUtil, BitSetCardinality) {
+    BitSet defaultBitSet;
+    ASSERT_EQUAL(0, defaultBitSet.cardinality());
+}
+
+TEST(JavaUtil, BitSetEquals) {
+    // TODO(truongchauhien): Create test later.
+}
+
+TEST(JavaUtil, BitSetHashCode) {
+    // TODO(truongchauhien): Create test later.
 }
 
 TEST(JavaUtil, BitSetLength) {
-    BitSet bitSet();
-    ASSERT_EQUAL(0, bitSet.length());
-    ASSERT_EQUAL(1, bitSet.size());
+    BitSet defaultBitSet;
+    ASSERT_EQUAL(0, defaultBitSet.length());
+    BitSet initialSizeBitSet(100);
+    ASSERT_EQUAL(0, initialSizeBitSet.length());
 }
 
 TEST(JavaUtil, BitSetSize) {
-    BitSet bitSet();
-    ASSERT_EQUAL(0, bitSet.length());
-    ASSERT_EQUAL(1, bitSet.size());
+    BitSet defaultBitSet;
+    ASSERT_EQUAL(64, defaultBitSet.size());
+    BitSet initialSizeBitSet(100);
+    ASSERT_EQUAL(128, initialSizeBitSet.size());
+}
+
+TEST(JavaUtil, BitSetToString) {
+    // TODO(truongchauhien): Create test later.
 }

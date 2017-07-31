@@ -56,7 +56,31 @@ BitSet::BitSet(int numberOfBits) {
     this->sizeIsSticky = true;
 }
 
+BitSet::BitSet(const Array<long> &words) {
+    this->words = words;
+    this->wordsInUse = words.length;
+}
+
 BitSet::~BitSet() { }
+
+int BitSet::cardinality() const {
+    int numberOfBitsSetToTrue = 0;
+    int indexOfWords;
+    for (indexOfWords = 0; indexOfWords < this->wordsInUse; indexOfWords++) {
+        numberOfBitsSetToTrue = numberOfBitsSetToTrue + Long::bitCount(this->words[indexOfWords]);
+    }
+    return numberOfBitsSetToTrue;
+}
+
+boolean BitSet::equals(const Object &target) const {
+    // TODO(truongchauhien): Implement this method later.
+    return false;
+}
+
+long BitSet::hashCode() const {
+    // TODO(truongchauhien): Implement this method later.
+    return 0;
+}
 
 int BitSet::length() const {
     if (this->wordsInUse == 0) {
@@ -71,4 +95,9 @@ int BitSet::length() const {
 
 int BitSet::size() const {
     return this->words.length * bitsPerWord;
+}
+
+string BitSet::toString() const {
+    // TODO(truongchauhien): Implement this method later.
+    return nullptr;
 }

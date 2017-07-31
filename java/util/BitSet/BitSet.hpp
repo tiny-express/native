@@ -39,7 +39,7 @@ namespace Java {
             static const int bitsPerWord = 1 << addressBitsPerWord;
             // Maximum index of a bit in a single word.
             static const int bitIndexMask = bitsPerWord - 1;
-            // Used to shift left or right for a p
+            // Used to shift left or right for a partial word mask.
             static const long wordMask = 0xffffffffffffffffL;
 
         private:
@@ -73,6 +73,9 @@ namespace Java {
             virtual ~BitSet();
 
         private:
+            BitSet(const Array<long> &words);
+
+        private:
             /**
              * This method return word index containing a bit has specified index.
              *
@@ -94,6 +97,12 @@ namespace Java {
             void bitOr(const BitSet &set);
             void bitXor(const BitSet &set);
             void andNot(const BitSet &set);
+
+            /**
+             * Returns the number of bits set to true in this BitSet.
+             *
+             * @return int
+             */
             int cardinality() const;
             void clear();
             void clear(int bitIndex);
@@ -134,6 +143,17 @@ namespace Java {
 //          IntStream stream() const;
             Array<byte> toByteArray() const;
             Array<long> toLongArray() const;
+
+            /**
+             * Returns a string representation of this bit set.
+             * For every index for which this BitSet contains a bit in the set state,
+             * the decimal representation of that index is included in the result.
+             * Such indices are listed in order from lowest to highest,
+             * separated by ", " (a comma and a space) and surrounded by braces,
+             * resulting in the usual mathematical notation for a set of integers.
+             *
+             * @return string
+             */
             string toString() const;
 
         public:
