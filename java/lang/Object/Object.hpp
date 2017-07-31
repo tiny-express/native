@@ -116,7 +116,7 @@ public:
 	 * @param containerSize
 	 */
 	Array(int containerSize) {
-		this->original.reserve(containerSize);
+		this->original.resize(containerSize);
 		this->length = containerSize;
 	}
 	
@@ -200,6 +200,16 @@ public:
 	* @return E
 	*/
 	E &operator[](const int index) {
+		return this->original.at(index);
+	}
+
+	/**
+	 * Get value of element at the specified position in this Array
+	 *
+	 * @param index
+	 * @return E
+	 */
+	const E &operator[](const int index) const {
 		return this->original.at(index);
 	}
 	
