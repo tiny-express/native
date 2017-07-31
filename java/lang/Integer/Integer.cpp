@@ -184,6 +184,10 @@ int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
 }
 
 Integer Integer::decode(String inputString) {
+    if (inputString.length() == 0) {
+        throw NumberFormatException("input string is null");
+    }
+
     if (inputString.charAt(0) == '0' && inputString.length() == 1) {
         return 0;
     }
