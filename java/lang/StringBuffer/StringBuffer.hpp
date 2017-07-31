@@ -262,7 +262,7 @@ namespace Java {
              *
              * @param beginIndex
              * @param endIndex
-             * @return Returns the number of Unicode code points in the specified text range of this sequence
+             * @return the number of Unicode code points in the specified text range of this sequence
              */
             int codePointCount(int beginIndex, int endIndex);
 
@@ -505,7 +505,7 @@ namespace Java {
              * If no such value of k exists, then -1 is returned.
              *
              * @param stringToGetIndex
-             * @return Returns the index within this string of the rightmost occurrence of the specified substring.
+             * @return the index within this string of the rightmost occurrence of the specified substring.
              */
             int lastIndexOf(String stringToGetIndex);
 
@@ -516,7 +516,7 @@ namespace Java {
              *
              * @param string
              * @param fromIndex
-             * @return Returns the index within this string of the rightmost occurrence of
+             * @return the index within this string of the rightmost occurrence of
              * the specified substring start fromIndex
              */
             int lastIndexOf(String stringToGetIndex, int fromIndex);
@@ -611,7 +611,7 @@ namespace Java {
              * @param end
              * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(),
              * or start is greater than end.
-             * @return
+             * @return the specified String
              */
             String subString(int start, int end);
 
@@ -857,7 +857,7 @@ namespace Java {
              *
              * @param beginIndex
              * @param endIndex
-             * @return Returns the number of Unicode code points in the specified text range of this sequence
+             * @return the number of Unicode code points in the specified text range of this sequence
              */
             int codePointCount(int beginIndex, int endIndex);
 
@@ -1071,14 +1071,14 @@ namespace Java {
              * The end argument must be greater than or equal to start, and less than or equal to the length of seq.
              * If s is null, four characters "null" will be inserted
              *
-             * @param dstOffset
+             * @param destinationOffset
              * @param sequence
              * @param start
              * @param end
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(int dstOffset, CharSequence *sequence, int start, int end);
+            StringBuffer &insert(int destinationOffset, CharSequence *sequence, int start, int end);
 
             /**
              * Inserts the string representation of a subarray of the str array argument into this sequence.
@@ -1086,7 +1086,7 @@ namespace Java {
              * The subarray is insert at position index
              *
              * @param index
-             * @param string
+             * @param stringToInsert
              * @param offset
              * @param len
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
@@ -1103,18 +1103,18 @@ namespace Java {
              * If no such value of k exists, then -1 is returned.
              *
              * @param stringToGetIndex
-             * @return Returns the index within this string of the rightmost occurrence of the specified substring.
+             * @return the index within this string of the rightmost occurrence of the specified substring.
              */
             int lastIndexOf(String stringToGetIndex);
 
             /**
              * Returns the index within this string of the last occurrence of the specified substring.
              * The integer returned is the largest value
-             * If no such value of k exists, then -1 is returned.
+             * If no such value exists, then -1 is returned.
              *
-             * @param string
+             * @param stringToGetIndex
              * @param fromIndex
-             * @return Returns the index within this string of the rightmost occurrence of
+             * @return the index within this string of the rightmost occurrence of
              * the specified substring start fromIndex
              */
             int lastIndexOf(String stringToGetIndex, int fromIndex);
@@ -1210,7 +1210,7 @@ namespace Java {
              * @param end
              * @throw StringIndexOutOfBoundsException - if start or end are negative or greater than length(),
              * or start is greater than end.
-             * @return
+             * @return the specified String
              */
             String subString(int start, int end);
 
