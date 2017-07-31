@@ -41,6 +41,7 @@ namespace Java {
         {
         private:
             string original = NULL;
+            mutable String backupOriginalForToString;
             int currentLength = 0;
             int currentCapacity = 0;
 
@@ -869,7 +870,7 @@ namespace Java {
              *
              * @return string
              */
-            String toString() const;
+            string toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.
