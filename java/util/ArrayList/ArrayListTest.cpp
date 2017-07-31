@@ -53,6 +53,11 @@ TEST (JavaLang, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	ASSERT_EQUAL(4, stringArrayList.size());
+	
+	// Standard declaration
+	Array<String> arrayString = { "hello", "world"};
+	ArrayList<String> stringArrayListCopy = arrayString;
+	ASSERT_EQUAL(2, stringArrayListCopy.size());
 }
 
 TEST (JavaLang, ArrayListDestructor) {
