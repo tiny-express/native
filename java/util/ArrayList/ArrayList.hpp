@@ -88,15 +88,25 @@ namespace Java {
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-			
 			}
-
+			
 			/**
-			 * ArrayList constructor with std::initializer_list
+			 * ArrayList copy constructor from initializer list
 			 *
 			 * @param target
 			 */
 			ArrayList(const std::initializer_list<E> &target) {
+				for (E item : target) {
+					this->add(item);
+				}
+			}
+			
+			/**
+			 * Array copy constructor for basic array
+			 *
+			 * @param target
+			 */
+			ArrayList(const Array<E> &target) {
 				for (E item : target) {
 					this->add(item);
 				}
