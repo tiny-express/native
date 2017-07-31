@@ -28,14 +28,22 @@ extern "C" {
 #include "../../../kernel/test.h"
 }
 
-#include "../URLEncoder/URLEncoder.hpp"
+#include "../BitSet/BitSet.hpp"
 
-using namespace Java::Net;
-using namespace Java::Lang;
+TEST(JavaUtil, BitSetConstructor) {
+    BitSet bitSet();
+    ASSERT_EQUAL(0, bitSet.length());
+    ASSERT_EQUAL(1, bitSet.size());
+}
 
-TEST(JavaNet, URLEncodeString) {
-//    unicode target = (unicode) "Quán ăn";
-//    String result = UrlEncoder::encode(target);
-//    unicode expect =  "Qu%c3%a1n+%c4%83n";
-//    ASSERT_STR(expect, result.toString());
+TEST(JavaUtil, BitSetLength) {
+    BitSet bitSet();
+    ASSERT_EQUAL(0, bitSet.length());
+    ASSERT_EQUAL(1, bitSet.size());
+}
+
+TEST(JavaUtil, BitSetSize) {
+    BitSet bitSet();
+    ASSERT_EQUAL(0, bitSet.length());
+    ASSERT_EQUAL(1, bitSet.size());
 }

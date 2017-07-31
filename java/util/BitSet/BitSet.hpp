@@ -24,24 +24,75 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef JAVA_UTIL_BITSET_HPP_
+#define JAVA_UTIL_BITSET_HPP_
+
 #include "../../Lang.hpp"
 
 namespace Java {
     namespace Util {
-        class BitSet : public Object {
+        class BitSet : public Object, public Cloneable, public Serializable {
+        private:
+            // Number of bits need to address every bit in a word with default size.
+            static const int addressBitsPerWord = 6;
+            // Number of bits of a word (default size of a word).
+            static const int bitsPerWord = 1 << addressBitsPerWord;
+            // Maximum index of a bit in a single word.
+            static const int bitIndexMask = bitsPerWord - 1;
+            // Used to shift left or right for a p
+            static const long wordMask = 0xffffffffffffffffL;
+
         private:
             Array<long> words;
+            // The number of words in the logical size of this BitSet.
             int wordsInUse = 0;
+            // The size of "words" array (array<long> words) is user-specified or by default.
+            boolean sizeIsSticky = false;
 
         public:
+            /**
+             * BitSet Constructor
+             * Creates a new bit set. All bits are initially false.
+             */
             BitSet();
+
+            /**
+             * BitSet Constructor
+             * Creates a bit set whose initial size is large enough to explicitly represent bits
+             * with indices in the range 0 through numberOfBits-1.
+             * All bits are initially false.
+             *
+             * @param numberOfBits
+             * @throw NegativeArraySizeException - if the specified initial size is negative.
+             */
             BitSet(int numberOfBits);
-            ~BitSet();
+
+            /**
+             * BitSet Destructor
+             */
+            virtual ~BitSet();
+
+        private:
+            /**
+             * This method return word index containing a bit has specified index.
+             *
+             * @param bitIndex
+             * @return int
+             */
+            static int wordIndex(int bitIndex);
+
+        private:
+            /**
+             * This method use to create a array of word (long) with size based on number of bits.
+             *
+             * @param numberOfBits
+             */
+            void initializeWords(int numberOfBits);
 
         public:
-            void AND(const BitSet &set);
-            void OR(const BitSet &set);
-            void XOR(const BitSet &set);
+            void bitAnd(const BitSet &set);
+            void bitOr(const BitSet &set);
+            void bitXor(const BitSet &set);
             void andNot(const BitSet &set);
             int cardinality() const;
             void clear();
@@ -56,6 +107,13 @@ namespace Java {
             long hashCode() const;
             boolean intersects(const BitSet &set);
             boolean isEmpty() const;
+
+            /**
+             * Returns the "logical size" of this BitSet: the index of the highest set bit in the BitSet plus one.
+             * Returns zero if the BitSet contains no set bits.
+             *
+             * @return int
+             */
             int length() const;
             int nextClearBit(int fromIndex) const;
             int nextSetBit(int fromIndex) const;
@@ -65,6 +123,13 @@ namespace Java {
             void set(int bitIndex, boolean value);
             void set(int fromIndex, int toIndex);
             void set(int fromIndex, int toIndex, boolean value);
+
+            /**
+             * Returns the number of bits of space actually in use by this BitSet to represent bit values.
+             * The maximum element in the set is the size - 1st element.
+             *
+             * @return int
+             */
             int size() const;
 //          IntStream stream() const;
             Array<byte> toByteArray() const;
@@ -76,6 +141,8 @@ namespace Java {
 //          static BitSet valueOf(const ByteBuffer &byteBuffer);
             static BitSet valueOf(const Array<long> &longs);
 //          static BitSet valueOf(const LongBuffer &longBuffer);
-        };
+        };  // class BitSet
     }  // namespace Util
 }  // namespace Java
+
+#endif  // JAVA_UTIL_BITSET_HPP_

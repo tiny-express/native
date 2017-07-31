@@ -25,4 +25,50 @@
  */
 
 #include "../BitSet/BitSet.hpp"
+#include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
 
+using namespace Java::Util;
+
+int BitSet::wordIndex(int bitIndex) {
+    // indexOfWord = bitIndex / (2 ^ addressBitsPerWord)
+    // (2 ^ addressBitsPerWord) is size of word.
+    int indexOfWord = bitIndex >> addressBitsPerWord;
+    return indexOfWord;
+}
+
+void BitSet::initializeWords(int numberOfBits) {
+    // Determine index of word contains the most significant bit,
+    // then increase by 1 to change index to size.
+    int sizeOfWordArray = wordIndex(numberOfBits - 1) + 1;
+    this->words = Array<long>(sizeOfWordArray);
+}
+
+BitSet::BitSet() {
+    this->initializeWords(bitsPerWord);
+    this->sizeIsSticky = false;
+}
+
+BitSet::BitSet(int numberOfBits) {
+    if (numberOfBits < 0) {
+        throw NegativeArraySizeException("numberOfBits < 0" + numberOfBits);
+    }
+    this->initializeWords(numberOfBits);
+    this->sizeIsSticky = true;
+}
+
+BitSet::~BitSet() { }
+
+int BitSet::length() const {
+    if (this->wordsInUse == 0) {
+        return 0;
+    }
+    int indexOfWordContainHighestBit = wordsInUse - 1;
+    // Number of bits in use.
+    int logicalSize = (bitsPerWord * (this->wordsInUse - 1)) +
+            (bitsPerWord - Long::numberOfLeadingZeros(words[indexOfWordContainHighestBit]));
+    return logicalSize;
+}
+
+int BitSet::size() const {
+    return this->words.length * bitsPerWord;
+}

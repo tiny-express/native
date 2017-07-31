@@ -33,7 +33,7 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-        class UrlEncoder : public virtual Object {
+        class URLEncoder : public virtual Object {
         public:
             static String encode(String s);
             static String encode(String s, String enc);
@@ -41,4 +41,4 @@ namespace Java {
     }
 }
 
-#endif
+#endif  // JAVA_NET_URL_ENCODER_HPP_
