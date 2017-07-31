@@ -465,6 +465,54 @@ TEST (JavaLang, StringBufferInsert) {
     charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, 4);
     ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
 
+    // Test negative destinationOffset
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(-1, charSequenceToInsert, 0, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("offset must be positive", e.getMessage().toString());
+    }
+
+    // Test destinationOffset > length
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(100, charSequenceToInsert, 0, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test negative start
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, -1, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test negative end
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, -1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > end
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 5, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test end > sequence length
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, 100);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
     // Test null CharSequence
     StringBuffer nullCharSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is a  pointer");
 
@@ -600,14 +648,6 @@ TEST (JavaLang, StringBufferCodePointBefore) {
     }
     catch (IndexOutOfBoundsException &e) {
         ASSERT_STR("index must be positive", e.getMessage().toString());
-    }
-
-    // Test equal to length index
-    try {
-        char expectEqualToLengthIndex = (char)(stringBuffer.codePointBefore(stringBuffer.length()));
-    }
-    catch (IndexOutOfBoundsException &e) {
-        ASSERT_STR("", e.getMessage().toString());
     }
 
     // Test greater than length index
