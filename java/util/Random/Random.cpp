@@ -257,3 +257,4 @@ void Random::setSeed(long seed) {
     this->seed.store(initialScramble(seed));
     haveNextGaussianNumber = false;
 }
+

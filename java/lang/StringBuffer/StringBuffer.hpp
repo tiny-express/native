@@ -33,6 +33,11 @@ namespace Java {
     namespace Lang {
         class StringBufferUnSafe : public Object{  //: public CharSequence {
 
+        private:
+            /**
+             * Default capacity
+             */
+            static const int defaultCapacity = 16;
         protected:
             string original = nullptr;
             int currentLength = 0;
@@ -630,6 +635,12 @@ namespace Java {
              *
              */
             void trimToSize();
+
+            /**
+             * Overload operator =
+             * @return a reference to this StringBufferUnSafe
+             */
+            StringBufferUnSafe &operator=(const StringBufferUnSafe &other);
 
             /**
              * Destructor, free memory alocated for original
@@ -1231,9 +1242,16 @@ namespace Java {
             void trimToSize();
 
             /**
+             * Overload operator =
+             * @return a reference to this StringBufferUnSafe
+             */
+            StringBuffer &operator=(const StringBuffer &other);
+
+            /**
              * Destructor, free memory alocated for original
              */
             ~StringBuffer();
+
         };
     }
 }

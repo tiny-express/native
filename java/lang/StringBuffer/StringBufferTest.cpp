@@ -88,6 +88,22 @@ TEST (JavaLang, StringBufferConstructor) {
     ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
     ASSERT_EQUAL(expectStringLength, stringConstructor.length());
     ASSERT_STR(expectStringValue, stringConstructor.getValue());
+
+    // Copy Constructor
+    StringBuffer other = StringBuffer("A string to test");
+    StringBuffer copyConstructor = StringBuffer(other);
+    ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
+    ASSERT_EQUAL(expectStringLength, stringConstructor.length());
+    ASSERT_STR(expectStringValue, stringConstructor.getValue());
+}
+
+TEST (JavaLang, StringBufferOperater) {
+    StringBuffer other = StringBuffer("A string to test");
+    StringBuffer stringBuffer;
+    stringBuffer = other;
+    ASSERT_EQUAL(other.capacity(), stringBuffer.capacity());
+    ASSERT_EQUAL(other.length(), stringBuffer.length());
+    ASSERT_STR(other.getValue(), stringBuffer.getValue());
 }
 
 TEST (JavaLang, StringBufferCapacity) {
@@ -215,6 +231,13 @@ TEST (JavaLang, StringBufferAppend) {
     string expectBoolAppend = (string)("bool true");
     ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
 
+    boolAppendStringBuffer = StringBuffer("bool ");
+
+    boolToAppend = false;
+    boolAppendStringBuffer.append(boolToAppend);
+    expectBoolAppend = (string)("bool false");
+    ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
+
     // Test char
     StringBuffer charAppendStringBuffer = StringBuffer("Character is : ");
 
@@ -247,9 +270,42 @@ TEST (JavaLang, StringBufferAppend) {
     charSequenceAppendStringBuffer.append(charSequenceToAppend);
     string expectCharSequenceAppend = (string)("CharSequence is : not null");
     ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+
+    charSequenceAppendStringBuffer.append(charSequenceToAppend, 0, 3);
+    expectCharSequenceAppend = (string)("CharSequence is : not nullnot");
+    ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+
+    // Test start < 0
+    try {
+        charSequenceAppendStringBuffer.append(charSequenceToAppend, -1, 3);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > end
+    try {
+        charSequenceAppendStringBuffer.append(charSequenceToAppend, 3, 1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > sequence length
+    try {
+        charSequenceAppendStringBuffer.append(charSequenceToAppend,
+                                              charSequenceToAppend->length() + 1,
+                                              charSequenceToAppend->length() + 2);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
     String *charSequenceString = dynamic_cast<String *>(charSequenceToAppend);
     delete charSequenceString;
-
     // Test null CharSequence
     StringBuffer nullCharSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
 
@@ -257,6 +313,8 @@ TEST (JavaLang, StringBufferAppend) {
     nullCharSequenceAppendStringBuffer.append(nullCharSequenceToAppend);
     string expectNullCharSequenceAppend = (string)("CharSequence is : null");
     ASSERT_STR(expectNullCharSequenceAppend, nullCharSequenceAppendStringBuffer.getValue());
+
+
 }
 
 TEST (JavaLang, StringBufferInsertSubCharArray) {
@@ -452,7 +510,9 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
     }
 
     // TODO Test Valid codePoint
-
+    string expectValidCodePointResult = (string)("Codepoint is : P�");
+    stringBuffer.appendCodePoint(800000);
+    //ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
 }
 
 TEST (JavaLang, StringBufferCharAt) {
@@ -524,7 +584,15 @@ TEST (JavaLang, StringBufferCodePointBefore) {
 
     // Test vaild index
     char expectCodePointBeforeResult = 'A';
-    ASSERT_EQUAL(expectCodePointBeforeResult, stringBuffer.codePointBefore(11));
+    ASSERT_EQUAL(expectCodePointBeforeResult, stringBuffer.codePointBefore(10));
+
+    // Test zero index
+    try {
+        char expectEqualToLengthIndex = (char)(stringBuffer.codePointBefore(0));
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("index must be positive", e.getMessage().toString());
+    }
 
     // Test negative index
     try {
@@ -560,15 +628,15 @@ TEST (JavaLang, StringBufferCodePointCount) {
 
     // Test negative beginIndex
     try {
-        char expectNegativeBegin = (char)(stringBuffer.codePointCount(-1, 9));
+        int expectNegativeBegin = stringBuffer.codePointCount(-1, 9);
     }
     catch (IndexOutOfBoundsException &e) {
         ASSERT_STR("", e.getMessage().toString());
     }
 
-    // Test equal to length endIndex
+    // Test greater than length endIndex
     try {
-        char expectEqualToLengthEnd = (char)(stringBuffer.codePointCount(1, stringBuffer.length()));
+        int expectEqualToLengthEnd = stringBuffer.codePointCount(1, stringBuffer.length() + 1);
     }
     catch (IndexOutOfBoundsException &e) {
         ASSERT_STR("", e.getMessage().toString());
@@ -576,7 +644,7 @@ TEST (JavaLang, StringBufferCodePointCount) {
 
     // Test beginIndex greather than endIndex
     try {
-        char expectBeginGreaterThanEnd = (char)(stringBuffer.codePointCount(10, 1));
+        int expectBeginGreaterThanEnd = stringBuffer.codePointCount(10, 1);
     }
     catch (IndexOutOfBoundsException &e) {
         ASSERT_STR("", e.getMessage().toString());

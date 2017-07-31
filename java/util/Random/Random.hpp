@@ -30,6 +30,8 @@
 #include <atomic>
 #include "random"
 #include "../../Lang.hpp"
+#include "../../../kernel/test.h"
+
 using namespace Java::Lang;
 
 namespace Java {

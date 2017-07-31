@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(16) {
+StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(this->defaultCapacity) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(int capacity) {
@@ -43,16 +43,16 @@ StringBufferUnSafe::StringBufferUnSafe(int capacity) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(String originalString) {
-    this->currentCapacity = originalString.length() + 16;
+    this->currentCapacity = originalString.length() + this->defaultCapacity;
     this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
     this->append(originalString);
 }
 
 StringBufferUnSafe::StringBufferUnSafe(CharSequence *sequence) {
     if (sequence == nullptr) {
-        this->currentCapacity = 20;
+        this->currentCapacity = this->defaultCapacity + 4;
     } else {
-        this->currentCapacity = sequence->length() + 16;
+        this->currentCapacity = sequence->length() + this->defaultCapacity;
     }
 
     this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
@@ -121,7 +121,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend, int offset
     this->ensureCapacity(this->length() + len);
     string appendPosition = this->original + this->currentLength;
     string startIndex = stringToAppend + offset;
-    int memorySizeToMove = len *sizeof(char);
+    int memorySizeToMove = len * sizeof(char);
     memmove(appendPosition, startIndex, (size_t) memorySizeToMove);
     this->currentLength += len;
     return *this;
@@ -210,6 +210,7 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
 
     if (isBmpCodePoint) {
         this->append((char) codePoint);
+        return *this;
     } else if (isValidCodePoint) {
         int MIN_HIGH_SURROGATE = 0xD800;
         unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
@@ -220,11 +221,10 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
                                      + (MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >> 10)));
         this->append(highSurrogate);
         this->append(lowSurrogate);
+        return *this;
     } else {
         throw IllegalArgumentException();
     }
-
-    return *this;
 }
 
 char StringBufferUnSafe::charAt(int index) {
@@ -261,7 +261,20 @@ int StringBufferUnSafe::codePointAt(int index) {
 }
 
 int StringBufferUnSafe::codePointBefore(int index) {
-    return this->codePointAt(index - 2);
+    if (index < 0 || index == 0) {
+        throw IndexOutOfBoundsException("index must be positive");
+    }
+    if (index > this->currentLength) {
+        throw IndexOutOfBoundsException();
+    }
+    char charAtPreviousIndex = this->original[index - 1];
+    if (Character::isLowSurrogate(charAtPreviousIndex) && (index > 1)) {
+        char charAtTwoBeforeIndex = this->original[index - 2];
+        if (Character::isLowSurrogate(charAtTwoBeforeIndex)) {
+            return Character::toCodePoint(charAtTwoBeforeIndex, charAtPreviousIndex);
+        }
+    }
+    return charAtPreviousIndex;
 }
 
 int StringBufferUnSafe::codePointCount(int beginIndex, int endIndex) {
@@ -360,8 +373,9 @@ int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, float floatValue) {
-    int valueLength = String::valueOf(floatValue).length();
-    return this->insert(offset, String::valueOf(floatValue).toString(), 0, valueLength);
+    String value = String::valueOf(floatValue);
+    int valueLength = value.length();
+    return this->insert(offset, value.toString(), 0, valueLength);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, CharSequence *charSequence) {
@@ -389,8 +403,9 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string str) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
-    int valueLength = String::valueOf(charValue).length();
-    return this->insert(offset, String::valueOf(charValue).toString(), 0, valueLength);
+    String value = String::valueOf(charValue);
+    int valueLength = value.length();
+    return this->insert(offset, value.toString(), 0, valueLength);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert) {
@@ -398,8 +413,9 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, long longValue) {
-    int valueLength = String::valueOf(longValue).length();
-    return this->insert(offset, String::valueOf(longValue).toString(), 0, valueLength);
+    String value = String::valueOf(longValue);
+    int valueLength = value.length();
+    return this->insert(offset, value.toString(), 0, valueLength);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object *object) {
@@ -411,13 +427,15 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object *object) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
-    int valueLength = String::valueOf(intValue).length();
-    return this->insert(offset, String::valueOf(intValue).toString(), 0, valueLength);
+    String value = String::valueOf(intValue);
+    int valueLength = value.length();
+    return this->insert(offset, value.toString(), 0, valueLength);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, double doubleValue) {
-    int valueLength = String::valueOf(doubleValue).length();
-    return this->insert(offset, String::valueOf(doubleValue).toString(), 0, valueLength);
+    String value = String::valueOf(doubleValue);
+    int valueLength = value.length();
+    return this->insert(offset, value.toString(), 0, valueLength);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int destinationOffset, CharSequence *sequence, int start, int end) {
@@ -612,6 +630,17 @@ void StringBufferUnSafe::trimToSize() {
     this->currentCapacity = this->currentLength;
 }
 
+StringBufferUnSafe &StringBufferUnSafe::operator=(const StringBufferUnSafe &other) {
+    this->original = (string) calloc((size_t) other.currentCapacity, sizeof(char));
+    int index;
+    for (index = 0; index < other.currentLength; index++) {
+        this->original[index] = other.original[index];
+    }
+    this->currentLength = other.currentLength;
+    this->currentCapacity = other.currentCapacity;
+    return *this;
+}
+
 
 // StringBuffer
 StringBuffer::StringBuffer() : StringBufferUnSafe() {
@@ -627,6 +656,15 @@ StringBuffer::StringBuffer(String originalString) : StringBufferUnSafe(originalS
 }
 
 StringBuffer::StringBuffer(const StringBuffer &other) {
+    std::lock_guard<std::mutex> guard(this->mutex);
+    free(this->original);
+    this->original = (string) calloc((size_t) other.currentCapacity, sizeof(char));
+    int index;
+    for (index = 0; index < other.currentLength; index++) {
+        this->original[index] = other.original[index];
+    }
+    this->currentLength = other.currentLength;
+    this->currentCapacity = other.currentCapacity;
 }
 
 StringBuffer &StringBuffer::append(Object *object) {
@@ -912,4 +950,17 @@ String StringBuffer::toString() {
 void StringBuffer::trimToSize() {
     std::lock_guard<std::mutex> guard(this->mutex);
     StringBufferUnSafe::trimToSize();
+}
+
+StringBuffer &StringBuffer::operator=(const StringBuffer &other) {
+    std::lock_guard<std::mutex> guard(this->mutex);
+    free(this->original);
+    this->original = (string) calloc((size_t) other.currentCapacity, sizeof(char));
+    int index;
+    for (index = 0; index < other.currentLength; index++) {
+        this->original[index] = other.original[index];
+    }
+    this->currentLength = other.currentLength;
+    this->currentCapacity = other.currentCapacity;
+    return *this;
 }
