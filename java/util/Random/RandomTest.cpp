@@ -128,7 +128,7 @@ TEST (JavaUtil, RandomNextFloat) {
     // Test if every generated float is in [0, 1) range
     int index;
     for (index = 0; index < 100; index++) {
-        double generatedFloat = random1.nextFloat();
+        float generatedFloat = random1.nextFloat();
         ASSERT_TRUE(generatedFloat >= 0 && generatedFloat < 1.0);
     }
 }
@@ -140,7 +140,7 @@ TEST (JavaUtil, RandomNextBoolean) {
     // Test if every generated Boolean is actually a bool
     int index;
     for (index = 0; index < 100; index++) {
-        double generatedBool = random1.nextBoolean();
+        boolean generatedBool = random1.nextBoolean();
         ASSERT_TRUE(generatedBool == TRUE || generatedBool == FALSE);
     }
 }
@@ -161,5 +161,6 @@ TEST (JavaUtil, RandomSetSeed) {
     // Given a random number generator
     Random random1;
     long expectSeed = (100 ^ 0x5DEECE66DL) & ((1L << 48) - 1);
+    random1.setSeed(100);
     //ASSERT_EQUAL(expectSeed, random1.getSeed());
 }

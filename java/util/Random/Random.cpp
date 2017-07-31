@@ -165,7 +165,7 @@ int Random::nextInt(int bound) {
         throw IllegalArgumentException(BADBOUND);
     }
 
-    if (bound & (bound - 1) == 0) {
+    if ((bound & (bound - 1)) == 0) {
         return (int) ((bound * (long) next(31)) >> 31);
     }
 
