@@ -435,6 +435,13 @@ TEST (JavaLang, StringBufferInsert) {
     string expectBoolInsert = (string)("bool true is good");
     ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
 
+    boolInsertStringBuffer = StringBuffer("bool  is bad");
+
+    boolToInsert = false;
+    boolInsertStringBuffer.insert(5, boolToInsert);
+    expectBoolInsert = (string)("bool false is bad");
+    ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
+
     // Test char
     StringBuffer charInsertStringBuffer = StringBuffer("Character  is uppercase");
 
@@ -450,6 +457,14 @@ TEST (JavaLang, StringBufferInsert) {
     charSequenceInsertStringBuffer.insert(17, charSequenceToInsert);
     string expectCharSequenceInsert = (string)("CharSequence is : not null");
     ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
+
+    // Test negative offset
+    try {
+        charSequenceInsertStringBuffer.insert(-1, charSequenceToInsert);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("offset must be positive", e.getMessage().toString());
+    }
 
     // Test null CharSequence
     StringBuffer nullCharSequenceInsertStringBuffer = StringBuffer("CharSequence is a  pointer");
