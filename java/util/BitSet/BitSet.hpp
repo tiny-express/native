@@ -125,6 +125,16 @@ namespace Java {
             boolean equals(const Object &target) const;
             void flip(int bitIndex);
             void flip(int fromIndex, int toIndex);
+
+            /**
+             * Returns the value of the bit with the specified index.
+             * The value is true if the bit with the index bitIndex is currently set in this BitSet;
+             * otherwise, the result is false.
+             *
+             * @param bitIndex
+             * @return boolean
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             boolean get(int bitIndex) const;
             BitSet get(int fromIndex, int toIndex) const;
             long hashCode() const;

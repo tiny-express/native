@@ -40,8 +40,14 @@ int BitSet::wordIndex(int bitIndex) {
 void BitSet::initializeWords(int numberOfBits) {
     // Determine index of word contains the most significant bit,
     // then increase by 1 to change index to size.
-    int sizeOfWordArray = wordIndex(numberOfBits - 1) + 1;
-    this->words = Array<long>(sizeOfWordArray);
+    int sizeOfWordsArray = wordIndex(numberOfBits - 1) + 1;
+    this->words = Array<long>(sizeOfWordsArray);
+    // Set value of new word to 0.
+    int indexOfWordsArray;
+    for (indexOfWordsArray = 0;
+         indexOfWordsArray < this->words.length; ++indexOfWordsArray) {
+        this->words[indexOfWordsArray] = 0L;
+    }
 }
 
 void BitSet::expandTo(int wordIndex) {
@@ -56,8 +62,15 @@ void BitSet::ensureCapacity(int wordsRequired) {
     if (this->words.length < wordsRequired) {
         // Allocate larger of doubled size or required size.
         int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
+        int oldWordsArrayLength = this->words.length;
         this->words = Arrays::copyOf(this->words, wordsRequested);
         this->sizeIsSticky = false;
+        // Set value of new word to 0.
+        int indexOfWordsArray;
+        for (indexOfWordsArray = oldWordsArrayLength;
+             indexOfWordsArray < this->words.length; ++indexOfWordsArray) {
+            this->words[indexOfWordsArray] = 0L;
+        }
     }
 }
 
@@ -68,7 +81,7 @@ BitSet::BitSet() {
 
 BitSet::BitSet(int numberOfBits) {
     if (numberOfBits < 0) {
-        throw NegativeArraySizeException("numberOfBits < 0" + numberOfBits);
+        throw NegativeArraySizeException("numberOfBits < 0: " + String::valueOf(numberOfBits));
     }
     this->initializeWords(numberOfBits);
     this->sizeIsSticky = true;
@@ -95,6 +108,22 @@ boolean BitSet::equals(const Object &target) const {
     return false;
 }
 
+boolean BitSet::get(int bitIndex) const {
+    if (bitIndex < 0) {
+        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+    }
+
+    int wordIndex = this->wordIndex(bitIndex);
+
+    // bitIndex is out of range, default value is false.
+    if (wordIndex >= this->wordsInUse) {
+        return false;
+    }
+
+    // Checking current bit at bitIndex in word at wordIndex.
+    return ((this->words[wordIndex] & (1L << bitIndex)) != 0);
+}
+
 long BitSet::hashCode() const {
     // TODO(truongchauhien): Implement this method later.
     return 0;
@@ -112,7 +141,13 @@ int BitSet::length() const {
 }
 
 void BitSet::set(int bitIndex) {
+    if (bitIndex < 0) {
+        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+    }
 
+    int wordIndex = this->wordIndex(bitIndex);
+    this->expandTo(wordIndex);
+    this->words[wordIndex] |= (1L << bitIndex);
 }
 
 int BitSet::size() const {

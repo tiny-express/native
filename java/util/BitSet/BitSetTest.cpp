@@ -29,6 +29,8 @@ extern "C" {
 }
 
 #include "../BitSet/BitSet.hpp"
+#include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
 
 TEST(JavaUtil, BitSetConstructor) {
     BitSet defaultBitSet;
@@ -38,6 +40,12 @@ TEST(JavaUtil, BitSetConstructor) {
     BitSet initialSizeBitSet(100);
     ASSERT_EQUAL(0, initialSizeBitSet.length());
     ASSERT_EQUAL(128, initialSizeBitSet.size());
+
+    try {
+        BitSet initialNegativeSizeBitSet(-1);
+    } catch (NegativeArraySizeException ex) {
+        ASSERT_STR("numberOfBits < 0: -1", ex.getMessage().toString());
+    }
 }
 
 TEST(JavaUtil, BitSetCardinality) {
@@ -58,6 +66,41 @@ TEST(JavaUtil, BitSetLength) {
     ASSERT_EQUAL(0, defaultBitSet.length());
     BitSet initialSizeBitSet(100);
     ASSERT_EQUAL(0, initialSizeBitSet.length());
+}
+
+TEST(VavaUtil, BitSetSet) {
+    BitSet bitSet;
+    ASSERT_EQUAL(0, bitSet.length());
+    ASSERT_EQUAL(64, bitSet.size());
+    ASSERT_EQUAL(false, bitSet.get(9));
+    bitSet.set(9);
+    // Highest index now is 9
+    // => Logical length is 10.
+    ASSERT_EQUAL(10, bitSet.length());
+    ASSERT_EQUAL(true, bitSet.get(9));
+    try {
+        bitSet.set(-1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+    }
+}
+
+TEST(JavaUtil, BitSetGet) {
+    BitSet bitSet;
+    ASSERT_EQUAL(0, bitSet.length());
+    ASSERT_EQUAL(64, bitSet.size());
+    try {
+        bitSet.get(-1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+    }
+    // bitIndex > logical length
+    ASSERT_EQUAL(false, bitSet.get(100));
+    bitSet.set(9);
+    // bit at index = 8 is currently set to 0.
+    ASSERT_EQUAL(false, bitSet.get(8));
+    // bit at index = 8 is currently set to 1.
+    ASSERT_EQUAL(true, bitSet.get(9));
 }
 
 TEST(JavaUtil, BitSetSize) {
