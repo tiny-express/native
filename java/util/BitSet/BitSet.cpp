@@ -26,6 +26,7 @@
 
 #include "../BitSet/BitSet.hpp"
 #include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
+#include "../Arrays/Arrays.hpp"
 
 using namespace Java::Util;
 
@@ -41,6 +42,23 @@ void BitSet::initializeWords(int numberOfBits) {
     // then increase by 1 to change index to size.
     int sizeOfWordArray = wordIndex(numberOfBits - 1) + 1;
     this->words = Array<long>(sizeOfWordArray);
+}
+
+void BitSet::expandTo(int wordIndex) {
+    int wordsRequired = wordIndex + 1;
+    if (this->wordsInUse < wordsRequired) {
+        this->ensureCapacity(wordsRequired);
+        this->wordsInUse = wordsRequired;
+    }
+}
+
+void BitSet::ensureCapacity(int wordsRequired) {
+    if (this->words.length < wordsRequired) {
+        // Allocate larger of doubled size or required size.
+        int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
+        this->words = Arrays::copyOf(this->words, wordsRequested);
+        this->sizeIsSticky = false;
+    }
 }
 
 BitSet::BitSet() {
@@ -91,6 +109,10 @@ int BitSet::length() const {
     int logicalSize = (bitsPerWord * (this->wordsInUse - 1)) +
             (bitsPerWord - Long::numberOfLeadingZeros(words[indexOfWordContainHighestBit]));
     return logicalSize;
+}
+
+void BitSet::set(int bitIndex) {
+
 }
 
 int BitSet::size() const {

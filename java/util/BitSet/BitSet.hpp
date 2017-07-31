@@ -92,6 +92,20 @@ namespace Java {
              */
             void initializeWords(int numberOfBits);
 
+            /**
+             * Ensures that the BitSet can accommodate a given wordIndex.
+             *
+             * @param wordIndex
+             */
+            void expandTo(int wordIndex);
+
+            /**
+             * Ensures that the BitSet can hold enough words.
+             *
+             * @param wordsRequired
+             */
+            void ensureCapacity(int wordsRequired);
+
         public:
             void bitAnd(const BitSet &set);
             void bitOr(const BitSet &set);
@@ -128,6 +142,13 @@ namespace Java {
             int nextSetBit(int fromIndex) const;
             int previousClearBit(int fromIndex) const;
             int previousSetBit(int fromIndex) const;
+
+            /**
+             * Sets the bit at the specified index to true.
+             *
+             * @param bitIndex
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             void set(int bitIndex);
             void set(int bitIndex, boolean value);
             void set(int fromIndex, int toIndex);
