@@ -25,3 +25,33 @@
  */
 
 #include "MediaType.h"
+extern "C" {
+#include "../../../../kernel/test.h"
+}
+
+using namespace Javax::Ws;
+
+TEST(MediaType, Constructor) {
+
+}
+
+TEST(MediaType, GetType) {
+
+}
+
+TEST(MediaType, GetSubtype) {
+
+}
+
+TEST(MediaType, IsCompatible) {
+
+}
+
+TEST(MediaType, IsWildcardSubtype) {
+
+}
+
+TEST(MediaType, IsWildcardType) {
+
+}
+
