@@ -37,7 +37,7 @@ namespace Java {
             /**
              * Default capacity
              */
-            static const int defaultCapacity = 16;
+            static const int DEFAULTCAPACITY = 16;
         protected:
             string original = nullptr;
             int currentLength = 0;

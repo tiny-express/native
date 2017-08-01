@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(this->defaultCapacity) {
+StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(this->DEFAULTCAPACITY) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(int capacity) {
@@ -43,16 +43,16 @@ StringBufferUnSafe::StringBufferUnSafe(int capacity) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(String originalString) {
-    this->currentCapacity = originalString.length() + this->defaultCapacity;
+    this->currentCapacity = originalString.length() + this->DEFAULTCAPACITY;
     this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
     this->append(originalString);
 }
 
 StringBufferUnSafe::StringBufferUnSafe(CharSequence *sequence) {
     if (sequence == nullptr) {
-        this->currentCapacity = this->defaultCapacity + 4;
+        this->currentCapacity = this->DEFAULTCAPACITY + 4;
     } else {
-        this->currentCapacity = sequence->length() + this->defaultCapacity;
+        this->currentCapacity = sequence->length() + this->DEFAULTCAPACITY;
     }
 
     this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
@@ -209,8 +209,7 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
     boolean isValidCodePoint = (unicodePlane < (((unsigned) (0X10FFFF + 1)) >> 16));
 
     if (isBmpCodePoint) {
-        this->append((char) codePoint);
-        return *this;
+        return this->append((char) codePoint);
     } else if (isValidCodePoint) {
         int MIN_HIGH_SURROGATE = 0xD800;
         unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
@@ -362,20 +361,18 @@ int StringBufferUnSafe::indexOf(String stringToGetIndex) {
 }
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) {
-    int stringAppearTime = 0;
-    int indexOfString = 0;
-    do {
-        stringAppearTime++;
-        indexOfString = string_index(this->original, stringToGetIndex.toString(), stringAppearTime);
-    } while (indexOfString < fromIndex && indexOfString != -1);
-
-    return indexOfString;
+    String originalString = this->original;
+    String fromIndexString = originalString.getStringFromIndex(fromIndex);
+    int result = fromIndexString.indexOf(stringToGetIndex);
+    if (result == -1) {
+        return result;
+    }
+    return result + fromIndex;
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, float floatValue) {
     String value = String::valueOf(floatValue);
-    int valueLength = value.length();
-    return this->insert(offset, value.toString(), 0, valueLength);
+    return this->insert(offset, value.toString(), 0, value.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, CharSequence *charSequence) {
@@ -404,8 +401,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string str) {
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
     String value = String::valueOf(charValue);
-    int valueLength = value.length();
-    return this->insert(offset, value.toString(), 0, valueLength);
+    return this->insert(offset, value.toString(), 0, value.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert) {
@@ -414,8 +410,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, long longValue) {
     String value = String::valueOf(longValue);
-    int valueLength = value.length();
-    return this->insert(offset, value.toString(), 0, valueLength);
+    return this->insert(offset, value.toString(), 0, value.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object *object) {
@@ -428,14 +423,12 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object *object) {
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
     String value = String::valueOf(intValue);
-    int valueLength = value.length();
-    return this->insert(offset, value.toString(), 0, valueLength);
+    return this->insert(offset, value.toString(), 0, value.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, double doubleValue) {
     String value = String::valueOf(doubleValue);
-    int valueLength = value.length();
-    return this->insert(offset, value.toString(), 0, valueLength);
+    return this->insert(offset, value.toString(), 0, value.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int destinationOffset, CharSequence *sequence, int start, int end) {
@@ -456,27 +449,27 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int destinationOffset, CharSequen
 }
 
 int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) {
-    int stringAppearTime = 0;
-    int index = -1;
-    int lastIndex;
-    do {
-        stringAppearTime++;
-        lastIndex = index;
-        index = string_index(this->original, stringToGetIndex.toString(), stringAppearTime);
-    } while (index != -1);
-    return lastIndex;
+    String originalString = this->original;
+    return originalString.lastIndexOf(stringToGetIndex);
 }
 
 int StringBufferUnSafe::lastIndexOf(String stringToGetIndex, int fromIndex) {
-    int stringAppearTime = 0;
-    int index = -1;
-    int lastIndex;
-    do {
-        stringAppearTime++;
-        lastIndex = index;
-        index = string_index(this->original, stringToGetIndex.toString(), stringAppearTime);
-    } while (index != -1 && index <= fromIndex);
-    return lastIndex;
+    string reversedOriginal = string_reverse(this->original);
+    string reversedString = string_reverse(stringToGetIndex.toString());
+    String reversedOriginalString = reversedOriginal;
+
+    int substringIndex = this->length() - fromIndex - stringToGetIndex.length();
+    reversedOriginalString = reversedOriginalString.getStringFromIndex(substringIndex);
+    int result = reversedOriginalString.indexOf(reversedString);
+
+    free(reversedOriginal);
+    free(reversedString);
+    // Calculate result with original
+    if (result == -1) {
+        return result;
+    }
+    result = reversedOriginalString.length() - stringToGetIndex.length() - result;
+    return result;
 }
 
 int StringBufferUnSafe::offsetByCodePoints(int index, int codePointOffset) {
