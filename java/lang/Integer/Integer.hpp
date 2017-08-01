@@ -42,7 +42,7 @@ namespace Java {
 
         private:
 			int original;
-			string string_original;
+			string stringOriginal;
         public:
             /**
             * The number of bits used to represent an int value in two's complement binary form.
@@ -53,7 +53,7 @@ namespace Java {
              * The number of bytes used to represent a int value in two's complement binary form.
              */
             // TODO change from 8 to Byte::SIZE
-            static const int BYTES = SIZE/8;
+            static const int BYTES = SIZE / 8;
 
             /**
              * A constant holding the maximum value of type int
@@ -116,9 +116,9 @@ namespace Java {
             char charValue() const;
 
             /**
-             * Integer to String
+             * Integer to string
              *
-             * @return CString
+             * @return string
              */
             string stringValue() const;
 
@@ -137,7 +137,7 @@ namespace Java {
              * @param target
              * @return Integer
              */
-            Integer operator=(const Integer &target);
+            Integer &operator=(const Integer &target);
 
             /**
              * Make a summation with target Integer
@@ -175,14 +175,14 @@ namespace Java {
             Integer operator%(const Integer &target);
 
             /**
-             * Compare this Integer is equal target
+             * Compare this Integer is equal to target
              *
              * @return boolean
              */
             boolean operator==(const Integer &target) const;
 
             /**
-             * Compare this Integer is not equal target
+             * Compare this Integer is not equal to target
              *
              * @return bool
              */
@@ -203,14 +203,14 @@ namespace Java {
             boolean operator>(const Integer &target) const;
 
             /**
-             * Compare this Integer is equal or less than target
+             * Compare this Integer is equal to or less than target
              *
              * @return bool
              */
             boolean operator<=(const Integer &target) const;
 
             /**
-             * Compare this Integer is equal
+             * Compare this Integer is equal to
              * or greater than target
              *
              * @return bool
@@ -233,7 +233,7 @@ namespace Java {
              * two's complement binary representation
              * of the specified int value.
              *
-             * @param int inputInt
+             * @param inputInt
              * @return int
              */
             static int bitCount(int inputInt);
@@ -249,16 +249,21 @@ namespace Java {
             /**
              * Compares two int values numerically.
              *
-             * @param target
-             * @return boolean
+             * @param a
+             * @param b
+             * @return the value 0 if intA == intB; a value less than 0 if intA < intB;
+             * and a value greater than 0 if intA > intB
              */
-            static int compare(int inputInt1, int inputInt2);
+            static int compare(int intA, int intB);
 
             /**
              * Compares two Integer objects numerically.
              *
              * @param  Integer anotherInteger
-             * @return int
+             * @return the value 0 if this Integer is equal to the argument Integer;
+             * a value less than 0 if this Integer is numerically less than the argument Integer;
+             * and a value greater than 0 if this Integer is numerically greater than
+             * the argument Integer (signed comparison).
              */
             int compareTo(Integer anotherInteger);
 
@@ -266,136 +271,141 @@ namespace Java {
              * Compares two int values numerically
              * treating the values as unsigned.
              *
-             * @param target
-             * @return boolean
+             * @param a
+             * @param b
+             * @return the value 0 if intA == intB;
+             * a value less than 0 if intA < intB as unsigned values;
+             * and a value greater than 0 if intA > intB as unsigned values
              */
-            static int compareUnsigned(int inputInt_1, int inputInt_2);
+            static int compareUnsigned(int intA, int intB);
 
             /**
-             * Decodes a String into an Integer .
+             * Decodes a String into an Integer. Accepts decimal, hexadecimal, and octal numbers
              *
-             * @param target
-             *
-             * @return Integer
+             * @param inputString
+             * @throw NumberFormatException - if the String does not contain a parsable integer
+             * or the String contain a number outside the range of integer
+             * @return an Integer object holding the int value represented by inputString
              */
-            static Integer decode(String inputStringtringInput);
+            static Integer decode(String inputString);
 
             /**
-             * Returns the unsigned quotient of dividing
-             * the first argument by the second where each
-             * argument and the result is interpreted as an unsigned value. ...
+             * Returns the unsigned quotient of dividing the first argument by the second
+             * where each argument and the result is interpreted as an unsigned value
              *
-             * @param    int dividend
-             *           int divisor
-             *
-             * @return   int
+             * @param dividend
+             * @param divisor
+             * @return the unsigned quotient of the first argument divided by the second argument
              */
             static int divideUnsigned(int dividend, int divisor);
 
             /**
-            * Integer value in double
+            * Returns the value of this Integer as a double after
+            * a widening primitive conversion.
             *
-            * @return int
+            * @return the value of this Integer as a double
             */
             double doubleValue() const;
 
             /**
              * Compares this object to the specified object.
              *
-             * @param target
-             * @return boolean
+             * @param object
+             * @return true if the objects are the same; false otherwise.
              */
-            static boolean equals(Integer obj);
+            static boolean equals(Integer object);
 
             /**
              * Returns the value of this Integer as
              * a float after a widening primitive conversion.
              *
-             * @param target
-             * @return float
+             * @return the value of this Integer as a float
              */
             float floatValue() const;
 
             /**
-             * Determines the integer value of the
-             * system property with the specified name.
+             * Determines the integer value of the system property with the specified name.
              *
-             * @param target
-             * @return int
+             * @param propertyName
+             * @throw SecurityException
+             * @return the Integer value of the property.
              */
-            static Integer getInteger(String inputString); // TODO(thoangminh): research it
+            // Not support this method yet
+            // static Integer getInteger(String propertyName); // TODO(thoangminh): research it
 
             /**
-             * Determines the integer value of the
-             * system property with the specified name.
+             * Determines the integer value of the system property with the specified name.
              *
-             * @param target
-             * @return int
+             * @param propertyName
+             * @param defaultValue
+             * @throw SecurityException
+             * @return the Integer value of the property.
              */
-            static Integer getInteger(String inputString, int inputInt);
+            // Not support this method yet
+            // static Integer getInteger(String propertyName, int defaultValue);
 
             /**
-             * Returns the integer value of the system
-             * property with the specified name.
+             * Returns the integer value of the system property with the specified name.
              *
-             * @param target
-             * @return int
+             * @param propertyName
+             * @param defaultValue
+             * @throw SecurityException
+             * @return Returns the integer value of the system property with the specified name.
              */
-            static Integer getInteger(String inputString, Integer inputInteger);
+            // Not support this method yet
+            // static Integer getInteger(String propertyName, Integer defaultValue);
 
             /**
              * Returns a hash code for this Integer.
              *
-             * @param target
-             * @return int
+             * @return hash code of this Integer
+             * equal to the primitive int value represented by this Integer object.
              */
-            //static int hashCode();
+            // static int hashCode();
 
             /**
              * Returns a hash code for a int value;
              * compatible with Integer.hashCode() .
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return a hash code value for a int value.
              */
             static int hashCode(int inputInt);
 
             /**
-             * Returns an int value with at most
-             * a single one-bit, in the position of
-             * the highest-order ("leftmost") one-bit
-             * in the specified int value.
+             * Returns an int value with at most a single one-bit, in the position of
+             * the highest-order ("leftmost") one-bit in the specified int value.
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return an int value with a single one-bit,
+             * in the position of the highest-order one-bit in the specified value,
+             * or zero if the specified value is itself equal to zero.
              */
             static int highestOneBit(int inputInt);
 
             /**
-             * Returns the value of
-             * this Integer as an int .
+             * Returns the value of this Integer as an int .
              *
-             * @param target
-             * @return int
+             * @return he value of this Integer as an int
              */
             int intValue() const;
 
             /**
-             * Returns the value of this Integer as a
-             * long after a widening primitive conversion.
+             * Returns the value of this Integer as an long after
+             * a widening primitive conversion
              *
-             * @param target
-             * @return long
+             * @return he value of this Integer as an long
              */
             long longValue() const;
 
             /**
-             * Returns an int value with at most
-             * a single one-bit, in the position of
+             * Returns an int value with at most a single one-bit, in the position of
              * the lowest-order ("rightmost") one-bit in the specified int value.
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return an int value with a single one-bit, 
+             * in the position of the lowest-order one-bit in the specified value, 
+             * or zero if the specified value is itself equal to zero
              */
             static int lowestOneBit(int inputInt);
 
@@ -404,38 +414,40 @@ namespace Java {
              * as if by calling Math#max(int,int) Math.max .
              *
              * @param target
-             * @return int
+             * @return ntA if intA >= intB, else intB
              */
-            static int max(int inputInt_1, int inputInt_2);
+            static int max(int intA, int intB);
 
             /**
              * Returns the smaller of two int values
              * as if by calling Math#min(int,int) Math.min .
              *
-             * @param target
-             * @return int
+             * @param intA
+             * @param intB
+             * @return intA if intA <= intB, else intB
              */
-            static int min(int inputInt_1, int inputInt_2);
+            static int min(int intA, int intB);
 
             /**
-             * Returns the number of zero bits
-             * preceding the highest-order
+             * Returns the number of zero bits preceding the highest-order
              * ("leftmost") one-bit in the two's complement
              * binary representation of the specified ...
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return the number of zero bits preceding the highest-order ("leftmost") one-bit
+             * in the two's complement binary representation of the specified int value,
+             * or 32 if the value is equal to zero.
              */
             static int numberOfLeadingZeros(int inputInt);
 
             /**
-             * Returns the number of zero bits
-             * following the lowest-order ("rightmost")
-             * one-bit in the two's complement binary
-             * representation of the specified ...
+             * Returns the number of zero bits following the lowest-order ("rightmost")
+             * one-bit in the two's complement binary representation of the specified ...
              *
              * @param target
-             * @return int
+             * @return the number of zero bits preceding the highest-order ("leftmost") one-bit
+             * in the two's complement binary representation of the specified int value,
+             * or 32 if the value is equal to zero.
              */
             static int numberOfTrailingZeros(int inputInt);
 
@@ -444,7 +456,8 @@ namespace Java {
              * a signed integer in the radix
              * specified by the second argument.
              *
-             * @param target
+             * @param inputString
+             * @param radix
              * @throw NumberFormatException if
              * The first argument is null or is a string of length zero.
              * The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX.
@@ -455,39 +468,47 @@ namespace Java {
             static int parseInt(String inputString, int radix);
 
             /**
-             * Parses the string argument as
-             * a signed decimal integer.
+             * Parses the string argument as a signed decimal integer.
              *
-             * @param target
-             * @return int
+             * @param inputString
+             * @throw NumberFormatException - if the string does not contain a parsable integer.
+             * @return the integer value represented by the argument in decimal.
              */
             static int parseInt(String inputString);
 
             /**
-             * Parses the string argument as an unsigned
-             * integer in the radix specified by the second argument.
+             * Parses the string argument as
+             * a signed integer in the radix
+             * specified by the second argument.
              *
-             * @param target
-             * @return int
+             * @param inputString
+             * @param radix
+             * @throw NumberFormatException if
+             * The first argument is null or is a string of length zero.
+             * The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX.
+             * Any character of the string is not a digit of the specified radix,
+             * The value represented by the string is not a value of type unsigned int.
+             * @return unsigned integer value represented by the argument in decimal
              */
             static int parseUnsignedInt(String inputString, int radix);
 
             /**
-             * Parses the string argument as
-             * an unsigned decimal integer.
+             * Parses the string argument as an unsigned decimal intege
              *
-             * @param target
-             * @return int
+             * @param inputString
+             * @throw NumberFormatException - if the string does not contain a parsable unsigned integer.
+             * @return unsigned integer value represented by the argument in decimal
              */
             static int parseUnsignedInt(String inputString);
 
             /**
-             * Returns the unsigned remainder from dividing
-             * the first argument by the second where each
-             * argument and the result is interpreted as an unsigned ...
+             * Returns the unsigned remainder from dividing the first argument by the second
+             * where each argument and the result is interpreted as an unsigned value.
              *
-             * @param target
-             * @return int
+             * @param dividend
+             * @param divisor
+             * @throw ArithmeticException if the divisor y is zero
+             * @return the unsigned remainder of the first argument divided by the second argument
              */
             static int remainderUnsigned(int dividend, int divisor);
 
@@ -496,73 +517,76 @@ namespace Java {
              * of the bits in the two's complement binary representation
              * of the specified int value.
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return the value obtained by reversing order of the bits in the specified int value.
              */
             static int reverse(int inputInt);
 
             /**
-             * Returns the value obtained by reversing
-             * the order of the bytes in the two's complement
+             * Returns the value obtained by reversing the order of the bytes in the two's complement
              * representation of the specified int value.
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return the value obtained by reversing the bytes in the specified int value.
              */
             static int reverseBytes(int inputInt);
 
             /**
              * Returns the value obtained by rotating the
              * two's complement binary representation of
-             * the specified int value left by the specified number of ...
+             * the specified int value left by the specified number of bits
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @param distance
+             * @return the value obtained by rotating the two's complement binary
+             * representation of the specified int value left by the specified number of bits.
              */
             static int rotateLeft(int inputInt, int distance);
 
             /**
-             * Returns the value obtained by rotating the
-             * two's complement binary representation of
-             * the specified int value right by the specified number of ...
-             *
-             * @param target
-             * @return int
-             */
+            * Returns the value obtained by rotating the
+            * two's complement binary representation of
+            * the specified int value right by the specified number of bits
+            *
+            * @param inputInt
+            * @param distance
+            * @return the value obtained by rotating the two's complement binary
+            * representation of the specified int value right by the specified number of bits.
+            */
             static int rotateRight(int inputInt, int distance);
 
             /**
              * Returns the value of this Integer as
              * a short after a narrowing primitive conversion.
              *
-             * @param target
-             * @return short
+             * @return the value of this Integer as a short
              */
             short shortValue() const;
 
             /**
-             * Returns the signum function
-             * of the specified int value.
+             * Returns the signum function of the specified int value.
              *
-             * @param target
-             * @return int
+             * @param inputInt
+             * @return the signum function of the specified int value.
              */
             static int signum(int inputInt);
 
             /**
              * Adds two integers together as per the + operator.
              *
-             * @param target
-             * @return int
+             * @param intA
+             * @param intA
+             * @return sum of intA and intB
              */
-            static int sum(int a, int b);
+            static int sum(int intA, int intB);
 
             /**
              * Returns a string representation of
              * the integer argument as an unsigned integer in base 2.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @return the string representation of the unsigned integer value
+             * represented by the argument in binary
              */
             static string toBinaryString(int inputInt);
 
@@ -570,8 +594,9 @@ namespace Java {
              * Returns a string representation of
              * the integer argument as an unsigned integer in base 16.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @return the string representation of the unsigned integer value
+             * represented by the argument in hex
              */
             static string toHexString(int inputInt);
 
@@ -579,52 +604,52 @@ namespace Java {
              * Returns a string representation of
              * the integer argument as an unsigned integer in base 8.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @return the string representation of the unsigned integer value
+             * represented by the argument in base 8
              */
             static string toOctalString(int inputInt);
 
             /**
-             * Returns a String object representing
-             * this Integer 's value.
+             * Returns a String object representing this Integer 's value.
              *
-             * @param target
-             * @return String
+             * @return a string representation of the value of this object in base 10
              */
-           // static String toString();
+            // static String toString();
 
             /**
              * Returns a String object
              * representing the specified integer.
+             *
+             * @return a string representation of the argument in base 10.
              */
             static String toString(int i);
 
             /**
-             * Returns a string representation of
-             * the first argument in the radix
+             * Returns a string representation of the first argument in the radix
              * specified by the second argument.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @param radix
+             * @return a string representation of the argument in the specified radix.
              */
             static string toString(int inputInt, int radix);
 
             /**
-             * Converts the argument to a long
-             * by an unsigned conversion.
+             * Converts the argument to a long by an unsigned conversion.
              *
-             * @param target
-             * @return long
+             * @param longValue
+             * @return the argument converted to long by an unsigned conversion
              */
-            static long toUnsignedLong(int x);
+            static long toUnsignedLong(int longValue);
 
             /**
-             * Returns a string representation of
-             * the first argument as an unsigned
+             * Returns a string representation of the first argument as an unsigned
              * integer value in the radix specified by the second argument.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @param radix
+             * @return an unsigned string representation of the argument in the specified radix.
              */
             static string toUnsignedString(int inputInt, int radix);
 
@@ -632,39 +657,39 @@ namespace Java {
              * Returns a string representation of
              * the argument as an unsigned decimal value.
              *
-             * @param target
-             * @return string
+             * @param inputInt
+             * @return an unsigned string representation of the argument.
              */
             static string toUnsignedString(int inputInt);
 
             /**
-             * Returns an Integer object holding
-             * the value of the specified String .
+             * Returns an Integer object holding the value of the specified String .
              *
-             * @param target
-             * @return Integer
+             * @param inputString
+             * @throw NumberFormatException - if the string cannot be parsed as an integer.
+             * @return an Integer object holding the value represented by the string argument.
              */
             static Integer valueOf(String inputString);
 
             /**
-             * Returns an Integer instance representing
-             * the specified int value.
+             * Returns an Integer instance representing the specified int value.
              *
-             * @param target
-             * @return Integer
+             * @param inputInt
+             * @return an Integer instance representing inputInt.
              */
             static Integer valueOf(int inputInt);
 
             /**
-             * Returns an Integer object
-             * holding the value extracted from the specified String
+             * Returns an Integer object holding the value extracted from the specified String
              * when parsed with the radix given by the second argument.
              *
              * @param inputString
-             * @param radixI
-             * @return
+             * @param radix
+             * @throw NumberFormatException - if the String does not contain a parsable int.
+             * @return an Integer object holding the value represented by the string argument
+             * in the specified radix.
              */
-            static Integer valueOf(String inputString, int radixI);
+            static Integer valueOf(String inputString, int radix);
 		};
 	}
 }

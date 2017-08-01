@@ -33,27 +33,26 @@ using namespace Java::Lang;
 
 Integer::Integer() {
 	this->original = 0;
-	this->string_original = string_from_int(this->original);
+	this->stringOriginal = (string) "0";
 }
 
 Integer::Integer(int original) {
 	this->original = original;
-	this->string_original = string_from_int(this->original);
+	this->stringOriginal = string_from_int(this->original);
 }
-// TODO(thoangminh): Enable after finish parseInt(String inputString, int radix)
-// Integer::Integer(String inputStringtringInput) {
-// 	this->original = string_to_int(stringInput.toString());
-// 	this->string_original = stringInput.toString();
-// }
+ Integer::Integer(String inputString) {
+ 	this->original = string_to_int(inputString.toString());
+ 	this->stringOriginal = inputString.toString();
+ }
 
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
-	this->string_original = string_from_int(this->original);
+	this->stringOriginal = string_from_int(this->original);
 }
 
 Integer::~Integer() {
-	if (this->string_original != NULL)  {
-		free(this->string_original);
+	if (this->stringOriginal != NULL)  {
+		free(this->stringOriginal);
 	}
 }
 
@@ -65,7 +64,7 @@ char Integer::charValue() const {
 }
 
 string Integer::stringValue() const {
-    return this->string_original;
+    return this->stringOriginal;
 }
 
 short Integer::shortValue() const {
@@ -88,10 +87,10 @@ double Integer::doubleValue() const {
 	return static_cast<double> (this->original);
 }
 
-Integer Integer::operator=(const Integer &target) {
+Integer &Integer::operator=(const Integer &target) {
+    //free(stringOriginal);
 	this->original = target.original;
-	free(this->string_original);
-	this->string_original = string_from_int(this->original);
+	this->stringOriginal = string_from_int(this->original);
     return *this;
 }
 
@@ -213,9 +212,8 @@ Integer Integer::decode(String inputString) {
 
     int result = parseInt(inputString, base);
     if (isNegative) {
-        result = -result;
+        return static_cast<Integer>(-result);
     }
-
     return static_cast<Integer>(result);
 }
 
@@ -483,7 +481,7 @@ int Integer::rotateRight(int inputInt, int distance) {
 // }
 
 string Integer::toString() const {
-	return this->string_original;
+	return this->stringOriginal;
 }
 
 // String Integer::toString(int i) {
