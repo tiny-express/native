@@ -33,8 +33,22 @@ using namespace Java::Util;
 int BitSet::wordIndex(int bitIndex) {
     // indexOfWord = bitIndex / (2 ^ addressBitsPerWord)
     // (2 ^ addressBitsPerWord) is size of word.
-    int indexOfWord = bitIndex >> addressBitsPerWord;
+    int indexOfWord = bitIndex >> ADDRESS_BITS_PER_WORD;
     return indexOfWord;
+}
+
+void BitSet::checkRange(int fromIndex, int toIndex) {
+    if (fromIndex < 0) {
+        throw IndexOutOfBoundsException("fromIndex < 0: " + String::valueOf(fromIndex));
+    }
+    if (toIndex < 0) {
+        throw IndexOutOfBoundsException("toIndex < 0: " + String::valueOf(toIndex));
+    }
+    if (fromIndex > toIndex) {
+        throw IndexOutOfBoundsException(String("fromIndex: ") + String::valueOf(fromIndex) +
+                                                String(" > ") +
+                                                String("toIndex: ") + String::valueOf(toIndex));
+    }
 }
 
 void BitSet::initializeWords(int numberOfBits) {
@@ -74,8 +88,21 @@ void BitSet::ensureCapacity(int wordsRequired) {
     }
 }
 
+void BitSet::recalculateWordsInUse() {
+    // Traverse the bitset until a used word is found.
+    int indexOfWordsArray = this->wordsInUse - 1;
+    while (indexOfWordsArray >= 0) {
+        if (this->words[indexOfWordsArray] != 0) {
+            break;
+        }
+        indexOfWordsArray = indexOfWordsArray - 1;
+    }
+    // Change index to logical size.
+    this->wordsInUse = indexOfWordsArray + 1;
+}
+
 BitSet::BitSet() {
-    this->initializeWords(bitsPerWord);
+    this->initializeWords(BITS_PER_WORD);
     this->sizeIsSticky = false;
 }
 
@@ -103,6 +130,71 @@ int BitSet::cardinality() const {
     return numberOfBitsSetToTrue;
 }
 
+void BitSet::clear() {
+    while (this->wordsInUse > 0) {
+        // Must decrease by 1 first, because we want change logical size to index.
+        this->wordsInUse = this->wordsInUse - 1;
+        this->words[this->wordsInUse] = 0L;
+    }
+}
+
+void BitSet::clear(int bitIndex) {
+    if (bitIndex < 0) {
+        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+    }
+
+    int indexOfWord = wordIndex(bitIndex);
+    if (indexOfWord >= this->wordsInUse) {
+        return;
+    }
+
+    this->words[indexOfWord] &= ~(1L << bitIndex);
+    this->recalculateWordsInUse();
+}
+
+void BitSet::clear(int fromIndex, int toIndex) {
+    checkRange(fromIndex, toIndex);
+
+    if (fromIndex == toIndex) {
+        return;
+    }
+
+    int startWordIndex = wordIndex(fromIndex);
+    if (startWordIndex >= this->wordsInUse) {
+        return;
+    }
+
+    // toIndex decrease by 1 because toIndex is out of specified range.
+    int endWordIndex = wordIndex(toIndex - 1);
+    if (endWordIndex >= this->wordsInUse) {
+        toIndex = this->length();
+        endWordIndex = this->wordsInUse - 1;
+    }
+
+    long firstWordMask = WORD_MASK << fromIndex;
+    // In Java, the line below is equivalent to: long lastWordMask = wordMask >>> -toIndex;
+    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+
+    if (startWordIndex == endWordIndex) {
+        // Case 1: fromIndex and toIndex are in one word.
+        this->words[startWordIndex] &= ~(firstWordMask & lastWordMask);
+    } else {
+        // Case 2: Multiple words.
+        // Handle first word.
+        this->words[startWordIndex] &= ~firstWordMask;
+        // Handle intermediate words, if any.
+        int indexOfIntermediateWords;
+        for (indexOfIntermediateWords = startWordIndex + 1;
+             indexOfIntermediateWords < endWordIndex; indexOfIntermediateWords++) {
+            this->words[indexOfIntermediateWords] = 0L;
+        }
+        // Handle last word.
+        this->words[endWordIndex] &= ~lastWordMask;
+    }
+
+    this->recalculateWordsInUse();
+}
+
 boolean BitSet::equals(const Object &target) const {
     // TODO(truongchauhien): Implement this method later.
     return false;
@@ -113,30 +205,82 @@ boolean BitSet::get(int bitIndex) const {
         throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
     }
 
-    int wordIndex = this->wordIndex(bitIndex);
+    int indexOfWord = wordIndex(bitIndex);
 
     // bitIndex is out of range, default value is false.
-    if (wordIndex >= this->wordsInUse) {
+    if (indexOfWord >= this->wordsInUse) {
         return false;
     }
 
     // Checking current bit at bitIndex in word at wordIndex.
-    return ((this->words[wordIndex] & (1L << bitIndex)) != 0);
+    return ((this->words[indexOfWord] & (1L << bitIndex)) != 0);
+}
+
+BitSet BitSet::get(int fromIndex, int toIndex) const {
+    this->checkRange(fromIndex, toIndex);
+
+    int logicalLength = this->length();
+    // If no set bits in range return empty bitset.
+    if (logicalLength <= fromIndex || fromIndex == toIndex) {
+        return BitSet(0);
+    }
+
+    if (toIndex > logicalLength) {
+        toIndex = logicalLength;
+    }
+
+    int logicalLengthOfResult = toIndex - fromIndex;
+    BitSet result = BitSet(logicalLengthOfResult);
+    int targetWords = wordIndex(logicalLengthOfResult - 1) + 1;
+    int sourceIndex = wordIndex(fromIndex);
+    boolean wordAligned = ((fromIndex & BIT_INDEX_MASK) == 0);
+
+    // Process all words but the last word.
+    int index;
+    for (index = 0; index < targetWords - 1; ++index, ++sourceIndex) {
+        if (wordAligned) {
+            result.words[index] = this->words[sourceIndex];
+        } else {
+            result.words[index] =
+                    (static_cast<unsigned long>(this->words[sourceIndex]) >> fromIndex) |
+                    (this->words[sourceIndex + 1] << (-fromIndex & 0b111111));
+        }
+    }
+
+    // Process the last word.
+    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+    if (((toIndex - 1) & BIT_INDEX_MASK) < (fromIndex & BIT_INDEX_MASK)) {
+        result.words[targetWords - 1] =
+                (static_cast<unsigned long>(this->words[sourceIndex]) >> fromIndex) |
+                        (words[sourceIndex+1] & lastWordMask) << (-fromIndex & 0b111111);
+    } else {
+        result.words[targetWords - 1] =
+                static_cast<unsigned long>(this->words[sourceIndex] & lastWordMask) >> fromIndex;
+    }
+
+    // Set wordsInUse correctly.
+    result.wordsInUse = targetWords;
+    result.recalculateWordsInUse();
+
+    return result;
 }
 
 long BitSet::hashCode() const {
-    // TODO(truongchauhien): Implement this method later.
-    return 0;
+    // BitSet hash code algorithm.
+    long hash = 1234;
+    for (int i = words.length; --i >= 0; )
+        hash ^= this->words[i] * (i + 1);
+    return (hash >> 32) ^ hash;
 }
 
 int BitSet::length() const {
     if (this->wordsInUse == 0) {
         return 0;
     }
-    int indexOfWordContainHighestBit = wordsInUse - 1;
+    int indexOfWordContainHighestBit = this->wordsInUse - 1;
     // Number of bits in use.
-    int logicalSize = (bitsPerWord * (this->wordsInUse - 1)) +
-            (bitsPerWord - Long::numberOfLeadingZeros(words[indexOfWordContainHighestBit]));
+    int logicalSize = (BITS_PER_WORD * indexOfWordContainHighestBit) +
+            (BITS_PER_WORD - Long::numberOfLeadingZeros(words[indexOfWordContainHighestBit]));
     return logicalSize;
 }
 
@@ -145,13 +289,61 @@ void BitSet::set(int bitIndex) {
         throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
     }
 
-    int wordIndex = this->wordIndex(bitIndex);
-    this->expandTo(wordIndex);
-    this->words[wordIndex] |= (1L << bitIndex);
+    int indexOfWord = wordIndex(bitIndex);
+    this->expandTo(indexOfWord);
+    this->words[indexOfWord] |= (1L << bitIndex);
+}
+
+void BitSet::set(int bitIndex, boolean value) {
+    if (value) {
+        this->set(bitIndex);
+    } else {
+        this->clear(bitIndex);
+    }
+}
+
+void BitSet::set(int fromIndex, int toIndex) {
+    this->checkRange(fromIndex, toIndex);
+
+    if (fromIndex == toIndex) {
+        return;
+    }
+
+    int startWordIndex = wordIndex(fromIndex);
+    int endWordIndex = wordIndex(toIndex - 1);
+    this->expandTo(endWordIndex);
+
+    long firstWordMask = WORD_MASK << fromIndex;
+    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+
+    if (startWordIndex == endWordIndex) {
+        // Case 1: One word.
+        this->words[startWordIndex] |= (firstWordMask & lastWordMask);
+    } else {
+        // Case 2: Multiple words.
+        // Handle first word.
+        this->words[startWordIndex] |= firstWordMask;
+        // handle intermediate words, if any.
+        int indexOfIntermediateWords;
+        for (indexOfIntermediateWords = startWordIndex + 1;
+             indexOfIntermediateWords < endWordIndex; ++indexOfIntermediateWords) {
+            this->words[indexOfIntermediateWords] = WORD_MASK;
+        }
+        // Handle last word.
+        this->words[endWordIndex] |= lastWordMask;
+    }
+}
+
+void BitSet::set(int fromIndex, int toIndex, boolean value) {
+    if (value) {
+        this->set(fromIndex, toIndex);
+    } else {
+        this->clear(fromIndex, toIndex);
+    }
 }
 
 int BitSet::size() const {
-    return this->words.length * bitsPerWord;
+    return this->words.length * BITS_PER_WORD;
 }
 
 string BitSet::toString() const {

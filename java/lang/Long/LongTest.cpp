@@ -246,6 +246,13 @@ TEST (JavaLang, LongNumberOfLeadingZeros) {
 
     expectedResult = 38;
     ASSERT_EQUAL(expectedResult, result);
+
+    // validValue = -1
+    validValue = 0b1111111111111111111111111111111111111111111111111111111111111111L;
+    result = Long::numberOfLeadingZeros(validValue);
+
+    expectedResult = 0;
+    ASSERT_EQUAL(expectedResult, result);
 }
 
 TEST (JavaLang, LongToHexString) {

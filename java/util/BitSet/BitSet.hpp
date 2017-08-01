@@ -34,13 +34,13 @@ namespace Java {
         class BitSet : public Object, public Cloneable, public Serializable {
         private:
             // Number of bits need to address every bit in a word with default size.
-            static const int addressBitsPerWord = 6;
+            static const int ADDRESS_BITS_PER_WORD = 6;
             // Number of bits of a word (default size of a word).
-            static const int bitsPerWord = 1 << addressBitsPerWord;
+            static const int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
             // Maximum index of a bit in a single word.
-            static const int bitIndexMask = bitsPerWord - 1;
+            static const int BIT_INDEX_MASK = BITS_PER_WORD - 1;
             // Used to shift left or right for a partial word mask.
-            static const long wordMask = 0xffffffffffffffffL;
+            static const long WORD_MASK = 0xffffffffffffffffL;
 
         private:
             Array<long> words;
@@ -84,6 +84,14 @@ namespace Java {
              */
             static int wordIndex(int bitIndex);
 
+            /**
+             * Checks that fromIndex ... toIndex is a valid range of bit indices.
+             *
+             * @param fromIndex
+             * @param toIndex
+             */
+            static void checkRange(int fromIndex, int toIndex);
+
         private:
             /**
              * This method use to create a array of word (long) with size based on number of bits.
@@ -106,6 +114,11 @@ namespace Java {
              */
             void ensureCapacity(int wordsRequired);
 
+            /**
+             * Sets the field wordsInUse to the logical size in words of the bit set.
+             */
+            void recalculateWordsInUse();
+
         public:
             void bitAnd(const BitSet &set);
             void bitOr(const BitSet &set);
@@ -118,9 +131,31 @@ namespace Java {
              * @return int
              */
             int cardinality() const;
+
+            /**
+             * Sets all of the bits in this BitSet to false.
+             */
             void clear();
+
+            /**
+             * Sets the bit specified by the index to false.
+             *
+             * @param bitIndex
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             void clear(int bitIndex);
+
+            /**
+             * Sets the bits from the specified fromIndex (inclusive) to the specified
+             * toIndex (exclusive) to false.
+             *
+             * @param fromIndex
+             * @param toIndex
+             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
+             * or fromIndex is larger than toIndex.
+             */
             void clear(int fromIndex, int toIndex);
+
             BitSet clone();
             boolean equals(const Object &target) const;
             void flip(int bitIndex);
@@ -136,7 +171,25 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
             boolean get(int bitIndex) const;
+
+            /**
+             * Returns a new BitSet composed of bits from this BitSet from fromIndex (inclusive)
+             * to toIndex (exclusive).
+             *
+             * @param fromIndex
+             * @param toIndex
+             * @return BitSet
+             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
+             * or fromIndex is larger than toIndex.
+             */
             BitSet get(int fromIndex, int toIndex) const;
+
+            /**
+             * Returns the hash code value for this bit set.
+             * The hash code depends only on which bits are set within this BitSet.
+             *
+             * @return long
+             */
             long hashCode() const;
             boolean intersects(const BitSet &set);
             boolean isEmpty() const;
@@ -160,8 +213,36 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
             void set(int bitIndex);
+
+            /**
+             * Sets the bit at the specified index to the specified value.
+             *
+             * @param bitIndex
+             * @param value
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             void set(int bitIndex, boolean value);
+
+            /**
+             * Sets the bits from the specified fromIndex (inclusive) to the specified toIndex (exclusive) to true.
+             *
+             * @param fromIndex
+             * @param toIndex
+             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
+             * or fromIndex is larger than toIndex.
+             */
             void set(int fromIndex, int toIndex);
+
+            /**
+             * Sets the bits from the specified fromIndex (inclusive) to the specified toIndex (exclusive)
+             * to the specified value.
+             *
+             * @param fromIndex
+             * @param toIndex
+             * @param value
+             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
+             * or fromIndex is larger than toIndex.
+             */
             void set(int fromIndex, int toIndex, boolean value);
 
             /**
