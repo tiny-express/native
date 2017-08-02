@@ -88,7 +88,7 @@ namespace Java {
 
             /**
              * Appends the string representation of the Object argument.
-             * If seq is null then four character "null" will be append
+             * If object is null then four character "null" will be append
              *
              * @param object
              * @return reference to this StringBufferUnSafe
@@ -123,7 +123,7 @@ namespace Java {
 
             /**
              * Appends the specified CharSequence to this sequence.
-             * If seq is null then four character "null" will be append
+             * If sequence is null then four character "null" will be append
              *
              * @param sequence
              * @return reference to this StringBufferUnSafe
@@ -196,7 +196,7 @@ namespace Java {
              * Appends a subsequence of the specified CharSequence to this sequence.
              * starting at index start, are appended, in order,
              * to the contents of this sequence up to the (exclusive) index end.
-             * If seq is null then four character "null" will be append
+             * If sequence is null then four character "null" will be append
              *
              * @param sequence
              * @param start
@@ -222,7 +222,7 @@ namespace Java {
             int capacity();
 
             /**
-             * Return character ai specified index
+             * Return character at specified index
              *
              * @param index
              * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
@@ -313,7 +313,7 @@ namespace Java {
              * destinationBegin is negative
              * the sourceBegin argument is greater than the sourceEnd argument.
              * sourceEnd is greater than this.length().
-             * destinationBegin+sourceEnd-sourceBegin is greater than dst.length
+             * destinationBegin+sourceEnd-sourceBegin is greater than destination length
              */
             // TODO need arrayCopy
             // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
@@ -473,7 +473,7 @@ namespace Java {
             /**
              * The subsequence of the argument s specified by start and end are inserted, in order, into this sequence
              * at the specified destination offset, moving up any characters originally above that position.
-             * The dstOffset argument must be greater than or equal to 0, and less than or equal to length
+             * The destinationOffset argument must be greater than or equal to 0, and less than or equal to length
              * The start argument must be nonnegative, and not greater than end.
              * The end argument must be greater than or equal to start, and less than or equal to the length of seq.
              * If s is null, four characters "null" will be inserted
@@ -507,7 +507,7 @@ namespace Java {
              * Returns the index within this string of the rightmost occurrence of the specified substring.
              * The rightmost empty string "" is considered to occur at the index value this.length(). T
              * he returned index is the largest value
-             * If no such value of k exists, then -1 is returned.
+             * If no such value of stringToGetIndex exists, then -1 is returned.
              *
              * @param stringToGetIndex
              * @return the index within this string of the rightmost occurrence of the specified substring.
@@ -517,7 +517,7 @@ namespace Java {
             /**
              * Returns the index within this string of the last occurrence of the specified substring.
              * The integer returned is the largest value
-             * If no such value of k exists, then -1 is returned.
+             * If no such value of stringToGetIndex exists, then -1 is returned.
              *
              * @param stringToGetIndex
              * @param fromIndex
@@ -643,7 +643,7 @@ namespace Java {
             StringBufferUnSafe &operator=(const StringBufferUnSafe &other);
 
             /**
-             * Destructor, free memory alocated for original
+             * Destructor, free memory allocated for original
              */
             ~StringBufferUnSafe();
         };
@@ -823,7 +823,7 @@ namespace Java {
             int capacity();
 
             /**
-             * Return character ai specified index
+             * Return character at specified index
              *
              * @param index
              * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
@@ -916,7 +916,7 @@ namespace Java {
              * destinationBegin is negative
              * the sourceBegin argument is greater than the sourceEnd argument.
              * sourceEnd is greater than this.length().
-             * destinationBegin+sourceEnd-sourceBegin is greater than dst.length
+             * destinationBegin+sourceEnd-sourceBegin is greater than destination length
              */
             // TODO need arrayCopy
             // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
@@ -1077,10 +1077,10 @@ namespace Java {
             /**
              * The subsequence of the argument s specified by start and end are inserted, in order, into this sequence
              * at the specified destination offset, moving up any characters originally above that position.
-             * The dstOffset argument must be greater than or equal to 0, and less than or equal to length
-             * The start argument must be nonnegative, and not greater than end.
-             * The end argument must be greater than or equal to start, and less than or equal to the length of seq.
-             * If s is null, four characters "null" will be inserted
+             * The destinationOffset argument must be greater than or equal to 0, and less than or equal to length
+             * The start argument must be non negative, and not greater than end.
+             * The end argument must be greater than or equal to start, and less than or equal to the length of sequence.
+             * If sequence is null, four characters "null" will be inserted
              *
              * @param destinationOffset
              * @param sequence
@@ -1111,7 +1111,7 @@ namespace Java {
              * Returns the index within this string of the rightmost occurrence of the specified substring.
              * The rightmost empty string "" is considered to occur at the index value this.length(). T
              * he returned index is the largest value
-             * If no such value of k exists, then -1 is returned.
+             * If no such value of stringToGetIndex exists, then -1 is returned.
              *
              * @param stringToGetIndex
              * @return the index within this string of the rightmost occurrence of the specified substring.
@@ -1248,7 +1248,7 @@ namespace Java {
             StringBuffer &operator=(const StringBuffer &other);
 
             /**
-             * Destructor, free memory alocated for original
+             * Destructor, free memory allocated for original
              */
             ~StringBuffer();
 
