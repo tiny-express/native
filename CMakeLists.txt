@@ -73,8 +73,8 @@ add_definitions(-D_GNU_SOURCE)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # CMake Modules
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
-    set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -Wfatal-errors")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -Wfatal-errors")
 
     # Enable coverage by cmake modules
     if (CMAKE_COMPILER_IS_GNUCXX)
@@ -88,11 +88,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
-
-# Only header files
-file(GLOB_RECURSE HEADERS
-        ./*.h
-        library.hpp)
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
@@ -183,9 +178,10 @@ enable_testing()
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/native)
-install(DIRECTORY java DESTINATION include/native)
-install(FILES ${HEADERS} DESTINATION include/native)
+install(FILES library.hpp DESTINATION include/native)
+install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
 
 # Add uninstall
 add_custom_target(
