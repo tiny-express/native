@@ -33,7 +33,7 @@ using namespace Java::Lang;
 
 Integer::Integer() {
 	this->original = 0;
-	this->stringOriginal = (string) "0";
+	this->stringOriginal = string_from_int(this->original);
 }
 
 Integer::Integer(int original) {
@@ -88,8 +88,8 @@ double Integer::doubleValue() const {
 }
 
 Integer &Integer::operator=(const Integer &target) {
-    //free(stringOriginal);
 	this->original = target.original;
+    free(this->stringOriginal);
 	this->stringOriginal = string_from_int(this->original);
     return *this;
 }
