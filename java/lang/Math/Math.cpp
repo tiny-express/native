@@ -466,7 +466,7 @@ double Math::ulp(double a) {
         return Math::pow(2, 971);
     }
     int exp = getExponent(a);
-    switch(exp) {
+    switch (exp) {
         case Double::MAX_EXPONENT + 1:        // NaN or infinity
             return Math::abs(a);
         case Double::MIN_EXPONENT - 1:        // zero or subnormal
@@ -480,37 +480,9 @@ double Math::ulp(double a) {
                 if (exp >= Double::MIN_EXPONENT) {
                     return powerOfTwoD(exp);
                 } else {
-                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT 
+                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
                                                                  - (Double::SIGNIFICAND_WIDTH - 1))));
                 }
             }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

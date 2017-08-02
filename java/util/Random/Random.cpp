@@ -40,6 +40,7 @@ std::atomic_long Random::seedUniquifierField {8682522807148012L};
  */
 //long Random::seedOffset = setSeedOffset();
 
+
 /**
  * Constructor
  */
@@ -102,8 +103,9 @@ void Random::resetSeed(long seedVal) {
     char *base = (char *) this;
     long *seed = (long *) (base + seedOffset);
     *seed = std::atomic_long{seedVal};
-}
-*/
+}*/
+
+
 
 /**
  * Copy constructor, std::atomic has it's copy constructor deleted, so a copy constructor is required
@@ -163,7 +165,7 @@ int Random::nextInt(int bound) {
         throw IllegalArgumentException(BADBOUND);
     }
 
-    if (bound & (bound - 1) == 0) {
+    if ((bound & (bound - 1)) == 0) {
         return (int) ((bound * (long) next(31)) >> 31);
     }
 
@@ -255,3 +257,4 @@ void Random::setSeed(long seed) {
     this->seed.store(initialScramble(seed));
     haveNextGaussianNumber = false;
 }
+

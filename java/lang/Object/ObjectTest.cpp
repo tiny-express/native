@@ -31,10 +31,11 @@ extern "C" {
 #include "../String/String.hpp"
 #include "../Integer/Integer.hpp"
 #include "../Long/Long.hpp"
+#include "../System/System.hpp"
 
 using namespace Java::Lang;
 
-TEST(JavaLang, JavaInstanceOf) {
+TEST (JavaLang, JavaInstanceOf) {
 	// Given a String instance - Return it should be an instance of String
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
@@ -55,20 +56,20 @@ TEST(JavaLang, JavaInstanceOf) {
 	ASSERT_FALSE(instanceof<Long>(objectLongNumber));
 }
 
-TEST(JavaLang, DataTypeBoolean) {
+TEST (JavaLang, DataTypeBoolean) {
 	// Verify syntax of boolean
 	boolean a = true;
 	ASSERT_TRUE(a);
 }
 
-TEST(JavaLang, DataTypeByte) {
+TEST (JavaLang, DataTypeByte) {
 	// Verify syntax of byte
 	byte a = 65;
 	char A = (char) a;
 	ASSERT_TRUE(A == 'A');
 }
 
-TEST(JavaLang, DataTypeArray) {
+TEST (JavaLang, DataTypeArray) {
 	// Array empty initialization
 	Array<String> emptyStrings;
 	emptyStrings.push("Food Tiny");
@@ -76,7 +77,7 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_EQUAL(2, emptyStrings.length);
 	
 	// Array from initialize list and length property
-	Array<byte> bytes = {64, 65, 66};
+	Array<byte> bytes = { 64, 65, 66 };
 	ASSERT_EQUAL(3, bytes.length);
 	
 	// Push new element and loop in array
@@ -84,21 +85,21 @@ TEST(JavaLang, DataTypeArray) {
 	bytes.push(68);
 	int length = 0;
 	for (byte byte : bytes) {
-		length ++;
+		length++;
 	}
-	ASSERT_EQUAL(5 , length);
+	ASSERT_EQUAL(5, length);
 	
 	// Modify an element in array
-	bytes[0] = 63;
-	ASSERT_EQUAL(63, bytes[0]);
+	bytes[ 0 ] = 63;
+	ASSERT_EQUAL(63, bytes[ 0 ]);
 	
 	// Merge two arrays with appendable
-	Array<String> initializedStrings = { "Food", "Tiny"};
-	initializedStrings += {"Hello", "World"};
+	Array<String> initializedStrings = { "Food", "Tiny" };
+	initializedStrings += { "Hello", "World" };
 	ASSERT_EQUAL(4, initializedStrings.length);
 	
 	// Loop in string array
-	int totalCharacters  = 0;
+	int totalCharacters = 0;
 	for (String element : initializedStrings) {
 		totalCharacters += element.length();
 	}
@@ -109,23 +110,35 @@ TEST(JavaLang, DataTypeArray) {
 	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
 }
 
-TEST(JavaLang, ArrayConstructorWithSize) {
-    // Give an Array use constructor with contain size then assert size - Should equal
+TEST (JavaLang, ArrayConstructorWithSize) {
+	// Give an Array use constructor with contain size then assert size - Should equal
 	Array<int> validArray(10);
 	int expect = 10;
 	int result = validArray.length;
 	ASSERT_EQUAL(expect, result);
-
-    int index;
-    for(index = 0; index < 10; index++) {
-        validArray.push(index);
-        expect = index + 1;
-        result = validArray.length;
-        ASSERT_EQUAL(expect, result);
-    }
+	
+	int index;
+	for (index = 10; index < 20; index++) {
+		validArray.push(index);
+		expect = index + 1;
+		result = validArray.length;
+		ASSERT_EQUAL(expect, result);
+	}
 }
 
-TEST(JavaLang, ObjectConstructor) {
+TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
+	// Give an Array use constructor with contain size then assert size - Should equal
+	char *stringArray[3] = {
+		(char*) "hello",
+		(char*) "world",
+				nullptr
+	};
+	char **stringList = (char**) stringArray;
+	Array<String> arrayString = stringList;
+	ASSERT_EQUAL(2, arrayString.length);
+}
+
+TEST (JavaLang, ObjectConstructor) {
 	// Normal declaration
 	Object objectNormalDeclaration;
 	objectNormalDeclaration.hashCode();
@@ -136,7 +149,7 @@ TEST(JavaLang, ObjectConstructor) {
 	delete objectPointerDeclaration;
 }
 
-TEST(JavaLang, ObjectEquals) {
+TEST (JavaLang, ObjectEquals) {
 	// Given two difference instances of Object - Return instances are not equal
 	Object object1;
 	Object object2;
@@ -144,7 +157,7 @@ TEST(JavaLang, ObjectEquals) {
 	// Supported for == & != operator
 	ASSERT_FALSE(object1 == object2);
 	ASSERT_TRUE(object1 != object2);
-
+	
 	// Given one instance of Object - Return equal with itself
 	Object object3;
 	ASSERT_TRUE(object3.equals(object3));
@@ -153,7 +166,7 @@ TEST(JavaLang, ObjectEquals) {
 	ASSERT_FALSE(object3 != object3);
 }
 
-TEST(JavaLang, ObjectHashCode) {
+TEST (JavaLang, ObjectHashCode) {
 	// Given two difference instances of Object - Return memory addresses are not equal
 	Object object;
 	Object object2;

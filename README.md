@@ -1,19 +1,15 @@
  # Native Library
- [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
- &nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
- &nbsp;[![Coverage Status](https://coveralls.io/repos/github/foodtiny/native/badge.svg?branch=master)](https://coveralls.io/github/foodtiny/native?branch=master)
- &nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
- ![Library Structure](misc/native.png)
+[![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
+[![Coverage Status](https://codecov.io/gh/foodtiny/native/branch/master/graph/badge.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Documentation](https://img.shields.io/badge/documentation-doxygen-ff69b4.svg)](https://foodtiny.github.io/native/annotated.html)&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
+![Library Structure](misc/native.png)
 
 **Native Library** provides a low-level optimization with productivity for C/C++ application.
 
-Beside standard library, we would like to have a greater customization with important goals:
+- Blazing fast performance, small footprint, low-level access with GAS & C
+- Provide rich Java core packages for productivity & maintainability
+- Zero memory leak with automatic storage
+- Prevents segfaults and no null pointer anymore
 
-- Blazing fast performance, small footprint & low-level access with GAS & C
-- Powerful structured programming in C++ for scalability
-- Syntactically enhancement with C++ operators & walk through
-- Provide rich Java standard packages for productivity & maintainability
-- Zero memory leak with automatic storage and avoid NullPointerException
 
 This project is also useful for new developers in practical programming.
 
@@ -22,74 +18,46 @@ This project is also useful for new developers in practical programming.
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make
+$ cmake . && make -j4
 $ sudo make install
+$ sudo ldconfig
 ```
 
-
-### Setup for development
-#### Windows
-Install CgyWin64 with dependencies below:
-- CMake
-- Makefile
-- GCC
-- G++
-
-#### Linux and Mac
-Install with apt-get or brew with dependencies below:
-- CMake
-
-#### Test Driven Development
-Note: `make leak` is ONLY available for Linux - production environment
-```bash
-$ cmake . && make native_test && make leak
-```
-
-#### Hello World Program
-```java
-public class Main {
-    public static void main(String[] args) {
-        String text = "Native Library: ";
-        byte[] bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
-        for (byte number : bytes) {
-            text += (char) number;
-        }
-        System.out.println(text);
-    }
-}
-```
+#### HelloWorld.cpp
 ```cpp
 #include <native/library.hpp>
 
-int main() {
-    String text = "Native Library: ";
-    Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
-    for (byte number : bytes) {
-        text += (char) number;
+class MainApplication {
+public:
+    static void main(Array<String> arguments) {
+        HashMap<String, String> hashMap;
+        int counter = 0;
+        for (String argument : arguments) {
+            hashMap.put("argument " + String::valueOf(counter), argument);
+            counter++;
+        }
+        ArrayList<HashMap<String, String>> arrayList;
+        arrayList.add(hashMap);
+        System::out::println(arrayList.toString());
     }
-    System::out::println(text);
+};
+
+int main(int argc, char **argv) {
+    MainApplication::main(argv);
     return 0;
 }
 ```
+
+Compile your source and link with native library
 ```bash
-$ g++ -c -o test.o ./test.cpp
-$ gcc -static -o native test.o -L/usr/local/lib libnative_static.a -lstdc++
-$ ./native
+$ g++ -c -o main.o HelloWorld.cpp
+$ gcc -o main main.o -lnative -lstdc++
+$ ./main one two three
 ```
 
-#### Unit Test with C-Unit
-```cpp
-#define TESTING
-#include <native/unit_test.h>
-
-int main(int argc, const char *argv[]) {
-   int result = ctest_main(argc, argv);
-   return result;
-}
-
-TEST(YourTestSuite, YourTestCase) {
-    ASSERT_STR("me", "you");
-}
+Output:
+```javascript
+[{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
 
 ### Contributors

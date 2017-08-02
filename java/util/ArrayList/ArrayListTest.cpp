@@ -53,6 +53,11 @@ TEST (JavaLang, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	ASSERT_EQUAL(4, stringArrayList.size());
+	
+	// Standard declaration
+	Array<String> arrayString = { "hello", "world"};
+	ArrayList<String> stringArrayListCopy = arrayString;
+	ASSERT_EQUAL(2, stringArrayListCopy.size());
 }
 
 TEST (JavaLang, ArrayListDestructor) {
@@ -96,11 +101,6 @@ TEST (Javalang, ArrayListFunction) {
 	int expect = 6;
 	int result = intArray.size();
 	ASSERT_EQUAL(expect, result);
-	
-	// Get value out of Array
-	intArray.get(-1);
-	ASSERT_EQUAL(0, intArray.get(-1).intValue());
-	ASSERT_EQUAL(5, intArray.get(intArray.size()).intValue());
 }
 
 TEST (JavaLang, ArrayListForEach) {

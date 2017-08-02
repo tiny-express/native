@@ -40,6 +40,7 @@
 #include "../function/Predicate/Predicate.hpp"
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../../lang/String/String.hpp"
+#include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include <initializer_list>
 #include <iostream>
 
@@ -84,13 +85,13 @@ namespace Java {
 			public virtual Serializable,
 			public virtual Cloneable,
 			public virtual RandomAccess {
-
+		
 		private:
 			std::vector<E> original;
 			typedef E *_iterator;
 			typedef const E *_const_iterator;
 			String backup;
-
+		
 		public:
 			
 			_iterator begin() {
@@ -110,23 +111,37 @@ namespace Java {
 			 * Constructs an empty list
 			 */
 			ArrayList() {
-
 			}
-
-            ArrayList(const std::initializer_list<E> &target) {
-                for (E item : target) {
-                    this->add(item);
-                }
-            }
-
+			
+			/**
+			 * ArrayList copy constructor from initializer list
+			 *
+			 * @param target
+			 */
+			ArrayList(const std::initializer_list<E> &target) {
+				for (E item : target) {
+					this->add(item);
+				}
+			}
+			
+			/**
+			 * Array copy constructor for basic array
+			 *
+			 * @param target
+			 */
+			ArrayList(const Array<E> &target) {
+				for (E item : target) {
+					this->add(item);
+				}
+			}
+			
 			/**
 			 * Constructs a list containing the elements of the specified collection
 			 *
 			 * @param c
 			 */
-
 			ArrayList(Collection<E> collection) {
-
+			
 			}
 			
 			/**
@@ -142,7 +157,7 @@ namespace Java {
 			 * Destructor ArrayList
 			 */
 			~ArrayList() {
-
+			
 			}
 		
 		public:
@@ -263,11 +278,8 @@ namespace Java {
 			 * @return
 			 */
 			E get(int index) const {
-				if (index < 0) {
-					return (E) this->original.at(0);
-				}
-				if (index > this->size() - 1) {
-					return (E) this->original.at(this->size() - 1);
+				if (index < 0 || index >= this->size()) {
+					throw IndexOutOfBoundsException("Index out of range");
 				}
 				return original.at(index);
 			}
@@ -496,23 +508,23 @@ namespace Java {
 			 * @return string
 			 */
 			string toString() {
-                if(this->size() == 0) {
-                    this->backup = "[]";
-                    return this->backup.toString();
-                }
-                String startArrayList = "[";
-                String commaAndSpace = ", ";
-                String endString = "]";
-                int index;
-                for (index = 0; index < this->size() - 1; ++index) {
-                    String appendString = this->original[index].toString();
-                    appendString += commaAndSpace;
-                    startArrayList += appendString;
-                }
-                startArrayList += this->original[this->size() - 1].toString();
-                startArrayList += endString;
-                this->backup = startArrayList;
-                return this->backup.toString();
+				if (this->size() == 0) {
+					this->backup = "[]";
+					return this->backup.toString();
+				}
+				String startArrayList = "[";
+				String commaAndSpace = ", ";
+				String endArrayList = "]";
+				int index;
+				for (index = 0; index < this->size() - 1; ++index) {
+					String appendString = this->original[ index ].toString();
+					appendString += commaAndSpace;
+					startArrayList += appendString;
+				}
+				startArrayList += this->original[ this->size() - 1 ].toString();
+				startArrayList += endArrayList;
+				this->backup = startArrayList;
+				return this->backup.toString();
 			}
 			
 			long hashCode() const {
@@ -522,18 +534,18 @@ namespace Java {
 			boolean equals(const Object object) const {
 				return true;
 			}
-
+			
 			friend std::ostream &operator<<(std::ostream &os, const ArrayList &target) {
 				for (E item : target) {
 					os << item << " ";
-                }
+				}
 				os << std::endl;
 				return os;
 			}
-
-            E &operator[](int index) {
-                return this->original[index];
-            }
+			
+			E &operator[](int index) {
+				return this->original[ index ];
+			}
 		protected:
 			/**
 			 * Removes from this list all of the elements
