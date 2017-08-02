@@ -91,7 +91,7 @@ namespace Java {
              * @return principal arc cosine of x, in the interval [0,pi] radians.
              * If the argument is NaN or its absolute value is greater than 1, then the result is NaN.
              */
-			static double acos(double a);
+			static double acos(double value);
 
             /**
              * Returns the arc sine of a value
@@ -101,7 +101,7 @@ namespace Java {
              * If the argument is NaN or its absolute value is greater than 1, then the result is NaN.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double asin(double a);
+			static double asin(double value);
 
             /**
              * Returns the arc tangent of a value
@@ -111,14 +111,15 @@ namespace Java {
              * If the argument is NaN, then the result is NaN.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double atan(double a);
+			static double atan(double value);
 
             /**
              * Returns the principal value of the arc tangent of y/x
              *
-             * @param corX
-             * @param corY
-             * @return Principal arc tangent of y/x, in the interval [-pi,+pi] radians.
+             * @param cordinateX
+             * @param cordinateY
+             * @return Principal arc tangent of cordinateY / cordinateX,
+             * in the interval [-pi,+pi] radians.
              * If either argument is NaN, then the result is NaN.
              * If the first argument is positive zero and the second argument is positive, or the first argument is positive and finite and the second argument is positive infinity, then the result is positive zero.
              * If the first argument is negative zero and the second argument is positive, or the first argument is negative and finite and the second argument is positive infinity, then the result is negative zero.
@@ -131,7 +132,7 @@ namespace Java {
              * If the first argument is negative infinity and the second argument is positive infinity, then the result is the double value closest to -pi/4.
              * If both arguments are negative infinity, then the result is the double value closest to -3*pi/4.
              */
-			static double atan2(double corX, double corY);
+			static double atan2(double cordinateX, double cordinateY);
 
             /**
              * Returns the sum of its arguments, throwing an exception if the result overflows a long.
@@ -139,7 +140,7 @@ namespace Java {
              * @param a
              * @param b
              * @throw ArithmeticException("long overflow")
-             * @return long
+             * @return the sum of a and b
              */
 			static long addExact(long a, long b);
 
@@ -156,7 +157,7 @@ namespace Java {
             /**
              * Returns the cube root of a double value.
              *
-             * @param a
+             * @param value
              * @return
              *  If the argument is NaN, then the result is NaN.
              *  If the argument is infinite, then the result is an
@@ -164,7 +165,7 @@ namespace Java {
              *  If the argument is zero, then the result is a zero
              *  with the same sign as the argument.
              */
-			static double cbrt(double a);
+			static double cbrt(double value);
 
             /**
              * Returns the smallest (closest to negative infinity) double value
@@ -202,146 +203,146 @@ namespace Java {
             /**
              * Returns the trigonometric cosine of an angle
              *
-             * @param a
+             * @param angle
              * @return the cosine of the argument
              * If the argument is NaN or an infinity, then the result is NaN.
              */
-			static double cos(double a);
+			static double cos(double angle);
 
             /**
              * Returns the hyperbolic cosine of a double value.
              *
-             * @param a
+             * @param angle
              * @return the hyperbolic cosine of a
              *  If the argument is NaN, then the result is NaN.
              *  If the argument is infinite, then the result is positive infinity.
              *  If the argument is zero, then the result is 1.0.
              */
-			static double cosh(double a);
+			static double cosh(double angle);
 
             /**
              * Returns the argument decremented by one,
              * throwing an exception if the result overflows an long.
              *
-             * @param a
+             * @param value
              * @throw ArithmeticException("long overflow")
              * @return long
              */
-			static long decrementExact(long a);
+			static long decrementExact(long value);
 
             /**
              * Returns the argument decremented by one,
              * throwing an exception if the result overflows an long.
              *
-             * @param a
+             * @param value
              * @throw ArithmeticException("integer overflow")
              * @return int
              */
-			static int decrementExact(int a);
+			static int decrementExact(int value);
 
             /**
              * Returns Euler's number e raised to the power of a double value
              *
-             * @param a
+             * @param exponent
              * @return the value (e^a),
              * If the argument is NaN, the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is negative infinity, then the result is positive zero.
              */
-			static double exp(double a);
+			static double exp(double exponent);
 
             /**
              * Returns Euler's number e raised to the power of a double value then subtract 1.
              *
-             * @param a
+             * @param exponent
              * @return the value (e^a)-1
              * If the argument is NaN, the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is negative infinity, then the result is positive zero.
              */
-			static double expm1(double a);
+			static double expm1(double exponent);
 
             /**
              * Returns the largest (closest to positive infinity) double value
              * that is less than or equal
              * to the argument and is equal to a mathematical integer.
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument value is already equal to a mathematical integer,
              * then the result is the same as the argument.
              * If the argument is NaN or an infinity or positive zero or negative zero,
              * then the result is the same as the argument.
              */
-			static double floor(double a);
+			static double floor(double value);
 
             /**
              * Returns the largest (closest to positive infinity)
              * int value that is less than or equal to the algebraic quotient
              *
-             * @param a
-             * @param b
-             * @throw ArithmeticException
+             * @param dividend
+             * @param divisor
+             * @throw ArithmeticException if divisor is 0
              * @return int
              */
-			static int floorDiv(int a, int b);
+			static int floorDiv(int dividend, int divisor);
 
             /**
              * Returns the largest (closest to positive infinity)
              * int value that is less than or equal to the algebraic quotient
              *
-             * @param a
-             * @param b
-             * @throw ArithmeticException
+             * @param dividend
+             * @param divisor
+             * @throw ArithmeticException if divisor is 0
              * @return long
              */
-			static long floorDiv(long a, long b);
+			static long floorDiv(long dividend, long divisor);
 
             /**
              * Returns the floor modulus of the int arguments.
              *
-             * @param a
-             * @param b
-             * @throw ArithmeticException
+             * @param dividend
+             * @param divisor
+             * @throw ArithmeticException if divisor is 0
              * @return int
              * If the signs of the arguments are the same, the results of floorMod
              * and the % operator are the same.
              * If the signs of the arguments are different, the results differ from the % operator.
              */
-			static int floorMod(int a, int b);
+			static int floorMod(int dividend, int divisor);
 
             /**
              * Returns the floor modulus of the int arguments.
              *
-             * @param a
-             * @param b
-             * @throw ArithmeticException
+             * @param dividend
+             * @param divisor
+             * @throw ArithmeticException if divisor is 0
              * @return long
              * If the signs of the arguments are the same, the results of floorMod
              * and the % operator are the same.
              * If the signs of the arguments are different, the results differ from the % operator.
              */
-			static long floorMod(long a, long b);
+			static long floorMod(long dividend, long divisor);
 
             /**
              * Returns the unbiased exponent used in the representation of a double
              *
-             * @param a
+             * @param value
              * @return int
              * If the argument is NaN or infinite, then the result is Double::MAX_EXPONENT + 1.
              * If the argument is zero or subnormal, then the result is Double::MIN_EXPONENT -1.
              */
-			static int getExponent(double a);
+			static int getExponent(double value);
 
             /**
              * Returns the unbiased exponent used in the representation of a float
              *
-             * @param a
+             * @param value
              * @return int
              * If the argument is NaN or infinite, then the result is Float::MAX_EXPONENT + 1.
              * If the argument is zero or subnormal, then the result is Float::MIN_EXPONENT -1.
              */
-			static int getExponent(float a);
+			static int getExponent(float value);
 
             /**
              * Returns sqrt(x2 +y2) without intermediate overflow or underflow.
@@ -366,62 +367,62 @@ namespace Java {
              * If the first argument is finite and the second argument is infinite,
              * then the result is the same as the first argument.
              */
-			static double IEEEremainder(double devidend, double devisor);
+			static double IEEERemainder(double dividend, double divisor);
 
             /**
              * Returns the argument incremented by one,
-             * throwing an exception if the result overflows a long.
+             * throwing an exception if the result overflows an int.
              *
-             * @param a
+             * @param value
              * @throw ArithmeticException("integer overflow")
              * @return int
              */
-			static int incrementExact(int a);
+			static int incrementExact(int value);
 
             /**
              * Returns the argument incremented by one,
              * throwing an exception if the result overflows a long.
              *
-             * @param a
+             * @param value
              * @throw ArithmeticException("long overflow")
              * @return long
              */
-			static long incrementExact(long a);
+			static long incrementExact(long value);
 
             /**
              * Returns the natural logarithm (base e) of a double value
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument is NaN or less than zero, then the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is positive zero or negative zero, then the result is negative infinity.
              */
-			static double log(double a);
+			static double log(double value);
 
             /**
              * Returns the base 10 logarithm of a double value
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument is NaN or less than zero, then the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is positive zero or negative zero, then the result is negative infinity.
              * If the argument is equal to 10n for integer n, then the result is n.
              */
-			static double log10(double a);
+			static double log10(double value);
 
             /**
              * Returns the natural logarithm of the sum of the argument and 1
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument is NaN or less than -1, then the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is negative one, then the result is negative infinity.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double log1p(double a);
+			static double log1p(double value);
 
             /**
              * Returns the greater of two int values.
@@ -494,7 +495,7 @@ namespace Java {
              * @return a if a < b; else b
              */
 			static double min(double a, double b);
-			
+
             /**
              * Returns the product of the arguments,
              * throwing an exception if the result overflows an int.
@@ -502,40 +503,40 @@ namespace Java {
              * @param a
              * @param b
              * @throw ArithmeticException("integer overflow")
-             * @return
+             * @return the product of a and b
              */
             static int multiplyExact(int a, int b);
 
             /**
             * Returns the product of the arguments,
-            * throwing an exception if the result overflows an int.
+            * throwing an exception if the result overflows a long.
             *
             * @param a
             * @param b
             * @throw ArithmeticException("long overflow")
-            * @return
+            * @return the product of a and b
             */
             static long multiplyExact(long a, long b);
 
             /**
              * Returns the negation of the argument,
-             * throwing an exception if the result overflows a long.
+             * throwing an exception if the result overflows a int.
              *
-             * @param a
+             * @param intValue
              * @throw ArithmeticException("integer overflow")
-             * @return int
+             * @return the negation of intValue
              */
-            static int negateExact(int a);
+            static int negateExact(int intValue);
 
             /**
              * Returns the negation of the argument,
              * throwing an exception if the result overflows a long.
              *
-             * @param a
+             * @param longValue
              * @throw ArithmeticException("long overflow")
-             * @return long
+             * @return the negation of longValue
              */
-            static long negateExact(long a);
+            static long negateExact(long longValue);
 
             /**
              * Returns the floating-point number adjacent to the first argument in the direction
@@ -576,46 +577,46 @@ namespace Java {
             /**
              * Returns the floating-point value adjacent to f in the direction of negative infinity.
              *
-             * @param a
+             * @param value
              * @return double
              *  If the argument is NaN, the result is NaN.
              *  If the argument is negative infinity, the result is negative infinity.
              *  If the argument is zero, the result is -Double.MIN_VALUE
              */
-            static double nextDown(double a);
+            static double nextDown(double value);
 
             /**
              * Returns the floating-point value adjacent to f in the direction of negative infinity.
              *
-             * @param a
+             * @param value
              * @return float
              *  If the argument is NaN, the result is NaN.
              *  If the argument is negative infinity, the result is negative infinity.
              *  If the argument is zero, the result is -Double.MIN_VALUE
              */
-            static float nextDown(float a);
+            static float nextDown(float value);
 
             /**
              * Returns the floating-point value adjacent to f in the direction of positive infinity.
              *
-             * @param a
+             * @param value
              * @return float
              * If the argument is NaN, the result is NaN.
              * If the argument is positive infinity, the result is positive infinity.
              * If the argument is zero, the result is Float.MIN_VALUE
              */
-			static float nextUp(float a);
+			static float nextUp(float value);
 
             /**
              * Returns the floating-point value adjacent to f in the direction of positive infinity.
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument is NaN, the result is NaN.
              * If the argument is positive infinity, the result is positive infinity.
              * If the argument is zero, the result is Double.MIN_VALUE
              */
-			static double nextUp(double a);
+			static double nextUp(double value);
 
             /**
              * Returns the value of the first argument raised to the power of the second argument
@@ -629,20 +630,20 @@ namespace Java {
             /**
              * Returns a floating-point power of two in the normal range.
              *
-             * @param n
+             * @param exponent
              * @throw AssertionError
              * @return double
              */
-            static double powerOfTwoD(int n);
+            static double powerOfTwoD(int exponent);
 
             /**
              * Returns a floating-point power of two in the normal range.
              *
-             * @param n
+             * @param exponent
              * @throw AssertionError
              * @return float
              */
-            static float powerOfTwoF(int n);
+            static float powerOfTwoF(int exponent);
 
             /**
              * Returns a double value with a positive sign, greater than or equal to 0.0
@@ -656,19 +657,19 @@ namespace Java {
              * Returns the double value that is closest in value to the argument
              * and is equal to a mathematical integer
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument value is already equal to a mathematical integer,
              * then the result is the same as the argument.
              * If the argument is NaN or an infinity or positive zero or negative zero,
              * then the result is the same as the argument.
              */
-			static double rint(double a);
+			static double rint(double value);
 
             /**
-             * Returns the closest int to the argument.
-             *
-             * @param a
+             * Returns the closest int value to the argument.
+             * and is equal to a mathematical integer
+             * @param value
              * @return int
              * If the argument is NaN, the result is 0.
              * If the argument is negative infinity or any value less than or equal
@@ -676,12 +677,12 @@ namespace Java {
              * If the argument is positive infinity or any value greater than or equal
              * to the value of Integer.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
              */
-			static int round(float a);
+			static int round(float value);
 
             /**
              * Returns the closest long to the argument.
              *
-             * @param a
+             * @param value
              * @return long
              * If the argument is NaN, the result is 0.
              * If the argument is negative infinity or any value less than or equal
@@ -689,88 +690,88 @@ namespace Java {
              * If the argument is positive infinity or any value greater than or equal
              * to the value of Long.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
              */
-			static long round(double a);
+			static long round(double value);
 
             /**
-             * Return a × 2^scaleFactor rounded
+             * Return value × 2^scaleFactor rounded
              *
-             * @param a
+             * @param value
              * @param scaleFactor
              * @return float
              * If the first argument is NaN, NaN is returned.
              * If the first argument is infinite, then an infinity of the same sign is returned.
              * If the first argument is zero, then a zero of the same sign is returned.
              */
-			static float scalb(float a, int scaleFactor);
+			static float scalb(float value, int scaleFactor);
 
             /**
-             * Return a × 2^scaleFactor rounded
+             * Return value × 2^scaleFactor rounded
              *
-             * @param a
+             * @param value
              * @param scaleFactor
              * @return double
              * If the first argument is NaN, NaN is returned.
              * If the first argument is infinite, then an infinity of the same sign is returned.
              * If the first argument is zero, then a zero of the same sign is returned.
              */
-			static double scalb(double a, int scaleFactor);
+			static double scalb(double value, int scaleFactor);
 
             /**
              * Returns the signum function of the argument
              *
-             * @param a
+             * @param value
              * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
              * -1.0 if the argument is less than zero.
              * If the argument is NaN, then the result is NaN.
              * If the argument is positive zero or negative zero, then the result
              * is the same as the argument.
              */
-			static double signum(double a);
+			static double signum(double value);
 
             /**
              * Returns the signum function of the argument
              *
-             * @param a
+             * @param value
              * @return zero if the argument is zero, 1.0 if the argument is greater than zero,
              * -1.0 if the argument is less than zero.
              * If the argument is NaN, then the result is NaN.
              * If the argument is positive zero or negative zero, then the result
              * is the same as the argument.
              */
-			static float signum(float a);
+			static float signum(float value);
 
             /**
              * Returns the trigonometric sine of an angle
              *
-             * @param a
+             * @param angle
              * @return the sine of the a
              * If the argument is NaN or an infinity, then the result is NaN.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double sin(double a);
+			static double sin(double angle);
 
             /**
              * Returns the hyperbolic sine of a double value.
              *
-             * @param a
+             * @param angle
              * @return the hyperbolic sine of a
              * If the argument is NaN, then the result is NaN.
              * If the argument is infinite, then the result is an infinity with the same sign as the argument.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double sinh(double a);
+			static double sinh(double angle);
 
             /**
              * Returns the correctly rounded positive square root of a double value
              *
-             * @param a
+             * @param value
              * @return double
              * If the argument is NaN or less than zero, then the result is NaN.
              * If the argument is positive infinity, then the result is positive infinity.
              * If the argument is positive zero or negative zero, then the result is
              * the same as the argument.
              */
-			static double sqrt(double a);
+			static double sqrt(double value);
 
             /**
              * Returns the difference of the arguments,
@@ -779,7 +780,7 @@ namespace Java {
              * @param a
              * @param b
              * @throw ArithmeticException("long overflow")
-             * @return
+             * @return the difference of the arguments
              */
             static long subtractExact(long a, long b);
 
@@ -790,31 +791,31 @@ namespace Java {
              * @param a
              * @param b
              * @throw ArithmeticException("integer overflow")
-             * @return int
+             * @return the difference of the arguments
              */
             static int subtractExact(int a, int b);
 
             /**
              * Returns the trigonometric tangent of an angle
              *
-             * @param a
+             * @param angle
              * @return the tangent of the a
              * If the argument is NaN or an infinity, then the result is NaN.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              */
-			static double tan(double a);
+			static double tan(double angle);
 
             /**
              * Returns the hyperbolic tangent of a double value.
              *
-             * @param a
+             * @param angle
              * @return the hyperbolic tangent of a
              * If the argument is NaN, then the result is NaN.
              * If the argument is zero, then the result is a zero with the same sign as the argument.
              * If the argument is positive infinity, then the result is +1.0.
              * If the argument is negative infinity, then the result is -1.0.
              */
-			static double tanh(double a);
+			static double tanh(double angle);
 
             /**
              * Converts an angle measured in radians to an approximately equivalent angle
@@ -832,11 +833,11 @@ namespace Java {
              * Returns the value of the long argument;
              * throwing an exception if the value overflows an int.
              *
-             * @param a
+             * @param value
              * @throw ArithmeticException("integer overflow")
-             * @return
+             * @return the value of the long argument
              */
-            static int toIntExact(long a);
+            static int toIntExact(long value);
 
             /**
              * Converts an angle measured in degrees to an approximately equivalent angle measured in radians.
@@ -849,9 +850,9 @@ namespace Java {
 			static double toRadians(double angleDegree);
 
             /**
-             * Returns the size of an ulp of the argument.
+             * Returns the size of an ulp of the float argument.
              *
-             * @param a
+             * @param value
              * @throw AssertionError
              * @return
              *  If the argument is NaN, then the result is NaN.
@@ -859,12 +860,12 @@ namespace Java {
              *  If the argument is positive or negative zero, then the result is Float::MIN_VALUE.
              *  If the argument is ±Float::MAX_VALUE, then the result is equal to 2^104.
              */
-			static float ulp(float a);
+			static float ulp(float value);
 
             /**
-             * Returns the size of an ulp of the argument.
+             * Returns the size of an ulp of the double argument.
              *
-             * @param a
+             * @param value
              * @throw AssertionError
              * @return
              *  If the argument is NaN, then the result is NaN.
@@ -872,7 +873,7 @@ namespace Java {
              *  If the argument is positive or negative zero, then the result is Double.MIN_VALUE.
              *  If the argument is ±Double.MAX_VALUE, then the result is equal to 2^971.
              */
-			static double ulp(double a);
+			static double ulp(double value);
 		};
 	}
 }

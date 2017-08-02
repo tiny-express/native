@@ -26,6 +26,7 @@
 
 #include "Math.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
+#include "../AssertionError/AssertionError.hpp"
 
 using namespace Java::Lang;
 
@@ -49,16 +50,16 @@ double Math::acos(double value) {
     return math_acos(value);
 }
 
-double Math::asin(double a) {
-    return math_asin(a);
+double Math::asin(double value) {
+    return math_asin(value);
 }
 
-double Math::atan(double a) {
-    return math_atan(a);
+double Math::atan(double value) {
+    return math_atan(value);
 }
 
-double Math::atan2(double corX, double corY) {
-    return math_atan2(corX, corY);
+double Math::atan2(double cordinateX, double cordinateY) {
+    return math_atan2(cordinateX, cordinateY);
 }
 
 long Math::addExact(long a, long b) {
@@ -77,8 +78,8 @@ int Math::addExact(int a, int b) {
     return result;
 }
 
-double Math::cbrt(double a) {
-    return math_cbrt(a);
+double Math::cbrt(double value) {
+    return math_cbrt(value);
 }
 
 double Math::ceil(double a) {
@@ -93,79 +94,82 @@ float Math::copySign(float magnitude, float sign) {
     return math_copysignf(magnitude, sign);
 }
 
-double Math::cos(double a) {
-    return math_cos(a);
+double Math::cos(double angle) {
+    return math_cos(angle);
 }
 
-double Math::cosh(double a) {
-    return math_cosh(a);
+double Math::cosh(double angle) {
+    return math_cosh(angle);
 }
 
-long Math::decrementExact(long a) {
-    if (a == Long::MIN_VALUE) {
+long Math::decrementExact(long value) {
+    if (value == Long::MIN_VALUE) {
         throw ArithmeticException("long overflow");
     }
-    return a - 1;
+    return value - 1;
 }
 
-int Math::decrementExact(int a) {
-    if (a == Integer::MIN_VALUE) {
+int Math::decrementExact(int value) {
+    if (value == Integer::MIN_VALUE) {
         throw ArithmeticException("integer overflow");
     }
-    return a - 1;
+    return value - 1;
 }
 
-double Math::exp(double a) {
-    return math_exp(a);
+double Math::exp(double exponent) {
+    return math_exp(exponent);
 }
 
-double Math::expm1(double a) {
-    return math_expm1(a);
+double Math::expm1(double exponent) {
+    return math_expm1(exponent);
 }
 
-double Math::floor(double a) {
-	return math_floor(a);
+double Math::floor(double value) {
+	return math_floor(value);
 }
 
-int Math::floorDiv(int a, int b) {
-    if (b == 0) {
+int Math::floorDiv(int dividend, int divisor) {
+    if (divisor == 0) {
         throw ArithmeticException();
     }
-    int result = a / b;
+    int result = dividend / divisor;
     // if the signs are different and modulo not zero, round down
-    if ((a ^ b) < 0 && (result * b != a)) {
+    if ((dividend ^ divisor) < 0 && (result * divisor != dividend)) {
         result--;
     }
     return result;
 }
 
-long Math::floorDiv(long a, long b) {
-    if (b == 0) {
+long Math::floorDiv(long dividend, long divisor) {
+    if (divisor == 0) {
         throw ArithmeticException();
     }
-    long result = a / b;
+    long result = dividend / divisor;
     // if the signs are different and modulo not zero, round down
-    if ((a ^ b) < 0 && (result * b != a)) {
+    if ((dividend ^ divisor) < 0 && (result * divisor != dividend)) {
         result--;
     }
     return result;
 }
 
-int Math::floorMod(int a, int b) {
-    return a - (floorDiv(a, b) * b);
+int Math::floorMod(int dividend, int divisor) {
+    return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
-long Math::floorMod(long a, long b) {
-    return a - (floorDiv(a, b) * b);
+long Math::floorMod(long dividend, long divisor) {
+    return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
-int Math::getExponent(double a) {
-    return static_cast<int>(((Double::doubleToRawLongBits(a) & Double::EXP_BIT_MASK)
+int Math::getExponent(double value) {
+    if (value == -INFINITY) {
+        value = Math::abs(value);
+    }
+    return (int) (((Double::doubleToRawLongBits(value) & Double::EXP_BIT_MASK)
                 >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS);
 }
 
-int Math::getExponent(float a) {
-    // return ((Float::floatToRawIntBits(a) & Float::EXP_BIT_MASK)
+int Math::getExponent(float value) {
+    // return ((Float::floatToRawIntBits(value) & Float::EXP_BIT_MASK)
     //        >> (Float::SIGNIFICAND_WIDTH - 1)) - Float::EXP_BIAS;
     return 0;
 }
@@ -174,34 +178,34 @@ double Math::hypot(double a, double b) {
     return math_hypot(a, b);
 }
 
-double Math::IEEEremainder(double dividend, double divisor) {
+double Math::IEEERemainder(double dividend, double divisor) {
     return math_ieeeremainder(dividend, divisor);
 }
 
-int Math::incrementExact(int a) {
-    if (a == Integer::MAX_VALUE) {
+int Math::incrementExact(int value) {
+    if (value == Integer::MAX_VALUE) {
         throw ArithmeticException("integer overflow");
     }
-    return a + 1;
+    return value + 1;
 }
 
-long Math::incrementExact(long a) {
-    if (a == Long::MAX_VALUE) {
+long Math::incrementExact(long value) {
+    if (value == Long::MAX_VALUE) {
         throw ArithmeticException("long overflow");
     }
-    return a + 1L;
+    return value + 1L;
 }
 
-double Math::log(double a) {
-    return math_log(a);
+double Math::log(double value) {
+    return math_log(value);
 }
 
-double Math::log10(double a) {
-    return math_log10(a);
+double Math::log10(double value) {
+    return math_log10(value);
 }
 
-double Math::log1p(double a) {
-    return math_log1p(a);
+double Math::log1p(double value) {
+    return math_log1p(value);
 }
 
 int Math::max(int a, int b) {
@@ -246,8 +250,8 @@ int Math::multiplyExact(int a, int b) {
 
 long Math::multiplyExact(long a, long b) {
     long result = a * b;
-    unsigned long absA = abs(a);
-    unsigned long absB = abs(b);
+    unsigned long absA = (unsigned) abs(a);
+    unsigned long absB = (unsigned) abs(b);
 
     if (((absA | absB) >> 31) != 0) {
         if ((a == Long::MIN_VALUE && b == -1) || ((b != 0) && (result / b != a))) {
@@ -257,18 +261,18 @@ long Math::multiplyExact(long a, long b) {
     return result;
 }
 
-int Math::negateExact(int a) {
-    if (a == Integer::MIN_VALUE) {
+int Math::negateExact(int intValue) {
+    if (intValue == Integer::MIN_VALUE) {
         throw ArithmeticException("integer overflow");
     }
-    return -a;
+    return -intValue;
 }
 
-long Math::negateExact(long a) {
-    if (a == Long::MIN_VALUE) {
+long Math::negateExact(long longValue) {
+    if (longValue == Long::MIN_VALUE) {
         throw ArithmeticException("long overflow");
     }
-    return -a;
+    return -longValue;
 }
 
 double Math::nextAfter(double start, double direction) {
@@ -279,75 +283,68 @@ float Math::nextAfter(float start, double direction) {
     return math_nexttowardf(start, direction);
 }
 
-double Math::nextDown(double a) {
-    if (Double::isNaN(a) || a == Double::NEGATIVE_INFINITY) {
-        return a;
-    } else {
-        if (a == 0.0) {
-            return -Double::MIN_VALUE;
-        } else {
-            return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a > 0.0) ? -1L : +1L));
-        }
+double Math::nextDown(double value) {
+    if (Double::isNaN(value) || value == Double::NEGATIVE_INFINITY) {
+        return value;
     }
+    if (value == 0.0) {
+        return -Double::MIN_VALUE;
+    }
+
+    return Double::longBitsToDouble(Double::doubleToRawLongBits(value) + ((value > 0.0) ? -1L : +1L));
 }
 
 // TODO need Float.intBitsToFloat, Float.floatToRawIntBits
-float Math::nextDown(float a) {
-    if (Float::isNaN(a) || a == Float::NEGATIVE_INFINITY) {
-        return a;
-    } else {
-        if (a == 0.0) {
-            return -Float::MIN_VALUE;
-        }
-        /*else {
-               return Float.intBitsToFloat(Float.floatToRawIntBits(f) + ((f > 0.0f) ? -1 : +1));
-        }*/
+float Math::nextDown(float value) {
+    if (Float::isNaN(value) || value == Float::NEGATIVE_INFINITY) {
+        return value;
     }
+
+    if (value == 0.0) {
+        return -Float::MIN_VALUE;
+    }
+
+    // return Float.intBitsToFloat(Float.floatToRawIntBits(f) + ((f > 0.0f) ? -1 : +1));
 }
 
 // TODO need Float::intBitsToFloat, Float::floatToRawIntBits
-float Math::nextUp(float a) {
-    if (Float::isNaN(a) || a == Float::POSITIVE_INFINITY) {
-        return a;
-    } else {
-        // a += 0.0f;
-        // return Float::intBitsToFloat(Float::floatToRawIntBits(a) + ((a >= 0.0) ? +1 : -1));
+float Math::nextUp(float value) {
+    if (Float::isNaN(value) || value == Float::POSITIVE_INFINITY) {
+        return value;
     }
+    // value += 0.0f;
+    // return Float::intBitsToFloat(Float::floatToRawIntBits(value) + ((value >= 0.0) ? +1 : -1));
 }
 
-double Math::nextUp(double a) {
-    if (Double::isNaN(a) || a == Double::POSITIVE_INFINITY) {
-        return a;
-    } else {
-       a += 0.0f;
-       return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a >= 0.0) ? +1 : -1));
+double Math::nextUp(double value) {
+    if (Double::isNaN(value) || value == Double::POSITIVE_INFINITY) {
+        return value;
     }
+    value += 0.0f;
+    return Double::longBitsToDouble(Double::doubleToRawLongBits(value) + ((value >= 0.0) ? +1 : -1));
 }
 
 double Math::pow(double base, double exponent) {
     return math_pow(base, exponent);
 }
 
-double Math::powerOfTwoD(int n) {
-    if (n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT) {
-        // TODO throw Assertion error
-        return 0;
-    } else {
-        return Double::longBitsToDouble((((long) n + (long) Double::EXP_BIAS)
-                << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
+double Math::powerOfTwoD(int exponent) {
+    if (exponent < Double::MIN_EXPONENT || exponent > Double::MAX_EXPONENT) {
+        throw AssertionError(exponent);
     }
+    return Double::longBitsToDouble((((long) exponent + (long) Double::EXP_BIAS)
+            << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
 }
 
 // TODO need Float::intBitsToFloat
-float Math::powerOfTwoF(int n) {
-    if (n >= Float::MIN_EXPONENT && n <= Float::MAX_EXPONENT) {
-        // TODO throw Assertion error
-        return 0;
-    } else {
-      /*  return Float::intBitsToFloat(((n + Float::EXP_BIAS)
-                << (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
-        return 1;
+float Math::powerOfTwoF(int exponent) {
+    if (exponent < Float::MIN_EXPONENT || exponent > Float::MAX_EXPONENT) {
+        throw AssertionError(exponent);
     }
+
+    /*return Float::intBitsToFloat(((exponent + Float::EXP_BIAS)
+            << (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
+        return 1;
 }
 
 double Math::random() {
@@ -355,44 +352,50 @@ double Math::random() {
     return random1.nextDouble();
 }
 
-double Math::rint(double a) {
-    return math_rint(a);
+double Math::rint(double value) {
+    return math_rint(value);
 }
 
-int Math::round(float a) {
-    return (int) math_round(a);
+int Math::round(float value) {
+    return (int) math_round(value);
 }
 
-long Math::round(double a) {
-	return (long) math_round(a);
+long Math::round(double value) {
+	return (long) math_round(value);
 }
 
-float Math::scalb(float a, int scaleFactor) {
-    return math_ldexpf(a, scaleFactor);
+float Math::scalb(float value, int scaleFactor) {
+    return math_ldexpf(value, scaleFactor);
 }
 
-double Math::scalb(double a, int scaleFactor) {
-    return math_ldexp(a, scaleFactor);
+double Math::scalb(double value, int scaleFactor) {
+    return math_ldexp(value, scaleFactor);
 }
 
-double Math::signum(double a) {
-    return (a == 0.0 || Double::isNaN(a)) ? a: copySign(1.0, a);
+double Math::signum(double value) {
+    if (value == 0.0 || Double::isNaN(value)) {
+        return value;
+    }
+    return Math::copySign(1.0, value);
 }
 
-float Math::signum(float a) {
-    return (a == 0.0f || Float::isNaN(a)) ? a : copySign(1.0f, a);
+float Math::signum(float value) {
+    if (value == 0.0f || Float::isNaN(value)) {
+        return value;
+    }
+    return Math::copySign(1.0f, value);
 }
 
-double Math::sin(double a) {
-    return math_sin(a);
+double Math::sin(double angle) {
+    return math_sin(angle);
 }
 
-double Math::sinh(double a) {
-    return math_sinh(a);
+double Math::sinh(double angle) {
+    return math_sinh(angle);
 }
 
-double Math::sqrt(double a) {
-	return math_sqrt(a);
+double Math::sqrt(double value) {
+	return math_sqrt(value);
 }
 
 long Math::subtractExact(long a, long b) {
@@ -411,23 +414,23 @@ int Math::subtractExact(int a, int b) {
     return result;
 }
 
-double Math::tan(double a) {
-    return math_tan(a);
+double Math::tan(double angle) {
+    return math_tan(angle);
 }
 
-double Math::tanh(double a) {
-    return math_tanh(a);
+double Math::tanh(double angle) {
+    return math_tanh(angle);
 }
 
 double Math::toDegrees(double angleRadian) {
     return angleRadian * 180.0 / PI;
 }
 
-int Math::toIntExact(long a) {
-    if ((int)a != a) {
+int Math::toIntExact(long value) {
+    if ((int)value != value) {
         throw ArithmeticException("integer overflow");
     }
-    return (int) a;
+    return (int) value;
 }
 
 double Math::toRadians(double angleDegree) {
@@ -435,54 +438,51 @@ double Math::toRadians(double angleDegree) {
 }
 
 //TODO need Float::intBitsToFloat
-float Math::ulp(float a) {
-    if (a == Float::MAX_VALUE || a == -Float::MAX_VALUE) {
-        return static_cast<float>(Math::pow(2, 104));
+float Math::ulp(float value) {
+    if (value == Float::MAX_VALUE || value == -Float::MAX_VALUE) {
+        return (float) Math::pow(2, 104);
     }
-    int exp = getExponent(a);
+    int exp = getExponent(value);
     switch(exp) {
         case Float::MAX_EXPONENT + 1:        // NaN or infinity
-            return Math::abs(a);
+            return Math::abs(value);
         case Float::MIN_EXPONENT - 1:        // zero or subnormal
             return Float::MIN_VALUE;
         default:
             if (exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT) {
-                //TODO Throw Assertion error
-                return 0;
-            } else {
-                exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
-                if (exp >= Float::MIN_EXPONENT) {
-                    return powerOfTwoF(exp);
-                } else {
-                 /*   return Float::intBitsToFloat(1 << (exp - (Float::MIN_EXPONENT
-                                                              - (Float::SIGNIFICAND_WIDTH - 1)) ));*/
-                }
+                throw AssertionError(exp);
             }
+
+            exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
+            if (exp >= Float::MIN_EXPONENT) {
+                return powerOfTwoF(exp);
+            }
+             /*   return Float::intBitsToFloat(1 << (exp - (Float::MIN_EXPONENT
+                                                          - (Float::SIGNIFICAND_WIDTH - 1)) ));*/
     }
 }
 
-double Math::ulp(double a) {
-    if (a == Double::MAX_VALUE || a == -Double::MAX_VALUE) {
+double Math::ulp(double value) {
+    if (value == Double::MAX_VALUE || value == -Double::MAX_VALUE) {
         return Math::pow(2, 971);
     }
-    int exp = getExponent(a);
+    int exp = getExponent(value);
     switch (exp) {
         case Double::MAX_EXPONENT + 1:        // NaN or infinity
-            return Math::abs(a);
+            return Math::abs(value);
         case Double::MIN_EXPONENT - 1:        // zero or subnormal
             return Double::MIN_VALUE;
         default:
             if (exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT) {
-                // TODO Throw Assertion error
-                return 0;
-            } else {
-                exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
-                if (exp >= Double::MIN_EXPONENT) {
-                    return powerOfTwoD(exp);
-                } else {
-                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
-                                                                 - (Double::SIGNIFICAND_WIDTH - 1))));
-                }
+                throw AssertionError(exp);
             }
+
+            exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
+            if (exp >= Double::MIN_EXPONENT) {
+                return powerOfTwoD(exp);
+            }
+
+            return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
+                                                             - (Double::SIGNIFICAND_WIDTH - 1))));
     }
 }

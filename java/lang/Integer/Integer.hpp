@@ -46,7 +46,7 @@ namespace Java {
 
 		public:
 			/**
-			 *A constant holding the minimum value an int can have, -2^31.
+			 * A constant holding the minimum value an int can have, -2^31.
 			 */
 			static const int MIN_VALUE = 0x80000000;
 

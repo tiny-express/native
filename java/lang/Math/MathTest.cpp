@@ -920,32 +920,32 @@ TEST(JavaLang, MathIEEERemainder) {
 	double x = 8;
 	double y = 6;
 	double expectResult = 2;
-    ASSERT_DBL_NEAR(expectResult, Math::IEEEremainder(x, y));
+    ASSERT_DBL_NEAR(expectResult, Math::IEEERemainder(x, y));
 
     // Given two double with First number equal INFINITY
     double z = 6;
     double inf = INFINITY;
     double expectFirstInfResult = NAN;
-    ASSERT_DBL_NEAR(expectFirstInfResult, Math::IEEEremainder(inf, z));
+    ASSERT_DBL_NEAR(expectFirstInfResult, Math::IEEERemainder(inf, z));
 
     // Given two double with one number equal NAN
     double nan = NAN;
     double expectNaNResult = NAN;
-    ASSERT_DBL_NEAR(expectNaNResult, Math::IEEEremainder(z, nan));
+    ASSERT_DBL_NEAR(expectNaNResult, Math::IEEERemainder(z, nan));
 
     // Given two double with the second number is 0.0
     double positiveZero = 0.0;
     double expectPositiveZeroResult = NAN;
-    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::IEEEremainder(z, positiveZero));
+    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::IEEERemainder(z, positiveZero));
 
     // Given two double with the second number is -0.0
     double negativeZero = 0.0;
     double expectNegativeZeroResult = NAN;
-    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::IEEEremainder(z, negativeZero));
+    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::IEEERemainder(z, negativeZero));
 
     // Given two double with one number equal INFINITY
     double expectSecondInfResult = NAN;
-    ASSERT_DBL_NEAR(expectSecondInfResult, Math::IEEEremainder(z, inf));
+    ASSERT_DBL_NEAR(expectSecondInfResult, Math::IEEERemainder(z, inf));
 }
 
 TEST(JavaLang, MathCosh) {
@@ -1317,7 +1317,7 @@ TEST(JavaLang, MathGetExponentDouble) {
     ASSERT_EQUAL(expectNANResult, Math::getExponent(nan));
 
     // Given an Infinity to get exponent
-    double infinity = INFINITY;
+    double infinity = -INFINITY;
     int expectInfiniteResult = Double::MAX_EXPONENT + 1;
     ASSERT_EQUAL(expectInfiniteResult, Math::getExponent(infinity));
 
@@ -1333,7 +1333,7 @@ TEST(JavaLang, MathGetExponentDouble) {
 }
 
 TEST(JavaLang, MathGetExponentFloat) {
-   /* // Given a float to get exponent
+    /*// Given a float to get exponent
     float floatNumber = 60984.1f;
     int expectResult = 15;
     ASSERT_EQUAL(expectResult, Math::getExponent(floatNumber));
@@ -1351,12 +1351,12 @@ TEST(JavaLang, MathGetExponentFloat) {
     // Given a zero to get exponent
     float zero = 0.0;
     int expectZeroResult = Float::MIN_EXPONENT - 1;
-    ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));
+    ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));*/
 
-    *//* // Given a subnormal to get exponent
-     float subNormal = 3.952525e-323;
-     int expectSubNormalResult = Double::MIN_EXPONENT - 1;
-     ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));*/
+    /*// Given a subnormal to get exponent
+    float subNormal = 3.952525e-323;
+    int expectSubNormalResult = Double::MIN_EXPONENT - 1;
+    ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));*/
 }
 
 TEST(JavaLang, MathNextDownDouble) {
@@ -1382,10 +1382,10 @@ TEST(JavaLang, MathNextDownDouble) {
 }
 
 TEST(JavaLang, MathNextDownFloat) {
-/*    // Given a float
-    float floatNumber = 98759.765;
-    float expectResult = 98759.76;
-    ASSERT_DBL_NEAR(expectResult, Math::nextDown(floatNumber));
+//    // Given a float
+//    float floatNumber = 98759.765f;
+//    float expectResult = 98759.76f;
+//    ASSERT_EQUAL(expectResult, Math::nextDown(floatNumber));
 
     // Given a NAN
     float nan = NAN;
@@ -1400,7 +1400,7 @@ TEST(JavaLang, MathNextDownFloat) {
     // Given a zero
     float zero = 0.0;
     float expectZeroResult = -Float::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));*/
+    ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));
 }
 
 TEST(JavaLang, MathNextUpDouble) {
@@ -1412,39 +1412,39 @@ TEST(JavaLang, MathNextUpDouble) {
     // Given a NAN
     double nan = NAN;
     double expectNANResult = NAN;
-    ASSERT_DBL_NEAR(expectNANResult, Math::nextDown(nan));
+    ASSERT_DBL_NEAR(expectNANResult, Math::nextUp(nan));
 
     // Given a positive Infinity
     double positiveInfinite = INFINITY;
     double expectPositiveInfiniteResult = INFINITY;
-    ASSERT_EQUAL(expectPositiveInfiniteResult, Math::nextDown(positiveInfinite));
+    ASSERT_EQUAL(expectPositiveInfiniteResult, Math::nextUp(positiveInfinite));
 
     // Given a zero
     double zero = 0.0;
     double expectZeroResult = Double::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));
+    ASSERT_DBL_NEAR(expectZeroResult, Math::nextUp(zero));
 }
 
 TEST(JavaLang, MathNextUpFloat) {
- /*   // Given a float
-    float floatNumber = 98759.765;
-    float expectResult = 98759.76500000001;
+    // Given a float
+    float floatNumber = 98759.765f;
+    float expectResult = 98759.76500000001f;
     ASSERT_DBL_NEAR(expectResult,  Math::nextUp(floatNumber));
 
     // Given a NAN
     float nan = NAN;
     float expectNANResult = NAN;
-    ASSERT_DBL_NEAR(expectNANResult, Math::nextDown(nan));
+    ASSERT_DBL_NEAR(expectNANResult, Math::nextUp(nan));
 
     // Given a positive Infinity
     float positiveInfinite = INFINITY;
     float expectNegativeInfiniteResult = INFINITY;
-    ASSERT_DBL_NEAR(expectNegativeInfiniteResult, Math::nextDown(positiveInfinite));
+    ASSERT_EQUAL(expectNegativeInfiniteResult, Math::nextUp(positiveInfinite));
 
     // Given a zero
     float zero = 0.0;
     float expectZeroResult = Float::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));*/
+    ASSERT_DBL_NEAR(expectZeroResult, Math::nextUp(zero));
 }
 
 TEST(JavaLang, MathUlpDouble) {
@@ -1456,7 +1456,7 @@ TEST(JavaLang, MathUlpDouble) {
     // Given a NAN
     double nan = NAN;
     double expectNANResult = NAN;
-    ASSERT_DBL_NEAR(expectNANResult, Math::nextDown(nan));
+    ASSERT_DBL_NEAR(expectNANResult, Math::ulp(nan));
 
     // Given a positive Infinity
     double positiveInfinite = +INFINITY;
@@ -1466,12 +1466,12 @@ TEST(JavaLang, MathUlpDouble) {
     // Given a negative Infinity
     double negativeInfinite = -INFINITY;
     double expectNegativeInfiniteResult = +INFINITY;
-    ASSERT_DBL_NEAR(expectNegativeInfiniteResult, Math::ulp(positiveInfinite));
+    ASSERT_EQUAL(expectNegativeInfiniteResult, Math::ulp(negativeInfinite));
 
     // Given a positive zero
     double positiveZero = +0.0;
     double expectPositiveZeroResult = Double::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::nextDown(positiveZero));
+    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::ulp(positiveZero));
 
     // Given a negative zero
     double negativeZero = -0.0;
@@ -1490,43 +1490,43 @@ TEST(JavaLang, MathUlpDouble) {
 }
 
 TEST(JavaLang, MathUlpFloat) {
-/*    // Given a float
-    float floatNumber = 956.294f;
-    float expectResult = 1.1368683772161603E-13;
-    ASSERT_DBL_NEAR(expectResult, Math::ulp(floatNumber));
-
-    // Given a NAN
-    float nan = NAN;
-    float expectNANResult = NAN;
-    ASSERT_DBL_NEAR(expectNANResult, Math::nextDown(nan));
-
-    // Given a positive Infinity
-    float positiveInfinite = +INFINITY;
-    float expectPositiveInfiniteResult = +INFINITY;
-    ASSERT_DBL_NEAR(expectPositiveInfiniteResult, Math::ulp(positiveInfinite));
-
-    // Given a negative Infinity
-    float negativeInfinite = -INFINITY;
-    float expectNegativeInfiniteResult = +INFINITY;
-    ASSERT_DBL_NEAR(expectNegativeInfiniteResult, Math::ulp(positiveInfinite));
-
-    // Given a positive zero
-    float positiveZero = +0.0;
-    float expectPositiveZeroResult = Float::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::nextDown(positiveZero));
-
-    // Given a negative zero
-    float negativeZero = -0.0;
-    float expectNegativeZeroResult = Float::MIN_VALUE;
-    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::ulp(negativeZero));
+//    // Given a float
+//    float floatNumber = 956.294f;
+//    float expectResult = 1.1368683772161603E-13f;
+//    ASSERT_DBL_NEAR(expectResult, Math::ulp(floatNumber));
+//
+//    // Given a NAN
+//    float nan = NAN;
+//    float expectNANResult = NAN;
+//    ASSERT_DBL_NEAR(expectNANResult, Math::ulp(nan));
+//
+//    // Given a positive Infinity
+//    float positiveInfinite = +INFINITY;
+//    float expectPositiveInfiniteResult = +INFINITY;
+//    ASSERT_EQUAL(expectPositiveInfiniteResult, Math::ulp(positiveInfinite));
+//
+//    // Given a negative Infinity
+//    float negativeInfinite = -INFINITY;
+//    float expectNegativeInfiniteResult = +INFINITY;
+//    ASSERT_EQUAL(expectNegativeInfiniteResult, Math::ulp(negativeInfinite));
+//
+//    // Given a positive zero
+//    float positiveZero = +0.0f;
+//    float expectPositiveZeroResult = Float::MIN_VALUE;
+//    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::ulp(positiveZero));
+//
+//    // Given a negative zero
+//    float negativeZero = -0.0f;
+//    float expectNegativeZeroResult = Float::MIN_VALUE;
+//    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::ulp(negativeZero));
 
     // Given a Float::MAX_VALUE
     float floatMaxValue = Float::MAX_VALUE;
     float expectFloatMaxValueResult = (float) Math::pow(2, 104);
-    ASSERT_DBL_NEAR(expectFloatMaxValueResult, Math::ulp(floatMaxValue));
+    ASSERT_EQUAL(expectFloatMaxValueResult, Math::ulp(floatMaxValue));
 
     // Given a -Float::MAX_VALUE
     float negativeFloatMaxValue = Float::MAX_VALUE;
-    float expectNegativeFloatMaxValueResult = Math::pow(2, 971);
-    ASSERT_DBL_NEAR(expectNegativeFloatMaxValueResult, Math::ulp(negativeFloatMaxValue));*/
+    float expectNegativeFloatMaxValueResult = (float) Math::pow(2, 971);
+    ASSERT_EQUAL(expectNegativeFloatMaxValueResult, Math::ulp(negativeFloatMaxValue));
 }

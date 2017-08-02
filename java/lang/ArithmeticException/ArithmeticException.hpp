@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,12 +28,11 @@
 #define NATIVE_ARITHMETICEXCEPTION_H
 
 #include "../String/String.hpp"
-#include "../Exception/Exception.hpp"
+#include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
     namespace Lang {
-        //TODO change to RuntimeException when merge
-        class ArithmeticException : public Exception {
+        class ArithmeticException : public RuntimeException {
         public:
             ArithmeticException();
             ArithmeticException(String message);

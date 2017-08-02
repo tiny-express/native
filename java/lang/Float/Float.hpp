@@ -118,7 +118,7 @@ namespace Java {
             static const int SIZE = 32;
 
             /**
-             *             The number of bytes used to represent a float value.
+             * The number of bytes used to represent a float value.
              */
             static constexpr int BYTES = SIZE / 8;
 
