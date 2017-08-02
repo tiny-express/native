@@ -40,6 +40,24 @@ namespace Java {
         private:
 			Math() = default;
 
+            /**
+             * Returns a floating-point power of two in the normal range.
+             *
+             * @param exponent
+             * @throw AssertionError
+             * @return double
+             */
+            static double powerOfTwoD(int exponent);
+
+            /**
+             * Returns a floating-point power of two in the normal range.
+             *
+             * @param exponent
+             * @throw AssertionError
+             * @return float
+             */
+            static float powerOfTwoF(int exponent);
+
         public:
             /**
              * e number
@@ -626,24 +644,6 @@ namespace Java {
              * @return double
              */
 			static double pow(double base, double exponent);
-
-            /**
-             * Returns a floating-point power of two in the normal range.
-             *
-             * @param exponent
-             * @throw AssertionError
-             * @return double
-             */
-            static double powerOfTwoD(int exponent);
-
-            /**
-             * Returns a floating-point power of two in the normal range.
-             *
-             * @param exponent
-             * @throw AssertionError
-             * @return float
-             */
-            static float powerOfTwoF(int exponent);
 
             /**
              * Returns a double value with a positive sign, greater than or equal to 0.0
