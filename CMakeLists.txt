@@ -33,7 +33,7 @@ project(native C CXX)
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    enable_language(ASM)
+#    enable_language(ASM)
 endif ()
 
 # Enable runtime search path support for dynamic libraries on OSX
