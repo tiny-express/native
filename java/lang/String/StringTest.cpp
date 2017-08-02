@@ -461,6 +461,9 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-	expect = (string) "ello w";
+
+// Please remove this
+//	expect = (string) "ello w"; This is wrong result, subString(1,5) has 5 characters, in this case is 6.
+    expect = (string) "ello ";
 	ASSERT_STR(expect, result);
 }

@@ -28,25 +28,37 @@
 #define NATIVE_MEDIATYPE_H
 
 #include "../../../../java/Lang.hpp"
-#include "../../../../java/util/Map/Map.hpp"
+#include "../../../../java/util/HashMap/HashMap.hpp"
 
 namespace Javax {
     namespace Ws {
         class MediaType : public virtual Java::Lang::Object {
         public:
-            static String APPLICATION_ATOM_XML          = "application/atom+xml";
-            static String APPLICATION_FORM_URLENCODED   = "application/x-www-form-urlencoded";
-            static String APPLICATION_JSON              = "application/json";
-            static String APPLICATION_OCTET_STREAM      = "application/octet-stream";
-            static String APPLICATION_SVG_XML           = "application/svg+xml";
-            static String APPLICATION_XHTML_XML         = "application/xhtml+xml";
-            static String APPLICATION_XML               = "application/xml";
-            static String MEDIA_TYPE_WILDCARD           = "*";
-            static String MULTIPART_FORM_DATA           = "multipart/form-data";
-            static String TEXT_HTML                     = "text/html";
-            static String TEXT_PLAIN                    = "text/plain";
-            static String TEXT_XML                      = "text/xml";
-            static String WILDCARD                      = "*/*";
+            static String APPLICATION_ATOM_XML;
+            static String APPLICATION_FORM_URLENCODED;
+            static String APPLICATION_JSON;
+            static String APPLICATION_OCTET_STREAM;
+            static String APPLICATION_SVG_XML;
+            static String APPLICATION_XHTML_XML;
+            static String APPLICATION_XML;
+            static String MEDIA_TYPE_WILDCARD;
+            static String MULTIPART_FORM_DATA;
+            static String TEXT_HTML;
+            static String TEXT_PLAIN;
+            static String TEXT_XML;
+            static String WILDCARD;
+            static MediaType APPLICATION_ATOM_XML_TYPE;
+            static MediaType APPLICATION_FORM_URLENCODED_TYPE;
+            static MediaType APPLICATION_JSON_TYPE;
+            static MediaType APPLICATION_OCTET_STREAM_TYPE;
+            static MediaType APPLICATION_SVG_XML_TYPE;
+            static MediaType APPLICATION_XHTML_XML_TYPE;
+            static MediaType APPLICATION_XML_TYPE;
+            static MediaType MULTIPART_FORM_DATA_TYPE;
+            static MediaType TEXT_HTML_TYPE;
+            static MediaType TEXT_PLAIN_TYPE;
+            static MediaType TEXT_XML_TYPE;
+            static MediaType WILDCARD_TYPE;
 
             /**
              * Creates a new instance of MediaType, both type and subtype are wildcards.
@@ -59,7 +71,7 @@ namespace Javax {
              * @param type
              * @param subtype
              */
-            MediaType(String type, String subtype);
+            MediaType(const String &type, const String &subtype);
 
             /**
              *   Creates a new instance of MediaType with the supplied type, subtype and parameters.
@@ -68,7 +80,7 @@ namespace Javax {
              * @param subtype
              * @param parameters
              */
-            MediaType(String type, String subtype, Map<String, String> parameters);
+            MediaType(const String &type, const String &subtype, const HashMap<String, String> &parameters);
 
             /**
              * Remove media type instance
@@ -80,7 +92,7 @@ namespace Javax {
              *
              * @return
              */
-            const Map<String, String> &getParameters() const;
+            const HashMap<String, String> &getParameters() const;
 
             /**
              * Getter for subtype.
@@ -99,29 +111,44 @@ namespace Javax {
             /**
              * Check if this media type is compatible with another media type.
              *
-             * @param other
-             * @return
+             * @param other the media type to compare with.
+             * @return true if the types are compatible, false otherwise.
              */
-            Boolean isCompatible(MediaType other);
+            boolean isCompatible(MediaType other);
 
             /**
              * Checks if the subtype is a wildcard
              *
              * @return
              */
-            Boolean isWildcardSubtype();
+            boolean isWildcardSubtype();
 
             /**
              * Checks if the primary type is a wildcard.
              *
              * @return
              */
-            Boolean isWildcardType();
+            boolean isWildcardType();
+
+            /**
+             * Convert the media type to a string suitable for use as the value of a corresponding HTTP header.
+             *
+             * @return
+             */
+            const String &toString();
+
+            /**
+             * Creates a new instance of MediaType by parsing the supplied string.
+             *
+             * @param type
+             * @return
+             */
+            static MediaType valueOf(String type);
 
         private:
             String type;
             String subtype;
-            Map<String, String> parameters;
+            HashMap<String, String> parameters;
         };
     }
 }
