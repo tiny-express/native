@@ -461,6 +461,7 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-	expect = (string) "ello w";
+//	expect = (string) "ello w"; // Wrong case 
+    expect = (string) "ello w";
 	ASSERT_STR(expect, result);
 }
