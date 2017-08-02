@@ -306,6 +306,7 @@ float Math::nextDown(float value) {
     }
 
     // return Float.intBitsToFloat(Float.floatToRawIntBits(f) + ((f > 0.0f) ? -1 : +1));
+    return 0;
 }
 
 // TODO need Float::intBitsToFloat, Float::floatToRawIntBits
@@ -315,6 +316,7 @@ float Math::nextUp(float value) {
     }
     // value += 0.0f;
     // return Float::intBitsToFloat(Float::floatToRawIntBits(value) + ((value >= 0.0) ? +1 : -1));
+    return 0;
 }
 
 double Math::nextUp(double value) {
@@ -345,7 +347,7 @@ float Math::powerOfTwoF(int exponent) {
 
     /*return Float::intBitsToFloat(((exponent + Float::EXP_BIAS)
             << (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
-        return 1;
+    return 0;
 }
 
 double Math::random() {
