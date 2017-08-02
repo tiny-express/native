@@ -165,7 +165,7 @@ int Math::getExponent(double a) {
 }
 
 int Math::getExponent(float a) {
-    //return ((Float::floatToRawIntBits(a) & Float::EXP_BIT_MASK)
+    // return ((Float::floatToRawIntBits(a) & Float::EXP_BIT_MASK)
     //        >> (Float::SIGNIFICAND_WIDTH - 1)) - Float::EXP_BIAS;
     return 0;
 }
@@ -282,24 +282,20 @@ float Math::nextAfter(float start, double direction) {
 double Math::nextDown(double a) {
     if (Double::isNaN(a) || a == Double::NEGATIVE_INFINITY) {
         return a;
-    }
-    else {
+    } else {
         if (a == 0.0) {
             return -Double::MIN_VALUE;
-        }
-        else {
+        } else {
             return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a > 0.0) ? -1L : +1L));
         }
-
     }
 }
 
-//TODO need Float.intBitsToFloat, Float.floatToRawIntBits
+// TODO need Float.intBitsToFloat, Float.floatToRawIntBits
 float Math::nextDown(float a) {
     if (Float::isNaN(a) || a == Float::NEGATIVE_INFINITY) {
         return a;
-    }
-    else {
+    } else {
         if (a == 0.0) {
             return -Float::MIN_VALUE;
         }
@@ -309,22 +305,20 @@ float Math::nextDown(float a) {
     }
 }
 
- //TODO need Float::intBitsToFloat, Float::floatToRawIntBits
+// TODO need Float::intBitsToFloat, Float::floatToRawIntBits
 float Math::nextUp(float a) {
-    if ( Float::isNaN(a) || a == Float::POSITIVE_INFINITY) {
+    if (Float::isNaN(a) || a == Float::POSITIVE_INFINITY) {
         return a;
+    } else {
+        // a += 0.0f;
+        // return Float::intBitsToFloat(Float::floatToRawIntBits(a) + ((a >= 0.0) ? +1 : -1));
     }
- /*   else {
-        a += 0.0f;
-        return Float::intBitsToFloat(Float::floatToRawIntBits(a) + ((a >= 0.0) ? +1 : -1));
-    }*/
 }
 
 double Math::nextUp(double a) {
-    if ( Double::isNaN(a) || a == Double::POSITIVE_INFINITY) {
+    if (Double::isNaN(a) || a == Double::POSITIVE_INFINITY) {
         return a;
-    }
-    else {
+    } else {
        a += 0.0f;
        return Double::longBitsToDouble(Double::doubleToRawLongBits(a) + ((a >= 0.0) ? +1 : -1));
     }
@@ -336,28 +330,24 @@ double Math::pow(double base, double exponent) {
 
 double Math::powerOfTwoD(int n) {
     if (n < Double::MIN_EXPONENT || n > Double::MAX_EXPONENT) {
-        //TODO throw Assertion error
+        // TODO throw Assertion error
         return 0;
-    }
-    else {
+    } else {
         return Double::longBitsToDouble((((long) n + (long) Double::EXP_BIAS)
                 << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
     }
-
 }
 
-//TODO need Float::intBitsToFloat
+// TODO need Float::intBitsToFloat
 float Math::powerOfTwoF(int n) {
     if (n >= Float::MIN_EXPONENT && n <= Float::MAX_EXPONENT) {
-        //TODO throw Assertion error
+        // TODO throw Assertion error
         return 0;
-    }
-    else {
+    } else {
       /*  return Float::intBitsToFloat(((n + Float::EXP_BIAS)
                 << (Float::SIGNIFICAND_WIDTH-1)) & Float::EXP_BIT_MASK);*/
         return 1;
     }
-
 }
 
 double Math::random() {
@@ -459,13 +449,11 @@ float Math::ulp(float a) {
             if (exp > Float::MAX_EXPONENT || exp < Float::MIN_EXPONENT) {
                 //TODO Throw Assertion error
                 return 0;
-            }
-            else {
+            } else {
                 exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
                 if (exp >= Float::MIN_EXPONENT) {
                     return powerOfTwoF(exp);
-                }
-                else {
+                } else {
                  /*   return Float::intBitsToFloat(1 << (exp - (Float::MIN_EXPONENT
                                                               - (Float::SIGNIFICAND_WIDTH - 1)) ));*/
                 }
@@ -485,16 +473,14 @@ double Math::ulp(double a) {
             return Double::MIN_VALUE;
         default:
             if (exp > Double::MAX_EXPONENT || exp < Double::MIN_EXPONENT) {
-                //TODO Throw Assertion error
+                // TODO Throw Assertion error
                 return 0;
-            }
-            else {
+            } else {
                 exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
                 if (exp >= Double::MIN_EXPONENT) {
                     return powerOfTwoD(exp);
-                }
-                else {
-                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
+                } else {
+                    return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT 
                                                                  - (Double::SIGNIFICAND_WIDTH - 1))));
                 }
             }

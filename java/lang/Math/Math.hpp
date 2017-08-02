@@ -37,10 +37,10 @@ using namespace Java::Util;
 namespace Java {
 	namespace Lang {
 		class Math final : public virtual Object {
-
         private:
-			Math(){}
-		public:
+			Math() = default;
+
+        public:
             /**
              * e number
              */
@@ -464,7 +464,7 @@ namespace Java {
              *
              * @param a
              * @param b
-             * @return a if a<b; else b
+             * @return a if a < b; else b
              */
 			static int min(int a, int b);
 
@@ -494,6 +494,7 @@ namespace Java {
              * @return a if a < b; else b
              */
 			static double min(double a, double b);
+			
             /**
              * Returns the product of the arguments,
              * throwing an exception if the result overflows an int.
@@ -563,11 +564,11 @@ namespace Java {
              * @return float
              * If either argument is a NaN, then NaN is returned.
              * If both arguments are signed zeros, a value equivalent to direction is returned.
-             * If start is ±Float.MIN_VALUE and direction has a value such that the result should
+             * If start is ±Float::MIN_VALUE and direction has a value such that the result should
              *  have a smaller magnitude, then a zero with the same sign as start is returned.
              * If start is infinite and direction has a value such that the result should have
-             *  a smaller magnitude, Float.MAX_VALUE with the same sign as start is returned.
-             * If start is equal to ± Float.MAX_VALUE and direction has a value such that the
+             *  a smaller magnitude, Float::MAX_VALUE with the same sign as start is returned.
+             * If start is equal to ± Float::MAX_VALUE and direction has a value such that the
              *  result should have a larger magnitude, an infinity with same sign as start is returned.
              */
 			static float nextAfter(float start, double direction);
