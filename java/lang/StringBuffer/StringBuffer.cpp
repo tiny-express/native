@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -210,20 +210,21 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
 
     if (isBmpCodePoint) {
         return this->append((char) codePoint);
-    } else if (isValidCodePoint) {
+    }
+    if (isValidCodePoint) {
         int MIN_HIGH_SURROGATE = 0xD800;
         unsigned int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
         int MIN_LOW_SURROGATE = 0xDC00;
 
         auto lowSurrogate = (char) ((codePoint & 0x3ff) + MIN_LOW_SURROGATE);
-        auto highSurrogate = (char) ((((unsigned)codePoint) >> 10)
+        auto highSurrogate = (char) ((((unsigned) codePoint) >> 10)
                                      + (MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >> 10)));
         this->append(highSurrogate);
         this->append(lowSurrogate);
         return *this;
-    } else {
-        throw IllegalArgumentException();
     }
+
+        throw IllegalArgumentException();
 }
 
 char StringBufferUnSafe::charAt(int index) {
