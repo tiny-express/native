@@ -193,7 +193,7 @@ long Math::incrementExact(long value) {
     if (value == Long::MAX_VALUE) {
         throw ArithmeticException("long overflow");
     }
-    return value + 1L;
+    return value + 1;
 }
 
 double Math::log(double value) {
@@ -291,7 +291,8 @@ double Math::nextDown(double value) {
         return -Double::MIN_VALUE;
     }
 
-    return Double::longBitsToDouble(Double::doubleToRawLongBits(value) + ((value > 0.0) ? -1L : +1L));
+    return Double::longBitsToDouble(Double::doubleToRawLongBits(value)
+                                    + ((value > 0.0) ? -1: +1));
 }
 
 // TODO need Float.intBitsToFloat, Float.floatToRawIntBits

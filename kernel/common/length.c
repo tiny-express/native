@@ -55,9 +55,9 @@ inline int length_##TYPE(TYPE target) {\
         return len; \
 }
 
-#ifndef __linux__
+//#ifndef __linux__
 P_LEN(char);
-#endif
+//#endif
 P_P_LEN(char);
 NUM_LEN(short);
 NUM_LEN(int);
