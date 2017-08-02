@@ -231,6 +231,12 @@ namespace Java {
              * @return boolean
              */
             boolean intersects(const BitSet &set);
+
+            /**
+             * Returns true if this BitSet contains no bits that are set to true.
+             *
+             * @return boolean
+             */
             boolean isEmpty() const;
 
             /**

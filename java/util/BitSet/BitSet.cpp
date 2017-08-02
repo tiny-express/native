@@ -332,6 +332,10 @@ boolean BitSet::intersects(const BitSet &set) {
     return false;
 }
 
+boolean BitSet::isEmpty() const {
+    return (this->wordsInUse == 0);
+}
+
 int BitSet::length() const {
     if (this->wordsInUse == 0) {
         return 0;

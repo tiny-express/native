@@ -243,6 +243,15 @@ TEST(JavaUtil, BitSetIntersects) {
     ASSERT_FALSE(bitSet1.intersects(bitSet2));
 }
 
+TEST(JavaUtil, BitSetIsEmpty) {
+    BitSet bitSet;
+    ASSERT_TRUE(bitSet.isEmpty());
+    bitSet.set(1);
+    ASSERT_FALSE(bitSet.isEmpty());
+    bitSet.clear();
+    ASSERT_TRUE(bitSet.isEmpty());
+}
+
 TEST(JavaUtil, BitSetLength) {
     BitSet defaultBitSet;
     ASSERT_EQUAL(0, defaultBitSet.length());
