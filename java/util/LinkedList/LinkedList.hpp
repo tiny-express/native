@@ -30,7 +30,7 @@
 #include "../../Lang.hpp"
 #include "../AbstractSequentialList/AbstractSequentialList.hpp"
 #include "../Collection/Collection.hpp"
-#include "../Deque/Deque.h"
+#include "../Deque/Deque.hpp"
 #include "../List/List.hpp"
 #include "../Queue/Queue.hpp"
 #include "../../lang/Exception/Exception.hpp"
