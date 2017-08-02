@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -195,12 +195,8 @@ StringBufferUnSafe &StringBufferUnSafe::append(char charValue) {
     return this->append(String::valueOf(charValue).toString());
 }
 
-StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe *stringBuffer) {
-    if (stringBuffer == nullptr) {
-        return this->append((string) "null", 0, 4);
-    }
-
-    return this->append(stringBuffer->getValue());
+StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe stringBufferUnSafe) {
+    return this->append(stringBufferUnSafe.getValue());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
@@ -396,8 +392,8 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, boolean boolValue) {
     return this->insert(offset, (string) "false", 0, 5);
 }
 
-StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string str) {
-    return this->insert(offset, str, 0, length_pointer_char(str));
+StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string stringToInsert) {
+    return this->insert(offset, stringToInsert, 0, length_pointer_char(stringToInsert));
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
@@ -733,7 +729,7 @@ StringBuffer &StringBuffer::appendCodePoint(int codePoint) {
     return *this;
 }
 
-StringBuffer &StringBuffer::append(StringBuffer *stringBuffer) {
+StringBuffer &StringBuffer::append(StringBuffer stringBuffer) {
     std::lock_guard<std::mutex> guard(this->mutex);
     StringBufferUnSafe::append(stringBuffer);
     return *this;

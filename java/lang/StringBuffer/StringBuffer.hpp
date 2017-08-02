@@ -174,17 +174,17 @@ namespace Java {
              * Appends the specified StringBuffer to this sequence.
              * If stringBuffer is null then four character "null" will be append
              *
-             * @param stringBuffer
+             * @param stringBufferUnSafe
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(StringBufferUnSafe *stringBuffer);
+            StringBufferUnSafe &append(StringBufferUnSafe stringBufferUnSafe);
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
              * Characters of the char array str, starting at index offset, are appended, in order,
              * the length of subarray is equal to len
              *
-             * @param string
+             * @param stringToAppend
              * @param offset
              * @param len
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
@@ -243,7 +243,7 @@ namespace Java {
              *
              * @param index
              * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
-             * @return
+             * @return the character (Unicode code point) at the specified index
              */
             int codePointAt(int index);
 
@@ -339,7 +339,7 @@ namespace Java {
              * Returns the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. The integer returned is the smallest value
              *
-             * @param string
+             * @param stringToGetIndex
              * @param fromIndex
              * @return the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. -1 if str is not a substring
@@ -389,11 +389,11 @@ namespace Java {
              * The length of this sequence increases by the length of the argument.
              *
              * @param offset
-             * @param string
+             * @param stringToInsert
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(int offset, string string);
+            StringBufferUnSafe &insert(int offset, string stringToInsert);
 
             /**
              * Inserts the string representation of the char argument into this sequence.
@@ -493,7 +493,7 @@ namespace Java {
              * The subarray is insert at position index
              *
              * @param index
-             * @param string
+             * @param stringToInsert
              * @param offset
              * @param len
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
@@ -519,7 +519,7 @@ namespace Java {
              * The integer returned is the largest value
              * If no such value of k exists, then -1 is returned.
              *
-             * @param string
+             * @param stringToGetIndex
              * @param fromIndex
              * @return the index within this string of the rightmost occurrence of
              * the specified substring start fromIndex
@@ -777,14 +777,14 @@ namespace Java {
              * @param stringBuffer
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(StringBuffer *stringBuffer);
+            StringBuffer &append(StringBuffer stringBuffer);
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
              * Characters of the char array str, starting at index offset, are appended, in order,
              * the length of subarray is equal to len
              *
-             * @param string
+             * @param stringToAppend
              * @param offset
              * @param len
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
@@ -844,7 +844,7 @@ namespace Java {
              *
              * @param index
              * @throw IndexOutOfBoundException if index is negative or greater than or equal to length().
-             * @return
+             * @return Returns the character (Unicode code point) at the specified index.
              */
             int codePointAt(int index);
 
@@ -942,7 +942,7 @@ namespace Java {
              * Returns the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. The integer returned is the smallest value
              *
-             * @param string
+             * @param stringToGetIndex
              * @param fromIndex
              * @return the index within this string of the first occurrence of the specified substring,
              * starting at the specified index. -1 if str is not a substring
