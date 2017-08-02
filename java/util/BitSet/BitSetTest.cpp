@@ -201,6 +201,7 @@ TEST(JavaUtil, BitSetFlip) {
     bitSet.clear();
     bitSet.set(0, 100, false);
     bitSet.set(100, 200, true);
+    // Flip on a large range.
     bitSet.flip(50, 150);
     // Out range of "flip".
     ASSERT_EQUAL(false, bitSet.get(0));
@@ -215,7 +216,31 @@ TEST(JavaUtil, BitSetFlip) {
 TEST(JavaUtil, BitSetHashCode) {
     BitSet bitSet1;
     BitSet bitSet2;
-    ASSERT_EQUAL(bitSet1.hashCode(), bitSet2.hashCode());
+    ASSERT_TRUE(bitSet1.hashCode() == bitSet2.hashCode());
+    bitSet1.set(0, 100, true);
+    bitSet2.set(0, 100, false);
+    ASSERT_FALSE(bitSet1.hashCode() == bitSet2.hashCode());
+    bitSet2.set(0, 100, true);
+    ASSERT_TRUE(bitSet1.hashCode() == bitSet2.hashCode());
+}
+
+TEST(JavaUtil, BitSetIntersects) {
+    BitSet bitSet1;
+    BitSet bitSet2;
+    bitSet1.set(0, 1024, false);
+    bitSet2.set(0, 1024, true);
+    ASSERT_FALSE(bitSet1.intersects(bitSet2));
+    bitSet1.set(512, true);
+    ASSERT_TRUE(bitSet1.intersects(bitSet2));
+
+    bitSet1.clear();
+    bitSet2.clear();
+    bitSet1.set(0, 512, false);
+    bitSet2.set(0, 1024, false);
+    ASSERT_FALSE(bitSet1.intersects(bitSet2));
+    bitSet1.set(0, true);
+    bitSet2.set(512, true);
+    ASSERT_FALSE(bitSet1.intersects(bitSet2));
 }
 
 TEST(JavaUtil, BitSetLength) {

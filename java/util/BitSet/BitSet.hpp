@@ -222,6 +222,14 @@ namespace Java {
              * @return long
              */
             long hashCode() const;
+
+            /**
+             * Returns true if the specified BitSet has any bits set to true that
+             * are also set to true in this BitSet.
+             *
+             * @param set
+             * @return boolean
+             */
             boolean intersects(const BitSet &set);
             boolean isEmpty() const;
 

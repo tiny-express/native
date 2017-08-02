@@ -321,6 +321,17 @@ long BitSet::hashCode() const {
     return (hash >> 32) ^ hash;
 }
 
+boolean BitSet::intersects(const BitSet &set) {
+    int endWordIndex = Math::min(this->wordsInUse, set.wordsInUse);
+    int index;
+    for (index = 0; index <= endWordIndex; ++index) {
+        if ((this->words[index] & set.words[index]) != 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int BitSet::length() const {
     if (this->wordsInUse == 0) {
         return 0;
