@@ -58,8 +58,8 @@ namespace Java {
 
             /**
              * BitSet Constructor
-             * Creates a bit set whose initial size is large enough to explicitly represent bits
-             * with indices in the range 0 through numberOfBits-1.
+             * Creates a bit set whose initial size is large enough to explicitly
+             * represent bits with indices in the range 0 through numberOfBits-1.
              * All bits are initially false.
              *
              * @param numberOfBits
@@ -94,7 +94,8 @@ namespace Java {
 
         private:
             /**
-             * This method use to create a array of word (long) with size based on number of bits.
+             * This method use to create a array of word (long) with size
+             * based on number of bits.
              *
              * @param numberOfBits
              */
@@ -151,20 +152,50 @@ namespace Java {
              *
              * @param fromIndex
              * @param toIndex
-             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
-             * or fromIndex is larger than toIndex.
+             * @throw IndexOutOfBoundsException - if fromIndex is negative,
+             * or toIndex is negative, or fromIndex is larger than toIndex.
              */
             void clear(int fromIndex, int toIndex);
 
+            /**
+             * Cloning this BitSet produces a new BitSet that is equal to it.
+             * The clone of the bit set is another bit set that has exactly
+             * the same bits set to true as this bit set.
+             *
+             * @return BitSet
+             */
             BitSet clone();
+
+            /**
+             * Compares this BitSet against the specified BitSet.
+             * The result is true if and only if the target is a Bitset object that has
+             * exactly the same set of bits set to true as this bit set.
+             * The current sizes of the two bit sets are not compared.
+             *
+             * @param target
+             * @return boolean
+             */
             boolean equals(const Object &target) const;
+
+            /**
+             * Sets the bit at the specified index to the complement of its current value.
+             *
+             * @param bitIndex
+             */
             void flip(int bitIndex);
+
+            /**
+             * Sets each bit from the specified fromIndex (inclusive) to the specified
+             * toIndex (exclusive) to the complement of its current value.
+             * @param fromIndex
+             * @param toIndex
+             */
             void flip(int fromIndex, int toIndex);
 
             /**
              * Returns the value of the bit with the specified index.
-             * The value is true if the bit with the index bitIndex is currently set in this BitSet;
-             * otherwise, the result is false.
+             * The value is true if the bit with the index bitIndex is currently
+             * set in this BitSet; otherwise, the result is false.
              *
              * @param bitIndex
              * @return boolean
@@ -173,14 +204,14 @@ namespace Java {
             boolean get(int bitIndex) const;
 
             /**
-             * Returns a new BitSet composed of bits from this BitSet from fromIndex (inclusive)
-             * to toIndex (exclusive).
+             * Returns a new BitSet composed of bits from this BitSet from
+             * fromIndex (inclusive) to toIndex (exclusive).
              *
              * @param fromIndex
              * @param toIndex
              * @return BitSet
-             * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
-             * or fromIndex is larger than toIndex.
+             * @throw IndexOutOfBoundsException - if fromIndex is negative,
+             * or toIndex is negative, or fromIndex is larger than toIndex.
              */
             BitSet get(int fromIndex, int toIndex) const;
 
@@ -195,7 +226,8 @@ namespace Java {
             boolean isEmpty() const;
 
             /**
-             * Returns the "logical size" of this BitSet: the index of the highest set bit in the BitSet plus one.
+             * Returns the "logical size" of this BitSet: the index of the highest set bit
+             * in the BitSet plus one.
              * Returns zero if the BitSet contains no set bits.
              *
              * @return int

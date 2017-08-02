@@ -195,9 +195,57 @@ void BitSet::clear(int fromIndex, int toIndex) {
     this->recalculateWordsInUse();
 }
 
+BitSet BitSet::clone() {
+    // TODO(truongchauhien): Implement this method later.
+}
+
 boolean BitSet::equals(const Object &target) const {
     // TODO(truongchauhien): Implement this method later.
     return false;
+}
+
+void BitSet::flip(int bitIndex) {
+    if (bitIndex < 0) {
+        throw IndexOutOfBoundsException(String("bitIndex < 0: ") + String::valueOf(bitIndex));
+    }
+    int indexOfWord = wordIndex(bitIndex);
+    this->expandTo(indexOfWord);
+    this->words[indexOfWord] ^= (1L << bitIndex);
+    this->recalculateWordsInUse();
+}
+
+void BitSet::flip(int fromIndex, int toIndex) {
+    this->checkRange(fromIndex, toIndex);
+
+    if (fromIndex == toIndex) {
+        return;
+    }
+
+    int startWordIndex = wordIndex(fromIndex);
+    int endWordIndex = wordIndex(toIndex);
+    this->expandTo(endWordIndex);
+
+    long firstWordMask = WORD_MASK << fromIndex;
+    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+
+    if (startWordIndex == endWordIndex) {
+        // Case 1: One word.
+        this->words[startWordIndex] ^= (firstWordMask & lastWordMask);
+    } else {
+        // Case 2:: Multiple words.
+        // Handle the first word.
+        this->words[startWordIndex] ^= firstWordMask;
+        // Handle intermediate words, if any.
+        int indexOfIntermediateWord;
+        for (indexOfIntermediateWord = startWordIndex + 1;
+             indexOfIntermediateWord < endWordIndex; ++indexOfIntermediateWord) {
+            this->words[indexOfIntermediateWord] ^= WORD_MASK;
+        }
+        // Handle the last words.
+        this->words[endWordIndex] ^= lastWordMask;
+    }
+
+    this->recalculateWordsInUse();
 }
 
 boolean BitSet::get(int bitIndex) const {

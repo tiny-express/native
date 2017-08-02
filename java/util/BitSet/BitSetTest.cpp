@@ -128,8 +128,88 @@ TEST(JavaUtil, BitSetClear) {
     ASSERT_EQUAL(false, bitSet.get(1024));
 }
 
+TEST(JavaUtil, BitSetClone) {
+    // TODO(truongchauhien): Create test later.
+}
+
 TEST(JavaUtil, BitSetEquals) {
     // TODO(truongchauhien): Create test later.
+}
+
+TEST(JavaUtil, BitSetFlip) {
+    BitSet bitSet;
+    // 100110101
+    bitSet.set(0, true);
+    bitSet.set(1, false);
+    bitSet.set(2, true);
+    bitSet.set(3, false);
+    bitSet.set(4, true);
+    bitSet.set(5, true);
+    bitSet.set(6, false);
+    bitSet.set(7, false);
+    bitSet.set(8, true);
+
+    bitSet.flip(1);
+    // 100110111
+    ASSERT_EQUAL(true, bitSet.get(0));
+    ASSERT_EQUAL(true, bitSet.get(1));
+    ASSERT_EQUAL(true, bitSet.get(2));
+    ASSERT_EQUAL(false, bitSet.get(3));
+    ASSERT_EQUAL(true, bitSet.get(4));
+    ASSERT_EQUAL(true, bitSet.get(5));
+    ASSERT_EQUAL(false, bitSet.get(6));
+    ASSERT_EQUAL(false, bitSet.get(7));
+    ASSERT_EQUAL(true, bitSet.get(8));
+
+    bitSet.flip(0, 9);
+    // 011001000
+    ASSERT_EQUAL(false, bitSet.get(0));
+    ASSERT_EQUAL(false, bitSet.get(1));
+    ASSERT_EQUAL(false, bitSet.get(2));
+    ASSERT_EQUAL(true, bitSet.get(3));
+    ASSERT_EQUAL(false, bitSet.get(4));
+    ASSERT_EQUAL(false, bitSet.get(5));
+    ASSERT_EQUAL(true, bitSet.get(6));
+    ASSERT_EQUAL(true, bitSet.get(7));
+    ASSERT_EQUAL(false, bitSet.get(8));
+
+    try {
+        bitSet.flip(-1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+    }
+
+    try {
+        bitSet.flip(-1, 9);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+    }
+
+    try {
+        bitSet.flip(0, -1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
+    }
+
+    try {
+        bitSet.flip(5, 1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex: 5 > toIndex: 1", ex.getMessage().toString());
+    }
+
+    // Reset bitSet.
+    bitSet.clear();
+    bitSet.set(0, 100, false);
+    bitSet.set(100, 200, true);
+    bitSet.flip(50, 150);
+    // Out range of "flip".
+    ASSERT_EQUAL(false, bitSet.get(0));
+    ASSERT_EQUAL(false, bitSet.get(49));
+    ASSERT_EQUAL(true, bitSet.get(150));
+    ASSERT_EQUAL(true, bitSet.get(199));
+    // In range of "flip".
+    ASSERT_EQUAL(true, bitSet.get(50));
+    ASSERT_EQUAL(false, bitSet.get(100));
 }
 
 TEST(JavaUtil, BitSetHashCode) {
