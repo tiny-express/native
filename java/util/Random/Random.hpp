@@ -28,8 +28,8 @@
 #define NATIVE_JAVA_UTIL_RANDOM_HPP
 
 #include <atomic>
-#include "random"
 #include "../../Lang.hpp"
+
 using namespace Java::Lang;
 
 namespace Java {

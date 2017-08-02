@@ -22,6 +22,8 @@ var searchData=
   ['streamtokenizer_2ehpp',['StreamTokenizer.hpp',['../StreamTokenizer_8hpp.html',1,'']]],
   ['string_2ecpp',['String.cpp',['../String_8cpp.html',1,'']]],
   ['string_2ehpp',['String.hpp',['../String_8hpp.html',1,'']]],
+  ['stringbuffer_2ecpp',['StringBuffer.cpp',['../StringBuffer_8cpp.html',1,'']]],
+  ['stringbuffer_2ehpp',['StringBuffer.hpp',['../StringBuffer_8hpp.html',1,'']]],
   ['stringbuilder_2ecpp',['StringBuilder.cpp',['../StringBuilder_8cpp.html',1,'']]],
   ['stringbuilder_2ehpp',['StringBuilder.hpp',['../StringBuilder_8hpp.html',1,'']]],
   ['stringindexoutofboundsexception_2ecpp',['StringIndexOutOfBoundsException.cpp',['../StringIndexOutOfBoundsException_8cpp.html',1,'']]],
