@@ -89,11 +89,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
-# Only header files
-file(GLOB_RECURSE HEADERS
-        ./*.h
-        library.hpp)
-
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
         kernel/common/*
@@ -183,9 +178,10 @@ enable_testing()
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/native)
-install(DIRECTORY java DESTINATION include/native)
-install(FILES ${HEADERS} DESTINATION include/native)
+install(FILES library.hpp DESTINATION include/native)
+install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
 
 # Add uninstall
 add_custom_target(
