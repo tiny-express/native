@@ -30,20 +30,20 @@
 
 using namespace Java::Lang;
 
-int Math::abs(int a) {
-    return a >= 0 ? a : -a;
+int Math::abs(int value) {
+    return value >= 0 ? value : -value;
 }
 
-float Math::abs(float a) {
-    return a >= 0 ? a : -a;
+float Math::abs(float value) {
+    return value >= 0 ? value : -value;
 }
 
-long Math::abs(long a) {
-    return a >= 0 ? a : -a;
+long Math::abs(long value) {
+    return value >= 0 ? value : -value;
 }
 
-double Math::abs(double a) {
-	return a >= 0 ? a : -a;
+double Math::abs(double value) {
+	return value >= 0 ? value : -value;
 }
 
 double Math::acos(double value) {
@@ -58,21 +58,21 @@ double Math::atan(double value) {
     return math_atan(value);
 }
 
-double Math::atan2(double cordinateX, double cordinateY) {
-    return math_atan2(cordinateX, cordinateY);
+double Math::atan2(double coordinateX, double coordinateY) {
+    return math_atan2(coordinateX, coordinateY);
 }
 
-long Math::addExact(long a, long b) {
-    long result = a + b;
-    if (((a ^ result) & (b ^ result)) < 0) {
+long Math::addExact(long valueA, long valueB) {
+    long result = valueA + valueB;
+    if (((valueA ^ result) & (valueB ^ result)) < 0) {
         throw ArithmeticException("long overflow");
     }
     return result;
 }
 
-int Math::addExact(int a, int b) {
-    int result = a + b;
-    if (((a ^ result) & (b ^ result)) < 0) {
+int Math::addExact(int valueA, int valueB) {
+    int result = valueA + valueB;
+    if (((valueA ^ result) & (valueB ^ result)) < 0) {
         throw ArithmeticException("integer overflow");
     }
     return result;
@@ -174,8 +174,8 @@ int Math::getExponent(float value) {
     return 0;
 }
 
-double Math::hypot(double a, double b) {
-    return math_hypot(a, b);
+double Math::hypot(double valueA, double valueB) {
+    return math_hypot(valueA, valueB);
 }
 
 double Math::IEEERemainder(double dividend, double divisor) {
@@ -208,53 +208,53 @@ double Math::log1p(double value) {
     return math_log1p(value);
 }
 
-int Math::max(int a, int b) {
-    return a > b ? a : b;
+int Math::max(int valueA, int valueB) {
+    return valueA > valueB ? valueA : valueB;
 }
 
-float Math::max(float a, float b) {
-    return a > b ? a : b;
+float Math::max(float valueA, float valueB) {
+    return valueA > valueB ? valueA : valueB;
 }
 
-long Math::max(long a, long b) {
-    return a > b ? a : b;
+long Math::max(long valueA, long valueB) {
+    return valueA > valueB ? valueA : valueB;
 }
 
-double Math::max(double a, double b) {
-	return a > b ? a : b;
+double Math::max(double valueA, double valueB) {
+	return valueA > valueB ? valueA : valueB;
 }
 
-int Math::min(int a, int b) {
-    return a < b ? a : b;
+int Math::min(int valueA, int valueB) {
+    return valueA < valueB ? valueA : valueB;
 }
 
-float Math::min(float a, float b) {
-	return a < b ? a : b;
+float Math::min(float valueA, float valueB) {
+	return valueA < valueB ? valueA : valueB;
 }
 
-long Math::min(long a, long b) {
-    return a < b ? a : b;
+long Math::min(long valueA, long valueB) {
+    return valueA < valueB ? valueA : valueB;
 }
 
-double Math::min(double a, double b) {
-    return a < b ? a : b;
+double Math::min(double valueA, double valueB) {
+    return valueA < valueB ? valueA : valueB;
 }
 
-int Math::multiplyExact(int a, int b) {
-    long result = (long)a * (long)b;
+int Math::multiplyExact(int valueA, int valueB) {
+    long result = (long)valueA * (long)valueB;
     if ((int)result != result) {
         throw ArithmeticException("integer overflow");
     }
     return (int)result;
 }
 
-long Math::multiplyExact(long a, long b) {
-    long result = a * b;
-    unsigned long absA = (unsigned) abs(a);
-    unsigned long absB = (unsigned) abs(b);
+long Math::multiplyExact(long valueA, long valueB) {
+    long result = valueA * valueB;
+    unsigned long absA = (unsigned) abs(valueA);
+    unsigned long absB = (unsigned) abs(valueB);
 
     if (((absA | absB) >> 31) != 0) {
-        if ((a == Long::MIN_VALUE && b == -1) || ((b != 0) && (result / b != a))) {
+        if ((valueA == Long::MIN_VALUE && valueB == -1) || ((valueB != 0) && (result / valueB != valueA))) {
             throw ArithmeticException("long overflow");
         }
     }
@@ -291,11 +291,9 @@ double Math::nextDown(double value) {
         return -Double::MIN_VALUE;
     }
 
-    return Double::longBitsToDouble(Double::doubleToRawLongBits(value)
-                                    + ((value > 0.0) ? -1: +1));
+    return math_nexttoward(value, Double::NEGATIVE_INFINITY);
 }
 
-// TODO need Float.intBitsToFloat, Float.floatToRawIntBits
 float Math::nextDown(float value) {
     if (Float::isNaN(value) || value == Float::NEGATIVE_INFINITY) {
         return value;
@@ -305,26 +303,23 @@ float Math::nextDown(float value) {
         return -Float::MIN_VALUE;
     }
 
-    // return Float.intBitsToFloat(Float.floatToRawIntBits(f) + ((f > 0.0f) ? -1 : +1));
-    return 0;
+    return math_nexttowardf(value, Float::NEGATIVE_INFINITY);
 }
 
-// TODO need Float::intBitsToFloat, Float::floatToRawIntBits
 float Math::nextUp(float value) {
     if (Float::isNaN(value) || value == Float::POSITIVE_INFINITY) {
         return value;
     }
-    // value += 0.0f;
-    // return Float::intBitsToFloat(Float::floatToRawIntBits(value) + ((value >= 0.0) ? +1 : -1));
-    return 0;
+
+    return math_nexttowardf(value, Float::POSITIVE_INFINITY);
 }
 
 double Math::nextUp(double value) {
     if (Double::isNaN(value) || value == Double::POSITIVE_INFINITY) {
         return value;
     }
-    value += 0.0f;
-    return Double::longBitsToDouble(Double::doubleToRawLongBits(value) + ((value >= 0.0) ? +1 : -1));
+
+    return math_nexttoward(value, Double::POSITIVE_INFINITY);
 }
 
 double Math::pow(double base, double exponent) {
@@ -401,17 +396,17 @@ double Math::sqrt(double value) {
 	return math_sqrt(value);
 }
 
-long Math::subtractExact(long a, long b) {
-    long result = a - b;
-    if (((a ^ b) & (a ^ result)) < 0) {
+long Math::subtractExact(long valueA, long valueB) {
+    long result = valueA - valueB;
+    if (((valueA ^ valueB) & (valueA ^ result)) < 0) {
         throw ArithmeticException("long overflow");
     }
     return result;
 }
 
-int Math::subtractExact(int a, int b) {
-    int result = a - b;
-    if (((a ^ b) & (a ^ result)) < 0) {
+int Math::subtractExact(int valueA, int valueB) {
+    int result = valueA - valueB;
+    if (((valueA ^ valueB) & (valueA ^ result)) < 0) {
         throw ArithmeticException("integer overflow");
     }
     return result;

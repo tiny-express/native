@@ -189,7 +189,7 @@ TEST(JavaLang, MathTan) {
 }
 
 TEST(JavaLang, MathAtan) {
-    // Given a tangen equal to 1
+    // Given a tangent equal to 1
     double tan = 1;
     double expectResult = Math::PI/4;
     ASSERT_DBL_NEAR(expectResult, Math::atan(tan));
@@ -211,11 +211,11 @@ TEST(JavaLang, MathAtan) {
 }
 
 TEST(JavaLang, MathAtan2) {
-    // Given 2 double for codinate x and cordinate y
-    double cordinateX = Math::PI / 2;
-    double cordinateY = Math::PI / 3;
+    // Given 2 double for coordinate x and coordinate y
+    double coordinateX = Math::PI / 2;
+    double coordinateY = Math::PI / 3;
     double expectResult = 0.9827937232473292;
-    double actualResult = Math::atan2(cordinateX, cordinateY);
+    double actualResult = Math::atan2(coordinateX, coordinateY);
     ASSERT_DBL_NEAR(expectResult, actualResult);
 
     // Expect result
@@ -232,79 +232,79 @@ TEST(JavaLang, MathAtan2) {
     double expectNegativeThreeFourthsPiResult = -3 * Math::PI/4;
 
 
-    // Given 2 NaN for codinate x and cordinate y
-    double nanCordinateX = NAN;
-    double nanCordinateY = NAN;
-    ASSERT_DBL_NEAR(expectNANResult, Math::atan2(nanCordinateX, nanCordinateY));
+    // Given 2 NaN for coordinate x and coordinate y
+    double nanCoordinateX = NAN;
+    double nanCoordinateY = NAN;
+    ASSERT_DBL_NEAR(expectNANResult, Math::atan2(nanCoordinateX, nanCoordinateY));
 
-    // Given positive zero codinate x and positive cordinate y
-    double positiveZeroCordinateX = +0.0;
-    double positiveCordinateY = 1;
-    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::atan2(positiveZeroCordinateX, positiveCordinateY));
+    // Given positive zero coordinate x and positive coordinate y
+    double positiveZeroCoordinateX = +0.0;
+    double positiveCoordinateY = 1;
+    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::atan2(positiveZeroCoordinateX, positiveCoordinateY));
 
-    // Given positive finite codinate x and positive infinite cordinate y
-    double positiveFiniteCordinateX = 100;
-    double positiveInfiniteCordinateY = +INFINITY;
-    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::atan2(positiveFiniteCordinateX, positiveInfiniteCordinateY));
+    // Given positive finite coordinate x and positive infinite coordinate y
+    double positiveFiniteCoordinateX = 100;
+    double positiveInfiniteCoordinateY = +INFINITY;
+    ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::atan2(positiveFiniteCoordinateX, positiveInfiniteCoordinateY));
 
-    // Given negative zero codinate x and positive cordinate y
-    double negativeZeroCordinateX = -0.0;
-    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::atan2(negativeZeroCordinateX, positiveCordinateY));
+    // Given negative zero coordinate x and positive coordinate y
+    double negativeZeroCoordinateX = -0.0;
+    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::atan2(negativeZeroCoordinateX, positiveCoordinateY));
 
-    // Given negative finite codinate x and positive infinite y
-    double negativeFiniteCordinateX = -0.0;
-    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::atan2(negativeFiniteCordinateX, positiveInfiniteCordinateY));
+    // Given negative finite coordinate x and positive infinite y
+    double negativeFiniteCoordinateX = -0.0;
+    ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::atan2(negativeFiniteCoordinateX, positiveInfiniteCoordinateY));
 
-    // Given positive zero codinate x and negative cordinate y
-    double negativeCordinateY = -1;
-    ASSERT_DBL_NEAR(expectPositivePiResult, Math::atan2(positiveZeroCordinateX, negativeCordinateY));
+    // Given positive zero coordinate x and negative coordinate y
+    double negativeCoordinateY = -1;
+    ASSERT_DBL_NEAR(expectPositivePiResult, Math::atan2(positiveZeroCoordinateX, negativeCoordinateY));
 
-    // Given positive finite codinate x and negative infinite cordinate y
-    double negativeInfiniteCordinateY = -INFINITY;
-    ASSERT_DBL_NEAR(expectPositivePiResult, Math::atan2(positiveFiniteCordinateX, negativeInfiniteCordinateY));
+    // Given positive finite coordinate x and negative infinite coordinate y
+    double negativeInfiniteCoordinateY = -INFINITY;
+    ASSERT_DBL_NEAR(expectPositivePiResult, Math::atan2(positiveFiniteCoordinateX, negativeInfiniteCoordinateY));
 
-    // Given negative zero codinate x and negative cordinate y
-    ASSERT_DBL_NEAR(expectNegativePiResult, Math::atan2(negativeZeroCordinateX, negativeCordinateY));
+    // Given negative zero coordinate x and negative coordinate y
+    ASSERT_DBL_NEAR(expectNegativePiResult, Math::atan2(negativeZeroCoordinateX, negativeCoordinateY));
 
-    // Given negative finite codinate x and negative infinite cordinate y
-    ASSERT_DBL_NEAR(expectNegativePiResult, Math::atan2(negativeFiniteCordinateX, negativeInfiniteCordinateY));
+    // Given negative finite coordinate x and negative infinite coordinate y
+    ASSERT_DBL_NEAR(expectNegativePiResult, Math::atan2(negativeFiniteCoordinateX, negativeInfiniteCoordinateY));
 
-    // Given positive codinate x and positive zero cordinate y
-    double positiveCordinateX = 1;
-    double positiveZeroCordinateY = +0.0;
-    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveCordinateX, positiveZeroCordinateY));
+    // Given positive coordinate x and positive zero coordinate y
+    double positiveCoordinateX = 1;
+    double positiveZeroCoordinateY = +0.0;
+    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveCoordinateX, positiveZeroCoordinateY));
 
-    // Given positive codinate x and negative zero cordinate y
-    double negativeZeroCordinateY = -0.0;
-    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveCordinateX, negativeZeroCordinateY));
+    // Given positive coordinate x and negative zero coordinate y
+    double negativeZeroCoordinateY = -0.0;
+    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveCoordinateX, negativeZeroCoordinateY));
 
-    // Given positive infinite cordinate x and finite cordinate y
-    double positiveInfiniteCordinateX = +INFINITY;
-    double finiteCordinateY = 100;
-    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveInfiniteCordinateX, finiteCordinateY));
+    // Given positive infinite coordinate x and finite coordinate y
+    double positiveInfiniteCoordinateX = +INFINITY;
+    double finiteCoordinateY = 100;
+    ASSERT_DBL_NEAR(expectPositiveHalfPiResult, Math::atan2(positiveInfiniteCoordinateX, finiteCoordinateY));
 
-    // Given negative codinate x and positive zero cordinate y
-    double negativeCordinateX = -1;
-    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeCordinateX, positiveZeroCordinateY));
+    // Given negative coordinate x and positive zero coordinate y
+    double negativeCoordinateX = -1;
+    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeCoordinateX, positiveZeroCoordinateY));
 
-    // Given negative codinate x and negative zero cordinate y
-    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeCordinateX, negativeZeroCordinateY));
+    // Given negative coordinate x and negative zero coordinate y
+    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeCoordinateX, negativeZeroCoordinateY));
 
-    // Given positive infinite cordinate x and finite cordinate y
-    double negativeInfiniteCordinateX = -INFINITY;
-    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeInfiniteCordinateX, finiteCordinateY));
+    // Given positive infinite coordinate x and finite coordinate y
+    double negativeInfiniteCoordinateX = -INFINITY;
+    ASSERT_DBL_NEAR(expectNegativeHalfPiResult, Math::atan2(negativeInfiniteCoordinateX, finiteCoordinateY));
 
-    // Given positive infinite cordinate x and positive infinite cordinate y
-    ASSERT_DBL_NEAR(expectPositiveQuarterPiResult, Math::atan2(positiveInfiniteCordinateX, positiveInfiniteCordinateY));
+    // Given positive infinite coordinate x and positive infinite coordinate y
+    ASSERT_DBL_NEAR(expectPositiveQuarterPiResult, Math::atan2(positiveInfiniteCoordinateX, positiveInfiniteCoordinateY));
 
-    // Given negative infinite cordinate x and positive infinite cordinate y
-    ASSERT_DBL_NEAR(expectNegativeQuarterPiResult, Math::atan2(negativeInfiniteCordinateX, positiveInfiniteCordinateY));
+    // Given negative infinite coordinate x and positive infinite coordinate y
+    ASSERT_DBL_NEAR(expectNegativeQuarterPiResult, Math::atan2(negativeInfiniteCoordinateX, positiveInfiniteCoordinateY));
 
-    // Given positive infinite cordinate x and negative infinite cordinate y
-    ASSERT_DBL_NEAR(expectPositiveThreeFourthsPiResult, Math::atan2(positiveInfiniteCordinateX, negativeInfiniteCordinateY));
+    // Given positive infinite coordinate x and negative infinite coordinate y
+    ASSERT_DBL_NEAR(expectPositiveThreeFourthsPiResult, Math::atan2(positiveInfiniteCoordinateX, negativeInfiniteCoordinateY));
 
-    // Given negative infinite cordinate x and negative infinite cordinate y
-    ASSERT_DBL_NEAR(expectNegativeThreeFourthsPiResult, Math::atan2(negativeInfiniteCordinateX, negativeInfiniteCordinateY));
+    // Given negative infinite coordinate x and negative infinite coordinate y
+    ASSERT_DBL_NEAR(expectNegativeThreeFourthsPiResult, Math::atan2(negativeInfiniteCoordinateX, negativeInfiniteCoordinateY));
 }
 
 TEST(JavaLang, MathCbrt) {
@@ -609,12 +609,12 @@ TEST(JavaLang, MathNextAfterDouble) {
     // Given a start value equal to -Double::MIN_VALUE
     double startMinValue = -Double::MIN_VALUE;
     double expectMinValueResult = -0.0;
-    ASSERT_DBL_NEAR(expectMinValueResult, Math::nextAfter(startMinValue, -1));
+    ASSERT_DBL_NEAR(expectMinValueResult, Math::nextAfter(startMinValue, -1.0));
 
     // Given a start value equal to Double::MAX_VALUE
     double startMaxValue = Double::MAX_VALUE;
     double expectMaxValueResult = INFINITY;
-    ASSERT_EQUAL(expectMaxValueResult, Math::nextAfter(startMaxValue, 1));
+    ASSERT_DBL_NEAR(expectMaxValueResult, Math::nextAfter(startMaxValue, INFINITY));
 
     // Given 2 value equal to two sign ZERO
     double positiveZero = 0.0;
@@ -627,39 +627,39 @@ TEST(JavaLang, MathNextAfterDouble) {
 }
 
 TEST(JavaLang, MathNextAfterFloat) {
-    // Given 2 double
+    // Given 2 float
     float start = 98759.765f;
     double direction = 154.28764;
-    double expectResult = 98759.76499999998;
-    ASSERT_EQUAL(expectResult, Math::nextAfter(start, direction));
+    float expectResult = 98759.76f;
+    ASSERT_DBL_NEAR(expectResult, Math::nextAfter(start, direction));
 
     // Given a value equal to NAN
     float nan = NAN;
-    double expectNaNResult = NAN;
+    float expectNaNResult = NAN;
     ASSERT_DBL_NEAR(expectNaNResult, Math::nextAfter(nan, direction));
 
     // Given a value equal to INFINITE
-    double inf = -INFINITY;
-    double expectInfResult = -Float::MAX_VALUE;
-    ASSERT_EQUAL(expectInfResult, Math::nextAfter(inf, direction));
+    float inf = -INFINITY;
+    float expectInfResult = -Float::MAX_VALUE;
+    ASSERT_DBL_NEAR(expectInfResult, Math::nextAfter(inf, direction));
 
     // Given a start value equal to -Float::MIN_VALUE
     float startMinValue = -Float::MIN_VALUE;
-    double expectMinValueResult = -0.0;
+    float expectMinValueResult = -0.0f;
     ASSERT_DBL_NEAR(expectMinValueResult, Math::nextAfter(startMinValue, -1));
 
     // Given a start value equal to Float::MAX_VALUE
     float startMaxValue = Float::MAX_VALUE;
-    double expectMaxValueResult = INFINITY;
-    ASSERT_EQUAL(expectMaxValueResult, Math::nextAfter(startMaxValue, 1));
+    float expectMaxValueResult = INFINITY;
+    ASSERT_DBL_NEAR(expectMaxValueResult, Math::nextAfter(startMaxValue, INFINITY));
 
     // Given 2 value equal to two sign ZERO
     float positiveZero = 0.0f;
     float negativeZero = -0.0f;
-    double expectPositiveZeroResult = 0.0;
+    float expectPositiveZeroResult = 0.0;
     ASSERT_DBL_NEAR(expectPositiveZeroResult, Math::nextAfter(negativeZero, positiveZero));
 
-    double expectNegativeZeroResult = -0.0;
+    float expectNegativeZeroResult = -0.0f;
     ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::nextAfter(positiveZero, negativeZero));
 }
 
@@ -757,15 +757,15 @@ TEST(JavaLang, MathLog10) {
 
     // Given a value > 0
     double lessThanZero = -1;
-    double expectlessThanZeroResult = NAN;
-    ASSERT_DBL_NEAR(expectlessThanZeroResult, Math::log10(lessThanZero));
+    double expectLessThanZeroResult = NAN;
+    ASSERT_DBL_NEAR(expectLessThanZeroResult, Math::log10(lessThanZero));
 }
 
 TEST(JavaLang, MathLog1p) {
     // Given a variable equal to E-1
     double natural = Math::E - 1;
-    double expectnaturalResult = 1;
-    ASSERT_DBL_NEAR(expectnaturalResult, Math::log1p(natural));
+    double expectNaturalResult = 1;
+    ASSERT_DBL_NEAR(expectNaturalResult, Math::log1p(natural));
 
     // Given a value equal to NAN
     double nan = NAN;
@@ -794,8 +794,8 @@ TEST(JavaLang, MathLog1p) {
 
     // Given a value > -1
     double lessThanZero = - 2;
-    double expectlessThanZeroResult = NAN;
-    ASSERT_DBL_NEAR(expectlessThanZeroResult, Math::log1p(lessThanZero));
+    double expectLessThanZeroResult = NAN;
+    ASSERT_DBL_NEAR(expectLessThanZeroResult, Math::log1p(lessThanZero));
 }
 
 TEST(JavaLang, MathRInt) {
@@ -1014,9 +1014,9 @@ TEST(JavaLang, MathTanh) {
     ASSERT_DBL_NEAR(expectPositiveInfResult, Math::tanh(positiveInf));
 
     // Given a value equal to -INFINITY
-    double negtiveInf = -INFINITY;
-    double expectNegtiveInfResult = -1.0;
-    ASSERT_DBL_NEAR(expectNegtiveInfResult, Math::tanh(negtiveInf));
+    double negativeInf = -INFINITY;
+    double expectNegativeInfResult = -1.0;
+    ASSERT_DBL_NEAR(expectNegativeInfResult, Math::tanh(negativeInf));
 
     // Given a value equal to ZERO
     double positiveZero = 0.0;
@@ -1090,7 +1090,7 @@ TEST(JavaLang, MathFloorDivInt) {
     dividend = 11;
     divisor = 0;
     try {
-        int devideByZero = Math::floorDiv(dividend, divisor);
+        int divideByZero = Math::floorDiv(dividend, divisor);
     }
     catch (ArithmeticException &e) {
         ASSERT_STR("", e.getMessage().toString());
@@ -1211,7 +1211,7 @@ TEST(JavaLang, MathFloorDivLong) {
     dividend = 11;
     divisor = 0;
     try {
-        long devideByZero = Math::floorDiv(dividend, divisor);
+        long divideByZero = Math::floorDiv(dividend, divisor);
     }
     catch (ArithmeticException &e) {
         ASSERT_STR("", e.getMessage().toString());
@@ -1362,8 +1362,8 @@ TEST(JavaLang, MathGetExponentFloat) {
 TEST(JavaLang, MathNextDownDouble) {
     // Given a double
     double doubleNumber = 98759.765;
-    double expectResult = 98759.76;
-    ASSERT_EQUAL(expectResult, Math::nextDown(doubleNumber));
+    double expectResult = 98759.76499999998;
+    ASSERT_DBL_NEAR(expectResult, Math::nextDown(doubleNumber));
 
     // Given a NAN
     double nan = NAN;
@@ -1384,8 +1384,8 @@ TEST(JavaLang, MathNextDownDouble) {
 TEST(JavaLang, MathNextDownFloat) {
     // Given a float
     float floatNumber = 98759.765f;
-    float expectResult = 0; // 98759.76f;
-    ASSERT_EQUAL(expectResult, Math::nextDown(floatNumber));
+    float expectResult = 98759.76f;
+    ASSERT_DBL_NEAR(expectResult, Math::nextDown(floatNumber));
 
     // Given a NAN
     float nan = NAN;
@@ -1406,8 +1406,8 @@ TEST(JavaLang, MathNextDownFloat) {
 TEST(JavaLang, MathNextUpDouble) {
     // Given a double
     double doubleNumber = 98759.765;
-    double expectResult = 98759.76500000001;
-    ASSERT_EQUAL(expectResult, Math::nextUp(doubleNumber));
+    double expectResult = 98759.7650000001;
+    ASSERT_DBL_NEAR(expectResult, Math::nextUp(doubleNumber));
 
     // Given a NAN
     double nan = NAN;
@@ -1417,7 +1417,7 @@ TEST(JavaLang, MathNextUpDouble) {
     // Given a positive Infinity
     double positiveInfinite = INFINITY;
     double expectPositiveInfiniteResult = INFINITY;
-    ASSERT_EQUAL(expectPositiveInfiniteResult, Math::nextUp(positiveInfinite));
+    ASSERT_DBL_NEAR(expectPositiveInfiniteResult, Math::nextUp(positiveInfinite));
 
     // Given a zero
     double zero = 0.0;
@@ -1428,8 +1428,8 @@ TEST(JavaLang, MathNextUpDouble) {
 TEST(JavaLang, MathNextUpFloat) {
     // Given a float
     float floatNumber = 98759.765f;
-    float expectResult = 0; // 98759.76500000001f;
-    ASSERT_EQUAL(expectResult,  Math::nextUp(floatNumber));
+    float expectResult = 98759.77f;
+    ASSERT_DBL_NEAR(expectResult,  Math::nextUp(floatNumber));
 
     // Given a NAN
     float nan = NAN;
@@ -1439,7 +1439,7 @@ TEST(JavaLang, MathNextUpFloat) {
     // Given a positive Infinity
     float positiveInfinite = INFINITY;
     float expectNegativeInfiniteResult = INFINITY;
-    ASSERT_EQUAL(expectNegativeInfiniteResult, Math::nextUp(positiveInfinite));
+    ASSERT_DBL_NEAR(expectNegativeInfiniteResult, Math::nextUp(positiveInfinite));
 
     // Given a zero
     float zero = 0.0;
@@ -1466,7 +1466,7 @@ TEST(JavaLang, MathUlpDouble) {
     // Given a negative Infinity
     double negativeInfinite = -INFINITY;
     double expectNegativeInfiniteResult = +INFINITY;
-    ASSERT_EQUAL(expectNegativeInfiniteResult, Math::ulp(negativeInfinite));
+    ASSERT_DBL_NEAR(expectNegativeInfiniteResult, Math::ulp(negativeInfinite));
 
     // Given a positive zero
     double positiveZero = +0.0;
@@ -1523,10 +1523,10 @@ TEST(JavaLang, MathUlpFloat) {
     // Given a Float::MAX_VALUE
     float floatMaxValue = Float::MAX_VALUE;
     float expectFloatMaxValueResult = (float) Math::pow(2, 104);
-    ASSERT_EQUAL(expectFloatMaxValueResult, Math::ulp(floatMaxValue));
+    ASSERT_DBL_NEAR(expectFloatMaxValueResult, Math::ulp(floatMaxValue));
 
     // Given a -Float::MAX_VALUE
     float negativeFloatMaxValue = Float::MAX_VALUE;
-    float expectNegativeFloatMaxValueResult = (float) Math::pow(2, 971);
-    ASSERT_EQUAL(expectNegativeFloatMaxValueResult, Math::ulp(negativeFloatMaxValue));
+    float expectNegativeFloatMaxValueResult = (float) Math::pow(2, 104);
+    ASSERT_DBL_NEAR(expectNegativeFloatMaxValueResult, Math::ulp(negativeFloatMaxValue));
 }

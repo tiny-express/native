@@ -73,34 +73,34 @@ namespace Java {
             /**
              * Returns the absolute value of an int value
              *
-             * @param a
+             * @param value
              * @return a if a is positive, else -a
              */
-			static int abs(int a);
+			static int abs(int value);
 
             /**
              * Returns the absolute value of an float value
              *
-             * @param a
+             * @param value
              * @return a if a is positive, else -a
              */
-			static float abs(float a);
+			static float abs(float value);
 
             /**
              * Returns the absolute value of an long value
              *
-             * @param a
+             * @param value
              * @return a if a is positive, else -a
              */
-			static long abs(long a);
+			static long abs(long value);
 
             /**
              * Returns the absolute value of an double value
              *
-             * @param a
+             * @param value
              * @return a if a is positive, else -a
              */
-			static double abs(double a);
+			static double abs(double value);
 
             /**
              * Returns the arc cosine of a value
@@ -134,43 +134,57 @@ namespace Java {
             /**
              * Returns the principal value of the arc tangent of y/x
              *
-             * @param cordinateX
-             * @param cordinateY
-             * @return Principal arc tangent of cordinateY / cordinateX,
+             * @param coordinateX
+             * @param coordinateY
+             * @return Principal arc tangent of coordinateY / coordinateX,
              * in the interval [-pi,+pi] radians.
              * If either argument is NaN, then the result is NaN.
-             * If the first argument is positive zero and the second argument is positive, or the first argument is positive and finite and the second argument is positive infinity, then the result is positive zero.
-             * If the first argument is negative zero and the second argument is positive, or the first argument is negative and finite and the second argument is positive infinity, then the result is negative zero.
-             * If the first argument is positive zero and the second argument is negative, or the first argument is positive and finite and the second argument is negative infinity, then the result is the double value closest to pi.
-             * If the first argument is negative zero and the second argument is negative, or the first argument is negative and finite and the second argument is negative infinity, then the result is the double value closest to -pi.
-             * If the first argument is positive and the second argument is positive zero or negative zero, or the first argument is positive infinity and the second argument is finite, then the result is the double value closest to pi/2.
-             * If the first argument is negative and the second argument is positive zero or negative zero, or the first argument is negative infinity and the second argument is finite, then the result is the double value closest to -pi/2.
+             * If the first argument is positive zero and the second argument is positive,
+             * or the first argument is positive and finite and the second argument is positive infinity,
+             * then the result is positive zero.
+             * If the first argument is negative zero and the second argument is positive,
+             * or the first argument is negative and finite and the second argument is positive infinity,
+             * then the result is negative zero.
+             * If the first argument is positive zero and the second argument is negative,
+             * or the first argument is positive and finite and the second argument is negative infinity,
+             * then the result is the double value closest to pi.
+             * If the first argument is negative zero and the second argument is negative,
+             * or the first argument is negative and finite and the second argument is negative infinity,
+             * then the result is the double value closest to -pi.
+             * If the first argument is positive and the second argument is positive zero or negative zero,
+             * or the first argument is positive infinity and the second argument is finite,
+             * then the result is the double value closest to pi/2.
+             * If the first argument is negative and the second argument is positive zero or negative zero,
+             * or the first argument is negative infinity and the second argument is finite,
+             * then the result is the double value closest to -pi/2.
              * If both arguments are positive infinity, then the result is the double value closest to pi/4.
-             * If the first argument is positive infinity and the second argument is negative infinity, then the result is the double value closest to 3*pi/4.
-             * If the first argument is negative infinity and the second argument is positive infinity, then the result is the double value closest to -pi/4.
+             * If the first argument is positive infinity and the second argument is negative infinity,
+             * then the result is the double value closest to 3*pi/4.
+             * If the first argument is negative infinity and the second argument is positive infinity,
+             * then the result is the double value closest to -pi/4.
              * If both arguments are negative infinity, then the result is the double value closest to -3*pi/4.
              */
-			static double atan2(double cordinateX, double cordinateY);
+			static double atan2(double coordinateX, double coordinateY);
 
             /**
              * Returns the sum of its arguments, throwing an exception if the result overflows a long.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @throw ArithmeticException("long overflow")
-             * @return the sum of a and b
+             * @return the sum of valueA and valueB
              */
-			static long addExact(long a, long b);
+			static long addExact(long valueA, long valueB);
 
             /**
              * Returns the sum of its arguments, throwing an exception if the result overflows a long.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @throw ArithmeticException("integer overflow")
-             * @return int
+             * @return the sum of valueA and valueB
              */
-			static int addExact(int a, int b);
+			static int addExact(int valueA, int valueB);
 
             /**
              * Returns the cube root of a double value.
@@ -363,16 +377,16 @@ namespace Java {
 			static int getExponent(float value);
 
             /**
-             * Returns sqrt(x2 +y2) without intermediate overflow or underflow.
+             * Returns sqrt(valueA^2 + valueB^2) without intermediate overflow or underflow.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @return double
              *
              * If either argument is infinite, then the result is positive infinity.
              * If either argument is NaN and neither argument is infinite, then the result is NaN.
              */
-			static double hypot(double a, double b);
+			static double hypot(double valueA, double valueB);
 
             /**
              * Computes the remainder operation on two arguments as prescribed by the IEEE 754 standard.
@@ -445,96 +459,96 @@ namespace Java {
             /**
              * Returns the greater of two int values.
              *
-             * @param a
-             * @param b
-             * @return a if a > b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA > valueB; else valueB
              */
-			static int max(int a, int b);
+			static int max(int valueA, int valueB);
 
             /**
              * Returns the greater of two float values.
              *
-             * @param a
-             * @param b
-             * @return a if a > b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA > valueB; else valueB
              */
-			static float max(float a, float b);
+			static float max(float valueA, float valueB);
 
             /**
              * Returns the greater of two long values.
              *
-             * @param a
-             * @param b
-             * @return a if a > b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA > valueB; else valueB
              */
-			static long max(long a, long b);
+			static long max(long valueA, long valueB);
 
             /**
              * Returns the greater of two double values.
              *
-             * @param a
-             * @param b
-             * @return a if a > b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA > valueB; else valueB
              */
-			static double max(double a, double b);
+			static double max(double valueA, double valueB);
 
             /**
              * Returns the smaller of two int values.
              *
-             * @param a
-             * @param b
-             * @return a if a < b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA < valueB; else valueB
              */
-			static int min(int a, int b);
+			static int min(int valueA, int valueB);
 
             /**
              * Returns the greater of two float values.
              *
-             * @param a
-             * @param b
-             * @return a if a < b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA < valueB; else valueB
              */
-			static float min(float a, float b);
+			static float min(float valueA, float valueB);
 
             /**
              * Returns the greater of two long values.
              *
-             * @param a
-             * @param b
-             * @return a if a < b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA < valueB; else valueB
              */
-			static long min(long a, long b);
+			static long min(long valueA, long valueB);
 
             /**
              * Returns the greater of two double values.
              *
-             * @param a
-             * @param b
-             * @return a if a < b; else b
+             * @param valueA
+             * @param valueB
+             * @return valueA if valueA < valueB; else valueB
              */
-			static double min(double a, double b);
+			static double min(double valueA, double valueB);
 
             /**
              * Returns the product of the arguments,
              * throwing an exception if the result overflows an int.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @throw ArithmeticException("integer overflow")
-             * @return the product of a and b
+             * @return the product of valueA and valueB
              */
-            static int multiplyExact(int a, int b);
+            static int multiplyExact(int valueA, int valueB);
 
             /**
             * Returns the product of the arguments,
             * throwing an exception if the result overflows a long.
             *
-            * @param a
-            * @param b
+            * @param valueA
+            * @param valueB
             * @throw ArithmeticException("long overflow")
-            * @return the product of a and b
+            * @return the product of valueA and valueB
             */
-            static long multiplyExact(long a, long b);
+            static long multiplyExact(long valueA, long valueB);
 
             /**
              * Returns the negation of the argument,
@@ -566,11 +580,11 @@ namespace Java {
              * If either argument is a NaN, then NaN is returned.
              * If both arguments are signed zeros, a value equivalent to direction is returned.
              * If start is ±Double.MIN_VALUE and direction has a value such that the result should
-             *  have a smaller magnitude, then a zero with the same sign as start is returned.
+             * have a smaller magnitude, then a zero with the same sign as start is returned.
              * If start is infinite and direction has a value such that the result should have
-             *  a smaller magnitude, Double.MAX_VALUE with the same sign as start is returned.
+             * a smaller magnitude, Double.MAX_VALUE with the same sign as start is returned.
              * If start is equal to ± Double.MAX_VALUE and direction has a value such that the
-             *  result should have a larger magnitude, an infinity with same sign as start is returned.
+             * result should have a larger magnitude, an infinity with same sign as start is returned.
              */
 			static double nextAfter(double start, double direction);
 
@@ -584,11 +598,11 @@ namespace Java {
              * If either argument is a NaN, then NaN is returned.
              * If both arguments are signed zeros, a value equivalent to direction is returned.
              * If start is ±Float::MIN_VALUE and direction has a value such that the result should
-             *  have a smaller magnitude, then a zero with the same sign as start is returned.
+             * have a smaller magnitude, then a zero with the same sign as start is returned.
              * If start is infinite and direction has a value such that the result should have
-             *  a smaller magnitude, Float::MAX_VALUE with the same sign as start is returned.
+             * a smaller magnitude, Float::MAX_VALUE with the same sign as start is returned.
              * If start is equal to ± Float::MAX_VALUE and direction has a value such that the
-             *  result should have a larger magnitude, an infinity with same sign as start is returned.
+             * result should have a larger magnitude, an infinity with same sign as start is returned.
              */
 			static float nextAfter(float start, double direction);
 
@@ -777,23 +791,23 @@ namespace Java {
              * Returns the difference of the arguments,
              * throwing an exception if the result overflows an long.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @throw ArithmeticException("long overflow")
-             * @return the difference of the arguments
+             * @return the difference of valueA and valueB
              */
-            static long subtractExact(long a, long b);
+            static long subtractExact(long valueA, long valueB);
 
             /**
              * Returns the difference of the arguments,
              * throwing an exception if the result overflows an int.
              *
-             * @param a
-             * @param b
+             * @param valueA
+             * @param valueB
              * @throw ArithmeticException("integer overflow")
-             * @return the difference of the arguments
+             * @return the difference of valueA and valueB
              */
-            static int subtractExact(int a, int b);
+            static int subtractExact(int valueA, int valueB);
 
             /**
              * Returns the trigonometric tangent of an angle
