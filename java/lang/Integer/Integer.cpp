@@ -24,10 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sstream>
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
 #include "../Character/Character.hpp"
 #include "../NumberFormatException/NumberFormatException.h"
+#include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 
 using namespace Java::Lang;
 
@@ -213,6 +215,10 @@ Integer Integer::decode(String inputString) {
 }
 
 int Integer::divideUnsigned(int dividend, int divisor) {
+    if (divisor == 0) {
+        //TODO throw ArithmeticException("Divide by zero");
+        return 0;
+    }
 	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
 }
 
@@ -428,7 +434,7 @@ int Integer::parseUnsignedInt(String inputString, int radix) {
 
     long result = unsignedResult;
 
-    if (result > std::numeric_limits<uint>::max() 
+    if (result > std::numeric_limits<uint>::max()
         || result < std::numeric_limits<uint>::min()) {
         throw NumberFormatException("Unsigned integer out of range");
     }
@@ -441,16 +447,20 @@ int Integer::parseUnsignedInt(String inputString) {
 }
 
 int Integer::remainderUnsigned(int dividend, int divisor) {
-	return static_cast<int> (toUnsignedLong(dividend) % toUnsignedLong(divisor));
+    if (divisor == 0) {
+        //TODO throw ArithmeticException("Divide by zero");
+        return 0;
+    }
+	return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
 }
 
 int Integer::reverse(int inputInt) {
 	inputInt = (inputInt & 0x55555555) << 1 
 				| ((unsigned int) inputInt >> 1) & 0x55555555;
 
-    inputInt = (inputInt & 0x33333333) << 2 
+    inputInt = (inputInt & 0x33333333) << 2
     			| ((unsigned int) inputInt >> 2) & 0x33333333;
-    
+
     inputInt = (inputInt & 0x0f0f0f0f) << 4 
     			| ((unsigned int) inputInt >> 4) & 0x0f0f0f0f;
 
@@ -543,6 +553,82 @@ int Integer::hashCode(int inputInt) {
 
 long Integer::hashCode() const {
     return Integer::hashCode(this->original);
+}
+
+int Integer::signum(int inputInt) {
+    if (inputInt == 0) {
+        return 0;
+    }
+
+    if (inputInt > 0) {
+        return 1;
+    }
+
+    return -1;
+}
+
+int Integer::sum(int intA, int intB) {
+    return intA + intB;
+}
+
+String Integer::toBinaryString(int inputInt) {
+    return Integer::toUnsignedString(inputInt, 2);
+}
+
+String Integer::toUnsignedString(int inputInt, int radix) {
+    if (inputInt == 0) {
+        return String("0");
+    }
+
+    if (radix > 32 || radix < 2) {
+        radix = 10;
+    }
+
+    std::stringstream stream;
+    std::string binaryString;
+    String result;
+
+    switch (radix) {
+        case 2:
+            binaryString = std::bitset<32> ((unsigned long long int) toUnsignedLong(inputInt)).to_string();
+            result = binaryString.c_str();
+            result = result.getStringFromIndex(result.indexOf('1'));
+            return result;
+        case 8:
+            stream << std::oct << toUnsignedLong(inputInt);
+            result = stream.str();
+            return result;
+        case 16:
+            stream << std::hex << toUnsignedLong(inputInt);
+            result = stream.str();
+            return result;;
+        case 10:
+            stream << std::dec << toUnsignedLong(inputInt);
+            result = stream.str();
+            return result;
+        default:
+            throw UnsupportedOperationException("Haven't support this radix yet");
+    }
+}
+
+String Integer::toUnsignedString(int inputInt) {
+    return Integer::toUnsignedString(inputInt, 10);
+}
+
+String Integer::toHexString(int inputInt) {
+    return Integer::toUnsignedString(inputInt, 16);
+}
+
+String Integer::toOctalString(int inputInt) {
+    return Integer::toUnsignedString(inputInt, 8);
+}
+
+Integer Integer::valueOf(int inputInt) {
+    return Integer();
+}
+
+Integer Integer::valueOf(String inputString) {
+    return Integer();
 }
 
 // string Integer::toUnsignedString(int inputInt, int radix) {

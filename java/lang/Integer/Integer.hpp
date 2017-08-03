@@ -30,6 +30,7 @@
 #include "../Number/Number.hpp"
 #include "../Comparable/Comparable.hpp"
 #include "iostream"
+#include "bitset"
 
 using namespace Java::Lang;
 
@@ -41,7 +42,7 @@ namespace Java {
         private:
 			int original;
  			string stringOriginal;
-            
+
         public:
             /**
             * The number of bits used to represent an int value in two's complement binary form.
@@ -128,7 +129,7 @@ namespace Java {
              * @param target
              * @return string
              */
-            string toString() const;
+            string toString() const override;
 
             /**
              * Assign value of this object same as target value
@@ -304,7 +305,7 @@ namespace Java {
             *
             * @return the value of this Integer as a double
             */
-            double doubleValue() const;
+            double doubleValue() const override;
 
             /**
              * Compares this object to the specified object.
@@ -321,7 +322,7 @@ namespace Java {
              *
              * @return the value of this Integer as a float
              */
-            float floatValue() const;
+            float floatValue() const override;
 
             /**
              * Determines the integer value of the system property with the specified name.
@@ -361,7 +362,7 @@ namespace Java {
              * @return hash code of this Integer
              * equal to the primitive int value represented by this Integer object.
              */
-            long hashCode() const;
+            long hashCode() const override;
 
             /**
              * Returns a hash code for a int value;
@@ -388,7 +389,7 @@ namespace Java {
              *
              * @return he value of this Integer as an int
              */
-            int intValue() const;
+            int intValue() const override;
 
             /**
              * Returns the value of this Integer as an long after
@@ -396,7 +397,7 @@ namespace Java {
              *
              * @return he value of this Integer as an long
              */
-            long longValue() const;
+            long longValue() const override;
 
             /**
              * Returns an int value with at most a single one-bit, in the position of
@@ -561,7 +562,7 @@ namespace Java {
              *
              * @return the value of this Integer as a short
              */
-            short shortValue() const;
+            short shortValue() const override;
 
             /**
              * Returns the signum function of the specified int value.
@@ -588,7 +589,7 @@ namespace Java {
              * @return the string representation of the unsigned integer value
              * represented by the argument in binary
              */
-            static string toBinaryString(int inputInt);
+            static String toBinaryString(int inputInt);
 
             /**
              * Returns a string representation of
@@ -598,7 +599,7 @@ namespace Java {
              * @return the string representation of the unsigned integer value
              * represented by the argument in hex
              */
-            static string toHexString(int inputInt);
+            static String toHexString(int inputInt);
 
             /**
              * Returns a string representation of
@@ -608,7 +609,7 @@ namespace Java {
              * @return the string representation of the unsigned integer value
              * represented by the argument in base 8
              */
-            static string toOctalString(int inputInt);
+            static String toOctalString(int inputInt);
 
             /**
              * Returns a String object representing this Integer 's value.
@@ -651,7 +652,7 @@ namespace Java {
              * @param radix
              * @return an unsigned string representation of the argument in the specified radix.
              */
-            static string toUnsignedString(int inputInt, int radix);
+            static String toUnsignedString(int inputInt, int radix);
 
             /**
              * Returns a string representation of
@@ -660,7 +661,7 @@ namespace Java {
              * @param inputInt
              * @return an unsigned string representation of the argument.
              */
-            static string toUnsignedString(int inputInt);
+            static String toUnsignedString(int inputInt);
 
             /**
              * Returns an Integer object holding the value of the specified String .
