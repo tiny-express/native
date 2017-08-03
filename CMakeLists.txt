@@ -60,12 +60,13 @@ add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 # Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wfatal-errors")
 elseif (COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x -Wfatal-errors")
 else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfatal-errors")
 
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
@@ -73,8 +74,8 @@ add_definitions(-D_GNU_SOURCE)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # CMake Modules
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
-    set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -Wfatal-errors")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -Wfatal-errors")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
 
     # Enable coverage by cmake modules
     if (CMAKE_COMPILER_IS_GNUCXX)
