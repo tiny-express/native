@@ -135,7 +135,7 @@ namespace Javax {
              *
              * @return
              */
-            const String &toString();
+            String toString();
 
             /**
              * Creates a new instance of MediaType by parsing the supplied string.

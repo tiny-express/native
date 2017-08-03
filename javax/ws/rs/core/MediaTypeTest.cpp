@@ -25,6 +25,8 @@
  */
 
 #include "MediaType.hpp"
+#include "MediaTypeException.hpp"
+
 extern "C" {
 #include "../../../../kernel/test.h"
 }
@@ -52,6 +54,32 @@ TEST(MediaType, Constructor) {
     ASSERT_STR("html", mediaType2.getSubtype().toString());
     ASSERT_STR("value", mediaType2.getParameters().get("key").toString());
 
+    // Constructor with type empty, expected Exception "`type` must not be empty"
+    MediaTypeException exception; // This variable is used to confirm Exception will happen
+    try {
+        MediaType mediaType3("", "text");
+    } catch (MediaTypeException &e) {
+        exception = e;
+    }
+    ASSERT_STR("`type` must not be empty", exception.getMessage().toString());
+
+    // Constructor with subtype empty, expected Exception "`subtype` must not be empty"
+    MediaTypeException exception1;
+    try {
+        MediaType mediaType3("text", "");
+    } catch (MediaTypeException &e) {
+        exception1 = e;
+    }
+    ASSERT_STR("`subtype` must not be empty", exception1.getMessage().toString());
+
+    // Constructor with type MEDIA_WILDCARD_TYPE, subtype is not empty, Expected exception wrong type
+    MediaTypeException exception2;
+    try {
+        MediaType mediaType3("*", "text");
+    } catch (MediaTypeException &e) {
+        exception2 = e;
+    }
+    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", exception2.getMessage().toString());
 }
 
 TEST(MediaType, IsWildcardSubtype) {
@@ -92,7 +120,7 @@ TEST(MediaType, IsWildcardType) {
 }
 
 TEST(MediaType, IsCompatible) {
-//     subtype is wildcard, other subtype is wildcard, expected true
+    // Subtype is wildcard, other subtype is wildcard, expected true
     MediaType mediaType;
     MediaType mediaType1;
     ASSERT_TRUE(mediaType.isCompatible(mediaType1));
@@ -110,9 +138,88 @@ TEST(MediaType, IsCompatible) {
 
     // MediaType */text is compatible with application/* and vice versa,  expected true
     MediaType mediaType6(MediaType::MEDIA_TYPE_WILDCARD, "text");
-    MediaType mediaType7("application", MediaType::MEDIA_TYPE_WILDCARD);
+    MediaType mediaType7("application", "*");
     ASSERT_TRUE(mediaType6.isCompatible(mediaType7));
     ASSERT_TRUE(mediaType7.isCompatible(mediaType6));
+}
 
+TEST(MediaType, ValueOf) {
+    // MediaType valueOf "application/json", expected type "application", subtype "json"
+    MediaType mediaType = MediaType::valueOf("application/json");
+    ASSERT_STR("application", mediaType.getType().toString());
+    ASSERT_STR("json", mediaType.getSubtype().toString());
 
+    // MediaType valueOf "text/*", expected type "text", subtype "*+plain"
+    MediaType mediaType1 = MediaType::valueOf("text/*+plain");
+    ASSERT_STR("text", mediaType1.getType().toString());
+    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType1.getSubtype().toString());
+
+    // MediaType valueOf "*/html", expected type MEDIA_WILDCARD_TYPE, subtype "html"
+    MediaType mediaType2 = MediaType::valueOf("*/html");
+    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType2.getType().toString());
+    ASSERT_STR("html", mediaType.getSubtype().toString());
+
+    // MediaType valueOf WILDCARD, expected both type and subtype are MEDIA_WILDCARD_TYPE
+    MediaType mediaType3 = MediaType::valueOf(MediaType::WILDCARD);
+    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getType().toString());
+    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getSubtype().toString());
+
+    // MediType valueOf empty String, expected exception "`type` must not be empty"
+    MediaTypeException exception;
+    try {
+        MediaType mediaType4 = MediaType::valueOf("");
+    } catch (MediaTypeException &e) {
+        exception = e;
+    }
+    ASSERT_STR("`type` must not be empty", exception.getMessage().toString());
+
+    // MediaType valueOf "/", expected exception "/ does not contain subtype after '/'"
+    MediaTypeException exception1;
+    try {
+        MediaType mediaType5 = MediaType::valueOf("/");
+    } catch (MediaTypeException &e) {
+       exception1 = e;
+    }
+    ASSERT_STR("/ does not contain subtype after '/'", exception1.getMessage().toString());
+
+    // MediaType valueOf "text/", expected exception "/ does not contain subtype after '/'"
+    MediaTypeException exception2;
+    try {
+        MediaType mediaType5 = MediaType::valueOf("text/");
+    } catch (MediaTypeException &e) {
+        exception2 = e;
+    }
+    ASSERT_STR("text/ does not contain subtype after '/'", exception2.getMessage().toString());
+
+    // MediaType valueOf "*/html", expected exception wrong type
+    MediaTypeException exception3;
+    try {
+        MediaType mediaType5 = MediaType::valueOf("*/html");
+    } catch (MediaTypeException &e) {
+        exception3 = e;
+    }
+    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", exception3.getMessage().toString());
+}
+
+TEST(MediaType, ToString) {
+
+    // Default constructor, expected WILDCARD
+    MediaType mediaType;
+    mediaType.toString();
+    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.toString().toString());
+
+    // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
+    MediaType mediaType2("application", "*+xml");
+    ASSERT_TRUE(mediaType2.toString().equals((String)"application/*+xml"));
+
+    // Constructor with type "application", subtype "atom+xml", expected "application/atom+xml"
+    MediaType mediaType3("application", "atom+xml");
+    ASSERT_STR(MediaType::APPLICATION_ATOM_XML.toString(), mediaType3.toString().toString());
+
+    // Constructor with type "application", subtype MEDIA_WILDCARD_TYPE, expected "application/*"
+    MediaType mediaType4("application", "*");
+    ASSERT_STR("application/*", mediaType4.toString().toString());
+
+    // Constructor with type "text", subtype "html", expected "text/html"
+    MediaType mediaType5("text", "html");
 }

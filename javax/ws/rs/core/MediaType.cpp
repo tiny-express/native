@@ -25,6 +25,8 @@
  */
 
 #include "MediaType.hpp"
+#include "../../../../java/lang/StringBuilder/StringBuilder.hpp"
+#include "MediaTypeException.hpp"
 
 using namespace Javax::Ws;
 
@@ -50,11 +52,36 @@ MediaType::MediaType() {
 }
 
 MediaType::MediaType(const String &type, const String &subtype) {
+    if (type.isEmpty()) {
+        throw MediaTypeException("`type` must not be empty");
+    }
+
+    if (subtype.isEmpty()) {
+        throw MediaTypeException("`subtype` must not be empty");
+    }
+
+    if (type.equals(MEDIA_TYPE_WILDCARD) && !subtype.equals(MEDIA_TYPE_WILDCARD)) {
+        throw MediaTypeException("Wildcard type is legal only in '*/*' (all types)");
+    }
+
     this->type = type;
     this->subtype = subtype;
 }
 
 MediaType::MediaType(const String &type, const String &subtype, const HashMap<String, String> &parameters) {
+
+    if (type.isEmpty()) {
+        throw MediaTypeException("`type` must not be empty");
+    }
+
+    if (subtype.isEmpty()) {
+        throw MediaTypeException("`subtype` must not be empty");
+    }
+
+    if (type.equals(MEDIA_TYPE_WILDCARD) && !subtype.equals(MEDIA_TYPE_WILDCARD)) {
+        throw MediaTypeException("Wildcard type is legal only in '*/*' (all types)");
+    }
+
     this->type = type;
     this->subtype = subtype;
     this->parameters = parameters;
@@ -113,9 +140,9 @@ boolean MediaType::isCompatible(MediaType other) {
 
 }
 
-const String &MediaType::toString() {
-    // TODO @DQuang
-    return "";
+String MediaType::toString() {
+    String result = type + "/" + subtype;
+    return result;
 }
 
 boolean MediaType::isWildcardSubtype() {
@@ -127,8 +154,42 @@ boolean MediaType::isWildcardType() {
 }
 
 MediaType MediaType::valueOf(String type) {
-    // TODO @DQuang
-    MediaType mediaType;
+
+    if (type.isEmpty()) {
+        throw MediaTypeException("`type` must not be empty");
+    }
+
+    int indexOfSemicolon = type.indexOf(";");
+    String fullType = (indexOfSemicolon >= 0 ? type.subString(0, indexOfSemicolon) : type).trim();
+    if (fullType.isEmpty()) {
+        throw MediaTypeException("`type` must not be empty");
+    }
+
+    if (fullType.equals(MEDIA_TYPE_WILDCARD)) {
+        fullType = WILDCARD;
+    }
+
+    int splashIndex = fullType.indexOf('/');
+
+    if (splashIndex == CHAR_NOT_FOUND) {
+        String exceptionMessage = type + (String) " does not contains '/'";
+        throw MediaTypeException(exceptionMessage);
+    }
+
+    if (splashIndex == fullType.length() - 1) {
+        String exceptionMessage = type + (String) " does not contain subtype after '/'";
+        throw MediaTypeException(exceptionMessage);
+    }
+
+    String getType = fullType.subString(0, splashIndex);
+    String getSubtype = fullType.subString(splashIndex + 1);
+    if (getType.equals(MEDIA_TYPE_WILDCARD) && !getSubtype.equals(MEDIA_TYPE_WILDCARD)) {
+        String exceptionMessage = type + (String) " wildcard type is legal only in '*/*' (all types)";
+        throw MediaTypeException(exceptionMessage);
+    }
+
+    MediaType mediaType(getType, getSubtype);
+
     return mediaType;
 }
 
