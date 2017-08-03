@@ -1353,7 +1353,7 @@ TEST(JavaLang, MathGetExponentFloat) {
     ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));
 
     // Given a subnormal to get exponent
-    float subNormal = 3.952525e-323;
+    float subNormal = 3.952525e-40;
     int expectSubNormalResult = Float::MIN_EXPONENT - 1;
     ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));
 }
