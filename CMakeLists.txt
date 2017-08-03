@@ -78,7 +78,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
 
     # Enable coverage by cmake modules
-    if (CMAKE_COMPILER_IS_GNUCXX)
+    if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
         include(CodeCoverage)
         setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
     endif ()
