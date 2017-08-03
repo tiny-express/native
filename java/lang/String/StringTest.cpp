@@ -465,3 +465,17 @@ TEST(JavaLang, StringSubString) {
     expect = (string) "ello ";
 	ASSERT_STR(expect, result);
 }
+
+TEST(JavaLang, StringFormat) {
+	String expectString = "-123 123 123.123 123.456789 hello world";
+	String format = "%d %d %.3f %.6f %s";
+
+	int signedValue = -123;
+	unsigned int unsignedValue = 123;
+	float floatValue = 123.123;
+	double doubleValue = 123.456789;
+	string stringValue = "hello world";
+
+	String resultString = String::format(format, signedValue, unsignedValue, floatValue, doubleValue, stringValue);
+	ASSERT_STR(expectString.toString(), resultString.toString());
+}

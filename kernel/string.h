@@ -20,7 +20,7 @@
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * (INCLUDING NEGLIchar *string_format(const char* format, va_list args);GENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 char *string_from_char(char target);
 char *string_from_short(short target);
@@ -59,6 +60,7 @@ int string_equals(char *target1, char *target2);
 char *string_concat_asm(char *target, char *subtarget);
 char *string_reverse(char *target);
 int string_matches(char *target, char *regex);
+char *string_format(const char* format, va_list args);
 
 char *string_from_to(char *target, int from, int to);
 char *string_from(char *target, int from);

@@ -199,6 +199,22 @@ boolean String::endsWith(const String &suffix) const {
 }
 
 /**
+ * Format string
+ * @param format
+ * @param args
+ * @return String
+ */
+String String::format(const String& format, ...) {
+	va_list args;
+	va_start(args, format);
+	string temp = string_format(format.toString(), args);
+	String result = temp;
+	free(temp);
+	va_end(args);
+	return result;
+}
+
+/**
  * String from character array
  *
  * @param chars

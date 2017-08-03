@@ -525,3 +525,33 @@ int string_matches(char *target, char *regex) {
 //    regfree(&exp);
 	return FALSE;
 }
+
+/**
+ * Format string
+ *
+ * @param format
+ * @param va_list
+ * @return formatted string
+ */
+char *string_format(const char* format, va_list args) {
+	char* result = NULL;
+	char dummyChar = 0;
+	int resultLength = 0;
+	va_list dummyArgs;
+
+	va_copy(dummyArgs, args);
+
+	resultLength = vsnprintf(&dummyChar, sizeof(dummyChar), format, dummyArgs);
+	if(resultLength > 0) {
+		++resultLength;
+		result = (char*)calloc((size_t)resultLength, sizeof(char));
+		if(result) {
+			if(resultLength - 1 != vsnprintf(result, (size_t)resultLength, format, args)) {
+				free(result);
+				result = NULL;
+			}
+		}
+	}
+
+	return result;
+}

@@ -83,6 +83,7 @@ namespace Java {
 				}
 				return true;
 			}
+			static String format(const String& format, ...);
 			Array<byte> getBytes() const;
 			String getStringFromIndex(int index);
 			// Array<byte> getBytes(const Charset &);
