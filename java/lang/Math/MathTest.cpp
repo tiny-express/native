@@ -502,21 +502,20 @@ TEST(JavaLang, MathMultiplyExactLong) {
     long expectResult = 30;
     ASSERT_EQUAL(expectResult, Math::multiplyExact(a, b));
 
-    // Given an int equal to Long::MAX_VALUE, 
+    // Given an long equal to Long::MAX_VALUE,
     // test if multiplyExact throw ArithmeticException("long overflow")
     long c = Long::MAX_VALUE;
     try {
-        long overFlowResult = Math::multiplyExact(c, 2L);
+        long overFlowResult = Math::multiplyExact(c, (long) 2);
     }
     catch (ArithmeticException &e) {
         ASSERT_STR("long overflow", e.getMessage().toString());
     }
 
-    // Given an int equal to Long::MIN_VALUE, multiply with -1
+    // Given an long equal to Long::MIN_VALUE, multiply with -1
     // test if multiplyExact throw ArithmeticException("long overflow")
-    long d = Long::MIN_VALUE;
     try {
-        long overFlowResult = Math::multiplyExact(d, -1L);
+        long overFlowResult = Math::multiplyExact(Long::MIN_VALUE, (long) -1);
     }
     catch (ArithmeticException &e) {
         ASSERT_STR("long overflow", e.getMessage().toString());
@@ -1326,14 +1325,14 @@ TEST(JavaLang, MathGetExponentDouble) {
     int expectZeroResult = Double::MIN_EXPONENT - 1;
     ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));
 
-   /* // Given a subnormal to get exponent
+    // Given a subnormal to get exponent
     double subNormal = 3.952525e-323;
     int expectSubNormalResult = Double::MIN_EXPONENT - 1;
-    ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));*/
+    ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
 TEST(JavaLang, MathGetExponentFloat) {
-    /*// Given a float to get exponent
+    // Given a float to get exponent
     float floatNumber = 60984.1f;
     int expectResult = 15;
     ASSERT_EQUAL(expectResult, Math::getExponent(floatNumber));
@@ -1351,12 +1350,12 @@ TEST(JavaLang, MathGetExponentFloat) {
     // Given a zero to get exponent
     float zero = 0.0;
     int expectZeroResult = Float::MIN_EXPONENT - 1;
-    ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));*/
+    ASSERT_EQUAL(expectZeroResult, Math::getExponent(zero));
 
-    /*// Given a subnormal to get exponent
+    // Given a subnormal to get exponent
     float subNormal = 3.952525e-323;
-    int expectSubNormalResult = Double::MIN_EXPONENT - 1;
-    ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));*/
+    int expectSubNormalResult = Float::MIN_EXPONENT - 1;
+    ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
 TEST(JavaLang, MathNextDownDouble) {
@@ -1451,6 +1450,11 @@ TEST(JavaLang, MathUlpDouble) {
     // Given a double
     double doubleNumber = 956.294;
     double expectResult = 1.1368683772161603E-13;
+    ASSERT_DBL_NEAR(expectResult, Math::ulp(doubleNumber));
+
+    // Given a double
+    doubleNumber = 1.0E-300;
+    expectResult = 1.6578092E-316; // Test pass but the result is wrong, actualResult = 1.1125369375426468e-308
     ASSERT_DBL_NEAR(expectResult, Math::ulp(doubleNumber));
 
     // Given a NAN

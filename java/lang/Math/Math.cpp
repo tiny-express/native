@@ -25,6 +25,8 @@
  */
 
 #include "Math.hpp"
+
+#include <cmath>
 #include "../ArithmeticException/ArithmeticException.hpp"
 #include "../AssertionError/AssertionError.hpp"
 
@@ -161,17 +163,41 @@ long Math::floorMod(long dividend, long divisor) {
 }
 
 int Math::getExponent(double value) {
-    if (value == -INFINITY) {
-        value = Math::abs(value);
+    if (Double::isNaN(value) || value == -INFINITY || value == INFINITY) {
+        return Double::MAX_EXPONENT + 1;
     }
-    return (int) (((Double::doubleToRawLongBits(value) & Double::EXP_BIT_MASK)
-                >> (Double::SIGNIFICAND_WIDTH - 1)) - Double::EXP_BIAS);
+
+    if (value == -0 || value == 0) {
+        return Double::MIN_EXPONENT - 1;
+    }
+
+    double mantissas;
+    int exponent;
+    mantissas = std::frexp(value, &exponent);
+    if (mantissas * 10 >= 1.0 && exponent - 1 < Double::MIN_EXPONENT) {
+        return Double::MIN_EXPONENT - 1;
+    }
+
+    return exponent - 1;
 }
 
 int Math::getExponent(float value) {
-    // return ((Float::floatToRawIntBits(value) & Float::EXP_BIT_MASK)
-    //        >> (Float::SIGNIFICAND_WIDTH - 1)) - Float::EXP_BIAS;
-    return 0;
+    if (Float::isNaN(value) || value == -INFINITY || value == INFINITY) {
+        return Float::MAX_EXPONENT + 1;
+    }
+
+    if (value == -0 || value == 0) {
+        return Float::MIN_EXPONENT - 1;
+    }
+
+    double mantissas;
+    int exponent;
+    mantissas = std::frexp(value, &exponent);
+    if ((mantissas * 10) >= 1.0 && (exponent - 1) < Float::MIN_EXPONENT) {
+        return Float::MIN_EXPONENT - 1;
+    }
+
+    return exponent - 1;
 }
 
 double Math::hypot(double valueA, double valueB) {
@@ -249,12 +275,17 @@ int Math::multiplyExact(int valueA, int valueB) {
 }
 
 long Math::multiplyExact(long valueA, long valueB) {
+    if (valueA == Long::MIN_VALUE && valueB == -1) {
+        throw ArithmeticException("long overflow");
+
+    }
+
     long result = valueA * valueB;
     unsigned long absA = (unsigned) abs(valueA);
     unsigned long absB = (unsigned) abs(valueB);
 
     if (((absA | absB) >> 31) != 0) {
-        if ((valueA == Long::MIN_VALUE && valueB == -1) || ((valueB != 0) && (result / valueB != valueA))) {
+        if ((valueB != 0) && (result / valueB != valueA)) {
             throw ArithmeticException("long overflow");
         }
     }
