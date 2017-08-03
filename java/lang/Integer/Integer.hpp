@@ -37,12 +37,11 @@ namespace Java {
 	namespace Lang {
 		class Integer;
 		
-		class Integer:
-			public Number {
-
+		class Integer : public Number {
         private:
 			int original;
-			string stringOriginal;
+ 			string stringOriginal;
+            
         public:
             /**
             * The number of bits used to represent an int value in two's complement binary form.
@@ -313,7 +312,8 @@ namespace Java {
              * @param object
              * @return true if the objects are the same; false otherwise.
              */
-            static boolean equals(Integer object);
+            // TODO need instanceof temporary use Integer instead of Object
+            boolean equals(Integer object);
 
             /**
              * Returns the value of this Integer as
@@ -361,7 +361,7 @@ namespace Java {
              * @return hash code of this Integer
              * equal to the primitive int value represented by this Integer object.
              */
-            // static int hashCode();
+            long hashCode() const;
 
             /**
              * Returns a hash code for a int value;
@@ -493,7 +493,7 @@ namespace Java {
             static int parseUnsignedInt(String inputString, int radix);
 
             /**
-             * Parses the string argument as an unsigned decimal intege
+             * Parses the string argument as an unsigned decimal integer
              *
              * @param inputString
              * @throw NumberFormatException - if the string does not contain a parsable unsigned integer.
@@ -615,7 +615,7 @@ namespace Java {
              *
              * @return a string representation of the value of this object in base 10
              */
-            // static String toString();
+            String toStringObject();
 
             /**
              * Returns a String object

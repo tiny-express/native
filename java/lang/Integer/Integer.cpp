@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -40,10 +40,11 @@ Integer::Integer(int original) {
 	this->original = original;
 	this->stringOriginal = string_from_int(this->original);
 }
- Integer::Integer(String inputString) {
- 	this->original = string_to_int(inputString.toString());
- 	this->stringOriginal = inputString.toString();
- }
+
+Integer::Integer(String inputString) {
+    this->original = Integer::parseInt(inputString);
+	this->stringOriginal = string_from_int(this->original);
+}
 
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
@@ -51,7 +52,7 @@ Integer::Integer(const Integer &integer) {
 }
 
 Integer::~Integer() {
-	if (this->stringOriginal != NULL)  {
+	if (this->stringOriginal != nullptr)  {
 		free(this->stringOriginal);
 	}
 }
@@ -68,7 +69,7 @@ string Integer::stringValue() const {
 }
 
 short Integer::shortValue() const {
-	return static_cast<short> (this->original);
+	return (short) this->original;
 }
 
 int Integer::intValue() const {
@@ -76,15 +77,15 @@ int Integer::intValue() const {
 }
 
 long Integer::longValue() const {
-	return static_cast<long> (this->original);
+	return (long) this->original;
 }
 
 float Integer::floatValue() const {
-	return static_cast<float> (this->original);
+	return (float) this->original;
 }
 
 double Integer::doubleValue() const {
-	return static_cast<double> (this->original);
+	return (double) this->original;
 }
 
 Integer &Integer::operator=(const Integer &target) {
@@ -140,18 +141,15 @@ Integer Integer::operator%(const Integer &target) {
 
 int Integer::bitCount(int inputInt) {
 	int resultBitCount = 0;
-	
-	if ( inputInt < 0 ) {
+	if (inputInt < 0) {
 		resultBitCount = 1;
 		inputInt = -inputInt;
 	}
 
-	while( (inputInt != 0) || resultBitCount == 32 ) {
-
-		if( (inputInt & 1) == 1 ) {
+	while((inputInt != 0) || resultBitCount == 32) {
+		if((inputInt & 1) == 1) {
 			resultBitCount++;
 		}
-
 		inputInt = inputInt >> 1;
 	}
 
@@ -178,8 +176,8 @@ int Integer::compareTo(Integer anotherInteger) {
 	return compare(this->original, anotherInteger.intValue());
 }
 
-int Integer::compareUnsigned(int inputInt_1, int inputInt_2) {
-	return compare(inputInt_1 + MIN_VALUE, inputInt_2 + MIN_VALUE);
+int Integer::compareUnsigned(int intA, int intB) {
+	return compare(intA + MIN_VALUE, intB + MIN_VALUE);
 }
 
 Integer Integer::decode(String inputString) {
@@ -194,7 +192,7 @@ Integer Integer::decode(String inputString) {
     boolean isNegative = false;
     int base = 10;
     char sign = inputString.charAt(0);
-    if (sign == '-' && !(isdigit(sign))) {
+    if (sign == '-' && ((isdigit(sign)) == 0)) {
         isNegative = true;
         inputString = inputString.getStringFromIndex(1);
     }
@@ -205,9 +203,6 @@ Integer Integer::decode(String inputString) {
         } else {
             base = 8;
         }
-
-    } else {
-        base = 10;
     }
 
     int result = parseInt(inputString, base);
@@ -218,7 +213,7 @@ Integer Integer::decode(String inputString) {
 }
 
 int Integer::divideUnsigned(int dividend, int divisor) {
-	return static_cast<int> (toUnsignedLong(dividend) / toUnsignedLong(divisor));
+	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
 }
 
 // double Integer::doubleValue() {
@@ -347,7 +342,6 @@ int Integer::numberOfTrailingZeros(int inputInt) {
     return n - ((unsigned int) (inputInt << 1) >> 31);
 }
 
-
 int Integer::parseInt(String inputString, int radix) {
 	if (inputString.length() == 0) {
         throw NumberFormatException("input string is null");
@@ -363,7 +357,7 @@ int Integer::parseInt(String inputString, int radix) {
 
     boolean isNegative = false;
     char sign = inputString.charAt(0);
-    if (sign == '-' && !(isdigit(sign))) {
+    if (sign == '-' && ((isdigit(sign)) == 0)) {
         isNegative = true;
         inputString = inputString.getStringFromIndex(1);
     }
@@ -393,21 +387,58 @@ int Integer::parseInt(String inputString, int radix) {
 }
 
 int Integer::parseInt(String inputString) {
-	return string_to_int(inputString.toString());
-	// TODO(thoanggminh): enable it after finish
-    // Integer::parseInt(String inputString, int radix)
-	// return parseInt(inputString,10);
+	return Integer::parseInt(inputString, 10);
 }
 
-// int Integer::parseUnsignedInt(String inputString, int radix) {
+int Integer::parseUnsignedInt(String inputString, int radix) {
+    if (inputString.length() == 0) {
+        throw NumberFormatException("input string is null");
+    }
+
+    if (radix > 32 || radix < 2) {
+        throw NumberFormatException("radix out of range");
+    }
+
+    if (inputString.charAt(0) == '0' && inputString.length() == 1) {
+        return 0;
+    }
+
+    char sign = inputString.charAt(0);
 
 
-// }
+    if ((isdigit(sign)) == 0) {
+        if (sign == '-') {
+            throw NumberFormatException("Illegal leading minus sign");
+        }
 
-// int Integer::parseUnsignedInt(String inputString) {
+        if (sign == '+') {
+            inputString = inputString.getStringFromIndex(1);
+        }
+    }
+    unsigned long unsignedResult = 0;
+    try {
+        unsignedResult = std::stoul(inputString.toString(), nullptr, radix);
+    }
+    catch (const std::invalid_argument &e) {
+        throw NumberFormatException("Not a number");
+    }
+    catch (const std::out_of_range &e) {
+        throw NumberFormatException("Unsigned integer out of range");
+    }
 
-	
-// }
+    long result = unsignedResult;
+
+    if (result > std::numeric_limits<uint>::max() 
+        || result < std::numeric_limits<uint>::min()) {
+        throw NumberFormatException("Unsigned integer out of range");
+    }
+
+    return (int) result;
+}
+
+int Integer::parseUnsignedInt(String inputString) {
+    return Integer::parseUnsignedInt(inputString, 10);
+}
 
 int Integer::remainderUnsigned(int dividend, int divisor) {
 	return static_cast<int> (toUnsignedLong(dividend) % toUnsignedLong(divisor));
@@ -419,7 +450,7 @@ int Integer::reverse(int inputInt) {
 
     inputInt = (inputInt & 0x33333333) << 2 
     			| ((unsigned int) inputInt >> 2) & 0x33333333;
-
+    
     inputInt = (inputInt & 0x0f0f0f0f) << 4 
     			| ((unsigned int) inputInt >> 4) & 0x0f0f0f0f;
 
@@ -440,8 +471,7 @@ int Integer::reverseBytes(int inputInt) {
 }
 
 int Integer::rotateLeft(int inputInt, int distance) {
-	inputInt = (inputInt << distance) 
-				| ((unsigned int) inputInt >> -distance);
+	inputInt = (inputInt << distance) | ((unsigned int) inputInt >> -distance);
 
 	return inputInt;
 }
@@ -496,7 +526,23 @@ string Integer::toString() const {
 
 long Integer::toUnsignedLong(int inputInt) {
 	// Make the overload bits is 0 to make sure inputInt in 32 bit type.
-	return ((long) inputInt) & 0xffffffffL;
+	return ((long) inputInt) & 0xffffffff;
+}
+
+String Integer::toStringObject() {
+    return String(this->stringOriginal);
+}
+
+boolean Integer::equals(Integer object) {
+    return this->original == object.intValue();
+}
+
+int Integer::hashCode(int inputInt) {
+    return inputInt;
+}
+
+long Integer::hashCode() const {
+    return Integer::hashCode(this->original);
 }
 
 // string Integer::toUnsignedString(int inputInt, int radix) {
@@ -514,7 +560,7 @@ long Integer::toUnsignedLong(int inputInt) {
 
 // }
 
-// Integer Integer::valueOf(String inputStringtringInput, int radixIntInput) {
+// Integer Integer::valueOf(String inputString, int radixIntInput) {
 
 
 // }

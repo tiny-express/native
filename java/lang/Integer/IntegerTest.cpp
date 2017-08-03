@@ -41,10 +41,10 @@ TEST(JavaLang, IntegerConstructor) {
     // Test Integer::Integer(int original)
     Integer integerConstructorIntParameter(13);
     ASSERT_EQUAL(13, integerConstructorIntParameter.intValue() );
-// TODO(thoangminh): Enable after finish parseInt(String s, int radix)
+
     // Test Integer::Integer(String stringInput)
-    // Integer integerConstructorStringParameter((string) 13);
-    // ASSERT_EQUAL(13, integerConstructorStringParameter.intValue() );
+    Integer integerConstructorStringParameter((String) "13");
+    ASSERT_EQUAL(13, integerConstructorStringParameter.intValue() );
 
     // Test Integer::Integer(const Integer &integer)
     Integer integerConstructorIntegerParameter = 13;
@@ -325,12 +325,12 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    inputInt = 1; // 01
+    inputInt = 1;  // 01
     expectedResult = 1;
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    inputInt = -1; // 11
+    inputInt = -1;  // 11
     expectedResult = 2;
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
@@ -340,15 +340,16 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    inputInt = Integer::MAX_VALUE; // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
+    inputInt = Integer::MAX_VALUE;  // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
     expectedResult = 31;
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
-// TODO(thoangminh): Check the case below:
-    // inputInt = Integer::MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
-    // expectedResult = 33;
-    // actualResult = Integer::bitCount(inputInt);
-    // ASSERT_EQUAL(expectedResult, actualResult);
+
+/*// TODO(thoangminh): Check the case below:
+     inputInt = Integer::MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
+     expectedResult = 33;
+     actualResult = Integer::bitCount(inputInt);
+     ASSERT_EQUAL(expectedResult, actualResult);*/
 }
 
 TEST(JavaLang, IntegerByteValue) {
@@ -529,7 +530,7 @@ TEST(JavaLang, IntegerDecode) {
         ASSERT_STR("input string is null", e.getMessage().toString());
     }
 
-    // Cast all case of inputing a string of type decimal number
+    // Cast all case of input a string of type decimal number
     stringInput = "0";
     expectedResult = 0;
     actualResult = Integer::decode(stringInput);
@@ -576,7 +577,7 @@ TEST(JavaLang, IntegerDecode) {
         ASSERT_STR("Not a number", e.getMessage().toString());
     }
 
-    // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    // Cast all case of input a string of type octal
     stringInput = "0";
     expectedResult = 0;
     actualResult = Integer::decode(stringInput);
@@ -614,7 +615,7 @@ TEST(JavaLang, IntegerDecode) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());
     }
 
-    // Cast all case of inputing a string of type hexadecimal number
+    // Cast all case of input a string of type hexadecimal number
     stringInput = "0x0";
     expectedResult = 0;
     actualResult = Integer::decode(stringInput);
@@ -661,7 +662,6 @@ TEST(JavaLang, IntegerDecode) {
     catch (NumberFormatException &e) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());
     }
-
 }
 
 // TEST(JavaLang, IntegerDivideUnsigned) {
@@ -731,58 +731,57 @@ TEST(JavaLang, IntegerDecode) {
 
 // }
 
-// TEST(JavaLang, IntegerEquals) {
-//     Integer thisInteger;
+TEST(JavaLang, IntegerEquals) {
+    Integer thisInteger;
 
-//     thisInteger = 0;
-//     ASSERT_TRUE(thisInteger.equals(0));
-//     ASSERT_FALSE(thisInteger.equals(1));
-//     ASSERT_FALSE(thisInteger.equals(-1));
-//     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
+    thisInteger = 0;
+    ASSERT_TRUE(thisInteger.equals(0));
+    ASSERT_FALSE(thisInteger.equals(1));
+    ASSERT_FALSE(thisInteger.equals(-1));
+    ASSERT_FALSE(thisInteger.equals(13));
+    ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = 1;
-//     ASSERT_FALSE(thisInteger.equals(0));
-//     ASSERT_TRUE(thisInteger.equals(1));
-//     ASSERT_FALSE(thisInteger.equals(-1));
-//     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
+    thisInteger = 1;
+    ASSERT_FALSE(thisInteger.equals(0));
+    ASSERT_TRUE(thisInteger.equals(1));
+    ASSERT_FALSE(thisInteger.equals(-1));
+    ASSERT_FALSE(thisInteger.equals(13));
+    ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = -1;
-//     ASSERT_FALSE(thisInteger.equals(0));
-//     ASSERT_FALSE(thisInteger.equals(1));
-//     ASSERT_TRUE(thisInteger.equals(-1));
-//     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
+    thisInteger = -1;
+    ASSERT_FALSE(thisInteger.equals(0));
+    ASSERT_FALSE(thisInteger.equals(1));
+    ASSERT_TRUE(thisInteger.equals(-1));
+    ASSERT_FALSE(thisInteger.equals(13));
+    ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = 13;
-//     ASSERT_FALSE(thisInteger.equals(0));
-//     ASSERT_FALSE(thisInteger.equals(1));
-//     ASSERT_FALSE(thisInteger.equals(-1));
-//     ASSERT_TRUE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
+    thisInteger = 13;
+    ASSERT_FALSE(thisInteger.equals(0));
+    ASSERT_FALSE(thisInteger.equals(1));
+    ASSERT_FALSE(thisInteger.equals(-1));
+    ASSERT_TRUE(thisInteger.equals(13));
+    ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = Integer::MAX_VALUE;
-//     ASSERT_FALSE(thisInteger.equals(0));
-//     ASSERT_FALSE(thisInteger.equals(1));
-//     ASSERT_FALSE(thisInteger.equals(-1));
-//     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_TRUE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
+    thisInteger = Integer::MAX_VALUE;
+    ASSERT_FALSE(thisInteger.equals(0));
+    ASSERT_FALSE(thisInteger.equals(1));
+    ASSERT_FALSE(thisInteger.equals(-1));
+    ASSERT_FALSE(thisInteger.equals(13));
+    ASSERT_TRUE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_FALSE(thisInteger.equals(Integer::MIN_VALUE));
 
-//     thisInteger = Integer::MIN_VALUE;
-//     ASSERT_FALSE(thisInteger.equals(0));
-//     ASSERT_FALSE(thisInteger.equals(1));
-//     ASSERT_FALSE(thisInteger.equals(-1));
-//     ASSERT_FALSE(thisInteger.equals(13));
-//     ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
-//     ASSERT_TRUE(thisInteger.equals(Integer::MIN_VALUE));
-
-// }
+    thisInteger = Integer::MIN_VALUE;
+    ASSERT_FALSE(thisInteger.equals(0));
+    ASSERT_FALSE(thisInteger.equals(1));
+    ASSERT_FALSE(thisInteger.equals(-1));
+    ASSERT_FALSE(thisInteger.equals(13));
+    ASSERT_FALSE(thisInteger.equals(Integer::MAX_VALUE));
+    ASSERT_TRUE(thisInteger.equals(Integer::MIN_VALUE));
+}
 
 // Test Integer::getInteger(String inputString)
 // TEST(JavaLang, IntegerGetInteger1) {
@@ -790,7 +789,7 @@ TEST(JavaLang, IntegerDecode) {
     // Integer expectedResult;
     // Integer actualResult;
 
-    // // Cast all case of inputing a string of type decimal number
+    // // Cast all case of input a string of type decimal number
     // stringInput = (String) "";
     // expectedResult = ; // NULL string
     // actualResult = Integer:getInteger(stringInput);
@@ -832,7 +831,7 @@ TEST(JavaLang, IntegerDecode) {
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 
-    // // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    // // Cast all case of input a string of type octal numberStringInput = (String) "0";
     // stringInput = (String) "00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput);
@@ -863,7 +862,7 @@ TEST(JavaLang, IntegerDecode) {
     // actualResult = Integer:getInteger(stringInput);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // // Cast all case of inputing a string of type hexadecimal number
+    // // Cast all case of input a string of type hexadecimal number
     // stringInput = (String) "0x00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput);
@@ -917,7 +916,7 @@ TEST(JavaLang, IntegerDecode) {
     // Integer expectedResult;
     // Integer actualResult;
 
-    // // Cast all case of inputing a string of type decimal number
+    // // Cast all case of input a string of type decimal number
     // stringInput = (String) "";
     // expectedResult = 9999; // NULL string
     // actualResult = Integer:getInteger(stringInput, 9999);
@@ -959,7 +958,7 @@ TEST(JavaLang, IntegerDecode) {
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 
-    // // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    // // Cast all case of input a string of type octal numberStringInput = (String) "0";
     // stringInput = (String) "00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput, 9999);
@@ -990,7 +989,7 @@ TEST(JavaLang, IntegerDecode) {
     // actualResult = Integer:getInteger(stringInput, 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // // Cast all case of inputing a string of type hexadecimal number
+    // // Cast all case of input a string of type hexadecimal number
     // stringInput = (String) "0x00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput, 9999);
@@ -1044,7 +1043,7 @@ TEST(JavaLang, IntegerDecode) {
     // Integer expectedResult;
     // Integer actualResult;
 
-    // // Cast all case of inputing a string of type decimal number
+    // // Cast all case of input a string of type decimal number
     // stringInput = (String) "";
     // expectedResult = 9999; // NULL string
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
@@ -1086,7 +1085,7 @@ TEST(JavaLang, IntegerDecode) {
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
 
-    // // Cast all case of inputing a string of type octal numberstringInput = (String) "0";
+    // // Cast all case of input a string of type octal numberstringInput = (String) "0";
     // stringInput = (String) "00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
@@ -1117,7 +1116,7 @@ TEST(JavaLang, IntegerDecode) {
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
     // ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // // Cast all case of inputing a string of type hexadecimal number
+    // // Cast all case of input a string of type hexadecimal number
     // stringInput = (String) "0x00";
     // expectedResult = 0;
     // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
@@ -1165,40 +1164,36 @@ TEST(JavaLang, IntegerDecode) {
 
 // }
 
-// Test Integer::hashCode()
-// TEST(JavaLang, IntegerHashCode) {
-//     Integer inputInteger;
+TEST(JavaLang, IntegerHashCode) {
+    Integer inputInteger;
 
-//     inputInteger = 0;
-//     ASSERT_EQUAL(0, inputInteger.hashCode());
+    inputInteger = 0;
+    ASSERT_EQUAL(0, inputInteger.hashCode());
 
-//     inputInteger = 1;
-//     ASSERT_EQUAL(1, inputInteger.hashCode());
+    inputInteger = 1;
+    ASSERT_EQUAL(1, inputInteger.hashCode());
 
-//     inputInteger = -1;
-//     ASSERT_EQUAL(-1, inputInteger.hashCode());
+    inputInteger = -1;
+    ASSERT_EQUAL(-1, inputInteger.hashCode());
 
-//     inputInteger = 13;
-//     ASSERT_EQUAL(13, inputInteger.hashCode());
+    inputInteger = 13;
+    ASSERT_EQUAL(13, inputInteger.hashCode());
 
-//     inputInteger = Integer::MAX_VALUE;
-//     ASSERT_EQUAL(Integer::MAX_VALUE, inputInteger.hashCode());
+    inputInteger = Integer::MAX_VALUE;
+    ASSERT_EQUAL(Integer::MAX_VALUE, inputInteger.hashCode());
 
-//     inputInteger = Integer::MIN_VALUE;
-//     ASSERT_EQUAL(Integer::MIN_VALUE, inputInteger.hashCode());
+    inputInteger = Integer::MIN_VALUE;
+    ASSERT_EQUAL(Integer::MIN_VALUE, inputInteger.hashCode());
+}
 
-// }
-
-// Test Integer::hashCode(int inputInt)
-// TEST(JavaLang, IntegerHashCode2) {
-//     ASSERT_EQUAL(0, Integer::hashCode(0));
-//     ASSERT_EQUAL(1, Integer::hashCode(1));
-//     ASSERT_EQUAL(-1, Integer::hashCode(-1));
-//     ASSERT_EQUAL(13, Integer::hashCode(13));
-//     ASSERT_EQUAL(Integer::MAX_VALUE, Integer::hashCode(Integer::MAX_VALUE));
-//     ASSERT_EQUAL(Integer::MIN_VALUE, Integer::hashCode(Integer::MIN_VALUE));
-
-// }
+TEST(JavaLang, IntegerHashCode2) {
+    ASSERT_EQUAL(0, Integer::hashCode(0));
+    ASSERT_EQUAL(1, Integer::hashCode(1));
+    ASSERT_EQUAL(-1, Integer::hashCode(-1));
+    ASSERT_EQUAL(13, Integer::hashCode(13));
+    ASSERT_EQUAL(Integer::MAX_VALUE, Integer::hashCode(Integer::MAX_VALUE));
+    ASSERT_EQUAL(Integer::MIN_VALUE, Integer::hashCode(Integer::MIN_VALUE));
+}
 
 TEST(JavaLang, IntegerHighestOneBit) {
     ASSERT_EQUAL(0, Integer::highestOneBit(0));
@@ -1394,7 +1389,7 @@ TEST(JavaLang, IntegerParseInt) {
         ASSERT_STR("input string is null", e.getMessage().toString());
     }
 
-    // Cast all case of inputing a string of type decimal number
+    // Cast all case of input a string of type decimal number
     stringInput = (String) "0";
     expectedResult = 0;
     actualResult = Integer::parseInt(stringInput);
@@ -1439,75 +1434,153 @@ TEST(JavaLang, IntegerParseInt) {
     catch (NumberFormatException &e) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());
     }
-
-
 }
 
-// Test int Integer::parseUnsignedInt(String inputString, int radix)
-// TEST(JavaLang, IntegerParseUnsignedInt) {
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"0", 10), 0);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"473", 10), 473);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"+42", 10), 42);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-0", 10), 0);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-FF", 16), -255); throws a NumberFormatException
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"1100110", 2), 102);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"2147483647", 10), 2147483647);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"-2147483648", 10), -2147483648); throws a NumberFormatException
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"2147483648", 10) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"99", 8) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"Kona", 10) throws a NumberFormatException);
-//     ASSERT_EQUAL(Integer::parseUnsignedInt((String)"Kona", 27), 411787);
+TEST(JavaLang, IntegerParseUnsignedInt) {
+    Integer exceptionResult;
 
-// }
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"0", 10), 0);
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"473", 10), 473);
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"+42", 10), 42);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String)"-0", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+    }
 
-// Test int Integer::parseUnsignedInt(String inputString)
-// TEST(JavaLang, IntegerParseUnsignedInt2) {
-//     String stringInput;
-//     int expectedResult;
-//     int actualResult;
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String)"-FF", 16);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+    }
 
-//     // Cast all case of inputing a string of type decimal number
-//     stringInput = (String) "0";
-//     expectedResult = 0;
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"1100110", 2), 102);
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"2147483647", 10), 2147483647);
 
-//     stringInput = (String) "1";
-//     expectedResult = 1;
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String)"-2147483648", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "-1";
-//     expectedResult = -1; throws a NumberFormatException
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "2147483648", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "13";
-//     expectedResult = 13;
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "99", 8);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "2147483647"; // Integer::MAX_VALUE
-//     expectedResult = Integer::MAX_VALUE;
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "Kona", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "-2147483648"; // Integer::MIN_VALUE
-//     expectedResult = Integer::MIN_VALUE; throws a NumberFormatException
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    ASSERT_EQUAL(Integer::parseUnsignedInt((String)"Kona", 27), 411787);
 
-//     stringInput = (String) "Not a Number";
-//     expectedResult = ; throws a NumberFormatException
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "Kona", 33);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
 
-//     stringInput = (String) "12345678901234567890123456789";
-//     expectedResult = ; // out of range throws a NumberFormatException
-//     actualResult = Integer::parseUnsignedInt(stringInput);
-//     ASSERT_EQUAL(expectedResult, actualResult);
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "Kona", 1);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
 
-// }
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "", 2);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("input string is null", e.getMessage().toString());
+    }
+
+    // Test out of range
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "4294967297", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::parseUnsignedInt((String) "12345678901234567890123456789", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+    }
+}
+
+TEST(JavaLang, IntegerParseUnsignedInt2) {
+    String stringInput;
+    int expectedResult;
+    int actualResult;
+    int exceptionResult;
+
+    // Cast all case of inputString a string of type decimal number
+    stringInput = (String) "0";
+    expectedResult = 0;
+    actualResult = Integer::parseUnsignedInt(stringInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    stringInput = (String) "1";
+    expectedResult = 1;
+    actualResult = Integer::parseUnsignedInt(stringInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    stringInput = (String) "-1";
+    try {
+        exceptionResult = Integer::parseUnsignedInt(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+    }
+
+    stringInput = (String) "13";
+    expectedResult = 13;
+    actualResult = Integer::parseUnsignedInt(stringInput);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    stringInput = (String) "Not a Number";
+    try {
+        exceptionResult = Integer::parseUnsignedInt(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    // Test out of range
+    stringInput = (String) "4294967297";
+    try {
+        exceptionResult = Integer::parseUnsignedInt(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+    }
+
+    stringInput = (String) "12345678901234567890123456789";
+    try {
+        exceptionResult = Integer::parseUnsignedInt(stringInput);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+    }
+}
 
 TEST(JavaLang, IntegerRemainderUnsigned) {
     // TODO(thoangminh): throw exception these cases later
@@ -1825,6 +1898,40 @@ TEST(JavaLang, IntegerToString) {
     ASSERT_STR(expectedResultToString, realResultToString);
 }
 
+TEST(JavaLang, IntegerToStringObject) {
+    // Input different values of type int to compare to the realResult of Integer::toString
+    Integer zeroIntegerToString = 0;
+    Integer oneIntegerToString = 1;
+    Integer positiveIntegerToString = 10;
+    Integer maxIntegerToString = 2147483647;
+    Integer minIntegerToString = -2147483647;
+
+    // Make a comparison between expected realResult and the real result
+    String expectedResultToString = "0";
+    String realResultToString = zeroIntegerToString.toStringObject();
+    ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
+
+    // Make a comparison between expected realResult and the real result
+    expectedResultToString = "1";
+    realResultToString = oneIntegerToString.toStringObject();
+    ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
+
+    // Make a comparison between expected realResult and the real result
+    expectedResultToString = "10";
+    realResultToString = positiveIntegerToString.toStringObject();
+    ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
+
+    // Make a comparison between expected realResult and the real result
+    expectedResultToString = (string) "2147483647";
+    realResultToString = maxIntegerToString.toStringObject();
+    ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
+
+    // Make a comparison between expected realResult and the real result
+    expectedResultToString = (string) "-2147483647";
+    realResultToString = minIntegerToString.toStringObject();
+    ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
+}
+
 // Test String Integer::toString(int i)
 // TEST(JavaLang, IntegerToString2) {
 //     ASSERT_STR((string) "0", Integer::toString(0));
@@ -2005,7 +2112,7 @@ TEST(JavaLang, IntegerToUnsignedLong) {
 //     System.out.println(Integer.valueOf( "-2147483648"));
 
 // }
-// Test Integer::valueOf(String inputStringtringInput, int radixIntInput)
+// Test Integer::valueOf(String inputString, int radixIntInput)
 // TEST(JavaLang, IntegerValueOf3) {    
 //     ASSERT_EQUAL(, Integer::valueOf((String) "0", 0)); // java.lang.NumberFormatException: radix 0 less than Character.MIN_RADIX
 //     ASSERT_EQUAL(, Integer::valueOf((String) "0", 1)); // java.lang.NumberFormatException: radix 1 less than Character.MIN_RADIX 
