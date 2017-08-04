@@ -38,7 +38,7 @@ namespace Java {
 	namespace Lang {
 		class Integer;
 		
-		class Integer : public Number {
+		class Integer : public Number , public virtual Comparable<Integer> {
         private:
 			int original;
  			string stringOriginal;
@@ -98,15 +98,6 @@ namespace Java {
              */
             ~Integer();
 
-        private:
-            /**
-             * Return size of a string
-             *
-             * @param int
-             * @return int
-             */
-            int stringSize(int x);
-
         public:
             /**
              * Integer to Char
@@ -137,6 +128,19 @@ namespace Java {
              * @param target
              * @return Integer
              */
+
+
+            /**
+             * Compares two Integer objects numerically.
+             *
+             * @param  Integer anotherInteger
+             * @return the value 0 if this Integer is equal to the argument Integer;
+             * a value less than 0 if this Integer is numerically less than the argument Integer;
+             * and a value greater than 0 if this Integer is numerically greater than
+             * the argument Integer (signed comparison).
+             */
+            int compareTo(const Integer &anotherInteger) const override ;
+
             Integer &operator=(const Integer &target);
 
             /**
@@ -217,15 +221,44 @@ namespace Java {
              */
             boolean operator>=(const Integer &target) const;
 
-            void operator+=(const Integer &target);
-            void operator-=(const Integer &target);
-            void operator/=(const Integer &target);
-            void operator*=(const Integer &target);
-            void operator%=(const Integer &target);
+            /**
+             * Add target to this Integer and assign the value to this Integer
+             *
+             * @param target
+             */
+            Integer &operator+=(const Integer &target);
+
+            /**
+             * Subtract target from this Integer and assign the value to this Integer
+             *
+             * @param target
+             */
+            Integer &operator-=(const Integer &target);
+
+            /**
+             * Divide this Integer with target and assign the value to this Integer
+             *
+             * @param target
+             */
+            Integer &operator/=(const Integer &target);
+
+            /**
+             * Multiply this Integer with target and assign the value to this Integer
+             *
+             * @param target
+             */
+            Integer &operator*=(const Integer &target);
+
+            /**
+             * Modulus this Integer with target and assign the value to this Integer
+             *
+             * @param target
+             */
+            Integer &operator%=(const Integer &target);
 
             friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
-              std::cout << target.original;
-              return os;
+                std::cout << target.original;
+                return os;
             }
 
             /**
@@ -255,17 +288,6 @@ namespace Java {
              * and a value greater than 0 if intA > intB
              */
             static int compare(int intA, int intB);
-
-            /**
-             * Compares two Integer objects numerically.
-             *
-             * @param  Integer anotherInteger
-             * @return the value 0 if this Integer is equal to the argument Integer;
-             * a value less than 0 if this Integer is numerically less than the argument Integer;
-             * and a value greater than 0 if this Integer is numerically greater than
-             * the argument Integer (signed comparison).
-             */
-            int compareTo(Integer anotherInteger);
 
             /**
              * Compares two int values numerically

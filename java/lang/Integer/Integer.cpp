@@ -174,7 +174,7 @@ int Integer::compare(int inputInt1, int inputInt2) {
 	return 0;
 }
 
-int Integer::compareTo(Integer anotherInteger) {
+int Integer::compareTo(const Integer &anotherInteger) const {
 	return compare(this->original, anotherInteger.intValue());
 }
 
@@ -616,4 +616,39 @@ String Integer::toString(int inputInt, int radix) {
     }
 
     return Integer::toUnsignedString(inputInt, radix);
+}
+
+Integer &Integer::operator+=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator-=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator/=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator*=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator%=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
 }

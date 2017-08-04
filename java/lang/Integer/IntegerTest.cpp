@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -37,19 +37,19 @@ using namespace Java::Lang;
 TEST(JavaLang, IntegerConstructor) {
     // Test Integer::Integer()
     Integer integerConstructorNoneParameter = 13;
-    ASSERT_EQUAL(13, integerConstructorNoneParameter.intValue() );
+    ASSERT_EQUAL(13, integerConstructorNoneParameter.intValue());
 
     // Test Integer::Integer(int original)
     Integer integerConstructorIntParameter(13);
-    ASSERT_EQUAL(13, integerConstructorIntParameter.intValue() );
+    ASSERT_EQUAL(13, integerConstructorIntParameter.intValue());
 
     // Test Integer::Integer(String stringInput)
     Integer integerConstructorStringParameter((String) "13");
-    ASSERT_EQUAL(13, integerConstructorStringParameter.intValue() );
+    ASSERT_EQUAL(13, integerConstructorStringParameter.intValue());
 
     // Test Integer::Integer(const Integer &integer)
     Integer integerConstructorIntegerParameter = 13;
-    ASSERT_EQUAL(13, integerConstructorIntegerParameter.intValue() );
+    ASSERT_EQUAL(13, integerConstructorIntegerParameter.intValue());
 }
 
 TEST(JavaLang, IntegerComparision) {
@@ -59,11 +59,11 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal targetNumber
     targetNumberComparision = 2;
-    ASSERT_TRUE(validNumberComparision == targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision ==  targetNumberComparision);
 
     // Test validNumber is not equal targetNumber
     targetNumberComparision = 101;
-    ASSERT_TRUE(validNumberComparision != targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision !=  targetNumberComparision);
 
     // Test validNumber is less than targetNumber
     targetNumberComparision = 3;
@@ -71,7 +71,7 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal or less than targetNumber
     targetNumberComparision = 3;
-    ASSERT_TRUE(validNumberComparision <= targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision <=  targetNumberComparision);
 
     // Test validNumber is more than targetNumber
     targetNumberComparision = 1;
@@ -79,7 +79,7 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal or more than targetNumber
     targetNumberComparision = 2;
-    ASSERT_TRUE(validNumberComparision >= targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision >=  targetNumberComparision);
 }
 
 TEST(JavaLang, IntegerOperator) {
@@ -132,9 +132,9 @@ TEST(JavaLang, IntegerCompareTo) {
     ASSERT_EQUAL(-1, validValueCompareTo.compareTo(moreThanValueCompareTo));
 
     // TODO - loint@foodtiny.com will review this case again
-    // Integer integerCompareTo = 1;
-    // Comparable<Integer> *comparable = &validValueCompareTo;
-    // ASSERT_EQUAL(1, comparable->compareTo(integerCompareTo));
+    Integer integerCompareTo = 1;
+    Comparable<Integer> *comparable = &validValueCompareTo;
+    ASSERT_EQUAL(1, comparable->compareTo(integerCompareTo));
 }
 
 TEST(JavaLang, IntegerCharValue) {
@@ -286,7 +286,7 @@ TEST(JavaLang, IntegerLongValue) {
     // Make a comparison between the not expected realResult and the real result
     long notExpectedResult = -11111;
     realResultLongValue = notExpectedIntegerLongValue.longValue();
-    ASSERT_FALSE(notExpectedResult == realResultLongValue);
+    ASSERT_FALSE(notExpectedResult ==  realResultLongValue);
 }
 
 TEST(JavaLang, IntegerFloatValue) {
@@ -294,13 +294,13 @@ TEST(JavaLang, IntegerFloatValue) {
     Integer positiveIntegerFloatValue = 12345;
     float expectedResultFloatValue = 12345.00;
     float realResultFloatValue = positiveIntegerFloatValue.floatValue();
-    ASSERT_TRUE(expectedResultFloatValue == realResultFloatValue);
+    ASSERT_TRUE(expectedResultFloatValue ==  realResultFloatValue);
 
 
     Integer negativeInteger = -12345;
     expectedResultFloatValue = static_cast<float> (-12345.00);
     realResultFloatValue = negativeInteger.floatValue();
-    ASSERT_TRUE(expectedResultFloatValue == realResultFloatValue);
+    ASSERT_TRUE(expectedResultFloatValue ==  realResultFloatValue);
 }
 
 TEST(JavaLang, IntegerDoubleValue) {
@@ -308,12 +308,12 @@ TEST(JavaLang, IntegerDoubleValue) {
     Integer positiveIntegerDoubleValue = 123456789;
     double expectedResultDoubleValue = 123456789.0;
     double realResultDoubleValue = positiveIntegerDoubleValue.doubleValue();
-    ASSERT_TRUE(expectedResultDoubleValue == realResultDoubleValue);
+    ASSERT_TRUE(expectedResultDoubleValue ==  realResultDoubleValue);
 
     Integer negativeInteger = -123456789;
     expectedResultDoubleValue = -123456789.0;
     realResultDoubleValue = negativeInteger.doubleValue();
-    ASSERT_TRUE(expectedResultDoubleValue == realResultDoubleValue);
+    ASSERT_TRUE(expectedResultDoubleValue ==  realResultDoubleValue);
 }
 
 TEST(JavaLang, IntegerBitCount) {
@@ -341,13 +341,13 @@ TEST(JavaLang, IntegerBitCount) {
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    inputInt = Integer::MAX_VALUE;  // 2,147,483,647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
+    inputInt = Integer::MAX_VALUE;  // 2, 147, 483, 647(10) = 0111 1111 1111 1111 1111 1111 1111 1111 (2)
     expectedResult = 31;
     actualResult = Integer::bitCount(inputInt);
     ASSERT_EQUAL(expectedResult, actualResult);
 
 /*// TODO(thoangminh): Check the case below:
-     inputInt = Integer::MIN_VALUE; // -2,147,483,648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
+     inputInt = Integer::MIN_VALUE; // -2, 147, 483, 648(10) = 1111 1111 1111 1111 1111 1111 1111 1111 1000 0000 0000 0000 0000 0000 0000 0000
      expectedResult = 33;
      actualResult = Integer::bitCount(inputInt);
      ASSERT_EQUAL(expectedResult, actualResult);*/
@@ -418,59 +418,6 @@ TEST(JavaLang, IntegerCompare) {
     ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , Integer::MAX_VALUE), -1);
     ASSERT_EQUAL(Integer::compare(Integer::MIN_VALUE , Integer::MIN_VALUE), 0);
 }
-
-// TEST(JavaLang, IntegerCompareTo) {
-//     Integer thisInteger;
-
-//     thisInteger = 0;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
-
-//     thisInteger = 1;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), 1 );
-//     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
-
-//     thisInteger = -1;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
-
-//     thisInteger = 13;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(13), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
-
-//     thisInteger = Integer::MAX_VALUE;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(13), 1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), 0);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 1);
-
-//     thisInteger = Integer::MIN_VALUE;
-//     ASSERT_EQUAL(thisInteger.compareTo(0), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(1), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(-1), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(13), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MAX_VALUE), -1);
-//     ASSERT_EQUAL(thisInteger.compareTo(Integer::MIN_VALUE), 0);
-
-// }
 
 TEST(JavaLang, IntegerCompareUnsigned) {
     ASSERT_EQUAL(Integer::compareUnsigned(0, 0), 0);
@@ -1820,7 +1767,6 @@ TEST(JavaLang, IntegerToOctalString) {
     ASSERT_STR((string) "20000000000", Integer::toOctalString(Integer::MIN_VALUE).toString());
 }
 
-// Test Integer::toString() const
 TEST(JavaLang, IntegerToString) {
     // Input different values of type int to compare to the realResult of Integer::toString
     Integer zeroIntegerToString = 0;
@@ -1889,25 +1835,15 @@ TEST(JavaLang, IntegerToStringObject) {
     ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
 }
 
-// Test String Integer::toString(int i)
-// TEST(JavaLang, IntegerToString2) {
-//     ASSERT_STR((string) "0", Integer::toString(0));
-//     ASSERT_STR((string) "1", Integer::toString(1));
-//     ASSERT_STR((string) "-1", Integer::toString(-1));
-//     ASSERT_STR((string) "13", Integer::toString(13));
-//     ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE));
-//     ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE));
+TEST(JavaLang, IntegerToString2) {
+    ASSERT_STR((string) "0", Integer::toString(0).toString());
+    ASSERT_STR((string) "1", Integer::toString(1).toString());
+    ASSERT_STR((string) "-1", Integer::toString(-1).toString());
+    ASSERT_STR((string) "13", Integer::toString(13).toString());
+    ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE).toString());
+    ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE).toString());
+}
 
-//     System.out.println(Integer.toString(0));
-//     System.out.println(Integer.toString(1));
-//     System.out.println(Integer.toString(-1));
-//     System.out.println(Integer.toString(13));
-//     System.out.println(Integer.toString(Integer.Integer::MAX_VALUE));
-//     System.out.println(Integer.toString(Integer.Integer::MIN_VALUE));
-
-// }
-
-// Test Integer::toString(int inputInt, int radix)
 TEST(JavaLang, IntegerToString3) {
     ASSERT_STR("0", Integer::toString(0, 10).toString());
     ASSERT_STR("473", Integer::toString(473, 10).toString());
