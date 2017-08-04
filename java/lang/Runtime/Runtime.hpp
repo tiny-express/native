@@ -32,7 +32,7 @@
 
 namespace Java {
 	namespace Lang {
-		class Runtime : public virtual Object {
+		class Runtime : public Object {
 		public:
 			Process exec(String &cmd);
 			Process exec(Array<String> &cmdarray);

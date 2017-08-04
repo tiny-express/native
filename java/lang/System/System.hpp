@@ -33,7 +33,7 @@
 
 namespace Java {
 	namespace Lang {
-		class System : public virtual Object {
+		class System : public Object {
 		public:
 			class in {
 			};

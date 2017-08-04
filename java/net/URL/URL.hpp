@@ -38,7 +38,7 @@ namespace Java {
 		// Pre-declaration
 		class URLConnection;
 		
-		class URL : public virtual Object {
+		class URL : public Object {
 		private:
 			String protocol;
 			String host;
@@ -61,7 +61,7 @@ namespace Java {
 			string toString() const;
 		};
 		
-		class URLConnection : public virtual Object {
+		class URLConnection : public Object {
 		private:
 			int connectTimeout;
 			int readTimeout;

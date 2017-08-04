@@ -33,7 +33,7 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-        class UrlEncoder : public virtual Object {
+        class UrlEncoder : public Object {
         public:
             static String encode(String s);
             static String encode(String s, String enc);

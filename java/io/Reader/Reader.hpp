@@ -33,7 +33,7 @@ using namespace Java::Lang;
 
 namespace Java {
 	namespace IO {
-		class Reader : public virtual Object {
+		class Reader : public Object {
 		
 		};
 	}

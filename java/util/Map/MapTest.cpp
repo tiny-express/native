@@ -24,18 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_RANDOM_ACCESS_HPP_
-#define JAVA_UTIL_RANDOM_ACCESS_HPP_
-
-#include "../../lang/Object/Object.hpp"
-
-using namespace Java::Lang;
-
-namespace Java {
-	namespace Util {
-		class RandomAccess : public Object {
-		};
-	}
+extern "C" {
+#include "../../../kernel/test.h"
 }
 
-#endif  // JAVA_UTIL_RANDOM_ACCESS_HPP_
+#include "Map.hpp"
+
+using namespace Java::Util;
+
+TEST (JavaUtil, MapEntryConstructor) {
+	ASSERT_STR("", "");
+}

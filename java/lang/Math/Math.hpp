@@ -33,7 +33,7 @@
 
 namespace Java {
 	namespace Lang {
-		class Math final : public virtual Object {
+		class Math final : public Object {
 		public:
 			static double abs(double a);
 			static float abs(float a);

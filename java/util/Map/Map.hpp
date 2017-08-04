@@ -24,24 +24,109 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_MAP_HPP
-#define NATIVE_JAVA_UTIL_MAP_HPP
+#ifndef NATIVE_JAVA_UTIL_MAP_HPP_
+#define NATIVE_JAVA_UTIL_MAP_HPP_
+
 #include "../../Lang.hpp"
+#include "../../util/Set/Set.hpp"
+#include "../../util/Comparator/Comparator.hpp"
 
 namespace Java {
 	namespace Util {
+		
 		template <class K, class V>
 		class Map {
-
+	
 		protected:
 			Map() {};
-			virtual ~Map() {};
+			~Map() {};
 
 		public:
 			/**
+			 * A map entry (key-value pair). The Map.entrySet method returns a collection-view
+			 * of the map, whose elements are of this class. The only way to obtain a reference to
+			 * a map entry is from the iterator of this collection-view.
+			 * These Map.Entry objects are valid only for the duration of the iteration;
+			 * more formally, the behavior of a map entry is undefined
+			 * if the backing map has been modified after the entry was returned by the iterator,
+			 * except through the setValue operation on the map entry.
+			 */
+			template <class K, class V>
+			class Entry {
+				
+				/**
+				 * Returns a comparator that compares Map.Entry
+				 * in natural order on key.
+				 *
+				 * @return Comparator<Map::Entry<K,V>>
+				 */
+				Comparator<Map::Entry<K,V>>	comparingByKey();
+				
+				/**
+				 * Returns a comparator that compares Map.Entry by key
+				 * using the given Comparator.
+				 *
+				 * @return Comparator<Map::Entry<K,V>>
+				 */
+				static Comparator<Map::Entry<K,V>> comparingByKey(Comparator cmp);
+				
+				/**
+				  * Returns a comparator that compares Map.Entry in natural order on value.
+				 * @return Comparator<Map::Entry<K,V>>
+				 */
+				static Comparator<Map::Entry<K,V>> comparingByValue();
+				
+				/**
+				 * Returns a comparator that compares Map.Entry by value
+				 * using the given Comparator.
+				 *
+				 * @return Comparator<Map.Entry<K,V>>
+				 */
+				Comparator<Map::Entry<K,V>>	comparingByValue(Comparator cmp);
+				
+				/**
+				 * Compares the specified object with this entry for equality.
+				 *
+				 * @param o
+				 * @return boolean
+				 */
+				boolean equals(Object o);
+				
+				/**
+				 * Returns the key corresponding to this entry.
+				 *
+				 * @return K
+				 */
+				K getKey();
+				
+				/**
+				 * Returns the value corresponding to this entry.
+				 *
+				 * @return V
+				 */
+				V getValue();
+				
+				/**
+				 * Returns the hash code value for this map entry.
+				 *
+				 * @return int
+				 */
+				int	hashCode();
+				
+				/**
+				 * Replaces the value corresponding to this entry
+				 * with the specified value (optional operation).
+				 *
+				 * @param value
+				 * @return
+				 */
+				V setValue(V value);
+			};
+			
+			/**
 			 * Removes all of the mappings from this map (optional operation).
 			 */
-			virtual void clear() = 0;
+			void clear() {}
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
@@ -49,7 +134,9 @@ namespace Java {
 			 * @param K key
 			 * @return boolean
 			 */
-			virtual boolean containsKey(const K &key) const = 0;
+			boolean containsKey(const K &key) {
+				return true;
+			}
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
@@ -57,7 +144,9 @@ namespace Java {
 			 * @param V value
 			 * @return boolean
 			 */
-			virtual boolean containsValue(const V &value) const = 0;
+			boolean containsValue(const V &value) {
+				return true;
+			}
 
 			/**
 			 * Returns the value to which the specified key is mapped,
@@ -66,24 +155,30 @@ namespace Java {
 			 * @param key
 			 * @return V
 			 */
-			virtual V get(const K &key) const = 0;
+			V get(const K &key) {
+				V v;
+				return v;
+			}
 
 			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
 			 * @return boolean
 			 */
-			virtual boolean isEmpty() const = 0;
+			boolean isEmpty() {
+				return false;
+			}
 
 			/**
 			 * Returns the number of key-value mappings in this map.
 			 *
 			 * @return int
 			 */
-			virtual int size() const = 0;
-
+			int size() {
+				return 0;
+			}
 		};
 	}
 }
 
-#endif //NATIVE_JAVA_UTIL_MAP_HPP
+#endif // NATIVE_JAVA_UTIL_MAP_HPP_

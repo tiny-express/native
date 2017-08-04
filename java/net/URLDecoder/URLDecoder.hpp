@@ -33,7 +33,7 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-        class URLDecoder : public virtual Object {
+        class URLDecoder : public Object {
         public:
             static String decode(String s);
             static String decode(String s, String enc);

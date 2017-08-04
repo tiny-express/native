@@ -31,7 +31,7 @@
 
 namespace Java {
 	namespace Lang {
-		class Process : public virtual Object {
+		class Process : public Object {
 			string toString() const;
 		};
 	}
