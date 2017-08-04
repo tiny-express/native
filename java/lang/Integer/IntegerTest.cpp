@@ -1738,13 +1738,6 @@ TEST(JavaLang, IntegerRotateRight) {
     ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , 13), 262144);
     ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
     ASSERT_EQUAL(Integer::rotateRight(Integer::MIN_VALUE , Integer::MIN_VALUE), -2147483648);
-
-    // System.out.println(Integer.rotateRight(0, 0));
-    // System.out.println(Integer.rotateRight(0, 1));
-    // System.out.println(Integer.rotateRight(0, -1));
-    // System.out.println(Integer.rotateRight(0, 13));
-    // System.out.println(Integer.rotateRight(0,Integer.Integer::MAX_VALUE));
-    // System.out.println(Integer.rotateRight(0,Integer.Integer::MIN_VALUE));
 }
 
 TEST(JavaLang, IntegerSignum) {
@@ -2005,36 +1998,102 @@ TEST(JavaLang, IntegerToUnsignedDecimalString) {
     ASSERT_STR("4294967041", Integer::toUnsignedString(-255).toString());
 }
 
-//TEST(JavaLang, IntegerValueOf) {
-//    ASSERT_EQUAL(0, Integer::valueOf((String) "0").intValue());
-//    ASSERT_EQUAL(1, Integer::valueOf((String) "1").intValue());
-//    ASSERT_EQUAL(-1, Integer::valueOf((String) "-1").intValue());
-//    ASSERT_EQUAL(13, Integer::valueOf((String) "13").intValue());
-//    ASSERT_EQUAL(2147483647, Integer::valueOf((String) "2147483647").intValue());
-//    ASSERT_EQUAL(-2147483648, Integer::valueOf((String) "-2147483648").intValue());
-//}
-//TEST(JavaLang, IntegerValueOf2) {
-//    ASSERT_EQUAL(0, Integer::valueOf(0).intValue());
-//    ASSERT_EQUAL(1, Integer::valueOf(1).intValue());
-//    ASSERT_EQUAL(-1, Integer::valueOf(-1).intValue());
-//    ASSERT_EQUAL(13, Integer::valueOf(13).intValue());
-//    ASSERT_EQUAL(2147483647, Integer::valueOf(2147483647).intValue());
-//    ASSERT_EQUAL(-2147483648, Integer::valueOf(-2147483648).intValue());
-//}
+TEST(JavaLang, IntegerValueOf) {
+    ASSERT_EQUAL(0, Integer::valueOf((String) "0").intValue());
+    ASSERT_EQUAL(1, Integer::valueOf((String) "1").intValue());
+    ASSERT_EQUAL(13, Integer::valueOf((String) "13").intValue());
 
-TEST(JavaLang, IntegerValueOf3) {
-//    ASSERT_EQUAL(, Integer::valueOf((String) "0", 0).intValue()); // java.lang.NumberFormatException: radix 0 less than Character.MIN_RADIX
-//    ASSERT_EQUAL(, Integer::valueOf((String) "0", 1).intValue()); // java.lang.NumberFormatException: radix 1 less than Character.MIN_RADIX
-//    ASSERT_EQUAL(, Integer::valueOf((String) "0", -1).intValue()); // java.lang.NumberFormatException: radix -1 less than Character.MIN_RADIX
-//    ASSERT_EQUAL(0, Integer::valueOf((String) "0", 13).intValue());
-//    ASSERT_EQUAL(, Integer::valueOf((String) "0", Integer::MAX_VALUE).intValue()); // java.lang.NumberFormatException: radix 2147483647 greater than Character.MAX_RADIX
-//    ASSERT_EQUAL(, Integer::valueOf((String) "0", Integer::MIN_VALUE).intValue()); // java.lang.NumberFormatException: radix -2147483648 less than Character.MIN_RADIX
-//
-//    ASSERT_EQUAL(1, Integer::valueOf((String) "1", 13).intValue());
-//    ASSERT_EQUAL(-1, Integer::valueOf((String) "-1", 13).intValue());
-//    ASSERT_EQUAL(16, Integer::valueOf((String) "13", 13).intValue());
-//    ASSERT_EQUAL(, Integer::valueOf((String) "2147483647", 13).intValue()); // java.lang.NumberFormatException: For input string: "2147483647"
-//    ASSERT_EQUAL(, Integer::valueOf((String) "-2147483648", 13).intValue()); // java.lang.NumberFormatException: For input string: "-2147483648"
+    Integer exceptionResult;
+    try {
+        exceptionResult = Integer::parseInt((String) "", 2);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("input string is null", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "-FF");
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    // Test out of range
+    try {
+        exceptionResult = Integer::valueOf((String) "21474836450");
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "-2147483658");
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
 }
 
-// TODO(thoangminh): check out of range input for all method later.
+TEST(JavaLang, IntegerValueOf2) {
+    ASSERT_EQUAL(0, Integer::valueOf(0).intValue());
+    ASSERT_EQUAL(1, Integer::valueOf(1).intValue());
+    ASSERT_EQUAL(-1, Integer::valueOf(-1).intValue());
+    ASSERT_EQUAL(13, Integer::valueOf(13).intValue());
+    ASSERT_EQUAL(2147483647, Integer::valueOf(2147483647).intValue());
+    ASSERT_EQUAL(-2147483648, Integer::valueOf(-2147483648).intValue());
+}
+
+TEST(JavaLang, IntegerValueOf3) {
+    ASSERT_EQUAL(0, Integer::valueOf((String)"0", 10).intValue());
+    ASSERT_EQUAL(473, Integer::valueOf((String)"473", 10).intValue());
+    ASSERT_EQUAL(42, Integer::valueOf((String)"+42", 10).intValue());
+    ASSERT_EQUAL(0, Integer::valueOf((String)"-0", 10).intValue());
+    ASSERT_EQUAL(-255, Integer::valueOf((String)"-FF", 16).intValue());
+    ASSERT_EQUAL(102, Integer::valueOf((String)"1100110", 2).intValue());
+    ASSERT_EQUAL(2147483647, Integer::valueOf((String)"2147483647", 10).intValue());
+    ASSERT_EQUAL(-2147483648, Integer::valueOf((String)"-2147483648", 10).intValue());
+    Integer exceptionResult;
+    try {
+        exceptionResult = Integer::valueOf((String) "2147483648", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "99", 8);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "Kona", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Not a number", e.getMessage().toString());
+    }
+
+    ASSERT_EQUAL(411787, Integer::valueOf((String)"Kona", 27).intValue());
+
+    try {
+        exceptionResult = Integer::valueOf((String) "Kona", 33);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "Kona", 1);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("radix out of range", e.getMessage().toString());
+    }
+
+    try {
+        exceptionResult = Integer::valueOf((String) "", 2);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("input string is null", e.getMessage().toString());
+    }
+}

@@ -490,36 +490,6 @@ int Integer::rotateRight(int inputInt, int distance) {
 	return ((unsigned int) inputInt >> distance) | (inputInt << -distance);
 }
 
-// int Integer::signum(int inputInt) {
-
-
-// }
-
-// int Integer::stringSize(int x) {
-
-
-// }
-
-// int Integer::sum(int a, int b) {
-
-
-// }
-
-// string Integer::toBinaryString(int inputInt) {
-
-
-// }
-
-// string Integer::toHexString(int inputInt) {
-
-
-// }
-
-// string Integer::toOctalString(int inputInt) {
-
-
-// }
-
 string Integer::toString() const {
 	return this->stringOriginal;
 }
@@ -624,29 +594,13 @@ String Integer::toOctalString(int inputInt) {
 }
 
 Integer Integer::valueOf(int inputInt) {
-    return Integer();
+    return Integer(inputInt);
 }
 
 Integer Integer::valueOf(String inputString) {
-    return Integer();
+    return Integer::valueOf(Integer::parseInt(inputString));
 }
 
-// string Integer::toUnsignedString(int inputInt, int radix) {
-
-
-// }
-
-// Integer Integer::valueOf(String inputString) {
-
-
-// }
-
-// Integer Integer::valueOf(int inputInt) {
-
-
-// }
-
-// Integer Integer::valueOf(String inputString, int radixIntInput) {
-
-
-// }
+Integer Integer::valueOf(String inputString, int radix) {
+    return Integer::valueOf(Integer::parseInt(inputString, radix));
+}
