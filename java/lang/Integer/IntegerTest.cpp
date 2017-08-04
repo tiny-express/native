@@ -73,11 +73,11 @@ TEST(JavaLang, IntegerComparision) {
     targetNumberComparision = 3;
     ASSERT_TRUE(validNumberComparision <=  targetNumberComparision);
 
-    // Test validNumber is more than targetNumber
+    // Test validNumber is greater than targetNumber
     targetNumberComparision = 1;
     ASSERT_TRUE(validNumberComparision> targetNumberComparision);
 
-    // Test validNumber is equal or more than targetNumber
+    // Test validNumber is equal or greater than targetNumber
     targetNumberComparision = 2;
     ASSERT_TRUE(validNumberComparision >=  targetNumberComparision);
 }
@@ -89,30 +89,80 @@ TEST(JavaLang, IntegerOperator) {
     Integer expectedResult;
     Integer actualResult;
 
-    // Make a summation with targetNumber
+    // Make a summation
     expectedResult = 8;
     actualResult = validNumberOperator + targetNumberOperator;
     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // Make a subtraction with targetNumber
+    expectedResult = 13;
+    actualResult += validNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // Make a subtraction
     expectedResult = 2;
     actualResult = validNumberOperator - targetNumberOperator;
     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // Make a multiplication with targetNumber
+    expectedResult = -3;
+    actualResult -= validNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // Make a multiplication
     expectedResult = 15;
     actualResult = validNumberOperator * targetNumberOperator;
     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
 
-    // Make a division with targetNumber
+    expectedResult = 75;
+    actualResult *= validNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+    // Make a division
     expectedResult = 1;
     actualResult = validNumberOperator / targetNumberOperator;
     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+    // TODO open when ArithmeticException available
+//    try {
+//        actualResult = validNumberOperator / 0;
+//    }
+//    catch (ArithmeticException &e) {
+//        ASSERT_STR("Divide by zero", e.getMessage().toString());
+//    }
 
-    // Make a modulo with targetNumber
+    expectedResult = 1;
+    actualResult = 5;
+    actualResult /= targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+//    try {
+//        actualResult /= 0;
+//    }
+//    catch (ArithmeticException &e) {
+//        ASSERT_STR("Divide by zero", e.getMessage().toString());
+//    }
+
+    // Make a modulo
     expectedResult = 2;
     actualResult = validNumberOperator % targetNumberOperator;
     ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+//    try {
+//        actualResult = validNumberOperator % 0;
+//    }
+//    catch (ArithmeticException &e) {
+//        ASSERT_STR("Divide by zero", e.getMessage().toString());
+//    }
+
+    expectedResult = 2;
+    actualResult = 5;
+    actualResult %= targetNumberOperator;
+    ASSERT_EQUAL(expectedResult.intValue(), actualResult.intValue());
+
+//    try {
+//        actualResult %= 0;
+//    }
+//    catch (ArithmeticException &e) {
+//        ASSERT_STR("Divide by zero", e.getMessage().toString());
+//    }
 }
 
 TEST(JavaLang, IntegerCompareTo) {
@@ -120,16 +170,16 @@ TEST(JavaLang, IntegerCompareTo) {
     Integer validValueCompareTo = 15;
     Integer lessThanValueCompareTo = 12;
     Integer equalValueCompareTo = 15;
-    Integer moreThanValueCompareTo = 20;
+    Integer greaterThanValueCompareTo = 20;
 
-    // Return 1 if validValue is more than lessThanValue
+    // Return 1 if validValue is greater than lessThanValue
     ASSERT_EQUAL(1, validValueCompareTo.compareTo(lessThanValueCompareTo));
 
-    // Return 0 if validValue is more than equalValue
+    // Return 0 if validValue is greater than equalValue
     ASSERT_EQUAL(0, validValueCompareTo.compareTo(equalValueCompareTo));
 
-    // Return -1 if validValue is less than moreThanValue
-    ASSERT_EQUAL(-1, validValueCompareTo.compareTo(moreThanValueCompareTo));
+    // Return -1 if validValue is less than greater ThanValue
+    ASSERT_EQUAL(-1, validValueCompareTo.compareTo(greaterThanValueCompareTo));
 
     // TODO - loint@foodtiny.com will review this case again
     Integer integerCompareTo = 1;
@@ -139,11 +189,11 @@ TEST(JavaLang, IntegerCompareTo) {
 
 TEST(JavaLang, IntegerCharValue) {
     // Input different values of type int to compare to the result of Integer::charValue
-    Integer zeroIntegerCharValue        = 0;
-    Integer oneIntegerCharValue         = 1;
-    Integer positiveIntegerCharValue    = 10;
-    Integer maxIntegerCharValue         = 2147483647;
-    Integer minIntegerCharValue         = -2147483647;
+    Integer zeroIntegerCharValue = 0;
+    Integer oneIntegerCharValue = 1;
+    Integer positiveIntegerCharValue = 10;
+    Integer maxIntegerCharValue = 2147483647;
+    Integer minIntegerCharValue = -2147483647;
 
     // Make a comparison between expected result and the real result
     char expectedResultCharValue = '0';
@@ -286,7 +336,7 @@ TEST(JavaLang, IntegerLongValue) {
     // Make a comparison between the not expected realResult and the real result
     long notExpectedResult = -11111;
     realResultLongValue = notExpectedIntegerLongValue.longValue();
-    ASSERT_FALSE(notExpectedResult ==  realResultLongValue);
+    ASSERT_FALSE(notExpectedResult == realResultLongValue);
 }
 
 TEST(JavaLang, IntegerFloatValue) {
@@ -294,11 +344,11 @@ TEST(JavaLang, IntegerFloatValue) {
     Integer positiveIntegerFloatValue = 12345;
     float expectedResultFloatValue = 12345.00;
     float realResultFloatValue = positiveIntegerFloatValue.floatValue();
-    ASSERT_TRUE(expectedResultFloatValue ==  realResultFloatValue);
+    ASSERT_TRUE(expectedResultFloatValue == realResultFloatValue);
 
 
     Integer negativeInteger = -12345;
-    expectedResultFloatValue = static_cast<float> (-12345.00);
+    expectedResultFloatValue = (float) -12345.0;
     realResultFloatValue = negativeInteger.floatValue();
     ASSERT_TRUE(expectedResultFloatValue ==  realResultFloatValue);
 }
@@ -308,12 +358,12 @@ TEST(JavaLang, IntegerDoubleValue) {
     Integer positiveIntegerDoubleValue = 123456789;
     double expectedResultDoubleValue = 123456789.0;
     double realResultDoubleValue = positiveIntegerDoubleValue.doubleValue();
-    ASSERT_TRUE(expectedResultDoubleValue ==  realResultDoubleValue);
+    ASSERT_TRUE(expectedResultDoubleValue == realResultDoubleValue);
 
     Integer negativeInteger = -123456789;
     expectedResultDoubleValue = -123456789.0;
     realResultDoubleValue = negativeInteger.doubleValue();
-    ASSERT_TRUE(expectedResultDoubleValue ==  realResultDoubleValue);
+    ASSERT_TRUE(expectedResultDoubleValue == realResultDoubleValue);
 }
 
 TEST(JavaLang, IntegerBitCount) {
@@ -613,12 +663,12 @@ TEST(JavaLang, IntegerDecode) {
 }
 
 TEST(JavaLang, IntegerDivideUnsigned) {
-    try {
+/*    try {
         int exceptionResult = Integer::divideUnsigned(0, 0);
     }
-    catch (NumberFormatException &e) {
+    catch (ArithmeticException &e) {
         ASSERT_STR("Divide by zero", e.getMessage().toString());
-    }
+    }*/
 
     ASSERT_EQUAL(Integer::divideUnsigned(0, 1), 0);
     ASSERT_EQUAL(Integer::divideUnsigned(0, -1), 0);
@@ -661,29 +711,6 @@ TEST(JavaLang, IntegerDivideUnsigned) {
     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , Integer::MAX_VALUE), 1);
     ASSERT_EQUAL(Integer::divideUnsigned(Integer::MIN_VALUE , Integer::MIN_VALUE), 1);
 }
-
-// TEST(JavaLang, IntegerDoubleValue) {
-//     Integer integerInput;
-
-//     integerInput = 0;
-//     ASSERT_DBL_NEAR(0.0, integerInput.doubleValue());
-
-//     integerInput = 1;
-//     ASSERT_DBL_NEAR(1.0, integerInput.doubleValue());
-
-//     integerInput = -1;
-//     ASSERT_DBL_NEAR(-1.0, integerInput.doubleValue());
-
-//     integerInput = 13;
-//     ASSERT_DBL_NEAR(13.0, integerInput.doubleValue());
-
-//     integerInput = Integer::MAX_VALUE;
-//     ASSERT_DBL_NEAR((double)Integer::MAX_VALUE, integerInput.doubleValue());
-
-//     integerInput = Integer::MIN_VALUE;
-//     ASSERT_DBL_NEAR((double)Integer::MIN_VALUE, integerInput.doubleValue());
-
-// }
 
 TEST(JavaLang, IntegerEquals) {
     Integer thisInteger;
@@ -1537,12 +1564,12 @@ TEST(JavaLang, IntegerParseUnsignedInt2) {
 }
 
 TEST(JavaLang, IntegerRemainderUnsigned) {
-    try {
+/*    try {
         int exceptionResult = Integer::remainderUnsigned(1, 0);
     }
-    catch (NumberFormatException &e) {
+    catch (ArithmeticException &e) {
         ASSERT_STR("Divide by zero", e.getMessage().toString());
-    }
+    }*/
 
     ASSERT_EQUAL(Integer::remainderUnsigned(0, 1), 0);
     ASSERT_EQUAL(Integer::remainderUnsigned(0, -1), 0);

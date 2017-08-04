@@ -110,7 +110,7 @@ boolean Integer::operator==(const Integer &target) const {
 }
 
 boolean Integer::operator!=(const Integer &target) const {
-	return !this->operator==(target);
+	return this->original == target.original;
 }
 
 boolean Integer::operator<(const Integer &target) const {
@@ -130,15 +130,62 @@ boolean Integer::operator>=(const Integer &target) const {
 }
 
 Integer Integer::operator/(const Integer &target) {
-	return ( this->original / target.original );
+    if (target.original == 0) {
+        // TODO throw ArithmeticException("Divide by zero");
+    }
+	return this->original / target.original;
 }
 
 Integer Integer::operator*(const Integer &target) {
-	return ( this->original * target.original );
+	return this->original * target.original;
 }
 
 Integer Integer::operator%(const Integer &target) {
-	return ( this->original % target.original );
+    if (target.original == 0) {
+        // TODO throw ArithmeticException("Divide by zero");
+    }
+	return this->original % target.original;
+}
+
+Integer &Integer::operator+=(const Integer &target) {
+    this->original += target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator-=(const Integer &target) {
+    this->original -= target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator/=(const Integer &target) {
+    if (target.original == 0) {
+        // TODO throw ArithmeticException("Divide by zero");
+    }
+    this->original /= target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator*=(const Integer &target) {
+    this->original *= target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
+}
+
+Integer &Integer::operator%=(const Integer &target) {
+    if (target.original == 0) {
+        // TODO throw ArithmeticException("Divide by zero");
+    }
+    this->original %= target.original;
+    free(this->stringOriginal);
+    this->stringOriginal = string_from_int(this->original);
+    return *this;
 }
 
 int Integer::bitCount(int inputInt) {
@@ -148,7 +195,7 @@ int Integer::bitCount(int inputInt) {
 		inputInt = -inputInt;
 	}
 
-	while((inputInt != 0) || resultBitCount == 32) {
+	while(inputInt != 0 || resultBitCount == 32) {
 		if((inputInt & 1) == 1) {
 			resultBitCount++;
 		}
@@ -222,16 +269,6 @@ int Integer::divideUnsigned(int dividend, int divisor) {
 	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
 }
 
-// double Integer::doubleValue() {
-
-
-// }
-
-// boolean Integer::equals(Integer obj) {
-
-
-// }
-
 // Integer Integer::getInteger(String inputString) {
 
 
@@ -247,14 +284,6 @@ int Integer::divideUnsigned(int dividend, int divisor) {
 
 // }
 
-// int Integer::hashCode() {
-
-
-// }
-
-// int Integer::hashCode(int inputInt) {
-// 	return inputInt;
-// }
 
 int Integer::highestOneBit(int inputInt)  {
 	inputInt |= (inputInt >> 1);
@@ -283,31 +312,31 @@ int Integer::numberOfLeadingZeros(int inputInt) {
         return 32;
 	}
 
-    int n = 1;
+    int numberOfZero = 1;
 
     if ((unsigned int) inputInt >> 16 == 0) {
-        n += 16;
+        numberOfZero += 16;
         inputInt <<= 16;
     }
 
     if ((unsigned int) inputInt >> 24 == 0) {
-        n += 8;
+        numberOfZero += 8;
         inputInt <<= 8;
     }
 
     if ((unsigned int) inputInt >> 28 == 0) {
-        n += 4;
+        numberOfZero += 4;
         inputInt <<= 4;
     }
 
     if ((unsigned int) inputInt >> 30 == 0) {
-        n += 2;
+        numberOfZero += 2;
         inputInt <<= 2;
     }
 
-    n -= (unsigned int) inputInt >> 31;
+    numberOfZero -= (unsigned int) inputInt >> 31;
 
-    return n;
+    return numberOfZero;
 }
 
 int Integer::numberOfTrailingZeros(int inputInt) {
@@ -382,7 +411,7 @@ int Integer::parseInt(String inputString, int radix) {
     long result = unsignedResult;
 
     if (isNegative) {
-        result = -unsignedResult;
+        return (int) -unsignedResult;
     }
 
     if (result > Integer::MAX_VALUE || result < Integer::MIN_VALUE) {
@@ -421,7 +450,9 @@ int Integer::parseUnsignedInt(String inputString, int radix) {
             inputString = inputString.getStringFromIndex(1);
         }
     }
+
     unsigned long unsignedResult = 0;
+
     try {
         unsignedResult = std::stoul(inputString.toString(), nullptr, radix);
     }
@@ -448,7 +479,7 @@ int Integer::parseUnsignedInt(String inputString) {
 
 int Integer::remainderUnsigned(int dividend, int divisor) {
     if (divisor == 0) {
-        //TODO throw ArithmeticException("Divide by zero");
+        // TODO throw ArithmeticException("Divide by zero");
         return 0;
     }
 	return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
@@ -482,7 +513,6 @@ int Integer::reverseBytes(int inputInt) {
 
 int Integer::rotateLeft(int inputInt, int distance) {
 	inputInt = (inputInt << distance) | ((unsigned int) inputInt >> -distance);
-
 	return inputInt;
 }
 
@@ -493,16 +523,6 @@ int Integer::rotateRight(int inputInt, int distance) {
 string Integer::toString() const {
 	return this->stringOriginal;
 }
-
-// String Integer::toString(int i) {
-
-
-// }
-
-// string Integer::toString(int inputInt, int radix) {
-
-
-// }
 
 long Integer::toUnsignedLong(int inputInt) {
 	// Make the overload bits is 0 to make sure inputInt in 32 bit type.
@@ -616,39 +636,4 @@ String Integer::toString(int inputInt, int radix) {
     }
 
     return Integer::toUnsignedString(inputInt, radix);
-}
-
-Integer &Integer::operator+=(const Integer &target) {
-    this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
-    return *this;
-}
-
-Integer &Integer::operator-=(const Integer &target) {
-    this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
-    return *this;
-}
-
-Integer &Integer::operator/=(const Integer &target) {
-    this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
-    return *this;
-}
-
-Integer &Integer::operator*=(const Integer &target) {
-    this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
-    return *this;
-}
-
-Integer &Integer::operator%=(const Integer &target) {
-    this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
-    return *this;
 }

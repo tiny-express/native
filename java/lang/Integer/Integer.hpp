@@ -58,12 +58,12 @@ namespace Java {
             /**
              * A constant holding the maximum value of type int
              */
-            static constexpr int MAX_VALUE = std::numeric_limits<int>::max(); // 2,147,483,647   2147483647
+            static constexpr int MAX_VALUE = std::numeric_limits<int>::max();  // 2,147,483,647   2147483647
 
             /**
              * A constant holding the minimum value of type int
              */
-            static constexpr int MIN_VALUE = std::numeric_limits<int>::min(); // –2,147,483,648  –2147483648
+            static constexpr int MIN_VALUE = std::numeric_limits<int>::min();  // –2,147,483,648  –2147483648
 
         public:
             /**
@@ -128,7 +128,7 @@ namespace Java {
              * @param target
              * @return Integer
              */
-
+            Integer &operator=(const Integer &target);
 
             /**
              * Compares two Integer objects numerically.
@@ -140,8 +140,6 @@ namespace Java {
              * the argument Integer (signed comparison).
              */
             int compareTo(const Integer &anotherInteger) const override ;
-
-            Integer &operator=(const Integer &target);
 
             /**
              * Make a summation with target Integer
@@ -160,6 +158,7 @@ namespace Java {
             /**
              * Make a division from this Integer with target
              *
+             * @throw ArithmeticException if target is zero
              * @return Integer
              */
             Integer operator/(const Integer &target);
@@ -174,6 +173,7 @@ namespace Java {
             /**
              * Make a modulo from this Integer with target
              *
+             * @throw ArithmeticException if target is zero
              * @return Integer
              */
             Integer operator%(const Integer &target);
@@ -238,6 +238,7 @@ namespace Java {
             /**
              * Divide this Integer with target and assign the value to this Integer
              *
+             * @throw ArithmeticException if target is zero
              * @param target
              */
             Integer &operator/=(const Integer &target);
@@ -252,6 +253,7 @@ namespace Java {
             /**
              * Modulus this Integer with target and assign the value to this Integer
              *
+             * @throw ArithmeticException if target is zero
              * @param target
              */
             Integer &operator%=(const Integer &target);
@@ -282,8 +284,8 @@ namespace Java {
             /**
              * Compares two int values numerically.
              *
-             * @param a
-             * @param b
+             * @param intA
+             * @param intB
              * @return the value 0 if intA == intB; a value less than 0 if intA < intB;
              * and a value greater than 0 if intA > intB
              */
@@ -293,8 +295,8 @@ namespace Java {
              * Compares two int values numerically
              * treating the values as unsigned.
              *
-             * @param a
-             * @param b
+             * @param intA
+             * @param intA
              * @return the value 0 if intA == intB;
              * a value less than 0 if intA < intB as unsigned values;
              * and a value greater than 0 if intA > intB as unsigned values
@@ -391,7 +393,7 @@ namespace Java {
              * compatible with Integer.hashCode() .
              *
              * @param inputInt
-             * @return a hash code value for a int value.
+             * @return a hash code value for inputInt
              */
             static int hashCode(int inputInt);
 
@@ -409,7 +411,7 @@ namespace Java {
             /**
              * Returns the value of this Integer as an int .
              *
-             * @return he value of this Integer as an int
+             * @return the value of this Integer as an int
              */
             int intValue() const override;
 
@@ -434,16 +436,17 @@ namespace Java {
 
             /**
              * Returns the greater of two int values
-             * as if by calling Math#max(int,int) Math.max .
+             * as if by calling Math::max(int, int).
              *
-             * @param target
-             * @return ntA if intA >= intB, else intB
+             * @param intA
+             * @param intB
+             * @return intA if intA >= intB, else intB
              */
             static int max(int intA, int intB);
 
             /**
              * Returns the smaller of two int values
-             * as if by calling Math#min(int,int) Math.min .
+             * as if by calling Math::min(int,int).
              *
              * @param intA
              * @param intB
@@ -454,7 +457,7 @@ namespace Java {
             /**
              * Returns the number of zero bits preceding the highest-order
              * ("leftmost") one-bit in the two's complement
-             * binary representation of the specified ...
+             * binary representation of the specified inputInt.
              *
              * @param inputInt
              * @return the number of zero bits preceding the highest-order ("leftmost") one-bit
@@ -465,9 +468,9 @@ namespace Java {
 
             /**
              * Returns the number of zero bits following the lowest-order ("rightmost")
-             * one-bit in the two's complement binary representation of the specified ...
+             * one-bit in the two's complement binary representation of the specified int value.
              *
-             * @param target
+             * @param inputInt
              * @return the number of zero bits preceding the highest-order ("leftmost") one-bit
              * in the two's complement binary representation of the specified int value,
              * or 32 if the value is equal to zero.
@@ -530,7 +533,7 @@ namespace Java {
              *
              * @param dividend
              * @param divisor
-             * @throw ArithmeticException if the divisor y is zero
+             * @throw ArithmeticException if the divisor is zero
              * @return the unsigned remainder of the first argument divided by the second argument
              */
             static int remainderUnsigned(int dividend, int divisor);
@@ -636,7 +639,7 @@ namespace Java {
             /**
              * Returns a String object representing this Integer 's value.
              *
-             * @return a string representation of the value of this object in base 10
+             * @return a String representation of the value of this object in base 10
              */
             String toStringObject();
 
@@ -645,7 +648,7 @@ namespace Java {
              * representing the specified integer.
              *
              * @param inputInt
-             * @return a string representation of the argument in base 10.
+             * @return a String representation of inputInt in base 10.
              */
             static String toString(int inputInt);
 
@@ -657,7 +660,7 @@ namespace Java {
              * @param inputInt
              * @param radix
              * @throw UnsupportedOperationException - if radix is not support
-             * @return a string representation of the argument in the specified radix.
+             * @return a String representation of inputInt in the specified radix.
              */
             static String toString(int inputInt, int radix);
 
