@@ -110,7 +110,7 @@ boolean Integer::operator==(const Integer &target) const {
 }
 
 boolean Integer::operator!=(const Integer &target) const {
-	return this->original == target.original;
+	return this->original != target.original;
 }
 
 boolean Integer::operator<(const Integer &target) const {

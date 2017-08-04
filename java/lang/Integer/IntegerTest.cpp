@@ -59,11 +59,11 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal targetNumber
     targetNumberComparision = 2;
-    ASSERT_TRUE(validNumberComparision ==  targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision == targetNumberComparision);
 
     // Test validNumber is not equal targetNumber
     targetNumberComparision = 101;
-    ASSERT_TRUE(validNumberComparision !=  targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision != targetNumberComparision);
 
     // Test validNumber is less than targetNumber
     targetNumberComparision = 3;
@@ -71,7 +71,7 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal or less than targetNumber
     targetNumberComparision = 3;
-    ASSERT_TRUE(validNumberComparision <=  targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision <= targetNumberComparision);
 
     // Test validNumber is greater than targetNumber
     targetNumberComparision = 1;
@@ -79,7 +79,7 @@ TEST(JavaLang, IntegerComparision) {
 
     // Test validNumber is equal or greater than targetNumber
     targetNumberComparision = 2;
-    ASSERT_TRUE(validNumberComparision >=  targetNumberComparision);
+    ASSERT_TRUE(validNumberComparision >= targetNumberComparision);
 }
 
 TEST(JavaLang, IntegerOperator) {
@@ -236,7 +236,7 @@ TEST(JavaLang, IntegerStringValue) {
 
     // Make a comparison between expected result and the real result
     expectedResultStringValue = (string) "1";
-    realResultStringValue  = oneIntegerStringValue.stringValue();
+    realResultStringValue = oneIntegerStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue, realResultStringValue);
 
     // Make a comparison between expected result and the real result
@@ -350,7 +350,7 @@ TEST(JavaLang, IntegerFloatValue) {
     Integer negativeInteger = -12345;
     expectedResultFloatValue = (float) -12345.0;
     realResultFloatValue = negativeInteger.floatValue();
-    ASSERT_TRUE(expectedResultFloatValue ==  realResultFloatValue);
+    ASSERT_TRUE(expectedResultFloatValue == realResultFloatValue);
 }
 
 TEST(JavaLang, IntegerDoubleValue) {
@@ -406,22 +406,22 @@ TEST(JavaLang, IntegerBitCount) {
 TEST(JavaLang, IntegerByteValue) {
     Integer integerInput;
 
-    integerInput = 0;  
+    integerInput = 0;
     ASSERT_EQUAL((byte) 0, integerInput.byteValue());
 
-    integerInput = 1;  
+    integerInput = 1;
     ASSERT_EQUAL((byte) 1, integerInput.byteValue());
 
-    integerInput = -1;  
+    integerInput = -1;
     ASSERT_EQUAL((byte) -1, integerInput.byteValue());
 
-    integerInput = 13;  
+    integerInput = 13;
     ASSERT_EQUAL((byte) 13, integerInput.byteValue());
 
-    integerInput = Integer::MAX_VALUE;  
+    integerInput = Integer::MAX_VALUE;
     ASSERT_EQUAL((byte) -1, integerInput.byteValue());
 
-    integerInput = Integer::MIN_VALUE;  
+    integerInput = Integer::MIN_VALUE;
     ASSERT_EQUAL((byte) 0, integerInput.byteValue());
 }
 
