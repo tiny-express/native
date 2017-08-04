@@ -103,6 +103,12 @@ void BitSet::recalculateWordsInUse() {
     this->wordsInUse = indexOfWordsArray + 1;
 }
 
+void BitSet::trimToSize() {
+    if (this->wordsInUse != this->words.length) {
+        this->words = Arrays::copyOf(this->words, this->wordsInUse);
+    }
+}
+
 BitSet::BitSet() {
     this->initializeWords(BITS_PER_WORD);
     this->sizeIsSticky = false;
@@ -122,13 +128,20 @@ BitSet::BitSet(const Array<long> &words) {
     this->wordsInUse = words.length;
 }
 
+BitSet::BitSet(const BitSet &bitSet){
+    this->words = Arrays::copyOf(bitSet.words,bitSet.words.length);
+    this->wordsInUse = bitSet.wordsInUse;
+    this->sizeIsSticky = bitSet.sizeIsSticky;
+}
+
 BitSet::~BitSet() { }
 
 int BitSet::cardinality() const {
     int numberOfBitsSetToTrue = 0;
     int indexOfWords;
     for (indexOfWords = 0; indexOfWords < this->wordsInUse; indexOfWords++) {
-        numberOfBitsSetToTrue = numberOfBitsSetToTrue + Long::bitCount(this->words[indexOfWords]);
+        numberOfBitsSetToTrue = numberOfBitsSetToTrue +
+                Long::bitCount(this->words[indexOfWords]);
     }
     return numberOfBitsSetToTrue;
 }
@@ -200,7 +213,11 @@ void BitSet::clear(int fromIndex, int toIndex) {
 }
 
 BitSet BitSet::clone() {
-    // TODO(truongchauhien): Implement this method later.
+    if (!sizeIsSticky) {
+        this->trimToSize();
+    }
+
+    return *this;
 }
 
 boolean BitSet::equals(const Object &target) const {
@@ -302,7 +319,8 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
     }
 
     // Process the last word.
-    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+    long lastWordMask =
+            static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
     if (((toIndex - 1) & BIT_INDEX_MASK) < (fromIndex & BIT_INDEX_MASK)) {
         result.words[targetWords - 1] =
                 (static_cast<unsigned long>(this->words[sourceIndex]) >> fromIndex) |
@@ -355,7 +373,8 @@ int BitSet::length() const {
 
 int BitSet::nextClearBit(int fromIndex) const {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException(String("fromIndex < 0: ") + String::valueOf(fromIndex));
+        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+                                                String::valueOf(fromIndex));
     }
 
     int indexOfWord = wordIndex(fromIndex);
@@ -457,7 +476,8 @@ int BitSet::previousSetBit(int fromIndex) const {
         return this->length() - 1;
     }
 
-    long word = this->words[indexOfWord] & (static_cast<unsigned long>(WORD_MASK) >> (-(fromIndex + 1) & 0b111111));
+    long word = this->words[indexOfWord] &
+            (static_cast<unsigned long>(WORD_MASK) >> (-(fromIndex + 1) & 0b111111));
 
     while (indexOfWord >= 0) {
         if (word != 0) {

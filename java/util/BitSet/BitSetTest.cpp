@@ -47,6 +47,15 @@ TEST(JavaUtil, BitSetConstructor) {
     } catch (NegativeArraySizeException ex) {
         ASSERT_STR("numberOfBits < 0: -1", ex.getMessage().toString());
     }
+
+    initialSizeBitSet.set(50, 100, true);
+    ASSERT_EQUAL(false, initialSizeBitSet.get(0));
+    ASSERT_EQUAL(true, initialSizeBitSet.get(50));
+    BitSet clonedBitSet(initialSizeBitSet);
+    ASSERT_EQUAL(100, clonedBitSet.length());
+    ASSERT_EQUAL(128, clonedBitSet.size());
+    ASSERT_EQUAL(false, clonedBitSet.get(0));
+    ASSERT_EQUAL(true, clonedBitSet.get(50));
 }
 
 TEST(JavaUtil, BitSetCardinality) {
@@ -130,7 +139,26 @@ TEST(JavaUtil, BitSetClear) {
 }
 
 TEST(JavaUtil, BitSetClone) {
-    // TODO(truongchauhien): Create test later.
+    BitSet bitSet1(100);
+    ASSERT_EQUAL(0, bitSet1.length());
+    ASSERT_EQUAL(128, bitSet1.size());
+
+    BitSet clonedBitSet = bitSet1.clone();
+    ASSERT_EQUAL(0, clonedBitSet.length());
+    ASSERT_EQUAL(128, clonedBitSet.size());
+
+    BitSet bitSet2;
+    // Expanding words array.
+    bitSet2.set(100, true);
+    bitSet2.set(100, false);
+    ASSERT_EQUAL(0, bitSet2.length());
+    ASSERT_EQUAL(128, bitSet2.size());
+
+    clonedBitSet = bitSet2.clone();
+    ASSERT_EQUAL(0, clonedBitSet.length());
+    // Trimming on clones.
+    ASSERT_EQUAL(0, bitSet2.size());
+    ASSERT_EQUAL(0, clonedBitSet.size());
 }
 
 TEST(JavaUtil, BitSetEquals) {

@@ -68,11 +68,25 @@ namespace Java {
             BitSet(int numberOfBits);
 
             /**
+             * BitSet Constructor
+             * Creates a bit set from another bit set instance.
+             *
+             * @param bitSet
+             */
+            BitSet(const BitSet &bitSet);
+
+            /**
              * BitSet Destructor
              */
             virtual ~BitSet();
 
         private:
+            /**
+             * Creates a bit set using words as the internal representation.
+             * The last word (if there is one) must be non-zero.
+             *
+             * @param words
+             */
             BitSet(const Array<long> &words);
 
         private:
@@ -119,6 +133,11 @@ namespace Java {
              * Sets the field wordsInUse to the logical size in words of the bit set.
              */
             void recalculateWordsInUse();
+
+            /**
+             * Attempts to reduce internal storage used for the bits in this bit set.
+             */
+            void trimToSize();
 
         public:
             void bitAnd(const BitSet &set);
