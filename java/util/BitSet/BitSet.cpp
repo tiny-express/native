@@ -39,10 +39,12 @@ int BitSet::wordIndex(int bitIndex) {
 
 void BitSet::checkRange(int fromIndex, int toIndex) {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException("fromIndex < 0: " + String::valueOf(fromIndex));
+        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+                                                String::valueOf(fromIndex));
     }
     if (toIndex < 0) {
-        throw IndexOutOfBoundsException("toIndex < 0: " + String::valueOf(toIndex));
+        throw IndexOutOfBoundsException(String("toIndex < 0: ") +
+                                                String::valueOf(toIndex));
     }
     if (fromIndex > toIndex) {
         throw IndexOutOfBoundsException(String("fromIndex: ") + String::valueOf(fromIndex) +
@@ -108,7 +110,8 @@ BitSet::BitSet() {
 
 BitSet::BitSet(int numberOfBits) {
     if (numberOfBits < 0) {
-        throw NegativeArraySizeException("numberOfBits < 0: " + String::valueOf(numberOfBits));
+        throw NegativeArraySizeException(String("numberOfBits < 0: ") +
+                                                 String::valueOf(numberOfBits));
     }
     this->initializeWords(numberOfBits);
     this->sizeIsSticky = true;
@@ -140,7 +143,8 @@ void BitSet::clear() {
 
 void BitSet::clear(int bitIndex) {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+        throw IndexOutOfBoundsException("bitIndex < 0: " +
+                                                String::valueOf(bitIndex));
     }
 
     int indexOfWord = wordIndex(bitIndex);
@@ -206,7 +210,8 @@ boolean BitSet::equals(const Object &target) const {
 
 void BitSet::flip(int bitIndex) {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException(String("bitIndex < 0: ") + String::valueOf(bitIndex));
+        throw IndexOutOfBoundsException(String("bitIndex < 0: ") +
+                                                String::valueOf(bitIndex));
     }
     int indexOfWord = wordIndex(bitIndex);
     this->expandTo(indexOfWord);
@@ -250,7 +255,8 @@ void BitSet::flip(int fromIndex, int toIndex) {
 
 boolean BitSet::get(int bitIndex) const {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+        throw IndexOutOfBoundsException(String("bitIndex < 0: ") +
+                                                String::valueOf(bitIndex));
     }
 
     int indexOfWord = wordIndex(bitIndex);
@@ -347,9 +353,130 @@ int BitSet::length() const {
     return logicalSize;
 }
 
+int BitSet::nextClearBit(int fromIndex) const {
+    if (fromIndex < 0) {
+        throw IndexOutOfBoundsException(String("fromIndex < 0: ") + String::valueOf(fromIndex));
+    }
+
+    int indexOfWord = wordIndex(fromIndex);
+    if (indexOfWord >= this->wordsInUse) {
+        return fromIndex;
+    }
+
+    long word = ~this->words[indexOfWord] & (WORD_MASK << fromIndex);
+
+    while (indexOfWord <= this->wordsInUse) {
+        if (word != 0) {
+            return (indexOfWord * BITS_PER_WORD) + Long::numberOfTrailingZeros(word);
+        }
+
+        indexOfWord = indexOfWord + 1;
+        if (indexOfWord == this->wordsInUse) {
+            return this->wordsInUse * BITS_PER_WORD;
+        }
+
+        word = ~this->words[indexOfWord];
+    }
+
+    // while loop must return a value, so don't need to return anything after while loop.
+}
+
+int BitSet::nextSetBit(int fromIndex) const {
+    if (fromIndex < 0) {
+        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+                                                String::valueOf(fromIndex));
+    }
+
+    int indexOfWord = wordIndex(fromIndex);
+    if (indexOfWord >= this->wordsInUse) {
+        return -1;
+    }
+
+    long word = this->words[indexOfWord] & (WORD_MASK << fromIndex);
+
+    while (indexOfWord <= this->wordsInUse) {
+        if (word != 0) {
+            return (indexOfWord * BITS_PER_WORD) + Long::numberOfTrailingZeros(word);
+        }
+
+        indexOfWord = indexOfWord + 1;
+        if (indexOfWord == this->wordsInUse) {
+            return -1;
+        }
+
+        word = this->words[indexOfWord];
+    }
+
+    // while loop must return a value, so don't need to return anything after while loop.
+}
+
+int BitSet::previousClearBit(int fromIndex) const {
+    if (fromIndex < 0) {
+        if (fromIndex == -1) {
+            return -1;
+        }
+        throw IndexOutOfBoundsException(String("fromIndex < -1: ") +
+                                                String::valueOf(fromIndex));
+    }
+
+    int indexOfWord = wordIndex(fromIndex);
+    if (indexOfWord >= this->wordsInUse) {
+        return fromIndex;
+    }
+
+    long word = ~this->words[indexOfWord] &
+            (static_cast<unsigned long>(WORD_MASK) >> (-(fromIndex + 1) & 0b111111));
+
+    while (indexOfWord >= 0) {
+        if (word != 0) {
+            return (indexOfWord + 1) * BITS_PER_WORD - 1 - Long::numberOfLeadingZeros(word);
+        }
+
+        if (indexOfWord == 0) {
+            return -1;
+        }
+
+        indexOfWord = indexOfWord - 1;
+        word = ~this->words[indexOfWord];
+    }
+
+    // while loop must return a value, so don't need to return anything after while loop.
+}
+
+int BitSet::previousSetBit(int fromIndex) const {
+    if (fromIndex < 0) {
+        if (fromIndex == -1) {
+            return -1;
+        }
+        throw IndexOutOfBoundsException(String("fromIndex < -1: ") +
+                                                String::valueOf(fromIndex));
+    }
+
+    int indexOfWord = wordIndex(fromIndex);
+    if (indexOfWord >= this->wordsInUse) {
+        return this->length() - 1;
+    }
+
+    long word = this->words[indexOfWord] & (static_cast<unsigned long>(WORD_MASK) >> (-(fromIndex + 1) & 0b111111));
+
+    while (indexOfWord >= 0) {
+        if (word != 0) {
+            return (indexOfWord + 1) * BITS_PER_WORD - 1 - Long::numberOfLeadingZeros(word);
+        }
+
+        if (indexOfWord == 0) {
+            return -1;
+        }
+
+        indexOfWord = indexOfWord - 1;
+        word = this->words[indexOfWord];
+    }
+}
+
 void BitSet::set(int bitIndex) {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException("bitIndex < 0: " + String::valueOf(bitIndex));
+        throw IndexOutOfBoundsException(String("bitIndex < 0: ") +
+                                                String::valueOf(bitIndex));
     }
 
     int indexOfWord = wordIndex(bitIndex);

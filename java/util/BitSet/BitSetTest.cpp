@@ -41,6 +41,7 @@ TEST(JavaUtil, BitSetConstructor) {
     ASSERT_EQUAL(0, initialSizeBitSet.length());
     ASSERT_EQUAL(128, initialSizeBitSet.size());
 
+    // numberOfBits < 0
     try {
         BitSet initialNegativeSizeBitSet(-1);
     } catch (NegativeArraySizeException ex) {
@@ -173,24 +174,28 @@ TEST(JavaUtil, BitSetFlip) {
     ASSERT_EQUAL(true, bitSet.get(7));
     ASSERT_EQUAL(false, bitSet.get(8));
 
+    // bitIndex < 0
     try {
         bitSet.flip(-1);
     } catch (IndexOutOfBoundsException ex) {
         ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
     }
 
+    // fromIndex < 0
     try {
         bitSet.flip(-1, 9);
     } catch (IndexOutOfBoundsException ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
+    // toIndex < 0
     try {
         bitSet.flip(0, -1);
     } catch (IndexOutOfBoundsException ex) {
         ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
     }
 
+    // fromIndex > toIndex
     try {
         bitSet.flip(5, 1);
     } catch (IndexOutOfBoundsException ex) {
@@ -257,6 +262,103 @@ TEST(JavaUtil, BitSetLength) {
     ASSERT_EQUAL(0, defaultBitSet.length());
     BitSet initialSizeBitSet(100);
     ASSERT_EQUAL(0, initialSizeBitSet.length());
+}
+
+TEST(JavaUtil, BitSetNextClearBit) {
+    BitSet bitSet;
+    // fromIndex < 0
+    try {
+        bitSet.nextClearBit(-1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+    }
+    ASSERT_EQUAL(0, bitSet.length());
+    // fromIndex >= logical length.
+    ASSERT_EQUAL(100, bitSet.nextClearBit(100));
+
+    bitSet.set(0, 100, true);
+    bitSet.set(100, 200, false);
+    bitSet.set(200, 300, true);
+    ASSERT_EQUAL(100, bitSet.nextClearBit(0));
+    ASSERT_EQUAL(300, bitSet.nextClearBit(200));
+    // logical length is power of 2.
+    bitSet.set(0, 512, true);
+    ASSERT_EQUAL(512, bitSet.nextClearBit(0));
+}
+
+TEST(JavaUtil, BitSetNextSetBit) {
+    BitSet bitSet;
+    // fromIndex < 0
+    try {
+        bitSet.nextClearBit(-1);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+    }
+    ASSERT_EQUAL(0, bitSet.length());
+    // fromIndex >= logical length.
+    ASSERT_EQUAL(-1, bitSet.nextSetBit(0));
+    ASSERT_EQUAL(-1, bitSet.nextSetBit(100));
+
+    bitSet.set(0, 100, true);
+    bitSet.set(100, 200, false);
+    bitSet.set(200, 300, true);
+    ASSERT_EQUAL(0, bitSet.nextSetBit(0));
+    ASSERT_EQUAL(5, bitSet.nextSetBit(5));
+    ASSERT_EQUAL(200, bitSet.nextSetBit(100));
+    ASSERT_EQUAL(200, bitSet.nextSetBit(200));
+    ASSERT_EQUAL(-1, bitSet.nextSetBit(300));
+}
+
+TEST(JavaUtil, BitSetPreviousClearBit) {
+    BitSet bitSet;
+    // fromIndex = -1
+    ASSERT_EQUAL(-1, bitSet.previousClearBit(-1));
+    // fromIndex < -1
+    try {
+        bitSet.previousClearBit(-5);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
+    }
+
+    ASSERT_EQUAL(0, bitSet.length());
+    // fromIndex > logical size
+    ASSERT_EQUAL(0, bitSet.previousClearBit(0));
+    ASSERT_EQUAL(100, bitSet.previousClearBit(100));
+
+    bitSet.set(0, 100, true);
+    bitSet.set(100, 200, false);
+    bitSet.set(200, 300, true);
+    ASSERT_EQUAL(-1, bitSet.previousClearBit(0));
+    ASSERT_EQUAL(100, bitSet.previousClearBit(100));
+    ASSERT_EQUAL(199, bitSet.previousClearBit(200));
+    ASSERT_EQUAL(199, bitSet.previousClearBit(250));
+    ASSERT_EQUAL(512, bitSet.previousClearBit(512));
+}
+
+TEST(JavaUtil, BitSetPreviousSetBit) {
+    BitSet bitSet;
+    // fromIndex = -1
+    ASSERT_EQUAL(-1, bitSet.previousSetBit(-1));
+    // fromIndex < -1
+    try {
+        bitSet.previousSetBit(-5);
+    } catch (IndexOutOfBoundsException ex) {
+        ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
+    }
+
+    bitSet.set(0, 100, true);
+    ASSERT_EQUAL(100, bitSet.length());
+    // fromIndex > logical
+    ASSERT_EQUAL(99, bitSet.previousSetBit(1000));
+
+    // Reset bitSet.
+    bitSet.clear();
+
+    bitSet.set(0, 100, false);
+    bitSet.set(100, 200, true);
+    ASSERT_EQUAL(-1, bitSet.previousSetBit(99));
+    ASSERT_EQUAL(100, bitSet.previousSetBit(100));
+    ASSERT_EQUAL(199, bitSet.previousSetBit(200));
 }
 
 TEST(JavaUtil, BitSetGet) {

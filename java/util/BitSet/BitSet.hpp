@@ -247,9 +247,49 @@ namespace Java {
              * @return int
              */
             int length() const;
+
+            /**
+             * Returns the index of the first bit that is set to false that occurs on or after
+             * the specified starting index.
+             *
+             * @param fromIndex
+             * @return int
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             int nextClearBit(int fromIndex) const;
+
+            /**
+             * Returns the index of the first bit that is set to true that occurs on or after
+             * the specified starting index.
+             * If no such bit exists then -1 is returned.
+             *
+             * @param fromIndex
+             * @return int
+             * @throw IndexOutOfBoundsException - if the specified index is negative.
+             */
             int nextSetBit(int fromIndex) const;
+
+            /**
+             * Returns the index of the nearest bit that is set to false that occurs on or
+             * before the specified starting index.
+             * If no such bit exists, or if -1 is given as the starting index,
+             * then -1 is returned.
+             *
+             * @param fromIndex
+             * @return int
+             * @throw IndexOutOfBoundsException - if the specified index is less than -1.
+             */
             int previousClearBit(int fromIndex) const;
+
+            /**
+             * Returns the index of the nearest bit that is set to true that occurs on or
+             * before the specified starting index.
+             * If no such bit exists, or if -1 is given as the starting index, then -1 is returned.
+             *
+             * @param fromIndex
+             * @return int
+             * @throw IndexOutOfBoundsException - if the specified index is less than -1.
+             */
             int previousSetBit(int fromIndex) const;
 
             /**
