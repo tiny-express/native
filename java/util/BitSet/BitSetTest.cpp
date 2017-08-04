@@ -162,7 +162,27 @@ TEST(JavaUtil, BitSetClone) {
 }
 
 TEST(JavaUtil, BitSetEquals) {
-    // TODO(truongchauhien): Create test later.
+    String justString("Hello! I'm not a BitSet!");
+    BitSet bitSet;
+    ASSERT_FALSE(bitSet.equals(justString));
+    BitSet anotherBitSet(100);
+    // Two of bit sets are equals because they contains only 0 bits.
+    ASSERT_TRUE(bitSet.equals(anotherBitSet));
+    anotherBitSet.set(100, true);
+    ASSERT_EQUAL(101, anotherBitSet.length());
+    ASSERT_EQUAL(128, anotherBitSet.size());
+    ASSERT_EQUAL(0, bitSet.length());
+    // Two of bit sets have difference logical length.
+    ASSERT_FALSE(bitSet.equals(anotherBitSet));
+
+    bitSet.clear();
+    anotherBitSet.clear();
+    ASSERT_TRUE(bitSet.equals(anotherBitSet));
+
+    bitSet.set(0, 1024, true);
+    anotherBitSet.set(0, 1024, true);
+    anotherBitSet.set(512, false);
+    ASSERT_FALSE(bitSet.equals(anotherBitSet));
 }
 
 TEST(JavaUtil, BitSetFlip) {
