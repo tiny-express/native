@@ -82,20 +82,20 @@ StringBuilder::~StringBuilder() {
     free(original);
 }
 
-StringBuilder StringBuilder::append(const Boolean &target) {
+StringBuilder &StringBuilder::append(const Boolean &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::append(boolean target) {
+StringBuilder &StringBuilder::append(boolean target) {
     return this->append(Boolean(target));
 }
 
-StringBuilder StringBuilder::append(const Character &target) {
+StringBuilder &StringBuilder::append(const Character &target) {
     Character *pointerToTarget = const_cast<Character *>(&target);
     return this->append(pointerToTarget->charValue());
 }
 
-StringBuilder StringBuilder::append(char target) {
+StringBuilder &StringBuilder::append(char target) {
     int newLength = this->currentLength + 1;
     this->ensureCapacity(newLength);
     this->original[this->currentLength] = target;
@@ -103,7 +103,7 @@ StringBuilder StringBuilder::append(char target) {
     return *this;
 }
 
-StringBuilder StringBuilder::append(const Array<Character> &target) {
+StringBuilder &StringBuilder::append(const Array<Character> &target) {
     int newLength = this->currentLength + target.length;
     this->ensureCapacity(newLength);
     int indexOfOriginal = this->currentLength;
@@ -115,7 +115,7 @@ StringBuilder StringBuilder::append(const Array<Character> &target) {
     return *this;
 }
 
-StringBuilder StringBuilder::append(const Array<char> &target) {
+StringBuilder &StringBuilder::append(const Array<char> &target) {
     int newLength = this->currentLength + target.length;
     this->ensureCapacity(newLength);
     int indexOfOriginal = this->currentLength;
@@ -127,20 +127,20 @@ StringBuilder StringBuilder::append(const Array<char> &target) {
     return *this;
 }
 
-StringBuilder StringBuilder::append(const Array<Character> &target, int offset, int length) {
+StringBuilder &StringBuilder::append(const Array<Character> &target, int offset, int length) {
     return this->insert(this->currentLength, target, offset, length);
 }
 
-StringBuilder StringBuilder::append(const Array<char> &target, int offset, int length) {
+StringBuilder &StringBuilder::append(const Array<char> &target, int offset, int length) {
     return this->insert(this->currentLength, target, offset, length);
 }
 
-StringBuilder StringBuilder::append(const CharSequence &target) {
+StringBuilder &StringBuilder::append(const CharSequence &target) {
     string targetString = target.toString();
     return this->append(targetString);
 }
 
-StringBuilder StringBuilder::append(const CharSequence &target, int start, int end) {
+StringBuilder &StringBuilder::append(const CharSequence &target, int start, int end) {
     string targetString = target.toString();
     int lengthOfTarget = length_pointer_char(targetString);
     if (start < 0 || start > end || end > lengthOfTarget) {
@@ -160,7 +160,7 @@ StringBuilder StringBuilder::append(const CharSequence &target, int start, int e
     return *this;
 }
 
-StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
+StringBuilder &StringBuilder::append(const std::initializer_list<char> &target) {
     int newLength = this->currentLength + (int)target.size();
     this->ensureCapacity(newLength);
     int index = this->currentLength;
@@ -173,7 +173,7 @@ StringBuilder StringBuilder::append(const std::initializer_list<char> &target) {
     return *this;
 }
 
-StringBuilder StringBuilder::append(const string target) {
+StringBuilder &StringBuilder::append(const string target) {
     int stringLength = length_pointer_char(target);
     int newLength = this->currentLength + stringLength;
     this->ensureCapacity(newLength);
@@ -187,43 +187,43 @@ StringBuilder StringBuilder::append(const string target) {
     return *this;
 }
 
-StringBuilder StringBuilder::append(const Double &target) {
+StringBuilder &StringBuilder::append(const Double &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::append(double target) {
+StringBuilder &StringBuilder::append(double target) {
     return this->append(Double(target));
 }
 
-StringBuilder StringBuilder::append(const Float &target) {
+StringBuilder &StringBuilder::append(const Float &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::append(float target) {
+StringBuilder &StringBuilder::append(float target) {
     return this->append(Float(target));
 }
 
-StringBuilder StringBuilder::append(const Integer &target) {
+StringBuilder &StringBuilder::append(const Integer &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::append(int target) {
+StringBuilder &StringBuilder::append(int target) {
     return this->append(Integer(target));
 }
 
-StringBuilder StringBuilder::append(const Long &target) {
+StringBuilder &StringBuilder::append(const Long &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::append(long target) {
+StringBuilder &StringBuilder::append(long target) {
     return this->append(Long(target));
 }
 
-StringBuilder StringBuilder::append(const String &target) {
+StringBuilder &StringBuilder::append(const String &target) {
     return this->append(target.toString());
 }
 
-StringBuilder StringBuilder::appendCodePoint(int codePoint) {
+StringBuilder &StringBuilder::appendCodePoint(int codePoint) {
     // TODO
 }
 
@@ -354,15 +354,15 @@ int StringBuilder::indexOf(const string target, int fromIndex) const {
     return  this->stringMatches(this->toString(), target, fromIndex);
 }
 
-StringBuilder StringBuilder::insert(int offset, boolean target) {
+StringBuilder &StringBuilder::insert(int offset, boolean target) {
     return this->insert(offset, Boolean(target));
 }
 
-StringBuilder StringBuilder::insert(int offset, const Boolean &target) {
+StringBuilder &StringBuilder::insert(int offset, const Boolean &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, char target) {
+StringBuilder &StringBuilder::insert(int offset, char target) {
     if (offset < 0 || offset > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
     }
@@ -380,20 +380,20 @@ StringBuilder StringBuilder::insert(int offset, char target) {
     return *this;
 }
 
-StringBuilder StringBuilder::insert(int offset, const Character &target) {
+StringBuilder &StringBuilder::insert(int offset, const Character &target) {
     Character *pointerToTarget = const_cast<Character *>(&target);
     return this->insert(offset, pointerToTarget->charValue());
 }
 
-StringBuilder StringBuilder::insert(int offset, const Array<char> &target) {
+StringBuilder &StringBuilder::insert(int offset, const Array<char> &target) {
     return this->insert(offset, target, 0, target.length);
 }
 
-StringBuilder StringBuilder::insert(int offset, const Array<Character> &target) {
+StringBuilder &StringBuilder::insert(int offset, const Array<Character> &target) {
     return this->insert(offset, target, 0, target.length);
 }
 
-StringBuilder StringBuilder::insert(int index, const Array<char> &target, int offset, int length) {
+StringBuilder &StringBuilder::insert(int index, const Array<char> &target, int offset, int length) {
     if (index < 0 || index > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
     }
@@ -421,7 +421,7 @@ StringBuilder StringBuilder::insert(int index, const Array<char> &target, int of
     return *this;
 }
 
-StringBuilder StringBuilder::insert(int index, const Array<Character> &target, int offset, int length) {
+StringBuilder &StringBuilder::insert(int index, const Array<Character> &target, int offset, int length) {
     if (index < 0 || index > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
     }
@@ -449,11 +449,11 @@ StringBuilder StringBuilder::insert(int index, const Array<Character> &target, i
     return *this;
 }
 
-StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &target) {
+StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &target) {
     return this->insert(destinationOffset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &target, int start, int end) {
+StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &target, int start, int end) {
     if (destinationOffset < 0 || destinationOffset > this->currentLength) {
         throw IndexOutOfBoundsException();
     }
@@ -483,43 +483,43 @@ StringBuilder StringBuilder::insert(int destinationOffset, const CharSequence &t
     return *this;
 }
 
-StringBuilder StringBuilder::insert(int offset, const Double &target) {
+StringBuilder &StringBuilder::insert(int offset, const Double &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, double target) {
+StringBuilder &StringBuilder::insert(int offset, double target) {
     return this->insert(offset, Double(target));
 }
 
-StringBuilder StringBuilder::insert(int offset, const Float &target) {
+StringBuilder &StringBuilder::insert(int offset, const Float &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, float target) {
+StringBuilder &StringBuilder::insert(int offset, float target) {
     return this->insert(offset, Float(target));
 }
 
-StringBuilder StringBuilder::insert(int offset, const Integer &target) {
+StringBuilder &StringBuilder::insert(int offset, const Integer &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, int target) {
+StringBuilder &StringBuilder::insert(int offset, int target) {
     return this->insert(offset, Integer(target));
 }
 
-StringBuilder StringBuilder::insert(int offset, const Long &target) {
+StringBuilder &StringBuilder::insert(int offset, const Long &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, long target) {
+StringBuilder &StringBuilder::insert(int offset, long target) {
     return this->insert(offset, Long(target));
 };
 
-StringBuilder StringBuilder::insert(int offset, const String &target) {
+StringBuilder &StringBuilder::insert(int offset, const String &target) {
     return this->insert(offset, target.toString());
 }
 
-StringBuilder StringBuilder::insert(int offset, const string target) {
+StringBuilder &StringBuilder::insert(int offset, const string target) {
     if (offset < 0 || offset > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
     }

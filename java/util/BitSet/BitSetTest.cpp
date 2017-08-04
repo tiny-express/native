@@ -560,5 +560,11 @@ TEST(JavaUtil, BitSetSize) {
 }
 
 TEST(JavaUtil, BitSetToString) {
-    // TODO(truongchauhien): Create test later.
+    BitSet bitSet;
+    ASSERT_STR("{}", bitSet.toString());
+    bitSet.set(2);
+    ASSERT_STR("{2}", bitSet.toString());
+    bitSet.set(4);
+    bitSet.set(10);
+    ASSERT_STR("{2, 4, 10}", bitSet.toString());
 }

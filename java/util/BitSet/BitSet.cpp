@@ -27,6 +27,7 @@
 #include "../BitSet/BitSet.hpp"
 #include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
 #include "../Arrays/Arrays.hpp"
+#include "../../lang/StringBuilder/StringBuilder.hpp"
 
 using namespace Java::Util;
 
@@ -134,7 +135,11 @@ BitSet::BitSet(const BitSet &bitSet){
     this->sizeIsSticky = bitSet.sizeIsSticky;
 }
 
-BitSet::~BitSet() { }
+BitSet::~BitSet() {
+    if (this->backupForToString != nullptr) {
+        free(this->backupForToString);
+    }
+}
 
 int BitSet::cardinality() const {
     int numberOfBitsSetToTrue = 0;
@@ -572,6 +577,31 @@ int BitSet::size() const {
 }
 
 string BitSet::toString() const {
-    // TODO(truongchauhien): Implement this method later.
-    return nullptr;
+    // Optimizing String Builder initial size.
+    int numberOfBits;
+    if (this->wordsInUse > 128) {
+        numberOfBits = this->cardinality();
+    } else {
+        numberOfBits = this->wordsInUse * BITS_PER_WORD;
+    }
+
+    StringBuilder stringBuilder(6 * numberOfBits + 2);
+    stringBuilder.append('{');
+
+    int indexOfNextSetBit = this->nextSetBit(0);
+    while (indexOfNextSetBit != -1) {
+        stringBuilder.append(indexOfNextSetBit);
+        indexOfNextSetBit = this->nextSetBit(indexOfNextSetBit + 1);
+        if (indexOfNextSetBit == -1) {
+            break;
+        } else {
+            stringBuilder.append(',').append(' ');
+        }
+    }
+    stringBuilder.append('}');
+
+    free(this->backupForToString);
+    this->backupForToString = strdup(stringBuilder.toString());
+
+    return this->backupForToString;
 }

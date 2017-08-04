@@ -139,6 +139,9 @@ namespace Java {
              */
             void trimToSize();
 
+        private:
+            mutable string backupForToString = nullptr;
+
         public:
             void bitAnd(const BitSet &set);
             void bitOr(const BitSet &set);
