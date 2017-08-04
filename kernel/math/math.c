@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -30,119 +30,119 @@ double math_pow(double base, double exponent) {
 	return pow(base, exponent);
 }
 
-double math_floor(double a) {
-	return floor(a);
+double math_floor(double value) {
+	return floor(value);
 }
 
-double math_round(double a) {
-	return round(a);
+double math_round(double value) {
+	return round(value);
 }
 
-double math_sqrt(double a) {
-    return sqrt(a);
+double math_sqrt(double value) {
+    return sqrt(value);
 }
 
-double math_cbrt(double a) {
-    return cbrt(a);
+double math_cbrt(double value) {
+    return cbrt(value);
 }
 
-double math_ceil(double a){
-    return ceil(a);
+double math_ceil(double value) {
+    return ceil(value);
 }
 
-double math_exp(double a){
-    return exp(a);
+double math_exp(double value) {
+    return exp(value);
 }
 
-double math_expm1(double a){
-    return expm1(a);
+double math_expm1(double value) {
+    return expm1(value);
 }
 
-double math_log(double a){
-    return log(a);
+double math_log(double value) {
+    return log(value);
 }
 
-double math_log10(double a){
-    return log10(a);
+double math_log10(double value) {
+    return log10(value);
 }
 
-double math_log1p(double a){
-    return log1p(a);
+double math_log1p(double value) {
+    return log1p(value);
 }
 
-double math_ieeeremainder(double a, double b){
-    return a - (round(a / b) * b);
+double math_ieeeremainder(double dividend, double divisor) {
+    return dividend - (round(dividend / divisor) * divisor);
 }
 
-double math_rint(double a){
-    return rint(a);
+double math_rint(double value) {
+    return rint(value);
 }
 
-double math_hypot(double a, double b){
-    return hypot(a,b);
+double math_hypot(double valueA, double valueB) {
+    return hypot(valueA, valueB);
 }
 
-double math_acos(double a){
-    return acos(a);
+double math_acos(double value) {
+    return acos(value);
 }
 
-double math_cos(double a){
-    return cos(a);
+double math_cos(double angle) {
+    return cos(angle);
 }
 
-double math_cosh(double a){
-    return cosh(a);
+double math_cosh(double angle) {
+    return cosh(angle);
 }
 
-double math_asin(double a){
-    return asin(a);
+double math_asin(double value) {
+    return asin(value);
 }
 
-double math_sin(double a){
-    return sin(a);
+double math_sin(double angle) {
+    return sin(angle);
 }
 
-double math_sinh(double a){
-    return sinh(a);
+double math_sinh(double angle) {
+    return sinh(angle);
 }
 
-double math_atan(double a){
-    return atan(a);
+double math_atan(double value) {
+    return atan(value);
 }
 
-double math_atan2(double a, double b){
-    return atan2(a,b);
+double math_atan2(double coordinateX, double coordinateY) {
+    return atan2(coordinateX, coordinateY);
 }
 
-double math_tan(double a){
-    return tan(a);
+double math_tan(double angle) {
+    return tan(angle);
 }
 
-double math_tanh(double a){
-    return tanh(a);
+double math_tanh(double angle) {
+    return tanh(angle);
 }
 
-double math_copysign(double a, double b){
-    return copysign( a, b);
+double math_copysign(double magnitude, double sign) {
+    return copysign(magnitude, sign);
 }
 
-float math_copysignf(float a, float b){
-    return copysignf( a, b);
+float math_copysignf(float magnitude, float sign) {
+    return copysignf(magnitude, sign);
 }
 
-double math_nexttoward(double a, double b){
-    return nexttoward(a,b);
+double math_nexttoward(double start, double direction) {
+    return nexttoward(start, direction);
 }
 
-float math_nexttowardf(float a, double b){
-    return nexttowardf(a,b);
+float math_nexttowardf(float start, double direction) {
+    return nexttowardf(start, direction);
 }
 
-double math_ldexp(double a, int exp){
-    return ldexp(a, exp);
+double math_ldexp(double value, int scaleFactor) {
+    return ldexp(value, scaleFactor);
 }
 
-float math_ldexpf(float a, int exp){
-    return ldexpf(a, exp);
+float math_ldexpf(float value, int scaleFactor) {
+    return ldexpf(value, scaleFactor);
 }
 

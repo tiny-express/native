@@ -84,8 +84,8 @@ double Math::cbrt(double value) {
     return math_cbrt(value);
 }
 
-double Math::ceil(double a) {
-    return math_ceil(a);
+double Math::ceil(double value) {
+    return math_ceil(value);
 }
 
 double Math::copySign(double magnitude, double sign) {
@@ -361,7 +361,7 @@ double Math::powerOfTwoD(int exponent) {
     if (exponent < Double::MIN_EXPONENT || exponent > Double::MAX_EXPONENT) {
         throw AssertionError(exponent);
     }
-    return Double::longBitsToDouble((((long) exponent + (long) Double::EXP_BIAS)
+    return Double::longBitsToDouble(((exponent + Double::EXP_BIAS)
             << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
 }
 
