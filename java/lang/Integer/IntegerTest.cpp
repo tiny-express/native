@@ -1908,65 +1908,20 @@ TEST(JavaLang, IntegerToStringObject) {
 // }
 
 // Test Integer::toString(int inputInt, int radix)
-// TEST(JavaLang, IntegerToString3) {
-    // // TODO(thoangminh): check these cases
-    // ASSERT_STR((string) "9999", Integer::toString(0,aaaa)); // error: cannot find symbol
-    // ASSERT_STR((string) "9999", Integer::toString(0,123456789132456789123456)); // integer number too large
-    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MAX_VALUE +1)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MAX_VALUE + 2)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MIN_VALUE -1)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,Integer::MIN_VALUE -2)); // out of range
-    // ASSERT_STR((string) "9999", Integer::toString(0,"Integer::MIN_VALUE -2")); // error: incompatible types: String cannot be converted to int
-
-    // ASSERT_STR((string) "0", (string) "", Integer::toString(0, 1));
-    // ASSERT_STR((string) "0", Integer::toString(0, -1));
-    // ASSERT_STR((string) "0", Integer::toString(0, 13));
-    // ASSERT_STR((string) "0", Integer::toString(0, Integer::MAX_VALUE));
-    // ASSERT_STR((string) "0", Integer::toString(0, Integer::MIN_VALUE));
-
-    // ASSERT_STR((string) "1", Integer::toString(1, 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "1", Integer::toString(1, 1));
-    // ASSERT_STR((string) "1", Integer::toString(1, -1));
-    // ASSERT_STR((string) "1", Integer::toString(1, 13));
-    // ASSERT_STR((string) "1", Integer::toString(1, Integer::MAX_VALUE));
-    // ASSERT_STR((string) "1", Integer::toString(1, Integer::MIN_VALUE));
-
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , 1));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , -1));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , 13));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , Integer::MAX_VALUE));
-    // ASSERT_STR((string) "-1", Integer::toString(-1 , Integer::MIN_VALUE));
-
-    // ASSERT_STR((string) "13", Integer::toString(13 , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "13", Integer::toString(13 , 1));
-    // ASSERT_STR((string) "13", Integer::toString(13 , -1));
-    // ASSERT_STR((string) "10", Integer::toString(13 , 13));
-    // ASSERT_STR((string) "13", Integer::toString(13 , Integer::MAX_VALUE));
-    // ASSERT_STR((string) "13", Integer::toString(13 , Integer::MIN_VALUE));
-
-    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , 1));
-    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , -1));
-    // ASSERT_STR((string) "282ba4aaa", Integer::toString(Integer::MAX_VALUE , 13));
-    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , Integer::MAX_VALUE));
-    // ASSERT_STR((string) "2147483647", Integer::toString(Integer::MAX_VALUE , Integer::MIN_VALUE));
-
-    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , 0));// java.lang.ArithmeticException: / by zero
-    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , 1));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , -1));
-    // ASSERT_STR((string) "-282ba4aab", Integer::toString(Integer::MIN_VALUE , 13));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , Integer::MAX_VALUE));
-    // ASSERT_STR((string) "-2147483648", Integer::toString(Integer::MIN_VALUE , Integer::MIN_VALUE));
-
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  0));
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  1));
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  -1));
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  13));
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  Integer.Integer::MAX_VALUE));
-    // System.out.println(Integer.toString(Integer.Integer::MIN_VALUE,  Integer.Integer::MIN_VALUE));
-
-// }
+TEST(JavaLang, IntegerToString3) {
+    ASSERT_STR("0", Integer::toString(0, 10).toString());
+    ASSERT_STR("473", Integer::toString(473, 10).toString());
+    ASSERT_STR("-ff", Integer::toString(-255, 16).toString());
+    ASSERT_STR("-1100110", Integer::toString(-102, 2).toString());
+    ASSERT_STR("106", Integer::toString(70, 8).toString());
+    ASSERT_STR("473", Integer::toString(473, 100).toString());
+    try {
+        String exceptionString = Integer::toString(100, 20);
+    }
+    catch (UnsupportedOperationException &e) {
+        ASSERT_STR("Haven't support this radix yet", e.getMessage().toString());
+    }
+}
 
 TEST(JavaLang, IntegerToUnsignedLong) {
     ASSERT_EQUAL(0, Integer::toUnsignedLong(0));

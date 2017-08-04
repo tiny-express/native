@@ -622,19 +622,22 @@ namespace Java {
              * Returns a String object
              * representing the specified integer.
              *
+             * @param inputInt
              * @return a string representation of the argument in base 10.
              */
-            static String toString(int i);
+            static String toString(int inputInt);
 
             /**
              * Returns a string representation of the first argument in the radix
              * specified by the second argument.
+             * Support radix 2, 8, 16, 10
              *
              * @param inputInt
              * @param radix
+             * @throw UnsupportedOperationException - if radix is not support
              * @return a string representation of the argument in the specified radix.
              */
-            static string toString(int inputInt, int radix);
+            static String toString(int inputInt, int radix);
 
             /**
              * Converts the argument to a long by an unsigned conversion.
@@ -647,9 +650,11 @@ namespace Java {
             /**
              * Returns a string representation of the first argument as an unsigned
              * integer value in the radix specified by the second argument.
+             * Support radix 2, 8, 16, 10
              *
              * @param inputInt
              * @param radix
+             * @throw UnsupportedOperationException - if radix is not support
              * @return an unsigned string representation of the argument in the specified radix.
              */
             static String toUnsignedString(int inputInt, int radix);

@@ -604,3 +604,16 @@ Integer Integer::valueOf(String inputString) {
 Integer Integer::valueOf(String inputString, int radix) {
     return Integer::valueOf(Integer::parseInt(inputString, radix));
 }
+
+String Integer::toString(int inputInt) {
+    return Integer::toString(inputInt, 10);
+}
+
+String Integer::toString(int inputInt, int radix) {
+    if (inputInt < 0) {
+        inputInt = -inputInt;  // Math::abs(inputInt);
+        return String("-") + Integer::toUnsignedString(inputInt, radix);
+    }
+
+    return Integer::toUnsignedString(inputInt, radix);
+}
