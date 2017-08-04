@@ -31,6 +31,7 @@ extern "C" {
 #include "../BitSet/BitSet.hpp"
 #include "../../lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
+#include "../Arrays/Arrays.hpp"
 
 TEST(JavaUtil, BitSetConstructor) {
     BitSet defaultBitSet;
@@ -567,4 +568,61 @@ TEST(JavaUtil, BitSetToString) {
     bitSet.set(4);
     bitSet.set(10);
     ASSERT_STR("{2, 4, 10}", bitSet.toString());
+
+    bitSet.clear();
+    ASSERT_STR("{}", bitSet.toString());
+}
+
+TEST(JavaUtil, BitSetToByteArray) {
+    BitSet bitSet;
+    Array<byte> expectedResultByteArray = Array<byte>(0);
+    Array<byte> resultByteArray = bitSet.toByteArray();
+    ASSERT_TRUE(Arrays::equals(expectedResultByteArray, resultByteArray));
+
+    bitSet.set(0, 8, false);
+    bitSet.set(8, 16, true);
+
+    expectedResultByteArray = Array<byte> {0b00000000, 0b11111111};
+    resultByteArray = bitSet.toByteArray();
+    ASSERT_EQUAL(2, resultByteArray.length);
+    ASSERT_TRUE(Arrays::equals(expectedResultByteArray, resultByteArray));
+
+    bitSet.clear();
+    bitSet.set(0, 4, true);
+    bitSet.set(4, 128, false);
+    bitSet.set(128, 254, true);
+    bitSet.set(254, 255, false);
+    bitSet.set(255, 256, true);
+    ASSERT_EQUAL(256, bitSet.length());
+    ASSERT_EQUAL(256, bitSet.size());
+    expectedResultByteArray = Array<byte>
+            {0b00001111, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b10111111};
+    resultByteArray = bitSet.toByteArray();
+    ASSERT_EQUAL(32, expectedResultByteArray.length);
+    ASSERT_EQUAL(32, resultByteArray.length);
+    ASSERT_TRUE(Arrays::equals(expectedResultByteArray, resultByteArray));
+}
+
+TEST(JavaUtil, BitSetToLongArray) {
+    BitSet bitSet;
+    Array<long> expectedResultLongArray = Array<long>(0);
+    Array<long> resultLongArray = bitSet.toLongArray();
+    ASSERT_TRUE(Arrays::equals(expectedResultLongArray, resultLongArray));
+
+    bitSet.set(0, 128, false);
+    bitSet.set(128, 254, true);
+    bitSet.set(254, 255, false);
+    bitSet.set(255, 256, true);
+    // -1L = 0xffffffffffffffffL
+    // This test is checked on Java.
+    expectedResultLongArray = Array<long> {0L, 0L, -1L, -4611686018427387905L};
+    resultLongArray = bitSet.toLongArray();
+    ASSERT_TRUE(Arrays::equals(expectedResultLongArray, resultLongArray));
 }

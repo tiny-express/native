@@ -360,8 +360,32 @@ namespace Java {
              * @return int
              */
             int size() const;
+
+            /**
+             * Returns a stream of indices for which this BitSet contains a bit in the set state.
+             * The indices are returned in order, from lowest to highest.
+             * The size of the stream is the number of bits in the set state,
+             * equal to the value returned by the cardinality() method.
+             *
+             * The bit set must remain constant during the execution of the terminal stream operation.
+             * Otherwise, the result of the terminal stream operation is undefined.
+             *
+             * @return IntStream
+             */
 //          IntStream stream() const;
+            // TODO(truongchauhien): Waiting for IntStream class.
+
+            /**
+             * Returns a new byte array containing all the bits in this bit set.
+             *
+             * @return Array<byte>
+             */
             Array<byte> toByteArray() const;
+
+            /**
+             *
+             * @return Array<long>
+             */
             Array<long> toLongArray() const;
 
             /**

@@ -576,6 +576,57 @@ int BitSet::size() const {
     return this->words.length * BITS_PER_WORD;
 }
 
+Array<byte> BitSet::toByteArray() const {
+    if (this->wordsInUse == 0) {
+        return Array<byte>(0);
+    }
+
+    const int numberOfBytesPerWord = 8;
+
+    Array<byte> result;
+    int indexOfWord;
+    long word;
+    byte *bytePointerToWord;
+    int indexOfEightPartsOfWord;
+    unsigned long unsignedWord;
+    // Handle all words before the last word.
+    for (indexOfWord = 0; indexOfWord < this->wordsInUse - 1; ++indexOfWord) {
+        word = this->words[indexOfWord];
+        unsignedWord = static_cast<unsigned long>(word);
+        bytePointerToWord = (byte *)&unsignedWord;
+        for (indexOfEightPartsOfWord = 0;
+             indexOfEightPartsOfWord < numberOfBytesPerWord; ++indexOfEightPartsOfWord) {
+            result.push(bytePointerToWord[indexOfEightPartsOfWord]);
+        }
+    }
+
+    // Handle the last word.
+    word = this->words[this->wordsInUse - 1];
+    unsignedWord = static_cast<unsigned long>(word);
+    bytePointerToWord = (byte *)&unsignedWord;
+    int numberOfTrailingZeroBytes = 0;
+    for (indexOfEightPartsOfWord = numberOfBytesPerWord - 1;
+         indexOfEightPartsOfWord >= 0; --indexOfEightPartsOfWord) {
+        if (bytePointerToWord[indexOfEightPartsOfWord] == 0) {
+            numberOfTrailingZeroBytes = numberOfTrailingZeroBytes + 1;
+        } else {
+            break;
+        }
+    }
+
+    int numberOfHeadingNonZeroByte = numberOfBytesPerWord - numberOfTrailingZeroBytes;
+    for (indexOfEightPartsOfWord = 0;
+         indexOfEightPartsOfWord < numberOfHeadingNonZeroByte; ++indexOfEightPartsOfWord) {
+        result.push(bytePointerToWord[indexOfEightPartsOfWord]);
+    }
+
+    return result;
+}
+
+Array<long> BitSet::toLongArray() const {
+    return Arrays::copyOf(this->words, this->wordsInUse);
+}
+
 string BitSet::toString() const {
     // Optimizing String Builder initial size.
     int numberOfBits;
