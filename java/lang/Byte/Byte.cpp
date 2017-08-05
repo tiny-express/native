@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -28,80 +28,36 @@
 
 using namespace Java::Lang;
 
-ByteCache *ByteCache::instance =0;
+ByteCache *ByteCache::instance = nullptr;
 
-/**
- * Byte initialization
- *
- * @param original
- */
-Bytes::Bytes(byte original) {
-	this->original = original;
+Bytes::Bytes(byte byteValue) {
+	this->original = byteValue;
 }
 
-/**
- * Construct a new Byte with the value of string
- *
- * @param string
- */
-Bytes::Bytes(String string) {
-	this->original = parseByte(string,10);
+Bytes::Bytes(String inputString) {
+	this->original = parseByte(inputString, 10);
 }
 
-Bytes::Bytes() {
-}
+Bytes::Bytes() = default;
 
-Bytes::~Bytes() {
-}
+Bytes::~Bytes() = default;
 
-/**
- *Return the value of this Byte as a char
- *
- * @return char
- */
 char Bytes::charValue() const {
     return (char) this->original;
 }
 
-/**
- * Byte value
- *
- * @return byte
- */
 byte Bytes::byteValue() {
 	return this->original;
 }
 
-/**
- * Compares two byte values numerically.
- *
- * @param a
- * @param b
- * @return  the value 0 if x == y; a value less than 0 if x < y; and a value greater than 0 if x > y
- */
-int Bytes::compare(byte a, byte b) {
-    return a - b;
+int Bytes::compare(byte byteA, byte byteB) {
+    return byteA - byteB;
 }
 
-
-/**
- * Compares two Byte objects numerically
- *
- * @param anotherByte
- * @return the value 0 if this Byte is equal to anotherByte;
- * a value less than 0 if this Byte is numerically less than anotherByte;
- * and a value greater than 0 if this Byte is numerically greater than anotherByte
- */
-int Bytes::compareTo(const Bytes &anotherByte) const {
-	return this->original - anotherByte.original;
+int Bytes::compareTo(const Bytes &other) const {
+	return this->original - other.original;
 }
 
-/**
- * Decodes a String into a Byte. Accepts decimal, hexadecimal, and octal numbers
- *
- * @param stringToDecode
- * @return
- */
 //TODO need Integer::decode(string)
 Bytes Bytes::decode(String stringToDecode) {
     /*int value = Integer::decode(stringToDecode);
@@ -112,12 +68,7 @@ Bytes Bytes::decode(String stringToDecode) {
     return 0;//temporarily
 }
 
-/**
- * Double value of Byte
- *
- * @return double
- */
-double Bytes::doubleValue() const{
+double Bytes::doubleValue() const {
 	return (double) this->original;
 }
 
@@ -131,7 +82,7 @@ double Bytes::doubleValue() const{
 boolean Bytes::equals(Object object) {
 
     boolean isByte = instanceof<Bytes>(object);
-	if (isByte){
+	if (isByte) {
         return this->original == parseByte(object.toString());
     }
 	return false;
@@ -179,7 +130,7 @@ int Bytes::intValue() const {
  *
  * @return long
  */
-long Bytes::longValue() const{
+long Bytes::longValue() const {
     return (long) this->original;
 }
 
@@ -217,11 +168,7 @@ byte Bytes::parseByte(String stringToParse, int radix) {
 short Bytes::shortValue() const {
     return (short) this->original;
 }
-/**
- * Returns the value of this Byte as an String.
- *
- * @return string
- */
+
 string Bytes::stringValue() const {
     return String::valueOf(this->original).toString();
 }
@@ -238,64 +185,64 @@ String Bytes::toString() {
 /**
  * Returns a new String object representing the specified byte with radix = 10
  *
- * @param byte
+ * @param byteValue
  * @return String
  */
-String Bytes::toString(byte specifiedByte) {
+String Bytes::toString(byte byteValue) {
     //TODO need Integer.toString(int, radix)
-    //return Integer::toString((int)specifiedByte, 10);
+    //return Integer::toString((int) byteValue, 10);
 }
 
 /**
  * Converts the argument to an int by an unsigned conversion.
  *
- * @param value
+ * @param byteValue
  * @return int
  */
-int Bytes::toUnsignedInt(byte value) {
-    return ((int) value) & 0xff;
+int Bytes::toUnsignedInt(byte byteValue) {
+    return ((int) byteValue) & 0xff;
 }
 
 /**
  * Converts the argument to an int by an unsigned conversion.
  *
- * @param value
+ * @param byteValue
  * @return long
  */
-long Bytes::toUnsignedLong(byte value) {
-    return ((long) value) & 0xffL;
+long Bytes::toUnsignedLong(byte byteValue) {
+    return ((long) byteValue) & 0xffL;
 }
 
 /**
  * Returns a Byte instance representing the specified byte value.
  *
- * @param targetByte
+ * @param byteValue
  * @return Bytes
  */
-Bytes Bytes::valueOf(byte targetByte) {
+Bytes Bytes::valueOf(byte byteValue) {
 	const int offset = 128;
-    return  ByteCache::getInstance()->cache[((int) targetByte+offset)];
+    return  ByteCache::getInstance()->cache[((int) byteValue+offset)];
 }
 
 /**
  * Returns a Byte instance representing the specified String value.
  *
- * @param targetString
+ * @param stringValue
  * @return Bytes
  */
-Bytes Bytes::valueOf(String targetString) {
-    return Bytes(parseByte(targetString));
+Bytes Bytes::valueOf(String stringValue) {
+    return Bytes(parseByte(stringValue));
 }
 
 /**
  * Returns a Byte instance representing the specified String value with radix
  *
- * @param targetString
+ * @param stringValue
  * @param radix
  * @return
  */
-Bytes Bytes::valueOf(String targetString, int radix) {
-    return Bytes(parseByte(targetString, radix));
+Bytes Bytes::valueOf(String stringValue, int radix) {
+    return Bytes(parseByte(stringValue, radix));
 }
 
 /**
@@ -419,7 +366,7 @@ void Bytes::operator-=(const Bytes &target) {
 }
 
 /**
- * Make an sumation from this Byte with target and assign the result value to this Byte
+ * Make an summation from this Byte with target and assign the result value to this Byte
  *
  * @param target
  * @return Byte
@@ -463,7 +410,7 @@ void Bytes::operator%=(const Bytes &target) {
  * @param target
  * @return Byte
  */
-void Bytes::operator=(const Bytes &target) {
+Bytes &Bytes::operator=(const Bytes &target) {
     this->original = target.original;
 }
 

@@ -32,7 +32,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ByteConstructor) {
+TEST(JavaLang, ByteConstructor) {
 	// Given empty value for Byte constructor and assign value - Return Byte
 	Bytes byte1 = Bytes(3);
     int expectResult = 3;
@@ -45,46 +45,48 @@ TEST (JavaLang, ByteConstructor) {
 
 }
 
-TEST (JavaLang, CharValue){
-    //Given a char and a Byte with the same value to compare the result of charValue()
+TEST(JavaLang, CharValue){
+    // Given a char and a Byte with the same value to compare the result of charValue()
     Bytes byteToGetValue = 'a';
     char expectResult = 'a';
     char actualResult = byteToGetValue.charValue();
     ASSERT_EQUAL(expectResult,actualResult);
 }
 
-TEST (JavaLang, ByteValue){
-    //Given a byte and a Byte with the same value to compare the result of charValue()
-    Bytes byteToGgetValue = 5;
+TEST(JavaLang, ByteValue){
+    // Given a byte and a Byte with the same value to compare the result of charValue()
+    Bytes byteToGetValue = 5;
     byte expectResult = 5;
-    byte actualResult = byteToGgetValue.byteValue();
-    ASSERT_EQUAL( expectResult, actualResult);
+    byte actualResult = byteToGetValue.byteValue();
+    ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, CompareTo){
-    //Given 3 Byte
+TEST(JavaLang, CompareTo){
+    // Given 3 Byte
     Bytes firstBytes = 1;
     Bytes secondBytes = 1;
     Bytes thirdBytes = 3;
 
-    //Compare
+    // Compare
     ASSERT_TRUE(firstBytes.compareTo(secondBytes)==0);
     ASSERT_TRUE(firstBytes.compareTo(thirdBytes)<0);
     ASSERT_TRUE(thirdBytes.compareTo(firstBytes)>0);
+    
+    // 
 }
 
-TEST (JavaLang, Decode){
+TEST(JavaLang, Decode){
     // Given a decimal value are decode and assigned to decByte
     Bytes decByte = Bytes::decode("100");
     byte expectDecResult = 100;
     byte actualDecResult = decByte.byteValue();
-    //ASSERT_EQUAL(expectDecResult, actualDecResult);
+    // ASSERT_EQUAL(expectDecResult, actualDecResult);
 
-    // Given a hexadecimal values are decoded and assigned to hexaByte
-    Bytes hexaByte = Bytes::decode("0x6b");
+    // Given a hexadecimal values are decoded and assigned to hexByte
+    Bytes hexByte = Bytes::decode("0x6b");
     byte expectHexResult = 107;
-    byte actualHexResult = hexaByte.byteValue();
-    //ASSERT_EQUAL(expectHexResult, actualHexResult);
+    byte actualHexResult = hexByte.byteValue();
+    // ASSERT_EQUAL(expectHexResult, actualHexResult);
 
     // Given an octal value is decoded and assigned to octalByte
     Bytes octalByte = Bytes::decode("0127");
@@ -93,144 +95,144 @@ TEST (JavaLang, Decode){
    // ASSERT_EQUAL(87, octalByte.byteValue());
 }
 
-TEST (JavaLang, DoubleValue){
-    //Given a Double and a Byte with the same value
+TEST(JavaLang, DoubleValue){
+    // Given a Double and a Byte with the same value
     Bytes byteToGetValue = 5;
     double expectResult = 5;
     double actualResult = byteToGetValue.doubleValue();
-    ASSERT_EQUAL(expectResult, actualResult);
+    ASSERT_DBL_NEAR(expectResult, actualResult);
 }
 
-TEST (JavaLang, ByteEquals){
-    //Given 3 Bytes
+TEST(JavaLang, ByteEquals){
+    // Given 3 Bytes
     Bytes firstBytes = 1;
     Bytes secondBytes = 1;
     Bytes thirdBytes = 3;
 
-    //Given an object not a Bytes
+    // Given an object not a Bytes
     Object object;
-    //Test Bytes and Bytes
-    //Object instanceof return false
-    //ASSERT_TRUE(firstBytes.equals(secondBytes));
-    //ASSERT_FALSE(firstBytes.equals(thirdBytes));
-    //Test Bytes and Object
-    //ASSERT_FALSE(firstBytes.equals(object));
+    // Test Bytes and Bytes
+    // Object instanceof return false
+    // ASSERT_TRUE(firstBytes.equals(secondBytes));
+    // ASSERT_FALSE(firstBytes.equals(thirdBytes));
+    // Test Bytes and Object
+    // ASSERT_FALSE(firstBytes.equals(object));
 }
 
-TEST (JavaLang, FloatValue){
-    //Given a float and a Byte with the same value
+TEST(JavaLang, FloatValue){
+    // Given a float and a Byte with the same value
     Bytes byteToGetValue = 5;
     float expectResult = 5;
     float actualResult = byteToGetValue.floatValue();
-    ASSERT_EQUAL(expectResult, actualResult);
+    ASSERT_DBL_NEAR(expectResult, actualResult);
 }
 
-TEST (JavaLang, HashCode ){
-    //Given a Byte
+TEST(JavaLang, HashCode ){
+    // Given a Byte
     Bytes byteToGetValue = 5;
     int expectResult = 5;
     int actualResult = byteToGetValue.hashCode();
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, IntValue){
-    //Given a int and a Byte with the same value
+TEST(JavaLang, IntValue){
+    // Given a int and a Byte with the same value
     Bytes byteToGetValue = 5;
     int expectResult = 5;
     int actualResult = byteToGetValue.intValue();
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, LongValue){
-    //Given a int and a Byte with the same value
+TEST(JavaLang, LongValue){
+    // Given a int and a Byte with the same value
     Bytes byteToGetValue = 5;
     long expectResult = 5;
     long actualResult = byteToGetValue.longValue();
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, ParseByte){
+TEST(JavaLang, ParseByte){
     // Assign value 20 to resultByte from a String using parseByte
     byte expectResult = 20;
     byte actualResult = Bytes::parseByte("20");
-    //need parseByte(string)
-    //ASSERT_EQUAL(expectResult, actualResult);
+    // need parseByte(string)
+    // ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, ParseByteWithRadix){
+TEST(JavaLang, ParseByteWithRadix){
 
-    //Assign value 20 to resultByte from a String using parseByte with radix =10
+    // Assign value 20 to resultByte from a String using parseByte with radix =10
     byte expectResult = 20;
     byte actualResult = Bytes::parseByte("20", 10);
-    //need parseByte(string)
-    //ASSERT_EQUAL(expectResult, actualResult);
+    // need parseByte(string)
+    // ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, ShortValue){
-    //Given a short and a Byte with the same value
+TEST(JavaLang, ShortValue){
+    // Given a short and a Byte with the same value
     Bytes byteToGetValue = 5;
     short expectResult = 5;
     short actualResult = byteToGetValue.shortValue();
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, StringValue){
-    //Given a string and a Byte with the same value
+TEST(JavaLang, StringValue){
+    // Given a string and a Byte with the same value
     Bytes byteToGetValue = Bytes("val");
-    string expectResult = (string) "val";
+    string expectResult =(string) "val";
     string actualResult = byteToGetValue.stringValue();
-    //need parseByte(string,radix)
-    //ASSERT_TRUE(actualResult == actualResult);
+    // need parseByte(string,radix)
+    // ASSERT_TRUE(actualResult == actualResult);
 }
 
-TEST (JavaLang, ToString){
-    //Given a string and a Byte with the same value
+TEST(JavaLang, ToString){
+    // Given a string and a Byte with the same value
     Bytes byteToGetValue = 2;
     String expectResult = "2";
     String actualResult = byteToGetValue.toString();
     ASSERT_TRUE(expectResult == actualResult);
 }
 
-TEST (JavaLang, ToStringWithByte){
-    //Given a string and a Byte with the same value
+TEST(JavaLang, ToStringWithByte){
+    // Given a string and a Byte with the same value
     byte byteToRepresent = 2;
     String expectResult = "2";
-    //String actualResult = Bytes::toString(byteToRepresent);
-    //ASSERT_TRUE(expectResult == actualResult);
+    // String actualResult = Bytes::toString(byteToRepresent);
+    // ASSERT_TRUE(expectResult == actualResult);
 }
 
-TEST (JavaLang, ValueOfByte){
+TEST(JavaLang, ValueOfByte){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
-    byte byteToGetValue = -50;
-    Bytes expectResult = Bytes(-50);
+    byte byteToGetValue = static_cast<byte>(-50);
+    Bytes expectResult = Bytes(static_cast<byte>(-50));
     Bytes actualResult = Bytes::valueOf(byteToGetValue);
     ASSERT_TRUE(expectResult == actualResult);
 }
 
-TEST (JavaLang, ValueOfString){
+TEST(JavaLang, ValueOfString){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     String stringToGetValue = "-50";
-    Bytes expectResult = Bytes(-50);
-    //Bytes actualResult = Bytes::valueOf(stringToGetValue);
-    //ASSERT_TRUE(expectResult == actualResult);
+    Bytes expectResult = Bytes(static_cast<byte>(-50));
+    // Bytes actualResult = Bytes::valueOf(stringToGetValue);
+    // ASSERT_TRUE(expectResult == actualResult);
 }
 
-TEST (JavaLang, ValueOfStringWithRadix){
+TEST(JavaLang, ValueOfStringWithRadix){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     String byteToGetValue = "-50";
-    Bytes expectResult = Bytes(-50);
-    //Bytes actualResult = Bytes::valueOf(byteToGetValue, 10);
-    //ASSERT_TRUE(expectResult == actualResult);
+    Bytes expectResult = Bytes(static_cast<byte>(-50));
+    // Bytes actualResult = Bytes::valueOf(byteToGetValue, 10);
+    // ASSERT_TRUE(expectResult == actualResult);
 }
 
-TEST (JavaLang, HashCodeWithByte){
+TEST(JavaLang, HashCodeWithByte){
     byte byteToGetValue = 5;
     int expectResult = 5;
     int actualResult = Bytes::hashCode(byteToGetValue);
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, Compare){
+TEST(JavaLang, Compare){
     byte byte1 = 5;
     byte byte2 = 10;
     byte byte3 = 5;
@@ -242,21 +244,21 @@ TEST (JavaLang, Compare){
     ASSERT_TRUE(Bytes::compare(byte1, byte3) == 0);
 }
 
-TEST (JavaLang, ToUnsignedInt){
-    byte byteToGetValue = -5;
+TEST(JavaLang, ToUnsignedInt){
+    byte byteToGetValue = static_cast<byte>(-5);
     int expectResult = 251;
     int actualResult = Bytes::toUnsignedInt(byteToGetValue);
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, ToUnsignedLong){
-    byte byteToGetValue = -5;
+TEST(JavaLang, ToUnsignedLong){
+    byte byteToGetValue = static_cast<byte>(-5);
     long expectResult = 251;
     long actualResult = Bytes::toUnsignedLong(byteToGetValue);
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST (JavaLang, ByteOperator) {
+TEST(JavaLang, ByteOperator) {
 	// Given a valid number
 	Bytes validByte = 5;
 	Bytes targetByte = 3;
@@ -264,23 +266,23 @@ TEST (JavaLang, ByteOperator) {
 	
 	// Make a summation with targetByte
 	Bytes summationByte = 8;
-	ASSERT_TRUE(summationByte == ( validByte + targetByte ));
+	ASSERT_TRUE(summationByte == (validByte + targetByte ));
 	
 	// Make a subtraction with targetByte
 	Bytes subtractionByte = 2;
-	ASSERT_TRUE(subtractionByte == ( validByte - targetByte ));
+	ASSERT_TRUE(subtractionByte == (validByte - targetByte ));
 	
 	// Make a multiplication with targetByte
 	Bytes multiplicationByte = 15;
-	ASSERT_TRUE(multiplicationByte == ( validByte * targetByte ));
+	ASSERT_TRUE(multiplicationByte == (validByte * targetByte ));
 	
 	// Make a division with targetByte
 	Bytes divisionByte = 1;
-	ASSERT_TRUE(divisionByte == ( validByte / targetByte ));
+	ASSERT_TRUE(divisionByte == (validByte / targetByte ));
 	
 	// Make a modulo with targetByte
 	Bytes modByte = 2;
-	ASSERT_TRUE(modByte == ( validByte % targetByte ));
+	ASSERT_TRUE(modByte == (validByte % targetByte ));
 
     // Determine if 2 byte is equal
     ASSERT_TRUE(validByte == equalValidByte);
@@ -306,29 +308,29 @@ TEST (JavaLang, ByteOperator) {
     ASSERT_TRUE(validByte <= equalValidByte);
     ASSERT_FALSE(validByte <= targetByte);
 
-    //Make a sumation from validByte with targetByte and assign the result value to this Byte
+    // Make a summation from validByte with targetByte and assign the result value to this Byte
     validByte += targetByte;
-    ASSERT_TRUE( summationByte == validByte );
+    ASSERT_TRUE(summationByte == validByte );
     validByte = 5;
 
-    //Make a subtraction from validByte with targetByte and assign the result value to this Byte
+    // Make a subtraction from validByte with targetByte and assign the result value to this Byte
     validByte -= targetByte;
-    ASSERT_TRUE( subtractionByte == validByte );
+    ASSERT_TRUE(subtractionByte == validByte );
     validByte = 5;
 
-    //Make a multiplication from validByte with targetByte and assign the result value to this Byte
+    // Make a multiplication from validByte with targetByte and assign the result value to this Byte
     validByte *= targetByte;
-    ASSERT_TRUE( multiplicationByte == validByte );
+    ASSERT_TRUE(multiplicationByte == validByte );
     validByte = 5;
 
-    //Make a division from validByte with targetByte and assign the result value to this Byte
+    // Make a division from validByte with targetByte and assign the result value to this Byte
     validByte /= targetByte;
-    ASSERT_TRUE( divisionByte == validByte );
+    ASSERT_TRUE(divisionByte == validByte );
     validByte = 5;
 
-    //Make a modulo from validByte with targetByte and assign the result value to this Byte
+    // Make a modulo from validByte with targetByte and assign the result value to this Byte
     validByte %= targetByte;
-    ASSERT_TRUE( modByte == validByte );
+    ASSERT_TRUE(modByte == validByte );
     validByte = 5;
 }
 

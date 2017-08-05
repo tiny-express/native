@@ -29,6 +29,7 @@
 
 #include "../Number/Number.hpp"
 #include "../Integer/Integer.hpp"
+#include "../../../type.h"
 
 
 namespace Java {
@@ -36,71 +37,142 @@ namespace Java {
 
         class Bytes;
 
-		class Bytes : public virtual Number,
-            public virtual Comparable<Bytes>{
+		class Bytes : public virtual Number, public virtual Comparable<Bytes> {
 
         private:
 			byte original;
-			//Min value of a byte
-			static const byte MIN_VALUE = -128;
-			//Max value of a byte
+
+			/**
+			 * Min value of Byte
+			 */
+			static const byte MIN_VALUE = static_cast<const byte>(-128);
+
+            /**
+             * Max value of Byte
+             */
 			static const byte MAX_VALUE = 127;
+
+            /**
+             * The number of bits used to represent a byte value in two's complement binary form.
+             */
 			static const int SIZE = 8;
+
+            /**
+             * The number of bytes used to represent a byte value in two's complement binary form.
+             */
+            static constexpr int BYTES = SIZE / Bytes::SIZE;
 
         private:
 
         public:
             Bytes();
-			Bytes(byte original);
-			Bytes(String string);
+
+            /**
+             * Byte initialization
+             *
+             * @param byteValue
+             */
+			Bytes(byte byteValue);
+
+            /**
+             * Construct a new Byte with the value of string
+             *
+             * @param inputString
+             */
+			Bytes(String inputString);
+
 			~Bytes();
 
 		public:
+
+            /**
+             *Return the value of this Byte as a char
+             *
+             * @return char
+             */
 			char charValue() const;
 
+            /**
+             * Returns the value of this Byte as an String.
+             *
+             * @return string
+             */
 			string stringValue() const;
 
+            /**
+             * Byte value
+             *
+             * @return byte
+             */
             byte byteValue ();
 
-			static int compare(byte, byte);
+            /**
+             * Compares two byte values numerically.
+             *
+             * @param byteA
+             * @param byteB
+             * @return  the value 0 if byteA == byteB; a value less than 0 if byteA < byteB;
+             * and a value greater than 0 if byteA > byteB
+             */
+			static int compare(byte byteA, byte byteB);
 
-			int compareTo(const Bytes & ) const;
+            /**
+             * Compares two Byte objects numerically
+             *
+             * @param other
+             * @return the value 0 if this Byte is equal to other;
+             * a value less than 0 if this Byte is numerically less than other;
+             * and a value greater than 0 if this Byte is numerically greater than other
+             */
+			int compareTo(const Bytes & other) const override;
 
-			static Bytes decode(String);
+            /**
+             * Decodes a String into a Byte. Accepts decimal, hexadecimal, and octal numbers
+             *
+             * @param stringToDecode
+             * @throw NumberFormatException - if the String does not contain a parsable byte.
+             * @return a Byte object holding the byte value represented by stringToDecode
+             */
+            static Bytes decode(String stringToDecode);
 
-			double doubleValue() const;
+            /**
+             * Double value of Byte
+             *
+             * @return double
+             */
+			double doubleValue() const override;
 
-			boolean equals(Object );
+			boolean equals(Object object);
 
-			float floatValue() const;
+			float floatValue() const override;
 
 			int hashCode();
 
-            static int hashCode(byte );
+            static int hashCode(byte byteValue);
 
-			int intValue() const;
+			int intValue() const override;
 
-			long longValue() const ;
+			long longValue() const override;
 
-			static byte parseByte(String);
+			static byte parseByte(String stringToParse);
 
-            static byte parseByte(String, int);
+            static byte parseByte(String stringToParse, int radix);
             
-			short shortValue() const;
+			short shortValue() const override;
 
 			String toString();
 
-			static String toString(byte);
+			static String toString(byte byteValue);
 
-			static int toUnsignedInt(byte);
+			static int toUnsignedInt(byte byteValue);
 
-			static long toUnsignedLong(byte);
+			static long toUnsignedLong(byte byteValue);
 
-			static Bytes valueOf(byte);
+			static Bytes valueOf(byte byteValue);
 
-			static Bytes valueOf(String);
+			static Bytes valueOf(String stringValue);
 
-            static Bytes valueOf(String,int);
+            static Bytes valueOf(String stringValue, int radix);
             
 		public:
 			Bytes operator+(const Bytes &target);
@@ -135,7 +207,7 @@ namespace Java {
 
 			void operator%=(const Bytes &target);
 
-            void operator=(const Bytes &target);
+            Bytes &operator=(const Bytes &target);
 
 		};
 
@@ -159,7 +231,7 @@ namespace Java {
 
             static ByteCache *getInstance()
             {
-                if (!instance)
+                if (instance == nullptr)
                     instance = new ByteCache();
                 return instance;
             }

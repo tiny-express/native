@@ -45,6 +45,6 @@ double number_default(double target);
 typedef char* string;
 typedef wchar_t* unicode;
 typedef const char* const_string;
-typedef signed char byte;
+typedef unsigned char byte;
 
 #endif
