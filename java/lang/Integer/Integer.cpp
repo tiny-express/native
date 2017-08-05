@@ -27,9 +27,9 @@
 #include <sstream>
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
-#include "../Character/Character.hpp"
 #include "../NumberFormatException/NumberFormatException.h"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
+#include "../ArithmeticException/ArithmeticException.hpp"
 
 using namespace Java::Lang;
 
@@ -131,7 +131,7 @@ boolean Integer::operator>=(const Integer &target) const {
 
 Integer Integer::operator/(const Integer &target) {
     if (target.original == 0) {
-        // TODO throw ArithmeticException("Divide by zero");
+        throw ArithmeticException("Divide by zero");
     }
 	return this->original / target.original;
 }
@@ -142,7 +142,7 @@ Integer Integer::operator*(const Integer &target) {
 
 Integer Integer::operator%(const Integer &target) {
     if (target.original == 0) {
-        // TODO throw ArithmeticException("Divide by zero");
+        throw ArithmeticException("Divide by zero");
     }
 	return this->original % target.original;
 }
@@ -163,7 +163,7 @@ Integer &Integer::operator-=(const Integer &target) {
 
 Integer &Integer::operator/=(const Integer &target) {
     if (target.original == 0) {
-        // TODO throw ArithmeticException("Divide by zero");
+        throw ArithmeticException("Divide by zero");
     }
     this->original /= target.original;
     free(this->stringOriginal);
@@ -180,7 +180,7 @@ Integer &Integer::operator*=(const Integer &target) {
 
 Integer &Integer::operator%=(const Integer &target) {
     if (target.original == 0) {
-        // TODO throw ArithmeticException("Divide by zero");
+        throw ArithmeticException("Divide by zero");
     }
     this->original %= target.original;
     free(this->stringOriginal);
@@ -189,18 +189,14 @@ Integer &Integer::operator%=(const Integer &target) {
 }
 
 int Integer::bitCount(int inputInt) {
+    String inputInBinary = Integer::toBinaryString(inputInt);
 	int resultBitCount = 0;
-	if (inputInt < 0) {
-		resultBitCount = 1;
-		inputInt = -inputInt;
-	}
-
-	while(inputInt != 0 || resultBitCount == 32) {
-		if((inputInt & 1) == 1) {
-			resultBitCount++;
-		}
-		inputInt = inputInt >> 1;
-	}
+    int index;
+    for (index = 0; index < inputInBinary.length(); index++) {
+        if (inputInBinary.charAt(index) == '1') {
+            resultBitCount++;
+        }
+    }
 
 	return resultBitCount;
 }
@@ -222,11 +218,11 @@ int Integer::compare(int inputInt1, int inputInt2) {
 }
 
 int Integer::compareTo(const Integer &anotherInteger) const {
-	return compare(this->original, anotherInteger.intValue());
+	return this->compare(this->original, anotherInteger.intValue());
 }
 
 int Integer::compareUnsigned(int intA, int intB) {
-	return compare(intA + MIN_VALUE, intB + MIN_VALUE);
+	return Integer::compare(intA + MIN_VALUE, intB + MIN_VALUE);
 }
 
 Integer Integer::decode(String inputString) {
@@ -263,10 +259,9 @@ Integer Integer::decode(String inputString) {
 
 int Integer::divideUnsigned(int dividend, int divisor) {
     if (divisor == 0) {
-        //TODO throw ArithmeticException("Divide by zero");
-        return 0;
+        throw ArithmeticException("Divide by zero");
     }
-	return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
+	return (int) (Integer::toUnsignedLong(dividend) / Integer::toUnsignedLong(divisor));
 }
 
 // Integer Integer::getInteger(String inputString) {
@@ -299,12 +294,12 @@ int Integer::lowestOneBit(int inputInt) {
 	return inputInt & -inputInt;
 }
 
-int Integer::max(int inputInt_1, int inputInt_2) {
-	return Math::max(inputInt_1, inputInt_2);
+int Integer::max(int intA, int intB) {
+	return Math::max(intA, intB);
 }
 
-int Integer::min(int inputInt_1, int inputInt_2) {
-	return Math::min(inputInt_1, inputInt_2);
+int Integer::min(int intA, int intB) {
+	return Math::min(intA, intB);
 }
 
 int Integer::numberOfLeadingZeros(int inputInt) {
@@ -479,8 +474,7 @@ int Integer::parseUnsignedInt(String inputString) {
 
 int Integer::remainderUnsigned(int dividend, int divisor) {
     if (divisor == 0) {
-        // TODO throw ArithmeticException("Divide by zero");
-        return 0;
+        throw ArithmeticException("Divide by zero");
     }
 	return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
 }
@@ -580,20 +574,20 @@ String Integer::toUnsignedString(int inputInt, int radix) {
 
     switch (radix) {
         case 2:
-            binaryString = std::bitset<32> ((unsigned long long int) toUnsignedLong(inputInt)).to_string();
+            binaryString = std::bitset<32> ((unsigned long long int) Integer::toUnsignedLong(inputInt)).to_string();
             result = binaryString.c_str();
             result = result.getStringFromIndex(result.indexOf('1'));
             return result;
         case 8:
-            stream << std::oct << toUnsignedLong(inputInt);
+            stream << std::oct << Integer::toUnsignedLong(inputInt);
             result = stream.str();
             return result;
         case 16:
-            stream << std::hex << toUnsignedLong(inputInt);
+            stream << std::hex << Integer::toUnsignedLong(inputInt);
             result = stream.str();
             return result;;
         case 10:
-            stream << std::dec << toUnsignedLong(inputInt);
+            stream << std::dec << Integer::toUnsignedLong(inputInt);
             result = stream.str();
             return result;
         default:
@@ -631,7 +625,7 @@ String Integer::toString(int inputInt) {
 
 String Integer::toString(int inputInt, int radix) {
     if (inputInt < 0) {
-        inputInt = -inputInt;  // Math::abs(inputInt);
+        inputInt = -inputInt;
         return String("-") + Integer::toUnsignedString(inputInt, radix);
     }
 

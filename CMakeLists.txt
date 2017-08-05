@@ -33,7 +33,7 @@ project(native C CXX)
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    enable_language(ASM)
+#    enable_language(ASM)
 endif ()
 
 # Enable runtime search path support for dynamic libraries on OSX
@@ -54,22 +54,35 @@ include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
-# Set GCC ignore warning Multi-character constant
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow" )
+# Set GCC ignore warning multi-characters constants
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
+# Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wfatal-errors")
 elseif (COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x -Wfatal-errors")
 else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfatal-errors")
 
+# GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
 
-# CMake Modules
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/mk" ${CMAKE_MODULE_PATH})
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    # CMake Modules
+    set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+
+    # Enable coverage by cmake modules
+    if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
+        include(CodeCoverage)
+        setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
+    endif ()
+endif ()
 
 # Detect platform and include path for OpenSSL
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -77,29 +90,29 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
-# Only header files
-file(GLOB_RECURSE HEADERS
-        ./*.h
-        library.hpp)
-
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
         kernel/common/*
         kernel/datetime/*
         kernel/math/*
         kernel/string/*
-        kernel/system/*
-        kernel/type/*
         )
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
+<<<<<<< HEAD
          kernel/common/*_test.c
          kernel/datetime/*_test.c
          kernel/math/*_test.c
          kernel/string/*_test.c
          kernel/system/*_test.c
          kernel/type/*_test.c
+=======
+        kernel/common/*_test.c
+        kernel/datetime/*_test.c
+        kernel/math/*_test.c
+        kernel/string/*_test.c
+>>>>>>> origin/development
         )
 
 # Remove all test files within c files
@@ -109,12 +122,22 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+<<<<<<< HEAD
          java/**/*.cpp
+=======
+        javax/**/*.cpp
+        java/**/*.cpp
+>>>>>>> origin/development
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
+<<<<<<< HEAD
          java/**/*Test.cpp
+=======
+        javax/**/*Test.cpp
+        java/**/*Test.cpp
+>>>>>>> origin/development
         )
 
 # Remove all test files within cpp files
@@ -123,7 +146,7 @@ foreach (test_cpp_file ${TESTS_CPP})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C}  misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
 add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
@@ -151,7 +174,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2  --leak-check=full ./native_test_c
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test_c
 )
 
 # Check memory leak
@@ -160,12 +183,17 @@ add_custom_target(
         COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
 )
 
+# Enable testing
+include(CTest)
+enable_testing()
+
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/native)
-install(DIRECTORY java DESTINATION include/native)
-install(FILES ${HEADERS} DESTINATION include/native)
+install(FILES library.hpp DESTINATION include/native)
+install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
 
 # Add uninstall
 add_custom_target(
@@ -186,14 +214,10 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-else()
+else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT}-lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
-endif()
+endif ()
 
-add_custom_target(
-    checkstyle
-    COMMAND ./misc/checkstyle.sh $(root)
-)

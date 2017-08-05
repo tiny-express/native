@@ -286,7 +286,7 @@ TEST (JavaLang, StringValueOf) {
 	// Value of boolean
 	boolean isChecked = true;
 	String valueOfBoolean = String::valueOf(isChecked);
-	ASSERT_STR((string) "1", valueOfBoolean.toString());
+	ASSERT_STR((string) "true", valueOfBoolean.toString());
 
 	// Value of single character
 	char givenChar = '\0';
@@ -461,6 +461,7 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-	expect = (string) "ello w";
+//	expect = (string) "ello w"; // Wrong case
+    expect = (string) "ello ";
 	ASSERT_STR(expect, result);
 }
