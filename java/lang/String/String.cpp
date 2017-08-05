@@ -697,6 +697,19 @@ String String::operator+(const string &target) {
 }
 
 /**
+ * Operator plus for const string
+ *
+ * @param target
+ * @return
+ */
+String String::operator+(const const_string &target) {
+	string pointerHolder = string_concat(this->original, (string) target);
+	String result = pointerHolder;
+	free(pointerHolder);
+	return result;
+}
+
+/**
  * Operator plus for String
  *
  * @param target
