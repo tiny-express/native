@@ -126,6 +126,7 @@ namespace Java {
 			boolean operator>(const String &target) const;
 			boolean operator<=(const String &target) const;
 			boolean operator>=(const String &target) const;
+            String operator+(const const_string &target);
 			String operator+(const string &target);
 			String operator+(const String &target);
 			String operator=(const String &target);
