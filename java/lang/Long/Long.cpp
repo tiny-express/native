@@ -39,7 +39,7 @@ using namespace Java::Lang;
  */
 Long::Long() {
     this->original = 0;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -50,7 +50,7 @@ Long::Long() {
  */
 Long::Long(long value) {
     this->original = value;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -61,15 +61,15 @@ Long::Long(long value) {
  */
 Long::Long(const Long &target) {
     this->original = target.original;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
  * Default destructor
  */
 Long::~Long() {
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
 }
 
@@ -531,7 +531,7 @@ String Long::toOctalString(long i) {
  * @return String
  */
 string Long::toString() const {
-    return this->string_original;
+    return this->originalString;
 }
 
 /**
@@ -646,10 +646,10 @@ String Long::toUnsignedString0(long val, int shift) {
  */
 Long Long::operator=(const Long &target) {
     this->original = target.original;
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
     return *this;
 }
 

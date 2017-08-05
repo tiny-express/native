@@ -41,7 +41,7 @@ namespace Java {
 		class Integer : public Number , public virtual Comparable<Integer> {
         private:
 			int original;
- 			string stringOriginal;
+ 			string originalString;
 
         public:
             /**
@@ -82,9 +82,9 @@ namespace Java {
             /**
              * Integer initialization with specific original value from String
              *
-             * @param string_original
+             * @param inputString
              */
-            Integer(String string_original);
+            Integer(String inputString);
 
             /**
              * Copy Constructor

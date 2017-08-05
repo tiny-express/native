@@ -35,27 +35,27 @@ using namespace Java::Lang;
 
 Integer::Integer() {
 	this->original = 0;
-	this->stringOriginal = string_from_int(this->original);
+	this->originalString = string_from_int(this->original);
 }
 
 Integer::Integer(int original) {
 	this->original = original;
-	this->stringOriginal = string_from_int(this->original);
+	this->originalString = string_from_int(this->original);
 }
 
 Integer::Integer(String inputString) {
     this->original = Integer::parseInt(inputString);
-	this->stringOriginal = string_from_int(this->original);
+	this->originalString = string_from_int(this->original);
 }
 
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
-	this->stringOriginal = string_from_int(this->original);
+	this->originalString = string_from_int(this->original);
 }
 
 Integer::~Integer() {
-	if (this->stringOriginal != nullptr)  {
-		free(this->stringOriginal);
+	if (this->originalString != nullptr)  {
+		free(this->originalString);
 	}
 }
 
@@ -67,7 +67,7 @@ char Integer::charValue() const {
 }
 
 string Integer::stringValue() const {
-    return this->stringOriginal;
+    return this->originalString;
 }
 
 short Integer::shortValue() const {
@@ -92,8 +92,8 @@ double Integer::doubleValue() const {
 
 Integer &Integer::operator=(const Integer &target) {
 	this->original = target.original;
-    free(this->stringOriginal);
-	this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+	this->originalString = string_from_int(this->original);
     return *this;
 }
 
@@ -149,15 +149,15 @@ Integer Integer::operator%(const Integer &target) {
 
 Integer &Integer::operator+=(const Integer &target) {
     this->original += target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+    this->originalString = string_from_int(this->original);
     return *this;
 }
 
 Integer &Integer::operator-=(const Integer &target) {
     this->original -= target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+    this->originalString = string_from_int(this->original);
     return *this;
 }
 
@@ -166,15 +166,15 @@ Integer &Integer::operator/=(const Integer &target) {
         throw ArithmeticException("Divide by zero");
     }
     this->original /= target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+    this->originalString = string_from_int(this->original);
     return *this;
 }
 
 Integer &Integer::operator*=(const Integer &target) {
     this->original *= target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+    this->originalString = string_from_int(this->original);
     return *this;
 }
 
@@ -183,8 +183,8 @@ Integer &Integer::operator%=(const Integer &target) {
         throw ArithmeticException("Divide by zero");
     }
     this->original %= target.original;
-    free(this->stringOriginal);
-    this->stringOriginal = string_from_int(this->original);
+    free(this->originalString);
+    this->originalString = string_from_int(this->original);
     return *this;
 }
 
@@ -515,7 +515,7 @@ int Integer::rotateRight(int inputInt, int distance) {
 }
 
 string Integer::toString() const {
-	return this->stringOriginal;
+	return this->originalString;
 }
 
 long Integer::toUnsignedLong(int inputInt) {
@@ -524,7 +524,7 @@ long Integer::toUnsignedLong(int inputInt) {
 }
 
 String Integer::toStringObject() {
-    return String(this->stringOriginal);
+    return String(this->originalString);
 }
 
 boolean Integer::equals(Integer object) {
