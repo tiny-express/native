@@ -51,24 +51,24 @@ namespace Java {
 			 * if the backing map has been modified after the entry was returned by the iterator,
 			 * except through the setValue operation on the map entry.
 			 */
-			template <class K, class V>
+			template <class T, class F>
 			class Entry {
 				
 				/**
 				 * Returns a comparator that compares Map.Entry
 				 * in natural order on key.
 				 *
-				 * @return Comparator<Map::Entry<K,V>>
+				 * @return Comparator<Map::Entry<T,F>>
 				 */
-				Comparator<Map::Entry<K,V>>	comparingByKey();
+				Comparator<Entry<T,F>>	comparingByKey();
 				
 				/**
 				 * Returns a comparator that compares Map.Entry by key
 				 * using the given Comparator.
 				 *
-				 * @return Comparator<Map::Entry<K,V>>
+				 * @return Comparator<Entry<T,F>>
 				 */
-				static Comparator<Map::Entry<K,V>> comparingByKey(Comparator cmp);
+				static Comparator<Entry<T,F>> comparingByKey(Comparator<Entry<T,F>> cmp);
 				
 				/**
 				  * Returns a comparator that compares Map.Entry in natural order on value.
@@ -82,7 +82,7 @@ namespace Java {
 				 *
 				 * @return Comparator<Map.Entry<K,V>>
 				 */
-				Comparator<Map::Entry<K,V>>	comparingByValue(Comparator cmp);
+				Comparator<Map::Entry<T,F>>	comparingByValue(Comparator<Map::Entry<T,F>> cmp);
 				
 				/**
 				 * Compares the specified object with this entry for equality.
@@ -97,14 +97,14 @@ namespace Java {
 				 *
 				 * @return K
 				 */
-				K getKey();
+				T getKey();
 				
 				/**
 				 * Returns the value corresponding to this entry.
 				 *
-				 * @return V
+				 * @return F
 				 */
-				V getValue();
+				F getValue();
 				
 				/**
 				 * Returns the hash code value for this map entry.
@@ -118,9 +118,9 @@ namespace Java {
 				 * with the specified value (optional operation).
 				 *
 				 * @param value
-				 * @return
+				 * @return F
 				 */
-				V setValue(V value);
+				F setValue(F value);
 			};
 			
 			/**

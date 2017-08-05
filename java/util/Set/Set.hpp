@@ -55,7 +55,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(Collection c);
+			boolean addAll(Collection<E> c);
 			
 			/**
 			 * Removes all of the elements from this set
@@ -78,7 +78,7 @@ namespace Java {
 			 * @param c
 			 * @return
 			 */
-			boolean containsAll(Collection c);
+			boolean containsAll(Collection<E> c);
 			
 			/**
 			 *  Compares the specified object with this set for equality.
@@ -90,6 +90,7 @@ namespace Java {
 			
 			/**
 			 * Returns the hash code value for this set.
+			 *
 			 * @return int
 			 */
 			long hashCode();
@@ -124,7 +125,7 @@ namespace Java {
 			 *
 			 * @return boolean
 			 */
-			boolean removeAll(Collection c);
+			boolean removeAll(Collection<E> c);
 			
 			/**
 			 * Retains only the elements in this set
@@ -134,7 +135,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean retainAll(Collection c);
+			boolean retainAll(Collection<E> c);
 			
 			/**
 			 * Returns the number of elements in this set (its cardinality).
