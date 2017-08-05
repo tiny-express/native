@@ -465,10 +465,9 @@ TEST(JavaLang, IntegerDecode) {
 
     stringInput = "";
     try {
-        exceptionResult = Integer::parseInt(stringInput);
+        exceptionResult = Integer::decode(stringInput);
     }
     catch (NumberFormatException &e) {
-        ASSERT_STR("input string is null", e.getMessage().toString());
         ASSERT_STR("input string is null", e.getMessage().toString());
     }
 
@@ -1119,6 +1118,13 @@ TEST(JavaLang, IntegerParseIntWithRadix) {
     }
 
     try {
+        exceptionResult = Integer::parseInt((String) "4294967298", 10);
+    }
+    catch (NumberFormatException &e) {
+        ASSERT_STR("Integer out of range", e.getMessage().toString());
+    }
+
+    try {
         exceptionResult = Integer::parseInt((String) "99", 8);
     }
     catch (NumberFormatException &e) {
@@ -1245,13 +1251,6 @@ TEST(JavaLang, IntegerParseUnsignedInt) {
     }
     catch (NumberFormatException &e) {
         ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
-    }
-
-    try {
-        exceptionResult = Integer::parseUnsignedInt((String) "2147483648", 10);
-    }
-    catch (NumberFormatException &e) {
-        ASSERT_STR("Integer out of range", e.getMessage().toString());
     }
 
     try {
