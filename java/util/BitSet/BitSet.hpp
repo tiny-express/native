@@ -383,6 +383,7 @@ namespace Java {
             Array<byte> toByteArray() const;
 
             /**
+             * Returns a new long array containing all the bits in this bit set.
              *
              * @return Array<long>
              */
@@ -401,10 +402,41 @@ namespace Java {
             string toString() const;
 
         public:
+            /**
+             * Returns a new bit set containing all the bits in the given byte array.
+             *
+             * @param bytes
+             * @return BitSet
+             */
             static BitSet valueOf(const Array<byte> &bytes);
+
+            /**
+             * Returns a new bit set containing all the bits in the given byte buffer
+             * between its position and limit.
+             *
+             * @param byteBuffer
+             * @return BitSet
+             */
 //          static BitSet valueOf(const ByteBuffer &byteBuffer);
+            // TODO(truongchauhien): Waiting for ByteBuffer class.
+
+            /**
+             * Returns a new bit set containing all the bits in the given long array.
+             *
+             * @param longs
+             * @return BitSet
+             */
             static BitSet valueOf(const Array<long> &longs);
+
+            /**
+             * Returns a new bit set containing all the bits in the given long buffer
+             * between its position and limit.
+             *
+             * @param longBuffer
+             * @return BitSet
+             */
 //          static BitSet valueOf(const LongBuffer &longBuffer);
+            // TODO(truongchauhien): Waiting for LongBuffer class.
         };  // class BitSet
     }  // namespace Util
 }  // namespace Java

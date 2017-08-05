@@ -544,7 +544,8 @@ void BitSet::set(int fromIndex, int toIndex) {
     this->expandTo(endWordIndex);
 
     long firstWordMask = WORD_MASK << fromIndex;
-    long lastWordMask = static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
+    long lastWordMask =
+            static_cast<unsigned long>(WORD_MASK) >> (-toIndex & 0b111111);
 
     if (startWordIndex == endWordIndex) {
         // Case 1: One word.
@@ -577,6 +578,8 @@ int BitSet::size() const {
 }
 
 Array<byte> BitSet::toByteArray() const {
+    // This is an alternative version, without supports from ByteBuffer data type.
+
     if (this->wordsInUse == 0) {
         return Array<byte>(0);
     }
@@ -595,7 +598,8 @@ Array<byte> BitSet::toByteArray() const {
         unsignedWord = static_cast<unsigned long>(word);
         bytePointerToWord = (byte *)&unsignedWord;
         for (indexOfEightPartsOfWord = 0;
-             indexOfEightPartsOfWord < numberOfBytesPerWord; ++indexOfEightPartsOfWord) {
+             indexOfEightPartsOfWord < numberOfBytesPerWord;
+             ++indexOfEightPartsOfWord) {
             result.push(bytePointerToWord[indexOfEightPartsOfWord]);
         }
     }
@@ -605,10 +609,11 @@ Array<byte> BitSet::toByteArray() const {
     unsignedWord = static_cast<unsigned long>(word);
     bytePointerToWord = (byte *)&unsignedWord;
     int numberOfTrailingZeroBytes = 0;
-    for (indexOfEightPartsOfWord = numberOfBytesPerWord - 1;
-         indexOfEightPartsOfWord >= 0; --indexOfEightPartsOfWord) {
+    indexOfEightPartsOfWord = numberOfBytesPerWord - 1;
+    while (indexOfEightPartsOfWord >= 0) {
         if (bytePointerToWord[indexOfEightPartsOfWord] == 0) {
             numberOfTrailingZeroBytes = numberOfTrailingZeroBytes + 1;
+            indexOfEightPartsOfWord = indexOfEightPartsOfWord - 1;
         } else {
             break;
         }
@@ -616,7 +621,8 @@ Array<byte> BitSet::toByteArray() const {
 
     int numberOfHeadingNonZeroByte = numberOfBytesPerWord - numberOfTrailingZeroBytes;
     for (indexOfEightPartsOfWord = 0;
-         indexOfEightPartsOfWord < numberOfHeadingNonZeroByte; ++indexOfEightPartsOfWord) {
+         indexOfEightPartsOfWord < numberOfHeadingNonZeroByte;
+         ++indexOfEightPartsOfWord) {
         result.push(bytePointerToWord[indexOfEightPartsOfWord]);
     }
 
@@ -655,4 +661,37 @@ string BitSet::toString() const {
     this->backupForToString = strdup(stringBuilder.toString());
 
     return this->backupForToString;
+}
+
+BitSet BitSet::valueOf(const Array<byte> &bytes) {
+    // This is an alternative version, without supports from ByteBuffer data type.
+
+    const int bytesPerWord = 8;
+
+    int numberOfHeadingNoneZeroBytes = bytes.length;
+    while (numberOfHeadingNoneZeroBytes > 0 &&
+            bytes[numberOfHeadingNoneZeroBytes - 1] == 0) {
+        numberOfHeadingNoneZeroBytes = numberOfHeadingNoneZeroBytes - 1;
+    }
+    // Length of words is always >= 1 if numberOfHeadingNoneZeroBytes > 0
+    Array<long> words((numberOfHeadingNoneZeroBytes + 7) / 8);
+
+    int indexOfByte;
+    byte *pointerToWord;
+    for (indexOfByte = 0;
+         indexOfByte < numberOfHeadingNoneZeroBytes; ++indexOfByte) {
+        pointerToWord = (byte *)&words[indexOfByte / bytesPerWord];
+        pointerToWord[indexOfByte % bytesPerWord] = bytes[indexOfByte];
+    }
+
+    return BitSet(words);
+}
+
+BitSet BitSet::valueOf(const Array<long> &longs) {
+    int numberOfHeadingNoneZeroWords = longs.length;
+    while (numberOfHeadingNoneZeroWords > 0 &&
+            longs[numberOfHeadingNoneZeroWords - 1] == 0) {
+        numberOfHeadingNoneZeroWords = numberOfHeadingNoneZeroWords - 1;
+    }
+    return BitSet(Arrays::copyOf(longs, numberOfHeadingNoneZeroWords));
 }

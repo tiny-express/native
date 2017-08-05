@@ -626,3 +626,32 @@ TEST(JavaUtil, BitSetToLongArray) {
     resultLongArray = bitSet.toLongArray();
     ASSERT_TRUE(Arrays::equals(expectedResultLongArray, resultLongArray));
 }
+
+TEST(JavaUtil, BitSetValueOf) {
+    Array<byte> inputByteArray = Array<byte>
+            {0b00001111, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b11111111,
+             0b11111111, 0b11111111, 0b11111111, 0b10111111};
+    BitSet expectedResultByteArray;
+    expectedResultByteArray.set(0, 4, true);
+    expectedResultByteArray.set(4, 128, false);
+    expectedResultByteArray.set(128, 254, true);
+    expectedResultByteArray.set(254, 255, false);
+    expectedResultByteArray.set(255, 256, true);
+    BitSet resultByteArray = BitSet::valueOf(inputByteArray);
+    ASSERT_TRUE(expectedResultByteArray.equals(resultByteArray));
+
+    Array<long> inputLongArray = Array<long> {0L, 0L, -1L, -4611686018427387905L};
+    BitSet expectedResultLongArray;
+    expectedResultLongArray.set(0, 128, false);
+    expectedResultLongArray.set(128, 254, true);
+    expectedResultLongArray.set(254, 255, false);
+    expectedResultLongArray.set(255, 256, true);
+    BitSet resultLongArray = BitSet::valueOf(inputLongArray);
+    ASSERT_TRUE(expectedResultLongArray.equals(resultLongArray));
+}
