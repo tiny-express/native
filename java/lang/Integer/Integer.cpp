@@ -406,7 +406,7 @@ int Integer::parseInt(String inputString, int radix) {
     long result = unsignedResult;
 
     if (isNegative) {
-        return (int) -unsignedResult;
+        result = -unsignedResult;
     }
 
     if (result > Integer::MAX_VALUE || result < Integer::MIN_VALUE) {
