@@ -1118,7 +1118,7 @@ TEST(JavaLang, IntegerParseIntWithRadix) {
     }
 
     try {
-        exceptionResult = Integer::parseInt((String) "4294967298", 10);
+        exceptionResult = Integer::parseInt((String) "99999999999999999999", 10);
     }
     catch (NumberFormatException &e) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());
@@ -1214,7 +1214,7 @@ TEST(JavaLang, IntegerParseInt) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());
     }
 
-    stringInput = (String) "-2147483650";
+    stringInput = (String) "-21474834650";
     try {
         exceptionResult = Integer::parseInt(stringInput);
     }
@@ -1621,7 +1621,7 @@ TEST(JavaLang, IntegerValueOf) {
     }
 
     try {
-        exceptionResult = Integer::valueOf((String) "-2147483658");
+        exceptionResult = Integer::valueOf((String) "-21474836458");
     }
     catch (NumberFormatException &e) {
         ASSERT_STR("Integer out of range", e.getMessage().toString());

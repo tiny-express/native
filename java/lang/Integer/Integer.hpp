@@ -29,8 +29,8 @@
 
 #include "../Number/Number.hpp"
 #include "../Comparable/Comparable.hpp"
-#include "iostream"
-#include "bitset"
+#include <iostream>
+#include <bitset>
 
 using namespace Java::Lang;
 
@@ -324,11 +324,11 @@ namespace Java {
             static int divideUnsigned(int dividend, int divisor);
 
             /**
-            * Returns the value of this Integer as a double after
-            * a widening primitive conversion.
-            *
-            * @return the value of this Integer as a double
-            */
+             * Returns the value of this Integer as a double after
+             * a widening primitive conversion.
+             *
+             * @return the value of this Integer as a double
+             */
             double doubleValue() const override;
 
             /**
@@ -570,15 +570,15 @@ namespace Java {
             static int rotateLeft(int inputInt, int distance);
 
             /**
-            * Returns the value obtained by rotating the
-            * two's complement binary representation of
-            * the specified int value right by the specified number of bits
-            *
-            * @param inputInt
-            * @param distance
-            * @return the value obtained by rotating the two's complement binary
-            * representation of the specified int value right by the specified number of bits.
-            */
+             * Returns the value obtained by rotating the
+             * two's complement binary representation of
+             * the specified int value right by the specified number of bits
+             *
+             * @param inputInt
+             * @param distance
+             * @return the value obtained by rotating the two's complement binary
+             * representation of the specified int value right by the specified number of bits.
+             */
             static int rotateRight(int inputInt, int distance);
 
             /**

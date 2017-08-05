@@ -100,19 +100,10 @@ file(GLOB_RECURSE SOURCES_C
 
 # Include all C unit test cases
 file(GLOB_RECURSE TESTS_C
-<<<<<<< HEAD
-         kernel/common/*_test.c
-         kernel/datetime/*_test.c
-         kernel/math/*_test.c
-         kernel/string/*_test.c
-         kernel/system/*_test.c
-         kernel/type/*_test.c
-=======
         kernel/common/*_test.c
         kernel/datetime/*_test.c
         kernel/math/*_test.c
         kernel/string/*_test.c
->>>>>>> origin/development
         )
 
 # Remove all test files within c files
@@ -122,22 +113,14 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
-<<<<<<< HEAD
-         java/**/*.cpp
-=======
         javax/**/*.cpp
         java/**/*.cpp
->>>>>>> origin/development
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-<<<<<<< HEAD
-         java/**/*Test.cpp
-=======
         javax/**/*Test.cpp
         java/**/*Test.cpp
->>>>>>> origin/development
         )
 
 # Remove all test files within cpp files
