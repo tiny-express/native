@@ -350,7 +350,7 @@ namespace Java {
              * @param dividend
              * @param divisor
              * @throw ArithmeticException if divisor is 0
-             * @return he floor modulus of the arguments
+             * @return the floor modulus of the arguments
              * If the signs of the arguments are the same, the results of floorMod
              * and the % operator are the same.
              * If the signs of the arguments are different, the results differ from the % operator.
