@@ -142,75 +142,275 @@ namespace Java {
              */
 			double doubleValue() const override;
 
+			/**
+			 * Compare this Byte to another Byte object
+			 *
+			 * @param object
+			 * @return true if object is a Byte and has the same value as this Bytes; false otherwise
+			 */
 			boolean equals(Object object);
 
+
+            /**
+             * Returns the value of this Byte as an float.
+             *
+             * @return float
+             */
 			float floatValue() const override;
 
+            /**
+             * Returns a hash code for this Byte
+             *
+             * @return int
+             */
 			int hashCode();
 
+            /**
+             * Returns a hash code for this Byte
+             *
+             * @param value
+             * @return int
+             */
             static int hashCode(byte byteValue);
 
+            /**
+             * Returns the value of this Byte as an int.
+             *
+             * @return int
+             */
 			int intValue() const override;
 
+            /**
+             * Returns the value of this Byte as an long.
+             *
+             * @return long
+             */
 			long longValue() const override;
 
+            /**
+             * Parse the parameter string as a byte with radix =10
+             *
+             * @param stringToParse
+             * @throw NumberFormatException If the string does not contain a parsable byte.
+             * @return the byte value represented by the string argument with radix =10
+             */
 			static byte parseByte(String stringToParse);
 
+            /**
+             * Parse the parameter string as a byte
+             *
+             * @param stringToParse
+             * @param radix
+             * @throw NumberFormatException If the string does not contain a parsable byte.
+             * @return the byte value represented by the string argument in the specified radix
+             */
             static byte parseByte(String stringToParse, int radix);
-            
+
+            /**
+             * Returns the value of this Byte as an short.
+             *
+             * @return short
+             */
 			short shortValue() const override;
 
+            /**
+             * Returns a String object representing this Byte's value
+             *
+             * @return String
+             */
 			String toString();
 
+            /**
+             * Returns a new String object representing the specified byte with radix = 10
+             *
+             * @param byteValue
+             * @return String
+             */
 			static String toString(byte byteValue);
 
+            /**
+             * Converts the argument to an int by an unsigned conversion.
+             *
+             * @param byteValue
+             * @return int
+             */
 			static int toUnsignedInt(byte byteValue);
 
+            /**
+             * Converts the argument to an int by an unsigned conversion.
+             *
+             * @param byteValue
+             * @return long
+             */
 			static long toUnsignedLong(byte byteValue);
 
+            /**
+             * Returns a Byte instance representing the specified byte value.
+             *
+             * @param byteValue
+             * @return Bytes
+             */
 			static Bytes valueOf(byte byteValue);
 
+            /**
+             * Returns a Byte instance representing the specified String value.
+             *
+             * @param stringValue
+             * @return Bytes
+             */
 			static Bytes valueOf(String stringValue);
 
+            /**
+             * Returns a Byte instance representing the specified String value with radix
+             *
+             * @param stringValue
+             * @param radix
+             * @return
+             */
             static Bytes valueOf(String stringValue, int radix);
             
 		public:
+            /**
+             * Make a summation with target Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			Bytes operator+(const Bytes &target);
 
+            /**
+             * Make a subtraction with target Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			Bytes operator-(const Bytes &target);
 
+            /**
+             *  Make a division from this Byte with target
+             *
+             * @param target
+             * @return Byte
+             */
 			Bytes operator/(const Bytes &target);
 
+            /**
+             * Make a modulo from this Byte with target
+             *
+             * @param target
+             * @return Byte
+             */
 			Bytes operator%(const Bytes &target);
 
+            /**
+             * Make a multiplication from this Byte with target
+             *
+             * @param target
+             * @return Byte
+             */
 			Bytes operator*(const Bytes &target);
 
+            /**
+             * Compare 2 Byte
+             *
+             * @param target
+             * @return true if target Byte is equal to this Byte; false otherwise
+             */
 			boolean operator==(const Bytes &target);
 
+            /**
+             * Compare 2 Byte
+             *
+             * @param target
+             * @return true if target Byte is not equal to this Byte; false otherwise
+             */
 			boolean operator!=(const Bytes &target);
 
+            /**
+             * Determine if this Byte is smaller than target
+             *
+             * @param target
+             * @return true if this Byte is smaller than target; false otherwise
+             */
 			boolean operator<(const Bytes &target);
 
+            /**
+             * Determine if this Byte is bigger than target
+             *
+             * @param target
+             * @return true if this Byte is bigger than target; false otherwise
+             */
 			boolean operator>(const Bytes &target);
 
+            /**
+             * Determine if this Byte is equal or less than target
+             *
+             * @param target
+             * @return true if this Byte is equal or less than target; false otherwise
+             */
 			boolean operator<=(const Bytes &target);
 
+            /**
+             * Determine if this Byte is equal or bigger than target
+             *
+             * @param target
+             * @return true if this Byte is equal or bigger than target; false otherwise
+             */
 			boolean operator>=(const Bytes &target);
 
+            /**
+             * Make a subtraction from this Byte with target and assign the result value to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			void operator-=(const Bytes &target);
 
+            /**
+             * Make an summation from this Byte with target and assign the result value to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			void operator+=(const Bytes &target);
 
+            /**
+             * Make a multiplication from this Byte with target and assign the result value to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			void operator*=(const Bytes &target);
 
+            /**
+             * Make a division from this Byte with target and assign the result value to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			void operator/=(const Bytes &target);
 
+            /**
+             * Make a modulo from this Byte with target and assign the result value to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
 			void operator%=(const Bytes &target);
 
+            /**
+             *  Assign the value of target to this Byte
+             *
+             * @param target
+             * @return Byte
+             */
             Bytes &operator=(const Bytes &target);
 
 		};
 
+        /**
+         * Byte cache for instance byte
+         */
         class ByteCache {
             static ByteCache *instance;
 
