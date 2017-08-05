@@ -335,41 +335,14 @@ int Integer::numberOfLeadingZeros(int inputInt) {
 }
 
 int Integer::numberOfTrailingZeros(int inputInt) {
-	int y;
-
-    if (inputInt == 0)
+    if (inputInt == 0) {
         return 32;
-
-    int n = 31;
-    y = inputInt << 16;
-
-    if (y != 0) {
-        n = n - 16;
-        inputInt = y;
     }
 
-    y = inputInt << 8;
-
-    if (y != 0) {
-        n = n - 8;
-        inputInt = y;
-    }
-
-    y = inputInt << 4;
-
-    if (y != 0) {
-        n = n - 4;
-        inputInt = y;
-    }
-
-    y = inputInt << 2;
-
-    if (y != 0) {
-        n = n - 2;
-        inputInt = y;
-    }
-
-    return n - ((unsigned int) (inputInt << 1) >> 31);
+    String inputInBinary = Integer::toBinaryString(inputInt);
+    int lastIndexOfOneBit = inputInBinary.lastIndexOf('1');
+    int numberOfTrailingZeros = inputInBinary.length() - lastIndexOfOneBit - 1;
+    return numberOfTrailingZeros;
 }
 
 int Integer::parseInt(String inputString, int radix) {
@@ -569,13 +542,12 @@ String Integer::toUnsignedString(int inputInt, int radix) {
     }
 
     std::stringstream stream;
-    std::string binaryString;
     String result;
 
     switch (radix) {
         case 2:
-            binaryString = std::bitset<32> ((unsigned long long int) Integer::toUnsignedLong(inputInt)).to_string();
-            result = binaryString.c_str();
+			// TODO change to java.util.BitSet
+            result = std::bitset<32> ((unsigned long long int) Integer::toUnsignedLong(inputInt)).to_string();
             result = result.getStringFromIndex(result.indexOf('1'));
             return result;
         case 8:

@@ -1094,8 +1094,8 @@ TEST(JavaLang, IntegerNumberOfTrailingZeros) {
     ASSERT_EQUAL(32, Integer::numberOfTrailingZeros(0));
     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(1));
     ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(-1));
-    ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(13));
-    ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(Integer::MAX_VALUE));
+    ASSERT_EQUAL(0, Integer::numberOfTrailingZeros(-113));
+    ASSERT_EQUAL(1, Integer::numberOfTrailingZeros(1314));
     ASSERT_EQUAL(31, Integer::numberOfTrailingZeros(Integer::MIN_VALUE));
 }
 

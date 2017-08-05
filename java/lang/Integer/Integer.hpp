@@ -117,7 +117,6 @@ namespace Java {
              * Returns a String object representing
              * the specified integer.
              *
-             * @param target
              * @return string
              */
             string toString() const override;
@@ -631,7 +630,7 @@ namespace Java {
              * the integer argument as an unsigned integer in base 8.
              *
              * @param inputInt
-             * @return the string representation of the unsigned integer value
+             * @return a String representation of the unsigned integer value
              * represented by the argument in base 8
              */
             static String toOctalString(int inputInt);
@@ -680,7 +679,7 @@ namespace Java {
              * @param inputInt
              * @param radix
              * @throw UnsupportedOperationException - if radix is not support
-             * @return an unsigned string representation of the argument in the specified radix.
+             * @return an unsigned String representation of the argument in the specified radix.
              */
             static String toUnsignedString(int inputInt, int radix);
 
@@ -689,7 +688,7 @@ namespace Java {
              * the argument as an unsigned decimal value.
              *
              * @param inputInt
-             * @return an unsigned string representation of the argument.
+             * @return an unsigned String representation of the argument.
              */
             static String toUnsignedString(int inputInt);
 
