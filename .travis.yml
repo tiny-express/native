@@ -10,8 +10,11 @@ addons:
         sources:
             - ubuntu-toolchain-r-test
         packages:
+            - g++-6
             - lcov
 before_script:
+- export CC=gcc-6
+- export CXX=g++-6
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
 - chmod +x misc/checkstyle.sh
