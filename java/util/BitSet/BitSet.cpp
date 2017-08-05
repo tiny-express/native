@@ -136,7 +136,7 @@ BitSet::BitSet(const Array<long> &words) {
 }
 
 BitSet::BitSet(const BitSet &bitSet){
-    this->words = Arrays::copyOf(bitSet.words,bitSet.words.length);
+    this->words = Arrays::copyOf(bitSet.words, bitSet.words.length);
     this->wordsInUse = bitSet.wordsInUse;
     this->sizeIsSticky = bitSet.sizeIsSticky;
 }
@@ -157,9 +157,74 @@ void BitSet::bitAnd(const BitSet &set) {
         this->words[this->wordsInUse] = 0L;
     }
 
+    // Perform logical AND on words in common.
     int index;
     for (index = 0; index < this->wordsInUse; ++index) {
         words[index] &= set.words[index];
+    }
+
+    this->recalculateWordsInUse();
+}
+
+void BitSet::bitOr(const BitSet &set) {
+    if (*this == set) {
+        return;
+    }
+
+    int wordsInCommon = Math::min(this->wordsInUse, set.wordsInUse);
+
+    if (this->wordsInUse < set.wordsInUse) {
+        this->ensureCapacity(set.wordsInUse);
+        this->wordsInUse = set.wordsInUse;
+    }
+
+    // Perform logical OR on words in common.
+    int index;
+    for (index = 0; index < wordsInCommon; ++index) {
+        this->words[index] |= set.words[index];
+    }
+
+    // Copy any remaining words.
+    if (wordsInCommon < set.wordsInUse) {
+        for (index = wordsInCommon;
+             index < set.wordsInUse; ++index) {
+            this->words[index] = set.words[index];
+        }
+    }
+}
+
+void BitSet::bitXor(const BitSet &set) {
+    int wordsInCommon = Math::min(this->wordsInUse, set.wordsInUse);
+
+    if (this->wordsInUse < set.wordsInUse) {
+        this->ensureCapacity(set.wordsInUse);
+        this->wordsInUse = set.wordsInUse;
+    }
+
+    // Perform logical XOR on words in common.
+    int index;
+    for (index = 0; index < wordsInCommon; ++index) {
+        this->words[index] ^= set.words[index];
+    }
+
+    // Copy any remaining words.
+    if (wordsInCommon < set.wordsInUse) {
+        for (index = wordsInCommon;
+             index < set.wordsInUse; ++index) {
+            this->words[index] = set.words[index];
+        }
+    }
+
+    this->recalculateWordsInUse();
+}
+
+void BitSet::andNot(const BitSet &set) {
+    // Perform logical (a & !b) on words in common.
+    int wordsInCommon = Math::min(this->wordsInUse, set.wordsInUse);
+
+    int index;
+    for (index = 0; index < wordsInCommon; ++index) {
+        this->words[index] &= ~set.words[index];
     }
 
     this->recalculateWordsInUse();

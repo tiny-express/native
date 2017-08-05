@@ -702,3 +702,47 @@ TEST(JavaUtil, BitSetAnd) {
     ASSERT_EQUAL(true, bitSet1.get(0));
     ASSERT_EQUAL(true, bitSet1.get(7));
 }
+
+TEST(JavaUtil, BitSetOr) {
+    BitSet bitSet1;
+    BitSet bitSet2;
+    bitSet1.bitOr(bitSet2);
+    // bitSet1 == bitSet2, nothing will be changed.
+    ASSERT_TRUE(bitSet1.equals(bitSet2));
+
+    bitSet1.set(0, 512, false);
+    bitSet1.set(512, 1024, true);
+    bitSet2.set(0, 2048, true);
+    bitSet1.bitOr(bitSet2);
+    ASSERT_EQUAL(2048, bitSet1.length());
+    ASSERT_EQUAL(2048, bitSet1.cardinality());
+}
+
+TEST(JavaUtil, BitSetXor) {
+    BitSet bitSet1;
+    BitSet bitSet2;
+    bitSet1.set(0, 1024, true);
+    bitSet2.set(0, 2048, true);
+
+    bitSet1.bitXor(bitSet2);
+    ASSERT_EQUAL(2048, bitSet1.length());
+    ASSERT_EQUAL(1024, bitSet1.cardinality());
+    ASSERT_EQUAL(false, bitSet1.get(0));
+    ASSERT_EQUAL(false, bitSet1.get(1023));
+    ASSERT_EQUAL(true, bitSet1.get(1024));
+    ASSERT_EQUAL(true, bitSet1.get(2047));
+}
+
+TEST(JavaUtil, BitSetAndNot) {
+    BitSet bitSet1;
+    BitSet bitSet2;
+    bitSet1.set(0, 1024, true);
+    bitSet1.andNot(bitSet2);
+    ASSERT_EQUAL(1024, bitSet1.length());
+    ASSERT_EQUAL(true, bitSet1.get(0));
+    ASSERT_EQUAL(true, bitSet1.get(1023));
+
+    bitSet2.set(0, 1024, true);
+    bitSet1.andNot(bitSet2);
+    ASSERT_EQUAL(0, bitSet1.length());
+}
