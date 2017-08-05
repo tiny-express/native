@@ -286,7 +286,7 @@ TEST (JavaLang, StringValueOf) {
 	// Value of boolean
 	boolean isChecked = true;
 	String valueOfBoolean = String::valueOf(isChecked);
-	ASSERT_STR((string) "1", valueOfBoolean.toString());
+	ASSERT_STR((string) "true", valueOfBoolean.toString());
 
 	// Value of single character
 	char givenChar = '\0';
@@ -461,9 +461,6 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-
-// Please remove this
-//	expect = (string) "ello w"; This is wrong result, subString(1,5) has 5 characters, in this case is 6.
     expect = (string) "ello ";
 	ASSERT_STR(expect, result);
 }

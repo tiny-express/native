@@ -137,7 +137,7 @@ TEST(MediaType, IsCompatible) {
     ASSERT_FALSE(mediaType4.isCompatible(mediaType5));
 
     // MediaType */text is compatible with application/* and vice versa,  expected true
-    MediaType mediaType6(MediaType::MEDIA_TYPE_WILDCARD, "text");
+    MediaType mediaType6("application", "*+json");
     MediaType mediaType7("application", "*");
     ASSERT_TRUE(mediaType6.isCompatible(mediaType7));
     ASSERT_TRUE(mediaType7.isCompatible(mediaType6));
@@ -152,12 +152,7 @@ TEST(MediaType, ValueOf) {
     // MediaType valueOf "text/*", expected type "text", subtype "*+plain"
     MediaType mediaType1 = MediaType::valueOf("text/*+plain");
     ASSERT_STR("text", mediaType1.getType().toString());
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType1.getSubtype().toString());
-
-    // MediaType valueOf "*/html", expected type MEDIA_WILDCARD_TYPE, subtype "html"
-    MediaType mediaType2 = MediaType::valueOf("*/html");
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType2.getType().toString());
-    ASSERT_STR("html", mediaType.getSubtype().toString());
+    ASSERT_STR("*+plain", mediaType1.getSubtype().toString());
 
     // MediaType valueOf WILDCARD, expected both type and subtype are MEDIA_WILDCARD_TYPE
     MediaType mediaType3 = MediaType::valueOf(MediaType::WILDCARD);
@@ -198,7 +193,7 @@ TEST(MediaType, ValueOf) {
     } catch (MediaTypeException &e) {
         exception3 = e;
     }
-    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", exception3.getMessage().toString());
+    ASSERT_STR("*/html wildcard type is legal only in '*/*' (all types)", exception3.getMessage().toString());
 }
 
 TEST(MediaType, ToString) {
@@ -206,7 +201,7 @@ TEST(MediaType, ToString) {
     // Default constructor, expected WILDCARD
     MediaType mediaType;
     mediaType.toString();
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.toString().toString());
+    ASSERT_STR(MediaType::WILDCARD.toString(), mediaType.toString().toString());
 
     // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
     MediaType mediaType2("application", "*+xml");

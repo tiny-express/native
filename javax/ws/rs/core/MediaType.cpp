@@ -181,7 +181,7 @@ MediaType MediaType::valueOf(String type) {
         throw MediaTypeException(exceptionMessage);
     }
 
-    String getType = fullType.subString(0, splashIndex);
+    String getType = fullType.subString(0, splashIndex - 1);
     String getSubtype = fullType.subString(splashIndex + 1);
     if (getType.equals(MEDIA_TYPE_WILDCARD) && !getSubtype.equals(MEDIA_TYPE_WILDCARD)) {
         String exceptionMessage = type + (String) " wildcard type is legal only in '*/*' (all types)";
