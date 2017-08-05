@@ -27,10 +27,15 @@
 #ifndef JAVA_LANG_STRING_STRING_HPP_
 #define JAVA_LANG_STRING_STRING_HPP_
 
+#include <typeinfo>
+#include <regex>
+#include <string>
+
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
+#include "../../lang/Number/Number.hpp"
 
 using namespace Java::IO;
 
@@ -83,7 +88,6 @@ namespace Java {
 				}
 				return true;
 			}
-			static String format(const String& format, ...);
 			Array<byte> getBytes() const;
 			String getStringFromIndex(int index);
 			// Array<byte> getBytes(const Charset &);
@@ -119,6 +123,72 @@ namespace Java {
 			static String valueOf(long target);
 			static String valueOf(float target);
 			static String valueOf(double target);
+
+			template<typename T, typename... Args>
+			static String format(const String& format, T value, Args... args) {
+				std::string result;
+				std::string inputString(format.toString());
+				std::smatch matchResult;
+				std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
+
+				while(true) {
+					if(std::regex_search(inputString, matchResult, reg)) {
+						result += matchResult.prefix();
+						result += printObject(matchResult[0], value);
+						if('%' == result.back()) {
+							inputString = matchResult.suffix().str();
+							continue;
+						}
+						return result + std::string(String::format(matchResult.suffix().str().c_str(), args...).toString());
+					} else {
+						result += inputString;
+						break;
+					}
+				}
+
+				return String(result.c_str());
+			}
+
+		private:
+			static String format(const String& format);
+			template<typename T>
+			static std::string print(const std::string& format, T value) {
+				std::string result;
+				char buffer[256] = {0};
+				const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+				if(length > 0)
+					result = std::string(buffer);
+				return result;
+			}
+			template<typename T>
+			static std::string printObject(const std::string& format, T value) {
+				std::string result;
+				char lastChar = format.back();
+				switch (lastChar) {
+					case 'd':
+						if(instanceof<Number>(value))
+							result = String::print(format, ((Number*)&value)->intValue());
+						else
+							result = String::print(format, value);
+						break;
+					case 'f':
+						if(instanceof<Number>(value))
+							result = String::print(format, ((Number*)&value)->doubleValue());
+						else
+							result = String::print(format, value);
+						break;
+					case 's':
+						if(instanceof<String>(value))
+							result = String::print(format, ((String*)&value)->toString());
+						else
+							result = String::print(format, value);
+						break;
+					case '%':
+						result += lastChar;
+						break;
+				}
+				return result;
+			}
 
 		public:
 			boolean operator==(const String &target) const;

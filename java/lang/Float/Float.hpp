@@ -28,6 +28,7 @@
 #define JAVA_LANG_FLOAT_HPP_
 
 #include "../Number/Number.hpp"
+#include "../String/String.hpp"
 
 namespace Java {
 	namespace Lang {

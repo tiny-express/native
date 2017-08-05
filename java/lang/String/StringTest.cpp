@@ -467,15 +467,20 @@ TEST(JavaLang, StringSubString) {
 }
 
 TEST(JavaLang, StringFormat) {
-	String expectString = "-123 123 123.123 123.456789 hello world";
-	String format = "%d %d %.3f %.6f %s";
-
+	String expectString = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
+	String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
 	int signedValue = -123;
 	unsigned int unsignedValue = 123;
-	float floatValue = 123.123;
+	float floatValue = 123.456;
 	double doubleValue = 123.456789;
-	string stringValue = "hello world";
+	char* stringValue = "string";
 
-	String resultString = String::format(format, signedValue, unsignedValue, floatValue, doubleValue, stringValue);
+	Integer integerObject = -123;
+	Long longObject = 123456;
+	Float floatObject = 123.456;
+	Double doubleObject = 123.456789;
+	String stringObject = "String";
+
+	String resultString = String::format(format, signedValue, unsignedValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
 	ASSERT_STR(expectString.toString(), resultString.toString());
 }

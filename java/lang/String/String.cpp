@@ -199,22 +199,6 @@ boolean String::endsWith(const String &suffix) const {
 }
 
 /**
- * Format string
- * @param format
- * @param args
- * @return String
- */
-String String::format(const String& format, ...) {
-	va_list args;
-	va_start(args, format);
-	string temp = string_format(format.toString(), args);
-	String result = temp;
-	free(temp);
-	va_end(args);
-	return result;
-}
-
-/**
  * String from character array
  *
  * @param chars
@@ -848,4 +832,35 @@ boolean String::operator>=(const String &target) const {
 		return false;
 	}
 	return true;
+}
+
+/**
+ * Format string (base - currying function)
+ * @param format
+ * @return String
+ */
+String String::format(const String &format)
+{
+	std::string result;
+	std::string inputString(format.toString());
+	std::smatch matchResult;
+	std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
+
+	while(true) {
+		if(std::regex_search(inputString, matchResult, reg)) {
+			result += matchResult.prefix();
+			if('%' == matchResult[0].str().back()) {
+				result += matchResult[0].str().back();
+				inputString = matchResult.suffix().str();
+				continue;
+			} else {
+				throw "missing arguments";
+			}
+		} else {
+			result += inputString;
+			break;
+		}
+	}
+
+	return String(result.c_str());
 }
