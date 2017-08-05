@@ -655,3 +655,50 @@ TEST(JavaUtil, BitSetValueOf) {
     BitSet resultLongArray = BitSet::valueOf(inputLongArray);
     ASSERT_TRUE(expectedResultLongArray.equals(resultLongArray));
 }
+
+TEST(JavaUtil, BitSetCompareEqualsOperator) {
+    BitSet bitSet1;
+    BitSet bitSet2;
+    ASSERT_TRUE(bitSet1 == bitSet2);
+    bitSet1.set(1);
+    ASSERT_TRUE(bitSet1 != bitSet2);
+}
+
+TEST(JavaUtil, BitSetAssignmentOperator) {
+    BitSet bitSet1;
+    bitSet1.set(0, 1024, true);
+    ASSERT_EQUAL(1024, bitSet1.length());
+    ASSERT_EQUAL(true, bitSet1.get(512));
+
+    BitSet bitSet2;
+    bitSet2.set(5000, true);
+    bitSet2 = bitSet1;
+    ASSERT_EQUAL(1024, bitSet2.length());
+    ASSERT_EQUAL(true, bitSet2.get(512));
+    ASSERT_TRUE(bitSet1.equals(bitSet2));
+}
+
+TEST(JavaUtil, BitSetAnd) {
+    BitSet bitSet1;
+    bitSet1.set(0, 8, true);
+    BitSet bitSet2;
+    bitSet2.set(0, 8, true);
+    // bitSet1 == bitSet2, nothing will be changed.
+    bitSet1.bitAnd(bitSet2);
+    ASSERT_EQUAL(8, bitSet1.length());
+    ASSERT_EQUAL(8, bitSet2.length());
+    ASSERT_EQUAL(true, bitSet1.get(0));
+    ASSERT_EQUAL(true, bitSet2.get(0));
+    ASSERT_EQUAL(true, bitSet1.get(7));
+    ASSERT_EQUAL(true, bitSet2.get(7));
+
+    bitSet2.set(4, false);
+    bitSet1.set(0, 16, true);
+    bitSet1.bitAnd(bitSet2);
+    ASSERT_EQUAL(8, bitSet1.length());
+    ASSERT_EQUAL(false, bitSet1.get(8));
+    ASSERT_EQUAL(false, bitSet1.get(15));
+    ASSERT_EQUAL(false, bitSet1.get(4));
+    ASSERT_EQUAL(true, bitSet1.get(0));
+    ASSERT_EQUAL(true, bitSet1.get(7));
+}

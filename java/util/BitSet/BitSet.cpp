@@ -110,6 +110,12 @@ void BitSet::trimToSize() {
     }
 }
 
+void BitSet::cleanUp() {
+    if (this->backupForToString != nullptr) {
+        free(this->backupForToString);
+    }
+}
+
 BitSet::BitSet() {
     this->initializeWords(BITS_PER_WORD);
     this->sizeIsSticky = false;
@@ -136,9 +142,27 @@ BitSet::BitSet(const BitSet &bitSet){
 }
 
 BitSet::~BitSet() {
-    if (this->backupForToString != nullptr) {
-        free(this->backupForToString);
+    this->cleanUp();
+}
+
+void BitSet::bitAnd(const BitSet &set) {
+    if (*this == set) {
+        // Nothing will be changed.
+        return;
     }
+
+    while (this->wordsInUse > set.wordsInUse) {
+        // Decrease by 1 to change logical size to index.
+        this->wordsInUse = this->wordsInUse - 1;
+        this->words[this->wordsInUse] = 0L;
+    }
+
+    int index;
+    for (index = 0; index < this->wordsInUse; ++index) {
+        words[index] &= set.words[index];
+    }
+
+    this->recalculateWordsInUse();
 }
 
 int BitSet::cardinality() const {
@@ -694,4 +718,15 @@ BitSet BitSet::valueOf(const Array<long> &longs) {
         numberOfHeadingNoneZeroWords = numberOfHeadingNoneZeroWords - 1;
     }
     return BitSet(Arrays::copyOf(longs, numberOfHeadingNoneZeroWords));
+}
+
+boolean BitSet::operator==(const BitSet &target) const {
+    return (this->equals(target));
+}
+
+BitSet& BitSet::operator=(const BitSet &target) {
+    this->cleanUp();
+    this->words = Arrays::copyOf(target.words, target.words.length);
+    this->wordsInUse = target.wordsInUse;
+    this->sizeIsSticky = target.sizeIsSticky;
 }

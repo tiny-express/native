@@ -139,13 +139,69 @@ namespace Java {
              */
             void trimToSize();
 
+            /**
+             * Free resources.
+             */
+            void cleanUp();
+
         private:
             mutable string backupForToString = nullptr;
 
         public:
+
+            /**
+             * @see bitAnd
+             */
+//          void and(const BitSet &set);
+
+            /**
+             * Performs a logical AND of this target bit set with the argument bit set.
+             * This bit set is modified so that each bit in it has the value true if and
+             * only if it both initially had the value true and the corresponding bit in
+             * the bit set argument also had the value true.
+             *
+             * @param set
+             */
             void bitAnd(const BitSet &set);
+
+            /**
+             * @see bitOr
+             */
+//          void or(const BitSet &set);
+
+            /**
+             * Performs a logical OR of this bit set with the bit set argument.
+             * This bit set is modified so that a bit in it has the value true if and
+             * only if it either already had the value true or the corresponding bit in
+             * the bit set argument has the value true.
+             *
+             * @param set
+             */
             void bitOr(const BitSet &set);
+
+            /**
+             * @see bitXor
+             */
+//          void xor(const BitSet &set);
+
+            /**
+             * Performs a logical XOR of this bit set with the bit set argument.
+             * This bit set is modified so that a bit in it has the value true if and
+             * only if one of the following statements holds:
+             * The bit initially has the value true, and the corresponding bit in
+             * the argument has the value false; The bit initially has the value false,
+             * and the corresponding bit in the argument has the value true.
+             *
+             * @param set
+             */
             void bitXor(const BitSet &set);
+
+            /**
+             * Clears all of the bits in this BitSet whose corresponding bit
+             * is set in the specified BitSet.
+             *
+             * @param set
+             */
             void andNot(const BitSet &set);
 
             /**
@@ -437,6 +493,24 @@ namespace Java {
              */
 //          static BitSet valueOf(const LongBuffer &longBuffer);
             // TODO(truongchauhien): Waiting for LongBuffer class.
+
+        public:
+            /**
+             * Checks if the values this bit set and target are equal or not,
+             * if yes then condition becomes true.
+             *
+             * @param target
+             * @return boolean
+             */
+            boolean operator==(const BitSet &target) const;
+
+            /**
+             * Assignment operator.
+             *
+             * @param target
+             * @return BitSet &
+             */
+            BitSet &operator=(const BitSet &target);
         };  // class BitSet
     }  // namespace Util
 }  // namespace Java
