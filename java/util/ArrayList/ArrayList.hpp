@@ -171,7 +171,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean addAll(Collection<E> collection) {
-				// TODO(@nakhoadl): Stuff
+				// TODO: Please discuss about param Collection
 				return true;
 			}
 			
@@ -184,7 +184,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean addAll(int index, Collection<E> collection) {
-                // TODO(@nakhoadl): Stuff
+				// TODO: Please discuss about param Collection
 				return true;
 			}
 			
@@ -227,7 +227,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean containsAll(Collection<Object> collection) const {
-                // TODO(@nakhoadl): Stuff
+				// TODO: Please discuss about param Collection
 				return true;
 			}
 			
@@ -249,7 +249,7 @@ namespace Java {
 			 * @param action
 			 */
 			void forEach(Consumer<E> action) const {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class Consumer
 			}
 			
 			/**
@@ -299,7 +299,7 @@ namespace Java {
 			 * @return Address of Iterator<E>
 			 */
 			Iterator<E> &iterator() const {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class Iterator
 				Iterator<E> *it = new Iterator<E>();
 				return *it;
 			}
@@ -385,7 +385,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean removeAll(Collection<Object> target) {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please discuss about param Collection
 				return true;
 			}
 			
@@ -396,7 +396,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean removeIf(Predicate<E> filter) {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class Predicate
 				return true;
 			}
 			
@@ -407,7 +407,7 @@ namespace Java {
 			 * @param unaryOperator
 			 */
 			void replaceAll(UnaryOperator<E> unaryOperator) {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class UnaryOperator
 			}
 			
 			/**
@@ -418,7 +418,7 @@ namespace Java {
 			 * @return boolean
 			 */
 			boolean retainAll(Collection<Object> collection) {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please discuss about Param Collection
 				return true;
 			}
 			
@@ -455,7 +455,7 @@ namespace Java {
 			 * @param cmp
 			 */
 			void sort(Comparator<E> cmp) {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class Comparator
 			}
 			
 			/**
@@ -464,13 +464,13 @@ namespace Java {
 			 * @return Spliterator<E>
 			 */
 			Spliterator<E> &spliterator() const {
-                // TODO(@nakhoadl): Stuff
+                // TODO: Please complete class Spliterator
 				Spliterator<E> *spliterator = new Spliterator<E>();
 				return *spliterator;
 			}
 
 //            List<E> &subList(int fromIndex, int toIndex) const {
-//                // TODO(@nakhoadl): Stuff
+//                // TODO: Please discuss about type return List
 //                List<E> *list = new ArrayList<E>();
 //                return *list;
 //            }
@@ -488,7 +488,7 @@ namespace Java {
 				}
 				return resultArray;
 			}
-			
+
 //			/**
 //			 * Returns an array containing all of the elements in this list
 //			 * in proper sequence (from first to last element);the runtime type of
@@ -500,7 +500,6 @@ namespace Java {
 //			 */
 //			template <class T>
 //			Array<T> &toArray(Array<T> array) const {
-//				// TODO(@nakhoadl): Stuff
 //				return array;
 //			}
 			
@@ -545,10 +544,10 @@ namespace Java {
 				return Object::hashCode();
 			}
 
-            // TODO(@nakhoadl): Stuff
-//			boolean equals(const Object object) const {
-//				return true;
-//			}
+            // TODO: Please discuss about param Object
+			boolean equals(const Object object) const {
+				return true;
+			}
 
 			/**
 			 * Print ArrayList to screen
@@ -585,7 +584,7 @@ namespace Java {
 			 * @param toIndex
 			 */
 			void removeRange(int fromIndex, int toIndex) {
-                // TODO(@nakhoadl): Stuff
+				this->original.erase(this->original.begin() + fromIndex, this->begin() + toIndex);
 			}
 		};
 		
