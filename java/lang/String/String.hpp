@@ -167,20 +167,27 @@ namespace Java {
 				switch (lastChar) {
 					case 'd':
 						if(instanceof<Number>(value))
-							result = String::print(format, ((Number*)&value)->intValue());
-						else
+							result = String::print(format, ((Number*)&value)->longValue());
+						else if(typeid(short) == typeid(value) ||
+                                typeid(int) == typeid(value) ||
+                                typeid(long) == typeid(value) ||
+                                typeid(long long) == typeid(value) ||
+                                typeid(unsigned short) == typeid(value) ||
+                                typeid(unsigned int) == typeid(value) ||
+                                typeid(unsigned long) == typeid(value) ||
+                                typeid(unsigned long long) == typeid(value))
 							result = String::print(format, value);
 						break;
 					case 'f':
 						if(instanceof<Number>(value))
 							result = String::print(format, ((Number*)&value)->doubleValue());
-						else
+						else if(typeid(float) == typeid(value) || typeid(double) == typeid(value))
 							result = String::print(format, value);
 						break;
 					case 's':
 						if(instanceof<String>(value))
 							result = String::print(format, ((String*)&value)->toString());
-						else
+						else if(typeid(char*) == typeid(value))
 							result = String::print(format, value);
 						break;
 					case '%':
