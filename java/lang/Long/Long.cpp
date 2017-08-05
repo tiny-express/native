@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,20 +30,7 @@
 
 using namespace Java::Lang;
 
-/**
- * A constant holding the maximum value a long can have, 2^63-1.
- */
-long Long::MAX_VALUE = 0x7fffffffffffffffL;;
 
-/**
- * A constant holding the minimum value a long can have, -2^63.
- */
-long Long::MIN_VALUE = 0x8000000000000000L;;
-
-/**
- * The number of bits used to represent a long value in two's complement binary form.
- */
-int Long::SIZE = 64;
 
 /**
  * Default constructor
@@ -186,7 +173,7 @@ Long Long::decode(String target) {
         return -1;
     }
 
-    result = Long::parseLong(target.subString(index), radix);
+    result = Long::parseLong(target.getStringFromIndex(index), radix);
     if (negative) {
         result = -result.longValue();
     }

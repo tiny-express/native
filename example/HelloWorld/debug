@@ -1,8 +1,0 @@
-cd ../../
-cmake .
-sudo make uninstall
-make native -j8
-sudo make install
-cd example/HelloWorld
-make
-valgrind --error-exitcode=42 --track-origins=yes --show-leak-kinds=all --show-reachable=yes --leak-check=full ./bin/main

@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "Byte.hpp"
@@ -203,16 +203,16 @@ TEST(JavaLang, ToStringWithByte){
 
 TEST(JavaLang, ValueOfByte){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
-    byte byteToGetValue = static_cast<byte>(-50);
-    Bytes expectResult = Bytes(static_cast<byte>(-50));
+    byte byteToGetValue = static_cast<byte>(50);
+    Bytes expectResult = Bytes(static_cast<byte>(50));
     Bytes actualResult = Bytes::valueOf(byteToGetValue);
     ASSERT_TRUE(expectResult == actualResult);
 }
 
 TEST(JavaLang, ValueOfString){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
-    String stringToGetValue = "-50";
-    Bytes expectResult = Bytes(static_cast<byte>(-50));
+    String stringToGetValue = "50";
+    Bytes expectResult = Bytes(static_cast<byte>(50));
     // Bytes actualResult = Bytes::valueOf(stringToGetValue);
     // ASSERT_TRUE(expectResult == actualResult);
 }
@@ -220,7 +220,7 @@ TEST(JavaLang, ValueOfString){
 TEST(JavaLang, ValueOfStringWithRadix){
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     String byteToGetValue = "-50";
-    Bytes expectResult = Bytes(static_cast<byte>(-50));
+    Bytes expectResult = Bytes(static_cast<byte>(50));
     // Bytes actualResult = Bytes::valueOf(byteToGetValue, 10);
     // ASSERT_TRUE(expectResult == actualResult);
 }

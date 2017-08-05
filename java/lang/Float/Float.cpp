@@ -83,7 +83,6 @@ char Float::charValue() const {
     char floatCharValueResult = string_to_char(stringFromFloatResult);
     free(stringFromFloatResult);
 	return floatCharValueResult;
-
 }
 
 /**
@@ -244,4 +243,8 @@ boolean Float::operator<=(const Float &target) const {
 */
 boolean Float::operator>=(const Float &target) const {
 	return this->original >= target.original;
+}
+
+boolean Float::isNaN(float v) {
+    return v != v;
 }
