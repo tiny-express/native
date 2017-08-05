@@ -6,6 +6,8 @@ var searchData=
   ['stack',['Stack',['../classJava_1_1Util_1_1Stack.html',1,'Java::Util']]],
   ['stream',['Stream',['../classJava_1_1Util_1_1Stream_1_1Stream.html',1,'Java::Util::Stream']]],
   ['string',['String',['../classJava_1_1Lang_1_1String.html',1,'Java::Lang']]],
+  ['stringbuffer',['StringBuffer',['../classJava_1_1Lang_1_1StringBuffer.html',1,'Java::Lang']]],
+  ['stringbufferunsafe',['StringBufferUnSafe',['../classJava_1_1Lang_1_1StringBufferUnSafe.html',1,'Java::Lang']]],
   ['stringbuilder',['StringBuilder',['../classJava_1_1Lang_1_1StringBuilder.html',1,'Java::Lang']]],
   ['stringindexoutofboundsexception',['StringIndexOutOfBoundsException',['../classJava_1_1Lang_1_1StringIndexOutOfBoundsException.html',1,'Java::Lang']]],
   ['sublist',['SubList',['../classJava_1_1Util_1_1SubList.html',1,'Java::Util']]],
