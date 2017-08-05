@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,23 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_ERROR_HPP
-#define NATIVE_JAVA_LANG_ERROR_HPP
+extern "C" {
+#include "../../../kernel/test.h"
 
-#include "../Object/Object.hpp"
-#include "../String/String.hpp"
-#include "../Throwable/Throwable.hpp"
+};
 
-namespace Java {
-    namespace Lang {
-        class Error : public Throwable {
-        public:
-            Error();
-            Error(String message);
-            Error(String message, Throwable *cause);
-            Error(Throwable *cause);
-        };
-    }
+#include "ArithmeticException.hpp"
+
+using namespace Java::Lang;
+
+TEST (JavaLang, ArithmeticExceptionConstructor) {
+    // Constructs a new ArithmeticException with null as its detail message.
+    ArithmeticException arithmeticExceptionWithNullMessage;
+    ASSERT_STR("", arithmeticExceptionWithNullMessage.getMessage().toString());
+
+    // Constructs a new ArithmeticException with the specified detail message.
+    ArithmeticException arithmeticExceptionWithMessage = ArithmeticException("ArithmeticException with the specified message");
+    ASSERT_STR("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage().toString());
 }
 
-#endif//NATIVE_JAVA_LANG_ERROR_HPP
+TEST (JavaLang, ArithmeticExceptionTryCatch) {
+    try {
+        throw ArithmeticException("Throw ArithmeticException");
+    } catch (ArithmeticException &e) {
+        ASSERT_STR("Throw ArithmeticException", e.getMessage().toString());
+    }
+}

@@ -24,23 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_ERROR_HPP
-#define NATIVE_JAVA_LANG_ERROR_HPP
+extern "C" {
+#include "../../../kernel/test.h"
+};
 
-#include "../Object/Object.hpp"
-#include "../String/String.hpp"
-#include "../Throwable/Throwable.hpp"
+#include "Error.hpp"
 
-namespace Java {
-    namespace Lang {
-        class Error : public Throwable {
-        public:
-            Error();
-            Error(String message);
-            Error(String message, Throwable *cause);
-            Error(Throwable *cause);
-        };
-    }
+using namespace Java::Lang;
+
+TEST (JavaLang, ErrorConstructor) {
+    // Constructs a new Error with null as its detail message.
+    Error errorWithNullMessage;
+    ASSERT_STR("", errorWithNullMessage.getMessage().toString());
+
+    // Constructs a new Error with the specified detail message.
+    Error errorWithMessage = Error("Error with the specified message");
+    ASSERT_STR("Error with the specified message", errorWithMessage.getMessage().toString());
+
+    // Constructs a new Error with the specified detail message and cause.
+    Error errorWithMessageAndCause = Error("Error with the specified message and cause", &errorWithMessage);
+    ASSERT_STR("Error with the specified message and cause", errorWithMessageAndCause.getMessage().toString());
+    ASSERT_STR("Error with the specified message", errorWithMessageAndCause.getCause()->getMessage().toString());
+
+    // Constructs a new Error with the specified cause.
+    Error errorWithCause = Error(&errorWithMessageAndCause);
+    ASSERT_STR("Error with the specified message and cause", errorWithCause.getCause()->getMessage().toString());
+    ASSERT_STR("Error with the specified message", errorWithCause.getCause()->getCause()->getMessage().toString());
 }
-
-#endif//NATIVE_JAVA_LANG_ERROR_HPP

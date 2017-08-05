@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,23 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_ERROR_HPP
-#define NATIVE_JAVA_LANG_ERROR_HPP
+#ifndef NATIVE_ARITHMETICEXCEPTION_H
+#define NATIVE_ARITHMETICEXCEPTION_H
 
-#include "../Object/Object.hpp"
 #include "../String/String.hpp"
-#include "../Throwable/Throwable.hpp"
+#include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
     namespace Lang {
-        class Error : public Throwable {
+        class ArithmeticException : public RuntimeException {
         public:
-            Error();
-            Error(String message);
-            Error(String message, Throwable *cause);
-            Error(Throwable *cause);
+            ArithmeticException();
+            ArithmeticException(String message);
         };
     }
 }
 
-#endif//NATIVE_JAVA_LANG_ERROR_HPP
+
+#endif //NATIVE_ARITHMETICEXCEPTION_H

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,23 +24,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_ERROR_HPP
-#define NATIVE_JAVA_LANG_ERROR_HPP
+#ifndef NATIVE_ASSERTIONERROR_H
+#define NATIVE_ASSERTIONERROR_H
 
-#include "../Object/Object.hpp"
+
 #include "../String/String.hpp"
-#include "../Throwable/Throwable.hpp"
+#include "../Error/Error.hpp"
 
 namespace Java {
     namespace Lang {
-        class Error : public Throwable {
+        class AssertionError : public Error {
+        private:
+            AssertionError(String message);
+
         public:
-            Error();
-            Error(String message);
-            Error(String message, Throwable *cause);
-            Error(Throwable *cause);
+            AssertionError();
+
+            AssertionError(double doubleValue);
+
+            AssertionError(float floatValue);
+
+            AssertionError(long longValue);
+
+            AssertionError(int intValue);
+
+            AssertionError(char charValue);
+
+            AssertionError(boolean boolValue);
+
+            AssertionError(String message, Throwable *cause);
         };
     }
 }
 
-#endif//NATIVE_JAVA_LANG_ERROR_HPP
+
+#endif //NATIVE_ASSERTIONERROR_H

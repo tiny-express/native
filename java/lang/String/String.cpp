@@ -561,9 +561,9 @@ String String::trim() {
  */
 String String::valueOf(boolean target) {
 	if (target) {
-		return (string) "1";
+		return (string) "true";
 	}
-	return (string) "0";
+	return (string) "false";
 }
 
 /**

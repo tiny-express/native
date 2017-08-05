@@ -124,6 +124,8 @@ namespace Java {
 
             long nextLong();
 
+            String nextString(int length);
+
             void setSeed(long seed);
         };
     }
