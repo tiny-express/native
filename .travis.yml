@@ -9,6 +9,7 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise
         packages:
             - libc++1
             - libc++1-dev
