@@ -43,10 +43,21 @@ namespace Java {
 			int original;
  			string originalString;
 
+        private:
+            /**
+             * Max value of unsigned int
+             */
+            static constexpr unsigned int UNSIGNED_INT_MAX = std::numeric_limits<uint>::max();
+
+            /**
+             * Max value of unsigned int
+             */
+            static constexpr unsigned int UNSIGNED_INT_MIN = std::numeric_limits<uint>::min();
+
         public:
             /**
-            * The number of bits used to represent an int value in two's complement binary form.
-            */
+             * The number of bits used to represent an int value in two's complement binary form.
+             */
             static const int SIZE = 32;
 
             /**
@@ -256,11 +267,6 @@ namespace Java {
              * @param target
              */
             Integer &operator%=(const Integer &target);
-
-            friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
-                std::cout << target.original;
-                return os;
-            }
 
             /**
              * Returns the number of one-bits in the
@@ -720,6 +726,11 @@ namespace Java {
              * in the specified radix.
              */
             static Integer valueOf(String inputString, int radix);
+
+            friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
+                std::cout << target.original;
+                return os;
+            }
 		};
 	}
 }

@@ -433,8 +433,7 @@ int Integer::parseUnsignedInt(String inputString, int radix) {
 
     long result = unsignedResult;
 
-    if (result > std::numeric_limits<uint>::max()
-        || result < std::numeric_limits<uint>::min()) {
+    if (result > UNSIGNED_INT_MAX || result < UNSIGNED_INT_MIN) {
         throw NumberFormatException("Unsigned integer out of range");
     }
 

@@ -37,20 +37,19 @@ using namespace Java::Lang;
 
 TEST(JavaLang, IntegerConstructor) {
     // Test Integer::Integer()
-    Integer integerConstructorNoneParameter = 13;
-    ASSERT_EQUAL(13, integerConstructorNoneParameter.intValue());
-
-    // Test Integer::Integer(int original)
-    Integer integerConstructorIntParameter(13);
-    ASSERT_EQUAL(13, integerConstructorIntParameter.intValue());
+    Integer integerConstructorNoneParameter;
+    ASSERT_EQUAL(0, integerConstructorNoneParameter.intValue());
+    ASSERT_STR((string) "0", integerConstructorNoneParameter.toString());
 
     // Test Integer::Integer(String stringInput)
     Integer integerConstructorStringParameter((String) "13");
     ASSERT_EQUAL(13, integerConstructorStringParameter.intValue());
+    ASSERT_STR((string) "13", integerConstructorStringParameter.toString());
 
     // Test Integer::Integer(const Integer &integer)
     Integer integerConstructorIntegerParameter = 13;
     ASSERT_EQUAL(13, integerConstructorIntegerParameter.intValue());
+    ASSERT_STR((string) "13", integerConstructorIntegerParameter.toString());
 }
 
 TEST(JavaLang, IntegerComparision) {
@@ -647,7 +646,7 @@ TEST(JavaLang, IntegerEquals) {
 }
 
 // Test Integer::getInteger(String inputString)
-// TEST(JavaLang, IntegerGetInteger1) {
+// TEST(JavaLang, IntegerGetIntegerWithString) {
     // String stringInput;
     // Integer expectedResult;
     // Integer actualResult;
@@ -774,7 +773,7 @@ TEST(JavaLang, IntegerEquals) {
 // }
 
 // Test Integer::getInteger(String inputString, int inputInt)
-// TEST(JavaLang, IntegerGetInteger2) {
+// TEST(JavaLang, IntegerGetIntegerWithStringAndInt) {
     // String stringInput;
     // Integer expectedResult;
     // Integer actualResult;
@@ -901,7 +900,7 @@ TEST(JavaLang, IntegerEquals) {
 // }
 
 // Test Integer::getInteger(String inputString, Integer inputInteger)
-// TEST(JavaLang, IntegerGetInteger3) {
+// TEST(JavaLang, IntegerGetIntegerWithStringAndInteger) {
     // String stringInput;
     // Integer expectedResult;
     // Integer actualResult;
@@ -1043,7 +1042,7 @@ TEST(JavaLang, IntegerHashCode) {
     ASSERT_EQUAL(13, inputInteger.hashCode());
 }
 
-TEST(JavaLang, IntegerHashCode2) {
+TEST(JavaLang, IntegerHashCodeOfInt) {
     ASSERT_EQUAL(0, Integer::hashCode(0));
     ASSERT_EQUAL(1, Integer::hashCode(1));
     ASSERT_EQUAL(-1, Integer::hashCode(-1));
@@ -1223,7 +1222,7 @@ TEST(JavaLang, IntegerParseInt) {
     }
 }
 
-TEST(JavaLang, IntegerParseUnsignedInt) {
+TEST(JavaLang, IntegerParseUnsignedIntWithRadix) {
     Integer exceptionResult;
 
     ASSERT_EQUAL(Integer::parseUnsignedInt((String) "0", 10), 0);
@@ -1306,7 +1305,7 @@ TEST(JavaLang, IntegerParseUnsignedInt) {
     }
 }
 
-TEST(JavaLang, IntegerParseUnsignedInt2) {
+TEST(JavaLang, IntegerParseUnsignedInt) {
     String stringInput;
     int expectedResult;
     int actualResult;
@@ -1534,14 +1533,14 @@ TEST(JavaLang, IntegerToStringObject) {
     ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
 }
 
-TEST(JavaLang, IntegerToString2) {
+TEST(JavaLang, IntegerToStringFromInt) {
     ASSERT_STR((string) "0", Integer::toString(0).toString());
     ASSERT_STR((string) "1", Integer::toString(1).toString());
     ASSERT_STR((string) "-1", Integer::toString(-1).toString());
     ASSERT_STR((string) "13", Integer::toString(13).toString());
 }
 
-TEST(JavaLang, IntegerToString3) {
+TEST(JavaLang, IntegerToStringWithRadix) {
     ASSERT_STR("0", Integer::toString(0, 10).toString());
     ASSERT_STR("473", Integer::toString(473, 10).toString());
     ASSERT_STR("-ff", Integer::toString(-255, 16).toString());
@@ -1592,7 +1591,7 @@ TEST(JavaLang, IntegerToUnsignedDecimalString) {
     ASSERT_STR("4294967041", Integer::toUnsignedString(-255).toString());
 }
 
-TEST(JavaLang, IntegerValueOf) {
+TEST(JavaLang, IntegerValueOfFromString) {
     ASSERT_EQUAL(0, Integer::valueOf((String) "0").intValue());
     ASSERT_EQUAL(1, Integer::valueOf((String) "1").intValue());
     ASSERT_EQUAL(13, Integer::valueOf((String) "13").intValue());
@@ -1628,7 +1627,7 @@ TEST(JavaLang, IntegerValueOf) {
     }
 }
 
-TEST(JavaLang, IntegerValueOf2) {
+TEST(JavaLang, IntegerValueOfFromInt) {
     ASSERT_EQUAL(0, Integer::valueOf(0).intValue());
     ASSERT_EQUAL(1, Integer::valueOf(1).intValue());
     ASSERT_EQUAL(-1, Integer::valueOf(-1).intValue());
@@ -1637,7 +1636,7 @@ TEST(JavaLang, IntegerValueOf2) {
     ASSERT_EQUAL(-2147483648, Integer::valueOf(-2147483648).intValue());
 }
 
-TEST(JavaLang, IntegerValueOf3) {
+TEST(JavaLang, IntegerValueOfWithRadix) {
     ASSERT_EQUAL(0, Integer::valueOf((String) "0", 10).intValue());
     ASSERT_EQUAL(473, Integer::valueOf((String) "473", 10).intValue());
     ASSERT_EQUAL(42, Integer::valueOf((String) "+42", 10).intValue());
