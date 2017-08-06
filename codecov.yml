@@ -28,4 +28,4 @@ comment:
   behavior: default
   require_changes: no
 ignore:
-  - "kernel/test.h"u
+  - "kernel/test.h"
