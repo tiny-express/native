@@ -30,9 +30,38 @@
 #include <stdio.h>
 #include <math.h>
 
-double math_pow(double a, double b);
-double math_floor(double a);
-long math_round(double a);
+double math_pow(double base, double exponent);
+double math_floor(double value);
+double math_round(double value);
+double math_sqrt(double value);
+double math_cbrt(double value);
+double math_ceil(double value);
+double math_exp(double value);
+double math_expm1(double value);
+double math_hypot(double valueA, double valueB);
+double math_log(double value);
+double math_log10(double value);
+double math_log1p(double value);
+double math_ieeeremainder(double dividend, double divisor);
+double math_rint(double value);
+double math_acos(double value);
+double math_cos(double angle);
+double math_cosh(double angle);
+double math_sin(double angle);
+double math_asin(double value);
+double math_sinh(double angle);
+double math_atan(double angle);
+double math_atan2(double coordinateX, double coordinateY);
+double math_tan(double angle);
+double math_tanh(double angle);
+double math_copysign(double magnitude, double sign);
+float math_copysignf(float magnitude, float sign);
+double math_nexttoward(double start, double direction);
+float math_nexttowardf(float start, double direction);
+double math_ldexp(double value, int scaleFactor);
+float math_ldexpf(float value, int scaleFactor);
+
+
 
 
 #endif

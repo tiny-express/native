@@ -1,6 +1,7 @@
 var searchData=
 [
   ['badbound',['BADBOUND',['../classJava_1_1Util_1_1Random.html#a5d298aa27d0d036f0fe702551b52f890',1,'Java::Util::Random']]],
+  ['base64',['Base64',['../classJava_1_1Util_1_1Base64.html',1,'Java::Util::Base64'],['../classJava_1_1Util_1_1Base64_1_1Encoder.html#a25e50fcfc8b290171054d129236ca27e',1,'Java::Util::Base64::Encoder::Base64()'],['../classJava_1_1Util_1_1Base64_1_1Decoder.html#a25e50fcfc8b290171054d129236ca27e',1,'Java::Util::Base64::Decoder::Base64()']]],
   ['base64_2ecpp',['Base64.cpp',['../Base64_8cpp.html',1,'']]],
   ['base64_2ehpp',['Base64.hpp',['../Base64_8hpp.html',1,'']]],
   ['before',['before',['../classJava_1_1Util_1_1Date.html#afbcbcd2fca3f6b79a93851b87d76465c',1,'Java::Util::Date']]],
