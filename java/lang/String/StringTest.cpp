@@ -484,9 +484,11 @@ TEST(JavaLang, StringFormat) {
 //	String resultString = String::format(format, signedValue, unsignedValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
 //	ASSERT_STR(expectString.toString(), resultString.toString());
 
+    String expectString = "-123 123";
     String intFormat = "%d %d";
     String realFormat = "%.3f %.6f";
     String stringFormat = "%s";
     String noFormat = "%% %%d";
-    String resultString = String::format(intFormat, intValue, integerObject);
+    String resultString = String::format(intFormat, intValue, longValue);
+   	ASSERT_STR(expectString.toString(), resultString.toString());
 }
