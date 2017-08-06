@@ -168,31 +168,31 @@ namespace Java {
 						if (instanceof<Number>(value))
 							result = String::print(format, ((Number*)&value)->longValue());
 						else if (typeid(short) == typeid(value))
-							result = String::print(format, *(short*)&value);
+							result = String::print(format, (short)value);
                         else if (typeid(int) == typeid(value))
-                            result = String::print(format, *(int*)&value);
+                            result = String::print(format, (int)value);
                         else if (typeid(long) == typeid(value))
-                            result = String::print(format, *(long*)&value);
+                            result = String::print(format, (long)value);
                         else if (typeid(unsigned short) == typeid(value))
-                            result = String::print(format, *(unsigned short*)&value);
+                            result = String::print(format, (unsigned short)value);
                         else if (typeid(unsigned int) == typeid(value))
-                            result = String::print(format, *(unsigned int*)&value);
+                            result = String::print(format, (unsigned int)value);
                         else if (typeid(unsigned long) == typeid(value))
-                            result = String::print(format, *(unsigned long*)&value);
+                            result = String::print(format, (unsigned long)value);
 						break;
 					case 'f':
 						if (instanceof<Number>(value))
 							result = String::print(format, ((Number*)&value)->doubleValue());
 						else if (typeid(float) == typeid(value))
-                            result = String::print(format, *(float*)&value);
+                            result = String::print(format, (float)value);
                         else if (typeid(double) == typeid(value))
-                            result = String::print(format, *(double*)&value);
+                            result = String::print(format, (double)value);
                         break;
 					case 's':
 						if (instanceof<String>(value))
 							result = String::print(format, ((String*)&value)->toString());
 						else if (typeid(char*) == typeid(value))
-							result = String::print(format, *(string*)&value);
+							result = String::print(format, (char*)value);
 						break;
 					case '%':
 						result += lastChar;
