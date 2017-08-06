@@ -727,6 +727,13 @@ namespace Java {
              */
             static Integer valueOf(String inputString, int radix);
 
+            /**
+             * Stream insertion operator
+             *
+             * @param os
+             * @param target
+             * @return ostream
+             */
             friend std::ostream &operator<<(std::ostream &os, const Integer &target) {
                 std::cout << target.original;
                 return os;
