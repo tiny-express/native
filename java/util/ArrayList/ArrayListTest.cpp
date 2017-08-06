@@ -240,6 +240,12 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
     string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
     string stringResult = validArrayList.toString();
     ASSERT_STR(stringExpect, stringResult);
+
+    try {
+        validArrayList.remove(-1);
+    } catch (IndexOutOfBoundsException exception) {
+        ASSERT_STR("Index out of range: -1", exception.getMessage().toString());
+    }
 }
 
 TEST(JavaUtil, ArrayListRemoveElement) {
@@ -268,6 +274,17 @@ TEST(JavaUtil, ArrayListSet) {
     string stringExpect = (string) "[String, String, String, String]";
     string stringResult = validArrayList.toString();
     ASSERT_STR(stringExpect, stringResult);
+
+    try {
+        validArrayList.set(-1, "String");
+    } catch (IndexOutOfBoundsException exception) {
+        ASSERT_STR("Index out of range: -1", exception.getMessage().toString());
+    }
+}
+
+TEST(JavaUtil, ArrayListHashCode) {
+    ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
+    ASSERT_NOT_EQUAL(validArrayList.hashCode(), 0);
 }
 
 TEST(JavaUtil, ArrayListToString) {
