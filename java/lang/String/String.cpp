@@ -864,3 +864,93 @@ String String::format(const String &format)
 
 	return String(result.c_str());
 }
+
+std::string String::print(const std::string &format, short value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, int value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, long value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, unsigned short value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, unsigned int value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, unsigned long value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, double value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, float value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, char *value)
+{
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}

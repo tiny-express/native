@@ -50,7 +50,7 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
-			
+
 		public:
 			String();
 			String(char target);
@@ -129,66 +129,70 @@ namespace Java {
 				std::string result;
 				std::string inputString(format.toString());
 				std::smatch matchResult;
-				std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
-
-				while(true) {
-					if(std::regex_search(inputString, matchResult, reg)) {
-						result += matchResult.prefix();
-						result += printObject(matchResult[0], value);
-						if('%' == result.back()) {
-							inputString = matchResult.suffix().str();
-							continue;
-						}
-						return result + std::string(String::format(matchResult.suffix().str().c_str(), args...).toString());
-					} else {
-						result += inputString;
-						break;
-					}
-				}
-
+                std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
+                while (true) {
+                    if (std::regex_search(inputString, matchResult, reg)) {
+                        result += matchResult.prefix();
+                        result += printObject(matchResult[0], value);
+                        if ('%' == result.back()) {
+                            inputString = matchResult.suffix().str();
+                            continue;
+                        }
+                        return result + std::string(String::format(matchResult.suffix().str().c_str(), args...).toString());
+                    } else {
+                        result += inputString;
+                        break;
+                    }
+                }
 				return String(result.c_str());
 			}
 
 		private:
 			static String format(const String& format);
-			template<typename T>
-			static std::string print(const std::string& format, T value) {
-				std::string result;
-				char buffer[256] = {0};
-				const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-				if(length > 0)
-					result = std::string(buffer);
-				return result;
-			}
-			template<typename T>
+            static std::string print(const std::string& format, short value);
+			static std::string print(const std::string& format, int value);
+            static std::string print(const std::string& format, long value);
+            static std::string print(const std::string& format, unsigned short value);
+            static std::string print(const std::string& format, unsigned int value);
+            static std::string print(const std::string& format, unsigned long value);
+            static std::string print(const std::string& format, double value);
+            static std::string print(const std::string& format, float value);
+            static std::string print(const std::string& format, char* value);
+
+            template<typename T>
 			static std::string printObject(const std::string& format, T value) {
 				std::string result;
 				char lastChar = format.back();
 				switch (lastChar) {
 					case 'd':
-						if(instanceof<Number>(value))
+						if (instanceof<Number>(value))
 							result = String::print(format, ((Number*)&value)->longValue());
-						else if(typeid(short) == typeid(value) ||
-                                typeid(int) == typeid(value) ||
-                                typeid(long) == typeid(value) ||
-                                typeid(long long) == typeid(value) ||
-                                typeid(unsigned short) == typeid(value) ||
-                                typeid(unsigned int) == typeid(value) ||
-                                typeid(unsigned long) == typeid(value) ||
-                                typeid(unsigned long long) == typeid(value))
-							result = String::print(format, value);
+						else if (typeid(short) == typeid(value))
+							result = String::print(format, *(short*)&value);
+                        else if (typeid(int) == typeid(value))
+                            result = String::print(format, *(int*)&value);
+                        else if (typeid(long) == typeid(value))
+                            result = String::print(format, *(long*)&value);
+                        else if (typeid(unsigned short) == typeid(value))
+                            result = String::print(format, *(unsigned short*)&value);
+                        else if (typeid(unsigned int) == typeid(value))
+                            result = String::print(format, *(unsigned int*)&value);
+                        else if (typeid(unsigned long) == typeid(value))
+                            result = String::print(format, *(unsigned long*)&value);
 						break;
 					case 'f':
-						if(instanceof<Number>(value))
+						if (instanceof<Number>(value))
 							result = String::print(format, ((Number*)&value)->doubleValue());
-						else if(typeid(float) == typeid(value) || typeid(double) == typeid(value))
-							result = String::print(format, value);
-						break;
+						else if (typeid(float) == typeid(value))
+                            result = String::print(format, *(float*)&value);
+                        else if (typeid(double) == typeid(value))
+                            result = String::print(format, *(double*)&value);
+                        break;
 					case 's':
-						if(instanceof<String>(value))
+						if (instanceof<String>(value))
 							result = String::print(format, ((String*)&value)->toString());
-						else if(typeid(char*) == typeid(value))
-							result = String::print(format, value);
+						else if (typeid(char*) == typeid(value))
+							result = String::print(format, *(string*)&value);
 						break;
 					case '%':
 						result += lastChar;
