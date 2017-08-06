@@ -225,7 +225,7 @@ TEST(JavaUtil, ArrayListLastIndexOf) {
     ASSERT_EQUAL(expect, result);
 
     expect = -1;
-    result = validArrayList.indexOf(31);
+    result = validArrayList.lastIndexOf(31);
     ASSERT_EQUAL(expect, result);
 }
 
