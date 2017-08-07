@@ -36,6 +36,8 @@
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
 #include "../../lang/Number/Number.hpp"
+#include "../StringBuilder/StringBuilder.hpp"
+#include "../StringBuffer/StringBuffer.hpp"
 
 using namespace Java::IO;
 
@@ -52,19 +54,192 @@ namespace Java {
 			int size = 0;
 
 		public:
+            /**
+             * Initializes a newly created String object
+             * so that it represents an empty character sequence.
+             */
 			String();
-			String(char target);
+
+            /**
+             * Initializes a newly created String object
+             * so that it represents the same sequence of characters as the argument.
+             *
+             * @param target
+             */
+            String(const String &target);
+
+            /**
+             * Constructs a new String by decoding the specified array of bytes.
+             *
+             * @param byteArray
+             */
+            String(Array<byte> &byteArray);
+
+            /**
+             * Allocates a new string that contains the sequence
+             * of characters currently contained in the string builder.
+             *
+             * @param stringBuffer
+             */
+            String(const StringBuilder &stringBuffer);
+
+            /**
+             * Allocates a new String so that it represents the sequence
+             * of characters currently contained in the character array argument.
+             *
+             * @param charArray
+             */
+            String(Array<char> &charArray);
+
+            /**
+             * Allocates a new string that contains the sequence
+             * of characters currently contained in the string buffer.
+             *
+             * @param stringBuffer
+             */
+            String(const StringBuffer &stringBuffer);
+
+            /**
+             * Constructs a new String by decoding the specified array of bytes
+             * using the specified charset.
+             *
+             * @param byteArray
+             * @param charsetName
+             */
+            String(Array<byte> byteArray, String charsetName);
+
+            /**
+             * Constructs a new String by decoding the specified array of bytes
+             * using the specified charset.
+             *
+             * @param byteArray
+             * @param charset
+             */
+            // String(Array<byte> byteArray, Charset charset)
+
+            /**
+             * Allocates a new String so that it represents the sequence
+             * of characters currently contained in the character array argument.
+             *
+             * @param charArray
+             * @param share
+             */
+            String(Array<char> &charArray, boolean share);
+
+            /**
+             * Allocates a new String that contains characters
+             * from a subarray of the character array argument.
+             *
+             * @param charArray
+             * @param offset
+             * @param count
+             * @throw IndexOutOfBoundsException If the offset and count arguments index
+             * characters outside the bounds of the value array
+             */
+            String(Array<char> &charArray, int offset, int count);
+
+            /**
+             * Allocates a new String that contains characters
+             * from a subarray of the Unicode code point array argument.
+             *
+             * @param codePoints
+             * @param offset
+             * @param count
+             * @throw IllegalArgumentException If any invalid Unicode
+             * code point is found in codePoints
+             * @throw IndexOutOfBoundsException If the offset and count
+             * arguments index characters outside the bounds of the codePoints array
+             */
+            String(Array<int> codePoints, int offset, int count);
+
+            /**
+             * Constructs a new String by decoding the specified
+             * subarray of bytes using the platform's default charset.
+             *
+             * @param byteArray
+             * @param offset
+             * @param length
+             * @throwIndexOutOfBoundsException If the offset and the length arguments index
+             * characters outside the bounds of the bytes array
+             */
+            String(Array<byte> &byteArray, int offset, int length);
+
+            /**
+             * Constructs a new String by decoding the specified
+             * subarray of bytes using the specified charset
+             *
+             * @param byteArray
+             * @param offset
+             * @param length
+             * @param charset
+             * @throw IndexOutOfBoundsException If the offset and length arguments index
+             * characters outside the bounds of the bytes array
+             */
+            // String(Array<byte> &byteArray, int offset, int length, Charset charset);
+
+            /**
+             * Constructs a new String by decoding the specified
+             * subarray of bytes using the specified charset.
+             *
+             * @param bytes
+             * @param offset
+             * @param length
+             * @param charsetName
+             * @throw java.io.UnsupportedEncodingException If the named charset is not supported
+             * @throw IndexOutOfBoundsException If the offset and length arguments index
+             * characters outside the bounds of the bytes array
+             */
+            String(byte bytes[], int offset, int length, String charsetName);
+
+            /**
+             * Construct a new String from target char
+             *
+             * @param target
+             */
+            String(char target);
+
+            /**
+             * Construct a new String from specific const_string
+             *
+             * @param original
+             */
 			String(const_string original);
+
+            /**
+             * Construct a new String from specific string
+             *
+             * @param original
+             */
 			String(string original);
-			String(Array<char> &chars);
-			String(Array<byte> &bytes);
-			String(const String &target);
+
+            /**
+             * Construct a new String from specific std::string
+             *
+             * @param target
+             */
 			String(const std::string &target);
+
+            /**
+             * Destructor
+             */
 			~String();
 
 		public:
+            /**
+             * Return size of String
+             *
+             * @return
+             */
 			int getSize() const;
+
+            /**
+             * String character at index
+             *
+             * @param index
+             * @return String
+             */
 			char charAt(int index) const;
+
 			int codePointAt();
 			int codePointBefore();
 			int codePointCount(int beginIndex, int endIndex);

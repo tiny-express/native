@@ -50,15 +50,15 @@ String::String(string target) {
 	this->size = length_pointer_char(target);
 }
 
-String::String(Array<char> &chars) {
+String::String(Array<char> &charArray) {
 	free(original);
-	this->original = String::fromCharArray(chars).toString();
-	this->size = chars.length;
+	this->original = String::fromCharArray(charArray).toString();
+	this->size = charArray.length;
 }
 
-String::String(Array<byte> &bytes) {
+String::String(Array<byte> &byteArray) {
 	Array<char> chars;
-	for (byte byte : bytes) {
+	for (byte byte : byteArray) {
 		chars.push((char) byte);
 	}
 	this->original = strdup(String::fromCharArray(chars).toString());
@@ -79,11 +79,6 @@ String::~String() {
 	free(original);
 }
 
-/**
- * Return size of String
- *
- * @return
- */
 int String::getSize() const {
 	return this->size;
 }
@@ -100,12 +95,6 @@ String String::clone() {
 	return result;
 }
 
-/**
- * String character at index
- *
- * @param index
- * @return String
- */
 char String::charAt(int index) const{
 	if(index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
