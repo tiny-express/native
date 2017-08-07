@@ -36,8 +36,8 @@
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
 #include "../../lang/Number/Number.hpp"
-#include "../StringBuilder/StringBuilder.hpp"
-#include "../StringBuffer/StringBuffer.hpp"
+//#include "../StringBuilder/StringBuilder.hpp"
+//#include "../StringBuffer/StringBuffer.hpp"
 
 using namespace Java::IO;
 
@@ -53,6 +53,8 @@ namespace Java {
 			string original;
 			int size = 0;
 
+        private:
+            int hash = 0;
 		public:
             /**
              * Initializes a newly created String object
@@ -81,7 +83,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            String(const StringBuilder &stringBuffer);
+            //String(const StringBuilder &stringBuffer);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -97,7 +99,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            String(const StringBuffer &stringBuffer);
+            // String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -106,7 +108,7 @@ namespace Java {
              * @param byteArray
              * @param charsetName
              */
-            String(Array<byte> byteArray, String charsetName);
+            // String(Array<byte> byteArray, String charsetName);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -124,7 +126,7 @@ namespace Java {
              * @param charArray
              * @param share
              */
-            String(Array<char> &charArray, boolean share);
+            //String(Array<char> &charArray, boolean share);
 
             /**
              * Allocates a new String that contains characters
@@ -136,7 +138,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            String(Array<char> &charArray, int offset, int count);
+            //String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -150,7 +152,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count
              * arguments index characters outside the bounds of the codePoints array
              */
-            String(Array<int> codePoints, int offset, int count);
+            //String(Array<int> codePoints, int offset, int count);
 
             /**
              * Constructs a new String by decoding the specified
@@ -162,7 +164,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            String(Array<byte> &byteArray, int offset, int length);
+            //String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -189,7 +191,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
-            String(byte bytes[], int offset, int length, String charsetName);
+            //String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
              * Construct a new String from target char
@@ -224,11 +226,20 @@ namespace Java {
              */
 			~String();
 
+        private:
+            /**
+             * Bounds check the byte array and requested offset & length values
+             * @param byteArray
+             * @param offset
+             * @param length
+             */
+            //static void checkBounds(Array<byte> &byteArray, int offset, int length);
+
 		public:
             /**
              * Return size of String
              *
-             * @return
+             * @return int
              */
 			int getSize() const;
 
@@ -240,19 +251,143 @@ namespace Java {
              */
 			char charAt(int index) const;
 
-			int codePointAt();
-			int codePointBefore();
+            /**
+             * Returns the character (Unicode code point) at the specified index.
+             *
+             * @param index
+             * @return int
+             */
+			int codePointAt(int index);
+
+            /**
+             * Returns the character (Unicode code point) before the specified index.
+             *
+             * @param index
+             * @return int
+             */
+			int codePointBefore(int index);
+
+            /**
+             * Returns the number of Unicode code points
+             * in the specified text range of this String.
+             *
+             * @param beginIndex
+             * @param endIndex
+             * @return int
+             */
 			int codePointCount(int beginIndex, int endIndex);
+
+            /**
+             * Clone to new object
+             *
+             * @return String
+             */
 			String clone();
-			virtual int compareTo(const String &o) const override;
-			int compareToIgnoreCase(String str) const;
+
+            /**
+             * String compare to another string
+             *
+             * @param anotherString
+             * @return 0 if the argument string is equal to this string;
+             * a value less than 0 if this string is lexicographically
+             * less than the string argument;
+             * and a value greater than 0 if this string is lexicographically
+             * greater than the string argument.
+             */
+			virtual int compareTo(const String &anotherString) const override;
+
+            /**
+             * String compare with another string but ignore case
+             *
+             * @param targetString
+             * @return 0 if the argument string is equal to this string
+             * ignoring case considerations.
+             * a value less than 0 if this string is lexicographically
+             * less than the string argument ignoring case considerations.
+             * and a value greater than 0 if this string is lexicographically
+             * greater than the string argument ignoring case considerations..
+             */
+			int compareToIgnoreCase(String targetString) const;
+
+
+            /**
+             * String concatenation
+             *
+             * @param str
+             * @return String
+             */
 			String concat(String str);
-			boolean contains(const CharSequence &str);
-			boolean contentEquals(const CharSequence &cs);
-			//boolean contentEquals(const StringBuffer &str);
-			static String copyValueOf(const Array<char> &data);
-			static String copyValueOf(const Array<char> &data, int offset, int count);
-			boolean endsWith(const String &suffix) const;
+
+
+            /**
+             * Find substring inside this String
+             *
+             * @param charSequence
+             * @return String
+             */
+			boolean contains(const CharSequence &charSequence);
+
+            /**
+             * Compares this string to the specified CharSequence.
+             * The result is true if and only if this String represents
+             * the same sequence of char values as the specified sequence.
+             *
+             * @param charSequence
+             * @return boolean
+             */
+			//boolean contentEquals(const CharSequence &charSequence);
+
+            /**
+             * Compares this string to the specified CharSequence.
+             * The result is true if and only if this String represents
+             * the same sequence of char values as the specified sequence.
+             *
+             * @param stringBuffer
+             * @return boolean
+             */
+            //boolean contentEquals(const StringBuffer &stringBuffer);
+
+            /**
+             * Returns the string representation of the char array argument.
+             * The contents of the character array are copied;
+             * subsequent modification of the character array does not affect the returned string.
+             *
+             * @param charArray
+             * @return a String that contains the characters of the charArray.
+             */
+			//static String copyValueOf(const Array<char> &charArray);
+
+            /**
+             * Returns the string representation of a specific subarray of the char array argument.
+             *
+             * @param charArray
+             * @param offset
+             * @param count
+             * @throw IndexOutOfBoundsException if offset is negative, or count is negative,
+             * or offset+count is larger than data.length.
+             * @return a String that contains the characters of the
+             * specified subarray of charArray.
+             */
+			//static String copyValueOf(const Array<char> &charArray, int offset, int count);
+
+            /**
+             * String endswith a suffix
+             *
+             * @param suffixString
+             * @return true if the character sequence represented by the argument
+             * is a suffix of the character sequence represented by this String;
+             * False otherwise
+             */
+			boolean endsWith(const String &suffixString) const;
+
+            /**
+             * Compares this string to the specified object.
+             *
+             * @tparam T
+             * @param anObject
+             * @return true if the given object represents a String equivalent
+             * to this string, false otherwise
+             */
 			template <class T>
 			boolean equals(T anObject) const {
 				if (Object::equals(anObject)) {
@@ -263,10 +398,80 @@ namespace Java {
 				}
 				return true;
 			}
+
+            /**
+             * Compares this String to another String, ignoring case considerations.
+             *
+             * @param anotherString
+             * @return true if the given object represents a String equivalent
+             * to this string, false otherwise, ignoring case considerations
+             */
+            boolean equalsIgnoreCase(String anotherString);
+
+            /**
+             * String from character array
+             *
+             * @param charArray
+             * @return String
+             */
+            static String fromCharArray(Array<char> &charArray);
+
+            /**
+             * Get byte array from this String
+             *
+             * @return Array<byte>
+             */
 			Array<byte> getBytes() const;
+
+            /**
+             * Encodes this String into a sequence of bytes using the named charset,
+             * storing the result into a new byte array.
+             *
+             * @param charSetName
+             * @return
+             */
+            //Array<byte> getBytes(String charSetName) const;
+
+            /**
+             * Encodes this String into a sequence of bytes using the charset,
+             * storing the result into a new byte array.
+             *
+             * @param charSet
+             * @return
+             */
+            // Array<byte> getBytes(CharSet charSet) const;
+
+            /**
+             * Copies characters from this string into the destination character array.
+             *
+             * @param sourceBegin
+             * @param sourceEnd
+             * @param destination
+             * @param destinationBegin
+             * @throw IndexOutOfBoundsException If :
+             * srcBegin is negative.
+             * srcBegin is greater than srcEnd
+             * srcEnd is greater than the length of this string
+             * dstBegin is negative
+             * dstBegin+(srcEnd-srcBegin) is larger than dst.length
+             */
+           // void getChars(int sourceBegin, int sourceEnd, Array<char> destination, int destinationBegin);
+
+            /**
+             * Get char to String
+             * This function use for class UUID and Long
+             *
+             * @param index
+             * @return String
+             */
 			String getStringFromIndex(int index);
-			// Array<byte> getBytes(const Charset &);
-			static String fromCharArray(Array<char> &chars);
+
+            /**
+             * Returns a hash code for this string.
+             *
+             * @return int
+             */
+            //long hashCode() const;
 			int indexOf(int ch) const;
 			int indexOf(int ch, int fromIndex) const;
 			int indexOf(String str) const;
@@ -282,7 +487,7 @@ namespace Java {
 			String replaceAll(String regex, String replacement) const;
 			String replaceFirst(String regex, String replacement) const;
 			Array<String> split(String regex) const;
-			Array<String> split(String regex, int limit) const;
+			//Array<String> split(String regex, int limit) const;
 			boolean startsWith(String prefix) const;
 			boolean startsWith(String prefix, int toffset) const;
 			Array<char> toCharArray() const;

@@ -83,11 +83,6 @@ int String::getSize() const {
 	return this->size;
 }
 
-/**
- * Clone to new object
- *
- * @return String
- */
 String String::clone() {
 	string pointerHolder = strdup(this->original);
 	String result = pointerHolder;
@@ -102,12 +97,6 @@ char String::charAt(int index) const{
 	return (this->original[index]);
 }
 
-/**
- * String compare to another string
- *
- * @param anotherString
- * @return int
- */
 int String::compareTo(const String &anotherString) const {
 	string anotherStringValue = anotherString.toString();
 	if (string_equals(this->original, anotherStringValue)) {
@@ -116,23 +105,11 @@ int String::compareTo(const String &anotherString) const {
 	return 0;
 }
 
-/**
- * String compare with another string but ignore case
- *
- * @param str
- * @return int
- */
-int String::compareToIgnoreCase(String str) const {
+int String::compareToIgnoreCase(String targetString) const {
 	// TODO
 	return 0;
 }
 
-/**
- * String concatenation
- *
- * @param str
- * @return String
- */
 String String::concat(String str) {
 	string stringConcat = string_concat(this->original, str.original);
 	String result(stringConcat);
@@ -140,21 +117,10 @@ String String::concat(String str) {
 	return result;
 }
 
-/**
- * Find substring inside
- *
- * @param str
- * @return String
- */
-boolean String::contains(const CharSequence &str) {
-	return ( string_index(this->original, str.toString(), 1) != NOT_FOUND );
+boolean String::contains(const CharSequence &charSequence) {
+	return ( string_index(this->original, charSequence.toString(), 1) != NOT_FOUND );
 }
 
-/**
- * Get byte array from String
- *
- * @return Array<byte>
- */
 Array<byte> String::getBytes() const {
 	Array<byte> bytes;
 	String originalString = this->original;
@@ -164,13 +130,6 @@ Array<byte> String::getBytes() const {
 	return bytes;
 }
 
-/**
- * Get char to String
- * This function use for class UUID and Long
- *
- * @param index
- * @return String
- */
 String String::getStringFromIndex(int index) {
 	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
@@ -178,29 +137,18 @@ String String::getStringFromIndex(int index) {
 	return &(this->original[index]);
 }
 
-/**
- * String endswith a suffix
- * @param suffix
- * @return
- */
-boolean String::endsWith(const String &suffix) const {
-	return ( string_endswith(this->original, suffix.original));
+boolean String::endsWith(const String &suffixString) const {
+	return ( string_endswith(this->original, suffixString.original));
 }
 
-/**
- * String from character array
- *
- * @param chars
- * @return String
- */
-String String::fromCharArray(Array<char> &chars) {
-	string str = (string) calloc((size_t) chars.length + 1, sizeof(char));
+String String::fromCharArray(Array<char> &charArray) {
+	string str = (string) calloc((size_t) charArray.length + 1, sizeof(char));
 #ifdef __linux__
 	register
 #endif
 	int index = 0;
 
-	for (char character : chars) {
+	for (char character : charArray) {
 		str[ index++ ] = character;
 	}
 	str[index] = '\0';
@@ -943,3 +891,15 @@ std::string String::print(const std::string &format, char *value)
         result = std::string(buffer);
     return result;
 }
+
+/*long String::hashCode() const {
+    int h = this->hash;
+    if (h == 0 && this->length() > 0) {
+        string value = original;
+        for (int i = 0; i < this->length(); i++) {
+            h = 31 * h + value[i];
+        }
+        //this->hash = h;
+    }
+    return h;
+}*/
