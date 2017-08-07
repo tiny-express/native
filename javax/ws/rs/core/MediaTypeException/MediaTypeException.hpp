@@ -27,7 +27,7 @@
 #ifndef NATIVE_MEDIATYPEEXCEPTION_H
 #define NATIVE_MEDIATYPEEXCEPTION_H
 
-#include "../../../../java/lang/Exception/Exception.hpp"
+#include "../../../../../java/lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 

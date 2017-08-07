@@ -25,7 +25,7 @@
  */
 
 #include "MediaType.hpp"
-#include "MediaTypeException.hpp"
+#include "MediaTypeException/MediaTypeException.hpp"
 
 extern "C" {
 #include "../../../../kernel/test.h"
