@@ -35,12 +35,23 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
-#include "../../lang/Number/Number.hpp"
+
+//#include "../Short/Short.hpp"
+//#include "../Integer/Integer.hpp"
+//#include "../Long/Long.hpp"
+//#include "../Float/Float.hpp"
+//#include "../Double/Double.hpp"
 
 using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
+
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
 
 		class String :
 				public Object,
@@ -158,45 +169,24 @@ namespace Java {
             static std::string print(const std::string& format, double value);
             static std::string print(const std::string& format, float value);
             static std::string print(const std::string& format, char* value);
+            static std::string print(const std::string& format, Short value);
+            static std::string print(const std::string& format, Integer value);
+            static std::string print(const std::string& format, Long value);
+            static std::string print(const std::string& format, Float value);
+            static std::string print(const std::string& format, Double value);
+            static std::string print(const std::string& format, String value);
 
             template<typename T>
 			static std::string printObject(const std::string& format, T value) {
 				std::string result;
 				char lastChar = format.back();
 				switch (lastChar) {
-					case 'd':
-						if (instanceof<Number>(value))
-							result = String::print(format, ((Number*)&value)->longValue());
-						else if (typeid(short) == typeid(value))
-							result = String::print(format, (short)value);
-                        else if (typeid(int) == typeid(value))
-                            result = String::print(format, (int)value);
-                        else if (typeid(long) == typeid(value))
-                            result = String::print(format, (long)value);
-                        else if (typeid(unsigned short) == typeid(value))
-                            result = String::print(format, (unsigned short)value);
-                        else if (typeid(unsigned int) == typeid(value))
-                            result = String::print(format, (unsigned int)value);
-                        else if (typeid(unsigned long) == typeid(value))
-                            result = String::print(format, (unsigned long)value);
-						break;
-					case 'f':
-						if (instanceof<Number>(value))
-							result = String::print(format, ((Number*)&value)->doubleValue());
-						else if (typeid(float) == typeid(value))
-                            result = String::print(format, (float)value);
-                        else if (typeid(double) == typeid(value))
-                            result = String::print(format, (double)value);
-                        break;
-					case 's':
-						if (instanceof<String>(value))
-							result = String::print(format, ((String*)&value)->toString());
-						else if (typeid(char*) == typeid(value))
-							result = String::print(format, (char*)value);
-						break;
 					case '%':
 						result += lastChar;
 						break;
+                    default:
+                        result = print(format, value);
+                        break;
 				}
 				return result;
 			}

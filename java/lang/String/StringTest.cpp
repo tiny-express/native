@@ -29,8 +29,6 @@ extern "C" {
 }
 
 #include "../String/String.hpp"
-#include "../Long/Long.hpp"
-#include "../Integer/Integer.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
@@ -479,16 +477,15 @@ TEST(JavaLang, StringFormat) {
 	Double doubleObject = 123.456789;
 	String stringObject = "String";
 
-//	String expectString = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
-//	String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
-//	String resultString = String::format(format, signedValue, unsignedValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
-//	ASSERT_STR(expectString.toString(), resultString.toString());
+	String expectString = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
+	String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
+    String resultString;
 
-    String expectString = "-123 123";
-    String intFormat = "%d %d";
-    String realFormat = "%.3f %.6f";
-    String stringFormat = "%s";
-    String noFormat = "%% %%d";
-    String resultString = String::format(intFormat, intValue, longValue);
-   	ASSERT_STR(expectString.toString(), resultString.toString());
+    try {
+        resultString = String::format(format, intValue, longValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
+    } catch (...) {
+
+    }
+
+	ASSERT_STR(expectString.toString(), resultString.toString());
 }
