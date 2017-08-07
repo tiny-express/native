@@ -25,6 +25,7 @@
  */
 
 #include "URLEncoder.hpp"
+#include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
 using namespace Java::Net;
 
@@ -34,8 +35,11 @@ String URLEncoder::encode(const String &source) {
 
 String URLEncoder::encode(const String &source, const String &encoding) {
     if (encoding == "UTF-8") {
-        return String::valueOf(url_encode(source.toString()));
+        string encodedString = url_encode(source.toString());
+        String result(encodedString);
+        free(encodedString);
+        return result;
+
     }
-    return "";
-    // TODO(truongchauhien): Add throw UnsupportedEncodingException.
+    throw UnsupportedEncodingException();
 }
