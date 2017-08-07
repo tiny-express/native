@@ -32,7 +32,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, IOExceptionConstructor) {
+TEST (JavaIO, IOExceptionConstructor) {
     // Constructs a new IOException with null as its detail message.
     IOException ioExceptionWithNullMessage;
     ASSERT_STR("", ioExceptionWithNullMessage.getMessage().toString());
@@ -52,7 +52,7 @@ TEST (JavaLang, IOExceptionConstructor) {
     ASSERT_STR("IOException with the specified message", ioExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, IOExceptionTryCatch) {
+TEST (JavaIO, IOExceptionTryCatch) {
     try {
         throw IOException("Throw IOException");
     } catch (Exception e) {
