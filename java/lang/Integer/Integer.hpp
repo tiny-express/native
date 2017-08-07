@@ -280,7 +280,6 @@ namespace Java {
              *
              * @param inputInt
              * @return int
-             * @return Integer
              */
             static int bitCount(int inputInt);
 
