@@ -35,10 +35,31 @@ namespace Java {
     namespace Net {
         class URLEncoder : public virtual Object {
         public:
-            static String encode(String s);
-            static String encode(String s, String enc);
-        };
-    }
-}
+            /**
+             * Translates a string into x-www-form-urlencoded format.
+             * This method uses the platform's default encoding as the encoding scheme
+             * to obtain the bytes for unsafe characters.
+             * The platform's default encoding is UTF-8.
+             *
+             * @param source
+             * @return String
+             */
+            static String encode(const String &source);
+
+            /**
+             * Translates a string into application/x-www-form-urlencoded format using
+             * a specific encoding scheme.
+             * This method uses the supplied encoding scheme to obtain the bytes
+             * for unsafe characters.
+             *
+             * @param source
+             * @param encoding
+             * @return String
+             * @throw UnsupportedEncodingException - If the named encoding is not supported.
+             */
+            static String encode(const String &source, const String &encoding);
+        };  // class URLEncoder
+    }  // namespace Net
+}  // namespace Java
 
 #endif  // JAVA_NET_URL_ENCODER_HPP_

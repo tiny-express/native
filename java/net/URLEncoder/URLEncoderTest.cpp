@@ -34,8 +34,8 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST(JavaNet, URLEncodeString) {
-//    unicode target = (unicode) "Quán ăn";
-//    String result = UrlEncoder::encode(target);
-//    unicode expect =  "Qu%c3%a1n+%c4%83n";
-//    ASSERT_STR(expect, result.toString());
+    String target = u8"Quán ăn";
+    String result = URLEncoder::encode(target);
+    String expect = "Qu%c3%a1n+%c4%83n";
+    ASSERT_STR(expect.toString(), result.toString());
 }

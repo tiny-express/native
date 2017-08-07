@@ -28,10 +28,14 @@
 
 using namespace Java::Net;
 
-String URLDecoder::decode(String s) {
-    return String::valueOf(url_decode(s.toString()));
+String URLDecoder::decode(const String &source) {
+    return URLDecoder::decode(source, "UTF-8");
 }
 
-String URLDecoder::decode(String s, String enc) {
+String URLDecoder::decode(const String &source, const String &encoding) {
+    if (encoding == "UTF-8") {
+        return String::valueOf(url_decode(source.toString()));
+    }
     return "";
+    // TODO(truongchauhien): Add throw UnsupportedEncodingException.
 }
