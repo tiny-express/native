@@ -235,6 +235,7 @@ namespace Java {
              * Add target to this Integer and assign the value to this Integer
              *
              * @param target
+             * @return Integer
              */
             Integer &operator+=(const Integer &target);
 
@@ -242,6 +243,7 @@ namespace Java {
              * Subtract target from this Integer and assign the value to this Integer
              *
              * @param target
+             * @return Integer
              */
             Integer &operator-=(const Integer &target);
 
@@ -250,6 +252,7 @@ namespace Java {
              *
              * @throw ArithmeticException if target is zero
              * @param target
+             * @return Integer
              */
             Integer &operator/=(const Integer &target);
 
@@ -257,6 +260,7 @@ namespace Java {
              * Multiply this Integer with target and assign the value to this Integer
              *
              * @param target
+             * @return Integer
              */
             Integer &operator*=(const Integer &target);
 
@@ -265,6 +269,7 @@ namespace Java {
              *
              * @throw ArithmeticException if target is zero
              * @param target
+             * @return Integer
              */
             Integer &operator%=(const Integer &target);
 
@@ -275,6 +280,7 @@ namespace Java {
              *
              * @param inputInt
              * @return int
+             * @return Integer
              */
             static int bitCount(int inputInt);
 
