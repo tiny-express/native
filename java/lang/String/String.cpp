@@ -25,7 +25,6 @@
  */
 
 #include "String.hpp"
-#include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
@@ -157,27 +156,14 @@ String String::fromCharArray(Array<char> &charArray) {
 	return result;
 }
 
-/**
- * String index of character
- *
- * @param ch
- * @return int
- */
-int String::indexOf(int ch) const {
-	string pointerHolder = string_from_char((char) ch);
+int String::indexOf(int character) const {
+	string pointerHolder = string_from_char((char) character);
 	int result = string_index(this->original, pointerHolder, 1);
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String index of
- *
- * @param ch
- * @param fromIndex
- * @return int
- */
-int String::indexOf(int ch, int fromIndex) const {
+int String::indexOf(int character, int fromIndex) const {
 	if (fromIndex > this->size) {
 		return -1;
 	}
@@ -188,92 +174,56 @@ int String::indexOf(int ch, int fromIndex) const {
 	int index = 0;
 
 	for (index = fromIndex; index < this->size; index++) {
-		if (this->original[ index ] == (char) ch) {
+		if (this->original[ index ] == (char) character) {
 			return index;
 		}
 	}
 	return -1;
 }
 
-/**
- * String index of a String
- *
- * @param str
- * @return int
- */
-int String::indexOf(String str) const {
-	return string_index(this->original, str.original, 1);
+int String::indexOf(String subString) const {
+	return string_index(this->original, subString.original, 1);
 }
 
-/**
- * String index of a string from index position
- *
- * @param str
- * @param fromIndex
- * @return int
- */
-int String::indexOf(String str, int fromIndex) const {
+int String::indexOf(String subString, int fromIndex) const {
+    // TODO
 	return 0;
 }
 
-/**
- * String is empty or not
- *
- * @return boolean
- */
 boolean String::isEmpty() const {
 	return (boolean) is_empty(this->original);
 }
 
-/**
- * String last index of character
- *
- * @param ch
- * @return int
- */
-int String::lastIndexOf(int ch) {
+int String::lastIndexOf(int character) {
 #ifdef __linux__
 	register
 #endif
 	int index = 0;
 
 	for (index = this->size - 1; index >= 0; index--) {
-		if (this->charAt(index) == (char) ch) {
+		if (this->charAt(index) == (char) character) {
 			return index;
 		}
 	}
 	return -1;
 }
 
-/**
- * String last index of character
- *
- * @param ch
- * @param fromIndex
- * @return int
- */
-int String::lastIndexOf(int ch, int fromIndex) {
+int String::lastIndexOf(int character, int fromIndex) {
 #ifdef __linux__
 	register
 #endif
 	int index = 0;
 
 	for (index = fromIndex - 1; index >= 0; index--) {
-		if (this->charAt(index) == (char) ch) {
+		if (this->charAt(index) == (char) character) {
 			return index;
 		}
 	}
 	return -1;
 }
 
-/**
- * Last index of String inside this
- *
- * @param str
- * @return int
- */
-int String::lastIndexOf(String str) const {
-	string reversedString = string_reverse(str.toString());
+int String::lastIndexOf(String subString) const {
+	string reversedString = string_reverse(subString.toString());
 	string currentReversedString = string_reverse(this->toString());
 	int result = string_index(currentReversedString, reversedString, 1);
 	free(reversedString);
@@ -281,22 +231,15 @@ int String::lastIndexOf(String str) const {
 	if (result == NOT_FOUND) {
 		return result;
 	}
-	//Re-calculate first character of str
-	result = this->size - ( result + str.size );
+	//Re-calculate first character of subString
+	result = this->size - ( result + subString.size );
 	return result;
 }
 
-/**
- * Last index of String start fromIndex inside this
- *
- * @param str
- * @param fromIndex
- * @return int
- */
-int String::lastIndexOf(String str, int fromIndex) const {
-	string subString = &( this->original )[ fromIndex ]; // get subString start fromIndex
-	string reversedString = string_reverse(str.toString());
-	string currentReversedString = string_reverse(subString);
+int String::lastIndexOf(String subString, int fromIndex) const {
+	string subStringFromIndex = &( this->original )[ fromIndex ]; // get subString start fromIndex
+	string reversedString = string_reverse(subString.toString());
+	string currentReversedString = string_reverse(subStringFromIndex);
 	int result = string_index(currentReversedString, reversedString, 1);
 	free(reversedString);
 	free(currentReversedString);
@@ -304,38 +247,20 @@ int String::lastIndexOf(String str, int fromIndex) const {
 		return result;
 	}
 	// Re-calculate first character of str
-	result = this->size - ( result + str.size );
+	result = this->size - ( result + subString.size );
 	return result;
 
 }
 
-/**
- * String length
- *
- * @return int
- */
 int String::length() const {
 	return this->size;
 }
 
-/**
- * String matches
- *
- * @params regex pattern
- * @return TRUE | FALSE
- */
 boolean String::matches(String regex) const {
 	int result = string_matches(this->original, regex.toString());
 	return result == TRUE;
 }
 
-/**
- * String replace
- *
- * @param oldChar
- * @param newChar
- * @return String
- */
 String String::replace(char oldChar, char newChar) const {
 	string oldString = string_from_char(oldChar);
 	string newString = string_from_char(newChar);
@@ -347,24 +272,11 @@ String String::replace(char oldChar, char newChar) const {
 	return result;
 }
 
-/**
- * String replace all matches by replacement
- *
- * @param regex
- * @param replacement
- * @return String
- */
 String String::replaceAll(String regex, String replacement) const {
 	// TODO fix this later
 	return "";
 }
 
-/**
- * Split string by regex
- *
- * @param regex
- * @return Array<String>
- */
 Array<String> String::split(String regex) const {
 	string *splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
@@ -383,30 +295,17 @@ Array<String> String::split(String regex) const {
 	return strings;
 }
 
-/**
- * String starts with a prefix
- *
- * @param prefix
- * @return boolean
- */
 boolean String::startsWith(String prefix) const {
 	return string_startswith(this->original, prefix.original);
 }
 
-/**
- * String starts with a prefix
- *
- * @param prefix
- * @param from t
- * @return boolean
- */
-boolean String::startsWith(String prefix, int toffset) const {
-	if (this->original == NULL || prefix.original == NULL || toffset < 0) {
+boolean String::startsWith(String prefix, int thisOffset) const {
+	if (this->original == NULL || prefix.original == NULL || thisOffset < 0) {
 		return FALSE;
 	}
 	int originalLength = length_pointer_char(this->original);
 	int prefixLength = length_pointer_char(prefix.original);
-	if (originalLength < prefixLength || toffset > ( originalLength - prefixLength )) {
+	if (originalLength < prefixLength || thisOffset > ( originalLength - prefixLength )) {
 		return FALSE;
 	}
 #ifdef __linux__
@@ -417,7 +316,7 @@ boolean String::startsWith(String prefix, int toffset) const {
 #ifdef __linux__
 	register
 #endif
-	int secondIndex = toffset;
+	int secondIndex = thisOffset;
 	for (; firstIndex < prefixLength; firstIndex++) {
 		if (prefix.original[ firstIndex ] != this->original[ secondIndex ]) {
 			return FALSE;
@@ -426,11 +325,7 @@ boolean String::startsWith(String prefix, int toffset) const {
 	}
 	return TRUE;
 }
-/**
- * String to char array
- *
- * @return Array<char>
- */
+
 Array<char> String::toCharArray() const {
 	Array<char> chars;
 
@@ -445,20 +340,10 @@ Array<char> String::toCharArray() const {
 	return chars;
 }
 
-/**
- * String to char string (char pointer)
- *
- * @return string
- */
 string String::toString() const {
 	return this->original;
 }
 
-/**
- * String to lowercase
- *
- * @return String
- */
 String String::toLowerCase() const {
 	string holdPointer = string_lower(this->original);
 	String result = holdPointer;
@@ -466,11 +351,6 @@ String String::toLowerCase() const {
 	return result;
 }
 
-/**
- * String to uppercase
- *
- * @return String
- */
 String String::toUpperCase() {
 	string holdPointer = string_upper(this->original);
 	String result = holdPointer;
@@ -478,11 +358,6 @@ String String::toUpperCase() {
 	return result;
 }
 
-/**
- * String trim space
- *
- * @return String
- */
 String String::trim() {
 	string holdPointer = string_trim(this->original);
 	String result = holdPointer;
@@ -490,142 +365,73 @@ String String::trim() {
 	return result;
 }
 
-/**
- * String value of boolean
- *
- * @param target
- * @return String
- */
-String String::valueOf(boolean target) {
-	if (target) {
+String String::valueOf(boolean boolValue) {
+	if (boolValue) {
 		return (string) "1";
 	}
 	return (string) "0";
 }
 
-/**
- * String value of character
- *
- * @param target
- * @return String
- */
-String String::valueOf(char target) {
-	string pointerHolder = string_from_char(target);
+String String::valueOf(char charValue) {
+	string pointerHolder = string_from_char(charValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String value of string
- *
- * @param target
- * @return String
- */
-String String::valueOf(string target) {
-	if (is_empty(target)) {
+String String::valueOf(string stringValue) {
+	if (is_empty(stringValue)) {
 		return (string) "";
 	}
-	return target;
+	return stringValue;
 }
 
-/**
- * String value of short
- *
- * @param target
- * @return String
- */
-String String::valueOf(short target) {
-	string pointerHolder = string_from_short(target);
+String String::valueOf(short shortValue) {
+	string pointerHolder = string_from_short(shortValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String value of integer
- *
- * @param target
- * @return String
- */
-String String::valueOf(int target) {
-	string pointerHolder = string_from_int(target);
+String String::valueOf(int intValue) {
+	string pointerHolder = string_from_int(intValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String value of long
- *
- * @param target
- * @return String
- */
-String String::valueOf(long target) {
-	string pointerHolder = string_from_long(target);
+String String::valueOf(long longValue) {
+	string pointerHolder = string_from_long(longValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String value of float
- *
- * @param target
- * @return String
- */
-String String::valueOf(float target) {
-	string pointerHolder = string_from_float(target);
+String String::valueOf(float floatValue) {
+	string pointerHolder = string_from_float(floatValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * String value of double
- *
- * @param target
- * @return String
- */
-String String::valueOf(double target) {
-	string pointerHolder = string_from_double(target);
+String String::valueOf(double doubleValue) {
+	string pointerHolder = string_from_double(doubleValue);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
 }
 
-/**
- * Returns a newly constructed string object with its value
- * initialized to a copy of a substring of this object.
- *
- * @param beginIndex
- * @return String
- */
 String String::subString(int beginIndex) {
    return this->subString(beginIndex, this->size - 1);
 }
 
-/**
- * Returns a newly constructed string object with its value
- * initialized to a copy of a substring of this object.
- *
- * @param from
- * @param to
- * @return String
- */
-String String::subString(int from, int to) {
-	string holder = string_from_to(this->original, from, to);
+String String::subString(int beginIndex, int endIndex) {
+	string holder = string_from_to(this->original, beginIndex, endIndex);
 	String result = holder;
 	free(holder);
 	return result;
 }
 
-/**
- * Operator plus for string
- *
- * @param target2
- * @return String
- */
 String String::operator+(const string &target) {
 	string pointerHolder = string_concat(this->original, target);
 	String result = pointerHolder;
@@ -633,12 +439,6 @@ String String::operator+(const string &target) {
 	return result;
 }
 
-/**
- * Operator plus for String
- *
- * @param target
- * @return String
- */
 String String::operator+(const String &target) {
 	string pointerHolder = string_concat(this->original, target.original);
 	String result = pointerHolder;
@@ -646,12 +446,6 @@ String String::operator+(const String &target) {
 	return result;
 }
 
-/**
- * Operator plus equals
- *
- * @param target
- * @return String
- */
 String String::operator+=(const String &target) {
 	string result = string_concat(this->original, target.original);
 	*this = result;
@@ -659,12 +453,6 @@ String String::operator+=(const String &target) {
 	return *this;
 }
 
-/**
- * Append target String to this String
- *
- * @param target
- * @return String
- */
 String String::operator+=(const char &target) {
 	string pointerHolder = this->original;
 	string_append(&this->original, target);
@@ -678,12 +466,6 @@ String String::operator+=(const_string target) {
 	return *this;
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return String
- */
 boolean String::operator==(const String &target) const {
 	if (string_equals(this->original, target.toString())) {
 		return true;
@@ -691,12 +473,6 @@ boolean String::operator==(const String &target) const {
 	return false;
 }
 
-/**
- * Assign value of this object String same as value of target object
- *
- * @param target
- * @return String
- */
 String String::operator=(const String &target) {
 	if (this->original != NULL) {
 		free(this->original);
@@ -706,22 +482,10 @@ String String::operator=(const String &target) {
 	return *this;
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return boolean
- */
 boolean String::operator!=(const String &target) const {
 	return !this->operator==(target);
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return boolean
- */
 boolean String::operator<(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
@@ -730,12 +494,6 @@ boolean String::operator<(const String &target) const {
 	return false;
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return boolean
- */
 boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
@@ -744,12 +502,6 @@ boolean String::operator>(const String &target) const {
 	return false;
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return boolean
- */
 boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
@@ -758,12 +510,6 @@ boolean String::operator<=(const String &target) const {
 	return true;
 }
 
-/**
- * Compare two object String
- *
- * @param target
- * @return boolean
- */
 boolean String::operator>=(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return false;
@@ -776,8 +522,7 @@ boolean String::operator>=(const String &target) const {
  * @param format
  * @return String
  */
-String String::format(const String &format)
-{
+String String::format(const String &format) {
 	std::string result;
 	std::string inputString(format.toString());
 	std::smatch matchResult;
@@ -802,8 +547,7 @@ String String::format(const String &format)
 	return String(result.c_str());
 }
 
-std::string String::print(const std::string &format, short value)
-{
+std::string String::print(const std::string &format, short value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -812,8 +556,7 @@ std::string String::print(const std::string &format, short value)
     return result;
 }
 
-std::string String::print(const std::string &format, int value)
-{
+std::string String::print(const std::string &format, int value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -822,8 +565,7 @@ std::string String::print(const std::string &format, int value)
     return result;
 }
 
-std::string String::print(const std::string &format, long value)
-{
+std::string String::print(const std::string &format, long value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -832,8 +574,7 @@ std::string String::print(const std::string &format, long value)
     return result;
 }
 
-std::string String::print(const std::string &format, unsigned short value)
-{
+std::string String::print(const std::string &format, unsigned short value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -842,8 +583,7 @@ std::string String::print(const std::string &format, unsigned short value)
     return result;
 }
 
-std::string String::print(const std::string &format, unsigned int value)
-{
+std::string String::print(const std::string &format, unsigned int value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -852,8 +592,7 @@ std::string String::print(const std::string &format, unsigned int value)
     return result;
 }
 
-std::string String::print(const std::string &format, unsigned long value)
-{
+std::string String::print(const std::string &format, unsigned long value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -862,8 +601,7 @@ std::string String::print(const std::string &format, unsigned long value)
     return result;
 }
 
-std::string String::print(const std::string &format, double value)
-{
+std::string String::print(const std::string &format, double value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -872,8 +610,7 @@ std::string String::print(const std::string &format, double value)
     return result;
 }
 
-std::string String::print(const std::string &format, float value)
-{
+std::string String::print(const std::string &format, float value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -882,8 +619,7 @@ std::string String::print(const std::string &format, float value)
     return result;
 }
 
-std::string String::print(const std::string &format, char *value)
-{
+std::string String::print(const std::string &format, char *value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -892,14 +628,57 @@ std::string String::print(const std::string &format, char *value)
     return result;
 }
 
-/*long String::hashCode() const {
-    int h = this->hash;
-    if (h == 0 && this->length() > 0) {
-        string value = original;
-        for (int i = 0; i < this->length(); i++) {
-            h = 31 * h + value[i];
-        }
-        //this->hash = h;
-    }
-    return h;
-}*/
+std::string String::print(const std::string &format, Short value) {
+	std::string result;
+	char buffer[256] = {0};
+	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.shortValue());
+	if(length > 0)
+		result = std::string(buffer);
+	return result;
+}
+
+std::string String::print(const std::string &format, Integer value) {
+	std::string result;
+	char buffer[256] = {0};
+	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.intValue());
+	if(length > 0)
+		result = std::string(buffer);
+	return result;
+}
+
+std::string String::print(const std::string &format, Long value) {
+	std::string result;
+	char buffer[256] = {0};
+	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.longValue());
+	if(length > 0)
+		result = std::string(buffer);
+	return result;
+}
+
+std::string String::print(const std::string &format, Float value) {
+	std::string result;
+	char buffer[256] = {0};
+	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.floatValue());
+	if(length > 0)
+		result = std::string(buffer);
+	return result;
+}
+
+std::string String::print(const std::string &format, Double value) {
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.doubleValue());
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+
+std::string String::print(const std::string &format, String value) {
+    std::string result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.toString());
+    if(length > 0)
+        result = std::string(buffer);
+    return result;
+}
+

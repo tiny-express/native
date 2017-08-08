@@ -9,8 +9,12 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise
         packages:
-            - g++-6
+            - libc++1
+            - libc++1-dev
+            - libc++abi1
+            - libc++abi-dev
             - lcov
 before_script:
 - export CC=gcc-6

@@ -35,9 +35,11 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
-#include "../../lang/Number/Number.hpp"
-//#include "../StringBuilder/StringBuilder.hpp"
-//#include "../StringBuffer/StringBuffer.hpp"
+/*#include "../Short/Short.hpp"
+#include "../Integer/Integer.hpp"
+#include "../Long/Long.hpp"
+#include "../Float/Float.hpp"
+#include "../Double/Double.hpp"*/
 
 using namespace Java::IO;
 
@@ -46,6 +48,12 @@ namespace Java {
 
         class StringBuilder;
         class StringBuffer;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+
 		class String :
 				public Object,
 				public virtual Serializable,
@@ -80,8 +88,8 @@ namespace Java {
             String(Array<byte> &byteArray);
 
             /**
-             * Allocates a new string that contains the sequence
-             * of characters currently contained in the string builder.
+             * Allocates a new String that contains the sequence
+             * of characters currently contained in the StringBuilder.
              *
              * @param stringBuilder
              */
@@ -96,8 +104,8 @@ namespace Java {
             String(Array<char> &charArray);
 
             /**
-             * Allocates a new string that contains the sequence
-             * of characters currently contained in the string buffer.
+             * Allocates a new String that contains the sequence
+             * of characters currently contained in the StringBuffer.
              *
              * @param stringBuffer
              */
@@ -290,24 +298,24 @@ namespace Java {
              * String compare to another string
              *
              * @param anotherString
-             * @return 0 if the argument string is equal to this string;
-             * a value less than 0 if this string is lexicographically
-             * less than the string argument;
-             * and a value greater than 0 if this string is lexicographically
-             * greater than the string argument.
+             * @return 0 if the argument String is equal to this string;
+             * a value less than 0 if this String is lexicographically
+             * less than the String argument;
+             * and a value greater than 0 if this String is lexicographically
+             * greater than the String argument.
              */
-			virtual int compareTo(const String &anotherString) const override;
+			int compareTo(const String &anotherString) const override;
 
             /**
-             * String compare with another string but ignore case
+             * String compare with another String but ignore case
              *
              * @param targetString
-             * @return 0 if the argument string is equal to this string
+             * @return 0 if the argument String is equal to this string
              * ignoring case considerations.
-             * a value less than 0 if this string is lexicographically
-             * less than the string argument ignoring case considerations.
-             * and a value greater than 0 if this string is lexicographically
-             * greater than the string argument ignoring case considerations..
+             * a value less than 0 if this String is lexicographically
+             * less than the String argument ignoring case considerations.
+             * and a value greater than 0 if this String is lexicographically
+             * greater than the String argument ignoring case considerations..
              */
 			int compareToIgnoreCase(String targetString) const;
 
@@ -330,7 +338,7 @@ namespace Java {
 			boolean contains(const CharSequence &charSequence);
 
             /**
-             * Compares this string to the specified CharSequence.
+             * Compares this String to the specified CharSequence.
              * The result is true if and only if this String represents
              * the same sequence of char values as the specified sequence.
              *
@@ -340,7 +348,7 @@ namespace Java {
 			//boolean contentEquals(const CharSequence &charSequence);
 
             /**
-             * Compares this string to the specified CharSequence.
+             * Compares this String to the specified CharSequence.
              * The result is true if and only if this String represents
              * the same sequence of char values as the specified sequence.
              *
@@ -350,7 +358,7 @@ namespace Java {
             //boolean contentEquals(const StringBuffer &stringBuffer);
 
             /**
-             * Returns the string representation of the char array argument.
+             * Returns the String representation of the char array argument.
              * The contents of the character array are copied;
              * subsequent modification of the character array does not affect the returned string.
              *
@@ -360,7 +368,7 @@ namespace Java {
 			//static String copyValueOf(const Array<char> &charArray);
 
             /**
-             * Returns the string representation of a specific subarray of the char array argument.
+             * Returns the String representation of a specific subarray of the char array argument.
              *
              * @param charArray
              * @param offset
@@ -383,7 +391,7 @@ namespace Java {
 			boolean endsWith(const String &suffixString) const;
 
             /**
-             * Compares this string to the specified object.
+             * Compares this String to the specified object.
              *
              * @tparam T
              * @param anObject
@@ -444,7 +452,7 @@ namespace Java {
             // Array<byte> getBytes(CharSet charSet) const;
 
             /**
-             * Copies characters from this string into the destination character array.
+             * Copies characters from this String into the destination character array.
              *
              * @param sourceBegin
              * @param sourceEnd
@@ -474,37 +482,388 @@ namespace Java {
              * @return int
              */
             //long hashCode() const;
-			int indexOf(int ch) const;
-			int indexOf(int ch, int fromIndex) const;
-			int indexOf(String str) const;
-			int indexOf(String str, int fromIndex) const;
+
+
+            /**
+             * Returns the index within this String
+             * of the first occurrence of the specified character.
+             *
+             * @param character
+             * @return index of the first occurrence of character,
+             * or -1 if there is no such occurrence.
+             */
+			int indexOf(int character) const;
+
+            /**
+             * Returns the index within this String
+             * of the first occurrence of the specified String.
+             *
+             * @param subString
+             * @return index of the first occurrence of the specified substring,
+             * or -1 if there is no such occurrence.
+             */
+            int indexOf(String subString) const;
+
+            /**
+             * Returns the index within this String
+             * of the first occurrence of the specified character,
+             * starting the search at the specified index.
+             *
+             * @param character
+             * @param fromIndex
+             * @return index of the first occurrence of the specified character,
+             * or -1 if there is no such occurrence.
+             */
+			int indexOf(int character, int fromIndex) const;
+
+            /**
+             * Returns the index within this string
+             * of the first occurrence of the specified String.
+             * starting the search at the specified index.
+             *
+             * @param subString
+             * @return index of the first occurrence of the specified substring,
+             * or -1 if there is no such occurrence.
+             */
+			int indexOf(String subString, int fromIndex) const;
+
+            /**
+             * Determine if this String is empty
+             *
+             * @return true if, and only if, length() is 0.
+             */
 			boolean isEmpty() const;
-			int lastIndexOf(int ch);
-			int lastIndexOf(int ch, int fromIndex);
-			int lastIndexOf(String str) const;
-			int lastIndexOf(String str, int fromIndex) const;
+
+            /**
+             * Returns a new String composed of copies of the CharSequence elements joined together
+             *
+             * @param charSequence
+             * @param elements
+             * @return a new String that is composed of the elements
+             */
+            template <typename... Args>
+            static String join(CharSequence &charSequence, Args... elements);
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified character
+             *
+             * @param character
+             * @return index of the last occurrence of the specified character,
+             * or -1 if the character does not occur.
+             */
+			int lastIndexOf(int character);
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified character,
+             * searching backward starting at the specified index.
+             *
+             * @param character
+             * @param fromIndex
+             * @return index of the last occurrence of the specified character,
+             * or -1 if the character does not occur.
+             */
+			int lastIndexOf(int character, int fromIndex);
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified substring
+             *
+             * @param subString
+             * @return index of the last occurrence of the specified substring,
+             * or -1 if the substring does not occur.
+             */
+			int lastIndexOf(String subString) const;
+
+            /**
+             * Returns the index within this string of the last occurrence of the specified substring,
+             * searching backward starting at the specified index.
+             *
+             * @param subString
+             * @param fromIndex
+             * @return index of the last occurrence of the specified substring,
+             * or -1 if the substring does not occur.
+             */
+			int lastIndexOf(String subString, int fromIndex) const;
+
+            /**
+             * Returns the length of this string
+             * @return int
+             */
 			int length() const;
+
+            /**
+             * Tells whether or not this string matches the given regular expression.
+             *
+             * @param regex
+             * @throw java.util.regex.PatternSyntaxException if the regular expression's syntax is invalid
+             * @return true if, and only if, this string matches the given regular expression
+             */
 			boolean matches(String regex) const;
+
+            /**
+             * Returns the index within this String that is offset
+             * from the given index by codePointOffset code points
+             *
+             * @param index
+             * @param codePointOffset
+             * @throw IndexOutOfBoundsException if index is negative or larger then the length of this String,
+             * or if codePointOffset is positive and the substring starting with index
+             * has fewer than codePointOffset code points,
+             * or if codePointOffset is negative and the substring before index has fewer than
+             * the absolute value of codePointOffset code points.
+             * @return the index within this String
+             */
+            int offsetByCodePoints(int index, int codePointOffset);
+
+            /**
+             * Tests if two string regions are equal.
+             *
+             * @param thisOffset
+             * @param otherString
+             * @param otherOffset
+             * @param len
+             * @return true if the specified subregion of this String exactly
+             * matches the specified subregion of the String argument; false otherwise.
+             */
+            boolean regionMatches(int thisOffset, String otherString, int otherOffset, int len);
+
+            /**
+             * Tests if two string regions are equal.
+             *
+             * @param regionMatches
+             * @param thisOffset
+             * @param otherString
+             * @param otherOffset
+             * @param len
+             * @return true if the specified subregion of this String matches the specified
+             * subregion of the String argument; false otherwise.
+             * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
+             */
+            boolean regionMatches(boolean regionMatches, int thisOffset, String otherString, int otherOffset, int len);
+
+            /**
+             * Returns a string resulting from replacing all occurrences of oldChar in this String with newChar.
+             *
+             * @param oldChar
+             * @param newChar
+             * @return a string derived from this String by replacing every occurrence of oldChar with newChar.
+             */
 			String replace(char oldChar, char newChar) const;
+
+            /**
+             * Replaces each substring of this string that matches the literal
+             * target sequence with the specified literal replacement sequence.
+             * The replacement proceeds from the beginning of the string to the end.
+             *
+             * @param target
+             * @param replacement
+             * @return The resulting String
+             */
+            String replace(CharSequence &target, CharSequence &replacement) const;
+
+            /**
+             * Replaces each substring of this string that matches
+             * the given regular expression with the given replacement.
+             *
+             * @param regex
+             * @param replacement
+             * @return The resulting String
+             */
 			String replaceAll(String regex, String replacement) const;
+
+            /**
+             * Replaces the first substring of this string that matches
+             * the given regular expression with the given replacement.
+             *
+             * @param regex
+             * @param replacement
+             * @throw java.util.regex.PatternSyntaxException
+             * if the regular expression's syntax is invalid
+             * @return The resulting String
+             */
 			String replaceFirst(String regex, String replacement) const;
+
+            /**
+             * Splits this String around matches of the given regular expression.
+             *
+             * @param regex
+             * @throw java.util.regex.PatternSyntaxException
+             * if the regular expression's syntax is invalid
+             * @return the array of Strings computed by splitting this String
+             * around matches of the given regular expression
+             */
 			Array<String> split(String regex) const;
-			//Array<String> split(String regex, int limit) const;
+
+            /**
+             * Splits this string around matches of the given regular expression.
+             *
+             * @param regex
+             * @param limit
+             * @throw java.util.regex.PatternSyntaxException
+             * if the regular expression's syntax is invalid
+             * @return array of Strings computed by splitting this String
+             * around matches of the given regular expression
+             */
+			Array<String> split(String regex, int limit) const;
+
+            /**
+             * Tests if this string starts with the specified prefix.
+             *
+             * @param prefix
+             * @return true if the character sequence represented by the argument is a prefix
+             * of the character sequence represented by this string; false otherwise.
+             */
 			boolean startsWith(String prefix) const;
-			boolean startsWith(String prefix, int toffset) const;
+
+            /**
+             * Tests if the substring of this string beginning
+             * at the specified index starts with the specified prefix.
+             *
+             * @param prefix
+             * @param thisOffset
+             * @return true if the character sequence represented by the argument is a prefix
+             * of the substring of this object starting at index thisOffset; false otherwise.
+             * The result is false if thisOffset is negative or greater than the length of this String object;
+             */
+			boolean startsWith(String prefix, int thisOffset) const;
+
+            /**
+             * Returns a character sequence that is a subsequence of this sequence.
+             *
+             * @param beginIndex
+             * @param endIndex
+             * @throw IndexOutOfBoundsException if beginIndex or endIndex is negative,
+             * if endIndex is greater than length(), or if beginIndex is greater than endIndex
+             * @return the specified subsequence.
+             */
+            //CharSequence subSequence(int beginIndex, int endIndex);
+
+            /**
+             * Returns a String that is a substring of this String.
+             * The substring begins with the character at the specified
+             * index and extends to the end of this string.
+             *
+             * @param beginIndex
+             * @throw IndexOutOfBoundsException if beginIndex is negative
+             * or larger than the length of this String object.
+             * @return the specified substring as a String.
+             */
+            String subString(int beginIndex);
+
+            /**
+             * Returns a string that is a substring of this string.
+             * The substring begins at the specified beginIndex
+             * and extends to the character at index endIndex - 1
+             *
+             * @param beginIndex
+             * @param endIndex
+             * @throw IndexOutOfBoundsException if the beginIndex is negative,
+             * or endIndex is larger than the length of this String object,
+             * or beginIndex is larger than endIndex.
+             * @return the specified substring as a String.
+             */
+            String subString(int beginIndex, int endIndex);
+
+            /**
+             * Converts this string to a new character array.
+             *
+             * @return a newly allocated character array contain
+             */
 			Array<char> toCharArray() const;
+
+            /**
+             * Converts all of the characters in this String to lower case
+             * using the rules of the default locale.
+             *
+             * @return the String, converted to lowercase.
+             */
 			String toLowerCase() const;
+
+            /**
+             * Converts all of the characters in this String to upper case
+             * using the rules of the default locale.
+             *
+             * @return the String, converted to uppercase.
+             */
 			String toUpperCase();
+
+            /**
+             * Returns a String whose value is this string, with any leading and trailing whitespace removed.
+             *
+             * @return a String with leading and trailing whitespace removed.
+             */
 			String trim();
+
+            /**
+             * Return a String a string contain value of this String
+             *
+             * @return a String contain value of this String
+             */
 			string toString() const;
-			static String valueOf(boolean target);
-			static String valueOf(char target);
-			static String valueOf(string target);
-			static String valueOf(short target);
-			static String valueOf(int target);
-			static String valueOf(long target);
-			static String valueOf(float target);
-			static String valueOf(double target);
+
+            /**
+             * Returns the String representation of the boolean argument.
+             *
+             * @param boolValue
+             * @return if the argument is true, a String equal to "true" is returned;
+             * otherwise, a String equal to "false" is returned.
+             */
+			static String valueOf(boolean boolValue);
+
+            /**
+             * Returns the String representation of the char argument.
+             *
+             * @param charValue
+             * @return a String of length 1 containing charValue.
+             */
+			static String valueOf(char charValue);
+
+            /**
+             * Returns the String representation of the string argument.
+             *
+             * @param stringValue
+             * @return a String containing stringValue.
+             */
+			static String valueOf(string stringValue);
+
+            /**
+             * Returns the String representation of the short argument.
+             *
+             * @param shortValue
+             * @return a String representation of the short argument.
+             */
+			static String valueOf(short shortValue);
+
+            /**
+             * Returns the String representation of the int argument.
+             *
+             * @param intValue
+             * @return a String representation of the int argument.
+             */
+			static String valueOf(int intValue);
+
+            /**
+             * Returns the String representation of the long argument.
+             *
+             * @param longValue
+             * @return a String representation of the long argument.
+             */
+			static String valueOf(long longValue);
+
+            /**
+             * Returns the String representation of the float argument.
+             *
+             * @param floatValue
+             * @return a String representation of the float argument.
+             */
+			static String valueOf(float floatValue);
+
+            /**
+             * Returns the String representation of the double argument.
+             *
+             * @param doubleValue
+             * @return a String representation of the double argument.
+             */
+			static String valueOf(double doubleValue);
 
 			template<typename T, typename... Args>
 			static String format(const String& format, T value, Args... args) {
@@ -540,45 +899,24 @@ namespace Java {
             static std::string print(const std::string& format, double value);
             static std::string print(const std::string& format, float value);
             static std::string print(const std::string& format, char* value);
+            static std::string print(const std::string& format, Short value);
+            static std::string print(const std::string& format, Integer value);
+            static std::string print(const std::string& format, Long value);
+            static std::string print(const std::string& format, Float value);
+            static std::string print(const std::string& format, Double value);
+            static std::string print(const std::string& format, String value);
 
             template<typename T>
 			static std::string printObject(const std::string& format, T value) {
 				std::string result;
 				char lastChar = format.back();
 				switch (lastChar) {
-					case 'd':
-						if (instanceof<Number>(value))
-							result = String::print(format, ((Number*)&value)->longValue());
-						else if (typeid(short) == typeid(value))
-							result = String::print(format, (short)value);
-                        else if (typeid(int) == typeid(value))
-                            result = String::print(format, (int)value);
-                        else if (typeid(long) == typeid(value))
-                            result = String::print(format, (long)value);
-                        else if (typeid(unsigned short) == typeid(value))
-                            result = String::print(format, (unsigned short)value);
-                        else if (typeid(unsigned int) == typeid(value))
-                            result = String::print(format, (unsigned int)value);
-                        else if (typeid(unsigned long) == typeid(value))
-                            result = String::print(format, (unsigned long)value);
-						break;
-					case 'f':
-						if (instanceof<Number>(value))
-							result = String::print(format, ((Number*)&value)->doubleValue());
-						else if (typeid(float) == typeid(value))
-                            result = String::print(format, (float)value);
-                        else if (typeid(double) == typeid(value))
-                            result = String::print(format, (double)value);
-                        break;
-					case 's':
-						if (instanceof<String>(value))
-							result = String::print(format, ((String*)&value)->toString());
-						else if (typeid(char*) == typeid(value))
-							result = String::print(format, (char*)value);
-						break;
 					case '%':
 						result += lastChar;
 						break;
+                    default:
+                        result = print(format, value);
+                        break;
 				}
 				return result;
 			}
@@ -596,8 +934,7 @@ namespace Java {
 			String operator+=(const String &target);
 			String operator+=(const char &target);
 			String operator+=(const_string target);
-            String subString(int beginIndex);
-			String subString(int from, int to);
+
 
 		public:
 			friend std::ostream &operator<<(std::ostream &os, const String &target) {
