@@ -304,96 +304,45 @@ long Long::lowestOneBit(long i) {
  * Returns the number of zero bits preceding the highest-order ("leftmost") one-bit
  * in the two's complement binary representation of the specified long value.
  *
- * @param long i
+ * @param source
  * @return int
  */
-int Long::numberOfLeadingZeros(long i) {
-    if (i == 0) {
+int Long::numberOfLeadingZeros(long source) {
+    if (source == 0L) {
         return 64;
     }
 
-    int n = 1;
-    long x = ((unsigned long)(i) >> 32);
-
-    if (x == 0) {
-        n += 32;
-        x = (int)i;
+    int shiftCount = 63;
+    while (shiftCount >= 0) {
+        if ((source & (1L << shiftCount)) != 0) {
+            return 63 - shiftCount;
+        }
+        --shiftCount;
     }
 
-    if (((unsigned long)(x) >> 16) == 0)
-    {
-        n += 16;
-        x <<= 16;
-    }
-
-    if (((unsigned long)(x) >> 24) == 0) {
-        n +=  8;
-        x <<=  8;
-    }
-
-    if (((unsigned long)(x) >> 28) == 0) {
-        n +=  4;
-        x <<=  4;
-    }
-
-    if (((unsigned long)(x) >> 30) == 0) {
-        n +=  2;
-        x <<=  2;
-    }
-
-    n -= ((unsigned long)(x) >> 31);
-
-    return n;
+    // for loop must return a value, so don't need to return anything after for loop.
 }
 
 /**
  * Returns the number of zero bits following the lowest-order ("rightmost") one-bit
  * in the two's complement binary representation of the specified long value.
  *
- * @param long i
+ * @param source
  * @return int
  */
-int Long::numberOfTrailingZeros(long i) {
-    if (i == 0) {
+int Long::numberOfTrailingZeros(long source) {
+    if (source == 0L) {
         return 64;
     }
 
-    int x, y;
-    int n = 63;
-
-    y = (int)i;
-    if (y != 0) {
-        n = n - 32;
-        x = y;
-    } else {
-        x = (int)((unsigned long)i >> 32);
+    int bitOrder;
+    for (bitOrder = 0; bitOrder < 64; ++bitOrder) {
+        if ((source & (1L << bitOrder)) != 0) {
+            return bitOrder;
+        }
     }
 
-    y = x << 16;
-    if (y != 0) {
-        n = n - 16;
-        x = y;
-    }
-
-    y = x << 8;
-    if (y != 0) {
-        n = n - 8;
-        x = y;
-    }
-
-    y = x << 4;
-    if (y != 0) {
-        n = n - 4;
-        x = y;
-    }
-
-    y = x << 2;
-    if (y != 0) {
-        n = n - 2;
-        x = y;
-    }
-
-    return n - ((unsigned int)(x << 1) >> 31);
+    // for loop must return a value, so don't need to return anything after for loop.
 }
 
 /**

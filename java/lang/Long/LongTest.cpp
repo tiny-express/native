@@ -233,26 +233,74 @@ TEST (JavaLang, LongDecode) {
 }
 
 TEST (JavaLang, LongNumberOfLeadingZeros) {
-    // Given valid long number to test leading
-    // The result is based on java code result
-    long validValue = 4053239666997989821L;
-    int result = Long::numberOfLeadingZeros(validValue);
+    ASSERT_EQUAL(0, Long::numberOfLeadingZeros(-1L));
+    ASSERT_EQUAL(33, Long::numberOfLeadingZeros(1234567890L));
 
-    int expectedResult = 2;
-    ASSERT_EQUAL(expectedResult, result);
-
-    validValue = 40532396L;
-    result = Long::numberOfLeadingZeros(validValue);
-
-    expectedResult = 38;
-    ASSERT_EQUAL(expectedResult, result);
-
-    // validValue = -1
-    validValue = 0xffffffffffffffffL;
-    result = Long::numberOfLeadingZeros(validValue);
-
-    expectedResult = 0;
-    ASSERT_EQUAL(expectedResult, result);
+    ASSERT_EQUAL(64, Long::numberOfLeadingZeros(0L));
+    ASSERT_EQUAL(63, Long::numberOfLeadingZeros(1L));
+    ASSERT_EQUAL(62, Long::numberOfLeadingZeros(2L));
+    ASSERT_EQUAL(61, Long::numberOfLeadingZeros(4L));
+    ASSERT_EQUAL(60, Long::numberOfLeadingZeros(8L));
+    ASSERT_EQUAL(59, Long::numberOfLeadingZeros(16L));
+    ASSERT_EQUAL(58, Long::numberOfLeadingZeros(32L));
+    ASSERT_EQUAL(57, Long::numberOfLeadingZeros(64L));
+    ASSERT_EQUAL(56, Long::numberOfLeadingZeros(128L));
+    ASSERT_EQUAL(55, Long::numberOfLeadingZeros(256L));
+    ASSERT_EQUAL(54, Long::numberOfLeadingZeros(512L));
+    ASSERT_EQUAL(53, Long::numberOfLeadingZeros(1024L));
+    ASSERT_EQUAL(52, Long::numberOfLeadingZeros(2048L));
+    ASSERT_EQUAL(51, Long::numberOfLeadingZeros(4096L));
+    ASSERT_EQUAL(50, Long::numberOfLeadingZeros(8192L));
+    ASSERT_EQUAL(49, Long::numberOfLeadingZeros(16384L));
+    ASSERT_EQUAL(48, Long::numberOfLeadingZeros(32768L));
+    ASSERT_EQUAL(47, Long::numberOfLeadingZeros(65536L));
+    ASSERT_EQUAL(46, Long::numberOfLeadingZeros(131072L));
+    ASSERT_EQUAL(45, Long::numberOfLeadingZeros(262144L));
+    ASSERT_EQUAL(44, Long::numberOfLeadingZeros(524288L));
+    ASSERT_EQUAL(43, Long::numberOfLeadingZeros(1048576L));
+    ASSERT_EQUAL(42, Long::numberOfLeadingZeros(2097152L));
+    ASSERT_EQUAL(41, Long::numberOfLeadingZeros(4194304L));
+    ASSERT_EQUAL(40, Long::numberOfLeadingZeros(8388608L));
+    ASSERT_EQUAL(39, Long::numberOfLeadingZeros(16777216L));
+    ASSERT_EQUAL(38, Long::numberOfLeadingZeros(33554432L));
+    ASSERT_EQUAL(37, Long::numberOfLeadingZeros(67108864L));
+    ASSERT_EQUAL(36, Long::numberOfLeadingZeros(134217728L));
+    ASSERT_EQUAL(35, Long::numberOfLeadingZeros(268435456L));
+    ASSERT_EQUAL(34, Long::numberOfLeadingZeros(536870912L));
+    ASSERT_EQUAL(33, Long::numberOfLeadingZeros(1073741824L));
+    ASSERT_EQUAL(32, Long::numberOfLeadingZeros(2147483648L));
+    ASSERT_EQUAL(31, Long::numberOfLeadingZeros(4294967296L));
+    ASSERT_EQUAL(30, Long::numberOfLeadingZeros(8589934592L));
+    ASSERT_EQUAL(29, Long::numberOfLeadingZeros(17179869184L));
+    ASSERT_EQUAL(28, Long::numberOfLeadingZeros(34359738368L));
+    ASSERT_EQUAL(27, Long::numberOfLeadingZeros(68719476736L));
+    ASSERT_EQUAL(26, Long::numberOfLeadingZeros(137438953472L));
+    ASSERT_EQUAL(25, Long::numberOfLeadingZeros(274877906944L));
+    ASSERT_EQUAL(24, Long::numberOfLeadingZeros(549755813888L));
+    ASSERT_EQUAL(23, Long::numberOfLeadingZeros(1099511627776L));
+    ASSERT_EQUAL(22, Long::numberOfLeadingZeros(2199023255552L));
+    ASSERT_EQUAL(21, Long::numberOfLeadingZeros(4398046511104L));
+    ASSERT_EQUAL(20, Long::numberOfLeadingZeros(8796093022208L));
+    ASSERT_EQUAL(19, Long::numberOfLeadingZeros(17592186044416L));
+    ASSERT_EQUAL(18, Long::numberOfLeadingZeros(35184372088832L));
+    ASSERT_EQUAL(17, Long::numberOfLeadingZeros(70368744177664L));
+    ASSERT_EQUAL(16, Long::numberOfLeadingZeros(140737488355328L));
+    ASSERT_EQUAL(15, Long::numberOfLeadingZeros(281474976710656L));
+    ASSERT_EQUAL(14, Long::numberOfLeadingZeros(562949953421312L));
+    ASSERT_EQUAL(13, Long::numberOfLeadingZeros(1125899906842624L));
+    ASSERT_EQUAL(12, Long::numberOfLeadingZeros(2251799813685248L));
+    ASSERT_EQUAL(11, Long::numberOfLeadingZeros(4503599627370496L));
+    ASSERT_EQUAL(10, Long::numberOfLeadingZeros(9007199254740992L));
+    ASSERT_EQUAL(9, Long::numberOfLeadingZeros(18014398509481984L));
+    ASSERT_EQUAL(8, Long::numberOfLeadingZeros(36028797018963968L));
+    ASSERT_EQUAL(7, Long::numberOfLeadingZeros(72057594037927936L));
+    ASSERT_EQUAL(6, Long::numberOfLeadingZeros(144115188075855872L));
+    ASSERT_EQUAL(5, Long::numberOfLeadingZeros(288230376151711744L));
+    ASSERT_EQUAL(4, Long::numberOfLeadingZeros(576460752303423488L));
+    ASSERT_EQUAL(3, Long::numberOfLeadingZeros(1152921504606846976L));
+    ASSERT_EQUAL(2, Long::numberOfLeadingZeros(2305843009213693952L));
+    ASSERT_EQUAL(1, Long::numberOfLeadingZeros(4611686018427387904L));
+    ASSERT_EQUAL(0, Long::numberOfLeadingZeros(9223372036854775808uL));
 }
 
 TEST(JavaLang, LongNumberOfTrailingZeros) {
