@@ -45,7 +45,7 @@ TEST(JavaUtil, BitSetConstructor) {
     // numberOfBits < 0
     try {
         BitSet initialNegativeSizeBitSet(-1);
-    } catch (NegativeArraySizeException ex) {
+    } catch (NegativeArraySizeException &ex) {
         ASSERT_STR("numberOfBits < 0: -1", ex.getMessage().toString());
     }
 
@@ -83,7 +83,7 @@ TEST(JavaUtil, BitSetClear) {
     // bitIndex < 0
     try {
         bitSet.clear(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
     }
 
@@ -105,21 +105,21 @@ TEST(JavaUtil, BitSetClear) {
     // fromIndex < 0
     try {
         bitSet.clear(-1, 5);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet.clear(0, -1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet.clear(5, 3);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex: 5 > toIndex: 3", ex.getMessage().toString());
     }
 
@@ -228,28 +228,28 @@ TEST(JavaUtil, BitSetFlip) {
     // bitIndex < 0
     try {
         bitSet.flip(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex < 0
     try {
         bitSet.flip(-1, 9);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet.flip(0, -1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet.flip(5, 1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex: 5 > toIndex: 1", ex.getMessage().toString());
     }
 
@@ -320,7 +320,7 @@ TEST(JavaUtil, BitSetNextClearBit) {
     // fromIndex < 0
     try {
         bitSet.nextClearBit(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(0, bitSet.length());
@@ -342,7 +342,7 @@ TEST(JavaUtil, BitSetNextSetBit) {
     // fromIndex < 0
     try {
         bitSet.nextSetBit(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(0, bitSet.length());
@@ -367,7 +367,7 @@ TEST(JavaUtil, BitSetPreviousClearBit) {
     // fromIndex < -1
     try {
         bitSet.previousClearBit(-5);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
     }
 
@@ -394,7 +394,7 @@ TEST(JavaUtil, BitSetPreviousSetBit) {
     // fromIndex < -1
     try {
         bitSet.previousSetBit(-5);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
     }
 
@@ -420,7 +420,7 @@ TEST(JavaUtil, BitSetGet) {
     // bitIndex < 0
     try {
         bitSet1.get(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
     }
     // bitIndex > logical length
@@ -442,21 +442,21 @@ TEST(JavaUtil, BitSetGet) {
     // fromIndex < 0
     try {
         BitSet bitSet3 = bitSet1.get(-1, 10);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         BitSet bitSet3 = bitSet1.get(0, -1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         BitSet bitSet3 = bitSet1.get(5, 2);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex: 5 > toIndex: 2", ex.getMessage().toString());
     }
 
@@ -504,7 +504,7 @@ TEST(VavaUtil, BitSetSet) {
     // bitIndex < 0
     try {
         bitSet1.set(-1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(false, bitSet1.get(9));
@@ -539,21 +539,21 @@ TEST(VavaUtil, BitSetSet) {
     // fromIndex < 0
     try {
         bitSet2.set(-1, 100);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet2.set(0, -1);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet2.set(20, 10);
-    } catch (IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("fromIndex: 20 > toIndex: 10", ex.getMessage().toString());
     }
 

@@ -45,7 +45,7 @@ TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
 TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
     try {
         throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
-    } catch (UnsupportedEncodingException ex) {
+    } catch (UnsupportedEncodingException &ex) {
         ASSERT_STR("Throw UnsupportedEncodingException", ex.getMessage().toString());
     }
 }
