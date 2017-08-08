@@ -258,3 +258,20 @@ void Random::setSeed(long seed) {
     haveNextGaussianNumber = false;
 }
 
+/**
+ * Random a string with specific length
+ *
+ * @return
+ */
+String Random::nextString(int length) {
+    char charArray[length];
+    int charListLength = 62;
+    int index;
+    for (index = 0; index < length; ++index) {
+        charArray[ index ] = CHAR_LIST[nextInt(charListLength)];
+    }
+    charArray[length] = 0;
+    String result = &charArray[ 0 ];
+    return result;
+}
+

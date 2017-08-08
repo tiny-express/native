@@ -30,20 +30,7 @@
 
 using namespace Java::Lang;
 
-/**
- * A constant holding the maximum value a long can have, 2^63-1.
- */
-long Long::MAX_VALUE = 0x7fffffffffffffffL;;
 
-/**
- * A constant holding the minimum value a long can have, -2^63.
- */
-long Long::MIN_VALUE = 0x8000000000000000L;;
-
-/**
- * The number of bits used to represent a long value in two's complement binary form.
- */
-int Long::SIZE = 64;
 
 /**
  * Default constructor
@@ -52,7 +39,7 @@ int Long::SIZE = 64;
  */
 Long::Long() {
     this->original = 0;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -63,7 +50,7 @@ Long::Long() {
  */
 Long::Long(long value) {
     this->original = value;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -74,15 +61,15 @@ Long::Long(long value) {
  */
 Long::Long(const Long &target) {
     this->original = target.original;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
  * Default destructor
  */
 Long::~Long() {
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
 }
 
@@ -544,7 +531,7 @@ String Long::toOctalString(long i) {
  * @return String
  */
 string Long::toString() const {
-    return this->string_original;
+    return this->originalString;
 }
 
 /**
@@ -659,10 +646,10 @@ String Long::toUnsignedString0(long val, int shift) {
  */
 Long Long::operator=(const Long &target) {
     this->original = target.original;
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
     return *this;
 }
 
