@@ -6,5 +6,7 @@ var searchData=
   ['nosuchelementexception_2ecpp',['NoSuchElementException.cpp',['../NoSuchElementException_8cpp.html',1,'']]],
   ['nosuchelementexception_2ehpp',['NoSuchElementException.hpp',['../NoSuchElementException_8hpp.html',1,'']]],
   ['number_2ecpp',['Number.cpp',['../Number_8cpp.html',1,'']]],
-  ['number_2ehpp',['Number.hpp',['../Number_8hpp.html',1,'']]]
+  ['number_2ehpp',['Number.hpp',['../Number_8hpp.html',1,'']]],
+  ['numberformatexception_2ecpp',['NumberFormatException.cpp',['../NumberFormatException_8cpp.html',1,'']]],
+  ['numberformatexception_2eh',['NumberFormatException.h',['../NumberFormatException_8h.html',1,'']]]
 ];
