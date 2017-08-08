@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,31 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_NETWORK_H
-#define NATIVE_NETWORK_H
+#ifndef NATIVE_MEDIATYPEEXCEPTION_H
+#define NATIVE_MEDIATYPEEXCEPTION_H
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE 1
-#endif
+#include "../../../../java/lang/Exception/Exception.hpp"
 
-#define HTTPS "https://"
-#define HTTP "http://"
-#define LOCALHOST "localhost"
-#define HTTP_PORT 80
-#define HTTPS_PORT 443
-#define IS_HTTPS 1
-#define IS_HTTP 2
-#define NOT_URL 0
+using namespace Java::Lang;
 
-char *get_ip_address();
-char *http_schema(char *url);
-char *http_hostname(char *url);
-int http_port(char *url);
-char *http_query(char *url);
-char *http_request(char *method, char *url, char **headers, char **body);
-char *http_path(char *url);
-char *http_protocol(char *url);
-int url_port(char *url);
-void send_response(int client_id, char *content);
+namespace Javax {
+    namespace Ws  {
+        class MediaTypeException : public Exception {
+        public:
+            MediaTypeException() : Exception() {};
+            MediaTypeException(String message) : Exception(message) {};
+            MediaTypeException(String message, Throwable *cause) : Exception(message, cause) {};
+            MediaTypeException(Throwable *cause) : Exception(cause) {};
+        };
+    }
+}
 
-#endif
+#endif //NATIVE_MEDIATYPEEXCEPTION_H

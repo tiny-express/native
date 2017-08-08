@@ -91,7 +91,7 @@ namespace Java {
 		class Double : public Number {
 		private:
 			double original;
-            string string_original;
+            string originalString;
 
         public:
             /**
