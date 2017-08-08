@@ -38,4 +38,7 @@ TEST(JavaNet, URLDecodeString) {
     String result = URLDecoder::decode(target);
     String expect = u8"Quán ăn";
     ASSERT_STR(expect.toString(), result.toString());
+
+    result = URLDecoder::decode(target, "UTF-8");
+    ASSERT_STR(expect.toString(), result.toString());
 }

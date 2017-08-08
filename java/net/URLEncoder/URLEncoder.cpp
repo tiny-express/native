@@ -34,12 +34,14 @@ String URLEncoder::encode(const String &source) {
 }
 
 String URLEncoder::encode(const String &source, const String &encoding) {
-    if (encoding == "UTF-8") {
+    // TODO(truongchauhien): String class need to be refactoring.
+    String &referenceToEncoding = const_cast<String &>(encoding);
+    if (referenceToEncoding.toUpperCase() == "UTF-8") {
         string encodedString = url_encode(source.toString());
         String result(encodedString);
         free(encodedString);
         return result;
-
     }
+    // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
     throw UnsupportedEncodingException();
 }

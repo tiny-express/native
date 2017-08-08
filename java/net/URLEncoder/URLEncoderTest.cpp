@@ -38,4 +38,7 @@ TEST(JavaNet, URLEncodeString) {
     String result = URLEncoder::encode(target);
     String expect = "Qu%c3%a1n+%c4%83n";
     ASSERT_STR(expect.toString(), result.toString());
+
+    result = URLEncoder::encode(target, "UTF-8");
+    ASSERT_STR(expect.toString(), result.toString());
 }
