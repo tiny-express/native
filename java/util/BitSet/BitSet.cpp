@@ -40,17 +40,17 @@ int BitSet::wordIndex(int bitIndex) {
 
 void BitSet::checkRange(int fromIndex, int toIndex) {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+        throw IndexOutOfBoundsException("fromIndex < 0: " +
                                                 String::valueOf(fromIndex));
     }
     if (toIndex < 0) {
-        throw IndexOutOfBoundsException(String("toIndex < 0: ") +
+        throw IndexOutOfBoundsException("toIndex < 0: " +
                                                 String::valueOf(toIndex));
     }
     if (fromIndex > toIndex) {
-        throw IndexOutOfBoundsException(String("fromIndex: ") + String::valueOf(fromIndex) +
-                                                String(" > ") +
-                                                String("toIndex: ") + String::valueOf(toIndex));
+        throw IndexOutOfBoundsException("fromIndex: " + String::valueOf(fromIndex) +
+                                                " > toIndex: " +
+                                                String::valueOf(toIndex));
     }
 }
 
@@ -123,7 +123,7 @@ BitSet::BitSet() {
 
 BitSet::BitSet(int numberOfBits) {
     if (numberOfBits < 0) {
-        throw NegativeArraySizeException(String("numberOfBits < 0: ") +
+        throw NegativeArraySizeException("numberOfBits < 0: " +
                                                  String::valueOf(numberOfBits));
     }
     this->initializeWords(numberOfBits);
@@ -336,7 +336,7 @@ boolean BitSet::equals(const Object &target) const {
 
 void BitSet::flip(int bitIndex) {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException(String("bitIndex < 0: ") +
+        throw IndexOutOfBoundsException("bitIndex < 0: " +
                                                 String::valueOf(bitIndex));
     }
     int indexOfWord = wordIndex(bitIndex);
@@ -381,7 +381,7 @@ void BitSet::flip(int fromIndex, int toIndex) {
 
 boolean BitSet::get(int bitIndex) const {
     if (bitIndex < 0) {
-        throw IndexOutOfBoundsException(String("bitIndex < 0: ") +
+        throw IndexOutOfBoundsException("bitIndex < 0: " +
                                                 String::valueOf(bitIndex));
     }
 
@@ -400,7 +400,7 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
     this->checkRange(fromIndex, toIndex);
 
     int logicalLength = this->length();
-    // If no set bits in range return empty bitset.
+    // If no set bits in range return empty BitSet.
     if (logicalLength <= fromIndex || fromIndex == toIndex) {
         return BitSet(0);
     }
@@ -482,7 +482,7 @@ int BitSet::length() const {
 
 int BitSet::nextClearBit(int fromIndex) const {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+        throw IndexOutOfBoundsException("fromIndex < 0: " +
                                                 String::valueOf(fromIndex));
     }
 
@@ -511,7 +511,7 @@ int BitSet::nextClearBit(int fromIndex) const {
 
 int BitSet::nextSetBit(int fromIndex) const {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
+        throw IndexOutOfBoundsException("fromIndex < 0: " +
                                                 String::valueOf(fromIndex));
     }
 
@@ -543,7 +543,7 @@ int BitSet::previousClearBit(int fromIndex) const {
         if (fromIndex == -1) {
             return -1;
         }
-        throw IndexOutOfBoundsException(String("fromIndex < -1: ") +
+        throw IndexOutOfBoundsException("fromIndex < -1: " +
                                                 String::valueOf(fromIndex));
     }
 
@@ -576,7 +576,7 @@ int BitSet::previousSetBit(int fromIndex) const {
         if (fromIndex == -1) {
             return -1;
         }
-        throw IndexOutOfBoundsException(String("fromIndex < -1: ") +
+        throw IndexOutOfBoundsException("fromIndex < -1: " +
                                                 String::valueOf(fromIndex));
     }
 
