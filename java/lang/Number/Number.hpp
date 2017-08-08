@@ -42,7 +42,6 @@ namespace Java {
 			virtual long longValue() const = 0;
 			virtual float floatValue() const = 0;
 			virtual double doubleValue() const = 0;
-			// virtual byte byteValue() const = 0;
 		};
 	}
 }

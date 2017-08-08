@@ -56,7 +56,7 @@ char Bytes::charValue() const {
     return (char) this->original;
 }
 
-byte Bytes::byteValue() {
+byte Bytes::byteValue() const {
 	return this->original;
 }
 

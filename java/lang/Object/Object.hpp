@@ -46,7 +46,6 @@ bool instanceof(T) {
 // Define builtin types
 typedef bool boolean;
 
-
 template <typename E>
 class Array;
 

@@ -113,7 +113,7 @@ namespace Java {
              *
              * @return byte
              */
-            byte byteValue ();
+            byte byteValue () const;
 
             /**
              * Compares two byte values numerically.
