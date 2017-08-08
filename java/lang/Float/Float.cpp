@@ -79,9 +79,9 @@ float Float::floatValue() const {
  * @return char
  */
 char Float::charValue() const {
-    string stringFromFloatResult = string_from_float(this->original);
-    char floatCharValueResult = string_to_char(stringFromFloatResult);
-    free(stringFromFloatResult);
+	string stringFromFloatResult = string_from_float(this->original);
+	char floatCharValueResult = string_to_char(stringFromFloatResult);
+	free(stringFromFloatResult);
 	return floatCharValueResult;
 }
 
@@ -246,5 +246,5 @@ boolean Float::operator>=(const Float &target) const {
 }
 
 boolean Float::isNaN(float v) {
-    return v != v;
+	return v != v;
 }

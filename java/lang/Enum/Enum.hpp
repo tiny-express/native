@@ -30,78 +30,80 @@
 #include "../String/String.hpp"
 
 namespace Java {
-    namespace Lang {
-        template <typename E>
-        class Enum: public Object
+		namespace Lang {
+				template <typename E>
+				class Enum : public Object
 //        , public virtual Comparable<E>
 //        , public virtual Serializable
-        {
-        private:
-            String name;
-            int    ordinal;
-
-        public:
-            Enum() {}
-
-            ~Enum() {}
-
-            Enum(String name, int ordinal) {
-                this->name    = name;
-                this->ordinal = ordinal;
-            }
-
-        public:
-            /**
-             * Don't support this method
-             */
-            Enum clone() {
-                Enum result;
-                result.name    = this->name;
-                result.ordinal = this->ordinal;
-                return result;
-            }
-
-            /**
-             * Make a comparation from this enum to another
-             * @param o
-             * @return int
-             */
-            int compareTo(const Enum<E> &e) {
-                return this->ordinal - e.ordinal;
-            }
-
-            /**
-             * Returns the name of this enum constant, exactly as declared in its enum declaration.
-             * @return String
-             */
-            String getName() {
-                return this->name;
-            }
-
-            /**
-             * Returns the ordinal of this enumeration constant
-             * (its position in its enum declaration, where the initial constant is assigned an ordinal of zero).
-             * @return int
-             */
-            int getOrdinal() {
-                return this->ordinal;
-            }
-
-            /**
-             * Returns the name of this enum constant, as contained in the declaration.
-             * @return String
-             */
-            string toString() const {
-                return this->name.toString();
-            }
-
-        public:
-            friend std::ostream &operator<<(std::ostream &os, const Enum &target) {
-                os << target.toString();
-                return os;
-            }
-        };
-    }
+				{
+				private:
+						String name;
+						int ordinal;
+				
+				public:
+						Enum() {
+						}
+						
+						~Enum() {
+						}
+						
+						Enum(String name, int ordinal) {
+							this->name = name;
+							this->ordinal = ordinal;
+						}
+				
+				public:
+						/**
+						 * Don't support this method
+						 */
+						Enum clone() {
+							Enum result;
+							result.name = this->name;
+							result.ordinal = this->ordinal;
+							return result;
+						}
+						
+						/**
+						 * Make a comparation from this enum to another
+						 * @param o
+						 * @return int
+						 */
+						int compareTo(const Enum<E> &e) {
+							return this->ordinal - e.ordinal;
+						}
+						
+						/**
+						 * Returns the name of this enum constant, exactly as declared in its enum declaration.
+						 * @return String
+						 */
+						String getName() {
+							return this->name;
+						}
+						
+						/**
+						 * Returns the ordinal of this enumeration constant
+						 * (its position in its enum declaration, where the initial constant is assigned an ordinal of zero).
+						 * @return int
+						 */
+						int getOrdinal() {
+							return this->ordinal;
+						}
+						
+						/**
+						 * Returns the name of this enum constant, as contained in the declaration.
+						 * @return String
+						 */
+						string toString() const {
+							return this->name.toString();
+						}
+				
+				public:
+						friend std::ostream &operator<<(std::ostream &os, const Enum &target) {
+							os << target.toString();
+							return os;
+						}
+				};
+		}
 }
 
 #endif //JAVA_LANG_ENUM_HPP_

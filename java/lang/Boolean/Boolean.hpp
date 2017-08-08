@@ -40,44 +40,43 @@ using namespace Java::Lang;
 using namespace Java::IO;
 
 namespace Java {
-    namespace Lang {
-        class Boolean :
-                public Object,
-                public Comparable<Boolean>,
-                public Serializable
-        {
-        private:
-            bool original;
-            string originalString;
-
-        public:
-            const static boolean True = true;
-            const static boolean False = false;
-
-        public:
-            Boolean(const boolean &target);
-            Boolean(const_string target);
-            ~Boolean();
-
-        public:
-            boolean booleanValue() const;
-            static int compare(const boolean &target1, const boolean &target2);
-            int compareTo(const Boolean &target) const;
-            static boolean getBoolean(const_string target);
-            long hashCode() const;
-            static boolean parseBoolean(const_string target);
-            string toString() const;
-            static string toString(const boolean &target);
-            static Boolean valueOf(boolean target);
-            static boolean valueOf(const_string target);
-            Boolean operator=(const Boolean &target);
-
-            friend std::ostream &operator<<(std::ostream &os, const Boolean &target) {
-                os << target.toString();
-                return os;
-            }
-        };
-
-    }
+		namespace Lang {
+				class Boolean :
+					public Object,
+					public Comparable<Boolean>,
+					public Serializable {
+				private:
+						bool original;
+						string originalString;
+				
+				public:
+						const static boolean True = true;
+						const static boolean False = false;
+				
+				public:
+						Boolean(const boolean &target);
+						Boolean(const_string target);
+						~Boolean();
+				
+				public:
+						boolean booleanValue() const;
+						static int compare(const boolean &target1, const boolean &target2);
+						int compareTo(const Boolean &target) const;
+						static boolean getBoolean(const_string target);
+						long hashCode() const;
+						static boolean parseBoolean(const_string target);
+						string toString() const;
+						static string toString(const boolean &target);
+						static Boolean valueOf(boolean target);
+						static boolean valueOf(const_string target);
+						Boolean operator=(const Boolean &target);
+						
+						friend std::ostream &operator<<(std::ostream &os, const Boolean &target) {
+							os << target.toString();
+							return os;
+						}
+				};
+			
+		}
 }
 #endif  // JAVA_LANG_BOOLEAN_HPP_

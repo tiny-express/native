@@ -33,102 +33,102 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace Util {
-        class Random {
-
-        private:
-            std::atomic_long seed;
-            static std::atomic_long seedUniquifierField;
-            static const long MULTIPLIER = 0x5DEECE66DL;
-            static const long ADDEND = 0xBL;
-            static constexpr long MASK = (1L << 48) - 1;
-            static constexpr double DOUBLE_UNIT = 1.0 / (1L << 53);
-            boolean haveNextGaussianNumber = false;
-            double nextGaussianNumber;
-            //static long seedOffset;
-
-        public:
-            // IllegalArgumentException messages
-            const String BADBOUND = "bound must be positive";
-
-        private:
-            long initialScramble(long seed);
-
-            //void readObject(ObjectInputStream s);
-
-            //void resetSeed(long seedVal);
-
-            static long seedUniquifier();
-
-            //void writeObject(ObjectOutputStream s)
-
-            long nanoTime();
-
-            /*static long setSeedOffset() {
-                return offsetof(Random, seed);
-            }*/
-
-        protected:
-            int next(int bits);
-
-        public:
-            Random();
-
-            Random(long seed);
-
-            Random(const Random& other);
-
-            //DoubleStream doubles();
-
-            //DoubleStream doubles(long streamSize);
-
-            //DoubleStream doubles(double randomNumberOrigin, double randomNumberBound);
-
-            //DoubleStream doubles(long streamSize, double randomNumberOrigin,double randomNumberBound);
-
-            //double internalNextDouble(double origin, double bound);
-
-            //int internalNextInt(int origin, int bound);
-
-            //long internalNextLong(long origin, long bound);
-
-            //IntStream ints();
-
-            //IntStream ints(long streamSize);
-
-            //IntStream ints(int randomNumberOrigin, int randomNumberBound);
-
-            //IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound);
-
-            //LongStream longs();
-
-            //LongStream longs(long streamSize);
-
-            //LongStream longs(long randomNumberOrigin, long randomNumberBound);
-
-            //LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound);
-
-            boolean nextBoolean();
-
-            void nextBytes(Array<byte> *bytes);
-
-            double nextDouble();
-
-            float nextFloat();
-
-            double nextGaussian();
-
-            int nextInt();
-
-            int nextInt(int bound);
-
-            long nextLong();
-
-            String nextString(int length);
-
-            void setSeed(long seed);
-        };
-    }
+		namespace Util {
+				class Random {
+				
+				private:
+						std::atomic_long seed;
+						static std::atomic_long seedUniquifierField;
+						static const long MULTIPLIER = 0x5DEECE66DL;
+						static const long ADDEND = 0xBL;
+						static constexpr long MASK = ( 1L << 48 ) - 1;
+						static constexpr double DOUBLE_UNIT = 1.0 / ( 1L << 53 );
+						boolean haveNextGaussianNumber = false;
+						double nextGaussianNumber;
+						//static long seedOffset;
+				
+				public:
+						// IllegalArgumentException messages
+						const String BADBOUND = "bound must be positive";
+				
+				private:
+						long initialScramble(long seed);
+						
+						//void readObject(ObjectInputStream s);
+						
+						//void resetSeed(long seedVal);
+						
+						static long seedUniquifier();
+						
+						//void writeObject(ObjectOutputStream s)
+						
+						long nanoTime();
+						
+						/*static long setSeedOffset() {
+							return offsetof(Random, seed);
+						}*/
+				
+				protected:
+						int next(int bits);
+				
+				public:
+						Random();
+						
+						Random(long seed);
+						
+						Random(const Random &other);
+						
+						//DoubleStream doubles();
+						
+						//DoubleStream doubles(long streamSize);
+						
+						//DoubleStream doubles(double randomNumberOrigin, double randomNumberBound);
+						
+						//DoubleStream doubles(long streamSize, double randomNumberOrigin,double randomNumberBound);
+						
+						//double internalNextDouble(double origin, double bound);
+						
+						//int internalNextInt(int origin, int bound);
+						
+						//long internalNextLong(long origin, long bound);
+						
+						//IntStream ints();
+						
+						//IntStream ints(long streamSize);
+						
+						//IntStream ints(int randomNumberOrigin, int randomNumberBound);
+						
+						//IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound);
+						
+						//LongStream longs();
+						
+						//LongStream longs(long streamSize);
+						
+						//LongStream longs(long randomNumberOrigin, long randomNumberBound);
+						
+						//LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound);
+						
+						boolean nextBoolean();
+						
+						void nextBytes(Array<byte> *bytes);
+						
+						double nextDouble();
+						
+						float nextFloat();
+						
+						double nextGaussian();
+						
+						int nextInt();
+						
+						int nextInt(int bound);
+						
+						long nextLong();
+						
+						String nextString(int length);
+						
+						void setSeed(long seed);
+				};
+		}
 }
 
 #endif

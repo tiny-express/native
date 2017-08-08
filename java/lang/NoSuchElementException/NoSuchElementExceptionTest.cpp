@@ -33,29 +33,29 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, NoSuchElementExceptionConstructor) {
-    // Constructs a new NoSuchElementException with null as its detail message.
-    NoSuchElementException NoSuchElementExceptionWithNullMessage;
-    ASSERT_STR("", NoSuchElementExceptionWithNullMessage.getMessage().toString());
-
-    // Constructs a new NoSuchElementException with the specified detail message.
-    NoSuchElementException NoSuchElementExceptionWithMessage = NoSuchElementException("NoSuchElementException with the specified message");
-    ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessage.getMessage().toString());
-
-    // Constructs a new NoSuchElementException with the specified detail message and cause.
-    NoSuchElementException NoSuchElementExceptionWithMessageAndCause = NoSuchElementException("NoSuchElementException with the specified message and cause", &NoSuchElementExceptionWithMessage);
-    ASSERT_STR("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessageAndCause.getCause()->getMessage().toString());
-
-    // Constructs a new NoSuchElementException with the specified cause.
-    NoSuchElementException NoSuchElementExceptionWithCause = NoSuchElementException(&NoSuchElementExceptionWithMessageAndCause);
-    ASSERT_STR("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	// Constructs a new NoSuchElementException with null as its detail message.
+	NoSuchElementException NoSuchElementExceptionWithNullMessage;
+	ASSERT_STR("", NoSuchElementExceptionWithNullMessage.getMessage().toString());
+	
+	// Constructs a new NoSuchElementException with the specified detail message.
+	NoSuchElementException NoSuchElementExceptionWithMessage = NoSuchElementException("NoSuchElementException with the specified message");
+	ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessage.getMessage().toString());
+	
+	// Constructs a new NoSuchElementException with the specified detail message and cause.
+	NoSuchElementException NoSuchElementExceptionWithMessageAndCause = NoSuchElementException("NoSuchElementException with the specified message and cause", &NoSuchElementExceptionWithMessage);
+	ASSERT_STR("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	
+	// Constructs a new NoSuchElementException with the specified cause.
+	NoSuchElementException NoSuchElementExceptionWithCause = NoSuchElementException(&NoSuchElementExceptionWithMessageAndCause);
+	ASSERT_STR("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, NoSuchElementExceptionTryCatch) {
-    try {
-        throw NoSuchElementException("Throw NoSuchElementException");
-    } catch (NoSuchElementException exception) {
-        ASSERT_STR("Throw NoSuchElementException", exception.getMessage().toString());
-    }
+	try {
+		throw NoSuchElementException("Throw NoSuchElementException");
+	} catch (NoSuchElementException exception) {
+		ASSERT_STR("Throw NoSuchElementException", exception.getMessage().toString());
+	}
 }

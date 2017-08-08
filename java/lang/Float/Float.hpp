@@ -30,142 +30,142 @@
 #include "../Number/Number.hpp"
 
 namespace Java {
-	namespace Lang {
-		
-		class Float;
-		
-		class Float : public virtual Number {
-		private:
-			float original;
-			string originalString;
-
-		public:
-			/**
- 			* A constant holding the smallest positive normal value of type float, 2-126.
- 			*/
-			static constexpr float MIN_NORMAL = 1.17549435E-38f;
-
-			/**
-			 * The number of logical bits in the significand of a float number,
-			 * including the implicit bit.
-			 */
-			static constexpr int SIGNIFICAND_WIDTH = 24;
-
-			/**
-			 * Maximum exponent a finite float number may have.
-			 */
-			static const int MAX_EXPONENT = 127;
-
-			/**
-			 * Minimum exponent a normalized float number may have.
-			 */
-			static const int MIN_EXPONENT = -126;
-
-			/**
-			 * The exponent the smallest positive float subnormal value would have
-			 * if it could be normalized.
-			 */
-			static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
-
-			/**
-			 * Bias used in representing a float exponent.
-			 */
-			static const int EXP_BIAS = 127;
-
-			/**
-			 * Bit mask to isolate the sign bit of a float.
-			 */
-			static const int SIGN_BIT_MASK = 0x80000000;
-
-			/**
-			 * Bit mask to isolate the exponent field of a float.
-			 */
-			static const int EXP_BIT_MASK = 0x7F800000;
-
-			/**
-			 * Bit mask to isolate the significand field of a float.
-			 */
-			static const int SIGNIF_BIT_MASK = 0x007FFFFF;
-
-            /**
-             * A constant holding the positive infinity of type float.
-             */
-            static constexpr float POSITIVE_INFINITY = INFINITY;
-
-            /**
-            * A constant holding the negative infinity of type float.
-            */
-            static constexpr float NEGATIVE_INFINITY = -INFINITY;
-
-            /**
-             * A constant holding a Not-a-Number (NaN) value of type float.
-             */
-            static constexpr float NaN = NAN;
-
-            /**
-             * A constant holding the largest positive finite value of type float, (2-2-23)·2127. 
-             */
-            static constexpr float MAX_VALUE = 0x1.fffffeP+127f; // 3.4028235e+38f
-
-            /**
-             * A constant holding the smallest positive nonzero value of type float, 2^-149. It is equal to the hexadecimal floating-point literal 0x0.000002P-126f and also equal to Float.intBitsToFloat(0x1).
-             */
-            static constexpr float MIN_VALUE = 0x0.000002P-126f; // 1.4e-45f
-
-            /**
-             * The number of bits used to represent a float value.
-             */
-            static const int SIZE = 32;
-
-            /**
-             * The number of bytes used to represent a float value.
-             */
-            static constexpr int BYTES = SIZE / 8;
-
-		public:
-			Float();
-			Float(float original);
-			Float(const Float &target);
-			~Float();
-		
-		public:
-			char charValue() const;
-			short shortValue() const;
-			int intValue() const;
-			long longValue() const;
-			float floatValue() const;
-			double doubleValue() const;
-			string toString() const;
-			
-			static Float parseFloat(String target);
-            static boolean isNaN(float v);
-		
-		public:
-			Float operator=(const Float &target);
-			Float operator+(const Float &target);
-			Float operator-(const Float &target);
-			Float operator/(const Float &target);
-			Float operator*(const Float &target);
-			
-			boolean operator==(const Float &target) const;
-			boolean operator!=(const Float &target) const;
-			boolean operator<(const Float &target) const;
-			boolean operator>(const Float &target) const;
-			boolean operator<=(const Float &target) const;
-			boolean operator>=(const Float &target) const;
-			
-			void operator-=(const Float &target);
-			void operator+=(const Float &target);
-			void operator*=(const Float &target);
-			void operator/=(const Float &target);
-
-		public:
-			friend std::ostream &operator<<(std::ostream &os, const Float &target) {
-				os << target.original;
-				return os;
-			}
-		};
-	}
+		namespace Lang {
+				
+				class Float;
+				
+				class Float : public virtual Number {
+				private:
+						float original;
+						string originalString;
+				
+				public:
+						/**
+						 * A constant holding the smallest positive normal value of type float, 2-126.
+						 */
+						static constexpr float MIN_NORMAL = 1.17549435E-38f;
+						
+						/**
+						 * The number of logical bits in the significand of a float number,
+						 * including the implicit bit.
+						 */
+						static constexpr int SIGNIFICAND_WIDTH = 24;
+						
+						/**
+						 * Maximum exponent a finite float number may have.
+						 */
+						static const int MAX_EXPONENT = 127;
+						
+						/**
+						 * Minimum exponent a normalized float number may have.
+						 */
+						static const int MIN_EXPONENT = -126;
+						
+						/**
+						 * The exponent the smallest positive float subnormal value would have
+						 * if it could be normalized.
+						 */
+						static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - ( SIGNIFICAND_WIDTH - 1 );
+						
+						/**
+						 * Bias used in representing a float exponent.
+						 */
+						static const int EXP_BIAS = 127;
+						
+						/**
+						 * Bit mask to isolate the sign bit of a float.
+						 */
+						static const int SIGN_BIT_MASK = 0x80000000;
+						
+						/**
+						 * Bit mask to isolate the exponent field of a float.
+						 */
+						static const int EXP_BIT_MASK = 0x7F800000;
+						
+						/**
+						 * Bit mask to isolate the significand field of a float.
+						 */
+						static const int SIGNIF_BIT_MASK = 0x007FFFFF;
+						
+						/**
+						 * A constant holding the positive infinity of type float.
+						 */
+						static constexpr float POSITIVE_INFINITY = INFINITY;
+						
+						/**
+						* A constant holding the negative infinity of type float.
+						*/
+						static constexpr float NEGATIVE_INFINITY = -INFINITY;
+						
+						/**
+						 * A constant holding a Not-a-Number (NaN) value of type float.
+						 */
+						static constexpr float NaN = NAN;
+						
+						/**
+						 * A constant holding the largest positive finite value of type float, (2-2-23)·2127.
+						 */
+						static constexpr float MAX_VALUE = 0x1.fffffeP+127f; // 3.4028235e+38f
+						
+						/**
+						 * A constant holding the smallest positive nonzero value of type float, 2^-149. It is equal to the hexadecimal floating-point literal 0x0.000002P-126f and also equal to Float.intBitsToFloat(0x1).
+						 */
+						static constexpr float MIN_VALUE = 0x0.000002P-126f; // 1.4e-45f
+						
+						/**
+						 * The number of bits used to represent a float value.
+						 */
+						static const int SIZE = 32;
+						
+						/**
+						 * The number of bytes used to represent a float value.
+						 */
+						static constexpr int BYTES = SIZE / 8;
+				
+				public:
+						Float();
+						Float(float original);
+						Float(const Float &target);
+						~Float();
+				
+				public:
+						char charValue() const;
+						short shortValue() const;
+						int intValue() const;
+						long longValue() const;
+						float floatValue() const;
+						double doubleValue() const;
+						string toString() const;
+						
+						static Float parseFloat(String target);
+						static boolean isNaN(float v);
+				
+				public:
+						Float operator=(const Float &target);
+						Float operator+(const Float &target);
+						Float operator-(const Float &target);
+						Float operator/(const Float &target);
+						Float operator*(const Float &target);
+						
+						boolean operator==(const Float &target) const;
+						boolean operator!=(const Float &target) const;
+						boolean operator<(const Float &target) const;
+						boolean operator>(const Float &target) const;
+						boolean operator<=(const Float &target) const;
+						boolean operator>=(const Float &target) const;
+						
+						void operator-=(const Float &target);
+						void operator+=(const Float &target);
+						void operator*=(const Float &target);
+						void operator/=(const Float &target);
+				
+				public:
+						friend std::ostream &operator<<(std::ostream &os, const Float &target) {
+							os << target.original;
+							return os;
+						}
+				};
+		}
 }
 
 #endif  // JAVA_LANG_FLOAT_HPP_

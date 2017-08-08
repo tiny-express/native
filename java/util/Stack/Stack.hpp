@@ -34,77 +34,78 @@
 using namespace Java::Util;
 
 namespace Java {
-    namespace Util {
-        template <typename E>
-        class Stack : public Vector<E>{
-        public:
-            /**
-             * Constructor
-             */
-            Stack(){}
-
-            /**
-            * Stack empty - check whether the Stack is empty or not
-            *
-            * @return true only if this stack has no item; false otherwise
-            */
-            bool empty() {
-                return this->size() == 0;
-            }
-            
-            /**
-             * Stack peek - return the top element
-             *
-             * @return E
-             * @throw EmptyStackException
-             */
-            E peek() {
-                int len = this->size();
-                if (len == 0) {
-                    throw EmptyStackException();
-                }
-                return this->elementAt(len - 1);
-            }
-            
-            /**
-             * Stack pop - return the top element and remove it
-             *
-             * @return E
-             * @throw EmptyStackException
-             */
-            E pop() {
-                int len = this->size();
-                E result = this->peek();
-                this->removeElementAt(len - 1);
-                return result;
-            }
-            
-           /**
-            * Stack push - Push new element
-            *
-            * @param element
-            * @return E
-            */
-            E push(const E &element) {
-               this->addElement(element);
-               return element;
-            }
-       
-           /**
-            * Stack search - search the object in Stack
-            *
-            * @param object
-            * @return the 1-based position from the top, -1 if can not find the object in Stack
-            */
-            int search(const E &object) {
-               int index = this->lastIndexOf(object);
-               if (index >= 0) {
-                   return index;
-               }
-               return -1;
-            }
-        };
-    }
+		namespace Util {
+				template <typename E>
+				class Stack : public Vector<E> {
+				public:
+						/**
+						 * Constructor
+						 */
+						Stack() {
+						}
+						
+						/**
+						* Stack empty - check whether the Stack is empty or not
+						*
+						* @return true only if this stack has no item; false otherwise
+						*/
+						bool empty() {
+							return this->size() == 0;
+						}
+						
+						/**
+						 * Stack peek - return the top element
+						 *
+						 * @return E
+						 * @throw EmptyStackException
+						 */
+						E peek() {
+							int len = this->size();
+							if (len == 0) {
+								throw EmptyStackException();
+							}
+							return this->elementAt(len - 1);
+						}
+						
+						/**
+						 * Stack pop - return the top element and remove it
+						 *
+						 * @return E
+						 * @throw EmptyStackException
+						 */
+						E pop() {
+							int len = this->size();
+							E result = this->peek();
+							this->removeElementAt(len - 1);
+							return result;
+						}
+						
+						/**
+						 * Stack push - Push new element
+						 *
+						 * @param element
+						 * @return E
+						 */
+						E push(const E &element) {
+							this->addElement(element);
+							return element;
+						}
+						
+						/**
+						 * Stack search - search the object in Stack
+						 *
+						 * @param object
+						 * @return the 1-based position from the top, -1 if can not find the object in Stack
+						 */
+						int search(const E &object) {
+							int index = this->lastIndexOf(object);
+							if (index >= 0) {
+								return index;
+							}
+							return -1;
+						}
+				};
+		}
 }
 
 #endif

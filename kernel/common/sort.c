@@ -63,8 +63,10 @@ void sort_string(char *array[], int left_position, int right_position) {
 	char *pivot = array[ ( left + right ) / 2 ];
 	
 	while (left <= right) {
-		while (strcmp(array[ left ], pivot) < 0) left++;
-		while (strcmp(array[ right ], pivot) > 0) right--;
+		while (strcmp(array[ left ], pivot) < 0)
+			left++;
+		while (strcmp(array[ right ], pivot) > 0)
+			right--;
 		if (left <= right) {
 			char *temp = array[ left ];
 			array[ left ] = array[ right ];

@@ -33,21 +33,21 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ErrorConstructor) {
-    // Constructs a new Error with null as its detail message.
-    Error errorWithNullMessage;
-    ASSERT_STR("", errorWithNullMessage.getMessage().toString());
-
-    // Constructs a new Error with the specified detail message.
-    Error errorWithMessage = Error("Error with the specified message");
-    ASSERT_STR("Error with the specified message", errorWithMessage.getMessage().toString());
-
-    // Constructs a new Error with the specified detail message and cause.
-    Error errorWithMessageAndCause = Error("Error with the specified message and cause", &errorWithMessage);
-    ASSERT_STR("Error with the specified message and cause", errorWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Error with the specified message", errorWithMessageAndCause.getCause()->getMessage().toString());
-
-    // Constructs a new Error with the specified cause.
-    Error errorWithCause = Error(&errorWithMessageAndCause);
-    ASSERT_STR("Error with the specified message and cause", errorWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Error with the specified message", errorWithCause.getCause()->getCause()->getMessage().toString());
+	// Constructs a new Error with null as its detail message.
+	Error errorWithNullMessage;
+	ASSERT_STR("", errorWithNullMessage.getMessage().toString());
+	
+	// Constructs a new Error with the specified detail message.
+	Error errorWithMessage = Error("Error with the specified message");
+	ASSERT_STR("Error with the specified message", errorWithMessage.getMessage().toString());
+	
+	// Constructs a new Error with the specified detail message and cause.
+	Error errorWithMessageAndCause = Error("Error with the specified message and cause", &errorWithMessage);
+	ASSERT_STR("Error with the specified message and cause", errorWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("Error with the specified message", errorWithMessageAndCause.getCause()->getMessage().toString());
+	
+	// Constructs a new Error with the specified cause.
+	Error errorWithCause = Error(&errorWithMessageAndCause);
+	ASSERT_STR("Error with the specified message and cause", errorWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("Error with the specified message", errorWithCause.getCause()->getCause()->getMessage().toString());
 }

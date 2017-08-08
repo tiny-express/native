@@ -33,8 +33,8 @@
  * @param target
  */
 Boolean::Boolean(const boolean &target) {
-    this->original = target;
-    this->originalString = string_from_boolean(this->original);
+	this->original = target;
+	this->originalString = string_from_boolean(this->original);
 }
 
 /**
@@ -47,21 +47,21 @@ Boolean::Boolean(const boolean &target) {
  * @param target
  */
 Boolean::Boolean(const_string target) {
-    if (strcmp(target, "True") == 0) {
-        this->original = true;
-    } else {
-        this->original = false;
-    }
-    this->originalString = string_from_boolean(this->original);
+	if (strcmp(target, "True") == 0) {
+		this->original = true;
+	} else {
+		this->original = false;
+	}
+	this->originalString = string_from_boolean(this->original);
 }
 
 /**
  * Boolean Destructor
  */
 Boolean::~Boolean() {
-    if (this->originalString != NULL) {
-        free(this->originalString);
-    }
+	if (this->originalString != NULL) {
+		free(this->originalString);
+	}
 }
 
 /**
@@ -70,7 +70,7 @@ Boolean::~Boolean() {
  * @return boolean
  */
 boolean Boolean::booleanValue() const {
-    return this->original;
+	return this->original;
 }
 
 /**
@@ -85,7 +85,7 @@ boolean Boolean::booleanValue() const {
  * @return int
  */
 int Boolean::compare(const boolean &target1, const boolean &target2) {
-    return (target1 - target2);
+	return ( target1 - target2 );
 }
 
 /**
@@ -100,7 +100,7 @@ int Boolean::compare(const boolean &target1, const boolean &target2) {
  * @return int
  */
 int Boolean::compareTo(const Boolean &target) const {
-    return Boolean::compare(this->original, target.original);
+	return Boolean::compare(this->original, target.original);
 }
 
 /**
@@ -112,7 +112,7 @@ int Boolean::compareTo(const Boolean &target) const {
  * @return boolean
  */
 boolean Boolean::getBoolean(const_string target) {
-    return string_to_boolean((string) target);
+	return string_to_boolean((string) target);
 }
 
 /**
@@ -122,7 +122,7 @@ boolean Boolean::getBoolean(const_string target) {
  * @return long
  */
 long Boolean::hashCode() const {
-    return Object::hashCode();
+	return Object::hashCode();
 }
 
 /**
@@ -136,7 +136,7 @@ long Boolean::hashCode() const {
  * @return boolean
  */
 boolean Boolean::parseBoolean(const_string target) {
-    return Boolean::getBoolean(target);
+	return Boolean::getBoolean(target);
 }
 
 /**
@@ -146,7 +146,7 @@ boolean Boolean::parseBoolean(const_string target) {
  * @return string
  */
 string Boolean::toString() const {
-    return this->originalString;
+	return this->originalString;
 }
 
 /**
@@ -157,10 +157,10 @@ string Boolean::toString() const {
  * @return String
  */
 string Boolean::toString(const boolean &target) {
-    if (target == True) {
-        return (string) "true";
-    }
-    return (string) "false";
+	if (target == True) {
+		return (string) "true";
+	}
+	return (string) "false";
 }
 
 /**
@@ -170,7 +170,7 @@ string Boolean::toString(const boolean &target) {
  * @return Boolean
  */
 Boolean Boolean::valueOf(boolean target) {
-    return target;
+	return target;
 }
 
 /**
@@ -180,7 +180,7 @@ Boolean Boolean::valueOf(boolean target) {
  * @return boolean
  */
 boolean Boolean::valueOf(const_string target) {
-    return Boolean::parseBoolean(target);
+	return Boolean::parseBoolean(target);
 }
 
 /**
@@ -190,9 +190,9 @@ boolean Boolean::valueOf(const_string target) {
  * @return Boolean
  */
 Boolean Boolean::operator=(const Boolean &target) {
-    this->original = target.original;
-    if (this->originalString != NULL) {
-        free(this->originalString);
-    }
-    this->originalString = string_from_boolean(this->original);
+	this->original = target.original;
+	if (this->originalString != NULL) {
+		free(this->originalString);
+	}
+	this->originalString = string_from_boolean(this->original);
 }

@@ -32,13 +32,13 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace Net {
-        class URLDecoder : public Object {
-        public:
-            static String decode(String s);
-            static String decode(String s, String enc);
-        };
-    }
+		namespace Net {
+				class URLDecoder : public Object {
+				public:
+						static String decode(String s);
+						static String decode(String s, String enc);
+				};
+		}
 }
 
 #endif

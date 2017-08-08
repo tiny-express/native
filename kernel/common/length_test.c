@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../test.h"
 
-TEST(KernelCommon, LengthPointerChar) {
+TEST (KernelCommon, LengthPointerChar) {
 	char *data = "Hello world";
 	ASSERT_EQUAL(11, length_pointer_char(data));
 	
@@ -41,14 +41,14 @@ TEST(KernelCommon, LengthPointerChar) {
 	
 	data = NULL;
 	ASSERT_EQUAL(0, length_pointer_char(data));
-
+	
 	//  Please use calloc instead of malloc because it is dangerous
 	//  data = malloc(10);
 	//  ASSERT_EQUAL(0, length_pointer_char(data));
 	//  free(data);
 }
 
-TEST(KernelCommon, LengthPointerPointerChar) {
+TEST (KernelCommon, LengthPointerPointerChar) {
 	
 	char *data_null = NULL;
 	ASSERT_EQUAL(0, length_pointer_pointer_char((char **) data_null));
@@ -77,35 +77,35 @@ TEST(KernelCommon, LengthPointerPointerChar) {
 	free(data2);
 }
 
-TEST(KernelCommon, LengthShort) {
+TEST (KernelCommon, LengthShort) {
 	short input = 0;
 	ASSERT_EQUAL(1, length_short(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_short(input));
 }
 
-TEST(KernelCommon, LengthInt) {
+TEST (KernelCommon, LengthInt) {
 	int input = 0;
 	ASSERT_EQUAL(1, length_int(input));
 	input = 123;
 	ASSERT_EQUAL(3, length_int(input));
 }
 
-TEST(KernelCommon, LengthLong) {
+TEST (KernelCommon, LengthLong) {
 	long input = 0;
 	ASSERT_EQUAL(1, length_long(input));
 	input = 123456;
 	ASSERT_EQUAL(6, length_long(input));
 }
 
-TEST(KernelCommon, LengthDouble) {
+TEST (KernelCommon, LengthDouble) {
 	double input = 0;
 	ASSERT_EQUAL(1, length_double(input));
 	input = 123.456;
 	ASSERT_EQUAL(7, length_double(input));
 }
 
-TEST(KernelCommon, LengthFloat) {
+TEST (KernelCommon, LengthFloat) {
 	float input = 1.23;
 	ASSERT_EQUAL(4, length_float(input));
 	input = 0.345;

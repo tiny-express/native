@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-TEST(KernelCommon, QuickSort) {
+TEST (KernelCommon, QuickSort) {
 	srand(time(NULL));
 	int *array_int = calloc(50, sizeof(int));
 	int index;
@@ -41,7 +41,7 @@ TEST(KernelCommon, QuickSort) {
 	ASSERT_TRUE(result);
 }
 
-TEST(KernelCommon, SortString) {
+TEST (KernelCommon, SortString) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

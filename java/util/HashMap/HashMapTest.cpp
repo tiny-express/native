@@ -150,7 +150,7 @@ TEST (JavaUtil, HashMapGet) {
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	String defaultResult = hashMap.get("wrong_key");
-        ASSERT_TRUE(defaultResult.isEmpty());
+	ASSERT_TRUE(defaultResult.isEmpty());
 }
 
 TEST (JavaUtil, HashMapIsEmpty) {
@@ -415,7 +415,7 @@ TEST (JavaUtil, HashMapToString) {
 	string expectedResult = (string) "{\"key02\": \"value02\", \"key1\": \"value1\", \"key16\": \"value16\"}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
-
+	
 	// Given another hash map type to test
 	HashMap<String, Integer> anotherHashMap;
 	anotherHashMap.put("some key", 12313);
@@ -430,9 +430,9 @@ TEST (JavaUtil, HashMapToString) {
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-
-    ArrayList<Integer> validArrayListInteger1 = {1, 2, 3, 4, 5};
-	ArrayList<Integer> validArrayListInteger2 = {100, 100, 100, 100, 1};
+	
+	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
+	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
 	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
 	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
 	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);

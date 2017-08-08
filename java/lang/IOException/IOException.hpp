@@ -30,15 +30,15 @@
 #include "../Exception/Exception.hpp"
 
 namespace Java {
-    namespace Lang {
-        class IOException : public Exception {
-        public:
-            IOException();
-            IOException(String message);
-            IOException(String message, Throwable *cause);
-            IOException(Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class IOException : public Exception {
+				public:
+						IOException();
+						IOException(String message);
+						IOException(String message, Throwable *cause);
+						IOException(Throwable *cause);
+				};
+		}
 }
 
 #endif//NATIVE_JAVA_LANG_IO_EXCEPTION_HPP

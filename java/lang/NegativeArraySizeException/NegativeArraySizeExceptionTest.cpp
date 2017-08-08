@@ -34,18 +34,18 @@ using namespace Java::Lang;
 
 TEST (JavaLang, NegativeArraySizeExceptionConstructor) {
 // Constructs a new NegativeArraySizeException with null as its detail message.
-    NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
-    ASSERT_STR("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
+	NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
+	ASSERT_STR("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
 
 // Constructs a new NegativeArraySizeException with the specified detail message.
-    NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException("NegativeArraySizeException with the specified message");
-    ASSERT_STR("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
+	NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException("NegativeArraySizeException with the specified message");
+	ASSERT_STR("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
 }
 
 TEST (JavaLang, NegativeArraySizeExceptionTryCatch) {
-    try {
-        throw RuntimeException("Throw NegativeArraySizeException");
-    } catch (Exception e) {
-        ASSERT_STR("Throw NegativeArraySizeException", e.getMessage().toString());
-    }
+	try {
+		throw RuntimeException("Throw NegativeArraySizeException");
+	} catch (Exception e) {
+		ASSERT_STR("Throw NegativeArraySizeException", e.getMessage().toString());
+	}
 }

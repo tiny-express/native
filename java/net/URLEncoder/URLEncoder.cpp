@@ -29,9 +29,9 @@
 using namespace Java::Net;
 
 String UrlEncoder::encode(String s) {
-    return String::valueOf(url_encode(s.toString()));
+	return String::valueOf(url_encode(s.toString()));
 }
 
 String UrlEncoder::encode(String s, String enc) {
-    return "";
+	return "";
 }

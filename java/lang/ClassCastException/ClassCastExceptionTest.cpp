@@ -34,19 +34,19 @@ using namespace Java::Lang;
 
 TEST (JavaLang, ClassCastExceptionConstructor) {
 // Constructs a new ClassCastException with null as its detail message.
-    ClassCastException classCastExceptionWithNullMessage;
-    ASSERT_STR("", classCastExceptionWithNullMessage.getMessage().toString());
+	ClassCastException classCastExceptionWithNullMessage;
+	ASSERT_STR("", classCastExceptionWithNullMessage.getMessage().toString());
 
 // Constructs a new ClassCastException with the specified detail message.
-    ClassCastException classCastExceptionWithMessage = ClassCastException("ClassCastException with the specified message");
-    ASSERT_STR("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
+	ClassCastException classCastExceptionWithMessage = ClassCastException("ClassCastException with the specified message");
+	ASSERT_STR("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
 }
 
-TEST(JavaLang, ClassCastExceptionTryCatch) {
-    try {
-        throw ClassCastException("Throw ClassCastException");
-    }
-    catch (ClassCastException ex) {
-        ASSERT_STR("Throw ClassCastException", ex.getMessage().toString());
-    }
+TEST (JavaLang, ClassCastExceptionTryCatch) {
+	try {
+		throw ClassCastException("Throw ClassCastException");
+	}
+	catch (ClassCastException ex) {
+		ASSERT_STR("Throw ClassCastException", ex.getMessage().toString());
+	}
 }

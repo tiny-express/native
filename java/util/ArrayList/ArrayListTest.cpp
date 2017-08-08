@@ -55,7 +55,7 @@ TEST (JavaLang, ArrayListConstructor) {
 	ASSERT_EQUAL(4, stringArrayList.size());
 	
 	// Standard declaration
-	Array<String> arrayString = { "hello", "world"};
+	Array<String> arrayString = { "hello", "world" };
 	ArrayList<String> stringArrayListCopy = arrayString;
 	ASSERT_EQUAL(2, stringArrayListCopy.size());
 }
@@ -118,25 +118,25 @@ TEST (JavaLang, ArrayListForEach) {
 	}
 }
 
-TEST(JavaUtil, ArrayListToString) {
-    //Give an empty ArrayList<Integer> then compare toString() - Should equal
-    ArrayList<Integer> inValidArrayListInteger;
-    string result = inValidArrayListInteger.toString();
-    string expect = (string) "[]";
-    ASSERT_STR(result, expect);
-
-    //Give an ArrayList<Integer> then compare toString() - Should equal
-	ArrayList<Integer> validArrayListInteger = {1, 2, 4, 5};
+TEST (JavaUtil, ArrayListToString) {
+	//Give an empty ArrayList<Integer> then compare toString() - Should equal
+	ArrayList<Integer> inValidArrayListInteger;
+	string result = inValidArrayListInteger.toString();
+	string expect = (string) "[]";
+	ASSERT_STR(result, expect);
+	
+	//Give an ArrayList<Integer> then compare toString() - Should equal
+	ArrayList<Integer> validArrayListInteger = { 1, 2, 4, 5 };
 	result = validArrayListInteger.toString();
 	expect = (string) "[1, 2, 4, 5]";
 	ASSERT_STR(result, expect);
-
-    // Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
-    ArrayList<ArrayList<Integer>> arrayListInArrayList;
-    arrayListInArrayList.add(validArrayListInteger);
-    arrayListInArrayList.add(validArrayListInteger);
-    arrayListInArrayList.add(inValidArrayListInteger);
-    result = arrayListInArrayList.toString();
-    expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5], []]";
-    ASSERT_STR(expect, result);
+	
+	// Give an ArrayList<ArrayList<Integer>> then compare toString() - Should equal
+	ArrayList<ArrayList<Integer>> arrayListInArrayList;
+	arrayListInArrayList.add(validArrayListInteger);
+	arrayListInArrayList.add(validArrayListInteger);
+	arrayListInArrayList.add(inValidArrayListInteger);
+	result = arrayListInArrayList.toString();
+	expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5], []]";
+	ASSERT_STR(expect, result);
 }

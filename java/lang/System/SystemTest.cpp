@@ -33,14 +33,14 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, SystemIn) {
-    // TODO
+	// TODO
 }
 
 TEST (JavaLang, SystemOut) {
-    // TODO
+	// TODO
 }
 
 TEST (JavaLang, SystemCurrentTimeMillis) {
-    long currentMilliSeconds = System::currentTimeMillis();
-    ASSERT_TRUE(currentMilliSeconds > 1500199237190);
+	long currentMilliSeconds = System::currentTimeMillis();
+	ASSERT_TRUE(currentMilliSeconds > 1500199237190);
 }

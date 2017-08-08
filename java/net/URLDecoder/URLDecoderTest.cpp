@@ -33,7 +33,7 @@ extern "C" {
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNet, URLDecodeString) {
+TEST (JavaNet, URLDecodeString) {
 //    String target = "Qu%c3%a1n+%c4%83n";
 //    String result = URLDecoder::decode(target);
 //    string expect = "Quán ăn";

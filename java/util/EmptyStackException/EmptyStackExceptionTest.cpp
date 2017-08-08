@@ -33,15 +33,15 @@ extern "C" {
 using namespace Java::Util;
 
 TEST (JavaUtil, EmptyStackExceptionConstructor) {
-    EmptyStackException emptyStackExceptionNullMess;
-    ASSERT_STR("", emptyStackExceptionNullMess.getMessage().toString());
+	EmptyStackException emptyStackExceptionNullMess;
+	ASSERT_STR("", emptyStackExceptionNullMess.getMessage().toString());
 }
 
 TEST (JavaUtil, EmptyStackExceptionTryCatch) {
-    try {
-        throw EmptyStackException();
-    }
-    catch (EmptyStackException e) {
-        ASSERT_STR("", e.getMessage().toString());
-    }
+	try {
+		throw EmptyStackException();
+	}
+	catch (EmptyStackException e) {
+		ASSERT_STR("", e.getMessage().toString());
+	}
 }

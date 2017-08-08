@@ -33,7 +33,7 @@ extern "C" {
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNet, UrlEncodeString) {
+TEST (JavaNet, UrlEncodeString) {
 //    unicode target = (unicode) "Quán ăn";
 //    String result = UrlEncoder::encode(target);
 //    unicode expect =  "Qu%c3%a1n+%c4%83n";

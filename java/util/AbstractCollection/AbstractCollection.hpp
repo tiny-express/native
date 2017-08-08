@@ -33,16 +33,18 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace Util {
-		template <typename E>
-		class AbstractCollection : public Object, public virtual Collection<E> {
-
-		protected:
-			AbstractCollection() {}
-			virtual ~AbstractCollection() {}
-
-		};
-	}
+		namespace Util {
+				template <typename E>
+				class AbstractCollection : public Object, public virtual Collection<E> {
+				
+				protected:
+						AbstractCollection() {
+						}
+						virtual ~AbstractCollection() {
+						}
+					
+				};
+		}
 }
 
 #endif //JAVA_UTIL_ABSTRACT_COLLECTION_HPP_

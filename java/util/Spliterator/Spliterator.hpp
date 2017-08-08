@@ -28,13 +28,13 @@
 #define JAVA_UTIL_SPLITERATOR_HPP_
 
 namespace Java {
-	namespace Util {
-		template <typename E>
-		class Spliterator {
-		public:
-			Spliterator();
-		};
-	}
+		namespace Util {
+				template <typename E>
+				class Spliterator {
+				public:
+						Spliterator();
+				};
+		}
 }
 
 #endif  // JAVA_UTIL_SPLITERATOR_HPP_

@@ -144,10 +144,10 @@ int string_to_boolean(char *target) {
  * @return string
  */
 char *string_from_boolean(int target) {
-    if (target == FALSE) {
-        return strdup("false");
-    }
-
-    return strdup("true");
-
+	if (target == FALSE) {
+		return strdup("false");
+	}
+	
+	return strdup("true");
+	
 }

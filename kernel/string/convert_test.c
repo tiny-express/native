@@ -28,7 +28,7 @@
 #include "../string.h"
 #include "../test.h"
 
-TEST(KernelString, ConvertFromChar) {
+TEST (KernelString, ConvertFromChar) {
 	// Input a number character to convert from char to string
 	char number_character = '6';
 	
@@ -50,7 +50,7 @@ TEST(KernelString, ConvertFromChar) {
 	free(result);
 }
 
-TEST(KernelString, ConvertFromShort) {
+TEST (KernelString, ConvertFromShort) {
 	// Input a positive short number to convert from short to string
 	int number = 123;
 	
@@ -78,7 +78,7 @@ TEST(KernelString, ConvertFromShort) {
 	free(result2);
 }
 
-TEST(KernelString, ConvertFromInt) {
+TEST (KernelString, ConvertFromInt) {
 	// Input a 0 value to convert from int to string
 	int input = 0;
 	
@@ -125,7 +125,7 @@ TEST(KernelString, ConvertFromInt) {
 	free(result4);
 }
 
-TEST(KernelString, ConvertFromLong) {
+TEST (KernelString, ConvertFromLong) {
 	// Input the maximum value of type long to convert from long to string
 	long input = (long) 393239259234023474;
 	
@@ -148,7 +148,7 @@ TEST(KernelString, ConvertFromLong) {
 	free(result1);
 }
 
-TEST(KernelString, ConvertFromFloat) {
+TEST (KernelString, ConvertFromFloat) {
 	// Input a positive value of type float to convert from float to string
 	float input = 12.56;
 	
@@ -171,7 +171,7 @@ TEST(KernelString, ConvertFromFloat) {
 	free(result1);
 }
 
-TEST(KernelString, ConvertFromDouble) {
+TEST (KernelString, ConvertFromDouble) {
 	// Input a positive value of type double to convert from double to string
 	double input = 125.569123;
 	
@@ -194,7 +194,7 @@ TEST(KernelString, ConvertFromDouble) {
 	free(result1);
 }
 
-TEST(KernelString, ConvertToShort) {
+TEST (KernelString, ConvertToShort) {
 	// Make a comparison between 0 and result of string_to_short(NULL)
 	ASSERT_EQUAL(0, string_to_short(NULL));
 	
@@ -214,7 +214,7 @@ TEST(KernelString, ConvertToShort) {
 	ASSERT_EQUAL(-123, result1);
 }
 
-TEST(KernelString, ConvertToInt) {
+TEST (KernelString, ConvertToInt) {
 	// Input a string representing the positive number to convert from string to int
 	char *input = "123\0";
 	
@@ -267,7 +267,7 @@ TEST(KernelString, ConvertToInt) {
 	ASSERT_EQUAL(0, result7);
 }
 
-TEST(KernelString, ConvertToLong) {
+TEST (KernelString, ConvertToLong) {
 	// Input a string representing the positive number to convert from string to long
 	char *input = "21474836";
 	
@@ -290,7 +290,7 @@ TEST(KernelString, ConvertToLong) {
 	ASSERT_EQUAL(0, result2);
 }
 
-TEST(KernelString, ConvertToFloat) {
+TEST (KernelString, ConvertToFloat) {
 	// Input a string representing a positive value of type float to convert from string to float
 	char *input = "12.56";
 	
@@ -307,7 +307,7 @@ TEST(KernelString, ConvertToFloat) {
 	ASSERT_EQUAL(-1.56799, result1);
 }
 
-TEST(KernelString, ConvertToDouble) {
+TEST (KernelString, ConvertToDouble) {
 	// Input a string representing a positive value of type double to convert from string to double
 	char *input = "125.569123";
 	
@@ -324,7 +324,7 @@ TEST(KernelString, ConvertToDouble) {
 	ASSERT_EQUAL(-125.56123, result1);
 }
 
-TEST(KernelString, ConvertToBoolean) {
+TEST (KernelString, ConvertToBoolean) {
 	// Input a string representing 1 to convert from string to boolean
 	char *target0 = "1";
 	
@@ -371,7 +371,7 @@ TEST(KernelString, ConvertToBoolean) {
 	ASSERT_FALSE(boolean6);
 }
 
-TEST(KernelString, ConvertFromBoolean) {
+TEST (KernelString, ConvertFromBoolean) {
 	// Input value 0 to convert from Boolean to String
 	int value = 0;
 	
