@@ -57,7 +57,7 @@ void BitSet::checkRange(int fromIndex, int toIndex) {
 void BitSet::initializeWords(int numberOfBits) {
     // Determine index of word contains the most significant bit,
     // then increase by 1 to change index to size.
-    int sizeOfWordsArray = wordIndex(numberOfBits - 1) + 1;
+    int sizeOfWordsArray = this->wordIndex(numberOfBits - 1) + 1;
     this->words = Array<long>(sizeOfWordsArray);
     // Set value of new word to 0.
     int indexOfWordsArray;
@@ -254,7 +254,7 @@ void BitSet::clear(int bitIndex) {
                                                 String::valueOf(bitIndex));
     }
 
-    int indexOfWord = wordIndex(bitIndex);
+    int indexOfWord = this->wordIndex(bitIndex);
     if (indexOfWord >= this->wordsInUse) {
         return;
     }
@@ -264,19 +264,19 @@ void BitSet::clear(int bitIndex) {
 }
 
 void BitSet::clear(int fromIndex, int toIndex) {
-    checkRange(fromIndex, toIndex);
+    this->checkRange(fromIndex, toIndex);
 
     if (fromIndex == toIndex) {
         return;
     }
 
-    int startWordIndex = wordIndex(fromIndex);
+    int startWordIndex = this->wordIndex(fromIndex);
     if (startWordIndex >= this->wordsInUse) {
         return;
     }
 
     // toIndex decrease by 1 because toIndex is out of specified range.
-    int endWordIndex = wordIndex(toIndex - 1);
+    int endWordIndex = this->wordIndex(toIndex - 1);
     if (endWordIndex >= this->wordsInUse) {
         toIndex = this->length();
         endWordIndex = this->wordsInUse - 1;
@@ -339,7 +339,7 @@ void BitSet::flip(int bitIndex) {
         throw IndexOutOfBoundsException("bitIndex < 0: " +
                                                 String::valueOf(bitIndex));
     }
-    int indexOfWord = wordIndex(bitIndex);
+    int indexOfWord = this->wordIndex(bitIndex);
     this->expandTo(indexOfWord);
     this->words[indexOfWord] ^= (1L << bitIndex);
     this->recalculateWordsInUse();
@@ -352,8 +352,8 @@ void BitSet::flip(int fromIndex, int toIndex) {
         return;
     }
 
-    int startWordIndex = wordIndex(fromIndex);
-    int endWordIndex = wordIndex(toIndex);
+    int startWordIndex = this->wordIndex(fromIndex);
+    int endWordIndex = this->wordIndex(toIndex);
     this->expandTo(endWordIndex);
 
     long firstWordMask = WORD_MASK << fromIndex;
@@ -385,7 +385,7 @@ boolean BitSet::get(int bitIndex) const {
                                                 String::valueOf(bitIndex));
     }
 
-    int indexOfWord = wordIndex(bitIndex);
+    int indexOfWord = this->wordIndex(bitIndex);
 
     // bitIndex is out of range, default value is false.
     if (indexOfWord >= this->wordsInUse) {
@@ -411,8 +411,8 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
 
     int logicalLengthOfResult = toIndex - fromIndex;
     BitSet result = BitSet(logicalLengthOfResult);
-    int targetWords = wordIndex(logicalLengthOfResult - 1) + 1;
-    int sourceIndex = wordIndex(fromIndex);
+    int targetWords = this->wordIndex(logicalLengthOfResult - 1) + 1;
+    int sourceIndex = this->wordIndex(fromIndex);
     boolean wordAligned = ((fromIndex & BIT_INDEX_MASK) == 0);
 
     // Process all words but the last word.
@@ -486,7 +486,7 @@ int BitSet::nextClearBit(int fromIndex) const {
                                                 String::valueOf(fromIndex));
     }
 
-    int indexOfWord = wordIndex(fromIndex);
+    int indexOfWord = this->wordIndex(fromIndex);
     if (indexOfWord >= this->wordsInUse) {
         return fromIndex;
     }
@@ -515,7 +515,7 @@ int BitSet::nextSetBit(int fromIndex) const {
                                                 String::valueOf(fromIndex));
     }
 
-    int indexOfWord = wordIndex(fromIndex);
+    int indexOfWord = this->wordIndex(fromIndex);
     if (indexOfWord >= this->wordsInUse) {
         return -1;
     }
@@ -547,7 +547,7 @@ int BitSet::previousClearBit(int fromIndex) const {
                                                 String::valueOf(fromIndex));
     }
 
-    int indexOfWord = wordIndex(fromIndex);
+    int indexOfWord = this->wordIndex(fromIndex);
     if (indexOfWord >= this->wordsInUse) {
         return fromIndex;
     }
@@ -580,7 +580,7 @@ int BitSet::previousSetBit(int fromIndex) const {
                                                 String::valueOf(fromIndex));
     }
 
-    int indexOfWord = wordIndex(fromIndex);
+    int indexOfWord = this->wordIndex(fromIndex);
     if (indexOfWord >= this->wordsInUse) {
         return this->length() - 1;
     }
@@ -608,7 +608,7 @@ void BitSet::set(int bitIndex) {
                                                 String::valueOf(bitIndex));
     }
 
-    int indexOfWord = wordIndex(bitIndex);
+    int indexOfWord = this->wordIndex(bitIndex);
     this->expandTo(indexOfWord);
     this->words[indexOfWord] |= (1L << bitIndex);
 }
@@ -628,8 +628,8 @@ void BitSet::set(int fromIndex, int toIndex) {
         return;
     }
 
-    int startWordIndex = wordIndex(fromIndex);
-    int endWordIndex = wordIndex(toIndex - 1);
+    int startWordIndex = this->wordIndex(fromIndex);
+    int endWordIndex = this->wordIndex(toIndex - 1);
     this->expandTo(endWordIndex);
 
     long firstWordMask = WORD_MASK << fromIndex;
