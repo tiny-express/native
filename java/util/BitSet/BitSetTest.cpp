@@ -93,6 +93,8 @@ TEST(JavaUtil, BitSetClear) {
     bitSet.set(5);
     ASSERT_EQUAL(true, bitSet.get(1));
     ASSERT_EQUAL(true, bitSet.get(5));
+    bitSet.clear(1, 1);
+    ASSERT_EQUAL(true, bitSet.get(1));
     bitSet.clear(2, 5);
     ASSERT_EQUAL(true, bitSet.get(1));
     ASSERT_EQUAL(true, bitSet.get(5));
@@ -339,7 +341,7 @@ TEST(JavaUtil, BitSetNextSetBit) {
     BitSet bitSet;
     // fromIndex < 0
     try {
-        bitSet.nextClearBit(-1);
+        bitSet.nextSetBit(-1);
     } catch (IndexOutOfBoundsException ex) {
         ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
     }
@@ -381,6 +383,7 @@ TEST(JavaUtil, BitSetPreviousClearBit) {
     ASSERT_EQUAL(100, bitSet.previousClearBit(100));
     ASSERT_EQUAL(199, bitSet.previousClearBit(200));
     ASSERT_EQUAL(199, bitSet.previousClearBit(250));
+    ASSERT_EQUAL(199, bitSet.previousClearBit(299));
     ASSERT_EQUAL(512, bitSet.previousClearBit(512));
 }
 
@@ -467,13 +470,31 @@ TEST(JavaUtil, BitSetGet) {
     ASSERT_EQUAL(true, bitSet4.get(1023));
     ASSERT_EQUAL(false, bitSet4.get(1024));
 
-    BitSet bitSet5 = bitSet4.get(200, 900);
+    // fromIndex is power of 2.
+    BitSet bitSet5 = bitSet4.get(512, 1024);
+    ASSERT_EQUAL(512, bitSet5.length());
+    ASSERT_EQUAL(true, bitSet5.get(0));
+    ASSERT_EQUAL(false, bitSet5.get(512));
+
+    // fromIndex, toIndex are in range.
+    bitSet5 = bitSet4.get(200, 900);
     ASSERT_EQUAL(700, bitSet5.length());
     ASSERT_EQUAL(false, bitSet5.get(0));
     ASSERT_EQUAL(false, bitSet5.get(311));
     ASSERT_EQUAL(true, bitSet5.get(312));
     ASSERT_EQUAL(true, bitSet5.get(699));
     ASSERT_EQUAL(false, bitSet5.get(700));
+
+    ASSERT_EQUAL(10, bitSet1.length());
+    // fromIndex = toIndex
+    BitSet bitSet6 = bitSet1.get(2, 2);
+    ASSERT_EQUAL(0, bitSet6.length());
+    // fromIndex >= logical length
+    bitSet6 = bitSet1.get(10, 16);
+    ASSERT_EQUAL(0, bitSet6.length());
+    bitSet6 = bitSet1.get(0, 100);
+    // toIndex > logical length
+    ASSERT_EQUAL(10, bitSet6.length());
 }
 
 TEST(VavaUtil, BitSetSet) {
@@ -568,7 +589,8 @@ TEST(JavaUtil, BitSetToString) {
     bitSet.set(4);
     bitSet.set(10);
     ASSERT_STR("{2, 4, 10}", bitSet.toString());
-
+    bitSet.set(16384);
+    ASSERT_STR("{2, 4, 10, 16384}", bitSet.toString());
     bitSet.clear();
     ASSERT_STR("{}", bitSet.toString());
 }
@@ -628,6 +650,7 @@ TEST(JavaUtil, BitSetToLongArray) {
 }
 
 TEST(JavaUtil, BitSetValueOf) {
+    // This input byte array has 4 zero bytes, it doesn't affect to result.
     Array<byte> inputByteArray = Array<byte>
             {0b00001111, 0b00000000, 0b00000000, 0b00000000,
              0b00000000, 0b00000000, 0b00000000, 0b00000000,
@@ -636,7 +659,8 @@ TEST(JavaUtil, BitSetValueOf) {
              0b11111111, 0b11111111, 0b11111111, 0b11111111,
              0b11111111, 0b11111111, 0b11111111, 0b11111111,
              0b11111111, 0b11111111, 0b11111111, 0b11111111,
-             0b11111111, 0b11111111, 0b11111111, 0b10111111};
+             0b11111111, 0b11111111, 0b11111111, 0b10111111,
+             0b00000000, 0b00000000, 0b00000000, 0b00000000};
     BitSet expectedResultByteArray;
     expectedResultByteArray.set(0, 4, true);
     expectedResultByteArray.set(4, 128, false);
@@ -646,7 +670,9 @@ TEST(JavaUtil, BitSetValueOf) {
     BitSet resultByteArray = BitSet::valueOf(inputByteArray);
     ASSERT_TRUE(expectedResultByteArray.equals(resultByteArray));
 
-    Array<long> inputLongArray = Array<long> {0L, 0L, -1L, -4611686018427387905L};
+    // This input byte array has 4 zero longs, it doesn't affect to result.
+    Array<long> inputLongArray =
+            Array<long> {0L, 0L, -1L, -4611686018427387905L, 0L, 0L, 0L, 0L};
     BitSet expectedResultLongArray;
     expectedResultLongArray.set(0, 128, false);
     expectedResultLongArray.set(128, 254, true);
@@ -693,14 +719,16 @@ TEST(JavaUtil, BitSetAnd) {
     ASSERT_EQUAL(true, bitSet2.get(7));
 
     bitSet2.set(4, false);
-    bitSet1.set(0, 16, true);
+    bitSet1.set(0, 128, true);
+    ASSERT_EQUAL(128, bitSet1.length());
     bitSet1.bitAnd(bitSet2);
     ASSERT_EQUAL(8, bitSet1.length());
-    ASSERT_EQUAL(false, bitSet1.get(8));
-    ASSERT_EQUAL(false, bitSet1.get(15));
-    ASSERT_EQUAL(false, bitSet1.get(4));
     ASSERT_EQUAL(true, bitSet1.get(0));
     ASSERT_EQUAL(true, bitSet1.get(7));
+    ASSERT_EQUAL(false, bitSet1.get(128));
+    ASSERT_EQUAL(false, bitSet1.get(127));
+    ASSERT_EQUAL(false, bitSet1.get(64));
+    ASSERT_EQUAL(false, bitSet1.get(4));
 }
 
 TEST(JavaUtil, BitSetOr) {
