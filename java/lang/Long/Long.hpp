@@ -37,7 +37,7 @@ namespace Java {
 
 		private:
 			long original;
-            string string_original;
+            string originalString;
 
 		public:
 			/**
