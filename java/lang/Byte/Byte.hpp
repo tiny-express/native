@@ -38,19 +38,20 @@ namespace Java {
         class Bytes;
 
 		class Bytes : public virtual Number, public virtual Comparable<Bytes> {
-
         private:
 			byte original;
+            string originalString;
 
+        public:
 			/**
 			 * Min value of Byte
 			 */
-			static const byte MIN_VALUE = static_cast<const byte>(-128);
+			static const byte MIN_VALUE = 0;
 
             /**
              * Max value of Byte
              */
-			static const byte MAX_VALUE = 127;
+			static const byte MAX_VALUE = 255;
 
             /**
              * The number of bits used to represent a byte value in two's complement binary form.
@@ -60,26 +61,35 @@ namespace Java {
             /**
              * The number of bytes used to represent a byte value in two's complement binary form.
              */
-            static constexpr int BYTES = SIZE / Bytes::SIZE;
-
-        private:
+            static constexpr int BYTES = 1;
 
         public:
+            /**
+             * Default constructor
+             */
             Bytes();
 
             /**
-             * Byte initialization
+             * Construct a new Byte with the value of byte
              *
              * @param byteValue
              */
 			Bytes(byte byteValue);
 
             /**
-             * Construct a new Byte with the value of string
+             * Construct a new Byte with the value of String
              *
              * @param inputString
+             * @throw NumberFormatException If inputString does not contain a parsable byte.
              */
 			Bytes(String inputString);
+
+            /**
+             * Copy constructor
+             *
+             * @param anotherBytes
+             */
+            Bytes(const Bytes &anotherBytes);
 
 			~Bytes();
 
@@ -93,7 +103,7 @@ namespace Java {
 			char charValue() const;
 
             /**
-             * Returns the value of this Byte as an String.
+             * Returns the value of this Byte as a string.
              *
              * @return string
              */
@@ -111,7 +121,7 @@ namespace Java {
              *
              * @param byteA
              * @param byteB
-             * @return  the value 0 if byteA == byteB; a value less than 0 if byteA < byteB;
+             * @return the value 0 if byteA == byteB; a value less than 0 if byteA < byteB;
              * and a value greater than 0 if byteA > byteB
              */
 			static int compare(byte byteA, byte byteB);
@@ -148,8 +158,8 @@ namespace Java {
 			 * @param object
 			 * @return true if object is a Byte and has the same value as this Bytes; false otherwise
 			 */
-			boolean equals(Object object);
-
+            // TODO need instanceof temporary use Byte instead of Object
+			boolean equals(Bytes object);
 
             /**
              * Returns the value of this Byte as an float.
@@ -161,14 +171,14 @@ namespace Java {
             /**
              * Returns a hash code for this Byte
              *
-             * @return int
+             * @return long
              */
-			int hashCode();
+			long hashCode() const override ;
 
             /**
              * Returns a hash code for this Byte
              *
-             * @param value
+             * @param byteValue
              * @return int
              */
             static int hashCode(byte byteValue);
@@ -248,7 +258,7 @@ namespace Java {
              * Returns a Byte instance representing the specified byte value.
              *
              * @param byteValue
-             * @return Bytes
+             * @return Byte
              */
 			static Bytes valueOf(byte byteValue);
 
@@ -256,7 +266,7 @@ namespace Java {
              * Returns a Byte instance representing the specified String value.
              *
              * @param stringValue
-             * @return Bytes
+             * @return Byte
              */
 			static Bytes valueOf(String stringValue);
 
@@ -265,7 +275,7 @@ namespace Java {
              *
              * @param stringValue
              * @param radix
-             * @return
+             * @return Byte
              */
             static Bytes valueOf(String stringValue, int radix);
             
@@ -364,7 +374,7 @@ namespace Java {
              * @param target
              * @return Byte
              */
-			void operator-=(const Bytes &target);
+			Bytes &operator-=(const Bytes &target);
 
             /**
              * Make an summation from this Byte with target and assign the result value to this Byte
@@ -372,7 +382,7 @@ namespace Java {
              * @param target
              * @return Byte
              */
-			void operator+=(const Bytes &target);
+			Bytes &operator+=(const Bytes &target);
 
             /**
              * Make a multiplication from this Byte with target and assign the result value to this Byte
@@ -380,7 +390,7 @@ namespace Java {
              * @param target
              * @return Byte
              */
-			void operator*=(const Bytes &target);
+			Bytes &operator*=(const Bytes &target);
 
             /**
              * Make a division from this Byte with target and assign the result value to this Byte
@@ -388,7 +398,7 @@ namespace Java {
              * @param target
              * @return Byte
              */
-			void operator/=(const Bytes &target);
+			Bytes &operator/=(const Bytes &target);
 
             /**
              * Make a modulo from this Byte with target and assign the result value to this Byte
@@ -396,7 +406,7 @@ namespace Java {
              * @param target
              * @return Byte
              */
-			void operator%=(const Bytes &target);
+			Bytes &operator%=(const Bytes &target);
 
             /**
              *  Assign the value of target to this Byte
@@ -415,18 +425,19 @@ namespace Java {
             static ByteCache *instance;
 
         public:
-            ByteCache(){
-                cache=cacheInit();
+            ByteCache() {
+                cache = cacheInit();
             };
 
             Array<Bytes> cache;
 
             Array<Bytes> cacheInit() {
-                Array<Bytes> cache1;
+                Array<Bytes> cacheArray;
                 int index = 0;
-                for (index; index < 256; index++)
-                    cache1.push((Bytes((byte) (index - 128))));
-                return cache1;
+                for (index; index < 256; index++) {
+					cacheArray.push(Bytes(static_cast<byte>(index)));
+				}
+                return cacheArray;
             }
 
             static ByteCache *getInstance()

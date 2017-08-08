@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -25,6 +25,7 @@
  */
 
 #include "Byte.hpp"
+#include "../NumberFormatException/NumberFormatException.h"
 
 using namespace Java::Lang;
 
@@ -32,15 +33,24 @@ ByteCache *ByteCache::instance = nullptr;
 
 Bytes::Bytes(byte byteValue) {
 	this->original = byteValue;
+    this->originalString = string_from_int(this->original);
 }
 
 Bytes::Bytes(String inputString) {
 	this->original = parseByte(inputString, 10);
+    this->originalString = string_from_int(this->original);
 }
 
-Bytes::Bytes() = default;
+Bytes::Bytes() {
+    this->original = 0;
+    this->originalString = string_from_int(this->original);
+}
 
-Bytes::~Bytes() = default;
+Bytes::~Bytes() {
+    if (this->originalString != nullptr) {
+        free(this->originalString);
+    }
+}
 
 char Bytes::charValue() const {
     return (char) this->original;
@@ -58,14 +68,12 @@ int Bytes::compareTo(const Bytes &other) const {
 	return this->original - other.original;
 }
 
-//TODO need Integer::decode(string)
 Bytes Bytes::decode(String stringToDecode) {
-    /*int value = Integer::decode(stringToDecode);
-    if (i < MIN_VALUE || i > MAX_VALUE)
-        //TODO throw NumberFormatException
-     return (byte)value;
-     */
-    return 0;//temporarily
+    int value = Integer::decode(stringToDecode).intValue();
+    if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
+        throw NumberFormatException("out of byte range");
+    }
+    return (byte) value;
 }
 
 double Bytes::doubleValue() const {
@@ -73,20 +81,21 @@ double Bytes::doubleValue() const {
 }
 
 //TODO need instanceof
-boolean Bytes::equals(Object object) {
+boolean Bytes::equals(Bytes object) {
+//    boolean isByte = instanceof<Bytes>(object);
+//	if (isByte) {
+//        return this->original == parseByte(object.toString());
+//    }
+//	return false;
+    return this->original == parseByte(object.toString());
 
-    boolean isByte = instanceof<Bytes>(object);
-	if (isByte) {
-        return this->original == parseByte(object.toString());
-    }
-	return false;
 }
 
 float Bytes::floatValue() const {
     return (float) this->original;
 }
 
-int Bytes::hashCode() {
+long Bytes::hashCode() const {
     return (int) this->original;
 }
 
@@ -106,15 +115,12 @@ byte Bytes::parseByte(String stringToParse) {
 	return parseByte(stringToParse, 10);
 }
 
-//TODO need Integer::parseInt(string, int)
 byte Bytes::parseByte(String stringToParse, int radix) {
-    /*int value = Integer::parseInt(stringToParse, radix);
-    if( value < MIN_VALUE || value > MAX_VALUE)
-    {
-        //TODO throw numberFormatException
+    int value = Integer::parseInt(stringToParse, radix);
+    if( value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
+        throw NumberFormatException("out of byte range");
     }
-    return (byte)value;*/
-    return 0;//temporarily
+    return (byte)value;
 }
 
 short Bytes::shortValue() const {
@@ -122,7 +128,7 @@ short Bytes::shortValue() const {
 }
 
 string Bytes::stringValue() const {
-    return String::valueOf(this->original).toString();
+    return this->originalString;
 }
 
 String Bytes::toString() {
@@ -130,8 +136,7 @@ String Bytes::toString() {
 }
 
 String Bytes::toString(byte byteValue) {
-    //TODO need Integer.toString(int, radix)
-    //return Integer::toString((int) byteValue, 10);
+    return Integer::toString((int) byteValue, 10);
 }
 
 int Bytes::toUnsignedInt(byte byteValue) {
@@ -143,8 +148,7 @@ long Bytes::toUnsignedLong(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(byte byteValue) {
-	const int offset = 128;
-    return  ByteCache::getInstance()->cache[((int) byteValue+offset)];
+    return  ByteCache::getInstance()->cache[((int) byteValue)];
 }
 
 Bytes Bytes::valueOf(String stringValue) {
@@ -164,7 +168,7 @@ Bytes Bytes::operator-(const Bytes &target) {
 }
 
 Bytes Bytes::operator/(const Bytes &target) {
-	return  this->original / target.original;
+	return this->original / target.original;
 }
 
 Bytes Bytes::operator%(const Bytes &target) {
@@ -199,26 +203,49 @@ boolean Bytes::operator>=(const  Bytes &target) {
 	return this->original >= target.original;
 }
 
-void Bytes::operator-=(const Bytes &target) {
+Bytes &Bytes::operator-=(const Bytes &target) {
+    free((this->originalString));
     this->original -= target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
 }
 
-void Bytes::operator+=(const Bytes &target) {
+Bytes &Bytes::operator+=(const Bytes &target) {
+    free((this->originalString));
     this->original += target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
 }
 
-void Bytes::operator*=(const Bytes &target) {
+Bytes &Bytes::operator*=(const Bytes &target) {
+    free((this->originalString));
     this->original *= target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
 }
 
-void Bytes::operator/=(const Bytes &target) {
+Bytes &Bytes::operator/=(const Bytes &target) {
+    free((this->originalString));
     this->original /= target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
 }
 
-void Bytes::operator%=(const Bytes &target) {
+Bytes &Bytes::operator%=(const Bytes &target) {
+    free((this->originalString));
     this->original %= target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
 }
 
 Bytes &Bytes::operator=(const Bytes &target) {
+    free((this->originalString));
     this->original = target.original;
+    this->originalString = string_from_int(this->original);
+    return *this;
+}
+
+Bytes::Bytes(const Bytes &anotherBytes) {
+    this->original = anotherBytes.original;
+    this->originalString = string_from_int(this->original);
 }
