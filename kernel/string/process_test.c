@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../test.h"
 
-TEST (KernelString, ProcessReplace) {
+TEST(KernelString, ProcessReplace) {
 	char *target = "Hello World";
 	char *find_string = "World";
 	char *replace_with = "Food Tiny";
@@ -68,7 +68,7 @@ TEST (KernelString, ProcessReplace) {
 	free(result5);
 }
 
-TEST (KernelString, ProcessTrim) {
+TEST(KernelString, ProcessTrim) {
 	char *expect = "Hello World";
 	char *target = "  Hello World  ";
 	char *result = string_trim(target);
@@ -86,7 +86,7 @@ TEST (KernelString, ProcessTrim) {
 	free(result2);
 }
 
-TEST (KernelString, ProcessJoin) {
+TEST(KernelString, ProcessJoin) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -106,7 +106,7 @@ TEST (KernelString, ProcessJoin) {
 	free(result);
 }
 
-TEST (KernelString, ProcessSplit) {
+TEST(KernelString, ProcessSplit) {
 	char *target = "The|quick|brown|fox|jumps|over|the|lazy|dog";
 	char *delimiter = "|";
 	char **result = string_split(target, delimiter);
@@ -144,7 +144,7 @@ TEST (KernelString, ProcessSplit) {
 	free_pointer_pointer_char(result);
 }
 
-TEST (KernelString, ProcessStartsWith) {
+TEST(KernelString, ProcessStartsWith) {
 	char *target = "Hello World";
 	char *prefix = "Hello";
 	ASSERT_TRUE(string_startswith(target, prefix));
@@ -156,7 +156,7 @@ TEST (KernelString, ProcessStartsWith) {
 	ASSERT_FALSE(string_startswith(target, prefix));
 }
 
-TEST (KernelString, ProcessEndsWith) {
+TEST(KernelString, ProcessEndsWith) {
 	char *target = "Hello World";
 	char *suffix = "World";
 	ASSERT_TRUE(string_endswith(target, suffix));
@@ -171,7 +171,7 @@ TEST (KernelString, ProcessEndsWith) {
 	ASSERT_FALSE(string_endswith(target, suffix));
 }
 
-TEST (KernelString, ProcessIndexOf) {
+TEST(KernelString, ProcessIndexOf) {
 	char *target = "Hello World";
 	char *subtarget = "World";
 	int result = string_index(target, subtarget, 1);
@@ -240,7 +240,7 @@ TEST (KernelString, ProcessIndexOf) {
 	ASSERT_EQUAL(-1, result);
 }
 
-TEST (KernelString, ProcessRandom) {
+TEST(KernelString, ProcessRandom) {
 	char *target = "ABCXYZ";
 	int size = 4;
 	char *result = string_random(target, size);
@@ -250,7 +250,7 @@ TEST (KernelString, ProcessRandom) {
 }
 
 // TODO fix this @dquang
-TEST (KernelString, ProcessAppend) {
+TEST(KernelString, ProcessAppend) {
 	char *target = "Hello ";
 	string_append(&target, 'W');
 	
@@ -274,7 +274,7 @@ TEST (KernelString, ProcessAppend) {
 	free(target);
 }
 
-TEST (KernelString, ProcessConcat) {
+TEST(KernelString, ProcessConcat) {
 	char *target = "Hello";
 	char *subtarget = "World";
 	
@@ -290,7 +290,7 @@ TEST (KernelString, ProcessConcat) {
 	free(result);
 }
 
-TEST (KernelString, ProcessConcatAsm) {
+TEST(KernelString, ProcessConcatAsm) {
 	return;
 	// TODO loint@foodtiny.com
 	char *target = "Hello\0";
@@ -306,7 +306,7 @@ TEST (KernelString, ProcessConcatAsm) {
 	ASSERT_EQUAL(5, length_pointer_char(result));
 }
 
-TEST (KernelString, ProcessFromTo) {
+TEST(KernelString, ProcessFromTo) {
 	char *target = "Hello World";
 	int from = 6;
 	int to = 11;
@@ -353,7 +353,7 @@ TEST (KernelString, ProcessFromTo) {
 	free(result);
 }
 
-TEST (KernelString, ProcessFrom) {
+TEST(KernelString, ProcessFrom) {
 	char *target = "Hello World";
 	int from = 6;
 	char *result = string_from(target, from);
@@ -374,7 +374,7 @@ TEST (KernelString, ProcessFrom) {
 	free(result);
 }
 
-TEST (KernelString, ProcessTo) {
+TEST(KernelString, ProcessTo) {
 	char *target = "Hello World";
 	int to = 4;
 	char *result = string_to(target, to);
@@ -395,7 +395,7 @@ TEST (KernelString, ProcessTo) {
 	free(result);
 }
 
-TEST (KernelString, ProcessCopy) {
+TEST(KernelString, ProcessCopy) {
 	char *target = "Hello World";
 	char *result = string_copy(target);
 	ASSERT_STR(target, result);
@@ -407,7 +407,7 @@ TEST (KernelString, ProcessCopy) {
 	free(result);
 }
 
-TEST (KernelString, ProcessUpper) {
+TEST(KernelString, ProcessUpper) {
 	char *target = "Hello World";
 	char *result = string_upper(target);
 	char *expect = "HELLO WORLD";
@@ -426,7 +426,7 @@ TEST (KernelString, ProcessUpper) {
 	free(result);
 }
 
-TEST (KernelString, ProcessLower) {
+TEST(KernelString, ProcessLower) {
 	char *target = "HELLO WORLD";
 	char *result = string_lower(target);
 	char *expect = "hello world";
@@ -451,7 +451,7 @@ TEST (KernelString, ProcessLower) {
 	free(result);
 }
 
-TEST (KernelString, ProcessTitle) {
+TEST(KernelString, ProcessTitle) {
 	char *target = "hello world";
 	char *result = string_title(target);
 	char *expect = "Hello World";
@@ -471,7 +471,7 @@ TEST (KernelString, ProcessTitle) {
 	free(result);
 }
 
-TEST (KernelString, ProcessStandardized) {
+TEST(KernelString, ProcessStandardized) {
 	char *target = "  hello  world ";
 	char *expect = "hello world";
 	char *result = string_standardized(target);
@@ -485,7 +485,7 @@ TEST (KernelString, ProcessStandardized) {
 	free(result);
 }
 
-TEST (KernelString, ProcessEquals) {
+TEST(KernelString, ProcessEquals) {
 	char *target1 = NULL;
 	char *target2 = NULL;
 	ASSERT_TRUE(string_equals(target1, target2));
@@ -507,7 +507,7 @@ TEST (KernelString, ProcessEquals) {
 	ASSERT_TRUE(string_equals(target1, target2));
 }
 
-TEST (KernelString, ProcessReverse) {
+TEST(KernelString, ProcessReverse) {
 	char *target = "hello from other side";
 	char *correct_reverse = "edis rehto morf olleh";
 	char *wrong_reverse = "something here";
@@ -524,7 +524,7 @@ TEST (KernelString, ProcessReverse) {
 	free(reverse_of_target);
 }
 
-TEST (KernelString, ProcessMatches) {
+TEST(KernelString, ProcessMatches) {
 	char *target = "hello from other side";
 	char *correct_reverse = "edis rehto morf olleh";
 	char *wrong_reverse = "something here";

@@ -28,7 +28,7 @@
 #include "../datetime.h"
 #include "../test.h"
 
-TEST (DateTime, UnixTimestampInMilliseconds) {
+TEST(KernelDateTime, UnixTimestampInMilliseconds) {
 #ifdef WINDOWS
     unsigned int millisecond = 123;
     unsigned int second = 3;
@@ -50,7 +50,7 @@ TEST (DateTime, UnixTimestampInMilliseconds) {
 #endif
 }
 
-TEST (DateTime, TimestampInNanoSeconds) {
+TEST(KernelDateTime, TimestampInNanoSeconds) {
 	long first_time = timestamp();
 	ASSERT_TRUE(first_time > 1500198318489000);
 	int maxN = 20000000;
@@ -67,7 +67,7 @@ TEST (DateTime, TimestampInNanoSeconds) {
     ASSERT_TRUE(delta > 50);
 }
 
-TEST (DateTime, Format) {
+TEST(KernelDateTime, Format) {
 	long timestamp = 1473765499;
 	string format = "d/m/y";
 	string result1 = date(timestamp, format);

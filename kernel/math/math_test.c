@@ -27,7 +27,7 @@
 #include "../test.h"
 #include "../math.h"
 
-TEST(Math, Pow) {
+TEST(KernelMath, Pow) {
     double base = 3;
     double power = 3;
     ASSERT_TRUE(math_pow(base, power) == 27);
