@@ -76,18 +76,19 @@ void BitSet::expandTo(int wordIndex) {
 }
 
 void BitSet::ensureCapacity(int wordsRequired) {
-    if (this->words.length < wordsRequired) {
-        // Allocate larger of doubled size or required size.
-        int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
-        int oldWordsArrayLength = this->words.length;
-        this->words = Arrays::copyOf(this->words, wordsRequested);
-        this->sizeIsSticky = false;
-        // Set value of new word to 0.
-        int indexOfWordsArray;
-        for (indexOfWordsArray = oldWordsArrayLength;
-             indexOfWordsArray < this->words.length; ++indexOfWordsArray) {
-            this->words[indexOfWordsArray] = 0L;
-        }
+    if (this->words.length >= wordsRequired) {
+        return;
+    }
+    // Allocate larger of doubled size or required size.
+    int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
+    int oldWordsArrayLength = this->words.length;
+    this->words = Arrays::copyOf(this->words, wordsRequested);
+    this->sizeIsSticky = false;
+    // Set value of new word to 0.
+    int indexOfWordsArray;
+    for (indexOfWordsArray = oldWordsArrayLength;
+         indexOfWordsArray < this->words.length; ++indexOfWordsArray) {
+        this->words[indexOfWordsArray] = 0L;
     }
 }
 
