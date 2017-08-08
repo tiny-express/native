@@ -44,6 +44,8 @@ using namespace Java::IO;
 namespace Java {
 	namespace Lang {
 
+        class StringBuilder;
+        class StringBuffer;
 		class String :
 				public Object,
 				public virtual Serializable,
@@ -81,9 +83,9 @@ namespace Java {
              * Allocates a new string that contains the sequence
              * of characters currently contained in the string builder.
              *
-             * @param stringBuffer
+             * @param stringBuilder
              */
-            //String(const StringBuilder &stringBuffer);
+            String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -99,7 +101,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            // String(const StringBuffer &stringBuffer);
+            String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
