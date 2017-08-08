@@ -30,6 +30,7 @@ extern "C" {
 
 #include "../StringBuilder/StringBuilder.hpp"
 
+
 using namespace Java::Lang;
 
 TEST(JavaLang, StringBuilderConstructor) {

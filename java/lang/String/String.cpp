@@ -561,9 +561,9 @@ String String::trim() {
  */
 String String::valueOf(boolean target) {
 	if (target) {
-		return (string) "1";
+		return (string) "true";
 	}
-	return (string) "0";
+	return (string) "false";
 }
 
 /**
@@ -665,7 +665,7 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::subString(int beginIndex) {
-   return this->subString(beginIndex, this->size);
+   return this->subString(beginIndex, this->size - 1);
 }
 
 /**
@@ -677,7 +677,7 @@ String String::subString(int beginIndex) {
  * @return String
  */
 String String::subString(int from, int to) {
-	string holder = string_from_to(this->original, from, to + 1);
+	string holder = string_from_to(this->original, from, to);
 	String result = holder;
 	free(holder);
 	return result;
@@ -691,6 +691,19 @@ String String::subString(int from, int to) {
  */
 String String::operator+(const string &target) {
 	string pointerHolder = string_concat(this->original, target);
+	String result = pointerHolder;
+	free(pointerHolder);
+	return result;
+}
+
+/**
+ * Operator plus for const string
+ *
+ * @param target
+ * @return
+ */
+String String::operator+(const const_string &target) {
+	string pointerHolder = string_concat(this->original, (string) target);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;

@@ -33,7 +33,7 @@ project(native C CXX)
 # C implementation must be implemented first for __APPLE__
 # Keep human readable for __APPLE__ - no need to optimize for testing
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    enable_language(ASM)
+#    enable_language(ASM)
 endif ()
 
 # Enable runtime search path support for dynamic libraries on OSX
@@ -60,12 +60,13 @@ add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 # Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wfatal-errors")
 elseif (COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x -Wfatal-errors")
 else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfatal-errors")
 
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
@@ -73,11 +74,11 @@ add_definitions(-D_GNU_SOURCE)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # CMake Modules
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
-    set(CMAKE_C_FLAGS "${CMAKE_CC_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
 
     # Enable coverage by cmake modules
-    if (CMAKE_COMPILER_IS_GNUCXX)
+    if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
         include(CodeCoverage)
         setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
     endif ()
@@ -88,11 +89,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
-
-# Only header files
-file(GLOB_RECURSE HEADERS
-        ./*.h
-        library.hpp)
 
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
@@ -183,9 +179,10 @@ enable_testing()
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/native)
-install(DIRECTORY java DESTINATION include/native)
-install(FILES ${HEADERS} DESTINATION include/native)
+install(FILES library.hpp DESTINATION include/native)
+install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
 
 # Add uninstall
 add_custom_target(
