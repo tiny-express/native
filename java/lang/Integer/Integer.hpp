@@ -400,7 +400,6 @@ namespace Java {
 
             /**
              * Returns a hash code for a int value;
-             * compatible with Integer.hashCode() .
              *
              * @param inputInt
              * @return a hash code value for inputInt
@@ -496,7 +495,7 @@ namespace Java {
              * @param radix
              * @throw NumberFormatException if
              * The first argument is null or is a string of length zero.
-             * The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX.
+             * The radix is either smaller than Character::MIN_RADIX or larger than Character::MAX_RADIX.
              * Any character of the string is not a digit of the specified radix,
              * The value represented by the string is not a value of type int.
              * @return int
@@ -521,7 +520,7 @@ namespace Java {
              * @param radix
              * @throw NumberFormatException if
              * The first argument is null or is a string of length zero.
-             * The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX.
+             * The radix is either smaller than Character::MIN_RADIX or larger than Character::MAX_RADIX.
              * Any character of the string is not a digit of the specified radix,
              * The value represented by the string is not a value of type unsigned int.
              * @return unsigned integer value represented by the argument in decimal
