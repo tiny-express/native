@@ -35,7 +35,7 @@ using namespace Java::Lang;
  */
 Float::Float() {
 	this->original = 0;
-	this->string_original = string_from_float(this->original);
+	this->originalString = string_from_float(this->original);
 }
 
 /**
@@ -45,7 +45,7 @@ Float::Float() {
  */
 Float::Float(float original) {
 	this->original = original;
-	this->string_original = string_from_float(this->original);
+	this->originalString = string_from_float(this->original);
 }
 
 /**
@@ -55,12 +55,12 @@ Float::Float(float original) {
  */
 Float::Float(const Float &floatNumber) {
 	this->original = floatNumber.original;
-	this->string_original = string_from_float(this->original);
+	this->originalString = string_from_float(this->original);
 }
 
 Float::~Float() {
-	if (this->string_original != NULL) {
-		free(this->string_original);
+	if (this->originalString != NULL) {
+		free(this->originalString);
 	}
 }
 
@@ -127,7 +127,7 @@ double Float::doubleValue() const {
  * @return String
  */
 string Float::toString() const {
-	return this->string_original;
+	return this->originalString;
 }
 
 /**
@@ -149,8 +149,8 @@ Float Float::parseFloat(String target) {
  */
 Float Float::operator=(const Float &target) {
 	this->original = target.original;
-	free(this->string_original);
-	this->string_original = string_from_float(this->original);
+	free(this->originalString);
+	this->originalString = string_from_float(this->original);
 	return *this;
 }
 
