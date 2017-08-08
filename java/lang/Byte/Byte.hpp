@@ -31,7 +31,6 @@
 #include "../Integer/Integer.hpp"
 #include "../../../kernel/type.h"
 
-
 namespace Java {
 	namespace Lang {
 
@@ -278,7 +277,7 @@ namespace Java {
              * @return Byte
              */
             static Bytes valueOf(String stringValue, int radix);
-            
+
 		public:
             /**
              * Make a summation with target Byte

@@ -25,7 +25,7 @@
  */
 
 #include "Byte.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 
 using namespace Java::Lang;
 
@@ -88,7 +88,6 @@ boolean Bytes::equals(Bytes object) {
 //    }
 //	return false;
     return this->original == parseByte(object.toString());
-
 }
 
 float Bytes::floatValue() const {
@@ -117,7 +116,7 @@ byte Bytes::parseByte(String stringToParse) {
 
 byte Bytes::parseByte(String stringToParse, int radix) {
     int value = Integer::parseInt(stringToParse, radix);
-    if( value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
+    if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
     return (byte)value;
@@ -148,7 +147,7 @@ long Bytes::toUnsignedLong(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(byte byteValue) {
-    return  ByteCache::getInstance()->cache[((int) byteValue)];
+    return ByteCache::getInstance()->cache[((int) byteValue)];
 }
 
 Bytes Bytes::valueOf(String stringValue) {

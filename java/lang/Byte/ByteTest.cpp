@@ -29,7 +29,7 @@ extern "C" {
 }
 
 #include "Byte.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 
 using namespace Java::Lang;
 
