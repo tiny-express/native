@@ -43,5 +43,5 @@ String URLDecoder::decode(const String &source, const String &encoding) {
         return result;
     }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
-    throw UnsupportedEncodingException();
+    throw UnsupportedEncodingException(encoding);
 }
