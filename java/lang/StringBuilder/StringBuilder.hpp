@@ -387,6 +387,11 @@ namespace Java {
             int codePointCount(int beginIndex, int endIndex);
 
             /**
+             * @see deleteRange
+             */
+//          StringBuilder delete(int start, int end);
+
+            /**
              * Removes the characters in a substring of this sequence.
              * The substring begins at the specified start and extends to the character at index end - 1
              * or to the end of the sequence if no such character exists.
@@ -497,7 +502,7 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @throw IndexOutOfBoundsException - if the offset is invalid.
              */
             StringBuilder &insert(int offset, char target);
 

@@ -29,7 +29,9 @@ extern "C" {
 }
 
 #include "../StringBuilder/StringBuilder.hpp"
-
+#include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
+#include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
+#include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
 
@@ -45,8 +47,8 @@ TEST(JavaLang, StringBuilderConstructor) {
     try {
         StringBuilder negativeCapacityStringBuilder(-1);
     }
-    catch (Exception e) {
-        ASSERT_STR("capacity is negative", e.getMessage().toString());
+    catch (NegativeArraySizeException &ex) {
+        ASSERT_STR("Capacity is negative", ex.getMessage().toString());
     }
 
     String aString = "Hello! Welcome to VietNam!";
@@ -150,7 +152,7 @@ TEST(JavaLang, StringBuilderAppend) {
         // start < 0
         stringBuilder7.append(*charSequence, -1, 3);
     }
-    catch (Exception ex){
+    catch (IndexOutOfBoundsException &ex){
         ASSERT_STR("", ex.getMessage().toString());
         ASSERT_STR("123Hello!", stringBuilder7.toString());
     }
@@ -158,7 +160,7 @@ TEST(JavaLang, StringBuilderAppend) {
         // start > end
         stringBuilder7.append(*charSequence, 4, 3);
     }
-    catch (Exception ex){
+    catch (IndexOutOfBoundsException &ex){
         ASSERT_STR("", ex.getMessage().toString());
         ASSERT_STR("123Hello!", stringBuilder7.toString());
     }
@@ -166,7 +168,7 @@ TEST(JavaLang, StringBuilderAppend) {
         // end > current length of StringBuilder instance.
         stringBuilder7.append(*charSequence, 4, 999);
     }
-    catch (Exception ex){
+    catch (IndexOutOfBoundsException &ex){
         ASSERT_STR("", ex.getMessage().toString());
         ASSERT_STR("123Hello!", stringBuilder7.toString());
     }
@@ -193,8 +195,8 @@ TEST(JavaLang, StringBuilderCharAt) {
     try {
         stringBuilder.charAt(999);
     }
-    catch (Exception e) {
-        ASSERT_STR("String index out of range: 999", e.getMessage().toString());
+    catch (IndexOutOfBoundsException &ex) {
+        ASSERT_STR("999", ex.getMessage().toString());
     }
 }
 
@@ -217,21 +219,21 @@ TEST(JavaLang, StringBuilderDeleteRange) {
         // start < 0
         stringBuilder.deleteRange(-1, 3);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("ABCXYZ", stringBuilder.toString());
     }
     try {
         // end < 0
         stringBuilder.deleteRange(1, -1);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("ABCXYZ", stringBuilder.toString());
     }
     try {
         // start > end
         stringBuilder.deleteRange(3, 1);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("ABCXYZ", stringBuilder.toString());
     }
     stringBuilder.deleteRange(1, 3); // valid start, valid end
@@ -304,14 +306,14 @@ TEST(JavaLang, StringBuilderInsert) {
         // offset is negative
         stringBuilder1.insert(-1, (const string)"xxx");
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("123", stringBuilder1.toString());
     }
     try {
         // offset is larger than length of StringBuilder
         stringBuilder1.insert(999, (const string)"xxx");
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("123", stringBuilder1.toString());
     }
     stringBuilder1.insert(1, (const string)"xxx");
@@ -355,14 +357,14 @@ TEST(JavaLang, StringBuilderInsert) {
         // offset < 0
         stringBuilder5.insert(-1, 'x');
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("abc", stringBuilder5.toString());
     }
     try {
         // offset > length of StringBuilder
         stringBuilder5.insert(999, 'x');
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("abc", stringBuilder5.toString());
     }
     stringBuilder5.insert(1, 'x');
@@ -371,14 +373,14 @@ TEST(JavaLang, StringBuilderInsert) {
         // offset < 0
         stringBuilder5.insert(-1, Character('y'));
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axbc", stringBuilder5.toString());
     }
     try {
         // offset > length of StringBuilder
         stringBuilder5.insert(999, Character('y'));
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axbc", stringBuilder5.toString());
     }
     stringBuilder5.insert(1, Character('y'));
@@ -399,35 +401,35 @@ TEST(JavaLang, StringBuilderInsert) {
         // index < 0
         stringBuilder7.insert(-1, anArray1, 1, 2);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("abc", stringBuilder7.toString());
     }
     try {
         // index > currentLength
         stringBuilder7.insert(999, anArray1, 1, 2);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("abc", stringBuilder7.toString());
     }
     try {
         // offset < 0
         stringBuilder7.insert(1, anArray1, -1, 2);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("abc", stringBuilder7.toString());
     }
     try {
         // length < 0
         stringBuilder7.insert(1, anArray1, 1, -1);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("abc", stringBuilder7.toString());
     }
     try {
         // offset + length > lengthOfArray
         stringBuilder7.insert(1, anArray1, 1, 100);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("abc", stringBuilder7.toString());
     }
     stringBuilder7.insert(1, anArray1, 1, 2); // valid index, offset, length
@@ -437,35 +439,35 @@ TEST(JavaLang, StringBuilderInsert) {
         // index < 0
         stringBuilder7.insert(-1, anArray2 , 1, 1);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("a23bc", stringBuilder7.toString());
     }
     try {
         // index > currentLength
         stringBuilder7.insert(999, anArray2 , 1, 1);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("a23bc", stringBuilder7.toString());
     }
     try {
         // offset < 0
         stringBuilder7.insert(1, anArray2 , -1, 1);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("a23bc", stringBuilder7.toString());
     }
     try {
         // length < 0
         stringBuilder7.insert(1, anArray2 , 1, -1);
     }
-    catch (Exception ex) {
+    catch (StringIndexOutOfBoundsException &ex) {
         ASSERT_STR("a23bc", stringBuilder7.toString());
     }
     try {
         // offset + length > lengthOfArray
         stringBuilder7.insert(1, anArray2 , 1, 999);
     }
-    catch (Exception ex){
+    catch (StringIndexOutOfBoundsException &ex){
         ASSERT_STR("a23bc", stringBuilder7.toString());
     }
     stringBuilder7.insert(1, anArray2 , 1, 1); // valid index, offset, length
@@ -482,42 +484,42 @@ TEST(JavaLang, StringBuilderInsert) {
         // destinationOffset < 0
         stringBuilder8.insert(-1, *charSequence, 1, 1);
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     try {
         // destinationOffset > length of this StringBuilder
         stringBuilder8.insert(999, *charSequence, 1, 1);
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     try {
         // start < 0
         stringBuilder8.insert(1, *charSequence, -1, 1);
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     try {
         // end < 0
         stringBuilder8.insert(1, *charSequence, 1, -1);
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     try {
         // start > end
         stringBuilder8.insert(1, *charSequence, 2, 1);
     }
-    catch (Exception ex) {
+    catch (IndexOutOfBoundsException &ex) {
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     try {
         // end > length of target (charSequence)
         stringBuilder8.insert(1, *charSequence, 1, 999);
     }
-    catch (Exception ex){
+    catch (IndexOutOfBoundsException &ex){
         ASSERT_STR("axyzbc", stringBuilder8.toString());
     }
     stringBuilder8.insert(1, *charSequence, 1, 1);
@@ -600,8 +602,8 @@ TEST(JavaLang, StringBuilderSubString) {
     try {
         stringBuilder.substring(-999);
     }
-    catch (Exception e) {
-        ASSERT_STR("String index out of range: -999", e.getMessage().toString());
+    catch (StringIndexOutOfBoundsException &ex) {
+        ASSERT_STR("String index out of range: -999", ex.getMessage().toString());
     }
 }
 

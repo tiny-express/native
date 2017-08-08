@@ -35,7 +35,7 @@ StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
 
 StringBuilder::StringBuilder(int capacity) {
     if (capacity < 0) {
-        throw NegativeArraySizeException("capacity is negative");
+        throw NegativeArraySizeException("Capacity is negative");
     }
 
     this->original = (string)calloc((size_t)capacity, sizeof(char));
@@ -233,7 +233,7 @@ int StringBuilder::capacity() const {
 
 char StringBuilder::charAt(int index) const {
     if (index < 0 || index >= this->currentLength) {
-        throw StringIndexOutOfBoundsException(index);
+        throw IndexOutOfBoundsException(String::valueOf(index));
     }
 
     return this->original[index];
@@ -241,7 +241,7 @@ char StringBuilder::charAt(int index) const {
 
 int StringBuilder::codePointAt(int index) const {
     if (index < 0 || index >= this->currentLength) {
-        throw StringIndexOutOfBoundsException(index);
+        throw IndexOutOfBoundsException(String::valueOf(index));
     }
 
     Array<char> originalArray;
@@ -364,7 +364,7 @@ StringBuilder &StringBuilder::insert(int offset, const Boolean &target) {
 
 StringBuilder &StringBuilder::insert(int offset, char target) {
     if (offset < 0 || offset > this->currentLength) {
-        throw StringIndexOutOfBoundsException(offset);
+        throw IndexOutOfBoundsException(String::valueOf(offset));
     }
 
     int newLength = this->currentLength + 1;
@@ -645,7 +645,7 @@ void StringBuilder::setCharAt(int index, const Character &target) {
 
 void StringBuilder::setLength(int newLength) {
     if (newLength < 0) {
-        throw StringIndexOutOfBoundsException(newLength);
+        throw IndexOutOfBoundsException(String::valueOf(newLength));
     }
 
     this->ensureCapacity(newLength);
