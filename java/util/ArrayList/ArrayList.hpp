@@ -568,7 +568,7 @@ namespace Java {
 			 * Get and set element at index in ArrayList
 			 *
 			 * @param index
-			 * @return
+			 * @return E
 			 */
 			E &operator[](int index) {
 				return this->original[index];
@@ -584,7 +584,8 @@ namespace Java {
 			 * @param toIndex
 			 */
 			void removeRange(int fromIndex, int toIndex) {
-				this->original.erase(this->original.begin() + fromIndex, this->begin() + toIndex);
+				this->original.erase(this->original.begin() + fromIndex,
+									 this->original.begin() + toIndex);
 			}
 		};
 		
