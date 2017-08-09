@@ -567,7 +567,7 @@ TEST(JavaLang, ByteByteOperator) {
     validByte = 5;
 
     try {
-        modulusByte = validByte / zeroByte;
+        validByte %= zeroByte;
     }
     catch (ArithmeticException &e) {
         ASSERT_STR("Divide by zero", e.getMessage().toString());
