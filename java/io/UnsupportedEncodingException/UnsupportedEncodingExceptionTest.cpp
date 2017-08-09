@@ -24,24 +24,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "URLDecoder.hpp"
-#include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
+extern "C" {
+#include "../../../kernel/test.h"
+};
 
-using namespace Java::Net;
+#include "UnsupportedEncodingException.hpp"
 
-String URLDecoder::decode(const String &source) {
-    return URLDecoder::decode(source, "UTF-8");
+using namespace Java::Lang;
+
+TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
+    // Constructs a new UnsupportedEncodingException with null as its detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
+    ASSERT_STR("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
+
+    // Constructs a new UnsupportedEncodingException with the specified detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithMessage = UnsupportedEncodingException("UnsupportedEncodingException with the specified message");
+    ASSERT_STR("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
 }
 
-String URLDecoder::decode(const String &source, const String &encoding) {
-    // TODO(truongchauhien): String class need to be refactoring.
-    String &referenceToEncoding = const_cast<String &>(encoding);
-    if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string decodedString = url_decode(source.toString());
-        String result(decodedString);
-        free(decodedString);
-        return result;
+TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
+    try {
+        throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
+    } catch (UnsupportedEncodingException &ex) {
+        ASSERT_STR("Throw UnsupportedEncodingException", ex.getMessage().toString());
     }
-    // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
-    throw UnsupportedEncodingException(encoding);
 }
