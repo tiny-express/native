@@ -47,12 +47,12 @@ namespace Java {
             /**
              * Max value of unsigned int
              */
-            static constexpr unsigned int UNSIGNED_INT_MAX = std::numeric_limits<uint>::max();
+            static constexpr unsigned int UNSIGNED_INT_MAX = 0xffffffff;
 
             /**
              * Max value of unsigned int
              */
-            static constexpr unsigned int UNSIGNED_INT_MIN = std::numeric_limits<uint>::min();
+            static constexpr unsigned int UNSIGNED_INT_MIN = 0;
 
         public:
             /**
