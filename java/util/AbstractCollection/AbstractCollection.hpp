@@ -40,7 +40,6 @@ namespace Java {
 		protected:
 			AbstractCollection() {}
 			virtual ~AbstractCollection() {}
-
 		};
 	}
 }
