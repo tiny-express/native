@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,19 +24,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "IOException.hpp"
+#ifndef JAVA_IO_UNSUPPORTED_ENCODING_EXCEPTION_HPP_
+#define JAVA_IO_UNSUPPORTED_ENCODING_EXCEPTION_HPP_
+
 #include "../../Lang.hpp"
+#include "../IOException/IOException.hpp"
 
-using namespace Java::Lang;
-
-IOException::IOException() : Exception::Exception() {
+namespace Java {
+    namespace IO {
+        class UnsupportedEncodingException : public IOException {
+        public:
+            UnsupportedEncodingException();
+            UnsupportedEncodingException(String message);
+        };
+    }
 }
 
-IOException::IOException(String message) : Exception::Exception(message) {
-}
-
-IOException::IOException(String message, Throwable *cause) : Exception::Exception(message, cause) {
-}
-
-IOException::IOException(Throwable *cause) : Exception::Exception(cause) {
-}
+#endif  // JAVA_IO_UNSUPPORTED_ENCODING_EXCEPTION_HPP_
