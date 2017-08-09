@@ -86,13 +86,32 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min(); //2.2250738
  */
 static int	MIN_EXPONENT_DOUBLE	= -1022;
 
+/**
+ * Init Double::MAX_VALUE
+ */
+static constexpr double initDoubleMaxValue () noexcept {
+    return (2 - pow(2, -52)) * pow(2, 1023);
+}
+
+/**
+ * Init Double::MIN_VALUE
+ */
+static constexpr double initDoubleMinValue () noexcept {
+    return pow(2, -1074);
+}
+
+/**
+ * Init Double::MIN_NORMAL_DOUBLE
+ */
+static constexpr double initMinNormalDouble () noexcept {
+    return pow(2, -1022);
+}
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
 		private:
 			double original;
             string originalString;
-
         public:
             /**
              * A constant holding the smallest positive normal value of type double, 2^-1022.
@@ -159,16 +178,16 @@ namespace Java {
             /**
              * A constant holding the largest positive finite value of type
              */
-            static constexpr double MAX_VALUE = (2 - pow(2, -52)) * pow(2, 1023);
+            static constexpr double MAX_VALUE = initDoubleMaxValue();
             /**
              * A constant holding the smallest positive normal value of type
              */
-            static constexpr double MIN_NORMAL_DOUBLE = pow(2, -1022); // 2.225073858507201e-308
+            static constexpr double MIN_NORMAL_DOUBLE = initMinNormalDouble(); // 2.225073858507201e-308
 
             /**
              * A constant holding the smallest positive nonzero value of type
              */
-            static constexpr double MIN_VALUE = pow(2, -1074); //4.940656458412465e-324
+            static constexpr double MIN_VALUE = initDoubleMinValue(); //4.940656458412465e-324
 
         public:
             /**
