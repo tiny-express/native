@@ -29,7 +29,7 @@ extern "C" {
 }
 
 #include "Integer.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 

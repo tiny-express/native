@@ -27,7 +27,7 @@
 #include <sstream>
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
