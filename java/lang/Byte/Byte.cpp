@@ -26,6 +26,7 @@
 
 #include "Byte.hpp"
 #include "../NumberFormatException/NumberFormatException.hpp"
+#include "../ArithmeticException/ArithmeticException.hpp"
 
 using namespace Java::Lang;
 
@@ -167,10 +168,16 @@ Bytes Bytes::operator-(const Bytes &target) {
 }
 
 Bytes Bytes::operator/(const Bytes &target) {
+    if (target.intValue() == 0) {
+        throw ArithmeticException("Divide by zero");
+    }
 	return this->original / target.original;
 }
 
 Bytes Bytes::operator%(const Bytes &target) {
+    if (target.intValue() == 0) {
+        throw ArithmeticException("Divide by zero");
+    }
 	return this->original % target.original;
 }
 
@@ -224,6 +231,9 @@ Bytes &Bytes::operator*=(const Bytes &target) {
 }
 
 Bytes &Bytes::operator/=(const Bytes &target) {
+    if (target.intValue() == 0) {
+        throw ArithmeticException("Divide by zero");
+    }
     free((this->originalString));
     this->original /= target.original;
     this->originalString = string_from_int(this->original);
@@ -231,6 +241,9 @@ Bytes &Bytes::operator/=(const Bytes &target) {
 }
 
 Bytes &Bytes::operator%=(const Bytes &target) {
+    if (target.intValue() == 0) {
+        throw ArithmeticException("Divide by zero");
+    }
     free((this->originalString));
     this->original %= target.original;
     this->originalString = string_from_int(this->original);

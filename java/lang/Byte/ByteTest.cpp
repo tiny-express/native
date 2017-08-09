@@ -30,6 +30,7 @@ extern "C" {
 
 #include "Byte.hpp"
 #include "../NumberFormatException/NumberFormatException.hpp"
+#include "../ArithmeticException/ArithmeticException.hpp"
 
 using namespace Java::Lang;
 
@@ -467,6 +468,7 @@ TEST(JavaLang, ByteByteOperator) {
 	Bytes validByte = 5;
 	Bytes targetByte = 3;
     Bytes equalValidByte = 5;
+    Bytes zeroByte = 0;
 	
 	// Make a summation with targetByte
 	Bytes summationByte = 8;
@@ -483,10 +485,24 @@ TEST(JavaLang, ByteByteOperator) {
 	// Make a division with targetByte
 	Bytes divisionByte = 1;
 	ASSERT_TRUE(divisionByte == (validByte / targetByte));
+
+    try {
+        divisionByte = validByte / zeroByte;
+    }
+    catch (ArithmeticException &e) {
+        ASSERT_STR("Divide by zero", e.getMessage().toString());
+    }
 	
 	// Make a modulo with targetByte
-	Bytes modByte = 2;
-	ASSERT_TRUE(modByte == (validByte % targetByte));
+	Bytes modulusByte = 2;
+	ASSERT_TRUE(modulusByte == (validByte % targetByte));
+
+    try {
+        modulusByte = validByte % zeroByte;
+    }
+    catch (ArithmeticException &e) {
+        ASSERT_STR("Divide by zero", e.getMessage().toString());
+    }
 
     // Determine if 2 byte is equal
     ASSERT_TRUE(validByte == equalValidByte);
@@ -533,15 +549,29 @@ TEST(JavaLang, ByteByteOperator) {
 
     // Make a division from validByte with targetByte and assign the result value to this Byte
     validByte /= targetByte;
-    ASSERT_EQUAL(divisionByte.intValue(), validByte.intValue());
+    ASSERT_EQUAL(validByte.intValue(), validByte.intValue());
     ASSERT_STR(divisionByte.toString().toString(), validByte.toString().toString());
     validByte = 5;
 
+    try {
+        validByte /= zeroByte;
+    }
+    catch (ArithmeticException &e) {
+        ASSERT_STR("Divide by zero", e.getMessage().toString());
+    }
+
     // Make a modulo from validByte with targetByte and assign the result value to this Byte
     validByte %= targetByte;
-    ASSERT_EQUAL(modByte.intValue(), validByte.intValue());
-    ASSERT_STR(modByte.toString().toString(), validByte.toString().toString());
+    ASSERT_EQUAL(modulusByte.intValue(), validByte.intValue());
+    ASSERT_STR(modulusByte.toString().toString(), validByte.toString().toString());
     validByte = 5;
+
+    try {
+        modulusByte = validByte / zeroByte;
+    }
+    catch (ArithmeticException &e) {
+        ASSERT_STR("Divide by zero", e.getMessage().toString());
+    }
 }
 
 

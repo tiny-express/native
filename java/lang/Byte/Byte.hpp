@@ -36,7 +36,9 @@ namespace Java {
 
         class Bytes;
 
-		class Bytes : public virtual Number, public virtual Comparable<Bytes> {
+		class Bytes :
+                public virtual Number,
+                public virtual Comparable<Bytes> {
         private:
 			byte original;
             string originalString;
@@ -302,6 +304,7 @@ namespace Java {
              *  Make a division from this Byte with target
              *
              * @param target
+             * @throw ArithmeticException if target equal to zero
              * @return Byte
              */
 			Bytes operator/(const Bytes &target);
@@ -310,6 +313,7 @@ namespace Java {
              * Make a modulo from this Byte with target
              *
              * @param target
+             * @throw ArithmeticException if target equal to zero
              * @return Byte
              */
 			Bytes operator%(const Bytes &target);
@@ -406,6 +410,7 @@ namespace Java {
              * Make a modulo from this Byte with target and assign the result value to this Byte
              *
              * @param target
+             * @throw ArithmeticException if target equal to zero
              * @return Byte
              */
 			Bytes &operator%=(const Bytes &target);
@@ -414,6 +419,7 @@ namespace Java {
              *  Assign the value of target to this Byte
              *
              * @param target
+             * @throw ArithmeticException if target equal to zero
              * @return Byte
              */
             Bytes &operator=(const Bytes &target);
