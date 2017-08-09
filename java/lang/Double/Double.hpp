@@ -159,17 +159,16 @@ namespace Java {
             /**
              * A constant holding the largest positive finite value of type
              */
-            static constexpr double MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
-
+            static constexpr double MAX_VALUE = (2 - pow(2, -52)) * pow(2, 1023);
             /**
              * A constant holding the smallest positive normal value of type
              */
-            static constexpr double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
+            static constexpr double MIN_NORMAL_DOUBLE = pow(2, -1022); // 2.225073858507201e-308
 
             /**
              * A constant holding the smallest positive nonzero value of type
              */
-            static constexpr double MIN_VALUE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
+            static constexpr double MIN_VALUE = pow(2, -1074); //4.940656458412465e-324
 
         public:
             /**
