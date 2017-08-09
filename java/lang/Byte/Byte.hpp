@@ -90,6 +90,9 @@ namespace Java {
              */
             Bytes(const Bytes &anotherBytes);
 
+			/**
+			 * Destructor, free memory allocated for originalString.
+			 */
 			~Bytes();
 
 		public:
@@ -421,11 +424,11 @@ namespace Java {
          * Byte cache for instance byte
          */
         class ByteCache {
+        private:
             static ByteCache *instance;
 
-        public:
             ByteCache() {
-                cache = cacheInit();
+                cache = this->cacheInit();
             };
 
             Array<Bytes> cache;
@@ -439,11 +442,15 @@ namespace Java {
                 return cacheArray;
             }
 
-            static ByteCache *getInstance()
-            {
+        public:
+            static ByteCache *getInstance() {
                 if (instance == nullptr)
                     instance = new ByteCache();
                 return instance;
+            }
+
+            Bytes getByteAtIndex(int index) {
+                return cache[index];
             }
         };
 	}

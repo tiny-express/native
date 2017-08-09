@@ -43,7 +43,7 @@ Bytes::Bytes(String inputString) {
 
 Bytes::Bytes() {
     this->original = 0;
-    this->originalString = string_from_int(this->original);
+    this->originalString = strdup("0");
 }
 
 Bytes::~Bytes() {
@@ -95,7 +95,7 @@ float Bytes::floatValue() const {
 }
 
 long Bytes::hashCode() const {
-    return (int) this->original;
+    return (long) this->original;
 }
 
 int Bytes::hashCode(byte value) {
@@ -147,7 +147,7 @@ long Bytes::toUnsignedLong(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(byte byteValue) {
-    return ByteCache::getInstance()->cache[((int) byteValue)];
+    return ByteCache::getInstance()->getByteAtIndex((int) byteValue);
 }
 
 Bytes Bytes::valueOf(String stringValue) {
