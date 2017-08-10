@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,20 +30,7 @@
 
 using namespace Java::Lang;
 
-/**
- * A constant holding the maximum value a long can have, 2^63-1.
- */
-long Long::MAX_VALUE = 0x7fffffffffffffffL;;
 
-/**
- * A constant holding the minimum value a long can have, -2^63.
- */
-long Long::MIN_VALUE = 0x8000000000000000L;;
-
-/**
- * The number of bits used to represent a long value in two's complement binary form.
- */
-int Long::SIZE = 64;
 
 /**
  * Default constructor
@@ -52,7 +39,7 @@ int Long::SIZE = 64;
  */
 Long::Long() {
     this->original = 0;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -63,7 +50,7 @@ Long::Long() {
  */
 Long::Long(long value) {
     this->original = value;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -74,15 +61,15 @@ Long::Long(long value) {
  */
 Long::Long(const Long &target) {
     this->original = target.original;
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
 }
 
 /**
  * Default destructor
  */
 Long::~Long() {
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
 }
 
@@ -186,7 +173,7 @@ Long Long::decode(String target) {
         return -1;
     }
 
-    result = Long::parseLong(target.subString(index), radix);
+    result = Long::parseLong(target.getStringFromIndex(index), radix);
     if (negative) {
         result = -result.longValue();
     }
@@ -317,47 +304,45 @@ long Long::lowestOneBit(long i) {
  * Returns the number of zero bits preceding the highest-order ("leftmost") one-bit
  * in the two's complement binary representation of the specified long value.
  *
- * @param long i
+ * @param source
  * @return int
  */
-int Long::numberOfLeadingZeros(long i) {
-    if (i == 0) {
+int Long::numberOfLeadingZeros(long source) {
+    if (source == 0L) {
         return 64;
     }
 
-    int n = 1;
-    long x = (i >> 32);
-    if (x == 0) { n += 32; x = (int)i; }
-    if (x >> 16 == 0) { n += 16; x <<= 16; }
-    if (x >> 24 == 0) { n +=  8; x <<=  8; }
-    if (x >> 28 == 0) { n +=  4; x <<=  4; }
-    if (x >> 30 == 0) { n +=  2; x <<=  2; }
-    n -= x >> 31;
-    return n;
+    int shiftCount = 63;
+    while (shiftCount >= 0) {
+        if ((source & (1L << shiftCount)) != 0) {
+            return 63 - shiftCount;
+        }
+        --shiftCount;
+    }
+
+    // for loop must return a value, so don't need to return anything after for loop.
 }
 
 /**
  * Returns the number of zero bits following the lowest-order ("rightmost") one-bit
  * in the two's complement binary representation of the specified long value.
  *
- * @param long i
+ * @param source
  * @return int
  */
-int Long::numberOfTrailingZeros(long i) {
-    long x, y;
-    if (i == 0) {
+int Long::numberOfTrailingZeros(long source) {
+    if (source == 0L) {
         return 64;
     }
 
-    int n = 63;
-    y = (int)i;
-    n = n -32;
-    x = y;
-    y = x <<16; if (y != 0) { n = n -16; x = y; }
-    y = x << 8; if (y != 0) { n = n - 8; x = y; }
-    y = x << 4; if (y != 0) { n = n - 4; x = y; }
-    y = x << 2; if (y != 0) { n = n - 2; x = y; }
-    return (int)(n - ((x << 1) >> 31));
+    int bitOrder;
+    for (bitOrder = 0; bitOrder < 64; ++bitOrder) {
+        if ((source & (1L << bitOrder)) != 0) {
+            return bitOrder;
+        }
+    }
+
+    // for loop must return a value, so don't need to return anything after for loop.
 }
 
 /**
@@ -544,7 +529,7 @@ String Long::toOctalString(long i) {
  * @return String
  */
 string Long::toString() const {
-    return this->string_original;
+    return this->originalString;
 }
 
 /**
@@ -659,10 +644,10 @@ String Long::toUnsignedString0(long val, int shift) {
  */
 Long Long::operator=(const Long &target) {
     this->original = target.original;
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
-    this->string_original = string_from_long(this->original);
+    this->originalString = string_from_long(this->original);
     return *this;
 }
 

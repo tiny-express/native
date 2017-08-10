@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,11 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_HASH_MAP_HPP
-#define NATIVE_JAVA_UTIL_HASH_MAP_HPP
+#ifndef JAVA_UTIL_HASH_MAP_HPP_
+#define JAVA_UTIL_HASH_MAP_HPP_
 
 #include <initializer_list>
 #include <iostream>
+#include "../../lang/String/String.hpp"
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 
@@ -38,6 +39,7 @@ namespace Java {
 		class HashMap : public AbstractMap, public virtual Map<K, V>, public virtual Cloneable, public virtual Serializable {
 		private:
 			std::map<K, V> original;
+			String backup;
 			typedef typename std::map<K, V>::iterator _iterator;
 			typedef typename std::map<K, V>::const_iterator _const_iterator;
 		
@@ -418,39 +420,43 @@ namespace Java {
 			 *
 			 * @return string
 			 */
-			string toString() const {
+			string toString() {
 				if (this->size() == 0) {
-					return strdup("{}");
+					this->backup = "{}";
+					return this->backup.toString();
 				}
-				
-				string builder = strdup("{");
-				
-				int sizeCounter = this->size();
-				typename std::map<K, V>::const_iterator it;
+
+				String startHashMap = "{";
+				String commaAndSpace = ", ";
+				String colonAndSpace = ": ";
+				String endString = "}";
+				String totalString;
+
+				typename std::map<K, V>::iterator it;
 				for (it = this->original.begin(); it != this->original.end(); ++it) {
-					sizeCounter--;
-					
-					if (instanceof<Object>(it->first) && instanceof<Object>(it->second)) {
-						string key = ((Object *) &it->first )->toString();
-						string value = ((Object *) &it->second )->toString();
-						string addCharacter = (string) "";
-						if (sizeCounter > 0) {
-							addCharacter = (string) ", ";
-						}
-						string holder = builder;
-						asprintf(&builder, "%s%s=%s%s\0", builder, key, value, addCharacter);
-						free(holder);
+					if (instanceof<String>(it->first)) {
+						totalString = String("\"") + it->first.toString() + String("\"");
+					} else {
+						totalString = it->first.toString();
 					}
+					totalString += colonAndSpace;
+					if (instanceof<String>(it->second)) {
+						totalString += String("\"") + it->second.toString() + String("\"");
+					} else {
+						totalString += it->second.toString();
+					}
+					totalString += commaAndSpace;
+					startHashMap += totalString;
 				}
-				
-				string holder = builder;
-				asprintf(&builder, "%s%c\0", builder, '}');
-				free(holder);
-				return builder;
+
+				startHashMap = startHashMap.subString(0, startHashMap.getSize() - 3);
+				startHashMap += endString;
+				this->backup = startHashMap;
+				return this->backup.toString();
 			}
 		};
 		
 	}
 }
 
-#endif//NATIVE_JAVA_UTIL_HASH_MAP_HPP
+#endif  // JAVA_UTIL_HASH_MAP_HPP_

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_NET_URL_ENCODER_HPP
-#define NATIVE_JAVA_NET_URL_ENCODER_HPP
+#ifndef JAVA_NET_URL_ENCODER_HPP_
+#define JAVA_NET_URL_ENCODER_HPP_
 
 #include "../../lang/String/String.hpp"
 
@@ -33,12 +33,33 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Net {
-        class UrlEncoder : public virtual Object {
+        class URLEncoder : public virtual Object {
         public:
-            static String encode(String s);
-            static String encode(String s, String enc);
-        };
-    }
-}
+            /**
+             * Translates a string into x-www-form-urlencoded format.
+             * This method uses the platform's default encoding as the encoding scheme
+             * to obtain the bytes for unsafe characters.
+             * The platform's default encoding is UTF-8.
+             *
+             * @param source
+             * @return String
+             */
+            static String encode(const String &source);
 
-#endif
+            /**
+             * Translates a string into application/x-www-form-urlencoded format using
+             * a specific encoding scheme.
+             * This method uses the supplied encoding scheme to obtain the bytes
+             * for unsafe characters.
+             *
+             * @param source
+             * @param encoding
+             * @return String
+             * @throw UnsupportedEncodingException - If the named encoding is not supported.
+             */
+            static String encode(const String &source, const String &encoding);
+        };  // class URLEncoder
+    }  // namespace Net
+}  // namespace Java
+
+#endif  // JAVA_NET_URL_ENCODER_HPP_

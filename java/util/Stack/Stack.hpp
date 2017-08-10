@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,11 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_STACK_LIST_HPP
-#define NATIVE_JAVA_STACK_LIST_HPP
+#ifndef JAVA_STACK_LIST_HPP_
+#define JAVA_STACK_LIST_HPP_
 
 #include "../Vector/Vector.hpp"
+#include "../../io/IOException/IOException.hpp"
+#include "../EmptyStackException/EmptyStackException.hpp"
 
+using namespace Java::Util;
 
 namespace Java {
     namespace Util {
@@ -53,11 +56,12 @@ namespace Java {
              * Stack peek - return the top element
              *
              * @return E
+             * @throw EmptyStackException
              */
             E peek() {
                 int len = this->size();
                 if (len == 0) {
-                    throw std::invalid_argument("index is out of range");
+                    throw EmptyStackException();
                 }
                 return this->elementAt(len - 1);
             }
@@ -66,6 +70,7 @@ namespace Java {
              * Stack pop - return the top element and remove it
              *
              * @return E
+             * @throw EmptyStackException
              */
             E pop() {
                 int len = this->size();

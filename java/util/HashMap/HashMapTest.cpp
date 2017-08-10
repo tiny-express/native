@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,11 +25,12 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "../../Lang.hpp"
 #include "HashMap.hpp"
+#include "../ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Util;
@@ -411,26 +412,32 @@ TEST (JavaUtil, HashMapToString) {
 	hashMap.put("key16", "value16");
 	hashMap.put("key02", "value02");
 	
-	string expectedResult = (string) "{key02=value02, key1=value1, key16=value16}";
+	string expectedResult = (string) "{\"key02\": \"value02\", \"key1\": \"value1\", \"key16\": \"value16\"}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
-	
+
 	// Given another hash map type to test
 	HashMap<String, Integer> anotherHashMap;
 	anotherHashMap.put("some key", 12313);
 	anotherHashMap.put("anotherKey", 76767);
 	
-	expectedResult = (string) "{anotherKey=76767, some key=12313}";
+	expectedResult = (string) "{\"anotherKey\": 76767, \"some key\": 12313}";
 	result = anotherHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
 	
 	// Given empty hash map to test default toString()
 	HashMap<String, Float> emptyHashMap;
-	
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-	free(result);
+
+    ArrayList<Integer> validArrayListInteger1 = {1, 2, 3, 4, 5};
+	ArrayList<Integer> validArrayListInteger2 = {100, 100, 100, 100, 1};
+	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
+	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
+	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
+	expectedResult = (string) "{\"ArrayList1\": [1, 2, 3, 4, 5], \"ArrayList2\": [100, 100, 100, 100, 1]}";
+	result = arrayListInHashMap.toString();
+	ASSERT_STR(expectedResult, result);
 }
+

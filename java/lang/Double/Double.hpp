@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_DOUBLE_HPP
-#define NATIVE_JAVA_LANG_DOUBLE_HPP
+#ifndef JAVA_LANG_DOUBLE_HPP_
+#define JAVA_LANG_DOUBLE_HPP_
 
 #include "../Number/Number.hpp"
 
@@ -91,9 +91,87 @@ namespace Java {
 		class Double : public Number {
 		private:
 			double original;
-            string string_original;
+            string originalString;
 
-		public:
+        public:
+            /**
+             * A constant holding the smallest positive normal value of type double, 2^-1022.
+             */
+            static constexpr double MIN_NORMAL = 2.2250738585072014E-308;
+
+            /**
+             * The number of logical bits in the significand of a double number,
+             * including the implicit bit.
+             */
+            static const int SIGNIFICAND_WIDTH = 53;
+
+            /**
+             * Maximum exponent a finite double number may have.
+             */
+            static const int MAX_EXPONENT = 1023;
+
+            /**
+             * Minimum exponent a normalized double number may have.
+             */
+            static const int MIN_EXPONENT = -1022;
+
+            /**
+             * The exponent the smallest positive double subnormal value would have
+             * if it could be normalized.
+             */
+            static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
+
+            /**
+             * Bias used in representing a double exponent.
+             */
+            static const int EXP_BIAS = 1023;
+
+            /**
+             * Bit mask to isolate the sign bit of a double.
+             */
+            static const long SIGN_BIT_MASK = 0x8000000000000000L;
+
+            /**
+             * Bit mask to isolate the exponent field of a double.
+             */
+            static const long EXP_BIT_MASK = 0x7FF0000000000000L;
+
+            /**
+             * Bit mask to isolate the significand field of a double.
+             */
+            static const long    SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+
+            /**
+             * A constant holding the positive infinity of type
+             */
+            static constexpr double POSITIVE_INFINITY = INFINITY; // inf
+
+            /**
+             * A constant holding the negative infinity of type
+             */
+            static constexpr double NEGATIVE_INFINITY = -INFINITY; // -inf
+
+            /**
+             * A constant holding a Not-a-Number (NaN) value of type
+             */
+            static constexpr double NOT_A_NUMBER_DOUBLE = NAN; // -nan
+
+            /**
+             * A constant holding the largest positive finite value of type
+             */
+            static constexpr double MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.797693134862316e+308
+
+            /**
+             * A constant holding the smallest positive normal value of type
+             */
+            static constexpr double MIN_NORMAL_DOUBLE = 0x1.0p-1022; // 2.225073858507201e-308
+
+            /**
+             * A constant holding the smallest positive nonzero value of type
+             */
+            static constexpr double MIN_VALUE = 0x0.0000000000001P-1022; // 4.940656458412465e-324
+
+        public:
             /**
              * Double initialization
              *
@@ -567,4 +645,4 @@ namespace Java {
         };
 	}
 }
-#endif//NATIVE_JAVA_LANG_DOUBLE_HPP
+#endif  // JAVA_LANG_DOUBLE_HPP_

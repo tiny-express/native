@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -47,23 +47,23 @@ URL::URL(const URL &target) {
 URL::URL(String spec) {
 	String url = spec.toString();
 
-    string _protocol = http_protocol(url.toString());
-	this->protocol = string_default(_protocol);
-    free(_protocol);
-
-    string _host = http_hostname(url.toString());
-	this->host = string_default(_host);
-    free(_host);
-
-	this->port = number_default(url_port(url.toString()));
-
-    string _query = http_query(url.toString());
-	this->query = string_default(_query);
-    free(_query);
-
-    string _path = http_path(url.toString());
-	this->path = string_default(_path);
-    free(_path);
+//    string _protocol = http_protocol(url.toString());
+//	this->protocol = string_default(_protocol);
+//    free(_protocol);
+//
+//    string _host = http_hostname(url.toString());
+//	this->host = string_default(_host);
+//    free(_host);
+//
+//	this->port = number_default(url_port(url.toString()));
+//
+//    string _query = http_query(url.toString());
+//	this->query = string_default(_query);
+//    free(_query);
+//
+//    string _path = http_path(url.toString());
+//	this->path = string_default(_path);
+//    free(_path);
 }
 
 URL::~URL() {

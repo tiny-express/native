@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_SHORT_HPP
-#define NATIVE_JAVA_LANG_SHORT_HPP
+#ifndef JAVA_LANG_SHORT_SHORT_HPP_
+#define JAVA_LANG_SHORT_SHORT_HPP_
 
 #include "../Number/Number.hpp"
 
@@ -34,7 +34,7 @@ namespace Java {
 		class Short : public virtual Number {
 		private:
 			short original;
-			string string_original;
+			string originalString;
 
 		public:
 			Short();
@@ -73,8 +73,14 @@ namespace Java {
 			void operator*=(const Short &target);
 			void operator/=(const Short &target);
 			void operator%=(const Short &target);
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const Short &target) {
+				os << target.original;
+				return os;
+			}
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_SHORT_HPP
+#endif  // JAVA_LANG_SHORT_SHORT_HPP_

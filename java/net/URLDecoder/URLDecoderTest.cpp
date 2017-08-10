@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,17 +25,31 @@
  */
 
 extern "C" {
-#include "../../../unit_test.h"
+#include "../../../kernel/test.h"
 }
 
 #include "URLDecoder.hpp"
+#include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNet, URLDecodeString) {
-//    String target = "Qu%c3%a1n+%c4%83n";
-//    String result = URLDecoder::decode(target);
-//    string expect = "Quán ăn";
-//    ASSERT_STR(expect, result.toString());
+TEST(JavaNet, URLDecoderDecode) {
+    String target = "Qu%c3%a1n+%c4%83n";
+    String result = URLDecoder::decode(target);
+    String expect = u8"Quán ăn";
+    ASSERT_STR(expect.toString(), result.toString());
+}
+
+TEST(JavaNet, URLDecoderDecodeUsingSpecificEncodingScheme) {
+    String target = "Qu%c3%a1n+%c4%83n";
+    String result = URLDecoder::decode(target, "UTF-8");
+    String expect = u8"Quán ăn";
+    ASSERT_STR(expect.toString(), result.toString());
+
+    try {
+        URLDecoder::decode(target, "UTF-0");
+    } catch (UnsupportedEncodingException &ex) {
+        ASSERT_STR("UTF-0", ex.getMessage().toString());
+    }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_FLOAT_HPP
-#define NATIVE_JAVA_LANG_FLOAT_HPP
+#ifndef JAVA_LANG_FLOAT_HPP_
+#define JAVA_LANG_FLOAT_HPP_
 
 #include "../Number/Number.hpp"
 
@@ -73,7 +73,90 @@ namespace Java {
 		class Float : public virtual Number {
 		private:
 			float original;
-			string string_original;
+			string originalString;
+
+		public:
+			/**
+ 			* A constant holding the smallest positive normal value of type float, 2-126.
+ 			*/
+			static constexpr float MIN_NORMAL = 1.17549435E-38f;
+
+			/**
+			 * The number of logical bits in the significand of a float number,
+			 * including the implicit bit.
+			 */
+			static constexpr int SIGNIFICAND_WIDTH = 24;
+
+			/**
+			 * Maximum exponent a finite float number may have.
+			 */
+			static const int MAX_EXPONENT = 127;
+
+			/**
+			 * Minimum exponent a normalized float number may have.
+			 */
+			static const int MIN_EXPONENT = -126;
+
+			/**
+			 * The exponent the smallest positive float subnormal value would have
+			 * if it could be normalized.
+			 */
+			static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
+
+			/**
+			 * Bias used in representing a float exponent.
+			 */
+			static const int EXP_BIAS = 127;
+
+			/**
+			 * Bit mask to isolate the sign bit of a float.
+			 */
+			static const int SIGN_BIT_MASK = 0x80000000;
+
+			/**
+			 * Bit mask to isolate the exponent field of a float.
+			 */
+			static const int EXP_BIT_MASK = 0x7F800000;
+
+			/**
+			 * Bit mask to isolate the significand field of a float.
+			 */
+			static const int SIGNIF_BIT_MASK = 0x007FFFFF;
+
+            /**
+             * A constant holding the positive infinity of type float.
+             */
+            static constexpr float POSITIVE_INFINITY = INFINITY;
+
+            /**
+            * A constant holding the negative infinity of type float.
+            */
+            static constexpr float NEGATIVE_INFINITY = -INFINITY;
+
+            /**
+             * A constant holding a Not-a-Number (NaN) value of type float.
+             */
+            static constexpr float NaN = NAN;
+
+            /**
+             * A constant holding the largest positive finite value of type float, (2-2-23)·2127. 
+             */
+            static constexpr float MAX_VALUE = 0x1.fffffeP+127f; // 3.4028235e+38f
+
+            /**
+             * A constant holding the smallest positive nonzero value of type float, 2^-149. It is equal to the hexadecimal floating-point literal 0x0.000002P-126f and also equal to Float.intBitsToFloat(0x1).
+             */
+            static constexpr float MIN_VALUE = 0x0.000002P-126f; // 1.4e-45f
+
+            /**
+             * The number of bits used to represent a float value.
+             */
+            static const int SIZE = 32;
+
+            /**
+             * The number of bytes used to represent a float value.
+             */
+            static constexpr int BYTES = SIZE / 8;
 
 		public:
 			/**
@@ -546,9 +629,8 @@ namespace Java {
             * @return a {Float} instance representing {d}.
             */
             static Float valueOf(float floatInput);
-
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_LANG_FLOAT_HPP
+#endif  // JAVA_LANG_FLOAT_HPP_

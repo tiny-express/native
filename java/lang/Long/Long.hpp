@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_LONG_HPP
-#define NATIVE_JAVA_LANG_LONG_HPP
+#ifndef JAVA_LANG_LONG_HPP_
+#define JAVA_LANG_LONG_HPP_
 
 #include "../Number/Number.hpp"
 #include "../String/String.hpp"
@@ -37,23 +37,23 @@ namespace Java {
 
 		private:
 			long original;
-            string string_original;
+            string originalString;
 
 		public:
 			/**
 			 * A constant holding the maximum value a long can have, 2^63-1.
 			 */
-			static long	MAX_VALUE;
+			static const long MAX_VALUE = 0x7fffffffffffffffL;;
 
 			/**
 			 * A constant holding the minimum value a long can have, -2^63.
 			 */
-			static long	MIN_VALUE;
+			static const long MIN_VALUE = 0x8000000000000000L;;
 
 			/**
 			 * The number of bits used to represent a long value in two's complement binary form.
 			 */
-			static int	SIZE;
+			static const int SIZE = 64;
 
 		public:
 			/**
@@ -521,8 +521,14 @@ namespace Java {
 			 * @param target
 			 */
 			void operator%=(const Long &target);
+
+		public:
+			friend std::ostream &operator<<(std::ostream &os, const Long &target) {
+				os << target.original;
+				return os;
+			}
 		};
 	}
 }
 
-#endif//NATIVE_JAVA_LANG__HPP
+#endif  // JAVA_LANG__HPP_

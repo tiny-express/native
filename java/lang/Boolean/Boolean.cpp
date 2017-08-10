@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,7 +34,7 @@
  */
 Boolean::Boolean(const boolean &target) {
     this->original = target;
-    this->string_original = string_from_boolean(this->original);
+    this->originalString = string_from_boolean(this->original);
 }
 
 /**
@@ -52,15 +52,15 @@ Boolean::Boolean(const_string target) {
     } else {
         this->original = false;
     }
-    this->string_original = string_from_boolean(this->original);
+    this->originalString = string_from_boolean(this->original);
 }
 
 /**
  * Boolean Destructor
  */
 Boolean::~Boolean() {
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
 }
 
@@ -146,7 +146,7 @@ boolean Boolean::parseBoolean(const_string target) {
  * @return string
  */
 string Boolean::toString() const {
-    return this->string_original;
+    return this->originalString;
 }
 
 /**
@@ -191,8 +191,8 @@ boolean Boolean::valueOf(const_string target) {
  */
 Boolean Boolean::operator=(const Boolean &target) {
     this->original = target.original;
-    if (this->string_original != NULL) {
-        free(this->string_original);
+    if (this->originalString != NULL) {
+        free(this->originalString);
     }
-    this->string_original = string_from_boolean(this->original);
+    this->originalString = string_from_boolean(this->original);
 }
