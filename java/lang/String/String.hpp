@@ -922,21 +922,111 @@ namespace Java {
 			}
 
 		public:
+			/**
+			 * Determine if two String is equal
+			 *
+			 * @param target
+			 * @return true if this String is equal to target; false otherwise
+			 */
 			boolean operator==(const String &target) const;
+
+            /**
+             * Determine if two String is not equal
+             *
+             * @param target
+             * @return true if this String is different from target; false otherwise
+             */
 			boolean operator!=(const String &target) const;
+
+            /**
+             * Determine if this String is smaller than another String
+             *
+             * @param target
+             * @return true if this String is smaller than target; false otherwise
+             */
 			boolean operator<(const String &target) const;
+
+            /**
+             * Determine if this String is greater than another String
+             *
+             * @param target
+             * @return true if this String is greater than target; false otherwise
+             */
 			boolean operator>(const String &target) const;
+
+            /**
+             * Determine if this String is smaller than or equal to another String
+             *
+             * @param target
+             * @return true if this String is smaller than or equal to target; false otherwise
+             */
 			boolean operator<=(const String &target) const;
+
+            /**
+             * Determine if this String is greater than or equal to another String
+             *
+             * @param target
+             * @return true if this String is greater than or equal to target; false otherwise
+             */
 			boolean operator>=(const String &target) const;
+
+            /**
+             * Add this String with string
+             *
+             * @param target
+             * @return a String contain value of this String and target string
+             */
 			String operator+(const string &target);
+
+            /**
+             * Add two String
+             *
+             * @param target
+             * @return a String contain value of this String and target String
+             */
 			String operator+(const String &target);
-			String operator=(const String &target);
-			String operator+=(const String &target);
-			String operator+=(const char &target);
-			String operator+=(const_string target);
+
+            /**
+             * Assign value from target to this String
+             *
+             * @param target
+             * @return a reference to this String
+             */
+			String &operator=(const String &target);
+
+            /**
+             * Add target String to this String and assign value to this String
+             *
+             * @param target
+             * @return a reference to this String
+             */
+			String &operator+=(const String &target);
+
+            /**
+             * Add target char to this String and assign value to this String
+             *
+             * @param target
+             * @return a reference to this String
+             */
+			String &operator+=(const char &target);
+
+            /**
+             * Add target string to this String and assign value to this String
+             *
+             * @param target
+             * @return a reference to this String
+             */
+			String &operator+=(const_string target);
 
 
 		public:
+            /**
+             * Output Stream operator
+             *
+             * @param os
+             * @param target
+             * @return std::ostream
+             */
 			friend std::ostream &operator<<(std::ostream &os, const String &target) {
 				os << target.original;
 				return os;

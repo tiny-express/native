@@ -446,21 +446,21 @@ String String::operator+(const String &target) {
 	return result;
 }
 
-String String::operator+=(const String &target) {
+String &String::operator+=(const String &target) {
 	string result = string_concat(this->original, target.original);
 	*this = result;
 	free(result);
 	return *this;
 }
 
-String String::operator+=(const char &target) {
+String &String::operator+=(const char &target) {
 	string pointerHolder = this->original;
 	string_append(&this->original, target);
 	free(pointerHolder);
 	return *this;
 }
 
-String String::operator+=(const_string target) {
+String &String::operator+=(const_string target) {
 	String appendString = target;
 	*this += appendString;
 	return *this;
@@ -473,7 +473,7 @@ boolean String::operator==(const String &target) const {
 	return false;
 }
 
-String String::operator=(const String &target) {
+String &String::operator=(const String &target) {
 	if (this->original != NULL) {
 		free(this->original);
 	}
