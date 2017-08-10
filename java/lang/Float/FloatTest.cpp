@@ -84,24 +84,24 @@ TEST(JavaLang, FloatArithmeticOperator) {
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
-    // Test Operator / . POSITIVE_INFINITY_FLOAT
+    // Test Operator / . POSITIVE_INFINITY
     variableArithmeticOperator1 = 26.04;
     variableArithmeticOperator2 = 0;
-    expectedResultOperator = POSITIVE_INFINITY_FLOAT;
+    expectedResultOperator = POSITIVE_INFINITY;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
-    // Test Operator / . NEGATIVE_INFINITY_FLOAT
+    // Test Operator / . NEGATIVE_INFINITY
     variableArithmeticOperator1 = -26.04;
     variableArithmeticOperator2 = 0;
-    expectedResultOperator = NEGATIVE_INFINITY_FLOAT;
+    expectedResultOperator = NEGATIVE_INFINITY;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
-    // Test Operator / . NaN_NUMBER_FLOAT
+    // Test Operator / . NaN_NUMBER
     variableArithmeticOperator1 = 0;
     variableArithmeticOperator2 = 0;
-    expectedResultOperator = NaN_NUMBER_FLOAT;
+    expectedResultOperator = NaN_NUMBER;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
     ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
@@ -271,38 +271,38 @@ TEST(JavaLang, FloatCharValue) {
     char expectedResultCharValue;
     char actualResultCharValue;
 
-    // Test POSITIVE_INFINITY_FLOAT
-    variableTestCharValue = POSITIVE_INFINITY_FLOAT;
+    // Test POSITIVE_INFINITY
+    variableTestCharValue = POSITIVE_INFINITY;
     expectedResultCharValue = 'i';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-    // Test NEGATIVE_INFINITY_FLOAT
-    variableTestCharValue = NEGATIVE_INFINITY_FLOAT;
+    // Test NEGATIVE_INFINITY
+    variableTestCharValue = NEGATIVE_INFINITY;
     expectedResultCharValue = '-';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-//    // Test NaN_NUMBER_FLOAT
-//    variableTestCharValue = NaN_NUMBER_FLOAT;
+//    // Test NaN_NUMBER
+//    variableTestCharValue = NaN_NUMBER;
 //    expectedResultCharValue = 45;  // 110 in MacOS
 //    actualResultCharValue = variableTestCharValue.charValue();
 //    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-    // Test MAX_VALUE_FLOAT
-    variableTestCharValue = MAX_VALUE_FLOAT;
+    // Test MAX_VALUE
+    variableTestCharValue = MAX_VALUE;
     expectedResultCharValue = '3';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-    // Test MIN_NORMAL_FLOAT
-    variableTestCharValue = MIN_NORMAL_FLOAT;
+    // Test MIN_NORMAL
+    variableTestCharValue = MIN_NORMAL;
     expectedResultCharValue = '1';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
 
-    // Test MIN_VALUE_FLOAT
-    variableTestCharValue = MIN_VALUE_FLOAT;
+    // Test MIN_VALUE
+    variableTestCharValue = MIN_VALUE;
     expectedResultCharValue = '1';
     actualResultCharValue = variableTestCharValue.charValue();
     ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
@@ -333,39 +333,39 @@ TEST(JavaLang, FloatCharValue) {
 //    string expectedResultStringValue;
 //    string actualResultStringValue;
 //
-//    // Test POSITIVE_INFINITY_FLOAT
-//    variableTestStringValue = POSITIVE_INFINITY_FLOAT;
+//    // Test POSITIVE_INFINITY
+//    variableTestStringValue = POSITIVE_INFINITY;
 //    expectedResultStringValue = (string) "inf";
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //
-//    // Test NEGATIVE_INFINITY_FLOAT
-//    variableTestStringValue = NEGATIVE_INFINITY_FLOAT;
+//    // Test NEGATIVE_INFINITY
+//    variableTestStringValue = NEGATIVE_INFINITY;
 //    expectedResultStringValue = (string) "-inf";
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //
-////    // Test NaN_NUMBER_FLOAT
-////    variableTestStringValue = NaN_NUMBER_FLOAT;
+////    // Test NaN_NUMBER
+////    variableTestStringValue = NaN_NUMBER;
 ////    expectedResultStringValue = "-nan"; // "nan" in MacOS
 ////    actualResultStringValue = variableTestStringValue.stringValue();
 ////    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 ////    free(actualResultStringValue);
 //
-//    // Test MAX_VALUE_FLOAT
-//    variableTestStringValue = MAX_VALUE_FLOAT;
+//    // Test MAX_VALUE
+//    variableTestStringValue = MAX_VALUE;
 //    expectedResultStringValue = (string) "1.797693134862316e+308";
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //
-//    // Test MIN_NORMAL_FLOAT
-//    variableTestStringValue = MIN_NORMAL_FLOAT;
+//    // Test MIN_NORMAL
+//    variableTestStringValue = MIN_NORMAL;
 //    expectedResultStringValue = (string) "4.940656458412465e-324";
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //
-//    // Test MIN_VALUE_FLOAT
-//    variableTestStringValue = MIN_VALUE_FLOAT;
+//    // Test MIN_VALUE
+//    variableTestStringValue = MIN_VALUE;
 //    expectedResultStringValue = (string) "2.225073858507201e-308";
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
@@ -377,38 +377,38 @@ TEST(JavaLang, FloatShortValue) {
     short expectedResultShortValue;
     short actualResultShortValue;
 
-    // Test POSITIVE_INFINITY_FLOAT
-    variableTestShortValue = POSITIVE_INFINITY_FLOAT;
+    // Test POSITIVE_INFINITY
+    variableTestShortValue = POSITIVE_INFINITY;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test NEGATIVE_INFINITY_FLOAT
-    variableTestShortValue = NEGATIVE_INFINITY_FLOAT;
+    // Test NEGATIVE_INFINITY
+    variableTestShortValue = NEGATIVE_INFINITY;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test NaN_NUMBER_FLOAT
-    variableTestShortValue = NaN_NUMBER_FLOAT;
+    // Test NaN_NUMBER
+    variableTestShortValue = NaN_NUMBER;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MAX_VALUE_FLOAT
-    variableTestShortValue = MAX_VALUE_FLOAT;
+    // Test MAX_VALUE
+    variableTestShortValue = MAX_VALUE;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MIN_NORMAL_FLOAT
-    variableTestShortValue = MIN_NORMAL_FLOAT;
+    // Test MIN_NORMAL
+    variableTestShortValue = MIN_NORMAL;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
 
-    // Test MIN_VALUE_FLOAT
-    variableTestShortValue = MIN_VALUE_FLOAT;
+    // Test MIN_VALUE
+    variableTestShortValue = MIN_VALUE;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
     ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
@@ -439,37 +439,37 @@ TEST(JavaLang, FloatIntValue) {
     int actualResultIntValue;
 
     // Test POSITIVE_INFINITY_DOUBLE
-    variableTestIntValue = POSITIVE_INFINITY_FLOAT;
+    variableTestIntValue = POSITIVE_INFINITY;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test NEGATIVE_INFINITY_FLOAT
-    variableTestIntValue = NEGATIVE_INFINITY_FLOAT;
+    // Test NEGATIVE_INFINITY
+    variableTestIntValue = NEGATIVE_INFINITY;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test NaN_NUMBER_FLOAT
-    variableTestIntValue = NaN_NUMBER_FLOAT;
+    // Test NaN_NUMBER
+    variableTestIntValue = NaN_NUMBER;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test MAX_VALUE_FLOAT
-    variableTestIntValue = MAX_VALUE_FLOAT;
+    // Test MAX_VALUE
+    variableTestIntValue = MAX_VALUE;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test MIN_NORMAL_FLOAT
-    variableTestIntValue = MIN_NORMAL_FLOAT;
+    // Test MIN_NORMAL
+    variableTestIntValue = MIN_NORMAL;
     expectedResultIntValue = 0;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
 
-    // Test MIN_VALUE_FLOAT
-    variableTestIntValue = MIN_VALUE_FLOAT;
+    // Test MIN_VALUE
+    variableTestIntValue = MIN_VALUE;
     expectedResultIntValue = 0;
     actualResultIntValue = variableTestIntValue.intValue();
     ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
@@ -500,37 +500,37 @@ TEST(JavaLang, FloatLongValue) {
     long actualResultLongValue;
 
     // Test POSITIVE_INFINITY_DOUBLE
-    variableTestLongValue = POSITIVE_INFINITY_FLOAT;
+    variableTestLongValue = POSITIVE_INFINITY;
     expectedResultLongValue = -9223372036854775808;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test NEGATIVE_INFINITY_FLOAT
-    variableTestLongValue = NEGATIVE_INFINITY_FLOAT;
+    // Test NEGATIVE_INFINITY
+    variableTestLongValue = NEGATIVE_INFINITY;
     expectedResultLongValue = -9223372036854775808;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test NaN_NUMBER_FLOAT
-    variableTestLongValue = NaN_NUMBER_FLOAT;
+    // Test NaN_NUMBER
+    variableTestLongValue = NaN_NUMBER;
     expectedResultLongValue = -9223372036854775808;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test MAX_VALUE_FLOAT
-    variableTestLongValue = MAX_VALUE_FLOAT;
+    // Test MAX_VALUE
+    variableTestLongValue = MAX_VALUE;
     expectedResultLongValue = -9223372036854775808;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test MIN_NORMAL_FLOAT
-    variableTestLongValue = MIN_NORMAL_FLOAT;
+    // Test MIN_NORMAL
+    variableTestLongValue = MIN_NORMAL;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
-    // Test MIN_VALUE_FLOAT
-    variableTestLongValue = MIN_VALUE_FLOAT;
+    // Test MIN_VALUE
+    variableTestLongValue = MIN_VALUE;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);

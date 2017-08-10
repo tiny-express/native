@@ -32,38 +32,38 @@
 /**
  * A constant holding the positive infinity of type
  */
-static float POSITIVE_INFINITY_FLOAT = float(1.0 / 0.0); // inf
+static float POSITIVE_INFINITY = float(1.0 / 0.0); // inf
 
 /**
  * A constant holding the negative infinity of type
  */
-static float NEGATIVE_INFINITY_FLOAT = float(-1.0 / 0.0); // -inf
+static float NEGATIVE_INFINITY = float(-1.0 / 0.0); // -inf
 
 /**
  * A constant holding a Not-a-Number (NaN) value of type
  */
-static float NaN_NUMBER_FLOAT = float(0.0 / 0.0); // -nan
+static float NaN_NUMBER = float(0.0 / 0.0); // -nan
 
 /**
  * A constant holding the largest positive finite value of type
  */
-static float MAX_VALUE_FLOAT = std::numeric_limits<float>::max(); // 3.403e+38
+static float MAX_VALUE = std::numeric_limits<float>::max(); // 3.403e+38
 
 /**
  * The smallest subnormal value has sign bit = 0, exponent = 0
  * and only the least significant bit of the fraction is 1
  */
-static float MIN_NORMAL_FLOAT = std::numeric_limits<float>::denorm_min(); // 1.401e-45
+static float MIN_NORMAL = std::numeric_limits<float>::denorm_min(); // 1.401e-45
 
 /**
  * A constant holding the smallest value of type
  */
-static float MIN_VALUE_FLOAT = std::numeric_limits<float>::min(); // 1.175e-38
+static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.175e-38
 
 /**
  * Minimum exponent a normalized double number may have
  */
-static int	MIN_EXPONENT_FLOAT	= -126;
+static int	MIN_EXPONENT	= -126;
 
 namespace Java {
 	namespace Lang {
