@@ -1200,7 +1200,7 @@ TEST (JavaLang, StringBufferToString) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
     string expectSubStringResult = (string)("This is a StringBuffer");
-    String result = stringBuffer.toString();
+    String result = stringBuffer.toStringObject();
     ASSERT_STR(expectSubStringResult, result.toString());
 }
 
