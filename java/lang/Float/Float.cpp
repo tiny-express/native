@@ -147,7 +147,7 @@ Float Float::parseFloat(String target) {
  * @param target
  * @return Float
  */
-Float Float::operator=(const Float &target) {
+Float &Float::operator=(const Float &target) {
 	this->original = target.original;
 	free(this->originalString);
 	this->originalString = string_from_float(this->original);

@@ -318,7 +318,7 @@ namespace Java {
              * @param target
              * @return Double
              */
-            Double operator=(const Double &target);
+            Double &operator=(const Double &target);
 
             /**
              * Add AND assignment operator,
@@ -379,48 +379,48 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const;
+            short shortValue() const override;
 
             /**
              * Double value in Double
              *
              * @return int
              */
-            int intValue() const;
+            int intValue() const override;
 
             /**
              * Double value in Long
              *
              * @return long
              */
-            long longValue() const;
+            long longValue() const override;
 
             /**
              * Double value in float
              *
              * @return float
              */
-            float floatValue() const;
+            float floatValue() const override;
 
             /**
              * Double value in double
              *
              * @return double
              */
-            double doubleValue() const;
+            double doubleValue() const override;
 
             /**
              * Double to String
              *
              * @return String
              */
-            string toString() const;
+            string toString() const override;
 
             /**
              * Returns a string representation of the {double}
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param   d   the {double} to be converted.
+             * @param d the {double} to be converted.
              * @return a string representation of the argument.
              */
             static String toString(double d);

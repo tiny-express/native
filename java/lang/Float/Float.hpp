@@ -146,18 +146,18 @@ namespace Java {
 		
 		public:
 			char charValue() const;
-			short shortValue() const;
-			int intValue() const;
-			long longValue() const;
-			float floatValue() const;
-			double doubleValue() const;
-			string toString() const;
+			short shortValue() const override;
+			int intValue() const override;
+			long longValue() const override;
+			float floatValue() const override;
+			double doubleValue() const override;
+			string toString() const override;
 			
 			static Float parseFloat(String target);
             static boolean isNaN(float v);
-		
+
 		public:
-			Float operator=(const Float &target);
+			Float &operator=(const Float &target);
 			Float operator+(const Float &target);
 			Float operator-(const Float &target);
 			Float operator/(const Float &target);
