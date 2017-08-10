@@ -104,6 +104,13 @@ TEST (JavaLang, StringBufferOperater) {
     ASSERT_EQUAL(other.capacity(), stringBuffer.capacity());
     ASSERT_EQUAL(other.length(), stringBuffer.length());
     ASSERT_STR(other.getValue(), stringBuffer.getValue());
+
+    StringBufferUnSafe otherUnSafe = StringBufferUnSafe("A string to test");
+    StringBufferUnSafe stringBufferUnSafe;
+    stringBufferUnSafe = otherUnSafe;
+    ASSERT_EQUAL(otherUnSafe.capacity(), stringBufferUnSafe.capacity());
+    ASSERT_EQUAL(otherUnSafe.length(), stringBufferUnSafe.length());
+    ASSERT_STR(otherUnSafe.getValue(), stringBufferUnSafe.getValue());
 }
 
 TEST (JavaLang, StringBufferCapacity) {

@@ -48,7 +48,7 @@ namespace Java {
         {
         private:
             bool original;
-            string string_original;
+            string originalString;
 
         public:
             const static boolean True = true;

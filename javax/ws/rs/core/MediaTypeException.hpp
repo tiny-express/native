@@ -24,19 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "IOException.hpp"
-#include "../../Lang.hpp"
+#ifndef NATIVE_MEDIATYPEEXCEPTION_H
+#define NATIVE_MEDIATYPEEXCEPTION_H
+
+#include "../../../../java/lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 
-IOException::IOException() : Exception::Exception() {
+namespace Javax {
+    namespace Ws  {
+        class MediaTypeException : public Exception {
+        public:
+            MediaTypeException() : Exception() {};
+            MediaTypeException(String message) : Exception(message) {};
+            MediaTypeException(String message, Throwable *cause) : Exception(message, cause) {};
+            MediaTypeException(Throwable *cause) : Exception(cause) {};
+        };
+    }
 }
 
-IOException::IOException(String message) : Exception::Exception(message) {
-}
-
-IOException::IOException(String message, Throwable *cause) : Exception::Exception(message, cause) {
-}
-
-IOException::IOException(Throwable *cause) : Exception::Exception(cause) {
-}
+#endif //NATIVE_MEDIATYPEEXCEPTION_H

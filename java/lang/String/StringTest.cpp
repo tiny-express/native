@@ -31,6 +31,8 @@ extern "C" {
 #include "../String/String.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../StringBuilder/StringBuilder.hpp"
+#include "../StringBuffer/StringBuffer.hpp"
 
 using namespace Java::Lang;
 
@@ -52,6 +54,18 @@ TEST (JavaLang, StringConstructor) {
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
 	ASSERT_STR("Hello world", normalString.toString());
+
+    // Given a StringBuilder for String constructor
+    StringBuilder stringBuilder  = StringBuilder("Hello world");
+    String stringBuilderConstructor = String(stringBuilder);
+    ASSERT_STR("Hello world", stringBuilderConstructor.toString());
+    ASSERT_EQUAL(stringBuilder.length(), stringBuilderConstructor.length());
+
+    // Given a StringBuffer for String constructor
+    StringBuffer stringBuffer  = StringBuffer("Hello world");
+    String stringBufferConstructor = String(stringBuffer);
+    ASSERT_STR("Hello world", stringBufferConstructor.toString());
+    ASSERT_EQUAL(stringBuffer.length(), stringBufferConstructor.length());
 }
 
 TEST (JavaLang, StringDestructor) {
@@ -284,7 +298,7 @@ TEST (JavaLang, StringValueOf) {
 	// Value of boolean
 	boolean isChecked = true;
 	String valueOfBoolean = String::valueOf(isChecked);
-	ASSERT_STR((string) "1", valueOfBoolean.toString());
+	ASSERT_STR((string) "true", valueOfBoolean.toString());
 
 	// Value of single character
 	char givenChar = '\0';
@@ -352,6 +366,24 @@ TEST (JavaLang, StringOperatorPlusStringDataType) {
 	string tiny = (string) " Tiny";
 	String foodTiny = food + tiny;
 	ASSERT_STR("Food Tiny", foodTiny.toString());
+}
+
+TEST (JavaLang, StringOperatorPlusConstantStringDataType) {
+    String input = "Food";
+    String result = input + "tiny";
+    String expected = "Foodtiny";
+    ASSERT_TRUE(expected.equals(result));
+
+    String input1 = "Hello";
+    String result1 = input1 + "";
+    String expected1 = "Hello";
+    ASSERT_TRUE(expected1.equals(result1));
+
+    String input2 = "";
+    String result2 = input2 + "World";
+    String expected2 = "World";
+    ASSERT_TRUE(expected2.equals(result2));
+
 }
 
 TEST (JavaLang, StringOperatorEquals) {
@@ -459,7 +491,6 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-//	expect = (string) "ello w"; // Wrong case
     expect = (string) "ello ";
 	ASSERT_STR(expect, result);
 }

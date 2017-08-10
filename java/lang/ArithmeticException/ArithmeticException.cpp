@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,31 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_NETWORK_H
-#define NATIVE_NETWORK_H
+#include "ArithmeticException.hpp"
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE 1
-#endif
+using namespace Java::Lang;
 
-#define HTTPS "https://"
-#define HTTP "http://"
-#define LOCALHOST "localhost"
-#define HTTP_PORT 80
-#define HTTPS_PORT 443
-#define IS_HTTPS 1
-#define IS_HTTP 2
-#define NOT_URL 0
+ArithmeticException::ArithmeticException() : RuntimeException() {
+}
 
-char *get_ip_address();
-char *http_schema(char *url);
-char *http_hostname(char *url);
-int http_port(char *url);
-char *http_query(char *url);
-char *http_request(char *method, char *url, char **headers, char **body);
-char *http_path(char *url);
-char *http_protocol(char *url);
-int url_port(char *url);
-void send_response(int client_id, char *content);
+ArithmeticException::ArithmeticException(String message) : RuntimeException(message) {
+}
 
-#endif

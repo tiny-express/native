@@ -58,7 +58,7 @@ namespace Java {
 			 * @param element
 			 * @return
 			 */
-			virtual void add(int index, E &element) = 0;
+			virtual void add(int index, E element) = 0;
 
 			/**
 			 * Appends all of the elements in the specified collection to the end of this list,

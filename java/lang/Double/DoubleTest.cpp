@@ -261,6 +261,7 @@ TEST(JavaLang, DoubleToString) {
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
+
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestToString = NaN_NUMBER_DOUBLE;
 //    expectedResultToString = "-nan"; // "nan" in MacOS
@@ -453,6 +454,7 @@ TEST(JavaLang, DoubleShortValue) {
     ASSERT_NOT_EQUAL(expectedResultShortValue , actualResultShortValue);
 }
 
+
 TEST(JavaLang, DoubleIntValue) {
     // Create variable to test
     Double variableTestIntValue;
@@ -522,25 +524,25 @@ TEST(JavaLang, DoubleLongValue) {
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestLongValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = static_cast<long> (-9223372036854775808);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestLongValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = static_cast<long> (-9223372036854775808);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NaN_NUMBER_DOUBLE
     variableTestLongValue = NaN_NUMBER_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = static_cast<long> (-9223372036854775808);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestLongValue = MAX_VALUE_DOUBLE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = static_cast<long> (-9223372036854775808);
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
@@ -635,6 +637,7 @@ TEST(JavaLang, DoubleFloatValue) {
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_FAR(expectedResultFloatValue , actualResultFloatValue);
 }
+
 
 TEST(JavaLang, DoubleDoubleValue) {
     // Create variable to test
@@ -1434,7 +1437,6 @@ TEST(JavaLang , DoubleHashCodeNotInput) {
 }
 
 TEST(JavaLang , DoubleIsFinite) {
-
     ASSERT_TRUE(Double::isFinite(13.02));
     ASSERT_TRUE(Double::isFinite(130.2));
     ASSERT_FALSE(Double::isFinite(POSITIVE_INFINITY_DOUBLE));
@@ -1443,7 +1445,6 @@ TEST(JavaLang , DoubleIsFinite) {
 }
 
 TEST(JavaLang , DoubleIsInfinite) {
-
     ASSERT_TRUE(Double::isInfinite(POSITIVE_INFINITY_DOUBLE));
     ASSERT_TRUE(Double::isInfinite(NEGATIVE_INFINITY_DOUBLE));
     ASSERT_FALSE(Double::isInfinite(13.02));

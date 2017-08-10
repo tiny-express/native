@@ -621,6 +621,7 @@ void StringBufferUnSafe::trimToSize() {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::operator=(const StringBufferUnSafe &other) {
+    free(this->original);
     this->original = (string) calloc((size_t) other.currentCapacity, sizeof(char));
     int index;
     for (index = 0; index < other.currentLength; index++) {

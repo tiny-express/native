@@ -35,7 +35,7 @@ namespace Java {
 		class Short : public virtual Number {
 		private:
 			short original;
-			string string_original;
+			string originalString;
 
 		public:
 			Short();

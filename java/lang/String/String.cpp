@@ -26,6 +26,9 @@
 
 #include "String.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../StringBuilder/StringBuilder.hpp"
+#include "../StringBuffer/StringBuffer.hpp"
+
 
 using namespace Java::Lang;
 
@@ -72,6 +75,16 @@ String::String(const String &target) {
 String::String(const std::string &target) {
 	this->original = (string) strdup(target.c_str());
 	this->size = (int) target.size();
+}
+
+String::String(const StringBuilder &stringBuilder) {
+    this->original = strdup(stringBuilder.toString());
+    this->size = stringBuilder.length();
+}
+
+String::String(const StringBuffer &stringBuffer) {
+    /*this->original = strdup(stringBuffer.getValue());
+    this->size = stringBuffer.length();*/
 }
 
 String::~String() {
@@ -365,11 +378,17 @@ String String::trim() {
 	return result;
 }
 
-String String::valueOf(boolean boolValue) {
-	if (boolValue) {
-		return (string) "1";
+/**
+ * String value of boolean
+ *
+ * @param target
+ * @return String
+ */
+String String::valueOf(boolean target) {
+	if (target) {
+		return (string) "true";
 	}
-	return (string) "0";
+	return (string) "false";
 }
 
 String String::valueOf(char charValue) {
@@ -681,4 +700,6 @@ std::string String::print(const std::string &format, String value) {
         result = std::string(buffer);
     return result;
 }
+
+
 
