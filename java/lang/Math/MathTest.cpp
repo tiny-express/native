@@ -860,7 +860,7 @@ TEST(JavaLang, MathExpm1) {
     // Given a variable equal to E^3
     double eCubed = 3;
     double expectResult = Math::pow(Math::E, 3) - 1;
-//    ASSERT_DBL_NEAR(expectResult, Math::expm1(eCubed));  // TODO(thoangminh): Fix bug here
+//    ASSERT_DBL_NEAR_PRE(expectResult, Math::expm1(eCubed), 13);  // TODO(thoangminh): Fix bug here
 
     // Given a value equal to NAN
     double nan = NAN;
