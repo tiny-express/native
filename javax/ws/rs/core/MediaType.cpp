@@ -47,8 +47,8 @@ String MediaType::TEXT_XML                      = "text/xml";
 String MediaType::WILDCARD                      = "*/*";
 
 MediaType::MediaType() {
-    type = MEDIA_TYPE_WILDCARD;
-    subtype = MEDIA_TYPE_WILDCARD;
+    this->type = MEDIA_TYPE_WILDCARD;
+    this->subtype = MEDIA_TYPE_WILDCARD;
 }
 
 MediaType::MediaType(const String &type, const String &subtype) {
@@ -88,43 +88,43 @@ MediaType::MediaType(const String &type, const String &subtype, const HashMap<St
 }
 
 const HashMap<String, String> &MediaType::getParameters() const {
-    return parameters;
+    return this->parameters;
 };
 
 const String &MediaType::getSubtype() const {
-    return subtype;
+    return this->subtype;
 }
 
 const String &MediaType::getType() const {
-    return type;
+    return this->type;
 }
 
 boolean MediaType::isCompatible(MediaType other) {
 
-    if (!isWildcardType() && !other.isWildcardType() && !type.equals(other.getType())) {
+    if (!this->isWildcardType() && !other.isWildcardType() && !this->type.equals(other.getType())) {
         return false;
     }
 
-    if (isWildcardType() || other.isWildcardSubtype()) {
+    if (this->isWildcardType() || other.isWildcardSubtype()) {
         return true;
     }
 
-    if (type.equals(other.getType()) && subtype.equals(other.getSubtype())) {
+    if (this->type.equals(other.getType()) && this->subtype.equals(other.getSubtype())) {
         return true;
     }
 
     // wildcard with suffix? e.g. application/*+xml
-    if (isWildcardSubtype() || other.isWildcardSubtype()) {
-        int thisPlusIndex = subtype.indexOf('+');
+    if (this->isWildcardSubtype() || other.isWildcardSubtype()) {
+        int thisPlusIndex = this->subtype.indexOf('+');
         int otherPlusIndex = other.getSubtype().indexOf('+');
         if (thisPlusIndex == CHAR_NOT_FOUND && otherPlusIndex == CHAR_NOT_FOUND) {
             return true;
         }
 
         if (thisPlusIndex != CHAR_NOT_FOUND && otherPlusIndex != CHAR_NOT_FOUND) {
-            String subtypeBeforePlus = subtype.subString(0, thisPlusIndex - 1);
+            String subtypeBeforePlus = this->subtype.subString(0, thisPlusIndex - 1);
             String otherSubtypeBeforePlus = ((String) other.getSubtype()).subString(0, otherPlusIndex - 1);
-            String subtypeAfterPlus = subtype.subString(thisPlusIndex + 1);
+            String subtypeAfterPlus = this->subtype.subString(thisPlusIndex + 1);
             String otherSubtypeAfterPlus = ((String) other.getSubtype()).subString(otherPlusIndex + 1);
 
             if (subtypeAfterPlus.equals(otherSubtypeAfterPlus) &&
@@ -141,16 +141,16 @@ boolean MediaType::isCompatible(MediaType other) {
 }
 
 String MediaType::toString() {
-    String result = type + "/" + subtype;
+    String result = this->type + "/" + this->subtype;
     return result;
 }
 
 boolean MediaType::isWildcardSubtype() {
-    return subtype.equals(MEDIA_TYPE_WILDCARD) || subtype.startsWith("*+");
+    return this->subtype.equals(MEDIA_TYPE_WILDCARD) || subtype.startsWith("*+");
 }
 
 boolean MediaType::isWildcardType() {
-    return type.equals(MEDIA_TYPE_WILDCARD);
+    return this->type.equals(MEDIA_TYPE_WILDCARD);
 }
 
 MediaType MediaType::valueOf(String type) {
