@@ -152,16 +152,18 @@ void assert_false(int real, const char *caller, int line);
 void assert_fail(const char *caller, int line);
 #define ASSERT_FAIL() assert_fail(__FILE__, __LINE__)
 
-void assert_dbl_near(double exp, double real, double tol, const char *caller, int line);
-#define ASSERT_DBL_NEAR(exp, real) assert_dbl_near(exp, real, 1e-4, __FILE__, __LINE__)
-#define ASSERT_DBL_NEAR_TOL(exp, real, tol) assert_dbl_near(exp, real, tol, __FILE__, __LINE__)
+void assert_dbl_near(double exp, double real, const char *caller, int line);
+#define ASSERT_DBL_NEAR(exp, real) assert_dbl_near(exp, real, __FILE__, __LINE__)
+//#define ASSERT_DBL_NEAR_TOL(exp, real, tol) assert_dbl_near(exp, real, tol, __FILE__, __LINE__)
 
-void assert_dbl_far(double exp, double real, double tol, const char *caller, int line);
-#define ASSERT_DBL_FAR(exp, real) assert_dbl_far(exp, real, 1e-4, __FILE__, __LINE__)
-#define ASSERT_DBL_FAR_TOL(exp, real, tol) assert_dbl_far(exp, real, tol, __FILE__, __LINE__)
+void assert_dbl_far(double exp, double real, const char *caller, int line);
+#define ASSERT_DBL_FAR(exp, real) assert_dbl_far(exp, real, __FILE__, __LINE__)
 
-void assert_float_near(float exp, float real, float tol, const char *caller, int line);
-#define ASSERT_FLOAT_NEAR(exp, real) assert_dbl_near(exp, real, 1e-4, __FILE__, __LINE__)
+void assert_float_near(float exp, float real, const char *caller, int line);
+#define ASSERT_FLOAT_NEAR(exp, real) assert_float_near(exp, real, __FILE__, __LINE__)
+
+void assert_float_far(float exp, float real, const char *caller, int line);
+#define ASSERT_FLOAT_FAR(exp, real) assert_float_far(exp, real, __FILE__, __LINE__)
 
 
 
@@ -323,8 +325,8 @@ void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const char* ca
     }
 }
 
-void assert_dbl_near(double exp, double real, double tol, const char* caller, int line) {
-    // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 53 - (-1023)
+void assert_dbl_near(double exp, double real, const char* caller, int line) {
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     char* expectedString = (char*) calloc(1079, sizeof(char));
     char* realString = (char*) calloc(1079, sizeof(char));
 
@@ -351,8 +353,8 @@ void assert_dbl_near(double exp, double real, double tol, const char* caller, in
     free(realString);
 }
 
-void assert_dbl_far(double exp, double real, double tol, const char* caller, int line) {
-    // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 53 - (-1023)
+void assert_dbl_far(double exp, double real, const char* caller, int line) {
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     char* expectedString = (char*) calloc(1079, sizeof(char));
     char* realString = (char*) calloc(1079, sizeof(char));
 
@@ -379,10 +381,10 @@ void assert_dbl_far(double exp, double real, double tol, const char* caller, int
     free(realString);
 }
 
-void assert_float_near(float exp, float real, float tol, const char* caller, int line) {
-    // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 53 - (-1023)
-    char* expectedString = (char*) calloc(1079, sizeof(char));
-    char* realString = (char*) calloc(1079, sizeof(char));
+void assert_float_near(float exp, float real, const char* caller, int line) {
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 24 - (-126)
+    char* expectedString = (char*) calloc(153, sizeof(char));
+    char* realString = (char*) calloc(153, sizeof(char));
 
 
     if(exp == 0.0f && exp < 0) {
@@ -400,6 +402,34 @@ void assert_float_near(float exp, float real, float tol, const char* caller, int
     if ((expectedString == NULL && realString != NULL) ||
 	(expectedString != NULL && realString == NULL) ||
 	(expectedString && realString && strcmp(expectedString, realString) != 0)) {
+	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
+    }
+
+    free(expectedString);
+    free(realString);
+}
+
+void assert_float_far(float exp, float real, const char* caller, int line) {
+    // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 24 - (-126)
+    char* expectedString = (char*) calloc(153, sizeof(char));
+    char* realString = (char*) calloc(153, sizeof(char));
+
+
+    if(exp == 0.0f && exp < 0) {
+        sprintf(expectedString, "-%f", exp);
+    } else {
+        sprintf(expectedString, "%f", exp);
+    }
+
+    if(real == -0.0f && real < 0) {
+        sprintf(realString, "-%f", real);
+    } else {
+        sprintf(realString, "%f", real);
+    }
+
+    if ((expectedString == NULL && realString != NULL) ||
+	(expectedString != NULL && realString == NULL) ||
+	(expectedString && realString && strcmp(expectedString, realString) == 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
 
