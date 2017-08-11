@@ -117,6 +117,7 @@ namespace Java {
              * @param byteArray
              * @param charsetName
              */
+            // TODO need CharSet
             // String(Array<byte> byteArray, String charsetName);
 
             /**
@@ -126,6 +127,7 @@ namespace Java {
              * @param byteArray
              * @param charset
              */
+            // TODO need CharSet
             // String(Array<byte> byteArray, Charset charset)
 
             /**
@@ -152,6 +154,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count
              * arguments index characters outside the bounds of the codePoints array
              */
+            // TODO need CharSet
             //String(Array<int> codePoints, int offset, int count);
 
             /**
@@ -164,7 +167,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            //String(Array<byte> &byteArray, int offset, int length);
+            String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -177,6 +180,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
+            // TODO need CharSet
             // String(Array<byte> &byteArray, int offset, int length, Charset charset);
 
             /**
@@ -191,6 +195,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
+            // TODO need CharSet
             //String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
@@ -257,7 +262,8 @@ namespace Java {
              * @param index
              * @return int
              */
-			int codePointAt(int index);
+            // TODO need Character
+			// int codePointAt(int index);
 
             /**
              * Returns the character (Unicode code point) before the specified index.
@@ -265,7 +271,8 @@ namespace Java {
              * @param index
              * @return int
              */
-			int codePointBefore(int index);
+            // TODO need Character
+            // int codePointBefore(int index);
 
             /**
              * Returns the number of Unicode code points
@@ -275,7 +282,8 @@ namespace Java {
              * @param endIndex
              * @return int
              */
-			int codePointCount(int beginIndex, int endIndex);
+            // TODO need Character
+            // int codePointCount(int beginIndex, int endIndex);
 
             /**
              * Clone to new object

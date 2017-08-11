@@ -111,6 +111,31 @@ String::String(Array<char> &charArray, int offset, int count) {
     free(charArrayString);
 }
 
+
+String::String(Array<byte> &byteArray, int offset, int length) {
+    if (offset < 0) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+
+    if (length < 0) {
+        throw StringIndexOutOfBoundsException(length);
+    }
+
+    if (offset > byteArray.length - length) {
+        throw StringIndexOutOfBoundsException(offset + length);
+    }
+
+    string charArrayString = static_cast<string>(calloc((size_t) length + 1, sizeof(char)));
+    int index;
+    for (index = 0; index < length; offset++, index++) {
+        charArrayString[index] = byteArray.get(offset);
+    }
+    this->original = strdup(charArrayString);
+    this->size = length;
+
+    free(charArrayString);
+}
+
 String::~String() {
 	free(original);
 }
@@ -134,11 +159,7 @@ char String::charAt(int index) const{
 }
 
 int String::compareTo(const String &anotherString) const {
-	string anotherStringValue = anotherString.toString();
-	if (string_equals(this->original, anotherStringValue)) {
-		return 0;
-	}
-	return 0;
+	return strcmp(this->original, anotherString.original);
 }
 
 int String::compareToIgnoreCase(String targetString) const {
@@ -724,6 +745,7 @@ std::string String::print(const std::string &format, String value) {
         result = std::string(buffer);
     return result;
 }
+
 
 
 

@@ -99,9 +99,34 @@ TEST (JavaLang, StringConstructor) {
     }
 
     // Given a byte Array
-    Array<byte> byteArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
+    Array<byte> byteArray = {72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100};
     ASSERT_STR("Hello world", arrayConstructor.toString());
     ASSERT_EQUAL(charArray.length, arrayConstructor.length());
+
+    String subByteArrayConstructor(byteArray, 6, 5);
+    ASSERT_STR("world", subByteArrayConstructor.toString());
+    ASSERT_EQUAL(5, subByteArrayConstructor.length());
+
+    try {
+        String exeptionConstructor(charArray, -1, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exeptionConstructor(charArray, 5, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exeptionConstructor(charArray, 10, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 15", e.getMessage().toString());
+    }
 
 }
 
@@ -147,6 +172,19 @@ TEST (JavaLang, StringCharAt) {
 	} catch (StringIndexOutOfBoundsException exception) {
 		ASSERT_STR("String index out of range", exception.getMessage().toString());
 	}
+}
+
+TEST(JavaLang, StringCompareTo) {
+    String smallerString = "ABCDEF";
+    String greaterString = "abcdef";
+    String equalToGreater = "abcdef";
+
+    ASSERT_TRUE(greaterString.compareTo(smallerString) > 0);
+    ASSERT_TRUE(greaterString.compareTo(equalToGreater) == 0);
+    ASSERT_TRUE(smallerString.compareTo(greaterString) < 0);
+
+    Comparable<String> *comparable = &greaterString;
+    ASSERT_TRUE(comparable->compareTo(smallerString) > 0);
 }
 
 TEST (JavaLang, StringConcat) {
