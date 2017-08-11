@@ -38,15 +38,15 @@ TEST(JavaLang, FloatConstructor) {
     // Test Float::Float()
     Float emptyFloatConstructor;
     emptyFloatConstructor = 13.02;
-//    ASSERT_DBL_NEAR(13.02, emptyFloatConstructor.floatValue());   // TODO(thoangminh): Fix bug here
+    ASSERT_FLOAT_NEAR(13.02, emptyFloatConstructor.floatValue());   // TODO(thoangminh): Fix bug here
 
     // Test Float::Float(float original)
     Float validFloatConstructor = 13.02;
-//    ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());   // TODO(thoangminh): Fix bug here
+    ASSERT_FLOAT_NEAR(13.02, validFloatConstructor.floatValue());   // TODO(thoangminh): Fix bug here
 
     // Test Float::Float(const Float &floatNumber)
     Float FloatConstructor(validFloatConstructor);
-//    ASSERT_DBL_NEAR(13.02, validFloatConstructor.floatValue());  // TODO(thoangminh): Fix bug here
+    ASSERT_FLOAT_NEAR(13.02, validFloatConstructor.floatValue());  // TODO(thoangminh): Fix bug here
 }
 
 TEST(JavaLang, FloatArithmeticOperator) {
