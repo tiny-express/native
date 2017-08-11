@@ -330,15 +330,15 @@ void assert_dbl_near(double exp, double real, double tol, const char* caller, in
 
 
     if(exp == 0.0f && exp < 0) {
-        sprintf(expectedString, "-%f", exp);
+        sprintf(expectedString, "-%.15f", exp);
     } else {
-        sprintf(expectedString, "%f", exp);
+        sprintf(expectedString, "%.15f", exp);
     }
 
     if(real == -0.0f && real < 0) {
-        sprintf(realString, "-%f", real);
+        sprintf(realString, "-%.15f", real);
     } else {
-        sprintf(realString, "%f", real);
+        sprintf(realString, "%.15f", real);
     }
 
     if ((expectedString == NULL && realString != NULL) ||
@@ -358,15 +358,15 @@ void assert_dbl_far(double exp, double real, double tol, const char* caller, int
 
 
     if(exp == 0.0f && exp < 0) {
-        sprintf(expectedString, "-%f", exp);
+        sprintf(expectedString, "-%.15f", exp);
     } else {
-        sprintf(expectedString, "%f", exp);
+        sprintf(expectedString, "%.15f", exp);
     }
 
     if(real == -0.0f && real < 0) {
-        sprintf(realString, "-%f", real);
+        sprintf(realString, "-%.15f", real);
     } else {
-        sprintf(realString, "%f", real);
+        sprintf(realString, "%.15f", real);
     }
 
     if ((expectedString == NULL && realString != NULL) ||
@@ -406,6 +406,7 @@ void assert_float_near(float exp, float real, float tol, const char* caller, int
     free(expectedString);
     free(realString);
 }
+
 
 void assert_null(void* real, const char* caller, int line) {
     if ((real) != NULL) {
