@@ -607,8 +607,8 @@ String StringBufferUnSafe::subString(int start, int end) const {
     return result;
 }
 
-String StringBufferUnSafe::toStringObject() const {
-    return String(this->original);
+string StringBufferUnSafe::toString() const {
+    return this->original;
 }
 
 void StringBufferUnSafe::trimToSize() {
@@ -933,8 +933,9 @@ String StringBuffer::subString(int start, int end) const {
     return StringBufferUnSafe::subString(start, end);
 }
 
-String StringBuffer::toStringObject() const {    std::lock_guard<std::mutex> guard(this->mutex);
-    return StringBufferUnSafe::toStringObject();
+string StringBuffer::toString() const {
+    std::lock_guard<std::mutex> guard(this->mutex);
+    return StringBufferUnSafe::toString();
 }
 
 void StringBuffer::trimToSize() {

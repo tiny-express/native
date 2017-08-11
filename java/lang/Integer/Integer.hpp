@@ -646,13 +646,6 @@ namespace Java {
             static String toOctalString(int inputInt);
 
             /**
-             * Returns a String object representing this Integer 's value.
-             *
-             * @return a String representation of the value of this object in base 10
-             */
-            String toStringObject();
-
-            /**
              * Returns a String object
              * representing the specified integer.
              *

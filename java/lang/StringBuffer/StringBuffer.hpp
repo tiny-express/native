@@ -626,7 +626,7 @@ namespace Java {
              *
              * @return a string representing the data in this sequence
              */
-            String toStringObject() const;
+            string toString() const override ;
 
             /**
              * Attempts to reduce storage used for the character sequence.
@@ -1231,7 +1231,7 @@ namespace Java {
              *
              * @return a string representing the data in this sequence
              */
-            String toStringObject() const;
+            string toString() const override;
 
             /**
              * Attempts to reduce storage used for the character sequence.
