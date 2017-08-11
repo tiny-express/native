@@ -24,23 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_
-#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_
+#include "MediaTypeException.hpp"
 
-#include "../../../../../java/lang/Exception/Exception.hpp"
+using namespace Javax::Ws;
 
-using namespace Java::Lang;
+MediaTypeException::MediaTypeException() : Exception() {
+};
 
-namespace Javax {
-    namespace Ws  {
-        class MediaTypeException : public Exception {
-        public:
-            MediaTypeException();
-            MediaTypeException(String message);
-            MediaTypeException(String message, Throwable *cause);
-            MediaTypeException(Throwable *cause);
-        };  // class MediaTypeException
-    }  // namespace Ws
-}  // namespace Javax
+MediaTypeException::MediaTypeException(String message) : Exception(message) {
+};
 
-#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_
+MediaTypeException::MediaTypeException(String message, Throwable *cause) : Exception(message, cause) {
+};
+
+MediaTypeException::MediaTypeException(Throwable *cause) : Exception(cause) {
+};

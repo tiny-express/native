@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_MEDIATYPE_H
-#define NATIVE_MEDIATYPE_H
+#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
+#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
 
 #include "../../../../java/Lang.hpp"
 #include "../../../../java/util/HashMap/HashMap.hpp"
@@ -74,7 +74,7 @@ namespace Javax {
             MediaType(const String &type, const String &subtype);
 
             /**
-             *   Creates a new instance of MediaType with the supplied type, subtype and parameters.
+             * Creates a new instance of MediaType with the supplied type, subtype and parameters.
              *
              * @param type
              * @param subtype
@@ -88,52 +88,53 @@ namespace Javax {
             ~MediaType();
 
             /**
-             *  Getter for a read-only parameter map.
+             * Getter for a read-only parameter map.
              *
-             * @return
+             * @return HashMap<String, String> &
              */
             const HashMap<String, String> &getParameters() const;
 
             /**
              * Getter for subtype.
              *
-             * @return
+             * @return String &
              */
             const String &getSubtype() const;
 
             /**
              * Getter for primary type.
              *
-             * @return
+             * @return String &
              */
             const String &getType() const;
 
             /**
              * Check if this media type is compatible with another media type.
              *
-             * @param other the media type to compare with.
-             * @return true if the types are compatible, false otherwise.
+             * @param other - the media type to compare with.
+             * @return boolean
+             * true if the types are compatible, false otherwise.
              */
             boolean isCompatible(MediaType other);
 
             /**
              * Checks if the subtype is a wildcard
              *
-             * @return
+             * @return boolean
              */
             boolean isWildcardSubtype();
 
             /**
              * Checks if the primary type is a wildcard.
              *
-             * @return
+             * @return boolean
              */
             boolean isWildcardType();
 
             /**
              * Convert the media type to a string suitable for use as the value of a corresponding HTTP header.
              *
-             * @return
+             * @return string
              */
             string toString();
 
@@ -141,7 +142,7 @@ namespace Javax {
              * Creates a new instance of MediaType by parsing the supplied string.
              *
              * @param type
-             * @return
+             * @return MediaType
              */
             static MediaType valueOf(String type);
 
@@ -152,8 +153,8 @@ namespace Javax {
 
         private:
             String backupForToString;
-        };
-    }
-}
+        };  // class MediaType
+    }  // namespace Ws
+}  // namespace Javax
 
-#endif //NATIVE_MEDIATYPE_H
+#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
