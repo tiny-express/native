@@ -160,11 +160,13 @@ void assert_dbl_far(double exp, double real, int precision, const char *caller, 
 #define ASSERT_DBL_FAR(exp, real) assert_dbl_far(exp, real, 15, __FILE__, __LINE__)
 #define ASSERT_DBL_FAR_PRE(exp, real, precision) assert_dbl_far(exp, real, precision, __FILE__, __LINE__)
 
-void assert_float_near(float exp, float real, const char *caller, int line);
-#define ASSERT_FLOAT_NEAR(exp, real) assert_float_near(exp, real, __FILE__, __LINE__)
+void assert_float_near(float exp, float real, int precision, const char *caller, int line);
+#define ASSERT_FLOAT_NEAR(exp, real) assert_float_near(exp, real, 6, __FILE__, __LINE__)
+#define ASSERT_FLOAT_NEAR_PRE(exp, real, precision) assert_float_near(exp, real, precision, __FILE__, __LINE__)
 
-void assert_float_far(float exp, float real, const char *caller, int line);
-#define ASSERT_FLOAT_FAR(exp, real) assert_float_far(exp, real, __FILE__, __LINE__)
+void assert_float_far(float exp, float real, int precision, const char *caller, int line);
+#define ASSERT_FLOAT_far(exp, real) assert_float_far(exp, real, 6, __FILE__, __LINE__)
+#define ASSERT_FLOAT_FAR_PRE(exp, real, precision) assert_float_far(exp, real, precision, __FILE__, __LINE__)
 
 
 
@@ -386,22 +388,22 @@ void assert_dbl_far(double exp, double real, int precision, const char* caller, 
     free(realString);
 }
 
-void assert_float_near(float exp, float real, const char* caller, int line) {
-    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 24 - (-126)
+void assert_float_near(float exp, float real, int precision, const char* caller, int line) {
+    // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 24 - (-126)
     char* expectedString = (char*) calloc(153, sizeof(char));
     char* realString = (char*) calloc(153, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
-        sprintf(expectedString, "-%f", exp);
+        sprintf(expectedString, "-%.*f", precision, exp);
     } else {
-        sprintf(expectedString, "%f", exp);
+        sprintf(expectedString, "%.*f", precision, exp);
     }
 
     if(real == -0.0f && real < 0) {
-        sprintf(realString, "-%f", real);
+        sprintf(realString, "-%.*f", precision, real);
     } else {
-        sprintf(realString, "%f", real);
+        sprintf(realString, "%.*f", precision, real);
     }
 
     // Compare with string type
@@ -416,22 +418,22 @@ void assert_float_near(float exp, float real, const char* caller, int line) {
     free(realString);
 }
 
-void assert_float_far(float exp, float real, const char* caller, int line) {
+void assert_float_far(float exp, float real, int precision, const char* caller, int line) {
     // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 24 - (-126)
     char* expectedString = (char*) calloc(153, sizeof(char));
     char* realString = (char*) calloc(153, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
-        sprintf(expectedString, "-%f", exp);
+        sprintf(expectedString, "-%.*f", precision, exp);
     } else {
-        sprintf(expectedString, "%f", exp);
+        sprintf(expectedString, "%.*f", precision, exp);
     }
 
     if(real == -0.0f && real < 0) {
-        sprintf(realString, "-%f", real);
+        sprintf(realString, "-%.*f", precision, real);
     } else {
-        sprintf(realString, "%f", real);
+        sprintf(realString, "%.*f", precision, real);
     }
 
     // Compare with string type
