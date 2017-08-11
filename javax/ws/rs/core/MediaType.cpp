@@ -100,7 +100,6 @@ const String &MediaType::getType() const {
 }
 
 boolean MediaType::isCompatible(MediaType other) {
-
     if (!this->isWildcardType() && !other.isWildcardType() && !this->type.equals(other.getType())) {
         return false;
     }
@@ -133,16 +132,14 @@ boolean MediaType::isCompatible(MediaType other) {
                 return true;
             }
         }
-
     }
 
     return false;
-
 }
 
-String MediaType::toString() {
-    String result = this->type + "/" + this->subtype;
-    return result;
+string MediaType::toString() {
+    this->backupForToString = this->type + "/" + this->subtype;
+    return this->backupForToString.toString();
 }
 
 boolean MediaType::isWildcardSubtype() {

@@ -135,7 +135,7 @@ namespace Javax {
              *
              * @return
              */
-            String toString();
+            string toString();
 
             /**
              * Creates a new instance of MediaType by parsing the supplied string.
@@ -149,6 +149,9 @@ namespace Javax {
             String type;
             String subtype;
             HashMap<String, String> parameters;
+
+        private:
+            String backupForToString;
         };
     }
 }
