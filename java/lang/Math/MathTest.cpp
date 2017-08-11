@@ -838,7 +838,7 @@ TEST(JavaLang, MathExp) {
 	// Given a variable equal to E^3
 	double eCubed = 3;
     double expectResult = Math::pow(Math::E, 3);
-//	ASSERT_DBL_NEAR(expectResult, Math::exp(eCubed));  // TODO(thoangminh): Fix bug here
+	ASSERT_DBL_NEAR_PRE(expectResult, Math::exp(eCubed), 13);
 
     // Given a value equal to NAN
     double nan = NAN;
@@ -860,7 +860,7 @@ TEST(JavaLang, MathExpm1) {
     // Given a variable equal to E^3
     double eCubed = 3;
     double expectResult = Math::pow(Math::E, 3) - 1;
-//    ASSERT_DBL_NEAR_PRE(expectResult, Math::expm1(eCubed), 13);  // TODO(thoangminh): Fix bug here
+    ASSERT_DBL_NEAR_PRE(expectResult, Math::expm1(eCubed), 13);
 
     // Given a value equal to NAN
     double nan = NAN;
@@ -1251,9 +1251,9 @@ TEST(JavaLang, MathMax) {
 	double double_value_max_2 = 2;
 	ASSERT_DBL_NEAR(4, Math::max(double_value_max_1, double_value_max_2));
 
-	float float_value_max_1 = 4.123;
-	float float_value_max_2 = 2.312;
-//	ASSERT_DBL_NEAR(4.123, Math::max(float_value_max_1, float_value_max_2));  // TODO(thoangminh): Fix bug here
+	float float_value_max_1 = 4.123f;
+	float float_value_max_2 = 2.312f;
+	ASSERT_DBL_NEAR(4.123f, Math::max(float_value_max_1, float_value_max_2));
 
 	int int_value_max_1 = 4;
 	int int_value_max_2 = 2;
@@ -1269,9 +1269,9 @@ TEST(JavaLang, MathMin) {
 	double double_value_min_2 = 2;
 	ASSERT_DBL_NEAR(2, Math::min(double_value_min_1, double_value_min_2));
 
-	float float_value_min_1 = 4.123;
-	float float_value_min_2 = 2.312;
-//	ASSERT_DBL_NEAR(2.312, Math::min(float_value_min_1, float_value_min_2)); // TODO(thoangminh): Fix bug here
+	float float_value_min_1 = 4.123f;
+	float float_value_min_2 = 2.312f;
+	ASSERT_DBL_NEAR(2.312f, Math::min(float_value_min_1, float_value_min_2));
 
     long long_value_min_1 = 4;
     long long_value_min_2 = 2;
@@ -1404,9 +1404,9 @@ TEST(JavaLang, MathNextDownFloat) {
 
 TEST(JavaLang, MathNextUpDouble) {
     // Given a double
-    double doubleNumber = 98759.765;
-    double expectResult = 98759.7650000001;
-//    ASSERT_DBL_NEAR(expectResult, Math::nextUp(doubleNumber));  // TODO(thoangminh): Fix bug here
+    double doubleNumber = 98759.765f;
+    double expectResult = 98759.7650000001f;
+    ASSERT_DBL_NEAR_PRE(expectResult, Math::nextUp(doubleNumber), 10);
 
     // Given a NAN
     double nan = NAN;
@@ -1450,7 +1450,7 @@ TEST(JavaLang, MathUlpDouble) {
     // Given a double
     double doubleNumber = 956.294;
     double expectResult = 1.1368683772161603E-13;
-//    ASSERT_DBL_NEAR(expectResult, Math::ulp(doubleNumber)); // TODO(thoangminh): Fix bug here
+    ASSERT_DBL_NEAR_PRE(expectResult, Math::ulp(doubleNumber), 12);
 
     // Given a double
     doubleNumber = 1.0E-300;
