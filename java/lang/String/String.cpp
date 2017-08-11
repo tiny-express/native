@@ -53,9 +53,10 @@ String::String(string target) {
 }
 
 String::String(Array<char> &charArray) {
-	free(original);
-	this->original = String::fromCharArray(charArray).toString();
+    string charArrayString = charArray.toString();
+	this->original = strdup(charArrayString);// String::fromCharArray(charArray).toString();
 	this->size = charArray.length;
+    free(charArrayString);
 }
 
 String::String(Array<byte> &byteArray) {
@@ -85,6 +86,29 @@ String::String(const StringBuilder &stringBuilder) {
 String::String(const StringBuffer &stringBuffer) {
     /*this->original = strdup(stringBuffer.getValue());
     this->size = stringBuffer.length();*/
+}
+
+String::String(Array<char> &charArray, int offset, int count) {
+    if (offset < 0) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+
+    if (count < 0) {
+        throw StringIndexOutOfBoundsException(count);
+    }
+
+    if (offset > charArray.length - count) {
+        throw StringIndexOutOfBoundsException(offset + count);
+    }
+
+    string charArrayString = static_cast<string>(calloc((size_t) count + 1, sizeof(char)));
+    int index;
+    for (index = 0; index < count; offset++, index++) {
+        charArrayString[index] = charArray.get(offset);
+    }
+    this->original = strdup(charArrayString);
+    this->size = count;
+    free(charArrayString);
 }
 
 String::~String() {

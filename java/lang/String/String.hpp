@@ -62,9 +62,8 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
-
-        private:
             int hash = 0;
+
 		public:
             /**
              * Initializes a newly created String object
@@ -130,15 +129,6 @@ namespace Java {
             // String(Array<byte> byteArray, Charset charset)
 
             /**
-             * Allocates a new String so that it represents the sequence
-             * of characters currently contained in the character array argument.
-             *
-             * @param charArray
-             * @param share
-             */
-            //String(Array<char> &charArray, boolean share);
-
-            /**
              * Allocates a new String that contains characters
              * from a subarray of the character array argument.
              *
@@ -148,7 +138,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            //String(Array<char> &charArray, int offset, int count);
+            String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
