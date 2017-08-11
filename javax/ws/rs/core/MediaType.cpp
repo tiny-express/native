@@ -46,6 +46,19 @@ const String MediaType::TEXT_PLAIN                    = "text/plain";
 const String MediaType::TEXT_XML                      = "text/xml";
 const String MediaType::WILDCARD                      = "*/*";
 
+const MediaType APPLICATION_ATOM_XML_TYPE             = MediaType("application","atom+xml");
+const MediaType APPLICATION_FORM_URLENCODED_TYPE      = MediaType("application","x-www-form-urlencoded");
+const MediaType APPLICATION_JSON_TYPE                 = MediaType("application","json");
+const MediaType APPLICATION_OCTET_STREAM_TYPE         = MediaType("application","octet-stream");
+const MediaType APPLICATION_SVG_XML_TYPE              = MediaType("application","svg+xml");
+const MediaType APPLICATION_XHTML_XML_TYPE            = MediaType("application","xhtml+xml");
+const MediaType APPLICATION_XML_TYPE                  = MediaType("application","xml");
+const MediaType MULTIPART_FORM_DATA_TYPE              = MediaType("multipart","form-data");
+const MediaType TEXT_HTML_TYPE                        = MediaType("text","html");
+const MediaType TEXT_PLAIN_TYPE                       = MediaType("text","plain");
+const MediaType TEXT_XML_TYPE                         = MediaType("text","xml");
+const MediaType WILDCARD_TYPE                         = MediaType();
+
 MediaType::MediaType() {
     this->type = MEDIA_TYPE_WILDCARD;
     this->subtype = MEDIA_TYPE_WILDCARD;

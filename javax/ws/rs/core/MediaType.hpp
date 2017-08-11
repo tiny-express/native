@@ -47,18 +47,18 @@ namespace Javax {
             static const String TEXT_PLAIN;
             static const String TEXT_XML;
             static const String WILDCARD;
-            static MediaType APPLICATION_ATOM_XML_TYPE;
-            static MediaType APPLICATION_FORM_URLENCODED_TYPE;
-            static MediaType APPLICATION_JSON_TYPE;
-            static MediaType APPLICATION_OCTET_STREAM_TYPE;
-            static MediaType APPLICATION_SVG_XML_TYPE;
-            static MediaType APPLICATION_XHTML_XML_TYPE;
-            static MediaType APPLICATION_XML_TYPE;
-            static MediaType MULTIPART_FORM_DATA_TYPE;
-            static MediaType TEXT_HTML_TYPE;
-            static MediaType TEXT_PLAIN_TYPE;
-            static MediaType TEXT_XML_TYPE;
-            static MediaType WILDCARD_TYPE;
+            static const MediaType APPLICATION_ATOM_XML_TYPE;
+            static const MediaType APPLICATION_FORM_URLENCODED_TYPE;
+            static const MediaType APPLICATION_JSON_TYPE;
+            static const MediaType APPLICATION_OCTET_STREAM_TYPE;
+            static const MediaType APPLICATION_SVG_XML_TYPE;
+            static const MediaType APPLICATION_XHTML_XML_TYPE;
+            static const MediaType APPLICATION_XML_TYPE;
+            static const MediaType MULTIPART_FORM_DATA_TYPE;
+            static const MediaType TEXT_HTML_TYPE;
+            static const MediaType TEXT_PLAIN_TYPE;
+            static const MediaType TEXT_XML_TYPE;
+            static const MediaType WILDCARD_TYPE;
 
             /**
              * Creates a new instance of MediaType, both type and subtype are wildcards.
