@@ -38,7 +38,7 @@ TEST(JavaLang, MathAbs) {
 	ASSERT_DBL_NEAR(123, Math::abs(double_value));
 
 	float float_value = -123.123f;
-	ASSERT_DBL_NEAR(123.123, Math::abs(float_value));
+	ASSERT_DBL_NEAR(123.123f, Math::abs(float_value));
 
 	int int_value = -123;
 	ASSERT_EQUAL(123, Math::abs(int_value));
@@ -335,7 +335,7 @@ TEST(JavaLang, MathCbrt) {
 
     // Given a value equal to -ZERO
     double negativeZeroCube = -0.0;
-    double expectNegativeZeroResult = 0.0;
+    double expectNegativeZeroResult = -0.0;
     ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::cbrt(negativeZeroCube));
 }
 
@@ -357,7 +357,7 @@ TEST(JavaLang, MathSqrt) {
 
     // Given a value equal to -INFINITE
     double negativeInfSquare = -INFINITY;
-    double expectNegativeInfResult = INFINITY;
+    double expectNegativeInfResult = -NAN;
     ASSERT_DBL_NEAR(expectNegativeInfResult, Math::sqrt(negativeInfSquare));
 
     // Given a value equal to ZERO
@@ -367,7 +367,7 @@ TEST(JavaLang, MathSqrt) {
 
     // Given a value equal to -ZERO
     double negativeZeroSquare = -0.0;
-    double expectNegativeZeroResult = 0.0;
+    double expectNegativeZeroResult = -0.0f;
     ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::sqrt(negativeZeroSquare));
 }
 
@@ -910,7 +910,7 @@ TEST(JavaLang, MathHypot) {
     // Given two double with one number equal INFINITY
     double inf1 = INFINITY;
     double inf2 = INFINITY;
-    double expectBothInfResult = NAN;
+    double expectBothInfResult = INFINITY;
     ASSERT_DBL_NEAR(expectBothInfResult, Math::hypot(inf1, inf2));
 }
 

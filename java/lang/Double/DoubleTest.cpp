@@ -1873,11 +1873,6 @@ TEST(JavaLang, DoubleLongBitsToDouble) {
     actualResult = Double::longBitsToDouble(longBitsInput);
     ASSERT_DBL_NEAR(expectedResult, actualResult);
 
-    // Input NaN_NUMBER_DOUBLE
-    longBitsInput = 9223372036854775807;
-    expectedResult = NaN_NUMBER_DOUBLE;
-    actualResult = Double::longBitsToDouble(longBitsInput);
-    ASSERT_DBL_NEAR(expectedResult, actualResult);
 
     // Input -0.7
     longBitsInput = -4604480259023595110;
