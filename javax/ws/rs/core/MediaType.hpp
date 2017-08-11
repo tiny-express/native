@@ -34,19 +34,19 @@ namespace Javax {
     namespace Ws {
         class MediaType : public virtual Java::Lang::Object {
         public:
-            static String APPLICATION_ATOM_XML;
-            static String APPLICATION_FORM_URLENCODED;
-            static String APPLICATION_JSON;
-            static String APPLICATION_OCTET_STREAM;
-            static String APPLICATION_SVG_XML;
-            static String APPLICATION_XHTML_XML;
-            static String APPLICATION_XML;
-            static String MEDIA_TYPE_WILDCARD;
-            static String MULTIPART_FORM_DATA;
-            static String TEXT_HTML;
-            static String TEXT_PLAIN;
-            static String TEXT_XML;
-            static String WILDCARD;
+            static const String APPLICATION_ATOM_XML;
+            static const String APPLICATION_FORM_URLENCODED;
+            static const String APPLICATION_JSON;
+            static const String APPLICATION_OCTET_STREAM;
+            static const String APPLICATION_SVG_XML;
+            static const String APPLICATION_XHTML_XML;
+            static const String APPLICATION_XML;
+            static const String MEDIA_TYPE_WILDCARD;
+            static const String MULTIPART_FORM_DATA;
+            static const String TEXT_HTML;
+            static const String TEXT_PLAIN;
+            static const String TEXT_XML;
+            static const String WILDCARD;
             static MediaType APPLICATION_ATOM_XML_TYPE;
             static MediaType APPLICATION_FORM_URLENCODED_TYPE;
             static MediaType APPLICATION_JSON_TYPE;

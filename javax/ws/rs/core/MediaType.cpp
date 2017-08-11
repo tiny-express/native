@@ -32,19 +32,19 @@ using namespace Javax::Ws;
 
 #define CHAR_NOT_FOUND -1
 
-String MediaType::APPLICATION_ATOM_XML          = "application/atom+xml";
-String MediaType::APPLICATION_FORM_URLENCODED   = "application/x-www-form-urlencoded";
-String MediaType::APPLICATION_JSON              = "application/json";
-String MediaType::APPLICATION_OCTET_STREAM      = "application/octet-stream";
-String MediaType::APPLICATION_SVG_XML           = "application/svg+xml";
-String MediaType::APPLICATION_XHTML_XML         = "application/xhtml+xml";
-String MediaType::APPLICATION_XML               = "application/xml";
-String MediaType::MEDIA_TYPE_WILDCARD           = "*";
-String MediaType::MULTIPART_FORM_DATA           = "multipart/form-data";
-String MediaType::TEXT_HTML                     = "text/html";
-String MediaType::TEXT_PLAIN                    = "text/plain";
-String MediaType::TEXT_XML                      = "text/xml";
-String MediaType::WILDCARD                      = "*/*";
+const String MediaType::APPLICATION_ATOM_XML          = "application/atom+xml";
+const String MediaType::APPLICATION_FORM_URLENCODED   = "application/x-www-form-urlencoded";
+const String MediaType::APPLICATION_JSON              = "application/json";
+const String MediaType::APPLICATION_OCTET_STREAM      = "application/octet-stream";
+const String MediaType::APPLICATION_SVG_XML           = "application/svg+xml";
+const String MediaType::APPLICATION_XHTML_XML         = "application/xhtml+xml";
+const String MediaType::APPLICATION_XML               = "application/xml";
+const String MediaType::MEDIA_TYPE_WILDCARD           = "*";
+const String MediaType::MULTIPART_FORM_DATA           = "multipart/form-data";
+const String MediaType::TEXT_HTML                     = "text/html";
+const String MediaType::TEXT_PLAIN                    = "text/plain";
+const String MediaType::TEXT_XML                      = "text/xml";
+const String MediaType::WILDCARD                      = "*/*";
 
 MediaType::MediaType() {
     this->type = MEDIA_TYPE_WILDCARD;
