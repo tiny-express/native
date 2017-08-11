@@ -165,7 +165,7 @@ void assert_float_near(float exp, float real, int precision, const char *caller,
 #define ASSERT_FLOAT_NEAR_PRE(exp, real, precision) assert_float_near(exp, real, precision, __FILE__, __LINE__)
 
 void assert_float_far(float exp, float real, int precision, const char *caller, int line);
-#define ASSERT_FLOAT_far(exp, real) assert_float_far(exp, real, 6, __FILE__, __LINE__)
+#define ASSERT_FLOAT_FAR(exp, real) assert_float_far(exp, real, 6, __FILE__, __LINE__)
 #define ASSERT_FLOAT_FAR_PRE(exp, real, precision) assert_float_far(exp, real, precision, __FILE__, __LINE__)
 
 

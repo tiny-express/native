@@ -41,12 +41,19 @@ TEST(JavaLang, FloatConstructor) {
     ASSERT_FLOAT_NEAR(13.02, emptyFloatConstructor.floatValue());
 
     // Test Float::Float(float original)
-    Float validFloatConstructor = 13.02;
-    ASSERT_FLOAT_NEAR(13.02, validFloatConstructor.floatValue());
+    Float floatConstructor = 13.02;
+    ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
+
+    floatConstructor = 13.02;
+    ASSERT_FLOAT_FAR(13.33, floatConstructor.floatValue());
+
+    floatConstructor = -0.0f;
+    ASSERT_FLOAT_NEAR(-0.0f, floatConstructor.floatValue());
 
     // Test Float::Float(const Float &floatNumber)
-    Float FloatConstructor(validFloatConstructor);
-    ASSERT_FLOAT_NEAR(13.02, validFloatConstructor.floatValue());
+    floatConstructor = 13.02;
+    Float FloatConstructor(floatConstructor);
+    ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
 }
 
 TEST(JavaLang, FloatArithmeticOperator) {
