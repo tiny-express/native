@@ -315,7 +315,7 @@ namespace Java {
              * and a value greater than 0 if this String is lexicographically
              * greater than the String argument ignoring case considerations..
              */
-			int compareToIgnoreCase(String targetString) const;
+			int compareToIgnoreCase(const String &targetString) const;
 
 
             /**

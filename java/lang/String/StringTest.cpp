@@ -187,6 +187,17 @@ TEST(JavaLang, StringCompareTo) {
     ASSERT_TRUE(comparable->compareTo(smallerString) > 0);
 }
 
+TEST(JavaLang, StringCompareToIgnoreCase) {
+    String smallerString = "because";
+    String greaterString = "hello";
+    String greaterUpperCase = "HELLO";
+
+    ASSERT_TRUE(greaterString.compareToIgnoreCase(smallerString) > 0);
+    ASSERT_TRUE(greaterString.compareToIgnoreCase(greaterUpperCase) == 0);
+    ASSERT_TRUE(smallerString.compareToIgnoreCase(greaterString) < 0);
+
+}
+
 TEST (JavaLang, StringConcat) {
 	// Given two strings - Return concatenation result
 	String textConcat1 = "Hello ";

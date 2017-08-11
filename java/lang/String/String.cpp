@@ -162,9 +162,8 @@ int String::compareTo(const String &anotherString) const {
 	return strcmp(this->original, anotherString.original);
 }
 
-int String::compareToIgnoreCase(String targetString) const {
-	// TODO
-	return 0;
+int String::compareToIgnoreCase(const String &anotherString) const {
+    return strcasecmp(this->original, anotherString.original);
 }
 
 String String::concat(String str) {
