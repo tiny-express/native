@@ -61,49 +61,49 @@ TEST(JavaLang, FloatArithmeticOperator) {
 //    variableArithmeticOperator2 = 22.22f;
 //    expectedResultOperator = 33.33f;
 //    actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator -
 //    variableArithmeticOperator1 = 33.33f;
 //    variableArithmeticOperator2 = 22.22f;
 //    expectedResultOperator = 11.11f;
 //    actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator *
 //    variableArithmeticOperator1 =  2.0;
 //    variableArithmeticOperator2 =  13.02;
 //    expectedResultOperator = 26.04;
 //    actualResultOperator = variableArithmeticOperator1 * variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator /
 //    variableArithmeticOperator1 = 26.04;
 //    variableArithmeticOperator2 = 2.0;
 //    expectedResultOperator = 13.02;
 //    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator / . POSITIVE_INFINITY
 //    variableArithmeticOperator1 = 26.04;
 //    variableArithmeticOperator2 = 0;
 //    expectedResultOperator = POSITIVE_INFINITY;
 //    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator / . NEGATIVE_INFINITY
 //    variableArithmeticOperator1 = -26.04;
 //    variableArithmeticOperator2 = 0;
 //    expectedResultOperator = NEGATIVE_INFINITY;
 //    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator / . NaN_NUMBER
 //    variableArithmeticOperator1 = 0;
 //    variableArithmeticOperator2 = 0;
 //    expectedResultOperator = NaN_NUMBER;
 //    actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
 // TODO(thoangminh): enable after finish method equals , compare
@@ -114,48 +114,48 @@ TEST(JavaLang, FloatArithmeticOperator) {
 //    boolean expectedResultOperator;
 //    boolean actualResultOperator;
 //
-//    ASSERT_DBL_NEAR(1.123,1.123);
+//    ASSERT_FLOAT_NEAR(1.123,1.123);
 //    // Test Operator ==
 //    variableRelationalOperator1 = 13.12;
 //    variableRelationalOperator2 = 13.12;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator !=
 //    variableRelationalOperator1 = 13.02;
 //    variableRelationalOperator2 = 99.02;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator >
 //    variableRelationalOperator1 = 13.02;
 //    variableRelationalOperator2 = 11.11f;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator <
 //    variableRelationalOperator1 = 1.11;
 //    variableRelationalOperator2 = 13.02;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator >=
 //    variableRelationalOperator1 = 15.00;
 //    variableRelationalOperator2 = 13.02;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator <=
 //    variableRelationalOperator1 = 1.11;
 //    variableRelationalOperator2 = 13.02;
 //    expectedResultOperator = TRUE;
 //    actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
-//    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+//    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //}
 
 TEST(JavaLang, FloatLogicalOperator) {
@@ -170,56 +170,56 @@ TEST(JavaLang, FloatLogicalOperator) {
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 0   0
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 0;
     expectedResultOperator = FALSE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = TRUE;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_DBL_NEAR(expectedResultOperator, actualResultOperator);
+    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 }
 
 TEST(JavaLang, FloatAssignmentOperator) {
@@ -234,38 +234,38 @@ TEST(JavaLang, FloatAssignmentOperator) {
 //    variableAssignmentOperator2 = 1.1;
 //    expectedResultOperator = 1.1;
 //    actualResultOperator = (variableAssignmentOperator1 = variableAssignmentOperator2);
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator +=
 //    variableAssignmentOperator1 = (Float) 11.11;
 //    variableAssignmentOperator2 = (Float) 22.22;
 //    expectedResultOperator = (Float) 33.33;
 //    actualResultOperator = (variableAssignmentOperator1 += variableAssignmentOperator2);
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 ////    float result = variableAssignmentOperator1.floatValue();
 ////    result = (float) (11.11 + 22.22);
-////    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), result);
+////    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), result);
 //
 //    // Test Operator -=
 //    variableAssignmentOperator1 =   33.33;
 //    variableAssignmentOperator2 =  11.11;
 //    expectedResultOperator = 22.22;
 //    actualResultOperator = (variableAssignmentOperator1 -= variableAssignmentOperator2);
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator *=
 //    variableAssignmentOperator1 = 13.02;
 //    variableAssignmentOperator2 = 2.0;
 //    expectedResultOperator = 26.04;
 //    actualResultOperator = (variableAssignmentOperator1 *= variableAssignmentOperator2);
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 //
 //    // Test Operator /=
 //    variableAssignmentOperator1 = 26.04;
 //    variableAssignmentOperator2 = 2.0;
 //    expectedResultOperator = 13.02;
 //    actualResultOperator = (variableAssignmentOperator1 /= variableAssignmentOperator2);
-//    ASSERT_DBL_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+//    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
 TEST(JavaLang, FloatCharValue) {
