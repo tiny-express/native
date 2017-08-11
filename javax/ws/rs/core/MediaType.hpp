@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_MEDIATYPE_H
-#define NATIVE_MEDIATYPE_H
+#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
+#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
 
 #include "../../../../java/Lang.hpp"
 #include "../../../../java/util/HashMap/HashMap.hpp"
@@ -34,31 +34,31 @@ namespace Javax {
     namespace Ws {
         class MediaType : public virtual Java::Lang::Object {
         public:
-            static String APPLICATION_ATOM_XML;
-            static String APPLICATION_FORM_URLENCODED;
-            static String APPLICATION_JSON;
-            static String APPLICATION_OCTET_STREAM;
-            static String APPLICATION_SVG_XML;
-            static String APPLICATION_XHTML_XML;
-            static String APPLICATION_XML;
-            static String MEDIA_TYPE_WILDCARD;
-            static String MULTIPART_FORM_DATA;
-            static String TEXT_HTML;
-            static String TEXT_PLAIN;
-            static String TEXT_XML;
-            static String WILDCARD;
-            static MediaType APPLICATION_ATOM_XML_TYPE;
-            static MediaType APPLICATION_FORM_URLENCODED_TYPE;
-            static MediaType APPLICATION_JSON_TYPE;
-            static MediaType APPLICATION_OCTET_STREAM_TYPE;
-            static MediaType APPLICATION_SVG_XML_TYPE;
-            static MediaType APPLICATION_XHTML_XML_TYPE;
-            static MediaType APPLICATION_XML_TYPE;
-            static MediaType MULTIPART_FORM_DATA_TYPE;
-            static MediaType TEXT_HTML_TYPE;
-            static MediaType TEXT_PLAIN_TYPE;
-            static MediaType TEXT_XML_TYPE;
-            static MediaType WILDCARD_TYPE;
+            static const String APPLICATION_ATOM_XML;
+            static const String APPLICATION_FORM_URLENCODED;
+            static const String APPLICATION_JSON;
+            static const String APPLICATION_OCTET_STREAM;
+            static const String APPLICATION_SVG_XML;
+            static const String APPLICATION_XHTML_XML;
+            static const String APPLICATION_XML;
+            static const String MEDIA_TYPE_WILDCARD;
+            static const String MULTIPART_FORM_DATA;
+            static const String TEXT_HTML;
+            static const String TEXT_PLAIN;
+            static const String TEXT_XML;
+            static const String WILDCARD;
+            static const MediaType APPLICATION_ATOM_XML_TYPE;
+            static const MediaType APPLICATION_FORM_URLENCODED_TYPE;
+            static const MediaType APPLICATION_JSON_TYPE;
+            static const MediaType APPLICATION_OCTET_STREAM_TYPE;
+            static const MediaType APPLICATION_SVG_XML_TYPE;
+            static const MediaType APPLICATION_XHTML_XML_TYPE;
+            static const MediaType APPLICATION_XML_TYPE;
+            static const MediaType MULTIPART_FORM_DATA_TYPE;
+            static const MediaType TEXT_HTML_TYPE;
+            static const MediaType TEXT_PLAIN_TYPE;
+            static const MediaType TEXT_XML_TYPE;
+            static const MediaType WILDCARD_TYPE;
 
             /**
              * Creates a new instance of MediaType, both type and subtype are wildcards.
@@ -74,7 +74,7 @@ namespace Javax {
             MediaType(const String &type, const String &subtype);
 
             /**
-             *   Creates a new instance of MediaType with the supplied type, subtype and parameters.
+             * Creates a new instance of MediaType with the supplied type, subtype and parameters.
              *
              * @param type
              * @param subtype
@@ -88,60 +88,61 @@ namespace Javax {
             ~MediaType();
 
             /**
-             *  Getter for a read-only parameter map.
+             * Getter for a read-only parameter map.
              *
-             * @return
+             * @return HashMap<String, String> &
              */
             const HashMap<String, String> &getParameters() const;
 
             /**
              * Getter for subtype.
              *
-             * @return
+             * @return String &
              */
             const String &getSubtype() const;
 
             /**
              * Getter for primary type.
              *
-             * @return
+             * @return String &
              */
             const String &getType() const;
 
             /**
              * Check if this media type is compatible with another media type.
              *
-             * @param other the media type to compare with.
-             * @return true if the types are compatible, false otherwise.
+             * @param other - the media type to compare with.
+             * @return boolean
+             * true if the types are compatible, false otherwise.
              */
             boolean isCompatible(MediaType other);
 
             /**
              * Checks if the subtype is a wildcard
              *
-             * @return
+             * @return boolean
              */
             boolean isWildcardSubtype();
 
             /**
              * Checks if the primary type is a wildcard.
              *
-             * @return
+             * @return boolean
              */
             boolean isWildcardType();
 
             /**
              * Convert the media type to a string suitable for use as the value of a corresponding HTTP header.
              *
-             * @return
+             * @return string
              */
-            String toString();
+            string toString();
 
             /**
              * Creates a new instance of MediaType by parsing the supplied string.
              *
              * @param type
-             * @return
+             * @return MediaType
              */
             static MediaType valueOf(String type);
 
@@ -149,8 +150,11 @@ namespace Javax {
             String type;
             String subtype;
             HashMap<String, String> parameters;
-        };
-    }
-}
 
-#endif //NATIVE_MEDIATYPE_H
+        private:
+            String backupForToString;
+        };  // class MediaType
+    }  // namespace Ws
+}  // namespace Javax
+
+#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_

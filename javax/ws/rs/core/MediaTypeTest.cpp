@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
  */
 
 #include "MediaType.hpp"
-#include "MediaTypeException.hpp"
+#include "MediaTypeException/MediaTypeException.hpp"
 
 extern "C" {
 #include "../../../../kernel/test.h"
@@ -159,7 +159,7 @@ TEST(MediaType, ValueOf) {
     ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getType().toString());
     ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getSubtype().toString());
 
-    // MediType valueOf empty String, expected exception "`type` must not be empty"
+    // MediaType valueOf empty String, expected exception "`type` must not be empty"
     MediaTypeException exception;
     try {
         MediaType mediaType4 = MediaType::valueOf("");
@@ -201,19 +201,19 @@ TEST(MediaType, ToString) {
     // Default constructor, expected WILDCARD
     MediaType mediaType;
     mediaType.toString();
-    ASSERT_STR(MediaType::WILDCARD.toString(), mediaType.toString().toString());
+    ASSERT_STR(MediaType::WILDCARD.toString(), mediaType.toString());
 
     // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
     MediaType mediaType2("application", "*+xml");
-    ASSERT_TRUE(mediaType2.toString().equals((String)"application/*+xml"));
+    ASSERT_STR(mediaType2.toString(), "application/*+xml");
 
     // Constructor with type "application", subtype "atom+xml", expected "application/atom+xml"
     MediaType mediaType3("application", "atom+xml");
-    ASSERT_STR(MediaType::APPLICATION_ATOM_XML.toString(), mediaType3.toString().toString());
+    ASSERT_STR(MediaType::APPLICATION_ATOM_XML.toString(), mediaType3.toString());
 
     // Constructor with type "application", subtype MEDIA_WILDCARD_TYPE, expected "application/*"
     MediaType mediaType4("application", "*");
-    ASSERT_STR("application/*", mediaType4.toString().toString());
+    ASSERT_STR("application/*", mediaType4.toString());
 
     // Constructor with type "text", subtype "html", expected "text/html"
     MediaType mediaType5("text", "html");
