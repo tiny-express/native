@@ -361,8 +361,9 @@ double Math::powerOfTwoD(int exponent) {
     if (exponent < Double::MIN_EXPONENT || exponent > Double::MAX_EXPONENT) {
         throw AssertionError(exponent);
     }
+    long oneLong = 1;
     return Double::longBitsToDouble(((exponent + Double::EXP_BIAS)
-            << (Double::SIGNIFICAND_WIDTH - 1)) & Double::EXP_BIT_MASK);
+            << (Double::SIGNIFICAND_WIDTH - oneLong)) & Double::EXP_BIT_MASK);
 }
 
 // TODO need Float::intBitsToFloat

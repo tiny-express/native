@@ -33,22 +33,22 @@ using namespace Java::Lang;
 
 Double::Double() {
 	this->original = 0;
-	this->string_original = string_from_double(this->original);
+	this->originalString = string_from_double(this->original);
 }
 
 Double::Double(double original) {
     this->original = original;
-    this->string_original = string_from_double(this->original);
+    this->originalString = string_from_double(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
 	this->original = doubleNumber.original;
-	this->string_original = string_from_double(this->original);
+	this->originalString = string_from_double(this->original);
 }
 
 Double::~Double() {
-	if (this->string_original != NULL) {
-		free(this->string_original);
+	if (this->originalString != NULL) {
+		free(this->originalString);
 	}
 }
 
@@ -57,7 +57,7 @@ Double Double::parseDouble(String target) {
 }
 
 string Double::toString() const {
-	return (string) this->string_original;
+	return (string) this->originalString;
 }
 
 // TODO(thoangminh): waiting for FloatingDecimal.toJavaFormatString()
@@ -167,8 +167,8 @@ boolean Double::operator||(const Double &target) const {
 
 Double Double::operator=(const Double &target) {
     this->original = target.original;
-    free(this->string_original);
-    this->string_original = string_from_double(this->original);
+    free(this->originalString);
+    this->originalString = string_from_double(this->original);
     return *this;
 }
 

@@ -24,31 +24,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_NETWORK_H
-#define NATIVE_NETWORK_H
+extern "C" {
+#include "../../../kernel/test.h"
+};
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE 1
-#endif
+#include "UnsupportedEncodingException.hpp"
 
-#define HTTPS "https://"
-#define HTTP "http://"
-#define LOCALHOST "localhost"
-#define HTTP_PORT 80
-#define HTTPS_PORT 443
-#define IS_HTTPS 1
-#define IS_HTTP 2
-#define NOT_URL 0
+using namespace Java::Lang;
 
-char *get_ip_address();
-char *http_schema(char *url);
-char *http_hostname(char *url);
-int http_port(char *url);
-char *http_query(char *url);
-char *http_request(char *method, char *url, char **headers, char **body);
-char *http_path(char *url);
-char *http_protocol(char *url);
-int url_port(char *url);
-void send_response(int client_id, char *content);
+TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
+    // Constructs a new UnsupportedEncodingException with null as its detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
+    ASSERT_STR("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
 
-#endif
+    // Constructs a new UnsupportedEncodingException with the specified detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithMessage = UnsupportedEncodingException("UnsupportedEncodingException with the specified message");
+    ASSERT_STR("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
+}
+
+TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
+    try {
+        throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
+    } catch (UnsupportedEncodingException &ex) {
+        ASSERT_STR("Throw UnsupportedEncodingException", ex.getMessage().toString());
+    }
+}

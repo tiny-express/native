@@ -37,7 +37,7 @@ namespace Java {
 		class Float : public virtual Number {
 		private:
 			float original;
-			string string_original;
+			string originalString;
 
 		public:
 			/**
