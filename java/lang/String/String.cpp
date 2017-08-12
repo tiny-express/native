@@ -194,7 +194,7 @@ String String::getStringFromIndex(int index) {
 }
 
 boolean String::endsWith(const String &suffixString) const {
-	return ( string_endswith(this->original, suffixString.original));
+	return (string_endswith(this->original, suffixString.original));
 }
 
 String String::fromCharArray(Array<char> &charArray) {
@@ -761,6 +761,10 @@ String String::copyValueOf(Array<char> &charArray) {
 
 String String::copyValueOf(Array<char> &charArray, int offset, int count) {
     return String(charArray, offset, count);
+}
+
+boolean String::equalsIgnoreCase(String anotherString) {
+    return this->compareToIgnoreCase(anotherString) == 0;
 }
 
 

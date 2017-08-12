@@ -194,7 +194,6 @@ TEST(JavaLang, StringCompareToIgnoreCase) {
     ASSERT_TRUE(greaterString.compareToIgnoreCase(smallerString) > 0);
     ASSERT_TRUE(greaterString.compareToIgnoreCase(greaterUpperCase) == 0);
     ASSERT_TRUE(smallerString.compareToIgnoreCase(greaterString) < 0);
-
 }
 
 TEST (JavaLang, StringConcat) {
@@ -272,9 +271,19 @@ TEST (JavaLang, StringCopyValueOf) {
 
 // FIXME
 TEST (JavaLang, StringEndsWith) {
-	String textPlus = "Hello welcom to VietNam";
+	String textPlus = "Hello welcome to VietNam";
 	String String_string = "VietNam";
 	ASSERT_TRUE(textPlus.endsWith(String_string));
+}
+
+TEST(JavaLang, StringEqualIgnoreCase) {
+	String smallerString = "because";
+	String greaterString = "hello";
+	String greaterUpperCase = "HELLO";
+
+	ASSERT_FALSE(greaterString.equalsIgnoreCase(smallerString));
+	ASSERT_TRUE(greaterString.equalsIgnoreCase(greaterUpperCase));
+	ASSERT_FALSE(smallerString.equalsIgnoreCase(greaterString));
 }
 
 TEST(JavaLang, StringGetBytes) {
