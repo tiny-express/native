@@ -745,6 +745,15 @@ std::string String::print(const std::string &format, String value) {
     return result;
 }
 
+boolean String::contentEquals(const CharSequence &charSequence) {
+    if (instanceof<StringBuffer>(charSequence)) {
+        mutable std::mutex mutex;
+        std::lock_guard<std::mutex> guard(mutex);
+        return strcmp(this->original, charSequence.toString()) == 0;
+    }
+    return strcmp(this->original, charSequence.toString()) == 0;
+}
+
 
 
 

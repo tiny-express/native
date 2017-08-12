@@ -223,6 +223,10 @@ TEST (JavaLang, StringContains) {
 	ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
+TEST (JavaLang, StringContentEqual) {
+    CharSequence *charSequence = new StringBuffer("Hello world");
+}
+
 // FIXME
 TEST (JavaLang, StringEndsWith) {
 	String textPlus = "Hello welcom to VietNam";

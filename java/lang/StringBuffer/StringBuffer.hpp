@@ -31,7 +31,7 @@
 
 namespace Java {
     namespace Lang {
-        class StringBufferUnSafe : public Object{  //: public CharSequence {
+        class StringBufferUnSafe : public Object, public virtual CharSequence {
 
         private:
             /**
@@ -228,7 +228,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
              * @return character at specified index
              */
-            char charAt(int index);
+            char charAt(int index) const override;
 
             // TODO need IntStream
             // IntStream codePoint();
@@ -531,7 +531,7 @@ namespace Java {
              *
              * @return int
              */
-            int length();
+            int length() const override;
 
             /**
              * Returns the index within this sequence that is offset from the given index by codePointOffset code points.

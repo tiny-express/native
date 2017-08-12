@@ -109,7 +109,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
     return this->append(stringToAppend.toString(), 0, stringToAppend.length());
 }
 
-int StringBufferUnSafe::length() {
+int StringBufferUnSafe::length() const {
     return this->currentLength;
 }
 
@@ -223,7 +223,7 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
         throw IllegalArgumentException();
 }
 
-char StringBufferUnSafe::charAt(int index) {
+char StringBufferUnSafe::charAt(int index) const {
     if (index < 0) {
         throw IndexOutOfBoundsException("index must be positive");
     }

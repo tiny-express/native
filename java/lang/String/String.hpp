@@ -343,7 +343,7 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
-			//boolean contentEquals(const CharSequence &charSequence);
+			boolean contentEquals(const CharSequence &charSequence);
 
             /**
              * Compares this String to the specified CharSequence.
