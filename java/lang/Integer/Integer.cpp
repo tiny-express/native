@@ -27,7 +27,7 @@
 #include <sstream>
 #include "Integer.hpp"
 #include "../Math/Math.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
@@ -493,10 +493,6 @@ string Integer::toString() const {
 long Integer::toUnsignedLong(int inputInt) {
 	// Make the overload bits is 0 to make sure inputInt in 32 bit type.
 	return ((long) inputInt ) & 0xffffffff;
-}
-
-String Integer::toStringObject() {
-	return String(this->originalString);
 }
 
 boolean Integer::equals(Integer object) {

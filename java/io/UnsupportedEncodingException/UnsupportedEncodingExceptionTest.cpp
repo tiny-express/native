@@ -24,24 +24,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef  JAVA_UTIL_ABSTRACT_COLLECTION_HPP_
-#define JAVA_UTIL_ABSTRACT_COLLECTION_HPP_
+extern "C" {
+#include "../../../kernel/test.h"
+};
 
-#include "../../lang/Object/Object.hpp"
-#include "../Collection/Collection.hpp"
+#include "UnsupportedEncodingException.hpp"
 
 using namespace Java::Lang;
 
-namespace Java {
-	namespace Util {
-		template <typename E>
-		class AbstractCollection : public virtual Object, public virtual Collection<E> {
+TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
+    // Constructs a new UnsupportedEncodingException with null as its detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
+    ASSERT_STR("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
 
-		protected:
-			AbstractCollection() {}
-			virtual ~AbstractCollection() {}
-		};
-	}
+    // Constructs a new UnsupportedEncodingException with the specified detail message.
+    UnsupportedEncodingException unsupportedEncodingExceptionWithMessage = UnsupportedEncodingException("UnsupportedEncodingException with the specified message");
+    ASSERT_STR("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
 }
 
-#endif //JAVA_UTIL_ABSTRACT_COLLECTION_HPP_
+TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
+    try {
+        throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
+    } catch (UnsupportedEncodingException &ex) {
+        ASSERT_STR("Throw UnsupportedEncodingException", ex.getMessage().toString());
+    }
+}

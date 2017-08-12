@@ -24,7 +24,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "NumberFormatException.h"
+#include "NumberFormatException.hpp"
 
 extern "C" {
 #include "../../../kernel/test.h"

@@ -27,7 +27,7 @@
 #ifndef JAVA_UTIL_ARRAY_LIST_HPP_
 #define JAVA_UTIL_ARRAY_LIST_HPP_
 
-#include "../../lang/Cloneable/Cloneable.hpp"
+#include "../../Lang.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../AbstractList/AbstractList.hpp"
 #include "../Collection/Collection.hpp"
@@ -54,34 +54,9 @@ namespace Java {
 				class ArrayList;
 				
 				template <class E>
-				class ArrayListIterator {
-				public:
-						ArrayListIterator(const ArrayList<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
-						
-						}
-						
-						boolean operator!=(const ArrayListIterator<E> &other) const {
-							return _pos != other._pos;
-						}
-						
-						int operator*() const {
-							return _p_vec->get(_pos);
-						}
-						
-						const ArrayListIterator<E> &operator++() {
-							++_pos;
-							return *this;
-						}
-				
-				private:
-						int _pos;
-						const ArrayList<E> *_p_vec;
-				};
-				
-				template <class E>
 				class ArrayList :
-					//public virtual AbstractList<E>,
-					//public virtual List<E>,
+					// public virtual AbstractList<E>,
+					// public virtual List<E>,
 					public virtual Serializable,
 					public virtual Cloneable,
 					public virtual RandomAccess {
@@ -93,19 +68,21 @@ namespace Java {
 						String backup;
 				
 				public:
-						
 						_iterator begin() {
 							return &this->original[ 0 ];
-						};
+						}
+						
 						_const_iterator begin() const {
 							return &this->original[ 0 ];
-						};
+						}
+						
 						_iterator end() {
 							return &this->original[ this->original.size() ];
-						};
+						}
+						
 						_const_iterator end() const {
 							return &this->original[ this->original.size() ];
-						};
+						}
 						
 						/**
 						 * Constructs an empty list
@@ -138,7 +115,7 @@ namespace Java {
 						/**
 						 * Constructs a list containing the elements of the specified collection
 						 *
-						 * @param c
+						 * @param collection
 						 */
 						ArrayList(Collection<E> collection) {
 						
@@ -194,7 +171,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean addAll(Collection<E> collection) {
-							// TODO
+							// TODO: Please discuss about param Collection
 							return true;
 						}
 						
@@ -203,11 +180,11 @@ namespace Java {
 						 * starting at the specified position.
 						 *
 						 * @param index
-						 * @param c
+						 * @param collection
 						 * @return boolean
 						 */
 						boolean addAll(int index, Collection<E> collection) {
-							// TODO
+							// TODO: Please discuss about param Collection
 							return true;
 						}
 						
@@ -222,31 +199,36 @@ namespace Java {
 						/**
 						 * Returns a shallow copy of this ArrayList instance.
 						 *
-						 * @return Object
+						 * @return ArrayList
 						 */
-						Object clone() {
-							// TODO
-							Object c;
-							return c;
+						ArrayList clone() {
+							ArrayList<E> resultArrayList = *this;
+							return resultArrayList;
 						}
 						
 						/**
 						 * Returns true if this list contains the specified element.
 						 *
-						 * @param o
+						 * @param element
 						 * @return boolean
 						 */
 						boolean contains(E element) const {
-							// TODO
-							return true;
+							for (E item : *this) {
+								if (item == element) {
+									return true;
+								}
+							}
+							return false;
 						}
 						
 						/**
+						 * Returns true if this collection contains all of the elements in the specified collection.
 						 *
-						 * @param c
-						 * @return
+						 * @param collection
+						 * @return boolean
 						 */
 						boolean containsAll(Collection<Object> collection) const {
+							// TODO: Please discuss about param Collection
 							return true;
 						}
 						
@@ -268,18 +250,20 @@ namespace Java {
 						 * @param action
 						 */
 						void forEach(Consumer<E> action) const {
-							// TODO
+							// TODO: Please complete class Consumer
 						}
 						
 						/**
 						 * Returns the element at the specified position in this list.
 						 *
 						 * @param index
-						 * @return
+						 * @return E
 						 */
 						E get(int index) const {
 							if (index < 0 || index >= this->size()) {
-								throw IndexOutOfBoundsException("Index out of range");
+								String message = "Index out of range: ";
+								message += Integer(index).stringValue();
+								throw IndexOutOfBoundsException(message);
 							}
 							return original.at(index);
 						}
@@ -288,11 +272,17 @@ namespace Java {
 						 * Returns the index of the first occurrence of the specified element in this list,
 						 * or -1 if this list does not contain the element.
 						 *
-						 * @param o
+						 * @param element
 						 * @return int
 						 */
 						int indexOf(E element) const {
-							return 0;
+							int index;
+							for (index = 0; index < this->size(); ++index) {
+								if (this->get(index) == element) {
+									return index;
+								}
+							}
+							return -1;
 						}
 						
 						/**
@@ -310,7 +300,7 @@ namespace Java {
 						 * @return Address of Iterator<E>
 						 */
 						Iterator<E> &iterator() const {
-							// TODO
+							// TODO: Please complete class Iterator
 							Iterator<E> *it = new Iterator<E>();
 							return *it;
 						}
@@ -323,8 +313,13 @@ namespace Java {
 						 * @return int
 						 */
 						int lastIndexOf(E element) const {
-							// TODO
-							return 0;
+							int index;
+							for (index = this->size() - 1; index >= 0; --index) {
+								if (this->get(index) == element) {
+									return index;
+								}
+							}
+							return -1;
 						}
 						
 						/**
@@ -357,20 +352,29 @@ namespace Java {
 						 */
 						E remove(int index) {
 							if (index < 0 || index >= this->size()) {
-								//FIXME: throw exception
+								String message = "Index out of range: ";
+								message += Integer(index).stringValue();
+								throw IndexOutOfBoundsException(message);
 							}
 							
+							E holder = this->get(index);
+							this->original.erase(this->original.begin() + index);
+							return holder;
 						}
 						
 						/**
 						 * Removes the first occurrence of the specified element
 						 * from this list, if it is present.
 						 *
-						 * @param object
+						 * @param element
 						 * @return boolean
 						 */
-						boolean remove(Object object) {
-							// TODO
+						boolean remove(E element) {
+							int position = this->indexOf(element);
+							if (position == -1) {
+								return false;
+							}
+							this->remove(position);
 							return true;
 						}
 						
@@ -382,7 +386,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean removeAll(Collection<Object> target) {
-							// TODO
+							// TODO: Please discuss about param Collection
 							return true;
 						}
 						
@@ -393,7 +397,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean removeIf(Predicate<E> filter) {
-							// TODO
+							// TODO: Please complete class Predicate
 							return true;
 						}
 						
@@ -404,18 +408,18 @@ namespace Java {
 						 * @param unaryOperator
 						 */
 						void replaceAll(UnaryOperator<E> unaryOperator) {
-							// TODO
+							// TODO: Please complete class UnaryOperator
 						}
 						
 						/**
 						 * Retains only the elements in this list that are contained
 						 * in the specified collection.
 						 *
-						 * @param c
-						 * @return
+						 * @param collection
+						 * @return boolean
 						 */
 						boolean retainAll(Collection<Object> collection) {
-							// TODO
+							// TODO: Please discuss about Param Collection
 							return true;
 						}
 						
@@ -425,11 +429,16 @@ namespace Java {
 						 *
 						 * @param index
 						 * @param element
-						 * @return Adress of E
+						 * @return E
 						 */
 						E set(int index, E element) {
-							E e;
-							return e;
+							if (index < 0 || index >= this->size()) {
+								String message = "Index out of range: ";
+								message += Integer(index).stringValue();
+								throw IndexOutOfBoundsException(message);
+							}
+							this->original[ index ] = element;
+							return this->original[ index ];
 						}
 						
 						/**
@@ -438,7 +447,7 @@ namespace Java {
 						 * @return int
 						 */
 						int size() const {
-							return original.size();
+							return static_cast<int>(this->original.size());
 						}
 						
 						/**
@@ -447,7 +456,7 @@ namespace Java {
 						 * @param cmp
 						 */
 						void sort(Comparator<E> cmp) {
-							// TODO
+							// TODO: Please complete class Comparator
 						}
 						
 						/**
@@ -456,57 +465,57 @@ namespace Java {
 						 * @return Spliterator<E>
 						 */
 						Spliterator<E> &spliterator() const {
-							// TODO
+							// TODO: Please complete class Spliterator
 							Spliterator<E> *spliterator = new Spliterator<E>();
 							return *spliterator;
 						}
 
 //            List<E> &subList(int fromIndex, int toIndex) const {
-//                // TODO
+//                // TODO: Please discuss about type return List
 //                List<E> *list = new ArrayList<E>();
 //                return *list;
 //            }
-						
-						/**
-						 * Returns an array containing all of the elements in this
-						 * list in proper sequence (from first to last element).
-						 *
-						 * @return Array<Object>
-						 */
-						Array<Object> toArray() {
-							// TODO
-							Array<Object> objects;
-							return objects;
+
+/**
+ * Returns an array containing all of the elements in this
+ * list in proper sequence (from first to last element).
+ *
+ * @return Array<Object>
+ */
+						Array<E> toArray() {
+							Array<E> resultArray;
+							for (E item : *this) {
+								resultArray.push(item);
+							}
+							return resultArray;
 						}
-						
-						/**
-						 * Returns an array containing all of the elements in this list
-						 * in proper sequence (from first to last element);the runtime type of
-						 * the returned array is that of the specified array.
-						 *
-						 * @tparam T
-						 * @param a
-						 * @return Array<T>
-						 */
-						template <class T>
-						Array<T> &toArray(Array<T> array) const {
-							// TODO
-							return array;
-						}
-						
-						/**
-						 * Trims the capacity of this ArrayList instance to be the list's current size.
-						 *
-						 */
+
+//			/**
+//			 * Returns an array containing all of the elements in this list
+//			 * in proper sequence (from first to last element);the runtime type of
+//			 * the returned array is that of the specified array.
+//			 *
+//			 * @tparam T
+//			 * @param a
+//			 * @return Array<T>
+//			 */
+//			template <class T>
+//			Array<T> &toArray(Array<T> array) const {
+//				return array;
+//			}
+
+/**
+ * Trims the capacity of this ArrayList instance to be the list's current size.
+ */
 						void trimToSize() {
-							// TODO
+							this->original.shrink_to_fit();
 						}
-						
-						/**
-						 * Convert ArrayList to string
-						 *
-						 * @return string
-						 */
+
+/**
+ * Convert ArrayList to string
+ *
+ * @return string
+ */
 						string toString() {
 							if (this->size() == 0) {
 								this->backup = "[]";
@@ -526,15 +535,28 @@ namespace Java {
 							this->backup = startArrayList;
 							return this->backup.toString();
 						}
-						
+
+/**
+ * A hash code value for this object.
+ *
+ * @return long
+ */
 						long hashCode() const {
-							return 0;
+							return Object::hashCode();
 						}
-						
+
+// TODO: Please discuss about param Object
 						boolean equals(const Object object) const {
 							return true;
 						}
-						
+
+/**
+ * Print ArrayList to screen
+ *
+ * @param os
+ * @param target
+ * @return std::ostream
+ */
 						friend std::ostream &operator<<(std::ostream &os, const ArrayList &target) {
 							for (E item : target) {
 								os << item << " ";
@@ -542,21 +564,29 @@ namespace Java {
 							os << std::endl;
 							return os;
 						}
-						
+
+/**
+ * Get and set element at index in ArrayList
+ *
+ * @param index
+ * @return E
+ */
 						E &operator[](int index) {
 							return this->original[ index ];
 						}
+				
 				protected:
-						/**
-						 * Removes from this list all of the elements
-						 * whose index is between fromIndex, inclusive, and toIndex, exclusive.
-						 * Shifts any succeeding elements to the left (reduces their index).
-						 *
-						 * @param fromIndex
-						 * @param toIndex
-						 */
+/**
+ * Removes from this list all of the elements
+ * whose index is between fromIndex, inclusive, and toIndex, exclusive.
+ * Shifts any succeeding elements to the left (reduces their index).
+ *
+ * @param fromIndex
+ * @param toIndex
+ */
 						void removeRange(int fromIndex, int toIndex) {
-							// TODO
+							this->original.erase(this->original.begin() + fromIndex,
+							                     this->original.begin() + toIndex);
 						}
 				};
 				
@@ -565,7 +595,8 @@ namespace Java {
 				private:
 						AbstractList<E> l;
 				};
-		}
-}
+			
+		} // namespace Util
+} // namespace Java
 
 #endif  // JAVA_UTIL_ARRAY_LIST_HPP_

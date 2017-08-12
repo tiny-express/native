@@ -28,7 +28,7 @@
 #define JAVA_STACK_LIST_HPP_
 
 #include "../Vector/Vector.hpp"
-#include "../../lang/IOException/IOException.hpp"
+#include "../../io/IOException/IOException.hpp"
 #include "../EmptyStackException/EmptyStackException.hpp"
 
 using namespace Java::Util;

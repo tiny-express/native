@@ -29,7 +29,7 @@ extern "C" {
 }
 
 #include "Integer.hpp"
-#include "../NumberFormatException/NumberFormatException.h"
+#include "../NumberFormatException/NumberFormatException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
@@ -1499,45 +1499,11 @@ TEST (JavaLang, IntegerToString) {
 	ASSERT_STR(expectedResultToString, realResultToString);
 }
 
-TEST (JavaLang, IntegerToStringObject) {
-	// Input different values of type int to compare to the realResult of Integer::toString
-	Integer zeroIntegerToString = 0;
-	Integer oneIntegerToString = 1;
-	Integer positiveIntegerToString = 10;
-	Integer maxIntegerToString = 2147483647;
-	Integer minIntegerToString = -2147483647;
-	
-	// Make a comparison between expected realResult and the real result
-	String expectedResultToString = "0";
-	String realResultToString = zeroIntegerToString.toStringObject();
-	ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
-	
-	// Make a comparison between expected realResult and the real result
-	expectedResultToString = "1";
-	realResultToString = oneIntegerToString.toStringObject();
-	ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
-	
-	// Make a comparison between expected realResult and the real result
-	expectedResultToString = "10";
-	realResultToString = positiveIntegerToString.toStringObject();
-	ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
-	
-	// Make a comparison between expected realResult and the real result
-	expectedResultToString = (string) "2147483647";
-	realResultToString = maxIntegerToString.toStringObject();
-	ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
-	
-	// Make a comparison between expected realResult and the real result
-	expectedResultToString = (string) "-2147483647";
-	realResultToString = minIntegerToString.toStringObject();
-	ASSERT_STR(expectedResultToString.toString(), realResultToString.toString());
-}
-
-TEST (JavaLang, IntegerToStringFromInt) {
-	ASSERT_STR((string) "0", Integer::toString(0).toString());
-	ASSERT_STR((string) "1", Integer::toString(1).toString());
-	ASSERT_STR((string) "-1", Integer::toString(-1).toString());
-	ASSERT_STR((string) "13", Integer::toString(13).toString());
+TEST(JavaLang, IntegerToStringFromInt) {
+    ASSERT_STR((string) "0", Integer::toString(0).toString());
+    ASSERT_STR((string) "1", Integer::toString(1).toString());
+    ASSERT_STR((string) "-1", Integer::toString(-1).toString());
+    ASSERT_STR((string) "13", Integer::toString(13).toString());
 }
 
 TEST (JavaLang, IntegerToStringWithRadix) {
