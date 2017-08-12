@@ -86,14 +86,110 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min(); //2.2250738
  */
 static int	MIN_EXPONENT_DOUBLE	= -1022;
 
+/**
+ * Init Double::MAX_VALUE
+ */
+static constexpr double initDoubleMaxValue () noexcept {
+    return (2 - pow(2, -52)) * pow(2, 1023);
+}
+
+/**
+ * Init Double::MIN_VALUE
+ */
+static constexpr double initDoubleMinValue () noexcept {
+    return pow(2, -1074);
+}
+
+/**
+ * Init Double::MIN_NORMAL_DOUBLE
+ */
+static constexpr double initMinNormalDouble () noexcept {
+    return pow(2, -1022);
+}
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
 		private:
 			double original;
-            string string_original;
+            string originalString;
+        public:
+            /**
+             * A constant holding the smallest positive normal value of type double, 2^-1022.
+             */
+            static constexpr double MIN_NORMAL = 2.2250738585072014E-308;
 
-		public:
+            /**
+             * The number of logical bits in the significand of a double number,
+             * including the implicit bit.
+             */
+            static const int SIGNIFICAND_WIDTH = 53;
+
+            /**
+             * Maximum exponent a finite double number may have.
+             */
+            static const int MAX_EXPONENT = 1023;
+
+            /**
+             * Minimum exponent a normalized double number may have.
+             */
+            static const int MIN_EXPONENT = -1022;
+
+            /**
+             * The exponent the smallest positive double subnormal value would have
+             * if it could be normalized.
+             */
+            static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
+
+            /**
+             * Bias used in representing a double exponent.
+             */
+            static const int EXP_BIAS = 1023;
+
+            /**
+             * Bit mask to isolate the sign bit of a double.
+             */
+            static const long SIGN_BIT_MASK = 0x8000000000000000L;
+
+            /**
+             * Bit mask to isolate the exponent field of a double.
+             */
+            static const long EXP_BIT_MASK = 0x7FF0000000000000L;
+
+            /**
+             * Bit mask to isolate the significand field of a double.
+             */
+            static const long    SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+
+            /**
+             * A constant holding the positive infinity of type
+             */
+            static constexpr double POSITIVE_INFINITY = INFINITY; // inf
+
+            /**
+             * A constant holding the negative infinity of type
+             */
+            static constexpr double NEGATIVE_INFINITY = -INFINITY; // -inf
+
+            /**
+             * A constant holding a Not-a-Number (NaN) value of type
+             */
+            static constexpr double NOT_A_NUMBER_DOUBLE = NAN; // -nan
+
+            /**
+             * A constant holding the largest positive finite value of type
+             */
+            static constexpr double MAX_VALUE = initDoubleMaxValue();
+            /**
+             * A constant holding the smallest positive normal value of type
+             */
+            static constexpr double MIN_NORMAL_DOUBLE = initMinNormalDouble(); // 2.225073858507201e-308
+
+            /**
+             * A constant holding the smallest positive nonzero value of type
+             */
+            static constexpr double MIN_VALUE = initDoubleMinValue(); //4.940656458412465e-324
+
+        public:
             /**
              * Double initialization
              *
@@ -222,7 +318,7 @@ namespace Java {
              * @param target
              * @return Double
              */
-            Double operator=(const Double &target);
+            Double &operator=(const Double &target);
 
             /**
              * Add AND assignment operator,
@@ -283,48 +379,48 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const;
+            short shortValue() const override;
 
             /**
              * Double value in Double
              *
              * @return int
              */
-            int intValue() const;
+            int intValue() const override;
 
             /**
              * Double value in Long
              *
              * @return long
              */
-            long longValue() const;
+            long longValue() const override;
 
             /**
              * Double value in float
              *
              * @return float
              */
-            float floatValue() const;
+            float floatValue() const override;
 
             /**
              * Double value in double
              *
              * @return double
              */
-            double doubleValue() const;
+            double doubleValue() const override;
 
             /**
              * Double to String
              *
              * @return String
              */
-            string toString() const;
+            string toString() const override;
 
             /**
              * Returns a string representation of the {double}
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param   d   the {double} to be converted.
+             * @param d the {double} to be converted.
              * @return a string representation of the argument.
              */
             static String toString(double d);

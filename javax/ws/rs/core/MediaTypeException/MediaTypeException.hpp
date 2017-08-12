@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,19 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "IOException.hpp"
-#include "../../Lang.hpp"
+#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_
+#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_
+
+#include "../../../../../java/lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 
-IOException::IOException() : Exception::Exception() {
-}
+namespace Javax {
+    namespace Ws  {
+        class MediaTypeException : public Exception {
+        public:
+            MediaTypeException();
+            MediaTypeException(String message);
+            MediaTypeException(String message, Throwable *cause);
+            MediaTypeException(Throwable *cause);
+        };  // class MediaTypeException
+    }  // namespace Ws
+}  // namespace Javax
 
-IOException::IOException(String message) : Exception::Exception(message) {
-}
-
-IOException::IOException(String message, Throwable *cause) : Exception::Exception(message, cause) {
-}
-
-IOException::IOException(Throwable *cause) : Exception::Exception(cause) {
-}
+#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP_

@@ -37,23 +37,23 @@ namespace Java {
 
 		private:
 			long original;
-            string string_original;
+            string originalString;
 
 		public:
 			/**
 			 * A constant holding the maximum value a long can have, 2^63-1.
 			 */
-			static long	MAX_VALUE;
+			static const long MAX_VALUE = 0x7fffffffffffffffL;;
 
 			/**
 			 * A constant holding the minimum value a long can have, -2^63.
 			 */
-			static long	MIN_VALUE;
+			static const long MIN_VALUE = 0x8000000000000000L;;
 
 			/**
 			 * The number of bits used to represent a long value in two's complement binary form.
 			 */
-			static int	SIZE;
+			static const int SIZE = 64;
 
 		public:
 			/**

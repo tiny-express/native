@@ -156,11 +156,21 @@ TEST (JavaUtil, RandomNextGaussian) {
     }
 }
 
-
 TEST (JavaUtil, RandomSetSeed) {
     // Given a random number generator
     Random random1;
     long expectSeed = (100 ^ 0x5DEECE66DL) & ((1L << 48) - 1);
     random1.setSeed(100);
     //ASSERT_EQUAL(expectSeed, random1.getSeed());
+}
+
+TEST (JavaUtil, RandomNextString) {
+    // Given a random number generator
+    Random random1;
+    String string = random1.nextString(10);
+    int index;
+    for (index = 0; index < 100; index++) {
+        string = random1.nextString(10);
+        ASSERT_EQUAL(10, string.length());
+    }
 }

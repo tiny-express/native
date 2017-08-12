@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unsigned_5flong_5flong',['unsigned_long_long',['../Double_8hpp.html#a78cc170761571914c4a1067c1e35abc2',1,'Double.hpp']]]
+  ['long_5flong',['long_long',['../Double_8hpp.html#a660257c623030cc87a8f5b66afa6754e',1,'Double.hpp']]]
 ];

@@ -25,13 +25,23 @@
  */
 
 #include "URLDecoder.hpp"
+#include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
 using namespace Java::Net;
 
-String URLDecoder::decode(String s) {
-    return String::valueOf(url_decode(s.toString()));
+String URLDecoder::decode(const String &source) {
+    return URLDecoder::decode(source, "UTF-8");
 }
 
-String URLDecoder::decode(String s, String enc) {
-    return "";
+String URLDecoder::decode(const String &source, const String &encoding) {
+    // TODO(truongchauhien): String class need to be refactoring.
+    String &referenceToEncoding = const_cast<String &>(encoding);
+    if (referenceToEncoding.toUpperCase() == "UTF-8") {
+        string decodedString = url_decode(source.toString());
+        String result(decodedString);
+        free(decodedString);
+        return result;
+    }
+    // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
+    throw UnsupportedEncodingException(encoding);
 }

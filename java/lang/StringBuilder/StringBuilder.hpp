@@ -35,12 +35,13 @@ using namespace Java::IO;
 namespace Java {
     namespace Lang {
         class StringBuilder :
-//              public Object,
+                public Object,
                 public virtual Serializable//,
 //              public virtual CharSequence
         {
         private:
             string original = NULL;
+            mutable String backupOriginalForToString;
             int currentLength = 0;
             int currentCapacity = 0;
 
@@ -118,7 +119,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Boolean &target);
+            StringBuilder &append(const Boolean &target);
 
             /**
              * Appends the string representation of the boolean argument to the sequence.
@@ -126,7 +127,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(boolean target);
+            StringBuilder &append(boolean target);
 
             /**
              * Appends the string representation of the Character argument to this sequence.
@@ -135,7 +136,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Character &target);
+            StringBuilder &append(const Character &target);
 
             /**
              * Appends the string representation of the char argument to this sequence.
@@ -144,7 +145,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(char target);
+            StringBuilder &append(char target);
 
             /**
              * Appends the string representation of the Character array argument to this sequence.
@@ -154,7 +155,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Array<Character> &target);
+            StringBuilder &append(const Array<Character> &target);
 
             /**
              * Appends the string representation of the char array argument to this sequence.
@@ -164,7 +165,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Array<char> &target);
+            StringBuilder &append(const Array<char> &target);
 
             /**
              * Appends the string representation of a subarray of the Character array argument to this sequence.
@@ -177,7 +178,7 @@ namespace Java {
              * @return StringBuilder
              * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
              */
-            StringBuilder append(const Array<Character> &target, int offset, int length);
+            StringBuilder &append(const Array<Character> &target, int offset, int length);
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
@@ -190,7 +191,7 @@ namespace Java {
              * @return StringBuilder
              * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
              */
-            StringBuilder append(const Array<char> &target, int offset, int length);
+            StringBuilder &append(const Array<char> &target, int offset, int length);
 
             /**
              * Appends the specified character sequence to this sequence.
@@ -198,7 +199,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const CharSequence &target);
+            StringBuilder &append(const CharSequence &target);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
@@ -209,7 +210,7 @@ namespace Java {
              * @return StringBuilder
              * @throw IndexOutOfBoundsException - if start is negative, or start is greater than end or end is greater than target.length()
              */
-            StringBuilder append(const CharSequence &target, int start, int end);
+            StringBuilder &append(const CharSequence &target, int start, int end);
 
             /**
              * Appends the specified initializer list of char to this character sequence.
@@ -217,7 +218,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const std::initializer_list<char> &target);
+            StringBuilder &append(const std::initializer_list<char> &target);
 
             /**
              * Appends the specified string to this character sequence.
@@ -225,7 +226,7 @@ namespace Java {
              * @param target
              * @return
              */
-            StringBuilder append(const string target);
+            StringBuilder &append(const string target);
 
             /**
              * Appends the string representation of the Double argument to this sequence.
@@ -233,7 +234,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Double &target);
+            StringBuilder &append(const Double &target);
 
             /**
              * Appends the string representation of the double argument to this sequence.
@@ -241,7 +242,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(double target);
+            StringBuilder &append(double target);
 
             /**
              * Appends the string representation of the Float argument to this sequence.
@@ -249,7 +250,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Float &target);
+            StringBuilder &append(const Float &target);
 
             /**
              * Appends the string representation of the float argument to this sequence.
@@ -257,7 +258,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(float target);
+            StringBuilder &append(float target);
 
             /**
              * Appends the string representation of the Integer argument to this sequence.
@@ -265,7 +266,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Integer &target);
+            StringBuilder &append(const Integer &target);
 
             /**
              * Appends the string representation of the int argument to this sequence.
@@ -273,7 +274,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(int target);
+            StringBuilder &append(int target);
 
             /**
              * Appends the string representation of the Long argument to this sequence.
@@ -281,7 +282,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const Long &target);
+            StringBuilder &append(const Long &target);
 
             /**
              * Appends the string representation of the long argument to this sequence.
@@ -289,7 +290,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(long target);
+            StringBuilder &append(long target);
 
             /**
              * Appends the string representation of the Object argument.
@@ -297,7 +298,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-//           StringBuilder append(const Object &target); // FIXME: Object.toString() return hashcode and it changes every time (can not test).
+//           StringBuilder &append(const Object &target); // FIXME: Object.toString() return hashcode and it changes every time (can not test).
 
             /**
              * Appends the specified string to this character sequence.
@@ -305,7 +306,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder append(const String &target);
+            StringBuilder &append(const String &target);
 
             /**
              * Appends the specified StringBuffer to this sequence.
@@ -313,7 +314,7 @@ namespace Java {
              * @param target
              * @return
              */
-//          StringBuilder append(const StringBuffer &target); // FIXME: StringBuffer doesn't implemented.
+//          StringBuilder &append(const StringBuffer &target); // FIXME: StringBuffer doesn't implemented.
 
             /**
              * Appends the string representation of the codePoint argument to this sequence.
@@ -321,7 +322,7 @@ namespace Java {
              * @param codePoint
              * @return StringBuilder
              */
-            StringBuilder appendCodePoint(int codePoint);
+            StringBuilder &appendCodePoint(int codePoint);
 
             /**
              * Returns the current capacity.
@@ -384,6 +385,11 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the beginIndex is negative, or endIndex is larger than the length of this sequence, or beginIndex is larger than endIndex.
              */
             int codePointCount(int beginIndex, int endIndex);
+
+            /**
+             * @see deleteRange
+             */
+//          StringBuilder delete(int start, int end);
 
             /**
              * Removes the characters in a substring of this sequence.
@@ -478,7 +484,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, boolean target);
+            StringBuilder &insert(int offset, boolean target);
 
             /**
              * Inserts the string representation of the Boolean argument into this sequence.
@@ -488,7 +494,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Boolean &target);
+            StringBuilder &insert(int offset, const Boolean &target);
 
             /**
              * Inserts the string representation of the char argument into this sequence.
@@ -496,9 +502,9 @@ namespace Java {
              * @param offset
              * @param target
              * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
+             * @throw IndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, char target);
+            StringBuilder &insert(int offset, char target);
 
             /**
              * Inserts the string representation of the Character argument into this sequence.
@@ -508,7 +514,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Character &target);
+            StringBuilder &insert(int offset, const Character &target);
 
             /**
              * Inserts the string representation of the char array argument into this sequence.
@@ -518,7 +524,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Array<char> &target);
+            StringBuilder &insert(int offset, const Array<char> &target);
 
             /**
              * Inserts the string representation of the Character array argument into this sequence.
@@ -528,7 +534,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Array<Character> &target);
+            StringBuilder &insert(int offset, const Array<Character> &target);
 
             /**
              * Inserts the string representation of a subarray of the target array argument into this sequence.
@@ -543,7 +549,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length().
              */
-            StringBuilder insert(int index, const Array<char> &target, int offset, int length);
+            StringBuilder &insert(int index, const Array<char> &target, int offset, int length);
 
             /**
              * Inserts the string representation of a subarray of the 'target' array argument into this sequence.
@@ -559,7 +565,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
              * or offset or length are negative, or (offset+length) is greater than target.length
              */
-            StringBuilder insert(int index, const Array<Character> &target, int offset, int length);
+            StringBuilder &insert(int index, const Array<Character> &target, int offset, int length);
 
             /**
              * Inserts the specified CharSequence into this sequence.
@@ -571,7 +577,7 @@ namespace Java {
              * @return StringBuilder
              * @throw IndexOutOfBoundsException - if the destinationOffset is invalid.
              */
-            StringBuilder insert(int destinationOffset, const CharSequence &target);
+            StringBuilder &insert(int destinationOffset, const CharSequence &target);
 
             /**
              * Inserts a subsequence of the specified CharSequence into this sequence.
@@ -587,7 +593,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if destinationOffset is negative or greater than length(),
              * or start or end are negative, or start is greater than end or end is greater than target.length()
              */
-            StringBuilder insert(int destinationOffset, const CharSequence &target, int start, int end);
+            StringBuilder &insert(int destinationOffset, const CharSequence &target, int start, int end);
 
             /**
              * Inserts the string representation of the Double argument into this sequence.
@@ -597,7 +603,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Double &target);
+            StringBuilder &insert(int offset, const Double &target);
 
             /**
              * Inserts the string representation of the double argument into this sequence.
@@ -607,7 +613,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, double target);
+            StringBuilder &insert(int offset, double target);
 
             /**
              * Inserts the string representation of the Float argument into this sequence.
@@ -617,7 +623,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Float &target);
+            StringBuilder &insert(int offset, const Float &target);
 
             /**
              * Inserts the string representation of the float argument into this sequence.
@@ -627,7 +633,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, float target);
+            StringBuilder &insert(int offset, float target);
 
             /**
              * Inserts the string representation of the second int argument into this sequence.
@@ -637,7 +643,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Integer &target);
+            StringBuilder &insert(int offset, const Integer &target);
 
             /**
              * Inserts the string representation of the second int argument into this sequence.
@@ -647,7 +653,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, int target);
+            StringBuilder &insert(int offset, int target);
 
             /**
              * Inserts the string representation of the Long argument into this sequence.
@@ -657,7 +663,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const Long &target);
+            StringBuilder &insert(int offset, const Long &target);
 
             /**
              * Inserts the string representation of the long argument into this sequence.
@@ -667,7 +673,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, long target);
+            StringBuilder &insert(int offset, long target);
 
             /**
              * Inserts the string representation of the Object argument into this character sequence.
@@ -677,7 +683,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-//          StringBuilder insert(int offset, const Object &target); // FIXME: String::valueOf(Object) doesn't exist.
+//          StringBuilder &insert(int offset, const Object &target); // FIXME: String::valueOf(Object) doesn't exist.
 
             /**
              * Inserts the string into this character sequence.
@@ -689,7 +695,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const String &target);
+            StringBuilder &insert(int offset, const String &target);
 
             /**
              * Inserts the string representation of the string argument into this sequence.
@@ -701,7 +707,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder insert(int offset, const string target);
+            StringBuilder &insert(int offset, const string target);
 
             /**
              * This method accepts a String as an argument, if the string argument occurs one or more times as a substring within this object,
@@ -869,7 +875,7 @@ namespace Java {
              *
              * @return string
              */
-            String toString() const;
+            string toString() const override;
 
             /**
              * Attempts to reduce storage used for the character sequence.

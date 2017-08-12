@@ -149,5 +149,4 @@ char *string_from_boolean(int target) {
     }
 
     return strdup("true");
-
 }
