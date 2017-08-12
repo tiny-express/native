@@ -584,7 +584,7 @@ boolean String::operator>=(const String &target) const {
  * Format string (base - currying function)
  * @param format
  * @return String
- */
+ *//*
 String String::format(const String &format) {
 	std::string result;
 	std::string inputString(format.toString());
@@ -608,9 +608,9 @@ String String::format(const String &format) {
 	}
 
 	return String(result.c_str());
-}
+}*/
 
-std::string String::print(const std::string &format, short value) {
+/*std::string String::print(const std::string &format, short value) {
     std::string result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
@@ -743,7 +743,7 @@ std::string String::print(const std::string &format, String value) {
     if(length > 0)
         result = std::string(buffer);
     return result;
-}
+}*/
 
 boolean String::contentEquals(const CharSequence &charSequence) {
     // TODO instanceof return false

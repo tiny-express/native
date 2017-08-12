@@ -628,28 +628,28 @@ TEST(JavaLang, StringSubString) {
 	ASSERT_STR(expect, result);
 }
 
-TEST(JavaLang, StringFormat) {
-	int intValue = -123;
-	long longValue = 123;
-	float floatValue = 123.456;
-	double doubleValue = 123.456789;
-	char* stringValue = "string";
-
-	Integer integerObject = -123;
-	Long longObject = 123456;
-	Float floatObject = 123.456;
-	Double doubleObject = 123.456789;
-	String stringObject = "String";
-
-	String expectString = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
-	String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
-    String resultString;
-
-    try {
-        resultString = String::format(format, intValue, longValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
-    } catch (...) {
-
-    }
-
-	ASSERT_STR(expectString.toString(), resultString.toString());
-}
+//TEST(JavaLang, StringFormat) {
+//	int intValue = -123;
+//	long longValue = 123;
+//	float floatValue = 123.456;
+//	double doubleValue = 123.456789;
+//	char* stringValue = "string";
+//
+//	Integer integerObject = -123;
+//	Long longObject = 123456;
+//	Float floatObject = 123.456;
+//	Double doubleObject = 123.456789;
+//	String stringObject = "String";
+//
+//	String expectString = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
+//	String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
+//    String resultString;
+//
+//    try {
+//        resultString = String::format(format, intValue, longValue, integerObject, longObject, floatValue, doubleValue, floatObject, doubleObject, stringValue, stringObject);
+//    } catch (...) {
+//
+//    }
+//
+//	ASSERT_STR(expectString.toString(), resultString.toString());
+//}
