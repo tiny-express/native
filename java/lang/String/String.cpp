@@ -746,11 +746,12 @@ std::string String::print(const std::string &format, String value) {
 }
 
 boolean String::contentEquals(const CharSequence &charSequence) {
-    if (instanceof<StringBuffer>(charSequence)) {
-        mutable std::mutex mutex;
+    // TODO instanceof return false
+/*    if (instanceof<StringBuffer>(&charSequence)) {
+        std::mutex mutex;
         std::lock_guard<std::mutex> guard(mutex);
         return strcmp(this->original, charSequence.toString()) == 0;
-    }
+    }*/
     return strcmp(this->original, charSequence.toString()) == 0;
 }
 

@@ -48,12 +48,12 @@ namespace Java {
             /**
              * Max value of unsigned int
              */
-            static constexpr unsigned int UNSIGNED_INT_MAX = std::numeric_limits<uint>::max();
+            static constexpr unsigned int UNSIGNED_INT_MAX = 0xffffffff;
 
             /**
              * Max value of unsigned int
              */
-            static constexpr unsigned int UNSIGNED_INT_MIN = std::numeric_limits<uint>::min();
+            static constexpr unsigned int UNSIGNED_INT_MIN = 0;
 
         public:
             /**
@@ -645,13 +645,6 @@ namespace Java {
              * represented by the argument in base 8
              */
             static String toOctalString(int inputInt);
-
-            /**
-             * Returns a String object representing this Integer 's value.
-             *
-             * @return a String representation of the value of this object in base 10
-             */
-            String toStringObject();
 
             /**
              * Returns a String object

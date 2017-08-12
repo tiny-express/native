@@ -224,7 +224,17 @@ TEST (JavaLang, StringContains) {
 }
 
 TEST (JavaLang, StringContentEqual) {
+    String string = String("Hello world");
     CharSequence *charSequence = new StringBuffer("Hello world");
+    ASSERT_TRUE(string.contentEquals(*charSequence));
+    StringBuffer *stringBuffer = dynamic_cast<StringBuffer *>(charSequence);
+    delete stringBuffer;
+
+    String stringEqual = String("Hello world");
+    ASSERT_TRUE(string.contentEquals(stringEqual));
+
+    String stringNotEqual = String("hello");
+    ASSERT_FALSE(string.contentEquals(stringNotEqual));
 }
 
 // FIXME

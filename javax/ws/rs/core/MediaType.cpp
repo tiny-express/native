@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -26,29 +26,42 @@
 
 #include "MediaType.hpp"
 #include "../../../../java/lang/StringBuilder/StringBuilder.hpp"
-#include "MediaTypeException.hpp"
+#include "MediaTypeException/MediaTypeException.hpp"
 
 using namespace Javax::Ws;
 
 #define CHAR_NOT_FOUND -1
 
-String MediaType::APPLICATION_ATOM_XML          = "application/atom+xml";
-String MediaType::APPLICATION_FORM_URLENCODED   = "application/x-www-form-urlencoded";
-String MediaType::APPLICATION_JSON              = "application/json";
-String MediaType::APPLICATION_OCTET_STREAM      = "application/octet-stream";
-String MediaType::APPLICATION_SVG_XML           = "application/svg+xml";
-String MediaType::APPLICATION_XHTML_XML         = "application/xhtml+xml";
-String MediaType::APPLICATION_XML               = "application/xml";
-String MediaType::MEDIA_TYPE_WILDCARD           = "*";
-String MediaType::MULTIPART_FORM_DATA           = "multipart/form-data";
-String MediaType::TEXT_HTML                     = "text/html";
-String MediaType::TEXT_PLAIN                    = "text/plain";
-String MediaType::TEXT_XML                      = "text/xml";
-String MediaType::WILDCARD                      = "*/*";
+const String MediaType::APPLICATION_ATOM_XML          = "application/atom+xml";
+const String MediaType::APPLICATION_FORM_URLENCODED   = "application/x-www-form-urlencoded";
+const String MediaType::APPLICATION_JSON              = "application/json";
+const String MediaType::APPLICATION_OCTET_STREAM      = "application/octet-stream";
+const String MediaType::APPLICATION_SVG_XML           = "application/svg+xml";
+const String MediaType::APPLICATION_XHTML_XML         = "application/xhtml+xml";
+const String MediaType::APPLICATION_XML               = "application/xml";
+const String MediaType::MEDIA_TYPE_WILDCARD           = "*";
+const String MediaType::MULTIPART_FORM_DATA           = "multipart/form-data";
+const String MediaType::TEXT_HTML                     = "text/html";
+const String MediaType::TEXT_PLAIN                    = "text/plain";
+const String MediaType::TEXT_XML                      = "text/xml";
+const String MediaType::WILDCARD                      = "*/*";
+
+const MediaType APPLICATION_ATOM_XML_TYPE             = MediaType("application","atom+xml");
+const MediaType APPLICATION_FORM_URLENCODED_TYPE      = MediaType("application","x-www-form-urlencoded");
+const MediaType APPLICATION_JSON_TYPE                 = MediaType("application","json");
+const MediaType APPLICATION_OCTET_STREAM_TYPE         = MediaType("application","octet-stream");
+const MediaType APPLICATION_SVG_XML_TYPE              = MediaType("application","svg+xml");
+const MediaType APPLICATION_XHTML_XML_TYPE            = MediaType("application","xhtml+xml");
+const MediaType APPLICATION_XML_TYPE                  = MediaType("application","xml");
+const MediaType MULTIPART_FORM_DATA_TYPE              = MediaType("multipart","form-data");
+const MediaType TEXT_HTML_TYPE                        = MediaType("text","html");
+const MediaType TEXT_PLAIN_TYPE                       = MediaType("text","plain");
+const MediaType TEXT_XML_TYPE                         = MediaType("text","xml");
+const MediaType WILDCARD_TYPE                         = MediaType();
 
 MediaType::MediaType() {
-    type = MEDIA_TYPE_WILDCARD;
-    subtype = MEDIA_TYPE_WILDCARD;
+    this->type = MEDIA_TYPE_WILDCARD;
+    this->subtype = MEDIA_TYPE_WILDCARD;
 }
 
 MediaType::MediaType(const String &type, const String &subtype) {
@@ -88,43 +101,42 @@ MediaType::MediaType(const String &type, const String &subtype, const HashMap<St
 }
 
 const HashMap<String, String> &MediaType::getParameters() const {
-    return parameters;
+    return this->parameters;
 };
 
 const String &MediaType::getSubtype() const {
-    return subtype;
+    return this->subtype;
 }
 
 const String &MediaType::getType() const {
-    return type;
+    return this->type;
 }
 
 boolean MediaType::isCompatible(MediaType other) {
-
-    if (!isWildcardType() && !other.isWildcardType() && !type.equals(other.getType())) {
+    if (!this->isWildcardType() && !other.isWildcardType() && !this->type.equals(other.getType())) {
         return false;
     }
 
-    if (isWildcardType() || other.isWildcardSubtype()) {
+    if (this->isWildcardType() || other.isWildcardSubtype()) {
         return true;
     }
 
-    if (type.equals(other.getType()) && subtype.equals(other.getSubtype())) {
+    if (this->type.equals(other.getType()) && this->subtype.equals(other.getSubtype())) {
         return true;
     }
 
     // wildcard with suffix? e.g. application/*+xml
-    if (isWildcardSubtype() || other.isWildcardSubtype()) {
-        int thisPlusIndex = subtype.indexOf('+');
+    if (this->isWildcardSubtype() || other.isWildcardSubtype()) {
+        int thisPlusIndex = this->subtype.indexOf('+');
         int otherPlusIndex = other.getSubtype().indexOf('+');
         if (thisPlusIndex == CHAR_NOT_FOUND && otherPlusIndex == CHAR_NOT_FOUND) {
             return true;
         }
 
         if (thisPlusIndex != CHAR_NOT_FOUND && otherPlusIndex != CHAR_NOT_FOUND) {
-            String subtypeBeforePlus = subtype.subString(0, thisPlusIndex - 1);
+            String subtypeBeforePlus = this->subtype.subString(0, thisPlusIndex - 1);
             String otherSubtypeBeforePlus = ((String) other.getSubtype()).subString(0, otherPlusIndex - 1);
-            String subtypeAfterPlus = subtype.subString(thisPlusIndex + 1);
+            String subtypeAfterPlus = this->subtype.subString(thisPlusIndex + 1);
             String otherSubtypeAfterPlus = ((String) other.getSubtype()).subString(otherPlusIndex + 1);
 
             if (subtypeAfterPlus.equals(otherSubtypeAfterPlus) &&
@@ -133,24 +145,22 @@ boolean MediaType::isCompatible(MediaType other) {
                 return true;
             }
         }
-
     }
 
     return false;
-
 }
 
-String MediaType::toString() {
-    String result = type + "/" + subtype;
-    return result;
+string MediaType::toString() {
+    this->backupForToString = this->type + "/" + this->subtype;
+    return this->backupForToString.toString();
 }
 
 boolean MediaType::isWildcardSubtype() {
-    return subtype.equals(MEDIA_TYPE_WILDCARD) || subtype.startsWith("*+");
+    return this->subtype.equals(MEDIA_TYPE_WILDCARD) || subtype.startsWith("*+");
 }
 
 boolean MediaType::isWildcardType() {
-    return type.equals(MEDIA_TYPE_WILDCARD);
+    return this->type.equals(MEDIA_TYPE_WILDCARD);
 }
 
 MediaType MediaType::valueOf(String type) {

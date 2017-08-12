@@ -107,13 +107,6 @@ namespace Java {
 			char charValue() const;
 
             /**
-             * Returns the value of this Byte as a string.
-             *
-             * @return string
-             */
-			string stringValue() const;
-
-            /**
              * Byte value
              *
              * @return byte
@@ -228,11 +221,11 @@ namespace Java {
 			short shortValue() const override;
 
             /**
-             * Returns a String object representing this Byte's value
+             * Returns a string representing this Byte's value
              *
-             * @return String
+             * @return string
              */
-			String toString();
+			string toString() const override;
 
             /**
              * Returns a new String object representing the specified byte with radix = 10

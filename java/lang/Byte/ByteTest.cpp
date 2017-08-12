@@ -40,26 +40,26 @@ TEST(JavaLang, ByteConstructor) {
     int expectResult = 0;
     int actualByteValue = defaultConstructorByte.intValue();
     ASSERT_EQUAL(expectResult, actualByteValue);
-    ASSERT_STR("0", defaultConstructorByte.toString().toString());
+    ASSERT_STR("0", defaultConstructorByte.toString());
 
 	Bytes byteConstructorByte = Bytes(3);
     expectResult = 3;
     actualByteValue = byteConstructorByte.intValue();
 	ASSERT_EQUAL(expectResult, actualByteValue);
-    ASSERT_STR("3", byteConstructorByte.toString().toString());
+    ASSERT_STR("3", byteConstructorByte.toString());
 
 
     // Constructor with String
     Bytes stringConstructorByte = Bytes("3");
     actualByteValue = stringConstructorByte.intValue();
     ASSERT_EQUAL(expectResult, actualByteValue);
-    ASSERT_STR("3", stringConstructorByte.toString().toString());
+    ASSERT_STR("3", stringConstructorByte.toString());
 
     // Copy constructor
     Bytes copyConstructorByte = Bytes(stringConstructorByte);
     actualByteValue = copyConstructorByte.intValue();
     ASSERT_EQUAL(expectResult, actualByteValue);
-    ASSERT_STR("3", copyConstructorByte.toString().toString());
+    ASSERT_STR("3", copyConstructorByte.toString());
 
     try {
         Bytes exceptionByte = Bytes("");
@@ -314,20 +314,12 @@ TEST(JavaLang, ByteShortValue) {
     ASSERT_EQUAL(expectResult, actualResult);
 }
 
-TEST(JavaLang, ByteStringValue) {
-    // Given a string and a Byte with the same value
-    Bytes byteToGetValue = Bytes("100");
-    string expectResult = (string) "100";
-    string actualResult = byteToGetValue.stringValue();
-    ASSERT_STR(expectResult, actualResult);
-}
-
 TEST(JavaLang, ByteToString) {
     // Given a string and a Byte with the same value
     Bytes byteToGetValue = 2;
-    String expectResult = "2";
-    String actualResult = byteToGetValue.toString();
-    ASSERT_STR(expectResult.toString(), actualResult.toString());
+    string expectResult = (string) "2";
+    string actualResult = byteToGetValue.toString();
+    ASSERT_STR(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteToStringWithByte) {
@@ -531,26 +523,26 @@ TEST(JavaLang, ByteByteOperator) {
     // Make a summation from validByte with targetByte and assign the result value to this Byte
     validByte += targetByte;
     ASSERT_EQUAL(summationByte.intValue(), validByte.intValue());
-    ASSERT_STR(summationByte.toString().toString(), validByte.toString().toString());
+    ASSERT_STR(summationByte.toString(), validByte.toString());
     validByte = 5;
 
     // Make a subtraction from validByte with targetByte and assign the result value to this Byte
     validByte -= targetByte;
     ASSERT_EQUAL(subtractionByte.intValue(), validByte.intValue());
-    ASSERT_STR(subtractionByte.toString().toString(), validByte.toString().toString());
+    ASSERT_STR(subtractionByte.toString(), validByte.toString());
 
     validByte = 5;
 
     // Make a multiplication from validByte with targetByte and assign the result value to this Byte
     validByte *= targetByte;
     ASSERT_EQUAL(multiplicationByte.intValue(), validByte.intValue());
-    ASSERT_STR(multiplicationByte.toString().toString(), validByte.toString().toString());
+    ASSERT_STR(multiplicationByte.toString(), validByte.toString());
     validByte = 5;
 
     // Make a division from validByte with targetByte and assign the result value to this Byte
     validByte /= targetByte;
     ASSERT_EQUAL(validByte.intValue(), validByte.intValue());
-    ASSERT_STR(divisionByte.toString().toString(), validByte.toString().toString());
+    ASSERT_STR(divisionByte.toString(), validByte.toString());
     validByte = 5;
 
     try {
@@ -563,7 +555,7 @@ TEST(JavaLang, ByteByteOperator) {
     // Make a modulo from validByte with targetByte and assign the result value to this Byte
     validByte %= targetByte;
     ASSERT_EQUAL(modulusByte.intValue(), validByte.intValue());
-    ASSERT_STR(modulusByte.toString().toString(), validByte.toString().toString());
+    ASSERT_STR(modulusByte.toString(), validByte.toString());
     validByte = 5;
 
     try {
