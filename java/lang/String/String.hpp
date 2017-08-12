@@ -62,7 +62,7 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
-            int hash = 0;
+            mutable int hash = 0;
 
 		public:
             /**
@@ -254,7 +254,7 @@ namespace Java {
              * @param index
              * @return String
              */
-			char charAt(int index) const;
+			char charAt(int index) const override;
 
             /**
              * Returns the character (Unicode code point) at the specified index.
@@ -469,7 +469,7 @@ namespace Java {
              *
              * @return int
              */
-            //long hashCode() const;
+            long hashCode() const;
 
 
             /**

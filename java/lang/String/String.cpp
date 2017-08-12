@@ -71,6 +71,7 @@ String::String(Array<byte> &byteArray) {
 String::String(const String &target) {
 	this->original = strdup(target.original);
 	this->size = target.size;
+    this->hash = target.hash;
 }
 
 String::String(const std::string &target) {
@@ -422,12 +423,6 @@ String String::trim() {
 	return result;
 }
 
-/**
- * String value of boolean
- *
- * @param target
- * @return String
- */
 String String::valueOf(boolean target) {
 	if (target) {
 		return (string) "true";
@@ -443,7 +438,7 @@ String String::valueOf(char charValue) {
 }
 
 String String::valueOf(string stringValue) {
-	if (is_empty(stringValue)) {
+	if (is_empty(stringValue) != 0) {
 		return (string) "";
 	}
 	return stringValue;
@@ -765,6 +760,17 @@ String String::copyValueOf(Array<char> &charArray, int offset, int count) {
 
 boolean String::equalsIgnoreCase(String anotherString) {
     return this->compareToIgnoreCase(anotherString) == 0;
+}
+
+long String::hashCode() const {
+    int hashCode = this->hash;
+    if (hashCode == 0 && this->size > 0) {
+        for (int i = 0; i < this->size; i++) {
+            hashCode = 31 * hashCode + this->original[i];
+        }
+        this->hash = hashCode;
+    }
+    return hashCode;
 }
 
 
