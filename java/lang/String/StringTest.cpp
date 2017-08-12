@@ -60,11 +60,10 @@ TEST (JavaLang, StringConstructor) {
     ASSERT_EQUAL(stringBuilder.length(), stringBuilderConstructor.length());
 
     // Given a StringBuffer for String constructor
-	// TODO wait hot fix
-//    StringBuffer stringBuffer  = StringBuffer("Hello world");
-//    String stringBufferConstructor = String(stringBuffer);
-//    ASSERT_STR("Hello world", stringBufferConstructor.toString());
-//    ASSERT_EQUAL(stringBuffer.length(), stringBufferConstructor.length());
+    StringBuffer stringBuffer  = StringBuffer("Hello world");
+    String stringBufferConstructor = String(stringBuffer);
+    ASSERT_STR("Hello world", stringBufferConstructor.toString());
+    ASSERT_EQUAL(stringBuffer.length(), stringBufferConstructor.length());
 
 	// Given a char Array
     Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
@@ -235,6 +234,40 @@ TEST (JavaLang, StringContentEqual) {
 
     String stringNotEqual = String("hello");
     ASSERT_FALSE(string.contentEquals(stringNotEqual));
+}
+
+TEST (JavaLang, StringCopyValueOf) {
+    // Given a char Array
+    Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
+
+    String copyArrayString = String::copyValueOf(charArray);
+    ASSERT_STR("Hello world", copyArrayString.toString());
+    ASSERT_EQUAL(charArray.length, copyArrayString.length());
+
+    String copySubArrayString = String::copyValueOf(charArray, 6, 5);
+    ASSERT_STR("world", copySubArrayString.toString());
+    ASSERT_EQUAL(5, copySubArrayString.length());
+
+    try {
+        String exeptionString = String::copyValueOf(charArray, -1, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+		String exeptionString = String::copyValueOf(charArray, 5, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+		String exeptionString = String::copyValueOf(charArray, 10, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 15", e.getMessage().toString());
+    }
 }
 
 // FIXME

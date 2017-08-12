@@ -346,16 +346,6 @@ namespace Java {
 			boolean contentEquals(const CharSequence &charSequence);
 
             /**
-             * Compares this String to the specified CharSequence.
-             * The result is true if and only if this String represents
-             * the same sequence of char values as the specified sequence.
-             *
-             * @param stringBuffer
-             * @return boolean
-             */
-            //boolean contentEquals(const StringBuffer &stringBuffer);
-
-            /**
              * Returns the String representation of the char array argument.
              * The contents of the character array are copied;
              * subsequent modification of the character array does not affect the returned string.
@@ -363,7 +353,7 @@ namespace Java {
              * @param charArray
              * @return a String that contains the characters of the charArray.
              */
-			//static String copyValueOf(const Array<char> &charArray);
+			static String copyValueOf(Array<char> &charArray);
 
             /**
              * Returns the String representation of a specific subarray of the char array argument.
@@ -376,7 +366,7 @@ namespace Java {
              * @return a String that contains the characters of the
              * specified subarray of charArray.
              */
-			//static String copyValueOf(const Array<char> &charArray, int offset, int count);
+			static String copyValueOf(Array<char> &charArray, int offset, int count);
 
             /**
              * String endswith a suffix

@@ -84,8 +84,8 @@ String::String(const StringBuilder &stringBuilder) {
 }
 
 String::String(const StringBuffer &stringBuffer) {
-    /*this->original = strdup(stringBuffer.getValue());
-    this->size = stringBuffer.length();*/
+    this->original = strdup(stringBuffer.getValue());
+    this->size = stringBuffer.length();
 }
 
 String::String(Array<char> &charArray, int offset, int count) {
@@ -174,7 +174,7 @@ String String::concat(String str) {
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-	return ( string_index(this->original, charSequence.toString(), 1) != NOT_FOUND );
+	return (string_index(this->original, charSequence.toString(), 1) != NOT_FOUND );
 }
 
 Array<byte> String::getBytes() const {
@@ -753,6 +753,14 @@ boolean String::contentEquals(const CharSequence &charSequence) {
         return strcmp(this->original, charSequence.toString()) == 0;
     }*/
     return strcmp(this->original, charSequence.toString()) == 0;
+}
+
+String String::copyValueOf(Array<char> &charArray) {
+    return String(charArray);
+}
+
+String String::copyValueOf(Array<char> &charArray, int offset, int count) {
+    return String(charArray, offset, count);
 }
 
 
