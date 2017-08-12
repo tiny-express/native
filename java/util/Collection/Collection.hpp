@@ -48,7 +48,9 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						virtual boolean add(E element);
+						virtual boolean add(E element) {
+							return true;
+						}
 						
 						/**
 						 * Add a Collection element to this collection
@@ -61,14 +63,17 @@ namespace Java {
 						 * Clear all element inside this collection
 						 * @return
 						 */
-						virtual void clear();
+						virtual void clear() {
+						}
 						
 						/**
 						 * Search for specified object, return true if it occurs
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean contains(E element);
+						virtual boolean contains(E element) {
+							return true;
+						}
 						
 						/**
 						 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
@@ -82,19 +87,25 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean equals(const Object object);
+						virtual boolean equals(const Object object) {
+							return true;
+						}
 						
 						/**
 						 * Make a hashcode through this virtual address on memory
 						 * @return int
 						 */
-						virtual long hashCode();
+						virtual long hashCode() {
+							return 0;
+						}
 						
 						/**
 						 * A hash code value for this object.
 						 * @return int
 						 */
-						virtual boolean isEmpty();
+						virtual boolean isEmpty() {
+							return true;
+						}
 						
 						/**
 						 * Don't support this method
@@ -107,14 +118,18 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean remove(Object object);
+						virtual boolean remove(Object object) {
+							return true;
+						}
 						
 						/**
 						 * Remove a collection of object inside this collection, return true if it exits and be removed all also
 						 * @param c
 						 * @return
 						 */
-						virtual boolean removeAll(Collection<Object> collection);
+						virtual boolean removeAll(Collection<Object> collection) {
+							return true;
+						}
 						
 						/**
 						 * Don't support this method
@@ -133,7 +148,9 @@ namespace Java {
 						 * Return number of element inside this collection
 						 * @return
 						 */
-						virtual int size();
+						virtual int size() {
+							return 0;
+						}
 						
 						/**
 						 * Don't support this method

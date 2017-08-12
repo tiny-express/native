@@ -51,7 +51,6 @@ namespace Java {
 			 * if the backing map has been modified after the entry was returned by the iterator,
 			 * except through the setValue operation on the map entry.
 			 */
-			template <class T, class F>
 			class Entry {
 				
 				/**
@@ -60,21 +59,33 @@ namespace Java {
 				 *
 				 * @return Comparator<Map::Entry<T,F>>
 				 */
-				Comparator<Entry<T, F> >	comparingByKey();
+				Comparator<Map<K,V>::Entry> comparingByKey() {
+					Comparator<Map<K,V>::Entry> comparator;
+					// TODO - loint@foodtiny.com
+					return comparator;
+				}
 				
 				/**
 				 * Returns a comparator that compares Map.Entry by key
 				 * using the given Comparator.
 				 *
-				 * @return Comparator<Entry<T,F>>
+				 * @return Comparator<Entry<K,V>>
 				 */
-				static Comparator<Entry<T, F>> comparingByKey(Comparator<Entry<T,F>> cmp);
+				static Comparator<Map<K,V>::Entry> comparingByKey(Comparator<Map<K, V>::Entry> cmp) {
+					Comparator<Map<K,V>::Entry> comparator;
+					// TODO - loint@foodtiny.com
+					return comparator;
+				};
 				
 				/**
 				  * Returns a comparator that compares Map.Entry in natural order on value.
 				 * @return Comparator<Map::Entry<K,V>>
 				 */
-				static Comparator<Map::Entry<K, V>> comparingByValue();
+				static Comparator<Map<K, V>::Entry> comparingByValue() {
+					Comparator<Map<K, V>::Entry> comparator;
+					// TODO - loint@foodtiny.com
+					return comparator;
+				};
 				
 				/**
 				 * Returns a comparator that compares Map.Entry by value
@@ -82,7 +93,11 @@ namespace Java {
 				 *
 				 * @return Comparator<Map.Entry<K,V>>
 				 */
-				Comparator<Map::Entry<T, F>>	comparingByValue(Comparator<Map::Entry<T,F>> cmp);
+				Comparator<Map<K, V>::Entry> comparingByValue(Comparator<Map<K, V>::Entry> cmp) {
+					Comparator<Map<K, V>::Entry> comparator;
+					// TODO - loint@foodtiny.com
+					return comparator;
+				};
 				
 				/**
 				 * Compares the specified object with this entry for equality.
@@ -90,43 +105,58 @@ namespace Java {
 				 * @param o
 				 * @return boolean
 				 */
-				boolean equals(Object o);
+				boolean equals(Object o) {
+					// TODO - loint@foodtiny.com
+					return true;
+				}
 				
 				/**
 				 * Returns the key corresponding to this entry.
 				 *
 				 * @return K
 				 */
-				T getKey();
+				K getKey() {
+					K k;
+					// TODO - loint@foodtiny.com
+					return k;
+				}
 				
 				/**
 				 * Returns the value corresponding to this entry.
 				 *
 				 * @return F
 				 */
-				F getValue();
+				V getValue() {
+					V v;
+					// TODO - loint@foodtiny.com
+					return v;
+				}
 				
 				/**
 				 * Returns the hash code value for this map entry.
 				 *
 				 * @return int
 				 */
-				int	hashCode();
+				long hashCode() {
+					return 0;
+				}
 				
 				/**
 				 * Replaces the value corresponding to this entry
 				 * with the specified value (optional operation).
 				 *
 				 * @param value
-				 * @return F
+				 * @return V
 				 */
-				F setValue(F value);
+				V setValue(V value);
 			};
 			
 			/**
 			 * Removes all of the mappings from this map (optional operation).
 			 */
-			void clear() {}
+			void clear() {
+				// TODO - loint@foodtiny.com
+			}
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.

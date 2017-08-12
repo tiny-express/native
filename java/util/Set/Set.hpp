@@ -36,9 +36,18 @@ namespace Java {
 		namespace Util {
 				template <class E>
 				class Set :
-					public Collection<E>,
-					public Iterable<E> {
+					public virtual Collection<E>,
+					public virtual Iterable<E> {
+				private:
+						std::set<E> original;
 				public:
+						Set() {
+							// TODO - loint@foodtiny.com
+						}
+						~Set() {
+							// TODO - loint@foodtiny.com
+						}
+						
 						/**
 						 * Adds the specified element to this set if
 						 * it is not already present (optional operation).
@@ -46,7 +55,10 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						boolean add(E e);
+						boolean add(E e) {
+							// TODO - loint@foodtiny.com
+							return true;
+						}
 						
 						/**
 						 * Adds all of the elements in the specified collection
@@ -55,13 +67,18 @@ namespace Java {
 						 * @param c
 						 * @return boolean
 						 */
-						boolean addAll(Collection<E> c);
+						boolean addAll(Collection<E> c) {
+							// TODO - loint@foodtiny.com
+							return true;
+						}
 						
 						/**
 						 * Removes all of the elements from this set
 						 * (optional operation).
 						 */
-						void clear();
+						void clear() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns true if this set contains the specified element.
@@ -69,7 +86,10 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						boolean contains(Object o);
+						boolean contains(Object o) {
+							// TODO - loint@foodtiny.com
+							return true;
+						}
 						
 						/**
 						 * Returns true if this set contains all of the elements
@@ -78,7 +98,9 @@ namespace Java {
 						 * @param c
 						 * @return
 						 */
-						boolean containsAll(Collection<E> c);
+						boolean containsAll(Collection<E> c) {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 *  Compares the specified object with this set for equality.
@@ -86,28 +108,36 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						boolean equals(Object o);
+						boolean equals(Object o) {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns the hash code value for this set.
 						 *
 						 * @return int
 						 */
-						long hashCode();
+						long hashCode() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns true if this set contains no elements.
 						 *
 						 * @return boolean
 						 */
-						boolean isEmpty();
+						boolean isEmpty() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns an iterator over the elements in this set.
 						 *
 						 * @return Iterator<E>
 						 */
-						Iterator<E> iterator();
+						Iterator<E> iterator() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Removes the specified element from this set
@@ -116,7 +146,9 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						boolean remove(Object o);
+						boolean remove(Object o) {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Removes from this set all of its elements
@@ -125,7 +157,9 @@ namespace Java {
 						 *
 						 * @return boolean
 						 */
-						boolean removeAll(Collection<E> c);
+						boolean removeAll(Collection<E> c) {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Retains only the elements in this set
@@ -135,28 +169,38 @@ namespace Java {
 						 * @param c
 						 * @return boolean
 						 */
-						boolean retainAll(Collection<E> c);
+						boolean retainAll(Collection<E> c) {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns the number of elements in this set (its cardinality).
 						 *
 						 * @return int
 						 */
-						int size();
+						int size() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Creates a Spliterator over the elements in this set.
 						 *
 						 * @return
 						 */
-						Spliterator<E> spliterator();
+						Spliterator<E> spliterator() {
+							// TODO - loint@foodtiny.com
+						}
 						
 						/**
 						 * Returns an array containing all of the elements in this set.
 						 *
 						 * @return Array<Object>
 						 */
-						Array<Object> toArray();
+						Array<Object> toArray() {
+							Array<Object> array;
+							// TODO - loint@foodtiny.com
+							return array;
+						}
 						
 						/**
 						 * Returns an array containing all of the elements in this set;
@@ -165,7 +209,10 @@ namespace Java {
 						 * @param T
 						 */
 						template <class T>
-						Array<E> toArray(Array<T> a);
+						Array<E> toArray(Array<T> a) {
+							Array<E> array;
+							return array;
+						}
 				};
 		}
 }

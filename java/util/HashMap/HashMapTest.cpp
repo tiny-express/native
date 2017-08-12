@@ -108,8 +108,6 @@ TEST (JavaUtil, HashMapClone) {
 	// Given invalid key and make result is null
 	String notExpectedKey = "wrong key";
 	result = anotherMap.get(notExpectedKey);
-//    ASSERT_TRUE(result.isNull());
-//    ASSERT_STR("something", result.toString());
 }
 
 TEST (JavaUtil, HashMapContainsKey) {
@@ -137,6 +135,17 @@ TEST (JavaUtil, HashMapContainsValue) {
 	
 	boolean notFound = hashMap.containsValue(30.22);
 	ASSERT_FALSE(notFound);
+}
+
+TEST (JavaUtil, HashMapEntrySet)
+{
+	HashMap<String, String> hashMap;
+	hashMap.put("key1", "Hello");
+	hashMap.put("key2", "World");
+	
+	Set<Map<String, String>::Entry> entrySet;
+	entrySet = hashMap.entrySet();
+	
 }
 
 TEST (JavaUtil, HashMapGet) {

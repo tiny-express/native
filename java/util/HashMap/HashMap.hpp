@@ -179,7 +179,10 @@ namespace Java {
 						 * Returns a Set view of the mappings contained in this map.
 						 * @return Set<Map.Entry<K,V>> - a set view of the mappings contained in this map
 						 */
-						Set<Map::Entry<K, V>> entrySet();
+						Set<class Map<K, V>::Entry> entrySet() {
+							Set<class Map<K, V>::Entry> entrySet;
+							return entrySet;
+						}
 						
 						/**
 						 * Don't support this method
