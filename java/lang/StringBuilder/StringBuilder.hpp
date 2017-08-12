@@ -35,7 +35,7 @@ using namespace Java::IO;
 namespace Java {
     namespace Lang {
         class StringBuilder :
-//              public Object,
+                public Object,
                 public virtual Serializable//,
 //              public virtual CharSequence
         {
@@ -875,7 +875,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const;
+            string toString() const override;
 
             /**
              * Attempts to reduce storage used for the character sequence.

@@ -495,10 +495,6 @@ long Integer::toUnsignedLong(int inputInt) {
 	return ((long) inputInt) & 0xffffffff;
 }
 
-String Integer::toStringObject() {
-    return String(this->originalString);
-}
-
 boolean Integer::equals(Integer object) {
     return this->original == object.intValue();
 }
