@@ -23,6 +23,6 @@ script:
 - make native && sudo make install && sudo ldconfig
 - cd examples && ./build; fi
 after_success:
-  - ./misc/codecov.sh
+- ./misc/codecov.sh
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
