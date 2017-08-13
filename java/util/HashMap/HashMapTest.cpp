@@ -135,22 +135,23 @@ TEST (JavaUtil, HashMapContainsValue) {
 
 TEST (JavaUtil, HashMapEntrySet) {
 	HashMap<String, String> hashMap;
-	hashMap.put("key1", "Hello");
-	hashMap.put("key2", "World");
+	for (int index=1; index<=100; index++) {
+		hashMap.put("Key "+ String::valueOf(index), "Value " + String::valueOf(index));
+	}
 	int counter = 0;
 	for (Map<String, String>::Entry entry : hashMap.entrySet()) {
 		counter += 1;
 		if (counter == 1) {
-			ASSERT_STR("key2", entry.getKey().toString());
-			ASSERT_STR("World", entry.getValue().toString());
+			ASSERT_STR("Key 99", entry.getKey().toString());
+			ASSERT_STR("Value 99", entry.getValue().toString());
 		}
 		if (counter == 2) {
-			ASSERT_STR("key1", entry.getKey().toString());
-			ASSERT_STR("Hello", entry.getValue().toString());
+			ASSERT_STR("Key 98", entry.getKey().toString());
+			ASSERT_STR("Value 98", entry.getValue().toString());
 		}
 	}
 	// Make sure foreach is working
-	ASSERT_EQUAL(2, counter);
+	ASSERT_EQUAL(100, counter);
 }
 
 TEST (JavaUtil, HashMapGet) {
