@@ -23,3 +23,35 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_TIME_ZONE_ID_HPP_
+#define NATIVE_JAVA_TIME_ZONE_ID_HPP_
+
+#include "../../Lang.hpp"
+#include "../../util/Map/Map.hpp"
+
+namespace Java {
+    namespace Time {
+        class ZoneId : public Serializable {
+        public:
+            static const Map<String, String> SHORT_IDS;
+
+        public:
+//          static ZoneId from(const TemporalAccessor &temporal);
+//          static Set<String> 	getAvailableZoneIds();
+            static ZoneId &of(const String &zoneId);
+            static ZoneId &of(const String &zoneId, const Map<String,String> &aliasMap);
+//          static ZoneId &ofOffset(const String &prefix, const ZoneOffset &offset);
+            static ZoneId &systemDefault();
+        public:
+            virtual boolean equals(const Object &target) const;
+            virtual String getID() const = 0;
+//          virtual ZoneRules getRules() const = 0;
+            virtual long hashCode() const;
+            ZoneId &normalized();
+            string toString() const;
+        };  // class ZoneId
+    }  // namespace Time
+}  // namespace Java
+
+#endif  // NATIVE_JAVA_TIME_ZONE_ID_HPP_
