@@ -140,6 +140,8 @@ TEST (JavaUtil, HashMapEntrySet) {
 	}
 	int counter = 0;
 	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
+	// TODO - loint@foodtiny.com will improve entrySet
+	// then we can put it inside foreach without any performance issue
 	for (Map<String, String>::Entry entry : entrySet) {
 		counter += 1;
 		if (counter == 1) {
