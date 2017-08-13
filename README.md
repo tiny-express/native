@@ -8,7 +8,7 @@
 - Blazing fast performance, small footprint, low-level access with GAS & C
 - Provide rich Java core packages for productivity & maintainability
 - Zero memory leak with automatic storage
-- Prevents segfaults and no null pointer anymore
+- Prevents segfaults and null pointer exception
 
 
 This project is also useful for new developers in practical programming.
@@ -36,6 +36,13 @@ public:
             hashMap.put("argument " + String::valueOf(counter), argument);
             counter++;
         }
+        // Collect key value pairs
+        String pairs = "Pairs: \n";
+        for (Map<String, String>::Entry entry : hashMap.entrySet()) {
+            pairs += entry.getKey() + String(" - ") + entry.getValue() + String("\n");
+        }
+        System::out::println(pairs);
+        // Serialize to json data
         ArrayList<HashMap<String, String>> arrayList;
         arrayList.add(hashMap);
         System::out::println(arrayList.toString());
@@ -51,12 +58,18 @@ int main(int argc, char **argv) {
 Compile your source and link with native library
 ```bash
 $ g++ -c -o main.o HelloWorld.cpp
-$ gcc -o main main.o -lnative -lstdc++
+$ g++ -o main main.o -lnative
 $ ./main one two three
 ```
 
 Output:
 ```javascript
+We have 4 pairs:
+argument 3 is three
+argument 2 is two
+argument 1 is one
+argument 0 is ./main
+
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
 
