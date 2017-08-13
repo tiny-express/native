@@ -93,16 +93,12 @@ TEST (JavaUtil, HashMapClone) {
 	String expectedKey = "some key";
 	String expectedValue = "123";
 	String result = anotherMap.get(expectedKey);
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Given valid key/value to test and make sure that result is not null
 	expectedKey = "another thing and key";
 	expectedValue = "-44444";
 	result = anotherMap.get(expectedKey);
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Given invalid key and make result is null
@@ -137,15 +133,24 @@ TEST (JavaUtil, HashMapContainsValue) {
 	ASSERT_FALSE(notFound);
 }
 
-TEST (JavaUtil, HashMapEntrySet)
-{
+TEST (JavaUtil, HashMapEntrySet) {
 	HashMap<String, String> hashMap;
 	hashMap.put("key1", "Hello");
 	hashMap.put("key2", "World");
-	
-	Set<Map<String, String>::Entry> entrySet;
-	entrySet = hashMap.entrySet();
-	
+	int counter = 0;
+	for (Map<String, String>::Entry entry : hashMap.entrySet()) {
+		counter += 1;
+		if (counter == 1) {
+			ASSERT_STR("key2", entry.getKey().toString());
+			ASSERT_STR("World", entry.getValue().toString());
+		}
+		if (counter == 2) {
+			ASSERT_STR("key1", entry.getKey().toString());
+			ASSERT_STR("Hello", entry.getValue().toString());
+		}
+	}
+	// Make sure foreach is working
+	ASSERT_EQUAL(2, counter);
 }
 
 TEST (JavaUtil, HashMapGet) {

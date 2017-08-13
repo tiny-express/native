@@ -85,7 +85,6 @@ namespace Java {
 							return this->original.end();
 						};
 				
-				
 				public:
 						/**
 						 * Removes all of the mappings from this map. The map will be empty after this call returns.
@@ -101,7 +100,7 @@ namespace Java {
 						 */
 						HashMap<K, V> clone() const {
 							HashMap<K, V> result;
-							for (auto const &element: this->original) {
+							for (auto const &element : this->original) {
 								result.put(element.first, element.second);
 							}
 							return result;
@@ -181,6 +180,10 @@ namespace Java {
 						 */
 						Set<class Map<K, V>::Entry> entrySet() {
 							Set<class Map<K, V>::Entry> entrySet;
+							for(auto const &pair : this->original) {
+								Map<String, String>::Entry entry(pair.first, pair.second);
+								entrySet.add(entry);
+							}
 							return entrySet;
 						}
 						

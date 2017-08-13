@@ -63,12 +63,13 @@ namespace Java {
 				
 				private:
 						std::vector<E> original;
+						String backup;
 						typedef E *_iterator;
 						typedef const E *_const_iterator;
-						String backup;
 				
 				public:
 						_iterator begin() {
+							this->original[0];
 							return &this->original[ 0 ];
 						}
 						

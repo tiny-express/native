@@ -40,10 +40,30 @@ namespace Java {
 					public virtual Iterable<E> {
 				private:
 						std::set<E> original;
+						typedef typename std::set<E>::iterator _iterator;
+						typedef typename std::set<E>::const_iterator _const_iterator;
+						
+				public:
+						_iterator begin() {
+							return this->original.begin();
+						}
+						
+						_const_iterator begin() const {
+							return this->original.begin();
+						}
+						
+						_iterator end() {
+							return this->original.end();
+						}
+						
+						_const_iterator end() const {
+							return this->original.end();
+						}
 				public:
 						Set() {
 							// TODO - loint@foodtiny.com
 						}
+						
 						~Set() {
 							// TODO - loint@foodtiny.com
 						}
@@ -55,9 +75,12 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						boolean add(E e) {
-							// TODO - loint@foodtiny.com
-							return true;
+						boolean add(const E &e) {
+							auto insertResult = this->original.insert(e);
+							if (insertResult.first != this->original.end()) {
+								return true;
+							}
+							return false;
 						}
 						
 						/**
@@ -77,7 +100,7 @@ namespace Java {
 						 * (optional operation).
 						 */
 						void clear() {
-							// TODO - loint@foodtiny.com
+							this->original.clear();
 						}
 						
 						/**
@@ -127,7 +150,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean isEmpty() {
-							// TODO - loint@foodtiny.com
+							return this->original.empty();
 						}
 						
 						/**
@@ -148,6 +171,7 @@ namespace Java {
 						 */
 						boolean remove(Object o) {
 							// TODO - loint@foodtiny.com
+							return true;
 						}
 						
 						/**
@@ -179,7 +203,7 @@ namespace Java {
 						 * @return int
 						 */
 						int size() {
-							// TODO - loint@foodtiny.com
+							return original.size();
 						}
 						
 						/**
