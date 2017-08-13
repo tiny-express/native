@@ -21,7 +21,7 @@ script:
 - make native_test -j8
 - ./misc/memory_check
 - make native && sudo make install && sudo ldconfig
-- cd examples && ./build; fi
+- cd examples && ./build
 after_success:
 - ./misc/codecov.sh
 notifications:
