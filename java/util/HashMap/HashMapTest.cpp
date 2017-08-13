@@ -139,7 +139,8 @@ TEST (JavaUtil, HashMapEntrySet) {
 		hashMap.put("Key "+ String::valueOf(index), "Value " + String::valueOf(index));
 	}
 	int counter = 0;
-	for (Map<String, String>::Entry entry : hashMap.entrySet()) {
+	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
+	for (Map<String, String>::Entry entry : entrySet) {
 		counter += 1;
 		if (counter == 1) {
 			ASSERT_STR("Key 99", entry.getKey().toString());
