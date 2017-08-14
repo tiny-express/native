@@ -360,6 +360,26 @@ TEST (JavaLang, StringLength) {
 	ASSERT_EQUAL(0, textPlus.length());
 }
 
+TEST (JavaLang, StringHashCode) {
+    String string = "Hello world";
+    ASSERT_EQUAL(-832992604, string.hashCode());
+}
+
+TEST (JavaLang, StringRegionMatch) {
+    String str1 = "Collection of tutorials";
+    String str2 = "Consists of different tutorials";
+
+    /* matches characters from index 14 in str1 to characters from
+       index 22 in str2 considering same case of the letters.*/
+    boolean match = str1.regionMatches(14, str2, 22, 9);
+    ASSERT_TRUE(match);
+
+    // considering different case, will return false
+    str2 = "Consists of different Tutorials";
+    match = str1.regionMatches(14, str2, 22, 9);
+    ASSERT_FALSE(match);
+}
+
 /** This test case is made based on pattern_test.c */
 TEST (JavaLang, StringMatches) {
 //	// Init params for test string matches
@@ -633,7 +653,7 @@ TEST(JavaLang, StringSubString) {
 
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-    expect = (string) "ello ";
+    expect = (string) "ello";
 	ASSERT_STR(expect, result);
 }
 

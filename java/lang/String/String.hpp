@@ -576,7 +576,7 @@ namespace Java {
              * Returns the length of this string
              * @return int
              */
-			int length() const;
+			int length() const override;
 
             /**
              * Tells whether or not this string matches the given regular expression.
@@ -585,7 +585,7 @@ namespace Java {
              * @throw java.util.regex.PatternSyntaxException if the regular expression's syntax is invalid
              * @return true if, and only if, this string matches the given regular expression
              */
-			boolean matches(String regex) const;
+			// boolean matches(String regex) const;
 
             /**
              * Returns the index within this String that is offset
@@ -600,7 +600,8 @@ namespace Java {
              * the absolute value of codePointOffset code points.
              * @return the index within this String
              */
-            int offsetByCodePoints(int index, int codePointOffset);
+            // TODO need Character
+            // int offsetByCodePoints(int index, int codePointOffset);
 
             /**
              * Tests if two string regions are equal.
@@ -786,7 +787,7 @@ namespace Java {
              *
              * @return a String contain value of this String
              */
-			string toString() const;
+			string toString() const override ;
 
             /**
              * Returns the String representation of the boolean argument.

@@ -314,10 +314,10 @@ int String::length() const {
 	return this->size;
 }
 
-boolean String::matches(String regex) const {
-	int result = string_matches(this->original, regex.toString());
-	return result == TRUE;
-}
+//boolean String::matches(String regex) const {
+//	int result = string_matches(this->original, regex.toString());
+//	return result == TRUE;
+//}
 
 String String::replace(char oldChar, char newChar) const {
 	string oldString = string_from_char(oldChar);
@@ -480,11 +480,11 @@ String String::valueOf(double doubleValue) {
 }
 
 String String::subString(int beginIndex) {
-   return this->subString(beginIndex, this->size - 1);
+   return this->subString(beginIndex, this->size);
 }
 
 String String::subString(int beginIndex, int endIndex) {
-	string holder = string_from_to(this->original, beginIndex, endIndex);
+	string holder = string_from_to(this->original, beginIndex, endIndex - 1);
 	String result = holder;
 	free(holder);
 	return result;
@@ -771,6 +771,12 @@ long String::hashCode() const {
         this->hash = hashCode;
     }
     return hashCode;
+}
+
+boolean String::regionMatches(int thisOffset, String otherString, int otherOffset, int len) {
+    String thisString = this->subString(thisOffset, thisOffset + len - 1);
+    otherString = otherString.subString(otherOffset, otherOffset + len - 1);
+    return thisString.compareTo(otherString) == 0;
 }
 
 
