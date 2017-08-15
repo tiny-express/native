@@ -267,6 +267,9 @@ int String::lastIndexOf(int character) {
 }
 
 int String::lastIndexOf(int character, int fromIndex) {
+    if (fromIndex > this->size - 1) {
+        return this->lastIndexOf(character);
+    }
 #ifdef __linux__
 	register
 #endif
@@ -307,7 +310,6 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	// Re-calculate first character of str
 	result = this->size - ( result + subString.size );
 	return result;
-
 }
 
 int String::length() const {
@@ -525,14 +527,11 @@ String &String::operator+=(const_string target) {
 }
 
 boolean String::operator==(const String &target) const {
-	if (string_equals(this->original, target.toString())) {
-		return true;
-	}
-	return false;
+    return string_equals(this->original, target.toString()) != 0;
 }
 
 String &String::operator=(const String &target) {
-	if (this->original != NULL) {
+	if (this->original != nullptr) {
 		free(this->original);
 	}
 	this->original = strdup(target.original);
@@ -545,34 +544,22 @@ boolean String::operator!=(const String &target) const {
 }
 
 boolean String::operator<(const String &target) const {
-	if (strcmp(this->original, target.toString()) < 0) {
-		return true;
-	}
+    return strcmp(this->original, target.toString()) < 0;
 
-	return false;
 }
 
 boolean String::operator>(const String &target) const {
-	if (strcmp(this->original, target.toString()) > 0) {
-		return true;
-	}
+    return strcmp(this->original, target.toString()) > 0;
 
-	return false;
 }
 
 boolean String::operator<=(const String &target) const {
-	if (strcmp(this->original, target.toString()) > 0) {
-		return false;
-	}
+    return strcmp(this->original, target.toString()) <= 0;
 
-	return true;
 }
 
 boolean String::operator>=(const String &target) const {
-	if (strcmp(this->original, target.toString()) < 0) {
-		return false;
-	}
-	return true;
+    return strcmp(this->original, target.toString()) >= 0;
 }
 
 /**
@@ -774,9 +761,16 @@ long String::hashCode() const {
 }
 
 boolean String::regionMatches(int thisOffset, String otherString, int otherOffset, int len) {
-    String thisString = this->subString(thisOffset, thisOffset + len - 1);
-    otherString = otherString.subString(otherOffset, otherOffset + len - 1);
-    return thisString.compareTo(otherString) == 0;
+	return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
+}
+
+boolean String::regionMatches(boolean ignoreCase, int thisOffset, String otherString, int otherOffset, int len) {
+	String thisString = this->subString(thisOffset, thisOffset + len);
+	otherString = otherString.subString(otherOffset, otherOffset + len);
+	if (ignoreCase) {
+		return thisString.compareToIgnoreCase(otherString) == 0;
+	}
+	return thisString.compareTo(otherString) == 0;
 }
 
 

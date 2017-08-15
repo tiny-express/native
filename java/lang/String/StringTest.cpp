@@ -312,6 +312,9 @@ TEST (JavaLang, StringIndexOf) {
 	result1 = textPlus.lastIndexOf('H', 2);
 	ASSERT_EQUAL(0, result1);
 
+    result1 = textPlus.lastIndexOf('H', 100);
+    ASSERT_EQUAL(12, result1);
+
 	// Given validString check lastIndexOf(string)
 	String validString = "awesome keyword inside this awesome string";
 	String subString = "awesome";
@@ -366,19 +369,55 @@ TEST (JavaLang, StringHashCode) {
 }
 
 TEST (JavaLang, StringRegionMatch) {
-    String str1 = "Collection of tutorials";
-    String str2 = "Consists of different tutorials";
+    String string1 = "Collection of tutorials";
+    String string2 = "Consists of different tutorials";
+    String string3 = "CONSISTS OF DIFFERENT TUTORIALS";
 
-    /* matches characters from index 14 in str1 to characters from
-       index 22 in str2 considering same case of the letters.*/
-    boolean match = str1.regionMatches(14, str2, 22, 9);
+    // Case considering
+    boolean match = string1.regionMatches(14, string2, 22, 9);
     ASSERT_TRUE(match);
 
-    // considering different case, will return false
-    str2 = "Consists of different Tutorials";
-    match = str1.regionMatches(14, str2, 22, 9);
+    match = string1.regionMatches(14, string2, 20, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(14, string3, 22, 9);
+    ASSERT_FALSE(match);
+
+    // Ignore case
+    match = string1.regionMatches(true, 14, string2, 22, 9);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(true, 14, string2, 20, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string3, 22, 9);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(false, 14, string3, 22, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, -1, string2, 22, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string2, -1, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string2, 22, 100);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(true, 14, string2, 100, 9);
     ASSERT_FALSE(match);
 }
+
+/*
+TEST(JavaLang, StringJoin) {
+    String a = "-";
+    String b = "goc";
+    StringBuffer c = StringBuffer((string) "dog");
+    String result = String::join(a,b,c);
+    ASSERT_STR("goc-dog", result.toString());
+}
+*/
 
 /** This test case is made based on pattern_test.c */
 TEST (JavaLang, StringMatches) {

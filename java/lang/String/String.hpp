@@ -529,8 +529,16 @@ namespace Java {
              * @param elements
              * @return a new String that is composed of the elements
              */
-            template <typename... Args>
-            static String join(CharSequence &charSequence, Args... elements);
+           /* template<typename ... Args>
+            static String join(CharSequence &charSequence, Args ... args) {
+                String result;
+                for (const auto arg : {&args...})
+                {
+                    result += arg;
+                    result += charSequence.toString();
+                }
+                return result = result.subString(0, result.size - 1);
+            }*/
 
             /**
              * Returns the index within this string of the last occurrence of the specified character
@@ -618,7 +626,7 @@ namespace Java {
             /**
              * Tests if two string regions are equal.
              *
-             * @param regionMatches
+             * @param ignoreCase
              * @param thisOffset
              * @param otherString
              * @param otherOffset
@@ -627,7 +635,7 @@ namespace Java {
              * subregion of the String argument; false otherwise.
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
-            boolean regionMatches(boolean regionMatches, int thisOffset, String otherString, int otherOffset, int len);
+            boolean regionMatches(boolean ignoreCase, int thisOffset, String otherString, int otherOffset, int len);
 
             /**
              * Returns a string resulting from replacing all occurrences of oldChar in this String with newChar.
@@ -1006,7 +1014,6 @@ namespace Java {
              * @return a reference to this String
              */
 			String &operator+=(const_string target);
-
 
 		public:
             /**
