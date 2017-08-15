@@ -1680,7 +1680,6 @@ TEST(JavaLang, DoubleToBinary64StringType) {
 //    free(actualResult);
 }
 
-// TODO(thoangminh): Must replace ASSERT_DBL_NEAR by Double::compare(double double1, double double2);
 TEST(JavaLang, DoubleBinary64StringTypeToDouble) {
     string Binary64StringTypeInput;
     double expectedResult;

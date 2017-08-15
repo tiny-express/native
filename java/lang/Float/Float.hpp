@@ -646,7 +646,9 @@ namespace Java {
             * @return a {Float} instance representing {d}.
             */
 			static Float valueOf(float inputFloat);
-		};
+
+            static float binary32StringTypeToFloat(string binary32StringTypeInput);
+        };
 	}
 }
 

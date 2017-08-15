@@ -799,11 +799,11 @@ double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
     double mantisaBase10;
     double resultBinary64StringTypeToDouble;
 
-    int tempValue;
+    int tempValue = 0;
     int tempExponent;
     int i;
 
-    boolean isNaN = 1;
+    boolean isNaN = true;
 
     // 1. Find signOfResultbinary64StringTypeToDouble
     signOfResultbinary64StringTypeToDouble = 1;
@@ -822,7 +822,7 @@ double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
 
         if (binary64StringTypeInput[i] == '0') {
             tempValue = 0;
-            isNaN = 0;
+            isNaN = false;
         }
 
         exponent = exponent + tempValue * pow(2, tempExponent);
@@ -841,7 +841,7 @@ double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
 
         if (binary64StringTypeInput[i] == '0') {
             tempValue = 0;
-            isNaN = 0;
+            isNaN = false;
         }
 
         mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);

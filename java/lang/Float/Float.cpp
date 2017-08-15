@@ -406,3 +406,72 @@ string Float::floatToBinary32StringType(float floatInput)
     return  resultFloatToBinary32StringType;
 
 }
+
+float Float::binary32StringTypeToFloat (string binary32StringTypeInput) {
+    // Create variable
+    int signOfResultbinary32StringTypeToFloat;
+    float exponent;
+    float exponentAdjusted;
+    float mantisaBase10;
+    float resultBinary32StringTypeToFloat;
+
+    int tempValue = 0;
+    int tempExponent;
+    int i;
+
+    boolean isNaN = true;
+
+    // 1. Find signOfResultbinary32StringTypeToFloat
+    signOfResultbinary32StringTypeToFloat = 1;
+
+    if (binary32StringTypeInput[0] == '1') {
+        signOfResultbinary32StringTypeToFloat = -1;
+    }
+
+    // 2. Convert the exponent from base 2 -> base 10
+    exponent = 0;
+    tempExponent = 7;
+    for (i = 1; i <= 8; i++) {
+        if (binary32StringTypeInput[i] == '1') {
+            tempValue = 1;
+        }
+
+        if (binary32StringTypeInput[i] == '0') {
+            tempValue = 0;
+            isNaN = false;
+        }
+
+        exponent = exponent + tempValue * static_cast<float> (pow(2, tempExponent));
+        tempExponent--;
+    }
+    // 3. Find exponentAdjusted
+    exponentAdjusted = exponent - 127;
+
+    // 4. Convert the mantissa from base 2 -> base 10
+    mantisaBase10 = 0;
+    tempExponent = -1;
+    for (i = 9; i <= 31; i++) {
+        if (binary32StringTypeInput[i] == '1') {
+            tempValue = 1;
+        }
+
+        if (binary32StringTypeInput[i] == '0') {
+            tempValue = 0;
+            isNaN = false;
+        }
+
+        mantisaBase10 = mantisaBase10 + tempValue * static_cast<float> (pow(2, tempExponent));
+        tempExponent--;
+    }
+
+    // 5. Find the Float precision floating point decimal value
+    resultBinary32StringTypeToFloat
+            = signOfResultbinary32StringTypeToFloat * (1 + mantisaBase10)
+              * static_cast<float> (pow(2, exponentAdjusted));
+
+    if(isNaN) {
+        return NaN_NUMBER;
+    }
+
+    return resultBinary32StringTypeToFloat;
+}
