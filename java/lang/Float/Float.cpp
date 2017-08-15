@@ -184,3 +184,7 @@ Float Float::parseFloat(String inputString) {
 boolean Float::isNaN(float v) {
     return v != v;
 }
+
+Float Float::valueOf(String stringInput) {
+    return Float::parseFloat(stringInput);
+}
