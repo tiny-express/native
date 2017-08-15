@@ -560,3 +560,46 @@ TEST(JavaLang, FloatLongValue) {
     ASSERT_NOT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
 }
+
+TEST(JavaLang, FloatToString) {
+    // Create variable to test
+    Float variableTestToString;
+    string expectedResultToString;
+    string actualResultToString;
+
+    // Test POSITIVE_INFINITY
+    variableTestToString = POSITIVE_INFINITY;
+    expectedResultToString = (string) "inf";
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+
+    // Test NEGATIVE_INFINITY
+    variableTestToString = NEGATIVE_INFINITY;
+    expectedResultToString = (string) "-inf";
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+
+    // Test NaN_NUMBER
+    variableTestToString = NaN_NUMBER;
+    expectedResultToString = (string) "-nan"; // "nan" in MacOS
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+
+    // Test MAX_VALUE
+    variableTestToString = MAX_VALUE;
+    expectedResultToString = (string) "3.40282e+38";
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+
+    // Test MIN_NORMAL
+    variableTestToString = MIN_NORMAL;
+    expectedResultToString = (string) "1.4013e-45";
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+
+    // Test MIN_VALUE
+    variableTestToString = MIN_VALUE;
+    expectedResultToString = (string) "1.17549e-38";
+    actualResultToString = variableTestToString.toString();
+    ASSERT_STR(expectedResultToString , actualResultToString);
+}

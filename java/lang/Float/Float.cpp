@@ -158,36 +158,21 @@ float Float::floatValue() const {
 }
 
 short Float::shortValue() const {
-    return (short) this->original;
+    return static_cast<short> (this->original);
 }
 
 int Float::intValue() const {
-    return (int) this->original;
+    return static_cast<int> (this->original);
 }
 
-/**
- * Long value
- *
- * @return long
- */
 long Float::longValue() const {
-    return (long) this->original;
+    return static_cast<long> (this->original);
 }
 
-/**
- * Float value
- *
- * @return
- */
 double Float::doubleValue() const {
-    return this->original;
+    return static_cast<double> (this->original);
 }
 
-/**
- * Float to String
- *
- * @return String
- */
 string Float::toString() const {
     return this->originalString;
 }
