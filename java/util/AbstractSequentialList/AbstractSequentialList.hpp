@@ -30,16 +30,18 @@
 #include "../AbstractList/AbstractList.hpp"
 
 namespace Java {
-    namespace Util {
-        template <typename E>
-        class AbstractSequentialList : public AbstractList<E> {
-
-        protected:
-            AbstractSequentialList() {}
-            virtual ~AbstractSequentialList() {}
-
-        };
-    }
+		namespace Util {
+				template <typename E>
+				class AbstractSequentialList : public AbstractList<E> {
+				
+				protected:
+						AbstractSequentialList() {
+						}
+						virtual ~AbstractSequentialList() {
+						}
+					
+				};
+		}
 }
 
 #endif //JAVA_UTIL_ABSTRACT_SEQUENTIAL_LIST_HPP_

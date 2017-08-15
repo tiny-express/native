@@ -34,85 +34,85 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ShortConstructor) {
-    
-    // 	Given empty value for Short constructor and assign value - Return Long
-    Short emptyShort;
-    emptyShort = 3;
-    ASSERT_EQUAL(3, emptyShort.longValue());
-
-    // Given value for Short constructor and assign value - Return Integer
-    Short validShort = 3;
-    ASSERT_EQUAL(3, validShort.intValue());
-
+	
+	// 	Given empty value for Short constructor and assign value - Return Long
+	Short emptyShort;
+	emptyShort = 3;
+	ASSERT_EQUAL(3, emptyShort.longValue());
+	
+	// Given value for Short constructor and assign value - Return Integer
+	Short validShort = 3;
+	ASSERT_EQUAL(3, validShort.intValue());
+	
 }
 
 TEST (JavaLang, ShortComparision) {
 	// Give a valid number and make a comparision
-    Short validNumber = 30000;
-    Short targetNumber;
-
-    // Test validNumber is equal targetNumber
-    targetNumber = 30000;
-    ASSERT_TRUE(validNumber == targetNumber);
-
-    // Test validNumber is not equal targetNumber
-    targetNumber = 13000;
-    ASSERT_TRUE(validNumber != targetNumber);
-
-    // Test validNumber is less than targetNumber
-    targetNumber = 31000;
-    ASSERT_TRUE(validNumber < targetNumber);
-
-    // Test validNumber is equal or less then targetNumber
-    targetNumber = 31300;
-    ASSERT_TRUE(validNumber <= targetNumber);
-
-    // Test validNumber is more than targetNumber
-    targetNumber = 29000;
-    ASSERT_TRUE(validNumber > targetNumber);
-
-    // Test validNumber is equal or more than targetNumber
-    targetNumber = 23777;
-    ASSERT_TRUE(validNumber >= targetNumber);
+	Short validNumber = 30000;
+	Short targetNumber;
+	
+	// Test validNumber is equal targetNumber
+	targetNumber = 30000;
+	ASSERT_TRUE(validNumber == targetNumber);
+	
+	// Test validNumber is not equal targetNumber
+	targetNumber = 13000;
+	ASSERT_TRUE(validNumber != targetNumber);
+	
+	// Test validNumber is less than targetNumber
+	targetNumber = 31000;
+	ASSERT_TRUE(validNumber < targetNumber);
+	
+	// Test validNumber is equal or less then targetNumber
+	targetNumber = 31300;
+	ASSERT_TRUE(validNumber <= targetNumber);
+	
+	// Test validNumber is more than targetNumber
+	targetNumber = 29000;
+	ASSERT_TRUE(validNumber > targetNumber);
+	
+	// Test validNumber is equal or more than targetNumber
+	targetNumber = 23777;
+	ASSERT_TRUE(validNumber >= targetNumber);
 }
 
 TEST (JavaLang, ShortOperator) {
-    // 	Given a valid number
-    Long validNumber = 5;
-    Long targetNumber = 3;
-
-    // Make a summation with targetNumber
-    Long summationNumber = 8;
-    ASSERT_TRUE(summationNumber == (validNumber + targetNumber));
-
-    // Make a subtraction with targetNumber
-    Long subtractionNumber = 2;
-    ASSERT_TRUE(subtractionNumber == (validNumber - targetNumber));
-
-    // Make a multiplication with targetNumber
-    Long multiplicationNumber = 15;
-    ASSERT_TRUE(multiplicationNumber == (validNumber * targetNumber));
-
-    // Make a division with targetNumber
-    Long divisionNumber = 1;
-    ASSERT_TRUE(divisionNumber == (validNumber / targetNumber));
-
-    // Make a modulo with targetNumber
-    Long modNumber = 2;
-    ASSERT_TRUE(modNumber == (validNumber % targetNumber));
+	// 	Given a valid number
+	Long validNumber = 5;
+	Long targetNumber = 3;
+	
+	// Make a summation with targetNumber
+	Long summationNumber = 8;
+	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
+	
+	// Make a subtraction with targetNumber
+	Long subtractionNumber = 2;
+	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
+	
+	// Make a multiplication with targetNumber
+	Long multiplicationNumber = 15;
+	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
+	
+	// Make a division with targetNumber
+	Long divisionNumber = 1;
+	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
+	
+	// Make a modulo with targetNumber
+	Long modNumber = 2;
+	ASSERT_TRUE(modNumber == ( validNumber % targetNumber ));
 }
 
 TEST (JavaLang, ShortParseShort) {
 	// Given value for Long constructor and assign value - Return long
-    Short validShortPointer = Short::parseShort("6");
-    ASSERT_EQUAL(6, validShortPointer.shortValue());
+	Short validShortPointer = Short::parseShort("6");
+	ASSERT_EQUAL(6, validShortPointer.shortValue());
 }
 
-TEST(JavaLang, ShortToString) {
-    // Give a valid Short object then compare result of method toString - Should be equals
-    Short validShort = 12344;
-
-    string expect = (string) "12344";
-    string result = validShort.toString();
-    ASSERT_STR(expect, result);
+TEST (JavaLang, ShortToString) {
+	// Give a valid Short object then compare result of method toString - Should be equals
+	Short validShort = 12344;
+	
+	string expect = (string) "12344";
+	string result = validShort.toString();
+	ASSERT_STR(expect, result);
 }

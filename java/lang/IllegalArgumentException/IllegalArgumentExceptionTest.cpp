@@ -34,30 +34,30 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, IllegalArgumentExceptionConstructor) {
-    // Constructs a new IllegalArgumentException with null as its detail message.
-    IllegalArgumentException illegalArgumentExceptionWithNullMessage;
-    ASSERT_STR("", illegalArgumentExceptionWithNullMessage.getMessage().toString());
-
-    // Constructs a new IllegalArgumentException with the specified detail message.
-    IllegalArgumentException illegalArgumentExceptionWithMessage = IllegalArgumentException("IllegalArgumentException with the specified message");
-    ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessage.getMessage().toString());
-
-    // Constructs a new IllegalArgumentException with the specified detail message and cause.
-    IllegalArgumentException illegalArgumentExceptionWithMessageAndCause = IllegalArgumentException("IllegalArgumentException with the specified message and cause", &illegalArgumentExceptionWithMessage);
-    ASSERT_STR("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessageAndCause.getCause()->getMessage().toString());
-
-    // Constructs a new IllegalArgumentException with the specified cause.
-    IllegalArgumentException illegalArgumentExceptionWithCause = IllegalArgumentException(&illegalArgumentExceptionWithMessageAndCause);
-    ASSERT_STR("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	// Constructs a new IllegalArgumentException with null as its detail message.
+	IllegalArgumentException illegalArgumentExceptionWithNullMessage;
+	ASSERT_STR("", illegalArgumentExceptionWithNullMessage.getMessage().toString());
+	
+	// Constructs a new IllegalArgumentException with the specified detail message.
+	IllegalArgumentException illegalArgumentExceptionWithMessage = IllegalArgumentException("IllegalArgumentException with the specified message");
+	ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessage.getMessage().toString());
+	
+	// Constructs a new IllegalArgumentException with the specified detail message and cause.
+	IllegalArgumentException illegalArgumentExceptionWithMessageAndCause = IllegalArgumentException("IllegalArgumentException with the specified message and cause", &illegalArgumentExceptionWithMessage);
+	ASSERT_STR("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	
+	// Constructs a new IllegalArgumentException with the specified cause.
+	IllegalArgumentException illegalArgumentExceptionWithCause = IllegalArgumentException(&illegalArgumentExceptionWithMessageAndCause);
+	ASSERT_STR("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("IllegalArgumentException with the specified message", illegalArgumentExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, IllegalArgumentExceptionTryCatch) {
-    try {
-        throw IllegalArgumentException("Throw IllegalArgumentException");
-    }
-    catch (IllegalArgumentException e) {
-        ASSERT_STR("Throw IllegalArgumentException", e.getMessage().toString());
-    }
+	try {
+		throw IllegalArgumentException("Throw IllegalArgumentException");
+	}
+	catch (IllegalArgumentException e) {
+		ASSERT_STR("Throw IllegalArgumentException", e.getMessage().toString());
+	}
 }

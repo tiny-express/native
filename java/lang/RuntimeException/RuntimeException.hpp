@@ -31,15 +31,15 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Lang {
-        class RuntimeException : public Exception {
-        public:
-            RuntimeException();
-            RuntimeException(String message);
-            RuntimeException(Throwable *cause);
-            RuntimeException(String message, Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class RuntimeException : public Exception {
+				public:
+						RuntimeException();
+						RuntimeException(String message);
+						RuntimeException(Throwable *cause);
+						RuntimeException(String message, Throwable *cause);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_RUNTIMEEXCEPTION_HPP

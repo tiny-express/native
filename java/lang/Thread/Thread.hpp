@@ -33,48 +33,48 @@
 #include "../Runnable/Runnable.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Thread: public Object, public virtual Runnable {
-        private:
-            pthread_t   original;
-            string threadName;
-            Runnable    *target;
-
-            boolean     isThreadRunning;
-            ///Adds-on function to adapt pthread_create of C style
-        public:
-            void *pthread_run(void *context) {
-                ((Thread *)context)->target->run();
-            }
-
-            static void *pthread_helper(void *context) {
-                return ((Thread *) context)->pthread_run(context);
-            }
-
-        public:
-            Thread();
-            Thread(Runnable &target2);
-            Thread(Runnable &target2, String name);
-            Thread(String name);
-            //Thread(ThreadGroup group, Runnable &target);
-            //Thread(ThreadGroup group, Runnable &target, String &name);
-            //Thread(ThreadGroup group, Runnable &target, String &name, long stackSize);
-            //Thread(ThreadGroup group, String &name);
-            ~Thread();
-
-        public:
-            void run() const;
-            void start();
-            void stop();
-            void join();
-            void join(unsigned int millis);
-
-            string getName();
-            void setName(string target);
-            string toString() const;
-
-        };
-    }
+		namespace Lang {
+				class Thread : public Object, public virtual Runnable {
+				private:
+						pthread_t original;
+						string threadName;
+						Runnable *target;
+						
+						boolean isThreadRunning;
+						///Adds-on function to adapt pthread_create of C style
+				public:
+						void *pthread_run(void *context) {
+							((Thread *) context )->target->run();
+						}
+						
+						static void *pthread_helper(void *context) {
+							return ((Thread *) context )->pthread_run(context);
+						}
+				
+				public:
+						Thread();
+						Thread(Runnable &target2);
+						Thread(Runnable &target2, String name);
+						Thread(String name);
+						//Thread(ThreadGroup group, Runnable &target);
+						//Thread(ThreadGroup group, Runnable &target, String &name);
+						//Thread(ThreadGroup group, Runnable &target, String &name, long stackSize);
+						//Thread(ThreadGroup group, String &name);
+						~Thread();
+				
+				public:
+						void run() const;
+						void start();
+						void stop();
+						void join();
+						void join(unsigned int millis);
+						
+						string getName();
+						void setName(string target);
+						string toString() const;
+					
+				};
+		}
 }
 
 #endif   // JAVA_LANG_THREAD_THREAD_HPP_

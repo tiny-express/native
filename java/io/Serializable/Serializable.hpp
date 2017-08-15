@@ -28,13 +28,15 @@
 #define JAVA_IO_SERIALIZABLE_HPP_
 
 namespace Java {
-	namespace IO {
-		class Serializable {
-		protected:
-			Serializable() {};
-			virtual ~Serializable() {};
-		};
-	}
+		namespace IO {
+				class Serializable {
+				protected:
+						Serializable() {
+						};
+						virtual ~Serializable() {
+						};
+				};
+		}
 }
 
 #endif  // JAVA_IO_SERIALIZABLE_HPP_

@@ -31,24 +31,24 @@
 #include "../String/String.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Throwable : public Object {
-        private:
-            Throwable *cause;
-            String message;
-
-        public:
-            Throwable();
-            Throwable(String message);
-            Throwable(String message, Throwable *cause);
-            Throwable(Throwable *cause);
-
-        public:
-            Throwable *getCause();
-            String getMessage();
-            string toString();
-        };
-    }
+		namespace Lang {
+				class Throwable : public Object {
+				private:
+						Throwable *cause;
+						String message;
+				
+				public:
+						Throwable();
+						Throwable(String message);
+						Throwable(String message, Throwable *cause);
+						Throwable(Throwable *cause);
+				
+				public:
+						Throwable *getCause();
+						String getMessage();
+						string toString();
+				};
+		}
 }
 
 #endif//NATIVE_JAVA_LANG_THROWABLE_HPP

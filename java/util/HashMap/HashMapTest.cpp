@@ -93,23 +93,17 @@ TEST (JavaUtil, HashMapClone) {
 	String expectedKey = "some key";
 	String expectedValue = "123";
 	String result = anotherMap.get(expectedKey);
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Given valid key/value to test and make sure that result is not null
 	expectedKey = "another thing and key";
 	expectedValue = "-44444";
 	result = anotherMap.get(expectedKey);
-
-//    ASSERT_FALSE(result.isNull());
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	// Given invalid key and make result is null
 	String notExpectedKey = "wrong key";
 	result = anotherMap.get(notExpectedKey);
-//    ASSERT_TRUE(result.isNull());
-//    ASSERT_STR("something", result.toString());
 }
 
 TEST (JavaUtil, HashMapContainsKey) {
@@ -139,6 +133,30 @@ TEST (JavaUtil, HashMapContainsValue) {
 	ASSERT_FALSE(notFound);
 }
 
+TEST (JavaUtil, HashMapEntrySet) {
+	HashMap<String, String> hashMap;
+	for (int index=1; index<=100; index++) {
+		hashMap.put("Key "+ String::valueOf(index), "Value " + String::valueOf(index));
+	}
+	int counter = 0;
+	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
+	// TODO - loint@foodtiny.com will improve entrySet
+	// then we can put it inside foreach without any performance issue
+	for (Map<String, String>::Entry entry : entrySet) {
+		counter += 1;
+		if (counter == 1) {
+			ASSERT_STR("Key 99", entry.getKey().toString());
+			ASSERT_STR("Value 99", entry.getValue().toString());
+		}
+		if (counter == 2) {
+			ASSERT_STR("Key 98", entry.getKey().toString());
+			ASSERT_STR("Value 98", entry.getValue().toString());
+		}
+	}
+	// Make sure foreach is working
+	ASSERT_EQUAL(100, counter);
+}
+
 TEST (JavaUtil, HashMapGet) {
 	// Given valid hash map to test get()
 	HashMap<String, String> hashMap;
@@ -150,7 +168,7 @@ TEST (JavaUtil, HashMapGet) {
 	ASSERT_STR(expectedValue.toString(), result.toString());
 	
 	String defaultResult = hashMap.get("wrong_key");
-        ASSERT_TRUE(defaultResult.isEmpty());
+	ASSERT_TRUE(defaultResult.isEmpty());
 }
 
 TEST (JavaUtil, HashMapIsEmpty) {
@@ -415,7 +433,7 @@ TEST (JavaUtil, HashMapToString) {
 	string expectedResult = (string) "{\"key02\": \"value02\", \"key1\": \"value1\", \"key16\": \"value16\"}";
 	string result = hashMap.toString();
 	ASSERT_STR(expectedResult, result);
-
+	
 	// Given another hash map type to test
 	HashMap<String, Integer> anotherHashMap;
 	anotherHashMap.put("some key", 12313);
@@ -430,9 +448,9 @@ TEST (JavaUtil, HashMapToString) {
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
 	ASSERT_STR(expectedResult, result);
-
-    ArrayList<Integer> validArrayListInteger1 = {1, 2, 3, 4, 5};
-	ArrayList<Integer> validArrayListInteger2 = {100, 100, 100, 100, 1};
+	
+	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
+	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
 	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
 	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
 	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);

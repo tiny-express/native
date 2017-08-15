@@ -26,10 +26,8 @@
 
 #include "Long.hpp"
 #include "../Math/Math.hpp"
-#include "../Character/Character.hpp"
 
 using namespace Java::Lang;
-
 
 
 /**
@@ -38,8 +36,8 @@ using namespace Java::Lang;
  * @return
  */
 Long::Long() {
-    this->original = 0;
-    this->originalString = string_from_long(this->original);
+	this->original = 0;
+	this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -49,8 +47,8 @@ Long::Long() {
  * @return Long
  */
 Long::Long(long value) {
-    this->original = value;
-    this->originalString = string_from_long(this->original);
+	this->original = value;
+	this->originalString = string_from_long(this->original);
 }
 
 /**
@@ -60,17 +58,17 @@ Long::Long(long value) {
  * @return Long
  */
 Long::Long(const Long &target) {
-    this->original = target.original;
-    this->originalString = string_from_long(this->original);
+	this->original = target.original;
+	this->originalString = string_from_long(this->original);
 }
 
 /**
  * Default destructor
  */
 Long::~Long() {
-    if (this->originalString != NULL) {
-        free(this->originalString);
-    }
+	if (this->originalString != NULL) {
+		free(this->originalString);
+	}
 }
 
 /**
@@ -81,13 +79,13 @@ Long::~Long() {
  * @return int
  */
 int Long::bitCount(long i) {
-    i = i - ((i >> 1) & 0x5555555555555555L);
-    i = (i & 0x3333333333333333L) + ((i>> 2) & 0x3333333333333333L);
-    i = (i + (i >> 4)) & 0x0f0f0f0f0f0f0f0fL;
-    i = i + (i >> 8);
-    i = i + (i >> 16);
-    i = i + (i >> 32);
-    return (int)i & 0x7f;
+	i = i - (( i >> 1 ) & 0x5555555555555555L );
+	i = ( i & 0x3333333333333333L ) + (( i >> 2 ) & 0x3333333333333333L );
+	i = ( i + ( i >> 4 )) & 0x0f0f0f0f0f0f0f0fL;
+	i = i + ( i >> 8 );
+	i = i + ( i >> 16 );
+	i = i + ( i >> 32 );
+	return (int) i & 0x7f;
 }
 
 /**
@@ -96,8 +94,8 @@ int Long::bitCount(long i) {
  * @return int
  */
 int Long::byteValue() {
-    int result = (int)(char)this->original;
-    return result;
+	int result = (int) (char) this->original;
+	return result;
 }
 
 /**
@@ -108,13 +106,13 @@ int Long::byteValue() {
  * @return int
  */
 int Long::compare(long x, long y) {
-    if (x < y) {
-        return -1;
-    }
-    if (x == y) {
-        return 0;
-    }
-    return 1;
+	if (x < y) {
+		return -1;
+	}
+	if (x == y) {
+		return 0;
+	}
+	return 1;
 }
 
 /**
@@ -123,9 +121,9 @@ int Long::compare(long x, long y) {
  * @param Long anotherLong
  * @return int
  */
-int	Long::compareTo(Long anotherLong) {
-    int result = compare(this->original, anotherLong.original);
-    return result;
+int Long::compareTo(Long anotherLong) {
+	int result = compare(this->original, anotherLong.original);
+	return result;
 }
 
 /**
@@ -135,50 +133,48 @@ int	Long::compareTo(Long anotherLong) {
  * @return Long
  */
 Long Long::decode(String target) {
-    int radix = 10;
-    int index = 0;
-    boolean negative = false;
-    Long result;
-
-    if (target.length() == 0) {
-        //FIXME: exception
-        return -1;
-    }
-
-    char firstChar = target.charAt(0);
-    // Handle sign, if present
-    if (firstChar == '-') {
-        negative = true;
-        index++;
-    } else if (firstChar == '+') {
-        index++;
-    }
-
-    // Handle radix specifier, if present
-    if (target.startsWith("0x", index) || target.startsWith("0X", index)) {
-        index += 2;
-        radix = 16;
-    }
-    else if (target.startsWith("#", index)) {
-        index ++;
-        radix = 16;
-    }
-    else if (target.startsWith("0", index) && target.length() > 1 + index) {
-        index ++;
-        radix = 8;
-    }
-
-    if (target.startsWith("-", index) || target.startsWith("+", index)) {
-        //FIXME: exception
-        return -1;
-    }
-
-    result = Long::parseLong(target.getStringFromIndex(index), radix);
-    if (negative) {
-        result = -result.longValue();
-    }
-
-    return result;
+	int radix = 10;
+	int index = 0;
+	boolean negative = false;
+	Long result;
+	
+	if (target.length() == 0) {
+		//FIXME: exception
+		return -1;
+	}
+	
+	char firstChar = target.charAt(0);
+	// Handle sign, if present
+	if (firstChar == '-') {
+		negative = true;
+		index++;
+	} else if (firstChar == '+') {
+		index++;
+	}
+	
+	// Handle radix specifier, if present
+	if (target.startsWith("0x", index) || target.startsWith("0X", index)) {
+		index += 2;
+		radix = 16;
+	} else if (target.startsWith("#", index)) {
+		index++;
+		radix = 16;
+	} else if (target.startsWith("0", index) && target.length() > 1 + index) {
+		index++;
+		radix = 8;
+	}
+	
+	if (target.startsWith("-", index) || target.startsWith("+", index)) {
+		//FIXME: exception
+		return -1;
+	}
+	
+	result = Long::parseLong(target.getStringFromIndex(index), radix);
+	if (negative) {
+		result = -result.longValue();
+	}
+	
+	return result;
 }
 
 /**
@@ -187,7 +183,7 @@ Long Long::decode(String target) {
  * @return double
  */
 double Long::doubleValue() const {
-    return (double)this->original;
+	return (double) this->original;
 }
 
 /**
@@ -196,11 +192,11 @@ double Long::doubleValue() const {
  * @param Long target
  * @return boolean
  */
-boolean	Long::equals(Long target) {
-    if (this->original == target.original) {
-        return true;
-    }
-    return false;
+boolean Long::equals(Long target) {
+	if (this->original == target.original) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -209,7 +205,7 @@ boolean	Long::equals(Long target) {
  * @return float
  */
 float Long::floatValue() const {
-    return (float)this->original;
+	return (float) this->original;
 }
 
 /**
@@ -219,8 +215,8 @@ float Long::floatValue() const {
  * @return Long
  */
 Long Long::getLong(String nm) {
-    Long result = decode(nm);
-    return result;
+	Long result = decode(nm);
+	return result;
 }
 
 /**
@@ -231,7 +227,7 @@ Long Long::getLong(String nm) {
  * @return Long
  */
 Long Long::getLong(String nm, long val) {
-    return Long();
+	return Long();
 }
 
 /**
@@ -242,7 +238,7 @@ Long Long::getLong(String nm, long val) {
  * @return Long
  */
 Long Long::getLong(String nm, Long val) {
-    return Long();
+	return Long();
 }
 
 /**
@@ -250,8 +246,8 @@ Long Long::getLong(String nm, Long val) {
  *
  * @return int
  */
-int	Long::hashCode() {
-    return (int)(this->original ^ (this->original >> 32));
+int Long::hashCode() {
+	return (int) ( this->original ^ ( this->original >> 32 ));
 }
 
 /**
@@ -262,13 +258,13 @@ int	Long::hashCode() {
  * @return long
  */
 long Long::highestOneBit(long i) {
-    i |= (i >>  1);
-    i |= (i >>  2);
-    i |= (i >>  4);
-    i |= (i >>  8);
-    i |= (i >> 16);
-    i |= (i >> 32);
-    return (i - (i >> 1));
+	i |= ( i >> 1 );
+	i |= ( i >> 2 );
+	i |= ( i >> 4 );
+	i |= ( i >> 8 );
+	i |= ( i >> 16 );
+	i |= ( i >> 32 );
+	return ( i - ( i >> 1 ));
 }
 
 /**
@@ -276,8 +272,8 @@ long Long::highestOneBit(long i) {
  *
  * @return int
  */
-int	Long::intValue() const {
-    return (int)this->original;
+int Long::intValue() const {
+	return (int) this->original;
 }
 
 /**
@@ -286,7 +282,7 @@ int	Long::intValue() const {
  * @return long
  */
 long Long::longValue() const {
-    return this->original;
+	return this->original;
 }
 
 /**
@@ -297,7 +293,7 @@ long Long::longValue() const {
  * @return long
  */
 long Long::lowestOneBit(long i) {
-    return (i & -i);
+	return ( i & -i );
 }
 
 /**
@@ -352,8 +348,8 @@ int Long::numberOfTrailingZeros(long source) {
  * @return long
  */
 long Long::parseLong(String s) {
-    long result = parseLong(s, 10);
-    return result;
+	long result = parseLong(s, 10);
+	return result;
 }
 
 /**
@@ -364,58 +360,58 @@ long Long::parseLong(String s) {
  * @return long
  */
 long Long::parseLong(String s, int radix) {
-    //FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
-
-    long result = 0;
-    boolean negative = false;
-    int index = 0;
-    int length = s.length();
-    long limit = -Long::MAX_VALUE;
-    long multmin;
-    int digit;
-
-    if (length > 0) {
-        char firstChar = s.charAt(0);
-        if (firstChar < '0') { // Possible leading "+" or "-"
-            if (firstChar == '-') {
-                negative = true;
-                limit = Long::MIN_VALUE;
-            } else if (firstChar != '+') {
-                //FIXME: exception
-                return -1;
-            }
-            if (length == 1) { // Cannot have lone "+" or "-"
-                //FIXME: exception
-                return -1;
-            }
-
-            index++;
-        }
-
-        multmin = limit / radix;
-        while (index < length) {
-            // Accumulating negatively avoids surprises near MAX_VALUE
-            digit = Character::digit(s.charAt(index++), radix);
-            if (digit < 0) {
-                //FIXME: exception
-                return -1;
-            }
-            if (result < multmin) {
-                //FIXME: exception
-                return -1;
-            }
-            result *= radix;
-            if (result < limit + digit) {
-                //FIXME: exception
-                return -1;
-            }
-            result -= digit;
-        }
-    } else {
-        //FIXME: exception
-        return -1;
-    }
-    return negative ? result : -result;
+	//FIXME: correct radix, correct target, correct negative, correct '+' '-' in the target[0]
+	
+	long result = 0;
+	boolean negative = false;
+	int index = 0;
+	int length = s.length();
+	long limit = -Long::MAX_VALUE;
+	long multmin;
+	int digit;
+	
+	if (length > 0) {
+		char firstChar = s.charAt(0);
+		if (firstChar < '0') { // Possible leading "+" or "-"
+			if (firstChar == '-') {
+				negative = true;
+				limit = Long::MIN_VALUE;
+			} else if (firstChar != '+') {
+				//FIXME: exception
+				return -1;
+			}
+			if (length == 1) { // Cannot have lone "+" or "-"
+				//FIXME: exception
+				return -1;
+			}
+			
+			index++;
+		}
+		
+		multmin = limit / radix;
+		while (index < length) {
+			// Accumulating negatively avoids surprises near MAX_VALUE
+			digit = Character::digit(s.charAt(index++), radix);
+			if (digit < 0) {
+				//FIXME: exception
+				return -1;
+			}
+			if (result < multmin) {
+				//FIXME: exception
+				return -1;
+			}
+			result *= radix;
+			if (result < limit + digit) {
+				//FIXME: exception
+				return -1;
+			}
+			result -= digit;
+		}
+	} else {
+		//FIXME: exception
+		return -1;
+	}
+	return negative ? result : -result;
 }
 
 /**
@@ -426,13 +422,13 @@ long Long::parseLong(String s, int radix) {
  * @return long
  */
 long Long::reverse(long i) {
-    i = (i & 0x5555555555555555L) << 1 | (i >> 1) & 0x5555555555555555L;
-    i = (i & 0x3333333333333333L) << 2 | (i >> 2) & 0x3333333333333333L;
-    i = (i & 0x0f0f0f0f0f0f0f0fL) << 4 | (i >> 4) & 0x0f0f0f0f0f0f0f0fL;
-    i = (i & 0x00ff00ff00ff00ffL) << 8 | (i >> 8) & 0x00ff00ff00ff00ffL;
-    i = (i << 48) | ((i & 0xffff0000L) << 16) |
-        ((i >> 16) & 0xffff0000L) | (i >> 48);
-    return i;
+	i = ( i & 0x5555555555555555L ) << 1 | ( i >> 1 ) & 0x5555555555555555L;
+	i = ( i & 0x3333333333333333L ) << 2 | ( i >> 2 ) & 0x3333333333333333L;
+	i = ( i & 0x0f0f0f0f0f0f0f0fL ) << 4 | ( i >> 4 ) & 0x0f0f0f0f0f0f0f0fL;
+	i = ( i & 0x00ff00ff00ff00ffL ) << 8 | ( i >> 8 ) & 0x00ff00ff00ff00ffL;
+	i = ( i << 48 ) | (( i & 0xffff0000L ) << 16 ) |
+	    (( i >> 16 ) & 0xffff0000L ) | ( i >> 48 );
+	return i;
 }
 
 /**
@@ -443,8 +439,8 @@ long Long::reverse(long i) {
  * @return long
  */
 long Long::reverseBytes(long i) {
-    i = (i & 0x00ff00ff00ff00ffL) << 8 | (i >> 8) & 0x00ff00ff00ff00ffL;
-    return ((i << 48) | ((i & 0xffff0000L) << 16) | ((i >> 16) & 0xffff0000L) | (i >> 48));
+	i = ( i & 0x00ff00ff00ff00ffL ) << 8 | ( i >> 8 ) & 0x00ff00ff00ff00ffL;
+	return (( i << 48 ) | (( i & 0xffff0000L ) << 16 ) | (( i >> 16 ) & 0xffff0000L ) | ( i >> 48 ));
 }
 
 /**
@@ -456,7 +452,7 @@ long Long::reverseBytes(long i) {
  * @return long
  */
 long Long::rotateLeft(long i, int distance) {
-    return ((i << distance) | (i >> -distance));
+	return (( i << distance ) | ( i >> -distance ));
 }
 
 /**
@@ -468,7 +464,7 @@ long Long::rotateLeft(long i, int distance) {
  * @return long
  */
 long Long::rotateRight(long i, int distance) {
-    return ((i >> distance) | (i << -distance));
+	return (( i >> distance ) | ( i << -distance ));
 }
 
 /**
@@ -477,7 +473,7 @@ long Long::rotateRight(long i, int distance) {
  * @return short
  */
 short Long::shortValue() const {
-    return (short)this->original;
+	return (short) this->original;
 }
 
 /**
@@ -487,7 +483,7 @@ short Long::shortValue() const {
  * @return int
  */
 int Long::signum(long i) {
-    return (int) ((i >> 63) | (-i >> 63));
+	return (int) (( i >> 63 ) | ( -i >> 63 ));
 }
 
 /**
@@ -497,8 +493,8 @@ int Long::signum(long i) {
  * @return String
  */
 String Long::toBinaryString(long i) {
-    String result = toUnsignedString0(i, 1);
-    return result;
+	String result = toUnsignedString0(i, 1);
+	return result;
 }
 
 /**
@@ -508,8 +504,8 @@ String Long::toBinaryString(long i) {
  * @return String
  */
 String Long::toHexString(long i) {
-    String result = toUnsignedString0(i, 4);
-    return result;
+	String result = toUnsignedString0(i, 4);
+	return result;
 }
 
 /**
@@ -519,8 +515,8 @@ String Long::toHexString(long i) {
  * @return String
  */
 String Long::toOctalString(long i) {
-    String result = toUnsignedString0(i, 3);
-    return result;
+	String result = toUnsignedString0(i, 3);
+	return result;
 }
 
 /**
@@ -529,7 +525,7 @@ String Long::toOctalString(long i) {
  * @return String
  */
 string Long::toString() const {
-    return this->originalString;
+	return this->originalString;
 }
 
 /**
@@ -539,8 +535,8 @@ string Long::toString() const {
  * @return String
  */
 string Long::toString(long i) {
-    static Long result = i;
-    return result.toString();
+	static Long result = i;
+	return result.toString();
 }
 
 /**
@@ -550,8 +546,8 @@ string Long::toString(long i) {
  * @return Long
  */
 Long Long::valueOf(long l) {
-    Long result = l;
-    return result;
+	Long result = l;
+	return result;
 }
 
 /**
@@ -561,8 +557,8 @@ Long Long::valueOf(long l) {
  * @return Long
  */
 Long Long::valueOf(String s) {
-    Long result = decode(s);
-    return result;
+	Long result = decode(s);
+	return result;
 }
 
 /**
@@ -574,8 +570,8 @@ Long Long::valueOf(String s) {
  * @return Long
  */
 Long Long::valueOf(String s, int radix) {
-    Long result = parseLong(s, radix);
-    return result;
+	Long result = parseLong(s, radix);
+	return result;
 }
 
 /**
@@ -589,26 +585,26 @@ Long Long::valueOf(String s, int radix) {
  * @return int
  */
 int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
-    int charPos = len;
-    int radix = 1 << shift;
-    int mask = radix - 1;
-
-    //FIXME: move this to Integer.digits
-    static char digits[] = {
-            '0' , '1' , '2' , '3' , '4' , '5' ,
-            '6' , '7' , '8' , '9' , 'a' , 'b' ,
-            'c' , 'd' , 'e' , 'f' , 'g' , 'h' ,
-            'i' , 'j' , 'k' , 'l' , 'm' , 'n' ,
-            'o' , 'p' , 'q' , 'r' , 's' , 't' ,
-            'u' , 'v' , 'w' , 'x' , 'y' , 'z'
-    };
-
-    do {
-        buf[offset + --charPos] = digits[((int) val) & mask];
-        val >>= shift;
-    } while (val != 0 && charPos > 0);
-
-    return charPos;
+	int charPos = len;
+	int radix = 1 << shift;
+	int mask = radix - 1;
+	
+	//FIXME: move this to Integer.digits
+	static char digits[] = {
+		'0', '1', '2', '3', '4', '5',
+		'6', '7', '8', '9', 'a', 'b',
+		'c', 'd', 'e', 'f', 'g', 'h',
+		'i', 'j', 'k', 'l', 'm', 'n',
+		'o', 'p', 'q', 'r', 's', 't',
+		'u', 'v', 'w', 'x', 'y', 'z'
+	};
+	
+	do {
+		buf[ offset + --charPos ] = digits[ ((int) val ) & mask ];
+		val >>= shift;
+	} while (val != 0 && charPos > 0);
+	
+	return charPos;
 }
 
 /**
@@ -619,21 +615,21 @@ int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, 
  * @return String
  */
 String Long::toUnsignedString0(long val, int shift) {
-    // assert shift > 0 && shift <=5 : "Illegal shift value";
-    static int SIZE = 64;
-
-    int mag = SIZE - Long::numberOfLeadingZeros(val);
-    int chars = Math::max(((mag + (shift - 1)) / shift), 1);
-
-    Array<char> buff;
-    for (int i = 0; i < chars; ++i) { //Set empty array
-        buff.push('0');
-    }
-
-    formatUnsignedLong(val, shift, buff, 0, chars);
-
-    String result = String::fromCharArray(buff);
-    return result;
+	// assert shift > 0 && shift <=5 : "Illegal shift value";
+	static int SIZE = 64;
+	
+	int mag = SIZE - Long::numberOfLeadingZeros(val);
+	int chars = Math::max((( mag + ( shift - 1 )) / shift ), 1);
+	
+	Array<char> buff;
+	for (int i = 0; i < chars; ++i) { //Set empty array
+		buff.push('0');
+	}
+	
+	formatUnsignedLong(val, shift, buff, 0, chars);
+	
+	String result = String::fromCharArray(buff);
+	return result;
 }
 
 /**
@@ -643,12 +639,12 @@ String Long::toUnsignedString0(long val, int shift) {
  * @return Long
  */
 Long Long::operator=(const Long &target) {
-    this->original = target.original;
-    if (this->originalString != NULL) {
-        free(this->originalString);
-    }
-    this->originalString = string_from_long(this->original);
-    return *this;
+	this->original = target.original;
+	if (this->originalString != NULL) {
+		free(this->originalString);
+	}
+	this->originalString = string_from_long(this->original);
+	return *this;
 }
 
 /**
@@ -658,8 +654,8 @@ Long Long::operator=(const Long &target) {
  * @return Long
  */
 Long Long::operator+(const Long &target) const {
-    Long result = this->original + target.original;
-    return result;
+	Long result = this->original + target.original;
+	return result;
 }
 
 /**
@@ -669,8 +665,8 @@ Long Long::operator+(const Long &target) const {
  * @return
  */
 Long Long::operator-(const Long &target) const {
-    Long result = this->original - target.original;
-    return result;
+	Long result = this->original - target.original;
+	return result;
 }
 
 /**
@@ -680,8 +676,8 @@ Long Long::operator-(const Long &target) const {
  * @return
  */
 Long Long::operator/(const Long &target) const {
-    Long result = this->original / target.original;
-    return result;
+	Long result = this->original / target.original;
+	return result;
 }
 
 /**
@@ -691,8 +687,8 @@ Long Long::operator/(const Long &target) const {
  * @return
  */
 Long Long::operator%(const Long &target) const {
-    Long result = this->original % target.original;
-    return result;
+	Long result = this->original % target.original;
+	return result;
 }
 
 /**
@@ -702,8 +698,8 @@ Long Long::operator%(const Long &target) const {
  * @return
  */
 Long Long::operator*(const Long &target) const {
-    Long result = this->original * target.original;
-    return result;
+	Long result = this->original * target.original;
+	return result;
 }
 
 /**
@@ -713,10 +709,10 @@ Long Long::operator*(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator==(const Long &target) const {
-    if (this->original == target.original) {
-        return true;
-    }
-    return false;
+	if (this->original == target.original) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -726,11 +722,11 @@ boolean Long::operator==(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator!=(const Long &target) const {
-    if (this->original != target.original) {
-        return true;
-    }
-
-    return false;
+	if (this->original != target.original) {
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -740,11 +736,11 @@ boolean Long::operator!=(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator<(const Long &target) const {
-    if (this->original < target.original) {
-        return true;
-    }
-
-    return false;
+	if (this->original < target.original) {
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -754,11 +750,11 @@ boolean Long::operator<(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator>(const Long &target) const {
-    if (this->original > target.original) {
-        return true;
-    }
-
-    return false;
+	if (this->original > target.original) {
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -768,11 +764,11 @@ boolean Long::operator>(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator<=(const Long &target) const {
-    if (this->original > target.original) {
-        return false;
-    }
-
-    return true;
+	if (this->original > target.original) {
+		return false;
+	}
+	
+	return true;
 }
 
 /**
@@ -782,10 +778,10 @@ boolean Long::operator<=(const Long &target) const {
  * @return boolean
  */
 boolean Long::operator>=(const Long &target) const {
-    if (this->original < target.original) {
-        return false;
-    }
-    return true;
+	if (this->original < target.original) {
+		return false;
+	}
+	return true;
 }
 
 /**
@@ -794,7 +790,7 @@ boolean Long::operator>=(const Long &target) const {
  * @param target
  */
 void Long::operator-=(const Long &target) {
-    this->original -= target.original;
+	this->original -= target.original;
 }
 
 /**
@@ -803,7 +799,7 @@ void Long::operator-=(const Long &target) {
  * @param target
  */
 void Long::operator+=(const Long &target) {
-    this->original += target.original;
+	this->original += target.original;
 }
 
 /**
@@ -812,7 +808,7 @@ void Long::operator+=(const Long &target) {
  * @param target
  */
 void Long::operator*=(const Long &target) {
-    this->original *= target.original;
+	this->original *= target.original;
 }
 
 /**
@@ -821,7 +817,7 @@ void Long::operator*=(const Long &target) {
  * @param target
  */
 void Long::operator/=(const Long &target) {
-    this->original /= target.original;
+	this->original /= target.original;
 }
 
 /**
@@ -830,5 +826,5 @@ void Long::operator/=(const Long &target) {
  * @param target
  */
 void Long::operator%=(const Long &target) {
-    this->original %= target.original;
+	this->original %= target.original;
 }

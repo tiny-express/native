@@ -28,14 +28,16 @@
 #define JAVA_LANG_CLONEABLE_HPP_
 
 namespace Java {
-	namespace Lang {
-		class Cloneable {
-
-		protected:
-			Cloneable() {};
-			virtual ~Cloneable() {};
-		};
-	}
+		namespace Lang {
+				class Cloneable {
+				
+				protected:
+						Cloneable() {
+						};
+						virtual ~Cloneable() {
+						};
+				};
+		}
 }
 
 #endif  // JAVA_LANG_CLONEABLE_HPP_

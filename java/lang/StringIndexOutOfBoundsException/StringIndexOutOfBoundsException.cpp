@@ -44,6 +44,6 @@ StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(String message,
 
 }
 
-StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(int index) : IndexOutOfBoundsException(String("String index out of range: ") + String::valueOf(index)){
+StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(int index) : IndexOutOfBoundsException(String("String index out of range: ") + String::valueOf(index)) {
 
 }

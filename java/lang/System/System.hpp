@@ -32,33 +32,34 @@
 #include <iostream>
 
 namespace Java {
-	namespace Lang {
-		class System : public virtual Object {
-		public:
-			class in {
-			};
-			
-			class out {
-			public:
-				template <typename T>
-				static void print(T target) {
-					std::cout << target;
-				}
-
-				template <typename T>
-				static void println(T target) {
-					std::cout << target<<std::endl;
-				}
-			};
-
-			class err {
-			};
-			static long currentTimeMillis();
-			static void exit(int status);
-			static void gc();
-			static String getenv(string name);
-		};
-	}
+		namespace Lang {
+				class System : public Object {
+				public:
+						class in {
+						};
+						
+						class out {
+						public:
+								template <typename T>
+								static void print(T target) {
+									std::cout << target;
+								}
+								
+								template <typename T>
+								static void println(T target) {
+									std::cout << target << std::endl;
+								}
+						};
+						
+						class err {
+						};
+						
+						static long currentTimeMillis();
+						static void exit(int status);
+						static void gc();
+						static String getenv(string name);
+				};
+		}
 }
 
 #endif  // JAVA_LANG_SYSTEM_SYSTEM_HPP_

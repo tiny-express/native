@@ -28,7 +28,7 @@
 //#include "../unit_test.h"
 //
 //
-//TEST (Common, BinarySearch) {
+//TEST(KernelCommon, BinarySearch) {
 //	int array[] = { 2, 3, 4, 7, 8, 10 };
 //	int length = 6;
 //	int key = 7;
@@ -67,7 +67,7 @@
 //}
 //
 //
-//TEST (Common, LinearSearch) {
+//TEST(KernelCommon, LinearSearch) {
 //	int array[] = { 2, 3, 4, 7, 8, 10 };
 //	int length = 6;
 //	int key = 7;

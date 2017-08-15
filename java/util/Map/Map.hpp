@@ -24,66 +24,211 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_MAP_HPP
-#define NATIVE_JAVA_UTIL_MAP_HPP
+#ifndef NATIVE_JAVA_UTIL_MAP_HPP_
+#define NATIVE_JAVA_UTIL_MAP_HPP_
+
 #include "../../Lang.hpp"
+#include "../../util/Set/Set.hpp"
+#include "../../util/Comparator/Comparator.hpp"
 
 namespace Java {
-	namespace Util {
-		template <class K, class V>
-		class Map {
-
-		protected:
-			Map() {};
-			virtual ~Map() {};
-
-		public:
-			/**
-			 * Removes all of the mappings from this map (optional operation).
-			 */
-			virtual void clear() = 0;
-
-			/**
-			 * Returns true if this map contains a mapping for the specified key.
-			 *
-			 * @param K key
-			 * @return boolean
-			 */
-			virtual boolean containsKey(const K &key) const = 0;
-
-			/**
-			 * Returns true if this map maps one or more keys to the specified value.
-			 *
-			 * @param V value
-			 * @return boolean
-			 */
-			virtual boolean containsValue(const V &value) const = 0;
-
-			/**
-			 * Returns the value to which the specified key is mapped,
-			 * or null if this map contains no mapping for the key.
-			 *
-			 * @param key
-			 * @return V
-			 */
-			virtual V get(const K &key) const = 0;
-
-			/**
-			 * Returns true if this map contains no key-value mappings.
-			 *
-			 * @return boolean
-			 */
-			virtual boolean isEmpty() const = 0;
-
-			/**
-			 * Returns the number of key-value mappings in this map.
-			 *
-			 * @return int
-			 */
-			virtual int size() const = 0;
-
-		};
-	}
+		namespace Util {
+				
+				template <class K, class V>
+				class Map {
+				
+				protected:
+						Map() {
+						};
+						~Map() {
+						};
+				
+				public:
+						/**
+						 * A map entry (key-value pair). The Map.entrySet method returns a collection-view
+						 * of the map, whose elements are of this class. The only way to obtain a reference to
+						 * a map entry is from the iterator of this collection-view.
+						 * These Map.Entry objects are valid only for the duration of the iteration;
+						 * more formally, the behavior of a map entry is undefined
+						 * if the backing map has been modified after the entry was returned by the iterator,
+						 * except through the setValue operation on the map entry.
+						 */
+						class Entry {
+						private:
+								K key;
+								V value;
+						public:
+								/**
+								 * Entry constructor
+								 *
+								 * @param key
+								 * @param value
+								 */
+								Entry(K key, V value) {
+									this->key =  key;
+									this->value = value;
+								}
+								
+								~Entry() {
+								}
+								
+								/**
+								 * Returns a comparator that compares Map.Entry
+								 * in natural order on key.
+								 *
+								 * @return Comparator<Map::Entry<T,F>>
+								 */
+								Comparator<Map<K, V>::Entry> comparingByKey() {
+									Comparator<Map<K, V>::Entry> comparator;
+									// TODO - loint@foodtiny.com
+									return comparator;
+								}
+								
+								/**
+								 * Returns a comparator that compares Map.Entry by key
+								 * using the given Comparator.
+								 *
+								 * @return Comparator<Entry<K,V>>
+								 */
+								static Comparator<Map<K, V>::Entry> comparingByKey(Comparator<Map<K, V>::Entry> cmp) {
+									Comparator<Map<K, V>::Entry> comparator;
+									// TODO - loint@foodtiny.com
+									return comparator;
+								};
+								
+								/**
+								  * Returns a comparator that compares Map.Entry in natural order on value.
+								 * @return Comparator<Map::Entry<K,V>>
+								 */
+								static Comparator<Map<K, V>::Entry> comparingByValue() {
+									Comparator<Map<K, V>::Entry> comparator;
+									// TODO - loint@foodtiny.com
+									return comparator;
+								};
+								
+								/**
+								 * Returns a comparator that compares Map.Entry by value
+								 * using the given Comparator.
+								 *
+								 * @return Comparator<Map.Entry<K,V>>
+								 */
+								Comparator<Map<K, V>::Entry> comparingByValue(Comparator<Map<K, V>::Entry> cmp) {
+									Comparator<Map<K, V>::Entry> comparator;
+									// TODO - loint@foodtiny.com
+									return comparator;
+								};
+								
+								/**
+								 * Compares the specified object with this entry for equality.
+								 *
+								 * @param o
+								 * @return boolean
+								 */
+								boolean equals(Object o) {
+									// TODO - loint@foodtiny.com
+									return true;
+								}
+								
+								/**
+								 * Returns the key corresponding to this entry.
+								 *
+								 * @return K
+								 */
+								K getKey() {
+									return this->key;
+								}
+								
+								/**
+								 * Returns the value corresponding to this entry.
+								 *
+								 * @return F
+								 */
+								V getValue() {
+									return this->value;
+								}
+								
+								/**
+								 * Returns the hash code value for this map entry.
+								 *
+								 * @return int
+								 */
+								long hashCode() {
+									return 0;
+								}
+								
+								/**
+								 * Replaces the value corresponding to this entry
+								 * with the specified value (optional operation).
+								 *
+								 * @param value
+								 * @return V
+								 */
+								V setValue(V value) {
+									this->value = value;
+								}
+								
+								boolean operator<(const Map<K, V>::Entry &target) const {
+									return true;
+								}
+						};
+						
+						/**
+						 * Removes all of the mappings from this map (optional operation).
+						 */
+						void clear() {
+						}
+						
+						/**
+						 * Returns true if this map contains a mapping for the specified key.
+						 *
+						 * @param K key
+						 * @return boolean
+						 */
+						boolean containsKey(const K &key) {
+							return true;
+						}
+						
+						/**
+						 * Returns true if this map maps one or more keys to the specified value.
+						 *
+						 * @param V value
+						 * @return boolean
+						 */
+						boolean containsValue(const V &value) {
+							return true;
+						}
+						
+						/**
+						 * Returns the value to which the specified key is mapped,
+						 * or null if this map contains no mapping for the key.
+						 *
+						 * @param key
+						 * @return V
+						 */
+						V get(const K &key) {
+							V v;
+							return v;
+						}
+						
+						/**
+						 * Returns true if this map contains no key-value mappings.
+						 *
+						 * @return boolean
+						 */
+						boolean isEmpty() {
+							return false;
+						}
+						
+						/**
+						 * Returns the number of key-value mappings in this map.
+						 *
+						 * @return int
+						 */
+						int size() {
+							return 0;
+						}
+				};
+		}
 }
 
-#endif //NATIVE_JAVA_UTIL_MAP_HPP
+#endif // NATIVE_JAVA_UTIL_MAP_HPP_

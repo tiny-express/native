@@ -32,10 +32,10 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace Util {
-		class AbstractMap : public Object {
-		};
-	}
+		namespace Util {
+				class AbstractMap : public Object {
+				};
+		}
 }
 
 #endif  // JAVA_UTIL_ABSTRACT_MAP_HPP_
