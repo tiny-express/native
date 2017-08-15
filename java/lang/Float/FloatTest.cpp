@@ -670,3 +670,24 @@ TEST(JavaLang, FloatValueOf) {
     // Test MIN_VALUE
     ASSERT_FLOAT_NEAR(MIN_VALUE, Float::valueOf((String) "1.17549e-38").floatValue());
 }
+
+TEST(JavaLang, FloatValueOf2) {
+    // Test POSITIVE_INFINITY
+    ASSERT_FLOAT_NEAR(POSITIVE_INFINITY, Float::valueOf(POSITIVE_INFINITY).floatValue());
+
+    // Test NEGATIVE_INFINITY
+    ASSERT_FLOAT_NEAR(NEGATIVE_INFINITY, Float::valueOf(NEGATIVE_INFINITY).floatValue());
+
+    // Test NaN_NUMBER
+    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::valueOf(-NaN_NUMBER).floatValue());
+
+    // Test MAX_VALUE
+    ASSERT_FLOAT_NEAR(MAX_VALUE,
+                      Float::valueOf(340282346638528859811704183484516925440.0f).floatValue());
+
+    // Test MIN_NORMAL
+    ASSERT_FLOAT_NEAR(MIN_NORMAL, Float::valueOf(1.4013e-45).floatValue());
+
+    // Test MIN_VALUE
+    ASSERT_FLOAT_NEAR(MIN_VALUE, Float::valueOf(1.17549e-38).floatValue());
+}

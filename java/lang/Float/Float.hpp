@@ -645,7 +645,7 @@ namespace Java {
             * @param  d a float value.
             * @return a {Float} instance representing {d}.
             */
-			static Float valueOf(float floatInput);
+			static Float valueOf(float inputFloat);
 		};
 	}
 }

@@ -188,3 +188,8 @@ boolean Float::isNaN(float v) {
 Float Float::valueOf(String stringInput) {
     return Float::parseFloat(stringInput);
 }
+
+Float Float::valueOf(float inputFloat) {
+    return Float(inputFloat);
+
+}
