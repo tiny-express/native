@@ -604,22 +604,23 @@ TEST(JavaLang, FloatToString) {
     ASSERT_STR(expectedResultToString , actualResultToString);
 }
 
-//TEST(JavaLang, FloatParseFloat) {
-//    // Test POSITIVE_INFINITY
-//    ASSERT_FLOAT_NEAR(POSITIVE_INFINITY, Float::parseFloat((String) "inf").floatValue());
-//
-//    // Test NEGATIVE_INFINITY
-//    ASSERT_FLOAT_NEAR(NEGATIVE_INFINITY, Float::parseFloat((String) "-inf").floatValue());
-//
-//    // Test NaN_NUMBER
-//    ASSERT_FLOAT_NEAR(NaN_NUMBER, Float::parseFloat((String) "-nan").floatValue());
-//
-//    // Test MAX_VALUE
-//    ASSERT_FLOAT_NEAR(MAX_VALUE, Float::parseFloat((String) "3.40282e+38").floatValue());
-//
-//    // Test MIN_NORMAL
-//    ASSERT_FLOAT_NEAR(MIN_NORMAL, Float::parseFloat((String) "1.4013e-45").floatValue());
-//
-//    // Test MIN_VALUE
-//    ASSERT_FLOAT_NEAR(MIN_VALUE, Float::parseFloat((String) "1.17549e-38").floatValue());
-//}
+TEST(JavaLang, FloatParseFloat) {
+    // Test POSITIVE_INFINITY
+    ASSERT_FLOAT_NEAR(POSITIVE_INFINITY, Float::parseFloat((String) "inf").floatValue());
+
+    // Test NEGATIVE_INFINITY
+    ASSERT_FLOAT_NEAR(NEGATIVE_INFINITY, Float::parseFloat((String) "-inf").floatValue());
+
+    // Test NaN_NUMBER
+    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::parseFloat((String) "-nan").floatValue());
+
+    // Test MAX_VALUE
+    ASSERT_FLOAT_NEAR(MAX_VALUE,
+                      Float::parseFloat((String) "340282346638528859811704183484516925440.0").floatValue());
+
+    // Test MIN_NORMAL
+    ASSERT_FLOAT_NEAR(MIN_NORMAL, Float::parseFloat((String) "1.4013e-45").floatValue());
+
+    // Test MIN_VALUE
+    ASSERT_FLOAT_NEAR(MIN_VALUE, Float::parseFloat((String) "1.17549e-38").floatValue());
+}

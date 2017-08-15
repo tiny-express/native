@@ -177,10 +177,9 @@ string Float::toString() const {
     return this->originalString;
 }
 
-//Float Float::parseFloat(String inputString) {
-//    Float result = string_to_float(inputString.toString());
-//    return result;
-//}
+Float Float::parseFloat(String inputString) {
+    return static_cast<Float> (string_to_float(inputString.toString()));
+}
 
 boolean Float::isNaN(float v) {
     return v != v;
