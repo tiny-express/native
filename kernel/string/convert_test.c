@@ -290,40 +290,6 @@ TEST (String, ConvertToLong) {
 	ASSERT_EQUAL(0, result2);
 }
 
-TEST (String, ConvertToFloat) {
-    // Input a string representing a positive value of type float to convert from string to float
-	char *input = "12.56";
-
-    // The result
-	float result = string_to_float(input);
-
-    // Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(12.56, result);
-
-    // Input a string representing a negative value of type float to convert from string to float
-    // Than make a comparison between the result and the right answer
-	char *input1 = "-1.56799";
-	float result1 = string_to_float(input1);
-	ASSERT_EQUAL(-1.56799, result1);
-}
-
-TEST (String, ConvertToDouble) {
-    // Input a string representing a positive value of type double to convert from string to double
-	char *input = "125.569123";
-
-    // The result
-	double result = string_to_double(input);
-
-    // Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(125.569123, result);
-
-    // Input a string representing a negative value of type double to convert from string to double
-    // Than make a comparison between the result and the right answer
-	char *input1 = "-125.56123";
-	double result1 = string_to_double(input1);
-	ASSERT_EQUAL(-125.56123, result1);
-}
-
 TEST (String, ConvertToBoolean) {
     // Input a string representing 1 to convert from string to boolean
 	char *target0 = "1";
@@ -402,4 +368,26 @@ TEST (String, ConvertFromBoolean) {
 	result = string_from_boolean(value);
 	ASSERT_STR(expect, result);
 	free(result);
+}
+
+TEST (String, ConvertToFloat) {
+	ASSERT_FLOAT_NEAR(0.000006f, string_to_float((char*) "0.000006"));
+	ASSERT_FLOAT_NEAR(-0.000006f, string_to_float((char*) "-0.000006"));
+	ASSERT_FLOAT_NEAR(0.0, string_to_float((char*) "0.0"));
+	ASSERT_FLOAT_NEAR(13.123456f, string_to_float((char*) "13.123456"));
+	ASSERT_FLOAT_NEAR(-13.123456f, string_to_float((char*) "-13.123456"));
+}
+
+
+
+TEST (String, ConvertToDouble) {
+	ASSERT_DBL_NEAR(0.000000000000006,
+					string_to_double((char*) "0.000000000000006"));
+	ASSERT_DBL_NEAR(-0.000000000000006,
+					string_to_double((char*) "-0.000000000000006"));
+	ASSERT_DBL_NEAR(0.0, string_to_double((char*) "0.0"));
+	ASSERT_DBL_NEAR(13.123456789012345,
+					string_to_double((char*) "13.123456789012345"));
+	ASSERT_DBL_NEAR(-13.123456789012345,
+					string_to_double((char*) "-13.123456789012345"));
 }

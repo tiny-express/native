@@ -57,7 +57,7 @@ inline TYPE string_to_##TYPE(char *target) {\
     sscanf(target, FORMAT, &result);\
     return result;\
 }
-STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, "%g");STR_FROM(double, "%.16g");STR_TO(short, "%hi");STR_TO(float, "%g");STR_TO(double, "%lg");
+STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, "%g");STR_FROM(double, "%.16g");STR_TO(short, "%hi");
 
 /**
  * String from char
@@ -149,4 +149,24 @@ char *string_from_boolean(int target) {
     }
 
     return strdup("true");
+}
+
+/**
+ * String to float
+ *
+ * @param char *inputString
+ * @return float
+ */
+float string_to_float(char *inputString) {
+	return strtof(inputString, NULL);
+}
+
+/**
+ * String to double
+ *
+ * @param char *inputString
+ * @return double
+ */
+double string_to_double(char *inputString) {
+	return strtod(inputString, NULL);
 }
