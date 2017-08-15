@@ -315,6 +315,9 @@ TEST (JavaLang, StringIndexOf) {
     result1 = textPlus.lastIndexOf('H', 100);
     ASSERT_EQUAL(12, result1);
 
+    result1 = textPlus.lastIndexOf('H', -1);
+    ASSERT_EQUAL(-1, result1);
+
 	// Given validString check lastIndexOf(string)
 	String validString = "awesome keyword inside this awesome string";
 	String subString = "awesome";
@@ -337,12 +340,20 @@ TEST (JavaLang, StringIndexOf) {
 	String wrongString2 = "abc xyz";
 
 	// Test true by 19th, with correct subString2 and correct fromIndex to find
-	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 18));
+	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 19));
 
-	// Test false by -1, with correct subString2 but out of range that subString2's appeared in validString2
-	ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, 20));
+    ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 18));
 
-	// Test false by -1, with wrongString2 that's not appeared inside validString2
+	ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 0));
+
+    ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 1));
+
+    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 100));
+
+    ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, -1));
+
+	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 20));
+
 	ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
 }
 

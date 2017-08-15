@@ -267,6 +267,9 @@ int String::lastIndexOf(int character) {
 }
 
 int String::lastIndexOf(int character, int fromIndex) {
+    if (fromIndex < 0) {
+        return -1;
+    }
     if (fromIndex > this->size - 1) {
         return this->lastIndexOf(character);
     }
@@ -298,17 +301,24 @@ int String::lastIndexOf(String subString) const {
 }
 
 int String::lastIndexOf(String subString, int fromIndex) const {
-	string subStringFromIndex = &( this->original )[ fromIndex ]; // get subString start fromIndex
+    if (fromIndex < 0) {
+        return -1;
+    }
+    if (fromIndex > this->size - 1) {
+        return this->lastIndexOf(subString);
+    }
+    string thisStringReversed = string_reverse(this->original);
+	string subStringFromIndex = &( thisStringReversed )[ this->size - fromIndex - subString.size]; // get subString start fromIndex
 	string reversedString = string_reverse(subString.toString());
-	string currentReversedString = string_reverse(subStringFromIndex);
-	int result = string_index(currentReversedString, reversedString, 1);
+	//string currentReversedString = string_reverse(subStringFromIndex);
+	int result = string_index(subStringFromIndex, reversedString, 1);
 	free(reversedString);
-	free(currentReversedString);
+	free(thisStringReversed);
 	if (result == NOT_FOUND) {
 		return result;
 	}
 	// Re-calculate first character of str
-	result = this->size - ( result + subString.size );
+	result = fromIndex - result;
 	return result;
 }
 
