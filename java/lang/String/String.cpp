@@ -50,6 +50,11 @@ String::String(string target) {
 	this->size = length_pointer_char(target);
 }
 
+String::String(string original, int length) {
+    this->original = strndup(original, length);
+    this->size = length;
+}
+
 String::String(Array<char> &chars) {
 	free(original);
 	this->original = String::fromCharArray(chars).toString();
@@ -845,4 +850,170 @@ boolean String::operator>=(const String &target) const {
 		return false;
 	}
 	return true;
+}
+
+String String::print(const String &format, short value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, int value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, long value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, unsigned short value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, unsigned int value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, unsigned long value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, double value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, float value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, char *value)
+{
+    String result;
+    char buffer[256] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if(length > 0)
+        result = String(buffer, length);
+    return result;
+}
+
+String String::print(const String &format, Short value)
+{
+    return String::print(format, value.shortValue());
+}
+
+String String::print(const String &format, Integer value)
+{
+    return String::print(format, value.intValue());
+}
+
+String String::print(const String &format, Long value)
+{
+    return String::print(format, value.longValue());
+}
+
+String String::print(const String &format, Float value)
+{
+    return String::print(format, value.floatValue());
+}
+
+String String::print(const String &format, Double value)
+{
+    return String::print(format, value.doubleValue());
+}
+
+String String::print(const String &format, String value)
+{
+    return String::print(format, value.toString());
+}
+
+String String::format(const String &format)
+{
+    const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+    String result;
+    String inputString(format);
+    string inputStringPtr = inputString.toString();
+    int inputStringLength = inputString.getSize();
+    int inputStringOffset = 0;
+    int errorCode = 0;
+    regex_t regex;
+
+    errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+    while(errorCode == 0 && inputStringOffset < inputString.getSize()) {
+        regmatch_t matchedResult[16] = {0}; // max 16 groups
+        errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
+        if(errorCode == 0) {
+            int unmatchedStringLength = matchedResult[0].rm_so;
+            int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+            if(unmatchedStringLength > 0)
+                result += String(inputStringPtr, unmatchedStringLength);
+
+            if(matchedStringLength > 0) {
+                String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+                if(matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                    regfree(&regex);
+                    throw "Missing arguments";
+                }
+                else
+                    result += "%";
+            }
+
+            inputStringPtr += matchedResult[0].rm_eo;
+            inputStringOffset += matchedResult[0].rm_eo;
+            inputStringLength -= matchedResult[0].rm_eo;
+
+        } else {
+            result += String(inputStringPtr, inputStringLength);
+            break;
+        }
+    }
+
+    regfree(&regex);
+    return result;
 }

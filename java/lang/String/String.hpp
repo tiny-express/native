@@ -31,11 +31,18 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
+#include <regex.h>
 
 using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
+
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
 
 		class String :
 				public Object,
@@ -51,6 +58,7 @@ namespace Java {
 			String(char target);
 			String(const_string original);
 			String(string original);
+            String(string original, int length);
 			String(Array<char> &chars);
 			String(Array<byte> &bytes);
 			String(const String &target);
@@ -119,6 +127,54 @@ namespace Java {
 			static String valueOf(float target);
 			static String valueOf(double target);
 
+            template<typename T, typename... Args>
+            static String format(const String& format, T value, Args... args) {
+                const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+                String result;
+                String inputString(format);
+                string inputStringPtr = inputString.toString();
+                int inputStringLength = inputString.getSize();
+                int inputStringOffset = 0;
+                int errorCode = 0;
+                regex_t regex;
+
+                errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+                while(errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
+                    if(errorCode == 0) {
+                        int unmatchedStringLength = matchedResult[0].rm_so;
+                        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+                        if(unmatchedStringLength > 0)
+                            result += String(inputStringPtr, unmatchedStringLength);
+
+                        if(matchedStringLength > 0) {
+                            String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+                            result += String::printObject(matchedString, value);
+
+                            if(matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                                String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
+                                result += String::format(remainString, args...);
+                                break;
+                            }
+                        }
+
+                        inputStringPtr += matchedResult[0].rm_eo;
+                        inputStringOffset += matchedResult[0].rm_eo;
+                        inputStringLength -= matchedResult[0].rm_eo;
+
+                    } else {
+                        result += String(inputStringPtr, inputStringLength);
+                        break;
+                    }
+                }
+
+                regfree(&regex);
+                return result;
+            };
+            static String format(const String& format);
+
 		public:
 			boolean operator==(const String &target) const;
 			boolean operator!=(const String &target) const;
@@ -148,6 +204,41 @@ namespace Java {
 				result += target2;
 				return result;
 			}
+
+        private:
+            template<typename T>
+            static String printObject(const String& format, T value) {
+                String result;
+                char lastChar = '\0';
+
+                if(format.getSize() > 0)
+                    lastChar = format.charAt(format.getSize() - 1);
+
+                switch(lastChar) {
+                    case '%':
+                        result += lastChar;
+                        break;
+                    default:
+                        result = String::print(format, value);
+                        break;
+                }
+                return result;
+            }
+            static String print(const String& format, short value);
+            static String print(const String& format, int value);
+            static String print(const String& format, long value);
+            static String print(const String& format, unsigned short value);
+            static String print(const String& format, unsigned int value);
+            static String print(const String& format, unsigned long value);
+            static String print(const String& format, double value);
+            static String print(const String& format, float value);
+            static String print(const String& format, char* value);
+            static String print(const String& format, Short value);
+            static String print(const String& format, Integer value);
+            static String print(const String& format, Long value);
+            static String print(const String& format, Float value);
+            static String print(const String& format, Double value);
+            static String print(const String& format, String value);
 		};
 	}
 }
