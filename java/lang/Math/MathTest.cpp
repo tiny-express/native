@@ -38,7 +38,7 @@ TEST(JavaLang, MathAbs) {
 	ASSERT_DBL_NEAR(123, Math::abs(double_value));
 
 	float float_value = -123.123f;
-	ASSERT_DBL_NEAR(123.123f, Math::abs(float_value));
+	ASSERT_FLOAT_NEAR(123.123f, Math::abs(float_value));
 
 	int int_value = -123;
 	ASSERT_EQUAL(123, Math::abs(int_value));
@@ -367,7 +367,7 @@ TEST(JavaLang, MathSqrt) {
 
     // Given a value equal to -ZERO
     double negativeZeroSquare = -0.0;
-    double expectNegativeZeroResult = -0.0f;
+    double expectNegativeZeroResult = -0.0;
     ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::sqrt(negativeZeroSquare));
 }
 
@@ -1253,7 +1253,7 @@ TEST(JavaLang, MathMax) {
 
 	float float_value_max_1 = 4.123f;
 	float float_value_max_2 = 2.312f;
-	ASSERT_DBL_NEAR(4.123f, Math::max(float_value_max_1, float_value_max_2));
+	ASSERT_FLOAT_NEAR(4.123, Math::max(float_value_max_1, float_value_max_2));
 
 	int int_value_max_1 = 4;
 	int int_value_max_2 = 2;
@@ -1271,7 +1271,7 @@ TEST(JavaLang, MathMin) {
 
 	float float_value_min_1 = 4.123f;
 	float float_value_min_2 = 2.312f;
-	ASSERT_DBL_NEAR(2.312f, Math::min(float_value_min_1, float_value_min_2));
+	ASSERT_FLOAT_NEAR(2.312, Math::min(float_value_min_1, float_value_min_2));
 
     long long_value_min_1 = 4;
     long long_value_min_2 = 2;
@@ -1404,9 +1404,9 @@ TEST(JavaLang, MathNextDownFloat) {
 
 TEST(JavaLang, MathNextUpDouble) {
     // Given a double
-    double doubleNumber = 98759.765f;
-    double expectResult = 98759.7650000001f;
-    ASSERT_DBL_NEAR_PRE(expectResult, Math::nextUp(doubleNumber), 10);
+    double doubleNumber = 98759.765;
+    double expectResult = 98759.7650000001;
+    ASSERT_DBL_NEAR_PRE(expectResult, Math::nextUp(doubleNumber), 9);
 
     // Given a NAN
     double nan = NAN;

@@ -47,7 +47,6 @@ long Math::abs(long value) {
 double Math::abs(double value) {
     if(Double::isNaN(value)) {
         return Double::NOT_A_NUMBER_DOUBLE;
-
     }
 
     return value >= 0 ? value : -value;
