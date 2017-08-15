@@ -1200,8 +1200,8 @@ TEST (JavaLang, StringBufferToString) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
     string expectSubStringResult = (string)("This is a StringBuffer");
-    String result = stringBuffer.toString();
-    ASSERT_STR(expectSubStringResult, result.toString());
+    string result = stringBuffer.toString();
+    ASSERT_STR(expectSubStringResult, result);
 }
 
 TEST (JavaLang, StringBufferTrimToSize) {

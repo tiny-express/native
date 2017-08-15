@@ -165,7 +165,7 @@ boolean Double::operator||(const Double &target) const {
     return (boolean) (this->original || target.original);
 }
 
-Double Double::operator=(const Double &target) {
+Double &Double::operator=(const Double &target) {
     this->original = target.original;
     free(this->originalString);
     this->originalString = string_from_double(this->original);
