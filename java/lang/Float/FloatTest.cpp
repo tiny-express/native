@@ -561,6 +561,31 @@ TEST(JavaLang, FloatLongValue) {
 
 }
 
+TEST(JavaLang, FloatDoubleValue) {
+    Float variableTest;
+
+    variableTest = 0.0;
+    ASSERT_DBL_NEAR(0.0, variableTest.doubleValue());
+
+    variableTest = NaN_NUMBER;
+    ASSERT_DBL_NEAR(NaN_NUMBER, variableTest.doubleValue());
+
+    variableTest = POSITIVE_INFINITY;
+    ASSERT_DBL_NEAR(POSITIVE_INFINITY, variableTest.doubleValue());
+
+    variableTest = NEGATIVE_INFINITY;
+    ASSERT_DBL_NEAR(NEGATIVE_INFINITY, variableTest.doubleValue());
+
+    variableTest = MIN_NORMAL;
+    ASSERT_DBL_NEAR(MIN_NORMAL, variableTest.doubleValue());
+
+    variableTest = MIN_VALUE;
+    ASSERT_DBL_NEAR(MIN_VALUE, variableTest.doubleValue());
+
+    variableTest = MAX_VALUE;
+    ASSERT_DBL_NEAR(MAX_VALUE, variableTest.doubleValue());
+}
+
 TEST(JavaLang, FloatToString) {
     // Create variable to test
     Float variableTestToString;
