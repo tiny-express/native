@@ -148,10 +148,10 @@ char Float::charValue() const {
     free(convertResult);
     return charValueResult;
 }
-// TODO(thoangminh): enable after finish toString()
-//string Float::stringValue() const {
-//    return (string) this->toString();
-//}
+
+string Float::stringValue() const {
+    return (string) this->toString();
+}
 
 float Float::floatValue() const {
     return this->original;
@@ -192,15 +192,8 @@ string Float::toString() const {
     return this->originalString;
 }
 
-/**
- * String to Float
- *
- * @param target
- * @return Float
- */
-
-//Float Float::parseFloat(String target) {
-//    Float result = string_to_float(target.toString());
+//Float Float::parseFloat(String inputString) {
+//    Float result = string_to_float(inputString.toString());
 //    return result;
 //}
 

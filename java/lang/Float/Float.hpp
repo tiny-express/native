@@ -410,13 +410,13 @@ namespace Java {
              */
 			static String toString(float d);
 
-			/**
-             * Parse float
+            /**
+             * String to Float
              *
-             * @param target
-             * @return float
+             * @param String inputString
+             * @return Float
              */
-			static Float parseFloat(String target);
+			static Float parseFloat(String inputString);
 
 			/**
              * Returns the value of this {Float} as a {byte}
