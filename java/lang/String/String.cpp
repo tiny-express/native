@@ -195,7 +195,7 @@ String String::getStringFromIndex(int index) {
 }
 
 boolean String::endsWith(const String &suffixString) const {
-	return (string_endswith(this->original, suffixString.original));
+	return static_cast<boolean>(string_endswith(this->original, suffixString.original));
 }
 
 String String::fromCharArray(Array<char> &charArray) {
@@ -225,6 +225,9 @@ int String::indexOf(int character, int fromIndex) const {
 	if (fromIndex > this->size) {
 		return -1;
 	}
+    if (fromIndex < 0) {
+        return this->indexOf(character);
+    }
 
 #ifdef __linux__
 	register
@@ -244,8 +247,20 @@ int String::indexOf(String subString) const {
 }
 
 int String::indexOf(String subString, int fromIndex) const {
-    // TODO
-	return 0;
+    if (fromIndex < 0) {
+        return this->indexOf(subString);
+    }
+    if (fromIndex > this->size - 1) {
+        return -1;
+    }
+    string stringFromIndex = string_from(this->original, fromIndex);
+    int result = string_index(stringFromIndex, subString.original, 1);
+    if (result == -1) {
+        return result;
+    }
+    free(stringFromIndex);
+    result = fromIndex + result;
+	return result;
 }
 
 boolean String::isEmpty() const {
@@ -366,17 +381,17 @@ Array<String> String::split(String regex) const {
 }
 
 boolean String::startsWith(String prefix) const {
-	return string_startswith(this->original, prefix.original);
+	return static_cast<boolean>(string_startswith(this->original, prefix.original));
 }
 
 boolean String::startsWith(String prefix, int thisOffset) const {
-	if (this->original == NULL || prefix.original == NULL || thisOffset < 0) {
-		return FALSE;
+	if (this->original == nullptr || prefix.original == nullptr || thisOffset < 0) {
+		return false;
 	}
 	int originalLength = length_pointer_char(this->original);
 	int prefixLength = length_pointer_char(prefix.original);
 	if (originalLength < prefixLength || thisOffset > ( originalLength - prefixLength )) {
-		return FALSE;
+		return false;
 	}
 #ifdef __linux__
 	register
@@ -389,11 +404,11 @@ boolean String::startsWith(String prefix, int thisOffset) const {
 	int secondIndex = thisOffset;
 	for (; firstIndex < prefixLength; firstIndex++) {
 		if (prefix.original[ firstIndex ] != this->original[ secondIndex ]) {
-			return FALSE;
+			return false;
 		}
 		secondIndex++;
 	}
-	return TRUE;
+	return true;
 }
 
 Array<char> String::toCharArray() const {

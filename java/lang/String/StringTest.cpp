@@ -300,11 +300,40 @@ TEST (JavaLang, StringIndexOf) {
 	int result = textPlus.indexOf('H');
 	ASSERT_EQUAL(0, result);
 
+    result = textPlus.indexOf('k');
+    ASSERT_EQUAL(-1, result);
+
 	result = textPlus.indexOf('l', 4);
 	ASSERT_EQUAL(8, result);
 
+    result = textPlus.indexOf('k', 4);
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf('l', -1);
+    ASSERT_EQUAL(2, result);
+
+    result = textPlus.indexOf('l', 100);
+    ASSERT_EQUAL(-1, result);
+
 	result = textPlus.indexOf("llo");
 	ASSERT_EQUAL(2, result);
+
+    result = textPlus.indexOf("llo", 4);
+    ASSERT_EQUAL(8, result);
+
+    result = textPlus.indexOf("llok");
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf("llo", -1);
+    ASSERT_EQUAL(2, result);
+
+    result = textPlus.indexOf("llo", 100);
+    ASSERT_EQUAL(-1, result);
+
+    // Given validString check lastIndexOf(string)
+    String validString = "awesome keyword inside this awesome string";
+    String subString = "awesome";
+    String wrongString = "some thing";
 
 	int result1 = textPlus.lastIndexOf('H');
 	ASSERT_EQUAL(12, result1);
@@ -317,12 +346,6 @@ TEST (JavaLang, StringIndexOf) {
 
     result1 = textPlus.lastIndexOf('H', -1);
     ASSERT_EQUAL(-1, result1);
-
-	// Given validString check lastIndexOf(string)
-	String validString = "awesome keyword inside this awesome string";
-	String subString = "awesome";
-	String wrongString = "some thing";
-
 
 	// Test true first character of subString appear last in validString is position 28th
 	ASSERT_EQUAL(28, validString.lastIndexOf(subString));
