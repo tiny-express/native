@@ -189,7 +189,6 @@ Double Double::operator/=(const Double &target) const {
 }
 
 int Double::compare(double double1, double double2) {
-
     long thisBits = Double::doubleToLongBits(double1);
     long anotherBits = Double::doubleToLongBits(double2);
 
@@ -288,6 +287,7 @@ boolean Double::isNaN() {
 }
 
 double Double::longBitsToDouble(long longBitsInput) {
+
     double resultLongBitsToDouble;
     string convertLongBitsToBinary64StringType;
 
@@ -791,7 +791,7 @@ string Double::doubleToBinary64StringType(double doubleInput)
     return  resultDoubleToBinary64StringType;
 }
 
-double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
+double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
     // Create variable
     int signOfResultbinary64StringTypeToDouble;
     double exponent;
@@ -803,10 +803,12 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     int tempExponent;
     int i;
 
+    boolean isNaN = 1;
+
     // 1. Find signOfResultbinary64StringTypeToDouble
     signOfResultbinary64StringTypeToDouble = 1;
 
-    if (Binary64StringTypeInput[0] == '1') {
+    if (binary64StringTypeInput[0] == '1') {
         signOfResultbinary64StringTypeToDouble = -1;
     }
 
@@ -814,12 +816,13 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     exponent = 0;
     tempExponent = 10;
     for (i = 1; i <= 11; i++) {
-        if (Binary64StringTypeInput[i] == '1') {
+        if (binary64StringTypeInput[i] == '1') {
             tempValue = 1;
         }
 
-        if (Binary64StringTypeInput[i] == '0') {
+        if (binary64StringTypeInput[i] == '0') {
             tempValue = 0;
+            isNaN = 0;
         }
 
         exponent = exponent + tempValue * pow(2, tempExponent);
@@ -832,12 +835,13 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     mantisaBase10 = 0;
     tempExponent = -1;
     for (i = 12; i <= 63; i++) {
-        if (Binary64StringTypeInput[i] == '1') {
+        if (binary64StringTypeInput[i] == '1') {
             tempValue = 1;
         }
 
-        if (Binary64StringTypeInput[i] == '0') {
+        if (binary64StringTypeInput[i] == '0') {
             tempValue = 0;
+            isNaN = 0;
         }
 
         mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);
@@ -848,6 +852,10 @@ double Double::binary64StringTypeToDouble (string Binary64StringTypeInput) {
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
               * pow(2, exponentAdjusted);
+
+    if(isNaN) {
+        return NaN_NUMBER_DOUBLE;
+    }
 
     return resultBinary64StringTypeToDouble;
 }

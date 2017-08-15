@@ -45,7 +45,11 @@ long Math::abs(long value) {
 }
 
 double Math::abs(double value) {
-	return value >= 0 ? value : -value;
+    if(Double::isNaN(value)) {
+        return Double::NOT_A_NUMBER_DOUBLE;
+    }
+
+    return value >= 0 ? value : -value;
 }
 
 double Math::acos(double value) {
@@ -97,6 +101,12 @@ float Math::copySign(float magnitude, float sign) {
 }
 
 double Math::cos(double angle) {
+    double result = math_cos(angle);
+
+    if(Double::isNaN(result)) {
+        return Math::abs(result);
+    }
+
     return math_cos(angle);
 }
 
@@ -205,6 +215,11 @@ double Math::hypot(double valueA, double valueB) {
 }
 
 double Math::IEEERemainder(double dividend, double divisor) {
+    double result = math_ieeeremainder(dividend, divisor);
+    if(Double::isNaN(result)) {
+        return Math::abs(result);
+    }
+
     return math_ieeeremainder(dividend, divisor);
 }
 
@@ -231,6 +246,12 @@ double Math::log10(double value) {
 }
 
 double Math::log1p(double value) {
+    double result = math_log1p(value);
+
+    if(Double::isNaN(result)) {
+        return Math::abs(result);
+    }
+
     return math_log1p(value);
 }
 
@@ -413,6 +434,11 @@ float Math::signum(float value) {
     if (value == 0.0f || Float::isNaN(value)) {
         return value;
     }
+
+    if (value == 0.0f) {
+        return -0.0f;
+    }
+
     return Math::copySign(1.0f, value);
 }
 
