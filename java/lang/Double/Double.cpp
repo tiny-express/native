@@ -189,7 +189,6 @@ Double Double::operator/=(const Double &target) const {
 }
 
 int Double::compare(double double1, double double2) {
-
     long thisBits = Double::doubleToLongBits(double1);
     long anotherBits = Double::doubleToLongBits(double2);
 
@@ -793,7 +792,6 @@ string Double::doubleToBinary64StringType(double doubleInput)
 }
 
 double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
-
     // Create variable
     int signOfResultbinary64StringTypeToDouble;
     double exponent;
