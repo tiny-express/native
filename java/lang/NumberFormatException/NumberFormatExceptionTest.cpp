@@ -31,19 +31,19 @@ extern "C" {
 }
 
 TEST (JavaLang, NumberFormatExceptionConstructor) {
-    // Constructs a new NumberFormatException with null as its detail message.
-    NumberFormatException NumberFormatExceptionWithNullMessage;
-    ASSERT_STR("", NumberFormatExceptionWithNullMessage.getMessage().toString());
-
-    // Constructs a new NumberFormatException with the specified detail message.
-    NumberFormatException NumberFormatExceptionWithMessage = NumberFormatException("NumberFormatException with the specified message");
-    ASSERT_STR("NumberFormatException with the specified message", NumberFormatExceptionWithMessage.getMessage().toString());
+	// Constructs a new NumberFormatException with null as its detail message.
+	NumberFormatException NumberFormatExceptionWithNullMessage;
+	ASSERT_STR("", NumberFormatExceptionWithNullMessage.getMessage().toString());
+	
+	// Constructs a new NumberFormatException with the specified detail message.
+	NumberFormatException NumberFormatExceptionWithMessage = NumberFormatException("NumberFormatException with the specified message");
+	ASSERT_STR("NumberFormatException with the specified message", NumberFormatExceptionWithMessage.getMessage().toString());
 }
 
 TEST (JavaLang, NumberFormatExceptionTryCatch) {
-    try {
-        throw NumberFormatException("Throw NumberFormatException");
-    } catch (NumberFormatException &e) {
-        ASSERT_STR("Throw NumberFormatException", e.getMessage().toString());
-    }
+	try {
+		throw NumberFormatException("Throw NumberFormatException");
+	} catch (NumberFormatException &e) {
+		ASSERT_STR("Throw NumberFormatException", e.getMessage().toString());
+	}
 }

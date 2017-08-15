@@ -35,28 +35,28 @@ using namespace Java::Lang;
 
 TEST (JavaLang, RuntimeExceptionConstructor) {
 // Constructs a new RuntimeException with null as its detail message.
-    RuntimeException runtimeExceptionWithNullMessage;
-    ASSERT_STR("", runtimeExceptionWithNullMessage.getMessage().toString());
+	RuntimeException runtimeExceptionWithNullMessage;
+	ASSERT_STR("", runtimeExceptionWithNullMessage.getMessage().toString());
 
 // Constructs a new RuntimeException with the specified detail message.
-    RuntimeException runtimeExceptionWithMessage = RuntimeException("RuntimeException with the specified message");
-    ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithMessage.getMessage().toString());
+	RuntimeException runtimeExceptionWithMessage = RuntimeException("RuntimeException with the specified message");
+	ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithMessage.getMessage().toString());
 
 // Constructs a new RuntimeException with the specified detail message and cause.
-    RuntimeException runtimeExceptionWithMessageAndCause = RuntimeException("RuntimeException with the specified message and cause", &runtimeExceptionWithMessage);
-    ASSERT_STR("RuntimeException with the specified message and cause", runtimeExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	RuntimeException runtimeExceptionWithMessageAndCause = RuntimeException("RuntimeException with the specified message and cause", &runtimeExceptionWithMessage);
+	ASSERT_STR("RuntimeException with the specified message and cause", runtimeExceptionWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
 // Constructs a new RuntimeException with the specified cause.
-    RuntimeException runtimeExceptionWithCause = RuntimeException(&runtimeExceptionWithMessageAndCause);
-    ASSERT_STR("RuntimeException with the specified message and cause", runtimeExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	RuntimeException runtimeExceptionWithCause = RuntimeException(&runtimeExceptionWithMessageAndCause);
+	ASSERT_STR("RuntimeException with the specified message and cause", runtimeExceptionWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("RuntimeException with the specified message", runtimeExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, RuntimeExceptionTryCatch) {
-    try {
-        throw RuntimeException("Throw RuntimeException");
-    } catch (Exception e) {
-        ASSERT_STR("Throw RuntimeException", e.getMessage().toString());
-    }
+	try {
+		throw RuntimeException("Throw RuntimeException");
+	} catch (Exception e) {
+		ASSERT_STR("Throw RuntimeException", e.getMessage().toString());
+	}
 }

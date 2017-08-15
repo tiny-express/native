@@ -33,21 +33,21 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, ExceptionConstructor) {
-    // Constructs a new Exception with null as its detail message.
-    Exception exceptionWithNullMessage;
-    ASSERT_STR("", exceptionWithNullMessage.getMessage().toString());
-
-    // Constructs a new Exception with the specified detail message.
-    Exception exceptionWithMessage = Exception("Exception with the specified message");
-    ASSERT_STR("Exception with the specified message", exceptionWithMessage.getMessage().toString());
-
-    // Constructs a new Exception with the specified detail message and cause.
-    Exception exceptionWithMessageAndCause = Exception("Exception with the specified message and cause", &exceptionWithMessage);
-    ASSERT_STR("Exception with the specified message and cause", exceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Exception with the specified message", exceptionWithMessageAndCause.getCause()->getMessage().toString());
-
-    // Constructs a new Exception with the specified cause.
-    Exception exceptionWithCause = Exception(&exceptionWithMessageAndCause);
-    ASSERT_STR("Exception with the specified message and cause", exceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Exception with the specified message", exceptionWithCause.getCause()->getCause()->getMessage().toString());
+	// Constructs a new Exception with null as its detail message.
+	Exception exceptionWithNullMessage;
+	ASSERT_STR("", exceptionWithNullMessage.getMessage().toString());
+	
+	// Constructs a new Exception with the specified detail message.
+	Exception exceptionWithMessage = Exception("Exception with the specified message");
+	ASSERT_STR("Exception with the specified message", exceptionWithMessage.getMessage().toString());
+	
+	// Constructs a new Exception with the specified detail message and cause.
+	Exception exceptionWithMessageAndCause = Exception("Exception with the specified message and cause", &exceptionWithMessage);
+	ASSERT_STR("Exception with the specified message and cause", exceptionWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("Exception with the specified message", exceptionWithMessageAndCause.getCause()->getMessage().toString());
+	
+	// Constructs a new Exception with the specified cause.
+	Exception exceptionWithCause = Exception(&exceptionWithMessageAndCause);
+	ASSERT_STR("Exception with the specified message and cause", exceptionWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("Exception with the specified message", exceptionWithCause.getCause()->getCause()->getMessage().toString());
 }

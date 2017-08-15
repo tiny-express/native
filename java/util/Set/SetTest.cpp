@@ -24,19 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_COMPARABLE_HPP_
-#define JAVA_LANG_COMPARABLE_HPP_
-
-#include "../Object/Object.hpp"
-
-namespace Java {
-		namespace Lang {
-				template <typename T>
-				class Comparable {
-				public:
-						virtual int compareTo(const T &o) const = 0;
-				};
-		}
+extern "C" {
+#include "../../../kernel/test.h"
 }
 
-#endif  // JAVA_LANG_COMPARABLE_HPP_
+#include "Set.hpp"
+
+using namespace Java::Util;
+
+TEST (JavaUtil, SetConstructor) {
+	ASSERT_STR("", "");
+}

@@ -36,142 +36,159 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace Util {
-		template <class E>
-		class Collection;
-		
-		template <class E>
-		class Collection : public virtual Iterable<E> {
-		public:
-			/**
-			 * Add a element to this collection
-			 * @param e
-			 * @return boolean
-			 */
-			virtual boolean add(E element);
-
-			/**
-			 * Add a Collection element to this collection
-			 * @param c
-			 * @return boealn
-			 */
+		namespace Util {
+				template <class E>
+				class Collection;
+				
+				template <class E>
+				class Collection : public virtual Iterable<E> {
+				public:
+						/**
+						 * Add a element to this collection
+						 * @param e
+						 * @return boolean
+						 */
+						virtual boolean add(E element) {
+							return true;
+						}
+						
+						/**
+						 * Add a Collection element to this collection
+						 * @param c
+						 * @return boealn
+						 */
 //			virtual boolean addAll(Collection<E> &c) = 0;//FIXME: should to implement foreach first
-
-			/**
-			 * Clear all element inside this collection
-			 * @return
-			 */
-			virtual void clear();
-
-			/**
-			 * Search for specified object, return true if it occurs
-			 * @param o
-			 * @return boolean
-			 */
-			virtual boolean contains(E element);
-
-			/**
-			 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
-			 * @param c
-			 * @return boolean
-			 */
+						
+						/**
+						 * Clear all element inside this collection
+						 * @return
+						 */
+						virtual void clear() {
+						}
+						
+						/**
+						 * Search for specified object, return true if it occurs
+						 * @param o
+						 * @return boolean
+						 */
+						virtual boolean contains(E element) {
+							return true;
+						}
+						
+						/**
+						 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
+						 * @param c
+						 * @return boolean
+						 */
 //			boolean containsAll(Collection<Object> &c);//FIXME: should to implement foreach first
-
-			/**
-			 * Compare object <o> with this collection through hashCode(), return true if it is equal
-			 * @param o
-			 * @return boolean
-			 */
-			virtual boolean equals(const Object object);
-
-			/**
-			 * Make a hashcode through this virtual address on memory
-			 * @return int
-			 */
-			virtual long hashCode();
-
-			/**
-			 * A hash code value for this object.
-			 * @return int
-			 */
-			virtual boolean isEmpty();
-
-			/**
-			 * Don't support this method
-			 * @return
-			 */
+						
+						/**
+						 * Compare object <o> with this collection through hashCode(), return true if it is equal
+						 * @param o
+						 * @return boolean
+						 */
+						virtual boolean equals(const Object object) {
+							return true;
+						}
+						
+						/**
+						 * Make a hashcode through this virtual address on memory
+						 * @return int
+						 */
+						virtual long hashCode() {
+							return 0;
+						}
+						
+						/**
+						 * A hash code value for this object.
+						 * @return int
+						 */
+						virtual boolean isEmpty() {
+							return true;
+						}
+						
+						/**
+						 * Don't support this method
+						 * @return
+						 */
 //			Java::Util::Stream::Stream<E> &parallelStream();
-
-			/**
-			 * Remove a specified object inside this collection, return true if it exits and be removed also
-			 * @param o
-			 * @return boolean
-			 */
-			virtual boolean remove(Object object);
-
-			/**
-			 * Remove a collection of object inside this collection, return true if it exits and be removed all also
-			 * @param c
-			 * @return
-			 */
-			virtual boolean removeAll(Collection<Object> collection);
-
-			/**
-			 * Don't support this method
-			 * @param filter
-			 * @return
-			 */
+						
+						/**
+						 * Remove a specified object inside this collection, return true if it exits and be removed also
+						 * @param o
+						 * @return boolean
+						 */
+						virtual boolean remove(Object object) {
+							return true;
+						}
+						
+						/**
+						 * Remove a collection of object inside this collection, return true if it exits and be removed all also
+						 * @param c
+						 * @return
+						 */
+						virtual boolean removeAll(Collection<Object> collection) {
+							return true;
+						}
+						
+						/**
+						 * Don't support this method
+						 * @param filter
+						 * @return
+						 */
 //			virtual boolean removeIf(Java::Util::Function::Predicate<E> &filter) = 0;
-
-			/**
-			 * Don't support this method
-			 * @return
-			 */
+						
+						/**
+						 * Don't support this method
+						 * @return
+						 */
 //			virtual boolean retainAll(Collection<Object> &c) = 0;
-
-			/**
-			 * Return number of element inside this collection
-			 * @return
-			 */
-			virtual int size();
-
-			/**
-			 * Don't support this method
-			 * @return
-			 */
+						
+						/**
+						 * Return number of element inside this collection
+						 * @return
+						 */
+						virtual int size() {
+							return 0;
+						}
+						
+						/**
+						 * Don't support this method
+						 * @return
+						 */
 //			Spliterator<E> &spliterator() {
 //				Spliterator<E> spliterator;
 //				return spliterator;
 //			}
-
-			/**
-		 	* Don't support this method
-		 	* @return
-		 	*/
+						
+						/**
+						 * Don't support this method
+						 * @return
+						 */
 //			Java::Util::Stream::Stream<E> &stream() {
 //				Java::Util::Stream::Stream<E> *stream = new Java::Util::Stream::Stream<E>();
 //				return *stream;
 //			}
-
-			/**
-			 * Don't support this method
-			 * @return
-			 */
+						
+						/**
+						 * Don't support this method
+						 * @return
+						 */
 //			Array<Object> &toArray() {
 //				Array<Object> *array = new Array<Object>();
 //				return *array;
 //			}
-
-			/**
-			 * Don't suppor this method
-			 * @param a
-			 * @return
-			 */
+						
+						/**
+						 * Don't suppor this method
+						 * @param a
+						 * @return
+						 */
 //			template <typename T>
 //			Array<T> toArray(Array<T> &a) const;
-
-		};
-	}
+				
+				};
+		}
 }
 
 #endif //JAVA_COLLECTION_HPP_

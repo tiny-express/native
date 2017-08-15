@@ -31,15 +31,15 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Lang {
-        class UnsupportedOperationException : public RuntimeException {
-        public:
-            UnsupportedOperationException();
-            UnsupportedOperationException(String message);
-            UnsupportedOperationException(Throwable *cause);
-            UnsupportedOperationException(String message, Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class UnsupportedOperationException : public RuntimeException {
+				public:
+						UnsupportedOperationException();
+						UnsupportedOperationException(String message);
+						UnsupportedOperationException(Throwable *cause);
+						UnsupportedOperationException(String message, Throwable *cause);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_UNSUPPORTEDOPERATIONEXCEPTION_HPP

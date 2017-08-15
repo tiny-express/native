@@ -30,25 +30,25 @@
 using namespace Java::Lang;
 
 Throwable::Throwable() {
-    this->message = "";
+	this->message = "";
 }
 
 Throwable::Throwable(String message) {
-    this->message = message;
+	this->message = message;
 }
 
 Throwable::Throwable(String message, Throwable *cause) {
-    this->message = message;
-    this->cause = cause;
+	this->message = message;
+	this->cause = cause;
 }
 
 Throwable::Throwable(Throwable *cause) {
-    this->message = "";
-    this->cause = cause;
+	this->message = "";
+	this->cause = cause;
 }
 
 String Throwable::getMessage() {
-    return this->message;
+	return this->message;
 }
 
 Throwable* Throwable::getCause() {

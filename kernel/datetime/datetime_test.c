@@ -28,29 +28,29 @@
 #include "../datetime.h"
 #include "../test.h"
 
-TEST (DateTime, UnixTimestampInMilliseconds) {
+TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 #ifdef WINDOWS
-    unsigned int millisecond = 123;
-    unsigned int second = 3;
-    unsigned int minute = 20;
-    unsigned int hour = 17;
-    unsigned int day  = 16;
-    unsigned int month = 7;
-    unsigned int year = 2017;
-    unsigned long timestamp = unix_time_in_milliseconds(
-            millisecond,
-            second,
-            minute,
-            hour,
-            day,
-            month,
-            year
-    );
-    ASSERT_EQUAL(timestamp, 1500225603123);
+	unsigned int millisecond = 123;
+	unsigned int second = 3;
+	unsigned int minute = 20;
+	unsigned int hour = 17;
+	unsigned int day  = 16;
+	unsigned int month = 7;
+	unsigned int year = 2017;
+	unsigned long timestamp = unix_time_in_milliseconds(
+			millisecond,
+			second,
+			minute,
+			hour,
+			day,
+			month,
+			year
+	);
+	ASSERT_EQUAL(timestamp, 1500225603123);
 #endif
 }
 
-TEST (DateTime, TimestampInNanoSeconds) {
+TEST (KernelDateTime, TimestampInNanoSeconds) {
 	long first_time = timestamp();
 	ASSERT_TRUE(first_time > 1500198318489000);
 	int maxN = 20000000;
@@ -63,22 +63,22 @@ TEST (DateTime, TimestampInNanoSeconds) {
 	}
 	long last_time = timestamp();
 	ASSERT_EQUAL(maxN, counter);
-    unsigned int delta = (last_time - first_time) / 1000;
-    ASSERT_TRUE(delta > 50);
+	unsigned int delta = ( last_time - first_time ) / 1000;
+	ASSERT_TRUE(delta > 50);
 }
 
-TEST (DateTime, Format) {
+TEST (KernelDateTime, Format) {
 	long timestamp = 1473765499;
 	string format = "d/m/y";
 	string result1 = date(timestamp, format);
 	ASSERT_STR("13/09/2016", result1);
 	free(result1);
-
+	
 	timestamp = 1511208660;
 	char *result2 = date(timestamp, format);
 	ASSERT_STR("20/11/2017", result2);
 	free(result2);
-
+	
 	format = "y-m-d";
 	char *result3 = date(timestamp, format);
 	ASSERT_STR("2017-11-20", result3);

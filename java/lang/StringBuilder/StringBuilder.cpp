@@ -29,9 +29,11 @@
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../UnsupportedOperationException/UnsupportedOperationException.hpp"
+
 using namespace Java::Lang;
 
-StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) { }
+StringBuilder::StringBuilder() : StringBuilder(defaultCapacity) {
+}
 
 StringBuilder::StringBuilder(int capacity) {
     if (capacity < 0) {
@@ -44,42 +46,42 @@ StringBuilder::StringBuilder(int capacity) {
 }
 
 StringBuilder::StringBuilder(const string target) {
-    int stringLength = length_pointer_char(target);
-    int newCapacity = defaultCapacity + stringLength;
-    this->ensureCapacity(newCapacity);
-    this->append(target);
+	int stringLength = length_pointer_char(target);
+	int newCapacity = defaultCapacity + stringLength;
+	this->ensureCapacity(newCapacity);
+	this->append(target);
 }
 
 StringBuilder::StringBuilder(const String &target) {
-    int newCapacity = defaultCapacity + target.length();
-    this->ensureCapacity(newCapacity);
-    this->append(target.toString());
+	int newCapacity = defaultCapacity + target.length();
+	this->ensureCapacity(newCapacity);
+	this->append(target.toString());
 }
 
 StringBuilder::StringBuilder(const std::initializer_list<char> &target) {
-    int newCapacity = defaultCapacity + (int)target.size();
-    this->ensureCapacity(newCapacity);
-    this->append(target);
+	int newCapacity = defaultCapacity + (int) target.size();
+	this->ensureCapacity(newCapacity);
+	this->append(target);
 }
 
 StringBuilder::StringBuilder(const CharSequence &charSequence) {
-    int newCapaity = defaultCapacity + charSequence.length();
-    this->ensureCapacity(newCapaity);
-    this->append(charSequence);
+	int newCapaity = defaultCapacity + charSequence.length();
+	this->ensureCapacity(newCapaity);
+	this->append(charSequence);
 }
 
 StringBuilder::StringBuilder(const StringBuilder &target) {
-    this->original = (string)calloc((size_t)target.currentCapacity, sizeof(char));
-    int index;
-    for (index = 0; index < target.currentLength; index++) {
-        this->original[index] = target.original[index];
-    }
-    this->currentLength = target.currentLength;
-    this->currentCapacity = target.currentCapacity;
+	this->original = (string) calloc((size_t) target.currentCapacity, sizeof(char));
+	int index;
+	for (index = 0; index < target.currentLength; index++) {
+		this->original[ index ] = target.original[ index ];
+	}
+	this->currentLength = target.currentLength;
+	this->currentCapacity = target.currentCapacity;
 }
 
 StringBuilder::~StringBuilder() {
-    free(original);
+	free(original);
 }
 
 StringBuilder &StringBuilder::append(const Boolean &target) {
@@ -228,7 +230,7 @@ StringBuilder &StringBuilder::appendCodePoint(int codePoint) {
 }
 
 int StringBuilder::capacity() const {
-    return this->currentCapacity;
+	return this->currentCapacity;
 }
 
 char StringBuilder::charAt(int index) const {
@@ -254,92 +256,92 @@ int StringBuilder::codePointAt(int index) const {
 }
 
 int StringBuilder::codePointBefore(int index) const {
-    int beforeOfIndex = index - 1;
-    return this->codePointAt(beforeOfIndex);
+	int beforeOfIndex = index - 1;
+	return this->codePointAt(beforeOfIndex);
 }
 
 int StringBuilder::codePointCount(int beginIndex, int endIndex) {
-    if (beginIndex < 0 || endIndex > this->currentLength || beginIndex > endIndex) {
-        throw IndexOutOfBoundsException();
-    }
-
-    Array<char> originalArray;
-    int numberOfCharacters = endIndex - beginIndex;
-    int index;
-    int stopIndex = beginIndex + numberOfCharacters;
-    for (index = 0; index < stopIndex; index++) {
-        originalArray.push(this->original[index]);
-    }
-    int result = Character::codePointCount(originalArray, 0, numberOfCharacters);
-    return result;
+	if (beginIndex < 0 || endIndex > this->currentLength || beginIndex > endIndex) {
+		throw IndexOutOfBoundsException();
+	}
+	
+	Array<char> originalArray;
+	int numberOfCharacters = endIndex - beginIndex;
+	int index;
+	int stopIndex = beginIndex + numberOfCharacters;
+	for (index = 0; index < stopIndex; index++) {
+		originalArray.push(this->original[ index ]);
+	}
+	int result = Character::codePointCount(originalArray, 0, numberOfCharacters);
+	return result;
 }
 
 StringBuilder StringBuilder::deleteRange(int start, int end) {
-    if (start < 0) {
-        throw StringIndexOutOfBoundsException(start);
-    }
-    if (end > this->currentLength) {
-        end = this->currentLength;
-    }
-    if (start > end) {
-        throw StringIndexOutOfBoundsException("start > end");
-    }
-
-    int lengthOfSubStringWillBeRemoved = end - start;
-    string newPositionOfTail = this->original + start;
-    string oldPositionOfTail = this->original + end;
-    int memorySizeOfTailPart = this->currentLength - end;
-    memmove(newPositionOfTail, oldPositionOfTail, (size_t)memorySizeOfTailPart);
-
-    this->currentLength = this->currentLength - lengthOfSubStringWillBeRemoved;
-    return *this;
+	if (start < 0) {
+		throw StringIndexOutOfBoundsException(start);
+	}
+	if (end > this->currentLength) {
+		end = this->currentLength;
+	}
+	if (start > end) {
+		throw StringIndexOutOfBoundsException("start > end");
+	}
+	
+	int lengthOfSubStringWillBeRemoved = end - start;
+	string newPositionOfTail = this->original + start;
+	string oldPositionOfTail = this->original + end;
+	int memorySizeOfTailPart = this->currentLength - end;
+	memmove(newPositionOfTail, oldPositionOfTail, (size_t) memorySizeOfTailPart);
+	
+	this->currentLength = this->currentLength - lengthOfSubStringWillBeRemoved;
+	return *this;
 }
 
 StringBuilder StringBuilder::deleteCharAt(int index) {
-    if (index < 0 || index >= this->currentLength) {
-        throw StringIndexOutOfBoundsException(index);
-    }
-
-    string newPositionOfTail = this->original + index;
-    string oldPositionOfTail = this->original + index + 1;
-    int memorySizeOfTailPart = this->currentLength - (index + 1);
-    memmove(newPositionOfTail, oldPositionOfTail, (size_t)memorySizeOfTailPart);
-
-    this->currentLength = this->currentLength - 1;
-    return *this;
+	if (index < 0 || index >= this->currentLength) {
+		throw StringIndexOutOfBoundsException(index);
+	}
+	
+	string newPositionOfTail = this->original + index;
+	string oldPositionOfTail = this->original + index + 1;
+	int memorySizeOfTailPart = this->currentLength - ( index + 1 );
+	memmove(newPositionOfTail, oldPositionOfTail, (size_t) memorySizeOfTailPart);
+	
+	this->currentLength = this->currentLength - 1;
+	return *this;
 }
 
 void StringBuilder::ensureCapacity(int minimumCapacity) {
-    if (minimumCapacity <= 0 || minimumCapacity <= this->currentCapacity) {
-        return;
-    }
-
-    int newCapacity = this->currentCapacity * 2 + 2;
-    if (newCapacity < minimumCapacity) {
-        newCapacity = minimumCapacity;
-    }
-    int numberOfBytes = newCapacity * sizeof(char);
-    this->original = (string)realloc(this->original, (size_t)numberOfBytes);
-    this->currentCapacity = newCapacity;
+	if (minimumCapacity <= 0 || minimumCapacity <= this->currentCapacity) {
+		return;
+	}
+	
+	int newCapacity = this->currentCapacity * 2 + 2;
+	if (newCapacity < minimumCapacity) {
+		newCapacity = minimumCapacity;
+	}
+	int numberOfBytes = newCapacity * sizeof(char);
+	this->original = (string) realloc(this->original, (size_t) numberOfBytes);
+	this->currentCapacity = newCapacity;
 }
 
 void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const {
-    if (sourceBegin < 0) {
-        throw StringIndexOutOfBoundsException(sourceBegin);
-    }
-    if (sourceEnd < 0 || sourceEnd > this->currentLength) {
-        throw StringIndexOutOfBoundsException(sourceEnd);
-    }
-    if (sourceBegin > sourceEnd) {
-        throw StringIndexOutOfBoundsException("sourceBegin > sourceEnd");
-    }
-
-    // TODO: copyOfRange method for Array is not implemented.
-    throw UnsupportedOperationException();
+	if (sourceBegin < 0) {
+		throw StringIndexOutOfBoundsException(sourceBegin);
+	}
+	if (sourceEnd < 0 || sourceEnd > this->currentLength) {
+		throw StringIndexOutOfBoundsException(sourceEnd);
+	}
+	if (sourceBegin > sourceEnd) {
+		throw StringIndexOutOfBoundsException("sourceBegin > sourceEnd");
+	}
+	
+	// TODO: copyOfRange method for Array is not implemented.
+	throw UnsupportedOperationException();
 }
 
-int StringBuilder::indexOf(const String &target) const{
-    return this->indexOf(target.toString());
+int StringBuilder::indexOf(const String &target) const {
+	return this->indexOf(target.toString());
 }
 
 int StringBuilder::indexOf(const string target) const {
@@ -347,7 +349,7 @@ int StringBuilder::indexOf(const string target) const {
 }
 
 int StringBuilder::indexOf(const String &target, int fromIndex) const {
-    return this->indexOf(target.toString(), fromIndex);
+	return this->indexOf(target.toString(), fromIndex);
 }
 
 int StringBuilder::indexOf(const string target, int fromIndex) const {
@@ -546,7 +548,7 @@ StringBuilder &StringBuilder::insert(int offset, const string target) {
 }
 
 int StringBuilder::lastIndexOf(const String &target) const {
-    return this->lastIndexOf(target.toString());
+	return this->lastIndexOf(target.toString());
 }
 
 int StringBuilder::lastIndexOf(const string target) const {
@@ -554,7 +556,7 @@ int StringBuilder::lastIndexOf(const string target) const {
 }
 
 int StringBuilder::lastIndexOf(const String &target, int fromIndex) const {
-    return this->lastIndexOf(target.toString(), fromIndex);
+	return this->lastIndexOf(target.toString(), fromIndex);
 }
 
 int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
@@ -562,85 +564,85 @@ int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
 }
 
 int StringBuilder::length() const {
-    return this->currentLength;
+	return this->currentLength;
 }
 
 int StringBuilder::offsetByCodePoints(int index, int codePointOffset) const {
-    if (index < 0 || index > this->currentLength) {
-        throw IndexOutOfBoundsException();
-    }
-    // TODO: Waiting for Character::offsetByCodePoints
-    throw UnsupportedOperationException();
+	if (index < 0 || index > this->currentLength) {
+		throw IndexOutOfBoundsException();
+	}
+	// TODO: Waiting for Character::offsetByCodePoints
+	throw UnsupportedOperationException();
 }
 
 StringBuilder StringBuilder::replace(int start, int end, const String &target) {
-    return this->replace(start, end, target.toString());
+	return this->replace(start, end, target.toString());
 }
 
 StringBuilder StringBuilder::replace(int start, int end, const string target) {
-    if (start < 0) {
-        throw StringIndexOutOfBoundsException(start);
-    }
-    if (start > this->currentLength) {
-        throw StringIndexOutOfBoundsException("start > length()");
-    }
-    if (start > end) {
-        throw StringIndexOutOfBoundsException("start > end");
-    }
-    if (end > this->currentLength) {
-        end = this->currentLength;
-    }
-
-    int lengthOfTarget = length_pointer_char(target);
-    int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
-    int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
-    this->ensureCapacity(newLength);
-
-    string newPositionOfTailPart = this->original + end + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
-    string oldPositionOfTailPart = this->original + end;
-    int memorySizeOfTailPart = (this->currentLength - end) * sizeof(char);
-    memmove(newPositionOfTailPart, oldPositionOfTailPart, (size_t)memorySizeOfTailPart);
-
-    string insertPosition = this->original + start;
-    int memorySizeForTarget = lengthOfTarget * sizeof(char);
-    memcpy(insertPosition, target, (size_t)memorySizeForTarget);
-
-    this->currentLength = newLength;
-    return *this;
+	if (start < 0) {
+		throw StringIndexOutOfBoundsException(start);
+	}
+	if (start > this->currentLength) {
+		throw StringIndexOutOfBoundsException("start > length()");
+	}
+	if (start > end) {
+		throw StringIndexOutOfBoundsException("start > end");
+	}
+	if (end > this->currentLength) {
+		end = this->currentLength;
+	}
+	
+	int lengthOfTarget = length_pointer_char(target);
+	int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
+	int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
+	this->ensureCapacity(newLength);
+	
+	string newPositionOfTailPart = this->original + end + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
+	string oldPositionOfTailPart = this->original + end;
+	int memorySizeOfTailPart = ( this->currentLength - end ) * sizeof(char);
+	memmove(newPositionOfTailPart, oldPositionOfTailPart, (size_t) memorySizeOfTailPart);
+	
+	string insertPosition = this->original + start;
+	int memorySizeForTarget = lengthOfTarget * sizeof(char);
+	memcpy(insertPosition, target, (size_t) memorySizeForTarget);
+	
+	this->currentLength = newLength;
+	return *this;
 }
 
 StringBuilder StringBuilder::reverse() {
-    boolean hasSurrogates = false;
-    int index;
-    int oppositeIndex;
-    int stopIndex = this->currentLength / 2;
-    char temp;
-    for (index = 0; index < stopIndex; index++) {
-        oppositeIndex = (this->currentLength - 1) - index;
-        temp = this->original[index];
-        this->original[index] = this->original[oppositeIndex];
-        this->original[oppositeIndex] = temp;
-        if (Character::isSurrogate((this->original[index])) || Character::isSurrogate(this->original[oppositeIndex])) {
-            hasSurrogates = true;
-        }
-    }
-    if (hasSurrogates) {
-        this->reverseAllValidSurrogatePairs();
-    }
-    return *this;
+	boolean hasSurrogates = false;
+	int index;
+	int oppositeIndex;
+	int stopIndex = this->currentLength / 2;
+	char temp;
+	for (index = 0; index < stopIndex; index++) {
+		oppositeIndex = ( this->currentLength - 1 ) - index;
+		temp = this->original[ index ];
+		this->original[ index ] = this->original[ oppositeIndex ];
+		this->original[ oppositeIndex ] = temp;
+		if (Character::isSurrogate(( this->original[ index ] )) || Character::isSurrogate(this->original[ oppositeIndex ])) {
+			hasSurrogates = true;
+		}
+	}
+	if (hasSurrogates) {
+		this->reverseAllValidSurrogatePairs();
+	}
+	return *this;
 }
 
 void StringBuilder::setCharAt(int index, char target) {
-    if (index < 0 || index >= this->currentLength) {
-        throw StringIndexOutOfBoundsException(index);
-    }
-
-    this->original[index] = target;
+	if (index < 0 || index >= this->currentLength) {
+		throw StringIndexOutOfBoundsException(index);
+	}
+	
+	this->original[ index ] = target;
 }
 
 void StringBuilder::setCharAt(int index, const Character &target) {
-    Character *pointerToTarget = const_cast<Character *>(&target);
-    this->setCharAt(index, pointerToTarget->charValue());
+	Character *pointerToTarget = const_cast<Character *>(&target);
+	this->setCharAt(index, pointerToTarget->charValue());
 }
 
 void StringBuilder::setLength(int newLength) {
@@ -659,32 +661,32 @@ void StringBuilder::setLength(int newLength) {
 }
 
 String StringBuilder::substring(int start) const {
-    return this->substring(start, this->currentLength);
+	return this->substring(start, this->currentLength);
 }
 
 String StringBuilder::substring(int start, int end) const {
-    if (start < 0 || start > this->currentLength) {
-        throw StringIndexOutOfBoundsException(start);
-    }
-    if (end < 0 || end > this->currentLength) {
-        throw StringIndexOutOfBoundsException(end);
-    }
-    if (start > end) {
-        throw StringIndexOutOfBoundsException(end - start);
-    }
-
-    int lengthOfSubString = end - start + 1;
-    string copyOfSubString = (string)calloc((size_t)lengthOfSubString, sizeof(char));
-    int indexOfOriginal;
-    int indexOfSubString = 0;
-    for (indexOfOriginal = start; indexOfOriginal < end;indexOfOriginal++) {
-        copyOfSubString[indexOfSubString] = this->original[indexOfOriginal];
-        indexOfSubString = indexOfSubString + 1;
-    }
-    copyOfSubString[indexOfSubString] = '\0';
-    String result(copyOfSubString);
-    free(copyOfSubString);
-    return result;
+	if (start < 0 || start > this->currentLength) {
+		throw StringIndexOutOfBoundsException(start);
+	}
+	if (end < 0 || end > this->currentLength) {
+		throw StringIndexOutOfBoundsException(end);
+	}
+	if (start > end) {
+		throw StringIndexOutOfBoundsException(end - start);
+	}
+	
+	int lengthOfSubString = end - start + 1;
+	string copyOfSubString = (string) calloc((size_t) lengthOfSubString, sizeof(char));
+	int indexOfOriginal;
+	int indexOfSubString = 0;
+	for (indexOfOriginal = start; indexOfOriginal < end; indexOfOriginal++) {
+		copyOfSubString[ indexOfSubString ] = this->original[ indexOfOriginal ];
+		indexOfSubString = indexOfSubString + 1;
+	}
+	copyOfSubString[ indexOfSubString ] = '\0';
+	String result(copyOfSubString);
+	free(copyOfSubString);
+	return result;
 }
 
 string StringBuilder::toString() const {
@@ -701,169 +703,163 @@ string StringBuilder::toString() const {
 }
 
 void StringBuilder::trimToSize() {
-    if (this->currentCapacity > this->currentLength) {
-        int numberOfBytesForCapacity = this->currentLength * sizeof(char);
-        this->original = (string)realloc(this->original, (size_t)numberOfBytesForCapacity);
-        this->currentCapacity = this->currentLength;
-    }
+	if (this->currentCapacity > this->currentLength) {
+		int numberOfBytesForCapacity = this->currentLength * sizeof(char);
+		this->original = (string) realloc(this->original, (size_t) numberOfBytesForCapacity);
+		this->currentCapacity = this->currentLength;
+	}
 }
 
-int *StringBuilder::initializeNextTable(const string pattern) const{
-    int lengthOfPattern = length_pointer_char(pattern);
-    if (pattern == NULL || lengthOfPattern == 0) {
-        return NULL;
-    }
-
-    int *nextTable = (int *)calloc((size_t)lengthOfPattern, sizeof(int));
-
-    if (nextTable == NULL) {
-        return NULL;
-    }
-
-    nextTable[0] = -1;
-    if (lengthOfPattern == 1) {
-        return nextTable;
-    }
-    nextTable[1] = 0;
-    if (lengthOfPattern == 2) {
-        return nextTable;
-    }
-
-    int position = 2;
-    int lengthOfTheLongestPrefixSuffix = 0;
-
-    while (position < lengthOfPattern) {
-        if (pattern[position - 1] == pattern[lengthOfTheLongestPrefixSuffix]) {
-            lengthOfTheLongestPrefixSuffix = lengthOfTheLongestPrefixSuffix + 1;
-            nextTable[position] = lengthOfTheLongestPrefixSuffix;
-            position = position + 1;
-        }
-        else if (lengthOfTheLongestPrefixSuffix > 0) {
-            lengthOfTheLongestPrefixSuffix = nextTable[lengthOfTheLongestPrefixSuffix];
-        }
-        else {
-            nextTable[position] = 0;
-            position = position + 1;
-        }
-    }
-
-    return nextTable;
+int *StringBuilder::initializeNextTable(const string pattern) const {
+	int lengthOfPattern = length_pointer_char(pattern);
+	if (pattern == NULL || lengthOfPattern == 0) {
+		return NULL;
+	}
+	
+	int *nextTable = (int *) calloc((size_t) lengthOfPattern, sizeof(int));
+	
+	if (nextTable == NULL) {
+		return NULL;
+	}
+	
+	nextTable[ 0 ] = -1;
+	if (lengthOfPattern == 1) {
+		return nextTable;
+	}
+	nextTable[ 1 ] = 0;
+	if (lengthOfPattern == 2) {
+		return nextTable;
+	}
+	
+	int position = 2;
+	int lengthOfTheLongestPrefixSuffix = 0;
+	
+	while (position < lengthOfPattern) {
+		if (pattern[ position - 1 ] == pattern[ lengthOfTheLongestPrefixSuffix ]) {
+			lengthOfTheLongestPrefixSuffix = lengthOfTheLongestPrefixSuffix + 1;
+			nextTable[ position ] = lengthOfTheLongestPrefixSuffix;
+			position = position + 1;
+		} else if (lengthOfTheLongestPrefixSuffix > 0) {
+			lengthOfTheLongestPrefixSuffix = nextTable[ lengthOfTheLongestPrefixSuffix ];
+		} else {
+			nextTable[ position ] = 0;
+			position = position + 1;
+		}
+	}
+	
+	return nextTable;
 }
 
 int StringBuilder::stringMatches(const string target, const string pattern, int startIndex) const {
-    int lengthOfPattern = length_pointer_char(pattern);
-    int lengthOfTarget = length_pointer_char(target);
-
-    if (startIndex > lengthOfTarget) {
-        if (lengthOfPattern == 0) {
-            return lengthOfTarget;
-        }
-        return -1;
-    }
-
-    if (startIndex < 0) {
-        startIndex = 0;
-    }
-
-    // Empty string always matches.
-    if (lengthOfPattern == 0) {
-        return startIndex;
-    }
-
-    // KMP algorithm.
-    int *nextTable = this->initializeNextTable(target);
-    if (nextTable == NULL) {
-        return -1;
-    }
-
-    int position = 0;
-    while (startIndex + position < lengthOfTarget) {
-        if (pattern[position] == target[startIndex + position]) {
-            if (position == lengthOfPattern - 1) {
-                free(nextTable);
-                return startIndex;
-            }
-            position = position + 1;
-        }
-        else {
-            if (nextTable[position] > -1) {
-                startIndex = startIndex + position;
-                position = nextTable[position];
-            }
-            else {
-                startIndex = startIndex + 1;
-                position = 0;
-            }
-        }
-    }
-
-    free(nextTable);
-    return -1;
+	int lengthOfPattern = length_pointer_char(pattern);
+	int lengthOfTarget = length_pointer_char(target);
+	
+	if (startIndex > lengthOfTarget) {
+		if (lengthOfPattern == 0) {
+			return lengthOfTarget;
+		}
+		return -1;
+	}
+	
+	if (startIndex < 0) {
+		startIndex = 0;
+	}
+	
+	// Empty string always matches.
+	if (lengthOfPattern == 0) {
+		return startIndex;
+	}
+	
+	// KMP algorithm.
+	int *nextTable = this->initializeNextTable(target);
+	if (nextTable == NULL) {
+		return -1;
+	}
+	
+	int position = 0;
+	while (startIndex + position < lengthOfTarget) {
+		if (pattern[ position ] == target[ startIndex + position ]) {
+			if (position == lengthOfPattern - 1) {
+				free(nextTable);
+				return startIndex;
+			}
+			position = position + 1;
+		} else {
+			if (nextTable[ position ] > -1) {
+				startIndex = startIndex + position;
+				position = nextTable[ position ];
+			} else {
+				startIndex = startIndex + 1;
+				position = 0;
+			}
+		}
+	}
+	
+	free(nextTable);
+	return -1;
 }
 
 int StringBuilder::stringMatchesReverse(const string target, const string pattern, int startIndex) const {
-    int lengthOfPattern = length_pointer_char(pattern);
-    int lengthOfTarget = length_pointer_char(target);
-
-    if (startIndex < 0) {
-        return -1;
-    }
-
-    int rightIndex = lengthOfTarget - lengthOfPattern;
-    if (startIndex < rightIndex) {
-        startIndex = rightIndex;
-    }
-
-    // Empty string always matches.
-    if (lengthOfPattern == 0) {
-        return startIndex;
-    }
-
-    // KMP algorithm.
-    int *nextTable = this->initializeNextTable(pattern);
-    if (nextTable == NULL) {
-        return -1;
-    }
-
-    int position = 0;
-    while (startIndex - position >= 0) {
-        if (pattern[lengthOfPattern - position - 1] == target[startIndex - position]) {
-            if (position == lengthOfPattern - 1) {
-                free(nextTable);
-                return startIndex - lengthOfPattern + 1;
-            }
-            position = position + 1;
-        }
-        else {
-            if (nextTable[position]> -1) {
-                startIndex = startIndex - position;
-                position = nextTable[position];
-            }
-            else {
-                startIndex = startIndex - 1;
-                position = 0;
-            }
-        }
-    }
-
-    free(nextTable);
-    return - 1;
+	int lengthOfPattern = length_pointer_char(pattern);
+	int lengthOfTarget = length_pointer_char(target);
+	
+	if (startIndex < 0) {
+		return -1;
+	}
+	
+	int rightIndex = lengthOfTarget - lengthOfPattern;
+	if (startIndex < rightIndex) {
+		startIndex = rightIndex;
+	}
+	
+	// Empty string always matches.
+	if (lengthOfPattern == 0) {
+		return startIndex;
+	}
+	
+	// KMP algorithm.
+	int *nextTable = this->initializeNextTable(pattern);
+	if (nextTable == NULL) {
+		return -1;
+	}
+	
+	int position = 0;
+	while (startIndex - position >= 0) {
+		if (pattern[ lengthOfPattern - position - 1 ] == target[ startIndex - position ]) {
+			if (position == lengthOfPattern - 1) {
+				free(nextTable);
+				return startIndex - lengthOfPattern + 1;
+			}
+			position = position + 1;
+		} else {
+			if (nextTable[ position ] > -1) {
+				startIndex = startIndex - position;
+				position = nextTable[ position ];
+			} else {
+				startIndex = startIndex - 1;
+				position = 0;
+			}
+		}
+	}
+	
+	free(nextTable);
+	return -1;
 }
 
 void StringBuilder::reverseAllValidSurrogatePairs() {
-    int stopIndex = this->currentLength - 1;
-    int index;
-    char ch1;
-    char ch2;
-    for (index = 0; index < stopIndex; index++) {
-        ch2 = this->original[index];
-        if (Character::isLowSurrogate(ch2)) {
-            ch1 = this->original[index + 1];
-            if (Character::isHighSurrogate(ch1)) {
-                this->original[index] = ch1;
-                index = index + 1;
-                this->original[index] = ch2;
-            }
-        }
-    }
+	int stopIndex = this->currentLength - 1;
+	int index;
+	char ch1;
+	char ch2;
+	for (index = 0; index < stopIndex; index++) {
+		ch2 = this->original[ index ];
+		if (Character::isLowSurrogate(ch2)) {
+			ch1 = this->original[ index + 1 ];
+			if (Character::isHighSurrogate(ch1)) {
+				this->original[ index ] = ch1;
+				index = index + 1;
+				this->original[ index ] = ch2;
+			}
+		}
+	}
 }

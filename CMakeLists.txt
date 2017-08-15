@@ -133,7 +133,6 @@ add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
 add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME}_static ${SOURCES_C} ${SOURCES_CPP})
 add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
@@ -171,7 +170,6 @@ include(CTest)
 enable_testing()
 
 # Add make installation - install to Unix system
-install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(FILES library.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
@@ -189,17 +187,14 @@ add_custom_target(
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
 else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_static ${CMAKE_THREAD_LIBS_INIT}-lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif ()

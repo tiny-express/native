@@ -20,12 +20,8 @@ script:
 - make native_test -j8
 - ./misc/memory_check
 - make native && sudo make install && sudo ldconfig
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cd examples && ./build; fi
+- cd examples && ./build
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}
-  - lcov --directory . --capture --output-file coverage.info
-  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
-  - lcov --list coverage.info
-  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+- ./misc/codecov.sh
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

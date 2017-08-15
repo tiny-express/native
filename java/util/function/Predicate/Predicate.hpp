@@ -28,13 +28,13 @@
 #define JAVA_UTIL_FUNCTION_PREDICATE_HPP_
 
 namespace Java {
-	namespace Util {
-		namespace Function {
-			template <typename E>
-			class Predicate {
-			};
+		namespace Util {
+				namespace Function {
+						template <typename E>
+						class Predicate {
+						};
+				}
 		}
-	}
 }
 
 #endif  // JAVA_UTIL_FUNCTION_PREDICATE_HPP_
