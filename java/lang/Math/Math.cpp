@@ -26,6 +26,7 @@
 
 #include "Math.hpp"
 
+#include <cmath>
 #include "../ArithmeticException/ArithmeticException.hpp"
 #include "../AssertionError/AssertionError.hpp"
 
@@ -44,6 +45,10 @@ long Math::abs(long value) {
 }
 
 double Math::abs(double value) {
+	if(Double::isNaN(value)) {
+		return Double::NOT_A_NUMBER_DOUBLE;
+	}
+	
 	return value >= 0 ? value : -value;
 }
 
@@ -65,7 +70,7 @@ double Math::atan2(double coordinateX, double coordinateY) {
 
 long Math::addExact(long valueA, long valueB) {
 	long result = valueA + valueB;
-	if ((( valueA ^ result ) & ( valueB ^ result )) < 0) {
+	if (((valueA ^ result) & (valueB ^ result)) < 0) {
 		throw ArithmeticException("long overflow");
 	}
 	return result;
@@ -73,7 +78,7 @@ long Math::addExact(long valueA, long valueB) {
 
 int Math::addExact(int valueA, int valueB) {
 	int result = valueA + valueB;
-	if ((( valueA ^ result ) & ( valueB ^ result )) < 0) {
+	if (((valueA ^ result) & (valueB ^ result)) < 0) {
 		throw ArithmeticException("integer overflow");
 	}
 	return result;
@@ -96,6 +101,12 @@ float Math::copySign(float magnitude, float sign) {
 }
 
 double Math::cos(double angle) {
+	double result = math_cos(angle);
+	
+	if(Double::isNaN(result)) {
+		return Math::abs(result);
+	}
+	
 	return math_cos(angle);
 }
 
@@ -135,7 +146,7 @@ int Math::floorDiv(int dividend, int divisor) {
 	}
 	int result = dividend / divisor;
 	// if the signs are different and modulo not zero, round down
-	if (( dividend ^ divisor ) < 0 && ( result * divisor != dividend )) {
+	if ((dividend ^ divisor) < 0 && (result * divisor != dividend)) {
 		result--;
 	}
 	return result;
@@ -147,18 +158,18 @@ long Math::floorDiv(long dividend, long divisor) {
 	}
 	long result = dividend / divisor;
 	// if the signs are different and modulo not zero, round down
-	if (( dividend ^ divisor ) < 0 && ( result * divisor != dividend )) {
+	if ((dividend ^ divisor) < 0 && (result * divisor != dividend)) {
 		result--;
 	}
 	return result;
 }
 
 int Math::floorMod(int dividend, int divisor) {
-	return dividend - ( floorDiv(dividend, divisor) * divisor );
+	return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
 long Math::floorMod(long dividend, long divisor) {
-	return dividend - ( floorDiv(dividend, divisor) * divisor );
+	return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
 int Math::getExponent(double value) {
@@ -192,7 +203,7 @@ int Math::getExponent(float value) {
 	double mantissas;
 	int exponent;
 	mantissas = std::frexp(value, &exponent);
-	if (( mantissas * 10 ) >= 1.0 && ( exponent - 1 ) < Float::MIN_EXPONENT) {
+	if ((mantissas * 10) >= 1.0 && (exponent - 1) < Float::MIN_EXPONENT) {
 		return Float::MIN_EXPONENT - 1;
 	}
 	
@@ -204,6 +215,11 @@ double Math::hypot(double valueA, double valueB) {
 }
 
 double Math::IEEERemainder(double dividend, double divisor) {
+	double result = math_ieeeremainder(dividend, divisor);
+	if(Double::isNaN(result)) {
+		return Math::abs(result);
+	}
+	
 	return math_ieeeremainder(dividend, divisor);
 }
 
@@ -230,6 +246,12 @@ double Math::log10(double value) {
 }
 
 double Math::log1p(double value) {
+	double result = math_log1p(value);
+	
+	if(Double::isNaN(result)) {
+		return Math::abs(result);
+	}
+	
 	return math_log1p(value);
 }
 
@@ -266,11 +288,11 @@ double Math::min(double valueA, double valueB) {
 }
 
 int Math::multiplyExact(int valueA, int valueB) {
-	long result = (long) valueA * (long) valueB;
-	if ((int) result != result) {
+	long result = (long)valueA * (long)valueB;
+	if ((int)result != result) {
 		throw ArithmeticException("integer overflow");
 	}
-	return (int) result;
+	return (int)result;
 }
 
 long Math::multiplyExact(long valueA, long valueB) {
@@ -283,8 +305,8 @@ long Math::multiplyExact(long valueA, long valueB) {
 	unsigned long absA = (unsigned) abs(valueA);
 	unsigned long absB = (unsigned) abs(valueB);
 	
-	if ((( absA | absB ) >> 31 ) != 0) {
-		if (( valueB != 0 ) && ( result / valueB != valueA )) {
+	if (((absA | absB) >> 31) != 0) {
+		if ((valueB != 0) && (result / valueB != valueA)) {
 			throw ArithmeticException("long overflow");
 		}
 	}
@@ -361,8 +383,8 @@ double Math::powerOfTwoD(int exponent) {
 		throw AssertionError(exponent);
 	}
 	long oneLong = 1;
-	return Double::longBitsToDouble((( exponent + Double::EXP_BIAS )
-		<< ( Double::SIGNIFICAND_WIDTH - oneLong )) & Double::EXP_BIT_MASK);
+	return Double::longBitsToDouble(((exponent + Double::EXP_BIAS)
+		<< (Double::SIGNIFICAND_WIDTH - oneLong)) & Double::EXP_BIT_MASK);
 }
 
 // TODO need Float::intBitsToFloat
@@ -412,6 +434,11 @@ float Math::signum(float value) {
 	if (value == 0.0f || Float::isNaN(value)) {
 		return value;
 	}
+	
+	if (value == 0.0f) {
+		return -0.0f;
+	}
+	
 	return Math::copySign(1.0f, value);
 }
 
@@ -429,7 +456,7 @@ double Math::sqrt(double value) {
 
 long Math::subtractExact(long valueA, long valueB) {
 	long result = valueA - valueB;
-	if ((( valueA ^ valueB ) & ( valueA ^ result )) < 0) {
+	if (((valueA ^ valueB) & (valueA ^ result)) < 0) {
 		throw ArithmeticException("long overflow");
 	}
 	return result;
@@ -437,7 +464,7 @@ long Math::subtractExact(long valueA, long valueB) {
 
 int Math::subtractExact(int valueA, int valueB) {
 	int result = valueA - valueB;
-	if ((( valueA ^ valueB ) & ( valueA ^ result )) < 0) {
+	if (((valueA ^ valueB) & (valueA ^ result)) < 0) {
 		throw ArithmeticException("integer overflow");
 	}
 	return result;
@@ -456,7 +483,7 @@ double Math::toDegrees(double angleRadian) {
 }
 
 int Math::toIntExact(long value) {
-	if ((int) value != value) {
+	if ((int)value != value) {
 		throw ArithmeticException("integer overflow");
 	}
 	return (int) value;
@@ -472,7 +499,7 @@ float Math::ulp(float value) {
 		return (float) Math::pow(2, 104);
 	}
 	int exp = getExponent(value);
-	switch (exp) {
+	switch(exp) {
 		case Float::MAX_EXPONENT + 1:        // NaN or infinity
 			return Math::abs(value);
 		case Float::MIN_EXPONENT - 1:        // zero or subnormal
@@ -482,7 +509,7 @@ float Math::ulp(float value) {
 				throw AssertionError(exp);
 			}
 			
-			exp = exp - ( Float::SIGNIFICAND_WIDTH - 1 );
+			exp = exp - (Float::SIGNIFICAND_WIDTH - 1);
 			if (exp >= Float::MIN_EXPONENT) {
 				return powerOfTwoF(exp);
 			}
@@ -506,12 +533,12 @@ double Math::ulp(double value) {
 				throw AssertionError(exp);
 			}
 			
-			exp = exp - ( Double::SIGNIFICAND_WIDTH - 1 );
+			exp = exp - (Double::SIGNIFICAND_WIDTH - 1);
 			if (exp >= Double::MIN_EXPONENT) {
 				return powerOfTwoD(exp);
 			}
 			
-			return Double::longBitsToDouble(1 << ( exp - ( Double::MIN_EXPONENT
-			                                               - ( Double::SIGNIFICAND_WIDTH - 1 ))));
+			return Double::longBitsToDouble(1 << (exp - (Double::MIN_EXPONENT
+			                                             - (Double::SIGNIFICAND_WIDTH - 1))));
 	}
 }

@@ -42,7 +42,7 @@ TEST (JavaUtil, LinkedListAdd) {
 	ASSERT_EQUAL(24, linkedList.getLast());
 }
 
-TEST (JavaUtil, LinkedListContains) {
+TEST(JavaUtil, LinkedListContains) {
 	// Given valid linked list to test contains of a element inside list
 	LinkedList<char> linkedList;
 	linkedList.add('6');
@@ -132,11 +132,11 @@ TEST (JavaUtil, LinkedListRemove) {
 	
 	// Remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
 	linkedList.remove();
-	ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
+	ASSERT_DBL_NEAR(52.2f, linkedList.getFirst());
 	
 	// Remove last element, so next getLast must be equal to 7.3
 	linkedList.removeLast();
-	ASSERT_DBL_NEAR(7.3, linkedList.getLast());
+	ASSERT_DBL_NEAR(7.3f, linkedList.getLast());
 }
 
 TEST (JavaUtil, LinkedListSize) {

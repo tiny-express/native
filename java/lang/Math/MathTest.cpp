@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -33,12 +33,12 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, MathAbs) {
+TEST(JavaLang, MathAbs) {
 	double double_value = -123;
 	ASSERT_DBL_NEAR(123, Math::abs(double_value));
 	
 	float float_value = -123.123f;
-	ASSERT_DBL_NEAR(123.123, Math::abs(float_value));
+	ASSERT_FLOAT_NEAR(123.123f, Math::abs(float_value));
 	
 	int int_value = -123;
 	ASSERT_EQUAL(123, Math::abs(int_value));
@@ -47,7 +47,7 @@ TEST (JavaLang, MathAbs) {
 	ASSERT_EQUAL(1233453453, Math::abs(long_value));
 }
 
-TEST (JavaLang, MathAddExactInt) {
+TEST(JavaLang, MathAddExactInt) {
 	// Given 2 int
 	int a = 1;
 	int b = 2;
@@ -65,7 +65,7 @@ TEST (JavaLang, MathAddExactInt) {
 	}
 }
 
-TEST (JavaLang, MathAddExactLong) {
+TEST(JavaLang, MathAddExactLong) {
 	// Given 2 long
 	long a = 1;
 	long b = 2;
@@ -83,7 +83,7 @@ TEST (JavaLang, MathAddExactLong) {
 	}
 }
 
-TEST (JavaLang, MathCos) {
+TEST(JavaLang, MathCos) {
 	// Given an angle equal to PI/ 2
 	double angle = Math::PI / 2;
 	double expectResult = 0;
@@ -100,10 +100,10 @@ TEST (JavaLang, MathCos) {
 	ASSERT_DBL_NEAR(expectINFResult, Math::cos(infAngle));
 }
 
-TEST (JavaLang, MathAcos) {
+TEST(JavaLang, MathAcos) {
 	// Given a cosine equal to 0
 	double cos = 0;
-	double expectResult = Math::PI / 2;
+	double expectResult = Math::PI/2;
 	ASSERT_DBL_NEAR(expectResult, Math::acos(cos));
 	
 	// Given a cosine equal to NAN
@@ -117,7 +117,7 @@ TEST (JavaLang, MathAcos) {
 	ASSERT_DBL_NEAR(expectBiggerThanOneResult, Math::acos(biggerThanOneCos));
 }
 
-TEST (JavaLang, MathSin) {
+TEST(JavaLang, MathSin) {
 	// Given an angle equal to PI/ 2
 	double angle = Math::PI / 2;
 	double expectResult = 1;
@@ -139,10 +139,10 @@ TEST (JavaLang, MathSin) {
 	ASSERT_DBL_NEAR(expectPositiveZeroAngleResult, Math::sin(positiveZeroAngle));
 }
 
-TEST (JavaLang, MathAsin) {
+TEST(JavaLang, MathAsin) {
 	// Given a sine equal to 1
 	double sin = 1;
-	double expectResult = Math::PI / 2;
+	double expectResult = Math::PI/2;
 	ASSERT_DBL_NEAR(expectResult, Math::asin(sin));
 	
 	// Given a sine equal to NAN
@@ -166,7 +166,7 @@ TEST (JavaLang, MathAsin) {
 	ASSERT_DBL_NEAR(expectPositiveZeroAngleResult, Math::sin(positiveZeroSin));
 }
 
-TEST (JavaLang, MathTan) {
+TEST(JavaLang, MathTan) {
 	// Given an angle equal to PI/ 4
 	double angle = Math::PI / 4;
 	double expectResult = 1;
@@ -188,10 +188,10 @@ TEST (JavaLang, MathTan) {
 	ASSERT_DBL_NEAR(expectPositiveZeroAngleResult, Math::tan(positiveZeroAngle));
 }
 
-TEST (JavaLang, MathAtan) {
+TEST(JavaLang, MathAtan) {
 	// Given a tangent equal to 1
 	double tan = 1;
-	double expectResult = Math::PI / 4;
+	double expectResult = Math::PI/4;
 	ASSERT_DBL_NEAR(expectResult, Math::atan(tan));
 	
 	// Given a sine equal to NAN
@@ -210,7 +210,7 @@ TEST (JavaLang, MathAtan) {
 	ASSERT_DBL_NEAR(expectPositiveZeroAngleResult, Math::atan(positiveZeroSin));
 }
 
-TEST (JavaLang, MathAtan2) {
+TEST(JavaLang, MathAtan2) {
 	// Given 2 double for coordinate x and coordinate y
 	double coordinateX = Math::PI / 2;
 	double coordinateY = Math::PI / 3;
@@ -224,12 +224,12 @@ TEST (JavaLang, MathAtan2) {
 	double expectNegativeZeroResult = -0.0;
 	double expectPositivePiResult = Math::PI;
 	double expectNegativePiResult = -Math::PI;
-	double expectPositiveHalfPiResult = Math::PI / 2;
-	double expectNegativeHalfPiResult = -Math::PI / 2;
-	double expectPositiveQuarterPiResult = Math::PI / 4;
-	double expectNegativeQuarterPiResult = -Math::PI / 4;
-	double expectPositiveThreeFourthsPiResult = 3 * Math::PI / 4;
-	double expectNegativeThreeFourthsPiResult = -3 * Math::PI / 4;
+	double expectPositiveHalfPiResult = Math::PI/2;
+	double expectNegativeHalfPiResult = -Math::PI/2;
+	double expectPositiveQuarterPiResult = Math::PI/4;
+	double expectNegativeQuarterPiResult = -Math::PI/4;
+	double expectPositiveThreeFourthsPiResult = 3 * Math::PI/4;
+	double expectNegativeThreeFourthsPiResult = -3 * Math::PI/4;
 	
 	
 	// Given 2 NaN for coordinate x and coordinate y
@@ -307,7 +307,7 @@ TEST (JavaLang, MathAtan2) {
 	ASSERT_DBL_NEAR(expectNegativeThreeFourthsPiResult, Math::atan2(negativeInfiniteCoordinateX, negativeInfiniteCoordinateY));
 }
 
-TEST (JavaLang, MathCbrt) {
+TEST(JavaLang, MathCbrt) {
 	// Given a variable equal to 3 ^ 3 = 27
 	double cube = 27;
 	double expectResult = 3;
@@ -335,11 +335,11 @@ TEST (JavaLang, MathCbrt) {
 	
 	// Given a value equal to -ZERO
 	double negativeZeroCube = -0.0;
-	double expectNegativeZeroResult = 0.0;
+	double expectNegativeZeroResult = -0.0;
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::cbrt(negativeZeroCube));
 }
 
-TEST (JavaLang, MathSqrt) {
+TEST(JavaLang, MathSqrt) {
 	// Given a variable equal to 3 ^ 2 = 9
 	double square = 9;
 	double expectResult = 3;
@@ -357,7 +357,7 @@ TEST (JavaLang, MathSqrt) {
 	
 	// Given a value equal to -INFINITE
 	double negativeInfSquare = -INFINITY;
-	double expectNegativeInfResult = INFINITY;
+	double expectNegativeInfResult = -NAN;
 	ASSERT_DBL_NEAR(expectNegativeInfResult, Math::sqrt(negativeInfSquare));
 	
 	// Given a value equal to ZERO
@@ -367,11 +367,11 @@ TEST (JavaLang, MathSqrt) {
 	
 	// Given a value equal to -ZERO
 	double negativeZeroSquare = -0.0;
-	double expectNegativeZeroResult = 0.0;
+	double expectNegativeZeroResult = -0.0;
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::sqrt(negativeZeroSquare));
 }
 
-TEST (JavaLang, MathCeil) {
+TEST(JavaLang, MathCeil) {
 	// Given a double to
 	double x = 125.9;
 	double expectResult = 126;
@@ -408,7 +408,7 @@ TEST (JavaLang, MathCeil) {
 	ASSERT_DBL_NEAR(expectBetweenResult, Math::ceil(between));
 }
 
-TEST (JavaLang, MathDecrementExactInt) {
+TEST(JavaLang, MathDecrementExactInt) {
 	// Given 2 int
 	int a = 5;
 	int expectResult = 4;
@@ -425,7 +425,7 @@ TEST (JavaLang, MathDecrementExactInt) {
 	}
 }
 
-TEST (JavaLang, MathDecrementExactLong) {
+TEST(JavaLang, MathDecrementExactLong) {
 	// Given 2 int
 	long a = 5;
 	long expectResult = 4;
@@ -441,7 +441,7 @@ TEST (JavaLang, MathDecrementExactLong) {
 	}
 }
 
-TEST (JavaLang, MathIncrementExactInt) {
+TEST(JavaLang, MathIncrementExactInt) {
 	// Given 2 int
 	int a = 5;
 	int expectResult = 6;
@@ -458,7 +458,7 @@ TEST (JavaLang, MathIncrementExactInt) {
 	}
 }
 
-TEST (JavaLang, MathIncrementExactLong) {
+TEST(JavaLang, MathIncrementExactLong) {
 	// Given 2 int
 	long a = 5;
 	long expectResult = 6;
@@ -475,7 +475,7 @@ TEST (JavaLang, MathIncrementExactLong) {
 	}
 }
 
-TEST (JavaLang, MathMultiplyExact) {
+TEST(JavaLang, MathMultiplyExact) {
 	// Given 2 int which multiply result overflow an integer
 	// test if multiplyExact throw ArithmeticException("integer overflow")
 	int x = Integer::MAX_VALUE;
@@ -495,7 +495,7 @@ TEST (JavaLang, MathMultiplyExact) {
 	ASSERT_EQUAL(expectResult, Math::multiplyExact(a, b));
 }
 
-TEST (JavaLang, MathMultiplyExactLong) {
+TEST(JavaLang, MathMultiplyExactLong) {
 	// Given 2 int
 	long a = 5;
 	long b = 6;
@@ -522,7 +522,7 @@ TEST (JavaLang, MathMultiplyExactLong) {
 	}
 }
 
-TEST (JavaLang, MathNegateExactInt) {
+TEST(JavaLang, MathNegateExactInt) {
 	// Given an int
 	int x = 100;
 	int expectResult = -100;
@@ -539,7 +539,7 @@ TEST (JavaLang, MathNegateExactInt) {
 	}
 }
 
-TEST (JavaLang, MathNegateExactLong) {
+TEST(JavaLang, MathNegateExactLong) {
 	// Given an int
 	long x = 100;
 	long expectResult = -100;
@@ -556,7 +556,7 @@ TEST (JavaLang, MathNegateExactLong) {
 	}
 }
 
-TEST (JavaLang, MathLog) {
+TEST(JavaLang, MathLog) {
 	// Given a variable equal to E
 	double natural = Math::E;
 	double expectNaturalResult = 1;
@@ -583,12 +583,12 @@ TEST (JavaLang, MathLog) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::log(negativeZero));
 	
 	// Given a value > 0
-	double lessThanZero = -1;
+	double lessThanZero = - 1;
 	double expectLessThanZeroResult = NAN;
 	ASSERT_DBL_NEAR(expectLessThanZeroResult, Math::log(lessThanZero));
 }
 
-TEST (JavaLang, MathNextAfterDouble) {
+TEST(JavaLang, MathNextAfterDouble) {
 	// Given 2 double
 	double start = 98759.765;
 	double direction = 154.28764;
@@ -625,7 +625,7 @@ TEST (JavaLang, MathNextAfterDouble) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::nextAfter(positiveZero, negativeZero));
 }
 
-TEST (JavaLang, MathNextAfterFloat) {
+TEST(JavaLang, MathNextAfterFloat) {
 	// Given 2 float
 	float start = 98759.765f;
 	double direction = 154.28764;
@@ -662,7 +662,7 @@ TEST (JavaLang, MathNextAfterFloat) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::nextAfter(positiveZero, negativeZero));
 }
 
-TEST (JavaLang, MathScalbFloat) {
+TEST(JavaLang, MathScalbFloat) {
 	// Given a float an a scale factor
 	float a = 50.14;
 	int scaleFactor = 4;
@@ -695,7 +695,7 @@ TEST (JavaLang, MathScalbFloat) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::scalb(negativeZero, scaleFactor));
 }
 
-TEST (JavaLang, MathScalbDouble) {
+TEST(JavaLang, MathScalbDouble) {
 	// Given a float an a scale factor
 	double a = 50.14;
 	int scaleFactor = 4;
@@ -728,7 +728,7 @@ TEST (JavaLang, MathScalbDouble) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::scalb(negativeZero, scaleFactor));
 }
 
-TEST (JavaLang, MathLog10) {
+TEST(JavaLang, MathLog10) {
 	// Given a variable equal to 10
 	double tenBase = 10;
 	double expectTenBaseResult = 1;
@@ -760,7 +760,7 @@ TEST (JavaLang, MathLog10) {
 	ASSERT_DBL_NEAR(expectLessThanZeroResult, Math::log10(lessThanZero));
 }
 
-TEST (JavaLang, MathLog1p) {
+TEST(JavaLang, MathLog1p) {
 	// Given a variable equal to E-1
 	double natural = Math::E - 1;
 	double expectNaturalResult = 1;
@@ -792,12 +792,12 @@ TEST (JavaLang, MathLog1p) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::log1p(negativeZero));
 	
 	// Given a value > -1
-	double lessThanZero = -2;
+	double lessThanZero = - 2;
 	double expectLessThanZeroResult = NAN;
 	ASSERT_DBL_NEAR(expectLessThanZeroResult, Math::log1p(lessThanZero));
 }
 
-TEST (JavaLang, MathRInt) {
+TEST(JavaLang, MathRInt) {
 	// Given a double number
 	double x = 125.9;
 	double expectXResult = 126;
@@ -834,11 +834,11 @@ TEST (JavaLang, MathRInt) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::rint(negativeZero));
 }
 
-TEST (JavaLang, MathExp) {
+TEST(JavaLang, MathExp) {
 	// Given a variable equal to E^3
 	double eCubed = 3;
 	double expectResult = Math::pow(Math::E, 3);
-	ASSERT_DBL_NEAR(expectResult, Math::exp(eCubed));
+	ASSERT_DBL_NEAR_PRE(expectResult, Math::exp(eCubed), 13);
 	
 	// Given a value equal to NAN
 	double nan = NAN;
@@ -856,11 +856,11 @@ TEST (JavaLang, MathExp) {
 	ASSERT_DBL_NEAR(expectPositiveInfResult, Math::exp(positiveInf));
 }
 
-TEST (JavaLang, MathExpm1) {
+TEST(JavaLang, MathExpm1) {
 	// Given a variable equal to E^3
 	double eCubed = 3;
 	double expectResult = Math::pow(Math::E, 3) - 1;
-	ASSERT_DBL_NEAR(expectResult, Math::expm1(eCubed));
+	ASSERT_DBL_NEAR_PRE(expectResult, Math::expm1(eCubed), 13);
 	
 	// Given a value equal to NAN
 	double nan = NAN;
@@ -888,7 +888,7 @@ TEST (JavaLang, MathExpm1) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::expm1(negativeZero));
 }
 
-TEST (JavaLang, MathHypot) {
+TEST(JavaLang, MathHypot) {
 	// Given two double numbers
 	double x = 6;
 	double y = 8;
@@ -910,11 +910,11 @@ TEST (JavaLang, MathHypot) {
 	// Given two double with one number equal INFINITY
 	double inf1 = INFINITY;
 	double inf2 = INFINITY;
-	double expectBothInfResult = NAN;
+	double expectBothInfResult = INFINITY;
 	ASSERT_DBL_NEAR(expectBothInfResult, Math::hypot(inf1, inf2));
 }
 
-TEST (JavaLang, MathIEEERemainder) {
+TEST(JavaLang, MathIEEERemainder) {
 	// Given two double numbers
 	double x = 8;
 	double y = 6;
@@ -947,9 +947,9 @@ TEST (JavaLang, MathIEEERemainder) {
 	ASSERT_DBL_NEAR(expectSecondInfResult, Math::IEEERemainder(z, inf));
 }
 
-TEST (JavaLang, MathCosh) {
+TEST(JavaLang, MathCosh) {
 	// Given a variable equal PI/2
-	double radian = Math::PI / 2;
+	double radian = Math::PI/2;
 	double expectResult = 2.5091784786580567;
 	ASSERT_DBL_NEAR(expectResult, Math::cosh(radian));
 	
@@ -969,9 +969,9 @@ TEST (JavaLang, MathCosh) {
 	ASSERT_DBL_NEAR(expectZeroResult, Math::cosh(zero));
 }
 
-TEST (JavaLang, MathSinh) {
+TEST(JavaLang, MathSinh) {
 	// Given a variable equal PI/2
-	double radian = Math::PI / 2;
+	double radian = Math::PI/2;
 	double expectResult = 2.3012989023072947;
 	ASSERT_DBL_NEAR(expectResult, Math::sinh(radian));
 	
@@ -996,9 +996,9 @@ TEST (JavaLang, MathSinh) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::sinh(negativeZero));
 }
 
-TEST (JavaLang, MathTanh) {
+TEST(JavaLang, MathTanh) {
 	// Given a variable equal PI/2
-	double radian = Math::PI / 2;
+	double radian = Math::PI/2;
 	double expectResult = 0.9171523356672744;
 	ASSERT_DBL_NEAR(expectResult, Math::tanh(radian));
 	
@@ -1027,21 +1027,21 @@ TEST (JavaLang, MathTanh) {
 	double expectNegativeZeroResult = -0.0;
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::tanh(negativeZero));
 }
-TEST (JavaLang, MathToRadian) {
+TEST(JavaLang, MathToRadian) {
 	// Given a variable degree which is equal to PI
 	double degree = 180;
 	double expectResult = Math::PI;
 	ASSERT_DBL_NEAR(expectResult, Math::toRadians(degree));
 }
 
-TEST (JavaLang, MathToDegree) {
+TEST(JavaLang, MathToDegree) {
 	// Given a variable degree which is equal to PI
 	double radian = Math::PI;
 	double expectResult = 180;
 	ASSERT_DBL_NEAR(expectResult, Math::toDegrees(radian));
 }
 
-TEST (JavaLang, MathFloor) {
+TEST(JavaLang, MathFloor) {
 	double floor_value = 2.3;
 	double expectResult = 2;
 	ASSERT_DBL_NEAR(expectResult, Math::floor(floor_value));
@@ -1072,7 +1072,7 @@ TEST (JavaLang, MathFloor) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::floor(negativeZero));
 }
 
-TEST (JavaLang, MathFloorDivInt) {
+TEST(JavaLang, MathFloorDivInt) {
 	// Given 2 int
 	int dividend = 10;
 	int divisor = 5;
@@ -1096,7 +1096,7 @@ TEST (JavaLang, MathFloorDivInt) {
 	}
 }
 
-TEST (JavaLang, MathSignNumDouble) {
+TEST(JavaLang, MathSignNumDouble) {
 	// Given a double
 	double a = 50.14;
 	double expectResult = 1.0;
@@ -1118,7 +1118,7 @@ TEST (JavaLang, MathSignNumDouble) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::signum(negativeZero));
 }
 
-TEST (JavaLang, MathSignNumFloat) {
+TEST(JavaLang, MathSignNumFloat) {
 	// Given a float
 	float a = 50.14;
 	float expectResult = 1.0;
@@ -1140,7 +1140,7 @@ TEST (JavaLang, MathSignNumFloat) {
 	ASSERT_DBL_NEAR(expectNegativeZeroResult, Math::signum(negativeZero));
 }
 
-TEST (JavaLang, MathSubtractExactInt) {
+TEST(JavaLang, MathSubtractExactInt) {
 	// Given 2 int
 	int a = 10;
 	int b = 20;
@@ -1158,7 +1158,7 @@ TEST (JavaLang, MathSubtractExactInt) {
 	}
 }
 
-TEST (JavaLang, MathSubtractExactLong) {
+TEST(JavaLang, MathSubtractExactLong) {
 	// Given 2 long
 	long a = 10;
 	long b = 20;
@@ -1176,7 +1176,7 @@ TEST (JavaLang, MathSubtractExactLong) {
 	}
 }
 
-TEST (JavaLang, MathToIntExact) {
+TEST(JavaLang, MathToIntExact) {
 	// Given a long
 	long a = 100;
 	int expectResult = 100;
@@ -1193,7 +1193,7 @@ TEST (JavaLang, MathToIntExact) {
 	}
 }
 
-TEST (JavaLang, MathFloorDivLong) {
+TEST(JavaLang, MathFloorDivLong) {
 	// Given 2 int
 	long dividend = 10;
 	long divisor = 5;
@@ -1217,7 +1217,7 @@ TEST (JavaLang, MathFloorDivLong) {
 	}
 }
 
-TEST (JavaLang, MathFloorModInt) {
+TEST(JavaLang, MathFloorModInt) {
 	// Given 2 int
 	int dividend = 10;
 	int divisor = 5;
@@ -1231,7 +1231,7 @@ TEST (JavaLang, MathFloorModInt) {
 	ASSERT_EQUAL(expectResult, Math::floorMod(dividend, divisor));
 }
 
-TEST (JavaLang, MathFloorModLong) {
+TEST(JavaLang, MathFloorModLong) {
 	// Given 2 int
 	long dividend = 10;
 	long divisor = 5;
@@ -1245,15 +1245,15 @@ TEST (JavaLang, MathFloorModLong) {
 	ASSERT_EQUAL(expectResult, Math::floorMod(dividend, divisor));
 }
 
-TEST (JavaLang, MathMax) {
+TEST(JavaLang, MathMax) {
 	// return;
 	double double_value_max_1 = 4;
 	double double_value_max_2 = 2;
 	ASSERT_DBL_NEAR(4, Math::max(double_value_max_1, double_value_max_2));
 	
-	float float_value_max_1 = 4.123;
-	float float_value_max_2 = 2.312;
-	ASSERT_DBL_NEAR(4.123, Math::max(float_value_max_1, float_value_max_2));
+	float float_value_max_1 = 4.123f;
+	float float_value_max_2 = 2.312f;
+	ASSERT_FLOAT_NEAR(4.123, Math::max(float_value_max_1, float_value_max_2));
 	
 	int int_value_max_1 = 4;
 	int int_value_max_2 = 2;
@@ -1264,14 +1264,14 @@ TEST (JavaLang, MathMax) {
 	ASSERT_EQUAL(4, Math::max(long_value_max_1, long_value_max_2));
 }
 
-TEST (JavaLang, MathMin) {
+TEST(JavaLang, MathMin) {
 	double double_value_min_1 = 4;
 	double double_value_min_2 = 2;
 	ASSERT_DBL_NEAR(2, Math::min(double_value_min_1, double_value_min_2));
 	
-	float float_value_min_1 = 4.123;
-	float float_value_min_2 = 2.312;
-	ASSERT_DBL_NEAR(2.312, Math::min(float_value_min_1, float_value_min_2));
+	float float_value_min_1 = 4.123f;
+	float float_value_min_2 = 2.312f;
+	ASSERT_FLOAT_NEAR(2.312, Math::min(float_value_min_1, float_value_min_2));
 	
 	long long_value_min_1 = 4;
 	long long_value_min_2 = 2;
@@ -1282,13 +1282,13 @@ TEST (JavaLang, MathMin) {
 	ASSERT_EQUAL(2, Math::min(int_value_min_1, int_value_min_2));
 }
 
-TEST (JavaLang, MathPow) {
+TEST(JavaLang, MathPow) {
 	double base = 3;
 	double power = 3;
 	ASSERT_DBL_NEAR(27, Math::pow(base, power));
 }
 
-TEST (JavaLang, MathRound) {
+TEST(JavaLang, MathRound) {
 	double double_value_round = 1.23643435;
 	ASSERT_EQUAL(1, Math::round(double_value_round));
 	
@@ -1296,15 +1296,15 @@ TEST (JavaLang, MathRound) {
 	ASSERT_DBL_NEAR(1, Math::round(float_value_round));
 }
 
-TEST (JavaLang, MathRandom) {
+TEST(JavaLang, MathRandom) {
 	// Test 100 number generated, check if all number are in range [0, 1)
 	for (int index = 0; index < 100; index++) {
 		double generatedNumber = Math::random();
-		ASSERT_TRUE(generatedNumber >= 0 && generatedNumber < 1);
+		ASSERT_TRUE(generatedNumber >=  0 && generatedNumber < 1);
 	}
 }
 
-TEST (JavaLang, MathGetExponentDouble) {
+TEST(JavaLang, MathGetExponentDouble) {
 	// Given a double to get exponent
 	double doubleNumber = 60984.1;
 	int expectResult = 15;
@@ -1331,7 +1331,7 @@ TEST (JavaLang, MathGetExponentDouble) {
 	ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
-TEST (JavaLang, MathGetExponentFloat) {
+TEST(JavaLang, MathGetExponentFloat) {
 	// Given a float to get exponent
 	float floatNumber = 60984.1f;
 	int expectResult = 15;
@@ -1358,7 +1358,7 @@ TEST (JavaLang, MathGetExponentFloat) {
 	ASSERT_EQUAL(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
-TEST (JavaLang, MathNextDownDouble) {
+TEST(JavaLang, MathNextDownDouble) {
 	// Given a double
 	double doubleNumber = 98759.765;
 	double expectResult = 98759.76499999998;
@@ -1380,7 +1380,7 @@ TEST (JavaLang, MathNextDownDouble) {
 	ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));
 }
 
-TEST (JavaLang, MathNextDownFloat) {
+TEST(JavaLang, MathNextDownFloat) {
 	// Given a float
 	float floatNumber = 98759.765f;
 	float expectResult = 98759.76f;
@@ -1402,11 +1402,11 @@ TEST (JavaLang, MathNextDownFloat) {
 	ASSERT_DBL_NEAR(expectZeroResult, Math::nextDown(zero));
 }
 
-TEST (JavaLang, MathNextUpDouble) {
+TEST(JavaLang, MathNextUpDouble) {
 	// Given a double
 	double doubleNumber = 98759.765;
 	double expectResult = 98759.7650000001;
-	ASSERT_DBL_NEAR(expectResult, Math::nextUp(doubleNumber));
+	ASSERT_DBL_NEAR_PRE(expectResult, Math::nextUp(doubleNumber), 9);
 	
 	// Given a NAN
 	double nan = NAN;
@@ -1424,11 +1424,11 @@ TEST (JavaLang, MathNextUpDouble) {
 	ASSERT_DBL_NEAR(expectZeroResult, Math::nextUp(zero));
 }
 
-TEST (JavaLang, MathNextUpFloat) {
+TEST(JavaLang, MathNextUpFloat) {
 	// Given a float
 	float floatNumber = 98759.765f;
 	float expectResult = 98759.77f;
-	ASSERT_DBL_NEAR(expectResult, Math::nextUp(floatNumber));
+	ASSERT_DBL_NEAR(expectResult,  Math::nextUp(floatNumber));
 	
 	// Given a NAN
 	float nan = NAN;
@@ -1446,11 +1446,11 @@ TEST (JavaLang, MathNextUpFloat) {
 	ASSERT_DBL_NEAR(expectZeroResult, Math::nextUp(zero));
 }
 
-TEST (JavaLang, MathUlpDouble) {
+TEST(JavaLang, MathUlpDouble) {
 	// Given a double
 	double doubleNumber = 956.294;
 	double expectResult = 1.1368683772161603E-13;
-	ASSERT_DBL_NEAR(expectResult, Math::ulp(doubleNumber));
+	ASSERT_DBL_NEAR_PRE(expectResult, Math::ulp(doubleNumber), 12);
 	
 	// Given a double
 	doubleNumber = 1.0E-300;
@@ -1493,7 +1493,7 @@ TEST (JavaLang, MathUlpDouble) {
 	ASSERT_DBL_NEAR(expectNegativeDoubleMaxValueResult, Math::ulp(negativeDoubleMaxValue));
 }
 
-TEST (JavaLang, MathUlpFloat) {
+TEST(JavaLang, MathUlpFloat) {
 //    // Given a float
 //    float floatNumber = 956.294f;
 //    float expectResult = 1.1368683772161603E-13f;
