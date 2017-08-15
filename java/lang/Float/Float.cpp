@@ -193,3 +193,216 @@ Float Float::valueOf(float inputFloat) {
     return Float(inputFloat);
 
 }
+
+string Float::floatToBinary32StringType(float floatInput)
+{
+    auto integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    auto fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    auto floatInputNormalizeForm = (string) malloc (280 * sizeof(char));
+    auto resultFloatToBinary32StringType = (string) malloc (33 * sizeof(char));
+
+    int powerExponentBase2 = 0;
+    int integerPartFloatInput;
+
+    int sizeOfIntegerPartNormalizeForm;
+    int sizeOfFractionPartNormalizeForm;
+    int sizeOfFloatInputNormalizeForm;
+
+    int sizeOfExponentPartBinary32 = 8;
+
+    int i;
+    int index;
+    int indexOfDotFloatInputNormalizeForm;
+    int indexFirstBit1FloatInputNormalizeForm;
+    int indexBeginFractionPartResultFloatToBinary32StringType = 0;
+
+    int exponentBiasBinary32 = 127;
+    int exponentFloatInput;
+
+    float fractionPartFloatInput;
+
+    for (i = 0 ; i <= 31; i++) {
+        floatInputNormalizeForm[i] = '0';
+        resultFloatToBinary32StringType[i] = '0';
+    }
+
+    for (i = 0 ; i <= 23; i++) {
+        integerPartNormalizeForm[i] = '0';
+        fractionPartNormalizeForm[i] = '0';
+    }
+
+    /** Set end point for string type */
+    integerPartNormalizeForm[24] = '\0';
+    fractionPartNormalizeForm[24] = '\0';
+    floatInputNormalizeForm[279] = '\0';
+    resultFloatToBinary32StringType[32] = '\0';
+
+    if (floatInput >= 0) {
+        resultFloatToBinary32StringType[0] = '0';
+    }
+
+    if (floatInput < 0) {
+        resultFloatToBinary32StringType[0] = '1';
+    }
+
+    if( floatInput == 0 ) {
+        goto outPut;
+    }
+
+    if( floatInput == POSITIVE_INFINITY ) {
+        strcpy(resultFloatToBinary32StringType, "01111111100000000000000000000000");
+        goto outPut;
+    }
+
+    if( floatInput == NEGATIVE_INFINITY ) {
+        strcpy(resultFloatToBinary32StringType, "11111111100000000000000000000000");
+        goto outPut;
+    }
+
+    if( isNaN(floatInput)){
+        strcpy (resultFloatToBinary32StringType,     "01111111111111111111111111111111");
+
+        goto outPut;
+    }
+
+    /** Get |floatInput| */
+    floatInput = fabs(floatInput);
+
+    /** Get size of integerPartNormalizeForm  */
+    integerPartFloatInput = (int) floor(floatInput);
+    sizeOfIntegerPartNormalizeForm = 0;
+
+    if (integerPartFloatInput == 0) {
+        sizeOfIntegerPartNormalizeForm = 1;
+    }
+
+    if (integerPartFloatInput != 0) {
+        while (integerPartFloatInput != 0) {
+            sizeOfIntegerPartNormalizeForm++;
+            integerPartFloatInput = integerPartFloatInput >> 1;
+        }
+    }
+
+    integerPartFloatInput = (int) floor(floatInput);
+    index = sizeOfIntegerPartNormalizeForm -1;
+    while( integerPartFloatInput != 0 ) {
+
+        if( (integerPartFloatInput & 1) == 1 ) {
+            integerPartNormalizeForm[index] = '1';
+        }
+
+        if ( (integerPartFloatInput & 1) == 0) {
+            integerPartNormalizeForm[index] = '0';
+        }
+
+        index--;
+        integerPartFloatInput = integerPartFloatInput >> 1;
+    }
+
+    fractionPartFloatInput = floatInput - integerPartFloatInput;
+    index = 0;
+
+    while ((fractionPartFloatInput != 0) && (index < 24)) {
+        fractionPartFloatInput = fractionPartFloatInput * 2;
+
+        int integerPart = (int) floor(fractionPartFloatInput);
+
+        if (integerPart == 1) {
+            fractionPartNormalizeForm[index] = '1';
+        }
+
+        if (integerPart == 0) {
+            fractionPartNormalizeForm[index] = '0';
+        }
+
+        index++;
+        fractionPartFloatInput = fractionPartFloatInput - integerPart;
+    }
+
+    sizeOfFractionPartNormalizeForm = index;
+
+    /** Copy value from integerPartNormalizeForm to floatInputNormalizeForm */
+    for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++ ) {
+        floatInputNormalizeForm[i] = integerPartNormalizeForm[i];
+    }
+
+    indexOfDotFloatInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
+
+    floatInputNormalizeForm[indexOfDotFloatInputNormalizeForm] = '.';
+
+    /** Copy value from fractionPartNormalizeForm
+     * to floatInputNormalizeForm
+     */
+    index = indexOfDotFloatInputNormalizeForm +1;
+    for( i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++ ) {
+        floatInputNormalizeForm[index]
+                = fractionPartNormalizeForm[i];
+    }
+
+    sizeOfFloatInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
+                                     + sizeOfFractionPartNormalizeForm;
+
+    indexFirstBit1FloatInputNormalizeForm = 1;
+    for ( i = 0; i <= sizeOfFloatInputNormalizeForm; i++ ) {
+        if (floatInputNormalizeForm[i] == '1') {
+            indexFirstBit1FloatInputNormalizeForm = i;
+            break;
+        }
+    }
+
+    integerPartFloatInput =  (int) floor(floatInput);
+    if (integerPartFloatInput != 0) {
+        powerExponentBase2 = indexOfDotFloatInputNormalizeForm
+                             - indexFirstBit1FloatInputNormalizeForm -1;
+    }
+
+    if (integerPartFloatInput == 0) {
+        powerExponentBase2 = indexOfDotFloatInputNormalizeForm
+                             - indexFirstBit1FloatInputNormalizeForm;
+    }
+
+    exponentFloatInput = powerExponentBase2 + exponentBiasBinary32;
+
+    index = sizeOfExponentPartBinary32;
+
+    while (exponentFloatInput != 0) {
+        if ( (exponentFloatInput & 1 ) == 1) {
+            resultFloatToBinary32StringType[index] = '1';
+        }
+
+        if ( (exponentFloatInput & 1 ) == 0) {
+            resultFloatToBinary32StringType[index] = '0';
+        }
+
+        index--;
+        exponentFloatInput = exponentFloatInput >> 1;
+    }
+
+    indexBeginFractionPartResultFloatToBinary32StringType
+            = sizeOfExponentPartBinary32 + 1;
+
+    index = indexBeginFractionPartResultFloatToBinary32StringType;
+    i = indexFirstBit1FloatInputNormalizeForm + 1;
+
+    for (index ; index <= 31; index++) {
+        if (i == sizeOfFloatInputNormalizeForm) {
+            break;
+        }
+
+        if (i == indexOfDotFloatInputNormalizeForm) {
+            i++;
+        }
+
+        resultFloatToBinary32StringType[index]
+                = floatInputNormalizeForm[i];
+        i++;
+    }
+
+    outPut:
+    /** Return resultFloatToBinary32StringType */
+    free(integerPartNormalizeForm);
+    free(fractionPartNormalizeForm);
+    free(floatInputNormalizeForm);
+    return  resultFloatToBinary32StringType;
+
+}

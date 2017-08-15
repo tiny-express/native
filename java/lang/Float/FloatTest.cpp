@@ -691,3 +691,87 @@ TEST(JavaLang, FloatValueOf2) {
     // Test MIN_VALUE
     ASSERT_FLOAT_NEAR(MIN_VALUE, Float::valueOf(1.17549e-38).floatValue());
 }
+
+TEST(JavaLang, FloatToBinary32StringType) {
+    float floatInput;
+    string expectedResult;
+    string actualResult;
+
+    floatInput = 0;
+    expectedResult = (string) "00000000000000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = POSITIVE_INFINITY;
+    expectedResult = (string) "01111111100000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = NEGATIVE_INFINITY;
+    expectedResult = (string) "11111111100000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = NaN_NUMBER;
+    expectedResult = (string) "01111111111111111111111111111111";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = -0.7f;
+    expectedResult = (string) "10111111001100110011001100110011";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = 12.375;
+    expectedResult = (string) "01000001010001100000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = 1.0;
+    expectedResult = (string) "00111111100000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = 0.375;
+    expectedResult = (string) "00111110110000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = -2.0f;
+    expectedResult = (string) "11000000000000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = 83.0;
+    expectedResult = (string) "01000010101001100000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = -2625.0f;
+    expectedResult = (string) "11000101001001000001000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = 0.5;
+    expectedResult = (string) "00111111000000000000000000000000";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    floatInput = -1302.123456f;
+    expectedResult = (string) "11000100101000101100001111110011";
+    actualResult = Float::floatToBinary32StringType(floatInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+}
