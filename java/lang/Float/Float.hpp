@@ -648,6 +648,10 @@ namespace Java {
 			static Float valueOf(float inputFloat);
 
             static float binary32StringTypeToFloat(string binary32StringTypeInput);
+
+            static string intBitsToBinary64StringType(int intBitsInput);
+
+            static int floatToRawIntBits(float floatInput);
         };
 	}
 }
