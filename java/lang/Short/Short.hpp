@@ -31,57 +31,57 @@
 #include "../String/String.hpp"
 
 namespace Java {
-	namespace Lang {
-		class Short : public virtual Number {
-		private:
-			short original;
-			string originalString;
-
-		public:
-			Short();
-			Short(short original);
-			Short(const Short &target);
-			~Short();
-		
-		public:
-			char charValue() const;
-			short shortValue() const;
-			int intValue() const;
-			long longValue() const;
-			float floatValue() const;
-			double doubleValue() const;
-			string toString() const;
-			
-			static Short parseShort(String target);
-		
-		public:
-			Short operator=(const Short &target);
-			Short operator+(const Short &target);
-			Short operator-(const Short &target);
-			Short operator/(const Short &target);
-			Short operator*(const Short &target);
-			Short operator%(const Short &target);
-			
-			boolean operator==(const Short &target) const;
-			boolean operator!=(const Short &target) const;
-			boolean operator<(const Short &target) const;
-			boolean operator>(const Short &target) const;
-			boolean operator<=(const Short &target) const;
-			boolean operator>=(const Short &target) const;
-			
-			void operator+=(const Short &target);
-			void operator-=(const Short &target);
-			void operator*=(const Short &target);
-			void operator/=(const Short &target);
-			void operator%=(const Short &target);
-
-		public:
-			friend std::ostream &operator<<(std::ostream &os, const Short &target) {
-				os << target.original;
-				return os;
-			}
-		};
-	}
+		namespace Lang {
+				class Short : public virtual Number {
+				private:
+						short original;
+						string originalString;
+				
+				public:
+						Short();
+						Short(short original);
+						Short(const Short &target);
+						~Short();
+				
+				public:
+						char charValue() const;
+						short shortValue() const;
+						int intValue() const;
+						long longValue() const;
+						float floatValue() const;
+						double doubleValue() const;
+						string toString() const;
+						
+						static Short parseShort(String target);
+				
+				public:
+						Short operator=(const Short &target);
+						Short operator+(const Short &target);
+						Short operator-(const Short &target);
+						Short operator/(const Short &target);
+						Short operator*(const Short &target);
+						Short operator%(const Short &target);
+						
+						boolean operator==(const Short &target) const;
+						boolean operator!=(const Short &target) const;
+						boolean operator<(const Short &target) const;
+						boolean operator>(const Short &target) const;
+						boolean operator<=(const Short &target) const;
+						boolean operator>=(const Short &target) const;
+						
+						void operator+=(const Short &target);
+						void operator-=(const Short &target);
+						void operator*=(const Short &target);
+						void operator/=(const Short &target);
+						void operator%=(const Short &target);
+				
+				public:
+						friend std::ostream &operator<<(std::ostream &os, const Short &target) {
+							os << target.original;
+							return os;
+						}
+				};
+		}
 }
 
 #endif  // JAVA_LANG_SHORT_SHORT_HPP_

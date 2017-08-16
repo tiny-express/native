@@ -96,23 +96,23 @@ string URL::toString() const {
 	int port = this->port;
 	String path = this->path;
 	String query = this->query;
-
+	
 	String url = protocol + (string) "://" + host;
-
+	
 	if (port > -1) {
 		url = url + (string) ":" + String::valueOf(port);
 	}
-
+	
 	if (path != "/") {
 		url += path;
 	}
-
+	
 	if (!query.isEmpty()) {
 		url += "?";
 	}
-
+	
 	url += query;
-
+	
 	string result = url.toString();
 	return strdup(result);
 }

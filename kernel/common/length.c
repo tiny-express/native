@@ -27,7 +27,6 @@
 #include "../string.h"
 #include "../common.h"
 #include "../type.h"
-#include <stdlib.h>
 
 #define P_LEN(TYPE); \
 inline int length_pointer_##TYPE(TYPE *target) {\
@@ -58,12 +57,7 @@ inline int length_##TYPE(TYPE target) {\
 //#ifndef __linux__
 P_LEN(char);
 //#endif
-P_P_LEN(char);
-NUM_LEN(short);
-NUM_LEN(int);
-NUM_LEN(long);
-NUM_LEN(double);
-NUM_LEN(float);
+P_P_LEN(char);NUM_LEN(short);NUM_LEN(int);NUM_LEN(long);NUM_LEN(double);NUM_LEN(float);
 
 /**
  * Is string empty ?
@@ -72,8 +66,8 @@ NUM_LEN(float);
  * @return TRUE or FALSE
  */
 int is_empty(char *input) {
-    if (length_pointer_char(input) == 0) {
-        return TRUE;
-    }
-    return FALSE;
+	if (length_pointer_char(input) == 0) {
+		return TRUE;
+	}
+	return FALSE;
 }

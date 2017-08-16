@@ -32,15 +32,15 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-    namespace Lang {
-        class IllegalArgumentException : public RuntimeException {
-        public:
-            IllegalArgumentException();
-            IllegalArgumentException(String message);
-            IllegalArgumentException(String message, Throwable *cause);
-            IllegalArgumentException(Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class IllegalArgumentException : public RuntimeException {
+				public:
+						IllegalArgumentException();
+						IllegalArgumentException(String message);
+						IllegalArgumentException(String message, Throwable *cause);
+						IllegalArgumentException(Throwable *cause);
+				};
+		}
 }
 
 

@@ -30,11 +30,11 @@
 #include "../Object/Object.hpp"
 
 namespace Java {
-	namespace Lang {
-		class Process : public virtual Object {
-			string toString() const;
-		};
-	}
+		namespace Lang {
+				class Process : public Object {
+						string toString() const;
+				};
+		}
 }
 
 #endif  // JAVA_LANG_PROCESS_HPP_

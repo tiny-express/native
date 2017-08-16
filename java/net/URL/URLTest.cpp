@@ -25,7 +25,6 @@
  */
 
 extern "C" {
-#include "../../../kernel/test.h"
 }
 
 #include "URL.hpp"

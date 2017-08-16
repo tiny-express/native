@@ -1257,5 +1257,4 @@ namespace Java {
 }
 
 
-
 #endif  // NATIVE_STRINGBUFFER_H

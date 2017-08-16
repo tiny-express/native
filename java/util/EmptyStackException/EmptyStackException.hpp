@@ -33,12 +33,12 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace Util {
-        class EmptyStackException : public RuntimeException {
-        public:
-            EmptyStackException();
-        };
-    }
+		namespace Util {
+				class EmptyStackException : public RuntimeException {
+				public:
+						EmptyStackException();
+				};
+		}
 }
 
 #endif

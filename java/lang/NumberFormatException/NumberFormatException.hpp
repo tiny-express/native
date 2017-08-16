@@ -30,22 +30,22 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-    namespace Lang {
-        class NumberFormatException : public RuntimeException {
-        public:
-            /**
-             * Constructs a NumberFormatException with no detail message.
-             */
-            NumberFormatException();
-
-            /**
-             * Constructs a NumberFormatException with the specified detail message.
-             *
-             * @param messageDetail
-             */
-            NumberFormatException(String messageDetail);
-        };
-    }
+		namespace Lang {
+				class NumberFormatException : public RuntimeException {
+				public:
+						/**
+						 * Constructs a NumberFormatException with no detail message.
+						 */
+						NumberFormatException();
+						
+						/**
+						 * Constructs a NumberFormatException with the specified detail message.
+						 *
+						 * @param messageDetail
+						 */
+						NumberFormatException(String messageDetail);
+				};
+		}
 };
 
 

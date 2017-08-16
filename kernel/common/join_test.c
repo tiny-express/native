@@ -27,7 +27,7 @@
 #include "../builtin.h"
 #include "../test.h"
 
-TEST (Common, JoinPointerPointerChar) {
+TEST (KernelCommon, JoinPointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -46,7 +46,7 @@ TEST (Common, JoinPointerPointerChar) {
 	free(result);
 }
 
-TEST (Common, JoinDelimiterPointerPointerChar) {
+TEST (KernelCommon, JoinDelimiterPointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

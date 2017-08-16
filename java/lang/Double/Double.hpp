@@ -31,24 +31,24 @@
 #include "../String/String.hpp"
 
 #ifdef WIN32
-    #define unsigned_long_long unsigned __int64
-    #define long_long __int64
+#define unsigned_long_long unsigned __int64
+#define long_long __int64
 #else // gcc. Might not work on other compilers!
-    #define unsigned_long_long unsigned long long
-    #define long_long long long
+#define unsigned_long_long unsigned long long
+#define long_long long long
 #endif
 
 /**
  * Bit mask to isolate the exponent field of a
  * double.
  */
-static long	EXP_BIT_MASK	= 0x7FF0000000000000L;
+static long EXP_BIT_MASK = 0x7FF0000000000000L;
 
 /**
  * Bit mask to isolate the significand field of a
  * double
  */
-static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
+static long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
 
 /**
  * A constant holding the positive infinity of type
@@ -85,7 +85,7 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min(); //2.2250738
  * have.  It is equal to the value returned by
  * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
  */
-static int	MIN_EXPONENT_DOUBLE	= -1022;
+static int MIN_EXPONENT_DOUBLE = -1022;
 
 /**
  * Init Double::MAX_VALUE
@@ -107,6 +107,7 @@ static constexpr double initDoubleMinValue () noexcept {
 static constexpr double initMinNormalDouble () noexcept {
     return pow(2, -1022);
 }
+
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
@@ -309,8 +310,7 @@ namespace Java {
              * @return boolean
              */
             boolean operator||(const Double &target) const;
-
-
+				
             /**
              * Simple assignment operator,
              * Assigns values from right side operands
@@ -601,67 +601,67 @@ namespace Java {
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
-
-            /**
-            * Convert double to binary 32 bit
-            * (Single-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param double
-            * @return string binary 32 bit of input
-            */
-            static string doubleToBinary32StringType(double doubleInput );
-
-            /**
-            * Convert double to binary 64 bit
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param double
-            * @return string binary 64 bit of input
-            */
-            static string doubleToBinary64StringType(double doubleInput );
-
-            /**
-            * Convert binary64StringType To Double
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            * To Double
-             *
-            * @param  string
-            * @return double
-            */
-            static double binary64StringTypeToDouble(string Binary64StringTypeInput);
-
-            /**
-            * Convert longBits To Binary64StringType
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-             *
-            * @param  long
-            * @return string
-            */
-            static string longBitsToBinary64StringType(long longBitsInput);
-
-            /**
-            * Convert from string to double
-            *
-            * @param      s   the string to be parsed.
-            * @return     a {Double} object holding the value
-            *             represented by the {String} argument.
-            * @throws     NumberFormatException  if the string does not contain a
-            *             parsable number.
-            */
-            static Double valueOf(String stringInput);
-
-            /**
-            * Assign value to Double variable
-            *
-            * @param  d a double value.
-            * @return a {Double} instance representing {d}.
-            */
-            static Double valueOf(double doubleInput);
-        };
-	}
+						
+						/**
+						* Convert double to binary 32 bit
+						* (Single-precision floating-point format
+						* In IEEE 754-2008)
+						*
+						* @param double
+						* @return string binary 32 bit of input
+						*/
+						static string doubleToBinary32StringType(double doubleInput);
+						
+						/**
+						* Convert double to binary 64 bit
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						*
+						* @param double
+						* @return string binary 64 bit of input
+						*/
+						static string doubleToBinary64StringType(double doubleInput);
+						
+						/**
+						* Convert binary64StringType To Double
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						* To Double
+						 *
+						* @param  string
+						* @return double
+						*/
+						static double binary64StringTypeToDouble(string Binary64StringTypeInput);
+						
+						/**
+						* Convert longBits To Binary64StringType
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						 *
+						* @param  long
+						* @return string
+						*/
+						static string longBitsToBinary64StringType(long longBitsInput);
+						
+						/**
+						* Convert from string to double
+						*
+						* @param      s   the string to be parsed.
+						* @return     a {Double} object holding the value
+						*             represented by the {String} argument.
+						* @throws     NumberFormatException  if the string does not contain a
+						*             parsable number.
+						*/
+						static Double valueOf(String stringInput);
+						
+						/**
+						* Assign value to Double variable
+						*
+						* @param  d a double value.
+						* @return a {Double} instance representing {d}.
+						*/
+						static Double valueOf(double doubleInput);
+				};
+		}
 }
 #endif  // JAVA_LANG_DOUBLE_HPP_

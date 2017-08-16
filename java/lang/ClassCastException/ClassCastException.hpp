@@ -31,13 +31,13 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Util {
-        class ClassCastException : public RuntimeException {
-        public:
-            ClassCastException();
-            ClassCastException(String message);
-        };
-    }
+		namespace Util {
+				class ClassCastException : public RuntimeException {
+				public:
+						ClassCastException();
+						ClassCastException(String message);
+				};
+		}
 }
 
 #endif // JAVA_LANG_CLASS_CAST_EXCEPTION_HPP

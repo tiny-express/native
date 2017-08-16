@@ -34,23 +34,23 @@ AssertionError::AssertionError(String message) : Error(message) {
 AssertionError::AssertionError() {
 }
 
-AssertionError::AssertionError(double doubleValue) : AssertionError(String::valueOf(doubleValue)){
+AssertionError::AssertionError(double doubleValue) : AssertionError(String::valueOf(doubleValue)) {
 }
 
-AssertionError::AssertionError(float floatValue) : AssertionError(String::valueOf(floatValue)){
+AssertionError::AssertionError(float floatValue) : AssertionError(String::valueOf(floatValue)) {
 }
 
-AssertionError::AssertionError(long longValue) : AssertionError(String::valueOf(longValue)){
+AssertionError::AssertionError(long longValue) : AssertionError(String::valueOf(longValue)) {
 }
 
-AssertionError::AssertionError(int intValue) : AssertionError(String::valueOf(intValue)){
+AssertionError::AssertionError(int intValue) : AssertionError(String::valueOf(intValue)) {
 }
 
-AssertionError::AssertionError(char charValue) : AssertionError(String::valueOf(charValue)){
+AssertionError::AssertionError(char charValue) : AssertionError(String::valueOf(charValue)) {
 }
 
 AssertionError::AssertionError(boolean boolValue) : AssertionError(String::valueOf(boolValue)) {
 }
 
-AssertionError::AssertionError(String message, Throwable *cause) : Error(message, cause){
+AssertionError::AssertionError(String message, Throwable *cause) : Error(message, cause) {
 }

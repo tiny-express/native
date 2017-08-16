@@ -156,7 +156,7 @@ char String::charAt(int index) const{
 	if(index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return (this->original[index]);
+	return ( this->original[ index ] );
 }
 
 int String::compareTo(const String &anotherString) const {
@@ -191,7 +191,7 @@ String String::getStringFromIndex(int index) {
 	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return &(this->original[index]);
+	return &( this->original[ index ] );
 }
 
 boolean String::endsWith(const String &suffixString) const {
@@ -208,7 +208,7 @@ String String::fromCharArray(Array<char> &charArray) {
 	for (char character : charArray) {
 		str[ index++ ] = character;
 	}
-	str[index] = '\0';
+	str[ index ] = '\0';
 	String result = str;
 	free(str);
 	return result;
@@ -233,7 +233,7 @@ int String::indexOf(int character, int fromIndex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) character) {
 			return index;
@@ -272,7 +272,7 @@ int String::lastIndexOf(int character) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) character) {
 			return index;
@@ -292,7 +292,7 @@ int String::lastIndexOf(int character, int fromIndex) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) character) {
 			return index;
@@ -370,12 +370,12 @@ Array<String> String::split(String regex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
 	}
-
+	
 	free_pointer_pointer_char(splitStrings);
 	return strings;
 }
@@ -418,7 +418,7 @@ Array<char> String::toCharArray() const {
 	register
 #endif
 	int index = 0;
-
+	
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
@@ -570,17 +570,14 @@ boolean String::operator!=(const String &target) const {
 
 boolean String::operator<(const String &target) const {
     return strcmp(this->original, target.toString()) < 0;
-
 }
 
 boolean String::operator>(const String &target) const {
     return strcmp(this->original, target.toString()) > 0;
-
 }
 
 boolean String::operator<=(const String &target) const {
     return strcmp(this->original, target.toString()) <= 0;
-
 }
 
 boolean String::operator>=(const String &target) const {

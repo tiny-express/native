@@ -31,16 +31,16 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Lang {
-        class StringIndexOutOfBoundsException : public IndexOutOfBoundsException {
-        public:
-            StringIndexOutOfBoundsException();
-            StringIndexOutOfBoundsException(String message);
-            StringIndexOutOfBoundsException(Throwable *cause);
-            StringIndexOutOfBoundsException(String message, Throwable *cause);
-            StringIndexOutOfBoundsException(int index);
-        };
-    }
+		namespace Lang {
+				class StringIndexOutOfBoundsException : public IndexOutOfBoundsException {
+				public:
+						StringIndexOutOfBoundsException();
+						StringIndexOutOfBoundsException(String message);
+						StringIndexOutOfBoundsException(Throwable *cause);
+						StringIndexOutOfBoundsException(String message, Throwable *cause);
+						StringIndexOutOfBoundsException(int index);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_HPP
