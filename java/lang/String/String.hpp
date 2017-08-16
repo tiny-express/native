@@ -446,14 +446,14 @@ namespace Java {
              * @param sourceEnd
              * @param destination
              * @param destinationBegin
-             * @throw IndexOutOfBoundsException If :
-             * srcBegin is negative.
-             * srcBegin is greater than srcEnd
-             * srcEnd is greater than the length of this string
-             * dstBegin is negative
-             * dstBegin+(srcEnd-srcBegin) is larger than dst.length
+             * @throw StringIndexOutOfBoundsException If :
+             * sourceBegin is negative.
+             * sourceBegin is greater than srcEnd
+             * sourceEnd is greater than the length of this string
+             * destinationBegin is negative
+             * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
-           // void getChars(int sourceBegin, int sourceEnd, Array<char> destination, int destinationBegin);
+            void getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin);
 
             /**
              * Get char to String
@@ -469,8 +469,7 @@ namespace Java {
              *
              * @return int
              */
-            long hashCode() const;
-
+            long hashCode() const override;
 
             /**
              * Returns the index within this String

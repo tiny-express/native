@@ -35,6 +35,7 @@ extern "C" {
 #include "../StringBuffer/StringBuffer.hpp"
 
 using namespace Java::Lang;
+using namespace Java::Util;
 
 TEST (JavaLang, StringConstructor) {
 	// Give NULL for String constructor
@@ -378,6 +379,60 @@ TEST (JavaLang, StringIndexOf) {
 	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 20));
 
 	ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
+}
+// TODO getChar run right but need Arrays.toString() to test
+TEST(JavaLang, StringGetChars) {
+    Array<char> charArray(30);
+    String testString = "This is a String";
+    testString.getChars(10, 16, charArray, 0);
+	string charArrayString = charArray.toString();
+	ASSERT_STR("String", charArrayString);
+	free(charArrayString);
+
+    try {
+        testString.getChars(-1, 16, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 5, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -5", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 50, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 50", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, 29);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 35", e.getMessage().toString());
+    }
+
+	testString.getChars(10, 16, charArray, 10);
+	charArrayString = charArray.toString();
+	ASSERT_STR("StringString", charArrayString);
+	free(charArrayString);
+
+	testString.getChars(10, 16, charArray, 3);
+	charArrayString = charArray.toString();
+	ASSERT_STR("StrStringString", charArrayString);
+	free(charArrayString);
 }
 
 TEST (JavaLang, StringIsEmpty) {

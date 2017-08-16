@@ -798,6 +798,39 @@ boolean String::regionMatches(boolean ignoreCase, int thisOffset, String otherSt
 	return thisString.compareTo(otherString) == 0;
 }
 
+void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) {
+	if (sourceBegin < 0) {
+		throw StringIndexOutOfBoundsException(sourceBegin);
+	}
+
+	if (sourceBegin > sourceEnd) {
+		throw StringIndexOutOfBoundsException(sourceEnd - sourceBegin);
+	}
+
+	if (sourceEnd > this->size) {
+		throw StringIndexOutOfBoundsException(sourceEnd);
+	}
+
+	if (destinationBegin < 0) {
+		throw StringIndexOutOfBoundsException(destinationBegin);
+	}
+
+	if (destinationBegin + (sourceEnd - sourceBegin) > destination.length) {
+		throw StringIndexOutOfBoundsException(destinationBegin + (sourceEnd - sourceBegin));
+	}
+
+    int index;
+    int len = sourceEnd - sourceBegin;
+	for (index = 0; index < destinationBegin + len; index++) {
+        if (index >= destinationBegin && index < destinationBegin + len) {
+            destination[index] = this->charAt(sourceBegin);
+            sourceBegin++;
+        } else {
+            destination[index] = destination[index];
+        }
+	}
+}
+
 
 
 
