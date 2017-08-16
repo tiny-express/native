@@ -649,11 +649,11 @@ namespace Java {
 
             static float binary32StringTypeToFloat(string binary32StringTypeInput);
 
-            static string intBitsToBinary64StringType(int intBitsInput);
-
             static int floatToRawIntBits(float floatInput);
 
             static int floatToIntBits(float inputFloat);
+
+            static string intBitsToBinary32StringType(int intBitsInput);
         };
 	}
 }

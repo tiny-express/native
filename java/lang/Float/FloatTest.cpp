@@ -964,7 +964,7 @@ TEST(JavaLang, FloatToIntBits) {
 
     // Input -0.7
     input = -0.7f;
-    expectedResult =  -1060320051;
+    expectedResult = -1060320051;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
@@ -1015,4 +1015,101 @@ TEST(JavaLang, FloatToIntBits) {
     expectedResult = -1151517683;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
+}
+
+TEST(JavaLang, FloatIntBitsToBinary32StringType) {
+    int intBitsInput;
+    string expectedResult;
+    string actualResult;
+
+    // IntBits of 0
+    intBitsInput = 0;
+    expectedResult = (string) "00000000000000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of POSITIVE_INFINITY;
+    intBitsInput = 2139095040;
+    expectedResult = (string) "01111111100000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of NEGATIVE_INFINITY
+    intBitsInput = -2139095040;
+    expectedResult = (string) "11111111100000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of NaN_NUMBER
+    intBitsInput = 2147483647;
+    expectedResult = (string) "01111111111111111111111111111111";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of -0.7
+    intBitsInput = -1060320051;
+    expectedResult = (string) "10111111001100110011001100110011";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of 12.375
+    intBitsInput = 1095106560;
+    expectedResult = (string) "01000001010001100000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of 1.0
+    intBitsInput = 1065353216;
+    expectedResult = (string) "00111111100000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of 0.375
+    intBitsInput = 1052770304;
+    expectedResult = (string) "00111110110000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of -2
+    intBitsInput = -1073741824;
+    expectedResult = (string) "11000000000000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of 83
+    intBitsInput = 1118175232;
+    expectedResult = (string) "01000010101001100000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of -2625
+    intBitsInput = -1159991296;
+    expectedResult = (string) "11000101001001000001000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of 0.5
+    intBitsInput = 1056964608;
+    expectedResult = (string) "00111111000000000000000000000000";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
+
+    // IntBits of -1302.12345678
+    intBitsInput = -1151517683;
+    expectedResult = (string) "11000100101000101100001111110011";
+    actualResult = Float::intBitsToBinary32StringType(intBitsInput);
+    ASSERT_STR(expectedResult, actualResult);
+    free(actualResult);
 }

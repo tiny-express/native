@@ -513,36 +513,36 @@ int Float::floatToIntBits(float inputFloat) {
     return floatToRawIntBits(inputFloat);
 }
 
-//string Float::intBitsToBinary64StringType(int intBitsInput) {
-//    string resultLongBitsToBinary64StringType = (string) malloc(33 * sizeof(char));
-//    int index;
-//    int i;
-//
-//    for (i = 0; i <= 31; i++) {
-//        resultLongBitsToBinary64StringType[i] = '0';
-//    }
-//
-//    resultLongBitsToBinary64StringType[32] = '\0';
-//
-//    if (intBitsInput < 0) {
-//        resultLongBitsToBinary64StringType[0] = '1';
-//        intBitsInput = -intBitsInput;
-//    }
-//
-//    index = 31;
-//    while ( (intBitsInput != 0) || (index > 1)) {
-//
-//        if ( (intBitsInput & 1) ==1 ) {
-//            resultLongBitsToBinary64StringType[index] = '1';
-//        }
-//
-//        if ( (intBitsInput & 1) == 0 ) {
-//            resultLongBitsToBinary64StringType[index] = '0';
-//        }
-//
-//        index--;
-//        intBitsInput = intBitsInput >> 1;
-//    }
-//
-//    return resultLongBitsToBinary64StringType;
-//}
+string Float::intBitsToBinary32StringType(int intBitsInput) {
+    string resultLongBitsToBinary32StringType = (string) malloc(33 * sizeof(char));
+    int index;
+    int i;
+
+    for (i = 0; i <= 31; i++) {
+        resultLongBitsToBinary32StringType[i] = '0';
+    }
+
+    resultLongBitsToBinary32StringType[32] = '\0';
+
+    if (intBitsInput < 0) {
+        resultLongBitsToBinary32StringType[0] = '1';
+        intBitsInput = -intBitsInput;
+    }
+
+    index = 31;
+    while ( (intBitsInput != 0) || (index > 1)) {
+
+        if ( (intBitsInput & 1) ==1 ) {
+            resultLongBitsToBinary32StringType[index] = '1';
+        }
+
+        if ( (intBitsInput & 1) == 0 ) {
+            resultLongBitsToBinary32StringType[index] = '0';
+        }
+
+        index--;
+        intBitsInput = intBitsInput >> 1;
+    }
+
+    return resultLongBitsToBinary32StringType;
+}
