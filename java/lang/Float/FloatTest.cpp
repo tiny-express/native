@@ -1134,3 +1134,64 @@ TEST(JavaLang , FloatIsNaN2) {
     variableIsInfinite2 = 13.02;
     ASSERT_FALSE(variableIsInfinite2.isNaN());
 }
+
+TEST(JavaLang, FloatFloatValue) {
+    // Create variable to test
+    Float variableTestFloatValue;
+    float expectedResultFloatValue;
+    float actualResultFloatValue;
+
+    // Test POSITIVE_INFINITY
+    variableTestFloatValue = POSITIVE_INFINITY;
+    expectedResultFloatValue = POSITIVE_INFINITY;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test NEGATIVE_INFINITY
+    variableTestFloatValue = NEGATIVE_INFINITY;
+    expectedResultFloatValue = NEGATIVE_INFINITY;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test NaN_NUMBER
+    variableTestFloatValue = NaN_NUMBER;
+    expectedResultFloatValue = NaN_NUMBER;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MAX_VALUE
+    variableTestFloatValue = MAX_VALUE;
+    expectedResultFloatValue = MAX_VALUE;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MIN_NORMAL
+    variableTestFloatValue = MIN_NORMAL;
+    expectedResultFloatValue = MIN_NORMAL;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test MIN_VALUE
+    variableTestFloatValue = MIN_VALUE;
+    expectedResultFloatValue = MIN_VALUE;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test valid case
+    variableTestFloatValue = 13.02;
+    expectedResultFloatValue = 13.02;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test valid case
+    variableTestFloatValue = 1.302;
+    expectedResultFloatValue = 1.302;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_NEAR(expectedResultFloatValue , actualResultFloatValue);
+
+    // Test invalid case
+    variableTestFloatValue = 130.2;
+    expectedResultFloatValue = 130.0;
+    actualResultFloatValue = variableTestFloatValue.floatValue();
+    ASSERT_FLOAT_FAR(expectedResultFloatValue , actualResultFloatValue);
+}
