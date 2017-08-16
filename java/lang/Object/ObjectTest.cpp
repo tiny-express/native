@@ -129,11 +129,11 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
 	// Give an Array use constructor with contain size then assert size - Should equal
 	char *stringArray[3] = {
-		(char*) "hello",
-		(char*) "world",
-				nullptr
+		(char *) "hello",
+		(char *) "world",
+		nullptr
 	};
-	char **stringList = (char**) stringArray;
+	char **stringList = (char **) stringArray;
 	Array<String> arrayString = stringList;
 	ASSERT_EQUAL(2, arrayString.length);
 }

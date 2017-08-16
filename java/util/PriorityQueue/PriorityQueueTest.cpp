@@ -34,129 +34,129 @@ extern "C" {
 
 using namespace Java::Util;
 
-TEST(JavaUtil, PriorityQueueConstructor) {
-    PriorityQueue<int> defaultConstructor;
-    ASSERT_EQUAL(0, defaultConstructor.size());
-
-    PriorityQueue<int> initializerListConstructor {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, initializerListConstructor.size());
-    ASSERT_EQUAL(5, initializerListConstructor.peek());
-
-    PriorityQueue<int> copyConstructor(initializerListConstructor);
-    ASSERT_EQUAL(5, copyConstructor.size());
-    ASSERT_EQUAL(5, copyConstructor.peek());
-
-    try {
-        PriorityQueue<int> customCapacityConstructor(-1);
-    }
-    catch (IllegalArgumentException ex) {
-        ASSERT_STR("initialCapacity < 1", ex.getMessage().toString());
-    }
+TEST (JavaUtil, PriorityQueueConstructor) {
+	PriorityQueue<int> defaultConstructor;
+	ASSERT_EQUAL(0, defaultConstructor.size());
+	
+	PriorityQueue<int> initializerListConstructor { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, initializerListConstructor.size());
+	ASSERT_EQUAL(5, initializerListConstructor.peek());
+	
+	PriorityQueue<int> copyConstructor(initializerListConstructor);
+	ASSERT_EQUAL(5, copyConstructor.size());
+	ASSERT_EQUAL(5, copyConstructor.peek());
+	
+	try {
+		PriorityQueue<int> customCapacityConstructor(-1);
+	}
+	catch (IllegalArgumentException ex) {
+		ASSERT_STR("initialCapacity < 1", ex.getMessage().toString());
+	}
 }
 
-TEST(JavaUtil, PriorityQueueAdd) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-    priorityQueue.add(10);
-    ASSERT_EQUAL(6, priorityQueue.size());
-    ASSERT_EQUAL(10, priorityQueue.peek());
+TEST (JavaUtil, PriorityQueueAdd) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	priorityQueue.add(10);
+	ASSERT_EQUAL(6, priorityQueue.size());
+	ASSERT_EQUAL(10, priorityQueue.peek());
 }
 
-TEST(JavaUtil, PriorityQueueClear) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    priorityQueue.clear();
-    ASSERT_EQUAL(0, priorityQueue.size());
+TEST (JavaUtil, PriorityQueueClear) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	priorityQueue.clear();
+	ASSERT_EQUAL(0, priorityQueue.size());
 }
 
-TEST(JavaUtil, PriorityQueueContains) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-    ASSERT_TRUE(priorityQueue.contains(1));
-    ASSERT_FALSE(priorityQueue.contains(7));
+TEST (JavaUtil, PriorityQueueContains) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	ASSERT_TRUE(priorityQueue.contains(1));
+	ASSERT_FALSE(priorityQueue.contains(7));
 }
 
-TEST(JavaUtil, PriorityQueueOffer) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-    priorityQueue.offer(10);
-    ASSERT_EQUAL(6, priorityQueue.size());
-    ASSERT_EQUAL(10, priorityQueue.peek());
+TEST (JavaUtil, PriorityQueueOffer) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	priorityQueue.offer(10);
+	ASSERT_EQUAL(6, priorityQueue.size());
+	ASSERT_EQUAL(10, priorityQueue.peek());
 }
 
-TEST(JavaUtil, PriorityQueuePeek) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-    ASSERT_EQUAL(5, priorityQueue.size());
-    priorityQueue.add(10);
-    ASSERT_EQUAL(10, priorityQueue.peek());
-    ASSERT_EQUAL(6, priorityQueue.size());
-
-    PriorityQueue<Integer> integerPriorityQueue;
-    ASSERT_EQUAL(0, integerPriorityQueue.size());
-    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
+TEST (JavaUtil, PriorityQueuePeek) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	ASSERT_EQUAL(5, priorityQueue.size());
+	priorityQueue.add(10);
+	ASSERT_EQUAL(10, priorityQueue.peek());
+	ASSERT_EQUAL(6, priorityQueue.size());
+	
+	PriorityQueue<Integer> integerPriorityQueue;
+	ASSERT_EQUAL(0, integerPriorityQueue.size());
+	ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
 }
 
-TEST(JavaUtil, PriorityQueuePoll) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.poll());
-    ASSERT_EQUAL(4, priorityQueue.size());
-    priorityQueue.add(10);
-    ASSERT_EQUAL(10, priorityQueue.poll());
-    ASSERT_EQUAL(4, priorityQueue.size());
-
-    PriorityQueue<Integer> integerPriorityQueue;
-    ASSERT_EQUAL(0, integerPriorityQueue.size());
-    ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
+TEST (JavaUtil, PriorityQueuePoll) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.poll());
+	ASSERT_EQUAL(4, priorityQueue.size());
+	priorityQueue.add(10);
+	ASSERT_EQUAL(10, priorityQueue.poll());
+	ASSERT_EQUAL(4, priorityQueue.size());
+	
+	PriorityQueue<Integer> integerPriorityQueue;
+	ASSERT_EQUAL(0, integerPriorityQueue.size());
+	ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
 }
 
-TEST(JavaUtil, PriorityQueueRemove) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-
-    ASSERT_TRUE(priorityQueue.remove(5));
-    ASSERT_EQUAL(4, priorityQueue.size());
-    ASSERT_EQUAL(4, priorityQueue.peek());
-
-    ASSERT_FALSE(priorityQueue.remove(10));
-    ASSERT_EQUAL(4, priorityQueue.size());
-    ASSERT_EQUAL(4, priorityQueue.peek());
+TEST (JavaUtil, PriorityQueueRemove) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	
+	ASSERT_TRUE(priorityQueue.remove(5));
+	ASSERT_EQUAL(4, priorityQueue.size());
+	ASSERT_EQUAL(4, priorityQueue.peek());
+	
+	ASSERT_FALSE(priorityQueue.remove(10));
+	ASSERT_EQUAL(4, priorityQueue.size());
+	ASSERT_EQUAL(4, priorityQueue.peek());
 }
 
-TEST(JavaUtil, PriorityQueueSize) {
-    PriorityQueue<int> priorityQueue;
-    ASSERT_EQUAL(0, priorityQueue.size());
-    priorityQueue.add(-1);
-    ASSERT_EQUAL(1, priorityQueue.size());
+TEST (JavaUtil, PriorityQueueSize) {
+	PriorityQueue<int> priorityQueue;
+	ASSERT_EQUAL(0, priorityQueue.size());
+	priorityQueue.add(-1);
+	ASSERT_EQUAL(1, priorityQueue.size());
 }
 
-TEST(JavaUtil, PriorityQueueToArray) {
-    PriorityQueue<int> priorityQueue {1, 2, 3, 4, 5};
-    ASSERT_EQUAL(5, priorityQueue.size());
-    ASSERT_EQUAL(5, priorityQueue.peek());
-    Array<int> arrayResult1 = priorityQueue.toArray();
-    ASSERT_TRUE(arrayResult1.length == priorityQueue.size());
-
-    PriorityQueue<Integer> integerPriorityQueue {Integer(1), Integer(2)};
-    ASSERT_EQUAL(2, integerPriorityQueue.size());
-    ASSERT_TRUE(Integer(2) == integerPriorityQueue.peek());
-
-    // if length of array is larger than queue size.
-    Array<Integer> integerArray1 = {Integer(), Integer(), Integer(), Integer(4)};
-    ASSERT_EQUAL(4, integerArray1.length);
-    integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
-    ASSERT_TRUE(Integer() != integerArray1[0]);
-    ASSERT_TRUE(Integer().intValue() == integerArray1[2].intValue()); // default Integer value (same as null).
-
-    // if length of array is less than queue size.
-    Array<Integer> integerArray2;
-    ASSERT_EQUAL(0, integerArray2.length);
-    Array<Integer> arrayResult2 = integerPriorityQueue.toArray(integerArray2); // new array will be created.
-    ASSERT_EQUAL(2, arrayResult2.length);
+TEST (JavaUtil, PriorityQueueToArray) {
+	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
+	ASSERT_EQUAL(5, priorityQueue.size());
+	ASSERT_EQUAL(5, priorityQueue.peek());
+	Array<int> arrayResult1 = priorityQueue.toArray();
+	ASSERT_TRUE(arrayResult1.length == priorityQueue.size());
+	
+	PriorityQueue<Integer> integerPriorityQueue { Integer(1), Integer(2) };
+	ASSERT_EQUAL(2, integerPriorityQueue.size());
+	ASSERT_TRUE(Integer(2) == integerPriorityQueue.peek());
+	
+	// if length of array is larger than queue size.
+	Array<Integer> integerArray1 = { Integer(), Integer(), Integer(), Integer(4) };
+	ASSERT_EQUAL(4, integerArray1.length);
+	integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
+	ASSERT_TRUE(Integer() != integerArray1[ 0 ]);
+	ASSERT_TRUE(Integer().intValue() == integerArray1[ 2 ].intValue()); // default Integer value (same as null).
+	
+	// if length of array is less than queue size.
+	Array<Integer> integerArray2;
+	ASSERT_EQUAL(0, integerArray2.length);
+	Array<Integer> arrayResult2 = integerPriorityQueue.toArray(integerArray2); // new array will be created.
+	ASSERT_EQUAL(2, arrayResult2.length);
 }

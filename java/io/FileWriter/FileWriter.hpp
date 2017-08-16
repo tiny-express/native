@@ -33,11 +33,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace IO {
-		class FileWriter : public virtual OutputStreamWriter {
-		
-		};
-	}
+		namespace IO {
+				class FileWriter : public virtual OutputStreamWriter {
+				
+				};
+		}
 }
 
 #endif  // JAVA_IO_FILE_HPP_

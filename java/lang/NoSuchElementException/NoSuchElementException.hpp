@@ -32,10 +32,10 @@
 
 class NoSuchElementException : public RuntimeException {
 public:
-    NoSuchElementException();
-    NoSuchElementException(String message);
-    NoSuchElementException(Throwable *cause);
-    NoSuchElementException(String message, Throwable *cause);
+		NoSuchElementException();
+		NoSuchElementException(String message);
+		NoSuchElementException(Throwable *cause);
+		NoSuchElementException(String message, Throwable *cause);
 };
 
 #endif //NATIVE_NOSUCHELEMENTEXCEPTION_HPP

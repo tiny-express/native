@@ -33,17 +33,17 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, EnumGetName) {
-    // Given valid enum and name to test getName()
-    Enum<int> validEnum = Enum<int>("validName", 7);
-
-    String expectedValue = "validName";
-    ASSERT_STR(expectedValue.toString(), validEnum.getName().toString());
+	// Given valid enum and name to test getName()
+	Enum<int> validEnum = Enum<int>("validName", 7);
+	
+	String expectedValue = "validName";
+	ASSERT_STR(expectedValue.toString(), validEnum.getName().toString());
 }
 
 TEST (JavaLang, EnumGetOrdinal) {
-    // Given valid enum and name to test getOrdinal()
-    Enum<int> validEnum = Enum<int>("validName", 18);
-
-    int expectedValue = 18;
-    ASSERT_EQUAL(expectedValue, validEnum.getOrdinal());
+	// Given valid enum and name to test getOrdinal()
+	Enum<int> validEnum = Enum<int>("validName", 18);
+	
+	int expectedValue = 18;
+	ASSERT_EQUAL(expectedValue, validEnum.getOrdinal());
 }

@@ -39,110 +39,110 @@ double math_round(double value) {
 }
 
 double math_sqrt(double value) {
-    return sqrt(value);
+	return sqrt(value);
 }
 
 double math_cbrt(double value) {
-    return cbrt(value);
+	return cbrt(value);
 }
 
 double math_ceil(double value) {
-    return ceil(value);
+	return ceil(value);
 }
 
 double math_exp(double value) {
-    return exp(value);
+	return exp(value);
 }
 
 double math_expm1(double value) {
-    return expm1(value);
+	return expm1(value);
 }
 
 double math_log(double value) {
-    return log(value);
+	return log(value);
 }
 
 double math_log10(double value) {
-    return log10(value);
+	return log10(value);
 }
 
 double math_log1p(double value) {
-    return log1p(value);
+	return log1p(value);
 }
 
 double math_ieeeremainder(double dividend, double divisor) {
-    return dividend - (round(dividend / divisor) * divisor);
+	return dividend - ( round(dividend / divisor) * divisor );
 }
 
 double math_rint(double value) {
-    return rint(value);
+	return rint(value);
 }
 
 double math_hypot(double valueA, double valueB) {
-    return hypot(valueA, valueB);
+	return hypot(valueA, valueB);
 }
 
 double math_acos(double value) {
-    return acos(value);
+	return acos(value);
 }
 
 double math_cos(double angle) {
-    return cos(angle);
+	return cos(angle);
 }
 
 double math_cosh(double angle) {
-    return cosh(angle);
+	return cosh(angle);
 }
 
 double math_asin(double value) {
-    return asin(value);
+	return asin(value);
 }
 
 double math_sin(double angle) {
-    return sin(angle);
+	return sin(angle);
 }
 
 double math_sinh(double angle) {
-    return sinh(angle);
+	return sinh(angle);
 }
 
 double math_atan(double value) {
-    return atan(value);
+	return atan(value);
 }
 
 double math_atan2(double coordinateX, double coordinateY) {
-    return atan2(coordinateX, coordinateY);
+	return atan2(coordinateX, coordinateY);
 }
 
 double math_tan(double angle) {
-    return tan(angle);
+	return tan(angle);
 }
 
 double math_tanh(double angle) {
-    return tanh(angle);
+	return tanh(angle);
 }
 
 double math_copysign(double magnitude, double sign) {
-    return copysign(magnitude, sign);
+	return copysign(magnitude, sign);
 }
 
 float math_copysignf(float magnitude, float sign) {
-    return copysignf(magnitude, sign);
+	return copysignf(magnitude, sign);
 }
 
 double math_nexttoward(double start, double direction) {
-    return nexttoward(start, direction);
+	return nexttoward(start, direction);
 }
 
 float math_nexttowardf(float start, double direction) {
-    return nexttowardf(start, direction);
+	return nexttowardf(start, direction);
 }
 
 double math_ldexp(double value, int scaleFactor) {
-    return ldexp(value, scaleFactor);
+	return ldexp(value, scaleFactor);
 }
 
 float math_ldexpf(float value, int scaleFactor) {
-    return ldexpf(value, scaleFactor);
+	return ldexpf(value, scaleFactor);
 }
 

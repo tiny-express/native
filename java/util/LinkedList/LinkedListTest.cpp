@@ -43,18 +43,18 @@ TEST (JavaUtil, LinkedListAdd) {
 }
 
 TEST(JavaUtil, LinkedListContains) {
-    // Given valid linked list to test contains of a element inside list
-    LinkedList<char> linkedList;
-    linkedList.add('6');
-    linkedList.add('#');
-    linkedList.add('f');
-    linkedList.add(';');
-
-    char expectedValue = '#';
-    ASSERT_TRUE(linkedList.contains(expectedValue));
-
-    char unexpectedValue = '5';
-    ASSERT_FALSE(linkedList.contains(unexpectedValue));
+	// Given valid linked list to test contains of a element inside list
+	LinkedList<char> linkedList;
+	linkedList.add('6');
+	linkedList.add('#');
+	linkedList.add('f');
+	linkedList.add(';');
+	
+	char expectedValue = '#';
+	ASSERT_TRUE(linkedList.contains(expectedValue));
+	
+	char unexpectedValue = '5';
+	ASSERT_FALSE(linkedList.contains(unexpectedValue));
 }
 
 TEST (JavaUtil, LinkedListGetFirst) {
@@ -75,50 +75,50 @@ TEST (JavaUtil, LinkedListGetLast) {
 
 TEST (JavaUtil, LinkedListPeek) {
 	//Given valid linked list to test peek(), peek..() also
-    LinkedList<String> linkedList;
-    linkedList.add("sample 1");
-    linkedList.add("sample 2");
-    linkedList.add("sample 3");
-
-    String result = linkedList.peek();
-    String expectedValue = "sample 1";
-    ASSERT_STR(expectedValue.toString(), result.toString());
-
-    result = linkedList.peekFirst();
-    ASSERT_STR(expectedValue.toString(), result.toString());
-
-    result = linkedList.peekLast();
-    expectedValue = "sample 3";
-    ASSERT_STR(expectedValue.toString(), result.toString());
+	LinkedList<String> linkedList;
+	linkedList.add("sample 1");
+	linkedList.add("sample 2");
+	linkedList.add("sample 3");
+	
+	String result = linkedList.peek();
+	String expectedValue = "sample 1";
+	ASSERT_STR(expectedValue.toString(), result.toString());
+	
+	result = linkedList.peekFirst();
+	ASSERT_STR(expectedValue.toString(), result.toString());
+	
+	result = linkedList.peekLast();
+	expectedValue = "sample 3";
+	ASSERT_STR(expectedValue.toString(), result.toString());
 }
 
 TEST (JavaUtil, LinkedListPoll) {
 	// Given valid linked list to test poll(), poll..() also
-    // Brief: after called function, linked list must return correct value and decrease linked list size also
-    LinkedList<Integer> linkedList;
-    linkedList.add(10);
-    linkedList.add(20);
-    linkedList.add(30);
-
-    Integer result = linkedList.poll();
-    Integer expectedValue = 10;
-    int expectedSize = 2;
-    ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-    ASSERT_EQUAL(expectedSize, linkedList.size());
-
-    result = linkedList.pollLast();
-    expectedValue = 30;
-    expectedSize = 1;
-    ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-    ASSERT_EQUAL(expectedSize, linkedList.size());
-
-    result = linkedList.pollFirst();
-    expectedValue = 20;
-    expectedSize = 0;
-    ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-    ASSERT_EQUAL(expectedSize, linkedList.size());
-
-    // In this test case, we get element and remove it also, so don't need to clear after finished
+	// Brief: after called function, linked list must return correct value and decrease linked list size also
+	LinkedList<Integer> linkedList;
+	linkedList.add(10);
+	linkedList.add(20);
+	linkedList.add(30);
+	
+	Integer result = linkedList.poll();
+	Integer expectedValue = 10;
+	int expectedSize = 2;
+	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
+	ASSERT_EQUAL(expectedSize, linkedList.size());
+	
+	result = linkedList.pollLast();
+	expectedValue = 30;
+	expectedSize = 1;
+	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
+	ASSERT_EQUAL(expectedSize, linkedList.size());
+	
+	result = linkedList.pollFirst();
+	expectedValue = 20;
+	expectedSize = 0;
+	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
+	ASSERT_EQUAL(expectedSize, linkedList.size());
+	
+	// In this test case, we get element and remove it also, so don't need to clear after finished
 }
 
 TEST (JavaUtil, LinkedListRemove) {
@@ -129,21 +129,21 @@ TEST (JavaUtil, LinkedListRemove) {
 	linkedList.add(0.2);
 	linkedList.add(7.3);
 	linkedList.add(10.3);
-
+	
 	// Remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
 	linkedList.remove();
-	ASSERT_DBL_NEAR(52.2, linkedList.getFirst());
-
+	ASSERT_DBL_NEAR(52.2f, linkedList.getFirst());
+	
 	// Remove last element, so next getLast must be equal to 7.3
 	linkedList.removeLast();
-	ASSERT_DBL_NEAR(7.3, linkedList.getLast());
+	ASSERT_DBL_NEAR(7.3f, linkedList.getLast());
 }
 
 TEST (JavaUtil, LinkedListSize) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<int> linkedList;
 	ASSERT_EQUAL(0, linkedList.size());
-
+	
 	// Append two elements to linked list - Return two elements
 	linkedList.add(25);
 	linkedList.add(25);

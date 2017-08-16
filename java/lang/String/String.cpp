@@ -111,11 +111,11 @@ String String::clone() {
  * @param index
  * @return String
  */
-char String::charAt(int index) const{
-	if(index < 0 || index > this->size - 1) {
+char String::charAt(int index) const {
+	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return (this->original[index]);
+	return ( this->original[ index ] );
 }
 
 /**
@@ -191,7 +191,7 @@ String String::getStringFromIndex(int index) {
 	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return &(this->original[index]);
+	return &( this->original[ index ] );
 }
 
 /**
@@ -215,11 +215,11 @@ String String::fromCharArray(Array<char> &chars) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (char character : chars) {
 		str[ index++ ] = character;
 	}
-	str[index] = '\0';
+	str[ index ] = '\0';
 	String result = str;
 	free(str);
 	return result;
@@ -254,7 +254,7 @@ int String::indexOf(int ch, int fromIndex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex; index < this->size; index++) {
 		if (this->original[ index ] == (char) ch) {
 			return index;
@@ -304,7 +304,7 @@ int String::lastIndexOf(int ch) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = this->size - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -325,7 +325,7 @@ int String::lastIndexOf(int ch, int fromIndex) {
 	register
 #endif
 	int index = 0;
-
+	
 	for (index = fromIndex - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) ch) {
 			return index;
@@ -374,7 +374,7 @@ int String::lastIndexOf(String str, int fromIndex) const {
 	// Re-calculate first character of str
 	result = this->size - ( result + str.size );
 	return result;
-
+	
 }
 
 /**
@@ -441,12 +441,12 @@ Array<String> String::split(String regex) const {
 	register
 #endif
 	int index = 0;
-
+	
 	int splitStringsLength = length_pointer_pointer_char(splitStrings);
 	for (index = 0; index < splitStringsLength; index++) {
 		strings.push(splitStrings[ index ]);
 	}
-
+	
 	free_pointer_pointer_char(splitStrings);
 	return strings;
 }
@@ -506,7 +506,7 @@ Array<char> String::toCharArray() const {
 	register
 #endif
 	int index = 0;
-
+	
 	while (this->original[ index ] != '\0') {
 		chars.push(this->original[ index++ ]);
 	}
@@ -670,7 +670,7 @@ String String::valueOf(double target) {
  * @return String
  */
 String String::subString(int beginIndex) {
-   return this->subString(beginIndex, this->size - 1);
+	return this->subString(beginIndex, this->size - 1);
 }
 
 /**
@@ -807,7 +807,7 @@ boolean String::operator<(const String &target) const {
 	if (strcmp(this->original, target.toString()) < 0) {
 		return true;
 	}
-
+	
 	return false;
 }
 
@@ -821,7 +821,7 @@ boolean String::operator>(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return true;
 	}
-
+	
 	return false;
 }
 
@@ -835,7 +835,7 @@ boolean String::operator<=(const String &target) const {
 	if (strcmp(this->original, target.toString()) > 0) {
 		return false;
 	}
-
+	
 	return true;
 }
 

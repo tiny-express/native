@@ -28,79 +28,141 @@
 
 using namespace Java::Lang;
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float() {
-	this->original = 0;
-	this->originalString = string_from_float(this->original);
+    this->original = 0;
+    this->originalString = string_from_float(this->original);
 }
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float(float original) {
-	this->original = original;
-	this->originalString = string_from_float(this->original);
+    this->original = original;
+    this->originalString = string_from_float(this->original);
 }
 
-/**
- * Float initialization
- *
- * @param original
- */
 Float::Float(const Float &floatNumber) {
-	this->original = floatNumber.original;
-	this->originalString = string_from_float(this->original);
+    this->original = floatNumber.original;
+    this->originalString = string_from_float(this->original);
 }
 
 Float::~Float() {
-	if (this->originalString != NULL) {
-		free(this->originalString);
-	}
+    if (this->originalString != NULL) {
+        free(this->originalString);
+    }
 }
 
-/**
- * Float value
- *
- * @return float
- */
-float Float::floatValue() const {
-	return this->original;
+Float Float::operator+(const Float &target) {
+    return Float(this->original + target.original);
 }
 
-/**
- * Char value
- *
- * @return char
- */
+Float Float::operator-(const Float &target) {
+    return Float(this->original - target.original);
+}
+
+Float Float::operator*(const Float &target) {
+    return Float( this->original * target.original );
+}
+
+Float Float::operator/(const Float &target) {
+    return Float( this->original / target.original );
+}
+
+boolean Float::operator==(const Float &target) const {
+    return (boolean) (this->original == target.original);
+}
+
+// TODO(thoangminh): enable after finish method equals , compare
+//boolean Float::operator==(const Float &target) const {
+//    return (boolean) equals(target.original);
+//}
+//
+//boolean Float::operator!=(const Float &target) const {
+//    return (boolean) !equals(target.original);
+//}
+//
+//boolean Float::operator<(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator>(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator>=(const Float &target) const {
+//    if (compare(this->doubleValue(), target.doubleValue()) == 1
+//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+//
+//        return true;
+//    }
+//    return false;
+//}
+//
+//boolean Float::operator<=(const Float &target) const {
+//
+//    if (compare(this->doubleValue(), target.doubleValue()) == -1
+//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+//
+//        return true;
+//    }
+//    return false;
+//}
+
+boolean Float::operator&&(const Float &target) const {
+    return (boolean) (this->original && target.original);
+}
+
+boolean Float::operator||(const Float &target) const {
+    return (boolean) (this->original || target.original);
+}
+
+Float Float::operator=(const Float &target) {
+    this->original = target.original;
+    free(this->originalString);
+    this->originalString = string_from_float(this->original);
+    return *this;
+}
+
+Float Float::operator+=(const Float &target) const {
+    return (Float) (this->original + target.original);
+}
+
+Float Float::operator-=(const Float &target) const {
+    return (Float) (this->original - target.original);
+}
+
+Float Float::operator*=(const Float &target) const {
+    return (Float) (this->original * target.original);
+}
+
+Float Float::operator/=(const Float &target) const {
+    return (Float) (this->original / target.original);
+}
+
 char Float::charValue() const {
-    string stringFromFloatResult = string_from_float(this->original);
-    char floatCharValueResult = string_to_char(stringFromFloatResult);
-    free(stringFromFloatResult);
-	return floatCharValueResult;
+    string convertResult = string_from_float(this->original);
+    char charValueResult = string_to_char(convertResult);
+    free(convertResult);
+    return charValueResult;
+}
+// TODO(thoangminh): enable after finish toString()
+//string Float::stringValue() const {
+//    return (string) this->toString();
+//}
+
+float Float::floatValue() const {
+    return this->original;
 }
 
-/**
- * Short value
- *
- * @return short
- */
 short Float::shortValue() const {
-	return (short) this->original;
+    return (short) this->original;
 }
 
-/**
- * Int value
- *
- * @return int
- */
 int Float::intValue() const {
-	return (int) this->original;
+    return (int) this->original;
 }
 
 /**
@@ -109,16 +171,16 @@ int Float::intValue() const {
  * @return long
  */
 long Float::longValue() const {
-	return (long) this->original;
+    return (long) this->original;
 }
 
 /**
- * Double value
+ * Float value
  *
  * @return
  */
 double Float::doubleValue() const {
-	return this->original;
+    return this->original;
 }
 
 /**
@@ -127,7 +189,7 @@ double Float::doubleValue() const {
  * @return String
  */
 string Float::toString() const {
-	return this->originalString;
+    return this->originalString;
 }
 
 /**
@@ -136,114 +198,11 @@ string Float::toString() const {
  * @param target
  * @return Float
  */
-Float Float::parseFloat(String target) {
-	Float result = string_to_float(target.toString());
-	return result;
-}
 
-/**
- * Assign value of this object same as target value
- *
- * @param target
- * @return Float
- */
-Float &Float::operator=(const Float &target) {
-	this->original = target.original;
-	free(this->originalString);
-	this->originalString = string_from_float(this->original);
-	return *this;
-}
-
-/**
- * Sum of this and target
- *
- * @param target
- * @return Float
- */
-Float Float::operator+(const Float &target) {
-	return this->original + target.original;
-}
-
-/**
- * Make a subtraction with target Float
- *
- * @return float
- */
-Float Float::operator-(const Float &target) {
-	return this->original - target.original;
-}
-
-/**
-* Make a multiplication with target Float
-*
-* @return float
-*/
-Float Float::operator*(const Float &target) {
-	return this->original * target.original;
-}
-
-/**
-* Make a division with target Float
-*
-* @return float
-*/
-Float Float::operator/(const Float &target) {
-	return this->original / target.original;
-}
-
-/**
-* Compare this Float is equal target
-*
-* @return bool
-*/
-boolean Float::operator==(const Float &target) const {
-	return this->original == target.original;
-}
-
-/**
-* Compare this Float is not equal target
-*
-* @return bool
-*/
-boolean Float::operator!=(const Float &target) const {
-	return this->original != target.original;
-}
-
-/**
-* Compare this Float is less than target
-*
-* @return bool
-*/
-boolean Float::operator<(const Float &target) const {
-	return this->original < target.original;
-}
-
-/**
-* Compare this Float is more than target
-*
-* @return bool
-*/
-boolean Float::operator>(const Float &target) const {
-	return this->original > target.original;
-}
-
-/**
-* Compare this Float is equal or less than target
-*
-* @return bool
-*/
-boolean Float::operator<=(const Float &target) const {
-	return this->original <= target.original;
-}
-
-/**
-*  Compare this Float is equal or more than target
-*
-* @return bool
-*/
-boolean Float::operator>=(const Float &target) const {
-	return this->original >= target.original;
-}
+//Float Float::parseFloat(String target) {
+//    Float result = string_to_float(target.toString());
+//    return result;
+//}
 
 boolean Float::isNaN(float v) {
     return v != v;
