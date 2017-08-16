@@ -181,8 +181,12 @@ Float Float::parseFloat(String inputString) {
     return static_cast<Float> (string_to_float(inputString.toString()));
 }
 
-boolean Float::isNaN(float v) {
-    return v != v;
+boolean Float::isNaN(float valueFloat) {
+    return (valueFloat != valueFloat);
+}
+
+boolean Float::isNaN() {
+    return isNaN(this->original);
 }
 
 Float Float::valueOf(String stringInput) {

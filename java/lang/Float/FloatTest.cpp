@@ -1113,3 +1113,24 @@ TEST(JavaLang, FloatIntBitsToBinary32StringType) {
     ASSERT_STR(expectedResult, actualResult);
     free(actualResult);
 }
+
+TEST(JavaLang , FloatIsNaN) {
+
+    ASSERT_TRUE(Float::isNaN(NaN_NUMBER));
+    ASSERT_FALSE(Float::isNaN(NEGATIVE_INFINITY));
+    ASSERT_FALSE(Float::isNaN(13.02));
+    ASSERT_FALSE(Float::isNaN(130.2));
+}
+
+TEST(JavaLang , FloatIsNaN2) {
+    Float variableIsInfinite2;
+
+    variableIsInfinite2 = NaN_NUMBER;
+    ASSERT_TRUE(variableIsInfinite2.isNaN());
+
+    variableIsInfinite2 = NEGATIVE_INFINITY;
+    ASSERT_FALSE(variableIsInfinite2.isNaN());
+
+    variableIsInfinite2 = 13.02;
+    ASSERT_FALSE(variableIsInfinite2.isNaN());
+}
