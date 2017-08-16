@@ -652,6 +652,8 @@ namespace Java {
             static string intBitsToBinary64StringType(int intBitsInput);
 
             static int floatToRawIntBits(float floatInput);
+
+            static int floatToIntBits(float inputFloat);
         };
 	}
 }

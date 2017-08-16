@@ -931,3 +931,88 @@ TEST(JavaLang, FloatToRawIntBits) {
     actualResult = Float::floatToRawIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 }
+
+TEST(JavaLang, FloatToIntBits) {
+    // Create variable to test
+    float input;
+    int expectedResult;
+    int actualResult;
+
+    // Input 0.0
+    input = 0.0;
+    expectedResult = 0;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY_DOUBLE
+    input = POSITIVE_INFINITY;
+    expectedResult = 2139095040;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY
+    input = NEGATIVE_INFINITY;
+    expectedResult = -2139095040;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input NaN_NUMBER
+    input = NaN_NUMBER;
+    expectedResult = 2147483647;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input -0.7
+    input = -0.7f;
+    expectedResult =  -1060320051;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input 12.375
+    input = 12.375;
+    expectedResult = 1095106560;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input 1.0
+    input = 1.0;
+    expectedResult = 1065353216;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input 0.375
+    input = 0.375;
+    expectedResult = 1052770304;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input -2
+    input = -2.0f;
+    expectedResult = -1073741824;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input 83
+    input = 83.0;
+    expectedResult = 1118175232;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input -2625
+    input = -2625.0f;
+    expectedResult = -1159991296;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input 0.5
+    input = 0.5;
+    expectedResult = 1056964608;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    input = -1302.12345678f;
+    expectedResult = -1151517683;
+    actualResult = Float::floatToIntBits(input);
+    ASSERT_EQUAL(expectedResult, actualResult);
+}

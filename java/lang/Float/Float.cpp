@@ -509,6 +509,10 @@ int Float::floatToRawIntBits(float floatInput) {
     return resultFloatToRawIntBits;
 }
 
+int Float::floatToIntBits(float inputFloat) {
+    return floatToRawIntBits(inputFloat);
+}
+
 //string Float::intBitsToBinary64StringType(int intBitsInput) {
 //    string resultLongBitsToBinary64StringType = (string) malloc(33 * sizeof(char));
 //    int index;
