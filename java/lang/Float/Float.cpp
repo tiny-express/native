@@ -67,50 +67,45 @@ Float Float::operator/(const Float &target) {
 }
 
 boolean Float::operator==(const Float &target) const {
-    return (boolean) (this->original == target.original);
+    return (boolean) equals(target.original);
 }
 
-// TODO(thoangminh): enable after finish method equals , compare
-//boolean Float::operator==(const Float &target) const {
-//    return (boolean) equals(target.original);
-//}
-//
-//boolean Float::operator!=(const Float &target) const {
-//    return (boolean) !equals(target.original);
-//}
-//
-//boolean Float::operator<(const Float &target) const {
-//    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
-//        return true;
-//    }
-//    return false;
-//}
-//
-//boolean Float::operator>(const Float &target) const {
-//    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
-//        return true;
-//    }
-//    return false;
-//}
-//
-//boolean Float::operator>=(const Float &target) const {
-//    if (compare(this->doubleValue(), target.doubleValue()) == 1
-//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
-//
-//        return true;
-//    }
-//    return false;
-//}
-//
-//boolean Float::operator<=(const Float &target) const {
-//
-//    if (compare(this->doubleValue(), target.doubleValue()) == -1
-//        || compare(this->doubleValue(), target.doubleValue()) == 0) {
-//
-//        return true;
-//    }
-//    return false;
-//}
+boolean Float::operator!=(const Float &target) const {
+    return (boolean) !equals(target.original);
+}
+
+boolean Float::operator<(const Float &target) const {
+    if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+        return true;
+    }
+    return false;
+}
+
+boolean Float::operator>(const Float &target) const {
+    if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+        return true;
+    }
+    return false;
+}
+
+boolean Float::operator>=(const Float &target) const {
+    if (compare(this->doubleValue(), target.doubleValue()) == 1
+        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return true;
+    }
+    return false;
+}
+
+boolean Float::operator<=(const Float &target) const {
+
+    if (compare(this->doubleValue(), target.doubleValue()) == -1
+        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+
+        return true;
+    }
+    return false;
+}
 
 boolean Float::operator&&(const Float &target) const {
     return (boolean) (this->original && target.original);
