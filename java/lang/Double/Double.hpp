@@ -28,11 +28,12 @@
 #define JAVA_LANG_DOUBLE_HPP_
 
 #include "../Number/Number.hpp"
+#include <limits>
 
 #ifdef WIN32
     #define unsigned_long_long unsigned __int64
     #define long_long __int64
-#else // gcc. Might not work on other compilers!
+#else  // gcc. Might not work on other compilers!
     #define unsigned_long_long unsigned long long
     #define long_long long long
 #endif
@@ -52,32 +53,32 @@ static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
 /**
  * A constant holding the positive infinity of type
  */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0; // inf
+static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0;  // inf
 
 /**
  * A constant holding the negative infinity of type
  */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0; // -inf
+static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0;  // -inf
 
 /**
  * A constant holding a Not-a-Number (NaN) value of type
  */
-static double NaN_NUMBER_DOUBLE = 0.0 / 0.0; // -nan
+static double NaN_NUMBER_DOUBLE = 0.0 / 0.0;  // -nan
 
 /**
  * A constant holding the largest positive finite value of type
  */
-static double MAX_VALUE_DOUBLE = std::numeric_limits<double>::max(); // 1.797693134862316e+308
+static double MAX_VALUE_DOUBLE = std::numeric_limits<double>::max();  // 1.797693134862316e+308
 
 /**
  * A constant holding the smallest positive normal value of type
  */
-static double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min(); // 4.940656458412465e-324
+static double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min();  // 4.940656458412465e-324
 
 /**
  * A constant holding the smallest positive nonzero value of type
  */
-static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min(); //2.225073858507201e-308
+static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min();  // 2.225073858507201e-308
 
 /**
  * Minimum exponent a normalized <code>double</code> number may
@@ -89,21 +90,21 @@ static int	MIN_EXPONENT_DOUBLE	= -1022;
 /**
  * Init Double::MAX_VALUE
  */
-static constexpr double initDoubleMaxValue () noexcept {
+static constexpr double initDoubleMaxValue() noexcept {
     return (2 - pow(2, -52)) * pow(2, 1023);
 }
 
 /**
  * Init Double::MIN_VALUE
  */
-static constexpr double initDoubleMinValue () noexcept {
+static constexpr double initDoubleMinValue() noexcept {
     return pow(2, -1074);
 }
 
 /**
  * Init Double::MIN_NORMAL_DOUBLE
  */
-static constexpr double initMinNormalDouble () noexcept {
+static constexpr double initMinNormalDouble() noexcept {
     return pow(2, -1022);
 }
 namespace Java {
@@ -112,6 +113,7 @@ namespace Java {
 		private:
 			double original;
             string originalString;
+            
         public:
             /**
              * The number of logical bits in the significand of a double number,
@@ -158,17 +160,17 @@ namespace Java {
             /**
              * A constant holding the positive infinity of type
              */
-            static constexpr double POSITIVE_INFINITY = INFINITY; // inf
+            static constexpr double POSITIVE_INFINITY = INFINITY;  // inf
 
             /**
              * A constant holding the negative infinity of type
              */
-            static constexpr double NEGATIVE_INFINITY = -INFINITY; // -inf
+            static constexpr double NEGATIVE_INFINITY = -INFINITY;  // -inf
 
             /**
              * A constant holding a Not-a-Number (NaN) value of type
              */
-            static constexpr double NOT_A_NUMBER_DOUBLE = NAN; // -nan
+            static constexpr double NOT_A_NUMBER_DOUBLE = NAN;  // -nan
 
             /**
              * A constant holding the largest positive finite value of type
@@ -177,41 +179,20 @@ namespace Java {
             /**
              * A constant holding the smallest positive normal value of type
              */
-            static constexpr double MIN_NORMAL_DOUBLE = initMinNormalDouble(); // 2.225073858507201e-308
+            static constexpr double MIN_NORMAL_DOUBLE = initMinNormalDouble();  // 2.225073858507201e-308
 
             /**
              * A constant holding the smallest positive nonzero value of type
              */
-            static constexpr double MIN_VALUE = initDoubleMinValue(); //4.940656458412465e-324
+            static constexpr double MIN_VALUE = initDoubleMinValue();  // 4.940656458412465e-324
 
-        public:
-            /**
-             * Double initialization
-             *
-             * @param original
-             */
+         public:
             Double();
-
-            /**
-             * Double initialization
-             *
-             * @param original
-             */
 			Double(double original);
-
-            /**
-             * Double initialization
-             *
-             * @param original
-             */
 			Double(const Double &target);
-
-            /**
-             * Double Destructor
-             */
 			~Double();
 
-        public:
+         public:
             /**
              * Adds two operands
              *
@@ -585,7 +566,7 @@ namespace Java {
              */
             static double min(double a, double b);
 
-            // TODO FIXME
+            // TODO(thoangminh): Implement later
 //            /**
 //             * Returns a hexadecimal string representation of the
 //             * {double} argument. All characters mentioned below
@@ -604,7 +585,7 @@ namespace Java {
             * @param double
             * @return string binary 32 bit of input
             */
-            static string doubleToBinary32StringType(double doubleInput );
+            static string doubleToBinary32StringType(double doubleInput);
 
             /**
             * Convert double to binary 64 bit
@@ -614,7 +595,7 @@ namespace Java {
             * @param double
             * @return string binary 64 bit of input
             */
-            static string doubleToBinary64StringType(double doubleInput );
+            static string doubleToBinary64StringType(double doubleInput);
 
             /**
             * Convert binary64StringType To Double
@@ -656,6 +637,6 @@ namespace Java {
             */
             static Double valueOf(double doubleInput);
         };
-	}
-}
-#endif  // JAVA_LANG_DOUBLE_HPP_
+	}  // namespace Lang
+}  // namespace Java
+#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP_

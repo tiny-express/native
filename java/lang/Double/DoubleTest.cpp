@@ -32,7 +32,6 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST(JavaLang, DoubleConstructor) {
-
     // Test Double::Double()
     Double emptyDoubleConstructor;
     emptyDoubleConstructor = 13.02;
@@ -264,10 +263,10 @@ TEST(JavaLang, DoubleToString) {
 
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestToString = NaN_NUMBER_DOUBLE;
-//    expectedResultToString = "-nan"; // "nan" in MacOS
+//    expectedResultToString = "-nan";  // "nan" in MacOS
 //    actualResultToString = variableTestToString.toString();
 //    ASSERT_STR(expectedResultToString , actualResultToString);
-//	free(actualResultToString);
+// free(actualResultToString);
 
     // Test MAX_VALUE_DOUBLE
     variableTestToString = MAX_VALUE_DOUBLE;
@@ -369,7 +368,7 @@ TEST(JavaLang, DoubleStringValue) {
 
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestStringValue = NaN_NUMBER_DOUBLE;
-//    expectedResultStringValue = "-nan"; // "nan" in MacOS
+//    expectedResultStringValue = "-nan";  // "nan" in MacOS
 //    actualResultStringValue = variableTestStringValue.stringValue();
 //    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 //    free(actualResultStringValue);
@@ -554,25 +553,25 @@ TEST(JavaLang, DoubleLongValue) {
 
     // Test MIN_VALUE_DOUBLE
     variableTestLongValue = MIN_VALUE_DOUBLE;
-    expectedResultLongValue= 0;
+    expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test valid case
     variableTestLongValue = 5.9;
-    expectedResultLongValue= 5;
+    expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test valid case
     variableTestLongValue = 5.4;
-    expectedResultLongValue= 5;
+    expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test invalid case
     variableTestLongValue = 6;
-    expectedResultLongValue= 5;
+    expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_NOT_EQUAL(expectedResultLongValue , actualResultLongValue);
 }
@@ -585,25 +584,25 @@ TEST(JavaLang, DoubleFloatValue) {
 
     // Test POSITIVE_INFINITY_DOUBLE
     variableTestFloatValue = POSITIVE_INFINITY_DOUBLE;
-    expectedResultFloatValue = (float) (1.0 / 0.0);
+    expectedResultFloatValue = static_cast<float> (1.0 / 0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestFloatValue = NEGATIVE_INFINITY_DOUBLE;
-    expectedResultFloatValue = (float) (-1.0/0.0);
+    expectedResultFloatValue = static_cast<float> (-1.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test NaN_NUMBER_DOUBLE
     variableTestFloatValue = NaN_NUMBER_DOUBLE;
-    expectedResultFloatValue = (float) (0.0/0.0);
+    expectedResultFloatValue = static_cast<float> (0.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestFloatValue = MAX_VALUE_DOUBLE;
-    expectedResultFloatValue = (float) (1.0/0.0);
+    expectedResultFloatValue = static_cast<float> (1.0/0.0);
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_DBL_NEAR(expectedResultFloatValue , actualResultFloatValue);
 
@@ -764,7 +763,6 @@ TEST(JavaLang, DoubleByteValue) {
 
 // TODO(thoangminh): Need to pass all test cases in comment block
 TEST(JavaLang, DoubleCompare) {
-
     // Test NaN_NUMBER_DOUBLE
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, NaN_NUMBER_DOUBLE), 0);
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, POSITIVE_INFINITY_DOUBLE), 1);
@@ -847,7 +845,7 @@ TEST(JavaLang, DoubleCompare) {
     ASSERT_EQUAL(Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(Double::compare(-0.0, MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(-0.0, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(-0.0, 0.0), 0); // error in OSX
+    ASSERT_EQUAL(Double::compare(-0.0, 0.0), 0);  // error in OSX
     ASSERT_EQUAL(Double::compare(-0.0, -0.0), 0);  // error in OSX
     ASSERT_EQUAL(Double::compare(-0.0, -1.2), +1);
     ASSERT_EQUAL(Double::compare(-0.0, MIN_VALUE_DOUBLE), -1);
@@ -947,7 +945,7 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0); // error in OSX
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);  // error in OSX
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
@@ -958,7 +956,7 @@ TEST(JavaLang, DoubleCompareTo) {
     ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0); // error in OSX
+    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0);  // error in OSX
     ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -1);
@@ -1154,7 +1152,7 @@ TEST(JavaLang, DoubleEquals) {
     Double DOUBLE_NaN = NaN_NUMBER_DOUBLE;
     Double DOUBLE_POSITIVE_INFINITY = POSITIVE_INFINITY_DOUBLE;
     Double DOUBLE_NEGATIVE_INFINITY = NEGATIVE_INFINITY_DOUBLE;
-    Double DOUBLE_MAX_VALUE= MAX_VALUE_DOUBLE;
+    Double DOUBLE_MAX_VALUE = MAX_VALUE_DOUBLE;
     Double DOUBLE_MIN_VALUE = MIN_VALUE_DOUBLE;
 
     // Test NaN_NUMBER_DOUBLE
@@ -1464,7 +1462,6 @@ TEST(JavaLang , DoubleIsInfinite2) {
 }
 
 TEST(JavaLang , DoubleIsNaN) {
-
     ASSERT_TRUE(Double::isNaN(NaN_NUMBER_DOUBLE));
     ASSERT_FALSE(Double::isNaN(NEGATIVE_INFINITY_DOUBLE));
     ASSERT_FALSE(Double::isNaN(13.02));

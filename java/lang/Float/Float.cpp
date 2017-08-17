@@ -91,17 +91,14 @@ boolean Float::operator>(const Float &target) const {
 boolean Float::operator>=(const Float &target) const {
     if (compare(this->doubleValue(), target.doubleValue()) == 1
         || compare(this->doubleValue(), target.doubleValue()) == 0) {
-
         return true;
     }
     return false;
 }
 
 boolean Float::operator<=(const Float &target) const {
-
     if (compare(this->doubleValue(), target.doubleValue()) == -1
         || compare(this->doubleValue(), target.doubleValue()) == 0) {
-
         return true;
     }
     return false;
@@ -188,7 +185,7 @@ boolean Float::isFinite(float valueFloat) {
 boolean Float::isInfinite(float valueFloat) {
     boolean isPOSITIVE_INFINITY = (valueFloat == POSITIVE_INFINITY);
     boolean isNEGATIVE_INFINITY = (valueFloat == NEGATIVE_INFINITY);
-    return( isPOSITIVE_INFINITY || isNEGATIVE_INFINITY ) ;
+    return (isPOSITIVE_INFINITY || isNEGATIVE_INFINITY) ;
 }
 
 boolean Float::isInfinite() {
@@ -209,11 +206,9 @@ Float Float::valueOf(String stringInput) {
 
 Float Float::valueOf(float inputFloat) {
     return Float(inputFloat);
-
 }
 
-string Float::floatToBinary32StringType(float floatInput)
-{
+string Float::floatToBinary32StringType(float floatInput) {
     auto integerPartNormalizeForm = (string) malloc (280 * sizeof(char));
     auto fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
     auto floatInputNormalizeForm = (string) malloc (280 * sizeof(char));
@@ -263,22 +258,22 @@ string Float::floatToBinary32StringType(float floatInput)
         resultFloatToBinary32StringType[0] = '1';
     }
 
-    if( floatInput == 0 ) {
+    if (floatInput == 0) {
         goto outPut;
     }
 
-    if( floatInput == POSITIVE_INFINITY ) {
+    if (floatInput == POSITIVE_INFINITY) {
         strcpy(resultFloatToBinary32StringType, "01111111100000000000000000000000");
         goto outPut;
     }
 
-    if( floatInput == NEGATIVE_INFINITY ) {
+    if (floatInput == NEGATIVE_INFINITY) {
         strcpy(resultFloatToBinary32StringType, "11111111100000000000000000000000");
         goto outPut;
     }
 
-    if( isNaN(floatInput)){
-        strcpy (resultFloatToBinary32StringType,     "01111111111111111111111111111111");
+    if (isNaN(floatInput)) {
+        strcpy(resultFloatToBinary32StringType, "01111111111111111111111111111111");
 
         goto outPut;
     }
@@ -287,7 +282,7 @@ string Float::floatToBinary32StringType(float floatInput)
     floatInput = fabs(floatInput);
 
     /** Get size of integerPartNormalizeForm  */
-    integerPartFloatInput = (int) floor(floatInput);
+    integerPartFloatInput = static_cast<int> (floor(floatInput));
     sizeOfIntegerPartNormalizeForm = 0;
 
     if (integerPartFloatInput == 0) {
@@ -301,15 +296,14 @@ string Float::floatToBinary32StringType(float floatInput)
         }
     }
 
-    integerPartFloatInput = (int) floor(floatInput);
+    integerPartFloatInput = static_cast<int> (floor(floatInput));
     index = sizeOfIntegerPartNormalizeForm -1;
-    while( integerPartFloatInput != 0 ) {
-
-        if( (integerPartFloatInput & 1) == 1 ) {
+    while (integerPartFloatInput != 0) {
+        if ((integerPartFloatInput & 1) == 1) {
             integerPartNormalizeForm[index] = '1';
         }
 
-        if ( (integerPartFloatInput & 1) == 0) {
+        if ((integerPartFloatInput & 1) == 0) {
             integerPartNormalizeForm[index] = '0';
         }
 
@@ -323,7 +317,7 @@ string Float::floatToBinary32StringType(float floatInput)
     while ((fractionPartFloatInput != 0) && (index < 24)) {
         fractionPartFloatInput = fractionPartFloatInput * 2;
 
-        int integerPart = (int) floor(fractionPartFloatInput);
+        int integerPart = static_cast<int> (floor(fractionPartFloatInput));
 
         if (integerPart == 1) {
             fractionPartNormalizeForm[index] = '1';
@@ -340,7 +334,7 @@ string Float::floatToBinary32StringType(float floatInput)
     sizeOfFractionPartNormalizeForm = index;
 
     /** Copy value from integerPartNormalizeForm to floatInputNormalizeForm */
-    for( i = 0; i < sizeOfIntegerPartNormalizeForm; i++ ) {
+    for (i = 0; i < sizeOfIntegerPartNormalizeForm; i++) {
         floatInputNormalizeForm[i] = integerPartNormalizeForm[i];
     }
 
@@ -352,7 +346,7 @@ string Float::floatToBinary32StringType(float floatInput)
      * to floatInputNormalizeForm
      */
     index = indexOfDotFloatInputNormalizeForm +1;
-    for( i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++ ) {
+    for (i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++) {
         floatInputNormalizeForm[index]
                 = fractionPartNormalizeForm[i];
     }
@@ -361,14 +355,14 @@ string Float::floatToBinary32StringType(float floatInput)
                                      + sizeOfFractionPartNormalizeForm;
 
     indexFirstBit1FloatInputNormalizeForm = 1;
-    for ( i = 0; i <= sizeOfFloatInputNormalizeForm; i++ ) {
+    for (i = 0; i <= sizeOfFloatInputNormalizeForm; i++) {
         if (floatInputNormalizeForm[i] == '1') {
             indexFirstBit1FloatInputNormalizeForm = i;
             break;
         }
     }
 
-    integerPartFloatInput =  (int) floor(floatInput);
+    integerPartFloatInput = static_cast<int> (floor(floatInput));
     if (integerPartFloatInput != 0) {
         powerExponentBase2 = indexOfDotFloatInputNormalizeForm
                              - indexFirstBit1FloatInputNormalizeForm -1;
@@ -384,11 +378,11 @@ string Float::floatToBinary32StringType(float floatInput)
     index = sizeOfExponentPartBinary32;
 
     while (exponentFloatInput != 0) {
-        if ( (exponentFloatInput & 1 ) == 1) {
+        if ((exponentFloatInput & 1) == 1) {
             resultFloatToBinary32StringType[index] = '1';
         }
 
-        if ( (exponentFloatInput & 1 ) == 0) {
+        if ((exponentFloatInput & 1) == 0) {
             resultFloatToBinary32StringType[index] = '0';
         }
 
@@ -424,7 +418,7 @@ string Float::floatToBinary32StringType(float floatInput)
     return  resultFloatToBinary32StringType;
 }
 
-float Float::binary32StringTypeToFloat (string binary32StringTypeInput) {
+float Float::binary32StringTypeToFloat(string binary32StringTypeInput) {
     // Create variable
     int signOfResultbinary32StringTypeToFloat;
     float exponent;
@@ -486,7 +480,7 @@ float Float::binary32StringTypeToFloat (string binary32StringTypeInput) {
             = signOfResultbinary32StringTypeToFloat * (1 + mantisaBase10)
               * static_cast<float> (pow(2, exponentAdjusted));
 
-    if(isNaN) {
+    if (isNaN) {
         return NaN_NUMBER;
     }
 
@@ -514,7 +508,8 @@ int Float::floatToRawIntBits(float floatInput) {
         if (floatInputToBinary32StringType[i] == '0') {
             tempValue = 0;
         }
-        resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue * (int) pow(2, exponent);
+        resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue
+                                    * static_cast<int> (pow(2, exponent));
         exponent--;
     }
 
@@ -547,7 +542,7 @@ string Float::intBitsToBinary32StringType(int intBitsInput) {
     }
 
     index = 31;
-    while ( (intBitsInput != 0) || (index > 1)) {
+    while ((intBitsInput != 0) || (index > 1)) {
 
         if ( (intBitsInput & 1) ==1 ) {
             resultIntBitsToBinary32StringType[index] = '1';
@@ -590,7 +585,7 @@ boolean Float::equals(const Float &object) const {
     int floatToIntBitsThis = floatToIntBits(this->original);
     boolean isEqual = (floatToIntBitsObject == floatToIntBitsThis);
     return isEqual;
-    //return (isFloat && isEqual);
+    // return (isFloat && isEqual);
 }
 
 int Float::hashCode(float floatInput) {
@@ -606,7 +601,6 @@ float Float::min(float floatA, float floatB) {
 }
 
 float Float::intBitsToFloat(int intBitsInput) {
-
     float resultIntBitsToFloat;
     string convertIntBitsToBinary32StringType;
 

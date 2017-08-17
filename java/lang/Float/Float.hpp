@@ -33,22 +33,22 @@
 /**
  * A constant holding the positive infinity of type
  */
-static float POSITIVE_INFINITY = float(1.0 / 0.0); // inf
+static float POSITIVE_INFINITY = static_cast<float> (1.0 / 0.0);  // inf
 
 /**
  * A constant holding the negative infinity of type
  */
-static float NEGATIVE_INFINITY = float(-1.0 / 0.0); // -inf
+static float NEGATIVE_INFINITY = static_cast<float> (-1.0 / 0.0);  // -inf
 
 /**
  * A constant holding a Not-a-Number (NaN) value of type
  */
-static float NaN_NUMBER = float(0.0 / 0.0); // -nan
+static float NaN_NUMBER = static_cast<float> (0.0 / 0.0);  // -nan
 
 /**
  * A constant holding the largest positive finite value of type
  */
-static float MAX_VALUE = std::numeric_limits<float>::max(); // 3.40282e+38
+static float MAX_VALUE = std::numeric_limits<float>::max();  // 3.40282e+38
 
 /**
  * The smallest subnormal value has sign bit = 0, exponent = 0
@@ -59,25 +59,25 @@ static float MIN_NORMAL = std::numeric_limits<float>::denorm_min(); // 1.401e-45
 /**
  * A constant holding the smallest value of type
  */
-static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.17549e-38
+static float MIN_VALUE = std::numeric_limits<float>::min();  // 1.17549e-38
 
 /**
  * Minimum exponent a normalized float number may have
  */
-static int  MIN_EXPONENT      = -126;
+static int  MIN_EXPONENT = -126;
 
 /**
  * Init Float::MAX_VALUE
  */
 static constexpr float initFloatMaxValue () noexcept {
-	return (float) ((2 - pow(2, -23)) * pow(2, 127));
+	return static_cast<float>  ((2 - pow(2, -23)) * pow(2, 127));
 }
 
 /**
  * Init Float::MIN_VALUE
  */
 static constexpr float initFloatMinValue () noexcept {
-	return (float) pow(2, -149);
+	return static_cast<float>  (pow(2, -149));
 }
 
 namespace Java {
@@ -90,7 +90,7 @@ namespace Java {
 			float original;
 			string originalString;
 
-		public:
+		 public:
 			/**
             * A constant holding the smallest positive normal value of type float, 2-126.
             */
@@ -156,14 +156,14 @@ namespace Java {
 			/**
              * A constant holding the largest positive finite value of type float, (2-2-23)·2127.
              */
-			static constexpr float MAX_VALUE = initFloatMaxValue(); // 3.4028235e+38f
+			static constexpr float MAX_VALUE = initFloatMaxValue();  // 3.4028235e+38f
 
 			/**
              * A constant holding the smallest positive nonzero value of type float, 2^-149.
              * It is equal to the hexadecimal floating-point literal 0x0.000002P-126f
              * and also equal to Float.intBitsToFloat(0x1).
              */
-			static constexpr float MIN_VALUE = initFloatMinValue(); // 1.4e-45f
+			static constexpr float MIN_VALUE = initFloatMinValue();  // 1.4e-45f
 
 			/**
              * The number of bits used to represent a float value.
@@ -181,7 +181,7 @@ namespace Java {
 			Float(const Float &target);
 			~Float();
 
-		public:
+		 public:
 			/**
              * Adds two operands
              *
@@ -535,7 +535,7 @@ namespace Java {
              */
 			static float min(float a, float b);
 
-			// TODO FIXME
+			// TODO(thoangminh): Implement this method later
 //            /**
 //             * Returns a hexadecimal string representation of the
 //             * {float} argument. All characters mentioned below
@@ -554,7 +554,7 @@ namespace Java {
             * @param float
             * @return string binary 32 bit of input
             */
-			static string floatToBinary32StringType(float floatInput );
+			static string floatToBinary32StringType(float floatInput);
 
 			/**
             * Convert from string to float
@@ -620,7 +620,7 @@ namespace Java {
             */
             static string intBitsToBinary32StringType(int intBitsInput);
         };
-	}
-}
+	}  // namespace Lang
+}  // namespace Java
 
-#endif  // JAVA_LANG_FLOAT_HPP_
+#endif  // JAVA_LANG_FLOAT_FLOAT_HPP_

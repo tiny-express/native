@@ -113,7 +113,7 @@ TEST(JavaLang, FloatArithmeticOperator) {
     ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
-TEST (JavaLang, FloatRelationalOperator) {
+TEST(JavaLang, FloatRelationalOperator) {
     // Create variable to test
     Float variableRelationalOperator1;
     Float variableRelationalOperator2;
@@ -344,7 +344,7 @@ TEST(JavaLang, FloatCharValue) {
     ASSERT_NOT_EQUAL(expectedResultCharValue , actualResultCharValue);
 }
 
-TEST (JavaLang, FloatStringValue){
+TEST(JavaLang, FloatStringValue) {
     // Create variable to test
     Float variableTestStringValue;
     string expectedResultStringValue;
@@ -364,7 +364,7 @@ TEST (JavaLang, FloatStringValue){
 
     // Test NaN_NUMBER
     variableTestStringValue = NaN_NUMBER;
-    expectedResultStringValue = (string) "-nan"; // "nan" in MacOS
+    expectedResultStringValue = (string) "-nan";  // "nan" in MacOS
     actualResultStringValue = variableTestStringValue.stringValue();
     ASSERT_STR(expectedResultStringValue , actualResultStringValue);
 
@@ -568,7 +568,6 @@ TEST(JavaLang, FloatLongValue) {
     expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_NOT_EQUAL(expectedResultLongValue , actualResultLongValue);
-
 }
 
 TEST(JavaLang, FloatDoubleValue) {
@@ -616,7 +615,7 @@ TEST(JavaLang, FloatToString) {
 
     // Test NaN_NUMBER
     variableTestToString = NaN_NUMBER;
-    expectedResultToString = (string) "-nan"; // "nan" in MacOS
+    expectedResultToString = (string) "-nan";  // "nan" in MacOS
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString , actualResultToString);
 
@@ -1141,7 +1140,6 @@ TEST(JavaLang, FloatIntBitsToBinary32StringType) {
 }
 
 TEST(JavaLang , FloatIsNaN) {
-
     ASSERT_TRUE(Float::isNaN(NaN_NUMBER));
     ASSERT_FALSE(Float::isNaN(NEGATIVE_INFINITY));
     ASSERT_FALSE(Float::isNaN(13.02));
@@ -1306,8 +1304,8 @@ TEST(JavaLang, FloatCompare) {
     ASSERT_EQUAL(Float::compare(-0.0f, POSITIVE_INFINITY), -1);
 //    ASSERT_EQUAL(Float::compare(-0.0f, MAX_VALUE), -1);
     ASSERT_EQUAL(Float::compare(-0.0f, 1.2), -1);
-    ASSERT_EQUAL(Float::compare(-0.0f, 0.0), 0); // error in OSX
-    ASSERT_EQUAL(Float::compare(-0.0f, -0.0f), 0);  // error in OSX
+    ASSERT_EQUAL(Float::compare(-0.0f, 0.0), 0);  // error in OSX
+    ASSERT_EQUAL(Float::compare(-0.0f, -0.0f), 0);   // error in OSX
     ASSERT_EQUAL(Float::compare(-0.0f, -1.2f), +1);
     ASSERT_EQUAL(Float::compare(-0.0f, MIN_VALUE), -1);
     ASSERT_EQUAL(Float::compare(-0.0f, NEGATIVE_INFINITY), 1);
@@ -1331,7 +1329,7 @@ TEST(JavaLang, FloatEquals) {
     Float FLOAT_NaN = NaN_NUMBER;
     Float FLOAT_POSITIVE_INFINITY = POSITIVE_INFINITY;
     Float FLOAT_NEGATIVE_INFINITY = NEGATIVE_INFINITY;
-    Float FLOAT_MAX_VALUE= MAX_VALUE;
+    Float FLOAT_MAX_VALUE = MAX_VALUE;
     Float FLOAT_MIN_VALUE = MIN_VALUE;
 
     // Test NaN_NUMBER
@@ -1832,7 +1830,7 @@ TEST(JavaLang, FloatCompareTo) {
     ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0); // error in OSX
+    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0);  // error in OSX
     ASSERT_EQUAL(variableCompareTo.compareTo(-0.0f), 0);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2f), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE), -1);
