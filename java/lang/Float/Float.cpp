@@ -589,3 +589,7 @@ boolean Float::equals(const Float &object) const {
     return isEqual;
     //return (isFloat && isEqual);
 }
+
+int Float::hashCode(float floatInput) {
+    return  floatToIntBits(floatInput);
+}

@@ -457,27 +457,7 @@ namespace Java {
              *          {Float} is numerically greater than
              *          {anotherFloat}.
              */
-			int compareTo(Float anotherFloat);
-
-			/**
-             * Returns a representation of the specified floating-point value
-             * according to the IEEE 754 floating-point "float
-             * format" bit layout.
-             *
-             * @param   value   a {float} precision floating-point number.
-             * @return the bits that represent the floating-point number.
-             */
-			static long floatToLongBits(float valueFloat);
-
-			/**
-             * Returns a representation of the specified floating-point value
-             * according to the IEEE 754 floating-point "float
-             * format" bit layout, preserving Not-a-Number (NaN) values.
-             *
-             * @param   value   a {float} precision floating-point number.
-             * @return the bits that represent the floating-point number.
-             */
-			static long floatToRawLongBits(float floatInput);
+			int compareTo(Float anotherFloat);					
 
 			/**
              * Compares this object against the specified object.
@@ -503,7 +483,7 @@ namespace Java {
              * @param value the value to hash
              * @return a hash code value for a {float} value.
              */
-			static long hashCode(float floatInput);
+			static int hashCode(float floatInput);
 
 			/**
              * Returns {true} if the argument is a finite floating-point
@@ -516,8 +496,7 @@ namespace Java {
              */
 			static boolean isFinite(float d);
 
-			/**
-             * Returns {true} if the specified number is infinitely
+			/**             * Returns {true} if the specified number is infinitely
              * large in magnitude, {false} otherwise.
              *
              * @param   v   the value to be tested.
@@ -564,7 +543,7 @@ namespace Java {
              * @return  the {float} floating-point value with the same
              *          bit pattern.
              */
-			static float longBitsToFloat(long bits);
+			static float intBitsToFloat(long bits);
 
 			/**
              * Returns the smaller of two {float} values
@@ -599,37 +578,6 @@ namespace Java {
 			static string floatToBinary32StringType(float floatInput );
 
 			/**
-            * Convert float to binary 64 bit
-            * (Float-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param float
-            * @return string binary 64 bit of input
-            */
-			static string floatToBinary64StringType(float floatInput );
-
-			/**
-            * Convert binary64StringType To Float
-            * (Float-precision floating-point format
-            * In IEEE 754-2008)
-            * To Float
-             *
-            * @param  string
-            * @return float
-            */
-			static float binary64StringTypeToFloat(string Binary64StringTypeInput);
-
-			/**
-            * Convert longBits To Binary64StringType
-            * (Float-precision floating-point format
-            * In IEEE 754-2008)
-             *
-            * @param  long
-            * @return string
-            */
-			static string longBitsToBinary64StringType(long longBitsInput);
-
-			/**
             * Convert from string to float
             *
             * @param      s   the string to be parsed.
@@ -648,12 +596,49 @@ namespace Java {
             */
 			static Float valueOf(float inputFloat);
 
+            /**
+            * Convert binary32StringType To Float
+            * (Float-precision floating-point format
+            * In IEEE 754-2008)
+            * To Float
+             *
+            * @param  string binary32StringTypeInput
+            * @return float
+            */
             static float binary32StringTypeToFloat(string binary32StringTypeInput);
 
+            /**
+             * Returns a representation of the specified floating-point value
+             * according to the IEEE 754 floating-point "float
+             * format" bit layout, preserving Not-a-Number (NaN) values.
+             *
+             * @param   float floatInput
+             *          value   a {float} precision floating-point number.
+             * @return  int
+             *          the bits that represent the floating-point number.
+             */
             static int floatToRawIntBits(float floatInput);
 
+            /**
+             * Returns a representation of the specified floating-point value
+             * according to the IEEE 754 floating-point "float
+             * format" bit layout, preserving Not-a-Number (NaN) values.
+             *
+             * @param   float floatInput
+             *          value   a {float} precision floating-point number.
+             * @return  int
+             *          the bits that represent the floating-point number.
+             */
             static int floatToIntBits(float inputFloat);
 
+            /**
+            * Convert intBits To Binary64StringType
+            * (Float-precision floating-point format
+            * In IEEE 754-2008)
+             *
+            * @param  int intBitsInput
+            * @return string
+            */
             static string intBitsToBinary32StringType(int intBitsInput);
         };
 	}
