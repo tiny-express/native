@@ -35,11 +35,6 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
-/*#include "../Short/Short.hpp"
-#include "../Integer/Integer.hpp"
-#include "../Long/Long.hpp"
-#include "../Float/Float.hpp"
-#include "../Double/Double.hpp"*/
 
 using namespace Java::IO;
 
@@ -48,11 +43,6 @@ namespace Java {
 
         class StringBuilder;
         class StringBuffer;
-//        class Short;
-//        class Integer;
-//        class Long;
-//        class Float;
-//        class Double;
 
 		class String :
 				public Object,
@@ -462,7 +452,7 @@ namespace Java {
              * @param index
              * @return String
              */
-			String getStringFromIndex(int index);
+			String getStringFromIndex(int index) const;
 
             /**
              * Returns a hash code for this string.
@@ -662,6 +652,8 @@ namespace Java {
              *
              * @param regex
              * @param replacement
+             * @throw java.util.regex.PatternSyntaxException
+             * if the regular expression's syntax is invalid
              * @return The resulting String
              */
 			String replaceAll(String regex, String replacement) const;
@@ -743,7 +735,7 @@ namespace Java {
              * or larger than the length of this String object.
              * @return the specified substring as a String.
              */
-            String subString(int beginIndex);
+            String subString(int beginIndex) const;
 
             /**
              * Returns a string that is a substring of this string.
@@ -757,7 +749,7 @@ namespace Java {
              * or beginIndex is larger than endIndex.
              * @return the specified substring as a String.
              */
-            String subString(int beginIndex, int endIndex);
+            String subString(int beginIndex, int endIndex) const;
 
             /**
              * Converts this string to a new character array.

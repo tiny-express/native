@@ -507,7 +507,7 @@ TEST(JavaLang, StringJoin) {
 */
 
 /** This test case is made based on pattern_test.c */
-TEST (JavaLang, StringMatches) {
+//TEST (JavaLang, StringMatches) {
 //	// Init params for test string matches
 //	String emailPattern = EMAIL_PATTERN;
 //	String phoneNumberPattern = PHONE_PATTERN;
@@ -529,16 +529,24 @@ TEST (JavaLang, StringMatches) {
 //	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
 //}
 //
-//TEST (JavaLang, StringReplace) {
-//	String textPlus = "Hello Hello Hello ";
-//
-//	String result = textPlus.replace('e', 'i');
-//	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
+TEST (JavaLang, StringReplace) {
+	String textPlus = "Hello Hello Hello ";
 
-//	String String_string1 = "Hello";
-//	String String_string2 = "Phuoc";
-//	result = textPlus.replaceAll(String_string1, String_string2);
-//	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+	String result = textPlus.replace('e', 'i');
+	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
+
+	String target = "llo";
+	String replacement = "llu";
+	result = textPlus.replace(target, replacement);
+	ASSERT_STR("Hellu Hellu Hellu ", result.toString());
+
+	target = "Hello";
+	replacement = "Phuoc";
+	result = textPlus.replaceAll(target, replacement);
+	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+
+    result = textPlus.replaceFirst(target, replacement);
+    ASSERT_STR("Phuoc Hello Hello ", result.toString());
 }
 
 TEST (JavaLang, StringSplit) {

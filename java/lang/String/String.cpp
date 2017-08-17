@@ -187,7 +187,7 @@ Array<byte> String::getBytes() const {
 	return bytes;
 }
 
-String String::getStringFromIndex(int index) {
+String String::getStringFromIndex(int index) const {
 	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
@@ -358,8 +358,8 @@ String String::replace(char oldChar, char newChar) const {
 }
 
 String String::replaceAll(String regex, String replacement) const {
-	// TODO fix this later
-	return "";
+	// TODO fix this later, temporary use replace, need Pattern
+	return replace(regex, replacement);
 }
 
 Array<String> String::split(String regex) const {
@@ -506,11 +506,11 @@ String String::valueOf(double doubleValue) {
 	return result;
 }
 
-String String::subString(int beginIndex) {
+String String::subString(int beginIndex) const {
    return this->subString(beginIndex, this->size);
 }
 
-String String::subString(int beginIndex, int endIndex) {
+String String::subString(int beginIndex, int endIndex) const {
 	string holder = string_from_to(this->original, beginIndex, endIndex - 1);
 	String result = holder;
 	free(holder);
@@ -826,6 +826,25 @@ void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, 
             destination[index] = destination[index];
         }
 	}
+}
+
+String String::replace(CharSequence &target, CharSequence &replacement) const {
+    string oldString = strdup(target.toString());
+    string newString = strdup(replacement.toString());
+    string pointerHolder = string_replace(this->original, oldString, newString);
+    String result = pointerHolder;
+    free(pointerHolder);
+    free(oldString);
+    free(newString);
+    return result;
+}
+
+String String::replaceFirst(String regex, String replacement) const {
+    // TODO fix this later, temporary, need Pattern
+    String stringWithFirstRegex = this->subString(0, this->indexOf(regex) + regex.length());
+    String remainString = this->getStringFromIndex(this->indexOf(regex) + regex.length());
+    stringWithFirstRegex = stringWithFirstRegex.replace(regex, replacement);
+    return stringWithFirstRegex + remainString;
 }
 
 
