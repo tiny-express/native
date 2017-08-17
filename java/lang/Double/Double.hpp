@@ -42,13 +42,13 @@
  * Bit mask to isolate the exponent field of a
  * double.
  */
-static long	EXP_BIT_MASK	= 0x7FF0000000000000L;
+static long EXP_BIT_MASK = 0x7FF0000000000000L;
 
 /**
  * Bit mask to isolate the significand field of a
  * double
  */
-static long	SIGNIF_BIT_MASK	= 0x000FFFFFFFFFFFFFL;
+static long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
 
 /**
  * A constant holding the positive infinity of type
@@ -85,7 +85,7 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min();  // 2.22507
  * have.  It is equal to the value returned by
  * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
  */
-static int	MIN_EXPONENT_DOUBLE	= -1022;
+static int MIN_EXPONENT_DOUBLE = -1022;
 
 /**
  * Init Double::MAX_VALUE
@@ -107,6 +107,7 @@ static constexpr double initDoubleMinValue() noexcept {
 static constexpr double initMinNormalDouble() noexcept {
     return pow(2, -1022);
 }
+
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
@@ -284,8 +285,7 @@ namespace Java {
              * @return boolean
              */
             boolean operator||(const Double &target) const;
-
-
+				
             /**
              * Simple assignment operator,
              * Assigns values from right side operands

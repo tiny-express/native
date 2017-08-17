@@ -32,158 +32,158 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace  Util {
-        class UUID : public Object
+		namespace Util {
+				class UUID : public Object
 //                , public virtual Serializable
 //                , public virtual Comparable<UUID>
-        {
-
-        private:
-            long mostSigBits;
-            long leastSigBits;
-            long timestamp;
-
-        private:
-            /**
-             * Private constructor which uses a byte array to construct the new UUID.
-             *
-             * @param Array<byte> data
-             * @return UUID
-             */
-            UUID(Array<byte> data);
-
-            /**
-             * Returns val represented by the specified number of hex digits
-             *
-             * @param long value
-             * @param int digit
-             * @return String
-             */
-            static String digits(long value, int digit);
-
-        public:
-            /**
-             * Default constructor
-             *
-             * @return UUID
-             */
-            UUID();
-
-            /**
-             * Create new instance this object through most && least significant bits
-             *
-             * @param mostSigBits
-             * @param leastSigBits
-             * @return UUID
-             */
-            UUID(long mostSigBits, long leastSigBits);
-
-            /**
-             * Default destructor
-             */
-            ~UUID();
-
-        public:
-
-            /**
-             * The clock sequence value associated with this UUID.
-             *
-             * @return int - The clock sequence of this UUID
-             */
-            int clockSequence();
-            /**
-             * Compares this UUID with the specified UUID.
-             *
-             * @param UUID target
-             * @return int
-             *  -1 : if this object less than target either mostSigBits or leastSigBits
-             *  0 : if this object equal both of mostSigBits and leastSigBits
-             *  1 : if this object more than target either mostSigBits or leastSigBits
-             */
-            int	compareTo(UUID target);
-
-            /**
-             * Compares this object to the specified object.
-             *
-             * @param UUID target
-             * @return boolean
-             * true : if the target are same mostSigBits and leastSigBits
-             * false : otherwise
-             */
-            boolean	equals(UUID target);
-
-            /**
-             * Returns the least significant 64 bits of this UUID's 128 bit value.
-             *
-             * @return long
-             */
-            long getLeastSignificantBits();
-
-            /**
-             * Returns the most significant 64 bits of this UUID's 128 bit value.
-             *
-             * @return long
-             */
-            long getMostSignificantBits();
-
-            /**
-             * Returns a hash code for this UUID.
-             *
-             * @return int
-             */
-            int	hashCode();
-
-            /**
-             * The node value associated with this UUID.
-             *
-             * @return long
-             */
-            long node();
-
-            /**
-             * The timestamp value associated with this UUID.
-             *
-             * @return long
-             */
-            long getTimestamp();
-
-            /**
-             * Returns a String object representing this UUID.
-             *
-             * @return String
-             */
-            String toString();
-
-            /**
-             * The variant number associated with this UUID.
-             *
-             * @return int
-             */
-            int variant();
-
-            /**
-             * The version number associated with this UUID.
-             *
-             * @return int
-             */
-            int version();
-
-            /**
-             * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
-             *
-             * @return UUID
-             */
-            static UUID	randomUUID();
-
-            /**
-             * Creates a UUID from the string standard representation as described in the toString() method.
-             *
-             * @param String name
-             * @return UUID
-             */
-            static UUID	fromString(String name);
-        };
-    }
+				{
+				
+				private:
+						long mostSigBits;
+						long leastSigBits;
+						long timestamp;
+				
+				private:
+						/**
+						 * Private constructor which uses a byte array to construct the new UUID.
+						 *
+						 * @param Array<byte> data
+						 * @return UUID
+						 */
+						UUID(Array<byte> data);
+						
+						/**
+						 * Returns val represented by the specified number of hex digits
+						 *
+						 * @param long value
+						 * @param int digit
+						 * @return String
+						 */
+						static String digits(long value, int digit);
+				
+				public:
+						/**
+						 * Default constructor
+						 *
+						 * @return UUID
+						 */
+						UUID();
+						
+						/**
+						 * Create new instance this object through most && least significant bits
+						 *
+						 * @param mostSigBits
+						 * @param leastSigBits
+						 * @return UUID
+						 */
+						UUID(long mostSigBits, long leastSigBits);
+						
+						/**
+						 * Default destructor
+						 */
+						~UUID();
+				
+				public:
+						
+						/**
+						 * The clock sequence value associated with this UUID.
+						 *
+						 * @return int - The clock sequence of this UUID
+						 */
+						int clockSequence();
+						/**
+						 * Compares this UUID with the specified UUID.
+						 *
+						 * @param UUID target
+						 * @return int
+						 *  -1 : if this object less than target either mostSigBits or leastSigBits
+						 *  0 : if this object equal both of mostSigBits and leastSigBits
+						 *  1 : if this object more than target either mostSigBits or leastSigBits
+						 */
+						int compareTo(UUID target);
+						
+						/**
+						 * Compares this object to the specified object.
+						 *
+						 * @param UUID target
+						 * @return boolean
+						 * true : if the target are same mostSigBits and leastSigBits
+						 * false : otherwise
+						 */
+						boolean equals(UUID target);
+						
+						/**
+						 * Returns the least significant 64 bits of this UUID's 128 bit value.
+						 *
+						 * @return long
+						 */
+						long getLeastSignificantBits();
+						
+						/**
+						 * Returns the most significant 64 bits of this UUID's 128 bit value.
+						 *
+						 * @return long
+						 */
+						long getMostSignificantBits();
+						
+						/**
+						 * Returns a hash code for this UUID.
+						 *
+						 * @return int
+						 */
+						int hashCode();
+						
+						/**
+						 * The node value associated with this UUID.
+						 *
+						 * @return long
+						 */
+						long node();
+						
+						/**
+						 * The timestamp value associated with this UUID.
+						 *
+						 * @return long
+						 */
+						long getTimestamp();
+						
+						/**
+						 * Returns a String object representing this UUID.
+						 *
+						 * @return String
+						 */
+						String toString();
+						
+						/**
+						 * The variant number associated with this UUID.
+						 *
+						 * @return int
+						 */
+						int variant();
+						
+						/**
+						 * The version number associated with this UUID.
+						 *
+						 * @return int
+						 */
+						int version();
+						
+						/**
+						 * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
+						 *
+						 * @return UUID
+						 */
+						static UUID randomUUID();
+						
+						/**
+						 * Creates a UUID from the string standard representation as described in the toString() method.
+						 *
+						 * @param String name
+						 * @return UUID
+						 */
+						static UUID fromString(String name);
+				};
+		}
 }
 
 

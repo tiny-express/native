@@ -62,6 +62,4 @@ double math_ldexp(double value, int scaleFactor);
 float math_ldexpf(float value, int scaleFactor);
 
 
-
-
 #endif

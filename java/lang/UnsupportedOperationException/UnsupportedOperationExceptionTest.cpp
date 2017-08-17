@@ -33,29 +33,29 @@ extern "C" {
 using namespace Java::Lang;
 
 TEST (JavaLang, UnsupportedOperationExceptionConstructor) {
-    // Constructs a new UnsupportedOperationException with null as its detail message.
-    UnsupportedOperationException unsupportedOperationExceptionWithNullMessage;
-    ASSERT_STR("", unsupportedOperationExceptionWithNullMessage.getMessage().toString());
-
-    // Constructs a new UnsupportedOperationException with the specified detail message.
-    UnsupportedOperationException unsupportedOperationExceptionWithMessage = UnsupportedOperationException("UnsupportedOperationException with the specified message");
-    ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessage.getMessage().toString());
-
-    // Constructs a new UnsupportedOperationException with the specified detail message and cause.
-    UnsupportedOperationException unsupportedOperationExceptionWithMessageAndCause = UnsupportedOperationException("UnsupportedOperationException with the specified message and cause", &unsupportedOperationExceptionWithMessage);
-    ASSERT_STR("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessageAndCause.getCause()->getMessage().toString());
-
-    // Constructs a new UnsupportedOperationException with the specified cause.
-    UnsupportedOperationException unsupportedOperationExceptionWithCause = UnsupportedOperationException(&unsupportedOperationExceptionWithMessageAndCause);
-    ASSERT_STR("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	// Constructs a new UnsupportedOperationException with null as its detail message.
+	UnsupportedOperationException unsupportedOperationExceptionWithNullMessage;
+	ASSERT_STR("", unsupportedOperationExceptionWithNullMessage.getMessage().toString());
+	
+	// Constructs a new UnsupportedOperationException with the specified detail message.
+	UnsupportedOperationException unsupportedOperationExceptionWithMessage = UnsupportedOperationException("UnsupportedOperationException with the specified message");
+	ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessage.getMessage().toString());
+	
+	// Constructs a new UnsupportedOperationException with the specified detail message and cause.
+	UnsupportedOperationException unsupportedOperationExceptionWithMessageAndCause = UnsupportedOperationException("UnsupportedOperationException with the specified message and cause", &unsupportedOperationExceptionWithMessage);
+	ASSERT_STR("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithMessageAndCause.getMessage().toString());
+	ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	
+	// Constructs a new UnsupportedOperationException with the specified cause.
+	UnsupportedOperationException unsupportedOperationExceptionWithCause = UnsupportedOperationException(&unsupportedOperationExceptionWithMessageAndCause);
+	ASSERT_STR("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithCause.getCause()->getMessage().toString());
+	ASSERT_STR("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, UnsupportedOperationExceptionTryCatch) {
-    try {
-        throw UnsupportedOperationException("Throw UnsupportedOperationException");
-    } catch (Exception e) {
-        ASSERT_STR("Throw UnsupportedOperationException", e.getMessage().toString());
-    }
+	try {
+		throw UnsupportedOperationException("Throw UnsupportedOperationException");
+	} catch (Exception e) {
+		ASSERT_STR("Throw UnsupportedOperationException", e.getMessage().toString());
+	}
 }

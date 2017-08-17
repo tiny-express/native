@@ -40,16 +40,16 @@ typedef void (*SetupFunc)(void *);
 typedef void (*TearDownFunc)(void *);
 
 struct ctest {
-	const char *ssname;  // suite name
-	const char *ttname;  // test name
-	void (*run)();
-	int skip;
-	
-	void *data;
-	SetupFunc setup;
-	TearDownFunc teardown;
-	
-	unsigned int magic;
+		const char *ssname;  // suite name
+		const char *ttname;  // test name
+		void (*run)();
+		int skip;
+		
+		void *data;
+		SetupFunc setup;
+		TearDownFunc teardown;
+		
+		unsigned int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run

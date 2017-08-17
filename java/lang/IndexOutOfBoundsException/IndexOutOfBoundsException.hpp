@@ -31,15 +31,15 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Lang {
-        class IndexOutOfBoundsException : public RuntimeException {
-        public:
-            IndexOutOfBoundsException();
-            IndexOutOfBoundsException(String message);
-            IndexOutOfBoundsException(Throwable *cause);
-            IndexOutOfBoundsException(String message, Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class IndexOutOfBoundsException : public RuntimeException {
+				public:
+						IndexOutOfBoundsException();
+						IndexOutOfBoundsException(String message);
+						IndexOutOfBoundsException(Throwable *cause);
+						IndexOutOfBoundsException(String message, Throwable *cause);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_INDEX_OUT_OF_BOUNDS_EXCEPTION_HPP

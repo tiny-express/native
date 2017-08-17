@@ -31,13 +31,13 @@
 #include "../../Lang.hpp"
 
 namespace Java {
-    namespace Lang {
-        class NegativeArraySizeException : public RuntimeException {
-        public:
-            NegativeArraySizeException();
-            NegativeArraySizeException(String message);
-        };
-    }
+		namespace Lang {
+				class NegativeArraySizeException : public RuntimeException {
+				public:
+						NegativeArraySizeException();
+						NegativeArraySizeException(String message);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_NEGATIVEARRAYSIZEEXCEPTION_HPP

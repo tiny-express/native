@@ -22,6 +22,8 @@ parsers:
       loop: yes
       method: no
       macro: no
+ignore:
+  - "kernel/test.h"
 
 comment:
   layout: "reach, diff, flags, files, footer"

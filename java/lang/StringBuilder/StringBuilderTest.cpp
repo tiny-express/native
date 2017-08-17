@@ -72,13 +72,13 @@ TEST(JavaLang, StringBuilderConstructor) {
     delete charSequenceString;
 }
 
-TEST(JavaLang, StringBuilderDestructor) {
-    // Destructor will be called automatically.
-    StringBuilder stringBuilder;
-
-    // Destructor will be called by delete operator.
-    StringBuilder *pStringBuilder = new StringBuilder();
-    delete pStringBuilder;
+TEST (JavaLang, StringBuilderDestructor) {
+	// Destructor will be called automatically.
+	StringBuilder stringBuilder;
+	
+	// Destructor will be called by delete operator.
+	StringBuilder *pStringBuilder = new StringBuilder();
+	delete pStringBuilder;
 }
 
 TEST(JavaLang, StringBuilderAppend) {
@@ -178,13 +178,13 @@ TEST(JavaLang, StringBuilderAppend) {
     delete charSequenceString;
 }
 
-TEST(JavaLang, StringBuilderAppendCodePoint) {
-    // TODO
+TEST (JavaLang, StringBuilderAppendCodePoint) {
+	// TODO
 }
 
-TEST(JavaLang, StringBuilderCapacity) {
-    StringBuilder stringBuilder(100);
-    ASSERT_EQUAL(100, stringBuilder.capacity());
+TEST (JavaLang, StringBuilderCapacity) {
+	StringBuilder stringBuilder(100);
+	ASSERT_EQUAL(100, stringBuilder.capacity());
 }
 
 TEST(JavaLang, StringBuilderCharAt) {
@@ -200,16 +200,16 @@ TEST(JavaLang, StringBuilderCharAt) {
     }
 }
 
-TEST(JavaLang, StringBuilderCodePointAt) {
-    // TODO
+TEST (JavaLang, StringBuilderCodePointAt) {
+	// TODO
 }
 
-TEST(JavaLang, StringBuilderCodePointBefore) {
-    // TODO
+TEST (JavaLang, StringBuilderCodePointBefore) {
+	// TODO
 }
 
-TEST(JavaLang, StringBuilderCodePointCount) {
-    // TODO
+TEST (JavaLang, StringBuilderCodePointCount) {
+	// TODO
 }
 
 TEST(JavaLang, StringBuilderDeleteRange) {
@@ -253,29 +253,29 @@ TEST(JavaLang, StringBuilderDeleteCharAt) {
     ASSERT_STR("BXYZ", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderEnsureCapacity) {
-    // Default capacity.
-    StringBuilder stringBuilder;
-    ASSERT_EQUAL(0, stringBuilder.length());
-    ASSERT_EQUAL(16, stringBuilder.capacity());
-    // New capacity is not positive.
-    stringBuilder.ensureCapacity(-1);
-    ASSERT_EQUAL(16, stringBuilder.capacity());
-    stringBuilder.ensureCapacity(0);
-    ASSERT_EQUAL(16, stringBuilder.capacity());
-    // New capacity less than current capacity.
-    stringBuilder.ensureCapacity(10);
-    ASSERT_EQUAL(16, stringBuilder.capacity());
-    // New capacity larger than current capacity but less than (2 * current + 2).
-    stringBuilder.ensureCapacity(17);
-    ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
-    // New capacity larget than current capacity but larger than (2 * current + 2).
-    stringBuilder.ensureCapacity(100);
-    ASSERT_EQUAL(100, stringBuilder.capacity());
+TEST (JavaLang, StringBuilderEnsureCapacity) {
+	// Default capacity.
+	StringBuilder stringBuilder;
+	ASSERT_EQUAL(0, stringBuilder.length());
+	ASSERT_EQUAL(16, stringBuilder.capacity());
+	// New capacity is not positive.
+	stringBuilder.ensureCapacity(-1);
+	ASSERT_EQUAL(16, stringBuilder.capacity());
+	stringBuilder.ensureCapacity(0);
+	ASSERT_EQUAL(16, stringBuilder.capacity());
+	// New capacity less than current capacity.
+	stringBuilder.ensureCapacity(10);
+	ASSERT_EQUAL(16, stringBuilder.capacity());
+	// New capacity larger than current capacity but less than (2 * current + 2).
+	stringBuilder.ensureCapacity(17);
+	ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
+	// New capacity larget than current capacity but larger than (2 * current + 2).
+	stringBuilder.ensureCapacity(100);
+	ASSERT_EQUAL(100, stringBuilder.capacity());
 }
 
-TEST(JavaLang, StringBuilderGetChars) {
-    // TODO
+TEST (JavaLang, StringBuilderGetChars) {
+	// TODO
 }
 
 TEST(JavaLang, StringBuilderIndexOf) {
@@ -547,10 +547,10 @@ TEST(JavaLang, StringBuilderLastIndexOf) {
     ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
 }
 
-TEST(JavaLang, StringBuilderLength) {
-    String aString("Hello! I'm a String");
-    StringBuilder stringBuilder(aString);
-    ASSERT_EQUAL(aString.length(), stringBuilder.length());
+TEST (JavaLang, StringBuilderLength) {
+	String aString("Hello! I'm a String");
+	StringBuilder stringBuilder(aString);
+	ASSERT_EQUAL(aString.length(), stringBuilder.length());
 }
 
 TEST(JavaLang, StringBuilderReplace) {
@@ -613,12 +613,12 @@ TEST(JavaLang, StringBuilderToString) {
     ASSERT_STR(aString.toString(), stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderTrimToSize) {
-    StringBuilder stringBuilder(100);
-    ASSERT_EQUAL(100, stringBuilder.capacity());
-    stringBuilder.trimToSize();
-    ASSERT_EQUAL(0, stringBuilder.capacity());
-    stringBuilder.append((const string)"123");
-    stringBuilder.trimToSize();
-    ASSERT_EQUAL(3, stringBuilder.capacity());
+TEST (JavaLang, StringBuilderTrimToSize) {
+	StringBuilder stringBuilder(100);
+	ASSERT_EQUAL(100, stringBuilder.capacity());
+	stringBuilder.trimToSize();
+	ASSERT_EQUAL(0, stringBuilder.capacity());
+	stringBuilder.append((const string) "123");
+	stringBuilder.trimToSize();
+	ASSERT_EQUAL(3, stringBuilder.capacity());
 }

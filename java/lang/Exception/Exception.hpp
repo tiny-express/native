@@ -32,15 +32,15 @@
 #include "../Throwable/Throwable.hpp"
 
 namespace Java {
-    namespace Lang {
-        class Exception : public Throwable {
-        public:
-            Exception();
-            Exception(String message);
-            Exception(String message, Throwable *cause);
-            Exception(Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class Exception : public Throwable {
+				public:
+						Exception();
+						Exception(String message);
+						Exception(String message, Throwable *cause);
+						Exception(Throwable *cause);
+				};
+		}
 }
 
 #endif  // JAVA_LANG_EXCEPTION_HPP_

@@ -76,7 +76,7 @@ char *url_decode(char *target);
 char *find_param(char *name, char *params);
 char *find_param_from_url(char *name, char *url);
 
-void free_pointer_pointer_char(char** char_array);
+void free_pointer_pointer_char(char **char_array);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

@@ -55,7 +55,7 @@ TEST(JavaUtil, ArrayListConstructor) {
 	ASSERT_EQUAL(4, stringArrayList.size());
 	
 	// Standard declaration
-	Array<String> arrayString = { "hello", "world"};
+	Array<String> arrayString = { "hello", "world" };
 	ArrayList<String> stringArrayListCopy = arrayString;
 	ASSERT_EQUAL(2, stringArrayListCopy.size());
 }

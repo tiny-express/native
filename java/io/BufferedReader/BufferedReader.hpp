@@ -33,11 +33,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace IO {
-		class BufferedWriter : public virtual Reader {
-		
-		};
-	}
+		namespace IO {
+				class BufferedWriter : public virtual Reader {
+				
+				};
+		}
 }
 
 #endif  // JAVA_IO_BUFFERED_READER_HPP_

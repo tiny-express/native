@@ -31,13 +31,13 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-    namespace Lang {
-        class ArithmeticException : public RuntimeException {
-        public:
-            ArithmeticException();
-            ArithmeticException(String message);
-        };
-    }
+		namespace Lang {
+				class ArithmeticException : public RuntimeException {
+				public:
+						ArithmeticException();
+						ArithmeticException(String message);
+				};
+		}
 }
 
 
