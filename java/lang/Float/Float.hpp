@@ -474,7 +474,7 @@ namespace Java {
              *
              * @return  a {hash code} value for this object.
              */
-			long hashCode();
+			int hashCode();
 
 			/**
              * Returns a hash code for a {float} value; compatible with
