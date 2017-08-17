@@ -454,7 +454,7 @@ TEST(JavaLang, FloatIntValue) {
     int expectedResultIntValue;
     int actualResultIntValue;
 
-    // Test POSITIVE_INFINITY_DOUBLE
+    // Test POSITIVE_INFINITY
     variableTestIntValue = POSITIVE_INFINITY;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
@@ -515,27 +515,27 @@ TEST(JavaLang, FloatLongValue) {
     long expectedResultLongValue;
     long actualResultLongValue;
 
-    // Test POSITIVE_INFINITY_DOUBLE
+    // Test POSITIVE_INFINITY
     variableTestLongValue = POSITIVE_INFINITY;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = -9223372036854775808l;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NEGATIVE_INFINITY
     variableTestLongValue = NEGATIVE_INFINITY;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = -9223372036854775808l;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NaN_NUMBER
     variableTestLongValue = NaN_NUMBER;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = -9223372036854775808l;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test MAX_VALUE
     variableTestLongValue = MAX_VALUE;
-    expectedResultLongValue = -9223372036854775808;
+    expectedResultLongValue = -9223372036854775808l;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
@@ -885,7 +885,7 @@ TEST(JavaLang, FloatToRawIntBits) {
     actualResult = Float::floatToRawIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    // Input POSITIVE_INFINITY_DOUBLE
+    // Input POSITIVE_INFINITY
     input = POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::floatToRawIntBits(input);
@@ -970,7 +970,7 @@ TEST(JavaLang, FloatToIntBits) {
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-    // Input POSITIVE_INFINITY_DOUBLE
+    // Input POSITIVE_INFINITY
     input = POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::floatToIntBits(input);
@@ -1849,4 +1849,66 @@ TEST(JavaLang, FloatCompareTo) {
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2f), 0);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY), +1);
+}
+
+TEST(JavaLang, FloatByteValue) {
+    // Create variable to test
+    Float variableTestByteValue;
+    byte expectedResultByteValue;
+    byte actualResultByteValue;
+
+    // Test POSITIVE_INFINITY
+    variableTestByteValue = POSITIVE_INFINITY;
+    expectedResultByteValue = 0;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test NEGATIVE_INFINITY
+    variableTestByteValue = NEGATIVE_INFINITY;
+    expectedResultByteValue = 0;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    //// Error in OSX
+//    // Test NaN_NUMBER
+//    variableTestByteValue = NaN_NUMBER;
+//    expectedResultByteValue = 45;  // 110 in MacOS
+//    actualResultByteValue = variableTestByteValue.byteValue();
+//    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test MAX_VALUE
+    variableTestByteValue = MAX_VALUE;
+    expectedResultByteValue = 0;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test MIN_NORMAL
+    variableTestByteValue = MIN_NORMAL;
+    expectedResultByteValue = 0;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test MIN_VALUE
+    variableTestByteValue = MIN_VALUE;
+    expectedResultByteValue = 0;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test valid case
+    variableTestByteValue = 13.02;
+    expectedResultByteValue = 13;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test valid case
+    variableTestByteValue = 20.31;
+    expectedResultByteValue = 20;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+
+    // Test invalid case
+    variableTestByteValue = 13.02;
+    expectedResultByteValue = 5;
+    actualResultByteValue = variableTestByteValue.byteValue();
+    ASSERT_NOT_EQUAL(expectedResultByteValue , actualResultByteValue);
 }

@@ -62,7 +62,7 @@ static float MIN_NORMAL = std::numeric_limits<float>::denorm_min(); // 1.401e-45
 static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.17549e-38
 
 /**
- * Minimum exponent a normalized double number may have
+ * Minimum exponent a normalized float number may have
  */
 static int  MIN_EXPONENT      = -126;
 
@@ -176,30 +176,9 @@ namespace Java {
 			static constexpr int BYTES = SIZE / 8;
 
 		public:
-			/**
-       * Float initialization
-       *
-       * @param original
-       */
 			Float();
-
-			/**
-       * Float initialization
-       *
-       * @param original
-       */
 			Float(float original);
-
-			/**
-       * Float initialization
-       *
-       * @param original
-       */
 			Float(const Float &target);
-
-			/**
-       * Float Destructor
-       */
 			~Float();
 
 		public:
@@ -403,10 +382,10 @@ namespace Java {
 			string toString() const;
 
 			/**
-             * Returns a string representation of the {double}
+             * Returns a string representation of the {float}
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param   d   the {double} to be converted.
+             * @param   d   the {float} to be converted.
              * @return a string representation of the argument.
              */
 			static String toString(float d);

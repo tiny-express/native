@@ -360,10 +360,10 @@ double Double::min(double doubleA, double doubleB) {
 
 string Double::doubleToBinary32StringType(double doubleInput)
 {
-    string integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
-    string fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
-    string doubleInputNormalizeForm = (string) malloc (280 * sizeof(char));
-    string resultDoubleToBinary32StringType = (string) malloc (33 * sizeof(char));
+    auto integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    auto fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    auto doubleInputNormalizeForm = (string) malloc (280 * sizeof(char));
+    auto resultDoubleToBinary32StringType = (string) malloc (33 * sizeof(char));
 
     int powerExponentBase2 = 0;
     int integerPartDoubleInput;
@@ -423,7 +423,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
         goto outPut;
     }
 
-    if( isNaN(doubleInput) == 1 ){
+    if( isNaN(doubleInput) ){
     strcpy (resultDoubleToBinary32StringType,     "01111111111111111111111111111111");
 
     goto outPut;
@@ -469,7 +469,7 @@ string Double::doubleToBinary32StringType(double doubleInput)
     while ((fractionPartDoubleInput != 0) && (index < 24)) {
         fractionPartDoubleInput = fractionPartDoubleInput * 2;
 
-        int integerPart = (int) floor(fractionPartDoubleInput);
+        auto integerPart = (int) floor(fractionPartDoubleInput);
 
         if (integerPart == 1) {
             fractionPartNormalizeForm[index] = '1';
@@ -573,10 +573,10 @@ string Double::doubleToBinary32StringType(double doubleInput)
 
 string Double::doubleToBinary64StringType(double doubleInput)
 {
-    string integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
-    string fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
-    string doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
-    string resultDoubleToBinary64StringType = (string) malloc (65 * sizeof(char));
+    auto integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
+    auto fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
+    auto doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
+    auto resultDoubleToBinary64StringType = (string) malloc (65 * sizeof(char));
 
     int powerExponentBase2 = 0;
     int integerPartDoubleInput;
@@ -640,7 +640,7 @@ string Double::doubleToBinary64StringType(double doubleInput)
         goto outPut;
     }
 
-    if( isNaN(doubleInput) == 1 ) {
+    if( isNaN(doubleInput) ) {
         strcpy (resultDoubleToBinary64StringType,
                 "0111111111111111111111111111111111111111111111111111111111111111");
 
@@ -861,7 +861,7 @@ double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
 }
 
 string Double::longBitsToBinary64StringType(long longBitsInput) {
-    string resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
+    auto resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
     int index;
     int i;
 

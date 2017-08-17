@@ -169,6 +169,10 @@ double Float::doubleValue() const {
     return static_cast<double> (this->original);
 }
 
+byte Float::byteValue() const {
+    return static_cast<byte> (this->original);
+}
+
 string Float::toString() const {
     return this->originalString;
 }
