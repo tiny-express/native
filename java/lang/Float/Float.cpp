@@ -532,18 +532,18 @@ int Float::floatToIntBits(float inputFloat) {
 }
 
 string Float::intBitsToBinary32StringType(int intBitsInput) {
-    string resultLongBitsToBinary32StringType = (string) malloc(33 * sizeof(char));
+    string resultIntBitsToBinary32StringType = (string) malloc(33 * sizeof(char));
     int index;
     int i;
 
     for (i = 0; i <= 31; i++) {
-        resultLongBitsToBinary32StringType[i] = '0';
+        resultIntBitsToBinary32StringType[i] = '0';
     }
 
-    resultLongBitsToBinary32StringType[32] = '\0';
+    resultIntBitsToBinary32StringType[32] = '\0';
 
     if (intBitsInput < 0) {
-        resultLongBitsToBinary32StringType[0] = '1';
+        resultIntBitsToBinary32StringType[0] = '1';
         intBitsInput = -intBitsInput;
     }
 
@@ -551,23 +551,23 @@ string Float::intBitsToBinary32StringType(int intBitsInput) {
     while ( (intBitsInput != 0) || (index > 1)) {
 
         if ( (intBitsInput & 1) ==1 ) {
-            resultLongBitsToBinary32StringType[index] = '1';
+            resultIntBitsToBinary32StringType[index] = '1';
         }
 
         if ( (intBitsInput & 1) == 0 ) {
-            resultLongBitsToBinary32StringType[index] = '0';
+            resultIntBitsToBinary32StringType[index] = '0';
         }
 
         index--;
         intBitsInput = intBitsInput >> 1;
     }
 
-    return resultLongBitsToBinary32StringType;
+    return resultIntBitsToBinary32StringType;
 }
 
 int Float::compare(float float1, float float2) {
-    long thisBits = Float::floatToIntBits(float1);
-    long anotherBits = Float::floatToIntBits(float2);
+    int thisBits = Float::floatToIntBits(float1);
+    int anotherBits = Float::floatToIntBits(float2);
 
     if (thisBits == anotherBits) {
         return 0;
@@ -579,12 +579,16 @@ int Float::compare(float float1, float float2) {
     return 1;
 }
 
+int Float::compareTo(Float anotherFloat) {
+    return Float::compare(this->original, anotherFloat.original);
+}
+
 // TODO(thoangminh): Wait for instanceof<>
 boolean Float::equals(const Float &object) const {
     boolean isFloat = instanceof<Float>(object);
     auto castObjectToFloat = (Float*)&object;
-    long floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
-    long floatToIntBitsThis = floatToIntBits(this->original);
+    int floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
+    int floatToIntBitsThis = floatToIntBits(this->original);
     boolean isEqual = (floatToIntBitsObject == floatToIntBitsThis);
     return isEqual;
     //return (isFloat && isEqual);
@@ -604,13 +608,13 @@ float Float::min(float floatA, float floatB) {
 
 float Float::intBitsToFloat(int intBitsInput) {
 
-    float resultLongBitsToFloat;
-    string convertLongBitsToBinary32StringType;
+    float resultIntBitsToFloat;
+    string convertIntBitsToBinary32StringType;
 
-    convertLongBitsToBinary32StringType = intBitsToBinary32StringType(intBitsInput);
+    convertIntBitsToBinary32StringType = intBitsToBinary32StringType(intBitsInput);
 
-    resultLongBitsToFloat = binary32StringTypeToFloat(convertLongBitsToBinary32StringType);
+    resultIntBitsToFloat = binary32StringTypeToFloat(convertIntBitsToBinary32StringType);
 
-    free(convertLongBitsToBinary32StringType);
-    return  resultLongBitsToFloat;
+    free(convertIntBitsToBinary32StringType);
+    return  resultIntBitsToFloat;
 }

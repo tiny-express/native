@@ -875,7 +875,7 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -9999);
+    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 1);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
@@ -887,7 +887,7 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo( MAX_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -9999);
+    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 1);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
@@ -899,7 +899,7 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -9999);
+    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 0);
@@ -917,16 +917,16 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
 
     // Test MIN_VALUE_DOUBLE
-//    variableCompareTo = MIN_VALUE_DOUBLE;
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -9999);
+    variableCompareTo = MIN_VALUE_DOUBLE;
+    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
+    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), 0);
+    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test value 1.2
     variableCompareTo = 1.2;
@@ -953,16 +953,16 @@ TEST(JavaLang, DoubleCompareTo) {
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
 
     // Test value -0.0
-//    variableCompareTo = -0.0;
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -9999);
+    variableCompareTo = -0.0;
+    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0); // error in OSX
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
+    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0); // error in OSX
+    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);
+    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test value -1.2
     variableCompareTo = -1.2;
@@ -971,7 +971,7 @@ TEST(JavaLang, DoubleCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
+    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
     ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), 0);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
     ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
