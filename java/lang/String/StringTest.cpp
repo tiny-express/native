@@ -496,15 +496,14 @@ TEST (JavaLang, StringRegionMatch) {
     ASSERT_FALSE(match);
 }
 
-/*
 TEST(JavaLang, StringJoin) {
-    String a = "-";
-    String b = "goc";
-    StringBuffer c = StringBuffer((string) "dog");
-    String result = String::join(a,b,c);
-    ASSERT_STR("goc-dog", result.toString());
+    String delimiter = "->";
+    String duck = "Duck";
+    StringBuffer dog("Dog");
+    StringBuilder pig("Pig");
+    String result = String::join(delimiter, duck, dog, pig);
+    ASSERT_STR("Duck->Dog->Pig", result.toString());
 }
-*/
 
 /** This test case is made based on pattern_test.c */
 //TEST (JavaLang, StringMatches) {

@@ -36,8 +36,8 @@ namespace Java {
     namespace Lang {
         class StringBuilder :
                 public Object,
-                public virtual Serializable//,
-//              public virtual CharSequence
+                public virtual Serializable,
+                public virtual CharSequence
         {
         private:
             string original = NULL;
@@ -754,7 +754,7 @@ namespace Java {
              *
              * @return int
              */
-            int length() const;
+            int length() const override;
 
             /**
              * Returns the index within this sequence that is offset from the given index by codePointOffset code points.

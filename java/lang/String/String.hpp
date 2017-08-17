@@ -514,20 +514,21 @@ namespace Java {
             /**
              * Returns a new String composed of copies of the CharSequence elements joined together
              *
-             * @param charSequence
+             * @param delimiter
              * @param elements
              * @return a new String that is composed of the elements
              */
-           /* template<typename ... Args>
-            static String join(CharSequence &charSequence, Args ... args) {
+            template<typename ... Args>
+            static String join(CharSequence &delimiter, Args &&... elements) {
                 String result;
-                for (const auto arg : {&args...})
-                {
-                    result += arg;
-                    result += charSequence.toString();
+                std::initializer_list<CharSequence *> paramList = {&elements...};
+                for (const CharSequence *arg : paramList) {
+                    result += arg->toString();
+                    result += delimiter.toString();
                 }
-                return result = result.subString(0, result.size - 1);
-            }*/
+                result = result.subString(0, result.size - delimiter.length());
+                return result;
+            }
 
             /**
              * Returns the index within this string of the last occurrence of the specified character
