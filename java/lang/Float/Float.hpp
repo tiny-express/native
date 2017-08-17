@@ -539,11 +539,11 @@ namespace Java {
              * Returns the {float} value corresponding to a given
              * bit representation.
              *
-             * @param   bits   any {long} integer.
+             * @param   bits   any {int} integer.
              * @return  the {float} floating-point value with the same
              *          bit pattern.
              */
-			static float intBitsToFloat(long bits);
+			static float intBitsToFloat(int intBitsInput);
 
 			/**
              * Returns the smaller of two {float} values

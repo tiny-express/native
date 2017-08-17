@@ -1492,7 +1492,7 @@ TEST(JavaLang , FloatHashCode) {
 
     // Input -0.7
     input = -0.7f;
-    expectedResult =  -1060320051;
+    expectedResult = -1060320051;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
@@ -1628,4 +1628,103 @@ TEST(JavaLang , FloatHashCode2) {
     expectedResult = -1151517683;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
+}
+
+TEST(JavaLang, FloatMin) {
+    float variableFloatMin1;
+    float variableFloatMin2;
+    float expectedResultFloatMin;
+    float actualResultFloatMin;
+
+    variableFloatMin1 = 13.02;
+    variableFloatMin2 = 1.302;
+    expectedResultFloatMin = 1.302;
+    actualResultFloatMin = Float::min(variableFloatMin1 , variableFloatMin2);
+    ASSERT_FLOAT_NEAR(expectedResultFloatMin , actualResultFloatMin);
+
+    variableFloatMin1 = 13.02;
+    variableFloatMin2 = 1.302;
+    expectedResultFloatMin = 13.02;
+    actualResultFloatMin = Float::min(variableFloatMin1 , variableFloatMin2);
+    ASSERT_FLOAT_FAR(expectedResultFloatMin , actualResultFloatMin);
+}
+
+TEST(JavaLang, FloatIntBitsToFloat) {
+    // Create variable to test
+    int intBitsInput;
+    float expectedResult;
+    float actualResult;
+
+    // Input 0.0
+    intBitsInput = 0;
+    expectedResult = 0.0;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input POSITIVE_INFINITY
+    intBitsInput = 2139095040;
+    expectedResult = POSITIVE_INFINITY;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input NEGATIVE_INFINITY
+    intBitsInput = -2139095040;
+    expectedResult = NEGATIVE_INFINITY;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+
+    // Input -0.7
+    intBitsInput = -1060320051;
+    expectedResult = -0.7f;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input 12.375
+    intBitsInput = 1095106560;
+    expectedResult = 12.375;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input 1.0
+    intBitsInput = 1065353216;
+    expectedResult = 1.0;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input 0.375
+    intBitsInput = 1052770304;
+    expectedResult = 0.375;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input -2
+    intBitsInput = -1073741824;
+    expectedResult = -2.0f;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input 83
+    intBitsInput = 1118175232;
+    expectedResult = 83.0;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input -2625
+    intBitsInput = -1159991296;
+    expectedResult = -2625.0f;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input 0.5
+    intBitsInput = 1056964608;
+    expectedResult = 0.5;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+
+    // Input -1302.12345678
+    intBitsInput = -1151517683;
+    expectedResult = -1302.12345678f;
+    actualResult = Float::intBitsToFloat(intBitsInput);
+    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 }

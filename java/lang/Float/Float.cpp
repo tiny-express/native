@@ -597,3 +597,20 @@ int Float::hashCode(float floatInput) {
 int Float::hashCode() {
     return Float::hashCode(this->original);
 }
+
+float Float::min(float floatA, float floatB) {
+    return Math::min(floatA, floatB);
+}
+
+float Float::intBitsToFloat(int intBitsInput) {
+
+    float resultLongBitsToFloat;
+    string convertLongBitsToBinary32StringType;
+
+    convertLongBitsToBinary32StringType = intBitsToBinary32StringType(intBitsInput);
+
+    resultLongBitsToFloat = binary32StringTypeToFloat(convertLongBitsToBinary32StringType);
+
+    free(convertLongBitsToBinary32StringType);
+    return  resultLongBitsToFloat;
+}
