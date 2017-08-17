@@ -853,62 +853,6 @@ namespace Java {
              */
 			static String valueOf(double doubleValue);
 
-//			template<typename T, typename... Args>
-//			static String format(const String& format, T value, Args... args) {
-//				std::string result;
-//				std::string inputString(format.toString());
-//				std::smatch matchResult;
-//                std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
-//                while (true) {
-//                    if (std::regex_search(inputString, matchResult, reg)) {
-//                        result += matchResult.prefix();
-//                        result += printObject(matchResult[0], value);
-//                        if ('%' == result.back()) {
-//                            inputString = matchResult.suffix().str();
-//                            continue;
-//                        }
-//                        return result + std::string(String::format(matchResult.suffix().str().c_str(), args...).toString());
-//                    } else {
-//                        result += inputString;
-//                        break;
-//                    }
-//                }
-//				return String(result.c_str());
-//			}
-//
-//		private:
-//			static String format(const String& format);
-//            static std::string print(const std::string& format, short value);
-//			static std::string print(const std::string& format, int value);
-//            static std::string print(const std::string& format, long value);
-//            static std::string print(const std::string& format, unsigned short value);
-//            static std::string print(const std::string& format, unsigned int value);
-//            static std::string print(const std::string& format, unsigned long value);
-//            static std::string print(const std::string& format, double value);
-//            static std::string print(const std::string& format, float value);
-//            static std::string print(const std::string& format, char* value);
-//            static std::string print(const std::string& format, Short value);
-//            static std::string print(const std::string& format, Integer value);
-//            static std::string print(const std::string& format, Long value);
-//            static std::string print(const std::string& format, Float value);
-//            static std::string print(const std::string& format, Double value);
-//            static std::string print(const std::string& format, String value);
-//
-//            template<typename T>
-//			static std::string printObject(const std::string& format, T value) {
-//				std::string result;
-//				char lastChar = format.back();
-//				switch (lastChar) {
-//					case '%':
-//						result += lastChar;
-//						break;
-//                    default:
-//                        result = print(format, value);
-//                        break;
-//				}
-//				return result;
-//			}
-
 		public:
 			/**
 			 * Determine if two String is equal
@@ -1019,6 +963,13 @@ namespace Java {
 				return os;
 			}
 
+			/**
+			 * Add const_string and String
+			 *
+			 * @param target1
+			 * @param target2
+			 * @return a String contain value of target1 and target2
+			 */
 			friend String operator+(const_string target1, String const &target2) {
 				String result;
 				result = target1;

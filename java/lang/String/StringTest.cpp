@@ -551,11 +551,38 @@ TEST (JavaLang, StringReplace) {
 
 TEST (JavaLang, StringSplit) {
 	// Give an Array<String> then asert each element - Should equal
-	String stringToSplit = "Hello Hello Hello";
+	String stringToSplit = "Hello Hello Hello Hello";
 	Array<String> strings = stringToSplit.split(" ");
 	for (String item : strings) {
 		ASSERT_STR("Hello", item.toString());
 	}
+
+    Array<String> splitWithLimit1 = stringToSplit.split(" ", 3);
+    int index;
+    for (index = 0; index < splitWithLimit1.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimit1[index].toString());
+    }
+    ASSERT_STR("Hello Hello", splitWithLimit1[splitWithLimit1.length - 1].toString());
+
+    // Split with limit greater than number of regex occurrence time
+    Array<String> splitWithLimit2 = stringToSplit.split(" ", 10);
+    for (index = 0; index < splitWithLimit2.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimit2[index].toString());
+    }
+
+    Array<String> splitWithLimitOne = stringToSplit.split(" ", 1);
+    ASSERT_STR(stringToSplit.toString(), splitWithLimitOne[0].toString());
+
+    Array<String> splitWithLimitZero = stringToSplit.split(" ", 0);
+    for (index = 0; index < splitWithLimitZero.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimitZero[index].toString());
+    }
+
+    Array<String> splitWithLimitNegative = stringToSplit.split(" ", -1);
+    for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimitNegative[index].toString());
+    }
+
 }
 
 TEST (JavaLang, StringStartsWith) {

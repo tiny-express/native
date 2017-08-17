@@ -363,6 +363,7 @@ String String::replaceAll(String regex, String replacement) const {
 }
 
 Array<String> String::split(String regex) const {
+    // TODO fix this later, temporary use replace, need Pattern
 	string *splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
 
@@ -584,171 +585,6 @@ boolean String::operator>=(const String &target) const {
     return strcmp(this->original, target.toString()) >= 0;
 }
 
-/**
- * Format string (base - currying function)
- * @param format
- * @return String
- *//*
-String String::format(const String &format) {
-	std::string result;
-	std::string inputString(format.toString());
-	std::smatch matchResult;
-	std::regex reg("%(\\d+\\$)?([-#+0,(\\<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])");
-
-	while(true) {
-		if(std::regex_search(inputString, matchResult, reg)) {
-			result += matchResult.prefix();
-			if('%' == matchResult[0].str().back()) {
-				result += matchResult[0].str().back();
-				inputString = matchResult.suffix().str();
-				continue;
-			} else {
-				throw "missing arguments";
-			}
-		} else {
-			result += inputString;
-			break;
-		}
-	}
-
-	return String(result.c_str());
-}*/
-
-/*std::string String::print(const std::string &format, short value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, int value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, long value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, unsigned short value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, unsigned int value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, unsigned long value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, double value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, float value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, char *value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value);
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, Short value) {
-	std::string result;
-	char buffer[256] = {0};
-	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.shortValue());
-	if(length > 0)
-		result = std::string(buffer);
-	return result;
-}
-
-std::string String::print(const std::string &format, Integer value) {
-	std::string result;
-	char buffer[256] = {0};
-	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.intValue());
-	if(length > 0)
-		result = std::string(buffer);
-	return result;
-}
-
-std::string String::print(const std::string &format, Long value) {
-	std::string result;
-	char buffer[256] = {0};
-	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.longValue());
-	if(length > 0)
-		result = std::string(buffer);
-	return result;
-}
-
-std::string String::print(const std::string &format, Float value) {
-	std::string result;
-	char buffer[256] = {0};
-	const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.floatValue());
-	if(length > 0)
-		result = std::string(buffer);
-	return result;
-}
-
-std::string String::print(const std::string &format, Double value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.doubleValue());
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}
-
-std::string String::print(const std::string &format, String value) {
-    std::string result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.c_str(), value.toString());
-    if(length > 0)
-        result = std::string(buffer);
-    return result;
-}*/
-
 boolean String::contentEquals(const CharSequence &charSequence) {
     // TODO instanceof return false
 /*    if (instanceof<StringBuffer>(&charSequence)) {
@@ -845,6 +681,26 @@ String String::replaceFirst(String regex, String replacement) const {
     String remainString = this->getStringFromIndex(this->indexOf(regex) + regex.length());
     stringWithFirstRegex = stringWithFirstRegex.replace(regex, replacement);
     return stringWithFirstRegex + remainString;
+}
+
+Array<String> String::split(String regex, int limit) const {
+    // TODO fix this later, temporary, need Pattern
+    Array<String> stringArrayNoLimit = this->split(regex);
+    if (limit == 1) {
+        return Array<String>{*this};
+    }
+    if (limit > stringArrayNoLimit.length || limit <= 0) {
+        return stringArrayNoLimit;
+    }
+    int indexOfRegexBelowLimit = string_index(this->original, regex.toString(), limit - 1);
+    String remainString = this->getStringFromIndex(indexOfRegexBelowLimit + regex.length());
+    Array<String> stringArrayLimit;
+    int index;
+    for (index = 0; index < limit - 1; index++) {
+        stringArrayLimit.push(stringArrayNoLimit[index]);
+    }
+    stringArrayLimit.push(remainString);
+    return stringArrayLimit;
 }
 
 
