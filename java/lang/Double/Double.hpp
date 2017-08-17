@@ -114,11 +114,6 @@ namespace Java {
             string originalString;
         public:
             /**
-             * A constant holding the smallest positive normal value of type double, 2^-1022.
-             */
-            static constexpr double MIN_NORMAL = 2.2250738585072014E-308;
-
-            /**
              * The number of logical bits in the significand of a double number,
              * including the implicit bit.
              */

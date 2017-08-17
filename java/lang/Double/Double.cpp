@@ -265,13 +265,13 @@ long Double::hashCode(double doubleInput) {
 }
 
 boolean Double::isFinite(double valueDouble) {
-    return (Math::abs(valueDouble) <= MAX_VALUE_DOUBLE);
+    return (Math::abs(valueDouble) <= MAX_VALUE);
 }
 
 boolean Double::isInfinite(double valueDouble) {
-    boolean isPOSITIVE_INFINITY_DOUBLE = (valueDouble == POSITIVE_INFINITY_DOUBLE);
-    boolean isNEGATIVE_INFINITY_DOUBLE = (valueDouble == NEGATIVE_INFINITY_DOUBLE);
-    return( isPOSITIVE_INFINITY_DOUBLE || isNEGATIVE_INFINITY_DOUBLE ) ;
+    boolean isPOSITIVE_INFINITY = (valueDouble == POSITIVE_INFINITY);
+    boolean isNEGATIVE_INFINITY = (valueDouble == NEGATIVE_INFINITY);
+    return( isPOSITIVE_INFINITY || isNEGATIVE_INFINITY ) ;
 }
 
 boolean Double::isInfinite() {
@@ -327,7 +327,7 @@ double Double::min(double doubleA, double doubleB) {
 //        if (doubleValue == 0.0) {
 //            answer.append("0.0p0");
 //        } else {
-//            boolean subnormal = (doubleValue < MIN_NORMAL_DOUBLE);
+//            boolean subnormal = (doubleValue < MIN_NORMAL);
 //
 //            // Isolate significand bits and OR in a high-order bit
 //            // so that the string representation has a known
@@ -413,12 +413,12 @@ string Double::doubleToBinary32StringType(double doubleInput)
         goto outPut;
     }
 
-    if( doubleInput == POSITIVE_INFINITY_DOUBLE ) {
+    if( doubleInput == POSITIVE_INFINITY ) {
         strcpy(resultDoubleToBinary32StringType, "01111111100000000000000000000000");
         goto outPut;
     }
 
-    if( doubleInput == NEGATIVE_INFINITY_DOUBLE ) {
+    if( doubleInput == NEGATIVE_INFINITY ) {
         strcpy(resultDoubleToBinary32StringType, "11111111100000000000000000000000");
         goto outPut;
     }
@@ -626,14 +626,14 @@ string Double::doubleToBinary64StringType(double doubleInput)
         goto outPut;
     }
 
-    if( doubleInput == POSITIVE_INFINITY_DOUBLE ) {
+    if( doubleInput == POSITIVE_INFINITY ) {
         strcpy (resultDoubleToBinary64StringType,
                 "0111111111110000000000000000000000000000000000000000000000000000");
 
         goto outPut;
     }
 
-    if( doubleInput == NEGATIVE_INFINITY_DOUBLE ) {
+    if( doubleInput == NEGATIVE_INFINITY ) {
         strcpy (resultDoubleToBinary64StringType,
                 "1111111111110000000000000000000000000000000000000000000000000000");
 
@@ -854,7 +854,7 @@ double Double::binary64StringTypeToDouble (string binary64StringTypeInput) {
               * pow(2, exponentAdjusted);
 
     if(isNaN) {
-        return NaN_NUMBER_DOUBLE;
+        return NaN_NUMBER;
     }
 
     return resultBinary64StringTypeToDouble;

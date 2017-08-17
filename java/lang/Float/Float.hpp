@@ -28,6 +28,7 @@
 #define JAVA_LANG_FLOAT_HPP_
 
 #include "../Number/Number.hpp"
+#include <limits>
 
 /**
  * A constant holding the positive infinity of type
@@ -47,7 +48,7 @@ static float NaN_NUMBER = float(0.0 / 0.0); // -nan
 /**
  * A constant holding the largest positive finite value of type
  */
-static float MAX_VALUE = std::numeric_limits<float>::max(); // 3.403e+38
+static float MAX_VALUE = std::numeric_limits<float>::max(); // 3.40282e+38
 
 /**
  * The smallest subnormal value has sign bit = 0, exponent = 0
@@ -58,7 +59,7 @@ static float MIN_NORMAL = std::numeric_limits<float>::denorm_min(); // 1.401e-45
 /**
  * A constant holding the smallest value of type
  */
-static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.175e-38
+static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.17549e-38
 
 /**
  * Minimum exponent a normalized double number may have
@@ -162,7 +163,7 @@ namespace Java {
              * It is equal to the hexadecimal floating-point literal 0x0.000002P-126f
              * and also equal to Float.intBitsToFloat(0x1).
              */
-			static constexpr float MIN_VALUE = initFloatMinValue(); // 1.4e-45f
+			static constexpr float MIN_VALUE = 1.17549e-38;//initFloatMinValue(); // 1.4e-45f
 
 			/**
              * The number of bits used to represent a float value.

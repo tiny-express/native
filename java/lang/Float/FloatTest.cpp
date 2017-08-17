@@ -692,10 +692,26 @@ TEST(JavaLang, FloatValueOf2) {
     ASSERT_FLOAT_NEAR(MIN_VALUE, Float::valueOf(1.17549e-38).floatValue());
 }
 
+// TODO(thoangminh): need to pass test case in comment block
 TEST(JavaLang, FloatToBinary32StringType) {
     float floatInput;
     string expectedResult;
     string actualResult;
+
+//    floatInput = 123456789.12345;
+//    expectedResult = (string) "01001100111010110111100110100010";
+//    actualResult = Float::floatToBinary32StringType(floatInput);
+//    ASSERT_STR(expectedResult, actualResult);
+//    free(actualResult);
+
+//    floatInput = 123456788.1234;
+//    expectedResult = (string) "01001100111010110111100110100010";
+//    actualResult = Float::floatToBinary32StringType(floatInput);
+//    ASSERT_STR(expectedResult, actualResult);
+//    free(actualResult);
+
+//    // Must be different
+//    ASSERT_STR(Float::floatToBinary32StringType(123.1234567), Float::floatToBinary32StringType(123.1234566));
 
     floatInput = 0;
     expectedResult = (string) "00000000000000000000000000000000";
@@ -1194,4 +1210,106 @@ TEST(JavaLang, FloatFloatValue) {
     expectedResultFloatValue = 130.0;
     actualResultFloatValue = variableTestFloatValue.floatValue();
     ASSERT_FLOAT_FAR(expectedResultFloatValue , actualResultFloatValue);
+}
+
+// TODO(thoangminh): Need to pass all test cases in comment block
+TEST(JavaLang, FloatCompare) {
+    // Test NaN_NUMBER
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, NaN_NUMBER), 0);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, POSITIVE_INFINITY), 1);
+//    ASSERT_EQUAL(Float::compare(NaN_NUMBER, MAX_VALUE), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, 1.2), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, 0.0), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, -0.0f), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, -1.2f), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, MIN_VALUE), 1);
+    ASSERT_EQUAL(Float::compare(NaN_NUMBER, NEGATIVE_INFINITY), 1);
+
+    // Test POSITIVE_INFINITY
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, MAX_VALUE), -9999);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, 1.2), 1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, 0.0), 1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, -0.0f), 1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, -1.2f), 1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, MIN_VALUE), 1);
+    ASSERT_EQUAL(Float::compare(POSITIVE_INFINITY, NEGATIVE_INFINITY), 1);
+
+    // Test NEGATIVE_INFINITY
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, MAX_VALUE), -9999);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, 1.2), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, 0.0), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, -0.0f), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, -1.2f), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, MIN_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(NEGATIVE_INFINITY, NEGATIVE_INFINITY), 0);
+
+//    // Test MAX_VALUE
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, NaN_NUMBER), -9999);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, POSITIVE_INFINITY), -9999);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, MAX_VALUE), 0);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, 1.2), +1);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, 0.0), +1);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, -0.0f), +1);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, -1.2f), +1);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, MIN_VALUE), +1);
+//    ASSERT_EQUAL(Float::compare(MAX_VALUE, NEGATIVE_INFINITY), -9999);
+
+    // Test MIN_VALUE
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(MIN_VALUE, MAX_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, 1.2), -1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, 0.0), 1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, -0.0f), 1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, -1.2f), 1);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, MIN_VALUE), 0);
+    ASSERT_EQUAL(Float::compare(MIN_VALUE, NEGATIVE_INFINITY), 1);
+
+    // Test value 1.2
+    ASSERT_EQUAL(Float::compare(1.2, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(1.2, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(1.2, MAX_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(1.2, 1.2), 0);
+    ASSERT_EQUAL(Float::compare(1.2, 0.0), +1);
+    ASSERT_EQUAL(Float::compare(1.2, -0.0f), +1);
+    ASSERT_EQUAL(Float::compare(1.2, -1.2f), +1);
+    ASSERT_EQUAL(Float::compare(1.2, MIN_VALUE), +1);
+    ASSERT_EQUAL(Float::compare(1.2, NEGATIVE_INFINITY), +1);
+
+    // Test value 0.0
+    ASSERT_EQUAL(Float::compare(0.0, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(0.0, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(0.0, MAX_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(0.0, 1.2), -1);
+    ASSERT_EQUAL(Float::compare(0.0, 0.0), 0);
+    ASSERT_EQUAL(Float::compare(0.0, -0.0f), 0);  // error in OSX
+    ASSERT_EQUAL(Float::compare(0.0, -1.2f), +1);
+    ASSERT_EQUAL(Float::compare(0.0, MIN_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(0.0, NEGATIVE_INFINITY), +1);
+
+    // Test value -0.0f
+    ASSERT_EQUAL(Float::compare(-0.0f, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(-0.0f, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(-0.0f, MAX_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(-0.0f, 1.2), -1);
+    ASSERT_EQUAL(Float::compare(-0.0f, 0.0), 0); // error in OSX
+    ASSERT_EQUAL(Float::compare(-0.0f, -0.0f), 0);  // error in OSX
+    ASSERT_EQUAL(Float::compare(-0.0f, -1.2f), +1);
+    ASSERT_EQUAL(Float::compare(-0.0f, MIN_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(-0.0f, NEGATIVE_INFINITY), 1);
+
+    // Test value -1.2f
+    ASSERT_EQUAL(Float::compare(-1.2f, NaN_NUMBER), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, POSITIVE_INFINITY), -1);
+//    ASSERT_EQUAL(Float::compare(-1.2f, MAX_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, 1.2), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, 0.0), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, -0.0f), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, -1.2f), 0);
+    ASSERT_EQUAL(Float::compare(-1.2f, MIN_VALUE), -1);
+    ASSERT_EQUAL(Float::compare(-1.2f, NEGATIVE_INFINITY), +1);
 }

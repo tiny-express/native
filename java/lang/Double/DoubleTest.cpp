@@ -762,7 +762,7 @@ TEST(JavaLang, DoubleByteValue) {
     ASSERT_NOT_EQUAL(expectedResultByteValue , actualResultByteValue);
 }
 
-// TODO(thoangminh): Fix MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE , -0
+// TODO(thoangminh): Need to pass all test cases in comment block
 TEST(JavaLang, DoubleCompare) {
 
     // Test NaN_NUMBER_DOUBLE
@@ -771,9 +771,9 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MAX_VALUE_DOUBLE), 1);
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, 1.2), 1);
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, 0.0), 1);
-//    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, -0.0), -9999);
+    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, -0.0), 1);
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, -1.2), 1);
-//    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE), -9999);
+    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE), 1);
     ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test POSITIVE_INFINITY_DOUBLE
@@ -782,9 +782,9 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, 1.2), 1);
     ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, 0.0), 1);
-//    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0), -9999);
+    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0), 1);
     ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, -1.2), 1);
-//    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), -9999);
+    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), 1);
     ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test NEGATIVE_INFINITY_DOUBLE
@@ -793,9 +793,9 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
     ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, 1.2), -1);
     ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, 0.0), -1);
-//    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0), -9999);
+    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0), -1);
     ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, -1.2), -1);
-//    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), -9999);
+    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 0);
 
 //    // Test MAX_VALUE_DOUBLE
@@ -809,16 +809,16 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE), +1);
 //    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), -9999);
 
-//    // Test MIN_VALUE_DOUBLE
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -9999);
+    // Test MIN_VALUE_DOUBLE
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -1);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MAX_VALUE_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 1.2), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 0.0), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -0.0), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -1.2), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE), 0);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), -9999);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 1.2), -1);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 0.0), 1);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -0.0), 1);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -1.2), 1);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE), 0);
+    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test value 1.2
     ASSERT_EQUAL(Double::compare(1.2, NaN_NUMBER_DOUBLE), -1);
@@ -826,9 +826,9 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(1.2, MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(1.2, 1.2), 0);
     ASSERT_EQUAL(Double::compare(1.2, 0.0), +1);
-//    ASSERT_EQUAL(Double::compare(1.2, -0.0), +1);
+    ASSERT_EQUAL(Double::compare(1.2, -0.0), +1);
     ASSERT_EQUAL(Double::compare(1.2, -1.2), +1);
-//    ASSERT_EQUAL(Double::compare(1.2, MIN_VALUE_DOUBLE), +1);
+    ASSERT_EQUAL(Double::compare(1.2, MIN_VALUE_DOUBLE), +1);
     ASSERT_EQUAL(Double::compare(1.2, NEGATIVE_INFINITY_DOUBLE), +1);
 
     // Test value 0.0
@@ -837,21 +837,21 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(0.0, MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(0.0, 1.2), -1);
     ASSERT_EQUAL(Double::compare(0.0, 0.0), 0);
-//    ASSERT_EQUAL(Double::compare(0.0, -0.0), 0);  // error in OSX
+    ASSERT_EQUAL(Double::compare(0.0, -0.0), 0);  // error in OSX
     ASSERT_EQUAL(Double::compare(0.0, -1.2), +1);
-//    ASSERT_EQUAL(Double::compare(0.0, MIN_VALUE_DOUBLE), +1);
+    ASSERT_EQUAL(Double::compare(0.0, MIN_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(0.0, NEGATIVE_INFINITY_DOUBLE), +1);
 
-//    // Test value -0.0
-//    ASSERT_EQUAL(Double::compare(-0.0, NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE), -9999);
+    // Test value -0.0
+    ASSERT_EQUAL(Double::compare(-0.0, NaN_NUMBER_DOUBLE), -1);
+    ASSERT_EQUAL(Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE), -1);
 //    ASSERT_EQUAL(Double::compare(-0.0, MAX_VALUE_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(-0.0, 1.2), -1);
-//    ASSERT_EQUAL(Double::compare(-0.0, 0.0), 0); // error in OSX
-//    ASSERT_EQUAL(Double::compare(-0.0, -0.0), 0);  // error in OSX
-//    ASSERT_EQUAL(Double::compare(-0.0, -1.2), +1);
-//    ASSERT_EQUAL(Double::compare(-0.0, MIN_VALUE_DOUBLE), +1);
-//    ASSERT_EQUAL(Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE), -9999);
+    ASSERT_EQUAL(Double::compare(-0.0, 1.2), -1);
+    ASSERT_EQUAL(Double::compare(-0.0, 0.0), 0); // error in OSX
+    ASSERT_EQUAL(Double::compare(-0.0, -0.0), 0);  // error in OSX
+    ASSERT_EQUAL(Double::compare(-0.0, -1.2), +1);
+    ASSERT_EQUAL(Double::compare(-0.0, MIN_VALUE_DOUBLE), -1);
+    ASSERT_EQUAL(Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE), 1);
 
     // Test value -1.2
     ASSERT_EQUAL(Double::compare(-1.2, NaN_NUMBER_DOUBLE), -1);
@@ -859,9 +859,9 @@ TEST(JavaLang, DoubleCompare) {
 //    ASSERT_EQUAL(Double::compare(-1.2, MAX_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(-1.2, 1.2), -1);
     ASSERT_EQUAL(Double::compare(-1.2, 0.0), -1);
-//    ASSERT_EQUAL(Double::compare(-1.2, -0.0), -1);
+    ASSERT_EQUAL(Double::compare(-1.2, -0.0), -1);
     ASSERT_EQUAL(Double::compare(-1.2, -1.2), 0);
-//    ASSERT_EQUAL(Double::compare(-1.2, MIN_VALUE_DOUBLE), +1);
+    ASSERT_EQUAL(Double::compare(-1.2, MIN_VALUE_DOUBLE), -1);
     ASSERT_EQUAL(Double::compare(-1.2, NEGATIVE_INFINITY_DOUBLE), +1);
 }
 
@@ -1216,7 +1216,7 @@ TEST(JavaLang, DoubleEquals) {
     ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
     ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 1);
-    
+
     // Test value (Double)1.2
     variableDoubleEquals = (Double)1.2;
     ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);

@@ -200,7 +200,7 @@ Float Float::valueOf(float inputFloat) {
 
 string Float::floatToBinary32StringType(float floatInput)
 {
-    auto integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
+    auto integerPartNormalizeForm = (string) malloc (280 * sizeof(char));
     auto fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
     auto floatInputNormalizeForm = (string) malloc (280 * sizeof(char));
     auto resultFloatToBinary32StringType = (string) malloc (33 * sizeof(char));
@@ -236,7 +236,7 @@ string Float::floatToBinary32StringType(float floatInput)
     }
 
     /** Set end point for string type */
-    integerPartNormalizeForm[24] = '\0';
+    integerPartNormalizeForm[279] = '\0';
     fractionPartNormalizeForm[24] = '\0';
     floatInputNormalizeForm[279] = '\0';
     resultFloatToBinary32StringType[32] = '\0';
@@ -408,7 +408,6 @@ string Float::floatToBinary32StringType(float floatInput)
     free(fractionPartNormalizeForm);
     free(floatInputNormalizeForm);
     return  resultFloatToBinary32StringType;
-
 }
 
 float Float::binary32StringTypeToFloat (string binary32StringTypeInput) {
@@ -549,4 +548,18 @@ string Float::intBitsToBinary32StringType(int intBitsInput) {
     }
 
     return resultLongBitsToBinary32StringType;
+}
+
+int Float::compare(float float1, float float2) {
+    long thisBits = Float::floatToIntBits(float1);
+    long anotherBits = Float::floatToIntBits(float2);
+
+    if (thisBits == anotherBits) {
+        return 0;
+    }
+    if (thisBits < anotherBits) {
+        return -1;
+    }
+
+    return 1;
 }
