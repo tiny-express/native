@@ -1432,3 +1432,30 @@ TEST(JavaLang, FloatEquals) {
 //    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
     ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
 }
+
+TEST(JavaLang , FloatIsFinite) {
+    ASSERT_TRUE(Float::isFinite(13.02));
+    ASSERT_TRUE(Float::isFinite(130.2));
+    ASSERT_FALSE(Float::isFinite(POSITIVE_INFINITY));
+    ASSERT_FALSE(Float::isFinite(NEGATIVE_INFINITY));
+}
+
+TEST(JavaLang , FloatIsInfinite) {
+    ASSERT_TRUE(Float::isInfinite(POSITIVE_INFINITY));
+    ASSERT_TRUE(Float::isInfinite(NEGATIVE_INFINITY));
+    ASSERT_FALSE(Float::isInfinite(13.02));
+    ASSERT_FALSE(Float::isInfinite(130.2));
+}
+
+TEST(JavaLang , FloatIsInfinite2) {
+    Float variableIsInfinite2;
+
+    variableIsInfinite2 = POSITIVE_INFINITY;
+    ASSERT_TRUE(variableIsInfinite2.isInfinite());
+
+    variableIsInfinite2 = NEGATIVE_INFINITY;
+    ASSERT_TRUE(variableIsInfinite2.isInfinite());
+
+    variableIsInfinite2 = 13.02;
+    ASSERT_FALSE(variableIsInfinite2.isInfinite());
+}

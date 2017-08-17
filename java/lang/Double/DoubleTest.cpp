@@ -1441,7 +1441,6 @@ TEST(JavaLang , DoubleIsFinite) {
     ASSERT_TRUE(Double::isFinite(130.2));
     ASSERT_FALSE(Double::isFinite(POSITIVE_INFINITY_DOUBLE));
     ASSERT_FALSE(Double::isFinite(NEGATIVE_INFINITY_DOUBLE));
-
 }
 
 TEST(JavaLang , DoubleIsInfinite) {

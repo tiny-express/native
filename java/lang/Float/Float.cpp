@@ -25,6 +25,7 @@
  */
 
 #include "Float.hpp"
+#include "../Math/Math.hpp"
 
 using namespace Java::Lang;
 
@@ -179,6 +180,20 @@ string Float::toString() const {
 
 Float Float::parseFloat(String inputString) {
     return static_cast<Float> (string_to_float(inputString.toString()));
+}
+
+boolean Float::isFinite(float valueFloat) {
+    return (Math::abs(valueFloat) <= MAX_VALUE);
+}
+
+boolean Float::isInfinite(float valueFloat) {
+    boolean isPOSITIVE_INFINITY = (valueFloat == POSITIVE_INFINITY);
+    boolean isNEGATIVE_INFINITY = (valueFloat == NEGATIVE_INFINITY);
+    return( isPOSITIVE_INFINITY || isNEGATIVE_INFINITY ) ;
+}
+
+boolean Float::isInfinite() {
+    return isInfinite(this->original);
 }
 
 boolean Float::isNaN(float valueFloat) {

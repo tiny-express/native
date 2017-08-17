@@ -163,7 +163,7 @@ namespace Java {
              * It is equal to the hexadecimal floating-point literal 0x0.000002P-126f
              * and also equal to Float.intBitsToFloat(0x1).
              */
-			static constexpr float MIN_VALUE = 1.17549e-38;//initFloatMinValue(); // 1.4e-45f
+			static constexpr float MIN_VALUE = initFloatMinValue(); // 1.4e-45f
 
 			/**
              * The number of bits used to represent a float value.
