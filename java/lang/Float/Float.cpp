@@ -563,3 +563,14 @@ int Float::compare(float float1, float float2) {
 
     return 1;
 }
+
+// TODO(thoangminh): Wait for instanceof<>
+boolean Float::equals(const Float &object) const {
+    boolean isFloat = instanceof<Float>(object);
+    auto castObjectToFloat = (Float*)&object;
+    long floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
+    long floatToIntBitsThis = floatToIntBits(this->original);
+    boolean isEqual = (floatToIntBitsObject == floatToIntBitsThis);
+    return isEqual;
+    //return (isFloat && isEqual);
+}

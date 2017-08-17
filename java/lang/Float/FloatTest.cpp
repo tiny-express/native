@@ -1313,3 +1313,122 @@ TEST(JavaLang, FloatCompare) {
     ASSERT_EQUAL(Float::compare(-1.2f, MIN_VALUE), -1);
     ASSERT_EQUAL(Float::compare(-1.2f, NEGATIVE_INFINITY), +1);
 }
+
+// TODO(thoangminh): Need to pass all test cases in comment block
+TEST(JavaLang, FloatEquals) {
+    // Create variable to test
+    Float variableFloatEquals;
+    Float FLOAT_NaN = NaN_NUMBER;
+    Float FLOAT_POSITIVE_INFINITY = POSITIVE_INFINITY;
+    Float FLOAT_NEGATIVE_INFINITY = NEGATIVE_INFINITY;
+    Float FLOAT_MAX_VALUE= MAX_VALUE;
+    Float FLOAT_MIN_VALUE = MIN_VALUE;
+
+    // Test NaN_NUMBER
+    variableFloatEquals = NaN_NUMBER;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 1);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), -1);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -1);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+    // Test FLOAT_POSITIVE_INFINITY
+    variableFloatEquals = FLOAT_POSITIVE_INFINITY;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals( FLOAT_MAX_VALUE), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+//    // Test FLOAT_MAX_VALUE
+//    variableFloatEquals = FLOAT_MAX_VALUE;
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+//
+//    // Test FLOAT_MIN_VALUE
+//    variableFloatEquals = FLOAT_MIN_VALUE;
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), -9999);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), -9999);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), -1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), -1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), -1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+    // Test FLOAT_NEGATIVE_INFINITY
+    variableFloatEquals = FLOAT_NEGATIVE_INFINITY;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 1);
+
+    // Test value (Float)1.2
+    variableFloatEquals = (Float)1.2;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 1);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+    // Test value (Float)0.0
+    variableFloatEquals = (Float)0.0;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), +0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+    // Test value (Float)-0.0
+//    variableFloatEquals = (Float)-0.0;
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+
+    // Test value (Float)-1.2
+    variableFloatEquals = (Float)-1.2;
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0), 0);
+//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2), 1);
+//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), 0);
+    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY), 0);
+}
