@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -153,10 +153,10 @@ String String::clone() {
 }
 
 char String::charAt(int index) const{
-	if(index < 0 || index > this->size - 1) {
+	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return ( this->original[ index ] );
+	return (this->original[ index ]);
 }
 
 int String::compareTo(const String &anotherString) const {
@@ -167,15 +167,15 @@ int String::compareToIgnoreCase(const String &anotherString) const {
     return strcasecmp(this->original, anotherString.original);
 }
 
-String String::concat(String str) {
-	string stringConcat = string_concat(this->original, str.original);
+String String::concat(String target) {
+	string stringConcat = string_concat(this->original, target.original);
 	String result(stringConcat);
 	free(stringConcat);
 	return result;
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-	return (string_index(this->original, charSequence.toString(), 1) != NOT_FOUND );
+	return (string_index(this->original, charSequence.toString(), 1) != NOT_FOUND);
 }
 
 Array<byte> String::getBytes() const {
@@ -191,7 +191,7 @@ String String::getStringFromIndex(int index) const {
 	if (index < 0 || index > this->size - 1) {
 		throw StringIndexOutOfBoundsException("String index out of range");
 	}
-	return &( this->original[ index ] );
+	return &(this->original[ index ]);
 }
 
 boolean String::endsWith(const String &suffixString) const {
@@ -311,7 +311,7 @@ int String::lastIndexOf(String subString) const {
 		return result;
 	}
 	//Re-calculate first character of subString
-	result = this->size - ( result + subString.size );
+	result = this->size - (result + subString.size);
 	return result;
 }
 
@@ -323,7 +323,7 @@ int String::lastIndexOf(String subString, int fromIndex) const {
         return this->lastIndexOf(subString);
     }
     string thisStringReversed = string_reverse(this->original);
-	string subStringFromIndex = &( thisStringReversed )[ this->size - fromIndex - subString.size]; // get subString start fromIndex
+	string subStringFromIndex = &(thisStringReversed)[ this->size - fromIndex - subString.size]; // get subString start fromIndex
 	string reversedString = string_reverse(subString.toString());
 	//string currentReversedString = string_reverse(subStringFromIndex);
 	int result = string_index(subStringFromIndex, reversedString, 1);
@@ -391,7 +391,7 @@ boolean String::startsWith(String prefix, int thisOffset) const {
 	}
 	int originalLength = length_pointer_char(this->original);
 	int prefixLength = length_pointer_char(prefix.original);
-	if (originalLength < prefixLength || thisOffset > ( originalLength - prefixLength )) {
+	if (originalLength < prefixLength || thisOffset > (originalLength - prefixLength)) {
 		return false;
 	}
 #ifdef __linux__

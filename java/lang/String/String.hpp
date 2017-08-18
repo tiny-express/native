@@ -311,10 +311,10 @@ namespace Java {
             /**
              * String concatenation
              *
-             * @param str
+             * @param target
              * @return String
              */
-			String concat(String str);
+			String concat(String target);
 
 
             /**
@@ -499,8 +499,9 @@ namespace Java {
              * starting the search at the specified index.
              *
              * @param subString
+             * @param fromIndex
              * @return index of the first occurrence of the specified substring,
-             * or -1 if there is no such occurrence.
+             * start from fromIndex or -1 if there is no such occurrence.
              */
 			int indexOf(String subString, int fromIndex) const;
 
@@ -572,6 +573,7 @@ namespace Java {
 
             /**
              * Returns the length of this string
+             *
              * @return int
              */
 			int length() const override;
@@ -583,6 +585,7 @@ namespace Java {
              * @throw java.util.regex.PatternSyntaxException if the regular expression's syntax is invalid
              * @return true if, and only if, this string matches the given regular expression
              */
+            // TODO need Pattern
 			// boolean matches(String regex) const;
 
             /**
