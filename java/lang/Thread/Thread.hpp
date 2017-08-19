@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_THREAD_HPP_
-#define JAVA_LANG_THREAD_HPP_
+#ifndef JAVA_LANG_THREAD_THREAD_HPP_
+#define JAVA_LANG_THREAD_THREAD_HPP_
 
 #include <pthread.h>
 #include "../Object/Object.hpp"
@@ -35,46 +35,154 @@
 namespace Java {
 		namespace Lang {
 				class Thread : public Object, public virtual Runnable {
-				private:
+				 private:
 						pthread_t original;
-						string threadName;
-						Runnable *target;
-						
 						boolean isThreadRunning;
-						///Adds-on function to adapt pthread_create of C style
-				public:
+
+                        volatile string name;
+                        int priority;
+                        Thread threadQ();
+                        long eetop;
+
+                        /**
+                         * Whether or not to single_step this thread.
+                         */
+                        boolean single_step;
+
+                        /**
+                         * Whether or not the thread is a daemon thread.
+                         */
+                        boolean daemon = false;
+
+                        /**
+                         * JVM state
+                         */
+                        boolean stillborn = false;
+
+                        /**
+                         * What will be run.
+                         */
+                        Runnable *target;
+
+                        // TODO(thoangminh): Need Class ThreadGroup
+                        /**
+                         * The group of this thread
+                         */
+//                        ThreadGroup group;
+
+                        // TODO(thoangminh): Need Class ClassLoader
+                        /**
+                         * The context ClassLoader for this thread
+                         */
+//                        ClassLoader contextClassLoader;
+
+                        // TODO(thoangminh): Need Class AccessControlContext
+                        /**
+                         * The inherited AccessControlContext of this thread
+                         */
+//                        AccessControlContext inheritedAccessControlContext;
+
+                        /**
+                         * For autonumbering anonymous threads.
+                         */
+                        static int threadInitNumber;
+
+                        // TODO(thoangminh): Need Class ThreadLocal
+                        /**
+                         * ThreadLocal values pertaining to this thread.
+                         * This map is maintained
+                         * by the ThreadLocal class.
+                         */
+//                        ThreadLocal.ThreadLocalMap threadLocals = null;
+
+                        // TODO(thoangminh): Need Class ThreadLocal
+                        /**
+                         * InheritableThreadLocal values pertaining to this thread.
+                         * This map is maintained by
+                         * the InheritableThreadLocal class.
+                         */
+//                        ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
+
+                        /**
+                         * The requested stack size for this thread, or 0 if the creator did
+                         * not specify a stack size.  It is up to the VM to do
+                         * whatever it likes with this number; some VMs will ignore it.                         *
+                         */
+                        long stackSize;
+
+                        /**
+                         * JVM-private state that persists after native thread termination.
+                         */
+                        long nativeParkEventPointer;
+
+                        /**
+                         * Thread ID
+                         */
+                        long tid;
+
+                        /**
+                         * For generating thread ID
+                         */
+                        static long threadSeqNumber;
+
+                        /**
+                         * Java thread status for tools,
+                         * initialized to indicate thread 'not yet started'
+                         */
+                        volatile int threadStatus = 0;
+
+                        // TODO(thoangminh): Need Class Interruptible
+                        /**
+                         * The object in which this thread is blocked in an interruptible I/O
+                         * operation, if any.  The blocker's interrupt method should be invoked
+                         * after setting this thread's interrupt status.
+                         */
+//                        volatile Interruptible blocker;
+//                        const Object blockerLock = new Object();
+
+
+                 public:
+                        /**
+                        * The minimum priority that a thread can have.
+                        */
+                        static int const MIN_PRIORITY = 1;
+
+                        /**
+                         * The default priority that is assigned to a thread.
+                         */
+                        static int const NORM_PRIORITY = 5;
+
+                        /**
+                         * The maximum priority that a thread can have.
+                         */
+                        static int const MAX_PRIORITY = 10;
+
+                 public:
 						void *pthread_run(void *context) {
-							((Thread *) context )->target->run();
+							((Thread *) (context))->target->run();
 						}
 						
 						static void *pthread_helper(void *context) {
-							return ((Thread *) context )->pthread_run(context);
+							return ((Thread *) (context))->pthread_run(context);
 						}
 				
-				public:
+				 public:
 						Thread();
-						Thread(Runnable &target2);
-						Thread(Runnable &target2, String name);
-						Thread(String name);
-						//Thread(ThreadGroup group, Runnable &target);
-						//Thread(ThreadGroup group, Runnable &target, String &name);
-						//Thread(ThreadGroup group, Runnable &target, String &name, long stackSize);
-						//Thread(ThreadGroup group, String &name);
+                        Thread(Runnable &target);
+                        Thread(String name);
+//                        Thread(Runnable target, AccessControlContext acc);
+//                        Thread(ThreadGroup group, Runnable target);
+//                        Thread(ThreadGroup group, String name);
+                        Thread(Runnable &target, String name);
+//                        Thread(ThreadGroup group, Runnable target
+//                                , String name, long stackSize);
+//                        Thread(ThreadGroup group, Runnable target, String name);
 						~Thread();
 				
-				public:
+				 public:
 						void run() const;
-						void start();
-						void stop();
-						void join();
-						void join(unsigned int millis);
-						
-						string getName();
-						void setName(string target);
-						string toString() const;
-					
 				};
-		}
-}
+		}  // namespace Lang
+}  // namespace Java
 
 #endif   // JAVA_LANG_THREAD_THREAD_HPP_
