@@ -28,3 +28,59 @@
 
 using namespace Java::Lang;
 
+
+Thread::Thread() {
+    this->name = strdup("");
+    this->target = nullptr;
+}
+
+Thread::~Thread() {
+    if (this->name != nullptr) {
+        free(this->name);
+    }
+}
+
+void Thread::run() const {
+    int index = 1;
+    int limit = 1;
+    for (; index <= limit; index++) {
+        std::cout<<"run #"<<index;
+        usleep(1);
+    }
+}
+
+// TODO(thoangminh): Need method checkAccess, threadStatus, setNativeName
+void Thread::setName(string name) {
+    this->name = strdup(name);
+}
+
+string Thread::getName() {
+    return this->name;
+}
+
+// TODO(thoangminh): Need IllegalThreadStateException, method checkAccess, isAlive
+void Thread::setDaemon(boolean on) {
+    this->daemon = on;
+}
+
+boolean Thread::isDaemon() {
+    return this->daemon;
+}
+
+// TODO(thoangminh): Need class ThreadGroup, IllegalThreadStateException, method checkAccess
+void Thread::setPriority(int newPriority) {
+        if (newPriority > Thread::MAX_PRIORITY) {
+            newPriority = Thread::MAX_PRIORITY;
+        }
+
+        if (newPriority < Thread::MIN_PRIORITY) {
+            newPriority = Thread::MIN_PRIORITY;
+        }
+
+        this->priority = newPriority;
+}
+
+int Thread::getPriority() {
+    return this->priority;
+}
+

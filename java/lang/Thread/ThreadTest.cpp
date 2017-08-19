@@ -49,3 +49,90 @@ public:
 		}
 	}
 };
+
+TEST(JavaLang, ThreadConstructor) {
+    Thread thread;
+}
+
+TEST(JavaLang, ThreadRun) {
+    Thread thread;
+
+    thread.run();
+}
+
+TEST(JavaLang, ThreadSetDaemon) {
+    Thread thread;
+
+    thread.setDaemon(true);
+    ASSERT_TRUE(thread.isDaemon());
+
+    thread.setDaemon(false);
+    ASSERT_FALSE(thread.isDaemon());
+}
+
+TEST(JavaLang, ThreadIsDaemon) {
+    Thread thread;
+
+    thread.setDaemon(true);
+    ASSERT_TRUE(thread.isDaemon());
+
+    thread.setDaemon(false);
+    ASSERT_FALSE(thread.isDaemon());
+}
+
+TEST(JavaLang, ThreadSetPriority) {
+    Thread thread;
+
+    thread.setPriority(-1);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(0);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(3);
+    ASSERT_EQUAL(3, thread.getPriority());
+
+    thread.setPriority(Thread::MIN_PRIORITY);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(Thread::NORM_PRIORITY);
+    ASSERT_EQUAL(5, thread.getPriority());
+
+    thread.setPriority(Thread::MAX_PRIORITY);
+    ASSERT_EQUAL(10, thread.getPriority());
+}
+
+TEST(JavaLang, ThreadGetPriority) {
+    Thread thread;
+
+    thread.setPriority(-1);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(0);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(3);
+    ASSERT_EQUAL(3, thread.getPriority());
+
+    thread.setPriority(Thread::MIN_PRIORITY);
+    ASSERT_EQUAL(1, thread.getPriority());
+
+    thread.setPriority(Thread::NORM_PRIORITY);
+    ASSERT_EQUAL(5, thread.getPriority());
+
+    thread.setPriority(Thread::MAX_PRIORITY);
+    ASSERT_EQUAL(10, thread.getPriority());
+}
+
+TEST(JavaLang, ThreadSetName) {
+    Thread thread;
+
+    thread.setName(static_cast<string> ("Thread 1"));
+    ASSERT_STR(static_cast<string> ("Thread 1"), thread.getName());
+
+    thread.setName(static_cast<string> ("Thread 2"));
+    ASSERT_STR(static_cast<string> ("Thread 2"), thread.getName());
+
+    thread.setName(static_cast<string> ("Thread 5"));
+    ASSERT_NOT_STR(static_cast<string> ("Thread 1"), thread.getName());
+}

@@ -47,7 +47,7 @@ Double::Double(const Double &doubleNumber) {
 }
 
 Double::~Double() {
-	if (this->originalString != NULL) {
+	if (this->originalString != nullptr) {
 		free(this->originalString);
 	}
 }
