@@ -28,17 +28,14 @@
 
 using namespace Java::Lang;
 
+int Thread::threadInitNumber = 0;
+long Thread::threadSeqNumber = 0;
 
 Thread::Thread() {
-    this->name = strdup("");
-    this->target = nullptr;
+    init(nullptr, "Thread - " + Thread::nextThreadNum(), 0);
 }
 
-Thread::~Thread() {
-    if (this->name != nullptr) {
-        free(this->name);
-    }
-}
+Thread::~Thread() = default;
 
 void Thread::run() const {
     int index = 1;
@@ -50,11 +47,19 @@ void Thread::run() const {
 }
 
 // TODO(thoangminh): Need method checkAccess, threadStatus, setNativeName
-void Thread::setName(string name) {
-    this->name = strdup(name);
+void Thread::setName(String name) {
+    this->name = name;
 }
 
-string Thread::getName() {
+void Thread::init(Runnable *target, String name, long stackSize) {
+    this->target = target;
+    this->name = name;
+    this->stackSize = stackSize;
+
+    this->tid = nextThreadID();
+}
+
+String Thread::getName() {
     return this->name;
 }
 
@@ -84,3 +89,10 @@ int Thread::getPriority() {
     return this->priority;
 }
 
+int Thread::nextThreadNum() {
+    return threadInitNumber++;
+}
+
+long Thread::nextThreadID() {
+    ++threadSeqNumber;
+};

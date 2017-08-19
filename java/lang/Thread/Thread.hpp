@@ -31,6 +31,8 @@
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 #include "../Runnable/Runnable.hpp"
+#include <mutex>
+#define synchronized(m) for(std::unique_lock<std::recursive_mutex> lk(m); lk; lk.unlock());
 
 namespace Java {
 		namespace Lang {
@@ -39,7 +41,7 @@ namespace Java {
                     pthread_t original;
                     boolean isAlive;
 
-                    string name;
+                    String name;
                     int priority;
                     long eetop;
 
@@ -154,6 +156,7 @@ namespace Java {
     //                        void init(ThreadGroup g, Runnable target, String name,
     //                              long stackSize, AccessControlContext acc);
 
+                    // TODO(thoangminh): Need to improve this medthod
                     /**
                      * Initializes a Thread.
                      *
@@ -162,7 +165,13 @@ namespace Java {
                      * @param stackSize the desired stack size for the new thread, or
                      *        zero to indicate that this parameter is to be ignored.
                      */
-                    void init(Runnable &target, String name, long stackSize);
+                    void init(Runnable *target, String name, long stackSize);
+
+                    // TODO(thoangminh): Set synchronized for this method
+                    static int nextThreadNum();
+
+                    // TODO(thoangminh): Set synchronized for this method
+                    static long nextThreadID();
 
                  public:
                     /**
@@ -203,7 +212,7 @@ namespace Java {
                     ~Thread();
 				
 				 public:
-                    void run() const;
+                    void run() const override ;
 
                     // TODO(thoangminh): Set synchronized for this method
                     /**
@@ -220,7 +229,7 @@ namespace Java {
                      * @see        #getName
                      * @see        #checkAccess()
                      */
-                    void setName(string name);
+                    void setName(String name);
 
                     /**
                      * Returns this thread's name.
@@ -228,7 +237,7 @@ namespace Java {
                      * @return  this thread's name.
                      * @see     #setName(String)
                      */
-                    string getName();
+                    String getName();
 
                     /**
                      * Tests if this thread is a daemon thread.
@@ -297,3 +306,4 @@ namespace Java {
 }  // namespace Java
 
 #endif   // JAVA_LANG_THREAD_THREAD_HPP_
+

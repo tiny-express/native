@@ -50,6 +50,7 @@ public:
 	}
 };
 
+// TODO(thoangminh): Need to improve it
 TEST(JavaLang, ThreadConstructor) {
     Thread thread;
 }
@@ -127,12 +128,28 @@ TEST(JavaLang, ThreadGetPriority) {
 TEST(JavaLang, ThreadSetName) {
     Thread thread;
 
-    thread.setName(static_cast<string> ("Thread 1"));
-    ASSERT_STR(static_cast<string> ("Thread 1"), thread.getName());
+    String name = "Thread 1";
+    thread.setName(name);
+    ASSERT_STR((string) "Thread 1", thread.getName().toString());
 
-    thread.setName(static_cast<string> ("Thread 2"));
-    ASSERT_STR(static_cast<string> ("Thread 2"), thread.getName());
+    thread.setName((string) "Thread 2");
+    ASSERT_STR((string) "Thread 2", thread.getName().toString());
 
-    thread.setName(static_cast<string> ("Thread 5"));
-    ASSERT_NOT_STR(static_cast<string> ("Thread 1"), thread.getName());
+    thread.setName((string) "Thread 5");
+    ASSERT_NOT_STR((string) "Thread 1", thread.getName().toString());
 }
+
+TEST(JavaLang, ThreadGetName) {
+    Thread thread;
+
+    String name = "Thread 1";
+    thread.setName(name);
+    ASSERT_STR((string) "Thread 1", thread.getName().toString());
+
+    thread.setName((string) "Thread 2");
+    ASSERT_STR((string) "Thread 2", thread.getName().toString());
+
+    thread.setName((string) "Thread 5");
+    ASSERT_NOT_STR((string) "Thread 1", thread.getName().toString());
+}
+
