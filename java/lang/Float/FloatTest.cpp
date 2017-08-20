@@ -517,25 +517,25 @@ TEST(JavaLang, FloatLongValue) {
 
     // Test POSITIVE_INFINITY
     variableTestLongValue = POSITIVE_INFINITY;
-    expectedResultLongValue = -9223372036854775808l;
+    expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NEGATIVE_INFINITY
     variableTestLongValue = NEGATIVE_INFINITY;
-    expectedResultLongValue = -9223372036854775808l;
+    expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test NaN_NUMBER
     variableTestLongValue = NaN_NUMBER;
-    expectedResultLongValue = -9223372036854775808l;
+    expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
     // Test MAX_VALUE
     variableTestLongValue = MAX_VALUE;
-    expectedResultLongValue = -9223372036854775808l;
+    expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
     ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
 
