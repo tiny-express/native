@@ -205,7 +205,7 @@ TEST(JavaLang, StringConcat) {
 	
 	// Given three strings - Return concatenation result
 	String textConcat0 = "Food Tiny ";
-	ASSERT_STR("Food Tiny Hello World", ( textConcat0 + textConcat1 + textConcat2 ).toString());
+	ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2 ).toString());
 }
 
 TEST(JavaLang, StringContains) {
@@ -214,9 +214,9 @@ TEST(JavaLang, StringContains) {
 	String subString = "valid string";
 	String invalidSubString = "text";
 	
-	//Test true with correct substring inside
+	// Test true with correct substring inside
 	ASSERT_TRUE(validString.contains(subString));
-	//Test with with invalid substring inside
+	// Test with with invalid substring inside
 	ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
@@ -376,7 +376,7 @@ TEST(JavaLang, StringIndexOf) {
 
 	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 20));
 }
-// TODO getChar run right but need Arrays.toString() to test
+// TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST(JavaLang, StringGetChars) {
     Array<char> charArray(30);
     String testString = "This is a String";
@@ -504,28 +504,28 @@ TEST(JavaLang, StringJoin) {
 }
 
 /** This test case is made based on pattern_test.c */
-//TEST(JavaLang, StringMatches) {
-//	// Init params for test string matches
-//	String emailPattern = EMAIL_PATTERN;
-//	String phoneNumberPattern = PHONE_PATTERN;
-//
-//	// Test true with correct email format
-//	String correctEmail = "neacao@gmail.com";
-//	ASSERT_TRUE(correctEmail.matches(emailPattern));
-//
-//	// Test fail with wrong email format
-//	String wrongEmail = "something@notcorrect";
-//	ASSERT_FALSE(wrongEmail.matches(emailPattern));
-//
-//	// Test true with correct phone number format
-//	String correctPhoneNumber = "+15005550006";
-//	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
-//
-//	// Test fail with wrong email format
-//	String wrongPhoneNumber = "001678080147";
-//	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
-//}
-//
+// TEST(JavaLang, StringMatches) {
+// 	// Init params for test string matches
+// 	String emailPattern = EMAIL_PATTERN;
+// 	String phoneNumberPattern = PHONE_PATTERN;
+// 
+// 	// Test true with correct email format
+// 	String correctEmail = "neacao@gmail.com";
+// 	ASSERT_TRUE(correctEmail.matches(emailPattern));
+// 
+// 	// Test fail with wrong email format
+// 	String wrongEmail = "something@notcorrect";
+// 	ASSERT_FALSE(wrongEmail.matches(emailPattern));
+// 
+// 	// Test true with correct phone number format
+// 	String correctPhoneNumber = "+15005550006";
+// 	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+// 
+// 	// Test fail with wrong email format
+// 	String wrongPhoneNumber = "001678080147";
+// 	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
+// }
+// 
 TEST(JavaLang, StringReplace) {
 	String textPlus = "Hello Hello Hello ";
 

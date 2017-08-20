@@ -107,7 +107,7 @@ namespace Java {
              * @param byteArray
              * @param charsetName
              */
-            // TODO need CharSet
+            // TODO (anhnt) need CharSet
             // String(Array<byte> byteArray, String charsetName);
 
             /**
@@ -117,7 +117,7 @@ namespace Java {
              * @param byteArray
              * @param charset
              */
-            // TODO need CharSet
+            // TODO (anhnt) need CharSet
             // String(Array<byte> byteArray, Charset charset)
 
             /**
@@ -144,8 +144,8 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count
              * arguments index characters outside the bounds of the codePoints array
              */
-            // TODO need CharSet
-            //String(Array<int> codePoints, int offset, int count);
+            // TODO (anhnt) need CharSet
+            // String(Array<int> codePoints, int offset, int count);
 
             /**
              * Constructs a new String by decoding the specified
@@ -170,7 +170,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
-            // TODO need CharSet
+            // TODO (anhnt) need CharSet
             // String(Array<byte> &byteArray, int offset, int length, Charset charset);
 
             /**
@@ -185,8 +185,8 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
-            // TODO need CharSet
-            //String(Array<byte> &byteArray, int offset, int length, String charsetName);
+            // TODO (anhnt) need CharSet
+            // String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
              * Construct a new String from target char
@@ -228,7 +228,7 @@ namespace Java {
              * @param offset
              * @param length
              */
-            //static void checkBounds(Array<byte> &byteArray, int offset, int length);
+            // static void checkBounds(Array<byte> &byteArray, int offset, int length);
 
 		public:
             /**
@@ -252,7 +252,7 @@ namespace Java {
              * @param index
              * @return int
              */
-            // TODO need Character
+            // TODO (anhnt) need Character
 			// int codePointAt(int index);
 
             /**
@@ -261,7 +261,7 @@ namespace Java {
              * @param index
              * @return int
              */
-            // TODO need Character
+            // TODO (anhnt) need Character
             // int codePointBefore(int index);
 
             /**
@@ -272,7 +272,7 @@ namespace Java {
              * @param endIndex
              * @return int
              */
-            // TODO need Character
+            // TODO (anhnt) need Character
             // int codePointCount(int beginIndex, int endIndex);
 
             /**
@@ -418,7 +418,7 @@ namespace Java {
              * @param charSetName
              * @return
              */
-            //Array<byte> getBytes(String charSetName) const;
+            // Array<byte> getBytes(String charSetName) const;
 
             /**
              * Encodes this String into a sequence of bytes using the charset,
@@ -443,7 +443,8 @@ namespace Java {
              * destinationBegin is negative
              * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
-            void getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin);
+            void getChars(int sourceBegin, int sourceEnd,
+                          Array<char> &destination, int destinationBegin);
 
             /**
              * Get char to String
@@ -513,7 +514,8 @@ namespace Java {
 			boolean isEmpty() const;
 
             /**
-             * Returns a new String composed of copies of the CharSequence elements joined together
+             * Returns a new String composed of copies of the CharSequence elements
+             * joined together
              *
              * @param delimiter
              * @param elements
@@ -532,7 +534,8 @@ namespace Java {
             }
 
             /**
-             * Returns the index within this string of the last occurrence of the specified character
+             * Returns the index within this string of the last occurrence
+             * of the specified character
              *
              * @param character
              * @return index of the last occurrence of the specified character,
@@ -541,7 +544,8 @@ namespace Java {
 			int lastIndexOf(int character);
 
             /**
-             * Returns the index within this string of the last occurrence of the specified character,
+             * Returns the index within this string of the last occurrence
+             * of the specified character,
              * searching backward starting at the specified index.
              *
              * @param character
@@ -552,7 +556,8 @@ namespace Java {
 			int lastIndexOf(int character, int fromIndex);
 
             /**
-             * Returns the index within this string of the last occurrence of the specified substring
+             * Returns the index within this string of the last occurrence
+             * of the specified substring
              *
              * @param subString
              * @return index of the last occurrence of the specified substring,
@@ -561,7 +566,8 @@ namespace Java {
 			int lastIndexOf(String subString) const;
 
             /**
-             * Returns the index within this string of the last occurrence of the specified substring,
+             * Returns the index within this string of the last occurrence
+             * of the specified substring,
              * searching backward starting at the specified index.
              *
              * @param subString
@@ -582,10 +588,12 @@ namespace Java {
              * Tells whether or not this string matches the given regular expression.
              *
              * @param regex
-             * @throw java.util.regex.PatternSyntaxException if the regular expression's syntax is invalid
-             * @return true if, and only if, this string matches the given regular expression
+             * @throw java.util.regex.PatternSyntaxException
+             * if the regular expression's syntax is invalid
+             * @return true if, and only if, this string matches
+             * the given regular expression
              */
-            // TODO need Pattern
+            // TODO (anhnt) need Pattern
 			// boolean matches(String regex) const;
 
             /**
@@ -594,14 +602,15 @@ namespace Java {
              *
              * @param index
              * @param codePointOffset
-             * @throw IndexOutOfBoundsException if index is negative or larger then the length of this String,
+             * @throw IndexOutOfBoundsException if index is negative or larger then
+             * the length of this String,
              * or if codePointOffset is positive and the substring starting with index
              * has fewer than codePointOffset code points,
              * or if codePointOffset is negative and the substring before index has fewer than
              * the absolute value of codePointOffset code points.
              * @return the index within this String
              */
-            // TODO need Character
+            // TODO (anhnt) need Character
             // int offsetByCodePoints(int index, int codePointOffset);
 
             /**
@@ -614,7 +623,8 @@ namespace Java {
              * @return true if the specified subregion of this String exactly
              * matches the specified subregion of the String argument; false otherwise.
              */
-            boolean regionMatches(int thisOffset, String otherString, int otherOffset, int len);
+            boolean regionMatches(int thisOffset,
+                                  String otherString, int otherOffset, int len);
 
             /**
              * Tests if two string regions are equal.
@@ -628,14 +638,17 @@ namespace Java {
              * subregion of the String argument; false otherwise.
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
-            boolean regionMatches(boolean ignoreCase, int thisOffset, String otherString, int otherOffset, int len);
+            boolean regionMatches(boolean ignoreCase, int thisOffset,
+                                  String otherString, int otherOffset, int len);
 
             /**
-             * Returns a string resulting from replacing all occurrences of oldChar in this String with newChar.
+             * Returns a string resulting from replacing all occurrences
+             * of oldChar in this String with newChar.
              *
              * @param oldChar
              * @param newChar
-             * @return a string derived from this String by replacing every occurrence of oldChar with newChar.
+             * @return a string derived from this String by replacing
+             * every occurrence of oldChar with newChar.
              */
 			String replace(char oldChar, char newChar) const;
 
@@ -714,7 +727,8 @@ namespace Java {
              * @param thisOffset
              * @return true if the character sequence represented by the argument is a prefix
              * of the substring of this object starting at index thisOffset; false otherwise.
-             * The result is false if thisOffset is negative or greater than the length of this String object;
+             * The result is false if thisOffset is negative or greater than the length
+             * of this String object;
              */
 			boolean startsWith(String prefix, int thisOffset) const;
 
@@ -727,7 +741,7 @@ namespace Java {
              * if endIndex is greater than length(), or if beginIndex is greater than endIndex
              * @return the specified subsequence.
              */
-            //CharSequence subSequence(int beginIndex, int endIndex);
+            // CharSequence subSequence(int beginIndex, int endIndex);
 
             /**
              * Returns a String that is a substring of this String.
@@ -779,7 +793,9 @@ namespace Java {
 			String toUpperCase();
 
             /**
-             * Returns a String whose value is this string, with any leading and trailing whitespace removed.
+             * Returns a String whose value is this string, with any leading
+             *
+             * and trailing whitespace removed.
              *
              * @return a String with leading and trailing whitespace removed.
              */
@@ -981,7 +997,7 @@ namespace Java {
 				return result;
 			}
 		};
-	}
+	} // namespace Lang
 }
 
 #endif  // JAVA_LANG_STRING_STRING_HPP_
