@@ -38,7 +38,7 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, StringBufferConstructor) {
+TEST(JavaLang, StringBufferConstructor) {
     // Init a StringBuffer with default constructor
     StringBuffer defaultConstructor;
     int expectCapacity = 16;
@@ -97,7 +97,7 @@ TEST (JavaLang, StringBufferConstructor) {
     ASSERT_STR(expectStringValue, stringConstructor.getValue());
 }
 
-TEST (JavaLang, StringBufferOperater) {
+TEST(JavaLang, StringBufferOperater) {
 	StringBuffer other = StringBuffer("A string to test");
 	StringBuffer stringBuffer;
 	stringBuffer = other;
@@ -113,14 +113,14 @@ TEST (JavaLang, StringBufferOperater) {
 	ASSERT_STR(otherUnSafe.getValue(), stringBufferUnSafe.getValue());
 }
 
-TEST (JavaLang, StringBufferCapacity) {
+TEST(JavaLang, StringBufferCapacity) {
 	// Init a StringBuffer with specific capacity
 	StringBuffer stringBuffer = StringBuffer(16);
 	int expectCapacity = 16;
 	ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
 }
 
-TEST (JavaLang, StringBufferLength) {
+TEST(JavaLang, StringBufferLength) {
 	// Init a StringBuffer with a String
 	String aString = "A string to test";
 	StringBuffer stringConstructor = StringBuffer(aString);
@@ -128,7 +128,7 @@ TEST (JavaLang, StringBufferLength) {
 	ASSERT_EQUAL(expectLength, stringConstructor.length());
 }
 
-TEST (JavaLang, StringBufferGetValue) {
+TEST(JavaLang, StringBufferGetValue) {
 	// Init a StringBuffer with string
 	String aString = "A string to test";
 	StringBuffer stringBuffer = StringBuffer(aString);
@@ -136,7 +136,7 @@ TEST (JavaLang, StringBufferGetValue) {
 	ASSERT_STR(expectValue, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferAppendSubCharArray) {
+TEST(JavaLang, StringBufferAppendSubCharArray) {
 	StringBuffer stringAppend = StringBuffer("please");
 	
 	// Append "add more" to stringAppend
@@ -145,7 +145,7 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
 	string expectString = (string) ( "please add more" );
 	ASSERT_STR(expectString, stringAppend.getValue());
 	
-	// Test (offset + len) > stringBuffer.length()
+	// TEST(offset + len) > stringBuffer.length()
 	try {
 		stringAppend.append(stringToAppend, 20, 2);
 	}
@@ -170,7 +170,7 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
 	}
 }
 
-TEST (JavaLang, StringBufferAppend) {
+TEST(JavaLang, StringBufferAppend) {
     // Test string
     StringBuffer charArrayAppendStringBuffer = StringBuffer("please");
 
@@ -313,7 +313,7 @@ TEST (JavaLang, StringBufferAppend) {
     ASSERT_STR(expectNullCharSequenceAppend, nullCharSequenceAppendStringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferInsertSubCharArray) {
+TEST(JavaLang, StringBufferInsertSubCharArray) {
 	// Given a StringBuffer
 	StringBuffer stringInsert = StringBuffer("please more");
 	
@@ -364,7 +364,7 @@ TEST (JavaLang, StringBufferInsertSubCharArray) {
 	}
 }
 
-TEST (JavaLang, StringBufferInsert) {
+TEST(JavaLang, StringBufferInsert) {
     // Test string
     StringBuffer charArrayInsertStringBuffer = StringBuffer("please more");
 
@@ -533,7 +533,7 @@ TEST (JavaLang, StringBufferInsert) {
     delete charSequenceString;
 }
 
-TEST (JavaLang, StringBufferEnsureCapacity) {
+TEST(JavaLang, StringBufferEnsureCapacity) {
 	StringBuffer stringBuffer;
 	
 	// Test minimum capacity = 20
@@ -552,7 +552,7 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
 	ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
 }
 
-TEST (JavaLang, StringBufferAppendCodePoint) {
+TEST(JavaLang, StringBufferAppendCodePoint) {
 	StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
 	
 	// Test Bmp codePoint
@@ -574,7 +574,7 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
 	//ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferCharAt) {
+TEST(JavaLang, StringBufferCharAt) {
 	StringBuffer stringBuffer = StringBuffer("CharAt");
 	
 	// Test vaild index
@@ -606,7 +606,7 @@ TEST (JavaLang, StringBufferCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointAt) {
+TEST(JavaLang, StringBufferCodePointAt) {
 	StringBuffer stringBuffer = StringBuffer("CodePointAt");
 	
 	// Test vaild index
@@ -638,7 +638,7 @@ TEST (JavaLang, StringBufferCodePointAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointBefore) {
+TEST(JavaLang, StringBufferCodePointBefore) {
 	StringBuffer stringBuffer = StringBuffer("CodePointAt");
 	
 	// Test vaild index
@@ -670,7 +670,7 @@ TEST (JavaLang, StringBufferCodePointBefore) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointCount) {
+TEST(JavaLang, StringBufferCodePointCount) {
 	StringBuffer stringBuffer = StringBuffer("CodePointCount");
 	
 	// Test vaild beginIndex, endIndex
@@ -702,7 +702,7 @@ TEST (JavaLang, StringBufferCodePointCount) {
 	}
 }
 
-TEST (JavaLang, StringBufferDeleteCharAt) {
+TEST(JavaLang, StringBufferDeleteCharAt) {
 	StringBuffer stringBuffer = StringBuffer("Delete char at");
 	
 	// Test vaild index
@@ -736,7 +736,7 @@ TEST (JavaLang, StringBufferDeleteCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferDelete) {
+TEST(JavaLang, StringBufferDelete) {
 	StringBuffer stringBuffer = StringBuffer("Delete char at");
 	
 	// Test vaild start, end
@@ -787,7 +787,7 @@ TEST (JavaLang, StringBufferDelete) {
 
 // TODO need getChar
 /*
-TEST (JavaLang, StringBufferGetChar) {
+TEST(JavaLang, StringBufferGetChar) {
     // Given a StringBuffer
     StringBuffer stringBuffer = StringBuffer("StringBuffer");
     // Destination string
@@ -839,7 +839,7 @@ TEST (JavaLang, StringBufferGetChar) {
     }
 }*/
 
-TEST (JavaLang, StringBufferIndexOf) {
+TEST(JavaLang, StringBufferIndexOf) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	// Given 2 subString
@@ -857,7 +857,7 @@ TEST (JavaLang, StringBufferIndexOf) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferIndexOfFromIndex) {
+TEST(JavaLang, StringBufferIndexOfFromIndex) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -875,7 +875,7 @@ TEST (JavaLang, StringBufferIndexOfFromIndex) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferLastIndexOf) {
+TEST(JavaLang, StringBufferLastIndexOf) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -893,7 +893,7 @@ TEST (JavaLang, StringBufferLastIndexOf) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
+TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -916,7 +916,7 @@ TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferOffSetByCodePoint) {
+TEST(JavaLang, StringBufferOffSetByCodePoint) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a string buffer");
 	
@@ -942,7 +942,7 @@ TEST (JavaLang, StringBufferOffSetByCodePoint) {
 	}
 }
 
-TEST (JavaLang, StringBufferReplace) {
+TEST(JavaLang, StringBufferReplace) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	
@@ -999,7 +999,7 @@ TEST (JavaLang, StringBufferReplace) {
 	}
 }
 
-TEST (JavaLang, StringBufferReverse) {
+TEST(JavaLang, StringBufferReverse) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1016,7 +1016,7 @@ TEST (JavaLang, StringBufferReverse) {
 	 ASSERT_STR(expectSurrogateStringReverse, surrogateStringBuffer.getValue());*/
 }
 
-TEST (JavaLang, StringBufferSetCharAt) {
+TEST(JavaLang, StringBufferSetCharAt) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1053,7 +1053,7 @@ TEST (JavaLang, StringBufferSetCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferSetLength) {
+TEST(JavaLang, StringBufferSetLength) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1076,7 +1076,7 @@ TEST (JavaLang, StringBufferSetLength) {
 	}
 }
 
-TEST (JavaLang, StringBufferSubString) {
+TEST(JavaLang, StringBufferSubString) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	
@@ -1137,7 +1137,7 @@ TEST (JavaLang, StringBufferSubString) {
 }
 
 // TODO need subSequence
-/*TEST (JavaLang, StringBufferSubSequence) {
+/*TEST(JavaLang, StringBufferSubSequence) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 
@@ -1194,7 +1194,7 @@ TEST (JavaLang, StringBufferSubString) {
     delete charSequenceString;
 }*/
 
-TEST (JavaLang, StringBufferToString) {
+TEST(JavaLang, StringBufferToString) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
     string expectSubStringResult = (string)("This is a StringBuffer");
@@ -1202,7 +1202,7 @@ TEST (JavaLang, StringBufferToString) {
     ASSERT_STR(expectSubStringResult, result);
 }
 
-TEST (JavaLang, StringBufferTrimToSize) {
+TEST(JavaLang, StringBufferTrimToSize) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer(50);
 	string stringToAppend = (string) ( "This is a StringBuffer" );
