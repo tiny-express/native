@@ -54,6 +54,11 @@ TEST (JavaLang, StringConstructor) {
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
 	ASSERT_STR("Hello world", normalString.toString());
+
+    // Given constant string with length - Return string
+    string constString = (string)"Hello world";
+    String newString(constString, 5);
+    ASSERT_STR("Hello", newString.toString());
 }
 
 TEST (JavaLang, StringDestructor) {
@@ -484,12 +489,16 @@ TEST (JavaLang, StringSubString) {
 }
 
 TEST(JavaLang, StringFormat) {
-
+    unsigned short ushortValue = 1;
+    short shortValue = -1;
     int intValue = -123;
+    unsigned int uintValue = 123;
     long longValue = 123;
+    unsigned long ulongValue = 123456;
     float floatValue = 123.456;
     double doubleValue = 123.456789;
-    string stringValue = "string";
+    string stringValue = (string)"string";
+    Short shortObject = 123;
     Integer integerObject = -123;
     Long longObject = 123456;
     Float floatObject = 123.456;
@@ -522,6 +531,13 @@ TEST(JavaLang, StringFormat) {
         String expect = "Preceding with zeros: 0000000123";
         String format = "Preceding with zeros: %010d";
         String result = String::format(format, longValue);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String expect = "1 123 123456 123";
+        String format = "%u %u %u %d";
+        String result = String::format(format, ushortValue, uintValue, ulongValue, shortObject);
         ASSERT_STR(expect.toString(), result.toString());
     }
 

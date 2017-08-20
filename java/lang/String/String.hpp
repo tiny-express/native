@@ -139,21 +139,21 @@ namespace Java {
                 regex_t regex;
 
                 errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-                while(errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-                    if(errorCode == 0) {
+                    if (errorCode == 0) {
                         int unmatchedStringLength = matchedResult[0].rm_so;
                         int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
 
-                        if(unmatchedStringLength > 0)
+                        if (unmatchedStringLength > 0)
                             result += String(inputStringPtr, unmatchedStringLength);
 
-                        if(matchedStringLength > 0) {
+                        if (matchedStringLength > 0) {
                             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
                             result += String::printObject(matchedString, value);
 
-                            if(matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                            if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                                 String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
                                 result += String::format(remainString, args...);
                                 break;
@@ -172,7 +172,7 @@ namespace Java {
 
                 regfree(&regex);
                 return result;
-            };
+            }
             static String format(const String& format);
 
 		public:
@@ -211,10 +211,10 @@ namespace Java {
                 String result;
                 char lastChar = '\0';
 
-                if(format.getSize() > 0)
+                if (format.getSize() > 0)
                     lastChar = format.charAt(format.getSize() - 1);
 
-                switch(lastChar) {
+                switch (lastChar) {
                     case '%':
                         result += lastChar;
                         break;

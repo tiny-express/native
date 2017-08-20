@@ -852,128 +852,112 @@ boolean String::operator>=(const String &target) const {
 	return true;
 }
 
-String String::print(const String &format, short value)
-{
+String String::print(const String &format, short value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, int value)
-{
+String String::print(const String &format, int value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, long value)
-{
+String String::print(const String &format, long value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, unsigned short value)
-{
+String String::print(const String &format, unsigned short value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, unsigned int value)
-{
+String String::print(const String &format, unsigned int value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, unsigned long value)
-{
+String String::print(const String &format, unsigned long value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, double value)
-{
+String String::print(const String &format, double value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, float value)
-{
+String String::print(const String &format, float value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, char *value)
-{
+String String::print(const String &format, char *value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if(length > 0)
+    if (length > 0)
         result = String(buffer, length);
     return result;
 }
 
-String String::print(const String &format, Short value)
-{
+String String::print(const String &format, Short value) {
     return String::print(format, value.shortValue());
 }
 
-String String::print(const String &format, Integer value)
-{
+String String::print(const String &format, Integer value) {
     return String::print(format, value.intValue());
 }
 
-String String::print(const String &format, Long value)
-{
+String String::print(const String &format, Long value) {
     return String::print(format, value.longValue());
 }
 
-String String::print(const String &format, Float value)
-{
+String String::print(const String &format, Float value) {
     return String::print(format, value.floatValue());
 }
 
-String String::print(const String &format, Double value)
-{
+String String::print(const String &format, Double value) {
     return String::print(format, value.doubleValue());
 }
 
-String String::print(const String &format, String value)
-{
+String String::print(const String &format, String value) {
     return String::print(format, value.toString());
 }
 
-String String::format(const String &format)
-{
+String String::format(const String &format) {
     const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
     String result;
     String inputString(format);
@@ -984,23 +968,22 @@ String String::format(const String &format)
     regex_t regex;
 
     errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-    while(errorCode == 0 && inputStringOffset < inputString.getSize()) {
+    while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-        if(errorCode == 0) {
+        if (errorCode == 0) {
             int unmatchedStringLength = matchedResult[0].rm_so;
             int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
 
-            if(unmatchedStringLength > 0)
+            if (unmatchedStringLength > 0)
                 result += String(inputStringPtr, unmatchedStringLength);
 
-            if(matchedStringLength > 0) {
+            if (matchedStringLength > 0) {
                 String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                if(matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                     regfree(&regex);
                     throw "Missing arguments";
-                }
-                else
+                } else
                     result += "%";
             }
 
