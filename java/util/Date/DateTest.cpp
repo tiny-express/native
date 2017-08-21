@@ -95,13 +95,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
 //}
 //
-//TEST(JavaUtil, DateGetDayOfWeek) {
-//    // Given valid date to test getDay()
-//    int expectedDayOfWeek = 4; // Thursday
-//    Date date = Date(2017, 05, 22, 20, 50, 58);
-//
-//    ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
-//}
 
 ///**
 // * This test case aim to make CI happy, no need to do like that
@@ -342,7 +335,6 @@ TEST(JavaUtil, DateGetYear) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
 
     // Test Date(int year, int month, int date)
@@ -397,7 +389,6 @@ TEST(JavaUtil, DateGetMonth) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
 
     // Test Date(int year, int month, int date)
@@ -452,7 +443,6 @@ TEST(JavaUtil, DateGetDate) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
 
     // Test Date(int year, int month, int date)
@@ -507,7 +497,6 @@ TEST(JavaUtil, DateGetHour) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
 
     // Test Date(int year, int month, int date)
@@ -562,7 +551,6 @@ TEST(JavaUtil, DateGetMinutes) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
 
     // Test Date(int year, int month, int date)
@@ -617,7 +605,6 @@ TEST(JavaUtil, DateGetSeconds) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
 
     // Test Date(int year, int month, int date)
@@ -648,7 +635,6 @@ TEST(JavaUtil, DateGetTime) {
 
     // Timer of C++ to test current local time
     time_t now = time(0);
-
     ASSERT_EQUAL(now, date.getTime());
 
     // Test Date(int year, int month, int date)
@@ -682,7 +668,6 @@ TEST(JavaUtil, DateSetTime) {
     // Timer of C++ to test current local time
     time_t now = time(0);
     tm *currentTime = localtime(&now);
-
     date.setTime(now);
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
     ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
@@ -746,4 +731,37 @@ TEST(JavaUtil, DateSetTime) {
     ASSERT_EQUAL(8, sameDate.getHours());
     ASSERT_EQUAL(01, sameDate.getMinutes());
     ASSERT_EQUAL(13, sameDate.getSeconds());
+}
+
+TEST(JavaUtil, DateGetDay) {
+    // Create variable to test
+    Date date;
+
+    // Test Sunday - value 0
+    date = Date(2017, 8, 13, 8, 01, 13);
+    ASSERT_EQUAL(0, date.getDay());
+
+    // Test Monday - value 1
+    date = Date(2017, 8, 14, 8, 01, 13);
+    ASSERT_EQUAL(1, date.getDay());
+
+    // Test Tuesday - value 2
+    date = Date(2017, 8, 15, 8, 01, 13);
+    ASSERT_EQUAL(2, date.getDay());
+
+    // Test Wednesday - value 3
+    date = Date(2017, 8, 16, 8, 01, 13);
+    ASSERT_EQUAL(3, date.getDay());
+
+    // Test Thursday - value 4
+    date = Date(2017, 8, 17, 8, 01, 13);
+    ASSERT_EQUAL(4, date.getDay());
+
+    // Test Friday - value 5
+    date = Date(2017, 8, 18, 8, 01, 13);
+    ASSERT_EQUAL(5, date.getDay());
+
+    // Test Saturday - value 6
+    date = Date(2017, 8, 19, 8, 01, 13);
+    ASSERT_EQUAL(6, date.getDay());
 }
