@@ -367,20 +367,7 @@ namespace Java {
 						 * @param sec
 						 * @return long
 						 */
-						static long UTC(int year, int month, int date, int hrs, int min, int sec) {
-							tm localTimer = { 0 };
-							localTimer.tm_year = year % 1900;
-							localTimer.tm_mon = month;
-							localTimer.tm_mday = date;
-							localTimer.tm_hour = hrs;
-							localTimer.tm_min = min;
-							localTimer.tm_sec = sec;
-							
-							time_t result = mktime(&localTimer);
-							return result;
-						}
-					
-					
+						static long UTC(int year, int month, int date, int hrs, int min, int sec);
 				};
 		}
 }

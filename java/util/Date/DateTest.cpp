@@ -86,14 +86,14 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(sameDate.getMinutes(), date.getMinutes());
     ASSERT_EQUAL(sameDate.getSeconds(), date.getSeconds());
 }
-//
-//TEST(JavaUtil, DateGetYear) {
-//    // Given valid date to test getYear()
-//    int expectedYear = 2018;
-//    Date date = Date(2018, 05, 20, 20, 50, 58);
-//
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//}
+
+TEST(JavaUtil, DateGetYear) {
+    // Given valid date to test getYear()
+    int expectedYear = 2018;
+    Date date = Date(2018, 05, 20, 20, 50, 58);
+
+    ASSERT_EQUAL(expectedYear, date.getYear());
+}
 //
 //TEST(JavaUtil, DateGetMonth) {
 //    // Given valid date to test getMonth()
@@ -291,28 +291,127 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedResult, date.compareTo(dateEqual));
 //}
 //
-///**
-// * This test case aim to make CI happy, no need to do like that
-// * Usage:
-// *  Date::UTC(...)
-// */
-//TEST(JavaUtil, DateUTC) {
-//    // Given valid date tot est Date::UTC - should to return correct epoch value
-//    long result = Date::UTC(2017, 05, 21, 21, 05, 43);
-//
-//    // Init timer of system
-//    tm timePresenter = {0};
-//    timePresenter.tm_year = 2017 - 1900; //LocalTimer start since 1900;
-//    timePresenter.tm_mon = 05;
-//    timePresenter.tm_mday = 21;
-//    timePresenter.tm_hour = 21;
-//    timePresenter.tm_min = 05;
-//    timePresenter.tm_sec = 43;
-//
-//    long expectedTime = mktime(&timePresenter);
-//
-//    ASSERT_EQUAL(expectedTime, result);
-//}
+
+TEST(JavaUtil, DateUTC) {
+    // Create variable to test
+    tm expectedTimer = {0};
+    long expectedResult;
+    long actualResult;
+
+    // Test valid case
+    expectedTimer.tm_year = 2017 - 1900;
+    expectedTimer.tm_mon = 02;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Test month = 12
+    expectedTimer.tm_year = 2018 - 1900;
+    expectedTimer.tm_mon = 1;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 12, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Test month > 12
+    expectedTimer.tm_year = 2018 - 1900;
+    expectedTimer.tm_mon = 3;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 15, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2019 - 1900;
+    expectedTimer.tm_mon = 1;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 24, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2019 - 1900;
+    expectedTimer.tm_mon = 1;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 25, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2019 - 1900;
+    expectedTimer.tm_mon = 4;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, 28, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    // Test month < 0
+    expectedTimer.tm_year = 2016 - 1900;
+    expectedTimer.tm_mon = 12;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, -1, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2016 - 1900;
+    expectedTimer.tm_mon = 10;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, -3, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2016 - 1900;
+    expectedTimer.tm_mon = 1;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, -12, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2015 - 1900;
+    expectedTimer.tm_mon = 1;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, -24, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+
+    expectedTimer.tm_year = 2014 - 1900;
+    expectedTimer.tm_mon = 9;
+    expectedTimer.tm_mday = 13;
+    expectedTimer.tm_hour = 8;
+    expectedTimer.tm_min = 01;
+    expectedTimer.tm_sec = 13;
+    expectedResult = mktime(&expectedTimer);
+    actualResult = Date::UTC(2017, -28, 13, 8, 01, 13);
+    ASSERT_EQUAL(expectedResult, actualResult);
+}
 //
 //TEST(JavaUtil, DateGetTimeZone) {
 //    // Given valid date to test current time zone, this test case is based on Vietnam GMT+7

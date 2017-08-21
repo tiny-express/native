@@ -67,11 +67,11 @@ Date::Date(long date) {
 }
 
 // TODO(thoangminh): Check this method later
-//Date::Date(String s) {
-//	this->refreshFlag = false;
-//	this->original = Date::parse(s);
-//	this->localTimer = localtime(&this->original);
-//}
+Date::Date(String s) {
+	this->refreshFlag = false;
+	this->original = Date::parse(s);
+	this->localTimer = localtime(&this->original);
+}
 
 Date::~Date() {
 }
@@ -135,14 +135,14 @@ int Date::getDate() {
 
 }
 
-int Date::getDay() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_wday;
-    return result;
-}
+//int Date::getDay() {
+//    if (this->refreshFlag) {
+//        refreshTime();
+//    }
+//
+//    int result = this->localTimer->tm_wday;
+//    return result;
+//}
 
 int Date::getHours() {
     if (this->refreshFlag) {
@@ -190,92 +190,124 @@ int Date::getYear() {
     return result;
 }
 
-long Date::getTime() {
-    if (this->refreshFlag) {
-        refreshTime();
+//long Date::getTime() {
+//    if (this->refreshFlag) {
+//        refreshTime();
+//    }
+//
+//    long result = this->original;
+//    return result;
+//}
+//
+//int Date::getTimezoneOffset() {
+//    tm *globalTimer = gmtime(&this->original);
+//    int result = this->localTimer->tm_hour - globalTimer->tm_hour;
+//    return result;
+//}
+//
+//boolean Date::after(Date when) {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	if (this->original > when.original) {
+//		return true;
+//	}
+//
+//	return false;
+//}
+//
+//boolean Date::before(Date when) {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	if (this->original > when.original) {
+//		return false;
+//	}
+//
+//	return true;
+//}
+//
+//int Date::compareTo(Date anotherDate) {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	long temp = this->original - anotherDate.original;
+//
+//	if (temp < 0) {
+//		return -1;
+//	} else if (temp == 0) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+//
+//}
+//
+//String Date::toGMTString() {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	tm *gmTimer = gmtime(&this->original);
+//
+//	string timeString = this->toString0(gmTimer);
+//	String result = timeString;
+//
+//	free(timeString);
+//	return result;
+//}
+//
+//String Date::toLocaleString() {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	string timeString = this->toString0(this->localTimer);
+//	String result = timeString;
+//
+//	free(timeString);
+//	return result;
+//}
+//
+//String Date::toString() {
+//	if (this->refreshFlag) {
+//		refreshTime();
+//	}
+//
+//	return this->toLocaleString();
+//}
+
+long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
+    long result;
+    tm localTimer = { 0 };
+
+    localTimer.tm_year = year % 1900;
+
+    if (month >= 12) {
+        localTimer.tm_year += month / 12;
+        month %= 12;
+
+        if (month == 0) {
+            month = 1;
+        }
     }
 
-    long result = this->original;
+    if (month < 0) {
+        localTimer.tm_year += ((month + 1) / 12) - 1;
+        month = month - 12 * ((month + 1) / 12 - 1);
+        month++;
+    }
+
+    localTimer.tm_mon = month;
+    localTimer.tm_mday = date;
+    localTimer.tm_hour = hrs;
+    localTimer.tm_min = min;
+    localTimer.tm_sec = sec;
+
+    result = mktime(&localTimer);
+
     return result;
-}
-
-int Date::getTimezoneOffset() {
-    tm *globalTimer = gmtime(&this->original);
-    int result = this->localTimer->tm_hour - globalTimer->tm_hour;
-    return result;
-}
-
-boolean Date::after(Date when) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	if (this->original > when.original) {
-		return true;
-	}
-
-	return false;
-}
-
-boolean Date::before(Date when) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	if (this->original > when.original) {
-		return false;
-	}
-
-	return true;
-}
-
-int Date::compareTo(Date anotherDate) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	long temp = this->original - anotherDate.original;
-
-	if (temp < 0) {
-		return -1;
-	} else if (temp == 0) {
-		return 0;
-	} else {
-		return 1;
-	}
-
-}
-
-String Date::toGMTString() {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	tm *gmTimer = gmtime(&this->original);
-
-	string timeString = this->toString0(gmTimer);
-	String result = timeString;
-
-	free(timeString);
-	return result;
-}
-
-String Date::toLocaleString() {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	string timeString = this->toString0(this->localTimer);
-	String result = timeString;
-
-	free(timeString);
-	return result;
-}
-
-String Date::toString() {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
-	return this->toLocaleString();
 }
