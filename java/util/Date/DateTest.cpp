@@ -128,15 +128,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
 
-//TEST(JavaUtil, DateSetMinutes) {
-//    // Given valid date to test setMinutes()
-//    Date date;
-//    int expectedMinutes = 58;
-//
-//    date.setMinutes(expectedMinutes);
-//    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
-//}
-
 //TEST(JavaUtil, DateSetSeconds) {
 //    // Given valid date to test setSeconds()
 //    Date date;
@@ -578,4 +569,27 @@ TEST(JavaUtil, DateGetHour) {
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(8, date.getHours());
+}
+
+TEST(JavaUtil, DateSetMinutes) {
+    // Create variable to test
+    Date date;
+
+    date.setMinutes(1);
+    ASSERT_EQUAL(1, date.getMinutes());
+
+    date.setMinutes(2);
+    ASSERT_EQUAL(2, date.getMinutes());
+
+    date.setMinutes(13);
+    ASSERT_EQUAL(13, date.getMinutes());
+
+    date.setMinutes(20);
+    ASSERT_EQUAL(20, date.getMinutes());
+
+    date.setMinutes(21);
+    ASSERT_EQUAL(21, date.getMinutes());
+
+    date.setMinutes(59);
+    ASSERT_EQUAL(59, date.getMinutes());
 }
