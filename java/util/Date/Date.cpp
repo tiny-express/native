@@ -323,6 +323,11 @@ long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
     return result;
 }
 
+Date Date::clone() {
+    Date clone = *this;
+    return clone;
+}
+
 //long Date::parse(String inputString) {
 //    tm timer = {0};
 //    long result;

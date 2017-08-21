@@ -115,14 +115,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
 //}
 
-//TEST(JavaUtil, DateClone) {
-//    // Given valid date and make a copy of this date
-//    Date date = Date(2017, 05, 21, 14, 05, 43);
-//
-//    Date target = date;
-//    ASSERT_EQUAL(date.getSeconds(), target.getSeconds());
-//}
-//
 //TEST(JavaUtil, DateCompare) {
 //    // Given valid date to test compareTo() with dateBefore, dateAfter, dateEqual
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
@@ -809,4 +801,73 @@ TEST(JavaUtil, DateBefore) {
 
     date = Date(2019, 8, 15, 8, 01, 13);
     ASSERT_FALSE(date.before(tempDate));
+}
+
+TEST(JavaUtil, DateClone) {
+    // Create variable to test
+    Date tempDate;
+    Date date;
+    long tempTime;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+    date = tempDate.clone();
+    ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
+    ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
+    ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
+    ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
+    ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
+    ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
+
+    // Test Date(int year, int month, int date)
+    tempDate = Date(2017, 02, 13);
+    date = tempDate.clone();
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(0, date.getHours());
+    ASSERT_EQUAL(0, date.getMinutes());
+    ASSERT_EQUAL(0, date.getSeconds());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    tempDate = Date(2017, 02, 13, 8, 01);
+    date = tempDate.clone();
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(0, date.getSeconds());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    tempDate = Date(2017, 02, 13, 8, 01, 13);
+    date = tempDate.clone();
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(13, date.getSeconds());
+
+    // Test Date(long date)
+    tempDate = Date(Date::UTC(2017, 02, 13, 8, 01, 13));
+    date = tempDate.clone();
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(13, date.getSeconds());
+
+    // Test Date sameDate = date;
+    tempDate = Date(2017, 02, 13, 8, 01, 13);
+    date = tempDate.clone();
+    Date sameDate = date;
+    ASSERT_EQUAL(2017, sameDate.getYear());
+    ASSERT_EQUAL(02, sameDate.getMonth());
+    ASSERT_EQUAL(13, sameDate.getDate());
+    ASSERT_EQUAL(8, sameDate.getHours());
+    ASSERT_EQUAL(01, sameDate.getMinutes());
+    ASSERT_EQUAL(13, sameDate.getSeconds());
 }

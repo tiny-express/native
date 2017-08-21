@@ -162,6 +162,7 @@ namespace Java {
 						
 						/**
 						 * Alloc a new object have sample orginal as target
+						 *
 						 * @param target
 						 * @return
 						 */
@@ -175,6 +176,7 @@ namespace Java {
 				public:
 						/**
 						 * Tests if this date is after the specified date.
+						 *
 						 * @param when: Date
 						 * @return boolean
 						 */
@@ -182,6 +184,7 @@ namespace Java {
 						
 						/**
 						 * Tests if this date is before the specified date.
+						 *
 						 * @param when
 						 * @return boolean
 						 */
@@ -190,17 +193,16 @@ namespace Java {
 						/**
 						 * We can hide function clone() on Object later
 						 * Return a copy of this object.
-						 * @return E
+						 *
+						 * @return Object
 						 */
-						template <typename E>
-						E clone() {
-							Date clone = *this;
-							return clone;
-						}
+
+						Date clone();
 						
 						/**
 						 * Compares two Dates for ordering.
 						 * @param anotherDate
+						 *
 						 * @return int
 						 */
 						int compareTo(Date anotherDate);
@@ -208,6 +210,7 @@ namespace Java {
 						/**
 						 * This function was implement on Object, no need to define again
 						 * Compares two dates for equality.
+						 *
 						 * @param obj
 						 * @return int
 						 */
