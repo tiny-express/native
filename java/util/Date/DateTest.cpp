@@ -363,7 +363,8 @@ TEST(JavaUtil, DateGetYear) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(2017, date.getYear());
+    Date sameDate = date;
+    ASSERT_EQUAL(2017, sameDate.getYear());
 }
 
 TEST(JavaUtil, DateSetMonth) {
@@ -417,7 +418,8 @@ TEST(JavaUtil, DateGetMonth) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(02, date.getMonth());
+    Date sameDate = date;
+    ASSERT_EQUAL(02, sameDate.getMonth());
 }
 
 TEST(JavaUtil, DateSetDate) {
@@ -471,7 +473,8 @@ TEST(JavaUtil, DateGetDate) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(13, date.getDate());
+    Date sameDate = date;
+    ASSERT_EQUAL(13, sameDate.getDate());
 }
 
 TEST(JavaUtil, DateSetHours) {
@@ -525,7 +528,8 @@ TEST(JavaUtil, DateGetHour) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(8, date.getHours());
+    Date sameDate = date;
+    ASSERT_EQUAL(8, sameDate.getHours());
 }
 
 TEST(JavaUtil, DateSetMinutes) {
@@ -579,7 +583,8 @@ TEST(JavaUtil, DateGetMinutes) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(01, date.getMinutes());
+    Date sameDate = date;
+    ASSERT_EQUAL(01, sameDate.getMinutes());
 }
 
 TEST(JavaUtil, DateSetSeconds) {
@@ -633,17 +638,9 @@ TEST(JavaUtil, DateGetSeconds) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(13, date.getSeconds());
+    Date sameDate = date;
+    ASSERT_EQUAL(13, sameDate.getSeconds());
 }
-
-//TEST(JavaUtil, DateSetTime) {
-//    // Given valid date to test setTime()
-//    Date date;
-//    int expectedTime = 1498028643;
-//
-//    date.setTime(expectedTime);
-//    ASSERT_EQUAL(1, date.getYear());
-//}
 
 TEST(JavaUtil, DateGetTime) {
     // Create variable to test
@@ -672,5 +669,81 @@ TEST(JavaUtil, DateGetTime) {
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(1489366873, date.getTime());
+    Date sameDate = date;
+    ASSERT_EQUAL(1489366873, sameDate.getTime());
+}
+
+TEST(JavaUtil, DateSetTime) {
+    // Create variable to test
+    Date tempDate;
+    Date date;
+    long tempTime;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+
+    date.setTime(now);
+    ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
+    ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
+    ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
+    ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
+    ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
+    ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
+
+    // Test Date(int year, int month, int date)
+    tempDate = Date(2017, 02, 13);
+    tempTime = tempDate.getTime();
+    date.setTime(tempTime);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(0, date.getHours());
+    ASSERT_EQUAL(0, date.getMinutes());
+    ASSERT_EQUAL(0, date.getSeconds());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    tempDate = Date(2017, 02, 13, 8, 01);
+    tempTime = tempDate.getTime();
+    date.setTime(tempTime);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(0, date.getSeconds());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    tempDate = Date(2017, 02, 13, 8, 01, 13);
+    tempTime = tempDate.getTime();
+    date.setTime(tempTime);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(13, date.getSeconds());
+
+    // Test Date(long date)
+    tempDate = Date(Date::UTC(2017, 02, 13, 8, 01, 13));
+    tempTime = tempDate.getTime();
+    date.setTime(tempTime);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(13, date.getSeconds());
+
+    // Test Date sameDate = date;
+    tempDate = Date(2017, 02, 13, 8, 01, 13);
+    tempTime = tempDate.getTime();
+    date.setTime(tempTime);
+    Date sameDate = date;
+    ASSERT_EQUAL(2017, sameDate.getYear());
+    ASSERT_EQUAL(02, sameDate.getMonth());
+    ASSERT_EQUAL(13, sameDate.getDate());
+    ASSERT_EQUAL(8, sameDate.getHours());
+    ASSERT_EQUAL(01, sameDate.getMinutes());
+    ASSERT_EQUAL(13, sameDate.getSeconds());
 }
