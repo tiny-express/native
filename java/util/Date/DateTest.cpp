@@ -103,24 +103,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
 //}
 
-//TEST(JavaUtil, DateGetTime) {
-//    // Get current time of system to validate getTime()
-//    long expectedTime = 1498032610;
-//
-//    Date date = expectedTime;
-//
-//    ASSERT_EQUAL(expectedTime, date.getTime());
-//}
-
-//TEST(JavaUtil, DateSetTime) {
-//    // Given valid date to test setTime()
-//    Date date;
-//    int expectedTime = 1498028643;
-//
-//    date.setTime(expectedTime);
-//    ASSERT_EQUAL(expectedTime, date.getTime());
-//}
-
 ///**
 // * This test case aim to make CI happy, no need to do like that
 // * Usage:
@@ -652,4 +634,43 @@ TEST(JavaUtil, DateGetSeconds) {
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(13, date.getSeconds());
+}
+
+//TEST(JavaUtil, DateSetTime) {
+//    // Given valid date to test setTime()
+//    Date date;
+//    int expectedTime = 1498028643;
+//
+//    date.setTime(expectedTime);
+//    ASSERT_EQUAL(1, date.getYear());
+//}
+
+TEST(JavaUtil, DateGetTime) {
+    // Create variable to test
+    Date date;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+
+    ASSERT_EQUAL(now, date.getTime());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(1489338000, date.getTime());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(1489366860, date.getTime());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(1489366873, date.getTime());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
+    ASSERT_EQUAL(1413162073, date.getTime());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(1489366873, date.getTime());
 }

@@ -192,15 +192,15 @@ int Date::getYear() {
     return result;
 }
 
-//long Date::getTime() {
-//    if (this->refreshFlag) {
-//        refreshTime();
-//    }
-//
-//    long result = this->original;
-//    return result;
-//}
-//
+long Date::getTime() {
+    if (this->refreshFlag) {
+        refreshTime();
+    }
+
+    long result = this->original;
+    return result;
+}
+
 //int Date::getTimezoneOffset() {
 //    tm *globalTimer = gmtime(&this->original);
 //    int result = this->localTimer->tm_hour - globalTimer->tm_hour;
