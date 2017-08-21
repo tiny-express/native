@@ -1,73 +1,93 @@
-///**
-// * Copyright 2017 Food Tiny Project. All rights reserved.
-// *
-// * Redistribution and use in source and binary forms, with or without
-// * modification, are permitted provided that the following conditions are met:
-// *
-// * Redistributions of source code must retain the above copyright
-// * notice, this list of conditions and the following disclaimer.
-// * Redistributions in binary form must reproduce the above
-// * copyright notice, this list of conditions and the following disclaimer
-// * in the documentation and/or other materials provided with the
-// * distribution.
-// *
-// * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-// * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-// * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-// * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-// * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-// * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// */
-//
-//extern "C" {
-//#include "../../../kernel/test.h"
-//}
-//
-//#include "Date.hpp"
-//
-//using namespace Java::Util;
-//
-//TEST (JavaUtil, DateConstructor) {
-//    // Given valid timer of C++ to test current local time
-//    time_t now = time(0);
-//    tm *currentTime = localtime(&now);
-//    int expectedYear = currentTime->tm_year + 1900; // This class return since 1900
-//
-//    // Given valid constructor and test
-//    Date date;
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//
-//    expectedYear = 2018;
-//    date = Date(2018, 05, 20);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//
-//    expectedYear = 2019;
-//    date = Date(2019, 05, 21, 05, 22);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//
-//    expectedYear = 2200;
-//    date = Date(2200, 05, 21, 05, 50, 58);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//
-//    expectedYear = 2017;
-//    date = Date(1498042091); //2017
-//    ASSERT_EQUAL(expectedYear, date.getYear());
-//
-//    expectedYear = 2017;
+/**
+ * Copyright 2017 Food Tiny Project. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+extern "C" {
+#include "../../../kernel/test.h"
+}
+
+#include "Date.hpp"
+
+using namespace Java::Util;
+
+TEST(JavaUtil, DateConstructor) {
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+
+    // Create variable to test
+    Date date;
+
+    // Test Date(). This class return since 1900
+    ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(2017, date.getYear());
+    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(13, date.getDate());
+    ASSERT_EQUAL(8, date.getHours());
+    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(13, date.getSeconds());
+    
+    // Test Date(long date) 
+    date = Date(1498042091); //2017
+    ASSERT_EQUAL(2017, date.getYear());
+
+    // TODO(thoangminh): Check it later
+    // Test Date(String s)
 //    String dateString = "Thu Jun 22 2017 12:35:34";
 //    date = Date(dateString);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    ASSERT_EQUAL(2017, date.getYear());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    Date sameDate = date;
+    ASSERT_EQUAL(sameDate.getYear(), date.getYear());
+    ASSERT_EQUAL(sameDate.getMonth(), date.getMonth());
+    ASSERT_EQUAL(sameDate.getDate(), date.getDate());
+    ASSERT_EQUAL(sameDate.getHours(), date.getHours());
+    ASSERT_EQUAL(sameDate.getMinutes(), date.getMinutes());
+    ASSERT_EQUAL(sameDate.getSeconds(), date.getSeconds());
+}
 //
-//    Date sameDate = date;
-//    ASSERT_EQUAL(sameDate.getYear(), date.getYear());
-//}
-//
-//TEST (JavaUtil, DateGetYear) {
+//TEST(JavaUtil, DateGetYear) {
 //    // Given valid date to test getYear()
 //    int expectedYear = 2018;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -75,7 +95,7 @@
 //    ASSERT_EQUAL(expectedYear, date.getYear());
 //}
 //
-//TEST (JavaUtil, DateGetMonth) {
+//TEST(JavaUtil, DateGetMonth) {
 //    // Given valid date to test getMonth()
 //    int expectedMonth = 05;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -83,7 +103,7 @@
 //    ASSERT_EQUAL(expectedMonth, date.getMonth());
 //}
 //
-//TEST (JavaUtil, DateGetDayOfMonth) {
+//TEST(JavaUtil, DateGetDayOfMonth) {
 //    // Given valid date to test getDate()
 //    int expectedDayOfMonth = 20;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -91,7 +111,7 @@
 //    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
 //}
 //
-//TEST (JavaUtil, DateGetDayOfWeek) {
+//TEST(JavaUtil, DateGetDayOfWeek) {
 //    // Given valid date to test getDay()
 //    int expectedDayOfWeek = 4; // Thursday
 //    Date date = Date(2017, 05, 22, 20, 50, 58);
@@ -99,7 +119,7 @@
 //    ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
 //}
 //
-//TEST (JavaUtil, DateGetHour) {
+//TEST(JavaUtil, DateGetHour) {
 //    // Given valid date to test getHours()
 //    int expectedHour = 20;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -107,7 +127,7 @@
 //    ASSERT_EQUAL(expectedHour, date.getHours());
 //}
 //
-//TEST (JavaUtil, DateGetMinutes) {
+//TEST(JavaUtil, DateGetMinutes) {
 //    // Given valid date to test getMinutes()
 //    int expectedMinutes = 50;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -115,7 +135,7 @@
 //    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
 //}
 //
-//TEST (JavaUtil, DateGetSeconds) {
+//TEST(JavaUtil, DateGetSeconds) {
 //    // Given valid date to test getSeconds()
 //    int expectedSecond = 58;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
@@ -123,7 +143,7 @@
 //    ASSERT_EQUAL(expectedSecond, date.getSeconds());
 //}
 //
-//TEST (JavaUtil, DateGetTime) {
+//TEST(JavaUtil, DateGetTime) {
 //    // Get current time of system to validate getTime()
 //    long expectedTime = 1498032610;
 //
@@ -132,7 +152,7 @@
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
 //
-//TEST (JavaUtil, DateSetDate) {
+//TEST(JavaUtil, DateSetDate) {
 //    // Given valid date to test setDate()
 //    Date date;
 //    int expectedDayOfMonth = 15;
@@ -141,7 +161,7 @@
 //    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
 //}
 //
-//TEST (JavaUtil, DateSetHours) {
+//TEST(JavaUtil, DateSetHours) {
 //    // Given valid date to test setHours()
 //    Date date;
 //    int expectedHour = 20;
@@ -150,7 +170,7 @@
 //    ASSERT_EQUAL(expectedHour, date.getHours());
 //}
 //
-//TEST (JavaUtil, DateSetMinutes) {
+//TEST(JavaUtil, DateSetMinutes) {
 //    // Given valid date to test setMinutes()
 //    Date date;
 //    int expectedMinutes = 58;
@@ -159,7 +179,7 @@
 //    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
 //}
 //
-//TEST (JavaUtil, DateSetMonth) {
+//TEST(JavaUtil, DateSetMonth) {
 //    // Given valid date to test setMonth()
 //    Date date;
 //    int expectedMonth = 12;
@@ -168,7 +188,7 @@
 //    ASSERT_EQUAL(expectedMonth, date.getMonth());
 //}
 //
-//TEST (JavaUtil, DateSetSeconds) {
+//TEST(JavaUtil, DateSetSeconds) {
 //    // Given valid date to test setSeconds()
 //    Date date;
 //    int expectedSecond = 15;
@@ -177,7 +197,7 @@
 //    ASSERT_EQUAL(expectedSecond, date.getSeconds());
 //}
 //
-//TEST (JavaUtil, DateSetTime) {
+//TEST(JavaUtil, DateSetTime) {
 //    // Given valid date to test setTime()
 //    Date date;
 //    int expectedTime = 1498028643;
@@ -186,7 +206,7 @@
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
 //
-//TEST (JavaUtil, DateSetYear) {
+//TEST(JavaUtil, DateSetYear) {
 //    // Given valid date to test setYear()
 //    Date date;
 //    int expectedYear = 2022;
@@ -201,7 +221,7 @@
 // *  Date date;
 // *  date.toGMTString()
 // */
-//TEST (JavaUtil, DateGMTString)  {
+//TEST(JavaUtil, DateGMTString)  {
 //    // Given valid date to test GMT time, this test case is based on Date.getTimeZoneOffset
 //    Date date = Date(2017, 05, 22, 12, 35, 34);
 //    int timeZone = date.getTimezoneOffset();
@@ -215,7 +235,7 @@
 //    ASSERT_STR(expectedGMTString.toString(), date.toGMTString().toString());
 //}
 //
-//TEST (JavaUtil, DateLocaleString) {
+//TEST(JavaUtil, DateLocaleString) {
 //    // Given valid date to test local time
 //    Date date = Date(2017, 05, 22, 12, 35, 34);
 //    String expectedLocaleString = "Thu Jun 22 2017 12:35:34";
@@ -223,7 +243,7 @@
 //    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
 //}
 //
-//TEST (JavaUtil, DateAfter) {
+//TEST(JavaUtil, DateAfter) {
 //    // Given valid date to test another date is after this day or not
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
@@ -234,7 +254,7 @@
 //    ASSERT_FALSE(date.after(dateAfter));
 //}
 //
-//TEST (JavaUtil, DateBefore) {
+//TEST(JavaUtil, DateBefore) {
 //    // Given valid date to test another date is before this day or not
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
@@ -245,7 +265,7 @@
 //    ASSERT_TRUE(date.before(dateAfter));
 //}
 //
-//TEST (JavaUtil, DateClone) {
+//TEST(JavaUtil, DateClone) {
 //    // Given valid date and make a copy of this date
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
@@ -253,7 +273,7 @@
 //    ASSERT_EQUAL(date.getSeconds(), target.getSeconds());
 //}
 //
-//TEST (JavaUtil, DateCompare) {
+//TEST(JavaUtil, DateCompare) {
 //    // Given valid date to test compareTo() with dateBefore, dateAfter, dateEqual
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
@@ -276,7 +296,7 @@
 // * Usage:
 // *  Date::UTC(...)
 // */
-//TEST (JavaUtil, DateUTC) {
+//TEST(JavaUtil, DateUTC) {
 //    // Given valid date tot est Date::UTC - should to return correct epoch value
 //    long result = Date::UTC(2017, 05, 21, 21, 05, 43);
 //
@@ -294,7 +314,7 @@
 //    ASSERT_EQUAL(expectedTime, result);
 //}
 //
-//TEST (JavaUtil, DateGetTimeZone) {
+//TEST(JavaUtil, DateGetTimeZone) {
 //    // Given valid date to test current time zone, this test case is based on Vietnam GMT+7
 //    Date date;
 //

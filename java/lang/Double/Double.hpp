@@ -661,6 +661,6 @@ namespace Java {
 						*/
 						static Double valueOf(double doubleInput);
 				};
-		}
-}
-#endif  // JAVA_LANG_DOUBLE_HPP_
+		}  // namespace Lang
+}  // namespace Java
+#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP_
