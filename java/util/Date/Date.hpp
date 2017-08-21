@@ -276,16 +276,7 @@ namespace Java {
 						 * @param s
 						 * @return long
 						 */
-						static long parse(String s) {
-							tm timer;
-							string timeString = s.toString();
-							
-							// TODO - Fix for WIN32
-							// strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
-							long result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
-							                        timer.tm_hour, timer.tm_min, timer.tm_sec);
-							return result;
-						}
+						static long parse(String inputString);
 						
 						/**
 						 * Deprecated.

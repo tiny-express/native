@@ -39,39 +39,39 @@ Date::Date() {
 Date::Date(const Date &inputDate) {
 	this->refreshFlag = false;
 	this->original = inputDate.original;
-	this->localTimer = localtime(&this->original);
+    Date::updateLocalTimer();
 }
 
 Date::Date(int year, int month, int date) {
 	this->refreshFlag = false;
 	this->original = Date::UTC(year, month, date, 0, 0, 0);
-	this->localTimer = localtime(&this->original);
+	Date::updateLocalTimer();
 }
 
 Date::Date(int year, int month, int date, int hrs, int min) {
 	this->refreshFlag = false;
 	this->original = Date::UTC(year, month, date, hrs, min, 0);
-	this->localTimer = localtime(&this->original);
+	Date::updateLocalTimer();
 }
 
 Date::Date(int year, int month, int date, int hrs, int min, int sec) {
 	this->refreshFlag = false;
 	this->original = Date::UTC(year, month, date, hrs, min, sec);
-	this->localTimer = localtime(&this->original);
+	Date::updateLocalTimer();
 }
 
 Date::Date(long date) {
 	this->refreshFlag = false;
 	this->original = date;
-	this->localTimer = localtime(&this->original);
+	Date::updateLocalTimer();
 }
 
 // TODO(thoangminh): Check this method later
-Date::Date(String s) {
-	this->refreshFlag = false;
-	this->original = Date::parse(s);
-	this->localTimer = localtime(&this->original);
-}
+//Date::Date(String s) {
+//	this->refreshFlag = false;
+//	this->original = Date::parse(s);
+//	Date::updateLocalTimer();
+//}
 
 Date::~Date() {
 }
@@ -311,3 +311,16 @@ long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
 
     return result;
 }
+
+//long Date::parse(String inputString) {
+//    tm timer = {0};
+//    long result;
+//
+//    // TODO(anhkhoa): Fix for WIN32
+//    // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
+////    string timeString = inputString.toString();
+//
+//    result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
+//                            timer.tm_hour, timer.tm_min, timer.tm_sec);
+//    return result;
+//}

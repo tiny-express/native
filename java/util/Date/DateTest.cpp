@@ -151,16 +151,30 @@ TEST(JavaUtil, DateGetYear) {
 //
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
-//
-//TEST(JavaUtil, DateSetDate) {
-//    // Given valid date to test setDate()
-//    Date date;
-//    int expectedDayOfMonth = 15;
-//
-//    date.setDate(expectedDayOfMonth);
-//    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
-//}
-//
+
+TEST(JavaUtil, DateSetDate) {
+    // Create variable to test
+    Date date;
+
+    date.setDate(1);
+    ASSERT_EQUAL(1, date.getDate());
+
+    date.setDate(2);
+    ASSERT_EQUAL(2, date.getDate());
+
+    date.setDate(13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    date.setDate(28);
+    ASSERT_EQUAL(28, date.getDate());
+
+    date.setDate(30);
+    ASSERT_EQUAL(30, date.getDate());
+
+    date.setDate(31);
+    ASSERT_EQUAL(31, date.getDate());
+}
+
 //TEST(JavaUtil, DateSetHours) {
 //    // Given valid date to test setHours()
 //    Date date;
@@ -423,3 +437,27 @@ TEST(JavaUtil, DateUTC) {
 //
 //    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 //}
+
+
+TEST(JavaUtil, DateGetDate) {
+    // Create variable to test
+    Date date;
+
+    date.setDate(1);
+    ASSERT_EQUAL(1, date.getDate());
+
+    date.setDate(2);
+    ASSERT_EQUAL(2, date.getDate());
+
+    date.setDate(13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    date.setDate(28);
+    ASSERT_EQUAL(28, date.getDate());
+
+    date.setDate(30);
+    ASSERT_EQUAL(30, date.getDate());
+
+    date.setDate(31);
+    ASSERT_EQUAL(31, date.getDate());
+}
