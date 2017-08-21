@@ -103,14 +103,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
 //}
 
-//TEST(JavaUtil, DateGetMinutes) {
-//    // Given valid date to test getMinutes()
-//    int expectedMinutes = 50;
-//    Date date = Date(2018, 05, 20, 20, 50, 58);
-//
-//    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
-//}
-//
 //TEST(JavaUtil, DateGetSeconds) {
 //    // Given valid date to test getSeconds()
 //    int expectedSecond = 58;
@@ -592,4 +584,35 @@ TEST(JavaUtil, DateSetMinutes) {
 
     date.setMinutes(59);
     ASSERT_EQUAL(59, date.getMinutes());
+}
+
+TEST(JavaUtil, DateGetMinutes) {
+    // Create variable to test
+    Date date;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+
+    ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(0, date.getMinutes());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(01, date.getMinutes());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(01, date.getMinutes());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
+    ASSERT_EQUAL(01, date.getMinutes());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(01, date.getMinutes());
 }
