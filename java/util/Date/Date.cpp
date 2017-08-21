@@ -121,7 +121,8 @@ void Date::setTime(long time) {
 void Date::setYear(int year) {
     this->refreshFlag = false;
 
-    this->localTimer->tm_year = year % 1900; //LocalTimer just keep year since 1900
+    // LocalTimer just keep year since 1900
+    this->localTimer->tm_year = year % 1900;
     this->updateOriginal();
 }
 
@@ -131,8 +132,8 @@ int Date::getDate() {
     }
 
     int result = this->localTimer->tm_mday;
-    return result;
 
+    return result;
 }
 
 //int Date::getDay() {
