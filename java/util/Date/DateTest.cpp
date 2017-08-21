@@ -115,24 +115,16 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
 //}
 
-//TEST(JavaUtil, DateCompare) {
-//    // Given valid date to test compareTo() with dateBefore, dateAfter, dateEqual
-//    Date date = Date(2017, 05, 21, 14, 05, 43);
+//TEST(JavaUtil, DateGetTimeZone) {
+//    // Given valid date to test current time zone, this test case is based on Vietnam GMT+7
+//    Date date;
 //
-//    Date dateBefore = Date(2017, 05, 21, 14, 05, 25);
-//    Date dateAfter = Date(2017, 05, 21, 14, 05, 50);
-//    Date dateEqual = Date(2017, 05, 21, 14, 05, 43);
+//    // Init timer of system to test time zone
+//    time_t now = time(0);
+//    int expectedTimeZone = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
 //
-//    int expectedResult = 1;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateBefore));
-//
-//    expectedResult = -1;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateAfter));
-//
-//    expectedResult = 0;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateEqual));
+//    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 //}
-//
 
 TEST(JavaUtil, DateUTC) {
     // Create variable to test
@@ -254,17 +246,6 @@ TEST(JavaUtil, DateUTC) {
     actualResult = Date::UTC(2017, -28, 13, 8, 01, 13);
     ASSERT_EQUAL(expectedResult, actualResult);
 }
-//
-//TEST(JavaUtil, DateGetTimeZone) {
-//    // Given valid date to test current time zone, this test case is based on Vietnam GMT+7
-//    Date date;
-//
-//    // Init timer of system to test time zone
-//    time_t now = time(0);
-//    int expectedTimeZone = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
-//
-//    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
-//}
 
 TEST(JavaUtil, DateSetYear) {
     // Create variable to test
@@ -870,4 +851,19 @@ TEST(JavaUtil, DateClone) {
     ASSERT_EQUAL(8, sameDate.getHours());
     ASSERT_EQUAL(01, sameDate.getMinutes());
     ASSERT_EQUAL(13, sameDate.getSeconds());
+}
+
+TEST(JavaUtil, DateCompareTo) {
+    // Create variable to test
+    Date date;
+    Date temp = Date(2017, 02, 13, 8, 01, 13);
+
+    date = Date(2017, 02, 12, 8, 01, 13);
+    ASSERT_EQUAL(-1, date.compareTo(temp));
+
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(0, date.compareTo(temp));
+
+    date = Date(2017, 02, 14, 8, 01, 13);
+    ASSERT_EQUAL(1, date.compareTo(temp));
 }

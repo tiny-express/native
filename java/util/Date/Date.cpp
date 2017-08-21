@@ -239,24 +239,25 @@ boolean Date::before(Date when) {
 
 	return false;
 }
-//
-//int Date::compareTo(Date anotherDate) {
-//	if (this->refreshFlag) {
-//		refreshTime();
-//	}
-//
-//	long temp = this->original - anotherDate.original;
-//
-//	if (temp < 0) {
-//		return -1;
-//	} else if (temp == 0) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-//
-//}
-//
+
+int Date::compareTo(Date anotherDate) {
+	if (this->refreshFlag) {
+		refreshTime();
+	}
+
+	long temp = this->original - anotherDate.original;
+
+	if (temp < 0) {
+		return -1;
+	}
+
+    if (temp > 0) {
+        return 1;
+    }
+
+    return 0;
+}
+
 //String Date::toGMTString() {
 //	if (this->refreshFlag) {
 //		refreshTime();
