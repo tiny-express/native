@@ -215,19 +215,19 @@ long Date::getTime() {
 //    int result = this->localTimer->tm_hour - globalTimer->tm_hour;
 //    return result;
 //}
-//
-//boolean Date::after(Date when) {
-//	if (this->refreshFlag) {
-//		refreshTime();
-//	}
-//
-//	if (this->original > when.original) {
-//		return true;
-//	}
-//
-//	return false;
-//}
-//
+
+boolean Date::after(Date when) {
+	if (this->refreshFlag) {
+		refreshTime();
+	}
+
+	if (this->original > when.original) {
+		return true;
+	}
+
+	return false;
+}
+
 //boolean Date::before(Date when) {
 //	if (this->refreshFlag) {
 //		refreshTime();
