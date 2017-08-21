@@ -136,15 +136,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
 
-//TEST(JavaUtil, DateSetHours) {
-//    // Given valid date to test setHours()
-//    Date date;
-//    int expectedHour = 20;
-//
-//    date.setHours(expectedHour);
-//    ASSERT_EQUAL(expectedHour, date.getHours());
-//}
-//
 //TEST(JavaUtil, DateSetMinutes) {
 //    // Given valid date to test setMinutes()
 //    Date date;
@@ -171,29 +162,6 @@ TEST(JavaUtil, DateConstructor) {
 //    date.setTime(expectedTime);
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
-
-TEST(JavaUtil, DateSetYear) {
-    // Create variable to test
-    Date date;
-
-    date.setYear(1900);
-    ASSERT_EQUAL(1900, date.getYear());
-
-    date.setYear(1994);
-    ASSERT_EQUAL(1994, date.getYear());
-
-    date.setYear(2000);
-    ASSERT_EQUAL(2000, date.getYear());
-
-    date.setYear(2010);
-    ASSERT_EQUAL(2010, date.getYear());
-
-    date.setYear(2017);
-    ASSERT_EQUAL(2017, date.getYear());
-
-    date.setYear(2020);
-    ASSERT_EQUAL(2020, date.getYear());
-}
 
 ///**
 // * This test case aim to make CI happy, no need to do like that
@@ -404,58 +372,27 @@ TEST(JavaUtil, DateUTC) {
 //    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 //}
 
-TEST(JavaUtil, DateSetDate) {
+TEST(JavaUtil, DateSetYear) {
     // Create variable to test
     Date date;
 
-    date.setDate(1);
-    ASSERT_EQUAL(1, date.getDate());
+    date.setYear(1900);
+    ASSERT_EQUAL(1900, date.getYear());
 
-    date.setDate(2);
-    ASSERT_EQUAL(2, date.getDate());
+    date.setYear(1994);
+    ASSERT_EQUAL(1994, date.getYear());
 
-    date.setDate(13);
-    ASSERT_EQUAL(13, date.getDate());
+    date.setYear(2000);
+    ASSERT_EQUAL(2000, date.getYear());
 
-    date.setDate(28);
-    ASSERT_EQUAL(28, date.getDate());
+    date.setYear(2010);
+    ASSERT_EQUAL(2010, date.getYear());
 
-    date.setDate(30);
-    ASSERT_EQUAL(30, date.getDate());
+    date.setYear(2017);
+    ASSERT_EQUAL(2017, date.getYear());
 
-    date.setDate(31);
-    ASSERT_EQUAL(31, date.getDate());
-}
-
-TEST(JavaUtil, DateGetDate) {
-    // Create variable to test
-    Date date;
-
-    // Timer of C++ to test current local time
-    time_t now = time(0);
-    tm *currentTime = localtime(&now);
-
-    ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
-
-    // Test Date(int year, int month, int date)
-    date = Date(2017, 02, 13);
-    ASSERT_EQUAL(13, date.getDate());
-
-    // Test Date(int year, int month, int date, int hrs, int min)
-    date = Date(2017, 02, 13, 8, 01);
-    ASSERT_EQUAL(13, date.getDate());
-
-    // Test Date(int year, int month, int date, int hrs, int min, int sec)
-    date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(13, date.getDate());
-
-    // Test Date(long date)
-    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
-    ASSERT_EQUAL(13, date.getDate());
-
-    // Test Date sameDate = date;
-    date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(13, date.getDate());
+    date.setYear(2020);
+    ASSERT_EQUAL(2020, date.getYear());
 }
 
 TEST(JavaUtil, DateGetYear) {
@@ -541,4 +478,81 @@ TEST(JavaUtil, DateGetMonth) {
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(02, date.getMonth());
+}
+
+TEST(JavaUtil, DateSetDate) {
+    // Create variable to test
+    Date date;
+
+    date.setDate(1);
+    ASSERT_EQUAL(1, date.getDate());
+
+    date.setDate(2);
+    ASSERT_EQUAL(2, date.getDate());
+
+    date.setDate(13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    date.setDate(28);
+    ASSERT_EQUAL(28, date.getDate());
+
+    date.setDate(30);
+    ASSERT_EQUAL(30, date.getDate());
+
+    date.setDate(31);
+    ASSERT_EQUAL(31, date.getDate());
+}
+
+TEST(JavaUtil, DateGetDate) {
+    // Create variable to test
+    Date date;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+
+    ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(13, date.getDate());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
+    ASSERT_EQUAL(13, date.getDate());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(13, date.getDate());
+}
+
+TEST(JavaUtil, DateSetHours) {
+    // Create variable to test
+    Date date;
+
+    date.setHours(1);
+    ASSERT_EQUAL(1, date.getHours());
+
+    date.setHours(2);
+    ASSERT_EQUAL(2, date.getHours());
+
+    date.setHours(13);
+    ASSERT_EQUAL(13, date.getHours());
+
+    date.setHours(20);
+    ASSERT_EQUAL(20, date.getHours());
+
+    date.setHours(21);
+    ASSERT_EQUAL(21, date.getHours());
+
+    date.setHours(23);
+    ASSERT_EQUAL(23, date.getHours());
 }
