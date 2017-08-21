@@ -144,29 +144,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_EQUAL(expectedTime, date.getTime());
 //}
 
-TEST(JavaUtil, DateSetDate) {
-    // Create variable to test
-    Date date;
-
-    date.setDate(1);
-    ASSERT_EQUAL(1, date.getDate());
-
-    date.setDate(2);
-    ASSERT_EQUAL(2, date.getDate());
-
-    date.setDate(13);
-    ASSERT_EQUAL(13, date.getDate());
-
-    date.setDate(28);
-    ASSERT_EQUAL(28, date.getDate());
-
-    date.setDate(30);
-    ASSERT_EQUAL(30, date.getDate());
-
-    date.setDate(31);
-    ASSERT_EQUAL(31, date.getDate());
-}
-
 //TEST(JavaUtil, DateSetHours) {
 //    // Given valid date to test setHours()
 //    Date date;
@@ -184,16 +161,7 @@ TEST(JavaUtil, DateSetDate) {
 //    date.setMinutes(expectedMinutes);
 //    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
 //}
-//
-//TEST(JavaUtil, DateSetMonth) {
-//    // Given valid date to test setMonth()
-//    Date date;
-//    int expectedMonth = 12;
-//
-//    date.setMonth(expectedMonth);
-//    ASSERT_EQUAL(expectedMonth, date.getMonth());
-//}
-//
+
 //TEST(JavaUtil, DateSetSeconds) {
 //    // Given valid date to test setSeconds()
 //    Date date;
@@ -444,6 +412,29 @@ TEST(JavaUtil, DateUTC) {
 //    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 //}
 
+TEST(JavaUtil, DateSetDate) {
+    // Create variable to test
+    Date date;
+
+    date.setDate(1);
+    ASSERT_EQUAL(1, date.getDate());
+
+    date.setDate(2);
+    ASSERT_EQUAL(2, date.getDate());
+
+    date.setDate(13);
+    ASSERT_EQUAL(13, date.getDate());
+
+    date.setDate(28);
+    ASSERT_EQUAL(28, date.getDate());
+
+    date.setDate(30);
+    ASSERT_EQUAL(30, date.getDate());
+
+    date.setDate(31);
+    ASSERT_EQUAL(31, date.getDate());
+}
+
 TEST(JavaUtil, DateGetDate) {
     // Create variable to test
     Date date;
@@ -504,4 +495,27 @@ TEST(JavaUtil, DateGetYear) {
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(2017, date.getYear());
+}
+
+TEST(JavaUtil, DateSetMonth) {
+    // Create variable to test
+    Date date;
+
+    date.setMonth(1);
+    ASSERT_EQUAL(1, date.getMonth());
+
+    date.setMonth(2);
+    ASSERT_EQUAL(2, date.getMonth());
+
+    date.setMonth(3);
+    ASSERT_EQUAL(3, date.getMonth());
+
+    date.setMonth(8);
+    ASSERT_EQUAL(8, date.getMonth());
+
+    date.setMonth(10);
+    ASSERT_EQUAL(10, date.getMonth());
+
+    date.setMonth(12);
+    ASSERT_EQUAL(12, date.getMonth());
 }

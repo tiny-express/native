@@ -186,7 +186,8 @@ int Date::getYear() {
         refreshTime();
     }
 
-    int result = this->localTimer->tm_year + 1900; //LocalTimer just keep tm_year since 1900
+    // LocalTimer just keep tm_year since 1900
+    int result = this->localTimer->tm_year + 1900;
 
     return result;
 }
