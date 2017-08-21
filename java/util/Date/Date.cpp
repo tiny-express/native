@@ -228,17 +228,17 @@ boolean Date::after(Date when) {
 	return false;
 }
 
-//boolean Date::before(Date when) {
-//	if (this->refreshFlag) {
-//		refreshTime();
-//	}
-//
-//	if (this->original > when.original) {
-//		return false;
-//	}
-//
-//	return true;
-//}
+boolean Date::before(Date when) {
+	if (this->refreshFlag) {
+		refreshTime();
+	}
+
+	if (this->original < when.original) {
+		return true;
+	}
+
+	return false;
+}
 //
 //int Date::compareTo(Date anotherDate) {
 //	if (this->refreshFlag) {

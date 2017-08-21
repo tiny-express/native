@@ -115,17 +115,6 @@ TEST(JavaUtil, DateConstructor) {
 //    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
 //}
 
-//TEST(JavaUtil, DateBefore) {
-//    // Given valid date to test another date is before this day or not
-//    Date date = Date(2017, 05, 21, 14, 05, 43);
-//
-//    Date dateBefore = Date(2017, 05, 21, 14, 05, 40);
-//    ASSERT_FALSE(date.before(dateBefore));
-//
-//    Date dateAfter = Date(2017, 05, 21, 14, 05, 45);
-//    ASSERT_TRUE(date.before(dateAfter));
-//}
-//
 //TEST(JavaUtil, DateClone) {
 //    // Given valid date and make a copy of this date
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
@@ -768,7 +757,7 @@ TEST(JavaUtil, DateAfter) {
     ASSERT_TRUE(date.after(tempDate));
 
     // Test case FALSE
-    date = Date(2017, 8, 5, 8, 01, 13);
+    date = Date(2017, 8, 10, 8, 01, 13);
     ASSERT_FALSE(date.after(tempDate));
 
     date = Date(2017, 8, 6, 8, 01, 13);
@@ -782,4 +771,42 @@ TEST(JavaUtil, DateAfter) {
 
     date = Date(2016, 8, 5, 8, 01, 13);
     ASSERT_FALSE(date.after(tempDate));
+}
+
+TEST(JavaUtil, DateBefore) {
+    // Create variable to test
+    Date date;
+    Date tempDate = Date(2017, 8, 10, 8, 01, 13);;
+
+    // Test case TRUE
+    date = Date(2017, 8, 6, 8, 01, 13);
+    ASSERT_TRUE(date.before(tempDate));
+
+    date = Date(2017, 7, 5, 8, 01, 13);
+    ASSERT_TRUE(date.before(tempDate));
+
+    date = Date(2017, 6, 5, 8, 01, 13);
+    ASSERT_TRUE(date.before(tempDate));
+
+    date = Date(2016, 8, 5, 8, 01, 13);
+    ASSERT_TRUE(date.before(tempDate));
+
+    date = Date(2015, 5, 5, 8, 01, 13);
+    ASSERT_TRUE(date.before(tempDate));
+
+    // Test case FALSE
+    date = Date(2017, 8, 10, 8, 01, 13);
+    ASSERT_FALSE(date.before(tempDate));
+
+    date = Date(2017, 8, 11, 8, 01, 13);
+    ASSERT_FALSE(date.before(tempDate));
+
+    date = Date(2017, 9, 13, 8, 01, 13);
+    ASSERT_FALSE(date.before(tempDate));
+
+    date = Date(2018, 8, 14, 8, 01, 13);
+    ASSERT_FALSE(date.before(tempDate));
+
+    date = Date(2019, 8, 15, 8, 01, 13);
+    ASSERT_FALSE(date.before(tempDate));
 }
