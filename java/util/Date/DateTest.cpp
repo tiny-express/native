@@ -87,14 +87,6 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(sameDate.getSeconds(), date.getSeconds());
 }
 
-//TEST(JavaUtil, DateGetMonth) {
-//    // Given valid date to test getMonth()
-//    int expectedMonth = 05;
-//    Date date = Date(2018, 05, 20, 20, 50, 58);
-//
-//    ASSERT_EQUAL(expectedMonth, date.getMonth());
-//}
-//
 //TEST(JavaUtil, DateGetDayOfMonth) {
 //    // Given valid date to test getDate()
 //    int expectedDayOfMonth = 20;
@@ -518,4 +510,35 @@ TEST(JavaUtil, DateSetMonth) {
 
     date.setMonth(12);
     ASSERT_EQUAL(12, date.getMonth());
+}
+
+TEST(JavaUtil, DateGetMonth) {
+    // Create variable to test
+    Date date;
+
+    // Timer of C++ to test current local time
+    time_t now = time(0);
+    tm *currentTime = localtime(&now);
+
+    ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(02, date.getMonth());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(02, date.getMonth());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(02, date.getMonth());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, 02, 13, 8, 01, 13));
+    ASSERT_EQUAL(02, date.getMonth());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(02, date.getMonth());
 }
