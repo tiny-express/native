@@ -282,14 +282,15 @@ int Date::compareTo(Date anotherDate) {
 //	free(timeString);
 //	return result;
 //}
-//
-//String Date::toString() {
-//	if (this->refreshFlag) {
-//		refreshTime();
-//	}
-//
-//	return this->toLocaleString();
-//}
+
+String Date::toString() {
+	if (this->refreshFlag) {
+		refreshTime();
+	}
+
+    auto format = (string) "%a %b %d %T UTC %Y";
+	return this->timeToString(format, this->localTimer);
+}
 
 long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
     long result;

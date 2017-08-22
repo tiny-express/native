@@ -87,33 +87,6 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(sameDate.getSeconds(), date.getSeconds());
 }
 
-///**
-// * This test case aim to make CI happy, no need to do like that
-// * Usage:
-// *  Date date;
-// *  date.toGMTString()
-// */
-//TEST(JavaUtil, DateGMTString)  {
-//    // Given valid date to test GMT time, this test case is based on Date.getTimeZoneOffset
-//    Date date = Date(2017, 05, 22, 12, 35, 34);
-//    int timeZone = date.getTimezoneOffset();
-//
-//    string timeString;
-//    asprintf(&timeString, "Thu Jun 22 2017 %02d:35:34", 12 - timeZone);
-//
-//    String expectedGMTString = timeString;
-//    free(timeString);
-//
-//    ASSERT_STR(expectedGMTString.toString(), date.toGMTString().toString());
-//}
-//
-//TEST(JavaUtil, DateLocaleString) {
-//    // Given valid date to test local time
-//    Date date = Date(2017, 05, 22, 12, 35, 34);
-//    String expectedLocaleString = "Thu Jun 22 2017 12:35:34";
-//
-//    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
-//}
 
 TEST(JavaUtil, DateUTC) {
     // Create variable to test
@@ -832,7 +805,7 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
 
     // Test System time zone
     time_t now = time(nullptr);
-    expectedResult = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
+    expectedResult = -(localtime(&now)->tm_hour - gmtime(&now)->tm_hour) *60;
     ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
 
     // Test Date(int year, int month, int date)
@@ -855,4 +828,46 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
 //    date = Date(2017, 02, 13, 8, 01, 13);
 //    Date sameDate = date;
 //    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+}
+
+
+TEST(JavaUtil, DateToString) {
+    // Create variable to test
+    Date date;
+    string expectedResult;
+
+    // Timer of C++ to test current local time
+    time_t now = time(nullptr);
+    tm *currentTime = localtime(&now);
+    auto format = (string) "%a %b %d %T UTC %Y";
+    size_t size = 100;
+    expectedResult = (string) (malloc(size * sizeof(char)));
+    strftime(expectedResult, size, format, currentTime);
+    ASSERT_STR(expectedResult, date.toString().toString());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    expectedResult = (string) "Mon Mar 13 00:00:00 UTC 2017";
+    ASSERT_STR(expectedResult, date.toString().toString());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    expectedResult = (string) "Mon Mar 13 08:01:00 UTC 2017";
+    ASSERT_STR(expectedResult, date.toString().toString());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
+    ASSERT_STR(expectedResult, date.toString().toString());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, 02, 13, 8, 01, 13));
+    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
+    ASSERT_STR(expectedResult, date.toString().toString());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    Date sameDate = date;
+    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
+    ASSERT_STR(expectedResult, sameDate.toString().toString());
 }
