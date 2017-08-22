@@ -562,6 +562,7 @@ TEST(JavaUtil, DateGetSeconds) {
     ASSERT_EQUAL(13, sameDate.getSeconds());
 }
 
+#ifdef linux
 TEST(JavaUtil, DateGetTime) {
     // Create variable to test
     Date date;
@@ -591,6 +592,7 @@ TEST(JavaUtil, DateGetTime) {
     Date sameDate = date;
     ASSERT_EQUAL(1489366873, sameDate.getTime());
 }
+#endif
 
 TEST(JavaUtil, DateSetTime) {
     // Create variable to test
