@@ -201,7 +201,7 @@ int Date::getYear() {
     return result;
 }
 
-#ifdef linux
+#ifdef __linux__
 long Date::getTime() {
     if (this->refreshFlag) {
         refreshTime();
