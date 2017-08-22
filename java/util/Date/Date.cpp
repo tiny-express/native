@@ -201,7 +201,6 @@ int Date::getYear() {
     return result;
 }
 
-#ifdef __linux__
 long Date::getTime() {
     if (this->refreshFlag) {
         refreshTime();
@@ -210,7 +209,6 @@ long Date::getTime() {
     long result = this->original;
     return result;
 }
-#endif
 
 //int Date::getTimezoneOffset() {
 //    tm *globalTimer = gmtime(&this->original);
