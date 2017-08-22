@@ -254,20 +254,21 @@ TEST(JavaUtil, DateSetYear) {
     date.setYear(1900);
     ASSERT_EQUAL(1900, date.getYear());
 
-    date.setYear(1994);
-    ASSERT_EQUAL(1994, date.getYear());
+    // TODO(thoangminh): Need to throw exeptions for this case
+    date.setYear(1889);
+    ASSERT_EQUAL(3789, date.getYear());
 
-    date.setYear(2000);
-    ASSERT_EQUAL(2000, date.getYear());
+    date.setYear(3000);
+    ASSERT_EQUAL(3000, date.getYear());
 
-    date.setYear(2010);
-    ASSERT_EQUAL(2010, date.getYear());
+    date.setYear(-1);
+    ASSERT_EQUAL(1899, date.getYear());
 
-    date.setYear(2017);
-    ASSERT_EQUAL(2017, date.getYear());
+    date.setYear(-900);
+    ASSERT_EQUAL(1000, date.getYear());
 
-    date.setYear(2020);
-    ASSERT_EQUAL(2020, date.getYear());
+    date.setYear(0);
+    ASSERT_EQUAL(1900, date.getYear());
 }
 
 TEST(JavaUtil, DateGetYear) {
@@ -308,20 +309,18 @@ TEST(JavaUtil, DateSetMonth) {
     date.setMonth(1);
     ASSERT_EQUAL(1, date.getMonth());
 
-    date.setMonth(2);
-    ASSERT_EQUAL(2, date.getMonth());
-
-    date.setMonth(3);
-    ASSERT_EQUAL(3, date.getMonth());
-
-    date.setMonth(8);
-    ASSERT_EQUAL(8, date.getMonth());
-
-    date.setMonth(10);
-    ASSERT_EQUAL(10, date.getMonth());
-
     date.setMonth(12);
     ASSERT_EQUAL(12, date.getMonth());
+
+    // TODO(thoangminh): Need to throw exeptions for these cases below
+    date.setMonth(0);
+    ASSERT_EQUAL(0, date.getMonth());
+
+    date.setMonth(-1);
+    ASSERT_EQUAL(-1, date.getMonth());
+
+    date.setMonth(13);
+    ASSERT_EQUAL(13, date.getMonth());
 }
 
 TEST(JavaUtil, DateGetMonth) {
@@ -362,20 +361,18 @@ TEST(JavaUtil, DateSetDate) {
     date.setDate(1);
     ASSERT_EQUAL(1, date.getDate());
 
-    date.setDate(2);
-    ASSERT_EQUAL(2, date.getDate());
-
-    date.setDate(13);
-    ASSERT_EQUAL(13, date.getDate());
-
-    date.setDate(28);
-    ASSERT_EQUAL(28, date.getDate());
-
-    date.setDate(30);
-    ASSERT_EQUAL(30, date.getDate());
-
     date.setDate(31);
     ASSERT_EQUAL(31, date.getDate());
+
+    // TODO(thoangminh): Need to throw exeptions for these cases below
+    date.setDate(0);
+    ASSERT_EQUAL(0, date.getDate());
+
+    date.setDate(32);
+    ASSERT_EQUAL(32, date.getDate());
+
+    date.setDate(-1);
+    ASSERT_EQUAL(-1, date.getDate());
 }
 
 TEST(JavaUtil, DateGetDate) {
@@ -416,20 +413,18 @@ TEST(JavaUtil, DateSetHours) {
     date.setHours(1);
     ASSERT_EQUAL(1, date.getHours());
 
-    date.setHours(2);
-    ASSERT_EQUAL(2, date.getHours());
-
-    date.setHours(13);
-    ASSERT_EQUAL(13, date.getHours());
-
-    date.setHours(20);
-    ASSERT_EQUAL(20, date.getHours());
-
-    date.setHours(21);
-    ASSERT_EQUAL(21, date.getHours());
-
     date.setHours(23);
     ASSERT_EQUAL(23, date.getHours());
+
+    date.setHours(0);
+    ASSERT_EQUAL(0, date.getHours());
+
+    // TODO(thoangminh): Need to throw exeptions for these cases below
+    date.setHours(-1);
+    ASSERT_EQUAL(-1, date.getHours());
+
+    date.setHours(24);
+    ASSERT_EQUAL(24, date.getHours());
 }
 
 TEST(JavaUtil, DateGetHour) {
@@ -470,20 +465,18 @@ TEST(JavaUtil, DateSetMinutes) {
     date.setMinutes(1);
     ASSERT_EQUAL(1, date.getMinutes());
 
-    date.setMinutes(2);
-    ASSERT_EQUAL(2, date.getMinutes());
-
-    date.setMinutes(13);
-    ASSERT_EQUAL(13, date.getMinutes());
-
-    date.setMinutes(20);
-    ASSERT_EQUAL(20, date.getMinutes());
-
-    date.setMinutes(21);
-    ASSERT_EQUAL(21, date.getMinutes());
-
     date.setMinutes(59);
     ASSERT_EQUAL(59, date.getMinutes());
+
+    date.setMinutes(0);
+    ASSERT_EQUAL(0, date.getMinutes());
+
+    // TODO(thoangminh): Need to throw exeptions for these cases below
+    date.setMinutes(-1);
+    ASSERT_EQUAL(-1, date.getMinutes());
+
+    date.setMinutes(60);
+    ASSERT_EQUAL(60, date.getMinutes());
 }
 
 TEST(JavaUtil, DateGetMinutes) {
@@ -524,20 +517,18 @@ TEST(JavaUtil, DateSetSeconds) {
     date.setSeconds(1);
     ASSERT_EQUAL(1, date.getSeconds());
 
-    date.setSeconds(2);
-    ASSERT_EQUAL(2, date.getSeconds());
-
-    date.setSeconds(13);
-    ASSERT_EQUAL(13, date.getSeconds());
-
-    date.setSeconds(20);
-    ASSERT_EQUAL(20, date.getSeconds());
-
-    date.setSeconds(21);
-    ASSERT_EQUAL(21, date.getSeconds());
-
     date.setSeconds(59);
     ASSERT_EQUAL(59, date.getSeconds());
+
+    date.setSeconds(0);
+    ASSERT_EQUAL(0, date.getSeconds());
+
+    // TODO(thoangminh): Need to throw exeptions for these cases below
+    date.setSeconds(-1);
+    ASSERT_EQUAL(-1, date.getSeconds());
+
+    date.setSeconds(60);
+    ASSERT_EQUAL(60, date.getSeconds());
 }
 
 TEST(JavaUtil, DateGetSeconds) {
@@ -652,14 +643,14 @@ TEST(JavaUtil, DateSetTime) {
     ASSERT_EQUAL(13, date.getSeconds());
 
     // Test Date(long date)
-    tempDate = Date(Date::UTC(2017, 02, 13, 8, 01, 13));
+    tempDate = Date(Date::UTC(2017, 2, 13, 8, 1, 13));
     tempTime = tempDate.getTime();
     date.setTime(tempTime);
     ASSERT_EQUAL(2017, date.getYear());
-    ASSERT_EQUAL(02, date.getMonth());
+    ASSERT_EQUAL(2, date.getMonth());
     ASSERT_EQUAL(13, date.getDate());
     ASSERT_EQUAL(8, date.getHours());
-    ASSERT_EQUAL(01, date.getMinutes());
+    ASSERT_EQUAL(1, date.getMinutes());
     ASSERT_EQUAL(13, date.getSeconds());
 
     // Test Date sameDate = date;
@@ -717,29 +708,17 @@ TEST(JavaUtil, DateAfter) {
     date = Date(2017, 8, 11, 8, 01, 13);
     ASSERT_TRUE(date.after(tempDate));
 
-    date = Date(2017, 8, 12, 8, 01, 13);
-    ASSERT_TRUE(date.after(tempDate));
-
     date = Date(2017, 9, 13, 8, 01, 13);
     ASSERT_TRUE(date.after(tempDate));
 
     date = Date(2018, 8, 14, 8, 01, 13);
     ASSERT_TRUE(date.after(tempDate));
 
-    date = Date(2019, 8, 15, 8, 01, 13);
-    ASSERT_TRUE(date.after(tempDate));
-
     // Test case FALSE
     date = Date(2017, 8, 10, 8, 01, 13);
     ASSERT_FALSE(date.after(tempDate));
 
-    date = Date(2017, 8, 6, 8, 01, 13);
-    ASSERT_FALSE(date.after(tempDate));
-
     date = Date(2017, 7, 5, 8, 01, 13);
-    ASSERT_FALSE(date.after(tempDate));
-
-    date = Date(2017, 6, 5, 8, 01, 13);
     ASSERT_FALSE(date.after(tempDate));
 
     date = Date(2016, 8, 5, 8, 01, 13);
@@ -758,29 +737,17 @@ TEST(JavaUtil, DateBefore) {
     date = Date(2017, 7, 5, 8, 01, 13);
     ASSERT_TRUE(date.before(tempDate));
 
-    date = Date(2017, 6, 5, 8, 01, 13);
-    ASSERT_TRUE(date.before(tempDate));
-
     date = Date(2016, 8, 5, 8, 01, 13);
-    ASSERT_TRUE(date.before(tempDate));
-
-    date = Date(2015, 5, 5, 8, 01, 13);
     ASSERT_TRUE(date.before(tempDate));
 
     // Test case FALSE
     date = Date(2017, 8, 10, 8, 01, 13);
     ASSERT_FALSE(date.before(tempDate));
 
-    date = Date(2017, 8, 11, 8, 01, 13);
-    ASSERT_FALSE(date.before(tempDate));
-
     date = Date(2017, 9, 13, 8, 01, 13);
     ASSERT_FALSE(date.before(tempDate));
 
     date = Date(2018, 8, 14, 8, 01, 13);
-    ASSERT_FALSE(date.before(tempDate));
-
-    date = Date(2019, 8, 15, 8, 01, 13);
     ASSERT_FALSE(date.before(tempDate));
 }
 
