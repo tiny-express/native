@@ -240,7 +240,7 @@ namespace Java {
             static String print(const String& format, Double value);
             static String print(const String& format, String value);
 		};
-	}
-}
+	} // namespace Lang
+} // namespace Java
 
 #endif  // JAVA_LANG_STRING_STRING_HPP_
