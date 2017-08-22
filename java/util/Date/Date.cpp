@@ -45,6 +45,7 @@ Date::Date(const Date &inputDate) {
 Date::Date(int year, int month, int date) {
 	this->refreshFlag = false;
 	this->original = Date::UTC(year, month, date, 0, 0, 0);
+    time_t now = time(nullptr);
 	Date::updateLocalTimer();
 }
 
@@ -210,11 +211,9 @@ long Date::getTime() {
     return result;
 }
 
-//int Date::getTimezoneOffset() {
-//    tm *globalTimer = gmtime(&this->original);
-//    int result = this->localTimer->tm_hour - globalTimer->tm_hour;
-//    return result;
-//}
+int Date::getTimezoneOffset() {
+    return this->timezoneOffset;
+}
 
 boolean Date::after(Date when) {
 	if (this->refreshFlag) {

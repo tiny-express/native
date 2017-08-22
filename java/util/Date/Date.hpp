@@ -43,6 +43,10 @@ namespace Java {
 						time_t original;
 						tm *localTimer;
 						boolean refreshFlag;
+                        time_t now = time(nullptr);
+                        int timezoneOffset = localtime(&now)->tm_hour
+                                             - gmtime(&now)->tm_hour ;
+//                        int timezoneOffset;
 						
 						/**
 						 * This function just work only by default constructor,
@@ -50,8 +54,10 @@ namespace Java {
 						 * will make this function disable
 						 */
 						void refreshTime() {
-							this->original = time(0);
+							this->original = time(nullptr);
 							this->localTimer = localtime(&this->original);
+                            this->timezoneOffset = localtime(&this->original)->tm_hour
+                                                   - gmtime(&this->original)->tm_hour ;
 						}
 						
 						/**
@@ -84,6 +90,9 @@ namespace Java {
 						 */
 						void updateLocalTimer() {
 							this->localTimer = localtime(&this->original);
+//                            time_t now = time(nullptr);
+//                            this->timezoneOffset = localtime(&now)->tm_hour
+//                                                   - gmtime(&now)->tm_hour ;
 						}
 				
 				public:

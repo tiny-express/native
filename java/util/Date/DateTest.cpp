@@ -34,7 +34,7 @@ using namespace Java::Util;
 
 TEST(JavaUtil, DateConstructor) {
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
 
     // Create variable to test
@@ -113,17 +113,6 @@ TEST(JavaUtil, DateConstructor) {
 //    String expectedLocaleString = "Thu Jun 22 2017 12:35:34";
 //
 //    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
-//}
-
-//TEST(JavaUtil, DateGetTimeZone) {
-//    // Given valid date to test current time zone, this test case is based on Vietnam GMT+7
-//    Date date;
-//
-//    // Init timer of system to test time zone
-//    time_t now = time(0);
-//    int expectedTimeZone = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
-//
-//    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
 //}
 
 TEST(JavaUtil, DateUTC) {
@@ -276,7 +265,7 @@ TEST(JavaUtil, DateGetYear) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
 
@@ -328,7 +317,7 @@ TEST(JavaUtil, DateGetMonth) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
 
@@ -380,7 +369,7 @@ TEST(JavaUtil, DateGetDate) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
 
@@ -432,7 +421,7 @@ TEST(JavaUtil, DateGetHour) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
 
@@ -484,7 +473,7 @@ TEST(JavaUtil, DateGetMinutes) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
 
@@ -536,7 +525,7 @@ TEST(JavaUtil, DateGetSeconds) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
 
@@ -567,7 +556,7 @@ TEST(JavaUtil, DateGetTime) {
     Date date;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
 
     // TODO(thoangminh): These test work for Linux, fail in Windows
@@ -600,7 +589,7 @@ TEST(JavaUtil, DateSetTime) {
     long tempTime;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     date.setTime(now);
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
@@ -759,7 +748,7 @@ TEST(JavaUtil, DateClone) {
     long tempTime;
 
     // Timer of C++ to test current local time
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     date = tempDate.clone();
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
@@ -834,4 +823,36 @@ TEST(JavaUtil, DateCompareTo) {
 
     date = Date(2017, 02, 14, 8, 01, 13);
     ASSERT_EQUAL(1, date.compareTo(temp));
+}
+
+TEST(JavaUtil, DateGetTimezoneOffset) {
+    // Create variable to test
+    Date date;
+    int expectedResult;
+
+    // Test System time zone
+    time_t now = time(nullptr);
+    expectedResult = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
+    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+
+//    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+//    date = Date(2017, 02, 13, 8, 01, 13);
+//    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+//
+//    // Test Date(long date)
+//    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
+//    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
+//
+//    // Test Date sameDate = date;
+//    date = Date(2017, 02, 13, 8, 01, 13);
+//    Date sameDate = date;
+//    ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
 }
