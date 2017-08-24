@@ -27,6 +27,7 @@
 #include "String.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
 
@@ -996,7 +997,7 @@ String String::format(const String &format) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                 regfree(&regex);
-                throw "Missing arguments";
+                throw IllegalArgumentException("Missing arguments.");
             } else {
                 result += "%";
             }

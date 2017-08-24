@@ -173,6 +173,13 @@ namespace Java {
                 regfree(&regex);
                 return result;
             }
+
+            /*
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
             static String format(const String& format);
 
 		public:

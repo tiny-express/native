@@ -33,6 +33,7 @@ extern "C" {
 #include "../Integer/Integer.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
 
@@ -547,5 +548,14 @@ TEST(JavaLang, StringFormat) {
         String format = "Characters: %c %c";
         String result = String::format(format, 'a', integerObject);
         ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String format = "%d %d";
+        try {
+            String result = String::format(format, shortObject);
+        } catch (IllegalArgumentException& e) {
+            ASSERT_STR("Missing arguments.", e.getMessage().toString());
+        }
     }
 }
