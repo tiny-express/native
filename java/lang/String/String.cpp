@@ -856,8 +856,9 @@ String String::print(const String &format, short value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -865,8 +866,9 @@ String String::print(const String &format, int value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -874,8 +876,9 @@ String String::print(const String &format, long value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -883,8 +886,9 @@ String String::print(const String &format, unsigned short value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -892,8 +896,9 @@ String String::print(const String &format, unsigned int value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -901,8 +906,9 @@ String String::print(const String &format, unsigned long value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -910,8 +916,9 @@ String String::print(const String &format, double value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -919,17 +926,19 @@ String String::print(const String &format, float value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
-String String::print(const String &format, char *value) {
+String String::print(const String &format, string value) {
     String result;
     char buffer[256] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
-    if (length > 0)
+    if (length > 0) {
         result = String(buffer, length);
+    }
     return result;
 }
 
@@ -971,30 +980,29 @@ String String::format(const String &format) {
     while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-        if (errorCode == 0) {
-            int unmatchedStringLength = matchedResult[0].rm_so;
-            int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
-            if (unmatchedStringLength > 0)
-                result += String(inputStringPtr, unmatchedStringLength);
-
-            if (matchedStringLength > 0) {
-                String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                    regfree(&regex);
-                    throw "Missing arguments";
-                } else
-                    result += "%";
-            }
-
-            inputStringPtr += matchedResult[0].rm_eo;
-            inputStringOffset += matchedResult[0].rm_eo;
-            inputStringLength -= matchedResult[0].rm_eo;
-
-        } else {
+        if (errorCode != 0) {
             result += String(inputStringPtr, inputStringLength);
             break;
         }
+
+        int unmatchedStringLength = matchedResult[0].rm_so;
+        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+        if (unmatchedStringLength > 0)
+            result += String(inputStringPtr, unmatchedStringLength);
+
+        if (matchedStringLength > 0) {
+            String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+            if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                regfree(&regex);
+                throw "Missing arguments";
+            } else
+                result += "%";
+        }
+
+        inputStringPtr += matchedResult[0].rm_eo;
+        inputStringOffset += matchedResult[0].rm_eo;
+        inputStringLength -= matchedResult[0].rm_eo;
     }
 
     regfree(&regex);

@@ -142,32 +142,31 @@ namespace Java {
                 while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-                    if (errorCode == 0) {
-                        int unmatchedStringLength = matchedResult[0].rm_so;
-                        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
-                        if (unmatchedStringLength > 0)
-                            result += String(inputStringPtr, unmatchedStringLength);
-
-                        if (matchedStringLength > 0) {
-                            String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                            result += String::printObject(matchedString, value);
-
-                            if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                                String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
-                                result += String::format(remainString, args...);
-                                break;
-                            }
-                        }
-
-                        inputStringPtr += matchedResult[0].rm_eo;
-                        inputStringOffset += matchedResult[0].rm_eo;
-                        inputStringLength -= matchedResult[0].rm_eo;
-
-                    } else {
+                    if (errorCode != 0) {
                         result += String(inputStringPtr, inputStringLength);
                         break;
                     }
+                    
+                    int unmatchedStringLength = matchedResult[0].rm_so;
+                    int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+                    if (unmatchedStringLength > 0)
+                        result += String(inputStringPtr, unmatchedStringLength);
+
+                    if (matchedStringLength > 0) {
+                        String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+                        result += String::printObject(matchedString, value);
+
+                        if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                            String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
+                            result += String::format(remainString, args...);
+                            break;
+                        }
+                    }
+
+                    inputStringPtr += matchedResult[0].rm_eo;
+                    inputStringOffset += matchedResult[0].rm_eo;
+                    inputStringLength -= matchedResult[0].rm_eo;
                 }
 
                 regfree(&regex);
