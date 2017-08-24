@@ -146,12 +146,13 @@ namespace Java {
                         result += String(inputStringPtr, inputStringLength);
                         break;
                     }
-                    
+
                     int unmatchedStringLength = matchedResult[0].rm_so;
                     int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
 
-                    if (unmatchedStringLength > 0)
+                    if (unmatchedStringLength > 0) {
                         result += String(inputStringPtr, unmatchedStringLength);
+                    }
 
                     if (matchedStringLength > 0) {
                         String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
@@ -210,8 +211,9 @@ namespace Java {
                 String result;
                 char lastChar = '\0';
 
-                if (format.getSize() > 0)
+                if (format.getSize() > 0) {
                     lastChar = format.charAt(format.getSize() - 1);
+                }
 
                 switch (lastChar) {
                     case '%':

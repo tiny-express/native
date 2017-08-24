@@ -988,16 +988,18 @@ String String::format(const String &format) {
         int unmatchedStringLength = matchedResult[0].rm_so;
         int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
 
-        if (unmatchedStringLength > 0)
+        if (unmatchedStringLength > 0) {
             result += String(inputStringPtr, unmatchedStringLength);
+        }
 
         if (matchedStringLength > 0) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                 regfree(&regex);
                 throw "Missing arguments";
-            } else
+            } else {
                 result += "%";
+            }
         }
 
         inputStringPtr += matchedResult[0].rm_eo;
