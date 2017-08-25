@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [[ "$TRAVIS_OS_NAME" == "linux" ]];
     cd ${TRAVIS_BUILD_DIR}
     lcov --directory . --capture --output-file coverage.info
