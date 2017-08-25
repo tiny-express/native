@@ -33,7 +33,7 @@ extern "C" {
 using namespace Java::Util;
 
 TEST(JavaUtil, DateConstructor) {
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
 
@@ -216,12 +216,11 @@ TEST(JavaUtil, DateSetYear) {
     date.setYear(1900);
     ASSERT_EQUAL(1900, date.getYear());
 
-    // TODO(thoangminh): Need to throw exeptions for this case
-    date.setYear(1889);
-    ASSERT_EQUAL(3789, date.getYear());
-
     date.setYear(3000);
     ASSERT_EQUAL(3000, date.getYear());
+
+    date.setYear(1889);
+    ASSERT_EQUAL(3789, date.getYear());
 
     date.setYear(-1);
     ASSERT_EQUAL(1899, date.getYear());
@@ -237,7 +236,7 @@ TEST(JavaUtil, DateGetYear) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
@@ -267,29 +266,81 @@ TEST(JavaUtil, DateGetYear) {
 TEST(JavaUtil, DateSetMonth) {
     // Create variable to test
     Date date;
+    Date expected;
+    Date actual;
 
-    date.setMonth(1);
-    ASSERT_EQUAL(1, date.getMonth());
+    // Set month = 12 => Year+= 1 , month = 0.
+    expected = Date(2018, 0, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(12);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setMonth(12);
-    ASSERT_EQUAL(12, date.getMonth());
+    // Set month = 33 => Year+= 2, month = 9.
+    expected = Date(2019, 9, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(33);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    // TODO(thoangminh): Need to throw exeptions for these cases below
-    date.setMonth(0);
-    ASSERT_EQUAL(0, date.getMonth());
+    // Set month = 0
+    expected = Date(2017, 0, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(0);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setMonth(-1);
-    ASSERT_EQUAL(-1, date.getMonth());
+    // Set month = -1 => Year-= 1, month = 11.
+    expected = Date(2016, 11, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(-1);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setMonth(13);
-    ASSERT_EQUAL(13, date.getMonth());
+    // Set month = -12 => Year-= 1, month = 0.
+    expected = Date(2016, 0, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(-12);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = -33 => Year-= 3, month = 3.
+    expected = Date(2014, 3, 13, 10, 01, 13);
+    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual.setMonth(-33);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }
 
 TEST(JavaUtil, DateGetMonth) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
@@ -341,7 +392,7 @@ TEST(JavaUtil, DateGetDate) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
@@ -393,7 +444,7 @@ TEST(JavaUtil, DateGetHour) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
@@ -445,7 +496,7 @@ TEST(JavaUtil, DateGetMinutes) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
@@ -497,7 +548,7 @@ TEST(JavaUtil, DateGetSeconds) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
@@ -528,7 +579,7 @@ TEST(JavaUtil, DateGetTime) {
     // Create variable to test
     Date date;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
 
@@ -561,7 +612,7 @@ TEST(JavaUtil, DateSetTime) {
     Date date;
     long tempTime;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     date.setTime(now);
@@ -720,7 +771,7 @@ TEST(JavaUtil, DateClone) {
     Date date;
     long tempTime;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     date = tempDate.clone();
@@ -836,7 +887,7 @@ TEST(JavaUtil, DateToString) {
     Date date;
     string expectedResult;
 
-    // Timer of C++ to test current local time
+    // Get the current local time
     time_t now = time(nullptr);
     tm *currentTime = localtime(&now);
     auto format = (string) "%a %b %d %T UTC %Y";
