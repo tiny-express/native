@@ -265,7 +265,6 @@ TEST(JavaUtil, DateGetYear) {
 
 TEST(JavaUtil, DateSetMonth) {
     // Create variable to test
-    Date date;
     Date expected;
     Date actual;
 
@@ -369,23 +368,63 @@ TEST(JavaUtil, DateGetMonth) {
 
 TEST(JavaUtil, DateSetDate) {
     // Create variable to test
-    Date date;
+    Date expected;
+    Date actual;
+    
+    // Set month = 3, date = -1 => month = 2, date = 30
+    expected = Date(2017, 2, 30, 10, 01, 13);
+    actual 	 = Date(2017, 3, 1, 10, 01, 13);
+    actual.setDate(-1);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setDate(1);
-    ASSERT_EQUAL(1, date.getDate());
+    // Set month = 6, date = -75 => month = 3, date = 16
+    expected = Date(2017, 3, 16, 10, 01, 13);
+    actual 	 = Date(2017, 6, 1, 10, 01, 13);
+    actual.setDate(-75);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setDate(31);
-    ASSERT_EQUAL(31, date.getDate());
+    // Set month = 3, date = 0 => month = 2, date = 31
+    expected = Date(2017, 2, 31, 10, 01, 13);
+    actual 	 = Date(2017, 3, 1, 10, 01, 13);
+    actual.setDate(0);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    // TODO(thoangminh): Need to throw exeptions for these cases below
-    date.setDate(0);
-    ASSERT_EQUAL(0, date.getDate());
+    // Set month = 2, date = 0 => month = 1, date = 28
+    expected = Date(2017, 1, 28, 10, 01, 13);
+    actual 	 = Date(2017, 2, 1, 10, 01, 13);
+    actual.setDate(0);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setDate(32);
-    ASSERT_EQUAL(32, date.getDate());
-
-    date.setDate(-1);
-    ASSERT_EQUAL(-1, date.getDate());
+    // Set month = 5, date = 32 => month = 6, date = 2
+    expected = Date(2017, 6, 2, 10, 01, 13);
+    actual 	 = Date(2017, 5, 1, 10, 01, 13);
+    actual.setDate(32);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }
 
 TEST(JavaUtil, DateGetDate) {
