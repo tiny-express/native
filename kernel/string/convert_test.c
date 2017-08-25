@@ -372,23 +372,53 @@ TEST(KernelString, ConvertFromBoolean) {
 }
 
 TEST(String, ConvertToFloat) {
-	ASSERT_FLOAT_NEAR(0.000006f, string_to_float((char*) "0.000006"));
-	ASSERT_FLOAT_NEAR(-0.000006f, string_to_float((char*) "-0.000006"));
-	ASSERT_FLOAT_NEAR(0.0, string_to_float((char*) "0.0"));
-	ASSERT_FLOAT_NEAR(13.123456f, string_to_float((char*) "13.123456"));
-	ASSERT_FLOAT_NEAR(-13.123456f, string_to_float((char*) "-13.123456"));
+    float expected;
+    float actual;
+
+    expected = 0.000006f;
+    actual = string_to_float((char*) "0.000006");
+	ASSERT_FLOAT_NEAR(expected, actual);
+
+    expected = -0.000006f;
+    actual = string_to_float((char*) "-0.000006");
+    ASSERT_FLOAT_NEAR(expected, actual);
+
+    expected = 0.0;
+    actual = string_to_float((char*) "0.0");
+    ASSERT_FLOAT_NEAR(expected, actual);
+
+    expected = 13.123456f;
+    actual = string_to_float((char*) "13.123456");
+    ASSERT_FLOAT_NEAR(expected, actual);
+
+    expected = -13.123456f;
+    actual = string_to_float((char*) "-13.123456");
+    ASSERT_FLOAT_NEAR(expected, actual);
 }
 
 
 
 TEST(String, ConvertToDouble) {
-	ASSERT_DBL_NEAR(0.000000000000006,
-					string_to_double((char*) "0.000000000000006"));
-	ASSERT_DBL_NEAR(-0.000000000000006,
-					string_to_double((char*) "-0.000000000000006"));
-	ASSERT_DBL_NEAR(0.0, string_to_double((char*) "0.0"));
-	ASSERT_DBL_NEAR(13.123456789012345,
-					string_to_double((char*) "13.123456789012345"));
-	ASSERT_DBL_NEAR(-13.123456789012345,
-					string_to_double((char*) "-13.123456789012345"));
+    double expected;
+    double actual;
+
+    expected = 0.000000000000006;
+    actual = string_to_double((char*) "0.000000000000006");
+	ASSERT_DBL_NEAR(expected, actual);
+
+    expected = -0.000000000000006;
+    actual = string_to_double((char*) "-0.000000000000006");
+    ASSERT_DBL_NEAR(expected, actual);
+
+    expected = 0.0;
+    actual = string_to_double((char*) "0.0");
+    ASSERT_DBL_NEAR(expected, actual);
+
+    expected = 13.123456789012345;
+    actual = string_to_double((char*) "13.123456789012345");
+    ASSERT_DBL_NEAR(expected, actual);
+
+    expected = -13.123456789012345;
+    actual = string_to_double((char*) "-13.123456789012345");
+    ASSERT_DBL_NEAR(expected, actual);
 }
