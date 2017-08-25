@@ -382,10 +382,10 @@ namespace Java {
 			string toString() const;
 
 			/**
-             * Returns a string representation of the {float}
+             * Returns a string representation of the float
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param   d   the {float} to be converted.
+             * @param   d   the float to be converted.
              * @return a string representation of the argument.
              */
 			static String toString(float d);
@@ -402,19 +402,19 @@ namespace Java {
              * Returns the value of this {Float} as a {byte}
              * after a narrowing primitive conversion.
              *
-             * @return  the {float} value represented by this object
+             * @return  the float value represented by this object
              *          converted to type {byte}
              */
 			byte byteValue() const ;
 
 			/**
-             * Compares the two specified {float} values. The sign
+             * Compares the two specified float values. The sign
              * of the integer value returned is the same as that of the
              * integer that would be returned by the call:
              *    Float(float1).compareTo(Float(d2))
              *
-             * @param   float1        the first {float} to compare
-             * @param   float2        the second {float} to compare
+             * @param   float1        the first float to compare
+             * @param   float2        the second float to compare
              * @return  the value {0} if {float1} is
              *          numerically equal to {float2}; a value less than
              *          {0} if {float1} is numerically less than
@@ -456,11 +456,11 @@ namespace Java {
 			int hashCode();
 
 			/**
-             * Returns a hash code for a {float} value; compatible with
+             * Returns a hash code for a float value; compatible with
              * {Float.hashCode()}.
              *
              * @param value the value to hash
-             * @return a hash code value for a {float} value.
+             * @return a hash code value for a float value.
              */
 			static int hashCode(float floatInput);
 
@@ -469,7 +469,7 @@ namespace Java {
              * value; returns {false} otherwise (for NaN and infinity
              * arguments).
              *
-             * @param d the {float} value to be tested
+             * @param d the float value to be tested
              * @return {true} if the argument is a finite
              * floating-point value, {false} otherwise.
              */
@@ -515,17 +515,17 @@ namespace Java {
 			boolean isNaN() ;
 
 			/**
-             * Returns the {float} value corresponding to a given
+             * Returns the float value corresponding to a given
              * bit representation.
              *
              * @param   bits   any {int} integer.
-             * @return  the {float} floating-point value with the same
+             * @return  the float floating-point value with the same
              *          bit pattern.
              */
 			static float intBitsToFloat(int intBitsInput);
 
 			/**
-             * Returns the smaller of two {float} values
+             * Returns the smaller of two float values
              * as if by calling {@link Math#min(float, float) Math.min}.
              *
              * @param a the first operand
@@ -538,10 +538,10 @@ namespace Java {
 			// TODO(thoangminh): Implement this method later
 //            /**
 //             * Returns a hexadecimal string representation of the
-//             * {float} argument. All characters mentioned below
+//             * float argument. All characters mentioned below
 //             * are ASCII characters.
 //             *
-//             * @param   d   the {float} to be converted.
+//             * @param   d   the float to be converted.
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(float d);
@@ -592,7 +592,7 @@ namespace Java {
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
              * @param   float floatInput
-             *          value   a {float} precision floating-point number.
+             *          value   a float precision floating-point number.
              * @return  int
              *          the bits that represent the floating-point number.
              */
@@ -604,7 +604,7 @@ namespace Java {
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
              * @param   float floatInput
-             *          value   a {float} precision floating-point number.
+             *          value   a float precision floating-point number.
              * @return  int
              *          the bits that represent the floating-point number.
              */

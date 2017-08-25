@@ -125,30 +125,32 @@ boolean Double::operator!=(const Double &target) const {
 }
 
 boolean Double::operator<(const Double &target) const {
-	if (compare(this->doubleValue(), target.doubleValue()) == -1) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+	if (compareResult == -1) {
 		return true;
 	}
 	return false;
 }
 
 boolean Double::operator>(const Double &target) const {
-	if (compare(this->doubleValue(), target.doubleValue()) == 1) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+	if (compareResult == 1) {
 		return true;
 	}
 	return false;
 }
 
 boolean Double::operator>=(const Double &target) const {
-    if (compare(this->doubleValue(), target.doubleValue()) == 1
-            || compare(this->doubleValue(), target.doubleValue()) == 0) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == 1 || compareResult == 0) {
         return true;
     }
     return false;
 }
 
 boolean Double::operator<=(const Double &target) const {
-    if (compare(this->doubleValue(), target.doubleValue()) == -1
-        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == -1 || compareResult == 0) {
         return true;
     }
     return false;
@@ -266,9 +268,9 @@ boolean Double::isFinite(double valueDouble) {
 }
 
 boolean Double::isInfinite(double valueDouble) {
-    boolean isPOSITIVE_INFINITY = (valueDouble == POSITIVE_INFINITY);
-    boolean isNEGATIVE_INFINITY = (valueDouble == NEGATIVE_INFINITY);
-    return(isPOSITIVE_INFINITY || isNEGATIVE_INFINITY );
+    boolean isPossitiveInfinity = (valueDouble == POSITIVE_INFINITY);
+    boolean isNegativeInfinity = (valueDouble == NEGATIVE_INFINITY);
+    return(isPossitiveInfinity || isNegativeInfinity );
 }
 
 boolean Double::isInfinite() {
@@ -428,7 +430,7 @@ string Double::doubleToBinary32StringType(double doubleInput) {
     doubleInput = fabs(doubleInput);
 
     /** Get size of integerPartNormalizeForm  */
-    integerPartDoubleInput = static_cast<int> (floor(doubleInput)); // TODO(thoangminh): replace by java.lang.Math when it is completed.
+    integerPartDoubleInput = static_cast<int> (floor(doubleInput));
     sizeOfIntegerPartNormalizeForm = 0;
 
     if (integerPartDoubleInput == 0) {

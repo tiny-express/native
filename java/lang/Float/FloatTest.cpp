@@ -646,7 +646,7 @@ TEST(JavaLang, FloatParseFloat) {
     ASSERT_FLOAT_NEAR(NEGATIVE_INFINITY, Float::parseFloat((String) "-inf").floatValue());
 
     // Test NaN_NUMBER
-    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::parseFloat((String) "-nan").floatValue());
+    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::parseFloat((String) "nan").floatValue());
 
     // Test MAX_VALUE
     ASSERT_FLOAT_NEAR(MAX_VALUE,
@@ -667,7 +667,7 @@ TEST(JavaLang, FloatValueOf) {
     ASSERT_FLOAT_NEAR(NEGATIVE_INFINITY, Float::valueOf((String) "-inf").floatValue());
 
     // Test NaN_NUMBER
-    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::valueOf((String) "-nan").floatValue());
+    ASSERT_FLOAT_NEAR(-NaN_NUMBER, Float::valueOf((String) "nan").floatValue());
 
     // Test MAX_VALUE
     ASSERT_FLOAT_NEAR(MAX_VALUE,

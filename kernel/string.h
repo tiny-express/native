@@ -42,8 +42,8 @@ char string_to_char(char *target);
 short string_to_short(char *target);
 int string_to_int(char *target);
 long string_to_long(char *target);
-double string_to_double(char *inputString);
-float string_to_float(char *inputString);
+double string_to_double(char *target);
+float string_to_float(char *target);
 
 char *string_replace(char *target, char *find, char *replace_with);
 char **string_split(char *target, char *delimiter);

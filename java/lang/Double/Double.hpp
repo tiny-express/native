@@ -393,10 +393,10 @@ namespace Java {
             string toString() const override;
 
             /**
-             * Returns a string representation of the {double}
+             * Returns a string representation of the double
              * argument. All characters mentioned below are ASCII characters.
              *
-             * @param d the {double} to be converted.
+             * @param d the double to be converted.
              * @return a string representation of the argument.
              */
             static String toString(double d);
@@ -413,19 +413,19 @@ namespace Java {
              * Returns the value of this {Double} as a {byte}
              * after a narrowing primitive conversion.
              *
-             * @return  the {double} value represented by this object
+             * @return  the double value represented by this object
              *          converted to type {byte}
              */
             byte byteValue() const ;
 
             /**
-             * Compares the two specified {double} values. The sign
+             * Compares the two specified double values. The sign
              * of the integer value returned is the same as that of the
              * integer that would be returned by the call:
              *    Double(double1).compareTo(Double(d2))
              *
-             * @param   double1        the first {double} to compare
-             * @param   double2        the second {double} to compare
+             * @param   double1        the first double to compare
+             * @param   double2        the second double to compare
              * @return  the value {0} if {double1} is
              *          numerically equal to {double2}; a value less than
              *          {0} if {double1} is numerically less than
@@ -454,7 +454,7 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout.
              *
-             * @param   value   a {double} precision floating-point number.
+             * @param   value   a double precision floating-point number.
              * @return the bits that represent the floating-point number.
              */
             static long doubleToLongBits(double valueDouble);
@@ -464,7 +464,7 @@ namespace Java {
              * according to the IEEE 754 floating-point "double
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
-             * @param   value   a {double} precision floating-point number.
+             * @param   value   a double precision floating-point number.
              * @return the bits that represent the floating-point number.
              */
             static long doubleToRawLongBits(double doubleInput);
@@ -487,11 +487,11 @@ namespace Java {
             long hashCode();
 
             /**
-             * Returns a hash code for a {double} value; compatible with
+             * Returns a hash code for a double value; compatible with
              * {Double.hashCode()}.
              *
              * @param value the value to hash
-             * @return a hash code value for a {double} value.
+             * @return a hash code value for a double value.
              */
             static long hashCode(double doubleInput);
 
@@ -500,7 +500,7 @@ namespace Java {
              * value; returns {false} otherwise (for NaN and infinity
              * arguments).
              *
-             * @param d the {double} value to be tested
+             * @param d the double value to be tested
              * @return {true} if the argument is a finite
              * floating-point value, {false} otherwise.
              */
@@ -546,17 +546,17 @@ namespace Java {
             boolean isNaN() ;
 
             /**
-             * Returns the {double} value corresponding to a given
+             * Returns the double value corresponding to a given
              * bit representation.
              *
              * @param   bits   any {long} integer.
-             * @return  the {double} floating-point value with the same
+             * @return  the double floating-point value with the same
              *          bit pattern.
              */
             static double longBitsToDouble(long bits);
 
             /**
-             * Returns the smaller of two {double} values
+             * Returns the smaller of two double values
              * as if by calling {@link Math#min(double, double) Math.min}.
              *
              * @param a the first operand
@@ -569,10 +569,10 @@ namespace Java {
             // TODO(thoangminh): Implement later
 //            /**
 //             * Returns a hexadecimal string representation of the
-//             * {double} argument. All characters mentioned below
+//             * double argument. All characters mentioned below
 //             * are ASCII characters.
 //             *
-//             * @param   d   the {double} to be converted.
+//             * @param   d   the double to be converted.
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
