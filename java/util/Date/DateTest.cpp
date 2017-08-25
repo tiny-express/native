@@ -460,23 +460,63 @@ TEST(JavaUtil, DateGetDate) {
 
 TEST(JavaUtil, DateSetHours) {
     // Create variable to test
-    Date date;
+    Date expected;
+    Date actual;
 
-    date.setHours(1);
-    ASSERT_EQUAL(1, date.getHours());
+    // Set hour = -1 => date -= 1, hour = 23
+    expected = Date(2017, 2, 12, 23, 01, 13);
+    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual.setHours(-1);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setHours(23);
-    ASSERT_EQUAL(23, date.getHours());
+    // Set hour = -58 => date -= 3, hour = 14
+    expected = Date(2017, 2, 10, 14, 01, 13);
+    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual.setHours(-58);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setHours(0);
-    ASSERT_EQUAL(0, date.getHours());
+    // Set hour = 0
+    expected = Date(2017, 2, 13, 0, 01, 13);
+    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual.setHours(0);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    // TODO(thoangminh): Need to throw exeptions for these cases below
-    date.setHours(-1);
-    ASSERT_EQUAL(-1, date.getHours());
+    // Set hour = 24. Day += 1, hour = 0
+    expected = Date(2017, 2, 14, 0, 01, 13);
+    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual.setHours(24);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setHours(24);
-    ASSERT_EQUAL(24, date.getHours());
+    // Set hour = 49. Day += 2, hour = 1
+    expected = Date(2017, 2, 15, 1, 01, 13);
+    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual.setHours(49);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }
 
 TEST(JavaUtil, DateGetHour) {
