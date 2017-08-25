@@ -784,6 +784,15 @@ namespace Java {
              */
 			String toLowerCase() const;
 
+			/**
+			 * Converts all of the characters in this String to lower case using the rules of the given Locale.
+			 *
+			 * @param locale
+			 * @return the String, converted to lowercase.
+			 */
+			// TODO (anhnt) need Locale
+			// String toLowerCase(Locale locale);
+
             /**
              * Converts all of the characters in this String to upper case
              * using the rules of the default locale.
@@ -791,6 +800,16 @@ namespace Java {
              * @return the String, converted to uppercase.
              */
 			String toUpperCase();
+
+			/**
+            * Converts all of the characters in this String to upper case
+            * using the rules of the given locale.
+            *
+            * @param locale
+            * @return the String, converted to uppercase.
+            */
+			// TODO need Locale
+			// String toUpperCase(Locale locale);
 
             /**
              * Returns a String whose value is this string, with any leading
