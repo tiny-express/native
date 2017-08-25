@@ -22,7 +22,6 @@ script:
 - make native && sudo make install && sudo ldconfig
 - cd examples && ./build
 after_success:
-- chmod +x misc/codecov.sh
-- ./misc/codecov.sh
+- cd $TRAVIS_BUILD_DIR && ./misc/codecov.sh
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
