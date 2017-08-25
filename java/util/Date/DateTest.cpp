@@ -633,23 +633,52 @@ TEST(JavaUtil, DateGetMinutes) {
 
 TEST(JavaUtil, DateSetSeconds) {
     // Create variable to test
-    Date date;
+    Date expected;
+    Date actual;
 
-    date.setSeconds(1);
-    ASSERT_EQUAL(1, date.getSeconds());
+    // Set second = -1 => minute -= 1, second = 59
+    expected = Date(2017, 2, 13, 10, 00, 59);
+    actual   = Date(2017, 2, 13, 10, 01, 1);
+    actual.setSeconds(-1);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setSeconds(59);
-    ASSERT_EQUAL(59, date.getSeconds());
+    // Set minute = 0
+    expected = Date(2017, 2, 13, 10, 01, 0);
+    actual   = Date(2017, 2, 13, 10, 01, 1);
+    actual.setSeconds(0);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    date.setSeconds(0);
-    ASSERT_EQUAL(0, date.getSeconds());
+    // Set second = 60 => minute += 1, second = 0
+    expected = Date(2017, 2, 13, 10, 02, 00);
+    actual   = Date(2017, 2, 13, 10, 01, 1);
+    actual.setSeconds(60);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-    // TODO(thoangminh): Need to throw exeptions for these cases below
-    date.setSeconds(-1);
-    ASSERT_EQUAL(-1, date.getSeconds());
-
-    date.setSeconds(60);
-    ASSERT_EQUAL(60, date.getSeconds());
+    // Set second = 150 => minute += 2, second = 30
+    expected = Date(2017, 2, 13, 10, 03, 30);
+    actual   = Date(2017, 2, 13, 10, 01, 1);
+    actual.setSeconds(150);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }
 
 TEST(JavaUtil, DateGetSeconds) {
