@@ -43,6 +43,7 @@ namespace Java {
         class Long;
         class Float;
         class Double;
+        class IllegalArgumentException;
 
 		class String :
 				public Object,
@@ -127,6 +128,12 @@ namespace Java {
 			static String valueOf(float target);
 			static String valueOf(double target);
 
+            /*
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
             template<typename T, typename... Args>
             static String format(const String& format, T value, Args... args) {
                 const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
@@ -160,7 +167,12 @@ namespace Java {
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
-                            result += String::format(remainString, args...);
+                            try {
+                                result += String::format(remainString, args...);
+                            } catch (IllegalArgumentException& e) {
+                                regfree(&regex);
+                                throw e;
+                            }
                             break;
                         }
                     }
