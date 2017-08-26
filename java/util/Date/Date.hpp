@@ -65,7 +65,7 @@ namespace Java {
                      * @param timePresenter
                      * @return String
                      */
-                    string timeToString(string format, tm *timeManagement) {
+                    String timeToString(string format, tm *timeManagement) {
                         size_t size = 100;
                         auto result = static_cast<string> (malloc(size * sizeof(char)));
 

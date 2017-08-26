@@ -270,18 +270,6 @@ int Date::compareTo(Date anotherDate) {
 //	free(timeString);
 //	return result;
 //}
-//
-//String Date::toLocaleString() {
-//	if (this->refreshFlag) {
-//		refreshTime();
-//	}
-//
-//	string timeString = this->toString0(this->localTimer);
-//	String result = timeString;
-//
-//	free(timeString);
-//	return result;
-//}
 
 String Date::toString() {
 	if (this->refreshFlag) {
@@ -297,22 +285,6 @@ long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
     tm localTimer = { 0 };
 
     localTimer.tm_year = year % 1900;
-
-    if (month >= 12) {
-        localTimer.tm_year += month / 12;
-        month %= 12;
-
-        if (month == 0) {
-            month = 1;
-        }
-    }
-
-    if (month < 0) {
-        localTimer.tm_year += ((month + 1) / 12) - 1;
-        month = month - 12 * ((month + 1) / 12 - 1);
-        month++;
-    }
-
     localTimer.tm_mon = month;
     localTimer.tm_mday = date;
     localTimer.tm_hour = hrs;
@@ -341,3 +313,12 @@ Date Date::clone() {
 //                            timer.tm_hour, timer.tm_min, timer.tm_sec);
 //    return result;
 //}
+
+String Date::toLocaleString() {
+    if (this->refreshFlag) {
+        refreshTime();
+    }
+
+    auto format = (string) "%b %d, %Y %I:%M:%S %p";
+    return this->timeToString(format, this->localTimer);
+}
