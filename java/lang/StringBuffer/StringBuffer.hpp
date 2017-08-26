@@ -31,7 +31,9 @@
 
 namespace Java {
     namespace Lang {
-        class StringBufferUnSafe : public Object, public virtual CharSequence {
+        class StringBufferUnSafe :
+                public Object,
+                public virtual CharSequence {
 
         private:
             /**

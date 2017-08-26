@@ -371,7 +371,7 @@ namespace Java {
             /**
              * Compares this String to the specified object.
              *
-             * @tparam T
+             * @param T
              * @param anObject
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise
@@ -384,7 +384,7 @@ namespace Java {
 				if (instanceof<String>(anObject)) {
 					return (boolean) string_equals(original, anObject.toString());
 				}
-				return true;
+				return false;
 			}
 
             /**

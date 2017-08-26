@@ -60,7 +60,6 @@ int string_equals(char *target1, char *target2);
 char *string_concat_asm(char *target, char *subtarget);
 char *string_reverse(char *target);
 int string_matches(char *target, char *regex);
-char *string_format(const char* format, va_list args);
 
 char *string_from_to(char *target, int from, int to);
 char *string_from(char *target, int from);

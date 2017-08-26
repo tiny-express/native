@@ -673,13 +673,11 @@ void String::getChars(int sourceBegin, int sourceEnd,
 }
 
 String String::replace(CharSequence &target, CharSequence &replacement) const {
-    string oldString = strdup(target.toString());
-    string newString = strdup(replacement.toString());
+    string oldString = target.toString();
+    string newString = replacement.toString();
     string pointerHolder = string_replace(this->original, oldString, newString);
     String result = pointerHolder;
     free(pointerHolder);
-    free(oldString);
-    free(newString);
     return result;
 }
 
