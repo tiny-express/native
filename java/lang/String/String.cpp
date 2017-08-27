@@ -189,7 +189,7 @@ Array<byte> String::getBytes() const {
 
 String String::getStringFromIndex(int index) const {
 	if (index < 0 || index > this->size - 1) {
-		throw StringIndexOutOfBoundsException("String index out of range");
+		throw StringIndexOutOfBoundsException(index);
 	}
 	return &(this->original[ index ]);
 }
@@ -255,10 +255,10 @@ int String::indexOf(String subString, int fromIndex) const {
     }
     string stringFromIndex = string_from(this->original, fromIndex);
     int result = string_index(stringFromIndex, subString.original, 1);
+    free(stringFromIndex);
     if (result == -1) {
         return result;
     }
-    free(stringFromIndex);
     result = fromIndex + result;
 	return result;
 }
