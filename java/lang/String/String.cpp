@@ -37,11 +37,6 @@ String::String() {
 	this->size = 0;
 }
 
-String::String(char target) {
-	this->original = strdup((string) &target);
-	this->size = 0;
-}
-
 String::String(const_string target) {
 	this->original = strdup(target);
 	this->size = length_pointer_char((string) target);

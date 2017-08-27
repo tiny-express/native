@@ -189,13 +189,6 @@ namespace Java {
             // String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
-             * Construct a new String from target char
-             *
-             * @param target
-             */
-            String(char target);
-
-            /**
              * Construct a new String from specific const_string
              *
              * @param original

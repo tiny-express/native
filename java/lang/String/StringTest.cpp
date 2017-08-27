@@ -382,6 +382,9 @@ TEST(JavaLang, StringLastIndexOf) {
     result = textPlus.lastIndexOf('H', -1);
     ASSERT_EQUAL(-1, result);
 
+    result = textPlus.lastIndexOf('a', 10);
+    ASSERT_EQUAL(-1, result);
+
     // Test true first character of subString appear last in validString is position 28th
     ASSERT_EQUAL(28, validString.lastIndexOf(subString));
 
