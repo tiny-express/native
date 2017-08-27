@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <malloc.h>
 #include "Date.hpp"
 
 /**
@@ -44,27 +45,53 @@ Date::Date(const Date &inputDate) {
 
 Date::Date(int year, int month, int date) {
 	this->refreshFlag = false;
-	this->original = Date::UTC(year, month, date, 0, 0, 0);
-    time_t now = time(nullptr);
+	this->original = Date::initialize(year, month, date, 0, 0, 0);
 	Date::updateLocalTimer();
 }
 
 Date::Date(int year, int month, int date, int hrs, int min) {
 	this->refreshFlag = false;
-	this->original = Date::UTC(year, month, date, hrs, min, 0);
+	this->original = Date::initialize(year, month, date, hrs, min, 0);
 	Date::updateLocalTimer();
 }
 
 Date::Date(int year, int month, int date, int hrs, int min, int sec) {
 	this->refreshFlag = false;
-	this->original = Date::UTC(year, month, date, hrs, min, sec);
+	this->original = Date::initialize(year, month, date, hrs, min, sec);
 	Date::updateLocalTimer();
 }
 
 Date::Date(long date) {
+    using namespace std::chrono;
+
 	this->refreshFlag = false;
+    this->original = date;
+//    Date::updateLocalTimer();
+
+//    typedef std::chrono::time_point<std::chrono::system_clock> TimePointType;
+//    time_t timer = date;
+//    TimePointType timePoint = system_clock::from_time_t(timer);
+//
+//    template <class Duration>
+//    typedef std::chrono::time_point<std::chrono::system_clock, Duration> DurationType;
+//    DurationType duration = timePoint;
+//    this->localTimer = *make_utc_tm(duration);
+
+    // Update localTimer
 	this->original = date;
-	Date::updateLocalTimer();
+    tm temp = {0};
+    tm *tempLocalTimer= localtime_r(&this->original, &temp);
+    this->localTimer = tempLocalTimer;
+
+    // Update timezoneOffset
+    time_t now = time(nullptr);
+    tm tempLocalTimeManager = {0};
+    tm *localTimeMagager = localtime_r(&now, &tempLocalTimeManager);
+    tm tempUTCTimeManager = {0};
+    tm *utcTimeManager = gmtime_r(&now, &tempUTCTimeManager);
+    this->timezoneOffset = -(localTimeMagager->tm_hour
+                             - utcTimeManager->tm_hour) *60;
+
 }
 
 // TODO(thoangminh): Check this method later
@@ -277,23 +304,38 @@ String Date::toString() {
 	}
 
     auto format = (string) "%a %b %d %T UTC %Y";
-	return this->timeToString(format, this->localTimer);
+    string convertResult = this->timeToString(format, this->localTimer);
+    String result = convertResult;
+    free(convertResult);
+
+    return result;
 }
 
 long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
-    long result;
-    tm localTimer = { 0 };
+    Date tempDate = Date(year, month, date, hrs, min, sec);
+    time_t timer = tempDate.getTime();
+    tm tempUTCTimer = {0};
+    tm *utcTimer = gmtime_r(&timer, &tempUTCTimer);
 
-    localTimer.tm_year = year % 1900;
-    localTimer.tm_mon = month;
-    localTimer.tm_mday = date;
-    localTimer.tm_hour = hrs;
-    localTimer.tm_min = min;
-    localTimer.tm_sec = sec;
+    return mktime(utcTimer);
 
-    result = mktime(&localTimer);
+//    Date tempDate = Date(year, month, date, hrs, min, sec);
+//    time_t timer = tempDate.getTime();
+//    auto localTimer = gmtime(&timer);
+//    localTimer->tm_isdst = -1;
+//    auto utcTime = mktime(localTimer);
+////    auto utcTimer = gmtime(&utcTime);
+//
+//    return  utcTime;
 
-    return result;
+//    Date tempDate = Date(year, month, date, hrs, min, sec);
+//    int localTimeZoneInHours = tempDate.getTimezoneOffset() / 60;
+//    int tempDateHours = tempDate.getHours();
+//    tempDate.setHours(tempDateHours - localTimeZoneInHours);
+//
+//    return tempDate.getTime();
+//
+//    return NULL;
 }
 
 Date Date::clone() {
@@ -309,7 +351,7 @@ Date Date::clone() {
 //    // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
 ////    string timeString = inputString.toString();
 //
-//    result = Date::UTC(timer.tm_year, timer.tm_mon, timer.tm_mday,
+//    result = Date::initialize(timer.tm_year, timer.tm_mon, timer.tm_mday,
 //                            timer.tm_hour, timer.tm_min, timer.tm_sec);
 //    return result;
 //}
@@ -320,5 +362,9 @@ String Date::toLocaleString() {
     }
 
     auto format = (string) "%b %d, %Y %I:%M:%S %p";
-    return this->timeToString(format, this->localTimer);
+    string convertResult = this->timeToString(format, this->localTimer);
+    String result = convertResult;
+    free(convertResult);
+
+    return result;
 }
