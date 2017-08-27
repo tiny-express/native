@@ -136,7 +136,7 @@ namespace Java {
              */
             template<typename T, typename... Args>
             static String format(const String& format, T value, Args... args) {
-                const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+                const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
                 String result;
                 String inputString(format);
                 string inputStringPtr = inputString.toString();

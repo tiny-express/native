@@ -968,7 +968,7 @@ String String::print(const String &format, String value) {
 }
 
 String String::format(const String &format) {
-    const String pattern = "%([[:digit:]]+)?([-#+0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
     String result;
     String inputString(format);
     string inputStringPtr = inputString.toString();

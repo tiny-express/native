@@ -558,4 +558,13 @@ TEST(JavaLang, StringFormat) {
             ASSERT_STR("Missing arguments.", e.getMessage().toString());
         }
     }
+
+    {
+        String format = "%%% d";
+        try {
+            String result = String::format(format);
+        } catch (IllegalArgumentException& e) {
+            ASSERT_STR("Missing arguments.", e.getMessage().toString());
+        }
+    }
 }
