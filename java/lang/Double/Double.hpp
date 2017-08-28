@@ -111,7 +111,7 @@ static constexpr double initMinNormalDouble() noexcept {
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
-		private:
+        private:
 			double original;
             string originalString;
             
