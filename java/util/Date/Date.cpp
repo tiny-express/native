@@ -33,65 +33,24 @@
  * @return
  */
 Date::Date() {
-	this->refreshFlag = true;
-	refreshTime();
-}
-
-Date::Date(const Date &inputDate) {
-	this->refreshFlag = false;
-	this->original = inputDate.original;
-    Date::updateLocalTimer();
+    initialize(time(nullptr));
 }
 
 Date::Date(int year, int month, int date) {
-	this->refreshFlag = false;
-	this->original = Date::initialize(year, month, date, 0, 0, 0);
-	Date::updateLocalTimer();
+    initialize(year, month, date, 0, 0, 0);
 }
 
 Date::Date(int year, int month, int date, int hrs, int min) {
-	this->refreshFlag = false;
-	this->original = Date::initialize(year, month, date, hrs, min, 0);
-	Date::updateLocalTimer();
+    initialize(year, month, date, hrs, min, 0);
 }
 
 Date::Date(int year, int month, int date, int hrs, int min, int sec) {
-	this->refreshFlag = false;
-	this->original = Date::initialize(year, month, date, hrs, min, sec);
-	Date::updateLocalTimer();
+    initialize(year, month, date, hrs, min, sec);
 }
 
 Date::Date(long date) {
-    using namespace std::chrono;
-
-	this->refreshFlag = false;
-    this->original = date;
-//    Date::updateLocalTimer();
-
-//    typedef std::chrono::time_point<std::chrono::system_clock> TimePointType;
-//    time_t timer = date;
-//    TimePointType timePoint = system_clock::from_time_t(timer);
-//
-//    template <class Duration>
-//    typedef std::chrono::time_point<std::chrono::system_clock, Duration> DurationType;
-//    DurationType duration = timePoint;
-//    this->localTimer = *make_utc_tm(duration);
-
-    // Update localTimer
-	this->original = date;
-    tm temp = {0};
-    tm *tempLocalTimer= localtime_r(&this->original, &temp);
-    this->localTimer = tempLocalTimer;
-
-    // Update timezoneOffset
-    time_t now = time(nullptr);
-    tm tempLocalTimeManager = {0};
-    tm *localTimeMagager = localtime_r(&now, &tempLocalTimeManager);
-    tm tempUTCTimeManager = {0};
-    tm *utcTimeManager = gmtime_r(&now, &tempUTCTimeManager);
-    this->timezoneOffset = -(localTimeMagager->tm_hour
-                             - utcTimeManager->tm_hour) *60;
-
+    time_t timer = date;
+    initialize(timer);
 }
 
 // TODO(thoangminh): Check this method later
@@ -106,70 +65,46 @@ Date::~Date() {
 
 // TODO(thoangminh): Need to check all methods below
 void Date::setDate(int date) {
-    this->refreshFlag = false;
-
     this->localTimer->tm_mday = date;
+    update();
 }
 
 void Date::setHours(int hours) {
-    this->refreshFlag = false;
-
     this->localTimer->tm_hour = hours;
-    this->updateOriginal();
+    update();
 }
 
 void Date::setMinutes(int minutes) {
-    this->refreshFlag = false;
-
     this->localTimer->tm_min = minutes;
-    this->updateOriginal();
+    update();
 }
 
 void Date::setMonth(int month) {
-    this->refreshFlag = false;
-
     this->localTimer->tm_mon = month;
-    this->updateOriginal();
+    update();
 }
 
 void Date::setSeconds(int seconds) {
-    this->refreshFlag = false;
-
     this->localTimer->tm_sec = seconds;
-    this->updateOriginal();
+    update();
 }
 
 void Date::setTime(long time) {
-    this->refreshFlag = false;
-
-    this->original = time;
-    this->updateLocalTimer();
+    initialize(time);
 }
 
 void Date::setYear(int year) {
-    this->refreshFlag = false;
-
     // LocalTimer just keep year since 1900
     this->localTimer->tm_year = year % 1900;
-    this->updateOriginal();
+    update();
 }
 
 int Date::getDate() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_mday;
-
-    return result;
+    return this->mday;
 }
 
 int Date::getDay() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_wday;
+    int result = this->wday;
 
     switch (result) {
         case 0: return 4;
@@ -180,73 +115,41 @@ int Date::getDay() {
         case 5: return 2;
         case 6: return 3;
     }
+
+    return result;
 }
 
 int Date::getHours() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_hour;
-    return result;
+    return this->hour;
 }
 
 int Date::getMinutes() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_min;
-    return result;
+    return this->min;
 }
 
 int Date::getMonth() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_mon;
-    return result;
+    return this->mon;
 }
 
 int Date::getSeconds() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    int result = this->localTimer->tm_sec;
-    return result;
+    return this->sec;
 }
 
 int Date::getYear() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    // LocalTimer just keep tm_year since 1900
-    int result = this->localTimer->tm_year + 1900;
-
-    return result;
+    return this->year + 1900;
 }
 
 long Date::getTime() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
-    long result = this->original;
-    return result;
+    return this->original;
 }
 
 int Date::getTimezoneOffset() {
-    return this->timezoneOffset;
+    auto result = static_cast<int> (- this->gmtoff / 60);
+
+    return result;
 }
 
 boolean Date::after(Date when) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
 	if (this->original > when.original) {
 		return true;
 	}
@@ -255,10 +158,6 @@ boolean Date::after(Date when) {
 }
 
 boolean Date::before(Date when) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
 	if (this->original < when.original) {
 		return true;
 	}
@@ -267,10 +166,6 @@ boolean Date::before(Date when) {
 }
 
 int Date::compareTo(Date anotherDate) {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
 	long temp = this->original - anotherDate.original;
 
 	if (temp < 0) {
@@ -286,7 +181,7 @@ int Date::compareTo(Date anotherDate) {
 
 //String Date::toGMTString() {
 //	if (this->refreshFlag) {
-//		refreshTime();
+//		initialize(time(nullptr));
 //	}
 //
 //	tm *gmTimer = gmtime(&this->original);
@@ -299,10 +194,6 @@ int Date::compareTo(Date anotherDate) {
 //}
 
 String Date::toString() {
-	if (this->refreshFlag) {
-		refreshTime();
-	}
-
     auto format = (string) "%a %b %d %T UTC %Y";
     string convertResult = this->timeToString(format, this->localTimer);
     String result = convertResult;
@@ -313,29 +204,9 @@ String Date::toString() {
 
 long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
     Date tempDate = Date(year, month, date, hrs, min, sec);
-    time_t timer = tempDate.getTime();
-    tm tempUTCTimer = {0};
-    tm *utcTimer = gmtime_r(&timer, &tempUTCTimer);
+    long result = tempDate.getTime() + tempDate.getTimezoneOffset() * 60;
 
-    return mktime(utcTimer);
-
-//    Date tempDate = Date(year, month, date, hrs, min, sec);
-//    time_t timer = tempDate.getTime();
-//    auto localTimer = gmtime(&timer);
-//    localTimer->tm_isdst = -1;
-//    auto utcTime = mktime(localTimer);
-////    auto utcTimer = gmtime(&utcTime);
-//
-//    return  utcTime;
-
-//    Date tempDate = Date(year, month, date, hrs, min, sec);
-//    int localTimeZoneInHours = tempDate.getTimezoneOffset() / 60;
-//    int tempDateHours = tempDate.getHours();
-//    tempDate.setHours(tempDateHours - localTimeZoneInHours);
-//
-//    return tempDate.getTime();
-//
-//    return NULL;
+    return result;
 }
 
 Date Date::clone() {
@@ -347,7 +218,7 @@ Date Date::clone() {
 //    tm timer = {0};
 //    long result;
 //
-//    // TODO(anhkhoa): Fix for WIN32
+
 //    // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
 ////    string timeString = inputString.toString();
 //
@@ -357,10 +228,6 @@ Date Date::clone() {
 //}
 
 String Date::toLocaleString() {
-    if (this->refreshFlag) {
-        refreshTime();
-    }
-
     auto format = (string) "%b %d, %Y %I:%M:%S %p";
     string convertResult = this->timeToString(format, this->localTimer);
     String result = convertResult;

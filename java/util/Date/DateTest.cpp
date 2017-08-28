@@ -49,7 +49,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(2017, date.getYear());
     ASSERT_EQUAL(02, date.getMonth());
     ASSERT_EQUAL(13, date.getDate());
-    
+
     // Test Date(int year, int month, int date, int hrs, int min)
     date = Date(2017, 02, 13, 8, 01);
     ASSERT_EQUAL(2017, date.getYear());
@@ -57,7 +57,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(13, date.getDate());
     ASSERT_EQUAL(8, date.getHours());
     ASSERT_EQUAL(01, date.getMinutes());
-    
+
     // Test Date(int year, int month, int date, int hrs, int min, int sec)
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(2017, date.getYear());
@@ -66,8 +66,8 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(8, date.getHours());
     ASSERT_EQUAL(01, date.getMinutes());
     ASSERT_EQUAL(13, date.getSeconds());
-    
-    // Test Date(long date) 
+
+    // Test Date(long date)
     date = Date(1498042091); //2017
     ASSERT_EQUAL(2017, date.getYear());
 
@@ -253,7 +253,7 @@ TEST(JavaUtil, DateSetDate) {
     // Create variable to test
     Date expected;
     Date actual;
-    
+
     // Set month = 3, date = -1 => month = 2, date = 30
     expected = Date(2017, 2, 30, 10, 01, 13);
     actual 	 = Date(2017, 3, 1, 10, 01, 13);
@@ -887,13 +887,10 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
 
     // Test System time zone
     time_t now = time(nullptr);
-    tm tempLocalTimeManager = {0};
-    tm *localTimeMagager = localtime_r(&now, &tempLocalTimeManager);
-    tm tempUTCTimeManager = {0};
-    tm *utcTimeManager = gmtime_r(&now, &tempUTCTimeManager);
+    tm tempLocalTimer = {0};
+    tm *localTimer = localtime_r(&now, &tempLocalTimer);
+    expectedResult = static_cast<int> (- localTimer->tm_gmtoff / 60);
 
-    expectedResult = -(localTimeMagager->tm_hour
-                       - utcTimeManager->tm_hour) *60;
     ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
 
     // Test Date(int year, int month, int date)
@@ -1130,341 +1127,333 @@ TEST(JavaUtil, DateUTC) {
         changeDay = -1;
     }
 
-
     // Valid case
     expected 	= Date(2017, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
     actual = Date(timeActual);
-//    Date temp = Date(2017, 2, 13, 10, 01, 13);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-    ASSERT_EQUAL(expected.getTimezoneOffset(), actual.getTimezoneOffset());
-//    ASSERT_EQUAL(expected.getTime(), timeActual);
-//    ASSERT_EQUAL(temp.getTime(), actual.getTime());
-//    expected = Date(temp.getTime());
-//    ASSERT_EQUAL(expected.getTime(), actual.getTime());
-//    ASSERT_EQUAL(expected.getHours(), actual.getHours());
 
-//    // Set year = 1900. Not work correctly
-//    expected 	= Date(1900, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_NOT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set year = 3000
-//    expected 	= Date(3000, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(3000, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set year = 1889
-//    expected 	= Date(1889, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(1889, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set year = -1. Not work correctly
-//    expected 	= Date(-1, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(-1, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_NOT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set year = -900. Not work correctly
-//    expected 	= Date(-900, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(-900, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_NOT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set year = 0
-//    expected 	= Date(1900, 2, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_NOT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 12 => Year+= 1 , month = 0.
-//    expected 	= Date(2018, 0, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 12, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 33 => Year+= 2, month = 9.
-//    expected 	= Date(2019, 9, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 33, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 0
-//    expected 	= Date(2017, 0, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 0, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = -1 => Year-= 1, month = 11.
-//    expected 	= Date(2016, 11, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, -1, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = -12 => Year-= 1, month = 0.
-//    expected 	= Date(2016, 0, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, -12, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = -33 => Year-= 3, month = 3.
-//    expected 	= Date(2014, 3, 13, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, -33, 13, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 3, date = -1 => month = 2, date = 30
-//    expected 	= Date(2017, 2, 30, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 3, -1, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 6, date = -75 => month = 3, date = 16
-//    expected 	= Date(2017, 3, 16, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 6, -75, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 3, date = 0 => month = 2, date = 31
-//    expected 	= Date(2017, 2, 31, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 3, 0, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 2, date = 0 => month = 1, date = 28
-//    expected 	= Date(2017, 1, 28, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 2, 0, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set month = 5, date = 32 => month = 6, date = 2
-//    expected 	= Date(2017, 6, 2, 10, 01, 13);
-//    timeActual 	= Date::UTC(2017, 5, 32, 10, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set hour = -1 => day -= 1, hour = 23
-//    expected 	= Date(2017, 2, 12, 23, 01, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, -1, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//     // Set hour = 0
-//    expected 	= Date(2017, 2, 13, 0, 01, 13);
-//    timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-//    ASSERT_EQUAL(expected.getHours(), ((actual.getHours() + localTimeZoneInHours) % 24) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set hour = 24. Day += 1, hour = 0
-//    expected 	= Date(2017, 2, 14, 0, 01, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 24, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set hour = 49. Day += 2, hour = 1
-//    expected 	= Date(2017, 2, 15, 1, 01, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 49, 01, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set minute = -1 => hour -= 1, minute = 59
-//    expected 	= Date(2017, 2, 13, 9, 59, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, -1, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set minute = 0
-//    expected 	= Date(2017, 2, 13, 10, 0, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 0, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set minute = 60 => hour += 1, minute = 0
-//    expected 	= Date(2017, 2, 13, 11, 00, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 60, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set minute = 150 => hour += 2, minute = 30
-//    expected 	= Date(2017, 2, 13, 12, 30, 13);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 150, 13);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set second = -1 => minute -= 1, second = 59
-//    expected 	= Date(2017, 2, 13, 10, 00, 59);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, -1);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set minute = 0
-//    expected 	= Date(2017, 2, 13, 10, 01, 0);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 0);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set second = 60 => minute += 1, second = 0
-//    expected 	= Date(2017, 2, 13, 10, 02, 00);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 60);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//
-//    // Set second = 150 => minute += 2, second = 30
-//    expected 	= Date(2017, 2, 13, 10, 03, 30);
-//    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 150);
-//    actual = Date(timeActual);
-//    ASSERT_EQUAL(expected.getYear(), actual.getYear());
-//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
-//    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
-//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
-//    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    // Set year = 1900. Not work correctly
+    expected 	= Date(1900, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set year = 3000
+    expected 	= Date(3000, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(3000, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set year = 1889
+    expected 	= Date(1889, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(1889, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set year = -1. Not work correctly
+    expected 	= Date(-1, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(-1, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set year = -900. Not work correctly
+    expected 	= Date(-900, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(-900, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set year = 0
+    expected 	= Date(1900, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 12 => Year+= 1 , month = 0.
+    expected 	= Date(2018, 0, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 12, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 33 => Year+= 2, month = 9.
+    expected 	= Date(2019, 9, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 33, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 0
+    expected 	= Date(2017, 0, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 0, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = -1 => Year-= 1, month = 11.
+    expected 	= Date(2016, 11, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, -1, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = -12 => Year-= 1, month = 0.
+    expected 	= Date(2016, 0, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, -12, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = -33 => Year-= 3, month = 3.
+    expected 	= Date(2014, 3, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, -33, 13, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 3, date = -1 => month = 2, date = 30
+    expected 	= Date(2017, 2, 30, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 3, -1, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 6, date = -75 => month = 3, date = 16
+    expected 	= Date(2017, 3, 16, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 6, -75, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 3, date = 0 => month = 2, date = 31
+    expected 	= Date(2017, 2, 31, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 3, 0, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 2, date = 0 => month = 1, date = 28
+    expected 	= Date(2017, 1, 28, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 0, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set month = 5, date = 32 => month = 6, date = 2
+    expected 	= Date(2017, 6, 2, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 5, 32, 10, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set hour = -1 => day -= 1, hour = 23
+    expected 	= Date(2017, 2, 12, 23, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, -1, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+     // Set hour = 0
+    expected 	= Date(2017, 2, 13, 0, 01, 13);
+    timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
+    ASSERT_EQUAL(expected.getHours(), ((actual.getHours() + localTimeZoneInHours) % 24) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set hour = 24. Day += 1, hour = 0
+    expected 	= Date(2017, 2, 14, 0, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 24, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set hour = 49. Day += 2, hour = 1
+    expected 	= Date(2017, 2, 15, 1, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 49, 01, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set minute = -1 => hour -= 1, minute = 59
+    expected 	= Date(2017, 2, 13, 9, 59, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, -1, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set minute = 0
+    expected 	= Date(2017, 2, 13, 10, 0, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 0, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set minute = 60 => hour += 1, minute = 0
+    expected 	= Date(2017, 2, 13, 11, 00, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 60, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set minute = 150 => hour += 2, minute = 30
+    expected 	= Date(2017, 2, 13, 12, 30, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 150, 13);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set second = -1 => minute -= 1, second = 59
+    expected 	= Date(2017, 2, 13, 10, 00, 59);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, -1);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set minute = 0
+    expected 	= Date(2017, 2, 13, 10, 01, 0);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 0);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set second = 60 => minute += 1, second = 0
+    expected 	= Date(2017, 2, 13, 10, 02, 00);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 60);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+
+    // Set second = 150 => minute += 2, second = 30
+    expected 	= Date(2017, 2, 13, 10, 03, 30);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 150);
+    actual = Date(timeActual);
+    ASSERT_EQUAL(expected.getYear(), actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }

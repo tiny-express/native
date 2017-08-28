@@ -29,8 +29,6 @@
 
 #include <ctime>
 #include "../../Lang.hpp"
-#include <chrono>
-#include <tuple>
 
 using namespace Java::Lang;
 
@@ -44,9 +42,79 @@ namespace Java {
 				 private:
                     time_t original;
                     tm *localTimer;
-                    boolean refreshFlag;
-                    time_t now = time(nullptr);
-                    int timezoneOffset;
+
+                    /**
+                     * Seconds.	[0-60] (1 leap second)
+                     */
+                    int sec;
+
+                    /**
+                     * Minutes.	[0-59]
+                     */
+                    int min;
+
+                    /**
+                     * Hours.	[0-23]
+                     */
+                    int hour;
+
+                    /**
+                     * Day.		[1-31]
+                     */
+                    int mday;
+
+                    /**
+                     * Month.	[0-11]
+                     */
+                    int mon;
+
+                    /**
+                     * Year	- 1900.
+                     */
+                    int year;
+
+                    /**
+                     * Day of week.	[0-6]
+                     */
+                    int wday;
+
+                    /**
+                     * Days in year.[0-365]	*/
+                    int yday;
+
+                    /**
+                     * DST.		[-1/0/1]*/
+                    int isdst;
+
+                    /**
+                     * Seconds east of UTC.
+                     */
+                    long int gmtoff;
+
+                    /**
+                     * Timezone abbreviation.
+                     */
+                    const char *zone;
+
+                    /**
+                     * Update changes of this->localTimer
+                     */
+                    void update() {
+                        // Update changes
+                        this->original = mktime(this->localTimer);
+
+                        this->sec = this->localTimer->tm_sec;
+                        this->min = this->localTimer->tm_min;
+                        this->hour = this->localTimer->tm_hour;
+                        this->mday = this->localTimer->tm_mday;
+                        this->mon = this->localTimer->tm_mon;
+                        this->year = this->localTimer->tm_year;
+                        this->wday = this->localTimer->tm_wday;
+                        this->yday = this->localTimer->tm_yday;
+                        this->isdst = this->localTimer->tm_isdst;
+                        this->gmtoff =this->localTimer->tm_gmtoff;
+                        this->zone =this->localTimer->tm_zone;
+                    }
 
                     /**
                      * Allocates a Date object and initializes it so that
@@ -62,8 +130,7 @@ namespace Java {
                      * @param   min     the minutes between 0-59.
                      * @param   sec     the seconds between 0-59.
                      */
-                    long initialize(int year, int month, int date, int hrs, int min, int sec) {
-                        long result;
+                    void initialize(int year, int month, int date, int hrs, int min, int sec) {
                         tm localTimer = { 0 };
 
                         localTimer.tm_year = year % 1900;
@@ -73,9 +140,14 @@ namespace Java {
                         localTimer.tm_min = min;
                         localTimer.tm_sec = sec;
 
-                        result = mktime(&localTimer);
+                        this->original = mktime(&localTimer);
 
-                        return result;
+                        this->localTimer = localtime(&this->original);
+
+//                        time_t timer = mktime(&localTimer);
+//                        tm tempTimer = {0};
+//                        this->localTimer = localtime_r(&timer, &tempTimer);
+                        update();
                     }
 
                     /**
@@ -83,16 +155,14 @@ namespace Java {
                      * every case call set() to this class
                      * will make this function disable
                      */
-                    void refreshTime() {
-                        this->original = time(nullptr);
+                    void initialize(time_t timer) {
+                        this->original = timer;
                         this->localTimer = localtime(&this->original);
 
-                        tm tempLocalTimeManager;
-                        tm *localTimeMagager = localtime_r(&now, &tempLocalTimeManager);
-                        tm tempUTCTimeManager;
-                        tm *utcTimeManager = gmtime_r(&now, &tempUTCTimeManager);
-                        this->timezoneOffset = -(localTimeMagager->tm_hour
-                                                 - utcTimeManager->tm_hour) *60;
+//                        tm tempTimer = {0};
+//                        this->localTimer = localtime_r(&timer, &tempTimer);
+                        update();
+
                     }
 
                     /**
@@ -108,34 +178,6 @@ namespace Java {
                         return result;
                     }
 
-                    /**
-                     * Update this->original
-                     * whenever user set value to this class
-                     */
-                    void updateOriginal() {
-                        tm *timePresenter = this->localTimer;
-                        this->original = Date::UTC(timePresenter->tm_year, timePresenter->tm_mon, timePresenter->tm_mday,
-                                                   timePresenter->tm_hour, timePresenter->tm_min, timePresenter->tm_sec);
-                    }
-
-                    /**
-                     * Update this->localTimer
-                     * whenever user set new value
-                     * for this->original through setTime()
-                     */
-                    void updateLocalTimer() {
-                        this->localTimer = localtime(&this->original);
-
-                        // Update timezoneOffset
-                        time_t now = time(nullptr);
-                        tm tempLocalTimeManager = {0};
-                        tm *localTimeMagager = localtime_r(&now, &tempLocalTimeManager);
-                        tm tempUTCTimeManager = {0};
-                        tm *utcTimeManager = gmtime_r(&now, &tempUTCTimeManager);
-                        this->timezoneOffset = -(localTimeMagager->tm_hour
-                                                   - utcTimeManager->tm_hour) *60;
-                    }
-				
 				 public:
                     /**
                      * Allocates a Date object and initializes it
@@ -209,14 +251,6 @@ namespace Java {
                      * @return
                      */
                     Date(String s);
-
-                    /**
-                     * Alloc a new object have sample orginal as target
-                     *
-                     * @param target
-                     * @return
-                     */
-                    Date(const Date &target);
 
                     /**
                      *  Destructor
@@ -471,118 +505,6 @@ namespace Java {
                      * @return long
                      */
                     static long UTC(int year, int month, int date, int hrs, int min, int sec);
-
-                   /** Returns number of days since civil 1970-01-01.  Negative values indicate
-                    *    days prior to 1970-01-01.
-                    * Preconditions:  y-m-d represents a date in the civil (Gregorian) calendar
-                    *                 m is in [1, 12]
-                    *                 d is in [1, last_day_of_month(y, m)]
-                    *                 y is "approximately" in
-                    *                   [numeric_limits<Int>::min()/366, numeric_limits<Int>::max()/366]
-                    *                 Exact range of validity is:
-                    *                 [civil_from_days(numeric_limits<Int>::min()),
-                    *                  civil_from_days(numeric_limits<Int>::max()-719468)]
-                    */
-                    template <class Int>
-                    constexpr
-                    Int
-                    days_from_civil(Int y, unsigned m, unsigned d) noexcept
-                    {
-                        static_assert(std::numeric_limits<unsigned>::digits >= 18,
-                                      "This algorithm has not been ported to a 16 bit unsigned integer");
-                        static_assert(std::numeric_limits<Int>::digits >= 20,
-                                      "This algorithm has not been ported to a 16 bit signed integer");
-                        y -= m <= 2;
-                        const Int era = (y >= 0 ? y : y-399) / 400;
-                        const unsigned yoe = static_cast<unsigned>(y - era * 400);      // [0, 399]
-                        const unsigned doy = (153*(m + (m > 2 ? -3 : 9)) + 2)/5 + d-1;  // [0, 365]
-                        const unsigned doe = yoe * 365 + yoe/4 - yoe/100 + doy;         // [0, 146096]
-                        return era * 146097 + static_cast<Int>(doe) - 719468;
-                    }
-
-                   /** Returns year/month/day triple in civil calendar
-                    * Preconditions:  z is number of days since 1970-01-01 and is in the range:
-                    *                 [numeric_limits<Int>::min(), numeric_limits<Int>::max()-719468].
-                    */
-                    template <class Int>
-                    constexpr
-                    std::tuple<Int, unsigned, unsigned>
-                    civil_from_days(Int z) noexcept
-                    {
-                        static_assert(std::numeric_limits<unsigned>::digits >= 18,
-                                      "This algorithm has not been ported to a 16 bit unsigned integer");
-                        static_assert(std::numeric_limits<Int>::digits >= 20,
-                                      "This algorithm has not been ported to a 16 bit signed integer");
-                        z += 719468;
-                        const Int era = (z >= 0 ? z : z - 146096) / 146097;
-                        auto doe = static_cast<unsigned>(z - era * 146097);          // [0, 146096]
-                        const unsigned yoe = (doe - doe/1460 + doe/36524 - doe/146096) / 365;  // [0, 399]
-                        const Int y = static_cast<Int>(yoe) + era * 400;
-                        const unsigned doy = doe - (365*yoe + yoe/4 - yoe/100);                // [0, 365]
-                        const unsigned mp = (5*doy + 2)/153;                                   // [0, 11]
-                        const unsigned d = doy - (153*mp+2)/5 + 1;                             // [1, 31]
-                        const unsigned m = mp + (mp < 10 ? 3 : -9);                            // [1, 12]
-                        return std::tuple<Int, unsigned, unsigned>(y + (m <= 2), m, d);
-                    }
-
-                    template <class Int>
-                    constexpr
-                    unsigned
-                    weekday_from_days(Int z) noexcept
-                    {
-                        return static_cast<unsigned>(z >= -4 ? (z+4) % 7 : (z+5) % 7 + 6);
-                    }
-
-                    template <class To, class Rep, class Period>
-                    To
-                    round_down(const std::chrono::duration<Rep, Period>& d)
-                    {
-                        To t = std::chrono::duration_cast<To>(d);
-                        if (t > d)
-                            --t;
-                        return t;
-                    }
-
-                    template <class Duration>
-                    std::tm
-                    make_utc_tm(std::chrono::time_point<std::chrono::system_clock, Duration> tp)
-                    {
-                        using namespace std;
-                        using namespace std::chrono;
-                        typedef duration<int, ratio_multiply<hours::period, ratio<24>>> days;
-
-                        // t is time duration since 1970-01-01
-                        Duration t = tp.time_since_epoch();
-
-                        // d is days since 1970-01-01
-                        days d = round_down<days>(t);
-
-                        // t is now time duration since midnight of day d
-                        t -= d;
-
-                        // break d down into year/month/day
-                        int year;
-                        unsigned month;
-                        unsigned day;
-                        std::tie(year, month, day) = civil_from_days(d.count());
-
-                        // start filling in the tm with calendar info
-                        std::tm tm = {0};
-                        tm.tm_year = year - 1900;
-                        tm.tm_mon = month - 1;
-                        tm.tm_mday = day;
-                        tm.tm_wday = weekday_from_days(d.count());
-                        tm.tm_yday = d.count() - days_from_civil(year, 1, 1);
-
-                        // Fill in the time
-                        tm.tm_hour = duration_cast<hours>(t).count();
-                        t -= hours(tm.tm_hour);
-                        tm.tm_min = duration_cast<minutes>(t).count();
-                        t -= minutes(tm.tm_min);
-                        tm.tm_sec = duration_cast<seconds>(t).count();
-
-                        return tm;
-                }
             };
     }  // namespace Util
 }  // namespace Java
