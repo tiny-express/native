@@ -33,6 +33,7 @@ extern "C" {
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../StringBuffer/StringBuffer.hpp"
+#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Util;
@@ -884,4 +885,83 @@ TEST(JavaLang, StringCompareOperater) {
     ASSERT_FALSE(smallerString > greaterString);
     ASSERT_FALSE(smallerString >= greaterString);
     ASSERT_FALSE(greaterString <= smallerString);
+}
+TEST(JavaLang, StringFormat) {
+    unsigned short ushortValue = 1;
+    short shortValue = -1;
+    int intValue = -123;
+    unsigned int uintValue = 123;
+    long longValue = 123;
+    unsigned long ulongValue = 123456;
+    float floatValue = 123.456;
+    double doubleValue = 123.456789;
+    string stringValue = (string)"string";
+    Short shortObject = 123;
+    Integer integerObject = -123;
+    Long longObject = 123456;
+    Float floatObject = 123.456;
+    Double doubleObject = 123.456789;
+    String stringObject = "String";
+
+    {
+        String expect = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
+        String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
+        String result = String::format(format, intValue, longValue, integerObject, longObject, floatValue, doubleValue,
+                                      floatObject, doubleObject, stringValue, stringObject);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String expect = "%% hello %D %S %d world";
+        String format = "%%% hello %D %S %%d world";
+        String result = String::format(format);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String expect = "123.46 +1e+02 1.234568E+02";
+        String format = "%4.2f %+.0e %E";
+        String result = String::format(format, doubleObject, doubleObject, doubleValue);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String expect = "Preceding with zeros: 0000000123";
+        String format = "Preceding with zeros: %010d";
+        String result = String::format(format, longValue);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String expect = "1 123 123456 123";
+        String format = "%u %u %u %d";
+        String result = String::format(format, ushortValue, uintValue, ulongValue, shortObject);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        integerObject = 65;
+        String expect = "Characters: a A";
+        String format = "Characters: %c %c";
+        String result = String::format(format, 'a', integerObject);
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        String format = "%d %d";
+        try {
+            String result = String::format(format, shortObject);
+        } catch (IllegalArgumentException& e) {
+            ASSERT_STR("Missing arguments.", e.getMessage().toString());
+        }
+    }
+
+    {
+        String format = "%%% d";
+        try {
+            String result = String::format(format);
+        } catch (IllegalArgumentException& e) {
+            ASSERT_STR("Missing arguments.", e.getMessage().toString());
+        }
+    }
 }

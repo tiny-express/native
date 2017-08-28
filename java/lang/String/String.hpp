@@ -35,14 +35,20 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
+#include <regex.h>
 
 using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-
         class StringBuilder;
         class StringBuffer;
+        class Short;
+        class Integer;
+        class Long;
+        class Float;
+        class Double;
+        class IllegalArgumentException;
 
 		class String :
 				public Object,
@@ -210,18 +216,17 @@ namespace Java {
 			String(const std::string &target);
 
             /**
+             * Construct a new String from char array with specific length
+             *
+             * @param original
+             * @param length
+             */
+            String(string original, int length);
+
+            /**
              * Destructor
              */
 			~String();
-
-        private:
-            /**
-             * Bounds check the byte array and requested offset & length values
-             * @param byteArray
-             * @param offset
-             * @param length
-             */
-            // static void checkBounds(Array<byte> &byteArray, int offset, int length);
 
 		public:
             /**
@@ -984,17 +989,76 @@ namespace Java {
 
 		public:
             /**
-             * Output Stream operator
+             * Format string
              *
-             * @param os
-             * @param target
-             * @return std::ostream
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
              */
+            template<typename T, typename... Args>
+            static String format(const String& format, T value, Args... args) {
+                const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+                String result;
+                String inputString(format);
+                string inputStringPtr = inputString.toString();
+                int inputStringLength = inputString.getSize();
+                int inputStringOffset = 0;
+                int errorCode = 0;
+                regex_t regex;
+
+                errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+                while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
+                    if (errorCode != 0) {
+                        result += String(inputStringPtr, inputStringLength);
+                        break;
+                    }
+
+                    int unmatchedStringLength = matchedResult[0].rm_so;
+                    int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+                    if (unmatchedStringLength > 0) {
+                        result += String(inputStringPtr, unmatchedStringLength);
+                    }
+
+                    if (matchedStringLength > 0) {
+                        String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+                        result += String::printObject(matchedString, value);
+
+                        if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                            String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
+                            try {
+                                result += String::format(remainString, args...);
+                            } catch (IllegalArgumentException& e) {
+                                regfree(&regex);
+                                throw e;
+                            }
+                            break;
+                        }
+                    }
+
+                    inputStringPtr += matchedResult[0].rm_eo;
+                    inputStringOffset += matchedResult[0].rm_eo;
+                    inputStringLength -= matchedResult[0].rm_eo;
+                }
+
+                regfree(&regex);
+                return result;
+            }
+
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            static String format(const String& format);
+
+		public:
 			friend std::ostream &operator<<(std::ostream &os, const String &target) {
 				os << target.original;
 				return os;
 			}
-
 			/**
 			 * Add const_string and String
 			 *
@@ -1008,8 +1072,44 @@ namespace Java {
 				result += target2;
 				return result;
 			}
+
+        private:
+            template<typename T>
+            static String printObject(const String& format, T value) {
+                String result;
+                char lastChar = '\0';
+
+                if (format.getSize() > 0) {
+                    lastChar = format.charAt(format.getSize() - 1);
+                }
+
+                switch (lastChar) {
+                    case '%':
+                        result += lastChar;
+                        break;
+                    default:
+                        result = String::print(format, value);
+                        break;
+                }
+                return result;
+            }
+            static String print(const String& format, short value);
+            static String print(const String& format, int value);
+            static String print(const String& format, long value);
+            static String print(const String& format, unsigned short value);
+            static String print(const String& format, unsigned int value);
+            static String print(const String& format, unsigned long value);
+            static String print(const String& format, double value);
+            static String print(const String& format, float value);
+            static String print(const String& format, char* value);
+            static String print(const String& format, Short value);
+            static String print(const String& format, Integer value);
+            static String print(const String& format, Long value);
+            static String print(const String& format, Float value);
+            static String print(const String& format, Double value);
+            static String print(const String& format, String value);
 		};
 	} // namespace Lang
-}
+} // namespace Java
 
 #endif  // JAVA_LANG_STRING_STRING_HPP_
