@@ -1118,14 +1118,22 @@ TEST(JavaUtil, DateUTC) {
     Date expected = Date();
     Date actual = Date();
     long timeActual;
-    int localTimeZoneInHours = - actual.getTimezoneOffset() / 60;
-    int changeDay;
-
-    if (localTimeZoneInHours > 0) {
-        changeDay = 1;
-    } else {
-        changeDay = -1;
-    }
+//    int localTimeZoneInHours = - actual.getTimezoneOffset() / 60;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+//    int changeDay;
+//
+//    if (localTimeZoneInHours > 0) {
+//        changeDay = 1;
+//    }
+//
+//    if (localTimeZoneInHours == 0) {
+//        changeDay = 0;
+//    }
+//
+//    if (localTimeZoneInHours < 0) {
+//        changeDay = -1;
+//    }
 
     // Valid case
     expected 	= Date(2017, 2, 13, 10, 01, 13);
@@ -1134,7 +1142,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1157,7 +1165,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1168,7 +1176,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1215,7 +1223,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1226,7 +1234,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1237,7 +1245,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1248,7 +1256,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1259,7 +1267,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1270,7 +1278,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1281,7 +1289,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1292,7 +1300,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1303,7 +1311,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1314,7 +1322,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1325,7 +1333,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1336,7 +1344,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1344,10 +1352,14 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 0, 01, 13);
     timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
     actual = Date(timeActual);
+
+    timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
+    expected.setTime(timeChange);
+
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-    ASSERT_EQUAL(expected.getHours(), ((actual.getHours() + localTimeZoneInHours) % 24) % 24);
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1355,10 +1367,14 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 14, 0, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 24, 01, 13);
     actual = Date(timeActual);
+
+    timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
+    expected.setTime(timeChange);
+
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1366,10 +1382,14 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 15, 1, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 49, 01, 13);
     actual = Date(timeActual);
+
+    timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
+    expected.setTime(timeChange);
+
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
-    ASSERT_EQUAL(expected.getDate(), actual.getDate() + changeDay);
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1380,7 +1400,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1391,7 +1411,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1402,7 +1422,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1413,7 +1433,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1424,7 +1444,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1435,7 +1455,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1446,7 +1466,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
@@ -1457,7 +1477,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
-    ASSERT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 }
