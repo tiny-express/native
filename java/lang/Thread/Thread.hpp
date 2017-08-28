@@ -27,19 +27,37 @@
 #ifndef JAVA_LANG_THREAD_THREAD_HPP_
 #define JAVA_LANG_THREAD_THREAD_HPP_
 
-#include <pthread.h>
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 #include "../Runnable/Runnable.hpp"
 #include <mutex>
+#include <thread>
+#include <condition_variable>
+#include <algorithm>
+
 #define synchronized(m) for(std::unique_lock<std::recursive_mutex> lk(m); lk; lk.unlock());
 
 namespace Java {
 		namespace Lang {
-				class Thread : public Object, public virtual Runnable {
+            class Semaphore {
+            public:
+                Semaphore(long initCount, long maxCount);
+                ~Semaphore();
+
+                void release(long releaseCount, long* previousCount);
+                void wait();
+                void wait(long millis);
+            private:
+                std::mutex mutexObject;
+                std::condition_variable conditionObject;
+                long maxCount;
+                long count;
+            };
+
+            class Thread : public Object, public virtual Runnable {
 				 private:
                     pthread_t original;
-                    boolean isAlive;
+                    boolean alive;
 
                     String name;
                     int priority;
@@ -141,6 +159,10 @@ namespace Java {
 //                    volatile Interruptible blocker;
 //                    const Object blockerLock = new Object();
 
+                    std::thread* threadObject;
+                    std::mutex mutexObject;
+                    Semaphore* semaphoreObject;
+
                  private:
                     /**
                      * Initializes a Thread.
@@ -153,8 +175,7 @@ namespace Java {
                      * @param acc the AccessControlContext to inherit, or
                      *            AccessController.getContext() if null
                      */
-    //                        void init(ThreadGroup g, Runnable target, String name,
-    //                              long stackSize, AccessControlContext acc);
+//                    void init(ThreadGroup g, Runnable target, String name, long stackSize, AccessControlContext acc);
 
                     // TODO(thoangminh): Need to improve this medthod
                     /**
@@ -200,19 +221,19 @@ namespace Java {
 
 				 public:
                     Thread();
+                    Thread(Runnable* target);
 //                    Thread(Runnable &target);
 //                    Thread(String name);
 //                    Thread(Runnable target, AccessControlContext acc);
 //                    Thread(ThreadGroup group, Runnable target);
 //                    Thread(ThreadGroup group, String name);
 //                    Thread(Runnable &target, String name);
-//                    Thread(ThreadGroup group, Runnable target
-//                            , String name, long stackSize);
+//                    Thread(ThreadGroup group, Runnable target, String name, long stackSize);
 //                    Thread(ThreadGroup group, Runnable target, String name);
                     ~Thread();
 				
 				 public:
-                    void run() const override ;
+                    void run() override ;
 
                     // TODO(thoangminh): Set synchronized for this method
                     /**
@@ -238,6 +259,8 @@ namespace Java {
                      * @see     #setName(String)
                      */
                     String getName();
+
+                    boolean isAlive();
 
                     /**
                      * Tests if this thread is a daemon thread.
@@ -301,6 +324,11 @@ namespace Java {
                      */
                     int getPriority();
 
+                    void start();
+
+                    void join();
+
+                    void join(long millis);
         };
     }  // namespace Lang
 }  // namespace Java

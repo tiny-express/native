@@ -35,15 +35,35 @@ Thread::Thread() {
     init(nullptr, "Thread - " + Thread::nextThreadNum(), 0);
 }
 
-Thread::~Thread() = default;
+Thread::Thread(Runnable *target) {
+    init(target, "Thread - " + Thread::nextThreadNum(), 0);
+}
 
-void Thread::run() const {
-    int index = 1;
-    int limit = 1;
-    for (; index <= limit; index++) {
-        std::cout<<"run #"<<index;
-        usleep(1);
+Thread::~Thread() {
+    if(threadObject) {
+        if (threadObject->joinable())
+            threadObject->join();
+        delete threadObject;
     }
+
+    if(this->semaphoreObject) {
+        delete this->semaphoreObject;
+    }
+}
+
+void Thread::run() {
+    mutexObject.lock();
+    alive = true;
+    mutexObject.unlock();
+
+    target->run();
+    if(semaphoreObject) {
+        semaphoreObject->release(1, NULL);
+    }
+
+    mutexObject.lock();
+    alive = false;
+    mutexObject.unlock();
 }
 
 // TODO(thoangminh): Need method checkAccess, threadStatus, setNativeName
@@ -55,8 +75,9 @@ void Thread::init(Runnable *target, String name, long stackSize) {
     this->target = target;
     this->name = name;
     this->stackSize = stackSize;
-
     this->tid = nextThreadID();
+    this->threadObject = NULL;
+    this->semaphoreObject = new Semaphore(0, 1);
 }
 
 String Thread::getName() {
@@ -66,6 +87,11 @@ String Thread::getName() {
 // TODO(thoangminh): Need IllegalThreadStateException, method checkAccess, isAlive
 void Thread::setDaemon(boolean on) {
     this->daemon = on;
+}
+
+boolean Thread::isAlive() {
+    std::unique_lock<std::mutex> locker(mutexObject);
+    return alive;
 }
 
 boolean Thread::isDaemon() {
@@ -95,4 +121,56 @@ int Thread::nextThreadNum() {
 
 long Thread::nextThreadID() {
     ++threadSeqNumber;
-};
+}
+
+void Thread::start() {
+    if(target && !isAlive()) {
+        threadObject = new std::thread(&Thread::run, this);
+    }
+}
+
+void Thread::join() {
+    join(0);
+}
+
+void Thread::join(long millis) {
+    if(millis > 0) {
+        semaphoreObject->wait(millis);
+    } else {
+        semaphoreObject->wait();
+    }
+}
+
+Semaphore::Semaphore(long initCount, long maxCount) {
+    this->count = initCount;
+    this->maxCount = maxCount;
+}
+
+Semaphore::~Semaphore() {
+
+}
+
+void Semaphore::release(long releaseCount, long* previousCount) {
+    std::unique_lock<std::mutex> locker(mutexObject);
+    if(previousCount)
+        *previousCount = count;
+    count += releaseCount;
+    count = std::max(count, maxCount);
+    conditionObject.notify_one();
+}
+
+void Semaphore::wait() {
+    wait(-1);
+}
+
+void Semaphore::wait(long millis) {
+    std::unique_lock<std::mutex> locker(mutexObject);
+    if(millis < 0) {
+        if(count == 0)
+            conditionObject.wait(locker);
+        --count;
+    } else {
+        if(count == 0 && conditionObject.wait_for(locker, std::chrono::milliseconds(millis)) != std::cv_status::timeout)
+            --count;
+    }
+}

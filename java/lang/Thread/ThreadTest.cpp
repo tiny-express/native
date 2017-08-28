@@ -32,33 +32,41 @@ extern "C" {
 
 using namespace Java::Lang;
 
-class RunnableTarget : public virtual Runnable {
+class RunnableTarget1 : public virtual Runnable {
 public:
-	void run() const {
-	}
-};
+    long value;
 
-class RunnableTarget2 : public virtual Runnable {
-public:
-	void run() const {
-		int index = 0;
-		int limit = 51;
-		for (; index <= limit; index++) {
-			// printf("Index [%d] must not equal to %d to test Thread.stop()\n", index, limit);
-			usleep(1);
-		}
+    RunnableTarget1() {
+        value = 0;
+    }
+
+    ~RunnableTarget1() {
+
+    }
+
+	void run() override {
+        value = 0xb00b;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 };
 
 // TODO(thoangminh): Need to improve it
 TEST(JavaLang, ThreadConstructor) {
-    Thread thread;
 }
 
 TEST(JavaLang, ThreadRun) {
-    Thread thread;
+    long expect = 0xb00b;
+    long result = 0;
 
-    thread.run();
+    {
+        RunnableTarget1 target;
+        Thread thread(&target);
+        thread.start();
+        thread.join();
+        result = target.value;
+    }
+
+    ASSERT_EQUAL(expect, result);
 }
 
 TEST(JavaLang, ThreadSetDaemon) {
@@ -153,3 +161,63 @@ TEST(JavaLang, ThreadGetName) {
     ASSERT_NOT_STR((string) "Thread 1", thread.getName().toString());
 }
 
+TEST(JavaLang, ThreadJoinWithTimeout) {
+    std::chrono::time_point<std::chrono::system_clock> start;
+    std::chrono::time_point<std::chrono::system_clock> end;
+    std::chrono::duration<double> elapsed;
+
+    long expect1 = 0xb00b;
+    long result1 = 0;
+    double expect2 = 1.0;
+    double result2 = 0;
+
+    {
+        RunnableTarget1 target;
+        Thread thread(&target);
+        thread.start();
+
+        start = std::chrono::system_clock::now();
+        thread.join(1000);
+        end = std::chrono::system_clock::now();
+        elapsed = end - start;
+
+        thread.join();
+
+        result1 = target.value;
+        result2 = elapsed.count();
+    }
+
+    ASSERT_EQUAL(expect1, result1);
+    ASSERT_DBL_NEAR_PRE(expect2, result2, 1);
+}
+
+TEST(JavaLang, Semaphore) {
+
+    Semaphore semObject(0, 1);
+
+    {
+        long expect = 0;
+        long result = 0;
+        semObject.release(1, &result);
+        semObject.wait();
+        ASSERT_EQUAL(expect, result);
+    }
+
+    {
+        double expect = 1.0;
+        double result = 0;
+
+        std::chrono::time_point<std::chrono::system_clock> start;
+        std::chrono::time_point<std::chrono::system_clock> end;
+        std::chrono::duration<double> elapsed;
+
+        start = std::chrono::system_clock::now();
+        semObject.wait(1000);
+        end = std::chrono::system_clock::now();
+        elapsed = end-start;
+        result = elapsed.count();
+
+        ASSERT_DBL_NEAR_PRE(expect, result, 1);
+    }
+
+}
