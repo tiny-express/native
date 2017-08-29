@@ -147,27 +147,27 @@ int Date::getTimezoneOffset() {
 }
 
 boolean Date::after(Date when) {
-	if (this->timer > when.timer) {
-		return true;
-	}
+    if (this->timer > when.timer) {
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 boolean Date::before(Date when) {
-	if (this->timer < when.timer) {
-		return true;
-	}
+    if (this->timer < when.timer) {
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 int Date::compareTo(Date anotherDate) {
-	long temp = this->timer - anotherDate.timer;
+    long temp = this->timer - anotherDate.timer;
 
-	if (temp < 0) {
-		return -1;
-	}
+    if (temp < 0) {
+        return -1;
+    }
 
     if (temp > 0) {
         return 1;

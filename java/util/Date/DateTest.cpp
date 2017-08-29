@@ -1344,7 +1344,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
 
-     // Set hour = 0
+    // Set hour = 0
     expected 	= Date(2017, 2, 13, 0, 01, 13);
     timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
     expectedString = "Sun Mar 12 17:01:13 +07 2017";
