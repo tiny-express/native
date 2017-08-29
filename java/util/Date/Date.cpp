@@ -197,9 +197,7 @@ String Date::toString() {
         format = (string) "%a %b %d %T UTC %Y";
     }
 
-    tm *localTimer = localtime(&this->timer);
-
-    string convertResult = this->timeToString(format, localTimer);
+    string convertResult = this->timeToString(format);
     String result = convertResult;
     free(convertResult);
 
@@ -220,7 +218,7 @@ Date Date::clone() {
 
 String Date::toLocaleString() {
     auto format = (string) "%b %d, %Y %I:%M:%S %p";
-    string convertResult = this->timeToString(format, this->localTimer);
+    string convertResult = this->timeToString(format);
     String result = convertResult;
     free(convertResult);
 

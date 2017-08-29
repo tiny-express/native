@@ -182,10 +182,13 @@ namespace Java {
              * @param timePresenter
              * @return String
              */
-            string timeToString(string format, tm *timeManagement) {
+            string timeToString(string format) {
                 size_t size = 100;
+                tm tempTimer;
+                tm *localTimer = localtime_r(&this->timer, &tempTimer);
+
                 auto result = static_cast<string> (malloc(size * sizeof(char)));
-                strftime(result, size, format, timeManagement);
+                strftime(result, size, format, localTimer);
 
                 return result;
             }
