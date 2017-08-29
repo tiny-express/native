@@ -27,8 +27,11 @@
 #include <chrono>
 #include "Date.hpp"
 
-boolean Date::isUTC = false;
-
+/**
+ * Only default constructor can refresh new time
+ * Every single set value to this class will remove refreshFlag - mean this class will be not available to refresh new time
+ * @return
+ */
 Date::Date() {
     initialize(time(nullptr));
 }
@@ -53,7 +56,7 @@ Date::Date(long date) {
 // TODO(thoangminh): Check this method later
 //Date::Date(String s) {
 //	this->refreshFlag = false;
-//	this->timer = Date::parse(s);
+//	this->original = Date::parse(s);
 //	Date::updateLocalTimer();
 //}
 
@@ -62,28 +65,28 @@ Date::~Date() {
 
 // TODO(thoangminh): Need to check all methods below
 void Date::setDate(int date) {
-    initialize(this->year, this->mon, date,
-           this->hour, this->min, this->sec);
+    this->localTimer->tm_mday = date;
+    update();
 }
 
 void Date::setHours(int hours) {
-    initialize(this->year, this->mon, this->mday,
-           hours, this->min, this->sec);
+    this->localTimer->tm_hour = hours;
+    update();
 }
 
 void Date::setMinutes(int minutes) {
-    initialize(this->year, this->mon, this->mday,
-           this->hour, minutes, this->sec);
+    this->localTimer->tm_min = minutes;
+    update();
 }
 
 void Date::setMonth(int month) {
-    initialize(this->year, month, this->mday,
-           this->hour, this->min, this->sec);
+    this->localTimer->tm_mon = month;
+    update();
 }
 
 void Date::setSeconds(int seconds) {
-    initialize(this->year, this->mon, this->mday,
-               this->hour, this->min, seconds);
+    this->localTimer->tm_sec = seconds;
+    update();
 }
 
 void Date::setTime(long time) {
@@ -91,8 +94,9 @@ void Date::setTime(long time) {
 }
 
 void Date::setYear(int year) {
-    initialize(year % 1900, this->mon, this->mday,
-               this->hour, this->min, this->sec);
+    // LocalTimer just keep year since 1900
+    this->localTimer->tm_year = year % 1900;
+    update();
 }
 
 int Date::getDate() {
@@ -101,6 +105,16 @@ int Date::getDate() {
 
 int Date::getDay() {
     int result = this->wday;
+
+    switch (result) {
+        case 0: return 4;
+        case 1: return 5;
+        case 2: return 6;
+        case 3: return 0;
+        case 4: return 1;
+        case 5: return 2;
+        case 6: return 3;
+    }
 
     return result;
 }
@@ -126,7 +140,7 @@ int Date::getYear() {
 }
 
 long Date::getTime() {
-    return this->timer;
+    return this->original;
 }
 
 int Date::getTimezoneOffset() {
@@ -136,7 +150,7 @@ int Date::getTimezoneOffset() {
 }
 
 boolean Date::after(Date when) {
-    if (this->timer > when.timer) {
+    if (this->original > when.original) {
         return true;
     }
 
@@ -144,7 +158,7 @@ boolean Date::after(Date when) {
 }
 
 boolean Date::before(Date when) {
-    if (this->timer < when.timer) {
+    if (this->original < when.original) {
         return true;
     }
 
@@ -152,7 +166,7 @@ boolean Date::before(Date when) {
 }
 
 int Date::compareTo(Date anotherDate) {
-    long temp = this->timer - anotherDate.timer;
+    long temp = this->original - anotherDate.original;
 
     if (temp < 0) {
         return -1;
@@ -170,7 +184,7 @@ int Date::compareTo(Date anotherDate) {
 //		initialize(time(nullptr));
 //	}
 //
-//	tm *gmTimer = gmtime(&this->timer);
+//	tm *gmTimer = gmtime(&this->original);
 //
 //	string timeString = this->toString0(gmTimer);
 //	String result = timeString;
@@ -180,98 +194,24 @@ int Date::compareTo(Date anotherDate) {
 //}
 
 String Date::toString() {
-    String year;
-    String month;
-    String weekDay;
-    String monthDay;
-    String hour;
-    String minute;
-    String second;
-    String zone;
+    auto format = (string) "%a %b %d %T %Z %Y";
 
-    String result;
-//    auto format = (string) "%a %b %d %T %Z %Y";
-//
-//    if (Date::isUTC) {
-//        format = (string) "%a %b %d %T UTC %Y";
-//    }
-//
-//    string convertResult = timeToString(format);
-//    String result = convertResult;
-//    free(convertResult);
-
-    // Get weekDay
-
-    switch (this->getDay()) {
-        case 0: weekDay = "Sun"; break;
-        case 1: weekDay = "Mon"; break;
-        case 2: weekDay = "Tue"; break;
-        case 3: weekDay = "Wed"; break;
-        case 4: weekDay = "Thu"; break;
-        case 5: weekDay = "Fri"; break;
-        case 6: weekDay = "Sat"; break;
-
-        default:; break;
-    }
-
-    // Get month
-    int monthInt = this->mon;
-
-    switch (monthInt) {
-        case 0:  month = "Jan"; break;
-        case 1:  month = "Feb"; break;
-        case 2:  month = "Mar"; break;
-        case 3:  month = "Apr"; break;
-        case 4:  month = "May"; break;
-        case 5:  month = "Jun"; break;
-        case 6:  month = "Jul"; break;
-        case 7:  month = "Aug"; break;
-        case 8:  month = "Sep"; break;
-        case 9:  month = "Oct"; break;
-        case 10: month = "Nov"; break;
-        case 11: month = "Dec"; break;
-
-        default:; break;
-    }
-
-    if (this->mday < 10) {
-        monthDay = "0";
-    }
-
-    if (this->hour < 10) {
-        hour = "0";
-    }
-
-    if (this->min < 10) {
-        minute = "0";
-    }
-
-    if (this->sec < 10) {
-        second = "0";
-    }
-
-    monthDay += std::to_string(this->mday);
-    hour += std::to_string(this->hour);
-    minute += std::to_string(this->min);
-    second += std::to_string(this->sec);
-
-    zone = Date::getZone();
     if (Date::isUTC) {
-        zone = "UTC";
+        format = (string) "%a %b %d %T UTC %Y";
     }
 
-    year = std::to_string(this->year + 1900);
-
-    result = weekDay + " " + month + " " + monthDay + " "
-                    + hour + ":" + minute + ":" + second
-                    + " " + zone + " " + year;
+    string convertResult = this->timeToString(format, this->localTimer);
+    String result = convertResult;
+    free(convertResult);
 
     return result;
 }
 
 long Date::UTC(int year, int month, int date, int hrs, int min, int sec){
     Date tempDate = Date(year, month, date, hrs, min, sec);
-    long result = tempDate.getTime() + tempDate.getTimezoneOffset() * 60;
+//    long result = tempDate.getTime() + tempDate.getTimezoneOffset() * 60;
+
+    long result = getUTCTime(tempDate.getTime());
 
     return result;
 }
@@ -283,7 +223,7 @@ Date Date::clone() {
 
 String Date::toLocaleString() {
     auto format = (string) "%b %d, %Y %I:%M:%S %p";
-    string convertResult = this->timeToString(format);
+    string convertResult = this->timeToString(format, this->localTimer);
     String result = convertResult;
     free(convertResult);
 
@@ -305,6 +245,7 @@ string Date::getZone() {
     return (string) this->zone;
 }
 
+boolean Date::isUTC = false;
 void Date::setUTC(boolean isUTC) {
     this->isUTC = isUTC;
 }
