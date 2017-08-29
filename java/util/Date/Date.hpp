@@ -28,6 +28,7 @@
 #define JAVA_UTIL_UTIL_DATE_HPP_
 
 #include "../../Lang.hpp"
+#include <malloc.h>
 
 using namespace Java::Lang;
 
