@@ -27,11 +27,8 @@
 #include <chrono>
 #include "Date.hpp"
 
-/**
- * Only default constructor can refresh new time
- * Every single set value to this class will remove refreshFlag - mean this class will be not available to refresh new time
- * @return
- */
+boolean Date::isUTC = false;
+
 Date::Date() {
     initialize(time(nullptr));
 }
@@ -243,7 +240,6 @@ string Date::getZone() {
     return (string) this->zone;
 }
 
-boolean Date::isUTC = false;
 void Date::setUTC(boolean isUTC) {
     this->isUTC = isUTC;
 }
