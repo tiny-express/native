@@ -161,7 +161,8 @@ TEST(JavaLang, StringCharAt) {
 	// Given a string - Return first position is exist
 	String text = "Hello World";
 	char positionIsExist = text.charAt(0);
-	ASSERT_TRUE('H' == positionIsExist);
+
+	ASSERT_EQUAL('H', positionIsExist);
 	
 	// Given a string - Return negative position is not exist
 	try {
@@ -183,12 +184,18 @@ TEST(JavaLang, StringCompareTo) {
     String greaterString = "abcdef";
     String equalToGreater = "abcdef";
 
-    ASSERT_TRUE(greaterString.compareTo(smallerString) > 0);
-    ASSERT_TRUE(greaterString.compareTo(equalToGreater) == 0);
-    ASSERT_TRUE(smallerString.compareTo(greaterString) < 0);
+    int compareResult = greaterString.compareTo(smallerString);
+    ASSERT_TRUE(compareResult > 0);
+
+    compareResult = greaterString.compareTo(equalToGreater);
+    ASSERT_TRUE(compareResult == 0);
+
+    compareResult = smallerString.compareTo(greaterString);
+    ASSERT_TRUE(compareResult < 0);
 
     Comparable<String> *comparable = &greaterString;
-    ASSERT_TRUE(comparable->compareTo(smallerString) > 0);
+    compareResult = comparable->compareTo(smallerString);
+    ASSERT_TRUE(compareResult > 0);
 }
 
 TEST(JavaLang, StringCompareToIgnoreCase) {
@@ -196,9 +203,14 @@ TEST(JavaLang, StringCompareToIgnoreCase) {
     String greaterString = "hello";
     String greaterUpperCase = "HELLO";
 
-    ASSERT_TRUE(greaterString.compareToIgnoreCase(smallerString) > 0);
-    ASSERT_TRUE(greaterString.compareToIgnoreCase(greaterUpperCase) == 0);
-    ASSERT_TRUE(smallerString.compareToIgnoreCase(greaterString) < 0);
+    int compareResult = greaterString.compareToIgnoreCase(smallerString);
+    ASSERT_TRUE(compareResult > 0);
+
+    compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
+    ASSERT_TRUE(compareResult == 0);
+
+    compareResult = smallerString.compareToIgnoreCase(greaterString);
+    ASSERT_TRUE(compareResult < 0);
 }
 
 TEST(JavaLang, StringConcat) {
@@ -210,7 +222,8 @@ TEST(JavaLang, StringConcat) {
 	
 	// Given three strings - Return concatenation result
 	String textConcat0 = "Food Tiny ";
-	ASSERT_STR("Food Tiny Hello World", (textConcat0 + textConcat1 + textConcat2 ).toString());
+    concatenationResult = textConcat0 + textConcat1 + textConcat2;
+	ASSERT_STR("Food Tiny Hello World", concatenationResult.toString());
 }
 
 TEST(JavaLang, StringContains) {
@@ -387,10 +400,12 @@ TEST(JavaLang, StringLastIndexOf) {
     ASSERT_EQUAL(-1, result);
 
     // Test true first character of subString appear last in validString is position 28th
-    ASSERT_EQUAL(28, validString.lastIndexOf(subString));
+    result = validString.lastIndexOf(subString);
+    ASSERT_EQUAL(28, result);
 
     // Test false with wrong subString
-    ASSERT_EQUAL(NOT_FOUND, validString.lastIndexOf(wrongString));
+    result = validString.lastIndexOf(wrongString);
+    ASSERT_EQUAL(NOT_FOUND, result);
 
     // Given validString2 check lastIndexOf(string, fromIndex)
     String validString2 = "sometimes you win, sometimes you learn";
@@ -398,21 +413,29 @@ TEST(JavaLang, StringLastIndexOf) {
     String wrongString2 = "abc xyz";
 
     // Test true by 19th, with correct subString2 and correct fromIndex to find
-    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 19));
+    result = validString2.lastIndexOf(subString2, 19);
+    ASSERT_EQUAL(19, result);
 
-    ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 18));
+    result = validString2.lastIndexOf(subString2, 18);
+    ASSERT_EQUAL(0, result);
 
-    ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 0));
+    result = validString2.lastIndexOf(subString2, 0);
+    ASSERT_EQUAL(0, result);
 
-    ASSERT_EQUAL(0, validString2.lastIndexOf(subString2, 1));
+    result = validString2.lastIndexOf(subString2, 1);
+    ASSERT_EQUAL(0, result);
 
-    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 100));
+    result = validString2.lastIndexOf(subString2, 100);
+    ASSERT_EQUAL(19, result);
 
-    ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, -1));
+    result = validString2.lastIndexOf(subString2, -1);
+    ASSERT_EQUAL(-1, result);
 
-    ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 20));
+    result = validString2.lastIndexOf(subString2, 20);
+    ASSERT_EQUAL(19, result);
 
-    ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 20));
+    result = validString2.lastIndexOf(wrongString2, 20);
+    ASSERT_EQUAL(-1, result);
 }
 // TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST(JavaLang, StringGetChars) {
@@ -617,7 +640,6 @@ TEST(JavaLang, StringSplit) {
     for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
         ASSERT_STR("Hello", splitWithLimitNegative[index].toString());
     }
-
 }
 
 TEST(JavaLang, StringStartsWith) {
