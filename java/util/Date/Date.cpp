@@ -102,16 +102,6 @@ int Date::getDate() {
 int Date::getDay() {
     int result = this->wday;
 
-    switch (result) {
-        case 0: return 4;
-        case 1: return 5;
-        case 2: return 6;
-        case 3: return 0;
-        case 4: return 1;
-        case 5: return 2;
-        case 6: return 3;
-    }
-
     return result;
 }
 
@@ -190,15 +180,91 @@ int Date::compareTo(Date anotherDate) {
 //}
 
 String Date::toString() {
-    auto format = (string) "%a %b %d %T %Z %Y";
+    String year;
+    String month;
+    String weekDay;
+    String monthDay;
+    String hour;
+    String minute;
+    String second;
+    String zone;
 
-    if (Date::isUTC) {
-        format = (string) "%a %b %d %T UTC %Y";
+    String result;
+//    auto format = (string) "%a %b %d %T %Z %Y";
+//
+//    if (Date::isUTC) {
+//        format = (string) "%a %b %d %T UTC %Y";
+//    }
+//
+//    string convertResult = timeToString(format);
+//    String result = convertResult;
+//    free(convertResult);
+
+    // Get weekDay
+
+    switch (this->getDay()) {
+        case 0: weekDay = "Sun"; break;
+        case 1: weekDay = "Mon"; break;
+        case 2: weekDay = "Tue"; break;
+        case 3: weekDay = "Wed"; break;
+        case 4: weekDay = "Thu"; break;
+        case 5: weekDay = "Fri"; break;
+        case 6: weekDay = "Sat"; break;
+
+        default:; break;
     }
 
-    string convertResult = timeToString(format);
-    String result = convertResult;
-    free(convertResult);
+    // Get month
+    int monthInt = this->mon;
+
+    switch (monthInt) {
+        case 0:  month = "Jan"; break;
+        case 1:  month = "Feb"; break;
+        case 2:  month = "Mar"; break;
+        case 3:  month = "Apr"; break;
+        case 4:  month = "May"; break;
+        case 5:  month = "Jun"; break;
+        case 6:  month = "Jul"; break;
+        case 7:  month = "Aug"; break;
+        case 8:  month = "Sep"; break;
+        case 9:  month = "Oct"; break;
+        case 10: month = "Nov"; break;
+        case 11: month = "Dec"; break;
+
+        default:; break;
+    }
+
+    if (this->mday < 10) {
+        monthDay = "0";
+    }
+
+    if (this->hour < 10) {
+        hour = "0";
+    }
+
+    if (this->min < 10) {
+        minute = "0";
+    }
+
+    if (this->sec < 10) {
+        second = "0";
+    }
+
+    monthDay += std::to_string(this->mday);
+    hour += std::to_string(this->hour);
+    minute += std::to_string(this->min);
+    second += std::to_string(this->sec);
+
+    zone = Date::getZone();
+    if (Date::isUTC) {
+        zone = "UTC";
+    }
+
+    year = std::to_string(this->year + 1900);
+
+    result = weekDay + " " + month + " " + monthDay + " "
+                    + hour + ":" + minute + ":" + second
+                    + " " + zone + " " + year;
 
     return result;
 }

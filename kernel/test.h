@@ -116,6 +116,9 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
 void assert_str(const char *exp, const char *real, const char *caller, int line);
 #define ASSERT_STR(exp, real) assert_str(exp, real, __FILE__, __LINE__)
 
+void assert_not_str(const char *exp, const char *real, const char *caller, int line);
+#define ASSERT_NOT_STR(exp, real) assert_not_str(exp, real, __FILE__, __LINE__)
+
 void assert_data(const unsigned char *exp, size_t expsize,
 	const unsigned char *real, size_t realsize,
 	const char *caller, int line);
@@ -279,6 +282,14 @@ void assert_str(const char* exp, const char*  real, const char* caller, int line
     if ((exp == NULL && real != NULL) ||
 	(exp != NULL && real == NULL) ||
 	(exp && real && strcmp(exp, real) != 0)) {
+	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, exp, real);
+    }
+}
+
+void assert_not_str(const char* exp, const char*  real, const char* caller, int line) {
+    if ((exp == NULL && real != NULL) ||
+	(exp != NULL && real == NULL) ||
+	(exp && real && strcmp(exp, real) == 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, exp, real);
     }
 }

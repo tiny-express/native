@@ -714,31 +714,31 @@ TEST(JavaUtil, DateGetDay) {
     Date date;
 
     // Test Sunday - value 0
-    date = Date(2017, 8, 13, 8, 01, 13);
+    date = Date(2017, 7, 13, 8, 01, 13);
     ASSERT_EQUAL(0, date.getDay());
 
     // Test Monday - value 1
-    date = Date(2017, 8, 14, 8, 01, 13);
+    date = Date(2017, 7, 14, 8, 01, 13);
     ASSERT_EQUAL(1, date.getDay());
 
     // Test Tuesday - value 2
-    date = Date(2017, 8, 15, 8, 01, 13);
+    date = Date(2017, 7, 15, 8, 01, 13);
     ASSERT_EQUAL(2, date.getDay());
 
     // Test Wednesday - value 3
-    date = Date(2017, 8, 16, 8, 01, 13);
+    date = Date(2017, 7, 16, 8, 01, 13);
     ASSERT_EQUAL(3, date.getDay());
 
     // Test Thursday - value 4
-    date = Date(2017, 8, 17, 8, 01, 13);
+    date = Date(2017, 7, 17, 8, 01, 13);
     ASSERT_EQUAL(4, date.getDay());
 
     // Test Friday - value 5
-    date = Date(2017, 8, 18, 8, 01, 13);
+    date = Date(2017, 7, 18, 8, 01, 13);
     ASSERT_EQUAL(5, date.getDay());
 
     // Test Saturday - value 6
-    date = Date(2017, 8, 19, 8, 01, 13);
+    date = Date(2017, 7, 19, 8, 01, 13);
     ASSERT_EQUAL(6, date.getDay());
 }
 
@@ -1091,7 +1091,7 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // TODO(thoangminh): This case return different result with Travis-ci
-//    // Set year = 1900. Not work correctly
+//     // Set year = 1900. Not work correctly
 //    expected 	= Date(1900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
 //    actual = Date(timeActual);
@@ -1102,7 +1102,7 @@ TEST(JavaUtil, DateUTC) {
 //    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
 //    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
 //    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
-//    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+//    ASSERT_NOT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set year = 3000
     expected 	= Date(3000, 2, 13, 10, 01, 13);
@@ -1523,6 +1523,7 @@ TEST(JavaUtil, DateToString) {
     expected = "Mon Mar 13 10:01:13 " + zone + " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
+//    ASSERT_EQUAL(1, actualDate.getDay());
 
 
     // Set month = 12 => Year+= 1 , month = 0.
