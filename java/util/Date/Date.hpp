@@ -184,11 +184,22 @@ namespace Java {
              */
             string timeToString(string format) {
                 size_t size = 100;
-                tm tempTimer;
-                tm *localTimer = localtime_r(&this->timer, &tempTimer);
+
+                tm localTimer = {0};
+                localTimer.tm_sec    = this->sec;
+                localTimer.tm_min    = this->min;
+                localTimer.tm_hour   = this->hour;
+                localTimer.tm_mday   = this->mday;
+                localTimer.tm_mon    = this->mon;
+                localTimer.tm_year   = this->year;
+                localTimer.tm_wday   = this->wday;
+                localTimer.tm_yday   = this->yday;
+                localTimer.tm_isdst  = this->isdst;
+                localTimer.tm_gmtoff = this->gmtoff;
+                localTimer.tm_zone   = this->zone;
 
                 auto result = static_cast<string> (malloc(size * sizeof(char)));
-                strftime(result, size, format, localTimer);
+                strftime(result, size, format, &localTimer);
 
                 return result;
             }
