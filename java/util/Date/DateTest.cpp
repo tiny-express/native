@@ -1067,6 +1067,126 @@ TEST(JavaUtil, DateToLocaleString) {
     ASSERT_STR(expected, actual.toString());
 }
 
+TEST(JavaUtil, DateUTC1) {
+    // Create variable to test
+    Date expected = Date();
+    String expectedString;
+    Date actual = Date();
+    long timeActual;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+
+    // Valid case
+    expected 	= Date(2017, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
+    actual = Date(timeActual);
+    actual.setUTC(true);
+    ASSERT_EQUAL(1, actual.getYear());
+    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
+TEST(JavaUtil, DateUTC2) {
+    // Create variable to test
+    Date expected = Date();
+    String expectedString;
+    Date actual = Date();
+    long timeActual;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+
+    // Valid case
+    expected 	= Date(2017, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
+    actual = Date(timeActual);
+    actual.setUTC(true);
+//    ASSERT_EQUAL(1, actual.getYear());
+    ASSERT_EQUAL(22, actual.getMonth());
+    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
+TEST(JavaUtil, DateUTC3) {
+    // Create variable to test
+    Date expected = Date();
+    String expectedString;
+    Date actual = Date();
+    long timeActual;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+
+    // Valid case
+    expected 	= Date(2017, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
+    actual = Date(timeActual);
+    actual.setUTC(true);
+//    ASSERT_EQUAL(1, actual.getYear());
+//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+    ASSERT_EQUAL(3, actual.getDate());
+    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
+TEST(JavaUtil, DateUTC4) {
+    // Create variable to test
+    Date expected = Date();
+    String expectedString;
+    Date actual = Date();
+    long timeActual;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+
+    // Valid case
+    expected 	= Date(2017, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
+    actual = Date(timeActual);
+    actual.setUTC(true);
+//    ASSERT_EQUAL(1, actual.getYear());
+//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+    ASSERT_EQUAL(4, actual.getHours());
+    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
+TEST(JavaUtil, DateUTC5) {
+    // Create variable to test
+    Date expected = Date();
+    String expectedString;
+    Date actual = Date();
+    long timeActual;
+    int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
+    long timeChange;
+
+    // Valid case
+    expected 	= Date(2017, 2, 13, 10, 01, 13);
+    timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
+    actual = Date(timeActual);
+    actual.setUTC(true);
+//    ASSERT_EQUAL(1, actual.getYear());
+//    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
+//    ASSERT_EQUAL(expected.getDate(), actual.getDate());
+//    ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
+//    ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
+    ASSERT_EQUAL(5, actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
 TEST(JavaUtil, DateUTC) {
     // Create variable to test
     Date expected = Date();
