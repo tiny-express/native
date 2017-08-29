@@ -916,431 +916,427 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
     ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
 }
 
-
-TEST(JavaUtil, DateToString) {
-    // Create variable to test
-    Date date = Date();
-    string expectedResult;
-
-    // Get the current local time
-    time_t now = time(nullptr);
-    tm tempTimer = {0};
-    tm *currentTime = localtime_r(&now, &tempTimer);
-    auto format = (string) "%a %b %d %T UTC %Y";
-    size_t size = 100;
-    expectedResult = (string) (malloc(size * sizeof(char)));
-    strftime(expectedResult, size, format, currentTime);
-    ASSERT_STR(expectedResult, date.toString().toString());
-    free(expectedResult);
-
-    // Test Date(int year, int month, int date)
-    date = Date(2017, 02, 13);
-    expectedResult = (string) "Mon Mar 13 00:00:00 UTC 2017";
-    ASSERT_STR(expectedResult, date.toString().toString());
-
-    // Test Date(int year, int month, int date, int hrs, int min)
-    date = Date(2017, 02, 13, 8, 01);
-    expectedResult = (string) "Mon Mar 13 08:01:00 UTC 2017";
-    ASSERT_STR(expectedResult, date.toString().toString());
-
-    // Test Date(int year, int month, int date, int hrs, int min, int sec)
-    date = Date(2017, 02, 13, 8, 01, 13);
-    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
-    ASSERT_STR(expectedResult, date.toString().toString());
-
-    // TODO(thoangminh): Need to pass this case
-//    // Test Date(long date)
-//    Date tempDate = Date(2017, 02, 13, 8, 01, 13);
-//    date = Date(tempDate.getTime());
-//    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
-//    ASSERT_STR(expectedResult, date.toString().toString());
-
-    // Test Date sameDate = date;
-    date = Date(2017, 02, 13, 8, 01, 13);
-    Date sameDate = date;
-    expectedResult = (string) "Mon Mar 13 08:01:13 UTC 2017";
-    ASSERT_STR(expectedResult, sameDate.toString().toString());
-}
-
 TEST(JavaUtil, DateToLocaleString) {
     // Create variable to test
     Date actualDate;
     string expected;
-    String actualString;
+    String actual;
 
     // Valid case
     actualDate = Date(117, 2, 13, 10, 01, 13);
     expected = (string) "Mar 13, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 12 => Year+= 1 , month = 0.
     actualDate = Date(117, 12, 13, 10, 01, 13);
     expected = (string) "Jan 13, 2018 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 33 => Year+= 2, month = 9.
     actualDate = Date(117, 33, 13, 10, 01, 13);
     expected = (string) "Oct 13, 2019 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 0
     actualDate = Date(117, 0, 13, 10, 01, 13);
     expected = (string) "Jan 13, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = -1 => Year-= 1, month = 11.
     actualDate = Date(117, -1, 13, 10, 01, 13);
     expected = (string) "Dec 13, 2016 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = -12 => Year-= 1, month = 0.
     actualDate = Date(117, -12, 13, 10, 01, 13);
     expected = (string) "Jan 13, 2016 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = -33 => Year-= 3, month = 3.
     actualDate = Date(117, -33, 13, 10, 01, 13);
     expected = (string) "Apr 13, 2014 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 3, date = -1 => month = 2, date = 30
     actualDate = Date(117, 3, -1, 10, 01, 13);
     expected = (string) "Mar 30, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 6, date = -75 => month = 3, date = 16
     actualDate = Date(117, 6, -75, 10, 01, 13);
     expected = (string) "Apr 16, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 3, date = 0 => month = 2, date = 31
     actualDate = Date(117, 3, 0, 10, 01, 13);
     expected = (string) "Mar 31, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 2, date = 0 => month = 1, date = 28
     actualDate = Date(117, 2, 0, 10, 01, 13);
     expected = (string) "Feb 28, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set month = 5, date = 32 => month = 6, date = 2
     actualDate = Date(117, 5, 32, 10, 01, 13);
     expected = (string) "Jul 02, 2017 10:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set hour = -1 => day -= 1, hour = 11 PM
     actualDate = Date(117, 2, 13, -1, 01, 13);
     expected = (string) "Mar 12, 2017 11:01:13 PM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set hour = 0
     actualDate = Date(117, 2, 13, 0, 01, 13);
     expected = (string) "Mar 13, 2017 12:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set hour = 24. Day += 1, hour = 0
     actualDate = Date(117, 2, 13, 24, 01, 13);
     expected = (string) "Mar 14, 2017 12:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set hour = 49. Day += 2, hour = 1
     actualDate = Date(117, 2, 13, 49, 01, 13);
     expected = (string) "Mar 15, 2017 01:01:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set minute = -1 => hour -= 1, minute = 59
     actualDate = Date(117, 2, 13, 10, -1, 13);
     expected = (string) "Mar 13, 2017 09:59:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set minute = 0
     actualDate = Date(117, 2, 13, 10, 0, 13);
     expected = (string) "Mar 13, 2017 10:00:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set minute = 60 => hour += 1, minute = 0
     actualDate = Date(117, 2, 13, 10, 60, 13);
     expected = (string) "Mar 13, 2017 11:00:13 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set minute = 150 => hour += 2, minute = 30
     actualDate = Date(117, 2, 13, 10, 150, 13);
     expected = (string) "Mar 13, 2017 12:30:13 PM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set second = -1 => minute -= 1, second = 59
     actualDate = Date(117, 2, 13, 10, 01, -1);
     expected = (string) "Mar 13, 2017 10:00:59 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set minute = 0
     actualDate = Date(117, 2, 13, 10, 01, 0);
     expected = (string) "Mar 13, 2017 10:01:00 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set second = 60 => minute += 1, second = 0
     actualDate = Date(117, 2, 13, 10, 01, 60);
     expected = (string) "Mar 13, 2017 10:02:00 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 
     // Set second = 150 => minute += 2, second = 30
     actualDate = Date(117, 2, 13, 10, 01, 150);
     expected = (string) "Mar 13, 2017 10:03:30 AM";
-    actualString = actualDate.toLocaleString();
-    ASSERT_STR(expected, actualString.toString());
+    actual = actualDate.toLocaleString();
+    ASSERT_STR(expected, actual.toString());
 }
 
 TEST(JavaUtil, DateUTC) {
     // Create variable to test
     Date expected = Date();
+    String expectedString;
     Date actual = Date();
     long timeActual;
-//    int localTimeZoneInHours = - actual.getTimezoneOffset() / 60;
     int localTimeZoneInHours = actual.getTimezoneOffset() / 60;
     long timeChange;
-//    int changeDay;
-//
-//    if (localTimeZoneInHours > 0) {
-//        changeDay = 1;
-//    }
-//
-//    if (localTimeZoneInHours == 0) {
-//        changeDay = 0;
-//    }
-//
-//    if (localTimeZoneInHours < 0) {
-//        changeDay = -1;
-//    }
 
     // Valid case
     expected 	= Date(2017, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
+    expectedString = "Mon Mar 13 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // TODO(thoangminh): This case return different result with Travis-ci
 //    // Set year = 1900. Not work correctly
 //    expected 	= Date(1900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
 //    actual = Date(timeActual);
+//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
 //    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
 //    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
 //    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+//    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set year = 3000
     expected 	= Date(3000, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(3000, 2, 13, 10, 01, 13);
+    expectedString = "Thu Mar 13 03:01:13 UTC 3000";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set year = 1889
     expected 	= Date(1889, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(1889, 2, 13, 10, 01, 13);
+    expectedString = "Fri Mar 13 03:01:13 UTC 3789";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // TODO(thoangminh): This case return different result with Travis-ci
 //    // Set year = -1. Not work correctly
 //    expected 	= Date(-1, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(-1, 2, 13, 10, 01, 13);
+//    expectedString = "";
 //    actual = Date(timeActual);
+//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
 //    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
 //    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
 //    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // TODO(thoangminh): This case return different result with Travis-ci
 //    // Set year = -900. Not work correctly
 //    expected 	= Date(-900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(-900, 2, 13, 10, 01, 13);
+//    expectedString = "";
 //    actual = Date(timeActual);
+//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
 //    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
 //    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
 //    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // TODO(thoangminh): This case return different result with Travis-ci
 //    // Set year = 0
 //    expected 	= Date(1900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
+//    expectedString = "";
 //    actual = Date(timeActual);
+//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
 //    ASSERT_NOT_EQUAL(expected.getHours(), (actual.getHours() + localTimeZoneInHours) % 24);
 //    ASSERT_NOT_EQUAL(expected.getMinutes(), actual.getMinutes());
 //    ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 12 => Year+= 1 , month = 0.
     expected 	= Date(2018, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 12, 13, 10, 01, 13);
+    expectedString = "Sat Jan 13 03:01:13 UTC 2018";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 33 => Year+= 2, month = 9.
     expected 	= Date(2019, 9, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 33, 13, 10, 01, 13);
+    expectedString = "Sun Oct 13 03:01:13 UTC 2019";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 0
     expected 	= Date(2017, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 0, 13, 10, 01, 13);
+    expectedString = "Fri Jan 13 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = -1 => Year-= 1, month = 11.
     expected 	= Date(2016, 11, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -1, 13, 10, 01, 13);
+    expectedString = "Tue Dec 13 03:01:13 UTC 2016";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = -12 => Year-= 1, month = 0.
     expected 	= Date(2016, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -12, 13, 10, 01, 13);
+    expectedString = "Wed Jan 13 03:01:13 UTC 2016";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = -33 => Year-= 3, month = 3.
     expected 	= Date(2014, 3, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -33, 13, 10, 01, 13);
+    expectedString = "Sun Apr 13 03:01:13 UTC 2014";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 3, date = -1 => month = 2, date = 30
     expected 	= Date(2017, 2, 30, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 3, -1, 10, 01, 13);
+    expectedString = "Thu Mar 30 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 6, date = -75 => month = 3, date = 16
     expected 	= Date(2017, 3, 16, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 6, -75, 10, 01, 13);
+    expectedString = "Sun Apr 16 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 3, date = 0 => month = 2, date = 31
     expected 	= Date(2017, 2, 31, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 3, 0, 10, 01, 13);
+    expectedString = "Fri Mar 31 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 2, date = 0 => month = 1, date = 28
     expected 	= Date(2017, 1, 28, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 0, 10, 01, 13);
+    expectedString = "Tue Feb 28 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set month = 5, date = 32 => month = 6, date = 2
     expected 	= Date(2017, 6, 2, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 5, 32, 10, 01, 13);
+    expectedString = "Sun Jul 02 03:01:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set hour = -1 => day -= 1, hour = 23
     expected 	= Date(2017, 2, 12, 23, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, -1, 01, 13);
+    expectedString = "";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1351,7 +1347,9 @@ TEST(JavaUtil, DateUTC) {
      // Set hour = 0
     expected 	= Date(2017, 2, 13, 0, 01, 13);
     timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
+    expectedString = "Sun Mar 12 17:01:13 +07 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1362,11 +1360,14 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set hour = 24. Day += 1, hour = 0
     expected 	= Date(2017, 2, 14, 0, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 24, 01, 13);
+    expectedString = "Mon Mar 13 17:01:13 +07 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1377,11 +1378,14 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set hour = 49. Day += 2, hour = 1
     expected 	= Date(2017, 2, 15, 1, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 49, 01, 13);
+    expectedString = "Tue Mar 14 18:01:13 +07 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1392,92 +1396,462 @@ TEST(JavaUtil, DateUTC) {
     ASSERT_EQUAL(expected.getHours(), actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set minute = -1 => hour -= 1, minute = 59
     expected 	= Date(2017, 2, 13, 9, 59, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, -1, 13);
+    expectedString = "Mon Mar 13 02:59:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set minute = 0
     expected 	= Date(2017, 2, 13, 10, 0, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 0, 13);
+    expectedString = "Mon Mar 13 03:00:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set minute = 60 => hour += 1, minute = 0
     expected 	= Date(2017, 2, 13, 11, 00, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 60, 13);
+    expectedString = "Mon Mar 13 04:00:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set minute = 150 => hour += 2, minute = 30
     expected 	= Date(2017, 2, 13, 12, 30, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 150, 13);
+    expectedString = "Mon Mar 13 05:30:13 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set second = -1 => minute -= 1, second = 59
     expected 	= Date(2017, 2, 13, 10, 00, 59);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, -1);
+    expectedString = "Mon Mar 13 03:00:59 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set minute = 0
     expected 	= Date(2017, 2, 13, 10, 01, 0);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 0);
+    expectedString = "Mon Mar 13 03:01:00 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set second = 60 => minute += 1, second = 0
     expected 	= Date(2017, 2, 13, 10, 02, 00);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 60);
+    expectedString = "Mon Mar 13 03:02:00 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
 
     // Set second = 150 => minute += 2, second = 30
     expected 	= Date(2017, 2, 13, 10, 03, 30);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 150);
+    expectedString = "Mon Mar 13 03:03:30 UTC 2017";
     actual = Date(timeActual);
+    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
     ASSERT_EQUAL(expected.getHours() + localTimeZoneInHours, actual.getHours());
     ASSERT_EQUAL(expected.getMinutes(), actual.getMinutes());
     ASSERT_EQUAL(expected.getSeconds(), actual.getSeconds());
+    ASSERT_STR(expectedString.toString(), actual.toString().toString());
+}
+
+TEST(JavaUtil, DateToString) {
+    // Create variable to test
+    Date actualDate = Date();
+    String expected;
+    String actual;
+    String zone = actualDate.getZone();
+
+    // Valid case
+    actualDate = Date(117, 2, 13, 10, 01, 13);
+    expected = "Mon Mar 13 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+
+    // Set month = 12 => Year+= 1 , month = 0.
+    actualDate = Date(117, 12, 13, 10, 01, 13);
+    expected = "Sat Jan 13 10:01:13 " + zone + " 2018";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 33 => Year+= 2, month = 9.
+    actualDate = Date(117, 33, 13, 10, 01, 13);
+    expected = "Sun Oct 13 10:01:13 " + zone + " 2019";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 0
+    actualDate = Date(117, 0, 13, 10, 01, 13);
+    expected = "Fri Jan 13 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = -1 => Year-= 1, month = 11.
+    actualDate = Date(117, -1, 13, 10, 01, 13);
+    expected = "Tue Dec 13 10:01:13 " + zone + " 2016";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = -12 => Year-= 1, month = 0.
+    actualDate = Date(117, -12, 13, 10, 01, 13);
+    expected = "Wed Jan 13 10:01:13 " + zone + " 2016";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = -33 => Year-= 3, month = 3.
+    actualDate = Date(117, -33, 13, 10, 01, 13);
+    expected = "Sun Apr 13 10:01:13 " + zone + " 2014";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 3, date = -1 => month = 2, date = 30
+    actualDate = Date(117, 3, -1, 10, 01, 13);
+    expected = "Thu Mar 30 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 6, date = -75 => month = 3, date = 16
+    actualDate = Date(117, 6, -75, 10, 01, 13);
+    expected = "Sun Apr 16 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 3, date = 0 => month = 2, date = 31
+    actualDate = Date(117, 3, 0, 10, 01, 13);
+    expected = "Fri Mar 31 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 2, date = 0 => month = 1, date = 28
+    actualDate = Date(117, 2, 0, 10, 01, 13);
+    expected = "Tue Feb 28 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set month = 5, date = 32 => month = 6, date = 2
+    actualDate = Date(117, 5, 32, 10, 01, 13);
+    expected = "Sun Jul 02 10:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set hour = -1 => day -= 1, hour = 11 PM
+    actualDate = Date(117, 2, 13, -1, 01, 13);
+    expected = "Sun Mar 12 23:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set hour = 0
+    actualDate = Date(117, 2, 13, 0, 01, 13);
+    expected = "Mon Mar 13 00:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set hour = 24. Day += 1, hour = 0
+    actualDate = Date(117, 2, 13, 24, 01, 13);
+    expected = "Tue Mar 14 00:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set hour = 49. Day += 2, hour = 1
+    actualDate = Date(117, 2, 13, 49, 01, 13);
+    expected = "Wed Mar 15 01:01:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set minute = -1 => hour -= 1, minute = 59
+    actualDate = Date(117, 2, 13, 10, -1, 13);
+    expected = "Mon Mar 13 09:59:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set minute = 0
+    actualDate = Date(117, 2, 13, 10, 0, 13);
+    expected = "Mon Mar 13 10:00:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set minute = 60 => hour += 1, minute = 0
+    actualDate = Date(117, 2, 13, 10, 60, 13);
+    expected = "Mon Mar 13 11:00:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set minute = 150 => hour += 2, minute = 30
+    actualDate = Date(117, 2, 13, 10, 150, 13);
+    expected = "Mon Mar 13 12:30:13 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set second = -1 => minute -= 1, second = 59
+    actualDate = Date(117, 2, 13, 10, 01, -1);
+    expected = "Mon Mar 13 10:00:59 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set minute = 0
+    actualDate = Date(117, 2, 13, 10, 01, 0);
+    expected = "Mon Mar 13 10:01:00 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set second = 60 => minute += 1, second = 0
+    actualDate = Date(117, 2, 13, 10, 01, 60);
+    expected = "Mon Mar 13 10:02:00 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Set second = 150 => minute += 2, second = 30
+    actualDate = Date(117, 2, 13, 10, 01, 150);
+    expected = "Mon Mar 13 10:03:30 " + zone + " 2017";
+    actual = actualDate.toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+}
+
+TEST(JavaUtil, DateParse) {
+    // Create variable to test
+    String expected;
+
+    Date   actualDate;
+    String actualString;
+    String actualFormat;
+    long   actualTime;
+    String actual;
+
+    // Valid case
+    expected     = "Thu Jan 09 12:35:34 +07 2014";
+    actualString = "Thu Jan 9 and 2014 12:35:34";
+    actualFormat = "%a %b %d and %Y %H:%M:%S";
+    actualTime = Date::parse(actualString, actualFormat.toString());
+    actual = Date(actualTime).toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+
+//    // Valid case
+//    actualDate = Date(117, 2, 13, 10, 01, 13);
+//    expected = (string) "Mar 13, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+
+//    // Set month = 12 => Year+= 1 , month = 0.
+//    actualDate = Date(117, 12, 13, 10, 01, 13);
+//    expected = (string) "Jan 13, 2018 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 33 => Year+= 2, month = 9.
+//    actualDate = Date(117, 33, 13, 10, 01, 13);
+//    expected = (string) "Oct 13, 2019 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 0
+//    actualDate = Date(117, 0, 13, 10, 01, 13);
+//    expected = (string) "Jan 13, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = -1 => Year-= 1, month = 11.
+//    actualDate = Date(117, -1, 13, 10, 01, 13);
+//    expected = (string) "Dec 13, 2016 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = -12 => Year-= 1, month = 0.
+//    actualDate = Date(117, -12, 13, 10, 01, 13);
+//    expected = (string) "Jan 13, 2016 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = -33 => Year-= 3, month = 3.
+//    actualDate = Date(117, -33, 13, 10, 01, 13);
+//    expected = (string) "Apr 13, 2014 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 3, date = -1 => month = 2, date = 30
+//    actualDate = Date(117, 3, -1, 10, 01, 13);
+//    expected = (string) "Mar 30, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 6, date = -75 => month = 3, date = 16
+//    actualDate = Date(117, 6, -75, 10, 01, 13);
+//    expected = (string) "Apr 16, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 3, date = 0 => month = 2, date = 31
+//    actualDate = Date(117, 3, 0, 10, 01, 13);
+//    expected = (string) "Mar 31, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 2, date = 0 => month = 1, date = 28
+//    actualDate = Date(117, 2, 0, 10, 01, 13);
+//    expected = (string) "Feb 28, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set month = 5, date = 32 => month = 6, date = 2
+//    actualDate = Date(117, 5, 32, 10, 01, 13);
+//    expected = (string) "Jul 02, 2017 10:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set hour = -1 => day -= 1, hour = 11 PM
+//    actualDate = Date(117, 2, 13, -1, 01, 13);
+//    expected = (string) "Mar 12, 2017 11:01:13 PM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set hour = 0
+//    actualDate = Date(117, 2, 13, 0, 01, 13);
+//    expected = (string) "Mar 13, 2017 12:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set hour = 24. Day += 1, hour = 0
+//    actualDate = Date(117, 2, 13, 24, 01, 13);
+//    expected = (string) "Mar 14, 2017 12:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set hour = 49. Day += 2, hour = 1
+//    actualDate = Date(117, 2, 13, 49, 01, 13);
+//    expected = (string) "Mar 15, 2017 01:01:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set minute = -1 => hour -= 1, minute = 59
+//    actualDate = Date(117, 2, 13, 10, -1, 13);
+//    expected = (string) "Mar 13, 2017 09:59:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set minute = 0
+//    actualDate = Date(117, 2, 13, 10, 0, 13);
+//    expected = (string) "Mar 13, 2017 10:00:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set minute = 60 => hour += 1, minute = 0
+//    actualDate = Date(117, 2, 13, 10, 60, 13);
+//    expected = (string) "Mar 13, 2017 11:00:13 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set minute = 150 => hour += 2, minute = 30
+//    actualDate = Date(117, 2, 13, 10, 150, 13);
+//    expected = (string) "Mar 13, 2017 12:30:13 PM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set second = -1 => minute -= 1, second = 59
+//    actualDate = Date(117, 2, 13, 10, 01, -1);
+//    expected = (string) "Mar 13, 2017 10:00:59 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set minute = 0
+//    actualDate = Date(117, 2, 13, 10, 01, 0);
+//    expected = (string) "Mar 13, 2017 10:01:00 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set second = 60 => minute += 1, second = 0
+//    actualDate = Date(117, 2, 13, 10, 01, 60);
+//    expected = (string) "Mar 13, 2017 10:02:00 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+//
+//    // Set second = 150 => minute += 2, second = 30
+//    actualDate = Date(117, 2, 13, 10, 01, 150);
+//    expected = (string) "Mar 13, 2017 10:03:30 AM";
+//    actual = actualDate.toLocaleString();
+//    ASSERT_STR(expected, actual.toString());
+
+//    // Valid case
+//    expected = Date(117, 2, 13, 10, 12, 13).toString();
+//    actualString = (string) "Mar 13, 2017 10:01:13 AM";
+//    actualTime = Date::parse(actualString);
+//    actual = Date(actualTime).toString();
+////    ASSERT_STR("", actual.toString());
+//
+//    // Valid case
+//    expected = Date(117, 2, 13, 10, 12, 13).toString();
+//    actualString = (string) "07:30:00";
+//    actualTime = Date::parse(actualString);
+//    actual = Date(actualTime).toString();
+////    ASSERT_STR("", actual.toString());
+//
+//    // Valid case
+//    expected = Date(117, 2, 13, 10, 12, 13).toString();
+//    actualString = (string) "Mar 13, 2017";
+//    actualTime = Date::parse(actualString);
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR("", actual.toString());
+
+//    // Valid case
+//    expected = Date(114, 2, 13, 10, 12, 13).toString();
+//    actualString = "Thu Jan 9 and 2014 12:35:34";
+//    actualFormat = "%a %b %d and %Y %H:%M:%S";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+////    ASSERT_STR("", actual.toString());
 }

@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <malloc.h>
+#include <chrono>
 #include "Date.hpp"
 
 /**
@@ -194,7 +194,12 @@ int Date::compareTo(Date anotherDate) {
 //}
 
 String Date::toString() {
-    auto format = (string) "%a %b %d %T UTC %Y";
+    auto format = (string) "%a %b %d %T %Z %Y";
+
+    if (Date::isUTC) {
+        format = (string) "%a %b %d %T UTC %Y";
+    }
+
     string convertResult = this->timeToString(format, this->localTimer);
     String result = convertResult;
     free(convertResult);
@@ -202,7 +207,7 @@ String Date::toString() {
     return result;
 }
 
-long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
+long Date::UTC(int year, int month, int date, int hrs, int min, int sec){
     Date tempDate = Date(year, month, date, hrs, min, sec);
     long result = tempDate.getTime() + tempDate.getTimezoneOffset() * 60;
 
@@ -214,19 +219,6 @@ Date Date::clone() {
     return clone;
 }
 
-//long Date::parse(String inputString) {
-//    tm timer = {0};
-//    long result;
-//
-
-//    // strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);
-////    string timeString = inputString.toString();
-//
-//    result = Date::initialize(timer.tm_year, timer.tm_mon, timer.tm_mday,
-//                            timer.tm_hour, timer.tm_min, timer.tm_sec);
-//    return result;
-//}
-
 String Date::toLocaleString() {
     auto format = (string) "%b %d, %Y %I:%M:%S %p";
     string convertResult = this->timeToString(format, this->localTimer);
@@ -234,4 +226,24 @@ String Date::toLocaleString() {
     free(convertResult);
 
     return result;
+}
+
+long Date::parse(String inputString, string format) {
+//    long result = Date::parseStringToTime(inputString);
+//    if (result == -1) {
+//        throw new IllegalArgumentException("syntax error");
+//    }
+
+    std::tm localTimer = {};
+    strptime(inputString.toString(), format, &localTimer);
+    return mktime(&localTimer);
+}
+
+string Date::getZone() {
+    return (string) this->zone;
+}
+
+boolean Date::isUTC = false;
+void Date::setUTC(boolean isUTC) {
+    this->isUTC = isUTC;
 }

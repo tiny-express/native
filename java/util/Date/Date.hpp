@@ -27,7 +27,6 @@
 #ifndef JAVA_UTIL_UTIL_DATE_HPP_
 #define JAVA_UTIL_UTIL_DATE_HPP_
 
-#include <ctime>
 #include "../../Lang.hpp"
 
 using namespace Java::Lang;
@@ -99,7 +98,19 @@ namespace Java {
                     /**
                      * Update changes of this->localTimer
                      */
-                    void update() {
+
+                    // TODO(thoangminh): Set static for this variable
+                    /**
+                     * Initialized just before the value is used. See parse().
+                     */
+                     int defaultCenturyStart;
+
+                    /**
+                     * Return the timezone is UTC or not
+                     */
+                    static boolean isUTC;
+
+                void update() {
                         // Update changes
                         this->original = mktime(this->localTimer);
 
@@ -112,8 +123,10 @@ namespace Java {
                         this->wday = this->localTimer->tm_wday;
                         this->yday = this->localTimer->tm_yday;
                         this->isdst = this->localTimer->tm_isdst;
-                        this->gmtoff =this->localTimer->tm_gmtoff;
-                        this->zone =this->localTimer->tm_zone;
+                        this->gmtoff = this->localTimer->tm_gmtoff;
+                        this->zone = this->localTimer->tm_zone;
+
+                        this->defaultCenturyStart = (this->year / 100) * 100;
                     }
 
                     /**
@@ -144,9 +157,8 @@ namespace Java {
 
                         this->localTimer = localtime(&this->original);
 
-//                        time_t timer = mktime(&localTimer);
-//                        tm tempTimer = {0};
-//                        this->localTimer = localtime_r(&timer, &tempTimer);
+                        setUTC(false);
+
                         update();
                     }
 
@@ -159,10 +171,9 @@ namespace Java {
                         this->original = timer;
                         this->localTimer = localtime(&this->original);
 
-//                        tm tempTimer = {0};
-//                        this->localTimer = localtime_r(&timer, &tempTimer);
-                        update();
+                        setUTC(false);
 
+                        update();
                     }
 
                     /**
@@ -178,7 +189,202 @@ namespace Java {
                         return result;
                     }
 
+                    // TODO(thoangminh): Need auto parse String to time
+                    /**
+                     * Auto parse String to time
+                     *
+                     * @param s String format of Date
+                     * @return timer from String
+                     */
+//                    static long parseStringToTime(String s) {
+//                        int year = Integer::MIN_VALUE;
+//                        int mon = -1;
+//                        int mday = -1;
+//                        int hour = -1;
+//                        int min = -1;
+//                        int sec = -1;
+//                        int millis = -1;
+//                        int c = -1;
+//                        int i = 0;
+//                        int n = -1;
+//                        int wst = -1;
+//                        int tzoffset = -1;
+//                        int prevc = 0;
+//
+//                        const std::vector<std::string> wtb = { "am", "pm", "monday", "tuesday",
+//                                        "wednesday", "thursday", "friday", "saturday", "sunday",
+//                                        "january", "february", "march", "april", "may", "june", "july",
+//                                        "august", "september", "october", "november", "december",
+//                                        "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
+//                                        "pst", "pdt"
+//                        };
+//
+//                        const int ttb[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
+//                                                           5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
+//                                                           10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
+//                                                           10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
+//                                                           10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
+//                                                           10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
+//                        };
+//
+//                        if (s.isEmpty())
+//                        return -1;
+//
+//                        int limit = s.length();
+//                        while (i < limit) {
+//                            c = s.charAt(i);
+//                            i++;
+//                            if (c <= ' ' || c == ',')
+//                                continue;
+//                            if (c == '(') { // skip comments
+//                                int depth = 1;
+//                                while (i < limit) {
+//                                    c = s.charAt(i);
+//                                    i++;
+//                                    if (c == '(')
+//                                        depth++;
+//                                    else if (c == ')')
+//                                        if (--depth <= 0)
+//                                            return -1;
+//                                }
+//                                continue;
+//                            }
+//                            if ('0' <= c && c <= '9') {
+//                                n = c - '0';
+//                                while (i < limit && '0' <= (c = s.charAt(i))
+//                                       && c <= '9') {
+//                                    n = n * 10 + c - '0';
+//                                    i++;
+//                                }
+//                                if (prevc == '+' || prevc == '-'
+//                                                    && year != Integer::MIN_VALUE) {
+//                                    // timezone offset
+//                                    if (n < 24)
+//                                        n = n * 60; // EG. "GMT-3"
+//                                    else
+//                                        n = n % 100 + n / 100 * 60; // eg "GMT-0430"
+//                                    if (prevc == '+') // plus means east of GMT
+//                                        n = -n;
+//                                    if (tzoffset != 0 && tzoffset != -1)
+//                                        return -1;
+//                                    tzoffset = n;
+//                                } else if (n >= 70)
+//                                    if (year != Integer::MIN_VALUE)
+//                                        return -1;
+//                                else if (c <= ' ' || c == ',' || c == '/'
+//                                         || i >= limit)
+//                                    // year = n < 1900 ? n : n - 1900;
+//                                    year = n;
+//                                else
+//                                    return -1;
+//                                else if (c == ':')
+//                                    if (hour < 0)
+//                                        hour = (byte) n;
+//                                    else if (min < 0)
+//                                        min = (byte) n;
+//                                    else
+//                                        return -1;
+//                                else if (c == '/')
+//                                    if (mon < 0)
+//                                        mon = (byte) (n - 1);
+//                                    else if (mday < 0)
+//                                        mday = (byte) n;
+//                                    else
+//                                        return -1;
+//                                else if (i < limit && c != ',' && c > ' ' && c != '-')
+//                                    return -1;
+//                                else if (hour >= 0 && min < 0)
+//                                    min = (byte) n;
+//                                else if (min >= 0 && sec < 0)
+//                                    sec = (byte) n;
+//                                else if (mday < 0)
+//                                    mday = (byte) n;
+//                                    // Handle two-digit years < 70 (70-99 handled above).
+//                                else if (year == Integer::MIN_VALUE && mon >= 0
+//                                         && mday >= 0)
+//                                    year = n;
+//                                else
+//                                    return -1;
+//                                prevc = 0;
+//                            } else if (c == '/' || c == ':' || c == '+' || c == '-')
+//                                prevc = c;
+//                            else {
+//                                int st = i - 1;
+//                                while (i < limit) {
+//                                    c = s.charAt(i);
+//                                    if (!('A' <= c && c <= 'Z' || 'a' <= c && c <= 'z'))
+//                                        return -1;
+//                                    i++;
+//                                }
+//                                if (i <= st + 1)
+//                                    return -1;
+//                                int k;
+//
+//                                for (k = (int) wtb.size(); --k >= 0;) {
+//                                    String thisStr = wtb[k];
+//                                    String compareStr = s.subString(st, st + (i - st));
+//                                    if (thisStr == compareStr) {
+//                                        int action = ttb[k];
+//                                        if (action != 0) {
+//                                            if (action == 1) { // pm
+//                                                if (hour > 12 || hour < 1)
+//                                                    return -1;
+//                                                else if (hour < 12)
+//                                                    hour += 12;
+//                                            } else if (action == 14) { // am
+//                                                if (hour > 12 || hour < 1)
+//                                                    return -1;
+//                                                else if (hour == 12)
+//                                                    hour = 0;
+//                                            } else if (action <= 13) { // month!
+//                                                if (mon < 0)
+//                                                    mon = (byte) (action - 2);
+//                                                else
+//                                                    return -1;
+//                                            } else {
+//                                                tzoffset = action - 10000;
+//                                            }
+//                                        }
+//                                        return -1;
+//                                    }
+//                                }
+//
+//                                if (k < 0)
+//                                    return -1;
+//                                prevc = 0;
+//                            }
+//                        }
+//                        if (year == Integer::MIN_VALUE || mon < 0 || mday < 0)
+//                        return -1;
+//                        // Parse 2-digit years within the correct default century.
+//                        if (year < 100) {
+//                            // TODO(thoangminh): need enable this line
+////                            year += Date::defaultCenturyStart;
+//                            Date tempDate = Date();
+//                            int defaultCentury = (tempDate.getYear() / 100) * 100;
+//                            year += defaultCentury;
+//                        }
+//
+//                        if (sec < 0) {
+//                            sec = 0;
+//                        }
+//
+//                        if (min < 0)
+//                        min = 0;
+//                        if (hour < 0)
+//                        hour = 0;
+//
+//                        if (tzoffset == -1) {  // no time zone specified, have to use local
+//                            Date date = Date(year, mon +1, mday, hour, min, sec);
+//                            return date.getTime();
+//                        }
+//
+//                        Date date = Date(year, mon +1, mday, hour, min, sec);
+//                        return date.getTime() + tzoffset * (60 * 1000);
+//                    }
+
 				 public:
+
                     /**
                      * Allocates a Date object and initializes it
                      * so that it represents the time at
@@ -376,6 +582,11 @@ namespace Java {
                     int getTimezoneOffset();
 
                     /**
+                     * Get current GMT time zone
+                     */
+                    string getZone();
+
+                    /**
                      * Deprecated.
                      * As of JDK version 1.1, replaced
                      * by Calendar.get(Calendar.YEAR) - 1900.
@@ -391,17 +602,64 @@ namespace Java {
 //                      int	hashCode();
 
                     /**
-                     * Deprecated.
-                     * As of JDK version 1.1, replaced by
-                     * DateFormat.parse(String s).
-                     * FORMAT: <Day of week> <Month of year>
-                     * <Day of month> <Year> <Hours>:<Minutes>:<Second>
-                     * SAMPLE: Thu Jan 9 2014 12:35:34
+                     * Attempts to interpret the string s as a representation
+                     * of a date and time. If the attempt is successful, the time
+                     * indicated is returned represented as the distance, measured in
+                     * milliseconds, of that time from the epoch (00:00:00 GMT on
+                     * January 1, 1970). If the attempt fails, an
+                     * IllegalArgumentException is thrown.
                      *
-                     * @param s
-                     * @return long
+                     * Format syntax:
+                     *
+                     * %a	Abbreviated weekday name --- Ex: Thu
+                     * %A	Full weekday name --- Ex: Thursday
+                     * %b	Abbreviated month name --- Ex: Aug
+                     * %B	Full month name --- Ex: August
+                     * %c	Date and time representation --- Ex: Thu Aug 23 14:55:02 2001
+                     * %C	Year divided by 100 and truncated to integer (00-99) --- Ex: 20
+                     * %d	Day of the month, zero-padded (01-31) --- Ex: 23
+                     * %D	Short MM/DD/YY date, equivalent to %m/%d/ * %y --- Ex: 08/23/01
+                     * %e	Day of the month, space-padded ( 1-31) --- Ex: 23
+                     * %F	Short YYYY-MM-DD date, equivalent to %Y-%m-%d --- Ex: 2001-08-23
+                     * %g	Week-based year, last two digits (00-99) --- Ex: 01
+                     * %G	Week-based year --- Ex: 2001
+                     * %h	Abbreviated month name * (same as %b) --- Ex: Aug
+                     * %H	Hour in 24h format (00-23) --- Ex: 14
+                     * %I	Hour in 12h format (01-12) --- Ex: 02
+                     * %j	Day of the year (001-366) --- Ex: 235
+                     * %m	Month as a decimal number (01-12) --- Ex: 08
+                     * %M	Minute (00-59) --- Ex: 55
+                     * %n	New-line character ('\n')
+                     * %p	AM or PM designation --- Ex: PM
+                     * %r	12-hour clock time --- Ex: 02:55:02 pm
+                     * %R	24-hour HH:MM time, equivalent to %H:%M --- Ex: 14:55
+                     * %S	Second (00-61) --- Ex: 02
+                     * %t	Horizontal-tab character --- Ex: ('\t')
+                     * %T	ISO 8601 time format (HH:MM:SS), equivalent to %H:%M:%S --- Ex: 14:55:02
+                     * %u	ISO 8601 weekday as number with Monday as 1 (1-7) --- Ex: 4
+                     * %U	Week number with the first Sunday as the first day of week one (00-53) --- Ex: 33
+                     * %V	ISO 8601 week number (01-53) --- Ex: 34
+                     * %w	Weekday as a decimal number with Sunday as 0 (0-6) --- Ex: 4
+                     * %W	Week number with the first Monday as the first day of week one (00-53) --- Ex: 34
+                     * %x	Date representation --- Ex: 08/23/01
+                     * %X	Time representation --- Ex: 14:55:02
+                     * %y	Year, last two digits (00-99) --- Ex: 01
+                     * %Y	Year --- Ex: 2001
+                     * %z	ISO 8601 offset from UTC in timezone (1 minute=1, 1 hour=100)
+                     * If timezone cannot be determined, no characters	+100
+                     * %Z	Timezone name or abbreviation *
+                     * If timezone cannot be determined, no characters	CDT
+                     * %%	A % sign	%
+                     *
+                     * @param   inputString   a string to be parsed as a date.
+                     * @param   format        format time of inputString
+                     * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
+                     *          represented by the string argument.
+                     * @see     java.text.DateFormat
+                     * @deprecated As of JDK version 1.1,
+                     * replaced by DateFormat.parse(String s).
                      */
-                    static long parse(String inputString);
+                    static long parse(String inputString, string format);
 
                     /**
                      * Deprecated.
@@ -467,6 +725,11 @@ namespace Java {
                     void setYear(int year);
 
                     /**
+                     * Set current timezone is UTC or not
+                     */
+                    void setUTC(boolean isUTC);
+
+                    /**
                      * Deprecated.
                      * As of JDK version 1.1, replaced by
                      * DateFormat.format(Date date), using a GMT TimeZone.
@@ -510,3 +773,4 @@ namespace Java {
 }  // namespace Java
 
 #endif //JAVA_UTIL_UTIL_DATE_HPP_
+
