@@ -71,11 +71,11 @@ boolean Float::operator==(const Float &target) const {
 
 // TODO(thoangminh): enable after finish method equals , compare
 //boolean Float::operator==(const Float &target) const {
-//    return (boolean) equals(target.original);
+//    return (boolean) equals(target.timer);
 //}
 //
 //boolean Float::operator!=(const Float &target) const {
-//    return (boolean) !equals(target.original);
+//    return (boolean) !equals(target.timer);
 //}
 //
 //boolean Float::operator<(const Float &target) const {

@@ -85,7 +85,7 @@ double Bytes::doubleValue() const {
 boolean Bytes::equals(Bytes object) {
 //    boolean isByte = instanceof<Bytes>(object);
 //	if (isByte) {
-//        return this->original == parseByte(object.toString());
+//        return this->timer == parseByte(object.toString());
 //    }
 //	return false;
     return this->original == parseByte(object.toString());

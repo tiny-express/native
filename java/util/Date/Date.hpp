@@ -39,7 +39,7 @@ namespace Java {
 //        , public virtual Comparable<Date>
 				{
 				 private:
-                    time_t original;
+                    time_t timer;
                     tm *localTimer;
 
                     /**
@@ -112,7 +112,7 @@ namespace Java {
 
                 void update() {
                         // Update changes
-                        this->original = mktime(this->localTimer);
+                        this->timer = mktime(this->localTimer);
 
                         this->sec = this->localTimer->tm_sec;
                         this->min = this->localTimer->tm_min;
@@ -153,9 +153,9 @@ namespace Java {
                         localTimer.tm_min = min;
                         localTimer.tm_sec = sec;
 
-                        this->original = mktime(&localTimer);
+                        this->timer = mktime(&localTimer);
 
-                        this->localTimer = localtime(&this->original);
+                        this->localTimer = localtime(&this->timer);
 
                         setUTC(false);
 
@@ -168,8 +168,8 @@ namespace Java {
                      * will make this function disable
                      */
                     void initialize(time_t timer) {
-                        this->original = timer;
-                        this->localTimer = localtime(&this->original);
+                        this->timer = timer;
+                        this->localTimer = localtime(&this->timer);
 
                         setUTC(false);
 

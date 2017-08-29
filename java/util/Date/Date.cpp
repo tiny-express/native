@@ -53,7 +53,7 @@ Date::Date(long date) {
 // TODO(thoangminh): Check this method later
 //Date::Date(String s) {
 //	this->refreshFlag = false;
-//	this->original = Date::parse(s);
+//	this->timer = Date::parse(s);
 //	Date::updateLocalTimer();
 //}
 
@@ -137,7 +137,7 @@ int Date::getYear() {
 }
 
 long Date::getTime() {
-    return this->original;
+    return this->timer;
 }
 
 int Date::getTimezoneOffset() {
@@ -147,7 +147,7 @@ int Date::getTimezoneOffset() {
 }
 
 boolean Date::after(Date when) {
-	if (this->original > when.original) {
+	if (this->timer > when.timer) {
 		return true;
 	}
 
@@ -155,7 +155,7 @@ boolean Date::after(Date when) {
 }
 
 boolean Date::before(Date when) {
-	if (this->original < when.original) {
+	if (this->timer < when.timer) {
 		return true;
 	}
 
@@ -163,7 +163,7 @@ boolean Date::before(Date when) {
 }
 
 int Date::compareTo(Date anotherDate) {
-	long temp = this->original - anotherDate.original;
+	long temp = this->timer - anotherDate.timer;
 
 	if (temp < 0) {
 		return -1;
@@ -181,7 +181,7 @@ int Date::compareTo(Date anotherDate) {
 //		initialize(time(nullptr));
 //	}
 //
-//	tm *gmTimer = gmtime(&this->original);
+//	tm *gmTimer = gmtime(&this->timer);
 //
 //	string timeString = this->toString0(gmTimer);
 //	String result = timeString;
@@ -197,7 +197,9 @@ String Date::toString() {
         format = (string) "%a %b %d %T UTC %Y";
     }
 
-    string convertResult = this->timeToString(format, this->localTimer);
+    tm *localTimer = localtime(&this->timer);
+
+    string convertResult = this->timeToString(format, localTimer);
     String result = convertResult;
     free(convertResult);
 

@@ -461,7 +461,7 @@ int StringBufferUnSafe::lastIndexOf(String stringToGetIndex, int fromIndex) cons
 	
 	free(reversedOriginal);
 	free(reversedString);
-	// Calculate result with original
+	// Calculate result with timer
 	if (result == -1) {
 		return result;
 	}
@@ -474,7 +474,7 @@ int StringBufferUnSafe::offsetByCodePoints(int index, int codePointOffset) const
 		throw IndexOutOfBoundsException();
 	}
 	// TODO need Character::offsetByCodePoints
-	// return Character::offsetByCodePoints(this->original, 0, this->currentLength, index, codePointOffset);
+	// return Character::offsetByCodePoints(this->timer, 0, this->currentLength, index, codePointOffset);
 	return 0;
 }
 
