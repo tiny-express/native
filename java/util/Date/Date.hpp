@@ -221,14 +221,17 @@ namespace Java {
                 tempTimer.tm_min = min;
                 tempTimer.tm_sec = sec;
 
-                this->timer = mktime(&tempTimer);
+//                this->timer = mktime(&tempTimer);
 
 //                tm tempTimer = {0};
 //                this->localTimer = localtime_r(&this->timer, &tempTimer);
 
 //                this->localTimer = localtime(&this->timer);
+
+                time_t timer = mktime(&tempTimer);
+
                 tempTimer = {0};
-                tm *localtimer = localtime_r(&this->timer, &tempTimer);
+                tm *localtimer = localtime_r(&timer, &tempTimer);
 
                 setUTC(false);
 
@@ -241,7 +244,7 @@ namespace Java {
              * will make this function disable
              */
             void initialize(time_t timer) {
-                this->timer = timer;
+//                this->timer = timer;
 
 //                tm tempTimer = {0};
 //                this->localTimer = localtime_r(&this->timer, &tempTimer);
@@ -249,7 +252,7 @@ namespace Java {
 //                this->localTimer = localtime(&this->timer);
 
                 tm tempTimer = {0};
-                tm *localtimer = localtime_r(&this->timer, &tempTimer);
+                tm *localtimer = localtime_r(&timer, &tempTimer);
 
                 setUTC(false);
 
