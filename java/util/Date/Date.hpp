@@ -111,24 +111,91 @@ namespace Java {
              */
             static boolean isUTC;
 
-            void update() {
+            /**
+             * Update a Date object and initializes it so that
+             * it represents the instant at the start of the second specified
+             * by the year, month, date,
+             * hrs, min, and sec arguments,
+             * in the local time zone.
+             *
+             * @param   local    the struct tm, use to assign
+             *                   value to Date object
+             */
+            void update(tm *localTimer) {
                 // Update changes
-                this->timer = mktime(this->localTimer);
+//                this->timer = mktime(this->localTimer);
 
-                this->sec = this->localTimer->tm_sec;
-                this->min = this->localTimer->tm_min;
-                this->hour = this->localTimer->tm_hour;
-                this->mday = this->localTimer->tm_mday;
-                this->mon = this->localTimer->tm_mon;
-                this->year = this->localTimer->tm_year;
-                this->wday = this->localTimer->tm_wday;
-                this->yday = this->localTimer->tm_yday;
-                this->isdst = this->localTimer->tm_isdst;
-                this->gmtoff = this->localTimer->tm_gmtoff;
-                this->zone = this->localTimer->tm_zone;
+//                this->sec = this->localTimer->tm_sec;
+//                this->min = this->localTimer->tm_min;
+//                this->hour = this->localTimer->tm_hour;
+//                this->mday = this->localTimer->tm_mday;
+//                this->mon = this->localTimer->tm_mon;
+//                this->year = this->localTimer->tm_year;
+//                this->wday = this->localTimer->tm_wday;
+//                this->yday = this->localTimer->tm_yday;
+//                this->isdst = this->localTimer->tm_isdst;
+//                this->gmtoff = this->localTimer->tm_gmtoff;
+//                this->zone = this->localTimer->tm_zone;
+
+                this->timer = mktime(localTimer);
+                this->sec = localTimer->tm_sec;
+                this->min = localTimer->tm_min;
+                this->hour = localTimer->tm_hour;
+                this->mday = localTimer->tm_mday;
+                this->mon = localTimer->tm_mon;
+                this->year = localTimer->tm_year;
+                this->wday = localTimer->tm_wday;
+                this->yday = localTimer->tm_yday;
+                this->isdst = localTimer->tm_isdst;
+                this->gmtoff = localTimer->tm_gmtoff;
+                this->zone = localTimer->tm_zone;
 
                 this->defaultCenturyStart = (this->year / 100) * 100;
             }
+
+//            /**
+//             * Update a Date object  so that
+//             * it represents the instant at the start of the second specified
+//             * by the year, month, date,
+//             * hrs, min, and sec arguments,
+//             * in the local time zone.
+//             *
+//             * @param   year    the year minus 1900.
+//             * @param   month   the month between 0-11.
+//             * @param   date    the day of the month between 1-31.
+//             * @param   hrs     the hours between 0-23.
+//             * @param   min     the minutes between 0-59.
+//             * @param   sec     the seconds between 0-59.
+//             */
+//            void update(int year, int month, int date, int hrs, int min, int sec) {
+//                tm tempTimer = { 0 };
+//
+//                tempTimer.tm_year = year % 1900;
+//                tempTimer.tm_mon = month;
+//                tempTimer.tm_mday = date;
+//                tempTimer.tm_hour = hrs;
+//                tempTimer.tm_min = min;
+//                tempTimer.tm_sec = sec;
+//
+//                this->timer = mktime(&tempTimer);
+//
+//                tempTimer = {0};
+//                tm *localtimer = localtime_r(&this->timer, &tempTimer);
+//
+//                this->sec = localTimer->tm_sec;
+//                this->min = localTimer->tm_min;
+//                this->hour = localTimer->tm_hour;
+//                this->mday = localTimer->tm_mday;
+//                this->mon = localTimer->tm_mon;
+//                this->year = localTimer->tm_year;
+//                this->wday = localTimer->tm_wday;
+//                this->yday = localTimer->tm_yday;
+//                this->isdst = localTimer->tm_isdst;
+//                this->gmtoff = localTimer->tm_gmtoff;
+//                this->zone = localTimer->tm_zone;
+//
+//                this->defaultCenturyStart = (this->year / 100) * 100;
+//            }
 
             /**
              * Allocates a Date object and initializes it so that
@@ -145,22 +212,27 @@ namespace Java {
              * @param   sec     the seconds between 0-59.
              */
             void initialize(int year, int month, int date, int hrs, int min, int sec) {
-                tm localTimer = { 0 };
+                tm tempTimer = { 0 };
 
-                localTimer.tm_year = year % 1900;
-                localTimer.tm_mon = month;
-                localTimer.tm_mday = date;
-                localTimer.tm_hour = hrs;
-                localTimer.tm_min = min;
-                localTimer.tm_sec = sec;
+                tempTimer.tm_year = year % 1900;
+                tempTimer.tm_mon = month;
+                tempTimer.tm_mday = date;
+                tempTimer.tm_hour = hrs;
+                tempTimer.tm_min = min;
+                tempTimer.tm_sec = sec;
 
-                this->timer = mktime(&localTimer);
+                this->timer = mktime(&tempTimer);
 
-                this->localTimer = localtime(&this->timer);
+//                tm tempTimer = {0};
+//                this->localTimer = localtime_r(&this->timer, &tempTimer);
+
+//                this->localTimer = localtime(&this->timer);
+                tempTimer = {0};
+                tm *localtimer = localtime_r(&this->timer, &tempTimer);
 
                 setUTC(false);
 
-                update();
+                update(localtimer);
             }
 
             /**
@@ -170,11 +242,18 @@ namespace Java {
              */
             void initialize(time_t timer) {
                 this->timer = timer;
-                this->localTimer = localtime(&this->timer);
+
+//                tm tempTimer = {0};
+//                this->localTimer = localtime_r(&this->timer, &tempTimer);
+
+//                this->localTimer = localtime(&this->timer);
+
+                tm tempTimer = {0};
+                tm *localtimer = localtime_r(&this->timer, &tempTimer);
 
                 setUTC(false);
 
-                update();
+                update(localtimer);
             }
 
             /**

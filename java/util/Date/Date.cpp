@@ -62,28 +62,28 @@ Date::~Date() {
 
 // TODO(thoangminh): Need to check all methods below
 void Date::setDate(int date) {
-    this->localTimer->tm_mday = date;
-    update();
+    initialize(this->year, this->mon, date,
+           this->hour, this->min, this->sec);
 }
 
 void Date::setHours(int hours) {
-    this->localTimer->tm_hour = hours;
-    update();
+    initialize(this->year, this->mon, this->mday,
+           hours, this->min, this->sec);
 }
 
 void Date::setMinutes(int minutes) {
-    this->localTimer->tm_min = minutes;
-    update();
+    initialize(this->year, this->mon, this->mday,
+           this->hour, minutes, this->sec);
 }
 
 void Date::setMonth(int month) {
-    this->localTimer->tm_mon = month;
-    update();
+    initialize(this->year, month, this->mday,
+           this->hour, this->min, this->sec);
 }
 
 void Date::setSeconds(int seconds) {
-    this->localTimer->tm_sec = seconds;
-    update();
+    initialize(this->year, this->mon, this->mday,
+               this->hour, this->min, seconds);
 }
 
 void Date::setTime(long time) {
@@ -91,9 +91,8 @@ void Date::setTime(long time) {
 }
 
 void Date::setYear(int year) {
-    // LocalTimer just keep year since 1900
-    this->localTimer->tm_year = year % 1900;
-    update();
+    initialize(year % 1900, this->mon, this->mday,
+               this->hour, this->min, this->sec);
 }
 
 int Date::getDate() {
@@ -197,7 +196,7 @@ String Date::toString() {
         format = (string) "%a %b %d %T UTC %Y";
     }
 
-    string convertResult = this->timeToString(format);
+    string convertResult = timeToString(format);
     String result = convertResult;
     free(convertResult);
 
