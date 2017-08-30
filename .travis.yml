@@ -9,9 +9,13 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.6
         packages:
+            - g++-4.8
             - lcov
 before_script:
+- export CC=gcc-4.8
+- export CXX=g++-4.8
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
 - chmod +x misc/checkstyle.sh
@@ -22,6 +26,6 @@ script:
 - make native && sudo make install && sudo ldconfig
 - cd examples && ./build
 after_success:
-- ./misc/codecov.sh
+- cd $TRAVIS_BUILD_DIR && ./misc/codecov.sh
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S

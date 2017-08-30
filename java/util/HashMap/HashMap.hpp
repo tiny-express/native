@@ -460,13 +460,12 @@ namespace Java {
 								startHashMap += totalString;
 							}
 							
-							startHashMap = startHashMap.subString(0, startHashMap.getSize() - 3);
+							startHashMap = startHashMap.subString(0, startHashMap.getSize() - 2);
 							startHashMap += endString;
 							this->backup = startHashMap;
 							return this->backup.toString();
 						}
 				};
-			
 		}
 }
 

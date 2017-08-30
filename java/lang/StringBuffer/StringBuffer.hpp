@@ -31,7 +31,9 @@
 
 namespace Java {
     namespace Lang {
-        class StringBufferUnSafe : public Object{  //: public CharSequence {
+        class StringBufferUnSafe :
+                public Object,
+                public virtual CharSequence {
 
         private:
             /**
@@ -62,7 +64,7 @@ namespace Java {
              *
              * @param sequence
              */
-            explicit StringBufferUnSafe(CharSequence *sequence);
+            explicit StringBufferUnSafe(CharSequence &sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -128,7 +130,7 @@ namespace Java {
              * @param sequence
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(CharSequence *sequence);
+            StringBufferUnSafe &append(CharSequence &sequence);
 
             /**
              * Appends the string representation of the double argument
@@ -204,7 +206,7 @@ namespace Java {
              * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(CharSequence *sequence, int start, int end);
+            StringBufferUnSafe &append(CharSequence &sequence, int start, int end);
 
             /**
              * Appends the string representation of the codePoint argument to this sequence.             *
@@ -228,7 +230,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length().
              * @return character at specified index
              */
-            char charAt(int index) const;
+            char charAt(int index) const override;
 
             // TODO need IntStream
             // IntStream codePoint();
@@ -444,7 +446,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(int offset, Object *object);
+            StringBufferUnSafe &insert(int offset, Object &object);
 
             /**
              * Inserts the string representation of the int argument into this sequence.
@@ -485,7 +487,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(int destinationOffset, CharSequence *sequence, int start, int end);
+            StringBufferUnSafe &insert(int destinationOffset, CharSequence &sequence, int start, int end);
 
             /**
              * Inserts the string representation of a subarray of the str array argument into this sequence.
@@ -531,7 +533,7 @@ namespace Java {
              *
              * @return int
              */
-            int length() const;
+            int length() const override;
 
             /**
              * Returns the index within this sequence that is offset from the given index by codePointOffset code points.
@@ -667,7 +669,7 @@ namespace Java {
              *
              * @param sequence
              */
-            explicit StringBuffer(CharSequence *sequence);
+            explicit StringBuffer(CharSequence &sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -697,7 +699,7 @@ namespace Java {
              * @param object
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(Object *object);
+            StringBuffer &append(Object &object);
 
             /**
              * Appends the string representation of the float argument
@@ -729,7 +731,7 @@ namespace Java {
              * @param sequence
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(CharSequence *sequence);
+            StringBuffer &append(CharSequence &sequence);
 
             /**
              * Appends the string representation of the double argument
@@ -805,7 +807,7 @@ namespace Java {
              * @throw IndexOutOfBoundException If start is negative or bigger than end or bigger than seq's length
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(CharSequence *sequence, int start, int end);
+            StringBuffer &append(CharSequence &sequence, int start, int end);
 
             /**
              * Appends the string representation of the codePoint argument to this sequence.             *
@@ -972,7 +974,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(int offset, CharSequence *charSequence);
+            StringBuffer &insert(int offset, CharSequence &charSequence);
 
             /**
              * Inserts the string representation of the bool argument into this sequence.
@@ -1048,7 +1050,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(int offset, Object *object);
+            StringBuffer &insert(int offset, Object &object);
 
             /**
              * Inserts the string representation of the int argument into this sequence.
@@ -1089,7 +1091,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(int destinationOffset, CharSequence *sequence, int start, int end);
+            StringBuffer &insert(int destinationOffset, CharSequence &sequence, int start, int end);
 
             /**
              * Inserts the string representation of a subarray of the str array argument into this sequence.

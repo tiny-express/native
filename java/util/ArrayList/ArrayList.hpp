@@ -534,7 +534,7 @@ namespace Java {
 							startArrayList += this->original[ this->size() - 1 ].toString();
 							// Remove last semicolon
 							if (startArrayList.length() > 0) {
-								startArrayList = startArrayList.subString(0, startArrayList.length() - 1);
+								startArrayList = startArrayList.subString(0, startArrayList.length());
 							}
 							startArrayList += endArrayList;
 							this->backup = startArrayList;

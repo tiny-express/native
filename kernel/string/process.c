@@ -26,7 +26,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-//#include <regex.h>
 #include "../type.h"
 #include "../string.h"
 #include "../common.h"
