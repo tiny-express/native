@@ -45,10 +45,6 @@ Thread::~Thread() {
             threadObject->join();
         delete threadObject;
     }
-
-    if(this->semaphoreObject) {
-        delete this->semaphoreObject;
-    }
 }
 
 void Thread::run() {
@@ -57,9 +53,9 @@ void Thread::run() {
     mutexObject.unlock();
 
     target->run();
-    if(semaphoreObject) {
-        semaphoreObject->release(1, NULL);
-    }
+//    if(semaphoreObject) {
+//        semaphoreObject->release(1, NULL);
+//    }
 
     mutexObject.lock();
     alive = false;
@@ -77,7 +73,6 @@ void Thread::init(Runnable *target, String name, long stackSize) {
     this->stackSize = stackSize;
     this->tid = nextThreadID();
     this->threadObject = NULL;
-    this->semaphoreObject = new Semaphore(0, 1);
 }
 
 String Thread::getName() {
@@ -135,42 +130,8 @@ void Thread::join() {
 
 void Thread::join(long millis) {
     if(millis > 0) {
-        semaphoreObject->wait(millis);
+        //semaphoreObject->wait(millis);
     } else {
-        semaphoreObject->wait();
-    }
-}
-
-Semaphore::Semaphore(long initCount, long maxCount) {
-    this->count = initCount;
-    this->maxCount = maxCount;
-}
-
-Semaphore::~Semaphore() {
-
-}
-
-void Semaphore::release(long releaseCount, long* previousCount) {
-    std::unique_lock<std::mutex> locker(mutexObject);
-    if(previousCount)
-        *previousCount = count;
-    count += releaseCount;
-    count = std::max(count, maxCount);
-    conditionObject.notify_one();
-}
-
-void Semaphore::wait() {
-    wait(-1);
-}
-
-void Semaphore::wait(long millis) {
-    std::unique_lock<std::mutex> locker(mutexObject);
-    if(millis < 0) {
-        if(count == 0)
-            conditionObject.wait(locker);
-        --count;
-    } else {
-        if(count == 0 && conditionObject.wait_for(locker, std::chrono::milliseconds(millis)) != std::cv_status::timeout)
-            --count;
+        //semaphoreObject->wait();
     }
 }

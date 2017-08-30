@@ -50,11 +50,6 @@ public:
 	}
 };
 
-void DummyThread()
-{
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-}
-
 // TODO(thoangminh): Need to improve it
 TEST(JavaLang, ThreadConstructor) {
 }
@@ -72,10 +67,6 @@ TEST(JavaLang, ThreadRun) {
 //    }
 //
 //    ASSERT_EQUAL(expect, result);
-
-    std::thread dummyThread(DummyThread);
-    if(dummyThread.joinable())
-        dummyThread.join();
 }
 
 TEST(JavaLang, ThreadSetDaemon) {
@@ -187,13 +178,4 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
 //    }
 //
 //    ASSERT_EQUAL(expect1, result1);
-}
-
-TEST(JavaLang, Semaphore) {
-    Semaphore semObject(0, 1);
-    long expect = 0;
-    long result = 0;
-    semObject.release(1, &result);
-    semObject.wait();
-    ASSERT_EQUAL(expect, result);
 }

@@ -39,21 +39,6 @@
 
 namespace Java {
 		namespace Lang {
-            class Semaphore {
-            public:
-                Semaphore(long initCount, long maxCount);
-                ~Semaphore();
-
-                void release(long releaseCount, long* previousCount);
-                void wait();
-                void wait(long millis);
-            private:
-                std::mutex mutexObject;
-                std::condition_variable conditionObject;
-                long maxCount;
-                long count;
-            };
-
             class Thread : public Object, public virtual Runnable {
 				 private:
                     pthread_t original;
@@ -161,7 +146,6 @@ namespace Java {
 
                     std::thread* threadObject;
                     std::mutex mutexObject;
-                    Semaphore* semaphoreObject;
 
                  private:
                     /**
