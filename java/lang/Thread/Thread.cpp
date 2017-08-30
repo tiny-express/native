@@ -69,7 +69,7 @@
 // */
 //void Thread::start() {
 //	this->isThreadRunning = TRUE;
-//	pthread_create(&this->timer, NULL, &Thread::pthread_helper, (void *) this);
+//	pthread_create(&this->original, NULL, &Thread::pthread_helper, (void *) this);
 //}
 //
 ///**
@@ -80,7 +80,7 @@
 //		return;
 //	}
 //
-//	//pthread_cancel(this->timer);
+//	//pthread_cancel(this->original);
 //	this->isThreadRunning = FALSE;
 //}
 //
@@ -92,7 +92,7 @@
 //		return;
 //	}
 //
-//	pthread_join(this->timer, NULL);
+//	pthread_join(this->original, NULL);
 //}
 //
 ///**
@@ -104,7 +104,7 @@
 //	}
 //
 //	usleep(millis * 1000);
-//	pthread_join(this->timer, NULL);
+//	pthread_join(this->original, NULL);
 //}
 //
 ///**

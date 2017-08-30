@@ -38,7 +38,7 @@ TEST(JavaLang, DoubleConstructor) {
 	emptyDoubleConstructor = 13.02;
 	ASSERT_DBL_NEAR(13.02, emptyDoubleConstructor.doubleValue());
 	
-	// Test Double::Double(double timer)
+	// Test Double::Double(double original)
 	Double validDoubleConstructor = 13.02;
 	ASSERT_DBL_NEAR(13.02, validDoubleConstructor.doubleValue());
 	

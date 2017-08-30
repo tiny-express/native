@@ -40,7 +40,7 @@ TEST(JavaLang, FloatConstructor) {
 	emptyFloatConstructor = 13.02;
 	ASSERT_FLOAT_NEAR(13.02, emptyFloatConstructor.floatValue());
 	
-	// Test Float::Float(float timer)
+	// Test Float::Float(float original)
 	Float floatConstructor = 13.02;
 	ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
 	
