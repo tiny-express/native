@@ -28,6 +28,7 @@
 #define JAVA_LANG_INTEGER_HPP_
 
 #include "../Number/Number.hpp"
+#include "../String/String.hpp"
 #include "../Comparable/Comparable.hpp"
 #include <iostream>
 #include <bitset>

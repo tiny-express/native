@@ -134,10 +134,10 @@ boolean MediaType::isCompatible(MediaType other) {
         }
 
         if (thisPlusIndex != CHAR_NOT_FOUND && otherPlusIndex != CHAR_NOT_FOUND) {
-            String subtypeBeforePlus = this->subtype.subString(0, thisPlusIndex - 1);
-            String otherSubtypeBeforePlus = ((String) other.getSubtype()).subString(0, otherPlusIndex - 1);
-            String subtypeAfterPlus = this->subtype.subString(thisPlusIndex + 1);
-            String otherSubtypeAfterPlus = ((String) other.getSubtype()).subString(otherPlusIndex + 1);
+            String subtypeBeforePlus = this->subtype.subString(0, thisPlusIndex);
+            String otherSubtypeBeforePlus = ((String) other.getSubtype()).subString(0, otherPlusIndex);
+            String subtypeAfterPlus = this->subtype.subString(thisPlusIndex);
+            String otherSubtypeAfterPlus = ((String) other.getSubtype()).subString(otherPlusIndex);
 
             if (subtypeAfterPlus.equals(otherSubtypeAfterPlus) &&
                     (subtypeBeforePlus.equals(MEDIA_TYPE_WILDCARD)
@@ -191,7 +191,7 @@ MediaType MediaType::valueOf(String type) {
         throw MediaTypeException(exceptionMessage);
     }
 
-    String getType = fullType.subString(0, splashIndex - 1);
+    String getType = fullType.subString(0, splashIndex);
     String getSubtype = fullType.subString(splashIndex + 1);
     if (getType.equals(MEDIA_TYPE_WILDCARD) && !getSubtype.equals(MEDIA_TYPE_WILDCARD)) {
         String exceptionMessage = type + (String) " wildcard type is legal only in '*/*' (all types)";
