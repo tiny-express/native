@@ -231,11 +231,6 @@ String Date::toLocaleString() {
 }
 
 long Date::parse(String inputString, string format) {
-//    long result = Date::parseStringToTime(inputString);
-//    if (result == -1) {
-//        throw new IllegalArgumentException("syntax error");
-//    }
-
     std::tm localTimer = {};
     strptime(inputString.toString(), format, &localTimer);
     return mktime(&localTimer);

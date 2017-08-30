@@ -171,7 +171,11 @@ namespace Java {
                 this->original = timer;
                 this->localTimer = localtime(&this->original);
 
-                setUTC(false);
+                if (this->original == getUTCTime(this->original)) {
+                    setUTC(true);
+                } else {
+                    setUTC(false);
+                }
 
                 update();
             }
