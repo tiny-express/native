@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_UTIL_DATE_HPP_
-#define JAVA_UTIL_UTIL_DATE_HPP_
+#ifndef JAVA_UTIL_DATE_DATE_HPP_
+#define JAVA_UTIL_DATE_DATE_HPP_
 
 #include "../../Lang.hpp"
 
@@ -33,13 +33,9 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
-        class Date : public Object
-//        , public virtual Serializable
-//        , public virtual Cloneable
-//        , public virtual Comparable<Date>
-        {
-        private:
-            time_t original;
+        class Date : public Object {
+         private:
+            time_t timer;
             tm *localTimer;
 
             /**
@@ -99,7 +95,6 @@ namespace Java {
              * Update changes of this->localTimer
              */
 
-            // TODO(thoangminh): Set static for this variable
             /**
              * Initialized just before the value is used. See parse().
              */
@@ -107,7 +102,7 @@ namespace Java {
 
             void update() {
                 // Update changes
-                this->original = mktime(this->localTimer);
+                this->timer = mktime(this->localTimer);
 
                 this->sec = this->localTimer->tm_sec;
                 this->min = this->localTimer->tm_min;
@@ -138,7 +133,8 @@ namespace Java {
              * @param   min     the minutes between 0-59.
              * @param   sec     the seconds between 0-59.
              */
-            void initialize(int year, int month, int date, int hrs, int min, int sec) {
+            void initialize(int year, int month, int date,
+                            int hrs, int min, int sec) {
                 tm localTimer = { 0 };
 
                 localTimer.tm_year = year % 1900;
@@ -148,9 +144,9 @@ namespace Java {
                 localTimer.tm_min = min;
                 localTimer.tm_sec = sec;
 
-                this->original = mktime(&localTimer);
+                this->timer = mktime(&localTimer);
 
-                this->localTimer = localtime(&this->original);
+                this->localTimer = localtime(&this->timer);
 
                 update();
             }
@@ -161,8 +157,8 @@ namespace Java {
              * will make this function disable
              */
             void initialize(time_t timer) {
-                this->original = timer;
-                this->localTimer = localtime(&this->original);
+                this->timer = timer;
+                this->localTimer = localtime(&this->timer);
 
                 update();
             }
@@ -386,7 +382,6 @@ namespace Java {
 //                    }
 
         public:
-
             /**
              * Allocates a Date object and initializes it
              * so that it represents the time at
@@ -602,7 +597,7 @@ namespace Java {
              * Returns a hash code value for this object.
              * @return
              */
-//                      int	hashCode();
+            int	hashCode();
 
             /**
              * Attempts to interpret the string s as a representation
@@ -770,4 +765,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif //JAVA_UTIL_UTIL_DATE_HPP_
+#endif  // JAVA_UTIL_DATE_DATE_HPP_

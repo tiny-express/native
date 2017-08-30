@@ -68,7 +68,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_EQUAL(13, date.getSeconds());
 
     // Test Date(long date)
-    date = Date(1498042091); //2017
+    date = Date(1498042091);  // 2017
     ASSERT_EQUAL(2017, date.getYear());
 
     // Test Date sameDate = date;
@@ -1035,6 +1035,13 @@ TEST(JavaUtil, DateCompareTo) {
     ASSERT_EQUAL(1, date.compareTo(temp));
 }
 
+TEST(JavaUtil, DateHashCode) {
+    Date date = Date(2017, 02, 14, 8, 01, 13);
+    int expected = 1489453273;
+    int actual = date.hashCode();
+    ASSERT_EQUAL(expected, actual);
+}
+
 TEST(JavaUtil, DateGetTimezoneOffset) {
     // Create variable to test
     Date date;
@@ -1941,7 +1948,8 @@ TEST(JavaUtil, DateToGMTString) {
     long actualTime = Date::parse(actualString, actualFormat.toString());
     Date actualDate = Date(actualTime);
 
-    long timeChange = expectedDate.getTime() + expectedDate.getTimezoneOffset() * 60;
+    long timeChange = expectedDate.getTime()
+                      + expectedDate.getTimezoneOffset() * 60;
     expectedDate.setTime(timeChange);
 
     String expected = expectedDate.toString();

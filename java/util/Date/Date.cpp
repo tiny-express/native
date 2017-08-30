@@ -126,7 +126,7 @@ int Date::getYear() {
 }
 
 long Date::getTime() {
-    return this->original;
+    return this->timer;
 }
 
 int Date::getTimezoneOffset() {
@@ -136,7 +136,7 @@ int Date::getTimezoneOffset() {
 }
 
 boolean Date::after(Date when) {
-    if (this->original > when.original) {
+    if (this->timer > when.timer) {
         return true;
     }
 
@@ -144,7 +144,7 @@ boolean Date::after(Date when) {
 }
 
 boolean Date::before(Date when) {
-    if (this->original < when.original) {
+    if (this->timer < when.timer) {
         return true;
     }
 
@@ -152,7 +152,7 @@ boolean Date::before(Date when) {
 }
 
 int Date::compareTo(Date anotherDate) {
-    long temp = this->original - anotherDate.original;
+    long temp = this->timer - anotherDate.timer;
 
     if (temp < 0) {
         return -1;
@@ -179,7 +179,7 @@ String Date::toString() {
     return result;
 }
 
-long Date::UTC(int year, int month, int date, int hrs, int min, int sec){
+long Date::UTC(int year, int month, int date, int hrs, int min, int sec) {
     Date tempDate = Date(year, month, date, hrs, min, sec);
     long result = getUTCTime(tempDate.getTime());
 
@@ -213,7 +213,7 @@ string Date::getZone() {
 String Date::toGMTString() {
     auto pattern = (string) "%a %b %d %T UTC %Y";
 
-    time_t utcTime = getUTCTime(this->original);
+    time_t utcTime = getUTCTime(this->timer);
     tm *utcTimer = localtime(&utcTime);
 
     string convertResult = this->timeToString(pattern, utcTimer);
@@ -221,4 +221,10 @@ String Date::toGMTString() {
     free(convertResult);
 
     return result;
+}
+
+int Date::hashCode() {
+    long thisTimer = this->getTime();
+
+    return (int) thisTimer ^ (int) (thisTimer >> 32);
 }
