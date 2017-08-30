@@ -1615,9 +1615,15 @@ TEST(JavaUtil, DateParse) {
     String actualFormat;
     long   actualTime;
     String actual;
+    String localZone;
 
     String zone = actualDate.getZone();
-    String localZone = "LMT";
+    if (actualDate.getTimezoneOffset() == 0) {
+        localZone = "UTC";
+    } else {
+        localZone = "LMT";
+    }
+
 
     // Valid case
     expected     = "Thu Jan 09 12:35:34 " + zone + " 2014";
