@@ -1037,8 +1037,8 @@ TEST(JavaUtil, DateCompareTo) {
 
 TEST(JavaUtil, DateHashCode) {
     Date date = Date(2017, 02, 14, 8, 01, 13);
-    int expected = 1489453273;
-    int actual = date.hashCode();
+    long expected = date.getTime();
+    long actual = date.hashCode();
     ASSERT_EQUAL(expected, actual);
 }
 
