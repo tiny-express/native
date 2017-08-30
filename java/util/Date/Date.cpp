@@ -223,8 +223,6 @@ String Date::toGMTString() {
     return result;
 }
 
-int Date::hashCode() {
-    long thisTimer = this->getTime();
-
-    return (int) thisTimer ^ (int) (thisTimer >> 32);
+long Date::hashCode() {
+    return this->timer;
 }

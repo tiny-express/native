@@ -597,7 +597,7 @@ namespace Java {
              * Returns a hash code value for this object.
              * @return
              */
-            int	hashCode();
+            long hashCode();
 
             /**
              * Attempts to interpret the string s as a representation
