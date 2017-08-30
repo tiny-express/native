@@ -52,17 +52,14 @@ Date::Date(long date) {
     initialize(timer);
 }
 
-// TODO(thoangminh): Check this method later
-//Date::Date(String s) {
-//	this->refreshFlag = false;
-//	this->original = Date::parse(s);
-//	Date::updateLocalTimer();
-//}
+Date::Date(String inputString, String pattern) {
+    time_t timer = Date::parse(inputString, pattern.toString());
+    initialize(timer);
+}
 
 Date::~Date() {
 }
 
-// TODO(thoangminh): Need to check all methods below
 void Date::setDate(int date) {
     this->localTimer->tm_mday = date;
     update();
@@ -169,13 +166,13 @@ int Date::compareTo(Date anotherDate) {
 }
 
 String Date::toString() {
-    auto format = (string) "%a %b %d %T %Z %Y";
+    auto pattern = (string) "%a %b %d %T %Z %Y";
 
     if (this->getTimezoneOffset() == 0) {
-        format = (string) "%a %b %d %T UTC %Y";
+        pattern = (string) "%a %b %d %T UTC %Y";
     }
 
-    string convertResult = this->timeToString(format, this->localTimer);
+    string convertResult = this->timeToString(pattern, this->localTimer);
     String result = convertResult;
     free(convertResult);
 
@@ -195,17 +192,17 @@ Date Date::clone() {
 }
 
 String Date::toLocaleString() {
-    auto format = (string) "%b %d, %Y %I:%M:%S %p";
-    string convertResult = this->timeToString(format, this->localTimer);
+    auto pattern = (string) "%b %d, %Y %I:%M:%S %p";
+    string convertResult = this->timeToString(pattern, this->localTimer);
     String result = convertResult;
     free(convertResult);
 
     return result;
 }
 
-long Date::parse(String inputString, string format) {
+long Date::parse(String inputString, string pattern) {
     tm localTimer = {};
-    strptime(inputString.toString(), format, &localTimer);
+    strptime(inputString.toString(), pattern, &localTimer);
     return mktime(&localTimer);
 }
 
@@ -214,12 +211,12 @@ string Date::getZone() {
 }
 
 String Date::toGMTString() {
-    auto format = (string) "%a %b %d %T UTC %Y";
+    auto pattern = (string) "%a %b %d %T UTC %Y";
 
     time_t utcTime = getUTCTime(this->original);
     tm *utcTimer = localtime(&utcTime);
 
-    string convertResult = this->timeToString(format, utcTimer);
+    string convertResult = this->timeToString(pattern, utcTimer);
     String result = convertResult;
     free(convertResult);
 

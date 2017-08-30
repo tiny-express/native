@@ -172,10 +172,10 @@ namespace Java {
              * @param timePresenter
              * @return String
              */
-            string timeToString(string format, tm *timeManagement) {
+            string timeToString(string pattern, tm *timeManagement) {
                 size_t size = 100;
                 auto result = static_cast<string> (malloc(size * sizeof(char)));
-                strftime(result, size, format, timeManagement);
+                strftime(result, size, pattern, timeManagement);
 
                 return result;
             }
@@ -195,7 +195,7 @@ namespace Java {
             /**
              * Auto parse String to time
              *
-             * @param s String format of Date
+             * @param s String pattern of Date
              * @return timer from String
              */
 //                    static long parseStringToTime(String s) {
@@ -455,10 +455,11 @@ namespace Java {
              * Deprecated.
              * As of JDK version 1.1, replaced by DateFormat.parse(String s).
              *
-             * @param s
+             * @param inputString
+             * @param pattern
              * @return
              */
-            Date(String s);
+            Date(String inputString, String pattern);
 
             /**
              *  Destructor
@@ -661,7 +662,7 @@ namespace Java {
              * @deprecated As of JDK version 1.1,
              * replaced by DateFormat.parse(String s).
              */
-            static long parse(String inputString, string format);
+            static long parse(String inputString, string pattern);
 
             /**
              * Deprecated.
