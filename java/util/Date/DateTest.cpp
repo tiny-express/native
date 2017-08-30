@@ -713,32 +713,32 @@ TEST(JavaUtil, DateGetDay) {
     // Create variable to test
     Date date;
 
-    // Test Sunday - value 0
-    date = Date(2017, 8, 13, 8, 01, 13);
+    // Test Sun - value 0
+    date = Date(2017, 8, 17, 8, 01, 13);
     ASSERT_EQUAL(0, date.getDay());
 
-    // Test Monday - value 1
-    date = Date(2017, 8, 14, 8, 01, 13);
+    // Test Mon - value 1
+    date = Date(2017, 8, 18, 8, 01, 13);
     ASSERT_EQUAL(1, date.getDay());
 
-    // Test Tuesday - value 2
-    date = Date(2017, 8, 15, 8, 01, 13);
+    // Test Tue - value 2
+    date = Date(2017, 8, 19, 8, 01, 13);
     ASSERT_EQUAL(2, date.getDay());
 
-    // Test Wednesday - value 3
-    date = Date(2017, 8, 16, 8, 01, 13);
+    // Test Wed - value 3
+    date = Date(2017, 8, 13, 8, 01, 13);
     ASSERT_EQUAL(3, date.getDay());
 
-    // Test Thursday - value 4
-    date = Date(2017, 8, 17, 8, 01, 13);
+    // Test Thu - value 4
+    date = Date(2017, 8, 14, 8, 01, 13);
     ASSERT_EQUAL(4, date.getDay());
 
-    // Test Friday - value 5
-    date = Date(2017, 8, 18, 8, 01, 13);
+    // Test Fri - value 5
+    date = Date(2017, 8, 15, 8, 01, 13);
     ASSERT_EQUAL(5, date.getDay());
 
-    // Test Saturday - value 6
-    date = Date(2017, 8, 19, 8, 01, 13);
+    // Test Sar - value 6
+    date = Date(2017, 8, 16, 8, 01, 13);
     ASSERT_EQUAL(6, date.getDay());
 }
 
@@ -1080,7 +1080,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1106,7 +1105,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(3000, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(3000, 2, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1118,7 +1116,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(1889, 2, 13, 10, 01, 13);
     timeActual 	= Date::UTC(1889, 2, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1131,7 +1128,6 @@ TEST(JavaUtil, DateUTC) {
 //    expected 	= Date(-1, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(-1, 2, 13, 10, 01, 13);
 //    actual = Date(timeActual);
-//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1144,7 +1140,6 @@ TEST(JavaUtil, DateUTC) {
 //    expected 	= Date(-900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(-900, 2, 13, 10, 01, 13);
 //    actual = Date(timeActual);
-//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1157,7 +1152,6 @@ TEST(JavaUtil, DateUTC) {
 //    expected 	= Date(1900, 2, 13, 10, 01, 13);
 //    timeActual 	= Date::UTC(1900, 2, 13, 10, 01, 13);
 //    actual = Date(timeActual);
-//    actual.setUTC(true);
 //    ASSERT_EQUAL(expected.getYear(), actual.getYear());
 //    ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
 //    ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1169,7 +1163,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2018, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 12, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1181,7 +1174,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2019, 9, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 33, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1193,7 +1185,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 0, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1205,7 +1196,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2016, 11, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -1, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1217,7 +1207,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2016, 0, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -12, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1229,7 +1218,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2014, 3, 13, 10, 01, 13);
     timeActual 	= Date::UTC(2017, -33, 13, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1241,7 +1229,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 30, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 3, -1, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1253,7 +1240,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 3, 16, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 6, -75, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1265,7 +1251,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 31, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 3, 0, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1277,7 +1262,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 1, 28, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 0, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1289,7 +1273,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 6, 2, 10, 01, 13);
     timeActual 	= Date::UTC(2017, 5, 32, 10, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1301,7 +1284,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 12, 23, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, -1, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1312,7 +1294,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 0, 01, 13);
     timeActual  = Date::UTC(2017, 2, 13, 0, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1328,7 +1309,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 14, 0, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 24, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1344,7 +1324,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 15, 1, 01, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 49, 01, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
 
     timeChange = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(timeChange);
@@ -1360,7 +1339,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 9, 59, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, -1, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1372,7 +1350,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 0, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 0, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1384,7 +1361,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 11, 00, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 60, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1396,7 +1372,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 12, 30, 13);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 150, 13);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1408,7 +1383,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 00, 59);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, -1);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1420,7 +1394,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 01, 0);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 0);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1432,7 +1405,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 02, 00);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 60);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1444,7 +1416,6 @@ TEST(JavaUtil, DateUTC) {
     expected 	= Date(2017, 2, 13, 10, 03, 30);
     timeActual 	= Date::UTC(2017, 2, 13, 10, 01, 150);
     actual = Date(timeActual);
-    actual.setUTC(true);
     ASSERT_EQUAL(expected.getYear(), actual.getYear());
     ASSERT_EQUAL(expected.getMonth(), actual.getMonth());
     ASSERT_EQUAL(expected.getDate(), actual.getDate());
@@ -1767,5 +1738,11 @@ TEST(JavaUtil, DateParse) {
     actualFormat = "%a %b %d %H:%M:%S " + zone + " %Y";
     actualTime = Date::parse(actualString, actualFormat.toString());
     actual = Date(actualTime).toString();
+    ASSERT_STR(expected.toString(), actual.toString());
+}
+
+TEST(JavaUtil, DateToGMTString) {
+    String expected = "Mon Mar 13 03:01:13 UTC 2017";
+    String actual = Date(2017, 2, 13, 10, 01, 13).toGMTString();
     ASSERT_STR(expected.toString(), actual.toString());
 }

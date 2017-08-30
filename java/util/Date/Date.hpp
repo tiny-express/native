@@ -105,11 +105,6 @@ namespace Java {
              */
             int defaultCenturyStart;
 
-            /**
-             * Return the timezone is UTC or not
-             */
-            static boolean isUTC;
-
             void update() {
                 // Update changes
                 this->original = mktime(this->localTimer);
@@ -157,8 +152,6 @@ namespace Java {
 
                 this->localTimer = localtime(&this->original);
 
-                setUTC(false);
-
                 update();
             }
 
@@ -170,12 +163,6 @@ namespace Java {
             void initialize(time_t timer) {
                 this->original = timer;
                 this->localTimer = localtime(&this->original);
-
-                if (this->original == getUTCTime(this->original)) {
-                    setUTC(true);
-                } else {
-                    setUTC(false);
-                }
 
                 update();
             }
@@ -738,11 +725,6 @@ namespace Java {
              * @param year
              */
             void setYear(int year);
-
-            /**
-             * Set current timezone is UTC or not
-             */
-            void setUTC(boolean isUTC);
 
             /**
              * Deprecated.

@@ -106,16 +106,6 @@ int Date::getDate() {
 int Date::getDay() {
     int result = this->wday;
 
-    switch (result) {
-        case 0: return 4;
-        case 1: return 5;
-        case 2: return 6;
-        case 3: return 0;
-        case 4: return 1;
-        case 5: return 2;
-        case 6: return 3;
-    }
-
     return result;
 }
 
@@ -179,24 +169,10 @@ int Date::compareTo(Date anotherDate) {
     return 0;
 }
 
-//String Date::toGMTString() {
-//	if (this->refreshFlag) {
-//		initialize(time(nullptr));
-//	}
-//
-//	tm *gmTimer = gmtime(&this->original);
-//
-//	string timeString = this->toString0(gmTimer);
-//	String result = timeString;
-//
-//	free(timeString);
-//	return result;
-//}
-
 String Date::toString() {
     auto format = (string) "%a %b %d %T %Z %Y";
 
-    if (Date::isUTC) {
+    if (this->getTimezoneOffset() == 0) {
         format = (string) "%a %b %d %T UTC %Y";
     }
 
@@ -209,8 +185,6 @@ String Date::toString() {
 
 long Date::UTC(int year, int month, int date, int hrs, int min, int sec){
     Date tempDate = Date(year, month, date, hrs, min, sec);
-//    long result = tempDate.getTime() + tempDate.getTimezoneOffset() * 60;
-
     long result = getUTCTime(tempDate.getTime());
 
     return result;
@@ -240,7 +214,15 @@ string Date::getZone() {
     return (string) this->zone;
 }
 
-boolean Date::isUTC = false;
-void Date::setUTC(boolean isUTC) {
-    this->isUTC = isUTC;
+String Date::toGMTString() {
+    auto format = (string) "%a %b %d %T UTC %Y";
+
+    time_t utcTime = getUTCTime(this->original);
+    tm *utcTimer = localtime(&utcTime);
+
+    string convertResult = this->timeToString(format, utcTimer);
+    String result = convertResult;
+    free(convertResult);
+
+    return result;
 }
