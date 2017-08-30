@@ -24,7 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <chrono>
 #include "Date.hpp"
 
 /**
@@ -205,7 +204,7 @@ String Date::toLocaleString() {
 }
 
 long Date::parse(String inputString, string format) {
-    std::tm localTimer = {};
+    tm localTimer = {};
     strptime(inputString.toString(), format, &localTimer);
     return mktime(&localTimer);
 }
