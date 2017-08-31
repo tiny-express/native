@@ -166,7 +166,8 @@ int Date::compareTo(Date anotherDate) {
 }
 
 String Date::toString() {
-    auto pattern = (string) "%a %b %d %T %Z %Y";
+    String zone = this->zone;
+    String pattern;
 
 #ifdef __unix__
     if (this->getTimezoneOffset() == 0) {
@@ -178,9 +179,15 @@ String Date::toString() {
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T GMT %Y";
     }
+
+    if (zone == "UTC") {
+        zone = "GMT";
+    }
 #endif
 
-    string convertResult = this->timeToString(pattern, this->localTimer);
+    pattern = (string) "%a %b %d %T %Z %Y";
+    string convertResult = this->timeToString(pattern.toString(),
+                                              this->localTimer);
     String result = convertResult;
     free(convertResult);
 
