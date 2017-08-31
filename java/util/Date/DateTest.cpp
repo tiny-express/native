@@ -92,21 +92,21 @@ TEST(JavaUtil, DateConstructor) {
     String localZone;
 
     String zone = actualDate.getZone();
-#ifdef __unix__
-    if (actualDate.getTimezoneOffset() == 0) {
-        localZone = "UTC";
-    } else {
-        localZone = "LMT";
-    }
-#endif
-
-#if (defined(_WIN32) || defined(WIN32))
+//#ifdef __unix__
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
     }
-#endif
+//#endif
+
+//#if (defined(_WIN32) || defined(WIN32))
+//    if (actualDate.getTimezoneOffset() == 0) {
+//        localZone = "GMT";
+//    } else {
+//        localZone = "LMT";
+//    }
+//#endif
 
     // Valid case
     expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
@@ -1778,23 +1778,23 @@ TEST(JavaUtil, DateParse) {
     String localZone;
     String zone;
 
-#ifdef __unix__
-    zone = actualDate.getZone();
-    if (actualDate.getTimezoneOffset() == 0) {
-        localZone = "UTC";
-    } else {
-        localZone = "LMT";
-    }
-#endif
-
-#if (defined(_WIN32) || defined(WIN32))
+//#ifdef __unix__
     zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
     }
-#endif
+//#endif
+
+//#if (defined(_WIN32) || defined(WIN32))
+//    zone = actualDate.getZone();
+//    if (actualDate.getTimezoneOffset() == 0) {
+//        localZone = "GMT";
+//    } else {
+//        localZone = "LMT";
+//    }
+//#endif
 
     // Valid case
     expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
@@ -1944,7 +1944,7 @@ TEST(JavaUtil, DateParse) {
 TEST(JavaUtil, DateToGMTString) {
     Date expectedDate = Date(2017, 2, 13, 10, 01, 13);
     String actualString = expectedDate.toGMTString();
-    String actualFormat = "%a %b %d %T UTC %Y";
+    String actualFormat = "%a %b %d %T GMT %Y";
     long actualTime = Date::parse(actualString, actualFormat.toString());
     Date actualDate = Date(actualTime);
 
