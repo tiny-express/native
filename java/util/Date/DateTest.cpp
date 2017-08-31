@@ -107,7 +107,7 @@ TEST(JavaUtil, DateConstructor) {
     }
 
     // Valid case
-    expected     = "Thu Jan 09 12:35:34 " + zone + " 2014";
+    expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
     actualString = "Thu Jan 9 and 2014 12:35:34";
     actualFormat = "%a %b %d and %Y %H:%M:%S";
     actualDate = Date(actualString, actualFormat);
@@ -115,7 +115,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Short date pattern. (en-US)
-    expected     = "Mon Feb 13 00:00:00 " + zone + " 2017";
+    expected     = "Mon Feb 13 00:00:00 " + zone + (string) " 2017";
     actualString = "02/13/2017";
     actualFormat = "%m/%d/%Y";
     actualDate = Date(actualString, actualFormat);
@@ -123,7 +123,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Long date pattern. (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009";
     actualFormat = "%A, %B %d, %Y";
     actualDate = Date(actualString, actualFormat);
@@ -131,7 +131,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Full date/time pattern (short time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 1:45 PM";
     actualFormat = "%A, %B %d, %Y %h:%m %p";
     actualDate = Date(actualString, actualFormat);
@@ -139,7 +139,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Full date/time pattern (long time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
     actualFormat = "%A, %B %d, %Y %h:%m:%s %p";
     actualDate = Date(actualString, actualFormat);
@@ -147,7 +147,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // General date/time pattern (short time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "6/15/2009 1:45 PM";
     actualFormat = "%m/%d/%Y %h:%m %p";
     actualDate = Date(actualString, actualFormat);
@@ -155,7 +155,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // General date/time pattern (long time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "6/15/2009 1:45:30 PM";
     actualFormat = "%m/%d/%Y %h:%m:%s %p";
     actualDate = Date(actualString, actualFormat);
@@ -163,7 +163,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Month/day pattern.(en-US)
-    expected     = "Fri Jun 15 00:00:00 " + localZone + " 1900";
+    expected     = "Fri Jun 15 00:00:00 " + localZone + (string) " 1900";
     actualString = "June 15";
     actualFormat = "%B %d";
     actualDate = Date(actualString, actualFormat);
@@ -171,7 +171,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Round-trip date/time pattern. (DateTimeKind.Local)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30.0000000-07:00";
     actualFormat = "%Y-%m-%dT%h:%m:%s-%Z";
     actualDate = Date(actualString, actualFormat);
@@ -179,7 +179,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Round-trip date/time pattern. (DateTimeKind.Utc)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30.0000000Z";
     actualFormat = "%Y-%m-%dT%h:%m:%s%Z";
     actualDate = Date(actualString, actualFormat);
@@ -187,7 +187,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // RFC1123 pattern.
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Mon, 15 Jun 2009 20:45:30 GMT";
     actualFormat = "%A, %d %B %Y %h:%m:%s %Z";
     actualDate = Date(actualString, actualFormat);
@@ -195,7 +195,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Sortable date/time pattern. (DateTimeKind.Local)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30";
     actualFormat = "%Y-%m-%dT%h:%m:%s";
     actualDate = Date(actualString, actualFormat);
@@ -203,7 +203,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Short time pattern. (en-US)
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
     actualString = "1:45 PM";
     actualFormat = "%h:%m %p";
     actualDate = Date(actualString, actualFormat);
@@ -211,7 +211,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Long time pattern. (en-US)
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
     actualString = "1:45:30 PM";
     actualFormat = "%h:%m:%s %p";
     actualDate = Date(actualString, actualFormat);
@@ -219,7 +219,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Universal sortable date/time pattern. With a DateTime value:
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15 13:45:30Z";
     actualFormat = "%Y-%m-%d %h:%m:%s%p";
     actualDate = Date(actualString, actualFormat);
@@ -227,7 +227,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Universal full date/time pattern. (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 8:45:30 PM";
     actualFormat = "%A, %B %d, %Y %h:%m%:%s %p";
     actualDate = Date(actualString, actualFormat);
@@ -235,7 +235,7 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Year month pattern. (en-US)
-    expected     = "Sun May 31 00:00:00 " + zone + " 2009";
+    expected     = "Sun May 31 00:00:00 " + zone + (string) " 2009";
     actualString = "June, 2009";
     actualFormat = "%B, %Y";
     actualDate = Date(actualString, actualFormat);
@@ -243,9 +243,9 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 12. Invalid case => Sun Dec 31 00:00:00 LMT 1899
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
-    actualString = "Sat 12 13 10:01:13 " + zone + " 2017";
-    actualFormat = "%a %b %d %H:%M:%S " + zone + " %Y";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
+    actualString = "Sat 12 13 10:01:13 " + zone + (string) " 2017";
+    actualFormat = "%a %b %d %H:%M:%S " + zone + (string) (string) " %Y";
     actualDate = Date(actualString, actualFormat);
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
@@ -1643,146 +1643,146 @@ TEST(JavaUtil, DateToString) {
 
     // Valid case
     actualDate = Date(117, 2, 13, 10, 01, 13);
-    expected = "Mon Mar 13 10:01:13 " + zone + " 2017";
+    expected = "Mon Mar 13 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
 
     // Set month = 12 => Year+= 1 , month = 0.
     actualDate = Date(117, 12, 13, 10, 01, 13);
-    expected = "Sat Jan 13 10:01:13 " + zone + " 2018";
+    expected = "Sat Jan 13 10:01:13 " + zone + (string) " 2018";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 33 => Year+= 2, month = 9.
     actualDate = Date(117, 33, 13, 10, 01, 13);
-    expected = "Sun Oct 13 10:01:13 " + zone + " 2019";
+    expected = "Sun Oct 13 10:01:13 " + zone + (string) " 2019";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 0
     actualDate = Date(117, 0, 13, 10, 01, 13);
-    expected = "Fri Jan 13 10:01:13 " + zone + " 2017";
+    expected = "Fri Jan 13 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = -1 => Year-= 1, month = 11.
     actualDate = Date(117, -1, 13, 10, 01, 13);
-    expected = "Tue Dec 13 10:01:13 " + zone + " 2016";
+    expected = "Tue Dec 13 10:01:13 " + zone + (string) " 2016";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = -12 => Year-= 1, month = 0.
     actualDate = Date(117, -12, 13, 10, 01, 13);
-    expected = "Wed Jan 13 10:01:13 " + zone + " 2016";
+    expected = "Wed Jan 13 10:01:13 " + zone + (string) " 2016";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = -33 => Year-= 3, month = 3.
     actualDate = Date(117, -33, 13, 10, 01, 13);
-    expected = "Sun Apr 13 10:01:13 " + zone + " 2014";
+    expected = "Sun Apr 13 10:01:13 " + zone + (string) " 2014";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 3, date = -1 => month = 2, date = 30
     actualDate = Date(117, 3, -1, 10, 01, 13);
-    expected = "Thu Mar 30 10:01:13 " + zone + " 2017";
+    expected = "Thu Mar 30 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 6, date = -75 => month = 3, date = 16
     actualDate = Date(117, 6, -75, 10, 01, 13);
-    expected = "Sun Apr 16 10:01:13 " + zone + " 2017";
+    expected = "Sun Apr 16 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 3, date = 0 => month = 2, date = 31
     actualDate = Date(117, 3, 0, 10, 01, 13);
-    expected = "Fri Mar 31 10:01:13 " + zone + " 2017";
+    expected = "Fri Mar 31 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 2, date = 0 => month = 1, date = 28
     actualDate = Date(117, 2, 0, 10, 01, 13);
-    expected = "Tue Feb 28 10:01:13 " + zone + " 2017";
+    expected = "Tue Feb 28 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 5, date = 32 => month = 6, date = 2
     actualDate = Date(117, 5, 32, 10, 01, 13);
-    expected = "Sun Jul 02 10:01:13 " + zone + " 2017";
+    expected = "Sun Jul 02 10:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set hour = -1 => day -= 1, hour = 11 PM
     actualDate = Date(117, 2, 13, -1, 01, 13);
-    expected = "Sun Mar 12 23:01:13 " + zone + " 2017";
+    expected = "Sun Mar 12 23:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set hour = 0
     actualDate = Date(117, 2, 13, 0, 01, 13);
-    expected = "Mon Mar 13 00:01:13 " + zone + " 2017";
+    expected = "Mon Mar 13 00:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set hour = 24. Day += 1, hour = 0
     actualDate = Date(117, 2, 13, 24, 01, 13);
-    expected = "Tue Mar 14 00:01:13 " + zone + " 2017";
+    expected = "Tue Mar 14 00:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set hour = 49. Day += 2, hour = 1
     actualDate = Date(117, 2, 13, 49, 01, 13);
-    expected = "Wed Mar 15 01:01:13 " + zone + " 2017";
+    expected = "Wed Mar 15 01:01:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set minute = -1 => hour -= 1, minute = 59
     actualDate = Date(117, 2, 13, 10, -1, 13);
-    expected = "Mon Mar 13 09:59:13 " + zone + " 2017";
+    expected = "Mon Mar 13 09:59:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set minute = 0
     actualDate = Date(117, 2, 13, 10, 0, 13);
-    expected = "Mon Mar 13 10:00:13 " + zone + " 2017";
+    expected = "Mon Mar 13 10:00:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set minute = 60 => hour += 1, minute = 0
     actualDate = Date(117, 2, 13, 10, 60, 13);
-    expected = "Mon Mar 13 11:00:13 " + zone + " 2017";
+    expected = "Mon Mar 13 11:00:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set minute = 150 => hour += 2, minute = 30
     actualDate = Date(117, 2, 13, 10, 150, 13);
-    expected = "Mon Mar 13 12:30:13 " + zone + " 2017";
+    expected = "Mon Mar 13 12:30:13 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set second = -1 => minute -= 1, second = 59
     actualDate = Date(117, 2, 13, 10, 01, -1);
-    expected = "Mon Mar 13 10:00:59 " + zone + " 2017";
+    expected = "Mon Mar 13 10:00:59 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set minute = 0
     actualDate = Date(117, 2, 13, 10, 01, 0);
-    expected = "Mon Mar 13 10:01:00 " + zone + " 2017";
+    expected = "Mon Mar 13 10:01:00 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set second = 60 => minute += 1, second = 0
     actualDate = Date(117, 2, 13, 10, 01, 60);
-    expected = "Mon Mar 13 10:02:00 " + zone + " 2017";
+    expected = "Mon Mar 13 10:02:00 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set second = 150 => minute += 2, second = 30
     actualDate = Date(117, 2, 13, 10, 01, 150);
-    expected = "Mon Mar 13 10:03:30 " + zone + " 2017";
+    expected = "Mon Mar 13 10:03:30 " + zone + (string) " 2017";
     actual = actualDate.toString();
     ASSERT_STR(expected.toString(), actual.toString());
 }
@@ -1797,16 +1797,26 @@ TEST(JavaUtil, DateParse) {
     long   actualTime;
     String actual;
     String localZone;
+    String zone;
 
-    String zone = actualDate.getZone();
+#ifdef __linux__
+    zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "UTC";
     } else {
         localZone = "LMT";
     }
+#endif
+
+    zone = actualDate.getZone();
+    if (actualDate.getTimezoneOffset() == 0) {
+        localZone = "GMT";
+    } else {
+        localZone = "LMT";
+    }
 
     // Valid case
-    expected     = "Thu Jan 09 12:35:34 " + zone + " 2014";
+    expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
     actualString = "Thu Jan 9 and 2014 12:35:34";
     actualFormat = "%a %b %d and %Y %H:%M:%S";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1814,7 +1824,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Short date pattern. (en-US)
-    expected     = "Mon Feb 13 00:00:00 " + zone + " 2017";
+    expected     = "Mon Feb 13 00:00:00 " + zone + (string) " 2017";
     actualString = "02/13/2017";
     actualFormat = "%m/%d/%Y";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1822,7 +1832,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Long date pattern. (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009";
     actualFormat = "%A, %B %d, %Y";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1830,7 +1840,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Full date/time pattern (short time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 1:45 PM";
     actualFormat = "%A, %B %d, %Y %h:%m %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1838,7 +1848,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Full date/time pattern (long time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
     actualFormat = "%A, %B %d, %Y %h:%m:%s %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1846,7 +1856,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // General date/time pattern (short time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "6/15/2009 1:45 PM";
     actualFormat = "%m/%d/%Y %h:%m %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1854,7 +1864,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // General date/time pattern (long time). (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "6/15/2009 1:45:30 PM";
     actualFormat = "%m/%d/%Y %h:%m:%s %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1862,7 +1872,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Month/day pattern.(en-US)
-    expected     = "Fri Jun 15 00:00:00 " + localZone + " 1900";
+    expected     = "Fri Jun 15 00:00:00 " + localZone + (string) " 1900";
     actualString = "June 15";
     actualFormat = "%B %d";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1870,7 +1880,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Round-trip date/time pattern. (DateTimeKind.Local)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30.0000000-07:00";
     actualFormat = "%Y-%m-%dT%h:%m:%s-%Z";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1878,7 +1888,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Round-trip date/time pattern. (DateTimeKind.Utc)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30.0000000Z";
     actualFormat = "%Y-%m-%dT%h:%m:%s%Z";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1886,7 +1896,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // RFC1123 pattern.
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Mon, 15 Jun 2009 20:45:30 GMT";
     actualFormat = "%A, %d %B %Y %h:%m:%s %Z";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1894,7 +1904,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Sortable date/time pattern. (DateTimeKind.Local)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30";
     actualFormat = "%Y-%m-%dT%h:%m:%s";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1902,7 +1912,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Short time pattern. (en-US)
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string)" 1899";
     actualString = "1:45 PM";
     actualFormat = "%h:%m %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1910,7 +1920,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Long time pattern. (en-US)
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
     actualString = "1:45:30 PM";
     actualFormat = "%h:%m:%s %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1918,7 +1928,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Universal sortable date/time pattern. With a DateTime value:
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "2009-06-15 13:45:30Z";
     actualFormat = "%Y-%m-%d %h:%m:%s%p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1926,7 +1936,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Universal full date/time pattern. (en-US)
-    expected     = "Mon Jun 15 00:00:00 " + zone + " 2009";
+    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
     actualString = "Monday, June 15, 2009 8:45:30 PM";
     actualFormat = "%A, %B %d, %Y %h:%m%:%s %p";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1934,7 +1944,7 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Year month pattern. (en-US)
-    expected     = "Sun May 31 00:00:00 " + zone + " 2009";
+    expected     = "Sun May 31 00:00:00 " + zone + (string) " 2009";
     actualString = "June, 2009";
     actualFormat = "%B, %Y";
     actualTime = Date::parse(actualString, actualFormat.toString());
@@ -1942,9 +1952,9 @@ TEST(JavaUtil, DateParse) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Set month = 12. Invalid case => Sun Dec 31 00:00:00 LMT 1899
-    expected     = "Sun Dec 31 00:00:00 " + localZone + " 1899";
-    actualString = "Sat 12 13 10:01:13 " + zone + " 2017";
-    actualFormat = "%a %b %d %H:%M:%S " + zone + " %Y";
+    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
+    actualString = "Sat 12 13 10:01:13 " + zone + (string) " 2017";
+    actualFormat = "%a %b %d %H:%M:%S " + zone + (string) " %Y";
     actualTime = Date::parse(actualString, actualFormat.toString());
     actual = Date(actualTime).toString();
     ASSERT_STR(expected.toString(), actual.toString());
