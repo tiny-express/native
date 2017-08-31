@@ -168,15 +168,17 @@ int Date::compareTo(Date anotherDate) {
 String Date::toString() {
     auto pattern = (string) "%a %b %d %T %Z %Y";
 
-#ifdef __linux__
+#ifdef __unix__
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T UTC %Y";
     }
 #endif
 
+#if defined(_WIN32) || defined(WIN32)
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T GMT %Y";
     }
+#endif
 
     string convertResult = this->timeToString(pattern, this->localTimer);
     String result = convertResult;
@@ -217,7 +219,15 @@ string Date::getZone() {
 }
 
 String Date::toGMTString() {
-    auto pattern = (string) "%a %b %d %T UTC %Y";
+    string pattern;
+
+#ifdef __unix__
+    pattern = (string) "%a %b %d %T UTC %Y";
+#endif
+
+#if defined(_WIN32) || defined(WIN32)
+    pattern = (string) "%a %b %d %T GMT %Y";
+#endif
 
     time_t utcTime = getUTCTime(this->timer);
     tm *utcTimer = localtime(&utcTime);

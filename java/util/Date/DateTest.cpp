@@ -92,7 +92,7 @@ TEST(JavaUtil, DateConstructor) {
     String localZone;
 
     String zone = actualDate.getZone();
-#ifdef __linux__
+#ifdef __unix__
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "UTC";
     } else {
@@ -100,11 +100,13 @@ TEST(JavaUtil, DateConstructor) {
     }
 #endif
 
+#if defined(_WIN32) || defined(WIN32)
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
     }
+#endif
 
     // Valid case
     expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
@@ -774,7 +776,7 @@ TEST(JavaUtil, DateGetTime) {
     time_t now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
 
-#ifdef __linux__
+#ifdef __unix__
     // Test Date(int year, int month, int date)
     date = Date(2017, 02, 13);
     ASSERT_EQUAL(1489338000, date.getTime());
@@ -1799,7 +1801,7 @@ TEST(JavaUtil, DateParse) {
     String localZone;
     String zone;
 
-#ifdef __linux__
+#ifdef __unix__
     zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "UTC";
