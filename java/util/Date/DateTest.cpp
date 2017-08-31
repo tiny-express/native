@@ -772,32 +772,9 @@ TEST(JavaUtil, DateGetTime) {
     // Create variable to test
     Date date;
 
-    // Get the current local time
+    // Test the current local time
     time_t now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
-
-#ifdef __unix__
-    // Test Date(int year, int month, int date)
-    date = Date(2017, 02, 13);
-    ASSERT_EQUAL(1489338000, date.getTime());
-
-    // Test Date(int year, int month, int date, int hrs, int min)
-    date = Date(2017, 02, 13, 8, 01);
-    ASSERT_EQUAL(1489366860, date.getTime());
-
-    // Test Date(int year, int month, int date, int hrs, int min, int sec)
-    date = Date(2017, 02, 13, 8, 01, 13);
-    ASSERT_EQUAL(1489366873, date.getTime());
-
-    // Test Date(long date)
-    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
-    ASSERT_EQUAL(1410544873, date.getTime());
-
-    // Test Date sameDate = date;
-    date = Date(2017, 02, 13, 8, 01, 13);
-    Date sameDate = date;
-    ASSERT_EQUAL(1489366873, sameDate.getTime());
-#endif
 }
 
 TEST(JavaUtil, DateSetTime) {
@@ -1810,12 +1787,14 @@ TEST(JavaUtil, DateParse) {
     }
 #endif
 
+#if defined(_WIN32) || defined(WIN32)
     zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
     }
+#endif
 
     // Valid case
     expected     = "Thu Jan 09 12:35:34 " + zone + (string) " 2014";
