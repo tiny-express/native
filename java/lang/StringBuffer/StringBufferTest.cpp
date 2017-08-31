@@ -38,66 +38,66 @@ extern "C" {
 
 using namespace Java::Lang;
 
-TEST (JavaLang, StringBufferConstructor) {
-	// Init a StringBuffer with default constructor
-	StringBuffer defaultConstructor;
-	int expectCapacity = 16;
-	ASSERT_EQUAL(expectCapacity, defaultConstructor.capacity());
-	
-	// Init a StringBuffer with specific capacity;
-	StringBuffer capacityConstructor = StringBuffer(10);
-	int expectSpecificCapacity = 10;
-	ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
-	
-	// Init a StringBuffer with negative specific capacity;
-	try {
-		StringBuffer negativeCapacityConstructor = StringBuffer(-1);
-	}
-	catch (NegativeArraySizeException &e) {
-		ASSERT_STR("Capacity must be non-negative", e.getMessage().toString());
-	}
-	
-	// Init a StringBuffer with a charsequence
-	CharSequence *sequence = new String("A string to test");
-	StringBuffer charSequenceConstructor = StringBuffer(sequence);
-	int expectSequenceCapacity = sequence->length() + 16;
-	int expectSequenceLength = sequence->length();
-	string expectSequenceValue = sequence->toString();
-	ASSERT_EQUAL(expectSequenceCapacity, charSequenceConstructor.capacity());
-	ASSERT_EQUAL(expectSequenceLength, charSequenceConstructor.length());
-	ASSERT_STR(expectSequenceValue, charSequenceConstructor.getValue());
-	String *charSequenceString = dynamic_cast<String *>(sequence);
-	delete charSequenceString;
-	
-	// Init a StringBuffer with a charsequence
-	CharSequence *nullSequence = nullptr;
-	StringBuffer nullSequenceConstructor = StringBuffer(nullSequence);
-	int expectNullSequenceCapacity = 20;
-	int expectNullSequenceLength = 4;
-	string expectNullSequenceValue = (string) ( "null" );
-	ASSERT_EQUAL(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
-	ASSERT_EQUAL(expectNullSequenceLength, nullSequenceConstructor.length());
-	ASSERT_STR(expectNullSequenceValue, nullSequenceConstructor.getValue());
-	
-	// Init a StringBuffer with a String
-	String aString = "A string to test";
-	StringBuffer stringConstructor = StringBuffer(aString);
-	int expectStringCapacity = aString.length() + 16;
-	int expectStringLength = aString.length();
-	string expectStringValue = aString.toString();
-	ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
-	ASSERT_EQUAL(expectStringLength, stringConstructor.length());
-	ASSERT_STR(expectStringValue, stringConstructor.getValue());
-	
-	// Copy Constructor
-	StringBuffer other = StringBuffer("A string to test");
-	StringBuffer copyConstructor = StringBuffer(other);
-	ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
-	ASSERT_EQUAL(expectStringLength, stringConstructor.length());
-	ASSERT_STR(expectStringValue, stringConstructor.getValue());
+TEST(JavaLang, StringBufferConstructor) {
+    // Init a StringBuffer with default constructor
+    StringBuffer defaultConstructor;
+    int expectCapacity = 16;
+    ASSERT_EQUAL(expectCapacity, defaultConstructor.capacity());
+
+    // Init a StringBuffer with specific capacity;
+    StringBuffer capacityConstructor = StringBuffer(10);
+    int expectSpecificCapacity = 10;
+    ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
+
+    // Init a StringBuffer with negative specific capacity;
+    try {
+        StringBuffer negativeCapacityConstructor = StringBuffer(-1);
+    }
+    catch (NegativeArraySizeException &e) {
+        ASSERT_STR("Capacity must be non-negative", e.getMessage().toString());
+    }
+
+    // Init a StringBuffer with a charsequence
+    CharSequence *sequence = new String("A string to test");
+    StringBuffer charSequenceConstructor =  StringBuffer(*sequence);
+    int expectSequenceCapacity = sequence->length() + 16;
+    int expectSequenceLength = sequence->length();
+    string expectSequenceValue = sequence->toString();
+    ASSERT_EQUAL(expectSequenceCapacity, charSequenceConstructor.capacity());
+    ASSERT_EQUAL(expectSequenceLength, charSequenceConstructor.length());
+    ASSERT_STR(expectSequenceValue, charSequenceConstructor.getValue());
+    String *charSequenceString = dynamic_cast<String *>(sequence);
+    delete charSequenceString;
+
+    // Init a StringBuffer with a charsequence
+    CharSequence *nullSequence = nullptr;
+    StringBuffer nullSequenceConstructor = StringBuffer(*nullSequence);
+    int expectNullSequenceCapacity = 20;
+    int expectNullSequenceLength = 4;
+    string expectNullSequenceValue = (string)("null");
+    ASSERT_EQUAL(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
+    ASSERT_EQUAL(expectNullSequenceLength, nullSequenceConstructor.length());
+    ASSERT_STR(expectNullSequenceValue, nullSequenceConstructor.getValue());
+
+    // Init a StringBuffer with a String
+    String aString = "A string to test";
+    StringBuffer stringConstructor = StringBuffer(aString);
+    int expectStringCapacity = aString.length() + 16;
+    int expectStringLength = aString.length();
+    string expectStringValue = aString.toString();
+    ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
+    ASSERT_EQUAL(expectStringLength, stringConstructor.length());
+    ASSERT_STR(expectStringValue, stringConstructor.getValue());
+
+    // Copy Constructor
+    StringBuffer other = StringBuffer("A string to test");
+    StringBuffer copyConstructor = StringBuffer(other);
+    ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
+    ASSERT_EQUAL(expectStringLength, stringConstructor.length());
+    ASSERT_STR(expectStringValue, stringConstructor.getValue());
 }
 
-TEST (JavaLang, StringBufferOperater) {
+TEST(JavaLang, StringBufferOperater) {
 	StringBuffer other = StringBuffer("A string to test");
 	StringBuffer stringBuffer;
 	stringBuffer = other;
@@ -113,14 +113,14 @@ TEST (JavaLang, StringBufferOperater) {
 	ASSERT_STR(otherUnSafe.getValue(), stringBufferUnSafe.getValue());
 }
 
-TEST (JavaLang, StringBufferCapacity) {
+TEST(JavaLang, StringBufferCapacity) {
 	// Init a StringBuffer with specific capacity
 	StringBuffer stringBuffer = StringBuffer(16);
 	int expectCapacity = 16;
 	ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
 }
 
-TEST (JavaLang, StringBufferLength) {
+TEST(JavaLang, StringBufferLength) {
 	// Init a StringBuffer with a String
 	String aString = "A string to test";
 	StringBuffer stringConstructor = StringBuffer(aString);
@@ -128,7 +128,7 @@ TEST (JavaLang, StringBufferLength) {
 	ASSERT_EQUAL(expectLength, stringConstructor.length());
 }
 
-TEST (JavaLang, StringBufferGetValue) {
+TEST(JavaLang, StringBufferGetValue) {
 	// Init a StringBuffer with string
 	String aString = "A string to test";
 	StringBuffer stringBuffer = StringBuffer(aString);
@@ -136,7 +136,7 @@ TEST (JavaLang, StringBufferGetValue) {
 	ASSERT_STR(expectValue, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferAppendSubCharArray) {
+TEST(JavaLang, StringBufferAppendSubCharArray) {
 	StringBuffer stringAppend = StringBuffer("please");
 	
 	// Append "add more" to stringAppend
@@ -145,7 +145,7 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
 	string expectString = (string) ( "please add more" );
 	ASSERT_STR(expectString, stringAppend.getValue());
 	
-	// Test (offset + len) > stringBuffer.length()
+	// TEST(offset + len) > stringBuffer.length()
 	try {
 		stringAppend.append(stringToAppend, 20, 2);
 	}
@@ -170,152 +170,150 @@ TEST (JavaLang, StringBufferAppendSubCharArray) {
 	}
 }
 
-TEST (JavaLang, StringBufferAppend) {
-	// Test string
-	StringBuffer charArrayAppendStringBuffer = StringBuffer("please");
-	
-	string stringToAppend = (string) ( " add more" );
-	charArrayAppendStringBuffer.append(stringToAppend);
-	string expectString = (string) ( "please add more" );
-	ASSERT_STR(expectString, charArrayAppendStringBuffer.getValue());
-	
-	// Test String
-	StringBuffer stringAppendStringBuffer = StringBuffer("please");
-	String stringObjectToAppend = " add more";
-	stringAppendStringBuffer.append(stringObjectToAppend);
-	ASSERT_STR(expectString, stringAppendStringBuffer.getValue());
-	
-	// Test Object
-	StringBuffer objectAppendStringBuffer = StringBuffer();
-	
-	Object *objToAppend = new String("object");
-	objectAppendStringBuffer.append(objToAppend);
-	string objString = objToAppend->toString();
-	ASSERT_STR(objString, objectAppendStringBuffer.getValue());
-	String *objToAppendString = dynamic_cast<String *>(objToAppend);
-	delete objToAppendString;
-	
-	// Test Null object
-	StringBuffer nullObjectAppendStringBuffer = StringBuffer();
-	
-	Object *nullObjToAppend = nullptr;
-	nullObjectAppendStringBuffer.append(nullObjToAppend);
-	string nullObjString = (string) ( "null" );
-	ASSERT_STR(nullObjString, nullObjectAppendStringBuffer.getValue());
-	
-	// Test number
-	StringBuffer numberAppendStringBuffer = StringBuffer("100");
-	
-	// float
-	float floatToAppend = 9.0;
-	numberAppendStringBuffer.append(floatToAppend);
-	string expectFloatAppend = (string) ( "1009" );
-	ASSERT_STR(expectFloatAppend, numberAppendStringBuffer.getValue());
-	
-	// double
-	double doubleToAppend = 100.0;
-	numberAppendStringBuffer.append(doubleToAppend);
-	string expectDoubleAppend = (string) ( "1009100" );
-	ASSERT_STR(expectDoubleAppend, numberAppendStringBuffer.getValue());
-	
-	// int
-	int intToAppend = 9;
-	numberAppendStringBuffer.append(intToAppend);
-	string expectIntAppend = (string) ( "10091009" );
-	ASSERT_STR(expectIntAppend, numberAppendStringBuffer.getValue());
-	
-	// long
-	long longToAppend = 900L;
-	numberAppendStringBuffer.append(longToAppend);
-	string expectLongAppend = (string) ( "10091009900" );
-	ASSERT_STR(expectLongAppend, numberAppendStringBuffer.getValue());
-	
-	// Test boolean
-	StringBuffer boolAppendStringBuffer = StringBuffer("bool ");
-	
-	boolean boolToAppend = true;
-	boolAppendStringBuffer.append(boolToAppend);
-	string expectBoolAppend = (string) ( "bool true" );
-	ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
-	
-	boolAppendStringBuffer = StringBuffer("bool ");
-	
-	boolToAppend = false;
-	boolAppendStringBuffer.append(boolToAppend);
-	expectBoolAppend = (string) ( "bool false" );
-	ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
-	
-	// Test char
-	StringBuffer charAppendStringBuffer = StringBuffer("Character is : ");
-	
-	char charToAppend = 'A';
-	charAppendStringBuffer.append(charToAppend);
-	string expectCharAppend = (string) ( "Character is : A" );
-	ASSERT_STR(expectCharAppend, charAppendStringBuffer.getValue());
-	
-	// Test StringBuffer
-	StringBuffer stringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
-	
-	StringBuffer stringBufferToAppend = StringBuffer("not null");
-	stringBufferAppendStringBuffer.append(stringBufferToAppend);
-	string expectStringBufferAppend = (string) ( "StringBuffer is : not null" );
-	ASSERT_STR(expectStringBufferAppend, stringBufferAppendStringBuffer.getValue());
-	
-	// Test CharSequence
-	StringBuffer charSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
-	
-	CharSequence *charSequenceToAppend = new String("not null");
-	charSequenceAppendStringBuffer.append(charSequenceToAppend);
-	string expectCharSequenceAppend = (string) ( "CharSequence is : not null" );
-	ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-	
-	charSequenceAppendStringBuffer.append(charSequenceToAppend, 0, 3);
-	expectCharSequenceAppend = (string) ( "CharSequence is : not nullnot" );
-	ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-	
-	// Test start < 0
-	try {
-		charSequenceAppendStringBuffer.append(charSequenceToAppend, -1, 3);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test start > end
-	try {
-		charSequenceAppendStringBuffer.append(charSequenceToAppend, 3, 1);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test start > sequence length
-	try {
-		charSequenceAppendStringBuffer.append(charSequenceToAppend,
-		                                      charSequenceToAppend->length() + 1,
-		                                      charSequenceToAppend->length() + 2);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	String *charSequenceString = dynamic_cast<String *>(charSequenceToAppend);
-	delete charSequenceString;
-	// Test null CharSequence
-	StringBuffer nullCharSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
-	
-	CharSequence *nullCharSequenceToAppend = nullptr;
-	nullCharSequenceAppendStringBuffer.append(nullCharSequenceToAppend);
-	string expectNullCharSequenceAppend = (string) ( "CharSequence is : null" );
-	ASSERT_STR(expectNullCharSequenceAppend, nullCharSequenceAppendStringBuffer.getValue());
-	
-	
+TEST(JavaLang, StringBufferAppend) {
+    // Test string
+    StringBuffer charArrayAppendStringBuffer = StringBuffer("please");
+
+    string stringToAppend = (string)(" add more");
+    charArrayAppendStringBuffer.append(stringToAppend);
+    string expectString = (string)("please add more");
+    ASSERT_STR(expectString, charArrayAppendStringBuffer.getValue());
+
+    // Test String
+    StringBuffer stringAppendStringBuffer = StringBuffer("please");
+    String stringObjectToAppend = " add more";
+    stringAppendStringBuffer.append(stringObjectToAppend);
+    ASSERT_STR(expectString, stringAppendStringBuffer.getValue());
+
+    // Test Object
+    StringBuffer objectAppendStringBuffer = StringBuffer();
+
+    Object *objToAppend = new String("object");
+    objectAppendStringBuffer.append(*objToAppend);
+    string objString = objToAppend->toString();
+    ASSERT_STR(objString, objectAppendStringBuffer.getValue());
+    String *objToAppendString = dynamic_cast<String *>(objToAppend);
+    delete objToAppendString;
+
+    // Test Null object
+    StringBuffer nullObjectAppendStringBuffer = StringBuffer();
+
+    Object *nullObjToAppend = nullptr;
+    nullObjectAppendStringBuffer.append(*nullObjToAppend);
+    string nullObjString = (string)("null");
+    ASSERT_STR(nullObjString, nullObjectAppendStringBuffer.getValue());
+
+    // Test number
+    StringBuffer numberAppendStringBuffer = StringBuffer("100");
+
+    // float
+    float floatToAppend = 9.0;
+    numberAppendStringBuffer.append(floatToAppend);
+    string expectFloatAppend = (string)("1009");
+    ASSERT_STR(expectFloatAppend, numberAppendStringBuffer.getValue());
+
+    // double
+    double doubleToAppend = 100.0;
+    numberAppendStringBuffer.append(doubleToAppend);
+    string expectDoubleAppend = (string)("1009100");
+    ASSERT_STR(expectDoubleAppend, numberAppendStringBuffer.getValue());
+
+    // int
+    int intToAppend = 9;
+    numberAppendStringBuffer.append(intToAppend);
+    string expectIntAppend = (string)("10091009");
+    ASSERT_STR(expectIntAppend, numberAppendStringBuffer.getValue());
+
+    // long
+    long longToAppend = 900L;
+    numberAppendStringBuffer.append(longToAppend);
+    string expectLongAppend = (string)("10091009900");
+    ASSERT_STR(expectLongAppend, numberAppendStringBuffer.getValue());
+
+    // Test boolean
+    StringBuffer boolAppendStringBuffer = StringBuffer("bool ");
+
+    boolean boolToAppend = true;
+    boolAppendStringBuffer.append(boolToAppend);
+    string expectBoolAppend = (string)("bool true");
+    ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
+
+    boolAppendStringBuffer = StringBuffer("bool ");
+
+    boolToAppend = false;
+    boolAppendStringBuffer.append(boolToAppend);
+    expectBoolAppend = (string)("bool false");
+    ASSERT_STR(expectBoolAppend, boolAppendStringBuffer.getValue());
+
+    // Test char
+    StringBuffer charAppendStringBuffer = StringBuffer("Character is : ");
+
+    char charToAppend = 'A';
+    charAppendStringBuffer.append(charToAppend);
+    string expectCharAppend = (string)("Character is : A");
+    ASSERT_STR(expectCharAppend, charAppendStringBuffer.getValue());
+
+    // Test StringBuffer
+    StringBuffer stringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
+
+    StringBuffer stringBufferToAppend = StringBuffer("not null");
+    stringBufferAppendStringBuffer.append(stringBufferToAppend);
+    string expectStringBufferAppend = (string)("StringBuffer is : not null");
+    ASSERT_STR(expectStringBufferAppend, stringBufferAppendStringBuffer.getValue());
+
+    // Test CharSequence
+    StringBuffer charSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
+
+    CharSequence *charSequenceToAppend = new String("not null");
+    charSequenceAppendStringBuffer.append(*charSequenceToAppend);
+    string expectCharSequenceAppend = (string)("CharSequence is : not null");
+    ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+
+    charSequenceAppendStringBuffer.append(*charSequenceToAppend, 0, 3);
+    expectCharSequenceAppend = (string)("CharSequence is : not nullnot");
+    ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+
+    // Test start < 0
+    try {
+        charSequenceAppendStringBuffer.append(*charSequenceToAppend, -1, 3);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > end
+    try {
+        charSequenceAppendStringBuffer.append(*charSequenceToAppend, 3, 1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > sequence length
+    try {
+        charSequenceAppendStringBuffer.append(*charSequenceToAppend,
+                                              charSequenceToAppend->length() + 1,
+                                              charSequenceToAppend->length() + 2);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    String *charSequenceString = dynamic_cast<String *>(charSequenceToAppend);
+    delete charSequenceString;
+    // Test null CharSequence
+    StringBuffer nullCharSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
+
+    CharSequence *nullCharSequenceToAppend = nullptr;
+    nullCharSequenceAppendStringBuffer.append(*nullCharSequenceToAppend);
+    string expectNullCharSequenceAppend = (string)("CharSequence is : null");
+    ASSERT_STR(expectNullCharSequenceAppend, nullCharSequenceAppendStringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferInsertSubCharArray) {
+TEST(JavaLang, StringBufferInsertSubCharArray) {
 	// Given a StringBuffer
 	StringBuffer stringInsert = StringBuffer("please more");
 	
@@ -366,176 +364,176 @@ TEST (JavaLang, StringBufferInsertSubCharArray) {
 	}
 }
 
-TEST (JavaLang, StringBufferInsert) {
-	// Test string
-	StringBuffer charArrayInsertStringBuffer = StringBuffer("please more");
-	
-	string stringToInsert = (string) ( "add " );
-	charArrayInsertStringBuffer.insert(7, stringToInsert);
-	string expectString = (string) ( "please add more" );
-	ASSERT_STR(expectString, charArrayInsertStringBuffer.getValue());
-	
-	// Test String
-	StringBuffer stringInsertStringBuffer = StringBuffer("please more");
-	String stringObjectToInsert = "add ";
-	stringInsertStringBuffer.insert(7, stringObjectToInsert);
-	ASSERT_STR(expectString, stringInsertStringBuffer.getValue());
-	
-	// Test Object
-	StringBuffer objectInsertStringBuffer = StringBuffer("please more");
-	
-	Object *objToInsert = new String("add ");
-	objectInsertStringBuffer.insert(7, objToInsert);
-	ASSERT_STR(expectString, objectInsertStringBuffer.getValue());
-	String *objToInsertString = dynamic_cast<String *>(objToInsert);
-	delete objToInsertString;
-	
-	// Test Null object
-	StringBuffer nullObjectInsertStringBuffer = StringBuffer("this is  pointer");
-	
-	Object *nullObjToInsert = nullptr;
-	nullObjectInsertStringBuffer.insert(8, nullObjToInsert);
-	string expectInsertNullObject = (string) ( "this is null pointer" );
-	ASSERT_STR(expectInsertNullObject, nullObjectInsertStringBuffer.getValue());
-	
-	// Test number
-	StringBuffer numberInsertStringBuffer = StringBuffer("100");
-	
-	// float
-	float floatToInsert = 9.0;
-	numberInsertStringBuffer.insert(2, floatToInsert);
-	string expectFloatInsert = (string) ( "1090" );
-	ASSERT_STR(expectFloatInsert, numberInsertStringBuffer.getValue());
-	
-	// double
-	double doubleToInsert = 100.0;
-	numberInsertStringBuffer.insert(2, doubleToInsert);
-	string expectDoubleInsert = (string) ( "1010090" );
-	ASSERT_STR(expectDoubleInsert, numberInsertStringBuffer.getValue());
-	
-	// int
-	int intToInsert = 9;
-	numberInsertStringBuffer.insert(2, intToInsert);
-	string expectIntInsert = (string) ( "10910090" );
-	ASSERT_STR(expectIntInsert, numberInsertStringBuffer.getValue());
-	
-	// long
-	long longToInsert = 900L;
-	numberInsertStringBuffer.insert(2, longToInsert);
-	string expectLongInsert = (string) ( "10900910090" );
-	ASSERT_STR(expectLongInsert, numberInsertStringBuffer.getValue());
-	
-	// Test boolean
-	StringBuffer boolInsertStringBuffer = StringBuffer("bool  is good");
-	
-	boolean boolToInsert = true;
-	boolInsertStringBuffer.insert(5, boolToInsert);
-	string expectBoolInsert = (string) ( "bool true is good" );
-	ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
-	
-	boolInsertStringBuffer = StringBuffer("bool  is bad");
-	
-	boolToInsert = false;
-	boolInsertStringBuffer.insert(5, boolToInsert);
-	expectBoolInsert = (string) ( "bool false is bad" );
-	ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
-	
-	// Test char
-	StringBuffer charInsertStringBuffer = StringBuffer("Character  is uppercase");
-	
-	char charToInsert = 'A';
-	charInsertStringBuffer.insert(10, charToInsert);
-	string expectCharInsert = (string) ( "Character A is uppercase" );
-	ASSERT_STR(expectCharInsert, charInsertStringBuffer.getValue());
-	
-	// Test CharSequence
-	StringBuffer charSequenceInsertStringBuffer = StringBuffer("CharSequence is : null");
-	
-	CharSequence *charSequenceToInsert = new String(" not");
-	charSequenceInsertStringBuffer.insert(17, charSequenceToInsert);
-	string expectCharSequenceInsert = (string) ( "CharSequence is : not null" );
-	ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
-	
-	// Test negative offset
-	try {
-		charSequenceInsertStringBuffer.insert(-1, charSequenceToInsert);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("offset must be positive", e.getMessage().toString());
-	}
-	
-	// Test null CharSequence
-	StringBuffer nullCharSequenceInsertStringBuffer = StringBuffer("CharSequence is a  pointer");
-	
-	CharSequence *nullCharSequenceToInsert = nullptr;
-	nullCharSequenceInsertStringBuffer.insert(18, nullCharSequenceToInsert);
-	string expectNullCharSequenceInsert = (string) ( "CharSequence is a null pointer" );
-	ASSERT_STR(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
-	
-	// Test CharSequence
-	StringBuffer charSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is : null");
-	
-	charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, 4);
-	ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
-	
-	// Test negative destinationOffset
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(-1, charSequenceToInsert, 0, 4);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("offset must be positive", e.getMessage().toString());
-	}
-	
-	// Test destinationOffset > length
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(100, charSequenceToInsert, 0, 4);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test negative start
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, -1, 4);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test negative end
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, -1);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test start > end
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 5, 4);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test end > sequence length
-	try {
-		charSequenceInsertWithOffsetStringBuffer.insert(17, charSequenceToInsert, 0, 100);
-	}
-	catch (IndexOutOfBoundsException &e) {
-		ASSERT_STR("", e.getMessage().toString());
-	}
-	
-	// Test null CharSequence
-	StringBuffer nullCharSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is a  pointer");
-	
-	nullCharSequenceInsertWithOffsetStringBuffer.insert(18, nullCharSequenceToInsert, 0, 3);
-	ASSERT_STR(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
-	String *charSequenceString = dynamic_cast<String *>(charSequenceToInsert);
-	delete charSequenceString;
+TEST(JavaLang, StringBufferInsert) {
+    // Test string
+    StringBuffer charArrayInsertStringBuffer = StringBuffer("please more");
+
+    string stringToInsert = (string)("add ");
+    charArrayInsertStringBuffer.insert(7, stringToInsert);
+    string expectString = (string)("please add more");
+    ASSERT_STR(expectString, charArrayInsertStringBuffer.getValue());
+
+    // Test String
+    StringBuffer stringInsertStringBuffer = StringBuffer("please more");
+    String stringObjectToInsert = "add ";
+    stringInsertStringBuffer.insert(7, stringObjectToInsert);
+    ASSERT_STR(expectString, stringInsertStringBuffer.getValue());
+
+    // Test Object
+    StringBuffer objectInsertStringBuffer = StringBuffer("please more");
+
+    Object *objToInsert = new String("add ");
+    objectInsertStringBuffer.insert(7, *objToInsert);
+    ASSERT_STR(expectString, objectInsertStringBuffer.getValue());
+    String *objToInsertString = dynamic_cast<String *>(objToInsert);
+    delete objToInsertString;
+
+    // Test Null object
+    StringBuffer nullObjectInsertStringBuffer = StringBuffer("this is  pointer");
+
+    Object *nullObjToInsert = nullptr;
+    nullObjectInsertStringBuffer.insert(8, *nullObjToInsert);
+    string expectInsertNullObject = (string)("this is null pointer");
+    ASSERT_STR(expectInsertNullObject, nullObjectInsertStringBuffer.getValue());
+
+    // Test number
+    StringBuffer numberInsertStringBuffer = StringBuffer("100");
+
+    // float
+    float floatToInsert = 9.0;
+    numberInsertStringBuffer.insert(2, floatToInsert);
+    string expectFloatInsert = (string)("1090");
+    ASSERT_STR(expectFloatInsert, numberInsertStringBuffer.getValue());
+
+    // double
+    double doubleToInsert = 100.0;
+    numberInsertStringBuffer.insert(2, doubleToInsert);
+    string expectDoubleInsert = (string)("1010090");
+    ASSERT_STR(expectDoubleInsert, numberInsertStringBuffer.getValue());
+
+    // int
+    int intToInsert = 9;
+    numberInsertStringBuffer.insert(2, intToInsert);
+    string expectIntInsert = (string)("10910090");
+    ASSERT_STR(expectIntInsert, numberInsertStringBuffer.getValue());
+
+    // long
+    long longToInsert = 900L;
+    numberInsertStringBuffer.insert(2, longToInsert);
+    string expectLongInsert = (string)("10900910090");
+    ASSERT_STR(expectLongInsert, numberInsertStringBuffer.getValue());
+
+    // Test boolean
+    StringBuffer boolInsertStringBuffer = StringBuffer("bool  is good");
+
+    boolean boolToInsert = true;
+    boolInsertStringBuffer.insert(5, boolToInsert);
+    string expectBoolInsert = (string)("bool true is good");
+    ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
+
+    boolInsertStringBuffer = StringBuffer("bool  is bad");
+
+    boolToInsert = false;
+    boolInsertStringBuffer.insert(5, boolToInsert);
+    expectBoolInsert = (string)("bool false is bad");
+    ASSERT_STR(expectBoolInsert, boolInsertStringBuffer.getValue());
+
+    // Test char
+    StringBuffer charInsertStringBuffer = StringBuffer("Character  is uppercase");
+
+    char charToInsert = 'A';
+    charInsertStringBuffer.insert(10, charToInsert);
+    string expectCharInsert = (string)("Character A is uppercase");
+    ASSERT_STR(expectCharInsert, charInsertStringBuffer.getValue());
+
+    // Test CharSequence
+    StringBuffer charSequenceInsertStringBuffer = StringBuffer("CharSequence is : null");
+
+    CharSequence *charSequenceToInsert = new String(" not");
+    charSequenceInsertStringBuffer.insert(17, *charSequenceToInsert);
+    string expectCharSequenceInsert = (string)("CharSequence is : not null");
+    ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
+
+    // Test negative offset
+    try {
+        charSequenceInsertStringBuffer.insert(-1, *charSequenceToInsert);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("offset must be positive", e.getMessage().toString());
+    }
+
+    // Test null CharSequence
+    StringBuffer nullCharSequenceInsertStringBuffer = StringBuffer("CharSequence is a  pointer");
+
+    CharSequence *nullCharSequenceToInsert = nullptr;
+    nullCharSequenceInsertStringBuffer.insert(18, *nullCharSequenceToInsert);
+    string expectNullCharSequenceInsert = (string)("CharSequence is a null pointer");
+    ASSERT_STR(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
+
+    // Test CharSequence
+    StringBuffer charSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is : null");
+
+    charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, 4);
+    ASSERT_STR(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
+
+    // Test negative destinationOffset
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(-1, *charSequenceToInsert, 0, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("offset must be positive", e.getMessage().toString());
+    }
+
+    // Test destinationOffset > length
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(100, *charSequenceToInsert, 0, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test negative start
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, -1, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test negative end
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, -1);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test start > end
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 5, 4);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test end > sequence length
+    try {
+        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, 100);
+    }
+    catch (IndexOutOfBoundsException &e) {
+        ASSERT_STR("", e.getMessage().toString());
+    }
+
+    // Test null CharSequence
+    StringBuffer nullCharSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is a  pointer");
+
+    nullCharSequenceInsertWithOffsetStringBuffer.insert(18, *nullCharSequenceToInsert, 0, 3);
+    ASSERT_STR(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
+    String *charSequenceString = dynamic_cast<String *>(charSequenceToInsert);
+    delete charSequenceString;
 }
 
-TEST (JavaLang, StringBufferEnsureCapacity) {
+TEST(JavaLang, StringBufferEnsureCapacity) {
 	StringBuffer stringBuffer;
 	
 	// Test minimum capacity = 20
@@ -554,7 +552,7 @@ TEST (JavaLang, StringBufferEnsureCapacity) {
 	ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
 }
 
-TEST (JavaLang, StringBufferAppendCodePoint) {
+TEST(JavaLang, StringBufferAppendCodePoint) {
 	StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
 	
 	// Test Bmp codePoint
@@ -576,7 +574,7 @@ TEST (JavaLang, StringBufferAppendCodePoint) {
 	//ASSERT_STR(expectBmpCodePointResult, stringBuffer.getValue());
 }
 
-TEST (JavaLang, StringBufferCharAt) {
+TEST(JavaLang, StringBufferCharAt) {
 	StringBuffer stringBuffer = StringBuffer("CharAt");
 	
 	// Test vaild index
@@ -608,7 +606,7 @@ TEST (JavaLang, StringBufferCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointAt) {
+TEST(JavaLang, StringBufferCodePointAt) {
 	StringBuffer stringBuffer = StringBuffer("CodePointAt");
 	
 	// Test vaild index
@@ -640,7 +638,7 @@ TEST (JavaLang, StringBufferCodePointAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointBefore) {
+TEST(JavaLang, StringBufferCodePointBefore) {
 	StringBuffer stringBuffer = StringBuffer("CodePointAt");
 	
 	// Test vaild index
@@ -672,7 +670,7 @@ TEST (JavaLang, StringBufferCodePointBefore) {
 	}
 }
 
-TEST (JavaLang, StringBufferCodePointCount) {
+TEST(JavaLang, StringBufferCodePointCount) {
 	StringBuffer stringBuffer = StringBuffer("CodePointCount");
 	
 	// Test vaild beginIndex, endIndex
@@ -704,7 +702,7 @@ TEST (JavaLang, StringBufferCodePointCount) {
 	}
 }
 
-TEST (JavaLang, StringBufferDeleteCharAt) {
+TEST(JavaLang, StringBufferDeleteCharAt) {
 	StringBuffer stringBuffer = StringBuffer("Delete char at");
 	
 	// Test vaild index
@@ -738,7 +736,7 @@ TEST (JavaLang, StringBufferDeleteCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferDelete) {
+TEST(JavaLang, StringBufferDelete) {
 	StringBuffer stringBuffer = StringBuffer("Delete char at");
 	
 	// Test vaild start, end
@@ -789,7 +787,7 @@ TEST (JavaLang, StringBufferDelete) {
 
 // TODO need getChar
 /*
-TEST (JavaLang, StringBufferGetChar) {
+TEST(JavaLang, StringBufferGetChar) {
     // Given a StringBuffer
     StringBuffer stringBuffer = StringBuffer("StringBuffer");
     // Destination string
@@ -841,7 +839,7 @@ TEST (JavaLang, StringBufferGetChar) {
     }
 }*/
 
-TEST (JavaLang, StringBufferIndexOf) {
+TEST(JavaLang, StringBufferIndexOf) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	// Given 2 subString
@@ -859,7 +857,7 @@ TEST (JavaLang, StringBufferIndexOf) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferIndexOfFromIndex) {
+TEST(JavaLang, StringBufferIndexOfFromIndex) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -877,7 +875,7 @@ TEST (JavaLang, StringBufferIndexOfFromIndex) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferLastIndexOf) {
+TEST(JavaLang, StringBufferLastIndexOf) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -895,7 +893,7 @@ TEST (JavaLang, StringBufferLastIndexOf) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
+TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
 	// Given 2 subString
@@ -918,7 +916,7 @@ TEST (JavaLang, StringBufferLastIndexOfFromIndex) {
 	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
 }
 
-TEST (JavaLang, StringBufferOffSetByCodePoint) {
+TEST(JavaLang, StringBufferOffSetByCodePoint) {
 	// Given a StringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a string buffer");
 	
@@ -944,7 +942,7 @@ TEST (JavaLang, StringBufferOffSetByCodePoint) {
 	}
 }
 
-TEST (JavaLang, StringBufferReplace) {
+TEST(JavaLang, StringBufferReplace) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	
@@ -1001,7 +999,7 @@ TEST (JavaLang, StringBufferReplace) {
 	}
 }
 
-TEST (JavaLang, StringBufferReverse) {
+TEST(JavaLang, StringBufferReverse) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1018,7 +1016,7 @@ TEST (JavaLang, StringBufferReverse) {
 	 ASSERT_STR(expectSurrogateStringReverse, surrogateStringBuffer.getValue());*/
 }
 
-TEST (JavaLang, StringBufferSetCharAt) {
+TEST(JavaLang, StringBufferSetCharAt) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1055,7 +1053,7 @@ TEST (JavaLang, StringBufferSetCharAt) {
 	}
 }
 
-TEST (JavaLang, StringBufferSetLength) {
+TEST(JavaLang, StringBufferSetLength) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
 	
@@ -1078,7 +1076,7 @@ TEST (JavaLang, StringBufferSetLength) {
 	}
 }
 
-TEST (JavaLang, StringBufferSubString) {
+TEST(JavaLang, StringBufferSubString) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 	
@@ -1139,7 +1137,7 @@ TEST (JavaLang, StringBufferSubString) {
 }
 
 // TODO need subSequence
-/*TEST (JavaLang, StringBufferSubSequence) {
+/*TEST(JavaLang, StringBufferSubSequence) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 
@@ -1196,7 +1194,7 @@ TEST (JavaLang, StringBufferSubString) {
     delete charSequenceString;
 }*/
 
-TEST (JavaLang, StringBufferToString) {
+TEST(JavaLang, StringBufferToString) {
     // Given a stringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
     string expectSubStringResult = (string)("This is a StringBuffer");
@@ -1204,7 +1202,7 @@ TEST (JavaLang, StringBufferToString) {
     ASSERT_STR(expectSubStringResult, result);
 }
 
-TEST (JavaLang, StringBufferTrimToSize) {
+TEST(JavaLang, StringBufferTrimToSize) {
 	// Given a stringBuffer
 	StringBuffer stringBuffer = StringBuffer(50);
 	string stringToAppend = (string) ( "This is a StringBuffer" );
