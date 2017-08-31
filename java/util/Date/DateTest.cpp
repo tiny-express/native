@@ -100,7 +100,7 @@ TEST(JavaUtil, DateConstructor) {
     }
 #endif
 
-#if (defined(_WIN32) || defined(WIN32))
+#if (defined(_WIN32) || defined(_WIN64))
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
@@ -1787,7 +1787,7 @@ TEST(JavaUtil, DateParse) {
     }
 #endif
 
-#if (defined(_WIN32) || defined(WIN32))
+#if (defined(_WIN32) || defined(_WIN64))
     zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";

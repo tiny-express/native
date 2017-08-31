@@ -174,7 +174,7 @@ String Date::toString() {
     }
 #endif
 
-#if (defined(_WIN32) || defined(WIN32))
+#if (defined(_WIN32) || defined(_WIN64))
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T GMT %Y";
     }
@@ -225,7 +225,7 @@ String Date::toGMTString() {
     pattern = (string) "%a %b %d %T UTC %Y";
 #endif
 
-#if (defined(_WIN32) || defined(WIN32))
+#if (defined(_WIN32) || defined(_WIN64))
     pattern = (string) "%a %b %d %T GMT %Y";
 #endif
 
