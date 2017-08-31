@@ -92,8 +92,16 @@ TEST(JavaUtil, DateConstructor) {
     String localZone;
 
     String zone = actualDate.getZone();
+#ifdef __linux__
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "UTC";
+    } else {
+        localZone = "LMT";
+    }
+#endif
+
+    if (actualDate.getTimezoneOffset() == 0) {
+        localZone = "GMT";
     } else {
         localZone = "LMT";
     }
@@ -766,27 +774,28 @@ TEST(JavaUtil, DateGetTime) {
     time_t now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
 
-    // TODO(thoangminh): These test work for Linux, fail in Windows
-//    // Test Date(int year, int month, int date)
-//    date = Date(2017, 02, 13);
-//    ASSERT_EQUAL(1489338000, date.getTime());
-//
-//    // Test Date(int year, int month, int date, int hrs, int min)
-//    date = Date(2017, 02, 13, 8, 01);
-//    ASSERT_EQUAL(1489366860, date.getTime());
-//
-//    // Test Date(int year, int month, int date, int hrs, int min, int sec)
-//    date = Date(2017, 02, 13, 8, 01, 13);
-//    ASSERT_EQUAL(1489366873, date.getTime());
-//
-//    // Test Date(long date)
-//    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
-//    ASSERT_EQUAL(1413162073, date.getTime());
-//
-//    // Test Date sameDate = date;
-//    date = Date(2017, 02, 13, 8, 01, 13);
-//    Date sameDate = date;
-//    ASSERT_EQUAL(1489366873, sameDate.getTime());
+#ifdef __linux__
+    // Test Date(int year, int month, int date)
+    date = Date(2017, 02, 13);
+    ASSERT_EQUAL(1489338000, date.getTime());
+
+    // Test Date(int year, int month, int date, int hrs, int min)
+    date = Date(2017, 02, 13, 8, 01);
+    ASSERT_EQUAL(1489366860, date.getTime());
+
+    // Test Date(int year, int month, int date, int hrs, int min, int sec)
+    date = Date(2017, 02, 13, 8, 01, 13);
+    ASSERT_EQUAL(1489366873, date.getTime());
+
+    // Test Date(long date)
+    date = Date(Date::UTC(2017, -28, 13, 8, 01, 13));
+    ASSERT_EQUAL(1410544873, date.getTime());
+
+    // Test Date sameDate = date;
+    date = Date(2017, 02, 13, 8, 01, 13);
+    Date sameDate = date;
+    ASSERT_EQUAL(1489366873, sameDate.getTime());
+#endif
 }
 
 TEST(JavaUtil, DateSetTime) {

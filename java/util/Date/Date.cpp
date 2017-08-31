@@ -168,8 +168,14 @@ int Date::compareTo(Date anotherDate) {
 String Date::toString() {
     auto pattern = (string) "%a %b %d %T %Z %Y";
 
+#ifdef __linux__
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T UTC %Y";
+    }
+#endif
+
+    if (this->getTimezoneOffset() == 0) {
+        pattern = (string) "%a %b %d %T GMT %Y";
     }
 
     string convertResult = this->timeToString(pattern, this->localTimer);
