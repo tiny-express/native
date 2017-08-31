@@ -63,7 +63,8 @@ TEST(JavaLang, StringBuilderConstructor) {
 
     StringBuilder initializerListStringBuilder({'a', 'b', 'c'});
     ASSERT_EQUAL(3, initializerListStringBuilder.length());
-    ASSERT_EQUAL(StringBuilder::defaultCapacity + initializerListStringBuilder.length(), initializerListStringBuilder.capacity());
+    ASSERT_EQUAL(StringBuilder::defaultCapacity + initializerListStringBuilder.length(),
+                 initializerListStringBuilder.capacity());
 
     CharSequence *charSequence = new String("Hello!");
     StringBuilder charSequenceStringBuilder(*charSequence);
@@ -72,7 +73,7 @@ TEST(JavaLang, StringBuilderConstructor) {
     delete charSequenceString;
 }
 
-TEST (JavaLang, StringBuilderDestructor) {
+TEST(JavaLang, StringBuilderDestructor) {
 	// Destructor will be called automatically.
 	StringBuilder stringBuilder;
 	
@@ -178,11 +179,11 @@ TEST(JavaLang, StringBuilderAppend) {
     delete charSequenceString;
 }
 
-TEST (JavaLang, StringBuilderAppendCodePoint) {
+TEST(JavaLang, StringBuilderAppendCodePoint) {
 	// TODO
 }
 
-TEST (JavaLang, StringBuilderCapacity) {
+TEST(JavaLang, StringBuilderCapacity) {
 	StringBuilder stringBuilder(100);
 	ASSERT_EQUAL(100, stringBuilder.capacity());
 }
@@ -200,15 +201,15 @@ TEST(JavaLang, StringBuilderCharAt) {
     }
 }
 
-TEST (JavaLang, StringBuilderCodePointAt) {
+TEST(JavaLang, StringBuilderCodePointAt) {
 	// TODO
 }
 
-TEST (JavaLang, StringBuilderCodePointBefore) {
+TEST(JavaLang, StringBuilderCodePointBefore) {
 	// TODO
 }
 
-TEST (JavaLang, StringBuilderCodePointCount) {
+TEST(JavaLang, StringBuilderCodePointCount) {
 	// TODO
 }
 
@@ -253,7 +254,7 @@ TEST(JavaLang, StringBuilderDeleteCharAt) {
     ASSERT_STR("BXYZ", stringBuilder.toString());
 }
 
-TEST (JavaLang, StringBuilderEnsureCapacity) {
+TEST(JavaLang, StringBuilderEnsureCapacity) {
 	// Default capacity.
 	StringBuilder stringBuilder;
 	ASSERT_EQUAL(0, stringBuilder.length());
@@ -274,7 +275,7 @@ TEST (JavaLang, StringBuilderEnsureCapacity) {
 	ASSERT_EQUAL(100, stringBuilder.capacity());
 }
 
-TEST (JavaLang, StringBuilderGetChars) {
+TEST(JavaLang, StringBuilderGetChars) {
 	// TODO
 }
 
@@ -547,7 +548,7 @@ TEST(JavaLang, StringBuilderLastIndexOf) {
     ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
 }
 
-TEST (JavaLang, StringBuilderLength) {
+TEST(JavaLang, StringBuilderLength) {
 	String aString("Hello! I'm a String");
 	StringBuilder stringBuilder(aString);
 	ASSERT_EQUAL(aString.length(), stringBuilder.length());
@@ -613,7 +614,7 @@ TEST(JavaLang, StringBuilderToString) {
     ASSERT_STR(aString.toString(), stringBuilder.toString());
 }
 
-TEST (JavaLang, StringBuilderTrimToSize) {
+TEST(JavaLang, StringBuilderTrimToSize) {
 	StringBuilder stringBuilder(100);
 	ASSERT_EQUAL(100, stringBuilder.capacity());
 	stringBuilder.trimToSize();
