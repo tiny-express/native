@@ -106,6 +106,10 @@ TEST(JavaUtil, DateConstructor) {
     } else {
         localZone = "LMT";
     }
+
+    if (localZone == "UTC") {
+        localZone = "GMT";
+    }
 #endif
 
     // Valid case
@@ -1793,6 +1797,10 @@ TEST(JavaUtil, DateParse) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
+    }
+
+    if (localZone == "UTC") {
+        localZone = "GMT";
     }
 #endif
 
