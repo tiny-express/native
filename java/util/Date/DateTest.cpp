@@ -100,15 +100,11 @@ TEST(JavaUtil, DateConstructor) {
     }
 #endif
 
-#if (defined(_WIN32) || defined(_WIN64))
+#ifdef _WIN32
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
-    }
-
-    if (localZone == "UTC") {
-        localZone = "GMT";
     }
 #endif
 
@@ -169,11 +165,6 @@ TEST(JavaUtil, DateConstructor) {
     ASSERT_STR(expected.toString(), actual.toString());
 
     // Month/day pattern.(en-US)
-#if (defined(_WIN32) || defined(_WIN64))
-    if (localZone == "UTC") {
-        localZone = "GMT";
-    }
-#endif
     expected     = "Fri Jun 15 00:00:00 " + localZone + (string) " 1900";
     actualString = "June 15";
     actualFormat = "%B %d";
@@ -1796,16 +1787,12 @@ TEST(JavaUtil, DateParse) {
     }
 #endif
 
-#if (defined(_WIN32) || defined(_WIN64))
+#ifdef _WIN32
     zone = actualDate.getZone();
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
         localZone = "LMT";
-    }
-
-    if (localZone == "UTC") {
-        localZone = "GMT";
     }
 #endif
 
