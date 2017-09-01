@@ -170,6 +170,9 @@ TEST(JavaUtil, DateConstructor) {
 
     // Month/day pattern.(en-US)
     expected     = "Fri Jun 15 00:00:00 " + localZone + (string) " 1900";
+#if (defined(_WIN32) || defined(_WIN64))
+    expected     = "Fri Jun 15 00:00:00 GMT 1900";
+#endif
     actualString = "June 15";
     actualFormat = "%B %d";
     actualDate = Date(actualString, actualFormat);
