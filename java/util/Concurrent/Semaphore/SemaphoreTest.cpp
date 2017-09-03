@@ -112,7 +112,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
     ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
 }
 
-TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermits) {
+TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
     const int expectPermits = 1;
     const int threadCount = 3;
     Semaphore semaphoreObject;
@@ -123,7 +123,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermits) {
         testThreads.push_back(std::move(std::thread(SemaphoreTestThread, 1000, 1, &semaphoreObject)));
     }
 
-    result = semaphoreObject.tryAcquire(2, 3000);
+    result = semaphoreObject.tryAcquire(2, 5000);
     ASSERT_EQUAL(result, true);
 
     for (int i = 0; i < testThreads.size(); ++i) {
