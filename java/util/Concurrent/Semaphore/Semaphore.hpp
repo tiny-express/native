@@ -54,7 +54,8 @@ namespace Java {
                 boolean tryAcquire(int permits, long timeout);
 
             private:
-                std::mutex mutexObject;
+                std::mutex permitMutexObject;
+                std::mutex conditionMutexObject;
                 std::condition_variable conditionObject;
                 int permitCounter;
             };

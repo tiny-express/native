@@ -26,22 +26,22 @@
 
 #include "Semaphore.hpp"
 
+using namespace std::chrono;
+
 Concurrent::Semaphore::Semaphore() {
-    std::unique_lock<std::mutex> locker(mutexObject);
     permitCounter = 0;
 }
 
 Concurrent::Semaphore::Semaphore(int permits) {
-    std::unique_lock<std::mutex> locker(mutexObject);
     permitCounter = permits;
 }
 
 Concurrent::Semaphore::~Semaphore() {
-
+    conditionObject.notify_one();
 }
 
 int Concurrent::Semaphore::availablePermits() {
-    std::unique_lock<std::mutex> locker(mutexObject);
+    std::unique_lock<std::mutex> locker(permitMutexObject);
     return permitCounter;
 }
 
@@ -62,8 +62,10 @@ void Concurrent::Semaphore::release() {
 }
 
 void Concurrent::Semaphore::release(int permits) {
-    std::unique_lock<std::mutex> locker(mutexObject);
+    std::unique_lock<std::mutex> locker(conditionMutexObject);
+    permitMutexObject.lock();
     permitCounter += permits;
+    permitMutexObject.unlock();
     conditionObject.notify_one();
 }
 
@@ -76,30 +78,51 @@ boolean Concurrent::Semaphore::tryAcquire(int permits) {
 }
 
 boolean Concurrent::Semaphore::tryAcquire(int permits, long timeout) {
-    std::unique_lock<std::mutex> locker(mutexObject);
+    int currentPermits = 0;
     if (timeout < 0) {
         for (int i = 0; i < permits; ++i) {
-            if (permitCounter == 0) {
-                conditionObject.wait(locker);
+            permitMutexObject.lock();
+            currentPermits = permitCounter;
+            permitMutexObject.unlock();
+
+            if (currentPermits == 0) {
+                std::unique_lock<std::mutex> conditionLocker(conditionMutexObject);
+                conditionObject.wait(conditionLocker);
             }
+
+            permitMutexObject.lock();
             --permitCounter;
+            permitMutexObject.unlock();
         }
         return true;
     } else {
-        if (permits <= permitCounter) {
-            permitCounter -= permits;
-            return true;
-        } else {
-            std::cv_status waitStatus = conditionObject.wait_for(locker, std::chrono::milliseconds(timeout));
-            if (waitStatus == std::cv_status::timeout) {
-                return false;
-            }
-
+        {
+            std::unique_lock<std::mutex> permitsLocker(permitMutexObject);
             if (permits <= permitCounter) {
                 permitCounter -= permits;
                 return true;
             }
-            return false;
+        }
+
+        long waitTime = timeout;
+        while (true) {
+            std::unique_lock<std::mutex> conditionLocker(conditionMutexObject);
+            const long startTime = duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
+            std::cv_status waitStatus = conditionObject.wait_for(conditionLocker, std::chrono::milliseconds(waitTime));
+            if (waitStatus == std::cv_status::timeout) {
+                return false;
+            }
+
+            const long elapsedTime = duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count() - startTime;
+            waitTime -= elapsedTime;
+
+            {
+                std::unique_lock<std::mutex> permitsLocker(permitMutexObject);
+                if (permits <= permitCounter) {
+                    permitCounter -= permits;
+                    return true;
+                }
+            }
         }
     }
 }
