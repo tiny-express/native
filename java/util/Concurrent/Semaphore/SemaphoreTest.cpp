@@ -127,14 +127,13 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
         it = std::move(std::thread(SemaphoreTestThread, 500, 1, &semaphoreObject));
     }
 
-    result = semaphoreObject.tryAcquire(2, 2000);
-    ASSERT_EQUAL(result, true);
-
+    result = semaphoreObject.tryAcquire(2, 1000);
     for (auto& it : testThreads) {
         if (it.joinable()) {
             it.join();
         }
     }
 
+    ASSERT_TRUE(result);
     ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
 }
