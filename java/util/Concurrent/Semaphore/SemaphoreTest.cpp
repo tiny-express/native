@@ -108,11 +108,12 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
     Semaphore semaphoreObject;
     std::thread testThread(SemaphoreTestThread, 1000, 1, &semaphoreObject);
     boolean result = semaphoreObject.tryAcquire();
-    ASSERT_EQUAL(result, false);
+
     if (testThread.joinable()) {
         testThread.join();
     }
 
+    ASSERT_FALSE(result);
     ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
 }
 
