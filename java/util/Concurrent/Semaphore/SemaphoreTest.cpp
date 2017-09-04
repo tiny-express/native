@@ -47,13 +47,13 @@ void SemaphoreTestThread(int sleepTime, int releasePermits, Semaphore* semaphore
 TEST(JavaUtilConcurrent, SemaphoreConstructor) {
     {
         Semaphore semaphoreObject;
-        ASSERT_EQUAL(semaphoreObject.availablePermits(), 0);
+        ASSERT_EQUAL(0, semaphoreObject.availablePermits());
     }
 
     {
         const int initPermits = 3;
         Semaphore semaphoreObject(initPermits);
-        ASSERT_EQUAL(semaphoreObject.availablePermits(), initPermits);
+        ASSERT_EQUAL(initPermits, semaphoreObject.availablePermits());
     }
 }
 
@@ -71,6 +71,13 @@ TEST(JavaUtilConcurrent, SemaphoreToString) {
     ASSERT_STR(expect.toString(), result.toString());
 }
 
+TEST(JavaUtilConcurrent, SemaphoreRelease) {
+    const int expectPermits = 2;
+    Semaphore semaphoreObject(1);
+    semaphoreObject.release();
+    ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
+}
+
 TEST(JavaUtilConcurrent, SemaphoreAcquireNotPassingPermits) {
     const int expectPermits = 0;
     Semaphore semaphoreObject;
@@ -80,7 +87,7 @@ TEST(JavaUtilConcurrent, SemaphoreAcquireNotPassingPermits) {
         testThread.join();
     }
 
-    ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
+    ASSERT_EQUAL(expectPermits, semaphoreObject.availablePermits());
 }
 
 TEST(JavaUtilConcurrent, SemaphoreAcquirePassingPermits) {
@@ -100,7 +107,7 @@ TEST(JavaUtilConcurrent, SemaphoreAcquirePassingPermits) {
         }
     }
 
-    ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
+    ASSERT_EQUAL(expectPermits, semaphoreObject.availablePermits());
 }
 
 TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
@@ -114,7 +121,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
     }
 
     ASSERT_FALSE(result);
-    ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
+    ASSERT_EQUAL(expectPermits, semaphoreObject.availablePermits());
 }
 
 TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
@@ -136,5 +143,12 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
     }
 
     ASSERT_TRUE(result);
-    ASSERT_EQUAL(semaphoreObject.availablePermits(), expectPermits);
+    ASSERT_EQUAL(expectPermits, semaphoreObject.availablePermits());
+}
+
+TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithInitPermits) {
+    const int expectPermits = 1;
+    Semaphore semaphoreObject(2);
+    semaphoreObject.tryAcquire();
+    ASSERT_EQUAL(expectPermits, semaphoreObject.availablePermits());
 }
