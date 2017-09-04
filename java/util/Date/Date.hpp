@@ -28,6 +28,8 @@
 #define JAVA_UTIL_DATE_DATE_HPP_
 
 #include "../../Lang.hpp"
+#include <algorithm>
+#include <string>
 
 using namespace Java::Lang;
 
@@ -186,200 +188,6 @@ namespace Java {
 
                 return mktime(utcTimer);
             }
-
-            // TODO(thoangminh): Need auto parse String to time
-            /**
-             * Auto parse String to time
-             *
-             * @param s String pattern of Date
-             * @return timer from String
-             */
-//                    static long parseStringToTime(String s) {
-//                        int year = Integer::MIN_VALUE;
-//                        int mon = -1;
-//                        int mday = -1;
-//                        int hour = -1;
-//                        int min = -1;
-//                        int sec = -1;
-//                        int millis = -1;
-//                        int c = -1;
-//                        int i = 0;
-//                        int n = -1;
-//                        int wst = -1;
-//                        int tzoffset = -1;
-//                        int prevc = 0;
-//
-//                        const std::vector<std::string> wtb = { "am", "pm", "monday", "tuesday",
-//                                        "wednesday", "thursday", "friday", "saturday", "sunday",
-//                                        "january", "february", "march", "april", "may", "june", "july",
-//                                        "august", "september", "october", "november", "december",
-//                                        "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
-//                                        "pst", "pdt"
-//                        };
-//
-//                        const int ttb[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
-//                                                           5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
-//                                                           10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
-//                                                           10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
-//                                                           10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
-//                                                           10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
-//                        };
-//
-//                        if (s.isEmpty())
-//                        return -1;
-//
-//                        int limit = s.length();
-//                        while (i < limit) {
-//                            c = s.charAt(i);
-//                            i++;
-//                            if (c <= ' ' || c == ',')
-//                                continue;
-//                            if (c == '(') { // skip comments
-//                                int depth = 1;
-//                                while (i < limit) {
-//                                    c = s.charAt(i);
-//                                    i++;
-//                                    if (c == '(')
-//                                        depth++;
-//                                    else if (c == ')')
-//                                        if (--depth <= 0)
-//                                            return -1;
-//                                }
-//                                continue;
-//                            }
-//                            if ('0' <= c && c <= '9') {
-//                                n = c - '0';
-//                                while (i < limit && '0' <= (c = s.charAt(i))
-//                                       && c <= '9') {
-//                                    n = n * 10 + c - '0';
-//                                    i++;
-//                                }
-//                                if (prevc == '+' || prevc == '-'
-//                                                    && year != Integer::MIN_VALUE) {
-//                                    // timezone offset
-//                                    if (n < 24)
-//                                        n = n * 60; // EG. "GMT-3"
-//                                    else
-//                                        n = n % 100 + n / 100 * 60; // eg "GMT-0430"
-//                                    if (prevc == '+') // plus means east of GMT
-//                                        n = -n;
-//                                    if (tzoffset != 0 && tzoffset != -1)
-//                                        return -1;
-//                                    tzoffset = n;
-//                                } else if (n >= 70)
-//                                    if (year != Integer::MIN_VALUE)
-//                                        return -1;
-//                                else if (c <= ' ' || c == ',' || c == '/'
-//                                         || i >= limit)
-//                                    // year = n < 1900 ? n : n - 1900;
-//                                    year = n;
-//                                else
-//                                    return -1;
-//                                else if (c == ':')
-//                                    if (hour < 0)
-//                                        hour = (byte) n;
-//                                    else if (min < 0)
-//                                        min = (byte) n;
-//                                    else
-//                                        return -1;
-//                                else if (c == '/')
-//                                    if (mon < 0)
-//                                        mon = (byte) (n - 1);
-//                                    else if (mday < 0)
-//                                        mday = (byte) n;
-//                                    else
-//                                        return -1;
-//                                else if (i < limit && c != ',' && c > ' ' && c != '-')
-//                                    return -1;
-//                                else if (hour >= 0 && min < 0)
-//                                    min = (byte) n;
-//                                else if (min >= 0 && sec < 0)
-//                                    sec = (byte) n;
-//                                else if (mday < 0)
-//                                    mday = (byte) n;
-//                                    // Handle two-digit years < 70 (70-99 handled above).
-//                                else if (year == Integer::MIN_VALUE && mon >= 0
-//                                         && mday >= 0)
-//                                    year = n;
-//                                else
-//                                    return -1;
-//                                prevc = 0;
-//                            } else if (c == '/' || c == ':' || c == '+' || c == '-')
-//                                prevc = c;
-//                            else {
-//                                int st = i - 1;
-//                                while (i < limit) {
-//                                    c = s.charAt(i);
-//                                    if (!('A' <= c && c <= 'Z' || 'a' <= c && c <= 'z'))
-//                                        return -1;
-//                                    i++;
-//                                }
-//                                if (i <= st + 1)
-//                                    return -1;
-//                                int k;
-//
-//                                for (k = (int) wtb.size(); --k >= 0;) {
-//                                    String thisStr = wtb[k];
-//                                    String compareStr = s.subString(st, st + (i - st));
-//                                    if (thisStr == compareStr) {
-//                                        int action = ttb[k];
-//                                        if (action != 0) {
-//                                            if (action == 1) { // pm
-//                                                if (hour > 12 || hour < 1)
-//                                                    return -1;
-//                                                else if (hour < 12)
-//                                                    hour += 12;
-//                                            } else if (action == 14) { // am
-//                                                if (hour > 12 || hour < 1)
-//                                                    return -1;
-//                                                else if (hour == 12)
-//                                                    hour = 0;
-//                                            } else if (action <= 13) { // month!
-//                                                if (mon < 0)
-//                                                    mon = (byte) (action - 2);
-//                                                else
-//                                                    return -1;
-//                                            } else {
-//                                                tzoffset = action - 10000;
-//                                            }
-//                                        }
-//                                        return -1;
-//                                    }
-//                                }
-//
-//                                if (k < 0)
-//                                    return -1;
-//                                prevc = 0;
-//                            }
-//                        }
-//                        if (year == Integer::MIN_VALUE || mon < 0 || mday < 0)
-//                        return -1;
-//                        // Parse 2-digit years within the correct default century.
-//                        if (year < 100) {
-//                            // TODO(thoangminh): need enable this line
-////                            year += Date::defaultCenturyStart;
-//                            Date tempDate = Date();
-//                            int defaultCentury = (tempDate.getYear() / 100) * 100;
-//                            year += defaultCentury;
-//                        }
-//
-//                        if (sec < 0) {
-//                            sec = 0;
-//                        }
-//
-//                        if (min < 0)
-//                        min = 0;
-//                        if (hour < 0)
-//                        hour = 0;
-//
-//                        if (tzoffset == -1) {  // no time zone specified, have to use local
-//                            Date date = Date(year, mon +1, mday, hour, min, sec);
-//                            return date.getTime();
-//                        }
-//
-//                        Date date = Date(year, mon +1, mday, hour, min, sec);
-//                        return date.getTime() + tzoffset * (60 * 1000);
-//                    }
 
         public:
             /**
@@ -659,6 +467,12 @@ namespace Java {
              */
             static long parse(String inputString, string pattern);
 
+            static long parses(String inputString);
+
+//            static long parse(String inputString);
+
+            static std::string parse(String inputString);
+
             /**
              * Deprecated.
              * As of JDK version 1.1, replaced by
@@ -760,7 +574,8 @@ namespace Java {
              * @param sec
              * @return long
              */
-            static long UTC(int year, int month, int date, int hrs, int min, int sec);
+            static long UTC(int year, int month, int date,
+                            int hrs, int min, int sec);
         };
     }  // namespace Util
 }  // namespace Java

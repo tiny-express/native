@@ -249,3 +249,573 @@ String Date::toGMTString() {
 long Date::hashCode() {
     return this->timer;
 }
+
+
+//long Date::parses(String inputString) {
+//    // Create variable to store a Date
+//    int year = Integer::MIN_VALUE;
+//    int mon = -1;
+//    int mday = -1;
+//    int hour = -1;
+//    int min = -1;
+//    int sec = -1;
+//
+//
+//    int millis = -1;
+//    int currentChar = -1;
+//    int index = 0;
+//    int currentNumber = -1;
+//    int wst = -1;
+//    int tzoffset = -1;
+//    int prevc = 0;
+//
+//    boolean isZeroToNine;
+//    int lengthOfInputString = inputString.length();
+//
+////    const std::vector<std::string> wtb = { "am", "pm", "monday", "tuesday",
+////                                           "wednesday", "thursday", "friday", "saturday", "sunday",
+////                                           "january", "february", "march", "april", "may", "june", "july",
+////                                           "august", "september", "october", "november", "december",
+////                                           "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
+////                                           "pst", "pdt"
+////    };
+////
+////    const int ttb[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
+////                        5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
+////                        10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
+////                        10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
+////                        10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
+////                        10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
+////    };
+//
+//    String wtb[] = { "am", "pm", "monday", "tuesday",
+//                      "wednesday", "thursday", "friday", "saturday", "sunday",
+//                      "january", "february", "march", "april", "may", "june", "july",
+//                      "august", "september", "october", "november", "december",
+//                      "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
+//                      "pst", "pdt" };
+//
+//    int ttb[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
+//                   5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
+//                   10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
+//                   10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
+//                   10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
+//                   10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
+//    };
+//
+//    // Stop if inputString is empty
+//    if (inputString.isEmpty())
+//        return -1;
+//
+//    // Scan the inputString
+//    while (index < lengthOfInputString) {
+//        currentChar = inputString[index];
+//        index++;
+//
+//        if (currentChar <= ' ' || currentChar == ',') {
+//            continue;
+//        }
+//
+//        // Skip comments between `(` and `)`
+//        if (currentChar == '(') {
+//            int lengthOfComment = 1;
+//
+//            // The length of comment must >= 2. If not stop here.
+//            while (index < lengthOfInputString) {
+//                currentChar = inputString[index];
+//                index++;
+//
+//                if (currentChar == '(') {
+//                    lengthOfComment++;
+//                } else if (currentChar == ')') {
+//                    if (lengthOfComment < 2)
+//                        return -1;
+//                }
+//            }
+//            continue;
+//        } // End skip comments between `(` and `)`
+//
+//        ////////////////////
+//
+//        // Process the number
+//        isZeroToNine = ('0' <= currentChar) && (currentChar <= '9');
+//
+//        // isZeroToNine
+//        if (isZeroToNine) {
+//            currentNumber = currentChar - '0';
+//
+//            // Get the currentNumber
+//            while (index < lengthOfInputString && isZeroToNine) {
+//                currentNumber = currentNumber * 10 + currentChar - '0';
+//                index++;
+//                currentChar = inputString[index];
+//
+//                isZeroToNine = ('0' <= currentChar) && (currentChar <= '9');
+//            }
+//
+//            // Process timezone offset
+//            if (prevc == '+' || prevc == '-'
+//                                && year != Integer::MIN_VALUE) {
+//
+//                // timezone offset
+//                if (currentNumber < 24) {
+//                    // EG. "GMT-3"
+//                    currentNumber = currentNumber * 60;
+//                } else {
+//                    // eg "GMT-0430"
+//                    currentNumber = currentNumber % 100
+//                                    + currentNumber / 100 * 60;
+//                }
+//
+//                // plus means east of GMT
+//                if (prevc == '+') {
+//                    currentNumber = -currentNumber;
+//                }
+//
+//                if (tzoffset != 0 && tzoffset != -1) {
+//                    return -1;
+//                }
+//
+//                tzoffset = currentNumber;
+//
+//            } else if (currentNumber >= 70)
+//                if (year != Integer::MIN_VALUE) {
+//                    return -1;
+//                }
+//                else {
+//                    if (currentChar <= ' ' || currentChar == ',' || currentChar == '/'
+//                        || index >= lengthOfInputString)
+//                        // year = n < 1900 ? n : n - 1900;
+//                        year = currentNumber;
+//                    else {
+//                        return -1;
+//                    }
+//                } //  End isZeroToNine
+//
+//
+//            else if (currentChar == ':') {
+//                if (hour < 0) {
+//                    hour = (byte) currentNumber;
+//                }
+//
+//                else if (min < 0) {
+//                    min = (byte) currentNumber;
+//                }
+//
+//                else {
+//                    return -1;
+//                }
+//            }
+//
+//
+//            else if (currentChar == '/') {
+//
+//                if (mon < 0) {
+//                    mon = (byte) (currentNumber - 1);
+//                }
+//
+//                else if (mday < 0) {
+//                    mday = (byte) currentNumber;
+//                }
+//
+//                else {
+//                    return -1;
+//                }
+//            }
+//
+//            else if (index < lengthOfInputString && currentChar != ','
+//                     && currentChar > ' ' && currentChar != '-') {
+//                return -1;
+//            }
+//
+//            else if (hour >= 0 && min < 0) {
+//                min = (byte) currentNumber;
+//            }
+//
+//            else if (min >= 0 && sec < 0) {
+//                sec = (byte) currentNumber;
+//            }
+//
+//            else if (mday < 0) {
+//                mday = (byte) currentNumber;
+//            }
+//
+//                // Handle two-digit years < 70 (70-99 handled above).
+//            else if (year == Integer::MIN_VALUE && mon >= 0
+//                     && mday >= 0) {
+//                year = currentNumber;
+//            }
+//
+//            else {
+//                return -1;
+//            }
+//
+//            prevc = 0;
+//        }
+//
+//
+//        else if (currentChar == '/' || currentChar == ':'
+//                 || currentChar == '+' || currentChar == '-') {
+//            prevc = currentChar;
+//        }
+//
+//            // Process character
+//        else {
+//            int st = index - 1;
+//
+//            while (index < lengthOfInputString) {
+//                currentChar = inputString[index];
+//                if (!('A' <= currentChar && currentChar <= 'Z'
+//                      || 'a' <= currentChar && currentChar <= 'z')) {
+//                    return -1;
+//                }
+//
+//                index++;
+//            }
+//
+//            if (index <= st + 1) {
+//                return -1;
+//            }
+//
+//            int k;
+//            int wtbLength = 32;
+//
+//            //////// for
+//            for (k = wtbLength; --k >= 0;) {
+//                if (wtb[k].regionMatches(true, 0, inputString, st, index - st)) {
+//
+////            for (k = (int) wtb.size(); --k >= 0;) {
+////                String thisStr = wtb[k];
+////                String compareStr = inputString.subString(st, st + (index - st));
+////                if (thisStr == compareStr) {
+//                    int action = ttb[k];
+//                    if (action != 0) {
+//                        if (action == 1) { // pm
+//                            if (hour > 12 || hour < 1) {
+//                                return -1;
+//                            }
+//
+//                            else if (hour < 12) {
+//                                hour += 12;
+//                            }
+//
+//                        } else if (action == 14) { // am
+//                            if (hour > 12 || hour < 1) {
+//                                return -1;
+//                            }
+//
+//                            else if (hour == 12) {
+//                                hour = 0;
+//                            }
+//
+//                        } else if (action <= 13) { // month!
+//                            if (mon < 0) {
+//                                mon = (byte) (action - 2);
+//                            }
+//
+//                            else {
+//                                return -1;
+//                            }
+//
+//                        } else {
+//                            tzoffset = action - 10000;
+//                        }
+//                    }
+//                    return -1;
+//                }
+//            } /// end for
+//
+//            if (k < 0) {
+//                return -1;
+//            }
+//
+//            prevc = 0;
+//        }
+//    } //// end while
+//
+//
+//    if (year == Integer::MIN_VALUE || mon < 0 || mday < 0)
+//        return -1;
+//    // Parse 2-digit years within the correct default century.
+//    if (year < 100) {
+//
+////                            year += Date::defaultCenturyStart;
+//        Date tempDate = Date();
+//        int defaultCentury = (tempDate.getYear() / 100) * 100;
+//        year += defaultCentury;
+//    }
+//
+//    if (sec < 0) {
+//        sec = 0;
+//    }
+//
+//    if (min < 0)
+//        min = 0;
+//    if (hour < 0)
+//        hour = 0;
+//
+//    if (tzoffset == -1) {  // no time zone specified, have to use local
+//        Date date = Date(year, mon +1, mday, hour, min, sec);
+//        return date.getTime();
+//    }
+//
+//    Date date = Date(year, mon +1, mday, hour, min, sec);
+//    return date.getTime() + tzoffset * (60 * 1000);
+//}
+
+//std::string Date::parse(String s) {
+//    // Create variable to store a Date
+////    string tempString = strdup(s.toString());
+//    std::string inputString(s.toString());
+//
+//    std::transform(inputString.begin(), inputString.end(),
+//                   inputString.begin(), ::tolower);
+//
+//    auto notFound = std::string::npos;
+//
+//    boolean year = false;
+//    boolean month = false;
+//    boolean dayOfMonth = false;
+//    boolean hour = false;
+//    boolean minute = false;
+//    boolean second = false;
+//
+//    int millis = -1;
+//    int currentChar = -1;
+//    int index = 0;
+//    int currentNumber = -1;
+//    int wst = -1;
+//    int tzoffset = -1;
+//
+//    int idOfCurrentPart = 0;
+//    char previousChar = '\0';
+//
+//
+//    int realLength = 0;
+//
+//    boolean isNumber = false;
+//    boolean isAcceptedChar = false;
+//    boolean isInRange = false;
+//    auto lengthOfInputString = inputString.length();
+//    int lengthOfCurrentSubString = 0;
+//
+//    std::string processArray[lengthOfInputString] = {};
+//    std::string currentSubString = "";
+//
+//    std::string pattern = "";
+//
+//    std::string tempStr;
+//
+//
+//    std::string sampleString[] = { "am", "pm", "monday", "tuesday",
+//                     "wednesday", "thursday", "friday", "saturday", "sunday",
+//                     "january", "february", "march", "april", "may", "june", "july",
+//                     "august", "september", "october", "november", "december",
+//                     "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
+//                     "pst", "pdt" };
+//
+//    int action[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
+//                  5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
+//                  10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
+//                  10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
+//                  10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
+//                  10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
+//    };
+//
+//    // Stop if inputString is empty
+////    if (inputString.isEmpty()) {
+////        return -1;
+////    }
+//
+//    isInRange = index < lengthOfInputString;
+//
+//    // Scan the inputString
+//    while (isInRange) {
+//        currentChar = inputString[index];
+//        currentNumber = -1;
+//        currentSubString = "";
+//        /**
+//         * 1. Segmentation
+//         */
+//
+//        /** Get the currentNumber */
+//        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+//        isInRange = true;
+//
+//        currentNumber = 0;
+//
+//        while (isInRange && isNumber) {
+//            currentNumber = currentNumber * 10 + (currentChar - '0');
+//
+//            // Check isInRange
+//            if (index + 1 < lengthOfInputString) {
+//                currentChar = inputString[++index];
+//                isInRange = true;
+//            } else {
+//                isInRange = false;
+//            }
+//
+//            // Check isNumber
+//            if ('0' <= currentChar
+//                && currentChar <= '9') {
+//                isNumber = true;
+//            } else {
+//                isNumber = false;
+//            }
+//        }  // End while (index < lengthOfInputString && isNumber)
+//
+//        processArray[++idOfCurrentPart] = std::to_string(currentNumber);
+//        // End Get the currentNumber
+//
+//
+//        /** Get currentSubString : A -> Z, a -> z */
+//        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+//                          || ('a' <= currentChar && currentChar <= 'z');
+//
+////        isInRange = index < lengthOfInputString;
+//
+//        while (isInRange && isAcceptedChar) {
+//            currentSubString += (char) currentChar;
+//
+//            if (index + 1 < lengthOfInputString) {
+//                currentChar = inputString[++index];
+//                isInRange = true;
+//            } else {
+//                isInRange = false;
+//            }
+//
+//            if (('A' <= currentChar && currentChar <= 'Z')
+//                || ('a' <= currentChar && currentChar <= 'z')) {
+//                isAcceptedChar = true;
+//            } else {
+//                isAcceptedChar = false;
+//            }  // End while(index < lengthOfInputString && isAcceptedChar)
+//        }
+//        processArray[++idOfCurrentPart] = currentSubString;
+//       // End Get currentSubString : A -> Z, a -> z
+//
+//        /** Not isAcceptedChar && Not isNumber */
+//        if (!isNumber && !isAcceptedChar) {
+//            processArray[++idOfCurrentPart]
+//                    = string_from_char((char) currentChar);
+//
+//            pattern += currentChar;
+//            ++index;
+//        }  // End Not isAcceptedChar && Not isNumber
+//
+//        /**
+//         * 2. Processing
+//         */
+//        currentChar = inputString[index];
+//
+//        if (!year) {
+//        }
+//        /** Process number */
+//
+//        /** Get year */
+//        if (currentNumber >= 100) {
+////            pattern += "%Y";
+//            tempStr = "%Y";
+//            pattern.append(tempStr);
+//            year = true;
+//        }
+//
+//        if ((currentNumber >= 60) && (currentNumber < 100)) {
+////            pattern += "%y";
+//            tempStr = "%y";
+//            pattern.append(tempStr);
+//            year = true;
+//        }
+//
+////        if (currentNumber < 60) {
+////            if ((currentChar == ' ') || (currentChar == '.')
+////                || (currentChar == '/') || (index + 1 == lengthOfInputString)) {
+////                if (month && dayOfMonth) {
+////                    pattern += "%y";
+////                    year = true;
+////                    goto GetMonth;
+////                }
+////            }
+////        }  // End Get year
+//
+////        /** Get month */
+////        if (!month && currentChar == '/') {
+////            pattern += "%m";
+////            month = true;
+////        }
+////
+//
+////        /** Get hour */
+////        if (!hour && currentNumber < 24) {
+////            if (currentChar == ':') {
+////                pattern += "%H";
+////                hour = true;
+////            }
+////        }
+////
+//
+////        /** Get minute */
+////        if (!minute && currentNumber > 24) {
+////            if (index + 1 < lengthOfInputString) {
+////                pattern += "%M";
+////                minute = true;
+////            }
+////        }
+////
+////        if (!minute && currentChar == ':' && hour) {
+////            pattern += "%M";
+////            minute = true;
+////        }
+////
+////        if (!minute) {
+////            if (currentChar == ' ' || currentChar == '.'
+////                || currentChar == '-' || index + 1 == lengthOfInputString) {
+////                if (hour) {
+////                    pattern += "%M";
+////                    minute = true;
+////                }
+////            }
+////        }  // End Get minute
+////
+//
+////        /** Get second */
+////        if (!second) {
+////            if (currentChar == ' ' || currentChar == '.'
+////                || currentChar == '-' || index + 1 == lengthOfInputString) {
+////                if (hour && minute) {
+////                    pattern += "%S";
+////                    second = true;
+////                }
+////            }
+////        }  // End Get second
+////
+//
+////        /** Get dayOfMonth */
+////        if (!dayOfMonth && currentChar == '/' && month) {
+////            pattern += "%d";
+////            dayOfMonth = true;
+////        }
+////
+////        if (!dayOfMonth) {
+////            if (currentChar == ' ' || currentChar == '.'
+////                || currentChar == '-' || index + 1 == lengthOfInputString) {
+////                if (hour && minute && second) {
+////                    pattern += "%d";
+////                    dayOfMonth = true;
+////                }
+////            }
+////        }  // End Get dayOfMonth
+//
+//
+//
+//    }  // End scan the inputString
+//
+////    free(tempString);
+////    return currentNumber;
+////    return lengthOfInputString;
+////    return currentSubString;
+////    return processArray[1];
+////    return idOfCurrentPart;
+////    return processArray->c_str();
+//    return pattern;
+//}
