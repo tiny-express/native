@@ -2000,59 +2000,6 @@ TEST(JavaUtil, DateToGMTString) {
     ASSERT_STR(expected.toString(), actual.toString());
 }
 
-TEST(JavaUtil, DateInprocessParse) {
-    // Create variable to test
-    String expected;
-
-    Date   actualDate;
-    String actualString;
-    String actualFormat;
-    long   actualNumber;
-    String localZone;
-    String zone;
-    String stringTest;
-
-    // Universal full date/time pattern. (en-US)
-//    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
-//    actualString = "abcd2017test20:6";
-//    actualString = "2017";
-
-//    actualNumber = Date::parse(actualString);
-//    ASSERT_EQUAL(-1, actualNumber);
-
-
-
-//    ASSERT_STR("", Date::parse(actualString));
-
-//    // Test Year
-//    actualString = "100";
-//    ASSERT_STR("%Y", Date::parse(actualString).c_str());
-//
-//    actualString = "61";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-//
-//    actualString = "abc61";
-//    ASSERT_STR("abc%y", Date::parse(actualString).c_str());
-//
-//    actualString = "61abc";
-//    ASSERT_STR("%yabc", Date::parse(actualString).c_str());
-//
-//    actualString = "aaa61bbb";
-//    ASSERT_STR("aaa%ybbb", Date::parse(actualString).c_str());
-//
-//    actualString = "59/";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-//
-//    actualString = "59.";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-//
-//    actualString = "59";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-//
-//    actualString = "59 aaa";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-}
-
 TEST(JavaUtil, DateGetSequenceNumber) {
     // Create variable to test
     int expected;
@@ -2105,30 +2052,83 @@ TEST(JavaUtil, DateGetSequenceNumber) {
     ASSERT_EQUAL(expected, actual);
 }
 
-
 TEST(JavaUtil, DateGetSequenceChar) {
     // Create variable to test
     string expected;
-    string actual;
+    string actual = new char[10];
     std::string actualString;
 
     expected     = (string) "Monday";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = (string) Date::getSequenceChar(actualString, 0).c_str();
+    std::strcpy(actual, Date::getSequenceChar(actualString, 0).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "June";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = (string) Date::getSequenceChar(actualString, 8).c_str();
+    std::strcpy(actual, Date::getSequenceChar(actualString, 8).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "PM";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = (string) Date::getSequenceChar(actualString, 30).c_str();
+    std::strcpy(actual, Date::getSequenceChar(actualString, 30).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "T";
     actualString = "2009-06-15T13:45:30.0000000-07:00";
-    actual = (string) Date::getSequenceChar(actualString, 10).c_str();
+    std::strcpy(actual, Date::getSequenceChar(actualString, 10).c_str());
     ASSERT_STR(expected, actual);
+
+    delete[] actual;
+}
+
+TEST(JavaUtil, DateInprocessParse) {
+    // Create variable to test
+    String expected;
+
+    Date   actualDate;
+    String actualString;
+    String actualFormat;
+    long   actualNumber;
+    String localZone;
+    String zone;
+    String stringTest;
+
+    // Universal full date/time pattern. (en-US)
+//    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
+//    actualString = "abcd2017test20:6";
+//    actualString = "2017";
+
+//    actualNumber = Date::parse(actualString);
+//    ASSERT_EQUAL(-1, actualNumber);
+
+
+//    ASSERT_STR("", Date::parse(actualString));
+
+//    // Test Year
+//    actualString = "100";
+//    ASSERT_STR("%Y", Date::parse(actualString).c_str());
+//
+//    actualString = "61";
+//    ASSERT_STR("%y", Date::parse(actualString).c_str());
+//
+//    actualString = "abc61";
+//    ASSERT_STR("abc%y", Date::parse(actualString).c_str());
+//
+//    actualString = "61abc";
+//    ASSERT_STR("%yabc", Date::parse(actualString).c_str());
+//
+//    actualString = "aaa61bbb";
+//    ASSERT_STR("aaa%ybbb", Date::parse(actualString).c_str());
+//
+//    actualString = "59/";
+//    ASSERT_STR("%y", Date::parse(actualString).c_str());
+//
+//    actualString = "59.";
+//    ASSERT_STR("%y", Date::parse(actualString).c_str());
+//
+//    actualString = "59";
+//    ASSERT_STR("%y", Date::parse(actualString).c_str());
+//
+//    actualString = "59 aaa";
+//    ASSERT_STR("%y", Date::parse(actualString).c_str());
 }

@@ -562,146 +562,186 @@ long Date::hashCode() {
 //    return date.getTime() + tzoffset * (60 * 1000);
 //}
 
-//std::string Date::parse(String s) {
-//    // Create variable to store a Date
-////    string tempString = strdup(s.toString());
-//    std::string inputString(s.toString());
-//
-//    std::transform(inputString.begin(), inputString.end(),
-//                   inputString.begin(), ::tolower);
-//
-//    auto notFound = std::string::npos;
-//
-//    boolean year = false;
-//    boolean month = false;
-//    boolean dayOfMonth = false;
-//    boolean hour = false;
-//    boolean minute = false;
-//    boolean second = false;
-//
-//    int millis = -1;
-//    int currentChar = -1;
-//    int index = 0;
-//    int currentNumber = -1;
-//    int wst = -1;
-//    int tzoffset = -1;
-//
-//    int idOfCurrentPart = 0;
-//    char previousChar = '\0';
-//
-//
-//    int realLength = 0;
-//
-//    boolean isNumber = false;
-//    boolean isAcceptedChar = false;
-//    boolean isInRange = false;
-//    auto inputString.length() = inputString.length();
-//    int lengthOfCurrentSubString = 0;
-//
-//    std::string processArray[inputString.length()];
-//    std::string currentSubString = "";
-//
-//    std::string pattern = "";
-//
-//    std::string tempStr;
-//
-//
-//    std::string sampleString[] = { "am", "pm", "monday", "tuesday",
-//                     "wednesday", "thursday", "friday", "saturday", "sunday",
-//                     "january", "february", "march", "april", "may", "june", "july",
-//                     "august", "september", "october", "november", "december",
-//                     "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
-//                     "pst", "pdt" };
-//
-//    int action[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
-//                  5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
-//                  10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
-//                  10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
-//                  10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
-//                  10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
-//    };
-//
-//    // Stop if inputString is empty
-////    if (inputString.isEmpty()) {
-////        return -1;
-////    }
-//
-//    isInRange = index < inputString.length();
-//
-//    // Scan the inputString
-//    while (isInRange) {
+int Date::getSequenceNumber(std::string inputString, int indexStart) {
+    boolean isNumber;
+    boolean isInRange;
+    char currentChar;
+    int currentNumber = 0;
+    int &index = indexStart;
+
+    currentChar = inputString[index];
+    isNumber = ('0' <= currentChar) && (currentChar <= '9');
+    isInRange = indexStart < inputString.length();
+
+    /** Get the currentNumber */
+    while (isInRange && isNumber) {
+        currentNumber = currentNumber * 10 + (currentChar - '0');
+        ++index;
+
+        // Check isInRange
+        if (index < inputString.length()) {
+            currentChar = inputString[index];
+            isInRange = true;
+        } else {
+            isInRange = false;
+        }
+
+        // Check isNumber
+        if ('0' <= currentChar && currentChar <= '9') {
+            isNumber = true;
+        } else {
+            isNumber = false;
+        }
+    }  // End while (index < inputString.length() && isNumber)
+
+    return currentNumber;
+}
+
+std::string Date::getSequenceChar(std::string inputString, int indexStart) {
+    boolean isInRange;
+    boolean isAcceptedChar;
+    char currentChar;
+    int &index = indexStart;
+    std::string sequenceChar = "";
+
+    currentChar = inputString[index];
+    isInRange = indexStart < inputString.length();
+
+    /** Check is the char accepted : A -> Z, a -> z */
+    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                     || ('a' <= currentChar && currentChar <= 'z');
+
+    while (isInRange && isAcceptedChar) {
+        sequenceChar += currentChar;
+        ++index;
+
+        if (index < inputString.length()) {
+            currentChar = inputString[index];
+            isInRange = true;
+        } else {
+            isInRange = false;
+        }
+
+        if (('A' <= currentChar && currentChar <= 'Z')
+            || ('a' <= currentChar && currentChar <= 'z')) {
+            isAcceptedChar = true;
+        } else {
+            isAcceptedChar = false;
+        }
+    }  // End while (isInRange && isAcceptedChar)
+
+    return sequenceChar;
+}
+
+std::string Date::parse(String s) {
+    // Create variable to store a Date
+//    string tempString = strdup(s.toString());
+    std::string inputString(s.toString());
+
+    std::transform(inputString.begin(), inputString.end(),
+                   inputString.begin(), ::tolower);
+
+    auto notFound = std::string::npos;
+
+    boolean year = false;
+    boolean month = false;
+    boolean dayOfMonth = false;
+    boolean hour = false;
+    boolean minute = false;
+    boolean second = false;
+
+    int millis = -1;
+    int currentChar = -1;
+    int index = 0;
+    int sequenceNumber = -1;
+    int wst = -1;
+    int tzoffset = -1;
+
+    int idOfCurrentPart = 0;
+    char previousChar = '\0';
+
+
+    int realLength = 0;
+
+    boolean isNumber = false;
+    boolean isAcceptedChar = false;
+    boolean isInRange = false;
+    int lengthOfCurrentSubString = 0;
+
+    std::string processArray[inputString.length()];
+    std::string sequenceChar = "";
+
+    std::string pattern = "";
+
+    std::string tempStr;
+
+
+    std::string sampleString[] = { "am", "pm", "monday", "tuesday",
+                                   "wednesday", "thursday", "friday", "saturday", "sunday",
+                                   "january", "february", "march", "april", "may", "june", "july",
+                                   "august", "september", "october", "november", "december",
+                                   "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt",
+                                   "pst", "pdt" };
+
+    int action[] = { 14, 1, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4,
+                     5, 6, 7, 8, 9, 10, 11, 12, 13, 10000 + 0, 10000 + 0, 10000 + 0, // GMT/UT/UTC
+                     10000 + 5 * 60, 10000 + 4 * 60, // EST/EDT
+                     10000 + 6 * 60, 10000 + 5 * 60, // CST/CDT
+                     10000 + 7 * 60, 10000 + 6 * 60, // MST/MDT
+                     10000 + 8 * 60, 10000 + 7 * 60 // PST/PDT
+    };
+
+    // Stop if inputString is empty
+//    if (inputString.isEmpty()) {
+//        return -1;
+//    }
+
+    isInRange = index < inputString.length();
+
+    // Scan the inputString
+    while (isInRange) {
 //        currentChar = inputString[index];
-//        currentNumber = -1;
-//        currentSubString = "";
-//        /**
-//         * 1. Segmentation
-//         */
-//
-//        /** Get the currentNumber */
-//        isNumber = ('0' <= currentChar) && (currentChar <= '9');
-//        isInRange = true;
-//
-//        currentNumber = 0;
-//
-//        while (isInRange && isNumber) {
-//            currentNumber = currentNumber * 10 + (currentChar - '0');
-//
-//            // Check isInRange
-//            if (index + 1 < inputString.length()) {
-//                currentChar = inputString[++index];
-//                isInRange = true;
-//            } else {
-//                isInRange = false;
-//            }
-//
-//            // Check isNumber
-//            if ('0' <= currentChar
-//                && currentChar <= '9') {
-//                isNumber = true;
-//            } else {
-//                isNumber = false;
-//            }
-//        }  // End while (index < inputString.length() && isNumber)
-//
-//        processArray[++idOfCurrentPart] = std::to_string(currentNumber);
-//        // End Get the currentNumber
-//
-//
-//        /** Get currentSubString : A -> Z, a -> z */
-//        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-//                          || ('a' <= currentChar && currentChar <= 'z');
-//
-////        isInRange = index < inputString.length();
-//
-//        while (isInRange && isAcceptedChar) {
-//            currentSubString += (char) currentChar;
-//
-//            if (index + 1 < inputString.length()) {
-//                currentChar = inputString[++index];
-//                isInRange = true;
-//            } else {
-//                isInRange = false;
-//            }
-//
-//            if (('A' <= currentChar && currentChar <= 'Z')
-//                || ('a' <= currentChar && currentChar <= 'z')) {
-//                isAcceptedChar = true;
-//            } else {
-//                isAcceptedChar = false;
-//            }  // End while(index < inputString.length() && isAcceptedChar)
-//        }
-//        processArray[++idOfCurrentPart] = currentSubString;
-//       // End Get currentSubString : A -> Z, a -> z
-//
-//        /** Not isAcceptedChar && Not isNumber */
-//        if (!isNumber && !isAcceptedChar) {
-//            processArray[++idOfCurrentPart]
-//                    = string_from_char((char) currentChar);
-//
-//            pattern += currentChar;
+        sequenceNumber = -1;
+        sequenceChar = "";
+
+        /**
+         * 1. Segmentation
+         */
+
+        /** Get the current sequence Number */
+        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+        isInRange = index < inputString.length();
+
+        /** Get the currentNumber */
+        if (isInRange && isNumber) {
+            sequenceNumber = Date::getSequenceNumber(inputString, index);
+        }
+
+        processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
+         // End Get the currentNumber
+
+
+        /** Get currentSubString : A -> Z, a -> z */
+        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                         || ('a' <= currentChar && currentChar <= 'z');
+
+        isInRange = index < inputString.length();
+
+        if (isInRange && isAcceptedChar) {
+            sequenceChar = Date::getSequenceChar(inputString, index);
+        }
+        processArray[++idOfCurrentPart] = sequenceChar;
+        // End Get currentSubString : A -> Z, a -> z
+
+        /** Not isAcceptedChar && Not isNumber */
+        if (!isNumber && !isAcceptedChar) {
+            processArray[++idOfCurrentPart]
+                    = string_from_char((char) currentChar);
+
+            pattern += currentChar;
 //            ++index;
-//        }  // End Not isAcceptedChar && Not isNumber
-//
+        }  // End Not isAcceptedChar && Not isNumber
+
 //        /**
 //         * 2. Processing
 //         */
@@ -712,27 +752,26 @@ long Date::hashCode() {
 //        /** Process number */
 //
 //        /** Get year */
-//        if (currentNumber >= 100) {
+//        if (sequenceNumber >= 100) {
 ////            pattern += "%Y";
 //            tempStr = "%Y";
 //            pattern.append(tempStr);
 //            year = true;
 //        }
 //
-//        if ((currentNumber >= 60) && (currentNumber < 100)) {
+//        if ((sequenceNumber >= 60) && (sequenceNumber < 100)) {
 ////            pattern += "%y";
 //            tempStr = "%y";
 //            pattern.append(tempStr);
 //            year = true;
 //        }
-
-//        if (currentNumber < 60) {
+//
+//        if (sequenceNumber < 60) {
 //            if ((currentChar == ' ') || (currentChar == '.')
 //                || (currentChar == '/') || (index + 1 == inputString.length())) {
 //                if (month && dayOfMonth) {
 //                    pattern += "%y";
 //                    year = true;
-//                    goto GetMonth;
 //                }
 //            }
 //        }  // End Get year
@@ -743,18 +782,18 @@ long Date::hashCode() {
 //            month = true;
 //        }
 //
-
+//
 //        /** Get hour */
-//        if (!hour && currentNumber < 24) {
+//        if (!hour && sequenceNumber < 24) {
 //            if (currentChar == ':') {
 //                pattern += "%H";
 //                hour = true;
 //            }
 //        }
 //
-
+//
 //        /** Get minute */
-//        if (!minute && currentNumber > 24) {
+//        if (!minute && sequenceNumber > 24) {
 //            if (index + 1 < inputString.length()) {
 //                pattern += "%M";
 //                minute = true;
@@ -776,7 +815,7 @@ long Date::hashCode() {
 //            }
 //        }  // End Get minute
 //
-
+//
 //        /** Get second */
 //        if (!second) {
 //            if (currentChar == ' ' || currentChar == '.'
@@ -788,7 +827,7 @@ long Date::hashCode() {
 //            }
 //        }  // End Get second
 //
-
+//
 //        /** Get dayOfMonth */
 //        if (!dayOfMonth && currentChar == '/' && month) {
 //            pattern += "%d";
@@ -804,10 +843,8 @@ long Date::hashCode() {
 //                }
 //            }
 //        }  // End Get dayOfMonth
-
-
-
-//    }  // End scan the inputString
+        isInRange = index < inputString.length();
+    }  // End scan the inputString
 
 //    free(tempString);
 //    return currentNumber;
@@ -816,75 +853,5 @@ long Date::hashCode() {
 //    return processArray[1];
 //    return idOfCurrentPart;
 //    return processArray->c_str();
-//    return pattern;
-//}
-
-int Date::getSequenceNumber(std::string inputString, int indexStart) {
-    boolean isNumber;
-    boolean isInRange;
-    char currentChar;
-    int currentNumber = 0;
-    int index = indexStart;
-
-    currentChar = inputString[index];
-    isNumber = ('0' <= currentChar) && (currentChar <= '9');
-    isInRange = indexStart < inputString.length();
-
-    /** Get the currentNumber */
-    while (isInRange && isNumber) {
-        currentNumber = currentNumber * 10 + (currentChar - '0');
-
-        // Check isInRange
-        if (index + 1 < inputString.length()) {
-            currentChar = inputString[++index];
-            isInRange = true;
-        } else {
-            isInRange = false;
-        }
-
-        // Check isNumber
-        if ('0' <= currentChar && currentChar <= '9') {
-            isNumber = true;
-        } else {
-            isNumber = false;
-        }
-    }  // End while (index < inputString.length() && isNumber)
-
-    return currentNumber;
+    return pattern;
 }
-
-std::string Date::getSequenceChar(std::string inputString, int indexStart) {
-    boolean isInRange;
-    boolean isAcceptedChar;
-    char currentChar;
-    int index = indexStart;
-    std::string sequenceChar = "";
-
-    currentChar = inputString[index];
-    isInRange = indexStart < inputString.length();
-
-    /** Check is the char accepted : A -> Z, a -> z */
-    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-                     || ('a' <= currentChar && currentChar <= 'z');
-
-    while (isInRange && isAcceptedChar) {
-        sequenceChar += currentChar;
-
-        if (index + 1 < inputString.length()) {
-            currentChar = inputString[++index];
-            isInRange = true;
-        } else {
-            isInRange = false;
-        }
-
-        if (('A' <= currentChar && currentChar <= 'Z')
-            || ('a' <= currentChar && currentChar <= 'z')) {
-            isAcceptedChar = true;
-        } else {
-            isAcceptedChar = false;
-        }
-    }  // End while (isInRange && isAcceptedChar)
-
-    return sequenceChar;
-}
-
