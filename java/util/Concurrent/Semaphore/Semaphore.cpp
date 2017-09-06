@@ -107,13 +107,16 @@ boolean Concurrent::Semaphore::tryAcquire(int permits, long timeout) {
         long waitTime = timeout;
         while (true) {
             std::unique_lock<std::mutex> conditionLocker(conditionMutexObject);
-            const long startTime = duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
-            std::cv_status waitStatus = conditionObject.wait_for(conditionLocker, std::chrono::milliseconds(waitTime));
+            const long startTime = duration_cast<milliseconds>(
+                    steady_clock::now().time_since_epoch()).count();
+            std::cv_status waitStatus = conditionObject.wait_for(
+                    conditionLocker, std::chrono::milliseconds(waitTime));
             if (waitStatus == std::cv_status::timeout) {
                 return false;
             }
 
-            const long elapsedTime = duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count() - startTime;
+            const long elapsedTime = duration_cast<milliseconds>(
+                    steady_clock::now().time_since_epoch()).count() - startTime;
             waitTime -= elapsedTime;
 
             {

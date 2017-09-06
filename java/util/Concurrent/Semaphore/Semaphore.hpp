@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_CONCURRENT_SEMAPHORE_HPP_
-#define JAVA_UTIL_CONCURRENT_SEMAPHORE_HPP_
+#ifndef JAVA_UTIL_CONCURRENT_SEMAPHORE_SEMAPHORE_HPP_
+#define JAVA_UTIL_CONCURRENT_SEMAPHORE_SEMAPHORE_HPP_
 
 #include "../../../Lang.hpp"
 #include "../../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
@@ -59,8 +59,8 @@ namespace Java {
                 std::condition_variable conditionObject;
                 int permitCounter;
             };
-        }
-    }
-}
+        } // namespace Concurrent
+    } // namespace Util
+} // namespace Java
 
 #endif //JAVA_UTIL_CONCURRENT_SEMAPHORE_HPP_
