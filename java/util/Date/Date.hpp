@@ -577,7 +577,25 @@ namespace Java {
             static long UTC(int year, int month, int date,
                             int hrs, int min, int sec);
 
-            static int getCurrentNumberFromInputString(std::string inputString, int indexStart);
+            /**
+             * Get Current Number From InputString
+             * Sub method of Date::parse(String inputString)
+             *
+             * @param inputString
+             * @param indexStart
+             * @return int
+             */
+            static int getSequenceNumberFromInputString(std::string inputString, int indexStart);
+
+            /**
+            * Get Current                                                                                                                From InputString
+            * Sub method of Date::parse(String inputString)
+            *
+            * @param inputString
+            * @param indexStart
+            * @return int
+            */
+            static int getSequenceCharFromInputString(std::string inputString, int indexStart);
         };
     }  // namespace Util
 }  // namespace Java
