@@ -2000,7 +2000,7 @@ TEST(JavaUtil, DateToGMTString) {
     ASSERT_STR(expected.toString(), actual.toString());
 }
 
-TEST(JavaUtil, InprocessParse) {
+TEST(JavaUtil, DateInprocessParse) {
     // Create variable to test
     String expected;
 
@@ -2051,4 +2051,65 @@ TEST(JavaUtil, InprocessParse) {
 //
 //    actualString = "59 aaa";
 //    ASSERT_STR("%y", Date::parse(actualString).c_str());
+}
+
+TEST(JavaUtil, DateGetCurrentNumberFromInputString) {
+    // Create variable to test
+    int expected;
+    int actual;
+    std::string actualString;
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 15;
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 13);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 2009;
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 17);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 1;
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 22);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 45;
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 24);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 6;
+    actualString = "6/15/2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 0);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 15;
+    actualString = "6/15/2009 1:45:30 PM";
+    actual = Date::getCurrentNumberFromInputString(actualString, 2);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 2009;
+    actualString = "2009-06-15T13:45:30.0000000-07:00";
+    actual = Date::getCurrentNumberFromInputString(actualString, 0);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 15;
+    actualString = "2009-06-15T13:45:30.0000000-07:00";
+    actual = Date::getCurrentNumberFromInputString(actualString, 8);
+    ASSERT_EQUAL(expected, actual);
+
+    // Full date/time pattern (long time). (en-US)
+    expected     = 30;
+    actualString = "2009-06-15T13:45:30.0000000-07:00";
+    actual = Date::getCurrentNumberFromInputString(actualString, 17);
+    ASSERT_EQUAL(expected, actual);
 }

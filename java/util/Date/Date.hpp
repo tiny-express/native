@@ -576,6 +576,8 @@ namespace Java {
              */
             static long UTC(int year, int month, int date,
                             int hrs, int min, int sec);
+
+            static int getCurrentNumberFromInputString(std::string inputString, int indexStart);
         };
     }  // namespace Util
 }  // namespace Java
