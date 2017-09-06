@@ -269,7 +269,7 @@ long Date::hashCode() {
 //    int prevc = 0;
 //
 //    boolean isZeroToNine;
-//    int lengthOfInputString = inputString.length();
+//    int inputString.length() = inputString.length();
 //
 ////    const std::vector<std::string> wtb = { "am", "pm", "monday", "tuesday",
 ////                                           "wednesday", "thursday", "friday", "saturday", "sunday",
@@ -307,7 +307,7 @@ long Date::hashCode() {
 //        return -1;
 //
 //    // Scan the inputString
-//    while (index < lengthOfInputString) {
+//    while (index < inputString.length()) {
 //        currentChar = inputString[index];
 //        index++;
 //
@@ -320,7 +320,7 @@ long Date::hashCode() {
 //            int lengthOfComment = 1;
 //
 //            // The length of comment must >= 2. If not stop here.
-//            while (index < lengthOfInputString) {
+//            while (index < inputString.length()) {
 //                currentChar = inputString[index];
 //                index++;
 //
@@ -344,7 +344,7 @@ long Date::hashCode() {
 //            currentNumber = currentChar - '0';
 //
 //            // Get the currentNumber
-//            while (index < lengthOfInputString && isZeroToNine) {
+//            while (index < inputString.length() && isZeroToNine) {
 //                currentNumber = currentNumber * 10 + currentChar - '0';
 //                index++;
 //                currentChar = inputString[index];
@@ -383,7 +383,7 @@ long Date::hashCode() {
 //                }
 //                else {
 //                    if (currentChar <= ' ' || currentChar == ',' || currentChar == '/'
-//                        || index >= lengthOfInputString)
+//                        || index >= inputString.length())
 //                        // year = n < 1900 ? n : n - 1900;
 //                        year = currentNumber;
 //                    else {
@@ -422,7 +422,7 @@ long Date::hashCode() {
 //                }
 //            }
 //
-//            else if (index < lengthOfInputString && currentChar != ','
+//            else if (index < inputString.length() && currentChar != ','
 //                     && currentChar > ' ' && currentChar != '-') {
 //                return -1;
 //            }
@@ -462,7 +462,7 @@ long Date::hashCode() {
 //        else {
 //            int st = index - 1;
 //
-//            while (index < lengthOfInputString) {
+//            while (index < inputString.length()) {
 //                currentChar = inputString[index];
 //                if (!('A' <= currentChar && currentChar <= 'Z'
 //                      || 'a' <= currentChar && currentChar <= 'z')) {
@@ -595,10 +595,10 @@ long Date::hashCode() {
 //    boolean isNumber = false;
 //    boolean isAcceptedChar = false;
 //    boolean isInRange = false;
-//    auto lengthOfInputString = inputString.length();
+//    auto inputString.length() = inputString.length();
 //    int lengthOfCurrentSubString = 0;
 //
-//    std::string processArray[lengthOfInputString];
+//    std::string processArray[inputString.length()];
 //    std::string currentSubString = "";
 //
 //    std::string pattern = "";
@@ -626,7 +626,7 @@ long Date::hashCode() {
 ////        return -1;
 ////    }
 //
-//    isInRange = index < lengthOfInputString;
+//    isInRange = index < inputString.length();
 //
 //    // Scan the inputString
 //    while (isInRange) {
@@ -647,7 +647,7 @@ long Date::hashCode() {
 //            currentNumber = currentNumber * 10 + (currentChar - '0');
 //
 //            // Check isInRange
-//            if (index + 1 < lengthOfInputString) {
+//            if (index + 1 < inputString.length()) {
 //                currentChar = inputString[++index];
 //                isInRange = true;
 //            } else {
@@ -661,7 +661,7 @@ long Date::hashCode() {
 //            } else {
 //                isNumber = false;
 //            }
-//        }  // End while (index < lengthOfInputString && isNumber)
+//        }  // End while (index < inputString.length() && isNumber)
 //
 //        processArray[++idOfCurrentPart] = std::to_string(currentNumber);
 //        // End Get the currentNumber
@@ -671,12 +671,12 @@ long Date::hashCode() {
 //        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
 //                          || ('a' <= currentChar && currentChar <= 'z');
 //
-////        isInRange = index < lengthOfInputString;
+////        isInRange = index < inputString.length();
 //
 //        while (isInRange && isAcceptedChar) {
 //            currentSubString += (char) currentChar;
 //
-//            if (index + 1 < lengthOfInputString) {
+//            if (index + 1 < inputString.length()) {
 //                currentChar = inputString[++index];
 //                isInRange = true;
 //            } else {
@@ -688,7 +688,7 @@ long Date::hashCode() {
 //                isAcceptedChar = true;
 //            } else {
 //                isAcceptedChar = false;
-//            }  // End while(index < lengthOfInputString && isAcceptedChar)
+//            }  // End while(index < inputString.length() && isAcceptedChar)
 //        }
 //        processArray[++idOfCurrentPart] = currentSubString;
 //       // End Get currentSubString : A -> Z, a -> z
@@ -728,7 +728,7 @@ long Date::hashCode() {
 
 //        if (currentNumber < 60) {
 //            if ((currentChar == ' ') || (currentChar == '.')
-//                || (currentChar == '/') || (index + 1 == lengthOfInputString)) {
+//                || (currentChar == '/') || (index + 1 == inputString.length())) {
 //                if (month && dayOfMonth) {
 //                    pattern += "%y";
 //                    year = true;
@@ -755,7 +755,7 @@ long Date::hashCode() {
 
 //        /** Get minute */
 //        if (!minute && currentNumber > 24) {
-//            if (index + 1 < lengthOfInputString) {
+//            if (index + 1 < inputString.length()) {
 //                pattern += "%M";
 //                minute = true;
 //            }
@@ -768,7 +768,7 @@ long Date::hashCode() {
 //
 //        if (!minute) {
 //            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == lengthOfInputString) {
+//                || currentChar == '-' || index + 1 == inputString.length()) {
 //                if (hour) {
 //                    pattern += "%M";
 //                    minute = true;
@@ -780,7 +780,7 @@ long Date::hashCode() {
 //        /** Get second */
 //        if (!second) {
 //            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == lengthOfInputString) {
+//                || currentChar == '-' || index + 1 == inputString.length()) {
 //                if (hour && minute) {
 //                    pattern += "%S";
 //                    second = true;
@@ -797,7 +797,7 @@ long Date::hashCode() {
 //
 //        if (!dayOfMonth) {
 //            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == lengthOfInputString) {
+//                || currentChar == '-' || index + 1 == inputString.length()) {
 //                if (hour && minute && second) {
 //                    pattern += "%d";
 //                    dayOfMonth = true;
@@ -811,7 +811,7 @@ long Date::hashCode() {
 
 //    free(tempString);
 //    return currentNumber;
-//    return lengthOfInputString;
+//    return inputString.length();
 //    return currentSubString;
 //    return processArray[1];
 //    return idOfCurrentPart;
@@ -819,9 +819,9 @@ long Date::hashCode() {
 //    return pattern;
 //}
 
-int Date::getSequenceNumberFromInputString(std::string inputString, int indexStart) {
-    boolean isNumber = false;
-    boolean isInRange = false;
+int Date::getSequenceNumber(std::string inputString, int indexStart) {
+    boolean isNumber;
+    boolean isInRange;
     char currentChar;
     int currentNumber = 0;
     int index = indexStart;
@@ -848,8 +848,43 @@ int Date::getSequenceNumberFromInputString(std::string inputString, int indexSta
         } else {
             isNumber = false;
         }
-    }  // End while (index < lengthOfInputString && isNumber)
+    }  // End while (index < inputString.length() && isNumber)
 
     return currentNumber;
+}
+
+std::string Date::getSequenceChar(std::string inputString, int indexStart) {
+    boolean isInRange;
+    boolean isAcceptedChar;
+    char currentChar;
+    int index = indexStart;
+    std::string sequenceChar = "";
+
+    currentChar = inputString[index];
+    isInRange = indexStart < inputString.length();
+
+    /** Check is the char accepted : A -> Z, a -> z */
+    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                     || ('a' <= currentChar && currentChar <= 'z');
+
+    while (isInRange && isAcceptedChar) {
+        sequenceChar += currentChar;
+
+        if (index + 1 < inputString.length()) {
+            currentChar = inputString[++index];
+            isInRange = true;
+        } else {
+            isInRange = false;
+        }
+
+        if (('A' <= currentChar && currentChar <= 'Z')
+            || ('a' <= currentChar && currentChar <= 'z')) {
+            isAcceptedChar = true;
+        } else {
+            isAcceptedChar = false;
+        }
+    }  // End while (isInRange && isAcceptedChar)
+
+    return sequenceChar;
 }
 

@@ -2053,63 +2053,82 @@ TEST(JavaUtil, DateInprocessParse) {
 //    ASSERT_STR("%y", Date::parse(actualString).c_str());
 }
 
-TEST(JavaUtil, DateGetSequenceNumberFromInputString) {
+TEST(JavaUtil, DateGetSequenceNumber) {
     // Create variable to test
     int expected;
     int actual;
     std::string actualString;
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 15;
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 13);
+    actual = Date::getSequenceNumber(actualString, 13);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 2009;
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 17);
+    actual = Date::getSequenceNumber(actualString, 17);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 1;
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 22);
+    actual = Date::getSequenceNumber(actualString, 22);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 45;
     actualString = "Monday, June 15, 2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 24);
+    actual = Date::getSequenceNumber(actualString, 24);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 6;
     actualString = "6/15/2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 0);
+    actual = Date::getSequenceNumber(actualString, 0);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 15;
     actualString = "6/15/2009 1:45:30 PM";
-    actual = Date::getSequenceNumberFromInputString(actualString, 2);
+    actual = Date::getSequenceNumber(actualString, 2);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 2009;
     actualString = "2009-06-15T13:45:30.0000000-07:00";
-    actual = Date::getSequenceNumberFromInputString(actualString, 0);
+    actual = Date::getSequenceNumber(actualString, 0);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 15;
     actualString = "2009-06-15T13:45:30.0000000-07:00";
-    actual = Date::getSequenceNumberFromInputString(actualString, 8);
+    actual = Date::getSequenceNumber(actualString, 8);
     ASSERT_EQUAL(expected, actual);
 
-    // Full date/time pattern (long time). (en-US)
     expected     = 30;
     actualString = "2009-06-15T13:45:30.0000000-07:00";
-    actual = Date::getSequenceNumberFromInputString(actualString, 17);
+    actual = Date::getSequenceNumber(actualString, 17);
     ASSERT_EQUAL(expected, actual);
+}
+
+
+TEST(JavaUtil, DateGetSequenceChar) {
+    // Create variable to test
+    string expected;
+    string actual;
+    std::string actualString;
+
+    expected     = (string) "Monday";
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = (string) Date::getSequenceChar(actualString, 0).c_str();
+    ASSERT_STR(expected, actual);
+
+    expected     = (string) "June";
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = (string) Date::getSequenceChar(actualString, 8).c_str();
+    ASSERT_STR(expected, actual);
+
+    expected     = (string) "PM";
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    actual = (string) Date::getSequenceChar(actualString, 30).c_str();
+    ASSERT_STR(expected, actual);
+
+    expected     = (string) "T";
+    actualString = "2009-06-15T13:45:30.0000000-07:00";
+    actual = (string) Date::getSequenceChar(actualString, 10).c_str();
+    ASSERT_STR(expected, actual);
 }

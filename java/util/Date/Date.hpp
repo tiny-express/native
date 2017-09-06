@@ -585,17 +585,17 @@ namespace Java {
              * @param indexStart
              * @return int
              */
-            static int getSequenceNumberFromInputString(std::string inputString, int indexStart);
+            static int getSequenceNumber(std::string inputString, int indexStart);
 
             /**
-            * Get Current                                                                                                                From InputString
+            * Get Current Sequence Char From InputString                                                                                                            From InputString
             * Sub method of Date::parse(String inputString)
             *
             * @param inputString
             * @param indexStart
-            * @return int
+            * @return std::string
             */
-            static int getSequenceCharFromInputString(std::string inputString, int indexStart);
+            static std::string getSequenceChar(std::string inputString, int indexStart);
         };
     }  // namespace Util
 }  // namespace Java
