@@ -585,7 +585,7 @@ namespace Java {
              * @param indexStart
              * @return int
              */
-            static int getSequenceNumber(std::string inputString, int indexStart);
+            static int getSequenceNumber(std::string inputString, int &indexStart);
 
             /**
             * Get Current Sequence Char From InputString                                                                                                            From InputString
@@ -595,7 +595,10 @@ namespace Java {
             * @param indexStart
             * @return std::string
             */
-            static std::string getSequenceChar(std::string inputString, int indexStart);
+            static std::string getSequenceChar(std::string inputString, int &indexStart);
+
+            static std::string processNumber(
+                    std::string previousString, int number, char followedChar);
         };
     }  // namespace Util
 }  // namespace Java

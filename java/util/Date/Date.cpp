@@ -562,7 +562,7 @@ long Date::hashCode() {
 //    return date.getTime() + tzoffset * (60 * 1000);
 //}
 
-int Date::getSequenceNumber(std::string inputString, int indexStart) {
+int Date::getSequenceNumber(std::string inputString, int &indexStart) {
     boolean isNumber;
     boolean isInRange;
     char currentChar;
@@ -597,7 +597,7 @@ int Date::getSequenceNumber(std::string inputString, int indexStart) {
     return currentNumber;
 }
 
-std::string Date::getSequenceChar(std::string inputString, int indexStart) {
+std::string Date::getSequenceChar(std::string inputString, int &indexStart) {
     boolean isInRange;
     boolean isAcceptedChar;
     char currentChar;
@@ -641,8 +641,6 @@ std::string Date::parse(String s) {
     std::transform(inputString.begin(), inputString.end(),
                    inputString.begin(), ::tolower);
 
-    auto notFound = std::string::npos;
-
     boolean year = false;
     boolean month = false;
     boolean dayOfMonth = false;
@@ -668,7 +666,7 @@ std::string Date::parse(String s) {
     boolean isInRange = false;
     int lengthOfCurrentSubString = 0;
 
-    std::string processArray[inputString.length()];
+    std::string processArray[500];
     std::string sequenceChar = "";
 
     std::string pattern = "";
@@ -676,7 +674,7 @@ std::string Date::parse(String s) {
     std::string tempStr;
 
 
-    std::string sampleString[] = { "am", "pm", "monday", "tuesday",
+    std::string sampleStringArray[] = { "am", "pm", "monday", "tuesday",
                                    "wednesday", "thursday", "friday", "saturday", "sunday",
                                    "january", "february", "march", "april", "may", "june", "july",
                                    "august", "september", "october", "november", "december",
@@ -700,7 +698,6 @@ std::string Date::parse(String s) {
 
     // Scan the inputString
     while (isInRange) {
-//        currentChar = inputString[index];
         sequenceNumber = -1;
         sequenceChar = "";
 
@@ -708,73 +705,88 @@ std::string Date::parse(String s) {
          * 1. Segmentation
          */
 
-        /** Get the current sequence Number */
-        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+        /** Get the current sequenceNumber */
+        currentChar = inputString[index];
         isInRange = index < inputString.length();
+        isNumber = ('0' <= currentChar) && (currentChar <= '9');
 
-        /** Get the currentNumber */
         if (isInRange && isNumber) {
             sequenceNumber = Date::getSequenceNumber(inputString, index);
+            processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
+
         }
 
-        processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
-         // End Get the currentNumber
-
-
-        /** Get currentSubString : A -> Z, a -> z */
+        /** Get current sequenceChar  : A -> Z, a -> z */
+        currentChar = inputString[index];
+        isInRange = index < inputString.length();
         isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
                          || ('a' <= currentChar && currentChar <= 'z');
 
-        isInRange = index < inputString.length();
-
         if (isInRange && isAcceptedChar) {
             sequenceChar = Date::getSequenceChar(inputString, index);
-        }
-        processArray[++idOfCurrentPart] = sequenceChar;
-        // End Get currentSubString : A -> Z, a -> z
 
-        /** Not isAcceptedChar && Not isNumber */
-        if (!isNumber && !isAcceptedChar) {
+            /** Find sequenceChar in sampleStringArray */
+            auto indexFind = 0;
+            auto limitFind = sampleStringArray->length();
+
+            long found = std::string::npos;
+
+            for (indexFind; indexFind < limitFind; indexFind++) {
+                found = sampleStringArray[indexFind].find(sequenceChar);
+                if (found != std::string::npos) {
+                    // TODO(thoangminh): check here
+                }
+            }
+
+            if (found == std::string::npos) {
+                pattern += sequenceChar;
+            }
+
+            processArray[++idOfCurrentPart] = sequenceChar;
+        }  // End Get currentSubString : A -> Z, a -> z
+
+        /** Not isNumber && Not isAcceptedChar */
+        currentChar = inputString[index];
+        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                         || ('a' <= currentChar && currentChar <= 'z');
+
+        if (!isNumber && !isAcceptedChar && index < inputString.length()) {
             processArray[++idOfCurrentPart]
                     = string_from_char((char) currentChar);
 
             pattern += currentChar;
-//            ++index;
+            ++index;
         }  // End Not isAcceptedChar && Not isNumber
 
-//        /**
-//         * 2. Processing
-//         */
-//        currentChar = inputString[index];
-//
-//        if (!year) {
-//        }
-//        /** Process number */
-//
-//        /** Get year */
-//        if (sequenceNumber >= 100) {
-////            pattern += "%Y";
-//            tempStr = "%Y";
-//            pattern.append(tempStr);
-//            year = true;
-//        }
-//
-//        if ((sequenceNumber >= 60) && (sequenceNumber < 100)) {
-////            pattern += "%y";
-//            tempStr = "%y";
-//            pattern.append(tempStr);
-//            year = true;
-//        }
-//
-//        if (sequenceNumber < 60) {
-//            if ((currentChar == ' ') || (currentChar == '.')
-//                || (currentChar == '/') || (index + 1 == inputString.length())) {
-//                if (month && dayOfMonth) {
-//                    pattern += "%y";
-//                    year = true;
-//                }
-//            }
-//        }  // End Get year
+        /**
+         * 2. Processing
+         */
+
+        if (!year) {
+        }
+        /** Process number */
+
+        /** Get year */
+        if (sequenceNumber >= 100) {
+            pattern += "%Y";
+            year = true;
+        }
+
+        if ((sequenceNumber >= 60) && (sequenceNumber < 100)) {
+            pattern += "%y";
+            year = true;
+        }
+
+        if (sequenceNumber < 60) {
+            if ((currentChar == ' ') || (currentChar == '.')
+                || (currentChar == '/') || (index + 1 == inputString.length())) {
+                if (month && dayOfMonth) {
+                    pattern += "%y";
+                    year = true;
+                }
+            }
+        }  // End Get year
 
 //        /** Get month */
 //        if (!month && currentChar == '/') {
