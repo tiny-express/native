@@ -633,7 +633,7 @@ std::string Date::getSequenceChar(std::string inputString, int &indexStart) {
     return sequenceChar;
 }
 
-std::string Date::parse(String s) {
+std::string Date::getPattern(String s) {
     // Create variable to store a Date
 //    string tempString = strdup(s.toString());
     std::string inputString(s.toString());
@@ -840,185 +840,281 @@ std::string Date::processNumber(std::string previousString, int number,
         }
     }
 
-//    /**
-//     *  number: 24 -> 31
-//     *  or day of month: %d
-//     *  minute: %M
-//     *  or second: %S
-//     *  or year: %y
-//     */
-//    if (24 <= number && number <= 31) {
-//        if (dateTime.dayOfMonth == false) {
-//
-//            dateTime.dayOfMonth = true;
-//            return "%d";
-//        }
-//
-//        if(dateTime.dayOfMonth == true && dateTime.minute == false) {
-//
-//            dateTime.minute = true;
-//            return "%M";
-//        }
-//
-//        if(dateTime.dayOfMonth == true && dateTime.minute == true
-//           && dateTime.second == false) {
-//
-//            dateTime.second = true;
-//            return "%S";
-//        }
-//
-//        if(dateTime.dayOfMonth == true && dateTime.minute == true
-//           && dateTime.second == true && dateTime.year == false) {
-//
-//            dateTime.year = true;
-//            return "%y";
-//        }
-//    }
-//
-//    /**
-//     *  number: 12 -> 23
-//     *  or day of month: %d
-//     *  or hour: %H
-//     *  minute: %M
-//     *  or second: %S
-//     *  or year: %y
-//     */
-//    if (12 <= number && number <= 23) {
-//        if (dateTime.dayOfMonth == false) {
-//
-//            dateTime.dayOfMonth = true;
-//            return "%d";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.hour == false) {
-//
-//            dateTime.hour = true;
-//            return "%H";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.hour == true
-//            && dateTime.minute == false) {
-//
-//            dateTime.minute = true;
-//            return "%M";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.hour == true
-//            && dateTime.minute == true && dateTime.second == false) {
-//
-//            dateTime.second = true;
-//            return "%S";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.hour == true
-//            && dateTime.minute == true && dateTime.second == true
-//            && dateTime.year == false) {
-//
-//            dateTime.year = true;
-//            return "%S";
-//        }
-//    }
-//
-//    /**
-//     *  number: 1 -> 11
-//     *  or day of month: %d
-//     *  or month: %m
-//     *  or hour: %H
-//     *  minute: %M
-//     *  or second: %S
-//     *  or year: %y
-//     */
-//    if (1 <= number && number <= 11) {
-//
-//        if (dateTime.dayOfMonth == false) {
-//
-//            dateTime.dayOfMonth = true;
-//            return "%d";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.month == false) {
-//
-//            dateTime.month = true;
-//            return "%m";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.month == true
-//            && dateTime.hour == false) {
-//
-//            dateTime.hour = true;
-//            return "%H";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.month == true
-//            && dateTime.hour == true && dateTime.minute == false) {
-//
-//            dateTime.minute = true;
-//            return "%M";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.month == true
-//            && dateTime.hour == true && dateTime.minute == true
-//            && dateTime.second == false) {
-//
-//            dateTime.second = true;
-//            return "%S";
-//        }
-//
-//        if (dateTime.dayOfMonth == true && dateTime.month == true
-//            && dateTime.hour == true && dateTime.minute == true
-//            && dateTime.second == true && dateTime.year == false) {
-//
-//            dateTime.year = true;
-//            return "%y";
-//        }
-//    }
-//
-//    /**
-//     *  number: = 0
-//     *  minute: %M
-//     *  or second: %S
-//     *  or hour.
-//     */
-//    if (number == 0) {
-//
-//        if (dateTime.hour == false && followedChar == ':') {
-//
-//            dateTime.hour = true;
-//            return "%H";
-//        }
-//
-//        if (dateTime.hour == true && dateTime.minute == false
-//            && followedChar == ':') {
-//
-//            dateTime.minute = true;
-//            return "%M";
-//        }
-//
-//        if (previousString.c_str() == ":" && dateTime.second == false
-//            && dateTime.minute == true) {
-//
-//            dateTime.second = true;
-//            return "%S";
-//        }
-//
-//        if (dateTime.hour == false) {
-//
-//            dateTime.hour = true;
-//            return "%H";
-//        }
-//
-//        if (dateTime.hour == true && dateTime.minute == false) {
-//
-//            dateTime.minute = true;
-//            return "%M";
-//        }
-//
-//        if (dateTime.hour == true && dateTime.minute == true
-//            && dateTime.second == false) {
-//
-//            dateTime.second = true;
-//            return "%S";
-//        }
-//    }
+    /**
+     *  number: 24 -> 31
+     *  or day of month: %d
+     *  or year: %y
+     *  minute: %M
+     *  or second: %S
+     */
+    if (24 <= number && number <= 31) {
+
+        if (previousString.compare(":") == 0 && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.minute == true
+            && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+
+        if (dateTime.minute == false && followedChar == ':') {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (dateTime.dayOfMonth == false) {
+
+            dateTime.dayOfMonth = true;
+            return "%d";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == false) {
+
+            dateTime.year = true;
+            return "%y";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == true
+           && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == true
+           && dateTime.minute == true && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+    }
+
+    /**
+     *  number: 12 -> 23
+     *  or day of month: %d
+     *  or year: %y
+     *  or hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    if (12 <= number && number <= 23) {
+
+        if (dateTime.hour == false && followedChar == ':') {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if (dateTime.hour == true && dateTime.minute == false
+            && followedChar == ':') {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == true && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+
+        if (dateTime.dayOfMonth == false) {
+
+            dateTime.dayOfMonth = true;
+            return "%d";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == false) {
+
+            dateTime.year = true;
+            return "%y";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == true
+           && dateTime.hour == false) {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == true
+           && dateTime.hour == true && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.year == true
+           && dateTime.hour == true && dateTime.minute == true
+           && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+    }
+
+    /**
+     *  number: 1 -> 11
+     *  or day of month: %d
+     *  or month: %m
+     *  or year: %y
+     *  or hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    if (1 <= number && number <= 11) {
+
+        if (dateTime.hour == false && followedChar == ':') {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if (dateTime.hour == true && dateTime.minute == false
+            && followedChar == ':') {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == true && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+
+        if (dateTime.dayOfMonth == false
+            && (followedChar == '/' || followedChar == '-')) {
+
+            dateTime.dayOfMonth = true;
+            return "%d";
+        }
+
+        if (dateTime.dayOfMonth == true && dateTime.month == false
+            && (followedChar == '/' || followedChar == '-')) {
+
+            dateTime.month = true;
+            return "%m";
+        }
+
+        if (dateTime.dayOfMonth == false) {
+
+            dateTime.dayOfMonth = true;
+            return "%d";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.month == false) {
+
+            dateTime.month = true;
+            return "%m";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.month == true
+           && dateTime.year == false) {
+
+            dateTime.year = true;
+            return "%y";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.month == true
+           && dateTime.year == true && dateTime.hour == false) {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.month == true
+           && dateTime.year == true && dateTime.hour == true
+           && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if(dateTime.dayOfMonth == true && dateTime.month == true
+           && dateTime.year == true && dateTime.hour == true
+           && dateTime.minute == true && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+    }
+
+    /**
+     *  number: = 0
+     *  hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    if (number == 0) {
+
+        if (dateTime.hour == false && followedChar == ':') {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if (dateTime.hour == true && dateTime.minute == false
+            && followedChar == ':') {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.hour == true
+            && dateTime.minute == true && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+
+        if (dateTime.hour == false) {
+
+            dateTime.hour = true;
+            return "%H";
+        }
+
+        if (dateTime.hour == true && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (dateTime.hour == true && dateTime.minute == true
+            && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+    }
     return "";
 }

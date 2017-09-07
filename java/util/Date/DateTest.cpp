@@ -2091,7 +2091,7 @@ TEST(JavaUtil, DateGetSequenceChar) {
     delete[] actual;
 }
 
-TEST(JavaUtil, DateParse2) {
+TEST(JavaUtil, DateGetPattern) {
     // Create variable to test
     String expected;
 
@@ -2121,48 +2121,108 @@ TEST(JavaUtil, DateParse2) {
      * year: %Y
      */
     actualString = "100";
-    ASSERT_STR("%Y", Date::parse(actualString).c_str());
+    ASSERT_STR("%Y", Date::getPattern(actualString).c_str());
 
     /**
      * number: 60 -> 99
      * year: %y
      */
     actualString = "61";
-    ASSERT_STR("%y", Date::parse(actualString).c_str());
+    ASSERT_STR("%y", Date::getPattern(actualString).c_str());
 
     actualString = "abc61";
-    ASSERT_STR("abc%y", Date::parse(actualString).c_str());
+    ASSERT_STR("abc%y", Date::getPattern(actualString).c_str());
 
     actualString = "61abc";
-    ASSERT_STR("%yabc", Date::parse(actualString).c_str());
+    ASSERT_STR("%yabc", Date::getPattern(actualString).c_str());
 
     actualString = "aaa61bbb";
-    ASSERT_STR("aaa%ybbb", Date::parse(actualString).c_str());
+    ASSERT_STR("aaa%ybbb", Date::getPattern(actualString).c_str());
 
     /**
      * number: 32 -> 59
-     * minute: %M
+     * year: %y
+     * or minute: %M
      * or second: %S
-     * or year: %y
      */
     actualString = "32/";
-    ASSERT_STR("%y/", Date::parse(actualString).c_str());
+    ASSERT_STR("%y/", Date::getPattern(actualString).c_str());
 
     actualString = "32.";
-    ASSERT_STR("%y.", Date::parse(actualString).c_str());
+    ASSERT_STR("%y.", Date::getPattern(actualString).c_str());
 
     actualString = "32";
-    ASSERT_STR("%y", Date::parse(actualString).c_str());
+    ASSERT_STR("%y", Date::getPattern(actualString).c_str());
 
     actualString = "32 aaa";
-    ASSERT_STR("%y aaa", Date::parse(actualString).c_str());
+    ASSERT_STR("%y aaa", Date::getPattern(actualString).c_str());
 
     actualString = "32:";
-    ASSERT_STR("%M:", Date::parse(actualString).c_str());
+    ASSERT_STR("%M:", Date::getPattern(actualString).c_str());
 
     actualString = "32:40";
-    ASSERT_STR("%M:%S", Date::parse(actualString).c_str());
+    ASSERT_STR("%M:%S", Date::getPattern(actualString).c_str());
 
     actualString = "32:40 50";
-    ASSERT_STR("%M:%S %y", Date::parse(actualString).c_str());
+    ASSERT_STR("%M:%S %y", Date::getPattern(actualString).c_str());
+
+    /**
+     *  number: 24 -> 31
+     *  or day of month: %d
+     *  or year: %y
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "24 25:30 31";
+    ASSERT_STR("%d %M:%S %y", Date::getPattern(actualString).c_str());
+
+    actualString = "25:30 24 31";
+    ASSERT_STR("%M:%S %d %y", Date::getPattern(actualString).c_str());
+
+    /**
+    *  number: 12 -> 23
+    *  or day of month: %d
+    *  or year: %y
+    *  or hour: %H
+    *  minute: %M
+    *  or second: %S
+    */
+    actualString = "14 12:20:15 20";
+    ASSERT_STR("%d %H:%M:%S %y", Date::getPattern(actualString).c_str());
+
+    actualString = "12:20:15 14 20";
+    ASSERT_STR("%H:%M:%S %d %y", Date::getPattern(actualString).c_str());
+
+    /**
+     *  number: 1 -> 11
+     *  or day of month: %d
+     *  or month: %m
+     *  or year: %y
+     *  or hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "1/2/11 5:10:11";
+    ASSERT_STR("%d/%m/%y %H:%M:%S", Date::getPattern(actualString).c_str());
+
+    actualString = "1-2-11 11:10:05";
+    ASSERT_STR("%d-%m-%y %H:%M:%S", Date::getPattern(actualString).c_str());
+
+    actualString = "3:11:08 1/2/11";
+    ASSERT_STR("%H:%M:%S %d/%m/%y", Date::getPattern(actualString).c_str());
+
+    /**
+     *  number: = 0
+     *  hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "1/2/11 00:10:11";
+    ASSERT_STR("%d/%m/%y %H:%M:%S", Date::getPattern(actualString).c_str());
+
+    actualString = "1-2-11 11:00:05";
+    ASSERT_STR("%d-%m-%y %H:%M:%S", Date::getPattern(actualString).c_str());
+
+    actualString = "00:00:00 1/2/11";
+    ASSERT_STR("%H:%M:%S %d/%m/%y", Date::getPattern(actualString).c_str());
 }

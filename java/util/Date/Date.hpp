@@ -584,6 +584,9 @@ namespace Java {
              * @param inputString
              * @param indexStart
              * @return int
+             *
+             * @see Date::getPattern(String inputString)
+             * @see Date::parse(String inputString)
              */
             static int getSequenceNumber(std::string inputString, int &indexStart);
 
@@ -594,13 +597,19 @@ namespace Java {
             * @param inputString
             * @param indexStart
             * @return std::string
+            *
+            * @see Date::getPattern(String inputString)
+            * @seeDate::parse(String inputString)
             */
             static std::string getSequenceChar(std::string inputString, int &indexStart);
 
             /**
              * Store Date status
              * support method
-             * Date::parse(String inputString)
+             * Date::getPattern(String inputString)
+             *
+             * @see Date::getPattern(String inputString)
+             * @see Date::parse(String inputString)
              */
             struct DateTime {
                 boolean year = false;
@@ -611,9 +620,34 @@ namespace Java {
                 boolean second = false;
             };
 
+            /**
+             * support method
+             * Date::getPattern(String inputString)
+             *
+             * @param previousString
+             * @param number
+             * @param followedChar
+             * @param dateTime
+             * @return std::string pattern of number
+             *
+             * @see Date::getPattern(String inputString)
+             * @see Date::parse(String inputString)
+             */
             static std::string processNumber(
                     std::string previousString, int number,
                     char followedChar, DateTime &dateTime);
+
+            /**
+             * support method
+             * Date::parse(String inputString)
+             *
+             * @param s
+             * @return std::string pattern of the input String
+             *
+             * @see Date::parse(String inputString)
+             */
+            static std::string getPattern(String s);
+
         };
     }  // namespace Util
 }  // namespace Java
