@@ -2064,13 +2064,13 @@ TEST(JavaUtil, DateGetSequenceChar) {
     expected     = (string) "Monday";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
     index = 0;
-    std::strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
+    strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "abc";
     actualString = "abc61";
     index = 0;
-    std::strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
+    strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
     ASSERT_STR(expected, actual);
 
 //    expected     = (string) "June";
@@ -2114,31 +2114,55 @@ TEST(JavaUtil, DateParse2) {
 
 //    ASSERT_STR("", Date::parse(actualString));
 
-    // Test Year
+    /** Test processing the number */
+
+    /**
+     * number: >= 100
+     * year: %Y
+     */
     actualString = "100";
     ASSERT_STR("%Y", Date::parse(actualString).c_str());
 
+    /**
+     * number: 60 -> 99
+     * year: %y
+     */
     actualString = "61";
     ASSERT_STR("%y", Date::parse(actualString).c_str());
 
     actualString = "abc61";
     ASSERT_STR("abc%y", Date::parse(actualString).c_str());
 
-//    actualString = "61abc";
-//    ASSERT_STR("%yabc", Date::parse(actualString).c_str());
+    actualString = "61abc";
+    ASSERT_STR("%yabc", Date::parse(actualString).c_str());
 
-//    actualString = "aaa61bbb";
-//    ASSERT_STR("aaa%ybbb", Date::parse(actualString).c_str());
+    actualString = "aaa61bbb";
+    ASSERT_STR("aaa%ybbb", Date::parse(actualString).c_str());
 
-//    actualString = "59/";
-//    ASSERT_STR("%y/", Date::parse(actualString).c_str());
-//
-//    actualString = "59.";
-//    ASSERT_STR("%y.", Date::parse(actualString).c_str());
-//
-//    actualString = "59";
-//    ASSERT_STR("%y", Date::parse(actualString).c_str());
-//
-//    actualString = "59 aaa";
-//    ASSERT_STR("%y aaa", Date::parse(actualString).c_str());
+    /**
+     * number: 32 -> 59
+     * minute: %M
+     * or second: %S
+     * or year: %y
+     */
+    actualString = "32/";
+    ASSERT_STR("%y/", Date::parse(actualString).c_str());
+
+    actualString = "32.";
+    ASSERT_STR("%y.", Date::parse(actualString).c_str());
+
+    actualString = "32";
+    ASSERT_STR("%y", Date::parse(actualString).c_str());
+
+    actualString = "32 aaa";
+    ASSERT_STR("%y aaa", Date::parse(actualString).c_str());
+
+    actualString = "32:";
+    ASSERT_STR("%M:", Date::parse(actualString).c_str());
+
+    actualString = "32:40";
+    ASSERT_STR("%M:%S", Date::parse(actualString).c_str());
+
+    actualString = "32:40 50";
+    ASSERT_STR("%M:%S %y", Date::parse(actualString).c_str());
 }

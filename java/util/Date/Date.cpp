@@ -641,12 +641,7 @@ std::string Date::parse(String s) {
     std::transform(inputString.begin(), inputString.end(),
                    inputString.begin(), ::tolower);
 
-    boolean year = false;
-    boolean month = false;
-    boolean dayOfMonth = false;
-    boolean hour = false;
-    boolean minute = false;
-    boolean second = false;
+    DateTime dateTime;
 
     int millis = -1;
     int currentChar = -1;
@@ -667,6 +662,7 @@ std::string Date::parse(String s) {
     int lengthOfCurrentSubString = 0;
 
     std::string processArray[500];
+    processArray[0] = "";
     std::string sequenceChar = "";
 
     std::string pattern = "";
@@ -712,8 +708,9 @@ std::string Date::parse(String s) {
 
         if (isInRange && isNumber) {
             sequenceNumber = Date::getSequenceNumber(inputString, index);
+            pattern += processNumber(processArray[idOfCurrentPart],
+                                     sequenceNumber, inputString[index], dateTime);
             processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
-
         }
 
         /** Get current sequenceChar  : A -> Z, a -> z */
@@ -752,9 +749,8 @@ std::string Date::parse(String s) {
                          || ('a' <= currentChar && currentChar <= 'z');
 
         if (!isNumber && !isAcceptedChar && index < inputString.length()) {
-            processArray[++idOfCurrentPart]
-                    = string_from_char((char) currentChar);
 
+            processArray[++idOfCurrentPart] = currentChar;
             pattern += currentChar;
             ++index;
         }  // End Not isAcceptedChar && Not isNumber
@@ -762,108 +758,267 @@ std::string Date::parse(String s) {
         /**
          * 2. Processing
          */
-
-        if (!year) {
-        }
-        /** Process number */
-
-        /** Get year */
-        if (sequenceNumber >= 100) {
-            pattern += "%Y";
-            year = true;
-        }
-
-        if ((sequenceNumber >= 60) && (sequenceNumber < 100)) {
-            pattern += "%y";
-            year = true;
-        }
-
-        if (sequenceNumber < 60) {
-            if ((currentChar == ' ') || (currentChar == '.')
-                || (currentChar == '/') || (index + 1 == inputString.length())) {
-                if (month && dayOfMonth) {
-                    pattern += "%y";
-                    year = true;
-                }
-            }
-        }  // End Get year
-
-//        /** Get month */
-//        if (!month && currentChar == '/') {
-//            pattern += "%m";
-//            month = true;
-//        }
-//
-//
-//        /** Get hour */
-//        if (!hour && sequenceNumber < 24) {
-//            if (currentChar == ':') {
-//                pattern += "%H";
-//                hour = true;
-//            }
-//        }
-//
-//
-//        /** Get minute */
-//        if (!minute && sequenceNumber > 24) {
-//            if (index + 1 < inputString.length()) {
-//                pattern += "%M";
-//                minute = true;
-//            }
-//        }
-//
-//        if (!minute && currentChar == ':' && hour) {
-//            pattern += "%M";
-//            minute = true;
-//        }
-//
-//        if (!minute) {
-//            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == inputString.length()) {
-//                if (hour) {
-//                    pattern += "%M";
-//                    minute = true;
-//                }
-//            }
-//        }  // End Get minute
-//
-//
-//        /** Get second */
-//        if (!second) {
-//            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == inputString.length()) {
-//                if (hour && minute) {
-//                    pattern += "%S";
-//                    second = true;
-//                }
-//            }
-//        }  // End Get second
-//
-//
-//        /** Get dayOfMonth */
-//        if (!dayOfMonth && currentChar == '/' && month) {
-//            pattern += "%d";
-//            dayOfMonth = true;
-//        }
-//
-//        if (!dayOfMonth) {
-//            if (currentChar == ' ' || currentChar == '.'
-//                || currentChar == '-' || index + 1 == inputString.length()) {
-//                if (hour && minute && second) {
-//                    pattern += "%d";
-//                    dayOfMonth = true;
-//                }
-//            }
-//        }  // End Get dayOfMonth
         isInRange = index < inputString.length();
     }  // End scan the inputString
 
-//    free(tempString);
-//    return currentNumber;
-//    return inputString.length();
-//    return currentSubString;
-//    return processArray[1];
-//    return idOfCurrentPart;
-//    return processArray->c_str();
+    // get processArray
+    std::string stringProcessArray = "";
+    for (int index = 1; index <= idOfCurrentPart; index++) {
+        stringProcessArray += processArray[index] + "_";
+    }
+
+//    return stringProcessArray;
     return pattern;
+}
+
+std::string Date::processNumber(std::string previousString, int number,
+                                char followedChar, DateTime &dateTime) {
+    /**
+     * number: >= 100
+     * year: %Y
+     */
+    if (number >= 100) {
+        if (dateTime.year == false) {
+            return "%Y";
+        }
+    }
+
+    /**
+     * number: 60 -> 99
+     * year: %y
+     */
+    if (60 <= number && number <= 99) {
+        if (dateTime.year == false) {
+            return "%y";
+        }
+    }
+
+    /**
+     * number: 32 -> 59
+     * year: %y
+     * or minute: %M
+     * or second: %S
+     */
+    if (32 <= number && number <= 59) {
+
+        if (previousString.compare(":") == 0 && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if (previousString.compare(":") == 0 && dateTime.minute == true
+            && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+
+        if (dateTime.minute == false && followedChar == ':') {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if(dateTime.year == false) {
+
+            dateTime.year = true;
+            return "%y";
+        }
+
+        if (dateTime.year == true && dateTime.minute == false) {
+
+            dateTime.minute = true;
+            return "%M";
+        }
+
+        if(dateTime.year == true && dateTime.minute == true
+           && dateTime.second == false) {
+
+            dateTime.second = true;
+            return "%S";
+        }
+    }
+
+//    /**
+//     *  number: 24 -> 31
+//     *  or day of month: %d
+//     *  minute: %M
+//     *  or second: %S
+//     *  or year: %y
+//     */
+//    if (24 <= number && number <= 31) {
+//        if (dateTime.dayOfMonth == false) {
+//
+//            dateTime.dayOfMonth = true;
+//            return "%d";
+//        }
+//
+//        if(dateTime.dayOfMonth == true && dateTime.minute == false) {
+//
+//            dateTime.minute = true;
+//            return "%M";
+//        }
+//
+//        if(dateTime.dayOfMonth == true && dateTime.minute == true
+//           && dateTime.second == false) {
+//
+//            dateTime.second = true;
+//            return "%S";
+//        }
+//
+//        if(dateTime.dayOfMonth == true && dateTime.minute == true
+//           && dateTime.second == true && dateTime.year == false) {
+//
+//            dateTime.year = true;
+//            return "%y";
+//        }
+//    }
+//
+//    /**
+//     *  number: 12 -> 23
+//     *  or day of month: %d
+//     *  or hour: %H
+//     *  minute: %M
+//     *  or second: %S
+//     *  or year: %y
+//     */
+//    if (12 <= number && number <= 23) {
+//        if (dateTime.dayOfMonth == false) {
+//
+//            dateTime.dayOfMonth = true;
+//            return "%d";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.hour == false) {
+//
+//            dateTime.hour = true;
+//            return "%H";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.hour == true
+//            && dateTime.minute == false) {
+//
+//            dateTime.minute = true;
+//            return "%M";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.hour == true
+//            && dateTime.minute == true && dateTime.second == false) {
+//
+//            dateTime.second = true;
+//            return "%S";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.hour == true
+//            && dateTime.minute == true && dateTime.second == true
+//            && dateTime.year == false) {
+//
+//            dateTime.year = true;
+//            return "%S";
+//        }
+//    }
+//
+//    /**
+//     *  number: 1 -> 11
+//     *  or day of month: %d
+//     *  or month: %m
+//     *  or hour: %H
+//     *  minute: %M
+//     *  or second: %S
+//     *  or year: %y
+//     */
+//    if (1 <= number && number <= 11) {
+//
+//        if (dateTime.dayOfMonth == false) {
+//
+//            dateTime.dayOfMonth = true;
+//            return "%d";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.month == false) {
+//
+//            dateTime.month = true;
+//            return "%m";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.month == true
+//            && dateTime.hour == false) {
+//
+//            dateTime.hour = true;
+//            return "%H";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.month == true
+//            && dateTime.hour == true && dateTime.minute == false) {
+//
+//            dateTime.minute = true;
+//            return "%M";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.month == true
+//            && dateTime.hour == true && dateTime.minute == true
+//            && dateTime.second == false) {
+//
+//            dateTime.second = true;
+//            return "%S";
+//        }
+//
+//        if (dateTime.dayOfMonth == true && dateTime.month == true
+//            && dateTime.hour == true && dateTime.minute == true
+//            && dateTime.second == true && dateTime.year == false) {
+//
+//            dateTime.year = true;
+//            return "%y";
+//        }
+//    }
+//
+//    /**
+//     *  number: = 0
+//     *  minute: %M
+//     *  or second: %S
+//     *  or hour.
+//     */
+//    if (number == 0) {
+//
+//        if (dateTime.hour == false && followedChar == ':') {
+//
+//            dateTime.hour = true;
+//            return "%H";
+//        }
+//
+//        if (dateTime.hour == true && dateTime.minute == false
+//            && followedChar == ':') {
+//
+//            dateTime.minute = true;
+//            return "%M";
+//        }
+//
+//        if (previousString.c_str() == ":" && dateTime.second == false
+//            && dateTime.minute == true) {
+//
+//            dateTime.second = true;
+//            return "%S";
+//        }
+//
+//        if (dateTime.hour == false) {
+//
+//            dateTime.hour = true;
+//            return "%H";
+//        }
+//
+//        if (dateTime.hour == true && dateTime.minute == false) {
+//
+//            dateTime.minute = true;
+//            return "%M";
+//        }
+//
+//        if (dateTime.hour == true && dateTime.minute == true
+//            && dateTime.second == false) {
+//
+//            dateTime.second = true;
+//            return "%S";
+//        }
+//    }
+    return "";
 }

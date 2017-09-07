@@ -597,8 +597,23 @@ namespace Java {
             */
             static std::string getSequenceChar(std::string inputString, int &indexStart);
 
+            /**
+             * Store Date status
+             * support method
+             * Date::parse(String inputString)
+             */
+            struct DateTime {
+                boolean year = false;
+                boolean month = false;
+                boolean dayOfMonth = false;
+                boolean hour = false;
+                boolean minute = false;
+                boolean second = false;
+            };
+
             static std::string processNumber(
-                    std::string previousString, int number, char followedChar);
+                    std::string previousString, int number,
+                    char followedChar, DateTime &dateTime);
         };
     }  // namespace Util
 }  // namespace Java
