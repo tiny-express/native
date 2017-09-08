@@ -639,7 +639,7 @@ std::string Date::getPattern(String s) {
 
     DateTime dateTime;
 
-    int currentChar = -1;
+    char currentChar;
     int index = 0;
     int sequenceNumber;
     int idOfCurrentPart = 0;
@@ -701,14 +701,62 @@ std::string Date::getPattern(String s) {
 
         if (!isNumber && !isAcceptedChar && index < inputString.length()) {
 
-            processArray[++idOfCurrentPart] = currentChar;
-            pattern += currentChar;
             ++index;
+
+            if (currentChar != '+' && currentChar != '-') {
+                pattern += currentChar;
+            }
+
+            if (currentChar != ' ' && currentChar != '+'
+                && currentChar != '-') {
+
+                processArray[++idOfCurrentPart] = currentChar;
+            }
+
+            if (currentChar == '+') {
+                currentChar = inputString[index];
+                isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+                if (isNumber) {
+                    sequenceNumber = getSequenceNumber(inputString, index);
+                    pattern += "%Z";
+
+                    processArray[++idOfCurrentPart]
+                            = currentChar + std::to_string(sequenceNumber);
+                }
+
+                if (!isNumber) {
+                    pattern += currentChar;
+                }
+            }
+
+            if (currentChar == '-' && dateTime.dayOfMonth == true
+                    && dateTime.month == true && dateTime.year == true) {
+
+                currentChar = inputString[index];
+                isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+                if (isNumber) {
+                    sequenceNumber = getSequenceNumber(inputString, index);
+                    pattern += "%Z";
+
+                    processArray[++idOfCurrentPart]
+                            = currentChar + std::to_string(sequenceNumber);
+                }
+
+                if (!isNumber) {
+                    pattern += currentChar;
+                }
+            }
+
+            if (currentChar == '-' && (dateTime.dayOfMonth == false
+                || dateTime.month == false || dateTime.year == false)) {
+
+                pattern += currentChar;
+            }
+
         }  // End Not isAcceptedChar && Not isNumber
 
-        /**
-         * 2. Processing
-         */
         isInRange = index < inputString.length();
     }  // End scan the inputString
 
@@ -733,184 +781,6 @@ std::string Date::getPattern(String s) {
     return pattern;
 }
 
-std::string Date::processChars(std::string sequenceChars,
-                               Date::DateTime &dateTime) {
-
-    std::string originalSequenceChars = sequenceChars;
-
-    std::transform(sequenceChars.begin(), sequenceChars.end(),
-                   sequenceChars.begin(), ::tolower);
-
-    long findResult = std::string::npos;
-    int index;
-
-    std::string arrayAbbreviatedSampleDayOfWeek[] = {
-            "mon", "tue",
-            "wed", "thu",
-            "fri", "sat", "sun"
-    };
-
-    std::string arraySampleDayOfWeek[] = {
-            "monday", "tuesday",
-            "wednesday", "thursday",
-            "friday", "saturday", "sunday"
-    };
-
-    std::string arrayAbbreviatedSampleMonth[] = {
-            "jan", "feb", "mar",
-            "apr", "may", "jun", "jul",
-            "aug", "sep", "oct",
-            "nov", "dec"
-    };
-
-    std::string arraySampleMonth[] = {
-            "january", "february", "march",
-            "april", "may", "june", "july",
-            "august", "september", "october",
-            "november", "december"
-    };
-
-    std::string arraySampleTimezone[] = {
-            "gmt", "ut", "utc",
-            "est", "edt", "cst",
-            "cdt", "mst", "mdt",
-            "pst", "pdt"
-    };
-
-    /**
-     * sequenceChars == 12 hours time format
-     *
-     * {
-     *      "am", "pm"
-     * }
-     *
-     * @return %p
-     */
-    if (sequenceChars.compare("am") == 0
-        || sequenceChars.compare("pm") == 0) {
-        dateTime.is12hFormat = true;
-
-        return "%p";
-    }
-
-    /**
-    * sequenceChars == abbreviated day of week
-    *
-    * {
-    *      "mon", "tue",
-    *      "wed", "thu",
-    *      "fri", "sat", "sun"
-    * }
-    *
-    * @return %a
-    */
-    for (index = 0; index < arrayAbbreviatedSampleDayOfWeek->length(); ++index) {
-
-        findResult = arrayAbbreviatedSampleDayOfWeek[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.dayOfWeek = true;
-            return "%a";
-        }
-    }
-
-    /**
-     * sequenceChars == day of week
-     *
-     * {
-     *      "monday", "tuesday",
-     *      "wednesday", "thursday",
-     *      "friday", "saturday", "sunday"
-     * }
-     *
-     * @return %A
-     */
-    for (index = 0; index < arraySampleDayOfWeek->length(); ++index) {
-
-        findResult = arraySampleDayOfWeek[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.dayOfWeek = true;
-            return "%A";
-        }
-    }
-
-    /**
-     * sequenceChars == abbreviated month
-     *
-     * {
-     *      "jan", "feb", "mar",
-     *      "apr", "may", "jun", "jul",
-     *      "aug", "sep", "oct",
-     *      "nov", "dec"
-     * }
-     *
-     * @return %b
-     */
-    for (index = 0; index < arrayAbbreviatedSampleMonth->length(); ++index) {
-
-        findResult = arrayAbbreviatedSampleMonth[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.monthInChars = true;
-            return "%b";
-        }
-    }
-
-    /**
-     * sequenceChars == month
-     *
-     * {
-     *      "january", "february", "march",
-     *      "april", "may", "june", "july",
-     *      "august", "september", "october",
-     *      "november", "december"
-     * }
-     *
-     * @return %B
-     */
-    for (index = 0; index < arraySampleMonth->length(); ++index) {
-
-        findResult = arraySampleMonth[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.monthInChars = true;
-            return "%B";
-        }
-    }
-
-    /**
-     * sequenceChars == timezone
-     *
-     * {
-     *      "gmt", "ut", "utc",
-     *      "est", "edt", "cst",
-     *      "cdt", "mst", "mdt",
-     *      "pst", "pdt"
-     * }
-     *
-     * @return %Z
-     */
-    for (index = 0; index < arraySampleTimezone->length(); ++index) {
-
-        findResult = arraySampleTimezone[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.timeZone = true;
-            return "%Z";
-        }
-    }
-
-    /**
-     * sequenceChars not match any sample
-     *
-     * @return originalSequenceChars
-     */
-    if (findResult == std::string::npos) {
-        return originalSequenceChars;
-    }
-}
-
 std::string Date::processNumber(std::string previousString, int sequenceNumber,
                                 char followedChar, DateTime &dateTime) {
     /**
@@ -919,6 +789,7 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
      */
     if (sequenceNumber >= 100) {
         if (dateTime.year == false) {
+            dateTime.year = true;
             return "%Y";
         }
     }
@@ -929,6 +800,7 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
      */
     if (60 <= sequenceNumber && sequenceNumber <= 99) {
         if (dateTime.year == false) {
+            dateTime.year = true;
             return "%y";
         }
     }
@@ -1255,5 +1127,190 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             dateTime.second = true;
             return "%S";
         }
+    }
+
+    return std::to_string(sequenceNumber);
+}
+
+std::string Date::processChars(std::string sequenceChars,
+                               Date::DateTime &dateTime) {
+
+    std::string originalSequenceChars = sequenceChars;
+
+    std::transform(sequenceChars.begin(), sequenceChars.end(),
+                   sequenceChars.begin(), ::tolower);
+
+    long findResult = std::string::npos;
+    int index;
+
+    std::string arrayAbbreviatedSampleDayOfWeek[] = {
+            "mon", "tue",
+            "wed", "thu",
+            "fri", "sat", "sun"
+    };
+    int lengthArrayAbbreviatedSampleDayOfWeek = 7;
+
+    std::string arraySampleDayOfWeek[] = {
+            "monday", "tuesday",
+            "wednesday", "thursday",
+            "friday", "saturday", "sunday"
+    };
+    int lengthArraySampleDayOfWeek = 7;
+
+    std::string arrayAbbreviatedSampleMonth[] = {
+            "jan", "feb", "mar",
+            "apr", "may", "jun", "jul",
+            "aug", "sep", "oct",
+            "nov", "dec"
+    };
+    int lengthArrayAbbreviatedSampleMonth = 12;
+
+    std::string arraySampleMonth[] = {
+            "january", "february", "march",
+            "april", "may", "june", "july",
+            "august", "september", "october",
+            "november", "december"
+    };
+    int lengthArraySampleMonth = 12;
+
+    std::string arraySampleTimezone[] = {
+            "gmt", "ut", "utc",
+            "est", "edt", "cst",
+            "cdt", "mst", "mdt",
+            "pst", "pdt"
+    };
+    int lengthArraySampleTimezone = 11;
+
+    /**
+     * sequenceChars == 12 hours time format
+     *
+     * {
+     *      "am", "pm"
+     * }
+     *
+     * @return %p
+     */
+    if (sequenceChars.compare("am") == 0
+        || sequenceChars.compare("pm") == 0) {
+        dateTime.is12hFormat = true;
+
+        return "%p";
+    }
+
+    /**
+    * sequenceChars == abbreviated day of week
+    *
+    * {
+    *      "mon", "tue",
+    *      "wed", "thu",
+    *      "fri", "sat", "sun"
+    * }
+    *
+    * @return %a
+    */
+    for (index = 0; index < lengthArrayAbbreviatedSampleDayOfWeek; ++index) {
+
+        findResult = arrayAbbreviatedSampleDayOfWeek[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.dayOfWeek = true;
+            return "%a";
+        }
+    }
+
+    /**
+     * sequenceChars == day of week
+     *
+     * {
+     *      "monday", "tuesday",
+     *      "wednesday", "thursday",
+     *      "friday", "saturday", "sunday"
+     * }
+     *
+     * @return %A
+     */
+    for (index = 0; index < lengthArraySampleDayOfWeek; ++index) {
+
+        findResult = arraySampleDayOfWeek[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.dayOfWeek = true;
+            return "%A";
+        }
+    }
+
+    /**
+     * sequenceChars == abbreviated month
+     *
+     * {
+     *      "jan", "feb", "mar",
+     *      "apr", "may", "jun", "jul",
+     *      "aug", "sep", "oct",
+     *      "nov", "dec"
+     * }
+     *
+     * @return %b
+     */
+    for (index = 0; index < lengthArrayAbbreviatedSampleMonth; ++index) {
+
+        findResult = arrayAbbreviatedSampleMonth[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.monthInChars = true;
+            return "%b";
+        }
+    }
+
+    /**
+     * sequenceChars == month
+     *
+     * {
+     *      "january", "february", "march",
+     *      "april", "may", "june", "july",
+     *      "august", "september", "october",
+     *      "november", "december"
+     * }
+     *
+     * @return %B
+     */
+    for (index = 0; index < lengthArraySampleMonth; ++index) {
+
+        findResult = arraySampleMonth[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.monthInChars = true;
+            return "%B";
+        }
+    }
+
+    /**
+     * sequenceChars == timezone
+     *
+     * {
+     *      "gmt", "ut", "utc",
+     *      "est", "edt", "cst",
+     *      "cdt", "mst", "mdt",
+     *      "pst", "pdt"
+     * }
+     *
+     * @return %Z
+     */
+    for (index = 0; index < lengthArraySampleTimezone; ++index) {
+
+        findResult = arraySampleTimezone[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.timeZone = true;
+            return "%Z";
+        }
+    }
+
+    /**
+     * sequenceChars not match any sample
+     *
+     * @return originalSequenceChars
+     */
+    if (findResult == std::string::npos) {
+        return originalSequenceChars;
     }
 }
