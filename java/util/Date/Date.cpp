@@ -633,6 +633,284 @@ std::string Date::getSequenceChar(std::string inputString, int &indexStart) {
     return sequenceChar;
 }
 
+std::string Date::getPattern(String s) {
+    // Create variable to store a Date
+    std::string inputString(s.toString());
+
+    DateTime dateTime;
+
+    int currentChar = -1;
+    int index = 0;
+    int sequenceNumber;
+    int idOfCurrentPart = 0;
+    unsigned long findResult = std::string::npos;
+
+    boolean isNumber;
+    boolean isAcceptedChar;
+    boolean isInRange;
+
+    std::string processArray[500];
+    processArray[0] = "";
+    std::string sequenceChars = "";
+    std::string pattern = "";
+
+    // Stop if inputString is empty
+    if (inputString.compare("") == 0) {
+        return "";
+    }
+
+    isInRange = index < inputString.length();
+
+    // Scan the inputString
+    while (isInRange) {
+        /**
+         * 1. Segmentation
+         */
+
+        /** Get the current sequenceNumber */
+        currentChar = inputString[index];
+        isInRange = index < inputString.length();
+        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+        if (isInRange && isNumber) {
+            sequenceNumber = Date::getSequenceNumber(inputString, index);
+            pattern += processNumber(processArray[idOfCurrentPart],
+                                     sequenceNumber, inputString[index], dateTime);
+            processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
+        }
+
+        /** Get current sequenceChar  : A -> Z, a -> z */
+        currentChar = inputString[index];
+        isInRange = index < inputString.length();
+        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                         || ('a' <= currentChar && currentChar <= 'z');
+
+        if (isInRange && isAcceptedChar) {
+            sequenceChars = Date::getSequenceChar(inputString, index);
+
+            pattern += Date::processChars(sequenceChars, dateTime);
+
+            processArray[++idOfCurrentPart] = sequenceChars;
+        }  // End Get currentSubString : A -> Z, a -> z
+
+        /** Not isNumber && Not isAcceptedChar */
+        currentChar = inputString[index];
+        isNumber = ('0' <= currentChar) && (currentChar <= '9');
+        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                         || ('a' <= currentChar && currentChar <= 'z');
+
+        if (!isNumber && !isAcceptedChar && index < inputString.length()) {
+
+            processArray[++idOfCurrentPart] = currentChar;
+            pattern += currentChar;
+            ++index;
+        }  // End Not isAcceptedChar && Not isNumber
+
+        /**
+         * 2. Processing
+         */
+        isInRange = index < inputString.length();
+    }  // End scan the inputString
+
+//    // get processArray
+//    std::string stringProcessArray = "";
+//    for (int index = 1; index <= idOfCurrentPart; index++) {
+//        stringProcessArray += processArray[index] + "_";
+//    }
+//    return stringProcessArray;
+
+    /**
+     * Process the 12 hour format
+     */
+    if (dateTime.is12hFormat == true) {
+        findResult = pattern.find("%H");
+
+        if (findResult != std::string::npos) {
+            pattern.replace(findResult, 2, "%I");
+        }
+    }
+
+    return pattern;
+}
+
+std::string Date::processChars(std::string sequenceChars,
+                               Date::DateTime &dateTime) {
+
+    std::string originalSequenceChars = sequenceChars;
+
+    std::transform(sequenceChars.begin(), sequenceChars.end(),
+                   sequenceChars.begin(), ::tolower);
+
+    long findResult = std::string::npos;
+    int index;
+
+    std::string arrayAbbreviatedSampleDayOfWeek[] = {
+            "mon", "tue",
+            "wed", "thu",
+            "fri", "sat", "sun"
+    };
+
+    std::string arraySampleDayOfWeek[] = {
+            "monday", "tuesday",
+            "wednesday", "thursday",
+            "friday", "saturday", "sunday"
+    };
+
+    std::string arrayAbbreviatedSampleMonth[] = {
+            "jan", "feb", "mar",
+            "apr", "may", "jun", "jul",
+            "aug", "sep", "oct",
+            "nov", "dec"
+    };
+
+    std::string arraySampleMonth[] = {
+            "january", "february", "march",
+            "april", "may", "june", "july",
+            "august", "september", "october",
+            "november", "december"
+    };
+
+    std::string arraySampleTimezone[] = {
+            "gmt", "ut", "utc",
+            "est", "edt", "cst",
+            "cdt", "mst", "mdt",
+            "pst", "pdt"
+    };
+
+    /**
+     * sequenceChars == 12 hours time format
+     *
+     * {
+     *      "am", "pm"
+     * }
+     *
+     * @return %p
+     */
+    if (sequenceChars.compare("am") == 0
+        || sequenceChars.compare("pm") == 0) {
+        dateTime.is12hFormat = true;
+
+        return "%p";
+    }
+
+    /**
+    * sequenceChars == abbreviated day of week
+    *
+    * {
+    *      "mon", "tue",
+    *      "wed", "thu",
+    *      "fri", "sat", "sun"
+    * }
+    *
+    * @return %a
+    */
+    for (index = 0; index < arrayAbbreviatedSampleDayOfWeek->length(); ++index) {
+
+        findResult = arrayAbbreviatedSampleDayOfWeek[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.dayOfWeek = true;
+            return "%a";
+        }
+    }
+
+    /**
+     * sequenceChars == day of week
+     *
+     * {
+     *      "monday", "tuesday",
+     *      "wednesday", "thursday",
+     *      "friday", "saturday", "sunday"
+     * }
+     *
+     * @return %A
+     */
+    for (index = 0; index < arraySampleDayOfWeek->length(); ++index) {
+
+        findResult = arraySampleDayOfWeek[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.dayOfWeek = true;
+            return "%A";
+        }
+    }
+
+    /**
+     * sequenceChars == abbreviated month
+     *
+     * {
+     *      "jan", "feb", "mar",
+     *      "apr", "may", "jun", "jul",
+     *      "aug", "sep", "oct",
+     *      "nov", "dec"
+     * }
+     *
+     * @return %b
+     */
+    for (index = 0; index < arrayAbbreviatedSampleMonth->length(); ++index) {
+
+        findResult = arrayAbbreviatedSampleMonth[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.monthInChars = true;
+            return "%b";
+        }
+    }
+
+    /**
+     * sequenceChars == month
+     *
+     * {
+     *      "january", "february", "march",
+     *      "april", "may", "june", "july",
+     *      "august", "september", "october",
+     *      "november", "december"
+     * }
+     *
+     * @return %B
+     */
+    for (index = 0; index < arraySampleMonth->length(); ++index) {
+
+        findResult = arraySampleMonth[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.monthInChars = true;
+            return "%B";
+        }
+    }
+
+    /**
+     * sequenceChars == timezone
+     *
+     * {
+     *      "gmt", "ut", "utc",
+     *      "est", "edt", "cst",
+     *      "cdt", "mst", "mdt",
+     *      "pst", "pdt"
+     * }
+     *
+     * @return %Z
+     */
+    for (index = 0; index < arraySampleTimezone->length(); ++index) {
+
+        findResult = arraySampleTimezone[index].find(sequenceChars);
+
+        if (findResult != std::string::npos) {
+            dateTime.timeZone = true;
+            return "%Z";
+        }
+    }
+
+    /**
+     * sequenceChars not match any sample
+     *
+     * @return originalSequenceChars
+     */
+    if (findResult == std::string::npos) {
+        return originalSequenceChars;
+    }
+}
+
 std::string Date::processNumber(std::string previousString, int sequenceNumber,
                                 char followedChar, DateTime &dateTime) {
     /**
@@ -867,18 +1145,18 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%S";
         }
 
-        if (dateTime.dayOfMonth == false
-            && (followedChar == '/' || followedChar == '-')) {
-
-            dateTime.dayOfMonth = true;
-            return "%d";
-        }
-
-        if (dateTime.dayOfMonth == true && dateTime.month == false
+        if (dateTime.month == false
             && (followedChar == '/' || followedChar == '-')) {
 
             dateTime.month = true;
             return "%m";
+        }
+
+        if (dateTime.month == true && dateTime.dayOfMonth == false
+            && (followedChar == '/' || followedChar == '-')) {
+
+            dateTime.dayOfMonth = true;
+            return "%d";
         }
 
         if (dateTime.dayOfMonth == false) {
@@ -977,227 +1255,5 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             dateTime.second = true;
             return "%S";
         }
-    }
-}
-
-std::string Date::getPattern(String s) {
-    // Create variable to store a Date
-    std::string inputString(s.toString());
-
-    std::transform(inputString.begin(), inputString.end(),
-                   inputString.begin(), ::tolower);
-
-    DateTime dateTime;
-
-    int currentChar = -1;
-    int index = 0;
-    int sequenceNumber;
-    int idOfCurrentPart = 0;
-    unsigned long findResult = std::string::npos;
-
-    boolean isNumber;
-    boolean isAcceptedChar;
-    boolean isInRange;
-
-    std::string processArray[500];
-    processArray[0] = "";
-    std::string sequenceChars = "";
-    std::string pattern = "";
-
-    // Stop if inputString is empty
-    if (inputString.compare("") == 0) {
-        return "";
-    }
-
-    isInRange = index < inputString.length();
-
-    // Scan the inputString
-    while (isInRange) {
-        /**
-         * 1. Segmentation
-         */
-
-        /** Get the current sequenceNumber */
-        currentChar = inputString[index];
-        isInRange = index < inputString.length();
-        isNumber = ('0' <= currentChar) && (currentChar <= '9');
-
-        if (isInRange && isNumber) {
-            sequenceNumber = Date::getSequenceNumber(inputString, index);
-            pattern += processNumber(processArray[idOfCurrentPart],
-                                     sequenceNumber, inputString[index], dateTime);
-            processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
-        }
-
-        /** Get current sequenceChar  : A -> Z, a -> z */
-        currentChar = inputString[index];
-        isInRange = index < inputString.length();
-        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-                         || ('a' <= currentChar && currentChar <= 'z');
-
-        if (isInRange && isAcceptedChar) {
-            sequenceChars = Date::getSequenceChar(inputString, index);
-
-            pattern += Date::processChars(sequenceChars, dateTime);
-
-            processArray[++idOfCurrentPart] = sequenceChars;
-        }  // End Get currentSubString : A -> Z, a -> z
-
-        /** Not isNumber && Not isAcceptedChar */
-        currentChar = inputString[index];
-        isNumber = ('0' <= currentChar) && (currentChar <= '9');
-        isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-                         || ('a' <= currentChar && currentChar <= 'z');
-
-        if (!isNumber && !isAcceptedChar && index < inputString.length()) {
-
-            processArray[++idOfCurrentPart] = currentChar;
-            pattern += currentChar;
-            ++index;
-        }  // End Not isAcceptedChar && Not isNumber
-
-        /**
-         * 2. Processing
-         */
-        isInRange = index < inputString.length();
-    }  // End scan the inputString
-
-//    // get processArray
-//    std::string stringProcessArray = "";
-//    for (int index = 1; index <= idOfCurrentPart; index++) {
-//        stringProcessArray += processArray[index] + "_";
-//    }
-//    return stringProcessArray;
-
-    /**
-     * Process the 12 hour format
-     */
-    if (dateTime.is12hFormat == true) {
-        findResult = pattern.find("%H");
-
-        if (findResult != std::string::npos) {
-            pattern.replace(findResult, findResult + 1, "%I");
-        }
-    }
-
-    return pattern;
-}
-
-std::string Date::processChars(std::string sequenceChars,
-                               Date::DateTime &dateTime) {
-    long findResult = std::string::npos;
-    int index;
-
-    std::string arraySampleDayOfWeek[] = {
-            "monday", "tuesday",
-            "wednesday", "thursday",
-            "friday", "saturday", "sunday"
-    };
-
-    std::string arraySampleMonth[] = {
-            "january", "february", "march",
-            "april", "may", "june", "july",
-            "august", "september", "october",
-            "november", "december"
-    };
-
-    std::string arraySampleTimezone[] = {
-            "gmt", "ut", "utc",
-            "est", "edt", "cst",
-            "cdt", "mst", "mdt",
-            "pst", "pdt"
-    };
-
-    /**
-     * sequenceChars == 12 hours time format
-     *
-     * {
-     *      "am", "pm"
-     * }
-     *
-     * @return %p
-     */
-    if (sequenceChars.compare("am") == 0
-        || sequenceChars.compare("pm") == 0) {
-        dateTime.is12hFormat = true;
-
-        return "%p";
-    }
-
-    /**
-     * sequenceChars == day of week
-     *
-     * {
-     *      "monday", "tuesday",
-     *      "wednesday", "thursday",
-     *      "friday", "saturday", "sunday"
-     * }
-     *
-     * @return %A
-     */
-
-    for (index = 0; index < arraySampleDayOfWeek->length(); ++index) {
-
-        findResult = arraySampleDayOfWeek[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.dayOfWeek = true;
-            return "%A";
-        }
-    }
-
-    /**
-     * sequenceChars == month
-     *
-     * {
-     *      "january", "february", "march",
-     *      "april", "may", "june", "july",
-     *      "august", "september", "october",
-     *      "november", "december"
-     * }
-     *
-     * @return %B
-     */
-
-    for (index = 0; index < arraySampleMonth->length(); ++index) {
-
-        findResult = arraySampleMonth[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.monthInChars = true;
-            return "%B";
-        }
-    }
-
-    /**
-     * sequenceChars == timezone
-     *
-     * {
-     *      "gmt", "ut", "utc",
-     *      "est", "edt", "cst",
-     *      "cdt", "mst", "mdt",
-     *      "pst", "pdt"
-     * }
-     *
-     * @return %Z
-     */
-
-    for (index = 0; index < arraySampleTimezone->length(); ++index) {
-
-        findResult = arraySampleTimezone[index].find(sequenceChars);
-
-        if (findResult != std::string::npos) {
-            dateTime.timeZone = true;
-            return "%Z";
-        }
-    }
-
-    /**
-     * sequenceChars not match any sample
-     *
-     * @return sequenceChars
-     */
-    if (findResult == std::string::npos) {
-        return sequenceChars;
     }
 }
