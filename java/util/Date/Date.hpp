@@ -467,11 +467,7 @@ namespace Java {
              */
             static long parse(String inputString, string pattern);
 
-            static long parses(String inputString);
-
-//            static long parse(String inputString);
-
-            static std::string parse(String inputString);
+            static long parse(String inputString);
 
             /**
              * Deprecated.
