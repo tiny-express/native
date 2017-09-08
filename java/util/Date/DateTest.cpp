@@ -1896,7 +1896,7 @@ TEST(JavaUtil, DateParse) {
     // Round-trip date/time pattern. (DateTimeKind.Local)
     expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
     actualString = "2009-06-15T13:45:30.0000000-07:00";
-    actualFormat = "%Y-%m-%dT%H:%M:%S-%Z";
+    actualFormat = "%Y-%m-%dT%H:%M:%S%Z";
     actualTime = Date::parse(actualString, actualFormat.toString());
     actual = Date(actualTime).toString();
     ASSERT_STR(expected.toString(), actual.toString());
@@ -2093,7 +2093,8 @@ TEST(JavaUtil, DateGetSequenceChar) {
 
 TEST(JavaUtil, DateGetPattern) {
     // Create variable to test
-    String expected;
+    std::string expected;
+    std::string actual;
 
     Date   actualDate;
     String actualString;
@@ -2121,23 +2122,33 @@ TEST(JavaUtil, DateGetPattern) {
      * year: %Y
      */
     actualString = "100";
-    ASSERT_STR("%Y", Date::getPattern(actualString).c_str());
+    expected = "%Y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
      * number: 60 -> 99
      * year: %y
      */
     actualString = "61";
-    ASSERT_STR("%y", Date::getPattern(actualString).c_str());
+    expected = "%y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "abc61";
-    ASSERT_STR("abc%y", Date::getPattern(actualString).c_str());
+    expected = "abc%y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "61abc";
-    ASSERT_STR("%yabc", Date::getPattern(actualString).c_str());
+    expected = "%yabc";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "aaa61bbb";
-    ASSERT_STR("aaa%ybbb", Date::getPattern(actualString).c_str());
+    expected = "aaa%ybbb";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
      * number: 32 -> 59
@@ -2146,25 +2157,39 @@ TEST(JavaUtil, DateGetPattern) {
      * or second: %S
      */
     actualString = "32/";
-    ASSERT_STR("%y/", Date::getPattern(actualString).c_str());
+    expected = "%y/";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32.";
-    ASSERT_STR("%y.", Date::getPattern(actualString).c_str());
+    expected = "%y.";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32";
-    ASSERT_STR("%y", Date::getPattern(actualString).c_str());
+    expected = "%y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32 aaa";
-    ASSERT_STR("%y aaa", Date::getPattern(actualString).c_str());
+    expected = "%y aaa";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32:";
-    ASSERT_STR("%M:", Date::getPattern(actualString).c_str());
+    expected = "%M:";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32:40";
-    ASSERT_STR("%M:%S", Date::getPattern(actualString).c_str());
+    expected = "%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "32:40 50";
-    ASSERT_STR("%M:%S %y", Date::getPattern(actualString).c_str());
+    expected = "%M:%S %y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
      *  number: 24 -> 31
@@ -2174,10 +2199,14 @@ TEST(JavaUtil, DateGetPattern) {
      *  or second: %S
      */
     actualString = "24 25:30 31";
-    ASSERT_STR("%d %M:%S %y", Date::getPattern(actualString).c_str());
+    expected = "%d %M:%S %y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "25:30 24 31";
-    ASSERT_STR("%M:%S %d %y", Date::getPattern(actualString).c_str());
+    expected = "%M:%S %d %y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
     *  number: 12 -> 23
@@ -2188,10 +2217,14 @@ TEST(JavaUtil, DateGetPattern) {
     *  or second: %S
     */
     actualString = "14 12:20:15 20";
-    ASSERT_STR("%d %H:%M:%S %y", Date::getPattern(actualString).c_str());
+    expected = "%d %H:%M:%S %y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "12:20:15 14 20";
-    ASSERT_STR("%H:%M:%S %d %y", Date::getPattern(actualString).c_str());
+    expected = "%H:%M:%S %d %y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
      *  number: 1 -> 11
@@ -2203,13 +2236,19 @@ TEST(JavaUtil, DateGetPattern) {
      *  or second: %S
      */
     actualString = "1/2/11 5:10:11";
-    ASSERT_STR("%d/%m/%y %H:%M:%S", Date::getPattern(actualString).c_str());
+    expected = "%d/%m/%y %H:%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "1-2-11 11:10:05";
-    ASSERT_STR("%d-%m-%y %H:%M:%S", Date::getPattern(actualString).c_str());
+    expected = "%d-%m-%y %H:%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "3:11:08 1/2/11";
-    ASSERT_STR("%H:%M:%S %d/%m/%y", Date::getPattern(actualString).c_str());
+    expected = "%H:%M:%S %d/%m/%y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     /**
      *  number: = 0
@@ -2218,11 +2257,185 @@ TEST(JavaUtil, DateGetPattern) {
      *  or second: %S
      */
     actualString = "1/2/11 00:10:11";
-    ASSERT_STR("%d/%m/%y %H:%M:%S", Date::getPattern(actualString).c_str());
+    expected = "%d/%m/%y %H:%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "1-2-11 11:00:05";
-    ASSERT_STR("%d-%m-%y %H:%M:%S", Date::getPattern(actualString).c_str());
+    expected = "%d-%m-%y %H:%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
 
     actualString = "00:00:00 1/2/11";
-    ASSERT_STR("%H:%M:%S %d/%m/%y", Date::getPattern(actualString).c_str());
+    expected = "%H:%M:%S %d/%m/%y";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
+
+    actualString = "aaa00:00:00aa aa1/2/11 aaa";
+    expected = "aaa%H:%M:%Saa aa%d/%m/%y aaa";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
+
+    // Valid case
+    actualString = "Thursday January 9 and 2014 12:35:34";
+    expected = "%A %B %d and %Y %H:%M:%S";
+    actual = Date::getPattern(actualString).c_str();
+    ASSERT_STR(expected.c_str(), actual.c_str());
+//
+//    /**
+//     * Sample Date format
+//     */
+//
+//    // Short date pattern. (en-US)
+//    expected     = "Mon Feb 13 00:00:00 " + zone + (string) " 2017";
+//    actualString = "02/13/2017";
+//    actualFormat = "%m/%d/%Y";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Long date pattern. (en-US)
+//    expected     = "Mon Jun 15 00:00:00 " + zone + (string) " 2009";
+//    actualString = "Monday, June 15, 2009";
+//    actualFormat = "%A, %B %d, %Y";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Full date/time pattern (short time). (en-US)
+//    expected     = "Mon Jun 15 13:45:00 " + zone + (string) " 2009";
+//    actualString = "Monday, June 15, 2009 1:45 PM";
+//    actualFormat = "%A, %B %d, %Y %I:%M %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Full date/time pattern (long time). (en-US)
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "Monday, June 15, 2009 1:45:30 PM";
+//    actualFormat = "%A, %B %d, %Y %I:%M:%S %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // General date/time pattern (short time). (en-US)
+//    expected     = "Mon Jun 15 01:45:00 " + zone + (string) " 2009";
+//    actualString = "6/15/2009 1:45";
+//    actualFormat = "%m/%d/%Y %H:%M";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // General date/time pattern (short time). (en-US)
+//    expected     = "Mon Jun 15 13:45:00 " + zone + (string) " 2009";
+//    actualString = "6/15/2009 1:45 PM";
+//    actualFormat = "%m/%d/%Y %I:%M %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // General date/time pattern (long time). (en-US)
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "6/15/2009 1:45:30 PM";
+//    actualFormat = "%m/%d/%Y %I:%M:%S %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Month/day pattern.(en-US)
+//    expected     = "Fri Jun 15 00:00:00 " + localZone + (string) " 1900";
+//    actualString = "June 15";
+//    actualFormat = "%B %d";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Round-trip date/time pattern. (DateTimeKind.Local)
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "2009-06-15T13:45:30.0000000-07:00";
+//    actualFormat = "%Y-%m-%dT%H:%M:%S%Z";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Round-trip date/time pattern. (DateTimeKind.Utc)
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "2009-06-15T13:45:30.0000000Z";
+//    actualFormat = "%Y-%m-%dT%H:%M:%S%Z";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // TODO(thoangminh): check it
+//    // RFC1123 pattern.
+////    expected     = "Tue Jun 16 20:45:30 " + zone + (string) " 2009";
+////    actualString = "Mon, 15 Jun 2009 20:45:30 UTC";
+////    actualFormat = "%A, %d %B %Y %H:%M:%S %Z";
+////    actualTime = Date::parse(actualString, actualFormat.toString());
+////    actual = Date(actualTime).toString();
+////    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Sortable date/time pattern. (DateTimeKind.Local)
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "2009-06-15T13:45:30";
+//    actualFormat = "%Y-%m-%dT%H:%M:%S";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Short time pattern. (en-US)
+//    expected     = "Sun Dec 31 13:45:00 " + localZone + (string)" 1899";
+//    actualString = "1:45 PM";
+//    actualFormat = "%I:%M %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Long time pattern. (en-US)
+//    expected     = "Sun Dec 31 01:45:30 " + localZone + (string) " 1899";
+//    actualString = "1:45:30";
+//    actualFormat = "%H:%M:%S";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Long time pattern. (en-US)
+//    expected     = "Sun Dec 31 13:45:30 " + localZone + (string) " 1899";
+//    actualString = "1:45:30 PM";
+//    actualFormat = "%I:%M:%S %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Universal sortable date/time pattern. With a DateTime value:
+//    expected     = "Mon Jun 15 13:45:30 " + zone + (string) " 2009";
+//    actualString = "2009-06-15 13:45:30Z";
+//    actualFormat = "%Y-%m-%d %H:%M:%S%p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Universal full date/time pattern. (en-US)
+//    expected     = "Mon Jun 15 20:45:30 " + zone + (string) " 2009";
+//    actualString = "Monday, June 15, 2009 8:45:30 PM";
+//    actualFormat = "%A, %B %d, %Y %I:%M:%S %p";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Year month pattern. (en-US)
+//    expected     = "Sun May 31 00:00:00 " + zone + (string) " 2009";
+//    actualString = "June, 2009";
+//    actualFormat = "%B, %Y";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
+//
+//    // Set month = 12. Invalid case => Sun Dec 31 00:00:00 LMT 1899
+//    expected     = "Sun Dec 31 00:00:00 " + localZone + (string) " 1899";
+//    actualString = "Sat 12 13 10:01:13 " + zone + (string) " 2017";
+//    actualFormat = "%a %b %d %H:%M:%S " + zone + (string) " %Y";
+//    actualTime = Date::parse(actualString, actualFormat.toString());
+//    actual = Date(actualTime).toString();
+//    ASSERT_STR(expected.toString(), actual.toString());
 }

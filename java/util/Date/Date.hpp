@@ -618,6 +618,10 @@ namespace Java {
                 boolean hour = false;
                 boolean minute = false;
                 boolean second = false;
+                boolean dayOfWeek = false;
+                boolean monthInChars = false;
+                boolean is12hFormat = false;
+                boolean timeZone = false;
             };
 
             /**
@@ -636,6 +640,21 @@ namespace Java {
             static std::string processNumber(
                     std::string previousString, int number,
                     char followedChar, DateTime &dateTime);
+
+            /**
+             * support method
+             * Date::getPattern(String inputString)
+             *
+             * @param chars
+             * @param dateTime
+             * @param pattern
+             * @return std::string pattern of chars
+             *
+             * @see Date::getPattern(String inputString)
+             * @see Date::parse(String inputString)
+             */
+            static std::string processChars(std::string sequenceChars,
+                                            DateTime &dateTime);
 
             /**
              * support method
