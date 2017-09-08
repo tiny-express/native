@@ -2075,19 +2075,19 @@ TEST(JavaUtil, DateGetSequenceChar) {
     expected     = (string) "June";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
     index = 8;
-    std::strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
+    strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "PM";
     actualString = "Monday, June 15, 2009 1:45:30 PM";
     index = 30;
-    std::strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
+    strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
     ASSERT_STR(expected, actual);
 
     expected     = (string) "T";
     actualString = "2009-06-15T13:45:30.0000000-07:00";
     index = 10;
-    std::strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
+    strcpy(actual, Date::getSequenceChar(actualString, index).c_str());
     ASSERT_STR(expected, actual);
 
     delete[] actual;
