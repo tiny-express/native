@@ -52,8 +52,8 @@ Date::Date(long date) {
     initialize(timer);
 }
 
-Date::Date(String inputString, String pattern) {
-    time_t timer = Date::parse(inputString, pattern.toString());
+Date::Date(String inputString) {
+    time_t timer = Date::parse(inputString);
     initialize(timer);
 }
 
@@ -219,22 +219,6 @@ long Date::parse(String inputString, string pattern) {
     tm localTimer = {};
     strptime(inputString.toString(), pattern, &localTimer);
     return mktime(&localTimer);
-
-//    tm inputTimer = {};
-//    strptime(inputString.toString(), pattern, &inputTimer);
-//    time_t inputTime = mktime(&inputTimer);
-//
-//    // Get the utc time
-//    tm tempUTCTimer = {};
-//    tm *utcTimer = gmtime_r(&inputTime, &tempUTCTimer);
-//
-//    // Get the local time
-//    time_t localTime = {0};
-//    tm tempLocalTimer = {};
-//    tm *localTimer = localtime_r(&localTime, &tempLocalTimer);
-//
-//    // Convert the input time to local time
-//    return mktime(utcTimer) + localTimer->tm_gmtoff;;
 }
 
 string Date::getZone() {
@@ -467,7 +451,6 @@ std::string Date::getPattern(String s, int &timeZoneOffset) {
                         int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
                         timeZoneOffset = (tempHour * 3600 + tempMinute * 60);
                     }
-
                 }
 
                 if (!isNumber) {
@@ -480,18 +463,10 @@ std::string Date::getPattern(String s, int &timeZoneOffset) {
 
                 pattern += currentChar;
             }
-
         }  // End Not isAcceptedChar && Not isNumber
 
         isInRange = index < inputString.length();
     }  // End scan the inputString
-
-//    // get processArray
-//    std::string stringProcessArray = "";
-//    for (int index = 1; index <= idOfCurrentPart; index++) {
-//        stringProcessArray += processArray[index] + "_";
-//    }
-//    return stringProcessArray;
 
     /**
      * Process the 12 hour format
@@ -558,8 +533,8 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%M";
         }
 
-        if(dateTime.year == false) {
-
+        if (dateTime.year == false) {
+            
             dateTime.year = true;
             return "%y";
         }
@@ -570,7 +545,7 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%M";
         }
 
-        if(dateTime.year == true && dateTime.minute == true
+        if (dateTime.year == true && dateTime.minute == true
            && dateTime.second == false) {
 
             dateTime.second = true;
@@ -612,20 +587,20 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%d";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == false) {
+        if (dateTime.dayOfMonth == true && dateTime.year == false) {
 
             dateTime.year = true;
             return "%y";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == true
+        if (dateTime.dayOfMonth == true && dateTime.year == true
            && dateTime.minute == false) {
 
             dateTime.minute = true;
             return "%M";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == true
+        if (dateTime.dayOfMonth == true && dateTime.year == true
            && dateTime.minute == true && dateTime.second == false) {
 
             dateTime.second = true;
@@ -676,27 +651,27 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%d";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == false) {
+        if (dateTime.dayOfMonth == true && dateTime.year == false) {
 
             dateTime.year = true;
             return "%y";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == true
+        if (dateTime.dayOfMonth == true && dateTime.year == true
            && dateTime.hour == false) {
 
             dateTime.hour = true;
             return "%H";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == true
+        if (dateTime.dayOfMonth == true && dateTime.year == true
            && dateTime.hour == true && dateTime.minute == false) {
 
             dateTime.minute = true;
             return "%M";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.year == true
+        if (dateTime.dayOfMonth == true && dateTime.year == true
            && dateTime.hour == true && dateTime.minute == true
            && dateTime.second == false) {
 
@@ -763,27 +738,27 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%d";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.month == false) {
+        if (dateTime.dayOfMonth == true && dateTime.month == false) {
 
             dateTime.month = true;
             return "%m";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.month == true
+        if (dateTime.dayOfMonth == true && dateTime.month == true
            && dateTime.year == false) {
 
             dateTime.year = true;
             return "%y";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.month == true
+        if (dateTime.dayOfMonth == true && dateTime.month == true
            && dateTime.year == true && dateTime.hour == false) {
 
             dateTime.hour = true;
             return "%H";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.month == true
+        if (dateTime.dayOfMonth == true && dateTime.month == true
            && dateTime.year == true && dateTime.hour == true
            && dateTime.minute == false) {
 
@@ -791,7 +766,7 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
             return "%M";
         }
 
-        if(dateTime.dayOfMonth == true && dateTime.month == true
+        if (dateTime.dayOfMonth == true && dateTime.month == true
            && dateTime.year == true && dateTime.hour == true
            && dateTime.minute == true && dateTime.second == false) {
 
