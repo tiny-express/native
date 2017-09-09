@@ -650,7 +650,7 @@ namespace Java {
              * @see Date::parse(String inputString)
              */
             static std::string processChars(std::string sequenceChars,
-                                            DateTime &dateTime);
+                                            DateTime &dateTime, int &timeZoneOffset);
 
             /**
              * support method
@@ -661,7 +661,7 @@ namespace Java {
              *
              * @see Date::parse(String inputString)
              */
-            static std::string getPattern(String s);
+            static std::string getPattern(String s, int &timeZoneOffset);
 
         };
     }  // namespace Util

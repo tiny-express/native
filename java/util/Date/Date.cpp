@@ -219,6 +219,22 @@ long Date::parse(String inputString, string pattern) {
     tm localTimer = {};
     strptime(inputString.toString(), pattern, &localTimer);
     return mktime(&localTimer);
+
+//    tm inputTimer = {};
+//    strptime(inputString.toString(), pattern, &inputTimer);
+//    time_t inputTime = mktime(&inputTimer);
+//
+//    // Get the utc time
+//    tm tempUTCTimer = {};
+//    tm *utcTimer = gmtime_r(&inputTime, &tempUTCTimer);
+//
+//    // Get the local time
+//    time_t localTime = {0};
+//    tm tempLocalTimer = {};
+//    tm *localTimer = localtime_r(&localTime, &tempLocalTimer);
+//
+//    // Convert the input time to local time
+//    return mktime(utcTimer) + localTimer->tm_gmtoff;;
 }
 
 string Date::getZone() {
@@ -321,7 +337,7 @@ std::string Date::getSequenceChar(std::string inputString, int &indexStart) {
     return sequenceChar;
 }
 
-std::string Date::getPattern(String s) {
+std::string Date::getPattern(String s, int &timeZoneOffset) {
     // Create variable to store a Date
     std::string inputString(s.toString());
 
@@ -331,6 +347,7 @@ std::string Date::getPattern(String s) {
     int index = 0;
     int sequenceNumber;
     int idOfCurrentPart = 0;
+    timeZoneOffset = 0;
     unsigned long findResult = std::string::npos;
 
     boolean isNumber;
@@ -376,7 +393,7 @@ std::string Date::getPattern(String s) {
         if (isInRange && isAcceptedChar) {
             sequenceChars = Date::getSequenceChar(inputString, index);
 
-            pattern += Date::processChars(sequenceChars, dateTime);
+            pattern += Date::processChars(sequenceChars, dateTime, timeZoneOffset);
 
             processArray[++idOfCurrentPart] = sequenceChars;
         }  // End Get currentSubString : A -> Z, a -> z
@@ -407,10 +424,20 @@ std::string Date::getPattern(String s) {
 
                 if (isNumber) {
                     sequenceNumber = getSequenceNumber(inputString, index);
-                    pattern += "%Z";
+                    pattern += "%z";
 
                     processArray[++idOfCurrentPart]
                             = currentChar + std::to_string(sequenceNumber);
+
+                    if (sequenceNumber < 14) {
+                        timeZoneOffset = -sequenceNumber * 3600;
+                    }
+
+                    if (sequenceNumber > 14) {
+                        int tempHour = sequenceNumber / 100;
+                        int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
+                        timeZoneOffset = - (tempHour * 3600 + tempMinute * 60);
+                    }
                 }
 
                 if (!isNumber) {
@@ -426,10 +453,21 @@ std::string Date::getPattern(String s) {
 
                 if (isNumber) {
                     sequenceNumber = getSequenceNumber(inputString, index);
-                    pattern += "%Z";
+                    pattern += "%z";
 
                     processArray[++idOfCurrentPart]
                             = currentChar + std::to_string(sequenceNumber);
+
+                    if (sequenceNumber < 14) {
+                        timeZoneOffset = sequenceNumber * 3600;
+                    }
+
+                    if (sequenceNumber > 14) {
+                        int tempHour = sequenceNumber / 100;
+                        int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
+                        timeZoneOffset = (tempHour * 3600 + tempMinute * 60);
+                    }
+
                 }
 
                 if (!isNumber) {
@@ -821,7 +859,7 @@ std::string Date::processNumber(std::string previousString, int sequenceNumber,
 }
 
 std::string Date::processChars(std::string sequenceChars,
-                               Date::DateTime &dateTime) {
+                               Date::DateTime &dateTime, int &timeZoneOffset) {
 
     std::string originalSequenceChars = sequenceChars;
 
@@ -868,6 +906,14 @@ std::string Date::processChars(std::string sequenceChars,
             "pst", "pdt"
     };
     int lengthArraySampleTimezone = 11;
+
+    int arrayTimezoneOffset[] = {
+            0, 0, 0, // GMT/UT/UTC
+            5 * 3600, 4 * 3600, // EST/EDT
+            6 * 3600, 5 * 3600, // CST/CDT
+            7 * 3600, 6 * 3600, // MST/MDT
+            8 * 3600, 7 * 3600 // PST/PDT
+    };
 
     /**
      * sequenceChars == 12 hours time format
@@ -989,6 +1035,7 @@ std::string Date::processChars(std::string sequenceChars,
 
         if (findResult != std::string::npos) {
             dateTime.timeZone = true;
+            timeZoneOffset = arrayTimezoneOffset[index];
             return "%Z";
         }
     }
@@ -1004,9 +1051,19 @@ std::string Date::processChars(std::string sequenceChars,
 }
 
 long Date::parse(String inputString) {
+    int timeZoneOffset = 0;
+
     tm localTimer = {};
-    std::string pattern = Date::getPattern(inputString);
+    std::string pattern = Date::getPattern(inputString, timeZoneOffset);
     strptime(inputString.toString(), pattern.c_str(), &localTimer);
 
-    return mktime(&localTimer);
+    long utcTime = mktime(&localTimer) + timeZoneOffset;
+
+    Date date = Date();
+
+    if (timeZoneOffset != 0) {
+        return utcTime - (date.getTimezoneOffset() * 60);
+    }
+
+    return utcTime;
 }
