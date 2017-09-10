@@ -14,6 +14,12 @@
 This project is also useful for new developers in practical programming.
 
 ### Getting started
+#### Docker
+```
+FROM foodtiny/native:latest
+RUN ls /usr/local/include/native
+RUN ls /usr/local/lib/libnative.so
+```
 
 #### Installation
 ```bash
@@ -71,11 +77,6 @@ argument 1 is one
 argument 0 is ./main
 
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
-```
-
-Build with Docker
-```
-FROM foodtiny/native:latest
 ```
 
 ### Contributors
