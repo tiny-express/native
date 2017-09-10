@@ -40,16 +40,16 @@ int BitSet::wordIndex(int bitIndex) {
 
 void BitSet::checkRange(int fromIndex, int toIndex) {
     if (fromIndex < 0) {
-        throw IndexOutOfBoundsException("fromIndex < 0: " +
+        throw IndexOutOfBoundsException(String("fromIndex < 0: ") +
                                                 String::valueOf(fromIndex));
     }
     if (toIndex < 0) {
-        throw IndexOutOfBoundsException("toIndex < 0: " +
+        throw IndexOutOfBoundsException(String("toIndex < 0: ") +
                                                 String::valueOf(toIndex));
     }
     if (fromIndex > toIndex) {
-        throw IndexOutOfBoundsException("fromIndex: " + String::valueOf(fromIndex) +
-                                                " > toIndex: " +
+        throw IndexOutOfBoundsException(String("fromIndex: ") + String::valueOf(fromIndex) +
+                                                String(" > toIndex: ") +
                                                 String::valueOf(toIndex));
     }
 }
