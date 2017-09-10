@@ -1,4 +1,4 @@
- # Native Library
+# Native Library
 [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
 [![Coverage Status](https://codecov.io/gh/foodtiny/native/branch/master/graph/badge.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Documentation](https://img.shields.io/badge/documentation-doxygen-ff69b4.svg)](https://foodtiny.github.io/native/annotated.html)&nbsp;[![License](https://img.shields.io/badge/license-apache-yellowgreen.svg)]()
 ![Library Structure](misc/native.png)
@@ -73,16 +73,16 @@ argument 0 is ./main
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
 
+Build with Docker
+```
+FROM foodtiny/native:latest
+```
+
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
 - Make sure that your commits must be passed before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
-
-### Copyright & license
-Copyright © 2014-2016 Food Tiny. All rights reserved, except as follows. Code is released under the Apache 2.0 license.
-You may obtain a duplicate copy of the same license, titled CC-BY-SA-4.0, at http://creativecommons.org/licenses/by/4.0/.
-Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foodtiny/native/tree/master/LICENSE.docs).
 
 ### Useful resources
 - [Example for GNU Assembly x64](http://cs.lmu.edu/~ray/notes/gasexamples)
@@ -92,7 +92,7 @@ Terms and conditions set forth in the file [LICENSE.docs](https://github.com/foo
 
 # Documentation
 #### Differences
-This library provides Java classes in C++ so its syntax is friendly for
+This library provides Java classes in C++ so its syntax are friendly for
 both programming languages but we still have some issues :
 
 - Namespace - Package
@@ -115,15 +115,15 @@ Array<byte> bytes = {};
 ```
 - Interface
 ```
-Coming soon
+Not supported
 ```
 - Runtime
 ```
-Coming soon
+Not supported
 ```
 - Garbage Collection
 ```
-Coming soon
+Not supported
 ```
 
 #### Data Types
@@ -153,9 +153,9 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Lang.Cloneable
 - [ ] Java.Lang.Comparable
 - [x] Java.Lang.Double
-- [ ] Java.Lang.Enum
+- [x] Java.Lang.Enum
 - [ ] Java.Lang.Error
-- [ ] Java.Lang.Exception
+- [x] Java.Lang.Exception
 - [x] Java.Lang.Float
 - [x] Java.Lang.Integer
 - [x] Java.Lang.Iterable
@@ -202,8 +202,8 @@ All Java packages are in transformation so we can have a general look about road
 - [ ] Java.Util.AbstractSet
 - [x] Java.Util.ArrayList
 - [x] Java.Util.Arrays
-- [ ] Java.Util.BitSet
-- [ ] Java.Util.Base64
+- [x] Java.Util.BitSet
+- [x] Java.Util.Base64
 - [ ] Java.Util.Calendar
 - [x] Java.Util.Collection
 - [x] Java.Util.Collections
@@ -216,22 +216,22 @@ All Java packages are in transformation so we can have a general look about road
 - [x] Java.Util.Iterator
 - [ ] Java.Util.LinkedListHashSet
 - [x] Java.Util.LinkedList
-- [ ] Java.Util.List
-- [ ] Java.Util.Map
+- [x] Java.Util.List
+- [x] Java.Util.Map
 - [ ] Java.Util.Observable
 - [ ] Java.Util.PriorityQueue
 - [x] Java.Util.Queue
-- [ ] Java.Util.Random
+- [x] Java.Util.Random
 - [ ] Java.Util.Scanner
 - [ ] Java.Util.Set
 - [ ] Java.Util.SimpleTimeZone
-- [ ] Java.Util.Stack
+- [x] Java.Util.Stack
 - [ ] Java.Util.Timer
 - [ ] Java.Util.TimerTask
 - [ ] Java.Util.TimeZone
 - [ ] Java.Util.TreeSet
-- [ ] Java.Util.UUID
-- [ ] Java.Util.Vector
+- [x] Java.Util.UUID
+- [x] Java.Util.Vector
 
 ##### Java.Security
 - [ ] Java.Security.Certificate
