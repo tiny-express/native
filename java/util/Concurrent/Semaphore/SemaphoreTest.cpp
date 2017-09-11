@@ -134,7 +134,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
                                    100, 1, &semaphoreObject));
     }
 
-    result = semaphoreObject.tryAcquire(2, 5000);
+    result = semaphoreObject.tryAcquire(2, 10000);
     for (auto& it : testThreads) {
         if (it.joinable()) {
             it.join();
