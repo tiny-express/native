@@ -771,17 +771,17 @@ TEST(JavaLang, StringOperatorPlusStringDataType) {
 
 TEST(JavaLang, StringOperatorPlusConstantStringDataType) {
 	String input = "Food";
-	String result = input + "tiny";
+	String result = input + String("tiny");
 	String expected = "Foodtiny";
 	ASSERT_TRUE(expected.equals(result));
 	
 	String input1 = "Hello";
-	String result1 = input1 + "";
+	String result1 = input1 + String("");
 	String expected1 = "Hello";
 	ASSERT_TRUE(expected1.equals(result1));
 	
 	String input2 = "";
-	String result2 = input2 + "World";
+	String result2 = input2 + String("World");
 	String expected2 = "World";
 	ASSERT_TRUE(expected2.equals(result2));
 }

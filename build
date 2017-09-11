@@ -1,0 +1,2 @@
+docker build -t foodtiny/native .
+docker push foodtiny/native

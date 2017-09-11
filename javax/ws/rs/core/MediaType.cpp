@@ -151,7 +151,7 @@ boolean MediaType::isCompatible(MediaType other) {
 }
 
 string MediaType::toString() {
-    this->backupForToString = this->type + "/" + this->subtype;
+    this->backupForToString = this->type + String("/") + this->subtype;
     return this->backupForToString.toString();
 }
 
