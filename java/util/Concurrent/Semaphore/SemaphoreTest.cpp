@@ -58,12 +58,7 @@ TEST(JavaUtilConcurrent, SemaphoreToString) {
     String expect = "[Permits = 3]";
     String result;
 
-    try {
-        result = semaphoreObject.toString();
-    } catch (IllegalArgumentException& e) {
-
-    }
-
+    result = semaphoreObject.toString();
     ASSERT_STR(expect.toString(), result.toString());
 }
 

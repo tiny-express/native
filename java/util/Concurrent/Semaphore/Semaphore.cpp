@@ -46,7 +46,13 @@ int Concurrent::Semaphore::availablePermits() {
 }
 
 String Concurrent::Semaphore::toString() {
-    return String::format("[Permits = %d]", availablePermits());
+    String result;
+    try {
+        result = String::format("[Permits = %d]", availablePermits());
+    } catch (IllegalArgumentException& e) {
+
+    }
+    return result;
 }
 
 void Concurrent::Semaphore::acquire() {
