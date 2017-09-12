@@ -560,7 +560,7 @@
 //                boolean isAcceptedChar;
 //                char currentChar;
 //                int &index = indexStart;
-//                string sequenceChar = "";
+//                String sequenceChar = "";
 //                int lengthInputString = length_pointer_char(inputString);
 //
 //                currentChar = inputString[index];
@@ -571,7 +571,10 @@
 //                                 || ('a' <= currentChar && currentChar <= 'z');
 //
 //                while (isInRange && isAcceptedChar) {
-//                    string_append(&sequenceChar, currentChar);
+//                    string temp = &currentChar;
+//                    String tempStr = temp;
+//                    sequenceChar += tempStr;
+//
 //                    ++index;
 //
 //                    if (index < lengthInputString) {
@@ -589,7 +592,7 @@
 //                    }
 //                }  // End while (isInRange && isAcceptedChar)
 //
-//                return sequenceChar;
+//                return sequenceChar.toString();
 //            }
 //
 //            /**
@@ -608,7 +611,6 @@
 //                boolean minute = false;
 //                boolean second = false;
 //                boolean dayOfWeek = false;
-//                boolean monthInChars = false;
 //                boolean is12hFormat = false;
 //                boolean timeZone = false;
 //            };
@@ -994,12 +996,11 @@
 //                                            DateTime &dateTime, int &timeZoneOffset) {
 //
 //                std::string originalSequenceChars = sequenceChars;
-//// TODO
-//                String upperStr = "AbC";
-//                String lowerStr = upperStr.toLowerCase();
-//                string lower = lowerStr.toString();
+//                std::string tempStr = sequenceChars;
+//                std::transform(tempStr.begin(), tempStr.end(),
+//                               tempStr.begin(), ::tolower);
 //
-//                return lower;
+//                sequenceChars = (string) tempStr.c_str();
 //
 //                long findResult = std::string::npos;
 //                int index;
@@ -1125,7 +1126,7 @@
 //                    findResult = arrayAbbreviatedSampleMonth[index].find(sequenceChars);
 //
 //                    if (findResult != std::string::npos) {
-//                        dateTime.monthInChars = true;
+//                        dateTime.month = true;
 //                        return "%b";
 //                    }
 //                }
@@ -1147,7 +1148,7 @@
 //                    findResult = arraySampleMonth[index].find(sequenceChars);
 //
 //                    if (findResult != std::string::npos) {
-//                        dateTime.monthInChars = true;
+//                        dateTime.month = true;
 //                        return "%B";
 //                    }
 //                }

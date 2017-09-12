@@ -2796,7 +2796,6 @@
 //        dateTime.minute = false;
 //        dateTime.second = false;
 //        dateTime.dayOfWeek = false;
-//        dateTime.monthInChars = false;
 //        dateTime.is12hFormat = false;
 //        dateTime.timeZone = false;
 //    }
@@ -2908,7 +2907,6 @@
 //        dateTime.minute = true;
 //        dateTime.second = false;
 //        dateTime.dayOfWeek = false;
-//        dateTime.monthInChars = false;
 //        dateTime.is12hFormat = false;
 //        dateTime.timeZone = false;
 //    }
@@ -2929,7 +2927,6 @@
 //        dateTime.minute = true;
 //        dateTime.second = true;
 //        dateTime.dayOfWeek = false;
-//        dateTime.monthInChars = false;
 //        dateTime.is12hFormat = false;
 //        dateTime.timeZone = false;
 //    }
@@ -2957,7 +2954,6 @@
 //        dateTime.minute = false;
 //        dateTime.second = false;
 //        dateTime.dayOfWeek = false;
-//        dateTime.monthInChars = false;
 //        dateTime.is12hFormat = false;
 //        dateTime.timeZone = false;
 //    }
@@ -2971,21 +2967,9 @@
 //TEST(JavaUtil, DateProcessChars) {
 //    String sequenceChars;
 //    Tester::DateTime dateTime;
-//    int timeZoneOffset;
 //    String expected;
 //    std::string actual;
-//
-//
-//    string testLowerResult = Date::testLower((string) "AbC");
-//    ASSERT_STR("abc", testLowerResult);
-//
-//
-//
-//    String upperStr = "AbC";
-//    String lowerStr = upperStr.toLowerCase();
-//    string lower = lowerStr.toString();
-////    ASSERT_STR("", upper.toLowerCase().toString());
-//    ASSERT_STR("abc", lower);
+//    int timeZoneOffset;
 //
 //    /**
 //     * sequenceChars == 12 hours time format
@@ -2997,14 +2981,12 @@
 //     * @return %p
 //     */
 //    sequenceChars = "Am";
-//    timeZoneOffset = 0;
 //    expected = "%p";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
 //    ASSERT_STR(expected.toString(), actual.c_str());
 //
 //    sequenceChars = "pm";
-//    timeZoneOffset = 0;
 //    expected = "%p";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
@@ -3022,14 +3004,12 @@
 //    * @return %a
 //    */
 //    sequenceChars = "mon";
-//    timeZoneOffset = 0;
 //    expected = "%a";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
 //    ASSERT_STR(expected.toString(), actual.c_str());
 //
 //    sequenceChars = "sAt";
-//    timeZoneOffset = 0;
 //    expected = "%a";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
@@ -3046,17 +3026,92 @@
 //     *
 //     * @return %A
 //     */
-//
 //    sequenceChars = "Monday";
-//    timeZoneOffset = 0;
 //    expected = "%A";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
 //    ASSERT_STR(expected.toString(), actual.c_str());
 //
 //    sequenceChars = "SaturDAY";
-//    timeZoneOffset = 0;
 //    expected = "%A";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    /**
+//     * sequenceChars == abbreviated month
+//     *
+//     * {
+//     *      "jan", "feb", "mar",
+//     *      "apr", "may", "jun", "jul",
+//     *      "aug", "sep", "oct",
+//     *      "nov", "dec"
+//     * }
+//     *
+//     * @return %b
+//     */
+//    sequenceChars = "Jan";
+//    expected = "%b";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    sequenceChars = "oCT";
+//    expected = "%b";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    /**
+//     * sequenceChars == month
+//     *
+//     * {
+//     *      "january", "february", "march",
+//     *      "april", "may", "june", "july",
+//     *      "august", "september", "october",
+//     *      "november", "december"
+//     * }
+//     *
+//     * @return %B
+//     */
+//    sequenceChars = "January";
+//    expected = "%B";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    sequenceChars = "oCTober";
+//    expected = "%B";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    /**
+//     * sequenceChars == timezone
+//     *
+//     * {
+//     *      "gmt", "ut", "utc",
+//     *      "est", "edt", "cst",
+//     *      "cdt", "mst", "mdt",
+//     *      "pst", "pdt"
+//     * }
+//     *
+//     * @return %Z
+//     */
+//    sequenceChars = "GMT";
+//    expected = "%Z";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    sequenceChars = "uT";
+//    expected = "%Z";
+//    actual = Tester::processChars(sequenceChars.toString(),
+//                                  dateTime, timeZoneOffset);
+//    ASSERT_STR(expected.toString(), actual.c_str());
+//
+//    sequenceChars = "EDt";
+//    expected = "%Z";
 //    actual = Tester::processChars(sequenceChars.toString(),
 //                                  dateTime, timeZoneOffset);
 //    ASSERT_STR(expected.toString(), actual.c_str());
