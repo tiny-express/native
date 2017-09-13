@@ -127,7 +127,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
 
     for (auto& it : testThreads) {
         it = std::move(std::thread(SemaphoreTestThread,
-                                   100, 1, &semaphoreObject));
+                                   1, 1, &semaphoreObject));
     }
 
     result = semaphoreObject.tryAcquire(2, 10000);
