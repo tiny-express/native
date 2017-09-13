@@ -31,6 +31,7 @@
 #include "../../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 #include <mutex>
 #include <condition_variable>
+
 using namespace Java::Lang;
 
 namespace Java {
@@ -38,19 +39,85 @@ namespace Java {
         namespace Concurrent {
             class Semaphore : public Object {
             public:
+                /**
+                 * Create a semaphore
+                 */
                 Semaphore();
+
+                /**
+                 * Create a semaphore with the given number of permits.
+                 */
                 Semaphore(int permits);
+
+                /**
+                 * Destructor
+                 */
                 ~Semaphore();
 
+                /**
+                 * Returns the current number of permits available in this semaphore.
+                 *
+                 * @return the number of permits available in this semaphore
+                 */
                 int availablePermits();
+
+                /**
+                 * Returns a string identifying this semaphore (the state, in brackets, includes the String "Permits ="
+                 * followed by the number of permits.
+                 *
+                 * @return a string identifying this semaphore
+                 */
                 String toString();
 
+                /**
+                 * Acquires a permit from this semaphore, blocking util one is available or the thread is interrupted.
+                 */
                 void acquire();
+
+                /**
+                 * Acquires the given number of permits from this semaphore, blocking util all are available or the
+                 * thread is interrupted.
+                 *
+                 * @param permits the number of permits to acquire
+                 */
                 void acquire(int permits);
+
+                /**
+                 * Releases a permit, returning it to the semaphore.
+                 */
                 void release();
+
+                /**
+                 * Releases the given number of permits, returning them to the semaphore.
+                 */
                 void release(int permits);
+
+                /**
+                 * Acquires a permit, only if one is available at the time of invocation.
+                 *
+                 * @return true if a permit was acquired and false otherwise
+                 */
                 boolean tryAcquire();
+
+                /**
+                 * Acquires the given number of permits from this semaphore, if all are available at the time of
+                 * invocation.
+                 *
+                 * @param permits the number of permits to acquire
+                 * @return true if the permits were acquired and false otherwise
+                 * acquired.
+                 */
                 boolean tryAcquire(int permits);
+
+                /**
+                 * Acquires the given number of permits from this semaphore, if all are available within the given
+                 * waiting time and the current thread has not been interrupted.
+                 *
+                 * @param permits the number of permits to acquire
+                 * @param timeout the maximum time to wait for the permits
+                 * @return true if all permits were acquired and false if the waiting time elapsed before all permits
+                 * were acquired
+                 */
                 boolean tryAcquire(int permits, long timeout);
 
             private:
@@ -63,4 +130,4 @@ namespace Java {
     } // namespace Util
 } // namespace Java
 
-#endif //JAVA_UTIL_CONCURRENT_SEMAPHORE_HPP_
+#endif //JAVA_UTIL_CONCURRENT_SEMAPHORE_SEMAPHORE_HPP_

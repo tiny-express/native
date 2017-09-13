@@ -34,7 +34,8 @@ extern "C" {
 
 using namespace Java::Util::Concurrent;
 
-void SemaphoreTestThread(int sleepTime, int releasePermits, Semaphore* semaphoreObject) {
+void SemaphoreTestThread(int sleepTime, int releasePermits,
+                         Semaphore* semaphoreObject) {
     std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
     if(semaphoreObject)
         semaphoreObject->release(releasePermits);
