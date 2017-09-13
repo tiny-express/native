@@ -55,28 +55,31 @@ namespace Java {
                 ~Semaphore();
 
                 /**
-                 * Returns the current number of permits available in this semaphore.
+                 * Returns the current number of permits available in this
+                 * semaphore.
                  *
                  * @return the number of permits available in this semaphore
                  */
                 int availablePermits();
 
                 /**
-                 * Returns a string identifying this semaphore (the state, in brackets, includes the String "Permits ="
-                 * followed by the number of permits.
+                 * Returns a string identifying this semaphore (the state, in
+                 * brackets, includes the String "Permits =" followed by the
+                 * number of permits.
                  *
                  * @return a string identifying this semaphore
                  */
                 String toString();
 
                 /**
-                 * Acquires a permit from this semaphore, blocking util one is available or the thread is interrupted.
+                 * Acquires a permit from this semaphore, blocking util one is
+                 * available or the thread is interrupted.
                  */
                 void acquire();
 
                 /**
-                 * Acquires the given number of permits from this semaphore, blocking util all are available or the
-                 * thread is interrupted.
+                 * Acquires the given number of permits from this semaphore,
+                 * blocking util all are available or the thread is interrupted.
                  *
                  * @param permits the number of permits to acquire
                  */
@@ -88,20 +91,22 @@ namespace Java {
                 void release();
 
                 /**
-                 * Releases the given number of permits, returning them to the semaphore.
+                 * Releases the given number of permits, returning them to the
+                 * semaphore.
                  */
                 void release(int permits);
 
                 /**
-                 * Acquires a permit, only if one is available at the time of invocation.
+                 * Acquires a permit, only if one is available at the time of
+                 * invocation.
                  *
                  * @return true if a permit was acquired and false otherwise
                  */
                 boolean tryAcquire();
 
                 /**
-                 * Acquires the given number of permits from this semaphore, if all are available at the time of
-                 * invocation.
+                 * Acquires the given number of permits from this semaphore, if
+                 * all are available at the time of invocation.
                  *
                  * @param permits the number of permits to acquire
                  * @return true if the permits were acquired and false otherwise
@@ -110,13 +115,14 @@ namespace Java {
                 boolean tryAcquire(int permits);
 
                 /**
-                 * Acquires the given number of permits from this semaphore, if all are available within the given
-                 * waiting time and the current thread has not been interrupted.
+                 * Acquires the given number of permits from this semaphore, if
+                 * all are available within the given waiting time and the
+                 * current thread has not been interrupted.
                  *
                  * @param permits the number of permits to acquire
                  * @param timeout the maximum time to wait for the permits
-                 * @return true if all permits were acquired and false if the waiting time elapsed before all permits
-                 * were acquired
+                 * @return true if all permits were acquired and false if the
+                 * waiting time elapsed before all permits were acquired
                  */
                 boolean tryAcquire(int permits, long timeout);
 
