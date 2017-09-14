@@ -632,8 +632,8 @@ namespace Java {
              * @see Date::getPattern(String inputString)
              * @see Date::parse(String inputString)
              */
-            static string processNumber(
-                    string previousString, int sequenceNumber,
+            static String processNumber(
+                    String previousString, int sequenceNumber,
                     char followedChar, DateTime &dateTime) {
                 /**
                  * sequenceNumber: >= 100
@@ -665,13 +665,13 @@ namespace Java {
                  */
                 if (32 <= sequenceNumber && sequenceNumber <= 59) {
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.minute == false) {
+                    if (previousString == ":" && dateTime.minute == false) {
 
                         dateTime.minute = true;
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.minute == true
+                    if (previousString == ":" && dateTime.minute == true
                         && dateTime.second == false) {
 
                         dateTime.second = true;
@@ -713,13 +713,13 @@ namespace Java {
                  */
                 if (24 <= sequenceNumber && sequenceNumber <= 31) {
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.minute == false) {
+                    if (previousString == ":" && dateTime.minute == false) {
 
                         dateTime.minute = true;
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.minute == true
+                    if (previousString == ":" && dateTime.minute == true
                         && dateTime.second == false) {
 
                         dateTime.second = true;
@@ -782,14 +782,14 @@ namespace Java {
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == false) {
 
                         dateTime.minute = true;
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == true && dateTime.second == false) {
 
                         dateTime.second = true;
@@ -855,14 +855,14 @@ namespace Java {
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == false) {
 
                         dateTime.minute = true;
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == true && dateTime.second == false) {
 
                         dateTime.second = true;
@@ -947,14 +947,14 @@ namespace Java {
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == false) {
 
                         dateTime.minute = true;
                         return "%M";
                     }
 
-                    if (strcmp(previousString, ":") == 0 && dateTime.hour == true
+                    if (previousString == ":" && dateTime.hour == true
                         && dateTime.minute == true && dateTime.second == false) {
 
                         dateTime.second = true;
@@ -981,7 +981,7 @@ namespace Java {
                     }
                 }
 
-                return (string) std::to_string(sequenceNumber).c_str();
+                return String::valueOf(sequenceNumber);
             }
 
             /**
@@ -996,14 +996,13 @@ namespace Java {
              * @see Date::getPattern(String inputString)
              * @see Date::parse(String inputString)
              */
-            static String processChars(string inputSequenceChars,
+            static String processChars(String inputSequenceChars,
                                             DateTime &dateTime, int &timeZoneOffset) {
 
                 String originalSequenceChars = inputSequenceChars;
-                String holdString = inputSequenceChars;
-                String sequenceChars = holdString.toLowerCase();
+                String sequenceChars = inputSequenceChars.toLowerCase();
 
-                String temp;
+                String resultArrayGetString;
 
                 boolean findResult = false;
                 int index;
@@ -1078,8 +1077,8 @@ namespace Java {
                 */
                 for (index = 0; index < arrayAbbreviatedSampleDayOfWeek.size(); ++index) {
 
-                    temp = arrayAbbreviatedSampleDayOfWeek.get(index).toString();
-                    findResult =  (temp == sequenceChars);
+                    resultArrayGetString = arrayAbbreviatedSampleDayOfWeek.get(index).toString();
+                    findResult =  (resultArrayGetString == sequenceChars);
 
                     if (findResult) {
                         dateTime.dayOfWeek = true;
@@ -1100,8 +1099,8 @@ namespace Java {
                  */
                 for (index = 0; index < arraySampleDayOfWeek.size(); ++index) {
 
-                    temp = arraySampleDayOfWeek.get(index).toString();
-                    findResult =  (temp == sequenceChars);
+                    resultArrayGetString = arraySampleDayOfWeek.get(index).toString();
+                    findResult =  (resultArrayGetString == sequenceChars);
 
                     if (findResult) {
                         dateTime.dayOfWeek = true;
@@ -1123,8 +1122,8 @@ namespace Java {
                  */
                 for (index = 0; index < arrayAbbreviatedSampleMonth.size(); ++index) {
 
-                    temp = arrayAbbreviatedSampleMonth.get(index).toString();
-                    findResult =  (temp == sequenceChars);
+                    resultArrayGetString = arrayAbbreviatedSampleMonth.get(index).toString();
+                    findResult =  (resultArrayGetString == sequenceChars);
 
                     if (findResult) {
                         dateTime.month = true;
@@ -1146,8 +1145,8 @@ namespace Java {
                  */
                 for (index = 0; index < arraySampleMonth.size(); ++index) {
 
-                    temp = arraySampleMonth.get(index).toString();
-                    findResult =  (temp == sequenceChars);
+                    resultArrayGetString = arraySampleMonth.get(index).toString();
+                    findResult =  (resultArrayGetString == sequenceChars);
 
                     if (findResult) {
                         dateTime.month = true;
@@ -1169,8 +1168,8 @@ namespace Java {
                  */
                 for (index = 0; index < arraySampleTimezone.size(); ++index) {
 
-                    temp = arraySampleTimezone.get(index).toString();
-                    findResult =  (temp == sequenceChars);
+                    resultArrayGetString = arraySampleTimezone.get(index).toString();
+                    findResult =  (resultArrayGetString == sequenceChars);
 
                     if (findResult) {
                         dateTime.timeZone = true;
@@ -1198,169 +1197,199 @@ namespace Java {
              *
              * @see Date::parse(String inputString)
              */
-//            static String getPattern(String s, int &timeZoneOffset) {
-//                // Create variable to store a Date
-//                std::string tempString(s.toString());
-//                string inputString = (string) tempString.c_str();
-//                int lengthInputString = length_pointer_char(inputString);
-//
-//                DateTime dateTime;
-//
-//                char currentChar;
-//                int index = 0;
-//                int sequenceNumber;
-//                int idOfCurrentPart = 0;
-//                timeZoneOffset = 0;
-//                unsigned long findResult = std::string::npos;
-//
-//                boolean isNumber;
-//                boolean isAcceptedChar;
-//                boolean isInRange;
-//
-//                std::string processArray[500];
-//                processArray[0] = "";
-//                String sequenceChars;
-//                String pattern = "";
-//
-//                // Stop if inputString is empty
-//                if (inputString == "") {
-//                    return "";
-//                }
-//
-//                isInRange = index < lengthInputString;
-//
-//                // Scan the inputString
-//                while (isInRange) {
-//                    /**
-//                     * 1. Segmentation
-//                     */
-//
-//                    /** Get the current sequenceNumber */
-//                    currentChar = inputString[index];
-//                    isInRange = index < lengthInputString;
-//                    isNumber = ('0' <= currentChar) && (currentChar <= '9');
-//
-//                    if (isInRange && isNumber) {
-//                        sequenceNumber = Date::getSequenceNumber(inputString, index);
-//                        // TODO(thoangminh): check it
-//                        string tempString = (string) processArray[idOfCurrentPart].c_str();
-//                        pattern += processNumber(tempString, sequenceNumber,
-//                                                 inputString[index], dateTime);
-//                        processArray[++idOfCurrentPart] = std::to_string(sequenceNumber);
-//                    }
-//
-//                    /** Get current sequenceChar  : A -> Z, a -> z */
-//                    currentChar = inputString[index];
-//                    isInRange = index < lengthInputString;
-//                    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-//                                     || ('a' <= currentChar && currentChar <= 'z');
-//
-//                    if (isInRange && isAcceptedChar) {
-//                        sequenceChars = Date::getSequenceChar(inputString, index);
-//
-//                        pattern += Date::processChars(sequenceChars, dateTime, timeZoneOffset);
-//
-//                        processArray[++idOfCurrentPart] = sequenceChars;
-//                    }  // End Get currentSubString : A -> Z, a -> z
-//
-//                    /** Not isNumber && Not isAcceptedChar */
-//                    currentChar = inputString[index];
-//                    isNumber = ('0' <= currentChar) && (currentChar <= '9');
-//                    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
-//                                     || ('a' <= currentChar && currentChar <= 'z');
-//
-//                    if (!isNumber && !isAcceptedChar && index < lengthInputString) {
-//
-//                        ++index;
-//
-//                        if (currentChar != '+' && currentChar != '-') {
-//                            pattern += currentChar;
-//                        }
-//
-//                        if (currentChar != ' ' && currentChar != '+'
-//                            && currentChar != '-') {
-//
-//                            processArray[++idOfCurrentPart] = currentChar;
-//                        }
-//
-//                        if (currentChar == '+') {
-//                            currentChar = inputString[index];
-//                            isNumber = ('0' <= currentChar) && (currentChar <= '9');
-//
-//                            if (isNumber) {
-//                                sequenceNumber = getSequenceNumber(inputString, index);
-//                                pattern += "%z";
-//
-//                                processArray[++idOfCurrentPart]
-//                                        = currentChar + std::to_string(sequenceNumber);
-//
-//                                if (sequenceNumber < 14) {
-//                                    timeZoneOffset = -sequenceNumber * 3600;
-//                                }
-//
-//                                if (sequenceNumber > 14) {
-//                                    int tempHour = sequenceNumber / 100;
-//                                    int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
-//                                    timeZoneOffset = - (tempHour * 3600 + tempMinute * 60);
-//                                }
-//                            }
-//
-//                            if (!isNumber) {
-//                                pattern += currentChar;
-//                            }
-//                        }
-//
-//                        if (currentChar == '-' && dateTime.dayOfMonth == true
-//                            && dateTime.month == true && dateTime.year == true) {
-//
-//                            currentChar = inputString[index];
-//                            isNumber = ('0' <= currentChar) && (currentChar <= '9');
-//
-//                            if (isNumber) {
-//                                sequenceNumber = getSequenceNumber(inputString, index);
-//                                pattern += "%z";
-//
-//                                processArray[++idOfCurrentPart]
-//                                        = currentChar + std::to_string(sequenceNumber);
-//
-//                                if (sequenceNumber < 14) {
-//                                    timeZoneOffset = sequenceNumber * 3600;
-//                                }
-//
-//                                if (sequenceNumber > 14) {
-//                                    int tempHour = sequenceNumber / 100;
-//                                    int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
-//                                    timeZoneOffset = (tempHour * 3600 + tempMinute * 60);
-//                                }
-//                            }
-//
-//                            if (!isNumber) {
-//                                pattern += currentChar;
-//                            }
-//                        }
-//
-//                        if (currentChar == '-' && (dateTime.dayOfMonth == false
-//                                                   || dateTime.month == false || dateTime.year == false)) {
-//
-//                            pattern += currentChar;
-//                        }
-//                    }  // End Not isAcceptedChar && Not isNumber
-//
-//                    isInRange = index < lengthInputString;
-//                }  // End scan the inputString
-//
-//                /**
-//                 * Process the 12 hour format
-//                 */
-//                if (dateTime.is12hFormat == true) {
-//                    String result = string_replace(pattern.toString(),
-//                                                   (string) "%H",
-//                                                   (string) "%I");
-//                    pattern = result.toString();
-//                }
-//
-//                return pattern;
-//            }
+            static String getPattern(String s, int &timeZoneOffset) {
+                // Create variable to store a Date
+                std::string tempString(s.toString());
+                string inputString = (string) tempString.c_str();
+                int lengthInputString = s.length();
+
+                DateTime dateTime;
+
+                char currentChar;
+                int index = 0;
+                int sequenceNumber;
+                int indexOfCurrentPart = 0;
+                timeZoneOffset = 0;
+                unsigned long findResult = std::string::npos;
+
+                boolean isNumber;
+                boolean isAcceptedChar;
+                boolean isInRange;
+
+                ArrayList<String> processArray;
+                processArray.add("");
+                String sequenceChars;
+                String pattern = "";
+                String previousString;
+                char followedChar;
+
+                // Stop if inputString is empty
+                if (inputString == "") {
+                    return "";
+                }
+
+                isInRange = index < lengthInputString;
+
+                // Scan the inputString
+                while (isInRange) {
+                    /**
+                     * 1. Segmentation
+                     */
+
+                    /** Get the current sequenceNumber */
+                    currentChar = inputString[index];
+                    isInRange = index < lengthInputString;
+                    isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+                    if (isInRange && isNumber) {
+                        sequenceNumber = Date::getSequenceNumber(inputString, index);
+                        previousString = processArray.get(indexOfCurrentPart);
+                        followedChar = inputString[index];
+
+                        pattern += processNumber(previousString.toString(), sequenceNumber,
+                                                 followedChar, dateTime);
+
+                        ++indexOfCurrentPart;
+                        processArray.add(String::valueOf(sequenceNumber));
+                    }
+
+                    /** Get current sequenceChar  : A -> Z, a -> z */
+                    currentChar = inputString[index];
+                    isInRange = index < lengthInputString;
+                    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                                     || ('a' <= currentChar && currentChar <= 'z');
+
+                    if (isInRange && isAcceptedChar) {
+                        sequenceChars = Date::getSequenceChar(inputString, index);
+
+                        pattern += Date::processChars(sequenceChars, dateTime, timeZoneOffset);
+
+                        ++indexOfCurrentPart;
+                        processArray.add(sequenceChars);
+                    }  // End Get currentSubString : A -> Z, a -> z
+
+                    /** Not isNumber && Not isAcceptedChar */
+                    currentChar = inputString[index];
+                    isNumber = ('0' <= currentChar) && (currentChar <= '9');
+                    isAcceptedChar = ('A' <= currentChar && currentChar <= 'Z')
+                                     || ('a' <= currentChar && currentChar <= 'z');
+
+                    if (!isNumber && !isAcceptedChar && index < lengthInputString) {
+
+                        ++index;
+
+                        if (currentChar != '+' && currentChar != '-') {
+                            pattern += currentChar;
+                        }
+
+                        if (currentChar != ' ' && currentChar != '+'
+                            && currentChar != '-') {
+
+                            char arrayChar[2];
+                            arrayChar[0] = currentChar;
+                            arrayChar[1] = '\0';
+
+                            ++indexOfCurrentPart;
+                            processArray.add(arrayChar);
+                        }
+
+                        if (currentChar == '+') {
+                            currentChar = inputString[index];
+                            isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+                            if (isNumber) {
+                                sequenceNumber = getSequenceNumber(inputString, index);
+                                pattern += "%z";
+
+                                char arrayChar[2];
+                                arrayChar[0] = currentChar;
+                                arrayChar[1] = '\0';
+
+                                String stringArrayChar = arrayChar;
+                                String stringSequenceNumber = String::valueOf(sequenceNumber);
+
+                                stringArrayChar += stringSequenceNumber;
+                                previousString = stringArrayChar;
+
+                                ++indexOfCurrentPart;
+                                processArray.add(previousString);
+
+                                if (sequenceNumber < 14) {
+                                    timeZoneOffset = -sequenceNumber * 3600;
+                                }
+
+                                if (sequenceNumber > 14) {
+                                    int tempHour = sequenceNumber / 100;
+                                    int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
+                                    timeZoneOffset = - (tempHour * 3600 + tempMinute * 60);
+                                }
+                            }
+
+                            if (!isNumber) {
+                                pattern += currentChar;
+                            }
+                        }
+
+                        if (currentChar == '-' && dateTime.dayOfMonth == true
+                            && dateTime.month == true && dateTime.year == true) {
+
+                            currentChar = inputString[index];
+                            isNumber = ('0' <= currentChar) && (currentChar <= '9');
+
+                            if (isNumber) {
+                                sequenceNumber = getSequenceNumber(inputString, index);
+                                pattern += "%z";
+
+                                char arrayChar[2];
+                                arrayChar[0] = currentChar;
+                                arrayChar[1] = '\0';
+
+                                String stringArrayChar = arrayChar;
+                                String stringSequenceNumber = String::valueOf(sequenceNumber);
+
+                                stringArrayChar += stringSequenceNumber;
+                                ++indexOfCurrentPart;
+                                processArray.add(stringArrayChar);
+
+                                if (sequenceNumber < 14) {
+                                    timeZoneOffset = sequenceNumber * 3600;
+                                }
+
+                                if (sequenceNumber > 14) {
+                                    int tempHour = sequenceNumber / 100;
+                                    int tempMinute = sequenceNumber - ((sequenceNumber / 100) * 100);
+                                    timeZoneOffset = (tempHour * 3600 + tempMinute * 60);
+                                }
+                            }
+
+                            if (!isNumber) {
+                                pattern += currentChar;
+                            }
+                        }
+
+                        if (currentChar == '-' && (dateTime.dayOfMonth == false
+                                                   || dateTime.month == false || dateTime.year == false)) {
+
+                            pattern += currentChar;
+                        }
+                    }  // End Not isAcceptedChar && Not isNumber
+
+                    isInRange = index < lengthInputString;
+                }  // End scan the inputString
+
+                /**
+                 * Process the 12 hour format
+                 */
+                if (dateTime.is12hFormat == true) {
+                    string result = string_replace(pattern.toString(),
+                                                   (string) "%H",
+                                                   (string) "%I");
+                    pattern = result;
+                    free(result);
+                }
+
+                return pattern;
+            }
 
             friend struct ::test::Tester;
         };

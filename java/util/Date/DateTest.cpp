@@ -47,7 +47,7 @@ namespace test {
             return Date::getSequenceChar(inputString, indexStart);
         }
 
-        static string processNumber(
+        static String processNumber(
                 string previousString, int number,
                 char followedChar, Date::DateTime dateTime) {
 
@@ -61,9 +61,9 @@ namespace test {
             return Date::processChars(sequenceChars, dateTime, timeZoneOffset);
         }
 
-//        static String getPattern(String s, int timeZoneOffset) {
-//            return Date::getPattern(s, timeZoneOffset);
-//        }
+        static String getPattern(String s, int timeZoneOffset) {
+            return Date::getPattern(s, timeZoneOffset);
+        }
     };
 }
 
@@ -2463,7 +2463,7 @@ TEST(JavaUtil, DateProcessNumber) {
     char followedChar;
     Tester::DateTime dateTime;
     String expected;
-    string actual;
+    String actual;
 
     /**
      * number: >= 100
@@ -2487,7 +2487,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     /**
      * number: 60 -> 99
@@ -2500,7 +2500,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "abc";
     sequenceNumber = 61;
@@ -2509,7 +2509,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 61;
@@ -2518,7 +2518,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "aaa";
     sequenceNumber = 61;
@@ -2527,7 +2527,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     /**
      * number: 32 -> 59
@@ -2542,7 +2542,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 32;
@@ -2551,7 +2551,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 32;
@@ -2560,7 +2560,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 32;
@@ -2569,7 +2569,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 32;
@@ -2578,7 +2578,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = ":";
     sequenceNumber = 40;
@@ -2598,7 +2598,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     previousString = "";
     sequenceNumber = 50;
@@ -2618,7 +2618,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     /**
      *  number: 24 -> 31
@@ -2645,7 +2645,7 @@ TEST(JavaUtil, DateProcessNumber) {
     actual = Tester::processNumber(
             previousString.toString(), sequenceNumber,
             followedChar, dateTime);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaUtil, DateProcessChars) {
@@ -2801,318 +2801,318 @@ TEST(JavaUtil, DateProcessChars) {
     ASSERT_STR(expected.toString(), actual.toString());
 }
 
-//
-//TEST(JavaUtil, DateGetPattern) {
-//    // Create variable to test
-//    String expected;
-//    String actual;
-//    String actualString;
-//    int timeZoneOffset;
-//
-//    /** Test processing the number */
-//
-//    /**
-//     * number: >= 100
-//     * year: %Y
-//     */
-//    actualString = "100";
-//    expected = "%Y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     * number: 60 -> 99
-//     * year: %y
-//     */
-//    actualString = "61";
-//    expected = "%y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "abc61";
-//    expected = "abc%y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "61abc";
-//    expected = "%yabc";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "aaa61bbb";
-//    expected = "aaa%ybbb";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     * number: 32 -> 59
-//     * year: %y
-//     * or minute: %M
-//     * or second: %S
-//     */
-//    actualString = "32/";
-//    expected = "%y/";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32.";
-//    expected = "%y.";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32";
-//    expected = "%y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32 aaa";
-//    expected = "%y aaa";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32:";
-//    expected = "%M:";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32:40";
-//    expected = "%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "32:40 50";
-//    expected = "%M:%S %y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     *  number: 24 -> 31
-//     *  or day of month: %d
-//     *  or year: %y
-//     *  minute: %M
-//     *  or second: %S
-//     */
-//    actualString = "24 25:30 31";
-//    expected = "%d %M:%S %y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "25:30 24 31";
-//    expected = "%M:%S %d %y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//    *  number: 12 -> 23
-//    *  or day of month: %d
-//    *  or year: %y
-//    *  or hour: %H
-//    *  minute: %M
-//    *  or second: %S
-//    */
-//    actualString = "14 12:20:15 20";
-//    expected = "%d %H:%M:%S %y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "12:20:15 14 20";
-//    expected = "%H:%M:%S %d %y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     *  number: 1 -> 11
-//     *  or day of month: %d
-//     *  or month: %m
-//     *  or year: %y
-//     *  or hour: %H
-//     *  minute: %M
-//     *  or second: %S
-//     */
-//    actualString = "1/2/11 5:10:11";
-//    expected = "%m/%d/%y %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "1-2-11 11:10:05";
-//    expected = "%m-%d-%y %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "3:11:08 1/2/11";
-//    expected = "%H:%M:%S %m/%d/%y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     *  number: = 0
-//     *  hour: %H
-//     *  minute: %M
-//     *  or second: %S
-//     */
-//    actualString = "1/2/11 00:10:11";
-//    expected = "%m/%d/%y %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "1-2-11 11:00:05";
-//    expected = "%m-%d-%y %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "00:00:00 1/2/11";
-//    expected = "%H:%M:%S %m/%d/%y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "aaa00:00:00aa aa1/2/11 aaa";
-//    expected = "aaa%H:%M:%Saa aa%m/%d/%y aaa";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Valid case
-//    actualString = "Thursday January 9 and 2014 12:35:34";
-//    expected = "%A %B %d and %Y %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     * Sample Date format
-//     */
-//
-//    // Short date pattern. (en-US)
-//    actualString = "02/13/2017";
-//    expected = "%m/%d/%Y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Long date pattern. (en-US)
-//    actualString = "Monday, June 15, 2009";
-//    expected = "%A, %B %d, %Y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Full date/time pattern (short time). (en-US)
-//    actualString = "Monday, June 15, 2009 1:45 PM";
-//    expected = "%A, %B %d, %Y %I:%M %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Full date/time pattern (long time). (en-US)
-//    actualString = "Monday, June 15, 2009 1:45:30 PM";
-//    expected = "%A, %B %d, %Y %I:%M:%S %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // General date/time pattern (short time). (en-US)
-//    actualString = "6/15/2009 1:45";
-//    expected = "%m/%d/%Y %H:%M";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // General date/time pattern (short time). (en-US)
-//    actualString = "6/15/2009 1:45 PM";
-//    expected = "%m/%d/%Y %I:%M %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // General date/time pattern (long time). (en-US)
-//    actualString = "6/15/2009 1:45:30 PM";
-//    expected = "%m/%d/%Y %I:%M:%S %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Month/day pattern.(en-US)
-//    actualString = "June 15";
-//    expected = "%B %d";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Round-trip date/time pattern. (DateTimeKind.Utc)
-//    actualString = "2009-06-15 13:45:30";
-//    expected = "%Y-%m-%d %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Sortable date/time pattern. (DateTimeKind.Local)
-//    actualString = "2009-06-15 13:45:30";
-//    expected = "%Y-%m-%d %H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Short time pattern. (en-US)
-//    actualString = "1:45 PM";
-//    expected = "%I:%M %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Long time pattern. (en-US)
-//    actualString = "1:45:30";
-//    expected = "%H:%M:%S";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Long time pattern. (en-US)
-//    actualString = "1:45:30 PM";
-//    expected = "%I:%M:%S %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Universal full date/time pattern. (en-US)
-//    actualString = "Monday, June 15, 2009 8:45:30 PM";
-//    expected = "%A, %B %d, %Y %I:%M:%S %p";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    // Year month pattern. (en-US)
-//    actualString = "June, 2009";
-//    expected = "%B, %Y";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    /**
-//     * Test the time zone
-//     * +number or -number
-//     * or
-//     * {
-//     *      "gmt", "ut", "utc",
-//     *      "est", "edt", "cst",
-//     *      "cdt", "mst", "mdt",
-//     *      "pst", "pdt"
-//     * }
-//     */
-//    actualString = "2009-06-15 13:45:30 +07";
-//    expected = "%Y-%m-%d %H:%M:%S %z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 -07";
-//    expected = "%Y-%m-%d %H:%M:%S %z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 -0430";
-//    expected = "%Y-%m-%d %H:%M:%S %z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 GMT";
-//    expected = "%Y-%m-%d %H:%M:%S %Z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 UT";
-//    expected = "%Y-%m-%d %H:%M:%S %Z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 utc";
-//    expected = "%Y-%m-%d %H:%M:%S %Z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//
-//    actualString = "2009-06-15 13:45:30 pdt";
-//    expected = "%Y-%m-%d %H:%M:%S %Z";
-//    actual = Tester::getPattern(actualString, timeZoneOffset);
-//    ASSERT_STR(expected.toString(), actual.toString());
-//}
+
+TEST(JavaUtil, DateGetPattern) {
+    // Create variable to test
+    String expected;
+    String actual;
+    String actualString;
+    int timeZoneOffset;
+
+    /** Test processing the number */
+
+    /**
+     * number: >= 100
+     * year: %Y
+     */
+    actualString = "100";
+    expected = "%Y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     * number: 60 -> 99
+     * year: %y
+     */
+    actualString = "61";
+    expected = "%y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "abc61";
+    expected = "abc%y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "61abc";
+    expected = "%yabc";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "aaa61bbb";
+    expected = "aaa%ybbb";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     * number: 32 -> 59
+     * year: %y
+     * or minute: %M
+     * or second: %S
+     */
+    actualString = "32/";
+    expected = "%y/";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32.";
+    expected = "%y.";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32";
+    expected = "%y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32 aaa";
+    expected = "%y aaa";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32:";
+    expected = "%M:";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32:40";
+    expected = "%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "32:40 50";
+    expected = "%M:%S %y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     *  number: 24 -> 31
+     *  or day of month: %d
+     *  or year: %y
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "24 25:30 31";
+    expected = "%d %M:%S %y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "25:30 24 31";
+    expected = "%M:%S %d %y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+    *  number: 12 -> 23
+    *  or day of month: %d
+    *  or year: %y
+    *  or hour: %H
+    *  minute: %M
+    *  or second: %S
+    */
+    actualString = "14 12:20:15 20";
+    expected = "%d %H:%M:%S %y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "12:20:15 14 20";
+    expected = "%H:%M:%S %d %y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     *  number: 1 -> 11
+     *  or day of month: %d
+     *  or month: %m
+     *  or year: %y
+     *  or hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "1/2/11 5:10:11";
+    expected = "%m/%d/%y %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "1-2-11 11:10:05";
+    expected = "%m-%d-%y %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "3:11:08 1/2/11";
+    expected = "%H:%M:%S %m/%d/%y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     *  number: = 0
+     *  hour: %H
+     *  minute: %M
+     *  or second: %S
+     */
+    actualString = "1/2/11 00:10:11";
+    expected = "%m/%d/%y %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "1-2-11 11:00:05";
+    expected = "%m-%d-%y %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "00:00:00 1/2/11";
+    expected = "%H:%M:%S %m/%d/%y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "aaa00:00:00aa aa1/2/11 aaa";
+    expected = "aaa%H:%M:%Saa aa%m/%d/%y aaa";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Valid case
+    actualString = "Thursday January 9 and 2014 12:35:34";
+    expected = "%A %B %d and %Y %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     * Sample Date format
+     */
+
+    // Short date pattern. (en-US)
+    actualString = "02/13/2017";
+    expected = "%m/%d/%Y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Long date pattern. (en-US)
+    actualString = "Monday, June 15, 2009";
+    expected = "%A, %B %d, %Y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Full date/time pattern (short time). (en-US)
+    actualString = "Monday, June 15, 2009 1:45 PM";
+    expected = "%A, %B %d, %Y %I:%M %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Full date/time pattern (long time). (en-US)
+    actualString = "Monday, June 15, 2009 1:45:30 PM";
+    expected = "%A, %B %d, %Y %I:%M:%S %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // General date/time pattern (short time). (en-US)
+    actualString = "6/15/2009 1:45";
+    expected = "%m/%d/%Y %H:%M";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // General date/time pattern (short time). (en-US)
+    actualString = "6/15/2009 1:45 PM";
+    expected = "%m/%d/%Y %I:%M %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // General date/time pattern (long time). (en-US)
+    actualString = "6/15/2009 1:45:30 PM";
+    expected = "%m/%d/%Y %I:%M:%S %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Month/day pattern.(en-US)
+    actualString = "June 15";
+    expected = "%B %d";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Round-trip date/time pattern. (DateTimeKind.Utc)
+    actualString = "2009-06-15 13:45:30";
+    expected = "%Y-%m-%d %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Sortable date/time pattern. (DateTimeKind.Local)
+    actualString = "2009-06-15 13:45:30";
+    expected = "%Y-%m-%d %H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Short time pattern. (en-US)
+    actualString = "1:45 PM";
+    expected = "%I:%M %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Long time pattern. (en-US)
+    actualString = "1:45:30";
+    expected = "%H:%M:%S";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Long time pattern. (en-US)
+    actualString = "1:45:30 PM";
+    expected = "%I:%M:%S %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Universal full date/time pattern. (en-US)
+    actualString = "Monday, June 15, 2009 8:45:30 PM";
+    expected = "%A, %B %d, %Y %I:%M:%S %p";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Year month pattern. (en-US)
+    actualString = "June, 2009";
+    expected = "%B, %Y";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    /**
+     * Test the time zone
+     * +number or -number
+     * or
+     * {
+     *      "gmt", "ut", "utc",
+     *      "est", "edt", "cst",
+     *      "cdt", "mst", "mdt",
+     *      "pst", "pdt"
+     * }
+     */
+    actualString = "2009-06-15 13:45:30 +07";
+    expected = "%Y-%m-%d %H:%M:%S %z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 -07";
+    expected = "%Y-%m-%d %H:%M:%S %z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 -0430";
+    expected = "%Y-%m-%d %H:%M:%S %z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 GMT";
+    expected = "%Y-%m-%d %H:%M:%S %Z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 UT";
+    expected = "%Y-%m-%d %H:%M:%S %Z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 utc";
+    expected = "%Y-%m-%d %H:%M:%S %Z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    actualString = "2009-06-15 13:45:30 pdt";
+    expected = "%Y-%m-%d %H:%M:%S %Z";
+    actual = Tester::getPattern(actualString, timeZoneOffset);
+    ASSERT_STR(expected.toString(), actual.toString());
+}
