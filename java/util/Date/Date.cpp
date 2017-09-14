@@ -497,8 +497,7 @@ String Date::processNumber(
             return "%M";
         }
 
-        if (previousString == ":" && dateTime.hour
-            && !dateTime.minute) {
+        if (previousString == ":" && !dateTime.minute) {
 
             dateTime.minute = true;
             return "%M";
@@ -570,8 +569,7 @@ String Date::processNumber(
             return "%M";
         }
 
-        if (previousString == ":" && dateTime.hour
-            && !dateTime.minute) {
+        if (previousString == ":" && !dateTime.minute) {
 
             dateTime.minute = true;
             return "%M";
@@ -662,8 +660,7 @@ String Date::processNumber(
             return "%M";
         }
 
-        if (previousString == ":" && dateTime.hour
-            && !dateTime.minute) {
+        if (previousString == ":" && !dateTime.minute) {
 
             dateTime.minute = true;
             return "%M";
@@ -916,7 +913,7 @@ String Date::getPattern(String s, int &timeZoneOffset) {
     char followedChar;
 
     // Stop if inputString is empty
-    if (inputString == "") {
+    if (s.isEmpty()) {
         return "";
     }
 
