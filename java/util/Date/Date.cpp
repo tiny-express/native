@@ -251,19 +251,19 @@ long Date::hashCode() {
 }
 
 long Date::parse(String inputString) {
-//    int timeZoneOffset = 0;
-//
-//    tm localTimer = {};
-//    String pattern = Date::getPattern(inputString, timeZoneOffset);
-//    strptime(inputString.toString(), pattern.toString(), &localTimer);
-//
-//    long utcTime = mktime(&localTimer) + timeZoneOffset;
-//
-//    Date date = Date();
-//
-//    if (timeZoneOffset != 0) {
-//        return utcTime - (date.getTimezoneOffset() * 60);
-//    }
-//
-//    return utcTime;
+    int timeZoneOffset = 0;
+
+    tm localTimer = {};
+    String pattern = Date::getPattern(inputString, timeZoneOffset);
+    strptime(inputString.toString(), pattern.toString(), &localTimer);
+
+    long utcTime = mktime(&localTimer) + timeZoneOffset;
+
+    Date date = Date();
+
+    if (timeZoneOffset != 0) {
+        return utcTime - (date.getTimezoneOffset() * 60);
+    }
+
+    return utcTime;
 }

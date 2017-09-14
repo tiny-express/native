@@ -34,10 +34,6 @@
 
 using namespace Java::Lang;
 
-namespace test {
-    struct Tester;
-}
-
 namespace Java {
     namespace Util {
         class Date : public Object {
@@ -1193,14 +1189,13 @@ namespace Java {
              * Date::parse(String inputString)
              *
              * @param s
-             * @return std::string pattern of the input String
+             * @return string pattern of the input String
              *
              * @see Date::parse(String inputString)
              */
             static String getPattern(String s, int &timeZoneOffset) {
                 // Create variable to store a Date
-                std::string tempString(s.toString());
-                string inputString = (string) tempString.c_str();
+                string inputString = s.toString();
                 int lengthInputString = s.length();
 
                 DateTime dateTime;
@@ -1210,7 +1205,6 @@ namespace Java {
                 int sequenceNumber;
                 int indexOfCurrentPart = 0;
                 timeZoneOffset = 0;
-                unsigned long findResult = std::string::npos;
 
                 boolean isNumber;
                 boolean isAcceptedChar;
@@ -1390,8 +1384,6 @@ namespace Java {
 
                 return pattern;
             }
-
-            friend struct ::test::Tester;
         };
     }  // namespace Util
 }  // namespace Java
