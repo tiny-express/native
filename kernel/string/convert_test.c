@@ -290,7 +290,6 @@ TEST(KernelString, ConvertToLong) {
 	ASSERT_EQUAL(0, result2);
 }
 
-
 TEST(String, ConvertToBoolean) {
     // Input a string representing 1 to convert from string to boolean
 	char *target0 = "1";
@@ -396,8 +395,6 @@ TEST(String, ConvertToFloat) {
     ASSERT_FLOAT_NEAR(expected, actual);
 }
 
-
-
 TEST(String, ConvertToDouble) {
     double expected;
     double actual;
@@ -421,4 +418,43 @@ TEST(String, ConvertToDouble) {
     expected = -13.123456789012345;
     actual = string_to_double((char*) "-13.123456789012345");
     ASSERT_DBL_NEAR(expected, actual);
+}
+
+TEST(String, ConvertToChar) {
+	char expected;
+	char actual;
+	char* expectedStringType;
+	char* actualStringType;
+
+	expected = '\0';
+	expectedStringType = string_from_char(expected);
+	actual = string_to_char((char*) "");
+	actualStringType = string_from_char(actual);
+	ASSERT_STR(expectedStringType, actualStringType);
+	free(actualStringType);
+	free(expectedStringType);
+
+	expected = 'a';
+	expectedStringType = string_from_char(expected);
+	actual = string_to_char((char*) "abc");
+	actualStringType = string_from_char(actual);
+	ASSERT_STR(expectedStringType, actualStringType);
+	free(actualStringType);
+	free(expectedStringType);
+
+	expected = '1';
+	expectedStringType = string_from_char(expected);
+	actual = string_to_char((char*) "123");
+	actualStringType = string_from_char(actual);
+	ASSERT_STR(expectedStringType, actualStringType);
+	free(actualStringType);
+	free(expectedStringType);
+
+	expected = '!';
+	expectedStringType = string_from_char(expected);
+	actual = string_to_char((char*) "!@#");
+	actualStringType = string_from_char(actual);
+	ASSERT_STR(expectedStringType, actualStringType);
+	free(actualStringType);
+	free(expectedStringType);
 }

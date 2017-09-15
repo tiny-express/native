@@ -105,24 +105,32 @@ TEST(JavaLang, DoubleArithmeticOperator) {
 
 TEST(JavaLang, DoubleRelationalOperator) {
 	// Test Operator ==
-	ASSERT_TRUE((Double)13.02 == (Double)13.02);
+	ASSERT_TRUE((Double) 13.02 == (Double) 13.02);
+	ASSERT_FALSE((Double) 13.03 == (Double) 13.02);
 	
 	// Test Operator !=
-	ASSERT_TRUE((Double)13.02 != (Double)20.31);
+	ASSERT_TRUE((Double) 13.02 != (Double) 20.31);
+	ASSERT_FALSE((Double) 13.02 != (Double) 13.02);
 	
 	// Test Operator >
-	ASSERT_TRUE((Double)20.31 > (Double)13.02);
+	ASSERT_TRUE((Double) 20.31 > (Double) 13.02);
+	ASSERT_FALSE((Double) 13.02 > (Double) 13.02);
+	ASSERT_FALSE((Double) 13.02 > (Double) 20.31);
 	
 	// Test Operator <
-	ASSERT_TRUE((Double)13.02 < (Double)20.31);
+	ASSERT_TRUE((Double) 13.02 < (Double) 20.31);
+	ASSERT_FALSE((Double) 13.02 < (Double) 13.02);
+	ASSERT_FALSE((Double) 20.31 < (Double) 13.02);
 	
 	// Test Operator >=
-	ASSERT_TRUE((Double)33.33 >= (Double)22.22);
-	ASSERT_TRUE((Double)33.33 >= (Double)33.33);
+	ASSERT_TRUE((Double) 33.33 >= (Double) 22.22);
+	ASSERT_TRUE((Double) 33.33 >= (Double) 33.33);
+	ASSERT_FALSE((Double) 13.02 >= (Double) 20.31);
 	
 	// Test Operator <=
-	ASSERT_TRUE((Double)22.22 <= (Double)33.33);
-	ASSERT_TRUE((Double)22.22 <= (Double)22.22);
+	ASSERT_TRUE((Double) 22.22 <= (Double) 33.33);
+	ASSERT_TRUE((Double) 22.22 <= (Double) 22.22);
+	ASSERT_FALSE((Double) 20.31 <= (Double) 13.02);
 }
 
 TEST(JavaLang, DoubleLogicalOperator) {
