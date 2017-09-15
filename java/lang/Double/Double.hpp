@@ -113,11 +113,7 @@ static constexpr double initMinNormalDouble() noexcept {
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
-        private:
-			double original;
-            string originalString;
-            
-        public:
+         public:
             /**
              * The number of logical bits in the significand of a double number,
              * including the implicit bit.
@@ -158,7 +154,7 @@ namespace Java {
             /**
              * Bit mask to isolate the significand field of a double.
              */
-            static const long    SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+            static const long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
 
             /**
              * A constant holding the positive infinity of type
@@ -189,13 +185,13 @@ namespace Java {
              */
             static constexpr double MIN_VALUE = initDoubleMinValue();  // 4.940656458412465e-324
 
-         public:
+          public:
             Double();
 			Double(double original);
 			Double(const Double &target);
 			~Double();
 
-         public:
+          public:
             /**
              * Adds two operands
              *
@@ -580,54 +576,11 @@ namespace Java {
 //            static String toHexString(double d);
 
             /**
-            * Convert double to binary 32 bit
-            * (Single-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param double
-            * @return string binary 32 bit of input
-            */
-            static string doubleToBinary32StringType(double doubleInput);
-
-            /**
-            * Convert double to binary 64 bit
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param double
-            * @return string binary 64 bit of input
-            */
-            static string doubleToBinary64StringType(double doubleInput);
-
-            /**
-            * Convert binary64StringType To Double
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            * To Double
-             *
-            * @param  string
-            * @return double
-            */
-            static double binary64StringTypeToDouble(string Binary64StringTypeInput);
-
-            /**
-            * Convert longBits To Binary64StringType
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-             *
-            * @param  long
-            * @return string
-            */
-            static string longBitsToBinary64StringType(long longBitsInput);
-
-            /**
             * Convert from string to double
             *
             * @param      s   the string to be parsed.
             * @return     a {Double} object holding the value
             *             represented by the {String} argument.
-            * @throws     NumberFormatException  if the string does not contain a
-            *             parsable number.
             */
             static Double valueOf(String stringInput);
 
@@ -638,6 +591,40 @@ namespace Java {
             * @return a {Double} instance representing {d}.
             */
             static Double valueOf(double doubleInput);
+        private:
+            double original;
+            string originalString;
+
+            /**
+            * Convert double to binary 64 bit
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+            *
+            * @param double
+            * @return string binary 64 bit of input
+            */
+            static String doubleToBinary64StringType(double doubleInput);
+
+            /**
+            * Convert binary64StringType To Double
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+            * To Double
+             *
+            * @param  string
+            * @return double
+            */
+            static double binary64StringTypeToDouble(String Binary64StringTypeInput);
+
+            /**
+            * Convert longBits To Binary64StringType
+            * (Double-precision floating-point format
+            * In IEEE 754-2008)
+             *
+            * @param  long
+            * @return string
+            */
+            static String longBitsToBinary64StringType(long longBitsInput);
         };
 	}  // namespace Lang
 }  // namespace Java
