@@ -29,6 +29,8 @@
 
 #include "../Number/Number.hpp"
 #include <limits>
+#include "../String/String.hpp"
+
 
 #ifdef WIN32
     #define unsigned_long_long unsigned __int64

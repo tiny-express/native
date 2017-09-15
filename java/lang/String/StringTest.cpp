@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -29,40 +29,108 @@ extern "C" {
 }
 
 #include "../String/String.hpp"
-#include "../Long/Long.hpp"
-#include "../Integer/Integer.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
+#include "../StringBuilder/StringBuilder.hpp"
+#include "../StringBuffer/StringBuffer.hpp"
 #include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
+using namespace Java::Util;
 
-TEST (JavaLang, StringConstructor) {
+TEST(JavaLang, StringConstructor) {
 	// Give NULL for String constructor
 	String nullString;
 	ASSERT_STR("", nullString.toString());
-	
+
+	// Given value for String constructor and assign value - Return string
+	String simpleStringConstructor = (string) "Hello world";
+	ASSERT_STR("Hello world", simpleStringConstructor.toString());
+
 	// Given empty value for String constructor and assign value - Return string
-	String simpleString;
-	simpleString = (string) "Hello world";
-	ASSERT_STR("Hello world", simpleString.toString());
-	
-	// Given empty value for String constructor and assign value - Return string
-	String emptyString;
-	emptyString = (string) "Hello world";
-	ASSERT_STR("Hello world", emptyString.toString());
-	
+	String stringConstructor(simpleStringConstructor);
+	ASSERT_STR("Hello world", stringConstructor.toString());
+
 	// Given constant string for String constructor - Return string
 	String normalString = "Hello world";
 	ASSERT_STR("Hello world", normalString.toString());
 
-    // Given constant string with length - Return string
-    string constString = (string)"Hello world";
-    String newString(constString, 5);
-    ASSERT_STR("Hello", newString.toString());
+    // Given a StringBuilder for String constructor
+    StringBuilder stringBuilder  = StringBuilder((string) "Hello world");
+    String stringBuilderConstructor(stringBuilder);
+    ASSERT_STR("Hello world", stringBuilderConstructor.toString());
+    ASSERT_EQUAL(stringBuilder.length(), stringBuilderConstructor.length());
+
+    // Given a StringBuffer for String constructor
+    StringBuffer stringBuffer  = StringBuffer("Hello world");
+    String stringBufferConstructor = String(stringBuffer);
+    ASSERT_STR("Hello world", stringBufferConstructor.toString());
+    ASSERT_EQUAL(stringBuffer.length(), stringBufferConstructor.length());
+
+	// Given a char Array
+    Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
+
+    String arrayConstructor(charArray);
+    ASSERT_STR("Hello world", arrayConstructor.toString());
+    ASSERT_EQUAL(charArray.length, arrayConstructor.length());
+
+    String subArrayConstructor(charArray, 6, 5);
+    ASSERT_STR("world", subArrayConstructor.toString());
+    ASSERT_EQUAL(5, subArrayConstructor.length());
+
+    try {
+        String exceptionConstructor(charArray, -1, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exceptionConstructor(charArray, 5, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exceptionConstructor(charArray, 10, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 15", e.getMessage().toString());
+    }
+
+    // Given a byte Array
+    Array<byte> byteArray = {72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100};
+    ASSERT_STR("Hello world", arrayConstructor.toString());
+    ASSERT_EQUAL(charArray.length, arrayConstructor.length());
+
+    String subByteArrayConstructor(byteArray, 6, 5);
+    ASSERT_STR("world", subByteArrayConstructor.toString());
+    ASSERT_EQUAL(5, subByteArrayConstructor.length());
+
+    try {
+        String exceptionConstructor(byteArray, -1, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exceptionConstructor(byteArray, 5, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        String exceptionConstructor(byteArray, 10, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 15", e.getMessage().toString());
+    }
 }
 
-TEST (JavaLang, StringDestructor) {
+TEST(JavaLang, StringDestructor) {
 	// Given data type declaration - Destructor will be called by system
 	String text = "";
 	
@@ -71,7 +139,7 @@ TEST (JavaLang, StringDestructor) {
 	delete textPointer;
 }
 
-TEST (JavaLang, StringEquals) {
+TEST(JavaLang, StringEquals) {
 	// Given two String objects with same value - Return they should equal
 	String stringEqual1 = "Hello World";
 	String stringEqual2 = "Hello World";
@@ -83,30 +151,69 @@ TEST (JavaLang, StringEquals) {
 	String stringEqual3 = "Food Tiny";
 	ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
 	ASSERT_TRUE(stringEqual1 != stringEqual3);
+
+    // Compare with another object
+    StringBuilder stringBuilder = StringBuilder((string) "abcd");
+    ASSERT_FALSE(stringEqual1.equals(stringBuilder));
 }
 
-TEST (JavaLang, StringCharAt) {
+TEST(JavaLang, StringCharAt) {
 	// Given a string - Return first position is exist
 	String text = "Hello World";
 	char positionIsExist = text.charAt(0);
-	ASSERT_TRUE('H' == positionIsExist);
+
+	ASSERT_EQUAL('H', positionIsExist);
 	
 	// Given a string - Return negative position is not exist
 	try {
 		char negativePositionIsNotExist = text.charAt(-1);
-	} catch (StringIndexOutOfBoundsException exception) {
+	} catch (StringIndexOutOfBoundsException &exception) {
 		ASSERT_STR("String index out of range", exception.getMessage().toString());
 	}
 	
 	// Given a string - Return out of scope position is not exist
 	try {
 		char outOfScopePositionIsNotExist = text.charAt(1000);
-	} catch (StringIndexOutOfBoundsException exception) {
+	} catch (StringIndexOutOfBoundsException &exception) {
 		ASSERT_STR("String index out of range", exception.getMessage().toString());
 	}
 }
 
-TEST (JavaLang, StringConcat) {
+TEST(JavaLang, StringCompareTo) {
+    String smallerString = "ABCDEF";
+    String greaterString = "abcdef";
+    String equalToGreater = "abcdef";
+
+    int compareResult = greaterString.compareTo(smallerString);
+    ASSERT_TRUE(compareResult > 0);
+
+    compareResult = greaterString.compareTo(equalToGreater);
+    ASSERT_TRUE(compareResult == 0);
+
+    compareResult = smallerString.compareTo(greaterString);
+    ASSERT_TRUE(compareResult < 0);
+
+    Comparable<String> *comparable = &greaterString;
+    compareResult = comparable->compareTo(smallerString);
+    ASSERT_TRUE(compareResult > 0);
+}
+
+TEST(JavaLang, StringCompareToIgnoreCase) {
+    String smallerString = "because";
+    String greaterString = "hello";
+    String greaterUpperCase = "HELLO";
+
+    int compareResult = greaterString.compareToIgnoreCase(smallerString);
+    ASSERT_TRUE(compareResult > 0);
+
+    compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
+    ASSERT_TRUE(compareResult == 0);
+
+    compareResult = smallerString.compareToIgnoreCase(greaterString);
+    ASSERT_TRUE(compareResult < 0);
+}
+
+TEST(JavaLang, StringConcat) {
 	// Given two strings - Return concatenation result
 	String textConcat1 = "Hello ";
 	String textConcat2 = "World";
@@ -115,30 +222,88 @@ TEST (JavaLang, StringConcat) {
 	
 	// Given three strings - Return concatenation result
 	String textConcat0 = "Food Tiny ";
-	ASSERT_STR("Food Tiny Hello World", ( textConcat0 + textConcat1 + textConcat2 ).toString());
+    concatenationResult = textConcat0 + textConcat1 + textConcat2;
+	ASSERT_STR("Food Tiny Hello World", concatenationResult.toString());
 }
 
-TEST (JavaLang, StringContains) {
-	return;
+TEST(JavaLang, StringContains) {
 	// Gives a valid string a sub string to find
 	String validString = "a valid string to test";
 	String subString = "valid string";
 	String invalidSubString = "text";
 	
-	//Test true with correct substring inside
+	// Test true with correct substring inside
 	ASSERT_TRUE(validString.contains(subString));
-	//Test with with invalid substring inside
+	// Test with with invalid substring inside
 	ASSERT_FALSE(validString.contains(invalidSubString));
 }
 
+TEST(JavaLang, StringContentEqual) {
+    String string = String("Hello world");
+    CharSequence *charSequence = new StringBuffer("Hello world");
+    ASSERT_TRUE(string.contentEquals(*charSequence));
+    StringBuffer *stringBuffer = dynamic_cast<StringBuffer *>(charSequence);
+    delete stringBuffer;
+
+    String stringEqual = String("Hello world");
+    ASSERT_TRUE(string.contentEquals(stringEqual));
+
+    String stringNotEqual = String("hello");
+    ASSERT_FALSE(string.contentEquals(stringNotEqual));
+}
+
+TEST(JavaLang, StringCopyValueOf) {
+    // Given a char Array
+    Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
+
+    String copyArrayString = String::copyValueOf(charArray);
+    ASSERT_STR("Hello world", copyArrayString.toString());
+    ASSERT_EQUAL(charArray.length, copyArrayString.length());
+
+    String copySubArrayString = String::copyValueOf(charArray, 6, 5);
+    ASSERT_STR("world", copySubArrayString.toString());
+    ASSERT_EQUAL(5, copySubArrayString.length());
+
+    try {
+        String exceptionString = String::copyValueOf(charArray, -1, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+		String exceptionString = String::copyValueOf(charArray, 5, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+		String exceptionString = String::copyValueOf(charArray, 10, 5);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 15", e.getMessage().toString());
+    }
+}
+
 // FIXME
-TEST (JavaLang, StringEndsWith) {
-	String textPlus = "Hello welcom to VietNam";
+TEST(JavaLang, StringEndsWith) {
+	String textPlus = "Hello welcome to VietNam";
 	String String_string = "VietNam";
 	ASSERT_TRUE(textPlus.endsWith(String_string));
 }
 
-TEST (JavaLang, StringGetBytes) {
+TEST(JavaLang, StringEqualIgnoreCase) {
+	String smallerString = "because";
+	String greaterString = "hello";
+	String greaterUpperCase = "HELLO";
+
+	ASSERT_FALSE(greaterString.equalsIgnoreCase(smallerString));
+	ASSERT_TRUE(greaterString.equalsIgnoreCase(greaterUpperCase));
+	ASSERT_FALSE(smallerString.equalsIgnoreCase(greaterString));
+}
+
+TEST(JavaLang, StringGetBytes) {
 	String text = "Sample Text";
 	Array<byte> bytes = text.getBytes();
 	string result = bytes.toString();
@@ -146,56 +311,188 @@ TEST (JavaLang, StringGetBytes) {
 	free(result);
 }
 
-TEST (JavaLang, StringIndexOf) {
+TEST(JavaLang, StringGetStringFromIndex) {
+    String aString = "Hello Hello Hello";
+    String result = aString.getStringFromIndex(6);
+    ASSERT_STR("Hello Hello", result.toString());
+
+    try {
+        result = aString.getStringFromIndex(-1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        result = aString.getStringFromIndex(20);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 20", e.getMessage().toString());
+    }
+}
+
+TEST(JavaLang, StringIndexOf) {
 	String textPlus = "Hello Hello Hello ";
 	
 	int result = textPlus.indexOf('H');
 	ASSERT_EQUAL(0, result);
-	
+
+    result = textPlus.indexOf('k');
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf('k');
+    ASSERT_EQUAL(-1, result);
+
 	result = textPlus.indexOf('l', 4);
 	ASSERT_EQUAL(8, result);
-	
+
+    result = textPlus.indexOf('k', 4);
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf('l', -1);
+    ASSERT_EQUAL(2, result);
+
+    result = textPlus.indexOf('l', 100);
+    ASSERT_EQUAL(-1, result);
+
 	result = textPlus.indexOf("llo");
 	ASSERT_EQUAL(2, result);
-	
-	int result1 = textPlus.lastIndexOf('H');
-	ASSERT_EQUAL(12, result1);
-	
-	result1 = textPlus.lastIndexOf('H', 2);
-	ASSERT_EQUAL(0, result1);
-	
-	// Given validString check lastIndexOf(string)
-	String validString = "awesome keyword inside this awesome string";
-	String subString = "awesome";
-	String wrongString = "some thing";
-	
-	
-	// Test true first character of subString appear last in validString is position 28th
-	ASSERT_EQUAL(28, validString.lastIndexOf(subString));
-	
-	// Test true first character of subString appear last in validString is position 16th
-	subString = "inside this";
-	ASSERT_EQUAL(16, validString.lastIndexOf(subString));
-	
-	// Test false with wrong subString
-	ASSERT_EQUAL(NOT_FOUND, validString.lastIndexOf(wrongString));
-	
-	// Given validString2 check lastIndexOf(string, fromIndex)
-	String validString2 = "sometimes you win, sometimes you learn";
-	String subString2 = "sometimes";
-	String wrongString2 = "abc xyz";
-	
-	// Test true by 19th, with correct subString2 and correct fromIndex to find
-	ASSERT_EQUAL(19, validString2.lastIndexOf(subString2, 18));
-	
-	// Test false by -1, with correct subString2 but out of range that subString2's appeared in validString2
-	ASSERT_EQUAL(-1, validString2.lastIndexOf(subString2, 20));
-	
-	// Test false by -1, with wrongString2 that's not appeared inside validString2
-	ASSERT_EQUAL(-1, validString2.lastIndexOf(wrongString2, 0));
+
+    result = textPlus.indexOf("llo", 4);
+    ASSERT_EQUAL(8, result);
+
+    result = textPlus.indexOf("llok");
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf("llo", -1);
+    ASSERT_EQUAL(2, result);
+
+    result = textPlus.indexOf("llo", 100);
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.indexOf("lli", 10);
+    ASSERT_EQUAL(-1, result);
 }
 
-TEST (JavaLang, StringIsEmpty) {
+TEST(JavaLang, StringLastIndexOf) {
+    // Given validString check lastIndexOf(string)
+    String textPlus = "Hello Hello Hello ";
+    String validString = "awesome keyword inside this awesome string";
+    String subString = "awesome";
+    String wrongString = "some thing";
+
+    int result = textPlus.lastIndexOf('H');
+    ASSERT_EQUAL(12, result);
+
+    result = textPlus.lastIndexOf('a');
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.lastIndexOf('H', 2);
+    ASSERT_EQUAL(0, result);
+
+    result = textPlus.lastIndexOf('H', 100);
+    ASSERT_EQUAL(12, result);
+
+    result = textPlus.lastIndexOf('H', -1);
+    ASSERT_EQUAL(-1, result);
+
+    result = textPlus.lastIndexOf('a', 10);
+    ASSERT_EQUAL(-1, result);
+
+    // Test true first character of subString appear last in validString is position 28th
+    result = validString.lastIndexOf(subString);
+    ASSERT_EQUAL(28, result);
+
+    // Test false with wrong subString
+    result = validString.lastIndexOf(wrongString);
+    ASSERT_EQUAL(NOT_FOUND, result);
+
+    // Given validString2 check lastIndexOf(string, fromIndex)
+    String validString2 = "sometimes you win, sometimes you learn";
+    String subString2 = "sometimes";
+    String wrongString2 = "abc xyz";
+
+    // Test true by 19th, with correct subString2 and correct fromIndex to find
+    result = validString2.lastIndexOf(subString2, 19);
+    ASSERT_EQUAL(19, result);
+
+    result = validString2.lastIndexOf(subString2, 18);
+    ASSERT_EQUAL(0, result);
+
+    result = validString2.lastIndexOf(subString2, 0);
+    ASSERT_EQUAL(0, result);
+
+    result = validString2.lastIndexOf(subString2, 1);
+    ASSERT_EQUAL(0, result);
+
+    result = validString2.lastIndexOf(subString2, 100);
+    ASSERT_EQUAL(19, result);
+
+    result = validString2.lastIndexOf(subString2, -1);
+    ASSERT_EQUAL(-1, result);
+
+    result = validString2.lastIndexOf(subString2, 20);
+    ASSERT_EQUAL(19, result);
+
+    result = validString2.lastIndexOf(wrongString2, 20);
+    ASSERT_EQUAL(-1, result);
+}
+// TODO (anhnt) getChar run right but need Arrays.toString() to test
+TEST(JavaLang, StringGetChars) {
+    Array<char> charArray(30);
+    String testString = "This is a String";
+    testString.getChars(10, 16, charArray, 0);
+	string charArrayString = charArray.toString();
+	ASSERT_STR("String", charArrayString);
+	free(charArrayString);
+
+    try {
+        testString.getChars(-1, 16, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 5, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -5", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 50, charArray, 0);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 50", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, -1);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: -1", e.getMessage().toString());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, 29);
+    }
+    catch (StringIndexOutOfBoundsException &e) {
+        ASSERT_STR("String index out of range: 35", e.getMessage().toString());
+    }
+
+	testString.getChars(10, 16, charArray, 10);
+	charArrayString = charArray.toString();
+	ASSERT_STR("StringString", charArrayString);
+	free(charArrayString);
+
+	testString.getChars(10, 16, charArray, 3);
+	charArrayString = charArray.toString();
+	ASSERT_STR("StrStringString", charArrayString);
+	free(charArrayString);
+}
+
+TEST(JavaLang, StringIsEmpty) {
 	String textPlus = "Hello Hello Hello ";
 	ASSERT_TRUE(!textPlus.isEmpty());
 	
@@ -203,7 +500,7 @@ TEST (JavaLang, StringIsEmpty) {
 	ASSERT_TRUE(textPlus.isEmpty());
 }
 
-TEST (JavaLang, StringLength) {
+TEST(JavaLang, StringLength) {
 	String textPlus = "Hello Hello Hello ";
 	
 	ASSERT_EQUAL(18, textPlus.length());
@@ -212,83 +509,188 @@ TEST (JavaLang, StringLength) {
 	ASSERT_EQUAL(0, textPlus.length());
 }
 
-/** This test case is made based on pattern_test.c */
-TEST (JavaLang, StringMatches) {
-//	// Init params for test string matches
-//	String emailPattern = EMAIL_PATTERN;
-//	String phoneNumberPattern = PHONE_PATTERN;
-//
-//	// Test true with correct email format
-//	String correctEmail = "neacao@gmail.com";
-//	ASSERT_TRUE(correctEmail.matches(emailPattern));
-//
-//	// Test fail with wrong email format
-//	String wrongEmail = "something@notcorrect";
-//	ASSERT_FALSE(wrongEmail.matches(emailPattern));
-//
-//	// Test true with correct phone number format
-//	String correctPhoneNumber = "+15005550006";
-//	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
-//
-//	// Test fail with wrong email format
-//	String wrongPhoneNumber = "001678080147";
-//	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
-//}
-//
-//TEST (JavaLang, StringReplace) {
-//	String textPlus = "Hello Hello Hello ";
-//
-//	String result = textPlus.replace('e', 'i');
-//	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
-
-//	String String_string1 = "Hello";
-//	String String_string2 = "Phuoc";
-//	result = textPlus.replaceAll(String_string1, String_string2);
-//	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+TEST(JavaLang, StringHashCode) {
+    String string = "Hello world";
+    ASSERT_EQUAL(-832992604, string.hashCode());
 }
 
-TEST (JavaLang, StringSplit) {
+TEST(JavaLang, StringRegionMatch) {
+    String string1 = "Collection of tutorials";
+    String string2 = "Consists of different tutorials";
+    String string3 = "CONSISTS OF DIFFERENT TUTORIALS";
+
+    // Case considering
+    boolean match = string1.regionMatches(14, string2, 22, 9);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(14, string2, 20, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(14, string3, 22, 9);
+    ASSERT_FALSE(match);
+
+    // Ignore case
+    match = string1.regionMatches(true, 14, string2, 22, 9);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(true, 14, string2, 20, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string3, 22, 9);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(false, 14, string3, 22, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, -1, string2, 22, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string2, -1, 9);
+    ASSERT_FALSE(match);
+
+    match = string1.regionMatches(true, 14, string2, 22, 100);
+    ASSERT_TRUE(match);
+
+    match = string1.regionMatches(true, 14, string2, 100, 9);
+    ASSERT_FALSE(match);
+}
+
+TEST(JavaLang, StringJoin) {
+    String delimiter = "->";
+    String duck = "Duck";
+    StringBuffer dog("Dog");
+    StringBuilder pig((string) "Pig");
+    String result = String::join(delimiter, duck, dog, pig);
+    ASSERT_STR("Duck->Dog->Pig", result.toString());
+}
+
+/** This test case is made based on pattern_test.c */
+// TEST(JavaLang, StringMatches) {
+// 	// Init params for test string matches
+// 	String emailPattern = EMAIL_PATTERN;
+// 	String phoneNumberPattern = PHONE_PATTERN;
+// 
+// 	// Test true with correct email format
+// 	String correctEmail = "neacao@gmail.com";
+// 	ASSERT_TRUE(correctEmail.matches(emailPattern));
+// 
+// 	// Test fail with wrong email format
+// 	String wrongEmail = "something@notcorrect";
+// 	ASSERT_FALSE(wrongEmail.matches(emailPattern));
+// 
+// 	// Test true with correct phone number format
+// 	String correctPhoneNumber = "+15005550006";
+// 	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+// 
+// 	// Test fail with wrong email format
+// 	String wrongPhoneNumber = "001678080147";
+// 	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
+// }
+// 
+TEST(JavaLang, StringReplace) {
+	String textPlus = "Hello Hello Hello ";
+
+	String result = textPlus.replace('e', 'i');
+	ASSERT_STR("Hillo Hillo Hillo ", result.toString());
+
+	String target = "llo";
+	String replacement = "llu";
+	result = textPlus.replace(target, replacement);
+	ASSERT_STR("Hellu Hellu Hellu ", result.toString());
+
+	target = "Hello";
+	replacement = "Phuoc";
+	result = textPlus.replaceAll(target, replacement);
+	ASSERT_STR("Phuoc Phuoc Phuoc ", result.toString());
+
+    result = textPlus.replaceFirst(target, replacement);
+    ASSERT_STR("Phuoc Hello Hello ", result.toString());
+}
+
+TEST(JavaLang, StringSplit) {
 	// Give an Array<String> then asert each element - Should equal
-	String stringToSplit = "Hello Hello Hello";
+	String stringToSplit = "Hello Hello Hello Hello";
 	Array<String> strings = stringToSplit.split(" ");
 	for (String item : strings) {
 		ASSERT_STR("Hello", item.toString());
 	}
+
+    Array<String> splitWithLimit1 = stringToSplit.split(" ", 3);
+    int index;
+    for (index = 0; index < splitWithLimit1.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimit1[index].toString());
+    }
+    ASSERT_STR("Hello Hello", splitWithLimit1[splitWithLimit1.length - 1].toString());
+
+    // Split with limit greater than number of regex occurrence time
+    Array<String> splitWithLimit2 = stringToSplit.split(" ", 10);
+    for (index = 0; index < splitWithLimit2.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimit2[index].toString());
+    }
+
+    Array<String> splitWithLimitOne = stringToSplit.split(" ", 1);
+    ASSERT_STR(stringToSplit.toString(), splitWithLimitOne[0].toString());
+
+    Array<String> splitWithLimitZero = stringToSplit.split(" ", 0);
+    for (index = 0; index < splitWithLimitZero.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimitZero[index].toString());
+    }
+
+    Array<String> splitWithLimitNegative = stringToSplit.split(" ", -1);
+    for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
+        ASSERT_STR("Hello", splitWithLimitNegative[index].toString());
+    }
 }
 
-TEST (JavaLang, StringStartsWith) {
-	String textPlus = "Hello Hello Hello ";
-	
-	String String_string = "Hello";
-	ASSERT_TRUE(textPlus.startsWith(String_string));
-	
-	String textPlus1 = "Welcom to VietNam";
-	String String_string1 = "to";
-	ASSERT_TRUE(textPlus1.startsWith(String_string1, 7));
+TEST(JavaLang, StringStartsWith) {
+    String textPlus;
+    // textPlus == ""
+    ASSERT_FALSE(textPlus.startsWith(String("abc"), 10));
+
+    textPlus = "Hello Hello Hello ";
+    // prefix == ""
+    String nullString;
+    ASSERT_TRUE(textPlus.startsWith(nullString, 10));
+
+    // thisOffset < 0
+    ASSERT_FALSE(textPlus.startsWith(String("Hello"), -1));
+
+    // textPlus.length < prefix.length
+    ASSERT_FALSE(textPlus.startsWith(String("Hello Hello Hello H")));
+
+    // thisOffset > (textPlus.length - prefix.length)
+    ASSERT_FALSE((textPlus.startsWith(String("Hello"), 20)));
+
+    // valid case
+	ASSERT_TRUE(textPlus.startsWith(String(""), 7));
+
+    ASSERT_TRUE(textPlus.startsWith(String("Hello")));
+
+    ASSERT_FALSE(textPlus.startsWith(String("ello")));
 }
 
-TEST (JavaLang, StringToLowerCase) {
+TEST(JavaLang, StringToLowerCase) {
 	String textPlus = "Hello HELLO Hello ";
 	
 	String result = textPlus.toLowerCase();
 	ASSERT_STR("hello hello hello ", result.toString());
 }
 
-TEST (JavaLang, StringToUpperCase) {
+TEST(JavaLang, StringToUpperCase) {
 	String textPlus = "Hello HELLO Hello ";
 	
 	String result = textPlus.toUpperCase();
 	ASSERT_STR("HELLO HELLO HELLO ", result.toString());
 }
 
-TEST (JavaLang, StringTrim) {
+TEST(JavaLang, StringTrim) {
 	String textPlus = " Hello HELLO Hello ";
 	
 	String result = textPlus.trim();
 	ASSERT_STR("Hello HELLO Hello", result.toString());
 }
 
-TEST (JavaLang, StringValueOf) {
+TEST(JavaLang, StringValueOf) {
 	// Value of boolean
 	boolean isChecked = true;
 	String valueOfBoolean = String::valueOf(isChecked);
@@ -303,6 +705,11 @@ TEST (JavaLang, StringValueOf) {
 	string givenString = (string) "Hello world";
 	String valueOfString = String::valueOf(givenString);
 	ASSERT_STR(givenString, valueOfString.toString());
+
+    // Value of string
+    string givenEmptyString = (string) "";
+    valueOfString = String::valueOf(givenEmptyString);
+    ASSERT_STR(givenEmptyString, valueOfString.toString());
 	
 	// Value of short number
 	short givenShortNumber = 5;
@@ -330,7 +737,7 @@ TEST (JavaLang, StringValueOf) {
 	ASSERT_STR("456.32423423424", valueOfDouble.toString());
 }
 
-TEST (JavaLang, StringOperatorPlusStringObject) {
+TEST(JavaLang, StringOperatorPlusStringObject) {
 	// Given two strings and concatenate them - Return string
 	String textPlus1 = "Hello ";
 	String textPlus2 = "World";
@@ -350,7 +757,7 @@ TEST (JavaLang, StringOperatorPlusStringObject) {
 	ASSERT_STR("Hello Galaxy 1", textResult.toString());
 }
 
-TEST (JavaLang, StringOperatorPlusStringDataType) {
+TEST(JavaLang, StringOperatorPlusStringDataType) {
 	string world = (string) " World";
 	String hello = "Hello";
 	hello += world;
@@ -362,25 +769,24 @@ TEST (JavaLang, StringOperatorPlusStringDataType) {
 	ASSERT_STR("Food Tiny", foodTiny.toString());
 }
 
-TEST (JavaLang, StringOperatorPlusConstantStringDataType) {
+TEST(JavaLang, StringOperatorPlusConstantStringDataType) {
 	String input = "Food";
-	String result = input + "tiny";
+	String result = input + String("tiny");
 	String expected = "Foodtiny";
 	ASSERT_TRUE(expected.equals(result));
 	
 	String input1 = "Hello";
-	String result1 = input1 + "";
+	String result1 = input1 + String("");
 	String expected1 = "Hello";
 	ASSERT_TRUE(expected1.equals(result1));
 	
 	String input2 = "";
-	String result2 = input2 + "World";
+	String result2 = input2 + String("World");
 	String expected2 = "World";
 	ASSERT_TRUE(expected2.equals(result2));
-	
 }
 
-TEST (JavaLang, StringOperatorEquals) {
+TEST(JavaLang, StringOperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
 	String textCompare2 = "Hello";
@@ -391,7 +797,7 @@ TEST (JavaLang, StringOperatorEquals) {
 	ASSERT_TRUE(comparable);
 }
 
-TEST (JavaLang, StringOperatorNotEquals) {
+TEST(JavaLang, StringOperatorNotEquals) {
 	// Given two Strings and compare not equal them - Return comparable
 	String textCompare1 = "Hello1";
 	String textCompare2 = "Hello2";
@@ -402,7 +808,7 @@ TEST (JavaLang, StringOperatorNotEquals) {
 	ASSERT_TRUE(comparable);
 }
 
-TEST (JavaLang, StringOperatorPlusEqualsChar) {
+TEST(JavaLang, StringOperatorPlusEqualsChar) {
 	// Given a string and append a char  - Return result of the concatenation
 	String text = "Hello";
 	text += ' ';
@@ -414,7 +820,7 @@ TEST (JavaLang, StringOperatorPlusEqualsChar) {
 	ASSERT_STR("Hello World", text.toString());
 }
 
-TEST (JavaLang, StringOperatorPlusEqualsString) {
+TEST(JavaLang, StringOperatorPlusEqualsString) {
 	// Given 2 Strings to check "+=" operator
 	String leftString = "hello";
 	String rightString = " world";
@@ -441,7 +847,7 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 	ASSERT_STR("Hello 11", stringTest.toString());
 }
 
-TEST (JavaLang, StringMemoryCheck) {
+TEST(JavaLang, StringMemoryCheck) {
 	// Test create object String with validString and change data of validString
 	string validString = strdup("foodtiny");
 	String stringTest = validString;
@@ -459,7 +865,7 @@ TEST (JavaLang, StringMemoryCheck) {
 	ASSERT_EQUAL(expect, result);
 }
 
-TEST (JavaLang, StringClone) {
+TEST(JavaLang, StringClone) {
 	// Given two string and compare - Should equal
 	String validString("Hello world");
 	String cloneString = validString.clone();
@@ -476,7 +882,7 @@ TEST (JavaLang, StringClone) {
 	ASSERT_STR(validString.toString(), cloneEmptyString.toString());
 }
 
-TEST (JavaLang, StringSubString) {
+TEST(JavaLang, StringSubString) {
 	String validString = "Hello world";
 	String subString = validString.subString(6);
 	string result = subString.toString();
@@ -485,10 +891,23 @@ TEST (JavaLang, StringSubString) {
 	
 	subString = validString.subString(1, 5);
 	result = subString.toString();
-	expect = (string) "ello ";
+    expect = (string) "ello";
 	ASSERT_STR(expect, result);
 }
 
+TEST(JavaLang, StringCompareOperater) {
+    String greaterString = "acde";
+    String smallerString = "ACDE";
+    String equalToGreaterString = "acde";
+
+    ASSERT_TRUE(greaterString > smallerString);
+    ASSERT_TRUE(smallerString <= greaterString);
+    ASSERT_TRUE(greaterString <= equalToGreaterString);
+    ASSERT_TRUE(greaterString >= equalToGreaterString);
+    ASSERT_FALSE(smallerString > greaterString);
+    ASSERT_FALSE(smallerString >= greaterString);
+    ASSERT_FALSE(greaterString <= smallerString);
+}
 TEST(JavaLang, StringFormat) {
     unsigned short ushortValue = 1;
     short shortValue = -1;

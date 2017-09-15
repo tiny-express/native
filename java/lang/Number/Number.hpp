@@ -30,7 +30,6 @@
 #define JAVA_LANG_NUMBER_HPP_
 
 #include "../Object/Object.hpp"
-#include "../String/String.hpp"
 
 namespace Java {
 		namespace Lang {
