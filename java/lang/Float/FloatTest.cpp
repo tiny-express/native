@@ -117,62 +117,73 @@ TEST(JavaLang, FloatRelationalOperator) {
     // Create variable to test
     Float variableRelationalOperator1;
     Float variableRelationalOperator2;
-    boolean expectedResultOperator;
-    boolean actualResultOperator;
+    boolean actual;
 
     // Test Operator ==
     variableRelationalOperator1 = 13.12;
     variableRelationalOperator2 = 13.12;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 == variableRelationalOperator2;
+    ASSERT_TRUE(actual);
 
     variableRelationalOperator1 = 13.12345;
     variableRelationalOperator2 = 13.12344;
-    expectedResultOperator = false;
-    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 == variableRelationalOperator2;
+    ASSERT_FALSE(actual);
 
     // Test Operator !=
     variableRelationalOperator1 = 13.02;
     variableRelationalOperator2 = 99.02;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 != variableRelationalOperator2;
+    ASSERT_TRUE(actual);
 
     variableRelationalOperator1 = 13.12345;
     variableRelationalOperator2 = 13.12344;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 != variableRelationalOperator2;
+    ASSERT_TRUE(actual);
 
     // Test Operator >
     variableRelationalOperator1 = 13.02;
     variableRelationalOperator2 = 1.1f;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 > variableRelationalOperator2;
+    ASSERT_TRUE(actual);
+
+    variableRelationalOperator1 = 13.22;
+    variableRelationalOperator2 = 13.99;
+    actual = variableRelationalOperator1 > variableRelationalOperator2;
+    ASSERT_FALSE(actual);
 
     // Test Operator <
     variableRelationalOperator1 = 1.11;
     variableRelationalOperator2 = 13.02;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 < variableRelationalOperator2;
+    ASSERT_TRUE(actual);
+
+    variableRelationalOperator1 = 13.02;
+    variableRelationalOperator2 = 13.01;
+    actual = variableRelationalOperator1 < variableRelationalOperator2;
+    ASSERT_FALSE(actual);
 
     // Test Operator >=
     variableRelationalOperator1 = 15.00;
     variableRelationalOperator2 = 13.02;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 >= variableRelationalOperator2;
+    ASSERT_TRUE(actual);
+
+    variableRelationalOperator1 = 10.11;
+    variableRelationalOperator2 = 13.02;
+    actual = variableRelationalOperator1 >= variableRelationalOperator2;
+    ASSERT_FALSE(actual);
 
     // Test Operator <=
     variableRelationalOperator1 = 1.11;
     variableRelationalOperator2 = 13.02;
-    expectedResultOperator = true;
-    actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    actual = variableRelationalOperator1 <= variableRelationalOperator2;
+    ASSERT_TRUE(actual);
+
+    variableRelationalOperator1 = 13.99;
+    variableRelationalOperator2 = 13.11;
+    actual = variableRelationalOperator1 <= variableRelationalOperator2;
+    ASSERT_FALSE(actual);
 }
 
 TEST(JavaLang, FloatLogicalOperator) {
