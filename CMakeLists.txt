@@ -47,6 +47,7 @@ include(GNUInstallDirs)
 # Force Linux and Darwin use GCC
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_CXX_FLAGS "-pthread")
 
 # Check C++ compiler version
 include(CheckCXXCompilerFlag)
@@ -115,12 +116,14 @@ endforeach ()
 file(GLOB_RECURSE SOURCES_CPP
         javax/**/*.cpp
         java/**/*.cpp
+        java/**/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         javax/**/*Test.cpp
         java/**/*Test.cpp
+        java/**/**/*Test.cpp
         )
 
 # Remove all test files within cpp files
