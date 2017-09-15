@@ -570,7 +570,11 @@ outPut:
 	free(integerPartNormalizeForm);
 	free(fractionPartNormalizeForm);
 	free(doubleInputNormalizeForm);
-	return  resultDoubleToBinary64StringType;
+
+    String result = resultDoubleToBinary64StringType;
+    free(resultDoubleToBinary64StringType);
+
+	return result;
 }
 
 double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
@@ -672,7 +676,10 @@ String Double::longBitsToBinary64StringType(long longBitsInput) {
         longBitsInput = longBitsInput >> 1;
     }
 
-    return resultLongBitsToBinary64StringType;
+    String result = resultLongBitsToBinary64StringType;
+    free(resultLongBitsToBinary64StringType);
+
+    return result;
 }
 
 Double Double::valueOf(String stringInput) {
