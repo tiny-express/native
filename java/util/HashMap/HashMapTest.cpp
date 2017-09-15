@@ -426,7 +426,7 @@ using namespace Java::Util;
 TEST (JavaUtil, HashMapToString) {
 	// Given some valid key/value to test toString()
 	HashMap<String, String> hashMap;
-	hashMap.put("key\"1", "va\"lu\"e1");
+	hashMap.put("key1", "value1");
 	hashMap.put("key16", "value16");
 	hashMap.put("key02", "value02");
 	
@@ -457,5 +457,14 @@ TEST (JavaUtil, HashMapToString) {
 	expectedResult = (string) "{\"ArrayList1\": [1, 2, 3, 4, 5], \"ArrayList2\": [100, 100, 100, 100, 1]}";
 	result = arrayListInHashMap.toString();
 	ASSERT_STR(expectedResult, result);
+
+    HashMap<String, String> hashMapWithSpecialCharacter;
+    hashMapWithSpecialCharacter.put("key\"1", "va\"lu\"e1");
+    hashMapWithSpecialCharacter.put("key\\16", "val\nue\t16");
+    hashMapWithSpecialCharacter.put("k\fey\b02", "val\rue02");
+
+    expectedResult = R"({"k\fey\b02": "val\rue02", "key\"1": "va\"lu\"e1", "key\\16": "val\nue\t16"})";
+    result = hashMapWithSpecialCharacter.toString();
+    ASSERT_STR(expectedResult, result);
 }
 

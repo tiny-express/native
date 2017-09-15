@@ -474,19 +474,63 @@ namespace Java {
 						}
 
                 private:
-                    String replaceEscapeSequence(const String s)
-                    {
-                        int index = s.indexOf('\"');
-                        int previousIndex;
+                    String replaceEscapeSequence(const String s) {
+//                        int index = s.indexOf('\"');
+//                        int previousIndex;
+//                        String result;
+//                        for(previousIndex = 0; index != -1; previousIndex++)
+//                        {
+//                            result += s.subString(previousIndex, index);
+//                            result += String(R"(\")");
+//                            previousIndex = index;
+//                            index = s.indexOf('\"', ++index);
+//                        }
+//                        result += s.subString(previousIndex);
+//                        return result;
+                        int index = 0;
+                        String replacementString;
                         String result;
-                        for(previousIndex = 0; index != -1; previousIndex++)
-                        {
-                            result += s.subString(previousIndex, index);
-                            result += String(R"(\")");
-                            previousIndex = index;
-                            index = s.indexOf('\"', ++index);
+                        while (index < s.length()) {
+                            int charAtIndex = s.charAt(index);
+                        //TODO (anhnt) need String support unicode
+//                            if (charAtIndex < 32 && charAtIndex > 126) {
+//                                replacementString = R"(\u)";
+//                                replacementString += String::valueOf(charAtIndex);
+//                            }
+
+                            switch (charAtIndex) {
+                                case '\"':
+                                    replacementString = R"(\")";
+                                    break;
+                                case '\b':
+                                    replacementString = R"(\b)";
+                                    break;
+                                case '\f':
+                                    replacementString = R"(\f)";
+                                    break;
+                                case '\n':
+                                    replacementString = R"(\n)";
+                                    break;
+                                case '\r':
+                                    replacementString = R"(\r)";
+                                    break;
+                                case '\t':
+                                    replacementString = R"(\t)";
+                                    break;
+                                case '\\':
+                                    replacementString = R"(\\)";
+                                    break;
+                                default:
+                                    if (replacementString.isEmpty()) {
+                                        replacementString = string_from_char(charAtIndex);
+                                    }
+                            }
+
+                            result += replacementString;
+                            replacementString = "";
+                            index++;
                         }
-                        result += s.subString(previousIndex);
+
                         return result;
                     }
 				};
