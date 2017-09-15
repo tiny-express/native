@@ -33,6 +33,8 @@
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
+#include <sstream>
+#include <iomanip>
 
 namespace Java {
 		namespace Util {
@@ -442,17 +444,22 @@ namespace Java {
 							String colonAndSpace = ": ";
 							String endString = "}";
 							String totalString;
+							std::string str;
 							
 							typename std::map<K, V>::iterator it;
 							for (it = this->original.begin(); it != this->original.end(); ++it) {
 								if (instanceof<String>(it->first)) {
-									totalString = String("\"") + it->first.toString() + String("\"");
+                                    String first = it->first.toString();
+                                    String key = replaceEscapeSequence(first);
+									totalString = String("\"") + key + String("\"");
 								} else {
 									totalString = it->first.toString();
 								}
 								totalString += colonAndSpace;
 								if (instanceof<String>(it->second)) {
-									totalString += String("\"") + it->second.toString() + String("\"");
+                                    String second = it->second.toString();
+                                    String value = replaceEscapeSequence(second);
+									totalString += String("\"") + value + String("\"");
 								} else {
 									totalString += it->second.toString();
 								}
@@ -465,6 +472,23 @@ namespace Java {
 							this->backup = startHashMap;
 							return this->backup.toString();
 						}
+
+                private:
+                    String replaceEscapeSequence(const String s)
+                    {
+                        int index = s.indexOf('\"');
+                        int previousIndex;
+                        String result;
+                        for(previousIndex = 0; index != -1; previousIndex++)
+                        {
+                            result += s.subString(previousIndex, index);
+                            result += String(R"(\")");
+                            previousIndex = index;
+                            index = s.indexOf('\"', ++index);
+                        }
+                        result += s.subString(previousIndex);
+                        return result;
+                    }
 				};
 		}
 }
