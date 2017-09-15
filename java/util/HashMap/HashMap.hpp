@@ -33,8 +33,6 @@
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
-#include <sstream>
-#include <iomanip>
 
 namespace Java {
 		namespace Util {
@@ -474,24 +472,12 @@ namespace Java {
 						}
 
                 private:
-                    String replaceEscapeSequence(const String s) {
-//                        int index = s.indexOf('\"');
-//                        int previousIndex;
-//                        String result;
-//                        for(previousIndex = 0; index != -1; previousIndex++)
-//                        {
-//                            result += s.subString(previousIndex, index);
-//                            result += String(R"(\")");
-//                            previousIndex = index;
-//                            index = s.indexOf('\"', ++index);
-//                        }
-//                        result += s.subString(previousIndex);
-//                        return result;
+                    String replaceEscapeSequence(const String stringToReplace) {
                         int index = 0;
                         String replacementString;
                         String result;
-                        while (index < s.length()) {
-                            int charAtIndex = s.charAt(index);
+                        while (index < stringToReplace.length()) {
+                            int charAtIndex = stringToReplace.charAt(index);
                         //TODO (anhnt) need String support unicode
 //                            if (charAtIndex < 32 && charAtIndex > 126) {
 //                                replacementString = R"(\u)";
