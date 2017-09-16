@@ -37,7 +37,7 @@ using namespace Java::Lang;
 namespace Java {
     namespace Util {
         class Date : public Object {
-        public:
+         public:
             Date();
             Date(int year, int month, int date);
             Date(int year, int month, int date, int hrs, int min);
@@ -45,15 +45,7 @@ namespace Java {
             Date(long date);
             Date(String inputString);
             ~Date();
-
          public:
-            static string testLower(string inputString) {
-                String upperStr = inputString;
-                String lowerStr = upperStr.toLowerCase();
-                string lower = lowerStr.toString();
-
-                return lower;
-            }
             /**
              * Tests if this date is after the specified date.
              *
@@ -153,11 +145,6 @@ namespace Java {
             int getTimezoneOffset();
 
             /**
-             * Get current GMT time zone
-             */
-            string getZone();
-
-            /**
              * Get year
              *
              * @return int
@@ -169,66 +156,6 @@ namespace Java {
              * @return
              */
             long hashCode();
-
-            /**
-             * Attempts to interpret the string s as a representation
-             * of a date and time. If the attempt is successful, the time
-             * indicated is returned represented as the distance, measured in
-             * milliseconds, of that time from the epoch (00:00:00 GMT on
-             * January 1, 1970). If the attempt fails, an
-             * IllegalArgumentException is thrown.
-             *
-             * Format syntax:
-             *
-             * %a	Abbreviated weekday name --- Ex: Thu
-             * %A	Full weekday name --- Ex: Thursday
-             * %b	Abbreviated month name --- Ex: Aug
-             * %B	Full month name --- Ex: August
-             * %c	Date and time representation --- Ex: Thu Aug 23 14:55:02 2001
-             * %C	Year divided by 100 and truncated to integer (00-99) --- Ex: 20
-             * %d	Day of the month, zero-padded (01-31) --- Ex: 23
-             * %D	Short MM/DD/YY date, equivalent to %m/%d/ * %y --- Ex: 08/23/01
-             * %e	Day of the month, space-padded ( 1-31) --- Ex: 23
-             * %F	Short YYYY-MM-DD date, equivalent to %Y-%m-%d --- Ex: 2001-08-23
-             * %g	Week-based year, last two digits (00-99) --- Ex: 01
-             * %G	Week-based year --- Ex: 2001
-             * %h	Abbreviated month name * (same as %b) --- Ex: Aug
-             * %H	Hour in 24h format (00-23) --- Ex: 14
-             * %I	Hour in 12h format (01-12) --- Ex: 02
-             * %j	Day of the year (001-366) --- Ex: 235
-             * %m	Month as a decimal number (01-12) --- Ex: 08
-             * %M	Minute (00-59) --- Ex: 55
-             * %n	New-line character ('\n')
-             * %p	AM or PM designation --- Ex: PM
-             * %r	12-hour clock time --- Ex: 02:55:02 pm
-             * %R	24-hour HH:MM time, equivalent to %H:%M --- Ex: 14:55
-             * %S	Second (00-61) --- Ex: 02
-             * %t	Horizontal-tab character --- Ex: ('\t')
-             * %T	ISO 8601 time format (HH:MM:SS), equivalent to %H:%M:%S --- Ex: 14:55:02
-             * %u	ISO 8601 weekday as number with Monday as 1 (1-7) --- Ex: 4
-             * %U	Week number with the first Sunday as the first day of week one (00-53) --- Ex: 33
-             * %V	ISO 8601 week number (01-53) --- Ex: 34
-             * %w	Weekday as a decimal number with Sunday as 0 (0-6) --- Ex: 4
-             * %W	Week number with the first Monday as the first day of week one (00-53) --- Ex: 34
-             * %x	Date representation --- Ex: 08/23/01
-             * %X	Time representation --- Ex: 14:55:02
-             * %y	Year, last two digits (00-99) --- Ex: 01
-             * %Y	Year --- Ex: 2001
-             * %z	ISO 8601 offset from UTC in timezone (1 minute=1, 1 hour=100)
-             * If timezone cannot be determined, no characters	+100
-             * %Z	Timezone name or abbreviation *
-             * If timezone cannot be determined, no characters	CDT
-             * %%	A % sign	%
-             *
-             * @param   inputString   a string to be parsed as a date.
-             * @param   format        format time of inputString
-             * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
-             *          represented by the string argument.
-             * @see     java.text.DateFormat
-             * @deprecated As of JDK version 1.1,
-             * replaced by DateFormat.parse(String s).
-             */
-            static long parse(String inputString, string pattern);
 
             /**
              * Attempts to interpret the string s as a representation
@@ -357,12 +284,12 @@ namespace Java {
             /**
              * Day.		[1-31]
              */
-            int mday;
+            int dayOfMonth;
 
             /**
              * Month.	[0-11]
              */
-            int mon;
+            int month;
 
             /**
              * Year	- 1900.
@@ -372,52 +299,38 @@ namespace Java {
             /**
              * Day of week.	[0-6]
              */
-            int wday;
+            int dayOfWeek;
 
             /**
-             * Days in year.[0-365]	*/
-            int yday;
+             * Days in year.[0-365]
+             */
+            int dayOfYear;
 
             /**
-             * DST.		[-1/0/1]*/
-            int isdst;
+             * DST.		[-1/0/1]
+             */
+            int isDaylightSavingTime;
 
             /**
              * Seconds east of UTC.
              */
-            long int gmtoff;
-
-            /**
-             * Timezone abbreviation.
-             */
-            const char *zone;
+            long int gmtOffset;
 
             /**
              * Initialized just before the value is used.
              */
+
+            /**
+             * Time zone name
+             */
+            String timeZoneName;
+
             int defaultCenturyStart;
 
             /**
-             * Update changes of this->localTimer
+             * Update Date status
              */
-            void update() {
-                // Update changes
-                this->timer = mktime(this->localTimer);
-
-                this->sec = this->localTimer->tm_sec;
-                this->min = this->localTimer->tm_min;
-                this->hour = this->localTimer->tm_hour;
-                this->mday = this->localTimer->tm_mday;
-                this->mon = this->localTimer->tm_mon;
-                this->year = this->localTimer->tm_year;
-                this->wday = this->localTimer->tm_wday;
-                this->yday = this->localTimer->tm_yday;
-                this->isdst = this->localTimer->tm_isdst;
-                this->gmtoff = this->localTimer->tm_gmtoff;
-                this->zone = this->localTimer->tm_zone;
-
-                this->defaultCenturyStart = (this->year / 100) * 100;
-            }
+            void updateDateStatus();
 
             /**
              * Allocates a Date object and initializes it so that
@@ -433,23 +346,8 @@ namespace Java {
              * @param   min     the minutes between 0-59.
              * @param   sec     the seconds between 0-59.
              */
-            void initialize(int year, int month, int date,
-                            int hrs, int min, int sec) {
-                tm localTimer = { 0 };
-
-                localTimer.tm_year = year % 1900;
-                localTimer.tm_mon = month;
-                localTimer.tm_mday = date;
-                localTimer.tm_hour = hrs;
-                localTimer.tm_min = min;
-                localTimer.tm_sec = sec;
-
-                this->timer = mktime(&localTimer);
-
-                this->localTimer = localtime(&this->timer);
-
-                update();
-            }
+            void initializeDate(int year, int month, int date,
+                                int hrs, int min, int sec);
 
             /**
              * Allocates a Date object and initializes it
@@ -457,28 +355,15 @@ namespace Java {
              * @param timer time milliseconds after
              *              January 1, 1970 00:00:00 GMT.
              */
-            void initialize(time_t timer) {
-                this->timer = timer;
-                this->localTimer = localtime(&this->timer);
-
-                update();
-            }
+            void initializeDate(long timer);
 
             /**
-             * Convert the time milliseconds after
-             * January 1, 1970 00:00:00 GMT to string
-             * type - represent the Date object
+             * Convert the time milliseconds to String
              *
-             * @param timePresenter
+             * @param pattern
              * @return String
              */
-            string timeToString(string pattern, tm *timeManagement) {
-                size_t size = 100;
-                auto result = static_cast<string> (malloc(size * sizeof(char)));
-                strftime(result, size, pattern, timeManagement);
-
-                return result;
-            }
+            String timeToString(String pattern, tm *timeManagement);
 
             /**
              * Get the UTC time
@@ -486,13 +371,7 @@ namespace Java {
              * @param timer
              * @return long
              */
-            static long getUTCTime(long timer) {
-                time_t tempTime = timer;
-                tm tempTimer = {0};
-                tm *utcTimer = gmtime_r(&tempTime, &tempTimer);
-
-                return mktime(utcTimer);
-            }
+            static long getUTCTime(long timer);
 
             /**
              * Get Current Number From InputString
@@ -582,6 +461,7 @@ namespace Java {
              * @see Date::parse(String inputString)
              */
             static String getPattern(String s, int &timeZoneOffset);
+
         };
     }  // namespace Util
 }  // namespace Java

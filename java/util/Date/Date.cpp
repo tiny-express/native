@@ -32,29 +32,29 @@
  * @return
  */
 Date::Date() {
-    initialize(time(nullptr));
+    initializeDate(time(nullptr));
 }
 
 Date::Date(int year, int month, int date) {
-    initialize(year, month, date, 0, 0, 0);
+    initializeDate(year, month, date, 0, 0, 0);
 }
 
 Date::Date(int year, int month, int date, int hrs, int min) {
-    initialize(year, month, date, hrs, min, 0);
+    initializeDate(year, month, date, hrs, min, 0);
 }
 
 Date::Date(int year, int month, int date, int hrs, int min, int sec) {
-    initialize(year, month, date, hrs, min, sec);
+    initializeDate(year, month, date, hrs, min, sec);
 }
 
 Date::Date(long date) {
     time_t timer = date;
-    initialize(timer);
+    initializeDate(timer);
 }
 
 Date::Date(String inputString) {
     time_t timer = Date::parse(inputString);
-    initialize(timer);
+    initializeDate(timer);
 }
 
 Date::~Date() {
@@ -62,45 +62,45 @@ Date::~Date() {
 
 void Date::setDate(int date) {
     this->localTimer->tm_mday = date;
-    update();
+    updateDateStatus();
 }
 
 void Date::setHours(int hours) {
     this->localTimer->tm_hour = hours;
-    update();
+    updateDateStatus();
 }
 
 void Date::setMinutes(int minutes) {
     this->localTimer->tm_min = minutes;
-    update();
+    updateDateStatus();
 }
 
 void Date::setMonth(int month) {
     this->localTimer->tm_mon = month;
-    update();
+    updateDateStatus();
 }
 
 void Date::setSeconds(int seconds) {
     this->localTimer->tm_sec = seconds;
-    update();
+    updateDateStatus();
 }
 
 void Date::setTime(long time) {
-    initialize(time);
+    initializeDate(time);
 }
 
 void Date::setYear(int year) {
     // LocalTimer just keep year since 1900
     this->localTimer->tm_year = year % 1900;
-    update();
+    updateDateStatus();
 }
 
 int Date::getDate() {
-    return this->mday;
+    return this->dayOfMonth;
 }
 
 int Date::getDay() {
-    int result = this->wday;
+    int result = this->dayOfWeek;
 
     return result;
 }
@@ -114,7 +114,7 @@ int Date::getMinutes() {
 }
 
 int Date::getMonth() {
-    return this->mon;
+    return this->month;
 }
 
 int Date::getSeconds() {
@@ -130,7 +130,7 @@ long Date::getTime() {
 }
 
 int Date::getTimezoneOffset() {
-    auto result = static_cast<int> (- this->gmtoff / 60);
+    auto result = static_cast<int> (- this->gmtOffset / 60);
 
     return result;
 }
@@ -166,7 +166,6 @@ int Date::compareTo(Date anotherDate) {
 }
 
 String Date::toString() {
-    String zone = this->zone;
     String pattern;
 
 #ifdef __unix__
@@ -179,17 +178,12 @@ String Date::toString() {
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T GMT %Y";
     }
-
-    if (zone == "UTC") {
-        zone = "GMT";
-    }
 #endif
 
     pattern = (string) "%a %b %d %T %Z %Y";
-    string convertResult = this->timeToString(pattern.toString(),
+    String convertResult = this->timeToString(pattern.toString(),
                                               this->localTimer);
     String result = convertResult;
-    free(convertResult);
 
     return result;
 }
@@ -208,21 +202,10 @@ Date Date::clone() {
 
 String Date::toLocaleString() {
     auto pattern = (string) "%b %d, %Y %I:%M:%S %p";
-    string convertResult = this->timeToString(pattern, this->localTimer);
+    String convertResult = this->timeToString(pattern, this->localTimer);
     String result = convertResult;
-    free(convertResult);
 
     return result;
-}
-
-long Date::parse(String inputString, string pattern) {
-    tm localTimer = {};
-    strptime(inputString.toString(), pattern, &localTimer);
-    return mktime(&localTimer);
-}
-
-string Date::getZone() {
-    return (string) this->zone;
 }
 
 String Date::toGMTString() {
@@ -239,9 +222,8 @@ String Date::toGMTString() {
     time_t utcTime = getUTCTime(this->timer);
     tm *utcTimer = localtime(&utcTime);
 
-    string convertResult = this->timeToString(pattern, utcTimer);
+    String convertResult = this->timeToString(pattern, utcTimer);
     String result = convertResult;
-    free(convertResult);
 
     return result;
 }
@@ -1078,4 +1060,67 @@ String Date::getPattern(String s, int &timeZoneOffset) {
     }
 
     return pattern;
+}
+
+void Date::updateDateStatus() {
+    // Update changes
+    this->timer = mktime(this->localTimer);
+
+    this->sec = this->localTimer->tm_sec;
+    this->min = this->localTimer->tm_min;
+    this->hour = this->localTimer->tm_hour;
+    this->dayOfMonth = this->localTimer->tm_mday;
+    this->month = this->localTimer->tm_mon;
+    this->year = this->localTimer->tm_year;
+    this->dayOfWeek = this->localTimer->tm_wday;
+    this->dayOfYear = this->localTimer->tm_yday;
+    this->isDaylightSavingTime = this->localTimer->tm_isdst;
+    this->gmtOffset = this->localTimer->tm_gmtoff;
+    this->timeZoneName = this->localTimer->tm_zone;
+
+    this->defaultCenturyStart = (this->year / 100) * 100;
+}
+
+void Date::initializeDate(int year, int month, int date,
+                          int hrs, int min, int sec) {
+    tm localTimer = { 0 };
+
+    localTimer.tm_year = year % 1900;
+    localTimer.tm_mon = month;
+    localTimer.tm_mday = date;
+    localTimer.tm_hour = hrs;
+    localTimer.tm_min = min;
+    localTimer.tm_sec = sec;
+
+    this->timer = mktime(&localTimer);
+
+    this->localTimer = localtime(&this->timer);
+
+    updateDateStatus();
+}
+
+void Date::initializeDate(long timer) {
+    this->timer = timer;
+    this->localTimer = localtime(&this->timer);
+
+    updateDateStatus();
+}
+
+String Date::timeToString(String pattern, tm *timeManagement) {
+    size_t size = 100;
+    string holdResult = static_cast<string> (calloc(size, sizeof(char)));
+    strftime(holdResult, size, pattern.toString(), timeManagement);
+
+    String result = holdResult;
+    free(holdResult);
+
+    return result;
+}
+
+long Date::getUTCTime(long timer) {
+    time_t tempTime = timer;
+    tm tempTimer = {0};
+    tm *utcTimer = gmtime_r(&tempTime, &tempTimer);
+
+    return mktime(utcTimer);
 }
