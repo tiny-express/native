@@ -1013,7 +1013,7 @@ TEST(JavaLang, StringFormat) {
                  "_test",
                  "http1.1",
                  "HEADER:HEADER",
-                 result.toString());
+                 body.toString());
 
         ASSERT_STR(expected, result.toString());
         free(expected);

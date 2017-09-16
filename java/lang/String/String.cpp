@@ -32,6 +32,8 @@
 
 using namespace Java::Lang;
 
+#define DEFAULT_BUFFER_LENGTH 256
+
 String::String() {
 	this->original = strdup("\0");
 	this->size = 0;
@@ -714,91 +716,165 @@ Array<String> String::split(String regex, int limit) const {
 
 String String::print(const String &format, short value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, int value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, long value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        ++length;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, unsigned short value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        ++length;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, unsigned int value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, unsigned long value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, double value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, float value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
 String String::print(const String &format, string value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH];
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        delete[] buffer;
+        buffer = new char[++length];
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
     return result;
 }
 
