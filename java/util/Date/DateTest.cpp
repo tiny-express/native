@@ -34,7 +34,7 @@ using namespace Java::Util;
 
 TEST(JavaUtil, DateConstructor) {
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
 
@@ -259,7 +259,7 @@ TEST(JavaUtil, DateGetYear) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     ASSERT_EQUAL(currentTime->tm_year + 1900, date.getYear());
@@ -364,7 +364,7 @@ TEST(JavaUtil, DateGetMonth) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     ASSERT_EQUAL(currentTime->tm_mon, date.getMonth());
@@ -458,7 +458,7 @@ TEST(JavaUtil, DateGetDate) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);;
     ASSERT_EQUAL(currentTime->tm_mday, date.getDate());
@@ -552,7 +552,7 @@ TEST(JavaUtil, DateGetHour) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     ASSERT_EQUAL(currentTime->tm_hour, date.getHours());
@@ -635,7 +635,7 @@ TEST(JavaUtil, DateGetMinutes) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     ASSERT_EQUAL(currentTime->tm_min, date.getMinutes());
@@ -718,7 +718,7 @@ TEST(JavaUtil, DateGetSeconds) {
     Date date;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     ASSERT_EQUAL(currentTime->tm_sec, date.getSeconds());
@@ -751,7 +751,7 @@ TEST(JavaUtil, DateGetTime) {
     Date date;
 
     // Test the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     ASSERT_EQUAL(now, date.getTime());
 }
 
@@ -762,7 +762,7 @@ TEST(JavaUtil, DateSetTime) {
     long tempTime;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     date.setTime(now);
@@ -922,7 +922,7 @@ TEST(JavaUtil, DateClone) {
     long tempTime;
 
     // Get the current local time
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     date = tempDate.clone();
@@ -1014,7 +1014,7 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
     int expectedResult;
 
     // Test System time zone
-    time_t now = time(nullptr);
+    long now = time(nullptr);
     tm tempLocalTimer = {0};
     tm *localTimer = localtime_r(&now, &tempLocalTimer);
     expectedResult = static_cast<int> (- localTimer->tm_gmtoff / 60);

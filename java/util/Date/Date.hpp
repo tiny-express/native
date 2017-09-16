@@ -37,15 +37,15 @@ using namespace Java::Lang;
 namespace Java {
     namespace Util {
         class Date : public Object {
-         public:
+        public:
             Date();
             Date(int year, int month, int date);
-            Date(int year, int month, int date, int hrs, int min);
-            Date(int year, int month, int date, int hrs, int min, int sec);
+            Date(int year, int month, int date, int hour, int minute);
+            Date(int year, int month, int date, int hour, int minute, int second);
             Date(long date);
             Date(String inputString);
             ~Date();
-         public:
+        public:
             /**
              * Tests if this date is after the specified date.
              *
@@ -254,27 +254,26 @@ namespace Java {
              * @param year
              * @param month
              * @param date
-             * @param hrs
-             * @param min
-             * @param sec
+             * @param hour
+             * @param minute
+             * @param second
              * @return long
              */
             static long UTC(int year, int month, int date,
-                            int hrs, int min, int sec);
-
-         private:
-            time_t timer;
+                            int hour, int minute, int second);
+        private:
+            long timer;
             tm *localTimer;
 
             /**
              * Seconds.	[0-60] (1 leap second)
              */
-            int sec;
+            int second;
 
             /**
              * Minutes.	[0-59]
              */
-            int min;
+            int minute;
 
             /**
              * Hours.	[0-23]
@@ -336,18 +335,18 @@ namespace Java {
              * Allocates a Date object and initializes it so that
              * it represents the instant at the start of the second specified
              * by the year, month, date,
-             * hrs, min, and sec arguments,
+             * hour, minute, and second arguments,
              * in the local time zone.
              *
              * @param   year    the year minus 1900.
              * @param   month   the month between 0-11.
              * @param   date    the day of the month between 1-31.
-             * @param   hrs     the hours between 0-23.
-             * @param   min     the minutes between 0-59.
-             * @param   sec     the seconds between 0-59.
+             * @param   hour     the hours between 0-23.
+             * @param   minute     the minutes between 0-59.
+             * @param   second     the seconds between 0-59.
              */
             void initializeDate(int year, int month, int date,
-                                int hrs, int min, int sec);
+                                int hour, int minute, int second);
 
             /**
              * Allocates a Date object and initializes it
@@ -461,7 +460,6 @@ namespace Java {
              * @see Date::parse(String inputString)
              */
             static String getPattern(String s, int &timeZoneOffset);
-
         };
     }  // namespace Util
 }  // namespace Java
