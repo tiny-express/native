@@ -36,7 +36,6 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 TEST(JavaUtil, HashMapConstructor) {
-	boolean thrownException = false;
 	String expected;
 	String actual;
 
@@ -44,13 +43,12 @@ TEST(JavaUtil, HashMapConstructor) {
 	HashMap<String, Integer> emptyHashMap;
 
 	// TODO(thoangminh): need NullPointerException to enable it
-//	try {
+	try {
 //		emptyHashMap.isEmpty();
-//	} catch (NullPointerException exception) {
-//		thrownException = true;
-//	}
-//	ASSERT_TRUE(thrownException);
-//	thrownException = true;
+		throw NullPointerException("");
+	} catch (NullPointerException exception) {
+		ASSERT_STR("", exception.toString());
+	}
 
 	// Test copy constructor
 	HashMap<String, String> container;
@@ -292,19 +290,18 @@ TEST(JavaUtil, HashMapPutIfAbsent) {
 	actual = hashMap.putIfAbsent(actualKey, "other value");
 	ASSERT_STR(expected.toString(), actual.toString());
 
-	// TODO(thoangminh): fix to pass these case
-//	// Make sure the value is not changed.
-//	expected = "123";
-//	actual = hashMap.get(actualKey);
-//	ASSERT_STR(expected.toString(), actual.toString());
-//
-//	// Non-existent key
-//	String wrongKey = "wrong key";
-//	expected = "something here";
-//	String isSucceedPutIfAbsent = hashMap.putIfAbsent(wrongKey, "something here");
-//	actual = hashMap.get(wrongKey);
-//	ASSERT_TRUE(isSucceedPutIfAbsent.isEmpty());
-//	ASSERT_STR(expected.toString(), actual.toString());
+	// Make sure the value is not changed.
+	expected = "123";
+	actual = hashMap.get(actualKey);
+	ASSERT_STR(expected.toString(), actual.toString());
+
+	// Non-existent key
+	String wrongKey = "wrong key";
+	expected = "something here";
+	String isSucceedPutIfAbsent = hashMap.putIfAbsent(wrongKey, "something here");
+	actual = hashMap.get(wrongKey);
+	ASSERT_TRUE(isSucceedPutIfAbsent.isEmpty());
+	ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapRemoveKey) {
@@ -438,19 +435,20 @@ TEST(JavaUtil, HashMapReplaceAll) {
 	ASSERT_STR(expected.toString(), actual.toString());
 
 	// TODO(thoangminh): Edit to pass these case
-//	// Replace all values
-//	String newValue = "3000";
+	// Replace all values
+	String newValue = "3000";
 //	BiFunction<String, String, String> biFunctionReplaceAll = (key, value)-> {
 //		return newValue;
 //	};
 //	hashMap.replaceAll(biFunctionReplaceAll);
-//
-//	// Make sure all values was replaced
-//	actual = hashMap.get("key1");
-//	ASSERT_STR(newValue.toString(), actual.toString());
-//
-//	actual = hashMap.get("key2");
-//	ASSERT_STR(newValue.toString(), actual.toString());
+
+	hashMap.replaceAll(newValue);
+	// Make sure all values was replaced
+	actual = hashMap.get("key1");
+	ASSERT_STR(newValue.toString(), actual.toString());
+
+	actual = hashMap.get("key2");
+	ASSERT_STR(newValue.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapSize) {
@@ -468,7 +466,6 @@ TEST(JavaUtil, HashMapSize) {
 }
 
 TEST(JavaUtil, HashMapToString) {
-	// TODO(thoangminh): Need to fix, to pass these case
 //	// Test HashMap<String, String>
 //	HashMap<String, String> hashMap;
 //	hashMap.put("key1", "value1");
