@@ -435,11 +435,11 @@ TEST (JavaUtil, HashMapToString) {
 	ASSERT_STR(expectedResult, result);
 	
 	// Given another hash map type to test
-	HashMap<String, Integer> anotherHashMap;
-	anotherHashMap.put("some key", 12313);
-	anotherHashMap.put("anotherKey", 76767);
+	HashMap<Integer, Integer> anotherHashMap;
+	anotherHashMap.put(1, 12313);
+	anotherHashMap.put(2, 76767);
 	
-	expectedResult = (string) R"({"anotherKey": 76767, "some key": 12313})";
+	expectedResult = (string) R"({1: 12313, 2: 76767})";
 	result = anotherHashMap.toString();
 	ASSERT_STR(expectedResult, result);
 	
