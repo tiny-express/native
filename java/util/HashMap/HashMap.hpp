@@ -508,7 +508,9 @@ namespace Java {
                                     break;
                                 default:
                                     if (replacementString.isEmpty()) {
-                                        replacementString = string_from_char(charAtIndex);
+                                        string charAtIndexString = string_from_char(charAtIndex);
+                                        replacementString = charAtIndexString;
+                                        free(charAtIndexString);
                                     }
                             }
 
