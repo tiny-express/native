@@ -491,8 +491,7 @@ namespace Java {
 							String colonAndSpace = ": ";
 							String endString = "}";
 							String totalString;
-							std::string str;
-							
+
 							typename std::map<K, V>::iterator it;
 							for (it = this->original.begin(); it != this->original.end(); ++it) {
 								if (instanceof<String>(it->first)) {

@@ -324,6 +324,4 @@ TEST(JavaUtil, ArrayListToString) {
     result = arrayListString.toString();
     expect = (string) R"([He\"llo\", I\b, am\t, Le\ngend, Acher\ry, from\f, Food\\Tiny])";
     ASSERT_STR(expect, result);
-
-
 }
