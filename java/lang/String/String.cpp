@@ -729,6 +729,7 @@ String String::print(const String &format, short value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -747,6 +748,7 @@ String String::print(const String &format, int value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -766,6 +768,7 @@ String String::print(const String &format, long value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -785,6 +788,7 @@ String String::print(const String &format, unsigned short value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -803,6 +807,7 @@ String String::print(const String &format, unsigned int value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -821,6 +826,7 @@ String String::print(const String &format, unsigned long value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -839,6 +845,7 @@ String String::print(const String &format, double value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -857,6 +864,7 @@ String String::print(const String &format, float value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
@@ -875,6 +883,7 @@ String String::print(const String &format, string value) {
         result = String(buffer, length);
     }
 
+    delete[] buffer;
     return result;
 }
 
