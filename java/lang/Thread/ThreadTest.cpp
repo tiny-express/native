@@ -64,7 +64,7 @@ public:
 
     void run() override {
         value = 0xb00b;
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
         value = 0xbeef;
     }
 };
@@ -192,7 +192,7 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
         thread.start();
 
         //
-        thread.join(1000);
+        thread.join(100);
         result1 = target.value;
 
         //
