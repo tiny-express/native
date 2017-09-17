@@ -168,13 +168,13 @@ int Date::compareTo(Date anotherDate) {
 String Date::toString() {
     String pattern;
 
-#ifdef __unix__
+#ifdef LINUX
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T UTC %Y";
     }
 #endif
 
-#ifdef WIN32
+#ifdef WINDOWS
     if (this->getTimezoneOffset() == 0) {
         pattern = (string) "%a %b %d %T GMT %Y";
     }
@@ -211,11 +211,11 @@ String Date::toLocaleString() {
 String Date::toGMTString() {
     string pattern;
 
-#ifdef __unix__
+#ifdef LINUX
     pattern = (string) "%a %b %d %T UTC %Y";
 #endif
 
-#ifdef WIN32
+#ifdef WINDOWS
     pattern = (string) "%a %b %d %T GMT %Y";
 #endif
 

@@ -29,6 +29,7 @@
 
 #include "../../Lang.hpp"
 #include "../ArrayList/ArrayList.hpp"
+#include "../../../kernel/platform.h"
 #include <algorithm>
 #include <string>
 

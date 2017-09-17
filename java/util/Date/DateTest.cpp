@@ -91,11 +91,11 @@ TEST(JavaUtil, DateConstructor) {
     String actual;
     String localZone;
 
-    void tzset (void);
+    tzset();
     extern char *tzname[2];
     String zone = (string) tzname[0];
 
-#ifdef __unix__
+#ifdef LINUX
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "UTC";
     } else {
@@ -103,7 +103,7 @@ TEST(JavaUtil, DateConstructor) {
     }
 #endif
 
-#ifdef WIN32
+#ifdef WINDOWS
     if (actualDate.getTimezoneOffset() == 0) {
         localZone = "GMT";
     } else {
@@ -1547,7 +1547,8 @@ TEST(JavaUtil, DateToString) {
     String expected;
     String actual;
 
-    void tzset (void);
+//    tzset();
+    tzset();
     extern char *tzname[2];
     String zone = (string) tzname[0];
 
@@ -1725,8 +1726,8 @@ TEST(JavaUtil, DateParse) {
     String localZone;
     String zone;
 
-#ifdef __unix__
-    void tzset (void);
+#ifdef LINUX
+    tzset();
     extern char *tzname[2];
     zone = (string) tzname[0];
 
@@ -1737,8 +1738,8 @@ TEST(JavaUtil, DateParse) {
     }
 #endif
 
-#ifdef WIN32
-    void tzset (void);
+#ifdef WINDOWS
+    tzset();
     extern char *tzname[2];
     zone = (string) tzname[0];
 
