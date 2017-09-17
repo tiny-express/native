@@ -1020,4 +1020,15 @@ TEST(JavaLang, StringFormat) {
         free(expected);
         free(url);
     }
+
+    {
+        string expected;
+        String result;
+        unsigned long ul = timestamp();
+
+        asprintf(&expected, "%lu", ul);
+        result = String::format("%lu", ul);
+        ASSERT_STR(expected, result.toString());
+        free(expected);
+    }
 }
