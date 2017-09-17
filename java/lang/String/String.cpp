@@ -796,11 +796,11 @@ String String::print(const String &format, float value) {
 
 String String::print(const String &format, string value) {
     String result;
-    char* buffer = new char[DEFAULT_BUFFER_LENGTH]();
+    char* buffer = (char*)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
     int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
 
     if (length > DEFAULT_BUFFER_LENGTH) {
-        delete[] buffer;
+        free(buffer);
         buffer = new char[++length]();
         length = snprintf(buffer, (size_t)length, format.toString(), value);
     }
@@ -809,7 +809,7 @@ String String::print(const String &format, string value) {
         result = String(buffer, length);
     }
 
-    delete[] buffer;
+    free(buffer);
     return result;
 }
 
