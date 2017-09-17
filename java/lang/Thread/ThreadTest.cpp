@@ -46,8 +46,27 @@ public:
 
 	void run() override {
         value = 0xb00b;
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	}
+};
+
+class RunnableTarget2 : public virtual Runnable {
+public:
+    long value;
+
+    RunnableTarget2() {
+        value = 0;
+    }
+
+    ~RunnableTarget2() {
+
+    }
+
+    void run() override {
+        value = 0xb00b;
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        value = 0xbeef;
+    }
 };
 
 // TODO(thoangminh): Need to improve it
@@ -55,18 +74,18 @@ TEST(JavaLang, ThreadConstructor) {
 }
 
 TEST(JavaLang, ThreadRun) {
-//    long expect = 0xb00b;
-//    long result = 0;
-//
-//    {
-//        RunnableTarget1 target;
-//        Thread thread(&target);
-//        thread.start();
-//        thread.join();
-//        result = target.value;
-//    }
-//
-//    ASSERT_EQUAL(expect, result);
+    long expect = 0xb00b;
+    long result = 0;
+
+    {
+        RunnableTarget1 target;
+        Thread thread(&target);
+        thread.start();
+        thread.join();
+        result = target.value;
+    }
+
+    ASSERT_EQUAL(expect, result);
 }
 
 TEST(JavaLang, ThreadSetDaemon) {
@@ -162,20 +181,25 @@ TEST(JavaLang, ThreadGetName) {
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
-//    std::chrono::time_point<std::chrono::system_clock> start;
-//    std::chrono::time_point<std::chrono::system_clock> end;
-//    std::chrono::duration<double> elapsed;
-//
-//    long expect1 = 0xb00b;
-//    long result1 = 0;
-//
-//    {
-//        RunnableTarget1 target;
-//        Thread thread(&target);
-//        thread.start();
-//        thread.join(1000);
-//        result1 = target.value;
-//    }
-//
-//    ASSERT_EQUAL(expect1, result1);
+    long expect1 = 0xb00b;
+    long result1 = 0;
+    long expect2 = 0xbeef;
+    long result2 = 0;
+
+    {
+        RunnableTarget2 target;
+        Thread thread(&target);
+        thread.start();
+
+        //
+        thread.join(1000);
+        result1 = target.value;
+
+        //
+        thread.join();
+        result2 = target.value;
+    }
+
+    ASSERT_EQUAL(expect1, result1);
+    ASSERT_EQUAL(expect2, result2);
 }

@@ -44,6 +44,9 @@ Thread::~Thread() {
         if (threadObject->joinable())
             threadObject->join();
         delete threadObject;
+
+        if (semahoreObject.availablePermits() > 0)
+            semahoreObject.release(semahoreObject.availablePermits());
     }
 }
 
@@ -53,9 +56,7 @@ void Thread::run() {
     mutexObject.unlock();
 
     target->run();
-//    if(semaphoreObject) {
-//        semaphoreObject->release(1, NULL);
-//    }
+    semahoreObject.release(1);
 
     mutexObject.lock();
     alive = false;
@@ -130,8 +131,8 @@ void Thread::join() {
 
 void Thread::join(long millis) {
     if(millis > 0) {
-        //semaphoreObject->wait(millis);
+        semahoreObject.tryAcquire(1, millis);
     } else {
-        //semaphoreObject->wait();
+        semahoreObject.acquire();
     }
 }

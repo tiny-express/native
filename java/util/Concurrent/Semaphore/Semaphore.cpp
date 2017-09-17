@@ -25,6 +25,7 @@
  */
 
 #include "Semaphore.hpp"
+#include "../../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace std::chrono;
 

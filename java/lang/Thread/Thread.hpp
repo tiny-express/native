@@ -27,20 +27,18 @@
 #ifndef JAVA_LANG_THREAD_THREAD_HPP_
 #define JAVA_LANG_THREAD_THREAD_HPP_
 
+#include <mutex>
+#include <thread>
+
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 #include "../Runnable/Runnable.hpp"
-#include <mutex>
-#include <thread>
-#include <condition_variable>
-#include <algorithm>
-
-#define synchronized(m) for(std::unique_lock<std::recursive_mutex> lk(m); lk; lk.unlock());
+#include "../../util/Concurrent/Semaphore/Semaphore.hpp"
 
 namespace Java {
 		namespace Lang {
             class Thread : public Object, public virtual Runnable {
-				 private:
+                private:
                     pthread_t original;
                     boolean alive;
 
@@ -146,6 +144,7 @@ namespace Java {
 
                     std::thread* threadObject;
                     std::mutex mutexObject;
+                    Java::Util::Concurrent::Semaphore semahoreObject;
 
                  private:
                     /**
