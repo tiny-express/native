@@ -801,7 +801,7 @@ String String::print(const String &format, string value) {
 
     if (length > DEFAULT_BUFFER_LENGTH) {
         free(buffer);
-        buffer = new char[++length]();
+        buffer = (char*)calloc(++length, sizeof(char));
         length = snprintf(buffer, (size_t)length, format.toString(), value);
     }
 
