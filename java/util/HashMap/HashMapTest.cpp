@@ -57,7 +57,6 @@ TEST(JavaUtil, HashMapConstructor) {
 
 	HashMap<String, String> hashMap = container;
 
-
 	// Test valid size()
 	ASSERT_EQUAL(2, hashMap.size());
 	ASSERT_FALSE(hashMap.isEmpty());
@@ -155,11 +154,14 @@ TEST(JavaUtil, HashMapContainsValue) {
 
 TEST(JavaUtil, HashMapEntrySet) {
 	HashMap<String, String> hashMap;
+
 	for (int index=1; index<=100; index++) {
 		hashMap.put("Key "+ String::valueOf(index), "Value " + String::valueOf(index));
 	}
+
 	int counter = 0;
 	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
+
 	// TODO - loint@foodtiny.com will improve entrySet
 	// then we can put it inside foreach without any performance issue
 	for (Map<String, String>::Entry entry : entrySet) {
@@ -173,6 +175,7 @@ TEST(JavaUtil, HashMapEntrySet) {
 			ASSERT_STR("Value 98", entry.getValue().toString());
 		}
 	}
+
 	// Make sure foreach is working
 	ASSERT_EQUAL(100, counter);
 }
