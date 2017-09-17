@@ -42,13 +42,8 @@ TEST(JavaUtil, HashMapConstructor) {
 	// Test default constructor
 	HashMap<String, Integer> emptyHashMap;
 
-	// TODO(thoangminh): need NullPointerException to enable it
-	try {
-//		emptyHashMap.isEmpty();
-		throw NullPointerException("");
-	} catch (NullPointerException exception) {
-		ASSERT_STR("", exception.toString());
-	}
+	// Make sure emptyHashMap is empty
+	ASSERT_TRUE(emptyHashMap.isEmpty());
 
 	// Test copy constructor
 	HashMap<String, String> container;
@@ -437,13 +432,8 @@ TEST(JavaUtil, HashMapReplaceAll) {
 	actual = hashMap.get("key2");
 	ASSERT_STR(expected.toString(), actual.toString());
 
-	// TODO(thoangminh): Edit to pass these case
 	// Replace all values
 	String newValue = "3000";
-//	BiFunction<String, String, String> biFunctionReplaceAll = (key, value)-> {
-//		return newValue;
-//	};
-//	hashMap.replaceAll(biFunctionReplaceAll);
 
 	hashMap.replaceAll(newValue);
 	// Make sure all values was replaced
@@ -468,39 +458,48 @@ TEST(JavaUtil, HashMapSize) {
 	ASSERT_EQUAL(3, hashMap.size());
 }
 
-TEST(JavaUtil, HashMapToString) {
-//	// Test HashMap<String, String>
-//	HashMap<String, String> hashMap;
-//	hashMap.put("key1", "value1");
-//	hashMap.put("key16", "value16");
-//	hashMap.put("key02", "value02");
-//	String expected = "{key1=value1, key02=value02, key16=value16}";
-//	String actual = hashMap.toString();
-//	ASSERT_STR(expected.toString(), actual.toString());
-//
-//	// Test HashMap<String, Integer>
-//	HashMap<String, Integer> anotherHashMap;
-//	anotherHashMap.put("some key", 12313);
-//	anotherHashMap.put("anotherKey", 76767);
-//	expected = "{anotherKey=76767, some key=12313}";
-//	actual = anotherHashMap.toString();
-//	ASSERT_STR(expected.toString(), actual.toString());
-//
-//	// Test an empty HashMap<String, Float>
-//	HashMap<String, Float> emptyHashMap;
-//	expected = "{}";
-//	actual = emptyHashMap.toString();
-//	ASSERT_STR(expected.toString(), actual.toString());
-//
-//	// Test HashMap<String, ArrayList<Integer>>
-//	ArrayList<Integer> arrayListInteger1 = { 1, 2, 3, 4, 5 };
-//	ArrayList<Integer> arrayListInteger2 = { 100, 100, 100, 100, 1 };
-//
-//	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
-//	arrayListInHashMap.put("ArrayList1", arrayListInteger1);
-//	arrayListInHashMap.put("ArrayList2", arrayListInteger2);
-//	expected = "{ArrayList1=[1, 2, 3, 4, 5], ArrayList2=[100, 100, 100, 100, 1]}";
-//	actual = arrayListInHashMap.toString();
-//	ASSERT_STR(expected.toString(), actual.toString());
+TEST (JavaUtil, HashMapToString) {
+	// Given some valid key/value to test toString()
+	HashMap<String, String> hashMap;
+	hashMap.put("key1", "value1");
+	hashMap.put("key16", "value16");
+	hashMap.put("key02", "value02");
+
+	string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
+	string result = hashMap.toString();
+	ASSERT_STR(expectedResult, result);
+
+	// Given another hash map type to test
+	HashMap<Integer, Integer> anotherHashMap;
+	anotherHashMap.put(1, 12313);
+	anotherHashMap.put(2, 76767);
+
+	expectedResult = (string) R"({1: 12313, 2: 76767})";
+	result = anotherHashMap.toString();
+	ASSERT_STR(expectedResult, result);
+
+	// Given empty hash map to test default toString()
+	HashMap<String, Float> emptyHashMap;
+	expectedResult = (string) "{}";
+	result = emptyHashMap.toString();
+	ASSERT_STR(expectedResult, result);
+
+	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
+	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
+	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
+	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
+	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
+	expectedResult = (string) R"({"ArrayList1": [1, 2, 3, 4, 5], "ArrayList2": [100, 100, 100, 100, 1]})";
+	result = arrayListInHashMap.toString();
+	ASSERT_STR(expectedResult, result);
+
+	HashMap<String, String> hashMapWithSpecialCharacter;
+	hashMapWithSpecialCharacter.put("key\"1", "va\"lu\"e1");
+	hashMapWithSpecialCharacter.put("key\\16", "val\nue\t16");
+	hashMapWithSpecialCharacter.put("k\fey\b02", "val\rue02");
+
+	expectedResult = (string) R"({"k\fey\b02": "val\rue02", "key\"1": "va\"lu\"e1", "key\\16": "val\nue\t16"})";
+	result = hashMapWithSpecialCharacter.toString();
+	ASSERT_STR(expectedResult, result);
 }
 

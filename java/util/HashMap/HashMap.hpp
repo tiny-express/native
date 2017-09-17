@@ -126,7 +126,7 @@ namespace Java {
 			 * If the specified key is not already associated
 			 * with a value (or is mapped to null),
 			 * attempts to compute its value using
-			 * the given mapping function and enters it into this map unless null.
+			 * the given mapping function and enters iteratorToString into this map unless null.
 			 *
 			 * @param 	key 		key with which the specified value is to be associated
 			 * @param 	Function 	mappingFunction - the function to compute a value
@@ -208,13 +208,13 @@ namespace Java {
 			 */
 			Value get(const Key &key) const {
 				Value result;
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end()) {
+				if (iteratorToString == this->original.end()) {
 					return result;
 				}
 
-				result = it->second;
+				result = iteratorToString->second;
 				return result;
 			}
 
@@ -230,12 +230,12 @@ namespace Java {
 			 */
 			Value getOrDefault(const Key &key, const Value &defaultValue) const {
 				Value result;
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end()) {
+				if (iteratorToString == this->original.end()) {
 					result = defaultValue;
 				} else {
-					result = it->second;
+					result = iteratorToString->second;
 				}
 
 				return result;
@@ -262,7 +262,7 @@ namespace Java {
 			 * Don't support this method
 			 *
 			 * If the specified key is not already associated with a value or is associated with null,
-			 * associates it with the given non-null value.
+			 * associates iteratorToString with the given non-null value.
 			 *
 			 * @param 	Key key 		key with which the resulting value is to be associated
 			 * @param 	value 		the non-null value to be merged with the
@@ -302,7 +302,7 @@ namespace Java {
 
 			/**
 			 * If the specified key is not already associated with a value (or is mapped to null)
-			 * associates it with the given value and returns null, else returns the current value.
+			 * associates iteratorToString with the given value and returns null, else returns the current value.
 			 *
 			 * @param 	key 	key with which the specified value is to be associated
 			 * @param 	value 	value to be associated with the specified key
@@ -337,20 +337,20 @@ namespace Java {
 			 */
 			Value remove(const Key &key) {
 				Value result;
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end()) {
+				if (iteratorToString == this->original.end()) {
 					return result;
 				}
 
-				result = it->second;
+				result = iteratorToString->second;
 				this->original.erase(key);
 
 				return result;
 			}
 
 			/**
-			 * Removes the entry for the specified key only if it is currently mapped to the specified value.
+			 * Removes the entry for the specified key only if iteratorToString is currently mapped to the specified value.
 			 *
 			 * @param 	Key key 		key with which the specified value is associated
 			 * @param 	Value value 	value expected to be associated with the specified key
@@ -359,9 +359,9 @@ namespace Java {
 			 * 			false: 		if otherwise
 			 */
 			boolean remove(const Key &key, const Value &value) {
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end() || it->second != value) {
+				if (iteratorToString == this->original.end() || iteratorToString->second != value) {
 					return false;
 				}
 
@@ -371,7 +371,7 @@ namespace Java {
 			}
 
 			/**
-			 * Replaces the entry for the specified key only if it is currently mapped to some value.
+			 * Replaces the entry for the specified key only if iteratorToString is currently mapped to some value.
 			 *
 			 * @param 	key 	key with which the specified value is associated
 			 * @param 	value 	value to be associated with the specified key
@@ -383,13 +383,13 @@ namespace Java {
 			 */
 			Value replace(const Key &key, const Value &value) {
 				Value result;
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end()) {
+				if (iteratorToString == this->original.end()) {
 					return result;
 				}
 
-				result = it->second;
+				result = iteratorToString->second;
 				this->original[ key ] = value;
 
 				return result;
@@ -407,9 +407,9 @@ namespace Java {
 			 */
 			boolean replace(const Key &key, const Value &oldValue, const Value &newValue) {
 				Value result;
-				auto const it = this->original.find(key);
+				auto const iteratorToString = this->original.find(key);
 
-				if (it == this->original.end() || it->second != oldValue) {
+				if (iteratorToString == this->original.end() || iteratorToString->second != oldValue) {
 					return false;
 				}
 
@@ -468,24 +468,28 @@ namespace Java {
 				String endString = "}";
 				String totalString;
 
-				typename std::map<Key, Value>::iterator it;
-
-				for (it = this->original.begin(); it != this->original.end(); ++it) {
-
-					if (instanceof<String>(it->first)) {
-						totalString = String("\"") + it->first.toString() + String("\"");
+				IteratorType iteratorToString;
+				
+				for (iteratorToString = this->original.begin(); iteratorToString != this->original.end(); ++iteratorToString) {
+					
+					if (instanceof<String>(iteratorToString->first)) {						
+						String first = iteratorToString->first.toString();
+						String key = this->replaceEscapeSequence(first);
+						totalString = String("\"") + key + String("\"");
 					} else {
-						totalString = it->first.toString();
+						totalString = iteratorToString->first.toString();
 					}
-
+					
 					totalString += colonAndSpace;
-
-					if (instanceof<String>(it->second)) {
-						totalString += String("\"") + it->second.toString() + String("\"");
+					
+					if (instanceof<String>(iteratorToString->second)) {
+						String second = iteratorToString->second.toString();
+						String value = this->replaceEscapeSequence(second);
+						totalString += String("\"") + value + String("\"");
 					} else {
-						totalString += it->second.toString();
+						totalString += iteratorToString->second.toString();
 					}
-
+					
 					totalString += commaAndSpace;
 					startHashMap += totalString;
 				}
@@ -493,8 +497,59 @@ namespace Java {
 				startHashMap = startHashMap.subString(0, startHashMap.getSize() - 2);
 				startHashMap += endString;
 				this->backup = startHashMap;
-
+				
 				return this->backup.toString();
+			}
+		private:
+			/**
+             * Replace escape sequence by raw string of that sequence to using in Json
+             *
+             * @param stringToReplace
+             * @return a String with add escape sequence replaced
+             */
+			//TODO (anhnt) need String support unicode for unicode character
+			String replaceEscapeSequence(const String stringToReplace) {
+				
+				int index = 0;
+				String replacementString;
+				String result;
+				
+				while (index < stringToReplace.length()) {
+					int charAtIndex = stringToReplace.charAt(index);
+					
+					switch (charAtIndex) {
+						case '\"':
+							replacementString = R"(\")";
+							break;
+						case '\b':
+							replacementString = R"(\b)";
+							break;
+						case '\f':
+							replacementString = R"(\f)";
+							break;
+						case '\n':
+							replacementString = R"(\n)";
+							break;
+						case '\r':
+							replacementString = R"(\r)";
+							break;
+						case '\t':
+							replacementString = R"(\t)";
+							break;
+						case '\\':
+							replacementString = R"(\\)";
+							break;
+						default:
+							string charAtIndexString = string_from_char(charAtIndex);
+							replacementString = charAtIndexString;
+							free(charAtIndexString);
+					}
+
+					result += replacementString;
+					index++;
+				}
+
+				return result;
 			}
 		};
 	}  // namespace Java
