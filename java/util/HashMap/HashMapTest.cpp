@@ -150,8 +150,9 @@ TEST(JavaUtil, HashMapContainsValue) {
 TEST(JavaUtil, HashMapEntrySet) {
 	HashMap<String, String> hashMap;
 
-	for (int index=1; index<=100; index++) {
-		hashMap.put("Key "+ String::valueOf(index), "Value " + String::valueOf(index));
+	for (int index = 1; index <= 100; index++) {
+		hashMap.put("Key "+ String::valueOf(index),
+					"Value " + String::valueOf(index));
 	}
 
 	int counter = 0;
@@ -458,7 +459,7 @@ TEST(JavaUtil, HashMapSize) {
 	ASSERT_EQUAL(3, hashMap.size());
 }
 
-TEST (JavaUtil, HashMapToString) {
+TEST(JavaUtil, HashMapToString) {
 	// Given some valid key/value to test toString()
 	HashMap<String, String> hashMap;
 	hashMap.put("key1", "value1");

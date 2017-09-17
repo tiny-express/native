@@ -73,19 +73,19 @@ namespace Java {
 		public:
 			IteratorType begin() {
 				return this->original.begin();
-			};
+			}
 
 			ConstIteratorType begin() const {
 				return this->original.begin();
-			};
+			}
 
 			IteratorType end() {
 				return this->original.end();
-			};
+			}
 
 			ConstIteratorType end() const {
 				return this->original.end();
-			};
+			}
 		public:
 			/**
 			 * Removes all of the mappings from this map.
@@ -119,7 +119,7 @@ namespace Java {
 			 * @return 	Value 			the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			//Value compute(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
+//			Value compute(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
 
             // TODO(thoangminh): Need class BiFunction to implement this method
 			/**
@@ -134,7 +134,7 @@ namespace Java {
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-			//Value computeIfAbsent(Key key, Function<? super Key,? extends Value> mappingFunction);
+//			Value computeIfAbsent(Key key, Function<? super Key,? extends Value> mappingFunction);
 
             // TODO(thoangminh): Need class BiFunction to implement this method
 			/**
@@ -146,7 +146,7 @@ namespace Java {
 			 * @return 	Value  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			//Value computeIfPresent(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
+//			Value computeIfPresent(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
@@ -196,7 +196,7 @@ namespace Java {
 			 * Don't support this method
 			 * Instead use: for (auto const &element: hashMap) {}
 			 */
-			//void forEach(BiConsumer<? super Key,? super Value> action);
+//			void forEach(BiConsumer<? super Key,? super Value> action);
 
 			/**
 			 * Returns the value to which the specified key is mapped,
@@ -256,7 +256,7 @@ namespace Java {
 			 * Returns a Set view of the keys contained in this map
 			 * @return Set<Key> - a set view of the keys contained in this map
 			 */
-			//Set<Key> keySet();
+//			Set<Key> keySet();
 
 			/**
 			 * Don't support this method
@@ -274,7 +274,7 @@ namespace Java {
 			 * @return 	Value 			the new value associated with the specified key,
 			 * 						or null if no value is associated with the key
 			 */
-			//Value merge(Key key, Value value, BiFunction<? super Value,? super Value,? extends Value> remappingFunction);
+//			Value merge(Key key, Value value, BiFunction<? super Value,? super Value,? extends Value> remappingFunction);
 
 			/**
 			 * Returns a shallow copy of this HashMap instance:
@@ -361,7 +361,8 @@ namespace Java {
 			boolean remove(const Key &key, const Value &value) {
 				auto const iteratorToString = this->original.find(key);
 
-				if (iteratorToString == this->original.end() || iteratorToString->second != value) {
+				if (iteratorToString == this->original.end()
+					|| iteratorToString->second != value) {
 					return false;
 				}
 
@@ -405,7 +406,9 @@ namespace Java {
 			 * 			true : 		if the value was replaced
 			 * 			false: 		if otherwise
 			 */
-			boolean replace(const Key &key, const Value &oldValue, const Value &newValue) {
+			boolean replace(const Key &key,
+							const Value &oldValue,
+							const Value &newValue) {
 				Value result;
 				auto const iteratorToString = this->original.find(key);
 
@@ -422,7 +425,7 @@ namespace Java {
 			 * Don't support this method
 			 * Instead use: void replaceAll(const Value &value)
 			 */
-			//void replaceAll(BiFunction<? super Key,? super Value,? extends Value> function);
+//			void replaceAll(BiFunction<? super Key,? super Value,? extends Value> function);
 
 			/**
 			 * Replace all key inside this instance with the specified value
@@ -449,7 +452,7 @@ namespace Java {
 			 * Returns a Collection view of the values contained in this map
 			 * @return Collection<Value> - a view of the values contained in this map
 			 */
-			//Collection<Value> values();
+//			Collection<Value> values();
 
 			/**
 			 * Return a presentation of all key/value in this object
@@ -470,7 +473,9 @@ namespace Java {
 
 				IteratorType iteratorToString;
 				
-				for (iteratorToString = this->original.begin(); iteratorToString != this->original.end(); ++iteratorToString) {
+				for (iteratorToString = this->original.begin();
+					 iteratorToString != this->original.end();
+					 ++iteratorToString) {
 					
 					if (instanceof<String>(iteratorToString->first)) {						
 						String first = iteratorToString->first.toString();
@@ -501,15 +506,14 @@ namespace Java {
 				return this->backup.toString();
 			}
 		private:
+			// TODO(anhnt): Need String support unicode for unicode character
 			/**
              * Replace escape sequence by raw string of that sequence to using in Json
              *
              * @param stringToReplace
              * @return a String with add escape sequence replaced
              */
-			//TODO (anhnt) need String support unicode for unicode character
 			String replaceEscapeSequence(const String stringToReplace) {
-				
 				int index = 0;
 				String replacementString;
 				String result;
@@ -552,7 +556,7 @@ namespace Java {
 				return result;
 			}
 		};
-	}  // namespace Java
-}  // namespace Util
+	}  // namespace Util
+}  // namespace Java
 
 #endif  // JAVA_UTIL_HASHMAP_HASHMAP_HPP_
