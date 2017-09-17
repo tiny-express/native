@@ -45,8 +45,8 @@ Thread::~Thread() {
             threadObject->join();
         delete threadObject;
 
-        if (semahoreObject.availablePermits() > 0)
-            semahoreObject.release(semahoreObject.availablePermits());
+//        if (semahoreObject.availablePermits() > 0)
+//            semahoreObject.release(semahoreObject.availablePermits());
     }
 }
 

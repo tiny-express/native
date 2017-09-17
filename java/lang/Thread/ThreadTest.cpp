@@ -181,25 +181,25 @@ TEST(JavaLang, ThreadGetName) {
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
-//    long expect1 = 0xb00b;
-//    long result1 = 0;
-//    long expect2 = 0xbeef;
-//    long result2 = 0;
-//
-//    {
-//        RunnableTarget2 target;
-//        Thread thread(&target);
-//        thread.start();
-//
-//        //
-//        thread.join(100);
-//        result1 = target.value;
-//
-//        //
-//        thread.join();
-//        result2 = target.value;
-//    }
-//
-//    ASSERT_EQUAL(expect1, result1);
-//    ASSERT_EQUAL(expect2, result2);
+    long expect1 = 0xb00b;
+    long result1 = 0;
+    long expect2 = 0xbeef;
+    long result2 = 0;
+
+    {
+        RunnableTarget2 target;
+        Thread thread(&target);
+        thread.start();
+
+        //
+        thread.join(100);
+        result1 = target.value;
+
+        //
+        thread.join();
+        result2 = target.value;
+    }
+
+    ASSERT_EQUAL(expect1, result1);
+    ASSERT_EQUAL(expect2, result2);
 }
