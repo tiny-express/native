@@ -504,3 +504,36 @@ TEST(JavaUtil, HashMapToString) {
 	ASSERT_STR(expectedResult, result);
 }
 
+TEST(JavaUtil, HashMapEquals) {
+    // Create a HashMap
+    HashMap<String, String> hashMap;
+    hashMap.put("some key", "123");
+    hashMap.put("another thing and key", "-44444");
+
+    // Create an other HashMap with the same data
+    HashMap<String, String> sameHashMap;
+    sameHashMap.put("some key", "123");
+    sameHashMap.put("another thing and key", "-44444");
+
+	// Create an other HashMap with the different key
+	HashMap<String, String> differentKeyHashMap;
+	differentKeyHashMap.put("different key", "123");
+	differentKeyHashMap.put("another thing and key", "-44444");
+
+	// Create an other HashMap with the different value
+	HashMap<String, String> differentValueHashMap;
+	differentValueHashMap.put("some key", "different value");
+	differentValueHashMap.put("another thing and key", "-44444");
+
+	// Create an other HashMap with the different size
+	HashMap<String, String> differentSizeHashMap;
+	differentSizeHashMap.put("different key", "123");
+
+    // Test valid case
+    ASSERT_TRUE(hashMap.equals(sameHashMap));
+
+	// Test invalid case
+	ASSERT_FALSE(hashMap.equals(differentKeyHashMap));
+	ASSERT_FALSE(hashMap.equals(differentValueHashMap));
+	ASSERT_FALSE(hashMap.equals(differentSizeHashMap));
+}

@@ -92,17 +92,18 @@ namespace Java {
 			 *
 			 * @param object
 			 */
-//			boolean equals(Object object) {
-//				if (o == this)
-//					return true;
-//				if (o instanceof Map.Entry) {
-//					Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-//					if (Objects.equals(key, e.getKey())
-//						&& Objects.equals(value, e.getValue()))
-//						return true;
-//				}
-//				return false;
-//			}
+			boolean equals(const HashMap<Key, Value> &anotherHashMap)  {
+
+                for(auto const &thisElement : this->original) {
+                    Value anotherValue = anotherHashMap.get(thisElement.first);
+
+                    if(thisElement.second != anotherValue) {
+                        return false;
+                    }
+                }
+
+                return true;
+			}
 
 			// TODO(thoangminh): Need class BiFunction to implement this method
 			/**
