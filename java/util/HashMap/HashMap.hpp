@@ -37,17 +37,17 @@
 
 namespace Java {
 	namespace Util {
-		template <class K, class V>
+		template <class Key, class Value>
 		class HashMap :
 			public AbstractMap,
-			public virtual Map<K, V>,
+			public virtual Map<Key, Value>,
 			public virtual Cloneable,
 			public virtual Serializable {
 		private:
-			std::map<K, V> original;
+			std::map<Key, Value> original;
 			String backup;
-			typedef typename std::map<K, V>::iterator _iterator;
-			typedef typename std::map<K, V>::const_iterator _const_iterator;
+			typedef typename std::map<Key, Value>::iterator IteratorType;
+			typedef typename std::map<Key, Value>::const_iterator ConstIteratorType;
 		public:
 			/**
 			 * Constructs an empty HashMap
@@ -58,10 +58,10 @@ namespace Java {
 			/**
 			 * Constructs a new HashMap with the same mappings as the specified Map.
 			 *
-			 * @param const HashMap<K, V> &target - the map whose mappings
-			 * 										are to be placed in this map
+			 * @param target  	the map whose mappings
+			 * 					are to be placed in this map
 			 */
-			HashMap(const HashMap<K, V> &target) {
+			HashMap(const HashMap<Key, Value> &target) {
 				this->putAll(target);
 			}
 
@@ -71,19 +71,19 @@ namespace Java {
 			~HashMap() {
 			}
 		public:
-			_iterator begin() {
+			IteratorType begin() {
 				return this->original.begin();
 			};
 
-			_const_iterator begin() const {
+			ConstIteratorType begin() const {
 				return this->original.begin();
 			};
 
-			_iterator end() {
+			IteratorType end() {
 				return this->original.end();
 			};
 
-			_const_iterator end() const {
+			ConstIteratorType end() const {
 				return this->original.end();
 			};
 		public:
@@ -99,10 +99,10 @@ namespace Java {
 			 * Returns a shallow copy of this HashMap instance:
 			 * the keys and values themselves are not cloned.
 			 *
-			 * @return HashMap<K, V>
+			 * @return HashMap<Key, Value>
 			 */
-			HashMap<K, V> clone() const {
-				HashMap<K, V> result;
+			HashMap<Key, Value> clone() const {
+				HashMap<Key, Value> result;
 				for (auto const &element : this->original) {
 					result.put(element.first, element.second);
 				}
@@ -114,12 +114,12 @@ namespace Java {
 			 * Attempts to compute a mapping for the specified key and
 			 * its current mapped value (or null if there is no current mapping).
 			 *
-			 * @param 	K key 		key with which the specified value is to be associated
+			 * @param 	key 		key with which the specified value is to be associated
 			 * @param 	BiFunction 	remappingFunction - the function to compute a value
-			 * @return 	V 			the new value associated with the specified key,
+			 * @return 	Value 			the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			//V compute(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);
+			//Value compute(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
 
             // TODO(thoangminh): Need class BiFunction to implement this method
 			/**
@@ -130,45 +130,43 @@ namespace Java {
 			 *
 			 * @param 	key 		key with which the specified value is to be associated
 			 * @param 	Function 	mappingFunction - the function to compute a value
-			 * @return 	V 			the current (existing or computed) value
+			 * @return 	Value 		the current (existing or computed) value
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-			//V computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction);
+			//Value computeIfAbsent(Key key, Function<? super Key,? extends Value> mappingFunction);
 
             // TODO(thoangminh): Need class BiFunction to implement this method
 			/**
 			 * If the value for the specified key is present and non-null,
 			 * attempts to compute a new mapping given the key and its current mapped value.
 			 *
-			 * @param 	K key - 	key with which the specified value is to be associated
+			 * @param 	Key key  	key with which the specified value is to be associated
 			 * @param 	BiFunction 	remappingFunction - the function to compute a value
-			 * @return 	V - 		the new value associated with the specified key,
+			 * @return 	Value  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			//V computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);
+			//Value computeIfPresent(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
 			 *
-			 * @param 	K key 		The key whose presence in this map is to be tested
-			 * @return 	boolean
-			 * 			true : 		if this map contains a mapping for the specified key.
-			 * 			false: 		otherwise
+			 * @param 	Key key 		The key whose presence in this map is to be tested
+			 * @return 	true  		if this map contains a mapping for the specified key.
+			 * 			false 		otherwise
 			 */
-			boolean containsKey(const K &key) const {
+			boolean containsKey(const Key &key) const {
 				return this->original.find(key) != this->original.end();
 			}
 
 			/**
 			 * Returns true if this map maps one or more keys to the specified value.
 			 *
-			 * @param 	V value 	value whose presence in this map is to be tested
-			 * @return 	boolean
-			 *  		true : 		if this map maps one or more keys to the specified value
-			 *  		false: 		otherwise
+			 * @param 	Value value 	value whose presence in this map is to be tested
+			 * @return 	true  		if this map maps one or more keys to the specified value
+			 *  		false 		otherwise
 			 */
-			boolean containsValue(const V &value) const {
+			boolean containsValue(const Value &value) const {
 				for (auto const &pair : this->original) {
 					if (pair.second == value) {
 						return true;
@@ -181,10 +179,10 @@ namespace Java {
 			 *  Set of hash map entries
 			 *
 			 * Returns a Set view of the mappings contained in this map.
-			 * @return Set<Map.Entry<K,V>> - a set view of the mappings contained in this map
+			 * @return Set<Map.Entry<Key,Value>> - a set view of the mappings contained in this map
 			 */
-			Set<class Map<K, V>::Entry> entrySet() {
-				Set<class Map<K, V>::Entry> entrySet;
+			Set<class Map<Key, Value>::Entry> entrySet() {
+				Set<class Map<Key, Value>::Entry> entrySet;
 
 				for(auto const &pair : this->original) {
 					Map<String, String>::Entry entry(pair.first, pair.second);
@@ -198,18 +196,18 @@ namespace Java {
 			 * Don't support this method
 			 * Instead use: for (auto const &element: hashMap) {}
 			 */
-			//void forEach(BiConsumer<? super K,? super V> action);
+			//void forEach(BiConsumer<? super Key,? super Value> action);
 
 			/**
 			 * Returns the value to which the specified key is mapped,
 			 * or null if this map contains no mapping for the key
 			 *
-			 * @param 	K key 		the key whose associated value is to be returned
-			 * @return 	V value 	the value to which the specified key is mapped,
+			 * @param 	Key key 		the key whose associated value is to be returned
+			 * @return 	Value value 	the value to which the specified key is mapped,
 			 * 						or null if no mapping with key
 			 */
-			V get(const K &key) const {
-				V result;
+			Value get(const Key &key) const {
+				Value result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end()) {
@@ -224,14 +222,14 @@ namespace Java {
 			 *  Returns the value to which the specified key is mapped,
 			 *  or defaultValue if this map contains no mapping for the key.
 			 *
-			 * @param 	K key 			the key whose associated value is to be returned
-			 * @param 	V defaultValue 	the default mapping of the key
-			 * @return 	V 				the value to which the specified key is mapped,
+			 * @param 	key 			the key whose associated value is to be returned
+			 * @param 	defaultValue 	the default mapping of the key
+			 * @return 	Value 			the value to which the specified key is mapped,
 			 * 							or defaultValue if this map contains no mapping
 			 * 							for the key
 			 */
-			V getOrDefault(const K &key, const V &defaultValue) const {
-				V result;
+			Value getOrDefault(const Key &key, const Value &defaultValue) const {
+				Value result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end()) {
@@ -246,8 +244,7 @@ namespace Java {
 			/**
 			 * Returns true if this map contains no key-value mappings.
 			 *
-			 * @return 	boolean
-			 *  		true : 	true if this map contains no key-value mappings
+			 * @return 	true : 	true if this map contains no key-value mappings
 			 *  		false: 	otherwise
 			 */
 			boolean isEmpty() const {
@@ -257,9 +254,9 @@ namespace Java {
             // TODO(thoangminh): Support this method later
 			/**
 			 * Returns a Set view of the keys contained in this map
-			 * @return Set<K> - a set view of the keys contained in this map
+			 * @return Set<Key> - a set view of the keys contained in this map
 			 */
-			//Set<K> keySet();
+			//Set<Key> keySet();
 
 			/**
 			 * Don't support this method
@@ -267,38 +264,38 @@ namespace Java {
 			 * If the specified key is not already associated with a value or is associated with null,
 			 * associates it with the given non-null value.
 			 *
-			 * @param 	K key 		key with which the resulting value is to be associated
+			 * @param 	Key key 		key with which the resulting value is to be associated
 			 * @param 	value 		the non-null value to be merged with the
 			 * 						existing value associated with the key or,
 			 * 						if no existing value or a null value
 			 * 						is associated with the key, to be associated with the key
 			 * @param 	BiFunction 	remappingFunction - the function to recompute
 			 * 						a value if present
-			 * @return 	V 			the new value associated with the specified key,
+			 * @return 	Value 			the new value associated with the specified key,
 			 * 						or null if no value is associated with the key
 			 */
-			//V merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction);
+			//Value merge(Key key, Value value, BiFunction<? super Value,? super Value,? extends Value> remappingFunction);
 
 			/**
 			 * Returns a shallow copy of this HashMap instance:
 			 * the keys and values themselves are not cloned.
 			 *
-			 * @param const K &key
-			 * @param const V &value
+			 * @param key
+			 * @param value
 			 */
-			void put(const K &key, const V &value) {
+			void put(const Key &key, const Value &value) {
 				this->original.insert(std::make_pair(key, value));
 			}
 
 			/**
 			 * Copies all of the mappings from the specified map to this map.
 			 *
-			 * @param const hashMap<K, V> &map
+			 * @param const hashMap<Key, Value> &map
 			 */
-			void putAll(const HashMap<K, V> &map) {
+			void putAll(const HashMap<Key, Value> &map) {
 				for (auto const &element: map) {
-					K key = element.first;
-					V value = element.second;
+					Key key = element.first;
+					Value value = element.second;
 					this->original.insert(std::make_pair(key, value));
 				}
 			}
@@ -309,14 +306,14 @@ namespace Java {
 			 *
 			 * @param 	key 	key with which the specified value is to be associated
 			 * @param 	value 	value to be associated with the specified key
-			 * @return 			the previous value associated with the specified key,
+			 * @return 	Value	the previous value associated with the specified key,
 			 * 					or null if there was no mapping for the key.
 			 * 					(A null return can also indicate
 			 * 					that the map previously associated null with the key,
 			 * 					if the implementation supports null values.)
 			 */
-			V putIfAbsent(K key, V value) {
-				V result;
+			Value putIfAbsent(Key key, Value value) {
+				Value result;
 				auto const iteratorFind = this->original.find(key);
 
 				if (iteratorFind == this->original.end()) {
@@ -332,14 +329,14 @@ namespace Java {
 			/**
 			 * Removes the mapping for the specified key from this map if present.
 			 *
-			 * @param 	K key 	key whose mapping is to be removed from the map
-			 * @return 	V 		the previous value associated with key,
+			 * @param 	Key key 	key whose mapping is to be removed from the map
+			 * @return 	Value 		the previous value associated with key,
 			 * 					or null if there was no mapping for key.
 			 * 					(A null return can also indicate that the map
 			 * 					previously associated null with key.)
 			 */
-			V remove(const K &key) {
-				V result;
+			Value remove(const Key &key) {
+				Value result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end()) {
@@ -355,13 +352,13 @@ namespace Java {
 			/**
 			 * Removes the entry for the specified key only if it is currently mapped to the specified value.
 			 *
-			 * @param 	K key 		key with which the specified value is associated
-			 * @param 	V value 	value expected to be associated with the specified key
+			 * @param 	Key key 		key with which the specified value is associated
+			 * @param 	Value value 	value expected to be associated with the specified key
 			 * @return 	boolean
 			 * 			true : 		if the value was removed
 			 * 			false: 		if otherwise
 			 */
-			boolean remove(const K &key, const V &value) {
+			boolean remove(const Key &key, const Value &value) {
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end() || it->second != value) {
@@ -378,14 +375,14 @@ namespace Java {
 			 *
 			 * @param 	key 	key with which the specified value is associated
 			 * @param 	value 	value to be associated with the specified key
-			 * @return 	V 		the previous value associated with the specified key,
+			 * @return 	Value 		the previous value associated with the specified key,
 			 * 					or null if there was no mapping for the key.
 			 * 					(A null return can also indicate that the map
 			 * 					previously associated null with the key,
 			 * 					if the implementation supports null values.)
 			 */
-			V replace(const K &key, const V &value) {
-				V result;
+			Value replace(const Key &key, const Value &value) {
+				Value result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end()) {
@@ -408,8 +405,8 @@ namespace Java {
 			 * 			true : 		if the value was replaced
 			 * 			false: 		if otherwise
 			 */
-			boolean replace(const K &key, const V &oldValue, const V &newValue) {
-				V result;
+			boolean replace(const Key &key, const Value &oldValue, const Value &newValue) {
+				Value result;
 				auto const it = this->original.find(key);
 
 				if (it == this->original.end() || it->second != oldValue) {
@@ -423,16 +420,16 @@ namespace Java {
 
 			/**
 			 * Don't support this method
-			 * Instead use: void replaceAll(const V &value)
+			 * Instead use: void replaceAll(const Value &value)
 			 */
-			//void replaceAll(BiFunction<? super K,? super V,? extends V> function);
+			//void replaceAll(BiFunction<? super Key,? super Value,? extends Value> function);
 
 			/**
 			 * Replace all key inside this instance with the specified value
 			 *
-			 * @param V value - value that will be assigned for all key
+			 * @param Value value - value that will be assigned for all key
 			 */
-			void replaceAll(const V &value) {
+			void replaceAll(const Value &value) {
 				for (auto &element: this->original) {
 					element.second = value;
 				}
@@ -450,9 +447,9 @@ namespace Java {
             // TODO(thoangminh): Support this method later
 			/**
 			 * Returns a Collection view of the values contained in this map
-			 * @return Collection<V> - a view of the values contained in this map
+			 * @return Collection<Value> - a view of the values contained in this map
 			 */
-			//Collection<V> values();
+			//Collection<Value> values();
 
 			/**
 			 * Return a presentation of all key/value in this object
@@ -471,7 +468,7 @@ namespace Java {
 				String endString = "}";
 				String totalString;
 
-				typename std::map<K, V>::iterator it;
+				typename std::map<Key, Value>::iterator it;
 
 				for (it = this->original.begin(); it != this->original.end(); ++it) {
 
