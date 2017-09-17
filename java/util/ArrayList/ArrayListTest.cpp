@@ -44,7 +44,7 @@ TEST(JavaUtil, ArrayListConstructor) {
 	integerArrayList.add(value);
 	integerArrayList.add(value);
 	ASSERT_EQUAL(4, integerArrayList.size());
-	
+
 	// Standard declaration
 	ArrayList<String> stringArrayList;
 	String element = "Element";
@@ -53,7 +53,7 @@ TEST(JavaUtil, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	ASSERT_EQUAL(4, stringArrayList.size());
-	
+
 	// Standard declaration
 	Array<String> arrayString = { "hello", "world" };
 	ArrayList<String> stringArrayListCopy = arrayString;
@@ -166,12 +166,12 @@ TEST(JavaUtil, ArrayListClone) {
 
 TEST(JavaUtil, ArrayListForEach) {
 	ArrayList<Integer> validArrayList;
-	
+
 	int index;
 	for (index = 0; index < 100; ++index) {
 		validArrayList.add(index);
 	}
-	
+
 	int expect = 0;
 	for (Integer element : validArrayList) {
 		ASSERT_EQUAL(expect, element.intValue());
@@ -310,5 +310,18 @@ TEST(JavaUtil, ArrayListToString) {
     arrayListInArrayList.add(inValidArrayListInteger);
     result = arrayListInArrayList.toString();
     expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5], []]";
+    ASSERT_STR(expect, result);
+
+    // Give an ArrayList<String> with Json control character
+	ArrayList<String> arrayListString;
+    arrayListString.add("He\"llo\"");
+    arrayListString.add("I\b");
+    arrayListString.add("am\t");
+    arrayListString.add("Le\ngend");
+    arrayListString.add("Acher\ry");
+    arrayListString.add("from\f");
+    arrayListString.add("Food\\Tiny");
+    result = arrayListString.toString();
+    expect = (string) R"([He\"llo\", I\b, am\t, Le\ngend, Acher\ry, from\f, Food\\Tiny])";
     ASSERT_STR(expect, result);
 }

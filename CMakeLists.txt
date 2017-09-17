@@ -116,12 +116,14 @@ endforeach ()
 file(GLOB_RECURSE SOURCES_CPP
         javax/**/*.cpp
         java/**/*.cpp
+        java/**/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         javax/**/*Test.cpp
         java/**/*Test.cpp
+        java/**/**/*Test.cpp
         )
 
 # Remove all test files within cpp files

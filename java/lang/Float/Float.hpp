@@ -29,6 +29,7 @@
 
 #include "../Number/Number.hpp"
 #include <limits>
+#include "../String/String.hpp"
 
 /**
  * A constant holding the positive infinity of type

@@ -29,6 +29,7 @@
 
 #include "../Number/Number.hpp"
 #include <limits>
+#include "../String/String.hpp"
 
 #ifdef WIN32
     #define unsigned_long_long unsigned __int64
@@ -111,7 +112,7 @@ static constexpr double initMinNormalDouble() noexcept {
 namespace Java {
 	namespace Lang {
 		class Double : public Number {
-		private:
+        private:
 			double original;
             string originalString;
             
