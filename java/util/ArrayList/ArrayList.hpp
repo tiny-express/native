@@ -66,6 +66,54 @@ namespace Java {
 						String backup;
 						typedef E *_iterator;
 						typedef const E *_const_iterator;
+                private:
+                    /**
+                     * Replace escape sequence by raw string of that sequence to using in Json
+                     *
+                     * @param stringToReplace
+                     * @return a String with add escape sequence replaced
+                     */
+                    //TODO (anhnt) need String support unicode for unicode character
+                    String replaceEscapeSequence(const String stringToReplace) {
+                        int index = 0;
+                        String replacementString;
+                        String result;
+                        while (index < stringToReplace.length()) {
+                            int charAtIndex = stringToReplace.charAt(index);
+                            switch (charAtIndex) {
+                                case '\"':
+                                    replacementString = R"(\")";
+                                    break;
+                                case '\b':
+                                    replacementString = R"(\b)";
+                                    break;
+                                case '\f':
+                                    replacementString = R"(\f)";
+                                    break;
+                                case '\n':
+                                    replacementString = R"(\n)";
+                                    break;
+                                case '\r':
+                                    replacementString = R"(\r)";
+                                    break;
+                                case '\t':
+                                    replacementString = R"(\t)";
+                                    break;
+                                case '\\':
+                                    replacementString = R"(\\)";
+                                    break;
+                                default:
+                                        string charAtIndexString = string_from_char(charAtIndex);
+                                        replacementString = charAtIndexString;
+                                        free(charAtIndexString);
+                            }
+
+                            result += replacementString;
+                            index++;
+                        }
+
+                        return result;
+                    }
 				
 				public:
 						_iterator begin() {
@@ -537,7 +585,7 @@ namespace Java {
 								startArrayList = startArrayList.subString(0, startArrayList.length());
 							}
 							startArrayList += endArrayList;
-							this->backup = startArrayList;
+							this->backup = this->replaceEscapeSequence(startArrayList);
 							return this->backup.toString();
 						}
 
@@ -594,7 +642,7 @@ namespace Java {
 							                     this->original.begin() + toIndex);
 						}
 				};
-				
+
 				template <class E>
 				class SubList : public virtual AbstractList<E> {
 				private:
