@@ -197,13 +197,17 @@ namespace Java {
 			Value merge(Key key, Value value,
 					   BiFunction <void(Value, Value, Value&)> remappingFunction) {
                 Value oldValue = this->get(key);
-
+                Value nullValue;
                 Value newValue;
-                remappingFunction(oldValue, value, newValue);
 
-                this->replace(key, newValue);
+                if(oldValue != nullValue) {
+                    remappingFunction(oldValue, value, newValue);
+                    this->replace(key, newValue);
 
-				return newValue;
+                    return newValue;
+                }
+
+				return nullValue;
 			}
 
 			/**
@@ -264,7 +268,6 @@ namespace Java {
 				return result;
 			}
 
-            // TODO(thoangminh): We will support this method later
 			/**
 			 * Attempts to compute a mapping for the specified key and
 			 * its current mapped value (or null if there is no current mapping).
@@ -276,16 +279,37 @@ namespace Java {
 			 * @return 	Value 		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-//			Value compute(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
+			Value compute(Key key,
+                          BiFunction<void (Key, Value, Value&)> remappingFunction) {
+                Value oldValue = this->get(key);
+                Value nullValue;
+                Value newValue;
+
+                if(oldValue != nullValue) {
+                    remappingFunction(key, oldValue, newValue);
+
+					if(newValue != nullValue) {
+						this->replace(key, newValue);
+
+						return newValue;
+					}
+
+					this->remove(key);
+                }
+
+                return nullValue;
+            }
 
             // TODO(thoangminh): We will support this method later
 			/**
 			 * If the specified key is not already associated
 			 * with a value (or is mapped to null),
 			 * attempts to compute its value using
-			 * the given mapping function and enters iteratorToString into this map unless null.
+			 * the given mapping function and enters
+			 * iteratorToString into this map unless null.
 			 *
-			 * @param 	key 		key with which the specified value is to be associated
+			 * @param 	key 		key with which the specified value
+			 * 						is to be associated
 			 *
 			 * @param 	Function 	mappingFunction - the function to compute a value
 			 *

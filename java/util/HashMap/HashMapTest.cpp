@@ -597,7 +597,7 @@ TEST(JavaUtil, HashMapMerge) {
     ASSERT_EQUAL(11, hashMap.get("key1").intValue());
     ASSERT_EQUAL(12, hashMap.get("key2").intValue());
     ASSERT_EQUAL(2, hashMap.size());
-    ASSERT_EQUAL(10, resultMergeInvalidKeyHashMap.intValue());
+    ASSERT_EQUAL(0, resultMergeInvalidKeyHashMap.intValue());
 
     /* Test HashMap<String, String> */
     // Create a HashMap
@@ -631,5 +631,92 @@ TEST(JavaUtil, HashMapMerge) {
     ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
     ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
     ASSERT_EQUAL(2, anotherHashMap.size());
-    ASSERT_STR(" New value", resultMergeInvalidKeyAnotherHashMap.toString());
+    ASSERT_STR("", resultMergeInvalidKeyAnotherHashMap.toString());
+}
+
+TEST(JavaUtil, HashMapCompute) {
+	/* Test HashMap<String, Integer> */
+	// Create a HashMap
+	HashMap<String, Integer> hashMap;
+	hashMap.put("key1", 1);
+	hashMap.put("key2", 2);
+
+	// Create function
+	std::function<void (String, Integer, Integer&)> function
+			= [] (String key, Integer value, Integer &newValue) {
+				newValue = value + 10;
+			};
+
+	// compute: valid key
+	Integer resultComputeKey1HashMap = hashMap.compute("key1",function);
+	Integer resultComputeKey2HashMap = hashMap.compute("key2",function);
+
+	// Make sure the value has changed base on the function
+	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+	ASSERT_EQUAL(11, resultComputeKey1HashMap.intValue());
+	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+	ASSERT_EQUAL(12, resultComputeKey2HashMap.intValue());
+
+	// compute: invalid key
+	Integer resultComputeInvalidKeyHashMap
+			= hashMap.compute("Invalid Key", function);
+
+	// Make sure the hashMap has NOT changed base on the function
+	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+	ASSERT_EQUAL(2, hashMap.size());
+	ASSERT_EQUAL(0, resultComputeInvalidKeyHashMap.intValue());
+
+	/* Test HashMap<String, String> */
+	// Create a HashMap
+	HashMap<String, String> anotherHashMap;
+	anotherHashMap.put("key1", "1");
+	anotherHashMap.put("key2", "2");
+
+	// Create function
+	std::function<void (String, String, String&)> anotherFunction
+			= [] (String key, String oldValue, String &newValue) {
+                String value = " New value";
+				newValue = oldValue + value;
+			};
+
+	// compute: valid key
+	String resultComputeKey1AnotherHashMap
+			= anotherHashMap.compute("key1", anotherFunction);
+	String resultComputeKey2AnotherHashMap
+			= anotherHashMap.compute("key2", anotherFunction);
+
+	// Make sure the value has changed base on the anotherFunction
+	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+	ASSERT_STR("1 New value", resultComputeKey1AnotherHashMap.toString());
+	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+	ASSERT_STR("2 New value", resultComputeKey2AnotherHashMap.toString());
+
+	// compute: invalid key
+	String resultComputeInvalidKeyAnotherHashMap
+			= anotherHashMap.compute("Invalid Key", anotherFunction);
+
+	// Make sure the anotherHashMap has NOT changed base on the function
+	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+	ASSERT_EQUAL(2, anotherHashMap.size());
+	ASSERT_STR("", resultComputeInvalidKeyAnotherHashMap.toString());
+
+    /* Test with the function do nothing = notherHashMap.remove(key) */
+    // Create function
+    std::function<void (String, String, String&)> nullFunction
+            = [] (String key, String oldValue, String &newValue) {
+            };
+
+    // compute key2 with nullFunction
+    String resultComputeKey1AnotherHashMapNullFunction
+            = anotherHashMap.compute("key2", nullFunction);
+
+    // Make sure the value of key1 has NOT changed
+    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+
+    // Make sure the key2 has been removed
+    ASSERT_STR("", anotherHashMap.get("key2").toString());
+    ASSERT_EQUAL(1, anotherHashMap.size());
+    ASSERT_STR("", resultComputeKey1AnotherHashMapNullFunction.toString());
 }
