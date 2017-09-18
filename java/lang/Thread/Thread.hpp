@@ -39,12 +39,10 @@ namespace Java {
 		namespace Lang {
             class Thread : public Object, public virtual Runnable {
                 private:
-                    pthread_t original;
-                    boolean alive;
+                    boolean alive = false;
 
                     String name;
                     int priority;
-                    long eetop;
 
                     /**
                      * Whether or not to single_step this thread.
@@ -64,7 +62,7 @@ namespace Java {
                     /**
                      * What will be run.
                      */
-                    Runnable *target;
+                    Runnable *target = NULL;
 
                     // TODO(thoangminh): Need Class ThreadGroup
                     /**

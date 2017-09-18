@@ -25,6 +25,7 @@
  */
 
 #include "Thread.hpp"
+#include <utility>
 
 using namespace Java::Lang;
 
@@ -115,7 +116,7 @@ long Thread::nextThreadID() {
 }
 
 void Thread::start() {
-    if(target && !isAlive()) {
+    if (target && !isAlive()) {
         threadObject = std::move(std::thread(&Thread::run, this));
     }
 }
@@ -125,7 +126,7 @@ void Thread::join() {
 }
 
 void Thread::join(long millis) {
-    if(millis > 0) {
+    if (millis > 0) {
         semahoreObject.tryAcquire(1, millis);
     } else {
         semahoreObject.acquire();
