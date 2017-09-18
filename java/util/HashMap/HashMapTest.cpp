@@ -65,7 +65,7 @@ TEST(JavaUtil, HashMapConstructor) {
 	ASSERT_STR(expected.toString(), actual.toString());
 
 	expected = container.get("key");
-	actual= hashMap.get("key");
+	actual = hashMap.get("key");
 
 	ASSERT_FALSE(expected.isEmpty());
 	ASSERT_FALSE(actual.isEmpty());
@@ -534,7 +534,7 @@ TEST(JavaUtil, HashMapReplaceAll) {
     hashMap.put("key2", 2);
 
     // Create function
-    std::function<void (String, Integer, Integer&)> function
+    std::function<void(String, Integer, Integer&)> function
             = [] (String key, Integer value, Integer &result) {
         result = value * 2;
     };
@@ -553,7 +553,7 @@ TEST(JavaUtil, HashMapReplaceAll) {
     anotherHashMap.put("key2", "2");
 
     // Create function
-    std::function<void (String, String, String&)> anotherFunction
+    std::function<void(String, String, String&)> anotherFunction
             = [] (String key, String value, String &result) {
                 result = value + (string) " New value";
             };
@@ -574,7 +574,7 @@ TEST(JavaUtil, HashMapMerge) {
     hashMap.put("key2", 2);
 
     // Create function
-    std::function<void (Integer, Integer, Integer&)> function
+    std::function<void(Integer, Integer, Integer&)> function
             = [] (Integer oldValue, Integer value, Integer &newValue) {
                 newValue = oldValue + value;
             };
@@ -606,7 +606,7 @@ TEST(JavaUtil, HashMapMerge) {
     anotherHashMap.put("key2", "2");
 
     // Create function
-    std::function<void (String, String, String&)> anotherFunction
+    std::function<void(String, String, String&)> anotherFunction
             = [] (String oldValue, String value, String &newValue) {
                 newValue = oldValue + value;
             };
@@ -642,14 +642,14 @@ TEST(JavaUtil, HashMapCompute) {
 	hashMap.put("key2", 2);
 
 	// Create function
-	std::function<void (String, Integer, Integer&)> function
+	std::function<void(String, Integer, Integer&)> function
 			= [] (String key, Integer value, Integer &newValue) {
 				newValue = value + 10;
 			};
 
 	// compute: existent key
-	Integer resultComputeKey1HashMap = hashMap.compute("key1",function);
-	Integer resultComputeKey2HashMap = hashMap.compute("key2",function);
+	Integer resultComputeKey1HashMap = hashMap.compute("key1", function);
+	Integer resultComputeKey2HashMap = hashMap.compute("key2", function);
 
 	// Make sure the value has changed base on the function
 	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
@@ -674,7 +674,7 @@ TEST(JavaUtil, HashMapCompute) {
 	anotherHashMap.put("key2", "2");
 
 	// Create function
-	std::function<void (String, String, String&)> anotherFunction
+	std::function<void(String, String, String&)> anotherFunction
 			= [] (String key, String oldValue, String &newValue) {
                 String value = " New value";
 				newValue = oldValue + value;
@@ -704,7 +704,7 @@ TEST(JavaUtil, HashMapCompute) {
 
     /* Test with the function do nothing = notherHashMap.remove(key) */
     // Create function
-    std::function<void (String, String, String&)> nullFunction
+    std::function<void(String, String, String&)> nullFunction
             = [] (String key, String oldValue, String &newValue) {
             };
 
@@ -729,14 +729,16 @@ TEST(JavaUtil, HashMapComputeIfAbsent) {
     hashMap.put("key2", 2);
 
     // Create function
-    std::function<void (String, Integer, Integer&)> function
+    std::function<void(String, Integer, Integer&)> function
             = [] (String key, Integer value, Integer &newValue) {
                 newValue = 10;
             };
 
     // computeIfAbsent: existent key
-    Integer resultComputeIfAbsentKey1HashMap = hashMap.computeIfAbsent("key1",function);
-    Integer resultComputeIfAbsentKey2HashMap = hashMap.computeIfAbsent("key2",function);
+    Integer resultComputeIfAbsentKey1HashMap
+            = hashMap.computeIfAbsent("key1",function);
+    Integer resultComputeIfAbsentKey2HashMap
+            = hashMap.computeIfAbsent("key2",function);
 
     // Make sure the value has NOT changed base on the function
     ASSERT_EQUAL(1, hashMap.get("key1").intValue());
@@ -777,14 +779,16 @@ TEST(JavaUtil, HashMapComputeIfPresent) {
     hashMap.put("key2", 2);
 
     // Create function
-    std::function<void (String, Integer, Integer&)> function
+    std::function<void(String, Integer, Integer&)> function
             = [] (String key, Integer oldValue, Integer &newValue) {
                 newValue = oldValue + 10;
             };
 
     // computeIfPresent: existent key
-    Integer resultComputeIfPresentKey1HashMap = hashMap.computeIfPresent("key1",function);
-    Integer resultComputeIfPresentKey2HashMap = hashMap.computeIfPresent("key2",function);
+    Integer resultComputeIfPresentKey1HashMap
+            = hashMap.computeIfPresent("key1", function);
+    Integer resultComputeIfPresentKey2HashMap
+            = hashMap.computeIfPresent("key2", function);
 
     // Make sure the value has CHANGED base on the function
     ASSERT_EQUAL(11, hashMap.get("key1").intValue());
@@ -816,7 +820,7 @@ TEST(JavaUtil, HashMapComputeIfPresent) {
     ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
 
     // Create nullFunction
-    std::function<void (String, Integer, Integer&)> nullFunction
+    std::function<void(String, Integer, Integer&)> nullFunction
             = [] (String key, Integer oldValue, Integer &newValue) {
             };
 
@@ -840,7 +844,7 @@ TEST(JavaUtil, HashMapForEach) {
     hashMap.put("key2", 2);
 
     // Create function
-    std::function<void (String&, Integer&)> function
+    std::function<void(String&, Integer&)> function
             = [] (String &key, Integer &value) {
                 value = value + 10;
             };

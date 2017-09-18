@@ -33,6 +33,7 @@
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
+#include <map>
 #include <functional>
 
 namespace Java {
@@ -73,19 +74,32 @@ namespace Java {
 			 */
 			~HashMap() {
 			}
+
 		public:
+            /**
+             * @return begin iterator of this object
+             */
 			IteratorType begin() {
 				return this->original.begin();
 			}
 
+            /**
+             * @return const begin iterator of this object
+             */
 			ConstIteratorType begin() const {
 				return this->original.begin();
 			}
 
+            /**
+             * @return end iterator of this object
+             */
 			IteratorType end() {
 				return this->original.end();
 			}
 
+            /**
+             * @return const end iterator of this object
+             */
 			ConstIteratorType end() const {
 				return this->original.end();
 			}
@@ -98,10 +112,14 @@ namespace Java {
 			 */
 			boolean equals(const HashMap<Key, Value> &anotherHashMap)  {
 
-                for(auto const &thisElement : this->original) {
+                if (this->size() != anotherHashMap.size()) {
+                    return false;
+                }
+
+                for (auto const &thisElement : this->original) {
                     Value anotherValue = anotherHashMap.get(thisElement.first);
 
-                    if(thisElement.second != anotherValue) {
+                    if (thisElement.second != anotherValue) {
                         return false;
                     }
                 }
@@ -109,14 +127,13 @@ namespace Java {
                 return true;
 			}
 
-			// TODO(thoangminh): We will support this method later
 			/**
 			 * forEach method: loop a HashMap and do the function action
 			 *
 			 * @param action
 			 */
-			void forEach(BiConsumer<void (Key&, Value&)> action) {
-                for(auto &element : this->original) {
+			void forEach (BiConsumer<void (Key&, Value&)> action) {
+                for (auto &element : this->original) {
                     Key nullKey;
 
                     Value oldValue = element.second;
@@ -153,7 +170,7 @@ namespace Java {
 			 */
 			int hashCode();
 
-			// TODO(thoangminh): We will support this method later
+			// TODO(thoangminh): We will support after finishing class Set
 			/**
 			 * Returns a Set view of the keys contained in this map.
 			 * The set is backed by the map, so changes to the map are
@@ -175,15 +192,10 @@ namespace Java {
 			 *
 			 * @return a set view of the keys contained in this map
 			 */
-//			Set<K> keySet() {
-//				Set<K> ks;
-//				return (ks = keySet) == null ? (keySet = new KeySet()) : ks;
+//			Set<Key> keySet() {
+//				Set<Key> resultKeySet;
+//				return (resultKeySet = keySet) == null ? (keySet = new KeySet()) : resultKeySet;
 //			}
-
-//			final class KeySet extends AbstractSet<K> {
-//				public final int size() {
-//					return size;
-//				}
 
 			/**
 			 * If the specified key is not already associated
@@ -208,7 +220,7 @@ namespace Java {
                 Value nullValue;
                 Value newValue;
 
-                if(oldValue != nullValue) {
+                if (oldValue != nullValue) {
                     remappingFunction(oldValue, value, newValue);
                     this->replace(key, newValue);
 
@@ -287,16 +299,17 @@ namespace Java {
 			 * @return 	Value 		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			Value compute(Key key,
-                          BiFunction<void (Key, Value, Value&)> remappingFunction) {
+			Value compute (Key key,
+                          BiFunction<void (Key, Value, Value&)>
+                          remappingFunction) {
                 Value oldValue = this->get(key);
                 Value nullValue;
                 Value newValue;
 
-                if(oldValue != nullValue) {
+                if (oldValue != nullValue) {
                     remappingFunction(key, oldValue, newValue);
 
-					if(newValue != nullValue) {
+					if (newValue != nullValue) {
 						this->replace(key, newValue);
 
 						return newValue;
@@ -324,18 +337,18 @@ namespace Java {
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-			Value computeIfAbsent(Key key,
+			Value computeIfAbsent (Key key,
                                 BiFunction<void (Key , Value, Value&)>
                                 mappingFunction) {
                 Value oldValue = this->get(key);
                 Value nullValue;
                 Value newValue;
 
-                if(oldValue != nullValue) {
+                if (oldValue != nullValue) {
                     return oldValue;
                 }
 
-                if(oldValue == nullValue) {
+                if (oldValue == nullValue) {
                     this->remove(key);
 
                     mappingFunction(key, oldValue, newValue);
@@ -356,18 +369,18 @@ namespace Java {
 			 * @return 	Value  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-            Value computeIfPresent(Key key,
+            Value computeIfPresent (Key key,
                                   BiFunction<void (Key , Value, Value&)>
                                   mappingFunction) {
                 Value oldValue = this->get(key);
                 Value nullValue;
                 Value newValue;
 
-                if(oldValue == nullValue) {
+                if (oldValue == nullValue) {
                     return nullValue;
                 }
 
-                if(oldValue != nullValue) {
+                if (oldValue != nullValue) {
                     mappingFunction(key, oldValue, newValue);
 
                     if (newValue != nullValue) {
@@ -421,7 +434,7 @@ namespace Java {
 			Set<class Map<Key, Value>::Entry> entrySet() {
 				Set<class Map<Key, Value>::Entry> entrySet;
 
-				for(auto const &pair : this->original) {
+				for (auto const &pair : this->original) {
 					Map<String, String>::Entry entry(pair.first, pair.second);
 					entrySet.add(entry);
 				}
@@ -629,7 +642,8 @@ namespace Java {
 				Value result;
 				auto const iteratorToString = this->original.find(key);
 
-				if (iteratorToString == this->original.end() || iteratorToString->second != oldValue) {
+				if (iteratorToString == this->original.end()
+                    || iteratorToString->second != oldValue) {
 					return false;
 				}
 
@@ -643,7 +657,7 @@ namespace Java {
 			 *
 			 * @param function
 			 */
-			void replaceAll(BiFunction<void(Key, Value, Value&)> function){
+			void replaceAll(BiFunction<void(Key, Value, Value&)> function) {
                 for (auto &element: this->original) {
                     Key key = element.first;
                     Value value = element.second;
@@ -660,7 +674,7 @@ namespace Java {
 				return this->original.size();
 			}
 
-            // TODO(thoangminh): We will support this method later
+            // TODO(thoangminh): We will support after finishing class Collection
 			/**
 			 * Returns a Collection view of the values contained in this map
 			 * @return Collection<Value> - a view of the values contained in this map
@@ -690,10 +704,12 @@ namespace Java {
 					 iteratorToString != this->original.end();
 					 ++iteratorToString) {
 					
-					if (instanceof<String>(iteratorToString->first)) {						
+					if (instanceof<String>(iteratorToString->first)) {
+
 						String first = iteratorToString->first.toString();
 						String key = this->replaceEscapeSequence(first);
 						totalString = String("\"") + key + String("\"");
+                        
 					} else {
 						totalString = iteratorToString->first.toString();
 					}
@@ -701,9 +717,11 @@ namespace Java {
 					totalString += colonAndSpace;
 					
 					if (instanceof<String>(iteratorToString->second)) {
+
 						String second = iteratorToString->second.toString();
 						String value = this->replaceEscapeSequence(second);
 						totalString += String("\"") + value + String("\"");
+
 					} else {
 						totalString += iteratorToString->second.toString();
 					}
