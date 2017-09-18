@@ -43,12 +43,13 @@ namespace Java {
 			public virtual Map<Key, Value>,
 			public virtual Cloneable,
 			public virtual Serializable {
+
 		private:
 			std::map<Key, Value> original;
 			String backup;
 			typedef typename std::map<Key, Value>::iterator IteratorType;
 			typedef typename std::map<Key, Value>::const_iterator ConstIteratorType;
-            typedef std::function<void(Key, Value, Value&)> BiFunction;
+
 		public:
 			/**
 			 * Constructs an empty HashMap
@@ -177,7 +178,8 @@ namespace Java {
 //				}
 
 			/**
-			 * If the specified key is not already associated with a value or is associated with null,
+			 * If the specified key is not already associated
+			 * with a value or is associated with null,
 			 * associates iteratorToString with the given non-null value.
 			 *
 			 * @param 	key 		key with which the resulting value is to be associated
@@ -192,66 +194,17 @@ namespace Java {
 			 * @return 	Value 		the new value associated with the specified key,
 			 * 						or null if no value is associated with the key
 			 */
-//			V merge(K key, V value,
-//					   BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
-//				if (value == null)
-//					throw new NullPointerException();
-//				if (remappingFunction == null)
-//					throw new NullPointerException();
-//				int hash = hash(key);
-//				Node<K, V>[] tab;
-//				Node<K, V> first;
-//				int n, i;
-//				int binCount = 0;
-//				TreeNode<K, V> t = null;
-//				Node<K, V> old = null;
-//				if (size > threshold || (tab = table) == null
-//					|| (n = tab.length) == 0)
-//					n = (tab = resize()).length;
-//				if ((first = tab[i = (n - 1) & hash]) != null) {
-//					if (first instanceof TreeNode)
-//					old = (t = (TreeNode<K, V>) first).getTreeNode(hash, key);
-//					else {
-//						Node<K, V> e = first;
-//						K k;
-//						do {
-//							if (e.hash == hash
-//								&& ((k = e.key) == key || (key != null && key
-//									.equals(k)))) {
-//								old = e;
-//								break;
-//							}
-//							++binCount;
-//						} while ((e = e.next) != null);
-//					}
-//				}
-//				if (old != null) {
-//					V v;
-//					if (old.value != null)
-//						v = remappingFunction.apply(old.value, value);
-//					else
-//						v = value;
-//					if (v != null) {
-//						old.value = v;
-//						afterNodeAccess(old);
-//					} else
-//						removeNode(hash, key, null, false, true);
-//					return v;
-//				}
-//				if (value != null) {
-//					if (t != null)
-//						t.putTreeVal(this, tab, hash, key, value);
-//					else {
-//						tab[i] = newNode(hash, key, value, first);
-//						if (binCount >= TREEIFY_THRESHOLD - 1)
-//							treeifyBin(tab, hash);
-//					}
-//					++modCount;
-//					++size;
-//					afterNodeInsertion(true);
-//				}
-//				return value;
-//			}
+			Value merge(Key key, Value value,
+					   BiFunction <void(Value, Value, Value&)> remappingFunction) {
+                Value oldValue = this->get(key);
+
+                Value newValue;
+                remappingFunction(oldValue, value, newValue);
+
+                this->replace(key, newValue);
+
+				return newValue;
+			}
 
 			/**
 			 * Reset to initial default state.
@@ -622,7 +575,7 @@ namespace Java {
 			 *
 			 * @param function
 			 */
-			void replaceAll(BiFunction function){
+			void replaceAll(BiFunction<void(Key, Value, Value&)> function){
                 for (auto &element: this->original) {
                     Key key = element.first;
                     Value value = element.second;

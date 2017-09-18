@@ -90,19 +90,19 @@ TEST(JavaUtil, HashMapClone) {
 
 	// Create a HashMap to test to test clone()
 	HashMap<String, String> hashMap;
-	hashMap.put("some key", "123");
-	hashMap.put("another thing and key", "-44444");
+	hashMap.put("Key1", "Value of Key1");
+	hashMap.put("Key2", "Value of Key2");
 	HashMap<String, String> anotherMap = (HashMap<String, String>) hashMap.clone();
 
-	// Test actualKey = "some key" is exist in anotherMap
-	actualKey = "some key";
-	expected = "123";
+	// Test actualKey = "Key1" is exist in anotherMap
+	actualKey = "Key1";
+	expected = "Value of Key1";
 	actual = anotherMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
 
-	// Test actualKey = "another thing and key" is exist in anotherMap
-	actualKey = "another thing and key";
-	expected = "-44444";
+	// Test actualKey = "Key2" is exist in anotherMap
+	actualKey = "Key2";
+	expected = "Value of Key2";
 	actual = anotherMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
 
@@ -203,7 +203,7 @@ TEST(JavaUtil, HashMapIsEmpty) {
 	ASSERT_TRUE(actual);
 
 	// Not empty case
-	hashMap.put("some key", (float) 123.33);
+	hashMap.put("Key1", (float) 123.33);
 	ASSERT_FALSE(hashMap.isEmpty());
 }
 
@@ -213,7 +213,7 @@ TEST(JavaUtil, HashMapPut) {
 
 	// Create a HashMap to test
 	HashMap<String, String> hashMap;
-	hashMap.put("abc", "123");
+	hashMap.put("abc", "Value of Key1");
 	hashMap.put("some key here", "456");
 
 	// Make sure hashMap is not null
@@ -221,7 +221,7 @@ TEST(JavaUtil, HashMapPut) {
 
 	// Make sure the data is safe
 	// Valid key
-	expected = "123";
+	expected = "Value of Key1";
 	actual = hashMap.get("abc");
 	ASSERT_STR(expected.toString(), actual.toString());
 
@@ -234,7 +234,7 @@ TEST(JavaUtil, HashMapPut) {
 TEST(JavaUtil, HashMapPutAll) {
 	// Create a HashMap to test
 	HashMap<String, String> hashMap;
-	hashMap.put("some string", "123");
+	hashMap.put("some string", "Value of Key1");
 	hashMap.put("another key", "777");
 	hashMap.put("#!@#another", "-123");
 
@@ -276,21 +276,21 @@ TEST(JavaUtil, HashMapPutIfAbsent) {
 
 	// Create a HashMap to test
 	HashMap<String, String> hashMap;
-	hashMap.put("abc", "123");
+	hashMap.put("abc", "Value of Key1");
 
 	// Make sure the data is right before test
 	actualKey = "abc";
-	expected = "123";
+	expected = "Value of Key1";
 	actual = hashMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
 
 	// Existent key
-	expected = "123";
+	expected = "Value of Key1";
 	actual = hashMap.putIfAbsent(actualKey, "other value");
 	ASSERT_STR(expected.toString(), actual.toString());
 
 	// Make sure the value is not changed.
-	expected = "123";
+	expected = "Value of Key1";
 	actual = hashMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
 
@@ -306,7 +306,7 @@ TEST(JavaUtil, HashMapPutIfAbsent) {
 TEST(JavaUtil, HashMapRemoveKey) {
 	// Create a HashMap to test
 	HashMap<String, String> hashMap;
-	hashMap.put("some key", "!@#!@#");
+	hashMap.put("Key1", "!@#!@#");
 	hashMap.put("another key", "1111");
 
 	// Make sure the size is right
@@ -333,30 +333,30 @@ TEST(JavaUtil, HashMapRemoveKey) {
 TEST(JavaUtil, HashMapRemoveKeyValue) {
 	// Create a HashMap to test
 	HashMap<String, String> hashMap;
-	hashMap.put("some key", "123");
+	hashMap.put("Key1", "Value of Key1");
 	hashMap.put("another key", "456");
 
 	// Make sure the size is right before removing
 	ASSERT_EQUAL(2, hashMap.size());
 
 	// Make sure the data is right before removing
-	String expectedactual = "123";
-	String actual = hashMap.get("some key");
+	String expectedactual = "Value of Key1";
+	String actual = hashMap.get("Key1");
 	ASSERT_STR(expectedactual.toString(), actual.toString());
 
 	// Invalid case: right case, wrong value
-	boolean isSucceedRemove = hashMap.remove("some key", "456");
+	boolean isSucceedRemove = hashMap.remove("Key1", "456");
 	ASSERT_FALSE(isSucceedRemove);
 
 	// Test remove true by key mapped to specified value
-	isSucceedRemove = hashMap.remove("some key", "123");
+	isSucceedRemove = hashMap.remove("Key1", "Value of Key1");
 	ASSERT_TRUE(isSucceedRemove);
 }
 
 TEST(JavaUtil, HashMapReplace) {
 	// Create a HashMap to test to test
 	HashMap<String, String> hashMap;
-	hashMap.put("some key", "value");
+	hashMap.put("Key1", "value");
 	hashMap.put("key !@#", "1000");
 	hashMap.put(".;;',", "ab232");
 
@@ -381,7 +381,7 @@ TEST(JavaUtil, HashMapReplace) {
 TEST(JavaUtil, HashMapReplace2) {
 	// Create a HashMap to test to test
 	HashMap<String, String> hashMap;
-	hashMap.put("some key", "123");
+	hashMap.put("Key1", "Value of Key1");
 	hashMap.put("key123", "!@#");
 
 	// Make sure the size is right
@@ -405,15 +405,15 @@ TEST(JavaUtil, HashMapReplace2) {
 	ASSERT_STR(newValue.toString(), actual.toString());
 
 	// Replace with incorrect key/oldValue
-	key = "some key";
+	key = "Key1";
 	oldValue = "wrong value";
 	newValue = "newValue";
 	isSucceedReplace = hashMap.replace(key, oldValue, newValue);
 	ASSERT_FALSE(isSucceedReplace);
 
 	// Make sure the value is not change if replacing is failed
-	key = "some key";
-	oldValue = "123";
+	key = "Key1";
+	oldValue = "Value of Key1";
 	actual = hashMap.get(key);
 	ASSERT_STR(oldValue.toString(), actual.toString());
 }
@@ -480,27 +480,27 @@ TEST(JavaUtil, HashMapToString) {
 TEST(JavaUtil, HashMapEquals) {
     // Create a HashMap
     HashMap<String, String> hashMap;
-    hashMap.put("some key", "123");
-    hashMap.put("another thing and key", "-44444");
+    hashMap.put("Key1", "Value of Key1");
+    hashMap.put("Key2", "Value of Key2");
 
     // Create an other HashMap with the same data
     HashMap<String, String> sameHashMap;
-    sameHashMap.put("some key", "123");
-    sameHashMap.put("another thing and key", "-44444");
+    sameHashMap.put("Key1", "Value of Key1");
+    sameHashMap.put("Key2", "Value of Key2");
 
 	// Create an other HashMap with the different key
 	HashMap<String, String> differentKeyHashMap;
-	differentKeyHashMap.put("different key", "123");
-	differentKeyHashMap.put("another thing and key", "-44444");
+	differentKeyHashMap.put("different key", "Value of Key1");
+	differentKeyHashMap.put("Key2", "Value of Key2");
 
 	// Create an other HashMap with the different value
 	HashMap<String, String> differentValueHashMap;
-	differentValueHashMap.put("some key", "different value");
-	differentValueHashMap.put("another thing and key", "-44444");
+	differentValueHashMap.put("Key1", "different value");
+	differentValueHashMap.put("Key2", "Value of Key2");
 
 	// Create an other HashMap with the different size
 	HashMap<String, String> differentSizeHashMap;
-	differentSizeHashMap.put("different key", "123");
+	differentSizeHashMap.put("different key", "Value of Key1");
 
     // Test valid case
     ASSERT_TRUE(hashMap.equals(sameHashMap));
@@ -514,8 +514,8 @@ TEST(JavaUtil, HashMapEquals) {
 TEST(JavaUtil, HashMapReinitialize) {
     // Create a HashMap
     HashMap<String, String> hashMap;
-    hashMap.put("some key", "123");
-    hashMap.put("another thing and key", "-44444");
+    hashMap.put("Key1", "Value of Key1");
+    hashMap.put("Key2", "Value of Key2");
 
     // Reinitialize
     hashMap.reinitialize();
@@ -564,4 +564,72 @@ TEST(JavaUtil, HashMapReplaceAll) {
     // Make sure the value has changed base on the anotherFunction
     ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
     ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+}
+
+TEST(JavaUtil, HashMapMerge) {
+    /* Test HashMap<String, Integer> */
+    // Create a HashMap
+    HashMap<String, Integer> hashMap;
+    hashMap.put("key1", 1);
+    hashMap.put("key2", 2);
+
+    // Create function
+    std::function<void (Integer, Integer, Integer&)> function
+            = [] (Integer oldValue, Integer value, Integer &newValue) {
+                newValue = oldValue + value;
+            };
+
+    // merge: valid key
+    Integer resultMergeKey1HashMap = hashMap.merge("key1", 10, function);
+    Integer resultMergeKey2HashMap = hashMap.merge("key2", 10, function);
+
+    // Make sure the value has changed base on the function
+    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(11, resultMergeKey1HashMap.intValue());
+    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(12, resultMergeKey2HashMap.intValue());
+
+    // merge: invalid key
+    Integer resultMergeInvalidKeyHashMap
+            = hashMap.merge("Invalid Key", 10, function);
+
+    // Make sure the hashMap has NOT changed base on the function
+    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(2, hashMap.size());
+    ASSERT_EQUAL(10, resultMergeInvalidKeyHashMap.intValue());
+
+    /* Test HashMap<String, String> */
+    // Create a HashMap
+    HashMap<String, String> anotherHashMap;
+    anotherHashMap.put("key1", "1");
+    anotherHashMap.put("key2", "2");
+
+    // Create function
+    std::function<void (String, String, String&)> anotherFunction
+            = [] (String oldValue, String value, String &newValue) {
+                newValue = oldValue + value;
+            };
+
+    // merge: valid key
+    String resultMergeKey1AnotherHashMap
+            = anotherHashMap.merge("key1", " New value", anotherFunction);
+    String resultMergeKey2AnotherHashMap
+            = anotherHashMap.merge("key2", " New value", anotherFunction);
+
+    // Make sure the value has changed base on the anotherFunction
+    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+    ASSERT_STR("1 New value", resultMergeKey1AnotherHashMap.toString());
+    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+    ASSERT_STR("2 New value", resultMergeKey2AnotherHashMap.toString());
+
+    // merge: invalid key
+    String resultMergeInvalidKeyAnotherHashMap
+            = anotherHashMap.merge("Invalid Key", " New value", anotherFunction);
+
+    // Make sure the anotherHashMap has NOT changed base on the function
+    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+    ASSERT_EQUAL(2, anotherHashMap.size());
+    ASSERT_STR(" New value", resultMergeInvalidKeyAnotherHashMap.toString());
 }
