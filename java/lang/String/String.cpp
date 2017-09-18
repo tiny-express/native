@@ -32,6 +32,8 @@
 
 using namespace Java::Lang;
 
+#define DEFAULT_BUFFER_LENGTH 128
+
 String::String() {
 	this->original = strdup("\0");
 	this->size = 0;
@@ -714,7 +716,7 @@ Array<String> String::split(String regex, int limit) const {
 
 String String::print(const String &format, short value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -724,7 +726,7 @@ String String::print(const String &format, short value) {
 
 String String::print(const String &format, int value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -734,7 +736,7 @@ String String::print(const String &format, int value) {
 
 String String::print(const String &format, long value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -744,7 +746,7 @@ String String::print(const String &format, long value) {
 
 String String::print(const String &format, unsigned short value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -754,7 +756,7 @@ String String::print(const String &format, unsigned short value) {
 
 String String::print(const String &format, unsigned int value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -764,7 +766,7 @@ String String::print(const String &format, unsigned int value) {
 
 String String::print(const String &format, unsigned long value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -774,7 +776,7 @@ String String::print(const String &format, unsigned long value) {
 
 String String::print(const String &format, double value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -784,7 +786,7 @@ String String::print(const String &format, double value) {
 
 String String::print(const String &format, float value) {
     String result;
-    char buffer[256] = {0};
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
     if (length > 0) {
         result = String(buffer, length);
@@ -794,11 +796,20 @@ String String::print(const String &format, float value) {
 
 String String::print(const String &format, string value) {
     String result;
-    char buffer[256] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    char* buffer = (char*)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        free(buffer);
+        buffer = (char*)calloc(++length, sizeof(char));
+        length = snprintf(buffer, (size_t)length, format.toString(), value);
+    }
+
     if (length > 0) {
         result = String(buffer, length);
     }
+
+    free(buffer);
     return result;
 }
 
@@ -827,7 +838,8 @@ String String::print(const String &format, String value) {
 }
 
 String String::format(const String &format) {
-    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?([diuoxXfFeEgGaAcspn%])";
+    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
+            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
     String result;
     String inputString(format);
     string inputStringPtr = inputString.toString();
