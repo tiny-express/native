@@ -112,7 +112,7 @@ boolean Float::operator||(const Float &target) const {
     return (boolean) (this->original || target.original);
 }
 
-Float Float::operator=(const Float &target) {
+Float& Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
     this->originalString = string_from_float(this->original);
@@ -481,7 +481,7 @@ float Float::binary32StringTypeToFloat(string binary32StringTypeInput) {
               * static_cast<float> (pow(2, exponentAdjusted));
 
     if (isNaN) {
-        return NaN_NUMBER;
+        return Float::NaN;
     }
 
     return resultBinary32StringTypeToFloat;

@@ -24,21 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_DOUBLE_HPP_
-#define JAVA_LANG_DOUBLE_HPP_
+#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP_
+#define JAVA_LANG_DOUBLE_DOUBLE_HPP_
 
 #include "../Number/Number.hpp"
 #include <limits>
 #include "../String/String.hpp"
-
-
-#ifdef WIN32
-    #define unsigned_long_long unsigned __int64
-    #define long_long __int64
-#else  // gcc. Might not work on other compilers!
-    #define unsigned_long_long unsigned long long
-    #define long_long long long
-#endif
 
 /**
  * Bit mask to isolate the exponent field of a

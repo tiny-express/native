@@ -640,7 +640,7 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
               * pow(2, exponentAdjusted);
 
     if (isNaN) {
-        return NaN_NUMBER;
+        return Float::NaN;
     }
 
     return resultBinary64StringTypeToDouble;
