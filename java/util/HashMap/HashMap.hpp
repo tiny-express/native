@@ -334,12 +334,10 @@ namespace Java {
                     mappingFunction(key, oldValue, newValue);
 
                     this->put(key, newValue);
+                    return newValue;
                 }
-
-                return newValue;
             }
 
-            // TODO(thoangminh): We will support this method later
 			/**
 			 * If the value for the specified key is present and non-null,
 			 * attempts to compute a new mapping given the key and its current mapped value.
@@ -351,7 +349,32 @@ namespace Java {
 			 * @return 	Value  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-//			Value computeIfPresent(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
+            Value computeIfPresent(Key key,
+                                  BiFunction<void (Key , Value, Value&)>
+                                  mappingFunction) {
+                Value oldValue = this->get(key);
+                Value nullValue;
+                Value newValue;
+
+                if(oldValue == nullValue) {
+                    return nullValue;
+                }
+
+                if(oldValue != nullValue) {
+                    mappingFunction(key, oldValue, newValue);
+
+                    if (newValue != nullValue) {
+                        this->replace(key, newValue);
+
+                        return newValue;
+                    }
+
+                    if (newValue == nullValue) {
+                        this->remove(key);
+                        return nullValue;
+                    }
+                }
+            }
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
