@@ -136,6 +136,7 @@ namespace Java {
                 for (auto &element : this->original) {
                     Key nullKey;
 
+                    Key oldKey = element.first;
                     Value oldValue = element.second;
 
                     Key key = element.first;
@@ -144,7 +145,7 @@ namespace Java {
                     action(key, value);
 
                     if (key == nullKey) {
-                        this->remove(key);
+                        this->remove(oldKey);
                     }
 
                     if (value != oldValue) {

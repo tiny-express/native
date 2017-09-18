@@ -369,13 +369,19 @@ TEST(JavaUtil, HashMapReplace) {
 	// Replace the oldValue
 	String oldValue = "ab232";
 	String newValue = "250008";
-	String replaceactual = hashMap.replace(actualKey, newValue);
-	ASSERT_STR(oldValue.toString(), replaceactual.toString());
+	String actualReplace = hashMap.replace(actualKey, newValue);
+	ASSERT_STR(oldValue.toString(), actualReplace.toString());
 
 	// Make sure the old value is replaced by new value
 	expected = newValue;
 	actual = hashMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
+    
+    // Test non-existent key
+    actualKey = "Non-existent key";
+    actualReplace = hashMap.replace(actualKey, newValue);
+    ASSERT_STR("", actualReplace.toString());
+    
 }
 
 TEST(JavaUtil, HashMapReplace2) {
@@ -855,4 +861,20 @@ TEST(JavaUtil, HashMapForEach) {
     // Make sure the value has CHANGED base on the function
     ASSERT_EQUAL(11, hashMap.get("key1").intValue());
     ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+
+    // Create removeFunction
+    std::function<void(String&, Integer&)> removeFunction
+            = [] (String &key, Integer &value) {
+                String nullKey;
+                key = nullKey;
+            };
+
+    // foreach with removeFunction
+    hashMap.forEach(removeFunction);
+
+    // Make sure the value has been REMOVED
+    ASSERT_EQUAL(0, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(0, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(0, hashMap.size());
+
 }
