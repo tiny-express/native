@@ -132,25 +132,11 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach (BiConsumer<void (Key&, Value&)> action) {
+			void forEach (BiConsumer<void(Key, Value)> action) {
                 for (auto &element : this->original) {
-                    Key nullKey;
-
-                    Key oldKey = element.first;
-                    Value oldValue = element.second;
-
                     Key key = element.first;
                     Value value = element.second;
-
                     action(key, value);
-
-                    if (key == nullKey) {
-                        this->remove(oldKey);
-                    }
-
-                    if (value != oldValue) {
-                        this->replace(key, value);
-                    }
                 }
 			}
 
