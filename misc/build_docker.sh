@@ -7,10 +7,3 @@ then
     docker build -t foodtiny/native:development -f DockerfileDevelopment .
     docker push foodtiny/native:development
 fi
-
-if [[ "$TRAVIS_BRANCH" == "docker-development" ]];
-then
-    docker login -u $UP -p $DOWN
-    docker build -t foodtiny/native:development -f DockerfileDevelopment .
-    docker push foodtiny/native:development
-fi
