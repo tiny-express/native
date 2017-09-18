@@ -111,22 +111,30 @@ namespace Java {
 
 			// TODO(thoangminh): We will support this method later
 			/**
-			 * forEach method
+			 * forEach method: loop a HashMap and do the function action
+			 *
+			 * @param action
 			 */
-//			void forEach(BiConsumer<? super K, ? super V> action) {
-//				Node<K, V>[] tab;
-//				if (action == null)
-//					throw new NullPointerException();
-//				if (size > 0 && (tab = table) != null) {
-//					int mc = modCount;
-//					for (int i = 0; i < tab.length; ++i) {
-//						for (Node<K, V> e = tab[i]; e != null; e = e.next)
-//							action.accept(e.key, e.value);
-//					}
-//					if (modCount != mc)
-//						throw new ConcurrentModificationException();
-//				}
-//			}
+			void forEach(BiConsumer<void (Key&, Value&)> action) {
+                for(auto &element : this->original) {
+                    Key nullKey;
+
+                    Value oldValue = element.second;
+
+                    Key key = element.first;
+                    Value value = element.second;
+
+                    action(key, value);
+
+                    if (key == nullKey) {
+                        this->remove(key);
+                    }
+
+                    if (value != oldValue) {
+                        this->replace(key, value);
+                    }
+                }
+			}
 
             // TODO(thoangminh): We will support this method later
 			/**
@@ -300,7 +308,6 @@ namespace Java {
                 return nullValue;
             }
 
-            // TODO(thoangminh): We will support this method later
 			/**
 			 * If the specified key is not already associated
 			 * with a value (or is mapped to null),
@@ -421,12 +428,6 @@ namespace Java {
 
 				return entrySet;
 			}
-
-			/**
-			 * Don't support this method
-			 * Instead use: for (auto const &element: hashMap) {}
-			 */
-//			void forEach(BiConsumer<? super Key,? super Value> action);
 
 			/**
 			 * Returns the value to which the specified key is mapped,

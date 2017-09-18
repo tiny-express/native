@@ -831,3 +831,24 @@ TEST(JavaUtil, HashMapComputeIfPresent) {
     ASSERT_EQUAL(2, hashMap.size());
     ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
 }
+
+TEST(JavaUtil, HashMapForEach) {
+    /* Test HashMap<String, Integer> */
+    // Create a HashMap
+    HashMap<String, Integer> hashMap;
+    hashMap.put("key1", 1);
+    hashMap.put("key2", 2);
+
+    // Create function
+    std::function<void (String&, Integer&)> function
+            = [] (String &key, Integer &value) {
+                value = value + 10;
+            };
+
+    // foreach
+    hashMap.forEach(function);
+
+    // Make sure the value has CHANGED base on the function
+    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+}
