@@ -76,15 +76,16 @@ TEST(JavaLang, ThreadConstructor) {
 TEST(JavaLang, ThreadRun) {
     long expect = 0xb00b;
     long result = 0;
+    RunnableTarget1* target = new RunnableTarget1();
 
     {
-        RunnableTarget1 target;
-        Thread thread(&target);
+        Thread thread(target);
         thread.start();
         thread.join();
-        result = target.value;
+        result = target->value;
     }
 
+    delete target;
     ASSERT_EQUAL(expect, result);
 }
 
