@@ -8,13 +8,6 @@ then
     docker push foodtiny/native:development
 fi
 
-if [[ "$TRAVIS_BRANCH" == "master" ]];
-then
-    docker login -u $UP -p $DOWN
-    docker build -t foodtiny/native:latest -f DockerfileMaster .
-    docker push foodtiny/native:latest
-fi
-
 if [[ "$TRAVIS_BRANCH" == "docker-development" ]];
 then
     docker login -u $UP -p $DOWN
