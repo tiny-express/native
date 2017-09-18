@@ -142,7 +142,7 @@ namespace Java {
 //                    volatile Interruptible blocker;
 //                    const Object blockerLock = new Object();
 
-                    std::thread* threadObject;
+                    std::thread threadObject;
                     std::mutex mutexObject;
                     Java::Util::Concurrent::Semaphore semahoreObject;
 

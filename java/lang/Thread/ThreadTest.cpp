@@ -74,18 +74,18 @@ TEST(JavaLang, ThreadConstructor) {
 }
 
 TEST(JavaLang, ThreadRun) {
-//    long expect = 0xb00b;
-//    long result = 0;
-//
-//    {
-//        RunnableTarget1 target;
-//        Thread thread(&target);
-//        thread.start();
-//        thread.join();
-//        result = target.value;
-//    }
-//
-//    ASSERT_EQUAL(expect, result);
+    long expect = 0xb00b;
+    long result = 0;
+
+    {
+        RunnableTarget1 target;
+        Thread thread(&target);
+        thread.start();
+        thread.join();
+        result = target.value;
+    }
+
+    ASSERT_EQUAL(expect, result);
 }
 
 TEST(JavaLang, ThreadSetDaemon) {

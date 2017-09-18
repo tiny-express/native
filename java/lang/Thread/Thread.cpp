@@ -40,14 +40,10 @@ Thread::Thread(Runnable *target) {
 }
 
 Thread::~Thread() {
-    if(threadObject) {
-        if (threadObject->joinable())
-            threadObject->join();
-        delete threadObject;
-
-//        if (semahoreObject.availablePermits() > 0)
-//            semahoreObject.release(semahoreObject.availablePermits());
-    }
+    if (threadObject.joinable())
+        threadObject.join();
+    if (semahoreObject.availablePermits() > 0)
+        semahoreObject.release(semahoreObject.availablePermits());
 }
 
 void Thread::run() {
@@ -73,7 +69,6 @@ void Thread::init(Runnable *target, String name, long stackSize) {
     this->name = name;
     this->stackSize = stackSize;
     this->tid = nextThreadID();
-    this->threadObject = NULL;
 }
 
 String Thread::getName() {
@@ -121,7 +116,7 @@ long Thread::nextThreadID() {
 
 void Thread::start() {
     if(target && !isAlive()) {
-        threadObject = new std::thread(&Thread::run, this);
+        threadObject = std::move(std::thread(&Thread::run, this));
     }
 }
 
