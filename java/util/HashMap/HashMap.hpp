@@ -33,6 +33,7 @@
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
+#include <functional>
 
 namespace Java {
 	namespace Util {
@@ -47,6 +48,7 @@ namespace Java {
 			String backup;
 			typedef typename std::map<Key, Value>::iterator IteratorType;
 			typedef typename std::map<Key, Value>::const_iterator ConstIteratorType;
+            typedef std::function<void(Key, Value, Value&)> BiFunction;
 		public:
 			/**
 			 * Constructs an empty HashMap
@@ -55,7 +57,8 @@ namespace Java {
 			}
 
 			/**
-			 * Constructs a new HashMap with the same mappings as the specified Map.
+			 * Constructs a new HashMap with the same
+			 * mappings as the specified Map.
 			 *
 			 * @param target  	the map whose mappings
 			 * 					are to be placed in this map
@@ -105,7 +108,7 @@ namespace Java {
                 return true;
 			}
 
-			// TODO(thoangminh): Need class BiFunction to implement this method
+			// TODO(thoangminh): We will support this method later
 			/**
 			 * forEach method
 			 */
@@ -124,6 +127,7 @@ namespace Java {
 //				}
 //			}
 
+            // TODO(thoangminh): We will support this method later
 			/**
 			 * Returns the hash code value for this map.  The hash code of a map is
 			 * defined to be the sum of the hash codes of each entry in the map's
@@ -138,15 +142,9 @@ namespace Java {
 			 *
 			 * @return 	the hash code value for this map
 			 */
-//			int hashCode() {
-//				int h = 0;
-//				Iterator<Entry<K, V>> i = entrySet().iterator();
-//				while (i.hasNext())
-//					h += i.next().hashCode();
-//				return h;
-//			}
+			int hashCode();
 
-			// TODO(thoangminh): Support this method later
+			// TODO(thoangminh): We will support this method later
 			/**
 			 * Returns a Set view of the keys contained in this map.
 			 * The set is backed by the map, so changes to the map are
@@ -259,15 +257,10 @@ namespace Java {
 			 * Reset to initial default state.
 			 * Called by clone and readObject.
 			 */
-//			void reinitialize() {
-//				table = null;
-//				entrySet = null;
-//				keySet = null;
-//				values = null;
-//				modCount = 0;
-//				threshold = 0;
-//				size = 0;
-//			}
+			void reinitialize() {
+                std::map<Key, Value> newMap;
+                this->original = newMap;
+			}
 
 			/**
 			 * Returns a {Collection} view of the values contained in this map.
@@ -318,7 +311,7 @@ namespace Java {
 				return result;
 			}
 
-            // TODO(thoangminh): Need class BiFunction to implement this method
+            // TODO(thoangminh): We will support this method later
 			/**
 			 * Attempts to compute a mapping for the specified key and
 			 * its current mapped value (or null if there is no current mapping).
@@ -332,7 +325,7 @@ namespace Java {
 			 */
 //			Value compute(Key key, BiFunction<? super Key,? super Value,? extends Value> remappingFunction);
 
-            // TODO(thoangminh): Need class BiFunction to implement this method
+            // TODO(thoangminh): We will support this method later
 			/**
 			 * If the specified key is not already associated
 			 * with a value (or is mapped to null),
@@ -349,7 +342,7 @@ namespace Java {
 			 */
 //			Value computeIfAbsent(Key key, Function<? super Key,? extends Value> mappingFunction);
 
-            // TODO(thoangminh): Need class BiFunction to implement this method
+            // TODO(thoangminh): We will support this method later
 			/**
 			 * If the value for the specified key is present and non-null,
 			 * attempts to compute a new mapping given the key and its current mapped value.
@@ -625,21 +618,17 @@ namespace Java {
 			}
 
 			/**
-			 * Don't support this method
-			 * Instead use: void replaceAll(const Value &value)
-			 */
-//			void replaceAll(BiFunction<? super Key,? super Value,? extends Value> function);
-
-			/**
-			 * Replace all key inside this instance with the specified value
+			 * Replace all the value base on the function
 			 *
-			 * @param Value value - value that will be assigned for all key
+			 * @param function
 			 */
-			void replaceAll(const Value &value) {
-				for (auto &element: this->original) {
-					element.second = value;
-				}
-			}
+			void replaceAll(BiFunction function){
+                for (auto &element: this->original) {
+                    Key key = element.first;
+                    Value value = element.second;
+                    function(key, value, element.second);
+                }
+            }
 
 			/**
 			 * Returns the number of key-value mappings in this map.
@@ -650,7 +639,7 @@ namespace Java {
 				return this->original.size();
 			}
 
-            // TODO(thoangminh): Support this method later
+            // TODO(thoangminh): We will support this method later
 			/**
 			 * Returns a Collection view of the values contained in this map
 			 * @return Collection<Value> - a view of the values contained in this map

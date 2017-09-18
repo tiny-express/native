@@ -418,33 +418,6 @@ TEST(JavaUtil, HashMapReplace2) {
 	ASSERT_STR(oldValue.toString(), actual.toString());
 }
 
-TEST(JavaUtil, HashMapReplaceAll) {
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("key1", "1000");
-	hashMap.put("key2", "2000");
-
-	// Make sure the data is right before test
-	String expected = "1000";
-	String actual = hashMap.get("key1");
-	ASSERT_STR(expected.toString(), actual.toString());
-
-	expected = "2000";
-	actual = hashMap.get("key2");
-	ASSERT_STR(expected.toString(), actual.toString());
-
-	// Replace all values
-	String newValue = "3000";
-
-	hashMap.replaceAll(newValue);
-	// Make sure all values was replaced
-	actual = hashMap.get("key1");
-	ASSERT_STR(newValue.toString(), actual.toString());
-
-	actual = hashMap.get("key2");
-	ASSERT_STR(newValue.toString(), actual.toString());
-}
-
 TEST(JavaUtil, HashMapSize) {
 	// Create a HashMap to test
 	HashMap<Double, String> hashMap;
@@ -536,4 +509,59 @@ TEST(JavaUtil, HashMapEquals) {
 	ASSERT_FALSE(hashMap.equals(differentKeyHashMap));
 	ASSERT_FALSE(hashMap.equals(differentValueHashMap));
 	ASSERT_FALSE(hashMap.equals(differentSizeHashMap));
+}
+
+TEST(JavaUtil, HashMapReinitialize) {
+    // Create a HashMap
+    HashMap<String, String> hashMap;
+    hashMap.put("some key", "123");
+    hashMap.put("another thing and key", "-44444");
+
+    // Reinitialize
+    hashMap.reinitialize();
+
+    // Make sure hashMap has been reinitialized
+    ASSERT_TRUE(hashMap.isEmpty());
+    ASSERT_EQUAL(0, hashMap.size());
+    ASSERT_STR("{}", hashMap.toString());
+}
+
+TEST(JavaUtil, HashMapReplaceAll) {
+    /* Test HashMap<String, Integer> */
+    // Create a HashMap
+    HashMap<String, Integer> hashMap;
+    hashMap.put("key1", 1);
+    hashMap.put("key2", 2);
+
+    // Create function
+    std::function<void (String, Integer, Integer&)> function
+            = [] (String key, Integer value, Integer &result) {
+        result = value * 2;
+    };
+
+    // replaceAll
+    hashMap.replaceAll(function);
+
+    // Make sure the value has changed base on the function
+    ASSERT_EQUAL(2, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(4, hashMap.get("key2").intValue());
+
+    /* Test HashMap<String, String> */
+    // Create a HashMap
+    HashMap<String, String> anotherHashMap;
+    anotherHashMap.put("key1", "1");
+    anotherHashMap.put("key2", "2");
+
+    // Create function
+    std::function<void (String, String, String&)> anotherFunction
+            = [] (String key, String value, String &result) {
+                result = value + (string) " New value";
+            };
+
+    // replaceAll
+    anotherHashMap.replaceAll(anotherFunction);
+
+    // Make sure the value has changed base on the anotherFunction
+    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
 }
