@@ -317,7 +317,27 @@ namespace Java {
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-//			Value computeIfAbsent(Key key, Function<? super Key,? extends Value> mappingFunction);
+			Value computeIfAbsent(Key key,
+                                BiFunction<void (Key , Value, Value&)>
+                                mappingFunction) {
+                Value oldValue = this->get(key);
+                Value nullValue;
+                Value newValue;
+
+                if(oldValue != nullValue) {
+                    return oldValue;
+                }
+
+                if(oldValue == nullValue) {
+                    this->remove(key);
+
+                    mappingFunction(key, oldValue, newValue);
+
+                    this->put(key, newValue);
+                }
+
+                return newValue;
+            }
 
             // TODO(thoangminh): We will support this method later
 			/**

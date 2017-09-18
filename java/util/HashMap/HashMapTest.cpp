@@ -106,7 +106,7 @@ TEST(JavaUtil, HashMapClone) {
 	actual = anotherMap.get(actualKey);
 	ASSERT_STR(expected.toString(), actual.toString());
 
-	// Test invalid key
+	// Test non-exist key
 	actualKey = "wrong key";
 	actual = anotherMap.get(actualKey);
 	ASSERT_TRUE(actual.isEmpty());
@@ -579,7 +579,7 @@ TEST(JavaUtil, HashMapMerge) {
                 newValue = oldValue + value;
             };
 
-    // merge: valid key
+    // merge: existent key
     Integer resultMergeKey1HashMap = hashMap.merge("key1", 10, function);
     Integer resultMergeKey2HashMap = hashMap.merge("key2", 10, function);
 
@@ -589,15 +589,15 @@ TEST(JavaUtil, HashMapMerge) {
     ASSERT_EQUAL(12, hashMap.get("key2").intValue());
     ASSERT_EQUAL(12, resultMergeKey2HashMap.intValue());
 
-    // merge: invalid key
-    Integer resultMergeInvalidKeyHashMap
+    // merge: non-existent key
+    Integer resultMergeNonExistentKeyHashMap
             = hashMap.merge("Invalid Key", 10, function);
 
     // Make sure the hashMap has NOT changed base on the function
     ASSERT_EQUAL(11, hashMap.get("key1").intValue());
     ASSERT_EQUAL(12, hashMap.get("key2").intValue());
     ASSERT_EQUAL(2, hashMap.size());
-    ASSERT_EQUAL(0, resultMergeInvalidKeyHashMap.intValue());
+    ASSERT_EQUAL(0, resultMergeNonExistentKeyHashMap.intValue());
 
     /* Test HashMap<String, String> */
     // Create a HashMap
@@ -611,7 +611,7 @@ TEST(JavaUtil, HashMapMerge) {
                 newValue = oldValue + value;
             };
 
-    // merge: valid key
+    // merge: existent key
     String resultMergeKey1AnotherHashMap
             = anotherHashMap.merge("key1", " New value", anotherFunction);
     String resultMergeKey2AnotherHashMap
@@ -623,15 +623,15 @@ TEST(JavaUtil, HashMapMerge) {
     ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
     ASSERT_STR("2 New value", resultMergeKey2AnotherHashMap.toString());
 
-    // merge: invalid key
-    String resultMergeInvalidKeyAnotherHashMap
+    // merge: non-existent key
+    String resultMergeNonExistentKeyAnotherHashMap
             = anotherHashMap.merge("Invalid Key", " New value", anotherFunction);
 
     // Make sure the anotherHashMap has NOT changed base on the function
     ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
     ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
     ASSERT_EQUAL(2, anotherHashMap.size());
-    ASSERT_STR("", resultMergeInvalidKeyAnotherHashMap.toString());
+    ASSERT_STR("", resultMergeNonExistentKeyAnotherHashMap.toString());
 }
 
 TEST(JavaUtil, HashMapCompute) {
@@ -647,7 +647,7 @@ TEST(JavaUtil, HashMapCompute) {
 				newValue = value + 10;
 			};
 
-	// compute: valid key
+	// compute: existent key
 	Integer resultComputeKey1HashMap = hashMap.compute("key1",function);
 	Integer resultComputeKey2HashMap = hashMap.compute("key2",function);
 
@@ -657,15 +657,15 @@ TEST(JavaUtil, HashMapCompute) {
 	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
 	ASSERT_EQUAL(12, resultComputeKey2HashMap.intValue());
 
-	// compute: invalid key
-	Integer resultComputeInvalidKeyHashMap
+	// compute: non-existent key
+	Integer resultComputeNonExistentKeyHashMap
 			= hashMap.compute("Invalid Key", function);
 
 	// Make sure the hashMap has NOT changed base on the function
 	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
 	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
 	ASSERT_EQUAL(2, hashMap.size());
-	ASSERT_EQUAL(0, resultComputeInvalidKeyHashMap.intValue());
+	ASSERT_EQUAL(0, resultComputeNonExistentKeyHashMap.intValue());
 
 	/* Test HashMap<String, String> */
 	// Create a HashMap
@@ -680,7 +680,7 @@ TEST(JavaUtil, HashMapCompute) {
 				newValue = oldValue + value;
 			};
 
-	// compute: valid key
+	// compute: existent key
 	String resultComputeKey1AnotherHashMap
 			= anotherHashMap.compute("key1", anotherFunction);
 	String resultComputeKey2AnotherHashMap
@@ -692,15 +692,15 @@ TEST(JavaUtil, HashMapCompute) {
 	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
 	ASSERT_STR("2 New value", resultComputeKey2AnotherHashMap.toString());
 
-	// compute: invalid key
-	String resultComputeInvalidKeyAnotherHashMap
+	// compute: non-existent key
+	String resultComputeNonExistentKeyAnotherHashMap
 			= anotherHashMap.compute("Invalid Key", anotherFunction);
 
 	// Make sure the anotherHashMap has NOT changed base on the function
 	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
 	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
 	ASSERT_EQUAL(2, anotherHashMap.size());
-	ASSERT_STR("", resultComputeInvalidKeyAnotherHashMap.toString());
+	ASSERT_STR("", resultComputeNonExistentKeyAnotherHashMap.toString());
 
     /* Test with the function do nothing = notherHashMap.remove(key) */
     // Create function
@@ -719,4 +719,52 @@ TEST(JavaUtil, HashMapCompute) {
     ASSERT_STR("", anotherHashMap.get("key2").toString());
     ASSERT_EQUAL(1, anotherHashMap.size());
     ASSERT_STR("", resultComputeKey1AnotherHashMapNullFunction.toString());
+}
+
+TEST(JavaUtil, HashMapComputeIfAbsent) {
+    /* Test HashMap<String, Integer> */
+    // Create a HashMap
+    HashMap<String, Integer> hashMap;
+    hashMap.put("key1", 1);
+    hashMap.put("key2", 2);
+
+    // Create function
+    std::function<void (String, Integer, Integer&)> function
+            = [] (String key, Integer value, Integer &newValue) {
+                newValue = 10;
+            };
+
+    // computeIfAbsent: existent key
+    Integer resultComputeIfAbsentKey1HashMap = hashMap.computeIfAbsent("key1",function);
+    Integer resultComputeIfAbsentKey2HashMap = hashMap.computeIfAbsent("key2",function);
+
+    // Make sure the value has NOT changed base on the function
+    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(1, resultComputeIfAbsentKey1HashMap.intValue());
+    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(2, resultComputeIfAbsentKey2HashMap.intValue());
+
+    // computeIfAbsent: non-existent key
+    Integer resultComputeIfAbsentNonExistentKeyHashMap
+            = hashMap.computeIfAbsent("Invalid Key", function);
+
+    // Make sure the "Invalid Key" and its value are existent
+    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
+    ASSERT_EQUAL(3, hashMap.size());
+    ASSERT_EQUAL(10, resultComputeIfAbsentNonExistentKeyHashMap.intValue());
+
+    // computeIfAbsent: "key3" has default value
+    hashMap.put("key3", 0);
+    Integer resultComputeIfAbsentDefaultValueHashMap
+            = hashMap.computeIfAbsent("key3", function);
+
+    // Make sure the value of "key3" has changed
+    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
+    ASSERT_EQUAL(10, hashMap.get("key3").intValue());
+    ASSERT_EQUAL(4, hashMap.size());
+    ASSERT_EQUAL(10, resultComputeIfAbsentDefaultValueHashMap.intValue());
 }
