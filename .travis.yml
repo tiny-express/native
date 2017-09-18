@@ -6,13 +6,13 @@ os:
 compiler:
 - gcc
 addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-        packages:
-            - g++-4.8
-            - lcov
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.6
+    packages:
+    - g++-4.8
+    - lcov
 before_script:
 - export CC=gcc-4.8
 - export CXX=g++-4.8
@@ -26,6 +26,12 @@ script:
 - make native && sudo make install && sudo ldconfig
 - cd examples && ./build
 after_success:
-- cd $TRAVIS_BUILD_DIR && ./misc/codecov.sh
+- cd $TRAVIS_BUILD_DIR
+- ./misc/codecov.sh
+- ./misc/build_docker.sh
 notifications:
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
+env:
+  global:
+  - secure: WhyNNr/jjhWKne4ozRfOG8VPn+XWMioMPBn6zvbVnNpEC3CMv2k25JhouWCGZ3un1e3ANeq/McVJ/iL5xrlPKWMUUlLV6u7nCsqm2uDA3CU9irjyPX8ydQ8ryXShO573EoUbGSaYQb1i4iS91tFqvMp+xKe8CWB3WnCgSkOHn2mtPnxkBEMXqCBxl5SXW80wtaUDt3wbC0D6/84GdLyfTCaBKdNJpn8UwMsg3NByjacBODxh7paJ7o3+AZHSltB9RFAliLXmsu1VND/U/P/VzMQrJ64voDoQVXBzvBL1mBkS2tsFMUCgH/Tphfb7Fz4BWLerPTA3jsmFXJ9uzKSyx+c6wiUt1FyttcU7ShJnAsVBy43CvzzNcCveJM2dNpZFfm2H8dad6ueg22o1C7pTblaolVz4ZuEkSeOZWgMI4u8rx2zScBiVppzk4pSLvjVNnCAMbi/XcedJ5lndkqfEF3I0fHPqSJEM1ce19jCtX/8Ri90J6Y0+S7BY3jXwsjt48jGDl2SDGKRV8k2z7dsE2uo4hvtjApKC5tc0O/tKBaxC2oqd9SBkOBvuf1QWSlcM/3FYxxWoEJCYl9MrkhLwftOg5JE6GW2E1yUZpQ/CKIbGZ9xMXf56OKa+/I3fMjOd7Mlzxb2RdBsdeOBOmS+QtNyGNuIVSubjbfPxTsG49pQ=
+  - secure: GlPubgHAAJSFctsalMKyNIwNDXrHyklfvAS1z3A+LKa4ur1K4YiHdiQIuXNPSyYfmDzWjHJzgrtaGN2RDFGDZ7x62B2PXJLmzzDHC590uBJOXmX9h5N0f5M8/kdyyHkw8auPxihfXyRN4F4IvRNOpdZxJ8ij6ShyD5QC6nqrWh6dx97ygVDCNRE+/9+VwUdBP1GWd/SjH+4aId0WU2dGCqiuqzp7Q5IE2czT8w66tGXvo5RpEMDUxl5OvafGH+35F38DdtPNJWLalTooXTG4Pa9snosTwscR4jZiqvdsoSFTFvLyDzL1yUTORGLmAqx4pGEgv8rq480NNPihhx5jGUwT/eOTm++4MVBKGPA3nJbPQLNlKwZ1v9Bmzjp0RjYh1Sc2dgLEJnk7xnPttjPPUpYCzi31EKYokG0t8jnEvolyRg4JfKlDyAqbmozlaYyuHF79Z3IiZBzQx9gbF+AZ1qPQxxuF9DpjdPxAnmx52odroKMqyNhDQaYEo4i99wpAz2+NXjy/Bi/+r0SYL4sowGW8MENO0UAF3d2675RiUXq/UJ0Ssrnm4feTTmaYVOADLObcFpgDB44XiWT+yMzD7DxJcP7DxVZksp+NJyBt3wWQu9H6V71lZkLD/h8HlnHNDqudUKRC8Ck8EWwakZyRuXBLsK7EjLxnSmozR/Zcyts=
