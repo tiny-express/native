@@ -1030,7 +1030,7 @@ namespace Java {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
                             try {
                                 result += String::format(remainString, args...);
-                            } catch (IllegalArgumentException& e) {
+                            } catch (IllegalArgumentException e) {
                                 regfree(&regex);
                                 throw e;
                             }
