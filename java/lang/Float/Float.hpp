@@ -69,14 +69,14 @@ static int  MIN_EXPONENT      = -126;
 /**
  * Init Float::MAX_VALUE
  */
-static constexpr float initFloatMaxValue () noexcept {
+static  float initFloatMaxValue () noexcept {
 	return (float) ((2 - pow(2, -23)) * pow(2, 127));
 }
 
 /**
  * Init Float::MIN_VALUE
  */
-static constexpr float initFloatMinValue () noexcept {
+static float initFloatMinValue () noexcept {
 	return (float) pow(2, -149);
 }
 

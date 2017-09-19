@@ -1028,12 +1028,13 @@ namespace Java {
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
-                            try {
-                                result += String::format(remainString, args...);
-                            } catch (IllegalArgumentException e) {
-                                regfree(&regex);
-                                throw e;
-                            }
+                            result += String::format(remainString, args...);
+//                            try {
+//
+//                            } catch (IllegalArgumentException e) {
+//                                regfree(&regex);
+//                                throw e;
+//                            }
                             break;
                         }
                     }
