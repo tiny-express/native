@@ -24,26 +24,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP
-#define JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP
+#ifndef JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP
+#define JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP
 
-#include "../ClientErrorException/ClientErrorException.hpp"
+#include "../WebApplicationException/WebApplicationException.hpp"
 
 using namespace Java::Lang;
 
 namespace Javax {
     namespace Ws  {
         namespace Rs {
-            class BadRequestException : public ClientErrorException {
+            class ClientErrorException : public WebApplicationException {
             public:
-                BadRequestException();
-                BadRequestException(String message);
-                BadRequestException(String message, Throwable *cause);
-                BadRequestException(Throwable *cause);
-            };  // class BadRequestException
+                ClientErrorException();
+                ClientErrorException(String message);
+                ClientErrorException(String message, Throwable *cause);
+                ClientErrorException(Throwable *cause);
+            };  // class ClientErrorException
         } // namespace Rs
     }  // namespace Ws
 }  // namespace Javax
 
 
-#endif // JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP
+#endif // JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP

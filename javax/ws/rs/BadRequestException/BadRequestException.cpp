@@ -28,14 +28,14 @@
 
 using namespace Javax::Ws::Rs;
 
-BadRequestException::BadRequestException() : Exception() {
+BadRequestException::BadRequestException() : ClientErrorException() {
 }
 
-BadRequestException::BadRequestException(String message) : Exception(message) {
+BadRequestException::BadRequestException(String message) : ClientErrorException(message) {
 }
 
-BadRequestException::BadRequestException(String message, Throwable *cause) : Exception(message, cause) {
+BadRequestException::BadRequestException(String message, Throwable *cause) : ClientErrorException(message, cause) {
 }
 
-BadRequestException::BadRequestException(Throwable *cause) : Exception(cause) {
+BadRequestException::BadRequestException(Throwable *cause) : ClientErrorException(cause) {
 }
