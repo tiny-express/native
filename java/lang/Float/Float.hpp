@@ -66,19 +66,6 @@ static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.175e-38
  */
 static int  MIN_EXPONENT      = -126;
 
-/**
- * Init Float::MAX_VALUE
- */
-static constexpr float initFloatMaxValue () noexcept {
-	return (float) ((2 - pow(2, -23)) * pow(2, 127));
-}
-
-/**
- * Init Float::MIN_VALUE
- */
-static constexpr float initFloatMinValue () noexcept {
-	return (float) pow(2, -149);
-}
 
 namespace Java {
 	namespace Lang {
@@ -156,14 +143,14 @@ namespace Java {
 			/**
              * A constant holding the largest positive finite value of type float, (2-2-23)·2127.
              */
-			static constexpr float MAX_VALUE = initFloatMaxValue(); // 3.4028235e+38f
+			static const float MAX_VALUE;// = initFloatMaxValue(); // 3.4028235e+38f
 
 			/**
              * A constant holding the smallest positive nonzero value of type float, 2^-149.
              * It is equal to the hexadecimal floating-point literal 0x0.000002P-126f
              * and also equal to Float.intBitsToFloat(0x1).
              */
-			static constexpr float MIN_VALUE = initFloatMinValue(); // 1.4e-45f
+			static const float MIN_VALUE;// = initFloatMinValue(); // 1.4e-45f
 
 			/**
              * The number of bits used to represent a float value.
