@@ -48,7 +48,6 @@ namespace Java {
         class Long;
         class Float;
         class Double;
-        class IllegalArgumentException;
 
 		class String :
 				public Object,
@@ -1028,13 +1027,12 @@ namespace Java {
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
-                            result += String::format(remainString, args...);
-//                            try {
-//
-//                            } catch (IllegalArgumentException e) {
-//                                regfree(&regex);
-//                                throw e;
-//                            }
+                            try {
+								result += String::format(remainString, args...);
+                            } catch (...) {
+                                regfree(&regex);
+                                throw;
+                            }
                             break;
                         }
                     }
