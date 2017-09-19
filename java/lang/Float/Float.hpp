@@ -142,9 +142,16 @@ namespace Java {
             /**
              * Float initialization
              *
-             * @param target
+             * @param target - Float
              */
 			Float(const Float &target);
+
+			/**
+			 * Float initialization
+			 *
+			 * @param inputString - String
+			 */
+			Float(String inputString);
 
             /**
              * Float destructor
@@ -296,20 +303,6 @@ namespace Java {
 			Float operator/=(const Float &target) const;
 
             /**
-             * Float to Char
-             *
-             * @return char
-             */
-			char charValue() const;
-
-            /**
-             * Float to String
-             *
-             * @return CString
-             */
-			string stringValue() const;
-
-            /**
              * Short value of Float
              *
              * @return short
@@ -423,7 +416,7 @@ namespace Java {
              *
              * @return  a hash code value for this object.
              */
-			int hashCode ();
+			int hashCode();
 
             /**
              * Returns a hash code for a float value; compatible with
@@ -557,7 +550,7 @@ namespace Java {
              * @return  int
              *          the bits that represent the floating-point number.
              */
-            static int floatToIntBits(float inputFloat);            
+            static int floatToIntBits(float inputFloat);
 
         private:
            /**
@@ -566,9 +559,9 @@ namespace Java {
             * In IEEE 754-2008)
             *
             * @param float
-            * @return string binary 32 bit of input
+            * @return String binary 32 bit of input
             */
-            static string floatToBinary32StringType(float floatInput);
+            static String floatToBinary32StringType(float floatInput);
 
            /**
             * Convert binary32StringType To Float
@@ -579,7 +572,8 @@ namespace Java {
             * @param  string binary32StringTypeInput
             * @return float
             */
-            static float binary32StringTypeToFloat(string binary32StringTypeInput);
+            static float binary32StringTypeToFloat(
+				   String binary32StringTypeInput);
 
            /**
             * Convert intBits To Binary64StringType
@@ -589,7 +583,7 @@ namespace Java {
             * @param  int intBitsInput
             * @return string
             */
-            static string intBitsToBinary32StringType(int intBitsInput);
+            static String intBitsToBinary32StringType(int intBitsInput);
         };
 	}  // namespace Lang
 }  // namespace Java

@@ -52,6 +52,33 @@ TEST(JavaLang, FloatConstructor) {
 	floatConstructor = 13.02;
 	Float FloatConstructor(floatConstructor);
 	ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
+
+    /* Test Float(String inputString) */
+    // Test Float::POSITIVE_INFINITY
+    Float positiveInfinityFloat((String) "inf");
+    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+                      positiveInfinityFloat.floatValue());
+
+    // Test Float::NEGATIVE_INFINITY
+    Float negativeInfinityFloat((String) "-inf");
+    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+                      negativeInfinityFloat.floatValue());
+
+    // Test Float::NaN
+    Float nanInfinityFloat((String) "nan");
+    ASSERT_FLOAT_NEAR(Float::NaN, nanInfinityFloat.floatValue());
+
+    // Test Float::MAX_VALUE
+    Float maxValueFloat((String) "340282346638528859811704183484516925440.0");
+    ASSERT_FLOAT_NEAR(Float::MAX_VALUE, maxValueFloat.floatValue());
+
+    // Test Float::MIN_NORMAL
+    Float minNormalFloat((String) "1.4013e-45");
+    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL, minNormalFloat.floatValue());
+
+    // Test Float::MIN_VALUE
+    Float minValueFloat((String) "1.17549e-38");
+    ASSERT_FLOAT_NEAR(Float::MIN_VALUE, minValueFloat.floatValue());
 }
 
 TEST(JavaLang, FloatArithmeticOperator) {
@@ -292,104 +319,6 @@ TEST(JavaLang, FloatAssignmentOperator) {
 	ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
-TEST(JavaLang, FloatCharValue) {
-	// Create variable to test
-	Float variableTestCharValue;
-	char expectedResultCharValue;
-	char actualResultCharValue;
-	
-	// Test Float::POSITIVE_INFINITY
-	variableTestCharValue = Float::POSITIVE_INFINITY;
-	expectedResultCharValue = 'i';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test Float::NEGATIVE_INFINITY
-	variableTestCharValue = Float::NEGATIVE_INFINITY;
-	expectedResultCharValue = '-';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-
-//    // Test Float::NaN
-//    variableTestCharValue = Float::NaN;
-//    expectedResultCharValue = 45;  // 110 in MacOS
-//    actualResultCharValue = variableTestCharValue.charValue();
-//    ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test Float::MAX_VALUE
-	variableTestCharValue = Float::MAX_VALUE;
-	expectedResultCharValue = '3';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test Float::MIN_NORMAL
-	variableTestCharValue = Float::MIN_NORMAL;
-	expectedResultCharValue = '1';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test Float::MIN_VALUE
-	variableTestCharValue = Float::MIN_VALUE;
-	expectedResultCharValue = '1';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test valid case
-	variableTestCharValue = 13.02;
-	expectedResultCharValue = '1';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue, actualResultCharValue);
-	
-	// Test invalid case
-	variableTestCharValue = 13.02;
-	expectedResultCharValue = '5';
-	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_NOT_EQUAL(expectedResultCharValue, actualResultCharValue);
-}
-
-TEST(JavaLang, FloatStringValue) {
-    // Create variable to test
-    Float variableTestStringValue;
-    string expectedResultStringValue;
-    string actualResultStringValue;
-
-    // Test Float::POSITIVE_INFINITY
-    variableTestStringValue = Float::POSITIVE_INFINITY;
-    expectedResultStringValue = (string) "inf";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-
-    // Test Float::NEGATIVE_INFINITY
-    variableTestStringValue = Float::NEGATIVE_INFINITY;
-    expectedResultStringValue = (string) "-inf";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-
-    // Test Float::NaN
-    variableTestStringValue = Float::NaN;
-    expectedResultStringValue = (string) "nan";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-
-    // Test Float::MAX_VALUE
-    variableTestStringValue = Float::MAX_VALUE;
-    expectedResultStringValue = (string) "3.40282e+38";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-
-    // Test Float::MIN_NORMAL
-    variableTestStringValue = Float::MIN_NORMAL;
-    expectedResultStringValue = (string) "1.4013e-45";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-
-    // Test Float::MIN_VALUE
-    variableTestStringValue = Float::MIN_VALUE;
-    expectedResultStringValue = (string) "1.17549e-38";
-    actualResultStringValue = variableTestStringValue.stringValue();
-    ASSERT_STR(expectedResultStringValue, actualResultStringValue);
-}
-
 TEST(JavaLang, FloatShortValue) {
 	// Create variable to test
 	Float variableTestShortValue;
@@ -580,7 +509,7 @@ TEST(JavaLang, FloatDoubleValue) {
     ASSERT_DBL_NEAR(Float::MAX_VALUE, variableTest.doubleValue());
 }
 
-TEST(JavaLang, FloatToString) {
+TEST(JavaLang, FloatToStringNoneParam) {
     // Create variable to test
     Float variableTestToString;
     string expectedResultToString;
@@ -621,6 +550,49 @@ TEST(JavaLang, FloatToString) {
     expectedResultToString = (string) "1.17549e-38";
     actualResultToString = variableTestToString.toString();
     ASSERT_STR(expectedResultToString, actualResultToString);
+}
+
+TEST(JavaLang, FloatToStringParamFloat) {
+    // Create variable to test
+    float variableFloat;
+    String expected;
+    String actual;
+
+    // Test Float::POSITIVE_INFINITY
+    variableFloat = Float::POSITIVE_INFINITY;
+    expected = "inf";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Test Float::NEGATIVE_INFINITY
+    variableFloat = Float::NEGATIVE_INFINITY;
+    expected = "-inf";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Test Float::NaN
+    variableFloat = Float::NaN;
+    expected = "nan";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Test Float::MAX_VALUE
+    variableFloat = Float::MAX_VALUE;
+    expected = "3.40282e+38";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Test Float::MIN_NORMAL
+    variableFloat = Float::MIN_NORMAL;
+    expected = "1.4013e-45";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
+
+    // Test Float::MIN_VALUE
+    variableFloat = Float::MIN_VALUE;
+    expected = "1.17549e-38";
+    actual = Float::toString(variableFloat);
+    ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaLang, FloatParseFloat) {
@@ -1553,7 +1525,7 @@ TEST(JavaLang, FloatCompareTo) {
 //    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
     ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
     ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0f));
     ASSERT_EQUAL(0, variableCompareTo.compareTo(-1.2f));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE));
     ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
