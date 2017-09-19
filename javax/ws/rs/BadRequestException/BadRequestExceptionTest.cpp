@@ -32,7 +32,7 @@ extern "C" {
 
 using namespace Javax::Ws::Rs;
 
-TEST (BadRequestException, Constructor) {
+TEST(BadRequestException, Constructor) {
     // Default constructor, expected empty message
     BadRequestException badRequestException;
     ASSERT_STR("", badRequestException.getMessage().toString());
@@ -44,21 +44,25 @@ TEST (BadRequestException, Constructor) {
                badRequestExceptionWithMessage.getMessage().toString());
 
     // Constructs a new BadRequestException with the specified detail message and cause.
-    BadRequestException badRequestExceptionWithMessageAndCause = BadRequestException("Illegal param",
-                                                                                  &badRequestExceptionWithMessage);
-    ASSERT_STR("Illegal param", badRequestExceptionWithMessageAndCause.getMessage().toString());
+    BadRequestException badRequestExceptionWithMessageAndCause =
+            BadRequestException("Illegal param", &badRequestExceptionWithMessage);
+    ASSERT_STR("Illegal param",
+               badRequestExceptionWithMessageAndCause.getMessage().toString());
     ASSERT_STR("Illegal param",
                badRequestExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new BadRequestException with the specified cause.
-    BadRequestException badRequestExceptionWithCause = BadRequestException(&badRequestExceptionWithMessageAndCause);
-    ASSERT_STR("Illegal param", badRequestExceptionWithCause.getCause()->getMessage().toString());
+    BadRequestException badRequestExceptionWithCause =
+            BadRequestException(&badRequestExceptionWithMessageAndCause);
+    ASSERT_STR("Illegal param",
+               badRequestExceptionWithCause.getCause()->getMessage().toString());
     ASSERT_STR("Illegal param",
                badRequestExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (BadRequestException, TryCatch) {
-    // Throw BadRequestException with message "throw BadRequestException", expected message "throw BadRequestException"
+TEST(BadRequestException, TryCatch) {
+    // Throw BadRequestException with message "throw BadRequestException"
+    // expected message "throw BadRequestException"
     BadRequestException badRequestException;
     try {
         throw BadRequestException("throw BadRequestException");
