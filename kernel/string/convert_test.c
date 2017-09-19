@@ -290,7 +290,7 @@ TEST(KernelString, ConvertToLong) {
 	ASSERT_EQUAL(0, result2);
 }
 
-TEST(String, ConvertToBoolean) {
+TEST(KernelString, ConvertToBoolean) {
     // Input a string representing 1 to convert from string to boolean
 	char *target0 = "1";
 	
@@ -370,7 +370,7 @@ TEST(KernelString, ConvertFromBoolean) {
 	free(result);
 }
 
-TEST(String, ConvertToFloat) {
+TEST(KernelString, ConvertToFloat) {
     float expected;
     float actual;
 
@@ -395,7 +395,7 @@ TEST(String, ConvertToFloat) {
     ASSERT_FLOAT_NEAR(expected, actual);
 }
 
-TEST(String, ConvertToDouble) {
+TEST(KernelString, ConvertToDouble) {
     double expected;
     double actual;
 
@@ -420,7 +420,7 @@ TEST(String, ConvertToDouble) {
     ASSERT_DBL_NEAR(expected, actual);
 }
 
-TEST(String, ConvertToChar) {
+TEST(KernelString, ConvertToChar) {
 	char expected;
 	char actual;
 	char* expectedStringType;

@@ -285,6 +285,10 @@ boolean Double::isNaN() {
 }
 
 double Double::longBitsToDouble(long longBitsInput) {
+    if(Double::isNaN(longBitsInput)) {
+        return NAN;
+    }
+
     double resultLongBitsToDouble;
     String convertLongBitsToBinary64StringType;
 
@@ -638,10 +642,6 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
               * pow(2, exponentAdjusted);
-
-    if (isNaN) {
-        return Float::NaN;
-    }
 
     return resultBinary64StringTypeToDouble;
 }
