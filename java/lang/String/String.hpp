@@ -58,6 +58,7 @@ namespace Java {
 		private:
 			string original;
 			int size = 0;
+			int capacity = 0;
             mutable int hash = 0;
 
 		public:

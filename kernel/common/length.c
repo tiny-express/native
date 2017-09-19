@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "../platform.h"
 #include "../string.h"
 #include "../common.h"
 #include "../type.h"
@@ -54,10 +55,16 @@ inline int length_##TYPE(TYPE target) {\
         return len; \
 }
 
-//#ifndef __linux__
+#ifndef LINUX
 P_LEN(char);
-//#endif
-P_P_LEN(char);NUM_LEN(short);NUM_LEN(int);NUM_LEN(long);NUM_LEN(double);NUM_LEN(float);
+#endif
+
+P_P_LEN(char);
+NUM_LEN(short);
+NUM_LEN(int);
+NUM_LEN(long);
+NUM_LEN(double);
+NUM_LEN(float);
 
 /**
  * Is string empty ?

@@ -34,29 +34,39 @@ using namespace Java::Lang;
 
 String::String() {
 	this->original = strdup("\0");
-	this->size = 0;
+	this->capacity = 1;
 }
 
 String::String(const_string target) {
+	if (target == nullptr) {
+		target = "\0";
+	}
 	this->original = strdup(target);
 	this->size = length_pointer_char((string) target);
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(string target) {
+	if (target == nullptr) {
+		target = (char*) "\0";
+	}
 	this->original = strdup(target);
 	this->size = length_pointer_char(target);
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(Array<char> &charArray) {
 	string charArrayString = charArray.toString();
-	this->original = strdup(charArrayString);// String::fromCharArray(charArray).toString();
+	this->original = strdup(charArrayString); // String::fromCharArray(charArray).toString();
 	this->size = charArray.length;
+	this->capacity = this->size == 0 ? -1 : this->size;
 	free(charArrayString);
 }
 
 String::String(char*original, int length) {
     this->original = strndup(original, length);
     this->size = length;
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 
@@ -67,27 +77,32 @@ String::String(Array<byte> &byteArray) {
 	}
 	this->original = strdup(String::fromCharArray(chars).toString());
 	this->size = chars.length;
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const String &target) {
 	this->original = strdup(target.original);
 	this->size = target.size;
+	this->capacity = this->size == 0 ? -1 : this->size;
     this->hash = target.hash;
 }
 
 String::String(const std::string &target) {
 	this->original = (string) strdup(target.c_str());
 	this->size = (int) target.size();
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuilder &stringBuilder) {
     this->original = strdup(stringBuilder.toString());
     this->size = stringBuilder.length();
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuffer &stringBuffer) {
     this->original = strdup(stringBuffer.getValue());
     this->size = stringBuffer.length();
+	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(Array<char> &charArray, int offset, int count) {
@@ -110,6 +125,7 @@ String::String(Array<char> &charArray, int offset, int count) {
     }
     this->original = strdup(charArrayString);
     this->size = count;
+	this->capacity = this->size;
     free(charArrayString);
 }
 
@@ -134,6 +150,7 @@ String::String(Array<byte> &byteArray, int offset, int length) {
     }
     this->original = strdup(charArrayString);
     this->size = length;
+	this->capacity = this->size;
 
     free(charArrayString);
 }
@@ -169,10 +186,8 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 }
 
 String String::concat(String target) {
-	string stringConcat = string_concat(this->original, target.original);
-	String result(stringConcat);
-	free(stringConcat);
-	return result;
+	*this += target.toString();
+	return *this;
 }
 
 boolean String::contains(const CharSequence &charSequence) {
@@ -201,7 +216,7 @@ boolean String::endsWith(const String &suffixString) const {
 
 String String::fromCharArray(Array<char> &charArray) {
 	string str = (string) calloc((size_t) charArray.length + 1, sizeof(char));
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -230,7 +245,7 @@ int String::indexOf(int character, int fromIndex) const {
         return this->indexOf(character);
     }
 
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -269,7 +284,7 @@ boolean String::isEmpty() const {
 }
 
 int String::lastIndexOf(int character) {
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -289,7 +304,7 @@ int String::lastIndexOf(int character, int fromIndex) {
     if (fromIndex > this->size - 1) {
         return this->lastIndexOf(character);
     }
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -368,7 +383,7 @@ Array<String> String::split(String regex) const {
 	string *splitStrings = string_split(this->original, regex.toString());
 	Array<String> strings;
 
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -397,12 +412,12 @@ boolean String::startsWith(String prefix, int thisOffset) const {
             thisOffset > (originalLength - prefixLength)) {
 		return false;
 	}
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int firstIndex = 0;
 
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int secondIndex = thisOffset;
@@ -418,7 +433,7 @@ boolean String::startsWith(String prefix, int thisOffset) const {
 Array<char> String::toCharArray() const {
 	Array<char> chars;
 
-#ifdef __linux__
+#ifdef LINUX
 	register
 #endif
 	int index = 0;
@@ -536,9 +551,23 @@ String String::operator+(const String &target) {
 }
 
 String &String::operator+=(const String &target) {
-	string result = string_concat(this->original, target.original);
-	*this = result;
-	free(result);
+	*this += target.original;
+	return *this;
+}
+
+String &String::operator+=(const_string target) {
+	int target_length = length_pointer_char((string) target);
+	int new_length = this->size + target_length;
+	if (new_length >= this->capacity) {
+		if (capacity == -1) {
+			capacity = 1;
+		}
+		this->capacity *= 2;
+		this->original = (string) realloc(this->original, this->capacity);
+	}
+	memcpy(&this->original[this->size], target, target_length + 1);
+	this->original[new_length] = '\0';
+	String result = this->original;
 	return *this;
 }
 
@@ -546,12 +575,6 @@ String &String::operator+=(const char &target) {
 	string pointerHolder = this->original;
 	string_append(&this->original, target);
 	free(pointerHolder);
-	return *this;
-}
-
-String &String::operator+=(const_string target) {
-	String appendString = target;
-	*this += appendString;
 	return *this;
 }
 
@@ -704,7 +727,10 @@ Array<String> String::split(String regex, int limit) const {
     int remainStringLength = indexOfRegexBelowLimit + regex.length();
     String remainString = this->getStringFromIndex(remainStringLength);
     Array<String> stringArrayLimit;
-    int index;
+#ifdef LINUX
+	register
+#endif
+	int index;
     for (index = 0; index < limit - 1; index++) {
         stringArrayLimit.push(stringArrayNoLimit[index]);
     }
