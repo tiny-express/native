@@ -29,6 +29,10 @@
 #include <windows.h>
 #endif
 
+#ifdef OSX
+#include <mach/mach_time.h>
+#endif
+
 #include "../datetime.h"
 #include "../string.h"
 
