@@ -112,4 +112,13 @@ TEST (KernelCommon, LengthFloat) {
 	ASSERT_EQUAL(5, length_float(input));
 }
 
+TEST (KernelCommon, IsEmpty) {
+	char *target1 = NULL;
+	ASSERT_TRUE(is_empty(target1));
 
+	char *target2 = "";
+	ASSERT_TRUE(is_empty(target2));
+
+	char *target3 = "abcd";
+	ASSERT_FALSE(is_empty(target3));
+}
