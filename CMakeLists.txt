@@ -127,7 +127,8 @@ add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
 add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME} STATIC ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME}_static STATIC ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -165,6 +166,7 @@ enable_testing()
 
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(FILES library.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")

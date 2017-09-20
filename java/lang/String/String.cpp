@@ -33,7 +33,8 @@
 using namespace Java::Lang;
 
 String::String() {
-	this->original = strdup("\0");
+	this->original = (string) malloc(1);
+	this->original[0] = '\0';
 	this->capacity = 1;
 }
 
@@ -127,7 +128,6 @@ String::String(Array<char> &charArray, int offset, int count) {
 	this->capacity = this->size;
     free(charArrayString);
 }
-
 
 String::String(Array<byte> &byteArray, int offset, int length) {
     if (offset < 0) {
@@ -539,7 +539,7 @@ String String::operator+(const string &target) {
 	int target_length = length_pointer_char((string) target);
 	int new_length = this->size + target_length;
 	if (new_length >= this->capacity) {
-		this->capacity = new_length * 2;
+		this->capacity = new_length << 1;
 		this->original = (string) realloc(this->original, this->capacity);
 	}
 	memcpy(&this->original[this->size], target, target_length + 1);
@@ -558,7 +558,14 @@ String &String::operator+=(const String &target) {
 }
 
 String &String::operator+=(const_string target) {
-	*this = *this + target;
+	int target_length = length_pointer_char((string) target);
+	int new_length = this->size + target_length;
+	if (new_length >= this->capacity) {
+		this->capacity = new_length << 1;
+		this->original = (string) realloc(this->original, this->capacity);
+	}
+	memcpy(&this->original[this->size], target, target_length + 1);
+	this->original[new_length + 1] = '\0';
 	return *this;
 }
 
