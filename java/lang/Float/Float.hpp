@@ -66,20 +66,6 @@ static float MIN_VALUE = std::numeric_limits<float>::min(); // 1.175e-38
  */
 static int  MIN_EXPONENT      = -126;
 
-/**
- * Init Float::MAX_VALUE
- */
-static  float initFloatMaxValue () noexcept {
-	return (float) ((2 - pow(2, -23)) * pow(2, 127));
-}
-
-/**
- * Init Float::MIN_VALUE
- */
-static float initFloatMinValue () noexcept {
-	return (float) pow(2, -149);
-}
-
 namespace Java {
 	namespace Lang {
 
