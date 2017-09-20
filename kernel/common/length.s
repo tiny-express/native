@@ -43,6 +43,6 @@ length_pointer_char:
     cld
 repne scasb
 	not	%rcx
-	pop	%rdi
+	pop %rdi
     lea	-1(%rcx), %rax
     ret

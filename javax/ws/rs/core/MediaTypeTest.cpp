@@ -201,7 +201,8 @@ TEST(MediaType, ToString) {
     // Default constructor, expected WILDCARD
     MediaType mediaType;
     mediaType.toString();
-    ASSERT_STR(MediaType::WILDCARD.toString(), mediaType.toString());
+    ASSERT_STR("*/*", MediaType::WILDCARD.toString());
+    ASSERT_STR("*/*", mediaType.toString());
 
     // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
     MediaType mediaType2("application", "*+xml");

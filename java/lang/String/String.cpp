@@ -48,7 +48,7 @@ String::String(const_string target) {
 
 String::String(string target) {
 	if (target == nullptr) {
-		target = (char*) "\0";
+		target = (string) "\0";
 	}
 	this->original = strdup(target);
 	this->size = length_pointer_char(target);
@@ -63,12 +63,11 @@ String::String(Array<char> &charArray) {
 	free(charArrayString);
 }
 
-String::String(char*original, int length) {
+String::String(string original, int length) {
     this->original = strndup(original, length);
     this->size = length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
-
 
 String::String(Array<byte> &byteArray) {
 	Array<char> chars;
@@ -537,37 +536,29 @@ String String::subString(int beginIndex, int endIndex) const {
 }
 
 String String::operator+(const string &target) {
-	string pointerHolder = string_concat(this->original, target);
-	String result = pointerHolder;
-	free(pointerHolder);
-	return result;
+	int target_length = length_pointer_char((string) target);
+	int new_length = this->size + target_length;
+	if (new_length >= this->capacity) {
+		this->capacity = new_length * 2;
+		this->original = (string) realloc(this->original, this->capacity);
+	}
+	memcpy(&this->original[this->size], target, target_length + 1);
+	this->original[new_length + 1] = '\0';
+	return this->original;
 }
 
 String String::operator+(const String &target) {
-	string pointerHolder = string_concat(this->original, target.original);
-	String result = pointerHolder;
-	free(pointerHolder);
-	return result;
+	*this = *this + target.original;
+	return *this;
 }
 
 String &String::operator+=(const String &target) {
-	*this += target.original;
+	*this = *this + target.original;
 	return *this;
 }
 
 String &String::operator+=(const_string target) {
-	int target_length = length_pointer_char((string) target);
-	int new_length = this->size + target_length;
-	if (new_length >= this->capacity) {
-		if (capacity == -1) {
-			capacity = 1;
-		}
-		this->capacity *= 2;
-		this->original = (string) realloc(this->original, this->capacity);
-	}
-	memcpy(&this->original[this->size], target, target_length + 1);
-	this->original[new_length] = '\0';
-	String result = this->original;
+	*this = *this + target;
 	return *this;
 }
 
@@ -588,6 +579,7 @@ String &String::operator=(const String &target) {
 	}
 	this->original = strdup(target.original);
 	this->size = target.size;
+	this->capacity = target.capacity;
 	return *this;
 }
 

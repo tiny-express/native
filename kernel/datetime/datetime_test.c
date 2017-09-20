@@ -26,6 +26,7 @@
 
 #include <stdlib.h>
 #include "../datetime.h"
+#include "../string.h"
 #include "../test.h"
 
 TEST (KernelDateTime, UnixTimestampInMilliseconds) {
@@ -53,17 +54,19 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 TEST (KernelDateTime, TimestampInNanoSeconds) {
 	long first_time = timestamp();
 	ASSERT_TRUE(first_time > 1500198318489000);
-	int maxN = 20000000;
+	int maxN = 2000000;
 	int i = 0;
 	int counter = 0;
 	for (i = 0; i < maxN; i++) {
-		counter++;
-		counter--;
+		length_pointer_char(string_from_int(i));
 		counter++;
 	}
 	long last_time = timestamp();
+	ASSERT_TRUE(last_time > 0);
+	
 	ASSERT_EQUAL(maxN, counter);
-	unsigned int delta = ( last_time - first_time ) / 1000;
+	ASSERT_EQUAL(2000000, maxN);
+	unsigned int delta = (last_time - first_time) / 1000;
 	ASSERT_TRUE(delta > 50);
 }
 

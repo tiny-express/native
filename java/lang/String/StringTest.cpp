@@ -831,6 +831,7 @@ TEST(JavaLang, StringOperatorPlusEqualsString) {
 	
 	leftString += rightString;
 	ASSERT_STR("hello world", leftString.toString());
+	ASSERT_EQUAL(11, leftString.length());
 	
 	// Given 2 Strings to check "+=" operator
 	String stringTest = "";
@@ -838,17 +839,24 @@ TEST(JavaLang, StringOperatorPlusEqualsString) {
 	String stringTest2 = " Galaxy";
 	stringTest += stringTest1 + stringTest2 + (string) "!";
 	ASSERT_STR("Hello Galaxy!", stringTest.toString());
+	ASSERT_EQUAL(13, stringTest.length());
 	
 	// Check a String concat with valueOf(number) use "+=" operator
 	int number = 1;
 	stringTest = "Hello ";
 	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 1", stringTest.toString());
+	ASSERT_EQUAL(7, stringTest.length());
 	
 	// Check a String concat with valueOf(number) use "+=" operator
 	number = 1;
-	stringTest += "" + String::valueOf(number);
+	ASSERT_STR("Hello 1", stringTest.toString());
+	ASSERT_EQUAL(7, stringTest.length());
+	stringTest += "";
+	ASSERT_STR("Hello 1", stringTest.toString());
+	stringTest += String::valueOf(number);
 	ASSERT_STR("Hello 11", stringTest.toString());
+	ASSERT_EQUAL(8, stringTest.length());
 }
 
 TEST(JavaLang, StringMemoryCheck) {
