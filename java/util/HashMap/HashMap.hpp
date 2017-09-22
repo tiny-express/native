@@ -36,6 +36,8 @@
 #include <map>
 #include <functional>
 
+//#define BiFunction std::function
+
 namespace Java {
 	namespace Util {
 		template <class Key, class Value>
@@ -201,21 +203,21 @@ namespace Java {
 			 * @return 	Value 		the new value associated with the specified key,
 			 * 						or null if no value is associated with the key
 			 */
-			Value merge(Key key, Value value,
-					   BiFunction <void(Value, Value, Value&)> remappingFunction) {
-                Value oldValue = this->get(key);
-                Value nullValue;
-                Value newValue;
-
-                if (oldValue != nullValue) {
-                    remappingFunction(oldValue, value, newValue);
-                    this->replace(key, newValue);
-
-                    return newValue;
-                }
-
-				return nullValue;
-			}
+//			Value merge(Key key, Value value,
+//					   BiFunction <void(Value, Value, Value&)> remappingFunction) {
+//                Value oldValue = this->get(key);
+//                Value nullValue;
+//                Value newValue;
+//
+//                if (oldValue != nullValue) {
+//                    remappingFunction(oldValue, value, newValue);
+//                    this->replace(key, newValue);
+//
+//                    return newValue;
+//                }
+//
+//				return nullValue;
+//			}
 
 			/**
 			 * Reset to initial default state.
@@ -286,27 +288,27 @@ namespace Java {
 			 * @return 	Value 		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-			Value compute (Key key,
-                          BiFunction<void (Key, Value, Value&)>
-                          remappingFunction) {
-                Value oldValue = this->get(key);
-                Value nullValue;
-                Value newValue;
-
-                if (oldValue != nullValue) {
-                    remappingFunction(key, oldValue, newValue);
-
-					if (newValue != nullValue) {
-						this->replace(key, newValue);
-
-						return newValue;
-					}
-
-					this->remove(key);
-                }
-
-                return nullValue;
-            }
+//			Value compute (Key key,
+//                          BiFunction<void (Key, Value, Value&)>
+//                          remappingFunction) {
+//                Value oldValue = this->get(key);
+//                Value nullValue;
+//                Value newValue;
+//
+//                if (oldValue != nullValue) {
+//                    remappingFunction(key, oldValue, newValue);
+//
+//					if (newValue != nullValue) {
+//						this->replace(key, newValue);
+//
+//						return newValue;
+//					}
+//
+//					this->remove(key);
+//                }
+//
+//                return nullValue;
+//            }
 
 			/**
 			 * If the specified key is not already associated
@@ -324,26 +326,26 @@ namespace Java {
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-			Value computeIfAbsent (Key key,
-                                BiFunction<void (Key , Value, Value&)>
-                                mappingFunction) {
-                Value oldValue = this->get(key);
-                Value nullValue;
-                Value newValue;
-
-                if (oldValue != nullValue) {
-                    return oldValue;
-                }
-
-                if (oldValue == nullValue) {
-                    this->remove(key);
-
-                    mappingFunction(key, oldValue, newValue);
-
-                    this->put(key, newValue);
-                    return newValue;
-                }
-            }
+//			Value computeIfAbsent (Key key,
+//                                BiFunction<void (Key , Value, Value&)>
+//                                mappingFunction) {
+//                Value oldValue = this->get(key);
+//                Value nullValue;
+//                Value newValue;
+//
+//                if (oldValue != nullValue) {
+//                    return oldValue;
+//                }
+//
+//                if (oldValue == nullValue) {
+//                    this->remove(key);
+//
+//                    mappingFunction(key, oldValue, newValue);
+//
+//                    this->put(key, newValue);
+//                    return newValue;
+//                }
+//            }
 
 			/**
 			 * If the value for the specified key is present and non-null,
@@ -356,32 +358,32 @@ namespace Java {
 			 * @return 	Value  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-            Value computeIfPresent (Key key,
-                                  BiFunction<void (Key , Value, Value&)>
-                                  mappingFunction) {
-                Value oldValue = this->get(key);
-                Value nullValue;
-                Value newValue;
-
-                if (oldValue == nullValue) {
-                    return nullValue;
-                }
-
-                if (oldValue != nullValue) {
-                    mappingFunction(key, oldValue, newValue);
-
-                    if (newValue != nullValue) {
-                        this->replace(key, newValue);
-
-                        return newValue;
-                    }
-
-                    if (newValue == nullValue) {
-                        this->remove(key);
-                        return nullValue;
-                    }
-                }
-            }
+//            Value computeIfPresent (Key key,
+//                                  BiFunction<void (Key , Value, Value&)>
+//                                  mappingFunction) {
+//                Value oldValue = this->get(key);
+//                Value nullValue;
+//                Value newValue;
+//
+//                if (oldValue == nullValue) {
+//                    return nullValue;
+//                }
+//
+//                if (oldValue != nullValue) {
+//                    mappingFunction(key, oldValue, newValue);
+//
+//                    if (newValue != nullValue) {
+//                        this->replace(key, newValue);
+//
+//                        return newValue;
+//                    }
+//
+//                    if (newValue == nullValue) {
+//                        this->remove(key);
+//                        return nullValue;
+//                    }
+//                }
+//            }
 
 			/**
 			 * Returns true if this map contains a mapping for the specified key.
@@ -644,13 +646,13 @@ namespace Java {
 			 *
 			 * @param function
 			 */
-			void replaceAll(BiFunction<void(Key, Value, Value&)> function) {
-                for (auto &element: this->original) {
-                    Key key = element.first;
-                    Value value = element.second;
-                    function(key, value, element.second);
-                }
-            }
+//			void replaceAll(BiFunction<void(Key, Value, Value&)> function) {
+//                for (auto &element: this->original) {
+//                    Key key = element.first;
+//                    Value value = element.second;
+//                    function(key, value, element.second);
+//                }
+//            }
 
 			/**
 			 * Returns the number of key-value mappings in this map.

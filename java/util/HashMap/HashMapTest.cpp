@@ -532,330 +532,330 @@ TEST(JavaUtil, HashMapReinitialize) {
     ASSERT_STR("{}", hashMap.toString());
 }
 
-TEST(JavaUtil, HashMapReplaceAll) {
-    /* Test HashMap<String, Integer> */
-    // Create a HashMap
-    HashMap<String, Integer> hashMap;
-    hashMap.put("key1", 1);
-    hashMap.put("key2", 2);
-
-    // Create function
-    std::function<void(String, Integer, Integer&)> function
-            = [] (String key, Integer value, Integer &result) {
-        result = value * 2;
-    };
-
-    // replaceAll
-    hashMap.replaceAll(function);
-
-    // Make sure the value has changed base on the function
-    ASSERT_EQUAL(2, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(4, hashMap.get("key2").intValue());
-
-    /* Test HashMap<String, String> */
-    // Create a HashMap
-    HashMap<String, String> anotherHashMap;
-    anotherHashMap.put("key1", "1");
-    anotherHashMap.put("key2", "2");
-
-    // Create function
-    std::function<void(String, String, String&)> anotherFunction
-            = [] (String key, String value, String &result) {
-                result = value + (string) " New value";
-            };
-
-    // replaceAll
-    anotherHashMap.replaceAll(anotherFunction);
-
-    // Make sure the value has changed base on the anotherFunction
-    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
-}
-
-TEST(JavaUtil, HashMapMerge) {
-    /* Test HashMap<String, Integer> */
-    // Create a HashMap
-    HashMap<String, Integer> hashMap;
-    hashMap.put("key1", 1);
-    hashMap.put("key2", 2);
-
-    // Create function
-    std::function<void(Integer, Integer, Integer&)> function
-            = [] (Integer oldValue, Integer value, Integer &newValue) {
-                newValue = oldValue + value;
-            };
-
-    // merge: existent key
-    Integer resultMergeKey1HashMap = hashMap.merge("key1", 10, function);
-    Integer resultMergeKey2HashMap = hashMap.merge("key2", 10, function);
-
-    // Make sure the value has changed base on the function
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(11, resultMergeKey1HashMap.intValue());
-    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(12, resultMergeKey2HashMap.intValue());
-
-    // merge: non-existent key
-    Integer resultMergeNonExistentKeyHashMap
-            = hashMap.merge("Invalid Key", 10, function);
-
-    // Make sure the hashMap has NOT changed base on the function
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(2, hashMap.size());
-    ASSERT_EQUAL(0, resultMergeNonExistentKeyHashMap.intValue());
-
-    /* Test HashMap<String, String> */
-    // Create a HashMap
-    HashMap<String, String> anotherHashMap;
-    anotherHashMap.put("key1", "1");
-    anotherHashMap.put("key2", "2");
-
-    // Create function
-    std::function<void(String, String, String&)> anotherFunction
-            = [] (String oldValue, String value, String &newValue) {
-                newValue = oldValue + value;
-            };
-
-    // merge: existent key
-    String resultMergeKey1AnotherHashMap
-            = anotherHashMap.merge("key1", " New value", anotherFunction);
-    String resultMergeKey2AnotherHashMap
-            = anotherHashMap.merge("key2", " New value", anotherFunction);
-
-    // Make sure the value has changed base on the anotherFunction
-    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-    ASSERT_STR("1 New value", resultMergeKey1AnotherHashMap.toString());
-    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
-    ASSERT_STR("2 New value", resultMergeKey2AnotherHashMap.toString());
-
-    // merge: non-existent key
-    String resultMergeNonExistentKeyAnotherHashMap
-            = anotherHashMap.merge("Invalid Key", " New value", anotherFunction);
-
-    // Make sure the anotherHashMap has NOT changed base on the function
-    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
-    ASSERT_EQUAL(2, anotherHashMap.size());
-    ASSERT_STR("", resultMergeNonExistentKeyAnotherHashMap.toString());
-}
-
-TEST(JavaUtil, HashMapCompute) {
-	/* Test HashMap<String, Integer> */
-	// Create a HashMap
-	HashMap<String, Integer> hashMap;
-	hashMap.put("key1", 1);
-	hashMap.put("key2", 2);
-
-	// Create function
-	std::function<void(String, Integer, Integer&)> function
-			= [] (String key, Integer value, Integer &newValue) {
-				newValue = value + 10;
-			};
-
-	// compute: existent key
-	Integer resultComputeKey1HashMap = hashMap.compute("key1", function);
-	Integer resultComputeKey2HashMap = hashMap.compute("key2", function);
-
-	// Make sure the value has changed base on the function
-	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-	ASSERT_EQUAL(11, resultComputeKey1HashMap.intValue());
-	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-	ASSERT_EQUAL(12, resultComputeKey2HashMap.intValue());
-
-	// compute: non-existent key
-	Integer resultComputeNonExistentKeyHashMap
-			= hashMap.compute("Invalid Key", function);
-
-	// Make sure the hashMap has NOT changed base on the function
-	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-	ASSERT_EQUAL(2, hashMap.size());
-	ASSERT_EQUAL(0, resultComputeNonExistentKeyHashMap.intValue());
-
-	/* Test HashMap<String, String> */
-	// Create a HashMap
-	HashMap<String, String> anotherHashMap;
-	anotherHashMap.put("key1", "1");
-	anotherHashMap.put("key2", "2");
-
-	// Create function
-	std::function<void(String, String, String&)> anotherFunction
-			= [] (String key, String oldValue, String &newValue) {
-                String value = " New value";
-				newValue = oldValue + value;
-			};
-
-	// compute: existent key
-	String resultComputeKey1AnotherHashMap
-			= anotherHashMap.compute("key1", anotherFunction);
-	String resultComputeKey2AnotherHashMap
-			= anotherHashMap.compute("key2", anotherFunction);
-
-	// Make sure the value has changed base on the anotherFunction
-	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-	ASSERT_STR("1 New value", resultComputeKey1AnotherHashMap.toString());
-	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
-	ASSERT_STR("2 New value", resultComputeKey2AnotherHashMap.toString());
-
-	// compute: non-existent key
-	String resultComputeNonExistentKeyAnotherHashMap
-			= anotherHashMap.compute("Invalid Key", anotherFunction);
-
-	// Make sure the anotherHashMap has NOT changed base on the function
-	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
-	ASSERT_EQUAL(2, anotherHashMap.size());
-	ASSERT_STR("", resultComputeNonExistentKeyAnotherHashMap.toString());
-
-    /* Test with the function do nothing = notherHashMap.remove(key) */
-    // Create function
-    std::function<void(String, String, String&)> nullFunction
-            = [] (String key, String oldValue, String &newValue) {
-            };
-
-    // compute key2 with nullFunction
-    String resultComputeKey1AnotherHashMapNullFunction
-            = anotherHashMap.compute("key2", nullFunction);
-
-    // Make sure the value of key1 has NOT changed
-    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
-
-    // Make sure the key2 has been removed
-    ASSERT_STR("", anotherHashMap.get("key2").toString());
-    ASSERT_EQUAL(1, anotherHashMap.size());
-    ASSERT_STR("", resultComputeKey1AnotherHashMapNullFunction.toString());
-}
-
-TEST(JavaUtil, HashMapComputeIfAbsent) {
-    /* Test HashMap<String, Integer> */
-    // Create a HashMap
-    HashMap<String, Integer> hashMap;
-    hashMap.put("key1", 1);
-    hashMap.put("key2", 2);
-
-    // Create function
-    std::function<void(String, Integer, Integer&)> function
-            = [] (String key, Integer value, Integer &newValue) {
-                newValue = 10;
-            };
-
-    // computeIfAbsent: existent key
-    Integer resultComputeIfAbsentKey1HashMap
-            = hashMap.computeIfAbsent("key1",function);
-    Integer resultComputeIfAbsentKey2HashMap
-            = hashMap.computeIfAbsent("key2",function);
-
-    // Make sure the value has NOT changed base on the function
-    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(1, resultComputeIfAbsentKey1HashMap.intValue());
-    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(2, resultComputeIfAbsentKey2HashMap.intValue());
-
-    // computeIfAbsent: non-existent key
-    Integer resultComputeIfAbsentNonExistentKeyHashMap
-            = hashMap.computeIfAbsent("Invalid Key", function);
-
-    // Make sure the "Invalid Key" and its value are existent
-    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
-    ASSERT_EQUAL(3, hashMap.size());
-    ASSERT_EQUAL(10, resultComputeIfAbsentNonExistentKeyHashMap.intValue());
-
-    // computeIfAbsent: "key3" has default value
-    hashMap.put("key3", 0);
-    Integer resultComputeIfAbsentDefaultValueHashMap
-            = hashMap.computeIfAbsent("key3", function);
-
-    // Make sure the value of "key3" has changed
-    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
-    ASSERT_EQUAL(10, hashMap.get("key3").intValue());
-    ASSERT_EQUAL(4, hashMap.size());
-    ASSERT_EQUAL(10, resultComputeIfAbsentDefaultValueHashMap.intValue());
-}
-
-TEST(JavaUtil, HashMapComputeIfPresent) {
-    /* Test HashMap<String, Integer> */
-    // Create a HashMap
-    HashMap<String, Integer> hashMap;
-    hashMap.put("key1", 1);
-    hashMap.put("key2", 2);
-
-    // Create function
-    std::function<void(String, Integer, Integer&)> function
-            = [] (String key, Integer oldValue, Integer &newValue) {
-                newValue = oldValue + 10;
-            };
-
-    // computeIfPresent: existent key
-    Integer resultComputeIfPresentKey1HashMap
-            = hashMap.computeIfPresent("key1", function);
-    Integer resultComputeIfPresentKey2HashMap
-            = hashMap.computeIfPresent("key2", function);
-
-    // Make sure the value has CHANGED base on the function
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(11, resultComputeIfPresentKey1HashMap.intValue());
-    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(12, resultComputeIfPresentKey2HashMap.intValue());
-
-    // computeIfPresent: non-existent key
-    Integer resultComputeIfPresentNonExistentKeyHashMap
-            = hashMap.computeIfPresent("Invalid Key", function);
-
-    // Make sure the data is NOT CHANGED
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(0, hashMap.get("Invalid Key").intValue());
-    ASSERT_EQUAL(2, hashMap.size());
-    ASSERT_EQUAL(0, resultComputeIfPresentNonExistentKeyHashMap.intValue());
-
-    // computeIfPresent: "key3" has default value
-    hashMap.put("key3", 0);
-    Integer resultComputeIfPresentDefaultValueHashMap
-            = hashMap.computeIfPresent("key3", function);
-
-    // Make sure the value of "key3" has NOT CHANGED
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(0, hashMap.get("key3").intValue());
-    ASSERT_EQUAL(3, hashMap.size());
-    ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
-
-    // Create nullFunction
-    std::function<void(String, Integer, Integer&)> nullFunction
-            = [] (String key, Integer oldValue, Integer &newValue) {
-            };
-
-    // computeIfPresent: "key2" with nullFunction => hashMap.remove("key3")
-    Integer resultComputeIfPresentNullFunctionHashMap
-                = hashMap.computeIfPresent("key2", nullFunction);
-
-    // Make sure the value of "key2" has been REMOVED
-    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
-    ASSERT_EQUAL(0, hashMap.get("key2").intValue());
-    ASSERT_EQUAL(0, hashMap.get("key3").intValue());
-    ASSERT_EQUAL(2, hashMap.size());
-    ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
-}
-
-TEST(JavaUtil, HashMapForEach) {
-    /* Test HashMap<String, Integer> */
-    // Create a HashMap
-    HashMap<String, Integer> hashMap;
-    hashMap.put("key1", 1);
-    hashMap.put("key2", 2);
-    Integer result;
-
-    // Create function
-    std::function<void(String, Integer)> function
-            = [] (String key, Integer value) {
-                printf("TEST(JavaUtil, HashMapForEach) is OK");
-            };
-
-    // foreach
-    hashMap.forEach(function);
-}
+//TEST(JavaUtil, HashMapReplaceAll) {
+//    /* Test HashMap<String, Integer> */
+//    // Create a HashMap
+//    HashMap<String, Integer> hashMap;
+//    hashMap.put("key1", 1);
+//    hashMap.put("key2", 2);
+//
+//    // Create function
+//    std::function<void(String, Integer, Integer&)> function
+//            = [] (String key, Integer value, Integer &result) {
+//        result = value * 2;
+//    };
+//
+//    // replaceAll
+//    hashMap.replaceAll(function);
+//
+//    // Make sure the value has changed base on the function
+//    ASSERT_EQUAL(2, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(4, hashMap.get("key2").intValue());
+//
+//    /* Test HashMap<String, String> */
+//    // Create a HashMap
+//    HashMap<String, String> anotherHashMap;
+//    anotherHashMap.put("key1", "1");
+//    anotherHashMap.put("key2", "2");
+//
+//    // Create function
+//    std::function<void(String, String, String&)> anotherFunction
+//            = [] (String key, String value, String &result) {
+//                result = value + (string) " New value";
+//            };
+//
+//    // replaceAll
+//    anotherHashMap.replaceAll(anotherFunction);
+//
+//    // Make sure the value has changed base on the anotherFunction
+//    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+//}
+//
+//TEST(JavaUtil, HashMapMerge) {
+//    /* Test HashMap<String, Integer> */
+//    // Create a HashMap
+//    HashMap<String, Integer> hashMap;
+//    hashMap.put("key1", 1);
+//    hashMap.put("key2", 2);
+//
+//    // Create function
+//    std::function<void(Integer, Integer, Integer&)> function
+//            = [] (Integer oldValue, Integer value, Integer &newValue) {
+//                newValue = oldValue + value;
+//            };
+//
+//    // merge: existent key
+//    Integer resultMergeKey1HashMap = hashMap.merge("key1", 10, function);
+//    Integer resultMergeKey2HashMap = hashMap.merge("key2", 10, function);
+//
+//    // Make sure the value has changed base on the function
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(11, resultMergeKey1HashMap.intValue());
+//    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(12, resultMergeKey2HashMap.intValue());
+//
+//    // merge: non-existent key
+//    Integer resultMergeNonExistentKeyHashMap
+//            = hashMap.merge("Invalid Key", 10, function);
+//
+//    // Make sure the hashMap has NOT changed base on the function
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(2, hashMap.size());
+//    ASSERT_EQUAL(0, resultMergeNonExistentKeyHashMap.intValue());
+//
+//    /* Test HashMap<String, String> */
+//    // Create a HashMap
+//    HashMap<String, String> anotherHashMap;
+//    anotherHashMap.put("key1", "1");
+//    anotherHashMap.put("key2", "2");
+//
+//    // Create function
+//    std::function<void(String, String, String&)> anotherFunction
+//            = [] (String oldValue, String value, String &newValue) {
+//                newValue = oldValue + value;
+//            };
+//
+//    // merge: existent key
+//    String resultMergeKey1AnotherHashMap
+//            = anotherHashMap.merge("key1", " New value", anotherFunction);
+//    String resultMergeKey2AnotherHashMap
+//            = anotherHashMap.merge("key2", " New value", anotherFunction);
+//
+//    // Make sure the value has changed base on the anotherFunction
+//    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//    ASSERT_STR("1 New value", resultMergeKey1AnotherHashMap.toString());
+//    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+//    ASSERT_STR("2 New value", resultMergeKey2AnotherHashMap.toString());
+//
+//    // merge: non-existent key
+//    String resultMergeNonExistentKeyAnotherHashMap
+//            = anotherHashMap.merge("Invalid Key", " New value", anotherFunction);
+//
+//    // Make sure the anotherHashMap has NOT changed base on the function
+//    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//    ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+//    ASSERT_EQUAL(2, anotherHashMap.size());
+//    ASSERT_STR("", resultMergeNonExistentKeyAnotherHashMap.toString());
+//}
+//
+//TEST(JavaUtil, HashMapCompute) {
+//	/* Test HashMap<String, Integer> */
+//	// Create a HashMap
+//	HashMap<String, Integer> hashMap;
+//	hashMap.put("key1", 1);
+//	hashMap.put("key2", 2);
+//
+//	// Create function
+//	std::function<void(String, Integer, Integer&)> function
+//			= [] (String key, Integer value, Integer &newValue) {
+//				newValue = value + 10;
+//			};
+//
+//	// compute: existent key
+//	Integer resultComputeKey1HashMap = hashMap.compute("key1", function);
+//	Integer resultComputeKey2HashMap = hashMap.compute("key2", function);
+//
+//	// Make sure the value has changed base on the function
+//	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//	ASSERT_EQUAL(11, resultComputeKey1HashMap.intValue());
+//	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//	ASSERT_EQUAL(12, resultComputeKey2HashMap.intValue());
+//
+//	// compute: non-existent key
+//	Integer resultComputeNonExistentKeyHashMap
+//			= hashMap.compute("Invalid Key", function);
+//
+//	// Make sure the hashMap has NOT changed base on the function
+//	ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//	ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//	ASSERT_EQUAL(2, hashMap.size());
+//	ASSERT_EQUAL(0, resultComputeNonExistentKeyHashMap.intValue());
+//
+//	/* Test HashMap<String, String> */
+//	// Create a HashMap
+//	HashMap<String, String> anotherHashMap;
+//	anotherHashMap.put("key1", "1");
+//	anotherHashMap.put("key2", "2");
+//
+//	// Create function
+//	std::function<void(String, String, String&)> anotherFunction
+//			= [] (String key, String oldValue, String &newValue) {
+//                String value = " New value";
+//				newValue = oldValue + value;
+//			};
+//
+//	// compute: existent key
+//	String resultComputeKey1AnotherHashMap
+//			= anotherHashMap.compute("key1", anotherFunction);
+//	String resultComputeKey2AnotherHashMap
+//			= anotherHashMap.compute("key2", anotherFunction);
+//
+//	// Make sure the value has changed base on the anotherFunction
+//	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//	ASSERT_STR("1 New value", resultComputeKey1AnotherHashMap.toString());
+//	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+//	ASSERT_STR("2 New value", resultComputeKey2AnotherHashMap.toString());
+//
+//	// compute: non-existent key
+//	String resultComputeNonExistentKeyAnotherHashMap
+//			= anotherHashMap.compute("Invalid Key", anotherFunction);
+//
+//	// Make sure the anotherHashMap has NOT changed base on the function
+//	ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//	ASSERT_STR("2 New value", anotherHashMap.get("key2").toString());
+//	ASSERT_EQUAL(2, anotherHashMap.size());
+//	ASSERT_STR("", resultComputeNonExistentKeyAnotherHashMap.toString());
+//
+//    /* Test with the function do nothing = notherHashMap.remove(key) */
+//    // Create function
+//    std::function<void(String, String, String&)> nullFunction
+//            = [] (String key, String oldValue, String &newValue) {
+//            };
+//
+//    // compute key2 with nullFunction
+//    String resultComputeKey1AnotherHashMapNullFunction
+//            = anotherHashMap.compute("key2", nullFunction);
+//
+//    // Make sure the value of key1 has NOT changed
+//    ASSERT_STR("1 New value", anotherHashMap.get("key1").toString());
+//
+//    // Make sure the key2 has been removed
+//    ASSERT_STR("", anotherHashMap.get("key2").toString());
+//    ASSERT_EQUAL(1, anotherHashMap.size());
+//    ASSERT_STR("", resultComputeKey1AnotherHashMapNullFunction.toString());
+//}
+//
+//TEST(JavaUtil, HashMapComputeIfAbsent) {
+//    /* Test HashMap<String, Integer> */
+//    // Create a HashMap
+//    HashMap<String, Integer> hashMap;
+//    hashMap.put("key1", 1);
+//    hashMap.put("key2", 2);
+//
+//    // Create function
+//    std::function<void(String, Integer, Integer&)> function
+//            = [] (String key, Integer value, Integer &newValue) {
+//                newValue = 10;
+//            };
+//
+//    // computeIfAbsent: existent key
+//    Integer resultComputeIfAbsentKey1HashMap
+//            = hashMap.computeIfAbsent("key1",function);
+//    Integer resultComputeIfAbsentKey2HashMap
+//            = hashMap.computeIfAbsent("key2",function);
+//
+//    // Make sure the value has NOT changed base on the function
+//    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(1, resultComputeIfAbsentKey1HashMap.intValue());
+//    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(2, resultComputeIfAbsentKey2HashMap.intValue());
+//
+//    // computeIfAbsent: non-existent key
+//    Integer resultComputeIfAbsentNonExistentKeyHashMap
+//            = hashMap.computeIfAbsent("Invalid Key", function);
+//
+//    // Make sure the "Invalid Key" and its value are existent
+//    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
+//    ASSERT_EQUAL(3, hashMap.size());
+//    ASSERT_EQUAL(10, resultComputeIfAbsentNonExistentKeyHashMap.intValue());
+//
+//    // computeIfAbsent: "key3" has default value
+//    hashMap.put("key3", 0);
+//    Integer resultComputeIfAbsentDefaultValueHashMap
+//            = hashMap.computeIfAbsent("key3", function);
+//
+//    // Make sure the value of "key3" has changed
+//    ASSERT_EQUAL(1, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(2, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(10, hashMap.get("Invalid Key").intValue());
+//    ASSERT_EQUAL(10, hashMap.get("key3").intValue());
+//    ASSERT_EQUAL(4, hashMap.size());
+//    ASSERT_EQUAL(10, resultComputeIfAbsentDefaultValueHashMap.intValue());
+//}
+//
+//TEST(JavaUtil, HashMapComputeIfPresent) {
+//    /* Test HashMap<String, Integer> */
+//    // Create a HashMap
+//    HashMap<String, Integer> hashMap;
+//    hashMap.put("key1", 1);
+//    hashMap.put("key2", 2);
+//
+//    // Create function
+//    std::function<void(String, Integer, Integer&)> function
+//            = [] (String key, Integer oldValue, Integer &newValue) {
+//                newValue = oldValue + 10;
+//            };
+//
+//    // computeIfPresent: existent key
+//    Integer resultComputeIfPresentKey1HashMap
+//            = hashMap.computeIfPresent("key1", function);
+//    Integer resultComputeIfPresentKey2HashMap
+//            = hashMap.computeIfPresent("key2", function);
+//
+//    // Make sure the value has CHANGED base on the function
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(11, resultComputeIfPresentKey1HashMap.intValue());
+//    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(12, resultComputeIfPresentKey2HashMap.intValue());
+//
+//    // computeIfPresent: non-existent key
+//    Integer resultComputeIfPresentNonExistentKeyHashMap
+//            = hashMap.computeIfPresent("Invalid Key", function);
+//
+//    // Make sure the data is NOT CHANGED
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(0, hashMap.get("Invalid Key").intValue());
+//    ASSERT_EQUAL(2, hashMap.size());
+//    ASSERT_EQUAL(0, resultComputeIfPresentNonExistentKeyHashMap.intValue());
+//
+//    // computeIfPresent: "key3" has default value
+//    hashMap.put("key3", 0);
+//    Integer resultComputeIfPresentDefaultValueHashMap
+//            = hashMap.computeIfPresent("key3", function);
+//
+//    // Make sure the value of "key3" has NOT CHANGED
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(12, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(0, hashMap.get("key3").intValue());
+//    ASSERT_EQUAL(3, hashMap.size());
+//    ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
+//
+//    // Create nullFunction
+//    std::function<void(String, Integer, Integer&)> nullFunction
+//            = [] (String key, Integer oldValue, Integer &newValue) {
+//            };
+//
+//    // computeIfPresent: "key2" with nullFunction => hashMap.remove("key3")
+//    Integer resultComputeIfPresentNullFunctionHashMap
+//                = hashMap.computeIfPresent("key2", nullFunction);
+//
+//    // Make sure the value of "key2" has been REMOVED
+//    ASSERT_EQUAL(11, hashMap.get("key1").intValue());
+//    ASSERT_EQUAL(0, hashMap.get("key2").intValue());
+//    ASSERT_EQUAL(0, hashMap.get("key3").intValue());
+//    ASSERT_EQUAL(2, hashMap.size());
+//    ASSERT_EQUAL(0, resultComputeIfPresentDefaultValueHashMap.intValue());
+//}
+//
+//TEST(JavaUtil, HashMapForEach) {
+//    /* Test HashMap<String, Integer> */
+//    // Create a HashMap
+//    HashMap<String, Integer> hashMap;
+//    hashMap.put("key1", 1);
+//    hashMap.put("key2", 2);
+//    Integer result;
+//
+//    // Create function
+//    std::function<void(String, Integer)> function
+//            = [] (String key, Integer value) {
+//                printf("TEST(JavaUtil, HashMapForEach) is OK");
+//            };
+//
+//    // foreach
+//    hashMap.forEach(function);
+//}
