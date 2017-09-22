@@ -29,7 +29,7 @@
 #include "../Type.hpp"
 
 #define P_LEN(TYPE); \
-inline int length_pointer_##TYPE(TYPE *target) {\
+int length_pointer_##TYPE(TYPE *target) {\
     if (target == NULL) return 0;\
         register TYPE*pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -38,7 +38,7 @@ inline int length_pointer_##TYPE(TYPE *target) {\
 
 // length of pointer pointer
 #define P_P_LEN(TYPE); \
-inline int length_pointer_pointer_##TYPE(TYPE **target) {\
+int length_pointer_pointer_##TYPE(TYPE **target) {\
         if (target == NULL) return 0;\
         register TYPE**pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -47,7 +47,7 @@ inline int length_pointer_pointer_##TYPE(TYPE **target) {\
 
 // Length of number
 #define NUM_LEN(TYPE); \
-inline int length_##TYPE(TYPE target) {\
+int length_##TYPE(TYPE target) {\
         char *result = string_from_##TYPE(target);\
         int len = length_pointer_char(result); \
         free(result); \

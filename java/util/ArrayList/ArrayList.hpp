@@ -27,6 +27,7 @@
 #ifndef JAVA_UTIL_ARRAY_LIST_HPP_
 #define JAVA_UTIL_ARRAY_LIST_HPP_
 
+#include "../../../kernel/String.hpp"
 #include "../../Lang.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../AbstractList/AbstractList.hpp"

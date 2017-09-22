@@ -39,7 +39,7 @@
  * @param replace_with
  * @return string
  */
-inline char *string_replace(char *target, char *find_string, char *replace_with) {
+char *string_replace(char *target, char *find_string, char *replace_with) {
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
 		return strdup("");
 	}
@@ -78,7 +78,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  * @param delimiter
  * @return array char pointer
  */
-inline char **string_split(char *target, char *delimiter) {
+char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		char **result = (char **)calloc(1, sizeof(char *));
 		return result;
@@ -125,7 +125,7 @@ void free_pointer_pointer_char(char **char_array) {
  * @param delimiter
  * @return string
  */
-inline char *string_join(char *target[], char *delimiter) {
+char *string_join(char *target[], char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		return NULL;
 	}
@@ -162,7 +162,7 @@ inline char *string_join(char *target[], char *delimiter) {
  * @param target
  * @return string
  */
-inline char *string_trim(char *target) {
+char *string_trim(char *target) {
 	if (target == NULL) {
 		return NULL;
 	}
@@ -186,7 +186,7 @@ inline char *string_trim(char *target) {
  * @param prefix
  * @return TRUE | FALSE
  */
-inline int string_startswith(char *target, char *prefix) {
+int string_startswith(char *target, char *prefix) {
 	if (target == NULL || prefix == NULL) {
 		return FALSE;
 	}
@@ -211,7 +211,7 @@ inline int string_startswith(char *target, char *prefix) {
  * @param suffix
  * @return TRUE | FALSE
  */
-inline int string_endswith(char *target, char *suffix) {
+int string_endswith(char *target, char *suffix) {
 	if (target == NULL || suffix == NULL) {
 		return FALSE;
 	}
@@ -237,7 +237,7 @@ inline int string_endswith(char *target, char *suffix) {
  * @param times
  * @return position
  */
-inline int string_index(char *target, char *subtarget, int times) {
+int string_index(char *target, char *subtarget, int times) {
 	if (is_empty(target) || is_empty(subtarget) || ( times <= 0 )) {
 		return NOT_FOUND;
 	}
@@ -277,7 +277,7 @@ inline int string_index(char *target, char *subtarget, int times) {
  * @param size
  * @return random string
  */
-inline char *string_random(char *target, int size) {
+char *string_random(char *target, int size) {
 	if (is_empty(target)) {
 		return NULL;
 	}
@@ -298,7 +298,7 @@ inline char *string_random(char *target, int size) {
  * @param subtarget
  * @return string
  */
-inline char *string_append(char **target, char subtarget) {
+char *string_append(char **target, char subtarget) {
 	asprintf(target, "%s%c", *target, subtarget);
 	return *target;
 }
@@ -310,7 +310,7 @@ inline char *string_append(char **target, char subtarget) {
  * @param subtarget
  * @return string
  */
-inline char *string_concat(char *target, char *subtarget) {
+char *string_concat(char *target, char *subtarget) {
 	if (is_empty(target)) {
 		return strdup(subtarget);
 	}
@@ -334,7 +334,7 @@ inline char *string_concat(char *target, char *subtarget) {
  * @param to
  * @return string
  */
-inline char *string_from_to(char *target, int from, int to) {
+char *string_from_to(char *target, int from, int to) {
 	return segment_pointer_char(target, from, to);
 }
 
@@ -345,7 +345,7 @@ inline char *string_from_to(char *target, int from, int to) {
  * @param from
  * @return
  */
-inline char *string_from(char *target, int from) {
+char *string_from(char *target, int from) {
 	return string_from_to(target, from, length_pointer_char(target));
 }
 
@@ -356,7 +356,7 @@ inline char *string_from(char *target, int from) {
  * @param to
  * @return
  */
-inline char *string_to(char *target, int to) {
+char *string_to(char *target, int to) {
 	return string_from_to(target, 0, to);
 }
 

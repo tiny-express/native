@@ -29,7 +29,7 @@
 #include "../String.hpp"
 #include "../Common.hpp"
 
-inline char *segment_pointer_char(char *target_param, int from, int to) {
+char *segment_pointer_char(char *target_param, int from, int to) {
 	if (target_param == NULL) {
 		return strdup("");
 	}
@@ -49,7 +49,7 @@ inline char *segment_pointer_char(char *target_param, int from, int to) {
 	return pointer;
 }
 
-inline char **segment_pointer_pointer_char(char **target, int from, int to) {
+char **segment_pointer_pointer_char(char **target, int from, int to) {
 	int length_target = length_pointer_pointer_char(target);
 	if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
 		return NULL;

@@ -27,10 +27,7 @@
 #ifndef JAVA_LANG_BOOLEAN_HPP_
 #define JAVA_LANG_BOOLEAN_HPP_
 
-extern "C" {
 #include "../../../kernel/String.hpp"
-};
-
 #include "../Object/Object.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"

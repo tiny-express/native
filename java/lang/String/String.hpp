@@ -27,6 +27,9 @@
 #ifndef JAVA_LANG_STRING_STRING_HPP_
 #define JAVA_LANG_STRING_STRING_HPP_
 
+#include "../../../kernel/String.hpp"
+#include "../../../kernel/Common.hpp"
+
 #include <typeinfo>
 #include <regex>
 #include <string>

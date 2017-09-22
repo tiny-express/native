@@ -40,7 +40,7 @@
  * @return result
  */
 #define QUICK_SORT(TYPE)                                                           \
-inline void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
+void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
     int left = left_position;                                                      \
     int right = right_position;                                                    \
     TYPE pivot = array[(left + right) / 2];                                        \
@@ -91,7 +91,7 @@ void sort_string(char *array[], int left_position, int right_position) {
  * @param size
  * @return TRUE | FALSE
  */
-inline int is_increase_string_array(char **array, int size) {
+int is_increase_string_array(char **array, int size) {
 	register int index = 0;
 	for (index = 0; index < size - 1; index++) {
 		if (strcmp(array[ index ], array[ index + 1 ]) > 0) {

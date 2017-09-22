@@ -38,7 +38,7 @@
  * @return string
  */
 #define STR_FROM(TYPE, FORMAT); \
-inline char* string_from_##TYPE(TYPE target) {\
+char* string_from_##TYPE(TYPE target) {\
         char *convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
@@ -51,7 +51,7 @@ inline char* string_from_##TYPE(TYPE target) {\
  * @return generic values
  */
 #define STR_TO(TYPE, FORMAT);\
-inline TYPE string_to_##TYPE(char *target) {\
+TYPE string_to_##TYPE(char *target) {\
     if (target == NULL || strcmp(target, "\0") == 0) return 0;\
         TYPE result;\
     sscanf(target, FORMAT, &result);\
