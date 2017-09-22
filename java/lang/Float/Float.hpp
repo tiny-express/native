@@ -53,7 +53,7 @@ namespace Java {
 			static constexpr float NEGATIVE_INFINITY = -INFINITY;
 
             /**
-             * A constant holding a Not-a-Number (NaN) value of type float.
+             * A constant holding a Not-a-Number NaN value of type float.
              */
 			static constexpr float NaN = NAN;
 
@@ -197,7 +197,7 @@ namespace Java {
 
             /**
              * Checks if the values of two operands
-             * are equal or not,
+             * are equal or not
              *
              * @return boolean
              */
@@ -213,7 +213,7 @@ namespace Java {
 
             /**
              * Checks if the value of left operand
-             * is less than the value of right operand,
+             * is less than the value of right operand
              *
              * @return boolean
              */
@@ -221,7 +221,7 @@ namespace Java {
 
             /**
              * Checks if the value of left operand
-             * is greater than or equal to the value of right operand,
+             * is greater than or equal to the value of right operand
              *
              * @return boolean
              */
@@ -229,7 +229,7 @@ namespace Java {
 
             /**
              *  Checks if the value of left operand
-             *  is less than or equal to the value of right operand,
+             *  is less than or equal to the value of right operand
              *
              * @return boolean
              */
@@ -257,8 +257,8 @@ namespace Java {
              * Assigns values from right side operands
              * to left side operand
              *
-             * @param target
-             * @return Float
+             * @param   target
+             * @return  Float
              */
 			Float& operator=(const Float &target);
 
@@ -267,8 +267,8 @@ namespace Java {
              * It adds right operand to the left operand
              * and assign the result to left operand
              *
-             * @param target
-             * @return Float
+             * @param   target
+             * @return  Float
              */
 			Float operator+=(const Float &target) const;
 
@@ -277,8 +277,8 @@ namespace Java {
              * It subtracts right operand from the left operand
              * and assign the result to left operand
              *
-             * @param target
-             * @return Float
+             * @param   target
+             * @return  Float
              */
 			Float operator-=(const Float &target) const;
 
@@ -287,8 +287,8 @@ namespace Java {
              * It multiplies right operand with the left operand
              * and assign the result to left operand
              *
-             * @param target
-             * @return Float
+             * @param   target
+             * @return  Float
              */
 			Float operator*=(const Float &target) const;
 
@@ -297,8 +297,8 @@ namespace Java {
              * It divides left operand with the right operand
              * and assign the result to left operand
              *
-             * @param target
-             * @return Float
+             * @param   target
+             * @return  Float
              */
 			Float operator/=(const Float &target) const;
 
@@ -349,24 +349,24 @@ namespace Java {
              * argument. All characters mentioned below are ASCII characters.
              *
              * @param   inputFloat   the float to be converted.
-             * @return a string representation of the argument.
+             * @return  a string representation of the argument.
              */
-			static String toString(float inputFloat);
+			static string toString(float inputFloat);
 
             /**
              * String to Float
              *
-             * @param String inputString
+             * @param  inputString
              * @return Float
              */
 			static Float parseFloat(String inputString);
 
             /**
-             * Returns the value of this Float as a {byte}
+             * Returns the value of this Float as a byte
              * after a narrowing primitive conversion.
              *
              * @return  the float value represented by this object
-             *          converted to type {byte}
+             *          converted to type byte
              */
 			byte byteValue() const ;
 
@@ -374,16 +374,16 @@ namespace Java {
              * Compares the two specified float values. The sign
              * of the integer value returned is the same as that of the
              * integer that would be returned by the call:
-             *    Float(float1).compareTo(Float(d2))
+             * Float(float1).compareTo(Float(d2))
              *
-             * @param   float1        the first float to compare
-             * @param   float2        the second float to compare
-             * @return  the value {0} if {float1} is
-             *          numerically equal to {float2}; a value less than
-             *          {0} if {float1} is numerically less than
-             *          {float2}; and a value greater than {0}
-             *          if {float1} is numerically greater than
-             *          {float2}.
+             * @param   float1   - the first float to compare
+             * @param   float2   - the second float to compare
+             * @return  the value 0 if float1 is
+             *          numerically equal to float2; a value less than
+             *          0 if float1 is numerically less than
+             *          float2; and a value greater than 0
+             *          if float1 is numerically greater than
+             *          float2.
              */
 			static int compare(float float1, float float2);
 
@@ -391,13 +391,13 @@ namespace Java {
              * Compares two Float objects numerically.
              *
              * @param   anotherFloat   the Float to be compared.
-             * @return  the value {0} if {anotherFloat} is
+             * @return  the value 0 if anotherFloat is
              *          numerically equal to this Float; a value
-             *          less than {0} if this Float
-             *          is numerically less than {anotherFloat};
-             *          and a value greater than {0} if this
+             *          less than 0 if this Float
+             *          is numerically less than anotherFloat;
+             *          and a value greater than 0 if this
              *          Float is numerically greater than
-             *          {anotherFloat}.
+             *          anotherFloat.
              */
 			int compareTo(Float anotherFloat);					
 
@@ -405,8 +405,8 @@ namespace Java {
              * Compares this object against the specified object.
              *
              * @param   obj   the object to compare with.
-             * @return  {true} if the objects are the same;
-             *          {false} otherwise.
+             * @return  true if the objects are the same;
+             *          false otherwise.
              * @see java.lang.Float#floatToLongBits(float)
              */
 			boolean equals(const Float &object) const;
@@ -428,52 +428,55 @@ namespace Java {
 			static int hashCode(float floatInput);
 
             /**
-             * Returns {true} if the argument is a finite floating-point
-             * value; returns {false} otherwise (for NaN and infinity
+             * Returns true if the argument is a finite floating-point
+             * value; returns false otherwise (for NaN and infinity
              * arguments).
              *
-             * @param inputFloat the float value to be tested
-             * @return {true} if the argument is a finite
-             * floating-point value, {false} otherwise.
+             * @param   inputFloat the float value to be tested
+             * @return  true    if the argument is a finite
+             *                  floating-point value,
+             *          false   otherwise.
              */
 			static boolean isFinite(float inputFloat);
 
             /**
-             * Returns {true} if the specified number is infinitely
-             * large in magnitude, {false} otherwise.
+             * Returns true if the specified number is infinitely
+             * large in magnitude, false otherwise.
              *
-             * @param   v   the value to be tested.
-             * @return  {true} if the value of the argument is positive
-             *          infinity or negative infinity; {false} otherwise.
+             * @param   valueFloat   the value to be tested.
+             * @return  true    - if the value of the argument is positive
+             *                    infinity or negative infinity;
+             *          false   - otherwise.
              */
-			static boolean isInfinite(float v);
+			static boolean isInfinite(float valueFloat);
 
            /**
-            * Returns {true} if this Float value is
-            * infinitely large in magnitude, {false} otherwise.
+            * Returns true if this Float value is
+            * infinitely large in magnitude, false otherwise.
             *
-            * @return  {true} if the value represented by this object is
-            *          positive infinity or negative infinity;
-            *          {false} otherwise.
+            * @return  true     - if the value represented by this object is
+            *                     positive infinity or negative infinity;
+            *          false    - otherwise.
             */
 			boolean isInfinite();
 
             /**
-             * Returns {true} if the specified number is a
-             * Not-a-Number (NaN) value, {false} otherwise.
+             * Returns true if the specified number is a
+             * Not-a-Number NaN value, false otherwise.
              *
-             * @param   v   the value to be tested.
-             * @return  {true} if the value of the argument is NaN;
-             *          {false} otherwise.
+             * @param   valueFloat  - the value to be tested.
+             * @return  true        - if the value of the argument is NaN;
+             *          false       - otherwise.
              */
-			static boolean isNaN(float v);
+			static boolean isNaN(float valueFloat);
 
             /**
-             * Returns {true} if this Float value is
-             * a Not-a-Number (NaN), {false} otherwise.
+             * Returns true if this Float value is
+             * a Not-a-Number NaN, false otherwise.
              *
-             * @return  {true} if the value represented by this object is
-             *          NaN; {false} otherwise.
+             * @return  true    - if the value represented by this
+             *                    object is NaN;
+             *          false   - otherwise.
              */
 			boolean isNaN() ;
 
@@ -481,7 +484,7 @@ namespace Java {
              * Returns the float value corresponding to a given
              * bit representation.
              *
-             * @param   bits   any {int} integer.
+             * @param   bits  - any int integer.
              * @return  the float floating-point value with the same
              *          bit pattern.
              */
@@ -489,14 +492,13 @@ namespace Java {
 
             /**
              * Returns the smaller of two float values
-             * as if by calling {@link Math#min(float, float) Math.min}.
+             * as if by calling Math#min(float, float) Math.min.
              *
-             * @param a the first operand
-             * @param b the second operand
-             * @return the smaller of {a} and {b}.
-             * @see java.util.function.BinaryOperator
+             * @param numberFloat the first operand
+             * @param anotherNumberFloat the second operand
+             * @return the smaller of a and b.
              */
-			static float min(float a, float b);
+			static float min(float numberFloat, float anotherNumberFloat);
 
 			// TODO(thoangminh): Implement this method later
 //            /**
@@ -512,7 +514,7 @@ namespace Java {
            /**
             * Convert from string to float
             *
-            * @param      s   the string to be parsed.
+            * @param      stringInput   - the string to be parsed.
             * @return     a Float object holding the value
             *             represented by the {String} argument.
             * @throws     NumberFormatException  if the string does not contain a
@@ -523,7 +525,7 @@ namespace Java {
            /**
             * Assign value to Float variable
             *
-            * @param  inputFloat a float value.
+            * @param  inputFloat    - float value.
             * @return a Float instance representing inputFloat.
             */
 			static Float valueOf(float inputFloat);
@@ -531,24 +533,20 @@ namespace Java {
             /**
              * Returns a representation of the specified floating-point value
              * according to the IEEE 754 floating-point "float
-             * format" bit layout, preserving Not-a-Number (NaN) values.
+             * format" bit layout, preserving Not-a-Number NaN values.
              *
-             * @param   float floatInput
-             *          value   a float precision floating-point number.
-             * @return  int
-             *          the bits that represent the floating-point number.
+             * @param   floatInput  - float precision floating-point number.
+             * @return  int         - the bits that represent the floating-point number.
              */
             static int floatToRawIntBits(float floatInput);
 
             /**
              * Returns a representation of the specified floating-point value
              * according to the IEEE 754 floating-point "float
-             * format" bit layout, preserving Not-a-Number (NaN) values.
+             * format" bit layout, preserving Not-a-Number NaN values.
              *
-             * @param   float floatInput
-             *          value   a float precision floating-point number.
-             * @return  int
-             *          the bits that represent the floating-point number.
+             * @param   floatInput  - value   a float precision floating-point number.
+             * @return  int         - the bits that represent the floating-point number.
              */
             static int floatToIntBits(float inputFloat);
 
@@ -558,8 +556,8 @@ namespace Java {
             * (Single-precision floating-point format
             * In IEEE 754-2008)
             *
-            * @param float
-            * @return String binary 32 bit of input
+            * @param    floatInput
+            * @return   String binary 32 bit of input
             */
             static String floatToBinary32StringType(float floatInput);
 
@@ -569,7 +567,7 @@ namespace Java {
             * In IEEE 754-2008)
             * To Float
             *
-            * @param  string binary32StringTypeInput
+            * @param  binary32StringTypeInput
             * @return float
             */
             static float binary32StringTypeToFloat(
@@ -580,7 +578,7 @@ namespace Java {
             * (Float-precision floating-point format
             * In IEEE 754-2008)
             *
-            * @param  int intBitsInput
+            * @param  intBitsInput
             * @return string
             */
             static String intBitsToBinary32StringType(int intBitsInput);

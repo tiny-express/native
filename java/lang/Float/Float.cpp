@@ -603,8 +603,8 @@ int Float::hashCode() {
     return Float::hashCode(this->original);
 }
 
-float Float::min(float floatA, float floatB) {
-    return Math::min(floatA, floatB);
+float Float::min(float numberFloat, float anotherNumberFloat) {
+    return Math::min(numberFloat, anotherNumberFloat);
 }
 
 float Float::intBitsToFloat(int intBitsInput) {
@@ -620,9 +620,8 @@ float Float::intBitsToFloat(int intBitsInput) {
     return  resultIntBitsToFloat;
 }
 
-String Float::toString(float inputFloat) {
-    string holdResult = string_from_float(inputFloat);
-    String result = holdResult;
-    free(holdResult);
+string Float::toString(float inputFloat) {
+    String holdResult = String::valueOf(inputFloat);
+    string result = holdResult.toString();
     return result;
 }
