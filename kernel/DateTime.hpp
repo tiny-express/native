@@ -27,7 +27,7 @@
 #ifndef NATIVE_DATETIME_H
 #define NATIVE_DATETIME_H
 
-#include "platform.h"
+#include "Platform.hpp"
 
 #ifdef LINUX
 
@@ -39,7 +39,7 @@
 #include <mach/mach_time.h>
 #endif
 
-#include "type.h"
+#include "Type.hpp"
 #include <time.h>
 
 #define SEC_PER_MIN         60
@@ -92,6 +92,6 @@ unsigned long timestamp();
  * @param format
  * @return
  */
-string date(unsigned long timestamp, char *format);
+string date(time_t timestamp, char *format);
 
 #endif

@@ -25,8 +25,6 @@
  */
 
 #include "Math.hpp"
-
-#include <cmath>
 #include "../ArithmeticException/ArithmeticException.hpp"
 #include "../AssertionError/AssertionError.hpp"
 

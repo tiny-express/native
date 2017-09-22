@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../math.h"
+#include "../Math.hpp"
 
 double math_pow(double base, double exponent) {
 	return pow(base, exponent);

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../common.h"
-#include "../type.h"
+#include "../Common.hpp"
+#include "../Type.hpp"
 #include <string.h>
 
 #define SWAP(value1, value2, TYPE) { TYPE temp = value1; value1 = value2; value2 = temp; }

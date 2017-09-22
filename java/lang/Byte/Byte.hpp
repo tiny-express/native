@@ -29,7 +29,7 @@
 
 #include "../Number/Number.hpp"
 #include "../Integer/Integer.hpp"
-#include "../../../kernel/type.h"
+#include "../../../kernel/Type.hpp"
 
 namespace Java {
 	namespace Lang {

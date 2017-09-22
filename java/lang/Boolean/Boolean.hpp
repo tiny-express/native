@@ -28,7 +28,7 @@
 #define JAVA_LANG_BOOLEAN_HPP_
 
 extern "C" {
-#include "../../../kernel/string.h"
+#include "../../../kernel/String.hpp"
 };
 
 #include "../Object/Object.hpp"

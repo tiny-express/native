@@ -28,7 +28,7 @@
 #define JAVA_LANG_OBJECT_H
 
 extern "C" {
-#include "../../../kernel/builtin.h"
+#include "../../../kernel/Builtin.hpp"
 };
 
 #include <algorithm>

@@ -27,7 +27,7 @@
 #include "NumberFormatException.hpp"
 
 extern "C" {
-#include "../../../kernel/test.h"
+#include "../../../kernel/Test.hpp"
 }
 
 TEST (JavaLang, NumberFormatExceptionConstructor) {

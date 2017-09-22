@@ -24,11 +24,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../test.h"
-#include "../math.h"
+#ifndef NATIVE_BUILTIN_H
+#define NATIVE_BUILTIN_H
 
-TEST (KernelMath, Pow) {
-	double base = 3;
-	double power = 3;
-	ASSERT_TRUE(math_pow(base, power) == 27);
-}
+// Platform Macros
+#include "Platform.hpp"
+
+// C Standard Library
+#include <stdio.h>
+#include <math.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <limits.h>
+#include <stdarg.h>
+#include <ctype.h>
+#include <memory.h>
+
+// Native Library
+#include "DateTime.hpp"
+#include "Common.hpp"
+#include "Math.hpp"
+#include "String.hpp"
+#include "Type.hpp"
+
+#endif//NATIVE_BUILTIN_H

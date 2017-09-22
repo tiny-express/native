@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,10 +24,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
-#include "../test.h"
+#include "../Test.hpp"
+#include <stdlib.h>
+#include <time.h>
 
-TEST (KernelCommon, AppendPointerChar) {
+TEST (KernelCommon, QuickSort) {
+	srand(time(NULL));
+	int *array_int = (int *)calloc(50, sizeof(int));
+	int index;
+	for (index = 0; index < 50; ++index) {
+		array_int[ index ] = rand();
+	}
+	sort_int(array_int, 0, 49);
+	int result = is_increase_int_array(array_int, 50);
+	free(array_int);
+	ASSERT_TRUE(result);
+}
+
+TEST (KernelCommon, SortString) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -37,26 +51,22 @@ TEST (KernelCommon, AppendPointerChar) {
 		(char *) "over",
 		(char *) "the",
 		(char *) "lazy",
+		(char *) "dog",
 		'\0'
 	};
-	char *append = "dog";
-	ASSERT_EQUAL(8, length_pointer_pointer_char(target));
-	char **result = append_pointer_char(target, append);
-	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
-	ASSERT_STR("The", result[ 0 ]);
-	ASSERT_STR("quick", result[ 1 ]);
-	ASSERT_STR("brown", result[ 2 ]);
-	ASSERT_STR("fox", result[ 3 ]);
-	ASSERT_STR("jumps", result[ 4 ]);
-	ASSERT_STR("over", result[ 5 ]);
-	ASSERT_STR("the", result[ 6 ]);
-	ASSERT_STR("lazy", result[ 7 ]);
-	ASSERT_STR("dog", result[ 8 ]);
-	append = "";
-	free(result);
-	result = append_pointer_char(target, append);
-	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
-	free(result);
+	sort_string(target, 0, 8);
+	int result = is_increase_string_array(target, 9);
+	ASSERT_TRUE(result);
 }
 
+//TEST(KernelCommon, DistributionCountingSort) {
+//	int *array_int = malloc(50 * sizeof(int));
+//	int index;
+//	for (index = 0; index < 50; ++index) {
+//		array_int[ index ] = rand() % ( 10 ) + 1;
+//	}
+//	distribution_counting_sort(array_int, 50);
+//	int result = is_increase_int_array(array_int, 50);
+//	ASSERT_TRUE(result);
+//}
 

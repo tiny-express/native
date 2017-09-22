@@ -26,8 +26,8 @@
 
 #include <ctype.h>
 #include <stdlib.h>
-#include "../string.h"
-#include "../common.h"
+#include "../String.hpp"
+#include "../Common.hpp"
 
 char from_hex(char ch) {
 	return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
@@ -40,7 +40,7 @@ char to_hex(char code) {
 
 char *url_encode(char *target) {
 	char *target_index = target;
-	char *result = calloc(length_pointer_char(target) * 3 + 1, sizeof(char));
+	char *result = (char *)calloc(length_pointer_char(target) * 3 + 1, sizeof(char));
 	char *result_index = result;
 	while (*target_index) {
 		if (isalnum(*target_index) || *target_index == '-' || *target_index == '_' || *target_index == '.' || *target_index == '~') {
@@ -58,7 +58,7 @@ char *url_encode(char *target) {
 
 char *url_decode(char *target) {
 	char *target_index = target;
-	char *result = calloc(length_pointer_char(target) + 1, sizeof(char));
+	char *result = (char *)calloc(length_pointer_char(target) + 1, sizeof(char));
 	char *result_index = result;
 	while (*target_index) {
 		if (*target_index == '%') {

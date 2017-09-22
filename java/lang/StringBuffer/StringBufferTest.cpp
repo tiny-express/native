@@ -33,7 +33,7 @@
 #include "../IllegalArgumentException/IllegalArgumentException.hpp"
 
 extern "C" {
-#include "../../../kernel/test.h"
+#include "../../../kernel/Test.hpp"
 }
 
 using namespace Java::Lang;

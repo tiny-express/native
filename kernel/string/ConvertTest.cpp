@@ -25,8 +25,8 @@
  */
 
 #include <stdlib.h>
-#include "../string.h"
-#include "../test.h"
+#include "../String.hpp"
+#include "../Test.hpp"
 
 TEST (KernelString, ConvertFromChar) {
 	// Input a number character to convert from char to string

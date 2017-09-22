@@ -24,24 +24,50 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../common.h"
+#include "../String.hpp"
+#include "../Common.hpp"
+#include "../Type.hpp"
+
+#define P_LEN(TYPE); \
+inline int length_pointer_##TYPE(TYPE *target) {\
+    if (target == NULL) return 0;\
+        register TYPE*pointer;\
+        for (pointer = target; *pointer; ++pointer);\
+        return pointer - target;\
+}
+
+// length of pointer pointer
+#define P_P_LEN(TYPE); \
+inline int length_pointer_pointer_##TYPE(TYPE **target) {\
+        if (target == NULL) return 0;\
+        register TYPE**pointer;\
+        for (pointer = target; *pointer; ++pointer);\
+        return pointer - target;\
+}
+
+// Length of number
+#define NUM_LEN(TYPE); \
+inline int length_##TYPE(TYPE target) {\
+        char *result = string_from_##TYPE(target);\
+        int len = length_pointer_char(result); \
+        free(result); \
+        return len; \
+}
+
+//#ifndef __linux__
+P_LEN(char);
+//#endif
+P_P_LEN(char);NUM_LEN(short);NUM_LEN(int);NUM_LEN(long);NUM_LEN(double);NUM_LEN(float);
 
 /**
- * Append pointer char
- * Use to append one more element to array
+ * Is string empty ?
  *
- * @param target
- * @param append
- * @return char pointer pointer
+ * @param input
+ * @return TRUE or FALSE
  */
-inline char **append_pointer_char(char **target, char *append) {
-	int len = length_pointer_pointer_char(target);
-	char **pointer = calloc(len + 2, sizeof(char *));
-	memcpy(pointer, target, len * sizeof(char *));
-	*( pointer + len ) = append;
-	*( pointer + len + 1 ) = '\0';
-	return pointer;
+int is_empty(char *input) {
+	if (length_pointer_char(input) == 0) {
+		return TRUE;
+	}
+	return FALSE;
 }

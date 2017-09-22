@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../type.h"
-#include "../common.h"
+#include "../Type.hpp"
+#include "../Common.hpp"
 
 /**
  * Join pointer pointer char
@@ -40,14 +40,14 @@
 inline char *join_pointer_pointer_char(char **target) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
-	char *result_tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
+	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
 		item_length = length_pointer_char(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
 		total_length += item_length;
 	}
 	// Allocate enough memory for result
-	char *result = calloc(total_length + 1, sizeof(char));
+	char *result = (char *)calloc(total_length + 1, sizeof(char));
 	memcpy(result, result_tmp, total_length);
 	// Free memory for temporary variable
 	free(result_tmp);
@@ -65,7 +65,7 @@ inline char *join_delimiter_pointer_pointer_char(char **target, const char *deli
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
 	int delimiter_length = length_pointer_char((char *) delimiter);
-	char *result_tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
+	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
 		item_length = length_pointer_char(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
@@ -74,7 +74,7 @@ inline char *join_delimiter_pointer_pointer_char(char **target, const char *deli
 		total_length += delimiter_length;
 	}
 	// Allocate enough memory for result
-	char *result = calloc(total_length - delimiter_length + 1, sizeof(char));
+	char *result = (char *)calloc(total_length - delimiter_length + 1, sizeof(char));
 	// Copy and remove remainder delimiter
 	memcpy(result, result_tmp, total_length - delimiter_length);
 	// Free memory for temporary variable

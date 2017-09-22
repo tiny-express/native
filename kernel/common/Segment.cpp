@@ -24,63 +24,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include <stdlib.h>
-#include "../datetime.h"
-#include "../test.h"
+#include "../String.hpp"
+#include "../Common.hpp"
 
-TEST (KernelDateTime, UnixTimestampInMilliseconds) {
-#ifdef WINDOWS
-	unsigned int millisecond = 123;
-	unsigned int second = 3;
-	unsigned int minute = 20;
-	unsigned int hour = 17;
-	unsigned int day  = 16;
-	unsigned int month = 7;
-	unsigned int year = 2017;
-	unsigned long timestamp = unix_time_in_milliseconds(
-			millisecond,
-			second,
-			minute,
-			hour,
-			day,
-			month,
-			year
-	);
-	ASSERT_EQUAL(timestamp, 1500225603123);
-#endif
-}
-
-TEST (KernelDateTime, TimestampInNanoSeconds) {
-	long first_time = timestamp();
-	ASSERT_TRUE(first_time > 1500198318489000);
-	int maxN = 20000000;
-	int i = 0;
-	int counter = 0;
-	for (i = 0; i < maxN; i++) {
-		counter++;
-		counter--;
-		counter++;
+inline char *segment_pointer_char(char *target_param, int from, int to) {
+	if (target_param == NULL) {
+		return strdup("");
 	}
-	long last_time = timestamp();
-	ASSERT_EQUAL(maxN, counter);
-	unsigned int delta = ( last_time - first_time ) / 1000;
-	ASSERT_TRUE(delta > 50);
+	int length_target = length_pointer_char(target_param);
+	if (from > to || from < 0 || from > length_target || to < 0) {
+		return strdup("");
+	}
+	char *target = strdup(target_param);
+	int length = to - from + 1;
+	if (to >= length_target) {
+		length = length_target - from + 1;
+	}
+	char *pointer = (char *)calloc(length + 1, sizeof(char));
+	memcpy(pointer, &target[ from ], length);
+	free(target);
+	pointer[ length ] = '\0';
+	return pointer;
 }
 
-TEST (KernelDateTime, Format) {
-	long timestamp = 1473765499;
-	string format = "d/m/y";
-	string result1 = date(timestamp, format);
-	ASSERT_STR("13/09/2016", result1);
-	free(result1);
-	
-	timestamp = 1511208660;
-	char *result2 = date(timestamp, format);
-	ASSERT_STR("20/11/2017", result2);
-	free(result2);
-	
-	format = "y-m-d";
-	char *result3 = date(timestamp, format);
-	ASSERT_STR("2017-11-20", result3);
-	free(result3);
+inline char **segment_pointer_pointer_char(char **target, int from, int to) {
+	int length_target = length_pointer_pointer_char(target);
+	if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
+		return NULL;
+	}
+	char **pointer = (char **)calloc(( to - from + 2 ), sizeof(char *));
+	memcpy(pointer, &target[ from ], ( to - from + 1 ) * sizeof(char *));
+	return pointer;
 }

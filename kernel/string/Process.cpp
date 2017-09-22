@@ -24,11 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../type.h"
-#include "../string.h"
-#include "../common.h"
+#include <cstdio>
+#include <cstdlib>
+#include "../Type.hpp"
+#include "../String.hpp"
+#include "../Common.hpp"
 
 /**
  * String replace
@@ -54,7 +54,7 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
 			i += old_len - 1;
 		}
 	}
-	result = malloc(i + 1 + count * ( new_len - old_len ));
+	result = (char *)malloc(i + 1 + count * ( new_len - old_len ));
 	
 	i = 0;
 	while (*target) {
@@ -80,10 +80,10 @@ inline char *string_replace(char *target, char *find_string, char *replace_with)
  */
 inline char **string_split(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
-		char **result = calloc(1, sizeof(char *));
+		char **result = (char **)calloc(1, sizeof(char *));
 		return result;
 	}
-	char **data = calloc(MAX_STRING_LENGTH, sizeof(char *));
+	char **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
 	const int target_length = length_pointer_char(target);
 	char const_target[target_length + 1];
 	strncpy(const_target, target, (size_t) target_length);
@@ -94,7 +94,7 @@ inline char **string_split(char *target, char *delimiter) {
 		data[ count++ ] = strdup(item);
 		item = strtok(NULL, delimiter);
 	}
-	char **result = calloc((size_t) count + 1, sizeof(char *));
+	char **result = (char **)calloc((size_t) count + 1, sizeof(char *));
 	memcpy(result, data, count * sizeof(char *));
 	result[ count ] = '\0';
 	free(data);
@@ -131,7 +131,7 @@ inline char *string_join(char *target[], char *delimiter) {
 	}
 	int num = length_pointer_pointer_char(target) - 1;
 	int len = 0, wlen = 0;
-	char *tmp = calloc(MAX_STRING_LENGTH, sizeof(char));
+	char *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	register int index;
 	for (index = 0; index < num; index++) {
 		// Copy memory segment
@@ -149,7 +149,7 @@ inline char *string_join(char *target[], char *delimiter) {
 	len += wlen;
 	len += 1;
 	// Saving memory
-	char *result = calloc(len + 1, sizeof(char));
+	char *result = (char *)calloc(len + 1, sizeof(char));
 	memcpy(result, tmp, len);
 	// Deallocate memory
 	free(tmp);
@@ -174,7 +174,7 @@ inline char *string_trim(char *target) {
 	while (target[ right ] == ' ')
 		right--;
 	len = right - left + 1;
-	char *result = calloc(len + 1, sizeof(char));
+	char *result = (char *)calloc(len + 1, sizeof(char));
 	strncpy(result, &target[ left ], len);
 	return result;
 }
@@ -282,7 +282,7 @@ inline char *string_random(char *target, int size) {
 		return NULL;
 	}
 	int target_length = length_pointer_char(target);
-	char *result = calloc(size + 1, sizeof(char));
+	char *result = (char *)calloc(size + 1, sizeof(char));
 	register int i;
 	for (i = 0; i < size; i++) {
 		result[ i ] = target[ rand() % target_length ];
@@ -319,7 +319,7 @@ inline char *string_concat(char *target, char *subtarget) {
 	}
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
-	char *result = calloc(target_length + subtarget_length + 1, sizeof(char));
+	char *result = (char *)calloc(target_length + subtarget_length + 1, sizeof(char));
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
 	result[ target_length + subtarget_length ] = '\0';

@@ -25,7 +25,7 @@
  */
 
 extern "C" {
-#include "../../../kernel/test.h"
+#include "../../../kernel/Test.hpp"
 }
 
 #include "Byte.hpp"

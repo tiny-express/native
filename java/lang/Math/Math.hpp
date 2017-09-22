@@ -31,6 +31,7 @@
 #include "../Object/Object.hpp"
 #include "../Double/Double.hpp"
 #include "../Float/Float.hpp"
+#include "../../../kernel/Math.hpp"
 
 using namespace Java::Util;
 

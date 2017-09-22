@@ -25,8 +25,8 @@
  */
 
 #include <stdlib.h>
-#include "../test.h"
-#include "../string.h"
+#include "../Test.hpp"
+#include "../String.hpp"
 
 TEST (KernelString, UrlEncode) {
 	char *target = "Quán ăn";

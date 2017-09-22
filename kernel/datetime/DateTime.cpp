@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "../platform.h"
+#include "../Platform.hpp"
 
 #ifdef WINDOWS
 #include <windows.h>
@@ -33,8 +33,8 @@
 #include <mach/mach_time.h>
 #endif
 
-#include "../datetime.h"
-#include "../string.h"
+#include "../DateTime.hpp"
+#include "../String.hpp"
 
 /**
  * Format timestamp to date
@@ -43,7 +43,7 @@
  * @param format
  * @return
  */
-string date(unsigned long timestamp, string format) {
+string date(time_t timestamp, string format) {
 	char *date_format = string_replace(format, "D", "%d");
 	char *date_format2 = string_replace(date_format, "d", "%d");
 	free(date_format);
@@ -60,7 +60,7 @@ string date(unsigned long timestamp, string format) {
 	char *date_format6 = string_replace(date_format5, "y", "%Y");
 	free(date_format5);
 	
-	char *result = calloc(11, sizeof(char));
+	char *result = (char *)calloc(11, sizeof(char));
 	strftime(result, 11, date_format6, gmtime(&timestamp));
 	free(date_format6);
 	

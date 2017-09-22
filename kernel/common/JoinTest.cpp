@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../builtin.h"
-#include "../test.h"
+#include "../Builtin.hpp"
+#include "../Test.hpp"
 
 TEST (KernelCommon, JoinPointerPointerChar) {
 	char *target[] = {

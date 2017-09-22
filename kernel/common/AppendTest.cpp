@@ -24,30 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_BUILTIN_H
-#define NATIVE_BUILTIN_H
+#include "../Builtin.hpp"
+#include "../Test.hpp"
 
-// Platform Macros
-#include "platform.h"
+TEST (KernelCommon, AppendPointerChar) {
+	char *target[] = {
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		'\0'
+	};
+	char *append = "dog";
+	ASSERT_EQUAL(8, length_pointer_pointer_char(target));
+	char **result = append_pointer_char(target, append);
+	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
+	ASSERT_STR("The", result[ 0 ]);
+	ASSERT_STR("quick", result[ 1 ]);
+	ASSERT_STR("brown", result[ 2 ]);
+	ASSERT_STR("fox", result[ 3 ]);
+	ASSERT_STR("jumps", result[ 4 ]);
+	ASSERT_STR("over", result[ 5 ]);
+	ASSERT_STR("the", result[ 6 ]);
+	ASSERT_STR("lazy", result[ 7 ]);
+	ASSERT_STR("dog", result[ 8 ]);
+	append = "";
+	free(result);
+	result = append_pointer_char(target, append);
+	ASSERT_EQUAL(9, length_pointer_pointer_char(result));
+	free(result);
+}
 
-// C Standard Library
-#include <stdio.h>
-#include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <ctype.h>
-#include <memory.h>
 
-// Native Library
-#include "datetime.h"
-#include "common.h"
-#include "math.h"
-#include "string.h"
-#include "type.h"
-
-#endif//NATIVE_BUILTIN_H

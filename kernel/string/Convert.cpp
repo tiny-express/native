@@ -27,9 +27,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "../common.h"
-#include "../type.h"
-#include "../string.h"
+#include "../Common.hpp"
+#include "../Type.hpp"
+#include "../String.hpp"
 
 /**
  * Convert generic types to string
@@ -69,7 +69,7 @@ char *string_from_char(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
-	char *result = calloc(2, sizeof(char));
+	char *result = (char *)calloc(2, sizeof(char));
 	result[ 0 ] = target;
 	result[ 1 ] = '\0';
 	return result;

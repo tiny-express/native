@@ -24,37 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../string.h"
-#include "../common.h"
+#define TESTING
+#include "../kernel/Test.hpp"
 
-inline char *segment_pointer_char(char *target_param, int from, int to) {
-	if (target_param == NULL) {
-		return strdup("");
-	}
-	int length_target = length_pointer_char(target_param);
-	if (from > to || from < 0 || from > length_target || to < 0) {
-		return strdup("");
-	}
-	char *target = strdup(target_param);
-	int length = to - from + 1;
-	if (to >= length_target) {
-		length = length_target - from + 1;
-	}
-	char *pointer = calloc(length + 1, sizeof(char));
-	memcpy(pointer, &target[ from ], length);
-	free(target);
-	pointer[ length ] = '\0';
-	return pointer;
-}
-
-inline char **segment_pointer_pointer_char(char **target, int from, int to) {
-	int length_target = length_pointer_pointer_char(target);
-	if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
-		return NULL;
-	}
-	char **pointer = calloc(( to - from + 2 ), sizeof(char *));
-	memcpy(pointer, &target[ from ], ( to - from + 1 ) * sizeof(char *));
-	return pointer;
+int main(int argc, const char *argv[]) {
+	int result = ctest_main(argc, argv);
+	return result;
 }
