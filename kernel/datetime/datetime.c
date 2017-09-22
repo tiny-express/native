@@ -29,6 +29,10 @@
 #include <windows.h>
 #endif
 
+#ifdef OSX
+#include <mach/mach_time.h>
+#endif
+
 #include "../datetime.h"
 #include "../string.h"
 
@@ -127,7 +131,7 @@ unsigned long timestamp() {
 	timebase = tb.numer;
 	timebase = timebase / tb.denom;
 	uint64_t current = mach_absolute_time() * timebase;
-	return (long) current;
+	return (long) current * 1000;
 #endif
 #ifdef LINUX
 	struct timespec tsp;

@@ -434,8 +434,8 @@ namespace Java {
 
             Array<Bytes> cacheInit() {
                 Array<Bytes> cacheArray;
-                int index = 0;
-                for (index; index < 256; index++) {
+                int index;
+                for (index = 0; index < 256; index++) {
 					cacheArray.push(Bytes(static_cast<byte>(index)));
 				}
                 return cacheArray;
