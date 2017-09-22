@@ -27,10 +27,7 @@
 #ifndef JAVA_LANG_OBJECT_H
 #define JAVA_LANG_OBJECT_H
 
-extern "C" {
 #include "../../../kernel/Builtin.hpp"
-};
-
 #include <algorithm>
 #include <vector>
 #include <map>

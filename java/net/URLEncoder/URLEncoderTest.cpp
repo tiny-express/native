@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
 #include "../../../kernel/Test.hpp"
-}
-
 #include "../URLEncoder/URLEncoder.hpp"
 #include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 

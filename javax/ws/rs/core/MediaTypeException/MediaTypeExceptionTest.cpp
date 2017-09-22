@@ -25,10 +25,7 @@
 */
 
 #include "MediaTypeException.hpp"
-
-extern "C" {
 #include "../../../../../kernel/Test.hpp"
-}
 
 using namespace Javax::Ws;
 

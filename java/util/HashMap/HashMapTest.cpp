@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
 #include "../../../kernel/Test.hpp"
-}
-
 #include "../../Lang.hpp"
 #include "HashMap.hpp"
 #include "../ArrayList/ArrayList.hpp"

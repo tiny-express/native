@@ -25,10 +25,7 @@
 */
 
 #include "BadRequestException.hpp"
-
-extern "C" {
 #include "../../../../kernel/Test.hpp"
-}
 
 using namespace Javax::Ws::Rs;
 

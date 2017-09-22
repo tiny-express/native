@@ -24,10 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/Test.hpp"
-};
 
+#include "../../../kernel/Test.hpp"
 #include "IOException.hpp"
 
 using namespace Java::Lang;

@@ -24,11 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
 #include "../../../kernel/Test.hpp"
-
-};
-
 #include "ArithmeticException.hpp"
 
 using namespace Java::Lang;
