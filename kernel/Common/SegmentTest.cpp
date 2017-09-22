@@ -31,104 +31,104 @@ TEST (KernelCommon, SegmentPointerChar) {
 	char *charArray = "Hello World";
 	int from = 6;
 	int to = 10;
-	char *result = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(5, length_pointer_char(result));
+	char *result = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(5, lengthPointerChar(result));
 	ASSERT_STR("World", result);
 	free(result);
 	
 	charArray = "Hello World";
 	from = 6;
 	to = 6;
-	char *result2 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(1, length_pointer_char(result2));
+	char *result2 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(1, lengthPointerChar(result2));
 	ASSERT_STR("W", result2);
 	free(result2);
 	
 	charArray = "Hello World";
 	from = 7;
 	to = 6;
-	char *result3 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result3));
+	char *result3 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result3));
 	ASSERT_STR("", result3);
 	free(result3);
 	
 	charArray = "Hello World";
 	from = -1;
 	to = -1;
-	char *result4 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result4));
+	char *result4 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result4));
 	ASSERT_STR("", result4);
 	free(result4);
 	
 	charArray = "Hello World";
 	from = -10;
 	to = -2;
-	char *result5 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result5));
+	char *result5 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result5));
 	ASSERT_STR("", result5);
 	free(result5);
 	
 	charArray = "Hello World";
 	from = -3;
 	to = 4;
-	char *result6 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result6));
+	char *result6 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result6));
 	ASSERT_STR("", result6);
 	free(result6);
 	
 	charArray = "Hello World";
 	from = 0;
 	to = 15;
-	char *result7 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(11, length_pointer_char(result7));
+	char *result7 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(11, lengthPointerChar(result7));
 	ASSERT_STR("Hello World", result7);
 	free(result7);
 	
 	charArray = "Hello World";
 	from = 15;
 	to = 20;
-	char *result8 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result8));
+	char *result8 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result8));
 	ASSERT_STR("", result8);
 	free(result8);
 	
 	charArray = NULL;
 	from = 15;
 	to = 20;
-	char *result9 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result9));
+	char *result9 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result9));
 	ASSERT_STR("", result9);
 	free(result9);
 	
 	charArray = "";
 	from = 1;
 	to = 10;
-	char *result10 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result10));
+	char *result10 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result10));
 	ASSERT_STR("", result10);
 	free(result10);
 	
 	charArray = "\0";
 	from = 0;
 	to = 1;
-	char *result11 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result11));
+	char *result11 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result11));
 	ASSERT_STR("", result11);
 	free(result11);
 	
 	charArray = "\0";
 	from = 0;
 	to = 0;
-	char *result12 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result12));
+	char *result12 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result12));
 	ASSERT_STR("", result12);
 	free(result12);
 	
 	charArray = "test";
 	from = -1;
 	to = -1;
-	char *result13 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result13));
+	char *result13 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result13));
 	ASSERT_STR("", result13);
 	free(result13);
 }
@@ -137,15 +137,15 @@ TEST (KernelCommon, SegmentPointerConstChar) {
 	char *charArray = "Hello World";
 	int from = 6;
 	int to = 6;
-	char *result = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(1, length_pointer_char(result));
+	char *result = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(1, lengthPointerChar(result));
 	ASSERT_STR("W", result);
 	free(result);
 	
 	from = 7;
 	to = 6;
-	char *result2 = segment_pointer_char(charArray, from, to);
-	ASSERT_EQUAL(0, length_pointer_char(result2));
+	char *result2 = segmentPointerChar(charArray, from, to);
+	ASSERT_EQUAL(0, lengthPointerChar(result2));
 	ASSERT_STR("", result2);
 	free(result2);
 }
@@ -165,10 +165,10 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 	};
 	int from = 2;
 	int to = 5;
-	char **result = segment_pointer_pointer_char(target, from, to);
+	char **result = segmentPointerPointerChar(target, from, to);
 	
-	ASSERT_EQUAL(4, length_pointer_pointer_char(result));
-	char *join = string_join(result, "|");
+	ASSERT_EQUAL(4, lengthPointerPointerChar(result));
+	char *join = stringJoin(result, "|");
 	ASSERT_STR("brown|fox|jumps|over", join);
 	free(join);
 	free(result);

@@ -39,8 +39,8 @@
  * @param key
  * @return result
  */
-#define QUICK_SORT(TYPE)                                                           \
-void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
+#define QUICK_SORT(NAME, TYPE)                                                           \
+void sort##NAME(TYPE *array, int left_position, int right_position) {      \
     int left = left_position;                                                      \
     int right = right_position;                                                    \
     TYPE pivot = array[(left + right) / 2];                                        \
@@ -53,11 +53,11 @@ void sort_##TYPE(TYPE *array, int left_position, int right_position) {      \
             right--;                                                               \
         }                                                                          \
     }                                                                              \
-    if (left_position < right) sort_##TYPE(array, left_position, right);           \
-    if (left < right_position) sort_##TYPE(array, left, right_position);           \
+    if (left_position < right) sort##NAME(array, left_position, right);           \
+    if (left < right_position) sort##NAME(array, left, right_position);           \
 }
 
-void sort_string(char *array[], int left_position, int right_position) {
+void sortString(char *array[], int left_position, int right_position) {
 	int left = left_position;
 	int right = right_position;
 	char *pivot = array[ ( left + right ) / 2 ];
@@ -76,10 +76,10 @@ void sort_string(char *array[], int left_position, int right_position) {
 		}
 	}
 	if (left_position < right) {
-		sort_string(array, left_position, right);
+		sortString(array, left_position, right);
 	}
 	if (left < right_position) {
-		sort_string(array, left, right_position);
+		sortString(array, left, right_position);
 	}
 	
 }
@@ -91,7 +91,7 @@ void sort_string(char *array[], int left_position, int right_position) {
  * @param size
  * @return TRUE | FALSE
  */
-int is_increase_string_array(char **array, int size) {
+int isIncreaseStringArray(char **array, int size) {
 	register int index = 0;
 	for (index = 0; index < size - 1; index++) {
 		if (strcmp(array[ index ], array[ index + 1 ]) > 0) {
@@ -108,8 +108,8 @@ int is_increase_string_array(char **array, int size) {
  * @param size
  * @return TRUE | FALSE
  */
-#define INCREASE(TYPE)                                      \
-int is_increase_##TYPE##_array(TYPE *array, int length) {   \
+#define INCREASE(NAME, TYPE)                                      \
+int isIncrease##NAME##Array(TYPE *array, int length) {   \
     register int index = 0;                                 \
     for (index = 0; index < length - 1; index++) {          \
         if (array[index] > array[index + 1])                \
@@ -118,8 +118,8 @@ int is_increase_##TYPE##_array(TYPE *array, int length) {   \
     return TRUE;                                            \
 }
 
-#define DECREASE(TYPE)                                      \
-int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
+#define DECREASE(NAME, TYPE)                                      \
+int isDecrease##NAME##Array(TYPE *array, int length) {   \
     register int index = 0;                                 \
     for (index = 0; index < length - 1; index++) {          \
         if (array[index] < array[index + 1])                \
@@ -128,8 +128,8 @@ int is_decrease_##TYPE##_array(TYPE *array, int length) {   \
     return TRUE;                                            \
 }
 
-INCREASE(short);
-INCREASE(int);
+INCREASE(Short, short);
+INCREASE(Int, int);
 //INCREASE(long);
 //INCREASE(float);
 //INCREASE(double);
@@ -141,5 +141,5 @@ INCREASE(int);
 //DECREASE(double);
 //
 //QUICK_SORT(short);
-QUICK_SORT(int);
+QUICK_SORT(Int, int);
 //QUICK_SORT(long);

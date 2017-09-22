@@ -37,8 +37,8 @@
  * @param target
  * @return string
  */
-#define STR_FROM(TYPE, FORMAT); \
-char* string_from_##TYPE(TYPE target) {\
+#define STR_FROM(NAME, TYPE, FORMAT); \
+char* stringFrom##NAME(TYPE target) {\
         char *convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
@@ -50,14 +50,21 @@ char* string_from_##TYPE(TYPE target) {\
  * @param target
  * @return generic values
  */
-#define STR_TO(TYPE, FORMAT);\
-TYPE string_to_##TYPE(char *target) {\
+#define STR_TO(NAME, TYPE, FORMAT);\
+TYPE stringTo##NAME(char *target) {\
     if (target == NULL || strcmp(target, "\0") == 0) return 0;\
         TYPE result;\
     sscanf(target, FORMAT, &result);\
     return result;\
 }
-STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, "%g");STR_FROM(double, "%.16g");STR_TO(short, "%hi");STR_TO(float, "%g");STR_TO(double, "%lg");
+STR_FROM(Short, short, "%d");
+STR_FROM(Int, int, "%d");
+STR_FROM(Long, long, "%ld");
+STR_FROM(Float, float, "%g");
+STR_FROM(Double, double, "%.16g");
+STR_TO(Short, short, "%hi");
+STR_TO(Float, float, "%g");
+STR_TO(Double, double, "%lg");
 
 /**
  * String from char
@@ -65,7 +72,7 @@ STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, 
  * @param target
  * @return string
  */
-char *string_from_char(char target) {
+char *stringFromChar(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
@@ -81,8 +88,8 @@ char *string_from_char(char target) {
  * @param target
  * @return string
  */
-char string_to_char(char *target) {
-	if (is_empty(target)) {
+char stringToChar(char *target) {
+	if (isEmptyString(target)) {
 		return '\0';
 	}
 	return target[ 0 ];
@@ -94,7 +101,7 @@ char string_to_char(char *target) {
  * @param target
  * @return string
  */
-int string_to_int(char *target) {
+int stringToInt(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -107,7 +114,7 @@ int string_to_int(char *target) {
  * @param target
  * @return string
  */
-long string_to_long(char *target) {
+long stringToLong(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -120,16 +127,16 @@ long string_to_long(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-int string_to_boolean(char *target) {
-	if (length_pointer_char(target) == 0) {
+int stringToBoolean(char *target) {
+	if (lengthPointerChar(target) == 0) {
 		return FALSE;
 	}
-	char *boolean_value = string_lower(target);
-	if (string_equals(boolean_value, "true")) {
+	char *boolean_value = stringLower(target);
+	if (stringEquals(boolean_value, "true")) {
 		free(boolean_value);
 		return TRUE;
 	}
-	if (string_to_int(boolean_value) == TRUE) {
+	if (stringToInt(boolean_value) == TRUE) {
 		free(boolean_value);
 		return TRUE;
 	}
@@ -143,7 +150,7 @@ int string_to_boolean(char *target) {
  * @param target
  * @return string
  */
-char *string_from_boolean(int target) {
+char *stringFromBoolean(int target) {
     if (target == FALSE) {
         return strdup("false");
     }

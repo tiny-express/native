@@ -35,8 +35,8 @@ TEST (KernelCommon, QuickSort) {
 	for (index = 0; index < 50; ++index) {
 		array_int[ index ] = rand();
 	}
-	sort_int(array_int, 0, 49);
-	int result = is_increase_int_array(array_int, 50);
+	sortInt(array_int, 0, 49);
+	int result = isIncreaseIntArray(array_int, 50);
 	free(array_int);
 	ASSERT_TRUE(result);
 }
@@ -54,8 +54,8 @@ TEST (KernelCommon, SortString) {
 		(char *) "dog",
 		'\0'
 	};
-	sort_string(target, 0, 8);
-	int result = is_increase_string_array(target, 9);
+	sortString(target, 0, 8);
+	int result = isIncreaseStringArray(target, 9);
 	ASSERT_TRUE(result);
 }
 
@@ -65,7 +65,7 @@ TEST (KernelCommon, SortString) {
 //	for (index = 0; index < 50; ++index) {
 //		array_int[ index ] = rand() % ( 10 ) + 1;
 //	}
-//	distribution_counting_sort(array_int, 50);
+//	distributionCountingSort(array_int, 50);
 //	int result = is_increase_int_array(array_int, 50);
 //	ASSERT_TRUE(result);
 //}

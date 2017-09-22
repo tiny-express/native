@@ -85,7 +85,7 @@ namespace Java {
 									replacementString = R"(\\)";
 									break;
 								default:
-										string charAtIndexString = string_from_char(charAtIndex);
+										string charAtIndexString = stringFromChar(charAtIndex);
 										replacementString = charAtIndexString;
 										free(charAtIndexString);
 							}

@@ -44,8 +44,8 @@ typedef wchar_t unicode;
 typedef const char *const_string;
 typedef unsigned char byte;
 
-string string_default(string target);
+string stringDefault(string target);
 
-double number_default(double target);
+double numberDefaut(double target);
 
 #endif

@@ -32,52 +32,52 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-char *string_from_char(char target);
-char *string_from_short(short target);
-char *string_from_int(int target);
-char *string_from_long(long target);
-char *string_from_double(double target);
-char *string_from_float(float target);
+char *stringFromChar(char target);
+char *stringFromShort(short target);
+char *stringFromInt(int target);
+char *stringFromLong(long target);
+char *stringFromDouble(double target);
+char *stringFromFloat(float target);
 
-char string_to_char(char *target);
-short string_to_short(char *target);
-int string_to_int(char *target);
-long string_to_long(char *target);
-double string_to_double(char *target);
-float string_to_float(char *target);
+char stringToChar(char *target);
+short stringToShort(char *target);
+int stringToInt(char *target);
+long stringToLong(char *target);
+double stringToDouble(char *target);
+float stringToFloat(char *target);
 
-char *string_replace(char *target, char *find, char *replace_with);
-char **string_split(char *target, char *delimiter);
-char *string_join(char **target, char *delimiter);
-int string_index(char *target, char *subtarget, int times);
-char *string_trim(char *target);
-int string_startswith(char *target, char *prefix);
-int string_endswith(char *target, char *suffix);
-char *string_random(char *target, int size);
-char *string_append(char **target, char subtarget);
-char *string_concat(char *target, char *subtarget);
-int string_equals(char *target1, char *target2);
+char *stringReplace(char *target, char *find, char *replace_with);
+char **stringSplit(char *target, char *delimiter);
+char *stringJoin(char **target, char *delimiter);
+int stringIndex(char *target, char *subtarget, int times);
+char *stringTrim(char *target);
+int stringStartswith(char *target, char *prefix);
+int stringEndswith(char *target, char *suffix);
+char *stringRandom(char *target, int size);
+char *stringAppend(char **target, char subtarget);
+char *stringConcat(char *target, char *subtarget);
+int stringEquals(char *target1, char *target2);
 char *string_concat_asm(char *target, char *subtarget);
-char *string_reverse(char *target);
-int string_matches(char *target, char *regex);
+char *stringReverse(char *target);
+int stringMatches(char *target, char *regex);
 
-char *string_from_to(char *target, int from, int to);
-char *string_from(char *target, int from);
-char *string_to(char *target, int to);
-char *string_copy(char *target);
-char *string_upper(char *target);
-char *string_lower(char *target);
-char *string_title(char *target);
-char *string_standardized(char *target);
-int string_to_boolean(char *target);
-char *string_from_boolean(int target);
-char *url_encode(char *target);
-char *url_decode(char *target);
+char *stringFromTo(char *target, int from, int to);
+char *stringFrom(char *target, int from);
+char *stringTo(char *target, int to);
+char *stringCopy(char *target);
+char *stringUpper(char *target);
+char *stringLower(char *target);
+char *stringTitle(char *target);
+char *stringStandardized(char *target);
+int stringToBoolean(char *target);
+char *stringFromBoolean(int target);
+char *urlEncode(char *target);
+char *urlDecode(char *target);
 
-char *find_param(char *name, char *params);
-char *find_param_from_url(char *name, char *url);
+char *findParam(char *name, char *params);
+char *findParamFromUrl(char *name, char *url);
 
-void free_pointer_pointer_char(char **char_array);
+void freePointerPointerChar(char **char_array);
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

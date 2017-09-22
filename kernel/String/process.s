@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#  char *string_concat(char *target, char *subtarget)
-# Optimized algorithms for string_concat() with greater speed
+#  char *stringConcat(char *target, char *subtarget)
+# Optimized algorithms for stringConcat() with greater speed
 # Reference from https://java.net/projects/solaris/sources/on-src/content/usr/src/lib/libc/amd64/gen/strcat.s
 .section .text
     .global string_concat_asm

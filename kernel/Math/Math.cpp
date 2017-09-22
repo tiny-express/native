@@ -26,123 +26,123 @@
 
 #include "../Math.hpp"
 
-double math_pow(double base, double exponent) {
+double mathPow(double base, double exponent) {
 	return pow(base, exponent);
 }
 
-double math_floor(double value) {
+double mathFloor(double value) {
 	return floor(value);
 }
 
-double math_round(double value) {
+double mathRound(double value) {
 	return round(value);
 }
 
-double math_sqrt(double value) {
+double mathSqrt(double value) {
 	return sqrt(value);
 }
 
-double math_cbrt(double value) {
+double mathCbrt(double value) {
 	return cbrt(value);
 }
 
-double math_ceil(double value) {
+double mathCeil(double value) {
 	return ceil(value);
 }
 
-double math_exp(double value) {
+double mathExp(double value) {
 	return exp(value);
 }
 
-double math_expm1(double value) {
+double mathExpm1(double value) {
 	return expm1(value);
 }
 
-double math_log(double value) {
+double mathLog(double value) {
 	return log(value);
 }
 
-double math_log10(double value) {
+double mathLog10(double value) {
 	return log10(value);
 }
 
-double math_log1p(double value) {
+double mathLog1p(double value) {
 	return log1p(value);
 }
 
-double math_ieeeremainder(double dividend, double divisor) {
+double mathIeeeRemainder(double dividend, double divisor) {
 	return dividend - ( round(dividend / divisor) * divisor );
 }
 
-double math_rint(double value) {
+double mathRint(double value) {
 	return rint(value);
 }
 
-double math_hypot(double valueA, double valueB) {
+double mathHypot(double valueA, double valueB) {
 	return hypot(valueA, valueB);
 }
 
-double math_acos(double value) {
+double mathAcos(double value) {
 	return acos(value);
 }
 
-double math_cos(double angle) {
+double mathCos(double angle) {
 	return cos(angle);
 }
 
-double math_cosh(double angle) {
+double mathCosh(double angle) {
 	return cosh(angle);
 }
 
-double math_asin(double value) {
+double mathAsin(double value) {
 	return asin(value);
 }
 
-double math_sin(double angle) {
+double mathSin(double angle) {
 	return sin(angle);
 }
 
-double math_sinh(double angle) {
+double mathSinh(double angle) {
 	return sinh(angle);
 }
 
-double math_atan(double value) {
+double mathAtan(double value) {
 	return atan(value);
 }
 
-double math_atan2(double coordinateX, double coordinateY) {
+double mathAtan2(double coordinateX, double coordinateY) {
 	return atan2(coordinateX, coordinateY);
 }
 
-double math_tan(double angle) {
+double mathTan(double angle) {
 	return tan(angle);
 }
 
-double math_tanh(double angle) {
+double mathTanh(double angle) {
 	return tanh(angle);
 }
 
-double math_copysign(double magnitude, double sign) {
+double mathCopySign(double magnitude, double sign) {
 	return copysign(magnitude, sign);
 }
 
-float math_copysignf(float magnitude, float sign) {
+float mathCopySignF(float magnitude, float sign) {
 	return copysignf(magnitude, sign);
 }
 
-double math_nexttoward(double start, double direction) {
+double mathNextToward(double start, double direction) {
 	return nexttoward(start, direction);
 }
 
-float math_nexttowardf(float start, double direction) {
+float mathNextTowardF(float start, double direction) {
 	return nexttowardf(start, direction);
 }
 
-double math_ldexp(double value, int scaleFactor) {
+double mathLdexp(double value, int scaleFactor) {
 	return ldexp(value, scaleFactor);
 }
 
-float math_ldexpf(float value, int scaleFactor) {
+float mathLdexpf(float value, int scaleFactor) {
 	return ldexpf(value, scaleFactor);
 }
 

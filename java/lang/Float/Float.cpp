@@ -34,17 +34,17 @@ const float Float::MIN_VALUE = (float) pow(2, -149);
 
 Float::Float() {
     this->original = 0;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::Float(float original) {
     this->original = original;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::Float(const Float &floatNumber) {
     this->original = floatNumber.original;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::~Float() {
@@ -126,7 +126,7 @@ boolean Float::operator||(const Float &target) const {
 Float Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
     return *this;
 }
 
@@ -147,8 +147,8 @@ Float Float::operator/=(const Float &target) const {
 }
 
 char Float::charValue() const {
-    string convertResult = string_from_float(this->original);
-    char charValueResult = string_to_char(convertResult);
+    string convertResult = stringFromFloat(this->original);
+    char charValueResult = stringToChar(convertResult);
     free(convertResult);
     return charValueResult;
 }

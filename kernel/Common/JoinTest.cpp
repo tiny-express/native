@@ -41,7 +41,7 @@ TEST (KernelCommon, JoinPointerPointerChar) {
 		'\0'
 	};
 	char *expect = "Thequickbrownfoxjumpsoverthelazydog";
-	char *result = join_pointer_pointer_char(target);
+	char *result = joinPointerPointerChar(target);
 	ASSERT_STR(expect, result);
 	free(result);
 }
@@ -62,7 +62,7 @@ TEST (KernelCommon, JoinDelimiterPointerPointerChar) {
 	
 	char *delimiter = "|";
 	char *expect = "The|quick|brown|fox|jumps|over|the|lazy|dog";
-	char *result = join_delimiter_pointer_pointer_char(target, delimiter);
+	char *result = joinDelimiterPointerPointerChar(target, delimiter);
 	ASSERT_STR(expect, result);
 	free(result);
 }

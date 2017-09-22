@@ -382,7 +382,7 @@ namespace Java {
 					return true;
 				}
 				if (instanceof<String>(anObject)) {
-					return (boolean) string_equals(original, anObject.toString());
+					return (boolean) stringEquals(original, anObject.toString());
 				}
 				return false;
 			}

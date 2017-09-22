@@ -169,7 +169,7 @@ TEST (JavaUtil, HashMapGet) {
 }
 
 TEST (JavaUtil, HashMapIsEmpty) {
-	// Given valid hash map to test isEmpty()
+	// Given valid hash map to test isEmptyString()
 	HashMap<String, Float> hashMap;
 
 	boolean result = hashMap.isEmpty();

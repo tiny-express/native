@@ -30,29 +30,29 @@
 
 TEST (KernelCommon, LengthPointerChar) {
 	char *data = "Hello world";
-	ASSERT_EQUAL(11, length_pointer_char(data));
+	ASSERT_EQUAL(11, lengthPointerChar(data));
 	
-	ASSERT_EQUAL(11, length_pointer_char("Hello world"));
+	ASSERT_EQUAL(11, lengthPointerChar("Hello world"));
 	
 	data = "";
-	ASSERT_EQUAL(0, length_pointer_char(data));
+	ASSERT_EQUAL(0, lengthPointerChar(data));
 	
 	data = "\0";
-	ASSERT_EQUAL(0, length_pointer_char(data));
+	ASSERT_EQUAL(0, lengthPointerChar(data));
 	
 	data = NULL;
-	ASSERT_EQUAL(0, length_pointer_char(data));
+	ASSERT_EQUAL(0, lengthPointerChar(data));
 	
 	//  Please use calloc instead of malloc because it is dangerous
 	//  data = malloc(10);
-	//  ASSERT_EQUAL(0, length_pointer_char(data));
+	//  ASSERT_EQUAL(0, lengthPointerChar(data));
 	//  free(data);
 }
 
 TEST (KernelCommon, LengthPointerPointerChar) {
 	
 	char *data_null = NULL;
-	ASSERT_EQUAL(0, length_pointer_pointer_char((char **) data_null));
+	ASSERT_EQUAL(0, lengthPointerPointerChar((char **) data_null));
 	
 	char *data_raw[] = {
 		(char *) "abc",
@@ -64,7 +64,7 @@ TEST (KernelCommon, LengthPointerPointerChar) {
 		'\0'
 	};
 	char **data1 = (char **) data_raw;
-	ASSERT_EQUAL(6, length_pointer_pointer_char(data1));
+	ASSERT_EQUAL(6, lengthPointerPointerChar(data1));
 	
 	// Dynamic string
 	int NUM = 135;
@@ -74,52 +74,52 @@ TEST (KernelCommon, LengthPointerPointerChar) {
 		data2[ i ] = (char *) "test";
 	}
 	data2[ NUM ] = '\0';
-	ASSERT_EQUAL(NUM, length_pointer_pointer_char(data2));
+	ASSERT_EQUAL(NUM, lengthPointerPointerChar(data2));
 	free(data2);
 }
 
 TEST (KernelCommon, LengthShort) {
 	short input = 0;
-	ASSERT_EQUAL(1, length_short(input));
+	ASSERT_EQUAL(1, lengthShort(input));
 	input = 123;
-	ASSERT_EQUAL(3, length_short(input));
+	ASSERT_EQUAL(3, lengthShort(input));
 }
 
 TEST (KernelCommon, LengthInt) {
 	int input = 0;
-	ASSERT_EQUAL(1, length_int(input));
+	ASSERT_EQUAL(1, lengthInt(input));
 	input = 123;
-	ASSERT_EQUAL(3, length_int(input));
+	ASSERT_EQUAL(3, lengthInt(input));
 }
 
 TEST (KernelCommon, LengthLong) {
 	long input = 0;
-	ASSERT_EQUAL(1, length_long(input));
+	ASSERT_EQUAL(1, lengthLong(input));
 	input = 123456;
-	ASSERT_EQUAL(6, length_long(input));
+	ASSERT_EQUAL(6, lengthLong(input));
 }
 
 TEST (KernelCommon, LengthDouble) {
 	double input = 0;
-	ASSERT_EQUAL(1, length_double(input));
+	ASSERT_EQUAL(1, lengthDouble(input));
 	input = 123.456;
-	ASSERT_EQUAL(7, length_double(input));
+	ASSERT_EQUAL(7, lengthDouble(input));
 }
 
 TEST (KernelCommon, LengthFloat) {
 	float input = 1.23;
-	ASSERT_EQUAL(4, length_float(input));
+	ASSERT_EQUAL(4, lengthFloat(input));
 	input = 0.345;
-	ASSERT_EQUAL(5, length_float(input));
+	ASSERT_EQUAL(5, lengthFloat(input));
 }
 
 TEST (KernelCommon, IsEmpty) {
 	char *target1 = NULL;
-	ASSERT_TRUE(is_empty(target1));
+	ASSERT_TRUE(isEmptyString(target1));
 
 	char *target2 = "";
-	ASSERT_TRUE(is_empty(target2));
+	ASSERT_TRUE(isEmptyString(target2));
 
 	char *target3 = "abcd";
-	ASSERT_FALSE(is_empty(target3));
+	ASSERT_FALSE(isEmptyString(target3));
 }

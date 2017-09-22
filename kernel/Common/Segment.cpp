@@ -29,11 +29,11 @@
 #include "../String.hpp"
 #include "../Common.hpp"
 
-char *segment_pointer_char(char *target_param, int from, int to) {
+char *segmentPointerChar(char *target_param, int from, int to) {
 	if (target_param == NULL) {
 		return strdup("");
 	}
-	int length_target = length_pointer_char(target_param);
+	int length_target = lengthPointerChar(target_param);
 	if (from > to || from < 0 || from > length_target || to < 0) {
 		return strdup("");
 	}
@@ -49,8 +49,8 @@ char *segment_pointer_char(char *target_param, int from, int to) {
 	return pointer;
 }
 
-char **segment_pointer_pointer_char(char **target, int from, int to) {
-	int length_target = length_pointer_pointer_char(target);
+char **segmentPointerPointerChar(char **target, int from, int to) {
+	int length_target = lengthPointerPointerChar(target);
 	if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
 		return NULL;
 	}

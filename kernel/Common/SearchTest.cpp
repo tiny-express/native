@@ -32,37 +32,37 @@
 //	int array[] = { 2, 3, 4, 7, 8, 10 };
 //	int length = 6;
 //	int key = 7;
-//	int result = binary_search(array, length, key);
+//	int result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(3, result);
 //
 //	length = -1;
 //	key = -5;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //	length = 6;
 //	key = 2;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(0, result);
 //
 //	length = 6;
 //	key = 10;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(5, result);
 //
 //	length = 6;
 //	key = 9;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //	length = -1;
 //	key = 10;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //	length = 10;
 //	key = 200;
-//	result = binary_search(array, length, key);
+//	result = binarySearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //}
 //
@@ -71,32 +71,32 @@
 //	int array[] = { 2, 3, 4, 7, 8, 10 };
 //	int length = 6;
 //	int key = 7;
-//	int result = linear_search(array, length, key);
+//	int result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(3, result);
 //
 //	length = -1;
 //	key = 5;
-//	result = linear_search(array, length, key);
+//	result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //	length = 6;
 //	key = 2;
-//	result = linear_search(array, length, key);
+//	result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(0, result);
 //
 //	length = 6;
 //	key = 10;
-//	result = linear_search(array, length, key);
+//	result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(5, result);
 //
 //	length = 6;
 //	key = -9;
-//	result = linear_search(array, length, key);
+//	result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //	length = -1;
 //	key = -10;
-//	result = linear_search(array, length, key);
+//	result = linearSearch(array, length, key);
 //	ASSERT_EQUAL(-1, result);
 //
 //}

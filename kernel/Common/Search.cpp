@@ -35,7 +35,7 @@
 // * @param key
 // * @return result
 // */
-//int linear_search(int array[], int length, int key) {
+//int linearSearch(int array[], int length, int key) {
 //	register int index;
 //	for (index = 0; index < length; index++) {
 //		if (array[ index ] == key) {
@@ -54,7 +54,7 @@
 // * @param key
 // * @return result
 // */
-//int binary_search(int array[], int length, int key) {
+//int binarySearch(int array[], int length, int key) {
 //	register int middle, left, right;
 //	left = 0;
 //	right = length;

@@ -37,12 +37,12 @@
  * @param target
  * @return char pointer
  */
-char *join_pointer_pointer_char(char **target) {
+char *joinPointerPointerChar(char **target) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
 	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
-		item_length = length_pointer_char(*pointer);
+		item_length = lengthPointerChar(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
 		total_length += item_length;
 	}
@@ -61,13 +61,13 @@ char *join_pointer_pointer_char(char **target) {
  * @param target
  * @return char pointer
  */
-char *join_delimiter_pointer_pointer_char(char **target, const char *delimiter) {
+char *joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
-	int delimiter_length = length_pointer_char((char *) delimiter);
+	int delimiter_length = lengthPointerChar((char *) delimiter);
 	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
-		item_length = length_pointer_char(*pointer);
+		item_length = lengthPointerChar(*pointer);
 		memcpy(result_tmp + total_length, *pointer, item_length);
 		total_length += item_length;
 		memcpy(result_tmp + total_length, delimiter, delimiter_length);

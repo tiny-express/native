@@ -28,8 +28,8 @@
 #include "../Common.hpp"
 #include "../Type.hpp"
 
-#define P_LEN(TYPE); \
-int length_pointer_##TYPE(TYPE *target) {\
+#define P_LEN(NAME, TYPE); \
+int lengthPointer##NAME(TYPE *target) {\
     if (target == NULL) return 0;\
         register TYPE*pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -37,8 +37,8 @@ int length_pointer_##TYPE(TYPE *target) {\
 }
 
 // length of pointer pointer
-#define P_P_LEN(TYPE); \
-int length_pointer_pointer_##TYPE(TYPE **target) {\
+#define P_P_LEN(NAME, TYPE); \
+int lengthPointerPointer##NAME(TYPE **target) {\
         if (target == NULL) return 0;\
         register TYPE**pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -46,18 +46,23 @@ int length_pointer_pointer_##TYPE(TYPE **target) {\
 }
 
 // Length of number
-#define NUM_LEN(TYPE); \
-int length_##TYPE(TYPE target) {\
-        char *result = string_from_##TYPE(target);\
-        int len = length_pointer_char(result); \
+#define NUM_LEN(NAME, TYPE); \
+int length##NAME(TYPE target) {\
+        char *result = stringFrom##NAME(target);\
+        int len = lengthPointerChar(result); \
         free(result); \
         return len; \
 }
 
 //#ifndef __linux__
-P_LEN(char);
+P_LEN(Char, char);
 //#endif
-P_P_LEN(char);NUM_LEN(short);NUM_LEN(int);NUM_LEN(long);NUM_LEN(double);NUM_LEN(float);
+P_P_LEN(Char, char);
+NUM_LEN(Short, short);
+NUM_LEN(Int, int);
+NUM_LEN(Long, long);
+NUM_LEN(Double, double);
+NUM_LEN(Float, float);
 
 /**
  * Is string empty ?
@@ -65,8 +70,8 @@ P_P_LEN(char);NUM_LEN(short);NUM_LEN(int);NUM_LEN(long);NUM_LEN(double);NUM_LEN(
  * @param input
  * @return TRUE or FALSE
  */
-int is_empty(char *input) {
-	if (length_pointer_char(input) == 0) {
+int isEmptyString(char *input) {
+	if (lengthPointerChar(input) == 0) {
 		return TRUE;
 	}
 	return FALSE;

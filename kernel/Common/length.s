@@ -24,15 +24,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-# int length_pointer_char(char *target)
-# Optimized algorithms for length_pointer_char() with greater speed
+# int lengthPointerChar(char *target)
+# Optimized algorithms for lengthPointerChar() with greater speed
 # Reference from http://www.int80h.org/strlen/
 .section .text
-    .global length_pointer_char
+    .global lengthPointerChar
 return_empty:
     mov $0, %rax
     ret
-length_pointer_char:
+lengthPointerChar:
     test %rdi, %rdi
     je return_empty
     push %rdi

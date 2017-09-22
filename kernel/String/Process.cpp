@@ -39,14 +39,14 @@
  * @param replace_with
  * @return string
  */
-char *string_replace(char *target, char *find_string, char *replace_with) {
+char *stringReplace(char *target, char *find_string, char *replace_with) {
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
 		return strdup("");
 	}
 	char *result;
 	int i, count = 0;
-	int new_len = length_pointer_char(replace_with);
-	int old_len = length_pointer_char(find_string);
+	int new_len = lengthPointerChar(replace_with);
+	int old_len = lengthPointerChar(find_string);
 	
 	for (i = 0; target[ i ] != '\0'; i++) {
 		if (strstr(&target[ i ], find_string) == &target[ i ]) {
@@ -78,13 +78,13 @@ char *string_replace(char *target, char *find_string, char *replace_with) {
  * @param delimiter
  * @return array char pointer
  */
-char **string_split(char *target, char *delimiter) {
+char **stringSplit(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		char **result = (char **)calloc(1, sizeof(char *));
 		return result;
 	}
 	char **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
-	const int target_length = length_pointer_char(target);
+	const int target_length = lengthPointerChar(target);
 	char const_target[target_length + 1];
 	strncpy(const_target, target, (size_t) target_length);
 	const_target[ target_length ] = '\0';
@@ -106,11 +106,11 @@ char **string_split(char *target, char *delimiter) {
  *
  * @param char_array
  */
-void free_pointer_pointer_char(char **char_array) {
+void freePointerPointerChar(char **char_array) {
 	if (char_array == NULL) {
 		return;
 	}
-	int length = length_pointer_pointer_char(char_array);
+	int length = lengthPointerPointerChar(char_array);
 	register int index;
 	for (index = length - 1; index >= 0; index--) {
 		free(char_array[ index ]);
@@ -125,26 +125,26 @@ void free_pointer_pointer_char(char **char_array) {
  * @param delimiter
  * @return string
  */
-char *string_join(char *target[], char *delimiter) {
+char *stringJoin(char *target[], char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		return NULL;
 	}
-	int num = length_pointer_pointer_char(target) - 1;
+	int num = lengthPointerPointerChar(target) - 1;
 	int len = 0, wlen = 0;
 	char *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	register int index;
 	for (index = 0; index < num; index++) {
 		// Copy memory segment
-		wlen = length_pointer_char(target[ index ]);
+		wlen = lengthPointerChar(target[index]);
 		memcpy(tmp + len, target[ index ], wlen);
 		len += wlen;
 		// Copy memory segment
-		wlen = length_pointer_char(delimiter);
+		wlen = lengthPointerChar(delimiter);
 		memcpy(tmp + len, delimiter, wlen);
 		len += wlen;
 	}
 	// Copy memory segment
-	wlen = length_pointer_char(target[ num ]);
+	wlen = lengthPointerChar(target[num]);
 	memcpy(tmp + len, target[ num ], wlen);
 	len += wlen;
 	len += 1;
@@ -162,13 +162,13 @@ char *string_join(char *target[], char *delimiter) {
  * @param target
  * @return string
  */
-char *string_trim(char *target) {
+char *stringTrim(char *target) {
 	if (target == NULL) {
 		return NULL;
 	}
 	int len, left, right;
 	left = 0;
-	right = length_pointer_char(target) - 1;
+	right = lengthPointerChar(target) - 1;
 	while (target[ left ] == ' ')
 		left++;
 	while (target[ right ] == ' ')
@@ -186,12 +186,12 @@ char *string_trim(char *target) {
  * @param prefix
  * @return TRUE | FALSE
  */
-int string_startswith(char *target, char *prefix) {
+int stringStartswith(char *target, char *prefix) {
 	if (target == NULL || prefix == NULL) {
 		return FALSE;
 	}
-	int target_length = length_pointer_char(target);
-	int prefix_length = length_pointer_char(prefix);
+	int target_length = lengthPointerChar(target);
+	int prefix_length = lengthPointerChar(prefix);
 	if (target_length < prefix_length) {
 		return FALSE;
 	}
@@ -211,12 +211,12 @@ int string_startswith(char *target, char *prefix) {
  * @param suffix
  * @return TRUE | FALSE
  */
-int string_endswith(char *target, char *suffix) {
+int stringEndswith(char *target, char *suffix) {
 	if (target == NULL || suffix == NULL) {
 		return FALSE;
 	}
-	int target_length = length_pointer_char(target);
-	int suffix_length = length_pointer_char(suffix);
+	int target_length = lengthPointerChar(target);
+	int suffix_length = lengthPointerChar(suffix);
 	if (target_length < suffix_length) {
 		return FALSE;
 	}
@@ -237,13 +237,13 @@ int string_endswith(char *target, char *suffix) {
  * @param times
  * @return position
  */
-int string_index(char *target, char *subtarget, int times) {
-	if (is_empty(target) || is_empty(subtarget) || ( times <= 0 )) {
+int stringIndex(char *target, char *subtarget, int times) {
+	if (isEmptyString(target) || isEmptyString(subtarget) || ( times <= 0 )) {
 		return NOT_FOUND;
 	}
 	
-	int target_length = length_pointer_char(target);
-	int subtarget_length = length_pointer_char(subtarget);
+	int target_length = lengthPointerChar(target);
+	int subtarget_length = lengthPointerChar(subtarget);
 	
 	if (target_length == 0 || subtarget_length == 0 || target_length < subtarget_length || ( times == 0 )) {
 		return NOT_FOUND;
@@ -277,11 +277,11 @@ int string_index(char *target, char *subtarget, int times) {
  * @param size
  * @return random string
  */
-char *string_random(char *target, int size) {
-	if (is_empty(target)) {
+char *stringRandom(char *target, int size) {
+	if (isEmptyString(target)) {
 		return NULL;
 	}
-	int target_length = length_pointer_char(target);
+	int target_length = lengthPointerChar(target);
 	char *result = (char *)calloc(size + 1, sizeof(char));
 	register int i;
 	for (i = 0; i < size; i++) {
@@ -298,7 +298,7 @@ char *string_random(char *target, int size) {
  * @param subtarget
  * @return string
  */
-char *string_append(char **target, char subtarget) {
+char *stringAppend(char **target, char subtarget) {
 	asprintf(target, "%s%c", *target, subtarget);
 	return *target;
 }
@@ -310,15 +310,15 @@ char *string_append(char **target, char subtarget) {
  * @param subtarget
  * @return string
  */
-char *string_concat(char *target, char *subtarget) {
-	if (is_empty(target)) {
+char *stringConcat(char *target, char *subtarget) {
+	if (isEmptyString(target)) {
 		return strdup(subtarget);
 	}
-	if (is_empty(subtarget)) {
+	if (isEmptyString(subtarget)) {
 		return strdup(target);
 	}
-	int target_length = length_pointer_char(target);
-	int subtarget_length = length_pointer_char(subtarget);
+	int target_length = lengthPointerChar(target);
+	int subtarget_length = lengthPointerChar(subtarget);
 	char *result = (char *)calloc(target_length + subtarget_length + 1, sizeof(char));
 	memcpy(result, target, target_length);
 	memcpy(result + target_length, subtarget, subtarget_length);
@@ -334,8 +334,8 @@ char *string_concat(char *target, char *subtarget) {
  * @param to
  * @return string
  */
-char *string_from_to(char *target, int from, int to) {
-	return segment_pointer_char(target, from, to);
+char *stringFromTo(char *target, int from, int to) {
+	return segmentPointerChar(target, from, to);
 }
 
 /**
@@ -345,8 +345,8 @@ char *string_from_to(char *target, int from, int to) {
  * @param from
  * @return
  */
-char *string_from(char *target, int from) {
-	return string_from_to(target, from, length_pointer_char(target));
+char *stringFrom(char *target, int from) {
+	return stringFromTo(target, from, lengthPointerChar(target));
 }
 
 /**
@@ -356,8 +356,8 @@ char *string_from(char *target, int from) {
  * @param to
  * @return
  */
-char *string_to(char *target, int to) {
-	return string_from_to(target, 0, to);
+char *stringTo(char *target, int to) {
+	return stringFromTo(target, 0, to);
 }
 
 /**
@@ -366,11 +366,11 @@ char *string_to(char *target, int to) {
  * @param target
  * @return string
  */
-char *string_copy(char *target) {
-	if (is_empty(target)) {
+char *stringCopy(char *target) {
+	if (isEmptyString(target)) {
 		return strdup("");
 	}
-	int length = length_pointer_char(target);
+	int length = lengthPointerChar(target);
 	char *result = (char *) calloc(length + 1, sizeof(char));
 	memcpy(result, target, length);
 	result[ length ] = '\0';
@@ -383,11 +383,11 @@ char *string_copy(char *target) {
  * @param target
  * @return string
  */
-char *string_upper(char *target) {
-	if (is_empty(target)) {
+char *stringUpper(char *target) {
+	if (isEmptyString(target)) {
 		return NULL;
 	}
-	char *result = string_copy(target);
+	char *result = stringCopy(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'a' <= *index ) && ( *index <= 'z' )) {
@@ -403,11 +403,11 @@ char *string_upper(char *target) {
  * @param target
  * @return string
  */
-char *string_lower(char *target) {
-	if (is_empty(target)) {
+char *stringLower(char *target) {
+	if (isEmptyString(target)) {
 		return NULL;
 	}
-	char *result = string_copy(target);
+	char *result = stringCopy(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'A' <= *index ) && ( *index <= 'Z' )) {
@@ -423,13 +423,13 @@ char *string_lower(char *target) {
  * @param target
  * @return string
  */
-char *string_title(char *target) {
-	if (is_empty(target)) {
+char *stringTitle(char *target) {
+	if (isEmptyString(target)) {
 		return NULL;
 	}
-	char *result = string_copy(target);
+	char *result = stringCopy(target);
 	register char *index = result;
-	if (length_pointer_char(index) > 0 && 'a' <= *index && *index <= 'z') {
+	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
 		*index = *index - 32;
 	}
 	char last_index = *index;
@@ -449,14 +449,14 @@ char *string_title(char *target) {
  * @param target
  * @return string
  */
-char *string_standardized(char *target) {
-	if (is_empty(target)) {
+char *stringStandardized(char *target) {
+	if (isEmptyString(target)) {
 		return NULL;
 	}
-	char **segments = string_split(target, " ");
-	char *result = string_join(segments, " ");
-	result[ length_pointer_char(result) ] = '\0';
-	free_pointer_pointer_char(segments);
+	char **segments = stringSplit(target, " ");
+	char *result = stringJoin(segments, " ");
+	result[lengthPointerChar(result) ] = '\0';
+	freePointerPointerChar(segments);
 	return result;
 }
 
@@ -467,7 +467,7 @@ char *string_standardized(char *target) {
  * @param target2
  * @return TRUE | FALSE
  */
-int string_equals(char *target1, char *target2) {
+int stringEquals(char *target1, char *target2) {
 	if (( target1 == NULL) && ( target2 == NULL)) {
 		return TRUE;
 	}
@@ -486,8 +486,8 @@ int string_equals(char *target1, char *target2) {
  * @param target
  * @return string reversed
  */
-char *string_reverse(char *target) {
-	int target_length = length_pointer_char(target);
+char *stringReverse(char *target) {
+	int target_length = lengthPointerChar(target);
 	char *result = (char *) calloc(target_length + 1, sizeof(char));
 #ifdef __linux__
 	register
@@ -507,8 +507,8 @@ char *string_reverse(char *target) {
  * @param regex
  * @return TRUE | FALSE
  */
-int string_matches(char *target, char *regex) {
-//	if (is_empty(target)) {
+int stringMatches(char *target, char *regex) {
+//	if (isEmptyString(target)) {
 //		return FALSE;
 //	}
 //

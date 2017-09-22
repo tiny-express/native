@@ -44,20 +44,20 @@
  * @return
  */
 string date(time_t timestamp, string format) {
-	char *date_format = string_replace(format, "D", "%d");
-	char *date_format2 = string_replace(date_format, "d", "%d");
+	char *date_format = stringReplace(format, "D", "%d");
+	char *date_format2 = stringReplace(date_format, "d", "%d");
 	free(date_format);
 	
-	char *date_format3 = string_replace(date_format2, "M", "%m");
+	char *date_format3 = stringReplace(date_format2, "M", "%m");
 	free(date_format2);
 	
-	char *date_format4 = string_replace(date_format3, "m", "%m");
+	char *date_format4 = stringReplace(date_format3, "m", "%m");
 	free(date_format3);
 	
-	char *date_format5 = string_replace(date_format4, "Y", "%Y");
+	char *date_format5 = stringReplace(date_format4, "Y", "%Y");
 	free(date_format4);
 	
-	char *date_format6 = string_replace(date_format5, "y", "%Y");
+	char *date_format6 = stringReplace(date_format5, "y", "%Y");
 	free(date_format5);
 	
 	char *result = (char *)calloc(11, sizeof(char));

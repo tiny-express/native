@@ -114,7 +114,7 @@ int StringBufferUnSafe::length() const {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend, int offset, int len) {
-	if (offset < 0 || len < 0 || (offset + len) > length_pointer_char(stringToAppend)) {
+	if (offset < 0 || len < 0 || (offset + len) > lengthPointerChar(stringToAppend)) {
 		throw IndexOutOfBoundsException();
 	}
 	
@@ -129,7 +129,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend, int offset
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int index, string stringToInsert, int offset, int len) {
 	if (index < 0 || index > length() || offset < 0
-	    || len < 0 || (offset + len) > length_pointer_char(stringToInsert)) {
+	    || len < 0 || (offset + len) > lengthPointerChar(stringToInsert)) {
 		throw StringIndexOutOfBoundsException();
 	}
 	
@@ -156,7 +156,7 @@ StringBufferUnSafe::StringBufferUnSafe(const StringBufferUnSafe &other) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend) {
-	return this->append(stringToAppend, 0, length_pointer_char(stringToAppend));
+	return this->append(stringToAppend, 0, lengthPointerChar(stringToAppend));
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(Object *object) {
@@ -354,7 +354,7 @@ StringBufferUnSafe::~StringBufferUnSafe() {
 }*/
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex) const {
-	return string_index(this->original, stringToGetIndex.toString(), 1);
+	return stringIndex(this->original, stringToGetIndex.toString(), 1);
 }
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) const {
@@ -393,7 +393,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, boolean boolValue) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string stringToInsert) {
-	return this->insert(offset, stringToInsert, 0, length_pointer_char(stringToInsert));
+	return this->insert(offset, stringToInsert, 0, lengthPointerChar(stringToInsert));
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
@@ -415,7 +415,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object &object) {
         return this->insert(offset, (string) "null", 0, 4);
     }
 
-    return this->insert(offset, object.toString(), 0, length_pointer_char(object.toString()));
+    return this->insert(offset, object.toString(), 0, lengthPointerChar(object.toString()));
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
@@ -451,8 +451,8 @@ int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
 }
 
 int StringBufferUnSafe::lastIndexOf(String stringToGetIndex, int fromIndex) const {
-	string reversedOriginal = string_reverse(this->original);
-	string reversedString = string_reverse(stringToGetIndex.toString());
+	string reversedOriginal = stringReverse(this->original);
+	string reversedString = stringReverse(stringToGetIndex.toString());
 	String reversedOriginalString = reversedOriginal;
 	
 	int substringIndex = this->length() - fromIndex - stringToGetIndex.length();

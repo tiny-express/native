@@ -30,5 +30,5 @@
 TEST (KernelMath, Pow) {
 	double base = 3;
 	double power = 3;
-	ASSERT_TRUE(math_pow(base, power) == 27);
+	ASSERT_TRUE(mathPow(base, power) == 27);
 }

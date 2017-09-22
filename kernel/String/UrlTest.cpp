@@ -30,7 +30,7 @@
 
 TEST (KernelString, UrlEncode) {
 	char *target = "Quán ăn";
-	char *result = url_encode(target);
+	char *result = urlEncode(target);
 	char *expect = "Qu%c3%a1n+%c4%83n";
 	ASSERT_STR(expect, result);
 	free(result);
@@ -38,7 +38,7 @@ TEST (KernelString, UrlEncode) {
 
 TEST (KernelString, UrlDecode) {
 	char *target = "Qu%c3%a1n+%c4%83n";
-	char *result = url_decode(target);
+	char *result = urlDecode(target);
 	char *expect = "Quán ăn";
 	ASSERT_STR(expect, result);
 	free(result);
@@ -47,122 +47,122 @@ TEST (KernelString, UrlDecode) {
 TEST (KernelString, UrlFindParam) {
 	char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	
-	char *result = find_param("username", params);
+	char *result = findParam("username", params);
 	ASSERT_STR("loint", result);
 	free(result);
 	
-	result = find_param("firstName", params);
+	result = findParam("firstName", params);
 	ASSERT_STR("Loi AbC", result);
 	free(result);
 	
-	result = find_param("password", params);
+	result = findParam("password", params);
 	ASSERT_STR("1234", result);
 	free(result);
 	
 	char *params2 = "username=&password=&firstName=Loi&&lastName=Nguyen";
 	
-	result = find_param("username", params2);
+	result = findParam("username", params2);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param("firstName", params2);
+	result = findParam("firstName", params2);
 	ASSERT_STR("Loi", result);
 	free(result);
 	
-	result = find_param("password", params2);
+	result = findParam("password", params2);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param("lastName", params2);
+	result = findParam("lastName", params2);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
 	char *params3 = "";
-	result = find_param("username", params3);
+	result = findParam("username", params3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param("firstName", params3);
+	result = findParam("firstName", params3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param("password", params3);
+	result = findParam("password", params3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param("lastName", params3);
+	result = findParam("lastName", params3);
 	ASSERT_STR("", result);
 	free(result);
 }
 
 TEST (KernelString, UrlFindParamFromUrl) {
-	char *result; // result that store value after find_param_from_url, should be freed after use
+	char *result; // result that store value after findParamFromUrl, should be freed after use
 	
 	char *url = "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
-	result = find_param_from_url("username", url);
+	result = findParamFromUrl("username", url);
 	ASSERT_STR("loint", result);
 	free(result);
 	
-	result = find_param_from_url("password", url);
+	result = findParamFromUrl("password", url);
 	ASSERT_STR("1234", result);
 	free(result);
 	
-	result = find_param_from_url("firstName", url);
+	result = findParamFromUrl("firstName", url);
 	ASSERT_STR("Loi AbC", result);
 	free(result);
 	
-	result = find_param_from_url("lastName", url);
+	result = findParamFromUrl("lastName", url);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
 	char *url2 = "/abcd/?username=&password=&firstName=Loi&&lastName=Nguyen";
-	result = find_param_from_url("username", url2);
+	result = findParamFromUrl("username", url2);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("password", url2);
+	result = findParamFromUrl("password", url2);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("firstName", url2);
+	result = findParamFromUrl("firstName", url2);
 	ASSERT_STR("Loi", result);
 	free(result);
 	
-	result = find_param_from_url("lastName", url2);
+	result = findParamFromUrl("lastName", url2);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
 	char *url3 = "/abcd/";
-	result = find_param_from_url("username", url3);
+	result = findParamFromUrl("username", url3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("firstName", url3);
+	result = findParamFromUrl("firstName", url3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("password", url3);
+	result = findParamFromUrl("password", url3);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("lastName", url3);
+	result = findParamFromUrl("lastName", url3);
 	ASSERT_STR("", result);
 	free(result);
 	
 	char *url4 = "/abcd/??";
-	result = find_param_from_url("username", url4);
+	result = findParamFromUrl("username", url4);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("firstName", url4);
+	result = findParamFromUrl("firstName", url4);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("password", url4);
+	result = findParamFromUrl("password", url4);
 	ASSERT_STR("", result);
 	free(result);
 	
-	result = find_param_from_url("lastName", url4);
+	result = findParamFromUrl("lastName", url4);
 	ASSERT_STR("", result);
 	free(result);
 }

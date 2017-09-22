@@ -988,7 +988,7 @@ TEST(JavaLang, StringFormat) {
         string key = (string)"Nhà hàng";
         double latitude = 10.824093;
         double longitude = 106.683844;
-        string url = url_decode(key);
+        string url = urlDecode(key);
         String queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
         String body = String::format(queryFormat, url, latitude, longitude);
 
