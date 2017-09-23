@@ -601,7 +601,7 @@ String StringBufferUnSafe::subString(int start, int end) const {
 	int resultStringLength = end - start;
 	string resultString = (string) calloc((size_t) resultStringLength + 1, sizeof(char));
 	int memorySizeToCopy = resultStringLength * sizeof(char);
-	mempcpy(resultString, this->original + start, (size_t) memorySizeToCopy);
+	memcpy(resultString, this->original + start, (size_t) memorySizeToCopy);
 	String result = String(resultString);
 	free(resultString);
 	return result;
