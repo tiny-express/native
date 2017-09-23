@@ -58,7 +58,8 @@ TEST (KernelDateTime, TimestampInNanoSeconds) {
 	int i = 0;
 	int counter = 0;
 	for (i = 0; i < maxN; i++) {
-		length_pointer_char(string_from_int(i));
+		string tmp = string_from_int(i);
+		free(tmp);
 		counter++;
 	}
 	long last_time = timestamp();

@@ -34,7 +34,8 @@ using namespace Java::Lang;
 
 String::String() {
 	this->original = strdup("\0");
-	this->capacity = 1;
+	this->size = 0;
+	this->capacity = -1;
 }
 
 String::String(const_string target) {
@@ -510,11 +511,11 @@ String String::subString(int beginIndex, int endIndex) const {
 }
 
 #define STRING_OPERATOR_PLUS  \
-	if (new_length > this->capacity) {\
+	if (new_length >= this->capacity) {\
 		this->capacity = new_length << 1;\
 		this->original = (string) realloc(this->original, this->capacity);\
 	}\
-	memcpy(&this->original[this->size], target_value, target_length);\
+	memcpy(&this->original[this->size], &target_value[0], target_length);\
 	this->original[new_length] = '\0';\
 	this->size = new_length;
 
