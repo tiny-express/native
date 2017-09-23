@@ -28,6 +28,8 @@
 #include "../Test.hpp"
 #include "../String.hpp"
 
+using namespace Kernel;
+
 TEST (KernelString, UrlEncode) {
 	char *target = "Quán ăn";
 	char *result = urlEncode(target);

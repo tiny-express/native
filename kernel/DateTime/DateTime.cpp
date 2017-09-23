@@ -43,7 +43,7 @@
  * @param format
  * @return
  */
-string date(time_t timestamp, string format) {
+string Kernel::date(time_t timestamp, string format) {
 	char *date_format = stringReplace(format, "D", "%d");
 	char *date_format2 = stringReplace(date_format, "d", "%d");
 	free(date_format);
@@ -123,7 +123,7 @@ unsigned long unix_time_in_milliseconds(
  *
  * @return long
  */
-unsigned long timestamp() {
+unsigned long Kernel::timestamp() {
 #ifdef OSX
 	double timebase = 0.0;
 	mach_timebase_info_data_t tb = { 0 };

@@ -37,7 +37,7 @@
  * @param target
  * @return char pointer
  */
-char *joinPointerPointerChar(char **target) {
+char *Kernel::joinPointerPointerChar(char **target) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
 	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
@@ -61,7 +61,7 @@ char *joinPointerPointerChar(char **target) {
  * @param target
  * @return char pointer
  */
-char *joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
+char *Kernel::joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
 	register char **pointer;
 	register int total_length = 0, item_length = 0;
 	int delimiter_length = lengthPointerChar((char *) delimiter);

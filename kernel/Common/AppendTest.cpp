@@ -28,6 +28,8 @@
 #include <cstdlib>
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelCommon, AppendPointerChar) {
 	char *target[] = {
 		(char *) "The",

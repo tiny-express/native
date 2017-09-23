@@ -40,7 +40,7 @@
  * @return result
  */
 #define QUICK_SORT(NAME, TYPE)                                                           \
-void sort##NAME(TYPE *array, int left_position, int right_position) {      \
+void Kernel::sort##NAME(TYPE *array, int left_position, int right_position) {      \
     int left = left_position;                                                      \
     int right = right_position;                                                    \
     TYPE pivot = array[(left + right) / 2];                                        \
@@ -57,7 +57,7 @@ void sort##NAME(TYPE *array, int left_position, int right_position) {      \
     if (left < right_position) sort##NAME(array, left, right_position);           \
 }
 
-void sortString(char *array[], int left_position, int right_position) {
+void Kernel::sortString(char *array[], int left_position, int right_position) {
 	int left = left_position;
 	int right = right_position;
 	char *pivot = array[ ( left + right ) / 2 ];
@@ -91,7 +91,7 @@ void sortString(char *array[], int left_position, int right_position) {
  * @param size
  * @return TRUE | FALSE
  */
-int isIncreaseStringArray(char **array, int size) {
+int Kernel::isIncreaseStringArray(char **array, int size) {
 	register int index = 0;
 	for (index = 0; index < size - 1; index++) {
 		if (strcmp(array[ index ], array[ index + 1 ]) > 0) {
@@ -109,7 +109,7 @@ int isIncreaseStringArray(char **array, int size) {
  * @return TRUE | FALSE
  */
 #define INCREASE(NAME, TYPE)                                      \
-int isIncrease##NAME##Array(TYPE *array, int length) {   \
+int Kernel::isIncrease##NAME##Array(TYPE *array, int length) {   \
     register int index = 0;                                 \
     for (index = 0; index < length - 1; index++) {          \
         if (array[index] > array[index + 1])                \
@@ -119,7 +119,7 @@ int isIncrease##NAME##Array(TYPE *array, int length) {   \
 }
 
 #define DECREASE(NAME, TYPE)                                      \
-int isDecrease##NAME##Array(TYPE *array, int length) {   \
+int Kernel::isDecrease##NAME##Array(TYPE *array, int length) {   \
     register int index = 0;                                 \
     for (index = 0; index < length - 1; index++) {          \
         if (array[index] < array[index + 1])                \

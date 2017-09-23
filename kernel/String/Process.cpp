@@ -39,7 +39,7 @@
  * @param replace_with
  * @return string
  */
-char *stringReplace(char *target, char *find_string, char *replace_with) {
+char *Kernel::stringReplace(char *target, char *find_string, char *replace_with) {
 	if (target == NULL || find_string == NULL || replace_with == NULL) {
 		return strdup("");
 	}
@@ -78,7 +78,7 @@ char *stringReplace(char *target, char *find_string, char *replace_with) {
  * @param delimiter
  * @return array char pointer
  */
-char **stringSplit(char *target, char *delimiter) {
+char **Kernel::stringSplit(char *target, char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		char **result = (char **)calloc(1, sizeof(char *));
 		return result;
@@ -106,7 +106,7 @@ char **stringSplit(char *target, char *delimiter) {
  *
  * @param char_array
  */
-void freePointerPointerChar(char **char_array) {
+void Kernel::freePointerPointerChar(char **char_array) {
 	if (char_array == NULL) {
 		return;
 	}
@@ -125,7 +125,7 @@ void freePointerPointerChar(char **char_array) {
  * @param delimiter
  * @return string
  */
-char *stringJoin(char *target[], char *delimiter) {
+char *Kernel::stringJoin(char *target[], char *delimiter) {
 	if (target == NULL || delimiter == NULL) {
 		return NULL;
 	}
@@ -162,7 +162,7 @@ char *stringJoin(char *target[], char *delimiter) {
  * @param target
  * @return string
  */
-char *stringTrim(char *target) {
+char *Kernel::stringTrim(char *target) {
 	if (target == NULL) {
 		return NULL;
 	}
@@ -186,7 +186,7 @@ char *stringTrim(char *target) {
  * @param prefix
  * @return TRUE | FALSE
  */
-int stringStartswith(char *target, char *prefix) {
+int Kernel::stringStartswith(char *target, char *prefix) {
 	if (target == NULL || prefix == NULL) {
 		return FALSE;
 	}
@@ -211,7 +211,7 @@ int stringStartswith(char *target, char *prefix) {
  * @param suffix
  * @return TRUE | FALSE
  */
-int stringEndswith(char *target, char *suffix) {
+int Kernel::stringEndswith(char *target, char *suffix) {
 	if (target == NULL || suffix == NULL) {
 		return FALSE;
 	}
@@ -237,7 +237,7 @@ int stringEndswith(char *target, char *suffix) {
  * @param times
  * @return position
  */
-int stringIndex(char *target, char *subtarget, int times) {
+int Kernel::stringIndex(char *target, char *subtarget, int times) {
 	if (isEmptyString(target) || isEmptyString(subtarget) || ( times <= 0 )) {
 		return NOT_FOUND;
 	}
@@ -277,7 +277,7 @@ int stringIndex(char *target, char *subtarget, int times) {
  * @param size
  * @return random string
  */
-char *stringRandom(char *target, int size) {
+char *Kernel::stringRandom(char *target, int size) {
 	if (isEmptyString(target)) {
 		return NULL;
 	}
@@ -298,7 +298,7 @@ char *stringRandom(char *target, int size) {
  * @param subtarget
  * @return string
  */
-char *stringAppend(char **target, char subtarget) {
+char *Kernel::stringAppend(char **target, char subtarget) {
 	asprintf(target, "%s%c", *target, subtarget);
 	return *target;
 }
@@ -310,7 +310,7 @@ char *stringAppend(char **target, char subtarget) {
  * @param subtarget
  * @return string
  */
-char *stringConcat(char *target, char *subtarget) {
+char *Kernel::stringConcat(char *target, char *subtarget) {
 	if (isEmptyString(target)) {
 		return strdup(subtarget);
 	}
@@ -334,7 +334,7 @@ char *stringConcat(char *target, char *subtarget) {
  * @param to
  * @return string
  */
-char *stringFromTo(char *target, int from, int to) {
+char *Kernel::stringFromTo(char *target, int from, int to) {
 	return segmentPointerChar(target, from, to);
 }
 
@@ -345,7 +345,7 @@ char *stringFromTo(char *target, int from, int to) {
  * @param from
  * @return
  */
-char *stringFrom(char *target, int from) {
+char *Kernel::stringFrom(char *target, int from) {
 	return stringFromTo(target, from, lengthPointerChar(target));
 }
 
@@ -356,7 +356,7 @@ char *stringFrom(char *target, int from) {
  * @param to
  * @return
  */
-char *stringTo(char *target, int to) {
+char *Kernel::stringTo(char *target, int to) {
 	return stringFromTo(target, 0, to);
 }
 
@@ -366,7 +366,7 @@ char *stringTo(char *target, int to) {
  * @param target
  * @return string
  */
-char *stringCopy(char *target) {
+char *Kernel::stringCopy(char *target) {
 	if (isEmptyString(target)) {
 		return strdup("");
 	}
@@ -383,7 +383,7 @@ char *stringCopy(char *target) {
  * @param target
  * @return string
  */
-char *stringUpper(char *target) {
+char *Kernel::stringUpper(char *target) {
 	if (isEmptyString(target)) {
 		return NULL;
 	}
@@ -403,7 +403,7 @@ char *stringUpper(char *target) {
  * @param target
  * @return string
  */
-char *stringLower(char *target) {
+char *Kernel::stringLower(char *target) {
 	if (isEmptyString(target)) {
 		return NULL;
 	}
@@ -423,7 +423,7 @@ char *stringLower(char *target) {
  * @param target
  * @return string
  */
-char *stringTitle(char *target) {
+char *Kernel::stringTitle(char *target) {
 	if (isEmptyString(target)) {
 		return NULL;
 	}
@@ -449,7 +449,7 @@ char *stringTitle(char *target) {
  * @param target
  * @return string
  */
-char *stringStandardized(char *target) {
+char *Kernel::stringStandardized(char *target) {
 	if (isEmptyString(target)) {
 		return NULL;
 	}
@@ -467,7 +467,7 @@ char *stringStandardized(char *target) {
  * @param target2
  * @return TRUE | FALSE
  */
-int stringEquals(char *target1, char *target2) {
+int Kernel::stringEquals(char *target1, char *target2) {
 	if (( target1 == NULL) && ( target2 == NULL)) {
 		return TRUE;
 	}
@@ -486,7 +486,7 @@ int stringEquals(char *target1, char *target2) {
  * @param target
  * @return string reversed
  */
-char *stringReverse(char *target) {
+char *Kernel::stringReverse(char *target) {
 	int target_length = lengthPointerChar(target);
 	char *result = (char *) calloc(target_length + 1, sizeof(char));
 #ifdef __linux__
@@ -507,7 +507,7 @@ char *stringReverse(char *target) {
  * @param regex
  * @return TRUE | FALSE
  */
-int stringMatches(char *target, char *regex) {
+int Kernel::stringMatches(char *target, char *regex) {
 //	if (isEmptyString(target)) {
 //		return FALSE;
 //	}

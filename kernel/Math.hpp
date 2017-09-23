@@ -30,36 +30,37 @@
 #include <stdio.h>
 #include <math.h>
 
-double mathPow(double base, double exponent);
-double mathFloor(double value);
-double mathRound(double value);
-double mathSqrt(double value);
-double mathCbrt(double value);
-double mathCeil(double value);
-double mathExp(double value);
-double mathExpm1(double value);
-double mathHypot(double valueA, double valueB);
-double mathLog(double value);
-double mathLog10(double value);
-double mathLog1p(double value);
-double mathIeeeRemainder(double dividend, double divisor);
-double mathRint(double value);
-double mathAcos(double value);
-double mathCos(double angle);
-double mathCosh(double angle);
-double mathSin(double angle);
-double mathAsin(double value);
-double mathSinh(double angle);
-double mathAtan(double angle);
-double mathAtan2(double coordinateX, double coordinateY);
-double mathTan(double angle);
-double mathTanh(double angle);
-double mathCopySign(double magnitude, double sign);
-float mathCopySignF(float magnitude, float sign);
-double mathNextToward(double start, double direction);
-float mathNextTowardF(float start, double direction);
-double mathLdexp(double value, int scaleFactor);
-float mathLdexpf(float value, int scaleFactor);
-
+namespace Kernel {
+    double mathPow(double base, double exponent);
+    double mathFloor(double value);
+    double mathRound(double value);
+    double mathSqrt(double value);
+    double mathCbrt(double value);
+    double mathCeil(double value);
+    double mathExp(double value);
+    double mathExpm1(double value);
+    double mathHypot(double valueA, double valueB);
+    double mathLog(double value);
+    double mathLog10(double value);
+    double mathLog1p(double value);
+    double mathIeeeRemainder(double dividend, double divisor);
+    double mathRint(double value);
+    double mathAcos(double value);
+    double mathCos(double angle);
+    double mathCosh(double angle);
+    double mathSin(double angle);
+    double mathAsin(double value);
+    double mathSinh(double angle);
+    double mathAtan(double angle);
+    double mathAtan2(double coordinateX, double coordinateY);
+    double mathTan(double angle);
+    double mathTanh(double angle);
+    double mathCopySign(double magnitude, double sign);
+    float mathCopySignF(float magnitude, float sign);
+    double mathNextToward(double start, double direction);
+    float mathNextTowardF(float start, double direction);
+    double mathLdexp(double value, int scaleFactor);
+    float mathLdexpf(float value, int scaleFactor);
+}
 
 #endif

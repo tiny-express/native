@@ -28,6 +28,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+using namespace Kernel;
+
 TEST (KernelCommon, QuickSort) {
 	srand(time(NULL));
 	int *array_int = (int *)calloc(50, sizeof(int));

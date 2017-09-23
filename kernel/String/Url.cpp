@@ -38,7 +38,7 @@ char to_hex(char code) {
 	return hex[ code & 15 ];
 }
 
-char *urlEncode(char *target) {
+char *Kernel::urlEncode(char *target) {
 	char *target_index = target;
 	char *result = (char *)calloc(lengthPointerChar(target) * 3 + 1, sizeof(char));
 	char *result_index = result;
@@ -56,7 +56,7 @@ char *urlEncode(char *target) {
 	return result;
 }
 
-char *urlDecode(char *target) {
+char *Kernel::urlDecode(char *target) {
 	char *target_index = target;
 	char *result = (char *)calloc(lengthPointerChar(target) + 1, sizeof(char));
 	char *result_index = result;
@@ -77,7 +77,7 @@ char *urlDecode(char *target) {
 	return result;
 }
 
-char *findParam(char *name, char *params) {
+char *Kernel::findParam(char *name, char *params) {
 	if (strcmp(params, "") == 0) {
 		return strdup("");
 	}
@@ -106,7 +106,7 @@ char *findParam(char *name, char *params) {
 	return strdup("");
 }
 
-char *findParamFromUrl(char *name, char *url) {
+char *Kernel::findParamFromUrl(char *name, char *url) {
 	char **url_components = stringSplit(url, "?");
 	
 	if (lengthPointerPointerChar(url_components) < 2) {

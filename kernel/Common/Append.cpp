@@ -37,7 +37,7 @@
  * @param append
  * @return char pointer pointer
  */
-char **appendPointerChar(char **target, char *append) {
+char **Kernel::appendPointerChar(char **target, char *append) {
 	int len = lengthPointerPointerChar(target);
 	char **pointer = (char **)calloc(len + 2, sizeof(char *));
 	memcpy(pointer, target, len * sizeof(char *));

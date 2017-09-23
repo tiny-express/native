@@ -26,123 +26,123 @@
 
 #include "../Math.hpp"
 
-double mathPow(double base, double exponent) {
+double Kernel::mathPow(double base, double exponent) {
 	return pow(base, exponent);
 }
 
-double mathFloor(double value) {
+double Kernel::mathFloor(double value) {
 	return floor(value);
 }
 
-double mathRound(double value) {
+double Kernel::mathRound(double value) {
 	return round(value);
 }
 
-double mathSqrt(double value) {
+double Kernel::mathSqrt(double value) {
 	return sqrt(value);
 }
 
-double mathCbrt(double value) {
+double Kernel::mathCbrt(double value) {
 	return cbrt(value);
 }
 
-double mathCeil(double value) {
+double Kernel::mathCeil(double value) {
 	return ceil(value);
 }
 
-double mathExp(double value) {
+double Kernel::mathExp(double value) {
 	return exp(value);
 }
 
-double mathExpm1(double value) {
+double Kernel::mathExpm1(double value) {
 	return expm1(value);
 }
 
-double mathLog(double value) {
+double Kernel::mathLog(double value) {
 	return log(value);
 }
 
-double mathLog10(double value) {
+double Kernel::mathLog10(double value) {
 	return log10(value);
 }
 
-double mathLog1p(double value) {
+double Kernel::mathLog1p(double value) {
 	return log1p(value);
 }
 
-double mathIeeeRemainder(double dividend, double divisor) {
+double Kernel::mathIeeeRemainder(double dividend, double divisor) {
 	return dividend - ( round(dividend / divisor) * divisor );
 }
 
-double mathRint(double value) {
+double Kernel::mathRint(double value) {
 	return rint(value);
 }
 
-double mathHypot(double valueA, double valueB) {
+double Kernel::mathHypot(double valueA, double valueB) {
 	return hypot(valueA, valueB);
 }
 
-double mathAcos(double value) {
+double Kernel::mathAcos(double value) {
 	return acos(value);
 }
 
-double mathCos(double angle) {
+double Kernel::mathCos(double angle) {
 	return cos(angle);
 }
 
-double mathCosh(double angle) {
+double Kernel::mathCosh(double angle) {
 	return cosh(angle);
 }
 
-double mathAsin(double value) {
+double Kernel::mathAsin(double value) {
 	return asin(value);
 }
 
-double mathSin(double angle) {
+double Kernel::mathSin(double angle) {
 	return sin(angle);
 }
 
-double mathSinh(double angle) {
+double Kernel::mathSinh(double angle) {
 	return sinh(angle);
 }
 
-double mathAtan(double value) {
+double Kernel::mathAtan(double value) {
 	return atan(value);
 }
 
-double mathAtan2(double coordinateX, double coordinateY) {
+double Kernel::mathAtan2(double coordinateX, double coordinateY) {
 	return atan2(coordinateX, coordinateY);
 }
 
-double mathTan(double angle) {
+double Kernel::mathTan(double angle) {
 	return tan(angle);
 }
 
-double mathTanh(double angle) {
+double Kernel::mathTanh(double angle) {
 	return tanh(angle);
 }
 
-double mathCopySign(double magnitude, double sign) {
+double Kernel::mathCopySign(double magnitude, double sign) {
 	return copysign(magnitude, sign);
 }
 
-float mathCopySignF(float magnitude, float sign) {
+float Kernel::mathCopySignF(float magnitude, float sign) {
 	return copysignf(magnitude, sign);
 }
 
-double mathNextToward(double start, double direction) {
+double Kernel::mathNextToward(double start, double direction) {
 	return nexttoward(start, direction);
 }
 
-float mathNextTowardF(float start, double direction) {
+float Kernel::mathNextTowardF(float start, double direction) {
 	return nexttowardf(start, direction);
 }
 
-double mathLdexp(double value, int scaleFactor) {
+double Kernel::mathLdexp(double value, int scaleFactor) {
 	return ldexp(value, scaleFactor);
 }
 
-float mathLdexpf(float value, int scaleFactor) {
+float Kernel::mathLdexpf(float value, int scaleFactor) {
 	return ldexpf(value, scaleFactor);
 }
 

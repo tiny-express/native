@@ -28,6 +28,8 @@
 #include "../DateTime.hpp"
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 #ifdef WINDOWS
 	unsigned int millisecond = 123;

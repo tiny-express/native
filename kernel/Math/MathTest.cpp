@@ -27,6 +27,8 @@
 #include "../Test.hpp"
 #include "../Math.hpp"
 
+using namespace Kernel;
+
 TEST (KernelMath, Pow) {
 	double base = 3;
 	double power = 3;

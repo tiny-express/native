@@ -59,46 +59,47 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
        void *: VOID_POINTER,                   int *: INT_POINTER,            \
       default: OTHER)
 
-char **appendPointerChar(char **target, char *append);
+namespace Kernel {
+    char **appendPointerChar(char **target, char *append);
 
-char *joinPointerPointerChar(char **target);
-char *joinDelimiterPointerPointerChar(char **target, const char *delimiter);
+    char *joinPointerPointerChar(char **target);
+    char *joinDelimiterPointerPointerChar(char **target, const char *delimiter);
 
-int lengthPointerChar(char *target);
-int isEmptyString(char *input);
-int lengthPointerPointerChar(char **target);
+    int lengthPointerChar(char *target);
+    int isEmptyString(char *input);
+    int lengthPointerPointerChar(char **target);
 
-int lengthShort(short target);
-int lengthInt(int target);
-int lengthLong(long target);
-int lengthDouble(double target);
-int lengthFloat(float target);
+    int lengthShort(short target);
+    int lengthInt(int target);
+    int lengthLong(long target);
+    int lengthDouble(double target);
+    int lengthFloat(float target);
 
-char *segmentPointerChar(char *target, int from, int to);
-char **segmentPointerPointerChar(char **target, int from, int to);
-int linearSearch(int *array, int length, int key);
-int binarySearch(int *array, int length, int key);
+    char *segmentPointerChar(char *target, int from, int to);
+    char **segmentPointerPointerChar(char **target, int from, int to);
+    int linearSearch(int *array, int length, int key);
+    int binarySearch(int *array, int length, int key);
 
-void distributionCountingSort(int *array, int size);
+    void distributionCountingSort(int *array, int size);
 
-void sortInt(int *array, int begin_array, int end_array);
-void sortLong(long *array, int begin_array, int end_array);
-void sortShort(short *array, int begin_array, int end_array);
-void sortFloat(float *array, int begin_array, int end_array);
-void sortString(char *array[], int left_position, int right_position);
+    void sortInt(int *array, int begin_array, int end_array);
+    void sortLong(long *array, int begin_array, int end_array);
+    void sortShort(short *array, int begin_array, int end_array);
+    void sortFloat(float *array, int begin_array, int end_array);
+    void sortString(char *array[], int left_position, int right_position);
 
 
-int isIncreaseIntArray(int *array, int length);
-int isIncreaseFloatArray(float *array, int length);
-int isIncreaseDoubleArray(double *array, int length);
-int isIncreaseLongArray(long *array, int length);
-int isIncreaseShortArray(short *array, int length);
-int isIncreaseStringArray(char **array, int size);
+    int isIncreaseIntArray(int *array, int length);
+    int isIncreaseFloatArray(float *array, int length);
+    int isIncreaseDoubleArray(double *array, int length);
+    int isIncreaseLongArray(long *array, int length);
+    int isIncreaseShortArray(short *array, int length);
+    int isIncreaseStringArray(char **array, int size);
 
-int isDecreaseIntArray(int *array, int length);
-int isDecreaseFloatArray(float *array, int length);
-int isDecreaseDoubleArray(double *array, int length);
-int isDecreaseLongArray(long *array, int length);
-
+    int isDecreaseIntArray(int *array, int length);
+    int isDecreaseFloatArray(float *array, int length);
+    int isDecreaseDoubleArray(double *array, int length);
+    int isDecreaseLongArray(long *array, int length);
+}
 
 #endif //NATIVE_GENERAL_H

@@ -28,6 +28,8 @@
 #include <cstdlib>
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelCommon, LengthPointerChar) {
 	char *data = "Hello world";
 	ASSERT_EQUAL(11, lengthPointerChar(data));

@@ -38,7 +38,7 @@
  * @return string
  */
 #define STR_FROM(NAME, TYPE, FORMAT); \
-char* stringFrom##NAME(TYPE target) {\
+char* Kernel::stringFrom##NAME(TYPE target) {\
         char *convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
@@ -51,7 +51,7 @@ char* stringFrom##NAME(TYPE target) {\
  * @return generic values
  */
 #define STR_TO(NAME, TYPE, FORMAT);\
-TYPE stringTo##NAME(char *target) {\
+TYPE Kernel::stringTo##NAME(char *target) {\
     if (target == NULL || strcmp(target, "\0") == 0) return 0;\
         TYPE result;\
     sscanf(target, FORMAT, &result);\
@@ -72,7 +72,7 @@ STR_TO(Double, double, "%lg");
  * @param target
  * @return string
  */
-char *stringFromChar(char target) {
+char *Kernel::stringFromChar(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
@@ -88,7 +88,7 @@ char *stringFromChar(char target) {
  * @param target
  * @return string
  */
-char stringToChar(char *target) {
+char Kernel::stringToChar(char *target) {
 	if (isEmptyString(target)) {
 		return '\0';
 	}
@@ -101,7 +101,7 @@ char stringToChar(char *target) {
  * @param target
  * @return string
  */
-int stringToInt(char *target) {
+int Kernel::stringToInt(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -114,7 +114,7 @@ int stringToInt(char *target) {
  * @param target
  * @return string
  */
-long stringToLong(char *target) {
+long Kernel::stringToLong(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -127,7 +127,7 @@ long stringToLong(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-int stringToBoolean(char *target) {
+int Kernel::stringToBoolean(char *target) {
 	if (lengthPointerChar(target) == 0) {
 		return FALSE;
 	}
@@ -150,7 +150,7 @@ int stringToBoolean(char *target) {
  * @param target
  * @return string
  */
-char *stringFromBoolean(int target) {
+char *Kernel::stringFromBoolean(int target) {
     if (target == FALSE) {
         return strdup("false");
     }

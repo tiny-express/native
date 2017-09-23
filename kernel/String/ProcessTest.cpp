@@ -27,6 +27,8 @@
 #include "../Builtin.hpp"
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelString, ProcessReplace) {
 	char *target = "Hello World";
 	char *find_string = "World";

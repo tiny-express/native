@@ -29,7 +29,7 @@
 #include "../String.hpp"
 #include "../Common.hpp"
 
-char *segmentPointerChar(char *target_param, int from, int to) {
+char *Kernel::segmentPointerChar(char *target_param, int from, int to) {
 	if (target_param == NULL) {
 		return strdup("");
 	}
@@ -49,7 +49,7 @@ char *segmentPointerChar(char *target_param, int from, int to) {
 	return pointer;
 }
 
-char **segmentPointerPointerChar(char **target, int from, int to) {
+char **Kernel::segmentPointerPointerChar(char **target, int from, int to) {
 	int length_target = lengthPointerPointerChar(target);
 	if (from > to || from < 0 || from > length_target || to < 0 || to > length_target) {
 		return NULL;

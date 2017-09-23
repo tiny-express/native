@@ -27,6 +27,8 @@
 #include "../Builtin.hpp"
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelCommon, SegmentPointerChar) {
 	char *charArray = "Hello World";
 	int from = 6;

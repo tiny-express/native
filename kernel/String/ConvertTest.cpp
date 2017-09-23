@@ -28,6 +28,8 @@
 #include "../String.hpp"
 #include "../Test.hpp"
 
+using namespace Kernel;
+
 TEST (KernelString, ConvertFromChar) {
 	// Input a number character to convert from char to string
 	char number_character = '6';

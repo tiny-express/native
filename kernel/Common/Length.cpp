@@ -29,7 +29,7 @@
 #include "../Type.hpp"
 
 #define P_LEN(NAME, TYPE); \
-int lengthPointer##NAME(TYPE *target) {\
+int Kernel::lengthPointer##NAME(TYPE *target) {\
     if (target == NULL) return 0;\
         register TYPE*pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -38,7 +38,7 @@ int lengthPointer##NAME(TYPE *target) {\
 
 // length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
-int lengthPointerPointer##NAME(TYPE **target) {\
+int Kernel::lengthPointerPointer##NAME(TYPE **target) {\
         if (target == NULL) return 0;\
         register TYPE**pointer;\
         for (pointer = target; *pointer; ++pointer);\
@@ -47,7 +47,7 @@ int lengthPointerPointer##NAME(TYPE **target) {\
 
 // Length of number
 #define NUM_LEN(NAME, TYPE); \
-int length##NAME(TYPE target) {\
+int Kernel::length##NAME(TYPE target) {\
         char *result = stringFrom##NAME(target);\
         int len = lengthPointerChar(result); \
         free(result); \
@@ -70,7 +70,7 @@ NUM_LEN(Float, float);
  * @param input
  * @return TRUE or FALSE
  */
-int isEmptyString(char *input) {
+int Kernel::isEmptyString(char *input) {
 	if (lengthPointerChar(input) == 0) {
 		return TRUE;
 	}

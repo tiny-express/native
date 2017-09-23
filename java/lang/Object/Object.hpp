@@ -35,6 +35,8 @@
 #include <type_traits>
 #include <iostream>
 
+using namespace Kernel;
+
 // Define instanceof
 template <typename Base, typename T>
 bool instanceof(T) {
