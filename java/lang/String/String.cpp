@@ -33,8 +33,7 @@
 using namespace Java::Lang;
 
 String::String() {
-	this->original = (string) malloc(1);
-	this->original[0] = '\0';
+	this->original = strdup("\0");
 	this->capacity = 1;
 }
 
@@ -49,24 +48,27 @@ String::String(const_string target) {
 
 String::String(string target) {
 	if (target == nullptr) {
-		target = (string) "\0";
+		this->original = (char*) malloc(sizeof(char));
+		this->original[0] = '\0';
+		this->size = 1;
+		this->capacity = 1;
+		return;
 	}
 	this->original = strdup(target);
+	free(target);
 	this->size = length_pointer_char(target);
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
-String::String(Array<char> &charArray) {
-	string charArrayString = charArray.toString();
-	this->original = strdup(charArrayString); // String::fromCharArray(charArray).toString();
-	this->size = charArray.length;
+String::String(string original, int length) {
+	this->original = strndup(original, length);
+	this->size = length;
 	this->capacity = this->size == 0 ? -1 : this->size;
-	free(charArrayString);
 }
 
-String::String(string original, int length) {
-    this->original = strndup(original, length);
-    this->size = length;
+String::String(Array<char> &charArray) {
+	this->original = charArray.toString();
+	this->size = charArray.length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
@@ -105,53 +107,31 @@ String::String(const StringBuffer &stringBuffer) {
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
-String::String(Array<char> &charArray, int offset, int count) {
-    if (offset < 0) {
-        throw StringIndexOutOfBoundsException(offset);
-    }
+#define STRING_CONSTRUCTOR_ARRAY \
+	if (offset < 0) {\
+		throw StringIndexOutOfBoundsException(offset);\
+	}\
+	if (length < 0) {\
+		throw StringIndexOutOfBoundsException(length);\
+	}\
+	if (offset > array.length - length) {\
+		throw StringIndexOutOfBoundsException(offset + length);\
+	}\
+	this->original = (string) malloc(( length + 1) * sizeof(char));\
+	int index;\
+	for (index = 0; index < length; offset++, index++) {\
+		this->original [index] = array.get(offset);\
+	}\
+	this->original [length] = '\0';\
+	this->size = length;\
+	this->capacity = this->size == 0 ? -1 : this->size;\
 
-    if (count < 0) {
-        throw StringIndexOutOfBoundsException(count);
-    }
-
-    if (offset > charArray.length - count) {
-        throw StringIndexOutOfBoundsException(offset + count);
-    }
-
-    string charArrayString = static_cast<string>(calloc((size_t) count + 1, sizeof(char)));
-    int index;
-    for (index = 0; index < count; offset++, index++) {
-        charArrayString[index] = charArray.get(offset);
-    }
-    this->original = strdup(charArrayString);
-    this->size = count;
-	this->capacity = this->size;
-    free(charArrayString);
+String::String(Array<char> &array, int offset, int length) {
+    STRING_CONSTRUCTOR_ARRAY
 }
 
-String::String(Array<byte> &byteArray, int offset, int length) {
-    if (offset < 0) {
-        throw StringIndexOutOfBoundsException(offset);
-    }
-
-    if (length < 0) {
-        throw StringIndexOutOfBoundsException(length);
-    }
-
-    if (offset > byteArray.length - length) {
-        throw StringIndexOutOfBoundsException(offset + length);
-    }
-
-    string charArrayString = static_cast<string>(calloc((size_t) length + 1, sizeof(char)));
-    int index;
-    for (index = 0; index < length; offset++, index++) {
-        charArrayString[index] = byteArray.get(offset);
-    }
-    this->original = strdup(charArrayString);
-    this->size = length;
-	this->capacity = this->size;
-
-    free(charArrayString);
+String::String(Array<byte> &array, int offset, int length) {
+	STRING_CONSTRUCTOR_ARRAY
 }
 
 String::~String() {
@@ -214,12 +194,11 @@ boolean String::endsWith(const String &suffixString) const {
 }
 
 String String::fromCharArray(Array<char> &charArray) {
-	string str = (string) calloc((size_t) charArray.length + 1, sizeof(char));
+	string str = (string) malloc((charArray.length + 1) * sizeof(char));
 #ifdef LINUX
 	register
 #endif
 	int index = 0;
-
 	for (char character : charArray) {
 		str[ index++ ] = character;
 	}
@@ -535,37 +514,44 @@ String String::subString(int beginIndex, int endIndex) const {
 	return result;
 }
 
+#define STRING_OPERATOR_PLUS  \
+	if (new_length > this->capacity) {\
+		this->capacity = new_length << 1;\
+		this->original = (string) realloc(this->original, this->capacity);\
+	}\
+	memcpy(&this->original[this->size], target_value, target_length);\
+	this->original[new_length] = '\0';\
+	this->size = new_length;
+
 String String::operator+(const string &target) {
+	string target_value = (string) target;
 	int target_length = length_pointer_char((string) target);
 	int new_length = this->size + target_length;
-	if (new_length >= this->capacity) {
-		this->capacity = new_length << 1;
-		this->original = (string) realloc(this->original, this->capacity);
-	}
-	memcpy(&this->original[this->size], target, target_length + 1);
-	this->original[new_length + 1] = '\0';
+	STRING_OPERATOR_PLUS
 	return this->original;
 }
 
 String String::operator+(const String &target) {
-	*this = *this + target.original;
-	return *this;
+	string target_value = target.original;
+	int target_length = target.size;
+	int new_length = this->size + target.size;
+	STRING_OPERATOR_PLUS
+	return this->original;
 }
 
 String &String::operator+=(const String &target) {
-	*this = *this + target.original;
+	string target_value = target.original;
+	int target_length = target.size;
+	int new_length = this->size + target.size;
+	STRING_OPERATOR_PLUS
 	return *this;
 }
 
 String &String::operator+=(const_string target) {
+	string target_value = (string) target;
 	int target_length = length_pointer_char((string) target);
 	int new_length = this->size + target_length;
-	if (new_length >= this->capacity) {
-		this->capacity = new_length << 1;
-		this->original = (string) realloc(this->original, this->capacity);
-	}
-	memcpy(&this->original[this->size], target, target_length + 1);
-	this->original[new_length + 1] = '\0';
+	STRING_OPERATOR_PLUS
 	return *this;
 }
 

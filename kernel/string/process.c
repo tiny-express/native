@@ -360,7 +360,7 @@ inline char *string_to(char *target, int to) {
  * @param target
  * @return string
  */
-char *string_copy(char *target) {
+inline char *string_copy(char *target) {
 	if (is_empty(target)) {
 		return strdup("");
 	}

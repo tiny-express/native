@@ -139,7 +139,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
+        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test JavaLangString
 )
 
 # Check memory leak
