@@ -57,8 +57,8 @@ namespace Java {
 				public virtual CharSequence {
 		private:
 			string original;
-			int size = 0;
-			int capacity = 0;
+			int size;
+			int capacity;
             mutable int hash = 0;
 
 		public:

@@ -514,42 +514,42 @@ String String::subString(int beginIndex, int endIndex) const {
 }
 
 #define STRING_OPERATOR_PLUS  \
-	if (new_length >= this->capacity) {\
-		this->capacity = new_length << 1;\
+	if (newLength >= this->capacity) {\
+		this->capacity = newLength << 1;\
 		this->original = (string) realloc(this->original, this->capacity);\
 	}\
-	memcpy(&this->original[this->size], &target_value[0], target_length);\
-	this->original[new_length] = '\0';\
-	this->size = new_length;
+	memcpy(&this->original[this->size], &targetValue[0], targetLength);\
+	this->original[newLength] = '\0';\
+	this->size = newLength;
 
 String String::operator+(const string &target) {
-	string target_value = (string) target;
-	int target_length = length_pointer_char((string) target);
-	int new_length = this->size + target_length;
+	string targetValue = (string) target;
+	int targetLength = length_pointer_char((string) target);
+	int newLength = this->size + targetLength;
 	STRING_OPERATOR_PLUS
 	return this->original;
 }
 
 String String::operator+(const String &target) {
-	string target_value = target.original;
-	int target_length = target.size;
-	int new_length = this->size + target.size;
+	string targetValue = target.original;
+	int targetLength = target.size;
+	int newLength = this->size + target.size;
 	STRING_OPERATOR_PLUS
 	return this->original;
 }
 
 String &String::operator+=(const String &target) {
-	string target_value = target.original;
-	int target_length = target.size;
-	int new_length = this->size + target.size;
+	string targetValue = target.original;
+	int targetLength = target.size;
+	int newLength = this->size + target.size;
 	STRING_OPERATOR_PLUS
 	return *this;
 }
 
 String &String::operator+=(const_string target) {
-	string target_value = (string) target;
-	int target_length = length_pointer_char((string) target);
-	int new_length = this->size + target_length;
+	string targetValue = (string) target;
+	int targetLength = length_pointer_char((string) target);
+	int newLength = this->size + targetLength;
 	STRING_OPERATOR_PLUS
 	return *this;
 }
