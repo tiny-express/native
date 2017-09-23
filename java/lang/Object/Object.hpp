@@ -27,16 +27,15 @@
 #ifndef JAVA_LANG_OBJECT_H
 #define JAVA_LANG_OBJECT_H
 
-extern "C" {
-#include "../../../kernel/builtin.h"
-};
-
+#include "../../../kernel/Builtin.hpp"
 #include <algorithm>
 #include <vector>
 #include <map>
 #include <set>
 #include <type_traits>
 #include <iostream>
+
+using namespace Kernel;
 
 // Define instanceof
 template <typename Base, typename T>
@@ -100,7 +99,7 @@ public:
 		}
 		
 		Array(char **charPointerArray) {
-			int size = length_pointer_pointer_char(charPointerArray);
+			int size = lengthPointerPointerChar(charPointerArray);
 #ifdef LINUX
 			register
 #endif
@@ -185,7 +184,7 @@ public:
 				string result = strdup("");
 				for (char element : *this) {
 					string result_holder = result;
-					result = string_append(&result, element);
+					result = stringAppend(&result, element);
 					free(result_holder);
 				}
 				return result;
@@ -268,7 +267,7 @@ namespace Java {
 						 * @return string
 						 */
 						virtual string toString() const {
-							return string_from_int(this->hashCode());
+							return stringFromInt(this->hashCode());
 						}
 						
 						/**

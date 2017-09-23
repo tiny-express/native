@@ -27,6 +27,7 @@
 #ifndef JAVA_LANG_MATH_HPP_
 #define JAVA_LANG_MATH_HPP_
 
+#include "../../../kernel/Math.hpp"
 #include "../../util/Random/Random.hpp"
 #include "../Object/Object.hpp"
 #include "../Double/Double.hpp"

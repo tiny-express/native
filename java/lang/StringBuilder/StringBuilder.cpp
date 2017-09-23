@@ -46,7 +46,7 @@ StringBuilder::StringBuilder(int capacity) {
 }
 
 StringBuilder::StringBuilder(const string target) {
-	int stringLength = length_pointer_char(target);
+	int stringLength = lengthPointerChar(target);
 	int newCapacity = defaultCapacity + stringLength;
 	this->ensureCapacity(newCapacity);
 	this->append(target);
@@ -144,7 +144,7 @@ StringBuilder &StringBuilder::append(const CharSequence &target) {
 
 StringBuilder &StringBuilder::append(const CharSequence &target, int start, int end) {
     string targetString = target.toString();
-    int lengthOfTarget = length_pointer_char(targetString);
+    int lengthOfTarget = lengthPointerChar(targetString);
     if (start < 0 || start > end || end > lengthOfTarget) {
         throw IndexOutOfBoundsException();
     }
@@ -176,7 +176,7 @@ StringBuilder &StringBuilder::append(const std::initializer_list<char> &target) 
 }
 
 StringBuilder &StringBuilder::append(const string target) {
-    int stringLength = length_pointer_char(target);
+    int stringLength = lengthPointerChar(target);
     int newLength = this->currentLength + stringLength;
     this->ensureCapacity(newLength);
     int indexOfOriginal;
@@ -460,7 +460,7 @@ StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &
         throw IndexOutOfBoundsException();
     }
     string targetString = target.toString();
-    int lengthOfTarget = length_pointer_char(targetString);
+    int lengthOfTarget = lengthPointerChar(targetString);
     if (start < 0 || end < 0 || start > end || end > lengthOfTarget){
         throw IndexOutOfBoundsException();
     }
@@ -526,7 +526,7 @@ StringBuilder &StringBuilder::insert(int offset, const string target) {
         throw StringIndexOutOfBoundsException(offset);
     }
 
-    int targetLength = length_pointer_char(target);
+    int targetLength = lengthPointerChar(target);
     int newLength = this->currentLength + targetLength;
     this->ensureCapacity(newLength);
 
@@ -593,7 +593,7 @@ StringBuilder StringBuilder::replace(int start, int end, const string target) {
 		end = this->currentLength;
 	}
 	
-	int lengthOfTarget = length_pointer_char(target);
+	int lengthOfTarget = lengthPointerChar(target);
 	int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
 	int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
 	this->ensureCapacity(newLength);
@@ -711,7 +711,7 @@ void StringBuilder::trimToSize() {
 }
 
 int *StringBuilder::initializeNextTable(const string pattern) const {
-	int lengthOfPattern = length_pointer_char(pattern);
+	int lengthOfPattern = lengthPointerChar(pattern);
 	if (pattern == NULL || lengthOfPattern == 0) {
 		return NULL;
 	}
@@ -751,8 +751,8 @@ int *StringBuilder::initializeNextTable(const string pattern) const {
 }
 
 int StringBuilder::stringMatches(const string target, const string pattern, int startIndex) const {
-	int lengthOfPattern = length_pointer_char(pattern);
-	int lengthOfTarget = length_pointer_char(target);
+	int lengthOfPattern = lengthPointerChar(pattern);
+	int lengthOfTarget = lengthPointerChar(target);
 	
 	if (startIndex > lengthOfTarget) {
 		if (lengthOfPattern == 0) {
@@ -800,8 +800,8 @@ int StringBuilder::stringMatches(const string target, const string pattern, int 
 }
 
 int StringBuilder::stringMatchesReverse(const string target, const string pattern, int startIndex) const {
-	int lengthOfPattern = length_pointer_char(pattern);
-	int lengthOfTarget = length_pointer_char(target);
+	int lengthOfPattern = lengthPointerChar(pattern);
+	int lengthOfTarget = lengthPointerChar(target);
 	
 	if (startIndex < 0) {
 		return -1;

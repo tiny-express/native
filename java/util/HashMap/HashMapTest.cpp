@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "../../Lang.hpp"
 #include "HashMap.hpp"
 #include "../ArrayList/ArrayList.hpp"
@@ -172,7 +169,7 @@ TEST (JavaUtil, HashMapGet) {
 }
 
 TEST (JavaUtil, HashMapIsEmpty) {
-	// Given valid hash map to test isEmpty()
+	// Given valid hash map to test isEmptyString()
 	HashMap<String, Float> hashMap;
 
 	boolean result = hashMap.isEmpty();

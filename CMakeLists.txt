@@ -91,29 +91,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
-# Include all C/C++ and Unix Assembly files
-file(GLOB_RECURSE SOURCES_C
-        kernel/common/*
-        kernel/datetime/*
-        kernel/math/*
-        kernel/string/*
-        )
-
-# Include all C unit test cases
-file(GLOB_RECURSE TESTS_C
-        kernel/common/*_test.c
-        kernel/datetime/*_test.c
-        kernel/math/*_test.c
-        kernel/string/*_test.c
-        )
-
-# Remove all test files within c files
-foreach (test_c_file ${TESTS_C})
-    list(REMOVE_ITEM SOURCES_C ${test_c_file})
-endforeach ()
-
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+        kernel/**/*.cpp
         javax/**/*.cpp
         java/**/*.cpp
         java/**/**/*.cpp
@@ -121,6 +101,7 @@ file(GLOB_RECURSE SOURCES_CPP
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
+        kernel/**/*Test.cpp
         javax/**/*Test.cpp
         java/**/*Test.cpp
         java/**/**/*Test.cpp
@@ -132,11 +113,10 @@ foreach (test_cpp_file ${TESTS_CPP})
 endforeach ()
 
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
-add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -177,7 +157,7 @@ install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(FILES library.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Add uninstall
 add_custom_target(
@@ -191,14 +171,11 @@ add_custom_target(
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
 else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif ()
 

@@ -25,8 +25,6 @@
  */
 
 #include "Math.hpp"
-
-#include <cmath>
 #include "../ArithmeticException/ArithmeticException.hpp"
 #include "../AssertionError/AssertionError.hpp"
 
@@ -53,19 +51,19 @@ double Math::abs(double value) {
 }
 
 double Math::acos(double value) {
-	return math_acos(value);
+	return mathAcos(value);
 }
 
 double Math::asin(double value) {
-	return math_asin(value);
+	return mathAsin(value);
 }
 
 double Math::atan(double value) {
-	return math_atan(value);
+	return mathAtan(value);
 }
 
 double Math::atan2(double coordinateX, double coordinateY) {
-	return math_atan2(coordinateX, coordinateY);
+	return mathAtan2(coordinateX, coordinateY);
 }
 
 long Math::addExact(long valueA, long valueB) {
@@ -85,33 +83,33 @@ int Math::addExact(int valueA, int valueB) {
 }
 
 double Math::cbrt(double value) {
-	return math_cbrt(value);
+	return mathCbrt(value);
 }
 
 double Math::ceil(double value) {
-	return math_ceil(value);
+	return mathCeil(value);
 }
 
 double Math::copySign(double magnitude, double sign) {
-	return math_copysign(magnitude, sign);
+	return mathCopySign(magnitude, sign);
 }
 
 float Math::copySign(float magnitude, float sign) {
-	return math_copysignf(magnitude, sign);
+	return mathCopySignF(magnitude, sign);
 }
 
 double Math::cos(double angle) {
-	double result = math_cos(angle);
+	double result = mathCos(angle);
 	
 	if(Double::isNaN(result)) {
 		return Math::abs(result);
 	}
 	
-	return math_cos(angle);
+	return mathCos(angle);
 }
 
 double Math::cosh(double angle) {
-	return math_cosh(angle);
+	return mathCosh(angle);
 }
 
 long Math::decrementExact(long value) {
@@ -129,15 +127,15 @@ int Math::decrementExact(int value) {
 }
 
 double Math::exp(double exponent) {
-	return math_exp(exponent);
+	return mathExp(exponent);
 }
 
 double Math::expm1(double exponent) {
-	return math_expm1(exponent);
+	return mathExpm1(exponent);
 }
 
 double Math::floor(double value) {
-	return math_floor(value);
+	return mathFloor(value);
 }
 
 int Math::floorDiv(int dividend, int divisor) {
@@ -211,16 +209,16 @@ int Math::getExponent(float value) {
 }
 
 double Math::hypot(double valueA, double valueB) {
-	return math_hypot(valueA, valueB);
+	return mathHypot(valueA, valueB);
 }
 
 double Math::IEEERemainder(double dividend, double divisor) {
-	double result = math_ieeeremainder(dividend, divisor);
+	double result = mathIeeeRemainder(dividend, divisor);
 	if(Double::isNaN(result)) {
 		return Math::abs(result);
 	}
 	
-	return math_ieeeremainder(dividend, divisor);
+	return mathIeeeRemainder(dividend, divisor);
 }
 
 int Math::incrementExact(int value) {
@@ -238,21 +236,21 @@ long Math::incrementExact(long value) {
 }
 
 double Math::log(double value) {
-	return math_log(value);
+	return mathLog(value);
 }
 
 double Math::log10(double value) {
-	return math_log10(value);
+	return mathLog10(value);
 }
 
 double Math::log1p(double value) {
-	double result = math_log1p(value);
+	double result = mathLog1p(value);
 	
 	if(Double::isNaN(result)) {
 		return Math::abs(result);
 	}
 	
-	return math_log1p(value);
+	return mathLog1p(value);
 }
 
 int Math::max(int valueA, int valueB) {
@@ -328,11 +326,11 @@ long Math::negateExact(long longValue) {
 }
 
 double Math::nextAfter(double start, double direction) {
-	return math_nexttoward(start, direction);
+	return mathNextToward(start, direction);
 }
 
 float Math::nextAfter(float start, double direction) {
-	return math_nexttowardf(start, direction);
+	return mathNextTowardF(start, direction);
 }
 
 double Math::nextDown(double value) {
@@ -343,7 +341,7 @@ double Math::nextDown(double value) {
 		return -Double::MIN_VALUE;
 	}
 	
-	return math_nexttoward(value, Double::NEGATIVE_INFINITY);
+	return mathNextToward(value, Double::NEGATIVE_INFINITY);
 }
 
 float Math::nextDown(float value) {
@@ -355,7 +353,7 @@ float Math::nextDown(float value) {
 		return -Float::MIN_VALUE;
 	}
 	
-	return math_nexttowardf(value, Float::NEGATIVE_INFINITY);
+	return mathNextTowardF(value, Float::NEGATIVE_INFINITY);
 }
 
 float Math::nextUp(float value) {
@@ -363,7 +361,7 @@ float Math::nextUp(float value) {
 		return value;
 	}
 	
-	return math_nexttowardf(value, Float::POSITIVE_INFINITY);
+	return mathNextTowardF(value, Float::POSITIVE_INFINITY);
 }
 
 double Math::nextUp(double value) {
@@ -371,11 +369,11 @@ double Math::nextUp(double value) {
 		return value;
 	}
 	
-	return math_nexttoward(value, Double::POSITIVE_INFINITY);
+	return mathNextToward(value, Double::POSITIVE_INFINITY);
 }
 
 double Math::pow(double base, double exponent) {
-	return math_pow(base, exponent);
+	return mathPow(base, exponent);
 }
 
 double Math::powerOfTwoD(int exponent) {
@@ -404,23 +402,23 @@ double Math::random() {
 }
 
 double Math::rint(double value) {
-	return math_rint(value);
+	return mathRint(value);
 }
 
 int Math::round(float value) {
-	return (int) math_round(value);
+	return (int) mathRound(value);
 }
 
 long Math::round(double value) {
-	return (long) math_round(value);
+	return (long) mathRound(value);
 }
 
 float Math::scalb(float value, int scaleFactor) {
-	return math_ldexpf(value, scaleFactor);
+	return mathLdexpf(value, scaleFactor);
 }
 
 double Math::scalb(double value, int scaleFactor) {
-	return math_ldexp(value, scaleFactor);
+	return mathLdexp(value, scaleFactor);
 }
 
 double Math::signum(double value) {
@@ -443,15 +441,15 @@ float Math::signum(float value) {
 }
 
 double Math::sin(double angle) {
-	return math_sin(angle);
+	return mathSin(angle);
 }
 
 double Math::sinh(double angle) {
-	return math_sinh(angle);
+	return mathSinh(angle);
 }
 
 double Math::sqrt(double value) {
-	return math_sqrt(value);
+	return mathSqrt(value);
 }
 
 long Math::subtractExact(long valueA, long valueB) {
@@ -471,11 +469,11 @@ int Math::subtractExact(int valueA, int valueB) {
 }
 
 double Math::tan(double angle) {
-	return math_tan(angle);
+	return mathTan(angle);
 }
 
 double Math::tanh(double angle) {
-	return math_tanh(angle);
+	return mathTanh(angle);
 }
 
 double Math::toDegrees(double angleRadian) {

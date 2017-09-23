@@ -27,6 +27,9 @@
 #ifndef JAVA_LANG_STRING_STRING_HPP_
 #define JAVA_LANG_STRING_STRING_HPP_
 
+#include "../../../kernel/String.hpp"
+#include "../../../kernel/Common.hpp"
+
 #include <typeinfo>
 #include <regex>
 #include <string>
@@ -379,7 +382,7 @@ namespace Java {
 					return true;
 				}
 				if (instanceof<String>(anObject)) {
-					return (boolean) string_equals(original, anObject.toString());
+					return (boolean) stringEquals(original, anObject.toString());
 				}
 				return false;
 			}
