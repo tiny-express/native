@@ -48,14 +48,9 @@ String::String(const_string target) {
 
 String::String(string target) {
 	if (target == nullptr) {
-		this->original = (char*) malloc(sizeof(char));
-		this->original[0] = '\0';
-		this->size = 1;
-		this->capacity = 1;
-		return;
+		target = (string) "\0";
 	}
 	this->original = strdup(target);
-	free(target);
 	this->size = length_pointer_char(target);
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
