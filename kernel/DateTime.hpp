@@ -51,12 +51,12 @@
 
 
 namespace Kernel {
-    static int days_per_month[2][MOS_PER_YEAR] = {
+    static int daysPerMonth[2][MOS_PER_YEAR] = {
             {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
             {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
     };
 
-    static int days_per_year[2] = {
+    static int daysPerYear[2] = {
             365, 366
     };
 
@@ -71,15 +71,15 @@ namespace Kernel {
      * @param year
      * @return
      */
-        unsigned long unix_time_in_milliseconds(
-                unsigned int millisecond,
-                unsigned int second,
-                unsigned int minute,
-                unsigned int hour,
-                unsigned int day,
-                unsigned int month,
-                unsigned int year
-        );
+        unsigned long unixTimeInMilliseconds(
+            unsigned int millisecond,
+            unsigned int second,
+            unsigned int minute,
+            unsigned int hour,
+            unsigned int day,
+            unsigned int month,
+            unsigned int year
+    );
 
     /**
      * Get unix timestamp

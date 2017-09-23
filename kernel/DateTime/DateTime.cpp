@@ -79,7 +79,7 @@ string Kernel::date(time_t timestamp, string format) {
  * @param year
  * @return
  */
-unsigned long unix_time_in_milliseconds(
+unsigned long Kernel::unixTimeInMilliseconds(
 		unsigned int millisecond,
 		unsigned int second,
 		unsigned int minute,
@@ -100,12 +100,12 @@ unsigned long unix_time_in_milliseconds(
 			years++;
 		}
 	}
-	ts += ( (years*days_per_year[0]) + (leap_years*days_per_year[1]) ) * SEC_PER_DAY;
+	ts += ( (years*daysPerYear[0]) + (leap_years*daysPerYear[1]) ) * SEC_PER_DAY;
 	//  Add up the seconds from all prev days this year, up until today.
 	unsigned int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
 	int mo_k;
 	for (mo_k = 0; mo_k<(month - 1); mo_k++ ) { //  days from previous months this year
-		ts += days_per_month[ year_index ][ mo_k ] * SEC_PER_DAY;
+		ts += daysPerMonth[ year_index ][ mo_k ] * SEC_PER_DAY;
 	}
 	ts += (day-1) * SEC_PER_DAY; // days from this month
 	//  Calculate seconds elapsed just today.
@@ -141,7 +141,7 @@ unsigned long Kernel::timestamp() {
 #ifdef WINDOWS
 	SYSTEMTIME current_time;
 	GetSystemTime(&current_time);
-	unsigned long timestamp_in_millisecond = unix_time_in_milliseconds(
+	unsigned long timestamp_in_millisecond = unixTimeInMilliseconds(
 			current_time.wMilliseconds,
 			current_time.wSecond,
 			current_time.wMinute,
