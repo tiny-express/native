@@ -921,7 +921,6 @@ TEST(JavaLangString, CompareOperater) {
 }
 
 TEST(JavaLangString, Format) {
-	return;
     unsigned short ushortValue = 1;
     short shortValue = -1;
     int intValue = -123;

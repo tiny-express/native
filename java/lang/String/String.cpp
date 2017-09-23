@@ -32,10 +32,13 @@
 
 using namespace Java::Lang;
 
+#define DEFAULT_CAPACITY 32
+
 String::String() {
-	this->original = strdup("\0");
+	this->original = (string) malloc(DEFAULT_CAPACITY * sizeof(char));
+	this->original[0] = '\0';
 	this->size = 0;
-	this->capacity = -1;
+	this->capacity = DEFAULT_CAPACITY;
 }
 
 String::String(const_string target) {

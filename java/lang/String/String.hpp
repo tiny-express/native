@@ -946,7 +946,7 @@ namespace Java {
              * @param target
              * @return a String contain value of this String and target string
              */
-			String operator+(const string &target);
+            String operator+(const string &target);
 
             /**
              * Add two String

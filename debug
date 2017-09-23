@@ -1,2 +1,2 @@
-cmake -DCMAKE_BUILD_TYPE=release . && make -j8 && sudo make install
+cmake -DCMAKE_BUILD_TYPE=release . && make -j && sudo make install
 cd examples/Application/String && make
