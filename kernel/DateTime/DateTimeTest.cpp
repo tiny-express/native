@@ -39,7 +39,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 	unsigned int day  = 16;
 	unsigned int month = 7;
 	unsigned int year = 2017;
-	unsigned long timestamp = unix_time_in_milliseconds(
+	unsigned long timestamp = unixTimeInMilliseconds(
 			millisecond,
 			second,
 			minute,
