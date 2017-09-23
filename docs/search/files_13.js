@@ -2,6 +2,8 @@ var searchData=
 [
   ['unaryoperator_2ecpp',['UnaryOperator.cpp',['../UnaryOperator_8cpp.html',1,'']]],
   ['unaryoperator_2ehpp',['UnaryOperator.hpp',['../UnaryOperator_8hpp.html',1,'']]],
+  ['unsupportedencodingexception_2ecpp',['UnsupportedEncodingException.cpp',['../UnsupportedEncodingException_8cpp.html',1,'']]],
+  ['unsupportedencodingexception_2ehpp',['UnsupportedEncodingException.hpp',['../UnsupportedEncodingException_8hpp.html',1,'']]],
   ['unsupportedoperationexception_2ecpp',['UnsupportedOperationException.cpp',['../UnsupportedOperationException_8cpp.html',1,'']]],
   ['unsupportedoperationexception_2ehpp',['UnsupportedOperationException.hpp',['../UnsupportedOperationException_8hpp.html',1,'']]],
   ['url_2ecpp',['URL.cpp',['../URL_8cpp.html',1,'']]],
