@@ -1058,15 +1058,14 @@ namespace Java {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                String inputString(format);
-                string inputStringPtr = inputString.toString();
-                int inputStringLength = inputString.getSize();
+                string inputStringPtr = format.toString();
+                int inputStringLength = format.getSize();
                 int inputStringOffset = 0;
                 int errorCode = 0;
                 regex_t regex;
 
                 errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-                while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                while (errorCode == 0 && inputStringOffset < format.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
                     if (errorCode != 0) {
@@ -1136,7 +1135,9 @@ namespace Java {
 			 * @return a String contain value of target1 and target2
 			 */
 			inline friend String operator+(String const &target1, String const &target2) {
-				return target1 + target2;
+				String result = target1;
+				result += target2;
+				return result;
 			}
 
         private:
@@ -1168,12 +1169,12 @@ namespace Java {
             static String print(const String& format, double value);
             static String print(const String& format, float value);
             static String print(const String& format, char* value);
-            static String print(const String& format, Short &value);
-            static String print(const String& format, Integer &value);
-            static String print(const String& format, Long &value);
-            static String print(const String& format, Float &value);
-            static String print(const String& format, Double &value);
-            static String print(const String& format, String &value);
+            static String print(const String& format, Short value);
+            static String print(const String& format, Integer value);
+            static String print(const String& format, Long value);
+            static String print(const String& format, Float value);
+            static String print(const String& format, Double value);
+            static String print(const String& format, String value);
 		};
 	} // namespace Lang
 } // namespace Java

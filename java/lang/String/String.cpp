@@ -744,27 +744,27 @@ String String::print(const String &format, string value) {
     return result;
 }
 
-String String::print(const String &format, Short &value) {
+String String::print(const String &format, Short value) {
     return String::print(format, value.shortValue());
 }
 
-String String::print(const String &format, Integer &value) {
+String String::print(const String &format, Integer value) {
     return String::print(format, value.intValue());
 }
 
-String String::print(const String &format, Long &value) {
+String String::print(const String &format, Long value) {
     return String::print(format, value.longValue());
 }
 
-String String::print(const String &format, Float &value) {
+String String::print(const String &format, Float value) {
     return String::print(format, value.floatValue());
 }
 
-String String::print(const String &format, Double &value) {
+String String::print(const String &format, Double value) {
     return String::print(format, value.doubleValue());
 }
 
-String String::print(const String &format, String &value) {
+String String::print(const String &format, String value) {
     return String::print(format, value.toString());
 }
 
@@ -772,15 +772,14 @@ String String::format(const String &format) {
     const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
             ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
     String result;
-    String inputString(format);
-    string inputStringPtr = inputString.toString();
-    int inputStringLength = inputString.getSize();
+    string inputStringPtr = format.toString();
+    int inputStringLength = format.getSize();
     int inputStringOffset = 0;
     int errorCode = 0;
     regex_t regex;
 
     errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-    while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+    while (errorCode == 0 && inputStringOffset < format.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
         if (errorCode != 0) {
