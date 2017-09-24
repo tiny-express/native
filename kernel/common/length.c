@@ -55,10 +55,7 @@ inline int length_##TYPE(TYPE target) {\
         return len; \
 }
 
-#ifndef LINUX
 P_LEN(char);
-#endif
-
 P_P_LEN(char);
 NUM_LEN(short);
 NUM_LEN(int);
