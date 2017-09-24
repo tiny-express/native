@@ -42,13 +42,11 @@ public:
             hashMap.put("argument " + String::valueOf(counter), argument);
             counter++;
         }
-        // Collect key value pairs
         String pairs = "Pairs: \n";
         for (Map<String, String>::Entry entry : hashMap.entrySet()) {
             pairs += entry.getKey() + String(" - ") + entry.getValue() + String("\n");
         }
         System::out::println(pairs);
-        // Serialize to json data
         ArrayList<HashMap<String, String>> arrayList;
         arrayList.add(hashMap);
         System::out::println(arrayList.toString());
@@ -56,8 +54,7 @@ public:
 };
 
 int main(int argc, char **argv) {
-    MainApplication::main(argv);
-    return 0;
+    return Application(MainApplication::main, argv));
 }
 ```
 

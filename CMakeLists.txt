@@ -112,6 +112,7 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+        java/Java.cpp
         javax/**/*.cpp
         java/**/*.cpp
         java/**/**/*.cpp

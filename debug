@@ -1,2 +1,2 @@
-cmake -DCMAKE_BUILD_TYPE=release . && make -j8 && sudo make install
-cd examples/Application/String && make
+cmake -DCMAKE_BUILD_TYPE=debug . && make -j8 && sudo make install
+cd examples/Application/Main && make
