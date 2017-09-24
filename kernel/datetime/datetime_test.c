@@ -52,9 +52,13 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 }
 
 TEST (KernelDateTime, TimestampInNanoSeconds) {
+    // Timestamp in seconds is 1506237734
+    // but nano seconds we need multiply with 1,000,000,000
+    // so it will be look likes this 1506237734000000000
+    // length of timestamp in nano seconds is 19 digits
 	long timestamps = timestamp();
-	ASSERT_TRUE(timestamps > 1500198318489000);
-	ASSERT_EQUAL(0, timestamps);
+	ASSERT_TRUE(timestamps > 1506237163070843650);
+    ASSERT_TRUE(timestamps < 2506237163070843650);
 }
 
 TEST (KernelDateTime, Format) {
