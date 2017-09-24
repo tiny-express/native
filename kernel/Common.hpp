@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_GENERAL_H
-#define NATIVE_GENERAL_H
+#ifndef NATIVE_COMMON_HPP
+#define NATIVE_COMMON_HPP
 
 #define _BOOL                   1
 #define CHAR                    2
@@ -59,47 +59,9 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
        void *: VOID_POINTER,                   int *: INT_POINTER,            \
       default: OTHER)
 
-namespace Kernel {
-    char **appendPointerChar(char **target, char *append);
+#include "Common/Append.hpp"
+#include "Common/Join.hpp"
+#include "Common/Length.hpp"
+#include "Common/Segment.hpp"
 
-    char *joinPointerPointerChar(char **target);
-    char *joinDelimiterPointerPointerChar(char **target, const char *delimiter);
-
-    int lengthPointerChar(char *target);
-    int isEmptyString(char *input);
-    int lengthPointerPointerChar(char **target);
-
-    int lengthShort(short target);
-    int lengthInt(int target);
-    int lengthLong(long target);
-    int lengthDouble(double target);
-    int lengthFloat(float target);
-
-    char *segmentPointerChar(char *target, int from, int to);
-    char **segmentPointerPointerChar(char **target, int from, int to);
-    int linearSearch(int *array, int length, int key);
-    int binarySearch(int *array, int length, int key);
-
-    void distributionCountingSort(int *array, int size);
-
-    void sortInt(int *array, int begin_array, int end_array);
-    void sortLong(long *array, int begin_array, int end_array);
-    void sortShort(short *array, int begin_array, int end_array);
-    void sortFloat(float *array, int begin_array, int end_array);
-    void sortString(char *array[], int left_position, int right_position);
-
-
-    int isIncreaseIntArray(int *array, int length);
-    int isIncreaseFloatArray(float *array, int length);
-    int isIncreaseDoubleArray(double *array, int length);
-    int isIncreaseLongArray(long *array, int length);
-    int isIncreaseShortArray(short *array, int length);
-    int isIncreaseStringArray(char **array, int size);
-
-    int isDecreaseIntArray(int *array, int length);
-    int isDecreaseFloatArray(float *array, int length);
-    int isDecreaseDoubleArray(double *array, int length);
-    int isDecreaseLongArray(long *array, int length);
-}
-
-#endif //NATIVE_GENERAL_H
+#endif //NATIVE_COMMON_HPP

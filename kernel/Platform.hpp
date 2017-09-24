@@ -40,8 +40,8 @@
 #endif
 
 #if defined __APPLE__
-#ifndef OSX
-#define OSX
+#ifndef DARWIN
+#define DARWIN
 #endif
 #endif
 

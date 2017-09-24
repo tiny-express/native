@@ -24,24 +24,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include "../Common.hpp"
+#ifndef NATIVE_COMMON_LENGTH_HPP
+#define NATIVE_COMMON_LENGTH_HPP
+
+#define P_LEN(NAME, TYPE); \
+inline int lengthPointer##NAME(TYPE *target) {\
+    if (target == nullptr) return 0;\
+    register TYPE*pointer;\
+    for (pointer = target; *pointer; ++pointer);\
+    return pointer - target;\
+}
+
+// Length of pointer pointer
+#define P_P_LEN(NAME, TYPE); \
+inline int lengthPointerPointer##NAME(TYPE **target) {\
+    if (target == nullptr) return 0;\
+    register TYPE**pointer;\
+    for (pointer = target; *pointer; ++pointer);\
+    return pointer - target;\
+}
+
+P_LEN(Char, char);
+P_LEN(Char, const char);
+P_P_LEN(Char, char);
 
 /**
- * Append pointer char
- * Use to append one more element to array
+ * Is string empty ?
  *
- * @param target
- * @param append
- * @return char pointer pointer
+ * @param input
+ * @return TRUE or FALSE
  */
-char **Kernel::appendPointerChar(char **target, char *append) {
-	int len = lengthPointerPointerChar(target);
-	char **pointer = (char **)calloc(len + 2, sizeof(char *));
-	memcpy(pointer, target, len * sizeof(char *));
-	*( pointer + len ) = append;
-	*( pointer + len + 1 ) = '\0';
-	return pointer;
+inline bool isEmptyString(const char *input) {
+	return lengthPointerChar(input) == 0;
 }
+
+#endif

@@ -24,44 +24,46 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cstdio>
-#include <cstdlib>
+#ifndef NATIVE_KERNEL_STRING_PROCESS_HPP
+#define NATIVE_KERNEL_STRING_PROCESS_HPP
+
+
 #include "../Type.hpp"
-#include "../String.hpp"
-#include "../Common.hpp"
+#include "../Common/Length.hpp"
+#include "../Common/Segment.hpp"
 
 /**
  * String replace
- * Find a string in target and replace it by replace_with
+ * Find a string in target and replace it by replaceWith
  *
  * @param target
- * @param find_string
- * @param replace_with
+ * @param findString
+ * @param replaceWith
  * @return string
  */
-char *Kernel::stringReplace(char *target, char *find_string, char *replace_with) {
-	if (target == NULL || find_string == NULL || replace_with == NULL) {
+inline char *stringReplace(char *target, const char *findString, const char *replaceWith) {
+	if (target == nullptr || findString == nullptr || replaceWith == nullptr) {
 		return strdup("");
 	}
 	char *result;
 	int i, count = 0;
-	int new_len = lengthPointerChar(replace_with);
-	int old_len = lengthPointerChar(find_string);
+	int newLength = lengthPointerChar(replaceWith);
+	int oldLength = lengthPointerChar(findString);
 	
 	for (i = 0; target[ i ] != '\0'; i++) {
-		if (strstr(&target[ i ], find_string) == &target[ i ]) {
+		if (strstr(&target[ i ], findString) == &target[ i ]) {
 			count++;
-			i += old_len - 1;
+			i += oldLength - 1;
 		}
 	}
-	result = (char *)malloc(i + 1 + count * ( new_len - old_len ));
+	result = (char *)malloc((size_t) i + 1 + count * ( newLength - oldLength ));
 	
 	i = 0;
 	while (*target) {
-		if (strstr(target, find_string) == target) {
-			strcpy(&result[ i ], replace_with);
-			i += new_len;
-			target += old_len;
+		if (strstr(target, findString) == target) {
+			strcpy(&result[ i ], replaceWith);
+			i += newLength;
+			target += oldLength;
 		} else {
 			result[ i++ ] = *target++;
 		}
@@ -78,23 +80,23 @@ char *Kernel::stringReplace(char *target, char *find_string, char *replace_with)
  * @param delimiter
  * @return array char pointer
  */
-char **Kernel::stringSplit(char *target, char *delimiter) {
-	if (target == NULL || delimiter == NULL) {
-		char **result = (char **)calloc(1, sizeof(char *));
+inline char **stringSplit(const char *target, const char *delimiter) {
+	if (target == nullptr || delimiter == nullptr) {
+		auto **result = (char **)calloc(1, sizeof(char *));
 		return result;
 	}
-	char **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
+	auto **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
 	const int target_length = lengthPointerChar(target);
 	char const_target[target_length + 1];
 	strncpy(const_target, target, (size_t) target_length);
 	const_target[ target_length ] = '\0';
 	char *item = strtok(const_target, delimiter);
 	register int count = 0;
-	while (item != NULL) {
+	while (item != nullptr) {
 		data[ count++ ] = strdup(item);
-		item = strtok(NULL, delimiter);
+		item = strtok(nullptr, delimiter);
 	}
-	char **result = (char **)calloc((size_t) count + 1, sizeof(char *));
+	auto **result = (char **) calloc((size_t) count + 1, sizeof(char *));
 	memcpy(result, data, count * sizeof(char *));
 	result[ count ] = '\0';
 	free(data);
@@ -104,18 +106,18 @@ char **Kernel::stringSplit(char *target, char *delimiter) {
 /**
  * Free pointer pointer char
  *
- * @param char_array
+ * @param charArray
  */
-void Kernel::freePointerPointerChar(char **char_array) {
-	if (char_array == NULL) {
+inline void freePointerPointerChar(char **charArray) {
+	if (charArray == nullptr) {
 		return;
 	}
-	int length = lengthPointerPointerChar(char_array);
+	int length = lengthPointerPointerChar(charArray);
 	register int index;
 	for (index = length - 1; index >= 0; index--) {
-		free(char_array[ index ]);
+		free(charArray[ index ]);
 	}
-	free(char_array);
+	free(charArray);
 }
 
 /**
@@ -125,32 +127,32 @@ void Kernel::freePointerPointerChar(char **char_array) {
  * @param delimiter
  * @return string
  */
-char *Kernel::stringJoin(char *target[], char *delimiter) {
-	if (target == NULL || delimiter == NULL) {
-		return NULL;
+inline char *stringJoin(char *target[], const char *delimiter) {
+	if (target == nullptr || delimiter == nullptr) {
+		return nullptr;
 	}
 	int num = lengthPointerPointerChar(target) - 1;
 	int len = 0, wlen = 0;
-	char *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
+	auto *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	register int index;
 	for (index = 0; index < num; index++) {
 		// Copy memory segment
 		wlen = lengthPointerChar(target[index]);
-		memcpy(tmp + len, target[ index ], wlen);
+		memcpy(tmp + len, target[ index ], (size_t) wlen);
 		len += wlen;
 		// Copy memory segment
 		wlen = lengthPointerChar(delimiter);
-		memcpy(tmp + len, delimiter, wlen);
+		memcpy(tmp + len, delimiter, (size_t) wlen);
 		len += wlen;
 	}
 	// Copy memory segment
 	wlen = lengthPointerChar(target[num]);
-	memcpy(tmp + len, target[ num ], wlen);
+	memcpy(tmp + len, target[ num ], (size_t) wlen);
 	len += wlen;
 	len += 1;
 	// Saving memory
-	char *result = (char *)calloc(len + 1, sizeof(char));
-	memcpy(result, tmp, len);
+	auto *result = (char *)calloc((size_t) len + 1, sizeof(char));
+	memcpy(result, tmp, (size_t) len);
 	// Deallocate memory
 	free(tmp);
 	return result;
@@ -162,9 +164,9 @@ char *Kernel::stringJoin(char *target[], char *delimiter) {
  * @param target
  * @return string
  */
-char *Kernel::stringTrim(char *target) {
-	if (target == NULL) {
-		return NULL;
+inline char *stringTrim(const char *target) {
+	if (target == nullptr) {
+		return nullptr;
 	}
 	int len, left, right;
 	left = 0;
@@ -174,8 +176,8 @@ char *Kernel::stringTrim(char *target) {
 	while (target[ right ] == ' ')
 		right--;
 	len = right - left + 1;
-	char *result = (char *)calloc(len + 1, sizeof(char));
-	strncpy(result, &target[ left ], len);
+	auto *result = (char *)calloc((size_t) len + 1, sizeof(char));
+	strncpy(result, &target[ left ], (size_t) len);
 	return result;
 }
 
@@ -184,24 +186,24 @@ char *Kernel::stringTrim(char *target) {
  *
  * @param target
  * @param prefix
- * @return TRUE | FALSE
+ * @return true | false
  */
-int Kernel::stringStartswith(char *target, char *prefix) {
-	if (target == NULL || prefix == NULL) {
-		return FALSE;
+inline bool stringStartswith(const char *target, const char *prefix) {
+	if (target == nullptr || prefix == nullptr) {
+		return false;
 	}
 	int target_length = lengthPointerChar(target);
 	int prefix_length = lengthPointerChar(prefix);
 	if (target_length < prefix_length) {
-		return FALSE;
+		return false;
 	}
 	register int i;
 	for (i = 0; i < prefix_length; i++) {
 		if (prefix[ i ] != target[ i ]) {
-			return FALSE;
+			return false;
 		}
 	}
-	return TRUE;
+	return true;
 }
 
 /**
@@ -209,57 +211,60 @@ int Kernel::stringStartswith(char *target, char *prefix) {
  *
  * @param target
  * @param suffix
- * @return TRUE | FALSE
+ * @return true | false
  */
-int Kernel::stringEndswith(char *target, char *suffix) {
-	if (target == NULL || suffix == NULL) {
-		return FALSE;
+inline bool stringEndswith(const char *target, const char *suffix) {
+	if (target == nullptr || suffix == nullptr) {
+		return false;
 	}
 	int target_length = lengthPointerChar(target);
 	int suffix_length = lengthPointerChar(suffix);
 	if (target_length < suffix_length) {
-		return FALSE;
+		return false;
 	}
 	register int i;
 	for (i = suffix_length - 1; i >= 0; i--) {
 		if (suffix[ i ] != target[ target_length - suffix_length + i ]) {
-			return FALSE;
+			return false;
 		}
 	}
-	return TRUE;
+	return true;
 }
 
 /**
  * String index
  *
  * @param target
- * @param subtarget
+ * @param subTarget
  * @param times
  * @return position
  */
-int Kernel::stringIndex(char *target, char *subtarget, int times) {
-	if (isEmptyString(target) || isEmptyString(subtarget) || ( times <= 0 )) {
+inline int stringIndex(const char *target, const char *subTarget, int times) {
+	if (isEmptyString((char*) target) || isEmptyString((char*) subTarget) || ( times <= 0 )) {
 		return NOT_FOUND;
 	}
 	
 	int target_length = lengthPointerChar(target);
-	int subtarget_length = lengthPointerChar(subtarget);
+	int subTarget_length = lengthPointerChar(subTarget);
 	
-	if (target_length == 0 || subtarget_length == 0 || target_length < subtarget_length || ( times == 0 )) {
+	if (target_length == 0 || subTarget_length == 0 || target_length < subTarget_length || ( times == 0 )) {
 		return NOT_FOUND;
 	}
-	
-	register int index_target, index_subtarget, count_times = 0, position_result;
-	for (index_target = 0; index_target <= ( target_length - subtarget_length ); index_target++) {
-		if (target[ index_target ] != subtarget[ 0 ]) {
+
+#ifdef LINUX
+	register
+#endif
+    int index_target, index_subTarget, count_times = 0, position_result;
+	for (index_target = 0; index_target <= ( target_length - subTarget_length ); index_target++) {
+		if (target[ index_target ] != subTarget[ 0 ]) {
 			continue;
 		}
-		for (index_subtarget = 1; index_subtarget < subtarget_length; index_subtarget++) {
-			if (target[ index_target + index_subtarget ] != subtarget[ index_subtarget ]) {
+		for (index_subTarget = 1; index_subTarget < subTarget_length; index_subTarget++) {
+			if (target[ index_target + index_subTarget ] != subTarget[ index_subTarget ]) {
 				break;
 			}
 		}
-		if (index_subtarget == subtarget_length) {
+		if (index_subTarget == subTarget_length) {
 			position_result = index_target;
 			count_times++;
 			if (count_times == times) {
@@ -277,13 +282,16 @@ int Kernel::stringIndex(char *target, char *subtarget, int times) {
  * @param size
  * @return random string
  */
-char *Kernel::stringRandom(char *target, int size) {
+inline char *stringRandom(char *target, int size) {
 	if (isEmptyString(target)) {
-		return NULL;
+		return nullptr;
 	}
 	int target_length = lengthPointerChar(target);
-	char *result = (char *)calloc(size + 1, sizeof(char));
-	register int i;
+	auto *result = (char *)calloc((size_t) size + 1, sizeof(char));
+#ifdef LINUX
+    register
+#endif
+	  int i;
 	for (i = 0; i < size; i++) {
 		result[ i ] = target[ rand() % target_length ];
 	}
@@ -295,11 +303,11 @@ char *Kernel::stringRandom(char *target, int size) {
  * Append a character into a string
  *
  * @param target
- * @param subtarget
+ * @param subTarget
  * @return string
  */
-char *Kernel::stringAppend(char **target, char subtarget) {
-	asprintf(target, "%s%c", *target, subtarget);
+inline char *stringAppend(char **target, char subTarget) {
+	asprintf(target, "%s%c", *target, subTarget);
 	return *target;
 }
 
@@ -307,22 +315,22 @@ char *Kernel::stringAppend(char **target, char subtarget) {
  * String concatenation
  *
  * @param target
- * @param subtarget
+ * @param subTarget
  * @return string
  */
-char *Kernel::stringConcat(char *target, char *subtarget) {
+inline char *stringConcat(char *target, char *subTarget) {
 	if (isEmptyString(target)) {
-		return strdup(subtarget);
+		return strdup(subTarget);
 	}
-	if (isEmptyString(subtarget)) {
+	if (isEmptyString(subTarget)) {
 		return strdup(target);
 	}
 	int target_length = lengthPointerChar(target);
-	int subtarget_length = lengthPointerChar(subtarget);
-	char *result = (char *)calloc(target_length + subtarget_length + 1, sizeof(char));
-	memcpy(result, target, target_length);
-	memcpy(result + target_length, subtarget, subtarget_length);
-	result[ target_length + subtarget_length ] = '\0';
+	int subTarget_length = lengthPointerChar(subTarget);
+	auto *result = (char *)calloc((size_t) target_length + subTarget_length + 1, sizeof(char));
+	memcpy(result, target, (size_t) target_length);
+	memcpy(result + target_length, subTarget, (size_t) subTarget_length);
+	result[ target_length + subTarget_length ] = '\0';
 	return result;
 }
 
@@ -334,7 +342,7 @@ char *Kernel::stringConcat(char *target, char *subtarget) {
  * @param to
  * @return string
  */
-char *Kernel::stringFromTo(char *target, int from, int to) {
+inline char *stringFromTo(char *target, int from, int to) {
 	return segmentPointerChar(target, from, to);
 }
 
@@ -345,7 +353,7 @@ char *Kernel::stringFromTo(char *target, int from, int to) {
  * @param from
  * @return
  */
-char *Kernel::stringFrom(char *target, int from) {
+inline char *stringFrom(char *target, int from) {
 	return stringFromTo(target, from, lengthPointerChar(target));
 }
 
@@ -356,7 +364,7 @@ char *Kernel::stringFrom(char *target, int from) {
  * @param to
  * @return
  */
-char *Kernel::stringTo(char *target, int to) {
+inline char *stringTo(char *target, int to) {
 	return stringFromTo(target, 0, to);
 }
 
@@ -366,13 +374,13 @@ char *Kernel::stringTo(char *target, int to) {
  * @param target
  * @return string
  */
-char *Kernel::stringCopy(char *target) {
+inline char *stringCopy(char *target) {
 	if (isEmptyString(target)) {
 		return strdup("");
 	}
 	int length = lengthPointerChar(target);
-	char *result = (char *) calloc(length + 1, sizeof(char));
-	memcpy(result, target, length);
+	auto *result = (char *) calloc((size_t) length + 1, sizeof(char));
+	memcpy(result, target, (size_t) length);
 	result[ length ] = '\0';
 	return result;
 }
@@ -383,15 +391,15 @@ char *Kernel::stringCopy(char *target) {
  * @param target
  * @return string
  */
-char *Kernel::stringUpper(char *target) {
+inline char *stringUpper(char *target) {
 	if (isEmptyString(target)) {
-		return NULL;
+		return nullptr;
 	}
 	char *result = stringCopy(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'a' <= *index ) && ( *index <= 'z' )) {
-			*index = *index - 32;
+			*index -= - 32;
 		}
 	}
 	return result;
@@ -403,15 +411,15 @@ char *Kernel::stringUpper(char *target) {
  * @param target
  * @return string
  */
-char *Kernel::stringLower(char *target) {
+inline char *stringLower(char *target) {
 	if (isEmptyString(target)) {
-		return NULL;
+		return nullptr;
 	}
 	char *result = stringCopy(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'A' <= *index ) && ( *index <= 'Z' )) {
-			*index = *index + 32;
+			*index += 32;
 		}
 	}
 	return result;
@@ -423,20 +431,20 @@ char *Kernel::stringLower(char *target) {
  * @param target
  * @return string
  */
-char *Kernel::stringTitle(char *target) {
+inline char *stringTitle(char *target) {
 	if (isEmptyString(target)) {
-		return NULL;
+		return nullptr;
 	}
 	char *result = stringCopy(target);
 	register char *index = result;
 	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
-		*index = *index - 32;
+		*index -= 32;
 	}
 	char last_index = *index;
 	index++;
 	for (; *index; index++) {
 		if (last_index == ' ' && 'a' <= *index && *index <= 'z') {
-			*index = *index - 32;
+			*index -= 32;
 		}
 		last_index = *index;
 	}
@@ -449,12 +457,12 @@ char *Kernel::stringTitle(char *target) {
  * @param target
  * @return string
  */
-char *Kernel::stringStandardized(char *target) {
+inline char *stringStandardized(char *target) {
 	if (isEmptyString(target)) {
-		return NULL;
+		return nullptr;
 	}
-	char **segments = stringSplit(target, " ");
-	char *result = stringJoin(segments, " ");
+	char **segments = stringSplit(target, (char*) " ");
+	char *result = stringJoin(segments, (char*) " ");
 	result[lengthPointerChar(result) ] = '\0';
 	freePointerPointerChar(segments);
 	return result;
@@ -465,19 +473,16 @@ char *Kernel::stringStandardized(char *target) {
  *
  * @param target1
  * @param target2
- * @return TRUE | FALSE
+ * @return true | false
  */
-int Kernel::stringEquals(char *target1, char *target2) {
-	if (( target1 == NULL) && ( target2 == NULL)) {
-		return TRUE;
+inline bool stringEquals(const char *target1, const char *target2) {
+	if (( target1 == nullptr) && ( target2 == nullptr)) {
+		return true;
 	}
-	if (( target1 == NULL) || ( target2 == NULL)) {
-		return FALSE;
+	if (( target1 == nullptr) || ( target2 == nullptr)) {
+		return false;
 	}
-	if (strcmp(target1, target2) == 0) {
-		return TRUE;
-	}
-	return FALSE;
+	return strcmp(target1, target2) == 0;
 }
 
 /**
@@ -486,10 +491,10 @@ int Kernel::stringEquals(char *target1, char *target2) {
  * @param target
  * @return string reversed
  */
-char *Kernel::stringReverse(char *target) {
+inline char *stringReverse(char *target) {
 	int target_length = lengthPointerChar(target);
-	char *result = (char *) calloc(target_length + 1, sizeof(char));
-#ifdef __linux__
+	auto *result = (char *) calloc((size_t) target_length + 1, sizeof(char));
+#ifdef LINUX
 	register
 #endif
 	int index;
@@ -500,28 +505,4 @@ char *Kernel::stringReverse(char *target) {
 	return result;
 }
 
-/**
- * Match a regex in target
- *
- * @param target
- * @param regex
- * @return TRUE | FALSE
- */
-int Kernel::stringMatches(char *target, char *regex) {
-//	if (isEmptyString(target)) {
-//		return FALSE;
-//	}
-//
-//	regex_t exp;
-//	int convert = regcomp(&exp, regex, REG_EXTENDED);
-//	if (convert != 0) {
-//        regfree(&exp);
-//		return FALSE;
-//	}
-//	if (regexec(&exp, target, 0, NULL, 0) == 0) {
-//		regfree(&exp);
-//		return TRUE;
-//	}
-//    regfree(&exp);
-	return FALSE;
-}
+#endif//NATIVE_KERNEL_STRING_PROCESS_HPP

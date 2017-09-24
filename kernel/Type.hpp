@@ -36,12 +36,13 @@
 #define NULL 0
 #endif
 
-#include <stddef.h>
-#include <wchar.h>
+#include <cstddef>
+#include <cwchar>
 
+typedef bool boolean;
 typedef char *string;
-typedef wchar_t unicode;
 typedef const char *const_string;
+typedef wchar_t unicode;
 typedef unsigned char byte;
 
 string stringDefault(string target);

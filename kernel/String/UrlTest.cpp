@@ -24,30 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
 #include "../Test.hpp"
 #include "../String.hpp"
 
-using namespace Kernel;
-
-TEST (KernelString, UrlEncode) {
-	char *target = "Quán ăn";
+TEST (KernelStringUrl, Encode) {
+	auto target = (char*) "Quán ăn";
 	char *result = urlEncode(target);
-	char *expect = "Qu%c3%a1n+%c4%83n";
+	auto expect = (char*) "Qu%c3%a1n+%c4%83n";
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, UrlDecode) {
-	char *target = "Qu%c3%a1n+%c4%83n";
+TEST (KernelStringUrl, Decode) {
+    auto target = (char*) "Qu%c3%a1n+%c4%83n";
 	char *result = urlDecode(target);
-	char *expect = "Quán ăn";
+	char *expect = (char*) "Quán ăn";
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, UrlFindParam) {
-	char *params = "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
+TEST (KernelStringUrl, FindParam) {
+	auto params = (char*) "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	
 	char *result = findParam("username", params);
 	ASSERT_STR("loint", result);
@@ -61,7 +58,7 @@ TEST (KernelString, UrlFindParam) {
 	ASSERT_STR("1234", result);
 	free(result);
 	
-	char *params2 = "username=&password=&firstName=Loi&&lastName=Nguyen";
+	auto params2 = (char*) "username=&password=&firstName=Loi&&lastName=Nguyen";
 	
 	result = findParam("username", params2);
 	ASSERT_STR("", result);
@@ -79,7 +76,7 @@ TEST (KernelString, UrlFindParam) {
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
-	char *params3 = "";
+	auto params3 = (char*) "";
 	result = findParam("username", params3);
 	ASSERT_STR("", result);
 	free(result);
@@ -97,10 +94,10 @@ TEST (KernelString, UrlFindParam) {
 	free(result);
 }
 
-TEST (KernelString, UrlFindParamFromUrl) {
+TEST (KernelStringUrl, FindParamFromUrl) {
 	char *result; // result that store value after findParamFromUrl, should be freed after use
 	
-	char *url = "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
+	auto url = (char*) "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	result = findParamFromUrl("username", url);
 	ASSERT_STR("loint", result);
 	free(result);
@@ -117,7 +114,7 @@ TEST (KernelString, UrlFindParamFromUrl) {
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
-	char *url2 = "/abcd/?username=&password=&firstName=Loi&&lastName=Nguyen";
+	auto url2 = (char*) "/abcd/?username=&password=&firstName=Loi&&lastName=Nguyen";
 	result = findParamFromUrl("username", url2);
 	ASSERT_STR("", result);
 	free(result);
@@ -134,7 +131,7 @@ TEST (KernelString, UrlFindParamFromUrl) {
 	ASSERT_STR("Nguyen", result);
 	free(result);
 	
-	char *url3 = "/abcd/";
+	auto url3 = (char*) "/abcd/";
 	result = findParamFromUrl("username", url3);
 	ASSERT_STR("", result);
 	free(result);
@@ -151,7 +148,7 @@ TEST (KernelString, UrlFindParamFromUrl) {
 	ASSERT_STR("", result);
 	free(result);
 	
-	char *url4 = "/abcd/??";
+	auto url4 = (char*) "/abcd/??";
 	result = findParamFromUrl("username", url4);
 	ASSERT_STR("", result);
 	free(result);

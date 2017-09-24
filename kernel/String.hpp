@@ -24,62 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_STRING_H
-#define NATIVE_STRING_H
+#ifndef NATIVE_KERNEL_STRING_HPP
+#define NATIVE_KERNEL_STRING_HPP
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <cstdarg>
 
-namespace Kernel {
-    char *stringFromChar(char target);
-    char *stringFromShort(short target);
-    char *stringFromInt(int target);
-    char *stringFromLong(long target);
-    char *stringFromDouble(double target);
-    char *stringFromFloat(float target);
-
-    char stringToChar(char *target);
-    short stringToShort(char *target);
-    int stringToInt(char *target);
-    long stringToLong(char *target);
-    double stringToDouble(char *target);
-    float stringToFloat(char *target);
-
-    char *stringReplace(char *target, char *find, char *replace_with);
-    char **stringSplit(char *target, char *delimiter);
-    char *stringJoin(char **target, char *delimiter);
-    int stringIndex(char *target, char *subtarget, int times);
-    char *stringTrim(char *target);
-    int stringStartswith(char *target, char *prefix);
-    int stringEndswith(char *target, char *suffix);
-    char *stringRandom(char *target, int size);
-    char *stringAppend(char **target, char subtarget);
-    char *stringConcat(char *target, char *subtarget);
-    int stringEquals(char *target1, char *target2);
-    char *string_concat_asm(char *target, char *subtarget);
-    char *stringReverse(char *target);
-    int stringMatches(char *target, char *regex);
-
-    char *stringFromTo(char *target, int from, int to);
-    char *stringFrom(char *target, int from);
-    char *stringTo(char *target, int to);
-    char *stringCopy(char *target);
-    char *stringUpper(char *target);
-    char *stringLower(char *target);
-    char *stringTitle(char *target);
-    char *stringStandardized(char *target);
-    int stringToBoolean(char *target);
-    char *stringFromBoolean(int target);
-    char *urlEncode(char *target);
-    char *urlDecode(char *target);
-
-    char *findParam(char *name, char *params);
-    char *findParamFromUrl(char *name, char *url);
-
-    void freePointerPointerChar(char **char_array);
-}
+#include "String/Convert.hpp"
+#include "String/Process.hpp"
+#include "String/Url.hpp"
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

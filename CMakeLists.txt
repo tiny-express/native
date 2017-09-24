@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native C CXX)
+project(native CXX)
 
 # Only enable GNU Assembly for Linux amd64
 # Please careful when you would like to optimize any function in ASM

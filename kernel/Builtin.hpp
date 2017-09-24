@@ -24,24 +24,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_BUILTIN_H
-#define NATIVE_BUILTIN_H
+#ifndef NATIVE_KERNEL_BUILTIN_HPP
+#define NATIVE_KERNEL_BUILTIN_HPP
+
+// C Standard Library
+#include <cstdio>
+#include <cmath>
+#include <cstddef>
+#include <cstdlib>
+#include <cstring>
+#include <climits>
+#include <cstdarg>
+#include <cctype>
+#include <memory>
 
 // Platform Macros
 #include "Platform.hpp"
-
-// C Standard Library
-#include <stdio.h>
-#include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <ctype.h>
-#include <memory.h>
 
 // Native Library
 #include "DateTime.hpp"
@@ -50,4 +48,4 @@
 #include "String.hpp"
 #include "Type.hpp"
 
-#endif//NATIVE_BUILTIN_H
+#endif //NATIVE_KERNEL_BUILTIN_HPP

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,51 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../Test.hpp"
-#include <stdlib.h>
-#include <time.h>
+#ifndef NATIVE_COMMON_SEGMENT_HPP
+#define NATIVE_COMMON_SEGMENT_HPP
 
-using namespace Kernel;
+#include "Length.hpp"
 
-TEST (KernelCommon, QuickSort) {
-	srand(time(NULL));
-	int *array_int = (int *)calloc(50, sizeof(int));
-	int index;
-	for (index = 0; index < 50; ++index) {
-		array_int[ index ] = rand();
+inline char *segmentPointerChar(char *targetParam, int from, int to) {
+	if (targetParam == nullptr) {
+		return strdup("");
 	}
-	sortInt(array_int, 0, 49);
-	int result = isIncreaseIntArray(array_int, 50);
-	free(array_int);
-	ASSERT_TRUE(result);
+	int lengthTarget = lengthPointerChar(targetParam);
+	if (from > to || from < 0 || from > lengthTarget || to < 0) {
+		return strdup("");
+	}
+	char *target = strdup(targetParam);
+	int length = to - from + 1;
+	if (to >= lengthTarget) {
+		length = lengthTarget - from + 1;
+	}
+	auto *pointer = (char *) calloc(length + 1, sizeof(char));
+	memcpy(pointer, &target[ from ], length);
+	free(target);
+	pointer[ length ] = '\0';
+	return pointer;
 }
 
-TEST (KernelCommon, SortString) {
-	char *target[] = {
-		(char *) "The",
-		(char *) "quick",
-		(char *) "brown",
-		(char *) "fox",
-		(char *) "jumps",
-		(char *) "over",
-		(char *) "the",
-		(char *) "lazy",
-		(char *) "dog",
-		'\0'
-	};
-	sortString(target, 0, 8);
-	int result = isIncreaseStringArray(target, 9);
-	ASSERT_TRUE(result);
+inline char **segmentPointerPointerChar(char **target, int from, int to) {
+	int lengthTarget = lengthPointerPointerChar(target);
+	if (from > to || from < 0 || from > lengthTarget || to < 0 || to > lengthTarget) {
+		return nullptr;
+	}
+	auto **pointer = (char **) calloc(( to - from + 2 ), sizeof(char *));
+	memcpy(pointer, &target[ from ], ( to - from + 1 ) * sizeof(char *));
+	return pointer;
 }
 
-//TEST(KernelCommon, DistributionCountingSort) {
-//	int *array_int = malloc(50 * sizeof(int));
-//	int index;
-//	for (index = 0; index < 50; ++index) {
-//		array_int[ index ] = rand() % ( 10 ) + 1;
-//	}
-//	distributionCountingSort(array_int, 50);
-//	int result = is_increase_int_array(array_int, 50);
-//	ASSERT_TRUE(result);
-//}
-
+#endif

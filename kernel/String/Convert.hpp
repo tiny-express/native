@@ -24,12 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "../Common.hpp"
+#ifndef NATIVE_KERNEL_STRING_CONVERT_HPP
+#define NATIVE_KERNEL_STRING_CONVERT_HPP
+
 #include "../Type.hpp"
-#include "../String.hpp"
+#include "../Common/Length.hpp"
+#include "Process.hpp"
 
 /**
  * Convert generic types to string
@@ -38,7 +38,7 @@
  * @return string
  */
 #define STR_FROM(NAME, TYPE, FORMAT); \
-char* Kernel::stringFrom##NAME(TYPE target) {\
+inline char* stringFrom##NAME(TYPE target) {\
         char *convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
@@ -51,12 +51,13 @@ char* Kernel::stringFrom##NAME(TYPE target) {\
  * @return generic values
  */
 #define STR_TO(NAME, TYPE, FORMAT);\
-TYPE Kernel::stringTo##NAME(char *target) {\
-    if (target == NULL || strcmp(target, "\0") == 0) return 0;\
+inline TYPE stringTo##NAME(char *target) {\
+    if (target == nullptr || strcmp(target, "\0") == 0) return 0;\
         TYPE result;\
     sscanf(target, FORMAT, &result);\
     return result;\
 }
+
 STR_FROM(Short, short, "%d");
 STR_FROM(Int, int, "%d");
 STR_FROM(Long, long, "%ld");
@@ -72,11 +73,11 @@ STR_TO(Double, double, "%lg");
  * @param target
  * @return string
  */
-char *Kernel::stringFromChar(char target) {
+inline char *stringFromChar(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
-	char *result = (char *)calloc(2, sizeof(char));
+	auto *result = (char *) calloc(2, sizeof(char));
 	result[ 0 ] = target;
 	result[ 1 ] = '\0';
 	return result;
@@ -88,7 +89,7 @@ char *Kernel::stringFromChar(char target) {
  * @param target
  * @return string
  */
-char Kernel::stringToChar(char *target) {
+inline char stringToChar(char *target) {
 	if (isEmptyString(target)) {
 		return '\0';
 	}
@@ -101,8 +102,8 @@ char Kernel::stringToChar(char *target) {
  * @param target
  * @return string
  */
-int Kernel::stringToInt(char *target) {
-	if (target == NULL) {
+inline int stringToInt(char *target) {
+	if (target == nullptr) {
 		return 0;
 	}
 	return atoi(target);
@@ -114,8 +115,8 @@ int Kernel::stringToInt(char *target) {
  * @param target
  * @return string
  */
-long Kernel::stringToLong(char *target) {
-	if (target == NULL) {
+inline long stringToLong(char *target) {
+	if (target == nullptr) {
 		return 0;
 	}
 	return atol(target);
@@ -127,21 +128,21 @@ long Kernel::stringToLong(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-int Kernel::stringToBoolean(char *target) {
+inline int stringToBoolean(char *target) {
 	if (lengthPointerChar(target) == 0) {
 		return FALSE;
 	}
 	char *boolean_value = stringLower(target);
-	if (stringEquals(boolean_value, "true")) {
+	if (stringEquals(boolean_value, (char*) "true")) {
 		free(boolean_value);
-		return TRUE;
+		return true;
 	}
-	if (stringToInt(boolean_value) == TRUE) {
+	if (stringToInt(boolean_value)) {
 		free(boolean_value);
-		return TRUE;
+		return true;
 	}
 	free(boolean_value);
-	return FALSE;
+	return true;
 }
 
 /**
@@ -150,10 +151,12 @@ int Kernel::stringToBoolean(char *target) {
  * @param target
  * @return string
  */
-char *Kernel::stringFromBoolean(int target) {
-    if (target == FALSE) {
+inline char *stringFromBoolean(int target) {
+    if (!target) {
         return strdup("false");
     }
 
     return strdup("true");
 }
+
+#endif//NATIVE_KERNEL_STRING_CONVERT_HPP

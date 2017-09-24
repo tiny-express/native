@@ -28,8 +28,6 @@
 #include <cstdlib>
 #include "../Test.hpp"
 
-using namespace Kernel;
-
 TEST (KernelCommon, AppendPointerChar) {
 	char *target[] = {
 		(char *) "The",
@@ -42,7 +40,7 @@ TEST (KernelCommon, AppendPointerChar) {
 		(char *) "lazy",
 		'\0'
 	};
-	char *append = "dog";
+	auto *append = (char*) "dog";
 	ASSERT_EQUAL(8, lengthPointerPointerChar(target));
 	char **result = appendPointerChar(target, append);
 	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
@@ -55,7 +53,7 @@ TEST (KernelCommon, AppendPointerChar) {
 	ASSERT_STR("the", result[ 6 ]);
 	ASSERT_STR("lazy", result[ 7 ]);
 	ASSERT_STR("dog", result[ 8 ]);
-	append = "";
+	append = (char*) "";
 	free(result);
 	result = appendPointerChar(target, append);
 	ASSERT_EQUAL(9, lengthPointerPointerChar(result));

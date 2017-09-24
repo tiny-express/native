@@ -43,9 +43,6 @@ bool instanceof(T) {
 	return std::is_base_of<Base, T>::value;
 }
 
-// Define builtin types
-typedef bool boolean;
-
 template <typename E>
 class Array;
 

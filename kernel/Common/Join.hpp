@@ -24,9 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef NATIVE_COMMON_JOIN_HPP
+#define NATIVE_COMMON_JOIN_HPP
+
 #include "../Type.hpp"
 #include "../Common.hpp"
 
@@ -37,20 +37,20 @@
  * @param target
  * @return char pointer
  */
-char *Kernel::joinPointerPointerChar(char **target) {
+inline char *joinPointerPointerChar(char **target) {
 	register char **pointer;
-	register int total_length = 0, item_length = 0;
-	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
+	register int totalLength = 0, itemLength = 0;
+	auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
-		item_length = lengthPointerChar(*pointer);
-		memcpy(result_tmp + total_length, *pointer, item_length);
-		total_length += item_length;
+		itemLength = lengthPointerChar(*pointer);
+		memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
+		totalLength += itemLength;
 	}
 	// Allocate enough memory for result
-	char *result = (char *)calloc(total_length + 1, sizeof(char));
-	memcpy(result, result_tmp, total_length);
+	auto *result = (char *)calloc((size_t) totalLength + 1, sizeof(char));
+	memcpy(result, temporaryResult, (size_t) totalLength);
 	// Free memory for temporary variable
-	free(result_tmp);
+	free(temporaryResult);
 	return result;
 }
 
@@ -61,23 +61,25 @@ char *Kernel::joinPointerPointerChar(char **target) {
  * @param target
  * @return char pointer
  */
-char *Kernel::joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
+inline char *joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
 	register char **pointer;
-	register int total_length = 0, item_length = 0;
-	int delimiter_length = lengthPointerChar((char *) delimiter);
-	char *result_tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
+	register int totalLength = 0, itemLength = 0;
+	int delimiterLength = lengthPointerChar((char *) delimiter);
+	auto *temporaryResult = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
 	for (pointer = target; *pointer; ++pointer) {
-		item_length = lengthPointerChar(*pointer);
-		memcpy(result_tmp + total_length, *pointer, item_length);
-		total_length += item_length;
-		memcpy(result_tmp + total_length, delimiter, delimiter_length);
-		total_length += delimiter_length;
+		itemLength = lengthPointerChar(*pointer);
+		memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
+		totalLength += itemLength;
+		memcpy(temporaryResult + totalLength, delimiter, (size_t) delimiterLength);
+		totalLength += delimiterLength;
 	}
 	// Allocate enough memory for result
-	char *result = (char *)calloc(total_length - delimiter_length + 1, sizeof(char));
+	auto *result = (char *) calloc((size_t) totalLength - delimiterLength + 1, sizeof(char));
 	// Copy and remove remainder delimiter
-	memcpy(result, result_tmp, total_length - delimiter_length);
+	memcpy(result, temporaryResult, (size_t) totalLength - delimiterLength);
 	// Free memory for temporary variable
-	free(result_tmp);
+	free(temporaryResult);
 	return result;
 }
+
+#endif

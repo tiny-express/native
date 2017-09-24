@@ -24,55 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../String.hpp"
+#ifndef NATIVE_COMMON_APPEND_HPP
+#define NATIVE_COMMON_APPEND_HPP
+
 #include "../Common.hpp"
-#include "../Type.hpp"
-
-#define P_LEN(NAME, TYPE); \
-int Kernel::lengthPointer##NAME(TYPE *target) {\
-    if (target == NULL) return 0;\
-        register TYPE*pointer;\
-        for (pointer = target; *pointer; ++pointer);\
-        return pointer - target;\
-}
-
-// length of pointer pointer
-#define P_P_LEN(NAME, TYPE); \
-int Kernel::lengthPointerPointer##NAME(TYPE **target) {\
-        if (target == NULL) return 0;\
-        register TYPE**pointer;\
-        for (pointer = target; *pointer; ++pointer);\
-        return pointer - target;\
-}
-
-// Length of number
-#define NUM_LEN(NAME, TYPE); \
-int Kernel::length##NAME(TYPE target) {\
-        char *result = stringFrom##NAME(target);\
-        int len = lengthPointerChar(result); \
-        free(result); \
-        return len; \
-}
-
-//#ifndef __linux__
-P_LEN(Char, char);
-//#endif
-P_P_LEN(Char, char);
-NUM_LEN(Short, short);
-NUM_LEN(Int, int);
-NUM_LEN(Long, long);
-NUM_LEN(Double, double);
-NUM_LEN(Float, float);
+#include "Length.hpp"
+#include <memory>
+#include <cstring>
 
 /**
- * Is string empty ?
+ * Append pointer char
+ * Use to append one more element to array
  *
- * @param input
- * @return TRUE or FALSE
+ * @param target
+ * @param append
+ * @return char pointer pointer
  */
-int Kernel::isEmptyString(char *input) {
-	if (lengthPointerChar(input) == 0) {
-		return TRUE;
-	}
-	return FALSE;
+inline char **appendPointerChar(char **target, char *append) {
+	int len = lengthPointerPointerChar(target);
+	auto **pointer = (char **) malloc((len + 2)* sizeof(char *));
+	memcpy(pointer, target, len * sizeof(char *));
+	*( pointer + len ) = append;
+	*( pointer + len + 1 ) = '\0';
+	return pointer;
 }
+
+#endif

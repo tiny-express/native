@@ -16,8 +16,6 @@
 #ifndef NATIVE_KERNEL_TEST_H
 #define NATIVE_KERNEL_TEST_H
 
-#include <stddef.h>
-
 #if defined _WIN32 || defined __CYGWIN__
 #ifndef WIN32
 #define WIN32
@@ -30,10 +28,9 @@
 #define WEAK
 #endif
 
-#include <inttypes.h> /* intmax_t, uintmax_t, PRI* */
-#include <stddef.h> /* size_t */
-#include <signal.h>
-//#include <sys/resource.h>
+#include <cinttypes> /* intmax_t, uintmax_t, PRI* */
+#include <cstddef> /* size_t */
+#include <csignal>
 #include "Common.hpp"
 
 typedef void (*SetupFunc)(void *);

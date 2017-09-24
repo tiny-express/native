@@ -27,68 +27,66 @@
 #include "../Builtin.hpp"
 #include "../Test.hpp"
 
-using namespace Kernel;
-
-TEST (KernelString, ProcessReplace) {
-	char *target = "Hello World";
-	char *find_string = "World";
-	char *replace_with = "Food Tiny";
-	char *expect = "Hello Food Tiny";
-	char *result = stringReplace(target, find_string, replace_with);
+TEST (KernelStringProcess, StringReplace) {
+    auto target = (char*) "Hello World";
+    auto find_string = (char*) "World";
+    auto replace_with = (char*) "Food Tiny";
+    auto expect = (char*) "Hello Food Tiny";
+    auto result = stringReplace(target, find_string, replace_with);
 	ASSERT_STR(expect, result);
 	free(result);
-	
-	char *target2 = "Hello World";
-	char *find_string2 = "Nothing";
-	char *replace_with2 = "Food Tiny";
-	char *expect2 = "Hello World";
-	char *result2 = stringReplace(target2, find_string2, replace_with2);
+
+    auto target2 = (char*) "Hello World";
+    auto find_string2 = (char*) "Nothing";
+	auto replace_with2 = (char*) "Food Tiny";
+    auto expect2 = (char*) "Hello World";
+    auto result2 = stringReplace(target2, find_string2, replace_with2);
 	ASSERT_STR(expect2, result2);
 	free(result2);
 	
-	char *target3 = "aaa bbededeb cccccc de dd eeeede";
-	char *find_string3 = "de";
-	char *replace_with3 = "ff";
-	char *expect3 = "aaa bbeffffb cccccc ff dd eeeeff";
-	char *result3 = stringReplace(target3, find_string3, replace_with3);
+	auto target3 = (char*) "aaa bbededeb cccccc de dd eeeede";
+    auto find_string3 = (char*) "de";
+    auto replace_with3 = (char*) "ff";
+    auto expect3 = (char*) "aaa bbeffffb cccccc ff dd eeeeff";
+    auto result3 = stringReplace(target3, find_string3, replace_with3);
 	ASSERT_STR(expect3, result3);
 	free(result3);
 	
-	char *target4 = "aaaaaaaaaaaffffffffffffffffff";
-	char *find_string4 = "aa";
-	char *replace_with4 = "o";
-	char *expect4 = "oooooaffffffffffffffffff";
-	char *result4 = stringReplace(target4, find_string4, replace_with4);
+	auto target4 = (char*) "aaaaaaaaaaaffffffffffffffffff";
+    auto find_string4 = (char*) "aa";
+    auto replace_with4 = (char*) "o";
+    auto expect4 = (char*) "oooooaffffffffffffffffff";
+    auto result4 = stringReplace(target4, find_string4, replace_with4);
 	ASSERT_STR(expect4, result4);
 	free(result4);
-	
-	char *target5 = "a";
-	char *find_string5 = "aaaaaaaaaaaaaaaaaaaa";
-	char *replace_with5 = "o";
-	char *result5 = stringReplace(target5, find_string5, replace_with5);
+
+    auto target5 = (char*) "a";
+    auto find_string5 = (char*) "aaaaaaaaaaaaaaaaaaaa";
+    auto replace_with5 = (char*) "o";
+    auto result5 = stringReplace(target5, find_string5, replace_with5);
 	ASSERT_STR("a", result5);
 	free(result5);
 }
 
-TEST (KernelString, ProcessTrim) {
-	char *expect = "Hello World";
-	char *target = "  Hello World  ";
-	char *result = stringTrim(target);
+TEST (KernelStringProcess, StringTrim) {
+    auto expect = (char*) "Hello World";
+    auto target = (char*) "  Hello World  ";
+    auto result = stringTrim(target);
 	ASSERT_STR(expect, result);
 	free(result);
-	
-	char *target1 = "  Hello World";
+
+    auto target1 = (char*) "  Hello World";
 	char *result1 = stringTrim(target1);
 	ASSERT_STR(expect, result1);
 	free(result1);
 	
-	char *target2 = "Hello World  ";
+	auto target2 = (char*) "Hello World  ";
 	char *result2 = stringTrim(target2);
 	ASSERT_STR(expect, result2);
 	free(result2);
 }
 
-TEST (KernelString, ProcessJoin) {
+TEST (KernelStringProcess, StringJoin) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -101,16 +99,16 @@ TEST (KernelString, ProcessJoin) {
 		(char *) "dog",
 		'\0'
 	};
-	char *delimiter = "|";
-	char *expect = "The|quick|brown|fox|jumps|over|the|lazy|dog";
+	auto delimiter = (char*) "|";
+	auto expect = (char*) "The|quick|brown|fox|jumps|over|the|lazy|dog";
 	char *result = stringJoin(target, delimiter);
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessSplit) {
-	char *target = "The|quick|brown|fox|jumps|over|the|lazy|dog";
-	char *delimiter = "|";
+TEST (KernelStringProcess, StringSplit) {
+    auto target = (char*) "The|quick|brown|fox|jumps|over|the|lazy|dog";
+    auto delimiter = (char*) "|";
 	char **result = stringSplit(target, delimiter);
 	ASSERT_STR("The", result[ 0 ]);
 	ASSERT_STR("quick", result[ 1 ]);
@@ -123,101 +121,101 @@ TEST (KernelString, ProcessSplit) {
 	ASSERT_STR("dog", result[ 8 ]);
 	freePointerPointerChar(result);
 	
-	target = "Nothing to split";
+	target = (char*) "Nothing to split";
 	result = stringSplit(target, delimiter);
 	ASSERT_STR("Nothing to split", result[ 0 ]);
 	freePointerPointerChar(result);
 	
-	char *url = "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
-	char **url_components = stringSplit(url, "?");
+	auto url = (char*) "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
+	char **url_components = stringSplit(url, (char*) "?");
 	ASSERT_EQUAL(2, lengthPointerPointerChar(url_components));
 	ASSERT_STR("/abc", url_components[ 0 ]);
 	ASSERT_STR("username=loint&password=123&firstName=Loi&lastName=Nguyen", url_components[ 1 ]);
 	freePointerPointerChar(url_components);
 	
-	target = "HTTP/1.1 200 OK\n"
+	target = (char*) "HTTP/1.1 200 OK\n"
 		"Content-Type: application/json; charset=UTF-8\n"
 		"Content-Length: 1498\r\n"
 		"\r\n"
 		"{\"took\":26,\"timed_out\":false,\"_shards\":{\"total\":2,\"successful\":2,\"failed\":0},\"hits\":{\"total\":1,\"max_score\":4.495634,\"hits\":[{\"_index\":\"db_foodtiny_test\",\"_type\":\"food_with_shop\",\"_id\":\"[\\\"ebc0aa50-3a26-11e7-9d38-8f725678c689\\\",\\\"05b05ff0-3a27-11e7-9d38-8f725678c689\\\"]\",\"_score\":4.495634,\"_source\":{\"food_discount\":0.0,\"food_name\":{\"en_EN\":\"Noodles with deep fried tofu, shrimp paste\",\"vi_VN\":\"Bún đậu mắm tôm\"},\"food_menu_name\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_shop_online_status\":false,\"food_shop_type\":{\"en_EN\":\"Diner\",\"vi_VN\":\"Quán Ăn\"},\"food_shop_id\":\"ebc0aa50-3a26-11e7-9d38-8f725678c689\",\"food_shop_rating\":4.0,\"food_id\":\"05b05ff0-3a27-11e7-9d38-8f725678c689\",\"food_image\":\"http://healthplus.vn/Images/Uploaded/Share/2013/08/25/e9020130521111500eP8Qt3fV2.jpg\",\"food_shop_logo\":\"http://thpt.daytot.vn/files/thpt/chi-pheo.jpg\",\"food_shop_phone_number\":\"0112\",\"food_ingredient_1\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_price\":45000.0,\"food_shop_address\":{\"en_EN\":\"818 Nguyen Kiem, Ward 3, Go Vap District, HCMC\",\"vi_VN\":\"818 Nguyễn Kiệm, Phường 3, Gò Vấp, Hồ Chí Minh\"},\"food_ingredient_2\":{\"en_EN\":\"tofu\",\"vi_VN\":\"Đậu hũ\"},\"food_ingredient_3\":{\"en_EN\":\"Shrimp paste\",\"vi_VN\":\"Mắm tôm\"},\"food_shop_name\":\"Bún đậu Thị Nở\",\"food_shop_start_time\":\"08:00\",\"location\":\"10.817053, 106.678834\",\"food_shop_delivery_status\":false,\"food_cooking_method\":{\"en_EN\":\"None\",\"vi_VN\":\"None\"},\"food_shop_quota_shipping\":100000.0,\"food_shop_finish_time\":\"21:00\"}}]}}";
 	
-	result = stringSplit(target, "\r\n\r\n");
+	result = stringSplit(target, (char*) "\r\n\r\n");
 	ASSERT_EQUAL(4, lengthPointerPointerChar(result));
 	freePointerPointerChar(result);
 }
 
-TEST (KernelString, ProcessStartsWith) {
-	char *target = "Hello World";
-	char *prefix = "Hello";
+TEST (KernelStringProcess, StringStartsWith) {
+	auto target = (char*) "Hello World";
+	auto prefix = (char*) "Hello";
 	ASSERT_TRUE(stringStartswith(target, prefix));
 	
-	prefix = "Nope";
+	prefix = (char*) "Nope";
 	ASSERT_FALSE(stringStartswith(target, prefix));
 	
-	prefix = "Prefix is longer than target";
+	prefix = (char*) "Prefix is longer than target";
 	ASSERT_FALSE(stringStartswith(target, prefix));
 }
 
-TEST (KernelString, ProcessEndsWith) {
-	char *target = "Hello World";
-	char *suffix = "World";
+TEST (KernelStringProcess, StringEndsWith) {
+	auto target = (char*) "Hello World";
+	auto suffix = (char*) "World";
 	ASSERT_TRUE(stringEndswith(target, suffix));
 	
-	suffix = "Nope";
+	suffix = (char*) "Nope";
 	ASSERT_FALSE(stringEndswith(target, suffix));
 	
-	suffix = "Suffix is longer than target";
+	suffix = (char*) "Suffix is longer than target";
 	ASSERT_FALSE(stringEndswith(target, suffix));
 	
-	suffix = "Suffix is longer than target";
+	suffix = (char*) "Suffix is longer than target";
 	ASSERT_FALSE(stringEndswith(target, suffix));
 }
 
-TEST (KernelString, ProcessIndexOf) {
-	char *target = "Hello World";
-	char *subtarget = "World";
+TEST (KernelStringProcess, StringIndexOf) {
+	char *target = (char*) "Hello World";
+	char *subtarget = (char*) "World";
 	int result = stringIndex(target, subtarget, 1);
 	ASSERT_EQUAL(6, result);
 	
-	target = "Hello World World World World";
-	subtarget = "World";
+	target = (char*) "Hello World World World World";
+	subtarget = (char*) "World";
 	result = stringIndex(target, subtarget, 3);
 	ASSERT_EQUAL(18, result);
 	
-	target = "Hello World World World World";
-	subtarget = "orl";
+	target = (char*) "Hello World World World World";
+	subtarget = (char*) "orl";
 	result = stringIndex(target, subtarget, 2);
 	ASSERT_EQUAL(13, result);
 	
-	target = "###############";
-	subtarget = "##";
+	target = (char*) "###############";
+	subtarget = (char*) "##";
 	result = stringIndex(target, subtarget, 4);
 	ASSERT_EQUAL(3, result);
 	
-	subtarget = "Substring is longer than target";
+	subtarget = (char*) "Substring is longer than target";
 	result = stringIndex(target, subtarget, 1);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "Hello";
+	subtarget = (char*) "Hello";
 	result = stringIndex(target, subtarget, 1);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "Nope";
+	subtarget = (char*) "Nope";
 	result = stringIndex(target, subtarget, 1);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "xxx";
-	target = "";
+	subtarget = (char*) "xxx";
+	target = (char*) "";
 	result = stringIndex(target, subtarget, 1);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "";
-	target = "";
+	subtarget = (char*) "";
+	target = (char*) "";
 	result = stringIndex(target, subtarget, 2);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "";
-	target = NULL;
+	subtarget = (char*) "";
+	target = nullptr;
 	result = stringIndex(target, subtarget, 2);
 	ASSERT_EQUAL(-1, result);
 	
@@ -226,24 +224,24 @@ TEST (KernelString, ProcessIndexOf) {
 	result = stringIndex(target, subtarget, 2);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "\0";
-	target = "\0";
+	subtarget = (char*) "\0";
+	target = (char*) "\0";
 	result = stringIndex(target, subtarget, -1);
 	ASSERT_EQUAL(-1, result);
 	
-	subtarget = "\0";
+	subtarget = (char*) "\0";
 	target = NULL;
 	result = stringIndex(target, subtarget, -1);
 	ASSERT_EQUAL(-1, result);
 	
 	subtarget = NULL;
-	target = "\0";
+	target = (char*) "\0";
 	result = stringIndex(target, subtarget, -1);
 	ASSERT_EQUAL(-1, result);
 }
 
-TEST (KernelString, ProcessRandom) {
-	char *target = "ABCXYZ";
+TEST (KernelStringProcess, StringRandom) {
+	char *target = (char*) "ABCXYZ";
 	int size = 4;
 	char *result = stringRandom(target, size);
 	
@@ -252,8 +250,8 @@ TEST (KernelString, ProcessRandom) {
 }
 
 // TODO fix this @dquang
-TEST (KernelString, ProcessAppend) {
-	char *target = "Hello ";
+TEST (KernelStringProcess, StringAppend) {
+	char *target = (char*) "Hello ";
 	stringAppend(&target, 'W');
 	
 	void *pointer = target; // use pointer to keep old address on heap
@@ -276,69 +274,53 @@ TEST (KernelString, ProcessAppend) {
 	free(target);
 }
 
-TEST (KernelString, ProcessConcat) {
-	char *target = "Hello";
-	char *subtarget = "World";
-	
-	char *result = stringConcat(target, subtarget);
+TEST (KernelStringProcess, StringConcat) {
+	auto target = (char*) "Hello";
+    auto subtarget = (char*) "World";
+
+    auto result = stringConcat(target, subtarget);
 	ASSERT_STR("HelloWorld", result);
 	ASSERT_EQUAL(10, lengthPointerChar(result));
 	free(result);
 	
-	subtarget = "";
+	subtarget = (char*) "";
 	result = stringConcat(target, subtarget);
 	ASSERT_STR("Hello", result);
 	ASSERT_EQUAL(5, lengthPointerChar(result));
 	free(result);
 }
 
-TEST (KernelString, ProcessConcatAsm) {
-	return;
-	// TODO loint@foodtiny.com
-	char *target = "Hello\0";
-	char *subtarget = "World\0";
-	
-	char *result = string_concat_asm(target, subtarget);
-	ASSERT_STR("Nullable", result);
-	ASSERT_EQUAL(10, lengthPointerChar(result));
-	
-	subtarget = "";
-	result = string_concat_asm(target, subtarget);
-	ASSERT_STR("Hello", result);
-	ASSERT_EQUAL(5, lengthPointerChar(result));
-}
-
-TEST (KernelString, ProcessFromTo) {
-	char *target = "Hello World";
+TEST (KernelStringProcess, StringFromTo) {
+	auto target = (char*) "Hello World";
 	int from = 6;
 	int to = 11;
 	char *result = stringFromTo(target, from, to);
-	char *expect = "World";
+	char *expect = (char*) "World";
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	from = 11;
 	to = 6;
 	result = stringFromTo(target, from, to);
-	expect = "";
+	expect = (char*) "";
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	from = -1;
 	to = 11;
 	result = stringFromTo(target, from, to);
-	expect = "";
+	expect = (char*) "";
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	from = 0;
 	to = 20;
 	result = stringFromTo(target, from, to);
-	expect = "Hello World";
+	expect = (char*) "Hello World";
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "HTTP/1.0 200 OK\n"
+	target = (char*) "HTTP/1.0 200 OK\n"
 		"Content-Type: text/html; charset=utf-8\n"
 		"Content-Length: 122\n"
 		"Server: Werkzeug/0.12.2 Python/2.7.12\n"
@@ -350,144 +332,144 @@ TEST (KernelString, ProcessFromTo) {
 	from = 30;
 	to = 53;
 	result = stringFromTo(target, from, to);
-	expect = "text/html; charset=utf-8";
+	expect = (char*) "text/html; charset=utf-8";
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessFrom) {
-	char *target = "Hello World";
+TEST (KernelStringProcess, StringFrom) {
+	char *target = (char*) "Hello World";
 	int from = 6;
 	char *result = stringFrom(target, from);
-	char *expect = "World";
+	char *expect = (char*) "World";
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	from = -1;
-	expect = "";
+	expect = (char*) "";
 	result = stringFrom(target, from);
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	from = 20;
-	expect = "";
+	expect = (char*) "";
 	result = stringFrom(target, from);
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessTo) {
-	char *target = "Hello World";
+TEST (KernelStringProcess, StringTo) {
+	char *target = (char*) "Hello World";
 	int to = 4;
 	char *result = stringTo(target, to);
-	char *expect = "Hello";
+	char *expect = (char*) "Hello";
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	to = -1;
-	expect = "";
+	expect = (char*) "";
 	result = stringTo(target, to);
 	ASSERT_STR(expect, result);
 	free(result);
 	
 	to = 20;
-	expect = "Hello World";
+	expect = (char*) "Hello World";
 	result = stringTo(target, to);
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessCopy) {
-	char *target = "Hello World";
+TEST (KernelStringProcess, StringCopy) {
+	char *target = (char*) "Hello World";
 	char *result = stringCopy(target);
 	ASSERT_STR(target, result);
 	free(result);
 	
-	target = "";
+	target = (char*) "";
 	result = stringCopy(target);
 	ASSERT_STR(target, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessUpper) {
-	char *target = "Hello World";
+TEST (KernelStringProcess, StringUpper) {
+	char *target = (char*) "Hello World";
 	char *result = stringUpper(target);
-	char *expect = "HELLO WORLD";
+	char *expect = (char*) "HELLO WORLD";
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "&*^&%&";
+	target = (char*) "&*^&%&";
 	result = stringUpper(target);
 	ASSERT_STR(target, result);
 	free(result);
 	
-	target = "JIJjifje&*^";
+	target = (char*) "JIJjifje&*^";
 	result = stringUpper(target);
-	expect = "JIJJIFJE&*^";
+	expect = (char*) "JIJJIFJE&*^";
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessLower) {
-	char *target = "HELLO WORLD";
+TEST (KernelStringProcess, StringLower) {
+	char *target = (char*) "HELLO WORLD";
 	char *result = stringLower(target);
-	char *expect = "hello world";
+	char *expect = (char*) "hello world";
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "&*%&*";
+	target = (char*) "&*%&*";
 	result = stringLower(target);
 	ASSERT_STR(target, result);
 	free(result);
 	
-	target = "HIhahaHI!@#";
+	target = (char*) "HIhahaHI!@#";
 	result = stringLower(target);
-	expect = "hihahahi!@#";
+	expect = (char*) "hihahahi!@#";
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "1";
+	target = (char*) "1";
 	result = stringLower(target);
-	expect = "1";
+	expect = (char*) "1";
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessTitle) {
-	char *target = "hello world";
+TEST (KernelStringProcess, StringTitle) {
+	char *target = (char*) "hello world";
 	char *result = stringTitle(target);
-	char *expect = "Hello World";
+	char *expect = (char*) "Hello World";
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "#hi";
-	expect = "#hi";
+	target = (char*) "#hi";
+	expect = (char*) "#hi";
 	result = stringTitle(target);
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "abcd";
-	expect = "Abcd";
+	target = (char*) "abcd";
+	expect = (char*) "Abcd";
 	result = stringTitle(target);
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessStandardized) {
-	char *target = "  hello  world ";
-	char *expect = "hello world";
+TEST (KernelStringProcess, StringStandardized) {
+	char *target = (char*) "  hello  world ";
+	char *expect = (char*) "hello world";
 	char *result = stringStandardized(target);
 	ASSERT_STR(expect, result);
 	free(result);
 	
-	target = "     hello      world      world     ";
-	expect = "hello world world";
+	target = (char*) "     hello      world      world     ";
+	expect = (char*) "hello world world";
 	result = stringStandardized(target);
 	ASSERT_STR(expect, result);
 	free(result);
 }
 
-TEST (KernelString, ProcessEquals) {
+TEST (KernelStringProcess, StringEquals) {
 	char *target1 = NULL;
 	char *target2 = NULL;
 	ASSERT_TRUE(stringEquals(target1, target2));
@@ -500,19 +482,19 @@ TEST (KernelString, ProcessEquals) {
 	target2 = (char *) "hello";
 	ASSERT_FALSE(stringEquals(target1, target2));
 	
-	target1 = "hello  world ";
-	target2 = "  hello world";
+	target1 = (char*) "hello  world ";
+	target2 = (char*) "  hello world";
 	ASSERT_FALSE(stringEquals(target1, target2));
 	
-	target1 = "abcd";
-	target2 = "abcd";
+	target1 = (char*) "abcd";
+	target2 = (char*) "abcd";
 	ASSERT_TRUE(stringEquals(target1, target2));
 }
 
-TEST (KernelString, ProcessReverse) {
-	char *target = "hello from other side";
-	char *correct_reverse = "edis rehto morf olleh";
-	char *wrong_reverse = "something here";
+TEST (KernelStringProcess, StringReverse) {
+	char *target = (char*) "hello from other side";
+	char *correct_reverse = (char*) "edis rehto morf olleh";
+	char *wrong_reverse = (char*) "something here";
 	
 	char *reverse_of_target = stringReverse(target);
 	
@@ -526,10 +508,10 @@ TEST (KernelString, ProcessReverse) {
 	free(reverse_of_target);
 }
 
-TEST (KernelString, ProcessMatches) {
-	char *target = "hello from other side";
-	char *correct_reverse = "edis rehto morf olleh";
-	char *wrong_reverse = "something here";
+TEST (KernelStringProcess, StringMatches) {
+	char *target = (char*) "hello from other side";
+	char *correct_reverse = (char*) "edis rehto morf olleh";
+	char *wrong_reverse = (char*) "something here";
 	
 	char *reverse_of_target = stringReverse(target);
 	

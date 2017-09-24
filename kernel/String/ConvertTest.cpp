@@ -28,9 +28,7 @@
 #include "../String.hpp"
 #include "../Test.hpp"
 
-using namespace Kernel;
-
-TEST (KernelString, ConvertFromChar) {
+TEST (KernelStringConvert, StringFromChar) {
 	// Input a number character to convert from char to string
 	char number_character = '6';
 	
@@ -52,12 +50,12 @@ TEST (KernelString, ConvertFromChar) {
 	free(result);
 }
 
-TEST (KernelString, ConvertFromShort) {
+TEST (KernelStringConvert, StringFromShort) {
 	// Input a positive short number to convert from short to string
 	int number = 123;
 	
 	// The expected result
-	char *expect = "123";
+	auto expect = (char*) "123";
 	
 	// The real result
 	char *result = stringFromShort(number);
@@ -70,7 +68,7 @@ TEST (KernelString, ConvertFromShort) {
 	int number2 = -123;
 	
 	// The expected result
-	char *expect2 = "-123";
+	auto expect2 = (char*) "-123";
 	
 	// The real result
 	char *result2 = stringFromShort(number2);
@@ -80,12 +78,12 @@ TEST (KernelString, ConvertFromShort) {
 	free(result2);
 }
 
-TEST (KernelString, ConvertFromInt) {
+TEST (KernelStringConvert, StringFromInt) {
 	// Input a 0 value to convert from int to string
 	int input = 0;
 	
 	// The expect result
-	char *expect = "0";
+	char *expect = (char*) "0";
 	
 	// The real result
 	char *result = stringFromInt(input);
@@ -97,7 +95,7 @@ TEST (KernelString, ConvertFromInt) {
 	// Input a 1 value to convert from int to string
 	// Than make a comparison between the expect result and the real result
 	int input1 = 1;
-	char *expect1 = "1";
+	auto expect1 = (char*) "1";
 	char *result1 = stringFromInt(input1);
 	ASSERT_STR(expect1, result1);
 	free(result1);
@@ -105,7 +103,7 @@ TEST (KernelString, ConvertFromInt) {
 	// Input a random positive value of type int such as 10 to convert from int to string
 	// Than make a comparison between the expect result and the real result
 	int input2 = 10;
-	char *expect2 = "10";
+	auto expect2 = (char*) "10";
 	char *result2 = stringFromInt(input2);
 	ASSERT_STR(expect2, result2);
 	free(result2);
@@ -113,7 +111,7 @@ TEST (KernelString, ConvertFromInt) {
 	// Input the maximum value of type int to convert from int to string
 	// Than make a comparison between the expect result and the real result
 	int input3 = 2147483647;
-	char *expect3 = "2147483647";
+	auto expect3 = (char*) "2147483647";
 	char *result3 = stringFromInt(input3);
 	ASSERT_STR(expect3, result3);
 	free(result3);
@@ -121,18 +119,18 @@ TEST (KernelString, ConvertFromInt) {
 	// Input the minimum value of type int to convert from int to string
 	// Than make a comparison between the expect result and the real result
 	int input4 = -2147483647;
-	char *expect4 = "-2147483647";
+	auto expect4 = (char*) "-2147483647";
 	char *result4 = stringFromInt(input4);
 	ASSERT_STR(expect4, result4);
 	free(result4);
 }
 
-TEST (KernelString, ConvertFromLong) {
+TEST (KernelStringConvert, StringFromLong) {
 	// Input the maximum value of type long to convert from long to string
-	long input = (long) 393239259234023474;
+	auto input = (long) 393239259234023474;
 	
 	// The expected result
-	char *expect = "393239259234023474";
+	auto expect = (char*) "393239259234023474";
 	
 	// The real result
 	char *result = stringFromLong(input);
@@ -144,18 +142,18 @@ TEST (KernelString, ConvertFromLong) {
 	// Input the minimum value of type long to convert from long to string
 	// Than make a comparison between the expect result and the real result
 	long input1 = -2147483647;
-	char *expect1 = "-2147483647";
+	auto expect1 = (char*) "-2147483647";
 	char *result1 = stringFromLong(input1);
 	ASSERT_STR(expect1, result1);
 	free(result1);
 }
 
-TEST (KernelString, ConvertFromFloat) {
+TEST (KernelStringConvert, StringFromFloat) {
 	// Input a positive value of type float to convert from float to string
 	float input = 12.56;
 	
 	// The expected result
-	char *expect = "12.56";
+	auto expect = (char*) "12.56";
 	
 	// The real result
 	char *result = stringFromFloat(input);
@@ -166,19 +164,19 @@ TEST (KernelString, ConvertFromFloat) {
 	
 	// Input a negative value of type float to convert from float to string
 	// Than make a comparison between the expected result and the real result
-	float input1 = -1.56799;
-	char *expect1 = "-1.56799";
+	auto input1 = (float) -1.56799;
+	auto expect1 = (char*) "-1.56799";
 	char *result1 = stringFromFloat(input1);
 	ASSERT_STR(expect1, result1);
 	free(result1);
 }
 
-TEST (KernelString, ConvertFromDouble) {
+TEST (KernelStringConvert, StringFromDouble) {
 	// Input a positive value of type double to convert from double to string
 	double input = 125.569123;
 	
 	// The expected result
-	char *expect = "125.569123";
+	auto expect = (char*) "125.569123";
 	
 	// The real result
 	char *result = stringFromDouble(input);
@@ -190,18 +188,18 @@ TEST (KernelString, ConvertFromDouble) {
 	// Input a negative value of type double to convert from double to string
 	// Than make a comparison between the expected result and the real result
 	double input1 = -125.56123;
-	char *expect1 = "-125.56123";
+	auto expect1 = (char*) "-125.56123";
 	char *result1 = stringFromDouble(input1);
 	ASSERT_STR(expect1, result1);
 	free(result1);
 }
 
-TEST (KernelString, ConvertToShort) {
-	// Make a comparison between 0 and result of stringToShort(NULL)
-	ASSERT_EQUAL(0, stringToShort(NULL));
+TEST (KernelStringConvert, StringToShort) {
+	// Make a comparison between 0 and result of stringToShort(nullptr)
+	ASSERT_EQUAL(0, stringToShort(nullptr));
 	
 	// Input a positive value of type short to convert from short to string
-	char *input = "123";
+	char *input = (char*) "123";
 	
 	// The result
 	short result = stringToShort(input);
@@ -211,14 +209,14 @@ TEST (KernelString, ConvertToShort) {
 	
 	// Input a negative value of type short to convert from short to string
 	// Than make a comparison between the input and the result
-	char *input1 = "-123";
+	auto input1 = (char*) "-123";
 	short result1 = stringToShort(input1);
 	ASSERT_EQUAL(-123, result1);
 }
 
-TEST (KernelString, ConvertToInt) {
+TEST (KernelStringConvert, StringToInt) {
 	// Input a string representing the positive number to convert from string to int
-	char *input = "123\0";
+	auto input = (char*) "123\0";
 	
 	// The result of stringToInt
 	int result = stringToInt(input);
@@ -228,50 +226,50 @@ TEST (KernelString, ConvertToInt) {
 	
 	// Input a string representing negative number to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input1 = "-123\0";
+	auto input1 = (char*) "-123\0";
 	int result1 = stringToInt(input1);
 	ASSERT_EQUAL(-123, result1);
 	
 	// Input a string representing 0 number to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input2 = "\0";
+	auto input2 = (char*) "\0";
 	int result2 = stringToInt(input2);
 	ASSERT_EQUAL(0, result2);
 	
 	// Input a string representing nothing to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input3 = "";
+	auto input3 = (char*) "";
 	int result3 = stringToInt(input3);
 	ASSERT_EQUAL(0, result3);
 	
 	// Input a string representing positive value of type float to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input4 = "12.321";
+	auto input4 = (char*) "12.321";
 	int result4 = stringToInt(input4);
 	ASSERT_EQUAL(12, result4);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input5 = "kajshdkashd";
+	auto input5 = (char*) "kajshdkashd";
 	int result5 = stringToInt(input5);
 	ASSERT_EQUAL(0, result5);
 	
-	// Input a string representing NULL to convert from string to int
+	// Input a string representing nullptr to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input6 = NULL;
+	char *input6 = nullptr;
 	int result6 = stringToInt(input6);
 	ASSERT_EQUAL(0, result6);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
-	char *input7 = "foodtiny.com";
+	auto input7 = (char*) "foodtiny.com";
 	int result7 = stringToInt(input7);
 	ASSERT_EQUAL(0, result7);
 }
 
-TEST (KernelString, ConvertToLong) {
+TEST (KernelStringConvert, StringToLong) {
 	// Input a string representing the positive number to convert from string to long
-	char *input = "21474836";
+	auto input = (char*) "21474836";
 	
 	// The result
 	long result = stringToLong(input);
@@ -281,20 +279,20 @@ TEST (KernelString, ConvertToLong) {
 	
 	// Input a string representing the negative number to convert from string to long
 	// Than make a comparison between the result and the right answer
-	char *input1 = "-21474836";
+	auto input1 = (char*) "-21474836";
 	long result1 = stringToLong(input1);
 	ASSERT_EQUAL(-21474836, result1);
 	
 	// Input a string representing characters to convert from string to long
 	// Than make a comparison between the result and the right answer
-	char *input2 = "Hello world";
+	auto input2 = (char*) "Hello world";
 	long result2 = stringToLong(input2);
 	ASSERT_EQUAL(0, result2);
 }
 
-TEST (KernelString, ConvertToFloat) {
+TEST (KernelStringConvert, StringToFloat) {
 	// Input a string representing a positive value of type float to convert from string to float
-	char *input = "12.56";
+	auto input = (char*) "12.56";
 	
 	// The result
 	float result = stringToFloat(input);
@@ -304,14 +302,14 @@ TEST (KernelString, ConvertToFloat) {
 	
 	// Input a string representing a negative value of type float to convert from string to float
 	// Than make a comparison between the result and the right answer
-	char *input1 = "-1.56799";
+	auto input1 = (char*) "-1.56799";
 	float result1 = stringToFloat(input1);
 	ASSERT_EQUAL(-1.56799, result1);
 }
 
-TEST (KernelString, ConvertToDouble) {
+TEST (KernelStringConvert, StringToDouble) {
 	// Input a string representing a positive value of type double to convert from string to double
-	char *input = "125.569123";
+	auto input = (char*) "125.569123";
 	
 	// The result
 	double result = stringToDouble(input);
@@ -321,14 +319,14 @@ TEST (KernelString, ConvertToDouble) {
 	
 	// Input a string representing a negative value of type double to convert from string to double
 	// Than make a comparison between the result and the right answer
-	char *input1 = "-125.56123";
+	auto input1 = (char*) "-125.56123";
 	double result1 = stringToDouble(input1);
 	ASSERT_EQUAL(-125.56123, result1);
 }
 
-TEST (KernelString, ConvertToBoolean) {
+TEST (KernelStringConvert, StringToBoolean) {
 	// Input a string representing 1 to convert from string to boolean
-	char *target0 = "1";
+	char *target0 = (char*) "1";
 	
 	// The result
 	int boolean0 = stringToBoolean(target0);
@@ -338,48 +336,48 @@ TEST (KernelString, ConvertToBoolean) {
 	
 	// Input a string representing "TRUE" to convert from string to boolean
 	// Than check if the result is TRUE or not
-	char *target1 = "TRUE";
+	auto target1 = (char*) "TRUE";
 	int boolean1 = stringToBoolean(target1);
 	ASSERT_TRUE(boolean1);
 	
 	// Input a string representing "True" to convert from string to boolean
 	// Than check if the result is TRUE or not
-	char *target2 = "True";
+	auto target2 = (char*) "True";
 	int boolean2 = stringToBoolean(target2);
 	ASSERT_TRUE(boolean2);
 	
 	// Input a string representing "true" to convert from string to boolean
 	// Than check if the result is TRUE or not
-	char *target3 = "true";
+	auto target3 = (char*) "true";
 	int boolean3 = stringToBoolean(target3);
 	ASSERT_TRUE(boolean3);
 	
 	// Input a string representing "FALSE" to convert from string to boolean
 	// Than check if the result is FALSE or not
-	char *target4 = "FALSE";
+	auto target4 = (char*) "FALSE";
 	int boolean4 = stringToBoolean(target4);
 	ASSERT_FALSE(boolean4);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
-	char *target5 = "False";
+	auto target5 = (char*) "False";
 	int boolean5 = stringToBoolean(target5);
 	ASSERT_FALSE(boolean5);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
-	char *target6 = "false";
+	auto target6 = (char*) "false";
 	int boolean6 = stringToBoolean(target6);
 	ASSERT_FALSE(boolean6);
 }
 
-TEST (KernelString, ConvertFromBoolean) {
+TEST (KernelStringConvert, StringFromBoolean) {
 	// Input value 0 to convert from Boolean to String
 	int value = 0;
 	
 	// The expected result
 	
-	char *expect = "false";
+	auto expect = (char*) "false";
 	
 	// The real result of stringFromBoolean
 	char *result = stringFromBoolean(value);
@@ -391,7 +389,7 @@ TEST (KernelString, ConvertFromBoolean) {
 	// Input value 1 to convert from Boolean to String
 	// Than make a comparison between the expected result and the real result
 	value = 1;
-	expect = "true";
+	expect = (char*) "true";
 	result = stringFromBoolean(value);
 	ASSERT_STR(expect, result);
 	free(result);
@@ -400,7 +398,7 @@ TEST (KernelString, ConvertFromBoolean) {
 	// Than make a comparison between the expected result and the real result
 	value = 10;
 	
-	expect = "true";
+	expect = (char*) "true";
 	result = stringFromBoolean(value);
 	ASSERT_STR(expect, result);
 	free(result);
