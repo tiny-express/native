@@ -54,7 +54,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 TEST (KernelDateTime, TimestampInNanoSeconds) {
 	long timestamps = timestamp();
 	ASSERT_TRUE(timestamps > 1500198318489000);
-	ASSERT_TRUE(timestamps < 2500198318489000);
+	ASSERT_EQUAL(0, timestamps);
 }
 
 TEST (KernelDateTime, Format) {
