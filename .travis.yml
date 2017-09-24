@@ -14,8 +14,8 @@ addons:
     - valgrind
     - lcov
 before_script:
-- export CC=gcc-4.9
-- export CXX=g++-4.9
+- export CC=gcc
+- export CXX=g++
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j
