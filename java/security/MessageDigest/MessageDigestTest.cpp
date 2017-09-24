@@ -23,3 +23,31 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+extern "C" {
+#include "../../../kernel/test.h"
+}
+
+#include "MessageDigest.hpp"
+
+using namespace Java::Lang;
+using namespace Java::Security;
+
+TEST(JavaSecurity, MD5) {
+    byte expect[] = {0x77, 0xad, 0xd1, 0xd5, 0xf4, 0x12, 0x23, 0xd5, 0x58,
+                     0x2f, 0xca, 0x73, 0x6a, 0x5c, 0xb3, 0x35};
+    String input = "the quick brown fox jumps over the lazy dog";
+    byte* result = NULL;
+
+    MessageDigest* md5 = MessageDigest::getInstance("MD5");
+    if (md5) {
+        md5->update((byte*)input.toString(), 0, input.getSize());
+        result = new byte[md5->getDigestLength()]();
+        md5->digest(result, 0, md5->getDigestLength());
+        ASSERT_DATA(expect,
+                    sizeof(expect),
+                    result,
+                    (size_t)md5->getDigestLength());
+        delete[] result;
+    }
+}

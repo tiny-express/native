@@ -24,51 +24,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#include "MD5MessageDigest.hpp"
 
-#include "../../../kernel/type.h"
-#include "../../Lang.hpp"
-#include "MessageDigestSpi.hpp"
+using namespace Java::Security;
 
-using namespace Java::Lang;
+MD5MessageDigest::MD5MessageDigest() {
+    memset(this->hash, 0, sizeof(this->hash));
+    md5_init(&this->state);
+    this->isFinished = false;
+}
 
-namespace Java {
-    namespace Security {
-        class MessageDigest : public MessageDigestSpi {
-        public:
-            static MessageDigest* getInstance(String algorithm);
+MD5MessageDigest::~MD5MessageDigest() {
 
-            ~MessageDigest();
+}
 
-            String getAlgorithm();
+int MD5MessageDigest::engineDigest(byte *buffer, int offset, int len) {
+    if (!this->isFinished) {
+        md5_finish(&this->state, this->hash);
+    }
+    memcpy(buffer + offset, this->hash, sizeof(this->hash));
+    return 0;
+}
 
-            int getDigestLength();
+int MD5MessageDigest::engineGetDigestLength() {
+    return (int)sizeof(this->hash);
+}
 
-            int digest(byte buf[], int offset, int len);
+void MD5MessageDigest::engineReset() {
+    memset(this->hash, 0, sizeof(this->hash));
+    this->isFinished = false;
+}
 
-            Array<byte> digest();
-
-            void reset();
-
-            void update(const byte input[], int offset, int len);
-
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi);
-
-            int engineDigest(byte buffer[], int offset, int len) override;
-
-            int engineGetDigestLength() override;
-
-            void engineReset() override;
-
-            void engineUpdate(const byte input[], int offset, int len) override;
-
-        };
-    } // namespace Security
-} // namespace Java
-
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+void MD5MessageDigest::engineUpdate(const byte *input, int offset, int len) {
+    md5_append(&this->state, (const md5_byte_t*)input, len);
+}

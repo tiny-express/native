@@ -23,4 +23,76 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
+#include "MessageDigest.hpp"
+//#include "MD5MessageDigest.hpp"
+
+using namespace Java::Security;
+
+MessageDigest *MessageDigest::getInstance(String algorithm) {
+    if (algorithm == "MD5") {
+       // MessageDigestSpi* spi = new MD5MessageDigest();
+        //return new MessageDigest(spi);
+    }
+    return nullptr;
+}
+
+MessageDigest::~MessageDigest() {
+    if (spi) {
+        delete spi;
+    }
+}
+
+String MessageDigest::getAlgorithm() {
+    return algorithm;
+}
+
+int MessageDigest::getDigestLength() {
+    return engineGetDigestLength();
+}
+
+int MessageDigest::digest(byte *buf, int offset, int len) {
+    return engineDigest(buf, offset, len);
+}
+
+Array<byte> MessageDigest::digest() {
+    return Array<byte>();
+}
+
+void MessageDigest::reset() {
+    engineReset();
+}
+
+void MessageDigest::update(const byte input[], int offset, int len) {
+    engineUpdate(input, offset, len);
+}
+
+MessageDigest::MessageDigest(MessageDigestSpi *spi) {
+    this->spi = spi;
+}
+
+int MessageDigest::engineDigest(byte buffer[], int offset, int len) {
+    if (spi) {
+        return spi->engineDigest(buffer, offset, len);
+    }
+    return 0;
+}
+
+int MessageDigest::engineGetDigestLength() {
+    if (spi) {
+        return spi->engineGetDigestLength();
+    }
+    return 0;
+}
+
+void MessageDigest::engineReset() {
+    if (spi) {
+        spi->engineReset();
+    }
+}
+
+void MessageDigest::engineUpdate(const byte input[], int offset, int len) {
+    if (spi) {
+        spi->engineUpdate(input, offset, len);
+    }
+}

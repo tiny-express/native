@@ -24,51 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#ifndef JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
+#define JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
 
 #include "../../../kernel/type.h"
 #include "../../Lang.hpp"
-#include "MessageDigestSpi.hpp"
-
-using namespace Java::Lang;
 
 namespace Java {
     namespace Security {
-        class MessageDigest : public MessageDigestSpi {
+        class MessageDigestSpi : public Object {
         public:
-            static MessageDigest* getInstance(String algorithm);
-
-            ~MessageDigest();
-
-            String getAlgorithm();
-
-            int getDigestLength();
-
-            int digest(byte buf[], int offset, int len);
-
-            Array<byte> digest();
-
-            void reset();
-
-            void update(const byte input[], int offset, int len);
-
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi);
-
-            int engineDigest(byte buffer[], int offset, int len) override;
-
-            int engineGetDigestLength() override;
-
-            void engineReset() override;
-
-            void engineUpdate(const byte input[], int offset, int len) override;
-
+            virtual int engineDigest(byte buffer[], int offset, int len) = 0;
+            virtual int engineGetDigestLength() = 0;
+            virtual void engineReset() = 0;
+            virtual void engineUpdate(const byte input[], int offset, int len)
+            = 0;
         };
     } // namespace Security
 } // namespace Java
 
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#endif //JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
