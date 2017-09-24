@@ -825,7 +825,6 @@ TEST(JavaLangString, OperatorPlusEqualsChar) {
 	text += 'd';
 	ASSERT_STR("Hello World", text.toString());
     ASSERT_EQUAL(11, text.getSize());
-
 }
 
 TEST(JavaLangString, OperatorPlusEqualsString) {
@@ -1014,5 +1013,50 @@ TEST(JavaLangString, Format) {
         } catch (IllegalArgumentException& e) {
             ASSERT_STR("Missing arguments.", e.getMessage().toString());
         }
+    }
+
+    {
+        string key = (string)"Nhà hàng";
+        double latitude = 10.824093;
+        double longitude = 106.683844;
+        string url = url_decode(key);
+        String queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
+        String body = String::format(queryFormat, url, latitude, longitude);
+
+        String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
+                "%s\r\n\r\n"
+                "%s";
+
+        String result = String::format(REQUEST_TEMPLATE,
+                                       "POST",
+                                       "CASSANDRA",
+                                       "_test",
+                                       "http1.1",
+                                       "HEADER:HEADER",
+                                       body);
+
+        string expected;
+        asprintf(&expected,
+                 REQUEST_TEMPLATE.toString(),
+                 "POST", "CASSANDRA",
+                 "_test",
+                 "http1.1",
+                 "HEADER:HEADER",
+                 body.toString());
+
+        ASSERT_STR(expected, result.toString());
+        free(expected);
+        free(url);
+    }
+
+    {
+        string expected;
+        String result;
+        unsigned long ul = timestamp();
+
+        asprintf(&expected, "%lu", ul);
+        result = String::format("%lu", ul);
+        ASSERT_STR(expected, result.toString());
+        free(expected);
     }
 }
