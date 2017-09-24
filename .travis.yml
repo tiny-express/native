@@ -19,7 +19,7 @@ before_script:
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
-- make leak
+- ./misc/memory_check
 after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
