@@ -151,7 +151,7 @@ unsigned long timestamp() {
 			current_time.wYear
 	);
 	// Timestamp should be in nano seconds
-	return timestamp_in_millisecond * 1000;
+	return timestamp_in_millisecond * 1000000;
 #endif
 	return 0;
 }

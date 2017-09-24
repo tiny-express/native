@@ -25,16 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native C CXX)
-
-# Only enable GNU Assembly for Linux amd64
-# Please careful when you would like to optimize any function in ASM
-# ASM implementation must be GNU Assembly for Linux amd x64
-# C implementation must be implemented first for __APPLE__
-# Keep human readable for __APPLE__ - no need to optimize for testing
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-#    enable_language(ASM)
-endif ()
+project(native ASM C CXX)
 
 # Enable runtime search path support for dynamic libraries on OSX
 if (APPLE)
@@ -91,6 +82,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
+# Release mode
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
+
 # Include all C/C++ and Unix Assembly files
 file(GLOB_RECURSE SOURCES_C
         kernel/common/*
@@ -137,6 +131,7 @@ add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURC
 
 # Create native library for static linking
 add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME}_static STATIC ${SOURCES_C} ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -147,6 +142,7 @@ add_custom_target(
 # Check memory leak
 add_custom_target(
         leak
+        COMMAND make native_test
         COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
 )
 
@@ -174,6 +170,7 @@ enable_testing()
 
 # Add make installation - install to Unix system
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
 install(FILES library.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
