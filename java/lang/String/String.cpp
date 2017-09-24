@@ -33,7 +33,27 @@
 using namespace Java::Lang;
 
 #define DEFAULT_CAPACITY 32
+
 #define DEFAULT_BUFFER_LENGTH 128
+
+#define STRING_CONSTRUCTOR_ARRAY \
+	if (offset < 0) {\
+		throw StringIndexOutOfBoundsException(offset);\
+	}\
+	if (length < 0) {\
+		throw StringIndexOutOfBoundsException(length);\
+	}\
+	if (offset > array.length - length) {\
+		throw StringIndexOutOfBoundsException(offset + length);\
+	}\
+	this->original = (string) malloc(( length + 1) * sizeof(char));\
+	int index;\
+	for (index = 0; index < length; offset++, index++) {\
+		this->original [index] = array.get(offset);\
+	}\
+	this->original [length] = '\0';\
+	this->size = length;\
+	this->capacity = this->size == 0 ? -1 : this->size;\
 
 String::String() {
 	this->original = (string) malloc(DEFAULT_CAPACITY * sizeof(char));
@@ -61,7 +81,7 @@ String::String(string target) {
 }
 
 String::String(string original, int length) {
-	this->original = strndup(original, length);
+	this->original = strndup(original, (size_t) length);
 	this->size = length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -107,25 +127,6 @@ String::String(const StringBuffer &stringBuffer) {
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
-#define STRING_CONSTRUCTOR_ARRAY \
-	if (offset < 0) {\
-		throw StringIndexOutOfBoundsException(offset);\
-	}\
-	if (length < 0) {\
-		throw StringIndexOutOfBoundsException(length);\
-	}\
-	if (offset > array.length - length) {\
-		throw StringIndexOutOfBoundsException(offset + length);\
-	}\
-	this->original = (string) malloc(( length + 1) * sizeof(char));\
-	int index;\
-	for (index = 0; index < length; offset++, index++) {\
-		this->original [index] = array.get(offset);\
-	}\
-	this->original [length] = '\0';\
-	this->size = length;\
-	this->capacity = this->size == 0 ? -1 : this->size;\
-
 String::String(Array<char> &array, int offset, int length) {
     STRING_CONSTRUCTOR_ARRAY
 }
@@ -165,7 +166,10 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 }
 
 String String::concat(String target) {
-	*this += target.toString();
+	string targetValue = target.original;
+	int targetLength = target.size;
+	int newLength = this->size + target.size;
+	STRING_OPERATOR_PLUS
 	return *this;
 }
 
@@ -512,89 +516,6 @@ String String::subString(int beginIndex, int endIndex) const {
 	String result = holder;
 	free(holder);
 	return result;
-}
-
-#define STRING_OPERATOR_PLUS  \
-	if (newLength >= this->capacity) {\
-		this->capacity = newLength << 1;\
-		this->original = (string) realloc(this->original, this->capacity);\
-	}\
-	memcpy(&this->original[this->size], &targetValue[0], targetLength);\
-	this->original[newLength] = '\0';\
-	this->size = newLength;
-
-String String::operator+(const string &target) {
-	string targetValue = (string) target;
-	int targetLength = length_pointer_char((string) target);
-	int newLength = this->size + targetLength;
-	STRING_OPERATOR_PLUS
-	return this->original;
-}
-
-String String::operator+(const String &target) {
-	string targetValue = target.original;
-	int targetLength = target.size;
-	int newLength = this->size + target.size;
-	STRING_OPERATOR_PLUS
-	return this->original;
-}
-
-String &String::operator+=(const String &target) {
-	string targetValue = target.original;
-	int targetLength = target.size;
-	int newLength = this->size + target.size;
-	STRING_OPERATOR_PLUS
-	return *this;
-}
-
-String &String::operator+=(const_string target) {
-	string targetValue = (string) target;
-	int targetLength = length_pointer_char((string) target);
-	int newLength = this->size + targetLength;
-	STRING_OPERATOR_PLUS
-	return *this;
-}
-
-String &String::operator+=(const char &target) {
-	string pointerHolder = this->original;
-	string_append(&this->original, target);
-    this->size++;
-	free(pointerHolder);
-	return *this;
-}
-
-boolean String::operator==(const String &target) const {
-    return string_equals(this->original, target.toString()) != 0;
-}
-
-String &String::operator=(const String &target) {
-	if (this->original != nullptr) {
-		free(this->original);
-	}
-	this->original = strdup(target.original);
-	this->size = target.size;
-	this->capacity = target.capacity;
-	return *this;
-}
-
-boolean String::operator!=(const String &target) const {
-	return !this->operator==(target);
-}
-
-boolean String::operator<(const String &target) const {
-    return strcmp(this->original, target.toString()) < 0;
-}
-
-boolean String::operator>(const String &target) const {
-    return strcmp(this->original, target.toString()) > 0;
-}
-
-boolean String::operator<=(const String &target) const {
-    return strcmp(this->original, target.toString()) <= 0;
-}
-
-boolean String::operator>=(const String &target) const {
-    return strcmp(this->original, target.toString()) >= 0;
 }
 
 boolean String::contentEquals(const CharSequence &charSequence) {

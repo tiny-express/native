@@ -41,13 +41,23 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-        class StringBuilder;
-        class StringBuffer;
-        class Short;
-        class Integer;
-        class Long;
-        class Float;
-        class Double;
+
+#define STRING_OPERATOR_PLUS  \
+		if (newLength >= this->capacity) {\
+			this->capacity = newLength << 1;\
+			this->original = (string) realloc(this->original, this->capacity);\
+		}\
+		memcpy(&this->original[this->size], &targetValue[0], targetLength);\
+		this->original[newLength] = '\0';\
+		this->size = newLength;
+
+		class StringBuilder;
+		class StringBuffer;
+		class Short;
+		class Integer;
+		class Long;
+		class Float;
+		class Double;
 
 		class String :
 				public Object,
@@ -313,7 +323,6 @@ namespace Java {
              * @return String
              */
 			String concat(String target);
-
 
             /**
              * Find substring inside this String
@@ -892,100 +901,150 @@ namespace Java {
 
 		public:
 			/**
-			 * Determine if two String is equal
-			 *
-			 * @param target
-			 * @return true if this String is equal to target; false otherwise
-			 */
-			boolean operator==(const String &target) const;
-
-            /**
-             * Determine if two String is not equal
-             *
-             * @param target
-             * @return true if this String is different from target; false otherwise
-             */
-			boolean operator!=(const String &target) const;
-
-            /**
-             * Determine if this String is smaller than another String
-             *
-             * @param target
-             * @return true if this String is smaller than target; false otherwise
-             */
-			boolean operator<(const String &target) const;
-
-            /**
-             * Determine if this String is greater than another String
-             *
-             * @param target
-             * @return true if this String is greater than target; false otherwise
-             */
-			boolean operator>(const String &target) const;
-
-            /**
-             * Determine if this String is smaller than or equal to another String
-             *
-             * @param target
-             * @return true if this String is smaller than or equal to target; false otherwise
-             */
-			boolean operator<=(const String &target) const;
-
-            /**
-             * Determine if this String is greater than or equal to another String
-             *
-             * @param target
-             * @return true if this String is greater than or equal to target; false otherwise
-             */
-			boolean operator>=(const String &target) const;
-
-            /**
-             * Add this String with string
-             *
-             * @param target
-             * @return a String contain value of this String and target string
-             */
-            String operator+(const string &target);
-
-            /**
              * Add two String
              *
              * @param target
              * @return a String contain value of this String and target String
              */
-			String operator+(const String &target);
+			inline String operator+(const string &target) {
+				auto targetValue = (string) target;
+				int targetLength = length_pointer_char((string) target);
+				int newLength = this->size + targetLength;
+				STRING_OPERATOR_PLUS
+				return this->original;
+			}
 
-            /**
-             * Assign value from target to this String
+			/**
+             * Add two String
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target String
              */
-			String &operator=(const String &target);
+			inline String operator+(const String &target) {
+				string targetValue = target.original;
+				int targetLength = target.size;
+				int newLength = this->size + target.size;
+				STRING_OPERATOR_PLUS
+				return this->original;
+			}
 
-            /**
-             * Add target String to this String and assign value to this String
+			/**
+             * Add this String with string
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target string
              */
-			String &operator+=(const String &target);
+			inline String &operator+=(const String &target) {
+				string targetValue = target.original;
+				int targetLength = target.size;
+				int newLength = this->size + target.size;
+				STRING_OPERATOR_PLUS
+				return *this;
+			}
 
-            /**
-             * Add target char to this String and assign value to this String
+			/**
+             * Add two String
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target String
              */
-			String &operator+=(const char &target);
+			inline String &operator+=(const_string target) {
+				auto targetValue = (string) target;
+				int targetLength = length_pointer_char((string) target);
+				int newLength = this->size + targetLength;
+				STRING_OPERATOR_PLUS
+				return *this;
+			}
 
-            /**
-             * Add target string to this String and assign value to this String
+			/**
+            * Add target char to this String and assign value to this String
+            *
+            * @param target
+            * @return a reference to this String
+            */
+			inline String &operator+=(const char &target) {
+				string pointerHolder = this->original;
+				string_append(&this->original, target);
+				this->size++;
+				free(pointerHolder);
+				return *this;
+			}
+
+			/**
+			 * Determine if two String is equal
+			 *
+			 * @param target
+			 * @return true if this String is equal to target; false otherwise
+			 */
+			inline boolean operator==(const String &target) const {
+				return string_equals(this->original, target.toString()) != 0;
+			}
+
+			/**
+            * Assign value from target to this String
+            *
+            * @param target
+            * @return a reference to this String
+            */
+			inline String &operator=(const String &target) {
+				if (this->original != nullptr) {
+					free(this->original);
+				}
+				this->original = strdup(target.original);
+				this->size = target.size;
+				this->capacity = target.capacity;
+				return *this;
+			}
+
+			/**
+            * Determine if two String is not equal
+            *
+            * @param target
+            * @return true if this String is different from target; false otherwise
+            */
+			inline boolean operator!=(const String &target) const {
+				return !this->operator==(target);
+			}
+
+			/**
+            * Determine if this String is smaller than another String
+            *
+            * @param target
+            * @return true if this String is smaller than target; false otherwise
+            */
+			inline boolean operator<(const String &target) const {
+				return strcmp(this->original, target.toString()) < 0;
+			}
+
+			/**
+             * Determine if this String is greater than another String
              *
              * @param target
-             * @return a reference to this String
+             * @return true if this String is greater than target; false otherwise
              */
-			String &operator+=(const_string target);
+			inline boolean operator>(const String &target) const {
+				return strcmp(this->original, target.toString()) > 0;
+			}
+
+			/**
+            * Determine if this String is smaller than or equal to another String
+            *
+            * @param target
+            * @return true if this String is smaller than or equal to target; false otherwise
+            */
+			inline boolean operator<=(const String &target) const {
+				return strcmp(this->original, target.toString()) <= 0;
+			}
+
+			/**
+             * Determine if this String is greater than or equal to another String
+             *
+             * @param target
+             * @return true if this String is greater than or equal to target; false otherwise
+             */
+			inline boolean operator>=(const String &target) const {
+				return strcmp(this->original, target.toString()) >= 0;
+			}
 
 		public:
             /**
@@ -1024,7 +1083,7 @@ namespace Java {
 
                     if (matchedStringLength > 0) {
                         String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                        result += String::printObject(matchedString, value);
+                        result += printObject(matchedString, value);
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
@@ -1089,7 +1148,7 @@ namespace Java {
                         result += lastChar;
                         break;
                     default:
-                        result = String::print(format, value);
+                        result = print(format, value);
                         break;
                 }
                 return result;
