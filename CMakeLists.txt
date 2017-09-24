@@ -35,6 +35,12 @@ endif ()
 # GNU filesystem layout conventions
 include(GNUInstallDirs)
 
+# Force GCC for Linux
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(CMAKE_C_COMPILER "gcc")
+    set(CMAKE_CXX_COMPILER "g++")
+endif()
+
 # Force Linux and Darwin use GCC
 set(CMAKE_CXX_FLAGS "-pthread")
 
