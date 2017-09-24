@@ -22,10 +22,8 @@ before_script:
 - chmod +x misc/checkstyle.sh
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
-- make native_test -j8
+- make native_test -j
 - ./misc/memory_check
-- make native && sudo make install && sudo ldconfig
-- cd examples && ./build
 after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
