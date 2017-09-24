@@ -27,7 +27,7 @@
 #ifndef JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
 #define JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
 
-#include "md5.h"
+#include "md5.hpp"
 #include "MessageDigestSpi.hpp"
 
 namespace Java {

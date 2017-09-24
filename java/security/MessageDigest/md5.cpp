@@ -51,6 +51,7 @@ self-checking.
 1999-05-03 lpd Original version.
 */
 
+#include "md5.hpp"
 #include <string.h>
 
 #undef BYTE_ORDER	/* 1 = big-endian, -1 = little-endian, 0 = unknown */
@@ -125,16 +126,6 @@ self-checking.
 #define T62 /* 0xbd3af235 */ (T_MASK ^ 0x42c50dca)
 #define T63    0x2ad7d2bb
 #define T64 /* 0xeb86d391 */ (T_MASK ^ 0x14792c6e)
-
-typedef unsigned char md5_byte_t; /* 8-bit byte */
-typedef unsigned int md5_word_t; /* 32-bit word */
-
-/* Define the state of the MD5 Algorithm. */
-typedef struct md5_state_s {
-    md5_word_t count[2];	/* message length in bits, lsw first */
-    md5_word_t abcd[4];		/* digest buffer */
-    md5_byte_t buf[64];		/* accumulate block */
-} md5_state_t;
 
 static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
 {

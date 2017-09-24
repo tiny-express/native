@@ -44,10 +44,14 @@ TEST(JavaSecurity, MD5) {
         md5->update((byte*)input.toString(), 0, input.getSize());
         result = new byte[md5->getDigestLength()]();
         md5->digest(result, 0, md5->getDigestLength());
-        ASSERT_DATA(expect,
-                    sizeof(expect),
-                    result,
-                    (size_t)md5->getDigestLength());
+    }
+
+    ASSERT_DATA(expect,
+                sizeof(expect),
+                result,
+                (size_t)md5->getDigestLength());
+
+    if (result) {
         delete[] result;
     }
 }

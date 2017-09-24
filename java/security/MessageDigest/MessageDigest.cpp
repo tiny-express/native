@@ -25,14 +25,14 @@
  */
 
 #include "MessageDigest.hpp"
-//#include "MD5MessageDigest.hpp"
+#include "MD5MessageDigest.hpp"
 
 using namespace Java::Security;
 
 MessageDigest *MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
-       // MessageDigestSpi* spi = new MD5MessageDigest();
-        //return new MessageDigest(spi);
+       MessageDigestSpi* spi = new MD5MessageDigest();
+       return new MessageDigest(spi);
     }
     return nullptr;
 }
