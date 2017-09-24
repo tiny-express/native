@@ -824,6 +824,8 @@ TEST(JavaLangString, OperatorPlusEqualsChar) {
 	text += 'l';
 	text += 'd';
 	ASSERT_STR("Hello World", text.toString());
+    ASSERT_EQUAL(11, text.getSize());
+
 }
 
 TEST(JavaLangString, OperatorPlusEqualsString) {

@@ -557,6 +557,7 @@ String &String::operator+=(const_string target) {
 String &String::operator+=(const char &target) {
 	string pointerHolder = this->original;
 	string_append(&this->original, target);
+    this->size++;
 	free(pointerHolder);
 	return *this;
 }
