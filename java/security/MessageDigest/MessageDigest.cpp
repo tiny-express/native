@@ -34,7 +34,7 @@ MessageDigest *MessageDigest::getInstance(String algorithm) {
        MessageDigestSpi* spi = new MD5MessageDigest();
        return new MessageDigest(spi);
     }
-    return nullptr;
+    return NULL;
 }
 
 MessageDigest::~MessageDigest() {

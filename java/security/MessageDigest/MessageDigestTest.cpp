@@ -33,23 +33,40 @@ extern "C" {
 using namespace Java::Lang;
 using namespace Java::Security;
 
+TEST(JavaSecurity, Constructor) {
+    {
+        MessageDigest* md = MessageDigest::getInstance("MD5");
+        ASSERT_TRUE(md != NULL);
+        if (md)
+            delete md;
+    }
+
+    {
+        MessageDigest* md = MessageDigest::getInstance("MDx");
+        ASSERT_TRUE(md == NULL);
+    }
+}
+
 TEST(JavaSecurity, MD5) {
     byte expect[] = {0x77, 0xad, 0xd1, 0xd5, 0xf4, 0x12, 0x23, 0xd5, 0x58,
                      0x2f, 0xca, 0x73, 0x6a, 0x5c, 0xb3, 0x35};
     String input = "the quick brown fox jumps over the lazy dog";
     byte* result = NULL;
-
     MessageDigest* md5 = MessageDigest::getInstance("MD5");
+    int digestLength = 0;
+
     if (md5) {
+        digestLength = md5->getDigestLength();
         md5->update((byte*)input.toString(), 0, input.getSize());
-        result = new byte[md5->getDigestLength()]();
-        md5->digest(result, 0, md5->getDigestLength());
+        result = new byte[digestLength]();
+        md5->digest(result, 0, digestLength);
+        delete md5;
     }
 
     ASSERT_DATA(expect,
                 sizeof(expect),
                 result,
-                (size_t)md5->getDigestLength());
+                (size_t)digestLength);
 
     if (result) {
         delete[] result;
