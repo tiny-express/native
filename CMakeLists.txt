@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native ASM C CXX)
+project(native C CXX)
 
 # Enable runtime search path support for dynamic libraries on OSX
 if (APPLE)
