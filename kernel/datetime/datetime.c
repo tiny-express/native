@@ -30,7 +30,7 @@
 #endif
 
 #ifdef OSX
-#include <mach/mach_time.h>
+#include <sys/time.h>
 #endif
 
 #include "../datetime.h"
@@ -125,13 +125,10 @@ unsigned long unix_time_in_milliseconds(
  */
 unsigned long timestamp() {
 #ifdef OSX
-	double timebase = 0.0;
-	mach_timebase_info_data_t tb = { 0 };
-	mach_timebase_info(&tb);
-	timebase = tb.numer;
-	timebase = timebase / tb.denom;
-	uint64_t current = mach_absolute_time() * timebase;
-	return (long) current * 1000000;
+	timeval time;
+	gettimeofday(&time, NULL);
+	long timestamp_in_millisecond = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return timestamp_in_millisecond * 1000000;
 #endif
 #ifdef LINUX
 	struct timespec tsp;
