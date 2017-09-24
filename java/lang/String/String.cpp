@@ -744,27 +744,27 @@ String String::print(const String &format, string value) {
     return result;
 }
 
-String String::print(const String &format, Short value) {
+String String::print(const String &format, Short &value) {
     return String::print(format, value.shortValue());
 }
 
-String String::print(const String &format, Integer value) {
+String String::print(const String &format, Integer &value) {
     return String::print(format, value.intValue());
 }
 
-String String::print(const String &format, Long value) {
+String String::print(const String &format, Long &value) {
     return String::print(format, value.longValue());
 }
 
-String String::print(const String &format, Float value) {
+String String::print(const String &format, Float &value) {
     return String::print(format, value.floatValue());
 }
 
-String String::print(const String &format, Double value) {
+String String::print(const String &format, Double &value) {
     return String::print(format, value.doubleValue());
 }
 
-String String::print(const String &format, String value) {
+String String::print(const String &format, String &value) {
     return String::print(format, value.toString());
 }
 

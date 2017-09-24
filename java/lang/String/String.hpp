@@ -1115,10 +1115,19 @@ namespace Java {
             static String format(const String& format);
 
 		public:
-			friend std::ostream &operator<<(std::ostream &os, const String &target) {
+
+			/**
+			 * Output string value as stream
+			 *
+			 * @param os
+			 * @param target
+			 * @return
+			 */
+			inline friend std::ostream &operator<<(std::ostream &os, const String &target) {
 				os << target.original;
 				return os;
 			}
+
 			/**
 			 * Add const_string and String
 			 *
@@ -1126,11 +1135,8 @@ namespace Java {
 			 * @param target2
 			 * @return a String contain value of target1 and target2
 			 */
-			friend String operator+(const_string target1, String const &target2) {
-				String result;
-				result = target1;
-				result += target2;
-				return result;
+			inline friend String operator+(String const &target1, String const &target2) {
+				return target1 + target2;
 			}
 
         private:
@@ -1162,12 +1168,12 @@ namespace Java {
             static String print(const String& format, double value);
             static String print(const String& format, float value);
             static String print(const String& format, char* value);
-            static String print(const String& format, Short value);
-            static String print(const String& format, Integer value);
-            static String print(const String& format, Long value);
-            static String print(const String& format, Float value);
-            static String print(const String& format, Double value);
-            static String print(const String& format, String value);
+            static String print(const String& format, Short &value);
+            static String print(const String& format, Integer &value);
+            static String print(const String& format, Long &value);
+            static String print(const String& format, Float &value);
+            static String print(const String& format, Double &value);
+            static String print(const String& format, String &value);
 		};
 	} // namespace Lang
 } // namespace Java
