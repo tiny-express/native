@@ -18,7 +18,7 @@ before_script:
 - export CXX=g++
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
-- make native_test -j
+- make native_test -j8
 - make leak
 after_success:
 - cd $TRAVIS_BUILD_DIR
