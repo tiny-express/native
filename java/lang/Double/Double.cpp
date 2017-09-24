@@ -25,11 +25,15 @@
  */
 
 #include "Double.hpp"
-#include "../Object/Object.hpp"
 #include "../Math/Math.hpp"
-#include "../Long/Long.hpp"
-#include <algorithm>
+
 using namespace Java::Lang;
+
+const double Double::MIN_NORMAL_DOUBLE = pow(2, -1022);
+
+const double Double::MAX_VALUE = (2 - pow(2, -52)) * pow(2, 1023);
+
+const double Double::MIN_VALUE = pow(2, -1074);
 
 Double::Double() {
 	this->original = 0;
