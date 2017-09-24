@@ -125,7 +125,7 @@ unsigned long unix_time_in_milliseconds(
  */
 unsigned long timestamp() {
 #ifdef OSX
-	timeval time;
+	struct timeval time;
 	gettimeofday(&time, NULL);
 	long timestamp_in_millisecond = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	return timestamp_in_millisecond * 1000000;
