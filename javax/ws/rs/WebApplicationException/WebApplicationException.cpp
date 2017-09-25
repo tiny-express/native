@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,26 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#include "WebApplicationException.hpp"
 
-// Java Core Packages
-#include "java/Io.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
+using namespace Javax::Ws::Rs;
 
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
+WebApplicationException::WebApplicationException() : RuntimeException() {
+}
 
-// Java::Lang is imported by default
-using namespace Java::Lang;
+WebApplicationException::WebApplicationException(String message) : RuntimeException(message) {
+}
 
-// Application starting point
-int Application(void (*program)(Array<String>), char **argument);
+WebApplicationException::WebApplicationException(String message, Throwable *cause) : RuntimeException(message, cause) {
+}
 
-#endif//NATIVE_LIBRARY_HPP_
+WebApplicationException::WebApplicationException(Throwable *cause) : RuntimeException(cause) {
+}

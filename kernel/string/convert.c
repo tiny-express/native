@@ -65,7 +65,7 @@ STR_FROM(short, "%d");STR_FROM(int, "%d");STR_FROM(long, "%ld");STR_FROM(float, 
  * @param target
  * @return string
  */
-char *string_from_char(char target) {
+inline char *string_from_char(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
@@ -81,7 +81,7 @@ char *string_from_char(char target) {
  * @param target
  * @return string
  */
-char string_to_char(char *target) {
+inline char string_to_char(char *target) {
 	if (is_empty(target)) {
 		return '\0';
 	}
@@ -94,7 +94,7 @@ char string_to_char(char *target) {
  * @param target
  * @return string
  */
-int string_to_int(char *target) {
+inline int string_to_int(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -107,7 +107,7 @@ int string_to_int(char *target) {
  * @param target
  * @return string
  */
-long string_to_long(char *target) {
+inline long string_to_long(char *target) {
 	if (target == NULL) {
 		return 0;
 	}
@@ -120,7 +120,7 @@ long string_to_long(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-int string_to_boolean(char *target) {
+inline int string_to_boolean(char *target) {
 	if (length_pointer_char(target) == 0) {
 		return FALSE;
 	}
@@ -143,7 +143,7 @@ int string_to_boolean(char *target) {
  * @param target
  * @return string
  */
-char *string_from_boolean(int target) {
+inline char *string_from_boolean(int target) {
     if (target == FALSE) {
         return strdup("false");
     }

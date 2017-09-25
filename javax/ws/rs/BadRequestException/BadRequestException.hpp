@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,26 +24,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#ifndef JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP_
+#define JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP_
 
-// Java Core Packages
-#include "java/Io.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
+#include "../ClientErrorException/ClientErrorException.hpp"
 
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
-
-// Java::Lang is imported by default
 using namespace Java::Lang;
 
-// Application starting point
-int Application(void (*program)(Array<String>), char **argument);
+namespace Javax {
+    namespace Ws  {
+        namespace Rs {
+            class BadRequestException : public ClientErrorException {
+            public:
+                BadRequestException();
+                BadRequestException(String message);
+                BadRequestException(String message, Throwable *cause);
+                BadRequestException(Throwable *cause);
+            };  // class BadRequestException
+        } // namespace Rs
+    }  // namespace Ws
+}  // namespace Javax
 
-#endif//NATIVE_LIBRARY_HPP_
+
+#endif // JAVAX_WS_RS_BADREQUESTEXCEPTION_BADREQUESTEXCEPTION_HPP_

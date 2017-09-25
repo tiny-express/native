@@ -310,13 +310,7 @@ inline char *string_append(char **target, char subtarget) {
  * @param subtarget
  * @return string
  */
-inline char *string_concat(char *target, char *subtarget) {
-	if (is_empty(target)) {
-		return strdup(subtarget);
-	}
-	if (is_empty(subtarget)) {
-		return strdup(target);
-	}
+inline string string_concat(string target, string subtarget) {
 	int target_length = length_pointer_char(target);
 	int subtarget_length = length_pointer_char(subtarget);
 	char *result = calloc(target_length + subtarget_length + 1, sizeof(char));
@@ -366,7 +360,7 @@ inline char *string_to(char *target, int to) {
  * @param target
  * @return string
  */
-char *string_copy(char *target) {
+inline char *string_copy(char *target) {
 	if (is_empty(target)) {
 		return strdup("");
 	}

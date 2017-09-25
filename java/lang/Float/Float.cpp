@@ -28,6 +28,10 @@
 
 using namespace Java::Lang;
 
+const float Float::MAX_VALUE = (float) ((2 - pow(2, -23)) * pow(2, 127));
+
+const float Float::MIN_VALUE = (float) pow(2, -149);
+
 Float::Float() {
     this->original = 0;
     this->originalString = string_from_float(this->original);

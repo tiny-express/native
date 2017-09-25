@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,26 +24,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#include "BadRequestException.hpp"
 
-// Java Core Packages
-#include "java/Io.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
+using namespace Javax::Ws::Rs;
 
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
+BadRequestException::BadRequestException() : ClientErrorException() {
+}
 
-// Java::Lang is imported by default
-using namespace Java::Lang;
+BadRequestException::BadRequestException(String message) : ClientErrorException(message) {
+}
 
-// Application starting point
-int Application(void (*program)(Array<String>), char **argument);
+BadRequestException::BadRequestException(String message, Throwable *cause) : ClientErrorException(message, cause) {
+}
 
-#endif//NATIVE_LIBRARY_HPP_
+BadRequestException::BadRequestException(Throwable *cause) : ClientErrorException(cause) {
+}
