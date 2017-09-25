@@ -33,21 +33,29 @@ namespace Java {
     namespace Lang {
         template<typename E>
         class Enum : public Object,
-                //public virtual Comparable<E>,
-                     public virtual Serializable {
+                    //public virtual Comparable<E>,
+                    public virtual Serializable {
         private:
-            String name;
+            string name;
             int ordinal;
+            string ordinalString;
 
         public:
             Enum(const_string name, int ordinal) {
-                this->name = name;
+                this->name = strdup(name);
                 this->ordinal = ordinal;
+                this->ordinalString = strdup("");
             }
 
             Enum(string name, int ordinal) {
-                this->name = name;
+                this->name = strdup(name);
                 this->ordinal = ordinal;
+                this->ordinalString = strdup("");
+            }
+
+            ~Enum() {
+                free(this->name);
+                free(this->ordinalString);
             }
 
         public:
@@ -91,15 +99,10 @@ namespace Java {
              * Returns the name of this enum constant, as contained in the declaration.
              * @return String
              */
-            string toString() const {
-                String resultHolder = this->name;
-                return resultHolder.toString();
-            }
-
-        public:
-            friend std::ostream &operator<<(std::ostream &os, const Enum &target) {
-                os << target.toString();
-                return os;
+            string toString() {
+                free(this->ordinalString);
+                this->ordinalString = string_from_int(this->ordinal);
+                return this->ordinalString;
             }
         };
     }

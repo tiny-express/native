@@ -28,7 +28,7 @@ $ sudo make install
 $ sudo ldconfig
 ```
 
-#### HelloWorld.cpp
+#### Examples
 ```cpp
 #include <native/library.hpp>
 
@@ -74,6 +74,7 @@ argument 0 is ./main
 
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
+More examples can be found [here](https://github.com/foodtiny/native/tree/master/examples)
 
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
