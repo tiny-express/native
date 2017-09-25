@@ -827,6 +827,11 @@ TEST(JavaLangString, OperatorPlusEqualsChar) {
     ASSERT_EQUAL(11, text.getSize());
 }
 
+TEST(JavaLangString, OperatorStream) {
+    String helloWorld = " ";
+    System::out::print(helloWorld);
+}
+
 TEST(JavaLangString, OperatorPlusEqualsString) {
 	// Given 2 Strings to check "+=" operator
 	String leftString = "hello";

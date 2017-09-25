@@ -772,15 +772,14 @@ String String::format(const String &format) {
     const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
             ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
     String result;
-    String inputString(format);
-    string inputStringPtr = inputString.toString();
-    int inputStringLength = inputString.getSize();
+    string inputStringPtr = format.toString();
+    int inputStringLength = format.getSize();
     int inputStringOffset = 0;
     int errorCode = 0;
     regex_t regex;
 
     errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-    while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+    while (errorCode == 0 && inputStringOffset < format.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
         if (errorCode != 0) {

@@ -966,6 +966,7 @@ namespace Java {
 				string pointerHolder = this->original;
 				string_append(&this->original, target);
 				this->size++;
+				this->capacity = this->size;
 				free(pointerHolder);
 				return *this;
 			}
@@ -1058,15 +1059,14 @@ namespace Java {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                String inputString(format);
-                string inputStringPtr = inputString.toString();
-                int inputStringLength = inputString.getSize();
+                string inputStringPtr = format.toString();
+                int inputStringLength = format.getSize();
                 int inputStringOffset = 0;
                 int errorCode = 0;
                 regex_t regex;
 
                 errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-                while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                while (errorCode == 0 && inputStringOffset < format.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
                     if (errorCode != 0) {
@@ -1115,10 +1115,19 @@ namespace Java {
             static String format(const String& format);
 
 		public:
-			friend std::ostream &operator<<(std::ostream &os, const String &target) {
+
+			/**
+			 * Output string value as stream
+			 *
+			 * @param os
+			 * @param target
+			 * @return
+			 */
+			inline friend std::ostream &operator<<(std::ostream &os, const String &target) {
 				os << target.original;
 				return os;
 			}
+
 			/**
 			 * Add const_string and String
 			 *
@@ -1126,9 +1135,8 @@ namespace Java {
 			 * @param target2
 			 * @return a String contain value of target1 and target2
 			 */
-			friend String operator+(const_string target1, String const &target2) {
-				String result;
-				result = target1;
+			inline friend String operator+(String const &target1, String const &target2) {
+				String result = target1;
 				result += target2;
 				return result;
 			}

@@ -23,6 +23,5 @@ public:
 };
 
 int main(int argc, char **argv) {
-	MainApplication::main(argv);
-	return 0;
+	return Application(MainApplication::main, argv);
 }

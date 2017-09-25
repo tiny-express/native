@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native ASM C CXX)
+project(native C CXX)
 
 # Enable runtime search path support for dynamic libraries on OSX
 if (APPLE)
@@ -35,9 +35,13 @@ endif ()
 # GNU filesystem layout conventions
 include(GNUInstallDirs)
 
+# Force GCC for Linux
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(CMAKE_C_COMPILER "gcc")
+    set(CMAKE_CXX_COMPILER "g++")
+endif()
+
 # Force Linux and Darwin use GCC
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_CXX_FLAGS "-pthread")
 
 # Check C++ compiler version
@@ -108,6 +112,7 @@ endforeach ()
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+        java/Java.cpp
         javax/**/*.cpp
         java/**/*.cpp
         java/**/**/*.cpp
