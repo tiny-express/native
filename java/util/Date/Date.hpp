@@ -408,15 +408,17 @@ namespace Java {
              * @see Date::parse(String inputString)
              */
             struct DateTime {
-                boolean year = false;
-                boolean month = false;
-                boolean dayOfMonth = false;
-                boolean hour = false;
-                boolean minute = false;
-                boolean second = false;
-                boolean dayOfWeek = false;
+                int year = Integer::MIN_VALUE;
+                int month = -1;
+                int dayOfMonth = -1;
+                int hour = -1;
+                int minute = -1;
+                int second = -1;
+                int miliSecond = -1;
+                int dayOfWeek = -1;
                 boolean is12hFormat = false;
-                boolean timeZone = false;
+                String timeZone = "";
+                int timeZoneOffset = -1;
             };
 
             /**
@@ -461,7 +463,10 @@ namespace Java {
              * @see Date::parse(String inputString)
              */
             static String getPattern(String s, int &timeZoneOffset);
-        };
+
+            static String removeIgnoredCharacter(String inputString);
+
+            };
     }  // namespace Util
 }  // namespace Java
 
