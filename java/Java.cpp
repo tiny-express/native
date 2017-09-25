@@ -16,7 +16,7 @@ int Application(void (*program)(Array<Java::Lang::String>), char **argument) {
         System::out::println("Application Exception: " + e.getMessage());
         return 1;
     } catch (...) {
-#ifndef LINUX
+#ifdef LINUX
         std::exception_ptr p = std::current_exception();
         String exceptionName = p.__cxa_exception_type()->name();
         System::out::println("Unhandled Exception: " + exceptionName);
