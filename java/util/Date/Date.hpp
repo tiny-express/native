@@ -407,6 +407,8 @@ namespace Java {
              * @see Date::getPattern(String inputString)
              * @see Date::parse(String inputString)
              */
+
+            static String removeIgnoredCharacter(String inputString);
             struct DateTime {
                 int year = Integer::MIN_VALUE;
                 int month = -1;
@@ -420,53 +422,7 @@ namespace Java {
                 String timeZone = "";
                 int timeZoneOffset = -1;
             };
-
-            /**
-             * support method
-             * Date::getPattern(String inputString)
-             *
-             * @param previousString
-             * @param number
-             * @param followedChar
-             * @param dateTime
-             * @return string pattern of number
-             *
-             * @see Date::getPattern(String inputString)
-             * @see Date::parse(String inputString)
-             */
-            static String processNumber(
-                    String previousString, int sequenceNumber,
-                    char followedChar, DateTime &dateTime);
-
-            /**
-             * support method
-             * Date::getPattern(String inputString)
-             *
-             * @param chars
-             * @param dateTime
-             * @param pattern
-             * @return string pattern of chars
-             *
-             * @see Date::getPattern(String inputString)
-             * @see Date::parse(String inputString)
-             */
-            static String processChars(String inputSequenceChars,
-                                            DateTime &dateTime, int &timeZoneOffset);
-
-            /**
-             * support method
-             * Date::parse(String inputString)
-             *
-             * @param s
-             * @return string pattern of the input String
-             *
-             * @see Date::parse(String inputString)
-             */
-            static String getPattern(String s, int &timeZoneOffset);
-
-            static String removeIgnoredCharacter(String inputString);
-
-            };
+        };
     }  // namespace Util
 }  // namespace Java
 
