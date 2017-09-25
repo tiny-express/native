@@ -310,6 +310,8 @@ namespace Java {
                     void join();
 
                     void join(long millis);
+
+                    static void sleep(long millis);
         };
     }  // namespace Lang
 }  // namespace Java

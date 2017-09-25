@@ -46,7 +46,7 @@ public:
 
 	void run() override {
         value = 0xb00b;
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        Thread::sleep(1000);
 	}
 };
 
@@ -64,7 +64,7 @@ public:
 
     void run() override {
         value = 0xb00b;
-        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        Thread::sleep(1000);
         value = 0xbeef;
     }
 };

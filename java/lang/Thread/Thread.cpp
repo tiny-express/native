@@ -24,9 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <chrono>
 #include "Thread.hpp"
-#include <utility>
 
+using namespace std;
 using namespace Java::Lang;
 
 int Thread::threadInitNumber = 0;
@@ -131,4 +132,8 @@ void Thread::join(long millis) {
     } else {
         semahoreObject.acquire();
     }
+}
+
+void Thread::sleep(long millis) {
+    this_thread::sleep_for(chrono::milliseconds(millis));
 }
