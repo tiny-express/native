@@ -966,6 +966,7 @@ namespace Java {
 				string pointerHolder = this->original;
 				string_append(&this->original, target);
 				this->size++;
+				this->capacity = this->size;
 				free(pointerHolder);
 				return *this;
 			}

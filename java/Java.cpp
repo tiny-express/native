@@ -2,6 +2,7 @@
 
 /**
  * Application starting point
+ * This function handle any application exception to keep program safety
  *
  * @param program
  * @param argument
@@ -10,8 +11,14 @@
 int Application(void (*program)(Array<Java::Lang::String>), char **argument) {
     try {
         program(argument);
-    } catch (Exception &exception) {
-        System::out::println(exception.getMessage());
+        return 0;
+    } catch (Exception &e) {
+        System::out::println("Application Exception: " + e.getMessage());
+        return 1;
+    } catch (...) {
+        std::exception_ptr p = std::current_exception();
+        String exceptionName = p.__cxa_exception_type()->name();
+        System::out::println("Unhandled Exception: " + exceptionName);
+        return 1;
     }
-    return 0;
 }

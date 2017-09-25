@@ -6,6 +6,7 @@ public:
         String helloWorld = "Hello World";
         helloWorld = "Food Tiny " + helloWorld;
         System::out::println(helloWorld);
+        throw Exception("Your program has been protected by native exception");
     }
 };
 
