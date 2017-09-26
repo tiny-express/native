@@ -380,9 +380,6 @@ namespace Java {
              * @param inputString
              * @param indexStart
              * @return int
-             *
-             * @see Date::getPattern(String inputString)
-             * @see Date::parse(String inputString)
              */
             static int getSequenceNumber(string inputString, int &indexStart);
 
@@ -393,22 +390,28 @@ namespace Java {
             * @param inputString
             * @param indexStart
             * @return string
-            *
-            * @see Date::getPattern(String inputString)
-            * @seeDate::parse(String inputString)
             */
             static String getSequenceChar(string inputString, int &index);
 
             /**
-             * Store Date status
-             * support method
-             * Date::getPattern(String inputString)
+             * Remove bracket and character inside bracket
              *
-             * @see Date::getPattern(String inputString)
-             * @see Date::parse(String inputString)
+             * @param inputString
+             * @return String with bracket and character inside it removed
              */
+            static String removeBracket(String inputString);
 
-            static String removeIgnoredCharacter(String inputString);
+            /**
+             * Get time offset in second from local time zone to UTC
+             *
+             * @return time offset in second
+             */
+            static long getOffsetFromUTC();
+
+            /**
+             * Store Date information
+             *
+             */
             struct DateTime {
                 int year = Integer::MIN_VALUE;
                 int month = -1;
@@ -416,12 +419,9 @@ namespace Java {
                 int hour = -1;
                 int minute = -1;
                 int second = -1;
-                int miliSecond = -1;
-                int dayOfWeek = -1;
-                boolean is12hFormat = false;
-                String timeZone = "";
                 int timeZoneOffset = -1;
             };
+
         };
     }  // namespace Util
 }  // namespace Java

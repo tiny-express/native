@@ -132,25 +132,19 @@ long Date::getTime() {
 }
 
 int Date::getTimezoneOffset() {
-    int result = static_cast<int> (- this->gmtOffset / 60);
+    int result = (int) (- this->gmtOffset / 60);
 
     return result;
 }
 
 boolean Date::after(Date when) {
-    if (this->timer > when.timer) {
-        return true;
-    }
+    return this->timer > when.timer;
 
-    return false;
 }
 
 boolean Date::before(Date when) {
-    if (this->timer < when.timer) {
-        return true;
-    }
+    return this->timer < when.timer;
 
-    return false;
 }
 
 int Date::compareTo(Date anotherDate) {
@@ -185,9 +179,7 @@ String Date::toString() {
     pattern = (string) "%a %b %d %T %Z %Y";
     String convertResult = this->timeToString(pattern.toString(),
                                               this->localTimer);
-    String result = convertResult;
-
-    return result;
+    return convertResult;
 }
 
 long Date::UTC(int year, int month, int date, int hour, int minute, int second) {
@@ -205,9 +197,7 @@ Date Date::clone() {
 String Date::toLocaleString() {
     string pattern = (string) "%b %d, %Y %I:%M:%S %p";
     String convertResult = this->timeToString(pattern, this->localTimer);
-    String result = convertResult;
-
-    return result;
+    return convertResult;
 }
 
 String Date::toGMTString() {
@@ -225,16 +215,14 @@ String Date::toGMTString() {
     tm *utcTimer = localtime(&utcTime);
 
     String convertResult = this->timeToString(pattern, utcTimer);
-    String result = convertResult;
-
-    return result;
+    return convertResult;
 }
 
 long Date::hashCode() {
     return this->timer;
 }
 
-String Date::removeIgnoredCharacter(String inputString) {
+String Date::removeBracket(String inputString) {
     int closeBracketOffSet = inputString.indexOf(')');
     int openBracketOffSet = inputString.indexOf('(');
     while (openBracketOffSet != -1 && closeBracketOffSet > openBracketOffSet ) {
@@ -247,22 +235,6 @@ String Date::removeIgnoredCharacter(String inputString) {
 }
 
 long Date::parse(String inputString) {
-//    int timeZoneOffset = 0;
-//
-//    tm localTimer = {};
-//    String pattern = Date::getPattern(inputString, timeZoneOffset);
-//    strptime(inputString.toString(), pattern.toString(), &localTimer);
-//
-//    long utcTime = mktime(&localTimer) + timeZoneOffset;
-//
-//    Date date = Date();
-//
-//    if (timeZoneOffset != 0) {
-//        return utcTime - (date.getTimezoneOffset() * 60);
-//    }
-//
-//    return utcTime;
-
     Array<String> wordTable = {
             "am", "pm",
             "monday", "tuesday", "wednesday", "thursday", "friday",
@@ -291,15 +263,15 @@ long Date::parse(String inputString) {
         throw IllegalArgumentException();
     }
 
-    inputString = Date::removeIgnoredCharacter(inputString);
+    inputString = Date::removeBracket(inputString);
 
-    int limit = inputString.length() - 1;
-    int index = -1;
+    int limit = inputString.length();
+    int index = 0;
 
     while (index < limit) {
-        index++;
         curentChar = inputString.charAt(index);
         if (curentChar <= ' ' || curentChar == ',') {
+            index++;
             continue;
         }
         if (curentChar >= '0' && curentChar <='9') {
@@ -367,6 +339,7 @@ long Date::parse(String inputString) {
             previousChar = '\0';
         } else if (curentChar == '/' || curentChar == ':' || curentChar == '+' || curentChar == '-') {
             previousChar = curentChar;
+            index++;
         } else {
             int sequenceStart = index - 1;
             String curentWord = Date::getSequenceChar(inputString.toString(), index);
@@ -380,20 +353,24 @@ long Date::parse(String inputString) {
                     int action = actionTable[tableIndex];
                     if (action != 0) {
                         if (action == 1) {  // pm
-                            if (dateTime.hour > 12 || dateTime.hour < 1)
+                            if (dateTime.hour > 12 || dateTime.hour < 1) {
                                 throw IllegalArgumentException();
-                            else if (dateTime.hour < 12)
+                            } else if (dateTime.hour < 12) {
                                 dateTime.hour += 12;
+                            }
                         } else if (action == 14) {  // am
-                            if (dateTime.hour > 12 || dateTime.hour < 1)
+                            if (dateTime.hour > 12 || dateTime.hour < 1) {
                                 throw IllegalArgumentException();
-                            else if (dateTime.hour == 12)
+                            } else if (dateTime.hour == 12) {
                                 dateTime.hour = 0;
+                            }
                         } else if (action <= 13) {  // month!
-                            if (dateTime.month < 0)
+                            if (dateTime.month < 0){
                                 dateTime.month = (byte) (action - 2);
-                            else
+                            }
+                            else {
                                 throw IllegalArgumentException();
+                            }
                         } else {
                             dateTime.timeZoneOffset = action - 10000;
                         }
@@ -415,11 +392,8 @@ long Date::parse(String inputString) {
         auto now = std::chrono::system_clock::now();
         std::time_t now_c = std::chrono::system_clock::to_time_t(now);
         struct tm *currentTime = std::localtime(&now_c);
-        int defaultCenturyStart = 0;
 
-        if (defaultCenturyStart == 0) {
-            defaultCenturyStart = currentTime->tm_year - 80;
-        }
+        int defaultCenturyStart = currentTime->tm_year - 80;
         dateTime.year += (defaultCenturyStart / 100) * 100;
         if (dateTime.year < defaultCenturyStart) {
             dateTime.year += 100;
@@ -432,6 +406,7 @@ long Date::parse(String inputString) {
     if (dateTime.hour < 0)
         dateTime.hour = 0;
 
+    // Get timestamp
     tm localTimer = { 0 };
 
     localTimer.tm_year = dateTime.year % 1900;
@@ -443,10 +418,29 @@ long Date::parse(String inputString) {
 
     long timer = mktime(&localTimer);
 
+    long offsetFromUTC = Date::getOffsetFromUTC();
+
     if (dateTime.timeZoneOffset == -1) {
         return timer;
     }
-    return timer + dateTime.timeZoneOffset * (60 * 1000);
+    return timer + (dateTime.timeZoneOffset * 60) - offsetFromUTC;
+}
+
+long Date::getOffsetFromUTC() {
+
+    long currtime;
+    struct tm * timeinfo;
+
+    time( &currtime );
+    timeinfo = gmtime (&currtime);
+    time_t utc = mktime(timeinfo);
+    timeinfo = localtime(&currtime);
+    time_t local = mktime(timeinfo);
+
+    // Get offset in hours from UTC
+    double offsetFromUTC = difftime(utc, local); // HOUR_IN_SECOND;
+
+    return (long) offsetFromUTC;
 }
 
 int Date::getSequenceNumber(string inputString, int &index) {
