@@ -203,13 +203,7 @@ String Date::toLocaleString() {
 String Date::toGMTString() {
     string pattern;
 
-#ifdef LINUX
-    pattern = (string) "%a %b %d %T UTC %Y";
-#endif
-
-#ifdef WINDOWS
-    pattern = (string) "%a %b %d %T GMT %Y";
-#endif
+    pattern = (string) "%d %b %Y %T GMT";
 
     long utcTime = getUTCTime(this->timer);
     tm *utcTimer = localtime(&utcTime);
