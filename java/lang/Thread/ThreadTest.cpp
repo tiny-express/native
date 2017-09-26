@@ -28,8 +28,14 @@ extern "C" {
 #include "../../../kernel/test.h"
 };
 
-#include "Thread.hpp"
+#include <pthread.h>
+#include <thread_db.h>
 
+#include <sstream>
+#include "Thread.hpp"
+#include "../InterruptedException/InterruptedException.hpp"
+
+using namespace std;
 using namespace Java::Lang;
 
 class RunnableTarget1 : public virtual Runnable {
@@ -46,7 +52,7 @@ public:
 
 	void run() override {
         value = 0xb00b;
-        Thread::sleep(1000);
+        this_thread::sleep_for(chrono::milliseconds(1000));
 	}
 };
 
@@ -64,14 +70,54 @@ public:
 
     void run() override {
         value = 0xb00b;
-        Thread::sleep(1000);
+        this_thread::sleep_for(chrono::milliseconds(1000));
         value = 0xbeef;
     }
 };
 
-// TODO(thoangminh): Need to improve it
-TEST(JavaLang, ThreadConstructor) {
-}
+class RunnableTarget3 : public virtual Runnable {
+public:
+    String threadIdString;
+
+    RunnableTarget3() {
+
+    }
+
+    ~RunnableTarget3() {
+
+    }
+
+    void run() override {
+        stringstream out;
+        out << this_thread::get_id();
+        this->threadIdString = out.str();
+    }
+};
+
+class RunnableTarget4 : public virtual Runnable {
+public:
+    thread_t threadHandle;
+
+    RunnableTarget4() {
+
+    }
+
+    ~RunnableTarget4() {
+
+    }
+
+    void run() override {
+        this->threadHandle = pthread_self();
+
+        try {
+            if (Thread::currentThread())
+                printf("tid: %lld\n", Thread::currentThread()->getId());
+            Thread::sleep(3000);
+        } catch (InterruptedException e) {
+            printf("yeah\n");
+        }
+    }
+};
 
 TEST(JavaLang, ThreadRun) {
     long expect = 0xb00b;
@@ -89,82 +135,18 @@ TEST(JavaLang, ThreadRun) {
     ASSERT_EQUAL(expect, result);
 }
 
-TEST(JavaLang, ThreadSetDaemon) {
-    Thread thread;
-
-    thread.setDaemon(true);
-    ASSERT_TRUE(thread.isDaemon());
-
-    thread.setDaemon(false);
-    ASSERT_FALSE(thread.isDaemon());
-}
-
-TEST(JavaLang, ThreadIsDaemon) {
-    Thread thread;
-
-    thread.setDaemon(true);
-    ASSERT_TRUE(thread.isDaemon());
-
-    thread.setDaemon(false);
-    ASSERT_FALSE(thread.isDaemon());
-}
-
-TEST(JavaLang, ThreadSetPriority) {
-    Thread thread;
-
-    thread.setPriority(-1);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(0);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(3);
-    ASSERT_EQUAL(3, thread.getPriority());
-
-    thread.setPriority(Thread::MIN_PRIORITY);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(Thread::NORM_PRIORITY);
-    ASSERT_EQUAL(5, thread.getPriority());
-
-    thread.setPriority(Thread::MAX_PRIORITY);
-    ASSERT_EQUAL(10, thread.getPriority());
-}
-
-TEST(JavaLang, ThreadGetPriority) {
-    Thread thread;
-
-    thread.setPriority(-1);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(0);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(3);
-    ASSERT_EQUAL(3, thread.getPriority());
-
-    thread.setPriority(Thread::MIN_PRIORITY);
-    ASSERT_EQUAL(1, thread.getPriority());
-
-    thread.setPriority(Thread::NORM_PRIORITY);
-    ASSERT_EQUAL(5, thread.getPriority());
-
-    thread.setPriority(Thread::MAX_PRIORITY);
-    ASSERT_EQUAL(10, thread.getPriority());
-}
-
 TEST(JavaLang, ThreadSetName) {
     Thread thread;
 
     String name = "Thread 1";
     thread.setName(name);
-    ASSERT_STR((string) "Thread 1", thread.getName().toString());
+    ASSERT_STR("Thread 1", thread.getName().toString());
 
-    thread.setName((string) "Thread 2");
-    ASSERT_STR((string) "Thread 2", thread.getName().toString());
+    thread.setName("Thread 2");
+    ASSERT_STR("Thread 2", thread.getName().toString());
 
-    thread.setName((string) "Thread 5");
-    ASSERT_NOT_STR((string) "Thread 1", thread.getName().toString());
+    thread.setName("Thread 5");
+    ASSERT_NOT_STR("Thread 1", thread.getName().toString());
 }
 
 TEST(JavaLang, ThreadGetName) {
@@ -172,13 +154,28 @@ TEST(JavaLang, ThreadGetName) {
 
     String name = "Thread 1";
     thread.setName(name);
-    ASSERT_STR((string) "Thread 1", thread.getName().toString());
+    ASSERT_STR("Thread 1", thread.getName().toString());
 
-    thread.setName((string) "Thread 2");
-    ASSERT_STR((string) "Thread 2", thread.getName().toString());
+    thread.setName("Thread 2");
+    ASSERT_STR("Thread 2", thread.getName().toString());
 
-    thread.setName((string) "Thread 5");
-    ASSERT_NOT_STR((string) "Thread 1", thread.getName().toString());
+    thread.setName("Thread 5");
+    ASSERT_NOT_STR("Thread 1", thread.getName().toString());
+}
+
+TEST(JavaLang, ThreadGetThreadId) {
+    RunnableTarget3 target;
+    Thread thread(&target);
+
+    thread.start();
+    thread.join();
+
+    String expect = target.threadIdString.toString();
+    //String result = String::format("%lld", thread.getId());
+    stringstream out;
+    out << thread.getId();
+
+    ASSERT_STR(expect.toString(), out.str().c_str());
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
@@ -203,4 +200,16 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
 
     ASSERT_EQUAL(expect1, result1);
     ASSERT_EQUAL(expect2, result2);
+}
+
+TEST(JavaLang, ThreadSleepWithInterruptedException) {
+//    RunnableTarget4 target;
+//    Thread thread(&target);
+//
+//    thread.start();
+//
+//    Thread::sleep(1000);
+//    pthread_cancel(target.threadHandle);
+//
+//    thread.join();
 }

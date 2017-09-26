@@ -25,20 +25,21 @@
  */
 
 #include <chrono>
+#include <sstream>
 #include "Thread.hpp"
+#include "../InterruptedException/InterruptedException.hpp"
 
 using namespace std;
 using namespace Java::Lang;
 
-int Thread::threadInitNumber = 0;
-long Thread::threadSeqNumber = 0;
+thread_local Thread* currentThreadPtr = NULL;
 
 Thread::Thread() {
-    init(nullptr, "Thread - " + Thread::nextThreadNum(), 0);
+    init(nullptr, "");
 }
 
 Thread::Thread(Runnable *target) {
-    init(target, "Thread - " + Thread::nextThreadNum(), 0);
+    init(target, "");
 }
 
 Thread::~Thread() {
@@ -49,6 +50,19 @@ Thread::~Thread() {
 }
 
 void Thread::run() {
+    // set thread id
+    {
+        stringstream out;
+        out << this_thread::get_id();
+        stringstream in(out.str());
+        in >> this->tid;
+    }
+
+    // set tls
+    if (currentThreadPtr == NULL) {
+        currentThreadPtr = this;
+    }
+
     mutexObject.lock();
     alive = true;
     mutexObject.unlock();
@@ -61,25 +75,17 @@ void Thread::run() {
     mutexObject.unlock();
 }
 
-// TODO(thoangminh): Need method checkAccess, threadStatus, setNativeName
 void Thread::setName(String name) {
     this->name = name;
 }
 
-void Thread::init(Runnable *target, String name, long stackSize) {
+void Thread::init(Runnable *target, String name) {
     this->target = target;
     this->name = name;
-    this->stackSize = stackSize;
-    this->tid = nextThreadID();
 }
 
 String Thread::getName() {
     return this->name;
-}
-
-// TODO(thoangminh): Need IllegalThreadStateException, method checkAccess, isAlive
-void Thread::setDaemon(boolean on) {
-    this->daemon = on;
 }
 
 boolean Thread::isAlive() {
@@ -87,33 +93,8 @@ boolean Thread::isAlive() {
     return alive;
 }
 
-boolean Thread::isDaemon() {
-    return this->daemon;
-}
-
-// TODO(thoangminh): Need class ThreadGroup, IllegalThreadStateException, method checkAccess
-void Thread::setPriority(int newPriority) {
-        if (newPriority > Thread::MAX_PRIORITY) {
-            newPriority = Thread::MAX_PRIORITY;
-        }
-
-        if (newPriority < Thread::MIN_PRIORITY) {
-            newPriority = Thread::MIN_PRIORITY;
-        }
-
-        this->priority = newPriority;
-}
-
-int Thread::getPriority() {
-    return this->priority;
-}
-
-int Thread::nextThreadNum() {
-    return threadInitNumber++;
-}
-
-long Thread::nextThreadID() {
-    ++threadSeqNumber;
+long long Thread::getId() {
+    return this->tid;
 }
 
 void Thread::start() {
@@ -135,5 +116,14 @@ void Thread::join(long millis) {
 }
 
 void Thread::sleep(long millis) {
-    this_thread::sleep_for(chrono::milliseconds(millis));
+    if (currentThreadPtr) {
+        if (currentThreadPtr->semahoreObject.tryAcquire(1, millis))
+            throw InterruptedException("interrupted");
+    } else {
+        this_thread::sleep_for(chrono::milliseconds(millis));
+    }
+}
+
+Thread *Thread::currentThread() {
+    return currentThreadPtr;
 }
