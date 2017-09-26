@@ -274,8 +274,8 @@ long Date::parse(String inputString) {
                 curentChar = inputString.charAt(index);
             }
 
-            if (previousChar == '+' || previousChar == '-'
-                                       && dateTime.year != Integer::MIN_VALUE) {
+            if ((previousChar == '+' || previousChar == '-')
+                && dateTime.year != Integer::MIN_VALUE) {
                 // timezone offset
                 if (curentNumber < 24) {
                     curentNumber = curentNumber * 60; // EG. "GMT-3"
