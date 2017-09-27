@@ -24,6 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <pthread.h>
 #include <chrono>
 #include <sstream>
 #include "Thread.hpp"
@@ -51,12 +52,7 @@ Thread::~Thread() {
 
 void Thread::run() {
     // set thread id
-    {
-        stringstream out;
-        out << this_thread::get_id();
-        stringstream in(out.str());
-        in >> this->tid;
-    }
+    this->tid = pthread_self();
 
     // set tls
     if (currentThreadPtr == NULL) {
@@ -93,7 +89,7 @@ boolean Thread::isAlive() {
     return alive;
 }
 
-long long Thread::getId() {
+unsigned long Thread::getId() {
     return this->tid;
 }
 

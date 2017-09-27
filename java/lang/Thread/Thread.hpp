@@ -41,7 +41,7 @@ namespace Java {
                 private:
                     boolean alive = false;
                     String name;
-                    long long tid = 0;
+                    unsigned long tid = 0;
                     Runnable *target = NULL;
                     Semaphore semahoreObject;
                     std::thread threadObject;
@@ -91,7 +91,7 @@ namespace Java {
 
                     boolean isAlive();
 
-                    long long getId();
+                    unsigned long getId();
 
                     void start();
 

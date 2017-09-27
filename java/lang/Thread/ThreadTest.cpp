@@ -28,7 +28,6 @@ extern "C" {
 #include "../../../kernel/test.h"
 };
 
-#include <iostream>
 #include "Thread.hpp"
 #include "../InterruptedException/InterruptedException.hpp"
 
@@ -88,10 +87,6 @@ public:
         stringstream out;
         out << this_thread::get_id();
         this->threadIdString = out.str();
-
-        // debug
-        cout << endl;
-        cout << "[debug] tid = " << this_thread::get_id() << endl;
     }
 };
 
@@ -149,7 +144,7 @@ TEST(JavaLang, ThreadGetThreadId) {
     String expect = target.threadIdString.toString();
     String result = String::format("%lld", thread.getId());
 
-    //ASSERT_STR(expect.toString(), result.toString());
+    ASSERT_STR(expect.toString(), result.toString());
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
