@@ -1097,9 +1097,11 @@ namespace Java {
             static String print(const String& format, short value);
             static String print(const String& format, int value);
             static String print(const String& format, long value);
+            static String print(const String& format, long long value);
             static String print(const String& format, unsigned short value);
             static String print(const String& format, unsigned int value);
             static String print(const String& format, unsigned long value);
+            static String print(const String& format, unsigned long long value);
             static String print(const String& format, double value);
             static String print(const String& format, float value);
             static String print(const String& format, char* value);

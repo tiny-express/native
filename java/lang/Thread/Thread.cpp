@@ -116,12 +116,7 @@ void Thread::join(long millis) {
 }
 
 void Thread::sleep(long millis) {
-    if (currentThreadPtr) {
-        if (currentThreadPtr->semahoreObject.tryAcquire(1, millis))
-            throw InterruptedException("interrupted");
-    } else {
-        this_thread::sleep_for(chrono::milliseconds(millis));
-    }
+    this_thread::sleep_for(chrono::milliseconds(millis));
 }
 
 Thread *Thread::currentThread() {

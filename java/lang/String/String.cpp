@@ -744,6 +744,16 @@ String String::print(const String &format, long value) {
     return result;
 }
 
+String String::print(const String &format, long long value) {
+    String result;
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if (length > 0) {
+        result = String(buffer, length);
+    }
+    return result;
+}
+
 String String::print(const String &format, unsigned short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
@@ -765,6 +775,16 @@ String String::print(const String &format, unsigned int value) {
 }
 
 String String::print(const String &format, unsigned long value) {
+    String result;
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    if (length > 0) {
+        result = String(buffer, length);
+    }
+    return result;
+}
+
+String String::print(const String &format, unsigned long long value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);

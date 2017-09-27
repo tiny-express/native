@@ -28,9 +28,6 @@ extern "C" {
 #include "../../../kernel/test.h"
 };
 
-#include <pthread.h>
-#include <thread_db.h>
-
 #include <sstream>
 #include "Thread.hpp"
 #include "../InterruptedException/InterruptedException.hpp"
@@ -52,7 +49,7 @@ public:
 
 	void run() override {
         value = 0xb00b;
-        this_thread::sleep_for(chrono::milliseconds(1000));
+        Thread::sleep(1000);
 	}
 };
 
@@ -70,7 +67,7 @@ public:
 
     void run() override {
         value = 0xb00b;
-        this_thread::sleep_for(chrono::milliseconds(1000));
+        Thread::sleep(1000);
         value = 0xbeef;
     }
 };
@@ -91,31 +88,6 @@ public:
         stringstream out;
         out << this_thread::get_id();
         this->threadIdString = out.str();
-    }
-};
-
-class RunnableTarget4 : public virtual Runnable {
-public:
-    thread_t threadHandle;
-
-    RunnableTarget4() {
-
-    }
-
-    ~RunnableTarget4() {
-
-    }
-
-    void run() override {
-        this->threadHandle = pthread_self();
-
-        try {
-            if (Thread::currentThread())
-                printf("tid: %lld\n", Thread::currentThread()->getId());
-            Thread::sleep(3000);
-        } catch (InterruptedException e) {
-            printf("yeah\n");
-        }
     }
 };
 
@@ -171,11 +143,9 @@ TEST(JavaLang, ThreadGetThreadId) {
     thread.join();
 
     String expect = target.threadIdString.toString();
-    //String result = String::format("%lld", thread.getId());
-    stringstream out;
-    out << thread.getId();
+    String result = String::format("%lld", thread.getId());
 
-    ASSERT_STR(expect.toString(), out.str().c_str());
+    ASSERT_STR(expect.toString(), result.toString());
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
@@ -200,16 +170,4 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
 
     ASSERT_EQUAL(expect1, result1);
     ASSERT_EQUAL(expect2, result2);
-}
-
-TEST(JavaLang, ThreadSleepWithInterruptedException) {
-//    RunnableTarget4 target;
-//    Thread thread(&target);
-//
-//    thread.start();
-//
-//    Thread::sleep(1000);
-//    pthread_cancel(target.threadHandle);
-//
-//    thread.join();
 }
