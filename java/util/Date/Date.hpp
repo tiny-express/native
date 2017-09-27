@@ -37,38 +37,184 @@ using namespace Java::Lang;
 
 namespace Java {
     namespace Util {
-        class Date : public Object {
+        class Date :
+                public Object,
+                public Comparable<Date>
+        {
+        private:
+            long timer;
+            tm *localTimer;
+            string backUp = nullptr;
+        private:
+            /**
+             * Update Date status
+             */
+            void updateDateStatus();
+
+            /**
+             * Allocates a Date object and initializes it so that
+             * it represents the instant at the start of the second specified
+             * by the year, month, date,
+             * hour, minute, and second arguments,
+             * in the local time zone.
+             *
+             * @param   year    the year minus 1900.
+             * @param   month   the month between 0-11.
+             * @param   date    the day of the month between 1-31.
+             * @param   hour     the hours between 0-23.
+             * @param   minute     the minutes between 0-59.
+             * @param   second     the seconds between 0-59.
+             */
+            void initializeDate(int year, int month, int date,
+                                int hour, int minute, int second);
+
+            /**
+             * Allocates a Date object and initializes it
+             *
+             * @param timer time seconds after
+             *              January 1, 1970 00:00:00 GMT.
+             */
+            void initializeDate(long timer);
+
+            /**
+             * Convert the time seconds to String
+             *
+             * @param pattern
+             * @return String
+             */
+            String timeToString(String pattern, tm *timeManagement) const;
+
+            /**
+             * Get the UTC time
+             *
+             * @param timer
+             * @return long
+             */
+            static long getUTCTime(long timer);
+
+            /**
+             * Get Current Number From InputString
+             * Sub method of Date::parse(String inputString)
+             *
+             * @param inputString
+             * @param indexStart
+             * @return int
+             */
+            static int getSequenceNumber(const String &inputString, int &indexStart);
+
+            /**
+            * Get Current Sequence Char From InputString                                                                                                            From InputString
+            * Sub method of Date::parse(String inputString)
+            *
+            * @param inputString
+            * @param indexStart
+            * @return string
+            */
+            static String getSequenceChar(const String &inputString, int &index);
+
+            /**
+             * Remove bracket and character inside bracket
+             *
+             * @param inputString
+             * @return String with bracket and character inside it removed
+             */
+            static String removeBracket(String inputString);
+
+            /**
+             * Get time offset in second from local time zone to UTC
+             *
+             * @return time offset in second
+             */
+            static long getOffsetFromUTC();
+
         public:
+            /**
+             * Default constructor
+             */
             Date();
+
+            /**
+             * Create a date instance with specified year, month, date
+             *
+             * @param year
+             * @param month
+             * @param date
+             */
             Date(int year, int month, int date);
+
+            /**
+             * Create a date instance with specified year, month, date,
+             * hour, minute
+             *
+             * @param year
+             * @param month
+             * @param date
+             * @param hour
+             * @param minute
+             */
             Date(int year, int month, int date, int hour, int minute);
+
+            /**
+             * Create a date instance with specified year, month, date,
+             * hour, minute, second
+             *
+             * @param year
+             * @param month
+             * @param date
+             * @param hour
+             * @param minute
+             * @param second
+             */
             Date(int year, int month, int date, int hour, int minute, int second);
+
+            /**
+             * Create a date instance with specified timestamp since
+             * "the epoch" in second
+             *
+             * @param date
+             */
             Date(long date);
+
+            /**
+             * Create a date instance with specified String
+             *
+             * @param inputString
+             */
             Date(String inputString);
+
+            /**
+             * Copy constructor
+             *
+             * @param anotherDate
+             */
+            Date(const Date &anotherDate);
+
+            /**
+             * Destructor, free backup string
+             */
             ~Date();
         public:
             /**
              * Tests if this date is after the specified date.
              *
-             * @param when: Date
+             * @param specifiedDate
              * @return boolean
              */
-            boolean after(Date when);
+            boolean after(Date specifiedDate) const;
 
             /**
              * Tests if this date is before the specified date.
              *
-             * @param when
+             * @param specifiedDate
              * @return boolean
              */
-            boolean before(Date when);
+            boolean before(Date specifiedDate) const;
 
             /**
              * Return a copy of this object.
              *
              * @return Object
              */
-
             Date clone();
 
             /**
@@ -77,7 +223,7 @@ namespace Java {
              *
              * @return int
              */
-            int compareTo(Date anotherDate);
+            int compareTo(const Date &anotherDate) const;
 
             /**
              * Compares two dates for equality.
@@ -85,78 +231,79 @@ namespace Java {
              * @param obj
              * @return int
              */
-//                  boolean equals(Object obj);
+            // TODO (anhnt) need instanceof, use Date instead of Object
+            boolean equals(Date obj) const;
 
             /**
              * Get day of month
              *
              * @return int
              */
-            int getDate();
+            int getDate() const;
 
             /**
              * Get day of week
              *
              * @return int
              */
-            int getDay();
+            int getDay() const;
 
             /**
              * Get hour
              *
              * @return int
              */
-            int getHours();
+            int getHours() const;
 
             /**
              * Get minute
              *
              * @return int
              */
-            int getMinutes();
+            int getMinutes() const;
 
             /**
              * Get month
              *
              * @return int
              */
-            int getMonth();
+            int getMonth() const;
 
             /**
              * Get second
              *
              * @return int
              */
-            int getSeconds();
+            int getSeconds() const;
 
             /**
-             * Returns the number of milliseconds since
+             * Returns the number of seconds since
              * January 1, 1970, 00:00:00 GMT represented
              * by this Date object.
              *
              * @return long
              */
-            long getTime();
+            long getTime() const;
 
             /**
              * Get time zone offset in minute
              *
              * @return int
              */
-            int getTimezoneOffset();
+            int getTimezoneOffset() const;
 
             /**
              * Get year
              *
              * @return int
              */
-            int getYear();
+            int getYear() const;
 
             /**
              * Returns a hash code value for this object.
              * @return
              */
-            long hashCode();
+            long hashCode() const override ;
 
             /**
              * Attempts to interpret the string s as a representation
@@ -229,7 +376,7 @@ namespace Java {
              *
              * @return String
              */
-            String toGMTString();
+            String toGMTString() const;
 
             /**
              * Return a string type of Date
@@ -237,7 +384,7 @@ namespace Java {
              *
              * @return String
              */
-            String toLocaleString();
+            String toLocaleString() const;
 
             /**
              * Return a string type of Date
@@ -246,7 +393,7 @@ namespace Java {
              *
              * @return String
              */
-            String toString();
+            string toString() const override ;
 
             /**
              * Return the time in milliseconds after
@@ -262,166 +409,14 @@ namespace Java {
              */
             static long UTC(int year, int month, int date,
                             int hour, int minute, int second);
-        private:
-            long timer;
-            tm *localTimer;
 
             /**
-             * Seconds.	[0-60] (1 leap second)
-             */
-            int second;
-
-            /**
-             * Minutes.	[0-59]
-             */
-            int minute;
-
-            /**
-             * Hours.	[0-23]
-             */
-            int hour;
-
-            /**
-             * Day.		[1-31]
-             */
-            int dayOfMonth;
-
-            /**
-             * Month.	[0-11]
-             */
-            int month;
-
-            /**
-             * Year	- 1900.
-             */
-            int year;
-
-            /**
-             * Day of week.	[0-6]
-             */
-            int dayOfWeek;
-
-            /**
-             * Days in year.[0-365]
-             */
-            int dayOfYear;
-
-            /**
-             * DST.		[-1/0/1]
-             */
-            int isDaylightSavingTime;
-
-            /**
-             * Seconds east of UTC.
-             */
-            long int gmtOffset;
-
-            /**
-             * Initialized just before the value is used.
-             */
-
-            /**
-             * Time zone name
-             */
-            String timeZoneName;
-
-            int defaultCenturyStart;
-
-            /**
-             * Update Date status
-             */
-            void updateDateStatus();
-
-            /**
-             * Allocates a Date object and initializes it so that
-             * it represents the instant at the start of the second specified
-             * by the year, month, date,
-             * hour, minute, and second arguments,
-             * in the local time zone.
+             * Assign operator
              *
-             * @param   year    the year minus 1900.
-             * @param   month   the month between 0-11.
-             * @param   date    the day of the month between 1-31.
-             * @param   hour     the hours between 0-23.
-             * @param   minute     the minutes between 0-59.
-             * @param   second     the seconds between 0-59.
+             * @param anotherDate
+             * @return a Date reference
              */
-            void initializeDate(int year, int month, int date,
-                                int hour, int minute, int second);
-
-            /**
-             * Allocates a Date object and initializes it
-             *
-             * @param timer time milliseconds after
-             *              January 1, 1970 00:00:00 GMT.
-             */
-            void initializeDate(long timer);
-
-            /**
-             * Convert the time milliseconds to String
-             *
-             * @param pattern
-             * @return String
-             */
-            String timeToString(String pattern, tm *timeManagement);
-
-            /**
-             * Get the UTC time
-             *
-             * @param timer
-             * @return long
-             */
-            static long getUTCTime(long timer);
-
-            /**
-             * Get Current Number From InputString
-             * Sub method of Date::parse(String inputString)
-             *
-             * @param inputString
-             * @param indexStart
-             * @return int
-             */
-            static int getSequenceNumber(string inputString, int &indexStart);
-
-            /**
-            * Get Current Sequence Char From InputString                                                                                                            From InputString
-            * Sub method of Date::parse(String inputString)
-            *
-            * @param inputString
-            * @param indexStart
-            * @return string
-            */
-            static String getSequenceChar(string inputString, int &index);
-
-            /**
-             * Remove bracket and character inside bracket
-             *
-             * @param inputString
-             * @return String with bracket and character inside it removed
-             */
-            static String removeBracket(String inputString);
-
-            /**
-             * Get time offset in second from local time zone to UTC
-             *
-             * @return time offset in second
-             */
-            static long getOffsetFromUTC();
-
-            /**
-             * Store Date information
-             *
-             */
-            struct DateTime {
-                int year = Integer::MIN_VALUE;
-                int month = -1;
-                int dayOfMonth = -1;
-                int hour = -1;
-                int minute = -1;
-                int second = -1;
-                int timeZoneOffset = -1;
-            };
-
+            Date& operator=(const Date& anotherDate);
         };
     }  // namespace Util
 }  // namespace Java
