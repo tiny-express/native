@@ -413,12 +413,12 @@ long Date::parse(String inputString) {
 
     long result = mktime(&localTimer);
 
-    long offsetFromUTC = Date::getOffsetFromUTC();
-
     // Add timeZoneOffset to result
     if (timeZoneOffset == -1) {
         return result;
     }
+
+    long offsetFromUTC = Date::getOffsetFromUTC();
 
     return result + (timeZoneOffset * 60) - offsetFromUTC;
 }
@@ -548,9 +548,8 @@ String Date::timeToString(String pattern, tm *timeManagement) const {
 }
 
 long Date::getUTCTime(long timer) {
-    long tempTime = timer;
     tm tempTimer = {0};
-    tm *utcTimer = gmtime_r(&tempTime, &tempTimer);
+    tm *utcTimer = gmtime_r(&timer, &tempTimer);
 
     return mktime(utcTimer);
 }

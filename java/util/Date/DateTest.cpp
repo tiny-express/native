@@ -586,7 +586,7 @@ TEST(JavaUtil, DateCompareTo) {
 
     date = Date(2017, 02, 14, 8, 01, 13);
     ASSERT_EQUAL(1, date.compareTo(temp));
-    
+
     Comparable<Date> *notEqualDate = &date;
     ASSERT_EQUAL(1, notEqualDate->compareTo(temp));
 }
@@ -607,7 +607,7 @@ TEST(JavaUtil, DateGetTimezoneOffset) {
     tm tempLocalTimer = {0};
     tm *localTimer = localtime_r(&now, &tempLocalTimer);
     expectedResult = static_cast<int> (- localTimer->tm_gmtoff / 60);
-    
+
     // Test Date(int year, int month, int date, int hrs, int min, int sec)
     date = Date(2017, 02, 13, 8, 01, 13);
     ASSERT_EQUAL(expectedResult, date.getTimezoneOffset());
@@ -666,9 +666,9 @@ TEST(JavaUtil, DateToString) {
 }
 
 TEST(JavaUtil, DateToGMTString) {
-    String expected = "13 Mar 2017 03:03:30 GMT";
-    Date actualDate = Date(117, 2, 13, 10, 01, 150);
-    ASSERT_STR(expected.toString(), actualDate.toGMTString().toString());
+    Date expected = Date("13 Mar 2017 10:03:30 GMT");
+    Date actualDate = Date("13 Mar 2017 10:03:30 UTC");
+    ASSERT_STR(expected.toGMTString().toString(), actualDate.toGMTString().toString());
 }
 
 TEST(JavaUtil, DateParse) {
@@ -678,7 +678,6 @@ TEST(JavaUtil, DateParse) {
     Date   actualDate;
     String actualString;
     long   actualTime;
-    String actual;
 
     // Empty String
     actualString = "";
@@ -693,99 +692,99 @@ TEST(JavaUtil, DateParse) {
     expected = Date(2014, 0, 9, 12, 35, 34);
     actualString = "Thu Jan 9 (ababa) (and ) 2014 12:35:34";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Short date pattern. (en-US)
     expected = Date(2017, 1, 13);
     actualString = "02/13/2017";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Short date pattern. (en-US)
     expected = Date(2017, 1, 13);
     actualString = "02/13/17";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Long date pattern. (en-US)
     expected = Date(2009, 5, 15);
     actualString = "Monday, June 15, 2009";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Full date/time pattern with PM
     expected = Date(2009, 5, 15, 13, 45);
     actualString = "Monday, June 15, 2009 1:45 PM";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Full date/time pattern with AM
     expected = Date(2009, 5, 15, 1, 45);
     actualString = "Monday, June 15, 2009 1:45 AM";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Full date/time pattern with AM and hour = 12
     expected = Date(2009, 5, 15, 0, 45);
     actualString = "Monday, June 15, 2009 12:45 AM";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Date time with TimeZone
-    expected = Date(2009, 5, 16, 3, 45, 30);
+    expected = Date("Mon Jun 15 20:45:30 GMT 2009");
     actualString = "Mon, 15 Jun 2009 20:45:30 UTC";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Date time with TimeZoneOffset
-    expected = Date(2009, 5, 15, 4, 15, 30);
+    expected = Date("Sun Jun 14 21:15:30 GMT 2009");
     actualString = "Monday, June 15, 2009 1:45:30 +0430";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Date time with TimeZone UTC and TimeZoneOffset
-    expected = Date(2009, 5, 15, 4, 15, 30);;
+    expected = Date("Sun Jun 14 21:15:30 GMT 2009");;
     actualString = "Monday, June 15, 2009 1:45:30 UTC +0430";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Date time with TimeZone GMT and TimeZoneOffset
-    expected = Date(2009, 5, 15, 4, 15, 30);;
+    expected = Date("Sun Jun 14 21:15:30 GMT 2009");;
     actualString = "Monday, June 15, 2009 1:45:30 GMT +0430";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Date time with TimeZone UT and TimeZoneOffset
-    expected = Date(2009, 5, 15, 4, 15, 30);
+    expected = Date("Sun Jun 14 21:15:30 GMT 2009");
     actualString = "Monday, June 15, 2009 1:45:30 UT +0430";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Full date/time pattern with TimeZoneOffset as hour
-    expected = Date(2009, 5, 15, 1, 45, 30);
+    expected = Date("Sun Jun 14 18:45:30 GMT 2009");
     actualString = "Monday, June 15, 2009 1:45:30 UTC +7";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Full date/time pattern with Year < 100 as hour
-    expected = Date(2009, 5, 15, 1, 45, 30);
+    expected = Date("Sun Jun 14 18:45:30 GMT 2009");
     actualString = "Monday, June 15, 9 1:45:30 UTC +7";
     actualTime = Date::parse(actualString);
-    actual = Date(actualTime).toString();
-    ASSERT_STR(expected.toString(), actual.toString());
+    actualDate = Date(actualTime);
+    ASSERT_STR(expected.toString(), actualDate.toString());
 
     // Input String with ignored character
     actualString = "Monday, 2009 June 15, 2009 1:45:30 UTC +7";
