@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,36 +24,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "MD5MessageDigest.hpp"
+#ifndef NATIVE_JAVA_SECURITY_NOSUCHALGORITHMEXCEPTION_HPP
+#define NATIVE_JAVA_SECURITY_NOSUCHALGORITHMEXCEPTION_HPP
 
-using namespace Java::Security;
+#include "../../lang/Exception/Exception.hpp"
+#include "../GeneralSecurityException/GeneralSecurityException.hpp"
 
-MD5MessageDigest::MD5MessageDigest() {
-    engineReset();
-}
+using namespace Java::Lang;
 
-MD5MessageDigest::~MD5MessageDigest() {
+namespace Java {
+    namespace Security {
+        class NoSuchAlgorithmException : public GeneralSecurityException {
+        public:
+            NoSuchAlgorithmException();
+            NoSuchAlgorithmException(String message);
+            NoSuchAlgorithmException(Throwable *cause);
+            NoSuchAlgorithmException(String message, Throwable *cause);
+        };
+    } // namespace Security
+} // namespace Java
 
-}
-
-int MD5MessageDigest::engineDigest(byte *buffer, int offset, int len) {
-    if (!this->isFinished) {
-        md5_finish(&this->state, this->hash);
-    }
-    memcpy(buffer + offset, this->hash, sizeof(this->hash));
-    return 0;
-}
-
-int MD5MessageDigest::engineGetDigestLength() {
-    return (int)sizeof(this->hash);
-}
-
-void MD5MessageDigest::engineReset() {
-    memset(this->hash, 0, sizeof(this->hash));
-    md5_init(&this->state);
-    this->isFinished = false;
-}
-
-void MD5MessageDigest::engineUpdate(const byte *input, int offset, int len) {
-    md5_append(&this->state, (const md5_byte_t*)input, len);
-}
+#endif //NATIVE_JAVA_SECURITY_NOSUCHALGORITHMEXCEPTION_HPP

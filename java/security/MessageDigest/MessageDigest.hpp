@@ -47,8 +47,6 @@ namespace Java {
 
             int digest(byte buf[], int offset, int len);
 
-            Array<byte> digest();
-
             void reset();
 
             void update(const byte input[], int offset, int len);
@@ -57,7 +55,7 @@ namespace Java {
             MessageDigestSpi* spi;
             String algorithm;
 
-            MessageDigest(MessageDigestSpi* spi);
+            MessageDigest(MessageDigestSpi* spi, String algorithm);
 
             int engineDigest(byte buffer[], int offset, int len) override;
 

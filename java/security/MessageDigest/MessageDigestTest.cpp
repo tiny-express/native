@@ -29,6 +29,7 @@ extern "C" {
 }
 
 #include "MessageDigest.hpp"
+#include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Security;
@@ -42,8 +43,13 @@ TEST(JavaSecurity, Constructor) {
     }
 
     {
-        MessageDigest* md = MessageDigest::getInstance("MDx");
-        ASSERT_TRUE(md == NULL);
+        try {
+            MessageDigest* md = MessageDigest::getInstance("MDx");
+            if (md)
+                delete md;
+        } catch (NoSuchAlgorithmException e) {
+            ASSERT_STR("MDx not found", e.getMessage().toString());
+        }
     }
 }
 
@@ -57,10 +63,10 @@ TEST(JavaSecurity, MD5) {
 
     if (md5) {
         digestLength = md5->getDigestLength();
-        md5->update((byte*)input.toString(), 0, input.getSize());
         result = new byte[digestLength]();
+
+        md5->update((byte*)input.toString(), 0, input.getSize());
         md5->digest(result, 0, digestLength);
-        delete md5;
     }
 
     ASSERT_DATA(expect,
@@ -68,7 +74,35 @@ TEST(JavaSecurity, MD5) {
                 result,
                 (size_t)digestLength);
 
+    if (md5) {
+        md5->reset();
+        md5->update((byte*)input.toString(), 0, input.getSize());
+        md5->digest(result, 0, digestLength);
+
+        ASSERT_DATA(expect,
+                    sizeof(expect),
+                    result,
+                    (size_t)digestLength);
+    }
+
+    if (md5) {
+        delete md5;
+    }
+
     if (result) {
         delete[] result;
     }
+}
+
+TEST(JavaSecurity, GetAlgorithm) {
+    MessageDigest* md5 = MessageDigest::getInstance("MD5");
+    String expect = "MD5";
+    String result;
+
+    if (md5) {
+        result = md5->getAlgorithm();
+        delete md5;
+    }
+
+    ASSERT_STR(expect.toString(), result.toString());
 }

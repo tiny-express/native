@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,36 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "MD5MessageDigest.hpp"
+
+#include "NoSuchAlgorithmException.hpp"
 
 using namespace Java::Security;
 
-MD5MessageDigest::MD5MessageDigest() {
-    engineReset();
-}
-
-MD5MessageDigest::~MD5MessageDigest() {
+NoSuchAlgorithmException::NoSuchAlgorithmException() : GeneralSecurityException() {
 
 }
 
-int MD5MessageDigest::engineDigest(byte *buffer, int offset, int len) {
-    if (!this->isFinished) {
-        md5_finish(&this->state, this->hash);
-    }
-    memcpy(buffer + offset, this->hash, sizeof(this->hash));
-    return 0;
+NoSuchAlgorithmException::NoSuchAlgorithmException(String message)
+        : GeneralSecurityException(message) {
+
 }
 
-int MD5MessageDigest::engineGetDigestLength() {
-    return (int)sizeof(this->hash);
+NoSuchAlgorithmException::NoSuchAlgorithmException(Throwable *cause)
+        : GeneralSecurityException(cause) {
+
 }
 
-void MD5MessageDigest::engineReset() {
-    memset(this->hash, 0, sizeof(this->hash));
-    md5_init(&this->state);
-    this->isFinished = false;
-}
+NoSuchAlgorithmException::NoSuchAlgorithmException(String message,
+                                                   Throwable *cause)
+        : GeneralSecurityException(message, cause) {
 
-void MD5MessageDigest::engineUpdate(const byte *input, int offset, int len) {
-    md5_append(&this->state, (const md5_byte_t*)input, len);
 }

@@ -26,13 +26,17 @@
 
 #include "MessageDigest.hpp"
 #include "MD5MessageDigest.hpp"
+#include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
+#include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Security;
 
 MessageDigest *MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
-       MessageDigestSpi* spi = new MD5MessageDigest();
-       return new MessageDigest(spi);
+        MessageDigestSpi* spi = new MD5MessageDigest();
+        return new MessageDigest(spi, algorithm);
+    } else {
+        throw NoSuchAlgorithmException(algorithm + " not found");
     }
     return NULL;
 }
@@ -51,12 +55,10 @@ int MessageDigest::getDigestLength() {
     return engineGetDigestLength();
 }
 
-int MessageDigest::digest(byte *buf, int offset, int len) {
+int MessageDigest::digest(byte buf[], int offset, int len) {
+    if (buf == NULL)
+        throw IllegalArgumentException("No input buffer given");
     return engineDigest(buf, offset, len);
-}
-
-Array<byte> MessageDigest::digest() {
-    return Array<byte>();
 }
 
 void MessageDigest::reset() {
@@ -64,11 +66,14 @@ void MessageDigest::reset() {
 }
 
 void MessageDigest::update(const byte input[], int offset, int len) {
+    if (input == NULL)
+        throw IllegalArgumentException("No input buffer given");
     engineUpdate(input, offset, len);
 }
 
-MessageDigest::MessageDigest(MessageDigestSpi *spi) {
+MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
     this->spi = spi;
+    this->algorithm = algorithm;
 }
 
 int MessageDigest::engineDigest(byte buffer[], int offset, int len) {
