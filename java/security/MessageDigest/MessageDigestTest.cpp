@@ -28,11 +28,19 @@ extern "C" {
 #include "../../../kernel/test.h"
 }
 
+#include <chrono>
 #include "MessageDigest.hpp"
 #include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
+#include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Security;
+using namespace std::chrono;
+
+long GetTickCount() {
+    return duration_cast<milliseconds>(
+            steady_clock::now().time_since_epoch()).count();
+}
 
 TEST(JavaSecurity, Constructor) {
     {
@@ -43,13 +51,17 @@ TEST(JavaSecurity, Constructor) {
     }
 
     {
+        String expect = "MDx not found";
+        String result;
         try {
             MessageDigest* md = MessageDigest::getInstance("MDx");
             if (md)
                 delete md;
         } catch (NoSuchAlgorithmException e) {
-            ASSERT_STR("MDx not found", e.getMessage().toString());
+            result = e.getMessage().toString();
         }
+
+        ASSERT_STR(expect.toString(), result.toString());
     }
 }
 
@@ -65,8 +77,8 @@ TEST(JavaSecurity, MD5) {
         digestLength = md5->getDigestLength();
         result = new byte[digestLength]();
 
-        md5->update((byte*)input.toString(), 0, input.getSize());
-        md5->digest(result, 0, digestLength);
+        md5->update((byte*)input.toString(), input.getSize());
+        md5->digest(result, digestLength);
     }
 
     ASSERT_DATA(expect,
@@ -76,8 +88,8 @@ TEST(JavaSecurity, MD5) {
 
     if (md5) {
         md5->reset();
-        md5->update((byte*)input.toString(), 0, input.getSize());
-        md5->digest(result, 0, digestLength);
+        md5->update((byte*)input.toString(), input.getSize());
+        md5->digest(result, digestLength);
 
         ASSERT_DATA(expect,
                     sizeof(expect),
@@ -94,15 +106,186 @@ TEST(JavaSecurity, MD5) {
     }
 }
 
-TEST(JavaSecurity, GetAlgorithm) {
+TEST(JavaSecurity, MD5MultiUpdate) {
+    byte expect[] = {0x2b, 0xa6, 0xe1, 0x5e, 0xff, 0x29, 0xaa, 0x9, 0xd5, 0x44,
+                     0xf5, 0x3f, 0x6c, 0x7d, 0xe5, 0x7d};
+    String input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+            "Morbi condimentum porta erat ut faucibus. Nunc dictum suscipit"
+            " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
+            " magna ultricies non.";
+    byte* result = NULL;
     MessageDigest* md5 = MessageDigest::getInstance("MD5");
-    String expect = "MD5";
-    String result;
+    int digestLength = 0;
 
     if (md5) {
-        result = md5->getAlgorithm();
+        digestLength = md5->getDigestLength();
+        result = new byte[digestLength]();
+
+        srand((unsigned int)GetTickCount());
+        int offset = 0;
+        while (offset < input.getSize()) {
+            int range = input.getSize() - offset;
+            int size = rand() % range;
+            if (size < 10)
+                size = range;
+
+            md5->update((byte*)input.toString() + offset, size);
+            offset += size;
+        }
+        md5->digest(result, digestLength);
         delete md5;
     }
 
-    ASSERT_STR(expect.toString(), result.toString());
+    ASSERT_DATA(expect,
+                sizeof(expect),
+                result,
+                (size_t)digestLength);
+
+    if (result)
+        delete[] result;
+}
+
+TEST(JavaSecurity, SHA1) {
+    byte expect[] = { 0x16, 0x31, 0x27, 0x51, 0xef, 0x93, 0x07, 0xc3, 0xfd,
+                      0x1a, 0xfb, 0xcb, 0x99, 0x3c, 0xdc, 0x80, 0x46, 0x4b,
+                      0xa0, 0xf1 };
+    String input = "the quick brown fox jumps over the lazy dog";
+    byte* result = NULL;
+    MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+    int digestLength = 0;
+
+    if (sha1) {
+        digestLength = sha1->getDigestLength();
+        result = new byte[digestLength];
+
+        sha1->update((byte*)input.toString(), input.getSize());
+        sha1->digest(result, digestLength);
+        delete sha1;
+    }
+
+    ASSERT_DATA(expect,
+                sizeof(expect),
+                result,
+                (size_t)digestLength);
+
+    if (result)
+        delete[] result;
+}
+
+TEST(JavaSecurity, SHA1MultiUpdate) {
+    byte expect[] = { 0xcd, 0x4b, 0x63, 0xd7, 0xde, 0x27, 0xcd, 0x21, 0x47,
+                      0xc0, 0xf3, 0xde, 0x71, 0x88, 0xec, 0xc6, 0x1d, 0x6d,
+                      0x91, 0x99 };
+    String input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+            "Morbi condimentum porta erat ut faucibus. Nunc dictum suscipit"
+            " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
+            " magna ultricies non.";
+    byte* result = NULL;
+    MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+    int digestLength = 0;
+
+    if (sha1) {
+        digestLength = sha1->getDigestLength();
+        result = new byte[digestLength]();
+
+        srand((unsigned int)GetTickCount());
+        int offset = 0;
+        while (offset < input.getSize()) {
+            int range = input.getSize() - offset;
+            int size = rand() % range;
+            if (size < 10)
+                size = range;
+            sha1->update((byte*)input.toString() + offset, size);
+            offset += size;
+        }
+        sha1->digest(result, digestLength);
+        delete sha1;
+    }
+
+    ASSERT_DATA(expect,
+                sizeof(expect),
+                result,
+                (size_t)digestLength);
+
+    if (result)
+        delete[] result;
+}
+
+TEST(JavaSecurity, GetAlgorithms) {
+    {
+        MessageDigest* md5 = MessageDigest::getInstance("MD5");
+        String expect = "MD5";
+        String result;
+
+        if (md5) {
+            result = md5->getAlgorithm();
+            delete md5;
+        }
+
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+
+    {
+        MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+        String expect = "SHA1";
+        String result;
+
+        if (sha1) {
+            result = sha1->getAlgorithm();
+            delete sha1;
+        }
+
+        ASSERT_STR(expect.toString(), result.toString());
+    }
+}
+
+TEST(JavaSecurity, Exception) {
+    {
+        MessageDigest *md5 = MessageDigest::getInstance("MD5");
+        String expect = "No input buffer given";
+        String result;
+
+        try {
+            md5->update(NULL, 0);
+        } catch (IllegalArgumentException e) {
+            result = e.getMessage().toString();
+        }
+
+        ASSERT_STR(expect.toString(), result.toString());
+
+        delete md5;
+    }
+
+    {
+        MessageDigest *sha1 = MessageDigest::getInstance("SHA1");
+        String expect = "No output buffer given";
+        String result;
+
+        try {
+            sha1->digest(NULL, 1);
+        } catch (IllegalArgumentException e) {
+            result = e.getMessage().toString();
+        }
+
+        ASSERT_STR(expect.toString(), result.toString());
+
+        delete sha1;
+    }
+
+    {
+        MessageDigest *sha1 = MessageDigest::getInstance("SHA1");
+        String expect = "Output buffer too small";
+        String result;
+
+        try {
+            byte buf[1] = { 0 };
+            sha1->digest(buf, sizeof(buf));
+        } catch (IllegalArgumentException e) {
+            result = e.getMessage().toString();
+        }
+
+        ASSERT_STR(expect.toString(), result.toString());
+
+        delete sha1;
+    }
 }

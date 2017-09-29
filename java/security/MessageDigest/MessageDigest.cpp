@@ -26,6 +26,7 @@
 
 #include "MessageDigest.hpp"
 #include "MD5MessageDigest.hpp"
+#include "SHA1MessageDigest.hpp"
 #include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
@@ -34,6 +35,9 @@ using namespace Java::Security;
 MessageDigest *MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
         MessageDigestSpi* spi = new MD5MessageDigest();
+        return new MessageDigest(spi, algorithm);
+    } else if (algorithm == "SHA1") {
+        MessageDigestSpi* spi = new SHA1MessageDigest();
         return new MessageDigest(spi, algorithm);
     } else {
         throw NoSuchAlgorithmException(algorithm + " not found");
@@ -55,20 +59,22 @@ int MessageDigest::getDigestLength() {
     return engineGetDigestLength();
 }
 
-int MessageDigest::digest(byte buf[], int offset, int len) {
+int MessageDigest::digest(byte buf[], int len) {
     if (buf == NULL)
-        throw IllegalArgumentException("No input buffer given");
-    return engineDigest(buf, offset, len);
+        throw IllegalArgumentException("No output buffer given");
+    if (len < engineGetDigestLength())
+        throw IllegalArgumentException("Output buffer too small");
+    return engineDigest(buf, len);
 }
 
 void MessageDigest::reset() {
     engineReset();
 }
 
-void MessageDigest::update(const byte input[], int offset, int len) {
-    if (input == NULL)
+void MessageDigest::update(const byte input[], int len) {
+    if (input == NULL || len == 0)
         throw IllegalArgumentException("No input buffer given");
-    engineUpdate(input, offset, len);
+    engineUpdate(input, len);
 }
 
 MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
@@ -76,9 +82,9 @@ MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
     this->algorithm = algorithm;
 }
 
-int MessageDigest::engineDigest(byte buffer[], int offset, int len) {
+int MessageDigest::engineDigest(byte buffer[], int len) {
     if (spi) {
-        return spi->engineDigest(buffer, offset, len);
+        return spi->engineDigest(buffer, len);
     }
     return 0;
 }
@@ -96,8 +102,8 @@ void MessageDigest::engineReset() {
     }
 }
 
-void MessageDigest::engineUpdate(const byte input[], int offset, int len) {
+void MessageDigest::engineUpdate(const byte input[], int len) {
     if (spi) {
-        spi->engineUpdate(input, offset, len);
+        spi->engineUpdate(input, len);
     }
 }
