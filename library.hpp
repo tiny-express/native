@@ -43,7 +43,7 @@
 // Java::Lang is imported by default
 using namespace Java::Lang;
 
-// Application starting point
+// Application starting point -- hokien check something
 int Application(void (*program)(Array<String>), char **argument);
 
 #endif//NATIVE_LIBRARY_HPP_
