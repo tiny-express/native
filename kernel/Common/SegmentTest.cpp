@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../Builtin.hpp"
+#include "../Kernel.hpp"
 #include "../Test.hpp"
 
 TEST (KernelCommon, SegmentPointerChar) {

@@ -145,7 +145,7 @@ boolean Double::operator>(const Double &target) const {
 boolean Double::operator>=(const Double &target) const {
 	if (compare(this->doubleValue(), target.doubleValue()) == 1
 	    || compare(this->doubleValue(), target.doubleValue()) == 0) {
-		
+
 		return true;
 	}
 	return false;
@@ -255,7 +255,6 @@ boolean Double::equals(const Double &object) const {
 	long doubleToLongBitsThis = doubleToLongBits(this->original);
 	boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
 	return isEqual;
-	//return (isDouble && isEqual);
 }
 
 long Double::hashCode() {

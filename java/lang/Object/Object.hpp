@@ -27,15 +27,7 @@
 #ifndef JAVA_LANG_OBJECT_H
 #define JAVA_LANG_OBJECT_H
 
-#include "../../../kernel/Builtin.hpp"
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <set>
-#include <type_traits>
-#include <iostream>
-
-using namespace Kernel;
+#include "../../../kernel/Kernel.hpp"
 
 // Define instanceof
 template <typename Base, typename T>

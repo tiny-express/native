@@ -82,10 +82,10 @@ inline char *stringReplace(char *target, const char *findString, const char *rep
  */
 inline char **stringSplit(const char *target, const char *delimiter) {
 	if (target == nullptr || delimiter == nullptr) {
-		auto **result = (char **)calloc(1, sizeof(char *));
+		auto **result = (char **) calloc(1, sizeof(char *));
 		return result;
 	}
-	auto **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
+	auto **data = (char **) calloc(MAX_STRING_LENGTH, sizeof(char *));
 	const int targetLength = lengthPointerChar(target);
 	char const_target[targetLength + 1];
 	strncpy(const_target, target, (size_t) targetLength);
@@ -134,7 +134,10 @@ inline char *stringJoin(char *target[], const char *delimiter) {
 	int num = lengthPointerPointerChar(target) - 1;
 	int len = 0, wlen = 0;
 	auto *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
-	register int index;
+#ifdef LINUX
+	register
+#endif
+    int index;
 	for (index = 0; index < num; index++) {
 		// Copy memory segment
 		wlen = lengthPointerChar(target[index]);

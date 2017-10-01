@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_KERNEL_BUILTIN_HPP
-#define NATIVE_KERNEL_BUILTIN_HPP
+#ifndef NATIVE_KERNEL_KERNEL_HPP
+#define NATIVE_KERNEL_KERNEL_HPP
 
 // C Standard Library
 #include <cstdio>
@@ -36,16 +36,24 @@
 #include <climits>
 #include <cstdarg>
 #include <cctype>
+#include <thread>
 #include <memory>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <type_traits>
+#include <iostream>
 
-// Platform Macros
+// Platform macros
 #include "Platform.hpp"
 
 // Native Library
 #include "DateTime.hpp"
 #include "Common.hpp"
-#include "Math.hpp"
 #include "String.hpp"
 #include "Type.hpp"
 
-#endif //NATIVE_KERNEL_BUILTIN_HPP
+using namespace Kernel;
+
+#endif //NATIVE_KERNEL_KERNEL_HPP

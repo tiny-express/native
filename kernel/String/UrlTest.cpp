@@ -44,125 +44,125 @@ TEST (KernelStringUrl, Decode) {
 }
 
 TEST (KernelStringUrl, FindParam) {
-    return;
 	auto params = (string) "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 
-	string result = findParam("username", params);
+	string result = findParam((string) "username", params);
 	ASSERT_STR("loint", result);
 	free(result);
 
-	result = findParam("firstName", params);
+	result = findParam((string) "firstName", params);
 	ASSERT_STR("Loi AbC", result);
 	free(result);
 
-	result = findParam("password", params);
+	result = findParam((string) "password", params);
 	ASSERT_STR("1234", result);
 	free(result);
 
 	auto params2 = (string) "username=&password=&firstName=Loi&&lastName=Nguyen";
 
-	result = findParam("username", params2);
+	result = findParam((string) "username", params2);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParam("firstName", params2);
+	result = findParam((string) "firstName", params2);
 	ASSERT_STR("Loi", result);
 	free(result);
 
-	result = findParam("password", params2);
+	result = findParam((string) "password", params2);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParam("lastName", params2);
+	result = findParam((string) "lastName", params2);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 
 	auto params3 = (string) "";
-	result = findParam("username", params3);
+	result = findParam((string) "username", params3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParam("firstName", params3);
+	result = findParam((string) "firstName", params3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParam("password", params3);
+	result = findParam((string) "password", params3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParam("lastName", params3);
+	result = findParam((string) "lastName", params3);
 	ASSERT_STR("", result);
 	free(result);
 }
 
 TEST (KernelStringUrl, FindParamFromUrl) {
+
 	string result; // result that store value after findParamFromUrl, should be freed after use
 
 	auto url = (string) "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
-	result = findParamFromUrl("username", url);
+	result = findParamFromUrl((string) "username", url);
 	ASSERT_STR("loint", result);
 	free(result);
 
-	result = findParamFromUrl("password", url);
+	result = findParamFromUrl((string) "password", url);
 	ASSERT_STR("1234", result);
 	free(result);
 
-	result = findParamFromUrl("firstName", url);
+	result = findParamFromUrl((string) "firstName", url);
 	ASSERT_STR("Loi AbC", result);
 	free(result);
 
-	result = findParamFromUrl("lastName", url);
+	result = findParamFromUrl((string) "lastName", url);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 
 	auto url2 = (string) "/abcd/?username=&password=&firstName=Loi&&lastName=Nguyen";
-	result = findParamFromUrl("username", url2);
+	result = findParamFromUrl((string) "username", url2);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("password", url2);
+	result = findParamFromUrl((string) "password", url2);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("firstName", url2);
+	result = findParamFromUrl((string) "firstName", url2);
 	ASSERT_STR("Loi", result);
 	free(result);
 
-	result = findParamFromUrl("lastName", url2);
+	result = findParamFromUrl((string) "lastName", url2);
 	ASSERT_STR("Nguyen", result);
 	free(result);
 
 	auto url3 = (string) "/abcd/";
-	result = findParamFromUrl("username", url3);
+	result = findParamFromUrl((string) "username", url3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("firstName", url3);
+	result = findParamFromUrl((string) "firstName", url3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("password", url3);
+	result = findParamFromUrl((string) "password", url3);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("lastName", url3);
+	result = findParamFromUrl((string) "lastName", url3);
 	ASSERT_STR("", result);
 	free(result);
 
 	auto url4 = (string) "/abcd/??";
-	result = findParamFromUrl("username", url4);
+	result = findParamFromUrl((string) "username", url4);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("firstName", url4);
+	result = findParamFromUrl((string) "firstName", url4);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("password", url4);
+	result = findParamFromUrl((string) "password", url4);
 	ASSERT_STR("", result);
 	free(result);
 
-	result = findParamFromUrl("lastName", url4);
+	result = findParamFromUrl((string) "lastName", url4);
 	ASSERT_STR("", result);
 	free(result);
 }
