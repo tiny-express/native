@@ -166,10 +166,15 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 	int from = 2;
 	int to = 5;
 	char **result = segment_pointer_pointer_char(target, from, to);
-	
 	ASSERT_EQUAL(4, length_pointer_pointer_char(result));
+
 	char *join = string_join(result, "|");
 	ASSERT_STR("brown|fox|jumps|over", join);
 	free(join);
 	free(result);
+
+	from = 5;
+	to  = 2;
+	char **result2 = segment_pointer_pointer_char(target, from, to);
+	ASSERT_NULL(result2);
 }
