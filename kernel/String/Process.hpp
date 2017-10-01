@@ -369,23 +369,6 @@ inline char *stringTo(char *target, int to) {
 }
 
 /**
- * String copy
- *
- * @param target
- * @return string
- */
-inline char *stringCopy(char *target) {
-	if (isEmptyString(target)) {
-		return strdup("");
-	}
-	int length = lengthPointerChar(target);
-	auto *result = (char *) calloc((size_t) length + 1, sizeof(char));
-	memcpy(result, target, (size_t) length);
-	result[ length ] = '\0';
-	return result;
-}
-
-/**
  * String upper
  *
  * @param target
@@ -395,7 +378,7 @@ inline char *stringUpper(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = stringCopy(target);
+	char *result = strdup(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'a' <= *index ) && ( *index <= 'z' )) {
@@ -415,7 +398,7 @@ inline char *stringLower(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = stringCopy(target);
+	char *result = strdup(target);
 	register char *index = result;
 	for (; *index; index++) {
 		if (( 'A' <= *index ) && ( *index <= 'Z' )) {
@@ -435,7 +418,7 @@ inline char *stringTitle(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = stringCopy(target);
+	char *result = strdup(target);
 	register char *index = result;
 	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
 		*index -= 32;
