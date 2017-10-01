@@ -24,11 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
 #include "../DateTime.hpp"
 #include "../Test.hpp"
-
-using namespace Kernel;
 
 TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 #ifdef WINDOWS
@@ -53,20 +50,13 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 }
 
 TEST (KernelDateTime, TimestampInNanoSeconds) {
-	long first_time = timestamp();
-	ASSERT_TRUE(first_time > 1500198318489000);
-	int maxN = 20000000;
-	int i = 0;
-	int counter = 0;
-	for (i = 0; i < maxN; i++) {
-		counter++;
-		counter--;
-		counter++;
-	}
-	long last_time = timestamp();
-	ASSERT_EQUAL(maxN, counter);
-	unsigned int delta = ( last_time - first_time ) / 1000;
-	ASSERT_TRUE(delta > 50);
+    // Timestamp in seconds is 1506237734
+    // but nano seconds we need multiply with 1,000,000,000
+    // so it will be look likes this 1506237734000000000
+    // length of timestamp in nano seconds is 19 digits
+	long timestamps = timestamp();
+	ASSERT_TRUE(timestamps > 1506237163070843650);
+    ASSERT_TRUE(timestamps < 2506237163070843650);
 }
 
 TEST (KernelDateTime, Format) {
@@ -75,12 +65,12 @@ TEST (KernelDateTime, Format) {
 	string result1 = date(timestamp, format);
 	ASSERT_STR("13/09/2016", result1);
 	free(result1);
-	
+
 	timestamp = 1511208660;
 	char *result2 = date(timestamp, format);
 	ASSERT_STR("20/11/2017", result2);
 	free(result2);
-	
+
 	format = (string) "y-m-d";
 	char *result3 = date(timestamp, format);
 	ASSERT_STR("2017-11-20", result3);

@@ -28,7 +28,7 @@
 #define NATIVE_LIBRARY_HPP_
 
 // Java Core Packages
-#include "java/IO.hpp"
+#include "java/Io.hpp"
 #include "java/Lang.hpp"
 #include "java/Net.hpp"
 #include "java/Security.hpp"
@@ -40,7 +40,10 @@
 #include "javax/Net.hpp"
 #include "javax/Sql.hpp"
 
-// In Java, Java::Lang is imported by default
+// Java::Lang is imported by default
 using namespace Java::Lang;
+
+// Application starting point
+int Application(void (*program)(Array<String>), char **argument);
 
 #endif//NATIVE_LIBRARY_HPP_

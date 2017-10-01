@@ -54,6 +54,4 @@
 #include "String.hpp"
 #include "Type.hpp"
 
-using namespace Kernel;
-
 #endif //NATIVE_KERNEL_KERNEL_HPP

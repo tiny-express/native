@@ -27,8 +27,6 @@
 #include "../Kernel.hpp"
 #include "../Test.hpp"
 
-using namespace Kernel;
-
 TEST (KernelCommon, JoinPointerPointerChar) {
 	char *target[] = {
 		(char *) "The",

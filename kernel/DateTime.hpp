@@ -24,15 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_DATETIME_H
-#define NATIVE_DATETIME_H
+#ifndef NATIVE_KERNEL_DATETIME_HPP
+#define NATIVE_KERNEL_DATETIME_HPP
 
 #include "Platform.hpp"
 
 #ifdef LINUX
-
 #include <stdint.h>
-
 #endif
 
 #ifdef DARWIN
@@ -50,51 +48,49 @@
 #define IS_LEAP_YEAR(year)  ( (((year)%4 == 0) && ((year)%100 != 0)) || ((year)%400 == 0) )
 
 
-namespace Kernel {
-    static int daysPerMonth[2][MOS_PER_YEAR] = {
-            {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-            {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
-    };
+static int daysPerMonth[2][MOS_PER_YEAR] = {
+        {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+        {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+};
 
-    static int daysPerYear[2] = {
-            365, 366
-    };
+static int daysPerYear[2] = {
+        365, 366
+};
 
-    /**
-     *  Unix time in seconds
-     *
-     * @param sec
-     * @param min
-     * @param hrs
-     * @param day
-     * @param mon
-     * @param year
-     * @return
-     */
-        unsigned long unixTimeInMilliseconds(
-            unsigned int millisecond,
-            unsigned int second,
-            unsigned int minute,
-            unsigned int hour,
-            unsigned int day,
-            unsigned int month,
-            unsigned int year
-    );
+/**
+ *  Unix time in seconds
+ *
+ * @param sec
+ * @param min
+ * @param hrs
+ * @param day
+ * @param mon
+ * @param year
+ * @return
+ */
+unsigned long unixTimeInMilliseconds(
+        unsigned int millisecond,
+        unsigned int second,
+        unsigned int minute,
+        unsigned int hour,
+        unsigned int day,
+        unsigned int month,
+        unsigned int year
+);
 
-    /**
-     * Get unix timestamp
-     *
-     * @return unsigned long
-     */
-        unsigned long timestamp();
+/**
+ * Get unix timestamp
+ *
+ * @return unsigned long
+ */
+unsigned long timestamp();
 
-    /**
-     *
-     * @param timestamp
-     * @param format
-     * @return
-     */
-        string date(time_t timestamp, char *format);
-}
+/**
+ *
+ * @param timestamp
+ * @param format
+ * @return
+ */
+string date(time_t timestamp, string format);
 
-#endif
+#endif //NATIVE_KERNEL_DATETIME_HPP

@@ -39,7 +39,7 @@
  */
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
-        char *convert;\
+        string convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
 }
@@ -51,7 +51,7 @@ inline string stringFrom##NAME(TYPE target) {\
  * @return generic values
  */
 #define STR_TO(NAME, TYPE, FORMAT);\
-inline TYPE stringTo##NAME(char *target) {\
+inline TYPE stringTo##NAME(string target) {\
     if (target == nullptr || strcmp(target, "\0") == 0) return 0;\
         TYPE result;\
     sscanf(target, FORMAT, &result);\
@@ -73,7 +73,7 @@ STR_TO(Double, double, "%lg");
  * @param target
  * @return string
  */
-inline char *stringFromChar(char target) {
+inline string stringFromChar(char target) {
 	if (target == '\0') {
 		return strdup("");
 	}
@@ -89,7 +89,7 @@ inline char *stringFromChar(char target) {
  * @param target
  * @return string
  */
-inline char stringToChar(char *target) {
+inline char stringToChar(string target) {
 	if (isEmptyString(target)) {
 		return '\0';
 	}
@@ -102,7 +102,7 @@ inline char stringToChar(char *target) {
  * @param target
  * @return string
  */
-inline int stringToInt(char *target) {
+inline int stringToInt(string target) {
 	if (target == nullptr) {
 		return 0;
 	}
@@ -115,7 +115,7 @@ inline int stringToInt(char *target) {
  * @param target
  * @return string
  */
-inline long stringToLong(char *target) {
+inline long stringToLong(string target) {
 	if (target == nullptr) {
 		return 0;
 	}
@@ -128,7 +128,7 @@ inline long stringToLong(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-inline boolean stringToBoolean(char *target) {
+inline boolean stringToBoolean(string target) {
 	if (lengthPointerChar(target) == 0) {
 		return false;
 	}
@@ -151,7 +151,7 @@ inline boolean stringToBoolean(char *target) {
  * @param target
  * @return string
  */
-inline char *stringFromBoolean(int target) {
+inline string stringFromBoolean(int target) {
     if (!target) {
         return strdup("false");
     }

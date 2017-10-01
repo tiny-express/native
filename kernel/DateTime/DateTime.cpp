@@ -29,8 +29,8 @@
 #include <windows.h>
 #endif
 
-#ifdef OSX
-#include <mach/mach_time.h>
+#ifdef DARWIN
+#include <sys/time.h>
 #endif
 
 #include "../DateTime.hpp"
@@ -43,7 +43,7 @@
  * @param format
  * @return
  */
-string Kernel::date(time_t timestamp, string format) {
+string date(time_t timestamp, string format) {
 	char *date_format = stringReplace(format, "D", "%d");
 	char *date_format2 = stringReplace(date_format, "d", "%d");
 	free(date_format);
@@ -79,7 +79,7 @@ string Kernel::date(time_t timestamp, string format) {
  * @param year
  * @return
  */
-unsigned long Kernel::unixTimeInMilliseconds(
+unsigned long unixTimeInMilliseconds(
 		unsigned int millisecond,
 		unsigned int second,
 		unsigned int minute,
@@ -123,15 +123,12 @@ unsigned long Kernel::unixTimeInMilliseconds(
  *
  * @return long
  */
-unsigned long Kernel::timestamp() {
-#ifdef OSX
-	double timebase = 0.0;
-	mach_timebase_info_data_t tb = { 0 };
-	mach_timebase_info(&tb);
-	timebase = tb.numer;
-	timebase = timebase / tb.denom;
-	uint64_t current = mach_absolute_time() * timebase;
-	return (long) current * 1000;
+unsigned long timestamp() {
+#ifdef DARWIN
+	struct timeval time;
+	gettimeofday(&time, NULL);
+	long timestamp_in_millisecond = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return timestamp_in_millisecond * 1000000;
 #endif
 #ifdef LINUX
 	struct timespec tsp;
@@ -151,7 +148,7 @@ unsigned long Kernel::timestamp() {
 			current_time.wYear
 	);
 	// Timestamp should be in nano seconds
-	return timestamp_in_millisecond * 1000;
+	return timestamp_in_millisecond * 1000000;
 #endif
 	return 0;
 }

@@ -137,10 +137,10 @@ void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const char *ca
 #define ASSERT_INTERVAL(exp1, exp2, real) assert_interval(exp1, exp2, real, __FILE__, __LINE__)
 
 void assert_null(void *real, const char *caller, int line);
-#define ASSERT_nullptr(real) assert_null((void*)real, __FILE__, __LINE__)
+#define ASSERT_NULL(real) assert_null((void*)real, __FILE__, __LINE__)
 
 void assert_not_null(const void *real, const char *caller, int line);
-#define ASSERT_NOT_nullptr(real) assert_not_null(real, __FILE__, __LINE__)
+#define ASSERT_NOT_NULL(real) assert_not_null(real, __FILE__, __LINE__)
 
 void assert_true(int real, const char *caller, int line);
 #define ASSERT_TRUE(real) assert_true(real, __FILE__, __LINE__)
