@@ -115,7 +115,7 @@ inline char *findParam(char *name, char *params) {
 }
 
 inline char *findParamFromUrl(const char *name, char *url) {
-    return findParam((char*) name, url);
+    return findParam((string) name, url);
 }
 
 inline char *findParamFromUrl(char *name, char *url) {

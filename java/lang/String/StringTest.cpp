@@ -150,7 +150,7 @@ TEST(JavaLang, StringEquals) {
 	ASSERT_TRUE(stringEqual1 != stringEqual3);
 
     // Compare with another object
-    StringBuilder stringBuilder = StringBuilder("abcd");
+    StringBuilder stringBuilder = StringBuilder((string) "abcd");
     ASSERT_FALSE(stringEqual1.equals(stringBuilder));
 }
 
@@ -555,8 +555,8 @@ TEST(JavaLang, StringRegionMatch) {
 TEST(JavaLang, StringJoin) {
     String delimiter = "->";
     String duck = "Duck";
-    StringBuffer dog("Dog");
-    StringBuilder pig("Pig");
+    StringBuffer dog((string) "Dog");
+    StringBuilder pig((string) "Pig");
     String result = String::join(delimiter, duck, dog, pig);
     ASSERT_STR("Duck->Dog->Pig", result.toString());
 }
@@ -787,9 +787,9 @@ TEST(JavaLang, StringOperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
 	String textCompare2 = "Hello";
-	int comparable = FALSE;
+	int comparable = false;
 	if (textCompare1 == textCompare2) {
-		comparable = TRUE;
+		comparable = true;
 	}
 	ASSERT_TRUE(comparable);
 }
@@ -798,9 +798,9 @@ TEST(JavaLang, StringOperatorNotEquals) {
 	// Given two Strings and compare not equal them - Return comparable
 	String textCompare1 = "Hello1";
 	String textCompare2 = "Hello2";
-	int comparable = FALSE;
+	int comparable = false;
 	if (textCompare1 != textCompare2) {
-		comparable = TRUE;
+		comparable = true;
 	}
 	ASSERT_TRUE(comparable);
 }

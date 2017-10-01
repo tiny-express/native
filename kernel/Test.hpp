@@ -16,6 +16,8 @@
 #ifndef NATIVE_KERNEL_TEST_H
 #define NATIVE_KERNEL_TEST_H
 
+#include "Type.hpp"
+
 #if defined _WIN32 || defined __CYGWIN__
 #ifndef WIN32
 #define WIN32
@@ -80,12 +82,12 @@ struct ctest {
 
 #define __CTEST_INTERNAL(sname, tname, _skip) \
     void __FNAME(sname, tname)(); \
-    __CTEST_STRUCT(sname, tname, _skip, NULL, NULL, NULL) \
+    __CTEST_STRUCT(sname, tname, _skip, nullptr, nullptr, nullptr) \
     void __FNAME(sname, tname)()
 
 #ifdef __APPLE__
-#define SETUP_FNAME(sname) NULL
-#define TEARDOWN_FNAME(sname) NULL
+#define SETUP_FNAME(sname) nullptr
+#define TEARDOWN_FNAME(sname) nullptr
 #else
 #define SETUP_FNAME(sname) sname##_setup
 #define TEARDOWN_FNAME(sname) sname##_teardown
@@ -135,10 +137,10 @@ void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const char *ca
 #define ASSERT_INTERVAL(exp1, exp2, real) assert_interval(exp1, exp2, real, __FILE__, __LINE__)
 
 void assert_null(void *real, const char *caller, int line);
-#define ASSERT_NULL(real) assert_null((void*)real, __FILE__, __LINE__)
+#define ASSERT_nullptr(real) assert_null((void*)real, __FILE__, __LINE__)
 
 void assert_not_null(const void *real, const char *caller, int line);
-#define ASSERT_NOT_NULL(real) assert_not_null(real, __FILE__, __LINE__)
+#define ASSERT_NOT_nullptr(real) assert_not_null(real, __FILE__, __LINE__)
 
 void assert_true(int real, const char *caller, int line);
 #define ASSERT_TRUE(real) assert_true(real, __FILE__, __LINE__)
@@ -183,12 +185,12 @@ void assert_float_far(float exp, float real, int precision, const char *caller, 
 #endif
 
 static size_t ctest_errorsize;
-static char* ctest_errormsg;
+static string ctest_errormsg;
 #define MSG_SIZE 4096
 static char ctest_errorbuffer[MSG_SIZE];
 static jmp_buf ctest_err;
 static int color_output = 1;
-static const char* suite_name;
+static const_string suite_name;
 
 typedef int (*filter_func)(struct ctest*);
 
@@ -212,7 +214,7 @@ typedef int (*filter_func)(struct ctest*);
 
 static CTEST(suite, test) { }
 
-inline static void vprint_errormsg(const char* const fmt, va_list ap) {
+inline static void vprint_errormsg(const_string fmt, va_list ap) {
 	// (v)snprintf returns the number that would have been written
     const int ret = vsnprintf(ctest_errormsg, ctest_errorsize, fmt, ap);
     if (ret < 0) {
@@ -226,14 +228,14 @@ inline static void vprint_errormsg(const char* const fmt, va_list ap) {
     }
 }
 
-inline static void print_errormsg(const char* const fmt, ...) {
+inline static void print_errormsg(const_string fmt, ...) {
     va_list argp;
     va_start(argp, fmt);
     vprint_errormsg(fmt, argp);
     va_end(argp);
 }
 
-static void msg_start(const char* color, const char* title) {
+static void msg_start(const_string color, const_string title) {
     if (color_output) {
 	    print_errormsg("%s", color);
     }
@@ -247,7 +249,7 @@ static void msg_end() {
     print_errormsg("\n");
 }
 
-void CTEST_LOG(const char* fmt, ...)
+void CTEST_LOG(const_string fmt, ...)
 {
     va_list argp;
     msg_start(ANSI_BLUE, "LOG");
@@ -259,7 +261,7 @@ void CTEST_LOG(const char* fmt, ...)
     msg_end();
 }
 
-void CTEST_ERR(const char* fmt, ...)
+void CTEST_ERR(const_string fmt, ...)
 {
     va_list argp;
     msg_start(ANSI_YELLOW, "\nERROR");
@@ -272,17 +274,17 @@ void CTEST_ERR(const char* fmt, ...)
     longjmp(ctest_err, 1);
 }
 
-void assert_str(const char* exp, const char*  real, const char* caller, int line) {
-    if ((exp == NULL && real != NULL) ||
-	(exp != NULL && real == NULL) ||
+void assert_str(const_string exp, const_string  real, const_string caller, int line) {
+    if ((exp == nullptr && real != nullptr) ||
+	(exp != nullptr && real == nullptr) ||
 	(exp && real && strcmp(exp, real) != 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, exp, real);
     }
 }
 
-void assert_data(const unsigned char* exp, size_t expsize,
-		 const unsigned char* real, size_t realsize,
-		 const char* caller, int line) {
+void assert_data(const_string exp, size_t expsize,
+		 const_string real, size_t realsize,
+		 const_string caller, int line) {
     size_t i;
     if (expsize != realsize) {
 	CTEST_ERR("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX, caller, line, (uintmax_t) expsize, (uintmax_t) realsize);
@@ -295,40 +297,40 @@ void assert_data(const unsigned char* exp, size_t expsize,
     }
 }
 
-void assert_equal(intmax_t exp, intmax_t real, const char* caller, int line) {
+void assert_equal(intmax_t exp, intmax_t real, const_string caller, int line) {
     if (exp != real) {
 	CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX, caller, line, exp, real);
     }
 }
 
-void assert_equal_u(uintmax_t exp, uintmax_t real, const char* caller, int line) {
+void assert_equal_u(uintmax_t exp, uintmax_t real, const_string caller, int line) {
     if (exp != real) {
 	CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX, caller, line, exp, real);
     }
 }
 
-void assert_not_equal(intmax_t exp, intmax_t real, const char* caller, int line) {
+void assert_not_equal(intmax_t exp, intmax_t real, const_string caller, int line) {
     if ((exp) == (real)) {
 	CTEST_ERR("%s:%d  should not be %" PRIdMAX, caller, line, real);
     }
 }
 
-void assert_not_equal_u(uintmax_t exp, uintmax_t real, const char* caller, int line) {
+void assert_not_equal_u(uintmax_t exp, uintmax_t real, const_string caller, int line) {
     if ((exp) == (real)) {
 	CTEST_ERR("%s:%d  should not be %" PRIuMAX, caller, line, real);
     }
 }
 
-void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const char* caller, int line) {
+void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t real, const_string caller, int line) {
     if (real < exp1 || real > exp2) {
 	CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX, caller, line, exp1, exp2, real);
     }
 }
 
-void assert_dbl_near(double exp, double real, int precision, const char* caller, int line) {
+void assert_dbl_near(double exp, double real, int precision, const_string caller, int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
-    char* expectedString = (char*) calloc(1079, sizeof(char));
-    char* realString = (char*) calloc(1079, sizeof(char));
+    string expectedString = (string) calloc(1079, sizeof(char));
+    string realString = (string) calloc(1079, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
@@ -344,8 +346,8 @@ void assert_dbl_near(double exp, double real, int precision, const char* caller,
     }
 
     // Compare with string type
-    if ((expectedString == NULL && realString != NULL) ||
-	(expectedString != NULL && realString == NULL) ||
+    if ((expectedString == nullptr && realString != nullptr) ||
+	(expectedString != nullptr && realString == nullptr) ||
 	(expectedString && realString && strcmp(expectedString, realString) != 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
@@ -355,10 +357,10 @@ void assert_dbl_near(double exp, double real, int precision, const char* caller,
     free(realString);
 }
 
-void assert_dbl_far(double exp, double real, int precision, const char* caller, int line) {
+void assert_dbl_far(double exp, double real, int precision, const_string caller, int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
-    char* expectedString = (char*) calloc(1079, sizeof(char));
-    char* realString = (char*) calloc(1079, sizeof(char));
+    string expectedString = (string) calloc(1079, sizeof(char));
+    string realString = (string) calloc(1079, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
@@ -374,8 +376,8 @@ void assert_dbl_far(double exp, double real, int precision, const char* caller, 
     }
 
     // Compare with string type
-    if ((expectedString == NULL && realString != NULL) ||
-	(expectedString != NULL && realString == NULL) ||
+    if ((expectedString == nullptr && realString != nullptr) ||
+	(expectedString != nullptr && realString == nullptr) ||
 	(expectedString && realString && strcmp(expectedString, realString) == 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
@@ -385,10 +387,10 @@ void assert_dbl_far(double exp, double real, int precision, const char* caller, 
     free(realString);
 }
 
-void assert_float_near(float exp, float real, int precision, const char* caller, int line) {
+void assert_float_near(float exp, float real, int precision, const_string caller, int line) {
     // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 24 - (-126)
-    char* expectedString = (char*) calloc(153, sizeof(char));
-    char* realString = (char*) calloc(153, sizeof(char));
+    string expectedString = (string) calloc(153, sizeof(char));
+    string realString = (string) calloc(153, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
@@ -404,8 +406,8 @@ void assert_float_near(float exp, float real, int precision, const char* caller,
     }
 
     // Compare with string type
-    if ((expectedString == NULL && realString != NULL) ||
-	(expectedString != NULL && realString == NULL) ||
+    if ((expectedString == nullptr && realString != nullptr) ||
+	(expectedString != nullptr && realString == nullptr) ||
 	(expectedString && realString && strcmp(expectedString, realString) != 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
@@ -415,10 +417,10 @@ void assert_float_near(float exp, float real, int precision, const char* caller,
     free(realString);
 }
 
-void assert_float_far(float exp, float real, int precision, const char* caller, int line) {
+void assert_float_far(float exp, float real, int precision, const_string caller, int line) {
     // max_digits = 3 + DBL_MANT_DIG - DBL_MIN_EXP = 3 + 24 - (-126)
-    char* expectedString = (char*) calloc(153, sizeof(char));
-    char* realString = (char*) calloc(153, sizeof(char));
+    string expectedString = (string) calloc(153, sizeof(char));
+    string realString = (string) calloc(153, sizeof(char));
 
     // Get string type of input number
     if(exp == 0.0f && exp < 0) {
@@ -434,8 +436,8 @@ void assert_float_far(float exp, float real, int precision, const char* caller, 
     }
 
     // Compare with string type
-    if ((expectedString == NULL && realString != NULL) ||
-	(expectedString != NULL && realString == NULL) ||
+    if ((expectedString == nullptr && realString != nullptr) ||
+	(expectedString != nullptr && realString == nullptr) ||
 	(expectedString && realString && strcmp(expectedString, realString) == 0)) {
 	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
@@ -446,31 +448,31 @@ void assert_float_far(float exp, float real, int precision, const char* caller, 
 }
 
 
-void assert_null(void* real, const char* caller, int line) {
-    if ((real) != NULL) {
-	CTEST_ERR("%s:%d  should be NULL", caller, line);
+void assert_null(void* real, const_string caller, int line) {
+    if ((real) != nullptr) {
+	CTEST_ERR("%s:%d  should be nullptr", caller, line);
     }
 }
 
-void assert_not_null(const void* real, const char* caller, int line) {
-    if (real == NULL) {
-	CTEST_ERR("%s:%d  should not be NULL", caller, line);
+void assert_not_null(const void* real, const_string caller, int line) {
+    if (real == nullptr) {
+	CTEST_ERR("%s:%d  should not be nullptr", caller, line);
     }
 }
 
-void assert_true(int real, const char* caller, int line) {
+void assert_true(int real, const_string caller, int line) {
     if ((real) == 0) {
 	CTEST_ERR("%s:%d  should be true", caller, line);
     }
 }
 
-void assert_false(int real, const char* caller, int line) {
+void assert_false(int real, const_string caller, int line) {
     if ((real) != 0) {
 	CTEST_ERR("%s:%d  should be false", caller, line);
     }
 }
 
-void assert_fail(const char* caller, int line) {
+void assert_fail(const_string caller, int line) {
     CTEST_ERR("%s:%d  shouldn't come here", caller, line);
 }
 
@@ -486,14 +488,14 @@ static int suite_filter(struct ctest* t) {
 
 static uint64_t getCurrentTime() {
     struct timeval now;
-    gettimeofday(&now, NULL);
+    gettimeofday(&now, nullptr);
     uint64_t now64 = (uint64_t) now.tv_sec;
     now64 *= 1000000;
     now64 += ((uint64_t) now.tv_usec);
     return now64;
 }
 
-static void color_print(const char* color, const char* text) {
+static void color_print(const_string color, const_string text) {
     if (color_output)
 	printf("%s%s " ANSI_NORMAL "\n", color, text);
     else
@@ -513,7 +515,7 @@ static void *find_symbol(struct ctest *test, const char *fname)
     if (!symbol) {
 	//fprintf(stderr, ">>>> ERROR: %s\n", dlerror());
     }
-    // returns NULL on error
+    // returns nullptr on error
 
     free(symbol_name);
     return symbol;
@@ -631,7 +633,7 @@ int ctest_main(int argc, const char *argv[])
     }
     uint64_t t2 = getCurrentTime();
 
-    const char* color = (num_fail) ? ANSI_BRED : ANSI_GREEN;
+    const_string color = (num_fail) ? ANSI_BRED : ANSI_GREEN;
     char results[80];
     sprintf(results, "RESULTS: %d tests (%d ok, %d failed, %d skipped) ran in %" PRIu64 " ms", total, num_ok, num_fail, num_skip, (t2 - t1)/1000);
     color_print(color, results);

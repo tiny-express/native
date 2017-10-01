@@ -27,14 +27,8 @@
 #ifndef NATIVE_TYPE_H
 #define NATIVE_TYPE_H
 
-#define TRUE 1
-#define FALSE 0
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
-
-#ifndef NULL
-#define NULL 0
-#endif
 
 #include <cstddef>
 #include <cwchar>
@@ -47,6 +41,6 @@ typedef unsigned char byte;
 
 string stringDefault(string target);
 
-double numberDefaut(double target);
+double numberDefault(double target);
 
 #endif

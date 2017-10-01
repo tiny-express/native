@@ -86,10 +86,10 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 		return result;
 	}
 	auto **data = (char **)calloc(MAX_STRING_LENGTH, sizeof(char *));
-	const int target_length = lengthPointerChar(target);
-	char const_target[target_length + 1];
-	strncpy(const_target, target, (size_t) target_length);
-	const_target[ target_length ] = '\0';
+	const int targetLength = lengthPointerChar(target);
+	char const_target[targetLength + 1];
+	strncpy(const_target, target, (size_t) targetLength);
+	const_target[ targetLength ] = '\0';
 	char *item = strtok(const_target, delimiter);
 	register int count = 0;
 	while (item != nullptr) {
@@ -188,13 +188,13 @@ inline char *stringTrim(const char *target) {
  * @param prefix
  * @return true | false
  */
-inline bool stringStartswith(const char *target, const char *prefix) {
+inline boolean stringStartswith(const char *target, const char *prefix) {
 	if (target == nullptr || prefix == nullptr) {
 		return false;
 	}
-	int target_length = lengthPointerChar(target);
+	int targetLength = lengthPointerChar(target);
 	int prefix_length = lengthPointerChar(prefix);
-	if (target_length < prefix_length) {
+	if (targetLength < prefix_length) {
 		return false;
 	}
 	register int i;
@@ -213,18 +213,18 @@ inline bool stringStartswith(const char *target, const char *prefix) {
  * @param suffix
  * @return true | false
  */
-inline bool stringEndswith(const char *target, const char *suffix) {
+inline boolean stringEndswith(const char *target, const char *suffix) {
 	if (target == nullptr || suffix == nullptr) {
 		return false;
 	}
-	int target_length = lengthPointerChar(target);
+	int targetLength = lengthPointerChar(target);
 	int suffix_length = lengthPointerChar(suffix);
-	if (target_length < suffix_length) {
+	if (targetLength < suffix_length) {
 		return false;
 	}
 	register int i;
 	for (i = suffix_length - 1; i >= 0; i--) {
-		if (suffix[ i ] != target[ target_length - suffix_length + i ]) {
+		if (suffix[ i ] != target[ targetLength - suffix_length + i ]) {
 			return false;
 		}
 	}
@@ -240,32 +240,32 @@ inline bool stringEndswith(const char *target, const char *suffix) {
  * @return position
  */
 inline int stringIndex(const char *target, const char *subTarget, int times) {
-	if (isEmptyString((char*) target) || isEmptyString((char*) subTarget) || ( times <= 0 )) {
+	if (isEmptyString((string) target) || isEmptyString((string) subTarget) || ( times <= 0 )) {
 		return NOT_FOUND;
 	}
 	
-	int target_length = lengthPointerChar(target);
-	int subTarget_length = lengthPointerChar(subTarget);
+	int targetLength = lengthPointerChar(target);
+	int subTargetLength = lengthPointerChar(subTarget);
 	
-	if (target_length == 0 || subTarget_length == 0 || target_length < subTarget_length || ( times == 0 )) {
+	if (targetLength == 0 || subTargetLength == 0 || targetLength < subTargetLength || ( times == 0 )) {
 		return NOT_FOUND;
 	}
 
 #ifdef LINUX
 	register
 #endif
-    int index_target, index_subTarget, count_times = 0, position_result;
-	for (index_target = 0; index_target <= ( target_length - subTarget_length ); index_target++) {
-		if (target[ index_target ] != subTarget[ 0 ]) {
+    int indexTarget, indexSubTarget, count_times = 0, position_result;
+	for (indexTarget = 0; indexTarget <= ( targetLength - subTargetLength ); indexTarget++) {
+		if (target[ indexTarget ] != subTarget[ 0 ]) {
 			continue;
 		}
-		for (index_subTarget = 1; index_subTarget < subTarget_length; index_subTarget++) {
-			if (target[ index_target + index_subTarget ] != subTarget[ index_subTarget ]) {
+		for (indexSubTarget = 1; indexSubTarget < subTargetLength; indexSubTarget++) {
+			if (target[ indexTarget + indexSubTarget ] != subTarget[ indexSubTarget ]) {
 				break;
 			}
 		}
-		if (index_subTarget == subTarget_length) {
-			position_result = index_target;
+		if (indexSubTarget == subTargetLength) {
+			position_result = indexTarget;
 			count_times++;
 			if (count_times == times) {
 				return position_result;
@@ -286,14 +286,14 @@ inline char *stringRandom(char *target, int size) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	int target_length = lengthPointerChar(target);
+	int targetLength = lengthPointerChar(target);
 	auto *result = (char *)calloc((size_t) size + 1, sizeof(char));
 #ifdef LINUX
     register
 #endif
 	  int i;
 	for (i = 0; i < size; i++) {
-		result[ i ] = target[ rand() % target_length ];
+		result[ i ] = target[ rand() % targetLength ];
 	}
 	result[ size ] = '\0';
 	return result;
@@ -325,12 +325,12 @@ inline char *stringConcat(char *target, char *subTarget) {
 	if (isEmptyString(subTarget)) {
 		return strdup(target);
 	}
-	int target_length = lengthPointerChar(target);
-	int subTarget_length = lengthPointerChar(subTarget);
-	auto *result = (char *)calloc((size_t) target_length + subTarget_length + 1, sizeof(char));
-	memcpy(result, target, (size_t) target_length);
-	memcpy(result + target_length, subTarget, (size_t) subTarget_length);
-	result[ target_length + subTarget_length ] = '\0';
+	int targetLength = lengthPointerChar(target);
+	int subTargetLength = lengthPointerChar(subTarget);
+	auto *result = (char *)calloc((size_t) targetLength + subTargetLength + 1, sizeof(char));
+	memcpy(result, target, (size_t) targetLength);
+	memcpy(result + targetLength, subTarget, (size_t) subTargetLength);
+	result[ targetLength + subTargetLength ] = '\0';
 	return result;
 }
 
@@ -379,13 +379,12 @@ inline char *stringUpper(char *target) {
 		return nullptr;
 	}
 	char *result = strdup(target);
-	char *index = result;
-	while (*index) {
-		if (( 'a' <= *index ) && ( *index <= 'z' )) {
-			*index -= 32;
-		}
-		index++;
-	}
+    register char *index = result;
+    for (; *index; index++) {
+        if (( 'a' <= *index ) && ( *index <= 'z' )) {
+            *index = *index - 32;
+        }
+    }
 	return result;
 }
 
@@ -400,13 +399,12 @@ inline char *stringLower(char *target) {
 		return nullptr;
 	}
 	char *result = strdup(target);
-	char *index = result;
-	while (*index) {
-		if (( 'a' <= *index ) && ( *index <= 'z' )) {
-			*index += 32;
-		}
-		index++;
-	}
+    register char *index = result;
+    for (; *index; index++) {
+        if (( 'A' <= *index ) && ( *index <= 'Z' )) {
+            *index = *index + 32;
+        }
+    }
 	return result;
 }
 
@@ -425,13 +423,13 @@ inline char *stringTitle(char *target) {
 	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
 		*index -= 32;
 	}
-	char last_index = *index;
+	char lastIndex = *index;
 	index++;
 	for (; *index; index++) {
-		if (last_index == ' ' && 'a' <= *index && *index <= 'z') {
+		if (lastIndex == ' ' && 'a' <= *index && *index <= 'z') {
 			*index -= 32;
 		}
-		last_index = *index;
+		lastIndex = *index;
 	}
 	return result;
 }
@@ -446,8 +444,8 @@ inline char *stringStandardized(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char **segments = stringSplit(target, (char*) " ");
-	char *result = stringJoin(segments, (char*) " ");
+	char **segments = stringSplit(target, (string) " ");
+	char *result = stringJoin(segments, (string) " ");
 	result[lengthPointerChar(result) ] = '\0';
 	freePointerPointerChar(segments);
 	return result;
@@ -460,7 +458,7 @@ inline char *stringStandardized(char *target) {
  * @param target2
  * @return true | false
  */
-inline bool stringEquals(const char *target1, const char *target2) {
+inline boolean stringEquals(const char *target1, const char *target2) {
 	if (( target1 == nullptr) && ( target2 == nullptr)) {
 		return true;
 	}
@@ -477,16 +475,16 @@ inline bool stringEquals(const char *target1, const char *target2) {
  * @return string reversed
  */
 inline char *stringReverse(char *target) {
-	int target_length = lengthPointerChar(target);
-	auto *result = (char *) calloc((size_t) target_length + 1, sizeof(char));
+	int targetLength = lengthPointerChar(target);
+	auto *result = (char *) calloc((size_t) targetLength + 1, sizeof(char));
 #ifdef LINUX
 	register
 #endif
 	int index;
-	for (index = 0; index < target_length; index++) {
-		result[ index ] = target[ target_length - index - 1 ];
+	for (index = 0; index < targetLength; index++) {
+		result[ index ] = target[ targetLength - index - 1 ];
 	}
-	result[ target_length ] = '\0';
+	result[ targetLength ] = '\0';
 	return result;
 }
 

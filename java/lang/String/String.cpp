@@ -346,7 +346,7 @@ int String::length() const {
 
 // boolean String::matches(String regex) const {
 // 	int result = stringMatches(this->original, regex.toString());
-// 	return result == TRUE;
+// 	return result == true;
 // }
 
 String String::replace(char oldChar, char newChar) const {

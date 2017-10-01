@@ -28,7 +28,7 @@
 #include "../Test.hpp"
 
 TEST (KernelCommon, SegmentPointerChar) {
-	auto charArray = (char*) "Hello World";
+	auto charArray = (string) "Hello World";
 	int from = 6;
 	int to = 10;
 	char *result = segmentPointerChar(charArray, from, to);
@@ -36,7 +36,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("World", result);
 	free(result);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = 6;
 	to = 6;
 	char *result2 = segmentPointerChar(charArray, from, to);
@@ -44,7 +44,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("W", result2);
 	free(result2);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = 7;
 	to = 6;
 	char *result3 = segmentPointerChar(charArray, from, to);
@@ -52,7 +52,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result3);
 	free(result3);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = -1;
 	to = -1;
 	char *result4 = segmentPointerChar(charArray, from, to);
@@ -60,7 +60,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result4);
 	free(result4);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = -10;
 	to = -2;
 	char *result5 = segmentPointerChar(charArray, from, to);
@@ -68,7 +68,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result5);
 	free(result5);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = -3;
 	to = 4;
 	char *result6 = segmentPointerChar(charArray, from, to);
@@ -76,7 +76,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result6);
 	free(result6);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = 0;
 	to = 15;
 	char *result7 = segmentPointerChar(charArray, from, to);
@@ -84,7 +84,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("Hello World", result7);
 	free(result7);
 	
-	charArray = (char*) "Hello World";
+	charArray = (string) "Hello World";
 	from = 15;
 	to = 20;
 	char *result8 = segmentPointerChar(charArray, from, to);
@@ -100,7 +100,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result9);
 	free(result9);
 	
-	charArray = (char*) "";
+	charArray = (string) "";
 	from = 1;
 	to = 10;
 	char *result10 = segmentPointerChar(charArray, from, to);
@@ -108,7 +108,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result10);
 	free(result10);
 	
-	charArray = (char*) "\0";
+	charArray = (string) "\0";
 	from = 0;
 	to = 1;
 	char *result11 = segmentPointerChar(charArray, from, to);
@@ -116,7 +116,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result11);
 	free(result11);
 	
-	charArray = (char*) "\0";
+	charArray = (string) "\0";
 	from = 0;
 	to = 0;
 	char *result12 = segmentPointerChar(charArray, from, to);
@@ -124,7 +124,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	ASSERT_STR("", result12);
 	free(result12);
 	
-	charArray = (char*) "test";
+	charArray = (string) "test";
 	from = -1;
 	to = -1;
 	char *result13 = segmentPointerChar(charArray, from, to);
@@ -134,7 +134,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 }
 
 TEST (KernelCommon, SegmentPointerConstChar) {
-	auto charArray = (char*) "Hello World";
+	auto charArray = (string) "Hello World";
 	int from = 6;
 	int to = 6;
 	char *result = segmentPointerChar(charArray, from, to);
@@ -168,7 +168,7 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 	char **result = segmentPointerPointerChar(target, from, to);
 	
 	ASSERT_EQUAL(4, lengthPointerPointerChar(result));
-	char *join = stringJoin(result, (char*) "|");
+	char *join = stringJoin(result, (string) "|");
 	ASSERT_STR("brown|fox|jumps|over", join);
 	free(join);
 	free(result);

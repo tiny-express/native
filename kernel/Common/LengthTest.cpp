@@ -29,15 +29,15 @@
 #include "../Test.hpp"
 
 TEST (KernelCommon, LengthPointerChar) {
-	auto data = (char*) "Hello world";
+	auto data = (string) "Hello world";
 	ASSERT_EQUAL(11, lengthPointerChar(data));
 	
 	ASSERT_EQUAL(11, lengthPointerChar("Hello world"));
 	
-	data = (char*) "";
+	data = (string) "";
 	ASSERT_EQUAL(0, lengthPointerChar(data));
 	
-	data = (char*) "\0";
+	data = (string) "\0";
 	ASSERT_EQUAL(0, lengthPointerChar(data));
 	
 	data = nullptr;
@@ -117,9 +117,9 @@ TEST (KernelCommon, IsEmpty) {
 	char *target1 = nullptr;
 	ASSERT_TRUE(isEmptyString(target1));
 
-    auto target2 = (char*) "";
+    auto target2 = (string) "";
 	ASSERT_TRUE(isEmptyString(target2));
 
-	char *target3 = (char*) "abcd";
+	char *target3 = (string) "abcd";
 	ASSERT_FALSE(isEmptyString(target3));
 }

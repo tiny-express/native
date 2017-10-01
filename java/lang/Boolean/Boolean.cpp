@@ -157,7 +157,7 @@ string Boolean::toString() const {
  * @return String
  */
 string Boolean::toString(const boolean &target) {
-	if (target == True) {
+	if (target) {
 		return (string) "true";
 	}
 	return (string) "false";

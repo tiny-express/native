@@ -138,7 +138,7 @@ TEST (JavaUtil, RandomNextBoolean) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		boolean generatedBool = random1.nextBoolean();
-		ASSERT_TRUE(generatedBool == TRUE || generatedBool == FALSE);
+		ASSERT_TRUE(generatedBool == true || generatedBool == false);
 	}
 }
 

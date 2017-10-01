@@ -79,7 +79,7 @@ TEST(JavaUtilConcurrent, SemaphoreRelease) {
 TEST(JavaUtilConcurrent, SemaphoreAcquireNotPassingPermits) {
     const int expectPermits = 0;
     Semaphore semaphoreObject;
-    std::thread testThread(SemaphoreTestThread, 1000, 1, &semaphoreObject);
+    std::thread testThread(SemaphoreTestThread, 100, 1, &semaphoreObject);
     semaphoreObject.acquire();
     if (testThread.joinable()) {
         testThread.join();
@@ -95,7 +95,7 @@ TEST(JavaUtilConcurrent, SemaphoreAcquirePassingPermits) {
     std::vector<std::thread> testThreads(threadCount);
     for (auto& it : testThreads) {
         it = std::move(std::thread(SemaphoreTestThread,
-                                   1000, 1, &semaphoreObject));
+                                   100, 1, &semaphoreObject));
     }
 
     semaphoreObject.acquire(2);
@@ -113,7 +113,7 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
     const int expectPermits = 1;
     Semaphore semaphoreObject;
     std::thread testThread(SemaphoreTestThread,
-                           1000, 1, &semaphoreObject);
+                           100, 1, &semaphoreObject);
     boolean result = semaphoreObject.tryAcquire();
 
     if (testThread.joinable()) {
@@ -127,10 +127,10 @@ TEST(JavaUtilConcurrent, SemaphoreTryAcquireNotPassingPermits) {
 TEST(JavaUtilConcurrent, SemaphoreTryAcquirePassingPermitsWithTimeout) {
     const int expectPermits = 0;
     Semaphore semaphoreObject;
-    std::thread testThread(SemaphoreTestThread2, 1000, 2, &semaphoreObject);
+    std::thread testThread(SemaphoreTestThread2, 100, 2, &semaphoreObject);
 
     semaphoreObject.release();
-    bool result = semaphoreObject.tryAcquire(3, 10000);
+    bool result = semaphoreObject.tryAcquire(3, 1000);
 
     if (testThread.joinable()) {
         testThread.join();

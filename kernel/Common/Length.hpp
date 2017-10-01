@@ -27,6 +27,8 @@
 #ifndef NATIVE_COMMON_LENGTH_HPP
 #define NATIVE_COMMON_LENGTH_HPP
 
+#include "../Type.hpp"
+
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
@@ -54,7 +56,7 @@ P_P_LEN(Char, char);
  * @param input
  * @return TRUE or FALSE
  */
-inline bool isEmptyString(const char *input) {
+inline boolean isEmptyString(const char *input) {
 	return lengthPointerChar(input) == 0;
 }
 

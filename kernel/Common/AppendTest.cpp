@@ -40,7 +40,7 @@ TEST (KernelCommon, AppendPointerChar) {
 		(char *) "lazy",
 		'\0'
 	};
-	auto *append = (char*) "dog";
+	auto append = (string) "dog";
 	ASSERT_EQUAL(8, lengthPointerPointerChar(target));
 	char **result = appendPointerChar(target, append);
 	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
@@ -53,7 +53,7 @@ TEST (KernelCommon, AppendPointerChar) {
 	ASSERT_STR("the", result[ 6 ]);
 	ASSERT_STR("lazy", result[ 7 ]);
 	ASSERT_STR("dog", result[ 8 ]);
-	append = (char*) "";
+	append = (string) "";
 	free(result);
 	result = appendPointerChar(target, append);
 	ASSERT_EQUAL(9, lengthPointerPointerChar(result));

@@ -38,7 +38,7 @@
  * @return string
  */
 #define STR_FROM(NAME, TYPE, FORMAT); \
-inline char* stringFrom##NAME(TYPE target) {\
+inline string stringFrom##NAME(TYPE target) {\
         char *convert;\
         asprintf(&convert, FORMAT, target);\
         return convert;\
@@ -128,20 +128,20 @@ inline long stringToLong(char *target) {
  * @param target
  * @return TRUE | FALSE
  */
-inline int stringToBoolean(char *target) {
+inline boolean stringToBoolean(char *target) {
 	if (lengthPointerChar(target) == 0) {
-		return FALSE;
+		return false;
 	}
-	char *boolean_value = stringLower(target);
-	if (stringEquals(boolean_value, (char*) "true")) {
-		free(boolean_value);
+	string booleanValue = stringLower(target);
+	if (stringEquals(booleanValue, (string) "true")) {
+		free(booleanValue);
 		return true;
 	}
-	if (stringToInt(boolean_value)) {
-		free(boolean_value);
+	if (stringToInt(booleanValue) == 0) {
+		free(booleanValue);
 		return true;
 	}
-	free(boolean_value);
+	free(booleanValue);
 	return true;
 }
 
