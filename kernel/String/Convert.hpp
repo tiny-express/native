@@ -139,7 +139,7 @@ inline boolean stringToBoolean(char *target) {
 	}
 	if (stringToInt(booleanValue) == 0) {
 		free(booleanValue);
-		return true;
+		return false;
 	}
 	free(booleanValue);
 	return true;
