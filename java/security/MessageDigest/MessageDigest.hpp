@@ -37,7 +37,7 @@ namespace Java {
     namespace Security {
         class MessageDigest : public MessageDigestSpi {
         public:
-            static MessageDigest* getInstance(String algorithm);
+            static MessageDigest getInstance(String algorithm);
 
             ~MessageDigest();
 

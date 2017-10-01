@@ -44,19 +44,10 @@ long GetTickCount() {
 
 TEST(JavaSecurity, Constructor) {
     {
-        MessageDigest* md = MessageDigest::getInstance("MD5");
-        ASSERT_TRUE(md != NULL);
-        if (md)
-            delete md;
-    }
-
-    {
         String expect = "MDx not found";
         String result;
         try {
-            MessageDigest* md = MessageDigest::getInstance("MDx");
-            if (md)
-                delete md;
+            MessageDigest md = MessageDigest::getInstance("MDx");
         } catch (NoSuchAlgorithmException e) {
             result = e.getMessage().toString();
         }
@@ -70,40 +61,31 @@ TEST(JavaSecurity, MD5) {
                      0x2f, 0xca, 0x73, 0x6a, 0x5c, 0xb3, 0x35};
     String input = "the quick brown fox jumps over the lazy dog";
     byte* result = NULL;
-    MessageDigest* md5 = MessageDigest::getInstance("MD5");
+    MessageDigest md5 = MessageDigest::getInstance("MD5");
     int digestLength = 0;
 
-    if (md5) {
-        digestLength = md5->getDigestLength();
-        result = new byte[digestLength]();
 
-        md5->update((byte*)input.toString(), input.getSize());
-        md5->digest(result, digestLength);
-    }
+    digestLength = md5.getDigestLength();
+    result = new byte[digestLength]();
+
+    md5.update((byte*)input.toString(), input.getSize());
+    md5.digest(result, digestLength);
 
     ASSERT_DATA(expect,
                 sizeof(expect),
                 result,
                 (size_t)digestLength);
 
-    if (md5) {
-        md5->reset();
-        md5->update((byte*)input.toString(), input.getSize());
-        md5->digest(result, digestLength);
+    md5.reset();
+    md5.update((byte*)input.toString(), input.getSize());
+    md5.digest(result, digestLength);
 
-        ASSERT_DATA(expect,
-                    sizeof(expect),
-                    result,
-                    (size_t)digestLength);
-    }
+    ASSERT_DATA(expect,
+                sizeof(expect),
+                result,
+                (size_t)digestLength);
 
-    if (md5) {
-        delete md5;
-    }
-
-    if (result) {
-        delete[] result;
-    }
+    delete[] result;
 }
 
 TEST(JavaSecurity, MD5MultiUpdate) {
@@ -114,35 +96,31 @@ TEST(JavaSecurity, MD5MultiUpdate) {
             " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
             " magna ultricies non.";
     byte* result = NULL;
-    MessageDigest* md5 = MessageDigest::getInstance("MD5");
+    MessageDigest md5 = MessageDigest::getInstance("MD5");
     int digestLength = 0;
 
-    if (md5) {
-        digestLength = md5->getDigestLength();
-        result = new byte[digestLength]();
+    digestLength = md5.getDigestLength();
+    result = new byte[digestLength]();
 
-        srand((unsigned int)GetTickCount());
-        int offset = 0;
-        while (offset < input.getSize()) {
-            int range = input.getSize() - offset;
-            int size = rand() % range;
-            if (size < 10)
-                size = range;
+    srand((unsigned int)GetTickCount());
+    int offset = 0;
+    while (offset < input.getSize()) {
+        int range = input.getSize() - offset;
+        int size = rand() % range;
+        if (size < 10)
+            size = range;
 
-            md5->update((byte*)input.toString() + offset, size);
-            offset += size;
-        }
-        md5->digest(result, digestLength);
-        delete md5;
+        md5.update((byte*)input.toString() + offset, size);
+        offset += size;
     }
+    md5.digest(result, digestLength);
 
     ASSERT_DATA(expect,
                 sizeof(expect),
                 result,
                 (size_t)digestLength);
 
-    if (result)
-        delete[] result;
+    delete[] result;
 }
 
 TEST(JavaSecurity, SHA1) {
@@ -151,25 +129,20 @@ TEST(JavaSecurity, SHA1) {
                       0xa0, 0xf1 };
     String input = "the quick brown fox jumps over the lazy dog";
     byte* result = NULL;
-    MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+    MessageDigest sha1 = MessageDigest::getInstance("SHA1");
     int digestLength = 0;
 
-    if (sha1) {
-        digestLength = sha1->getDigestLength();
-        result = new byte[digestLength];
+    digestLength = sha1.getDigestLength();
+    result = new byte[digestLength];
 
-        sha1->update((byte*)input.toString(), input.getSize());
-        sha1->digest(result, digestLength);
-        delete sha1;
-    }
+    sha1.update((byte*)input.toString(), input.getSize());
+    sha1.digest(result, digestLength);
 
     ASSERT_DATA(expect,
                 sizeof(expect),
                 result,
                 (size_t)digestLength);
-
-    if (result)
-        delete[] result;
+    delete[] result;
 }
 
 TEST(JavaSecurity, SHA1MultiUpdate) {
@@ -181,111 +154,93 @@ TEST(JavaSecurity, SHA1MultiUpdate) {
             " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
             " magna ultricies non.";
     byte* result = NULL;
-    MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+    MessageDigest sha1 = MessageDigest::getInstance("SHA1");
     int digestLength = 0;
 
-    if (sha1) {
-        digestLength = sha1->getDigestLength();
-        result = new byte[digestLength]();
+    digestLength = sha1.getDigestLength();
+    result = new byte[digestLength]();
 
-        srand((unsigned int)GetTickCount());
-        int offset = 0;
-        while (offset < input.getSize()) {
-            int range = input.getSize() - offset;
-            int size = rand() % range;
-            if (size < 10)
-                size = range;
-            sha1->update((byte*)input.toString() + offset, size);
-            offset += size;
-        }
-        sha1->digest(result, digestLength);
-        delete sha1;
+    srand((unsigned int)GetTickCount());
+    int offset = 0;
+    while (offset < input.getSize()) {
+        int range = input.getSize() - offset;
+        int size = rand() % range;
+        if (size < 10)
+            size = range;
+        sha1.update((byte*)input.toString() + offset, size);
+        offset += size;
     }
+    sha1.digest(result, digestLength);
 
     ASSERT_DATA(expect,
                 sizeof(expect),
                 result,
                 (size_t)digestLength);
 
-    if (result)
-        delete[] result;
+    delete[] result;
 }
 
 TEST(JavaSecurity, GetAlgorithms) {
     {
-        MessageDigest* md5 = MessageDigest::getInstance("MD5");
+        MessageDigest md5 = MessageDigest::getInstance("MD5");
         String expect = "MD5";
         String result;
 
-        if (md5) {
-            result = md5->getAlgorithm();
-            delete md5;
-        }
-
+        result = md5.getAlgorithm();
         ASSERT_STR(expect.toString(), result.toString());
     }
 
     {
-        MessageDigest* sha1 = MessageDigest::getInstance("SHA1");
+        MessageDigest sha1 = MessageDigest::getInstance("SHA1");
         String expect = "SHA1";
         String result;
 
-        if (sha1) {
-            result = sha1->getAlgorithm();
-            delete sha1;
-        }
-
+        result = sha1.getAlgorithm();
         ASSERT_STR(expect.toString(), result.toString());
     }
 }
 
 TEST(JavaSecurity, Exception) {
     {
-        MessageDigest *md5 = MessageDigest::getInstance("MD5");
+        MessageDigest md5 = MessageDigest::getInstance("MD5");
         String expect = "No input buffer given";
         String result;
 
         try {
-            md5->update(NULL, 0);
+            md5.update(NULL, 0);
         } catch (IllegalArgumentException e) {
             result = e.getMessage().toString();
         }
 
         ASSERT_STR(expect.toString(), result.toString());
-
-        delete md5;
     }
 
     {
-        MessageDigest *sha1 = MessageDigest::getInstance("SHA1");
+        MessageDigest sha1 = MessageDigest::getInstance("SHA1");
         String expect = "No output buffer given";
         String result;
 
         try {
-            sha1->digest(NULL, 1);
+            sha1.digest(NULL, 1);
         } catch (IllegalArgumentException e) {
             result = e.getMessage().toString();
         }
 
         ASSERT_STR(expect.toString(), result.toString());
-
-        delete sha1;
     }
 
     {
-        MessageDigest *sha1 = MessageDigest::getInstance("SHA1");
+        MessageDigest sha1 = MessageDigest::getInstance("SHA1");
         String expect = "Output buffer too small";
         String result;
 
         try {
             byte buf[1] = { 0 };
-            sha1->digest(buf, sizeof(buf));
+            sha1.digest(buf, sizeof(buf));
         } catch (IllegalArgumentException e) {
             result = e.getMessage().toString();
         }
 
         ASSERT_STR(expect.toString(), result.toString());
-
-        delete sha1;
     }
 }

@@ -32,17 +32,16 @@
 
 using namespace Java::Security;
 
-MessageDigest *MessageDigest::getInstance(String algorithm) {
+MessageDigest MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
         MessageDigestSpi* spi = new MD5MessageDigest();
-        return new MessageDigest(spi, algorithm);
+        return MessageDigest(spi, algorithm);
     } else if (algorithm == "SHA1") {
         MessageDigestSpi* spi = new SHA1MessageDigest();
-        return new MessageDigest(spi, algorithm);
+        return MessageDigest(spi, algorithm);
     } else {
         throw NoSuchAlgorithmException(algorithm + " not found");
     }
-    return NULL;
 }
 
 MessageDigest::~MessageDigest() {
