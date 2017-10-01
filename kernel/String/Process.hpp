@@ -379,11 +379,12 @@ inline char *stringUpper(char *target) {
 		return nullptr;
 	}
 	char *result = strdup(target);
-	register char *index = result;
-	for (; *index; index++) {
+	char *index = result;
+	while (*index) {
 		if (( 'a' <= *index ) && ( *index <= 'z' )) {
-			*index -= - 32;
+			*index -= 32;
 		}
+		index++;
 	}
 	return result;
 }
@@ -399,11 +400,12 @@ inline char *stringLower(char *target) {
 		return nullptr;
 	}
 	char *result = strdup(target);
-	register char *index = result;
-	for (; *index; index++) {
-		if (( 'A' <= *index ) && ( *index <= 'Z' )) {
+	char *index = result;
+	while (*index) {
+		if (( 'a' <= *index ) && ( *index <= 'z' )) {
 			*index += 32;
 		}
+		index++;
 	}
 	return result;
 }
