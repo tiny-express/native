@@ -37,7 +37,7 @@ String URLDecoder::decode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
     String &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string decodedString = url_decode(source.toString());
+        string decodedString = urlDecode(source.toString());
         String result(decodedString);
         free(decodedString);
         return result;

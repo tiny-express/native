@@ -27,9 +27,10 @@
 #ifndef NATIVE_JAVA_LANG_BYTE_HPP
 #define NATIVE_JAVA_LANG_BYTE_HPP
 
+#include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
 #include "../Integer/Integer.hpp"
-#include "../../../kernel/type.h"
+#include "../../../kernel/Type.hpp"
 
 namespace Java {
 	namespace Lang {
@@ -434,8 +435,8 @@ namespace Java {
 
             Array<Bytes> cacheInit() {
                 Array<Bytes> cacheArray;
-                int index = 0;
-                for (index; index < 256; index++) {
+                int index;
+                for (index = 0; index < 256; index++) {
 					cacheArray.push(Bytes(static_cast<byte>(index)));
 				}
                 return cacheArray;

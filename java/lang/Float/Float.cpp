@@ -339,7 +339,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     }
 
     sizeOfFloatInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
-                                     + sizeOfFractionPartNormalizeForm;
+                                    + sizeOfFractionPartNormalizeForm;
 
     indexFirstBit1FloatInputNormalizeForm = 1;
     for (indexOfFor = 0; indexOfFor <= sizeOfFloatInputNormalizeForm; indexOfFor++) {
@@ -500,7 +500,7 @@ int Float::floatToRawIntBits(float floatInput) {
             tempValue = 0;
         }
         resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue
-                                    * (int) pow(2, exponent);
+                                                            * (int) pow(2, exponent);
         exponent--;
     }
 

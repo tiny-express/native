@@ -115,7 +115,7 @@ for (index = 0; index < array_length; index++) {
 - C99 mode - Declaring variable inside loop parameters can not be allowed here
 - Use calculation in loop parameters
 ```c
-for (int index = 0; index < length_pointer_char(array); index++) {
+for (int index = 0; index < lengthPointerChar(array); index++) {
     // doSomething()
 }
 ```

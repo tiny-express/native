@@ -3,6 +3,9 @@ dist: trusty
 language: cpp
 os:
 - linux
+- osx
+services:
+- docker
 compiler:
 - gcc
 addons:
@@ -11,25 +14,21 @@ addons:
     - ubuntu-toolchain-r-test
     - llvm-toolchain-precise-3.6
     packages:
-    - g++-4.8
+    - valgrind
     - lcov
 before_script:
-- export CC=gcc-4.8
-- export CXX=g++-4.8
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./misc/install_linux; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./misc/install_osx; fi
-- chmod +x misc/checkstyle.sh
+- export CC=gcc
+- export CXX=g++
 - cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
 script:
 - make native_test -j8
 - ./misc/memory_check
-- make native && sudo make install && sudo ldconfig
-- cd examples && ./build
 after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
 - ./misc/build_docker.sh
 notifications:
+  email: false
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
 env:
   global:

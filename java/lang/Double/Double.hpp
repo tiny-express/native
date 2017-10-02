@@ -102,9 +102,9 @@ static constexpr double initMinNormalDouble() noexcept {
 }
 
 namespace Java {
-	namespace Lang {
-		class Double : public Number {
-         public:
+    namespace Lang {
+        class Double : public Number {
+        public:
             /**
              * The number of logical bits in the significand of a double number,
              * including the implicit bit.
@@ -176,13 +176,13 @@ namespace Java {
              */
             static constexpr double MIN_VALUE = initDoubleMinValue();  // 4.940656458412465e-324
 
-          public:
+        public:
             Double();
-			Double(double original);
-			Double(const Double &target);
-			~Double();
+            Double(double original);
+            Double(const Double &target);
+            ~Double();
 
-          public:
+        public:
             /**
              * Adds two operands
              *
@@ -274,7 +274,7 @@ namespace Java {
              * @return boolean
              */
             boolean operator||(const Double &target) const;
-				
+
             /**
              * Simple assignment operator,
              * Assigns values from right side operands
@@ -617,6 +617,6 @@ namespace Java {
             */
             static String longBitsToBinary64StringType(long longBitsInput);
         };
-	}  // namespace Lang
+    }  // namespace Lang
 }  // namespace Java
 #endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP_

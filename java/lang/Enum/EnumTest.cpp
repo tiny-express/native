@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Enum.hpp"
 
 using namespace Java::Lang;
@@ -46,4 +43,11 @@ TEST (JavaLang, EnumGetOrdinal) {
 	
 	int expectedValue = 18;
 	ASSERT_EQUAL(expectedValue, validEnum.getOrdinal());
+}
+
+TEST (JavaLang, EnumToString) {
+	// Given valid enum and name to test getOrdinal()
+	Enum<int> validEnum = Enum<int>("validName", 18);
+
+	ASSERT_STR("18", validEnum.toString());
 }
