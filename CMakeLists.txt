@@ -106,6 +106,14 @@ file(GLOB_RECURSE TESTS_CPP
         javax/**/*Test.cpp
         )
 
+# Only C++ unit benchmark files
+file(GLOB_RECURSE BENCHMARK_CPP
+        kernel/**/*Benchmark.cpp
+        java/**/*Benchmark.cpp
+        java/**/**/*Benchmark.cpp
+        javax/**/*Benchmark.cpp
+        )
+
 # Remove all test files within cpp files
 foreach (test_cpp_file ${TESTS_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
@@ -113,6 +121,12 @@ endforeach ()
 
 # Create test binary for testing
 add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
+
+# Create benchmark binary
+add_executable(${PROJECT_NAME}_benchmark ${BENCHMARK_CPP} ${SOURCES_CPP} benchmark/benchmark.cpp)
+
+# Link google benchmark library
+target_link_libraries(${PROJECT_NAME}_benchmark ${PROJECT_SOURCE_DIR}/benchmark/benchmark/src/libbenchmark.a)
 
 # Create native library for static linking
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
