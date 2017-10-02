@@ -16,7 +16,4 @@ Testing
 /native
 /libnative*
 /test*
-/logging
-/json
-main
-main.o
+main*
