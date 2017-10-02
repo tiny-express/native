@@ -12,6 +12,8 @@ var searchData=
   ['charsequence_2ehpp',['CharSequence.hpp',['../CharSequence_8hpp.html',1,'']]],
   ['classcastexception_2ecpp',['ClassCastException.cpp',['../ClassCastException_8cpp.html',1,'']]],
   ['classcastexception_2ehpp',['ClassCastException.hpp',['../ClassCastException_8hpp.html',1,'']]],
+  ['clienterrorexception_2ecpp',['ClientErrorException.cpp',['../ClientErrorException_8cpp.html',1,'']]],
+  ['clienterrorexception_2ehpp',['ClientErrorException.hpp',['../ClientErrorException_8hpp.html',1,'']]],
   ['cloneable_2ecpp',['Cloneable.cpp',['../Cloneable_8cpp.html',1,'']]],
   ['cloneable_2ehpp',['Cloneable.hpp',['../Cloneable_8hpp.html',1,'']]],
   ['collection_2ecpp',['Collection.cpp',['../Collection_8cpp.html',1,'']]],

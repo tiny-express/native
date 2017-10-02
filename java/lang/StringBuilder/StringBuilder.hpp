@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRINGBUILDER_HPP
 #define NATIVE_JAVA_LANG_STRINGBUILDER_HPP
 
+#include "../../../kernel/Common.hpp"
 #include "../../Lang.hpp"
 #include <initializer_list>
 

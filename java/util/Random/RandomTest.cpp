@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
@@ -141,7 +138,7 @@ TEST (JavaUtil, RandomNextBoolean) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		boolean generatedBool = random1.nextBoolean();
-		ASSERT_TRUE(generatedBool == TRUE || generatedBool == FALSE);
+		ASSERT_TRUE(generatedBool == true || generatedBool == false);
 	}
 }
 

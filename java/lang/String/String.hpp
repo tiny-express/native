@@ -27,6 +27,9 @@
 #ifndef JAVA_LANG_STRING_STRING_HPP_
 #define JAVA_LANG_STRING_STRING_HPP_
 
+#include "../../../kernel/String.hpp"
+#include "../../../kernel/Common.hpp"
+
 #include <typeinfo>
 #include <regex>
 #include <string>
@@ -41,13 +44,23 @@ using namespace Java::IO;
 
 namespace Java {
 	namespace Lang {
-        class StringBuilder;
-        class StringBuffer;
-        class Short;
-        class Integer;
-        class Long;
-        class Float;
-        class Double;
+
+#define STRING_OPERATOR_PLUS  \
+		if (newLength >= this->capacity) {\
+			this->capacity = newLength << 1;\
+			this->original = (string) realloc(this->original, this->capacity);\
+		}\
+		memcpy(&this->original[this->size], &targetValue[0], targetLength);\
+		this->original[newLength] = '\0';\
+		this->size = newLength;
+
+		class StringBuilder;
+		class StringBuffer;
+		class Short;
+		class Integer;
+		class Long;
+		class Float;
+		class Double;
 
 		class String :
 				public Object,
@@ -56,7 +69,8 @@ namespace Java {
 				public virtual CharSequence {
 		private:
 			string original;
-			int size = 0;
+			int size;
+			int capacity;
             mutable int hash = 0;
 
 		public:
@@ -313,7 +327,6 @@ namespace Java {
              */
 			String concat(String target);
 
-
             /**
              * Find substring inside this String
              *
@@ -379,7 +392,7 @@ namespace Java {
 					return true;
 				}
 				if (instanceof<String>(anObject)) {
-					return (boolean) string_equals(original, anObject.toString());
+					return (boolean) stringEquals(original, anObject.toString());
 				}
 				return false;
 			}
@@ -891,100 +904,151 @@ namespace Java {
 
 		public:
 			/**
-			 * Determine if two String is equal
-			 *
-			 * @param target
-			 * @return true if this String is equal to target; false otherwise
-			 */
-			boolean operator==(const String &target) const;
-
-            /**
-             * Determine if two String is not equal
-             *
-             * @param target
-             * @return true if this String is different from target; false otherwise
-             */
-			boolean operator!=(const String &target) const;
-
-            /**
-             * Determine if this String is smaller than another String
-             *
-             * @param target
-             * @return true if this String is smaller than target; false otherwise
-             */
-			boolean operator<(const String &target) const;
-
-            /**
-             * Determine if this String is greater than another String
-             *
-             * @param target
-             * @return true if this String is greater than target; false otherwise
-             */
-			boolean operator>(const String &target) const;
-
-            /**
-             * Determine if this String is smaller than or equal to another String
-             *
-             * @param target
-             * @return true if this String is smaller than or equal to target; false otherwise
-             */
-			boolean operator<=(const String &target) const;
-
-            /**
-             * Determine if this String is greater than or equal to another String
-             *
-             * @param target
-             * @return true if this String is greater than or equal to target; false otherwise
-             */
-			boolean operator>=(const String &target) const;
-
-            /**
-             * Add this String with string
-             *
-             * @param target
-             * @return a String contain value of this String and target string
-             */
-			String operator+(const string &target);
-
-            /**
              * Add two String
              *
              * @param target
              * @return a String contain value of this String and target String
              */
-			String operator+(const String &target);
+			inline String operator+(const string &target) {
+				auto targetValue = (string) target;
+				int targetLength = lengthPointerChar((string) target);
+				int newLength = this->size + targetLength;
+				STRING_OPERATOR_PLUS
+				return this->original;
+			}
 
-            /**
-             * Assign value from target to this String
+			/**
+             * Add two String
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target String
              */
-			String &operator=(const String &target);
+			inline String operator+(const String &target) {
+				string targetValue = target.original;
+				int targetLength = target.size;
+				int newLength = this->size + target.size;
+				STRING_OPERATOR_PLUS
+				return this->original;
+			}
 
-            /**
-             * Add target String to this String and assign value to this String
+			/**
+             * Add this String with string
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target string
              */
-			String &operator+=(const String &target);
+			inline String &operator+=(const String &target) {
+				string targetValue = target.original;
+				int targetLength = target.size;
+				int newLength = this->size + target.size;
+				STRING_OPERATOR_PLUS
+				return *this;
+			}
 
-            /**
-             * Add target char to this String and assign value to this String
+			/**
+             * Add two String
              *
              * @param target
-             * @return a reference to this String
+             * @return a String contain value of this String and target String
              */
-			String &operator+=(const char &target);
+			inline String &operator+=(const_string target) {
+				auto targetValue = (string) target;
+				int targetLength = lengthPointerChar((string) target);
+				int newLength = this->size + targetLength;
+				STRING_OPERATOR_PLUS
+				return *this;
+			}
 
-            /**
-             * Add target string to this String and assign value to this String
+			/**
+            * Add target char to this String and assign value to this String
+            *
+            * @param target
+            * @return a reference to this String
+            */
+			inline String &operator+=(const char &target) {
+				string pointerHolder = this->original;
+				stringAppend(&this->original, target);
+				this->size++;
+				this->capacity = this->size;
+				free(pointerHolder);
+				return *this;
+			}
+
+			/**
+			 * Determine if two String is equal
+			 *
+			 * @param target
+			 * @return true if this String is equal to target; false otherwise
+			 */
+			inline boolean operator==(const String &target) const {
+				return stringEquals(this->original, target.toString()) != 0;
+			}
+
+			/**
+            * Assign value from target to this String
+            *
+            * @param target
+            * @return a reference to this String
+            */
+			inline String &operator=(const String &target) {
+				if (this->original != nullptr) {
+					free(this->original);
+				}
+				this->original = strdup(target.original);
+				this->size = target.size;
+				this->capacity = target.capacity;
+				return *this;
+			}
+
+			/**
+            * Determine if two String is not equal
+            *
+            * @param target
+            * @return true if this String is different from target; false otherwise
+            */
+			inline boolean operator!=(const String &target) const {
+				return !this->operator==(target);
+			}
+
+			/**
+            * Determine if this String is smaller than another String
+            *
+            * @param target
+            * @return true if this String is smaller than target; false otherwise
+            */
+			inline boolean operator<(const String &target) const {
+				return strcmp(this->original, target.toString()) < 0;
+			}
+
+			/**
+             * Determine if this String is greater than another String
              *
              * @param target
-             * @return a reference to this String
+             * @return true if this String is greater than target; false otherwise
              */
-			String &operator+=(const_string target);
+			inline boolean operator>(const String &target) const {
+				return strcmp(this->original, target.toString()) > 0;
+			}
+
+			/**
+            * Determine if this String is smaller than or equal to another String
+            *
+            * @param target
+            * @return true if this String is smaller than or equal to target; false otherwise
+            */
+			inline boolean operator<=(const String &target) const {
+				return strcmp(this->original, target.toString()) <= 0;
+			}
+
+			/**
+             * Determine if this String is greater than or equal to another String
+             *
+             * @param target
+             * @return true if this String is greater than or equal to target; false otherwise
+             */
+			inline boolean operator>=(const String &target) const {
+				return strcmp(this->original, target.toString()) >= 0;
+			}
 
 		public:
             /**
@@ -998,15 +1062,14 @@ namespace Java {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                String inputString(format);
-                string inputStringPtr = inputString.toString();
-                int inputStringLength = inputString.getSize();
+                string inputStringPtr = format.toString();
+                int inputStringLength = format.getSize();
                 int inputStringOffset = 0;
                 int errorCode = 0;
                 regex_t regex;
 
                 errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
-                while (errorCode == 0 && inputStringOffset < inputString.getSize()) {
+                while (errorCode == 0 && inputStringOffset < format.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
                     if (errorCode != 0) {
@@ -1023,7 +1086,7 @@ namespace Java {
 
                     if (matchedStringLength > 0) {
                         String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                        result += String::printObject(matchedString, value);
+                        result += printObject(matchedString, value);
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                             String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
@@ -1055,10 +1118,19 @@ namespace Java {
             static String format(const String& format);
 
 		public:
-			friend std::ostream &operator<<(std::ostream &os, const String &target) {
+
+			/**
+			 * Output string value as stream
+			 *
+			 * @param os
+			 * @param target
+			 * @return
+			 */
+			inline friend std::ostream &operator<<(std::ostream &os, const String &target) {
 				os << target.original;
 				return os;
 			}
+
 			/**
 			 * Add const_string and String
 			 *
@@ -1066,9 +1138,8 @@ namespace Java {
 			 * @param target2
 			 * @return a String contain value of target1 and target2
 			 */
-			friend String operator+(const_string target1, String const &target2) {
-				String result;
-				result = target1;
+			inline friend String operator+(String const &target1, String const &target2) {
+				String result = target1;
 				result += target2;
 				return result;
 			}
@@ -1088,7 +1159,7 @@ namespace Java {
                         result += lastChar;
                         break;
                     default:
-                        result = String::print(format, value);
+                        result = print(format, value);
                         break;
                 }
                 return result;

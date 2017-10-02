@@ -36,500 +36,500 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 TEST(JavaUtil, HashMapConstructor) {
-	String expected;
-	String actual;
+String expected;
+String actual;
 
-	// Test default constructor
-	HashMap<String, Integer> emptyHashMap;
+// Test default constructor
+HashMap<String, Integer> emptyHashMap;
 
-	// Make sure emptyHashMap is empty
-	ASSERT_TRUE(emptyHashMap.isEmpty());
+// Make sure emptyHashMap is empty
+ASSERT_TRUE(emptyHashMap.isEmpty());
 
-	// Test copy constructor
-	HashMap<String, String> container;
-	container.put("sample", "here");
-	container.put("key", "value");
+// Test copy constructor
+HashMap<String, String> container;
+container.put("sample", "here");
+container.put("key", "value");
 
-	HashMap<String, String> hashMap = container;
+HashMap<String, String> hashMap = container;
 
-	// Test valid size()
-	ASSERT_EQUAL(2, hashMap.size());
-	ASSERT_FALSE(hashMap.isEmpty());
+// Test valid size()
+ASSERT_EQUAL(2, hashMap.size());
+ASSERT_FALSE(hashMap.isEmpty());
 
-	// Test valid data between hashMap and container
-	expected = container.get("sample");
-	actual = hashMap.get("sample");
+// Test valid data between hashMap and container
+expected = container.get("sample");
+actual = hashMap.get("sample");
 
-	ASSERT_FALSE(expected.isEmpty());
-	ASSERT_FALSE(actual.isEmpty());
-	ASSERT_STR(expected.toString(), actual.toString());
+ASSERT_FALSE(expected.isEmpty());
+ASSERT_FALSE(actual.isEmpty());
+ASSERT_STR(expected.toString(), actual.toString());
 
-	expected = container.get("key");
-	actual = hashMap.get("key");
+expected = container.get("key");
+actual = hashMap.get("key");
 
-	ASSERT_FALSE(expected.isEmpty());
-	ASSERT_FALSE(actual.isEmpty());
-	ASSERT_STR(expected.toString(), actual.toString());
+ASSERT_FALSE(expected.isEmpty());
+ASSERT_FALSE(actual.isEmpty());
+ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapClear) {
-	// Given valid hashMap to test clear()
-	HashMap<Long, Integer> hashMap;
-	hashMap.put((long) 100, 25);
-	hashMap.put((long) 500, 123);
-	ASSERT_EQUAL(2, hashMap.size());
+// Given valid hashMap to test clear()
+HashMap<Long, Integer> hashMap;
+hashMap.put((long) 100, 25);
+hashMap.put((long) 500, 123);
+ASSERT_EQUAL(2, hashMap.size());
 
-	hashMap.clear();
-	ASSERT_EQUAL(0, hashMap.size());
+hashMap.clear();
+ASSERT_EQUAL(0, hashMap.size());
 }
 
 TEST(JavaUtil, HashMapClone) {
-	String actualKey;
-	String expected;
-	String actual;
+String actualKey;
+String expected;
+String actual;
 
-	// Create a HashMap to test to test clone()
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "Value of Key1");
-	hashMap.put("Key2", "Value of Key2");
-	HashMap<String, String> anotherMap = hashMap.clone();
+// Create a HashMap to test to test clone()
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "Value of Key1");
+hashMap.put("Key2", "Value of Key2");
+HashMap<String, String> anotherMap = hashMap.clone();
 
-	// Test actualKey = "Key1" is exist in anotherMap
-	actualKey = "Key1";
-	expected = "Value of Key1";
-	actual = anotherMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Test actualKey = "Key1" is exist in anotherMap
+actualKey = "Key1";
+expected = "Value of Key1";
+actual = anotherMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Test actualKey = "Key2" is exist in anotherMap
-	actualKey = "Key2";
-	expected = "Value of Key2";
-	actual = anotherMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Test actualKey = "Key2" is exist in anotherMap
+actualKey = "Key2";
+expected = "Value of Key2";
+actual = anotherMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Test non-exist key
-	actualKey = "wrong key";
-	actual = anotherMap.get(actualKey);
-	ASSERT_TRUE(actual.isEmpty());
+// Test non-exist key
+actualKey = "wrong key";
+actual = anotherMap.get(actualKey);
+ASSERT_TRUE(actual.isEmpty());
 }
 
 TEST(JavaUtil, HashMapContainsKey) {
-	boolean actual;
+boolean actual;
 
-	// Create a HashMap to test
-	HashMap<Integer, String> hashMap;
-	hashMap.put(3, "three");
-	hashMap.put(17, "seven teen");
-	hashMap.put(-52, "negative fifty two");
+// Create a HashMap to test
+HashMap<Integer, String> hashMap;
+hashMap.put(3, "three");
+hashMap.put(17, "seven teen");
+hashMap.put(-52, "negative fifty two");
 
-	// Valid key
-	actual = hashMap.containsKey(-52);
-	ASSERT_TRUE(actual);
+// Valid key
+actual = hashMap.containsKey(-52);
+ASSERT_TRUE(actual);
 
-	// Invalid key
-	actual = hashMap.containsKey(100);
-	ASSERT_FALSE(actual);
+// Invalid key
+actual = hashMap.containsKey(100);
+ASSERT_FALSE(actual);
 }
 
 TEST(JavaUtil, HashMapContainsValue) {
-	boolean actual;
+boolean actual;
 
-	// Create a HashMap to test
-	HashMap<String, Double> hashMap;
-	hashMap.put("15.3", 15.3);
-	hashMap.put("30.111", 30.111);
+// Create a HashMap to test
+HashMap<String, Double> hashMap;
+hashMap.put("15.3", 15.3);
+hashMap.put("30.111", 30.111);
 
-	// Valid key
-	actual = hashMap.containsValue(15.3);
-	ASSERT_TRUE(actual);
+// Valid key
+actual = hashMap.containsValue(15.3);
+ASSERT_TRUE(actual);
 
-	// Invalid key
-	actual = hashMap.containsValue(30.22);
-	ASSERT_FALSE(actual);
+// Invalid key
+actual = hashMap.containsValue(30.22);
+ASSERT_FALSE(actual);
 }
 
 TEST(JavaUtil, HashMapEntrySet) {
-	HashMap<String, String> hashMap;
+HashMap<String, String> hashMap;
 
-	for (int index = 1; index <= 100; index++) {
-		hashMap.put("Key "+ String::valueOf(index),
-					"Value " + String::valueOf(index));
-	}
+for (int index = 1; index <= 100; index++) {
+hashMap.put("Key "+ String::valueOf(index),
+"Value " + String::valueOf(index));
+}
 
-	int counter = 0;
-	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
+int counter = 0;
+Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
 
-	// TODO - loint@foodtiny.com will improve entrySet
-	// then we can put it inside foreach without any performance issue
-	for (Map<String, String>::Entry entry : entrySet) {
-		counter += 1;
-		if (counter == 1) {
-			ASSERT_STR("Key 99", entry.getKey().toString());
-			ASSERT_STR("Value 99", entry.getValue().toString());
-		}
-		if (counter == 2) {
-			ASSERT_STR("Key 98", entry.getKey().toString());
-			ASSERT_STR("Value 98", entry.getValue().toString());
-		}
-	}
+// TODO - loint@foodtiny.com will improve entrySet
+// then we can put it inside foreach without any performance issue
+for (Map<String, String>::Entry entry : entrySet) {
+counter += 1;
+if (counter == 1) {
+ASSERT_STR("Key 99", entry.getKey().toString());
+ASSERT_STR("Value 99", entry.getValue().toString());
+}
+if (counter == 2) {
+ASSERT_STR("Key 98", entry.getKey().toString());
+ASSERT_STR("Value 98", entry.getValue().toString());
+}
+}
 
-	// Make sure foreach is working
-	ASSERT_EQUAL(100, counter);
+// Make sure foreach is working
+ASSERT_EQUAL(100, counter);
 }
 
 TEST(JavaUtil, HashMapGet) {
-	String expected;
-	String actual;
+String expected;
+String actual;
 
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("key", "value");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("key", "value");
 
-	// Valid key
-	expected = "value";
-	actual = hashMap.get("key");
-	ASSERT_STR(expected.toString(), actual.toString());
+// Valid key
+expected = "value";
+actual = hashMap.get("key");
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Invalid key
-	actual = hashMap.get("wrong_key");
-	ASSERT_TRUE(actual.isEmpty());
+// Invalid key
+actual = hashMap.get("wrong_key");
+ASSERT_TRUE(actual.isEmpty());
 }
 
 TEST(JavaUtil, HashMapIsEmpty) {
-	// Create a HashMap to test
-	HashMap<String, Float> hashMap;
+// Create a HashMap to test
+HashMap<String, Float> hashMap;
 
-	// Empty case
-	boolean actual = hashMap.isEmpty();
-	ASSERT_TRUE(actual);
+// Empty case
+boolean actual = hashMap.isEmpty();
+ASSERT_TRUE(actual);
 
-	// Not empty case
-	hashMap.put("Key1", (float) 123.33);
-	ASSERT_FALSE(hashMap.isEmpty());
+// Not empty case
+hashMap.put("Key1", (float) 123.33);
+ASSERT_FALSE(hashMap.isEmpty());
 }
 
 TEST(JavaUtil, HashMapPut) {
-	String expected;
-	String actual;
+String expected;
+String actual;
 
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("abc", "Value of Key1");
-	hashMap.put("some key here", "456");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("abc", "Value of Key1");
+hashMap.put("some key here", "456");
 
-	// Make sure hashMap is not null
-	ASSERT_EQUAL(2, hashMap.size());
+// Make sure hashMap is not null
+ASSERT_EQUAL(2, hashMap.size());
 
-	// Make sure the data is safe
-	// Valid key
-	expected = "Value of Key1";
-	actual = hashMap.get("abc");
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the data is safe
+// Valid key
+expected = "Value of Key1";
+actual = hashMap.get("abc");
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Valid key
-	expected = "456";
-	actual = hashMap.get("some key here");
-	ASSERT_STR(expected.toString(), actual.toString());
+// Valid key
+expected = "456";
+actual = hashMap.get("some key here");
+ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapPutAll) {
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("some string", "Value of Key1");
-	hashMap.put("another key", "777");
-	hashMap.put("#!@#another", "-123");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("some string", "Value of Key1");
+hashMap.put("another key", "777");
+hashMap.put("#!@#another", "-123");
 
-	// putAll data of hashMap to targetMap
-	HashMap<String, String> targetMap;
-	targetMap.putAll(hashMap);
+// putAll data of hashMap to targetMap
+HashMap<String, String> targetMap;
+targetMap.putAll(hashMap);
 
-	// Make sure both are the same size
-	ASSERT_EQUAL(hashMap.size(), targetMap.size());
+// Make sure both are the same size
+ASSERT_EQUAL(hashMap.size(), targetMap.size());
 
-	// Make sure both have the same data
-	String actualKey = "#!@#another";
-	String expected = hashMap.get(actualKey);
-	String actual = targetMap.get(actualKey);
-	ASSERT_STR(actual.toString(), expected.toString());
+// Make sure both have the same data
+String actualKey = "#!@#another";
+String expected = hashMap.get(actualKey);
+String actual = targetMap.get(actualKey);
+ASSERT_STR(actual.toString(), expected.toString());
 
-	actualKey = "some string";
-	expected = hashMap.get(actualKey);
-	actual = targetMap.get(actualKey);
-	ASSERT_STR(actual.toString(), expected.toString());
+actualKey = "some string";
+expected = hashMap.get(actualKey);
+actual = targetMap.get(actualKey);
+ASSERT_STR(actual.toString(), expected.toString());
 
-	actualKey = "another key";
-	expected = hashMap.get(actualKey);
-	actual = targetMap.get(actualKey);
-	ASSERT_STR(actual.toString(), expected.toString());
+actualKey = "another key";
+expected = hashMap.get(actualKey);
+actual = targetMap.get(actualKey);
+ASSERT_STR(actual.toString(), expected.toString());
 
-	// Invalid case
-	actualKey = "some wrong key here";
-	expected = hashMap.get(actualKey);
-	actual = targetMap.get(actualKey);
-	ASSERT_TRUE(expected.isEmpty());
-	ASSERT_TRUE(actual.isEmpty());
+// Invalid case
+actualKey = "some wrong key here";
+expected = hashMap.get(actualKey);
+actual = targetMap.get(actualKey);
+ASSERT_TRUE(expected.isEmpty());
+ASSERT_TRUE(actual.isEmpty());
 }
 
 TEST(JavaUtil, HashMapPutIfAbsent) {
-	String actualKey;
-	String expected;
-	String actual;
+String actualKey;
+String expected;
+String actual;
 
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("abc", "Value of Key1");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("abc", "Value of Key1");
 
-	// Make sure the data is right before test
-	actualKey = "abc";
-	expected = "Value of Key1";
-	actual = hashMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the data is right before test
+actualKey = "abc";
+expected = "Value of Key1";
+actual = hashMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Existent key
-	expected = "Value of Key1";
-	actual = hashMap.putIfAbsent(actualKey, "other value");
-	ASSERT_STR(expected.toString(), actual.toString());
+// Existent key
+expected = "Value of Key1";
+actual = hashMap.putIfAbsent(actualKey, "other value");
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Make sure the value is not changed.
-	expected = "Value of Key1";
-	actual = hashMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the value is not changed.
+expected = "Value of Key1";
+actual = hashMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Non-existent key
-	String wrongKey = "wrong key";
-	expected = "something here";
-	String isSucceedPutIfAbsent = hashMap.putIfAbsent(wrongKey, "something here");
-	actual = hashMap.get(wrongKey);
-	ASSERT_TRUE(isSucceedPutIfAbsent.isEmpty());
-	ASSERT_STR(expected.toString(), actual.toString());
+// Non-existent key
+String wrongKey = "wrong key";
+expected = "something here";
+String isSucceedPutIfAbsent = hashMap.putIfAbsent(wrongKey, "something here");
+actual = hashMap.get(wrongKey);
+ASSERT_TRUE(isSucceedPutIfAbsent.isEmpty());
+ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapRemoveKey) {
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "!@#!@#");
-	hashMap.put("another key", "1111");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "!@#!@#");
+hashMap.put("another key", "1111");
 
-	// Make sure the size is right
-	ASSERT_EQUAL(2, hashMap.size());
+// Make sure the size is right
+ASSERT_EQUAL(2, hashMap.size());
 
-	// Make sure the data is right
-	String expected = "1111";
-	String actual = hashMap.get("another key");
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the data is right
+String expected = "1111";
+String actual = hashMap.get("another key");
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Data must be removed after removing
-	String isSucceedRemove = hashMap.remove("another key");
-	expected = "1111";
-	ASSERT_STR(expected.toString(), isSucceedRemove.toString());
+// Data must be removed after removing
+String isSucceedRemove = hashMap.remove("another key");
+expected = "1111";
+ASSERT_STR(expected.toString(), isSucceedRemove.toString());
 
-	// Size must decrease after removing
-	ASSERT_EQUAL(1, hashMap.size());
+// Size must decrease after removing
+ASSERT_EQUAL(1, hashMap.size());
 
-	// Make sure the old data must not exist any more
-	actual = hashMap.get("another key");
-	ASSERT_TRUE(actual.isEmpty());
+// Make sure the old data must not exist any more
+actual = hashMap.get("another key");
+ASSERT_TRUE(actual.isEmpty());
 }
 
 TEST(JavaUtil, HashMapRemoveKeyValue) {
-	// Create a HashMap to test
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "Value of Key1");
-	hashMap.put("another key", "456");
+// Create a HashMap to test
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "Value of Key1");
+hashMap.put("another key", "456");
 
-	// Make sure the size is right before removing
-	ASSERT_EQUAL(2, hashMap.size());
+// Make sure the size is right before removing
+ASSERT_EQUAL(2, hashMap.size());
 
-	// Make sure the data is right before removing
-	String expectedactual = "Value of Key1";
-	String actual = hashMap.get("Key1");
-	ASSERT_STR(expectedactual.toString(), actual.toString());
+// Make sure the data is right before removing
+String expectedactual = "Value of Key1";
+String actual = hashMap.get("Key1");
+ASSERT_STR(expectedactual.toString(), actual.toString());
 
-	// Invalid case: right case, wrong value
-	boolean isSucceedRemove = hashMap.remove("Key1", "456");
-	ASSERT_FALSE(isSucceedRemove);
+// Invalid case: right case, wrong value
+boolean isSucceedRemove = hashMap.remove("Key1", "456");
+ASSERT_FALSE(isSucceedRemove);
 
-	// Test remove true by key mapped to specified value
-	isSucceedRemove = hashMap.remove("Key1", "Value of Key1");
-	ASSERT_TRUE(isSucceedRemove);
+// Test remove true by key mapped to specified value
+isSucceedRemove = hashMap.remove("Key1", "Value of Key1");
+ASSERT_TRUE(isSucceedRemove);
 }
 
 TEST(JavaUtil, HashMapReplaceKeyValue) {
-	// Create a HashMap to test to test
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "value");
-	hashMap.put("key !@#", "1000");
-	hashMap.put(".;;',", "ab232");
+// Create a HashMap to test to test
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "value");
+hashMap.put("key !@#", "1000");
+hashMap.put(".;;',", "ab232");
 
-	// Make sure the data is right before replacing
-	String actualKey = ".;;',";
-	String expected = "ab232";
-	String actual = hashMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the data is right before replacing
+String actualKey = ".;;',";
+String expected = "ab232";
+String actual = hashMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Replace the oldValue
-	String oldValue = "ab232";
-	String newValue = "250008";
-	String actualReplace = hashMap.replace(actualKey, newValue);
-	ASSERT_STR(oldValue.toString(), actualReplace.toString());
+// Replace the oldValue
+String oldValue = "ab232";
+String newValue = "250008";
+String actualReplace = hashMap.replace(actualKey, newValue);
+ASSERT_STR(oldValue.toString(), actualReplace.toString());
 
-	// Make sure the old value is replaced by new value
-	expected = newValue;
-	actual = hashMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
-    
-    // Test non-existent key
-    actualKey = "Non-existent key";
-    actualReplace = hashMap.replace(actualKey, newValue);
-    ASSERT_STR("", actualReplace.toString());
-    
+// Make sure the old value is replaced by new value
+expected = newValue;
+actual = hashMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
+
+// Test non-existent key
+actualKey = "Non-existent key";
+actualReplace = hashMap.replace(actualKey, newValue);
+ASSERT_STR("", actualReplace.toString());
+
 }
 
 TEST(JavaUtil, HashMapReplaceKeyOldValueNewValue) {
-	// Create a HashMap to test to test
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "Value of Key1");
-	hashMap.put("key123", "!@#");
+// Create a HashMap to test to test
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "Value of Key1");
+hashMap.put("key123", "!@#");
 
-	// Make sure the size is right
-	ASSERT_EQUAL(2, hashMap.size());
+// Make sure the size is right
+ASSERT_EQUAL(2, hashMap.size());
 
-	// Make sure the data is right
-	String actualKey = "key123";
-	String expected = "!@#";
-	String actual = hashMap.get(actualKey);
-	ASSERT_STR(expected.toString(), actual.toString());
+// Make sure the data is right
+String actualKey = "key123";
+String expected = "!@#";
+String actual = hashMap.get(actualKey);
+ASSERT_STR(expected.toString(), actual.toString());
 
-	// Replace the old value
-	String key = "key123";
-	String oldValue = "!@#";
-	String newValue = "456";
-	boolean isSucceedReplace = hashMap.replace(key, oldValue, newValue);
-	ASSERT_TRUE(isSucceedReplace);
+// Replace the old value
+String key = "key123";
+String oldValue = "!@#";
+String newValue = "456";
+boolean isSucceedReplace = hashMap.replace(key, oldValue, newValue);
+ASSERT_TRUE(isSucceedReplace);
 
-	// Make sure the old value is replace by new value
-	actual = hashMap.get(key);
-	ASSERT_STR(newValue.toString(), actual.toString());
+// Make sure the old value is replace by new value
+actual = hashMap.get(key);
+ASSERT_STR(newValue.toString(), actual.toString());
 
-	// Replace with incorrect key/oldValue
-	key = "Key1";
-	oldValue = "wrong value";
-	newValue = "newValue";
-	isSucceedReplace = hashMap.replace(key, oldValue, newValue);
-	ASSERT_FALSE(isSucceedReplace);
+// Replace with incorrect key/oldValue
+key = "Key1";
+oldValue = "wrong value";
+newValue = "newValue";
+isSucceedReplace = hashMap.replace(key, oldValue, newValue);
+ASSERT_FALSE(isSucceedReplace);
 
-	// Make sure the value is not change if replacing is failed
-	key = "Key1";
-	oldValue = "Value of Key1";
-	actual = hashMap.get(key);
-	ASSERT_STR(oldValue.toString(), actual.toString());
+// Make sure the value is not change if replacing is failed
+key = "Key1";
+oldValue = "Value of Key1";
+actual = hashMap.get(key);
+ASSERT_STR(oldValue.toString(), actual.toString());
 }
 
 TEST(JavaUtil, HashMapSize) {
-	// Create a HashMap to test
-	HashMap<Double, String> hashMap;
-	hashMap.put(15.22222, "15.22222");
-	hashMap.put(-50.2222, "50");
+// Create a HashMap to test
+HashMap<Double, String> hashMap;
+hashMap.put(15.22222, "15.22222");
+hashMap.put(-50.2222, "50");
 
-	// Make sure the size is 2
-	ASSERT_EQUAL(2, hashMap.size());
+// Make sure the size is 2
+ASSERT_EQUAL(2, hashMap.size());
 
-	// Add one more key/value and check size again
-	hashMap.put((double) 123, "some thing here");
-	ASSERT_EQUAL(3, hashMap.size());
+// Add one more key/value and check size again
+hashMap.put((double) 123, "some thing here");
+ASSERT_EQUAL(3, hashMap.size());
 }
 
 TEST(JavaUtil, HashMapToString) {
-	// Given some valid key/value to test toString()
-	HashMap<String, String> hashMap;
-	hashMap.put("key1", "value1");
-	hashMap.put("key16", "value16");
-	hashMap.put("key02", "value02");
+// Given some valid key/value to test toString()
+HashMap<String, String> hashMap;
+hashMap.put("key1", "value1");
+hashMap.put("key16", "value16");
+hashMap.put("key02", "value02");
 
-	string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
-	string result = hashMap.toString();
-	ASSERT_STR(expectedResult, result);
+string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
+string result = hashMap.toString();
+ASSERT_STR(expectedResult, result);
 
-	// Given another hash map type to test
-	HashMap<Integer, Integer> anotherHashMap;
-	anotherHashMap.put(1, 12313);
-	anotherHashMap.put(2, 76767);
+// Given another hash map type to test
+HashMap<Integer, Integer> anotherHashMap;
+anotherHashMap.put(1, 12313);
+anotherHashMap.put(2, 76767);
 
-	expectedResult = (string) R"({1: 12313, 2: 76767})";
-	result = anotherHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+expectedResult = (string) R"({1: 12313, 2: 76767})";
+result = anotherHashMap.toString();
+ASSERT_STR(expectedResult, result);
 
-	// Given empty hash map to test default toString()
-	HashMap<String, Float> emptyHashMap;
-	expectedResult = (string) "{}";
-	result = emptyHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+// Given empty hash map to test default toString()
+HashMap<String, Float> emptyHashMap;
+expectedResult = (string) "{}";
+result = emptyHashMap.toString();
+ASSERT_STR(expectedResult, result);
 
-	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
-	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
-	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
-	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
-	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
-	expectedResult = (string) R"({"ArrayList1": [1, 2, 3, 4, 5], "ArrayList2": [100, 100, 100, 100, 1]})";
-	result = arrayListInHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
+ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
+HashMap<String, ArrayList<Integer>> arrayListInHashMap;
+arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
+arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
+expectedResult = (string) R"({"ArrayList1": [1, 2, 3, 4, 5], "ArrayList2": [100, 100, 100, 100, 1]})";
+result = arrayListInHashMap.toString();
+ASSERT_STR(expectedResult, result);
 
-	HashMap<String, String> hashMapWithSpecialCharacter;
-	hashMapWithSpecialCharacter.put("key\"1", "va\"lu\"e1");
-	hashMapWithSpecialCharacter.put("key\\16", "val\nue\t16");
-	hashMapWithSpecialCharacter.put("k\fey\b02", "val\rue02");
+HashMap<String, String> hashMapWithSpecialCharacter;
+hashMapWithSpecialCharacter.put("key\"1", "va\"lu\"e1");
+hashMapWithSpecialCharacter.put("key\\16", "val\nue\t16");
+hashMapWithSpecialCharacter.put("k\fey\b02", "val\rue02");
 
-	expectedResult = (string) R"({"k\fey\b02": "val\rue02", "key\"1": "va\"lu\"e1", "key\\16": "val\nue\t16"})";
-	result = hashMapWithSpecialCharacter.toString();
-	ASSERT_STR(expectedResult, result);
+expectedResult = (string) R"({"k\fey\b02": "val\rue02", "key\"1": "va\"lu\"e1", "key\\16": "val\nue\t16"})";
+result = hashMapWithSpecialCharacter.toString();
+ASSERT_STR(expectedResult, result);
 }
 
 TEST(JavaUtil, HashMapEquals) {
-    // Create a HashMap
-    HashMap<String, String> hashMap;
-    hashMap.put("Key1", "Value of Key1");
-    hashMap.put("Key2", "Value of Key2");
+// Create a HashMap
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "Value of Key1");
+hashMap.put("Key2", "Value of Key2");
 
-    // Create an other HashMap with the same data
-    HashMap<String, String> sameHashMap;
-    sameHashMap.put("Key1", "Value of Key1");
-    sameHashMap.put("Key2", "Value of Key2");
+// Create an other HashMap with the same data
+HashMap<String, String> sameHashMap;
+sameHashMap.put("Key1", "Value of Key1");
+sameHashMap.put("Key2", "Value of Key2");
 
-	// Create an other HashMap with the different key
-	HashMap<String, String> differentKeyHashMap;
-	differentKeyHashMap.put("different key", "Value of Key1");
-	differentKeyHashMap.put("Key2", "Value of Key2");
+// Create an other HashMap with the different key
+HashMap<String, String> differentKeyHashMap;
+differentKeyHashMap.put("different key", "Value of Key1");
+differentKeyHashMap.put("Key2", "Value of Key2");
 
-	// Create an other HashMap with the different value
-	HashMap<String, String> differentValueHashMap;
-	differentValueHashMap.put("Key1", "different value");
-	differentValueHashMap.put("Key2", "Value of Key2");
+// Create an other HashMap with the different value
+HashMap<String, String> differentValueHashMap;
+differentValueHashMap.put("Key1", "different value");
+differentValueHashMap.put("Key2", "Value of Key2");
 
-	// Create an other HashMap with the different size
-	HashMap<String, String> differentSizeHashMap;
-	differentSizeHashMap.put("different key", "Value of Key1");
+// Create an other HashMap with the different size
+HashMap<String, String> differentSizeHashMap;
+differentSizeHashMap.put("different key", "Value of Key1");
 
-    // Test valid case
-    ASSERT_TRUE(hashMap.equals(sameHashMap));
+// Test valid case
+ASSERT_TRUE(hashMap.equals(sameHashMap));
 
-	// Test invalid case
-	ASSERT_FALSE(hashMap.equals(differentKeyHashMap));
-	ASSERT_FALSE(hashMap.equals(differentValueHashMap));
-	ASSERT_FALSE(hashMap.equals(differentSizeHashMap));
+// Test invalid case
+ASSERT_FALSE(hashMap.equals(differentKeyHashMap));
+ASSERT_FALSE(hashMap.equals(differentValueHashMap));
+ASSERT_FALSE(hashMap.equals(differentSizeHashMap));
 }
 
 TEST(JavaUtil, HashMapReinitialize) {
-    // Create a HashMap
-    HashMap<String, String> hashMap;
-    hashMap.put("Key1", "Value of Key1");
-    hashMap.put("Key2", "Value of Key2");
+// Create a HashMap
+HashMap<String, String> hashMap;
+hashMap.put("Key1", "Value of Key1");
+hashMap.put("Key2", "Value of Key2");
 
-    // Reinitialize
-    hashMap.reinitialize();
+// Reinitialize
+hashMap.reinitialize();
 
-    // Make sure hashMap has been reinitialized
-    ASSERT_TRUE(hashMap.isEmpty());
-    ASSERT_EQUAL(0, hashMap.size());
-    ASSERT_STR("{}", hashMap.toString());
+// Make sure hashMap has been reinitialized
+ASSERT_TRUE(hashMap.isEmpty());
+ASSERT_EQUAL(0, hashMap.size());
+ASSERT_STR("{}", hashMap.toString());
 }
 
 //TEST(JavaUtil, HashMapReplaceAll) {

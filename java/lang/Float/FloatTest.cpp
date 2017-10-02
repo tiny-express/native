@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Float.hpp"
 
 using namespace Java::Lang;
@@ -125,42 +122,42 @@ TEST(JavaLang, FloatArithmeticOperator) {
 //    // Test Operator ==
 //    variableRelationalOperator1 = 13.12;
 //    variableRelationalOperator2 = 13.12;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 == variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator !=
 //    variableRelationalOperator1 = 13.02;
 //    variableRelationalOperator2 = 99.02;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 != variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator >
 //    variableRelationalOperator1 = 13.02;
 //    variableRelationalOperator2 = 1.1f;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 > variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator <
 //    variableRelationalOperator1 = 1.11;
 //    variableRelationalOperator2 = 13.02;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 < variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator >=
 //    variableRelationalOperator1 = 15.00;
 //    variableRelationalOperator2 = 13.02;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 >= variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //
 //    // Test Operator <=
 //    variableRelationalOperator1 = 1.11;
 //    variableRelationalOperator2 = 13.02;
-//    expectedResultOperator = TRUE;
+//    expectedResultOperator = true;
 //    actualResultOperator = variableRelationalOperator1 <= variableRelationalOperator2;
 //    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 //}
@@ -175,56 +172,56 @@ TEST(JavaLang, FloatLogicalOperator) {
 	// Test Operator && . Case 0   0
 	variableLogicalOperator1 = 0;
 	variableLogicalOperator2 = 0;
-	expectedResultOperator = FALSE;
+	expectedResultOperator = false;
 	actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator && . Case 0   1
 	variableLogicalOperator1 = 0;
 	variableLogicalOperator2 = 1;
-	expectedResultOperator = FALSE;
+	expectedResultOperator = false;
 	actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator && . Case 1   0
 	variableLogicalOperator1 = 1;
 	variableLogicalOperator2 = 0;
-	expectedResultOperator = FALSE;
+	expectedResultOperator = false;
 	actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator && . Case 1   1
 	variableLogicalOperator1 = 1;
 	variableLogicalOperator2 = 1;
-	expectedResultOperator = TRUE;
+	expectedResultOperator = true;
 	actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator || . Case 0   0
 	variableLogicalOperator1 = 0;
 	variableLogicalOperator2 = 0;
-	expectedResultOperator = FALSE;
+	expectedResultOperator = false;
 	actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator || . Case 0   1
 	variableLogicalOperator1 = 0;
 	variableLogicalOperator2 = 1;
-	expectedResultOperator = TRUE;
+	expectedResultOperator = true;
 	actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator || . Case 1   0
 	variableLogicalOperator1 = 1;
 	variableLogicalOperator2 = 0;
-	expectedResultOperator = TRUE;
+	expectedResultOperator = true;
 	actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 	
 	// Test Operator || . Case 1   1
 	variableLogicalOperator1 = 1;
 	variableLogicalOperator2 = 1;
-	expectedResultOperator = TRUE;
+	expectedResultOperator = true;
 	actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
 	ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 }
