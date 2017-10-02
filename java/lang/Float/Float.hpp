@@ -351,7 +351,7 @@ namespace Java {
              * @param   inputFloat   the float to be converted.
              * @return  a string representation of the argument.
              */
-			static string toString(float inputFloat);
+			static String toString(float inputFloat);
 
             /**
              * String to Float

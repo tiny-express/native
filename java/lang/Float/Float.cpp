@@ -80,38 +80,25 @@ boolean Float::operator!=(const Float &target) const {
 }
 
 boolean Float::operator<(const Float &target) const {
-    boolean isLess = compare(this->floatValue(), target.floatValue()) == -1;
-
-    if (isLess) {
-        return true;
-    }
-    return false;
+    return (boolean) (compare(this->floatValue(), target.floatValue()) == -1);
 }
 
 boolean Float::operator>(const Float &target) const {
-    boolean isGreater = compare(this->floatValue(), target.floatValue()) == 1;
-    if (isGreater) {
-        return true;
-    }
-    return false;
+    return (boolean) (compare(this->floatValue(), target.floatValue()) == 1);
 }
 
 boolean Float::operator>=(const Float &target) const {
     boolean isGreater = compare(this->floatValue(), target.floatValue()) == 1;
     boolean isEqual = compare(this->floatValue(), target.floatValue()) == 0;
-    if (isEqual || isGreater) {
-        return true;
-    }
-    return false;
+
+    return  (boolean) (isEqual || isGreater);
 }
 
 boolean Float::operator<=(const Float &target) const {
     boolean isLess = compare(this->floatValue(), target.floatValue()) == -1;
     boolean isEqual = compare(this->floatValue(), target.floatValue()) == 0;
-    if (isLess || isEqual) {
-        return true;
-    }
-    return false;
+
+    return  (boolean) (isLess || isEqual);
 }
 
 boolean Float::operator&&(const Float &target) const {
@@ -620,8 +607,6 @@ float Float::intBitsToFloat(int intBitsInput) {
     return  resultIntBitsToFloat;
 }
 
-string Float::toString(float inputFloat) {
-    String holdResult = String::valueOf(inputFloat);
-    string result = holdResult.toString();
-    return result;
+String Float::toString(float inputFloat) {
+    return String::valueOf(inputFloat);
 }

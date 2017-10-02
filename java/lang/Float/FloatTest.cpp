@@ -55,12 +55,12 @@ TEST(JavaLang, FloatConstructor) {
 
     /* Test Float(String inputString) */
     // Test Float::POSITIVE_INFINITY
-    Float positiveInfinityFloat((String) "inf");
+    Float positiveOtherInfinityFloat((String) "INFINITY");
     ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
-                      positiveInfinityFloat.floatValue());
+                      positiveOtherInfinityFloat.floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    Float negativeInfinityFloat((String) "-inf");
+    Float negativeInfinityFloat((String) "-INFINITY");
     ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
                       negativeInfinityFloat.floatValue());
 
@@ -556,106 +556,121 @@ TEST(JavaLang, FloatToStringParamFloat) {
     // Create variable to test
     float variableFloat;
     String expected;
-    string actual;
+    String actual;
 
     // Test Float::POSITIVE_INFINITY
     variableFloat = Float::POSITIVE_INFINITY;
     expected = "inf";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     // Test Float::NEGATIVE_INFINITY
     variableFloat = Float::NEGATIVE_INFINITY;
     expected = "-inf";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     // Test Float::NaN
     variableFloat = Float::NaN;
     expected = "nan";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     // Test Float::MAX_VALUE
     variableFloat = Float::MAX_VALUE;
     expected = "3.40282e+38";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     // Test Float::MIN_NORMAL
     variableFloat = Float::MIN_NORMAL;
     expected = "1.4013e-45";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 
     // Test Float::MIN_VALUE
     variableFloat = Float::MIN_VALUE;
     expected = "1.17549e-38";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual);
+    ASSERT_STR(expected.toString(), actual.toString());
 }
 
 TEST(JavaLang, FloatParseFloat) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY, Float::parseFloat((String) "inf").floatValue());
+    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+                      Float::parseFloat((String) "INFINITY").floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY, Float::parseFloat((String) "-inf").floatValue());
+    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+                      Float::parseFloat((String) "-INFINITY").floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(Float::NaN, Float::parseFloat((String) "nan").floatValue());
+    ASSERT_FLOAT_NEAR(Float::NaN,
+                      Float::parseFloat((String) "nan").floatValue());
 
     // Test Float::MAX_VALUE
     ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
                       Float::parseFloat((String) "340282346638528859811704183484516925440.0").floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL, Float::parseFloat((String) "1.4013e-45").floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+                      Float::parseFloat((String) "1.4013e-45").floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE, Float::parseFloat((String) "1.17549e-38").floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+                      Float::parseFloat((String) "1.17549e-38").floatValue());
 }
 
 TEST(JavaLang, FloatValueOfParamString) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY, Float::valueOf((String) "inf").floatValue());
+    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+                      Float::valueOf((String) "INFINITY").floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY, Float::valueOf((String) "-inf").floatValue());
+    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+                      Float::valueOf((String) "-INFINITY").floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(Float::NaN, Float::valueOf((String) "nan").floatValue());
+    ASSERT_FLOAT_NEAR(Float::NaN,
+                      Float::valueOf((String) "nan").floatValue());
 
     // Test Float::MAX_VALUE
     ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
                       Float::valueOf((String) "340282346638528859811704183484516925440.0").floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL, Float::valueOf((String) "1.4013e-45").floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+                      Float::valueOf((String) "1.4013e-45").floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE, Float::valueOf((String) "1.17549e-38").floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+                      Float::valueOf((String) "1.17549e-38").floatValue());
 }
 
 TEST(JavaLang, FloatValueOfParamFloat) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY, Float::valueOf(Float::POSITIVE_INFINITY).floatValue());
+    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+                      Float::valueOf(Float::POSITIVE_INFINITY).floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY, Float::valueOf(Float::NEGATIVE_INFINITY).floatValue());
+    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+                      Float::valueOf(Float::NEGATIVE_INFINITY).floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(-Float::NaN, Float::valueOf(-Float::NaN).floatValue());
+    ASSERT_FLOAT_NEAR(-Float::NaN,
+                      Float::valueOf(-Float::NaN).floatValue());
 
     // Test Float::MAX_VALUE
     ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
                       Float::valueOf(340282346638528859811704183484516925440.0f).floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL, Float::valueOf(1.4013e-45).floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+                      Float::valueOf(1.4013e-45).floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE, Float::valueOf(1.17549e-38).floatValue());
+    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+                      Float::valueOf(1.17549e-38).floatValue());
 }
 
 TEST(JavaLang, FloatToRawIntBits) {
