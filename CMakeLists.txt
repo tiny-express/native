@@ -137,18 +137,6 @@ add_custom_target(
         COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
 )
 
-# Check memory leak
-add_custom_target(
-        leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test_c
-)
-
-# Check memory leak
-add_custom_target(
-        leak-c-debug
-        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
-)
-
 # Enable testing
 include(CTest)
 enable_testing()
@@ -180,4 +168,3 @@ else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif ()
-
