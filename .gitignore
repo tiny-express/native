@@ -16,4 +16,4 @@ Testing
 /native
 /libnative*
 /test*
-main*
+main.o
