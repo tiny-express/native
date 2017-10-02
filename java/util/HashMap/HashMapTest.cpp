@@ -92,7 +92,7 @@ TEST(JavaUtil, HashMapClone) {
 	HashMap<String, String> hashMap;
 	hashMap.put("Key1", "Value of Key1");
 	hashMap.put("Key2", "Value of Key2");
-	HashMap<String, String> anotherMap = (HashMap<String, String>) hashMap.clone();
+	HashMap<String, String> anotherMap = hashMap.clone();
 
 	// Test actualKey = "Key1" is exist in anotherMap
 	actualKey = "Key1";
@@ -353,7 +353,7 @@ TEST(JavaUtil, HashMapRemoveKeyValue) {
 	ASSERT_TRUE(isSucceedRemove);
 }
 
-TEST(JavaUtil, HashMapReplace) {
+TEST(JavaUtil, HashMapReplaceKeyValue) {
 	// Create a HashMap to test to test
 	HashMap<String, String> hashMap;
 	hashMap.put("Key1", "value");
@@ -384,7 +384,7 @@ TEST(JavaUtil, HashMapReplace) {
     
 }
 
-TEST(JavaUtil, HashMapReplace2) {
+TEST(JavaUtil, HashMapReplaceKeyOldValueNewValue) {
 	// Create a HashMap to test to test
 	HashMap<String, String> hashMap;
 	hashMap.put("Key1", "Value of Key1");

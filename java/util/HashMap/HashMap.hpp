@@ -36,8 +36,6 @@
 #include <map>
 #include <functional>
 
-//#define BiFunction std::function
-
 namespace Java {
 	namespace Util {
 		template <class Key, class Value>
@@ -159,7 +157,6 @@ namespace Java {
 			 */
 			int hashCode();
 
-			// TODO(thoangminh): We will support after finishing class Set
 			/**
 			 * Returns a Set view of the keys contained in this map.
 			 * The set is backed by the map, so changes to the map are
