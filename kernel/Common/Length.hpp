@@ -28,6 +28,9 @@
 #define NATIVE_COMMON_LENGTH_HPP
 
 #include "../Type.hpp"
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
