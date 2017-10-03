@@ -71,7 +71,7 @@ inline char *joinDelimiterPointerPointerChar(char **target, const char *delimite
     int totalLength = 0, itemLength = 0;
     char **pointer;
     int delimiterLength = lengthPointerChar((char *) delimiter);
-    auto *temporaryResult = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
+    auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
     for (pointer = target; *pointer; ++pointer) {
         itemLength = lengthPointerChar(*pointer);
         memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
@@ -80,7 +80,7 @@ inline char *joinDelimiterPointerPointerChar(char **target, const char *delimite
         totalLength += delimiterLength;
     }
     // Allocate enough memory for result
-    auto *result = (char *) malloc((totalLength - delimiterLength + 1) * sizeof(char));
+    auto *result = (char *) calloc((size_t) totalLength - delimiterLength + 1, sizeof(char));
     // Copy and remove remainder delimiter
     memcpy(result, temporaryResult, (size_t) totalLength - delimiterLength);
     // Free memory for temporary variable
