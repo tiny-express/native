@@ -41,7 +41,7 @@ namespace Java {
                 public virtual CharSequence
         {
         private:
-            string original = NULL;
+            string original = nullptr;
             mutable String backupOriginalForToString;
             int currentLength = 0;
             int currentCapacity = 0;
