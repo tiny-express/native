@@ -97,7 +97,7 @@ TEST (KernelStringProcess, StringJoin) {
 		(char *) "the",
 		(char *) "lazy",
 		(char *) "dog",
-		null
+		nullptr
 	};
 	auto delimiter = (string) "|";
 	auto expect = (string) "The|quick|brown|fox|jumps|over|the|lazy|dog";
