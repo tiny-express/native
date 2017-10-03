@@ -25,7 +25,6 @@
  */
 
 #include "../Common.hpp"
-#include <cstdlib>
 #include "../Test.hpp"
 
 TEST (KernelCommon, LengthPointerChar) {
@@ -50,76 +49,41 @@ TEST (KernelCommon, LengthPointerChar) {
 }
 
 TEST (KernelCommon, LengthPointerPointerChar) {
-	
-	char *data_null = nullptr;
-	ASSERT_EQUAL(0, lengthPointerPointerChar((char **) data_null));
-	
-	char *data_raw[] = {
-		(char *) "abc",
-		(char *) "abd",
-		(char *) "abf",
-		(char *) "xyz",
-		(char *) "123",
-		(char *) "3456",
-		'\0'
-	};
-	char **data1 = (char **) data_raw;
-	ASSERT_EQUAL(6, lengthPointerPointerChar(data1));
-	
-	// Dynamic string
-	int NUM = 135;
-	char **data2 = (char **) calloc(NUM + 1, sizeof(char *));
-	int i;
-	for (i = 0; i < NUM; i++) {
-		data2[ i ] = (char *) "test";
-	}
-	data2[ NUM ] = '\0';
-	ASSERT_EQUAL(NUM, lengthPointerPointerChar(data2));
-	free(data2);
+
+    char *data_null = nullptr;
+    ASSERT_EQUAL(0, lengthPointerPointerChar((char **) data_null));
+
+    char *data_raw[] = {
+            (char *) "abc",
+            (char *) "abd",
+            (char *) "abf",
+            (char *) "xyz",
+            (char *) "123",
+            (char *) "3456",
+            nullptr
+    };
+    auto data1 = (char **) data_raw;
+    ASSERT_EQUAL(6, lengthPointerPointerChar(data1));
+
+    // Dynamic string
+    int NUM = 135;
+    auto data2 = (char **) calloc(NUM + 1, sizeof(char *));
+    int i;
+    for (i = 0; i < NUM; i++) {
+        data2[i] = (char *) "test";
+    }
+    data2[NUM] = '\0';
+    ASSERT_EQUAL(NUM, lengthPointerPointerChar(data2));
+    free(data2);
 }
-//
-//TEST (KernelCommon, LengthShort) {
-//	short input = 0;
-//	ASSERT_EQUAL(1, lengthShort(input));
-//	input = 123;
-//	ASSERT_EQUAL(3, lengthShort(input));
-//}
-//
-//TEST (KernelCommon, LengthInt) {
-//	int input = 0;
-//	ASSERT_EQUAL(1, lengthInt(input));
-//	input = 123;
-//	ASSERT_EQUAL(3, lengthInt(input));
-//}
-//
-//TEST (KernelCommon, LengthLong) {
-//	long input = 0;
-//	ASSERT_EQUAL(1, lengthLong(input));
-//	input = 123456;
-//	ASSERT_EQUAL(6, lengthLong(input));
-//}
-//
-//TEST (KernelCommon, LengthDouble) {
-//	double input = 0;
-//	ASSERT_EQUAL(1, lengthDouble(input));
-//	input = 123.456;
-//	ASSERT_EQUAL(7, lengthDouble(input));
-//}
-//
-//TEST (KernelCommon, LengthFloat) {
-//	float input = 1.23;
-//	ASSERT_EQUAL(4, lengthFloat(input));
-//	input = 0.345;
-//	ASSERT_EQUAL(5, lengthFloat(input));
-//}
 
 TEST (KernelCommon, IsEmpty) {
-	char *target1 = nullptr;
+	string target1 = nullptr;
 	ASSERT_TRUE(isEmptyString(target1));
 
     auto target2 = (string) "";
 	ASSERT_TRUE(isEmptyString(target2));
 
-	char *target3 = (string) "abcd";
+	auto target3 = (string) "abcd";
 	ASSERT_FALSE(isEmptyString(target3));
 }

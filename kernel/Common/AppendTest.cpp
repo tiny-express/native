@@ -38,7 +38,7 @@ TEST (KernelCommon, AppendPointerChar) {
 		(char *) "over",
 		(char *) "the",
 		(char *) "lazy",
-		'\0'
+		nullptr
 	};
 	auto append = (string) "dog";
 	ASSERT_EQUAL(8, lengthPointerPointerChar(target));

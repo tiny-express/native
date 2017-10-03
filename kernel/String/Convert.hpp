@@ -126,7 +126,7 @@ inline long stringToLong(string target) {
  * String to boolean
  *
  * @param target
- * @return TRUE | FALSE
+ * @return true | false
  */
 inline boolean stringToBoolean(string target) {
 	if (lengthPointerChar(target) == 0) {

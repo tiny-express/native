@@ -27,22 +27,22 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native CXX)
 
-# Enable runtime search path support for dynamic libraries on OSX
-if (APPLE)
-    set(CMAKE_MACOSX_RPATH 1)
-endif ()
-
 # GNU filesystem layout conventions
 include(GNUInstallDirs)
 
 # Force GCC for Linux
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(CMAKE_C_COMPILER "gcc")
     set(CMAKE_CXX_COMPILER "g++")
 endif()
 
+# Enable runtime search path support for dynamic libraries on OSX
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_MACOSX_RPATH 1)
+    set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER} -w ")
+endif ()
+
 # Force Linux and Darwin use GCC
-set(CMAKE_CXX_FLAGS "-pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # Check C++ compiler version
 include(CheckCXXCompilerFlag)
