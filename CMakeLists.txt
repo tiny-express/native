@@ -38,7 +38,7 @@ endif()
 # Enable runtime search path support for dynamic libraries on OSX
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_MACOSX_RPATH 1)
-    set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER} -w ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
 endif ()
 
 # Force Linux and Darwin use GCC
