@@ -97,7 +97,7 @@ TEST (KernelStringProcess, StringJoin) {
 		(char *) "the",
 		(char *) "lazy",
 		(char *) "dog",
-		'\0'
+		null
 	};
 	auto delimiter = (string) "|";
 	auto expect = (string) "The|quick|brown|fox|jumps|over|the|lazy|dog";
@@ -241,7 +241,7 @@ TEST (KernelStringProcess, StringIndexOf) {
 }
 
 TEST (KernelStringProcess, StringRandom) {
-	char *target = (string) "ABCXYZ";
+	auto target = (string) "ABCXYZ";
 	int size = 4;
 	char *result = stringRandom(target, size);
 	
@@ -249,9 +249,8 @@ TEST (KernelStringProcess, StringRandom) {
 	free(result);
 }
 
-// TODO fix this @dquang
 TEST (KernelStringProcess, StringAppend) {
-	char *target = (string) "Hello ";
+	auto target = (string) "Hello ";
 	stringAppend(&target, 'W');
 	
 	void *pointer = target; // use pointer to keep old address on heap

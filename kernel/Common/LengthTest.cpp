@@ -67,12 +67,12 @@ TEST (KernelCommon, LengthPointerPointerChar) {
 
     // Dynamic string
     int NUM = 135;
-    auto data2 = (char **) calloc(NUM + 1, sizeof(char *));
+    auto data2 = (char **) calloc((size_t) NUM + 1, sizeof(char *));
     int i;
     for (i = 0; i < NUM; i++) {
-        data2[i] = (char *) "test";
+        data2[i] = (string) "test";
     }
-    data2[NUM] = '\0';
+    data2[NUM] = nullptr;
     ASSERT_EQUAL(NUM, lengthPointerPointerChar(data2));
     free(data2);
 }
