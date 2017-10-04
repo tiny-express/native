@@ -27,6 +27,9 @@ after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
 - ./misc/build_docker.sh
+- ./misc/benchmark.sh
+- make native_benchmark
+- ./native_benchmark
 notifications:
   email: false
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
