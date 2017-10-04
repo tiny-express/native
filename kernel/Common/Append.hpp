@@ -30,6 +30,8 @@
 #include "../Common.hpp"
 #include "Length.hpp"
 #include <memory>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 
 /**
@@ -41,11 +43,11 @@
  * @return char pointer pointer
  */
 inline char **appendPointerChar(char **target, char *append) {
-	int len = lengthPointerPointerChar(target);
-	auto **pointer = (char **) malloc((len + 2)* sizeof(char *));
-	memcpy(pointer, target, len * sizeof(char *));
-	*( pointer + len ) = append;
-	*( pointer + len + 1 ) = '\0';
+	int targetLength = lengthPointerPointerChar(target);
+	auto **pointer = (char **) malloc((targetLength + 2)* sizeof(char *));
+	memcpy(pointer, target, targetLength * sizeof(char *));
+	*( pointer + targetLength ) = append;
+	*( pointer + targetLength + 1 ) = nullptr;
 	return pointer;
 }
 

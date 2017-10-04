@@ -28,11 +28,14 @@
 #define NATIVE_COMMON_LENGTH_HPP
 
 #include "../Type.hpp"
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
-    register TYPE*pointer;\
+    TYPE*pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }
@@ -41,7 +44,7 @@ inline int lengthPointer##NAME(TYPE *target) {\
 #define P_P_LEN(NAME, TYPE); \
 inline int lengthPointerPointer##NAME(TYPE **target) {\
     if (target == nullptr) return 0;\
-    register TYPE**pointer;\
+    TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }

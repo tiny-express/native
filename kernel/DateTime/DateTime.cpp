@@ -25,7 +25,7 @@
  */
 #include "../Platform.hpp"
 
-#ifdef WINDOWS
+#ifdef WIN
 #include <windows.h>
 #endif
 
@@ -67,7 +67,7 @@ string date(time_t timestamp, string format) {
 	return result;
 }
 
-#ifdef WINDOWS
+#ifdef WIN
 /**
  *
  * @param millisecond
@@ -135,7 +135,7 @@ unsigned long timestamp() {
 	clock_gettime(0, &tsp);
 	return (long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
 #endif
-#ifdef WINDOWS
+#ifdef WIN
 	SYSTEMTIME current_time;
 	GetSystemTime(&current_time);
 	unsigned long timestamp_in_millisecond = unixTimeInMilliseconds(

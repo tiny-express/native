@@ -29,7 +29,7 @@
 //using namespace Java::Lang;
 //
 //Thread::Thread() {
-//	this->target = NULL;
+//	this->target = nullptr;
 //	this->threadName = strdup("");
 //}
 //
@@ -44,7 +44,7 @@
 //}
 //
 //Thread::Thread(String name) {
-//	this->target = NULL;
+//	this->target = nullptr;
 //	this->threadName = strdup(name.toString());
 //}
 //

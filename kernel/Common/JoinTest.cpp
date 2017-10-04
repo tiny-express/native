@@ -38,7 +38,7 @@ TEST (KernelCommon, JoinPointerPointerChar) {
 		(char *) "the",
 		(char *) "lazy",
 		(char *) "dog",
-		'\0'
+		nullptr
 	};
 	auto expect = (string) "Thequickbrownfoxjumpsoverthelazydog";
 	char *result = joinPointerPointerChar(target);
@@ -57,7 +57,7 @@ TEST (KernelCommon, JoinDelimiterPointerPointerChar) {
 		(char *) "the",
 		(char *) "lazy",
 		(char *) "dog",
-		'\0'
+		nullptr
 	};
 	
 	auto *delimiter = (string) "|";

@@ -421,7 +421,7 @@ float Math::scalb(float value, int scaleFactor) {
 }
 
 double Math::scalb(double value, int scaleFactor) {
-	return ::scalb(value, scaleFactor);
+	return ::scalbn(value, scaleFactor);
 }
 
 double Math::signum(double value) {
