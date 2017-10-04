@@ -119,6 +119,11 @@ foreach (test_cpp_file ${TESTS_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
+# Remove all benchmark files within cpp files
+foreach (benchmark_cpp_file ${BENCHMARK_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${benchmark_cpp_file})
+endforeach ()
+
 # Create test binary for testing
 add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
 
