@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "../String/String.hpp"
 #include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
@@ -154,7 +151,7 @@ TEST(JavaLangString, Equals) {
 	ASSERT_TRUE(stringEqual1 != stringEqual3);
 
     // Compare with another object
-    StringBuilder stringBuilder = StringBuilder(String("abcd"));
+    StringBuilder stringBuilder = StringBuilder((string) "abcd");
     ASSERT_FALSE(stringEqual1.equals(stringBuilder));
 }
 
@@ -564,8 +561,8 @@ TEST(JavaLangString, RegionMatch) {
 TEST(JavaLangString, Join) {
     String delimiter = "->";
     String duck = "Duck";
-    StringBuffer dog(String("Dog"));
-    StringBuilder pig(String("Pig"));
+    StringBuffer dog((string) "Dog");
+    StringBuilder pig((string) "Pig");
     String result = String::join(delimiter, duck, dog, pig);
     ASSERT_STR("Duck->Dog->Pig", result.toString());
 }
@@ -796,9 +793,9 @@ TEST(JavaLangString, OperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
 	String textCompare2 = "Hello";
-	int comparable = FALSE;
+	int comparable = false;
 	if (textCompare1 == textCompare2) {
-		comparable = TRUE;
+		comparable = true;
 	}
 	ASSERT_TRUE(comparable);
 }
@@ -807,9 +804,9 @@ TEST(JavaLangString, OperatorNotEquals) {
 	// Given two Strings and compare not equal them - Return comparable
 	String textCompare1 = "Hello1";
 	String textCompare2 = "Hello2";
-	int comparable = FALSE;
+	int comparable = false;
 	if (textCompare1 != textCompare2) {
-		comparable = TRUE;
+		comparable = true;
 	}
 	ASSERT_TRUE(comparable);
 }
@@ -1023,7 +1020,7 @@ TEST(JavaLangString, Format) {
         string key = (string)"Nhà hàng";
         double latitude = 10.824093;
         double longitude = 106.683844;
-        string url = url_decode(key);
+        string url = urlDecode(key);
         String queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
         String body = String::format(queryFormat, url, latitude, longitude);
 

@@ -27,6 +27,7 @@
 #ifndef JAVA_LANG_SYSTEM_SYSTEM_HPP_
 #define JAVA_LANG_SYSTEM_SYSTEM_HPP_
 
+#include "../../../kernel/DateTime.hpp"
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
 #include <iostream>

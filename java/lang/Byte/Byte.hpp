@@ -27,9 +27,10 @@
 #ifndef NATIVE_JAVA_LANG_BYTE_HPP
 #define NATIVE_JAVA_LANG_BYTE_HPP
 
+#include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
 #include "../Integer/Integer.hpp"
-#include "../../../kernel/type.h"
+#include "../../../kernel/Type.hpp"
 
 namespace Java {
 	namespace Lang {

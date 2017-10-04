@@ -27,6 +27,7 @@
 #ifndef JAVA_LANG_DOUBLE_HPP_
 #define JAVA_LANG_DOUBLE_HPP_
 
+#include "../../../kernel/String.hpp"
 #include <limits>
 #include "../Number/Number.hpp"
 #include "../String/String.hpp"
