@@ -38,20 +38,23 @@
  * @return char pointer
  */
 inline char *joinPointerPointerChar(char **target) {
-	register char **pointer;
-	register int totalLength = 0, itemLength = 0;
-	auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
-	for (pointer = target; *pointer; ++pointer) {
-		itemLength = lengthPointerChar(*pointer);
-		memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
-		totalLength += itemLength;
-	}
-	// Allocate enough memory for result
-	auto *result = (char *)calloc((size_t) totalLength + 1, sizeof(char));
-	memcpy(result, temporaryResult, (size_t) totalLength);
-	// Free memory for temporary variable
-	free(temporaryResult);
-	return result;
+#ifdef LINUX
+    register
+#endif
+    int totalLength = 0, itemLength = 0;
+    char **pointer;
+    auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
+    for (pointer = target; *pointer; ++pointer) {
+        itemLength = lengthPointerChar(*pointer);
+        memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
+        totalLength += itemLength;
+    }
+    // Allocate enough memory for result
+    auto *result = (char *) calloc((size_t) totalLength + 1, sizeof(char));
+    memcpy(result, temporaryResult, (size_t) totalLength);
+    // Free memory for temporary variable
+    free(temporaryResult);
+    return result;
 }
 
 /**
@@ -62,24 +65,27 @@ inline char *joinPointerPointerChar(char **target) {
  * @return char pointer
  */
 inline char *joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
-	register char **pointer;
-	register int totalLength = 0, itemLength = 0;
-	int delimiterLength = lengthPointerChar((char *) delimiter);
-	auto *temporaryResult = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
-	for (pointer = target; *pointer; ++pointer) {
-		itemLength = lengthPointerChar(*pointer);
-		memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
-		totalLength += itemLength;
-		memcpy(temporaryResult + totalLength, delimiter, (size_t) delimiterLength);
-		totalLength += delimiterLength;
-	}
-	// Allocate enough memory for result
-	auto *result = (char *) calloc((size_t) totalLength - delimiterLength + 1, sizeof(char));
-	// Copy and remove remainder delimiter
-	memcpy(result, temporaryResult, (size_t) totalLength - delimiterLength);
-	// Free memory for temporary variable
-	free(temporaryResult);
-	return result;
+#ifdef LINUX
+    register
+#endif
+    int totalLength = 0, itemLength = 0;
+    char **pointer;
+    int delimiterLength = lengthPointerChar((char *) delimiter);
+    auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
+    for (pointer = target; *pointer; ++pointer) {
+        itemLength = lengthPointerChar(*pointer);
+        memcpy(temporaryResult + totalLength, *pointer, (size_t) itemLength);
+        totalLength += itemLength;
+        memcpy(temporaryResult + totalLength, delimiter, (size_t) delimiterLength);
+        totalLength += delimiterLength;
+    }
+    // Allocate enough memory for result
+    auto *result = (char *) calloc((size_t) totalLength - delimiterLength + 1, sizeof(char));
+    // Copy and remove remainder delimiter
+    memcpy(result, temporaryResult, (size_t) totalLength - delimiterLength);
+    // Free memory for temporary variable
+    free(temporaryResult);
+    return result;
 }
 
 #endif

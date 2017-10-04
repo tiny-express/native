@@ -28,8 +28,14 @@
 #define NATIVE_PLATFORM_H
 
 #if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
-#ifndef WINDOWS
-#define WINDOWS
+#ifndef WIN
+#define WIN
+#endif
+#endif
+
+#if defined __unix__
+#ifndef UNIX
+#define UNIX
 #endif
 #endif
 

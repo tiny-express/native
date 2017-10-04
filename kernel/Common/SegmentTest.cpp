@@ -161,7 +161,7 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 		(char *) "the",
 		(char *) "lazy",
 		(char *) "dog",
-		'\0'
+		nullptr
 	};
 	int from = 2;
 	int to = 5;
