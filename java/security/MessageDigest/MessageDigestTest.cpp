@@ -24,14 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
 #include <chrono>
 #include "MessageDigest.hpp"
 #include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
+#include "../../../kernel/Test.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Security;
@@ -71,10 +68,7 @@ TEST(JavaSecurity, MD5) {
     md5.update((byte*)input.toString(), input.getSize());
     md5.digest(result, digestLength);
 
-    ASSERT_DATA(expect,
-                sizeof(expect),
-                result,
-                (size_t)digestLength);
+    ASSERT_DATA(expect, sizeof(expect), result, (size_t)digestLength);
 
     md5.reset();
     md5.update((byte*)input.toString(), input.getSize());

@@ -24,10 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
 
+#include "../../../kernel/Test.hpp"
 #include "GeneralSecurityException.hpp"
 
 using namespace Java::Security;
