@@ -27,6 +27,6 @@
 #ifndef NATIVE_BENCHMARK_HPP
 #define NATIVE_BENCHMARK_HPP
 
-#include "benchmark/include/benchmark/benchmark.h"
+#include <benchmark/benchmark.h>
 
 #endif //NATIVE_BENCHMARK_HPP
