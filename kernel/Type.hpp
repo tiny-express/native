@@ -33,7 +33,11 @@
 #include <cstddef>
 #include <cwchar>
 
+#ifdef WIN
+#define boolean bool;
+#else
 typedef bool boolean;
+#endif
 typedef char *string;
 typedef const char *const_string;
 typedef wchar_t unicode;
