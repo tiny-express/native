@@ -25,7 +25,7 @@
  */
 
 
-#include "../../../kernel/test.hpp"
+#include "../../../kernel/Test.hpp"
 
 #include "Float.hpp"
 
