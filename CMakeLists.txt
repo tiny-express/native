@@ -124,6 +124,17 @@ foreach (benchmark_cpp_file ${BENCHMARK_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${benchmark_cpp_file})
 endforeach ()
 
+include(ExternalProject)
+set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
+
+ExternalProject_Add(google-benchmark
+        GIT_REPOSITORY https://github.com/google/benchmark
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+        )
+
+include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
+link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
+
 # Create test binary for testing
 add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
 
@@ -148,12 +159,6 @@ add_custom_target(
         leak
         COMMAND make native_test
         COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
-)
-
-# Check memory leak
-add_custom_target(
-        leak-debug
-        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
 )
 
 # Enable testing

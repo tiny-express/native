@@ -28,7 +28,7 @@ after_success:
 - ./misc/codecov.sh
 - ./misc/build_docker.sh
 - ./misc/benchmark.sh
-- make native_benchmark
+- make benchmark
 - ./native_benchmark
 notifications:
   email: false
