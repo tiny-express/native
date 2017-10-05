@@ -18,3 +18,5 @@ Testing
 /test*
 main.o
 main
+/cygnative.dll
+/native_benchmark
