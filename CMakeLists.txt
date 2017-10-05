@@ -155,8 +155,9 @@ include(CTest)
 enable_testing()
 
 # Add make installation - install to Unix system
-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
+set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
+install(TARGETS ${PROJECT_NAME} DESTINATION lib OPTIONAL)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib OPTIONAL)
 install(FILES library.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
