@@ -34,7 +34,7 @@
 #include <cwchar>
 
 #ifdef WIN
-#define boolean bool;
+#define boolean bool
 #else
 typedef bool boolean;
 #endif
