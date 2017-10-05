@@ -231,7 +231,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
         if (doubleInputToBinary64StringType.charAt(i) == '0') {
             tempValue = 0;
         }
-        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2, exponent);
+        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) Math::pow(2, exponent);
         exponent--;
     }
 
@@ -616,7 +616,7 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
             isNaN = false;
         }
 
-        exponent = exponent + tempValue * pow(2, tempExponent);
+        exponent = exponent + tempValue * Math::pow(2, tempExponent);
         tempExponent--;
     }
     // 3. Find exponentAdjusted
@@ -635,14 +635,14 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
             isNaN = false;
         }
 
-        mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);
+        mantisaBase10 = mantisaBase10 + tempValue * Math::pow(2, tempExponent);
         tempExponent--;
     }
 
     // 5. Find the Double precision floating point decimal value
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
-              * pow(2, exponentAdjusted);
+              * Math::pow(2, exponentAdjusted);
 
     return resultBinary64StringTypeToDouble;
 }

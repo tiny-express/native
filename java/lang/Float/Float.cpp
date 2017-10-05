@@ -442,7 +442,7 @@ float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
             isNaN = false;
         }
 
-        exponent = exponent + tempValue * (float) pow(2, tempExponent);
+        exponent = exponent + tempValue * (float) Math::pow(2, tempExponent);
         tempExponent--;
     }
     // 3. Find exponentAdjusted
@@ -462,14 +462,14 @@ float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
         }
 
         mantisaBase10 = mantisaBase10
-                        + tempValue * (float) (pow(2, tempExponent));
+                        + tempValue * (float) (Math::pow(2, tempExponent));
         tempExponent--;
     }
 
     // 5. Find the Float precision floating point decimal value
     resultBinary32StringTypeToFloat
             = signOfResultbinary32StringTypeToFloat * (1 + mantisaBase10)
-              * (float) (pow(2, exponentAdjusted));
+              * (float) (Math::pow(2, exponentAdjusted));
 
     if (isNaN) {
         return Float::NaN;
@@ -500,7 +500,7 @@ int Float::floatToRawIntBits(float floatInput) {
             tempValue = 0;
         }
         resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue
-                                                            * (int) pow(2, exponent);
+                                                            * (int) Math::pow(2, exponent);
         exponent--;
     }
 
