@@ -27,6 +27,7 @@
 #ifndef JAVA_UTIL_ARRAY_LIST_HPP_
 #define JAVA_UTIL_ARRAY_LIST_HPP_
 
+#include "../../../kernel/String.hpp"
 #include "../../Lang.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../AbstractList/AbstractList.hpp"
@@ -103,7 +104,7 @@ namespace Java {
                                     replacementString = R"(\\)";
                                     break;
                                 default:
-                                        string charAtIndexString = string_from_char(charAtIndex);
+                                        string charAtIndexString = stringFromChar(charAtIndex);
                                         replacementString = charAtIndexString;
                                         free(charAtIndexString);
                             }
