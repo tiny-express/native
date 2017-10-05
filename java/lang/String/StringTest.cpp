@@ -24,9 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
+
+#include "../../../kernel/test.hpp"
+
 
 #include "../String/String.hpp"
 #include "../../Lang.hpp"
@@ -214,16 +214,16 @@ ASSERT_TRUE(compareResult < 0);
 }
 
 TEST(JavaLang, StringConcat) {
-// Given two strings - Return concatenation result
-String textConcat1 = "Hello ";
-String textConcat2 = "World";
-String concatenationResult = textConcat1.concat(textConcat2);
-ASSERT_STR("Hello World", concatenationResult.toString());
+    // Given three strings - Return concatenation result
+    String textConcat0 = "Food Tiny ";
+    String textConcat1 = "Hello ";
+    String textConcat2 = "World";
+    String concatenationResult = textConcat0 + textConcat1 + textConcat2;
+    ASSERT_STR("Food Tiny Hello World", concatenationResult.toString());
 
-// Given three strings - Return concatenation result
-String textConcat0 = "Food Tiny ";
-concatenationResult = textConcat0 + textConcat1 + textConcat2;
-ASSERT_STR("Food Tiny Hello World", concatenationResult.toString());
+    // Given two strings - Return concatenation result
+    concatenationResult = textConcat1.concat(textConcat2);
+    ASSERT_STR("Hello World", concatenationResult.toString());
 }
 
 TEST(JavaLang, StringContains) {
@@ -790,9 +790,9 @@ TEST(JavaLang, StringOperatorEquals) {
 // Given two string and compare equal them - Return comparable
 String textCompare1 = "Hello";
 String textCompare2 = "Hello";
-int comparable = FALSE;
+int comparable = false;
 if (textCompare1 == textCompare2) {
-comparable = TRUE;
+comparable = true;
 }
 ASSERT_TRUE(comparable);
 }
@@ -801,9 +801,9 @@ TEST(JavaLang, StringOperatorNotEquals) {
 // Given two Strings and compare not equal them - Return comparable
 String textCompare1 = "Hello1";
 String textCompare2 = "Hello2";
-int comparable = FALSE;
+int comparable = false;
 if (textCompare1 != textCompare2) {
-comparable = TRUE;
+comparable = true;
 }
 ASSERT_TRUE(comparable);
 }
@@ -991,7 +991,7 @@ ASSERT_STR("Missing arguments.", e.getMessage().toString());
 string key = (string)"Nhà hàng";
 double latitude = 10.824093;
 double longitude = 106.683844;
-string url = url_decode(key);
+string url = urlDecode(key);
 String queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
 String body = String::format(queryFormat, url, latitude, longitude);
 

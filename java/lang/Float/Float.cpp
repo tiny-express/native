@@ -31,22 +31,22 @@ using namespace Java::Lang;
 
 Float::Float() {
     this->original = 0;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::Float(float original) {
     this->original = original;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::Float(const Float &floatNumber) {
     this->original = floatNumber.original;
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::Float(String inputString) {
     this->original = this->parseFloat(inputString).floatValue();
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
 }
 
 Float::~Float() {
@@ -112,7 +112,7 @@ boolean Float::operator||(const Float &target) const {
 Float& Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = string_from_float(this->original);
+    this->originalString = stringFromFloat(this->original);
     return *this;
 }
 
@@ -161,7 +161,7 @@ string Float::toString() const {
 }
 
 Float Float::parseFloat(String inputString) {
-    return (Float) string_to_float(inputString.toString());
+    return (Float) stringToFloat(inputString.toString());
 }
 
 boolean Float::isFinite(float valueFloat) {

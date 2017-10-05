@@ -28,22 +28,23 @@
 #include "../Object/Object.hpp"
 #include "../Math/Math.hpp"
 #include "../Long/Long.hpp"
+#include "../String/String.hpp"
 #include <algorithm>
 using namespace Java::Lang;
 
 Double::Double() {
     this->original = 0;
-    this->originalString = string_from_double(this->original);
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::Double(double original) {
     this->original = original;
-    this->originalString = string_from_double(this->original);
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
     this->original = doubleNumber.original;
-    this->originalString = string_from_double(this->original);
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::~Double() {
@@ -53,7 +54,7 @@ Double::~Double() {
 }
 
 Double Double::parseDouble(String target) {
-    return Double(string_to_double(target.toString()));
+    return Double(stringToDouble(target.toString()));
 }
 
 string Double::toString() const {
@@ -66,8 +67,8 @@ string Double::toString() const {
 //}
 
 char Double::charValue() const {
-    string convertResult = string_from_double(this->original);
-    char charValueResult = string_to_char(convertResult);
+    string convertResult = stringFromDouble(this->original);
+    char charValueResult = stringToChar(convertResult);
     free(convertResult);
     return charValueResult;
 }
@@ -167,7 +168,7 @@ boolean Double::operator||(const Double &target) const {
 Double &Double::operator=(const Double &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = string_from_double(this->original);
+    this->originalString = stringFromDouble(this->original);
     return *this;
 }
 
