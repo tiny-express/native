@@ -19,17 +19,16 @@ addons:
 before_script:
 - export CC=gcc
 - export CXX=g++
-- cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true
+- ./misc/benchmark.sh
+- cmake . -DCMAKE_BUILD_TYPE=Debug   && make native_test -j8
+- cmake . -DCMAKE_BUILD_TYPE=Release && make benchmark
 script:
-- make native_test -j8
 - ./misc/memory_check
+- ./native_benchmark
 after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
 - ./misc/build_docker.sh
-- ./misc/benchmark.sh
-- make benchmark
-- ./native_benchmark
 notifications:
   email: false
   slack: foodtiny:hzkLBCLrqjtgi9ctqwdQ034S
