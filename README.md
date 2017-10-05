@@ -5,7 +5,7 @@
 **Native Library** brings productivity and maintainability for your C/C++ application like a Java program.
 
 * Blazing fast performance, small footprint with no dependency required
-* Provide rich Java Core classes compare to C++/STL ([benchmarking](benchmark))
+* Provide rich Java Core classes compare to C++/STL
 * Zero memory leak and prevents segfaults via automatic storage
 * C++ and Java developers can use strength of two languages
 * Support bindings for NodeJS addon and Python module development (experimental)
