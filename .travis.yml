@@ -20,8 +20,8 @@ before_script:
 - export CC=gcc
 - export CXX=g++
 - ./misc/benchmark.sh
-- cmake . -DCMAKE_BUILD_TYPE=Debug   && make native_test -j8
-- cmake . -DCMAKE_BUILD_TYPE=Release && make benchmark
+- cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
+- cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
 script:
 - ./misc/memory_check
 - ./native_benchmark

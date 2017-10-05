@@ -3,11 +3,7 @@
 # Only run memory check after Travis complete unit testing
 
 # -e: fail on error
-# -v: show commands
-# -x: show expanded commands
-set -vex
-
-env | sort
+set -e
 
 # Python is not available in Travis for osx.
 #  https://github.com/travis-ci/travis-ci/issues/2320
