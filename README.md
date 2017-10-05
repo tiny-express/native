@@ -24,8 +24,8 @@ docker pull foodtiny/native:latest
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake -DCMAKE_BUILD_TYPE=Release  . && make
-$ sudo make install
+$ cmake -DCMAKE_BUILD_TYPE=Release
+$ make && sudo make install
 $ sudo ldconfig
 ```
 
