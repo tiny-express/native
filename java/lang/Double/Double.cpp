@@ -25,11 +25,7 @@
  */
 
 #include "Double.hpp"
-#include "../Object/Object.hpp"
-#include "../Math/Math.hpp"
-#include "../Long/Long.hpp"
-#include "../String/String.hpp"
-#include <algorithm>
+
 using namespace Java::Lang;
 
 Double::Double() {

@@ -30,6 +30,7 @@
 #include "../Number/Number.hpp"
 #include <limits>
 #include "../String/String.hpp"
+#include "../Math/Math.hpp"
 
 /**
  * Bit mask to isolate the exponent field of a
@@ -79,27 +80,6 @@ static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min();  // 2.22507
  * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
  */
 static int MIN_EXPONENT_DOUBLE = -1022;
-
-/**
- * Init Double::MAX_VALUE
- */
-static constexpr double initDoubleMaxValue() noexcept {
-    return (2 - pow(2, -52)) * pow(2, 1023);
-}
-
-/**
- * Init Double::MIN_VALUE
- */
-static constexpr double initDoubleMinValue() noexcept {
-    return pow(2, -1074);
-}
-
-/**
- * Init Double::MIN_NORMAL_DOUBLE
- */
-static constexpr double initMinNormalDouble() noexcept {
-    return pow(2, -1022);
-}
 
 namespace Java {
     namespace Lang {
@@ -165,16 +145,16 @@ namespace Java {
             /**
              * A constant holding the largest positive finite value of type
              */
-            static constexpr double MAX_VALUE = initDoubleMaxValue();
+            static constexpr double MAX_VALUE = std::numeric_limits<double>::max();
             /**
              * A constant holding the smallest positive normal value of type
              */
-            static constexpr double MIN_NORMAL_DOUBLE = initMinNormalDouble();  // 2.225073858507201e-308
+            static constexpr double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min();  // 2.225073858507201e-308
 
             /**
              * A constant holding the smallest positive nonzero value of type
              */
-            static constexpr double MIN_VALUE = initDoubleMinValue();  // 4.940656458412465e-324
+            static constexpr double MIN_VALUE = std::numeric_limits<double>::min();  // 4.940656458412465e-324
 
         public:
             Double();
