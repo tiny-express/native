@@ -2,12 +2,13 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 [![Coverage status](https://codecov.io/gh/foodtiny/native/branch/master/graph/badge.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
 
-**Native Library** brings productivity and maintainability for your C/C++ application as a Java Program.
+**Native Library** brings productivity and maintainability for your C/C++ application like a Java program.
 
 * Blazing fast performance, small footprint with no dependency required
 * Provide rich Java Core classes compare to C++/STL
 * Zero memory leak and prevents segfaults via automatic storage
 * C++ and Java developers can use strength of two languages
+* Support bindings for NodeJS addon and Python module development (experimental)
 * Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
 
@@ -23,9 +24,8 @@ docker pull foodtiny/native:latest
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake . && make
-$ sudo make install
-$ sudo ldconfig
+$ cmake -DCMAKE_BUILD_TYPE=Release
+$ make native && sudo make install
 ```
 
 #### Examples

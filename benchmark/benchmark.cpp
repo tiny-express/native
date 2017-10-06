@@ -24,27 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
+#include "benchmark.hpp"
 
-#define NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
-
-#include <cstddef>
-#include <cwchar>
-
-#ifdef WIN
-#define boolean bool
-#else
-typedef bool boolean;
-#endif
-typedef char *string;
-typedef const char *const_string;
-typedef wchar_t unicode;
-typedef unsigned char byte;
-
-string stringDefault(string target);
-
-double numberDefault(double target);
-
-#endif
+BENCHMARK_MAIN()

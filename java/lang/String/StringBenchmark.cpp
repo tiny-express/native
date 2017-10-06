@@ -24,27 +24,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
+#include "../../../benchmark/benchmark.hpp"
+#include "String.hpp"
+#include <string>
 
-#define NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
+using namespace Java::Lang;
 
-#include <cstddef>
-#include <cwchar>
+void StringContains(benchmark::State& state) {
+    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    String subString = "Praesent sagittis magna orci,";
 
-#ifdef WIN
-#define boolean bool
-#else
-typedef bool boolean;
-#endif
-typedef char *string;
-typedef const char *const_string;
-typedef wchar_t unicode;
-typedef unsigned char byte;
+    while (state.KeepRunning()) {
+        source.contains(subString);
+    }
+}
 
-string stringDefault(string target);
+void StlStringContains(benchmark::State& state) {
+    std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    std::string subString = "Praesent sagittis magna orci,";
 
-double numberDefault(double target);
+    while (state.KeepRunning()) {
+        source.find(subString);
+    }
+}
 
-#endif
+BENCHMARK(StringContains)->RangeMultiplier(10)->Range(1000, 100000);
+BENCHMARK(StlStringContains)->RangeMultiplier(10)->Range(1000, 100000);
