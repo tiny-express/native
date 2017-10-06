@@ -38,7 +38,7 @@
 
 namespace Java {
     namespace Util {
-        template <class Key, class Value>
+        template<class Key, class Value>
         class HashMap :
                 public AbstractMap,
                 public virtual Map<Key, Value>,
@@ -103,6 +103,7 @@ namespace Java {
             ConstIteratorType end() const {
                 return this->original.end();
             }
+
         public:
             /**
              * Compares the specified object
@@ -110,7 +111,7 @@ namespace Java {
              *
              * @param object
              */
-            boolean equals(const HashMap<Key, Value> &anotherHashMap)  {
+            boolean equals(const HashMap<Key, Value> &anotherHashMap) {
 
                 if (this->size() != anotherHashMap.size()) {
                     return false;
@@ -132,7 +133,7 @@ namespace Java {
              *
              * @param action
              */
-            void forEach (BiConsumer<void(Key, Value)> action) {
+            void forEach(BiConsumer<void(Key, Value)> action) {
                 for (auto &element : this->original) {
                     Key key = element.first;
                     Value value = element.second;
@@ -527,7 +528,7 @@ namespace Java {
                 auto const iteratorFind = this->original.find(key);
 
                 if (iteratorFind == this->original.end()) {
-                    this->original[ key ] = value;
+                    this->original[key] = value;
                     return result;
                 } else {
                     result = iteratorFind->second;
@@ -605,7 +606,7 @@ namespace Java {
                 }
 
                 result = iteratorToString->second;
-                this->original[ key ] = value;
+                this->original[key] = value;
 
                 return result;
             }
@@ -633,7 +634,7 @@ namespace Java {
                     return false;
                 }
 
-                this->original[ key ] = newValue;
+                this->original[key] = newValue;
 
                 return true;
             }
@@ -722,6 +723,7 @@ namespace Java {
 
                 return this->backup.toString();
             }
+
         private:
             // TODO(anhnt): Need String support unicode for unicode character
             /**
@@ -762,7 +764,7 @@ namespace Java {
                             replacementString = R"(\\)";
                             break;
                         default:
-                            string charAtIndexString = string_from_char(charAtIndex);
+                            string charAtIndexString = stringFromChar(charAtIndex);
                             replacementString = charAtIndexString;
                             free(charAtIndexString);
                     }
