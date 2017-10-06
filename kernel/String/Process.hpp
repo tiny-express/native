@@ -69,7 +69,7 @@ inline char *stringReplace(char *target, const char *findString, const char *rep
 		}
 	}
 	result[ i ] = '\0';
-	
+
 	return result;
 }
 
@@ -98,7 +98,7 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 	}
 	auto **result = (char **) calloc((size_t) count + 1, sizeof(char *));
 	memcpy(result, data, count * sizeof(char *));
-	result[ count ] = '\0';
+	result[ count ] = nullptr;
 	free(data);
 	return result;
 }
@@ -133,7 +133,7 @@ inline char *stringJoin(char *target[], const char *delimiter) {
 	}
 	int num = lengthPointerPointerChar(target) - 1;
 	int len = 0, wlen = 0;
-	auto *tmp = (char *)calloc(MAX_STRING_LENGTH, sizeof(char));
+	auto *tmp = (char*) calloc(MAX_STRING_LENGTH, sizeof(char));
 #ifdef LINUX
 	register
 #endif
@@ -154,7 +154,7 @@ inline char *stringJoin(char *target[], const char *delimiter) {
 	len += wlen;
 	len += 1;
 	// Saving memory
-	auto *result = (char *)calloc((size_t) len + 1, sizeof(char));
+	auto *result = (char *) calloc((size_t) len + 1, sizeof(char));
 	memcpy(result, tmp, (size_t) len);
 	// Deallocate memory
 	free(tmp);

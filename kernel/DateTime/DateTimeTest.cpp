@@ -28,7 +28,7 @@
 #include "../Test.hpp"
 
 TEST (KernelDateTime, UnixTimestampInMilliseconds) {
-#ifdef WINDOWS
+#ifdef WIN
 	unsigned int millisecond = 123;
 	unsigned int second = 3;
 	unsigned int minute = 20;

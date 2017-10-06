@@ -24,31 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_APPEND_HPP
-#define NATIVE_COMMON_APPEND_HPP
+#include "benchmark.hpp"
 
-#include "../Common.hpp"
-#include "Length.hpp"
-#include <memory>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
-/**
- * Append pointer char
- * Use to append one more element to array
- *
- * @param target
- * @param append
- * @return char pointer pointer
- */
-inline char **appendPointerChar(char **target, char *append) {
-	int targetLength = lengthPointerPointerChar(target);
-	auto **pointer = (char **) malloc((targetLength + 2)* sizeof(char *));
-	memcpy(pointer, target, targetLength * sizeof(char *));
-	*( pointer + targetLength ) = append;
-	*( pointer + targetLength + 1 ) = nullptr;
-	return pointer;
-}
-
-#endif
+BENCHMARK_MAIN()
