@@ -32,11 +32,14 @@
 #include <limits>
 #include "../String/String.hpp"
 #include "../Byte/Byte.hpp"
+#include "../Comparable/Comparable.hpp"
 
 namespace Java {
 	namespace Lang {
+
 		class Float :
-				virtual public Number {
+				virtual public Number,
+				virtual public Comparable<Float> {
 		private:
 			float original;
 			string originalString;
@@ -399,7 +402,7 @@ namespace Java {
              *          Float is numerically greater than
              *          anotherFloat.
              */
-			int compareTo(Float anotherFloat);
+			int compareTo(const Float &anotherFloat) const override;
 
 			/**
              * Compares this object against the specified object.

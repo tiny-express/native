@@ -567,7 +567,7 @@ int Float::compare(float float1, float float2) {
     return 1;
 }
 
-int Float::compareTo(Float anotherFloat) {
+int Float::compareTo(const Float &anotherFloat) const {
     return Float::compare(this->original, anotherFloat.original);
 }
 

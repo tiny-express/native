@@ -231,7 +231,7 @@ TEST (JavaLang, FloatLogicalOperator) {
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
     ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
 
-        // Test Operator && . Case 1   0
+    // Test Operator && . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = false;
@@ -672,170 +672,85 @@ TEST (JavaLang, FloatValueOfParamFloat) {
                       Float::valueOf(1.17549e-38).floatValue());
 }
 
-TEST (JavaLang, FloatToRawIntBits) {
-// Create variable to test
-    float input;
-    int expectedResult;
-    int actualResult;
-
-// Input 0.0
-    input = 0.0;
-    expectedResult = 0;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input Float::POSITIVE_INFINITY
-    input = Float::POSITIVE_INFINITY;
-    expectedResult = 2139095040;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input Float::NEGATIVE_INFINITY
-    input = Float::NEGATIVE_INFINITY;
-    expectedResult = -2139095040;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input Float::NaN
-    input = Float::NaN;
-    expectedResult = 2147483647;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input -0.7
-    input = -0.7f;
-    expectedResult = -1060320051;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input 12.375
-    input = 12.375;
-    expectedResult = 1095106560;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input 1.0
-    input = 1.0;
-    expectedResult = 1065353216;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input 0.375
-    input = 0.375;
-    expectedResult = 1052770304;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input -2
-    input = -2.0f;
-    expectedResult = -1073741824;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input 83
-    input = 83.0;
-    expectedResult = 1118175232;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input -2625
-    input = -2625.0f;
-    expectedResult = -1159991296;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input 0.5
-    input = 0.5;
-    expectedResult = 1056964608;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-
-// Input -1302.12345678
-    input = -1302.12345678f;
-    expectedResult = -1151517683;
-    actualResult = Float::floatToRawIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
-}
-
 TEST (JavaLang, FloatToIntBits) {
-// Create variable to test
+    // Create variable to test
     float input;
     int expectedResult;
     int actualResult;
 
-// Input 0.0
+    // Input 0.0
     input = 0.0;
     expectedResult = 0;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::POSITIVE_INFINITY
+    // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NEGATIVE_INFINITY
+    // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NaN
+    // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -0.7
+    // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 12.375
+    // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 1.0
+    // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.375
+    // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2
+    // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 83
+    // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2625
+    // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.5
+    // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = Float::floatToIntBits(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -1302.12345678
+    // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = Float::floatToIntBits(input);
@@ -863,7 +778,7 @@ TEST (JavaLang, FloatIsNaNParamFloat) {
 }
 
 TEST (JavaLang, FloatFloatValue) {
-// Create variable to test
+    // Create variable to test
     Float variableTestFloatValue;
     float expectedResultFloatValue;
     float actualResultFloatValue;
@@ -1145,14 +1060,14 @@ TEST (JavaLang, FloatIsFinite) {
     ASSERT_FALSE(Float::isFinite(Float::NEGATIVE_INFINITY));
 }
 
-TEST (JavaLang, FloatIsInfinite) {
+TEST (JavaLang, FloatIsInfiniteParamFloat) {
     ASSERT_TRUE(Float::isInfinite(Float::POSITIVE_INFINITY));
     ASSERT_TRUE(Float::isInfinite(Float::NEGATIVE_INFINITY));
     ASSERT_FALSE(Float::isInfinite(13.02));
     ASSERT_FALSE(Float::isInfinite(130.2));
 }
 
-TEST (JavaLang, FloatIsInfinite2) {
+TEST (JavaLang, FloatIsInfiniteNoneParam) {
     Float variableIsInfinite2;
 
     variableIsInfinite2 = Float::POSITIVE_INFINITY;
@@ -1166,84 +1081,84 @@ TEST (JavaLang, FloatIsInfinite2) {
 }
 
 TEST (JavaLang, FloatHashCodeNoneParam) {
-// Create variable to test
+    // Create variable to test
     Float input;
     int expectedResult;
     int actualResult;
 
-// Input 0.0
+    // Input 0.0
     input = 0.0;
     expectedResult = 0;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::POSITIVE_INFINITY
+    // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NEGATIVE_INFINITY
+    // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NaN
+    // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -0.7
+    // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 12.375
+    // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 1.0
+    // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.375
+    // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2
+    // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 83
+    // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2625
+    // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.5
+    // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = input.hashCode();
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -1302.12345678
+    // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = input.hashCode();
@@ -1251,84 +1166,84 @@ TEST (JavaLang, FloatHashCodeNoneParam) {
 }
 
 TEST (JavaLang, FloatHashCodeParamFloat) {
-// Create variable to test
+    // Create variable to test
     float input;
     int expectedResult;
     int actualResult;
 
-// Input 0.0
+    // Input 0.0
     input = 0.0;
     expectedResult = 0;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::POSITIVE_INFINITY
+    // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NEGATIVE_INFINITY
+    // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input Float::NaN
+    // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -0.7
+    // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 12.375
+    // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 1.0
+    // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.375
+    // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2
+    // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 83
+    // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -2625
+    // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input 0.5
+    // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = Float::hashCode(input);
     ASSERT_EQUAL(expectedResult, actualResult);
 
-// Input -1302.12345678
+    // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = Float::hashCode(input);
@@ -1355,78 +1270,78 @@ TEST (JavaLang, FloatMin) {
 }
 
 TEST (JavaLang, FloatIntBitsToFloat) {
-// Create variable to test
+    // Create variable to test
     int intBitsInput;
     float expectedResult;
     float actualResult;
 
-// Input 0.0
+    // Input 0.0
     intBitsInput = 0;
     expectedResult = 0.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input Float::POSITIVE_INFINITY
+    // Input Float::POSITIVE_INFINITY
     intBitsInput = 2139095040;
     expectedResult = Float::POSITIVE_INFINITY;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input Float::NEGATIVE_INFINITY
+    // Input Float::NEGATIVE_INFINITY
     intBitsInput = -2139095040;
     expectedResult = Float::NEGATIVE_INFINITY;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input -0.7
+    // Input -0.7
     intBitsInput = -1060320051;
     expectedResult = -0.7f;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input 12.375
+    // Input 12.375
     intBitsInput = 1095106560;
     expectedResult = 12.375;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input 1.0
+    // Input 1.0
     intBitsInput = 1065353216;
     expectedResult = 1.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input 0.375
+    // Input 0.375
     intBitsInput = 1052770304;
     expectedResult = 0.375;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input -2
+    // Input -2
     intBitsInput = -1073741824;
     expectedResult = -2.0f;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input 83
+    // Input 83
     intBitsInput = 1118175232;
     expectedResult = 83.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input -2625
+    // Input -2625
     intBitsInput = -1159991296;
     expectedResult = -2625.0f;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input 0.5
+    // Input 0.5
     intBitsInput = 1056964608;
     expectedResult = 0.5;
     actualResult = Float::intBitsToFloat(intBitsInput);
     ASSERT_FLOAT_NEAR(expectedResult, actualResult);
 
-// Input -1302.12345678
+    // Input -1302.12345678
     intBitsInput = -1151517683;
     expectedResult = -1302.12345678f;
     actualResult = Float::intBitsToFloat(intBitsInput);
@@ -1546,7 +1461,7 @@ TEST (JavaLang, FloatCompareTo) {
 }
 
 TEST (JavaLang, FloatByteValue) {
-// Create variable to test
+    // Create variable to test
     Float variableTestByteValue;
     byte expectedResultByteValue;
     byte actualResultByteValue;
