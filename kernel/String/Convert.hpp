@@ -152,11 +152,11 @@ inline boolean stringToBoolean(string target) {
  * @return string
  */
 inline string stringFromBoolean(int target) {
-    if (!target) {
-        return strdup("false");
-    }
+	if (!target) {
+		return strdup("false");
+	}
 
-    return strdup("true");
+	return strdup("true");
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP
