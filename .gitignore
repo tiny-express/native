@@ -20,3 +20,4 @@ main.o
 main
 /cygnative.dll
 /native_benchmark
+native_test.exe
