@@ -43,6 +43,7 @@
 #include <map>
 #include <set>
 #include <type_traits>
+#include <string>
 #include <iostream>
 
 // Platform macros

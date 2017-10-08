@@ -29,7 +29,6 @@
 
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
-
 #include <typeinfo>
 #include <regex>
 #include <string>
@@ -333,7 +332,9 @@ namespace Java {
              * @param charSequence
              * @return String
              */
-			boolean contains(const CharSequence &charSequence);
+            inline boolean contains(const CharSequence &charSequence) {
+                return ::strstr(this->original, charSequence.toString()) > 0;
+            }
 
             /**
              * Compares this String to the specified CharSequence.

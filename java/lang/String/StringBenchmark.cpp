@@ -26,11 +26,10 @@
 
 #include "../../../benchmark/benchmark.hpp"
 #include "String.hpp"
-#include <string>
 
 using namespace Java::Lang;
 
-void StringContains(benchmark::State& state) {
+void JavaLangStringContains(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
             " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
@@ -42,7 +41,7 @@ void StringContains(benchmark::State& state) {
     }
 }
 
-void StlStringContains(benchmark::State& state) {
+void StdStringContains(benchmark::State& state) {
     std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
             "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
             " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
@@ -54,5 +53,5 @@ void StlStringContains(benchmark::State& state) {
     }
 }
 
-BENCHMARK(StringContains)->RangeMultiplier(10)->Range(1000, 100000);
-BENCHMARK(StlStringContains)->RangeMultiplier(10)->Range(1000, 100000);
+BENCHMARK(JavaLangStringContains)->RangeMultiplier(10)->Range(1000, 100000);
+BENCHMARK(StdStringContains)->RangeMultiplier(10)->Range(1000, 100000);
