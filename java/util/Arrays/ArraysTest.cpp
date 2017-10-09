@@ -126,7 +126,7 @@ TEST (JavaUtil, ArraysCopyOf) {
 	
 	Array<boolean> arrayBooleanCopy = Arrays::copyOf(arrayBoolean, 5);
 	for (int index = 0; index < 5; ++index) {
-		ASSERT_TRUE(arrayBoolean.get(index) == arrayBooleanCopy.get(index));
+		assertTrue(arrayBoolean.get(index) == arrayBooleanCopy.get(index));
 	}
 	
 	/// Give valid array char and arrayLength to test copyOf with less than length
@@ -143,7 +143,7 @@ TEST (JavaUtil, ArraysCopyOf) {
 	
 	Array<float> arrayFloatCopy = Arrays::copyOf(arrayFloat, 6);
 	for (int index = 0; index < 6; ++index) {
-		ASSERT_TRUE(arrayResultFloat.get(index) == arrayFloatCopy.get(index));
+		assertTrue(arrayResultFloat.get(index) == arrayFloatCopy.get(index));
 	}
 }
 
@@ -152,13 +152,13 @@ TEST (JavaUtil, ArraysEquals) {
 	Array<boolean> arrayBoolean = { false, false, false, false, true };
 	Array<boolean> arrayCompareBoolean = { false, false, false, false, true };
 	
-	ASSERT_TRUE(Arrays::equals(arrayBoolean, arrayCompareBoolean));
+	assertTrue(Arrays::equals(arrayBoolean, arrayCompareBoolean));
 	
 	/// Give valid array long to test equals - this test case wrapped <int>, <short>, <char> also
 	Array<long> arrayLong = { 12, 66, 16, 35, 87 };
 	Array<long> arrayCompareLong = { 12, 66, 16, 35, 87 };
 	
-	ASSERT_TRUE(Arrays::equals(arrayLong, arrayCompareLong));
+	assertTrue(Arrays::equals(arrayLong, arrayCompareLong));
 }
 
 TEST (JavaUtil, ArraysFill) {
@@ -177,7 +177,7 @@ TEST (JavaUtil, ArraysFill) {
 	
 	Arrays::fill(&arrayFloat, filledFloatVal);
 	for (int index = 0; index < arrayFloat.length; ++index) {
-		ASSERT_TRUE(filledFloatVal == arrayFloat[ index ]);
+		assertTrue(filledFloatVal == arrayFloat[ index ]);
 	}
 }
 

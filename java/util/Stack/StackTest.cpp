@@ -99,19 +99,19 @@ TEST (JavaUtil, StackEmpty) {
 	
 	// int
 	Stack<int> emptyIntStack;
-	ASSERT_TRUE(emptyIntStack.empty());
+	assertTrue(emptyIntStack.empty());
 	
 	// Integer
 	Stack<Integer> emptyIntegerStack;
-	ASSERT_TRUE(emptyIntegerStack.empty());
+	assertTrue(emptyIntegerStack.empty());
 	
 	// string
 	Stack<String> emptyStringStack;
-	ASSERT_TRUE(emptyStringStack.empty());
+	assertTrue(emptyStringStack.empty());
 	
 	// Object
 	Stack<Object> emptyObjectStack;
-	ASSERT_TRUE(emptyObjectStack.empty());
+	assertTrue(emptyObjectStack.empty());
 	
 	// Give an not empty Stack
 	

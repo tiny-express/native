@@ -1298,7 +1298,7 @@ TEST(JavaLang, MathRandom) {
 	// Test 100 number generated, check if all number are in range [0, 1)
 	for (int index = 0; index < 100; index++) {
 		double generatedNumber = Math::random();
-		ASSERT_TRUE(generatedNumber >=  0 && generatedNumber < 1);
+		assertTrue(generatedNumber >=  0 && generatedNumber < 1);
 	}
 }
 

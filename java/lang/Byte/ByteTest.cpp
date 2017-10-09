@@ -111,8 +111,8 @@ TEST(JavaLang, ByteCompareTo) {
 
     // Compare
     assertEquals(0, firstBytes.compareTo(secondBytes));
-    ASSERT_TRUE(firstBytes.compareTo(thirdBytes) < 0);
-    ASSERT_TRUE(thirdBytes.compareTo(firstBytes) > 0);
+    assertTrue(firstBytes.compareTo(thirdBytes) < 0);
+    assertTrue(thirdBytes.compareTo(firstBytes) > 0);
 
     Comparable<Bytes> *comparable = &secondBytes;
     assertEquals(0, comparable->compareTo(firstBytes));
@@ -180,7 +180,7 @@ TEST(JavaLang, ByteByteEquals) {
     Bytes secondBytes = 1;
     Bytes thirdBytes = 3;
 
-    ASSERT_TRUE(firstBytes.equals(secondBytes));
+    assertTrue(firstBytes.equals(secondBytes));
     ASSERT_FALSE(firstBytes.equals(thirdBytes));
     /*// Test Bytes and Object
     Object object;
@@ -431,9 +431,9 @@ TEST(JavaLang, ByteCompare) {
     byte byte2 = 10;
     byte byte3 = 5;
     // Return a value < 0 if a < b
-    ASSERT_TRUE(Bytes::compare(byte1, byte2) < 0);
+    assertTrue(Bytes::compare(byte1, byte2) < 0);
     // Return a value > 0 if a > b
-    ASSERT_TRUE(Bytes::compare(byte2, byte1) > 0);
+    assertTrue(Bytes::compare(byte2, byte1) > 0);
     // Return a value = 0 if a < b
     assertEquals(0, Bytes::compare(byte1, byte3));
 }
@@ -461,19 +461,19 @@ TEST(JavaLang, ByteByteOperator) {
 	
 	// Make a summation with targetByte
 	Bytes summationByte = 8;
-	ASSERT_TRUE(summationByte == (validByte + targetByte));
+	assertTrue(summationByte == (validByte + targetByte));
 	
 	// Make a subtraction with targetByte
 	Bytes subtractionByte = 2;
-	ASSERT_TRUE(subtractionByte == (validByte - targetByte));
+	assertTrue(subtractionByte == (validByte - targetByte));
 	
 	// Make a multiplication with targetByte
 	Bytes multiplicationByte = 15;
-	ASSERT_TRUE(multiplicationByte == (validByte * targetByte));
+	assertTrue(multiplicationByte == (validByte * targetByte));
 	
 	// Make a division with targetByte
 	Bytes divisionByte = 1;
-	ASSERT_TRUE(divisionByte == (validByte / targetByte));
+	assertTrue(divisionByte == (validByte / targetByte));
 
     try {
         divisionByte = validByte / zeroByte;
@@ -484,7 +484,7 @@ TEST(JavaLang, ByteByteOperator) {
 	
 	// Make a modulo with targetByte
 	Bytes modulusByte = 2;
-	ASSERT_TRUE(modulusByte == (validByte % targetByte));
+	assertTrue(modulusByte == (validByte % targetByte));
 
     try {
         modulusByte = validByte % zeroByte;
@@ -494,27 +494,27 @@ TEST(JavaLang, ByteByteOperator) {
     }
 
     // Determine if 2 byte is equal
-    ASSERT_TRUE(validByte == equalValidByte);
+    assertTrue(validByte == equalValidByte);
     ASSERT_FALSE(validByte == targetByte);
-    ASSERT_TRUE(validByte != targetByte);
+    assertTrue(validByte != targetByte);
     ASSERT_FALSE(validByte != equalValidByte);
 
     // Determine if validByte is bigger than targetByte
-    ASSERT_TRUE(validByte > targetByte);
+    assertTrue(validByte > targetByte);
     ASSERT_FALSE(targetByte > validByte);
 
     // Determine if validByte is smaller than targetByte
-    ASSERT_TRUE(targetByte < validByte);
+    assertTrue(targetByte < validByte);
     ASSERT_FALSE(validByte < targetByte);
 
     // Determine if validByte is bigger than targetByte
-    ASSERT_TRUE(validByte >= targetByte);
-    ASSERT_TRUE(validByte >= equalValidByte);
+    assertTrue(validByte >= targetByte);
+    assertTrue(validByte >= equalValidByte);
     ASSERT_FALSE(targetByte >= validByte);
 
     // Determine if validByte is bigger than targetByte
-    ASSERT_TRUE(targetByte <= validByte);
-    ASSERT_TRUE(validByte <= equalValidByte);
+    assertTrue(targetByte <= validByte);
+    assertTrue(validByte <= equalValidByte);
     ASSERT_FALSE(validByte <= targetByte);
 
     // Make a summation from validByte with targetByte and assign the result value to this Byte

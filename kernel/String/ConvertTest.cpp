@@ -332,25 +332,25 @@ TEST (KernelStringConvert, StringToBoolean) {
 	int boolean0 = stringToBoolean(target0);
 	
 	// Check if the result is TRUE or not
-	ASSERT_TRUE(boolean0);
+	assertTrue(boolean0);
 	
 	// Input a string representing "TRUE" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target1 = (string) "TRUE";
 	int boolean1 = stringToBoolean(target1);
-	ASSERT_TRUE(boolean1);
+	assertTrue(boolean1);
 	
 	// Input a string representing "True" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target2 = (string) "True";
 	int boolean2 = stringToBoolean(target2);
-	ASSERT_TRUE(boolean2);
+	assertTrue(boolean2);
 	
 	// Input a string representing "true" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target3 = (string) "true";
 	int boolean3 = stringToBoolean(target3);
-	ASSERT_TRUE(boolean3);
+	assertTrue(boolean3);
 	
 	// Input a string representing "FALSE" to convert from string to boolean
 	// Than check if the result is FALSE or not

@@ -105,7 +105,7 @@ TEST (JavaUtil, VectorAddAll) {
 	// Given an empty vector.
 	Vector<int> vector1;
 	// Add all elements from initializer list.
-	ASSERT_TRUE(vector1.addAll({ 1, 2, 3, 4, 5 }));
+	assertTrue(vector1.addAll({ 1, 2, 3, 4, 5 }));
 	// Checks size.
 	assertEquals(5, vector1.size());
 	// Check the first-last elements.
@@ -120,7 +120,7 @@ TEST (JavaUtil, VectorAddAll) {
 	vector2.add(4);
 	vector2.add(5);
 	// Add initializer list at index 2.
-	ASSERT_TRUE(vector2.addAll(2, { 7, 8, 9 }));
+	assertTrue(vector2.addAll(2, { 7, 8, 9 }));
 	// Check the first-last element.
 	assertEquals(8, vector2.size());
 	assertEquals(1, vector2.firstElement());
@@ -183,7 +183,7 @@ TEST (JavaUtil, VectorContains) {
 	vector.add(4);
 	vector.add(5);
 	ASSERT_FALSE(vector.contains(0));
-	ASSERT_TRUE(vector.contains(5));
+	assertTrue(vector.contains(5));
 }
 
 TEST (JavaUtil, VectorContainsAll) {
@@ -191,7 +191,7 @@ TEST (JavaUtil, VectorContainsAll) {
 	Vector<int> vector { 1, 2, 3, 4, 5 };
 	// Checks vector for having all elements in a list.
 	ASSERT_FALSE(vector.containsAll({ 1, 2, 3, 4, 6 }));
-	ASSERT_TRUE(vector.containsAll({ 1, 2, 3, 4, 5 }));
+	assertTrue(vector.containsAll({ 1, 2, 3, 4, 5 }));
 }
 
 TEST (JavaUtil, VectorCopyInto) {
@@ -247,7 +247,7 @@ TEST (JavaUtil, VectorEquals) {
 	// Given two valid vector, check they are equals or not.
 	Vector<int> vector2 { 1, 2, 3, 4, 5, 6, 7 };
 	Vector<int> target2 { 1, 2, 3, 4, 5, 6, 7 };
-	ASSERT_TRUE(vector2.equals(target2));
+	assertTrue(vector2.equals(target2));
 }
 
 TEST (JavaUtil, VectorFirstElement) {
@@ -275,7 +275,7 @@ TEST (JavaUtil, VectorGet) {
 TEST (JavaUtil, VectorIsEmpty) {
 	// Given an empty vector, vector is empty.
 	Vector<int> vector;
-	ASSERT_TRUE(vector.isEmpty());
+	assertTrue(vector.isEmpty());
 	// Add an element into vector, vector is not empty.
 	vector.add(0);
 	ASSERT_FALSE(vector.isEmpty());
@@ -361,7 +361,7 @@ TEST (JavaUtil, VectorRemove) {
 	vector2.add(String("4"));
 	vector2.add(String("5"));
 	ASSERT_FALSE(vector2.remove(String("10"))); // This element doesn't exists.
-	ASSERT_TRUE(vector2.remove(String("5")));
+	assertTrue(vector2.remove(String("5")));
 	
 	Vector<Integer> vector3;
 	vector3.add(Integer(1));
@@ -377,7 +377,7 @@ TEST (JavaUtil, VectorRemoveAll) {
 	// Given a valid vector.
 	Vector<int> vector({ 1, 2, 3, 4, 5 });
 	// Removes element appearing in the specified list.
-	ASSERT_TRUE(vector.removeAll({ 1, 2, 3 }));
+	assertTrue(vector.removeAll({ 1, 2, 3 }));
 	// Checks size and the first-last element.
 	assertEquals(2, vector.size());
 	assertEquals(4, vector.firstElement());
@@ -458,7 +458,7 @@ TEST (JavaUtil, VectorRemoveRange) {
 
 TEST (JavaUtil, VectorRetainAll) {
 	Vector<int> vector { 1, 2, 3, 4, 5 };
-	ASSERT_TRUE(vector.retainAll({ 4, 5, 6 }));
+	assertTrue(vector.retainAll({ 4, 5, 6 }));
 	assertEquals(2, vector.size());
 	assertEquals(4, vector.firstElement());
 	assertEquals(5, vector.lastElement());

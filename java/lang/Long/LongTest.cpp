@@ -120,27 +120,27 @@ TEST (JavaLang, LongComparision) {
 	
 	// Test validNumber is equal targetNumber
 	targetNumber = 123000000000;
-	ASSERT_TRUE(validNumber == targetNumber);
+	assertTrue(validNumber == targetNumber);
 	
 	// Test validNumber is not equal targetNumber
 	targetNumber = 113000000000;
-	ASSERT_TRUE(validNumber != targetNumber);
+	assertTrue(validNumber != targetNumber);
 	
 	// Test validNumber is less than targetNumber
 	targetNumber = 124000000000;
-	ASSERT_TRUE(validNumber < targetNumber);
+	assertTrue(validNumber < targetNumber);
 	
 	// Test validNumber is equal or less then targetNumber
 	targetNumber = 125000000000;
-	ASSERT_TRUE(validNumber <= targetNumber);
+	assertTrue(validNumber <= targetNumber);
 	
 	// Test validNumber is more than targetNumber
 	targetNumber = 122000000000;
-	ASSERT_TRUE(validNumber > targetNumber);
+	assertTrue(validNumber > targetNumber);
 	
 	// Test validNumber is equal or more than targetNumber
 	targetNumber = 121000000000;
-	ASSERT_TRUE(validNumber >= targetNumber);
+	assertTrue(validNumber >= targetNumber);
 }
 
 TEST (JavaLang, LongOperator) {
@@ -150,23 +150,23 @@ TEST (JavaLang, LongOperator) {
 	
 	// Make a summation with targetNumber
 	Long summationNumber = 8;
-	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
+	assertTrue(summationNumber == ( validNumber + targetNumber ));
 	
 	// Make a subtraction with targetNumber
 	Long subtractionNumber = 2;
-	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
+	assertTrue(subtractionNumber == ( validNumber - targetNumber ));
 	
 	// Make a multiplication with targetNumber
 	Long multiplicationNumber = 15;
-	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
+	assertTrue(multiplicationNumber == ( validNumber * targetNumber ));
 	
 	// Make a division with targetNumber
 	Long divisionNumber = 1;
-	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
+	assertTrue(divisionNumber == ( validNumber / targetNumber ));
 	
 	// Make a modulo with targetNumber
 	Long modNumber = 2;
-	ASSERT_TRUE(modNumber == ( validNumber % targetNumber ));
+	assertTrue(modNumber == ( validNumber % targetNumber ));
 }
 
 TEST (JavaLang, LongParseLong) {
@@ -194,7 +194,7 @@ TEST (JavaLang, LongEquals) {
 	Long validValue = 1231372934234234L;
 	Long anotherValue = 2434234234234L;
 	
-	ASSERT_TRUE(validValue.equals(validValue));
+	assertTrue(validValue.equals(validValue));
 	
 	ASSERT_FALSE(validValue.equals(anotherValue));
 }

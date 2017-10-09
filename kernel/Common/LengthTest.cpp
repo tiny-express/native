@@ -79,10 +79,10 @@ TEST (KernelCommon, LengthPointerPointerChar) {
 
 TEST (KernelCommon, IsEmpty) {
 	string target1 = nullptr;
-	ASSERT_TRUE(isEmptyString(target1));
+	assertTrue(isEmptyString(target1));
 
     auto target2 = (string) "";
-	ASSERT_TRUE(isEmptyString(target2));
+	assertTrue(isEmptyString(target2));
 
 	auto target3 = (string) "abcd";
 	ASSERT_FALSE(isEmptyString(target3));

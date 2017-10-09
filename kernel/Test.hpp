@@ -190,9 +190,12 @@ void assertNull(void *actual);
  */
 void assertNotNull(const void *actual);
 
-void assert_true(int actual, const char *caller, int line);
-
-#define ASSERT_TRUE(actual) assert_true(actual, __FILE__, __LINE__)
+/**
+ * Assert True
+ *
+ * @param actual
+ */
+void assertTrue(int actual);
 
 void assert_false(int actual, const char *caller, int line);
 
@@ -527,9 +530,9 @@ void assertNotNull(const void* actual) {
     }
 }
 
-void assert_true(int actual, const_string caller, int line) {
+void assertTrue(int actual) {
     if ((actual) == 0) {
-    CTEST_ERR("%s:%d  should be true", caller, line);
+    CTEST_ERR("%s:%d  should be true", __FILE__, __LINE__);
     }
 }
 

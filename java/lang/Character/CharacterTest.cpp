@@ -34,11 +34,11 @@ TEST (JavaLang, CharacterConstructor) {
 	Character variableTestConstructor;
 	
 	// Test NULL value
-	ASSERT_TRUE(variableTestConstructor.charValue() == '\0');
+	assertTrue(variableTestConstructor.charValue() == '\0');
 	
 	// Test valid case
 	variableTestConstructor = 'M';
-	ASSERT_TRUE(variableTestConstructor.charValue() == 'M');
+	assertTrue(variableTestConstructor.charValue() == 'M');
 	
 	// Test invalid case
 	variableTestConstructor = 'M';
@@ -77,11 +77,11 @@ TEST (JavaLang, CharacterCharValue) {
 	Character variableTestCharValue;
 	
 	// Test NULL value
-	ASSERT_TRUE(variableTestCharValue.charValue() == '\0');
+	assertTrue(variableTestCharValue.charValue() == '\0');
 	
 	// Test valid case
 	variableTestCharValue = 'M';
-	ASSERT_TRUE(variableTestCharValue.charValue() == 'M');
+	assertTrue(variableTestCharValue.charValue() == 'M');
 	
 	// Test invalid case
 	variableTestCharValue = 'M';
@@ -405,7 +405,7 @@ TEST (JavaLang, CharacterIsHighSurrogate) {
 	// Test valid case
 	variableTestIsHighSurrogate = '\u000D800';
 	actualResultIsHighSurrogate = Character::isHighSurrogate(variableTestIsHighSurrogate);
-	ASSERT_TRUE(actualResultIsHighSurrogate);
+	assertTrue(actualResultIsHighSurrogate);
 	
 	// Test invalid case
 	variableTestIsHighSurrogate = '\u000D777';
@@ -423,7 +423,7 @@ TEST (JavaLang, CharacterisLowSurrogate) {
 	// Test valid case
 	variableTestisLowSurrogate = '\u000DC00';
 	actualResultisLowSurrogate = Character::isLowSurrogate(variableTestisLowSurrogate);
-	ASSERT_TRUE(actualResultisLowSurrogate);
+	assertTrue(actualResultisLowSurrogate);
 	
 	// Test invalid case
 	variableTestisLowSurrogate = '\u000DB00';
@@ -439,7 +439,7 @@ TEST (JavaLang, CharacterIsSurrogate) {
 	// Test valid case
 	variableTestIsSurrogate = '\u000DC00';
 	actualResultIsSurrogate = Character::isSurrogate(variableTestIsSurrogate);
-	ASSERT_TRUE(actualResultIsSurrogate);
+	assertTrue(actualResultIsSurrogate);
 	
 	// Test invalid case
 	variableTestIsSurrogate = L'A';

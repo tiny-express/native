@@ -71,7 +71,7 @@ TEST (JavaUtil, PriorityQueueContains) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
-	ASSERT_TRUE(priorityQueue.contains(1));
+	assertTrue(priorityQueue.contains(1));
 	ASSERT_FALSE(priorityQueue.contains(7));
 }
 
@@ -95,7 +95,7 @@ TEST (JavaUtil, PriorityQueuePeek) {
 	
 	PriorityQueue<Integer> integerPriorityQueue;
 	assertEquals(0, integerPriorityQueue.size());
-	ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
+	assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
 }
 
 TEST (JavaUtil, PriorityQueuePoll) {
@@ -109,7 +109,7 @@ TEST (JavaUtil, PriorityQueuePoll) {
 	
 	PriorityQueue<Integer> integerPriorityQueue;
 	assertEquals(0, integerPriorityQueue.size());
-	ASSERT_TRUE(Integer() == integerPriorityQueue.peek()); // default value of Integer.
+	assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer.
 }
 
 TEST (JavaUtil, PriorityQueueRemove) {
@@ -117,7 +117,7 @@ TEST (JavaUtil, PriorityQueueRemove) {
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
 	
-	ASSERT_TRUE(priorityQueue.remove(5));
+	assertTrue(priorityQueue.remove(5));
 	assertEquals(4, priorityQueue.size());
 	assertEquals(4, priorityQueue.peek());
 	
@@ -138,18 +138,18 @@ TEST (JavaUtil, PriorityQueueToArray) {
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
 	Array<int> arrayResult1 = priorityQueue.toArray();
-	ASSERT_TRUE(arrayResult1.length == priorityQueue.size());
+	assertTrue(arrayResult1.length == priorityQueue.size());
 	
 	PriorityQueue<Integer> integerPriorityQueue { Integer(1), Integer(2) };
 	assertEquals(2, integerPriorityQueue.size());
-	ASSERT_TRUE(Integer(2) == integerPriorityQueue.peek());
+	assertTrue(Integer(2) == integerPriorityQueue.peek());
 	
 	// if length of array is larger than queue size.
 	Array<Integer> integerArray1 = { Integer(), Integer(), Integer(), Integer(4) };
 	assertEquals(4, integerArray1.length);
 	integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
-	ASSERT_TRUE(Integer() != integerArray1[ 0 ]);
-	ASSERT_TRUE(Integer().intValue() == integerArray1[ 2 ].intValue()); // default Integer value (same as null).
+	assertTrue(Integer() != integerArray1[ 0 ]);
+	assertTrue(Integer().intValue() == integerArray1[ 2 ].intValue()); // default Integer value (same as null).
 	
 	// if length of array is less than queue size.
 	Array<Integer> integerArray2;

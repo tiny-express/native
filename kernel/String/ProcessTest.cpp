@@ -147,7 +147,7 @@ TEST (KernelStringProcess, StringSplit) {
 TEST (KernelStringProcess, StringStartsWith) {
 	auto target = (string) "Hello World";
 	auto prefix = (string) "Hello";
-	ASSERT_TRUE(stringStartswith(target, prefix));
+	assertTrue(stringStartswith(target, prefix));
 	
 	prefix = (string) "Nope";
 	ASSERT_FALSE(stringStartswith(target, prefix));
@@ -159,7 +159,7 @@ TEST (KernelStringProcess, StringStartsWith) {
 TEST (KernelStringProcess, StringEndsWith) {
 	auto target = (string) "Hello World";
 	auto suffix = (string) "World";
-	ASSERT_TRUE(stringEndswith(target, suffix));
+	assertTrue(stringEndswith(target, suffix));
 	
 	suffix = (string) "Nope";
 	ASSERT_FALSE(stringEndswith(target, suffix));
@@ -471,7 +471,7 @@ TEST (KernelStringProcess, StringStandardized) {
 TEST (KernelStringProcess, StringEquals) {
 	char *target1 = nullptr;
 	char *target2 = nullptr;
-	ASSERT_TRUE(stringEquals(target1, target2));
+	assertTrue(stringEquals(target1, target2));
 	
 	target1 = (char *) "hello";
 	target2 = nullptr;
@@ -487,7 +487,7 @@ TEST (KernelStringProcess, StringEquals) {
 	
 	target1 = (string) "abcd";
 	target2 = (string) "abcd";
-	ASSERT_TRUE(stringEquals(target1, target2));
+	assertTrue(stringEquals(target1, target2));
 }
 
 TEST (KernelStringProcess, StringReverse) {
@@ -499,7 +499,7 @@ TEST (KernelStringProcess, StringReverse) {
 	
 	
 	// Test true with correct reverse string
-	ASSERT_TRUE(stringEquals(correct_reverse, reverse_of_target));
+	assertTrue(stringEquals(correct_reverse, reverse_of_target));
 	
 	// Test fail with wrong reverse string
 	ASSERT_FALSE(stringEquals(wrong_reverse, reverse_of_target));
@@ -515,7 +515,7 @@ TEST (KernelStringProcess, StringMatches) {
 	char *reverse_of_target = stringReverse(target);
 	
 	// Test true with correct reverse string
-	ASSERT_TRUE(stringEquals(correct_reverse, reverse_of_target));
+	assertTrue(stringEquals(correct_reverse, reverse_of_target));
 	
 	// Test fail with wrong reverse string
 	ASSERT_FALSE(stringEquals(wrong_reverse, reverse_of_target));

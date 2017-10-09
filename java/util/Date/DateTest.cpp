@@ -228,7 +228,7 @@
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
 //    Date dateBefore = Date(2017, 05, 21, 14, 05, 40);
-//    ASSERT_TRUE(date.after(dateBefore));
+//    assertTrue(date.after(dateBefore));
 //
 //    Date dateAfter = Date(2017, 05, 21, 14, 05, 45);
 //    ASSERT_FALSE(date.after(dateAfter));
@@ -242,7 +242,7 @@
 //    ASSERT_FALSE(date.before(dateBefore));
 //
 //    Date dateAfter = Date(2017, 05, 21, 14, 05, 45);
-//    ASSERT_TRUE(date.before(dateAfter));
+//    assertTrue(date.before(dateAfter));
 //}
 //
 //TEST (JavaUtil, DateClone) {

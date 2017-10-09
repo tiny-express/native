@@ -48,7 +48,7 @@ TEST(JavaUtil, LinkedListContains) {
 	linkedList.add(';');
 	
 	char expectedValue = '#';
-	ASSERT_TRUE(linkedList.contains(expectedValue));
+	assertTrue(linkedList.contains(expectedValue));
 	
 	char unexpectedValue = '5';
 	ASSERT_FALSE(linkedList.contains(unexpectedValue));

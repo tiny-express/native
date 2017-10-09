@@ -30,7 +30,7 @@
 TEST (JavaLang, BooleanConstructor) {
 	// Give a object Boolean with value true - Should be true
 	Boolean objectBoolean1(true);
-	ASSERT_TRUE(objectBoolean1.booleanValue());
+	assertTrue(objectBoolean1.booleanValue());
 	
 	// Give a object Boolean with value false - Should be false
 	Boolean objectBoolean2(false);
@@ -38,7 +38,7 @@ TEST (JavaLang, BooleanConstructor) {
 	
 	// Give a object Boolean with String - Should be true
 	Boolean objectBoolean3("True");
-	ASSERT_TRUE(objectBoolean3.booleanValue());
+	assertTrue(objectBoolean3.booleanValue());
 	
 	// Give a object Boolean with String - Should be false
 	Boolean objectBoolean4("False");
@@ -49,7 +49,7 @@ TEST (JavaLang, BooleanDestructor) {
 	// Create new object Boolean, then delete - Should not leak memory
 	Boolean *newBoolean = new Boolean(true);
 	boolean result = newBoolean->booleanValue();
-	ASSERT_TRUE(result);
+	assertTrue(result);
 	delete newBoolean;
 }
 

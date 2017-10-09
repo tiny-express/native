@@ -143,14 +143,14 @@ TEST(JavaLang, StringEquals) {
 // Given two String objects with same value - Return they should equal
 String stringEqual1 = "Hello World";
 String stringEqual2 = "Hello World";
-ASSERT_TRUE(instanceof<String>(stringEqual1));
-ASSERT_TRUE(stringEqual1.equals(stringEqual2));
-ASSERT_TRUE(stringEqual1 == stringEqual2);
+assertTrue(instanceof<String>(stringEqual1));
+assertTrue(stringEqual1.equals(stringEqual2));
+assertTrue(stringEqual1 == stringEqual2);
 
 // Compare with another String object - Return they are not equal
 String stringEqual3 = "Food Tiny";
-ASSERT_TRUE(!stringEqual1.equals(stringEqual3));
-ASSERT_TRUE(stringEqual1 != stringEqual3);
+assertTrue(!stringEqual1.equals(stringEqual3));
+assertTrue(stringEqual1 != stringEqual3);
 
 // Compare with another object
 StringBuilder stringBuilder = StringBuilder((string) "abcd");
@@ -185,17 +185,17 @@ String greaterString = "abcdef";
 String equalToGreater = "abcdef";
 
 int compareResult = greaterString.compareTo(smallerString);
-ASSERT_TRUE(compareResult > 0);
+assertTrue(compareResult > 0);
 
 compareResult = greaterString.compareTo(equalToGreater);
-ASSERT_TRUE(compareResult == 0);
+assertTrue(compareResult == 0);
 
 compareResult = smallerString.compareTo(greaterString);
-ASSERT_TRUE(compareResult < 0);
+assertTrue(compareResult < 0);
 
 Comparable<String> *comparable = &greaterString;
 compareResult = comparable->compareTo(smallerString);
-ASSERT_TRUE(compareResult > 0);
+assertTrue(compareResult > 0);
 }
 
 TEST(JavaLang, StringCompareToIgnoreCase) {
@@ -204,13 +204,13 @@ String greaterString = "hello";
 String greaterUpperCase = "HELLO";
 
 int compareResult = greaterString.compareToIgnoreCase(smallerString);
-ASSERT_TRUE(compareResult > 0);
+assertTrue(compareResult > 0);
 
 compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
-ASSERT_TRUE(compareResult == 0);
+assertTrue(compareResult == 0);
 
 compareResult = smallerString.compareToIgnoreCase(greaterString);
-ASSERT_TRUE(compareResult < 0);
+assertTrue(compareResult < 0);
 }
 
 TEST(JavaLang, StringConcat) {
@@ -233,7 +233,7 @@ String subString = "valid string";
 String invalidSubString = "text";
 
 // Test true with correct substring inside
-ASSERT_TRUE(validString.contains(subString));
+assertTrue(validString.contains(subString));
 // Test with with invalid substring inside
 ASSERT_FALSE(validString.contains(invalidSubString));
 }
@@ -241,12 +241,12 @@ ASSERT_FALSE(validString.contains(invalidSubString));
 TEST(JavaLang, StringContentEqual) {
 String string = String("Hello world");
 CharSequence *charSequence = new StringBuffer("Hello world");
-ASSERT_TRUE(string.contentEquals(*charSequence));
+assertTrue(string.contentEquals(*charSequence));
 StringBuffer *stringBuffer = dynamic_cast<StringBuffer *>(charSequence);
 delete stringBuffer;
 
 String stringEqual = String("Hello world");
-ASSERT_TRUE(string.contentEquals(stringEqual));
+assertTrue(string.contentEquals(stringEqual));
 
 String stringNotEqual = String("hello");
 ASSERT_FALSE(string.contentEquals(stringNotEqual));
@@ -290,7 +290,7 @@ assertEquals("String index out of range: 15", e.getMessage().toString());
 TEST(JavaLang, StringEndsWith) {
 String textPlus = "Hello welcome to VietNam";
 String String_string = "VietNam";
-ASSERT_TRUE(textPlus.endsWith(String_string));
+assertTrue(textPlus.endsWith(String_string));
 }
 
 TEST(JavaLang, StringEqualIgnoreCase) {
@@ -299,7 +299,7 @@ String greaterString = "hello";
 String greaterUpperCase = "HELLO";
 
 ASSERT_FALSE(greaterString.equalsIgnoreCase(smallerString));
-ASSERT_TRUE(greaterString.equalsIgnoreCase(greaterUpperCase));
+assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
 ASSERT_FALSE(smallerString.equalsIgnoreCase(greaterString));
 }
 
@@ -494,10 +494,10 @@ free(charArrayString);
 
 TEST(JavaLang, StringIsEmpty) {
 String textPlus = "Hello Hello Hello ";
-ASSERT_TRUE(!textPlus.isEmpty());
+assertTrue(!textPlus.isEmpty());
 
 textPlus = "";
-ASSERT_TRUE(textPlus.isEmpty());
+assertTrue(textPlus.isEmpty());
 }
 
 TEST(JavaLang, StringLength) {
@@ -521,7 +521,7 @@ String string3 = "CONSISTS OF DIFFERENT TUTORIALS";
 
 // Case considering
 boolean match = string1.regionMatches(14, string2, 22, 9);
-ASSERT_TRUE(match);
+assertTrue(match);
 
 match = string1.regionMatches(14, string2, 20, 9);
 ASSERT_FALSE(match);
@@ -531,13 +531,13 @@ ASSERT_FALSE(match);
 
 // Ignore case
 match = string1.regionMatches(true, 14, string2, 22, 9);
-ASSERT_TRUE(match);
+assertTrue(match);
 
 match = string1.regionMatches(true, 14, string2, 20, 9);
 ASSERT_FALSE(match);
 
 match = string1.regionMatches(true, 14, string3, 22, 9);
-ASSERT_TRUE(match);
+assertTrue(match);
 
 match = string1.regionMatches(false, 14, string3, 22, 9);
 ASSERT_FALSE(match);
@@ -549,7 +549,7 @@ match = string1.regionMatches(true, 14, string2, -1, 9);
 ASSERT_FALSE(match);
 
 match = string1.regionMatches(true, 14, string2, 22, 100);
-ASSERT_TRUE(match);
+assertTrue(match);
 
 match = string1.regionMatches(true, 14, string2, 100, 9);
 ASSERT_FALSE(match);
@@ -572,7 +572,7 @@ assertEquals("Duck->Dog->Pig", result.toString());
 //
 // 	// Test true with correct email format
 // 	String correctEmail = "neacao@gmail.com";
-// 	ASSERT_TRUE(correctEmail.matches(emailPattern));
+// 	assertTrue(correctEmail.matches(emailPattern));
 //
 // 	// Test fail with wrong email format
 // 	String wrongEmail = "something@notcorrect";
@@ -580,7 +580,7 @@ assertEquals("Duck->Dog->Pig", result.toString());
 //
 // 	// Test true with correct phone number format
 // 	String correctPhoneNumber = "+15005550006";
-// 	ASSERT_TRUE(correctPhoneNumber.matches(phoneNumberPattern));
+// 	assertTrue(correctPhoneNumber.matches(phoneNumberPattern));
 //
 // 	// Test fail with wrong email format
 // 	String wrongPhoneNumber = "001678080147";
@@ -650,7 +650,7 @@ ASSERT_FALSE(textPlus.startsWith(String("abc"), 10));
 textPlus = "Hello Hello Hello ";
 // prefix == ""
 String nullString;
-ASSERT_TRUE(textPlus.startsWith(nullString, 10));
+assertTrue(textPlus.startsWith(nullString, 10));
 
 // thisOffset < 0
 ASSERT_FALSE(textPlus.startsWith(String("Hello"), -1));
@@ -662,9 +662,9 @@ ASSERT_FALSE(textPlus.startsWith(String("Hello Hello Hello H")));
 ASSERT_FALSE((textPlus.startsWith(String("Hello"), 20)));
 
 // valid case
-ASSERT_TRUE(textPlus.startsWith(String(""), 7));
+assertTrue(textPlus.startsWith(String(""), 7));
 
-ASSERT_TRUE(textPlus.startsWith(String("Hello")));
+assertTrue(textPlus.startsWith(String("Hello")));
 
 ASSERT_FALSE(textPlus.startsWith(String("ello")));
 }
@@ -773,17 +773,17 @@ TEST(JavaLang, StringOperatorPlusConstantStringDataType) {
 String input = "Food";
 String result = input + String("tiny");
 String expected = "Foodtiny";
-ASSERT_TRUE(expected.equals(result));
+assertTrue(expected.equals(result));
 
 String input1 = "Hello";
 String result1 = input1 + String("");
 String expected1 = "Hello";
-ASSERT_TRUE(expected1.equals(result1));
+assertTrue(expected1.equals(result1));
 
 String input2 = "";
 String result2 = input2 + String("World");
 String expected2 = "World";
-ASSERT_TRUE(expected2.equals(result2));
+assertTrue(expected2.equals(result2));
 }
 
 TEST(JavaLang, StringOperatorEquals) {
@@ -794,7 +794,7 @@ int comparable = false;
 if (textCompare1 == textCompare2) {
 comparable = true;
 }
-ASSERT_TRUE(comparable);
+assertTrue(comparable);
 }
 
 TEST(JavaLang, StringOperatorNotEquals) {
@@ -805,7 +805,7 @@ int comparable = false;
 if (textCompare1 != textCompare2) {
 comparable = true;
 }
-ASSERT_TRUE(comparable);
+assertTrue(comparable);
 }
 
 TEST(JavaLang, StringOperatorPlusEqualsChar) {
@@ -900,10 +900,10 @@ String greaterString = "acde";
 String smallerString = "ACDE";
 String equalToGreaterString = "acde";
 
-ASSERT_TRUE(greaterString > smallerString);
-ASSERT_TRUE(smallerString <= greaterString);
-ASSERT_TRUE(greaterString <= equalToGreaterString);
-ASSERT_TRUE(greaterString >= equalToGreaterString);
+assertTrue(greaterString > smallerString);
+assertTrue(smallerString <= greaterString);
+assertTrue(greaterString <= equalToGreaterString);
+assertTrue(greaterString >= equalToGreaterString);
 ASSERT_FALSE(smallerString > greaterString);
 ASSERT_FALSE(smallerString >= greaterString);
 ASSERT_FALSE(greaterString <= smallerString);

@@ -36,12 +36,12 @@ TEST (JavaLang, JavaInstanceOf) {
 	// Given a String instance - Return it should be an instance of String
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
-	ASSERT_TRUE(instanceof<String>(stringInstanceWithSameClass));
+	assertTrue(instanceof<String>(stringInstanceWithSameClass));
 	ASSERT_FALSE(stringInstanceWithSameClass.equals(string2));
 	
 	// Given a String instance - Return it should be an instance of Object
 	String stringInstanceWithSameBaseClass;
-	ASSERT_TRUE(instanceof<Object>(stringInstanceWithSameBaseClass));
+	assertTrue(instanceof<Object>(stringInstanceWithSameBaseClass));
 	
 	// Given a Integer instance - Return it should not be an instance of String
 	Integer integer = 1;
@@ -56,14 +56,14 @@ TEST (JavaLang, JavaInstanceOf) {
 TEST (JavaLang, DataTypeBoolean) {
 	// Verify syntax of boolean
 	boolean a = true;
-	ASSERT_TRUE(a);
+	assertTrue(a);
 }
 
 TEST (JavaLang, DataTypeByte) {
 	// Verify syntax of byte
 	byte a = 65;
 	char A = (char) a;
-	ASSERT_TRUE(A == 'A');
+	assertTrue(A == 'A');
 }
 
 TEST (JavaLang, DataTypeArray) {
@@ -153,13 +153,13 @@ TEST (JavaLang, ObjectEquals) {
 	ASSERT_FALSE(object1.equals(object2));
 	// Supported for == & != operator
 	ASSERT_FALSE(object1 == object2);
-	ASSERT_TRUE(object1 != object2);
+	assertTrue(object1 != object2);
 	
 	// Given one instance of Object - Return equal with itself
 	Object object3;
-	ASSERT_TRUE(object3.equals(object3));
+	assertTrue(object3.equals(object3));
 	// Supported for == & != operator
-	ASSERT_TRUE(object3 == object3);
+	assertTrue(object3 == object3);
 	ASSERT_FALSE(object3 != object3);
 }
 
