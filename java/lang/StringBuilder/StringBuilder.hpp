@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRINGBUILDER_HPP
 #define NATIVE_JAVA_LANG_STRINGBUILDER_HPP
 
+#include "../../../kernel/Common.hpp"
 #include "../../Lang.hpp"
 #include <initializer_list>
 
@@ -40,7 +41,7 @@ namespace Java {
                 public virtual CharSequence
         {
         private:
-            string original = NULL;
+            string original = nullptr;
             mutable String backupOriginalForToString;
             int currentLength = 0;
             int currentCapacity = 0;

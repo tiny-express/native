@@ -29,7 +29,7 @@
 //using namespace Java::Lang;
 //
 //Thread::Thread() {
-//	this->target = NULL;
+//	this->target = nullptr;
 //	this->threadName = strdup("");
 //}
 //
@@ -44,7 +44,7 @@
 //}
 //
 //Thread::Thread(String name) {
-//	this->target = NULL;
+//	this->target = nullptr;
 //	this->threadName = strdup(name.toString());
 //}
 //
@@ -68,7 +68,7 @@
 // * Force thread and call Runnable target's run() method
 // */
 //void Thread::start() {
-//	this->isThreadRunning = TRUE;
+//	this->isThreadRunning = true;
 //	pthread_create(&this->original, NULL, &Thread::pthread_helper, (void *) this);
 //}
 //
@@ -81,7 +81,7 @@
 //	}
 //
 //	//pthread_cancel(this->original);
-//	this->isThreadRunning = FALSE;
+//	this->isThreadRunning = false;
 //}
 //
 ///**

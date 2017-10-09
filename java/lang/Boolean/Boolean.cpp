@@ -34,7 +34,7 @@
  */
 Boolean::Boolean(const boolean &target) {
 	this->original = target;
-	this->originalString = string_from_boolean(this->original);
+	this->originalString = stringFromBoolean(this->original);
 }
 
 /**
@@ -52,7 +52,7 @@ Boolean::Boolean(const_string target) {
 	} else {
 		this->original = false;
 	}
-	this->originalString = string_from_boolean(this->original);
+	this->originalString = stringFromBoolean(this->original);
 }
 
 /**
@@ -112,7 +112,7 @@ int Boolean::compareTo(const Boolean &target) const {
  * @return boolean
  */
 boolean Boolean::getBoolean(const_string target) {
-	return string_to_boolean((string) target);
+	return stringToBoolean((string) target);
 }
 
 /**
@@ -157,7 +157,7 @@ string Boolean::toString() const {
  * @return String
  */
 string Boolean::toString(const boolean &target) {
-	if (target == True) {
+	if (target) {
 		return (string) "true";
 	}
 	return (string) "false";
@@ -194,5 +194,5 @@ Boolean Boolean::operator=(const Boolean &target) {
 	if (this->originalString != NULL) {
 		free(this->originalString);
 	}
-	this->originalString = string_from_boolean(this->original);
+	this->originalString = stringFromBoolean(this->original);
 }

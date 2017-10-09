@@ -3,6 +3,8 @@ var searchData=
   ['scanner_2ecpp',['Scanner.cpp',['../Scanner_8cpp.html',1,'']]],
   ['scanner_2ehpp',['Scanner.hpp',['../Scanner_8hpp.html',1,'']]],
   ['security_2ehpp',['Security.hpp',['../Security_8hpp.html',1,'']]],
+  ['semaphore_2ecpp',['Semaphore.cpp',['../Semaphore_8cpp.html',1,'']]],
+  ['semaphore_2ehpp',['Semaphore.hpp',['../Semaphore_8hpp.html',1,'']]],
   ['serializable_2ecpp',['Serializable.cpp',['../Serializable_8cpp.html',1,'']]],
   ['serializable_2ehpp',['Serializable.hpp',['../Serializable_8hpp.html',1,'']]],
   ['set_2ecpp',['Set.cpp',['../Set_8cpp.html',1,'']]],

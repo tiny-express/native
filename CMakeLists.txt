@@ -25,24 +25,24 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native C CXX)
-
-# Enable runtime search path support for dynamic libraries on OSX
-if (APPLE)
-    set(CMAKE_MACOSX_RPATH 1)
-endif ()
+project(native CXX)
 
 # GNU filesystem layout conventions
 include(GNUInstallDirs)
 
 # Force GCC for Linux
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(CMAKE_C_COMPILER "gcc")
     set(CMAKE_CXX_COMPILER "g++")
 endif()
 
+# Enable runtime search path support for dynamic libraries on OSX
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_MACOSX_RPATH 1)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
+endif ()
+
 # Force Linux and Darwin use GCC
-set(CMAKE_CXX_FLAGS "-pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # Check C++ compiler version
 include(CheckCXXCompilerFlag)
@@ -89,40 +89,29 @@ set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 # Release mode
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
-# Include all C/C++ and Unix Assembly files
-file(GLOB_RECURSE SOURCES_C
-        kernel/common/*
-        kernel/datetime/*
-        kernel/math/*
-        kernel/string/*
-        )
-
-# Include all C unit test cases
-file(GLOB_RECURSE TESTS_C
-        kernel/common/*_test.c
-        kernel/datetime/*_test.c
-        kernel/math/*_test.c
-        kernel/string/*_test.c
-        )
-
-# Remove all test files within c files
-foreach (test_c_file ${TESTS_C})
-    list(REMOVE_ITEM SOURCES_C ${test_c_file})
-endforeach ()
-
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
+        kernel/**/*.cpp
         java/Java.cpp
-        javax/**/*.cpp
         java/**/*.cpp
         java/**/**/*.cpp
+        javax/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-        javax/**/*Test.cpp
+        kernel/**/*Test.cpp
         java/**/*Test.cpp
         java/**/**/*Test.cpp
+        javax/**/*Test.cpp
+        )
+
+# Only C++ unit benchmark files
+file(GLOB_RECURSE BENCHMARK_CPP
+        kernel/**/*Benchmark.cpp
+        java/**/*Benchmark.cpp
+        java/**/**/*Benchmark.cpp
+        javax/**/*Benchmark.cpp
         )
 
 # Remove all test files within cpp files
@@ -130,13 +119,23 @@ foreach (test_cpp_file ${TESTS_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
+# Remove all benchmark files within cpp files
+foreach (benchmark_cpp_file ${BENCHMARK_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${benchmark_cpp_file})
+endforeach ()
+
 # Create test binary for testing
-add_executable(${PROJECT_NAME}_test_c ${TESTS_C} ${SOURCES_C} misc/unit-test.c)
-add_executable(${PROJECT_NAME}_test ${TESTS_C} ${SOURCES_C} ${TESTS_CPP} ${SOURCES_CPP} misc/unit-test.c)
+add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
+
+# Create benchmark binary
+add_executable(${PROJECT_NAME}_benchmark ${BENCHMARK_CPP} ${SOURCES_CPP} benchmark/benchmark.cpp)
+
+# Link google benchmark library
+target_link_libraries(${PROJECT_NAME}_benchmark libbenchmark.a)
 
 # Create native library for static linking
-add_library(${PROJECT_NAME} SHARED ${SOURCES_C} ${SOURCES_CPP})
-add_library(${PROJECT_NAME}_static STATIC ${SOURCES_C} ${SOURCES_CPP})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
+add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
 
 # Add make test
 add_custom_target(
@@ -151,35 +150,19 @@ add_custom_target(
         COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
 )
 
-# Check memory leak
-add_custom_target(
-        leak-debug
-        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test
-)
-
-# Check memory leak
-add_custom_target(
-        leak-c
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test_c
-)
-
-# Check memory leak
-add_custom_target(
-        leak-c-debug
-        COMMAND valgrind --gen-suppressions=yes --track-origins=yes --error-exitcode=2 --show-leak-kinds=all --leak-check=full ./native_test_c
-)
-
 # Enable testing
 include(CTest)
 enable_testing()
 
 # Add make installation - install to Unix system
-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(TARGETS ${PROJECT_NAME}_static DESTINATION lib)
+set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
+install(TARGETS ${PROJECT_NAME} DESTINATION lib OPTIONAL)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib OPTIONAL)
 install(FILES library.hpp DESTINATION include/native)
+install(FILES node.hpp DESTINATION include/native)
 install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Add uninstall
 add_custom_target(
@@ -193,14 +176,10 @@ add_custom_target(
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
 else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test_c ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif ()
-

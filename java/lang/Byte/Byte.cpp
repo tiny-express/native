@@ -34,12 +34,12 @@ ByteCache *ByteCache::instance = nullptr;
 
 Bytes::Bytes(byte byteValue) {
 	this->original = byteValue;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
 }
 
 Bytes::Bytes(String inputString) {
 	this->original = parseByte(inputString, 10);
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
 }
 
 Bytes::Bytes() {
@@ -208,21 +208,21 @@ boolean Bytes::operator>=(const  Bytes &target) {
 Bytes &Bytes::operator-=(const Bytes &target) {
     free((this->originalString));
     this->original -= target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
 Bytes &Bytes::operator+=(const Bytes &target) {
     free((this->originalString));
     this->original += target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
 Bytes &Bytes::operator*=(const Bytes &target) {
     free((this->originalString));
     this->original *= target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
@@ -232,7 +232,7 @@ Bytes &Bytes::operator/=(const Bytes &target) {
     }
     free((this->originalString));
     this->original /= target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
@@ -242,18 +242,18 @@ Bytes &Bytes::operator%=(const Bytes &target) {
     }
     free((this->originalString));
     this->original %= target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
 Bytes &Bytes::operator=(const Bytes &target) {
     free((this->originalString));
     this->original = target.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
     return *this;
 }
 
 Bytes::Bytes(const Bytes &anotherBytes) {
     this->original = anotherBytes.original;
-    this->originalString = string_from_int(this->original);
+    this->originalString = stringFromInt(this->original);
 }

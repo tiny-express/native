@@ -156,8 +156,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a50cd0658ba480a83d141f21ece9524e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bd427dc4f263f042d72885c43c3bd37"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJava_1_1Lang_1_1Integer.html#a6bd427dc4f263f042d72885c43c3bd37">shortValue</a> () const override</td></tr>
 <tr class="separator:a6bd427dc4f263f042d72885c43c3bd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa94254cf4121bb39eef5463e9dac9ebc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classJava_1_1Lang_1_1String.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJava_1_1Lang_1_1Integer.html#aa94254cf4121bb39eef5463e9dac9ebc">toStringObject</a> ()</td></tr>
-<tr class="separator:aa94254cf4121bb39eef5463e9dac9ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classJava_1_1Lang_1_1Object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJava_1_1Lang_1_1Object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classJava_1_1Lang_1_1Object.html">Java::Lang::Object</a></td></tr>
 <tr class="memitem:aa2210c89ac4ecf704a4eab15fcf8b948 inherit pub_methods_classJava_1_1Lang_1_1Object"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="Object_8hpp.html#af29b166bf5fea7f0bbc07f7014a8c6b5">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJava_1_1Lang_1_1Object.html#aa2210c89ac4ecf704a4eab15fcf8b948">equals</a> (const <a class="el" href="classJava_1_1Lang_1_1Object.html">Object</a> &amp;o) const</td></tr>
 <tr class="separator:aa2210c89ac4ecf704a4eab15fcf8b948 inherit pub_methods_classJava_1_1Lang_1_1Object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -848,7 +846,7 @@ hash code of this <a class="el" href="classJava_1_1Lang_1_1Integer.html">Integer
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns a hash code for a int value; compatible with <a class="el" href="classJava_1_1Lang_1_1Integer.html#a1602a846d72bce33a2a69e2885fe935c">Integer.hashCode()</a> .</p>
+<p>Returns a hash code for a int value;</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inputInt</td><td></td></tr>
@@ -1586,7 +1584,7 @@ hash code of this <a class="el" href="classJava_1_1Lang_1_1Integer.html">Integer
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classJava_1_1Lang_1_1NumberFormatException.html">NumberFormatException</a></td><td>if The first argument is null or is a string of length zero. The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX. Any character of the string is not a digit of the specified radix, The value represented by the string is not a value of type int. </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJava_1_1Lang_1_1NumberFormatException.html">NumberFormatException</a></td><td>if The first argument is null or is a string of length zero. The radix is either smaller than Character::MIN_RADIX or larger than Character::MAX_RADIX. Any character of the string is not a digit of the specified radix, The value represented by the string is not a value of type int. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1677,7 +1675,7 @@ hash code of this <a class="el" href="classJava_1_1Lang_1_1Integer.html">Integer
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classJava_1_1Lang_1_1NumberFormatException.html">NumberFormatException</a></td><td>if The first argument is null or is a string of length zero. The radix is either smaller than Character.MIN_RADIX or larger than Character.MAX_RADIX. Any character of the string is not a digit of the specified radix, The value represented by the string is not a value of type unsigned int. </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJava_1_1Lang_1_1NumberFormatException.html">NumberFormatException</a></td><td>if The first argument is null or is a string of length zero. The radix is either smaller than Character::MIN_RADIX or larger than Character::MAX_RADIX. Any character of the string is not a digit of the specified radix, The value represented by the string is not a value of type unsigned int. </td></tr>
   </table>
   </dd>
 </dl>
@@ -2274,25 +2272,6 @@ hash code of this <a class="el" href="classJava_1_1Lang_1_1Integer.html">Integer
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classJava_1_1Lang_1_1String.html">String</a> representation of inputInt in the specified radix. </dd></dl>
-
-</div>
-</div>
-<a id="aa94254cf4121bb39eef5463e9dac9ebc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa94254cf4121bb39eef5463e9dac9ebc">&#9670;&nbsp;</a></span>toStringObject()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classJava_1_1Lang_1_1String.html">String</a> Integer::toStringObject </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Returns a <a class="el" href="classJava_1_1Lang_1_1String.html">String</a> object representing this <a class="el" href="classJava_1_1Lang_1_1Integer.html">Integer</a> 's value.</p>
-<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classJava_1_1Lang_1_1String.html">String</a> representation of the value of this object in base 10 </dd></dl>
 
 </div>
 </div>

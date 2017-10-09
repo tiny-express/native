@@ -32,8 +32,6 @@
 #include "../Double/Double.hpp"
 #include "../Float/Float.hpp"
 
-using namespace Java::Util;
-
 namespace Java {
 		namespace Lang {
 				class Math final : public virtual Object {
