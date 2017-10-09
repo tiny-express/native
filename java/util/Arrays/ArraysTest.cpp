@@ -40,12 +40,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	byte keyByte = 4;
 	int positionByte = 3;
-	ASSERT_EQUAL(positionByte, Arrays::binarySearch(arrayByte, keyByte, 5));
+	assertEquals(positionByte, Arrays::binarySearch(arrayByte, keyByte, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	byte keyByte2 = 101;
 	int positionByte2 = -1;
-	ASSERT_EQUAL(positionByte2, Arrays::binarySearch(arrayByte, keyByte2, 5));
+	assertEquals(positionByte2, Arrays::binarySearch(arrayByte, keyByte2, 5));
 	
 	/// Given valid char[] to test binary search
 	char arrayChar[5] = { 'a', 'b', 'c', 'd', 'e' };
@@ -53,12 +53,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	char keyChar = 'b';
 	int positionChar = 1;
-	ASSERT_EQUAL(positionChar, Arrays::binarySearch(arrayChar, keyChar, 5));
+	assertEquals(positionChar, Arrays::binarySearch(arrayChar, keyChar, 5));
 	
 	// With correct key but not appear inside array, return -1
 	char keyChar2 = 'f';
 	int positionChar2 = -1;
-	ASSERT_EQUAL(positionChar2, Arrays::binarySearch(arrayChar, keyChar2, 5));
+	assertEquals(positionChar2, Arrays::binarySearch(arrayChar, keyChar2, 5));
 	
 	/// Given valid double[] to test binary search - this test case wrapped <float> also
 	double arrayDouble[6] = { 15.5, 17.7, 32.9, 51.4, 64.3, 69.9 };
@@ -66,12 +66,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	double keyDouble = 15.5;
 	int positionDouble = 0;
-	ASSERT_EQUAL(positionDouble, Arrays::binarySearch(arrayDouble, keyDouble, 6));
+	assertEquals(positionDouble, Arrays::binarySearch(arrayDouble, keyDouble, 6));
 	
 	// With correct key2 but not appear inside array, return -1
 	double keyDouble2 = 65;
 	int positionDouble2 = -1;
-	ASSERT_EQUAL(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
+	assertEquals(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
 	
 	/// Given valid Integer[] to test binary search with Object
 	Integer arrayObject[5] = { Integer(1), Integer(2), Integer(3), Integer(4), Integer(5) };
@@ -79,12 +79,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	Integer keyObject = Integer(5);
 	int positionObject = 4;
-	ASSERT_EQUAL(positionObject, Arrays::binarySearch(arrayObject, keyObject, 5));
+	assertEquals(positionObject, Arrays::binarySearch(arrayObject, keyObject, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	Integer keyObject2 = Integer(99);
 	int positionObject2 = -1;
-	ASSERT_EQUAL(positionObject2, Arrays::binarySearch(arrayObject, keyObject2, 5));
+	assertEquals(positionObject2, Arrays::binarySearch(arrayObject, keyObject2, 5));
 	
 }
 
@@ -96,7 +96,7 @@ TEST (JavaUtil, ArraysSort) {
 	
 	// Test true: all elements inside arrayLong[] must be equal arrayLongSorted[]
 	for (int index = 0; index < 5; ++index) {
-		ASSERT_EQUAL(arrayLongSorted[ index ], arrayLong[ index ]);
+		assertEquals(arrayLongSorted[ index ], arrayLong[ index ]);
 	}
 	
 	/// Given valid arrayLong[] to test Arrays::sort() with arrayCharSorted[]
@@ -106,7 +106,7 @@ TEST (JavaUtil, ArraysSort) {
 	
 	// Test true: all elements inside arrayChar[] must be equal arrayCharSorted[]
 	for (int index = 0; index < 5; ++index) {
-		ASSERT_EQUAL(arrayCharSorted[ index ], arrayChar[ index ]);
+		assertEquals(arrayCharSorted[ index ], arrayChar[ index ]);
 	}
 	
 	/// Given valid arrayFloat[] to test Arrays::sort() with arrayFloatSorted[] - this test case wrapped <double> also
@@ -116,7 +116,7 @@ TEST (JavaUtil, ArraysSort) {
 	
 	// Test true: all elements inside arrayFloat[] must be equal arrayFloatSorted[]
 	for (int index = 0; index < 5; ++index) {
-		ASSERT_EQUAL(arrayFloatSorted[ index ], arrayFloat[ index ]);
+		assertEquals(arrayFloatSorted[ index ], arrayFloat[ index ]);
 	}
 }
 
@@ -134,7 +134,7 @@ TEST (JavaUtil, ArraysCopyOf) {
 	
 	Array<char> arrayCharCopy = Arrays::copyOf(arrayChar, 3);
 	for (int index = 0; index < 3; ++index) {
-		ASSERT_EQUAL(arrayChar.get(index), arrayCharCopy.get(index));
+		assertEquals(arrayChar.get(index), arrayCharCopy.get(index));
 	}
 	
 	/// Give valid array float and arrayLength to test copyOf with more than length
@@ -168,7 +168,7 @@ TEST (JavaUtil, ArraysFill) {
 	
 	Arrays::fill(&arrayChar, filledCharVal);
 	for (int index = 0; index < arrayChar.length; ++index) {
-		ASSERT_EQUAL(filledCharVal, arrayChar[ index ]);
+		assertEquals(filledCharVal, arrayChar[ index ]);
 	}
 	
 	/// Given valid array float and arrayLength to test fill - this test case wrapped <int>, <short>, <long>, <double>, <byte> also

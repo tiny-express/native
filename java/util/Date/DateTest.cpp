@@ -40,31 +40,31 @@
 //
 //    // Given valid constructor and test
 //    Date date;
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    expectedYear = 2018;
 //    date = Date(2018, 05, 20);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    expectedYear = 2019;
 //    date = Date(2019, 05, 21, 05, 22);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    expectedYear = 2200;
 //    date = Date(2200, 05, 21, 05, 50, 58);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    expectedYear = 2017;
 //    date = Date(1498042091); //2017
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    expectedYear = 2017;
 //    String dateString = "Thu Jun 22 2017 12:35:34";
 //    date = Date(dateString);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //
 //    Date sameDate = date;
-//    ASSERT_EQUAL(sameDate.getYear(), date.getYear());
+//    assertEquals(sameDate.getYear(), date.getYear());
 //}
 //
 //TEST (JavaUtil, DateGetYear) {
@@ -72,7 +72,7 @@
 //    int expectedYear = 2018;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //}
 //
 //TEST (JavaUtil, DateGetMonth) {
@@ -80,7 +80,7 @@
 //    int expectedMonth = 05;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedMonth, date.getMonth());
+//    assertEquals(expectedMonth, date.getMonth());
 //}
 //
 //TEST (JavaUtil, DateGetDayOfMonth) {
@@ -88,7 +88,7 @@
 //    int expectedDayOfMonth = 20;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
+//    assertEquals(expectedDayOfMonth, date.getDate());
 //}
 //
 //TEST (JavaUtil, DateGetDayOfWeek) {
@@ -96,7 +96,7 @@
 //    int expectedDayOfWeek = 4; // Thursday
 //    Date date = Date(2017, 05, 22, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedDayOfWeek, date.getDay());
+//    assertEquals(expectedDayOfWeek, date.getDay());
 //}
 //
 //TEST (JavaUtil, DateGetHour) {
@@ -104,7 +104,7 @@
 //    int expectedHour = 20;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedHour, date.getHours());
+//    assertEquals(expectedHour, date.getHours());
 //}
 //
 //TEST (JavaUtil, DateGetMinutes) {
@@ -112,7 +112,7 @@
 //    int expectedMinutes = 50;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
+//    assertEquals(expectedMinutes, date.getMinutes());
 //}
 //
 //TEST (JavaUtil, DateGetSeconds) {
@@ -120,7 +120,7 @@
 //    int expectedSecond = 58;
 //    Date date = Date(2018, 05, 20, 20, 50, 58);
 //
-//    ASSERT_EQUAL(expectedSecond, date.getSeconds());
+//    assertEquals(expectedSecond, date.getSeconds());
 //}
 //
 //TEST (JavaUtil, DateGetTime) {
@@ -129,7 +129,7 @@
 //
 //    Date date = expectedTime;
 //
-//    ASSERT_EQUAL(expectedTime, date.getTime());
+//    assertEquals(expectedTime, date.getTime());
 //}
 //
 //TEST (JavaUtil, DateSetDate) {
@@ -138,7 +138,7 @@
 //    int expectedDayOfMonth = 15;
 //
 //    date.setDate(expectedDayOfMonth);
-//    ASSERT_EQUAL(expectedDayOfMonth, date.getDate());
+//    assertEquals(expectedDayOfMonth, date.getDate());
 //}
 //
 //TEST (JavaUtil, DateSetHours) {
@@ -147,7 +147,7 @@
 //    int expectedHour = 20;
 //
 //    date.setHours(expectedHour);
-//    ASSERT_EQUAL(expectedHour, date.getHours());
+//    assertEquals(expectedHour, date.getHours());
 //}
 //
 //TEST (JavaUtil, DateSetMinutes) {
@@ -156,7 +156,7 @@
 //    int expectedMinutes = 58;
 //
 //    date.setMinutes(expectedMinutes);
-//    ASSERT_EQUAL(expectedMinutes, date.getMinutes());
+//    assertEquals(expectedMinutes, date.getMinutes());
 //}
 //
 //TEST (JavaUtil, DateSetMonth) {
@@ -165,7 +165,7 @@
 //    int expectedMonth = 12;
 //
 //    date.setMonth(expectedMonth);
-//    ASSERT_EQUAL(expectedMonth, date.getMonth());
+//    assertEquals(expectedMonth, date.getMonth());
 //}
 //
 //TEST (JavaUtil, DateSetSeconds) {
@@ -174,7 +174,7 @@
 //    int expectedSecond = 15;
 //
 //    date.setSeconds(expectedSecond);
-//    ASSERT_EQUAL(expectedSecond, date.getSeconds());
+//    assertEquals(expectedSecond, date.getSeconds());
 //}
 //
 //TEST (JavaUtil, DateSetTime) {
@@ -183,7 +183,7 @@
 //    int expectedTime = 1498028643;
 //
 //    date.setTime(expectedTime);
-//    ASSERT_EQUAL(expectedTime, date.getTime());
+//    assertEquals(expectedTime, date.getTime());
 //}
 //
 //TEST (JavaUtil, DateSetYear) {
@@ -192,7 +192,7 @@
 //    int expectedYear = 2022;
 //
 //    date.setYear(expectedYear);
-//    ASSERT_EQUAL(expectedYear, date.getYear());
+//    assertEquals(expectedYear, date.getYear());
 //}
 //
 ///**
@@ -250,7 +250,7 @@
 //    Date date = Date(2017, 05, 21, 14, 05, 43);
 //
 //    Date target = date;
-//    ASSERT_EQUAL(date.getSeconds(), target.getSeconds());
+//    assertEquals(date.getSeconds(), target.getSeconds());
 //}
 //
 //TEST (JavaUtil, DateCompare) {
@@ -262,13 +262,13 @@
 //    Date dateEqual = Date(2017, 05, 21, 14, 05, 43);
 //
 //    int expectedResult = 1;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateBefore));
+//    assertEquals(expectedResult, date.compareTo(dateBefore));
 //
 //    expectedResult = -1;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateAfter));
+//    assertEquals(expectedResult, date.compareTo(dateAfter));
 //
 //    expectedResult = 0;
-//    ASSERT_EQUAL(expectedResult, date.compareTo(dateEqual));
+//    assertEquals(expectedResult, date.compareTo(dateEqual));
 //}
 //
 ///**
@@ -291,7 +291,7 @@
 //
 //    long expectedTime = mktime(&timePresenter);
 //
-//    ASSERT_EQUAL(expectedTime, result);
+//    assertEquals(expectedTime, result);
 //}
 //
 //TEST (JavaUtil, DateGetTimeZone) {
@@ -302,5 +302,5 @@
 //    time_t now = time(0);
 //    int expectedTimeZone = localtime(&now)->tm_hour - gmtime(&now)->tm_hour;
 //
-//    ASSERT_EQUAL(expectedTimeZone, date.getTimezoneOffset());
+//    assertEquals(expectedTimeZone, date.getTimezoneOffset());
 //}

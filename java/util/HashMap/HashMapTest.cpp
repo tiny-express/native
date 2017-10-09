@@ -37,7 +37,7 @@ TEST (JavaUtil, HashMapConstructor) {
 	HashMap<String, Integer> emptyHashMap;
 
 	int expectedSize = 0;
-	ASSERT_EQUAL(expectedSize, emptyHashMap.size());
+	assertEquals(expectedSize, emptyHashMap.size());
 	ASSERT_TRUE(emptyHashMap.isEmpty());
 
 	// Test copy constructor
@@ -49,7 +49,7 @@ TEST (JavaUtil, HashMapConstructor) {
 
 	// Test valid size()
 	expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 	ASSERT_FALSE(hashMap.isEmpty());
 
 	// Test valid data between hashMap and container
@@ -76,7 +76,7 @@ TEST (JavaUtil, HashMapClear) {
 
 	hashMap.clear();
 	int expectedSizeAfterClear = 0;
-	ASSERT_EQUAL(expectedSizeAfterClear, hashMap.size());
+	assertEquals(expectedSizeAfterClear, hashMap.size());
 }
 
 TEST (JavaUtil, HashMapClone) {
@@ -151,7 +151,7 @@ TEST (JavaUtil, HashMapEntrySet) {
 		}
 	}
 	// Make sure foreach is working
-	ASSERT_EQUAL(100, counter);
+	assertEquals(100, counter);
 }
 
 TEST (JavaUtil, HashMapGet) {
@@ -189,7 +189,7 @@ TEST (JavaUtil, HashMapPut) {
 	// Test size after putted()
 	int expectedSize = 2;
 	int actualSize = hashMap.size();
-	ASSERT_EQUAL(expectedSize, actualSize);
+	assertEquals(expectedSize, actualSize);
 
 	// Test data inside after putted()
 	String expectedValue = "123";
@@ -210,7 +210,7 @@ TEST (JavaUtil, HashMapPutAll) {
 
 	int hashMapSize = hashMap.size();
 	int targetSize = targetMap.size();
-	ASSERT_EQUAL(targetSize, hashMapSize);
+	assertEquals(targetSize, hashMapSize);
 
 	// Test valid key/value inside both of hashMap and targetMap
 	String expectedKey = "#!@#another";
@@ -269,7 +269,7 @@ TEST (JavaUtil, HashMapRemoveKey) {
 
 	// Valid data inside hash map
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	String expectedResult = "1111";
 	String result = hashMap.get("another thing");
@@ -282,7 +282,7 @@ TEST (JavaUtil, HashMapRemoveKey) {
 
 	// Test size after removed
 	expectedSize = 1;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Test old key must not be in hash map
 	String getOldKeyResult = hashMap.get("another thing");
@@ -296,7 +296,7 @@ TEST (JavaUtil, HashMapRemoveKeyValue) {
 
 	// Valid size before remove
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Valid data before remove
 	String expectedResult = "123";
@@ -345,7 +345,7 @@ TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
 
 	// Valid size before replace
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Valid data inside before replace
 	String expectedKey = "key123";
@@ -412,12 +412,12 @@ TEST (JavaUtil, HashMapSize) {
 	hashMap.put(-50.2222, "50");
 
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Add more param to valid size
 	hashMap.put(123, "some thing here");
 	expectedSize = 3;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 }
 
 TEST (JavaUtil, HashMapToString) {

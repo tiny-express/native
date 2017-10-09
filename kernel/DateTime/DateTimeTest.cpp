@@ -45,7 +45,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 			month,
 			year
 	);
-	ASSERT_EQUAL(timestamp, 1500225603123);
+	assertEquals(timestamp, 1500225603123);
 #endif
 }
 

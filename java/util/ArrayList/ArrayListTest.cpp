@@ -40,7 +40,7 @@ TEST(JavaUtil, ArrayListConstructor) {
 	integerArrayList.add(value);
 	integerArrayList.add(value);
 	integerArrayList.add(value);
-	ASSERT_EQUAL(4, integerArrayList.size());
+	assertEquals(4, integerArrayList.size());
 
 	// Standard declaration
 	ArrayList<String> stringArrayList;
@@ -49,12 +49,12 @@ TEST(JavaUtil, ArrayListConstructor) {
 	stringArrayList.add(element);
 	stringArrayList.add(element);
 	stringArrayList.add(element);
-	ASSERT_EQUAL(4, stringArrayList.size());
+	assertEquals(4, stringArrayList.size());
 
 	// Standard declaration
 	Array<String> arrayString = { "hello", "world" };
 	ArrayList<String> stringArrayListCopy = arrayString;
-	ASSERT_EQUAL(2, stringArrayListCopy.size());
+	assertEquals(2, stringArrayListCopy.size());
 }
 
 TEST(JavaUtil, ArrayListDestructor) {
@@ -70,7 +70,7 @@ TEST(JavaUtil, ArrayListSize) {
 	ArrayList<Integer> emptyArray;
 	int expect = 0;
 	int result = emptyArray.size();
-	ASSERT_EQUAL(expect, result);
+	assertEquals(expect, result);
 
 	// Give an valid ArrayList
     // then compare size of this list - Should equal
@@ -78,7 +78,7 @@ TEST(JavaUtil, ArrayListSize) {
 	ArrayList<Integer> validArray(size);
 	expect = size;
 	result = validArray.size();
-	ASSERT_EQUAL(expect, result);
+	assertEquals(expect, result);
 }
 
 TEST(JavaUtil, ArrayListAdd) {
@@ -88,7 +88,7 @@ TEST(JavaUtil, ArrayListAdd) {
 	validArrayList.add(4);
 	int sizeExpect = 4;
 	int sizeResult = validArrayList.size();
-	ASSERT_EQUAL(sizeExpect, sizeResult);
+	assertEquals(sizeExpect, sizeResult);
 
 	// Compare validArrayList toString
 	string stringExpect = (string) "[1, 2, 3, 4]";
@@ -140,7 +140,7 @@ TEST(JavaUtil, ArrayListClear) {
 	validArrayList.clear();
 	int sizeExpect = 0;
 	int sizeResult = validArrayList.size();
-	ASSERT_EQUAL(sizeExpect, sizeResult);
+	assertEquals(sizeExpect, sizeResult);
 
 	stringExpect = (string) "[]";
 	stringResult = validArrayList.toString();
@@ -158,7 +158,7 @@ TEST(JavaUtil, ArrayListClone) {
 	assertEquals(stringExpect, stringResult);
 	int sizeExpect = 2;
 	int sizeResult = cloneArrayList.size();
-	ASSERT_EQUAL(sizeExpect, sizeResult);
+	assertEquals(sizeExpect, sizeResult);
 }
 
 TEST(JavaUtil, ArrayListForEach) {
@@ -171,7 +171,7 @@ TEST(JavaUtil, ArrayListForEach) {
 
 	int expect = 0;
 	for (Integer element : validArrayList) {
-		ASSERT_EQUAL(expect, element.intValue());
+		assertEquals(expect, element.intValue());
 		expect++;
 	}
 }
@@ -181,7 +181,7 @@ TEST(JavaUtil, ArrayListGet) {
 	ArrayList<Integer> validArrayList = {1, 2, 3};
 	int expect = 1;
 	int result = validArrayList.get(0).intValue();
-	ASSERT_EQUAL(expect, result);
+	assertEquals(expect, result);
 
 	try {
 		validArrayList.get(-1);
@@ -206,11 +206,11 @@ TEST(JavaUtil, ArrayListIndexOf) {
     ArrayList<Integer> validArrayList = {1, 2, 3};
     int expect = 2;
     int result = validArrayList.indexOf(3);
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 
     expect = -1;
     result = validArrayList.indexOf(31);
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 }
 
 TEST(JavaUtil, ArrayListLastIndexOf) {
@@ -219,11 +219,11 @@ TEST(JavaUtil, ArrayListLastIndexOf) {
     ArrayList<Integer> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
     int expect = 7;
     int result = validArrayList.lastIndexOf(3);
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 
     expect = -1;
     result = validArrayList.lastIndexOf(31);
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 }
 
 TEST(JavaUtil, ArrayListRemoveIndex) {
@@ -232,7 +232,7 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
     ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
     int expect = 3;
     int result = validArrayList.remove(7).intValue();
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 
     string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
     string stringResult = validArrayList.toString();

@@ -34,9 +34,9 @@ TEST (JavaUtil, LinkedListAdd) {
 	LinkedList<int> linkedList;
 	linkedList.add(25);
 	linkedList.add(24);
-	ASSERT_EQUAL(2, linkedList.size());
-	ASSERT_EQUAL(25, linkedList.getFirst());
-	ASSERT_EQUAL(24, linkedList.getLast());
+	assertEquals(2, linkedList.size());
+	assertEquals(25, linkedList.getFirst());
+	assertEquals(24, linkedList.getLast());
 }
 
 TEST(JavaUtil, LinkedListContains) {
@@ -100,20 +100,20 @@ TEST (JavaUtil, LinkedListPoll) {
 	Integer result = linkedList.poll();
 	Integer expectedValue = 10;
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-	ASSERT_EQUAL(expectedSize, linkedList.size());
+	assertEquals(expectedValue.intValue(), result.intValue());
+	assertEquals(expectedSize, linkedList.size());
 	
 	result = linkedList.pollLast();
 	expectedValue = 30;
 	expectedSize = 1;
-	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-	ASSERT_EQUAL(expectedSize, linkedList.size());
+	assertEquals(expectedValue.intValue(), result.intValue());
+	assertEquals(expectedSize, linkedList.size());
 	
 	result = linkedList.pollFirst();
 	expectedValue = 20;
 	expectedSize = 0;
-	ASSERT_EQUAL(expectedValue.intValue(), result.intValue());
-	ASSERT_EQUAL(expectedSize, linkedList.size());
+	assertEquals(expectedValue.intValue(), result.intValue());
+	assertEquals(expectedSize, linkedList.size());
 	
 	// In this test case, we get element and remove it also, so don't need to clear after finished
 }
@@ -139,10 +139,10 @@ TEST (JavaUtil, LinkedListRemove) {
 TEST (JavaUtil, LinkedListSize) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<int> linkedList;
-	ASSERT_EQUAL(0, linkedList.size());
+	assertEquals(0, linkedList.size());
 	
 	// Append two elements to linked list - Return two elements
 	linkedList.add(25);
 	linkedList.add(25);
-	ASSERT_EQUAL(2, linkedList.size());
+	assertEquals(2, linkedList.size());
 }

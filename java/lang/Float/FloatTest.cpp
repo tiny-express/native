@@ -328,43 +328,43 @@ TEST (JavaLang, FloatShortValue) {
     variableTestShortValue = Float::POSITIVE_INFINITY;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestShortValue = Float::NEGATIVE_INFINITY;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NaN
     variableTestShortValue = Float::NaN;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::MAX_VALUE
     variableTestShortValue = Float::MAX_VALUE;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::MIN_NORMAL
     variableTestShortValue = Float::MIN_NORMAL;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::MIN_VALUE
     variableTestShortValue = Float::MIN_VALUE;
     expectedResultShortValue = 0;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test valid case
     variableTestShortValue = 5.9;
     expectedResultShortValue = 5;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test invalid case
     variableTestShortValue = 6;
@@ -383,43 +383,43 @@ TEST (JavaLang, FloatIntValue) {
     variableTestIntValue = Float::POSITIVE_INFINITY;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestIntValue = Float::NEGATIVE_INFINITY;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test Float::NaN
     variableTestIntValue = Float::NaN;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test Float::MAX_VALUE
     variableTestIntValue = Float::MAX_VALUE;
     expectedResultIntValue = -2147483648;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test Float::MIN_NORMAL
     variableTestIntValue = Float::MIN_NORMAL;
     expectedResultIntValue = 0;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test Float::MIN_VALUE
     variableTestIntValue = Float::MIN_VALUE;
     expectedResultIntValue = 0;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test valid case
     variableTestIntValue = 5.9;
     expectedResultIntValue = 5;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertEquals(expectedResultIntValue, actualResultIntValue);
 
     // Test invalid case
     variableTestIntValue = 6;
@@ -438,43 +438,43 @@ TEST (JavaLang, FloatLongValue) {
     variableTestLongValue = Float::POSITIVE_INFINITY;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestLongValue = Float::NEGATIVE_INFINITY;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test Float::NaN
     variableTestLongValue = Float::NaN;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test Float::MAX_VALUE
     variableTestLongValue = Float::MAX_VALUE;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test Float::MIN_NORMAL
     variableTestLongValue = Float::MIN_NORMAL;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test Float::MIN_VALUE
     variableTestLongValue = Float::MIN_VALUE;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test valid case
     variableTestLongValue = 5.9;
     expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertEquals(expectedResultLongValue, actualResultLongValue);
 
     // Test invalid case
     variableTestLongValue = 6;
@@ -682,79 +682,79 @@ TEST (JavaLang, FloatToIntBits) {
     input = 0.0;
     expectedResult = 0;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = Float::floatToIntBits(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 }
 
 TEST (JavaLang, FloatIsNaNNoneParam) {
@@ -835,103 +835,103 @@ TEST (JavaLang, FloatFloatValue) {
 // TODO(thoangminh): Need to pass all test cases in comment block
 TEST (JavaLang, FloatCompare) {
     // Test Float::NaN
-    ASSERT_EQUAL(0, Float::compare(Float::NaN, Float::NaN));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(1, Float::compare(Float::NaN, Float::MAX_VALUE));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, 1.2));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, 0.0));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, -0.0f));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, -1.2f));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(Float::NaN, Float::NEGATIVE_INFINITY));
+    assertEquals(0, Float::compare(Float::NaN, Float::NaN));
+    assertEquals(1, Float::compare(Float::NaN, Float::POSITIVE_INFINITY));
+//    assertEquals(1, Float::compare(Float::NaN, Float::MAX_VALUE));
+    assertEquals(1, Float::compare(Float::NaN, 1.2));
+    assertEquals(1, Float::compare(Float::NaN, 0.0));
+    assertEquals(1, Float::compare(Float::NaN, -0.0f));
+    assertEquals(1, Float::compare(Float::NaN, -1.2f));
+    assertEquals(1, Float::compare(Float::NaN, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(Float::NaN, Float::NEGATIVE_INFINITY));
 
     // Test Float::POSITIVE_INFINITY
-    ASSERT_EQUAL(-1, Float::compare(Float::POSITIVE_INFINITY, Float::NaN));
-    ASSERT_EQUAL(0, Float::compare(Float::POSITIVE_INFINITY, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(-1, Float::compare(Float::POSITIVE_INFINITY, Float::MAX_VALUE), -9999);
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, 1.2));
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, 0.0));
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, -0.0f));
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, -1.2f));
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(Float::POSITIVE_INFINITY, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(Float::POSITIVE_INFINITY, Float::NaN));
+    assertEquals(0, Float::compare(Float::POSITIVE_INFINITY, Float::POSITIVE_INFINITY));
+//    assertEquals(-1, Float::compare(Float::POSITIVE_INFINITY, Float::MAX_VALUE), -9999);
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, 1.2));
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, 0.0));
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, -0.0f));
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, -1.2f));
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(Float::POSITIVE_INFINITY, Float::NEGATIVE_INFINITY));
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::MAX_VALUE), -9999);
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, 1.2));
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, 0.0));
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, -0.0f));
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, -1.2f));
-    ASSERT_EQUAL(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::MIN_VALUE));
-    ASSERT_EQUAL(0, Float::compare(Float::NEGATIVE_INFINITY, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::NaN));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::POSITIVE_INFINITY));
+//    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::MAX_VALUE), -9999);
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, 1.2));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, 0.0));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, -0.0f));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, -1.2f));
+    assertEquals(-1, Float::compare(Float::NEGATIVE_INFINITY, Float::MIN_VALUE));
+    assertEquals(0, Float::compare(Float::NEGATIVE_INFINITY, Float::NEGATIVE_INFINITY));
 
 //    // Test Float::MAX_VALUE
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, Float::NaN), -9999);
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, Float::POSITIVE_INFINITY), -9999);
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, Float::MAX_VALUE));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, 1.2));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, 0.0));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, -0.0f));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, -1.2f));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, Float::MIN_VALUE));
-//    ASSERT_EQUAL(Float::compare(Float::MAX_VALUE, Float::NEGATIVE_INFINITY), -9999);
+//    assertEquals(Float::compare(Float::MAX_VALUE, Float::NaN), -9999);
+//    assertEquals(Float::compare(Float::MAX_VALUE, Float::POSITIVE_INFINITY), -9999);
+//    assertEquals(Float::compare(Float::MAX_VALUE, Float::MAX_VALUE));
+//    assertEquals(Float::compare(Float::MAX_VALUE, 1.2));
+//    assertEquals(Float::compare(Float::MAX_VALUE, 0.0));
+//    assertEquals(Float::compare(Float::MAX_VALUE, -0.0f));
+//    assertEquals(Float::compare(Float::MAX_VALUE, -1.2f));
+//    assertEquals(Float::compare(Float::MAX_VALUE, Float::MIN_VALUE));
+//    assertEquals(Float::compare(Float::MAX_VALUE, Float::NEGATIVE_INFINITY), -9999);
 
     // Test Float::MIN_VALUE
-    ASSERT_EQUAL(-1, Float::compare(Float::MIN_VALUE, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(Float::MIN_VALUE, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(Float::compare(Float::MIN_VALUE, Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, Float::compare(Float::MIN_VALUE, 1.2));
-    ASSERT_EQUAL(1, Float::compare(Float::MIN_VALUE, 0.0));
-    ASSERT_EQUAL(1, Float::compare(Float::MIN_VALUE, -0.0f));
-    ASSERT_EQUAL(1, Float::compare(Float::MIN_VALUE, -1.2f));
-    ASSERT_EQUAL(0, Float::compare(Float::MIN_VALUE, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(Float::MIN_VALUE, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(Float::MIN_VALUE, Float::NaN));
+    assertEquals(-1, Float::compare(Float::MIN_VALUE, Float::POSITIVE_INFINITY));
+//    assertEquals(Float::compare(Float::MIN_VALUE, Float::MAX_VALUE));
+    assertEquals(-1, Float::compare(Float::MIN_VALUE, 1.2));
+    assertEquals(1, Float::compare(Float::MIN_VALUE, 0.0));
+    assertEquals(1, Float::compare(Float::MIN_VALUE, -0.0f));
+    assertEquals(1, Float::compare(Float::MIN_VALUE, -1.2f));
+    assertEquals(0, Float::compare(Float::MIN_VALUE, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(Float::MIN_VALUE, Float::NEGATIVE_INFINITY));
 
     // Test value 1.2
-    ASSERT_EQUAL(-1, Float::compare(1.2, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(1.2, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(-1, Float::compare(1.2, Float::MAX_VALUE));
-    ASSERT_EQUAL(0, Float::compare(1.2, 1.2));
-    ASSERT_EQUAL(1, Float::compare(1.2, 0.0));
-    ASSERT_EQUAL(1, Float::compare(1.2, -0.0f));
-    ASSERT_EQUAL(1, Float::compare(1.2, -1.2f));
-    ASSERT_EQUAL(1, Float::compare(1.2, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(1.2, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(1.2, Float::NaN));
+    assertEquals(-1, Float::compare(1.2, Float::POSITIVE_INFINITY));
+//    assertEquals(-1, Float::compare(1.2, Float::MAX_VALUE));
+    assertEquals(0, Float::compare(1.2, 1.2));
+    assertEquals(1, Float::compare(1.2, 0.0));
+    assertEquals(1, Float::compare(1.2, -0.0f));
+    assertEquals(1, Float::compare(1.2, -1.2f));
+    assertEquals(1, Float::compare(1.2, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(1.2, Float::NEGATIVE_INFINITY));
 
     // Test value 0.0
-    ASSERT_EQUAL(-1, Float::compare(0.0, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(0.0, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(Float::compare(0.0, Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, Float::compare(0.0, 1.2));
-    ASSERT_EQUAL(0, Float::compare(0.0, 0.0));
-    ASSERT_EQUAL(0, Float::compare(0.0, -0.0f));  // error in OSX
-    ASSERT_EQUAL(1, Float::compare(0.0, -1.2f));
-    ASSERT_EQUAL(-1, Float::compare(0.0, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(0.0, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(0.0, Float::NaN));
+    assertEquals(-1, Float::compare(0.0, Float::POSITIVE_INFINITY));
+//    assertEquals(Float::compare(0.0, Float::MAX_VALUE));
+    assertEquals(-1, Float::compare(0.0, 1.2));
+    assertEquals(0, Float::compare(0.0, 0.0));
+    assertEquals(0, Float::compare(0.0, -0.0f));  // error in OSX
+    assertEquals(1, Float::compare(0.0, -1.2f));
+    assertEquals(-1, Float::compare(0.0, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(0.0, Float::NEGATIVE_INFINITY));
 
     // Test value -0.0f
-    ASSERT_EQUAL(-1, Float::compare(-0.0f, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(-0.0f, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(Float::compare(-0.0f, Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, Float::compare(-0.0f, 1.2));
-    ASSERT_EQUAL(0, Float::compare(-0.0f, 0.0));  // error in OSX
-    ASSERT_EQUAL(0, Float::compare(-0.0f, -0.0f));   // error in OSX
-    ASSERT_EQUAL(1, Float::compare(-0.0f, -1.2f));
-    ASSERT_EQUAL(-1, Float::compare(-0.0f, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(-0.0f, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(-0.0f, Float::NaN));
+    assertEquals(-1, Float::compare(-0.0f, Float::POSITIVE_INFINITY));
+//    assertEquals(Float::compare(-0.0f, Float::MAX_VALUE));
+    assertEquals(-1, Float::compare(-0.0f, 1.2));
+    assertEquals(0, Float::compare(-0.0f, 0.0));  // error in OSX
+    assertEquals(0, Float::compare(-0.0f, -0.0f));   // error in OSX
+    assertEquals(1, Float::compare(-0.0f, -1.2f));
+    assertEquals(-1, Float::compare(-0.0f, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(-0.0f, Float::NEGATIVE_INFINITY));
 
     // Test value -1.2f
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, Float::NaN));
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(Float::compare(-1.2f, Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, 1.2));
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, 0.0));
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, -0.0f));
-    ASSERT_EQUAL(0, Float::compare(-1.2f, -1.2f));
-    ASSERT_EQUAL(-1, Float::compare(-1.2f, Float::MIN_VALUE));
-    ASSERT_EQUAL(1, Float::compare(-1.2f, Float::NEGATIVE_INFINITY));
+    assertEquals(-1, Float::compare(-1.2f, Float::NaN));
+    assertEquals(-1, Float::compare(-1.2f, Float::POSITIVE_INFINITY));
+//    assertEquals(Float::compare(-1.2f, Float::MAX_VALUE));
+    assertEquals(-1, Float::compare(-1.2f, 1.2));
+    assertEquals(-1, Float::compare(-1.2f, 0.0));
+    assertEquals(-1, Float::compare(-1.2f, -0.0f));
+    assertEquals(0, Float::compare(-1.2f, -1.2f));
+    assertEquals(-1, Float::compare(-1.2f, Float::MIN_VALUE));
+    assertEquals(1, Float::compare(-1.2f, Float::NEGATIVE_INFINITY));
 }
 
 // TODO(thoangminh): Need to pass all test cases in comment block
@@ -946,111 +946,111 @@ TEST (JavaLang, FloatEquals) {
 
     // Test Float::NaN
     variableFloatEquals = Float::NaN;
-    ASSERT_EQUAL(1, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(1, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test FLOAT_POSITIVE_INFINITY
     variableFloatEquals = FLOAT_POSITIVE_INFINITY;
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(1, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals( FLOAT_MAX_VALUE), -9999);
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -9999);
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(1, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals( FLOAT_MAX_VALUE), -9999);
+    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0), -9999);
+    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
 //    // Test FLOAT_MAX_VALUE
 //    variableFloatEquals = FLOAT_MAX_VALUE;
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NaN));
+//    assertEquals(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+//    assertEquals(variableFloatEquals.equals((Float)1.2));
+//    assertEquals(variableFloatEquals.equals((Float)0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 //
 //    // Test FLOAT_MIN_VALUE
 //    variableFloatEquals = FLOAT_MIN_VALUE;
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN), -9999);
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), -9999);
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NaN), -9999);
+//    assertEquals(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY), -9999);
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+//    assertEquals(variableFloatEquals.equals((Float)1.2));
+//    assertEquals(variableFloatEquals.equals((Float)0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test FLOAT_NEGATIVE_INFINITY
     variableFloatEquals = FLOAT_NEGATIVE_INFINITY;
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE), -9999);
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0), -9999);
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
-    ASSERT_EQUAL(1, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE), -9999);
+    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0), -9999);
+    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
+    assertEquals(1, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)1.2
     variableFloatEquals = (Float) 1.2;
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    ASSERT_EQUAL(1, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+    assertEquals(1, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)0.0
     variableFloatEquals = (Float) 0.0;
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(1, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(1, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)-0.0
 //    variableFloatEquals = (Float)-0.0;
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NaN));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NaN));
+//    assertEquals(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+//    assertEquals(variableFloatEquals.equals((Float)1.2));
+//    assertEquals(variableFloatEquals.equals((Float)0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+//    assertEquals(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)-1.2
     variableFloatEquals = (Float) -1.2;
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NaN));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 1.2));
-    ASSERT_EQUAL(0, variableFloatEquals.equals((Float) 0.0));
-//    ASSERT_EQUAL(variableFloatEquals.equals((Float)-0.0));
-    ASSERT_EQUAL(1, variableFloatEquals.equals((Float) -1.2));
-//    ASSERT_EQUAL(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    ASSERT_EQUAL(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
+    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
+    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+//    assertEquals(variableFloatEquals.equals((Float)-0.0));
+    assertEquals(1, variableFloatEquals.equals((Float) -1.2));
+//    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
+    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 }
 
 TEST (JavaLang, FloatIsFinite) {
@@ -1090,79 +1090,79 @@ TEST (JavaLang, FloatHashCodeNoneParam) {
     input = 0.0;
     expectedResult = 0;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = input.hashCode();
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 }
 
 TEST (JavaLang, FloatHashCodeParamFloat) {
@@ -1175,79 +1175,79 @@ TEST (JavaLang, FloatHashCodeParamFloat) {
     input = 0.0;
     expectedResult = 0;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::POSITIVE_INFINITY
     input = Float::POSITIVE_INFINITY;
     expectedResult = 2139095040;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NEGATIVE_INFINITY
     input = Float::NEGATIVE_INFINITY;
     expectedResult = -2139095040;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NaN
     input = Float::NaN;
     expectedResult = 2147483647;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -0.7
     input = -0.7f;
     expectedResult = -1060320051;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 12.375
     input = 12.375;
     expectedResult = 1095106560;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 1.0
     input = 1.0;
     expectedResult = 1065353216;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.375
     input = 0.375;
     expectedResult = 1052770304;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2
     input = -2.0f;
     expectedResult = -1073741824;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 83
     input = 83.0;
     expectedResult = 1118175232;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2625
     input = -2625.0f;
     expectedResult = -1159991296;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.5
     input = 0.5;
     expectedResult = 1056964608;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -1302.12345678
     input = -1302.12345678f;
     expectedResult = -1151517683;
     actualResult = Float::hashCode(input);
-    ASSERT_EQUAL(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 }
 
 TEST (JavaLang, FloatMin) {
@@ -1353,111 +1353,111 @@ TEST (JavaLang, FloatCompareTo) {
 
     // Test Float::NaN
     variableCompareTo = Float::NaN;
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0f));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(0, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(1.2));
+    assertEquals(1, variableCompareTo.compareTo(0.0));
+    assertEquals(1, variableCompareTo.compareTo(-0.0f));
+    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::POSITIVE_INFINITY
     variableCompareTo = Float::POSITIVE_INFINITY;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo( Float::MAX_VALUE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0f));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(0, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo( Float::MAX_VALUE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(1.2));
+    assertEquals(1, variableCompareTo.compareTo(0.0));
+    assertEquals(1, variableCompareTo.compareTo(-0.0f));
+    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::NEGATIVE_INFINITY
     variableCompareTo = Float::NEGATIVE_INFINITY;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE), -9999);
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0f));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE), -9999);
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(-1, variableCompareTo.compareTo(0.0));
+    assertEquals(-1, variableCompareTo.compareTo(-0.0f));
+    assertEquals(-1, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
+    assertEquals(0, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::MAX_VALUE
 //    variableCompareTo = Float::MAX_VALUE;
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::NaN), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::POSITIVE_INFINITY), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY), -9999);
+//    assertEquals(variableCompareTo.compareTo(Float::NaN), -9999);
+//    assertEquals(variableCompareTo.compareTo(Float::POSITIVE_INFINITY), -9999);
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+//    assertEquals(variableCompareTo.compareTo(1.2));
+//    assertEquals(variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+//    assertEquals(variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
+//    assertEquals(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY), -9999);
 
     // Test Float::MIN_VALUE
     variableCompareTo = Float::MIN_VALUE;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(Float::MIN_VALUE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+//    assertEquals(variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+//    assertEquals(variableCompareTo.compareTo(-1.2));
+    assertEquals(0, variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value 1.2
     variableCompareTo = 1.2;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+    assertEquals(0, variableCompareTo.compareTo(1.2));
+    assertEquals(1, variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value 0.0
     variableCompareTo = 0.0;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0)); // error in OSX
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(0, variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0)); // error in OSX
+    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value -0.0
     variableCompareTo = -0.0;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));  // error in OSX
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(-0.0f));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2f));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::MIN_VALUE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(0, variableCompareTo.compareTo(0.0));  // error in OSX
+    assertEquals(0, variableCompareTo.compareTo(-0.0f));
+    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertEquals(-1, variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value -1.2
     variableCompareTo = -1.2;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::NaN));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MAX_VALUE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0f));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(-1.2f));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(Float::MIN_VALUE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
+    assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+//    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(-1, variableCompareTo.compareTo(0.0));
+    assertEquals(-1, variableCompareTo.compareTo(-0.0f));
+    assertEquals(0, variableCompareTo.compareTo(-1.2f));
+//    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 }
 
 TEST (JavaLang, FloatByteValue) {
@@ -1470,43 +1470,43 @@ TEST (JavaLang, FloatByteValue) {
     variableTestByteValue = Float::POSITIVE_INFINITY;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestByteValue = Float::NEGATIVE_INFINITY;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test Float::NaN
     variableTestByteValue = Float::NaN;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test Float::MAX_VALUE
     variableTestByteValue = Float::MAX_VALUE;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test Float::MIN_NORMAL
     variableTestByteValue = Float::MIN_NORMAL;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test Float::MIN_VALUE
     variableTestByteValue = Float::MIN_VALUE;
     expectedResultByteValue = 0;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test valid case
     variableTestByteValue = 13.02;
     expectedResultByteValue = 13;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertEquals(expectedResultByteValue, actualResultByteValue);
 
     // Test invalid case
     variableTestByteValue = 13.02;

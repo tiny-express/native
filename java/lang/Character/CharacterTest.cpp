@@ -54,22 +54,22 @@ TEST (JavaLang, CharacterCharCount) {
 	// Test LATIN CAPITAL LETTER A :  UTF-32 (hex)	0x00000041 (0041)
 	expectedResultCharCount = 1;
 	actualResultCharCount = variableTestCharCount.charCount(0x00000041);
-	ASSERT_EQUAL(expectedResultCharCount, actualResultCharCount);
+	assertEquals(expectedResultCharCount, actualResultCharCount);
 	
 	// Test Unicode Han Data 香 : UTF-32 (hex)	0x00009999 (9999)
 	expectedResultCharCount = 1;
 	actualResultCharCount = variableTestCharCount.charCount(0x00009999);
-	ASSERT_EQUAL(expectedResultCharCount, actualResultCharCount);
+	assertEquals(expectedResultCharCount, actualResultCharCount);
 	
 	// Test LINEAR B SYLLABLE B008 A : UTF-32 (hex)	0x00010000 (10000)
 	expectedResultCharCount = 2;
 	actualResultCharCount = variableTestCharCount.charCount(0x00010000);
-	ASSERT_EQUAL(expectedResultCharCount, actualResultCharCount);
+	assertEquals(expectedResultCharCount, actualResultCharCount);
 	
 	// Test AEGEAN WORD SEPARATOR LINE : UTF-32 (hex)	0x00010100 (10100)
 	expectedResultCharCount = 2;
 	actualResultCharCount = variableTestCharCount.charCount(0x00010100);
-	ASSERT_EQUAL(expectedResultCharCount, actualResultCharCount);
+	assertEquals(expectedResultCharCount, actualResultCharCount);
 }
 
 TEST (JavaLang, CharacterCharValue) {
@@ -103,7 +103,7 @@ TEST (JavaLang, CharacterCodePointAt) {
 	index = 0;
 	actualResultCodePointAt = Character::codePointAt(arrayCodePointAt, index);
 	expectedResultCodePointAt = 97;
-	ASSERT_EQUAL(expectedResultCodePointAt, actualResultCodePointAt);
+	assertEquals(expectedResultCodePointAt, actualResultCodePointAt);
 	
 	// Test invalid case
 	index = 1;
@@ -130,14 +130,14 @@ TEST (JavaLang, CharacterCodePointAt2) {
 	limitCodePointAt2 = 3;
 	expectedResultCodePointAt2 = 'a';
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 	
 	// Test valid case.
 	indexCodePointAt2 = 1;
 	limitCodePointAt2 = 3;
 	expectedResultCodePointAt2 = 'b';
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 	
 	// Test invalid case.
 	indexCodePointAt2 = 2;
@@ -151,21 +151,21 @@ TEST (JavaLang, CharacterCodePointAt2) {
 	limitCodePointAt2 = 3;
 	expectedResultCodePointAt2 = -1;
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 	
 	// Test exception limit < 0.
 	indexCodePointAt2 = 2;
 	limitCodePointAt2 = -1;
 	expectedResultCodePointAt2 = -1;
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 	
 	// Test exception limit > length.
 	indexCodePointAt2 = 2;
 	limitCodePointAt2 = 5;
 	expectedResultCodePointAt2 = -1;
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 }
 
 TEST (JavaLang, CharacterCodePointBefore) {
@@ -182,7 +182,7 @@ TEST (JavaLang, CharacterCodePointBefore) {
 	indexCodePointBefore = 2;
 	actualResultCodePointBefore = Character::codePointBefore(arrayCodePointBefore, indexCodePointBefore);
 	expectedResultCodePointBefore = 'b';
-	ASSERT_EQUAL(expectedResultCodePointBefore, actualResultCodePointBefore);
+	assertEquals(expectedResultCodePointBefore, actualResultCodePointBefore);
 	
 	// Test invalid case
 	indexCodePointBefore = 2;
@@ -209,14 +209,14 @@ TEST (JavaLang, CharacterCodePointBefore2) {
 	startCodePointBefore2 = 0;
 	expectedResultCodePointBefore2 = 'a';
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 	
 	// Test valid case.
 	indexCodePointBefore2 = 2;
 	startCodePointBefore2 = 0;
 	expectedResultCodePointBefore2 = 'b';
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 	
 	// Test invalid case.
 	indexCodePointBefore2 = 3;
@@ -230,21 +230,21 @@ TEST (JavaLang, CharacterCodePointBefore2) {
 	startCodePointBefore2 = 1;
 	expectedResultCodePointBefore2 = -1;
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 	
 	// Test exception start > length.
 	indexCodePointBefore2 = 2;
 	startCodePointBefore2 = 4;
 	expectedResultCodePointBefore2 = -1;
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 	
 	// Test exception start < 0.
 	indexCodePointBefore2 = 2;
 	startCodePointBefore2 = -1;
 	expectedResultCodePointBefore2 = -1;
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 }
 
 TEST (JavaLang, CharacterCodePointCount) {
@@ -265,14 +265,14 @@ TEST (JavaLang, CharacterCodePointCount) {
 	countCodePointCount = 1;
 	expectedResultCodePointCount = 1;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 	
 	// Test valid case
 	offsetCodePointCount = 0;
 	countCodePointCount = 2;
 	expectedResultCodePointCount = 2;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 	
 	// Test invalid case
 	offsetCodePointCount = 0;
@@ -286,21 +286,21 @@ TEST (JavaLang, CharacterCodePointCount) {
 	countCodePointCount = 3;
 	expectedResultCodePointCount = -1;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 	
 	// Test exception count < 0
 	offsetCodePointCount = 0;
 	countCodePointCount = -1;
 	expectedResultCodePointCount = -1;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 	
 	// Test exception count > length - offset
 	offsetCodePointCount = 2;
 	countCodePointCount = 5;
 	expectedResultCodePointCount = -1;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 }
 
 TEST (JavaLang, CharacterCompare) {
@@ -315,21 +315,21 @@ TEST (JavaLang, CharacterCompare) {
 	yCompare = 'd';
 	expectedResultCompare = 0;
 	actualResultCompare = Character::compare(xCompare, yCompare);
-	ASSERT_EQUAL(expectedResultCompare, actualResultCompare);
+	assertEquals(expectedResultCompare, actualResultCompare);
 	
 	// Test valid case
 	xCompare = 'd';
 	yCompare = 'a';
 	expectedResultCompare = 3;
 	actualResultCompare = Character::compare(xCompare, yCompare);
-	ASSERT_EQUAL(expectedResultCompare, actualResultCompare);
+	assertEquals(expectedResultCompare, actualResultCompare);
 	
 	// Test valid case
 	xCompare = 'd';
 	yCompare = 'e';
 	expectedResultCompare = -1;
 	actualResultCompare = Character::compare(xCompare, yCompare);
-	ASSERT_EQUAL(expectedResultCompare, actualResultCompare);
+	assertEquals(expectedResultCompare, actualResultCompare);
 }
 
 TEST (JavaLang, CharacterCompareTo) {
@@ -344,21 +344,21 @@ TEST (JavaLang, CharacterCompareTo) {
 	anotherCharacterCompareTo = 'd';
 	expectedResultCompareTo = 0;
 	actualResultCompareTo = variableTestCompareTo.compareTo(anotherCharacterCompareTo);
-	ASSERT_EQUAL(expectedResultCompareTo, actualResultCompareTo);
+	assertEquals(expectedResultCompareTo, actualResultCompareTo);
 	
 	// Test valid case
 	variableTestCompareTo = 'd';
 	anotherCharacterCompareTo = 'a';
 	expectedResultCompareTo = 3;
 	actualResultCompareTo = variableTestCompareTo.compareTo(anotherCharacterCompareTo);
-	ASSERT_EQUAL(expectedResultCompareTo, actualResultCompareTo);
+	assertEquals(expectedResultCompareTo, actualResultCompareTo);
 	
 	// Test valid case
 	variableTestCompareTo = 'd';
 	anotherCharacterCompareTo = 'e';
 	expectedResultCompareTo = -1;
 	actualResultCompareTo = variableTestCompareTo.compareTo(anotherCharacterCompareTo);
-	ASSERT_EQUAL(expectedResultCompareTo, actualResultCompareTo);
+	assertEquals(expectedResultCompareTo, actualResultCompareTo);
 }
 
 // TEST sample
@@ -386,7 +386,7 @@ TEST (JavaLang, CharacterToCodePoint) {
 	variableTest2ToCodePoint = (unicode) '\u000DC00';
 	expectedResultToCodePoint = 65536;
 	actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
-	ASSERT_EQUAL(expectedResultToCodePoint, actualResultToCodePoint);
+	assertEquals(expectedResultToCodePoint, actualResultToCodePoint);
 	
 	// Test invalid case
 	variableTest1ToCodePoint = (unicode) '\u000d800';
@@ -457,14 +457,14 @@ TEST (JavaLang, CharacterDigit) {
 	char wrongValueDigit = 'q';
 	
 	int expectedResultDigit = 11;
-	ASSERT_EQUAL(expectedResultDigit, Character::digit(hexValueDigit, 16));
+	assertEquals(expectedResultDigit, Character::digit(hexValueDigit, 16));
 	
 	expectedResultDigit = 13;
-	ASSERT_EQUAL(expectedResultDigit, Character::digit(hexValue2Digit, 16));
+	assertEquals(expectedResultDigit, Character::digit(hexValue2Digit, 16));
 	
 	expectedResultDigit = 5;
-	ASSERT_EQUAL(expectedResultDigit, Character::digit(hexValue3Digit, 16));
+	assertEquals(expectedResultDigit, Character::digit(hexValue3Digit, 16));
 	
 	expectedResultDigit = -1;
-	ASSERT_EQUAL(expectedResultDigit, Character::digit(wrongValueDigit, 16));
+	assertEquals(expectedResultDigit, Character::digit(wrongValueDigit, 16));
 }

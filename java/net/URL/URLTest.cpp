@@ -34,7 +34,7 @@ using namespace Java::Lang;
 //	URL url(urlString);
 //	assertEquals("http", url.getProtocol().toString());
 //	assertEquals("test.com", url.getHost().toString());
-//	ASSERT_EQUAL(3000, url.getPort());
+//	assertEquals(3000, url.getPort());
 //	assertEquals("/file/test", url.getPath().toString());
 //	assertEquals("param=1", url.getQuery().toString());
 //
@@ -44,7 +44,7 @@ using namespace Java::Lang;
 //	assertEquals("", url2.getHost().toString());
 //	assertEquals("", url2.getPath().toString());
 //	assertEquals("", url2.getQuery().toString());
-//	ASSERT_EQUAL(-1, url2.getPort());
+//	assertEquals(-1, url2.getPort());
 //}
 //
 //TEST (JavaNet, URLToString) {
@@ -52,7 +52,7 @@ using namespace Java::Lang;
 //	URL url = URL("http://test.com:80/file/test?param=1");
 //	assertEquals("test.com", url.getHost().toString());
 //	assertEquals("/file/test", url.getPath().toString());
-//	ASSERT_EQUAL(80, url.getPort());
+//	assertEquals(80, url.getPort());
 //	assertEquals("http", url.getProtocol().toString());
 //	assertEquals("param=1", url.getQuery().toString());
 //

@@ -29,29 +29,29 @@
 
 TEST (KernelCommon, LengthPointerChar) {
 	auto data = (string) "Hello world";
-	ASSERT_EQUAL(11, lengthPointerChar(data));
+	assertEquals(11, lengthPointerChar(data));
 	
-	ASSERT_EQUAL(11, lengthPointerChar("Hello world"));
+	assertEquals(11, lengthPointerChar("Hello world"));
 	
 	data = (string) "";
-	ASSERT_EQUAL(0, lengthPointerChar(data));
+	assertEquals(0, lengthPointerChar(data));
 	
 	data = (string) "\0";
-	ASSERT_EQUAL(0, lengthPointerChar(data));
+	assertEquals(0, lengthPointerChar(data));
 	
 	data = nullptr;
-	ASSERT_EQUAL(0, lengthPointerChar(data));
+	assertEquals(0, lengthPointerChar(data));
 	
 	//  Please use calloc instead of malloc because it is dangerous
 	//  data = malloc(10);
-	//  ASSERT_EQUAL(0, lengthPointerChar(data));
+	//  assertEquals(0, lengthPointerChar(data));
 	//  free(data);
 }
 
 TEST (KernelCommon, LengthPointerPointerChar) {
 
     char *data_null = nullptr;
-    ASSERT_EQUAL(0, lengthPointerPointerChar((char **) data_null));
+    assertEquals(0, lengthPointerPointerChar((char **) data_null));
 
     char *data_raw[] = {
             (char *) "abc",
@@ -63,7 +63,7 @@ TEST (KernelCommon, LengthPointerPointerChar) {
             nullptr
     };
     auto data1 = (char **) data_raw;
-    ASSERT_EQUAL(6, lengthPointerPointerChar(data1));
+    assertEquals(6, lengthPointerPointerChar(data1));
 
     // Dynamic string
     int NUM = 135;
@@ -73,7 +73,7 @@ TEST (KernelCommon, LengthPointerPointerChar) {
         data2[i] = (string) "test";
     }
     data2[NUM] = nullptr;
-    ASSERT_EQUAL(NUM, lengthPointerPointerChar(data2));
+    assertEquals(NUM, lengthPointerPointerChar(data2));
     free(data2);
 }
 

@@ -33,14 +33,14 @@ TEST (JavaLang, LongConstructor) {
 	// Given empty value for Long constructor and assign value - Return Long
 	Long emptyLong;
 	emptyLong = 3;
-	ASSERT_EQUAL(3, emptyLong.longValue());
+	assertEquals(3, emptyLong.longValue());
 	
 	// Given value for Integer constructor and assign value - Return string
 	Long validLong = 3;
-	ASSERT_EQUAL(3, validLong.longValue());
+	assertEquals(3, validLong.longValue());
 	
 	Long test = 3;
-	ASSERT_EQUAL(3, test.intValue());
+	assertEquals(3, test.intValue());
 }
 
 TEST (JavaLang, LongBitCount) {
@@ -49,13 +49,13 @@ TEST (JavaLang, LongBitCount) {
 	int result = Long::bitCount(validValue);
 	
 	int expectedResult = 24;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	validValue = 4547830931350L;
 	result = Long::bitCount(validValue);
 	
 	expectedResult = 25;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 }
 
 TEST (JavaLang, LongByteValue) {
@@ -64,13 +64,13 @@ TEST (JavaLang, LongByteValue) {
 	int result = validValue.byteValue();
 	
 	int expectedResult = 50;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	validValue = 200L;
 	result = validValue.byteValue();
 	
 	expectedResult = -56;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 }
 
 TEST (JavaLang, LongCompare) {
@@ -82,15 +82,15 @@ TEST (JavaLang, LongCompare) {
 	
 	int result = Long::compare(validValue, lessValue);
 	int expectedResult = 1;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	result = Long::compare(validValue, equalValue);
 	expectedResult = 0;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	result = Long::compare(validValue, moreValue);
 	expectedResult = -1;
-	ASSERT_EQUAL(expectedResult, result);
+	assertEquals(expectedResult, result);
 }
 
 TEST (JavaLang, LongCompareTo) {
@@ -102,15 +102,15 @@ TEST (JavaLang, LongCompareTo) {
 	
 	int result = validValue.compareTo(lessValue);
 	int expectedValue = 1;
-	ASSERT_EQUAL(expectedValue, result);
+	assertEquals(expectedValue, result);
 	
 	result = validValue.compareTo(equalValue);
 	expectedValue = 0;
-	ASSERT_EQUAL(expectedValue, result);
+	assertEquals(expectedValue, result);
 	
 	result = validValue.compareTo(moreValue);
 	expectedValue = -1;
-	ASSERT_EQUAL(expectedValue, result);
+	assertEquals(expectedValue, result);
 }
 
 TEST (JavaLang, LongComparision) {
@@ -173,20 +173,20 @@ TEST (JavaLang, LongParseLong) {
 	// Given value for Long constructor and assign value - Return long
 	Long validLong = Long::parseLong("6");
 	long expectedResult = 6;
-	ASSERT_EQUAL(expectedResult, validLong.longValue());
+	assertEquals(expectedResult, validLong.longValue());
 	
 	// Given valid string to test parseLong with radix 16
 	String validNumberString = "1b";
 	Long result = Long::parseLong(validNumberString, 16);
 	
 	expectedResult = 27;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 	
 	String invalidNumbeString = "122q3";
 	result = Long::parseLong(invalidNumbeString, 16);
 	
 	expectedResult = -1;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLang, LongEquals) {
@@ -207,11 +207,11 @@ TEST (JavaLang, LongGetLong) {
 	
 	Long result = Long::getLong(hexString);
 	long expectedResult = 35;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 	
 	result = Long::getLong(decimalString);
 	expectedResult = 123;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLang, LongDecode) {
@@ -220,217 +220,217 @@ TEST (JavaLang, LongDecode) {
 	Long result = Long::decode(validNumberString);
 	
 	long expectedResult = 27;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 	
 	String invalidNumberString = "0x23xx";
 	result = Long::decode(invalidNumberString);
 	
 	expectedResult = -1;
-	ASSERT_EQUAL(expectedResult, result.longValue());
+	assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLang, LongNumberOfLeadingZeros) {
-    ASSERT_EQUAL(0, Long::numberOfLeadingZeros(-1L));
-    ASSERT_EQUAL(33, Long::numberOfLeadingZeros(1234567890L));
+    assertEquals(0, Long::numberOfLeadingZeros(-1L));
+    assertEquals(33, Long::numberOfLeadingZeros(1234567890L));
 
-    ASSERT_EQUAL(64, Long::numberOfLeadingZeros(0L));
-    ASSERT_EQUAL(63, Long::numberOfLeadingZeros(1L));
-    ASSERT_EQUAL(62, Long::numberOfLeadingZeros(2L));
-    ASSERT_EQUAL(61, Long::numberOfLeadingZeros(4L));
-    ASSERT_EQUAL(60, Long::numberOfLeadingZeros(8L));
-    ASSERT_EQUAL(59, Long::numberOfLeadingZeros(16L));
-    ASSERT_EQUAL(58, Long::numberOfLeadingZeros(32L));
-    ASSERT_EQUAL(57, Long::numberOfLeadingZeros(64L));
-    ASSERT_EQUAL(56, Long::numberOfLeadingZeros(128L));
-    ASSERT_EQUAL(55, Long::numberOfLeadingZeros(256L));
-    ASSERT_EQUAL(54, Long::numberOfLeadingZeros(512L));
-    ASSERT_EQUAL(53, Long::numberOfLeadingZeros(1024L));
-    ASSERT_EQUAL(52, Long::numberOfLeadingZeros(2048L));
-    ASSERT_EQUAL(51, Long::numberOfLeadingZeros(4096L));
-    ASSERT_EQUAL(50, Long::numberOfLeadingZeros(8192L));
-    ASSERT_EQUAL(49, Long::numberOfLeadingZeros(16384L));
-    ASSERT_EQUAL(48, Long::numberOfLeadingZeros(32768L));
-    ASSERT_EQUAL(47, Long::numberOfLeadingZeros(65536L));
-    ASSERT_EQUAL(46, Long::numberOfLeadingZeros(131072L));
-    ASSERT_EQUAL(45, Long::numberOfLeadingZeros(262144L));
-    ASSERT_EQUAL(44, Long::numberOfLeadingZeros(524288L));
-    ASSERT_EQUAL(43, Long::numberOfLeadingZeros(1048576L));
-    ASSERT_EQUAL(42, Long::numberOfLeadingZeros(2097152L));
-    ASSERT_EQUAL(41, Long::numberOfLeadingZeros(4194304L));
-    ASSERT_EQUAL(40, Long::numberOfLeadingZeros(8388608L));
-    ASSERT_EQUAL(39, Long::numberOfLeadingZeros(16777216L));
-    ASSERT_EQUAL(38, Long::numberOfLeadingZeros(33554432L));
-    ASSERT_EQUAL(37, Long::numberOfLeadingZeros(67108864L));
-    ASSERT_EQUAL(36, Long::numberOfLeadingZeros(134217728L));
-    ASSERT_EQUAL(35, Long::numberOfLeadingZeros(268435456L));
-    ASSERT_EQUAL(34, Long::numberOfLeadingZeros(536870912L));
-    ASSERT_EQUAL(33, Long::numberOfLeadingZeros(1073741824L));
-    ASSERT_EQUAL(32, Long::numberOfLeadingZeros(2147483648L));
-    ASSERT_EQUAL(31, Long::numberOfLeadingZeros(4294967296L));
-    ASSERT_EQUAL(30, Long::numberOfLeadingZeros(8589934592L));
-    ASSERT_EQUAL(29, Long::numberOfLeadingZeros(17179869184L));
-    ASSERT_EQUAL(28, Long::numberOfLeadingZeros(34359738368L));
-    ASSERT_EQUAL(27, Long::numberOfLeadingZeros(68719476736L));
-    ASSERT_EQUAL(26, Long::numberOfLeadingZeros(137438953472L));
-    ASSERT_EQUAL(25, Long::numberOfLeadingZeros(274877906944L));
-    ASSERT_EQUAL(24, Long::numberOfLeadingZeros(549755813888L));
-    ASSERT_EQUAL(23, Long::numberOfLeadingZeros(1099511627776L));
-    ASSERT_EQUAL(22, Long::numberOfLeadingZeros(2199023255552L));
-    ASSERT_EQUAL(21, Long::numberOfLeadingZeros(4398046511104L));
-    ASSERT_EQUAL(20, Long::numberOfLeadingZeros(8796093022208L));
-    ASSERT_EQUAL(19, Long::numberOfLeadingZeros(17592186044416L));
-    ASSERT_EQUAL(18, Long::numberOfLeadingZeros(35184372088832L));
-    ASSERT_EQUAL(17, Long::numberOfLeadingZeros(70368744177664L));
-    ASSERT_EQUAL(16, Long::numberOfLeadingZeros(140737488355328L));
-    ASSERT_EQUAL(15, Long::numberOfLeadingZeros(281474976710656L));
-    ASSERT_EQUAL(14, Long::numberOfLeadingZeros(562949953421312L));
-    ASSERT_EQUAL(13, Long::numberOfLeadingZeros(1125899906842624L));
-    ASSERT_EQUAL(12, Long::numberOfLeadingZeros(2251799813685248L));
-    ASSERT_EQUAL(11, Long::numberOfLeadingZeros(4503599627370496L));
-    ASSERT_EQUAL(10, Long::numberOfLeadingZeros(9007199254740992L));
-    ASSERT_EQUAL(9, Long::numberOfLeadingZeros(18014398509481984L));
-    ASSERT_EQUAL(8, Long::numberOfLeadingZeros(36028797018963968L));
-    ASSERT_EQUAL(7, Long::numberOfLeadingZeros(72057594037927936L));
-    ASSERT_EQUAL(6, Long::numberOfLeadingZeros(144115188075855872L));
-    ASSERT_EQUAL(5, Long::numberOfLeadingZeros(288230376151711744L));
-    ASSERT_EQUAL(4, Long::numberOfLeadingZeros(576460752303423488L));
-    ASSERT_EQUAL(3, Long::numberOfLeadingZeros(1152921504606846976L));
-    ASSERT_EQUAL(2, Long::numberOfLeadingZeros(2305843009213693952L));
-    ASSERT_EQUAL(1, Long::numberOfLeadingZeros(4611686018427387904L));
-    ASSERT_EQUAL(0, Long::numberOfLeadingZeros(9223372036854775808uL));
+    assertEquals(64, Long::numberOfLeadingZeros(0L));
+    assertEquals(63, Long::numberOfLeadingZeros(1L));
+    assertEquals(62, Long::numberOfLeadingZeros(2L));
+    assertEquals(61, Long::numberOfLeadingZeros(4L));
+    assertEquals(60, Long::numberOfLeadingZeros(8L));
+    assertEquals(59, Long::numberOfLeadingZeros(16L));
+    assertEquals(58, Long::numberOfLeadingZeros(32L));
+    assertEquals(57, Long::numberOfLeadingZeros(64L));
+    assertEquals(56, Long::numberOfLeadingZeros(128L));
+    assertEquals(55, Long::numberOfLeadingZeros(256L));
+    assertEquals(54, Long::numberOfLeadingZeros(512L));
+    assertEquals(53, Long::numberOfLeadingZeros(1024L));
+    assertEquals(52, Long::numberOfLeadingZeros(2048L));
+    assertEquals(51, Long::numberOfLeadingZeros(4096L));
+    assertEquals(50, Long::numberOfLeadingZeros(8192L));
+    assertEquals(49, Long::numberOfLeadingZeros(16384L));
+    assertEquals(48, Long::numberOfLeadingZeros(32768L));
+    assertEquals(47, Long::numberOfLeadingZeros(65536L));
+    assertEquals(46, Long::numberOfLeadingZeros(131072L));
+    assertEquals(45, Long::numberOfLeadingZeros(262144L));
+    assertEquals(44, Long::numberOfLeadingZeros(524288L));
+    assertEquals(43, Long::numberOfLeadingZeros(1048576L));
+    assertEquals(42, Long::numberOfLeadingZeros(2097152L));
+    assertEquals(41, Long::numberOfLeadingZeros(4194304L));
+    assertEquals(40, Long::numberOfLeadingZeros(8388608L));
+    assertEquals(39, Long::numberOfLeadingZeros(16777216L));
+    assertEquals(38, Long::numberOfLeadingZeros(33554432L));
+    assertEquals(37, Long::numberOfLeadingZeros(67108864L));
+    assertEquals(36, Long::numberOfLeadingZeros(134217728L));
+    assertEquals(35, Long::numberOfLeadingZeros(268435456L));
+    assertEquals(34, Long::numberOfLeadingZeros(536870912L));
+    assertEquals(33, Long::numberOfLeadingZeros(1073741824L));
+    assertEquals(32, Long::numberOfLeadingZeros(2147483648L));
+    assertEquals(31, Long::numberOfLeadingZeros(4294967296L));
+    assertEquals(30, Long::numberOfLeadingZeros(8589934592L));
+    assertEquals(29, Long::numberOfLeadingZeros(17179869184L));
+    assertEquals(28, Long::numberOfLeadingZeros(34359738368L));
+    assertEquals(27, Long::numberOfLeadingZeros(68719476736L));
+    assertEquals(26, Long::numberOfLeadingZeros(137438953472L));
+    assertEquals(25, Long::numberOfLeadingZeros(274877906944L));
+    assertEquals(24, Long::numberOfLeadingZeros(549755813888L));
+    assertEquals(23, Long::numberOfLeadingZeros(1099511627776L));
+    assertEquals(22, Long::numberOfLeadingZeros(2199023255552L));
+    assertEquals(21, Long::numberOfLeadingZeros(4398046511104L));
+    assertEquals(20, Long::numberOfLeadingZeros(8796093022208L));
+    assertEquals(19, Long::numberOfLeadingZeros(17592186044416L));
+    assertEquals(18, Long::numberOfLeadingZeros(35184372088832L));
+    assertEquals(17, Long::numberOfLeadingZeros(70368744177664L));
+    assertEquals(16, Long::numberOfLeadingZeros(140737488355328L));
+    assertEquals(15, Long::numberOfLeadingZeros(281474976710656L));
+    assertEquals(14, Long::numberOfLeadingZeros(562949953421312L));
+    assertEquals(13, Long::numberOfLeadingZeros(1125899906842624L));
+    assertEquals(12, Long::numberOfLeadingZeros(2251799813685248L));
+    assertEquals(11, Long::numberOfLeadingZeros(4503599627370496L));
+    assertEquals(10, Long::numberOfLeadingZeros(9007199254740992L));
+    assertEquals(9, Long::numberOfLeadingZeros(18014398509481984L));
+    assertEquals(8, Long::numberOfLeadingZeros(36028797018963968L));
+    assertEquals(7, Long::numberOfLeadingZeros(72057594037927936L));
+    assertEquals(6, Long::numberOfLeadingZeros(144115188075855872L));
+    assertEquals(5, Long::numberOfLeadingZeros(288230376151711744L));
+    assertEquals(4, Long::numberOfLeadingZeros(576460752303423488L));
+    assertEquals(3, Long::numberOfLeadingZeros(1152921504606846976L));
+    assertEquals(2, Long::numberOfLeadingZeros(2305843009213693952L));
+    assertEquals(1, Long::numberOfLeadingZeros(4611686018427387904L));
+    assertEquals(0, Long::numberOfLeadingZeros(9223372036854775808uL));
 }
 
 TEST(JavaLang, LongNumberOfTrailingZeros) {
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(-1L));
-    ASSERT_EQUAL(2, Long::numberOfTrailingZeros(100L));
+    assertEquals(0, Long::numberOfTrailingZeros(-1L));
+    assertEquals(2, Long::numberOfTrailingZeros(100L));
 
-    ASSERT_EQUAL(64, Long::numberOfTrailingZeros(0L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1L));
-    ASSERT_EQUAL(1, Long::numberOfTrailingZeros(2L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(3L));
-    ASSERT_EQUAL(2, Long::numberOfTrailingZeros(4L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(7L));
-    ASSERT_EQUAL(3, Long::numberOfTrailingZeros(8L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(15L));
-    ASSERT_EQUAL(4, Long::numberOfTrailingZeros(16L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(31L));
-    ASSERT_EQUAL(5, Long::numberOfTrailingZeros(32L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(63L));
-    ASSERT_EQUAL(6, Long::numberOfTrailingZeros(64L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(127L));
-    ASSERT_EQUAL(7, Long::numberOfTrailingZeros(128L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(255L));
-    ASSERT_EQUAL(8, Long::numberOfTrailingZeros(256L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(511L));
-    ASSERT_EQUAL(9, Long::numberOfTrailingZeros(512L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1023L));
-    ASSERT_EQUAL(10, Long::numberOfTrailingZeros(1024L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2047L));
-    ASSERT_EQUAL(11, Long::numberOfTrailingZeros(2048L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4095L));
-    ASSERT_EQUAL(12, Long::numberOfTrailingZeros(4096L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(8191L));
-    ASSERT_EQUAL(13, Long::numberOfTrailingZeros(8192L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(16383L));
-    ASSERT_EQUAL(14, Long::numberOfTrailingZeros(16384L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(32767L));
-    ASSERT_EQUAL(15, Long::numberOfTrailingZeros(32768L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(65535L));
-    ASSERT_EQUAL(16, Long::numberOfTrailingZeros(65536L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(131071L));
-    ASSERT_EQUAL(17, Long::numberOfTrailingZeros(131072L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(262143L));
-    ASSERT_EQUAL(18, Long::numberOfTrailingZeros(262144L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(524287L));
-    ASSERT_EQUAL(19, Long::numberOfTrailingZeros(524288L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1048575L));
-    ASSERT_EQUAL(20, Long::numberOfTrailingZeros(1048576L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2097151L));
-    ASSERT_EQUAL(21, Long::numberOfTrailingZeros(2097152L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4194303L));
-    ASSERT_EQUAL(22, Long::numberOfTrailingZeros(4194304L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(8388607L));
-    ASSERT_EQUAL(23, Long::numberOfTrailingZeros(8388608L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(16777215L));
-    ASSERT_EQUAL(24, Long::numberOfTrailingZeros(16777216L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(33554431L));
-    ASSERT_EQUAL(25, Long::numberOfTrailingZeros(33554432L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(67108863L));
-    ASSERT_EQUAL(26, Long::numberOfTrailingZeros(67108864L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(134217727L));
-    ASSERT_EQUAL(27, Long::numberOfTrailingZeros(134217728L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(268435455L));
-    ASSERT_EQUAL(28, Long::numberOfTrailingZeros(268435456L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(536870911L));
-    ASSERT_EQUAL(29, Long::numberOfTrailingZeros(536870912L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1073741823L));
-    ASSERT_EQUAL(30, Long::numberOfTrailingZeros(1073741824L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2147483647L));
-    ASSERT_EQUAL(31, Long::numberOfTrailingZeros(2147483648L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4294967295L));
-    ASSERT_EQUAL(32, Long::numberOfTrailingZeros(4294967296L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(8589934591L));
-    ASSERT_EQUAL(33, Long::numberOfTrailingZeros(8589934592L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(17179869183L));
-    ASSERT_EQUAL(34, Long::numberOfTrailingZeros(17179869184L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(34359738367L));
-    ASSERT_EQUAL(35, Long::numberOfTrailingZeros(34359738368L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(68719476735L));
-    ASSERT_EQUAL(36, Long::numberOfTrailingZeros(68719476736L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(137438953471L));
-    ASSERT_EQUAL(37, Long::numberOfTrailingZeros(137438953472L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(274877906943L));
-    ASSERT_EQUAL(38, Long::numberOfTrailingZeros(274877906944L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(549755813887L));
-    ASSERT_EQUAL(39, Long::numberOfTrailingZeros(549755813888L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1099511627775L));
-    ASSERT_EQUAL(40, Long::numberOfTrailingZeros(1099511627776L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2199023255551L));
-    ASSERT_EQUAL(41, Long::numberOfTrailingZeros(2199023255552L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4398046511103L));
-    ASSERT_EQUAL(42, Long::numberOfTrailingZeros(4398046511104L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(8796093022207L));
-    ASSERT_EQUAL(43, Long::numberOfTrailingZeros(8796093022208L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(17592186044415L));
-    ASSERT_EQUAL(44, Long::numberOfTrailingZeros(17592186044416L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(35184372088831L));
-    ASSERT_EQUAL(45, Long::numberOfTrailingZeros(35184372088832L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(70368744177663L));
-    ASSERT_EQUAL(46, Long::numberOfTrailingZeros(70368744177664L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(140737488355327L));
-    ASSERT_EQUAL(47, Long::numberOfTrailingZeros(140737488355328L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(281474976710655L));
-    ASSERT_EQUAL(48, Long::numberOfTrailingZeros(281474976710656L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(562949953421311L));
-    ASSERT_EQUAL(49, Long::numberOfTrailingZeros(562949953421312L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1125899906842623L));
-    ASSERT_EQUAL(50, Long::numberOfTrailingZeros(1125899906842624L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2251799813685247L));
-    ASSERT_EQUAL(51, Long::numberOfTrailingZeros(2251799813685248L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4503599627370495L));
-    ASSERT_EQUAL(52, Long::numberOfTrailingZeros(4503599627370496L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(9007199254740991L));
-    ASSERT_EQUAL(53, Long::numberOfTrailingZeros(9007199254740992L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(18014398509481983L));
-    ASSERT_EQUAL(54, Long::numberOfTrailingZeros(18014398509481984L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(36028797018963967L));
-    ASSERT_EQUAL(55, Long::numberOfTrailingZeros(36028797018963968L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(72057594037927935L));
-    ASSERT_EQUAL(56, Long::numberOfTrailingZeros(72057594037927936L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(144115188075855871L));
-    ASSERT_EQUAL(57, Long::numberOfTrailingZeros(144115188075855872L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(288230376151711743L));
-    ASSERT_EQUAL(58, Long::numberOfTrailingZeros(288230376151711744L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(576460752303423487L));
-    ASSERT_EQUAL(59, Long::numberOfTrailingZeros(576460752303423488L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(1152921504606846975L));
-    ASSERT_EQUAL(60, Long::numberOfTrailingZeros(1152921504606846976L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(2305843009213693951L));
-    ASSERT_EQUAL(61, Long::numberOfTrailingZeros(2305843009213693952L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(4611686018427387903L));
-    ASSERT_EQUAL(62, Long::numberOfTrailingZeros(4611686018427387904L));
-    ASSERT_EQUAL(0, Long::numberOfTrailingZeros(9223372036854775807L));
-    ASSERT_EQUAL(63, Long::numberOfTrailingZeros(9223372036854775808uL));
+    assertEquals(64, Long::numberOfTrailingZeros(0L));
+    assertEquals(0, Long::numberOfTrailingZeros(1L));
+    assertEquals(1, Long::numberOfTrailingZeros(2L));
+    assertEquals(0, Long::numberOfTrailingZeros(3L));
+    assertEquals(2, Long::numberOfTrailingZeros(4L));
+    assertEquals(0, Long::numberOfTrailingZeros(7L));
+    assertEquals(3, Long::numberOfTrailingZeros(8L));
+    assertEquals(0, Long::numberOfTrailingZeros(15L));
+    assertEquals(4, Long::numberOfTrailingZeros(16L));
+    assertEquals(0, Long::numberOfTrailingZeros(31L));
+    assertEquals(5, Long::numberOfTrailingZeros(32L));
+    assertEquals(0, Long::numberOfTrailingZeros(63L));
+    assertEquals(6, Long::numberOfTrailingZeros(64L));
+    assertEquals(0, Long::numberOfTrailingZeros(127L));
+    assertEquals(7, Long::numberOfTrailingZeros(128L));
+    assertEquals(0, Long::numberOfTrailingZeros(255L));
+    assertEquals(8, Long::numberOfTrailingZeros(256L));
+    assertEquals(0, Long::numberOfTrailingZeros(511L));
+    assertEquals(9, Long::numberOfTrailingZeros(512L));
+    assertEquals(0, Long::numberOfTrailingZeros(1023L));
+    assertEquals(10, Long::numberOfTrailingZeros(1024L));
+    assertEquals(0, Long::numberOfTrailingZeros(2047L));
+    assertEquals(11, Long::numberOfTrailingZeros(2048L));
+    assertEquals(0, Long::numberOfTrailingZeros(4095L));
+    assertEquals(12, Long::numberOfTrailingZeros(4096L));
+    assertEquals(0, Long::numberOfTrailingZeros(8191L));
+    assertEquals(13, Long::numberOfTrailingZeros(8192L));
+    assertEquals(0, Long::numberOfTrailingZeros(16383L));
+    assertEquals(14, Long::numberOfTrailingZeros(16384L));
+    assertEquals(0, Long::numberOfTrailingZeros(32767L));
+    assertEquals(15, Long::numberOfTrailingZeros(32768L));
+    assertEquals(0, Long::numberOfTrailingZeros(65535L));
+    assertEquals(16, Long::numberOfTrailingZeros(65536L));
+    assertEquals(0, Long::numberOfTrailingZeros(131071L));
+    assertEquals(17, Long::numberOfTrailingZeros(131072L));
+    assertEquals(0, Long::numberOfTrailingZeros(262143L));
+    assertEquals(18, Long::numberOfTrailingZeros(262144L));
+    assertEquals(0, Long::numberOfTrailingZeros(524287L));
+    assertEquals(19, Long::numberOfTrailingZeros(524288L));
+    assertEquals(0, Long::numberOfTrailingZeros(1048575L));
+    assertEquals(20, Long::numberOfTrailingZeros(1048576L));
+    assertEquals(0, Long::numberOfTrailingZeros(2097151L));
+    assertEquals(21, Long::numberOfTrailingZeros(2097152L));
+    assertEquals(0, Long::numberOfTrailingZeros(4194303L));
+    assertEquals(22, Long::numberOfTrailingZeros(4194304L));
+    assertEquals(0, Long::numberOfTrailingZeros(8388607L));
+    assertEquals(23, Long::numberOfTrailingZeros(8388608L));
+    assertEquals(0, Long::numberOfTrailingZeros(16777215L));
+    assertEquals(24, Long::numberOfTrailingZeros(16777216L));
+    assertEquals(0, Long::numberOfTrailingZeros(33554431L));
+    assertEquals(25, Long::numberOfTrailingZeros(33554432L));
+    assertEquals(0, Long::numberOfTrailingZeros(67108863L));
+    assertEquals(26, Long::numberOfTrailingZeros(67108864L));
+    assertEquals(0, Long::numberOfTrailingZeros(134217727L));
+    assertEquals(27, Long::numberOfTrailingZeros(134217728L));
+    assertEquals(0, Long::numberOfTrailingZeros(268435455L));
+    assertEquals(28, Long::numberOfTrailingZeros(268435456L));
+    assertEquals(0, Long::numberOfTrailingZeros(536870911L));
+    assertEquals(29, Long::numberOfTrailingZeros(536870912L));
+    assertEquals(0, Long::numberOfTrailingZeros(1073741823L));
+    assertEquals(30, Long::numberOfTrailingZeros(1073741824L));
+    assertEquals(0, Long::numberOfTrailingZeros(2147483647L));
+    assertEquals(31, Long::numberOfTrailingZeros(2147483648L));
+    assertEquals(0, Long::numberOfTrailingZeros(4294967295L));
+    assertEquals(32, Long::numberOfTrailingZeros(4294967296L));
+    assertEquals(0, Long::numberOfTrailingZeros(8589934591L));
+    assertEquals(33, Long::numberOfTrailingZeros(8589934592L));
+    assertEquals(0, Long::numberOfTrailingZeros(17179869183L));
+    assertEquals(34, Long::numberOfTrailingZeros(17179869184L));
+    assertEquals(0, Long::numberOfTrailingZeros(34359738367L));
+    assertEquals(35, Long::numberOfTrailingZeros(34359738368L));
+    assertEquals(0, Long::numberOfTrailingZeros(68719476735L));
+    assertEquals(36, Long::numberOfTrailingZeros(68719476736L));
+    assertEquals(0, Long::numberOfTrailingZeros(137438953471L));
+    assertEquals(37, Long::numberOfTrailingZeros(137438953472L));
+    assertEquals(0, Long::numberOfTrailingZeros(274877906943L));
+    assertEquals(38, Long::numberOfTrailingZeros(274877906944L));
+    assertEquals(0, Long::numberOfTrailingZeros(549755813887L));
+    assertEquals(39, Long::numberOfTrailingZeros(549755813888L));
+    assertEquals(0, Long::numberOfTrailingZeros(1099511627775L));
+    assertEquals(40, Long::numberOfTrailingZeros(1099511627776L));
+    assertEquals(0, Long::numberOfTrailingZeros(2199023255551L));
+    assertEquals(41, Long::numberOfTrailingZeros(2199023255552L));
+    assertEquals(0, Long::numberOfTrailingZeros(4398046511103L));
+    assertEquals(42, Long::numberOfTrailingZeros(4398046511104L));
+    assertEquals(0, Long::numberOfTrailingZeros(8796093022207L));
+    assertEquals(43, Long::numberOfTrailingZeros(8796093022208L));
+    assertEquals(0, Long::numberOfTrailingZeros(17592186044415L));
+    assertEquals(44, Long::numberOfTrailingZeros(17592186044416L));
+    assertEquals(0, Long::numberOfTrailingZeros(35184372088831L));
+    assertEquals(45, Long::numberOfTrailingZeros(35184372088832L));
+    assertEquals(0, Long::numberOfTrailingZeros(70368744177663L));
+    assertEquals(46, Long::numberOfTrailingZeros(70368744177664L));
+    assertEquals(0, Long::numberOfTrailingZeros(140737488355327L));
+    assertEquals(47, Long::numberOfTrailingZeros(140737488355328L));
+    assertEquals(0, Long::numberOfTrailingZeros(281474976710655L));
+    assertEquals(48, Long::numberOfTrailingZeros(281474976710656L));
+    assertEquals(0, Long::numberOfTrailingZeros(562949953421311L));
+    assertEquals(49, Long::numberOfTrailingZeros(562949953421312L));
+    assertEquals(0, Long::numberOfTrailingZeros(1125899906842623L));
+    assertEquals(50, Long::numberOfTrailingZeros(1125899906842624L));
+    assertEquals(0, Long::numberOfTrailingZeros(2251799813685247L));
+    assertEquals(51, Long::numberOfTrailingZeros(2251799813685248L));
+    assertEquals(0, Long::numberOfTrailingZeros(4503599627370495L));
+    assertEquals(52, Long::numberOfTrailingZeros(4503599627370496L));
+    assertEquals(0, Long::numberOfTrailingZeros(9007199254740991L));
+    assertEquals(53, Long::numberOfTrailingZeros(9007199254740992L));
+    assertEquals(0, Long::numberOfTrailingZeros(18014398509481983L));
+    assertEquals(54, Long::numberOfTrailingZeros(18014398509481984L));
+    assertEquals(0, Long::numberOfTrailingZeros(36028797018963967L));
+    assertEquals(55, Long::numberOfTrailingZeros(36028797018963968L));
+    assertEquals(0, Long::numberOfTrailingZeros(72057594037927935L));
+    assertEquals(56, Long::numberOfTrailingZeros(72057594037927936L));
+    assertEquals(0, Long::numberOfTrailingZeros(144115188075855871L));
+    assertEquals(57, Long::numberOfTrailingZeros(144115188075855872L));
+    assertEquals(0, Long::numberOfTrailingZeros(288230376151711743L));
+    assertEquals(58, Long::numberOfTrailingZeros(288230376151711744L));
+    assertEquals(0, Long::numberOfTrailingZeros(576460752303423487L));
+    assertEquals(59, Long::numberOfTrailingZeros(576460752303423488L));
+    assertEquals(0, Long::numberOfTrailingZeros(1152921504606846975L));
+    assertEquals(60, Long::numberOfTrailingZeros(1152921504606846976L));
+    assertEquals(0, Long::numberOfTrailingZeros(2305843009213693951L));
+    assertEquals(61, Long::numberOfTrailingZeros(2305843009213693952L));
+    assertEquals(0, Long::numberOfTrailingZeros(4611686018427387903L));
+    assertEquals(62, Long::numberOfTrailingZeros(4611686018427387904L));
+    assertEquals(0, Long::numberOfTrailingZeros(9223372036854775807L));
+    assertEquals(63, Long::numberOfTrailingZeros(9223372036854775808uL));
 }
 
 TEST (JavaLang, LongToHexString) {

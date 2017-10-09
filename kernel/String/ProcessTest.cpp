@@ -128,7 +128,7 @@ TEST (KernelStringProcess, StringSplit) {
 	
 	auto url = (string) "/abc?username=loint&password=123&firstName=Loi&lastName=Nguyen";
 	char **url_components = stringSplit(url, (string) "?");
-	ASSERT_EQUAL(2, lengthPointerPointerChar(url_components));
+	assertEquals(2, lengthPointerPointerChar(url_components));
 	assertEquals("/abc", url_components[ 0 ]);
 	assertEquals("username=loint&password=123&firstName=Loi&lastName=Nguyen", url_components[ 1 ]);
 	freePointerPointerChar(url_components);
@@ -140,7 +140,7 @@ TEST (KernelStringProcess, StringSplit) {
 		"{\"took\":26,\"timed_out\":false,\"_shards\":{\"total\":2,\"successful\":2,\"failed\":0},\"hits\":{\"total\":1,\"max_score\":4.495634,\"hits\":[{\"_index\":\"db_foodtiny_test\",\"_type\":\"food_with_shop\",\"_id\":\"[\\\"ebc0aa50-3a26-11e7-9d38-8f725678c689\\\",\\\"05b05ff0-3a27-11e7-9d38-8f725678c689\\\"]\",\"_score\":4.495634,\"_source\":{\"food_discount\":0.0,\"food_name\":{\"en_EN\":\"Noodles with deep fried tofu, shrimp paste\",\"vi_VN\":\"Bún đậu mắm tôm\"},\"food_menu_name\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_shop_online_status\":false,\"food_shop_type\":{\"en_EN\":\"Diner\",\"vi_VN\":\"Quán Ăn\"},\"food_shop_id\":\"ebc0aa50-3a26-11e7-9d38-8f725678c689\",\"food_shop_rating\":4.0,\"food_id\":\"05b05ff0-3a27-11e7-9d38-8f725678c689\",\"food_image\":\"http://healthplus.vn/Images/Uploaded/Share/2013/08/25/e9020130521111500eP8Qt3fV2.jpg\",\"food_shop_logo\":\"http://thpt.daytot.vn/files/thpt/chi-pheo.jpg\",\"food_shop_phone_number\":\"0112\",\"food_ingredient_1\":{\"en_EN\":\"Noodles\",\"vi_VN\":\"Bún\"},\"food_price\":45000.0,\"food_shop_address\":{\"en_EN\":\"818 Nguyen Kiem, Ward 3, Go Vap District, HCMC\",\"vi_VN\":\"818 Nguyễn Kiệm, Phường 3, Gò Vấp, Hồ Chí Minh\"},\"food_ingredient_2\":{\"en_EN\":\"tofu\",\"vi_VN\":\"Đậu hũ\"},\"food_ingredient_3\":{\"en_EN\":\"Shrimp paste\",\"vi_VN\":\"Mắm tôm\"},\"food_shop_name\":\"Bún đậu Thị Nở\",\"food_shop_start_time\":\"08:00\",\"location\":\"10.817053, 106.678834\",\"food_shop_delivery_status\":false,\"food_cooking_method\":{\"en_EN\":\"None\",\"vi_VN\":\"None\"},\"food_shop_quota_shipping\":100000.0,\"food_shop_finish_time\":\"21:00\"}}]}}";
 	
 	result = stringSplit(target, (string) "\r\n\r\n");
-	ASSERT_EQUAL(4, lengthPointerPointerChar(result));
+	assertEquals(4, lengthPointerPointerChar(result));
 	freePointerPointerChar(result);
 }
 
@@ -175,69 +175,69 @@ TEST (KernelStringProcess, StringIndexOf) {
 	char *target = (string) "Hello World";
 	char *subTarget = (string) "World";
 	int result = stringIndex(target, subTarget, 1);
-	ASSERT_EQUAL(6, result);
+	assertEquals(6, result);
 	
 	target = (string) "Hello World World World World";
 	subTarget = (string) "World";
 	result = stringIndex(target, subTarget, 3);
-	ASSERT_EQUAL(18, result);
+	assertEquals(18, result);
 	
 	target = (string) "Hello World World World World";
 	subTarget = (string) "orl";
 	result = stringIndex(target, subTarget, 2);
-	ASSERT_EQUAL(13, result);
+	assertEquals(13, result);
 	
 	target = (string) "###############";
 	subTarget = (string) "##";
 	result = stringIndex(target, subTarget, 4);
-	ASSERT_EQUAL(3, result);
+	assertEquals(3, result);
 	
 	subTarget = (string) "Substring is longer than target";
 	result = stringIndex(target, subTarget, 1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "Hello";
 	result = stringIndex(target, subTarget, 1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "Nope";
 	result = stringIndex(target, subTarget, 1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "xxx";
 	target = (string) "";
 	result = stringIndex(target, subTarget, 1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "";
 	target = (string) "";
 	result = stringIndex(target, subTarget, 2);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "";
 	target = nullptr;
 	result = stringIndex(target, subTarget, 2);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = nullptr;
 	target = nullptr;
 	result = stringIndex(target, subTarget, 2);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "\0";
 	target = (string) "\0";
 	result = stringIndex(target, subTarget, -1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = (string) "\0";
 	target = nullptr;
 	result = stringIndex(target, subTarget, -1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 	
 	subTarget = nullptr;
 	target = (string) "\0";
 	result = stringIndex(target, subTarget, -1);
-	ASSERT_EQUAL(-1, result);
+	assertEquals(-1, result);
 }
 
 TEST (KernelStringProcess, StringRandom) {
@@ -245,7 +245,7 @@ TEST (KernelStringProcess, StringRandom) {
 	int size = 4;
 	char *result = stringRandom(target, size);
 	
-	ASSERT_EQUAL(4, lengthPointerChar(result));
+	assertEquals(4, lengthPointerChar(result));
 	free(result);
 }
 
@@ -279,13 +279,13 @@ TEST (KernelStringProcess, StringConcat) {
 
     auto result = stringConcat(target, subTarget);
 	assertEquals("HelloWorld", result);
-	ASSERT_EQUAL(10, lengthPointerChar(result));
+	assertEquals(10, lengthPointerChar(result));
 	free(result);
 	
 	subTarget = (string) "";
 	result = stringConcat(target, subTarget);
 	assertEquals("Hello", result);
-	ASSERT_EQUAL(5, lengthPointerChar(result));
+	assertEquals(5, lengthPointerChar(result));
 	free(result);
 }
 

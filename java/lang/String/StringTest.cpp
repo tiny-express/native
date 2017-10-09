@@ -59,24 +59,24 @@ assertEquals("Hello world", normalString.toString());
 StringBuilder stringBuilder  = StringBuilder((string) "Hello world");
 String stringBuilderConstructor(stringBuilder);
 assertEquals("Hello world", stringBuilderConstructor.toString());
-ASSERT_EQUAL(stringBuilder.length(), stringBuilderConstructor.length());
+assertEquals(stringBuilder.length(), stringBuilderConstructor.length());
 
 // Given a StringBuffer for String constructor
 StringBuffer stringBuffer  = StringBuffer("Hello world");
 String stringBufferConstructor = String(stringBuffer);
 assertEquals("Hello world", stringBufferConstructor.toString());
-ASSERT_EQUAL(stringBuffer.length(), stringBufferConstructor.length());
+assertEquals(stringBuffer.length(), stringBufferConstructor.length());
 
 // Given a char Array
 Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
 
 String arrayConstructor(charArray);
 assertEquals("Hello world", arrayConstructor.toString());
-ASSERT_EQUAL(charArray.length, arrayConstructor.length());
+assertEquals(charArray.length, arrayConstructor.length());
 
 String subArrayConstructor(charArray, 6, 5);
 assertEquals("world", subArrayConstructor.toString());
-ASSERT_EQUAL(5, subArrayConstructor.length());
+assertEquals(5, subArrayConstructor.length());
 
 try {
 String exceptionConstructor(charArray, -1, 5);
@@ -102,11 +102,11 @@ assertEquals("String index out of range: 15", e.getMessage().toString());
 // Given a byte Array
 Array<byte> byteArray = {72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100};
 assertEquals("Hello world", arrayConstructor.toString());
-ASSERT_EQUAL(charArray.length, arrayConstructor.length());
+assertEquals(charArray.length, arrayConstructor.length());
 
 String subByteArrayConstructor(byteArray, 6, 5);
 assertEquals("world", subByteArrayConstructor.toString());
-ASSERT_EQUAL(5, subByteArrayConstructor.length());
+assertEquals(5, subByteArrayConstructor.length());
 
 try {
 String exceptionConstructor(byteArray, -1, 5);
@@ -162,7 +162,7 @@ TEST(JavaLang, StringCharAt) {
 String text = "Hello World";
 char positionIsExist = text.charAt(0);
 
-ASSERT_EQUAL('H', positionIsExist);
+assertEquals('H', positionIsExist);
 
 // Given a string - Return negative position is not exist
 try {
@@ -258,11 +258,11 @@ Array<char> charArray = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
 
 String copyArrayString = String::copyValueOf(charArray);
 assertEquals("Hello world", copyArrayString.toString());
-ASSERT_EQUAL(charArray.length, copyArrayString.length());
+assertEquals(charArray.length, copyArrayString.length());
 
 String copySubArrayString = String::copyValueOf(charArray, 6, 5);
 assertEquals("world", copySubArrayString.toString());
-ASSERT_EQUAL(5, copySubArrayString.length());
+assertEquals(5, copySubArrayString.length());
 
 try {
 String exceptionString = String::copyValueOf(charArray, -1, 5);
@@ -335,43 +335,43 @@ TEST(JavaLang, StringIndexOf) {
 String textPlus = "Hello Hello Hello ";
 
 int result = textPlus.indexOf('H');
-ASSERT_EQUAL(0, result);
+assertEquals(0, result);
 
 result = textPlus.indexOf('k');
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf('k');
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf('l', 4);
-ASSERT_EQUAL(8, result);
+assertEquals(8, result);
 
 result = textPlus.indexOf('k', 4);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf('l', -1);
-ASSERT_EQUAL(2, result);
+assertEquals(2, result);
 
 result = textPlus.indexOf('l', 100);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf("llo");
-ASSERT_EQUAL(2, result);
+assertEquals(2, result);
 
 result = textPlus.indexOf("llo", 4);
-ASSERT_EQUAL(8, result);
+assertEquals(8, result);
 
 result = textPlus.indexOf("llok");
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf("llo", -1);
-ASSERT_EQUAL(2, result);
+assertEquals(2, result);
 
 result = textPlus.indexOf("llo", 100);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.indexOf("lli", 10);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 }
 
 TEST(JavaLang, StringLastIndexOf) {
@@ -382,30 +382,30 @@ String subString = "awesome";
 String wrongString = "some thing";
 
 int result = textPlus.lastIndexOf('H');
-ASSERT_EQUAL(12, result);
+assertEquals(12, result);
 
 result = textPlus.lastIndexOf('a');
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.lastIndexOf('H', 2);
-ASSERT_EQUAL(0, result);
+assertEquals(0, result);
 
 result = textPlus.lastIndexOf('H', 100);
-ASSERT_EQUAL(12, result);
+assertEquals(12, result);
 
 result = textPlus.lastIndexOf('H', -1);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = textPlus.lastIndexOf('a', 10);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 // Test true first character of subString appear last in validString is position 28th
 result = validString.lastIndexOf(subString);
-ASSERT_EQUAL(28, result);
+assertEquals(28, result);
 
 // Test false with wrong subString
 result = validString.lastIndexOf(wrongString);
-ASSERT_EQUAL(NOT_FOUND, result);
+assertEquals(NOT_FOUND, result);
 
 // Given validString2 check lastIndexOf(string, fromIndex)
 String validString2 = "sometimes you win, sometimes you learn";
@@ -414,28 +414,28 @@ String wrongString2 = "abc xyz";
 
 // Test true by 19th, with correct subString2 and correct fromIndex to find
 result = validString2.lastIndexOf(subString2, 19);
-ASSERT_EQUAL(19, result);
+assertEquals(19, result);
 
 result = validString2.lastIndexOf(subString2, 18);
-ASSERT_EQUAL(0, result);
+assertEquals(0, result);
 
 result = validString2.lastIndexOf(subString2, 0);
-ASSERT_EQUAL(0, result);
+assertEquals(0, result);
 
 result = validString2.lastIndexOf(subString2, 1);
-ASSERT_EQUAL(0, result);
+assertEquals(0, result);
 
 result = validString2.lastIndexOf(subString2, 100);
-ASSERT_EQUAL(19, result);
+assertEquals(19, result);
 
 result = validString2.lastIndexOf(subString2, -1);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 
 result = validString2.lastIndexOf(subString2, 20);
-ASSERT_EQUAL(19, result);
+assertEquals(19, result);
 
 result = validString2.lastIndexOf(wrongString2, 20);
-ASSERT_EQUAL(-1, result);
+assertEquals(-1, result);
 }
 // TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST(JavaLang, StringGetChars) {
@@ -503,15 +503,15 @@ ASSERT_TRUE(textPlus.isEmpty());
 TEST(JavaLang, StringLength) {
 String textPlus = "Hello Hello Hello ";
 
-ASSERT_EQUAL(18, textPlus.length());
+assertEquals(18, textPlus.length());
 
 textPlus = "";
-ASSERT_EQUAL(0, textPlus.length());
+assertEquals(0, textPlus.length());
 }
 
 TEST(JavaLang, StringHashCode) {
 String string = "Hello world";
-ASSERT_EQUAL(-832992604, string.hashCode());
+assertEquals(-832992604, string.hashCode());
 }
 
 TEST(JavaLang, StringRegionMatch) {
@@ -855,14 +855,14 @@ free(validString);
 
 int expect = 8;
 int result = stringTest.length();
-ASSERT_EQUAL(expect, result);
+assertEquals(expect, result);
 
 // Test copy String and change data of stringTest
 String stringCopyStringTest(stringTest);
 stringTest = "";
 expect = 8;
 result = stringCopyStringTest.length();
-ASSERT_EQUAL(expect, result);
+assertEquals(expect, result);
 }
 
 TEST(JavaLang, StringClone) {

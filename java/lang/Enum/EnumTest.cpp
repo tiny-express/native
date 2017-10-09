@@ -42,7 +42,7 @@ TEST (JavaLang, EnumGetOrdinal) {
 	Enum<int> validEnum = Enum<int>("validName", 18);
 	
 	int expectedValue = 18;
-	ASSERT_EQUAL(expectedValue, validEnum.getOrdinal());
+	assertEquals(expectedValue, validEnum.getOrdinal());
 }
 
 TEST (JavaLang, EnumToString) {

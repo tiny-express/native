@@ -40,12 +40,12 @@ TEST(JavaLang, StringBufferConstructor) {
     // Init a StringBuffer with default constructor
     StringBuffer defaultConstructor;
     int expectCapacity = 16;
-    ASSERT_EQUAL(expectCapacity, defaultConstructor.capacity());
+    assertEquals(expectCapacity, defaultConstructor.capacity());
 
     // Init a StringBuffer with specific capacity;
     StringBuffer capacityConstructor = StringBuffer(10);
     int expectSpecificCapacity = 10;
-    ASSERT_EQUAL(expectSpecificCapacity, capacityConstructor.capacity());
+    assertEquals(expectSpecificCapacity, capacityConstructor.capacity());
 
     // Init a StringBuffer with negative specific capacity;
     try {
@@ -61,8 +61,8 @@ TEST(JavaLang, StringBufferConstructor) {
     int expectSequenceCapacity = sequence->length() + 16;
     int expectSequenceLength = sequence->length();
     string expectSequenceValue = sequence->toString();
-    ASSERT_EQUAL(expectSequenceCapacity, charSequenceConstructor.capacity());
-    ASSERT_EQUAL(expectSequenceLength, charSequenceConstructor.length());
+    assertEquals(expectSequenceCapacity, charSequenceConstructor.capacity());
+    assertEquals(expectSequenceLength, charSequenceConstructor.length());
     assertEquals(expectSequenceValue, charSequenceConstructor.getValue());
     String *charSequenceString = dynamic_cast<String *>(sequence);
     delete charSequenceString;
@@ -73,8 +73,8 @@ TEST(JavaLang, StringBufferConstructor) {
     int expectNullSequenceCapacity = 20;
     int expectNullSequenceLength = 4;
     string expectNullSequenceValue = (string)("null");
-    ASSERT_EQUAL(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
-    ASSERT_EQUAL(expectNullSequenceLength, nullSequenceConstructor.length());
+    assertEquals(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
+    assertEquals(expectNullSequenceLength, nullSequenceConstructor.length());
     assertEquals(expectNullSequenceValue, nullSequenceConstructor.getValue());
 
     // Init a StringBuffer with a String
@@ -83,15 +83,15 @@ TEST(JavaLang, StringBufferConstructor) {
     int expectStringCapacity = aString.length() + 16;
     int expectStringLength = aString.length();
     string expectStringValue = aString.toString();
-    ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
-    ASSERT_EQUAL(expectStringLength, stringConstructor.length());
+    assertEquals(expectStringCapacity, stringConstructor.capacity());
+    assertEquals(expectStringLength, stringConstructor.length());
     assertEquals(expectStringValue, stringConstructor.getValue());
 
     // Copy Constructor
     StringBuffer other = StringBuffer("A string to test");
     StringBuffer copyConstructor = StringBuffer(other);
-    ASSERT_EQUAL(expectStringCapacity, stringConstructor.capacity());
-    ASSERT_EQUAL(expectStringLength, stringConstructor.length());
+    assertEquals(expectStringCapacity, stringConstructor.capacity());
+    assertEquals(expectStringLength, stringConstructor.length());
     assertEquals(expectStringValue, stringConstructor.getValue());
 }
 
@@ -99,15 +99,15 @@ TEST(JavaLang, StringBufferOperater) {
 	StringBuffer other = StringBuffer("A string to test");
 	StringBuffer stringBuffer;
 	stringBuffer = other;
-	ASSERT_EQUAL(other.capacity(), stringBuffer.capacity());
-	ASSERT_EQUAL(other.length(), stringBuffer.length());
+	assertEquals(other.capacity(), stringBuffer.capacity());
+	assertEquals(other.length(), stringBuffer.length());
 	assertEquals(other.getValue(), stringBuffer.getValue());
 	
 	StringBufferUnSafe otherUnSafe = StringBufferUnSafe("A string to test");
 	StringBufferUnSafe stringBufferUnSafe;
 	stringBufferUnSafe = otherUnSafe;
-	ASSERT_EQUAL(otherUnSafe.capacity(), stringBufferUnSafe.capacity());
-	ASSERT_EQUAL(otherUnSafe.length(), stringBufferUnSafe.length());
+	assertEquals(otherUnSafe.capacity(), stringBufferUnSafe.capacity());
+	assertEquals(otherUnSafe.length(), stringBufferUnSafe.length());
 	assertEquals(otherUnSafe.getValue(), stringBufferUnSafe.getValue());
 }
 
@@ -115,7 +115,7 @@ TEST(JavaLang, StringBufferCapacity) {
 	// Init a StringBuffer with specific capacity
 	StringBuffer stringBuffer = StringBuffer(16);
 	int expectCapacity = 16;
-	ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
+	assertEquals(expectCapacity, stringBuffer.capacity());
 }
 
 TEST(JavaLang, StringBufferLength) {
@@ -123,7 +123,7 @@ TEST(JavaLang, StringBufferLength) {
 	String aString = "A string to test";
 	StringBuffer stringConstructor = StringBuffer(aString);
 	int expectLength = 16;
-	ASSERT_EQUAL(expectLength, stringConstructor.length());
+	assertEquals(expectLength, stringConstructor.length());
 }
 
 TEST(JavaLang, StringBufferGetValue) {
@@ -537,17 +537,17 @@ TEST(JavaLang, StringBufferEnsureCapacity) {
 	// Test minimum capacity = 20
 	int expectMinimumTwentyCapacity = 34;
 	stringBuffer.ensureCapacity(20);
-	ASSERT_EQUAL(expectMinimumTwentyCapacity, stringBuffer.capacity());
+	assertEquals(expectMinimumTwentyCapacity, stringBuffer.capacity());
 	
 	// Tets minimum capacity < current capacity
 	int expectMinimumEightyCapacity = 34;
 	stringBuffer.ensureCapacity(30);
-	ASSERT_EQUAL(expectMinimumEightyCapacity, stringBuffer.capacity());
+	assertEquals(expectMinimumEightyCapacity, stringBuffer.capacity());
 	
 	// Test negative minimum capacity
 	int expectMinNonPositiveCapacity = 34;
 	stringBuffer.ensureCapacity(-1);
-	ASSERT_EQUAL(expectMinNonPositiveCapacity, stringBuffer.capacity());
+	assertEquals(expectMinNonPositiveCapacity, stringBuffer.capacity());
 }
 
 TEST(JavaLang, StringBufferAppendCodePoint) {
@@ -577,7 +577,7 @@ TEST(JavaLang, StringBufferCharAt) {
 	
 	// Test vaild index
 	char expectCharAtResult = 'A';
-	ASSERT_EQUAL(expectCharAtResult, stringBuffer.charAt(4));
+	assertEquals(expectCharAtResult, stringBuffer.charAt(4));
 	
 	// Test negative index
 	try {
@@ -609,7 +609,7 @@ TEST(JavaLang, StringBufferCodePointAt) {
 	
 	// Test vaild index
 	char expectCodePointAtResult = 'A';
-	ASSERT_EQUAL(expectCodePointAtResult, stringBuffer.codePointAt(9));
+	assertEquals(expectCodePointAtResult, stringBuffer.codePointAt(9));
 	
 	// Test negative index
 	try {
@@ -641,7 +641,7 @@ TEST(JavaLang, StringBufferCodePointBefore) {
 	
 	// Test vaild index
 	char expectCodePointBeforeResult = 'A';
-	ASSERT_EQUAL(expectCodePointBeforeResult, stringBuffer.codePointBefore(10));
+	assertEquals(expectCodePointBeforeResult, stringBuffer.codePointBefore(10));
 	
 	// Test zero index
 	try {
@@ -673,7 +673,7 @@ TEST(JavaLang, StringBufferCodePointCount) {
 	
 	// Test vaild beginIndex, endIndex
 	int expectCodePointCount = 8;
-	ASSERT_EQUAL(expectCodePointCount, stringBuffer.codePointCount(1, 9));
+	assertEquals(expectCodePointCount, stringBuffer.codePointCount(1, 9));
 	
 	// Test negative beginIndex
 	try {
@@ -847,12 +847,12 @@ TEST(JavaLang, StringBufferIndexOf) {
 	// Test isSubString
 	int expectIsSubStringResult = 5;
 	int actualIsSubStringResult = stringBuffer.indexOf(isSubString);
-	ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+	assertEquals(expectIsSubStringResult, actualIsSubStringResult);
 	
 	// Test notSubString
 	int expectNotSubStringResult = -1;
 	int actualNotSubStringResult = stringBuffer.indexOf(notSubString);
-	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+	assertEquals(expectNotSubStringResult, actualNotSubStringResult);
 }
 
 TEST(JavaLang, StringBufferIndexOfFromIndex) {
@@ -865,12 +865,12 @@ TEST(JavaLang, StringBufferIndexOfFromIndex) {
 	// Test isSubString
 	int expectIsSubStringResult = 29;
 	int actualIsSubStringResult = stringBuffer.indexOf(isSubString, 10);
-	ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+	assertEquals(expectIsSubStringResult, actualIsSubStringResult);
 	
 	// Test notSubString
 	int expectNotSubStringResult = -1;
 	int actualNotSubStringResult = stringBuffer.indexOf(notSubString, 10);
-	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+	assertEquals(expectNotSubStringResult, actualNotSubStringResult);
 }
 
 TEST(JavaLang, StringBufferLastIndexOf) {
@@ -883,12 +883,12 @@ TEST(JavaLang, StringBufferLastIndexOf) {
 	// Test isSubString
 	int expectIsSubStringResult = 53;
 	int actualIsSubStringResult = stringBuffer.lastIndexOf(isSubString);
-	ASSERT_EQUAL(expectIsSubStringResult, actualIsSubStringResult);
+	assertEquals(expectIsSubStringResult, actualIsSubStringResult);
 	
 	// Test notSubString
 	int expectNotSubStringResult = -1;
 	int actualNotSubStringResult = stringBuffer.lastIndexOf(notSubString);
-	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+	assertEquals(expectNotSubStringResult, actualNotSubStringResult);
 }
 
 TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
@@ -901,17 +901,17 @@ TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
 	// Test isSubString
 	int expectIsSubStringFromIndexResult = 29;
 	int actualIsSubStringFromIndexResult = stringBuffer.lastIndexOf(isSubString, 29);
-	ASSERT_EQUAL(expectIsSubStringFromIndexResult, actualIsSubStringFromIndexResult);
+	assertEquals(expectIsSubStringFromIndexResult, actualIsSubStringFromIndexResult);
 	
 	// Test isSubString
 	int expectNotSubStringFromIndexResult = -1;
 	int actualNotSubStringFromIndexResult = stringBuffer.lastIndexOf(isSubString, 4);
-	ASSERT_EQUAL(expectNotSubStringFromIndexResult, actualNotSubStringFromIndexResult);
+	assertEquals(expectNotSubStringFromIndexResult, actualNotSubStringFromIndexResult);
 	
 	// Test notSubString
 	int expectNotSubStringResult = -1;
 	int actualNotSubStringResult = stringBuffer.lastIndexOf(notSubString, 30);
-	ASSERT_EQUAL(expectNotSubStringResult, actualNotSubStringResult);
+	assertEquals(expectNotSubStringResult, actualNotSubStringResult);
 }
 
 TEST(JavaLang, StringBufferOffSetByCodePoint) {
@@ -921,7 +921,7 @@ TEST(JavaLang, StringBufferOffSetByCodePoint) {
 	// Test vaild param
 	int expectOffsetByCodePointsResult = 0; // 5
 	int actualOffsetByCodePointsResult = stringBuffer.offsetByCodePoints(1, 4);
-	ASSERT_EQUAL(expectOffsetByCodePointsResult, actualOffsetByCodePointsResult);
+	assertEquals(expectOffsetByCodePointsResult, actualOffsetByCodePointsResult);
 	
 	// Test index < 0
 	try {
@@ -1207,5 +1207,5 @@ TEST(JavaLang, StringBufferTrimToSize) {
 	stringBuffer.append(stringToAppend);
 	int expectCapacity = 22;
 	stringBuffer.trimToSize();
-	ASSERT_EQUAL(expectCapacity, stringBuffer.capacity());
+	assertEquals(expectCapacity, stringBuffer.capacity());
 }

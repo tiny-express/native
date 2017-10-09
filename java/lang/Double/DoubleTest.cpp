@@ -302,49 +302,49 @@ TEST(JavaLang, DoubleCharValue) {
 	variableTestCharValue = POSITIVE_INFINITY_DOUBLE;
 	expectedResultCharValue = 'i';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestCharValue = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultCharValue = '-';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestCharValue = NaN_NUMBER_DOUBLE;
 //    expectedResultCharValue = 45;  // 110 in MacOS
 //    actualResultCharValue = variableTestCharValue.charValue();
-//    ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+//    assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test MAX_VALUE_DOUBLE
 	variableTestCharValue = MAX_VALUE_DOUBLE;
 	expectedResultCharValue = '1';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test MIN_NORMAL_DOUBLE
 	variableTestCharValue = MIN_NORMAL_DOUBLE;
 	expectedResultCharValue = '4';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test MIN_VALUE_DOUBLE
 	variableTestCharValue = MIN_VALUE_DOUBLE;
 	expectedResultCharValue = '2';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test valid case
 	variableTestCharValue = 13.02;
 	expectedResultCharValue = '1';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test valid case
 	variableTestCharValue = 20.31;
 	expectedResultCharValue = '2';
 	actualResultCharValue = variableTestCharValue.charValue();
-	ASSERT_EQUAL(expectedResultCharValue , actualResultCharValue);
+	assertEquals(expectedResultCharValue , actualResultCharValue);
 	
 	// Test invalid case
 	variableTestCharValue = 13.02;
@@ -407,49 +407,49 @@ TEST(JavaLang, DoubleShortValue) {
 	variableTestShortValue = POSITIVE_INFINITY_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestShortValue = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test NaN_NUMBER_DOUBLE
 	variableTestShortValue = NaN_NUMBER_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test MAX_VALUE_DOUBLE
 	variableTestShortValue = MAX_VALUE_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test MIN_NORMAL_DOUBLE
 	variableTestShortValue = MIN_NORMAL_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test MIN_VALUE_DOUBLE
 	variableTestShortValue = MIN_VALUE_DOUBLE;
 	expectedResultShortValue = 0;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test valid case
 	variableTestShortValue = 5.9;
 	expectedResultShortValue = 5;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test valid case
 	variableTestShortValue = 5.4;
 	expectedResultShortValue = 5;
 	actualResultShortValue = variableTestShortValue.shortValue();
-	ASSERT_EQUAL(expectedResultShortValue , actualResultShortValue);
+	assertEquals(expectedResultShortValue , actualResultShortValue);
 	
 	// Test invalid case
 	variableTestShortValue = 6;
@@ -469,49 +469,49 @@ TEST(JavaLang, DoubleIntValue) {
 	variableTestIntValue = POSITIVE_INFINITY_DOUBLE;
 	expectedResultIntValue = -2147483648;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestIntValue = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultIntValue = -2147483648;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test NaN_NUMBER_DOUBLE
 	variableTestIntValue = NaN_NUMBER_DOUBLE;
 	expectedResultIntValue = -2147483648;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test MAX_VALUE_DOUBLE
 	variableTestIntValue = MAX_VALUE_DOUBLE;
 	expectedResultIntValue = -2147483648;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test MIN_NORMAL_DOUBLE
 	variableTestIntValue = MIN_NORMAL_DOUBLE;
 	expectedResultIntValue = 0;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test MIN_VALUE_DOUBLE
 	variableTestIntValue = MIN_VALUE_DOUBLE;
 	expectedResultIntValue = 0;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test valid case
 	variableTestIntValue = 5.9;
 	expectedResultIntValue = 5;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test valid case
 	variableTestIntValue = 5.4;
 	expectedResultIntValue = 5;
 	actualResultIntValue = variableTestIntValue.intValue();
-	ASSERT_EQUAL(expectedResultIntValue , actualResultIntValue);
+	assertEquals(expectedResultIntValue , actualResultIntValue);
 	
 	// Test invalid case
 	variableTestIntValue = 6;
@@ -530,49 +530,49 @@ TEST(JavaLang, DoubleLongValue) {
     variableTestLongValue = POSITIVE_INFINITY_DOUBLE;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test NEGATIVE_INFINITY_DOUBLE
     variableTestLongValue = NEGATIVE_INFINITY_DOUBLE;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test NaN_NUMBER_DOUBLE
     variableTestLongValue = NaN_NUMBER_DOUBLE;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test MAX_VALUE_DOUBLE
     variableTestLongValue = MAX_VALUE_DOUBLE;
     expectedResultLongValue = -9223372036854775808u;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestLongValue = MIN_NORMAL_DOUBLE;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test MIN_VALUE_DOUBLE
     variableTestLongValue = MIN_VALUE_DOUBLE;
     expectedResultLongValue = 0;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test valid case
     variableTestLongValue = 5.9;
     expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test valid case
     variableTestLongValue = 5.4;
     expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_EQUAL(expectedResultLongValue , actualResultLongValue);
+    assertEquals(expectedResultLongValue , actualResultLongValue);
 
     // Test invalid case
     variableTestLongValue = 6;
@@ -714,50 +714,50 @@ TEST(JavaLang, DoubleByteValue) {
 	variableTestByteValue = POSITIVE_INFINITY_DOUBLE;
 	expectedResultByteValue = 0;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestByteValue = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultByteValue = 0;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	//// Error in OSX
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestByteValue = NaN_NUMBER_DOUBLE;
 //    expectedResultByteValue = 45;  // 110 in MacOS
 //    actualResultByteValue = variableTestByteValue.byteValue();
-//    ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+//    assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test MAX_VALUE_DOUBLE
 	variableTestByteValue = MAX_VALUE_DOUBLE;
 	expectedResultByteValue = 0;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test MIN_NORMAL_DOUBLE
 	variableTestByteValue = MIN_NORMAL_DOUBLE;
 	expectedResultByteValue = 0;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test MIN_VALUE_DOUBLE
 	variableTestByteValue = MIN_VALUE_DOUBLE;
 	expectedResultByteValue = 0;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test valid case
 	variableTestByteValue = 13.02;
 	expectedResultByteValue = 13;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test valid case
 	variableTestByteValue = 20.31;
 	expectedResultByteValue = 20;
 	actualResultByteValue = variableTestByteValue.byteValue();
-	ASSERT_EQUAL(expectedResultByteValue , actualResultByteValue);
+	assertEquals(expectedResultByteValue , actualResultByteValue);
 	
 	// Test invalid case
 	variableTestByteValue = 13.02;
@@ -769,103 +769,103 @@ TEST(JavaLang, DoubleByteValue) {
 // TODO(thoangminh): Need to pass all test cases in comment block
 TEST(JavaLang, DoubleCompare) {
     // Test NaN_NUMBER_DOUBLE
-    ASSERT_EQUAL(0, Double::compare(NaN_NUMBER_DOUBLE, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, 1.2));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, 0.0));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, -0.0));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, -1.2));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(0, Double::compare(NaN_NUMBER_DOUBLE, NaN_NUMBER_DOUBLE));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(NaN_NUMBER_DOUBLE, MAX_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, 1.2));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, 0.0));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, -0.0));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, -1.2));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(NaN_NUMBER_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test POSITIVE_INFINITY_DOUBLE
-    ASSERT_EQUAL(-1, Double::compare(POSITIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(0, Double::compare(POSITIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 1.2));
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 0.0));
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0));
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -1.2));
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(POSITIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
+    assertEquals(0, Double::compare(POSITIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(POSITIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 1.2));
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 0.0));
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0));
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -1.2));
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(POSITIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test NEGATIVE_INFINITY_DOUBLE
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 1.2));
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 0.0));
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0));
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -1.2));
-    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(0, Double::compare(NEGATIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(NEGATIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 1.2));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 0.0));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -1.2));
+    assertEquals(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
+    assertEquals(0, Double::compare(NEGATIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
 //    // Test MAX_VALUE_DOUBLE
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -9999);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 1.2));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 0.0));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -0.0));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -1.2));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), -9999);
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -9999);
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -9999);
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, 1.2));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, 0.0));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, -0.0));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, -1.2));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
+//    assertEquals(Double::compare(MAX_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), -9999);
 
     // Test MIN_VALUE_DOUBLE
-    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, 1.2));
-    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, 0.0));
-    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, -0.0));
-    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, -1.2));
-    ASSERT_EQUAL(0, Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(MIN_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
+    assertEquals(-1, Double::compare(MIN_VALUE_DOUBLE, 1.2));
+    assertEquals(1, Double::compare(MIN_VALUE_DOUBLE, 0.0));
+    assertEquals(1, Double::compare(MIN_VALUE_DOUBLE, -0.0));
+    assertEquals(1, Double::compare(MIN_VALUE_DOUBLE, -1.2));
+    assertEquals(0, Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 1.2
-    ASSERT_EQUAL(-1, Double::compare(1.2, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(1.2, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(1.2, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(0, Double::compare(1.2, 1.2));
-    ASSERT_EQUAL(1, Double::compare(1.2, 0.0));
-    ASSERT_EQUAL(1, Double::compare(1.2, -0.0));
-    ASSERT_EQUAL(1, Double::compare(1.2, -1.2));
-    ASSERT_EQUAL(1, Double::compare(1.2, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(1.2, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(1.2, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(1.2, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(1.2, MAX_VALUE_DOUBLE));
+    assertEquals(0, Double::compare(1.2, 1.2));
+    assertEquals(1, Double::compare(1.2, 0.0));
+    assertEquals(1, Double::compare(1.2, -0.0));
+    assertEquals(1, Double::compare(1.2, -1.2));
+    assertEquals(1, Double::compare(1.2, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(1.2, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 0.0
-    ASSERT_EQUAL(-1, Double::compare(0.0, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(0.0, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(0.0, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(0.0, 1.2));
-    ASSERT_EQUAL(0, Double::compare(0.0, 0.0));
-    ASSERT_EQUAL(0, Double::compare(0.0, -0.0));  // error in OSX
-    ASSERT_EQUAL(1, Double::compare(0.0, -1.2));
-    ASSERT_EQUAL(-1, Double::compare(0.0, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(0.0, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(0.0, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(0.0, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(0.0, MAX_VALUE_DOUBLE));
+    assertEquals(-1, Double::compare(0.0, 1.2));
+    assertEquals(0, Double::compare(0.0, 0.0));
+    assertEquals(0, Double::compare(0.0, -0.0));  // error in OSX
+    assertEquals(1, Double::compare(0.0, -1.2));
+    assertEquals(-1, Double::compare(0.0, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(0.0, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -0.0
-    ASSERT_EQUAL(-1, Double::compare(-0.0, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(-0.0, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(-0.0, 1.2));
-    ASSERT_EQUAL(0, Double::compare(-0.0, 0.0));  // error in OSX
-    ASSERT_EQUAL(0, Double::compare(-0.0, -0.0));  // error in OSX
-    ASSERT_EQUAL(1, Double::compare(-0.0, -1.2));
-    ASSERT_EQUAL(-1, Double::compare(-0.0, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(-0.0, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(-0.0, MAX_VALUE_DOUBLE));
+    assertEquals(-1, Double::compare(-0.0, 1.2));
+    assertEquals(0, Double::compare(-0.0, 0.0));  // error in OSX
+    assertEquals(0, Double::compare(-0.0, -0.0));  // error in OSX
+    assertEquals(1, Double::compare(-0.0, -1.2));
+    assertEquals(-1, Double::compare(-0.0, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -1.2
-    ASSERT_EQUAL(-1, Double::compare(-1.2, NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(-1.2, POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(Double::compare(-1.2, MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, Double::compare(-1.2, 1.2));
-    ASSERT_EQUAL(-1, Double::compare(-1.2, 0.0));
-    ASSERT_EQUAL(-1, Double::compare(-1.2, -0.0));
-    ASSERT_EQUAL(0, Double::compare(-1.2, -1.2));
-    ASSERT_EQUAL(-1, Double::compare(-1.2, MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, Double::compare(-1.2, NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, Double::compare(-1.2, NaN_NUMBER_DOUBLE));
+    assertEquals(-1, Double::compare(-1.2, POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(Double::compare(-1.2, MAX_VALUE_DOUBLE));
+    assertEquals(-1, Double::compare(-1.2, 1.2));
+    assertEquals(-1, Double::compare(-1.2, 0.0));
+    assertEquals(-1, Double::compare(-1.2, -0.0));
+    assertEquals(0, Double::compare(-1.2, -1.2));
+    assertEquals(-1, Double::compare(-1.2, MIN_VALUE_DOUBLE));
+    assertEquals(1, Double::compare(-1.2, NEGATIVE_INFINITY_DOUBLE));
 }
 
 TEST(JavaLang, DoubleCompareTo) {
@@ -873,111 +873,111 @@ TEST(JavaLang, DoubleCompareTo) {
 	
 	// Test NaN_NUMBER_DOUBLE
 	variableCompareTo = NaN_NUMBER_DOUBLE;
-	ASSERT_EQUAL(0, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+	assertEquals(0, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	assertEquals(1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(1.2));
+    assertEquals(1, variableCompareTo.compareTo(0.0));
+    assertEquals(1, variableCompareTo.compareTo(-0.0));
+    assertEquals(1, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
+	assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test POSITIVE_INFINITY_DOUBLE
 	variableCompareTo = POSITIVE_INFINITY_DOUBLE;
-	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-	ASSERT_EQUAL(0, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo( MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+	assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	assertEquals(0, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo( MAX_VALUE_DOUBLE), -9999);
+    assertEquals(1, variableCompareTo.compareTo(1.2));
+    assertEquals(1, variableCompareTo.compareTo(0.0));
+    assertEquals(1, variableCompareTo.compareTo(-0.0));
+    assertEquals(1, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
+	assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableCompareTo = NEGATIVE_INFINITY_DOUBLE;
-	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-	ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(0, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+	assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(-1, variableCompareTo.compareTo(0.0));
+    assertEquals(-1, variableCompareTo.compareTo(-0.0));
+    assertEquals(-1, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
+	assertEquals(0, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test MAX_VALUE_DOUBLE
 //    variableCompareTo = MAX_VALUE_DOUBLE;
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
+//    assertEquals(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -9999);
+//    assertEquals(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -9999);
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(1.2));
+//    assertEquals(variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+//    assertEquals(variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
 
     // Test MIN_VALUE_DOUBLE
     variableCompareTo = MIN_VALUE_DOUBLE;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+//    assertEquals(variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+//    assertEquals(variableCompareTo.compareTo(-1.2));
+    assertEquals(0, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 1.2
     variableCompareTo = 1.2;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-	ASSERT_EQUAL(0, variableCompareTo.compareTo(1.2));
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+	assertEquals(0, variableCompareTo.compareTo(1.2));
+	assertEquals(1, variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));
+	assertEquals(1, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+	assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test value 0.0
 	variableCompareTo = 0.0;
-	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-	ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));  // error in OSX
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+	assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(0, variableCompareTo.compareTo(0.0));
+//    assertEquals(variableCompareTo.compareTo(-0.0));  // error in OSX
+    assertEquals(1, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -0.0
     variableCompareTo = -0.0;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));  // error in OSX
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(0, variableCompareTo.compareTo(0.0));  // error in OSX
+    assertEquals(0, variableCompareTo.compareTo(-0.0));
+    assertEquals(1, variableCompareTo.compareTo(-1.2));
+    assertEquals(-1, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -1.2
     variableCompareTo = -1.2;
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
-    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0));
-    ASSERT_EQUAL(0, variableCompareTo.compareTo(-1.2));
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
-	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    assertEquals(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    assertEquals(-1, variableCompareTo.compareTo(1.2));
+    assertEquals(-1, variableCompareTo.compareTo(0.0));
+    assertEquals(-1, variableCompareTo.compareTo(-0.0));
+    assertEquals(0, variableCompareTo.compareTo(-1.2));
+//    assertEquals(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+	assertEquals(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 }
 
 TEST(JavaLang, DoubleToRawLongBits) {
@@ -990,79 +990,79 @@ TEST(JavaLang, DoubleToRawLongBits) {
 	input = 0.0;
 	expectedResult = 0;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input POSITIVE_INFINITY_DOUBLE
 	input = POSITIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868437227405312;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NEGATIVE_INFINITY_DOUBLE
 	input = NEGATIVE_INFINITY_DOUBLE;
 	expectedResult = -9218868437227405312;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NaN_NUMBER_DOUBLE
 	input = NaN_NUMBER_DOUBLE;
 	expectedResult = 9223372036854775807;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -0.7
 	input = -0.7;
 	expectedResult =  -4604480259023595110;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 12.375
 	input = 12.375;
 	expectedResult = 4623156123728347136;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 1.0
 	input = 1.0;
 	expectedResult = 4607182418800017408;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.375
 	input = 0.375;
 	expectedResult = 4600427019358961664;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2
 	input = -2.0;
 	expectedResult = -4611686018427387904;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 83
 	input = 83.0;
 	expectedResult = 4635541022703616000;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2625
 	input = -2625.0;
 	expectedResult = -4657990851119546368;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.5
 	input = 0.5;
 	expectedResult = 4602678819172646912;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -1302.12345678
 	input = -1302.12345678;
 	expectedResult = -4653441614972469831;
 	actualResult = Double::doubleToRawLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 }
 
 TEST(JavaLang, DoubleToLongBits) {
@@ -1075,79 +1075,79 @@ TEST(JavaLang, DoubleToLongBits) {
 	input = 0.0;
 	expectedResult = 0;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input POSITIVE_INFINITY_DOUBLE
 	input = POSITIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868437227405312;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NEGATIVE_INFINITY_DOUBLE
 	input = NEGATIVE_INFINITY_DOUBLE;
 	expectedResult = -9218868437227405312;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NaN_NUMBER_DOUBLE
 	input = NaN_NUMBER_DOUBLE;
 	expectedResult = 9223372036854775807;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -0.7
 	input = -0.7;
 	expectedResult =  -4604480259023595110;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 12.375
 	input = 12.375;
 	expectedResult = 4623156123728347136;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 1.0
 	input = 1.0;
 	expectedResult = 4607182418800017408;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.375
 	input = 0.375;
 	expectedResult = 4600427019358961664;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2
 	input = -2.0;
 	expectedResult = -4611686018427387904;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 83
 	input = 83.0;
 	expectedResult = 4635541022703616000;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2625
 	input = -2625.0;
 	expectedResult = -4657990851119546368;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.5
 	input = 0.5;
 	expectedResult = 4602678819172646912;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -1302.12345678
 	input = -1302.12345678;
 	expectedResult = -4653441614972469831;
 	actualResult = Double::doubleToLongBits(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 }
 
 // TODO(thoangminh): Wait for instanceof <> , check later: max, min , -0
@@ -1162,111 +1162,111 @@ TEST(JavaLang, DoubleEquals) {
 
     // Test NaN_NUMBER_DOUBLE
     variableDoubleEquals = NaN_NUMBER_DOUBLE;
-    ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_NaN));
-    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+    assertEquals(1, variableDoubleEquals.equals(DOUBLE_NaN));
+    assertEquals(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	assertEquals(0, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(0, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+	assertEquals(0, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test DOUBLE_POSITIVE_INFINITY
 	variableDoubleEquals = DOUBLE_POSITIVE_INFINITY;
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
-	ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals( DOUBLE_MAX_VALUE), -9999);
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -9999);
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	assertEquals(1, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals( DOUBLE_MAX_VALUE), -9999);
+	assertEquals(0, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(0, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0), -9999);
+	assertEquals(0, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 
 //    // Test DOUBLE_MAX_VALUE
 //    variableDoubleEquals = DOUBLE_MAX_VALUE;
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NaN));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    assertEquals(variableDoubleEquals.equals((Double)1.2));
+//    assertEquals(variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 //
 //    // Test DOUBLE_MIN_VALUE
 //    variableDoubleEquals = DOUBLE_MIN_VALUE;
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), -9999);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), -9999);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NaN), -9999);
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), -9999);
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    assertEquals(variableDoubleEquals.equals((Double)1.2));
+//    assertEquals(variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test DOUBLE_NEGATIVE_INFINITY
 	variableDoubleEquals = DOUBLE_NEGATIVE_INFINITY;
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), -9999);
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -9999);
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
-    ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), -9999);
+	assertEquals(0, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(0, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0), -9999);
+	assertEquals(0, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
+    assertEquals(1, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 
     // Test value (Double)1.2
     variableDoubleEquals = (Double)1.2;
-    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
-    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+    assertEquals(0, variableDoubleEquals.equals(DOUBLE_NaN));
+    assertEquals(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	assertEquals(1, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(0, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+	assertEquals(0, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)0.0
 	variableDoubleEquals = (Double)0.0;
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	assertEquals(0, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(1, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+	assertEquals(0, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)-0.0
 //    variableDoubleEquals = (Double)-0.0;
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NaN));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    assertEquals(variableDoubleEquals.equals((Double)1.2));
+//    assertEquals(variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)-1.2
 	variableDoubleEquals = (Double)-1.2;
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
-	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)-1.2));
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
-	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	assertEquals(0, variableDoubleEquals.equals((Double)1.2));
+	assertEquals(0, variableDoubleEquals.equals((Double)0.0));
+//    assertEquals(variableDoubleEquals.equals((Double)-0.0));
+	assertEquals(1, variableDoubleEquals.equals((Double)-1.2));
+//    assertEquals(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 }
 
 TEST(JavaLang , DoubleHashCode) {
@@ -1279,79 +1279,79 @@ TEST(JavaLang , DoubleHashCode) {
 	input = 0.0;
 	expectedResult = 0;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input POSITIVE_INFINITY_DOUBLE
 	input = POSITIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868439373840384;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NEGATIVE_INFINITY_DOUBLE
 	input = NEGATIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868435080970240;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NaN_NUMBER_DOUBLE
 	input = NaN_NUMBER_DOUBLE;
 	expectedResult = 9223372034707292160;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -0.7
 	input = -0.7;
 	expectedResult =  4604480258807169027;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 12.375
 	input = 12.375;
 	expectedResult = 4623156124804759552;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 1.0
 	input = 1.0;
 	expectedResult = 4607182419872710656;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.375
 	input = 0.375;
 	expectedResult = 4600427020430082048;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2
 	input = -2.0;
 	expectedResult = 4611686017353646080;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 83
 	input = 83.0;
 	expectedResult = 4635541023782912000;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2625
 	input = -2625.0;
 	expectedResult = 4657990850035023360;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.5
 	input = 0.5;
 	expectedResult = 4602678820244291584;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -1302.12345678
 	input = -1302.12345678;
 	expectedResult = 4653441613905795640;
 	actualResult = Double::hashCode(input);
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 }
 
 TEST(JavaLang , DoubleHashCodeNotInput) {
@@ -1364,79 +1364,79 @@ TEST(JavaLang , DoubleHashCodeNotInput) {
 	variableDouble = 0.0;
 	expectedResult = 0;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input POSITIVE_INFINITY_DOUBLE
 	variableDouble = POSITIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868439373840384;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NEGATIVE_INFINITY_DOUBLE
 	variableDouble = NEGATIVE_INFINITY_DOUBLE;
 	expectedResult = 9218868435080970240;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input NaN_NUMBER_DOUBLE
 	variableDouble = NaN_NUMBER_DOUBLE;
 	expectedResult = 9223372034707292160;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -0.7
 	variableDouble = -0.7;
 	expectedResult =  4604480258807169027;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 12.375
 	variableDouble = 12.375;
 	expectedResult = 4623156124804759552;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 1.0
 	variableDouble = 1.0;
 	expectedResult = 4607182419872710656;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.375
 	variableDouble = 0.375;
 	expectedResult = 4600427020430082048;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2
 	variableDouble = -2.0;
 	expectedResult = 4611686017353646080;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 83
 	variableDouble = 83.0;
 	expectedResult = 4635541023782912000;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -2625
 	variableDouble = -2625.0;
 	expectedResult = 4657990850035023360;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input 0.5
 	variableDouble = 0.5;
 	expectedResult = 4602678820244291584;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 	
 	// Input -1302.12345678
 	variableDouble = -1302.12345678;
 	expectedResult = 4653441613905795640;
 	actualResult = variableDouble.hashCode();
-	ASSERT_EQUAL(expectedResult, actualResult);
+	assertEquals(expectedResult, actualResult);
 }
 
 TEST(JavaLang , DoubleIsFinite) {

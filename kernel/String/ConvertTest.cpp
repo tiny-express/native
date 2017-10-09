@@ -196,7 +196,7 @@ TEST (KernelStringConvert, StringFromDouble) {
 
 TEST (KernelStringConvert, StringToShort) {
 	// Make a comparison between 0 and result of stringToShort(nullptr)
-	ASSERT_EQUAL(0, stringToShort(nullptr));
+	assertEquals(0, stringToShort(nullptr));
 	
 	// Input a positive value of type short to convert from short to string
 	char *input = (string) "123";
@@ -205,13 +205,13 @@ TEST (KernelStringConvert, StringToShort) {
 	short result = stringToShort(input);
 	
 	// Make a comparison between the input and the result
-	ASSERT_EQUAL(123, result);
+	assertEquals(123, result);
 	
 	// Input a negative value of type short to convert from short to string
 	// Than make a comparison between the input and the result
 	auto input1 = (string) "-123";
 	short result1 = stringToShort(input1);
-	ASSERT_EQUAL(-123, result1);
+	assertEquals(-123, result1);
 }
 
 TEST (KernelStringConvert, StringToInt) {
@@ -222,49 +222,49 @@ TEST (KernelStringConvert, StringToInt) {
 	int result = stringToInt(input);
 	
 	// Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(123, result);
+	assertEquals(123, result);
 	
 	// Input a string representing negative number to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-123\0";
 	int result1 = stringToInt(input1);
-	ASSERT_EQUAL(-123, result1);
+	assertEquals(-123, result1);
 	
 	// Input a string representing 0 number to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input2 = (string) "\0";
 	int result2 = stringToInt(input2);
-	ASSERT_EQUAL(0, result2);
+	assertEquals(0, result2);
 	
 	// Input a string representing nothing to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input3 = (string) "";
 	int result3 = stringToInt(input3);
-	ASSERT_EQUAL(0, result3);
+	assertEquals(0, result3);
 	
 	// Input a string representing positive value of type float to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input4 = (string) "12.321";
 	int result4 = stringToInt(input4);
-	ASSERT_EQUAL(12, result4);
+	assertEquals(12, result4);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input5 = (string) "kajshdkashd";
 	int result5 = stringToInt(input5);
-	ASSERT_EQUAL(0, result5);
+	assertEquals(0, result5);
 	
 	// Input a string representing nullptr to convert from string to int
 	// Than make a comparison between the result and the right answer
 	char *input6 = nullptr;
 	int result6 = stringToInt(input6);
-	ASSERT_EQUAL(0, result6);
+	assertEquals(0, result6);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input7 = (string) "foodtiny.com";
 	int result7 = stringToInt(input7);
-	ASSERT_EQUAL(0, result7);
+	assertEquals(0, result7);
 }
 
 TEST (KernelStringConvert, StringToLong) {
@@ -275,19 +275,19 @@ TEST (KernelStringConvert, StringToLong) {
 	long result = stringToLong(input);
 	
 	// Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(21474836, result);
+	assertEquals(21474836, result);
 	
 	// Input a string representing the negative number to convert from string to long
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-21474836";
 	long result1 = stringToLong(input1);
-	ASSERT_EQUAL(-21474836, result1);
+	assertEquals(-21474836, result1);
 	
 	// Input a string representing characters to convert from string to long
 	// Than make a comparison between the result and the right answer
 	auto input2 = (string) "Hello world";
 	long result2 = stringToLong(input2);
-	ASSERT_EQUAL(0, result2);
+	assertEquals(0, result2);
 }
 
 TEST (KernelStringConvert, StringToFloat) {
@@ -298,13 +298,13 @@ TEST (KernelStringConvert, StringToFloat) {
 	float result = stringToFloat(input);
 	
 	// Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(12.56, result);
+	assertEquals(12.56, result);
 	
 	// Input a string representing a negative value of type float to convert from string to float
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-1.56799";
 	float result1 = stringToFloat(input1);
-	ASSERT_EQUAL(-1.56799, result1);
+	assertEquals(-1.56799, result1);
 }
 
 TEST (KernelStringConvert, StringToDouble) {
@@ -315,13 +315,13 @@ TEST (KernelStringConvert, StringToDouble) {
 	double result = stringToDouble(input);
 	
 	// Than make a comparison between the result and the right answer
-	ASSERT_EQUAL(125.569123, result);
+	assertEquals(125.569123, result);
 	
 	// Input a string representing a negative value of type double to convert from string to double
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-125.56123";
 	double result1 = stringToDouble(input1);
-	ASSERT_EQUAL(-125.56123, result1);
+	assertEquals(-125.56123, result1);
 }
 
 TEST (KernelStringConvert, StringToBoolean) {

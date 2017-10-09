@@ -71,11 +71,11 @@ TEST (JavaLang, DataTypeArray) {
 	Array<String> emptyStrings;
 	emptyStrings.push("Food Tiny");
 	emptyStrings.push("Hello World");
-	ASSERT_EQUAL(2, emptyStrings.length);
+	assertEquals(2, emptyStrings.length);
 	
 	// Array from initialize list and length property
 	Array<byte> bytes = { 64, 65, 66 };
-	ASSERT_EQUAL(3, bytes.length);
+	assertEquals(3, bytes.length);
 	
 	// Push new element and loop in array
 	bytes.push(67);
@@ -84,23 +84,23 @@ TEST (JavaLang, DataTypeArray) {
 	for (byte byte : bytes) {
 		length++;
 	}
-	ASSERT_EQUAL(5, length);
+	assertEquals(5, length);
 	
 	// Modify an element in array
 	bytes[ 0 ] = 63;
-	ASSERT_EQUAL(63, bytes[ 0 ]);
+	assertEquals(63, bytes[ 0 ]);
 	
 	// Merge two arrays with appendable
 	Array<String> initializedStrings = { "Food", "Tiny" };
 	initializedStrings += { "Hello", "World" };
-	ASSERT_EQUAL(4, initializedStrings.length);
+	assertEquals(4, initializedStrings.length);
 	
 	// Loop in string array
 	int totalCharacters = 0;
 	for (String element : initializedStrings) {
 		totalCharacters += element.length();
 	}
-	ASSERT_EQUAL(18, totalCharacters);
+	assertEquals(18, totalCharacters);
 	
 	// Retrieve  elements from an existing array
 	assertEquals("Food", initializedStrings.get(0).toString());
@@ -112,14 +112,14 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 	Array<int> validArray(10);
 	int expect = 10;
 	int result = validArray.length;
-	ASSERT_EQUAL(expect, result);
+	assertEquals(expect, result);
 	
 	int index;
 	for (index = 10; index < 20; index++) {
 		validArray.push(index);
 		expect = index + 1;
 		result = validArray.length;
-		ASSERT_EQUAL(expect, result);
+		assertEquals(expect, result);
 	}
 }
 
@@ -132,7 +132,7 @@ TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
 	};
 	char **stringList = (char **) stringArray;
 	Array<String> arrayString = stringList;
-	ASSERT_EQUAL(2, arrayString.length);
+	assertEquals(2, arrayString.length);
 }
 
 TEST (JavaLang, ObjectConstructor) {
@@ -171,5 +171,5 @@ TEST (JavaLang, ObjectHashCode) {
 	
 	// Given one instance of Object - Return it and itself is the same
 	Object object3;
-	ASSERT_EQUAL(object3.hashCode(), object3.hashCode());
+	assertEquals(object3.hashCode(), object3.hashCode());
 }

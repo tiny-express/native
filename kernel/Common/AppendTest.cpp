@@ -41,9 +41,9 @@ TEST (KernelCommon, AppendPointerChar) {
 		nullptr
 	};
 	auto append = (string) "dog";
-	ASSERT_EQUAL(8, lengthPointerPointerChar(target));
+	assertEquals(8, lengthPointerPointerChar(target));
 	char **result = appendPointerChar(target, append);
-	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
+	assertEquals(9, lengthPointerPointerChar(result));
 	assertEquals("The", result[ 0 ]);
 	assertEquals("quick", result[ 1 ]);
 	assertEquals("brown", result[ 2 ]);
@@ -56,7 +56,7 @@ TEST (KernelCommon, AppendPointerChar) {
 	append = (string) "";
 	free(result);
 	result = appendPointerChar(target, append);
-	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
+	assertEquals(9, lengthPointerPointerChar(result));
 	free(result);
 }
 

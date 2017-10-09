@@ -34,12 +34,12 @@ using namespace Java::Lang;
 
 TEST(JavaLang, StringBuilderConstructor) {
     StringBuilder defaultStringBuilder;
-    ASSERT_EQUAL(0, defaultStringBuilder.length());
-    ASSERT_EQUAL(StringBuilder::defaultCapacity, defaultStringBuilder.capacity());
+    assertEquals(0, defaultStringBuilder.length());
+    assertEquals(StringBuilder::defaultCapacity, defaultStringBuilder.capacity());
 
     StringBuilder customCapacityStringBuilder(20);
-    ASSERT_EQUAL(0, customCapacityStringBuilder.length());
-    ASSERT_EQUAL(20, customCapacityStringBuilder.capacity());
+    assertEquals(0, customCapacityStringBuilder.length());
+    assertEquals(20, customCapacityStringBuilder.capacity());
 
     try {
         StringBuilder negativeCapacityStringBuilder(-1);
@@ -53,14 +53,14 @@ TEST(JavaLang, StringBuilderConstructor) {
     StringBuilder nullTerminatedStringStringBuilder(aString.toString());
     StringBuilder stringStringBuilder(aString);
     int newCapacity = StringBuilder::defaultCapacity + aStringLength;
-    ASSERT_EQUAL(aStringLength, nullTerminatedStringStringBuilder.length());
-    ASSERT_EQUAL(newCapacity, nullTerminatedStringStringBuilder.capacity());
-    ASSERT_EQUAL(aStringLength, stringStringBuilder.length());
-    ASSERT_EQUAL(newCapacity, stringStringBuilder.capacity());
+    assertEquals(aStringLength, nullTerminatedStringStringBuilder.length());
+    assertEquals(newCapacity, nullTerminatedStringStringBuilder.capacity());
+    assertEquals(aStringLength, stringStringBuilder.length());
+    assertEquals(newCapacity, stringStringBuilder.capacity());
 
     StringBuilder initializerListStringBuilder({'a', 'b', 'c'});
-    ASSERT_EQUAL(3, initializerListStringBuilder.length());
-    ASSERT_EQUAL(StringBuilder::defaultCapacity + initializerListStringBuilder.length(),
+    assertEquals(3, initializerListStringBuilder.length());
+    assertEquals(StringBuilder::defaultCapacity + initializerListStringBuilder.length(),
                  initializerListStringBuilder.capacity());
 
     CharSequence *charSequence = new String("Hello!");
@@ -182,14 +182,14 @@ TEST(JavaLang, StringBuilderAppendCodePoint) {
 
 TEST(JavaLang, StringBuilderCapacity) {
 	StringBuilder stringBuilder(100);
-	ASSERT_EQUAL(100, stringBuilder.capacity());
+	assertEquals(100, stringBuilder.capacity());
 }
 
 TEST(JavaLang, StringBuilderCharAt) {
     StringBuilder stringBuilder({'a', 'b', 'c'});
-    ASSERT_EQUAL('a', stringBuilder.charAt(0));
-    ASSERT_EQUAL('b', stringBuilder.charAt(1));
-    ASSERT_EQUAL('c', stringBuilder.charAt(2));
+    assertEquals('a', stringBuilder.charAt(0));
+    assertEquals('b', stringBuilder.charAt(1));
+    assertEquals('c', stringBuilder.charAt(2));
     try {
         stringBuilder.charAt(999);
     }
@@ -254,22 +254,22 @@ TEST(JavaLang, StringBuilderDeleteCharAt) {
 TEST(JavaLang, StringBuilderEnsureCapacity) {
 	// Default capacity.
 	StringBuilder stringBuilder;
-	ASSERT_EQUAL(0, stringBuilder.length());
-	ASSERT_EQUAL(16, stringBuilder.capacity());
+	assertEquals(0, stringBuilder.length());
+	assertEquals(16, stringBuilder.capacity());
 	// New capacity is not positive.
 	stringBuilder.ensureCapacity(-1);
-	ASSERT_EQUAL(16, stringBuilder.capacity());
+	assertEquals(16, stringBuilder.capacity());
 	stringBuilder.ensureCapacity(0);
-	ASSERT_EQUAL(16, stringBuilder.capacity());
+	assertEquals(16, stringBuilder.capacity());
 	// New capacity less than current capacity.
 	stringBuilder.ensureCapacity(10);
-	ASSERT_EQUAL(16, stringBuilder.capacity());
+	assertEquals(16, stringBuilder.capacity());
 	// New capacity larger than current capacity but less than (2 * current + 2).
 	stringBuilder.ensureCapacity(17);
-	ASSERT_EQUAL(2 * 16 + 2, stringBuilder.capacity());
+	assertEquals(2 * 16 + 2, stringBuilder.capacity());
 	// New capacity larget than current capacity but larger than (2 * current + 2).
 	stringBuilder.ensureCapacity(100);
-	ASSERT_EQUAL(100, stringBuilder.capacity());
+	assertEquals(100, stringBuilder.capacity());
 }
 
 TEST(JavaLang, StringBuilderGetChars) {
@@ -278,22 +278,22 @@ TEST(JavaLang, StringBuilderGetChars) {
 
 TEST(JavaLang, StringBuilderIndexOf) {
     StringBuilder stringBuilder((const string)"Welcome to Vietnam");
-    ASSERT_EQUAL(0, stringBuilder.indexOf((const string)"Welcome"));
-    ASSERT_EQUAL(0, stringBuilder.indexOf(String("Welcome")));
-    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam"));
-    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam")));
-    ASSERT_EQUAL(-1, stringBuilder.indexOf((const string)"Hello"));
-    ASSERT_EQUAL(-1, stringBuilder.indexOf(String("Hello")));
+    assertEquals(0, stringBuilder.indexOf((const string)"Welcome"));
+    assertEquals(0, stringBuilder.indexOf(String("Welcome")));
+    assertEquals(11, stringBuilder.indexOf((const string)"Vietnam"));
+    assertEquals(11, stringBuilder.indexOf(String("Vietnam")));
+    assertEquals(-1, stringBuilder.indexOf((const string)"Hello"));
+    assertEquals(-1, stringBuilder.indexOf(String("Hello")));
     stringBuilder.append((const string)" Vietnam");
     assertEquals("Welcome to Vietnam Vietnam", stringBuilder.toString());
-    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam", 10));
-    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam"), 10));
-    ASSERT_EQUAL(11, stringBuilder.indexOf((const string)"Vietnam", 11));
-    ASSERT_EQUAL(11, stringBuilder.indexOf(String("Vietnam"), 11));
-    ASSERT_EQUAL(19, stringBuilder.indexOf((const string)"Vietnam", 12));
-    ASSERT_EQUAL(19, stringBuilder.indexOf(String("Vietnam"), 12));
-    ASSERT_EQUAL(-1, stringBuilder.indexOf((const string)"Vietnam", 20));
-    ASSERT_EQUAL(-1, stringBuilder.indexOf(String("Vietnam"), 20));
+    assertEquals(11, stringBuilder.indexOf((const string)"Vietnam", 10));
+    assertEquals(11, stringBuilder.indexOf(String("Vietnam"), 10));
+    assertEquals(11, stringBuilder.indexOf((const string)"Vietnam", 11));
+    assertEquals(11, stringBuilder.indexOf(String("Vietnam"), 11));
+    assertEquals(19, stringBuilder.indexOf((const string)"Vietnam", 12));
+    assertEquals(19, stringBuilder.indexOf(String("Vietnam"), 12));
+    assertEquals(-1, stringBuilder.indexOf((const string)"Vietnam", 20));
+    assertEquals(-1, stringBuilder.indexOf(String("Vietnam"), 20));
 }
 
 TEST(JavaLang, StringBuilderInsert) {
@@ -533,22 +533,22 @@ TEST(JavaLang, StringBuilderInsert) {
 TEST(JavaLang, StringBuilderLastIndexOf) {
     StringBuilder stringBuilder((const string)"Welcome to Vietnam");
     assertEquals("Welcome to Vietnam", stringBuilder.toString());
-    ASSERT_EQUAL(11, stringBuilder.lastIndexOf((const string)"Vietnam"));
-    ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam")));
-    ASSERT_EQUAL(0, stringBuilder.lastIndexOf((const string)"Welcome"));
-    ASSERT_EQUAL(0, stringBuilder.lastIndexOf(String("Welcome")));
-    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 11));
-    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf(String("Vietnam"), 11));
-    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 12));
-    ASSERT_EQUAL(-1, stringBuilder.lastIndexOf(String("Vietnam"), 12));
-    ASSERT_EQUAL(11, stringBuilder.lastIndexOf((const string)"Vietnam", stringBuilder.length()));
-    ASSERT_EQUAL(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
+    assertEquals(11, stringBuilder.lastIndexOf((const string)"Vietnam"));
+    assertEquals(11, stringBuilder.lastIndexOf(String("Vietnam")));
+    assertEquals(0, stringBuilder.lastIndexOf((const string)"Welcome"));
+    assertEquals(0, stringBuilder.lastIndexOf(String("Welcome")));
+    assertEquals(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 11));
+    assertEquals(-1, stringBuilder.lastIndexOf(String("Vietnam"), 11));
+    assertEquals(-1, stringBuilder.lastIndexOf((const string)"Vietnam", 12));
+    assertEquals(-1, stringBuilder.lastIndexOf(String("Vietnam"), 12));
+    assertEquals(11, stringBuilder.lastIndexOf((const string)"Vietnam", stringBuilder.length()));
+    assertEquals(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
 }
 
 TEST(JavaLang, StringBuilderLength) {
 	String aString("Hello! I'm a String");
 	StringBuilder stringBuilder(aString);
-	ASSERT_EQUAL(aString.length(), stringBuilder.length());
+	assertEquals(aString.length(), stringBuilder.length());
 }
 
 TEST(JavaLang, StringBuilderReplace) {
@@ -584,12 +584,12 @@ TEST(JavaLang, StringBuilderSetCharAt) {
 TEST(JavaLang, StringBuilderSetLength) {
     StringBuilder stringBuilder((const string)"Hello! I'm a StringBuilder");
     assertEquals("Hello! I'm a StringBuilder", stringBuilder.toString());
-    ASSERT_EQUAL(26, stringBuilder.length());
+    assertEquals(26, stringBuilder.length());
     stringBuilder.setLength(30);
-    ASSERT_EQUAL(30, stringBuilder.length());
+    assertEquals(30, stringBuilder.length());
     assertEquals("Hello! I'm a StringBuilder", stringBuilder.toString());
     stringBuilder.setLength(6);
-    ASSERT_EQUAL(6, stringBuilder.length());
+    assertEquals(6, stringBuilder.length());
     assertEquals("Hello!", stringBuilder.toString());
 }
 
@@ -613,10 +613,10 @@ TEST(JavaLang, StringBuilderToString) {
 
 TEST(JavaLang, StringBuilderTrimToSize) {
 	StringBuilder stringBuilder(100);
-	ASSERT_EQUAL(100, stringBuilder.capacity());
+	assertEquals(100, stringBuilder.capacity());
 	stringBuilder.trimToSize();
-	ASSERT_EQUAL(0, stringBuilder.capacity());
+	assertEquals(0, stringBuilder.capacity());
 	stringBuilder.append((const string) "123");
 	stringBuilder.trimToSize();
-	ASSERT_EQUAL(3, stringBuilder.capacity());
+	assertEquals(3, stringBuilder.capacity());
 }
