@@ -281,7 +281,7 @@ TEST(JavaUtil, ArrayListSet) {
 
 TEST(JavaUtil, ArrayListHashCode) {
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
-    ASSERT_NOT_EQUAL(validArrayList.hashCode(), 0);
+    assertNotEquals(validArrayList.hashCode(), 0);
 }
 
 TEST(JavaUtil, ArrayListToString) {

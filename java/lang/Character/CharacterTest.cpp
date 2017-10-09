@@ -109,7 +109,7 @@ TEST (JavaLang, CharacterCodePointAt) {
 	index = 1;
 	actualResultCodePointAt = Character::codePointAt(arrayCodePointAt, index);
 	expectedResultCodePointAt = 456;
-	ASSERT_NOT_EQUAL(expectedResultCodePointAt, actualResultCodePointAt);
+	assertNotEquals(expectedResultCodePointAt, actualResultCodePointAt);
 }
 
 TEST (JavaLang, CharacterCodePointAt2) {
@@ -144,7 +144,7 @@ TEST (JavaLang, CharacterCodePointAt2) {
 	limitCodePointAt2 = 3;
 	expectedResultCodePointAt2 = 'b';
 	actualResultCodePointAt2 = Character::codePointAt(arrayCodePointAt2, indexCodePointAt2, limitCodePointAt2);
-	ASSERT_NOT_EQUAL(expectedResultCodePointAt2, actualResultCodePointAt2);
+	assertNotEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 	
 	// Test exception index >= limit.
 	indexCodePointAt2 = 3;
@@ -188,7 +188,7 @@ TEST (JavaLang, CharacterCodePointBefore) {
 	indexCodePointBefore = 2;
 	actualResultCodePointBefore = Character::codePointBefore(arrayCodePointBefore, indexCodePointBefore);
 	expectedResultCodePointBefore = 'c';
-	ASSERT_NOT_EQUAL(expectedResultCodePointBefore, actualResultCodePointBefore);
+	assertNotEquals(expectedResultCodePointBefore, actualResultCodePointBefore);
 }
 
 TEST (JavaLang, CharacterCodePointBefore2) {
@@ -223,7 +223,7 @@ TEST (JavaLang, CharacterCodePointBefore2) {
 	startCodePointBefore2 = 0;
 	expectedResultCodePointBefore2 = 'b';
 	actualResultCodePointBefore2 = Character::codePointBefore(arrayCodePointBefore2, indexCodePointBefore2, startCodePointBefore2);
-	ASSERT_NOT_EQUAL(expectedResultCodePointBefore2, actualResultCodePointBefore2);
+	assertNotEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 	
 	// Test exception index < start.
 	indexCodePointBefore2 = 0;
@@ -279,7 +279,7 @@ TEST (JavaLang, CharacterCodePointCount) {
 	countCodePointCount = 3;
 	expectedResultCodePointCount = 2;
 	actualResultCodePointCount = Character::codePointCount(arrayCodePointCount, offsetCodePointCount, countCodePointCount);
-	ASSERT_NOT_EQUAL(expectedResultCodePointCount, actualResultCodePointCount);
+	assertNotEquals(expectedResultCodePointCount, actualResultCodePointCount);
 	
 	// Test exception offset < 0
 	offsetCodePointCount = -1;
@@ -393,7 +393,7 @@ TEST (JavaLang, CharacterToCodePoint) {
 	variableTest2ToCodePoint = (unicode) '\u000dc11';
 	expectedResultToCodePoint = 60000;
 	actualResultToCodePoint = Character::toCodePoint(variableTest1ToCodePoint, variableTest2ToCodePoint);
-	ASSERT_NOT_EQUAL(expectedResultToCodePoint, actualResultToCodePoint);
+	assertNotEquals(expectedResultToCodePoint, actualResultToCodePoint);
 }
 
 #ifdef __linux__

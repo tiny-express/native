@@ -167,7 +167,7 @@ TEST (JavaLang, ObjectHashCode) {
 	// Given two difference instances of Object - Return memory addresses are not equal
 	Object object;
 	Object object2;
-	ASSERT_NOT_EQUAL(object.hashCode(), object2.hashCode());
+	assertNotEquals(object.hashCode(), object2.hashCode());
 	
 	// Given one instance of Object - Return it and itself is the same
 	Object object3;

@@ -560,7 +560,7 @@ TEST (JavaUtil, VectorTrimToSize) {
 	vector.trimToSize(); // Trims the capacity to be the current size.
 	assertEquals(vector.size(), vector.capacity());
 	vector.remove(0); // After removing an element, capacity is not equal with size.
-	ASSERT_NOT_EQUAL(vector.size(), vector.capacity());
+	assertNotEquals(vector.size(), vector.capacity());
 	vector.trimToSize();
 	assertEquals(vector.size(), vector.capacity());
 }

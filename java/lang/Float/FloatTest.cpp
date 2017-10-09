@@ -370,7 +370,7 @@ TEST (JavaLang, FloatShortValue) {
     variableTestShortValue = 6;
     expectedResultShortValue = 5;
     actualResultShortValue = variableTestShortValue.shortValue();
-    ASSERT_NOT_EQUAL(expectedResultShortValue, actualResultShortValue);
+    assertNotEquals(expectedResultShortValue, actualResultShortValue);
 }
 
 TEST (JavaLang, FloatIntValue) {
@@ -425,7 +425,7 @@ TEST (JavaLang, FloatIntValue) {
     variableTestIntValue = 6;
     expectedResultIntValue = 5;
     actualResultIntValue = variableTestIntValue.intValue();
-    ASSERT_NOT_EQUAL(expectedResultIntValue, actualResultIntValue);
+    assertNotEquals(expectedResultIntValue, actualResultIntValue);
 }
 
 TEST (JavaLang, FloatLongValue) {
@@ -480,7 +480,7 @@ TEST (JavaLang, FloatLongValue) {
     variableTestLongValue = 6;
     expectedResultLongValue = 5;
     actualResultLongValue = variableTestLongValue.longValue();
-    ASSERT_NOT_EQUAL(expectedResultLongValue, actualResultLongValue);
+    assertNotEquals(expectedResultLongValue, actualResultLongValue);
 }
 
 TEST (JavaLang, FloatDoubleValue) {
@@ -1512,5 +1512,5 @@ TEST (JavaLang, FloatByteValue) {
     variableTestByteValue = 13.02;
     expectedResultByteValue = 5;
     actualResultByteValue = variableTestByteValue.byteValue();
-    ASSERT_NOT_EQUAL(expectedResultByteValue, actualResultByteValue);
+    assertNotEquals(expectedResultByteValue, actualResultByteValue);
 }
