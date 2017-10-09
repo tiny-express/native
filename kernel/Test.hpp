@@ -125,6 +125,14 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
  */
 void assertEquals(String expected, String actual);
 
+/**
+ * Assert Data
+ * 
+ * @param expected 
+ * @param expectedSize 
+ * @param actual 
+ * @param actualSize 
+ */
 void assertData(String *expected, size_t expectedSize,
                 String *actual, size_t actualSize);
 
@@ -135,9 +143,13 @@ void assertData(String *expected, size_t expectedSize,
  */
 void assertEquals(intmax_t expected, intmax_t actual);
 
-void assert_equal_u(uintmax_t expected, uintmax_t actual, const char *caller, int line);
-
-#define ASSERT_EQUAL_U(expected, actual) assert_equal_u(expected, actual, __FILE__, __LINE__)
+/**
+ * Asserts that two unsigned intmax_ts are equal.
+ *
+ * @param expected
+ * @param actual
+ */
+void assertEqualsU(uintmax_t expected, uintmax_t actual);
 
 void assert_not_equal(intmax_t expected, intmax_t actual, const char *caller, int line);
 
@@ -333,9 +345,10 @@ void assertEquals(intmax_t expected, intmax_t actual) {
     }
 }
 
-void assert_equal_u(uintmax_t expected, uintmax_t actual, const_string caller, int line) {
+void assertEqualsU(uintmax_t expected, uintmax_t actual) {
     if (expected != actual) {
-    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX, caller, line, expected, actual);
+    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
+                __FILE__, __LINE__, expected, actual);
     }
 }
 
