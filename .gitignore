@@ -21,3 +21,6 @@ main
 /cygnative.dll
 /native_benchmark
 native_test.exe
+node_modules
+package-lock.json
+build

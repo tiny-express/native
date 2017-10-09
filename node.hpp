@@ -24,28 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#ifndef NATIVE_LIBRARY_NODE_HPP_
+#define NATIVE_LIBRARY_NODE_HPP_
 
-// Java Core Packages
-#include "java/Io.hpp"
-#include "java/Lang.hpp"
-#include "java/Net.hpp"
-#include "java/Security.hpp"
-#include "java/Util.hpp"
+#define JAVA_DEFAULT 0
+#include <node.h>
+#include <v8.h>
+#include "library.hpp"
 
-// Java Modules
-#include "javax/Cql.hpp"
-#include "javax/Json.hpp"
-#include "javax/Net.hpp"
-#include "javax/Sql.hpp"
-
-#ifndef JAVA_DEFAULT
-// Java::Lang is imported by default
-using namespace Java::Lang;
-#endif
-
-// Application starting point
-int Application(void (*program)(Array<String>), char **argument);
-
-#endif//NATIVE_LIBRARY_HPP_
+#endif//NATIVE_LIBRARY_NODE_HPP_
