@@ -59,7 +59,7 @@ TEST (JavaUtil, LinkedListGetFirst) {
 	LinkedList<String> linkedList;
 	linkedList.add("Hello");
 	linkedList.add("World");
-	ASSERT_STR("Hello", linkedList.getFirst().toString());
+	assertEquals("Hello", linkedList.getFirst().toString());
 }
 
 TEST (JavaUtil, LinkedListGetLast) {
@@ -67,7 +67,7 @@ TEST (JavaUtil, LinkedListGetLast) {
 	LinkedList<String> linkedList;
 	linkedList.add("Hello");
 	linkedList.add("World");
-	ASSERT_STR("World", linkedList.getLast().toString());
+	assertEquals("World", linkedList.getLast().toString());
 }
 
 TEST (JavaUtil, LinkedListPeek) {
@@ -79,14 +79,14 @@ TEST (JavaUtil, LinkedListPeek) {
 	
 	String result = linkedList.peek();
 	String expectedValue = "sample 1";
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 	
 	result = linkedList.peekFirst();
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 	
 	result = linkedList.peekLast();
 	expectedValue = "sample 3";
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 }
 
 TEST (JavaUtil, LinkedListPoll) {

@@ -257,39 +257,39 @@ TEST(JavaLang, DoubleToString) {
 	variableTestToString = POSITIVE_INFINITY_DOUBLE;
 	expectedResultToString = (string) "inf";
 	actualResultToString = variableTestToString.toString();
-	ASSERT_STR(expectedResultToString , actualResultToString);
+	assertEquals(expectedResultToString , actualResultToString);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestToString = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultToString = (string) "-inf";
 	actualResultToString = variableTestToString.toString();
-	ASSERT_STR(expectedResultToString , actualResultToString);
+	assertEquals(expectedResultToString , actualResultToString);
 
 
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestToString = NaN_NUMBER_DOUBLE;
 //    expectedResultToString = "-nan";  // "nan" in MacOS
 //    actualResultToString = variableTestToString.toString();
-//    ASSERT_STR(expectedResultToString , actualResultToString);
+//    assertEquals(expectedResultToString , actualResultToString);
 // free(actualResultToString);
 
     // Test MAX_VALUE_DOUBLE
     variableTestToString = MAX_VALUE_DOUBLE;
     expectedResultToString = (string) "1.797693134862316e+308";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString , actualResultToString);
+    assertEquals(expectedResultToString , actualResultToString);
 
     // Test MIN_NORMAL_DOUBLE
     variableTestToString = MIN_NORMAL_DOUBLE;
     expectedResultToString = (string) "4.940656458412465e-324";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString , actualResultToString);
+    assertEquals(expectedResultToString , actualResultToString);
 
     // Test MIN_VALUE_DOUBLE
     variableTestToString = MIN_VALUE_DOUBLE;
     expectedResultToString = (string) "2.225073858507201e-308";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString , actualResultToString);
+    assertEquals(expectedResultToString , actualResultToString);
 }
 
 TEST(JavaLang, DoubleCharValue) {
@@ -363,38 +363,38 @@ TEST(JavaLang, DoubleStringValue) {
 	variableTestStringValue = POSITIVE_INFINITY_DOUBLE;
 	expectedResultStringValue = (string) "inf";
 	actualResultStringValue = variableTestStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+	assertEquals(expectedResultStringValue , actualResultStringValue);
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableTestStringValue = NEGATIVE_INFINITY_DOUBLE;
 	expectedResultStringValue = (string) "-inf";
 	actualResultStringValue = variableTestStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+	assertEquals(expectedResultStringValue , actualResultStringValue);
 
 //    // Test NaN_NUMBER_DOUBLE
 //    variableTestStringValue = NaN_NUMBER_DOUBLE;
 //    expectedResultStringValue = "-nan";  // "nan" in MacOS
 //    actualResultStringValue = variableTestStringValue.stringValue();
-//    ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+//    assertEquals(expectedResultStringValue , actualResultStringValue);
 //    free(actualResultStringValue);
 	
 	// Test MAX_VALUE_DOUBLE
 	variableTestStringValue = MAX_VALUE_DOUBLE;
 	expectedResultStringValue = (string) "1.797693134862316e+308";
 	actualResultStringValue = variableTestStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+	assertEquals(expectedResultStringValue , actualResultStringValue);
 	
 	// Test MIN_NORMAL_DOUBLE
 	variableTestStringValue = MIN_NORMAL_DOUBLE;
 	expectedResultStringValue = (string) "4.940656458412465e-324";
 	actualResultStringValue = variableTestStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+	assertEquals(expectedResultStringValue , actualResultStringValue);
 	
 	// Test MIN_VALUE_DOUBLE
 	variableTestStringValue = MIN_VALUE_DOUBLE;
 	expectedResultStringValue = (string) "2.225073858507201e-308";
 	actualResultStringValue = variableTestStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue , actualResultStringValue);
+	assertEquals(expectedResultStringValue , actualResultStringValue);
 }
 
 TEST(JavaLang, DoubleShortValue) {

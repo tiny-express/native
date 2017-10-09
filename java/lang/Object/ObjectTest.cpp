@@ -103,8 +103,8 @@ TEST (JavaLang, DataTypeArray) {
 	ASSERT_EQUAL(18, totalCharacters);
 	
 	// Retrieve  elements from an existing array
-	ASSERT_STR("Food", initializedStrings.get(0).toString());
-	ASSERT_STR("Tiny", initializedStrings.get(1).toString());
+	assertEquals("Food", initializedStrings.get(0).toString());
+	assertEquals("Tiny", initializedStrings.get(1).toString());
 }
 
 TEST (JavaLang, ArrayConstructorWithSize) {

@@ -111,5 +111,5 @@ TEST (JavaLang, ShortToString) {
 	
 	string expect = (string) "12344";
 	string result = validShort.toString();
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 }

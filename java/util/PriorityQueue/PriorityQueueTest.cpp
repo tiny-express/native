@@ -47,7 +47,7 @@ TEST (JavaUtil, PriorityQueueConstructor) {
 		PriorityQueue<int> customCapacityConstructor(-1);
 	}
 	catch (IllegalArgumentException ex) {
-		ASSERT_STR("initialCapacity < 1", ex.getMessage().toString());
+		assertEquals("initialCapacity < 1", ex.getMessage().toString());
 	}
 }
 

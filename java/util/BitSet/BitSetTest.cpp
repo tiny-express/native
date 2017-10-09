@@ -43,7 +43,7 @@ TEST(JavaUtil, BitSetConstructor) {
     try {
         BitSet initialNegativeSizeBitSet(-1);
     } catch (NegativeArraySizeException &ex) {
-        ASSERT_STR("numberOfBits < 0: -1", ex.getMessage().toString());
+        assertEquals("numberOfBits < 0: -1", ex.getMessage().toString());
     }
 
     initialSizeBitSet.set(50, 100, true);
@@ -81,7 +81,7 @@ TEST(JavaUtil, BitSetClear) {
     try {
         bitSet.clear(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("bitIndex < 0: -1", ex.getMessage().toString());
     }
 
     ASSERT_EQUAL(false, bitSet.get(1));
@@ -103,21 +103,21 @@ TEST(JavaUtil, BitSetClear) {
     try {
         bitSet.clear(-1, 5);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet.clear(0, -1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet.clear(5, 3);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex: 5 > toIndex: 3", ex.getMessage().toString());
+        assertEquals("fromIndex: 5 > toIndex: 3", ex.getMessage().toString());
     }
 
     // Reset bitSet.
@@ -226,28 +226,28 @@ TEST(JavaUtil, BitSetFlip) {
     try {
         bitSet.flip(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("bitIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex < 0
     try {
         bitSet.flip(-1, 9);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet.flip(0, -1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet.flip(5, 1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex: 5 > toIndex: 1", ex.getMessage().toString());
+        assertEquals("fromIndex: 5 > toIndex: 1", ex.getMessage().toString());
     }
 
     // Reset bitSet.
@@ -318,7 +318,7 @@ TEST(JavaUtil, BitSetNextClearBit) {
     try {
         bitSet.nextClearBit(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(0, bitSet.length());
     // fromIndex >= logical length.
@@ -340,7 +340,7 @@ TEST(JavaUtil, BitSetNextSetBit) {
     try {
         bitSet.nextSetBit(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(0, bitSet.length());
     // fromIndex >= logical length.
@@ -365,7 +365,7 @@ TEST(JavaUtil, BitSetPreviousClearBit) {
     try {
         bitSet.previousClearBit(-5);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
+        assertEquals("fromIndex < -1: -5", ex.getMessage().toString());
     }
 
     ASSERT_EQUAL(0, bitSet.length());
@@ -392,7 +392,7 @@ TEST(JavaUtil, BitSetPreviousSetBit) {
     try {
         bitSet.previousSetBit(-5);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < -1: -5", ex.getMessage().toString());
+        assertEquals("fromIndex < -1: -5", ex.getMessage().toString());
     }
 
     bitSet.set(0, 100, true);
@@ -418,7 +418,7 @@ TEST(JavaUtil, BitSetGet) {
     try {
         bitSet1.get(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("bitIndex < 0: -1", ex.getMessage().toString());
     }
     // bitIndex > logical length
     ASSERT_EQUAL(false, bitSet1.get(100));
@@ -440,21 +440,21 @@ TEST(JavaUtil, BitSetGet) {
     try {
         BitSet bitSet3 = bitSet1.get(-1, 10);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         BitSet bitSet3 = bitSet1.get(0, -1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         BitSet bitSet3 = bitSet1.get(5, 2);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex: 5 > toIndex: 2", ex.getMessage().toString());
+        assertEquals("fromIndex: 5 > toIndex: 2", ex.getMessage().toString());
     }
 
     // Get on a large range.
@@ -502,7 +502,7 @@ TEST(VavaUtil, BitSetSet) {
     try {
         bitSet1.set(-1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("bitIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("bitIndex < 0: -1", ex.getMessage().toString());
     }
     ASSERT_EQUAL(false, bitSet1.get(9));
     // bitIndex > logical length => BitSet will be expanded.
@@ -537,21 +537,21 @@ TEST(VavaUtil, BitSetSet) {
     try {
         bitSet2.set(-1, 100);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("fromIndex < 0: -1", ex.getMessage().toString());
     }
 
     // toIndex < 0
     try {
         bitSet2.set(0, -1);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("toIndex < 0: -1", ex.getMessage().toString());
+        assertEquals("toIndex < 0: -1", ex.getMessage().toString());
     }
 
     // fromIndex > toIndex
     try {
         bitSet2.set(20, 10);
     } catch (IndexOutOfBoundsException &ex) {
-        ASSERT_STR("fromIndex: 20 > toIndex: 10", ex.getMessage().toString());
+        assertEquals("fromIndex: 20 > toIndex: 10", ex.getMessage().toString());
     }
 
     // Reset bitSet.
@@ -580,16 +580,16 @@ TEST(JavaUtil, BitSetSize) {
 
 TEST(JavaUtil, BitSetToString) {
     BitSet bitSet;
-    ASSERT_STR("{}", bitSet.toString());
+    assertEquals("{}", bitSet.toString());
     bitSet.set(2);
-    ASSERT_STR("{2}", bitSet.toString());
+    assertEquals("{2}", bitSet.toString());
     bitSet.set(4);
     bitSet.set(10);
-    ASSERT_STR("{2, 4, 10}", bitSet.toString());
+    assertEquals("{2, 4, 10}", bitSet.toString());
     bitSet.set(16384);
-    ASSERT_STR("{2, 4, 10, 16384}", bitSet.toString());
+    assertEquals("{2, 4, 10, 16384}", bitSet.toString());
     bitSet.clear();
-    ASSERT_STR("{}", bitSet.toString());
+    assertEquals("{}", bitSet.toString());
 }
 
 TEST(JavaUtil, BitSetToByteArray) {

@@ -518,37 +518,37 @@ TEST (JavaLang, FloatToStringNoneParam) {
     variableTestToString = Float::POSITIVE_INFINITY;
     expectedResultToString = (string) "inf";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestToString = Float::NEGATIVE_INFINITY;
     expectedResultToString = (string) "-inf";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::NaN
     variableTestToString = Float::NaN;
     expectedResultToString = (string) "nan";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MAX_VALUE
     variableTestToString = Float::MAX_VALUE;
     expectedResultToString = (string) "3.40282e+38";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MIN_NORMAL
     variableTestToString = Float::MIN_NORMAL;
     expectedResultToString = (string) "1.4013e-45";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MIN_VALUE
     variableTestToString = Float::MIN_VALUE;
     expectedResultToString = (string) "1.17549e-38";
     actualResultToString = variableTestToString.toString();
-    ASSERT_STR(expectedResultToString, actualResultToString);
+    assertEquals(expectedResultToString, actualResultToString);
 }
 
 TEST (JavaLang, FloatToStringParamFloat) {
@@ -561,37 +561,37 @@ TEST (JavaLang, FloatToStringParamFloat) {
     variableFloat = Float::POSITIVE_INFINITY;
     expected = "inf";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 
     // Test Float::NEGATIVE_INFINITY
     variableFloat = Float::NEGATIVE_INFINITY;
     expected = "-inf";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 
     // Test Float::NaN
     variableFloat = Float::NaN;
     expected = "nan";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 
     // Test Float::MAX_VALUE
     variableFloat = Float::MAX_VALUE;
     expected = "3.40282e+38";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 
     // Test Float::MIN_NORMAL
     variableFloat = Float::MIN_NORMAL;
     expected = "1.4013e-45";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 
     // Test Float::MIN_VALUE
     variableFloat = Float::MIN_VALUE;
     expected = "1.17549e-38";
     actual = Float::toString(variableFloat);
-    ASSERT_STR(expected.toString(), actual.toString());
+    assertEquals(expected.toString(), actual.toString());
 }
 
 TEST (JavaLang, FloatParseFloat) {

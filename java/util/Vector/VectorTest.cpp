@@ -256,7 +256,7 @@ TEST (JavaUtil, VectorFirstElement) {
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_STR("Hello", vector.firstElement().toString());
+	assertEquals("Hello", vector.firstElement().toString());
 }
 
 TEST (JavaUtil, VectorGet) {
@@ -268,8 +268,8 @@ TEST (JavaUtil, VectorGet) {
 	vector.add("a");
 	vector.add("Vector");
 	// Get element at index 0, then index 4.
-	ASSERT_STR("Hello", vector.get(0).toString());
-	ASSERT_STR("Vector", vector.get(4).toString());
+	assertEquals("Hello", vector.get(0).toString());
+	assertEquals("Vector", vector.get(4).toString());
 }
 
 TEST (JavaUtil, VectorIsEmpty) {
@@ -322,7 +322,7 @@ TEST (JavaUtil, VectorLastElement) {
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_STR("Vector", vector.lastElement().toString());
+	assertEquals("Vector", vector.lastElement().toString());
 }
 
 TEST (JavaUtil, VectorLastIndexOf) {

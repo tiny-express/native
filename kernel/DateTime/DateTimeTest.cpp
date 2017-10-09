@@ -63,16 +63,16 @@ TEST (KernelDateTime, Format) {
 	long timestamp = 1473765499;
 	string format = (string) "d/m/y";
 	string result1 = date(timestamp, format);
-	ASSERT_STR("13/09/2016", result1);
+	assertEquals("13/09/2016", result1);
 	free(result1);
 
 	timestamp = 1511208660;
 	char *result2 = date(timestamp, format);
-	ASSERT_STR("20/11/2017", result2);
+	assertEquals("20/11/2017", result2);
 	free(result2);
 
 	format = (string) "y-m-d";
 	char *result3 = date(timestamp, format);
-	ASSERT_STR("2017-11-20", result3);
+	assertEquals("2017-11-20", result3);
 	free(result3);
 }

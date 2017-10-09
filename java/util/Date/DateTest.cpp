@@ -212,7 +212,7 @@
 //    String expectedGMTString = timeString;
 //    free(timeString);
 //
-//    ASSERT_STR(expectedGMTString.toString(), date.toGMTString().toString());
+//    assertEquals(expectedGMTString.toString(), date.toGMTString().toString());
 //}
 //
 //TEST (JavaUtil, DateLocaleString) {
@@ -220,7 +220,7 @@
 //    Date date = Date(2017, 05, 22, 12, 35, 34);
 //    String expectedLocaleString = "Thu Jun 22 2017 12:35:34";
 //
-//    ASSERT_STR(expectedLocaleString.toString(), date.toLocaleString().toString());
+//    assertEquals(expectedLocaleString.toString(), date.toLocaleString().toString());
 //}
 //
 //TEST (JavaUtil, DateAfter) {

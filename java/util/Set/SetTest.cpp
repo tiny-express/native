@@ -30,5 +30,5 @@
 using namespace Java::Util;
 
 TEST (JavaUtil, SetConstructor) {
-	ASSERT_STR("", "");
+	assertEquals("", "");
 }

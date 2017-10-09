@@ -189,7 +189,7 @@ TEST (JavaUtil, StackPeek) {
 	
 	// Return the top element without removing it
 	String stringResult = peekStringStack.peek();
-	ASSERT_STR(stringResult.toString(), pushString3.toString());
+	assertEquals(stringResult.toString(), pushString3.toString());
 	ASSERT_EQUAL(3, peekStringStack.size());// check size to make sure the top element is not removed
 	
 	// Given an empty stack
@@ -199,7 +199,7 @@ TEST (JavaUtil, StackPeek) {
 		emptyStack.peek();
 	}
 	catch (Exception e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 
@@ -252,7 +252,7 @@ TEST (JavaUtil, StackPop) {
 	
 	// Return the top element and remove it
 	String stringResult = popStringStack.pop();
-	ASSERT_STR(stringResult.toString(), pushString3.toString());
+	assertEquals(stringResult.toString(), pushString3.toString());
 	ASSERT_EQUAL(2, popStringStack.size());// check size to make sure the top element is removed
 	
 	// Given an empty stack
@@ -262,7 +262,7 @@ TEST (JavaUtil, StackPop) {
 		emptyStack.peek();
 	}
 	catch (Exception e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 

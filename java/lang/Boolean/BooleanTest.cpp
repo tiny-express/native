@@ -122,18 +122,18 @@ TEST (JavaLang, BooleanToString) {
 	Boolean objectBooleanTrue(true);
 	string expect = (string) "true";
 	string result = objectBooleanTrue.toString();
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	
 	// Give two string - Should equal
 	Boolean objectBooleanFalse(false);
 	expect = (string) "false";
 	result = objectBooleanFalse.toString();
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	
 	// Give two string - Should equal
 	expect = (string) "true";
 	result = Boolean::toString(true);
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 }
 
 TEST (JavaLang, BooleanStaticValueOf) {

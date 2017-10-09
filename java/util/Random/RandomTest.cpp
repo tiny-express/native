@@ -53,7 +53,7 @@ TEST (JavaUtil, RandomNextIntWithBound) {
 		random1.nextInt(-10);
 	}
 	catch (IllegalArgumentException &e) {
-		ASSERT_STR("bound must be positive", e.getMessage().toString());
+		assertEquals("bound must be positive", e.getMessage().toString());
 	}
 	
 	// Test nextInt(bound) with bound = 100

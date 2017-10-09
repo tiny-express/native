@@ -439,13 +439,13 @@ TEST (JavaLang, LongToHexString) {
 	String result = Long::toHexString(validValue);
 	
 	String expectedString = "384000008cf011bd";
-	ASSERT_STR(expectedString.toString(), result.toString());
+	assertEquals(expectedString.toString(), result.toString());
 	
 	validValue = -5603022497796657139;
 	result = Long::toHexString(validValue);
 	
 	expectedString = "b23e10b96e4ef00d";
-	ASSERT_STR(expectedString.toString(), result.toString());
+	assertEquals(expectedString.toString(), result.toString());
 }
 
 TEST (JavaLang, LongStaticToString) {
@@ -453,5 +453,5 @@ TEST (JavaLang, LongStaticToString) {
 	long longNumber = 999738373833883736;
 	string expect = (string) "999738373833883736";
 	string result = Long::toString(longNumber);
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 }

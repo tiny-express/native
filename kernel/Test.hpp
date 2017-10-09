@@ -112,8 +112,7 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
 #define CTEST2_SKIP(sname, tname) __CTEST2_INTERNAL(sname, tname, 1)
 
 
-void assert_str(const char *exp, const char *real, const char *caller, int line);
-#define ASSERT_STR(exp, real) assert_str(exp, real, __FILE__, __LINE__)
+void assertEquals(const char *exp, const char *real);
 
 void assert_data(const unsigned char *exp, size_t expsize,
 	const unsigned char *real, size_t realsize,
@@ -274,11 +273,11 @@ void CTEST_ERR(const_string fmt, ...)
     longjmp(ctest_err, 1);
 }
 
-void assert_str(const_string exp, const_string  real, const_string caller, int line) {
+void assertEquals(const_string exp, const_string  real) {
     if ((exp == nullptr && real != nullptr) ||
 	(exp != nullptr && real == nullptr) ||
 	(exp && real && strcmp(exp, real) != 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, exp, real);
+	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", __FILE__, __LINE__, exp, real);
     }
 }
 

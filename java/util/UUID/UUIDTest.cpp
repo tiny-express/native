@@ -102,5 +102,5 @@ TEST (JavaUtil, UUIDToString) {
 	UUID uuid = UUID(4053239666997989821, -5603022497796657139);
 	
 	String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
-	ASSERT_STR(expectedString.toString(), uuid.toString().toString());
+	assertEquals(expectedString.toString(), uuid.toString().toString());
 }

@@ -36,17 +36,17 @@ TEST (JavaLang, IntegerConstructor) {
 	// Test Integer::Integer()
 	Integer integerConstructorNoneParameter;
 	ASSERT_EQUAL(0, integerConstructorNoneParameter.intValue());
-	ASSERT_STR((string) "0", integerConstructorNoneParameter.toString());
+	assertEquals((string) "0", integerConstructorNoneParameter.toString());
 	
 	// Test Integer::Integer(String stringInput)
 	Integer integerConstructorStringParameter((String) "13");
 	ASSERT_EQUAL(13, integerConstructorStringParameter.intValue());
-	ASSERT_STR((string) "13", integerConstructorStringParameter.toString());
+	assertEquals((string) "13", integerConstructorStringParameter.toString());
 	
 	// Test Integer::Integer(const Integer &integer)
 	Integer integerConstructorIntegerParameter = 13;
 	ASSERT_EQUAL(13, integerConstructorIntegerParameter.intValue());
-	ASSERT_STR((string) "13", integerConstructorIntegerParameter.toString());
+	assertEquals((string) "13", integerConstructorIntegerParameter.toString());
 }
 
 TEST (JavaLang, IntegerComparision) {
@@ -122,7 +122,7 @@ TEST (JavaLang, IntegerOperator) {
 		actualResult = validNumberOperator / 0;
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 	
 	expectedResult = 1;
@@ -134,7 +134,7 @@ TEST (JavaLang, IntegerOperator) {
 		actualResult /= 0;
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 	
 	// Make a modulo
@@ -146,7 +146,7 @@ TEST (JavaLang, IntegerOperator) {
 		actualResult = validNumberOperator % 0;
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 	
 	expectedResult = 2;
@@ -158,7 +158,7 @@ TEST (JavaLang, IntegerOperator) {
 		actualResult %= 0;
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 }
 
@@ -229,27 +229,27 @@ TEST (JavaLang, IntegerStringValue) {
 	// Make a comparison between expected result and the real result
 	string expectedResultStringValue = (string) "0";
 	string realResultStringValue = zeroIntegerStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue, realResultStringValue);
+	assertEquals(expectedResultStringValue, realResultStringValue);
 	
 	// Make a comparison between expected result and the real result
 	expectedResultStringValue = (string) "1";
 	realResultStringValue = oneIntegerStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue, realResultStringValue);
+	assertEquals(expectedResultStringValue, realResultStringValue);
 	
 	// Make a comparison between expected result and the real result
 	expectedResultStringValue = (string) "10";
 	realResultStringValue = positiveIntegerStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue, realResultStringValue);
+	assertEquals(expectedResultStringValue, realResultStringValue);
 	
 	// Make a comparison between expected result and the real result
 	expectedResultStringValue = (string) "2147483647";
 	realResultStringValue = maxIntegerStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue, realResultStringValue);
+	assertEquals(expectedResultStringValue, realResultStringValue);
 	
 	// Make a comparison between expected result and the real result
 	expectedResultStringValue = (string) "-2147483647";
 	realResultStringValue = minIntegerStringValue.stringValue();
-	ASSERT_STR(expectedResultStringValue, realResultStringValue);
+	assertEquals(expectedResultStringValue, realResultStringValue);
 }
 
 TEST (JavaLang, IntegerShortValue) {
@@ -464,7 +464,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 	
 	// Cast all case of input a string of type decimal number
@@ -494,7 +494,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "-2147483650";
@@ -502,7 +502,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	
@@ -511,7 +511,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	// Cast all case of input a string of type octal
@@ -541,7 +541,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "-020000000002";
@@ -549,7 +549,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	// Cast all case of input a string of type hexadecimal number
@@ -589,7 +589,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "-0x80000002";
@@ -597,7 +597,7 @@ TEST (JavaLang, IntegerDecode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 }
 
@@ -613,7 +613,7 @@ TEST (JavaLang, IntegerDivideUnsigned) {
 		int exceptionResult = Integer::divideUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 	
 	// Positive divide
@@ -1110,28 +1110,28 @@ TEST (JavaLang, IntegerParseIntWithRadix) {
 		exceptionResult = Integer::parseInt((String) "2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "99999999999999999999", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	ASSERT_EQUAL(Integer::parseInt((String) "Kona", 27), 411787);
@@ -1140,21 +1140,21 @@ TEST (JavaLang, IntegerParseIntWithRadix) {
 		exceptionResult = Integer::parseInt((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 }
 
@@ -1169,7 +1169,7 @@ TEST (JavaLang, IntegerParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 	
 	// Cast all case of input a string of type decimal number
@@ -1198,7 +1198,7 @@ TEST (JavaLang, IntegerParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	// Test out of range
@@ -1207,7 +1207,7 @@ TEST (JavaLang, IntegerParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "-21474834650";
@@ -1215,7 +1215,7 @@ TEST (JavaLang, IntegerParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 }
 
@@ -1229,14 +1229,14 @@ TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "-0", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "-FF", 16);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage().toString());
 	}
 	
 	ASSERT_EQUAL(Integer::parseUnsignedInt((String) "1100110", 2), 102);
@@ -1246,21 +1246,21 @@ TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "-2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	ASSERT_EQUAL(Integer::parseUnsignedInt((String) "Kona", 27), 411787);
@@ -1269,21 +1269,21 @@ TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 	
 	// Test out of range
@@ -1291,14 +1291,14 @@ TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "4294967297", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "12345678901234567890123456789", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage().toString());
 	}
 }
 
@@ -1324,7 +1324,7 @@ TEST (JavaLang, IntegerParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "13";
@@ -1337,7 +1337,7 @@ TEST (JavaLang, IntegerParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	// Test out of range
@@ -1346,7 +1346,7 @@ TEST (JavaLang, IntegerParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage().toString());
 	}
 	
 	stringInput = (String) "12345678901234567890123456789";
@@ -1354,7 +1354,7 @@ TEST (JavaLang, IntegerParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage().toString());
 	}
 }
 
@@ -1370,7 +1370,7 @@ TEST (JavaLang, IntegerRemainderUnsigned) {
 		int exceptionResult = Integer::remainderUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage().toString());
 	}
 	
 	// Positive divide
@@ -1436,30 +1436,30 @@ TEST (JavaLang, IntegerSum) {
 }
 
 TEST (JavaLang, IntegerToBinaryString) {
-	ASSERT_STR((string) "0", Integer::toBinaryString(0).toString());
-	ASSERT_STR((string) "1", Integer::toBinaryString(1).toString());
-	ASSERT_STR((string) "11111111111111111111111111111111", Integer::toBinaryString(-1).toString());
-	ASSERT_STR((string) "1101", Integer::toBinaryString(13).toString());
-	ASSERT_STR((string) "1111111111111111111111111111111", Integer::toBinaryString(Integer::MAX_VALUE).toString());
-	ASSERT_STR((string) "10000000000000000000000000000000", Integer::toBinaryString(Integer::MIN_VALUE).toString());
+	assertEquals((string) "0", Integer::toBinaryString(0).toString());
+	assertEquals((string) "1", Integer::toBinaryString(1).toString());
+	assertEquals((string) "11111111111111111111111111111111", Integer::toBinaryString(-1).toString());
+	assertEquals((string) "1101", Integer::toBinaryString(13).toString());
+	assertEquals((string) "1111111111111111111111111111111", Integer::toBinaryString(Integer::MAX_VALUE).toString());
+	assertEquals((string) "10000000000000000000000000000000", Integer::toBinaryString(Integer::MIN_VALUE).toString());
 }
 
 TEST (JavaLang, IntegerToHexString) {
-	ASSERT_STR((string) "0", Integer::toHexString(0).toString());
-	ASSERT_STR((string) "1", Integer::toHexString(1).toString());
-	ASSERT_STR((string) "ffffffff", Integer::toHexString(-1).toString());
-	ASSERT_STR((string) "d", Integer::toHexString(13).toString());
-	ASSERT_STR((string) "7fffffff", Integer::toHexString(Integer::MAX_VALUE).toString());
-	ASSERT_STR((string) "80000000", Integer::toHexString(Integer::MIN_VALUE).toString());
+	assertEquals((string) "0", Integer::toHexString(0).toString());
+	assertEquals((string) "1", Integer::toHexString(1).toString());
+	assertEquals((string) "ffffffff", Integer::toHexString(-1).toString());
+	assertEquals((string) "d", Integer::toHexString(13).toString());
+	assertEquals((string) "7fffffff", Integer::toHexString(Integer::MAX_VALUE).toString());
+	assertEquals((string) "80000000", Integer::toHexString(Integer::MIN_VALUE).toString());
 }
 
 TEST (JavaLang, IntegerToOctalString) {
-	ASSERT_STR((string) "0", Integer::toOctalString(0).toString());
-	ASSERT_STR((string) "1", Integer::toOctalString(1).toString());
-	ASSERT_STR((string) "37777777777", Integer::toOctalString(-1).toString());
-	ASSERT_STR((string) "15", Integer::toOctalString(13).toString());
-	ASSERT_STR((string) "17777777777", Integer::toOctalString(Integer::MAX_VALUE).toString());
-	ASSERT_STR((string) "20000000000", Integer::toOctalString(Integer::MIN_VALUE).toString());
+	assertEquals((string) "0", Integer::toOctalString(0).toString());
+	assertEquals((string) "1", Integer::toOctalString(1).toString());
+	assertEquals((string) "37777777777", Integer::toOctalString(-1).toString());
+	assertEquals((string) "15", Integer::toOctalString(13).toString());
+	assertEquals((string) "17777777777", Integer::toOctalString(Integer::MAX_VALUE).toString());
+	assertEquals((string) "20000000000", Integer::toOctalString(Integer::MIN_VALUE).toString());
 }
 
 TEST (JavaLang, IntegerToString) {
@@ -1473,50 +1473,50 @@ TEST (JavaLang, IntegerToString) {
 	// Make a comparison between expected realResult and the real result
 	string expectedResultToString = (string) "0";
 	string realResultToString = zeroIntegerToString.toString();
-	ASSERT_STR(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, realResultToString);
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "1";
 	realResultToString = oneIntegerToString.toString();
-	ASSERT_STR(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, realResultToString);
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "10";
 	realResultToString = positiveIntegerToString.toString();
-	ASSERT_STR(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, realResultToString);
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "2147483647";
 	realResultToString = maxIntegerToString.toString();
-	ASSERT_STR(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, realResultToString);
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "-2147483647";
 	realResultToString = minIntegerToString.toString();
-	ASSERT_STR(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, realResultToString);
 }
 
 TEST(JavaLang, IntegerToStringFromInt) {
-    ASSERT_STR((string) "0", Integer::toString(0).toString());
-    ASSERT_STR((string) "1", Integer::toString(1).toString());
-    ASSERT_STR((string) "-1", Integer::toString(-1).toString());
-    ASSERT_STR((string) "13", Integer::toString(13).toString());
+    assertEquals((string) "0", Integer::toString(0).toString());
+    assertEquals((string) "1", Integer::toString(1).toString());
+    assertEquals((string) "-1", Integer::toString(-1).toString());
+    assertEquals((string) "13", Integer::toString(13).toString());
 }
 
 TEST (JavaLang, IntegerToStringWithRadix) {
-	ASSERT_STR("0", Integer::toString(0, 10).toString());
-	ASSERT_STR("473", Integer::toString(473, 10).toString());
-	ASSERT_STR("-ff", Integer::toString(-255, 16).toString());
-	ASSERT_STR("-1100110", Integer::toString(-102, 2).toString());
-	ASSERT_STR("106", Integer::toString(70, 8).toString());
+	assertEquals("0", Integer::toString(0, 10).toString());
+	assertEquals("473", Integer::toString(473, 10).toString());
+	assertEquals("-ff", Integer::toString(-255, 16).toString());
+	assertEquals("-1100110", Integer::toString(-102, 2).toString());
+	assertEquals("106", Integer::toString(70, 8).toString());
 	
 	// Radix out of range
-	ASSERT_STR("473", Integer::toString(473, 100).toString());
+	assertEquals("473", Integer::toString(473, 100).toString());
 	try {
 		String exceptionString = Integer::toString(100, 20);
 	}
 	catch (UnsupportedOperationException &e) {
-		ASSERT_STR("Haven't support this radix yet", e.getMessage().toString());
+		assertEquals("Haven't support this radix yet", e.getMessage().toString());
 	}
 }
 
@@ -1530,28 +1530,28 @@ TEST (JavaLang, IntegerToUnsignedLong) {
 }
 
 TEST (JavaLang, IntegerToUnsignedString) {
-	ASSERT_STR("0", Integer::toUnsignedString(0, 10).toString());
-	ASSERT_STR("473", Integer::toUnsignedString(473, 10).toString());
-	ASSERT_STR("ffffff01", Integer::toUnsignedString(-255, 16).toString());
-	ASSERT_STR("1100110", Integer::toUnsignedString(102, 2).toString());
-	ASSERT_STR("106", Integer::toUnsignedString(70, 8).toString());
+	assertEquals("0", Integer::toUnsignedString(0, 10).toString());
+	assertEquals("473", Integer::toUnsignedString(473, 10).toString());
+	assertEquals("ffffff01", Integer::toUnsignedString(-255, 16).toString());
+	assertEquals("1100110", Integer::toUnsignedString(102, 2).toString());
+	assertEquals("106", Integer::toUnsignedString(70, 8).toString());
 	
 	// Radix out of range
-	ASSERT_STR("473", Integer::toUnsignedString(473, 100).toString());
+	assertEquals("473", Integer::toUnsignedString(473, 100).toString());
 	
 	// Radix is not 2, 8, 16, 10
 	try {
 		String exceptionString = Integer::toUnsignedString(100, 20);
 	}
 	catch (UnsupportedOperationException &e) {
-		ASSERT_STR("Haven't support this radix yet", e.getMessage().toString());
+		assertEquals("Haven't support this radix yet", e.getMessage().toString());
 	}
 }
 
 TEST (JavaLang, IntegerToUnsignedDecimalString) {
-	ASSERT_STR("0", Integer::toUnsignedString(0).toString());
-	ASSERT_STR("473", Integer::toUnsignedString(473).toString());
-	ASSERT_STR("4294967041", Integer::toUnsignedString(-255).toString());
+	assertEquals("0", Integer::toUnsignedString(0).toString());
+	assertEquals("473", Integer::toUnsignedString(473).toString());
+	assertEquals("4294967041", Integer::toUnsignedString(-255).toString());
 }
 
 TEST (JavaLang, IntegerValueOfFromString) {
@@ -1564,14 +1564,14 @@ TEST (JavaLang, IntegerValueOfFromString) {
 		exceptionResult = Integer::parseInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "-FF");
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	// Test out of range
@@ -1579,14 +1579,14 @@ TEST (JavaLang, IntegerValueOfFromString) {
 		exceptionResult = Integer::valueOf((String) "21474836450");
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "-21474836458");
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 }
 
@@ -1613,21 +1613,21 @@ TEST (JavaLang, IntegerValueOfWithRadix) {
 		exceptionResult = Integer::valueOf((String) "2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage().toString());
 	}
 	
 	ASSERT_EQUAL(411787, Integer::valueOf((String) "Kona", 27).intValue());
@@ -1636,20 +1636,20 @@ TEST (JavaLang, IntegerValueOfWithRadix) {
 		exceptionResult = Integer::valueOf((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage().toString());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		ASSERT_STR("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage().toString());
 	}
 }

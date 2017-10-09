@@ -33,7 +33,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	int to = 10;
 	char *result = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(5, lengthPointerChar(result));
-	ASSERT_STR("World", result);
+	assertEquals("World", result);
 	free(result);
 	
 	charArray = (string) "Hello World";
@@ -41,7 +41,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 6;
 	char *result2 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(1, lengthPointerChar(result2));
-	ASSERT_STR("W", result2);
+	assertEquals("W", result2);
 	free(result2);
 	
 	charArray = (string) "Hello World";
@@ -49,7 +49,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 6;
 	char *result3 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result3));
-	ASSERT_STR("", result3);
+	assertEquals("", result3);
 	free(result3);
 	
 	charArray = (string) "Hello World";
@@ -57,7 +57,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = -1;
 	char *result4 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result4));
-	ASSERT_STR("", result4);
+	assertEquals("", result4);
 	free(result4);
 	
 	charArray = (string) "Hello World";
@@ -65,7 +65,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = -2;
 	char *result5 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result5));
-	ASSERT_STR("", result5);
+	assertEquals("", result5);
 	free(result5);
 	
 	charArray = (string) "Hello World";
@@ -73,7 +73,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 4;
 	char *result6 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result6));
-	ASSERT_STR("", result6);
+	assertEquals("", result6);
 	free(result6);
 	
 	charArray = (string) "Hello World";
@@ -81,7 +81,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 15;
 	char *result7 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(11, lengthPointerChar(result7));
-	ASSERT_STR("Hello World", result7);
+	assertEquals("Hello World", result7);
 	free(result7);
 	
 	charArray = (string) "Hello World";
@@ -89,7 +89,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 20;
 	char *result8 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result8));
-	ASSERT_STR("", result8);
+	assertEquals("", result8);
 	free(result8);
 	
 	charArray = nullptr;
@@ -97,7 +97,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 20;
 	char *result9 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result9));
-	ASSERT_STR("", result9);
+	assertEquals("", result9);
 	free(result9);
 	
 	charArray = (string) "";
@@ -105,7 +105,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 10;
 	char *result10 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result10));
-	ASSERT_STR("", result10);
+	assertEquals("", result10);
 	free(result10);
 	
 	charArray = (string) "\0";
@@ -113,7 +113,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 1;
 	char *result11 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result11));
-	ASSERT_STR("", result11);
+	assertEquals("", result11);
 	free(result11);
 	
 	charArray = (string) "\0";
@@ -121,7 +121,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = 0;
 	char *result12 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result12));
-	ASSERT_STR("", result12);
+	assertEquals("", result12);
 	free(result12);
 	
 	charArray = (string) "test";
@@ -129,7 +129,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	to = -1;
 	char *result13 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result13));
-	ASSERT_STR("", result13);
+	assertEquals("", result13);
 	free(result13);
 }
 
@@ -139,14 +139,14 @@ TEST (KernelCommon, SegmentPointerConstChar) {
 	int to = 6;
 	char *result = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(1, lengthPointerChar(result));
-	ASSERT_STR("W", result);
+	assertEquals("W", result);
 	free(result);
 	
 	from = 7;
 	to = 6;
 	char *result2 = segmentPointerChar(charArray, from, to);
 	ASSERT_EQUAL(0, lengthPointerChar(result2));
-	ASSERT_STR("", result2);
+	assertEquals("", result2);
 	free(result2);
 }
 
@@ -171,7 +171,7 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 	ASSERT_EQUAL(4, lengthPointerPointerChar(result));
 	char *join = stringJoin(result, (string) "|");
 
-	ASSERT_STR("brown|fox|jumps|over", join);
+	assertEquals("brown|fox|jumps|over", join);
 	free(join);
 	free(result);
 

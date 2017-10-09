@@ -71,14 +71,14 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	}
 	String stringResult = basicEncoder.encodeToString(stringInputToArrayOfByte);
 	String expectedStringResult = "V2VsY29tZSB0byBWaWV0bmFtIQ==";
-	ASSERT_STR(expectedStringResult.toString(), stringResult.toString());
+	assertEquals(expectedStringResult.toString(), stringResult.toString());
 	
 	// Passing output Array<byte> by reference.
 	Array<byte> outputByteArrayIsNotEnoughSize(10);  // Not enough size.
 	try {
 		basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
 	} catch (IllegalArgumentException ex) {
-		ASSERT_STR("Output byte array is too small for encoding all input bytes",
+		assertEquals("Output byte array is too small for encoding all input bytes",
 		           ex.getMessage().toString());
 	}
 	Array<byte> outputByteArray(100);
@@ -213,7 +213,7 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	try {
 		basicDecoder.decode(inputArray, outputArrayNotEnoughSize);
 	} catch (IllegalArgumentException ex) {
-		ASSERT_STR("Output byte array is too small for decoding all input bytes",
+		assertEquals("Output byte array is too small for decoding all input bytes",
 		           ex.getMessage().toString());
 	}
 	Array<byte> outputArray(100);

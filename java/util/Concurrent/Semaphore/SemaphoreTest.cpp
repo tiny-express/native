@@ -66,7 +66,7 @@ TEST(JavaUtilConcurrent, SemaphoreToString) {
     String result;
 
     result = semaphoreObject.toString();
-    ASSERT_STR(expect.toString(), result.toString());
+    assertEquals(expect.toString(), result.toString());
 }
 
 TEST(JavaUtilConcurrent, SemaphoreRelease) {

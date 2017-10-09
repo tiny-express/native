@@ -93,13 +93,13 @@ TEST(JavaUtil, ArrayListAdd) {
 	// Compare validArrayList toString
 	string stringExpect = (string) "[1, 2, 3, 4]";
 	string stringResult = validArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 
 	// Add new element at index 0 then compare string - Should equal
 	validArrayList.add(0, 0);
 	stringExpect = (string) "[0, 1, 2, 3, 4]";
 	stringResult = validArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 }
 
 TEST(JavaUtil, ArrayListContains) {
@@ -126,7 +126,7 @@ TEST(JavaUtil, ArrayListIsEmpty) {
 	// Compare string of validArrayList - Should equal
 	string stringExpect = (string) "[1.2, 1.4]";
 	string stringResult = validArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 }
 
 TEST(JavaUtil, ArrayListClear) {
@@ -134,7 +134,7 @@ TEST(JavaUtil, ArrayListClear) {
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	string stringExpect = (string) R"(["food", "tiny"])";
 	string stringResult = validArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 
 	// Clear validArrayList - Should equal
 	validArrayList.clear();
@@ -144,7 +144,7 @@ TEST(JavaUtil, ArrayListClear) {
 
 	stringExpect = (string) "[]";
 	stringResult = validArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 }
 
 TEST(JavaUtil, ArrayListClone) {
@@ -155,7 +155,7 @@ TEST(JavaUtil, ArrayListClone) {
 
 	string stringExpect = (string) R"(["food", "tiny"])";
 	string stringResult = cloneArrayList.toString();
-	ASSERT_STR(stringExpect, stringResult);
+	assertEquals(stringExpect, stringResult);
 	int sizeExpect = 2;
 	int sizeResult = cloneArrayList.size();
 	ASSERT_EQUAL(sizeExpect, sizeResult);
@@ -188,7 +188,7 @@ TEST(JavaUtil, ArrayListGet) {
 	} catch (IndexOutOfBoundsException exception) {
 		string stringExpect = (string) "Index out of range: -1";
 		string stringResult = exception.toString();
-        ASSERT_STR(stringExpect, stringResult);
+        assertEquals(stringExpect, stringResult);
 	}
 
 	try {
@@ -196,7 +196,7 @@ TEST(JavaUtil, ArrayListGet) {
 	} catch (IndexOutOfBoundsException exception) {
 		string stringExpect = (string) "Index out of range: 1000";
 		string stringResult = exception.toString();
-        ASSERT_STR(stringExpect, stringResult);
+        assertEquals(stringExpect, stringResult);
 	}
 }
 
@@ -236,12 +236,12 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
 
     string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
     string stringResult = validArrayList.toString();
-    ASSERT_STR(stringExpect, stringResult);
+    assertEquals(stringExpect, stringResult);
 
     try {
         validArrayList.remove(-1);
     } catch (IndexOutOfBoundsException exception) {
-        ASSERT_STR("Index out of range: -1", exception.getMessage().toString());
+        assertEquals("Index out of range: -1", exception.getMessage().toString());
     }
 }
 
@@ -253,14 +253,14 @@ TEST(JavaUtil, ArrayListRemoveElement) {
     string stringExpect = (string) R"(["123", "789"])";
     string stringResult = validArrayList.toString();
     ASSERT_TRUE(result);
-    ASSERT_STR(stringExpect, stringResult);
+    assertEquals(stringExpect, stringResult);
 
     // Test case false
     result = validArrayList.remove("012");
     stringExpect = (string) R"(["123", "789"])";
     stringResult = validArrayList.toString();
     ASSERT_FALSE(result);
-    ASSERT_STR(stringExpect, stringResult);
+    assertEquals(stringExpect, stringResult);
 }
 
 TEST(JavaUtil, ArrayListSet) {
@@ -270,12 +270,12 @@ TEST(JavaUtil, ArrayListSet) {
     validArrayList.set(2, "String");
     string stringExpect = (string) R"(["String", "String", "String", "String"])";
     string stringResult = validArrayList.toString();
-    ASSERT_STR(stringExpect, stringResult);
+    assertEquals(stringExpect, stringResult);
 
     try {
         validArrayList.set(-1, "String");
     } catch (IndexOutOfBoundsException exception) {
-        ASSERT_STR("Index out of range: -1", exception.getMessage().toString());
+        assertEquals("Index out of range: -1", exception.getMessage().toString());
     }
 }
 
@@ -290,14 +290,14 @@ TEST(JavaUtil, ArrayListToString) {
     ArrayList<Integer> inValidArrayListInteger;
     string result = inValidArrayListInteger.toString();
     string expect = (string) "[]";
-    ASSERT_STR(result, expect);
+    assertEquals(result, expect);
 
     // Give an ArrayList<Integer>
     // then compare toString() - Should equal
 	ArrayList<Integer> validArrayListInteger = {1, 2, 4, 5};
 	result = validArrayListInteger.toString();
 	expect = (string) "[1, 2, 4, 5]";
-	ASSERT_STR(result, expect);
+	assertEquals(result, expect);
 
     // Give an ArrayList<ArrayList<Integer>>
     // then compare toString() - Should equal
@@ -307,7 +307,7 @@ TEST(JavaUtil, ArrayListToString) {
     arrayListInArrayList.add(inValidArrayListInteger);
     result = arrayListInArrayList.toString();
     expect = (string) "[[1, 2, 4, 5], [1, 2, 4, 5], []]";
-    ASSERT_STR(expect, result);
+    assertEquals(expect, result);
 
     // Test ArrayList<String> with element from another ArrayList.toString();
 	ArrayList<String> arrayListStringInArrayList;
@@ -316,7 +316,7 @@ TEST(JavaUtil, ArrayListToString) {
 	arrayListStringInArrayList.add("ArrayList");
 	result = arrayListStringInArrayList.toString();
     expect = (string) R"(["String", [1, 2, 4, 5], "ArrayList"])";
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 
 //    // Give an ArrayList<String> with Json control character
 //	ArrayList<String> arrayListString;
@@ -329,5 +329,5 @@ TEST(JavaUtil, ArrayListToString) {
 //    arrayListString.add("Food\\Tiny");
 //    result = arrayListString.toString();
 //    expect = (string) R"([He\"llo\", I\b, am\t, Le\ngend, Acher\ry, from\f, Food\\Tiny])";
-//    ASSERT_STR(expect, result);
+//    assertEquals(expect, result);
 }

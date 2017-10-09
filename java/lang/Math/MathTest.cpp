@@ -59,7 +59,7 @@ TEST(JavaLang, MathAddExactInt) {
 		int overFlowResult = Math::addExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -77,7 +77,7 @@ TEST(JavaLang, MathAddExactLong) {
 		long overFlowResult = Math::addExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -419,7 +419,7 @@ TEST(JavaLang, MathDecrementExactInt) {
 		int overFlowResult = Math::decrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -435,7 +435,7 @@ TEST(JavaLang, MathDecrementExactLong) {
 		long overFlowResult = Math::decrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -452,7 +452,7 @@ TEST(JavaLang, MathIncrementExactInt) {
 		int overFlowResult = Math::incrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -469,7 +469,7 @@ TEST(JavaLang, MathIncrementExactLong) {
 		long overFlowResult = Math::incrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -482,7 +482,7 @@ TEST(JavaLang, MathMultiplyExact) {
 		int overFlowResult = Math::multiplyExact(x, y);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 	
 	
@@ -507,7 +507,7 @@ TEST(JavaLang, MathMultiplyExactLong) {
 		long overFlowResult = Math::multiplyExact(c, (long) 2);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 	
 	// Given an long equal to Long::MIN_VALUE, multiply with -1
@@ -516,7 +516,7 @@ TEST(JavaLang, MathMultiplyExactLong) {
 		long overFlowResult = Math::multiplyExact(Long::MIN_VALUE, (long) -1);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -533,7 +533,7 @@ TEST(JavaLang, MathNegateExactInt) {
 		int overFlowResult = Math::negateExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -550,7 +550,7 @@ TEST(JavaLang, MathNegateExactLong) {
 		long overFlowResult = Math::negateExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -1090,7 +1090,7 @@ TEST(JavaLang, MathFloorDivInt) {
 		int divideByZero = Math::floorDiv(dividend, divisor);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 
@@ -1152,7 +1152,7 @@ TEST(JavaLang, MathSubtractExactInt) {
 		int overFlowResult = Math::subtractExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -1170,7 +1170,7 @@ TEST(JavaLang, MathSubtractExactLong) {
 		long overFlowResult = Math::subtractExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage().toString());
 	}
 }
 
@@ -1187,7 +1187,7 @@ TEST(JavaLang, MathToIntExact) {
 		int overFlowResult = Math::toIntExact(c);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage().toString());
 	}
 }
 
@@ -1211,7 +1211,7 @@ TEST(JavaLang, MathFloorDivLong) {
 		long divideByZero = Math::floorDiv(dividend, divisor);
 	}
 	catch (ArithmeticException &e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 
