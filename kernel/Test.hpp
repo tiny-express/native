@@ -153,9 +153,7 @@ void assertEqualsU(uintmax_t expected, uintmax_t actual);
 
 void assertNotEquals(intmax_t expected, intmax_t actual);
 
-void assert_not_equal_u(uintmax_t expected, uintmax_t actual, const char *caller, int line);
-
-#define ASSERT_NOT_EQUAL_U(expected, actual) assert_not_equal_u(expected, actual, __FILE__, __LINE__)
+void assertNotEqualsU(uintmax_t expected, uintmax_t actual);
 
 void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t actual, const char *caller, int line);
 
@@ -357,9 +355,10 @@ void assertNotEquals(intmax_t expected, intmax_t actual) {
     }
 }
 
-void assert_not_equal_u(uintmax_t expected, uintmax_t actual, const_string caller, int line) {
+void assertNotEqualsU(uintmax_t expected, uintmax_t actual) {
     if ((expected) == (actual)) {
-    CTEST_ERR("%s:%d  should not be %" PRIuMAX, caller, line, actual);
+    CTEST_ERR("%s:%d  should not be %" PRIuMAX,
+            __FILE__, __LINE__, actual);
     }
 }
 
