@@ -578,19 +578,17 @@ namespace Java {
 							String endArrayList = "]";
                             String appendString;
 
-                            // if (instanceof<String>(this->original[ 0 ])) {
-                            //     isStringArrayList = true;
-							// }
+                            if (instanceof<String>(this->original[ 0 ])) {
+                                isStringArrayList = true;
+                            }
 							int index;
 							for (index = 0; index < this->size(); ++index) {
-                                // if (isStringArrayList) {
-                                //     String stringAtIndex = this->original[ index ].toString();
-								// appendString = String("\"") + stringAtIndex + String("\"");
-                                // } else {
-								///    appendString = this->original[ index ].toString();
-                                // }
-
-								appendString = this->original[ index ].toString();
+                                if (isStringArrayList) {
+                                    String stringAtIndex = this->original[ index ].toString();
+                                    appendString = String("\"") + stringAtIndex + String("\"");
+                                } else {
+                                    appendString = this->original[ index ].toString();
+                                }
 								appendString += commaAndSpace;
 								startArrayList += appendString;
 							}

@@ -132,7 +132,7 @@ TEST(JavaUtil, ArrayListIsEmpty) {
 TEST(JavaUtil, ArrayListClear) {
 	// Give an valid ArrayList
 	ArrayList<String> validArrayList = {"food", "tiny"};
-	string stringExpect = (string) R"([food, tiny])";
+	string stringExpect = (string) R"(["food", "tiny"])";
 	string stringResult = validArrayList.toString();
 	ASSERT_STR(stringExpect, stringResult);
 
@@ -153,7 +153,7 @@ TEST(JavaUtil, ArrayListClone) {
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	ArrayList<String> cloneArrayList = validArrayList.clone();
 
-	string stringExpect = (string) R"([food, tiny])";
+	string stringExpect = (string) R"(["food", "tiny"])";
 	string stringResult = cloneArrayList.toString();
 	ASSERT_STR(stringExpect, stringResult);
 	int sizeExpect = 2;
@@ -250,14 +250,14 @@ TEST(JavaUtil, ArrayListRemoveElement) {
     // then test method remove with element - Should equal
     ArrayList<String> validArrayList = {"123", "456", "789"};
     boolean result = validArrayList.remove("456");
-    string stringExpect = (string) R"([123, 789])";
+    string stringExpect = (string) R"(["123", "789"])";
     string stringResult = validArrayList.toString();
     ASSERT_TRUE(result);
     ASSERT_STR(stringExpect, stringResult);
 
     // Test case false
     result = validArrayList.remove("012");
-    stringExpect = (string) R"([123, 789])";
+    stringExpect = (string) R"(["123", "789"])";
     stringResult = validArrayList.toString();
     ASSERT_FALSE(result);
     ASSERT_STR(stringExpect, stringResult);
@@ -268,7 +268,7 @@ TEST(JavaUtil, ArrayListSet) {
     // then test method set - Should equal
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
     validArrayList.set(2, "String");
-    string stringExpect = (string) R"([String, String, String, String])";
+    string stringExpect = (string) R"(["String", "String", "String", "String"])";
     string stringResult = validArrayList.toString();
     ASSERT_STR(stringExpect, stringResult);
 
@@ -315,7 +315,7 @@ TEST(JavaUtil, ArrayListToString) {
 	arrayListStringInArrayList.add(validArrayListInteger.toString());
 	arrayListStringInArrayList.add("ArrayList");
 	result = arrayListStringInArrayList.toString();
-    expect = (string) R"([String, [1, 2, 4, 5], ArrayList])";
+    expect = (string) R"(["String", [1, 2, 4, 5], "ArrayList"])";
 	ASSERT_STR(expect, result);
 
 //    // Give an ArrayList<String> with Json control character
