@@ -151,13 +151,30 @@ void assertEquals(intmax_t expected, intmax_t actual);
  */
 void assertEqualsU(uintmax_t expected, uintmax_t actual);
 
+/**
+ * Asserts that two intmax_ts are not equal.
+ *
+ * @param expected
+ * @param actual
+ */
 void assertNotEquals(intmax_t expected, intmax_t actual);
 
+/**
+ * Asserts that two unsigned intmax_ts are not equal.
+ *
+ * @param expected
+ * @param actual
+ */
 void assertNotEqualsU(uintmax_t expected, uintmax_t actual);
 
-void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t actual, const char *caller, int line);
-
-#define ASSERT_INTERVAL(exp1, exp2, actual) assert_interval(exp1, exp2, actual, __FILE__, __LINE__)
+/**
+ * Assert Interval
+ *
+ * @param expectedFirst
+ * @param expectedSecond
+ * @param actual
+ */
+void assertInterval(intmax_t expectedFirst, intmax_t expectedSecond, intmax_t actual);
 
 void assert_null(void *actual, const char *caller, int line);
 
@@ -362,9 +379,13 @@ void assertNotEqualsU(uintmax_t expected, uintmax_t actual) {
     }
 }
 
-void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t actual, const_string caller, int line) {
-    if (actual < exp1 || actual > exp2) {
-    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX, caller, line, exp1, exp2, actual);
+void assertInterval(intmax_t expectedFirst,
+                        intmax_t expectedSecond,
+                        intmax_t actual) {
+
+    if (actual < expectedFirst || actual > expectedSecond) {
+    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
+                __FILE__, __LINE__, expectedFirst, expectedSecond, actual);
     }
 }
 
