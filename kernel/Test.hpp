@@ -176,13 +176,19 @@ void assertNotEqualsU(uintmax_t expected, uintmax_t actual);
  */
 void assertInterval(intmax_t expectedFirst, intmax_t expectedSecond, intmax_t actual);
 
-void assert_null(void *actual, const char *caller, int line);
+/**
+ * Assert Null
+ *
+ * @param actual
+ */
+void assertNull(void *actual);
 
-#define ASSERT_NULL(actual) assert_null((void*)actual, __FILE__, __LINE__)
-
-void assert_not_null(const void *actual, const char *caller, int line);
-
-#define ASSERT_NOT_NULL(actual) assert_not_null(actual, __FILE__, __LINE__)
+/**
+ * Assert Not Null
+ *
+ * @param actual
+ */
+void assertNotNull(const void *actual);
 
 void assert_true(int actual, const char *caller, int line);
 
@@ -509,16 +515,15 @@ void assert_float_far(float expected, float actual, int precision, const_string 
     free(realString);
 }
 
-
-void assert_null(void* actual, const_string caller, int line) {
+void assertNull(void* actual) {
     if ((actual) != nullptr) {
-    CTEST_ERR("%s:%d  should be nullptr", caller, line);
+    CTEST_ERR("%s:%d  should be nullptr", __FILE__, __LINE__);
     }
 }
 
-void assert_not_null(const void* actual, const_string caller, int line) {
+void assertNotNull(const void* actual) {
     if (actual == nullptr) {
-    CTEST_ERR("%s:%d  should not be nullptr", caller, line);
+    CTEST_ERR("%s:%d  should not be nullptr", __FILE__, __LINE__);
     }
 }
 

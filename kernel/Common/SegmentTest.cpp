@@ -178,5 +178,5 @@ TEST (KernelCommon, SegmentPointerPointerChar) {
 	from = 5;
 	to  = 2;
 	char **result2 = segmentPointerPointerChar(target, from, to);
-	ASSERT_NULL(result2);
+	assertNull(result2);
 }
