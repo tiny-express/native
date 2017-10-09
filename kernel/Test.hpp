@@ -39,19 +39,21 @@ using namespace Java::Lang;
 #include "Common.hpp"
 
 typedef void (*SetupFunc)(void *);
+
 typedef void (*TearDownFunc)(void *);
 
 struct CTEST {
-		const char *ssname;  // suite name
-		const char *ttname;  // test name
-		void (*run)();
-		int skip;
-		
-		void *data;
-		SetupFunc setup;
-		TearDownFunc teardown;
-		
-		unsigned int magic;
+    const char *ssname;  // suite name
+    const char *ttname;  // test name
+    void (*run)();
+
+    int skip;
+
+    void *data;
+    SetupFunc setup;
+    TearDownFunc teardown;
+
+    unsigned int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run
@@ -106,6 +108,7 @@ struct CTEST {
 
 
 void CTEST_LOG(const char *fmt, ...);
+
 void CTEST_ERR(const char *fmt, ...);  // doesn't return
 
 #define CTEST(sname, tname) __CTEST_INTERNAL(sname, tname, 0)
@@ -122,11 +125,8 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
  */
 void assertEquals(String expected, String actual);
 
-void assert_data(const unsigned char *expected, size_t expsize,
-	const unsigned char *actual, size_t realsize,
-	const char *caller, int line);
-#define ASSERT_DATA(expected, expsize, actual, realsize) \
-    assert_data(expected, expsize, actual, realsize, __FILE__, __LINE__)
+void assertData(String *expected, size_t expectedSize,
+                String *actual, size_t actualSize);
 
 /**
  * Asserts that two intmax_ts are equal.
@@ -136,45 +136,58 @@ void assert_data(const unsigned char *expected, size_t expsize,
 void assertEquals(intmax_t expected, intmax_t actual);
 
 void assert_equal_u(uintmax_t expected, uintmax_t actual, const char *caller, int line);
+
 #define ASSERT_EQUAL_U(expected, actual) assert_equal_u(expected, actual, __FILE__, __LINE__)
 
 void assert_not_equal(intmax_t expected, intmax_t actual, const char *caller, int line);
+
 #define ASSERT_NOT_EQUAL(expected, actual) assert_not_equal(expected, actual, __FILE__, __LINE__)
 
 void assert_not_equal_u(uintmax_t expected, uintmax_t actual, const char *caller, int line);
+
 #define ASSERT_NOT_EQUAL_U(expected, actual) assert_not_equal_u(expected, actual, __FILE__, __LINE__)
 
 void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t actual, const char *caller, int line);
+
 #define ASSERT_INTERVAL(exp1, exp2, actual) assert_interval(exp1, exp2, actual, __FILE__, __LINE__)
 
 void assert_null(void *actual, const char *caller, int line);
+
 #define ASSERT_NULL(actual) assert_null((void*)actual, __FILE__, __LINE__)
 
 void assert_not_null(const void *actual, const char *caller, int line);
+
 #define ASSERT_NOT_NULL(actual) assert_not_null(actual, __FILE__, __LINE__)
 
 void assert_true(int actual, const char *caller, int line);
+
 #define ASSERT_TRUE(actual) assert_true(actual, __FILE__, __LINE__)
 
 void assert_false(int actual, const char *caller, int line);
+
 #define ASSERT_FALSE(actual) assert_false(actual, __FILE__, __LINE__)
 
 void assert_fail(const char *caller, int line);
+
 #define ASSERT_FAIL() assert_fail(__FILE__, __LINE__)
 
 void assert_dbl_near(double expected, double actual, int precision, const char *caller, int line);
+
 #define ASSERT_DBL_NEAR(expected, actual) assert_dbl_near(expected, actual, 15, __FILE__, __LINE__)
 #define ASSERT_DBL_NEAR_PRE(expected, actual, precision) assert_dbl_near(expected, actual, precision, __FILE__, __LINE__)
 
 void assert_dbl_far(double expected, double actual, int precision, const char *caller, int line);
+
 #define ASSERT_DBL_FAR(expected, actual) assert_dbl_far(expected, actual, 15, __FILE__, __LINE__)
 #define ASSERT_DBL_FAR_PRE(expected, actual, precision) assert_dbl_far(expected, actual, precision, __FILE__, __LINE__)
 
 void assert_float_near(float expected, float actual, int precision, const char *caller, int line);
+
 #define ASSERT_FLOAT_NEAR(expected, actual) assert_float_near(expected, actual, 6, __FILE__, __LINE__)
 #define ASSERT_FLOAT_NEAR_PRE(expected, actual, precision) assert_float_near(expected, actual, precision, __FILE__, __LINE__)
 
 void assert_float_far(float expected, float actual, int precision, const char *caller, int line);
+
 #define ASSERT_FLOAT_FAR(expected, actual) assert_float_far(expected, actual, 6, __FILE__, __LINE__)
 #define ASSERT_FLOAT_FAR_PRE(expected, actual, precision) assert_float_far(expected, actual, precision, __FILE__, __LINE__)
 
@@ -225,16 +238,16 @@ typedef int (*filter_func)(struct CTEST*);
 static CTEST(suite, test) { }
 
 inline static void vprint_errormsg(const_string fmt, va_list ap) {
-	// (v)snprintf returns the number that would have been written
+    // (v)snprintf returns the number that would have been written
     const int ret = vsnprintf(ctest_errormsg, ctest_errorsize, fmt, ap);
     if (ret < 0) {
-		ctest_errormsg[0] = 0x00;
+        ctest_errormsg[0] = 0x00;
     } else {
-	    const size_t size = (size_t) ret;
-	    const size_t s = (ctest_errorsize <= size ? size -ctest_errorsize : size);
-	    // ctest_errorsize may overflow at this point
-		ctest_errorsize -= s;
-		ctest_errormsg += s;
+        const size_t size = (size_t) ret;
+        const size_t s = (ctest_errorsize <= size ? size -ctest_errorsize : size);
+        // ctest_errorsize may overflow at this point
+        ctest_errorsize -= s;
+        ctest_errormsg += s;
     }
 }
 
@@ -247,14 +260,14 @@ inline static void print_errormsg(const_string fmt, ...) {
 
 static void msg_start(const_string color, const_string title) {
     if (color_output) {
-	    print_errormsg("%s", color);
+        print_errormsg("%s", color);
     }
     print_errormsg("  %s: ", title);
 }
 
 static void msg_end() {
     if (color_output) {
-	    print_errormsg(ANSI_NORMAL);
+        print_errormsg(ANSI_NORMAL);
     }
     print_errormsg("\n");
 }
@@ -291,53 +304,56 @@ void assertEquals(String expected, String actual) {
             && actual.toString() == nullptr) ||
         (expected.toString() && actual.toString()
             && strcmp(expected.toString(), actual.toString()) != 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", __FILE__, __LINE__, expected, actual);
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", __FILE__, __LINE__, expected.toString(), actual.toString());
     }
 }
 
-void assert_data(const_string expected, size_t expsize,
-		 const_string actual, size_t realsize,
-		 const_string caller, int line) {
+void assertData(String expected, size_t expectedSize,
+         String actual, size_t actualSize) {
     size_t i;
-    if (expsize != realsize) {
-	CTEST_ERR("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX, caller, line, (uintmax_t) expsize, (uintmax_t) realsize);
+
+    if (expectedSize != actualSize) {
+    CTEST_ERR("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX,
+            __FILE__, __LINE__, (uintmax_t) expectedSize,
+            (uintmax_t) actualSize);
     }
-    for (i=0; i<expsize; i++) {
-	if (expected[i] != actual[i]) {
-	    CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
-		caller, line, expected[i], (uintmax_t) i, actual[i]);
-	}
+
+    for (i = 0; i < expectedSize; i++) {
+        if (expected.charAt(i) != actual.charAt(i)) {
+            CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
+            __FILE__, __LINE__, expected.charAt(i), (uintmax_t) i, actual.charAt(i));
+        }
     }
 }
 
 void assertEquals(intmax_t expected, intmax_t actual) {
     if (expected != actual) {
-	CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
-	            __FILE__, __LINE__, expected, actual);
+    CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+                __FILE__, __LINE__, expected, actual);
     }
 }
 
 void assert_equal_u(uintmax_t expected, uintmax_t actual, const_string caller, int line) {
     if (expected != actual) {
-	CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX, caller, line, expected, actual);
+    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX, caller, line, expected, actual);
     }
 }
 
 void assert_not_equal(intmax_t expected, intmax_t actual, const_string caller, int line) {
     if ((expected) == (actual)) {
-	CTEST_ERR("%s:%d  should not be %" PRIdMAX, caller, line, actual);
+    CTEST_ERR("%s:%d  should not be %" PRIdMAX, caller, line, actual);
     }
 }
 
 void assert_not_equal_u(uintmax_t expected, uintmax_t actual, const_string caller, int line) {
     if ((expected) == (actual)) {
-	CTEST_ERR("%s:%d  should not be %" PRIuMAX, caller, line, actual);
+    CTEST_ERR("%s:%d  should not be %" PRIuMAX, caller, line, actual);
     }
 }
 
 void assert_interval(intmax_t exp1, intmax_t exp2, intmax_t actual, const_string caller, int line) {
     if (actual < exp1 || actual > exp2) {
-	CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX, caller, line, exp1, exp2, actual);
+    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX, caller, line, exp1, exp2, actual);
     }
 }
 
@@ -361,9 +377,9 @@ void assert_dbl_near(double expected, double actual, int precision, const_string
 
     // Compare with string type
     if ((expectedString == nullptr && realString != nullptr) ||
-	(expectedString != nullptr && realString == nullptr) ||
-	(expectedString && realString && strcmp(expectedString, realString) != 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
+    (expectedString != nullptr && realString == nullptr) ||
+    (expectedString && realString && strcmp(expectedString, realString) != 0)) {
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
 
     // Free
@@ -391,9 +407,9 @@ void assert_dbl_far(double expected, double actual, int precision, const_string 
 
     // Compare with string type
     if ((expectedString == nullptr && realString != nullptr) ||
-	(expectedString != nullptr && realString == nullptr) ||
-	(expectedString && realString && strcmp(expectedString, realString) == 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
+    (expectedString != nullptr && realString == nullptr) ||
+    (expectedString && realString && strcmp(expectedString, realString) == 0)) {
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
 
     // Free
@@ -421,9 +437,9 @@ void assert_float_near(float expected, float actual, int precision, const_string
 
     // Compare with string type
     if ((expectedString == nullptr && realString != nullptr) ||
-	(expectedString != nullptr && realString == nullptr) ||
-	(expectedString && realString && strcmp(expectedString, realString) != 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
+    (expectedString != nullptr && realString == nullptr) ||
+    (expectedString && realString && strcmp(expectedString, realString) != 0)) {
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
 
     // Free
@@ -451,9 +467,9 @@ void assert_float_far(float expected, float actual, int precision, const_string 
 
     // Compare with string type
     if ((expectedString == nullptr && realString != nullptr) ||
-	(expectedString != nullptr && realString == nullptr) ||
-	(expectedString && realString && strcmp(expectedString, realString) == 0)) {
-	CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
+    (expectedString != nullptr && realString == nullptr) ||
+    (expectedString && realString && strcmp(expectedString, realString) == 0)) {
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, realString);
     }
 
     // Free
@@ -464,25 +480,25 @@ void assert_float_far(float expected, float actual, int precision, const_string 
 
 void assert_null(void* actual, const_string caller, int line) {
     if ((actual) != nullptr) {
-	CTEST_ERR("%s:%d  should be nullptr", caller, line);
+    CTEST_ERR("%s:%d  should be nullptr", caller, line);
     }
 }
 
 void assert_not_null(const void* actual, const_string caller, int line) {
     if (actual == nullptr) {
-	CTEST_ERR("%s:%d  should not be nullptr", caller, line);
+    CTEST_ERR("%s:%d  should not be nullptr", caller, line);
     }
 }
 
 void assert_true(int actual, const_string caller, int line) {
     if ((actual) == 0) {
-	CTEST_ERR("%s:%d  should be true", caller, line);
+    CTEST_ERR("%s:%d  should be true", caller, line);
     }
 }
 
 void assert_false(int actual, const_string caller, int line) {
     if ((actual) != 0) {
-	CTEST_ERR("%s:%d  should be false", caller, line);
+    CTEST_ERR("%s:%d  should be false", caller, line);
     }
 }
 
@@ -511,9 +527,9 @@ static uint64_t getCurrentTime() {
 
 static void color_print(const_string color, const_string text) {
     if (color_output)
-	printf("%s%s " ANSI_NORMAL "\n", color, text);
+    printf("%s%s " ANSI_NORMAL "\n", color, text);
     else
-	printf("%s\n", text);
+    printf("%s\n", text);
 }
 
 #ifdef __APPLE__
@@ -527,7 +543,7 @@ static void *find_symbol(struct CTEST *test, const char *fname)
     //fprintf(stderr, ">>>> dlsym: loading %s\n", symbol_name);
     void *symbol = dlsym(RTLD_DEFAULT, symbol_name);
     if (!symbol) {
-	//fprintf(stderr, ">>>> ERROR: %s\n", dlerror());
+    //fprintf(stderr, ">>>> ERROR: %s\n", dlerror());
     }
     // returns nullptr on error
 
@@ -569,8 +585,8 @@ int ctest_main(int argc, const char *argv[])
 #endif
 
     if (argc == 2) {
-	suite_name = argv[1];
-	filter = suite_filter;
+    suite_name = argv[1];
+    filter = suite_filter;
     }
 #ifdef CTEST_NO_COLORS
     color_output = 0;
@@ -583,67 +599,67 @@ int ctest_main(int argc, const char *argv[])
     struct CTEST* ctest_end = &__TNAME(suite, test);
     // find begin and end of section by comparing magics
     while (1) {
-	struct CTEST* t = ctest_begin-1;
-	if (t->magic != __CTEST_MAGIC) break;
-	ctest_begin--;
+    struct CTEST* t = ctest_begin-1;
+    if (t->magic != __CTEST_MAGIC) break;
+    ctest_begin--;
     }
     while (1) {
-	struct CTEST* t = ctest_end+1;
-	if (t->magic != __CTEST_MAGIC) break;
-	ctest_end++;
+    struct CTEST* t = ctest_end+1;
+    if (t->magic != __CTEST_MAGIC) break;
+    ctest_end++;
     }
     ctest_end++;    // end after last one
 
     static struct CTEST* test;
     for (test = ctest_begin; test != ctest_end; test++) {
-	if (test == &__TNAME(suite, test)) continue;
-	if (filter(test)) total++;
+    if (test == &__TNAME(suite, test)) continue;
+    if (filter(test)) total++;
     }
 
     for (test = ctest_begin; test != ctest_end; test++) {
-	if (test == &__TNAME(suite, test)) continue;
-	if (filter(test)) {
-	    ctest_errorbuffer[0] = 0;
-	    ctest_errorsize = MSG_SIZE-1;
-	    ctest_errormsg = ctest_errorbuffer;
-	    printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
-	    fflush(stdout);
-	    if (test->skip) {
-		color_print(ANSI_BYELLOW, "[SKIPPED]");
-		num_skip++;
-	    } else {
-		int result = setjmp(ctest_err);
-		if (result == 0) {
+    if (test == &__TNAME(suite, test)) continue;
+    if (filter(test)) {
+        ctest_errorbuffer[0] = 0;
+        ctest_errorsize = MSG_SIZE-1;
+        ctest_errormsg = ctest_errorbuffer;
+        printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
+        fflush(stdout);
+        if (test->skip) {
+        color_print(ANSI_BYELLOW, "[SKIPPED]");
+        num_skip++;
+        } else {
+        int result = setjmp(ctest_err);
+        if (result == 0) {
 #ifdef __APPLE__
-		    if (!test->setup) {
-			test->setup = (SetupFunc) find_symbol(test, "setup");
-		    }
-		    if (!test->teardown) {
-			test->teardown = (TearDownFunc) find_symbol(test, "teardown");
-		    }
+            if (!test->setup) {
+            test->setup = (SetupFunc) find_symbol(test, "setup");
+            }
+            if (!test->teardown) {
+            test->teardown = (TearDownFunc) find_symbol(test, "teardown");
+            }
 #endif
 
-		    if (test->setup) test->setup(test->data);
+            if (test->setup) test->setup(test->data);
 //                    if (test->data)
 //                        test->run(test->data);
 //                    else
-		    test->run();
-		    if (test->teardown) test->teardown(test->data);
-		    // if we got here it's ok
+            test->run();
+            if (test->teardown) test->teardown(test->data);
+            // if we got here it's ok
 #ifdef CTEST_COLOR_OK
-		    color_print(ANSI_GREEN, "[OK]");
+            color_print(ANSI_GREEN, "[OK]");
 #else
-		    color_print(ANSI_GREEN, "[OK]");
+            color_print(ANSI_GREEN, "[OK]");
 #endif
-		    num_ok++;
-		} else {
-		    color_print(ANSI_BRED, "[FAIL]");
-		    num_fail++;
-		}
-		if (ctest_errorsize != MSG_SIZE-1) printf("%s", ctest_errorbuffer);
-	    }
-	    index++;
-	}
+            num_ok++;
+        } else {
+            color_print(ANSI_BRED, "[FAIL]");
+            num_fail++;
+        }
+        if (ctest_errorsize != MSG_SIZE-1) printf("%s", ctest_errorbuffer);
+        }
+        index++;
+    }
     }
     uint64_t t2 = getCurrentTime();
 
