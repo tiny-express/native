@@ -317,7 +317,6 @@ namespace Java {
              */
 			int compareToIgnoreCase(const String &targetString) const;
 
-
             /**
              * String concatenation
              *
@@ -333,7 +332,7 @@ namespace Java {
              * @return String
              */
             inline boolean contains(const CharSequence &charSequence) {
-                return ::strstr(this->original, charSequence.toString()) > 0;
+                return __builtin_strstr(this->original, charSequence.toString()) > 0;
             }
 
             /**
