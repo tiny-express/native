@@ -164,7 +164,7 @@ TEST(JavaUtil, BitSetClone) {
 TEST(JavaUtil, BitSetEquals) {
     String justString("Hello! I'm not a BitSet!");
     BitSet bitSet;
-    ASSERT_FALSE(bitSet.equals(justString));
+    assertFalse(bitSet.equals(justString));
     BitSet anotherBitSet(100);
     // Two of bit sets are equals because they contains only 0 bits.
     assertTrue(bitSet.equals(anotherBitSet));
@@ -173,7 +173,7 @@ TEST(JavaUtil, BitSetEquals) {
     assertEquals(128, anotherBitSet.size());
     assertEquals(0, bitSet.length());
     // Two of bit sets have difference logical length.
-    ASSERT_FALSE(bitSet.equals(anotherBitSet));
+    assertFalse(bitSet.equals(anotherBitSet));
 
     bitSet.clear();
     anotherBitSet.clear();
@@ -182,7 +182,7 @@ TEST(JavaUtil, BitSetEquals) {
     bitSet.set(0, 1024, true);
     anotherBitSet.set(0, 1024, true);
     anotherBitSet.set(512, false);
-    ASSERT_FALSE(bitSet.equals(anotherBitSet));
+    assertFalse(bitSet.equals(anotherBitSet));
 }
 
 TEST(JavaUtil, BitSetFlip) {
@@ -272,7 +272,7 @@ TEST(JavaUtil, BitSetHashCode) {
     assertTrue(bitSet1.hashCode() == bitSet2.hashCode());
     bitSet1.set(0, 100, true);
     bitSet2.set(0, 100, false);
-    ASSERT_FALSE(bitSet1.hashCode() == bitSet2.hashCode());
+    assertFalse(bitSet1.hashCode() == bitSet2.hashCode());
     bitSet2.set(0, 100, true);
     assertTrue(bitSet1.hashCode() == bitSet2.hashCode());
 }
@@ -282,7 +282,7 @@ TEST(JavaUtil, BitSetIntersects) {
     BitSet bitSet2;
     bitSet1.set(0, 1024, false);
     bitSet2.set(0, 1024, true);
-    ASSERT_FALSE(bitSet1.intersects(bitSet2));
+    assertFalse(bitSet1.intersects(bitSet2));
     bitSet1.set(512, true);
     assertTrue(bitSet1.intersects(bitSet2));
 
@@ -290,17 +290,17 @@ TEST(JavaUtil, BitSetIntersects) {
     bitSet2.clear();
     bitSet1.set(0, 512, false);
     bitSet2.set(0, 1024, false);
-    ASSERT_FALSE(bitSet1.intersects(bitSet2));
+    assertFalse(bitSet1.intersects(bitSet2));
     bitSet1.set(0, true);
     bitSet2.set(512, true);
-    ASSERT_FALSE(bitSet1.intersects(bitSet2));
+    assertFalse(bitSet1.intersects(bitSet2));
 }
 
 TEST(JavaUtil, BitSetIsEmpty) {
     BitSet bitSet;
     assertTrue(bitSet.isEmpty());
     bitSet.set(1);
-    ASSERT_FALSE(bitSet.isEmpty());
+    assertFalse(bitSet.isEmpty());
     bitSet.clear();
     assertTrue(bitSet.isEmpty());
 }

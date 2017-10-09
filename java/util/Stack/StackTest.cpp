@@ -119,25 +119,25 @@ TEST (JavaUtil, StackEmpty) {
 	Stack<int> notEmptyIntStack;
 	int intTemp = 123;
 	notEmptyIntStack.push(intTemp);
-	ASSERT_FALSE(notEmptyIntStack.empty());
+	assertFalse(notEmptyIntStack.empty());
 	
 	// Integer
 	Stack<Integer> notEmptyIntegerStack;
 	Integer integerTemp = 123;
 	notEmptyIntegerStack.push(integerTemp);
-	ASSERT_FALSE(notEmptyIntegerStack.empty());
+	assertFalse(notEmptyIntegerStack.empty());
 	
 	// string
 	Stack<String> notEmptyStringStack;
 	String stringTemp = "123";
 	notEmptyStringStack.push(stringTemp);
-	ASSERT_FALSE(notEmptyStringStack.empty());
+	assertFalse(notEmptyStringStack.empty());
 	
 	// Object
 	Stack<Object> notEmptyObjectStack;
 	Object objectTemp;
 	notEmptyObjectStack.push(objectTemp);
-	ASSERT_FALSE(notEmptyObjectStack.empty());
+	assertFalse(notEmptyObjectStack.empty());
 }
 
 TEST (JavaUtil, StackPeek) {

@@ -196,7 +196,7 @@ TEST (JavaLang, LongEquals) {
 	
 	assertTrue(validValue.equals(validValue));
 	
-	ASSERT_FALSE(validValue.equals(anotherValue));
+	assertFalse(validValue.equals(anotherValue));
 }
 
 TEST (JavaLang, LongGetLong) {

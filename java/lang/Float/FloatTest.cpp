@@ -152,7 +152,7 @@ TEST (JavaLang, FloatRelationalOperator) {
     variableRelationalOperator1 = 13.12345;
     variableRelationalOperator2 = 13.12344;
     actual = variableRelationalOperator1 == variableRelationalOperator2;
-    ASSERT_FALSE(actual);
+    assertFalse(actual);
 
     // Test Operator !=
     variableRelationalOperator1 = 13.02;
@@ -174,7 +174,7 @@ TEST (JavaLang, FloatRelationalOperator) {
     variableRelationalOperator1 = 13.22;
     variableRelationalOperator2 = 13.99;
     actual = variableRelationalOperator1 > variableRelationalOperator2;
-    ASSERT_FALSE(actual);
+    assertFalse(actual);
 
     // Test Operator <
     variableRelationalOperator1 = 1.11;
@@ -185,7 +185,7 @@ TEST (JavaLang, FloatRelationalOperator) {
     variableRelationalOperator1 = 13.02;
     variableRelationalOperator2 = 13.01;
     actual = variableRelationalOperator1 < variableRelationalOperator2;
-    ASSERT_FALSE(actual);
+    assertFalse(actual);
 
     // Test Operator >=
     variableRelationalOperator1 = 15.00;
@@ -196,7 +196,7 @@ TEST (JavaLang, FloatRelationalOperator) {
     variableRelationalOperator1 = 10.11;
     variableRelationalOperator2 = 13.02;
     actual = variableRelationalOperator1 >= variableRelationalOperator2;
-    ASSERT_FALSE(actual);
+    assertFalse(actual);
 
     // Test Operator <=
     variableRelationalOperator1 = 1.11;
@@ -207,7 +207,7 @@ TEST (JavaLang, FloatRelationalOperator) {
     variableRelationalOperator1 = 13.99;
     variableRelationalOperator2 = 13.11;
     actual = variableRelationalOperator1 <= variableRelationalOperator2;
-    ASSERT_FALSE(actual);
+    assertFalse(actual);
 }
 
 TEST (JavaLang, FloatLogicalOperator) {
@@ -764,17 +764,17 @@ TEST (JavaLang, FloatIsNaNNoneParam) {
     assertTrue(variableIsInfinite2.isNaN());
 
     variableIsInfinite2 = Float::NEGATIVE_INFINITY;
-    ASSERT_FALSE(variableIsInfinite2.isNaN());
+    assertFalse(variableIsInfinite2.isNaN());
 
     variableIsInfinite2 = 13.02;
-    ASSERT_FALSE(variableIsInfinite2.isNaN());
+    assertFalse(variableIsInfinite2.isNaN());
 }
 
 TEST (JavaLang, FloatIsNaNParamFloat) {
     assertTrue(Float::isNaN(Float::NaN));
-    ASSERT_FALSE(Float::isNaN(Float::NEGATIVE_INFINITY));
-    ASSERT_FALSE(Float::isNaN(13.02));
-    ASSERT_FALSE(Float::isNaN(130.2));
+    assertFalse(Float::isNaN(Float::NEGATIVE_INFINITY));
+    assertFalse(Float::isNaN(13.02));
+    assertFalse(Float::isNaN(130.2));
 }
 
 TEST (JavaLang, FloatFloatValue) {
@@ -1056,15 +1056,15 @@ TEST (JavaLang, FloatEquals) {
 TEST (JavaLang, FloatIsFinite) {
     assertTrue(Float::isFinite(13.02));
     assertTrue(Float::isFinite(130.2));
-    ASSERT_FALSE(Float::isFinite(Float::POSITIVE_INFINITY));
-    ASSERT_FALSE(Float::isFinite(Float::NEGATIVE_INFINITY));
+    assertFalse(Float::isFinite(Float::POSITIVE_INFINITY));
+    assertFalse(Float::isFinite(Float::NEGATIVE_INFINITY));
 }
 
 TEST (JavaLang, FloatIsInfiniteParamFloat) {
     assertTrue(Float::isInfinite(Float::POSITIVE_INFINITY));
     assertTrue(Float::isInfinite(Float::NEGATIVE_INFINITY));
-    ASSERT_FALSE(Float::isInfinite(13.02));
-    ASSERT_FALSE(Float::isInfinite(130.2));
+    assertFalse(Float::isInfinite(13.02));
+    assertFalse(Float::isInfinite(130.2));
 }
 
 TEST (JavaLang, FloatIsInfiniteNoneParam) {
@@ -1077,7 +1077,7 @@ TEST (JavaLang, FloatIsInfiniteNoneParam) {
     assertTrue(variableIsInfinite2.isInfinite());
 
     variableIsInfinite2 = 13.02;
-    ASSERT_FALSE(variableIsInfinite2.isInfinite());
+    assertFalse(variableIsInfinite2.isInfinite());
 }
 
 TEST (JavaLang, FloatHashCodeNoneParam) {

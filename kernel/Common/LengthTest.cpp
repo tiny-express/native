@@ -85,5 +85,5 @@ TEST (KernelCommon, IsEmpty) {
 	assertTrue(isEmptyString(target2));
 
 	auto target3 = (string) "abcd";
-	ASSERT_FALSE(isEmptyString(target3));
+	assertFalse(isEmptyString(target3));
 }

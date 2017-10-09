@@ -540,7 +540,7 @@ _EMPTY_CONDITIONAL_BODY_PATTERN = re.compile(r'^\s*$', re.DOTALL)
 _CHECK_MACROS = [
     'DCHECK', 'CHECK',
     'EXPECT_TRUE', 'assertTrue',
-    'EXPECT_FALSE', 'ASSERT_FALSE',
+    'EXPECT_FALSE', 'assertFalse',
     ]
 
 # Replacement macros for CHECK/DCHECK/EXPECT_TRUE/EXPECT_FALSE
@@ -558,7 +558,7 @@ for op, inv_replacement in [('==', 'NE'), ('!=', 'EQ'),
                             ('>=', 'LT'), ('>', 'LE'),
                             ('<=', 'GT'), ('<', 'GE')]:
   _CHECK_REPLACEMENT['EXPECT_FALSE'][op] = 'EXPECT_%s' % inv_replacement
-  _CHECK_REPLACEMENT['ASSERT_FALSE'][op] = 'ASSERT_%s' % inv_replacement
+  _CHECK_REPLACEMENT['assertFalse'][op] = 'ASSERT_%s' % inv_replacement
 
 # Alternative tokens and their replacements.  For full list, see section 2.5
 # Alternative tokens [lex.digraph] in the C++ standard.

@@ -72,7 +72,7 @@ TEST (JavaUtil, PriorityQueueContains) {
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
 	assertTrue(priorityQueue.contains(1));
-	ASSERT_FALSE(priorityQueue.contains(7));
+	assertFalse(priorityQueue.contains(7));
 }
 
 TEST (JavaUtil, PriorityQueueOffer) {
@@ -121,7 +121,7 @@ TEST (JavaUtil, PriorityQueueRemove) {
 	assertEquals(4, priorityQueue.size());
 	assertEquals(4, priorityQueue.peek());
 	
-	ASSERT_FALSE(priorityQueue.remove(10));
+	assertFalse(priorityQueue.remove(10));
 	assertEquals(4, priorityQueue.size());
 	assertEquals(4, priorityQueue.peek());
 }

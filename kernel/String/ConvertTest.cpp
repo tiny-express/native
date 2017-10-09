@@ -356,19 +356,19 @@ TEST (KernelStringConvert, StringToBoolean) {
 	// Than check if the result is FALSE or not
 	auto target4 = (string) "FALSE";
 	int boolean4 = stringToBoolean(target4);
-	ASSERT_FALSE(boolean4);
+	assertFalse(boolean4);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
 	auto target5 = (string) "False";
 	int boolean5 = stringToBoolean(target5);
-	ASSERT_FALSE(boolean5);
+	assertFalse(boolean5);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
 	auto target6 = (string) "false";
 	int boolean6 = stringToBoolean(target6);
-	ASSERT_FALSE(boolean6);
+	assertFalse(boolean6);
 }
 
 TEST (KernelStringConvert, StringFromBoolean) {

@@ -37,7 +37,7 @@ TEST (JavaLang, JavaInstanceOf) {
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
 	assertTrue(instanceof<String>(stringInstanceWithSameClass));
-	ASSERT_FALSE(stringInstanceWithSameClass.equals(string2));
+	assertFalse(stringInstanceWithSameClass.equals(string2));
 	
 	// Given a String instance - Return it should be an instance of Object
 	String stringInstanceWithSameBaseClass;
@@ -45,12 +45,12 @@ TEST (JavaLang, JavaInstanceOf) {
 	
 	// Given a Integer instance - Return it should not be an instance of String
 	Integer integer = 1;
-	ASSERT_FALSE(instanceof<String>(integer));
+	assertFalse(instanceof<String>(integer));
 	
 	// Given a Long instance but casted with Object - Return it should be an instance of Long
 	Long longNumber = 1;
 	Object objectLongNumber = longNumber;
-	ASSERT_FALSE(instanceof<Long>(objectLongNumber));
+	assertFalse(instanceof<Long>(objectLongNumber));
 }
 
 TEST (JavaLang, DataTypeBoolean) {
@@ -150,9 +150,9 @@ TEST (JavaLang, ObjectEquals) {
 	// Given two difference instances of Object - Return instances are not equal
 	Object object1;
 	Object object2;
-	ASSERT_FALSE(object1.equals(object2));
+	assertFalse(object1.equals(object2));
 	// Supported for == & != operator
-	ASSERT_FALSE(object1 == object2);
+	assertFalse(object1 == object2);
 	assertTrue(object1 != object2);
 	
 	// Given one instance of Object - Return equal with itself
@@ -160,7 +160,7 @@ TEST (JavaLang, ObjectEquals) {
 	assertTrue(object3.equals(object3));
 	// Supported for == & != operator
 	assertTrue(object3 == object3);
-	ASSERT_FALSE(object3 != object3);
+	assertFalse(object3 != object3);
 }
 
 TEST (JavaLang, ObjectHashCode) {

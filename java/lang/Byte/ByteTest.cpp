@@ -181,10 +181,10 @@ TEST(JavaLang, ByteByteEquals) {
     Bytes thirdBytes = 3;
 
     assertTrue(firstBytes.equals(secondBytes));
-    ASSERT_FALSE(firstBytes.equals(thirdBytes));
+    assertFalse(firstBytes.equals(thirdBytes));
     /*// Test Bytes and Object
     Object object;
-    ASSERT_FALSE(firstBytes.equals(object));*/
+    assertFalse(firstBytes.equals(object));*/
 }
 
 TEST(JavaLang, ByteFloatValue) {
@@ -495,27 +495,27 @@ TEST(JavaLang, ByteByteOperator) {
 
     // Determine if 2 byte is equal
     assertTrue(validByte == equalValidByte);
-    ASSERT_FALSE(validByte == targetByte);
+    assertFalse(validByte == targetByte);
     assertTrue(validByte != targetByte);
-    ASSERT_FALSE(validByte != equalValidByte);
+    assertFalse(validByte != equalValidByte);
 
     // Determine if validByte is bigger than targetByte
     assertTrue(validByte > targetByte);
-    ASSERT_FALSE(targetByte > validByte);
+    assertFalse(targetByte > validByte);
 
     // Determine if validByte is smaller than targetByte
     assertTrue(targetByte < validByte);
-    ASSERT_FALSE(validByte < targetByte);
+    assertFalse(validByte < targetByte);
 
     // Determine if validByte is bigger than targetByte
     assertTrue(validByte >= targetByte);
     assertTrue(validByte >= equalValidByte);
-    ASSERT_FALSE(targetByte >= validByte);
+    assertFalse(targetByte >= validByte);
 
     // Determine if validByte is bigger than targetByte
     assertTrue(targetByte <= validByte);
     assertTrue(validByte <= equalValidByte);
-    ASSERT_FALSE(validByte <= targetByte);
+    assertFalse(validByte <= targetByte);
 
     // Make a summation from validByte with targetByte and assign the result value to this Byte
     validByte += targetByte;

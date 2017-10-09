@@ -150,10 +150,10 @@ TEST (KernelStringProcess, StringStartsWith) {
 	assertTrue(stringStartswith(target, prefix));
 	
 	prefix = (string) "Nope";
-	ASSERT_FALSE(stringStartswith(target, prefix));
+	assertFalse(stringStartswith(target, prefix));
 	
 	prefix = (string) "Prefix is longer than target";
-	ASSERT_FALSE(stringStartswith(target, prefix));
+	assertFalse(stringStartswith(target, prefix));
 }
 
 TEST (KernelStringProcess, StringEndsWith) {
@@ -162,13 +162,13 @@ TEST (KernelStringProcess, StringEndsWith) {
 	assertTrue(stringEndswith(target, suffix));
 	
 	suffix = (string) "Nope";
-	ASSERT_FALSE(stringEndswith(target, suffix));
+	assertFalse(stringEndswith(target, suffix));
 	
 	suffix = (string) "Suffix is longer than target";
-	ASSERT_FALSE(stringEndswith(target, suffix));
+	assertFalse(stringEndswith(target, suffix));
 	
 	suffix = (string) "Suffix is longer than target";
-	ASSERT_FALSE(stringEndswith(target, suffix));
+	assertFalse(stringEndswith(target, suffix));
 }
 
 TEST (KernelStringProcess, StringIndexOf) {
@@ -475,15 +475,15 @@ TEST (KernelStringProcess, StringEquals) {
 	
 	target1 = (char *) "hello";
 	target2 = nullptr;
-	ASSERT_FALSE(stringEquals(target1, target2));
+	assertFalse(stringEquals(target1, target2));
 	
 	target1 = nullptr;
 	target2 = (char *) "hello";
-	ASSERT_FALSE(stringEquals(target1, target2));
+	assertFalse(stringEquals(target1, target2));
 	
 	target1 = (string) "hello  world ";
 	target2 = (string) "  hello world";
-	ASSERT_FALSE(stringEquals(target1, target2));
+	assertFalse(stringEquals(target1, target2));
 	
 	target1 = (string) "abcd";
 	target2 = (string) "abcd";
@@ -502,7 +502,7 @@ TEST (KernelStringProcess, StringReverse) {
 	assertTrue(stringEquals(correct_reverse, reverse_of_target));
 	
 	// Test fail with wrong reverse string
-	ASSERT_FALSE(stringEquals(wrong_reverse, reverse_of_target));
+	assertFalse(stringEquals(wrong_reverse, reverse_of_target));
 	
 	free(reverse_of_target);
 }
@@ -518,7 +518,7 @@ TEST (KernelStringProcess, StringMatches) {
 	assertTrue(stringEquals(correct_reverse, reverse_of_target));
 	
 	// Test fail with wrong reverse string
-	ASSERT_FALSE(stringEquals(wrong_reverse, reverse_of_target));
+	assertFalse(stringEquals(wrong_reverse, reverse_of_target));
 	free(reverse_of_target);
 }
 

@@ -333,7 +333,7 @@ TEST (JavaLang, IntegerLongValue) {
 	// Make a comparison between the not expected realResult and the real result
 	long notExpectedResult = -11111;
 	realResultLongValue = notExpectedIntegerLongValue.longValue();
-	ASSERT_FALSE(notExpectedResult == realResultLongValue);
+	assertFalse(notExpectedResult == realResultLongValue);
 }
 
 TEST (JavaLang, IntegerFloatValue) {
@@ -636,9 +636,9 @@ TEST (JavaLang, IntegerEquals) {
 	Integer thisInteger;
 	
 	thisInteger = 13;
-	ASSERT_FALSE(thisInteger.equals(0));
-	ASSERT_FALSE(thisInteger.equals(1));
-	ASSERT_FALSE(thisInteger.equals(-1));
+	assertFalse(thisInteger.equals(0));
+	assertFalse(thisInteger.equals(1));
+	assertFalse(thisInteger.equals(-1));
 	assertTrue(thisInteger.equals(13));
 }
 

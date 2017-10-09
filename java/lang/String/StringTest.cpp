@@ -154,7 +154,7 @@ assertTrue(stringEqual1 != stringEqual3);
 
 // Compare with another object
 StringBuilder stringBuilder = StringBuilder((string) "abcd");
-ASSERT_FALSE(stringEqual1.equals(stringBuilder));
+assertFalse(stringEqual1.equals(stringBuilder));
 }
 
 TEST(JavaLang, StringCharAt) {
@@ -235,7 +235,7 @@ String invalidSubString = "text";
 // Test true with correct substring inside
 assertTrue(validString.contains(subString));
 // Test with with invalid substring inside
-ASSERT_FALSE(validString.contains(invalidSubString));
+assertFalse(validString.contains(invalidSubString));
 }
 
 TEST(JavaLang, StringContentEqual) {
@@ -249,7 +249,7 @@ String stringEqual = String("Hello world");
 assertTrue(string.contentEquals(stringEqual));
 
 String stringNotEqual = String("hello");
-ASSERT_FALSE(string.contentEquals(stringNotEqual));
+assertFalse(string.contentEquals(stringNotEqual));
 }
 
 TEST(JavaLang, StringCopyValueOf) {
@@ -298,9 +298,9 @@ String smallerString = "because";
 String greaterString = "hello";
 String greaterUpperCase = "HELLO";
 
-ASSERT_FALSE(greaterString.equalsIgnoreCase(smallerString));
+assertFalse(greaterString.equalsIgnoreCase(smallerString));
 assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
-ASSERT_FALSE(smallerString.equalsIgnoreCase(greaterString));
+assertFalse(smallerString.equalsIgnoreCase(greaterString));
 }
 
 TEST(JavaLang, StringGetBytes) {
@@ -524,35 +524,35 @@ boolean match = string1.regionMatches(14, string2, 22, 9);
 assertTrue(match);
 
 match = string1.regionMatches(14, string2, 20, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 match = string1.regionMatches(14, string3, 22, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 // Ignore case
 match = string1.regionMatches(true, 14, string2, 22, 9);
 assertTrue(match);
 
 match = string1.regionMatches(true, 14, string2, 20, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 match = string1.regionMatches(true, 14, string3, 22, 9);
 assertTrue(match);
 
 match = string1.regionMatches(false, 14, string3, 22, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 match = string1.regionMatches(true, -1, string2, 22, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 match = string1.regionMatches(true, 14, string2, -1, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 
 match = string1.regionMatches(true, 14, string2, 22, 100);
 assertTrue(match);
 
 match = string1.regionMatches(true, 14, string2, 100, 9);
-ASSERT_FALSE(match);
+assertFalse(match);
 }
 
 TEST(JavaLang, StringJoin) {
@@ -576,7 +576,7 @@ assertEquals("Duck->Dog->Pig", result.toString());
 //
 // 	// Test fail with wrong email format
 // 	String wrongEmail = "something@notcorrect";
-// 	ASSERT_FALSE(wrongEmail.matches(emailPattern));
+// 	assertFalse(wrongEmail.matches(emailPattern));
 //
 // 	// Test true with correct phone number format
 // 	String correctPhoneNumber = "+15005550006";
@@ -584,7 +584,7 @@ assertEquals("Duck->Dog->Pig", result.toString());
 //
 // 	// Test fail with wrong email format
 // 	String wrongPhoneNumber = "001678080147";
-// 	ASSERT_FALSE(wrongPhoneNumber.matches(phoneNumberPattern));
+// 	assertFalse(wrongPhoneNumber.matches(phoneNumberPattern));
 // }
 //
 TEST(JavaLang, StringReplace) {
@@ -645,7 +645,7 @@ assertEquals("Hello", splitWithLimitNegative[index].toString());
 TEST(JavaLang, StringStartsWith) {
 String textPlus;
 // textPlus == ""
-ASSERT_FALSE(textPlus.startsWith(String("abc"), 10));
+assertFalse(textPlus.startsWith(String("abc"), 10));
 
 textPlus = "Hello Hello Hello ";
 // prefix == ""
@@ -653,20 +653,20 @@ String nullString;
 assertTrue(textPlus.startsWith(nullString, 10));
 
 // thisOffset < 0
-ASSERT_FALSE(textPlus.startsWith(String("Hello"), -1));
+assertFalse(textPlus.startsWith(String("Hello"), -1));
 
 // textPlus.length < prefix.length
-ASSERT_FALSE(textPlus.startsWith(String("Hello Hello Hello H")));
+assertFalse(textPlus.startsWith(String("Hello Hello Hello H")));
 
 // thisOffset > (textPlus.length - prefix.length)
-ASSERT_FALSE((textPlus.startsWith(String("Hello"), 20)));
+assertFalse((textPlus.startsWith(String("Hello"), 20)));
 
 // valid case
 assertTrue(textPlus.startsWith(String(""), 7));
 
 assertTrue(textPlus.startsWith(String("Hello")));
 
-ASSERT_FALSE(textPlus.startsWith(String("ello")));
+assertFalse(textPlus.startsWith(String("ello")));
 }
 
 TEST(JavaLang, StringToLowerCase) {
@@ -904,9 +904,9 @@ assertTrue(greaterString > smallerString);
 assertTrue(smallerString <= greaterString);
 assertTrue(greaterString <= equalToGreaterString);
 assertTrue(greaterString >= equalToGreaterString);
-ASSERT_FALSE(smallerString > greaterString);
-ASSERT_FALSE(smallerString >= greaterString);
-ASSERT_FALSE(greaterString <= smallerString);
+assertFalse(smallerString > greaterString);
+assertFalse(smallerString >= greaterString);
+assertFalse(greaterString <= smallerString);
 }
 TEST(JavaLang, StringFormat) {
 unsigned short ushortValue = 1;

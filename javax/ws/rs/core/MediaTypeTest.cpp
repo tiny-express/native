@@ -86,13 +86,13 @@ TEST(JavaxWsRsCoreMediaType, IsWildcardSubtype) {
 
     // Subtype card is "html", expected false
     MediaType mediaType1("text", "html");
-    ASSERT_FALSE(mediaType1.isWildcardSubtype());
+    assertFalse(mediaType1.isWildcardSubtype());
 
     // Subtype card is "plain", expected true
     HashMap<String, String> parameters;
     parameters.put("text", "plain");
     MediaType mediaType2("application", "json", parameters);
-    ASSERT_FALSE(mediaType2.isWildcardSubtype());
+    assertFalse(mediaType2.isWildcardSubtype());
 
     // Constructor with subtype is wildcard, expected true
     MediaType mediaType3("text", MediaType::MEDIA_TYPE_WILDCARD);
@@ -107,13 +107,13 @@ TEST(JavaxWsRsCoreMediaType, IsWildcardType) {
 
     // Constructor with type is "text", expected false
     MediaType mediaType1("text", "html");
-    ASSERT_FALSE(mediaType1.isWildcardType());
+    assertFalse(mediaType1.isWildcardType());
 
     // Constructor with type is "application", expected false
     HashMap<String, String> parameters;
     parameters.put("text", "plain");
     MediaType mediaType2("application", "json", parameters);
-    ASSERT_FALSE(mediaType2.isWildcardType());
+    assertFalse(mediaType2.isWildcardType());
 }
 
 TEST(JavaxWsRsCoreMediaType, IsCompatible) {
@@ -131,7 +131,7 @@ TEST(JavaxWsRsCoreMediaType, IsCompatible) {
     // MediaType application/* is not compatible with text/html, expected false
     MediaType mediaType4("application", "*");
     MediaType mediaType5("text", "html");
-    ASSERT_FALSE(mediaType4.isCompatible(mediaType5));
+    assertFalse(mediaType4.isCompatible(mediaType5));
 
     // MediaType */text is compatible with application/* and vice versa,  expected true
     MediaType mediaType6("application", "*+json");

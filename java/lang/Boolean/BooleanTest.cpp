@@ -34,7 +34,7 @@ TEST (JavaLang, BooleanConstructor) {
 	
 	// Give a object Boolean with value false - Should be false
 	Boolean objectBoolean2(false);
-	ASSERT_FALSE(objectBoolean2.booleanValue());
+	assertFalse(objectBoolean2.booleanValue());
 	
 	// Give a object Boolean with String - Should be true
 	Boolean objectBoolean3("True");
@@ -42,7 +42,7 @@ TEST (JavaLang, BooleanConstructor) {
 	
 	// Give a object Boolean with String - Should be false
 	Boolean objectBoolean4("False");
-	ASSERT_FALSE(objectBoolean4.booleanValue());
+	assertFalse(objectBoolean4.booleanValue());
 }
 
 TEST (JavaLang, BooleanDestructor) {

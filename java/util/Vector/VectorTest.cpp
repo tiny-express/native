@@ -182,7 +182,7 @@ TEST (JavaUtil, VectorContains) {
 	vector.add(3);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_FALSE(vector.contains(0));
+	assertFalse(vector.contains(0));
 	assertTrue(vector.contains(5));
 }
 
@@ -190,7 +190,7 @@ TEST (JavaUtil, VectorContainsAll) {
 	// Given a valid vector.
 	Vector<int> vector { 1, 2, 3, 4, 5 };
 	// Checks vector for having all elements in a list.
-	ASSERT_FALSE(vector.containsAll({ 1, 2, 3, 4, 6 }));
+	assertFalse(vector.containsAll({ 1, 2, 3, 4, 6 }));
 	assertTrue(vector.containsAll({ 1, 2, 3, 4, 5 }));
 }
 
@@ -243,7 +243,7 @@ TEST (JavaUtil, VectorEquals) {
 	// Given two valid vectors, check they are equals or not.
 	Vector<int> vector1 { 1, 2, 3, 4, 5 };
 	Vector<int> target1 { 1, 2, 3, 5, 4 };
-	ASSERT_FALSE(vector1.equals(target1));
+	assertFalse(vector1.equals(target1));
 	// Given two valid vector, check they are equals or not.
 	Vector<int> vector2 { 1, 2, 3, 4, 5, 6, 7 };
 	Vector<int> target2 { 1, 2, 3, 4, 5, 6, 7 };
@@ -278,7 +278,7 @@ TEST (JavaUtil, VectorIsEmpty) {
 	assertTrue(vector.isEmpty());
 	// Add an element into vector, vector is not empty.
 	vector.add(0);
-	ASSERT_FALSE(vector.isEmpty());
+	assertFalse(vector.isEmpty());
 }
 
 TEST (JavaUtil, VectorIndexOf) {
@@ -360,7 +360,7 @@ TEST (JavaUtil, VectorRemove) {
 	vector2.add(String("3"));
 	vector2.add(String("4"));
 	vector2.add(String("5"));
-	ASSERT_FALSE(vector2.remove(String("10"))); // This element doesn't exists.
+	assertFalse(vector2.remove(String("10"))); // This element doesn't exists.
 	assertTrue(vector2.remove(String("5")));
 	
 	Vector<Integer> vector3;
@@ -370,7 +370,7 @@ TEST (JavaUtil, VectorRemove) {
 	vector3.add(Integer(4));
 	vector3.add(Integer(5));
 	vector3.remove(Integer(3));
-	ASSERT_FALSE(vector3.contains(Integer(3)));
+	assertFalse(vector3.contains(Integer(3)));
 }
 
 TEST (JavaUtil, VectorRemoveAll) {
@@ -410,7 +410,7 @@ TEST (JavaUtil, VectorRemoveElement) {
 	
 	vector.removeElement(Integer(3));
 	assertEquals(4, vector.size());
-	ASSERT_FALSE(vector.contains(Integer(3)));
+	assertFalse(vector.contains(Integer(3)));
 }
 
 TEST (JavaUtil, VectorRemoveElementAt) {
