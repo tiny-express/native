@@ -71,7 +71,7 @@ public:
 
 class RunnableTarget3 : public virtual Runnable {
 public:
-    String threadIdString;
+    unsigned long tid;
 
     RunnableTarget3() {
 
@@ -84,7 +84,7 @@ public:
     void run() override {
         stringstream out;
         out << this_thread::get_id();
-        this->threadIdString = out.str();
+        tid = (unsigned long)pthread_self();
     }
 };
 
@@ -133,7 +133,7 @@ TEST(JavaLang, ThreadGetThreadId) {
     thread.start();
     thread.join();
 
-    String expect = target.threadIdString.toString();
+    String expect = String::format("%lld", target.tid);
     String result = String::format("%lld", thread.getId());
 
     ASSERT_STR(expect.toString(), result.toString());
