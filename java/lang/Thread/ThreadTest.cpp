@@ -136,7 +136,7 @@ TEST(JavaLang, ThreadGetThreadId) {
     String expect = target.threadIdString.toString();
     String result = String::format("%lld", thread.getId());
 
-    ASSERT_STR("25770228112", result.toString());
+    ASSERT_STR(expect.toString(), result.toString());
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
