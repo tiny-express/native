@@ -212,10 +212,12 @@ namespace Java {
              * @param target
              */
             inline String(const_string target) {
+                if (target == nullptr) {
+                    target = "\0";
+                }
                 this->size = (int) __builtin_strlen(target);
                 this->capacity = this->size == 0 ? -1 : this->size;
-                this->original  = (string) __builtin_malloc((size_t) this->size);
-                __builtin_bcopy(target, this->original , (size_t) this->size);
+                this->original = __builtin_strdup(target);
             }
 
             /**
@@ -597,7 +599,9 @@ namespace Java {
              *
              * @return int
              */
-			int length() const override;
+			inline int length() const override {
+                return this->size;
+            }
 
             /**
              * Tells whether or not this string matches the given regular expression.

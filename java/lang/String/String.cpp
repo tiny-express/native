@@ -322,10 +322,6 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	return result;
 }
 
-int String::length() const {
-	return this->size;
-}
-
 // boolean String::matches(String regex) const {
 // 	int result = stringMatches(this->original, regex.toString());
 // 	return result == true;
