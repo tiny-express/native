@@ -36,7 +36,7 @@ TEST (JavaLang, AssertionErrorConstructor) {
 	
 	// Constructs a new AssertionError with double
 	AssertionError assertionErrorWithDouble = AssertionError(10000.0);
-	assertEquals("10000", assertionErrorWithDouble.getMessage().toString());
+	assertEquals("10000.000000000000000", assertionErrorWithDouble.getMessage().toString());
 	
 	// Constructs a new AssertionError with float
 	AssertionError assertionErrorWithFloat = AssertionError(10000.0f);
@@ -65,7 +65,7 @@ TEST (JavaLang, AssertionErrorConstructor) {
 	// Constructs a new AssertionError with the specified detail message and cause.
 	AssertionError assertionErrorWithMessageAndCause = AssertionError("AssertionError with the specified message and cause", &assertionErrorWithDouble);
 	assertEquals("AssertionError with the specified message and cause", assertionErrorWithMessageAndCause.getMessage().toString());
-	assertEquals("10000", assertionErrorWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("10000.000000000000000", assertionErrorWithMessageAndCause.getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, AssertionErrorTryCatch) {

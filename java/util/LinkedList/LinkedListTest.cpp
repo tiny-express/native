@@ -129,11 +129,11 @@ TEST (JavaUtil, LinkedListRemove) {
 	
 	// Remove first element, so next getFirst must be equal to 52.2 - this test case wrapped removeFirst() also
 	linkedList.remove();
-	ASSERT_DBL_NEAR(52.2f, linkedList.getFirst());
+	assertEquals(52.2f, linkedList.getFirst());
 	
 	// Remove last element, so next getLast must be equal to 7.3
 	linkedList.removeLast();
-	ASSERT_DBL_NEAR(7.3f, linkedList.getLast());
+	assertEquals(7.3f, linkedList.getLast());
 }
 
 TEST (JavaUtil, LinkedListSize) {

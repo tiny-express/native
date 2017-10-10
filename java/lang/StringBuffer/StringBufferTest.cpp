@@ -213,19 +213,19 @@ TEST(JavaLang, StringBufferAppend) {
     // double
     double doubleToAppend = 100.0;
     numberAppendStringBuffer.append(doubleToAppend);
-    string expectDoubleAppend = (string)("1009100");
+    string expectDoubleAppend = (string)("1009100.000000000000000");
     assertEquals(expectDoubleAppend, numberAppendStringBuffer.getValue());
 
     // int
     int intToAppend = 9;
     numberAppendStringBuffer.append(intToAppend);
-    string expectIntAppend = (string)("10091009");
+    string expectIntAppend = (string)("1009100.0000000000000009");
     assertEquals(expectIntAppend, numberAppendStringBuffer.getValue());
 
     // long
     long longToAppend = 900L;
     numberAppendStringBuffer.append(longToAppend);
-    string expectLongAppend = (string)("10091009900");
+    string expectLongAppend = (string)("1009100.0000000000000009900");
     assertEquals(expectLongAppend, numberAppendStringBuffer.getValue());
 
     // Test boolean
@@ -406,19 +406,19 @@ TEST(JavaLang, StringBufferInsert) {
     // double
     double doubleToInsert = 100.0;
     numberInsertStringBuffer.insert(2, doubleToInsert);
-    string expectDoubleInsert = (string)("1010090");
+    string expectDoubleInsert = (string)("10100.00000000000000090");
     assertEquals(expectDoubleInsert, numberInsertStringBuffer.getValue());
 
     // int
-    int intToInsert = 9;
+    int intToInsert = 13;
     numberInsertStringBuffer.insert(2, intToInsert);
-    string expectIntInsert = (string)("10910090");
+    String expectIntInsert = "1013100.00000000000000090";
     assertEquals(expectIntInsert, numberInsertStringBuffer.getValue());
 
     // long
     long longToInsert = 900L;
     numberInsertStringBuffer.insert(2, longToInsert);
-    string expectLongInsert = (string)("10900910090");
+    string expectLongInsert = (string)("1090013100.00000000000000090");
     assertEquals(expectLongInsert, numberInsertStringBuffer.getValue());
 
     // Test boolean

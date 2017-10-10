@@ -62,7 +62,6 @@ STR_FROM(Short, short, "%d");
 STR_FROM(Int, int, "%d");
 STR_FROM(Long, long, "%ld");
 STR_FROM(Float, float, "%g");
-STR_FROM(Double, double, "%.16g");
 STR_TO(Short, short, "%hi");
 STR_TO(Float, float, "%g");
 STR_TO(Double, double, "%lg");
@@ -157,6 +156,22 @@ inline string stringFromBoolean(int target) {
 	}
 
 	return strdup("true");
+}
+
+inline string stringFromDouble(double target) {
+	int precision = 15;
+
+	// max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
+	string result = (string) calloc(1079, sizeof(char));
+
+	// Get string type of input number
+	if (target == 0.0f && target < 0) {
+		sprintf(result, "-%.*f", precision, target);
+	} else {
+		sprintf(result, "%.*f", precision, target);
+	}
+
+	return result;
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP

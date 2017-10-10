@@ -812,3 +812,21 @@ String String::format(const String &format) {
     regfree(&regex);
     return result;
 }
+
+String String::valueOf(unsigned long longValue) {
+	string pointerHolder = stringFromLong(longValue);
+	String result = pointerHolder;
+	free(pointerHolder);
+	return result;
+}
+
+String String::valueOf(const_string constStringValue) {
+	if (isEmptyString(constStringValue) != 0) {
+		return (string) "";
+	}
+	return constStringValue;
+}
+
+String String::valueOf(String stringValue) {
+    return stringValue;
+}

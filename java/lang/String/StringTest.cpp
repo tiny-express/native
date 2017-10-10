@@ -732,9 +732,9 @@ String valueOfFloat = String::valueOf(givenFloatNumber);
 assertEquals("5.68", valueOfFloat.toString());
 
 // Value of double number
-double givenDoubleNumber = (double) 456.32423423424;
+double givenDoubleNumber = (double) 456.324234234240009;
 String valueOfDouble = String::valueOf(givenDoubleNumber);
-assertEquals("456.32423423424", valueOfDouble.toString());
+assertEquals("456.324234234240009", valueOfDouble.toString());
 }
 
 TEST(JavaLang, StringOperatorPlusStringObject) {

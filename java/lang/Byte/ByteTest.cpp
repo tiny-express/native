@@ -171,7 +171,7 @@ TEST(JavaLang, ByteDoubleValue) {
     Bytes byteToGetValue = 5;
     double expectResult = 5;
     double actualResult = byteToGetValue.doubleValue();
-    ASSERT_DBL_NEAR(expectResult, actualResult);
+    assertEquals(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteByteEquals) {
@@ -192,7 +192,7 @@ TEST(JavaLang, ByteFloatValue) {
     Bytes byteToGetValue = 5;
     float expectResult = 5;
     float actualResult = byteToGetValue.floatValue();
-    ASSERT_DBL_NEAR(expectResult, actualResult);
+    assertEquals(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteHashCode ) {

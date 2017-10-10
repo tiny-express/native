@@ -487,25 +487,25 @@ TEST (JavaLang, FloatDoubleValue) {
     Float variableTest;
 
     variableTest = 0.0;
-    ASSERT_DBL_NEAR(0.0, variableTest.doubleValue());
+    assertEquals(0.0, variableTest.doubleValue());
 
     variableTest = Float::NaN;
-    ASSERT_DBL_NEAR(Float::NaN, variableTest.doubleValue());
+    assertEquals(Float::NaN, variableTest.doubleValue());
 
     variableTest = Float::POSITIVE_INFINITY;
-    ASSERT_DBL_NEAR(Float::POSITIVE_INFINITY, variableTest.doubleValue());
+    assertEquals(Float::POSITIVE_INFINITY, variableTest.doubleValue());
 
     variableTest = Float::NEGATIVE_INFINITY;
-    ASSERT_DBL_NEAR(Float::NEGATIVE_INFINITY, variableTest.doubleValue());
+    assertEquals(Float::NEGATIVE_INFINITY, variableTest.doubleValue());
 
     variableTest = Float::MIN_NORMAL;
-    ASSERT_DBL_NEAR(Float::MIN_NORMAL, variableTest.doubleValue());
+    assertEquals(Float::MIN_NORMAL, variableTest.doubleValue());
 
     variableTest = Float::MIN_VALUE;
-    ASSERT_DBL_NEAR(Float::MIN_VALUE, variableTest.doubleValue());
+    assertEquals(Float::MIN_VALUE, variableTest.doubleValue());
 
     variableTest = Float::MAX_VALUE;
-    ASSERT_DBL_NEAR(Float::MAX_VALUE, variableTest.doubleValue());
+    assertEquals(Float::MAX_VALUE, variableTest.doubleValue());
 }
 
 TEST (JavaLang, FloatToStringNoneParam) {
