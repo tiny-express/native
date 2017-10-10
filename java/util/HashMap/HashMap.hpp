@@ -243,12 +243,12 @@ namespace Java {
              *
              * @return a view of the values contained in this map
              */
-//			Collection<V> values() {
-//				Collection<V> vs;
+//			Collection<Value> values() {
+//				Collection<Value> vs;
 //				return (vs = values) == null ? (values = new Values()) : vs;
 //			}
 //
-//			final class Values extends AbstractCollection<V> {
+//			final class Values extends AbstractCollection<Value> {
 //				public final int size() {
 //					return size;
 //				}
@@ -685,96 +685,86 @@ namespace Java {
                 String endString = "}";
                 String totalString;
 
-                IteratorType iteratorToString;
-
-                for (iteratorToString = this->original.begin();
-                     iteratorToString != this->original.end();
-                     ++iteratorToString) {
-
-                    if (instanceof<String>(iteratorToString->first)) {
-
-                        String first = iteratorToString->first.toString();
-                        String key = this->replaceEscapeSequence(first);
-                        totalString = String("\"") + key + String("\"");
-
+                typename std::map<Key, Value>::iterator it;
+                for (it = this->original.begin(); it != this->original.end(); ++it) {
+                    if (instanceof<String>(it->first)) {
+                        String first = it->first.toString();
+                        //String key = this->replaceEscapeSequence(first);
+                        totalString = String("\"") + first + String("\"");
                     } else {
-                        totalString = iteratorToString->first.toString();
+                        totalString = it->first.toString();
                     }
-
                     totalString += colonAndSpace;
-
-                    if (instanceof<String>(iteratorToString->second)) {
-
-                        String second = iteratorToString->second.toString();
-                        String value = this->replaceEscapeSequence(second);
-                        totalString += String("\"") + value + String("\"");
-
+                    if (instanceof<String>(it->second)) {
+                        String second = it->second.toString();
+                        //String value = this->replaceEscapeSequence(second);
+                        totalString += String("\"") + second + String("\"");
                     } else {
-                        totalString += iteratorToString->second.toString();
+                        totalString += it->second.toString();
                     }
-
                     totalString += commaAndSpace;
                     startHashMap += totalString;
                 }
 
                 startHashMap = startHashMap.subString(0, startHashMap.getSize() - 2);
                 startHashMap += endString;
+                startHashMap = startHashMap.replaceAll("}\"", "}");
+                startHashMap = startHashMap.replaceAll("\"{", "{");
                 this->backup = startHashMap;
-
                 return this->backup.toString();
             }
 
-        private:
-            // TODO(anhnt): Need String support unicode for unicode character
-            /**
-             * Replace escape sequence by raw string of
-             * that sequence to using in Json
-             *
-             * @param stringToReplace
-             * @return a String with add escape sequence replaced
-             */
-            String replaceEscapeSequence(const String stringToReplace) {
-                int index = 0;
-                String replacementString;
-                String result;
-
-                while (index < stringToReplace.length()) {
-                    int charAtIndex = stringToReplace.charAt(index);
-
-                    switch (charAtIndex) {
-                        case '\"':
-                            replacementString = R"(\")";
-                            break;
-                        case '\b':
-                            replacementString = R"(\b)";
-                            break;
-                        case '\f':
-                            replacementString = R"(\f)";
-                            break;
-                        case '\n':
-                            replacementString = R"(\n)";
-                            break;
-                        case '\r':
-                            replacementString = R"(\r)";
-                            break;
-                        case '\t':
-                            replacementString = R"(\t)";
-                            break;
-                        case '\\':
-                            replacementString = R"(\\)";
-                            break;
-                        default:
-                            string charAtIndexString = stringFromChar(charAtIndex);
-                            replacementString = charAtIndexString;
-                            free(charAtIndexString);
-                    }
-
-                    result += replacementString;
-                    index++;
-                }
-
-                return result;
-            }
+//        private:
+//            // TODO(anhnt): Need String support unicode for unicode character
+//            /**
+//             * Replace escape sequence by raw string of
+//             * that sequence to using in Json
+//             *
+//             * @param stringToReplace
+//             * @return a String with add escape sequence replaced
+//             */
+//            String replaceEscapeSequence(const String stringToReplace) {
+//                int index = 0;
+//                String replacementString;
+//                String result;
+//
+//                while (index < stringToReplace.length()) {
+//                    int charAtIndex = stringToReplace.charAt(index);
+//
+//                    switch (charAtIndex) {
+//                        case '\"':
+//                            replacementString = R"(\")";
+//                            break;
+//                        case '\b':
+//                            replacementString = R"(\b)";
+//                            break;
+//                        case '\f':
+//                            replacementString = R"(\f)";
+//                            break;
+//                        case '\n':
+//                            replacementString = R"(\n)";
+//                            break;
+//                        case '\r':
+//                            replacementString = R"(\r)";
+//                            break;
+//                        case '\t':
+//                            replacementString = R"(\t)";
+//                            break;
+//                        case '\\':
+//                            replacementString = R"(\\)";
+//                            break;
+//                        default:
+//                            string charAtIndexString = stringFromChar(charAtIndex);
+//                            replacementString = charAtIndexString;
+//                            free(charAtIndexString);
+//                    }
+//
+//                    result += replacementString;
+//                    index++;
+//                }
+//
+//                return result;
+//            }
         };
     }  // namespace Util
 }  // namespace Java

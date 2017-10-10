@@ -470,14 +470,23 @@ TEST (JavaUtil, HashMapToString) {
     result = arrayListInHashMap.toString();
     ASSERT_STR(expectedResult, result);
 
-    HashMap<String, String> hashMapWithSpecialCharacter;
-    hashMapWithSpecialCharacter.put("key\"1", "va\"lu\"e1");
-    hashMapWithSpecialCharacter.put("key\\16", "val\nue\t16");
-    hashMapWithSpecialCharacter.put("k\fey\b02", "val\rue02");
+	// Test HashMap::toString with HashMap has String (key or value) that come from another HashMap::toString()
+	HashMap<String, String> result2;
 
-    expectedResult = (string) R"({"k\fey\b02": "val\rue02", "key\"1": "va\"lu\"e1", "key\\16": "val\nue\t16"})";
-    result = hashMapWithSpecialCharacter.toString();
-    ASSERT_STR(expectedResult, result);
+	result2.put("firstName", "firstName");
+	result2.put("lastName", "lastName");
+	result2.put("birthday", "birthday");
+	result2.put("avatar", "avatar");
+	result2.put("gender", "gender");
+	result2.put("email", "email");
+
+	HashMap<String, String> result3;
+
+	result3.put("Status", "true");
+	result3.put("Infor", result2.toString());
+
+	expectedResult = (string) R"({"Infor": {"avatar": "avatar", "birthday": "birthday", "email": "email", "firstName": "firstName", "gender": "gender", "lastName": "lastName"}, "Status": "true"})";
+	ASSERT_STR(expectedResult, result3.toString());
 }
 
 TEST (JavaUtil, HashMapEquals) {
