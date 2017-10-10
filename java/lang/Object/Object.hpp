@@ -27,25 +27,13 @@
 #ifndef JAVA_LANG_OBJECT_H
 #define JAVA_LANG_OBJECT_H
 
-extern "C" {
-#include "../../../kernel/builtin.h"
-};
-
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <set>
-#include <type_traits>
-#include <iostream>
+#include "../../../kernel/Kernel.hpp"
 
 // Define instanceof
 template <typename Base, typename T>
 bool instanceof(T) {
 	return std::is_base_of<Base, T>::value;
 }
-
-// Define builtin types
-typedef bool boolean;
 
 template <typename E>
 class Array;
@@ -100,7 +88,7 @@ public:
 		}
 		
 		Array(char **charPointerArray) {
-			int size = length_pointer_pointer_char(charPointerArray);
+			int size = lengthPointerPointerChar(charPointerArray);
 #ifdef LINUX
 			register
 #endif
@@ -185,7 +173,7 @@ public:
 				string result = strdup("");
 				for (char element : *this) {
 					string result_holder = result;
-					result = string_append(&result, element);
+					result = stringAppend(&result, element);
 					free(result_holder);
 				}
 				return result;
@@ -268,7 +256,7 @@ namespace Java {
 						 * @return string
 						 */
 						virtual string toString() const {
-							return string_from_int(this->hashCode());
+							return stringFromInt(this->hashCode());
 						}
 						
 						/**

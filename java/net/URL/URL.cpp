@@ -48,21 +48,21 @@ URL::URL(String spec) {
 	String url = spec.toString();
 
 //    string _protocol = http_protocol(url.toString());
-//	this->protocol = string_default(_protocol);
+//	this->protocol = stringDefault(_protocol);
 //    free(_protocol);
 //
 //    string _host = http_hostname(url.toString());
-//	this->host = string_default(_host);
+//	this->host = stringDefault(_host);
 //    free(_host);
 //
-//	this->port = number_default(url_port(url.toString()));
+//	this->port = numberDefaut(url_port(url.toString()));
 //
 //    string _query = http_query(url.toString());
-//	this->query = string_default(_query);
+//	this->query = stringDefault(_query);
 //    free(_query);
 //
 //    string _path = http_path(url.toString());
-//	this->path = string_default(_path);
+//	this->path = stringDefault(_path);
 //    free(_path);
 }
 

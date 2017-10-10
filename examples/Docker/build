@@ -1,0 +1,3 @@
+docker rm -f test || true
+docker build -t test .
+docker run -it --name=test test .

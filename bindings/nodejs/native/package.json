@@ -1,0 +1,14 @@
+{
+  "name": "native.js",
+  "version": "0.0.0",
+  "description": "Native Library for Nodejs",
+  "main": "native.js",
+  "private": true,
+  "scripts": {
+    "test": "node native.js"
+  },
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "~1.2.1"
+  }
+}

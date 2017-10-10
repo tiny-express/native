@@ -25,39 +25,36 @@
  */
 
 #include "Double.hpp"
-#include "../Object/Object.hpp"
-#include "../Math/Math.hpp"
-#include "../Long/Long.hpp"
-#include <algorithm>
+
 using namespace Java::Lang;
 
 Double::Double() {
-	this->original = 0;
-	this->originalString = string_from_double(this->original);
+    this->original = 0;
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::Double(double original) {
-	this->original = original;
-	this->originalString = string_from_double(this->original);
+    this->original = original;
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::Double(const Double &doubleNumber) {
-	this->original = doubleNumber.original;
-	this->originalString = string_from_double(this->original);
+    this->original = doubleNumber.original;
+    this->originalString = stringFromDouble(this->original);
 }
 
 Double::~Double() {
-	if (this->originalString != nullptr) {
-		free(this->originalString);
-	}
+    if (this->originalString != NULL) {
+        free(this->originalString);
+    }
 }
 
 Double Double::parseDouble(String target) {
-	return Double(string_to_double(target.toString()));
+    return Double(stringToDouble(target.toString()));
 }
 
 string Double::toString() const {
-	return (string) this->originalString;
+    return (string) this->originalString;
 }
 
 // TODO(thoangminh): waiting for FloatingDecimal.toJavaFormatString()
@@ -66,14 +63,14 @@ string Double::toString() const {
 //}
 
 char Double::charValue() const {
-	string convertResult = string_from_double(this->original);
-	char charValueResult = string_to_char(convertResult);
-	free(convertResult);
-	return charValueResult;
+    string convertResult = stringFromDouble(this->original);
+    char charValueResult = stringToChar(convertResult);
+    free(convertResult);
+    return charValueResult;
 }
 
 string Double::stringValue() const {
-	return (string) this->toString();
+    return (string) this->toString();
 }
 
 short Double::shortValue() const {
@@ -93,7 +90,7 @@ float Double::floatValue() const {
 }
 
 double Double::doubleValue() const {
-	return this->original;
+    return this->original;
 }
 
 byte Double::byteValue() const {
@@ -101,143 +98,144 @@ byte Double::byteValue() const {
 }
 
 Double Double::operator+(const Double &target) {
-	return Double(this->original + target.original);
+    return Double(this->original + target.original);
 }
 
 Double Double::operator-(const Double &target) {
-	return Double(this->original - target.original);
+    return Double(this->original - target.original);
 }
 
 Double Double::operator*(const Double &target) {
-	return Double( this->original * target.original );
+    return Double( this->original * target.original );
 }
 
 Double Double::operator/(const Double &target) {
-	return Double( this->original / target.original );
+    return Double( this->original / target.original );
 }
 
 boolean Double::operator==(const Double &target) const {
-	return (boolean) equals(target.original);
+    return (boolean) equals(target.original);
 }
 
 boolean Double::operator!=(const Double &target) const {
-	return (boolean) !equals(target.original);
+    return (boolean) !equals(target.original);
 }
 
 boolean Double::operator<(const Double &target) const {
-	if (compare(this->doubleValue(), target.doubleValue()) == -1) {
-		return true;
-	}
-	return false;
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == -1) {
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator>(const Double &target) const {
-	if (compare(this->doubleValue(), target.doubleValue()) == 1) {
-		return true;
-	}
-	return false;
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == 1) {
+        return true;
+    }
+    return false;
 }
 
 boolean Double::operator>=(const Double &target) const {
-    if (compare(this->doubleValue(), target.doubleValue()) == 1
-            || compare(this->doubleValue(), target.doubleValue()) == 0) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == 1 || compareResult == 0) {
         return true;
     }
     return false;
 }
 
 boolean Double::operator<=(const Double &target) const {
-    if (compare(this->doubleValue(), target.doubleValue()) == -1
-        || compare(this->doubleValue(), target.doubleValue()) == 0) {
+    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    if (compareResult == -1 || compareResult == 0) {
         return true;
     }
     return false;
 }
 
 boolean Double::operator&&(const Double &target) const {
-	return (boolean) (this->original && target.original);
+    return (boolean) (this->original && target.original);
 }
 
 boolean Double::operator||(const Double &target) const {
-	return (boolean) (this->original || target.original);
+    return (boolean) (this->original || target.original);
 }
 
 Double &Double::operator=(const Double &target) {
-	this->original = target.original;
-	free(this->originalString);
-	this->originalString = string_from_double(this->original);
-	return *this;
+    this->original = target.original;
+    free(this->originalString);
+    this->originalString = stringFromDouble(this->original);
+    return *this;
 }
 
 Double Double::operator+=(const Double &target) const {
-	return (Double) (this->original + target.original);
+    return (Double) (this->original + target.original);
 }
 
 Double Double::operator-=(const Double &target) const {
-	return (Double) (this->original - target.original);
+    return (Double) (this->original - target.original);
 }
 
 Double Double::operator*=(const Double &target) const {
-	return (Double) (this->original * target.original);
+    return (Double) (this->original * target.original);
 }
 
 Double Double::operator/=(const Double &target) const {
-	return (Double) (this->original / target.original);
+    return (Double) (this->original / target.original);
 }
 
 int Double::compare(double double1, double double2) {
-	long thisBits = Double::doubleToLongBits(double1);
-	long anotherBits = Double::doubleToLongBits(double2);
-	
-	if (thisBits == anotherBits) {
-		return 0;
-	}
-	if (thisBits < anotherBits) {
-		return -1;
-	}
-	
-	return 1;
+    long thisBits = Double::doubleToLongBits(double1);
+    long anotherBits = Double::doubleToLongBits(double2);
+
+    if (thisBits == anotherBits) {
+        return 0;
+    }
+    if (thisBits < anotherBits) {
+        return -1;
+    }
+
+    return 1;
 }
 
 int Double::compareTo(Double anotherDouble) {
-	return Double::compare(this->original, anotherDouble.original);
+    return Double::compare(this->original, anotherDouble.original);
 }
 
 long Double::doubleToLongBits(double valueDouble) {
-	return doubleToRawLongBits(valueDouble);
+    return doubleToRawLongBits(valueDouble);
 }
 
 long Double::doubleToRawLongBits(double doubleInput) {
-	string doubleInputToBinary64StringType;
-	long resultDoubleToRawLongBits;
-	int tempValue;
-	int exponent;
-	int i;
-	
-	doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
-	
-	exponent = 62;
-	tempValue = 0;
-	resultDoubleToRawLongBits = 0;
-	
-	for (i = 1; i <= 63; i++) {
-		if (doubleInputToBinary64StringType[i] == '1') {
-			tempValue = 1;
-		}
-		
-		if (doubleInputToBinary64StringType[i] == '0') {
-			tempValue = 0;
-		}
-		resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) pow(2, exponent);
-		exponent--;
-	}
-	
-	if (doubleInputToBinary64StringType[0] == '1') {
-		resultDoubleToRawLongBits =  (-1) * resultDoubleToRawLongBits;
-	}
-	
-	free(doubleInputToBinary64StringType);
-	return resultDoubleToRawLongBits;
+    String doubleInputToBinary64StringType;
+    long resultDoubleToRawLongBits;
+    int tempValue;
+    int exponent;
+    int i;
+
+    doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
+
+    exponent = 62;
+    tempValue = 0;
+    resultDoubleToRawLongBits = 0;
+
+    for (i = 1; i <= 63; i++) {
+        if (doubleInputToBinary64StringType.charAt(i) == '1') {
+            tempValue = 1;
+        }
+
+        if (doubleInputToBinary64StringType.charAt(i) == '0') {
+            tempValue = 0;
+        }
+        resultDoubleToRawLongBits = resultDoubleToRawLongBits + tempValue * (long) Math::pow(2, exponent);
+        exponent--;
+    }
+
+    if (doubleInputToBinary64StringType.charAt(0) == '1') {
+        resultDoubleToRawLongBits =  (-1) * resultDoubleToRawLongBits;
+    }
+
+    return resultDoubleToRawLongBits;
 }
 
 // TODO(thoangminh): Wait for instanceof<>
@@ -252,13 +250,13 @@ boolean Double::equals(const Double &object) const {
 }
 
 long Double::hashCode() {
-	return Double::hashCode(this->original);
+    return Double::hashCode(this->original);
 }
 
 long Double::hashCode(double doubleInput) {
-	long bits = doubleToLongBits(doubleInput);
-	long rightShiftBits = bits >> 32;
-	return  (bits ^ rightShiftBits);
+    long bits = doubleToLongBits(doubleInput);
+    long rightShiftBits = bits >> 32;
+    return  (bits ^ rightShiftBits);
 }
 
 boolean Double::isFinite(double valueDouble) {
@@ -266,37 +264,40 @@ boolean Double::isFinite(double valueDouble) {
 }
 
 boolean Double::isInfinite(double valueDouble) {
-    boolean isPOSITIVE_INFINITY = (valueDouble == POSITIVE_INFINITY);
-    boolean isNEGATIVE_INFINITY = (valueDouble == NEGATIVE_INFINITY);
-    return(isPOSITIVE_INFINITY || isNEGATIVE_INFINITY );
+    boolean isPossitiveInfinity = (valueDouble == POSITIVE_INFINITY);
+    boolean isNegativeInfinity = (valueDouble == NEGATIVE_INFINITY);
+    return(isPossitiveInfinity || isNegativeInfinity );
 }
 
 boolean Double::isInfinite() {
-	return isInfinite(this->original);
+    return isInfinite(this->original);
 }
 
 boolean Double::isNaN(double valueDouble) {
-	return (valueDouble != valueDouble);
+    return (valueDouble != valueDouble);
 }
 
 boolean Double::isNaN() {
-	return isNaN(this->original);
+    return isNaN(this->original);
 }
 
 double Double::longBitsToDouble(long longBitsInput) {
+    if(Double::isNaN(longBitsInput)) {
+        return NAN;
+    }
+
     double resultLongBitsToDouble;
-    string convertLongBitsToBinary64StringType;
+    String convertLongBitsToBinary64StringType;
 
     convertLongBitsToBinary64StringType = longBitsToBinary64StringType(longBitsInput);
 
     resultLongBitsToDouble = binary64StringTypeToDouble(convertLongBitsToBinary64StringType);
 
-    free(convertLongBitsToBinary64StringType);
     return  resultLongBitsToDouble;
 }
 
 double Double::min(double doubleA, double doubleB) {
-	return Math::min(doubleA, doubleB);
+    return Math::min(doubleA, doubleB);
 }
 
 // TODO(thoangminh): Wait for build
@@ -354,219 +355,7 @@ double Double::min(double doubleA, double doubleB) {
 //    }
 //}
 
-string Double::doubleToBinary32StringType(double doubleInput) {
-    auto integerPartNormalizeForm = (string) malloc (25 * sizeof(char));
-    auto fractionPartNormalizeForm = (string) malloc (25 * sizeof(char));
-    auto doubleInputNormalizeForm = (string) malloc (280 * sizeof(char));
-    auto resultDoubleToBinary32StringType = (string) malloc (33 * sizeof(char));
-
-    int powerExponentBase2 = 0;
-    int integerPartDoubleInput;
-
-    int sizeOfIntegerPartNormalizeForm;
-    int sizeOfFractionPartNormalizeForm;
-    int sizeOfDoubleInputNormalizeForm;
-
-    int sizeOfExponentPartBinary32 = 8;
-
-    int i;
-    int index;
-    int indexOfDotDoubleInputNormalizeForm;
-    int indexFirstBit1DoubleInputNormalizeForm;
-    int indexBeginFractionPartResultDoubleToBinary32StringType = 0;
-
-    int exponentBiasBinary32 = 127;
-    int exponentDoubleInput;
-
-    double fractionPartDoubleInput;
-
-    for (i = 0 ; i <= 31; i++) {
-        doubleInputNormalizeForm[i] = '0';
-        resultDoubleToBinary32StringType[i] = '0';
-    }
-
-    for (i = 0 ; i <= 23; i++) {
-        integerPartNormalizeForm[i] = '0';
-        fractionPartNormalizeForm[i] = '0';
-    }
-
-    /** Set end point for string type */
-    integerPartNormalizeForm[24] = '\0';
-    fractionPartNormalizeForm[24] = '\0';
-    doubleInputNormalizeForm[279] = '\0';
-    resultDoubleToBinary32StringType[32] = '\0';
-
-    if (doubleInput >= 0) {
-        resultDoubleToBinary32StringType[0] = '0';
-    }
-
-    if (doubleInput < 0) {
-         resultDoubleToBinary32StringType[0] = '1';
-    }
-
-    if (doubleInput == 0) {
-        goto outPut;
-    }
-
-    if (doubleInput == POSITIVE_INFINITY) {
-        strcpy(resultDoubleToBinary32StringType, "01111111100000000000000000000000");
-        goto outPut;
-    }
-
-    if (doubleInput == NEGATIVE_INFINITY) {
-        strcpy(resultDoubleToBinary32StringType, "11111111100000000000000000000000");
-        goto outPut;
-    }
-
-    if (isNaN(doubleInput)) {
-    strcpy(resultDoubleToBinary32StringType,     "01111111111111111111111111111111");
-
-    goto outPut;
-}
-
-    /** Get |doubleInput| */
-    doubleInput = fabs(doubleInput);
-
-    /** Get size of integerPartNormalizeForm  */
-    integerPartDoubleInput = static_cast<int> (floor(doubleInput)); // TODO(thoangminh): replace by java.lang.Math when it is completed.
-    sizeOfIntegerPartNormalizeForm = 0;
-
-    if (integerPartDoubleInput == 0) {
-        sizeOfIntegerPartNormalizeForm = 1;
-    }
-
-    if (integerPartDoubleInput != 0) {
-        while (integerPartDoubleInput != 0) {
-            sizeOfIntegerPartNormalizeForm++;
-            integerPartDoubleInput = integerPartDoubleInput >> 1;
-        }
-    }
-
-    integerPartDoubleInput = static_cast<int> (floor(doubleInput));
-    index = sizeOfIntegerPartNormalizeForm -1;
-    while (integerPartDoubleInput != 0) {
-
-        if ((integerPartDoubleInput & 1) == 1) {
-            integerPartNormalizeForm[index] = '1';
-        }
-
-        if ((integerPartDoubleInput & 1) == 0) {
-            integerPartNormalizeForm[index] = '0';
-        }
-
-        index--;
-        integerPartDoubleInput = integerPartDoubleInput >> 1;
-    }
-
-    fractionPartDoubleInput = doubleInput - integerPartDoubleInput;
-    index = 0;
-
-    while ((fractionPartDoubleInput != 0) && (index < 24)) {
-        fractionPartDoubleInput = fractionPartDoubleInput * 2;
-
-        auto integerPart = static_cast<int> (floor(fractionPartDoubleInput));
-
-        if (integerPart == 1) {
-            fractionPartNormalizeForm[index] = '1';
-        }
-
-        if (integerPart == 0) {
-            fractionPartNormalizeForm[index] = '0';
-        }
-
-        index++;
-        fractionPartDoubleInput = fractionPartDoubleInput - integerPart;
-    }
-
-    sizeOfFractionPartNormalizeForm = index;
-
-    /** Copy value from integerPartNormalizeForm to doubleInputNormalizeForm */
-    for (i = 0; i < sizeOfIntegerPartNormalizeForm; i++) {
-        doubleInputNormalizeForm[i] = integerPartNormalizeForm[i];
-    }
-
-    indexOfDotDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm;
-
-    doubleInputNormalizeForm[indexOfDotDoubleInputNormalizeForm] = '.';
-
-    /** Copy value from fractionPartNormalizeForm
-     * to doubleInputNormalizeForm
-     */
-    index = indexOfDotDoubleInputNormalizeForm +1;
-    for (i = 0; i <= sizeOfFractionPartNormalizeForm; i++, index++) {
-        doubleInputNormalizeForm[index]
-                = fractionPartNormalizeForm[i];
-    }
-
-    sizeOfDoubleInputNormalizeForm = sizeOfIntegerPartNormalizeForm + 1
-                                     + sizeOfFractionPartNormalizeForm;
-
-    indexFirstBit1DoubleInputNormalizeForm = 1;
-    for (i = 0; i <= sizeOfDoubleInputNormalizeForm; i++) {
-        if (doubleInputNormalizeForm[i] == '1') {
-            indexFirstBit1DoubleInputNormalizeForm = i;
-            break;
-        }
-    }
-
-    integerPartDoubleInput =  static_cast<int> (floor(doubleInput));
-    if (integerPartDoubleInput != 0) {
-        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
-                             - indexFirstBit1DoubleInputNormalizeForm -1;
-    }
-
-    if (integerPartDoubleInput == 0) {
-        powerExponentBase2 = indexOfDotDoubleInputNormalizeForm
-                             - indexFirstBit1DoubleInputNormalizeForm;
-    }
-
-    exponentDoubleInput = powerExponentBase2 + exponentBiasBinary32;
-
-    index = sizeOfExponentPartBinary32;
-
-    while (exponentDoubleInput != 0) {
-        if ((exponentDoubleInput & 1) == 1) {
-            resultDoubleToBinary32StringType[index] = '1';
-        }
-
-        if ((exponentDoubleInput & 1) == 0) {
-            resultDoubleToBinary32StringType[index] = '0';
-        }
-
-        index--;
-        exponentDoubleInput = exponentDoubleInput >> 1;
-    }
-
-    indexBeginFractionPartResultDoubleToBinary32StringType
-            = sizeOfExponentPartBinary32 + 1;
-
-    index = indexBeginFractionPartResultDoubleToBinary32StringType;
-    i = indexFirstBit1DoubleInputNormalizeForm + 1;
-
-    for (index ; index <= 31; index++) {
-        if (i == sizeOfDoubleInputNormalizeForm) {
-            break;
-        }
-
-        if (i == indexOfDotDoubleInputNormalizeForm) {
-            i++;
-        }
-
-        resultDoubleToBinary32StringType[index]
-                = doubleInputNormalizeForm[i];
-        i++;
-    }
-
-outPut:
-	/** Return resultDoubleToBinary32StringType */
-	free(integerPartNormalizeForm);
-	free(fractionPartNormalizeForm);
-	free(doubleInputNormalizeForm);
-	return  resultDoubleToBinary32StringType;
-	
-}
-
-string Double::doubleToBinary64StringType(double doubleInput) {
+String Double::doubleToBinary64StringType(double doubleInput) {
     auto integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
     auto fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
     auto doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
@@ -622,21 +411,21 @@ string Double::doubleToBinary64StringType(double doubleInput) {
 
     if (doubleInput == POSITIVE_INFINITY) {
         strcpy(resultDoubleToBinary64StringType,
-                "0111111111110000000000000000000000000000000000000000000000000000");
+               "0111111111110000000000000000000000000000000000000000000000000000");
 
         goto outPut;
     }
 
     if (doubleInput == NEGATIVE_INFINITY) {
         strcpy(resultDoubleToBinary64StringType,
-                "1111111111110000000000000000000000000000000000000000000000000000");
+               "1111111111110000000000000000000000000000000000000000000000000000");
 
         goto outPut;
     }
 
     if (isNaN(doubleInput)) {
         strcpy(resultDoubleToBinary64StringType,
-                "0111111111111111111111111111111111111111111111111111111111111111");
+               "0111111111111111111111111111111111111111111111111111111111111111");
 
         goto outPut;
     }
@@ -777,15 +566,19 @@ string Double::doubleToBinary64StringType(double doubleInput) {
         i++;
     }
 
-outPut:
-	/** Return resultDoubleToBinary64StringType */
-	free(integerPartNormalizeForm);
-	free(fractionPartNormalizeForm);
-	free(doubleInputNormalizeForm);
-	return  resultDoubleToBinary64StringType;
+    outPut:
+    /** Return resultDoubleToBinary64StringType */
+    free(integerPartNormalizeForm);
+    free(fractionPartNormalizeForm);
+    free(doubleInputNormalizeForm);
+
+    String result = resultDoubleToBinary64StringType;
+    free(resultDoubleToBinary64StringType);
+
+    return result;
 }
 
-double Double::binary64StringTypeToDouble(string binary64StringTypeInput) {
+double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
     // Create variable
     int signOfResultbinary64StringTypeToDouble;
     double exponent;
@@ -802,7 +595,7 @@ double Double::binary64StringTypeToDouble(string binary64StringTypeInput) {
     // 1. Find signOfResultbinary64StringTypeToDouble
     signOfResultbinary64StringTypeToDouble = 1;
 
-    if (binary64StringTypeInput[0] == '1') {
+    if (binary64StringTypeInput.charAt(0) == '1') {
         signOfResultbinary64StringTypeToDouble = -1;
     }
 
@@ -810,16 +603,16 @@ double Double::binary64StringTypeToDouble(string binary64StringTypeInput) {
     exponent = 0;
     tempExponent = 10;
     for (i = 1; i <= 11; i++) {
-        if (binary64StringTypeInput[i] == '1') {
+        if (binary64StringTypeInput.charAt(i) == '1') {
             tempValue = 1;
         }
 
-        if (binary64StringTypeInput[i] == '0') {
+        if (binary64StringTypeInput.charAt(i) == '0') {
             tempValue = 0;
             isNaN = false;
         }
 
-        exponent = exponent + tempValue * pow(2, tempExponent);
+        exponent = exponent + tempValue * Math::pow(2, tempExponent);
         tempExponent--;
     }
     // 3. Find exponentAdjusted
@@ -829,32 +622,28 @@ double Double::binary64StringTypeToDouble(string binary64StringTypeInput) {
     mantisaBase10 = 0;
     tempExponent = -1;
     for (i = 12; i <= 63; i++) {
-        if (binary64StringTypeInput[i] == '1') {
+        if (binary64StringTypeInput.charAt(i) == '1') {
             tempValue = 1;
         }
 
-        if (binary64StringTypeInput[i] == '0') {
+        if (binary64StringTypeInput.charAt(i) == '0') {
             tempValue = 0;
             isNaN = false;
         }
 
-        mantisaBase10 = mantisaBase10 + tempValue * pow(2, tempExponent);
+        mantisaBase10 = mantisaBase10 + tempValue * Math::pow(2, tempExponent);
         tempExponent--;
     }
 
     // 5. Find the Double precision floating point decimal value
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
-              * pow(2, exponentAdjusted);
-
-    if (isNaN) {
-        return NaN_NUMBER;
-    }
+              * Math::pow(2, exponentAdjusted);
 
     return resultBinary64StringTypeToDouble;
 }
 
-string Double::longBitsToBinary64StringType(long longBitsInput) {
+String Double::longBitsToBinary64StringType(long longBitsInput) {
     auto resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
     int index;
     int i;
@@ -884,11 +673,14 @@ string Double::longBitsToBinary64StringType(long longBitsInput) {
         longBitsInput = longBitsInput >> 1;
     }
 
-    return resultLongBitsToBinary64StringType;
+    String result = resultLongBitsToBinary64StringType;
+    free(resultLongBitsToBinary64StringType);
+
+    return result;
 }
 
 Double Double::valueOf(String stringInput) {
-	return Double::parseDouble(stringInput);
+    return Double::parseDouble(stringInput);
 }
 
 Double Double::valueOf(double doubleInput) {

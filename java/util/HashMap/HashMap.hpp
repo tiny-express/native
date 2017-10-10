@@ -49,53 +49,53 @@ namespace Java {
 						typedef typename std::map<K, V>::const_iterator _const_iterator;
 
 				private:
-					/**
-					 * Replace escape sequence by raw string of that sequence to using in Json
-					 *
-					 * @param stringToReplace
-					 * @return a String with add escape sequence replaced
-					 */
-					//TODO (anhnt) need String support unicode for unicode character
-					String replaceEscapeSequence(const String stringToReplace) {
-						int index = 0;
-						String replacementString;
-						String result;
-						while (index < stringToReplace.length()) {
-							int charAtIndex = stringToReplace.charAt(index);
-							switch (charAtIndex) {
-								case '\"':
-									replacementString = R"(\")";
-									break;
-								case '\b':
-									replacementString = R"(\b)";
-									break;
-								case '\f':
-									replacementString = R"(\f)";
-									break;
-								case '\n':
-									replacementString = R"(\n)";
-									break;
-								case '\r':
-									replacementString = R"(\r)";
-									break;
-								case '\t':
-									replacementString = R"(\t)";
-									break;
-								case '\\':
-									replacementString = R"(\\)";
-									break;
-								default:
-										string charAtIndexString = string_from_char(charAtIndex);
-										replacementString = charAtIndexString;
-										free(charAtIndexString);
-							}
-
-							result += replacementString;
-							index++;
-						}
-
-						return result;
-					}
+//					/**
+//					 * Replace escape sequence by raw string of that sequence to using in Json
+//					 *
+//					 * @param stringToReplace
+//					 * @return a String with add escape sequence replaced
+//					 */
+//					//TODO (anhnt) need String support unicode for unicode character
+//					String replaceEscapeSequence(const String stringToReplace) {
+//						int index = 0;
+//						String replacementString;
+//						String result;
+//						while (index < stringToReplace.length()) {
+//							int charAtIndex = stringToReplace.charAt(index);
+//							switch (charAtIndex) {
+//								case '\"':
+//									replacementString = R"(\")";
+//									break;
+//								case '\b':
+//									replacementString = R"(\b)";
+//									break;
+//								case '\f':
+//									replacementString = R"(\f)";
+//									break;
+//								case '\n':
+//									replacementString = R"(\n)";
+//									break;
+//								case '\r':
+//									replacementString = R"(\r)";
+//									break;
+//								case '\t':
+//									replacementString = R"(\t)";
+//									break;
+//								case '\\':
+//									replacementString = R"(\\)";
+//									break;
+//								default:
+//										string charAtIndexString = stringFromChar(charAtIndex);
+//										replacementString = charAtIndexString;
+//										free(charAtIndexString);
+//							}
+//
+//							result += replacementString;
+//							index++;
+//						}
+//
+//						return result;
+//					}
 				
 				public:
 						/**
@@ -496,16 +496,16 @@ namespace Java {
 							for (it = this->original.begin(); it != this->original.end(); ++it) {
 								if (instanceof<String>(it->first)) {
                                     String first = it->first.toString();
-                                    String key = this->replaceEscapeSequence(first);
-									totalString = String("\"") + key + String("\"");
+                                    //String key = this->replaceEscapeSequence(first);
+									totalString = String("\"") + first + String("\"");
 								} else {
 									totalString = it->first.toString();
 								}
 								totalString += colonAndSpace;
 								if (instanceof<String>(it->second)) {
                                     String second = it->second.toString();
-                                    String value = this->replaceEscapeSequence(second);
-									totalString += String("\"") + value + String("\"");
+                                    //String value = this->replaceEscapeSequence(second);
+									totalString += String("\"") + second + String("\"");
 								} else {
 									totalString += it->second.toString();
 								}
@@ -515,6 +515,8 @@ namespace Java {
 							
 							startHashMap = startHashMap.subString(0, startHashMap.getSize() - 2);
 							startHashMap += endString;
+							startHashMap = startHashMap.replaceAll("}\"", "}");
+							startHashMap = startHashMap.replaceAll("\"{", "{");
 							this->backup = startHashMap;
 							return this->backup.toString();
 						}

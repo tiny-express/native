@@ -27,6 +27,7 @@
 #ifndef JAVA_LANG_SHORT_SHORT_HPP_
 #define JAVA_LANG_SHORT_SHORT_HPP_
 
+#include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
 #include "../String/String.hpp"
 

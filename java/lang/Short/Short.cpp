@@ -35,7 +35,7 @@ using namespace Java::Lang;
  */
 Short::Short() {
 	this->original = 0;
-	this->originalString = string_from_short(this->original);
+	this->originalString = stringFromShort(this->original);
 }
 
 /**
@@ -45,7 +45,7 @@ Short::Short() {
  */
 Short::Short(short original) {
 	this->original = original;
-	this->originalString = string_from_short(this->original);
+	this->originalString = stringFromShort(this->original);
 }
 
 /**
@@ -55,7 +55,7 @@ Short::Short(short original) {
  */
 Short::Short(const Short &shortNumber) {
 	this->original = shortNumber.original;
-	this->originalString = string_from_short(this->original);
+	this->originalString = stringFromShort(this->original);
 }
 
 Short::~Short() {
@@ -71,7 +71,7 @@ Short::~Short() {
  * @return short
  */
 Short Short::parseShort(String target) {
-	return Short(string_to_short(target.toString()));
+	return Short(stringToShort(target.toString()));
 }
 
 /**
@@ -89,7 +89,7 @@ string Short::toString() const {
  * @return char
  */
 char Short::charValue() const {
-	return string_to_char(string_from_short(this->original));
+	return stringToChar(stringFromShort(this->original));
 }
 
 /**
@@ -146,7 +146,7 @@ double Short::doubleValue() const {
 Short Short::operator=(const Short &target) {
 	this->original = target.original;
 	free(this->originalString);
-	this->originalString = string_from_short(this->original);
+	this->originalString = stringFromShort(this->original);
 	return *this;
 }
 

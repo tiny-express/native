@@ -52,7 +52,7 @@ Thread::~Thread() {
 
 void Thread::run() {
     // set thread id
-    this->tid = pthread_self();
+    this->tid = (unsigned long) pthread_self();
 
     // set tls
     if (currentThreadPtr == NULL) {

@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Double.hpp"
 using namespace Java::Lang;
 
@@ -105,24 +102,32 @@ TEST(JavaLang, DoubleArithmeticOperator) {
 
 TEST(JavaLang, DoubleRelationalOperator) {
 	// Test Operator ==
-	ASSERT_TRUE((Double)13.02 == (Double)13.02);
+	ASSERT_TRUE((Double) 13.02 == (Double) 13.02);
+	ASSERT_FALSE((Double) 13.03 == (Double) 13.02);
 	
 	// Test Operator !=
-	ASSERT_TRUE((Double)13.02 != (Double)20.31);
+	ASSERT_TRUE((Double) 13.02 != (Double) 20.31);
+	ASSERT_FALSE((Double) 13.02 != (Double) 13.02);
 	
 	// Test Operator >
-	ASSERT_TRUE((Double)20.31 > (Double)13.02);
+	ASSERT_TRUE((Double) 20.31 > (Double) 13.02);
+	ASSERT_FALSE((Double) 13.02 > (Double) 13.02);
+	ASSERT_FALSE((Double) 13.02 > (Double) 20.31);
 	
 	// Test Operator <
-	ASSERT_TRUE((Double)13.02 < (Double)20.31);
+	ASSERT_TRUE((Double) 13.02 < (Double) 20.31);
+	ASSERT_FALSE((Double) 13.02 < (Double) 13.02);
+	ASSERT_FALSE((Double) 20.31 < (Double) 13.02);
 	
 	// Test Operator >=
-	ASSERT_TRUE((Double)33.33 >= (Double)22.22);
-	ASSERT_TRUE((Double)33.33 >= (Double)33.33);
+	ASSERT_TRUE((Double) 33.33 >= (Double) 22.22);
+	ASSERT_TRUE((Double) 33.33 >= (Double) 33.33);
+	ASSERT_FALSE((Double) 13.02 >= (Double) 20.31);
 	
 	// Test Operator <=
-	ASSERT_TRUE((Double)22.22 <= (Double)33.33);
-	ASSERT_TRUE((Double)22.22 <= (Double)22.22);
+	ASSERT_TRUE((Double) 22.22 <= (Double) 33.33);
+	ASSERT_TRUE((Double) 22.22 <= (Double) 22.22);
+	ASSERT_FALSE((Double) 20.31 <= (Double) 13.02);
 }
 
 TEST(JavaLang, DoubleLogicalOperator) {
@@ -764,103 +769,103 @@ TEST(JavaLang, DoubleByteValue) {
 // TODO(thoangminh): Need to pass all test cases in comment block
 TEST(JavaLang, DoubleCompare) {
     // Test NaN_NUMBER_DOUBLE
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, NaN_NUMBER_DOUBLE), 0);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, POSITIVE_INFINITY_DOUBLE), 1);
-//    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MAX_VALUE_DOUBLE), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, 1.2), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, 0.0), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, -0.0), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, -1.2), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE), 1);
-    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(0, Double::compare(NaN_NUMBER_DOUBLE, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(NaN_NUMBER_DOUBLE, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, 1.2));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, 0.0));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, -0.0));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, -1.2));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(NaN_NUMBER_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test POSITIVE_INFINITY_DOUBLE
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE), 0);
+    ASSERT_EQUAL(-1, Double::compare(POSITIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(0, Double::compare(POSITIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
 //    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, 1.2), 1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, 0.0), 1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0), 1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, -1.2), 1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), 1);
-    ASSERT_EQUAL(Double::compare(POSITIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 1.2));
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, 0.0));
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -0.0));
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, -1.2));
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(POSITIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test NEGATIVE_INFINITY_DOUBLE
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE), -1);
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, POSITIVE_INFINITY_DOUBLE));
 //    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, 0.0), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, -1.2), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(NEGATIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 0);
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 1.2));
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, 0.0));
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -0.0));
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, -1.2));
+    ASSERT_EQUAL(-1, Double::compare(NEGATIVE_INFINITY_DOUBLE, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(0, Double::compare(NEGATIVE_INFINITY_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
 //    // Test MAX_VALUE_DOUBLE
 //    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -9999);
 //    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -9999);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MAX_VALUE_DOUBLE), 0);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 1.2), +1);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 0.0), +1);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -0.0), +1);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -1.2), +1);
-//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE), +1);
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 1.2));
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, 0.0));
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -0.0));
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, -1.2));
+//    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
 //    ASSERT_EQUAL(Double::compare(MAX_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), -9999);
 
     // Test MIN_VALUE_DOUBLE
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, 0.0), 1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -0.0), 1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, -1.2), 1);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE), 0);
-    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(MIN_VALUE_DOUBLE, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(MIN_VALUE_DOUBLE, 1.2));
+    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, 0.0));
+    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, -0.0));
+    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, -1.2));
+    ASSERT_EQUAL(0, Double::compare(MIN_VALUE_DOUBLE, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(MIN_VALUE_DOUBLE, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 1.2
-    ASSERT_EQUAL(Double::compare(1.2, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(1.2, POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(1.2, MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(1.2, 1.2), 0);
-    ASSERT_EQUAL(Double::compare(1.2, 0.0), +1);
-    ASSERT_EQUAL(Double::compare(1.2, -0.0), +1);
-    ASSERT_EQUAL(Double::compare(1.2, -1.2), +1);
-    ASSERT_EQUAL(Double::compare(1.2, MIN_VALUE_DOUBLE), +1);
-    ASSERT_EQUAL(Double::compare(1.2, NEGATIVE_INFINITY_DOUBLE), +1);
+    ASSERT_EQUAL(-1, Double::compare(1.2, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(1.2, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(1.2, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(0, Double::compare(1.2, 1.2));
+    ASSERT_EQUAL(1, Double::compare(1.2, 0.0));
+    ASSERT_EQUAL(1, Double::compare(1.2, -0.0));
+    ASSERT_EQUAL(1, Double::compare(1.2, -1.2));
+    ASSERT_EQUAL(1, Double::compare(1.2, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(1.2, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 0.0
-    ASSERT_EQUAL(Double::compare(0.0, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(0.0, POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(0.0, MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(0.0, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(0.0, 0.0), 0);
-    ASSERT_EQUAL(Double::compare(0.0, -0.0), 0);  // error in OSX
-    ASSERT_EQUAL(Double::compare(0.0, -1.2), +1);
-    ASSERT_EQUAL(Double::compare(0.0, MIN_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(0.0, NEGATIVE_INFINITY_DOUBLE), +1);
+    ASSERT_EQUAL(-1, Double::compare(0.0, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(0.0, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(0.0, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(0.0, 1.2));
+    ASSERT_EQUAL(0, Double::compare(0.0, 0.0));
+    ASSERT_EQUAL(0, Double::compare(0.0, -0.0));  // error in OSX
+    ASSERT_EQUAL(1, Double::compare(0.0, -1.2));
+    ASSERT_EQUAL(-1, Double::compare(0.0, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(0.0, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -0.0
-    ASSERT_EQUAL(Double::compare(-0.0, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(-0.0, MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-0.0, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(-0.0, 0.0), 0);  // error in OSX
-    ASSERT_EQUAL(Double::compare(-0.0, -0.0), 0);  // error in OSX
-    ASSERT_EQUAL(Double::compare(-0.0, -1.2), +1);
-    ASSERT_EQUAL(Double::compare(-0.0, MIN_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(-1, Double::compare(-0.0, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(-0.0, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(-0.0, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(-0.0, 1.2));
+    ASSERT_EQUAL(0, Double::compare(-0.0, 0.0));  // error in OSX
+    ASSERT_EQUAL(0, Double::compare(-0.0, -0.0));  // error in OSX
+    ASSERT_EQUAL(1, Double::compare(-0.0, -1.2));
+    ASSERT_EQUAL(-1, Double::compare(-0.0, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(-0.0, NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -1.2
-    ASSERT_EQUAL(Double::compare(-1.2, NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(Double::compare(-1.2, MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, 1.2), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, 0.0), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, -0.0), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, -1.2), 0);
-    ASSERT_EQUAL(Double::compare(-1.2, MIN_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(Double::compare(-1.2, NEGATIVE_INFINITY_DOUBLE), +1);
+    ASSERT_EQUAL(-1, Double::compare(-1.2, NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(-1.2, POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(Double::compare(-1.2, MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, Double::compare(-1.2, 1.2));
+    ASSERT_EQUAL(-1, Double::compare(-1.2, 0.0));
+    ASSERT_EQUAL(-1, Double::compare(-1.2, -0.0));
+    ASSERT_EQUAL(0, Double::compare(-1.2, -1.2));
+    ASSERT_EQUAL(-1, Double::compare(-1.2, MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, Double::compare(-1.2, NEGATIVE_INFINITY_DOUBLE));
 }
 
 TEST(JavaLang, DoubleCompareTo) {
@@ -868,111 +873,111 @@ TEST(JavaLang, DoubleCompareTo) {
 	
 	// Test NaN_NUMBER_DOUBLE
 	variableCompareTo = NaN_NUMBER_DOUBLE;
-	ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), 0);
-	ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), +1);
+	ASSERT_EQUAL(0, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test POSITIVE_INFINITY_DOUBLE
 	variableCompareTo = POSITIVE_INFINITY_DOUBLE;
-	ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), 0);
+	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	ASSERT_EQUAL(0, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
 //    ASSERT_EQUAL(variableCompareTo.compareTo( MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test NEGATIVE_INFINITY_DOUBLE
 	variableCompareTo = NEGATIVE_INFINITY_DOUBLE;
-	ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
+	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -9999);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), -1);
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-1.2));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -9999);
-	ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 0);
+	ASSERT_EQUAL(0, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test MAX_VALUE_DOUBLE
 //    variableCompareTo = MAX_VALUE_DOUBLE;
 //    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -9999);
 //    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -9999);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
 //    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), -9999);
 
     // Test MIN_VALUE_DOUBLE
     variableCompareTo = MIN_VALUE_DOUBLE;
-    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), 0);
-    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2));
+    ASSERT_EQUAL(0, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value 1.2
     variableCompareTo = 1.2;
-    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(1.2), 0);
-	ASSERT_EQUAL(variableCompareTo.compareTo(0.0), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), +1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+	ASSERT_EQUAL(0, variableCompareTo.compareTo(1.2));
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 	
 	// Test value 0.0
 	variableCompareTo = 0.0;
-	ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);  // error in OSX
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
+	ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+	ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0));  // error in OSX
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -0.0
     variableCompareTo = -0.0;
-    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), 0);  // error in OSX
-    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), 0);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), +1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), 1);
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(0, variableCompareTo.compareTo(0.0));  // error in OSX
+    ASSERT_EQUAL(0, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(-1.2));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+    ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 
     // Test value -1.2
     variableCompareTo = -1.2;
-    ASSERT_EQUAL(variableCompareTo.compareTo(NaN_NUMBER_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE), -1);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(1.2), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(0.0), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-0.0), -1);
-    ASSERT_EQUAL(variableCompareTo.compareTo(-1.2), 0);
-//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE), +1);
-	ASSERT_EQUAL(variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE), +1);
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(NaN_NUMBER_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(POSITIVE_INFINITY_DOUBLE));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MAX_VALUE_DOUBLE));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(1.2));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(0.0));
+    ASSERT_EQUAL(-1, variableCompareTo.compareTo(-0.0));
+    ASSERT_EQUAL(0, variableCompareTo.compareTo(-1.2));
+//    ASSERT_EQUAL(variableCompareTo.compareTo(MIN_VALUE_DOUBLE));
+	ASSERT_EQUAL(1, variableCompareTo.compareTo(NEGATIVE_INFINITY_DOUBLE));
 }
 
 TEST(JavaLang, DoubleToRawLongBits) {
@@ -1157,111 +1162,111 @@ TEST(JavaLang, DoubleEquals) {
 
     // Test NaN_NUMBER_DOUBLE
     variableDoubleEquals = NaN_NUMBER_DOUBLE;
-    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 1);
-    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), -1);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -1);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+    ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_NaN));
+    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test DOUBLE_POSITIVE_INFINITY
 	variableDoubleEquals = DOUBLE_POSITIVE_INFINITY;
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 1);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
 //    ASSERT_EQUAL(variableDoubleEquals.equals( DOUBLE_MAX_VALUE), -9999);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
 //    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -9999);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 
 //    // Test DOUBLE_MAX_VALUE
 //    variableDoubleEquals = DOUBLE_MAX_VALUE;
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), 1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 //
 //    // Test DOUBLE_MIN_VALUE
 //    variableDoubleEquals = DOUBLE_MIN_VALUE;
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), -9999);
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), -9999);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), -1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), -1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), -1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test DOUBLE_NEGATIVE_INFINITY
 	variableDoubleEquals = DOUBLE_NEGATIVE_INFINITY;
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), -9999);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
 //    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), -9999);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
 //    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), -9999);
-    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 1);
+    ASSERT_EQUAL(1, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 
     // Test value (Double)1.2
     variableDoubleEquals = (Double)1.2;
-    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 1);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
+    ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)0.0
 	variableDoubleEquals = (Double)0.0;
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), +0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)-0.0
 //    variableDoubleEquals = (Double)-0.0;
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), 1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 	
 	// Test value (Double)-1.2
 	variableDoubleEquals = (Double)-1.2;
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NaN), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)1.2), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)0.0), 0);
-//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals((Double)-1.2), 1);
-//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE), 0);
-	ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY), 0);
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NaN));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_POSITIVE_INFINITY));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MAX_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)1.2));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals((Double)0.0));
+//    ASSERT_EQUAL(variableDoubleEquals.equals((Double)-0.0));
+	ASSERT_EQUAL(1, variableDoubleEquals.equals((Double)-1.2));
+//    ASSERT_EQUAL(variableDoubleEquals.equals(DOUBLE_MIN_VALUE));
+	ASSERT_EQUAL(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 }
 
 TEST(JavaLang , DoubleHashCode) {
@@ -1486,362 +1491,18 @@ TEST(JavaLang, DoubleMin) {
 	double variableDoubleMin2;
 	double expectedResultDoubleMin;
 	double actualResultDoubleMin;
-	
+
 	variableDoubleMin1 = 13.02;
 	variableDoubleMin2 = 1.302;
 	expectedResultDoubleMin = 1.302;
-	actualResultDoubleMin = Double::min(variableDoubleMin1 , variableDoubleMin2);
-	ASSERT_DBL_NEAR(expectedResultDoubleMin , actualResultDoubleMin);
-	
+	actualResultDoubleMin = Double::min(variableDoubleMin1, variableDoubleMin2);
+	ASSERT_DBL_NEAR(expectedResultDoubleMin, actualResultDoubleMin);
+
 	variableDoubleMin1 = 13.02;
 	variableDoubleMin2 = 1.302;
 	expectedResultDoubleMin = 13.02;
-	actualResultDoubleMin = Double::min(variableDoubleMin1 , variableDoubleMin2);
-	ASSERT_DBL_FAR(expectedResultDoubleMin , actualResultDoubleMin);
-}
-
-
-TEST(JavaLang, DoubleToBinary32StringType) {
-	double doubleInput;
-	string expectedResult;
-	string actualResult;
-	
-	doubleInput = 0;
-	expectedResult = (string) "00000000000000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = POSITIVE_INFINITY_DOUBLE;
-	expectedResult = (string) "01111111100000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = NEGATIVE_INFINITY_DOUBLE;
-	expectedResult = (string) "11111111100000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = NaN_NUMBER_DOUBLE;
-	expectedResult = (string) "01111111111111111111111111111111";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -0.7;
-	expectedResult = (string) "10111111001100110011001100110011";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 12.375;
-	expectedResult = (string) "01000001010001100000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 1.0;
-	expectedResult = (string) "00111111100000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 0.375;
-	expectedResult = (string) "00111110110000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -2.0;
-	expectedResult = (string) "11000000000000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 83.0;
-	expectedResult = (string) "01000010101001100000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -2625.0;
-	expectedResult = (string) "11000101001001000001000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 0.5;
-	expectedResult = (string) "00111111000000000000000000000000";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -1302.123456789;
-	expectedResult = (string) "11000100101000101100001111110011";
-	actualResult = Double::doubleToBinary32StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-}
-
-TEST(JavaLang, DoubleToBinary64StringType) {
-	double doubleInput;
-	string expectedResult;
-	string actualResult;
-	
-	doubleInput = 0;
-	expectedResult = (string) "0000000000000000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = POSITIVE_INFINITY_DOUBLE;
-	expectedResult = (string) "0111111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = NEGATIVE_INFINITY_DOUBLE;
-	expectedResult = (string) "1111111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = NaN_NUMBER_DOUBLE;
-	expectedResult = (string) "0111111111111111111111111111111111111111111111111111111111111111";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -0.7;
-	expectedResult = (string) "1011111111100110011001100110011001100110011001100110011001100110";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 12.375;
-	expectedResult = (string) "0100000000101000110000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 1.0;
-	expectedResult = (string) "0011111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 0.375;
-	expectedResult = (string) "0011111111011000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -2.0;
-	expectedResult = (string) "1100000000000000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 83.0;
-	expectedResult = (string) "0100000001010100110000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -2625.0;
-	expectedResult = (string) "1100000010100100100000100000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = 0.5;
-	expectedResult = (string) "0011111111100000000000000000000000000000000000000000000000000000";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	doubleInput = -1302.12345678;
-	expectedResult = (string) "1100000010010100010110000111111001101011011101000100001001000111";
-	actualResult = Double::doubleToBinary64StringType(doubleInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// TODO(thoangminh): Check the accuracy of this method in C++
-//    doubleInput = -1302.123456789;
-//    expectedResult = (string) "1100000010010100010110000111111001101011011101001101110011100101";
-//    actualResult = Double::doubleToBinary64StringType(doubleInput);
-//    ASSERT_STR(expectedResult, actualResult);
-//    free(actualResult);
-}
-
-TEST(JavaLang, DoubleBinary64StringTypeToDouble) {
-	string Binary64StringTypeInput;
-	double expectedResult;
-	double actualResult;
-	
-	Binary64StringTypeInput = (string) "0000000000000000000000000000000000000000000000000000000000000000";
-	expectedResult = 0;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0111111111110000000000000000000000000000000000000000000000000000";
-	expectedResult = POSITIVE_INFINITY_DOUBLE;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "1111111111110000000000000000000000000000000000000000000000000000";
-	expectedResult = NEGATIVE_INFINITY_DOUBLE;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0111111111111111111111111111111111111111111111111111111111111111";
-	expectedResult = NaN_NUMBER_DOUBLE;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "1011111111100110011001100110011001100110011001100110011001100110";
-	expectedResult = -0.7;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0100000000101000110000000000000000000000000000000000000000000000";
-	expectedResult = 12.375;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0011111111110000000000000000000000000000000000000000000000000000";
-	expectedResult = 1.0;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0011111111011000000000000000000000000000000000000000000000000000";
-	expectedResult = 0.375;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "1100000000000000000000000000000000000000000000000000000000000000";
-	expectedResult = -2.0;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0100000001010100110000000000000000000000000000000000000000000000";
-	expectedResult = 83.0;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "1100000010100100100000100000000000000000000000000000000000000000";
-	expectedResult = -2625.0;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "0011111111100000000000000000000000000000000000000000000000000000";
-	expectedResult = 0.5;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-	
-	Binary64StringTypeInput = (string) "1100000010010100010110000111111001101011011101000100001001000111";
-	expectedResult = -1302.12345678;
-	actualResult = Double::binary64StringTypeToDouble(Binary64StringTypeInput);
-	ASSERT_DBL_NEAR(expectedResult, actualResult);
-}
-
-TEST(JavaLang, DoubleLongBitsToBinary64StringType) {
-	long longBitsInput;
-	string expectedResult;
-	string actualResult;
-	
-	// LongBits of 0
-	longBitsInput = 0;
-	expectedResult = (string) "0000000000000000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of POSITIVE_INFINITY_DOUBLE;
-	longBitsInput = 9218868437227405312;
-	expectedResult = (string) "0111111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of NEGATIVE_INFINITY_DOUBLE
-	longBitsInput = -9218868437227405312;
-	expectedResult = (string) "1111111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of NaN_NUMBER_DOUBLE
-	longBitsInput = 9223372036854775807;
-	expectedResult = (string) "0111111111111111111111111111111111111111111111111111111111111111";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of -0.7
-	longBitsInput = -4604480259023595110;
-	expectedResult = (string) "1011111111100110011001100110011001100110011001100110011001100110";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of 12.375
-	longBitsInput = 4623156123728347136;
-	expectedResult = (string) "0100000000101000110000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of 1.0
-	longBitsInput = 4607182418800017408;
-	expectedResult = (string) "0011111111110000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of 0.375
-	longBitsInput = 4600427019358961664;
-	expectedResult = (string) "0011111111011000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of -2
-	longBitsInput = -4611686018427387904;
-	expectedResult = (string) "1100000000000000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of 83
-	longBitsInput = 4635541022703616000;
-	expectedResult = (string) "0100000001010100110000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of -2625
-	longBitsInput = -4657990851119546368;
-	expectedResult = (string) "1100000010100100100000100000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of 0.5
-	longBitsInput = 4602678819172646912;
-	expectedResult = (string) "0011111111100000000000000000000000000000000000000000000000000000";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
-	
-	// LongBits of -1302.12345678
-	longBitsInput = -4653441614972469831;
-	expectedResult = (string) "1100000010010100010110000111111001101011011101000100001001000111";
-	actualResult = Double::longBitsToBinary64StringType(longBitsInput);
-	ASSERT_STR(expectedResult, actualResult);
-	free(actualResult);
+	actualResultDoubleMin = Double::min(variableDoubleMin1, variableDoubleMin2);
+	ASSERT_DBL_FAR(expectedResultDoubleMin, actualResultDoubleMin);
 }
 
 TEST(JavaLang, DoubleLongBitsToDouble) {
