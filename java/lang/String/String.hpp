@@ -215,9 +215,9 @@ namespace Java {
                 if (target == nullptr) {
                     target = "\0";
                 }
-                this->size = (int) __builtin_strlen(target);
+                this->size = lengthPointerChar(target);
                 this->capacity = this->size == 0 ? -1 : this->size;
-                this->original = __builtin_strdup(target);
+                this->original = stringCopy(target);
             }
 
             /**

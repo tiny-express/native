@@ -35,16 +35,14 @@
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
-    register TYPE*pointer;\
-    for (pointer = target; *pointer; ++pointer);\
-    return pointer - target;\
+    return __builtin_strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
 inline int lengthPointerPointer##NAME(TYPE **target) {\
     if (target == nullptr) return 0;\
-    TYPE**pointer;\
+    register TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }

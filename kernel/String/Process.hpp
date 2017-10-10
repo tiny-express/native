@@ -341,6 +341,16 @@ inline char *stringConcat(char *target, char *subTarget) {
 }
 
 /**
+ * String copy
+ *
+ * @param target
+ * @return char*
+ */
+inline char *stringCopy(const char *target) {
+	return __builtin_strdup(target);
+}
+
+/**
  * String from to
  *
  * @param target
