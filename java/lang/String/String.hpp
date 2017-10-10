@@ -100,7 +100,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            String(const StringBuilder &stringBuilder);
+            explicit String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -209,23 +209,28 @@ namespace Java {
             /**
              * Construct a new String from specific const_string
              *
-             * @param original
+             * @param target
              */
-			String(const_string original);
+            inline String(const_string target) {
+                this->size = (int) __builtin_strlen(target);
+                this->capacity = this->size == 0 ? -1 : this->size;
+                this->original  = (string) __builtin_malloc((size_t) this->size);
+                __builtin_bcopy(target, this->original , (size_t) this->size);
+            }
 
             /**
              * Construct a new String from specific string
              *
              * @param original
              */
-			String(string original);
+            String(string original);
 
             /**
              * Construct a new String from specific std::string
              *
              * @param target
              */
-			String(const std::string &target);
+            String(const std::string &target);
 
             /**
              * Construct a new String from char array with specific length

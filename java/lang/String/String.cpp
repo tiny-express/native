@@ -62,15 +62,6 @@ String::String() {
 	this->capacity = DEFAULT_CAPACITY;
 }
 
-String::String(const_string target) {
-	if (target == nullptr) {
-		target = "\0";
-	}
-	this->original = strdup(target);
-	this->size = lengthPointerChar((string) target);
-	this->capacity = this->size == 0 ? -1 : this->size;
-}
-
 String::String(string target) {
 	if (target == nullptr) {
 		target = (string) "\0";

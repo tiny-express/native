@@ -47,8 +47,8 @@ void StdStringConstructor(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringConstructor)->Range(100000, 100000);
-BENCHMARK(StdStringConstructor)->Range(100000, 100000);
+BENCHMARK(JavaLangStringConstructor)->Range(RANGE, RANGE);
+BENCHMARK(StdStringConstructor)->Range(RANGE, RANGE);
 
 void JavaLangStringLength(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -70,8 +70,8 @@ void StdStringSize(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringLength)->Range(100000, 100000);
-BENCHMARK(StdStringSize)->Range(100000, 100000);
+BENCHMARK(JavaLangStringLength)->Range(RANGE, RANGE);
+BENCHMARK(StdStringSize)->Range(RANGE, RANGE);
 
 void JavaLangStringContains(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -97,5 +97,5 @@ void StdStringFind(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringContains)->Range(100000, 100000);
-BENCHMARK(StdStringFind)->Range(100000, 100000);
+BENCHMARK(JavaLangStringContains)->Range(RANGE, RANGE);
+BENCHMARK(StdStringFind)->Range(RANGE, RANGE);

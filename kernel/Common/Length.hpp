@@ -35,7 +35,7 @@
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
-    TYPE*pointer;\
+    register TYPE*pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }
