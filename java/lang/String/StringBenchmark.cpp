@@ -73,6 +73,35 @@ void StdStringSize(benchmark::State& state) {
 BENCHMARK(JavaLangStringLength)->Range(RANGE, RANGE);
 BENCHMARK(StdStringSize)->Range(RANGE, RANGE);
 
+void JavaLangStringOperatorPlus(benchmark::State& state) {
+    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+void StdStringOperatorPlus(benchmark::State& state) {
+    std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+//BENCHMARK(JavaLangStringOperatorPlus)->Range(RANGE, RANGE);
+BENCHMARK(StdStringOperatorPlus)->Range(RANGE, RANGE);
+
 void JavaLangStringContains(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"

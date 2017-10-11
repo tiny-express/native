@@ -170,7 +170,7 @@ public:
 		 */
 		string toString() {
 			if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
-				string result = strdup("");
+				string result = stringCopy("");
 				for (char element : *this) {
 					string result_holder = result;
 					result = stringAppend(&result, element);

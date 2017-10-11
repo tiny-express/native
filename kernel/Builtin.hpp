@@ -24,10 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_LENGTH_HPP
-#define NATIVE_COMMON_LENGTH_HPP
+#ifndef NATIVE_KERNEL_BUILTIN_HPP
+#define NATIVE_KERNEL_BUILTIN_HPP
 
-#include "../Type.hpp"
+#include "Type.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -58,7 +58,27 @@ P_P_LEN(Char, char);
  * @return TRUE or FALSE
  */
 inline boolean isEmptyString(const char *input) {
-	return lengthPointerChar(input) == 0;
+    return lengthPointerChar(input) == 0;
 }
 
-#endif
+/**
+ * Allocate memory
+ *
+ * @param size
+ * @return
+ */
+inline void *allocateMemory(int size) {
+    return __builtin_malloc(size);
+}
+
+/**
+ * String copy
+ *
+ * @param target
+ * @return char*
+ */
+inline char *stringCopy(const char *target) {
+    return __builtin_strdup(target);
+}
+
+#endif //NATIVE_KERNEL_BUILTIN_HPP

@@ -28,7 +28,7 @@
 #define NATIVE_COMMON_APPEND_HPP
 
 #include "../Common.hpp"
-#include "Length.hpp"
+#include "../Builtin.hpp"
 #include <memory>
 #include <cstdio>
 #include <cstdlib>

@@ -1003,7 +1003,7 @@ namespace Java {
 				if (this->original != nullptr) {
 					free(this->original);
 				}
-				this->original = strdup(target.original);
+				this->original = stringCopy(target.original);
 				this->size = target.size;
 				this->capacity = target.capacity;
 				return *this;

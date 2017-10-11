@@ -66,7 +66,7 @@ String::String(string target) {
 	if (target == nullptr) {
 		target = (string) "\0";
 	}
-	this->original = strdup(target);
+	this->original = stringCopy(target);
 	this->size = lengthPointerChar(target);
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -88,32 +88,32 @@ String::String(Array<byte> &byteArray) {
 	for (byte byte : byteArray) {
 		chars.push((char) byte);
 	}
-	this->original = strdup(String::fromCharArray(chars).toString());
+	this->original = stringCopy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const String &target) {
-	this->original = strdup(target.original);
+	this->original = stringCopy(target.original);
 	this->size = target.size;
 	this->capacity = this->size == 0 ? -1 : this->size;
     this->hash = target.hash;
 }
 
 String::String(const std::string &target) {
-	this->original = (string) strdup(target.c_str());
+	this->original = (string) stringCopy(target.c_str());
 	this->size = (int) target.size();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuilder &stringBuilder) {
-    this->original = strdup(stringBuilder.toString());
+    this->original = stringCopy(stringBuilder.toString());
     this->size = stringBuilder.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuffer &stringBuffer) {
-    this->original = strdup(stringBuffer.getValue());
+    this->original = stringCopy(stringBuffer.getValue());
     this->size = stringBuffer.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -135,7 +135,7 @@ int String::getSize() const {
 }
 
 String String::clone() {
-	string pointerHolder = strdup(this->original);
+	string pointerHolder = stringCopy(this->original);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
@@ -321,6 +321,7 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	result = fromIndex - result;
 	return result;
 }
+
 
 // boolean String::matches(String regex) const {
 // 	int result = stringMatches(this->original, regex.toString());

@@ -748,7 +748,7 @@ string BitSet::toString() const {
     stringBuilder.append('}');
 
     free(this->backupForToString);
-    this->backupForToString = strdup(stringBuilder.toString());
+    this->backupForToString = stringCopy(stringBuilder.toString());
 
     return this->backupForToString;
 }

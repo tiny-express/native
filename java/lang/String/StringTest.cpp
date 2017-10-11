@@ -822,7 +822,7 @@ TEST (JavaLang, StringOperatorPlusEqualsString) {
 
 TEST (JavaLang, StringMemoryCheck) {
     // Test create object String with validString and change data of validString
-    string validString = strdup("foodtiny");
+    string validString = stringCopy("foodtiny");
     String stringTest = validString;
     free(validString);
 

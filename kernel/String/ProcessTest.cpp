@@ -380,12 +380,12 @@ TEST (KernelStringProcess, StringTo) {
 
 TEST (KernelStringProcess, StringCopy) {
 	char *target = (string) "Hello World";
-	char *result = strdup(target);
+	char *result = stringCopy(target);
 	ASSERT_STR(target, result);
 	free(result);
 	
 	target = (string) "";
-	result = strdup(target);
+	result = stringCopy(target);
 	ASSERT_STR(target, result);
 	free(result);
 }

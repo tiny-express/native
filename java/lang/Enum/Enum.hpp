@@ -42,15 +42,15 @@ namespace Java {
 
         public:
             Enum(const_string name, int ordinal) {
-                this->name = strdup(name);
+                this->name = stringCopy(name);
                 this->ordinal = ordinal;
-                this->ordinalString = strdup("");
+                this->ordinalString = stringCopy("");
             }
 
             Enum(string name, int ordinal) {
-                this->name = strdup(name);
+                this->name = stringCopy(name);
                 this->ordinal = ordinal;
-                this->ordinalString = strdup("");
+                this->ordinalString = stringCopy("");
             }
 
             ~Enum() {

@@ -27,8 +27,7 @@
 #ifndef NATIVE_KERNEL_STRING_CONVERT_HPP
 #define NATIVE_KERNEL_STRING_CONVERT_HPP
 
-#include "../Type.hpp"
-#include "../Common/Length.hpp"
+#include "../Builtin.hpp"
 #include "Process.hpp"
 
 /**
@@ -78,7 +77,7 @@ STR_TO(Double, double, "%lg");
  */
 inline string stringFromChar(char target) {
 	if (target == '\0') {
-		return strdup("");
+		return stringCopy("");
 	}
 	auto *result = (char *) calloc(2, sizeof(char));
 	result[ 0 ] = target;
@@ -156,10 +155,10 @@ inline boolean stringToBoolean(string target) {
  */
 inline string stringFromBoolean(int target) {
 	if (!target) {
-		return strdup("false");
+		return stringCopy("false");
 	}
 
-	return strdup("true");
+	return stringCopy("true");
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP
