@@ -60,16 +60,31 @@ inline boolean isEmptyString(const char *input) {
 }
 
 /**
- * Allocate memory
+ * Allocate new memory with specific size
  *
  * @param size
- * @return
+ * @return void pointer
  */
 inline void *allocateMemory(int size) {
 #ifdef DARWIN
     return malloc(size);
 #else
     return __builtin_malloc(size);
+#endif
+}
+
+/**
+ * Re-allocate memory with new capacity
+ *
+ * @param currentPointer
+ * @param newCapacity
+ * @return void*
+ */
+inline void *allocateMemory(void *currentPointer, int newCapacity) {
+#ifdef DARWIN
+    return realloc(currentPointer, newCapacity);
+#else
+    return __builtin_realloc(currentPointer, newCapacity);
 #endif
 }
 

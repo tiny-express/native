@@ -28,6 +28,6 @@
 #define NATIVE_BENCHMARK_HPP
 
 #include <benchmark/benchmark.h>
-#define RANGE 10000000
+#define RANGE 1000000
 
 #endif //NATIVE_BENCHMARK_HPP

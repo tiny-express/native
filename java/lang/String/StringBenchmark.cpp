@@ -99,7 +99,7 @@ void StdStringOperatorPlus(benchmark::State& state) {
     }
 }
 
-//BENCHMARK(JavaLangStringOperatorPlus)->Range(RANGE, RANGE);
+BENCHMARK(JavaLangStringOperatorPlus)->Range(RANGE, RANGE);
 BENCHMARK(StdStringOperatorPlus)->Range(RANGE, RANGE);
 
 void JavaLangStringContains(benchmark::State& state) {

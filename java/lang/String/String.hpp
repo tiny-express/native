@@ -47,7 +47,7 @@ namespace Java {
 #define STRING_OPERATOR_PLUS  \
 		if (newLength >= this->capacity) {\
 			this->capacity = newLength << 1;\
-			this->original = (string) realloc(this->original, this->capacity);\
+			this->original = (string) allocateMemory(this->original, this->capacity);\
 		}\
 		memcpy(&this->original[this->size], &targetValue[0], targetLength);\
 		this->original[newLength] = '\0';\
@@ -92,7 +92,7 @@ namespace Java {
              *
              * @param byteArray
              */
-            String(Array<byte> &byteArray);
+			explicit String(Array<byte> &byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -108,7 +108,7 @@ namespace Java {
              *
              * @param charArray
              */
-            String(Array<char> &charArray);
+			explicit String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -116,7 +116,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            String(const StringBuffer &stringBuffer);
+			explicit String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -148,7 +148,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            String(Array<char> &charArray, int offset, int count);
+			explicit String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -175,7 +175,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            String(Array<byte> &byteArray, int offset, int length);
+			explicit String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -961,8 +961,8 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
 			inline String &operator+=(const_string target) {
-				auto targetValue = (string) target;
-				int targetLength = lengthPointerChar((string) target);
+				auto targetValue = target;
+				int targetLength = lengthPointerChar(target);
 				int newLength = this->size + targetLength;
 				STRING_OPERATOR_PLUS
 				return *this;
