@@ -44,7 +44,7 @@
  */
 inline char **appendPointerChar(char **target, char *append) {
 	int targetLength = lengthPointerPointerChar(target);
-	auto **pointer = (char **) malloc((targetLength + 2)* sizeof(char *));
+	auto **pointer = (char **) allocateMemory((targetLength + 2)* sizeof(char *));
 	memcpy(pointer, target, targetLength * sizeof(char *));
 	*( pointer + targetLength ) = append;
 	*( pointer + targetLength + 1 ) = nullptr;

@@ -54,7 +54,7 @@ inline char *stringReplace(char *target, const char *findString, const char *rep
 			i += oldLength - 1;
 		}
 	}
-	result = (char *)malloc((size_t) i + 1 + count * ( newLength - oldLength ));
+	result = (char *)allocateMemory((size_t) i + 1 + count * ( newLength - oldLength ));
 	
 	i = 0;
 	while (*target) {

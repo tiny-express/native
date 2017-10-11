@@ -27,10 +27,8 @@
 #ifndef NATIVE_KERNEL_BUILTIN_HPP
 #define NATIVE_KERNEL_BUILTIN_HPP
 
+#include "Platform.hpp"
 #include "Type.hpp"
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
 
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
@@ -68,7 +66,11 @@ inline boolean isEmptyString(const char *input) {
  * @return
  */
 inline void *allocateMemory(int size) {
+#ifdef DARWIN
+    return malloc(size);
+#else
     return __builtin_malloc(size);
+#endif
 }
 
 /**

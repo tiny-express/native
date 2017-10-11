@@ -30,9 +30,6 @@
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
 
-#include <cstddef>
-#include <cwchar>
-
 #ifdef WIN
 #define boolean bool
 #else
