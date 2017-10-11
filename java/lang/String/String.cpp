@@ -46,7 +46,7 @@ using namespace Java::Lang;
 	if (offset > array.length - length) {\
 		throw StringIndexOutOfBoundsException(offset + length);\
 	}\
-	this->original = (string) malloc(( length + 1) * sizeof(char));\
+	this->original = (string) allocateMemory(( length + 1) * sizeof(char));\
 	int index;\
 	for (index = 0; index < length; offset++, index++) {\
 		this->original [index] = array.get(offset);\
@@ -56,7 +56,7 @@ using namespace Java::Lang;
 	this->capacity = this->size == 0 ? -1 : this->size;\
 
 String::String() {
-	this->original = (string) malloc(DEFAULT_CAPACITY * sizeof(char));
+	this->original = (string) allocateMemory(DEFAULT_CAPACITY * sizeof(char));
 	this->original[0] = '\0';
 	this->size = 0;
 	this->capacity = DEFAULT_CAPACITY;
@@ -185,7 +185,7 @@ boolean String::endsWith(const String &suffixString) const {
 }
 
 String String::fromCharArray(Array<char> &charArray) {
-	string str = (string) malloc((charArray.length + 1) * sizeof(char));
+	string str = (string) allocateMemory((charArray.length + 1) * sizeof(char));
 #ifdef LINUX
 	register
 #endif

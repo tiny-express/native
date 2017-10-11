@@ -356,10 +356,10 @@ double Double::min(double doubleA, double doubleB) {
 //}
 
 String Double::doubleToBinary64StringType(double doubleInput) {
-    auto integerPartNormalizeForm = (string) malloc (2048 * sizeof(char));
-    auto fractionPartNormalizeForm = (string) malloc (54 * sizeof(char));
-    auto doubleInputNormalizeForm = (string) malloc (2102 * sizeof(char));
-    auto resultDoubleToBinary64StringType = (string) malloc (65 * sizeof(char));
+    auto integerPartNormalizeForm = (string) allocateMemory (2048 * sizeof(char));
+    auto fractionPartNormalizeForm = (string) allocateMemory (54 * sizeof(char));
+    auto doubleInputNormalizeForm = (string) allocateMemory (2102 * sizeof(char));
+    auto resultDoubleToBinary64StringType = (string) allocateMemory (65 * sizeof(char));
 
     int powerExponentBase2 = 0;
     int integerPartDoubleInput;
@@ -644,7 +644,7 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
 }
 
 String Double::longBitsToBinary64StringType(long longBitsInput) {
-    auto resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
+    auto resultLongBitsToBinary64StringType = (string) allocateMemory(65 * sizeof(char));
     int index;
     int i;
 
