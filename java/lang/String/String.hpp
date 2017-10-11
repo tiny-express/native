@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_STRING_STRING_HPP_
-#define JAVA_LANG_STRING_STRING_HPP_
+#ifndef JAVA_LANG_STRING_STRING_HPP
+#define JAVA_LANG_STRING_STRING_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
@@ -46,10 +46,10 @@ namespace Java {
 
 #define STRING_OPERATOR_PLUS  \
 		if (newLength >= this->capacity) {\
-			this->capacity = newLength << 1;\
+			this->capacity = newLength + 1 << 1;\
 			this->original = (string) allocateMemory(this->original, this->capacity);\
 		}\
-		memcpy(&this->original[this->size], &targetValue[0], targetLength);\
+		memcpy(&this->original[this->size], targetValue, targetLength);\
 		this->original[newLength] = '\0';\
 		this->size = newLength;
 
@@ -1192,4 +1192,4 @@ namespace Java {
 	} // namespace Lang
 } // namespace Java
 
-#endif  // JAVA_LANG_STRING_STRING_HPP_
+#endif  // JAVA_LANG_STRING_STRING_HPP

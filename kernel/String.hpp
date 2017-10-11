@@ -27,12 +27,7 @@
 #ifndef NATIVE_KERNEL_STRING_HPP
 #define NATIVE_KERNEL_STRING_HPP
 
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <cctype>
-#include <cstdarg>
-
+#include "Builtin.hpp"
 #include "String/Convert.hpp"
 #include "String/Process.hpp"
 #include "String/Url.hpp"

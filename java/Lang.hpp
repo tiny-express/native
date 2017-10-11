@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_HPP_
-#define JAVA_LANG_HPP_
+#ifndef JAVA_LANG_HPP
+#define JAVA_LANG_HPP
 
 #include "lang/Appendable/Appendable.hpp"
 #include "lang/AutoCloseable/AutoCloseable.hpp"
@@ -54,4 +54,4 @@
 #include "lang/Throwable/Throwable.hpp"
 #include "lang/Thread/Thread.hpp"
 
-#endif  // JAVA_LANG_HPP_
+#endif  // JAVA_LANG_HPP

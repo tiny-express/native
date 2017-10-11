@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_RUNNABLE_HPP_
-#define JAVA_LANG_RUNNABLE_HPP_
+#ifndef JAVA_LANG_RUNNABLE_HPP
+#define JAVA_LANG_RUNNABLE_HPP
 
 namespace Java {
 		namespace Lang {
@@ -36,4 +36,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_LANG_RUNNABLE_HPP_
+#endif //JAVA_LANG_RUNNABLE_HPP

@@ -27,9 +27,45 @@
 #ifndef NATIVE_KERNEL_BUILTIN_HPP
 #define NATIVE_KERNEL_BUILTIN_HPP
 
+// Definitions and macros
 #include "Platform.hpp"
 #include "Type.hpp"
 
+// C Compatible Library
+#include <cerrno>
+#include <cassert>
+#include <cstdio>
+#include <cmath>
+#include <cstddef>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <climits>
+#include <cstdarg>
+#include <cctype>
+#include <ctime>
+
+#ifdef LINUX
+#include <stdint.h>
+#endif
+
+#ifdef DAWIN
+#include <stdlib.h>
+#include <mach/mach_time.h>
+#endif
+
+// C++ Standard Library
+#include <thread>
+#include <memory>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <type_traits>
+#include <string>
+#include <iostream>
+
+// Builtin functions
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\

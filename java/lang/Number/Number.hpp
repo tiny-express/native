@@ -26,8 +26,8 @@
 
 // https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
 
-#ifndef JAVA_LANG_NUMBER_HPP_
-#define JAVA_LANG_NUMBER_HPP_
+#ifndef JAVA_LANG_NUMBER_HPP
+#define JAVA_LANG_NUMBER_HPP
 
 #include "../Object/Object.hpp"
 
@@ -44,4 +44,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_NUMBER_HPP_
+#endif  // JAVA_LANG_NUMBER_HPP

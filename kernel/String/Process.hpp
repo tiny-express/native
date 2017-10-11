@@ -27,7 +27,6 @@
 #ifndef NATIVE_KERNEL_STRING_PROCESS_HPP
 #define NATIVE_KERNEL_STRING_PROCESS_HPP
 
-#include "../Builtin.hpp"
 #include "../Common/Segment.hpp"
 
 /**

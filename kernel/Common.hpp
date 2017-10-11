@@ -24,8 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_HPP
-#define NATIVE_COMMON_HPP
+#ifndef NATIVE_KERNEL_COMMON_HPP
+#define NATIVE_KERNEL_COMMON_HPP
+
+// C++ builtin functions
+#include "Builtin.hpp"
 
 #define _BOOL                   1
 #define CHAR                    2
@@ -63,4 +66,4 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
 #include "Common/Join.hpp"
 #include "Common/Segment.hpp"
 
-#endif //NATIVE_COMMON_HPP
+#endif //NATIVE_KERNEL_COMMON_HPP

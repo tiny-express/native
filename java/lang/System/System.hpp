@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_SYSTEM_SYSTEM_HPP_
-#define JAVA_LANG_SYSTEM_SYSTEM_HPP_
+#ifndef JAVA_LANG_SYSTEM_SYSTEM_HPP
+#define JAVA_LANG_SYSTEM_SYSTEM_HPP
 
 #include "../../../kernel/DateTime.hpp"
 #include "../Object/Object.hpp"
@@ -63,4 +63,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_SYSTEM_SYSTEM_HPP_
+#endif  // JAVA_LANG_SYSTEM_SYSTEM_HPP
