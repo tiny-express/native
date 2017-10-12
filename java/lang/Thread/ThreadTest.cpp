@@ -82,8 +82,6 @@ public:
     }
 
     void run() override {
-        stringstream out;
-        out << this_thread::get_id();
         tid = (unsigned long)pthread_self();
     }
 };
