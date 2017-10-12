@@ -74,15 +74,9 @@ BENCHMARK(JavaLangStringLength)->Range(RANGE, RANGE);
 BENCHMARK(StdStringSize)->Range(RANGE, RANGE);
 
 void JavaLangStringOperatorPlus(benchmark::State& state) {
-    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
-            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
-            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
-            " sit amet consequat magna tristique ut.";
+    String source = "Lorem ipsum dolor sit amet";
     while (state.KeepRunning()) {
-        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
-                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
-                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
-                " sit amet consequat magna tristique ut.";
+        source += "Lorem ipsum dolor sit amet";
     }
 }
 

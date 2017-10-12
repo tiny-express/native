@@ -42,42 +42,48 @@
 using namespace Java::IO;
 
 namespace Java {
-	namespace Lang {
+    namespace Lang {
 
 #define STRING_OPERATOR_PLUS  \
-		if (newLength >= this->capacity) {\
-			this->capacity = newLength + 1 << 1;\
-			this->original = (string) allocateMemory(this->original, this->capacity);\
-		}\
-		memcpy(&this->original[this->size], targetValue, targetLength);\
-		this->original[newLength] = '\0';\
-		this->size = newLength;
+        if (newLength >= this->capacity) {\
+            this->capacity = newLength << 1;\
+            this->original = (string) allocateMemory(this->original, this->capacity);\
+        }\
+        memcpy(&this->original[this->size], targetValue, targetLength);\
+        this->original[newLength] = '\0';\
+        this->size = newLength;
 
-		class StringBuilder;
-		class StringBuffer;
-		class Short;
-		class Integer;
-		class Long;
-		class Float;
-		class Double;
+        class StringBuilder;
 
-		class String :
-				public Object,
-				public virtual Serializable,
-				public virtual Comparable<String>,
-				public virtual CharSequence {
-		private:
-			string original;
-			int size;
-			int capacity;
+        class StringBuffer;
+
+        class Short;
+
+        class Integer;
+
+        class Long;
+
+        class Float;
+
+        class Double;
+
+        class String :
+                public Object,
+                public virtual Serializable,
+                public virtual Comparable<String>,
+                public virtual CharSequence {
+        private:
+            string original;
+            long size;
+            long capacity;
             mutable int hash = 0;
 
-		public:
+        public:
             /**
              * Initializes a newly created String object
              * so that it represents an empty character sequence.
              */
-			String();
+            String();
 
             /**
              * Initializes a newly created String object
@@ -92,7 +98,7 @@ namespace Java {
              *
              * @param byteArray
              */
-			explicit String(Array<byte> &byteArray);
+            explicit String(Array<byte> &byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -108,7 +114,7 @@ namespace Java {
              *
              * @param charArray
              */
-			explicit String(Array<char> &charArray);
+            explicit String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -116,7 +122,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-			explicit String(const StringBuffer &stringBuffer);
+            explicit String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -148,7 +154,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-			explicit String(Array<char> &charArray, int offset, int count);
+            explicit String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -175,7 +181,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-			explicit String(Array<byte> &byteArray, int offset, int length);
+            explicit String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -245,15 +251,15 @@ namespace Java {
             /**
              * Destructor
              */
-			~String();
+            ~String();
 
-		public:
+        public:
             /**
              * Return size of String
              *
              * @return int
              */
-			int getSize() const;
+            int getSize() const;
 
             /**
              * String character at index
@@ -261,7 +267,7 @@ namespace Java {
              * @param index
              * @return String
              */
-			char charAt(int index) const override;
+            char charAt(int index) const override;
 
             /**
              * Returns the character (Unicode code point) at the specified index.
@@ -270,7 +276,7 @@ namespace Java {
              * @return int
              */
             // TODO (anhnt) need Character
-			// int codePointAt(int index);
+            // int codePointAt(int index);
 
             /**
              * Returns the character (Unicode code point) before the specified index.
@@ -297,7 +303,7 @@ namespace Java {
              *
              * @return String
              */
-			String clone();
+            String clone();
 
             /**
              * String compare to another string
@@ -309,7 +315,7 @@ namespace Java {
              * and a value greater than 0 if this String is lexicographically
              * greater than the String argument.
              */
-			int compareTo(const String &anotherString) const override;
+            int compareTo(const String &anotherString) const override;
 
             /**
              * String compare with another String but ignore case
@@ -322,7 +328,7 @@ namespace Java {
              * and a value greater than 0 if this String is lexicographically
              * greater than the String argument ignoring case considerations..
              */
-			int compareToIgnoreCase(const String &targetString) const;
+            int compareToIgnoreCase(const String &targetString) const;
 
             /**
              * String concatenation
@@ -330,7 +336,7 @@ namespace Java {
              * @param target
              * @return String
              */
-			String concat(String target);
+            String concat(String target);
 
             /**
              * Find substring inside this String
@@ -350,7 +356,7 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
-			boolean contentEquals(const CharSequence &charSequence);
+            boolean contentEquals(const CharSequence &charSequence);
 
             /**
              * Returns the String representation of the char array argument.
@@ -360,7 +366,7 @@ namespace Java {
              * @param charArray
              * @return a String that contains the characters of the charArray.
              */
-			static String copyValueOf(Array<char> &charArray);
+            static String copyValueOf(Array<char> &charArray);
 
             /**
              * Returns the String representation of a specific subarray of the char array argument.
@@ -373,7 +379,7 @@ namespace Java {
              * @return a String that contains the characters of the
              * specified subarray of charArray.
              */
-			static String copyValueOf(Array<char> &charArray, int offset, int count);
+            static String copyValueOf(Array<char> &charArray, int offset, int count);
 
             /**
              * String endswith a suffix
@@ -383,7 +389,7 @@ namespace Java {
              * is a suffix of the character sequence represented by this String;
              * False otherwise
              */
-			boolean endsWith(const String &suffixString) const;
+            boolean endsWith(const String &suffixString) const;
 
             /**
              * Compares this String to the specified object.
@@ -393,16 +399,16 @@ namespace Java {
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise
              */
-			template <class T>
-			boolean equals(T anObject) const {
-				if (Object::equals(anObject)) {
-					return true;
-				}
-				if (instanceof<String>(anObject)) {
-					return (boolean) stringEquals(original, anObject.toString());
-				}
-				return false;
-			}
+            template<class T>
+            boolean equals(T anObject) const {
+                if (Object::equals(anObject)) {
+                    return true;
+                }
+                if (instanceof<String>(anObject)) {
+                    return (boolean) stringEquals(original, anObject.toString());
+                }
+                return false;
+            }
 
             /**
              * Compares this String to another String, ignoring case considerations.
@@ -426,7 +432,7 @@ namespace Java {
              *
              * @return Array<byte>
              */
-			Array<byte> getBytes() const;
+            Array<byte> getBytes() const;
 
             /**
              * Encodes this String into a sequence of bytes using the named charset,
@@ -470,7 +476,7 @@ namespace Java {
              * @param index
              * @return String
              */
-			String getStringFromIndex(int index) const;
+            String getStringFromIndex(int index) const;
 
             /**
              * Returns a hash code for this string.
@@ -487,7 +493,7 @@ namespace Java {
              * @return index of the first occurrence of character,
              * or -1 if there is no such occurrence.
              */
-			int indexOf(int character) const;
+            int indexOf(int character) const;
 
             /**
              * Returns the index within this String
@@ -509,7 +515,7 @@ namespace Java {
              * @return index of the first occurrence of the specified character,
              * or -1 if there is no such occurrence.
              */
-			int indexOf(int character, int fromIndex) const;
+            int indexOf(int character, int fromIndex) const;
 
             /**
              * Returns the index within this string
@@ -521,14 +527,14 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * start from fromIndex or -1 if there is no such occurrence.
              */
-			int indexOf(String subString, int fromIndex) const;
+            int indexOf(String subString, int fromIndex) const;
 
             /**
              * Determine if this String is empty
              *
              * @return true if, and only if, length() is 0.
              */
-			boolean isEmpty() const;
+            boolean isEmpty() const;
 
             /**
              * Returns a new String composed of copies of the CharSequence elements
@@ -558,7 +564,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-			int lastIndexOf(int character);
+            int lastIndexOf(int character);
 
             /**
              * Returns the index within this string of the last occurrence
@@ -570,7 +576,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-			int lastIndexOf(int character, int fromIndex);
+            int lastIndexOf(int character, int fromIndex);
 
             /**
              * Returns the index within this string of the last occurrence
@@ -580,7 +586,7 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-			int lastIndexOf(String subString) const;
+            int lastIndexOf(String subString) const;
 
             /**
              * Returns the index within this string of the last occurrence
@@ -592,14 +598,14 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-			int lastIndexOf(String subString, int fromIndex) const;
+            int lastIndexOf(String subString, int fromIndex) const;
 
             /**
              * Returns the length of this string
              *
              * @return int
              */
-			inline int length() const override {
+            inline int length() const override {
                 return this->size;
             }
 
@@ -613,7 +619,7 @@ namespace Java {
              * the given regular expression
              */
             // TODO (anhnt) need Pattern
-			// boolean matches(String regex) const;
+            // boolean matches(String regex) const;
 
             /**
              * Returns the index within this String that is offset
@@ -669,7 +675,7 @@ namespace Java {
              * @return a string derived from this String by replacing
              * every occurrence of oldChar with newChar.
              */
-			String replace(char oldChar, char newChar) const;
+            String replace(char oldChar, char newChar) const;
 
             /**
              * Replaces each substring of this string that matches the literal
@@ -692,7 +698,7 @@ namespace Java {
              * if the regular expression's syntax is invalid
              * @return The resulting String
              */
-			String replaceAll(String regex, String replacement) const;
+            String replaceAll(String regex, String replacement) const;
 
             /**
              * Replaces the first substring of this string that matches
@@ -704,7 +710,7 @@ namespace Java {
              * if the regular expression's syntax is invalid
              * @return The resulting String
              */
-			String replaceFirst(String regex, String replacement) const;
+            String replaceFirst(String regex, String replacement) const;
 
             /**
              * Splits this String around matches of the given regular expression.
@@ -715,7 +721,7 @@ namespace Java {
              * @return the array of Strings computed by splitting this String
              * around matches of the given regular expression
              */
-			Array<String> split(String regex) const;
+            Array<String> split(String regex) const;
 
             /**
              * Splits this string around matches of the given regular expression.
@@ -727,7 +733,7 @@ namespace Java {
              * @return array of Strings computed by splitting this String
              * around matches of the given regular expression
              */
-			Array<String> split(String regex, int limit) const;
+            Array<String> split(String regex, int limit) const;
 
             /**
              * Tests if this string starts with the specified prefix.
@@ -736,7 +742,7 @@ namespace Java {
              * @return true if the character sequence represented by the argument is a prefix
              * of the character sequence represented by this string; false otherwise.
              */
-			boolean startsWith(String prefix) const;
+            boolean startsWith(String prefix) const;
 
             /**
              * Tests if the substring of this string beginning
@@ -749,7 +755,7 @@ namespace Java {
              * The result is false if thisOffset is negative or greater than the length
              * of this String object;
              */
-			boolean startsWith(String prefix, int thisOffset) const;
+            boolean startsWith(String prefix, int thisOffset) const;
 
             /**
              * Returns a character sequence that is a subsequence of this sequence.
@@ -793,7 +799,7 @@ namespace Java {
              *
              * @return a newly allocated character array contain
              */
-			Array<char> toCharArray() const;
+            Array<char> toCharArray() const;
 
             /**
              * Converts all of the characters in this String to lower case
@@ -801,16 +807,16 @@ namespace Java {
              *
              * @return the String, converted to lowercase.
              */
-			String toLowerCase() const;
+            String toLowerCase() const;
 
-			/**
-			 * Converts all of the characters in this String to lower case using the rules of the given Locale.
-			 *
-			 * @param locale
-			 * @return the String, converted to lowercase.
-			 */
-			// TODO (anhnt) need Locale
-			// String toLowerCase(Locale locale);
+            /**
+             * Converts all of the characters in this String to lower case using the rules of the given Locale.
+             *
+             * @param locale
+             * @return the String, converted to lowercase.
+             */
+            // TODO (anhnt) need Locale
+            // String toLowerCase(Locale locale);
 
             /**
              * Converts all of the characters in this String to upper case
@@ -818,17 +824,17 @@ namespace Java {
              *
              * @return the String, converted to uppercase.
              */
-			String toUpperCase();
+            String toUpperCase();
 
-			/**
+            /**
             * Converts all of the characters in this String to upper case
             * using the rules of the given locale.
             *
             * @param locale
             * @return the String, converted to uppercase.
             */
-			// TODO need Locale
-			// String toUpperCase(Locale locale);
+            // TODO need Locale
+            // String toUpperCase(Locale locale);
 
             /**
              * Returns a String whose value is this string, with any leading
@@ -837,14 +843,14 @@ namespace Java {
              *
              * @return a String with leading and trailing whitespace removed.
              */
-			String trim();
+            String trim();
 
             /**
              * Return a String a string contain value of this String
              *
              * @return a String contain value of this String
              */
-			string toString() const override ;
+            string toString() const override;
 
             /**
              * Returns the String representation of the boolean argument.
@@ -853,7 +859,7 @@ namespace Java {
              * @return if the argument is true, a String equal to "true" is returned;
              * otherwise, a String equal to "false" is returned.
              */
-			static String valueOf(boolean boolValue);
+            static String valueOf(boolean boolValue);
 
             /**
              * Returns the String representation of the char argument.
@@ -861,7 +867,7 @@ namespace Java {
              * @param charValue
              * @return a String of length 1 containing charValue.
              */
-			static String valueOf(char charValue);
+            static String valueOf(char charValue);
 
             /**
              * Returns the String representation of the string argument.
@@ -869,7 +875,7 @@ namespace Java {
              * @param stringValue
              * @return a String containing stringValue.
              */
-			static String valueOf(string stringValue);
+            static String valueOf(string stringValue);
 
             /**
              * Returns the String representation of the short argument.
@@ -877,7 +883,7 @@ namespace Java {
              * @param shortValue
              * @return a String representation of the short argument.
              */
-			static String valueOf(short shortValue);
+            static String valueOf(short shortValue);
 
             /**
              * Returns the String representation of the int argument.
@@ -885,7 +891,7 @@ namespace Java {
              * @param intValue
              * @return a String representation of the int argument.
              */
-			static String valueOf(int intValue);
+            static String valueOf(int intValue);
 
             /**
              * Returns the String representation of the long argument.
@@ -893,7 +899,7 @@ namespace Java {
              * @param longValue
              * @return a String representation of the long argument.
              */
-			static String valueOf(long longValue);
+            static String valueOf(long longValue);
 
             /**
              * Returns the String representation of the float argument.
@@ -901,7 +907,7 @@ namespace Java {
              * @param floatValue
              * @return a String representation of the float argument.
              */
-			static String valueOf(float floatValue);
+            static String valueOf(float floatValue);
 
             /**
              * Returns the String representation of the double argument.
@@ -909,157 +915,157 @@ namespace Java {
              * @param doubleValue
              * @return a String representation of the double argument.
              */
-			static String valueOf(double doubleValue);
+            static String valueOf(double doubleValue);
 
-		public:
-			/**
+        public:
+            /**
              * Add two String
              *
              * @param target
              * @return a String contain value of this String and target String
              */
-			inline String operator+(const string &target) {
-				auto targetValue = (string) target;
-				int targetLength = lengthPointerChar((string) target);
-				int newLength = this->size + targetLength;
-				STRING_OPERATOR_PLUS
-				return this->original;
-			}
+            inline String operator+(const string &target) {
+                auto targetValue = (string) target;
+                int targetLength = lengthPointerChar((string) target);
+                int newLength = this->size + targetLength;
+                STRING_OPERATOR_PLUS
+                return this->original;
+            }
 
-			/**
+            /**
              * Add two String
              *
              * @param target
              * @return a String contain value of this String and target String
              */
-			inline String operator+(const String &target) {
-				string targetValue = target.original;
-				int targetLength = target.size;
-				int newLength = this->size + target.size;
-				STRING_OPERATOR_PLUS
-				return this->original;
-			}
+            inline String operator+(const String &target) {
+                string targetValue = target.original;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
+                STRING_OPERATOR_PLUS
+                return this->original;
+            }
 
-			/**
+            /**
              * Add this String with string
              *
              * @param target
              * @return a String contain value of this String and target string
              */
-			inline String &operator+=(const String &target) {
-				string targetValue = target.original;
-				int targetLength = target.size;
-				int newLength = this->size + target.size;
-				STRING_OPERATOR_PLUS
-				return *this;
-			}
+            inline String &operator+=(const String &target) {
+                string targetValue = target.original;
+                long targetLength = target.size;
+                long newLength = this->size + target.size;
+                STRING_OPERATOR_PLUS
+                return *this;
+            }
 
-			/**
+            /**
              * Add two String
              *
              * @param target
              * @return a String contain value of this String and target String
              */
-			inline String &operator+=(const_string target) {
-				auto targetValue = target;
-				int targetLength = lengthPointerChar(target);
-				int newLength = this->size + targetLength;
-				STRING_OPERATOR_PLUS
-				return *this;
-			}
+            inline String &operator+=(const_string target) {
+                auto targetValue = target;
+                int targetLength = lengthPointerChar(target);
+                int newLength = this->size + targetLength;
+                STRING_OPERATOR_PLUS
+                return *this;
+            }
 
-			/**
+            /**
             * Add target char to this String and assign value to this String
             *
             * @param target
             * @return a reference to this String
             */
-			inline String &operator+=(const char &target) {
-				string pointerHolder = this->original;
-				stringAppend(&this->original, target);
-				this->size++;
-				this->capacity = this->size;
-				free(pointerHolder);
-				return *this;
-			}
+            inline String &operator+=(const char &target) {
+                string pointerHolder = this->original;
+                stringAppend(&this->original, target);
+                this->size++;
+                this->capacity = this->size;
+                free(pointerHolder);
+                return *this;
+            }
 
-			/**
-			 * Determine if two String is equal
-			 *
-			 * @param target
-			 * @return true if this String is equal to target; false otherwise
-			 */
-			inline boolean operator==(const String &target) const {
-				return stringEquals(this->original, target.toString()) != 0;
-			}
+            /**
+             * Determine if two String is equal
+             *
+             * @param target
+             * @return true if this String is equal to target; false otherwise
+             */
+            inline boolean operator==(const String &target) const {
+                return stringEquals(this->original, target.toString()) != 0;
+            }
 
-			/**
+            /**
             * Assign value from target to this String
             *
             * @param target
             * @return a reference to this String
             */
-			inline String &operator=(const String &target) {
-				if (this->original != nullptr) {
-					free(this->original);
-				}
-				this->original = stringCopy(target.original);
-				this->size = target.size;
-				this->capacity = target.capacity;
-				return *this;
-			}
+            inline String &operator=(const String &target) {
+                if (this->original != nullptr) {
+                    free(this->original);
+                }
+                this->original = stringCopy(target.original);
+                this->size = target.size;
+                this->capacity = target.capacity;
+                return *this;
+            }
 
-			/**
+            /**
             * Determine if two String is not equal
             *
             * @param target
             * @return true if this String is different from target; false otherwise
             */
-			inline boolean operator!=(const String &target) const {
-				return !this->operator==(target);
-			}
+            inline boolean operator!=(const String &target) const {
+                return !this->operator==(target);
+            }
 
-			/**
+            /**
             * Determine if this String is smaller than another String
             *
             * @param target
             * @return true if this String is smaller than target; false otherwise
             */
-			inline boolean operator<(const String &target) const {
-				return strcmp(this->original, target.toString()) < 0;
-			}
+            inline boolean operator<(const String &target) const {
+                return strcmp(this->original, target.toString()) < 0;
+            }
 
-			/**
+            /**
              * Determine if this String is greater than another String
              *
              * @param target
              * @return true if this String is greater than target; false otherwise
              */
-			inline boolean operator>(const String &target) const {
-				return strcmp(this->original, target.toString()) > 0;
-			}
+            inline boolean operator>(const String &target) const {
+                return strcmp(this->original, target.toString()) > 0;
+            }
 
-			/**
+            /**
             * Determine if this String is smaller than or equal to another String
             *
             * @param target
             * @return true if this String is smaller than or equal to target; false otherwise
             */
-			inline boolean operator<=(const String &target) const {
-				return strcmp(this->original, target.toString()) <= 0;
-			}
+            inline boolean operator<=(const String &target) const {
+                return strcmp(this->original, target.toString()) <= 0;
+            }
 
-			/**
+            /**
              * Determine if this String is greater than or equal to another String
              *
              * @param target
              * @return true if this String is greater than or equal to target; false otherwise
              */
-			inline boolean operator>=(const String &target) const {
-				return strcmp(this->original, target.toString()) >= 0;
-			}
+            inline boolean operator>=(const String &target) const {
+                return strcmp(this->original, target.toString()) >= 0;
+            }
 
-		public:
+        public:
             /**
              * Format string
              *
@@ -1067,7 +1073,7 @@ namespace Java {
              * @throw IllegalArgumentException - if not enough arguments
              */
             template<typename T, typename... Args>
-            static String format(const String& format, T value, Args... args) {
+            static String format(const String &format, T value, Args... args) {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
@@ -1098,9 +1104,10 @@ namespace Java {
                         result += printObject(matchedString, value);
 
                         if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                            String remainString(inputStringPtr + matchedResult[0].rm_eo, inputStringLength - matchedResult[0].rm_eo);
+                            String remainString(inputStringPtr + matchedResult[0].rm_eo,
+                                                inputStringLength - matchedResult[0].rm_eo);
                             try {
-								result += String::format(remainString, args...);
+                                result += String::format(remainString, args...);
                             } catch (...) {
                                 regfree(&regex);
                                 throw;
@@ -1124,38 +1131,38 @@ namespace Java {
              * @param format
              * @throw IllegalArgumentException - if not enough arguments
              */
-            static String format(const String& format);
+            static String format(const String &format);
 
-		public:
+        public:
 
-			/**
-			 * Output string value as stream
-			 *
-			 * @param os
-			 * @param target
-			 * @return
-			 */
-			inline friend std::ostream &operator<<(std::ostream &os, const String &target) {
-				os << target.original;
-				return os;
-			}
+            /**
+             * Output string value as stream
+             *
+             * @param os
+             * @param target
+             * @return
+             */
+            inline friend std::ostream &operator<<(std::ostream &os, const String &target) {
+                os << target.original;
+                return os;
+            }
 
-			/**
-			 * Add const_string and String
-			 *
-			 * @param target1
-			 * @param target2
-			 * @return a String contain value of target1 and target2
-			 */
-			inline friend String operator+(String const &target1, String const &target2) {
-				String result = target1;
-				result += target2;
-				return result;
-			}
+            /**
+             * Add const_string and String
+             *
+             * @param target1
+             * @param target2
+             * @return a String contain value of target1 and target2
+             */
+            inline friend String operator+(String const &target1, String const &target2) {
+                String result = target1;
+                result += target2;
+                return result;
+            }
 
         private:
             template<typename T>
-            static String printObject(const String& format, T value) {
+            static String printObject(const String &format, T value) {
                 String result;
                 char lastChar = '\0';
 
@@ -1173,23 +1180,38 @@ namespace Java {
                 }
                 return result;
             }
-            static String print(const String& format, short value);
-            static String print(const String& format, int value);
-            static String print(const String& format, long value);
-            static String print(const String& format, unsigned short value);
-            static String print(const String& format, unsigned int value);
-            static String print(const String& format, unsigned long value);
-            static String print(const String& format, double value);
-            static String print(const String& format, float value);
-            static String print(const String& format, char* value);
-            static String print(const String& format, Short value);
-            static String print(const String& format, Integer value);
-            static String print(const String& format, Long value);
-            static String print(const String& format, Float value);
-            static String print(const String& format, Double value);
-            static String print(const String& format, String value);
-		};
-	} // namespace Lang
+
+            static String print(const String &format, short value);
+
+            static String print(const String &format, int value);
+
+            static String print(const String &format, long value);
+
+            static String print(const String &format, unsigned short value);
+
+            static String print(const String &format, unsigned int value);
+
+            static String print(const String &format, unsigned long value);
+
+            static String print(const String &format, double value);
+
+            static String print(const String &format, float value);
+
+            static String print(const String &format, char *value);
+
+            static String print(const String &format, Short value);
+
+            static String print(const String &format, Integer value);
+
+            static String print(const String &format, Long value);
+
+            static String print(const String &format, Float value);
+
+            static String print(const String &format, Double value);
+
+            static String print(const String &format, String value);
+        };
+    } // namespace Lang
 } // namespace Java
 
 #endif  // JAVA_LANG_STRING_STRING_HPP

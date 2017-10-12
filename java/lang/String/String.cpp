@@ -32,7 +32,7 @@
 
 using namespace Java::Lang;
 
-#define DEFAULT_CAPACITY 32
+#define DEFAULT_CAPACITY 16
 
 #define DEFAULT_BUFFER_LENGTH 128
 
@@ -46,7 +46,7 @@ using namespace Java::Lang;
 	if (offset > array.length - length) {\
 		throw StringIndexOutOfBoundsException(offset + length);\
 	}\
-	this->original = (string) allocateMemory(( length + 1) * sizeof(char));\
+	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
 	int index;\
 	for (index = 0; index < length; offset++, index++) {\
 		this->original [index] = array.get(offset);\
@@ -158,8 +158,8 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 
 String String::concat(String target) {
 	string targetValue = target.original;
-	int targetLength = target.size;
-	int newLength = this->size + target.size;
+	long targetLength = target.size;
+	long newLength = this->size + target.size;
 	STRING_OPERATOR_PLUS
 	return *this;
 }
