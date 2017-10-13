@@ -36,7 +36,7 @@ TEST(JavaLang, MathAbs) {
 	assertEquals(123, Math::abs(double_value));
 	
 	float float_value = -123.123f;
-	ASSERT_FLOAT_NEAR(123.123f, Math::abs(float_value));
+	assertEquals(123.123f, Math::abs(float_value));
 	
 	int int_value = -123;
 	assertEquals(123, Math::abs(int_value));
@@ -1251,7 +1251,7 @@ TEST(JavaLang, MathMax) {
 	
 	float float_value_max_1 = 4.123f;
 	float float_value_max_2 = 2.312f;
-	ASSERT_FLOAT_NEAR(4.123, Math::max(float_value_max_1, float_value_max_2));
+	assertEquals(4.123, Math::max(float_value_max_1, float_value_max_2));
 	
 	int int_value_max_1 = 4;
 	int int_value_max_2 = 2;
@@ -1269,7 +1269,7 @@ TEST(JavaLang, MathMin) {
 	
 	float float_value_min_1 = 4.123f;
 	float float_value_min_2 = 2.312f;
-	ASSERT_FLOAT_NEAR(2.312, Math::min(float_value_min_1, float_value_min_2));
+	assertEquals(2.312, Math::min(float_value_min_1, float_value_min_2));
 	
 	long long_value_min_1 = 4;
 	long long_value_min_2 = 2;

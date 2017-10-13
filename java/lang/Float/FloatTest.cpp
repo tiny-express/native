@@ -35,49 +35,49 @@ TEST (JavaLang, FloatConstructor) {
     // Test Float::Float()
     Float emptyFloatConstructor;
     emptyFloatConstructor = 13.02;
-    ASSERT_FLOAT_NEAR(13.02, emptyFloatConstructor.floatValue());
+    assertEquals(13.02, emptyFloatConstructor.floatValue());
 
     // Test Float::Float(float original)
     Float floatConstructor = 13.02;
-    ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
+    assertEquals(13.02, floatConstructor.floatValue());
 
     floatConstructor = 13.02;
-    ASSERT_FLOAT_FAR(13.33, floatConstructor.floatValue());
+    assertNotEquals(13.33, floatConstructor.floatValue());
 
     floatConstructor = -0.0f;
-    ASSERT_FLOAT_NEAR(-0.0f, floatConstructor.floatValue());
+    assertEquals(-0.0f, floatConstructor.floatValue());
 
     // Test Float::Float(const Float &floatNumber)
     floatConstructor = 13.02;
     Float FloatConstructor(floatConstructor);
-    ASSERT_FLOAT_NEAR(13.02, floatConstructor.floatValue());
+    assertEquals(13.02, floatConstructor.floatValue());
 
     /* Test Float(String inputString) */
     // Test Float::POSITIVE_INFINITY
     Float positiveOtherInfinityFloat((String) "INFINITY");
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+    assertEquals(Float::POSITIVE_INFINITY,
                       positiveOtherInfinityFloat.floatValue());
 
     // Test Float::NEGATIVE_INFINITY
     Float negativeInfinityFloat((String) "-INFINITY");
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+    assertEquals(Float::NEGATIVE_INFINITY,
                       negativeInfinityFloat.floatValue());
 
     // Test Float::NaN
     Float nanInfinityFloat((String) "nan");
-    ASSERT_FLOAT_NEAR(Float::NaN, nanInfinityFloat.floatValue());
+    assertEquals(Float::NaN, nanInfinityFloat.floatValue());
 
     // Test Float::MAX_VALUE
     Float maxValueFloat((String) "340282346638528859811704183484516925440.0");
-    ASSERT_FLOAT_NEAR(Float::MAX_VALUE, maxValueFloat.floatValue());
+    assertEquals(Float::MAX_VALUE, maxValueFloat.floatValue());
 
     // Test Float::MIN_NORMAL
     Float minNormalFloat((String) "1.4013e-45");
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL, minNormalFloat.floatValue());
+    assertEquals(Float::MIN_NORMAL, minNormalFloat.floatValue());
 
     // Test Float::MIN_VALUE
     Float minValueFloat((String) "1.17549e-38");
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE, minValueFloat.floatValue());
+    assertEquals(Float::MIN_VALUE, minValueFloat.floatValue());
 }
 
 TEST (JavaLang, FloatArithmeticOperator) {
@@ -92,49 +92,49 @@ TEST (JavaLang, FloatArithmeticOperator) {
     variableArithmeticOperator2 = 2.2;
     expectedResultOperator = 3.3;
     actualResultOperator = variableArithmeticOperator1 + variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator -
     variableArithmeticOperator1 = 3.3;
     variableArithmeticOperator2 = 2.2;
     expectedResultOperator = 1.1;
     actualResultOperator = variableArithmeticOperator1 - variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator *
     variableArithmeticOperator1 = 2.0;
     variableArithmeticOperator2 = 13.02;
     expectedResultOperator = 26.04;
     actualResultOperator = variableArithmeticOperator1 * variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /
     variableArithmeticOperator1 = 26.04;
     variableArithmeticOperator2 = 2.0;
     expectedResultOperator = 13.02;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . Float::POSITIVE_INFINITY
     variableArithmeticOperator1 = 26.04;
     variableArithmeticOperator2 = 0;
     expectedResultOperator = Float::POSITIVE_INFINITY;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . Float::NEGATIVE_INFINITY
     variableArithmeticOperator1 = -26.04;
     variableArithmeticOperator2 = 0;
     expectedResultOperator = Float::NEGATIVE_INFINITY;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator / . Float::NaN
     variableArithmeticOperator1 = 0;
     variableArithmeticOperator2 = 0;
     expectedResultOperator = -Float::NaN;
     actualResultOperator = variableArithmeticOperator1 / variableArithmeticOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
 TEST (JavaLang, FloatRelationalOperator) {
@@ -222,56 +222,56 @@ TEST (JavaLang, FloatLogicalOperator) {
     variableLogicalOperator2 = 0;
     expectedResultOperator = false;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = false;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = false;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator && . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = true;
     actualResultOperator = variableLogicalOperator1 && variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 0   0
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 0;
     expectedResultOperator = false;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 0   1
     variableLogicalOperator1 = 0;
     variableLogicalOperator2 = 1;
     expectedResultOperator = true;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 1   0
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 0;
     expectedResultOperator = true;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 
     // Test Operator || . Case 1   1
     variableLogicalOperator1 = 1;
     variableLogicalOperator2 = 1;
     expectedResultOperator = true;
     actualResultOperator = variableLogicalOperator1 || variableLogicalOperator2;
-    ASSERT_FLOAT_NEAR(expectedResultOperator, actualResultOperator);
+    assertEquals(expectedResultOperator, actualResultOperator);
 }
 
 TEST (JavaLang, FloatAssignmentOperator) {
@@ -286,14 +286,14 @@ TEST (JavaLang, FloatAssignmentOperator) {
     variableAssignmentOperator2 = 1.1;
     expectedResultOperator = 1.1;
     actualResultOperator = (variableAssignmentOperator1 = variableAssignmentOperator2);
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator +=
     variableAssignmentOperator1 = 1.1;
     variableAssignmentOperator2 = 2.2;
     expectedResultOperator = 3.3;
     actualResultOperator = (variableAssignmentOperator1 += variableAssignmentOperator2);
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
 
     // Test Operator -=
@@ -301,21 +301,21 @@ TEST (JavaLang, FloatAssignmentOperator) {
     variableAssignmentOperator2 = 1.1;
     expectedResultOperator = 2.2;
     actualResultOperator = (variableAssignmentOperator1 -= variableAssignmentOperator2);
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator *=
     variableAssignmentOperator1 = 13.02;
     variableAssignmentOperator2 = 2.0;
     expectedResultOperator = 26.04;
     actualResultOperator = (variableAssignmentOperator1 *= variableAssignmentOperator2);
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 
     // Test Operator /=
     variableAssignmentOperator1 = 26.04;
     variableAssignmentOperator2 = 2.0;
     expectedResultOperator = 13.02;
     actualResultOperator = (variableAssignmentOperator1 /= variableAssignmentOperator2);
-    ASSERT_FLOAT_NEAR(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
+    assertEquals(expectedResultOperator.floatValue(), actualResultOperator.floatValue());
 }
 
 TEST (JavaLang, FloatShortValue) {
@@ -596,79 +596,79 @@ TEST (JavaLang, FloatToStringParamFloat) {
 
 TEST (JavaLang, FloatParseFloat) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+    assertEquals(Float::POSITIVE_INFINITY,
                       Float::parseFloat((String) "INFINITY").floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+    assertEquals(Float::NEGATIVE_INFINITY,
                       Float::parseFloat((String) "-INFINITY").floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(Float::NaN,
+    assertEquals(Float::NaN,
                       Float::parseFloat((String) "nan").floatValue());
 
     // Test Float::MAX_VALUE
-    ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
+    assertEquals(Float::MAX_VALUE,
                       Float::parseFloat((String) "340282346638528859811704183484516925440.0").floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+    assertEquals(Float::MIN_NORMAL,
                       Float::parseFloat((String) "1.4013e-45").floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+    assertEquals(Float::MIN_VALUE,
                       Float::parseFloat((String) "1.17549e-38").floatValue());
 }
 
 TEST (JavaLang, FloatValueOfParamString) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+    assertEquals(Float::POSITIVE_INFINITY,
                       Float::valueOf((String) "INFINITY").floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+    assertEquals(Float::NEGATIVE_INFINITY,
                       Float::valueOf((String) "-INFINITY").floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(Float::NaN,
+    assertEquals(Float::NaN,
                       Float::valueOf((String) "nan").floatValue());
 
     // Test Float::MAX_VALUE
-    ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
+    assertEquals(Float::MAX_VALUE,
                       Float::valueOf((String) "340282346638528859811704183484516925440.0").floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+    assertEquals(Float::MIN_NORMAL,
                       Float::valueOf((String) "1.4013e-45").floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+    assertEquals(Float::MIN_VALUE,
                       Float::valueOf((String) "1.17549e-38").floatValue());
 }
 
 TEST (JavaLang, FloatValueOfParamFloat) {
     // Test Float::POSITIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::POSITIVE_INFINITY,
+    assertEquals(Float::POSITIVE_INFINITY,
                       Float::valueOf(Float::POSITIVE_INFINITY).floatValue());
 
     // Test Float::NEGATIVE_INFINITY
-    ASSERT_FLOAT_NEAR(Float::NEGATIVE_INFINITY,
+    assertEquals(Float::NEGATIVE_INFINITY,
                       Float::valueOf(Float::NEGATIVE_INFINITY).floatValue());
 
     // Test Float::NaN
-    ASSERT_FLOAT_NEAR(-Float::NaN,
+    assertEquals(-Float::NaN,
                       Float::valueOf(-Float::NaN).floatValue());
 
     // Test Float::MAX_VALUE
-    ASSERT_FLOAT_NEAR(Float::MAX_VALUE,
+    assertEquals(Float::MAX_VALUE,
                       Float::valueOf(340282346638528859811704183484516925440.0f).floatValue());
 
     // Test Float::MIN_NORMAL
-    ASSERT_FLOAT_NEAR(Float::MIN_NORMAL,
+    assertEquals(Float::MIN_NORMAL,
                       Float::valueOf(1.4013e-45).floatValue());
 
     // Test Float::MIN_VALUE
-    ASSERT_FLOAT_NEAR(Float::MIN_VALUE,
+    assertEquals(Float::MIN_VALUE,
                       Float::valueOf(1.17549e-38).floatValue());
 }
 
@@ -787,49 +787,49 @@ TEST (JavaLang, FloatFloatValue) {
     variableTestFloatValue = Float::POSITIVE_INFINITY;
     expectedResultFloatValue = Float::POSITIVE_INFINITY;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestFloatValue = Float::NEGATIVE_INFINITY;
     expectedResultFloatValue = Float::NEGATIVE_INFINITY;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test Float::NaN
     variableTestFloatValue = Float::NaN;
     expectedResultFloatValue = Float::NaN;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test Float::MAX_VALUE
     variableTestFloatValue = Float::MAX_VALUE;
     expectedResultFloatValue = Float::MAX_VALUE;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test Float::MIN_NORMAL
     variableTestFloatValue = Float::MIN_NORMAL;
     expectedResultFloatValue = Float::MIN_NORMAL;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test Float::MIN_VALUE
     variableTestFloatValue = Float::MIN_VALUE;
     expectedResultFloatValue = Float::MIN_VALUE;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test valid case
     variableTestFloatValue = 13.02;
     expectedResultFloatValue = 13.02;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_NEAR(expectedResultFloatValue, actualResultFloatValue);
+    assertEquals(expectedResultFloatValue, actualResultFloatValue);
 
     // Test invalid case
     variableTestFloatValue = 130.2;
     expectedResultFloatValue = 130.0;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_FLOAT_FAR(expectedResultFloatValue, actualResultFloatValue);
+    assertNotEquals(expectedResultFloatValue, actualResultFloatValue);
 }
 
 // TODO(thoangminh): Need to pass all test cases in comment block
@@ -1260,13 +1260,13 @@ TEST (JavaLang, FloatMin) {
     variableFloatMin2 = 1.302;
     expectedResultFloatMin = 1.302;
     actualResultFloatMin = Float::min(variableFloatMin1, variableFloatMin2);
-    ASSERT_FLOAT_NEAR(expectedResultFloatMin, actualResultFloatMin);
+    assertEquals(expectedResultFloatMin, actualResultFloatMin);
 
     variableFloatMin1 = 13.02;
     variableFloatMin2 = 1.302;
     expectedResultFloatMin = 13.02;
     actualResultFloatMin = Float::min(variableFloatMin1, variableFloatMin2);
-    ASSERT_FLOAT_FAR(expectedResultFloatMin, actualResultFloatMin);
+    assertNotEquals(expectedResultFloatMin, actualResultFloatMin);
 }
 
 TEST (JavaLang, FloatIntBitsToFloat) {
@@ -1279,73 +1279,73 @@ TEST (JavaLang, FloatIntBitsToFloat) {
     intBitsInput = 0;
     expectedResult = 0.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::POSITIVE_INFINITY
     intBitsInput = 2139095040;
     expectedResult = Float::POSITIVE_INFINITY;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input Float::NEGATIVE_INFINITY
     intBitsInput = -2139095040;
     expectedResult = Float::NEGATIVE_INFINITY;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -0.7
     intBitsInput = -1060320051;
     expectedResult = -0.7f;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 12.375
     intBitsInput = 1095106560;
     expectedResult = 12.375;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 1.0
     intBitsInput = 1065353216;
     expectedResult = 1.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.375
     intBitsInput = 1052770304;
     expectedResult = 0.375;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2
     intBitsInput = -1073741824;
     expectedResult = -2.0f;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 83
     intBitsInput = 1118175232;
     expectedResult = 83.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -2625
     intBitsInput = -1159991296;
     expectedResult = -2625.0f;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input 0.5
     intBitsInput = 1056964608;
     expectedResult = 0.5;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 
     // Input -1302.12345678
     intBitsInput = -1151517683;
     expectedResult = -1302.12345678f;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    ASSERT_FLOAT_NEAR(expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
 }
 
 TEST (JavaLang, FloatCompareTo) {

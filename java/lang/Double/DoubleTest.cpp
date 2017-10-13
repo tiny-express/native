@@ -596,7 +596,7 @@ TEST (JavaLang, DoubleFloatValue) {
     variableTestFloatValue = 130.2;
     expectedResultFloatValue = 130.0;
     actualResultFloatValue = variableTestFloatValue.floatValue();
-    ASSERT_DBL_FAR(expectedResultFloatValue, actualResultFloatValue);
+    assertNotEquals(expectedResultFloatValue, actualResultFloatValue);
 }
 
 
@@ -658,7 +658,7 @@ TEST (JavaLang, DoubleDoubleValue) {
     variableTestDoubleValue = 130.2;
     expectedResultDoubleValue = 130.0;
     actualResultDoubleValue = variableTestDoubleValue.doubleValue();
-    ASSERT_DBL_FAR(expectedResultDoubleValue, actualResultDoubleValue);
+    assertNotEquals(expectedResultDoubleValue, actualResultDoubleValue);
 }
 
 TEST (JavaLang, DoubleByteValue) {
@@ -1459,7 +1459,7 @@ TEST (JavaLang, DoubleMin) {
     variableDoubleMin2 = 1.302;
     expectedResultDoubleMin = 13.02;
     actualResultDoubleMin = Double::min(variableDoubleMin1, variableDoubleMin2);
-    ASSERT_DBL_FAR(expectedResultDoubleMin, actualResultDoubleMin);
+    assertNotEquals(expectedResultDoubleMin, actualResultDoubleMin);
 }
 
 TEST (JavaLang, DoubleLongBitsToDouble) {
