@@ -50,7 +50,6 @@ namespace Java {
             this->original = (string) allocateMemory(this->original, this->capacity);\
         }\
         memcpy(&this->original[this->size], targetValue, targetLength);\
-        this->original[newLength] = '\0';\
         this->size = newLength;
 
         class StringBuilder;
@@ -926,8 +925,8 @@ namespace Java {
              */
             inline String operator+(const string &target) {
                 auto targetValue = (string) target;
-                int targetLength = lengthPointerChar((string) target);
-                int newLength = this->size + targetLength;
+                long targetLength = lengthPointerChar((string) target);
+                long newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -940,8 +939,8 @@ namespace Java {
              */
             inline String operator+(const String &target) {
                 string targetValue = target.original;
-                int targetLength = target.size;
-                int newLength = this->size + target.size;
+                long targetLength = target.size;
+                long newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -968,8 +967,8 @@ namespace Java {
              */
             inline String &operator+=(const_string target) {
                 auto targetValue = target;
-                int targetLength = lengthPointerChar(target);
-                int newLength = this->size + targetLength;
+                long targetLength = lengthPointerChar(target);
+                long newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
