@@ -50,6 +50,7 @@ namespace Java {
             this->original = (string) allocateMemory(this->original, this->capacity);\
         }\
         memcpy(&this->original[this->size], targetValue, targetLength);\
+        this->original[newLength] = '\0';\
         this->size = newLength;
 
         class StringBuilder;

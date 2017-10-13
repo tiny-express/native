@@ -101,7 +101,7 @@ inline boolean isEmptyString(const char *input) {
  * @param size
  * @return void pointer
  */
-inline void *allocateMemory(size_t size) {
+inline void *allocateMemory(long size) {
 #ifdef DARWIN
     return malloc(size);
 #else
