@@ -20,6 +20,7 @@
 #include "../java/lang/String/String.hpp"
 #include "../java/lang/Integer/Integer.hpp"
 #include "../java/lang/Double/Double.hpp"
+#include <iostream>
 
 using namespace Java::Lang;
 
@@ -119,6 +120,15 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
 #define CTEST2(sname, tname) __CTEST2_INTERNAL(sname, tname, 0)
 #define CTEST2_SKIP(sname, tname) __CTEST2_INTERNAL(sname, tname, 1)
 
+#define sampleString (char*) ""
+#define sampleConstString ""
+#define sampleInt 1
+#define sampleDouble 0.1
+
+template<typename Type, typename AnotherType>
+boolean isSame(Type type, AnotherType anotherType) {
+    return std::is_same<Type, AnotherType>::value;
+}
 
 /**
  * Asserts that two strings are equal.
@@ -136,10 +146,17 @@ void assertEqualsString(String expected,
  * @param expected
  * @param actual
  */
-void assertIntEquals(int expected,
-                     int actual,
+template <typename Type, typename AnotherType>
+void assertIntEquals(Type expected,
+                     AnotherType actual,
                      const_string file,
-                     int line);
+                     int line) {
+
+    if (expected != actual) {
+        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+                  file, line, expected, actual);
+    }
+}
 
 /**
  * Asserts that two doubles are equal.
@@ -153,18 +170,6 @@ void assertDoubleEquals(double expected,
                         double actual,
                         const_string file,
                         int line);
-
-#include <iostream>
-
-#define sampleString (char*) ""
-#define sampleConstString ""
-#define sampleInt 1
-#define sampleDouble 0.1
-
-template<typename Type, typename AnotherType>
-boolean isSame(Type type, AnotherType anotherType) {
-    return std::is_same<Type, AnotherType>::value;
-}
 
 /**
  * Assert Data
@@ -328,22 +333,19 @@ void assertEqualsAll(Type expected,
                      const_string file,
                      int line) {
 
+    String expectedString;
+    String actualString;
+
     boolean isInt = isSame(expected, sampleInt)
                     && isSame(actual, sampleInt);
-    boolean isDouble = std::is_same<Type, double>::value;
+    boolean isDouble = isSame(expected, sampleDouble);
 
-    boolean isString = std::is_same<Type, const_string>::value
-                       || std::is_same<Type, string>::value;
-
-    String expectedString = String::valueOf(expected);
-    String actualString = String::valueOf(actual);
+    boolean isString = isSame(expected, sampleString)
+                       || isSame(expected, sampleConstString);
 
     // Assert int equals
     if (isInt) {
-        int expectedInt = Integer::valueOf(expectedString).intValue();
-        int actualInt = Integer::valueOf(actualString).intValue();
-
-        assertIntEquals(expectedInt, actualInt, file, line);
+        assertIntEquals(expected, actual, file, line);
     }
 
     // Assert double equals
@@ -576,34 +578,14 @@ void assert_float_near(float expected, float actual, int precision, const_string
     free(actualString);
 }
 
-/**
- * Asserts that two strings are equal.
- *
- * @param expected
- * @param actual
- */
+
 void assertEqualsString(String expected,
                         String actual,
                         const_string file,
                         int line) {
     if (expected != actual) {
-        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
                   file, line, expected.toString(), actual.toString());
-    }
-}
-
-/**
- * Asserts that two intmax_ts are equal.
- * @param expected
- * @param actual
- */
-void assertIntEquals(int expected,
-                     int actual,
-                     const_string file,
-                     int line) {
-    if (expected != actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
-                  file, line, expected, actual);
     }
 }
 
