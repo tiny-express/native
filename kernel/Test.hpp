@@ -282,8 +282,8 @@ void assert_str(const_string exp, const_string  real, const_string caller, int l
     }
 }
 
-void assert_data(const_string exp, size_t expsize,
-		 const_string real, size_t realsize,
+void assert_data(const unsigned char *exp, size_t expsize,
+		 const unsigned char *real, size_t realsize,
 		 const_string caller, int line) {
     size_t i;
     if (expsize != realsize) {
