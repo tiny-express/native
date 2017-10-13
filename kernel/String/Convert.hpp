@@ -40,7 +40,10 @@
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
         string convert;\
-        asprintf(&convert, FORMAT, target);\
+        int result = asprintf(&convert, FORMAT, target);\
+		if (result < 0) {\
+			return nullptr;\
+		}\
         return convert;\
 }
 

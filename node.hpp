@@ -24,35 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_KERNEL_KERNEL_HPP
-#define NATIVE_KERNEL_KERNEL_HPP
+#ifndef NATIVE_LIBRARY_NODE_HPP_
+#define NATIVE_LIBRARY_NODE_HPP_
 
-// C Standard Library
-#include <cstdio>
-#include <cmath>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <climits>
-#include <cstdarg>
-#include <cctype>
-#include <thread>
-#include <memory>
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <set>
-#include <type_traits>
-#include <string>
-#include <iostream>
+#define JAVA_DEFAULT 0
+#include <node.h>
+#include <v8.h>
+#include "library.hpp"
 
-// Platform macros
-#include "Platform.hpp"
-
-// Native Library
-#include "DateTime.hpp"
-#include "Common.hpp"
-#include "String.hpp"
-#include "Type.hpp"
-
-#endif //NATIVE_KERNEL_KERNEL_HPP
+#endif//NATIVE_LIBRARY_NODE_HPP_
