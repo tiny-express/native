@@ -20,7 +20,6 @@
 #include "../java/lang/String/String.hpp"
 #include "../java/lang/Integer/Integer.hpp"
 #include "../java/lang/Double/Double.hpp"
-#include <iostream>
 
 using namespace Java::Lang;
 
@@ -41,20 +40,20 @@ using namespace Java::Lang;
 #include <csignal>
 #include "Common.hpp"
 
-typedef void (*SetupFunction)(void *);
+typedef void (*SetupFunc)(void *);
 
-typedef void (*TearDownFunction)(void *);
+typedef void (*TearDownFunc)(void *);
 
-struct CTest {
-    const char *suiteName;  // suite name
-    const char *testName;  // test name
+struct CTEST {
+    const char *ssname;  // suite name
+    const char *ttname;  // test name
     void (*run)();
 
     int skip;
 
     void *data;
-    SetupFunction setup;
-    TearDownFunction teardown;
+    SetupFunc setup;
+    TearDownFunc teardown;
 
     unsigned int magic;
 };
@@ -64,20 +63,20 @@ struct CTest {
 
 #define __CTEST_MAGIC (0xdeadbeef)
 #ifdef __APPLE__
-#define __Test_Section __attribute__ ((used, section ("__DATA, .CTest")))
+#define __Test_Section __attribute__ ((used, section ("__DATA, .CTEST")))
 #else
-#define __Test_Section __attribute__ ((used, section (".CTest")))
+#define __Test_Section __attribute__ ((used, section (".CTEST")))
 #endif
 
 #define __CTEST_STRUCT(sname, tname, _skip, __data, __setup, __teardown) \
-    static struct CTest __TNAME(sname, tname) __Test_Section = { \
-        .suiteName=#sname, \
-        .testName=#tname, \
+    static struct CTEST __TNAME(sname, tname) __Test_Section = { \
+        .ssname=#sname, \
+        .ttname=#tname, \
         .run = __FNAME(sname, tname), \
         .skip = _skip, \
         .data = __data, \
-        .setup = (SetupFunction)__setup,                                        \
-        .teardown = (TearDownFunction)__teardown,                                \
+        .setup = (SetupFunc)__setup,                                        \
+        .teardown = (TearDownFunc)__teardown,                                \
         .magic = __CTEST_MAGIC };
 
 #define CTEST_DATA(sname) struct sname##_data
@@ -110,11 +109,11 @@ struct CTest {
     void __FNAME(sname, tname)(struct sname##_data* data)
 
 
-void CTestLog(const char *fmt, ...);
+void CTEST_LOG(const char *fmt, ...);
 
-void CTestError(const char *fmt, ...);  // doesn't return
+void CTEST_ERR(const char *fmt, ...);  // doesn't return
 
-#define CTest(sname, tname) __CTEST_INTERNAL(sname, tname, 0)
+#define CTEST(sname, tname) __CTEST_INTERNAL(sname, tname, 0)
 #define CTEST_SKIP(sname, tname) __CTEST_INTERNAL(sname, tname, 1)
 
 #define CTEST2(sname, tname) __CTEST2_INTERNAL(sname, tname, 0)
@@ -131,7 +130,7 @@ boolean isSame(Type type, AnotherType anotherType) {
 }
 
 /**
- * Asserts that two Strings are equal.
+ * Asserts that two strings are equal.
  *
  * @param expected
  * @param actual
@@ -146,8 +145,8 @@ void assertEqualsString(String expected,
  * @param expected
  * @param actual
  */
-void assertEqualsInt(intmax_t expected,
-                     intmax_t actual,
+void assertEqualsInt(int expected,
+                     int actual,
                      const_string file,
                      int line);
 
@@ -165,7 +164,7 @@ void assertEqualsDouble(double expected,
                         int line);
 
 /**
- * Asserts that two Strings are not equal.
+ * Asserts that two strings are not equal.
  *
  * @param expected
  * @param actual
@@ -180,8 +179,8 @@ void assertNotEqualsString(String expected,
  * @param expected
  * @param actual
  */
-void assertNotEqualsInt(intmax_t expected,
-                        intmax_t actual,
+void assertNotEqualsInt(int expected,
+                        int actual,
                         const_string file,
                         int line);
 
@@ -331,6 +330,8 @@ void assertEqualsPrecisionDouble(double expected,
 #define assertEqualsPrecision(expected, actual, precision)\
 assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
 
+
+
 /**
  * Asserts that two doubles are equal.
  * With the input precision.
@@ -422,14 +423,14 @@ void assertNotEqualsAll(Type expected,
     boolean isString = isSame(expected, sampleString)
                        || isSame(expected, sampleConstString);
 
-    // Assert int not equals
+    // Assert int equals
     if (isInt) {
         int expectedInt = Integer::valueOf(expectedString).intValue();
         int actualInt = Integer::valueOf(actualString).intValue();
         assertNotEqualsInt(expectedInt, actualInt, file, line);
     }
 
-    // Assert double not equals
+    // Assert double equals
     if (isDouble) {
         double expectedDouble = Double::valueOf(expectedString).doubleValue();
         double actualDouble = Double::valueOf(actualString).doubleValue();
@@ -437,7 +438,7 @@ void assertNotEqualsAll(Type expected,
         assertNotEqualsDouble(expectedDouble, actualDouble, file, line);
     }
 
-    // Assert string not equals
+    // Assert string equals
     if (isString) {
         assertNotEqualsString(expectedString, actualString, file, line);
     }
@@ -469,7 +470,7 @@ static jmp_buf ctest_err;
 static int color_output = 1;
 static const_string suite_name;
 
-typedef int (*filter_func)(struct CTest*);
+typedef int (*filter_func)(struct CTEST*);
 
 #define ANSI_BLACK    "\033[0;30m"
 #define ANSI_RED      "\033[0;31m"
@@ -489,7 +490,7 @@ typedef int (*filter_func)(struct CTest*);
 #define ANSI_WHITE    "\033[01;37m"
 #define ANSI_NORMAL   "\033[0m"
 
-static CTest(suite, test) { }
+static CTEST(suite, test) { }
 
 inline static void vprint_errormsg(const_string fmt, va_list ap) {
     // (v)snprintf returns the number that would have been written
@@ -526,7 +527,7 @@ static void msg_end() {
     print_errormsg("\n");
 }
 
-void CTestLog(const_string fmt, ...)
+void CTEST_LOG(const_string fmt, ...)
 {
     va_list argp;
     msg_start(ANSI_BLUE, "LOG");
@@ -538,7 +539,7 @@ void CTestLog(const_string fmt, ...)
     msg_end();
 }
 
-void CTestError(const_string fmt, ...)
+void CTEST_ERR(const_string fmt, ...)
 {
     va_list argp;
     msg_start(ANSI_YELLOW, "\nERROR");
@@ -556,7 +557,7 @@ void assertEqualsIntUnsigned(uintmax_t expected,
                     string file,
                     int line) {
     if (expected != actual) {
-    CTestError("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
+    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
                 file, line, expected, actual);
     }
 }
@@ -566,7 +567,7 @@ void assertNotEqualsIntUnsigned(uintmax_t expected,
                         string file,
                         int line) {
     if ((expected) == (actual)) {
-    CTestError("%s:%d  should not be %" PRIuMAX,
+    CTEST_ERR("%s:%d  should not be %" PRIuMAX,
             file, line, actual);
     }
 }
@@ -578,9 +579,39 @@ void assertIntervalInt(intmax_t expectedFirst,
                         int line) {
 
     if (actual < expectedFirst || actual > expectedSecond) {
-    CTestError("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
+    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
                 file, line, expectedFirst, expectedSecond, actual);
     }
+}
+
+void assert_dbl_far(double expected, double actual, int precision, const_string caller, int line) {
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
+    string expectedString = (string) calloc(1079, sizeof(char));
+    string actualString = (string) calloc(1079, sizeof(char));
+
+    // Get string type of input number
+    if(expected == 0.0f && expected < 0) {
+        sprintf(expectedString, "-%.*f", precision, expected);
+    } else {
+        sprintf(expectedString, "%.*f", precision, expected);
+    }
+
+    if(actual == -0.0f && actual < 0) {
+        sprintf(actualString, "-%.*f", precision, actual);
+    } else {
+        sprintf(actualString, "%.*f", precision, actual);
+    }
+
+    // Compare with string type
+    if ((expectedString == nullptr && actualString != nullptr) ||
+    (expectedString != nullptr && actualString == nullptr) ||
+    (expectedString && actualString && strcmp(expectedString, actualString) == 0)) {
+    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, actualString);
+    }
+
+    // Free
+    free(expectedString);
+    free(actualString);
 }
 
 void assertEqualsString(String expected,
@@ -588,22 +619,30 @@ void assertEqualsString(String expected,
                         const_string file,
                         int line) {
     if (expected != actual) {
-        CTestError("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
                   file, line, expected.toString(), actual.toString());
     }
 }
 
-void assertEqualsInt(intmax_t expected,
-                     intmax_t actual,
+void assertEqualsInt(int expected,
+                     int actual,
                      const_string file,
                      int line) {
 
     if (expected != actual) {
-        CTestError("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
                   file, line, expected, actual);
     }
 }
 
+/**
+ * Asserts that two doubles are equal.
+ * With the default precision is 15.
+ *
+ * @param expected
+ * @param actual
+ * @param precision
+ */
 void assertEqualsDouble(double expected,
                         double actual,
                         const_string file,
@@ -631,7 +670,7 @@ void assertEqualsDouble(double expected,
     if ((expectedString == nullptr && actualString != nullptr) ||
         (expectedString != nullptr && actualString == nullptr) ||
         (expectedString && actualString && strcmp(expectedString, actualString) != 0)) {
-        CTestError("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expectedString, actualString);
     }
 
@@ -640,27 +679,37 @@ void assertEqualsDouble(double expected,
     free(actualString);
 }
 
+
+
 void assertNotEqualsString(String expected,
                         String actual,
                         const_string file,
                         int line) {
     if (expected == actual) {
-        CTestError("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
                   file, line, expected.toString(), actual.toString());
     }
 }
 
-void assertNotEqualsInt(intmax_t expected,
-                     intmax_t actual,
+void assertNotEqualsInt(int expected,
+                     int actual,
                      const_string file,
                      int line) {
 
     if (expected == actual) {
-        CTestError("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
                   file, line, expected, actual);
     }
 }
 
+/**
+ * Asserts that two doubles are equal.
+ * With the default precision is 15.
+ *
+ * @param expected
+ * @param actual
+ * @param precision
+ */
 void assertNotEqualsDouble(double expected,
                         double actual,
                         const_string file,
@@ -688,7 +737,7 @@ void assertNotEqualsDouble(double expected,
     if ((expectedString == nullptr && actualString != nullptr) ||
         (expectedString != nullptr && actualString == nullptr) ||
         (expectedString && actualString && strcmp(expectedString, actualString) == 0)) {
-        CTestError("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expectedString, actualString);
     }
 
@@ -697,6 +746,14 @@ void assertNotEqualsDouble(double expected,
     free(actualString);
 }
 
+/**
+ * Assert Data
+ *
+ * @param expected
+ * @param expectedSize
+ * @param actual
+ * @param actualSize
+ */
 void assertDataString(String expected,
                        size_t expectedSize,
                        String actual,
@@ -706,61 +763,121 @@ void assertDataString(String expected,
     size_t i;
 
     if (expectedSize != actualSize) {
-        CTestError("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX,
+        CTEST_ERR("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX,
                   __FILE__, __LINE__, (uintmax_t) expectedSize,
                   (uintmax_t) actualSize);
     }
 
     for (i = 0; i < expectedSize; i++) {
         if (expected.charAt(i) != actual.charAt(i)) {
-            CTestError("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
+            CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
                       file, line, expected.charAt(i), (uintmax_t) i, actual.charAt(i));
         }
     }
 }
 
+
+/**
+ * Asserts that two unsigned intmax_ts are equal.
+ *
+ * @param expected
+ * @param actual
+ */
 void assertEqualsUnsignedInt(uintmax_t expected,
                    uintmax_t actual,
                    string file,
                    int line);
 
+/**
+ * Asserts that two intmax_ts are not equal.
+ *
+ * @param expected
+ * @param actual
+ */
+void assertNotEqualsInt(intmax_t expected,
+                            intmax_t actual,
+                            const_string file,
+                            int line) {
+    if ((expected) == (actual)) {
+        CTEST_ERR("%s:%d  should not be %" PRIdMAX,
+                  file, line, actual);
+    }
+}
+
+/**
+ * Asserts that two unsigned intmax_ts are not equal.
+ *
+ * @param expected
+ * @param actual
+ */
 void assertNotEqualsUnsignedInt(uintmax_t expected,
                         uintmax_t actual,
                         string file,
                         int line);
 
+/**
+ * Assert Null
+ *
+ * @param actual
+ */
 void assertNullVoid(void *actual,
                 const_string file,
                 int line) {
     if ((actual) != nullptr) {
-        CTestError("%s:%d  should be nullptr", file, line);
+        CTEST_ERR("%s:%d  should be nullptr", file, line);
     }
 }
 
+/**
+ * Assert Not Null
+ *
+ * @param actual
+ */
 void assertNotNullVoid(const void* actual,
                    const_string file,
                    int line) {
     if (actual == nullptr) {
-    CTestError("%s:%d  should not be nullptr", __FILE__, __LINE__);
+    CTEST_ERR("%s:%d  should not be nullptr", __FILE__, __LINE__);
     }
 }
 
+/**
+ * Assert True
+ *
+ * @param actual
+ */
 void assertTrueInt(int actual, const_string file, int line) {
     if ((actual) == 0) {
-        CTestError("%s:%d  should be true", file, line);
+        CTEST_ERR("%s:%d  should be true", file, line);
     }
 }
 
+/**
+ * Assert False
+ *
+ * @param actual
+ */
 void assertFalseInt(int actual, const_string file, int line) {
     if ((actual) != 0) {
-        CTestError("%s:%d  should be false", file, line);
+        CTEST_ERR("%s:%d  should be false", file, line);
     }
 }
 
+/**
+ * Assert Fail
+ */
 void assertFailNoneArgument(const_string file, int line) {
-    CTestError("%s:%d  shouldn't come here", file, line);
+    CTEST_ERR("%s:%d  shouldn't come here", file, line);
 }
 
+/**
+ * Asserts that two doubles are equal.
+ * With the input precision.
+ *
+ * @param expected
+ * @param actual
+ * @param precision
+ */
 void assertEqualsPrecisionDouble(double expected,
                                   double actual,
                                   int precision,
@@ -787,7 +904,7 @@ void assertEqualsPrecisionDouble(double expected,
     if ((expectedString == nullptr && actualString != nullptr) ||
         (expectedString != nullptr && actualString == nullptr) ||
         (expectedString && actualString && strcmp(expectedString, actualString) != 0)) {
-        CTestError("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expectedString, actualString);
     }
 
@@ -796,6 +913,14 @@ void assertEqualsPrecisionDouble(double expected,
     free(actualString);
 }
 
+/**
+ * Asserts that two doubles are equal.
+ * With the input precision.
+ *
+ * @param expected
+ * @param actual
+ * @param precision
+ */
 void assertNotEqualsPrecisionDouble(double expected,
                                   double actual,
                                   int precision,
@@ -822,7 +947,7 @@ void assertNotEqualsPrecisionDouble(double expected,
     if ((expectedString == nullptr && actualString != nullptr) ||
         (expectedString != nullptr && actualString == nullptr) ||
         (expectedString && actualString && strcmp(expectedString, actualString) == 0)) {
-        CTestError("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expectedString, actualString);
     }
 
@@ -831,13 +956,13 @@ void assertNotEqualsPrecisionDouble(double expected,
     free(actualString);
 }
 
-static int suite_all(struct CTest* t) {
+static int suite_all(struct CTEST* t) {
     (void) t; // fix unused parameter warning
     return 1;
 }
 
-static int suite_filter(struct CTest* t) {
-    return strncmp(suite_name, t->suiteName, strlen((char *)suite_name)) == 0;
+static int suite_filter(struct CTEST* t) {
+    return strncmp(suite_name, t->ssname, strlen((char *)suite_name)) == 0;
 }
 
 static uint64_t getCurrentTime() {
@@ -857,12 +982,12 @@ static void color_print(const_string color, const_string text) {
 }
 
 #ifdef __APPLE__
-static void *find_symbol(struct CTest *test, const char *fname)
+static void *find_symbol(struct CTEST *test, const char *fname)
 {
-    size_t len = strlen(test->suiteName) + 1 + strlen(fname);
+    size_t len = strlen(test->ssname) + 1 + strlen(fname);
     char *symbol_name = (char *) calloc(len + 1, sizeof(char));
     memset(symbol_name, 0, len + 1);
-    snprintf(symbol_name, len + 1, "%s_%s", test->suiteName, fname);
+    snprintf(symbol_name, len + 1, "%s_%s", test->ssname, fname);
 
     //fprintf(stderr, ">>>> dlsym: loading %s\n", symbol_name);
     void *symbol = dlsym(RTLD_DEFAULT, symbol_name);
@@ -919,22 +1044,22 @@ int ctest_main(int argc, const char *argv[])
 #endif
     uint64_t t1 = getCurrentTime();
 
-    struct CTest* ctest_begin = &__TNAME(suite, test);
-    struct CTest* ctest_end = &__TNAME(suite, test);
+    struct CTEST* ctest_begin = &__TNAME(suite, test);
+    struct CTEST* ctest_end = &__TNAME(suite, test);
     // find begin and end of section by comparing magics
     while (1) {
-    struct CTest* t = ctest_begin-1;
+    struct CTEST* t = ctest_begin-1;
     if (t->magic != __CTEST_MAGIC) break;
     ctest_begin--;
     }
     while (1) {
-    struct CTest* t = ctest_end+1;
+    struct CTEST* t = ctest_end+1;
     if (t->magic != __CTEST_MAGIC) break;
     ctest_end++;
     }
     ctest_end++;    // end after last one
 
-    static struct CTest* test;
+    static struct CTEST* test;
     for (test = ctest_begin; test != ctest_end; test++) {
     if (test == &__TNAME(suite, test)) continue;
     if (filter(test)) total++;
@@ -946,7 +1071,7 @@ int ctest_main(int argc, const char *argv[])
         ctest_errorbuffer[0] = 0;
         ctest_errorsize = MSG_SIZE-1;
         ctest_errormsg = ctest_errorbuffer;
-        printf("TEST %d/%d %s:%s ", index, total, test->suiteName, test->testName);
+        printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
         fflush(stdout);
         if (test->skip) {
         color_print(ANSI_BYELLOW, "[SKIPPED]");
@@ -956,10 +1081,10 @@ int ctest_main(int argc, const char *argv[])
         if (result == 0) {
 #ifdef __APPLE__
             if (!test->setup) {
-            test->setup = (SetupFunction) find_symbol(test, "setup");
+            test->setup = (SetupFunc) find_symbol(test, "setup");
             }
             if (!test->teardown) {
-            test->teardown = (TearDownFunction) find_symbol(test, "teardown");
+            test->teardown = (TearDownFunc) find_symbol(test, "teardown");
             }
 #endif
 
@@ -998,4 +1123,4 @@ int ctest_main(int argc, const char *argv[])
 
 #endif//NATIVE_KERNEL_TEST_H
 
-#define TEST CTest
+#define TEST CTEST

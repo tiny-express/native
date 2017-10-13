@@ -310,10 +310,7 @@ inline char *stringRandom(char *target, int size) {
  * @return string
  */
 inline char *stringAppend(char **target, char subTarget) {
-	int result = asprintf(target, "%s%c", *target, subTarget);
-	if (result < 0) {
-		return nullptr;
-	}
+	asprintf(target, "%s%c", *target, subTarget);
 	return *target;
 }
 

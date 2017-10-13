@@ -1353,11 +1353,11 @@ tr.heading h2 {
 	font-style: italic;
 }
 
-#powerTip div.testName a {
+#powerTip div.ttname a {
         font-weight: bold;
 }
 
-#powerTip div.testName {
+#powerTip div.ttname {
         font-weight: bold;
 }
 
