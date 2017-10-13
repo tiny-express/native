@@ -131,7 +131,7 @@ boolean isSame(Type type, AnotherType anotherType) {
 }
 
 /**
- * Asserts that two strings are equal.
+ * Asserts that two Strings are equal.
  *
  * @param expected
  * @param actual
@@ -146,8 +146,8 @@ void assertEqualsString(String expected,
  * @param expected
  * @param actual
  */
-void assertEqualsInt(int expected,
-                     int actual,
+void assertEqualsInt(intmax_t expected,
+                     intmax_t actual,
                      const_string file,
                      int line);
 
@@ -165,25 +165,25 @@ void assertEqualsDouble(double expected,
                         int line);
 
 /**
- * Asserts that two strings are not equal.
+ * Asserts that two Strings are not equal.
  *
  * @param expected
  * @param actual
  */
 void assertNotEqualsString(String expected,
-                        String actual,
-                        const_string file,
-                        int line);
+                           String actual,
+                           const_string file,
+                           int line);
 
 /**
  * Asserts that two intmax_ts are not equal.
  * @param expected
  * @param actual
  */
-void assertNotEqualsInt(int expected,
-                     int actual,
-                     const_string file,
-                     int line);
+void assertNotEqualsInt(intmax_t expected,
+                        intmax_t actual,
+                        const_string file,
+                        int line);
 
 /**
  * Asserts that two doubles are not equal.
@@ -194,9 +194,9 @@ void assertNotEqualsInt(int expected,
  * @param precision
  */
 void assertNotEqualsDouble(double expected,
-                        double actual,
-                        const_string file,
-                        int line);
+                           double actual,
+                           const_string file,
+                           int line);
 
 /**
  * Assert Data
@@ -331,8 +331,6 @@ void assertEqualsPrecisionDouble(double expected,
 #define assertEqualsPrecision(expected, actual, precision)\
 assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
 
-
-
 /**
  * Asserts that two doubles are equal.
  * With the input precision.
@@ -342,10 +340,10 @@ assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
  * @param precision
  */
 void assertNotEqualsPrecisionDouble(double expected,
-                                 double actual,
-                                 int precision,
-                                 const_string file,
-                                 int line);
+                                    double actual,
+                                    int precision,
+                                    const_string file,
+                                    int line);
 
 #define assertNotEqualsPrecision(expected, actual, precision)\
 assertNotEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
@@ -410,9 +408,9 @@ assertEqualsAll(expected, actual, __FILE__, __LINE__);
  */
 template<typename Type, typename AnotherType>
 void assertNotEqualsAll(Type expected,
-                     AnotherType actual,
-                     const_string file,
-                     int line) {
+                        AnotherType actual,
+                        const_string file,
+                        int line) {
 
     String expectedString = String::valueOf(expected);
     String actualString = String::valueOf(actual);
@@ -585,36 +583,6 @@ void assertIntervalInt(intmax_t expectedFirst,
     }
 }
 
-void assert_dbl_far(double expected, double actual, int precision, const_string caller, int line) {
-    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
-    string expectedString = (string) calloc(1079, sizeof(char));
-    string actualString = (string) calloc(1079, sizeof(char));
-
-    // Get string type of input number
-    if(expected == 0.0f && expected < 0) {
-        sprintf(expectedString, "-%.*f", precision, expected);
-    } else {
-        sprintf(expectedString, "%.*f", precision, expected);
-    }
-
-    if(actual == -0.0f && actual < 0) {
-        sprintf(actualString, "-%.*f", precision, actual);
-    } else {
-        sprintf(actualString, "%.*f", precision, actual);
-    }
-
-    // Compare with string type
-    if ((expectedString == nullptr && actualString != nullptr) ||
-    (expectedString != nullptr && actualString == nullptr) ||
-    (expectedString && actualString && strcmp(expectedString, actualString) == 0)) {
-    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, actualString);
-    }
-
-    // Free
-    free(expectedString);
-    free(actualString);
-}
-
 void assertEqualsString(String expected,
                         String actual,
                         const_string file,
@@ -625,8 +593,8 @@ void assertEqualsString(String expected,
     }
 }
 
-void assertEqualsInt(int expected,
-                     int actual,
+void assertEqualsInt(intmax_t expected,
+                     intmax_t actual,
                      const_string file,
                      int line) {
 
@@ -636,14 +604,6 @@ void assertEqualsInt(int expected,
     }
 }
 
-/**
- * Asserts that two doubles are equal.
- * With the default precision is 15.
- *
- * @param expected
- * @param actual
- * @param precision
- */
 void assertEqualsDouble(double expected,
                         double actual,
                         const_string file,
@@ -680,8 +640,6 @@ void assertEqualsDouble(double expected,
     free(actualString);
 }
 
-
-
 void assertNotEqualsString(String expected,
                         String actual,
                         const_string file,
@@ -692,8 +650,8 @@ void assertNotEqualsString(String expected,
     }
 }
 
-void assertNotEqualsInt(int expected,
-                     int actual,
+void assertNotEqualsInt(intmax_t expected,
+                     intmax_t actual,
                      const_string file,
                      int line) {
 
@@ -703,14 +661,6 @@ void assertNotEqualsInt(int expected,
     }
 }
 
-/**
- * Asserts that two doubles are equal.
- * With the default precision is 15.
- *
- * @param expected
- * @param actual
- * @param precision
- */
 void assertNotEqualsDouble(double expected,
                         double actual,
                         const_string file,
@@ -747,14 +697,6 @@ void assertNotEqualsDouble(double expected,
     free(actualString);
 }
 
-/**
- * Assert Data
- *
- * @param expected
- * @param expectedSize
- * @param actual
- * @param actualSize
- */
 void assertDataString(String expected,
                        size_t expectedSize,
                        String actual,
@@ -777,50 +719,16 @@ void assertDataString(String expected,
     }
 }
 
-
-/**
- * Asserts that two unsigned intmax_ts are equal.
- *
- * @param expected
- * @param actual
- */
 void assertEqualsUnsignedInt(uintmax_t expected,
                    uintmax_t actual,
                    string file,
                    int line);
 
-/**
- * Asserts that two intmax_ts are not equal.
- *
- * @param expected
- * @param actual
- */
-void assertNotEqualsInt(intmax_t expected,
-                            intmax_t actual,
-                            const_string file,
-                            int line) {
-    if ((expected) == (actual)) {
-        CTEST_ERR("%s:%d  should not be %" PRIdMAX,
-                  file, line, actual);
-    }
-}
-
-/**
- * Asserts that two unsigned intmax_ts are not equal.
- *
- * @param expected
- * @param actual
- */
 void assertNotEqualsUnsignedInt(uintmax_t expected,
                         uintmax_t actual,
                         string file,
                         int line);
 
-/**
- * Assert Null
- *
- * @param actual
- */
 void assertNullVoid(void *actual,
                 const_string file,
                 int line) {
@@ -829,11 +737,6 @@ void assertNullVoid(void *actual,
     }
 }
 
-/**
- * Assert Not Null
- *
- * @param actual
- */
 void assertNotNullVoid(const void* actual,
                    const_string file,
                    int line) {
@@ -842,43 +745,22 @@ void assertNotNullVoid(const void* actual,
     }
 }
 
-/**
- * Assert True
- *
- * @param actual
- */
 void assertTrueInt(int actual, const_string file, int line) {
     if ((actual) == 0) {
         CTEST_ERR("%s:%d  should be true", file, line);
     }
 }
 
-/**
- * Assert False
- *
- * @param actual
- */
 void assertFalseInt(int actual, const_string file, int line) {
     if ((actual) != 0) {
         CTEST_ERR("%s:%d  should be false", file, line);
     }
 }
 
-/**
- * Assert Fail
- */
 void assertFailNoneArgument(const_string file, int line) {
     CTEST_ERR("%s:%d  shouldn't come here", file, line);
 }
 
-/**
- * Asserts that two doubles are equal.
- * With the input precision.
- *
- * @param expected
- * @param actual
- * @param precision
- */
 void assertEqualsPrecisionDouble(double expected,
                                   double actual,
                                   int precision,
@@ -914,14 +796,6 @@ void assertEqualsPrecisionDouble(double expected,
     free(actualString);
 }
 
-/**
- * Asserts that two doubles are equal.
- * With the input precision.
- *
- * @param expected
- * @param actual
- * @param precision
- */
 void assertNotEqualsPrecisionDouble(double expected,
                                   double actual,
                                   int precision,
