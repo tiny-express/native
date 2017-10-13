@@ -146,17 +146,10 @@ void assertEqualsString(String expected,
  * @param expected
  * @param actual
  */
-template <typename Type, typename AnotherType>
-void assertIntEquals(Type expected,
-                     AnotherType actual,
+void assertIntEquals(int expected,
+                     int actual,
                      const_string file,
-                     int line) {
-
-    if (expected != actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
-                  file, line, expected, actual);
-    }
-}
+                     int line);
 
 /**
  * Asserts that two doubles are equal.
@@ -333,8 +326,8 @@ void assertEqualsAll(Type expected,
                      const_string file,
                      int line) {
 
-    String expectedString;
-    String actualString;
+    String expectedString = String::valueOf(expected);
+    String actualString = String::valueOf(actual);
 
     boolean isInt = isSame(expected, sampleInt)
                     && isSame(actual, sampleInt);
@@ -345,7 +338,9 @@ void assertEqualsAll(Type expected,
 
     // Assert int equals
     if (isInt) {
-        assertIntEquals(expected, actual, file, line);
+        int expectedInt = Integer::valueOf(expectedString).intValue();
+        int actualInt = Integer::valueOf(actualString).intValue();
+        assertIntEquals(expectedInt, actualInt, file, line);
     }
 
     // Assert double equals
@@ -586,6 +581,17 @@ void assertEqualsString(String expected,
     if (expected != actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
                   file, line, expected.toString(), actual.toString());
+    }
+}
+
+void assertIntEquals(int expected,
+                     int actual,
+                     const_string file,
+                     int line) {
+
+    if (expected != actual) {
+        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+                  file, line, expected, actual);
     }
 }
 
