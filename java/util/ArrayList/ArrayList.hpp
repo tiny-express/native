@@ -68,53 +68,53 @@ namespace Java {
 						typedef E *_iterator;
 						typedef const E *_const_iterator;
                 private:
-                    /**
-                     * Replace escape sequence by raw string of that sequence to using in Json
-                     *
-                     * @param stringToReplace
-                     * @return a String with add escape sequence replaced
-                     */
-                    //TODO (anhnt) need String support unicode for unicode character
-                    String replaceEscapeSequence(const String stringToReplace) {
-                        int index = 0;
-                        String replacementString;
-                        String result;
-                        while (index < stringToReplace.length()) {
-                            int charAtIndex = stringToReplace.charAt(index);
-                            switch (charAtIndex) {
-                                case '\"':
-                                    replacementString = R"(\")";
-                                    break;
-                                case '\b':
-                                    replacementString = R"(\b)";
-                                    break;
-                                case '\f':
-                                    replacementString = R"(\f)";
-                                    break;
-                                case '\n':
-                                    replacementString = R"(\n)";
-                                    break;
-                                case '\r':
-                                    replacementString = R"(\r)";
-                                    break;
-                                case '\t':
-                                    replacementString = R"(\t)";
-                                    break;
-                                case '\\':
-                                    replacementString = R"(\\)";
-                                    break;
-                                default:
-                                        string charAtIndexString = stringFromChar(charAtIndex);
-                                        replacementString = charAtIndexString;
-                                        free(charAtIndexString);
-                            }
-
-                            result += replacementString;
-                            index++;
-                        }
-
-                        return result;
-                    }
+//                    /**
+//                     * Replace escape sequence by raw string of that sequence to using in Json
+//                     *
+//                     * @param stringToReplace
+//                     * @return a String with add escape sequence replaced
+//                     */
+//                    //TODO (anhnt) need String support unicode for unicode character
+//                    String replaceEscapeSequence(const String stringToReplace) {
+//                        int index = 0;
+//                        String replacementString;
+//                        String result;
+//                        while (index < stringToReplace.length()) {
+//                            int charAtIndex = stringToReplace.charAt(index);
+//                            switch (charAtIndex) {
+//                                case '\"':
+//                                    replacementString = R"(\")";
+//                                    break;
+//                                case '\b':
+//                                    replacementString = R"(\b)";
+//                                    break;
+//                                case '\f':
+//                                    replacementString = R"(\f)";
+//                                    break;
+//                                case '\n':
+//                                    replacementString = R"(\n)";
+//                                    break;
+//                                case '\r':
+//                                    replacementString = R"(\r)";
+//                                    break;
+//                                case '\t':
+//                                    replacementString = R"(\t)";
+//                                    break;
+//                                case '\\':
+//                                    replacementString = R"(\\)";
+//                                    break;
+//                                default:
+//                                        string charAtIndexString = stringFromChar(charAtIndex);
+//                                        replacementString = charAtIndexString;
+//                                        free(charAtIndexString);
+//                            }
+//
+//                            result += replacementString;
+//                            index++;
+//                        }
+//
+//                        return result;
+//                    }
 				
 				public:
 						_iterator begin() {
@@ -520,18 +520,18 @@ namespace Java {
 							return *spliterator;
 						}
 
-//            List<E> &subList(int fromIndex, int toIndex) const {
-//                // TODO: Please discuss about type return List
-//                List<E> *list = new ArrayList<E>();
-//                return *list;
-//            }
+                        //            List<E> &subList(int fromIndex, int toIndex) const {
+                        //                // TODO: Please discuss about type return List
+                        //                List<E> *list = new ArrayList<E>();
+                        //                return *list;
+                        //            }
 
-/**
- * Returns an array containing all of the elements in this
- * list in proper sequence (from first to last element).
- *
- * @return Array<Object>
- */
+                        /**
+                         * Returns an array containing all of the elements in this
+                         * list in proper sequence (from first to last element).
+                         *
+                         * @return Array<Object>
+                         */
 						Array<E> toArray() {
 							Array<E> resultArray;
 							for (E item : *this) {
@@ -540,53 +540,68 @@ namespace Java {
 							return resultArray;
 						}
 
-//			/**
-//			 * Returns an array containing all of the elements in this list
-//			 * in proper sequence (from first to last element);the runtime type of
-//			 * the returned array is that of the specified array.
-//			 *
-//			 * @tparam T
-//			 * @param a
-//			 * @return Array<T>
-//			 */
-//			template <class T>
-//			Array<T> &toArray(Array<T> array) const {
-//				return array;
-//			}
+                        //			/**
+                        //			 * Returns an array containing all of the elements in this list
+                        //			 * in proper sequence (from first to last element);the runtime type of
+                        //			 * the returned array is that of the specified array.
+                        //			 *
+                        //			 * @tparam T
+                        //			 * @param a
+                        //			 * @return Array<T>
+                        //			 */
+                        //			template <class T>
+                        //			Array<T> &toArray(Array<T> array) const {
+                        //				return array;
+                        //			}
 
-/**
- * Trims the capacity of this ArrayList instance to be the list's current size.
- */
+                        /**
+                         * Trims the capacity of this ArrayList instance to be the list's current size.
+                         */
 						void trimToSize() {
 							this->original.shrink_to_fit();
 						}
 
-/**
- * Convert ArrayList to string
- *
- * @return string
- */
+                        /**
+                         * Convert ArrayList to string
+                         *
+                         * @return string
+                         */
 						string toString() {
 							if (this->size() == 0) {
 								this->backup = "[]";
 								return this->backup.toString();
 							}
+
+                            boolean isStringArrayList = false;
 							String startArrayList = "[";
 							String commaAndSpace = ", ";
 							String endArrayList = "]";
+                            String appendString;
+
+                            if (instanceof<String>(this->original[ 0 ])) {
+                                isStringArrayList = true;
+                            }
 							int index;
-							for (index = 0; index < this->size() - 1; ++index) {
-								String appendString = this->original[ index ].toString();
+							for (index = 0; index < this->size(); ++index) {
+                                if (isStringArrayList) {
+                                    String stringAtIndex = this->original[ index ].toString();
+                                    appendString = String("\"") + stringAtIndex + String("\"");
+                                } else {
+                                    appendString = this->original[ index ].toString();
+                                }
 								appendString += commaAndSpace;
 								startArrayList += appendString;
 							}
-							startArrayList += this->original[ this->size() - 1 ].toString();
+							//startArrayList += this->original[ this->size() - 1 ].toString();
 							// Remove last semicolon
 							if (startArrayList.length() > 0) {
-								startArrayList = startArrayList.subString(0, startArrayList.length());
+								startArrayList = startArrayList.subString(0, startArrayList.length() - 2);
 							}
 							startArrayList += endArrayList;
-							this->backup = this->replaceEscapeSequence(startArrayList);
+							startArrayList = startArrayList.replaceAll("\"[", "[");
+                            startArrayList = startArrayList.replaceAll("]\"", "]");
+                            //this->backup = this->replaceEscapeSequence(startArrayList);
+                            this->backup = startArrayList;
 							return this->backup.toString();
 						}
 
