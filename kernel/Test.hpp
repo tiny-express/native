@@ -224,8 +224,8 @@ assertArrayAllType(expected, actual, __FILE__, __LINE__)
  * @param actualSize
  */
 template<typename Type>
-void assertArrayAllType(ArrayList<Type> expected,
-                        ArrayList<Type> actual,
+void assertArrayAllType(ArrayList<Type> &expected,
+                        ArrayList<Type> &actual,
                         const_string file,
                         int line) {
     size_t index;
