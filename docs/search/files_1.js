@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['badrequestexception_2ecpp',['BadRequestException.cpp',['../BadRequestException_8cpp.html',1,'']]],
+  ['badrequestexception_2ehpp',['BadRequestException.hpp',['../BadRequestException_8hpp.html',1,'']]],
   ['base64_2ecpp',['Base64.cpp',['../Base64_8cpp.html',1,'']]],
   ['base64_2ehpp',['Base64.hpp',['../Base64_8hpp.html',1,'']]],
   ['bitset_2ecpp',['BitSet.cpp',['../BitSet_8cpp.html',1,'']]],

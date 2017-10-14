@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
 
 using namespace Java::Lang;
@@ -35,17 +32,17 @@ using namespace Java::Lang;
 TEST (JavaLang, NegativeArraySizeExceptionConstructor) {
 // Constructs a new NegativeArraySizeException with null as its detail message.
 	NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
-	ASSERT_STR("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
 
 // Constructs a new NegativeArraySizeException with the specified detail message.
 	NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException("NegativeArraySizeException with the specified message");
-	ASSERT_STR("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
+	assertEquals("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
 }
 
 TEST (JavaLang, NegativeArraySizeExceptionTryCatch) {
 	try {
 		throw RuntimeException("Throw NegativeArraySizeException");
 	} catch (Exception e) {
-		ASSERT_STR("Throw NegativeArraySizeException", e.getMessage().toString());
+		assertEquals("Throw NegativeArraySizeException", e.getMessage().toString());
 	}
 }

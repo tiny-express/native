@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "Throwable.hpp"
 
 using namespace Java::Lang;
@@ -35,19 +32,19 @@ using namespace Java::Lang;
 TEST (JavaLang, ThrowableConstructor) {
 	// Constructs a new throwable with null as its detail message.
 	Throwable throwableWithNullMessage;
-	ASSERT_STR("", throwableWithNullMessage.getMessage().toString());
+	assertEquals("", throwableWithNullMessage.getMessage().toString());
 	
 	// Constructs a new throwable with the specified detail message.
 	Throwable throwableWithMessage = Throwable("Throwable with the specified message");
-	ASSERT_STR("Throwable with the specified message", throwableWithMessage.getMessage().toString());
+	assertEquals("Throwable with the specified message", throwableWithMessage.getMessage().toString());
 	
 	// Constructs a new throwable with the specified detail message and cause.
 	Throwable throwableWithMessageAndCause = Throwable("Throwable with the specified message and cause", &throwableWithMessage);
-	ASSERT_STR("Throwable with the specified message and cause", throwableWithMessageAndCause.getMessage().toString());
-	ASSERT_STR("Throwable with the specified message", throwableWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("Throwable with the specified message and cause", throwableWithMessageAndCause.getMessage().toString());
+	assertEquals("Throwable with the specified message", throwableWithMessageAndCause.getCause()->getMessage().toString());
 	
 	// Constructs a new throwable with the specified cause.
 	Throwable throwableWithCause = Throwable(&throwableWithMessageAndCause);
-	ASSERT_STR("Throwable with the specified message and cause", throwableWithCause.getCause()->getMessage().toString());
-	ASSERT_STR("Throwable with the specified message", throwableWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("Throwable with the specified message and cause", throwableWithCause.getCause()->getMessage().toString());
+	assertEquals("Throwable with the specified message", throwableWithCause.getCause()->getCause()->getMessage().toString());
 }

@@ -24,11 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-
-};
-
+#include "../../../kernel/Test.hpp"
 #include "ArithmeticException.hpp"
 
 using namespace Java::Lang;
@@ -36,17 +32,17 @@ using namespace Java::Lang;
 TEST (JavaLang, ArithmeticExceptionConstructor) {
 	// Constructs a new ArithmeticException with null as its detail message.
 	ArithmeticException arithmeticExceptionWithNullMessage;
-	ASSERT_STR("", arithmeticExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", arithmeticExceptionWithNullMessage.getMessage().toString());
 	
 	// Constructs a new ArithmeticException with the specified detail message.
 	ArithmeticException arithmeticExceptionWithMessage = ArithmeticException("ArithmeticException with the specified message");
-	ASSERT_STR("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage().toString());
+	assertEquals("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage().toString());
 }
 
 TEST (JavaLang, ArithmeticExceptionTryCatch) {
 	try {
 		throw ArithmeticException("Throw ArithmeticException");
 	} catch (ArithmeticException &e) {
-		ASSERT_STR("Throw ArithmeticException", e.getMessage().toString());
+		assertEquals("Throw ArithmeticException", e.getMessage().toString());
 	}
 }

@@ -25,38 +25,35 @@
 */
 
 #include "WebApplicationException.hpp"
-
-extern "C" {
-#include "../../../../kernel/test.h"
-}
+#include "../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws::Rs;
 
 TEST(WebApplicationException, Constructor) {
     // Default constructor, expected empty message
     WebApplicationException webApplicationException;
-    ASSERT_STR("", webApplicationException.getMessage().toString());
+    assertEquals("", webApplicationException.getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified detail message.
     WebApplicationException webApplicationExceptionWithMessage = WebApplicationException(
             "Illegal param");
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                webApplicationExceptionWithMessage.getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified detail message and cause.
     WebApplicationException webApplicationExceptionWithMessageAndCause =
             WebApplicationException("Illegal param", &webApplicationExceptionWithMessage);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                webApplicationExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                webApplicationExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified cause.
     WebApplicationException webApplicationExceptionWithCause =
             WebApplicationException(&webApplicationExceptionWithMessageAndCause);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                webApplicationExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                webApplicationExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
@@ -69,5 +66,5 @@ TEST(WebApplicationException, TryCatch) {
     } catch (WebApplicationException &exception) {
         webApplicationException = exception;
     }
-    ASSERT_STR("throw WebApplicationException", webApplicationException.getMessage().toString());
+    assertEquals("throw WebApplicationException", webApplicationException.getMessage().toString());
 }

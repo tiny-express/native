@@ -25,38 +25,35 @@
 */
 
 #include "BadRequestException.hpp"
-
-extern "C" {
-#include "../../../../kernel/test.h"
-}
+#include "../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws::Rs;
 
 TEST(BadRequestException, Constructor) {
     // Default constructor, expected empty message
     BadRequestException badRequestException;
-    ASSERT_STR("", badRequestException.getMessage().toString());
+    assertEquals("", badRequestException.getMessage().toString());
 
     // Constructs a new BadRequestException with the specified detail message.
     BadRequestException badRequestExceptionWithMessage = BadRequestException(
             "Illegal param");
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                badRequestExceptionWithMessage.getMessage().toString());
 
     // Constructs a new BadRequestException with the specified detail message and cause.
     BadRequestException badRequestExceptionWithMessageAndCause =
             BadRequestException("Illegal param", &badRequestExceptionWithMessage);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                badRequestExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                badRequestExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new BadRequestException with the specified cause.
     BadRequestException badRequestExceptionWithCause =
             BadRequestException(&badRequestExceptionWithMessageAndCause);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                badRequestExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                badRequestExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
@@ -69,5 +66,5 @@ TEST(BadRequestException, TryCatch) {
     } catch (BadRequestException &exception) {
         badRequestException = exception;
     }
-    ASSERT_STR("throw BadRequestException", badRequestException.getMessage().toString());
+    assertEquals("throw BadRequestException", badRequestException.getMessage().toString());
 }

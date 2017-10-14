@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "../URLEncoder/URLEncoder.hpp"
 #include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
@@ -38,18 +35,18 @@ TEST(JavaNet, URLEncoderEncode) {
     String target = u8"Quán ăn";
     String result = URLEncoder::encode(target);
     String expect = "Qu%c3%a1n+%c4%83n";
-    ASSERT_STR(expect.toString(), result.toString());
+    assertEquals(expect.toString(), result.toString());
 }
 
 TEST(JavaNet, URLEncoderEncodeUsingSpecificEncodingScheme) {
     String target = u8"Quán ăn";
     String result = URLEncoder::encode(target, "UTF-8");
     String expect = "Qu%c3%a1n+%c4%83n";
-    ASSERT_STR(expect.toString(), result.toString());
+    assertEquals(expect.toString(), result.toString());
 
     try {
         URLEncoder::encode(target, "UTF-0");
     } catch (UnsupportedEncodingException &ex) {
-        ASSERT_STR("UTF-0", ex.getMessage().toString());
+        assertEquals("UTF-0", ex.getMessage().toString());
     }
 }

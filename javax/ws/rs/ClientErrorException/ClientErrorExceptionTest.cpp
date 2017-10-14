@@ -25,38 +25,35 @@
 */
 
 #include "ClientErrorException.hpp"
-
-extern "C" {
-#include "../../../../kernel/test.h"
-}
+#include "../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws::Rs;
 
 TEST(ClientErrorException, Constructor) {
     // Default constructor, expected empty message
     ClientErrorException clientErrorException;
-    ASSERT_STR("", clientErrorException.getMessage().toString());
+    assertEquals("", clientErrorException.getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified detail message.
     ClientErrorException clientErrorExceptionWithMessage = ClientErrorException(
             "Illegal param");
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                clientErrorExceptionWithMessage.getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified detail message and cause.
     ClientErrorException clientErrorExceptionWithMessageAndCause =
             ClientErrorException("Illegal param", &clientErrorExceptionWithMessage);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                clientErrorExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                clientErrorExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified cause.
     ClientErrorException clientErrorExceptionWithCause =
             ClientErrorException(&clientErrorExceptionWithMessageAndCause);
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                clientErrorExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Illegal param",
+    assertEquals("Illegal param",
                clientErrorExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
@@ -69,5 +66,5 @@ TEST(ClientErrorException, TryCatch) {
     } catch (ClientErrorException &exception) {
         clientErrorException = exception;
     }
-    ASSERT_STR("throw ClientErrorException", clientErrorException.getMessage().toString());
+    assertEquals("throw ClientErrorException", clientErrorException.getMessage().toString());
 }

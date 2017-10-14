@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "CQLException.hpp"
 
 using namespace Javax::Cql;
@@ -35,27 +32,27 @@ using namespace Javax::Cql;
 TEST (JavaxCql, CQLExceptionConstructor) {
     // Constructs a new CQLException with null as its detail message.
     CQLException cqlExceptionWithNullMessage;
-    ASSERT_STR("", cqlExceptionWithNullMessage.getMessage().toString());
+    assertEquals("", cqlExceptionWithNullMessage.getMessage().toString());
 
     // Constructs a new CQLException with the specified detail message.
     CQLException cqlExceptionWithMessage = CQLException("CQLException with the specified message");
-    ASSERT_STR("CQLException with the specified message", cqlExceptionWithMessage.getMessage().toString());
+    assertEquals("CQLException with the specified message", cqlExceptionWithMessage.getMessage().toString());
 
     // Constructs a new CQLException with the specified detail message and cause.
     CQLException cqlExceptionWithMessageAndCause = CQLException("CQLException with the specified message and cause", &cqlExceptionWithMessage);
-    ASSERT_STR("CQLException with the specified message and cause", cqlExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("CQLException with the specified message", cqlExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    assertEquals("CQLException with the specified message and cause", cqlExceptionWithMessageAndCause.getMessage().toString());
+    assertEquals("CQLException with the specified message", cqlExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new CQLException with the specified cause.
     CQLException cqlExceptionWithCause = CQLException(&cqlExceptionWithMessageAndCause);
-    ASSERT_STR("CQLException with the specified message and cause", cqlExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("CQLException with the specified message", cqlExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    assertEquals("CQLException with the specified message and cause", cqlExceptionWithCause.getCause()->getMessage().toString());
+    assertEquals("CQLException with the specified message", cqlExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaxCql, CQLExceptionTryCatch) {
     try {
         throw CQLException("Throw CQLException");
     } catch (CQLException &e) {
-        ASSERT_STR("Throw CQLException", e.getMessage().toString());
+        assertEquals("Throw CQLException", e.getMessage().toString());
     }
 }

@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "IndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
@@ -35,27 +32,27 @@ using namespace Java::Lang;
 TEST (JavaLang, IndexOutOfBoundsExceptionConstructor) {
 	// Constructs a new IndexOutOfBoundsException with null as its detail message.
 	IndexOutOfBoundsException indexOutOfBoundsExceptionWithNullMessage;
-	ASSERT_STR("", indexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", indexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
 	
 	// Constructs a new IndexOutOfBoundsException with the specified detail message.
 	IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessage = IndexOutOfBoundsException("IndexOutOfBoundsException with the specified message");
-	ASSERT_STR("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessage.getMessage().toString());
+	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessage.getMessage().toString());
 	
 	// Constructs a new IndexOutOfBoundsException with the specified detail message and cause.
 	IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessageAndCause = IndexOutOfBoundsException("IndexOutOfBoundsException with the specified message and cause", &indexOutOfBoundsExceptionWithMessage);
-	ASSERT_STR("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithMessageAndCause.getMessage().toString());
-	ASSERT_STR("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithMessageAndCause.getMessage().toString());
+	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage().toString());
 	
 	// Constructs a new IndexOutOfBoundsException with the specified cause.
 	IndexOutOfBoundsException indexOutOfBoundsExceptionWithCause = IndexOutOfBoundsException(&indexOutOfBoundsExceptionWithMessageAndCause);
-	ASSERT_STR("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
-	ASSERT_STR("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
+	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST (JavaLang, IndexOutOfBoundsExceptionTryCatch) {
 	try {
 		throw IndexOutOfBoundsException("Throw IndexOutOfBoundsException");
 	} catch (Exception e) {
-		ASSERT_STR("Throw IndexOutOfBoundsException", e.getMessage().toString());
+		assertEquals("Throw IndexOutOfBoundsException", e.getMessage().toString());
 	}
 }

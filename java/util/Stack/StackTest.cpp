@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "../../lang/String/String.hpp"
 #include "Stack.hpp"
 
@@ -48,7 +45,7 @@ TEST (JavaUtil, StackPush) {
 	pushIntStack.push(pushInt3);
 	
 	// Check size
-	ASSERT_EQUAL(3, pushIntStack.size());
+	assertEquals(3, pushIntStack.size());
 	
 	// Integer
 	Stack<Integer> pushIntegerStack;
@@ -63,7 +60,7 @@ TEST (JavaUtil, StackPush) {
 	pushIntegerStack.push(pushInteger3);
 	
 	// Check size
-	ASSERT_EQUAL(3, pushIntegerStack.size());
+	assertEquals(3, pushIntegerStack.size());
 	
 	// string
 	Stack<String> pushStringStack;
@@ -78,7 +75,7 @@ TEST (JavaUtil, StackPush) {
 	pushStringStack.push(pushString3);
 	
 	// Check size
-	ASSERT_EQUAL(3, pushStringStack.size());
+	assertEquals(3, pushStringStack.size());
 	
 	// Object
 	Stack<Object> pushObjectStack;
@@ -93,7 +90,7 @@ TEST (JavaUtil, StackPush) {
 	pushObjectStack.push(pushObject3);
 	
 	// Check size
-	ASSERT_EQUAL(3, pushObjectStack.size());
+	assertEquals(3, pushObjectStack.size());
 	
 }
 
@@ -102,19 +99,19 @@ TEST (JavaUtil, StackEmpty) {
 	
 	// int
 	Stack<int> emptyIntStack;
-	ASSERT_TRUE(emptyIntStack.empty());
+	assertTrue(emptyIntStack.empty());
 	
 	// Integer
 	Stack<Integer> emptyIntegerStack;
-	ASSERT_TRUE(emptyIntegerStack.empty());
+	assertTrue(emptyIntegerStack.empty());
 	
 	// string
 	Stack<String> emptyStringStack;
-	ASSERT_TRUE(emptyStringStack.empty());
+	assertTrue(emptyStringStack.empty());
 	
 	// Object
 	Stack<Object> emptyObjectStack;
-	ASSERT_TRUE(emptyObjectStack.empty());
+	assertTrue(emptyObjectStack.empty());
 	
 	// Give an not empty Stack
 	
@@ -122,25 +119,25 @@ TEST (JavaUtil, StackEmpty) {
 	Stack<int> notEmptyIntStack;
 	int intTemp = 123;
 	notEmptyIntStack.push(intTemp);
-	ASSERT_FALSE(notEmptyIntStack.empty());
+	assertFalse(notEmptyIntStack.empty());
 	
 	// Integer
 	Stack<Integer> notEmptyIntegerStack;
 	Integer integerTemp = 123;
 	notEmptyIntegerStack.push(integerTemp);
-	ASSERT_FALSE(notEmptyIntegerStack.empty());
+	assertFalse(notEmptyIntegerStack.empty());
 	
 	// string
 	Stack<String> notEmptyStringStack;
 	String stringTemp = "123";
 	notEmptyStringStack.push(stringTemp);
-	ASSERT_FALSE(notEmptyStringStack.empty());
+	assertFalse(notEmptyStringStack.empty());
 	
 	// Object
 	Stack<Object> notEmptyObjectStack;
 	Object objectTemp;
 	notEmptyObjectStack.push(objectTemp);
-	ASSERT_FALSE(notEmptyObjectStack.empty());
+	assertFalse(notEmptyObjectStack.empty());
 }
 
 TEST (JavaUtil, StackPeek) {
@@ -158,8 +155,8 @@ TEST (JavaUtil, StackPeek) {
 	
 	// Return the top element without removing it
 	int intResult = peekIntStack.peek();
-	ASSERT_EQUAL(intResult, peekIntStack.peek());
-	ASSERT_EQUAL(3, peekIntStack.size());// check size to make sure the top element is not removed
+	assertEquals(intResult, peekIntStack.peek());
+	assertEquals(3, peekIntStack.size());// check size to make sure the top element is not removed
 	
 	// Integer
 	Stack<Integer> peekIntegerStack;
@@ -175,8 +172,8 @@ TEST (JavaUtil, StackPeek) {
 	
 	// Return the top element without removing it
 	Integer integerResult = peekIntegerStack.peek();
-	ASSERT_EQUAL(integerResult.intValue(), peekIntegerStack.peek().intValue());
-	ASSERT_EQUAL(3, peekIntegerStack.size()); // Check size to make sure the top element is not removed
+	assertEquals(integerResult.intValue(), peekIntegerStack.peek().intValue());
+	assertEquals(3, peekIntegerStack.size()); // Check size to make sure the top element is not removed
 	
 	// string
 	Stack<String> peekStringStack;
@@ -192,8 +189,8 @@ TEST (JavaUtil, StackPeek) {
 	
 	// Return the top element without removing it
 	String stringResult = peekStringStack.peek();
-	ASSERT_STR(stringResult.toString(), pushString3.toString());
-	ASSERT_EQUAL(3, peekStringStack.size());// check size to make sure the top element is not removed
+	assertEquals(stringResult.toString(), pushString3.toString());
+	assertEquals(3, peekStringStack.size());// check size to make sure the top element is not removed
 	
 	// Given an empty stack
 	Stack<int> emptyStack;
@@ -202,7 +199,7 @@ TEST (JavaUtil, StackPeek) {
 		emptyStack.peek();
 	}
 	catch (Exception e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 
@@ -221,8 +218,8 @@ TEST (JavaUtil, StackPop) {
 	
 	// Return the top element and remove it
 	int intResult = popIntStack.pop();
-	ASSERT_EQUAL(intResult, pushInt3);
-	ASSERT_EQUAL(2, popIntStack.size()); // check size to make sure the top element is removed
+	assertEquals(intResult, pushInt3);
+	assertEquals(2, popIntStack.size()); // check size to make sure the top element is removed
 	
 	// Integer
 	Stack<Integer> popIntegerStack;
@@ -238,8 +235,8 @@ TEST (JavaUtil, StackPop) {
 	
 	// Return the top element and remove it
 	Integer integerResult = popIntegerStack.pop();
-	ASSERT_EQUAL(integerResult.intValue(), pushInteger3.intValue());
-	ASSERT_EQUAL(2, popIntegerStack.size());// check size to make sure the top element is removed
+	assertEquals(integerResult.intValue(), pushInteger3.intValue());
+	assertEquals(2, popIntegerStack.size());// check size to make sure the top element is removed
 	
 	// string
 	Stack<String> popStringStack;
@@ -255,8 +252,8 @@ TEST (JavaUtil, StackPop) {
 	
 	// Return the top element and remove it
 	String stringResult = popStringStack.pop();
-	ASSERT_STR(stringResult.toString(), pushString3.toString());
-	ASSERT_EQUAL(2, popStringStack.size());// check size to make sure the top element is removed
+	assertEquals(stringResult.toString(), pushString3.toString());
+	assertEquals(2, popStringStack.size());// check size to make sure the top element is removed
 	
 	// Given an empty stack
 	Stack<int> emptyStack;
@@ -265,7 +262,7 @@ TEST (JavaUtil, StackPop) {
 		emptyStack.peek();
 	}
 	catch (Exception e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }
 
@@ -283,8 +280,8 @@ TEST (JavaUtil, StackSearch) {
 	searchIntStack.push(pushInt3);
 	
 	// Search elements in Stack
-	ASSERT_EQUAL(1, searchIntStack.search(pushInt2));
-	ASSERT_EQUAL(-1, searchIntStack.search(5));
+	assertEquals(1, searchIntStack.search(pushInt2));
+	assertEquals(-1, searchIntStack.search(5));
 	
 	// Integer
 	Stack<Integer> searchIntegerStack;
@@ -299,8 +296,8 @@ TEST (JavaUtil, StackSearch) {
 	searchIntegerStack.push(pushInteger3);
 	
 	// Search elements in Stack
-	ASSERT_EQUAL(1, searchIntegerStack.search(pushInteger2));
-	ASSERT_EQUAL(-1, searchIntegerStack.search(5));
+	assertEquals(1, searchIntegerStack.search(pushInteger2));
+	assertEquals(-1, searchIntegerStack.search(5));
 	
 	// string
 	Stack<String> searchStringStack;
@@ -315,6 +312,6 @@ TEST (JavaUtil, StackSearch) {
 	searchStringStack.push(pushString3);
 	
 	// Search elements in Stack
-	ASSERT_EQUAL(1, searchStringStack.search(pushString2));
-	ASSERT_EQUAL(-1, searchStringStack.search("5"));
+	assertEquals(1, searchStringStack.search(pushString2));
+	assertEquals(-1, searchStringStack.search("5"));
 }

@@ -24,17 +24,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "EmptyStackException.hpp"
 
 using namespace Java::Util;
 
 TEST (JavaUtil, EmptyStackExceptionConstructor) {
 	EmptyStackException emptyStackExceptionNullMess;
-	ASSERT_STR("", emptyStackExceptionNullMess.getMessage().toString());
+	assertEquals("", emptyStackExceptionNullMess.getMessage().toString());
 }
 
 TEST (JavaUtil, EmptyStackExceptionTryCatch) {
@@ -42,6 +39,6 @@ TEST (JavaUtil, EmptyStackExceptionTryCatch) {
 		throw EmptyStackException();
 	}
 	catch (EmptyStackException e) {
-		ASSERT_STR("", e.getMessage().toString());
+		assertEquals("", e.getMessage().toString());
 	}
 }

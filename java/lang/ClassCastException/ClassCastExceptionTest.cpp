@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "../ClassCastException/ClassCastException.hpp"
 
 using namespace Java::Lang;
@@ -35,11 +32,11 @@ using namespace Java::Lang;
 TEST (JavaLang, ClassCastExceptionConstructor) {
 // Constructs a new ClassCastException with null as its detail message.
 	ClassCastException classCastExceptionWithNullMessage;
-	ASSERT_STR("", classCastExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", classCastExceptionWithNullMessage.getMessage().toString());
 
 // Constructs a new ClassCastException with the specified detail message.
 	ClassCastException classCastExceptionWithMessage = ClassCastException("ClassCastException with the specified message");
-	ASSERT_STR("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
+	assertEquals("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
 }
 
 TEST (JavaLang, ClassCastExceptionTryCatch) {
@@ -47,6 +44,6 @@ TEST (JavaLang, ClassCastExceptionTryCatch) {
 		throw ClassCastException("Throw ClassCastException");
 	}
 	catch (ClassCastException ex) {
-		ASSERT_STR("Throw ClassCastException", ex.getMessage().toString());
+		assertEquals("Throw ClassCastException", ex.getMessage().toString());
 	}
 }

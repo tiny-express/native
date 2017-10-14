@@ -71,7 +71,10 @@ $(function() {
 <div class="title">Double.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="Number_8hpp_source.html">../Number/Number.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;../../../kernel/String.hpp&quot;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &quot;<a class="el" href="Number_8hpp_source.html">../Number/Number.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="String_8hpp_source.html">../String/String.hpp</a>&quot;</code><br />
 </div>
 <p><a href="Double_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -100,17 +103,17 @@ Variables</h2></td></tr>
 <tr class="separator:ac793ed8c7f37f08e14a46b47a46a8f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3a60af2b5ae29381e829ff0e191466d"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#af3a60af2b5ae29381e829ff0e191466d">SIGNIF_BIT_MASK</a> = 0x000FFFFFFFFFFFFFL</td></tr>
 <tr class="separator:af3a60af2b5ae29381e829ff0e191466d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a545572e4bef6c5c199eeb08122ea8f99"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a545572e4bef6c5c199eeb08122ea8f99">POSITIVE_INFINITY_DOUBLE</a> = 1.0 / 0.0</td></tr>
+<tr class="memitem:a545572e4bef6c5c199eeb08122ea8f99"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a545572e4bef6c5c199eeb08122ea8f99">Double::POSITIVE_INFINITY</a> = 1.0 / 0.0</td></tr>
 <tr class="separator:a545572e4bef6c5c199eeb08122ea8f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3d9292da300d6edbc2216a47c00177"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#aea3d9292da300d6edbc2216a47c00177">NEGATIVE_INFINITY_DOUBLE</a> = -1.0 / 0.0</td></tr>
+<tr class="memitem:aea3d9292da300d6edbc2216a47c00177"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#aea3d9292da300d6edbc2216a47c00177">Double::NEGATIVE_INFINITY</a> = -1.0 / 0.0</td></tr>
 <tr class="separator:aea3d9292da300d6edbc2216a47c00177"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26376fc6fe5a231fb7559f5b50895105"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a26376fc6fe5a231fb7559f5b50895105">NaN_NUMBER_DOUBLE</a> = 0.0 / 0.0</td></tr>
+<tr class="memitem:a26376fc6fe5a231fb7559f5b50895105"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a26376fc6fe5a231fb7559f5b50895105">Double::NaN</a> = 0.0 / 0.0</td></tr>
 <tr class="separator:a26376fc6fe5a231fb7559f5b50895105"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8368233193dc7996009a1b51c210292"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#ab8368233193dc7996009a1b51c210292">MAX_VALUE_DOUBLE</a> = std::numeric_limits&lt;double&gt;::max()</td></tr>
+<tr class="memitem:ab8368233193dc7996009a1b51c210292"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#ab8368233193dc7996009a1b51c210292">Double::MAX_VALUE</a> = std::numeric_limits&lt;double&gt;::max()</td></tr>
 <tr class="separator:ab8368233193dc7996009a1b51c210292"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23f35824ea8d70e63e45bc518be2b446"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a23f35824ea8d70e63e45bc518be2b446">MIN_NORMAL_DOUBLE</a> = std::numeric_limits&lt;double&gt;::denorm_min()</td></tr>
+<tr class="memitem:a23f35824ea8d70e63e45bc518be2b446"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#a23f35824ea8d70e63e45bc518be2b446">Double::MIN_NORMAL</a> = std::numeric_limits&lt;double&gt;::denorm_min()</td></tr>
 <tr class="separator:a23f35824ea8d70e63e45bc518be2b446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd063d76f07f5ca3a83f51b5c361ad51"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#abd063d76f07f5ca3a83f51b5c361ad51">MIN_VALUE_DOUBLE</a> = std::numeric_limits&lt;double&gt;::min()</td></tr>
+<tr class="memitem:abd063d76f07f5ca3a83f51b5c361ad51"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#abd063d76f07f5ca3a83f51b5c361ad51">Double::MIN_VALUE</a> = std::numeric_limits&lt;double&gt;::min()</td></tr>
 <tr class="separator:abd063d76f07f5ca3a83f51b5c361ad51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7a708c90c113dd094d52c52624d460c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Double_8hpp.html#ae7a708c90c113dd094d52c52624d460c">MIN_EXPONENT_DOUBLE</a> = -1022</td></tr>
 <tr class="separator:ae7a708c90c113dd094d52c52624d460c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,7 +176,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ab8368233193dc7996009a1b51c210292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8368233193dc7996009a1b51c210292">&#9670;&nbsp;</a></span>MAX_VALUE_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8368233193dc7996009a1b51c210292">&#9670;&nbsp;</a></span>Double::MAX_VALUE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +185,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MAX_VALUE_DOUBLE = std::numeric_limits&lt;double&gt;::max()</td>
+          <td class="memname">double Double::MAX_VALUE = std::numeric_limits&lt;double&gt;::max()</td>
         </tr>
       </table>
   </td>
@@ -219,7 +222,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a23f35824ea8d70e63e45bc518be2b446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23f35824ea8d70e63e45bc518be2b446">&#9670;&nbsp;</a></span>MIN_NORMAL_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a23f35824ea8d70e63e45bc518be2b446">&#9670;&nbsp;</a></span>Double::MIN_NORMAL</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +231,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MIN_NORMAL_DOUBLE = std::numeric_limits&lt;double&gt;::denorm_min()</td>
+          <td class="memname">double Double::MIN_NORMAL = std::numeric_limits&lt;double&gt;::denorm_min()</td>
         </tr>
       </table>
   </td>
@@ -242,7 +245,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="abd063d76f07f5ca3a83f51b5c361ad51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd063d76f07f5ca3a83f51b5c361ad51">&#9670;&nbsp;</a></span>MIN_VALUE_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd063d76f07f5ca3a83f51b5c361ad51">&#9670;&nbsp;</a></span>Double::MIN_VALUE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +254,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MIN_VALUE_DOUBLE = std::numeric_limits&lt;double&gt;::min()</td>
+          <td class="memname">double Double::MIN_VALUE = std::numeric_limits&lt;double&gt;::min()</td>
         </tr>
       </table>
   </td>
@@ -265,7 +268,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a26376fc6fe5a231fb7559f5b50895105"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26376fc6fe5a231fb7559f5b50895105">&#9670;&nbsp;</a></span>NaN_NUMBER_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a26376fc6fe5a231fb7559f5b50895105">&#9670;&nbsp;</a></span>Double::NaN</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +277,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double NaN_NUMBER_DOUBLE = 0.0 / 0.0</td>
+          <td class="memname">double Double::NaN = 0.0 / 0.0</td>
         </tr>
       </table>
   </td>
@@ -288,7 +291,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aea3d9292da300d6edbc2216a47c00177"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea3d9292da300d6edbc2216a47c00177">&#9670;&nbsp;</a></span>NEGATIVE_INFINITY_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aea3d9292da300d6edbc2216a47c00177">&#9670;&nbsp;</a></span>Double::NEGATIVE_INFINITY</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +300,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0</td>
+          <td class="memname">double Double::NEGATIVE_INFINITY = -1.0 / 0.0</td>
         </tr>
       </table>
   </td>
@@ -311,7 +314,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a545572e4bef6c5c199eeb08122ea8f99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a545572e4bef6c5c199eeb08122ea8f99">&#9670;&nbsp;</a></span>POSITIVE_INFINITY_DOUBLE</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a545572e4bef6c5c199eeb08122ea8f99">&#9670;&nbsp;</a></span>Double::POSITIVE_INFINITY</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +323,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0</td>
+          <td class="memname">double Double::POSITIVE_INFINITY = 1.0 / 0.0</td>
         </tr>
       </table>
   </td>

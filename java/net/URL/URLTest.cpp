@@ -24,9 +24,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-}
-
 #include "URL.hpp"
 
 using namespace Java::Net;
@@ -35,52 +32,52 @@ using namespace Java::Lang;
 //TEST (JavaNet, URLConstructor) {
 //	String urlString = "http://test.com:3000/file/test?param=1";
 //	URL url(urlString);
-//	ASSERT_STR("http", url.getProtocol().toString());
-//	ASSERT_STR("test.com", url.getHost().toString());
-//	ASSERT_EQUAL(3000, url.getPort());
-//	ASSERT_STR("/file/test", url.getPath().toString());
-//	ASSERT_STR("param=1", url.getQuery().toString());
+//	assertEquals("http", url.getProtocol().toString());
+//	assertEquals("test.com", url.getHost().toString());
+//	assertEquals(3000, url.getPort());
+//	assertEquals("/file/test", url.getPath().toString());
+//	assertEquals("param=1", url.getQuery().toString());
 //
 //	String urlString2 = "http://";
 //	URL url2(urlString2);
-//	ASSERT_STR("", url2.getProtocol().toString());
-//	ASSERT_STR("", url2.getHost().toString());
-//	ASSERT_STR("", url2.getPath().toString());
-//	ASSERT_STR("", url2.getQuery().toString());
-//	ASSERT_EQUAL(-1, url2.getPort());
+//	assertEquals("", url2.getProtocol().toString());
+//	assertEquals("", url2.getHost().toString());
+//	assertEquals("", url2.getPath().toString());
+//	assertEquals("", url2.getQuery().toString());
+//	assertEquals(-1, url2.getPort());
 //}
 //
 //TEST (JavaNet, URLToString) {
 //	// Full URL with protocol, host, port, path and query
 //	URL url = URL("http://test.com:80/file/test?param=1");
-//	ASSERT_STR("test.com", url.getHost().toString());
-//	ASSERT_STR("/file/test", url.getPath().toString());
-//	ASSERT_EQUAL(80, url.getPort());
-//	ASSERT_STR("http", url.getProtocol().toString());
-//	ASSERT_STR("param=1", url.getQuery().toString());
+//	assertEquals("test.com", url.getHost().toString());
+//	assertEquals("/file/test", url.getPath().toString());
+//	assertEquals(80, url.getPort());
+//	assertEquals("http", url.getProtocol().toString());
+//	assertEquals("param=1", url.getQuery().toString());
 //
 //    string result = url.toString();
-//	ASSERT_STR("http://test.com:80/file/test?param=1", result);
+//	assertEquals("http://test.com:80/file/test?param=1", result);
 //	free(result);
 
 //
 //	// URL without port
 //	urlString = "http://test.com/file/test?param=1";
 //	URL url2(urlString);
-//	ASSERT_STR("http://test.com/file/test?param=1", url2.toString());
+//	assertEquals("http://test.com/file/test?param=1", url2.toString());
 //
 //	// URL without path
 //	urlString = "http://test.com:8080?param=1&param1=2";
 //	URL url3(urlString);
-//	ASSERT_STR("http://test.com:8080?param=1&param1=2", url3.toString());
+//	assertEquals("http://test.com:8080?param=1&param1=2", url3.toString());
 
 //	// URL without query
 //	urlString = "https://test.com:9200/index";
 //	url = URL(urlString);
-//	ASSERT_STR("https://test.com:9200/index", url.toString());
+//	assertEquals("https://test.com:9200/index", url.toString());
 //
 //	// URL with just protocol and host
 //	urlString = "http://test.com";
 //	url = URL(urlString);
-//	ASSERT_STR("http://test.com", url.toString());
+//	assertEquals("http://test.com", url.toString());
 //}

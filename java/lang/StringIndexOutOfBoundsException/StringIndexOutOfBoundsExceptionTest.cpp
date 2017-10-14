@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-};
-
+#include "../../../kernel/Test.hpp"
 #include "StringIndexOutOfBoundsException.hpp"
 
 using namespace Java::Lang;
@@ -35,31 +32,31 @@ using namespace Java::Lang;
 TEST (JavaLang, StringIndexOutOfBoundsExceptionConstructor) {
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with null as its detail message.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithNullMessage;
-	ASSERT_STR("", stringIndexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", stringIndexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessage = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message");
-	ASSERT_STR("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage().toString());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message and cause.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessageAndCause = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message and cause", &stringIndexOutOfBoundsExceptionWithMessage);
-	ASSERT_STR("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithMessageAndCause.getMessage().toString());
-	ASSERT_STR("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithMessageAndCause.getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage().toString());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified cause.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithCause = StringIndexOutOfBoundsException(&stringIndexOutOfBoundsExceptionWithMessageAndCause);
-	ASSERT_STR("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
-	ASSERT_STR("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
 	
 	// Constructs a new StringIndexOutOfBoundsException class with an argument indicating the illegal index.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithIllegalIndex = StringIndexOutOfBoundsException(999);
-	ASSERT_STR("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage().toString());
+	assertEquals("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage().toString());
 }
 
 TEST (JavaLang, StringIndexOutOfBoundsExceptionTryCatch) {
 	try {
 		throw StringIndexOutOfBoundsException("Throw StringIndexOutOfBoundsException");
 	} catch (Exception e) {
-		ASSERT_STR("Throw StringIndexOutOfBoundsException", e.getMessage().toString());
+		assertEquals("Throw StringIndexOutOfBoundsException", e.getMessage().toString());
 	}
 }

@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
@@ -42,7 +39,7 @@ TEST (JavaUtil, RandomNextInt) {
 	// Test 100 number
 	for (int index = 0; index < 100; index++) {
 		int a = random1.nextInt();
-		ASSERT_TRUE(a >= intMin && a <= intMax); // Check if the return value is in Integer range
+		assertTrue(a >= intMin && a <= intMax); // Check if the return value is in Integer range
 	}
 }
 
@@ -56,7 +53,7 @@ TEST (JavaUtil, RandomNextIntWithBound) {
 		random1.nextInt(-10);
 	}
 	catch (IllegalArgumentException &e) {
-		ASSERT_STR("bound must be positive", e.getMessage().toString());
+		assertEquals("bound must be positive", e.getMessage().toString());
 	}
 	
 	// Test nextInt(bound) with bound = 100
@@ -64,14 +61,14 @@ TEST (JavaUtil, RandomNextIntWithBound) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		int a = random1.nextInt(bound);
-		ASSERT_TRUE(a >= 0 && a < bound); // Check if the return value is in [0, bound)
+		assertTrue(a >= 0 && a < bound); // Check if the return value is in [0, bound)
 	}
 	
 	// Test nextInt(bound) with bound = 64 is a power of 2
 	bound = 64;
 	for (index = 0; index < 100; index++) {
 		int a = random1.nextInt(bound);
-		ASSERT_TRUE(a >= 0 && a < bound); // Check if the return value is in [0, bound)
+		assertTrue(a >= 0 && a < bound); // Check if the return value is in [0, bound)
 	}
 }
 
@@ -90,7 +87,7 @@ TEST (JavaUtil, RandomNextBytes) {
 	byte byteMin = 0;
 	int index;
 	for (index = 0; index < byteArray.length; index++) {
-		ASSERT_TRUE(byteArray[ index ] >= byteMin && byteArray[ index ] <= byteMax);
+		assertTrue(byteArray[ index ] >= byteMin && byteArray[ index ] <= byteMax);
 	}
 }
 
@@ -102,7 +99,7 @@ TEST (JavaUtil, RandomNextDouble) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		double generatedDouble = random1.nextDouble();
-		ASSERT_TRUE(generatedDouble >= 0 && generatedDouble < 1.0);
+		assertTrue(generatedDouble >= 0 && generatedDouble < 1.0);
 	}
 }
 
@@ -117,7 +114,7 @@ TEST (JavaUtil, RandomNextLong) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		double generatedLong = random1.nextLong();
-		ASSERT_TRUE(generatedLong >= longMin && generatedLong <= longMax);
+		assertTrue(generatedLong >= longMin && generatedLong <= longMax);
 	}
 }
 
@@ -129,7 +126,7 @@ TEST (JavaUtil, RandomNextFloat) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		float generatedFloat = random1.nextFloat();
-		ASSERT_TRUE(generatedFloat >= 0 && generatedFloat < 1.0);
+		assertTrue(generatedFloat >= 0 && generatedFloat < 1.0);
 	}
 }
 
@@ -141,7 +138,7 @@ TEST (JavaUtil, RandomNextBoolean) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		boolean generatedBool = random1.nextBoolean();
-		ASSERT_TRUE(generatedBool == TRUE || generatedBool == FALSE);
+		assertTrue(generatedBool == true || generatedBool == false);
 	}
 }
 
@@ -161,7 +158,7 @@ TEST (JavaUtil, RandomSetSeed) {
 	Random random1;
 	long expectSeed = ( 100 ^ 0x5DEECE66DL ) & (( 1L << 48 ) - 1 );
 	random1.setSeed(100);
-	//ASSERT_EQUAL(expectSeed, random1.getSeed());
+	//assertEquals(expectSeed, random1.getSeed());
 }
 
 TEST (JavaUtil, RandomNextString) {
@@ -171,6 +168,6 @@ TEST (JavaUtil, RandomNextString) {
 	int index;
 	for (index = 0; index < 100; index++) {
 		string = random1.nextString(10);
-		ASSERT_EQUAL(10, string.length());
+		assertEquals(10, string.length());
 	}
 }

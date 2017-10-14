@@ -27,6 +27,9 @@
 #ifndef JAVA_LANG_STRING_STRING_HPP_
 #define JAVA_LANG_STRING_STRING_HPP_
 
+#include "../../../kernel/String.hpp"
+#include "../../../kernel/Common.hpp"
+
 #include <typeinfo>
 #include <regex>
 #include <string>
@@ -389,7 +392,7 @@ namespace Java {
 					return true;
 				}
 				if (instanceof<String>(anObject)) {
-					return (boolean) string_equals(original, anObject.toString());
+					return (boolean) stringEquals(original, anObject.toString());
 				}
 				return false;
 			}
@@ -859,6 +862,22 @@ namespace Java {
              */
 			static String valueOf(string stringValue);
 
+			/**
+             * Returns the String representation of the String argument.
+             *
+             * @param stringValue
+             * @return a String containing stringValue.
+             */
+			static String valueOf(String stringValue);
+
+            /**
+             * Returns the String representation of the const string argument.
+             *
+             * @param stringValue
+             * @return a String containing stringValue.
+             */
+            static String valueOf(const_string constStringValue);
+
             /**
              * Returns the String representation of the short argument.
              *
@@ -882,6 +901,14 @@ namespace Java {
              * @return a String representation of the long argument.
              */
 			static String valueOf(long longValue);
+
+			/**
+             * Returns the String representation of the unsigned long argument.
+             *
+             * @param longValue
+             * @return a String representation of the long argument.
+             */
+			static String valueOf(unsigned long longValue);
 
             /**
              * Returns the String representation of the float argument.
@@ -908,7 +935,7 @@ namespace Java {
              */
 			inline String operator+(const string &target) {
 				auto targetValue = (string) target;
-				int targetLength = length_pointer_char((string) target);
+				int targetLength = lengthPointerChar((string) target);
 				int newLength = this->size + targetLength;
 				STRING_OPERATOR_PLUS
 				return this->original;
@@ -950,7 +977,7 @@ namespace Java {
              */
 			inline String &operator+=(const_string target) {
 				auto targetValue = (string) target;
-				int targetLength = length_pointer_char((string) target);
+				int targetLength = lengthPointerChar((string) target);
 				int newLength = this->size + targetLength;
 				STRING_OPERATOR_PLUS
 				return *this;
@@ -964,7 +991,7 @@ namespace Java {
             */
 			inline String &operator+=(const char &target) {
 				string pointerHolder = this->original;
-				string_append(&this->original, target);
+				stringAppend(&this->original, target);
 				this->size++;
 				this->capacity = this->size;
 				free(pointerHolder);
@@ -978,7 +1005,7 @@ namespace Java {
 			 * @return true if this String is equal to target; false otherwise
 			 */
 			inline boolean operator==(const String &target) const {
-				return string_equals(this->original, target.toString()) != 0;
+				return stringEquals(this->original, target.toString()) != 0;
 			}
 
 			/**

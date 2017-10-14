@@ -24,14 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Map.hpp"
 
 using namespace Java::Util;
 
 TEST (JavaUtil, MapEntryConstructor) {
-	ASSERT_STR("", "");
+	assertEquals("", "");
 }

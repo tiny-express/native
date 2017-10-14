@@ -24,51 +24,48 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "Vector.hpp"
 
 using namespace Java::Util;
 
 TEST (JavaUtil, VectorDefaultConstructor) {
 	Vector<int> vector;
-	ASSERT_EQUAL(10, vector.capacity());
+	assertEquals(10, vector.capacity());
 }
 
 TEST (JavaUtil, VectorCustomConstructor) {
 	// Checks initial capacity.
 	Vector<int> vector1(30);
-	ASSERT_EQUAL(30, vector1.capacity());
+	assertEquals(30, vector1.capacity());
 	
 	// Checks initial capacity and capacity increment.
 	Vector<int> vector2(3, 2);
-	ASSERT_EQUAL(0, vector2.size());
-	ASSERT_EQUAL(3, vector2.capacity());
+	assertEquals(0, vector2.size());
+	assertEquals(3, vector2.capacity());
 	vector2.add(1);
-	ASSERT_EQUAL(1, vector2.size());
-	ASSERT_EQUAL(3, vector2.capacity());
+	assertEquals(1, vector2.size());
+	assertEquals(3, vector2.capacity());
 	vector2.add(2);
-	ASSERT_EQUAL(2, vector2.size());
-	ASSERT_EQUAL(3, vector2.capacity());
+	assertEquals(2, vector2.size());
+	assertEquals(3, vector2.capacity());
 	vector2.add(3);
-	ASSERT_EQUAL(3, vector2.size());
-	ASSERT_EQUAL(3, vector2.capacity());
+	assertEquals(3, vector2.size());
+	assertEquals(3, vector2.capacity());
 	// new capacity = old capacity + capacity increment.
 	vector2.add(4);
-	ASSERT_EQUAL(4, vector2.size());
-	ASSERT_EQUAL(5, vector2.capacity());
+	assertEquals(4, vector2.size());
+	assertEquals(5, vector2.capacity());
 }
 
 TEST (JavaUtil, VectorInitializerListConstructor) {
 	// Given a vector construct from a std::initializer_list.
 	Vector<int> vector { 1, 2, 3, 4, 5 };
 	// Checks size.
-	ASSERT_EQUAL(5, vector.size());
+	assertEquals(5, vector.size());
 	// Check the first-last elements.
-	ASSERT_EQUAL(1, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(1, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 }
 
 TEST (JavaUtil, VectorCopyConstructor) {
@@ -81,9 +78,9 @@ TEST (JavaUtil, VectorCopyConstructor) {
 	target.add(5);
 	// Use copy-constructor.
 	Vector<int> vector(target);
-	ASSERT_EQUAL(target.size(), vector.size());
-	ASSERT_EQUAL(target.firstElement(), vector.firstElement());
-	ASSERT_EQUAL(target.lastElement(), vector.lastElement());
+	assertEquals(target.size(), vector.size());
+	assertEquals(target.firstElement(), vector.firstElement());
+	assertEquals(target.lastElement(), vector.lastElement());
 }
 
 TEST (JavaUtil, VectorAdd) {
@@ -94,26 +91,26 @@ TEST (JavaUtil, VectorAdd) {
 	vector.add(3);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_EQUAL(5, vector.size());
-	ASSERT_EQUAL(1, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(5, vector.size());
+	assertEquals(1, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 	
 	// Add an element at specified index in vector - return that element at that index.
 	vector.add(3, 100);
-	ASSERT_EQUAL(100, vector.get(3));
-	ASSERT_EQUAL(4, vector.get(4));
+	assertEquals(100, vector.get(3));
+	assertEquals(4, vector.get(4));
 }
 
 TEST (JavaUtil, VectorAddAll) {
 	// Given an empty vector.
 	Vector<int> vector1;
 	// Add all elements from initializer list.
-	ASSERT_TRUE(vector1.addAll({ 1, 2, 3, 4, 5 }));
+	assertTrue(vector1.addAll({ 1, 2, 3, 4, 5 }));
 	// Checks size.
-	ASSERT_EQUAL(5, vector1.size());
+	assertEquals(5, vector1.size());
 	// Check the first-last elements.
-	ASSERT_EQUAL(1, vector1.firstElement());
-	ASSERT_EQUAL(5, vector1.lastElement());
+	assertEquals(1, vector1.firstElement());
+	assertEquals(5, vector1.lastElement());
 	
 	// Given a valid vector.
 	Vector<int> vector2;
@@ -123,13 +120,13 @@ TEST (JavaUtil, VectorAddAll) {
 	vector2.add(4);
 	vector2.add(5);
 	// Add initializer list at index 2.
-	ASSERT_TRUE(vector2.addAll(2, { 7, 8, 9 }));
+	assertTrue(vector2.addAll(2, { 7, 8, 9 }));
 	// Check the first-last element.
-	ASSERT_EQUAL(8, vector2.size());
-	ASSERT_EQUAL(1, vector2.firstElement());
-	ASSERT_EQUAL(5, vector2.lastElement());
+	assertEquals(8, vector2.size());
+	assertEquals(1, vector2.firstElement());
+	assertEquals(5, vector2.lastElement());
 	// Check element at index 2.
-	ASSERT_EQUAL(7, vector2.get(2));
+	assertEquals(7, vector2.get(2));
 }
 
 TEST (JavaUtil, VectorAddElement) {
@@ -139,31 +136,31 @@ TEST (JavaUtil, VectorAddElement) {
 	vector.addElement(3);
 	vector.addElement(4);
 	vector.addElement(5);
-	ASSERT_EQUAL(1, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(1, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 }
 
 TEST (JavaUtil, VectorClear) {
 	// Given empty vector - return size of vector is 0.
 	Vector<String> vector;
-	ASSERT_EQUAL(0, vector.size());
+	assertEquals(0, vector.size());
 	
 	// Add three elements into vector - return size of vector is 3.
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_EQUAL(3, vector.size());
+	assertEquals(3, vector.size());
 	
 	// Clear all elements of vector - return size of vector is 0.
 	vector.clear();
-	ASSERT_EQUAL(0, vector.size());
+	assertEquals(0, vector.size());
 }
 
 TEST (JavaUtil, VectorClone) {
 	// Given an empty vector, check size of cloned vector.
 	Vector<int> vector;
 	Vector<int> clonedVector1 = vector.clone();
-	ASSERT_EQUAL(0, clonedVector1.size());
+	assertEquals(0, clonedVector1.size());
 	
 	// Given a valid vector, check size of cloned vector; check first-last element.7
 	vector.add(1);
@@ -172,9 +169,9 @@ TEST (JavaUtil, VectorClone) {
 	vector.add(4);
 	vector.add(5);
 	Vector<int> clonedVector2 = vector.clone();
-	ASSERT_EQUAL(5, clonedVector2.size());
-	ASSERT_EQUAL(1, clonedVector2.firstElement());
-	ASSERT_EQUAL(5, clonedVector2.lastElement());
+	assertEquals(5, clonedVector2.size());
+	assertEquals(1, clonedVector2.firstElement());
+	assertEquals(5, clonedVector2.lastElement());
 }
 
 TEST (JavaUtil, VectorContains) {
@@ -185,26 +182,26 @@ TEST (JavaUtil, VectorContains) {
 	vector.add(3);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_FALSE(vector.contains(0));
-	ASSERT_TRUE(vector.contains(5));
+	assertFalse(vector.contains(0));
+	assertTrue(vector.contains(5));
 }
 
 TEST (JavaUtil, VectorContainsAll) {
 	// Given a valid vector.
 	Vector<int> vector { 1, 2, 3, 4, 5 };
 	// Checks vector for having all elements in a list.
-	ASSERT_FALSE(vector.containsAll({ 1, 2, 3, 4, 6 }));
-	ASSERT_TRUE(vector.containsAll({ 1, 2, 3, 4, 5 }));
+	assertFalse(vector.containsAll({ 1, 2, 3, 4, 6 }));
+	assertTrue(vector.containsAll({ 1, 2, 3, 4, 5 }));
 }
 
 TEST (JavaUtil, VectorCopyInto) {
 	Vector<int> vector { 1, 2, 3, 4, 5 };
 	Array<int> anArray;
 	vector.copyInto(anArray);
-	ASSERT_EQUAL(vector.size(), anArray.length);
+	assertEquals(vector.size(), anArray.length);
 	register int index;
 	for (index = 0; index < vector.size(); index++) {
-		ASSERT_EQUAL(vector.get(index), anArray.get(index));
+		assertEquals(vector.get(index), anArray.get(index));
 	}
 }
 
@@ -217,40 +214,40 @@ TEST (JavaUtil, VectorElementAt) {
 	vector.add(4);
 	vector.add(5);
 	// Get element at the first and the last position.
-	ASSERT_EQUAL(vector.firstElement(), vector.elementAt(0));
-	ASSERT_EQUAL(vector.lastElement(), vector.elementAt(4));
+	assertEquals(vector.firstElement(), vector.elementAt(0));
+	assertEquals(vector.lastElement(), vector.elementAt(4));
 }
 
 TEST (JavaUtil, VectorEnsureCapacity) {
 	// Given an empty vector with initial capacity is 10 and capacity increment is 5.
 	Vector<int> vector1(10, 5);
-	ASSERT_EQUAL(10, vector1.capacity());
+	assertEquals(10, vector1.capacity());
 	// New capacity = old capacity + capacity increment.
 	vector1.ensureCapacity(12);
-	ASSERT_EQUAL(15, vector1.capacity());
+	assertEquals(15, vector1.capacity());
 	// New capacity = min capacity (because old capacity + capacity increment < min capacity).
 	vector1.ensureCapacity(25);
-	ASSERT_EQUAL(25, vector1.capacity());
+	assertEquals(25, vector1.capacity());
 	
 	// Given an empty vector with initial capacity is 10 and capacity increment is 0.
 	Vector<int> vector2(10, 0);
 	// New capacity = old capacity * 2 (because capacity increment is zero).
 	vector2.ensureCapacity(15);
-	ASSERT_EQUAL(20, vector2.capacity());
+	assertEquals(20, vector2.capacity());
 	// New capacity = min capacity (because old capacity * 2 < min capacity).
 	vector2.ensureCapacity(100);
-	ASSERT_EQUAL(100, vector2.capacity());
+	assertEquals(100, vector2.capacity());
 }
 
 TEST (JavaUtil, VectorEquals) {
 	// Given two valid vectors, check they are equals or not.
 	Vector<int> vector1 { 1, 2, 3, 4, 5 };
 	Vector<int> target1 { 1, 2, 3, 5, 4 };
-	ASSERT_FALSE(vector1.equals(target1));
+	assertFalse(vector1.equals(target1));
 	// Given two valid vector, check they are equals or not.
 	Vector<int> vector2 { 1, 2, 3, 4, 5, 6, 7 };
 	Vector<int> target2 { 1, 2, 3, 4, 5, 6, 7 };
-	ASSERT_TRUE(vector2.equals(target2));
+	assertTrue(vector2.equals(target2));
 }
 
 TEST (JavaUtil, VectorFirstElement) {
@@ -259,7 +256,7 @@ TEST (JavaUtil, VectorFirstElement) {
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_STR("Hello", vector.firstElement().toString());
+	assertEquals("Hello", vector.firstElement().toString());
 }
 
 TEST (JavaUtil, VectorGet) {
@@ -271,17 +268,17 @@ TEST (JavaUtil, VectorGet) {
 	vector.add("a");
 	vector.add("Vector");
 	// Get element at index 0, then index 4.
-	ASSERT_STR("Hello", vector.get(0).toString());
-	ASSERT_STR("Vector", vector.get(4).toString());
+	assertEquals("Hello", vector.get(0).toString());
+	assertEquals("Vector", vector.get(4).toString());
 }
 
 TEST (JavaUtil, VectorIsEmpty) {
 	// Given an empty vector, vector is empty.
 	Vector<int> vector;
-	ASSERT_TRUE(vector.isEmpty());
+	assertTrue(vector.isEmpty());
 	// Add an element into vector, vector is not empty.
 	vector.add(0);
-	ASSERT_FALSE(vector.isEmpty());
+	assertFalse(vector.isEmpty());
 }
 
 TEST (JavaUtil, VectorIndexOf) {
@@ -290,8 +287,8 @@ TEST (JavaUtil, VectorIndexOf) {
 	vector.add(1);
 	vector.add(2);
 	vector.add(3);
-	ASSERT_EQUAL(0, vector.indexOf(1));
-	ASSERT_EQUAL(2, vector.indexOf(3));
+	assertEquals(0, vector.indexOf(1));
+	assertEquals(2, vector.indexOf(3));
 	
 	vector.clear();
 	vector.add(1);
@@ -299,8 +296,8 @@ TEST (JavaUtil, VectorIndexOf) {
 	vector.add(4);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_EQUAL(-1, vector.indexOf(4, 4));
-	ASSERT_EQUAL(2, vector.indexOf(4, 0));
+	assertEquals(-1, vector.indexOf(4, 4));
+	assertEquals(2, vector.indexOf(4, 0));
 }
 
 TEST (JavaUtil, VectorInsertElementAt) {
@@ -311,12 +308,12 @@ TEST (JavaUtil, VectorInsertElementAt) {
 	vector.add(3);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_EQUAL(1, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(1, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 	// Inserts an element.
 	vector.insertElementAt(0, 0);
 	// Checks that element after added.
-	ASSERT_EQUAL(0, vector.get(0));
+	assertEquals(0, vector.get(0));
 }
 
 TEST (JavaUtil, VectorLastElement) {
@@ -325,7 +322,7 @@ TEST (JavaUtil, VectorLastElement) {
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_STR("Vector", vector.lastElement().toString());
+	assertEquals("Vector", vector.lastElement().toString());
 }
 
 TEST (JavaUtil, VectorLastIndexOf) {
@@ -336,11 +333,11 @@ TEST (JavaUtil, VectorLastIndexOf) {
 	vector.add(2);
 	vector.add(2);
 	vector.add(5);
-	ASSERT_EQUAL(0, vector.lastIndexOf(1));
-	ASSERT_EQUAL(3, vector.lastIndexOf(2));
+	assertEquals(0, vector.lastIndexOf(1));
+	assertEquals(3, vector.lastIndexOf(2));
 	
-	ASSERT_EQUAL(3, vector.lastIndexOf(2, 4));
-	ASSERT_EQUAL(1, vector.lastIndexOf(2, 1));
+	assertEquals(3, vector.lastIndexOf(2, 4));
+	assertEquals(1, vector.lastIndexOf(2, 1));
 }
 
 TEST (JavaUtil, VectorRemove) {
@@ -350,11 +347,11 @@ TEST (JavaUtil, VectorRemove) {
 	vector1.add(1);
 	vector1.add(2);
 	vector1.add(3);
-	ASSERT_EQUAL(2, vector1.remove(1));
-	ASSERT_EQUAL(3, vector1.remove(1));
-	ASSERT_EQUAL(1, vector1.remove(0));
+	assertEquals(2, vector1.remove(1));
+	assertEquals(3, vector1.remove(1));
+	assertEquals(1, vector1.remove(0));
 	// Check size of vector.
-	ASSERT_EQUAL(0, vector1.size());
+	assertEquals(0, vector1.size());
 	
 	// Given a valid vector, removes specified elements.
 	Vector<String> vector2;
@@ -363,8 +360,8 @@ TEST (JavaUtil, VectorRemove) {
 	vector2.add(String("3"));
 	vector2.add(String("4"));
 	vector2.add(String("5"));
-	ASSERT_FALSE(vector2.remove(String("10"))); // This element doesn't exists.
-	ASSERT_TRUE(vector2.remove(String("5")));
+	assertFalse(vector2.remove(String("10"))); // This element doesn't exists.
+	assertTrue(vector2.remove(String("5")));
 	
 	Vector<Integer> vector3;
 	vector3.add(Integer(1));
@@ -373,34 +370,34 @@ TEST (JavaUtil, VectorRemove) {
 	vector3.add(Integer(4));
 	vector3.add(Integer(5));
 	vector3.remove(Integer(3));
-	ASSERT_FALSE(vector3.contains(Integer(3)));
+	assertFalse(vector3.contains(Integer(3)));
 }
 
 TEST (JavaUtil, VectorRemoveAll) {
 	// Given a valid vector.
 	Vector<int> vector({ 1, 2, 3, 4, 5 });
 	// Removes element appearing in the specified list.
-	ASSERT_TRUE(vector.removeAll({ 1, 2, 3 }));
+	assertTrue(vector.removeAll({ 1, 2, 3 }));
 	// Checks size and the first-last element.
-	ASSERT_EQUAL(2, vector.size());
-	ASSERT_EQUAL(4, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(2, vector.size());
+	assertEquals(4, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 }
 
 TEST (JavaUtil, VectorRemoveAllElements) {
 	// Given empty vector - return size of vector is 0.
 	Vector<String> vector;
-	ASSERT_EQUAL(0, vector.size());
+	assertEquals(0, vector.size());
 	
 	// Add three elements into vector - return size of vector is 3.
 	vector.add("Hello");
 	vector.add("World");
 	vector.add("Vector");
-	ASSERT_EQUAL(3, vector.size());
+	assertEquals(3, vector.size());
 	
 	// Remove all elements of vector - return size of vector is 0.
 	vector.clear();
-	ASSERT_EQUAL(0, vector.size());
+	assertEquals(0, vector.size());
 }
 
 TEST (JavaUtil, VectorRemoveElement) {
@@ -412,8 +409,8 @@ TEST (JavaUtil, VectorRemoveElement) {
 	vector.add(Integer(5));
 	
 	vector.removeElement(Integer(3));
-	ASSERT_EQUAL(4, vector.size());
-	ASSERT_FALSE(vector.contains(Integer(3)));
+	assertEquals(4, vector.size());
+	assertFalse(vector.contains(Integer(3)));
 }
 
 TEST (JavaUtil, VectorRemoveElementAt) {
@@ -427,7 +424,7 @@ TEST (JavaUtil, VectorRemoveElementAt) {
 	// Removes element at index = 2.
 	vector.removeElementAt(2);
 	// Checks element value at index = 2.
-	ASSERT_EQUAL(4, vector.get(2));
+	assertEquals(4, vector.get(2));
 }
 
 // This class use to call some protected methods in Vector class to run in test cases.
@@ -455,16 +452,16 @@ TEST (JavaUtil, VectorRemoveRange) {
 	vector.removeRange(1, 3); // Removes elements at index: {1, 2}
 	// index: 0 1 2 3 4 5
 	// value: 1 4 5 6 7 8
-	ASSERT_EQUAL(1, vector.get(0));
-	ASSERT_EQUAL(4, vector.get(1));
+	assertEquals(1, vector.get(0));
+	assertEquals(4, vector.get(1));
 }
 
 TEST (JavaUtil, VectorRetainAll) {
 	Vector<int> vector { 1, 2, 3, 4, 5 };
-	ASSERT_TRUE(vector.retainAll({ 4, 5, 6 }));
-	ASSERT_EQUAL(2, vector.size());
-	ASSERT_EQUAL(4, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertTrue(vector.retainAll({ 4, 5, 6 }));
+	assertEquals(2, vector.size());
+	assertEquals(4, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 }
 
 TEST (JavaUtil, VectorSet) {
@@ -476,13 +473,13 @@ TEST (JavaUtil, VectorSet) {
 	vector.add(4);
 	vector.add(5);
 	// Change element at index 0.
-	ASSERT_EQUAL(1, vector.set(0, 10));
+	assertEquals(1, vector.set(0, 10));
 	// Check element at index 0.
-	ASSERT_EQUAL(10, vector.get(0));
+	assertEquals(10, vector.get(0));
 	// Change element at index 4.
-	ASSERT_EQUAL(5, vector.set(4, 0));
+	assertEquals(5, vector.set(4, 0));
 	// Check element at index 4.
-	ASSERT_EQUAL(0, vector.get(4));
+	assertEquals(0, vector.get(4));
 }
 
 TEST (JavaUtil, VectorSetElementAt) {
@@ -496,11 +493,11 @@ TEST (JavaUtil, VectorSetElementAt) {
 	// Change element at index 0.
 	vector.setElementAt(10, 0);
 	// Check element at index 0.
-	ASSERT_EQUAL(10, vector.get(0));
+	assertEquals(10, vector.get(0));
 	// Change element at index 4.
 	vector.setElementAt(0, 4);
 	// Check element at index 4.
-	ASSERT_EQUAL(0, vector.get(4));
+	assertEquals(0, vector.get(4));
 }
 
 TEST (JavaUtil, VectorSetSize) {
@@ -517,18 +514,18 @@ TEST (JavaUtil, VectorSetSize) {
 	vector.add(9);
 	// Sets size and checks size.
 	vector.setSize(5);
-	ASSERT_EQUAL(5, vector.size());
+	assertEquals(5, vector.size());
 }
 
 TEST (JavaUtil, VectorSize) {
 	// Given a empty vector, then add an element - return size.
 	Vector<int> vector;
 	vector.add(0);
-	ASSERT_EQUAL(1, vector.size());
+	assertEquals(1, vector.size());
 	
 	// Remove the element at index 0 - return size.
 	vector.remove(0);
-	ASSERT_EQUAL(0, vector.size());
+	assertEquals(0, vector.size());
 	
 	// Add five elements into vector - return size.
 	vector.add(1);
@@ -536,7 +533,7 @@ TEST (JavaUtil, VectorSize) {
 	vector.add(3);
 	vector.add(4);
 	vector.add(5);
-	ASSERT_EQUAL(5, vector.size());
+	assertEquals(5, vector.size());
 }
 
 TEST (JavaUtil, VectorToArray) {
@@ -547,7 +544,7 @@ TEST (JavaUtil, VectorToArray) {
 	// Check elements of vector and array at same order.
 	register int index;
 	for (index = 0; index < vector.size(); index++) {
-		ASSERT_EQUAL(vector[ index ], anArray[ index ]);
+		assertEquals(vector[ index ], anArray[ index ]);
 	}
 }
 
@@ -561,11 +558,11 @@ TEST (JavaUtil, VectorTrimToSize) {
 	vector.add(5);
 	vector.add(6);
 	vector.trimToSize(); // Trims the capacity to be the current size.
-	ASSERT_EQUAL(vector.size(), vector.capacity());
+	assertEquals(vector.size(), vector.capacity());
 	vector.remove(0); // After removing an element, capacity is not equal with size.
-	ASSERT_NOT_EQUAL(vector.size(), vector.capacity());
+	assertNotEquals(vector.size(), vector.capacity());
 	vector.trimToSize();
-	ASSERT_EQUAL(vector.size(), vector.capacity());
+	assertEquals(vector.size(), vector.capacity());
 }
 
 TEST (JavaUtil, VectorRangeBasedForLoop) {
@@ -579,7 +576,7 @@ TEST (JavaUtil, VectorRangeBasedForLoop) {
 	// Using range-base-for-loop and checks element value.
 	int index = 0;
 	for (int element : vector) {
-		ASSERT_EQUAL(index, element);
+		assertEquals(index, element);
 		index++;
 	}
 }
@@ -595,10 +592,10 @@ TEST (JavaUtil, VectorArrayOperator) {
 	// Accesses element value using array operator.
 	int index;
 	for (index = 0; index < vector.size(); index++) {
-		ASSERT_EQUAL(index, vector[ index ]);
+		assertEquals(index, vector[ index ]);
 	}
 	vector[ 0 ] = -1;
-	ASSERT_EQUAL(-1, vector.get(0));
+	assertEquals(-1, vector.get(0));
 }
 
 TEST (JavaUtil, VectorAssignmentOperator) {
@@ -608,16 +605,16 @@ TEST (JavaUtil, VectorAssignmentOperator) {
 	// Assigns with an initializer list.
 	vector = { 1, 2, 3, 4, 5 };
 	// Checks size and the first-last element.
-	ASSERT_EQUAL(5, vector.size());
-	ASSERT_EQUAL(1, vector.firstElement());
-	ASSERT_EQUAL(5, vector.lastElement());
+	assertEquals(5, vector.size());
+	assertEquals(1, vector.firstElement());
+	assertEquals(5, vector.lastElement());
 	
 	// Given an target vector with some elements inside.
 	Vector<int> target { 10, 11, 12 };
 	// Assigns target to vector.
 	vector = target;
 	// Checks size and the first-last element.
-	ASSERT_EQUAL(3, vector.size());
-	ASSERT_EQUAL(10, vector.firstElement());
-	ASSERT_EQUAL(12, vector.lastElement());
+	assertEquals(3, vector.size());
+	assertEquals(10, vector.firstElement());
+	assertEquals(12, vector.lastElement());
 }

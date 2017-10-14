@@ -1,12 +1,13 @@
 var searchData=
 [
   ['gc',['gc',['../classJava_1_1Lang_1_1Runtime.html#a350e6096c2d144d26d7cda8ce8567caf',1,'Java::Lang::Runtime::gc()'],['../classJava_1_1Lang_1_1System.html#a473cb65f56e1273a662c14e21367a32a',1,'Java::Lang::System::gc()']]],
-  ['get',['get',['../classArray.html#a5eb5c3dcbcfbc0936a254508fca7819c',1,'Array::get()'],['../classJava_1_1Util_1_1ArrayList.html#a9e473ae187f0e0496b1ec2b2caa6a3e7',1,'Java::Util::ArrayList::get()'],['../classJava_1_1Util_1_1HashMap.html#a85a5d7e51857807696921174f111a0ff',1,'Java::Util::HashMap::get()'],['../classJava_1_1Util_1_1LinkedList.html#a5ec54fcd8831fb76e5212ce04d1f1c36',1,'Java::Util::LinkedList::get()'],['../classJava_1_1Util_1_1List.html#af96fd7838876e8d5159e3e09350a963e',1,'Java::Util::List::get()'],['../classJava_1_1Util_1_1Map.html#a2c4ca06b676ffb15b13a7d35a38ad8c1',1,'Java::Util::Map::get()'],['../classJava_1_1Util_1_1Vector.html#a3a2fc1a5da6da0f2c855ac2ad9456b05',1,'Java::Util::Vector::get()']]],
+  ['get',['get',['../classArray.html#a5eb5c3dcbcfbc0936a254508fca7819c',1,'Array::get()'],['../classJava_1_1Util_1_1ArrayList.html#a9e473ae187f0e0496b1ec2b2caa6a3e7',1,'Java::Util::ArrayList::get()'],['../classJava_1_1Util_1_1BitSet.html#a42c39da934d0a19fa55560c7e6c35e3c',1,'Java::Util::BitSet::get(int bitIndex) const'],['../classJava_1_1Util_1_1BitSet.html#afc7ececdbbd252696d6d72319f1e41f7',1,'Java::Util::BitSet::get(int fromIndex, int toIndex) const'],['../classJava_1_1Util_1_1HashMap.html#a85a5d7e51857807696921174f111a0ff',1,'Java::Util::HashMap::get()'],['../classJava_1_1Util_1_1LinkedList.html#a5ec54fcd8831fb76e5212ce04d1f1c36',1,'Java::Util::LinkedList::get()'],['../classJava_1_1Util_1_1List.html#af96fd7838876e8d5159e3e09350a963e',1,'Java::Util::List::get()'],['../classJava_1_1Util_1_1Map.html#a2e93e8184ae7f272a5b06205244aae9d',1,'Java::Util::Map::get()'],['../classJava_1_1Util_1_1Vector.html#a3a2fc1a5da6da0f2c855ac2ad9456b05',1,'Java::Util::Vector::get()']]],
   ['getallowuserinteraction',['getAllowUserInteraction',['../classJava_1_1Net_1_1URLConnection.html#a17a92611bf099ef478617b42c52b4750',1,'Java::Net::URLConnection']]],
   ['getboolean',['getBoolean',['../classJava_1_1Lang_1_1Boolean.html#a9c9521b3835af594f5d4ab0b73fa7f5d',1,'Java::Lang::Boolean']]],
+  ['getbyteatindex',['getByteAtIndex',['../classJava_1_1Lang_1_1ByteCache.html#a94a784f65f7fe589b1c0a55a8ac543b6',1,'Java::Lang::ByteCache']]],
   ['getbytes',['getBytes',['../classJava_1_1Lang_1_1String.html#a0e5c6e421f30d826f3f1843360104220',1,'Java::Lang::String']]],
   ['getcause',['getCause',['../classJava_1_1Lang_1_1Throwable.html#ab2f1c5f820c7b47b3809b7b12ee39bfa',1,'Java::Lang::Throwable']]],
-  ['getchars',['getChars',['../classJava_1_1Lang_1_1StringBuilder.html#ae9ba8302c39b9df6b8913a3599c77978',1,'Java::Lang::StringBuilder']]],
+  ['getchars',['getChars',['../classJava_1_1Lang_1_1String.html#a6416e99f7d38066a0681e19013547444',1,'Java::Lang::String::getChars()'],['../classJava_1_1Lang_1_1StringBuilder.html#ae9ba8302c39b9df6b8913a3599c77978',1,'Java::Lang::StringBuilder::getChars()']]],
   ['getclass',['getClass',['../classJava_1_1Lang_1_1Object.html#a32e3649ee0d7fd70a52ff1a2820e3f85',1,'Java::Lang::Object']]],
   ['getconnecttimeout',['getConnectTimeout',['../classJava_1_1Net_1_1URLConnection.html#a4feef41793cf54793d0e2a24a6e3cfb4',1,'Java::Net::URLConnection']]],
   ['getcontentencoding',['getContentEncoding',['../classJava_1_1Net_1_1URLConnection.html#a94fd7a4ff6b89594b2cdae731fe20619',1,'Java::Net::URLConnection']]],
@@ -24,6 +25,8 @@ var searchData=
   ['gethost',['getHost',['../classJava_1_1Net_1_1URL.html#a6afe3b9ff20cb850cdc42b6e7a18bd36',1,'Java::Net::URL']]],
   ['gethours',['getHours',['../classJava_1_1Util_1_1Date.html#ad4c96af2f29e92e49880933a559e9cbe',1,'Java::Util::Date']]],
   ['getifmodifiedsince',['getIfModifiedSince',['../classJava_1_1Net_1_1URLConnection.html#a79f79642d17d46a8bdbf9a576e234210',1,'Java::Net::URLConnection']]],
+  ['getinstance',['getInstance',['../classJava_1_1Lang_1_1ByteCache.html#a4d0d5a2aca1652e8bdec6a401cb62160',1,'Java::Lang::ByteCache']]],
+  ['getkey',['getKey',['../classJava_1_1Util_1_1Map_1_1Entry.html#a391ed3ea93e50194b28413cf606231ab',1,'Java::Util::Map::Entry']]],
   ['getlast',['getLast',['../classJava_1_1Util_1_1Deque.html#a3cbf39574ba46da1a9dadd84859528ed',1,'Java::Util::Deque::getLast()'],['../classJava_1_1Util_1_1LinkedList.html#aa4a8d917b97b502b7f41577cb2fe4bae',1,'Java::Util::LinkedList::getLast()']]],
   ['getleastsignificantbits',['getLeastSignificantBits',['../classJava_1_1Util_1_1UUID.html#a2b4e36fe5e973d1f069d4c55c14ef930',1,'Java::Util::UUID']]],
   ['getlong',['getLong',['../classJava_1_1Lang_1_1Long.html#a5d25d53a5c208dbe38073f90f4960696',1,'Java::Lang::Long::getLong(String nm)'],['../classJava_1_1Lang_1_1Long.html#a3e64ce5394736b189bc771573e665a73',1,'Java::Lang::Long::getLong(String nm, long val)'],['../classJava_1_1Lang_1_1Long.html#a08c902b6edda6be1899e9beb95f15050',1,'Java::Lang::Long::getLong(String nm, Long val)']]],
@@ -48,7 +51,7 @@ var searchData=
   ['getresponsemessage',['getResponseMessage',['../classJava_1_1Net_1_1HttpURLConnection.html#aab2a6759a1c0917381a6912aeb6982fe',1,'Java::Net::HttpURLConnection']]],
   ['getseconds',['getSeconds',['../classJava_1_1Util_1_1Date.html#a1870aec99b58bfc87927891c4413f1b0',1,'Java::Util::Date']]],
   ['getsize',['getSize',['../classJava_1_1Lang_1_1String.html#a37b964f5f999cf938b6bac8bdf73b401',1,'Java::Lang::String']]],
-  ['getstringfromindex',['getStringFromIndex',['../classJava_1_1Lang_1_1String.html#a5507042fabe48731a18b866245904752',1,'Java::Lang::String']]],
+  ['getstringfromindex',['getStringFromIndex',['../classJava_1_1Lang_1_1String.html#a66321f28058235efd96a4a5d30bf6534',1,'Java::Lang::String']]],
   ['getsubtype',['getSubtype',['../classJavax_1_1Ws_1_1MediaType.html#a98800332e070dcd362eea8882348c11d',1,'Javax::Ws::MediaType']]],
   ['gettime',['getTime',['../classJava_1_1Util_1_1Date.html#a5771c37c7a4eeb79436d6f7745b7ca17',1,'Java::Util::Date']]],
   ['gettimestamp',['getTimestamp',['../classJava_1_1Util_1_1UUID.html#a635da74af8a704da1ec7bc5ae80aa8a8',1,'Java::Util::UUID']]],
@@ -58,6 +61,6 @@ var searchData=
   ['geturldecoder',['getUrlDecoder',['../classJava_1_1Util_1_1Base64.html#a58f0946ecca9f9e52fe61e45e80a5e3b',1,'Java::Util::Base64']]],
   ['geturlencoder',['getUrlEncoder',['../classJava_1_1Util_1_1Base64.html#aae9d040fd20781a98acb0fbc3575f38d',1,'Java::Util::Base64']]],
   ['getusecaches',['getUseCaches',['../classJava_1_1Net_1_1URLConnection.html#aaa691bd9475dee99acc443c3244e6215',1,'Java::Net::URLConnection']]],
-  ['getvalue',['getValue',['../classJava_1_1Lang_1_1StringBufferUnSafe.html#a21f482678209e2d2cf0a8c6809bc0ddb',1,'Java::Lang::StringBufferUnSafe::getValue()'],['../classJava_1_1Lang_1_1StringBuffer.html#af82b32d7545b4a568a6f5803a92d2eb3',1,'Java::Lang::StringBuffer::getValue()']]],
+  ['getvalue',['getValue',['../classJava_1_1Lang_1_1StringBufferUnSafe.html#a4b3b2746a50771be5e5e80510b93d218',1,'Java::Lang::StringBufferUnSafe::getValue()'],['../classJava_1_1Lang_1_1StringBuffer.html#a26b2bdff07dd05e7035ecf60310631d2',1,'Java::Lang::StringBuffer::getValue()'],['../classJava_1_1Util_1_1Map_1_1Entry.html#af467756a7ee91f683d49ed9002aa428b',1,'Java::Util::Map::Entry::getValue()']]],
   ['getyear',['getYear',['../classJava_1_1Util_1_1Date.html#a229acd3344780529ba6b7255b87b01f0',1,'Java::Util::Date']]]
 ];

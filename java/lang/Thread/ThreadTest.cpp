@@ -56,14 +56,14 @@
 //	Thread thread;
 //
 //	// Test empty threadName
-//	ASSERT_STR("", thread.getName());
+//	assertEquals("", thread.getName());
 //
 //	// Given valid Thread & valid Target to test constructor with target and threadName
 //	RunnableTarget target;
 //	Thread thread2 = Thread(target, String("sample thread"));
 //
 //	// Test true after call constructor
-//	ASSERT_STR("sample thread", thread2.getName());
+//	assertEquals("sample thread", thread2.getName());
 //}
 //
 //TEST (JavaLang, ThreadName) {
@@ -73,7 +73,7 @@
 //
 //	// Test true after set new name for threadName
 //	thread.setName((string) "Some valid name");
-//	ASSERT_STR("Some valid name", thread.getName());
+//	assertEquals("Some valid name", thread.getName());
 //}
 //
 //TEST (JavaLang, ThreadStart) {

@@ -25,31 +25,28 @@
 */
 
 #include "MediaTypeException.hpp"
-
-extern "C" {
-#include "../../../../../kernel/test.h"
-}
+#include "../../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws;
 
 TEST(MediaTypeException, Constructor) {
     // Default constructor, expected empty message
     MediaTypeException mediaTypeException;
-    ASSERT_STR("", mediaTypeException.getMessage().toString());
+    assertEquals("", mediaTypeException.getMessage().toString());
 
     // Constructs a new MediaTypeException with the specified detail message.
     MediaTypeException mediaTypeExceptionWithMessage = MediaTypeException("Wildcard type is legal only in '*/*' (all types)");
-    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithMessage.getMessage().toString());
+    assertEquals("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithMessage.getMessage().toString());
 
     // Constructs a new MediaTypeException with the specified detail message and cause.
     MediaTypeException mediaTypeExceptionWithMessageAndCause = MediaTypeException("does not contain subtype after '/'", &mediaTypeExceptionWithMessage);
-    ASSERT_STR("does not contain subtype after '/'", mediaTypeExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    assertEquals("does not contain subtype after '/'", mediaTypeExceptionWithMessageAndCause.getMessage().toString());
+    assertEquals("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new MediaTypeException with the specified cause.
     MediaTypeException mediaTypeExceptionWithCause = MediaTypeException(&mediaTypeExceptionWithMessageAndCause);
-    ASSERT_STR("does not contain subtype after '/'", mediaTypeExceptionWithCause.getCause()->getMessage().toString());
-    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    assertEquals("does not contain subtype after '/'", mediaTypeExceptionWithCause.getCause()->getMessage().toString());
+    assertEquals("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
 TEST(MediaTypeException, TryCatch) {
@@ -61,5 +58,5 @@ TEST(MediaTypeException, TryCatch) {
     } catch(MediaTypeException &exception) {
         mediaTypeException = exception;
     }
-    ASSERT_STR("throw MediaType Exception", mediaTypeException.getMessage().toString());
+    assertEquals("throw MediaType Exception", mediaTypeException.getMessage().toString());
 }

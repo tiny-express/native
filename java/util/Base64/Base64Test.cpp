@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
-#include "../../../kernel/test.h"
-}
-
+#include "../../../kernel/Test.hpp"
 #include "../Base64/Base64.hpp"
 #include "../Arrays/Arrays.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
@@ -50,11 +47,11 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	Array<byte> resultFromInput2Bytes = basicEncoder.encode(input2Bytes);
 	Array<byte> resultFromInput1Byte = basicEncoder.encode(input1Byte);
 	
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInput3Bytes,
+	assertTrue(Arrays::equals(expectedResultFromInput3Bytes,
 	                           resultFromInput3Bytes));
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInput2Bytes,
+	assertTrue(Arrays::equals(expectedResultFromInput2Bytes,
 	                           resultFromInput2Bytes));
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInput1Byte,
+	assertTrue(Arrays::equals(expectedResultFromInput1Byte,
 	                           resultFromInput1Byte));
 	
 	// Without padding character ('=') in result.
@@ -62,7 +59,7 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	Array<byte> expectedResultWithoutPaddingFromInput1Byte = { 'T', 'Q' };
 	Array<byte> resultWithoutPaddingFromInput1Byte =
 		basicEncoderWithoutPadding.encode(input1Byte);
-	ASSERT_TRUE(Arrays::equals(expectedResultWithoutPaddingFromInput1Byte,
+	assertTrue(Arrays::equals(expectedResultWithoutPaddingFromInput1Byte,
 	                           resultWithoutPaddingFromInput1Byte));
 	
 	// Result as a String, not an Array<byte>.
@@ -74,14 +71,14 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	}
 	String stringResult = basicEncoder.encodeToString(stringInputToArrayOfByte);
 	String expectedStringResult = "V2VsY29tZSB0byBWaWV0bmFtIQ==";
-	ASSERT_STR(expectedStringResult.toString(), stringResult.toString());
+	assertEquals(expectedStringResult.toString(), stringResult.toString());
 	
 	// Passing output Array<byte> by reference.
 	Array<byte> outputByteArrayIsNotEnoughSize(10);  // Not enough size.
 	try {
 		basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
 	} catch (IllegalArgumentException ex) {
-		ASSERT_STR("Output byte array is too small for encoding all input bytes",
+		assertEquals("Output byte array is too small for encoding all input bytes",
 		           ex.getMessage().toString());
 	}
 	Array<byte> outputByteArray(100);
@@ -102,8 +99,8 @@ TEST (JavaUtil, Base64BasicEncoder) {
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*' };
-	ASSERT_EQUAL(realLength, expectedStringResult.length());
-	ASSERT_TRUE(Arrays::equals(expectedResultOfOutputByteArray, outputByteArray));
+	assertEquals(realLength, expectedStringResult.length());
+	assertTrue(Arrays::equals(expectedResultOfOutputByteArray, outputByteArray));
 }
 
 TEST (JavaUtil, Base64UrlSafeEncoder) {
@@ -119,7 +116,7 @@ TEST (JavaUtil, Base64UrlSafeEncoder) {
 		  '9', 'k', 'd', 'G', 'l', 'u', 'e', 'S', '5',
 		  '2', 'b', 'i', '9', '-' };
 	Array<byte> resultFromUrlInput = urlEncoder.encode(urlInput);
-	ASSERT_TRUE(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
+	assertTrue(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
 }
 
 TEST (JavaUitl, Base64MimeEncoder) {
@@ -168,8 +165,8 @@ TEST (JavaUitl, Base64MimeEncoder) {
 	Array<byte> resultFromMimeInputWithCustomNewLineSeparator =
 		mimeDecoderWithCustomNewLineSeparator.encode(mimeInput);
 	
-	ASSERT_TRUE(Arrays::equals(expectedResultFromMimeInput, resultFromMimeInput));
-	ASSERT_TRUE(Arrays::equals(expectedResultFromMimeInputWithCustomNewLineSeparator,
+	assertTrue(Arrays::equals(expectedResultFromMimeInput, resultFromMimeInput));
+	assertTrue(Arrays::equals(expectedResultFromMimeInputWithCustomNewLineSeparator,
 	                           resultFromMimeInputWithCustomNewLineSeparator));
 }
 
@@ -192,11 +189,11 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	Array<byte> resultFromInput4BytesWith2BytesPadding =
 		basicDecoder.decode(input4BytesWith2BytesPadding);
 	
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInput4BytesWith0BytePadding,
+	assertTrue(Arrays::equals(expectedResultFromInput4BytesWith0BytePadding,
 	                           resultFromInput4BytesWith0BytePadding));
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInput4BytesWith1BytePadding,
+	assertTrue(Arrays::equals(expectedResultFromInput4BytesWith1BytePadding,
 	                           resultFromInput4BytesWith1BytePadding));
-	ASSERT_TRUE(Arrays::equals(resultFromInput4BytesWith2BytesPadding,
+	assertTrue(Arrays::equals(resultFromInput4BytesWith2BytesPadding,
 	                           resultFromInput4BytesWith2BytesPadding));
 	
 	// Basic decoder without padding character '=' in input.
@@ -204,7 +201,7 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	Array<byte> resultFromInputWithoutPadding =
 		basicDecoder.decode(inputWithoutPadding);
 	Array<byte> expectedResultFromInputWithoutPadding = { 'M', 'a' };
-	ASSERT_TRUE(Arrays::equals(expectedResultFromInputWithoutPadding,
+	assertTrue(Arrays::equals(expectedResultFromInputWithoutPadding,
 	                           resultFromInputWithoutPadding));
 	
 	// Passing output Array<byte> by reference.
@@ -216,7 +213,7 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	try {
 		basicDecoder.decode(inputArray, outputArrayNotEnoughSize);
 	} catch (IllegalArgumentException ex) {
-		ASSERT_STR("Output byte array is too small for decoding all input bytes",
+		assertEquals("Output byte array is too small for decoding all input bytes",
 		           ex.getMessage().toString());
 	}
 	Array<byte> outputArray(100);
@@ -238,8 +235,8 @@ TEST (JavaUtil, Base64BasicDecoder) {
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',
 		  '*', '*', '*', '*', '*', '*', '*', '*', '*', '*' };  // "Welcome to Vietnam!"
-	ASSERT_EQUAL(expectedOutputAsString.length(), realLength);
-	ASSERT_TRUE(Arrays::equals(expectedOutputArray, outputArray));
+	assertEquals(expectedOutputAsString.length(), realLength);
+	assertTrue(Arrays::equals(expectedOutputArray, outputArray));
 	
 	// Input as String.
 	String inputAsString = "V2VsY29tZSB0byBWaWV0bmFtIQ==";
@@ -247,7 +244,7 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	Array<byte> expectedResultOfInputAsString =
 		{ 'W', 'e', 'l', 'c', 'o', 'm', 'e', ' ', 't', 'o',
 		  ' ', 'V', 'i', 'e', 't', 'n', 'a', 'm', '!' };  // "Welcome to Vietnam!"
-	ASSERT_TRUE(Arrays::equals(expectedResultOfInputAsString,
+	assertTrue(Arrays::equals(expectedResultOfInputAsString,
 	                           resultOfInputAsString));
 }
 
@@ -263,7 +260,7 @@ TEST (JavaUtil, Base64UrlSafeDecoder) {
 	                                           'v', 'n', '/',
 	                                           '~' };
 	Array<byte> resultFromUrlInput = urlDecoder.decode(urlInput);
-	ASSERT_TRUE(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
+	assertTrue(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
 }
 
 TEST (JavaUtil, Base64MimeDecoder) {
@@ -309,7 +306,7 @@ TEST (JavaUtil, Base64MimeDecoder) {
 	Array<byte> resultFromMimeInput = mimeDecoder.decode(mimeInput);
 	Array<byte> resultFromMimeInputWithCustomNewLineSeparator =
 		mimeDecoder.decode(mimeInputWithCustomNewLineSeparator);
-	ASSERT_TRUE(Arrays::equals(expectedResultFromMimeInput, resultFromMimeInput));
-	ASSERT_TRUE(Arrays::equals(expectedResultFromMimeInput,
+	assertTrue(Arrays::equals(expectedResultFromMimeInput, resultFromMimeInput));
+	assertTrue(Arrays::equals(expectedResultFromMimeInput,
 	                           resultFromMimeInputWithCustomNewLineSeparator));
 }

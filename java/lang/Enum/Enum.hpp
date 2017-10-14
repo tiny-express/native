@@ -101,7 +101,7 @@ namespace Java {
              */
             string toString() {
                 free(this->ordinalString);
-                this->ordinalString = string_from_int(this->ordinal);
+                this->ordinalString = stringFromInt(this->ordinal);
                 return this->ordinalString;
             }
         };
