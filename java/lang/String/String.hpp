@@ -45,6 +45,32 @@ using namespace Java::IO;
 namespace Java {
     namespace Lang {
 
+#define DEFAULT_CAPACITY 16
+#define DEFAULT_BUFFER_LENGTH 128
+
+#define STRING_CONSTRUCTOR  \
+        this->original = stringCopy(target);\
+        this->capacity = this->size == 0 ? -1 : this->size;
+
+#define STRING_CONSTRUCTOR_ARRAY \
+	if (offset < 0) {\
+		throw StringIndexOutOfBoundsException(offset);\
+	}\
+	if (length < 0) {\
+		throw StringIndexOutOfBoundsException(length);\
+	}\
+	if (offset > array.length - length) {\
+		throw StringIndexOutOfBoundsException(offset + length);\
+	}\
+	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
+	int index;\
+	for (index = 0; index < length; offset++, index++) {\
+		this->original [index] = array.get(offset);\
+	}\
+	this->original [length] = '\0';\
+	this->size = length;\
+	this->capacity = this->size == 0 ? -1 : this->size;
+
 #define STRING_OPERATOR_PLUS  \
         if (newLength >= this->capacity) {\
             this->capacity = newLength << 1;\
@@ -214,32 +240,35 @@ namespace Java {
             // String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
+             * Construct a new String from specific string
+             *
+             * @param original
+             */
+            inline String(string target) {
+                this->size = lengthPointerChar(target);
+                STRING_CONSTRUCTOR
+            }
+
+            /**
              * Construct a new String from specific const_string
              *
              * @param target
              */
             inline String(const_string target) {
-                if (target == nullptr) {
-                    target = "\0";
-                }
                 this->size = lengthPointerChar(target);
-                this->capacity = this->size == 0 ? -1 : this->size;
-                this->original = stringCopy(target);
+                STRING_CONSTRUCTOR
             }
-
-            /**
-             * Construct a new String from specific string
-             *
-             * @param original
-             */
-            String(string original);
 
             /**
              * Construct a new String from specific std::string
              *
              * @param target
              */
-            String(const std::string &target);
+            inline String(const std::string &targetString) {
+                string target = (string) targetString.c_str();
+                this->size = targetString.length();
+                STRING_CONSTRUCTOR
+            }
 
             /**
              * Construct a new String from char array with specific length
@@ -247,7 +276,7 @@ namespace Java {
              * @param original
              * @param length
              */
-            String(string original, int length);
+            String(string target, int length);
 
             /**
              * Destructor
@@ -916,14 +945,6 @@ namespace Java {
              * @return a String representation of the long argument.
              */
             static String valueOf(long longValue);
-
-			/**
-             * Returns the String representation of the unsigned long argument.
-             *
-             * @param longValue
-             * @return a String representation of the long argument.
-             */
-			static String valueOf(unsigned long longValue);
 
             /**
              * Returns the String representation of the float argument.
