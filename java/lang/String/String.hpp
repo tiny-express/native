@@ -946,14 +946,6 @@ namespace Java {
              */
             static String valueOf(long longValue);
 
-			/**
-             * Returns the String representation of the unsigned long argument.
-             *
-             * @param longValue
-             * @return a String representation of the long argument.
-             */
-			static String valueOf(unsigned long longValue);
-
             /**
              * Returns the String representation of the float argument.
              *

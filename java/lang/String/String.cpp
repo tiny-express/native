@@ -763,13 +763,6 @@ String String::format(const String &format) {
     return result;
 }
 
-String String::valueOf(unsigned long longValue) {
-	string pointerHolder = stringFromLong(longValue);
-	String result = pointerHolder;
-	free(pointerHolder);
-	return result;
-}
-
 String String::valueOf(const_string constStringValue) {
 	if (isEmptyString(constStringValue) != 0) {
 		return (string) "";
