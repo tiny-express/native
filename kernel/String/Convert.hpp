@@ -39,7 +39,10 @@
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
         string convert;\
-        asprintf(&convert, FORMAT, target);\
+        int length = asprintf(&convert, FORMAT, target);\
+		if (length <= 0) {\
+			return (string) "";\
+		}\
         return convert;\
 }
 

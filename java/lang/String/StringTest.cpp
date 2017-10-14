@@ -1058,7 +1058,7 @@ TEST (JavaLang, StringFormat) {
                                        body);
 
         string expected;
-        asprintf(&expected,
+        int length = asprintf(&expected,
                  REQUEST_TEMPLATE.toString(),
                  "POST", "CASSANDRA",
                  "_test",
@@ -1066,6 +1066,7 @@ TEST (JavaLang, StringFormat) {
                  "HEADER:HEADER",
                  body.toString());
 
+        assertTrue(length > 0);
         assertEquals(expected, result.toString());
         free(expected);
         free(url);
@@ -1076,7 +1077,8 @@ TEST (JavaLang, StringFormat) {
         String result;
         unsigned long ul = timestamp();
 
-        asprintf(&expected, "%lu", ul);
+        int length = asprintf(&expected, "%lu", ul);
+        assertTrue(length > 0);
         result = String::format("%lu", ul);
         assertEquals(expected, result.toString());
         free(expected);
