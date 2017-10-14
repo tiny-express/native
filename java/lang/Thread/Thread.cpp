@@ -30,22 +30,22 @@
 //
 //Thread::Thread() {
 //	this->target = nullptr;
-//	this->threadName = strdup("");
+//	this->threadName = stringCopy("");
 //}
 //
 //Thread::Thread(Runnable &target2) {
 //	this->target = &target2;
-//	this->threadName = strdup("");
+//	this->threadName = stringCopy("");
 //}
 //
 //Thread::Thread(Runnable &target2, String name) {
 //	this->target = &target2;
-//	this->threadName = strdup(name.toString());
+//	this->threadName = stringCopy(name.toString());
 //}
 //
 //Thread::Thread(String name) {
 //	this->target = nullptr;
-//	this->threadName = strdup(name.toString());
+//	this->threadName = stringCopy(name.toString());
 //}
 //
 //Thread::~Thread() {
@@ -118,7 +118,7 @@
 // * Set this thread's name
 // */
 //void Thread::setName(string target) {
-//	this->threadName = strdup(target);
+//	this->threadName = stringCopy(target);
 //}
 //
 ///**

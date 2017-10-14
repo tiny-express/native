@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_VENDOR_HPP_
-#define JAVA_VENDOR_HPP_
+#ifndef JAVA_VENDOR_HPP
+#define JAVA_VENDOR_HPP
 
 #include "vendor/ElasticSearch/ElasticSearch.hpp"
 #include "vendor/Etcd/Etcd.hpp"
@@ -33,4 +33,4 @@
 #include "vendor/SendGrid/SendGrid.hpp"
 #include "vendor/Twilio/Twilio.hpp"
 
-#endif  // JAVA_VENDOR_HPP_
+#endif  // JAVA_VENDOR_HPP

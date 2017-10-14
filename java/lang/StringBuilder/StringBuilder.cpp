@@ -321,7 +321,7 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
 		newCapacity = minimumCapacity;
 	}
 	int numberOfBytes = newCapacity * sizeof(char);
-	this->original = (string) realloc(this->original, (size_t) numberOfBytes);
+	this->original = (string) allocateMemory(this->original, (size_t) numberOfBytes);
 	this->currentCapacity = newCapacity;
 }
 
@@ -705,7 +705,7 @@ string StringBuilder::toString() const {
 void StringBuilder::trimToSize() {
 	if (this->currentCapacity > this->currentLength) {
 		int numberOfBytesForCapacity = this->currentLength * sizeof(char);
-		this->original = (string) realloc(this->original, (size_t) numberOfBytesForCapacity);
+		this->original = (string) allocateMemory(this->original, (size_t) numberOfBytesForCapacity);
 		this->currentCapacity = this->currentLength;
 	}
 }

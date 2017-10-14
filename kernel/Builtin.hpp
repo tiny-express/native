@@ -24,27 +24,59 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_LENGTH_HPP
-#define NATIVE_COMMON_LENGTH_HPP
+#ifndef NATIVE_KERNEL_BUILTIN_HPP
+#define NATIVE_KERNEL_BUILTIN_HPP
 
-#include "../Type.hpp"
+// Definitions and macros
+#include "Platform.hpp"
+#include "Type.hpp"
+
+// C Compatible Library
+#include <cerrno>
+#include <cassert>
 #include <cstdio>
+#include <cmath>
+#include <cstddef>
 #include <cstdlib>
 #include <cstring>
+#include <cstdio>
+#include <climits>
+#include <cstdarg>
+#include <cctype>
+#include <ctime>
 
+#ifdef LINUX
+#include <stdint.h>
+#endif
+
+#ifdef DAWIN
+#include <stdlib.h>
+#include <mach/mach_time.h>
+#endif
+
+// C++ Standard Library
+#include <thread>
+#include <memory>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <type_traits>
+#include <string>
+#include <iostream>
+
+// Builtin functions
 #define P_LEN(NAME, TYPE); \
-inline int lengthPointer##NAME(TYPE *target) {\
+inline long lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
-    TYPE*pointer;\
-    for (pointer = target; *pointer; ++pointer);\
-    return pointer - target;\
+    return __builtin_strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
-inline int lengthPointerPointer##NAME(TYPE **target) {\
+inline long lengthPointerPointer##NAME(TYPE **target) {\
     if (target == nullptr) return 0;\
-    TYPE**pointer;\
+    register TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }
@@ -60,7 +92,46 @@ P_P_LEN(Char, char);
  * @return TRUE or FALSE
  */
 inline boolean isEmptyString(const char *input) {
-	return lengthPointerChar(input) == 0;
+    return lengthPointerChar(input) == 0;
 }
 
+/**
+ * Allocate new memory with specific size
+ *
+ * @param size
+ * @return void pointer
+ */
+inline void *allocateMemory(long size) {
+#ifdef DARWIN
+    return malloc(size);
+#else
+    return __builtin_malloc(size);
 #endif
+}
+
+/**
+ * Re-allocate memory with new capacity
+ *
+ * @param currentPointer
+ * @param newCapacity
+ * @return void*
+ */
+inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
+#ifdef DARWIN
+    return realloc(currentPointer, newCapacity);
+#else
+    return __builtin_realloc(currentPointer, newCapacity);
+#endif
+}
+
+/**
+ * String copy
+ *
+ * @param target
+ * @return char*
+ */
+inline char *stringCopy(const char *target) {
+    return __builtin_strdup(target);
+}
+
+#endif //NATIVE_KERNEL_BUILTIN_HPP

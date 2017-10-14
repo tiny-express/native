@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_ARRAY_LIST_HPP_
-#define JAVA_UTIL_ARRAY_LIST_HPP_
+#ifndef JAVA_UTIL_ARRAY_LIST_HPP
+#define JAVA_UTIL_ARRAY_LIST_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../../Lang.hpp"
@@ -668,4 +668,4 @@ namespace Java {
 		} // namespace Util
 } // namespace Java
 
-#endif  // JAVA_UTIL_ARRAY_LIST_HPP_
+#endif  // JAVA_UTIL_ARRAY_LIST_HPP

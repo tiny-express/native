@@ -27,9 +27,6 @@
 #ifndef NATIVE_KERNEL_STRING_PROCESS_HPP
 #define NATIVE_KERNEL_STRING_PROCESS_HPP
 
-
-#include "../Type.hpp"
-#include "../Common/Length.hpp"
 #include "../Common/Segment.hpp"
 
 /**
@@ -43,7 +40,7 @@
  */
 inline char *stringReplace(char *target, const char *findString, const char *replaceWith) {
 	if (target == nullptr || findString == nullptr || replaceWith == nullptr) {
-		return strdup("");
+		return stringCopy("");
 	}
 	char *result;
 	int i, count = 0;
@@ -56,7 +53,7 @@ inline char *stringReplace(char *target, const char *findString, const char *rep
 			i += oldLength - 1;
 		}
 	}
-	result = (char *)malloc((size_t) i + 1 + count * ( newLength - oldLength ));
+	result = (char *)allocateMemory((size_t) i + 1 + count * ( newLength - oldLength ));
 	
 	i = 0;
 	while (*target) {
@@ -93,7 +90,7 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 	char *item = strtok(const_target, delimiter);
 	register int count = 0;
 	while (item != nullptr) {
-		data[ count++ ] = strdup(item);
+		data[ count++ ] = stringCopy(item);
 		item = strtok(nullptr, delimiter);
 	}
 	auto **result = (char **) calloc((size_t) count + 1, sizeof(char *));
@@ -310,7 +307,10 @@ inline char *stringRandom(char *target, int size) {
  * @return string
  */
 inline char *stringAppend(char **target, char subTarget) {
-	asprintf(target, "%s%c", *target, subTarget);
+	int length = asprintf(target, "%s%c", *target, subTarget);
+	if (length <= 0) {
+		return nullptr;
+	}
 	return *target;
 }
 
@@ -323,10 +323,10 @@ inline char *stringAppend(char **target, char subTarget) {
  */
 inline char *stringConcat(char *target, char *subTarget) {
 	if (isEmptyString(target)) {
-		return strdup(subTarget);
+		return stringCopy(subTarget);
 	}
 	if (isEmptyString(subTarget)) {
-		return strdup(target);
+		return stringCopy(target);
 	}
 	int targetLength = lengthPointerChar(target);
 	int subTargetLength = lengthPointerChar(subTarget);
@@ -381,7 +381,7 @@ inline char *stringUpper(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = strdup(target);
+	char *result = stringCopy(target);
     register char *index = result;
     for (; *index; index++) {
         if (( 'a' <= *index ) && ( *index <= 'z' )) {
@@ -401,7 +401,7 @@ inline char *stringLower(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = strdup(target);
+	char *result = stringCopy(target);
     register char *index = result;
     for (; *index; index++) {
         if (( 'A' <= *index ) && ( *index <= 'Z' )) {
@@ -421,7 +421,7 @@ inline char *stringTitle(char *target) {
 	if (isEmptyString(target)) {
 		return nullptr;
 	}
-	char *result = strdup(target);
+	char *result = stringCopy(target);
 	register char *index = result;
 	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
 		*index -= 32;

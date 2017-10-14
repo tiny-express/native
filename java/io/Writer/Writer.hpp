@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_IO_WRITER_HPP_
-#define JAVA_IO_WRITER_HPP_
+#ifndef JAVA_IO_WRITER_HPP
+#define JAVA_IO_WRITER_HPP
 
 #include "../../lang/Object/Object.hpp"
 
@@ -39,4 +39,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_IO_WRITER_HPP_
+#endif  // JAVA_IO_WRITER_HPP

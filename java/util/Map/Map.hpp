@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_MAP_HPP_
-#define NATIVE_JAVA_UTIL_MAP_HPP_
+#ifndef NATIVE_JAVA_UTIL_MAP_HPP
+#define NATIVE_JAVA_UTIL_MAP_HPP
 
 #include "../../Lang.hpp"
 #include "../../util/Set/Set.hpp"
@@ -231,4 +231,4 @@ namespace Java {
 		}
 }
 
-#endif // NATIVE_JAVA_UTIL_MAP_HPP_
+#endif // NATIVE_JAVA_UTIL_MAP_HPP
