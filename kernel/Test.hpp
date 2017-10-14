@@ -241,27 +241,18 @@ void assertArrayAllType(ArrayList<Type> &expected,
 
     for (index = 0; index < expectedSize; index++) {
         if (expected.get(index) != actual.get(index)) {
+
+            String expectedString = expected.get(index).toString();
+            String actualString = actual.get(index).toString();
+
             CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
-                      file, line, expected.get(index), (uintmax_t) index, actual.get(index));
+                      file,
+                      line,
+                      expectedString.toString(),
+                      (uintmax_t) index,
+                      actualString.toString());
         }
     }
-}
-
-/**
- * Get length of pointer
- *
- * @tparam Type
- * @param target
- * @return
- */
-template<typename Type>
-int lengthPointer(Type *target) {
-    if (target == nullptr) return 0;
-
-    Type *pointer;
-    for (pointer = target; *pointer; ++pointer);
-
-    return pointer - target;
 }
 
 #if !defined(ARRAY_SIZE)
