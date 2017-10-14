@@ -99,7 +99,7 @@ TEST(JavaLang, ThreadRun) {
     }
 
     delete target;
-    ASSERT_EQUAL(expect, result);
+    assertEquals(expect, result);
 }
 
 TEST(JavaLang, ThreadSetName) {
@@ -107,10 +107,10 @@ TEST(JavaLang, ThreadSetName) {
 
     String name = "Thread 1";
     thread.setName(name);
-    ASSERT_STR("Thread 1", thread.getName().toString());
+    assertEquals("Thread 1", thread.getName().toString());
 
     thread.setName("Thread 2");
-    ASSERT_STR("Thread 2", thread.getName().toString());
+    assertEquals("Thread 2", thread.getName().toString());
 }
 
 TEST(JavaLang, ThreadGetName) {
@@ -118,10 +118,10 @@ TEST(JavaLang, ThreadGetName) {
 
     String name = "Thread 1";
     thread.setName(name);
-    ASSERT_STR("Thread 1", thread.getName().toString());
+    assertEquals("Thread 1", thread.getName().toString());
 
     thread.setName("Thread 2");
-    ASSERT_STR("Thread 2", thread.getName().toString());
+    assertEquals("Thread 2", thread.getName().toString());
 }
 
 TEST(JavaLang, ThreadGetThreadId) {
@@ -134,7 +134,7 @@ TEST(JavaLang, ThreadGetThreadId) {
     String expect = String::format("%lld", target.tid);
     String result = String::format("%lld", thread.getId());
 
-    ASSERT_STR(expect.toString(), result.toString());
+    assertEquals(expect.toString(), result.toString());
 }
 
 TEST(JavaLang, ThreadJoinWithTimeout) {
@@ -157,6 +157,6 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
         result2 = target.value;
     }
 
-    ASSERT_EQUAL(expect1, result1);
-    ASSERT_EQUAL(expect2, result2);
+    assertEquals(expect1, result1);
+    assertEquals(expect2, result2);
 }

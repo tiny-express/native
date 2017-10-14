@@ -45,7 +45,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 			month,
 			year
 	);
-	ASSERT_EQUAL(timestamp, 1500225603123);
+	assertEquals(timestamp, 1500225603123);
 #endif
 }
 
@@ -55,24 +55,24 @@ TEST (KernelDateTime, TimestampInNanoSeconds) {
     // so it will be look likes this 1506237734000000000
     // length of timestamp in nano seconds is 19 digits
 	long timestamps = timestamp();
-	ASSERT_TRUE(timestamps > 1506237163070843650);
-    ASSERT_TRUE(timestamps < 2506237163070843650);
+	assertTrue(timestamps > 1506237163070843650);
+    assertTrue(timestamps < 2506237163070843650);
 }
 
 TEST (KernelDateTime, Format) {
 	long timestamp = 1473765499;
 	string format = (string) "d/m/y";
 	string result1 = date(timestamp, format);
-	ASSERT_STR("13/09/2016", result1);
+	assertEquals("13/09/2016", result1);
 	free(result1);
 
 	timestamp = 1511208660;
 	char *result2 = date(timestamp, format);
-	ASSERT_STR("20/11/2017", result2);
+	assertEquals("20/11/2017", result2);
 	free(result2);
 
 	format = (string) "y-m-d";
 	char *result3 = date(timestamp, format);
-	ASSERT_STR("2017-11-20", result3);
+	assertEquals("2017-11-20", result3);
 	free(result3);
 }

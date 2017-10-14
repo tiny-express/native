@@ -33,7 +33,7 @@ using namespace Java::Lang;
 TEST(JavaLang, InterruptedExceptionConstructor) {
 
     InterruptedException interruptedExceptionWithNullMessage;
-    ASSERT_STR(
+    assertEquals(
             "",
             interruptedExceptionWithNullMessage.getMessage().toString());
 
@@ -41,7 +41,7 @@ TEST(JavaLang, InterruptedExceptionConstructor) {
             InterruptedException(
                     "InterruptedException with the specified message");
 
-    ASSERT_STR(
+    assertEquals(
             "InterruptedException with the specified message",
             interruptedExceptionWithMessage.getMessage().toString());
 
@@ -49,20 +49,20 @@ TEST(JavaLang, InterruptedExceptionConstructor) {
             InterruptedException(
                     "InterruptedException with the specified message and cause",
                     &interruptedExceptionWithMessage);
-    ASSERT_STR(
+    assertEquals(
             "InterruptedException with the specified message and cause",
             interruptedExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR(
+    assertEquals(
             "InterruptedException with the specified message",
             interruptedExceptionWithMessageAndCause.getCause()
                     ->getMessage().toString());
 
     InterruptedException interruptedExceptionWithCause =
             InterruptedException(&interruptedExceptionWithMessageAndCause);
-    ASSERT_STR("InterruptedException with the specified message and cause",
+    assertEquals("InterruptedException with the specified message and cause",
                interruptedExceptionWithCause.getCause()
                        ->getMessage().toString());
-    ASSERT_STR("InterruptedException with the specified message",
+    assertEquals("InterruptedException with the specified message",
                interruptedExceptionWithCause.getCause()
                        ->getCause()
                        ->getMessage().toString());
@@ -72,6 +72,6 @@ TEST(JavaLang, InterruptedExceptionTryCatch) {
     try {
         throw InterruptedException("Throw InterruptedException");
     } catch (Exception e) {
-        ASSERT_STR("Throw InterruptedException", e.getMessage().toString());
+        assertEquals("Throw InterruptedException", e.getMessage().toString());
     }
 }
