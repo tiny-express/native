@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_SET_HPP_
-#define JAVA_UTIL_SET_HPP_
+#ifndef JAVA_UTIL_SET_HPP
+#define JAVA_UTIL_SET_HPP
 
 #include "../../Lang.hpp"
 #include "../../util/Collection/Collection.hpp"
@@ -241,4 +241,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_UTIL_SET_HPP_
+#endif  // JAVA_UTIL_SET_HPP

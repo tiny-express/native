@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_ENUM_HPP_
-#define JAVA_LANG_ENUM_HPP_
+#ifndef JAVA_LANG_ENUM_HPP
+#define JAVA_LANG_ENUM_HPP
 
 #include "../String/String.hpp"
 
@@ -42,15 +42,15 @@ namespace Java {
 
         public:
             Enum(const_string name, int ordinal) {
-                this->name = strdup(name);
+                this->name = stringCopy(name);
                 this->ordinal = ordinal;
-                this->ordinalString = strdup("");
+                this->ordinalString = stringCopy("");
             }
 
             Enum(string name, int ordinal) {
-                this->name = strdup(name);
+                this->name = stringCopy(name);
                 this->ordinal = ordinal;
-                this->ordinalString = strdup("");
+                this->ordinalString = stringCopy("");
             }
 
             ~Enum() {
@@ -108,4 +108,4 @@ namespace Java {
     }
 }
 
-#endif //JAVA_LANG_ENUM_HPP_
+#endif //JAVA_LANG_ENUM_HPP

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP_
-#define JAVA_LANG_DOUBLE_DOUBLE_HPP_
+#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP
+#define JAVA_LANG_DOUBLE_DOUBLE_HPP
 
 #include "../Number/Number.hpp"
 #include <limits>
@@ -547,4 +547,4 @@ namespace Java {
         };
     }  // namespace Lang
 }  // namespace Java
-#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP_
+#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP

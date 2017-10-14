@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_FLOAT_HPP_
-#define JAVA_LANG_FLOAT_HPP_
+#ifndef JAVA_LANG_FLOAT_HPP
+#define JAVA_LANG_FLOAT_HPP
 
 #include "../Object/Object.hpp"
 #include "../Number/Number.hpp"
@@ -589,4 +589,4 @@ namespace Java {
 	}  // namespace Lang
 }  // namespace Java
 
-#endif  // JAVA_LANG_FLOAT_FLOAT_HPP_
+#endif  // JAVA_LANG_FLOAT_FLOAT_HPP

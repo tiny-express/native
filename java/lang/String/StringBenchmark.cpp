@@ -30,7 +30,80 @@
 
 using namespace Java::Lang;
 
-void StringContains(benchmark::State& state) {
+void JavaLangStringConstructor(benchmark::State& state) {
+    while (state.KeepRunning()) {
+        String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+void StdStringConstructor(benchmark::State& state) {
+    while (state.KeepRunning()) {
+        std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+BENCHMARK(JavaLangStringConstructor)->Range(RANGE, RANGE);
+BENCHMARK(StdStringConstructor)->Range(RANGE, RANGE);
+
+void JavaLangStringLength(benchmark::State& state) {
+    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source.length();
+    }
+}
+
+void StdStringSize(benchmark::State& state) {
+    std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source.length();
+    }
+}
+
+BENCHMARK(JavaLangStringLength)->Range(RANGE, RANGE);
+BENCHMARK(StdStringSize)->Range(RANGE, RANGE);
+
+void JavaLangStringOperatorPlus(benchmark::State& state) {
+    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+void StdStringOperatorPlus(benchmark::State& state) {
+    std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+BENCHMARK(JavaLangStringOperatorPlus)->Range(RANGE, RANGE);
+BENCHMARK(StdStringOperatorPlus)->Range(RANGE, RANGE);
+
+void JavaLangStringContains(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             " Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
             " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
@@ -42,7 +115,7 @@ void StringContains(benchmark::State& state) {
     }
 }
 
-void StlStringContains(benchmark::State& state) {
+void StdStringFind(benchmark::State& state) {
     std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
             "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
             " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
@@ -54,5 +127,5 @@ void StlStringContains(benchmark::State& state) {
     }
 }
 
-BENCHMARK(StringContains)->RangeMultiplier(10)->Range(1000, 100000);
-BENCHMARK(StlStringContains)->RangeMultiplier(10)->Range(1000, 100000);
+BENCHMARK(JavaLangStringContains)->Range(RANGE, RANGE);
+BENCHMARK(StdStringFind)->Range(RANGE, RANGE);

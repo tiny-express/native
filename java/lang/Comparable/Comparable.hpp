@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_COMPARABLE_HPP_
-#define JAVA_LANG_COMPARABLE_HPP_
+#ifndef JAVA_LANG_COMPARABLE_HPP
+#define JAVA_LANG_COMPARABLE_HPP
 
 #include "../Object/Object.hpp"
 
@@ -39,4 +39,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_COMPARABLE_HPP_
+#endif  // JAVA_LANG_COMPARABLE_HPP

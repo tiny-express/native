@@ -27,18 +27,8 @@
 #ifndef NATIVE_KERNEL_DATETIME_HPP
 #define NATIVE_KERNEL_DATETIME_HPP
 
-#include "Platform.hpp"
-
-#ifdef LINUX
-#include <stdint.h>
-#endif
-
-#ifdef DARWIN
-#include <mach/mach_time.h>
-#endif
-
-#include "Type.hpp"
-#include <time.h>
+// C++ builtin functions
+#include "Builtin.hpp"
 
 #define SEC_PER_MIN         60
 #define SEC_PER_HOUR        3600

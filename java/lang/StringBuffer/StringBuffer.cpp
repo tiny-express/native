@@ -102,7 +102,7 @@ void StringBufferUnSafe::ensureCapacity(int minimumCapacity) {
 	} while (newCapacity < minimumCapacity);
 	
 	int newSize = newCapacity * sizeof(char);
-	this->original = (string) realloc(this->original, (size_t) newSize);
+	this->original = (string) allocateMemory(this->original, (size_t) newSize);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
@@ -616,7 +616,7 @@ void StringBufferUnSafe::trimToSize() {
 		return;
 	}
 	int newSize = this->currentLength * sizeof(char);
-	this->original = (string) realloc(this->original, (size_t) newSize);
+	this->original = (string) allocateMemory(this->original, (size_t) newSize);
 	this->currentCapacity = this->currentLength;
 }
 

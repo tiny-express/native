@@ -28,6 +28,12 @@ $ cmake -DCMAKE_BUILD_TYPE=Release
 $ make native && sudo make install
 ```
 
+#### Benchmarking with C++/STL
+[Google Benchmark](https://github.com/google/benchmark) is required for benchmark testing
+$ cmake -DCMAKE_BUILD_TYPE=Release
+$ make native_benchmark
+$ ./native_benchmark
+
 #### Examples
 ```cpp
 #include <native/library.hpp>
