@@ -32,43 +32,11 @@
 
 using namespace Java::Lang;
 
-#define DEFAULT_CAPACITY 16
-
-#define DEFAULT_BUFFER_LENGTH 128
-
-#define STRING_CONSTRUCTOR_ARRAY \
-	if (offset < 0) {\
-		throw StringIndexOutOfBoundsException(offset);\
-	}\
-	if (length < 0) {\
-		throw StringIndexOutOfBoundsException(length);\
-	}\
-	if (offset > array.length - length) {\
-		throw StringIndexOutOfBoundsException(offset + length);\
-	}\
-	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
-	int index;\
-	for (index = 0; index < length; offset++, index++) {\
-		this->original [index] = array.get(offset);\
-	}\
-	this->original [length] = '\0';\
-	this->size = length;\
-	this->capacity = this->size == 0 ? -1 : this->size;\
-
 String::String() {
 	this->original = (string) allocateMemory(DEFAULT_CAPACITY * sizeof(char));
 	this->original[0] = '\0';
 	this->size = 0;
 	this->capacity = DEFAULT_CAPACITY;
-}
-
-String::String(string target) {
-	if (target == nullptr) {
-		target = (string) "\0";
-	}
-	this->original = stringCopy(target);
-	this->size = lengthPointerChar(target);
-	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(string original, int length) {
@@ -98,12 +66,6 @@ String::String(const String &target) {
 	this->size = target.size;
 	this->capacity = this->size == 0 ? -1 : this->size;
     this->hash = target.hash;
-}
-
-String::String(const std::string &target) {
-	this->original = (string) stringCopy(target.c_str());
-	this->size = (int) target.size();
-	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuilder &stringBuilder) {
@@ -799,13 +761,6 @@ String String::format(const String &format) {
 
     regfree(&regex);
     return result;
-}
-
-String String::valueOf(unsigned long longValue) {
-	string pointerHolder = stringFromLong(longValue);
-	String result = pointerHolder;
-	free(pointerHolder);
-	return result;
 }
 
 String String::valueOf(const_string constStringValue) {
