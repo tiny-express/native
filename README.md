@@ -2,7 +2,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl/branch/master?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 [![Coverage status](https://img.shields.io/codecov/c/github/foodtiny/native/master.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20darwin-blue.svg)]()
 
-**Native Library** brings productivity and maintainability for your C/C++ application like a Java program.
+**Native Library** brings productivity and maintainability for your C/C++ application as a Java program.
 
 * Blazing fast performance, small footprint with no dependency required
 * Provide rich Java Core classes compare to C++/STL
@@ -28,7 +28,7 @@ $ cmake -DCMAKE_BUILD_TYPE=Release
 $ make native && sudo make install
 ```
 
-#### Benchmarking with C++/STL and Java
+#### Benchmarking with C++/STL
 [Google Benchmark](https://github.com/google/benchmark) is required for benchmarking
 if you're using Linux or Mac please use ./misc/benchmark.sh to install
 ```bash
