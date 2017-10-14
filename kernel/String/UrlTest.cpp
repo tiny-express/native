@@ -31,7 +31,7 @@ TEST (KernelStringUrl, Encode) {
 	auto target = (string) "Quán ăn";
 	string result = urlEncode(target);
 	auto expect = (string) "Qu%c3%a1n+%c4%83n";
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	free(result);
 }
 
@@ -39,7 +39,7 @@ TEST (KernelStringUrl, Decode) {
     auto target = (string) "Qu%c3%a1n+%c4%83n";
 	string result = urlDecode(target);
 	auto expect = (string) "Quán ăn";
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	free(result);
 }
 
@@ -47,50 +47,50 @@ TEST (KernelStringUrl, FindParam) {
 	auto params = (string) "username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 
 	string result = findParam((string) "username", params);
-	ASSERT_STR("loint", result);
+	assertEquals("loint", result);
 	free(result);
 
 	result = findParam((string) "firstName", params);
-	ASSERT_STR("Loi AbC", result);
+	assertEquals("Loi AbC", result);
 	free(result);
 
 	result = findParam((string) "password", params);
-	ASSERT_STR("1234", result);
+	assertEquals("1234", result);
 	free(result);
 
 	auto params2 = (string) "username=&password=&firstName=Loi&&lastName=Nguyen";
 
 	result = findParam((string) "username", params2);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParam((string) "firstName", params2);
-	ASSERT_STR("Loi", result);
+	assertEquals("Loi", result);
 	free(result);
 
 	result = findParam((string) "password", params2);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParam((string) "lastName", params2);
-	ASSERT_STR("Nguyen", result);
+	assertEquals("Nguyen", result);
 	free(result);
 
 	auto params3 = (string) "";
 	result = findParam((string) "username", params3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParam((string) "firstName", params3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParam((string) "password", params3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParam((string) "lastName", params3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 }
 
@@ -100,69 +100,69 @@ TEST (KernelStringUrl, FindParamFromUrl) {
 
 	auto url = (string) "/abcd?username=loint&password=1234&firstName=Loi AbC&lastName=Nguyen";
 	result = findParamFromUrl((string) "username", url);
-	ASSERT_STR("loint", result);
+	assertEquals("loint", result);
 	free(result);
 
 	result = findParamFromUrl((string) "password", url);
-	ASSERT_STR("1234", result);
+	assertEquals("1234", result);
 	free(result);
 
 	result = findParamFromUrl((string) "firstName", url);
-	ASSERT_STR("Loi AbC", result);
+	assertEquals("Loi AbC", result);
 	free(result);
 
 	result = findParamFromUrl((string) "lastName", url);
-	ASSERT_STR("Nguyen", result);
+	assertEquals("Nguyen", result);
 	free(result);
 
 	auto url2 = (string) "/abcd/?username=&password=&firstName=Loi&&lastName=Nguyen";
 	result = findParamFromUrl((string) "username", url2);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "password", url2);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "firstName", url2);
-	ASSERT_STR("Loi", result);
+	assertEquals("Loi", result);
 	free(result);
 
 	result = findParamFromUrl((string) "lastName", url2);
-	ASSERT_STR("Nguyen", result);
+	assertEquals("Nguyen", result);
 	free(result);
 
 	auto url3 = (string) "/abcd/";
 	result = findParamFromUrl((string) "username", url3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "firstName", url3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "password", url3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "lastName", url3);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	auto url4 = (string) "/abcd/??";
 	result = findParamFromUrl((string) "username", url4);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "firstName", url4);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "password", url4);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 
 	result = findParamFromUrl((string) "lastName", url4);
-	ASSERT_STR("", result);
+	assertEquals("", result);
 	free(result);
 }

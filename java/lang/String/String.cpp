@@ -173,6 +173,10 @@ String String::concat(String target) {
 	return *this;
 }
 
+boolean String::contains(const CharSequence &charSequence) {
+	return (stringIndex(this->original, charSequence.toString(), 1) != NOT_FOUND);
+}
+
 Array<byte> String::getBytes() const {
 	Array<byte> bytes;
 	String originalString = this->original;
@@ -807,4 +811,22 @@ String String::format(const String &format) {
 
     regfree(&regex);
     return result;
+}
+
+String String::valueOf(unsigned long longValue) {
+	string pointerHolder = stringFromLong(longValue);
+	String result = pointerHolder;
+	free(pointerHolder);
+	return result;
+}
+
+String String::valueOf(const_string constStringValue) {
+	if (isEmptyString(constStringValue) != 0) {
+		return (string) "";
+	}
+	return constStringValue;
+}
+
+String String::valueOf(String stringValue) {
+    return stringValue;
 }
