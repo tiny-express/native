@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_DATE_HPP_
-#define JAVA_UTIL_DATE_HPP_
+#ifndef JAVA_UTIL_DATE_HPP
+#define JAVA_UTIL_DATE_HPP
 
 #include <ctime>
 #include "../../Lang.hpp"
@@ -59,7 +59,7 @@ namespace Java {
 						 * @return String
 						 */
 						string toString0(tm *timePresenter) {
-							string result = (string) malloc(80 * sizeof(char));
+							string result = (string) allocateMemory(80 * sizeof(char));
 							
 							strftime(result, 80, "%a %b %d %Y %H:%M:%S", timePresenter);
 							
@@ -385,4 +385,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_UTIL_DATE_HPP_
+#endif //JAVA_UTIL_DATE_HPP

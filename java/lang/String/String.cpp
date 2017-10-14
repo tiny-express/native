@@ -32,7 +32,7 @@
 
 using namespace Java::Lang;
 
-#define DEFAULT_CAPACITY 32
+#define DEFAULT_CAPACITY 16
 
 #define DEFAULT_BUFFER_LENGTH 128
 
@@ -46,7 +46,7 @@ using namespace Java::Lang;
 	if (offset > array.length - length) {\
 		throw StringIndexOutOfBoundsException(offset + length);\
 	}\
-	this->original = (string) malloc(( length + 1) * sizeof(char));\
+	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
 	int index;\
 	for (index = 0; index < length; offset++, index++) {\
 		this->original [index] = array.get(offset);\
@@ -56,26 +56,17 @@ using namespace Java::Lang;
 	this->capacity = this->size == 0 ? -1 : this->size;\
 
 String::String() {
-	this->original = (string) malloc(DEFAULT_CAPACITY * sizeof(char));
+	this->original = (string) allocateMemory(DEFAULT_CAPACITY * sizeof(char));
 	this->original[0] = '\0';
 	this->size = 0;
 	this->capacity = DEFAULT_CAPACITY;
-}
-
-String::String(const_string target) {
-	if (target == nullptr) {
-		target = "\0";
-	}
-	this->original = strdup(target);
-	this->size = lengthPointerChar((string) target);
-	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(string target) {
 	if (target == nullptr) {
 		target = (string) "\0";
 	}
-	this->original = strdup(target);
+	this->original = stringCopy(target);
 	this->size = lengthPointerChar(target);
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -97,32 +88,32 @@ String::String(Array<byte> &byteArray) {
 	for (byte byte : byteArray) {
 		chars.push((char) byte);
 	}
-	this->original = strdup(String::fromCharArray(chars).toString());
+	this->original = stringCopy(String::fromCharArray(chars).toString());
 	this->size = chars.length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const String &target) {
-	this->original = strdup(target.original);
+	this->original = stringCopy(target.original);
 	this->size = target.size;
 	this->capacity = this->size == 0 ? -1 : this->size;
     this->hash = target.hash;
 }
 
 String::String(const std::string &target) {
-	this->original = (string) strdup(target.c_str());
+	this->original = (string) stringCopy(target.c_str());
 	this->size = (int) target.size();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuilder &stringBuilder) {
-    this->original = strdup(stringBuilder.toString());
+    this->original = stringCopy(stringBuilder.toString());
     this->size = stringBuilder.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const StringBuffer &stringBuffer) {
-    this->original = strdup(stringBuffer.getValue());
+    this->original = stringCopy(stringBuffer.getValue());
     this->size = stringBuffer.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -144,7 +135,7 @@ int String::getSize() const {
 }
 
 String String::clone() {
-	string pointerHolder = strdup(this->original);
+	string pointerHolder = stringCopy(this->original);
 	String result = pointerHolder;
 	free(pointerHolder);
 	return result;
@@ -167,8 +158,8 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 
 String String::concat(String target) {
 	string targetValue = target.original;
-	int targetLength = target.size;
-	int newLength = this->size + target.size;
+	long targetLength = target.size;
+	long newLength = this->size + target.size;
 	STRING_OPERATOR_PLUS
 	return *this;
 }
@@ -198,7 +189,7 @@ boolean String::endsWith(const String &suffixString) const {
 }
 
 String String::fromCharArray(Array<char> &charArray) {
-	string str = (string) malloc((charArray.length + 1) * sizeof(char));
+	string str = (string) allocateMemory((charArray.length + 1) * sizeof(char));
 #ifdef LINUX
 	register
 #endif
@@ -335,9 +326,6 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	return result;
 }
 
-int String::length() const {
-	return this->size;
-}
 
 // boolean String::matches(String regex) const {
 // 	int result = stringMatches(this->original, regex.toString());

@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef JAVA_UTIL_COLLECTION_HPP_
-#define JAVA_UTIL_COLLECTION_HPP_
+#ifndef JAVA_UTIL_COLLECTION_HPP
+#define JAVA_UTIL_COLLECTION_HPP
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -191,4 +191,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_COLLECTION_HPP_
+#endif //JAVA_COLLECTION_HPP

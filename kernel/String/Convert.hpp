@@ -27,8 +27,7 @@
 #ifndef NATIVE_KERNEL_STRING_CONVERT_HPP
 #define NATIVE_KERNEL_STRING_CONVERT_HPP
 
-#include "../Type.hpp"
-#include "../Common/Length.hpp"
+#include "../Builtin.hpp"
 #include "Process.hpp"
 
 /**
@@ -40,7 +39,10 @@
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
         string convert;\
-        asprintf(&convert, FORMAT, target);\
+        int length = asprintf(&convert, FORMAT, target);\
+		if (length <= 0) {\
+			return (string) "";\
+		}\
         return convert;\
 }
 
@@ -74,7 +76,7 @@ STR_TO(Double, double, "%lg");
  */
 inline string stringFromChar(char target) {
 	if (target == '\0') {
-		return strdup("");
+		return stringCopy("");
 	}
 	auto *result = (char *) calloc(2, sizeof(char));
 	result[ 0 ] = target;
@@ -152,10 +154,10 @@ inline boolean stringToBoolean(string target) {
  */
 inline string stringFromBoolean(int target) {
 	if (!target) {
-		return strdup("false");
+		return stringCopy("false");
 	}
 
-	return strdup("true");
+	return stringCopy("true");
 }
 
 inline string stringFromDouble(double target) {

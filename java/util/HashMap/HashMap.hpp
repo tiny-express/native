@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_HASH_MAP_HPP_
-#define JAVA_UTIL_HASH_MAP_HPP_
+#ifndef JAVA_UTIL_HASH_MAP_HPP
+#define JAVA_UTIL_HASH_MAP_HPP
 
 #include <initializer_list>
 #include <iostream>
@@ -524,4 +524,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_UTIL_HASH_MAP_HPP_
+#endif  // JAVA_UTIL_HASH_MAP_HPP

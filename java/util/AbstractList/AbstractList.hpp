@@ -24,8 +24,8 @@
         * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         */
 
-#ifndef  JAVA_UTIL_ABSTRACT_LIST_HPP_
-#define JAVA_UTIL_ABSTRACT_LIST_HPP_
+#ifndef  JAVA_UTIL_ABSTRACT_LIST_HPP
+#define JAVA_UTIL_ABSTRACT_LIST_HPP
 
 #include "../AbstractCollection/AbstractCollection.hpp"
 #include "../ListIterator/ListIterator.hpp"
@@ -46,4 +46,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_ABSTRACT_LIST_HPP_
+#endif //JAVA_ABSTRACT_LIST_HPP

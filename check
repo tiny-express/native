@@ -1,0 +1,3 @@
+# Check before a commit
+cmake -DCMAKE_BUILD_TYPE=Debug && make native_test -j8 && valgrind ./native_test
+cmake -DCMAKE_BUILD_TYPE=Release && make native_benchmark -j8 && ./native_benchmark

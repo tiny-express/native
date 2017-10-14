@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_NET_URL_HPP_
-#define JAVA_NET_URL_HPP_
+#ifndef JAVA_NET_URL_HPP
+#define JAVA_NET_URL_HPP
 
 #include "../../lang/String/String.hpp"
 #include "../URLConnection/URLConnection.hpp"
@@ -106,4 +106,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_NET_URL_HPP_
+#endif  // JAVA_NET_URL_HPP
