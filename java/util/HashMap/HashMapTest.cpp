@@ -37,8 +37,8 @@ TEST (JavaUtil, HashMapConstructor) {
 	HashMap<String, Integer> emptyHashMap;
 
 	int expectedSize = 0;
-	ASSERT_EQUAL(expectedSize, emptyHashMap.size());
-	ASSERT_TRUE(emptyHashMap.isEmpty());
+	assertEquals(expectedSize, emptyHashMap.size());
+	assertTrue(emptyHashMap.isEmpty());
 
 	// Test copy constructor
 	HashMap<String, String> container;
@@ -49,23 +49,23 @@ TEST (JavaUtil, HashMapConstructor) {
 
 	// Test valid size()
 	expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
-	ASSERT_FALSE(hashMap.isEmpty());
+	assertEquals(expectedSize, hashMap.size());
+	assertFalse(hashMap.isEmpty());
 
 	// Test valid data between hashMap and container
 	String expectedValue = container.get("sample");
 	String actualValue = hashMap.get("sample");
 
-//    ASSERT_FALSE(expectedValue.isNull());
-//    ASSERT_FALSE(actualValue.isNull());
-	ASSERT_STR(expectedValue.toString(), actualValue.toString());
+//    assertFalse(expectedValue.isNull());
+//    assertFalse(actualValue.isNull());
+	assertEquals(expectedValue.toString(), actualValue.toString());
 
 	expectedValue = container.get("key");
 	actualValue = hashMap.get("key");
 
-//    ASSERT_FALSE(expectedValue.isNull());
-//    ASSERT_FALSE(actualValue.isNull());
-	ASSERT_STR(expectedValue.toString(), actualValue.toString());
+//    assertFalse(expectedValue.isNull());
+//    assertFalse(actualValue.isNull());
+	assertEquals(expectedValue.toString(), actualValue.toString());
 }
 
 TEST (JavaUtil, HashMapClear) {
@@ -76,7 +76,7 @@ TEST (JavaUtil, HashMapClear) {
 
 	hashMap.clear();
 	int expectedSizeAfterClear = 0;
-	ASSERT_EQUAL(expectedSizeAfterClear, hashMap.size());
+	assertEquals(expectedSizeAfterClear, hashMap.size());
 }
 
 TEST (JavaUtil, HashMapClone) {
@@ -90,13 +90,13 @@ TEST (JavaUtil, HashMapClone) {
 	String expectedKey = "some key";
 	String expectedValue = "123";
 	String result = anotherMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	// Given valid key/value to test and make sure that result is not null
 	expectedKey = "another thing and key";
 	expectedValue = "-44444";
 	result = anotherMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	// Given invalid key and make result is null
 	String notExpectedKey = "wrong key";
@@ -111,10 +111,10 @@ TEST (JavaUtil, HashMapContainsKey) {
 	hashMap.put(-52, "negative fifty two");
 
 	boolean exist = hashMap.containsKey(-52);
-	ASSERT_TRUE(exist);
+	assertTrue(exist);
 
 	boolean notFound = hashMap.containsKey(100);
-	ASSERT_FALSE(notFound);
+	assertFalse(notFound);
 }
 
 TEST (JavaUtil, HashMapContainsValue) {
@@ -124,10 +124,10 @@ TEST (JavaUtil, HashMapContainsValue) {
 	hashMap.put("30.111", 30.111);
 
 	boolean exist = hashMap.containsValue(15.3);
-	ASSERT_TRUE(exist);
+	assertTrue(exist);
 
 	boolean notFound = hashMap.containsValue(30.22);
-	ASSERT_FALSE(notFound);
+	assertFalse(notFound);
 }
 
 TEST (JavaUtil, HashMapEntrySet) {
@@ -142,16 +142,16 @@ TEST (JavaUtil, HashMapEntrySet) {
 	for (Map<String, String>::Entry entry : entrySet) {
 		counter += 1;
 		if (counter == 1) {
-			ASSERT_STR("Key 99", entry.getKey().toString());
-			ASSERT_STR("Value 99", entry.getValue().toString());
+			assertEquals("Key 99", entry.getKey().toString());
+			assertEquals("Value 99", entry.getValue().toString());
 		}
 		if (counter == 2) {
-			ASSERT_STR("Key 98", entry.getKey().toString());
-			ASSERT_STR("Value 98", entry.getValue().toString());
+			assertEquals("Key 98", entry.getKey().toString());
+			assertEquals("Value 98", entry.getValue().toString());
 		}
 	}
 	// Make sure foreach is working
-	ASSERT_EQUAL(100, counter);
+	assertEquals(100, counter);
 }
 
 TEST (JavaUtil, HashMapGet) {
@@ -162,10 +162,10 @@ TEST (JavaUtil, HashMapGet) {
 	// Given valid key/value to test and make sure that result is not null
 	String result = hashMap.get("key");
 	String expectedValue = "value";
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	String defaultResult = hashMap.get("wrong_key");
-	ASSERT_TRUE(defaultResult.isEmpty());
+	assertTrue(defaultResult.isEmpty());
 }
 
 TEST (JavaUtil, HashMapIsEmpty) {
@@ -173,11 +173,11 @@ TEST (JavaUtil, HashMapIsEmpty) {
 	HashMap<String, Float> hashMap;
 
 	boolean result = hashMap.isEmpty();
-	ASSERT_TRUE(result);
+	assertTrue(result);
 
 	// Add one more param into hash map to test not empty
 	hashMap.put("some key", 123.33);
-	ASSERT_FALSE(hashMap.isEmpty());
+	assertFalse(hashMap.isEmpty());
 }
 
 TEST (JavaUtil, HashMapPut) {
@@ -189,12 +189,12 @@ TEST (JavaUtil, HashMapPut) {
 	// Test size after putted()
 	int expectedSize = 2;
 	int actualSize = hashMap.size();
-	ASSERT_EQUAL(expectedSize, actualSize);
+	assertEquals(expectedSize, actualSize);
 
 	// Test data inside after putted()
 	String expectedValue = "123";
 	String result = hashMap.get("abc");
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 }
 
 TEST (JavaUtil, HashMapPutAll) {
@@ -210,23 +210,23 @@ TEST (JavaUtil, HashMapPutAll) {
 
 	int hashMapSize = hashMap.size();
 	int targetSize = targetMap.size();
-	ASSERT_EQUAL(targetSize, hashMapSize);
+	assertEquals(targetSize, hashMapSize);
 
 	// Test valid key/value inside both of hashMap and targetMap
 	String expectedKey = "#!@#another";
 	String hashMapValue = hashMap.get(expectedKey);
 	String targetValue = targetMap.get(expectedKey);
-	ASSERT_STR(targetValue.toString(), hashMapValue.toString());
+	assertEquals(targetValue.toString(), hashMapValue.toString());
 
 	expectedKey = "some string";
 	hashMapValue = hashMap.get(expectedKey);
 	targetValue = targetMap.get(expectedKey);
-	ASSERT_STR(targetValue.toString(), hashMapValue.toString());
+	assertEquals(targetValue.toString(), hashMapValue.toString());
 
 	expectedKey = "another key";
 	hashMapValue = hashMap.get(expectedKey);
 	targetValue = targetMap.get(expectedKey);
-	ASSERT_STR(targetValue.toString(), hashMapValue.toString());
+	assertEquals(targetValue.toString(), hashMapValue.toString());
 
 	// Test invalid key and get null data
 	String notExpectedKey = "some wrong key here";
@@ -243,17 +243,17 @@ TEST (JavaUtil, HashMapPutIfAbsent) {
 	String expectedKey = "abc";
 	String expectedValue = "123";
 	String actualValue = hashMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), actualValue.toString());
+	assertEquals(expectedValue.toString(), actualValue.toString());
 
 	// Make putIfAbsent with correct key, result's returned must equal to old value
 	String oldValue = "123";
 	String newValue = "other value";
 	String putResult = hashMap.putIfAbsent(expectedKey, newValue);
-	ASSERT_STR(oldValue.toString(), putResult.toString());
+	assertEquals(oldValue.toString(), putResult.toString());
 
 	// Valid data inside after putted
 	String getResult = hashMap.get(expectedKey);
-	ASSERT_STR(newValue.toString(), getResult.toString());
+	assertEquals(newValue.toString(), getResult.toString());
 
 	// Make putIfAbsent with incorrect key, result's returned must be null
 	String wrongKey = "wrong key";
@@ -269,24 +269,24 @@ TEST (JavaUtil, HashMapRemoveKey) {
 
 	// Valid data inside hash map
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	String expectedResult = "1111";
 	String result = hashMap.get("another thing");
-	ASSERT_STR(expectedResult.toString(), result.toString());
+	assertEquals(expectedResult.toString(), result.toString());
 
 	// Test valid data return after removed
 	String removeResult = hashMap.remove("another thing");
 	expectedResult = "1111";
-	ASSERT_STR(expectedResult.toString(), removeResult.toString());
+	assertEquals(expectedResult.toString(), removeResult.toString());
 
 	// Test size after removed
 	expectedSize = 1;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Test old key must not be in hash map
 	String getOldKeyResult = hashMap.get("another thing");
-	ASSERT_TRUE(getOldKeyResult.isEmpty());
+	assertTrue(getOldKeyResult.isEmpty());
 }
 
 TEST (JavaUtil, HashMapRemoveKeyValue) {
@@ -296,20 +296,20 @@ TEST (JavaUtil, HashMapRemoveKeyValue) {
 
 	// Valid size before remove
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Valid data before remove
 	String expectedResult = "123";
 	String result = hashMap.get("some key");
-	ASSERT_STR(expectedResult.toString(), result.toString());
+	assertEquals(expectedResult.toString(), result.toString());
 
 	// Test remove fail by key is not mapped to the correct value.
 	boolean removeResult = hashMap.remove("some key", "456");
-	ASSERT_FALSE(removeResult);
+	assertFalse(removeResult);
 
 	// Test remove true by key mapped to specified value
 	removeResult = hashMap.remove("some key", "123");
-	ASSERT_TRUE(removeResult);
+	assertTrue(removeResult);
 }
 
 TEST (JavaUtil, HashMapReplace) {
@@ -323,18 +323,18 @@ TEST (JavaUtil, HashMapReplace) {
 	String expectedKey = ".;;',";
 	String expectedValue = "ab232";
 	String result = hashMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	// Test replace(expectedKey, value)
 	String oldValue = "ab232";
 	String newValue = "250008";
 	String replaceResult = hashMap.replace(expectedKey, newValue);
-	ASSERT_STR(oldValue.toString(), replaceResult.toString());
+	assertEquals(oldValue.toString(), replaceResult.toString());
 
 	// Valid new data inside mapped expectedKey
 	expectedValue = newValue;
 	result = hashMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 }
 
 TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
@@ -345,37 +345,37 @@ TEST (JavaUtil, HashMapReplaceSpecifiedValue) {
 
 	// Valid size before replace
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Valid data inside before replace
 	String expectedKey = "key123";
 	String expectedValue = "!@#";
 	String getResult = hashMap.get(expectedKey);
-	ASSERT_STR(expectedValue.toString(), getResult.toString());
+	assertEquals(expectedValue.toString(), getResult.toString());
 
 	// Replace with correct key/oldValue - result must equal to TRUE
 	String key = "key123";
 	String oldValue = "!@#";
 	String newValue = "456";
 	boolean replaceResult = hashMap.replace(key, oldValue, newValue);
-	ASSERT_TRUE(replaceResult);
+	assertTrue(replaceResult);
 
 	// Valid data inside after replace succeed - key must be mapped with newValue
 	String valueAfterReplaced = hashMap.get(key);
-	ASSERT_STR(newValue.toString(), valueAfterReplaced.toString());
+	assertEquals(newValue.toString(), valueAfterReplaced.toString());
 
 	// Replace with incorrect key/oldValue - result must equal to FALSE
 	key = "some key";
 	oldValue = "wrong value";
 	newValue = "newValue";
 	replaceResult = hashMap.replace(key, oldValue, newValue);
-	ASSERT_FALSE(replaceResult);
+	assertFalse(replaceResult);
 
 	// Valid data inside after replace failed - key must be mapped previous value before replace
 	key = "some key";
 	oldValue = "123";
 	getResult = hashMap.get(key);
-	ASSERT_STR(oldValue.toString(), getResult.toString());
+	assertEquals(oldValue.toString(), getResult.toString());
 }
 
 TEST (JavaUtil, HashMapReplaceAll) {
@@ -387,11 +387,11 @@ TEST (JavaUtil, HashMapReplaceAll) {
 	// Valid data inside before replace
 	String expectedValue = "1000";
 	String result = hashMap.get("key1");
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	expectedValue = "2000";
 	result = hashMap.get("key2");
-	ASSERT_STR(expectedValue.toString(), result.toString());
+	assertEquals(expectedValue.toString(), result.toString());
 
 	// Replace all value inside hash map that mapped with key to newValue
 	String newValue = "3000";
@@ -399,10 +399,10 @@ TEST (JavaUtil, HashMapReplaceAll) {
 
 	// Valid data after replaced, all value inside must equal to newValue
 	result = hashMap.get("key1");
-	ASSERT_STR(newValue.toString(), result.toString());
+	assertEquals(newValue.toString(), result.toString());
 
 	result = hashMap.get("key2");
-	ASSERT_STR(newValue.toString(), result.toString());
+	assertEquals(newValue.toString(), result.toString());
 }
 
 TEST (JavaUtil, HashMapSize) {
@@ -412,12 +412,12 @@ TEST (JavaUtil, HashMapSize) {
 	hashMap.put(-50.2222, "50");
 
 	int expectedSize = 2;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 
 	// Add more param to valid size
 	hashMap.put(123, "some thing here");
 	expectedSize = 3;
-	ASSERT_EQUAL(expectedSize, hashMap.size());
+	assertEquals(expectedSize, hashMap.size());
 }
 
 TEST (JavaUtil, HashMapToString) {
@@ -429,7 +429,7 @@ TEST (JavaUtil, HashMapToString) {
 	
 	string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
 	string result = hashMap.toString();
-	ASSERT_STR(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	// Given another hash map type to test
 	HashMap<Integer, Integer> anotherHashMap;
@@ -438,13 +438,13 @@ TEST (JavaUtil, HashMapToString) {
 	
 	expectedResult = (string) R"({1: 12313, 2: 76767})";
 	result = anotherHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	// Given empty hash map to test default toString()
 	HashMap<String, Float> emptyHashMap;
 	expectedResult = (string) "{}";
 	result = emptyHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+	assertEquals(expectedResult, result);
 	
 	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
 	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
@@ -453,7 +453,7 @@ TEST (JavaUtil, HashMapToString) {
 	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
 	expectedResult = (string) R"({"ArrayList1": [1, 2, 3, 4, 5], "ArrayList2": [100, 100, 100, 100, 1]})";
 	result = arrayListInHashMap.toString();
-	ASSERT_STR(expectedResult, result);
+	assertEquals(expectedResult, result);
 
 	// Test HashMap::toString with HashMap has String (key or value) that come from another HashMap::toString()
 	HashMap<String, String> result2;
@@ -471,6 +471,6 @@ TEST (JavaUtil, HashMapToString) {
 	result3.put("Infor", result2.toString());
 
 	expectedResult = (string) R"({"Infor": {"avatar": "avatar", "birthday": "birthday", "email": "email", "firstName": "firstName", "gender": "gender", "lastName": "lastName"}, "Status": "true"})";
-	ASSERT_STR(expectedResult, result3.toString());
+	assertEquals(expectedResult, result3.toString());
 }
 

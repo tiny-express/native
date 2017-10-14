@@ -33,7 +33,7 @@ using namespace Java::Security;
 TEST(JavaLang, GeneralSecurityExceptionConstructor) {
 
     GeneralSecurityException generalSecurityExceptionWithNullMessage;
-    ASSERT_STR(
+    assertEquals(
             "",
             generalSecurityExceptionWithNullMessage.getMessage().toString());
 
@@ -41,7 +41,7 @@ TEST(JavaLang, GeneralSecurityExceptionConstructor) {
             GeneralSecurityException(
                     "GeneralSecurityException with the specified message");
 
-    ASSERT_STR(
+    assertEquals(
             "GeneralSecurityException with the specified message",
             generalSecurityExceptionWithMessage.getMessage().toString());
 
@@ -49,20 +49,20 @@ TEST(JavaLang, GeneralSecurityExceptionConstructor) {
             GeneralSecurityException(
                     "GeneralSecurityException with the specified message and cause",
                     &generalSecurityExceptionWithMessage);
-    ASSERT_STR(
+    assertEquals(
             "GeneralSecurityException with the specified message and cause",
             generalSecurityExceptionWithMessageAndCause.getMessage().toString());
-    ASSERT_STR(
+    assertEquals(
             "GeneralSecurityException with the specified message",
             generalSecurityExceptionWithMessageAndCause.getCause()
                     ->getMessage().toString());
 
     GeneralSecurityException generalSecurityExceptionWithCause =
             GeneralSecurityException(&generalSecurityExceptionWithMessageAndCause);
-    ASSERT_STR("GeneralSecurityException with the specified message and cause",
+    assertEquals("GeneralSecurityException with the specified message and cause",
                generalSecurityExceptionWithCause.getCause()
                        ->getMessage().toString());
-    ASSERT_STR("GeneralSecurityException with the specified message",
+    assertEquals("GeneralSecurityException with the specified message",
                generalSecurityExceptionWithCause.getCause()
                        ->getCause()
                        ->getMessage().toString());
@@ -72,6 +72,6 @@ TEST(JavaLang, GeneralSecurityExceptionTryCatch) {
     try {
         throw GeneralSecurityException("Throw GeneralException");
     } catch (Exception e) {
-        ASSERT_STR("Throw GeneralException", e.getMessage().toString());
+        assertEquals("Throw GeneralException", e.getMessage().toString());
     }
 }

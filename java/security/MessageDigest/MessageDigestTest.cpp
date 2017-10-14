@@ -49,7 +49,7 @@ TEST(JavaSecurity, Constructor) {
             result = e.getMessage().toString();
         }
 
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 }
 
@@ -68,16 +68,13 @@ TEST(JavaSecurity, MD5) {
     md5.update((byte*)input.toString(), input.getSize());
     md5.digest(result, digestLength);
 
-    ASSERT_DATA(expect, sizeof(expect), result, (size_t)digestLength);
+    assertArray(expect, result);
 
     md5.reset();
     md5.update((byte*)input.toString(), input.getSize());
     md5.digest(result, digestLength);
 
-    ASSERT_DATA(expect,
-                sizeof(expect),
-                result,
-                (size_t)digestLength);
+    assertArray(expect, result);
 
     delete[] result;
 }
@@ -109,10 +106,7 @@ TEST(JavaSecurity, MD5MultiUpdate) {
     }
     md5.digest(result, digestLength);
 
-    ASSERT_DATA(expect,
-                sizeof(expect),
-                result,
-                (size_t)digestLength);
+    assertArray(expect, result);
 
     delete[] result;
 }
@@ -132,10 +126,7 @@ TEST(JavaSecurity, SHA1) {
     sha1.update((byte*)input.toString(), input.getSize());
     sha1.digest(result, digestLength);
 
-    ASSERT_DATA(expect,
-                sizeof(expect),
-                result,
-                (size_t)digestLength);
+    assertArray(expect, result);
     delete[] result;
 }
 
@@ -166,10 +157,7 @@ TEST(JavaSecurity, SHA1MultiUpdate) {
     }
     sha1.digest(result, digestLength);
 
-    ASSERT_DATA(expect,
-                sizeof(expect),
-                result,
-                (size_t)digestLength);
+    assertArray(expect, result);
 
     delete[] result;
 }
@@ -181,7 +169,7 @@ TEST(JavaSecurity, GetAlgorithms) {
         String result;
 
         result = md5.getAlgorithm();
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 
     {
@@ -190,7 +178,7 @@ TEST(JavaSecurity, GetAlgorithms) {
         String result;
 
         result = sha1.getAlgorithm();
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 }
 
@@ -206,7 +194,7 @@ TEST(JavaSecurity, Exception) {
             result = e.getMessage().toString();
         }
 
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 
     {
@@ -220,7 +208,7 @@ TEST(JavaSecurity, Exception) {
             result = e.getMessage().toString();
         }
 
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 
     {
@@ -235,6 +223,6 @@ TEST(JavaSecurity, Exception) {
             result = e.getMessage().toString();
         }
 
-        ASSERT_STR(expect.toString(), result.toString());
+        assertEquals(expect.toString(), result.toString());
     }
 }

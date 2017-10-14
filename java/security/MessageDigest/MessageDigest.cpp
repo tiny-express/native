@@ -40,7 +40,7 @@ MessageDigest MessageDigest::getInstance(String algorithm) {
         MessageDigestSpi* spi = new SHA1MessageDigest();
         return MessageDigest(spi, algorithm);
     } else {
-        throw NoSuchAlgorithmException(algorithm + " not found");
+        throw NoSuchAlgorithmException(algorithm + (string) " not found");
     }
 }
 
