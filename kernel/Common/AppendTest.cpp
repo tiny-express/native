@@ -41,22 +41,22 @@ TEST (KernelCommon, AppendPointerChar) {
 		nullptr
 	};
 	auto append = (string) "dog";
-	ASSERT_EQUAL(8, lengthPointerPointerChar(target));
+	assertEquals(8, lengthPointerPointerChar(target));
 	char **result = appendPointerChar(target, append);
-	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
-	ASSERT_STR("The", result[ 0 ]);
-	ASSERT_STR("quick", result[ 1 ]);
-	ASSERT_STR("brown", result[ 2 ]);
-	ASSERT_STR("fox", result[ 3 ]);
-	ASSERT_STR("jumps", result[ 4 ]);
-	ASSERT_STR("over", result[ 5 ]);
-	ASSERT_STR("the", result[ 6 ]);
-	ASSERT_STR("lazy", result[ 7 ]);
-	ASSERT_STR("dog", result[ 8 ]);
+	assertEquals(9, lengthPointerPointerChar(result));
+	assertEquals("The", result[ 0 ]);
+	assertEquals("quick", result[ 1 ]);
+	assertEquals("brown", result[ 2 ]);
+	assertEquals("fox", result[ 3 ]);
+	assertEquals("jumps", result[ 4 ]);
+	assertEquals("over", result[ 5 ]);
+	assertEquals("the", result[ 6 ]);
+	assertEquals("lazy", result[ 7 ]);
+	assertEquals("dog", result[ 8 ]);
 	append = (string) "";
 	free(result);
 	result = appendPointerChar(target, append);
-	ASSERT_EQUAL(9, lengthPointerPointerChar(result));
+	assertEquals(9, lengthPointerPointerChar(result));
 	free(result);
 }
 

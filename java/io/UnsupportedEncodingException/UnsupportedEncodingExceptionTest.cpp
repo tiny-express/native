@@ -32,17 +32,17 @@ using namespace Java::Lang;
 TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
     // Constructs a new UnsupportedEncodingException with null as its detail message.
     UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
-    ASSERT_STR("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
+    assertEquals("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
 
     // Constructs a new UnsupportedEncodingException with the specified detail message.
     UnsupportedEncodingException unsupportedEncodingExceptionWithMessage = UnsupportedEncodingException("UnsupportedEncodingException with the specified message");
-    ASSERT_STR("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
+    assertEquals("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
 }
 
 TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
     try {
         throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
     } catch (UnsupportedEncodingException &ex) {
-        ASSERT_STR("Throw UnsupportedEncodingException", ex.getMessage().toString());
+        assertEquals("Throw UnsupportedEncodingException", ex.getMessage().toString());
     }
 }

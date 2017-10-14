@@ -29,6 +29,7 @@
 
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
+
 #include <typeinfo>
 #include <regex>
 #include <string>
@@ -317,6 +318,7 @@ namespace Java {
              */
 			int compareToIgnoreCase(const String &targetString) const;
 
+
             /**
              * String concatenation
              *
@@ -331,9 +333,7 @@ namespace Java {
              * @param charSequence
              * @return String
              */
-            inline boolean contains(const CharSequence &charSequence) {
-                return __builtin_strstr(this->original, charSequence.toString()) > 0;
-            }
+			boolean contains(const CharSequence &charSequence);
 
             /**
              * Compares this String to the specified CharSequence.
@@ -862,6 +862,22 @@ namespace Java {
              */
 			static String valueOf(string stringValue);
 
+			/**
+             * Returns the String representation of the String argument.
+             *
+             * @param stringValue
+             * @return a String containing stringValue.
+             */
+			static String valueOf(String stringValue);
+
+            /**
+             * Returns the String representation of the const string argument.
+             *
+             * @param stringValue
+             * @return a String containing stringValue.
+             */
+            static String valueOf(const_string constStringValue);
+
             /**
              * Returns the String representation of the short argument.
              *
@@ -885,6 +901,14 @@ namespace Java {
              * @return a String representation of the long argument.
              */
 			static String valueOf(long longValue);
+
+			/**
+             * Returns the String representation of the unsigned long argument.
+             *
+             * @param longValue
+             * @return a String representation of the long argument.
+             */
+			static String valueOf(unsigned long longValue);
 
             /**
              * Returns the String representation of the float argument.

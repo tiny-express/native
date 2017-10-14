@@ -33,23 +33,23 @@ using namespace Javax::Ws;
 TEST(JavaxWsRsCoreMediaType, Constructor) {
     // Default constructor expected type and subtype are wildcard, parameters empty
     MediaType mediaType;
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.getType().toString());
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.getSubtype().toString());
-    ASSERT_TRUE(mediaType.getParameters().isEmpty());
+    assertEquals(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.getType().toString());
+    assertEquals(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType.getSubtype().toString());
+    assertTrue(mediaType.getParameters().isEmpty());
 
     // Constructor with type and subtype, expected type, subtype
     MediaType mediaType1("application", "json");
-    ASSERT_STR("application", mediaType1.getType().toString());
-    ASSERT_STR("json", mediaType1.getSubtype().toString());
-    ASSERT_TRUE(mediaType.getParameters().isEmpty());
+    assertEquals("application", mediaType1.getType().toString());
+    assertEquals("json", mediaType1.getSubtype().toString());
+    assertTrue(mediaType.getParameters().isEmpty());
 
     // Constructor with type, subtype and parameters, expected type, subtype and parameters equal params
     HashMap<String, String> parameters;
     parameters.put("key", "value");
     MediaType mediaType2("text", "html", parameters);
-    ASSERT_STR("text", mediaType2.getType().toString());
-    ASSERT_STR("html", mediaType2.getSubtype().toString());
-    ASSERT_STR("value", mediaType2.getParameters().get("key").toString());
+    assertEquals("text", mediaType2.getType().toString());
+    assertEquals("html", mediaType2.getSubtype().toString());
+    assertEquals("value", mediaType2.getParameters().get("key").toString());
 
     // Constructor with type empty, expected Exception "`type` must not be empty"
     MediaTypeException exception; // This variable is used to confirm Exception will happen
@@ -58,7 +58,7 @@ TEST(JavaxWsRsCoreMediaType, Constructor) {
     } catch (MediaTypeException &e) {
         exception = e;
     }
-    ASSERT_STR("`type` must not be empty", exception.getMessage().toString());
+    assertEquals("`type` must not be empty", exception.getMessage().toString());
 
     // Constructor with subtype empty, expected Exception "`subtype` must not be empty"
     MediaTypeException exception1;
@@ -67,7 +67,7 @@ TEST(JavaxWsRsCoreMediaType, Constructor) {
     } catch (MediaTypeException &e) {
         exception1 = e;
     }
-    ASSERT_STR("`subtype` must not be empty", exception1.getMessage().toString());
+    assertEquals("`subtype` must not be empty", exception1.getMessage().toString());
 
     // Constructor with type MEDIA_WILDCARD_TYPE, subtype is not empty, Expected exception wrong type
     MediaTypeException exception2;
@@ -76,85 +76,85 @@ TEST(JavaxWsRsCoreMediaType, Constructor) {
     } catch (MediaTypeException &e) {
         exception2 = e;
     }
-    ASSERT_STR("Wildcard type is legal only in '*/*' (all types)", exception2.getMessage().toString());
+    assertEquals("Wildcard type is legal only in '*/*' (all types)", exception2.getMessage().toString());
 }
 
 TEST(JavaxWsRsCoreMediaType, IsWildcardSubtype) {
     // Default constructor, expected true
     MediaType mediaType;
-    ASSERT_TRUE(mediaType.isWildcardSubtype());
+    assertTrue(mediaType.isWildcardSubtype());
 
     // Subtype card is "html", expected false
     MediaType mediaType1("text", "html");
-    ASSERT_FALSE(mediaType1.isWildcardSubtype());
+    assertFalse(mediaType1.isWildcardSubtype());
 
     // Subtype card is "plain", expected true
     HashMap<String, String> parameters;
     parameters.put("text", "plain");
     MediaType mediaType2("application", "json", parameters);
-    ASSERT_FALSE(mediaType2.isWildcardSubtype());
+    assertFalse(mediaType2.isWildcardSubtype());
 
     // Constructor with subtype is wildcard, expected true
     MediaType mediaType3("text", MediaType::MEDIA_TYPE_WILDCARD);
-    ASSERT_TRUE(mediaType3.isWildcardSubtype());
+    assertTrue(mediaType3.isWildcardSubtype());
 }
 
 TEST(JavaxWsRsCoreMediaType, IsWildcardType) {
 
     // Default constructor, expected true
     MediaType mediaType;
-    ASSERT_TRUE(mediaType.isWildcardType());
+    assertTrue(mediaType.isWildcardType());
 
     // Constructor with type is "text", expected false
     MediaType mediaType1("text", "html");
-    ASSERT_FALSE(mediaType1.isWildcardType());
+    assertFalse(mediaType1.isWildcardType());
 
     // Constructor with type is "application", expected false
     HashMap<String, String> parameters;
     parameters.put("text", "plain");
     MediaType mediaType2("application", "json", parameters);
-    ASSERT_FALSE(mediaType2.isWildcardType());
+    assertFalse(mediaType2.isWildcardType());
 }
 
 TEST(JavaxWsRsCoreMediaType, IsCompatible) {
     // Subtype is wildcard, other subtype is wildcard, expected true
     MediaType mediaType;
     MediaType mediaType1;
-    ASSERT_TRUE(mediaType.isCompatible(mediaType1));
+    assertTrue(mediaType.isCompatible(mediaType1));
 
     // MediaType application/*+xml is compatible with application/atom+xml and vice versa, expected true
     MediaType mediaType2("application", "*+xml");
     MediaType mediaType3("application", "atom+xml");
-    ASSERT_TRUE(mediaType2.isCompatible(mediaType3));
-    ASSERT_TRUE(mediaType3.isCompatible(mediaType2));
+    assertTrue(mediaType2.isCompatible(mediaType3));
+    assertTrue(mediaType3.isCompatible(mediaType2));
 
     // MediaType application/* is not compatible with text/html, expected false
     MediaType mediaType4("application", "*");
     MediaType mediaType5("text", "html");
-    ASSERT_FALSE(mediaType4.isCompatible(mediaType5));
+    assertFalse(mediaType4.isCompatible(mediaType5));
 
     // MediaType */text is compatible with application/* and vice versa,  expected true
     MediaType mediaType6("application", "*+json");
     MediaType mediaType7("application", "*");
-    ASSERT_TRUE(mediaType6.isCompatible(mediaType7));
-    ASSERT_TRUE(mediaType7.isCompatible(mediaType6));
+    assertTrue(mediaType6.isCompatible(mediaType7));
+    assertTrue(mediaType7.isCompatible(mediaType6));
 }
 
 TEST(JavaxWsRsCoreMediaType, ValueOf) {
     // MediaType valueOf "application/json", expected type "application", subtype "json"
     MediaType mediaType = MediaType::valueOf("application/json");
-    ASSERT_STR("application", mediaType.getType().toString());
-    ASSERT_STR("json", mediaType.getSubtype().toString());
+    assertEquals("application", mediaType.getType().toString());
+    assertEquals("json", mediaType.getSubtype().toString());
 
     // MediaType valueOf "text/*", expected type "text", subtype "*+plain"
     MediaType mediaType1 = MediaType::valueOf("text/*+plain");
-    ASSERT_STR("text", mediaType1.getType().toString());
-    ASSERT_STR("*+plain", mediaType1.getSubtype().toString());
+    assertEquals("text", mediaType1.getType().toString());
+    assertEquals("*+plain", mediaType1.getSubtype().toString());
 
     // MediaType valueOf WILDCARD, expected both type and subtype are MEDIA_WILDCARD_TYPE
     MediaType mediaType3 = MediaType::valueOf(MediaType::WILDCARD);
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getType().toString());
-    ASSERT_STR(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getSubtype().toString());
+    assertEquals(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getType().toString());
+    assertEquals(MediaType::MEDIA_TYPE_WILDCARD.toString(), mediaType3.getSubtype().toString());
 
     // MediaType valueOf empty String, expected exception "`type` must not be empty"
     MediaTypeException exception;
@@ -163,7 +163,7 @@ TEST(JavaxWsRsCoreMediaType, ValueOf) {
     } catch (MediaTypeException &e) {
         exception = e;
     }
-    ASSERT_STR("`type` must not be empty", exception.getMessage().toString());
+    assertEquals("`type` must not be empty", exception.getMessage().toString());
 
     // MediaType valueOf "/", expected exception "/ does not contain subtype after '/'"
     MediaTypeException exception1;
@@ -172,7 +172,7 @@ TEST(JavaxWsRsCoreMediaType, ValueOf) {
     } catch (MediaTypeException &e) {
        exception1 = e;
     }
-    ASSERT_STR("/ does not contain subtype after '/'", exception1.getMessage().toString());
+    assertEquals("/ does not contain subtype after '/'", exception1.getMessage().toString());
 
     // MediaType valueOf "text/", expected exception "/ does not contain subtype after '/'"
     MediaTypeException exception2;
@@ -181,7 +181,7 @@ TEST(JavaxWsRsCoreMediaType, ValueOf) {
     } catch (MediaTypeException &e) {
         exception2 = e;
     }
-    ASSERT_STR("text/ does not contain subtype after '/'", exception2.getMessage().toString());
+    assertEquals("text/ does not contain subtype after '/'", exception2.getMessage().toString());
 
     // MediaType valueOf "*/html", expected exception wrong type
     MediaTypeException exception3;
@@ -190,7 +190,7 @@ TEST(JavaxWsRsCoreMediaType, ValueOf) {
     } catch (MediaTypeException &e) {
         exception3 = e;
     }
-    ASSERT_STR("*/html wildcard type is legal only in '*/*' (all types)", exception3.getMessage().toString());
+    assertEquals("*/html wildcard type is legal only in '*/*' (all types)", exception3.getMessage().toString());
 }
 
 TEST(JavaxWsRsCoreMediaType, ToString) {
@@ -198,20 +198,20 @@ TEST(JavaxWsRsCoreMediaType, ToString) {
     // Default constructor, expected WILDCARD
     MediaType mediaType;
     mediaType.toString();
-    ASSERT_STR("*/*", MediaType::WILDCARD.toString());
-//    ASSERT_STR("*/*", mediaType.toString());
+    assertEquals("*/*", MediaType::WILDCARD.toString());
+//    assertEquals("*/*", mediaType.toString());
 
     // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
     MediaType mediaType2("application", "*+xml");
-    ASSERT_STR(mediaType2.toString(), "application/*+xml");
+    assertEquals(mediaType2.toString(), "application/*+xml");
 
     // Constructor with type "application", subtype "atom+xml", expected "application/atom+xml"
     MediaType mediaType3("application", "atom+xml");
-    ASSERT_STR(MediaType::APPLICATION_ATOM_XML.toString(), mediaType3.toString());
+    assertEquals(MediaType::APPLICATION_ATOM_XML.toString(), mediaType3.toString());
 
     // Constructor with type "application", subtype MEDIA_WILDCARD_TYPE, expected "application/*"
     MediaType mediaType4("application", "*");
-    ASSERT_STR("application/*", mediaType4.toString());
+    assertEquals("application/*", mediaType4.toString());
 
     // Constructor with type "text", subtype "html", expected "text/html"
     MediaType mediaType5("text", "html");
