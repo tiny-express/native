@@ -17,8 +17,8 @@ This project is also useful for new developers in practical programming.
 
 ## Getting started
 #### Docker
-```
-docker pull foodtiny/native:latest
+```bash
+$ docker pull foodtiny/native:latest
 ```
 
 #### Installation
