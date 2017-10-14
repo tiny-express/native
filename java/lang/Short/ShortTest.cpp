@@ -35,11 +35,11 @@ TEST (JavaLang, ShortConstructor) {
 	// 	Given empty value for Short constructor and assign value - Return Long
 	Short emptyShort;
 	emptyShort = 3;
-	ASSERT_EQUAL(3, emptyShort.longValue());
+	assertEquals(3, emptyShort.longValue());
 	
 	// Given value for Short constructor and assign value - Return Integer
 	Short validShort = 3;
-	ASSERT_EQUAL(3, validShort.intValue());
+	assertEquals(3, validShort.intValue());
 	
 }
 
@@ -50,27 +50,27 @@ TEST (JavaLang, ShortComparision) {
 	
 	// Test validNumber is equal targetNumber
 	targetNumber = 30000;
-	ASSERT_TRUE(validNumber == targetNumber);
+	assertTrue(validNumber == targetNumber);
 	
 	// Test validNumber is not equal targetNumber
 	targetNumber = 13000;
-	ASSERT_TRUE(validNumber != targetNumber);
+	assertTrue(validNumber != targetNumber);
 	
 	// Test validNumber is less than targetNumber
 	targetNumber = 31000;
-	ASSERT_TRUE(validNumber < targetNumber);
+	assertTrue(validNumber < targetNumber);
 	
 	// Test validNumber is equal or less then targetNumber
 	targetNumber = 31300;
-	ASSERT_TRUE(validNumber <= targetNumber);
+	assertTrue(validNumber <= targetNumber);
 	
 	// Test validNumber is more than targetNumber
 	targetNumber = 29000;
-	ASSERT_TRUE(validNumber > targetNumber);
+	assertTrue(validNumber > targetNumber);
 	
 	// Test validNumber is equal or more than targetNumber
 	targetNumber = 23777;
-	ASSERT_TRUE(validNumber >= targetNumber);
+	assertTrue(validNumber >= targetNumber);
 }
 
 TEST (JavaLang, ShortOperator) {
@@ -80,29 +80,29 @@ TEST (JavaLang, ShortOperator) {
 	
 	// Make a summation with targetNumber
 	Long summationNumber = 8;
-	ASSERT_TRUE(summationNumber == ( validNumber + targetNumber ));
+	assertTrue(summationNumber == ( validNumber + targetNumber ));
 	
 	// Make a subtraction with targetNumber
 	Long subtractionNumber = 2;
-	ASSERT_TRUE(subtractionNumber == ( validNumber - targetNumber ));
+	assertTrue(subtractionNumber == ( validNumber - targetNumber ));
 	
 	// Make a multiplication with targetNumber
 	Long multiplicationNumber = 15;
-	ASSERT_TRUE(multiplicationNumber == ( validNumber * targetNumber ));
+	assertTrue(multiplicationNumber == ( validNumber * targetNumber ));
 	
 	// Make a division with targetNumber
 	Long divisionNumber = 1;
-	ASSERT_TRUE(divisionNumber == ( validNumber / targetNumber ));
+	assertTrue(divisionNumber == ( validNumber / targetNumber ));
 	
 	// Make a modulo with targetNumber
 	Long modNumber = 2;
-	ASSERT_TRUE(modNumber == ( validNumber % targetNumber ));
+	assertTrue(modNumber == ( validNumber % targetNumber ));
 }
 
 TEST (JavaLang, ShortParseShort) {
 	// Given value for Long constructor and assign value - Return long
 	Short validShortPointer = Short::parseShort("6");
-	ASSERT_EQUAL(6, validShortPointer.shortValue());
+	assertEquals(6, validShortPointer.shortValue());
 }
 
 TEST (JavaLang, ShortToString) {
@@ -111,5 +111,5 @@ TEST (JavaLang, ShortToString) {
 	
 	string expect = (string) "12344";
 	string result = validShort.toString();
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 }

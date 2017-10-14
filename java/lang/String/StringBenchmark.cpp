@@ -26,6 +26,7 @@
 
 #include "../../../benchmark/benchmark.hpp"
 #include "String.hpp"
+#include <string>
 
 using namespace Java::Lang;
 

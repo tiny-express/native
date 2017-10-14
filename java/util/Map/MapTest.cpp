@@ -30,5 +30,5 @@
 using namespace Java::Util;
 
 TEST (JavaUtil, MapEntryConstructor) {
-	ASSERT_STR("", "");
+	assertEquals("", "");
 }

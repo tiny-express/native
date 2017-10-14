@@ -21,7 +21,7 @@ var searchData=
   ['polllast',['pollLast',['../classJava_1_1Util_1_1Deque.html#a8d0b94186b37326134e7391e0d8af198',1,'Java::Util::Deque::pollLast()'],['../classJava_1_1Util_1_1LinkedList.html#a340e4f61de1468f0d6874fc72cfd0f50',1,'Java::Util::LinkedList::pollLast()']]],
   ['pop',['pop',['../classJava_1_1Util_1_1Deque.html#ad73f330e197daa545f802c15f3d43e42',1,'Java::Util::Deque::pop()'],['../classJava_1_1Util_1_1LinkedList.html#a8d13fe17855edc2a1c07a5d06541a0d4',1,'Java::Util::LinkedList::pop()'],['../classJava_1_1Util_1_1Stack.html#a822fa5d58fbe6ed88e5a121a6da6a8da',1,'Java::Util::Stack::pop()']]],
   ['positive_5finfinity',['POSITIVE_INFINITY',['../classJava_1_1Lang_1_1Double.html#a3cf2b979eec79e6809f176d0bf7e542e',1,'Java::Lang::Double::POSITIVE_INFINITY()'],['../classJava_1_1Lang_1_1Float.html#a083f2340879439a3696a4e6ab67c7d18',1,'Java::Lang::Float::POSITIVE_INFINITY()'],['../Float_8hpp.html#a3ca50f58cd69d676a48e527cf760b24c',1,'POSITIVE_INFINITY():&#160;Float.hpp']]],
-  ['positive_5finfinity_5fdouble',['POSITIVE_INFINITY_DOUBLE',['../Double_8hpp.html#a545572e4bef6c5c199eeb08122ea8f99',1,'Double.hpp']]],
+  ['positive_5finfinity_5fdouble',['Double::POSITIVE_INFINITY',['../Double_8hpp.html#a545572e4bef6c5c199eeb08122ea8f99',1,'Double.hpp']]],
   ['pow',['pow',['../classJava_1_1Lang_1_1Math.html#adcb68b60ad4b8266ae376a4034f955b3',1,'Java::Lang::Math']]],
   ['predicate',['Predicate',['../classJava_1_1Util_1_1Function_1_1Predicate.html',1,'Java::Util::Function']]],
   ['predicate_2ecpp',['Predicate.cpp',['../Predicate_8cpp.html',1,'']]],

@@ -42,7 +42,7 @@ TEST (KernelCommon, JoinPointerPointerChar) {
 	};
 	auto expect = (string) "Thequickbrownfoxjumpsoverthelazydog";
 	char *result = joinPointerPointerChar(target);
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	free(result);
 }
 
@@ -63,6 +63,6 @@ TEST (KernelCommon, JoinDelimiterPointerPointerChar) {
 	auto *delimiter = (string) "|";
 	auto *expect = (string) "The|quick|brown|fox|jumps|over|the|lazy|dog";
 	char *result = joinDelimiterPointerPointerChar(target, delimiter);
-	ASSERT_STR(expect, result);
+	assertEquals(expect, result);
 	free(result);
 }
