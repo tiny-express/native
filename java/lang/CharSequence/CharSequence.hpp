@@ -31,9 +31,12 @@
 
 namespace Java {
 		namespace Lang {
+				class String;
 				class CharSequence {
 				public:
-						virtual string toString() const = 0;
+
+						virtual String toString() const = 0;
+
 						/**
 						 * Returns the char value at the specified index.  An index ranges from zero
 						 * to length() - 1.  The first char value of the sequence is at

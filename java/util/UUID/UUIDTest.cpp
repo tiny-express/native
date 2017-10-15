@@ -27,34 +27,38 @@
 #include "../../../kernel/Test.hpp"
 #include "UUID.hpp"
 
+
+TEST (JavaUtil, UUIDConstructor) {
+	UUID uuid;
+    String str = uuid.toString();
+
+	// Given valid construct to test
+	uuid = UUID(123, 456);
+
+	long result = uuid.getMostSignificantBits();
+	long expectedValue = 123;
+	assertEquals(expectedValue, result);
+
+	result = uuid.getLeastSignificantBits();
+	expectedValue = 456;
+	assertEquals(expectedValue, result);
+
+	// Given valid static constructor with randomUUID
+	String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+	uuid = UUID::fromString(expectedString);
+	long expectedMostSigBits = 4053239666997989821;
+	long expectedLeastSigBits = -5603022497796657139;
+
+	assertEquals(expectedMostSigBits, uuid.getMostSignificantBits());
+	assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
+}
+
 TEST (JavaUtil, UUIDClockSequence) {
 	// Given valid uuid and expectedResult based on result of java code
 	UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 	int expectedResult = 12862;
 	
 	assertEquals(expectedResult, uuid.clockSequence());
-}
-
-TEST (JavaUtil, UUIDConstructor) {
-	// Given valid construct to test
-	UUID uuid = UUID(123, 456);
-	
-	long result = uuid.getMostSignificantBits();
-	long expectedValue = 123;
-	assertEquals(expectedValue, result);
-	
-	result = uuid.getLeastSignificantBits();
-	expectedValue = 456;
-	assertEquals(expectedValue, result);
-	
-	// Given valid static constructor with randomUUID
-	String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
-	uuid = UUID::fromString(expectedString);
-	long expectedMostSigBits = 4053239666997989821;
-	long expectedLeastSigBits = -5603022497796657139;
-	
-	assertEquals(expectedMostSigBits, uuid.getMostSignificantBits());
-	assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtil, UUIDCompare) {

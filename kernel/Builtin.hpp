@@ -62,8 +62,10 @@
 #include <map>
 #include <set>
 #include <type_traits>
-#include <string>
 #include <iostream>
+#include <typeinfo>
+#include <regex>
+#include <string>
 
 // Builtin functions
 #define P_LEN(NAME, TYPE); \

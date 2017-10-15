@@ -31,10 +31,8 @@ namespace Java {
 		namespace IO {
 				class Serializable {
 				protected:
-						Serializable() {
-						};
-						virtual ~Serializable() {
-						};
+						Serializable() = default;
+						virtual ~Serializable() = default;
 				};
 		}
 }

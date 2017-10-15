@@ -33,9 +33,10 @@ using namespace Java::Lang;
 
 namespace Java {
 		namespace Util {
-				class UUID : public Object
-//                , public virtual Serializable
-//                , public virtual Comparable<UUID>
+				class UUID :
+							public Object,
+							public virtual Serializable
+							//public virtual Comparable<UUID>
 				{
 				
 				private:

@@ -132,7 +132,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const override;
+            string toString() const;
 
             /**
              * Assign value of this object same as target value

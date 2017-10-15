@@ -376,8 +376,12 @@ Array<char> String::toCharArray() const {
 	return chars;
 }
 
-string String::toString() const {
-	return this->original;
+string String::toCharPointer() const {
+    return this->original;
+}
+
+String String::toString() const {
+	return *this;
 }
 
 String String::toLowerCase() const {

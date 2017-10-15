@@ -648,7 +648,7 @@ namespace Java {
         /**
          * An inheritance class with thread-safe
          */
-        class StringBuffer : public StringBufferUnSafe{
+        class StringBuffer : public StringBufferUnSafe {
         private:
             mutable std::mutex mutex;
 

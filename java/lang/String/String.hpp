@@ -29,11 +29,6 @@
 
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
-
-#include <typeinfo>
-#include <regex>
-#include <string>
-
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
@@ -95,10 +90,10 @@ namespace Java {
         class Double;
 
         class String :
-                public Object,
                 public virtual Serializable,
                 public virtual Comparable<String>,
                 public virtual CharSequence {
+
         private:
             string original;
             long size;
@@ -125,7 +120,7 @@ namespace Java {
              *
              * @param byteArray
              */
-            explicit String(Array<byte> &byteArray);
+             String(Array<byte> &byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -133,7 +128,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            explicit String(const StringBuilder &stringBuilder);
+             String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -141,7 +136,7 @@ namespace Java {
              *
              * @param charArray
              */
-            explicit String(Array<char> &charArray);
+             String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -149,7 +144,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            explicit String(const StringBuffer &stringBuffer);
+             String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -181,7 +176,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            explicit String(Array<char> &charArray, int offset, int count);
+             String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -208,7 +203,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            explicit String(Array<byte> &byteArray, int offset, int length);
+             String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -430,9 +425,6 @@ namespace Java {
              */
             template<class T>
             boolean equals(T anObject) const {
-                if (Object::equals(anObject)) {
-                    return true;
-                }
                 if (instanceof<String>(anObject)) {
                     return (boolean) stringEquals(original, anObject.toString());
                 }
@@ -512,7 +504,7 @@ namespace Java {
              *
              * @return int
              */
-            long hashCode() const override;
+            long hashCode();
 
             /**
              * Returns the index within this String
@@ -875,11 +867,18 @@ namespace Java {
             String trim();
 
             /**
+            * Return C String
+            *
+            * @return a String contain value of this String
+            */
+            string toCharPointer() const;
+
+            /**
              * Return a String a string contain value of this String
              *
              * @return a String contain value of this String
              */
-            string toString() const override;
+            String toString() const;
 
             /**
              * Returns the String representation of the boolean argument.
@@ -1041,7 +1040,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return stringEquals(this->original, target.toString()) != 0;
+                return stringEquals(this->original, target.toCharPointer()) != 0;
             }
 
             /**
@@ -1077,7 +1076,7 @@ namespace Java {
             * @return true if this String is smaller than target; false otherwise
             */
             inline boolean operator<(const String &target) const {
-                return strcmp(this->original, target.toString()) < 0;
+                return strcmp(this->original, target.toCharPointer()) < 0;
             }
 
             /**
@@ -1087,7 +1086,7 @@ namespace Java {
              * @return true if this String is greater than target; false otherwise
              */
             inline boolean operator>(const String &target) const {
-                return strcmp(this->original, target.toString()) > 0;
+                return strcmp(this->original, target.toCharPointer()) > 0;
             }
 
             /**
@@ -1097,7 +1096,7 @@ namespace Java {
             * @return true if this String is smaller than or equal to target; false otherwise
             */
             inline boolean operator<=(const String &target) const {
-                return strcmp(this->original, target.toString()) <= 0;
+                return strcmp(this->original, target.toCharPointer()) <= 0;
             }
 
             /**
@@ -1107,7 +1106,7 @@ namespace Java {
              * @return true if this String is greater than or equal to target; false otherwise
              */
             inline boolean operator>=(const String &target) const {
-                return strcmp(this->original, target.toString()) >= 0;
+                return strcmp(this->original, target.toCharPointer()) >= 0;
             }
 
         public:
@@ -1122,13 +1121,13 @@ namespace Java {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                string inputStringPtr = format.toString();
+                string inputStringPtr = format.toCharPointer();
                 int inputStringLength = format.getSize();
                 int inputStringOffset = 0;
                 int errorCode = 0;
                 regex_t regex;
 
-                errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+                errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
                 while (errorCode == 0 && inputStringOffset < format.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
@@ -1244,17 +1243,17 @@ namespace Java {
 
             static String print(const String &format, char *value);
 
-            static String print(const String &format, Short value);
+            static String print(const String &format, Short &value);
 
-            static String print(const String &format, Integer value);
+            static String print(const String &format, Integer &value);
 
-            static String print(const String &format, Long value);
+            static String print(const String &format, Long &value);
 
-            static String print(const String &format, Float value);
+            static String print(const String &format, Float &value);
 
-            static String print(const String &format, Double value);
+            static String print(const String &format, Double &value);
 
-            static String print(const String &format, String value);
+            static String print(const String &format, String &value);
         };
     } // namespace Lang
 } // namespace Java
