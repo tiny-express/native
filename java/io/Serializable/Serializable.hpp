@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_IO_SERIALIZABLE_HPP_
-#define JAVA_IO_SERIALIZABLE_HPP_
+#ifndef JAVA_IO_SERIALIZABLE_HPP
+#define JAVA_IO_SERIALIZABLE_HPP
 
 namespace Java {
 		namespace IO {
@@ -39,4 +39,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_IO_SERIALIZABLE_HPP_
+#endif  // JAVA_IO_SERIALIZABLE_HPP

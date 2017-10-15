@@ -45,7 +45,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 			month,
 			year
 	);
-	assertEquals(timestamp, 1500225603123);
+	assertEquals(1500225603123, (long) timestamp);
 #endif
 }
 
@@ -61,7 +61,7 @@ TEST (KernelDateTime, TimestampInNanoSeconds) {
 
 TEST (KernelDateTime, Format) {
 	long timestamp = 1473765499;
-	string format = (string) "d/m/y";
+	auto format = (string) "d/m/y";
 	string result1 = date(timestamp, format);
 	assertEquals("13/09/2016", result1);
 	free(result1);

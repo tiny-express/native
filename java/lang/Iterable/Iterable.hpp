@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_ITERABLE_HPP_
-#define JAVA_LANG_ITERABLE_HPP_
+#ifndef JAVA_LANG_ITERABLE_HPP
+#define JAVA_LANG_ITERABLE_HPP
 
 #include "../../util/Iterator/Iterator.hpp"
 
@@ -41,4 +41,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_LANG_ITERABLE_HPP_
+#endif //JAVA_LANG_ITERABLE_HPP

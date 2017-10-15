@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_LINKED_LIST_HPP_
-#define JAVA_UTIL_LINKED_LIST_HPP_
+#ifndef JAVA_UTIL_LINKED_LIST_HPP
+#define JAVA_UTIL_LINKED_LIST_HPP
 
 #include "../../Lang.hpp"
 #include "../AbstractSequentialList/AbstractSequentialList.hpp"
@@ -637,4 +637,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_UTIL_LINKED_LIST_HPP_
+#endif //JAVA_UTIL_LINKED_LIST_HPP

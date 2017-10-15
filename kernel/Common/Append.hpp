@@ -28,7 +28,7 @@
 #define NATIVE_COMMON_APPEND_HPP
 
 #include "../Common.hpp"
-#include "Length.hpp"
+#include "../Builtin.hpp"
 #include <memory>
 #include <cstdio>
 #include <cstdlib>
@@ -44,7 +44,7 @@
  */
 inline char **appendPointerChar(char **target, char *append) {
 	int targetLength = lengthPointerPointerChar(target);
-	auto **pointer = (char **) malloc((targetLength + 2)* sizeof(char *));
+	auto **pointer = (char **) allocateMemory((targetLength + 2)* sizeof(char *));
 	memcpy(pointer, target, targetLength * sizeof(char *));
 	*( pointer + targetLength ) = append;
 	*( pointer + targetLength + 1 ) = nullptr;

@@ -44,7 +44,7 @@ Double::Double(const Double &doubleNumber) {
 }
 
 Double::~Double() {
-    if (this->originalString != NULL) {
+    if (this->originalString != nullptr) {
         free(this->originalString);
     }
 }
@@ -119,34 +119,22 @@ boolean Double::operator!=(const Double &target) const {
 
 boolean Double::operator<(const Double &target) const {
     int compareResult = compare(this->doubleValue(), target.doubleValue());
-    if (compareResult == -1) {
-        return true;
-    }
-    return false;
+    return compareResult == -1;
 }
 
 boolean Double::operator>(const Double &target) const {
     int compareResult = compare(this->doubleValue(), target.doubleValue());
-    if (compareResult == 1) {
-        return true;
-    }
-    return false;
+    return compareResult == 1;
 }
 
 boolean Double::operator>=(const Double &target) const {
     int compareResult = compare(this->doubleValue(), target.doubleValue());
-    if (compareResult == 1 || compareResult == 0) {
-        return true;
-    }
-    return false;
+    return compareResult == 1 || compareResult == 0;
 }
 
 boolean Double::operator<=(const Double &target) const {
     int compareResult = compare(this->doubleValue(), target.doubleValue());
-    if (compareResult == -1 || compareResult == 0) {
-        return true;
-    }
-    return false;
+    return compareResult == -1 || compareResult == 0;
 }
 
 boolean Double::operator&&(const Double &target) const {
@@ -187,6 +175,7 @@ int Double::compare(double double1, double double2) {
     if (thisBits == anotherBits) {
         return 0;
     }
+
     if (thisBits < anotherBits) {
         return -1;
     }
@@ -237,7 +226,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
 // TODO(thoangminh): Wait for instanceof<>
 boolean Double::equals(const Double &object) const {
     boolean isDouble = instanceof<Double>(object);
-    Double *castObjectToDouble = (Double *) &object;
+    auto castObjectToDouble = (Double *) &object;
     long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
     long doubleToLongBitsThis = doubleToLongBits(this->original);
     boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
@@ -352,10 +341,10 @@ double Double::min(double doubleA, double doubleB) {
 //}
 
 String Double::doubleToBinary64StringType(double doubleInput) {
-    auto integerPartNormalizeForm = (string) malloc(2048 * sizeof(char));
-    auto fractionPartNormalizeForm = (string) malloc(54 * sizeof(char));
-    auto doubleInputNormalizeForm = (string) malloc(2102 * sizeof(char));
-    auto resultDoubleToBinary64StringType = (string) malloc(65 * sizeof(char));
+    auto integerPartNormalizeForm = (string) allocateMemory(2048 * sizeof(char));
+    auto fractionPartNormalizeForm = (string) allocateMemory(54 * sizeof(char));
+    auto doubleInputNormalizeForm = (string) allocateMemory(2102 * sizeof(char));
+    auto resultDoubleToBinary64StringType = (string) allocateMemory(65 * sizeof(char));
 
     int powerExponentBase2 = 0;
     int integerPartDoubleInput;
@@ -640,7 +629,7 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
 }
 
 String Double::longBitsToBinary64StringType(long longBitsInput) {
-    auto resultLongBitsToBinary64StringType = (string) malloc(65 * sizeof(char));
+    auto resultLongBitsToBinary64StringType = (string) allocateMemory(65 * sizeof(char));
     int index;
     int i;
 

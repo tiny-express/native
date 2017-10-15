@@ -172,8 +172,8 @@ TEST (KernelStringProcess, StringEndsWith) {
 }
 
 TEST (KernelStringProcess, StringIndexOf) {
-	char *target = (string) "Hello World";
-	char *subTarget = (string) "World";
+	auto target = (string) "Hello World";
+	auto subTarget = (string) "World";
 	int result = stringIndex(target, subTarget, 1);
 	assertEquals(6, result);
 	
@@ -294,7 +294,7 @@ TEST (KernelStringProcess, StringFromTo) {
 	int from = 6;
 	int to = 11;
 	char *result = stringFromTo(target, from, to);
-	char *expect = (string) "World";
+	auto expect = (string) "World";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -337,10 +337,10 @@ TEST (KernelStringProcess, StringFromTo) {
 }
 
 TEST (KernelStringProcess, StringFrom) {
-	char *target = (string) "Hello World";
+	auto target = (string) "Hello World";
 	int from = 6;
 	char *result = stringFrom(target, from);
-	char *expect = (string) "World";
+	auto expect = (string) "World";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -358,10 +358,10 @@ TEST (KernelStringProcess, StringFrom) {
 }
 
 TEST (KernelStringProcess, StringTo) {
-	char *target = (string) "Hello World";
+	auto target = (string) "Hello World";
 	int to = 4;
 	char *result = stringTo(target, to);
-	char *expect = (string) "Hello";
+	auto expect = (string) "Hello";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -379,21 +379,21 @@ TEST (KernelStringProcess, StringTo) {
 }
 
 TEST (KernelStringProcess, StringCopy) {
-	char *target = (string) "Hello World";
-	char *result = strdup(target);
+	auto target = (string) "Hello World";
+	char *result = stringCopy(target);
 	assertEquals(target, result);
 	free(result);
 	
 	target = (string) "";
-	result = strdup(target);
+	result = stringCopy(target);
 	assertEquals(target, result);
 	free(result);
 }
 
 TEST (KernelStringProcess, StringUpper) {
-	char *target = (string) "Hello World";
+	auto target = (string) "Hello World";
 	char *result = stringUpper(target);
-	char *expect = (string) "HELLO WORLD";
+	auto expect = (string) "HELLO WORLD";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -410,9 +410,9 @@ TEST (KernelStringProcess, StringUpper) {
 }
 
 TEST (KernelStringProcess, StringLower) {
-	char *target = (string) "HELLO WORLD";
+	auto target = (string) "HELLO WORLD";
 	char *result = stringLower(target);
-	char *expect = (string) "hello world";
+	auto expect = (string) "hello world";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -435,9 +435,9 @@ TEST (KernelStringProcess, StringLower) {
 }
 
 TEST (KernelStringProcess, StringTitle) {
-	char *target = (string) "hello world";
+	auto target = (string) "hello world";
 	char *result = stringTitle(target);
-	char *expect = (string) "Hello World";
+	auto expect = (string) "Hello World";
 	assertEquals(expect, result);
 	free(result);
 	
@@ -455,8 +455,8 @@ TEST (KernelStringProcess, StringTitle) {
 }
 
 TEST (KernelStringProcess, StringStandardized) {
-	char *target = (string) "  hello  world ";
-	char *expect = (string) "hello world";
+	auto target = (string) "  hello  world ";
+	auto expect = (string) "hello world";
 	char *result = stringStandardized(target);
 	assertEquals(expect, result);
 	free(result);
@@ -491,35 +491,34 @@ TEST (KernelStringProcess, StringEquals) {
 }
 
 TEST (KernelStringProcess, StringReverse) {
-	char *target = (string) "hello from other side";
-	char *correct_reverse = (string) "edis rehto morf olleh";
-	char *wrong_reverse = (string) "something here";
+	auto target = (string) "hello from other side";
+	auto correctReverse = (string) "edis rehto morf olleh";
+	auto wrongReverse = (string) "something here";
 	
-	char *reverse_of_target = stringReverse(target);
-	
-	
+	char *reverseOfTarget = stringReverse(target);
+
 	// Test true with correct reverse string
-	assertTrue(stringEquals(correct_reverse, reverse_of_target));
+	assertTrue(stringEquals(correctReverse, reverseOfTarget));
 	
 	// Test fail with wrong reverse string
-	assertFalse(stringEquals(wrong_reverse, reverse_of_target));
+	assertFalse(stringEquals(wrongReverse, reverseOfTarget));
 	
-	free(reverse_of_target);
+	free(reverseOfTarget);
 }
 
 TEST (KernelStringProcess, StringMatches) {
-	char *target = (string) "hello from other side";
-	char *correct_reverse = (string) "edis rehto morf olleh";
-	char *wrong_reverse = (string) "something here";
+	auto target = (string) "hello from other side";
+	auto correctReverse = (string) "edis rehto morf olleh";
+	auto wrongReverse = (string) "something here";
 	
-	char *reverse_of_target = stringReverse(target);
+	char *reverseOfTarget = stringReverse(target);
 	
 	// Test true with correct reverse string
-	assertTrue(stringEquals(correct_reverse, reverse_of_target));
+	assertTrue(stringEquals(correctReverse, reverseOfTarget));
 	
 	// Test fail with wrong reverse string
-	assertFalse(stringEquals(wrong_reverse, reverse_of_target));
-	free(reverse_of_target);
+	assertFalse(stringEquals(wrongReverse, reverseOfTarget));
+	free(reverseOfTarget);
 }
 
 

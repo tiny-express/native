@@ -31,9 +31,6 @@
 #define MAX_STRING_LENGTH 100000
 #define BiConsumer std::function
 
-#include <cstddef>
-#include <cwchar>
-
 #ifdef WIN
 #define boolean bool
 #else
