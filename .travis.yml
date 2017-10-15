@@ -19,7 +19,7 @@ addons:
 before_script:
 - export CC=gcc
 - export CXX=g++
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ruby; brew update; brew install llvm; export CXX=clang++; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ruby; brew update; brew install llvm; export CXX=clang++-5.0; fi
 - ./misc/benchmark.sh
 - cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
 - cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
