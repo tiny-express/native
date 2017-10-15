@@ -1109,6 +1109,16 @@ namespace Java {
                 return strcmp(this->original, target.toCharPointer()) >= 0;
             }
 
+            /**
+             * Get value of element at the specified position in this String
+             *
+             * @param index
+             * @return char
+             */
+            const char &operator[](const int index) const {
+                return this->original[index];
+            }
+
         public:
             /**
              * Format string
@@ -1241,7 +1251,7 @@ namespace Java {
 
             static String print(const String &format, float value);
 
-            static String print(const String &format, char *value);
+            static String print(const String &format, string value);
 
             static String print(const String &format, Short value);
 

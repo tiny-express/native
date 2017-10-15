@@ -56,7 +56,7 @@ String::String(Array<byte> &byteArray) {
 	for (byte byte : byteArray) {
 		chars.push((char) byte);
 	}
-	this->original = stringCopy(String::fromCharArray(chars).toString());
+	this->original = stringCopy(String::fromCharArray(chars).toCharPointer());
 	this->size = chars.length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -69,7 +69,7 @@ String::String(const String &target) {
 }
 
 String::String(const StringBuilder &stringBuilder) {
-    this->original = stringCopy(stringBuilder.toString());
+    this->original = stringCopy(stringBuilder.toString().toCharPointer());
     this->size = stringBuilder.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -127,7 +127,7 @@ String String::concat(String target) {
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-	return (stringIndex(this->original, charSequence.toString(), 1) != NOT_FOUND);
+	return (stringIndex(this->original, charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
 }
 
 Array<byte> String::getBytes() const {
@@ -253,8 +253,8 @@ int String::lastIndexOf(int character, int fromIndex) {
 }
 
 int String::lastIndexOf(String subString) const {
-	string reversedString = stringReverse(subString.toString());
-	string currentReversedString = stringReverse(this->toString());
+	string reversedString = stringReverse(subString.toCharPointer());
+	string currentReversedString = stringReverse(this->toCharPointer());
 	int result = stringIndex(currentReversedString, reversedString, 1);
 	free(reversedString);
 	free(currentReversedString);
@@ -275,7 +275,7 @@ int String::lastIndexOf(String subString, int fromIndex) const {
     }
     string thisStringReversed = stringReverse(this->original);
 	string subStringFromIndex = &(thisStringReversed)[ this->size - fromIndex - subString.size];
-	string reversedString = stringReverse(subString.toString());
+	string reversedString = stringReverse(subString.toCharPointer());
 	// string currentReversedString = stringReverse(subStringFromIndex);
 	int result = stringIndex(subStringFromIndex, reversedString, 1);
 	free(reversedString);
@@ -312,7 +312,7 @@ String String::replaceAll(String regex, String replacement) const {
 
 Array<String> String::split(String regex) const {
     // TODO (anhnt) fix this later, temporary use replace, need Pattern
-	string *splitStrings = stringSplit(this->original, regex.toString());
+	string *splitStrings = stringSplit(this->original, regex.toCharPointer());
 	Array<String> strings;
 
 #ifdef LINUX
@@ -479,7 +479,7 @@ boolean String::contentEquals(const CharSequence &charSequence) {
         std::lock_guard<std::mutex> guard(mutex);
         return strcmp(this->original, charSequence.toString()) == 0;
     }*/
-    return strcmp(this->original, charSequence.toString()) == 0;
+    return strcmp(this->original, charSequence.toString().toCharPointer()) == 0;
 }
 
 String String::copyValueOf(Array<char> &charArray) {
@@ -558,9 +558,11 @@ void String::getChars(int sourceBegin, int sourceEnd,
 }
 
 String String::replace(CharSequence &target, CharSequence &replacement) const {
-    string oldString = target.toString();
-    string newString = replacement.toString();
-    string pointerHolder = stringReplace(this->original, oldString, newString);
+    string pointerHolder = stringReplace(
+            this->original,
+            target.toString().toCharPointer(),
+            replacement.toString().toCharPointer()
+    );
     String result = pointerHolder;
     free(pointerHolder);
     return result;
@@ -672,7 +674,7 @@ String String::print(const String &format, double value) {
 String String::print(const String &format, float value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -681,13 +683,13 @@ String String::print(const String &format, float value) {
 
 String String::print(const String &format, string value) {
     String result;
-    char* buffer = (char*)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
-    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toString(), value);
+    auto buffer = (string)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
 
     if (length > DEFAULT_BUFFER_LENGTH) {
         free(buffer);
-        buffer = (char*)calloc(++length, sizeof(char));
-        length = snprintf(buffer, (size_t)length, format.toString(), value);
+        buffer = (string) calloc(++length, sizeof(char));
+        length = snprintf(buffer, (size_t)length, format.toCharPointer(), value);
     }
 
     if (length > 0) {

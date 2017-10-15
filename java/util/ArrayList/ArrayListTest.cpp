@@ -26,8 +26,6 @@
 
 #include "../../../kernel/Test.hpp"
 #include "../List/List.hpp"
-#include "../../lang/String/String.hpp"
-#include "../../lang/Integer/Integer.hpp"
 #include "ArrayList.hpp"
 
 using namespace Java::Lang;
@@ -91,12 +89,12 @@ TEST(JavaUtil, ArrayListAdd) {
 	assertEquals(sizeExpect, sizeResult);
 
 	// Compare validArrayList toString
-	auto stringExpect = (string) "[1, 2, 3, 4]";
+	String stringExpect = "[1, 2, 3, 4]";
 	assertEquals(stringExpect, validArrayList.toString());
 
 	// Add new element at index 0 then compare string - Should equal
 	validArrayList.add(0, 0);
-	stringExpect = (string) "[0, 1, 2, 3, 4]";
+	stringExpect = "[0, 1, 2, 3, 4]";
 	assertEquals(stringExpect, validArrayList.toString());
 }
 
@@ -130,7 +128,7 @@ TEST(JavaUtil, ArrayListClear) {
 	// Give an valid ArrayList
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	auto stringExpect = (string) R"(["food", "tiny"])";
-	assertEquals(stringExpect, validArrayList);
+	assertEquals(stringExpect, validArrayList.toString());
 
 	// Clear validArrayList - Should equal
 	validArrayList.clear();
@@ -139,7 +137,7 @@ TEST(JavaUtil, ArrayListClear) {
 	assertEquals(sizeExpect, sizeResult);
 
 	stringExpect = (string) "[]";
-	assertEquals(stringExpect, validArrayList);
+	assertEquals(stringExpect, validArrayList.toString());
 }
 
 TEST(JavaUtil, ArrayListClone) {
@@ -149,7 +147,7 @@ TEST(JavaUtil, ArrayListClone) {
 	ArrayList<String> cloneArrayList = validArrayList.clone();
 
 	auto stringExpect = (string) R"(["food", "tiny"])";
-	assertEquals(stringExpect, cloneArrayList);
+	assertEquals(stringExpect, cloneArrayList.toString());
 	int sizeExpect = 2;
 	int sizeResult = cloneArrayList.size();
 	assertEquals(sizeExpect, sizeResult);
@@ -245,16 +243,14 @@ TEST(JavaUtil, ArrayListRemoveElement) {
     ArrayList<String> validArrayList = {"123", "456", "789"};
     boolean result = validArrayList.remove("456");
     auto stringExpect = (string) R"(["123", "789"])";
-    String stringResult = validArrayList.toString();
     assertTrue(result);
-    assertEquals(stringExpect, stringResult);
+    assertEquals(stringExpect,  validArrayList.toString());
 
     // Test case false
     result = validArrayList.remove("012");
     stringExpect = (string) R"(["123", "789"])";
-    stringResult = validArrayList.toString();
     assertFalse(result);
-    assertEquals(stringExpect, stringResult);
+    assertEquals(stringExpect, validArrayList.toString());
 }
 
 TEST(JavaUtil, ArrayListSet) {

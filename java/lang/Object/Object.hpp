@@ -102,7 +102,7 @@ public:
      *
      * @param containerSize
      */
-    Array(int containerSize) {
+    Array(long containerSize) {
         this->original.resize(containerSize);
         this->length = containerSize;
     }
@@ -117,7 +117,7 @@ public:
      *
      * Don't set this property when you coding
      */
-    int length;
+    long length;
 
     /**
      * Get the first element in Array

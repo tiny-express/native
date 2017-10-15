@@ -45,14 +45,14 @@ StringBuilder::StringBuilder(int capacity) {
     this->currentCapacity = capacity;
 }
 
-StringBuilder::StringBuilder(const string target) {
+StringBuilder::StringBuilder(const_string target) {
 	int stringLength = lengthPointerChar(target);
 	int newCapacity = defaultCapacity + stringLength;
 	this->ensureCapacity(newCapacity);
-	this->append(target);
+	this->append(String(target));
 }
 
-StringBuilder::StringBuilder(const String &target) {
+StringBuilder::StringBuilder(const String target) {
 	int newCapacity = defaultCapacity + target.length();
 	this->ensureCapacity(newCapacity);
 	this->append(target.toString());
@@ -84,7 +84,7 @@ StringBuilder::~StringBuilder() {
 	free(original);
 }
 
-StringBuilder &StringBuilder::append(const Boolean &target) {
+StringBuilder &StringBuilder::append(Boolean target) {
     return this->append(target.toString());
 }
 
@@ -138,13 +138,12 @@ StringBuilder &StringBuilder::append(const Array<char> &target, int offset, int 
 }
 
 StringBuilder &StringBuilder::append(const CharSequence &target) {
-    string targetString = target.toString();
-    return this->append(targetString);
+    return this->append(target.toString());
 }
 
 StringBuilder &StringBuilder::append(const CharSequence &target, int start, int end) {
-    string targetString = target.toString();
-    int lengthOfTarget = lengthPointerChar(targetString);
+    String targetString = target.toString();
+    int lengthOfTarget = targetString.length();
     if (start < 0 || start > end || end > lengthOfTarget) {
         throw IndexOutOfBoundsException();
     }
@@ -221,7 +220,7 @@ StringBuilder &StringBuilder::append(long target) {
     return this->append(Long(target));
 }
 
-StringBuilder &StringBuilder::append(const String &target) {
+StringBuilder &StringBuilder::append(const String target) {
     return this->append(target.toString());
 }
 
@@ -340,20 +339,20 @@ void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &t
 	throw UnsupportedOperationException();
 }
 
-int StringBuilder::indexOf(const String &target) const {
+int StringBuilder::indexOf(const String target) const {
 	return this->indexOf(target.toString());
 }
 
 int StringBuilder::indexOf(const string target) const {
-    return this->stringMatches(this->toString(), target, 0);
+    return this->stringMatches(this->toString().toCharPointer(), target, 0);
 }
 
-int StringBuilder::indexOf(const String &target, int fromIndex) const {
+int StringBuilder::indexOf(const String target, int fromIndex) const {
 	return this->indexOf(target.toString(), fromIndex);
 }
 
 int StringBuilder::indexOf(const string target, int fromIndex) const {
-    return  this->stringMatches(this->toString(), target, fromIndex);
+    return  this->stringMatches(this->toString().toCharPointer(), target, fromIndex);
 }
 
 StringBuilder &StringBuilder::insert(int offset, boolean target) {
@@ -459,8 +458,8 @@ StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &
     if (destinationOffset < 0 || destinationOffset > this->currentLength) {
         throw IndexOutOfBoundsException();
     }
-    string targetString = target.toString();
-    int lengthOfTarget = lengthPointerChar(targetString);
+
+    int lengthOfTarget = target.length();
     if (start < 0 || end < 0 || start > end || end > lengthOfTarget){
         throw IndexOutOfBoundsException();
     }
@@ -477,7 +476,7 @@ StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &
     int indexOfOriginal = destinationOffset;
     int indexOfTarget;
     for (indexOfTarget = start; indexOfTarget < end; indexOfTarget++) {
-        this->original[indexOfOriginal] = targetString[indexOfTarget];
+        this->original[indexOfOriginal] = target.toString()[indexOfTarget];
         indexOfOriginal = indexOfOriginal + 1;
     }
 
@@ -517,8 +516,8 @@ StringBuilder &StringBuilder::insert(int offset, long target) {
     return this->insert(offset, Long(target));
 };
 
-StringBuilder &StringBuilder::insert(int offset, const String &target) {
-    return this->insert(offset, target.toString());
+StringBuilder &StringBuilder::insert(int offset, const String target) {
+    return this->insert(offset, target);
 }
 
 StringBuilder &StringBuilder::insert(int offset, const string target) {
@@ -547,19 +546,11 @@ StringBuilder &StringBuilder::insert(int offset, const string target) {
     return *this;
 }
 
-int StringBuilder::lastIndexOf(const String &target) const {
-	return this->lastIndexOf(target.toString());
+int StringBuilder::lastIndexOf(const String target) const {
+	return this->stringMatchesReverse(this->toString(), target, this->currentLength);
 }
 
-int StringBuilder::lastIndexOf(const string target) const {
-    return this->stringMatchesReverse(this->toString(), target, this->currentLength);
-}
-
-int StringBuilder::lastIndexOf(const String &target, int fromIndex) const {
-	return this->lastIndexOf(target.toString(), fromIndex);
-}
-
-int StringBuilder::lastIndexOf(const string target, int fromIndex) const {
+int StringBuilder::lastIndexOf(String target, int fromIndex) const {
     return this->stringMatchesReverse(this->toString(), target, fromIndex);
 }
 
@@ -575,11 +566,7 @@ int StringBuilder::offsetByCodePoints(int index, int codePointOffset) const {
 	throw UnsupportedOperationException();
 }
 
-StringBuilder StringBuilder::replace(int start, int end, const String &target) {
-	return this->replace(start, end, target.toString());
-}
-
-StringBuilder StringBuilder::replace(int start, int end, const string target) {
+StringBuilder StringBuilder::replace(int start, int end, String target) {
 	if (start < 0) {
 		throw StringIndexOutOfBoundsException(start);
 	}
@@ -593,7 +580,7 @@ StringBuilder StringBuilder::replace(int start, int end, const string target) {
 		end = this->currentLength;
 	}
 	
-	int lengthOfTarget = lengthPointerChar(target);
+	int lengthOfTarget = target.length();
 	int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
 	int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
 	this->ensureCapacity(newLength);
@@ -605,7 +592,7 @@ StringBuilder StringBuilder::replace(int start, int end, const string target) {
 	
 	string insertPosition = this->original + start;
 	int memorySizeForTarget = lengthOfTarget * sizeof(char);
-	memcpy(insertPosition, target, (size_t) memorySizeForTarget);
+	memcpy(insertPosition, target.toCharPointer(), (size_t) memorySizeForTarget);
 	
 	this->currentLength = newLength;
 	return *this;
@@ -641,7 +628,7 @@ void StringBuilder::setCharAt(int index, char target) {
 }
 
 void StringBuilder::setCharAt(int index, const Character &target) {
-	Character *pointerToTarget = const_cast<Character *>(&target);
+	auto pointerToTarget = const_cast<Character *>(&target);
 	this->setCharAt(index, pointerToTarget->charValue());
 }
 
@@ -676,7 +663,7 @@ String StringBuilder::substring(int start, int end) const {
 	}
 	
 	int lengthOfSubString = end - start + 1;
-	string copyOfSubString = (string) calloc((size_t) lengthOfSubString, sizeof(char));
+	auto copyOfSubString = (string) calloc((size_t) lengthOfSubString, sizeof(char));
 	int indexOfOriginal;
 	int indexOfSubString = 0;
 	for (indexOfOriginal = start; indexOfOriginal < end; indexOfOriginal++) {
@@ -689,17 +676,17 @@ String StringBuilder::substring(int start, int end) const {
 	return result;
 }
 
-string StringBuilder::toString() const {
+String StringBuilder::toString() const {
     int numberOfElementIncludeNullTerminator = this->currentLength + 1;
-    string content = (string)calloc((size_t)numberOfElementIncludeNullTerminator, sizeof(char));
+    auto content = (string)calloc((size_t) numberOfElementIncludeNullTerminator, sizeof(char));
     int index;
     for (index = 0; index < this->currentLength; index++) {
         content[index] = this->original[index];
     }
     content[this->currentLength] = '\0';
-    this->backupOriginalForToString = String(content);
+    this->backupOriginalForToString = stringCopy(content);
     free(content);
-    return this->backupOriginalForToString.toString();
+    return this->backupOriginalForToString;
 }
 
 void StringBuilder::trimToSize() {
@@ -710,16 +697,16 @@ void StringBuilder::trimToSize() {
 	}
 }
 
-int *StringBuilder::initializeNextTable(const string pattern) const {
-	int lengthOfPattern = lengthPointerChar(pattern);
-	if (pattern == NULL || lengthOfPattern == 0) {
-		return NULL;
+int *StringBuilder::initializeNextTable(String pattern) const {
+	int lengthOfPattern = pattern.length();
+	if (pattern.isEmpty()) {
+		return nullptr;
 	}
 	
 	int *nextTable = (int *) calloc((size_t) lengthOfPattern, sizeof(int));
 	
-	if (nextTable == NULL) {
-		return NULL;
+	if (nextTable == nullptr) {
+		return nullptr;
 	}
 	
 	nextTable[ 0 ] = -1;
@@ -750,9 +737,9 @@ int *StringBuilder::initializeNextTable(const string pattern) const {
 	return nextTable;
 }
 
-int StringBuilder::stringMatches(const string target, const string pattern, int startIndex) const {
-	int lengthOfPattern = lengthPointerChar(pattern);
-	int lengthOfTarget = lengthPointerChar(target);
+int StringBuilder::stringMatches(String target, String pattern, int startIndex) const {
+	int lengthOfPattern = pattern.length();
+	int lengthOfTarget = target.length();
 	
 	if (startIndex > lengthOfTarget) {
 		if (lengthOfPattern == 0) {
@@ -772,7 +759,7 @@ int StringBuilder::stringMatches(const string target, const string pattern, int 
 	
 	// KMP algorithm.
 	int *nextTable = this->initializeNextTable(target);
-	if (nextTable == NULL) {
+	if (nextTable == nullptr) {
 		return -1;
 	}
 	
@@ -799,9 +786,9 @@ int StringBuilder::stringMatches(const string target, const string pattern, int 
 	return -1;
 }
 
-int StringBuilder::stringMatchesReverse(const string target, const string pattern, int startIndex) const {
-	int lengthOfPattern = lengthPointerChar(pattern);
-	int lengthOfTarget = lengthPointerChar(target);
+int StringBuilder::stringMatchesReverse(String target, String pattern, int startIndex) const {
+	int lengthOfPattern = pattern.length();
+	int lengthOfTarget = target.length();
 	
 	if (startIndex < 0) {
 		return -1;
@@ -819,7 +806,7 @@ int StringBuilder::stringMatchesReverse(const string target, const string patter
 	
 	// KMP algorithm.
 	int *nextTable = this->initializeNextTable(pattern);
-	if (nextTable == NULL) {
+	if (nextTable == nullptr) {
 		return -1;
 	}
 	

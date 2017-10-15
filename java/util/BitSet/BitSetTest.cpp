@@ -594,7 +594,7 @@ TEST(JavaUtil, BitSetToString) {
 
 TEST(JavaUtil, BitSetToByteArray) {
     BitSet bitSet;
-    Array<byte> expectedResultByteArray = Array<byte>(0);
+    Array<byte> expectedResultByteArray = {};
     Array<byte> resultByteArray = bitSet.toByteArray();
     assertTrue(Arrays::equals(expectedResultByteArray, resultByteArray));
 
@@ -631,7 +631,7 @@ TEST(JavaUtil, BitSetToByteArray) {
 
 TEST(JavaUtil, BitSetToLongArray) {
     BitSet bitSet;
-    Array<long> expectedResultLongArray = Array<long>(0);
+    Array<long> expectedResultLongArray = {};
     Array<long> resultLongArray = bitSet.toLongArray();
     assertTrue(Arrays::equals(expectedResultLongArray, resultLongArray));
 

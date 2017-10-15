@@ -46,7 +46,7 @@ namespace Java {
 				public:
 						Throwable *getCause();
 						String getMessage();
-						string toString();
+						String toString();
 				};
 		}
 }

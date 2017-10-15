@@ -71,7 +71,7 @@ namespace Java {
              *
              * @param nullTerminatedString
              */
-            StringBuilder(const string target);
+            StringBuilder(const_string target);
 
             /**
              * StringBuilder Constructor
@@ -80,7 +80,7 @@ namespace Java {
              *
              * @param string
              */
-            StringBuilder(const String &target);
+            StringBuilder(String target);
 
             /**
              * StringBuilder Constructor
@@ -119,7 +119,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder &append(const Boolean &target);
+            StringBuilder &append(const Boolean target);
 
             /**
              * Appends the string representation of the boolean argument to the sequence.
@@ -306,7 +306,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder &append(const String &target);
+            StringBuilder &append(const String target);
 
             /**
              * Appends the specified StringBuffer to this sequence.
@@ -448,7 +448,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int indexOf(const String &target) const;
+            int indexOf(const String target) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring.
@@ -465,7 +465,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int indexOf(const String &target, int fromIndex) const;
+            int indexOf(const String target, int fromIndex) const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
@@ -695,7 +695,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder &insert(int offset, const String &target);
+            StringBuilder &insert(int offset, const String target);
 
             /**
              * Inserts the string representation of the string argument into this sequence.
@@ -717,17 +717,7 @@ namespace Java {
              * @param target
              * @return int
              */
-            int lastIndexOf(const String &target) const;
-
-            /**
-             * This method accepts a string as an argument, if the string argument occurs one or more times as a substring within this object,
-             * then it returns the index of the first character of the last such substring is returned.
-             * If it does not occur as a substring, -1 is returned.
-             *
-             * @param target
-             * @return int
-             */
-            int lastIndexOf(const string target) const;
+            int lastIndexOf(String target) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -737,7 +727,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int lastIndexOf(const String &target, int fromIndex) const;
+            int lastIndexOf(const String target, int fromIndex) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -781,22 +771,7 @@ namespace Java {
              * @param target
              * @return StringBuilder
              */
-            StringBuilder replace(int start, int end, const String &target);
-
-            /**
-             * Replaces the characters in a substring of this sequence with characters in the specified string.
-             * The substring begins at the specified start and extends to the character at index end - 1
-             * or to the end of the sequence if no such character exists.
-             * First the characters in the substring are removed and then the specified string is inserted at start.
-             * (This sequence will be lengthened to accommodate the specified string if necessary.)
-             *
-             * @param start
-             * @param end
-             * @param target
-             * @return StringBuilder
-             * @throw StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
-             */
-            StringBuilder replace(int start, int end, const string target);
+            StringBuilder replace(int start, int end, String target);
 
             /**
              * Causes this character sequence to be replaced by the reverse of the sequence.
@@ -875,7 +850,7 @@ namespace Java {
              *
              * @return string
              */
-            String toString() const;
+            String toString() const override;
 
             /**
              * Attempts to reduce storage used for the character sequence.
@@ -894,7 +869,7 @@ namespace Java {
              * @param pattern
              * @return int *
              */
-            int *initializeNextTable(const string pattern) const;
+            int *initializeNextTable(String pattern) const;
 
             /**
              * This method returns the index within this string of the first occurrence of the specified substring,
@@ -905,7 +880,7 @@ namespace Java {
              * @param startIndex
              * @return int
              */
-            int stringMatches(const string target, const string pattern, int startIndex) const;
+            int stringMatches(String target, String pattern, int startIndex) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -916,7 +891,7 @@ namespace Java {
              * @param startIndex
              * @return int
              */
-            int stringMatchesReverse(const string target, const string pattern, int startIndex) const;
+            int stringMatchesReverse(String target, String pattern, int startIndex) const;
 
             /**
              * This method helps reverses all valid surrogate pairs are produced by reverse method.
