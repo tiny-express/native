@@ -17,7 +17,7 @@ addons:
     - valgrind
     - lcov
 before_script:
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then brew help; fi
+- if [ "$TRAVIS_OS_NAME" != "osx" ]; then brew help; fi
 - export CC=gcc
 - export CXX=g++
 - ./misc/benchmark.sh
