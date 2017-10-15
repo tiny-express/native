@@ -566,10 +566,10 @@ namespace Java {
                          *
                          * @return string
                          */
-						string toString() {
+						String toString() {
 							if (this->size() == 0) {
 								this->backup = "[]";
-								return this->backup.toString();
+								return this->backup;
 							}
 
                             boolean isStringArrayList = false;

@@ -59,7 +59,7 @@ namespace Java {
              *
              * @param sequence
              */
-            explicit StringBufferUnSafe(CharSequence &sequence);
+             StringBufferUnSafe(CharSequence &sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -67,14 +67,14 @@ namespace Java {
              * @param capacity
              * @throw NegativeArraySizeException if capacity is negative
              */
-            explicit StringBufferUnSafe(int capacity);
+             StringBufferUnSafe(int capacity);
 
             /**
              * Constructs a string buffer initialized to the contents of the specified string.
              *
              * @param originalString
              */
-            explicit StringBufferUnSafe(String originalString);
+             StringBufferUnSafe(String originalString);
 
             /**
              * Copy constructor
@@ -108,7 +108,7 @@ namespace Java {
              * @param stringToAppend
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(string stringToAppend);
+            StringBufferUnSafe &append(String stringToAppend);
 
             /**
              * Appends the string representation of the boolean argument
@@ -142,14 +142,6 @@ namespace Java {
              * @return reference to this StringBufferUnSafe
              */
             StringBufferUnSafe &append(char charValue);
-
-            /**
-             * Appends the string representation of char array argument to this sequence.
-             *
-             * @param stringToAppend
-             * @return reference to this StringBufferUnSafe
-             */
-            StringBufferUnSafe &append(String stringToAppend);
 
             /**
              * Appends the string representation of the int argument
@@ -390,7 +382,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(int offset, string stringToInsert);
+            StringBufferUnSafe &insert(int offset, String stringToInsert);
 
             /**
              * Inserts the string representation of the char argument into this sequence.
@@ -403,21 +395,6 @@ namespace Java {
              * @return a reference to this StringBufferUnSafe
              */
             StringBufferUnSafe &insert(int offset, char charValue);
-
-            /**
-             * Inserts the string into this character sequence.
-             * The characters of the String argument are inserted, in order,
-             * into this sequence at the indicated offset, moving up any
-             * characters originally above that position and increasing
-             * the length of this sequence by the length of the argument.
-             * If str is null, then the four characters "null" are inserted into this sequence.
-             *
-             * @param offset
-             * @param stringToInsert
-             * @throw StringIndexOutOfBoundsException - if the offset is invalid.
-             * @return a reference to this StringBufferUnSafe
-             */
-            StringBufferUnSafe &insert(int offset, String stringToInsert);
 
             /**
              * Inserts the string representation of the long argument into this sequence.
@@ -498,7 +475,7 @@ namespace Java {
              * @return a reference to this StringBufferUnSafe
              */
 
-            StringBufferUnSafe &insert(int index, string stringToInsert, int offset, int len);
+            StringBufferUnSafe &insert(int index, String stringToInsert, int offset, int len);
 
             /**
              * Returns the index within this string of the rightmost occurrence of the specified substring.
@@ -623,7 +600,7 @@ namespace Java {
              *
              * @return a string representing the data in this sequence
              */
-            string toString() const override ;
+            String toString() const ;
 
             /**
              * Attempts to reduce storage used for the character sequence.
@@ -664,7 +641,7 @@ namespace Java {
              *
              * @param sequence
              */
-            explicit StringBuffer(CharSequence &sequence);
+             StringBuffer(CharSequence &sequence);
 
             /**
              * Constructs a string buffer with no characters in it and the specified initial capacity.
@@ -672,14 +649,21 @@ namespace Java {
              * @param capacity
              * @throw NegativeArraySizeException if capacity is negative
              */
-            explicit StringBuffer(int capacity);
+             StringBuffer(int capacity);
 
             /**
              * Constructs a string buffer initialized to the contents of the specified string.
              *
              * @param originalString
              */
-            explicit StringBuffer(String originalString);
+            StringBuffer(const_string originalString);
+
+            /**
+             * Constructs a string buffer initialized to the contents of the specified string.
+             *
+             * @param originalString
+             */
+            StringBuffer(String originalString);
 
             /**
              * Copy constructor
@@ -1228,7 +1212,7 @@ namespace Java {
              *
              * @return a string representing the data in this sequence
              */
-            string toString() const override;
+            String toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.

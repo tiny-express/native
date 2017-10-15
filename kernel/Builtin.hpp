@@ -66,17 +66,18 @@
 #include <typeinfo>
 #include <regex>
 #include <string>
+#include <initializer_list>
 
 // Builtin functions
 #define P_LEN(NAME, TYPE); \
-inline long lengthPointer##NAME(TYPE *target) {\
+inline int lengthPointer##NAME(TYPE *target) {\
     if (target == nullptr) return 0;\
     return __builtin_strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
-inline long lengthPointerPointer##NAME(TYPE **target) {\
+inline int lengthPointerPointer##NAME(TYPE **target) {\
     if (target == nullptr) return 0;\
     register TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
@@ -103,7 +104,7 @@ inline boolean isEmptyString(const char *input) {
  * @param size
  * @return void pointer
  */
-inline void *allocateMemory(long size) {
+inline void *allocateMemory(int size) {
 #ifdef DARWIN
     return malloc(size);
 #else
@@ -134,6 +135,11 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  */
 inline char *stringCopy(const char *target) {
     return __builtin_strdup(target);
+}
+
+template<typename Base, typename T>
+inline bool instanceof(T t) {
+    return dynamic_cast<const Base*>(&t) != nullptr;
 }
 
 #endif //NATIVE_KERNEL_BUILTIN_HPP

@@ -96,8 +96,8 @@ namespace Java {
 
         private:
             string original;
-            long size;
-            long capacity;
+            int size;
+            int capacity;
             mutable int hash = 0;
 
         public:
@@ -425,8 +425,8 @@ namespace Java {
              */
             template<class T>
             boolean equals(T anObject) const {
-                if (instanceof<String>(anObject)) {
-                    return (boolean) stringEquals(original, anObject.toString());
+                if (instanceof<String>(&anObject)) {
+                    return (boolean) stringEquals(original, anObject.toCharPointer());
                 }
                 return false;
             }
@@ -970,8 +970,8 @@ namespace Java {
              */
             inline String operator+(const string &target) {
                 auto targetValue = (string) target;
-                long targetLength = lengthPointerChar((string) target);
-                long newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar((string) target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -984,8 +984,8 @@ namespace Java {
              */
             inline String operator+(const String &target) {
                 string targetValue = target.original;
-                long targetLength = target.size;
-                long newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -998,8 +998,8 @@ namespace Java {
              */
             inline String &operator+=(const String &target) {
                 string targetValue = target.original;
-                long targetLength = target.size;
-                long newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
@@ -1012,8 +1012,8 @@ namespace Java {
              */
             inline String &operator+=(const_string target) {
                 auto targetValue = target;
-                long targetLength = lengthPointerChar(target);
-                long newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar(target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return *this;
             }

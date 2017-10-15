@@ -56,11 +56,11 @@ TEST(JavaLang, StringBufferConstructor) {
     }
 
     // Init a StringBuffer with a charsequence
-    CharSequence *sequence = new String("A string to test");
+    CharSequence *sequence = new String("A String to test");
     StringBuffer charSequenceConstructor =  StringBuffer(*sequence);
     int expectSequenceCapacity = sequence->length() + 16;
     int expectSequenceLength = sequence->length();
-    string expectSequenceValue = sequence->toString();
+    String expectSequenceValue = sequence->toString();
     assertEquals(expectSequenceCapacity, charSequenceConstructor.capacity());
     assertEquals(expectSequenceLength, charSequenceConstructor.length());
     assertEquals(expectSequenceValue, charSequenceConstructor.getValue());
@@ -69,136 +69,135 @@ TEST(JavaLang, StringBufferConstructor) {
 
     // Init a StringBuffer with a charsequence
     CharSequence *nullSequence = nullptr;
-    StringBuffer nullSequenceConstructor = StringBuffer(*nullSequence);
+    StringBuffer nullSequenceConstructor = *nullSequence;
     int expectNullSequenceCapacity = 20;
     int expectNullSequenceLength = 4;
-    string expectNullSequenceValue = (string)("null");
+    String expectNullSequenceValue = (String)("null");
     assertEquals(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
     assertEquals(expectNullSequenceLength, nullSequenceConstructor.length());
     assertEquals(expectNullSequenceValue, nullSequenceConstructor.getValue());
 
     // Init a StringBuffer with a String
-    String aString = "A string to test";
-    StringBuffer stringConstructor = StringBuffer(aString);
+    String aString = "A String to test";
+    StringBuffer StringConstructor = StringBuffer(aString);
     int expectStringCapacity = aString.length() + 16;
     int expectStringLength = aString.length();
-    string expectStringValue = aString.toString();
-    assertEquals(expectStringCapacity, stringConstructor.capacity());
-    assertEquals(expectStringLength, stringConstructor.length());
-    assertEquals(expectStringValue, stringConstructor.getValue());
+    String expectStringValue = aString.toString();
+    assertEquals(expectStringCapacity, StringConstructor.capacity());
+    assertEquals(expectStringLength, StringConstructor.length());
+    assertEquals(expectStringValue, StringConstructor.getValue());
 
     // Copy Constructor
-    StringBuffer other = StringBuffer("A string to test");
+    StringBuffer other = StringBuffer("A String to test");
     StringBuffer copyConstructor = StringBuffer(other);
-    assertEquals(expectStringCapacity, stringConstructor.capacity());
-    assertEquals(expectStringLength, stringConstructor.length());
-    assertEquals(expectStringValue, stringConstructor.getValue());
+    assertEquals(expectStringCapacity, StringConstructor.capacity());
+    assertEquals(expectStringLength, StringConstructor.length());
+    assertEquals(expectStringValue, StringConstructor.getValue());
 }
 
 TEST(JavaLang, StringBufferOperater) {
-	StringBuffer other = StringBuffer("A string to test");
+	StringBuffer other = StringBuffer("A String to test");
 	StringBuffer stringBuffer;
-	stringBuffer = other;
 	assertEquals(other.capacity(), stringBuffer.capacity());
 	assertEquals(other.length(), stringBuffer.length());
 	assertEquals(other.getValue(), stringBuffer.getValue());
 	
-	StringBufferUnSafe otherUnSafe = StringBufferUnSafe("A string to test");
-	StringBufferUnSafe stringBufferUnSafe;
-	stringBufferUnSafe = otherUnSafe;
-	assertEquals(otherUnSafe.capacity(), stringBufferUnSafe.capacity());
-	assertEquals(otherUnSafe.length(), stringBufferUnSafe.length());
-	assertEquals(otherUnSafe.getValue(), stringBufferUnSafe.getValue());
+	StringBufferUnSafe otherUnSafe = StringBufferUnSafe("A String to test");
+	StringBufferUnSafe StringBufferUnSafe;
+	StringBufferUnSafe = otherUnSafe;
+	assertEquals(otherUnSafe.capacity(), StringBufferUnSafe.capacity());
+	assertEquals(otherUnSafe.length(), StringBufferUnSafe.length());
+	assertEquals(otherUnSafe.getValue(), StringBufferUnSafe.getValue());
 }
 
 TEST(JavaLang, StringBufferCapacity) {
 	// Init a StringBuffer with specific capacity
-	StringBuffer stringBuffer = StringBuffer(16);
+	StringBuffer stringBuffer(16);
 	int expectCapacity = 16;
 	assertEquals(expectCapacity, stringBuffer.capacity());
 }
 
 TEST(JavaLang, StringBufferLength) {
 	// Init a StringBuffer with a String
-	String aString = "A string to test";
-	StringBuffer stringConstructor = StringBuffer(aString);
+	String aString = "A String to test";
+	StringBuffer StringConstructor = StringBuffer(aString);
 	int expectLength = 16;
-	assertEquals(expectLength, stringConstructor.length());
+	assertEquals(expectLength, StringConstructor.length());
 }
 
 TEST(JavaLang, StringBufferGetValue) {
-	// Init a StringBuffer with string
-	String aString = "A string to test";
-	StringBuffer stringBuffer = StringBuffer(aString);
-	string expectValue = aString.toString();
+	// Init a StringBuffer with String
+	String aString = "A String to test";
+	StringBuffer stringBuffer = aString;
+	String expectValue = aString.toString();
 	assertEquals(expectValue, stringBuffer.getValue());
 }
 
 TEST(JavaLang, StringBufferAppendSubCharArray) {
-	StringBuffer stringAppend = StringBuffer("please");
+	StringBuffer StringAppend = StringBuffer("please");
 	
-	// Append "add more" to stringAppend
-	string stringToAppend = (string) ( "don't add more" );
-	stringAppend.append(stringToAppend, 5, 9);
-	string expectString = (string) ( "please add more" );
-	assertEquals(expectString, stringAppend.getValue());
+	// Append "add more" to StringAppend
+	String StringToAppend = "don't add more";
+	StringAppend.append(StringToAppend, 5, 9);
+	String expectString = "please add more";
+	assertEquals(expectString, StringAppend.getValue());
 	
 	// TEST(offset + len) > stringBuffer.length()
 	try {
-		stringAppend.append(stringToAppend, 20, 2);
+		StringAppend.append(StringToAppend, 20, 2);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringAppend.getValue());
+		assertEquals(expectString, StringAppend.getValue());
 	}
 	
 	// Test negative offset
 	try {
-		stringAppend.append(stringToAppend, -1, 5);
+		StringAppend.append(StringToAppend, -1, 5);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringAppend.getValue());
+		assertEquals(expectString, StringAppend.getValue());
 	}
 	
 	// Test negative len
 	try {
-		stringAppend.append(stringToAppend, 5, -1);
+		StringAppend.append(StringToAppend, 5, -1);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringAppend.getValue());
+		assertEquals(expectString, StringAppend.getValue());
 	}
 }
 
 TEST(JavaLang, StringBufferAppend) {
-    // Test string
-    StringBuffer charArrayAppendStringBuffer = StringBuffer("please");
+    // Test String
+    StringBuffer charArrayAppendStringBuffer = "please";
 
-    string stringToAppend = (string)(" add more");
-    charArrayAppendStringBuffer.append(stringToAppend);
-    string expectString = (string)("please add more");
+    String StringToAppend = (String)(" add more");
+    charArrayAppendStringBuffer.append(StringToAppend);
+    String expectString = (String)("please add more");
     assertEquals(expectString, charArrayAppendStringBuffer.getValue());
 
     // Test String
     StringBuffer stringAppendStringBuffer = StringBuffer("please");
-    String stringObjectToAppend = " add more";
-    stringAppendStringBuffer.append(stringObjectToAppend);
+    String StringObjectToAppend = " add more";
+    stringAppendStringBuffer.append(StringObjectToAppend);
     assertEquals(expectString, stringAppendStringBuffer.getValue());
 
     // Test Object
     StringBuffer objectAppendStringBuffer = StringBuffer();
 
-    Object *objToAppend = new String("object");
+    auto objToAppend = new String("object");
     objectAppendStringBuffer.append(*objToAppend);
-    string objString = objToAppend->toString();
+    String objString = objToAppend->toString();
     assertEquals(objString, objectAppendStringBuffer.getValue());
-    String *objToAppendString = dynamic_cast<String *>(objToAppend);
+    auto objToAppendString = dynamic_cast<String *>(objToAppend);
     delete objToAppendString;
 
     // Test Null object
-    StringBuffer nullObjectAppendStringBuffer = StringBuffer();
+    StringBuffer nullObjectAppendStringBuffer;
 
     Object *nullObjToAppend = nullptr;
     nullObjectAppendStringBuffer.append(*nullObjToAppend);
-    string nullObjString = (string)("null");
+    String nullObjString = "null";
     assertEquals(nullObjString, nullObjectAppendStringBuffer.getValue());
 
     // Test number
@@ -207,98 +206,98 @@ TEST(JavaLang, StringBufferAppend) {
     // float
     float floatToAppend = 9.0;
     numberAppendStringBuffer.append(floatToAppend);
-    string expectFloatAppend = (string)("1009");
+    String expectFloatAppend = "1009";
     assertEquals(expectFloatAppend, numberAppendStringBuffer.getValue());
 
     // TODO(thoangminh): @anhnt, please check leak error for this double case
 //    // double
 //    double doubleToAppend = 100.0;
-//    string expectedDoubleAppend = (string)("1009100.000000000000000");
-//    numberAppendStringBuffer.append(doubleToAppend);
-//    assertEquals(expectedDoubleAppend, numberAppendStringBuffer.getValue());
+//    String expectedDoubleAppend = (String)("1009100.000000000000000");
+//    numberAppendstringBuffer.append(doubleToAppend);
+//    assertEquals(expectedDoubleAppend, numberAppendstringBuffer.getValue());
 
 
 //    // int
 //    int intToAppend = 9;
-//    numberAppendStringBuffer.append(intToAppend);
-//    string expectIntAppend = (string)("1009100.0000000000000009");
-//    assertEquals(expectIntAppend, numberAppendStringBuffer.getValue());
+//    numberAppendstringBuffer.append(intToAppend);
+//    String expectIntAppend = (String)("1009100.0000000000000009");
+//    assertEquals(expectIntAppend, numberAppendstringBuffer.getValue());
 //
 //    // long
 //    long longToAppend = 900L;
-//    numberAppendStringBuffer.append(longToAppend);
-//    string expectLongAppend = (string)("1009100.0000000000000009900");
-//    assertEquals(expectLongAppend, numberAppendStringBuffer.getValue());
+//    numberAppendstringBuffer.append(longToAppend);
+//    String expectLongAppend = (String)("1009100.0000000000000009900");
+//    assertEquals(expectLongAppend, numberAppendstringBuffer.getValue());
 //
 //    // Test boolean
 //    StringBuffer boolAppendStringBuffer = StringBuffer("bool ");
 //
 //    boolean boolToAppend = true;
-//    boolAppendStringBuffer.append(boolToAppend);
-//    string expectBoolAppend = (string)("bool true");
-//    assertEquals(expectBoolAppend, boolAppendStringBuffer.getValue());
+//    boolAppendstringBuffer.append(boolToAppend);
+//    String expectBoolAppend = (String)("bool true");
+//    assertEquals(expectBoolAppend, boolAppendstringBuffer.getValue());
 //
 //    boolAppendStringBuffer = StringBuffer("bool ");
 //
 //    boolToAppend = false;
-//    boolAppendStringBuffer.append(boolToAppend);
-//    expectBoolAppend = (string)("bool false");
-//    assertEquals(expectBoolAppend, boolAppendStringBuffer.getValue());
+//    boolAppendstringBuffer.append(boolToAppend);
+//    expectBoolAppend = (String)("bool false");
+//    assertEquals(expectBoolAppend, boolAppendstringBuffer.getValue());
 //
 //    // Test char
 //    StringBuffer charAppendStringBuffer = StringBuffer("Character is : ");
 //
 //    char charToAppend = 'A';
-//    charAppendStringBuffer.append(charToAppend);
-//    string expectCharAppend = (string)("Character is : A");
-//    assertEquals(expectCharAppend, charAppendStringBuffer.getValue());
+//    charAppendstringBuffer.append(charToAppend);
+//    String expectCharAppend = (String)("Character is : A");
+//    assertEquals(expectCharAppend, charAppendstringBuffer.getValue());
 //
 //    // Test StringBuffer
-//    StringBuffer stringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
+//    StringBuffer StringBufferAppendStringBuffer = StringBuffer("StringBuffer is : ");
 //
-//    StringBuffer stringBufferToAppend = StringBuffer("not null");
-//    stringBufferAppendStringBuffer.append(stringBufferToAppend);
-//    string expectStringBufferAppend = (string)("StringBuffer is : not null");
-//    assertEquals(expectStringBufferAppend, stringBufferAppendStringBuffer.getValue());
+//    StringBuffer StringBufferToAppend = StringBuffer("not null");
+//    StringBufferAppendstringBuffer.append(StringBufferToAppend);
+//    String expectStringBufferAppend = (String)("StringBuffer is : not null");
+//    assertEquals(expectStringBufferAppend, StringBufferAppendstringBuffer.getValue());
 //
 //    // Test CharSequence
 //    StringBuffer charSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
 //
 //    CharSequence *charSequenceToAppend = new String("not null");
-//    charSequenceAppendStringBuffer.append(*charSequenceToAppend);
-//    string expectCharSequenceAppend = (string)("CharSequence is : not null");
-//    assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+//    charSequenceAppendstringBuffer.append(*charSequenceToAppend);
+//    String expectCharSequenceAppend = (String)("CharSequence is : not null");
+//    assertEquals(expectCharSequenceAppend, charSequenceAppendstringBuffer.getValue());
 //
-//    charSequenceAppendStringBuffer.append(*charSequenceToAppend, 0, 3);
-//    expectCharSequenceAppend = (string)("CharSequence is : not nullnot");
-//    assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+//    charSequenceAppendstringBuffer.append(*charSequenceToAppend, 0, 3);
+//    expectCharSequenceAppend = (String)("CharSequence is : not nullnot");
+//    assertEquals(expectCharSequenceAppend, charSequenceAppendstringBuffer.getValue());
 //
 //    // Test start < 0
 //    try {
-//        charSequenceAppendStringBuffer.append(*charSequenceToAppend, -1, 3);
+//        charSequenceAppendstringBuffer.append(*charSequenceToAppend, -1, 3);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+//        assertEquals(expectCharSequenceAppend, charSequenceAppendstringBuffer.getValue());
 //        assertEquals("", e.getMessage().toString());
 //    }
 //
 //    // Test start > end
 //    try {
-//        charSequenceAppendStringBuffer.append(*charSequenceToAppend, 3, 1);
+//        charSequenceAppendstringBuffer.append(*charSequenceToAppend, 3, 1);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+//        assertEquals(expectCharSequenceAppend, charSequenceAppendstringBuffer.getValue());
 //        assertEquals("", e.getMessage().toString());
 //    }
 //
 //    // Test start > sequence length
 //    try {
-//        charSequenceAppendStringBuffer.append(*charSequenceToAppend,
+//        charSequenceAppendstringBuffer.append(*charSequenceToAppend,
 //                                              charSequenceToAppend->length() + 1,
 //                                              charSequenceToAppend->length() + 2);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
+//        assertEquals(expectCharSequenceAppend, charSequenceAppendstringBuffer.getValue());
 //        assertEquals("", e.getMessage().toString());
 //    }
 //
@@ -308,81 +307,80 @@ TEST(JavaLang, StringBufferAppend) {
 //    StringBuffer nullCharSequenceAppendStringBuffer = StringBuffer("CharSequence is : ");
 //
 //    CharSequence *nullCharSequenceToAppend = nullptr;
-//    nullCharSequenceAppendStringBuffer.append(*nullCharSequenceToAppend);
-//    string expectNullCharSequenceAppend = (string)("CharSequence is : null");
-//    assertEquals(expectNullCharSequenceAppend, nullCharSequenceAppendStringBuffer.getValue());
+//    nullCharSequenceAppendstringBuffer.append(*nullCharSequenceToAppend);
+//    String expectNullCharSequenceAppend = (String)("CharSequence is : null");
+//    assertEquals(expectNullCharSequenceAppend, nullCharSequenceAppendstringBuffer.getValue());
 }
 
 TEST(JavaLang, StringBufferInsertSubCharArray) {
 	// Given a StringBuffer
-	StringBuffer stringInsert = StringBuffer("please more");
+	StringBuffer StringInsert = StringBuffer("please more");
 	
 	// Test vaild param
-	string stringToInsert = (string) ( "don't insert" );
-	stringInsert.insert(6, stringToInsert, 5, 7);
-	string expectString = (string) ( "please insert more" );
-	assertEquals(expectString, stringInsert.getValue());
+	String StringToInsert = (String) ( "don't insert" );
+	StringInsert.insert(6, StringToInsert, 5, 7);
+	String expectString = (String) ( "please insert more" );
+	assertEquals(expectString, StringInsert.getValue());
 	
 	// Test negative index
 	try {
-		stringInsert.insert(-1, stringToInsert, 6, 6);
+		StringInsert.insert(-1, StringToInsert, 6, 6);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringInsert.getValue());
+		assertEquals(expectString, StringInsert.getValue());
 	}
 	
 	// Test index greater than length
 	try {
-		stringInsert.insert(stringInsert.length() + 1, stringToInsert, 6, 6);
+		StringInsert.insert(StringInsert.length() + 1, StringToInsert, 6, 6);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringInsert.getValue());
+		assertEquals(expectString, StringInsert.getValue());
 	}
 	
 	// Test negative offset
 	try {
-		stringInsert.insert(7, stringToInsert, -6, 6);
+		StringInsert.insert(7, StringToInsert, -6, 6);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringInsert.getValue());
+		assertEquals(expectString, StringInsert.getValue());
 	}
 	
 	// Test negative len
 	try {
-		stringInsert.insert(7, stringToInsert, 6, -1);
+		StringInsert.insert(7, StringToInsert, 6, -1);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringInsert.getValue());
+		assertEquals(expectString, StringInsert.getValue());
 	}
 	
 	// Test offset + len > length
 	try {
-		stringInsert.insert(7, stringToInsert, 20, 10);
+		StringInsert.insert(7, StringToInsert, 20, 10);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals(expectString, stringInsert.getValue());
+		assertEquals(expectString, StringInsert.getValue());
 	}
 }
 
 TEST(JavaLang, StringBufferInsert) {
-    // Test string
-    StringBuffer charArrayInsertStringBuffer = StringBuffer("please more");
+    // Test String
+    StringBuffer charArrayInsertStringBuffer = "please more";
 
-    string stringToInsert = (string)("add ");
-    charArrayInsertStringBuffer.insert(7, stringToInsert);
-    string expectString = (string)("please add more");
+    String StringToInsert = (String)("add ");
+    charArrayInsertStringBuffer.insert(7, StringToInsert);
+    String expectString = (String)("please add more");
     assertEquals(expectString, charArrayInsertStringBuffer.getValue());
 
     // Test String
     StringBuffer stringInsertStringBuffer = StringBuffer("please more");
-    String stringObjectToInsert = "add ";
-    stringInsertStringBuffer.insert(7, stringObjectToInsert);
+    String StringObjectToInsert = "add ";
+    stringInsertStringBuffer.insert(7, StringObjectToInsert);
     assertEquals(expectString, stringInsertStringBuffer.getValue());
 
     // Test Object
     StringBuffer objectInsertStringBuffer = StringBuffer("please more");
-
-    Object *objToInsert = new String("add ");
+    auto objToInsert = new String("add ");
     objectInsertStringBuffer.insert(7, *objToInsert);
     assertEquals(expectString, objectInsertStringBuffer.getValue());
     String *objToInsertString = dynamic_cast<String *>(objToInsert);
@@ -393,7 +391,7 @@ TEST(JavaLang, StringBufferInsert) {
 
     Object *nullObjToInsert = nullptr;
     nullObjectInsertStringBuffer.insert(8, *nullObjToInsert);
-    string expectInsertNullObject = (string)("this is null pointer");
+    String expectInsertNullObject = (String)("this is null pointer");
     assertEquals(expectInsertNullObject, nullObjectInsertStringBuffer.getValue());
 
     // Test number
@@ -401,63 +399,63 @@ TEST(JavaLang, StringBufferInsert) {
 
     // float
     float floatToInsert = 9.0;
-    numberInsertStringBuffer.insert(2, floatToInsert);
-    string expectFloatInsert = (string)("1090");
-    assertEquals(expectFloatInsert, numberInsertStringBuffer.getValue());
+    nullObjectInsertStringBuffer.insert(2, floatToInsert);
+    String expectFloatInsert = (String)("1090");
+    assertEquals(expectFloatInsert, nullObjectInsertStringBuffer.getValue());
 
     // TODO(thoangminh): @anhnt please check leak error for this double case
 //    // double
 //    double doubleToInsert = 100.0;
-//    numberInsertStringBuffer.insert(2, doubleToInsert);
-//    string expectDoubleInsert = (string)("10100.00000000000000090");
-//    assertEquals(expectDoubleInsert, numberInsertStringBuffer.getValue());
+//    numberInsertstringBuffer.insert(2, doubleToInsert);
+//    String expectDoubleInsert = (String)("10100.00000000000000090");
+//    assertEquals(expectDoubleInsert, numberInsertstringBuffer.getValue());
 
 //    // int
 //    int intToInsert = 13;
-//    numberInsertStringBuffer.insert(2, intToInsert);
+//    numberInsertstringBuffer.insert(2, intToInsert);
 //    String expectIntInsert = "1013100.00000000000000090";
-//    assertEquals(expectIntInsert, numberInsertStringBuffer.getValue());
+//    assertEquals(expectIntInsert, numberInsertstringBuffer.getValue());
 //
 //    // long
 //    long longToInsert = 900L;
-//    numberInsertStringBuffer.insert(2, longToInsert);
-//    string expectLongInsert = (string)("1090013100.00000000000000090");
-//    assertEquals(expectLongInsert, numberInsertStringBuffer.getValue());
+//    numberInsertstringBuffer.insert(2, longToInsert);
+//    String expectLongInsert = (String)("1090013100.00000000000000090");
+//    assertEquals(expectLongInsert, numberInsertstringBuffer.getValue());
 //
 //    // Test boolean
 //    StringBuffer boolInsertStringBuffer = StringBuffer("bool  is good");
 //
 //    boolean boolToInsert = true;
-//    boolInsertStringBuffer.insert(5, boolToInsert);
-//    string expectBoolInsert = (string)("bool true is good");
-//    assertEquals(expectBoolInsert, boolInsertStringBuffer.getValue());
+//    boolInsertstringBuffer.insert(5, boolToInsert);
+//    String expectBoolInsert = (String)("bool true is good");
+//    assertEquals(expectBoolInsert, boolInsertstringBuffer.getValue());
 //
 //    boolInsertStringBuffer = StringBuffer("bool  is bad");
 //
 //    boolToInsert = false;
-//    boolInsertStringBuffer.insert(5, boolToInsert);
-//    expectBoolInsert = (string)("bool false is bad");
-//    assertEquals(expectBoolInsert, boolInsertStringBuffer.getValue());
+//    boolInsertstringBuffer.insert(5, boolToInsert);
+//    expectBoolInsert = (String)("bool false is bad");
+//    assertEquals(expectBoolInsert, boolInsertstringBuffer.getValue());
 //
 //    // Test char
 //    StringBuffer charInsertStringBuffer = StringBuffer("Character  is uppercase");
 //
 //    char charToInsert = 'A';
-//    charInsertStringBuffer.insert(10, charToInsert);
-//    string expectCharInsert = (string)("Character A is uppercase");
-//    assertEquals(expectCharInsert, charInsertStringBuffer.getValue());
+//    charInsertstringBuffer.insert(10, charToInsert);
+//    String expectCharInsert = (String)("Character A is uppercase");
+//    assertEquals(expectCharInsert, charInsertstringBuffer.getValue());
 //
 //    // Test CharSequence
 //    StringBuffer charSequenceInsertStringBuffer = StringBuffer("CharSequence is : null");
 //
 //    CharSequence *charSequenceToInsert = new String(" not");
-//    charSequenceInsertStringBuffer.insert(17, *charSequenceToInsert);
-//    string expectCharSequenceInsert = (string)("CharSequence is : not null");
-//    assertEquals(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
+//    charSequenceInsertstringBuffer.insert(17, *charSequenceToInsert);
+//    String expectCharSequenceInsert = (String)("CharSequence is : not null");
+//    assertEquals(expectCharSequenceInsert, charSequenceInsertstringBuffer.getValue());
 //
 //    // Test negative offset
 //    try {
-//        charSequenceInsertStringBuffer.insert(-1, *charSequenceToInsert);
+//        charSequenceInsertstringBuffer.insert(-1, *charSequenceToInsert);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("offset must be positive", e.getMessage().toString());
@@ -467,19 +465,19 @@ TEST(JavaLang, StringBufferInsert) {
 //    StringBuffer nullCharSequenceInsertStringBuffer = StringBuffer("CharSequence is a  pointer");
 //
 //    CharSequence *nullCharSequenceToInsert = nullptr;
-//    nullCharSequenceInsertStringBuffer.insert(18, *nullCharSequenceToInsert);
-//    string expectNullCharSequenceInsert = (string)("CharSequence is a null pointer");
-//    assertEquals(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
+//    nullCharSequenceInsertstringBuffer.insert(18, *nullCharSequenceToInsert);
+//    String expectNullCharSequenceInsert = (String)("CharSequence is a null pointer");
+//    assertEquals(expectNullCharSequenceInsert, nullCharSequenceInsertstringBuffer.getValue());
 //
 //    // Test CharSequence
 //    StringBuffer charSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is : null");
 //
-//    charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, 4);
-//    assertEquals(expectCharSequenceInsert, charSequenceInsertStringBuffer.getValue());
+//    charSequenceInsertWithOffsetstringBuffer.insert(17, *charSequenceToInsert, 0, 4);
+//    assertEquals(expectCharSequenceInsert, charSequenceInsertstringBuffer.getValue());
 //
 //    // Test negative destinationOffset
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(-1, *charSequenceToInsert, 0, 4);
+//        charSequenceInsertWithOffsetstringBuffer.insert(-1, *charSequenceToInsert, 0, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("offset must be positive", e.getMessage().toString());
@@ -487,7 +485,7 @@ TEST(JavaLang, StringBufferInsert) {
 //
 //    // Test destinationOffset > length
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(100, *charSequenceToInsert, 0, 4);
+//        charSequenceInsertWithOffsetstringBuffer.insert(100, *charSequenceToInsert, 0, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("", e.getMessage().toString());
@@ -495,7 +493,7 @@ TEST(JavaLang, StringBufferInsert) {
 //
 //    // Test negative start
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, -1, 4);
+//        charSequenceInsertWithOffsetstringBuffer.insert(17, *charSequenceToInsert, -1, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("", e.getMessage().toString());
@@ -503,7 +501,7 @@ TEST(JavaLang, StringBufferInsert) {
 //
 //    // Test negative end
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, -1);
+//        charSequenceInsertWithOffsetstringBuffer.insert(17, *charSequenceToInsert, 0, -1);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("", e.getMessage().toString());
@@ -511,7 +509,7 @@ TEST(JavaLang, StringBufferInsert) {
 //
 //    // Test start > end
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 5, 4);
+//        charSequenceInsertWithOffsetstringBuffer.insert(17, *charSequenceToInsert, 5, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("", e.getMessage().toString());
@@ -519,7 +517,7 @@ TEST(JavaLang, StringBufferInsert) {
 //
 //    // Test end > sequence length
 //    try {
-//        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, 100);
+//        charSequenceInsertWithOffsetstringBuffer.insert(17, *charSequenceToInsert, 0, 100);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals("", e.getMessage().toString());
@@ -528,8 +526,8 @@ TEST(JavaLang, StringBufferInsert) {
 //    // Test null CharSequence
 //    StringBuffer nullCharSequenceInsertWithOffsetStringBuffer = StringBuffer("CharSequence is a  pointer");
 //
-//    nullCharSequenceInsertWithOffsetStringBuffer.insert(18, *nullCharSequenceToInsert, 0, 3);
-//    assertEquals(expectNullCharSequenceInsert, nullCharSequenceInsertStringBuffer.getValue());
+//    nullCharSequenceInsertWithOffsetstringBuffer.insert(18, *nullCharSequenceToInsert, 0, 3);
+//    assertEquals(expectNullCharSequenceInsert, nullCharSequenceInsertstringBuffer.getValue());
 //    String *charSequenceString = dynamic_cast<String *>(charSequenceToInsert);
 //    delete charSequenceString;
 }
@@ -554,10 +552,10 @@ TEST(JavaLang, StringBufferEnsureCapacity) {
 }
 
 TEST(JavaLang, StringBufferAppendCodePoint) {
-	StringBuffer stringBuffer = StringBuffer("Codepoint is : ");
+	StringBuffer stringBuffer("Codepoint is : ");
 	
 	// Test Bmp codePoint
-	string expectBmpCodePointResult = (string) ( "Codepoint is : P" );
+	String expectBmpCodePointResult = (String) ( "Codepoint is : P" );
 	stringBuffer.appendCodePoint(80);
 	assertEquals(expectBmpCodePointResult, stringBuffer.getValue());
 	
@@ -570,13 +568,13 @@ TEST(JavaLang, StringBufferAppendCodePoint) {
 	}
 	
 	// TODO Test Valid codePoint
-	string expectValidCodePointResult = (string) ( "Codepoint is : P�" );
+	String expectValidCodePointResult = (String) ( "Codepoint is : P�" );
 	stringBuffer.appendCodePoint(800000);
 	//assertEquals(expectBmpCodePointResult, stringBuffer.getValue());
 }
 
 TEST(JavaLang, StringBufferCharAt) {
-	StringBuffer stringBuffer = StringBuffer("CharAt");
+	StringBuffer stringBuffer = "CharAt";
 	
 	// Test vaild index
 	char expectCharAtResult = 'A';
@@ -608,7 +606,7 @@ TEST(JavaLang, StringBufferCharAt) {
 }
 
 TEST(JavaLang, StringBufferCodePointAt) {
-	StringBuffer stringBuffer = StringBuffer("CodePointAt");
+	StringBuffer stringBuffer = String("CodePointAt");
 	
 	// Test vaild index
 	char expectCodePointAtResult = 'A';
@@ -616,7 +614,7 @@ TEST(JavaLang, StringBufferCodePointAt) {
 	
 	// Test negative index
 	try {
-		char expectNegativeIndex = (char) ( stringBuffer.codePointAt(-1));
+		char expectNegativeIndex = (char) (stringBuffer.codePointAt(-1));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("index must be positive", e.getMessage().toString());
@@ -624,7 +622,7 @@ TEST(JavaLang, StringBufferCodePointAt) {
 	
 	// Test equal to length index
 	try {
-		char expectEqualToLengthIndex = (char) ( stringBuffer.codePointAt(stringBuffer.length()));
+		auto expectEqualToLengthIndex = (char) (stringBuffer.codePointAt(stringBuffer.length()));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("", e.getMessage().toString());
@@ -632,7 +630,7 @@ TEST(JavaLang, StringBufferCodePointAt) {
 	
 	// Test greater than length index
 	try {
-		char expectGreaterThanLengthIndex = (char) ( stringBuffer.codePointAt(stringBuffer.length() + 1));
+		auto expectGreaterThanLengthIndex = (char) (stringBuffer.codePointAt(stringBuffer.length() + 1));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("", e.getMessage().toString());
@@ -640,7 +638,7 @@ TEST(JavaLang, StringBufferCodePointAt) {
 }
 
 TEST(JavaLang, StringBufferCodePointBefore) {
-	StringBuffer stringBuffer = StringBuffer("CodePointAt");
+	StringBuffer stringBuffer = "CodePointAt";
 	
 	// Test vaild index
 	char expectCodePointBeforeResult = 'A';
@@ -648,7 +646,7 @@ TEST(JavaLang, StringBufferCodePointBefore) {
 	
 	// Test zero index
 	try {
-		char expectEqualToLengthIndex = (char) ( stringBuffer.codePointBefore(0));
+		auto expectEqualToLengthIndex = (char) (stringBuffer.codePointBefore(0));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("index must be positive", e.getMessage().toString());
@@ -656,7 +654,7 @@ TEST(JavaLang, StringBufferCodePointBefore) {
 	
 	// Test negative index
 	try {
-		char expectNegativeIndex = (char) ( stringBuffer.codePointBefore(-1));
+		auto expectNegativeIndex = (char) (stringBuffer.codePointBefore(-1));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("index must be positive", e.getMessage().toString());
@@ -664,7 +662,7 @@ TEST(JavaLang, StringBufferCodePointBefore) {
 	
 	// Test greater than length index
 	try {
-		char expectGreaterThanLengthIndex = (char) ( stringBuffer.codePointBefore(stringBuffer.length() + 1));
+		auto expectGreaterThanLengthIndex = (char) (stringBuffer.codePointBefore(stringBuffer.length() + 1));
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals("", e.getMessage().toString());
@@ -672,7 +670,7 @@ TEST(JavaLang, StringBufferCodePointBefore) {
 }
 
 TEST(JavaLang, StringBufferCodePointCount) {
-	StringBuffer stringBuffer = StringBuffer("CodePointCount");
+	StringBuffer stringBuffer = "CodePointCount";
 	
 	// Test vaild beginIndex, endIndex
 	int expectCodePointCount = 8;
@@ -704,16 +702,16 @@ TEST(JavaLang, StringBufferCodePointCount) {
 }
 
 TEST(JavaLang, StringBufferDeleteCharAt) {
-	StringBuffer stringBuffer = StringBuffer("Delete char at");
+	StringBuffer stringBuffer = "Delete char at";
 	
 	// Test vaild index
-	string expectDeleteCharResult = (string) ( "Delete cha at" );
-	stringBuffer.deleteCharAt(10);
+	String expectDeleteCharResult = (String) ( "Delete cha at" );
+    stringBuffer.deleteCharAt(10);
 	assertEquals(expectDeleteCharResult, stringBuffer.getValue());
 	
 	// Test negative index
 	try {
-		stringBuffer.deleteCharAt(-1);
+        stringBuffer.deleteCharAt(-1);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectDeleteCharResult, stringBuffer.getValue());
@@ -722,7 +720,7 @@ TEST(JavaLang, StringBufferDeleteCharAt) {
 	
 	// Test equal to length index
 	try {
-		stringBuffer.deleteCharAt(stringBuffer.length());
+        stringBuffer.deleteCharAt(stringBuffer.length());
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectDeleteCharResult, stringBuffer.getValue());
@@ -730,7 +728,7 @@ TEST(JavaLang, StringBufferDeleteCharAt) {
 	
 	// Test greater than length index
 	try {
-		stringBuffer.deleteCharAt(stringBuffer.length() + 1);
+        stringBuffer.deleteCharAt(stringBuffer.length() + 1);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectDeleteCharResult, stringBuffer.getValue());
@@ -738,10 +736,10 @@ TEST(JavaLang, StringBufferDeleteCharAt) {
 }
 
 TEST(JavaLang, StringBufferDelete) {
-	StringBuffer stringBuffer = StringBuffer("Delete char at");
+	StringBuffer stringBuffer = "Delete char at";
 	
 	// Test vaild start, end
-	string expectDeleteCharResult = (string) ( "Delete at" );
+	String expectDeleteCharResult = "Delete at";
 	stringBuffer.deletes(7, 12);
 	assertEquals(expectDeleteCharResult, stringBuffer.getValue());
 	
@@ -750,7 +748,7 @@ TEST(JavaLang, StringBufferDelete) {
 	assertEquals(expectDeleteCharResult, stringBuffer.getValue());
 	
 	// Test end greater than length
-	string expectEndGreaterThanLengthResult = (string) ( "Delete" );
+	String expectEndGreaterThanLengthResult = (String) ( "Delete" );
 	stringBuffer.deletes(6, 12);
 	assertEquals(expectEndGreaterThanLengthResult, stringBuffer.getValue());
 	
@@ -791,11 +789,11 @@ TEST(JavaLang, StringBufferDelete) {
 TEST(JavaLang, StringBufferGetChar) {
     // Given a StringBuffer
     StringBuffer stringBuffer = StringBuffer("StringBuffer");
-    // Destination string
-    string destinationString = (string)("Copy from : !!!");
+    // Destination String
+    String destinationString = (String)("Copy from : !!!");
 
     // Test vaild param
-    string expectGetCharResult = (string)("Copy from : StringBuffer !!!");
+    String expectGetCharResult = (String)("Copy from : StringBuffer !!!");
     stringBuffer.getChars(0, 12, destinationString, 11);
     assertEquals(expectGetCharResult, destinationString);
 
@@ -842,7 +840,7 @@ TEST(JavaLang, StringBufferGetChar) {
 
 TEST(JavaLang, StringBufferIndexOf) {
 	// Given a StringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+	StringBuffer stringBuffer = "This is a StringBuffer";
 	// Given 2 subString
 	String isSubString = "is a";
 	String notSubString = "is not";
@@ -860,7 +858,7 @@ TEST(JavaLang, StringBufferIndexOf) {
 
 TEST(JavaLang, StringBufferIndexOfFromIndex) {
 	// Given a StringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer");
+	StringBuffer stringBuffer = "This is a stringBuffer. This is a StringBuffer";
 	// Given 2 subString
 	String isSubString = "is a";
 	String notSubString = "is not";
@@ -878,7 +876,7 @@ TEST(JavaLang, StringBufferIndexOfFromIndex) {
 
 TEST(JavaLang, StringBufferLastIndexOf) {
 	// Given a StringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
+	StringBuffer stringBuffer = "This is a stringBuffer. This is a stringBuffer. This is a StringBuffer";
 	// Given 2 subString
 	String isSubString = "is a";
 	String notSubString = "is not";
@@ -896,7 +894,7 @@ TEST(JavaLang, StringBufferLastIndexOf) {
 
 TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
 	// Given a StringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer. This is a StringBuffer. This is a StringBuffer");
+	StringBuffer stringBuffer = "This is a stringBuffer. This is a stringBuffer. This is a StringBuffer";
 	// Given 2 subString
 	String isSubString = "is a";
 	String notSubString = "is not";
@@ -919,7 +917,7 @@ TEST(JavaLang, StringBufferLastIndexOfFromIndex) {
 
 TEST(JavaLang, StringBufferOffSetByCodePoint) {
 	// Given a StringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a string buffer");
+	StringBuffer stringBuffer = "This is a String buffer";
 	
 	// Test vaild param
 	int expectOffsetByCodePointsResult = 0; // 5
@@ -944,37 +942,37 @@ TEST(JavaLang, StringBufferOffSetByCodePoint) {
 }
 
 TEST(JavaLang, StringBufferReplace) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+	// Given a StringBuffer
+	StringBuffer stringBuffer = "This is a StringBuffer";
 	
-	// Given a string
-	String stringToReplace = (string) ( "Butter" );
+	// Given a String
+	String StringToReplace = (String) ( "Butter" );
 	
 	// Test vaild param
-	string expectReplaceResult = (string) ( "This is a StringButter" );
-	stringBuffer.replace(16, 22, stringToReplace);
+	String expectReplaceResult = (String) ( "This is a StringButter" );
+	stringBuffer.replace(16, 22, StringToReplace);
 	assertEquals(expectReplaceResult, stringBuffer.getValue());
 	
 	// Test end greater than length
-	string expectEndGreaterThanLength = (string) ( "This is a StringButButter" );
-	stringBuffer.replace(19, 30, stringToReplace);
+	String expectEndGreaterThanLength = (String) ( "This is a StringButButter" );
+	stringBuffer.replace(19, 30, StringToReplace);
 	assertEquals(expectEndGreaterThanLength, stringBuffer.getValue());
 	
 	// Test end - start > str length
-	string expectReplaceRangeGreaterThanStringLength = (string) ( "This is a StringButter" );
-	stringBuffer.replace(16, 25, stringToReplace);
+	String expectReplaceRangeGreaterThanStringLength = (String) ( "This is a StringButter" );
+	stringBuffer.replace(16, 25, StringToReplace);
 	assertEquals(expectReplaceRangeGreaterThanStringLength, stringBuffer.getValue());
 	
 	// Test end - start < str length
-	string expectReplaceRangeSmallerThanStringLength = (string) ( "This is a StringButterutter" );
-	stringBuffer.replace(16, 17, stringToReplace);
+	String expectReplaceRangeSmallerThanStringLength = (String) ( "This is a StringButterutter" );
+	stringBuffer.replace(16, 17, StringToReplace);
 	assertEquals(expectReplaceRangeSmallerThanStringLength, stringBuffer.getValue());
 	
-	string expectNotChangeResult = (string) ( "This is a StringButterutter" );
+	String expectNotChangeResult = (String) ( "This is a StringButterutter" );
 	
 	// Test negative start
 	try {
-		stringBuffer.replace(-1, 10, stringToReplace);
+		stringBuffer.replace(-1, 10, StringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("start must be positive", e.getMessage().toString());
@@ -983,7 +981,7 @@ TEST(JavaLang, StringBufferReplace) {
 	
 	// Test start greater than length
 	try {
-		stringBuffer.replace(stringBuffer.length() + 1, 10, stringToReplace);
+		stringBuffer.replace(stringBuffer.length() + 1, 10, StringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("", e.getMessage().toString());
@@ -992,7 +990,7 @@ TEST(JavaLang, StringBufferReplace) {
 	
 	// Test start greater than end
 	try {
-		stringBuffer.replace(10, 1, stringToReplace);
+        stringBuffer.replace(10, 1, StringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("", e.getMessage().toString());
@@ -1001,34 +999,34 @@ TEST(JavaLang, StringBufferReplace) {
 }
 
 TEST(JavaLang, StringBufferReverse) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+	// Given a StringBuffer
+	StringBuffer stringBuffer = "ABCDEFGH";
 	
-	// Test nomal string
-	stringBuffer.reverse();
-	string expectNomalStringReverse = (string) ( "HGFEDCBA" );
+	// Test nomal String
+    stringBuffer.reverse();
+	String expectNomalStringReverse = "HGFEDCBA";
 	assertEquals(expectNomalStringReverse, stringBuffer.getValue());
 	
 	// TODO handle surrogate as one char
-	/* // Test surrogate string
+	/* // Test surrogate String
 	 StringBuffer surrogateStringBuffer = StringBuffer("\u000DC00\u000D800");
-	 surrogateStringBuffer.reverse();
-	 string expectSurrogateStringReverse = (string)("\u000D800\u000DC00");
-	 assertEquals(expectSurrogateStringReverse, surrogateStringBuffer.getValue());*/
+	 surrogatestringBuffer.reverse();
+	 String expectSurrogateStringReverse = (String)("\u000D800\u000DC00");
+	 assertEquals(expectSurrogateStringReverse, surrogatestringBuffer.getValue());*/
 }
 
 TEST(JavaLang, StringBufferSetCharAt) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+	// Given a StringBuffer
+	StringBuffer stringBuffer = "ABCDEFGH";
 	
 	// Test vaild index
-	stringBuffer.setCharAt(3, 'd');
-	string expectSetCharAtResult = (string) ( "ABCdEFGH" );
+    stringBuffer.setCharAt(3, 'd');
+	String expectSetCharAtResult = (String) ( "ABCdEFGH" );
 	assertEquals(expectSetCharAtResult, stringBuffer.getValue());
 	
 	// Test negative Index
 	try {
-		stringBuffer.setCharAt(-1, 'd');
+        stringBuffer.setCharAt(-1, 'd');
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
@@ -1037,7 +1035,7 @@ TEST(JavaLang, StringBufferSetCharAt) {
 	
 	// Test index greater than length
 	try {
-		stringBuffer.setCharAt(stringBuffer.length() + 1, 'd');
+        stringBuffer.setCharAt(stringBuffer.length() + 1, 'd');
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
@@ -1046,7 +1044,7 @@ TEST(JavaLang, StringBufferSetCharAt) {
 	
 	// Test index equal to length
 	try {
-		stringBuffer.setCharAt(stringBuffer.length(), 'd');
+        stringBuffer.setCharAt(stringBuffer.length(), 'd');
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
@@ -1055,16 +1053,16 @@ TEST(JavaLang, StringBufferSetCharAt) {
 }
 
 TEST(JavaLang, StringBufferSetLength) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer("ABCDEFGH");
+	// Given a StringBuffer
+	StringBuffer stringBuffer = "ABCDEFGH";
 	
 	// Test new length < current length
-	stringBuffer.setLength(6);
-	string expectSetCharAtResult = (string) ( "ABCDEF" );
+    stringBuffer.setLength(6);
+	String expectSetCharAtResult = (String) ( "ABCDEF" );
 	assertEquals(expectSetCharAtResult, stringBuffer.getValue());
 	
 	// Test new length < current length
-	stringBuffer.setLength(10);
+    stringBuffer.setLength(10);
 	assertEquals(expectSetCharAtResult, stringBuffer.getValue());
 	
 	// Test negative newLength
@@ -1078,11 +1076,11 @@ TEST(JavaLang, StringBufferSetLength) {
 }
 
 TEST(JavaLang, StringBufferSubString) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
+	// Given a StringBuffer
+	StringBuffer stringBuffer = "This is a StringBuffer";
 	
 	// Test valid param
-	string expectSubStringResult = (string) ( "a String" );
+	String expectSubStringResult = "a String";
 	String result = stringBuffer.subString(8, 16);
 	assertEquals(expectSubStringResult, result.toString());
 	
@@ -1132,18 +1130,18 @@ TEST(JavaLang, StringBufferSubString) {
 	}
 	
 	// Test subString(start)
-	string expectSubStringStartResult = (string) ( "a StringBuffer" );
+	String expectSubStringStartResult = "a StringBuffer";
 	result = stringBuffer.subString(8);
 	assertEquals(expectSubStringStartResult, result.toString());
 }
 
 // TODO need subSequence
 /*TEST(JavaLang, StringBufferSubSequence) {
-    // Given a stringBuffer
+    // Given a StringBuffer
     StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
 
     // Test valid param
-    string expectSubStringResult = (string)("a String");
+    String expectSubStringResult = (String)("a String");
     CharSequence *result = stringBuffer.subSequence(8, 16);
     assertEquals(expectSubStringResult, result->toString());
 
@@ -1196,19 +1194,19 @@ TEST(JavaLang, StringBufferSubString) {
 }*/
 
 TEST(JavaLang, StringBufferToString) {
-    // Given a stringBuffer
-    StringBuffer stringBuffer = StringBuffer("This is a StringBuffer");
-    string expectSubStringResult = (string)("This is a StringBuffer");
-    string result = stringBuffer.toString();
+    // Given a StringBuffer
+    StringBuffer stringBuffer = "This is a StringBuffer";
+    String expectSubStringResult = "This is a StringBuffer";
+    String result = stringBuffer.toString();
     assertEquals(expectSubStringResult, result);
 }
 
 TEST(JavaLang, StringBufferTrimToSize) {
-	// Given a stringBuffer
-	StringBuffer stringBuffer = StringBuffer(50);
-	string stringToAppend = (string) ( "This is a StringBuffer" );
-	stringBuffer.append(stringToAppend);
+	// Given a StringBuffer
+	StringBuffer stringBuffer(50);
+	String stringToAppend = "This is a StringBuffer";
+    stringBuffer.append(stringToAppend);
 	int expectCapacity = 22;
-	stringBuffer.trimToSize();
+    stringBuffer.trimToSize();
 	assertEquals(expectCapacity, stringBuffer.capacity());
 }

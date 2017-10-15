@@ -28,13 +28,6 @@
 #define JAVA_LANG_OBJECT_H
 
 #include "../../../kernel/Kernel.hpp"
-#include "../String/String.hpp"
-
-// Define instance of
-template<typename Base, typename T>
-bool instanceof(T) {
-    return std::is_base_of<Base, T>::value;
-}
 
 template<typename E>
 class Array;

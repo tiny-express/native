@@ -315,26 +315,6 @@ BitSet BitSet::clone() {
     return *this;
 }
 
-boolean BitSet::equals(const Object &target) const {
-    const BitSet* pointerToTarget = dynamic_cast<const BitSet *>(&target);
-    if (pointerToTarget == nullptr) {
-        return false;
-    }
-
-    if (this->wordsInUse != pointerToTarget->wordsInUse) {
-        return false;
-    }
-
-    int indexOfWord;
-    for (indexOfWord = 0; indexOfWord < this->wordsInUse; ++indexOfWord) {
-        if (this->words[indexOfWord] != pointerToTarget->words[indexOfWord]) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 void BitSet::flip(int bitIndex) {
     if (bitIndex < 0) {
         throw IndexOutOfBoundsException("bitIndex < 0: " +

@@ -929,14 +929,12 @@ TEST (JavaLang, StringClone) {
 TEST (JavaLang, StringSubString) {
     String validString = "Hello world";
     String subString = validString.subString(6);
-    string result = subString.toString();
-    string expect = (string) "world";
-    assertEquals(expect, result);
+    auto expect = (string) "world";
+    assertEquals(expect, subString);
 
     subString = validString.subString(1, 5);
-    result = subString.toString();
     expect = (string) "ello";
-    assertEquals(expect, result);
+    assertEquals(expect, subString);
 }
 
 TEST (JavaLang, StringCompareOperater) {
@@ -1059,7 +1057,7 @@ TEST (JavaLang, StringFormat) {
 
         string expected;
         int length = asprintf(&expected,
-                 REQUEST_TEMPLATE.toString(),
+                 REQUEST_TEMPLATE.toCharPointer(),
                  "POST", "CASSANDRA",
                  "_test",
                  "http1.1",

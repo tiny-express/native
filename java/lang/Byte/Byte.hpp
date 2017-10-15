@@ -226,7 +226,7 @@ namespace Java {
              *
              * @return string
              */
-			string toString() const override;
+			String toString() const;
 
             /**
              * Returns a new String object representing the specified byte with radix = 10

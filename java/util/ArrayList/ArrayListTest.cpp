@@ -91,15 +91,13 @@ TEST(JavaUtil, ArrayListAdd) {
 	assertEquals(sizeExpect, sizeResult);
 
 	// Compare validArrayList toString
-	string stringExpect = (string) "[1, 2, 3, 4]";
-	string stringResult = validArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	auto stringExpect = (string) "[1, 2, 3, 4]";
+	assertEquals(stringExpect, validArrayList.toString());
 
 	// Add new element at index 0 then compare string - Should equal
 	validArrayList.add(0, 0);
 	stringExpect = (string) "[0, 1, 2, 3, 4]";
-	stringResult = validArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	assertEquals(stringExpect, validArrayList.toString());
 }
 
 TEST(JavaUtil, ArrayListContains) {
@@ -125,16 +123,14 @@ TEST(JavaUtil, ArrayListIsEmpty) {
 
 	// Compare string of validArrayList - Should equal
 	string stringExpect = (string) "[1.2, 1.4]";
-	string stringResult = validArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	assertEquals(stringExpect, validArrayList);
 }
 
 TEST(JavaUtil, ArrayListClear) {
 	// Give an valid ArrayList
 	ArrayList<String> validArrayList = {"food", "tiny"};
-	string stringExpect = (string) R"(["food", "tiny"])";
-	string stringResult = validArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	auto stringExpect = (string) R"(["food", "tiny"])";
+	assertEquals(stringExpect, validArrayList);
 
 	// Clear validArrayList - Should equal
 	validArrayList.clear();
@@ -143,8 +139,7 @@ TEST(JavaUtil, ArrayListClear) {
 	assertEquals(sizeExpect, sizeResult);
 
 	stringExpect = (string) "[]";
-	stringResult = validArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	assertEquals(stringExpect, validArrayList);
 }
 
 TEST(JavaUtil, ArrayListClone) {
@@ -153,9 +148,8 @@ TEST(JavaUtil, ArrayListClone) {
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	ArrayList<String> cloneArrayList = validArrayList.clone();
 
-	string stringExpect = (string) R"(["food", "tiny"])";
-	string stringResult = cloneArrayList.toString();
-	assertEquals(stringExpect, stringResult);
+	auto stringExpect = (string) R"(["food", "tiny"])";
+	assertEquals(stringExpect, cloneArrayList);
 	int sizeExpect = 2;
 	int sizeResult = cloneArrayList.size();
 	assertEquals(sizeExpect, sizeResult);
@@ -185,17 +179,17 @@ TEST(JavaUtil, ArrayListGet) {
 
 	try {
 		validArrayList.get(-1);
-	} catch (IndexOutOfBoundsException exception) {
-		string stringExpect = (string) "Index out of range: -1";
-		string stringResult = exception.toString();
+	} catch (IndexOutOfBoundsException &exception) {
+		auto stringExpect = (string) "Index out of range: -1";
+		String stringResult = exception.toString();
         assertEquals(stringExpect, stringResult);
 	}
 
 	try {
 		validArrayList.get(1000);
-	} catch (IndexOutOfBoundsException exception) {
-		string stringExpect = (string) "Index out of range: 1000";
-		string stringResult = exception.toString();
+	} catch (IndexOutOfBoundsException &exception) {
+		auto stringExpect = (string) "Index out of range: 1000";
+		String stringResult = exception.toString();
         assertEquals(stringExpect, stringResult);
 	}
 }
@@ -234,13 +228,13 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
     int result = validArrayList.remove(7).intValue();
     assertEquals(expect, result);
 
-    string stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
-    string stringResult = validArrayList.toString();
+    auto stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";
+    String stringResult = validArrayList.toString();
     assertEquals(stringExpect, stringResult);
 
     try {
         validArrayList.remove(-1);
-    } catch (IndexOutOfBoundsException exception) {
+    } catch (IndexOutOfBoundsException &exception) {
         assertEquals("Index out of range: -1", exception.getMessage().toString());
     }
 }
@@ -250,8 +244,8 @@ TEST(JavaUtil, ArrayListRemoveElement) {
     // then test method remove with element - Should equal
     ArrayList<String> validArrayList = {"123", "456", "789"};
     boolean result = validArrayList.remove("456");
-    string stringExpect = (string) R"(["123", "789"])";
-    string stringResult = validArrayList.toString();
+    auto stringExpect = (string) R"(["123", "789"])";
+    String stringResult = validArrayList.toString();
     assertTrue(result);
     assertEquals(stringExpect, stringResult);
 
@@ -268,13 +262,13 @@ TEST(JavaUtil, ArrayListSet) {
     // then test method set - Should equal
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
     validArrayList.set(2, "String");
-    string stringExpect = (string) R"(["String", "String", "String", "String"])";
-    string stringResult = validArrayList.toString();
+    auto stringExpect = (string) R"(["String", "String", "String", "String"])";
+    String stringResult = validArrayList.toString();
     assertEquals(stringExpect, stringResult);
 
     try {
         validArrayList.set(-1, "String");
-    } catch (IndexOutOfBoundsException exception) {
+    } catch (IndexOutOfBoundsException &exception) {
         assertEquals("Index out of range: -1", exception.getMessage().toString());
     }
 }
@@ -288,16 +282,16 @@ TEST(JavaUtil, ArrayListToString) {
     // Give an empty ArrayList<Integer>
     // then compare toString() - Should equal
     ArrayList<Integer> inValidArrayListInteger;
-    string result = inValidArrayListInteger.toString();
-    string expect = (string) "[]";
-    assertEquals(result, expect);
+    auto result = inValidArrayListInteger.toString();
+    auto expect = (string) "[]";
+    assertEquals(expect, result);
 
     // Give an ArrayList<Integer>
     // then compare toString() - Should equal
 	ArrayList<Integer> validArrayListInteger = {1, 2, 4, 5};
 	result = validArrayListInteger.toString();
 	expect = (string) "[1, 2, 4, 5]";
-	assertEquals(result, expect);
+	assertEquals(expect, result);
 
     // Give an ArrayList<ArrayList<Integer>>
     // then compare toString() - Should equal

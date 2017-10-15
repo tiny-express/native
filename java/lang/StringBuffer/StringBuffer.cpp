@@ -83,7 +83,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(CharSequence &sequence, int start
         throw IndexOutOfBoundsException();
     }
 
-    return this->append(sequence.toString(), start, end - start);
+    return this->append(sequence, start, end - start);
 }
 
 void StringBufferUnSafe::ensureCapacity(int minimumCapacity) {
@@ -106,7 +106,7 @@ void StringBufferUnSafe::ensureCapacity(int minimumCapacity) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
-	return this->append(stringToAppend.toString(), 0, stringToAppend.length());
+	return this->append(stringToAppend, 0, stringToAppend.length());
 }
 
 int StringBufferUnSafe::length() const {
@@ -127,9 +127,9 @@ StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend, int offset
 	return *this;
 }
 
-StringBufferUnSafe &StringBufferUnSafe::insert(int index, string stringToInsert, int offset, int len) {
+StringBufferUnSafe &StringBufferUnSafe::insert(int index, String stringToInsert, int offset, int len) {
 	if (index < 0 || index > length() || offset < 0
-	    || len < 0 || (offset + len) > lengthPointerChar(stringToInsert)) {
+	    || len < 0 || (offset + len) > stringToInsert.length()) {
 		throw StringIndexOutOfBoundsException();
 	}
 	
@@ -138,7 +138,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int index, string stringToInsert,
 	string newTailStart = this->original + index + len;
 	int memorySizeToMove = (this->currentLength - index) * sizeof(char);
 	memmove(newTailStart, insertPosition, (size_t) memorySizeToMove);
-	string startIndex = stringToInsert + offset;
+	string startIndex = stringToInsert.toCharPointer() + offset;
 	int memorySizeToInsert = len * sizeof(char);
 	memmove(insertPosition, startIndex, (size_t) memorySizeToInsert);
 	this->currentLength += len;
@@ -155,8 +155,8 @@ StringBufferUnSafe::StringBufferUnSafe(const StringBufferUnSafe &other) {
 	this->currentCapacity = other.currentCapacity;
 }
 
-StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend) {
-	return this->append(stringToAppend, 0, lengthPointerChar(stringToAppend));
+StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
+	return this->append(stringToAppend, 0, stringToAppend.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(Object *object) {
@@ -500,7 +500,7 @@ StringBufferUnSafe &StringBufferUnSafe::replace(int start, int end, String strin
 	memmove(toPosition, fromPosition, (size_t) memorySizeToMove);
 	
 	string insertPosition = this->original + start;
-	memcpy(insertPosition, stringToReplace.toString(), (size_t) memorySizeToMove);
+	memcpy(insertPosition, stringToReplace.toCharPointer(), (size_t) memorySizeToMove);
 	
 	return *this;
 }
@@ -641,6 +641,9 @@ StringBuffer::StringBuffer(CharSequence &sequence) : StringBufferUnSafe(sequence
 }
 
 StringBuffer::StringBuffer(int capacity) : StringBufferUnSafe(capacity) {
+}
+
+StringBuffer::StringBuffer(const_string originalString) : StringBufferUnSafe(originalString) {
 }
 
 StringBuffer::StringBuffer(String originalString) : StringBufferUnSafe(originalString) {

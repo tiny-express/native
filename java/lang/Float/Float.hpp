@@ -345,7 +345,7 @@ namespace Java {
              *
              * @return String
              */
-			string toString() const override;
+			String toString() const;
 
 			/**
              * Returns a string representation of the float

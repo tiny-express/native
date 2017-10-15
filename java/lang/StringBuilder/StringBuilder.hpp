@@ -24,12 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_STRINGBUILDER_HPP
-#define NATIVE_JAVA_LANG_STRINGBUILDER_HPP
+#ifndef NATIVE_JAVA_LANG_STRING_BUILDER_HPP
+#define NATIVE_JAVA_LANG_STRING_BUILDER_HPP
 
 #include "../../../kernel/Common.hpp"
 #include "../../Lang.hpp"
-#include <initializer_list>
 
 using namespace Java::IO;
 
@@ -876,7 +875,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const override;
+            String toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.
@@ -927,4 +926,4 @@ namespace Java {
     }
 }
 
-#endif //NATIVE_JAVA_LANG_STRINGBUILDER_HPP
+#endif //NATIVE_JAVA_LANG_STRING_BUILDER_HPP

@@ -127,7 +127,7 @@ short Bytes::shortValue() const {
     return (short) this->original;
 }
 
-string Bytes::toString() const {
+String Bytes::toString() const {
     return this->originalString;
 }
 
