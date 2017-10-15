@@ -17,9 +17,9 @@ addons:
     - valgrind
     - lcov
 before_script:
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then brew install llvm; export CXX=clang++; fi
 - export CC=gcc
 - export CXX=g++
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then brew install llvm; export CXX=clang++; fi
 - ./misc/benchmark.sh
 - cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
 - cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
