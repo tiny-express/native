@@ -332,7 +332,7 @@ namespace Java {
 						 *
 						 * @return String
 						 */
-						string toString() const;
+						String toString() const;
 						
 						/**
 						 * Returns a String object representing the specified long.
@@ -340,7 +340,7 @@ namespace Java {
 						 * @param long i
 						 * @return String
 						 */
-						static string toString(long i);
+						static String toString(long i);
 						
 						/**
 						 * Returns a Long instance representing the specified long value.

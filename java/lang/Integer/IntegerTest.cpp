@@ -1471,29 +1471,24 @@ TEST (JavaLang, IntegerToString) {
 	Integer minIntegerToString = -2147483647;
 	
 	// Make a comparison between expected realResult and the real result
-	string expectedResultToString = (string) "0";
-	string realResultToString = zeroIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	auto expectedResultToString = (string) "0";
+	assertEquals(expectedResultToString, zeroIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "1";
-	realResultToString = oneIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, oneIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "10";
-	realResultToString = positiveIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, positiveIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "2147483647";
-	realResultToString = maxIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, maxIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "-2147483647";
-	realResultToString = minIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, minIntegerToString.toString());
 }
 
 TEST(JavaLang, IntegerToStringFromInt) {

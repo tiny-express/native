@@ -486,7 +486,7 @@ int Integer::rotateRight(int inputInt, int distance) {
 	return ((unsigned int) inputInt >> distance ) | ( inputInt << -distance );
 }
 
-string Integer::toString() const {
+String Integer::toString() const {
 	return this->originalString;
 }
 

@@ -50,11 +50,11 @@ Double::~Double() {
 }
 
 Double Double::parseDouble(String target) {
-    return Double(stringToDouble(target.toString()));
+    return Double(stringToDouble(target.toCharPointer()));
 }
 
-string Double::toString() const {
-    return (string) this->originalString;
+String Double::toString() const {
+    return this->originalString;
 }
 
 // TODO(thoangminh): waiting for FloatingDecimal.toJavaFormatString()
