@@ -12,12 +12,11 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
+    - llvm-toolchain-precise-3.7
     packages:
     - valgrind
     - lcov
 before_script:
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then brew install llvm; export CXX=clang++; fi
 - export CC=gcc
 - export CXX=g++
 - ./misc/benchmark.sh
