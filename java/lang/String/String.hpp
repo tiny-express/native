@@ -425,8 +425,8 @@ namespace Java {
              */
             template<class T>
             boolean equals(T anObject) const {
-                if (instanceof<String>(&anObject)) {
-                    return (boolean) stringEquals(original, anObject.toCharPointer());
+                if (instanceof<String>(anObject)) {
+                    return (boolean) stringEquals(original, anObject.toString().toCharPointer());
                 }
                 return false;
             }
@@ -1243,17 +1243,17 @@ namespace Java {
 
             static String print(const String &format, char *value);
 
-            static String print(const String &format, Short &value);
+            static String print(const String &format, Short value);
 
-            static String print(const String &format, Integer &value);
+            static String print(const String &format, Integer value);
 
-            static String print(const String &format, Long &value);
+            static String print(const String &format, Long value);
 
-            static String print(const String &format, Float &value);
+            static String print(const String &format, Float value);
 
-            static String print(const String &format, Double &value);
+            static String print(const String &format, Double value);
 
-            static String print(const String &format, String &value);
+            static String print(const String &format, String value);
         };
     } // namespace Lang
 } // namespace Java

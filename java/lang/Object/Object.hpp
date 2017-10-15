@@ -102,7 +102,7 @@ public:
      *
      * @param containerSize
      */
-    Array(long containerSize) {
+    Array(int containerSize) {
         this->original.resize(containerSize);
         this->length = containerSize;
     }
@@ -117,7 +117,7 @@ public:
      *
      * Don't set this property when you coding
      */
-    long length;
+    int length;
 
     /**
      * Get the first element in Array
@@ -268,7 +268,7 @@ namespace Java {
             /**
              * A hash code value for this object.
              *
-             * @return long
+             * @return int
              */
             virtual long hashCode() const {
                 return (intptr_t) std::addressof(*this);
@@ -292,12 +292,12 @@ namespace Java {
             /**
              * Not support this function yet
              */
-            void wait(long timeout);
+            void wait(int timeout);
 
             /**
              * Not support this function yet
              */
-            void wait(long timeout, int nanos);
+            void wait(int timeout, int nanos);
 
             /**
              * Compare two object is equal or not

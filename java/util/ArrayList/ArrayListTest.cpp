@@ -122,8 +122,8 @@ TEST(JavaUtil, ArrayListIsEmpty) {
 	assertFalse(result);
 
 	// Compare string of validArrayList - Should equal
-	string stringExpect = (string) "[1.2, 1.4]";
-	assertEquals(stringExpect, validArrayList);
+	auto stringExpect = (string) "[1.2, 1.4]";
+	assertEquals(stringExpect, validArrayList.toString());
 }
 
 TEST(JavaUtil, ArrayListClear) {

@@ -137,9 +137,17 @@ inline char *stringCopy(const char *target) {
     return __builtin_strdup(target);
 }
 
+/**
+ * Check if instance t is an instance of Base class
+ *
+ * @tparam Base
+ * @tparam T
+ * @param t
+ * @return
+ */
 template<typename Base, typename T>
-inline bool instanceof(T t) {
-    return dynamic_cast<const Base*>(&t) != nullptr;
+inline boolean instanceof(T t) {
+    return typeid(t).name() == typeid(Base).name();
 }
 
 #endif //NATIVE_KERNEL_BUILTIN_HPP

@@ -24,10 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include "../../../kernel/Test.hpp"
-#include "../String/String.hpp"
-#include "../../Lang.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../StringBuffer/StringBuffer.hpp"
