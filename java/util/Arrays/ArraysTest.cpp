@@ -40,12 +40,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	byte keyByte = 4;
 	int positionByte = 3;
-	assertEquals(positionByte, Arrays::binarySearch(arrayByte, keyByte, 5));
+	assertEquals(positionByte, Arrays::binarySearchByKey(arrayByte, keyByte, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	byte keyByte2 = 101;
 	int positionByte2 = -1;
-	assertEquals(positionByte2, Arrays::binarySearch(arrayByte, keyByte2, 5));
+	assertEquals(positionByte2, Arrays::binarySearchByKey(arrayByte, keyByte2, 5));
 	
 	/// Given valid char[] to test binary search
 	char arrayChar[5] = { 'a', 'b', 'c', 'd', 'e' };
@@ -53,12 +53,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	char keyChar = 'b';
 	int positionChar = 1;
-	assertEquals(positionChar, Arrays::binarySearch(arrayChar, keyChar, 5));
+	assertEquals(positionChar, Arrays::binarySearchByKey(arrayChar, keyChar, 5));
 	
 	// With correct key but not appear inside array, return -1
 	char keyChar2 = 'f';
 	int positionChar2 = -1;
-	assertEquals(positionChar2, Arrays::binarySearch(arrayChar, keyChar2, 5));
+	assertEquals(positionChar2, Arrays::binarySearchByKey(arrayChar, keyChar2, 5));
 	
 	/// Given valid double[] to test binary search - this test case wrapped <float> also
 	double arrayDouble[6] = { 15.5, 17.7, 32.9, 51.4, 64.3, 69.9 };
@@ -66,12 +66,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	double keyDouble = 15.5;
 	int positionDouble = 0;
-	assertEquals(positionDouble, Arrays::binarySearch(arrayDouble, keyDouble, 6));
+	assertEquals(positionDouble, Arrays::binarySearchByKey(arrayDouble, keyDouble, 6));
 	
 	// With correct key2 but not appear inside array, return -1
 	double keyDouble2 = 65;
 	int positionDouble2 = -1;
-	assertEquals(positionDouble2, Arrays::binarySearch(arrayDouble, keyDouble2, 6));
+	assertEquals(positionDouble2, Arrays::binarySearchByKey(arrayDouble, keyDouble2, 6));
 	
 	/// Given valid Integer[] to test binary search with Object
 	Integer arrayObject[5] = { Integer(1), Integer(2), Integer(3), Integer(4), Integer(5) };
@@ -79,12 +79,12 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	// With correct key appeared inside array, return correct position
 	Integer keyObject = Integer(5);
 	int positionObject = 4;
-	assertEquals(positionObject, Arrays::binarySearch(arrayObject, keyObject, 5));
+	assertEquals(positionObject, Arrays::binarySearchByKey(arrayObject, keyObject, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	Integer keyObject2 = Integer(99);
 	int positionObject2 = -1;
-	assertEquals(positionObject2, Arrays::binarySearch(arrayObject, keyObject2, 5));
+	assertEquals(positionObject2, Arrays::binarySearchByKey(arrayObject, keyObject2, 5));
 	
 }
 
