@@ -53,23 +53,23 @@ namespace Java {
         this->capacity = this->size == 0 ? -1 : this->size;
 
 #define STRING_CONSTRUCTOR_ARRAY \
-	if (offset < 0) {\
-		throw StringIndexOutOfBoundsException(offset);\
-	}\
-	if (length < 0) {\
-		throw StringIndexOutOfBoundsException(length);\
-	}\
-	if (offset > array.length - length) {\
-		throw StringIndexOutOfBoundsException(offset + length);\
-	}\
-	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
-	int index;\
-	for (index = 0; index < length; offset++, index++) {\
-		this->original [index] = array.get(offset);\
-	}\
-	this->original [length] = '\0';\
-	this->size = length;\
-	this->capacity = this->size == 0 ? -1 : this->size;
+    if (offset < 0) {\
+        throw StringIndexOutOfBoundsException(offset);\
+    }\
+    if (length < 0) {\
+        throw StringIndexOutOfBoundsException(length);\
+    }\
+    if (offset > array.length - length) {\
+        throw StringIndexOutOfBoundsException(offset + length);\
+    }\
+    this->original = (string) allocateMemory((length + 1) * sizeof(char));\
+    int index;\
+    for (index = 0; index < length; offset++, index++) {\
+        this->original [index] = array.get(offset);\
+    }\
+    this->original [length] = '\0';\
+    this->size = length;\
+    this->capacity = this->size == 0 ? -1 : this->size;
 
 #define STRING_OPERATOR_PLUS  \
         if (newLength >= this->capacity) {\
@@ -285,6 +285,24 @@ namespace Java {
 
         public:
             /**
+            * Set and get value of element in char type
+            * at the specified position in this String
+            *
+            * @param index
+            * @return char
+            */
+            char &operator[](const int index);
+
+            /**
+             * Get value of element in char type
+             * at the specified position in this String
+             *
+             * @param index
+             * @return const char
+             */
+            const char &operator[](const int index) const;
+
+            /**
              * Return size of String
              *
              * @return int
@@ -375,7 +393,7 @@ namespace Java {
              * @param charSequence
              * @return String
              */
-			boolean contains(const CharSequence &charSequence);
+            boolean contains(const CharSequence &charSequence);
 
             /**
              * Compares this String to the specified CharSequence.
@@ -906,13 +924,13 @@ namespace Java {
              */
             static String valueOf(string stringValue);
 
-			/**
+            /**
              * Returns the String representation of the String argument.
              *
              * @param stringValue
              * @return a String containing stringValue.
              */
-			static String valueOf(String stringValue);
+            static String valueOf(String stringValue);
 
             /**
              * Returns the String representation of the const string argument.
