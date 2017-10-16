@@ -317,7 +317,7 @@ namespace Java {
              *
              * @param inputString   a string to be parsed as a date.
              *
-             * @returnthe number of seconds since January 1, 1970, 00:00:00 GMT
+             * @return long the number of seconds since January 1, 1970, 00:00:00 GMT
              * represented by the string argument.
              */
             static long parse(String inputString);
@@ -423,4 +423,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_DATE_HPP_
+#endif  // JAVA_UTIL_DATE_HPP
