@@ -619,7 +619,7 @@ void assertEqualsString(String expected,
                         const_string file,
                         int line) {
     if (expected != actual) {
-        CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expected.toString(), actual.toString());
     }
 }
