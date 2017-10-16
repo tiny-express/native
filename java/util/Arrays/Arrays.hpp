@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_ARRAYS_HPP_
-#define JAVA_UTIL_ARRAYS_HPP_
+#ifndef JAVA_UTIL_ARRAYS_HPP
+#define JAVA_UTIL_ARRAYS_HPP
 
 #include <stack>
 #include "../../Lang.hpp"
@@ -747,4 +747,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_UTIL_ARRAYS_HPP_
+#endif //JAVA_UTIL_ARRAYS_HPP

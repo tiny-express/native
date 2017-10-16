@@ -24,8 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_DATE_DATE_HPP_
-#define JAVA_UTIL_DATE_DATE_HPP_
+
+#ifndef JAVA_UTIL_DATE_HPP
+#define JAVA_UTIL_DATE_HPP
 
 #include "../../Lang.hpp"
 #include "../ArrayList/ArrayList.hpp"
@@ -80,6 +81,7 @@ namespace Java {
              * Convert the time seconds to String
              *
              * @param pattern
+             * @param timeManagement
              * @return String
              */
             String timeToString(String pattern, tm *timeManagement) const;
@@ -93,7 +95,7 @@ namespace Java {
             static long getUTCTime(long timer);
 
             /**
-             * Get Current Number From InputString
+             * Get current number from processing String
              * Sub method of Date::parse(String inputString)
              *
              * @param inputString
@@ -103,12 +105,12 @@ namespace Java {
             static int getSequenceNumber(const String &inputString, int &indexStart);
 
             /**
-            * Get Current Sequence Char From InputString                                                                                                            From InputString
+            * Get current char sequence from processing String                                                                                                        From InputString
             * Sub method of Date::parse(String inputString)
             *
             * @param inputString
             * @param indexStart
-            * @return string
+            * @return String
             */
             static String getSequenceChar(const String &inputString, int &index);
 
@@ -123,7 +125,7 @@ namespace Java {
             /**
              * Get time offset in second from local time zone to UTC
              *
-             * @return time offset in second
+             * @return long time offset in seconds
              */
             static long getOffsetFromUTC();
 
@@ -301,7 +303,8 @@ namespace Java {
 
             /**
              * Returns a hash code value for this object.
-             * @return
+             *
+             * @return long
              */
             long hashCode() const override ;
 
@@ -309,13 +312,13 @@ namespace Java {
              * Attempts to interpret the string s as a representation
              * of a date and time. If the attempt is successful, the time
              * indicated is returned represented as the distance, measured in
-             * milliseconds, of that time from the epoch (00:00:00 GMT on
+             * seconds, of that time from the epoch (00:00:00 GMT on
              * January 1, 1970).
              *
-             * @param   inputString   a string to be parsed as a date.
-             * @param   format        format time of inputString
-             * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
-             *          represented by the string argument.
+             * @param inputString   a string to be parsed as a date.
+             *
+             * @returnthe number of seconds since January 1, 1970, 00:00:00 GMT
+             * represented by the string argument.
              */
             static long parse(String inputString);
 
@@ -356,7 +359,7 @@ namespace Java {
 
             /**
              * Sets this Date object to represent a point
-             * in time that is time milliseconds after
+             * in time that is time seconds after
              * January 1, 1970 00:00:00 GMT.
              *
              * @param time
@@ -388,15 +391,14 @@ namespace Java {
 
             /**
              * Return a string type of Date
-             *
              * Example: "Mar 13, 2017 10:01:13 AM"
              *
-             * @return String
+             * @return string
              */
             string toString() const override ;
 
             /**
-             * Return the time in milliseconds after
+             * Return the time in seconds after
              * January 1, 1970 00:00:00 GMT.
              *
              * @param year
@@ -421,4 +423,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_DATE_DATE_HPP_
+#endif  // JAVA_UTIL_DATE_HPP_

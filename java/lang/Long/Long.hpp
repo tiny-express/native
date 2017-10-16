@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_LONG_HPP_
-#define JAVA_LANG_LONG_HPP_
+#ifndef JAVA_LANG_LONG_HPP
+#define JAVA_LANG_LONG_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -532,4 +532,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG__HPP_
+#endif  // JAVA_LANG__HPP

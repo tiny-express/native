@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_UUID_HPP_
-#define JAVA_UTIL_UUID_HPP_
+#ifndef JAVA_UTIL_UUID_HPP
+#define JAVA_UTIL_UUID_HPP
 
 #include "../../Lang.hpp"
 
@@ -187,4 +187,4 @@ namespace Java {
 }
 
 
-#endif //JAVA_UTIL_UUID_HPP_
+#endif //JAVA_UTIL_UUID_HPP

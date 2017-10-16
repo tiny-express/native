@@ -97,7 +97,7 @@ void Date::setTime(long time) {
 
 void Date::setYear(int year) {
     // LocalTimer just keep year since 1900
-    this->localTimer->tm_year = year % 1900;
+    this->localTimer->tm_year = year;
     this->updateDateStatus();
 }
 
@@ -126,7 +126,7 @@ int Date::getSeconds() const {
 }
 
 int Date::getYear() const {
-    return this->localTimer->tm_year + 1900;
+    return this->localTimer->tm_year;
 }
 
 long Date::getTime() const {
@@ -146,13 +146,13 @@ boolean Date::before(Date specifiedDate) const {
 }
 
 int Date::compareTo(const Date &anotherDate) const {
-    long temp = this->timer - anotherDate.timer;
+    long timeOffset = this->timer - anotherDate.timer;
 
-    if (temp < 0) {
+    if (timeOffset < 0) {
         return -1;
     }
 
-    if (temp > 0) {
+    if (timeOffset > 0) {
         return 1;
     }
 
@@ -242,78 +242,78 @@ long Date::parse(String inputString) {
 
     inputString = Date::removeBracket(inputString);
 
-    int limit = inputString.length();
+    int stringLength = inputString.length();
     int index = 0;
 
-    while (index < limit) {
+    while (index < stringLength) {
         currentChar = inputString.charAt(index);
         if (currentChar <= ' ' || currentChar == ',') {
             index++;
             continue;
         }
         if (currentChar >= '0' && currentChar <='9') {
-            int curentNumber = Date::getSequenceNumber(inputString, index);
-            if (index < limit) {
+            int currentNumber = Date::getSequenceNumber(inputString, index);
+            if (index < stringLength) {
                 currentChar = inputString.charAt(index);
             }
 
             if ((previousChar == '+' || previousChar == '-')
                 && year != Integer::MIN_VALUE) {
                 // timezone offset
-                if (curentNumber < 24) {
-                    curentNumber = curentNumber * 60; // EG. "GMT-3"
+                if (currentNumber < 24) {
+                    currentNumber = currentNumber * 60; // EG. "GMT-3"
                 } else {
-                    curentNumber = curentNumber % 100 + curentNumber / 100 * 60; // eg "GMT-0430"
+                    currentNumber = currentNumber % 100 + currentNumber / 100 * 60; // eg "GMT-0430"
                 }
 
                 if (previousChar == '+') {
-                    curentNumber = -curentNumber;
+                    currentNumber = -currentNumber;
                 }   // plus means east of GMT
 
                 if (timeZoneOffset != 0 && timeZoneOffset != -1) {
                     throw IllegalArgumentException();
                 }
 
-                timeZoneOffset = curentNumber;
-            } else if (curentNumber >= 70) {
+                timeZoneOffset = currentNumber;
+            } else if (currentNumber >= 70) {
                 if (year != Integer::MIN_VALUE) {
                     throw IllegalArgumentException();
                 } else if (currentChar <= ' ' || currentChar == ','
-                           || currentChar == '/' || index >= limit) {
-                    year = curentNumber;
+                           || currentChar == '/' || index >= stringLength) {
+                    year = currentNumber;
                 } else {
                     throw IllegalArgumentException();
                 }
             } else if (currentChar == ':') {
                 if (hour < 0) {
-                    hour = (byte) curentNumber;
+                    hour = (byte) currentNumber;
                 } else if (minute < 0) {
-                    minute = (byte) curentNumber;
+                    minute = (byte) currentNumber;
                 } else {
                     throw IllegalArgumentException();
                 }
             } else if (currentChar == '/') {
                 if (month < 0) {
-                    month = (byte) (curentNumber - 1);
+                    month = (byte) (currentNumber - 1);
                 } else if (dayOfMonth < 0) {
-                    dayOfMonth = (byte) curentNumber;
+                    dayOfMonth = (byte) currentNumber;
                 } else {
                     throw IllegalArgumentException();
                 }
-            } else if (index < limit && currentChar != ','
+            } else if (index < stringLength && currentChar != ','
                        && currentChar > ' ' && currentChar != '-') {
 
                 throw IllegalArgumentException();
             } else if (hour >= 0 && minute < 0) {
-                minute = (byte) curentNumber;
+                minute = (byte) currentNumber;
             } else if (minute >= 0 && second < 0) {
-                second = (byte) curentNumber;
+                second = (byte) currentNumber;
             } else if (dayOfMonth < 0) {
-                dayOfMonth = (byte) curentNumber;
+                dayOfMonth = (byte) currentNumber;
             } else if (year == Integer::MIN_VALUE
                        && month >= 0 && dayOfMonth >= 0) {
 
-                year = curentNumber;
+                year = currentNumber;
             } else {
                 throw IllegalArgumentException();
             }
@@ -380,6 +380,7 @@ long Date::parse(String inputString) {
         std::time_t now_c = std::chrono::system_clock::to_time_t(now);
         struct tm *currentTime = std::localtime(&now_c);
 
+        currentTime->tm_year += 1900;
         int defaultCenturyStart = currentTime->tm_year - 80;
         year += (defaultCenturyStart / 100) * 100;
 
@@ -404,7 +405,7 @@ long Date::parse(String inputString) {
     // Get timestamp
     tm localTimer = { 0 };
 
-    localTimer.tm_year = year % 1900;
+    localTimer.tm_year = year - 1900;
     localTimer.tm_mon = month;
     localTimer.tm_mday = dayOfMonth;
     localTimer.tm_hour = hour;
@@ -516,7 +517,7 @@ void Date::initializeDate(int year, int month, int date,
                           int hour, int minute, int second) {
     tm localTimer = { 0 };
 
-    localTimer.tm_year = year % 1900;
+    localTimer.tm_year = year;
     localTimer.tm_mon = month;
     localTimer.tm_mday = date;
     localTimer.tm_hour = hour;
@@ -538,12 +539,12 @@ void Date::initializeDate(long timer) {
 
 String Date::timeToString(String pattern, tm *timeManagement) const {
     size_t size = 100;
+
     string holdResult = static_cast<string> (calloc(size, sizeof(char)));
     strftime(holdResult, size, pattern.toString(), timeManagement);
 
     String result = holdResult;
     free(holdResult);
-
     return result;
 }
 

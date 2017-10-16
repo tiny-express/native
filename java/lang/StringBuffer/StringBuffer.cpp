@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(this->DEFAULT_CAPACITY) {
+StringBufferUnSafe::StringBufferUnSafe() : StringBufferUnSafe(DEFAULT_CAPACITY) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(int capacity) {
@@ -43,16 +43,16 @@ StringBufferUnSafe::StringBufferUnSafe(int capacity) {
 }
 
 StringBufferUnSafe::StringBufferUnSafe(String originalString) {
-	this->currentCapacity = originalString.length() + this->DEFAULT_CAPACITY;
+	this->currentCapacity = originalString.length() + DEFAULT_CAPACITY;
 	this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
 	this->append(originalString);
 }
 
 StringBufferUnSafe::StringBufferUnSafe(CharSequence &sequence) {
     if (&sequence == nullptr) {
-        this->currentCapacity = this->DEFAULT_CAPACITY + 4;
+        this->currentCapacity = DEFAULT_CAPACITY + 4;
     } else {
-        this->currentCapacity = sequence.length() + this->DEFAULT_CAPACITY;
+        this->currentCapacity = sequence.length() + DEFAULT_CAPACITY;
     }
 
     this->original = (string) calloc((size_t) this->currentCapacity, sizeof(char));
@@ -102,7 +102,7 @@ void StringBufferUnSafe::ensureCapacity(int minimumCapacity) {
 	} while (newCapacity < minimumCapacity);
 	
 	int newSize = newCapacity * sizeof(char);
-	this->original = (string) realloc(this->original, (size_t) newSize);
+	this->original = (string) allocateMemory(this->original, (size_t) newSize);
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
@@ -616,7 +616,7 @@ void StringBufferUnSafe::trimToSize() {
 		return;
 	}
 	int newSize = this->currentLength * sizeof(char);
-	this->original = (string) realloc(this->original, (size_t) newSize);
+	this->original = (string) allocateMemory(this->original, (size_t) newSize);
 	this->currentCapacity = this->currentLength;
 }
 
