@@ -29,7 +29,6 @@
 
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
-#define BiConsumer std::function
 
 #ifdef WIN
 #define boolean bool
