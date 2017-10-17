@@ -57,7 +57,7 @@ TEST(JavaSecurity, MD5) {
     byte expect[] = {0x77, 0xad, 0xd1, 0xd5, 0xf4, 0x12, 0x23, 0xd5, 0x58,
                      0x2f, 0xca, 0x73, 0x6a, 0x5c, 0xb3, 0x35};
     String input = "the quick brown fox jumps over the lazy dog";
-    byte* result = NULL;
+    byte* result = nullptr;
     MessageDigest md5 = MessageDigest::getInstance("MD5");
     int digestLength = 0;
 
@@ -86,7 +86,7 @@ TEST(JavaSecurity, MD5MultiUpdate) {
             "Morbi condimentum porta erat ut faucibus. Nunc dictum suscipit"
             " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
             " magna ultricies non.";
-    byte* result = NULL;
+    byte* result = nullptr;
     MessageDigest md5 = MessageDigest::getInstance("MD5");
     int digestLength = 0;
 
@@ -116,7 +116,7 @@ TEST(JavaSecurity, SHA1) {
                       0x1a, 0xfb, 0xcb, 0x99, 0x3c, 0xdc, 0x80, 0x46, 0x4b,
                       0xa0, 0xf1 };
     String input = "the quick brown fox jumps over the lazy dog";
-    byte* result = NULL;
+    byte* result = nullptr;
     MessageDigest sha1 = MessageDigest::getInstance("SHA1");
     int digestLength = 0;
 
@@ -138,7 +138,7 @@ TEST(JavaSecurity, SHA1MultiUpdate) {
             "Morbi condimentum porta erat ut faucibus. Nunc dictum suscipit"
             " nisl nec suscipit. Phasellus mattis mauris velit, ac tincidunt"
             " magna ultricies non.";
-    byte* result = NULL;
+    byte* result = nullptr;
     MessageDigest sha1 = MessageDigest::getInstance("SHA1");
     int digestLength = 0;
 
@@ -189,7 +189,7 @@ TEST(JavaSecurity, Exception) {
         String result;
 
         try {
-            md5.update(NULL, 0);
+            md5.update(nullptr, 0);
         } catch (IllegalArgumentException e) {
             result = e.getMessage().toString();
         }
@@ -203,7 +203,7 @@ TEST(JavaSecurity, Exception) {
         String result;
 
         try {
-            sha1.digest(NULL, 1);
+            sha1.digest(nullptr, 1);
         } catch (IllegalArgumentException e) {
             result = e.getMessage().toString();
         }
