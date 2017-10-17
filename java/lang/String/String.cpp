@@ -774,10 +774,3 @@ String String::valueOf(String stringValue) {
     return stringValue;
 }
 
-char &String::operator[](const int index) {
-    return this->original[index];
-}
-
-const char &String::operator[](const int index) const {
-    return this->original[index];
-}

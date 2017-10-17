@@ -291,16 +291,9 @@ namespace Java {
             * @param index
             * @return char
             */
-            char &operator[](const int index);
-
-            /**
-             * Get value of element in char type
-             * at the specified position in this String
-             *
-             * @param index
-             * @return const char
-             */
-            const char &operator[](const int index) const;
+            inline char &operator[](const int index) {
+                return this->original[index];
+            }
 
             /**
              * Return size of String
