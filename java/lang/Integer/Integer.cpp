@@ -367,7 +367,7 @@ int Integer::parseInt(String inputString, int radix) {
 	
 	unsigned long unsignedResult = 0;
 	try {
-		unsignedResult = std::stoul(inputString.toString(), nullptr, radix);
+		unsignedResult = std::stoul(inputString.toCharPointer(), nullptr, radix);
 	}
 	catch (const std::invalid_argument &e) {
 		throw NumberFormatException("Not a number");
@@ -422,12 +422,10 @@ int Integer::parseUnsignedInt(String inputString, int radix) {
 	unsigned long unsignedResult = 0;
 	
 	try {
-		unsignedResult = std::stoul(inputString.toString(), nullptr, radix);
-	}
-	catch (const std::invalid_argument &e) {
+		unsignedResult = std::stoul(inputString.toCharPointer(), nullptr, radix);
+	} catch (const std::invalid_argument &e) {
 		throw NumberFormatException("Not a number");
-	}
-	catch (const std::out_of_range &e) {
+	} catch (const std::out_of_range &e) {
 		throw NumberFormatException("Unsigned integer out of range");
 	}
 	

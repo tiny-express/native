@@ -50,7 +50,6 @@ namespace Java {
         public:
             /**
              * Constructs a string buffer with no characters in it and an initial capacity of 16 characters.
-             *
              */
             StringBufferUnSafe();
 
@@ -306,13 +305,6 @@ namespace Java {
              */
             // TODO need arrayCopy
             // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
-
-            /**
-             * Return the string value of this StringBuffer
-             *
-             * @return string
-             */
-            string getValue() const;
 
             /**
              * Returns the index within this string of the first occurrence of the specified substring.
@@ -593,14 +585,6 @@ namespace Java {
              * @return the specified String
              */
             String subString(int start, int end) const;
-
-            /**
-             * Returns a string representing the data in this sequence.
-             * A new String object is allocated and initialized to contain the character represented by this object.
-             *
-             * @return a string representing the data in this sequence
-             */
-            String toString() const ;
 
             /**
              * Attempts to reduce storage used for the character sequence.
@@ -903,13 +887,6 @@ namespace Java {
             // void getChars(int sourceBegin, int sourceEnd, string destination, int destinationBegin);
 
             /**
-             * Return the string value of this StringBuffer
-             *
-             * @return string
-             */
-            string getValue() const;
-
-            /**
              * Returns the index within this string of the first occurrence of the specified substring.
              * The integer returned is the smallest value
              *
@@ -1205,14 +1182,6 @@ namespace Java {
              * @return the specified String
              */
             String subString(int start, int end) const;
-
-            /**
-             * Returns a string representing the data in this sequence.
-             * A new String object is allocated and initialized to contain the character represented by this object.
-             *
-             * @return a string representing the data in this sequence
-             */
-            String toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.
