@@ -71,7 +71,7 @@ Short::~Short() {
  * @return short
  */
 Short Short::parseShort(String target) {
-	return Short(stringToShort(target.toString()));
+	return Short(stringToShort(target.toCharPointer()));
 }
 
 /**
@@ -79,7 +79,7 @@ Short Short::parseShort(String target) {
  *
  * @return String
  */
-string Short::toString() const {
+String Short::toString() const {
 	return this->originalString;
 }
 

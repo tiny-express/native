@@ -109,7 +109,7 @@ TEST (JavaLang, ShortToString) {
 	// Give a valid Short object then compare result of method toString - Should be equals
 	Short validShort = 12344;
 	
-	string expect = (string) "12344";
-	string result = validShort.toString();
+	String expect = (string) "12344";
+	String result = validShort.toString();
 	assertEquals(expect, result);
 }

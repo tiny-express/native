@@ -93,6 +93,18 @@ TEST(JavaLang, StringBufferConstructor) {
     assertEquals(expectStringCapacity, StringConstructor.capacity());
     assertEquals(expectStringLength, StringConstructor.length());
     assertEquals(expectStringValue, StringConstructor.getValue());
+
+    // Given a StringBuilder for String constructor
+    StringBuilder stringBuilder = StringBuilder((string) "Hello world");
+    String stringBuilderConstructor(stringBuilder);
+    assertEquals("Hello world", stringBuilderConstructor.toString());
+    assertEquals(stringBuilder.length(), stringBuilderConstructor.length());
+
+    // Given a StringBuffer for String constructor
+    StringBuffer stringBuffer = StringBuffer("Hello world");
+    String stringBufferConstructor = String(stringBuffer);
+    assertEquals("Hello world", stringBufferConstructor.toString());
+    assertEquals(stringBuffer.length(), stringBufferConstructor.length());
 }
 
 TEST(JavaLang, StringBufferOperater) {
@@ -195,7 +207,7 @@ TEST(JavaLang, StringBufferAppend) {
     // Test Null object
     StringBuffer nullObjectAppendStringBuffer;
 
-    Object *nullObjToAppend = nullptr;
+    String *nullObjToAppend = nullptr;
     nullObjectAppendStringBuffer.append(*nullObjToAppend);
     String nullObjString = "null";
     assertEquals(nullObjString, nullObjectAppendStringBuffer.getValue());
@@ -383,13 +395,13 @@ TEST(JavaLang, StringBufferInsert) {
     auto objToInsert = new String("add ");
     objectInsertStringBuffer.insert(7, *objToInsert);
     assertEquals(expectString, objectInsertStringBuffer.getValue());
-    String *objToInsertString = dynamic_cast<String *>(objToInsert);
+    auto objToInsertString = dynamic_cast<String *>(objToInsert);
     delete objToInsertString;
 
     // Test Null object
     StringBuffer nullObjectInsertStringBuffer = StringBuffer("this is  pointer");
 
-    Object *nullObjToInsert = nullptr;
+    String *nullObjToInsert = nullptr;
     nullObjectInsertStringBuffer.insert(8, *nullObjToInsert);
     String expectInsertNullObject = (String)("this is null pointer");
     assertEquals(expectInsertNullObject, nullObjectInsertStringBuffer.getValue());

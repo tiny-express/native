@@ -75,7 +75,7 @@ String::String(const StringBuilder &stringBuilder) {
 }
 
 String::String(const StringBuffer &stringBuffer) {
-    this->original = stringCopy(stringBuffer.getValue());
+    this->original = stringCopy(stringBuffer.getValue().toCharPointer());
     this->size = stringBuffer.length();
 	this->capacity = this->size == 0 ? -1 : this->size;
 }
@@ -586,7 +586,7 @@ Array<String> String::split(String regex, int limit) const {
     if (limit > stringArrayNoLimit.length || limit <= 0) {
         return stringArrayNoLimit;
     }
-    int indexOfRegexBelowLimit = stringIndex(this->original, regex.toString(), limit - 1);
+    int indexOfRegexBelowLimit = stringIndex(this->original, regex.toCharPointer(), limit - 1);
     int remainStringLength = indexOfRegexBelowLimit + regex.length();
     String remainString = this->getStringFromIndex(remainStringLength);
     Array<String> stringArrayLimit;
@@ -604,7 +604,7 @@ Array<String> String::split(String regex, int limit) const {
 String String::print(const String &format, short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -614,7 +614,7 @@ String String::print(const String &format, short value) {
 String String::print(const String &format, int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -624,7 +624,7 @@ String String::print(const String &format, int value) {
 String String::print(const String &format, long value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -634,7 +634,7 @@ String String::print(const String &format, long value) {
 String String::print(const String &format, unsigned short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -644,7 +644,7 @@ String String::print(const String &format, unsigned short value) {
 String String::print(const String &format, unsigned int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -654,7 +654,7 @@ String String::print(const String &format, unsigned int value) {
 String String::print(const String &format, unsigned long value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -664,7 +664,7 @@ String String::print(const String &format, unsigned long value) {
 String String::print(const String &format, double value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toString(), value);
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -721,20 +721,20 @@ String String::print(const String &format, Double value) {
 }
 
 String String::print(const String &format, String value) {
-    return String::print(format, value.toString());
+    return String::print(format, value.toCharPointer());
 }
 
 String String::format(const String &format) {
     const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
             ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
     String result;
-    string inputStringPtr = format.toString();
+    string inputStringPtr = format.toCharPointer();
     int inputStringLength = format.getSize();
     int inputStringOffset = 0;
     int errorCode = 0;
     regex_t regex;
 
-    errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+    errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
     while (errorCode == 0 && inputStringOffset < format.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);

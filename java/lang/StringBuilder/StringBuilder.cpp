@@ -516,11 +516,11 @@ StringBuilder &StringBuilder::insert(int offset, long target) {
     return this->insert(offset, Long(target));
 };
 
-StringBuilder &StringBuilder::insert(int offset, const String target) {
-    return this->insert(offset, target);
+StringBuilder &StringBuilder::insert(int offset, String target) {
+    return this->insert(offset, target.toCharPointer());
 }
 
-StringBuilder &StringBuilder::insert(int offset, const string target) {
+StringBuilder &StringBuilder::insert(int offset, const_string target) {
     if (offset < 0 || offset > this->currentLength) {
         throw StringIndexOutOfBoundsException(offset);
     }
@@ -551,6 +551,10 @@ int StringBuilder::lastIndexOf(const String target) const {
 }
 
 int StringBuilder::lastIndexOf(String target, int fromIndex) const {
+    return this->stringMatchesReverse(this->toString(), target, fromIndex);
+}
+
+int StringBuilder::lastIndexOf(const_string target, int fromIndex) const {
     return this->stringMatchesReverse(this->toString(), target, fromIndex);
 }
 

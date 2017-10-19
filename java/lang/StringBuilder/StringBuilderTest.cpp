@@ -32,7 +32,7 @@
 
 using namespace Java::Lang;
 
-TEST(JavaLang, StringBuilderConstructor) {
+TEST(JavaLangStringBuilder, Constructor) {
     StringBuilder defaultStringBuilder;
     assertEquals(0, defaultStringBuilder.length());
     assertEquals(StringBuilder::defaultCapacity, defaultStringBuilder.capacity());
@@ -70,16 +70,16 @@ TEST(JavaLang, StringBuilderConstructor) {
     delete charSequenceString;
 }
 
-TEST(JavaLang, StringBuilderDestructor) {
+TEST(JavaLangStringBuilder, Destructor) {
 	// Destructor will be called automatically.
 	StringBuilder stringBuilder;
 	
 	// Destructor will be called by delete operator.
-	StringBuilder *pStringBuilder = new StringBuilder();
+    auto pStringBuilder = new StringBuilder();
 	delete pStringBuilder;
 }
 
-TEST(JavaLang, StringBuilderAppend) {
+TEST(JavaLangStringBuilder, Append) {
     // Array of Character or char
     StringBuilder stringBuilder1;
     Array<char> arrayOfChar({'1','2','3'});
@@ -149,24 +149,23 @@ TEST(JavaLang, StringBuilderAppend) {
     try {
         // start < 0
         stringBuilder7.append(*charSequence, -1, 3);
-    }
-    catch (IndexOutOfBoundsException &ex){
+    } catch (IndexOutOfBoundsException &ex){
         assertEquals("", ex.getMessage().toString());
         assertEquals("123Hello!", stringBuilder7.toString());
     }
+
     try {
         // start > end
         stringBuilder7.append(*charSequence, 4, 3);
-    }
-    catch (IndexOutOfBoundsException &ex){
+    } catch (IndexOutOfBoundsException &ex){
         assertEquals("", ex.getMessage().toString());
         assertEquals("123Hello!", stringBuilder7.toString());
     }
+
     try {
         // end > current length of StringBuilder instance.
         stringBuilder7.append(*charSequence, 4, 999);
-    }
-    catch (IndexOutOfBoundsException &ex){
+    } catch (IndexOutOfBoundsException &ex){
         assertEquals("", ex.getMessage().toString());
         assertEquals("123Hello!", stringBuilder7.toString());
     }
@@ -176,16 +175,16 @@ TEST(JavaLang, StringBuilderAppend) {
     delete charSequenceString;
 }
 
-TEST(JavaLang, StringBuilderAppendCodePoint) {
+TEST(JavaLangStringBuilder, AppendCodePoint) {
 	// TODO
 }
 
-TEST(JavaLang, StringBuilderCapacity) {
+TEST(JavaLangStringBuilder, Capacity) {
 	StringBuilder stringBuilder(100);
 	assertEquals(100, stringBuilder.capacity());
 }
 
-TEST(JavaLang, StringBuilderCharAt) {
+TEST(JavaLangStringBuilder, CharAt) {
     StringBuilder stringBuilder({'a', 'b', 'c'});
     assertEquals('a', stringBuilder.charAt(0));
     assertEquals('b', stringBuilder.charAt(1));
@@ -198,19 +197,19 @@ TEST(JavaLang, StringBuilderCharAt) {
     }
 }
 
-TEST(JavaLang, StringBuilderCodePointAt) {
+TEST(JavaLangStringBuilder, CodePointAt) {
 	// TODO
 }
 
-TEST(JavaLang, StringBuilderCodePointBefore) {
+TEST(JavaLangStringBuilder, CodePointBefore) {
 	// TODO
 }
 
-TEST(JavaLang, StringBuilderCodePointCount) {
+TEST(JavaLangStringBuilder, CodePointCount) {
 	// TODO
 }
 
-TEST(JavaLang, StringBuilderDeleteRange) {
+TEST(JavaLangStringBuilder, DeleteRange) {
     StringBuilder stringBuilder((const string)"ABCXYZ");
     assertEquals("ABCXYZ", stringBuilder.toString());
     try {
@@ -242,7 +241,7 @@ TEST(JavaLang, StringBuilderDeleteRange) {
     assertEquals("", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderDeleteCharAt) {
+TEST(JavaLangStringBuilder, DeleteCharAt) {
     StringBuilder stringBuilder((const string)"ABCXYZ");
     assertEquals("ABCXYZ", stringBuilder.toString());
     stringBuilder.deleteCharAt(0);
@@ -251,7 +250,7 @@ TEST(JavaLang, StringBuilderDeleteCharAt) {
     assertEquals("BXYZ", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderEnsureCapacity) {
+TEST(JavaLangStringBuilder, EnsureCapacity) {
 	// Default capacity.
 	StringBuilder stringBuilder;
 	assertEquals(0, stringBuilder.length());
@@ -272,11 +271,11 @@ TEST(JavaLang, StringBuilderEnsureCapacity) {
 	assertEquals(100, stringBuilder.capacity());
 }
 
-TEST(JavaLang, StringBuilderGetChars) {
+TEST(JavaLangStringBuilder, GetChars) {
 	// TODO
 }
 
-TEST(JavaLang, StringBuilderIndexOf) {
+TEST(JavaLangStringBuilder, IndexOf) {
     StringBuilder stringBuilder((const string)"Welcome to Vietnam");
     assertEquals(0, stringBuilder.indexOf((const string)"Welcome"));
     assertEquals(0, stringBuilder.indexOf(String("Welcome")));
@@ -296,7 +295,7 @@ TEST(JavaLang, StringBuilderIndexOf) {
     assertEquals(-1, stringBuilder.indexOf(String("Vietnam"), 20));
 }
 
-TEST(JavaLang, StringBuilderInsert) {
+TEST(JavaLangStringBuilder, Insert) {
     // String and string
     StringBuilder stringBuilder1((const string)"123");
     assertEquals("123", stringBuilder1.toString());
@@ -405,29 +404,27 @@ TEST(JavaLang, StringBuilderInsert) {
     try {
         // index > currentLength
         stringBuilder7.insert(999, anArray1, 1, 2);
-    }
-    catch (StringIndexOutOfBoundsException &ex){
+    } catch (StringIndexOutOfBoundsException &ex){
         assertEquals("abc", stringBuilder7.toString());
     }
+
     try {
         // offset < 0
         stringBuilder7.insert(1, anArray1, -1, 2);
-    }
-    catch (StringIndexOutOfBoundsException &ex) {
+    } catch (StringIndexOutOfBoundsException &ex) {
         assertEquals("abc", stringBuilder7.toString());
     }
+
     try {
         // length < 0
         stringBuilder7.insert(1, anArray1, 1, -1);
-    }
-    catch (StringIndexOutOfBoundsException &ex) {
+    } catch (StringIndexOutOfBoundsException &ex) {
         assertEquals("abc", stringBuilder7.toString());
     }
     try {
         // offset + length > lengthOfArray
         stringBuilder7.insert(1, anArray1, 1, 100);
-    }
-    catch (StringIndexOutOfBoundsException &ex){
+    } catch (StringIndexOutOfBoundsException &ex){
         assertEquals("abc", stringBuilder7.toString());
     }
     stringBuilder7.insert(1, anArray1, 1, 2); // valid index, offset, length
@@ -436,36 +433,34 @@ TEST(JavaLang, StringBuilderInsert) {
     try {
         // index < 0
         stringBuilder7.insert(-1, anArray2 , 1, 1);
-    }
-    catch (StringIndexOutOfBoundsException &ex){
+    } catch (StringIndexOutOfBoundsException &ex){
         assertEquals("a23bc", stringBuilder7.toString());
     }
+
     try {
         // index > currentLength
         stringBuilder7.insert(999, anArray2 , 1, 1);
-    }
-    catch (StringIndexOutOfBoundsException &ex){
+    } catch (StringIndexOutOfBoundsException &ex){
         assertEquals("a23bc", stringBuilder7.toString());
     }
+
     try {
         // offset < 0
         stringBuilder7.insert(1, anArray2 , -1, 1);
-    }
-    catch (StringIndexOutOfBoundsException &ex) {
+    } catch (StringIndexOutOfBoundsException &ex) {
         assertEquals("a23bc", stringBuilder7.toString());
     }
+
     try {
         // length < 0
         stringBuilder7.insert(1, anArray2 , 1, -1);
-    }
-    catch (StringIndexOutOfBoundsException &ex) {
+    } catch (StringIndexOutOfBoundsException &ex) {
         assertEquals("a23bc", stringBuilder7.toString());
     }
     try {
         // offset + length > lengthOfArray
         stringBuilder7.insert(1, anArray2 , 1, 999);
-    }
-    catch (StringIndexOutOfBoundsException &ex){
+    } catch (StringIndexOutOfBoundsException &ex){
         assertEquals("a23bc", stringBuilder7.toString());
     }
     stringBuilder7.insert(1, anArray2 , 1, 1); // valid index, offset, length
@@ -474,63 +469,63 @@ TEST(JavaLang, StringBuilderInsert) {
     // CharSequence
     StringBuilder stringBuilder8((const string)"abc");
     assertEquals("abc", stringBuilder8.toString());
-    CharSequence *charSequence = (CharSequence *)new String("xyz");
+    auto charSequence = (CharSequence *)new String("xyz");
     stringBuilder8.insert(1, *charSequence);
     assertEquals("axyzbc", stringBuilder8.toString());
 
     try {
         // destinationOffset < 0
         stringBuilder8.insert(-1, *charSequence, 1, 1);
-    }
-    catch (IndexOutOfBoundsException &ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     try {
         // destinationOffset > length of this StringBuilder
         stringBuilder8.insert(999, *charSequence, 1, 1);
-    }
-    catch (IndexOutOfBoundsException &ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     try {
         // start < 0
         stringBuilder8.insert(1, *charSequence, -1, 1);
-    }
-    catch (IndexOutOfBoundsException &ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     try {
         // end < 0
         stringBuilder8.insert(1, *charSequence, 1, -1);
-    }
-    catch (IndexOutOfBoundsException &ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     try {
         // start > end
         stringBuilder8.insert(1, *charSequence, 2, 1);
-    }
-    catch (IndexOutOfBoundsException &ex) {
+    } catch (IndexOutOfBoundsException &ex) {
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     try {
         // end > length of target (charSequence)
         stringBuilder8.insert(1, *charSequence, 1, 999);
-    }
-    catch (IndexOutOfBoundsException &ex){
+    } catch (IndexOutOfBoundsException &ex){
         assertEquals("axyzbc", stringBuilder8.toString());
     }
+
     stringBuilder8.insert(1, *charSequence, 1, 1);
     assertEquals("axyzbc", stringBuilder8.toString());
     stringBuilder8.insert(1, *charSequence, 1, 2);
     assertEquals("ayxyzbc", stringBuilder8.toString());
     stringBuilder8.insert(1, *charSequence, 1, 3);
     assertEquals("ayzyxyzbc", stringBuilder8.toString());
-    String *charSequenceString = dynamic_cast<String *>(charSequence); // FIXME: Must use this 'dynamic_cast' operator because CharSequence class doesn't have virtual destructor.
+    auto charSequenceString = dynamic_cast<String *>(charSequence); // FIXME: Must use this 'dynamic_cast' operator because CharSequence class doesn't have virtual destructor.
     delete charSequenceString;
 }
 
-TEST(JavaLang, StringBuilderLastIndexOf) {
+TEST(JavaLangStringBuilder, LastIndexOf) {
     StringBuilder stringBuilder((const string)"Welcome to Vietnam");
     assertEquals("Welcome to Vietnam", stringBuilder.toString());
     assertEquals(11, stringBuilder.lastIndexOf((const string)"Vietnam"));
@@ -545,13 +540,13 @@ TEST(JavaLang, StringBuilderLastIndexOf) {
     assertEquals(11, stringBuilder.lastIndexOf(String("Vietnam"), stringBuilder.length()));
 }
 
-TEST(JavaLang, StringBuilderLength) {
+TEST(JavaLangStringBuilder, Length) {
 	String aString("Hello! I'm a String");
 	StringBuilder stringBuilder(aString);
 	assertEquals(aString.length(), stringBuilder.length());
 }
 
-TEST(JavaLang, StringBuilderReplace) {
+TEST(JavaLangStringBuilder, Replace) {
     StringBuilder stringBuilder((const string)"ABCXYZ");
     assertEquals("ABCXYZ", stringBuilder.toString());
     stringBuilder.replace(1, 2, (const string)"123");
@@ -560,7 +555,7 @@ TEST(JavaLang, StringBuilderReplace) {
     assertEquals("Clear!", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderReverse) {
+TEST(JavaLangStringBuilder, Reverse) {
     StringBuilder stringBuilder1((const string)"ABCXYZ");
     stringBuilder1.reverse();
     assertEquals("ZYXCBA", stringBuilder1.toString());
@@ -572,7 +567,7 @@ TEST(JavaLang, StringBuilderReverse) {
     assertEquals("\u000DC00\u000D800", stringBuilder2.toString());
 }
 
-TEST(JavaLang, StringBuilderSetCharAt) {
+TEST(JavaLangStringBuilder, SetCharAt) {
     StringBuilder stringBuilder((const string)"ABCXYZ");
     assertEquals("ABCXYZ", stringBuilder.toString());
     stringBuilder.setCharAt(0, 'T');
@@ -581,7 +576,7 @@ TEST(JavaLang, StringBuilderSetCharAt) {
     assertEquals("TVCXYZ", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderSetLength) {
+TEST(JavaLangStringBuilder, SetLength) {
     StringBuilder stringBuilder((const string)"Hello! I'm a StringBuilder");
     assertEquals("Hello! I'm a StringBuilder", stringBuilder.toString());
     assertEquals(26, stringBuilder.length());
@@ -593,7 +588,7 @@ TEST(JavaLang, StringBuilderSetLength) {
     assertEquals("Hello!", stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderSubString) {
+TEST(JavaLangStringBuilder, SubString) {
     StringBuilder stringBuilder((const string)"Hello Vietnam");
     assertEquals("Vietnam", stringBuilder.substring(6).toString());
     assertEquals("llo", stringBuilder.substring(2, 5).toString());
@@ -605,13 +600,13 @@ TEST(JavaLang, StringBuilderSubString) {
     }
 }
 
-TEST(JavaLang, StringBuilderToString) {
+TEST(JavaLangStringBuilder, ToString) {
     String aString = "Hello!";
     StringBuilder stringBuilder(aString.toString());
     assertEquals(aString.toString(), stringBuilder.toString());
 }
 
-TEST(JavaLang, StringBuilderTrimToSize) {
+TEST(JavaLangStringBuilder, TrimToSize) {
 	StringBuilder stringBuilder(100);
 	assertEquals(100, stringBuilder.capacity());
 	stringBuilder.trimToSize();
@@ -619,4 +614,11 @@ TEST(JavaLang, StringBuilderTrimToSize) {
 	stringBuilder.append((const string) "123");
 	stringBuilder.trimToSize();
 	assertEquals(3, stringBuilder.capacity());
+}
+
+TEST(JavaLangStringBuilder, Equals) {
+    // Compare with another object
+    String stringEqual1 = "Hello World";
+    StringBuilder stringBuilder = StringBuilder((string) "abcd");
+    assertFalse(stringEqual1.equals(stringBuilder));
 }

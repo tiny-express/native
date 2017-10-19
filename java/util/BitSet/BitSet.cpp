@@ -80,8 +80,8 @@ void BitSet::ensureCapacity(int wordsRequired) {
         return;
     }
     // Allocate larger of doubled size or required size.
-    int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
-    int oldWordsArrayLength = this->words.length;
+    int wordsRequested = Math::max((int) (2 * this->words.length), (int) wordsRequired);
+    int oldWordsArrayLength = (int) this->words.length;
     this->words = Arrays::copyOf(this->words, wordsRequested);
     this->sizeIsSticky = false;
     // Set value of new word to 0.
@@ -644,14 +644,14 @@ void BitSet::set(int fromIndex, int toIndex, boolean value) {
 }
 
 int BitSet::size() const {
-    return this->words.length * BITS_PER_WORD;
+    return (int) this->words.length * BITS_PER_WORD;
 }
 
 Array<byte> BitSet::toByteArray() const {
     // This is an alternative version, without supports from ByteBuffer data type.
 
     if (this->wordsInUse == 0) {
-        return Array<byte>(0);
+        return Array<byte>();
     }
 
     const int numberOfBytesPerWord = 8;
@@ -728,7 +728,7 @@ string BitSet::toString() const {
     stringBuilder.append('}');
 
     free(this->backupForToString);
-    this->backupForToString = stringCopy(stringBuilder.toString());
+    this->backupForToString = stringCopy(stringBuilder.toString().toCharPointer());
 
     return this->backupForToString;
 }

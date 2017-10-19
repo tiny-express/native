@@ -152,7 +152,7 @@ boolean MediaType::isCompatible(MediaType other) {
 
 string MediaType::toString() {
    this->backupForToString = this->type + String("/") + this->subtype;
-    return backupForToString.toString();
+    return backupForToString.toCharPointer();
 }
 
 boolean MediaType::isWildcardSubtype() {

@@ -64,7 +64,7 @@ int StringBufferUnSafe::capacity() const {
 	return this->currentCapacity;
 }
 
-string StringBufferUnSafe::getValue() const {
+String StringBufferUnSafe::getValue() const {
 	return this->original;
 }
 
@@ -114,14 +114,14 @@ int StringBufferUnSafe::length() const {
 	return this->currentLength;
 }
 
-StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend, int offset, int len) {
-	if (offset < 0 || len < 0 || (offset + len) > lengthPointerChar(stringToAppend)) {
+StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend, int offset, int len) {
+	if (offset < 0 || len < 0 || (offset + len) > stringToAppend.length()) {
 		throw IndexOutOfBoundsException();
 	}
 	
 	this->ensureCapacity(this->length() + len);
 	string appendPosition = this->original + this->currentLength;
-	string startIndex = stringToAppend + offset;
+	string startIndex = stringToAppend.toCharPointer() + offset;
 	int memorySizeToMove = len * sizeof(char);
 	memmove(appendPosition, startIndex, (size_t) memorySizeToMove);
 	this->currentLength += len;
@@ -156,18 +156,6 @@ StringBufferUnSafe::StringBufferUnSafe(const StringBufferUnSafe &other) {
 	this->currentCapacity = other.currentCapacity;
 }
 
-StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
-	return this->append(stringToAppend, 0, stringToAppend.length());
-}
-
-StringBufferUnSafe &StringBufferUnSafe::append(Object *object) {
-	if (object == nullptr) {
-		return this->append((string) "null", 0, 4);
-	}
-	
-	return this->append(object->toString());
-}
-
 StringBufferUnSafe &StringBufferUnSafe::append(float floatValue) {
 	return this->append(String::valueOf(floatValue).toString());
 }
@@ -196,7 +184,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(char charValue) {
 	return this->append(String::valueOf(charValue).toString());
 }
 
-StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe stringBufferUnSafe) {
+StringBufferUnSafe &StringBufferUnSafe::append(StringBufferUnSafe &stringBufferUnSafe) {
 	return this->append(stringBufferUnSafe.getValue());
 }
 
@@ -355,7 +343,7 @@ StringBufferUnSafe::~StringBufferUnSafe() {
 }*/
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex) const {
-	return stringIndex(this->original, stringToGetIndex.toString(), 1);
+	return stringIndex(this->original, stringToGetIndex.toCharPointer(), 1);
 }
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) const {
@@ -393,8 +381,8 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, boolean boolValue) {
 	return this->insert(offset, (string) "false", 0, 5);
 }
 
-StringBufferUnSafe &StringBufferUnSafe::insert(int offset, string stringToInsert) {
-	return this->insert(offset, stringToInsert, 0, lengthPointerChar(stringToInsert));
+StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert) {
+	return this->insert(offset, stringToInsert, 0, stringToInsert.length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
@@ -402,21 +390,9 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
 	return this->insert(offset, value.toString(), 0, value.length());
 }
 
-StringBufferUnSafe &StringBufferUnSafe::insert(int offset, String stringToInsert) {
-	return this->insert(offset, stringToInsert.toString(), 0, stringToInsert.length());
-}
-
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, long longValue) {
 	String value = String::valueOf(longValue);
 	return this->insert(offset, value.toString(), 0, value.length());
-}
-
-StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object &object) {
-    if (&object == nullptr) {
-        return this->insert(offset, (string) "null", 0, 4);
-    }
-
-    return this->insert(offset, object.toString(), 0, lengthPointerChar(object.toString()));
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
@@ -453,7 +429,7 @@ int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
 
 int StringBufferUnSafe::lastIndexOf(String stringToGetIndex, int fromIndex) const {
 	string reversedOriginal = stringReverse(this->original);
-	string reversedString = stringReverse(stringToGetIndex.toString());
+	string reversedString = stringReverse(stringToGetIndex.toCharPointer());
 	String reversedOriginalString = reversedOriginal;
 	
 	int substringIndex = this->length() - fromIndex - stringToGetIndex.length();
@@ -608,7 +584,7 @@ String StringBufferUnSafe::subString(int start, int end) const {
 	return result;
 }
 
-string StringBufferUnSafe::toString() const {
+String StringBufferUnSafe::toString() const {
 	return this->original;
 }
 
@@ -662,19 +638,13 @@ StringBuffer::StringBuffer(const StringBuffer &other) {
 	this->currentCapacity = other.currentCapacity;
 }
 
-StringBuffer &StringBuffer::append(Object &object) {
-    std::lock_guard<std::mutex> guard(this->mutex);
-    StringBufferUnSafe::append(&object);
-    return *this;
-}
-
 StringBuffer &StringBuffer::append(float floatValue) {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	StringBufferUnSafe::append(floatValue);
 	return *this;
 }
 
-StringBuffer &StringBuffer::append(string stringToAppend) {
+StringBuffer &StringBuffer::append(String stringToAppend) {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	StringBufferUnSafe::append(stringToAppend);
 	return *this;
@@ -695,12 +665,6 @@ StringBuffer &StringBuffer::append(CharSequence &sequence) {
 StringBuffer &StringBuffer::append(char charValue) {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	StringBufferUnSafe::append(charValue);
-	return *this;
-}
-
-StringBuffer &StringBuffer::append(String stringToAppend) {
-	std::lock_guard<std::mutex> guard(this->mutex);
-	StringBufferUnSafe::append(stringToAppend);
 	return *this;
 }
 
@@ -734,7 +698,7 @@ StringBuffer &StringBuffer::appendCodePoint(int codePoint) {
 	return *this;
 }
 
-StringBuffer &StringBuffer::append(StringBuffer stringBuffer) {
+StringBuffer &StringBuffer::append(StringBuffer &stringBuffer) {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	StringBufferUnSafe::append(stringBuffer);
 	return *this;
@@ -775,7 +739,7 @@ void StringBuffer::ensureCapacity(int minimumCapacity) {
 	StringBufferUnSafe::ensureCapacity(minimumCapacity);
 }
 
-string StringBuffer::getValue() const {
+String StringBuffer::getValue() const {
 	return StringBufferUnSafe::getValue();
 }
 
@@ -826,7 +790,7 @@ StringBuffer &StringBuffer::insert(int offset, boolean boolValue) {
 
 StringBuffer &StringBuffer::insert(int offset, string stringToInsert) {
 	std::lock_guard<std::mutex> guard(this->mutex);
-	StringBufferUnSafe::insert(offset, stringToInsert);
+	StringBufferUnSafe::insert(offset, String(stringToInsert));
 	return *this;
 }
 
@@ -840,12 +804,6 @@ StringBuffer &StringBuffer::insert(int offset, String stringToInsert) {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	StringBufferUnSafe::insert(offset, stringToInsert);
 	return *this;
-}
-
-StringBuffer &StringBuffer::insert(int offset, Object &object) {
-    std::lock_guard<std::mutex> guard(this->mutex);
-    StringBufferUnSafe::insert(offset, object);
-    return *this;
 }
 
 StringBuffer &StringBuffer::insert(int offset, double doubleValue) {
@@ -936,7 +894,7 @@ String StringBuffer::subString(int start, int end) const {
 	return StringBufferUnSafe::subString(start, end);
 }
 
-string StringBuffer::toString() const {
+String StringBuffer::toString() const {
 	std::lock_guard<std::mutex> guard(this->mutex);
 	return StringBufferUnSafe::toString();
 }

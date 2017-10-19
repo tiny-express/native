@@ -695,7 +695,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder &insert(int offset, const String target);
+            StringBuilder &insert(int offset, String target);
 
             /**
              * Inserts the string representation of the string argument into this sequence.
@@ -707,7 +707,7 @@ namespace Java {
              * @return StringBuilder
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              */
-            StringBuilder &insert(int offset, const string target);
+            StringBuilder &insert(int offset, const_string target);
 
             /**
              * This method accepts a String as an argument, if the string argument occurs one or more times as a substring within this object,
@@ -727,7 +727,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int lastIndexOf(const String target, int fromIndex) const;
+            int lastIndexOf(String target, int fromIndex) const;
 
             /**
              * This method returns the index within this string of the last occurrence of the specified substring,
@@ -737,7 +737,7 @@ namespace Java {
              * @param fromIndex
              * @return int
              */
-            int lastIndexOf(const string target, int fromIndex) const;
+            int lastIndexOf(const_string target, int fromIndex) const;
 
             /**
              * Returns the length (character count).

@@ -278,7 +278,7 @@ namespace Java {
 						 */
 						static long parse(String s) {
 							tm timer;
-							string timeString = s.toString();
+							string timeString = s.toCharPointer();
 							
 							// TODO - Fix for WIN32
 							// strptime(timeString, "%a %b %d %Y %H:%M:%S", &timer);

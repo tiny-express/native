@@ -33,7 +33,6 @@
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
-#include <regex.h>
 
 using namespace Java::IO;
 
@@ -441,6 +440,13 @@ namespace Java {
             boolean equalsIgnoreCase(String anotherString);
 
             /**
+             * String hash code
+             *
+             * @return long
+             */
+            long hashCode() const;
+
+            /**
              * String from character array
              *
              * @param charArray
@@ -498,13 +504,6 @@ namespace Java {
              * @return String
              */
             String getStringFromIndex(int index) const;
-
-            /**
-             * Returns a hash code for this string.
-             *
-             * @return int
-             */
-            long hashCode();
 
             /**
              * Returns the index within this String

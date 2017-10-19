@@ -89,7 +89,14 @@ namespace Java {
              * @param object
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(Object *object);
+             template <typename T>
+            StringBufferUnSafe &append(T *object) {
+                if (object == nullptr) {
+                    return this->append((string) "null", 0, 4);
+                }
+
+                return this->append(object->toString());
+            }
 
             /**
              * Appends the string representation of the float argument
@@ -165,7 +172,7 @@ namespace Java {
              * @param stringBufferUnSafe
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(StringBufferUnSafe stringBufferUnSafe);
+            StringBufferUnSafe &append(StringBufferUnSafe &stringBufferUnSafe);
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
@@ -178,7 +185,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(string stringToAppend, int offset, int len);
+            StringBufferUnSafe &append(String stringToAppend, int offset, int len);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
@@ -208,6 +215,13 @@ namespace Java {
              * @return int
              */
             int capacity() const;
+
+            /**
+             * Get value of string buffer unsage
+             *
+             * @return String
+             */
+            String getValue() const;
 
             /**
              * Return character at specified index
@@ -401,7 +415,7 @@ namespace Java {
             StringBufferUnSafe &insert(int offset, long longValue);
 
             /**
-             * Inserts the string representation of the Object argument into this character sequence.
+             * Inserts the string representation of the T argument into this character sequence.
              * The offset argument must be greater than or equal to 0,
              * and less than or equal to the length of this sequence.
              *
@@ -410,7 +424,13 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(int offset, Object &object);
+             template <class T>
+            StringBufferUnSafe &insert(int offset, T &object) {
+                if (&object == nullptr) {
+                    return this->insert(offset, (string) "null", 0, 4);
+                }
+                return this->insert(offset, object.toString(), 0, object.toString().length());
+            }
 
             /**
              * Inserts the string representation of the int argument into this sequence.
@@ -595,6 +615,13 @@ namespace Java {
             void trimToSize();
 
             /**
+             * Convert String Buffer Unsafe to string
+             *
+             * @return String
+             */
+            String toString() const;
+
+            /**
              * Overload operator =
              * @return a reference to this StringBufferUnSafe
              */
@@ -662,7 +689,12 @@ namespace Java {
              * @param object
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(Object &object);
+            template <class T>
+            StringBuffer &append(T &object) {
+                std::lock_guard<std::mutex> guard(this->mutex);
+                StringBufferUnSafe::append(&object);
+                return *this;
+            }
 
             /**
              * Appends the string representation of the float argument
@@ -742,7 +774,7 @@ namespace Java {
              * @param stringBuffer
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(StringBuffer stringBuffer);
+            StringBuffer &append(StringBuffer &stringBuffer);
 
             /**
              * Appends the string representation of a subarray of the char array argument to this sequence.
@@ -868,6 +900,13 @@ namespace Java {
              * @param minimumCapacity
              */
             void ensureCapacity(int minimumCapacity);
+
+            /**
+             * Get value of string buffer
+             *
+             * @return String
+             */
+            String getValue() const;
 
             /**
              * Characters are copied from this sequence into the destination character array.
@@ -1006,7 +1045,12 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(int offset, Object &object);
+            template <typename T>
+            StringBuffer &insert(int offset, T &object) {
+                std::lock_guard<std::mutex> guard(this->mutex);
+                StringBufferUnSafe::insert(offset, object);
+                return *this;
+            }
 
             /**
              * Inserts the string representation of the int argument into this sequence.
@@ -1182,6 +1226,13 @@ namespace Java {
              * @return the specified String
              */
             String subString(int start, int end) const;
+
+            /**
+             * Convert String Buffer to String
+             *
+             * @return String
+             */
+            String toString() const;
 
             /**
              * Attempts to reduce storage used for the character sequence.

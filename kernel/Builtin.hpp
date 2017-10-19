@@ -44,6 +44,7 @@
 #include <cstdarg>
 #include <cctype>
 #include <ctime>
+#include <regex.h>
 
 #ifdef LINUX
 #include <stdint.h>

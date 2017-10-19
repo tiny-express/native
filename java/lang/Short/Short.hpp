@@ -51,7 +51,7 @@ namespace Java {
 						long longValue() const;
 						float floatValue() const;
 						double doubleValue() const;
-						string toString() const;
+						String toString() const;
 						
 						static Short parseShort(String target);
 				

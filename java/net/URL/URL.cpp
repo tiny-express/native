@@ -112,8 +112,7 @@ string URL::toString() const {
 	}
 	
 	url += query;
-	
-	string result = url.toString();
-	return stringCopy(result);
+
+	return stringCopy(url.toCharPointer());
 }
 
