@@ -517,6 +517,8 @@ namespace Java {
 							startHashMap += endString;
 							startHashMap = startHashMap.replaceAll("}\"", "}");
 							startHashMap = startHashMap.replaceAll("\"{", "{");
+							startHashMap = startHashMap.replaceAll("]\"", "]");
+							startHashMap = startHashMap.replaceAll("\"[", "[");
 							this->backup = startHashMap;
 							return this->backup.toString();
 						}

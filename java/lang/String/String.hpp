@@ -125,7 +125,7 @@ namespace Java {
              *
              * @param byteArray
              */
-            explicit String(Array<byte> &byteArray);
+            String(Array<byte> &byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -133,7 +133,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            explicit String(const StringBuilder &stringBuilder);
+            String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -141,7 +141,7 @@ namespace Java {
              *
              * @param charArray
              */
-            explicit String(Array<char> &charArray);
+            String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -149,7 +149,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            explicit String(const StringBuffer &stringBuffer);
+            String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -181,7 +181,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            explicit String(Array<char> &charArray, int offset, int count);
+            String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -208,7 +208,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            explicit String(Array<byte> &byteArray, int offset, int length);
+            String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
