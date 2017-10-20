@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['map',['Map',['../classJava_1_1Util_1_1Map.html',1,'Java::Util']]],
-  ['map_3c_20string_2c_20string_20_3e',['Map&lt; String, String &gt;',['../classJava_1_1Util_1_1Map.html',1,'Java::Util']]],
-  ['math',['Math',['../classJava_1_1Lang_1_1Math.html',1,'Java::Lang']]],
-  ['mediatype',['MediaType',['../classJavax_1_1Ws_1_1MediaType.html',1,'Javax::Ws']]],
-  ['mediatypeexception',['MediaTypeException',['../classJavax_1_1Ws_1_1MediaTypeException.html',1,'Javax::Ws']]]
+  ['linkedlist',['LinkedList',['../classJava_1_1Util_1_1LinkedList.html',1,'Java::Util']]],
+  ['list',['List',['../classJava_1_1Util_1_1List.html',1,'Java::Util']]],
+  ['listiterator',['ListIterator',['../classJava_1_1Util_1_1ListIterator.html',1,'Java::Util']]],
+  ['long',['Long',['../classJava_1_1Lang_1_1Long.html',1,'Java::Lang']]]
 ];

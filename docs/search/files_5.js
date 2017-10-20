@@ -12,5 +12,6 @@ var searchData=
   ['float_2ehpp',['Float.hpp',['../Float_8hpp.html',1,'']]],
   ['flushable_2ecpp',['Flushable.cpp',['../Flushable_8cpp.html',1,'']]],
   ['flushable_2ehpp',['Flushable.hpp',['../Flushable_8hpp.html',1,'']]],
-  ['function_2ehpp',['Function.hpp',['../function_2Function_2Function_8hpp.html',1,'(Global Namespace)'],['../Function_8hpp.html',1,'(Global Namespace)']]]
+  ['function_2ehpp',['Function.hpp',['../function_2Function_2Function_8hpp.html',1,'']]],
+  ['function_2ehpp',['Function.hpp',['../Function_8hpp.html',1,'']]]
 ];
