@@ -53,23 +53,23 @@ namespace Java {
         this->capacity = this->size == 0 ? -1 : this->size;
 
 #define STRING_CONSTRUCTOR_ARRAY \
-	if (offset < 0) {\
-		throw StringIndexOutOfBoundsException(offset);\
-	}\
-	if (length < 0) {\
-		throw StringIndexOutOfBoundsException(length);\
-	}\
-	if (offset > array.length - length) {\
-		throw StringIndexOutOfBoundsException(offset + length);\
-	}\
-	this->original = (string) allocateMemory((length + 1) * sizeof(char));\
-	int index;\
-	for (index = 0; index < length; offset++, index++) {\
-		this->original [index] = array.get(offset);\
-	}\
-	this->original [length] = '\0';\
-	this->size = length;\
-	this->capacity = this->size == 0 ? -1 : this->size;
+    if (offset < 0) {\
+        throw StringIndexOutOfBoundsException(offset);\
+    }\
+    if (length < 0) {\
+        throw StringIndexOutOfBoundsException(length);\
+    }\
+    if (offset > array.length - length) {\
+        throw StringIndexOutOfBoundsException(offset + length);\
+    }\
+    this->original = (string) allocateMemory((length + 1) * sizeof(char));\
+    int index;\
+    for (index = 0; index < length; offset++, index++) {\
+        this->original [index] = array.get(offset);\
+    }\
+    this->original [length] = '\0';\
+    this->size = length;\
+    this->capacity = this->size == 0 ? -1 : this->size;
 
 #define STRING_OPERATOR_PLUS  \
         if (newLength >= this->capacity) {\
@@ -125,7 +125,7 @@ namespace Java {
              *
              * @param byteArray
              */
-            explicit String(Array<byte> &byteArray);
+            String(Array<byte> &byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -133,7 +133,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            explicit String(const StringBuilder &stringBuilder);
+            String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -141,7 +141,7 @@ namespace Java {
              *
              * @param charArray
              */
-            explicit String(Array<char> &charArray);
+            String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -149,7 +149,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            explicit String(const StringBuffer &stringBuffer);
+            String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -181,7 +181,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            explicit String(Array<char> &charArray, int offset, int count);
+            String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -208,7 +208,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            explicit String(Array<byte> &byteArray, int offset, int length);
+            String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -284,6 +284,17 @@ namespace Java {
             ~String();
 
         public:
+            /**
+            * Set and get value of element in char type
+            * at the specified position in this String
+            *
+            * @param index
+            * @return char
+            */
+            inline char &operator[](const int index) {
+                return this->original[index];
+            }
+
             /**
              * Return size of String
              *
@@ -375,7 +386,7 @@ namespace Java {
              * @param charSequence
              * @return String
              */
-			boolean contains(const CharSequence &charSequence);
+            boolean contains(const CharSequence &charSequence);
 
             /**
              * Compares this String to the specified CharSequence.
@@ -906,13 +917,13 @@ namespace Java {
              */
             static String valueOf(string stringValue);
 
-			/**
+            /**
              * Returns the String representation of the String argument.
              *
              * @param stringValue
              * @return a String containing stringValue.
              */
-			static String valueOf(String stringValue);
+            static String valueOf(String stringValue);
 
             /**
              * Returns the String representation of the const string argument.

@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,49 +24,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#ifndef NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP
+#define NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP
 
-#include "../../../kernel/Type.hpp"
-#include "../../Lang.hpp"
-#include "MessageDigestSpi.hpp"
+#include "../../lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 
 namespace Java {
     namespace Security {
-        class MessageDigest : public MessageDigestSpi {
+        class GeneralSecurityException : public Exception {
         public:
-            static MessageDigest getInstance(String algorithm);
-
-            ~MessageDigest();
-
-            String getAlgorithm();
-
-            int getDigestLength();
-
-            int digest(byte buf[], int len);
-
-            void reset();
-
-            void update(const byte input[], int len);
-
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
-
-            int engineDigest(byte buffer[], int len) override;
-
-            int engineGetDigestLength() override;
-
-            void engineReset() override;
-
-            void engineUpdate(const byte input[], int len) override;
-
+            GeneralSecurityException();
+            GeneralSecurityException(String message);
+            GeneralSecurityException(Throwable *cause);
+            GeneralSecurityException(String message, Throwable *cause);
         };
     } // namespace Security
 } // namespace Java
 
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#endif //NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP

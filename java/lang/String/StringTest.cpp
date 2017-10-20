@@ -231,14 +231,14 @@ TEST (JavaLang, StringCompareToIgnoreCase) {
 }
 
 TEST (JavaLang, StringConcat) {
-        // Given three strings - Return concatenation result
+    // Given three strings - Return concatenation result
     String textConcat0 = "Food Tiny ";
     String textConcat1 = "Hello ";
     String textConcat2 = "World";
     String concatenationResult = textConcat0 + textConcat1 + textConcat2;
     assertEquals("Food Tiny Hello World", concatenationResult.toString());
 
-        // Given two strings - Return concatenation result
+    // Given two strings - Return concatenation result
     concatenationResult = textConcat1.concat(textConcat2);
     assertEquals("Hello World", concatenationResult.toString());
 }
@@ -307,7 +307,7 @@ TEST (JavaLang, StringCopyValueOf) {
     }
 }
 
-    // FIXME
+// FIXME
 TEST (JavaLang, StringEndsWith) {
     String textPlus = "Hello welcome to VietNam";
     String String_string = "VietNam";
@@ -460,7 +460,7 @@ TEST (JavaLang, StringLastIndexOf) {
     result = validString2.lastIndexOf(wrongString2, 20);
     assertEquals(-1, result);
 }
-    // TODO (anhnt) getChar run right but need Arrays.toString() to test
+// TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST (JavaLang, StringGetChars) {
     Array<char> charArray(30);
     String testString = "This is a String";
@@ -593,27 +593,27 @@ TEST (JavaLang, StringJoin) {
 }
 
 /** This test case is made based on pattern_test.c */
-    // TEST(JavaLang, StringMatches) {
-    // 	    // Init params for test string matches
-    // 	String emailPattern = EMAIL_PATTERN;
-    // 	String phoneNumberPattern = PHONE_PATTERN;
+// TEST(JavaLang, StringMatches) {
+// 	    // Init params for test string matches
+// 	String emailPattern = EMAIL_PATTERN;
+// 	String phoneNumberPattern = PHONE_PATTERN;
 //
-    // 	    // Test true with correct email format
-    // 	String correctEmail = "neacao@gmail.com";
-    // 	assertTrue(correctEmail.matches(emailPattern));
+// 	    // Test true with correct email format
+// 	String correctEmail = "neacao@gmail.com";
+// 	assertTrue(correctEmail.matches(emailPattern));
 //
-    // 	    // Test fail with wrong email format
-    // 	String wrongEmail = "something@notcorrect";
-    // 	assertFalse(wrongEmail.matches(emailPattern));
+// 	    // Test fail with wrong email format
+// 	String wrongEmail = "something@notcorrect";
+// 	assertFalse(wrongEmail.matches(emailPattern));
 //
-    // 	    // Test true with correct phone number format
-    // 	String correctPhoneNumber = "+15005550006";
-    // 	assertTrue(correctPhoneNumber.matches(phoneNumberPattern));
+// 	    // Test true with correct phone number format
+// 	String correctPhoneNumber = "+15005550006";
+// 	assertTrue(correctPhoneNumber.matches(phoneNumberPattern));
 //
-    // 	    // Test fail with wrong email format
-    // 	String wrongPhoneNumber = "001678080147";
-    // 	assertFalse(wrongPhoneNumber.matches(phoneNumberPattern));
-    // }
+// 	    // Test fail with wrong email format
+// 	String wrongPhoneNumber = "001678080147";
+// 	assertFalse(wrongPhoneNumber.matches(phoneNumberPattern));
+// }
 //
 TEST (JavaLang, StringReplace) {
     String textPlus = "Hello Hello Hello ";
@@ -1059,12 +1059,12 @@ TEST (JavaLang, StringFormat) {
 
         string expected;
         int length = asprintf(&expected,
-                 REQUEST_TEMPLATE.toString(),
-                 "POST", "CASSANDRA",
-                 "_test",
-                 "http1.1",
-                 "HEADER:HEADER",
-                 body.toString());
+                              REQUEST_TEMPLATE.toString(),
+                              "POST", "CASSANDRA",
+                              "_test",
+                              "http1.1",
+                              "HEADER:HEADER",
+                              body.toString());
 
         assertTrue(length > 0);
         assertEquals(expected, result.toString());
@@ -1083,4 +1083,10 @@ TEST (JavaLang, StringFormat) {
         assertEquals(expected, result.toString());
         free(expected);
     }
+}
+
+TEST (JavaLang, StringOperatorGetSet) {
+    String testString = "123";
+    testString[1] = 'a';
+    assertEquals('a', testString[1]);
 }
