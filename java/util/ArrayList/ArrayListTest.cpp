@@ -162,18 +162,20 @@ TEST(JavaUtil, ArrayListClone) {
 }
 
 TEST(JavaUtil, ArrayListForEach) {
-	ArrayList<Integer> validArrayList;
+	ArrayList<Integer> expected;
+	ArrayList<Integer> actual;
 
-	int index;
-	for (index = 0; index < 100; ++index) {
-		validArrayList.add(index);
+	int index = 1;
+	for (index; index <= 100; ++index) {
+		expected.add(index);
 	}
 
-	int expect = 0;
-	for (Integer element : validArrayList) {
-		assertEquals(expect, element.intValue());
-		expect++;
+	index = 1;
+	for (Integer element : expected) {
+		actual.add(index++);
 	}
+
+	assertArray(expected, actual);
 }
 
 TEST(JavaUtil, ArrayListGet) {

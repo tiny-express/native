@@ -24,49 +24,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#ifndef JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
+#define JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
 
-#include "../../../kernel/Type.hpp"
-#include "../../Lang.hpp"
+#include "md5.hpp"
 #include "MessageDigestSpi.hpp"
-
-using namespace Java::Lang;
 
 namespace Java {
     namespace Security {
-        class MessageDigest : public MessageDigestSpi {
+        class MD5MessageDigest : public MessageDigestSpi {
         public:
-            static MessageDigest getInstance(String algorithm);
+            MD5MessageDigest();
 
-            ~MessageDigest();
+            ~MD5MessageDigest();
 
-            String getAlgorithm();
-
-            int getDigestLength();
-
-            int digest(byte buf[], int len);
-
-            void reset();
-
-            void update(const byte input[], int len);
-
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
-
-            int engineDigest(byte buffer[], int len) override;
+            int engineDigest(byte *buffer, int len) override;
 
             int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte input[], int len) override;
+            void engineUpdate(const byte *input, int len) override;
 
+        private:
+            byte hash[16];
+            md5_state_t state;
+            bool isFinished;
         };
     } // namespace Security
 } // namespace Java
 
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+
+#endif //JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_

@@ -24,49 +24,41 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#include "MD5MessageDigest.hpp"
 
-#include "../../../kernel/Type.hpp"
-#include "../../Lang.hpp"
-#include "MessageDigestSpi.hpp"
+using namespace Java::Security;
 
-using namespace Java::Lang;
+MD5MessageDigest::MD5MessageDigest() {
+    engineReset();
+}
 
-namespace Java {
-    namespace Security {
-        class MessageDigest : public MessageDigestSpi {
-        public:
-            static MessageDigest getInstance(String algorithm);
+MD5MessageDigest::~MD5MessageDigest() {
 
-            ~MessageDigest();
+}
 
-            String getAlgorithm();
+int MD5MessageDigest::engineDigest(byte *buffer, int len) {
+    if (len < engineGetDigestLength()) {
+        return 0;
+    }
 
-            int getDigestLength();
+    if (!this->isFinished) {
+        md5_finish(&this->state, this->hash);
+    }
 
-            int digest(byte buf[], int len);
+    memcpy(buffer, this->hash, sizeof(this->hash));
+    return engineGetDigestLength();
+}
 
-            void reset();
+int MD5MessageDigest::engineGetDigestLength() {
+    return (int)sizeof(this->hash);
+}
 
-            void update(const byte input[], int len);
+void MD5MessageDigest::engineReset() {
+    memset(this->hash, 0, sizeof(this->hash));
+    md5_init(&this->state);
+    this->isFinished = false;
+}
 
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
-
-            int engineDigest(byte buffer[], int len) override;
-
-            int engineGetDigestLength() override;
-
-            void engineReset() override;
-
-            void engineUpdate(const byte input[], int len) override;
-
-        };
-    } // namespace Security
-} // namespace Java
-
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+void MD5MessageDigest::engineUpdate(const byte *input, int len) {
+    md5_append(&this->state, (const md5_byte_t*)input, len);
+}
