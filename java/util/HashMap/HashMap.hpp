@@ -106,10 +106,12 @@ namespace Java {
 
         public:
             /**
-             * Compares the specified object
+             * Compares the anotherHashMap
              * with this map for equality.
              *
-             * @param object
+             * @param   anotherHashMap
+             * @return  true if equal
+             *          false if not equal
              */
             boolean equals(const HashMap<Key, Value> &anotherHashMap) {
 
@@ -133,13 +135,13 @@ namespace Java {
              *
              * @param action
              */
-            void forEach(BiConsumer<void(Key, Value)> action) {
-                for (auto &element : this->original) {
-                    Key key = element.first;
-                    Value value = element.second;
-                    action(key, value);
-                }
-            }
+//            void forEach(BiConsumer<void(Key, Value)> action) {
+//                for (auto &element : this->original) {
+//                    Key key = element.first;
+//                    Value value = element.second;
+//                    action(key, value);
+//                }
+//            }
 
             // TODO(thoangminh): We will support this method later
             /**
@@ -151,10 +153,10 @@ namespace Java {
              * Object.
              *
              * This implementation iterates over entrySet(), calling
-             * {Map.Entry hashCode()} on each element (entry) in the
+             * Map.Entry hashCode() on each element (entry) in the
              * set, and adding up the results.
              *
-             * @return 	the hash code value for this map
+             * @return 	int the hash code value for this map
              */
             int hashCode();
 
@@ -415,8 +417,7 @@ namespace Java {
             /**
              *  Set of hash map entries
              *
-             * Returns a Set view of the mappings contained in this map.
-             * @return Set<Map.Entry<Key,Value>> - a set view of the mappings contained in this map
+             * @return a set view of the mappings contained in this map
              */
             Set<class Map<Key, Value>::Entry> entrySet() {
                 Set<class Map<Key, Value>::Entry> entrySet;
@@ -431,12 +432,12 @@ namespace Java {
 
             /**
              * Returns the value to which the specified key is mapped,
-             * or null if this map contains no mapping for the key
+             * or default if this map contains no mapping for the key
              *
              * @param 	key 			the key whose associated value is to be returned
              *
              * @return 	Value value 	the value to which the specified key is mapped,
-             * 							or null if no mapping with key
+             * 							or default if no mapping with key
              */
             Value get(const Key &key) const {
                 Value result;

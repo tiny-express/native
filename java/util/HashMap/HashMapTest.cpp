@@ -147,7 +147,9 @@ TEST (JavaUtil, HashMapContainsValue) {
 TEST (JavaUtil, HashMapEntrySet) {
     HashMap<String, String> hashMap;
 
-    for (int index = 1; index <= 100; index++) {
+    int index = 1;
+
+    for (index; index <= 100; index++) {
         hashMap.put("Key " + String::valueOf(index),
                     "Value " + String::valueOf(index));
     }

@@ -87,7 +87,7 @@ More examples can be found [here](https://github.com/foodtiny/native/tree/master
 
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
-- Make sure your commits must be passed before you create pull request
+- Make sure your commits must be passed with [check](./check)  before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
 
