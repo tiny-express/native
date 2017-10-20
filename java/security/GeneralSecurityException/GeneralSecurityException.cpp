@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,43 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_LENGTH_HPP
-#define NATIVE_COMMON_LENGTH_HPP
 
-#include "../Type.hpp"
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include "GeneralSecurityException.hpp"
 
-#define P_LEN(NAME, TYPE); \
-inline int lengthPointer##NAME(TYPE *target) {\
-    if (target == nullptr) return 0;\
-    TYPE*pointer;\
-    for (pointer = target; *pointer; ++pointer);\
-    return pointer - target;\
+using namespace Java::Security;
+
+GeneralSecurityException::GeneralSecurityException() : Exception() {
+
 }
 
-// Length of pointer pointer
-#define P_P_LEN(NAME, TYPE); \
-inline int lengthPointerPointer##NAME(TYPE **target) {\
-    if (target == nullptr) return 0;\
-    TYPE**pointer;\
-    for (pointer = target; *pointer; ++pointer);\
-    return pointer - target;\
+GeneralSecurityException::GeneralSecurityException(String message)
+        : Exception(message) {
+
 }
 
-P_LEN(Char, char);
-P_LEN(Char, const char);
-P_P_LEN(Char, char);
+GeneralSecurityException::GeneralSecurityException(Throwable *cause)
+        : Exception(cause) {
 
-/**
- * Is string empty ?
- *
- * @param input
- * @return TRUE or FALSE
- */
-inline boolean isEmptyString(const char *input) {
-	return lengthPointerChar(input) == 0;
 }
 
-#endif
+GeneralSecurityException::GeneralSecurityException(String message,
+                                                   Throwable *cause)
+        : Exception(message, cause) {
+
+}

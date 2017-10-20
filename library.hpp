@@ -40,10 +40,8 @@
 #include "javax/Net.hpp"
 #include "javax/Sql.hpp"
 
-#ifndef JAVA_DEFAULT
 // Java::Lang is imported by default
 using namespace Java::Lang;
-#endif
 
 // Application starting point
 int Application(void (*program)(Array<String>), char **argument);

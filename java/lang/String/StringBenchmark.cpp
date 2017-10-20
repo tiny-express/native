@@ -26,6 +26,7 @@
 
 #include "../../../benchmark/benchmark.hpp"
 #include "String.hpp"
+#include <string>
 
 using namespace Java::Lang;
 
@@ -47,8 +48,8 @@ void StdStringConstructor(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringConstructor)->Range(100000, 100000);
-BENCHMARK(StdStringConstructor)->Range(100000, 100000);
+BENCHMARK(JavaLangStringConstructor)->Range(RANGE, RANGE);
+BENCHMARK(StdStringConstructor)->Range(RANGE, RANGE);
 
 void JavaLangStringLength(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -70,8 +71,37 @@ void StdStringSize(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringLength)->Range(100000, 100000);
-BENCHMARK(StdStringSize)->Range(100000, 100000);
+BENCHMARK(JavaLangStringLength)->Range(RANGE, RANGE);
+BENCHMARK(StdStringSize)->Range(RANGE, RANGE);
+
+void JavaLangStringOperatorPlus(benchmark::State& state) {
+    String source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+void StdStringOperatorPlus(benchmark::State& state) {
+    std::string source = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+            "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+            " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+            " sit amet consequat magna tristique ut.";
+    while (state.KeepRunning()) {
+        source += "Lorem ipsum dolor sit amet, consectetur adipiscing "
+                "elit. Vivamus rhoncus lorem non euismod eleifend. Duis elementum"
+                " venenatis nibh vitae dignissim. Praesent sagittis magna orci,"
+                " sit amet consequat magna tristique ut.";
+    }
+}
+
+BENCHMARK(JavaLangStringOperatorPlus)->Range(RANGE, RANGE);
+BENCHMARK(StdStringOperatorPlus)->Range(RANGE, RANGE);
 
 void JavaLangStringContains(benchmark::State& state) {
     String source = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -97,5 +127,5 @@ void StdStringFind(benchmark::State& state) {
     }
 }
 
-BENCHMARK(JavaLangStringContains)->Range(100000, 100000);
-BENCHMARK(StdStringFind)->Range(100000, 100000);
+BENCHMARK(JavaLangStringContains)->Range(RANGE, RANGE);
+BENCHMARK(StdStringFind)->Range(RANGE, RANGE);

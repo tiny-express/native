@@ -83,7 +83,7 @@ inline char *urlDecode(char *target) {
 
 inline char *findParam(char *name, char *params) {
     if (strcmp(params, "") == 0) {
-        return strdup("");
+        return stringCopy("");
     }
 
     char **queryPairs = stringSplit(params, "&");
@@ -97,7 +97,7 @@ inline char *findParam(char *name, char *params) {
         char **pair = stringSplit(queryPairs[ i ], "=");
         if (lengthPointerPointerChar(pair) == 2) {
             if (strcmp(pair[ 0 ], name) == 0) {
-                char *result = strdup(pair[ 1 ]);
+                char *result = stringCopy(pair[ 1 ]);
                 freePointerPointerChar(pair);
                 freePointerPointerChar(queryPairs);
                 return result;
@@ -107,7 +107,7 @@ inline char *findParam(char *name, char *params) {
     }
 
     freePointerPointerChar(queryPairs);
-    return strdup("");
+    return stringCopy("");
 }
 
 inline char *findParamFromUrl(char *name, char *url) {
@@ -115,7 +115,7 @@ inline char *findParamFromUrl(char *name, char *url) {
 
     if (lengthPointerPointerChar(urlComponents) < 2) {
         freePointerPointerChar(urlComponents);
-        return strdup("");
+        return stringCopy("");
     }
 
     char *queryUrl = urlComponents[ 1 ];
@@ -130,7 +130,7 @@ inline char *findParamFromUrl(char *name, char *url) {
         char **pair = stringSplit(queryPairs[ i ], "=");
         if (lengthPointerPointerChar(pair) == 2) {
             if (strcmp(pair[ 0 ], name) == 0) {
-                char *result = strdup(pair[ 1 ]);
+                char *result = stringCopy(pair[ 1 ]);
                 freePointerPointerChar(urlComponents);
                 freePointerPointerChar(queryPairs);
                 freePointerPointerChar(pair);
@@ -144,7 +144,7 @@ inline char *findParamFromUrl(char *name, char *url) {
     freePointerPointerChar(urlComponents);
     freePointerPointerChar(queryPairs);
 
-    return strdup("");
+    return stringCopy("");
 }
 
 #endif

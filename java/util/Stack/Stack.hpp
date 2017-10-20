@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_STACK_LIST_HPP_
-#define JAVA_STACK_LIST_HPP_
+#ifndef JAVA_STACK_LIST_HPP
+#define JAVA_STACK_LIST_HPP
 
 #include "../Vector/Vector.hpp"
 #include "../../io/IOException/IOException.hpp"

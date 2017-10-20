@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_EXCEPTION_HPP_
-#define JAVA_LANG_EXCEPTION_HPP_
+#ifndef JAVA_LANG_EXCEPTION_HPP
+#define JAVA_LANG_EXCEPTION_HPP
 
 #include "../Object/Object.hpp"
 #include "../String/String.hpp"
@@ -43,4 +43,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_EXCEPTION_HPP_
+#endif  // JAVA_LANG_EXCEPTION_HPP

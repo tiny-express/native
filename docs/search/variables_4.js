@@ -6,5 +6,5 @@ var searchData=
   ['end_5fpunctuation',['END_PUNCTUATION',['../Character_8cpp.html#a2771699a1a6ae215aa0ca6cc76f5c326',1,'Character.cpp']]],
   ['error',['ERROR',['../Character_8cpp.html#a59902cbbaff65b4bb85a63546ab4e52f',1,'Character.cpp']]],
   ['exp_5fbias',['EXP_BIAS',['../classJava_1_1Lang_1_1Double.html#adbbf9fccb73a5c7ec003edc0d2ab5e36',1,'Java::Lang::Double::EXP_BIAS()'],['../classJava_1_1Lang_1_1Float.html#a4e13a852228401a6cbb45d463f9860eb',1,'Java::Lang::Float::EXP_BIAS()']]],
-  ['exp_5fbit_5fmask',['EXP_BIT_MASK',['../classJava_1_1Lang_1_1Double.html#aa926a1b32642aa322c0065b5b13f8368',1,'Java::Lang::Double::EXP_BIT_MASK()'],['../classJava_1_1Lang_1_1Float.html#a6f70d8514f14e5d622a91e7614d90556',1,'Java::Lang::Float::EXP_BIT_MASK()'],['../Double_8hpp.html#ac793ed8c7f37f08e14a46b47a46a8f93',1,'EXP_BIT_MASK():&#160;Double.hpp']]]
+  ['exp_5fbit_5fmask',['EXP_BIT_MASK',['../classJava_1_1Lang_1_1Double.html#aa926a1b32642aa322c0065b5b13f8368',1,'Java::Lang::Double::EXP_BIT_MASK()'],['../classJava_1_1Lang_1_1Float.html#a6f70d8514f14e5d622a91e7614d90556',1,'Java::Lang::Float::EXP_BIT_MASK()']]]
 ];

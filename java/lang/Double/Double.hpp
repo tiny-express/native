@@ -24,62 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP_
-#define JAVA_LANG_DOUBLE_DOUBLE_HPP_
+#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP
+#define JAVA_LANG_DOUBLE_DOUBLE_HPP
 
 #include "../Number/Number.hpp"
 #include <limits>
 #include "../String/String.hpp"
 #include "../Math/Math.hpp"
-
-/**
- * Bit mask to isolate the exponent field of a
- * double.
- */
-static long EXP_BIT_MASK = 0x7FF0000000000000L;
-
-/**
- * Bit mask to isolate the significand field of a
- * double
- */
-static long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
-
-/**
- * A constant holding the positive infinity of type
- */
-static double POSITIVE_INFINITY_DOUBLE = 1.0 / 0.0;  // inf
-
-/**
- * A constant holding the negative infinity of type
- */
-static double NEGATIVE_INFINITY_DOUBLE = -1.0 / 0.0;  // -inf
-
-/**
- * A constant holding a Not-a-Number (NaN) value of type
- */
-static double NaN_NUMBER_DOUBLE = 0.0 / 0.0;  // -nan
-
-/**
- * A constant holding the largest positive finite value of type
- */
-static double MAX_VALUE_DOUBLE = std::numeric_limits<double>::max();  // 1.797693134862316e+308
-
-/**
- * A constant holding the smallest positive normal value of type
- */
-static double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min();  // 4.940656458412465e-324
-
-/**
- * A constant holding the smallest positive nonzero value of type
- */
-static double MIN_VALUE_DOUBLE = std::numeric_limits<double>::min();  // 2.225073858507201e-308
-
-/**
- * Minimum exponent a normalized <code>double</code> number may
- * have.  It is equal to the value returned by
- * <code>Math.ilogb(Double.MIN_NORMAL)</code>.
- */
-static int MIN_EXPONENT_DOUBLE = -1022;
 
 namespace Java {
     namespace Lang {
@@ -140,7 +91,7 @@ namespace Java {
             /**
              * A constant holding a Not-a-Number (NaN) value of type
              */
-            static constexpr double NOT_A_NUMBER_DOUBLE = NAN;  // -nan
+            static constexpr double NaN = NAN;  // -nan
 
             /**
              * A constant holding the largest positive finite value of type
@@ -149,7 +100,7 @@ namespace Java {
             /**
              * A constant holding the smallest positive normal value of type
              */
-            static constexpr double MIN_NORMAL_DOUBLE = std::numeric_limits<double>::denorm_min();  // 2.225073858507201e-308
+            static constexpr double MIN_NORMAL = std::numeric_limits<double>::denorm_min();  // 2.225073858507201e-308
 
             /**
              * A constant holding the smallest positive nonzero value of type
@@ -158,8 +109,11 @@ namespace Java {
 
         public:
             Double();
+
             Double(double original);
+
             Double(const Double &target);
+
             ~Double();
 
         public:
@@ -313,13 +267,6 @@ namespace Java {
             char charValue() const;
 
             /**
-             * Double to String
-             *
-             * @return CString
-             */
-            string stringValue() const;
-
-            /**
              * Short value of Double
              *
              * @return short
@@ -385,7 +332,7 @@ namespace Java {
              * @return  the double value represented by this object
              *          converted to type {byte}
              */
-            byte byteValue() const ;
+            byte byteValue() const;
 
             /**
              * Compares the two specified double values. The sign
@@ -512,7 +459,7 @@ namespace Java {
              * @return  {true} if the value represented by this object is
              *          NaN; {false} otherwise.
              */
-            boolean isNaN() ;
+            boolean isNaN();
 
             /**
              * Returns the double value corresponding to a given
@@ -562,6 +509,7 @@ namespace Java {
             * @return a {Double} instance representing {d}.
             */
             static Double valueOf(double doubleInput);
+
         private:
             double original;
             string originalString;
@@ -599,4 +547,4 @@ namespace Java {
         };
     }  // namespace Lang
 }  // namespace Java
-#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP_
+#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP

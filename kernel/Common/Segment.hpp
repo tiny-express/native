@@ -27,17 +27,17 @@
 #ifndef NATIVE_COMMON_SEGMENT_HPP
 #define NATIVE_COMMON_SEGMENT_HPP
 
-#include "Length.hpp"
+#include "../Builtin.hpp"
 
 inline char *segmentPointerChar(char *targetParam, int from, int to) {
 	if (targetParam == nullptr) {
-		return strdup("");
+		return stringCopy("");
 	}
 	int lengthTarget = lengthPointerChar(targetParam);
 	if (from > to || from < 0 || from > lengthTarget || to < 0) {
-		return strdup("");
+		return stringCopy("");
 	}
-	char *target = strdup(targetParam);
+	char *target = stringCopy(targetParam);
 	int length = to - from + 1;
 	if (to >= lengthTarget) {
 		length = lengthTarget - from + 1;

@@ -57,5 +57,5 @@
 //    String urlString = "http://test.com:3000/file/test?param=1";
 //    URL url(urlString);
 //    URLConnectionTest urlConnection = URLConnectionTest(url);
-//    ASSERT_EQUAL(url, urlConnection.getURL());
+//    assertEquals(url, urlConnection.getURL());
 //}

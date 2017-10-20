@@ -44,7 +44,7 @@ Bytes::Bytes(String inputString) {
 
 Bytes::Bytes() {
     this->original = 0;
-    this->originalString = strdup("0");
+    this->originalString = stringCopy("0");
 }
 
 Bytes::~Bytes() {

@@ -24,727 +24,634 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_ARRAYS_HPP_
-#define JAVA_UTIL_ARRAYS_HPP_
+#ifndef JAVA_UTIL_ARRAYS_ARRAYS_HPP
+#define JAVA_UTIL_ARRAYS_ARRAYS_HPP
 
 #include <stack>
 #include "../../Lang.hpp"
 #include "../List/List.hpp"
 #include "../ArrayList/ArrayList.hpp"
 
+#define BINARY_SEARCH_BY_INDEX(TYPE); \
+static int binarySearchByIndex(TYPE array[],\
+                                int fromIndex,\
+                                int toIndex,\
+                                TYPE key) {\
+    return BinarySearch(array, fromIndex, toIndex, key);\
+}
+
+#define BINARY_SEARCH_BY_KEY(TYPE); \
+static int binarySearchByKey(TYPE array[],\
+                            TYPE key,\
+                            int arraySize) {\
+    return BinarySearch(array, 0, arraySize - 1, key);\
+}
+
+#define COPY_OF(TYPE); \
+static Array<TYPE> copyOf(Array<TYPE> original,\
+                            int newLength) {\
+    return copyOfOrigin(original, newLength, NULL);\
+}
+
+#define COPY_OF_RANGE(TYPE); \
+static Array<TYPE> copyOfRange(Array<TYPE> original,\
+                                int from,\
+                                int to) {\
+    return copyOfRangeOrigin(original, from, to);\
+}
+
+#define EQUALS(TYPE); \
+static boolean equals(Array<TYPE> array,\
+                        Array<TYPE> a2) {\
+    return equalsOrigin(array, a2);\
+}
+
+#define FILL(TYPE); \
+static void fill(Array<TYPE> *array,\
+                    TYPE value) {\
+    return fileOrigin(array, 0, (*array).length - 1, value);\
+}
+
+#define FILL_BY_INDEX(TYPE); \
+static void fillByIndex(Array<TYPE> *array,\
+                        int fromIndex,\
+                        int toIndex,\
+                        TYPE value) {\
+    return fileOrigin(array, fromIndex, toIndex, value);\
+}
+
+#define HASH_CODE(TYPE); \
+static int hashCode(Array<TYPE> array) {\
+    if (array.length == 0) {\
+        return 0;\
+    }\
+\
+    int result = 1;\
+    for (TYPE element : array) {\
+        result = 31 * result + element;\
+    }\
+\
+    return result;\
+}
+
+#define SORT(TYPE); \
+static void sort(TYPE array[],\
+                int arraySize) {\
+    return sortOrigin(array, 0, arraySize - 1);\
+}
+
+#define SORT_BY_INDEX(TYPE); \
+static void sortByIndex(TYPE array[],\
+                        int fromIndex,\
+                        int toIndex) {\
+    return sortOrigin(array, fromIndex, toIndex);\
+}
+
+#define SORT_BY_ARRAY_SIZE(TYPE); \
+static void sortByArraySize(TYPE array[],\
+                            int arraySize) {\
+    return sortOrigin(array, 0, arraySize - 1);\
+}
+
+#define SORT_BY_INDEX_ARRAY_SIZE(TYPE); \
+static void sortByIndexArraySize(TYPE array[],\
+                                int fromIndex,\
+                                int toIndex,\
+                                TYPE arraySize) {\
+    return sortOrigin(array, fromIndex, toIndex);\
+}
+
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Util {
-				class Arrays : public Object {
-				private:
-						Arrays();
-						~Arrays();
-				public:
-						template <typename U, typename... T>
-						static List<U> asList(T... a) {
-							//FIXME: Please implement ArrayList<T>(a);
-						}
-						
-						static int binarySearch(byte a[], byte key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(byte a[], int fromIndex, int toIndex, byte key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(char a[], char key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(char a[], int fromIndex, int toIndex, char key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(double a[], double key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(double a[], int fromIndex, int toIndex, double key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(float a[], float key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(float a[], int fromIndex, int toIndex, float key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(int a[], int key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(int a[], int fromIndex, int toIndex, int key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(long a[], long key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(long a[], int fromIndex, int toIndex, long key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch(short a[], short key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						static int binarySearch(short a[], int fromIndex, int toIndex, short key) {
-							return binarySearch0(a, fromIndex, toIndex, key);
-						}
-						
-						static int binarySearch1(Object a[], Object key, int arraySize) {
-							return -1;
-						}
-						static int binarySearch(Object a[], int fromIndex, int toIndex, Object key) {
-							return -1;
-						}
-						
-						template <typename T>
-						static int binarySearch(T a[], T key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						template <typename T>
-						static int binarySearch(T a[], int fromIndex, int toIndex, T key) {
-							return binarySearch0(a, 0, toIndex, key);
-						}
-						
-						template <typename T>
-						static int binarySearch(Array<T> a, T key, int arraySize) {
-							return binarySearch0(a, 0, arraySize - 1, key);
-						}
-						
-						template <typename T>
-						static int binarySearch(Array<T> a, int fromIndex, int toIndex, T key) {
-							return binarySearch0(a, 0, toIndex, key);
-						}
-						
-						static Array<boolean> copyOf(Array<boolean> original, int newLength) {
-							return copyOf0(original, newLength, false);
-						}
-						
-						static Array<char> copyOf(Array<char> original, int newLength) {
-							return copyOf0(original, newLength, NULL);
-						}
-						
-						static Array<short> copyOf(Array<short> original, int newLength) {
-							return copyOf0(original, newLength, 0);
-						}
-						
-						static Array<int> copyOf(Array<int> original, int newLength) {
-							return copyOf0(original, newLength, 0);
-						}
-						
-						static Array<long> copyOf(Array<long> original, int newLength) {
-							return copyOf0(original, newLength, 0);
-						}
-						
-						static Array<float> copyOf(Array<float> original, int newLength) {
-							return copyOf0(original, newLength, 0.0);
-						}
-						
-						static Array<double> copyOf(Array<double> original, int newLength) {
-							return copyOf0(original, newLength, 0.0);
-						}
-						
-						template <typename T>
-						static Array<T> copyOf(Array<T> original, int newLength) {
-							return copyOf0(original, newLength, NULL);
-						}
-						
-						template <typename T, typename U>
-						static Array<T> copyOf(Array<U> u, int newLength, T newType) {
-							Array<T> result;
-							for (U element: u) {
-								T newElement = (T) u; ///T must have a constructor of U
-								result.push(newElement);
-							}
-							
-							return result;
-						}
-						
-						static Array<boolean> copyOfRange(Array<boolean> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<byte> copyOfRange(Array<byte> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<char> copyOfRange(Array<char> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<short> copyOfRange(Array<short> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<int> copyOfRange(Array<int> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<long> copyOfRange(Array<long> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<float> copyOfRange(Array<float> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						static Array<double> copyOfRange(Array<double> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						template <typename T>
-						static Array<T> copyOfRange(Array<T> original, int from, int to) {
-							return copyOfRange0(original, from, to);
-						}
-						
-						template <typename T, typename U>
-						static Array<T> copyOfRange(Array<U> original, int from, int to, T newType) {
-							Array<T> result;
-							
-							if (from < 0 || to <= 0 || to <= from || to > original.length) {
-								return result;
-							}
-							
-							for (int index = from; index < to; ++index) {
-								T element = (T) original[ index ]; ///T must have a constructor of U
-								result.push(element);
-							}
-							
-							return result;
-						}
-						
-						static boolean deepEquals(Object a1[], Object a2[]) {
-							return false; /// Don't support this method
-						}
-						
-						static int deepHashCode(Object a[]) {
-							return -1; /// Don't support this method
-						}
-						
-						static String deepToString(Object a[]) {
-							return ""; /// Don't support this method
-						}
-						
-						static boolean equals(Array<boolean> a, Array<boolean> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<byte> a, Array<byte> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<char> a, Array<char> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<double> a, Array<double> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<float> a, Array<float> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<int> a, Array<int> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<long> a, Array<long> a2) {
-							return equals0(a, a2);
-						}
-						
-						static boolean equals(Array<short> a, Array<short> a2) {
-							return equals0(a, a2);
-						}
-						
-						/**
-						 *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
-						 *  Use fill(Array<int>, int) instead
-						 */
-						//static void fill(Array<boolean> *a, boolean val) {}
-						
-						/**
-						 *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
-						 *  Use fill(Array<int>, int) instead
-						 */
-						//static void fill(Array<boolean> *a, int fromIndex, int toIndex, boolean val) {}
-						
-						static void fill(Array<byte> *a, byte val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<byte> *a, int fromIndex, int toIndex, byte val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<char> *a, char val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<char> *a, int fromIndex, int toIndex, char val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<double> *a, double val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<double> *a, int fromIndex, int toIndex, double val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<float> *a, float val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<float> *a, int fromIndex, int toIndex, float val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<int> *a, int val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<int> *a, int fromIndex, int toIndex, int val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<long> *a, long val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<long> *a, int fromIndex, int toIndex, long val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static void fill(Array<short> *a, short val) {
-							return fill0(a, 0, ( *a ).length - 1, val);
-						}
-						
-						static void fill(Array<short> *a, int fromIndex, int toIndex, short val) {
-							return fill0(a, fromIndex, toIndex, val);
-						}
-						
-						static int hashCode(Array<boolean> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (boolean element : a) {
-								result = 31 * result + ( element ? 1231 : 1237 );
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<byte> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (byte element : a) {
-								result = 31 * result + element;
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<char> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (char element : a) {
-								result = 31 * result + element;
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<double> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (double element : a) {
-								long bits = long(element);
-								result = 31 * result + (int) ( bits ^ ( bits >> 32 ));
-							}
-							return result;
-						}
-						
-						static int hashCode(Array<float> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (float element : a) {
-								result = 31 * result + int(element);
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<int> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (int element : a) {
-								result = 31 * result + element;
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<long> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (long element : a) {
-								int elementHash = (int) ( element ^ ( element >> 32 ));
-								result = 31 * result + elementHash;
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<Object> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (Object element : a) {
-								result = 31 * result + element.hashCode();
-							}
-							
-							return result;
-						}
-						
-						static int hashCode(Array<short> a) {
-							if (a.length == 0) {
-								return 0;
-							}
-							
-							int result = 1;
-							for (short element : a) {
-								result = 31 * result + element;
-							}
-							
-							return result;
-						}
-						
-						static void sort(byte a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(byte a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(char a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(char a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(double a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(double a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(float a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(float a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(int a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(int a[], int fromIndex, int toIndex, int arraySize) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(long a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(long a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						static void sort(short a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						static void sort(short a[], int fromIndex, int toIndex, int arraySize) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						template <typename T>
-						static void sort(T a[], int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						template <typename T>
-						static void sort(T a[], int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-						
-						template <typename T>
-						static void sort(Array<T> *a, int arraySize) {
-							return sort0(a, 0, arraySize - 1);
-						}
-						
-						template <typename T>
-						static void sort(Array<T> *a, int fromIndex, int toIndex) {
-							return sort0(a, fromIndex, toIndex);
-						}
-				
-				private:
-						template <typename T>
-						static int binarySearch0(T a[], int fromIndex, int toIndex, T key) {
-							if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex) {
-								return -1;
-							}
-							
-							int left = fromIndex;
-							int right = toIndex;
-							
-							while (left < right) {
-								int mid = ( left + right ) / 2;
-								
-								if (a[ mid ] >= key) {
-									right = mid;
-								} else {
-									left = mid + 1;
-								}
-								
-								if (left == right - 1) { /// Get very first left postition in array
-									if (a[ left ] == key) {
-										return left;
-									}
-									if (a[ right ] == key) {
-										return right;
-									}
-									
-									break;
-								}
-							}
-							
-							return -1;
-						}
-						
-						/// Support Array<E>
-						template <typename T>
-						static int binarySearch0(Array<T> a, int fromIndex, int toIndex, T key) {
-							if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex) {
-								return -1;
-							}
-							
-							int left = fromIndex;
-							int right = toIndex;
-							
-							while (left < right) {
-								int mid = ( left + right ) / 2;
-								
-								if (a[ mid ] >= key) {
-									right = mid;
-								} else {
-									left = mid + 1;
-								}
-								
-								if (left == right - 1) { /// Get very first left postition in array
-									if (a[ left ] == key) {
-										return left;
-									}
-									if (a[ right ] == key) {
-										return right;
-									}
-									
-									break;
-								}
-							}
-							
-							return -1;
-						}
-						
-						/// Quick sort
-						template <typename T>
-						static void sort0(T a[], int fromIndex, int toIndex) {
-							std::stack<int> positionKeeper;
-							
-							positionKeeper.push(fromIndex);
-							positionKeeper.push(toIndex);
-							
-							while (!positionKeeper.empty()) {
-								int right = positionKeeper.top();
-								positionKeeper.pop();
-								int left = positionKeeper.top();
-								positionKeeper.pop();
-								
-								while (left < right) {
-									int i = left;
-									int j = right;
-									T key = a[ ( i + j ) / 2 ];
-									
-									while (i <= j) {
-										while (a[ i ] < key && i <= j)
-											i++;
-										while (a[ j ] > key && j >= i)
-											j--;
-										
-										if (i <= j) {
-											T temp = a[ i ];
-											a[ i ] = a[ j ];
-											a[ j ] = temp;
-											
-											i++;
-											j--;
-										}
-									}
-									if (i < right) {
-										positionKeeper.push(i);
-										positionKeeper.push(right);
-									}
-									right = j;
-								}
-							}
-						}
-						
-						/// Support Array<T>
-						template <typename T>
-						static void sort0(Array<T> *a, int fromIndex, int toIndex) {
-							std::stack<int> positionKeeper;
-							
-							positionKeeper.push(fromIndex);
-							positionKeeper.push(toIndex);
-							
-							while (!positionKeeper.empty()) {
-								int right = positionKeeper.top();
-								positionKeeper.pop();
-								int left = positionKeeper.top();
-								positionKeeper.pop();
-								
-								while (left < right) {
-									int i = left;
-									int j = right;
-									T key = a->get(( i + j ) / 2);
-									
-									while (i <= j) {
-										while (a->get(i) < key && i <= j)
-											i++;
-										while (a->get(j) > key && j >= i)
-											j--;
-										
-										if (i <= j) {
-											T temp = a->get(i);
-											a->operator[](i) = a->get(j);
-											a->operator[](j) = temp;
-											
-											i++;
-											j--;
-										}
-									}
-									if (i < right) {
-										positionKeeper.push(i);
-										positionKeeper.push(right);
-									}
-									right = j;
-								}
-							}
-						}
-						
-						template <typename T, typename U>
-						static Array<T> copyOf0(Array<T> original, int newLength, U padding) {
-							Array<T> result;
-							
-							int copyLength = Math::min(original.length, newLength);
-							
-							for (int index = 0; index < copyLength; ++index) {
-								result.push(original.get(index));
-							}
-							
-							for (int index = copyLength; index < newLength; ++index) {
-								result.push(padding);
-							}
-							
-							return result;
-						}
-						
-						template <typename T>
-						static Array<T> copyOfRange0(Array<T> original, int fromIndex, int toIndex) {
-							Array<T> result;
-							
-							if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex || toIndex > original.length - 1) {
-								return result;
-							}
-							
-							for (int index = fromIndex; index < toIndex; ++index) {
-								result.push(original.get(index));
-							}
-							
-							return result;
-						}
-						
-						template <typename T>
-						static boolean equals0(Array<T> original, Array<T> target) {
-							if (original.length != target.length) {
-								return false;
-							}
-							
-							for (int index = 0; index < original.length; ++index) {
-								if (original.get(index) != target.get(index)) {
-									return false;
-								}
-							}
-							
-							return true;
-						}
-						
-						template <typename T>
-						static void fill0(Array<T> *a, int fromIndex, int toIndex, T val) {
-							if (fromIndex < 0 || toIndex < 0 || toIndex < fromIndex || toIndex > ( *a ).length - 1) {
-								return;
-							}
-							for (int index = fromIndex; index <= toIndex; ++index) {
-								( *a )[ index ] = val;
-							}
-							return;
-						}
-				};
-		}
+    namespace Util {
+        class Arrays : public Object {
+        private:
+            Arrays();
+
+            ~Arrays();
+
+        public:
+            template<typename AnotherType, typename... Type>
+            static List<AnotherType> asList(Type... array) {
+                //FIXME: Please implement ArrayList<Type>(array);
+            }
+
+            BINARY_SEARCH_BY_INDEX(char);
+            BINARY_SEARCH_BY_INDEX(byte);
+            BINARY_SEARCH_BY_INDEX(short);
+            BINARY_SEARCH_BY_INDEX(int);
+            BINARY_SEARCH_BY_INDEX(long);
+            BINARY_SEARCH_BY_INDEX(float);
+            BINARY_SEARCH_BY_INDEX(double);
+
+            static int binarySearchByIndex(Object *array,
+                                           int fromIndex,
+                                           int toIndex,
+                                           Object key) {
+                return -1;
+            }
+
+            BINARY_SEARCH_BY_KEY(char);
+            BINARY_SEARCH_BY_KEY(byte);
+            BINARY_SEARCH_BY_KEY(short);
+            BINARY_SEARCH_BY_KEY(int);
+            BINARY_SEARCH_BY_KEY(long);
+            BINARY_SEARCH_BY_KEY(float);
+            BINARY_SEARCH_BY_KEY(double);
+
+            static int binarySearchByKey(Object *array,
+                                         Object key,
+                                         int arraySize) {
+                return -1;
+            }
+
+            template<typename Type>
+            static int binarySearchByKey(Type *array,
+                                         Type key,
+                                         int arraySize) {
+                return BinarySearch(array, 0, arraySize - 1, key);
+            }
+
+            template<typename Type>
+            static int binarySearch(Type array[],
+                                    int fromIndex,
+                                    int toIndex,
+                                    Type key) {
+                return BinarySearch(array, 0, toIndex, key);
+            }
+
+            template<typename Type>
+            static int binarySearch(Array<Type> array,
+                                    Type key,
+                                    int arraySize) {
+                return BinarySearch(array, 0, arraySize - 1, key);
+            }
+
+            template<typename Type>
+            static int binarySearch(Array<Type> array,
+                                    int fromIndex,
+                                    int toIndex,
+                                    Type key) {
+                return BinarySearch(array, 0, toIndex, key);
+            }
+
+            COPY_OF(boolean);
+            COPY_OF(char);
+            COPY_OF(short);
+            COPY_OF(int);
+            COPY_OF(long);
+            COPY_OF(float);
+            COPY_OF(double);
+
+            template<typename Type>
+            static Array<Type> copyOf(Array<Type> original,
+                                      int newLength) {
+                return copyOfOrigin(original, newLength, NULL);
+            }
+
+            template<typename Type, typename AnotherType>
+            static Array<Type> copyOf(Array<AnotherType> anotherType, 
+                                      int newLength, 
+                                      Type newType) {
+                Array<Type> result;
+                for (AnotherType element: anotherType) {
+                    Type newElement = (Type) anotherType;  // Type must have array constructor of AnotherType
+                    result.push(newElement);
+                }
+
+                return result;
+            }
+
+            COPY_OF_RANGE(boolean);
+            COPY_OF_RANGE(byte);
+            COPY_OF_RANGE(char);
+            COPY_OF_RANGE(short);
+            COPY_OF_RANGE(int);
+            COPY_OF_RANGE(long);
+            COPY_OF_RANGE(float);
+            COPY_OF_RANGE(double);
+
+            template<typename Type>
+            static Array<Type> copyOfRange(Array<Type> original, 
+                                           int from, 
+                                           int to) {
+                return copyOfRangeOrigin(original, from, to);
+            }
+
+            template<typename Type, typename AnotherType>
+            static Array<Type> copyOfRange(Array<AnotherType> original, 
+                                           int from, int to, 
+                                           Type newType) {
+                Array<Type> result;
+
+                if (from < 0 
+                    || to <= 0 
+                    || to <= from 
+                    || to > original.length) {
+                    return result;
+                }
+
+                for (int index = from; index < to; ++index) {
+                    Type element = (Type) original[index];  // Type must have array constructor of AnotherType
+                    result.push(element);
+                }
+
+                return result;
+            }
+
+            static boolean deepEquals(Object fisrtArray[],
+                                      Object secondArray[]) {
+                return false; /// Don't support this method
+            }
+
+            static int deepHashCode(Object array[]) {
+                return -1; /// Don't support this method
+            }
+
+            static String deepToString(Object array[]) {
+                return ""; /// Don't support this method
+            }
+
+            EQUALS(boolean);
+            EQUALS(byte);
+            EQUALS(char);
+            EQUALS(double);
+            EQUALS(float);
+            EQUALS(int);
+            EQUALS(long);
+            EQUALS(short);
+
+            /**
+             *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
+             *  Use fill(Array<int>, int) instead
+             */
+            //static void fill(Array<boolean> *array, boolean value) {}
+
+            /**
+             *  Don't support this in C++ runtime, because <bool> will be optimised to bit and can't modify in vector of Array
+             *  Use fill(Array<int>, int) instead
+             */
+            //static void fill(Array<boolean> *array, int fromIndex, int toIndex, boolean value) {}
+
+            FILL(byte);
+            FILL(char);
+            FILL(double);
+            FILL(float);
+            FILL(int);
+            FILL(long);
+            FILL(short);
+
+            FILL_BY_INDEX(byte);
+            FILL_BY_INDEX(char);
+            FILL_BY_INDEX(double);
+            FILL_BY_INDEX(float);
+            FILL_BY_INDEX(int);
+            FILL_BY_INDEX(long);
+            FILL_BY_INDEX(short);
+
+            HASH_CODE(byte);
+            HASH_CODE(char);
+            HASH_CODE(float);
+            HASH_CODE(int);
+            HASH_CODE(short);
+
+            static int hashCode(Array<boolean> array) {
+                if (array.length == 0) {
+                    return 0;
+                }
+
+                int result = 1;
+                for (boolean element : array) {
+                    result = 31 * result + (element ? 1231 : 1237);
+                }
+
+                return result;
+            }
+
+            static int hashCode(Array<double> array) {
+                if (array.length == 0) {
+                    return 0;
+                }
+
+                int result = 1;
+                for (double element : array) {
+                    long bits = long(element);
+                    result = 31 * result + (int) (bits ^ (bits >> 32));
+                }
+                return result;
+            }
+
+            static int hashCode(Array<long> array) {
+                if (array.length == 0) {
+                    return 0;
+                }
+
+                int result = 1;
+                for (long element : array) {
+                    int elementHash = (int) (element ^ (element >> 32));
+                    result = 31 * result + elementHash;
+                }
+
+                return result;
+            }
+
+            static int hashCode(Array<Object> array) {
+                if (array.length == 0) {
+                    return 0;
+                }
+
+                int result = 1;
+                for (Object element : array) {
+                    result = 31 * result + element.hashCode();
+                }
+
+                return result;
+            }
+
+            SORT(byte);
+            SORT(char);
+            SORT(double);
+            SORT(float);
+            SORT(int);
+
+            SORT_BY_INDEX(byte);
+            SORT_BY_INDEX(char);
+            SORT_BY_INDEX(double);
+            SORT_BY_INDEX(float);
+            SORT_BY_INDEX(long);
+
+            SORT_BY_ARRAY_SIZE(long);
+            SORT_BY_ARRAY_SIZE(short);
+
+            SORT_BY_INDEX_ARRAY_SIZE(int);
+            SORT_BY_INDEX_ARRAY_SIZE(short);
+
+            template<typename Type>
+            static void sort(Type array[], int arraySize) {
+                return sortOrigin(array, 0, arraySize - 1);
+            }
+
+            template<typename Type>
+            static void sort(Type array[], 
+                             int fromIndex, 
+                             int toIndex) {
+                return sortOrigin(array, fromIndex, toIndex);
+            }
+
+            template<typename Type>
+            static void sort(Array<Type> *array, int arraySize) {
+                return sortOrigin(array, 0, arraySize - 1);
+            }
+
+            template<typename Type>
+            static void sort(Array<Type> *array, 
+                             int fromIndex, 
+                             int toIndex) {
+                return sortOrigin(array, fromIndex, toIndex);
+            }
+
+        private:
+            template<typename Type>
+            static int BinarySearch(Type array[],
+                                    int fromIndex,
+                                    int toIndex,
+                                    Type key) {
+                if (fromIndex < 0
+                    || toIndex < 0
+                    || toIndex < fromIndex) {
+                    return -1;
+                }
+
+                int left = fromIndex;
+                int right = toIndex;
+
+                while (left < right) {
+                    int mid = (left + right) / 2;
+
+                    if (array[mid] >= key) {
+                        right = mid;
+                    } else {
+                        left = mid + 1;
+                    }
+
+                    if (left == right - 1) { /// Get very first left postition in array
+                        if (array[left] == key) {
+                            return left;
+                        }
+                        if (array[right] == key) {
+                            return right;
+                        }
+
+                        break;
+                    }
+                }
+
+                return -1;
+            }
+
+            // Support Array<E>
+            template<typename Type>
+            static int BinarySearch(Array<Type> array,
+                                    int fromIndex,
+                                    int toIndex,
+                                    Type key) {
+                if (fromIndex < 0
+                    || toIndex < 0
+                    || toIndex < fromIndex) {
+                    return -1;
+                }
+
+                int left = fromIndex;
+                int right = toIndex;
+
+                while (left < right) {
+                    int mid = (left + right) / 2;
+
+                    if (array[mid] >= key) {
+                        right = mid;
+                    } else {
+                        left = mid + 1;
+                    }
+
+                    if (left == right - 1) { /// Get very first left postition in array
+                        if (array[left] == key) {
+                            return left;
+                        }
+                        if (array[right] == key) {
+                            return right;
+                        }
+
+                        break;
+                    }
+                }
+
+                return -1;
+            }
+
+            /// Quick sort
+            template<typename Type>
+            static void sortOrigin(Type array[],
+                                   int fromIndex,
+                                   int toIndex) {
+                std::stack<int> positionKeeper;
+
+                positionKeeper.push(fromIndex);
+                positionKeeper.push(toIndex);
+
+                while (!positionKeeper.empty()) {
+                    int right = positionKeeper.top();
+                    positionKeeper.pop();
+                    int left = positionKeeper.top();
+                    positionKeeper.pop();
+
+                    while (left < right) {
+                        int i = left;
+                        int j = right;
+                        Type key = array[(i + j) / 2];
+
+                        while (i <= j) {
+                            while (array[i] < key && i <= j)
+                                i++;
+                            while (array[j] > key && j >= i)
+                                j--;
+
+                            if (i <= j) {
+                                Type temp = array[i];
+                                array[i] = array[j];
+                                array[j] = temp;
+
+                                i++;
+                                j--;
+                            }
+                        }
+                        if (i < right) {
+                            positionKeeper.push(i);
+                            positionKeeper.push(right);
+                        }
+                        right = j;
+                    }
+                }
+            }
+
+            /// Support Array<Type>
+            template<typename Type>
+            static void sortOrigin(Array<Type> *array,
+                                   int fromIndex,
+                                   int toIndex) {
+                std::stack<int> positionKeeper;
+
+                positionKeeper.push(fromIndex);
+                positionKeeper.push(toIndex);
+
+                while (!positionKeeper.empty()) {
+                    int right = positionKeeper.top();
+                    positionKeeper.pop();
+                    int left = positionKeeper.top();
+                    positionKeeper.pop();
+
+                    while (left < right) {
+                        int i = left;
+                        int j = right;
+                        Type key = array->get((i + j) / 2);
+
+                        while (i <= j) {
+                            while (array->get(i) < key && i <= j)
+                                i++;
+                            while (array->get(j) > key && j >= i)
+                                j--;
+
+                            if (i <= j) {
+                                Type temp = array->get(i);
+                                array->operator[](i) = array->get(j);
+                                array->operator[](j) = temp;
+
+                                i++;
+                                j--;
+                            }
+                        }
+                        if (i < right) {
+                            positionKeeper.push(i);
+                            positionKeeper.push(right);
+                        }
+                        right = j;
+                    }
+                }
+            }
+
+            template<typename Type, typename AnotherType>
+            static Array<Type> copyOfOrigin(Array<Type> original,
+                                            int newLength,
+                                            AnotherType padding) {
+                Array<Type> result;
+
+                int copyLength = Math::min(original.length, newLength);
+
+                for (int index = 0; index < copyLength; ++index) {
+                    result.push(original.get(index));
+                }
+
+                for (int index = copyLength; index < newLength; ++index) {
+                    result.push(padding);
+                }
+
+                return result;
+            }
+
+            template<typename Type>
+            static Array<Type> copyOfRangeOrigin(Array<Type> original,
+                                                 int fromIndex,
+                                                 int toIndex) {
+                Array<Type> result;
+
+                if (fromIndex < 0
+                    || toIndex < 0
+                    || toIndex < fromIndex
+                    || toIndex > original.length - 1) {
+                    return result;
+                }
+
+                for (int index = fromIndex; index < toIndex; ++index) {
+                    result.push(original.get(index));
+                }
+
+                return result;
+            }
+
+            template<typename Type>
+            static boolean equalsOrigin(Array<Type> original,
+                                        Array<Type> target) {
+                if (original.length != target.length) {
+                    return false;
+                }
+
+                for (int index = 0; index < original.length; ++index) {
+                    if (original.get(index) != target.get(index)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            template<typename Type>
+            static void fileOrigin(Array<Type> *array,
+                              int fromIndex,
+                              int toIndex,
+                              Type value) {
+                if (fromIndex < 0
+                    || toIndex < 0
+                    || toIndex < fromIndex
+                    || toIndex > (*array).length - 1) {
+                    return;
+                }
+                for (int index = fromIndex; index <= toIndex; ++index) {
+                    (*array)[index] = value;
+                }
+                return;
+            }
+        };
+    }
 }
 
-#endif //JAVA_UTIL_ARRAYS_HPP_
+#endif //JAVA_UTIL_ARRAYS_ARRAYS_HPP
