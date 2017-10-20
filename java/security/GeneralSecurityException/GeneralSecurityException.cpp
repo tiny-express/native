@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,49 +24,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
 
-#include "../../../kernel/Type.hpp"
-#include "../../Lang.hpp"
-#include "MessageDigestSpi.hpp"
+#include "GeneralSecurityException.hpp"
 
-using namespace Java::Lang;
+using namespace Java::Security;
 
-namespace Java {
-    namespace Security {
-        class MessageDigest : public MessageDigestSpi {
-        public:
-            static MessageDigest getInstance(String algorithm);
+GeneralSecurityException::GeneralSecurityException() : Exception() {
 
-            ~MessageDigest();
+}
 
-            String getAlgorithm();
+GeneralSecurityException::GeneralSecurityException(String message)
+        : Exception(message) {
 
-            int getDigestLength();
+}
 
-            int digest(byte buf[], int len);
+GeneralSecurityException::GeneralSecurityException(Throwable *cause)
+        : Exception(cause) {
 
-            void reset();
+}
 
-            void update(const byte input[], int len);
+GeneralSecurityException::GeneralSecurityException(String message,
+                                                   Throwable *cause)
+        : Exception(message, cause) {
 
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
-
-            int engineDigest(byte buffer[], int len) override;
-
-            int engineGetDigestLength() override;
-
-            void engineReset() override;
-
-            void engineUpdate(const byte input[], int len) override;
-
-        };
-    } // namespace Security
-} // namespace Java
-
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+}

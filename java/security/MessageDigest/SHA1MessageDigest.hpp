@@ -23,50 +23,34 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP
+#define JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
-
-#include "../../../kernel/Type.hpp"
-#include "../../Lang.hpp"
+#include "sha1.hpp"
 #include "MessageDigestSpi.hpp"
-
-using namespace Java::Lang;
 
 namespace Java {
     namespace Security {
-        class MessageDigest : public MessageDigestSpi {
+        class SHA1MessageDigest : public MessageDigestSpi {
         public:
-            static MessageDigest getInstance(String algorithm);
+            SHA1MessageDigest();
 
-            ~MessageDigest();
+            ~SHA1MessageDigest();
 
-            String getAlgorithm();
-
-            int getDigestLength();
-
-            int digest(byte buf[], int len);
-
-            void reset();
-
-            void update(const byte input[], int len);
-
-        private:
-            MessageDigestSpi* spi;
-            String algorithm;
-
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
-
-            int engineDigest(byte buffer[], int len) override;
+            int engineDigest(byte *buffer, int len) override;
 
             int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte input[], int len) override;
+            void engineUpdate(const byte *input, int len) override;
 
+        private:
+            byte hash[20];
+            SHA_CTX state;
+            bool isFinished;
         };
     } // namespace Security
 } // namespace Java
 
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#endif //JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP
