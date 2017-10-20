@@ -51,5 +51,11 @@
 #endif
 #endif
 
+#if defined __unix__
+#ifndef UNIX
+#define UNIX
+#endif
+#endif
+
 #endif//NATIVE_PLATFORM_H
 
