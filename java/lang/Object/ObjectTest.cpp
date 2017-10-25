@@ -25,10 +25,7 @@
  */
 
 #include "../../../kernel/Test.hpp"
-#include "../String/String.hpp"
-#include "../Integer/Integer.hpp"
-#include "../Long/Long.hpp"
-#include "../System/System.hpp"
+#include "../../util/HashMap/HashMap.hpp"
 
 using namespace Java::Lang;
 
@@ -105,6 +102,14 @@ TEST (JavaLang, DataTypeArray) {
 	// Retrieve  elements from an existing array
 	assertEquals("Food", initializedStrings.get(0).toString());
 	assertEquals("Tiny", initializedStrings.get(1).toString());
+	
+	Array<HashMap<String, String>*> arrayHashMap;
+	HashMap<String, String> hashMap;
+	hashMap.put("Key1", "Value1");
+	arrayHashMap.push(&hashMap);
+	for (auto hashMap : arrayHashMap) {
+		assertEquals("Value1", hashMap->get("Key1").toString());
+	}
 }
 
 TEST (JavaLang, ArrayConstructorWithSize) {
