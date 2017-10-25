@@ -146,17 +146,13 @@ TEST (JavaUtil, HashMapContainsValue) {
 
 TEST (JavaUtil, HashMapEntrySet) {
     HashMap<String, String> hashMap;
-
     int index = 1;
-
     for (index; index <= 100; index++) {
         hashMap.put("Key " + String::valueOf(index),
                     "Value " + String::valueOf(index));
     }
-
     int counter = 0;
     Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
-
     // TODO - loint@foodtiny.com will improve entrySet
     // then we can put it inside foreach without any performance issue
     for (Map<String, String>::Entry entry : entrySet) {
@@ -170,9 +166,18 @@ TEST (JavaUtil, HashMapEntrySet) {
             assertEquals("Value 98", entry.getValue().toString());
         }
     }
-
     // Make sure foreach is working
     assertEquals(100, counter);
+    
+    HashMap<String, String*> hashMapStringPointer;
+    hashMapStringPointer.put("test1", new String("test1"));
+    hashMapStringPointer.put("test2", new String("test1"));
+    hashMapStringPointer.put("test3", new String("test1"));
+	for (Map<String, String*>::Entry entry : hashMapStringPointer.entrySet()) {
+		assertEquals("test1", entry.getValue()->toString());
+        String *stringValue = entry.getValue();
+        delete stringValue;
+	}
 }
 
 TEST (JavaUtil, HashMapGet) {
@@ -849,7 +854,7 @@ TEST (JavaUtil, HashMapReinitialize) {
 //    assertEquals(2, hashMap.size());
 //    assertEquals(0, resultComputeIfPresentDefaultValueHashMap.intValue());
 //}
-//
+
 //TEST(JavaUtil, HashMapForEach) {
 //    /* Test HashMap<String, Integer> */
 //        // Create a HashMap
@@ -859,10 +864,9 @@ TEST (JavaUtil, HashMapReinitialize) {
 //    Integer result;
 //
 //        // Create function
-//    std::function<void(String, Integer)> function
-//            = [] (String key, Integer value) {
-//                printf("TEST(JavaUtil, HashMapForEach) is OK");
-//            };
+//    std::function<void(String, Integer)> function = [] (String key, Integer value) {
+//            printf("TEST(JavaUtil, HashMapForEach) is OK");
+//    };
 //
 //        // foreach
 //    hashMap.forEach(function);
