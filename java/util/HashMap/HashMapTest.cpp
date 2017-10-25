@@ -175,6 +175,8 @@ TEST (JavaUtil, HashMapEntrySet) {
     hashMapStringPointer.put("test3", new String("test1"));
 	for (Map<String, String*>::Entry entry : hashMapStringPointer.entrySet()) {
 		assertEquals("test1", entry.getValue()->toString());
+        String *stringValue = entry.getValue();
+        delete stringValue;
 	}
 }
 
@@ -852,7 +854,7 @@ TEST (JavaUtil, HashMapReinitialize) {
 //    assertEquals(2, hashMap.size());
 //    assertEquals(0, resultComputeIfPresentDefaultValueHashMap.intValue());
 //}
-//
+
 //TEST(JavaUtil, HashMapForEach) {
 //    /* Test HashMap<String, Integer> */
 //        // Create a HashMap
@@ -862,10 +864,9 @@ TEST (JavaUtil, HashMapReinitialize) {
 //    Integer result;
 //
 //        // Create function
-//    std::function<void(String, Integer)> function
-//            = [] (String key, Integer value) {
-//                printf("TEST(JavaUtil, HashMapForEach) is OK");
-//            };
+//    std::function<void(String, Integer)> function = [] (String key, Integer value) {
+//            printf("TEST(JavaUtil, HashMapForEach) is OK");
+//    };
 //
 //        // foreach
 //    hashMap.forEach(function);
