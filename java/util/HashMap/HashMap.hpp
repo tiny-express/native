@@ -423,7 +423,7 @@ namespace Java {
                 Set<class Map<Key, Value>::Entry> entrySet;
 
                 for (auto const &pair : this->original) {
-                    Map<String, String>::Entry entry(pair.first, pair.second);
+                    class Map<Key, Value>::Entry entry(pair.first, pair.second);
                     entrySet.add(entry);
                 }
 
