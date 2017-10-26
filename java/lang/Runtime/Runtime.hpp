@@ -39,7 +39,7 @@ namespace Java {
 						void exit(int status);
 						long freeMemory();
 						void gc();
-						string toString() const;
+						String toString() const;
 				};
 		}
 }

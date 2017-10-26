@@ -703,7 +703,7 @@ Array<long> BitSet::toLongArray() const {
     return Arrays::copyOf(this->words, this->wordsInUse);
 }
 
-string BitSet::toString() const {
+String BitSet::toString() const {
     // Optimizing String Builder initial size.
     int numberOfBits;
     if (this->wordsInUse > 128) {

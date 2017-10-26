@@ -90,7 +90,7 @@ String URL::getQuery() {
 	return this->query;
 }
 
-string URL::toString() const {
+String URL::toString() const {
 	String protocol = this->protocol;
 	String host = this->host;
 	int port = this->port;

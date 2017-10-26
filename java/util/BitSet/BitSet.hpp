@@ -474,7 +474,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const;
+            String toString() const;
 
         public:
             /**

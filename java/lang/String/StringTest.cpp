@@ -432,6 +432,7 @@ TEST (JavaLangString, GetChars) {
 	testString.getChars(10, 16, charArray, 0);
 	string charArrayString = charArray.toCharPointer();
 	assertEquals("String", charArrayString);
+	free(charArrayString);
 	
 	try {
 		testString.getChars(-1, 16, charArray, 0);
@@ -471,10 +472,12 @@ TEST (JavaLangString, GetChars) {
 	testString.getChars(10, 16, charArray, 10);
 	charArrayString = charArray.toCharPointer();
 	assertEquals("StringString", charArrayString);
+	free(charArrayString);
 	
 	testString.getChars(10, 16, charArray, 3);
 	charArrayString = charArray.toCharPointer();
 	assertEquals("StrStringString", charArrayString);
+	free(charArrayString);
 }
 
 TEST (JavaLangString, IsEmpty) {

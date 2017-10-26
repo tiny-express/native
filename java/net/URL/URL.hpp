@@ -58,7 +58,7 @@ namespace Java {
 						String getProtocol();
 						String getQuery();
 						//URLConnection openConnection();
-						string toString() const;
+						String toString() const;
 				};
 				
 				class URLConnection : public Object {
@@ -101,7 +101,7 @@ namespace Java {
 //            HashMap< String, Array<String> > getRequestProperties();
 						String getRequestProperty(String key);
 						void setRequestProperty(String key, String value);
-						string toString() const;
+						String toString() const;
 				};
 		}
 }

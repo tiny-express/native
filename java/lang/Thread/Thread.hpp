@@ -68,11 +68,9 @@ namespace Java {
 						void stop();
 						void join();
 						void join(unsigned int millis);
-						
 						string getName();
 						void setName(string target);
-						string toString() const;
-					
+						String toString() const;
 				};
 		}
 }

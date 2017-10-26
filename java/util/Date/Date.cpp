@@ -251,10 +251,7 @@ String Date::toGMTString() {
 	
 	tm *gmTimer = gmtime(&this->original);
 	
-	string timeString = this->toString0(gmTimer);
-	String result = timeString;
-	
-	free(timeString);
+	String result = this->toString0(gmTimer);
 	return result;
 }
 
@@ -263,10 +260,7 @@ String Date::toLocaleString() {
 		refreshTime();
 	}
 	
-	string timeString = this->toString0(this->localTimer);
-	String result = timeString;
-	
-	free(timeString);
+	String result = this->toString0(this->localTimer);
 	return result;
 }
 

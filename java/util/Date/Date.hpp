@@ -58,7 +58,7 @@ namespace Java {
 						 * @param timePresenter
 						 * @return String
 						 */
-						string toString0(tm *timePresenter) {
+						String toString0(tm *timePresenter) {
 							string result = (string) allocateMemory(80 * sizeof(char));
 							
 							strftime(result, 80, "%a %b %d %Y %H:%M:%S", timePresenter);

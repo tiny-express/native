@@ -99,7 +99,7 @@ namespace Java {
              * Returns the name of this enum constant, as contained in the declaration.
              * @return String
              */
-            string toString() {
+            String toString() {
                 free(this->ordinalString);
                 this->ordinalString = stringFromInt(this->ordinal);
                 return this->ordinalString;
