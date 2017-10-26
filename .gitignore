@@ -22,3 +22,4 @@ main
 /native_benchmark
 native_test.exe
 build
+libbenchmark.gcno
