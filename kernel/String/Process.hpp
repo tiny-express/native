@@ -307,7 +307,10 @@ inline char *stringRandom(char *target, int size) {
  * @return string
  */
 inline void stringAppend(char **targetPointer, char subTarget) {
-	asprintf(targetPointer, "%s%c", *targetPointer, subTarget);
+	int result = asprintf(targetPointer, "%s%c", *targetPointer, subTarget);
+	if (result == 0) {
+		*targetPointer = nullptr;
+	}
 }
 
 /**
