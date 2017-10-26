@@ -124,6 +124,7 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
 #define sampleConstString ""
 #define sampleInt 1
 #define sampleDouble 0.1
+#define sampleObjectString (String) ""
 
 template<typename Type, typename AnotherType>
 boolean isSame(Type type, AnotherType anotherType) {
@@ -449,7 +450,8 @@ void assertEqualsAll(Type expected,
     boolean isDouble = isSame(expected, sampleDouble);
 
     boolean isString = isSame(expected, sampleString)
-                       || isSame(expected, sampleConstString);
+                       || isSame(expected, sampleConstString)
+                       || isSame(expected, sampleObjectString);
 
     // Assert int equals
     if (isInt) {
