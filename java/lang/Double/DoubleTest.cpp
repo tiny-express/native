@@ -287,18 +287,12 @@ TEST (JavaLang, DoubleToString) {
     // Test Double::MIN_NORMAL
     variableTestToString = Double::MIN_NORMAL;
     expected = "0.000000000000000";
-#ifdef WIN
-    expected = "4.940656458412465e-324";
-#endif
     actual = variableTestToString.toString();
     assertEquals(expected, actual);
 
     // Test Double::MIN_VALUE
     variableTestToString = Double::MIN_VALUE;
     expected = "0.000000000000000";
-#ifdef WIN
-    expected = "2.225073858507201e-308";
-#endif
     actual = variableTestToString.toString();
     assertEquals(expected, actual);
 }
