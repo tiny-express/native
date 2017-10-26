@@ -620,6 +620,9 @@ StringBuffer::StringBuffer(CharSequence &sequence) : StringBufferUnSafe(sequence
 StringBuffer::StringBuffer(int capacity) : StringBufferUnSafe(capacity) {
 }
 
+StringBuffer::StringBuffer(string originalString) : StringBufferUnSafe(originalString) {
+}
+
 StringBuffer::StringBuffer(const_string originalString) : StringBufferUnSafe(originalString) {
 }
 

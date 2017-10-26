@@ -1024,11 +1024,9 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator+=(const char &target) {
-                string pointerHolder = this->original;
                 stringAppend(&this->original, target);
                 this->size++;
                 this->capacity = this->size;
-                free(pointerHolder);
                 return *this;
             }
 

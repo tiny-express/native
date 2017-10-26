@@ -250,25 +250,12 @@ TEST (KernelStringProcess, StringRandom) {
 }
 
 TEST (KernelStringProcess, StringAppend) {
-	auto target = (string) "Hello ";
+	char *target = stringCopy("Hello ");
 	stringAppend(&target, 'W');
-	
-	void *pointer = target; // use pointer to keep old address on heap
 	stringAppend(&target, 'o');
-	free(pointer);
-	
-	pointer = target;
 	stringAppend(&target, 'r');
-	free(pointer);
-	
-	pointer = target;
 	stringAppend(&target, 'l');
-	free(pointer);
-	
-	pointer = target;
 	stringAppend(&target, 'd');
-	free(pointer);
-	
 	assertEquals("Hello World", target);
 	free(target);
 }

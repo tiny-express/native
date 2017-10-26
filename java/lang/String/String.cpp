@@ -46,7 +46,15 @@ String::String(string original, int length) {
 }
 
 String::String(Array<char> &charArray) {
-	this->original = charArray.toString();
+	this->original = (string) malloc(charArray.length + 1);
+#ifdef LINUX
+	register
+#endif
+	int i;
+	for (i = 0; i<charArray.length; i++) {
+		this->original[i] = charArray[i];
+	}
+	this->original[charArray.length] = '\0';
 	this->size = charArray.length;
 	this->capacity = this->size == 0 ? -1 : this->size;
 }

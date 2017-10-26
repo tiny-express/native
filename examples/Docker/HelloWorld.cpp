@@ -11,5 +11,5 @@ public:
 };
 
 int main(int argc, char **argv) {
-    return Application(MainApplication::main, argv);
+    return Application(MainApplication::main, argc, argv);
 }

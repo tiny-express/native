@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,26 +24,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP
-#define JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP
-
-#include "../WebApplicationException/WebApplicationException.hpp"
+#include "../../java/Lang.hpp"
 
 using namespace Java::Lang;
 
-namespace Javax {
-    namespace Ws  {
-        namespace Rs {
-            class ClientErrorException : public WebApplicationException {
-            public:
-                ClientErrorException();
-                ClientErrorException(String message);
-                ClientErrorException(String message, Throwable *cause);
-                ClientErrorException(Throwable *cause);
-            };  // class ClientErrorException
-        } // namespace Rs
-    }  // namespace Ws
-}  // namespace Javax
-
-
-#endif // JAVAX_WS_RS_CLIENTERROREXCEPTION_CLIENTERROREXCEPTION_HPP
+/**
+ * Application starting point
+ * This function handle any application exception to keep program safety
+ *
+ * @param program
+ * @param argument
+ * @return int
+ */
+int Application(void (*program)(Array <String>), int argc, char **argument) {
+	try {
+		Array <String> args;
+		int argumentIndex;
+		for (argumentIndex = 0; argumentIndex < argc; argumentIndex++) {
+			args.push(argument[ argumentIndex ]);
+		}
+		program(argument);
+		return 0;
+	} catch (Exception &e) {
+		System::out::println("Application Exception: " + e.getMessage());
+		return 1;
+	} catch (...) {
+#ifdef LINUX
+		std::exception_ptr p = std::current_exception();
+				String exceptionName = p.__cxa_exception_type()->name();
+				System::out::println("Unhandled Exception: " + exceptionName);
+#else
+		System::out::println("Unhandled Exception");
+#endif
+		return 1;
+	}
+}

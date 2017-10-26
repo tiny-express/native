@@ -24,202 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_OBJECT_H
-#define JAVA_LANG_OBJECT_H
+#ifndef JAVA_LANG_OBJECT_HPP
+#define JAVA_LANG_OBJECT_HPP
 
 #include "../../../kernel/Kernel.hpp"
-
-template<typename E>
-class Array;
-
-template<typename E>
-class ArrayIterator;
-
-template<typename E>
-class ArrayIterator {
-public:
-    ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
-    }
-
-    boolean operator!=(const ArrayIterator<E> &other) const {
-        return _pos != other._pos;
-    }
-
-    E operator*() const {
-        return _p_vec->get(_pos);
-    }
-
-    const ArrayIterator<E> &operator++() {
-        ++_pos;
-        return *this;
-    }
-
-private:
-    int _pos;
-    const Array<E> *_p_vec;
-};
-
-template<typename E>
-class Array {
-private:
-    std::vector<E> original;
-public:
-
-    /**
-     * Array default constructor
-     */
-    Array() {
-        this->length = 0;
-    }
-
-    /**
-     * Array constructor with std::initializer_list
-     *
-     * @param list
-     */
-    Array(std::initializer_list<E> list) {
-        typename std::initializer_list<E>::iterator it;
-        for (it = list.begin(); it != list.end(); ++it) {
-            original.push_back(*it);
-        }
-        this->length = original.size();
-    }
-
-    Array(char **charPointerArray) {
-        int size = lengthPointerPointerChar(charPointerArray);
-#ifdef LINUX
-        register
-#endif
-        int index;
-        for (index = 0; index < size; index++) {
-            original.push_back(charPointerArray[index]);
-        }
-        this->length = original.size();
-    }
-
-    /**
-     *  Array constructor with contain size
-     *
-     * @param containerSize
-     */
-    Array(long containerSize) {
-        this->original.resize(containerSize);
-        this->length = containerSize;
-    }
-
-    /**
-     * Array destructor
-     */
-    ~Array() = default;
-
-    /**
-     * Property length of Array
-     *
-     * Don't set this property when you coding
-     */
-    long length;
-
-    /**
-     * Get the first element in Array
-     *
-     * @return ArrayIterator<E>
-     */
-    ArrayIterator<E> begin() const {
-        return ArrayIterator<E>(this, 0);
-    }
-
-    /**
-     * Get the final element in Array
-     *
-     * @return ArrayIterator<E>
-     */
-    ArrayIterator<E> end() const {
-        return ArrayIterator<E>(this, this->length);
-    }
-
-public:
-
-    /**
-     * Push new element to end of Array
-     *
-     * @param e
-     */
-    void push(E e) {
-        original.push_back(e);
-        this->length = original.size();
-    }
-
-    /**
-     * Returns the element at the specified position in this Array
-     *
-     * @param index
-     * @return E
-     */
-    E get(const int index) const {
-        return (E) original.at(index);
-    }
-
-    /**
-     * Convert Array to string
-     *
-     * @return string
-     */
-    string toString() {
-        if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
-            string result = stringCopy("");
-            for (char element : *this) {
-                string result_holder = result;
-                result = stringAppend(&result, element);
-                free(result_holder);
-            }
-            return result;
-        }
-        return (string) "This type is not available for serialize";
-    }
-
-public:
-
-    /**
-    * Set and get value of element at the specified position in this Array
-    *
-    * @param index
-    * @return E
-    */
-    E &operator[](const int index) {
-        return this->original.at(index);
-    }
-
-    /**
-     * Get value of element at the specified position in this Array
-     *
-     * @param index
-     * @return E
-     */
-    const E &operator[](const int index) const {
-        return this->original.at(index);
-    }
-
-    /**
-     * Append a std::initializer_list<E> to this array
-     *
-     * @param list
-     * @return Array<E>
-     */
-    Array<E> operator+=(const std::initializer_list<E> &list) {
-        typename std::initializer_list<E>::iterator it;
-        for (it = list.begin(); it != list.end(); ++it) {
-            original.push_back(*it);
-        }
-        this->length = original.size();
-        return *this;
-    }
-};
 
 namespace Java {
     namespace Lang {
         template<typename E>
         class Class;
 
+		class String;
         class Object;
 
         template<typename E>
@@ -320,4 +135,4 @@ namespace Java {
     }
 }
 
-#endif  // JAVA_LANG_OBJECT_H
+#endif //JAVA_LANG_OBJECT_HPP

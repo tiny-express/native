@@ -34,7 +34,7 @@ long System::currentTimeMillis() {
 }
 
 void System::exit(int status) {
-	exit(status);
+	::exit(status);
 }
 
 void System::gc() {

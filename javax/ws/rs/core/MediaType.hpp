@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
-#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
+#ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP
+#define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP
 
 #include "../../../../java/Lang.hpp"
 #include "../../../../java/util/HashMap/HashMap.hpp"
@@ -157,4 +157,4 @@ namespace Javax {
     }  // namespace Ws
 }  // namespace Javax
 
-#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP_
+#endif  // NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP
