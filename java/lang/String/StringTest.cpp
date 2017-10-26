@@ -150,7 +150,6 @@ TEST (JavaLangString, CharAt) {
 	// Given a string - Return first position is exist
 	String text = "Hello World";
 	char positionIsExist = text.charAt(0);
-	
 	assertEquals('H', positionIsExist);
 	
 	// Given a string - Return negative position is not exist

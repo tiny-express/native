@@ -145,7 +145,7 @@ boolean Boolean::parseBoolean(const_string target) {
  *
  * @return string
  */
-string Boolean::toString() const {
+String Boolean::toString() const {
 	return this->originalString;
 }
 
@@ -156,7 +156,7 @@ string Boolean::toString() const {
  * @param target
  * @return String
  */
-string Boolean::toString(const boolean &target) {
+String Boolean::toString(const boolean &target) {
 	if (target) {
 		return (string) "true";
 	}

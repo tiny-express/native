@@ -121,7 +121,7 @@ TEST (JavaLang, BooleanToString) {
 	// Give two string - Should equal
 	Boolean objectBooleanTrue(true);
 	string expect = (string) "true";
-	string result = objectBooleanTrue.toString();
+	String result = objectBooleanTrue.toString();
 	assertEquals(expect, result);
 	
 	// Give two string - Should equal

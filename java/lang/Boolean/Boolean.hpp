@@ -62,8 +62,8 @@ namespace Java {
 						static boolean getBoolean(const_string target);
 						long hashCode() const;
 						static boolean parseBoolean(const_string target);
-						string toString() const;
-						static string toString(const boolean &target);
+						String toString() const;
+						static String toString(const boolean &target);
 						static Boolean valueOf(boolean target);
 						static boolean valueOf(const_string target);
 						Boolean operator=(const Boolean &target);
