@@ -23,3 +23,34 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP
+#define JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP
+
+#include "sha1.hpp"
+#include "MessageDigestSpi.hpp"
+
+namespace Java {
+    namespace Security {
+        class SHA1MessageDigest : public MessageDigestSpi {
+        public:
+            SHA1MessageDigest();
+
+            ~SHA1MessageDigest();
+
+            int engineDigest(byte *buffer, int len) override;
+
+            int engineGetDigestLength() override;
+
+            void engineReset() override;
+
+            void engineUpdate(const byte *input, int len) override;
+
+        private:
+            byte hash[20];
+            SHA_CTX state;
+            bool isFinished;
+        };
+    } // namespace Security
+} // namespace Java
+
+#endif //JAVA_SECURITY_SHA1MESSAGEDIGEST_HPP

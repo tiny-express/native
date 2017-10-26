@@ -32,7 +32,8 @@
 
 namespace Java {
 		namespace Lang {
-				class Throwable : public Object {
+				class Throwable //: public Object 
+		       {
 				private:
 						Throwable *cause;
 						String message;
@@ -46,7 +47,6 @@ namespace Java {
 				public:
 						Throwable *getCause();
 						String getMessage();
-						String toString();
 				};
 		}
 }

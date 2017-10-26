@@ -27,7 +27,7 @@
 #ifndef JAVA_NET_URL_ENCODER_HPP
 #define JAVA_NET_URL_ENCODER_HPP
 
-#include "../../../kernel/String.hpp"
+#include "../../lang/Object/Object.hpp"
 #include "../../lang/String/String.hpp"
 
 using namespace Java::Lang;

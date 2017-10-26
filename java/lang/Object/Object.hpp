@@ -28,6 +28,7 @@
 #define JAVA_LANG_OBJECT_HPP
 
 #include "../../../kernel/Kernel.hpp"
+#include "../String/String.hpp"
 
 namespace Java {
     namespace Lang {
@@ -41,7 +42,6 @@ namespace Java {
         class Class {
         public:
             Class();
-
             ~Class();
         };
 
@@ -61,7 +61,6 @@ namespace Java {
             void finalize();
 
         public:
-
             /**
              * Support compare two Object through hashCode()
              *
@@ -113,7 +112,14 @@ namespace Java {
              * Not support this function yet
              */
             void wait(int timeout, int nanos);
-
+              
+              /**
+               * Serialize object
+               *
+               * @return String
+               */
+              virtual String toString() const = 0;
+              
             /**
              * Compare two object is equal or not
              * @param target

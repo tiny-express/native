@@ -27,8 +27,6 @@
 #ifndef JAVA_LANG_CHAR_SEQUENCE_HPP
 #define JAVA_LANG_CHAR_SEQUENCE_HPP
 
-#include "../Object/Object.hpp"
-
 namespace Java {
     namespace Lang {
         class String;

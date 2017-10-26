@@ -277,7 +277,7 @@ namespace Java {
 						 * @param collection
 						 * @return boolean
 						 */
-						boolean containsAll(Collection<Object> collection) const {
+						boolean containsAll(Collection<Object> &collection) const {
 							// TODO: Please discuss about param Collection
 							return true;
 						}
@@ -435,7 +435,7 @@ namespace Java {
 						 * @param target
 						 * @return boolean
 						 */
-						boolean removeAll(Collection<Object> target) {
+						boolean removeAll(Collection<Object> &target) {
 							// TODO: Please discuss about param Collection
 							return true;
 						}
@@ -468,7 +468,7 @@ namespace Java {
 						 * @param collection
 						 * @return boolean
 						 */
-						boolean retainAll(Collection<Object> collection) {
+						boolean retainAll(Collection<Object> &collection) {
 							// TODO: Please discuss about Param Collection
 							return true;
 						}
@@ -481,7 +481,7 @@ namespace Java {
 						 * @param element
 						 * @return E
 						 */
-						E set(int index, E element) {
+						E set(int index, E &element) {
 							if (index < 0 || index >= this->size()) {
 								String message = "Index out of range: ";
 								message += Integer(index).stringValue();
@@ -505,7 +505,7 @@ namespace Java {
 						 *
 						 * @param cmp
 						 */
-						void sort(Comparator<E> cmp) {
+						void sort(Comparator<E> &cmp) {
 							// TODO: Please complete class Comparator
 						}
 						
@@ -615,7 +615,7 @@ namespace Java {
 						}
 
 // TODO: Please discuss about param Object
-						boolean equals(const Object object) const {
+						boolean equals(const Object &object) const {
 							return true;
 						}
 

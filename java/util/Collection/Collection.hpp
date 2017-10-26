@@ -48,9 +48,7 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						virtual boolean add(E element) {
-							return true;
-						}
+						virtual boolean add(E &element) = 0;
 						
 						/**
 						 * Add a Collection element to this collection
@@ -63,17 +61,14 @@ namespace Java {
 						 * Clear all element inside this collection
 						 * @return
 						 */
-						virtual void clear() {
-						}
+						virtual void clear() = 0;
 						
 						/**
 						 * Search for specified object, return true if it occurs
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean contains(E element) {
-							return true;
-						}
+						virtual boolean contains(E &element) = 0;
 						
 						/**
 						 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
@@ -87,49 +82,39 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean equals(const Object object) {
-							return true;
-						}
+						virtual boolean equals(const Object &object) = 0;
 						
 						/**
 						 * Make a hashcode through this virtual address on memory
 						 * @return int
 						 */
-						virtual long hashCode() {
-							return 0;
-						}
+						virtual long hashCode() = 0;
 						
 						/**
 						 * A hash code value for this object.
 						 * @return int
 						 */
-						virtual boolean isEmpty() {
-							return true;
-						}
+						virtual boolean isEmpty() = 0;
 						
 						/**
 						 * Don't support this method
 						 * @return
 						 */
-//			Java::Util::Stream::Stream<E> &parallelStream();
+						//			Java::Util::Stream::Stream<E> &parallelStream();
 						
 						/**
 						 * Remove a specified object inside this collection, return true if it exits and be removed also
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean remove(Object object) {
-							return true;
-						}
+						virtual boolean remove(Object &object) = 0;
 						
 						/**
 						 * Remove a collection of object inside this collection, return true if it exits and be removed all also
 						 * @param c
 						 * @return
 						 */
-						virtual boolean removeAll(Collection<Object> collection) {
-							return true;
-						}
+						virtual boolean removeAll(Collection<Object> &collection) = 0;
 						
 						/**
 						 * Don't support this method
@@ -148,9 +133,7 @@ namespace Java {
 						 * Return number of element inside this collection
 						 * @return
 						 */
-						virtual int size() {
-							return 0;
-						}
+						virtual int size() = 0;
 						
 						/**
 						 * Don't support this method

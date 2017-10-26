@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -23,3 +23,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+
+#include "NoSuchAlgorithmException.hpp"
+
+using namespace Java::Security;
+
+NoSuchAlgorithmException::NoSuchAlgorithmException() : GeneralSecurityException() {
+
+}
+
+NoSuchAlgorithmException::NoSuchAlgorithmException(String message)
+        : GeneralSecurityException(message) {
+
+}
+
+NoSuchAlgorithmException::NoSuchAlgorithmException(Throwable *cause)
+        : GeneralSecurityException(cause) {
+
+}
+
+NoSuchAlgorithmException::NoSuchAlgorithmException(String message,
+                                                   Throwable *cause)
+        : GeneralSecurityException(message, cause) {
+
+}

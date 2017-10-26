@@ -277,9 +277,9 @@ TEST (JavaLangString, CopyValueOf) {
 
 // FIXME
 TEST (JavaLangString, EndsWith) {
-	String textPlus = "Hello welcome to VietNam";
-	String String_string = "VietNam";
-	assertTrue(textPlus.endsWith(String_string));
+	String text = "Hello welcome to VietNam";
+	String endsWith = "VietNam";
+	assertTrue(text.endsWith(endsWith));
 }
 
 TEST (JavaLangString, EqualIgnoreCase) {
@@ -577,7 +577,7 @@ TEST (JavaLangString, Join) {
 // 	String wrongPhoneNumber = "001678080147";
 // 	assertFalse(wrongPhoneNumber.matches(phoneNumberPattern));
 // }
-//
+
 TEST (JavaLangString, Replace) {
 	String textPlus = "Hello Hello Hello ";
 	

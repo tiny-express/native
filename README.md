@@ -4,10 +4,9 @@
 
 **Native Library** brings productivity and maintainability for your C/C++ application as a Java program.
 
-* Blazing fast performance, small footprint with no dependency required
-* Provide rich Java Core classes compare to C++/STL
-* Zero memory leak and prevents segfaults via automatic storage
-* C++ and Java developers can use strength of two languages
+* Blazing fast, small footprint with no dependency required
+* Provide rich Java Core classes beside C++ Standard Library
+* Prevents nearly all memory leak and  segfaults via automatic storage
 * Support bindings for NodeJS addon and Python module development (experimental)
 * Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
@@ -50,6 +49,7 @@ public:
             hashMap.put("argument " + String::valueOf(counter), argument);
             counter++;
         }
+        System::out::println("We have 4 pairs:");
         String pairs = "Pairs: \n";
         for (Map<String, String>::Entry entry : hashMap.entrySet()) {
             pairs += entry.getKey() + String(" - ") + entry.getValue() + String("\n");
@@ -87,7 +87,7 @@ More examples can be found [here](https://github.com/foodtiny/native/tree/master
 
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
-- Make sure your commits must be passed before you create pull request
+- Make sure your commits must be passed with [check](./check)  before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
 

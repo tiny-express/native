@@ -63,6 +63,9 @@
 #include <thread>
 #include <memory>
 #include <algorithm>
+#include <stack>
+#include <queue>
+#include <bitset>
 #include <vector>
 #include <map>
 #include <set>
@@ -72,6 +75,7 @@
 #include <regex>
 #include <string>
 #include <initializer_list>
+#include <functional>
 
 // Builtin functions
 #define P_LEN(NAME, TYPE); \

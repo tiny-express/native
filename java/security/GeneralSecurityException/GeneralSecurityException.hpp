@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -23,3 +23,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP
+#define NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP
+
+#include "../../lang/Exception/Exception.hpp"
+
+using namespace Java::Lang;
+
+namespace Java {
+    namespace Security {
+        class GeneralSecurityException : public Exception {
+        public:
+            GeneralSecurityException();
+            GeneralSecurityException(String message);
+            GeneralSecurityException(Throwable *cause);
+            GeneralSecurityException(String message, Throwable *cause);
+        };
+    } // namespace Security
+} // namespace Java
+
+#endif //NATIVE_JAVA_SECURITY_GENERALSECURITYEXCEPTION_HPP

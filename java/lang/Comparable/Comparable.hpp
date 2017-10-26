@@ -27,8 +27,6 @@
 #ifndef JAVA_LANG_COMPARABLE_HPP
 #define JAVA_LANG_COMPARABLE_HPP
 
-#include "../Object/Object.hpp"
-
 namespace Java {
 		namespace Lang {
 				template <typename T>

@@ -27,7 +27,10 @@
 #ifndef JAVA_NET_URL_HPP
 #define JAVA_NET_URL_HPP
 
+#include "../../lang/Object/Object.hpp"
 #include "../../lang/String/String.hpp"
+#include "../../util/ArrayList/ArrayList.hpp"
+#include "../../util/HashMap/HashMap.hpp"
 #include "../URLConnection/URLConnection.hpp"
 
 using namespace Java::Lang;
@@ -98,7 +101,7 @@ namespace Java {
 						String getContentEncoding();
 						int getContentLength();
 						String getContentType();
-//            HashMap< String, Array<String> > getRequestProperties();
+                        HashMap< String, Array<String> > getRequestProperties();
 						String getRequestProperty(String key);
 						void setRequestProperty(String key, String value);
 						String toString() const;
