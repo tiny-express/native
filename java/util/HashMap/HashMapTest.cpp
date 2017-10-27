@@ -466,24 +466,6 @@ TEST (JavaUtil, HashMapToString) {
 	expectedResult = (string) R"({"ArrayList2": [100, 100, 100, 100, 1], "ArrayList1": [1, 2, 3, 4, 5]})";
 	result = arrayListInHashMap.toString();
 	assertEquals(expectedResult, result);
-	
-	// Test HashMap::toString with HashMap has String (key or value) that come from another HashMap::toString()
-	HashMap<String, String> result2;
-	
-	result2.put("firstName", "firstName");
-	result2.put("lastName", "lastName");
-	result2.put("birthday", "birthday");
-	result2.put("avatar", "avatar");
-	result2.put("gender", "gender");
-	result2.put("email", "email");
-	
-	HashMap<String, String> result3;
-	
-	result3.put("Status", "true");
-	result3.put("Info", result2.toString());
-	
-	expectedResult = (string) R"({"Info": {"email": "email", "avatar": "avatar", "birthday": "birthday", "gender": "gender", "firstName": "firstName", "lastName": "lastName"}, "Status": "true"})";
-	assertEquals(expectedResult, result3.toString());
 }
 
 TEST (JavaUtil, HashMapEquals) {
