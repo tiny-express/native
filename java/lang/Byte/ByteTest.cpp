@@ -33,13 +33,13 @@ using namespace Java::Lang;
 
 TEST(JavaLang, ByteConstructor) {
 	// Given empty value for Byte constructor and assign value - Return Byte
-    Bytes defaultConstructorByte;
+    Byte defaultConstructorByte;
     int expectResult = 0;
     int actualByteValue = defaultConstructorByte.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("0", defaultConstructorByte.toString());
 
-	Bytes byteConstructorByte = Bytes(3);
+	Byte byteConstructorByte = Byte(3);
     expectResult = 3;
     actualByteValue = byteConstructorByte.intValue();
 	assertEquals(expectResult, actualByteValue);
@@ -47,40 +47,40 @@ TEST(JavaLang, ByteConstructor) {
 
 
     // Constructor with String
-    Bytes stringConstructorByte = Bytes("3");
+    Byte stringConstructorByte = Byte("3");
     actualByteValue = stringConstructorByte.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("3", stringConstructorByte.toString());
 
     // Copy constructor
-    Bytes copyConstructorByte = Bytes(stringConstructorByte);
+    Byte copyConstructorByte = Byte(stringConstructorByte);
     actualByteValue = copyConstructorByte.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("3", copyConstructorByte.toString());
 
     try {
-        Bytes exceptionByte = Bytes("");
+        Byte exceptionByte = Byte("");
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes("abcd");
+        Byte exceptionByte = Byte("abcd");
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes("999999999999");
+        Byte exceptionByte = Byte("999999999999");
     }
     catch (NumberFormatException &e) {
         assertEquals("Integer out of range", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes("256");
+        Byte exceptionByte = Byte("256");
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -89,7 +89,7 @@ TEST(JavaLang, ByteConstructor) {
 
 TEST(JavaLang, ByteCharValue) {
     // Given a char and a Byte with the same value to compare the result of charValue()
-    Bytes byteToGetValue = 'a';
+    Byte byteToGetValue = 'a';
     char expectResult = 'a';
     char actualResult = byteToGetValue.charValue();
     assertEquals(expectResult,actualResult);
@@ -97,7 +97,7 @@ TEST(JavaLang, ByteCharValue) {
 
 TEST(JavaLang, ByteByteValue) {
     // Given a byte and a Byte with the same value to compare the result of charValue()
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     byte expectResult = 5;
     byte actualResult = byteToGetValue.byteValue();
     assertEquals(expectResult, actualResult);
@@ -105,61 +105,61 @@ TEST(JavaLang, ByteByteValue) {
 
 TEST(JavaLang, ByteCompareTo) {
     // Given 3 Byte
-    Bytes firstBytes = 1;
-    Bytes secondBytes = 1;
-    Bytes thirdBytes = 3;
+    Byte firstByte = 1;
+    Byte secondByte = 1;
+    Byte thirdByte = 3;
 
     // Compare
-    assertEquals(0, firstBytes.compareTo(secondBytes));
-    assertTrue(firstBytes.compareTo(thirdBytes) < 0);
-    assertTrue(thirdBytes.compareTo(firstBytes) > 0);
+    assertEquals(0, firstByte.compareTo(secondByte));
+    assertTrue(firstByte.compareTo(thirdByte) < 0);
+    assertTrue(thirdByte.compareTo(firstByte) > 0);
 
-    Comparable<Bytes> *comparable = &secondBytes;
-    assertEquals(0, comparable->compareTo(firstBytes));
+    Comparable<Byte> *comparable = &secondByte;
+    assertEquals(0, comparable->compareTo(firstByte));
 }
 
 TEST(JavaLang, ByteDecode) {
     // Given a decimal value are decode and assigned to decByte
-    Bytes decByte = Bytes::decode("100");
+    Byte decByte = Byte::decode("100");
     byte expectDecResult = 100;
     byte actualDecResult = decByte.byteValue();
     assertEquals(expectDecResult, actualDecResult);
 
     // Given a hexadecimal values are decoded and assigned to hexByte
-    Bytes hexByte = Bytes::decode("0x6b");
+    Byte hexByte = Byte::decode("0x6b");
     byte expectHexResult = 107;
     byte actualHexResult = hexByte.byteValue();
     assertEquals(expectHexResult, actualHexResult);
 
     // Given an octal value is decoded and assigned to octalByte
-    Bytes octalByte = Bytes::decode("0127");
+    Byte octalByte = Byte::decode("0127");
     byte expectOctalResult = 87;
     byte actualOctalResult = octalByte.byteValue();
     assertEquals(expectOctalResult, actualOctalResult);
 
     try {
-        Bytes exceptionByte = Bytes::decode("");
+        Byte exceptionByte = Byte::decode("");
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::decode("abcd");
+        Byte exceptionByte = Byte::decode("abcd");
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::decode("999999999999");
+        Byte exceptionByte = Byte::decode("999999999999");
     }
     catch (NumberFormatException &e) {
         assertEquals("Integer out of range", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::decode("256");
+        Byte exceptionByte = Byte::decode("256");
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -168,28 +168,28 @@ TEST(JavaLang, ByteDecode) {
 
 TEST(JavaLang, ByteDoubleValue) {
     // Given a Double and a Byte with the same value
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     double expectResult = 5;
     double actualResult = byteToGetValue.doubleValue();
     assertEquals(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteByteEquals) {
-    // Given 3 Bytes
-    Bytes firstBytes = 1;
-    Bytes secondBytes = 1;
-    Bytes thirdBytes = 3;
+    // Given 3 Byte
+    Byte firstByte = 1;
+    Byte secondByte = 1;
+    Byte thirdByte = 3;
 
-    assertTrue(firstBytes.equals(secondBytes));
-    assertFalse(firstBytes.equals(thirdBytes));
-    /*// Test Bytes and Object
+    assertTrue(firstByte.equals(secondByte));
+    assertFalse(firstByte.equals(thirdByte));
+    /*// Test Byte and Object
     Object object;
-    assertFalse(firstBytes.equals(object));*/
+    assertFalse(firstByte.equals(object));*/
 }
 
 TEST(JavaLang, ByteFloatValue) {
     // Given a float and a Byte with the same value
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     float expectResult = 5;
     float actualResult = byteToGetValue.floatValue();
     assertEquals(expectResult, actualResult);
@@ -197,7 +197,7 @@ TEST(JavaLang, ByteFloatValue) {
 
 TEST(JavaLang, ByteHashCode ) {
     // Given a Byte
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     long expectResult = 5;
     long actualResult = byteToGetValue.hashCode();
     assertEquals(expectResult, actualResult);
@@ -205,7 +205,7 @@ TEST(JavaLang, ByteHashCode ) {
 
 TEST(JavaLang, ByteIntValue) {
     // Given a int and a Byte with the same value
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     int expectResult = 5;
     int actualResult = byteToGetValue.intValue();
     assertEquals(expectResult, actualResult);
@@ -213,7 +213,7 @@ TEST(JavaLang, ByteIntValue) {
 
 TEST(JavaLang, ByteLongValue) {
     // Given a int and a Byte with the same value
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     long expectResult = 5;
     long actualResult = byteToGetValue.longValue();
     assertEquals(expectResult, actualResult);
@@ -222,33 +222,33 @@ TEST(JavaLang, ByteLongValue) {
 TEST(JavaLang, ByteParseByte) {
     // Assign value 20 to resultByte from a String using parseByte
     byte expectResult = 20;
-    byte actualResult = Bytes::parseByte("20");
+    byte actualResult = Byte::parseByte("20");
     // need parseByte(string)
     assertEquals(expectResult, actualResult);
 
     try {
-        Bytes exceptionByte = Bytes::parseByte("");
+        Byte exceptionByte = Byte::parseByte("");
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::parseByte("abcd");
+        Byte exceptionByte = Byte::parseByte("abcd");
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::parseByte("999999999999");
+        Byte exceptionByte = Byte::parseByte("999999999999");
     }
     catch (NumberFormatException &e) {
         assertEquals("Integer out of range", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::parseByte("256");
+        Byte exceptionByte = Byte::parseByte("256");
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -259,44 +259,44 @@ TEST(JavaLang, ByteParseByteWithRadix) {
 
     // Assign value 20 to resultByte from a String using parseByte with radix =10
     byte expectResult = 20;
-    byte actualResult = Bytes::parseByte("+20", 10);
+    byte actualResult = Byte::parseByte("+20", 10);
     assertEquals(expectResult, actualResult);
 
     expectResult = 0;
-    actualResult = Bytes::parseByte("0", 15);
+    actualResult = Byte::parseByte("0", 15);
     assertEquals(expectResult, actualResult);
 
     expectResult = 255;
-    actualResult = Bytes::parseByte("FF", 16);
+    actualResult = Byte::parseByte("FF", 16);
     assertEquals(expectResult, actualResult);
 
     expectResult = 102;
-    actualResult = Bytes::parseByte("1100110", 2);
+    actualResult = Byte::parseByte("1100110", 2);
     assertEquals(expectResult, actualResult);
 
     try {
-        expectResult = Bytes::parseByte((String) "99", 8);
+        expectResult = Byte::parseByte((String) "99", 8);
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        expectResult = Bytes::parseByte((String) "Kona", 33);
+        expectResult = Byte::parseByte((String) "Kona", 33);
     }
     catch (NumberFormatException &e) {
         assertEquals("radix out of range", e.getMessage().toString());
     }
 
     try {
-        expectResult = Bytes::parseByte((String) "", 2);
+        expectResult = Byte::parseByte((String) "", 2);
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::parseByte("256", 10);
+        Byte exceptionByte = Byte::parseByte("256", 10);
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -305,7 +305,7 @@ TEST(JavaLang, ByteParseByteWithRadix) {
 
 TEST(JavaLang, ByteShortValue) {
     // Given a short and a Byte with the same value
-    Bytes byteToGetValue = 5;
+    Byte byteToGetValue = 5;
     short expectResult = 5;
     short actualResult = byteToGetValue.shortValue();
     assertEquals(expectResult, actualResult);
@@ -313,7 +313,7 @@ TEST(JavaLang, ByteShortValue) {
 
 TEST(JavaLang, ByteToString) {
     // Given a string and a Byte with the same value
-    Bytes byteToGetValue = 2;
+    Byte byteToGetValue = 2;
     string expectResult = (string) "2";
     string actualResult = byteToGetValue.toString();
     assertEquals(expectResult, actualResult);
@@ -323,48 +323,48 @@ TEST(JavaLang, ByteToStringWithByte) {
     // Given a string and a Byte with the same value
     byte byteToRepresent = 2;
     String expectResult = "2";
-    String actualResult = Bytes::toString(byteToRepresent);
+    String actualResult = Byte::toString(byteToRepresent);
     assertEquals(expectResult.toString(), actualResult.toString());
 }
 
 TEST(JavaLang, ByteValueOfByte) {
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     byte byteToGetValue = 50;
-    Bytes expectResult = Bytes(50);
-    Bytes actualResult = Bytes::valueOf(byteToGetValue);
+    Byte expectResult = Byte(50);
+    Byte actualResult = Byte::valueOf(byteToGetValue);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 }
 
 TEST(JavaLang, ByteValueOfString) {
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     String stringToGetValue = "50";
-    Bytes expectResult = Bytes(static_cast<byte>(50));
-    Bytes actualResult = Bytes::valueOf(stringToGetValue);
+    Byte expectResult = Byte(static_cast<byte>(50));
+    Byte actualResult = Byte::valueOf(stringToGetValue);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 
     try {
-        Bytes exceptionByte = Bytes::valueOf("");
+        Byte exceptionByte = Byte::valueOf("");
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::valueOf("abcd");
+        Byte exceptionByte = Byte::valueOf("abcd");
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::valueOf("999999999999");
+        Byte exceptionByte = Byte::valueOf("999999999999");
     }
     catch (NumberFormatException &e) {
         assertEquals("Integer out of range", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::valueOf("256");
+        Byte exceptionByte = Byte::valueOf("256");
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -374,45 +374,45 @@ TEST(JavaLang, ByteValueOfString) {
 TEST(JavaLang, ByteValueOfStringWithRadix) {
     // Given a byte and a Byte, then assign value to Byte using valueOf(byte)
     String byteToGetValue = "50";
-    Bytes expectResult = Bytes(50);
-    Bytes actualResult = Bytes::valueOf(byteToGetValue, 10);
+    Byte expectResult = Byte(50);
+    Byte actualResult = Byte::valueOf(byteToGetValue, 10);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 
     expectResult = 0;
-    actualResult = Bytes::valueOf("0", 15);
+    actualResult = Byte::valueOf("0", 15);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 
     expectResult = 255;
-    actualResult = Bytes::valueOf("FF", 16);
+    actualResult = Byte::valueOf("FF", 16);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 
     expectResult = 102;
-    actualResult = Bytes::valueOf("1100110", 2);
+    actualResult = Byte::valueOf("1100110", 2);
     assertEquals(expectResult.intValue(), actualResult.intValue());
 
     try {
-        expectResult = Bytes::valueOf((String) "99", 8);
+        expectResult = Byte::valueOf((String) "99", 8);
     }
     catch (NumberFormatException &e) {
         assertEquals("Not a number", e.getMessage().toString());
     }
 
     try {
-        expectResult = Bytes::valueOf((String) "Kona", 33);
+        expectResult = Byte::valueOf((String) "Kona", 33);
     }
     catch (NumberFormatException &e) {
         assertEquals("radix out of range", e.getMessage().toString());
     }
 
     try {
-        expectResult = Bytes::valueOf((String) "", 2);
+        expectResult = Byte::valueOf((String) "", 2);
     }
     catch (NumberFormatException &e) {
         assertEquals("input string is null", e.getMessage().toString());
     }
 
     try {
-        Bytes exceptionByte = Bytes::valueOf("256", 10);
+        Byte exceptionByte = Byte::valueOf("256", 10);
     }
     catch (NumberFormatException &e) {
         assertEquals("out of byte range", e.getMessage().toString());
@@ -422,7 +422,7 @@ TEST(JavaLang, ByteValueOfStringWithRadix) {
 TEST(JavaLang, ByteHashCodeWithByte) {
     byte byteToGetValue = 5;
     int expectResult = 5;
-    int actualResult = Bytes::hashCode(byteToGetValue);
+    int actualResult = Byte::hashCode(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 
@@ -431,48 +431,48 @@ TEST(JavaLang, ByteCompare) {
     byte byte2 = 10;
     byte byte3 = 5;
     // Return a value < 0 if a < b
-    assertTrue(Bytes::compare(byte1, byte2) < 0);
+    assertTrue(Byte::compare(byte1, byte2) < 0);
     // Return a value > 0 if a > b
-    assertTrue(Bytes::compare(byte2, byte1) > 0);
+    assertTrue(Byte::compare(byte2, byte1) > 0);
     // Return a value = 0 if a < b
-    assertEquals(0, Bytes::compare(byte1, byte3));
+    assertEquals(0, Byte::compare(byte1, byte3));
 }
 
 TEST(JavaLang, ByteToUnsignedInt) {
     byte byteToGetValue = static_cast<byte>(-5);
     int expectResult = 251;
-    int actualResult = Bytes::toUnsignedInt(byteToGetValue);
+    int actualResult = Byte::toUnsignedInt(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteToUnsignedLong) {
     byte byteToGetValue = static_cast<byte>(-5);
     long expectResult = 251;
-    long actualResult = Bytes::toUnsignedLong(byteToGetValue);
+    long actualResult = Byte::toUnsignedLong(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 
 TEST(JavaLang, ByteByteOperator) {
 	// Given a valid number
-	Bytes validByte = 5;
-	Bytes targetByte = 3;
-    Bytes equalValidByte = 5;
-    Bytes zeroByte = 0;
+	Byte validByte = 5;
+	Byte targetByte = 3;
+    Byte equalValidByte = 5;
+    Byte zeroByte = 0;
 	
 	// Make a summation with targetByte
-	Bytes summationByte = 8;
+	Byte summationByte = 8;
 	assertTrue(summationByte == (validByte + targetByte));
 	
 	// Make a subtraction with targetByte
-	Bytes subtractionByte = 2;
+	Byte subtractionByte = 2;
 	assertTrue(subtractionByte == (validByte - targetByte));
 	
 	// Make a multiplication with targetByte
-	Bytes multiplicationByte = 15;
+	Byte multiplicationByte = 15;
 	assertTrue(multiplicationByte == (validByte * targetByte));
 	
 	// Make a division with targetByte
-	Bytes divisionByte = 1;
+	Byte divisionByte = 1;
 	assertTrue(divisionByte == (validByte / targetByte));
 
     try {
@@ -483,7 +483,7 @@ TEST(JavaLang, ByteByteOperator) {
     }
 	
 	// Make a modulo with targetByte
-	Bytes modulusByte = 2;
+	Byte modulusByte = 2;
 	assertTrue(modulusByte == (validByte % targetByte));
 
     try {

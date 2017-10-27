@@ -29,11 +29,11 @@
 
 #include <initializer_list>
 #include <iostream>
+#include <unordered_map>
 #include "../../lang/String/String.hpp"
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
-#include <map>
 #include <functional>
 
 namespace Java {
@@ -46,10 +46,10 @@ namespace Java {
                 public virtual Serializable {
 
         private:
-            std::map<Key, Value> original;
+            std::unordered_map<Key, Value> original;
             String backup;
-            typedef typename std::map<Key, Value>::iterator IteratorType;
-            typedef typename std::map<Key, Value>::const_iterator ConstIteratorType;
+            typedef typename std::unordered_map<Key, Value>::iterator IteratorType;
+            typedef typename std::unordered_map<Key, Value>::const_iterator ConstIteratorType;
 
         public:
             /**
@@ -224,7 +224,7 @@ namespace Java {
              * Called by clone and readObject.
              */
             void reinitialize() {
-                std::map<Key, Value> newMap;
+                std::unordered_map<Key, Value> newMap;
                 this->original = newMap;
             }
 
@@ -686,7 +686,7 @@ namespace Java {
                 String endString = "}";
                 String totalString;
 
-                typename std::map<Key, Value>::iterator it;
+                typename std::unordered_map<Key, Value>::iterator it;
                 for (it = this->original.begin(); it != this->original.end(); ++it) {
                     if (instanceof<String>(it->first)) {
                         String first = it->first.toString();
