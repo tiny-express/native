@@ -438,9 +438,8 @@ TEST (JavaUtil, HashMapToString) {
 	HashMap<String, String> hashMap;
 	hashMap.put("key1", "value1");
 	hashMap.put("key16", "value16");
-	hashMap.put("key02", "value02");
 	
-	string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
+	string expectedResult = (string) R"({"key16": "value16", "key1": "value1"})";
 	string result = hashMap.toString();
 	assertEquals(expectedResult, result);
 	
