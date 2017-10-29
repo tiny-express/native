@@ -530,8 +530,8 @@ namespace Java {
 						}
 						
 						inline size_t operator()(const Long &target) const {
-							String targetLong = target.toString();
-							return std::_Hash_impl::hash(targetLong.toString(), targetLong.length());
+							String targetString = target.toString();
+							return std::hash<std::string>{}(targetString.toString());
 						}
 				};
 		}

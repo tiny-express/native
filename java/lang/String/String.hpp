@@ -1122,7 +1122,7 @@ namespace Java {
             }
         
             inline size_t operator()(const String &target) const {
-                  return std::_Hash_impl::hash(target.original, target.length());
+                return std::hash<std::string>{}(target.original);
             }
         public:
             /**

@@ -420,7 +420,7 @@ namespace Java {
 						
 						inline size_t operator()(const Byte &target) const {
 							String targetString = target.toString();
-							return std::_Hash_impl::hash(targetString.toString(), targetString.length());
+							return std::hash<std::string>{}(targetString.toString());
 						}
 				};
 				

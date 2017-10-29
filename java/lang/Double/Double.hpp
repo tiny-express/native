@@ -547,8 +547,8 @@ namespace Java {
 				
 				public:
 						inline size_t operator()(const Double &target) const {
-							String targetLong = target.toString();
-							return std::_Hash_impl::hash(targetLong.toString(), targetLong.length());
+							String targetString = target.toString();
+							return std::hash<std::string>{}(targetString.toString());
 						}
 				};
 		}  // namespace Lang
