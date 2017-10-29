@@ -1120,7 +1120,10 @@ namespace Java {
             inline boolean operator>=(const String &target) const {
                 return strcmp(this->original, target.toString()) >= 0;
             }
-
+        
+            inline size_t operator()(const String &target) const {
+                return std::hash<std::string>{}(target.original);
+            }
         public:
             /**
              * Format string
@@ -1269,5 +1272,15 @@ namespace Java {
         };
     } // namespace Lang
 } // namespace Java
+
+using namespace Java::Lang;
+
+namespace std {
+        template <> struct hash<String> {
+                std::size_t operator()(const String& k) const {
+                    return String()(k);
+                }
+        };
+}
 
 #endif  // JAVA_LANG_STRING_STRING_HPP

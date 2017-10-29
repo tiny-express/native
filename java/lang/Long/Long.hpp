@@ -522,14 +522,29 @@ namespace Java {
 						 * @param target
 						 */
 						void operator%=(const Long &target);
-				
+						
 				public:
 						friend std::ostream &operator<<(std::ostream &os, const Long &target) {
 							os << target.original;
 							return os;
 						}
+						
+						inline size_t operator()(const Long &target) const {
+							String targetString = target.toString();
+							return std::hash<std::string>{}(targetString.toString());
+						}
 				};
 		}
+}
+
+using namespace Java::Lang;
+
+namespace std {
+		template <> struct hash<Long> {
+				std::size_t operator()(const Long& k) const {
+					return Long()(k);
+				}
+		};
 }
 
 #endif  // JAVA_LANG__HPP

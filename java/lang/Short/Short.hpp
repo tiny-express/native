@@ -81,8 +81,21 @@ namespace Java {
 							os << target.original;
 							return os;
 						}
+						
+						inline size_t operator()(const Short &target) const {
+							String targetString = target.toString();
+							return std::hash<std::string>{}(targetString.toString());
+						}
 				};
 		}
+}
+
+namespace std {
+		template <> struct hash<Short> {
+				std::size_t operator()(const Short& k) const {
+					return Short()(k);
+				}
+		};
 }
 
 #endif  // JAVA_LANG_SHORT_SHORT_HPP
