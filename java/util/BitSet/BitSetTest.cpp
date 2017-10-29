@@ -494,7 +494,7 @@ TEST(JavaUtilBitSet, Get) {
     assertEquals(10, bitSet6.length());
 }
 
-TEST(VavaUtil, BitSetSet) {
+TEST(JavaUtilBitSet, Set) {
     BitSet bitSet1;
     assertEquals(0, bitSet1.length());
     assertEquals(64, bitSet1.size());
