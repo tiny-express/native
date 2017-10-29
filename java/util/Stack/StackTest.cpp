@@ -30,8 +30,7 @@
 
 using namespace Java::Util;
 
-
-TEST (JavaUtil, StackPush) {
+TEST (JavaUtilStack, Push) {
 	// int
 	Stack<int> pushIntStack;
 	
@@ -94,7 +93,7 @@ TEST (JavaUtil, StackPush) {
 	
 }
 
-TEST (JavaUtil, StackEmpty) {
+TEST (JavaUtilStack, Empty) {
 	// Give an emtpy Stack
 	
 	// int
@@ -140,7 +139,7 @@ TEST (JavaUtil, StackEmpty) {
 	assertFalse(notEmptyObjectStack.empty());
 }
 
-TEST (JavaUtil, StackPeek) {
+TEST (JavaUtilStack, Peek) {
 	//int
 	Stack<int> peekIntStack;
 	
@@ -203,7 +202,7 @@ TEST (JavaUtil, StackPeek) {
 	}
 }
 
-TEST (JavaUtil, StackPop) {
+TEST (JavaUtilStack, Pop) {
 	//int
 	Stack<int> popIntStack;
 	
@@ -266,7 +265,7 @@ TEST (JavaUtil, StackPop) {
 	}
 }
 
-TEST (JavaUtil, StackSearch) {
+TEST (JavaUtilStack, Search) {
 	//int
 	Stack<int> searchIntStack;
 	

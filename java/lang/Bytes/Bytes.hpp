@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_BYTE_HPP
-#define NATIVE_JAVA_LANG_BYTE_HPP
+#ifndef NATIVE_JAVA_LANG_BYTES_HPP
+#define NATIVE_JAVA_LANG_BYTES_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -34,12 +34,11 @@
 
 namespace Java {
 		namespace Lang {
+				class Bytes;
 				
-				class Byte;
-				
-				class Byte :
+				class Bytes :
 					public virtual Number,
-					public virtual Comparable<Byte> {
+					public virtual Comparable<Bytes> {
 				private:
 						byte original;
 						string originalString;
@@ -69,14 +68,14 @@ namespace Java {
 						/**
 						 * Default constructor
 						 */
-						Byte();
+						Bytes();
 						
 						/**
 						 * Construct a new Byte with the value of byte
 						 *
 						 * @param byteValue
 						 */
-						Byte(byte byteValue);
+						Bytes(byte byteValue);
 						
 						/**
 						 * Construct a new Byte with the value of String
@@ -84,19 +83,19 @@ namespace Java {
 						 * @param inputString
 						 * @throw NumberFormatException If inputString does not contain a parsable byte.
 						 */
-						Byte(String inputString);
+						Bytes(String inputString);
 						
 						/**
 						 * Copy constructor
 						 *
-						 * @param anotherByte
+						 * @param anotherBytes
 						 */
-						Byte(const Byte &anotherByte);
+						Bytes(const Bytes &anotherBytes);
 						
 						/**
 						 * Destructor, free memory allocated for originalString.
 						 */
-						~Byte();
+						~Bytes();
 				
 				public:
 						
@@ -132,7 +131,7 @@ namespace Java {
 						 * a value less than 0 if this Byte is numerically less than other;
 						 * and a value greater than 0 if this Byte is numerically greater than other
 						 */
-						int compareTo(const Byte &other) const override;
+						int compareTo(const Bytes &other) const override;
 						
 						/**
 						 * Decodes a String into a Byte. Accepts decimal, hexadecimal, and octal numbers
@@ -141,7 +140,7 @@ namespace Java {
 						 * @throw NumberFormatException - if the String does not contain a parsable byte.
 						 * @return a Byte object holding the byte value represented by stringToDecode
 						 */
-						static Byte decode(String stringToDecode);
+						static Bytes decode(String stringToDecode);
 						
 						/**
 						 * Double value of Byte
@@ -154,10 +153,10 @@ namespace Java {
 						 * Compare this Byte to another Byte object
 						 *
 						 * @param object
-						 * @return true if object is a Byte and has the same value as this Byte; false otherwise
+						 * @return true if object is a Byte and has the same value as this Bytes; false otherwise
 						 */
 						// TODO need instanceof temporary use Byte instead of Object
-						boolean equals(Byte object);
+						boolean equals(Bytes object);
 						
 						/**
 						 * Returns the value of this Byte as an float.
@@ -171,7 +170,7 @@ namespace Java {
 						 *
 						 * @return long
 						 */
-						long hashCode() const override;
+						int hashCode() const;
 						
 						/**
 						 * Returns a hash code for this Byte
@@ -202,7 +201,7 @@ namespace Java {
 						 * @throw NumberFormatException If the string does not contain a parsable byte.
 						 * @return the byte value represented by the string argument with radix =10
 						 */
-						static byte parseByte(String stringToParse);
+						static byte parseBytes(String stringToParse);
 						
 						/**
 						 * Parse the parameter string as a byte
@@ -212,7 +211,7 @@ namespace Java {
 						 * @throw NumberFormatException If the string does not contain a parsable byte.
 						 * @return the byte value represented by the string argument in the specified radix
 						 */
-						static byte parseByte(String stringToParse, int radix);
+						static byte parseBytes(String stringToParse, int radix);
 						
 						/**
 						 * Returns the value of this Byte as an short.
@@ -226,7 +225,7 @@ namespace Java {
 						 *
 						 * @return string
 						 */
-						string toString() const override;
+						String toString() const;
 						
 						/**
 						 * Returns a new String object representing the specified byte with radix = 10
@@ -258,7 +257,7 @@ namespace Java {
 						 * @param byteValue
 						 * @return Byte
 						 */
-						static Byte valueOf(byte byteValue);
+						static Bytes valueOf(byte byteValue);
 						
 						/**
 						 * Returns a Byte instance representing the specified String value.
@@ -266,7 +265,7 @@ namespace Java {
 						 * @param stringValue
 						 * @return Byte
 						 */
-						static Byte valueOf(String stringValue);
+						static Bytes valueOf(String stringValue);
 						
 						/**
 						 * Returns a Byte instance representing the specified String value with radix
@@ -275,7 +274,7 @@ namespace Java {
 						 * @param radix
 						 * @return Byte
 						 */
-						static Byte valueOf(String stringValue, int radix);
+						static Bytes valueOf(String stringValue, int radix);
 				
 				public:
 						/**
@@ -284,7 +283,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte operator+(const Byte &target);
+						Bytes operator+(const Bytes &target);
 						
 						/**
 						 * Make a subtraction with target Byte
@@ -292,7 +291,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte operator-(const Byte &target);
+						Bytes operator-(const Bytes &target);
 						
 						/**
 						 *  Make a division from this Byte with target
@@ -301,7 +300,7 @@ namespace Java {
 						 * @throw ArithmeticException if target equal to zero
 						 * @return Byte
 						 */
-						Byte operator/(const Byte &target);
+						Bytes operator/(const Bytes &target);
 						
 						/**
 						 * Make a modulo from this Byte with target
@@ -310,7 +309,7 @@ namespace Java {
 						 * @throw ArithmeticException if target equal to zero
 						 * @return Byte
 						 */
-						Byte operator%(const Byte &target);
+						Bytes operator%(const Bytes &target);
 						
 						/**
 						 * Make a multiplication from this Byte with target
@@ -318,7 +317,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte operator*(const Byte &target);
+						Bytes operator*(const Bytes &target);
 						
 						/**
 						 * Compare 2 Byte
@@ -326,7 +325,7 @@ namespace Java {
 						 * @param target
 						 * @return true if target Byte is equal to this Byte; false otherwise
 						 */
-						boolean operator==(const Byte &target);
+						boolean operator==(const Bytes &target);
 						
 						/**
 						 * Compare 2 Byte
@@ -334,7 +333,7 @@ namespace Java {
 						 * @param target
 						 * @return true if target Byte is not equal to this Byte; false otherwise
 						 */
-						boolean operator!=(const Byte &target);
+						boolean operator!=(const Bytes &target);
 						
 						/**
 						 * Determine if this Byte is smaller than target
@@ -342,7 +341,7 @@ namespace Java {
 						 * @param target
 						 * @return true if this Byte is smaller than target; false otherwise
 						 */
-						boolean operator<(const Byte &target);
+						boolean operator<(const Bytes &target);
 						
 						/**
 						 * Determine if this Byte is bigger than target
@@ -350,7 +349,7 @@ namespace Java {
 						 * @param target
 						 * @return true if this Byte is bigger than target; false otherwise
 						 */
-						boolean operator>(const Byte &target);
+						boolean operator>(const Bytes &target);
 						
 						/**
 						 * Determine if this Byte is equal or less than target
@@ -358,7 +357,7 @@ namespace Java {
 						 * @param target
 						 * @return true if this Byte is equal or less than target; false otherwise
 						 */
-						boolean operator<=(const Byte &target);
+						boolean operator<=(const Bytes &target);
 						
 						/**
 						 * Determine if this Byte is equal or bigger than target
@@ -366,7 +365,7 @@ namespace Java {
 						 * @param target
 						 * @return true if this Byte is equal or bigger than target; false otherwise
 						 */
-						boolean operator>=(const Byte &target);
+						boolean operator>=(const Bytes &target);
 						
 						/**
 						 * Make a subtraction from this Byte with target and assign the result value to this Byte
@@ -374,7 +373,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte &operator-=(const Byte &target);
+						Bytes &operator-=(const Bytes &target);
 						
 						/**
 						 * Make an summation from this Byte with target and assign the result value to this Byte
@@ -382,7 +381,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte &operator+=(const Byte &target);
+						Bytes &operator+=(const Bytes &target);
 						
 						/**
 						 * Make a multiplication from this Byte with target and assign the result value to this Byte
@@ -390,7 +389,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte &operator*=(const Byte &target);
+						Bytes &operator*=(const Bytes &target);
 						
 						/**
 						 * Make a division from this Byte with target and assign the result value to this Byte
@@ -398,7 +397,7 @@ namespace Java {
 						 * @param target
 						 * @return Byte
 						 */
-						Byte &operator/=(const Byte &target);
+						Bytes &operator/=(const Bytes &target);
 						
 						/**
 						 * Make a modulo from this Byte with target and assign the result value to this Byte
@@ -407,7 +406,7 @@ namespace Java {
 						 * @throw ArithmeticException if target equal to zero
 						 * @return Byte
 						 */
-						Byte &operator%=(const Byte &target);
+						Bytes &operator%=(const Bytes &target);
 						
 						/**
 						 *  Assign the value of target to this Byte
@@ -416,11 +415,10 @@ namespace Java {
 						 * @throw ArithmeticException if target equal to zero
 						 * @return Byte
 						 */
-						Byte &operator=(const Byte &target);
+						Bytes &operator=(const Bytes &target);
 						
-						inline size_t operator()(const Byte &target) const {
-							String targetString = target.toString();
-							return std::hash<std::string>{}(targetString.toString());
+						inline size_t operator()(const Bytes &target) const {
+							return std::hash<std::string>{}(target.toString().toCharPointer());
 						}
 				};
 				
@@ -435,13 +433,14 @@ namespace Java {
 							cache = this->cacheInit();
 						};
 						
-						Array<Byte> cache;
+						Array<Bytes> cache;
 						
-						Array<Byte> cacheInit() {
-							Array<Byte> cacheArray;
+						
+						Array<Bytes> cacheInit() {
+							Array<Bytes> cacheArray;
 							int index;
 							for (index = 0; index < 256; index++) {
-								cacheArray.push(Byte(static_cast<byte>(index)));
+								cacheArray.push(Bytes(static_cast<byte>(index)));
 							}
 							return cacheArray;
 						}
@@ -454,7 +453,7 @@ namespace Java {
 							return instance;
 						}
 						
-						Byte getByteAtIndex(int index) {
+						Bytes getByteAtIndex(int index) {
 							return cache[ index ];
 						}
 				};
@@ -463,10 +462,11 @@ namespace Java {
 
 namespace std {
 		template <>
-		struct hash<Byte> {
-				std::size_t operator()(const Byte &k) const {
-					return Byte()(k);
+		struct hash<Bytes> {
+				std::size_t operator()(const Bytes &k) const {
+					return Bytes()(k);
 				}
 		};
 }
-#endif
+
+#endif // NATIVE_JAVA_LANG_BYTES_HPP

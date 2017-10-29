@@ -29,25 +29,22 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, EnumGetName) {
+TEST (JavaLangEnum, GetName) {
 	// Given valid enum and name to test getName()
-	Enum<int> validEnum = Enum<int>("validName", 7);
-	
+	Enum<Integer> validEnum = Enum<Integer>("validName", 7);
 	String expectedValue = "validName";
 	assertEquals(expectedValue.toString(), validEnum.getName().toString());
 }
 
-TEST (JavaLang, EnumGetOrdinal) {
+TEST (JavaLangEnum, GetOrdinal) {
 	// Given valid enum and name to test getOrdinal()
-	Enum<int> validEnum = Enum<int>("validName", 18);
-	
+	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
 	int expectedValue = 18;
 	assertEquals(expectedValue, validEnum.getOrdinal());
 }
 
-TEST (JavaLang, EnumToString) {
+TEST (JavaLangEnum, ToString) {
 	// Given valid enum and name to test getOrdinal()
-	Enum<int> validEnum = Enum<int>("validName", 18);
-
+	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
 	assertEquals("18", validEnum.toString());
 }

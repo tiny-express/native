@@ -65,13 +65,13 @@ TEST(JavaSecurity, MD5) {
     digestLength = md5.getDigestLength();
     result = new byte[digestLength]();
 
-    md5.update((byte*)input.toString(), input.getSize());
+    md5.update((byte*)input.toCharPointer(), input.getSize());
     md5.digest(result, digestLength);
 
     assertArray(expect, result);
 
     md5.reset();
-    md5.update((byte*)input.toString(), input.getSize());
+    md5.update((byte*)input.toCharPointer(), input.getSize());
     md5.digest(result, digestLength);
 
     assertArray(expect, result);
@@ -101,7 +101,7 @@ TEST(JavaSecurity, MD5MultiUpdate) {
         if (size < 10)
             size = range;
 
-        md5.update((byte*)input.toString() + offset, size);
+        md5.update((byte*)input.toCharPointer() + offset, size);
         offset += size;
     }
     md5.digest(result, digestLength);
@@ -123,7 +123,7 @@ TEST(JavaSecurity, SHA1) {
     digestLength = sha1.getDigestLength();
     result = new byte[digestLength];
 
-    sha1.update((byte*)input.toString(), input.getSize());
+    sha1.update((byte*)input.toCharPointer(), input.getSize());
     sha1.digest(result, digestLength);
 
     assertArray(expect, result);
@@ -152,7 +152,7 @@ TEST(JavaSecurity, SHA1MultiUpdate) {
         int size = rand() % range;
         if (size < 10)
             size = range;
-        sha1.update((byte*)input.toString() + offset, size);
+        sha1.update((byte*)input.toCharPointer() + offset, size);
         offset += size;
     }
     sha1.digest(result, digestLength);
@@ -190,7 +190,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             md5.update(nullptr, 0);
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 
@@ -204,7 +204,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             sha1.digest(nullptr, 1);
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 
@@ -219,7 +219,7 @@ TEST(JavaSecurity, Exception) {
         try {
             byte buf[1] = { 0 };
             sha1.digest(buf, sizeof(buf));
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 

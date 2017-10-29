@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ThrowableConstructor) {
+TEST (JavaLangThrowable, Constructor) {
 	// Constructs a new throwable with null as its detail message.
 	Throwable throwableWithNullMessage;
 	assertEquals("", throwableWithNullMessage.getMessage().toString());

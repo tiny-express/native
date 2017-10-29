@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_LIST_HPP
-#define JAVA_UTIL_LIST_HPP
+#ifndef NATIVE_JAVA_UTIL_LIST_HPP
+#define NATIVE_JAVA_UTIL_LIST_HPP
 
 #include "../function/UnaryOperator/UnaryOperator.hpp"
 #include "../Iterator/Iterator.hpp"
@@ -49,7 +49,7 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						virtual boolean add(E element);
+						virtual boolean add(E &element) = 0;
 						
 						/**
 						 * Inserts the specified element at the specified position in this list (optional operation).
@@ -58,7 +58,7 @@ namespace Java {
 						 * @param element
 						 * @return
 						 */
-						virtual void add(int index, E element) = 0;
+						virtual void add(int index, E &element) = 0;
 						
 						/**
 						 * Appends all of the elements in the specified collection to the end of this list,
@@ -82,7 +82,7 @@ namespace Java {
 						/**
 						 * Removes all of the elements from this list (optional operation).
 						 */
-						virtual void clear();
+						virtual void clear() = 0;
 						
 						/**
 						 * Returns true if this list contains the specified element.
@@ -90,7 +90,7 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean contains(E element);
+						virtual boolean contains(E &element) = 0;
 						
 						/**
 						 * Returns true if this list contains all of the elements of the specified collection.
@@ -104,20 +104,20 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						virtual boolean equals(const Object object);
+						virtual boolean equals(const Object &object) = 0;
 						
 						/**
 						 * Returns the element at the specified position in this list.
 						 * @param index
 						 * @return E
 						 */
-						virtual E get(int index);
+						virtual E get(int index) = 0;
 						
 						/**
 						 * Returns the hash code value for this list.
 						 * @return
 						 */
-						virtual long hashCode();
+						virtual long hashCode() = 0;
 						
 						/**
 						 * Returns the index of the first occurrence of the specified element in this list,
@@ -125,13 +125,13 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						virtual int indexOf(E element);
+						virtual int indexOf(E &element) = 0;
 						
 						/**
 						 * Returns true if this list contains no elements.
 						 * @return boolean
 						 */
-						virtual boolean isEmpty();
+						virtual boolean isEmpty() = 0;
 						
 						/**
 						 * Don't support this method
@@ -145,7 +145,7 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						virtual int lastIndexOf(E element);
+						virtual int lastIndexOf(E &element) = 0;
 						
 						/**
 						 * Don't support this method
@@ -187,13 +187,13 @@ namespace Java {
 						 * @param element
 						 * @return E
 						 */
-						virtual E set(int index, E element);
+						virtual E set(int index, E &element) = 0;
 						
 						/**
 						 * Returns the number of elements in this list.
 						 * @return int
 						 */
-						virtual int size();
+						virtual int size() = 0;
 						
 						/**
 						 * Don't support this method
@@ -219,4 +219,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_UTIL_LIST_HPP
+#endif // NATIVE_JAVA_UTIL_LIST_HPP

@@ -24,45 +24,47 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_CHAR_SEQUENCE_HPP
-#define JAVA_LANG_CHAR_SEQUENCE_HPP
-
-#include "../Object/Object.hpp"
+#ifndef NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP
+#define NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP
 
 namespace Java {
-		namespace Lang {
-				class CharSequence {
-				public:
-						virtual string toString() const = 0;
-						/**
-						 * Returns the char value at the specified index.  An index ranges from zero
-						 * to length() - 1.  The first char value of the sequence is at
-						 * index zero, the next at index one, and so on, as for array
-						 * indexing.
-						 *
-						 * If the char value specified by the index is a
-						 * "{@docRoot}/java/lang/Character.html#unicode">surrogate, the surrogate
-						 * value is returned.
-						 *
-						 * @param   index   the index of the char value to be returned
-						 *
-						 * @return  the specified char value
-						 *
-						 * @throws  IndexOutOfBoundsException
-						 *          if the index argument is negative or not less than
-						 *          length()
-						 */
-						virtual char charAt(int index) const = 0;
-						
-						/**
-						 * Returns the length of this character sequence.  The length is the number
-						 * of 16-bit <code>char</code>s in the sequence.
-						 *
-						 * @return  the number of <code>char</code>s in this sequence
-						 */
-						virtual int length() const = 0;
-				};
-		}
+    namespace Lang {
+        class String;
+
+        class CharSequence {
+        public:
+
+            virtual String toString() const = 0;
+
+            /**
+             * Returns the char value at the specified index.  An index ranges from zero
+             * to length() - 1.  The first char value of the sequence is at
+             * index zero, the next at index one, and so on, as for array
+             * indexing.
+             *
+             * If the char value specified by the index is a
+             * "{@docRoot}/java/lang/Character.html#unicode">surrogate, the surrogate
+             * value is returned.
+             *
+             * @param   index   the index of the char value to be returned
+             *
+             * @return  the specified char value
+             *
+             * @throws  IndexOutOfBoundsException
+             *          if the index argument is negative or not less than
+             *          length()
+             */
+            virtual char charAt(int index) const = 0;
+
+            /**
+             * Returns the length of this character sequence.  The length is the number
+             * of 16-bit <code>char</code>s in the sequence.
+             *
+             * @return  the number of <code>char</code>s in this sequence
+             */
+            virtual int length() const = 0;
+        };
+    }
 }
 
-#endif  // JAVA_LANG_CHAR_SEQUENCE_HPP
+#endif // NATIVE_JAVA_LANG_CHAR_SEQUENCE_HPP

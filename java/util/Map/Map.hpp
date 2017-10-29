@@ -152,7 +152,7 @@ namespace Java {
 								 *
 								 * @return int
 								 */
-								long hashCode() {
+								int hashCode() {
 									return 0;
 								}
 								
@@ -216,7 +216,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean isEmpty() {
-							return false;
+							return 0;
 						}
 						
 						/**

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_SHORT_SHORT_HPP
-#define JAVA_LANG_SHORT_SHORT_HPP
+#ifndef NATIVE_JAVA_LANG_SHORT_SHORT_HPP
+#define NATIVE_JAVA_LANG_SHORT_SHORT_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -51,7 +51,7 @@ namespace Java {
 						long longValue() const;
 						float floatValue() const;
 						double doubleValue() const;
-						string toString() const;
+						String toString() const;
 						
 						static Short parseShort(String target);
 				
@@ -83,8 +83,7 @@ namespace Java {
 						}
 						
 						inline size_t operator()(const Short &target) const {
-							String targetString = target.toString();
-							return std::hash<std::string>{}(targetString.toString());
+							return std::hash<std::string>{}(target.toString().toCharPointer());
 						}
 				};
 		}
@@ -98,4 +97,4 @@ namespace std {
 		};
 }
 
-#endif  // JAVA_LANG_SHORT_SHORT_HPP
+#endif // NATIVE_JAVA_LANG_SHORT_SHORT_HPP

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_IO_HPP
-#define JAVA_IO_HPP
+#ifndef NATIVE_JAVA_IO_HPP
+#define NATIVE_JAVA_IO_HPP
 
 #include "io/BufferedReader/BufferedReader.hpp"
 #include "io/BufferedWriter/BufferedWriter.hpp"
@@ -48,4 +48,4 @@
 #include "io/StreamTokenizer/StreamTokenizer.hpp"
 #include "io/Writer/Writer.hpp"
 
-#endif  // JAVA_IO_HPP
+#endif // NATIVE_JAVA_IO_HPP

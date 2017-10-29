@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, StringIndexOutOfBoundsExceptionConstructor) {
+TEST (JavaLangStringIndexOutOfBoundsException, Constructor) {
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with null as its detail message.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithNullMessage;
 	assertEquals("", stringIndexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
@@ -53,7 +53,7 @@ TEST (JavaLang, StringIndexOutOfBoundsExceptionConstructor) {
 	assertEquals("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage().toString());
 }
 
-TEST (JavaLang, StringIndexOutOfBoundsExceptionTryCatch) {
+TEST (JavaLangStringIndexOutOfBoundsException, TryCatch) {
 	try {
 		throw StringIndexOutOfBoundsException("Throw StringIndexOutOfBoundsException");
 	} catch (Exception e) {

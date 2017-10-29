@@ -24,40 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../Common.hpp"
-#include <cstdlib>
-#include "../Test.hpp"
+#ifndef NATIVE_KERNEL_COMMON_APPEND_HPP
+#define NATIVE_KERNEL_COMMON_APPEND_HPP
 
-TEST (KernelCommon, AppendPointerChar) {
-	char *target[] = {
-		(char *) "The",
-		(char *) "quick",
-		(char *) "brown",
-		(char *) "fox",
-		(char *) "jumps",
-		(char *) "over",
-		(char *) "the",
-		(char *) "lazy",
-		nullptr
-	};
-	auto append = (string) "dog";
-	assertEquals(8, lengthPointerPointerChar(target));
-	char **result = appendPointerChar(target, append);
-	assertEquals(9, lengthPointerPointerChar(result));
-	assertEquals("The", result[ 0 ]);
-	assertEquals("quick", result[ 1 ]);
-	assertEquals("brown", result[ 2 ]);
-	assertEquals("fox", result[ 3 ]);
-	assertEquals("jumps", result[ 4 ]);
-	assertEquals("over", result[ 5 ]);
-	assertEquals("the", result[ 6 ]);
-	assertEquals("lazy", result[ 7 ]);
-	assertEquals("dog", result[ 8 ]);
-	append = (string) "";
-	free(result);
-	result = appendPointerChar(target, append);
-	assertEquals(9, lengthPointerPointerChar(result));
-	free(result);
+#include "../Common.hpp"
+#include "../Builtin.hpp"
+#include <memory>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+/**
+ * Append pointer char
+ * Use to append one more element to array
+ *
+ * @param target
+ * @param append
+ * @return char pointer pointer
+ */
+inline char **appendPointerChar(char **target, char *append) {
+	int targetLength = lengthPointerPointerChar(target);
+	auto **pointer = (char **) allocateMemory((targetLength + 2)* sizeof(char *));
+	memcpy(pointer, target, targetLength * sizeof(char *));
+	*( pointer + targetLength ) = append;
+	*( pointer + targetLength + 1 ) = nullptr;
+	return pointer;
 }
 
-
+#endif // NATIVE_KERNEL_COMMON_APPEND_HPP

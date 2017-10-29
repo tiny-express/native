@@ -524,7 +524,7 @@ String Long::toOctalString(long i) {
  *
  * @return String
  */
-string Long::toString() const {
+String Long::toString() const {
 	return this->originalString;
 }
 
@@ -534,7 +534,7 @@ string Long::toString() const {
  * @param long i
  * @return String
  */
-string Long::toString(long i) {
+String Long::toString(long i) {
 	static Long result = i;
 	return result.toString();
 }

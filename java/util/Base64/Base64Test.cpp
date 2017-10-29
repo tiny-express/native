@@ -31,7 +31,7 @@
 
 using namespace Java::Util;
 
-TEST (JavaUtil, Base64BasicEncoder) {
+TEST (JavaUtilBase64, Encoder) {
 	// Add padding character by default.
 	Array<byte> input3Bytes = { 'M', 'a', 'n' };
 	Array<byte> input2Bytes = { 'M', 'a' };
@@ -77,7 +77,7 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	Array<byte> outputByteArrayIsNotEnoughSize(10);  // Not enough size.
 	try {
 		basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
-	} catch (IllegalArgumentException ex) {
+	} catch (InterruptedException ex) {
 		assertEquals("Output byte array is too small for encoding all input bytes",
 		           ex.getMessage().toString());
 	}
@@ -103,7 +103,7 @@ TEST (JavaUtil, Base64BasicEncoder) {
 	assertTrue(Arrays::equals(expectedResultOfOutputByteArray, outputByteArray));
 }
 
-TEST (JavaUtil, Base64UrlSafeEncoder) {
+TEST (JavaUtilBase64, UrlSafeEncoder) {
 	Array<byte> urlInput = { 'h', 't', 't', 'p', ':', '/', '/',
 	                         'w', 'w', 'w', '.',
 	                         'f', 'o', 'o', 'd', 't', 'i', 'n', 'y', '.',
@@ -119,7 +119,7 @@ TEST (JavaUtil, Base64UrlSafeEncoder) {
 	assertTrue(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
 }
 
-TEST (JavaUitl, Base64MimeEncoder) {
+TEST (JavaUtilBase64, MimeEncoder) {
 	Array<byte> mimeInput =
 		{ 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
 		  'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
@@ -170,7 +170,7 @@ TEST (JavaUitl, Base64MimeEncoder) {
 	                           resultFromMimeInputWithCustomNewLineSeparator));
 }
 
-TEST (JavaUtil, Base64BasicDecoder) {
+TEST (JavaUtilBase64, Decoder) {
 	// Basic decoder with padding character in input.
 	Array<byte> input4BytesWith0BytePadding = { 'T', 'W', 'F', 'u' };
 	Array<byte> input4BytesWith1BytePadding = { 'T', 'W', 'E', '=' };
@@ -212,9 +212,9 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	Array<byte> outputArrayNotEnoughSize(10);
 	try {
 		basicDecoder.decode(inputArray, outputArrayNotEnoughSize);
-	} catch (IllegalArgumentException ex) {
+	} catch (InterruptedException &e) {
 		assertEquals("Output byte array is too small for decoding all input bytes",
-		           ex.getMessage().toString());
+		           e.getMessage().toString());
 	}
 	Array<byte> outputArray(100);
 	int index;
@@ -248,7 +248,7 @@ TEST (JavaUtil, Base64BasicDecoder) {
 	                           resultOfInputAsString));
 }
 
-TEST (JavaUtil, Base64UrlSafeDecoder) {
+TEST (JavaUtilBase64, UrlSafeDecoder) {
 	Array<byte> urlInput = { 'a', 'H', 'R', '0', 'c', 'D', 'o', 'v', 'L',
 	                         '3', 'd', '3', 'd', 'y', '5', 'm', 'b', '2',
 	                         '9', 'k', 'd', 'G', 'l', 'u', 'e', 'S', '5',
@@ -263,7 +263,7 @@ TEST (JavaUtil, Base64UrlSafeDecoder) {
 	assertTrue(Arrays::equals(expectedResultFromUrlInput, resultFromUrlInput));
 }
 
-TEST (JavaUtil, Base64MimeDecoder) {
+TEST (JavaUtilBase64, MimeDecoder) {
 	// Input with "crlf" - "\r\n" as new line separator.
 	Array<byte> mimeInput =
 		{ 'Y', 'W', 'F', 'h', 'Y', 'W', 'F', 'h', 'Y', 'W',

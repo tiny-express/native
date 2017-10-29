@@ -30,7 +30,7 @@
 #include "../../lang/NegativeArraySizeException/NegativeArraySizeException.hpp"
 #include "../Arrays/Arrays.hpp"
 
-TEST(JavaUtil, BitSetConstructor) {
+TEST(JavaUtilBitSet, Constructor) {
     BitSet defaultBitSet;
     assertEquals(0, defaultBitSet.length());
     assertEquals(64, defaultBitSet.size());
@@ -56,14 +56,14 @@ TEST(JavaUtil, BitSetConstructor) {
     assertEquals(true, clonedBitSet.get(50));
 }
 
-TEST(JavaUtil, BitSetCardinality) {
+TEST(JavaUtilBitSet, Cardinality) {
     BitSet bitSet;
     assertEquals(0, bitSet.cardinality());
     bitSet.set(100);
     assertEquals(1, bitSet.cardinality());
 }
 
-TEST(JavaUtil, BitSetClear) {
+TEST(JavaUtilBitSet, Clear) {
     BitSet bitSet;
     assertEquals(0, bitSet.length());
     assertEquals(false, bitSet.get(9));
@@ -138,7 +138,7 @@ TEST(JavaUtil, BitSetClear) {
     assertEquals(false, bitSet.get(1024));
 }
 
-TEST(JavaUtil, BitSetClone) {
+TEST(JavaUtilBitSet, Clone) {
     BitSet bitSet1(100);
     assertEquals(0, bitSet1.length());
     assertEquals(128, bitSet1.size());
@@ -161,7 +161,7 @@ TEST(JavaUtil, BitSetClone) {
     assertEquals(0, clonedBitSet.size());
 }
 
-TEST(JavaUtil, BitSetEquals) {
+TEST(JavaUtilBitSet, Equals) {
     String justString("Hello! I'm not a BitSet!");
     BitSet bitSet;
     assertFalse(bitSet.equals(justString));
@@ -185,7 +185,7 @@ TEST(JavaUtil, BitSetEquals) {
     assertFalse(bitSet.equals(anotherBitSet));
 }
 
-TEST(JavaUtil, BitSetFlip) {
+TEST(JavaUtilBitSet, Flip) {
     BitSet bitSet;
     // 100110101
     bitSet.set(0, true);
@@ -266,7 +266,7 @@ TEST(JavaUtil, BitSetFlip) {
     assertEquals(false, bitSet.get(100));
 }
 
-TEST(JavaUtil, BitSetHashCode) {
+TEST(JavaUtilBitSet, HashCode) {
     BitSet bitSet1;
     BitSet bitSet2;
     assertTrue(bitSet1.hashCode() == bitSet2.hashCode());
@@ -277,7 +277,7 @@ TEST(JavaUtil, BitSetHashCode) {
     assertTrue(bitSet1.hashCode() == bitSet2.hashCode());
 }
 
-TEST(JavaUtil, BitSetIntersects) {
+TEST(JavaUtilBitSet, Intersects) {
     BitSet bitSet1;
     BitSet bitSet2;
     bitSet1.set(0, 1024, false);
@@ -296,7 +296,7 @@ TEST(JavaUtil, BitSetIntersects) {
     assertFalse(bitSet1.intersects(bitSet2));
 }
 
-TEST(JavaUtil, BitSetIsEmpty) {
+TEST(JavaUtilBitSet, IsEmpty) {
     BitSet bitSet;
     assertTrue(bitSet.isEmpty());
     bitSet.set(1);
@@ -305,14 +305,14 @@ TEST(JavaUtil, BitSetIsEmpty) {
     assertTrue(bitSet.isEmpty());
 }
 
-TEST(JavaUtil, BitSetLength) {
+TEST(JavaUtilBitSet, Length) {
     BitSet defaultBitSet;
     assertEquals(0, defaultBitSet.length());
     BitSet initialSizeBitSet(100);
     assertEquals(0, initialSizeBitSet.length());
 }
 
-TEST(JavaUtil, BitSetNextClearBit) {
+TEST(JavaUtilBitSet, NextClearBit) {
     BitSet bitSet;
     // fromIndex < 0
     try {
@@ -334,7 +334,7 @@ TEST(JavaUtil, BitSetNextClearBit) {
     assertEquals(512, bitSet.nextClearBit(0));
 }
 
-TEST(JavaUtil, BitSetNextSetBit) {
+TEST(JavaUtilBitSet, NextSetBit) {
     BitSet bitSet;
     // fromIndex < 0
     try {
@@ -357,7 +357,7 @@ TEST(JavaUtil, BitSetNextSetBit) {
     assertEquals(-1, bitSet.nextSetBit(300));
 }
 
-TEST(JavaUtil, BitSetPreviousClearBit) {
+TEST(JavaUtilBitSet, PreviousClearBit) {
     BitSet bitSet;
     // fromIndex = -1
     assertEquals(-1, bitSet.previousClearBit(-1));
@@ -384,7 +384,7 @@ TEST(JavaUtil, BitSetPreviousClearBit) {
     assertEquals(512, bitSet.previousClearBit(512));
 }
 
-TEST(JavaUtil, BitSetPreviousSetBit) {
+TEST(JavaUtilBitSet, PreviousSetBit) {
     BitSet bitSet;
     // fromIndex = -1
     assertEquals(-1, bitSet.previousSetBit(-1));
@@ -410,7 +410,7 @@ TEST(JavaUtil, BitSetPreviousSetBit) {
     assertEquals(199, bitSet.previousSetBit(200));
 }
 
-TEST(JavaUtil, BitSetGet) {
+TEST(JavaUtilBitSet, Get) {
     BitSet bitSet1;
     assertEquals(0, bitSet1.length());
     assertEquals(64, bitSet1.size());
@@ -571,14 +571,14 @@ TEST(VavaUtil, BitSetSet) {
     assertEquals(false, bitSet2.get(1024));
 }
 
-TEST(JavaUtil, BitSetSize) {
+TEST(JavaUtilBitSet, Size) {
     BitSet defaultBitSet;
     assertEquals(64, defaultBitSet.size());
     BitSet initialSizeBitSet(100);
     assertEquals(128, initialSizeBitSet.size());
 }
 
-TEST(JavaUtil, BitSetToString) {
+TEST(JavaUtilBitSet, ToString) {
     BitSet bitSet;
     assertEquals("{}", bitSet.toString());
     bitSet.set(2);
@@ -592,9 +592,9 @@ TEST(JavaUtil, BitSetToString) {
     assertEquals("{}", bitSet.toString());
 }
 
-TEST(JavaUtil, BitSetToByteArray) {
+TEST(JavaUtilBitSet, ToByteArray) {
     BitSet bitSet;
-    Array<byte> expectedResultByteArray = Array<byte>(0);
+    Array<byte> expectedResultByteArray = {};
     Array<byte> resultByteArray = bitSet.toByteArray();
     assertTrue(Arrays::equals(expectedResultByteArray, resultByteArray));
 
@@ -629,9 +629,9 @@ TEST(JavaUtil, BitSetToByteArray) {
     assertTrue(Arrays::equals(expectedResultByteArray, resultByteArray));
 }
 
-TEST(JavaUtil, BitSetToLongArray) {
+TEST(JavaUtilBitSet, ToLongArray) {
     BitSet bitSet;
-    Array<long> expectedResultLongArray = Array<long>(0);
+    Array<long> expectedResultLongArray = {};
     Array<long> resultLongArray = bitSet.toLongArray();
     assertTrue(Arrays::equals(expectedResultLongArray, resultLongArray));
 
@@ -646,7 +646,7 @@ TEST(JavaUtil, BitSetToLongArray) {
     assertTrue(Arrays::equals(expectedResultLongArray, resultLongArray));
 }
 
-TEST(JavaUtil, BitSetValueOf) {
+TEST(JavaUtilBitSet, ValueOf) {
     // This input byte array has 4 zero bytes, it doesn't affect to result.
     Array<byte> inputByteArray = Array<byte>
             {0b00001111, 0b00000000, 0b00000000, 0b00000000,
@@ -679,7 +679,7 @@ TEST(JavaUtil, BitSetValueOf) {
     assertTrue(expectedResultLongArray.equals(resultLongArray));
 }
 
-TEST(JavaUtil, BitSetCompareEqualsOperator) {
+TEST(JavaUtilBitSet, CompareEqualsOperator) {
     BitSet bitSet1;
     BitSet bitSet2;
     assertTrue(bitSet1 == bitSet2);
@@ -687,7 +687,7 @@ TEST(JavaUtil, BitSetCompareEqualsOperator) {
     assertTrue(bitSet1 != bitSet2);
 }
 
-TEST(JavaUtil, BitSetAssignmentOperator) {
+TEST(JavaUtilBitSet, AssignmentOperator) {
     BitSet bitSet1;
     bitSet1.set(0, 1024, true);
     assertEquals(1024, bitSet1.length());
@@ -701,7 +701,7 @@ TEST(JavaUtil, BitSetAssignmentOperator) {
     assertTrue(bitSet1.equals(bitSet2));
 }
 
-TEST(JavaUtil, BitSetAnd) {
+TEST(JavaUtilBitSet, And) {
     BitSet bitSet1;
     bitSet1.set(0, 8, true);
     BitSet bitSet2;
@@ -728,7 +728,7 @@ TEST(JavaUtil, BitSetAnd) {
     assertEquals(false, bitSet1.get(4));
 }
 
-TEST(JavaUtil, BitSetOr) {
+TEST(JavaUtilBitSet, Or) {
     BitSet bitSet1;
     BitSet bitSet2;
     bitSet1.bitOr(bitSet2);
@@ -743,7 +743,7 @@ TEST(JavaUtil, BitSetOr) {
     assertEquals(2048, bitSet1.cardinality());
 }
 
-TEST(JavaUtil, BitSetXor) {
+TEST(JavaUtilBitSet, Xor) {
     BitSet bitSet1;
     BitSet bitSet2;
     bitSet1.set(0, 1024, true);
@@ -758,7 +758,7 @@ TEST(JavaUtil, BitSetXor) {
     assertEquals(true, bitSet1.get(2047));
 }
 
-TEST(JavaUtil, BitSetAndNot) {
+TEST(JavaUtilBitSet, AndNot) {
     BitSet bitSet1;
     BitSet bitSet2;
     bitSet1.set(0, 1024, true);

@@ -27,11 +27,11 @@
 #ifndef NATIVE_KERNEL_STRING_PROCESS_HPP
 #define NATIVE_KERNEL_STRING_PROCESS_HPP
 
-#include "../Common/Segment.hpp"
+#include "../common/Segment.hpp"
 
 /**
  * String replace
- * Find a string in target and replace it by replaceWith
+ * Find a char *in target and replace it by replaceWith
  *
  * @param target
  * @param findString
@@ -254,7 +254,7 @@ inline int stringIndex(const char *target, const char *subTarget, int times) {
 #ifdef LINUX
 	register
 #endif
-    int indexTarget, indexSubTarget, count_times = 0, position_result;
+    int indexTarget, indexSubTarget, countTimes = 0, positionResult;
 	for (indexTarget = 0; indexTarget <= ( targetLength - subTargetLength ); indexTarget++) {
 		if (target[ indexTarget ] != subTarget[ 0 ]) {
 			continue;
@@ -265,10 +265,10 @@ inline int stringIndex(const char *target, const char *subTarget, int times) {
 			}
 		}
 		if (indexSubTarget == subTargetLength) {
-			position_result = indexTarget;
-			count_times++;
-			if (count_times == times) {
-				return position_result;
+			positionResult = indexTarget;
+			countTimes++;
+			if (countTimes == times) {
+				return positionResult;
 			}
 		}
 	}
@@ -306,12 +306,13 @@ inline char *stringRandom(char *target, int size) {
  * @param subTarget
  * @return string
  */
-inline char *stringAppend(char **target, char subTarget) {
-	int length = asprintf(target, "%s%c", *target, subTarget);
-	if (length <= 0) {
-		return nullptr;
+inline void stringAppend(char **targetPointer, char subTarget) {
+	string targetHolder =  *targetPointer;
+	int result = asprintf(targetPointer, "%s%c", *targetPointer, subTarget);
+	if (result == 0) {
+		*targetPointer = nullptr;
 	}
-	return *target;
+	free(targetHolder);
 }
 
 /**
@@ -350,7 +351,7 @@ inline char *stringFromTo(char *target, int from, int to) {
 }
 
 /**
- * Substring from a position to end of string
+ * Subchar *from a position to end of string
  *
  * @param target
  * @param from
@@ -455,7 +456,7 @@ inline char *stringStandardized(char *target) {
 }
 
 /**
- * Check two string equals or not
+ * Check two char *equals or not
  *
  * @param target1
  * @param target2
@@ -475,7 +476,7 @@ inline boolean stringEquals(const char *target1, const char *target2) {
  * Reverse a string
  *
  * @param target
- * @return string reversed
+ * @return char *reversed
  */
 inline char *stringReverse(char *target) {
 	int targetLength = lengthPointerChar(target);

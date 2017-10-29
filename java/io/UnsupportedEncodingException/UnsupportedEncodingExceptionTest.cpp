@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
+TEST(JavaIoUnsupportedEncodingException, Constructor) {
     // Constructs a new UnsupportedEncodingException with null as its detail message.
     UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
     assertEquals("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
@@ -39,7 +39,7 @@ TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
     assertEquals("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
 }
 
-TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
+TEST(JavaIoUnsupportedEncodingException, TryCatch) {
     try {
         throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
     } catch (UnsupportedEncodingException &ex) {

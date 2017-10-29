@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, NegativeArraySizeExceptionConstructor) {
+TEST (JavaLangNegativeArraySizeException, Constructor) {
 // Constructs a new NegativeArraySizeException with null as its detail message.
 	NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
 	assertEquals("", negativeArraySizeExceptionWithNullMessage.getMessage().toString());
@@ -39,7 +39,7 @@ TEST (JavaLang, NegativeArraySizeExceptionConstructor) {
 	assertEquals("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage().toString());
 }
 
-TEST (JavaLang, NegativeArraySizeExceptionTryCatch) {
+TEST (JavaLangNegativeArraySizeException, TryCatch) {
 	try {
 		throw RuntimeException("Throw NegativeArraySizeException");
 	} catch (Exception e) {

@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ExceptionConstructor) {
+TEST (JavaLangException, Constructor) {
 	// Constructs a new Exception with null as its detail message.
 	Exception exceptionWithNullMessage;
 	assertEquals("", exceptionWithNullMessage.getMessage().toString());

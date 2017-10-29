@@ -43,4 +43,4 @@ namespace Java {
 		}
 }
 
-#endif//NATIVE_JAVA_LANG_ERROR_HPP
+#endif // NATIVE_JAVA_LANG_ERROR_HPP

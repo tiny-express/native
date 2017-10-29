@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_SET_HPP
-#define JAVA_UTIL_SET_HPP
+#ifndef NATIVE_JAVA_UTIL_SET_HPP
+#define NATIVE_JAVA_UTIL_SET_HPP
 
 #include "../../Lang.hpp"
 #include "../../util/Collection/Collection.hpp"
@@ -36,7 +36,7 @@ namespace Java {
 		namespace Util {
 				template <class E>
 				class Set :
-					public virtual Collection<E>,
+					//public virtual Collection<E>,
 					public virtual Iterable<E> {
 				private:
 						std::set<E> original;
@@ -90,7 +90,7 @@ namespace Java {
 						 * @param c
 						 * @return boolean
 						 */
-						boolean addAll(Collection<E> c) {
+						boolean addAll(Collection<E> &c) {
 							// TODO - loint@foodtiny.com
 							return true;
 						}
@@ -121,8 +121,8 @@ namespace Java {
 						 * @param c
 						 * @return
 						 */
-						boolean containsAll(Collection<E> c) {
-							// TODO - loint@foodtiny.com
+						boolean containsAll(Collection<E> &c) {
+							return true;
 						}
 						
 						/**
@@ -132,7 +132,7 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean equals(Object o) {
-							// TODO - loint@foodtiny.com
+							return true;
 						}
 						
 						/**
@@ -140,8 +140,8 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						long hashCode() {
-							// TODO - loint@foodtiny.com
+						int hashCode() {
+							return 0;
 						}
 						
 						/**
@@ -170,7 +170,6 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean remove(Object o) {
-							// TODO - loint@foodtiny.com
 							return true;
 						}
 						
@@ -181,8 +180,8 @@ namespace Java {
 						 *
 						 * @return boolean
 						 */
-						boolean removeAll(Collection<E> c) {
-							// TODO - loint@foodtiny.com
+						boolean removeAll(Collection<E> &c) {
+							return true;
 						}
 						
 						/**
@@ -193,8 +192,8 @@ namespace Java {
 						 * @param c
 						 * @return boolean
 						 */
-						boolean retainAll(Collection<E> c) {
-							// TODO - loint@foodtiny.com
+						boolean retainAll(Collection<E> &c) {
+							return true;
 						}
 						
 						/**
@@ -241,4 +240,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_UTIL_SET_HPP
+#endif // NATIVE_JAVA_UTIL_SET_HPP

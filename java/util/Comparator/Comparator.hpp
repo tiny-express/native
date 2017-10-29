@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef JAVA_UTIL_COMPARATOR_HPP
-#define JAVA_UTIL_COMPARATOR_HPP
+#ifndef NATIVE_JAVA_UTIL_COMPARATOR_HPP
+#define NATIVE_JAVA_UTIL_COMPARATOR_HPP
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -40,4 +40,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_UTIL_COMPARATOR_HPP
+#endif // NATIVE_JAVA_UTIL_COMPARATOR_HPP

@@ -24,21 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_STRING_STRING_HPP
-#define JAVA_LANG_STRING_STRING_HPP
+#ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
+#define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
+#include "../../../kernel/Java.hpp"
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
-
-#include <typeinfo>
-#include <regex>
-#include <string>
-
-#include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../io/Serializable/Serializable.hpp"
+#include "../../io/Serializable/Serializable.hpp"
 #include "../../lang/Comparable/Comparable.hpp"
-#include <regex.h>
 
 using namespace Java::IO;
 
@@ -79,30 +74,30 @@ namespace Java {
         memcpy(&this->original[this->size], targetValue, targetLength);\
         this->original[newLength] = '\0';\
         this->size = newLength;
-
+        
         class StringBuilder;
 
         class StringBuffer;
 
         class Short;
-
-        class Integer;
+				
+		class Integer;
 
         class Long;
 
         class Float;
 
         class Double;
-
+				
         class String :
-                public Object,
                 public virtual Serializable,
                 public virtual Comparable<String>,
                 public virtual CharSequence {
+
         private:
             string original;
-            long size;
-            long capacity;
+            int size;
+            int capacity;
             mutable int hash = 0;
 
         public:
@@ -133,7 +128,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            String(const StringBuilder &stringBuilder);
+             String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -141,7 +136,7 @@ namespace Java {
              *
              * @param charArray
              */
-            String(Array<char> &charArray);
+             String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -149,7 +144,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            String(const StringBuffer &stringBuffer);
+             String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -181,7 +176,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            String(Array<char> &charArray, int offset, int count);
+             String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -208,7 +203,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            String(Array<byte> &byteArray, int offset, int length);
+             String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -441,11 +436,8 @@ namespace Java {
              */
             template<class T>
             boolean equals(T anObject) const {
-                if (Object::equals(anObject)) {
-                    return true;
-                }
                 if (instanceof<String>(anObject)) {
-                    return (boolean) stringEquals(original, anObject.toString());
+                    return (boolean) stringEquals(original, anObject.toString().toCharPointer());
                 }
                 return false;
             }
@@ -458,6 +450,13 @@ namespace Java {
              * to this string, false otherwise, ignoring case considerations
              */
             boolean equalsIgnoreCase(String anotherString);
+
+            /**
+             * String hash code
+             *
+             * @return long
+             */
+            long hashCode() const;
 
             /**
              * String from character array
@@ -517,13 +516,6 @@ namespace Java {
              * @return String
              */
             String getStringFromIndex(int index) const;
-
-            /**
-             * Returns a hash code for this string.
-             *
-             * @return int
-             */
-            long hashCode() const override;
 
             /**
              * Returns the index within this String
@@ -886,11 +878,18 @@ namespace Java {
             String trim();
 
             /**
+            * Return C String
+            *
+            * @return a String contain value of this String
+            */
+            string toCharPointer() const;
+
+            /**
              * Return a String a string contain value of this String
              *
              * @return a String contain value of this String
              */
-            string toString() const override;
+            String toString() const;
 
             /**
              * Returns the String representation of the boolean argument.
@@ -982,8 +981,8 @@ namespace Java {
              */
             inline String operator+(const string &target) {
                 auto targetValue = (string) target;
-                long targetLength = lengthPointerChar((string) target);
-                long newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar((string) target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -996,8 +995,8 @@ namespace Java {
              */
             inline String operator+(const String &target) {
                 string targetValue = target.original;
-                long targetLength = target.size;
-                long newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -1010,8 +1009,8 @@ namespace Java {
              */
             inline String &operator+=(const String &target) {
                 string targetValue = target.original;
-                long targetLength = target.size;
-                long newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
@@ -1024,8 +1023,8 @@ namespace Java {
              */
             inline String &operator+=(const_string target) {
                 auto targetValue = target;
-                long targetLength = lengthPointerChar(target);
-                long newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar(target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
@@ -1037,11 +1036,9 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator+=(const char &target) {
-                string pointerHolder = this->original;
                 stringAppend(&this->original, target);
                 this->size++;
                 this->capacity = this->size;
-                free(pointerHolder);
                 return *this;
             }
 
@@ -1052,7 +1049,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return stringEquals(this->original, target.toString()) != 0;
+                return stringEquals(this->original, target.toCharPointer()) != 0;
             }
 
             /**
@@ -1088,7 +1085,7 @@ namespace Java {
             * @return true if this String is smaller than target; false otherwise
             */
             inline boolean operator<(const String &target) const {
-                return strcmp(this->original, target.toString()) < 0;
+                return strcmp(this->original, target.toCharPointer()) < 0;
             }
 
             /**
@@ -1098,7 +1095,7 @@ namespace Java {
              * @return true if this String is greater than target; false otherwise
              */
             inline boolean operator>(const String &target) const {
-                return strcmp(this->original, target.toString()) > 0;
+                return strcmp(this->original, target.toCharPointer()) > 0;
             }
 
             /**
@@ -1108,7 +1105,7 @@ namespace Java {
             * @return true if this String is smaller than or equal to target; false otherwise
             */
             inline boolean operator<=(const String &target) const {
-                return strcmp(this->original, target.toString()) <= 0;
+                return strcmp(this->original, target.toCharPointer()) <= 0;
             }
 
             /**
@@ -1118,11 +1115,21 @@ namespace Java {
              * @return true if this String is greater than or equal to target; false otherwise
              */
             inline boolean operator>=(const String &target) const {
-                return strcmp(this->original, target.toString()) >= 0;
+                return strcmp(this->original, target.toCharPointer()) >= 0;
+            }
+
+            /**
+             * Get value of element at the specified position in this String
+             *
+             * @param index
+             * @return char
+             */
+            const char &operator[](const int index) const {
+                return this->original[index];
             }
         
             inline size_t operator()(const String &target) const {
-                return std::hash<std::string>{}(target.original);
+                return std::hash<std::string>{}(target.toCharPointer());
             }
         public:
             /**
@@ -1136,13 +1143,13 @@ namespace Java {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
                         "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                string inputStringPtr = format.toString();
+                string inputStringPtr = format.toCharPointer();
                 int inputStringLength = format.getSize();
                 int inputStringOffset = 0;
                 int errorCode = 0;
                 regex_t regex;
 
-                errorCode = regcomp(&regex, pattern.toString(), REG_EXTENDED);
+                errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
                 while (errorCode == 0 && inputStringOffset < format.getSize()) {
                     regmatch_t matchedResult[16] = {0}; // max 16 groups
                     errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
@@ -1256,7 +1263,7 @@ namespace Java {
 
             static String print(const String &format, float value);
 
-            static String print(const String &format, char *value);
+            static String print(const String &format, string value);
 
             static String print(const String &format, Short value);
 
@@ -1283,4 +1290,4 @@ namespace std {
         };
 }
 
-#endif  // JAVA_LANG_STRING_STRING_HPP
+#endif // NATIVE_JAVA_LANG_STRING_STRING_HPP

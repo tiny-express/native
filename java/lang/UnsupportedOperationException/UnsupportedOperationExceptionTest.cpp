@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, UnsupportedOperationExceptionConstructor) {
+TEST (JavaLangUnsupportedOperationException, Constructor) {
 	// Constructs a new UnsupportedOperationException with null as its detail message.
 	UnsupportedOperationException unsupportedOperationExceptionWithNullMessage;
 	assertEquals("", unsupportedOperationExceptionWithNullMessage.getMessage().toString());
@@ -49,7 +49,7 @@ TEST (JavaLang, UnsupportedOperationExceptionConstructor) {
 	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, UnsupportedOperationExceptionTryCatch) {
+TEST (JavaLangUnsupportedOperationException, TryCatch) {
 	try {
 		throw UnsupportedOperationException("Throw UnsupportedOperationException");
 	} catch (Exception e) {

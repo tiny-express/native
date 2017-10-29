@@ -24,15 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_INTEGER_HPP
-#define JAVA_LANG_INTEGER_HPP
+#ifndef NATIVE_JAVA_LANG_INTEGER_HPP
+#define NATIVE_JAVA_LANG_INTEGER_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
 #include "../String/String.hpp"
 #include "../Comparable/Comparable.hpp"
-#include <iostream>
-#include <bitset>
 
 using namespace Java::Lang;
 
@@ -40,7 +38,9 @@ namespace Java {
 		namespace Lang {
 				class Integer;
 				
-				class Integer : public Number, public virtual Comparable<Integer> {
+				class Integer :
+							public Number,
+							public virtual Comparable<Integer> {
 				private:
 						int original;
 						string originalString;
@@ -81,7 +81,6 @@ namespace Java {
 				public:
 						/**
 						 * Integer initialization
-						 *
 						 */
 						Integer();
 						
@@ -132,7 +131,7 @@ namespace Java {
 						 *
 						 * @return string
 						 */
-						string toString() const override;
+						String toString() const;
 						
 						/**
 						 * Assign value of this object same as target value
@@ -393,20 +392,19 @@ namespace Java {
 						// static Integer getInteger(String propertyName, Integer defaultValue);
 						
 						/**
-						 * Returns a hash code for this Integer.
-						 *
-						 * @return hash code of this Integer
-						 * equal to the primitive int value represented by this Integer object.
-						 */
-						long hashCode() const override;
-						
-						/**
 						 * Returns a hash code for a int value;
 						 *
 						 * @param inputInt
 						 * @return a hash code value for inputInt
 						 */
 						static int hashCode(int inputInt);
+						
+						/**
+						 * Returns a hash code
+						 *
+						 * @return a hash code value of current value
+						 */
+						int hashCode() const override;
 						
 						/**
 						 * Returns an int value with at most a single one-bit, in the position of
@@ -739,19 +737,19 @@ namespace Java {
 						}
 						
 						inline size_t operator()(const Integer &target) const {
-							String targetString = target.toString();
-							return std::hash<std::string>{}(targetString.toString());
+							return std::hash<std::string>{}(target.toString().toCharPointer());
 						}
 				};
 		}
 }
 
 namespace std {
-		template <> struct hash<Integer> {
-				std::size_t operator()(const Integer& k) const {
+		template <>
+		struct hash<Integer> {
+				std::size_t operator()(const Integer &k) const {
 					return Integer()(k);
 				}
 		};
 }
 
-#endif  // JAVA_LANG_INTEGER_HPP
+#endif // NATIVE_JAVA_LANG_INTEGER_HPP

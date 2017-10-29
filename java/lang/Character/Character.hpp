@@ -24,14 +24,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_CHARACTER_HPP
-#define JAVA_LANG_CHARACTER_HPP
+#ifndef NATIVE_JAVA_LANG_CHARACTER_HPP
+#define NATIVE_JAVA_LANG_CHARACTER_HPP
 
+#include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
 
 namespace Java {
 		namespace Lang {
-				class Character : public Object {
+				class Character //: public Object 
+				{
 				private:
 						char original;
 				public:
@@ -299,7 +301,7 @@ namespace Java {
 						 *          Note that this is strictly a numerical comparison; it is not
 						 *          locale-dependent.
 						 */
-						int compareTo(Character anotherCharacter);
+						int compareTo(Character &anotherCharacter);
 						
 						/**
 						 * Returns the numeric value of the specified character (Unicode
@@ -369,4 +371,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_CHARACTER_HPP
+#endif // NATIVE_JAVA_LANG_CHARACTER_HPP

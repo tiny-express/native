@@ -24,14 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_FLOAT_HPP
-#define JAVA_LANG_FLOAT_HPP
+#ifndef NATIVE_JAVA_LANG_FLOAT_HPP
+#define NATIVE_JAVA_LANG_FLOAT_HPP
 
-#include "../Object/Object.hpp"
+#include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
-#include <limits>
 #include "../String/String.hpp"
-#include "../Byte/Byte.hpp"
+#include "../Bytes/Bytes.hpp"
 #include "../Comparable/Comparable.hpp"
 
 namespace Java {
@@ -95,7 +94,7 @@ namespace Java {
 						/**
 						 * The number of bytes used to represent a float value.
 						 */
-						static constexpr int BYTES = SIZE / Byte::SIZE;
+						static constexpr int BYTES = SIZE / Bytes::SIZE;
 						
 						/**
 						 * The number of logical bits in the significand of a float number,
@@ -345,7 +344,7 @@ namespace Java {
 						 *
 						 * @return String
 						 */
-						string toString() const override;
+						String toString() const;
 						
 						/**
 						 * Returns a string representation of the float
@@ -502,8 +501,7 @@ namespace Java {
 						 * @return the smaller of a and b.
 						 */
 						static float min(float numberFloat, float anotherNumberFloat);
-						
-						// TODO(thoangminh): Implement this method later
+
 //            /**
 //             * Returns a hexadecimal string representation of the
 //             * float argument. All characters mentioned below
@@ -588,8 +586,7 @@ namespace Java {
 				
 				public:
 						inline size_t operator()(const Float &target) const {
-							String targetString = target.toString();
-							return std::hash<std::string>{}(targetString.toString());
+							return std::hash<std::string>{}(target.toString().toCharPointer());
 						}
 				};
 		}  // namespace Lang
@@ -604,4 +601,4 @@ namespace std {
 		};
 }
 
-#endif  // JAVA_LANG_FLOAT_FLOAT_HPP
+#endif // NATIVE_JAVA_LANG_FLOAT_FLOAT_HPP

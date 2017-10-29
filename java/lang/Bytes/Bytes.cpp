@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Byte.hpp"
+#include "Bytes.hpp"
 #include "../NumberFormatException/NumberFormatException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
@@ -32,201 +32,201 @@ using namespace Java::Lang;
 
 ByteCache *ByteCache::instance = nullptr;
 
-Byte::Byte(byte byteValue) {
+Bytes::Bytes(byte byteValue) {
 	this->original = byteValue;
     this->originalString = stringFromInt(this->original);
 }
 
-Byte::Byte(String inputString) {
-	this->original = parseByte(inputString, 10);
+Bytes::Bytes(String inputString) {
+	this->original = parseBytes(inputString, 10);
     this->originalString = stringFromInt(this->original);
 }
 
-Byte::Byte() {
+Bytes::Bytes() {
     this->original = 0;
     this->originalString = stringCopy("0");
 }
 
-Byte::~Byte() {
+Bytes::~Bytes() {
     if (this->originalString != nullptr) {
         free(this->originalString);
     }
 }
 
-char Byte::charValue() const {
+char Bytes::charValue() const {
     return (char) this->original;
 }
 
-byte Byte::byteValue() const {
+byte Bytes::byteValue() const {
 	return this->original;
 }
 
-int Byte::compare(byte byteA, byte byteB) {
+int Bytes::compare(byte byteA, byte byteB) {
     return byteA - byteB;
 }
 
-int Byte::compareTo(const Byte &other) const {
+int Bytes::compareTo(const Bytes &other) const {
 	return this->original - other.original;
 }
 
-Byte Byte::decode(String stringToDecode) {
+Bytes Bytes::decode(String stringToDecode) {
     int value = Integer::decode(stringToDecode).intValue();
-    if (value < Byte::MIN_VALUE || value > Byte::MAX_VALUE) {
+    if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
+        throw NumberFormatException("out of byte range");
+    }
+    return (Bytes) value;
+}
+
+double Bytes::doubleValue() const {
+	return (double) this->original;
+}
+
+//TODO need instanceof
+boolean Bytes::equals(Bytes object) {
+//    boolean isBytes = instanceof<Byte>(object);
+//	if (isByte) {
+//        return this->original == parseBytes(object.toString());
+//    }
+//	return false;
+    return this->original == parseBytes(object.toString());
+}
+
+float Bytes::floatValue() const {
+    return (float) this->original;
+}
+
+int Bytes::hashCode() const {
+    return (int) this->original;
+}
+
+int Bytes::hashCode(byte value) {
+    return (int) value;
+}
+
+int Bytes::intValue() const {
+    return (int) this->original;
+}
+
+long Bytes::longValue() const {
+    return (long) this->original;
+}
+
+byte Bytes::parseBytes(String stringToParse) {
+	return parseBytes(stringToParse, 10);
+}
+
+byte Bytes::parseBytes(String stringToParse, int radix) {
+    int value = Integer::parseInt(stringToParse, radix);
+    if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
     return (byte) value;
 }
 
-double Byte::doubleValue() const {
-	return (double) this->original;
-}
-
-//TODO need instanceof
-boolean Byte::equals(Byte object) {
-//    boolean isByte = instanceof<Byte>(object);
-//	if (isByte) {
-//        return this->original == parseByte(object.toString());
-//    }
-//	return false;
-    return this->original == parseByte(object.toString());
-}
-
-float Byte::floatValue() const {
-    return (float) this->original;
-}
-
-long Byte::hashCode() const {
-    return (long) this->original;
-}
-
-int Byte::hashCode(byte value) {
-    return (int) value;
-}
-
-int Byte::intValue() const {
-    return (int) this->original;
-}
-
-long Byte::longValue() const {
-    return (long) this->original;
-}
-
-byte Byte::parseByte(String stringToParse) {
-	return parseByte(stringToParse, 10);
-}
-
-byte Byte::parseByte(String stringToParse, int radix) {
-    int value = Integer::parseInt(stringToParse, radix);
-    if (value < Byte::MIN_VALUE || value > Byte::MAX_VALUE) {
-        throw NumberFormatException("out of byte range");
-    }
-    return (byte)value;
-}
-
-short Byte::shortValue() const {
+short Bytes::shortValue() const {
     return (short) this->original;
 }
 
-string Byte::toString() const {
+String Bytes::toString() const {
     return this->originalString;
 }
 
-String Byte::toString(byte byteValue) {
+String Bytes::toString(byte byteValue) {
     return Integer::toString((int) byteValue, 10);
 }
 
-int Byte::toUnsignedInt(byte byteValue) {
+int Bytes::toUnsignedInt(byte byteValue) {
     return ((int) byteValue) & 0xff;
 }
 
-long Byte::toUnsignedLong(byte byteValue) {
+long Bytes::toUnsignedLong(byte byteValue) {
     return ((long) byteValue) & 0xffL;
 }
 
-Byte Byte::valueOf(byte byteValue) {
+Bytes Bytes::valueOf(byte byteValue) {
     return ByteCache::getInstance()->getByteAtIndex((int) byteValue);
 }
 
-Byte Byte::valueOf(String stringValue) {
-    return Byte(parseByte(stringValue));
+Bytes Bytes::valueOf(String stringValue) {
+    return Bytes(parseBytes(stringValue));
 }
 
-Byte Byte::valueOf(String stringValue, int radix) {
-    return Byte(parseByte(stringValue, radix));
+Bytes Bytes::valueOf(String stringValue, int radix) {
+    return Bytes(parseBytes(stringValue, radix));
 }
 
-Byte Byte::operator+(const Byte &target) {
+Bytes Bytes::operator+(const Bytes &target) {
 	return this->original + target.original;
 }
 
-Byte Byte::operator-(const Byte &target) {
+Bytes Bytes::operator-(const Bytes &target) {
 	return this->original - target.original;
 }
 
-Byte Byte::operator/(const Byte &target) {
+Bytes Bytes::operator/(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
 	return this->original / target.original;
 }
 
-Byte Byte::operator%(const Byte &target) {
+Bytes Bytes::operator%(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
 	return this->original % target.original;
 }
 
-Byte Byte::operator*(const Byte &target) {
+Bytes Bytes::operator*(const Bytes &target) {
 	return this->original * target.original;
 }
 
-boolean Byte::operator==(const Byte &target) {
+boolean Bytes::operator==(const Bytes &target) {
 	return this->original == target.original;
 }
 
-boolean Byte::operator!=(const Byte &target) {
+boolean Bytes::operator!=(const Bytes &target) {
 	return this->original != target.original;
 }
 
-boolean Byte::operator<(const Byte &target) {
+boolean Bytes::operator<(const Bytes &target) {
 	return this->original < target.original;
 }
 
-boolean Byte::operator>(const Byte &target) {
+boolean Bytes::operator>(const Bytes &target) {
 	return this->original > target.original;
 }
 
-boolean Byte::operator<=(const Byte &target) {
+boolean Bytes::operator<=(const Bytes &target) {
 	return this->original <= target.original;
 }
 
-boolean Byte::operator>=(const  Byte &target) {
+boolean Bytes::operator>=(const  Bytes &target) {
 	return this->original >= target.original;
 }
 
-Byte &Byte::operator-=(const Byte &target) {
+Bytes &Bytes::operator-=(const Bytes &target) {
     free((this->originalString));
     this->original -= target.original;
     this->originalString = stringFromInt(this->original);
     return *this;
 }
 
-Byte &Byte::operator+=(const Byte &target) {
+Bytes &Bytes::operator+=(const Bytes &target) {
     free((this->originalString));
     this->original += target.original;
     this->originalString = stringFromInt(this->original);
     return *this;
 }
 
-Byte &Byte::operator*=(const Byte &target) {
+Bytes &Bytes::operator*=(const Bytes &target) {
     free((this->originalString));
     this->original *= target.original;
     this->originalString = stringFromInt(this->original);
     return *this;
 }
 
-Byte &Byte::operator/=(const Byte &target) {
+Bytes &Bytes::operator/=(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
@@ -236,7 +236,7 @@ Byte &Byte::operator/=(const Byte &target) {
     return *this;
 }
 
-Byte &Byte::operator%=(const Byte &target) {
+Bytes &Bytes::operator%=(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
@@ -246,14 +246,14 @@ Byte &Byte::operator%=(const Byte &target) {
     return *this;
 }
 
-Byte &Byte::operator=(const Byte &target) {
+Bytes &Bytes::operator=(const Bytes &target) {
     free((this->originalString));
     this->original = target.original;
     this->originalString = stringFromInt(this->original);
     return *this;
 }
 
-Byte::Byte(const Byte &anotherByte) {
+Bytes::Bytes(const Bytes &anotherByte) {
     this->original = anotherByte.original;
     this->originalString = stringFromInt(this->original);
 }

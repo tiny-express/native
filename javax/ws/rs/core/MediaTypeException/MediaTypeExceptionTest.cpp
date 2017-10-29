@@ -27,9 +27,9 @@
 #include "MediaTypeException.hpp"
 #include "../../../../../kernel/Test.hpp"
 
-using namespace Javax::Ws;
+using namespace Javax::Ws::Rs::Core;
 
-TEST(MediaTypeException, Constructor) {
+TEST(JavaxWsRsCoreMediaTypeException, Constructor) {
     // Default constructor, expected empty message
     MediaTypeException mediaTypeException;
     assertEquals("", mediaTypeException.getMessage().toString());
@@ -49,8 +49,7 @@ TEST(MediaTypeException, Constructor) {
     assertEquals("Wildcard type is legal only in '*/*' (all types)", mediaTypeExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST(MediaTypeException, TryCatch) {
-
+TEST(JavaxWsRsCoreMediaTypeException, TryCatch) {
     // Throw MediaType Exception with message "throw MediaType Exception", expected message "throw MediaType Exception"
     MediaTypeException mediaTypeException;
     try {

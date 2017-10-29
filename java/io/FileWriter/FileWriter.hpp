@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_IO_FILE_HPP
-#define JAVA_IO_FILE_HPP
+#ifndef NATIVE_JAVA_IO_FILE_HPP
+#define NATIVE_JAVA_IO_FILE_HPP
 
 #include "../../lang/Object/Object.hpp"
 #include "../OutputStreamWriter/OutputStreamWriter.hpp"
@@ -40,4 +40,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_IO_FILE_HPP
+#endif // NATIVE_JAVA_IO_FILE_HPP

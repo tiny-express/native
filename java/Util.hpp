@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_HPP
-#define JAVA_UTIL_HPP
+#ifndef NATIVE_JAVA_UTIL_HPP
+#define NATIVE_JAVA_UTIL_HPP
 
 #include "util/AbstractCollection/AbstractCollection.hpp"
 #include "util/AbstractList/AbstractList.hpp"
@@ -69,4 +69,4 @@
 
 #include "util/Function.hpp"
 
-#endif  // JAVA_UTIL_HPP
+#endif // NATIVE_JAVA_UTIL_HPP

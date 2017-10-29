@@ -49,7 +49,7 @@ String Concurrent::Semaphore::toString() {
     String result;
     try {
         result = String::format("[Permits = %d]", availablePermits());
-    } catch (IllegalArgumentException& e) {
+    } catch (InterruptedException& e) {
 
     }
     return result;

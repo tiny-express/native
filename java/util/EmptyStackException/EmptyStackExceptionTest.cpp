@@ -29,16 +29,15 @@
 
 using namespace Java::Util;
 
-TEST (JavaUtil, EmptyStackExceptionConstructor) {
+TEST (JavaUtilEmptyStackException, Constructor) {
 	EmptyStackException emptyStackExceptionNullMess;
 	assertEquals("", emptyStackExceptionNullMess.getMessage().toString());
 }
 
-TEST (JavaUtil, EmptyStackExceptionTryCatch) {
+TEST (JavaUtilEmptyStackException, TryCatch) {
 	try {
 		throw EmptyStackException();
-	}
-	catch (EmptyStackException e) {
+	} catch (EmptyStackException &e) {
 		assertEquals("", e.getMessage().toString());
 	}
 }

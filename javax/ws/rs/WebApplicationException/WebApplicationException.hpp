@@ -24,26 +24,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVAX_WS_RS_WEBAPPLICATIONEXCEPTION_WEBAPPLICATIONEXCEPTION_HPP_
-#define JAVAX_WS_RS_WEBAPPLICATIONEXCEPTION_WEBAPPLICATIONEXCEPTION_HPP_
+#ifndef JAVAX_WS_RS_WEB_APPLICATION_EXCEPTION_WEB_APPLICATION_EXCEPTION_HPP
+#define JAVAX_WS_RS_WEB_APPLICATION_EXCEPTION_WEB_APPLICATION_EXCEPTION_HPP
 
 #include "../../../../java/lang/RuntimeException/RuntimeException.hpp"
 
 using namespace Java::Lang;
 
 namespace Javax {
-    namespace Ws  {
-        namespace Rs {
-            class WebApplicationException : public RuntimeException {
-            public:
-                WebApplicationException();
-                WebApplicationException(String message);
-                WebApplicationException(String message, Throwable *cause);
-                WebApplicationException(Throwable *cause);
-            };  // class WebApplicationException
-        } // namespace Rs
-    }  // namespace Ws
+		namespace Ws {
+				namespace Rs {
+						class WebApplicationException : public RuntimeException {
+						public:
+								WebApplicationException();
+								WebApplicationException(String message);
+								WebApplicationException(String message, Throwable *cause);
+								WebApplicationException(Throwable *cause);
+						};  // class WebApplicationException
+				} // namespace Rs
+		}  // namespace Ws
 }  // namespace Javax
 
 
-#endif // JAVAX_WS_RS_WEBAPPLICATIONEXCEPTION_WEBAPPLICATIONEXCEPTION_HPP_
+#endif // JAVAX_WS_RS_WEB_APPLICATION_EXCEPTION_WEB_APPLICATION_EXCEPTION_HPP

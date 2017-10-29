@@ -37,7 +37,7 @@ String URLEncoder::encode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
     String &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string encodedString = urlEncode(source.toString());
+        string encodedString = urlEncode(source.toCharPointer());
         String result(encodedString);
         free(encodedString);
         return result;

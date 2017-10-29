@@ -34,3 +34,11 @@ ArithmeticException::ArithmeticException() : RuntimeException() {
 ArithmeticException::ArithmeticException(String message) : RuntimeException(message) {
 }
 
+ArithmeticException::ArithmeticException(Throwable *cause) : RuntimeException(cause) {
+
+}
+
+ArithmeticException::ArithmeticException(String message, Throwable *cause) : RuntimeException(message, cause) {
+
+}
+

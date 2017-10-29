@@ -101,6 +101,6 @@ int URLConnection::getConnectTimeout() {
 	return this->connectTimeout;
 }
 
-string URLConnection::toString() const {
+String URLConnection::toString() const {
 	return this->url.toString();
 }

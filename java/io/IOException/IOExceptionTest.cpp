@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaIO, IOExceptionConstructor) {
+TEST (JavaIoIOException, Constructor) {
     // Constructs a new IOException with null as its detail message.
     IOException ioExceptionWithNullMessage;
     assertEquals("", ioExceptionWithNullMessage.getMessage().toString());
@@ -50,7 +50,7 @@ TEST (JavaIO, IOExceptionConstructor) {
     assertEquals("IOException with the specified message", ioExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaIO, IOExceptionTryCatch) {
+TEST (JavaIoIOException, TryCatch) {
     try {
         throw IOException("Throw IOException");
     } catch (IOException &ex) {

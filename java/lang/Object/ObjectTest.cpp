@@ -28,7 +28,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, JavaInstanceOf) {
+TEST (JavaLang, InstanceOf) {
 	// Given a String instance - Return it should be an instance of String
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
@@ -36,8 +36,8 @@ TEST (JavaLang, JavaInstanceOf) {
 	assertFalse(stringInstanceWithSameClass.equals(string2));
 	
 	// Given a String instance - Return it should be an instance of Object
-	String stringInstanceWithSameBaseClass;
-	assertTrue(instanceof<Object>(stringInstanceWithSameBaseClass));
+	// String stringInstanceWithSameBaseClass;
+	// assertTrue(instanceof<Object>(stringInstanceWithSameBaseClass));
 	
 	// Given a Integer instance - Return it should not be an instance of String
 	Integer integer = 1;
@@ -119,7 +119,7 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 	}
 }
 
-TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
+TEST (JavaLang, ArrayConstructor) {
 	// Give an Array use constructor with contain size then assert size - Should equal
 	char *stringArray[3] = {
 		(char *) "hello",
@@ -131,7 +131,7 @@ TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
 	assertEquals(2, arrayString.length);
 }
 
-TEST (JavaLang, ObjectConstructor) {
+TEST (JavaLangObject, Constructor) {
 	// Normal declaration
 	Object objectNormalDeclaration;
 	objectNormalDeclaration.hashCode();
@@ -142,7 +142,7 @@ TEST (JavaLang, ObjectConstructor) {
 	delete objectPointerDeclaration;
 }
 
-TEST (JavaLang, ObjectEquals) {
+TEST (JavaLangObject, Equals) {
 	// Given two difference instances of Object - Return instances are not equal
 	Object object1;
 	Object object2;
@@ -159,7 +159,7 @@ TEST (JavaLang, ObjectEquals) {
 	assertFalse(object3 != object3);
 }
 
-TEST (JavaLang, ObjectHashCode) {
+TEST (JavaLangObject, HashCode) {
 	// Given two difference instances of Object - Return memory addresses are not equal
 	Object object;
 	Object object2;

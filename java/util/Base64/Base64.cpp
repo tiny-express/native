@@ -89,7 +89,7 @@ int Base64::Encoder::encode(const Array<byte> &source,
 	Array<byte> &destination) const {
 	int length = this->outLength(source.length);
 	if (destination.length < length) {
-		throw IllegalArgumentException(
+		throw InterruptedException(
 			"Output byte array is too small for encoding all input bytes");
 	}
 	return this->encoding(source, 0, source.length, destination);
@@ -281,7 +281,7 @@ int Base64::Decoder::decode(const Array<byte> &source,
 	Array<byte> &destination) const {
 	int length = this->outLength(source, 0, source.length);
 	if (destination.length < length) {
-		throw IllegalArgumentException(
+		throw InterruptedException(
 			"Output byte array is too small for decoding all input bytes");
 	}
 	return this->decoding(source, 0, source.length, destination);
@@ -311,7 +311,7 @@ int Base64::Decoder::outLength(const Array<byte> &source,
 		if (this->isMime && fromBase64Table[ 0 ] == -1) {
 			return 0;
 		}
-		throw IllegalArgumentException(
+		throw InterruptedException(
 			"Input byte[] should at least have 2 bytes for based64 bytes");
 	}
 	if (this->isMime) {
@@ -376,7 +376,7 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 					// => Second '=' is missing.
 					// shiftTo == 6 && source[sourcePosition++] != '='
 					// => Byte after first '=' doesn't present for '='.
-					throw IllegalArgumentException("Input byte array has wrong 4-byte ending unit");
+					throw InterruptedException("Input byte array has wrong 4-byte ending unit");
 				}
 				break;
 			}
@@ -385,7 +385,7 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 			if (this->isMime) {
 				continue;
 			} else {
-				throw IllegalArgumentException("Illegal base64 character");
+				throw InterruptedException("Illegal base64 character");
 			}
 		}
 		groupBits |= ( currentByteDecoded << shiftTo );
@@ -406,7 +406,7 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 		destination[ destinationPosition++ ] = static_cast<byte>(groupBits >> 16);
 		destination[ destinationPosition++ ] = static_cast<byte>(groupBits >> 8);
 	} else if (shiftTo == 12) {
-		throw IllegalArgumentException("Last unit does not have enough valid bits");
+		throw InterruptedException("Last unit does not have enough valid bits");
 	}
 	
 	// Anything left is invalid, if is not MIME.
@@ -415,7 +415,7 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 		if (this->isMime && fromBase64Table[ source[ sourcePosition++ ]] < 0) {
 			continue;
 		}
-		throw IllegalArgumentException(
+		throw InterruptedException(
 			"Input byte array has incorrect ending byte at " +
 			sourcePosition);
 	}
@@ -446,7 +446,7 @@ Base64::Encoder Base64::getMimeEncoder(int lineLength,
 		if (fromBase64Table[ currentByte & 0xff ] != -1) {
 			// If currentByte present for alphabet character.
 			// Because line separator must NOT contain alphabet character.
-			throw IllegalArgumentException("Illegal base64 line separator character");
+			throw InterruptedException("Illegal base64 line separator character");
 		}
 	}
 	if (lineLength < 0) {

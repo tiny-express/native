@@ -32,7 +32,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, IntegerConstructor) {
+TEST (JavaLangInteger, Constructor) {
 	// Test Integer::Integer()
 	Integer integerConstructorNoneParameter;
 	assertEquals(0, integerConstructorNoneParameter.intValue());
@@ -49,7 +49,7 @@ TEST (JavaLang, IntegerConstructor) {
 	assertEquals((string) "13", integerConstructorIntegerParameter.toString());
 }
 
-TEST (JavaLang, IntegerComparision) {
+TEST (JavaLangInteger, Comparision) {
 	// Give a valid number and make a comparision
 	Integer validNumberComparision = 2;
 	Integer targetNumberComparision;
@@ -79,7 +79,7 @@ TEST (JavaLang, IntegerComparision) {
 	assertTrue(validNumberComparision >= targetNumberComparision);
 }
 
-TEST (JavaLang, IntegerOperator) {
+TEST (JavaLangInteger, Operator) {
 	// Create variable
 	Integer validNumberOperator = 5;
 	Integer targetNumberOperator = 3;
@@ -162,7 +162,7 @@ TEST (JavaLang, IntegerOperator) {
 	}
 }
 
-TEST (JavaLang, IntegerCompareTo) {
+TEST (JavaLangInteger, CompareTo) {
 	// Given valid Integer to compare with target
 	Integer validValueCompareTo = 15;
 	Integer lessThanValueCompareTo = 12;
@@ -184,7 +184,7 @@ TEST (JavaLang, IntegerCompareTo) {
 	assertEquals(1, comparable->compareTo(integerCompareTo));
 }
 
-TEST (JavaLang, IntegerCharValue) {
+TEST (JavaLangInteger, CharValue) {
 	// Input different values of type int to compare to the result of Integer::charValue
 	Integer zeroIntegerCharValue = 0;
 	Integer oneIntegerCharValue = 1;
@@ -218,7 +218,7 @@ TEST (JavaLang, IntegerCharValue) {
 	assertEquals(expectedResultCharValue, realResultCharValue);
 }
 
-TEST (JavaLang, IntegerStringValue) {
+TEST (JavaLangInteger, StringValue) {
 	// Create variable
 	Integer zeroIntegerStringValue = 0;
 	Integer oneIntegerStringValue = 1;
@@ -252,7 +252,7 @@ TEST (JavaLang, IntegerStringValue) {
 	assertEquals(expectedResultStringValue, realResultStringValue);
 }
 
-TEST (JavaLang, IntegerShortValue) {
+TEST (JavaLangInteger, ShortValue) {
 	// Input different values of type int to compare to the result of Integer::shortValue
 	Integer positiveIntegerShortValue = 1302;
 	Integer negativeIntegerShortValue = -1302;
@@ -274,7 +274,7 @@ TEST (JavaLang, IntegerShortValue) {
 	assertNotEquals(notExpectedResultShortValue, realResultShortValue);
 }
 
-TEST (JavaLang, IntegerIntValue) {
+TEST (JavaLangInteger, IntValue) {
 	// Input different values of type int to compare to the realResult of Integer::intValue
 	Integer zeroIntegerIntValue = 0;
 	Integer oneIntegerIntValue = 1;
@@ -314,7 +314,7 @@ TEST (JavaLang, IntegerIntValue) {
 	assertNotEquals(notExpectedResult, realResultIntValue);
 }
 
-TEST (JavaLang, IntegerLongValue) {
+TEST (JavaLangInteger, LongValue) {
 	// Input different values of type int to compare to the realResult of Integer::longValue
 	Integer positiveIntegerLongValue = 1302321013;
 	Integer negativeIntegerLongValue = -1302321013;
@@ -336,7 +336,7 @@ TEST (JavaLang, IntegerLongValue) {
 	assertFalse(notExpectedResult == realResultLongValue);
 }
 
-TEST (JavaLang, IntegerFloatValue) {
+TEST (JavaLangInteger, FloatValue) {
 	// Input different values of type int to compare to the realResult of Integer::floatValue
 	Integer positiveIntegerFloatValue = 12345;
 	float expectedResultFloatValue = 12345.00;
@@ -350,7 +350,7 @@ TEST (JavaLang, IntegerFloatValue) {
 	assertTrue(expectedResultFloatValue == realResultFloatValue);
 }
 
-TEST (JavaLang, IntegerDoubleValue) {
+TEST (JavaLangInteger, DoubleValue) {
 	// Input different values of type int to compare to the realResult of Integer::doubleValue
 	Integer positiveIntegerDoubleValue = 123456789;
 	double expectedResultDoubleValue = 123456789.0;
@@ -363,7 +363,7 @@ TEST (JavaLang, IntegerDoubleValue) {
 	assertTrue(expectedResultDoubleValue == realResultDoubleValue);
 }
 
-TEST (JavaLang, IntegerBitCount) {
+TEST (JavaLangInteger, BitCount) {
 	int inputInt;
 	int expectedResult;
 	int actualResult;
@@ -399,7 +399,7 @@ TEST (JavaLang, IntegerBitCount) {
 	assertEquals(expectedResult, actualResult);
 }
 
-TEST (JavaLang, IntegerByteValue) {
+TEST (JavaLangInteger, ByteValue) {
 	Integer integerInput;
 	
 	integerInput = 0;
@@ -421,7 +421,7 @@ TEST (JavaLang, IntegerByteValue) {
 	assertEquals((byte) 0, integerInput.byteValue());
 }
 
-TEST (JavaLang, IntegerCompare) {
+TEST (JavaLangInteger, Compare) {
 	// Given 2 int
 	int greater = 10;
 	int smaller = 5;
@@ -434,7 +434,7 @@ TEST (JavaLang, IntegerCompare) {
 	assertEquals(1, Integer::compare(greater, smaller));
 }
 
-TEST (JavaLang, IntegerCompareUnsigned) {
+TEST (JavaLangInteger, CompareUnsigned) {
 	// Given 3 int
 	int greater = 10;
 	int smaller = 5;
@@ -453,7 +453,7 @@ TEST (JavaLang, IntegerCompareUnsigned) {
 	assertEquals(1, Integer::compareUnsigned(negative, greater));
 }
 
-TEST (JavaLang, IntegerDecode) {
+TEST (JavaLangInteger, Decode) {
 	String stringInput;
 	Integer expectedResult;
 	Integer actualResult;
@@ -601,7 +601,7 @@ TEST (JavaLang, IntegerDecode) {
 	}
 }
 
-TEST (JavaLang, IntegerDivideUnsigned) {
+TEST (JavaLangInteger, DivideUnsigned) {
 	// Given 4 int
 	int positiveDividend = 10;
 	int positiveDivisor = 5;
@@ -632,7 +632,7 @@ TEST (JavaLang, IntegerDivideUnsigned) {
 	assertEquals(429496729, Integer::divideUnsigned(negativeDivisor, positiveDividend));
 }
 
-TEST (JavaLang, IntegerEquals) {
+TEST (JavaLangInteger, Equals) {
 	Integer thisInteger;
 	
 	thisInteger = 13;
@@ -643,7 +643,7 @@ TEST (JavaLang, IntegerEquals) {
 }
 
 // Test Integer::getInteger(String inputString)
-// TEST(JavaLang, IntegerGetIntegerWithString) {
+// TEST(JavaLangInteger, GetIntegerWithString) {
 // String stringInput;
 // Integer expectedResult;
 // Integer actualResult;
@@ -770,7 +770,7 @@ TEST (JavaLang, IntegerEquals) {
 // }
 
 // Test Integer::getInteger(String inputString, int inputInt)
-// TEST(JavaLang, IntegerGetIntegerWithStringAndInt) {
+// TEST(JavaLangInteger, GetIntegerWithStringAndInt) {
 // String stringInput;
 // Integer expectedResult;
 // Integer actualResult;
@@ -897,7 +897,7 @@ TEST (JavaLang, IntegerEquals) {
 // }
 
 // Test Integer::getInteger(String inputString, Integer inputInteger)
-// TEST(JavaLang, IntegerGetIntegerWithStringAndInteger) {
+// TEST(JavaLangInteger, GetIntegerWithStringAndInteger) {
 // String stringInput;
 // Integer expectedResult;
 // Integer actualResult;
@@ -1023,30 +1023,14 @@ TEST (JavaLang, IntegerEquals) {
 
 // }
 
-TEST (JavaLang, IntegerHashCode) {
-	Integer inputInteger;
-	
-	inputInteger = 0;
-	assertEquals(0, inputInteger.hashCode());
-	
-	inputInteger = 1;
-	assertEquals(1, inputInteger.hashCode());
-	
-	inputInteger = -1;
-	assertEquals(-1, inputInteger.hashCode());
-	
-	inputInteger = 13;
-	assertEquals(13, inputInteger.hashCode());
-}
-
-TEST (JavaLang, IntegerHashCodeOfInt) {
+TEST (JavaLangInteger, HashCode) {
 	assertEquals(0, Integer::hashCode(0));
 	assertEquals(1, Integer::hashCode(1));
 	assertEquals(-1, Integer::hashCode(-1));
 	assertEquals(13, Integer::hashCode(13));
 }
 
-TEST (JavaLang, IntegerHighestOneBit) {
+TEST (JavaLangInteger, HighestOneBit) {
 	assertEquals(0, Integer::highestOneBit(0));
 	assertEquals(1, Integer::highestOneBit(1));
 	assertEquals(-2147483648, Integer::highestOneBit(-1));
@@ -1055,7 +1039,7 @@ TEST (JavaLang, IntegerHighestOneBit) {
 	assertEquals(-2147483648, Integer::highestOneBit(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerLowestOneBit) {
+TEST (JavaLangInteger, LowestOneBit) {
 	assertEquals(0, Integer::lowestOneBit(0));
 	assertEquals(1, Integer::lowestOneBit(1));
 	assertEquals(1, Integer::lowestOneBit(-1));
@@ -1064,20 +1048,20 @@ TEST (JavaLang, IntegerLowestOneBit) {
 	assertEquals(-2147483648, Integer::lowestOneBit(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerMax) {
+TEST (JavaLangInteger, Max) {
 	assertEquals(0, Integer::max(0, 0));
 	assertEquals(1, Integer::max(0, 1));
 	assertEquals(0, Integer::max(0, -1));
 	assertEquals(13, Integer::max(0, 13));
 }
 
-TEST (JavaLang, IntegerMin) {
+TEST (JavaLangInteger, Min) {
 	assertEquals(0, Integer::min(0, 0));
 	assertEquals(0, Integer::min(0, 1));
 	assertEquals(-1, Integer::min(0, -1));
 }
 
-TEST (JavaLang, IntegerNumberOfLeadingZeros) {
+TEST (JavaLangInteger, NumberOfLeadingZeros) {
 	assertEquals(32, Integer::numberOfLeadingZeros(0));
 	assertEquals(31, Integer::numberOfLeadingZeros(1));
 	assertEquals(0, Integer::numberOfLeadingZeros(-1));
@@ -1086,7 +1070,7 @@ TEST (JavaLang, IntegerNumberOfLeadingZeros) {
 	assertEquals(0, Integer::numberOfLeadingZeros(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerNumberOfTrailingZeros) {
+TEST (JavaLangInteger, NumberOfTrailingZeros) {
 	assertEquals(32, Integer::numberOfTrailingZeros(0));
 	assertEquals(0, Integer::numberOfTrailingZeros(1));
 	assertEquals(0, Integer::numberOfTrailingZeros(-1));
@@ -1096,7 +1080,7 @@ TEST (JavaLang, IntegerNumberOfTrailingZeros) {
 }
 
 
-TEST (JavaLang, IntegerParseIntWithRadix) {
+TEST (JavaLangInteger, ParseIntWithRadix) {
 	assertEquals(Integer::parseInt((String) "0", 10), 0);
 	assertEquals(Integer::parseInt((String) "473", 10), 473);
 	assertEquals(Integer::parseInt((String) "+42", 10), 42);
@@ -1158,7 +1142,7 @@ TEST (JavaLang, IntegerParseIntWithRadix) {
 	}
 }
 
-TEST (JavaLang, IntegerParseInt) {
+TEST (JavaLangInteger, ParseInt) {
 	String stringInput;
 	int expectedResult;
 	int actualResult;
@@ -1219,7 +1203,7 @@ TEST (JavaLang, IntegerParseInt) {
 	}
 }
 
-TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
+TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 	Integer exceptionResult;
 	
 	assertEquals(Integer::parseUnsignedInt((String) "0", 10), 0);
@@ -1302,7 +1286,7 @@ TEST (JavaLang, IntegerParseUnsignedIntWithRadix) {
 	}
 }
 
-TEST (JavaLang, IntegerParseUnsignedInt) {
+TEST (JavaLangInteger, ParseUnsignedInt) {
 	String stringInput;
 	int expectedResult;
 	int actualResult;
@@ -1358,7 +1342,7 @@ TEST (JavaLang, IntegerParseUnsignedInt) {
 	}
 }
 
-TEST (JavaLang, IntegerRemainderUnsigned) {
+TEST (JavaLangInteger, RemainderUnsigned) {
 	// Given 4 int
 	int positiveDividend = 10;
 	int positiveDivisor = 4;
@@ -1389,7 +1373,7 @@ TEST (JavaLang, IntegerRemainderUnsigned) {
 	assertEquals(2, Integer::remainderUnsigned(negativeDivisor, positiveDividend));
 }
 
-TEST (JavaLang, IntegerReverse) {
+TEST (JavaLangInteger, Reverse) {
 	assertEquals(0, Integer::reverse(0));
 	assertEquals(-2147483648, Integer::reverse(1));
 	assertEquals(-1, Integer::reverse(-1));
@@ -1398,7 +1382,7 @@ TEST (JavaLang, IntegerReverse) {
 	assertEquals(1, Integer::reverse(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerReverseBytes) {
+TEST (JavaLangInteger, ReverseBytes) {
 	assertEquals(0, Integer::reverseBytes(0));
 	assertEquals(16777216, Integer::reverseBytes(1));
 	assertEquals(-1, Integer::reverseBytes(-1));
@@ -1407,13 +1391,13 @@ TEST (JavaLang, IntegerReverseBytes) {
 	assertEquals(128, Integer::reverseBytes(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerRotateLeft) {
+TEST (JavaLangInteger, RotateLeft) {
 	assertEquals(-2147483648, Integer::rotateLeft(1, -1));
 	assertEquals(8192, Integer::rotateLeft(1, 13));
 	assertEquals(1, Integer::rotateLeft(1, Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerRotateRight) {
+TEST (JavaLangInteger, RotateRight) {
 	assertEquals(1, Integer::rotateRight(1, 0));
 	assertEquals(-2147483648, Integer::rotateRight(1, 1));
 	assertEquals(2, Integer::rotateRight(1, -1));
@@ -1422,20 +1406,20 @@ TEST (JavaLang, IntegerRotateRight) {
 	assertEquals(1, Integer::rotateRight(1, Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerSignum) {
+TEST (JavaLangInteger, Signum) {
 	assertEquals(0, Integer::signum(0));
 	assertEquals(1, Integer::signum(1));
 	assertEquals(-1, Integer::signum(-1));
 }
 
-TEST (JavaLang, IntegerSum) {
+TEST (JavaLangInteger, Sum) {
 	assertEquals(13, Integer::sum(13, 0));
 	assertEquals(12, Integer::sum(13, -1));
 	assertEquals(26, Integer::sum(13, 13));
 	assertEquals(-2147483636, Integer::sum(13, Integer::MAX_VALUE));
 }
 
-TEST (JavaLang, IntegerToBinaryString) {
+TEST (JavaLangInteger, ToBinaryString) {
 	assertEquals((string) "0", Integer::toBinaryString(0).toString());
 	assertEquals((string) "1", Integer::toBinaryString(1).toString());
 	assertEquals((string) "11111111111111111111111111111111", Integer::toBinaryString(-1).toString());
@@ -1444,7 +1428,7 @@ TEST (JavaLang, IntegerToBinaryString) {
 	assertEquals((string) "10000000000000000000000000000000", Integer::toBinaryString(Integer::MIN_VALUE).toString());
 }
 
-TEST (JavaLang, IntegerToHexString) {
+TEST (JavaLangInteger, ToHexString) {
 	assertEquals((string) "0", Integer::toHexString(0).toString());
 	assertEquals((string) "1", Integer::toHexString(1).toString());
 	assertEquals((string) "ffffffff", Integer::toHexString(-1).toString());
@@ -1453,7 +1437,7 @@ TEST (JavaLang, IntegerToHexString) {
 	assertEquals((string) "80000000", Integer::toHexString(Integer::MIN_VALUE).toString());
 }
 
-TEST (JavaLang, IntegerToOctalString) {
+TEST (JavaLangInteger, ToOctalString) {
 	assertEquals((string) "0", Integer::toOctalString(0).toString());
 	assertEquals((string) "1", Integer::toOctalString(1).toString());
 	assertEquals((string) "37777777777", Integer::toOctalString(-1).toString());
@@ -1462,7 +1446,7 @@ TEST (JavaLang, IntegerToOctalString) {
 	assertEquals((string) "20000000000", Integer::toOctalString(Integer::MIN_VALUE).toString());
 }
 
-TEST (JavaLang, IntegerToString) {
+TEST (JavaLangInteger, ToString) {
 	// Input different values of type int to compare to the realResult of Integer::toString
 	Integer zeroIntegerToString = 0;
 	Integer oneIntegerToString = 1;
@@ -1471,39 +1455,34 @@ TEST (JavaLang, IntegerToString) {
 	Integer minIntegerToString = -2147483647;
 	
 	// Make a comparison between expected realResult and the real result
-	string expectedResultToString = (string) "0";
-	string realResultToString = zeroIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	auto expectedResultToString = (string) "0";
+	assertEquals(expectedResultToString, zeroIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "1";
-	realResultToString = oneIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, oneIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "10";
-	realResultToString = positiveIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, positiveIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "2147483647";
-	realResultToString = maxIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, maxIntegerToString.toString());
 	
 	// Make a comparison between expected realResult and the real result
 	expectedResultToString = (string) "-2147483647";
-	realResultToString = minIntegerToString.toString();
-	assertEquals(expectedResultToString, realResultToString);
+	assertEquals(expectedResultToString, minIntegerToString.toString());
 }
 
-TEST(JavaLang, IntegerToStringFromInt) {
+TEST(JavaLangInteger, ToStringFromInt) {
     assertEquals((string) "0", Integer::toString(0).toString());
     assertEquals((string) "1", Integer::toString(1).toString());
     assertEquals((string) "-1", Integer::toString(-1).toString());
     assertEquals((string) "13", Integer::toString(13).toString());
 }
 
-TEST (JavaLang, IntegerToStringWithRadix) {
+TEST (JavaLangInteger, ToStringWithRadix) {
 	assertEquals("0", Integer::toString(0, 10).toString());
 	assertEquals("473", Integer::toString(473, 10).toString());
 	assertEquals("-ff", Integer::toString(-255, 16).toString());
@@ -1520,7 +1499,7 @@ TEST (JavaLang, IntegerToStringWithRadix) {
 	}
 }
 
-TEST (JavaLang, IntegerToUnsignedLong) {
+TEST (JavaLangInteger, ToUnsignedLong) {
 	assertEquals(0, Integer::toUnsignedLong(0));
 	assertEquals(1, Integer::toUnsignedLong(1));
 	assertEquals(4294967295, Integer::toUnsignedLong(-1));
@@ -1529,7 +1508,7 @@ TEST (JavaLang, IntegerToUnsignedLong) {
 	assertEquals(2147483648, Integer::toUnsignedLong(Integer::MIN_VALUE));
 }
 
-TEST (JavaLang, IntegerToUnsignedString) {
+TEST (JavaLangInteger, ToUnsignedString) {
 	assertEquals("0", Integer::toUnsignedString(0, 10).toString());
 	assertEquals("473", Integer::toUnsignedString(473, 10).toString());
 	assertEquals("ffffff01", Integer::toUnsignedString(-255, 16).toString());
@@ -1548,13 +1527,13 @@ TEST (JavaLang, IntegerToUnsignedString) {
 	}
 }
 
-TEST (JavaLang, IntegerToUnsignedDecimalString) {
+TEST (JavaLangInteger, ToUnsignedDecimalString) {
 	assertEquals("0", Integer::toUnsignedString(0).toString());
 	assertEquals("473", Integer::toUnsignedString(473).toString());
 	assertEquals("4294967041", Integer::toUnsignedString(-255).toString());
 }
 
-TEST (JavaLang, IntegerValueOfFromString) {
+TEST (JavaLangInteger, ValueOfFromString) {
 	assertEquals(0, Integer::valueOf((String) "0").intValue());
 	assertEquals(1, Integer::valueOf((String) "1").intValue());
 	assertEquals(13, Integer::valueOf((String) "13").intValue());
@@ -1590,7 +1569,7 @@ TEST (JavaLang, IntegerValueOfFromString) {
 	}
 }
 
-TEST (JavaLang, IntegerValueOfFromInt) {
+TEST (JavaLangInteger, ValueOfFromInt) {
 	assertEquals(0, Integer::valueOf(0).intValue());
 	assertEquals(1, Integer::valueOf(1).intValue());
 	assertEquals(-1, Integer::valueOf(-1).intValue());
@@ -1599,7 +1578,7 @@ TEST (JavaLang, IntegerValueOfFromInt) {
 	assertEquals(-2147483648, Integer::valueOf(-2147483648).intValue());
 }
 
-TEST (JavaLang, IntegerValueOfWithRadix) {
+TEST (JavaLangInteger, ValueOfWithRadix) {
 	assertEquals(0, Integer::valueOf((String) "0", 10).intValue());
 	assertEquals(473, Integer::valueOf((String) "473", 10).intValue());
 	assertEquals(42, Integer::valueOf((String) "+42", 10).intValue());

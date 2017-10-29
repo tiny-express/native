@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_LONG_HPP
-#define JAVA_LANG_LONG_HPP
+#ifndef NATIVE_JAVA_LANG_LONG_HPP
+#define NATIVE_JAVA_LANG_LONG_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -332,7 +332,7 @@ namespace Java {
 						 *
 						 * @return String
 						 */
-						string toString() const;
+						String toString() const;
 						
 						/**
 						 * Returns a String object representing the specified long.
@@ -340,7 +340,7 @@ namespace Java {
 						 * @param long i
 						 * @return String
 						 */
-						static string toString(long i);
+						static String toString(long i);
 						
 						/**
 						 * Returns a Long instance representing the specified long value.
@@ -530,8 +530,7 @@ namespace Java {
 						}
 						
 						inline size_t operator()(const Long &target) const {
-							String targetString = target.toString();
-							return std::hash<std::string>{}(targetString.toString());
+							return std::hash<std::string>{}(target.toString().toCharPointer());
 						}
 				};
 		}
@@ -547,4 +546,4 @@ namespace std {
 		};
 }
 
-#endif  // JAVA_LANG__HPP
+#endif // NATIVE_JAVA_LANG__HPP

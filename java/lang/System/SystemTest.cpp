@@ -29,15 +29,15 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, SystemIn) {
+TEST (JavaLangSystem, In) {
 	// TODO
 }
 
-TEST (JavaLang, SystemOut) {
+TEST (JavaLangSystem, Out) {
 	// TODO
 }
 
-TEST (JavaLang, SystemCurrentTimeMillis) {
+TEST (JavaLangSystem, CurrentTimeMillis) {
 	long currentMilliSeconds = System::currentTimeMillis();
 	assertTrue(currentMilliSeconds > 1500199237190);
 }

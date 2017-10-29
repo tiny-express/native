@@ -24,39 +24,55 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_SEGMENT_HPP
-#define NATIVE_COMMON_SEGMENT_HPP
+#include "../DateTime.hpp"
+#include "../Test.hpp"
 
-#include "../Builtin.hpp"
-
-inline char *segmentPointerChar(char *targetParam, int from, int to) {
-	if (targetParam == nullptr) {
-		return stringCopy("");
-	}
-	int lengthTarget = lengthPointerChar(targetParam);
-	if (from > to || from < 0 || from > lengthTarget || to < 0) {
-		return stringCopy("");
-	}
-	char *target = stringCopy(targetParam);
-	int length = to - from + 1;
-	if (to >= lengthTarget) {
-		length = lengthTarget - from + 1;
-	}
-	auto *pointer = (char *) calloc(length + 1, sizeof(char));
-	memcpy(pointer, &target[ from ], length);
-	free(target);
-	pointer[ length ] = '\0';
-	return pointer;
-}
-
-inline char **segmentPointerPointerChar(char **target, int from, int to) {
-	int lengthTarget = lengthPointerPointerChar(target);
-	if (from > to || from < 0 || from > lengthTarget || to < 0 || to > lengthTarget) {
-		return nullptr;
-	}
-	auto **pointer = (char **) calloc(( to - from + 2 ), sizeof(char *));
-	memcpy(pointer, &target[ from ], ( to - from + 1 ) * sizeof(char *));
-	return pointer;
-}
-
+TEST (KernelDateTime, TimestampForWindows) {
+#ifdef WIN
+	unsigned int millisecond = 123;
+	unsigned int second = 3;
+	unsigned int minute = 20;
+	unsigned int hour = 17;
+	unsigned int day  = 16;
+	unsigned int month = 7;
+	unsigned int year = 2017;
+	unsigned long timestamp = unixTimeInMilliseconds(
+			millisecond,
+			second,
+			minute,
+			hour,
+			day,
+			month,
+			year
+	);
+	assertEquals(1500225603123, (long) timestamp);
 #endif
+}
+
+TEST (KernelDateTime, Timestamp) {
+    // Timestamp in seconds is 1506237734
+    // but nano seconds we need multiply with 1,000,000,000
+    // so it will be look likes this 1506237734000000000
+    // length of timestamp in nano seconds is 19 digits
+	long timestamps = timestamp();
+	assertTrue(timestamps > 1506237163070843650);
+    assertTrue(timestamps < 2506237163070843650);
+}
+
+TEST (KernelDateTime, Date) {
+	long timestamp = 1473765499;
+	auto format = (string) "d/m/y";
+	string result1 = date(timestamp, format);
+	assertEquals("13/09/2016", result1);
+	free(result1);
+
+	timestamp = 1511208660;
+	char *result2 = date(timestamp, format);
+	assertEquals("20/11/2017", result2);
+	free(result2);
+
+	format = (string) "y-m-d";
+	char *result3 = date(timestamp, format);
+	assertEquals("2017-11-20", result3);
+	free(result3);
+}

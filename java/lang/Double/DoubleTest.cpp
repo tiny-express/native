@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, DoubleConstructor) {
+TEST (JavaLangDouble, Constructor) {
     // Test Double::Double()
     Double emptyDoubleConstructor;
     emptyDoubleConstructor = 13.02;
@@ -45,7 +45,7 @@ TEST (JavaLang, DoubleConstructor) {
     assertEquals(13.02, validDoubleConstructor.doubleValue());
 }
 
-TEST (JavaLang, DoubleArithmeticOperator) {
+TEST (JavaLangDouble, ArithmeticOperator) {
     // Create variable to test
     Double variableFirst;
     Double variableSecond;
@@ -102,7 +102,7 @@ TEST (JavaLang, DoubleArithmeticOperator) {
     assertEquals(expected.doubleValue(), actual.doubleValue());
 }
 
-TEST (JavaLang, DoubleRelationalOperator) {
+TEST (JavaLangDouble, RelationalOperator) {
     // Test Operator ==
     assertTrue((Double) 13.02 == (Double) 13.02);
     assertFalse((Double) 13.03 == (Double) 13.02);
@@ -132,7 +132,7 @@ TEST (JavaLang, DoubleRelationalOperator) {
     assertFalse((Double) 20.31 <= (Double) 13.02);
 }
 
-TEST (JavaLang, DoubleLogicalOperator) {
+TEST (JavaLangDouble, LogicalOperator) {
     // Test Operator && . Case 0   0
     assertFalse((Double) 0 && (Double) 0);
 
@@ -158,7 +158,7 @@ TEST (JavaLang, DoubleLogicalOperator) {
     assertTrue((Double) 1 || (Double) 1);
 }
 
-TEST (JavaLang, DoubleAssignmentOperator) {
+TEST (JavaLangDouble, AssignmentOperator) {
     // Create variable to test
     Double variableAssignmentOperator1;
     Double variableAssignmentOperator2;
@@ -201,7 +201,7 @@ TEST (JavaLang, DoubleAssignmentOperator) {
     assertEquals(expected.doubleValue(), actual.doubleValue());
 }
 
-TEST (JavaLang, DoubleParseDouble) {
+TEST (JavaLangDouble, ParseDouble) {
     string stringInput;
     Double expectedResult;
     Double actualResult;
@@ -217,7 +217,7 @@ TEST (JavaLang, DoubleParseDouble) {
     assertEquals(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
-TEST (JavaLang, DoubleValueOfWithStringInput) {
+TEST (JavaLangDouble, ValueOfWithStringInput) {
     string stringInput;
     Double expectedResult;
     Double actualResult;
@@ -233,7 +233,7 @@ TEST (JavaLang, DoubleValueOfWithStringInput) {
     assertEquals(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
-TEST (JavaLang, DoubleValueOfWithDoubleInput) {
+TEST (JavaLangDouble, ValueOfWithDoubleInput) {
     double doubleInput;
     Double expectedResult;
     Double actualResult;
@@ -249,7 +249,7 @@ TEST (JavaLang, DoubleValueOfWithDoubleInput) {
     assertEquals(expectedResult.doubleValue(), actualResult.doubleValue());
 }
 
-TEST (JavaLang, DoubleToString) {
+TEST (JavaLangDouble, ToString) {
     // Create variable to test
     Double variableTestToString;
     String expected;
@@ -297,7 +297,7 @@ TEST (JavaLang, DoubleToString) {
     assertEquals(expected, actual);
 }
 
-TEST (JavaLang, DoubleCharValue) {
+TEST (JavaLangDouble, CharValue) {
     // Create variable to test
     Double variableTestCharValue;
     char expectedResultCharValue;
@@ -358,7 +358,7 @@ TEST (JavaLang, DoubleCharValue) {
     assertNotEquals(expectedResultCharValue, actualResultCharValue);
 }
 
-TEST (JavaLang, DoubleShortValue) {
+TEST (JavaLangDouble, ShortValue) {
     // Create variable to test
     Double variableTestShortValue;
     short expectedResultShortValue;
@@ -420,7 +420,7 @@ TEST (JavaLang, DoubleShortValue) {
 }
 
 
-TEST (JavaLang, DoubleIntValue) {
+TEST (JavaLangDouble, IntValue) {
     // Create variable to test
     Double variableTestIntValue;
     int expectedResultIntValue;
@@ -481,7 +481,7 @@ TEST (JavaLang, DoubleIntValue) {
     assertNotEquals(expectedResultIntValue, actualResultIntValue);
 }
 
-TEST (JavaLang, DoubleLongValue) {
+TEST (JavaLangDouble, LongValue) {
     // Create variable to test
     Double variableTestLongValue;
     long expectedResultLongValue;
@@ -542,7 +542,7 @@ TEST (JavaLang, DoubleLongValue) {
     assertNotEquals(expectedResultLongValue, actualResultLongValue);
 }
 
-TEST (JavaLang, DoubleFloatValue) {
+TEST (JavaLangDouble, FloatValue) {
     // Create variable to test
     Double variableTestFloatValue;
     float expectedResultFloatValue;
@@ -604,7 +604,7 @@ TEST (JavaLang, DoubleFloatValue) {
 }
 
 
-TEST (JavaLang, DoubleDoubleValue) {
+TEST (JavaLangDouble, DoubleValue) {
     // Create variable to test
     Double variableTestDoubleValue;
     double expectedResultDoubleValue;
@@ -665,7 +665,7 @@ TEST (JavaLang, DoubleDoubleValue) {
     assertNotEquals(expectedResultDoubleValue, actualResultDoubleValue);
 }
 
-TEST (JavaLang, DoubleByteValue) {
+TEST (JavaLangDouble, ByteValue) {
     // Create variable to test
     Double variableTestByteValue;
     byte expectedResultByteValue;
@@ -728,7 +728,7 @@ TEST (JavaLang, DoubleByteValue) {
 }
 
 // TODO(thoangminh): Need to pass all test cases in comment block
-TEST (JavaLang, DoubleCompare) {
+TEST (JavaLangDouble, Compare) {
     // Test Double::NaN
     assertEquals(0, Double::compare(Double::NaN, Double::NaN));
     assertEquals(1, Double::compare(Double::NaN, Double::POSITIVE_INFINITY));
@@ -829,7 +829,7 @@ TEST (JavaLang, DoubleCompare) {
     assertEquals(1, Double::compare(-1.2, Double::NEGATIVE_INFINITY));
 }
 
-TEST (JavaLang, DoubleCompareTo) {
+TEST (JavaLangDouble, CompareTo) {
     Double variableCompareTo;
 
     // Test Double::NaN
@@ -941,7 +941,7 @@ TEST (JavaLang, DoubleCompareTo) {
     assertEquals(1, variableCompareTo.compareTo(Double::NEGATIVE_INFINITY));
 }
 
-TEST (JavaLang, DoubleToRawLongBits) {
+TEST (JavaLangDouble, ToRawLongBits) {
     // Create variable to test
     double input;
     long expectedResult;
@@ -1026,7 +1026,7 @@ TEST (JavaLang, DoubleToRawLongBits) {
     assertEquals(expectedResult, actualResult);
 }
 
-TEST (JavaLang, DoubleToLongBits) {
+TEST (JavaLangDouble, ToLongBits) {
     // Create variable to test
     double input;
     long expectedResult;
@@ -1112,7 +1112,7 @@ TEST (JavaLang, DoubleToLongBits) {
 }
 
 // TODO(thoangminh): Wait for instanceof <> , check later: max, min , -0
-TEST (JavaLang, DoubleEquals) {
+TEST (JavaLangDouble, Equals) {
     // Create variable to test
     Double variableDoubleEquals;
     Double DOUBLE_NaN = Double::NaN;
@@ -1230,7 +1230,7 @@ TEST (JavaLang, DoubleEquals) {
     assertEquals(0, variableDoubleEquals.equals(DOUBLE_NEGATIVE_INFINITY));
 }
 
-TEST (JavaLang, DoubleHashCode) {
+TEST (JavaLangDouble, HashCode) {
     // Create variable to test
     double input;
     long expectedResult;
@@ -1315,7 +1315,7 @@ TEST (JavaLang, DoubleHashCode) {
     assertEquals(expectedResult, actualResult);
 }
 
-TEST (JavaLang, DoubleHashCodeNotInput) {
+TEST (JavaLangDouble, HashCodeNotInput) {
     // Create variable to test
     Double variableDouble;
     long expectedResult;
@@ -1400,21 +1400,21 @@ TEST (JavaLang, DoubleHashCodeNotInput) {
     assertEquals(expectedResult, actualResult);
 }
 
-TEST (JavaLang, DoubleIsFinite) {
+TEST (JavaLangDouble, IsFinite) {
     assertTrue(Double::isFinite(13.02));
     assertTrue(Double::isFinite(130.2));
     assertFalse(Double::isFinite(Double::POSITIVE_INFINITY));
     assertFalse(Double::isFinite(Double::NEGATIVE_INFINITY));
 }
 
-TEST (JavaLang, DoubleIsInfinite) {
+TEST (JavaLangDouble, IsInfinite) {
     assertTrue(Double::isInfinite(Double::POSITIVE_INFINITY));
     assertTrue(Double::isInfinite(Double::NEGATIVE_INFINITY));
     assertFalse(Double::isInfinite(13.02));
     assertFalse(Double::isInfinite(130.2));
 }
 
-TEST (JavaLang, DoubleIsInfinite2) {
+TEST (JavaLangDouble, IsInfinite2) {
     Double variableIsInfinite2;
 
     variableIsInfinite2 = Double::POSITIVE_INFINITY;
@@ -1427,14 +1427,14 @@ TEST (JavaLang, DoubleIsInfinite2) {
     assertFalse(variableIsInfinite2.isInfinite());
 }
 
-TEST (JavaLang, DoubleIsNaN) {
+TEST (JavaLangDouble, IsNaN) {
     assertTrue(Double::isNaN(Double::NaN));
     assertFalse(Double::isNaN(Double::NEGATIVE_INFINITY));
     assertFalse(Double::isNaN(13.02));
     assertFalse(Double::isNaN(130.2));
 }
 
-TEST (JavaLang, DoubleIsNaN2) {
+TEST (JavaLangDouble, IsNaN2) {
     Double variableIsInfinite2;
 
     variableIsInfinite2 = Double::NaN;
@@ -1447,7 +1447,7 @@ TEST (JavaLang, DoubleIsNaN2) {
     assertFalse(variableIsInfinite2.isNaN());
 }
 
-TEST (JavaLang, DoubleMin) {
+TEST (JavaLangDouble, Min) {
     double variableDoubleMin1;
     double variableDoubleMin2;
     double expectedResultDoubleMin;
@@ -1466,7 +1466,7 @@ TEST (JavaLang, DoubleMin) {
     assertNotEquals(expectedResultDoubleMin, actualResultDoubleMin);
 }
 
-TEST (JavaLang, DoubleLongBitsToDouble) {
+TEST (JavaLangDouble, LongBitsToDouble) {
     // Create variable to test
     long longBitsInput;
     double expectedResult;

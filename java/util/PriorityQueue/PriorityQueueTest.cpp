@@ -31,7 +31,7 @@
 
 using namespace Java::Util;
 
-TEST (JavaUtil, PriorityQueueConstructor) {
+TEST (JavaUtilPriorityQueue, Constructor) {
 	PriorityQueue<int> defaultConstructor;
 	assertEquals(0, defaultConstructor.size());
 	
@@ -46,12 +46,12 @@ TEST (JavaUtil, PriorityQueueConstructor) {
 	try {
 		PriorityQueue<int> customCapacityConstructor(-1);
 	}
-	catch (IllegalArgumentException ex) {
+	catch (InterruptedException ex) {
 		assertEquals("initialCapacity < 1", ex.getMessage().toString());
 	}
 }
 
-TEST (JavaUtil, PriorityQueueAdd) {
+TEST (JavaUtilPriorityQueue, Add) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
@@ -60,14 +60,14 @@ TEST (JavaUtil, PriorityQueueAdd) {
 	assertEquals(10, priorityQueue.peek());
 }
 
-TEST (JavaUtil, PriorityQueueClear) {
+TEST (JavaUtilPriorityQueue, Clear) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	priorityQueue.clear();
 	assertEquals(0, priorityQueue.size());
 }
 
-TEST (JavaUtil, PriorityQueueContains) {
+TEST (JavaUtilPriorityQueue, Contains) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
@@ -75,7 +75,7 @@ TEST (JavaUtil, PriorityQueueContains) {
 	assertFalse(priorityQueue.contains(7));
 }
 
-TEST (JavaUtil, PriorityQueueOffer) {
+TEST (JavaUtilPriorityQueue, Offer) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
@@ -84,7 +84,7 @@ TEST (JavaUtil, PriorityQueueOffer) {
 	assertEquals(10, priorityQueue.peek());
 }
 
-TEST (JavaUtil, PriorityQueuePeek) {
+TEST (JavaUtilPriorityQueue, Peek) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
@@ -98,7 +98,7 @@ TEST (JavaUtil, PriorityQueuePeek) {
 	assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
 }
 
-TEST (JavaUtil, PriorityQueuePoll) {
+TEST (JavaUtilPriorityQueue, Poll) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.poll());
@@ -112,7 +112,7 @@ TEST (JavaUtil, PriorityQueuePoll) {
 	assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer.
 }
 
-TEST (JavaUtil, PriorityQueueRemove) {
+TEST (JavaUtilPriorityQueue, Remove) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());
@@ -126,14 +126,14 @@ TEST (JavaUtil, PriorityQueueRemove) {
 	assertEquals(4, priorityQueue.peek());
 }
 
-TEST (JavaUtil, PriorityQueueSize) {
+TEST (JavaUtilPriorityQueue, Size) {
 	PriorityQueue<int> priorityQueue;
 	assertEquals(0, priorityQueue.size());
 	priorityQueue.add(-1);
 	assertEquals(1, priorityQueue.size());
 }
 
-TEST (JavaUtil, PriorityQueueToArray) {
+TEST (JavaUtilPriorityQueue, ToArray) {
 	PriorityQueue<int> priorityQueue { 1, 2, 3, 4, 5 };
 	assertEquals(5, priorityQueue.size());
 	assertEquals(5, priorityQueue.peek());

@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ClassCastExceptionConstructor) {
+TEST (JavaLangClassCastException, Constructor) {
 // Constructs a new ClassCastException with null as its detail message.
 	ClassCastException classCastExceptionWithNullMessage;
 	assertEquals("", classCastExceptionWithNullMessage.getMessage().toString());
@@ -39,7 +39,7 @@ TEST (JavaLang, ClassCastExceptionConstructor) {
 	assertEquals("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
 }
 
-TEST (JavaLang, ClassCastExceptionTryCatch) {
+TEST (JavaLangClassCastException, TryCatch) {
 	try {
 		throw ClassCastException("Throw ClassCastException");
 	}

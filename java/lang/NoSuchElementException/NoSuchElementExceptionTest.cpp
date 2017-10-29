@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, NoSuchElementExceptionConstructor) {
+TEST (NoSuchElementException, Constructor) {
 	// Constructs a new NoSuchElementException with null as its detail message.
 	NoSuchElementException NoSuchElementExceptionWithNullMessage;
 	assertEquals("", NoSuchElementExceptionWithNullMessage.getMessage().toString());
@@ -49,10 +49,10 @@ TEST (JavaLang, NoSuchElementExceptionConstructor) {
 	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, NoSuchElementExceptionTryCatch) {
+TEST (NoSuchElementException, TryCatch) {
 	try {
 		throw NoSuchElementException("Throw NoSuchElementException");
-	} catch (NoSuchElementException exception) {
+	} catch (NoSuchElementException &exception) {
 		assertEquals("Throw NoSuchElementException", exception.getMessage().toString());
 	}
 }

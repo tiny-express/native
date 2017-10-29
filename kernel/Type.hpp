@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_TYPE_H
-#define NATIVE_TYPE_H
+#ifndef NATIVE_TYPE_HPP
+#define NATIVE_TYPE_HPP
 
 #define NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
@@ -44,4 +44,4 @@ string stringDefault(string target);
 
 double numberDefault(double target);
 
-#endif
+#endif//NATIVE_TYPE_HPP

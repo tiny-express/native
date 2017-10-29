@@ -35,3 +35,11 @@ ClassCastException::ClassCastException() : RuntimeException() {
 ClassCastException::ClassCastException(String message) : RuntimeException(message) {
 
 }
+
+ClassCastException::ClassCastException(Throwable *cause) : RuntimeException(cause) {
+
+}
+
+ClassCastException::ClassCastException(String message, Throwable *cause) : RuntimeException(message, cause) {
+
+}
