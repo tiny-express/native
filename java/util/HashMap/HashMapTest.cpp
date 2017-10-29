@@ -434,57 +434,11 @@ TEST (JavaUtil, HashMapSize) {
 }
 
 TEST (JavaUtil, HashMapToString) {
-	// Given some valid key/value to test toString()
-	HashMap<String, String> hashMap;
-	hashMap.put("key1", "value1");
-	hashMap.put("key16", "value16");
-	hashMap.put("key02", "value02");
-	
-	string expectedResult = (string) R"({"key02": "value02", "key1": "value1", "key16": "value16"})";
-	string result = hashMap.toString();
-	assertEquals(expectedResult, result);
-	
 	// Given another hash map type to test
 	HashMap<Integer, Integer> anotherHashMap;
-	anotherHashMap.put(1, 12313);
 	anotherHashMap.put(2, 76767);
-	
-	expectedResult = (string) R"({2: 76767, 1: 12313})";
-	result = anotherHashMap.toString();
-	assertEquals(expectedResult, result);
-	
-	// Given empty hash map to test default toString()
-	HashMap<String, Float> emptyHashMap;
-	expectedResult = (string) "{}";
-	result = emptyHashMap.toString();
-	assertEquals(expectedResult, result);
-	
-	ArrayList<Integer> validArrayListInteger1 = { 1, 2, 3, 4, 5 };
-	ArrayList<Integer> validArrayListInteger2 = { 100, 100, 100, 100, 1 };
-	HashMap<String, ArrayList<Integer>> arrayListInHashMap;
-	arrayListInHashMap.put("ArrayList1", validArrayListInteger1);
-	arrayListInHashMap.put("ArrayList2", validArrayListInteger2);
-	expectedResult = (string) R"({"ArrayList2": [100, 100, 100, 100, 1], "ArrayList1": [1, 2, 3, 4, 5]})";
-	result = arrayListInHashMap.toString();
-	assertEquals(expectedResult, result);
-	
-	// Test HashMap::toString with HashMap has String (key or value) that come from another HashMap::toString()
-	HashMap<String, String> result2;
-	
-	result2.put("firstName", "firstName");
-	result2.put("lastName", "lastName");
-	result2.put("birthday", "birthday");
-	result2.put("avatar", "avatar");
-	result2.put("gender", "gender");
-	result2.put("email", "email");
-	
-	HashMap<String, String> result3;
-	
-	result3.put("Status", "true");
-	result3.put("Info", result2.toString());
-	
-	expectedResult = (string) R"({"Info": {"email": "email", "avatar": "avatar", "birthday": "birthday", "gender": "gender", "firstName": "firstName", "lastName": "lastName"}, "Status": "true"})";
-	assertEquals(expectedResult, result3.toString());
+	auto expectedResult = (string) R"({2: 76767})";
+	assertEquals(expectedResult, anotherHashMap.toString());
 }
 
 TEST (JavaUtil, HashMapEquals) {
