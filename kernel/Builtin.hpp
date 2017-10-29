@@ -37,7 +37,6 @@
 #include <cmath>
 #include <cstring>
 #include <climits>
-#include <cstdalign>
 #include <cstdarg>
 #include <cstdbool>
 #include <cstddef>
