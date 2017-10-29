@@ -249,9 +249,9 @@ void assertArrayAllType(ArrayList<Type> &expected,
             CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
                       file,
                       line,
-                      expectedString.toString(),
+                      expectedString.toCharPointer(),
                       (uintmax_t) index,
-                      actualString.toString());
+                      actualString.toCharPointer());
         }
     }
 }
@@ -699,7 +699,7 @@ void assertEqualsString(String expected,
                         int line) {
     if (expected != actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
@@ -766,7 +766,7 @@ void assertNotEqualsString(String expected,
                         int line) {
     if (expected == actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
