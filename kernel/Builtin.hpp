@@ -58,6 +58,10 @@
 #include <mach/mach_time.h>
 #endif
 
+#ifdef UNIX
+#include <unistd.h>
+#endif
+
 // C++ Standard Library
 #include <thread>
 #include <memory>
