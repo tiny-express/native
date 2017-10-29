@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_APPEND_HPP
-#define NATIVE_COMMON_APPEND_HPP
+#ifndef NATIVE_KERNEL_COMMON_APPEND_HPP
+#define NATIVE_KERNEL_COMMON_APPEND_HPP
 
 #include "../Common.hpp"
 #include "../Builtin.hpp"
@@ -51,4 +51,4 @@ inline char **appendPointerChar(char **target, char *append) {
 	return pointer;
 }
 
-#endif
+#endif // NATIVE_KERNEL_COMMON_APPEND_HPP

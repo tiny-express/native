@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_BASE64_BASE64_HPP
-#define JAVA_UTIL_BASE64_BASE64_HPP
+#ifndef NATIVE_JAVA_UTIL_BASE64_BASE64_HPP
+#define NATIVE_JAVA_UTIL_BASE64_BASE64_HPP
 
 #include "../../Lang.hpp"
 
@@ -363,5 +363,5 @@ namespace Java {
 		}  // namespace Util
 }  // namespace Java
 
-#endif // JAVA_UTIL_BASE64_BASE64_HPP
+#endif // NATIVE_JAVA_UTIL_BASE64_BASE64_HPP
 

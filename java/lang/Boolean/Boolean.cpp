@@ -121,7 +121,7 @@ boolean Boolean::getBoolean(const_string target) {
  *
  * @return long
  */
-long Boolean::hashCode() const {
+int Boolean::hashCode() const {
 	return Object::hashCode();
 }
 

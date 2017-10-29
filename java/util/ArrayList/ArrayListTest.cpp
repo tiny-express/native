@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-TEST(JavaUtil, ArrayListConstructor) {
+TEST(JavaUtilArrayList, Constructor) {
 	// Standard declaration
 	ArrayList<Integer> integerArrayList;
 	Integer value = 1324;
@@ -55,14 +55,14 @@ TEST(JavaUtil, ArrayListConstructor) {
 	assertEquals(2, stringArrayListCopy.size());
 }
 
-TEST(JavaUtil, ArrayListDestructor) {
+TEST(JavaUtilArrayList, Destructor) {
 	// Give a pointer ArrayList was allocated
     // then delete this pointer - Should not leak memory
 	ArrayList<Integer> *intArray = new ArrayList<Integer>(10);
 	delete intArray;
 }
 
-TEST(JavaUtil, ArrayListSize) {
+TEST(JavaUtilArrayList, Size) {
 	// Give an empty ArrayList
     // then compare size of this list - Should equal
 	ArrayList<Integer> emptyArray;
@@ -79,7 +79,7 @@ TEST(JavaUtil, ArrayListSize) {
 	assertEquals(expect, result);
 }
 
-TEST(JavaUtil, ArrayListAdd) {
+TEST(JavaUtilArrayList, Add) {
 	// Give an valid ArrayList
     // then add one element - Should equal
 	ArrayList<Integer> validArrayList = {1, 2, 3};
@@ -98,7 +98,7 @@ TEST(JavaUtil, ArrayListAdd) {
 	assertEquals(stringExpect, validArrayList.toString());
 }
 
-TEST(JavaUtil, ArrayListContains) {
+TEST(JavaUtilArrayList, Contains) {
     // Give a valid ArrayList then test method contains - Should equal
     ArrayList<String> validArrayList = {"nakhoadl", "thuydung",
                                         "loint", "dthongvl", "dquang"};
@@ -108,7 +108,7 @@ TEST(JavaUtil, ArrayListContains) {
     assertFalse(result);
 }
 
-TEST(JavaUtil, ArrayListIsEmpty) {
+TEST(JavaUtilArrayList, IsEmpty) {
 	// Give an empty ArrayList - Should equal
 	ArrayList<Long> emptyArrayList;
 	boolean result = emptyArrayList.isEmpty();
@@ -124,7 +124,7 @@ TEST(JavaUtil, ArrayListIsEmpty) {
 	assertEquals(stringExpect, validArrayList.toString());
 }
 
-TEST(JavaUtil, ArrayListClear) {
+TEST(JavaUtilArrayList, Clear) {
 	// Give an valid ArrayList
 	ArrayList<String> validArrayList = {"food", "tiny"};
 	auto stringExpect = (string) R"(["food", "tiny"])";
@@ -140,7 +140,7 @@ TEST(JavaUtil, ArrayListClear) {
 	assertEquals(stringExpect, validArrayList.toString());
 }
 
-TEST(JavaUtil, ArrayListClone) {
+TEST(JavaUtilArrayList, Clone) {
     // Give a valid ArrayList
     // then clone this to new object - Should equal
 	ArrayList<String> validArrayList = {"food", "tiny"};
@@ -153,7 +153,7 @@ TEST(JavaUtil, ArrayListClone) {
 	assertEquals(sizeExpect, sizeResult);
 }
 
-TEST(JavaUtil, ArrayListForEach) {
+TEST(JavaUtilArrayList, ForEach) {
 	ArrayList<Integer> expected;
 	ArrayList<Integer> actual;
 
@@ -170,7 +170,7 @@ TEST(JavaUtil, ArrayListForEach) {
 	assertArray(expected, actual);
 }
 
-TEST(JavaUtil, ArrayListGet) {
+TEST(JavaUtilArrayList, Get) {
     // Give a valid ArrayList and get value some index
 	ArrayList<Integer> validArrayList = {1, 2, 3};
 	int expect = 1;
@@ -181,7 +181,7 @@ TEST(JavaUtil, ArrayListGet) {
 		validArrayList.get(-1);
 	} catch (IndexOutOfBoundsException &exception) {
 		auto stringExpect = (string) "Index out of range: -1";
-		String stringResult = exception.toString();
+		String stringResult = exception.getMessage();
         assertEquals(stringExpect, stringResult);
 	}
 
@@ -189,12 +189,12 @@ TEST(JavaUtil, ArrayListGet) {
 		validArrayList.get(1000);
 	} catch (IndexOutOfBoundsException &exception) {
 		auto stringExpect = (string) "Index out of range: 1000";
-		String stringResult = exception.toString();
+		String stringResult = exception.getMessage();
         assertEquals(stringExpect, stringResult);
 	}
 }
 
-TEST(JavaUtil, ArrayListIndexOf) {
+TEST(JavaUtilArrayList, IndexOf) {
     // Give a valid ArrayList
     // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3};
@@ -207,7 +207,7 @@ TEST(JavaUtil, ArrayListIndexOf) {
     assertEquals(expect, result);
 }
 
-TEST(JavaUtil, ArrayListLastIndexOf) {
+TEST(JavaUtilArrayList, LastIndexOf) {
     // Give a valid ArrayList
     // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
@@ -220,7 +220,7 @@ TEST(JavaUtil, ArrayListLastIndexOf) {
     assertEquals(expect, result);
 }
 
-TEST(JavaUtil, ArrayListRemoveIndex) {
+TEST(JavaUtilArrayList, RemoveIndex) {
     // Give a valid ArrayList
     // then test method with index remove - Should equal
     ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
@@ -239,7 +239,7 @@ TEST(JavaUtil, ArrayListRemoveIndex) {
     }
 }
 
-TEST(JavaUtil, ArrayListRemoveElement) {
+TEST(JavaUtilArrayList, RemoveElement) {
     // Give a valid ArrayList
     // then test method remove with element - Should equal
     ArrayList<String> validArrayList = {"123", "456", "789"};
@@ -255,11 +255,11 @@ TEST(JavaUtil, ArrayListRemoveElement) {
     assertEquals(stringExpect, validArrayList.toString());
 }
 
-TEST(JavaUtil, ArrayListSet) {
+TEST(JavaUtilArrayList, Set) {
     // Give a valid ArrayList
     // then test method set - Should equal
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
-    validArrayList.set(2, "String");
+    validArrayList.set(2, String("String"));
     auto stringExpect = (string) R"(["String", "String", "String", "String"])";
     String stringResult = validArrayList.toString();
     assertEquals(stringExpect, stringResult);
@@ -271,12 +271,12 @@ TEST(JavaUtil, ArrayListSet) {
     }
 }
 
-TEST(JavaUtil, ArrayListHashCode) {
+TEST(JavaUtilArrayList, HashCode) {
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
     assertNotEquals(validArrayList.hashCode(), 0);
 }
 
-TEST(JavaUtil, ArrayListToString) {
+TEST(JavaUtilArrayList, ToString) {
     // Give an empty ArrayList<Integer>
     // then compare toString() - Should equal
     ArrayList<Integer> inValidArrayListInteger;

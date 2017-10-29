@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_THREAD_HPP
-#define JAVA_LANG_THREAD_HPP
+#ifndef NATIVE_JAVA_LANG_THREAD_HPP
+#define NATIVE_JAVA_LANG_THREAD_HPP
 
 #include <pthread.h>
 #include "../Object/Object.hpp"

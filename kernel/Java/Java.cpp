@@ -28,6 +28,10 @@
 
 using namespace Java::Lang;
 
+Java::Lang::String IntegerToHexString(int inputInt) {
+	return  Java::Lang::Integer::toHexString(inputInt);
+}
+
 /**
  * Application starting point
  * This function handle any application exception to keep program safety

@@ -33,13 +33,17 @@ using namespace Java::Lang;
 
 namespace Javax {
     namespace Ws  {
-        class MediaTypeException : public Exception {
-        public:
-            MediaTypeException();
-            MediaTypeException(String message);
-            MediaTypeException(String message, Throwable *cause);
-            MediaTypeException(Throwable *cause);
-        };  // class MediaTypeException
+            namespace Rs {
+                    namespace Core {
+                            class MediaTypeException : public Exception {
+                            public:
+                                    MediaTypeException();
+                                    MediaTypeException(String message);
+                                    MediaTypeException(String message, Throwable *cause);
+                                    MediaTypeException(Throwable *cause);
+                            };  // class MediaTypeException
+                    } // namespace Core
+            } // namespace Rs
     }  // namespace Ws
 }  // namespace Javax
 

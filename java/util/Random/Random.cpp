@@ -162,7 +162,7 @@ int Random::nextInt() {
  */
 int Random::nextInt(int bound) {
 	if (bound <= 0) {
-		throw IllegalArgumentException(BADBOUND);
+		throw InterruptedException(BADBOUND);
 	}
 	
 	if (( bound & ( bound - 1 )) == 0) {

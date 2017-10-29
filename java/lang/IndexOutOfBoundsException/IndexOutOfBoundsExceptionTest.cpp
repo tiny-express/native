@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, IndexOutOfBoundsExceptionConstructor) {
+TEST (JavaLangIndexOutOfBoundsException, Constructor) {
 	// Constructs a new IndexOutOfBoundsException with null as its detail message.
 	IndexOutOfBoundsException indexOutOfBoundsExceptionWithNullMessage;
 	assertEquals("", indexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
@@ -49,7 +49,7 @@ TEST (JavaLang, IndexOutOfBoundsExceptionConstructor) {
 	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, IndexOutOfBoundsExceptionTryCatch) {
+TEST (JavaLangIndexOutOfBoundsException, TryCatch) {
 	try {
 		throw IndexOutOfBoundsException("Throw IndexOutOfBoundsException");
 	} catch (Exception e) {

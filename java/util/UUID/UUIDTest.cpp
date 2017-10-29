@@ -27,8 +27,7 @@
 #include "../../../kernel/Test.hpp"
 #include "UUID.hpp"
 
-
-TEST (JavaUtil, UUIDConstructor) {
+TEST (JavaUtilUUID, Constructor) {
 	UUID uuid;
     String str = uuid.toString();
 
@@ -53,7 +52,7 @@ TEST (JavaUtil, UUIDConstructor) {
 	assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
-TEST (JavaUtil, UUIDClockSequence) {
+TEST (JavaUtilUUID, ClockSequence) {
 	// Given valid uuid and expectedResult based on result of java code
 	UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 	int expectedResult = 12862;
@@ -61,7 +60,7 @@ TEST (JavaUtil, UUIDClockSequence) {
 	assertEquals(expectedResult, uuid.clockSequence());
 }
 
-TEST (JavaUtil, UUIDCompare) {
+TEST (JavaUtilUUID, Compare) {
 	// Given valid 2 UUIDs, both of them will never be equal if different instance
 	
 	UUID uuid = UUID(123, 456);
@@ -83,14 +82,14 @@ TEST (JavaUtil, UUIDCompare) {
 	assertEquals(expectedValue, result);
 }
 
-TEST (JavaUtil, UUIDEquals) {
+TEST (JavaUtilUUID, Equals) {
 	// Given valid an instance of UUID, test equals with ifself
 	UUID uuid = UUID::randomUUID();
 	
 	assertTrue(uuid.equals(uuid));
 }
 
-TEST (JavaUtil, UUIDGetSignificantBits) {
+TEST (JavaUtilUUID, GetSignificantBits) {
 	// Given valid UUID to test getLeast and getMost of significant bits inside this class
 	long expectedMost = 100000000;
 	long expectedLeast = 5000000;
@@ -101,7 +100,7 @@ TEST (JavaUtil, UUIDGetSignificantBits) {
 	assertEquals(expectedLeast, uuid.getLeastSignificantBits());
 }
 
-TEST (JavaUtil, UUIDToString) {
+TEST (JavaUtilUUID, ToString) {
 	// Given valid uuid to test toString() - this test case was based on java's result
 	UUID uuid = UUID(4053239666997989821, -5603022497796657139);
 	

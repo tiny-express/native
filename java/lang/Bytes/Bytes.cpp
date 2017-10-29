@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Byte.hpp"
+#include "Bytes.hpp"
 #include "../NumberFormatException/NumberFormatException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
@@ -38,7 +38,7 @@ Bytes::Bytes(byte byteValue) {
 }
 
 Bytes::Bytes(String inputString) {
-	this->original = parseByte(inputString, 10);
+	this->original = parseBytes(inputString, 10);
     this->originalString = stringFromInt(this->original);
 }
 
@@ -74,7 +74,7 @@ Bytes Bytes::decode(String stringToDecode) {
     if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
-    return (byte) value;
+    return (Bytes) value;
 }
 
 double Bytes::doubleValue() const {
@@ -83,20 +83,20 @@ double Bytes::doubleValue() const {
 
 //TODO need instanceof
 boolean Bytes::equals(Bytes object) {
-//    boolean isByte = instanceof<Bytes>(object);
+//    boolean isBytes = instanceof<Byte>(object);
 //	if (isByte) {
-//        return this->original == parseByte(object.toString());
+//        return this->original == parseBytes(object.toString());
 //    }
 //	return false;
-    return this->original == parseByte(object.toString());
+    return this->original == parseBytes(object.toString());
 }
 
 float Bytes::floatValue() const {
     return (float) this->original;
 }
 
-long Bytes::hashCode() const {
-    return (long) this->original;
+int Bytes::hashCode() const {
+    return (int) this->original;
 }
 
 int Bytes::hashCode(byte value) {
@@ -111,16 +111,16 @@ long Bytes::longValue() const {
     return (long) this->original;
 }
 
-byte Bytes::parseByte(String stringToParse) {
-	return parseByte(stringToParse, 10);
+byte Bytes::parseBytes(String stringToParse) {
+	return parseBytes(stringToParse, 10);
 }
 
-byte Bytes::parseByte(String stringToParse, int radix) {
+byte Bytes::parseBytes(String stringToParse, int radix) {
     int value = Integer::parseInt(stringToParse, radix);
     if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
-    return (byte)value;
+    return (byte) value;
 }
 
 short Bytes::shortValue() const {
@@ -148,11 +148,11 @@ Bytes Bytes::valueOf(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(String stringValue) {
-    return Bytes(parseByte(stringValue));
+    return Bytes(parseBytes(stringValue));
 }
 
 Bytes Bytes::valueOf(String stringValue, int radix) {
-    return Bytes(parseByte(stringValue, radix));
+    return Bytes(parseBytes(stringValue, radix));
 }
 
 Bytes Bytes::operator+(const Bytes &target) {
@@ -253,7 +253,7 @@ Bytes &Bytes::operator=(const Bytes &target) {
     return *this;
 }
 
-Bytes::Bytes(const Bytes &anotherBytes) {
-    this->original = anotherBytes.original;
+Bytes::Bytes(const Bytes &anotherByte) {
+    this->original = anotherByte.original;
     this->originalString = stringFromInt(this->original);
 }

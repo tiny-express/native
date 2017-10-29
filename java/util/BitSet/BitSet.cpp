@@ -427,7 +427,7 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
     return result;
 }
 
-long BitSet::hashCode() const {
+int BitSet::hashCode() const {
     // BitSet hash code algorithm.
     long hash = 1234;
     for (int i = words.length; --i >= 0; )

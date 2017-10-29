@@ -190,7 +190,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             md5.update(nullptr, 0);
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 
@@ -204,7 +204,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             sha1.digest(nullptr, 1);
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 
@@ -219,7 +219,7 @@ TEST(JavaSecurity, Exception) {
         try {
             byte buf[1] = { 0 };
             sha1.digest(buf, sizeof(buf));
-        } catch (IllegalArgumentException e) {
+        } catch (InterruptedException e) {
             result = e.getMessage().toString();
         }
 

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_STRING_STRING_HPP
-#define JAVA_LANG_STRING_STRING_HPP
+#ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
+#define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
 #include "../../../kernel/Java.hpp"
 #include "../../../kernel/String.hpp"
@@ -74,21 +74,21 @@ namespace Java {
         memcpy(&this->original[this->size], targetValue, targetLength);\
         this->original[newLength] = '\0';\
         this->size = newLength;
-
+        
         class StringBuilder;
 
         class StringBuffer;
 
         class Short;
-
-        class Integer;
+				
+		class Integer;
 
         class Long;
 
         class Float;
 
         class Double;
-
+				
         class String :
                 public virtual Serializable,
                 public virtual Comparable<String>,
@@ -1127,7 +1127,10 @@ namespace Java {
             const char &operator[](const int index) const {
                 return this->original[index];
             }
-
+        
+            inline size_t operator()(const String &target) const {
+                return std::hash<std::string>{}(target.toCharPointer());
+            }
         public:
             /**
              * Format string
@@ -1277,4 +1280,14 @@ namespace Java {
     } // namespace Lang
 } // namespace Java
 
-#endif  // JAVA_LANG_STRING_STRING_HPP
+using namespace Java::Lang;
+
+namespace std {
+        template <> struct hash<String> {
+                std::size_t operator()(const String& k) const {
+                    return String()(k);
+                }
+        };
+}
+
+#endif // NATIVE_JAVA_LANG_STRING_STRING_HPP

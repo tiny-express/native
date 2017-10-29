@@ -216,6 +216,8 @@ public:
 		}
 };
 
+Java::Lang::String IntegerToHexString(int inputInt);
+
 /**
  * Application starting point
  * This function handle any application exception to keep program safety

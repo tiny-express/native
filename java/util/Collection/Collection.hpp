@@ -24,8 +24,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef JAVA_UTIL_COLLECTION_HPP
-#define JAVA_UTIL_COLLECTION_HPP
+#ifndef NATIVE_JAVA_UTIL_COLLECTION_HPP
+#define NATIVE_JAVA_UTIL_COLLECTION_HPP
 
 #include "../../lang/Iterable/Iterable.hpp"
 #include "../Collection/Collection.hpp"
@@ -88,7 +88,7 @@ namespace Java {
 						 * Make a hashcode through this virtual address on memory
 						 * @return int
 						 */
-						virtual long hashCode() = 0;
+						virtual int hashCode() = 0;
 						
 						/**
 						 * A hash code value for this object.
@@ -174,4 +174,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_COLLECTION_HPP
+#endif // NATIVE_JAVA_COLLECTION_HPP

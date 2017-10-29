@@ -27,7 +27,7 @@
 #include "NumberFormatException.hpp"
 #include "../../../kernel/Test.hpp"
 
-TEST (JavaLang, NumberFormatExceptionConstructor) {
+TEST (JavaLangNumberFormatException, Constructor) {
 	// Constructs a new NumberFormatException with null as its detail message.
 	NumberFormatException NumberFormatExceptionWithNullMessage;
 	assertEquals("", NumberFormatExceptionWithNullMessage.getMessage().toString());
@@ -37,7 +37,7 @@ TEST (JavaLang, NumberFormatExceptionConstructor) {
 	assertEquals("NumberFormatException with the specified message", NumberFormatExceptionWithMessage.getMessage().toString());
 }
 
-TEST (JavaLang, NumberFormatExceptionTryCatch) {
+TEST (JavaLangNumberFormatException, TryCatch) {
 	try {
 		throw NumberFormatException("Throw NumberFormatException");
 	} catch (NumberFormatException &e) {

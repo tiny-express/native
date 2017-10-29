@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_SHORT_SHORT_HPP
-#define JAVA_LANG_SHORT_SHORT_HPP
+#ifndef NATIVE_JAVA_LANG_SHORT_SHORT_HPP
+#define NATIVE_JAVA_LANG_SHORT_SHORT_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -81,8 +81,20 @@ namespace Java {
 							os << target.original;
 							return os;
 						}
+						
+						inline size_t operator()(const Short &target) const {
+							return std::hash<std::string>{}(target.toString().toCharPointer());
+						}
 				};
 		}
 }
 
-#endif  // JAVA_LANG_SHORT_SHORT_HPP
+namespace std {
+		template <> struct hash<Short> {
+				std::size_t operator()(const Short& k) const {
+					return Short()(k);
+				}
+		};
+}
+
+#endif // NATIVE_JAVA_LANG_SHORT_SHORT_HPP

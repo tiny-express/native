@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_BITSET_HPP
-#define JAVA_UTIL_BITSET_HPP
+#ifndef NATIVE_JAVA_UTIL_BITSET_HPP
+#define NATIVE_JAVA_UTIL_BITSET_HPP
 
 #include "../../Lang.hpp"
 
@@ -318,7 +318,7 @@ namespace Java {
              *
              * @return long
              */
-            long hashCode() const;
+            int hashCode() const;
 
             /**
              * Returns true if the specified BitSet has any bits set to true that
@@ -534,4 +534,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_BITSET_HPP
+#endif // NATIVE_JAVA_UTIL_BITSET_HPP

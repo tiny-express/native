@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_ENUM_HPP
-#define JAVA_LANG_ENUM_HPP
+#ifndef NATIVE_JAVA_LANG_ENUM_HPP
+#define NATIVE_JAVA_LANG_ENUM_HPP
 
 #include "../String/String.hpp"
 
@@ -59,9 +59,6 @@ namespace Java {
             }
 
         public:
-            /**
-             * Don't support this method
-             */
             Enum clone() {
                 Enum result;
                 result.name = this->name;
@@ -70,8 +67,9 @@ namespace Java {
             }
 
             /**
-             * Make a comparation from this enum to another
-             * @param o
+             * Make a comparision from this enum to another
+             *
+             * @param e
              * @return int
              */
             int compareTo(const Enum<E> &e) {
@@ -108,4 +106,4 @@ namespace Java {
     }
 }
 
-#endif //JAVA_LANG_ENUM_HPP
+#endif // NATIVE_JAVA_LANG_ENUM_HPP

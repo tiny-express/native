@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_BOOLEAN_HPP
-#define JAVA_LANG_BOOLEAN_HPP
+#ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
+#define NATIVE_JAVA_LANG_BOOLEAN_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Object/Object.hpp"
@@ -60,7 +60,7 @@ namespace Java {
 						static int compare(const boolean &target1, const boolean &target2);
 						int compareTo(const Boolean &target) const;
 						static boolean getBoolean(const_string target);
-						long hashCode() const;
+						virtual int hashCode() const;
 						static boolean parseBoolean(const_string target);
 						String toString() const;
 						static String toString(const boolean &target);
@@ -73,7 +73,6 @@ namespace Java {
 							return os;
 						}
 				};
-			
 		}
 }
-#endif  // JAVA_LANG_BOOLEAN_HPP
+#endif // NATIVE_JAVA_LANG_BOOLEAN_HPP

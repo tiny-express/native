@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_DEQUE_HPP
-#define JAVA_UTIL_DEQUE_HPP
+#ifndef NATIVE_JAVA_UTIL_DEQUE_HPP
+#define NATIVE_JAVA_UTIL_DEQUE_HPP
 
 #include "../../Lang.hpp"
 #include "../Collection/Collection.hpp"
@@ -69,4 +69,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_UTIL_LINKED_LIST_HPP
+#endif // NATIVE_JAVA_UTIL_LINKED_LIST_HPP

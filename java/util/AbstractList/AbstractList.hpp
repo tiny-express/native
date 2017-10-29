@@ -24,8 +24,8 @@
         * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         */
 
-#ifndef  JAVA_UTIL_ABSTRACT_LIST_HPP
-#define JAVA_UTIL_ABSTRACT_LIST_HPP
+#ifndef  NATIVE_JAVA_UTIL_ABSTRACT_LIST_HPP
+#define NATIVE_JAVA_UTIL_ABSTRACT_LIST_HPP
 
 #include "../AbstractCollection/AbstractCollection.hpp"
 #include "../ListIterator/ListIterator.hpp"
@@ -36,7 +36,6 @@ namespace Java {
 		namespace Util {
 				template <class E>
 				class AbstractList : public virtual AbstractCollection<E>, public virtual List<E> {
-				
 				protected:
 						AbstractList() {
 						}
@@ -46,4 +45,4 @@ namespace Java {
 		}
 }
 
-#endif //JAVA_ABSTRACT_LIST_HPP
+#endif // NATIVE_JAVA_UTIL_ABSTRACT_LIST_HPP

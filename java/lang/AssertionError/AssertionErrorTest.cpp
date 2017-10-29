@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, AssertionErrorConstructor) {
+TEST (JavaLangAssertionError, Constructor) {
 	// Constructs a new AssertionError with null as its detail message.
 	AssertionError assertionErrorWithNullMessage;
 	assertEquals("", assertionErrorWithNullMessage.getMessage().toString());
@@ -68,7 +68,7 @@ TEST (JavaLang, AssertionErrorConstructor) {
 	assertEquals("10000.000000000000000", assertionErrorWithMessageAndCause.getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, AssertionErrorTryCatch) {
+TEST (JavaLangAssertionError, TryCatch) {
 	try {
 		throw AssertionError(10000);
 	} catch (AssertionError &e) {

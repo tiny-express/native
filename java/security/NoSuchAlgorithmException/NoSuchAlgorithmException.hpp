@@ -44,4 +44,4 @@ namespace Java {
     } // namespace Security
 } // namespace Java
 
-#endif //NATIVE_JAVA_SECURITY_NOSUCHALGORITHMEXCEPTION_HPP
+#endif // NATIVE_JAVA_SECURITY_NOSUCHALGORITHMEXCEPTION_HPP

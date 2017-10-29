@@ -562,7 +562,7 @@ TEST(JavaLangStringBuffer, AppendCodePoint) {
 	try {
 		stringBuffer.appendCodePoint(80000000);
 	}
-	catch (IllegalArgumentException &e) {
+	catch (InterruptedException &e) {
 		assertEquals(expectBmpCodePointResult, stringBuffer.getValue());
 	}
 	

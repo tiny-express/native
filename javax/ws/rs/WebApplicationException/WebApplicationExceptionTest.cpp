@@ -29,35 +29,27 @@
 
 using namespace Javax::Ws::Rs;
 
-TEST(WebApplicationException, Constructor) {
+TEST(JavaxWsRsWebApplicationException,  Constructor) {
     // Default constructor, expected empty message
     WebApplicationException webApplicationException;
     assertEquals("", webApplicationException.getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified detail message.
-    WebApplicationException webApplicationExceptionWithMessage = WebApplicationException(
-            "Illegal param");
-    assertEquals("Illegal param",
-               webApplicationExceptionWithMessage.getMessage().toString());
+    auto webApplicationExceptionWithMessage = WebApplicationException("Illegal param");
+    assertEquals("Illegal param", webApplicationExceptionWithMessage.getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified detail message and cause.
-    WebApplicationException webApplicationExceptionWithMessageAndCause =
-            WebApplicationException("Illegal param", &webApplicationExceptionWithMessage);
-    assertEquals("Illegal param",
-               webApplicationExceptionWithMessageAndCause.getMessage().toString());
-    assertEquals("Illegal param",
-               webApplicationExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    auto webApplicationExceptionWithMessageAndCause = WebApplicationException("Illegal param", &webApplicationExceptionWithMessage);
+    assertEquals("Illegal param", webApplicationExceptionWithMessageAndCause.getMessage().toString());
+    assertEquals("Illegal param", webApplicationExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new WebApplicationException with the specified cause.
-    WebApplicationException webApplicationExceptionWithCause =
-            WebApplicationException(&webApplicationExceptionWithMessageAndCause);
-    assertEquals("Illegal param",
-               webApplicationExceptionWithCause.getCause()->getMessage().toString());
-    assertEquals("Illegal param",
-               webApplicationExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    auto webApplicationExceptionWithCause = WebApplicationException(&webApplicationExceptionWithMessageAndCause);
+    assertEquals("Illegal param", webApplicationExceptionWithCause.getCause()->getMessage().toString());
+    assertEquals("Illegal param", webApplicationExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST(WebApplicationException, TryCatch) {
+TEST(JavaxWsRsWebApplicationException,  TryCatch) {
     // Throw WebApplicationException with message "throw WebApplicationException"
     // expected message "throw WebApplicationException"
     WebApplicationException webApplicationException;

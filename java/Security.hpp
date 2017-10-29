@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_HPP
-#define JAVA_SECURITY_HPP
+#ifndef NATIVE_JAVA_SECURITY_HPP
+#define NATIVE_JAVA_SECURITY_HPP
 
 #include "security/Certificate/Certificate.hpp"
 #include "security/KeyFactory/KeyFactory.hpp"
@@ -33,4 +33,4 @@
 #include "security/KeyStore/KeyStore.hpp"
 #include "security/MessageDigest/MessageDigest.hpp"
 
-#endif  // JAVA_SECURITY_HPP
+#endif // NATIVE_JAVA_SECURITY_HPP

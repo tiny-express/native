@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_LONG_HPP
-#define JAVA_LANG_LONG_HPP
+#ifndef NATIVE_JAVA_LANG_LONG_HPP
+#define NATIVE_JAVA_LANG_LONG_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
@@ -522,14 +522,28 @@ namespace Java {
 						 * @param target
 						 */
 						void operator%=(const Long &target);
-				
+						
 				public:
 						friend std::ostream &operator<<(std::ostream &os, const Long &target) {
 							os << target.original;
 							return os;
 						}
+						
+						inline size_t operator()(const Long &target) const {
+							return std::hash<std::string>{}(target.toString().toCharPointer());
+						}
 				};
 		}
 }
 
-#endif  // JAVA_LANG__HPP
+using namespace Java::Lang;
+
+namespace std {
+		template <> struct hash<Long> {
+				std::size_t operator()(const Long& k) const {
+					return Long()(k);
+				}
+		};
+}
+
+#endif // NATIVE_JAVA_LANG__HPP

@@ -25,11 +25,10 @@
  */
 
 #include "../../../kernel/Test.hpp"
-#include "../../util/HashMap/HashMap.hpp"
 
 using namespace Java::Lang;
 
-TEST (JavaLang, JavaInstanceOf) {
+TEST (JavaLang, InstanceOf) {
 	// Given a String instance - Return it should be an instance of String
 	String stringInstanceWithSameClass = "test";
 	String string2 = "abcd";
@@ -102,14 +101,6 @@ TEST (JavaLang, DataTypeArray) {
 	// Retrieve  elements from an existing array
 	assertEquals("Food", initializedStrings.get(0).toString());
 	assertEquals("Tiny", initializedStrings.get(1).toString());
-	
-	Array<HashMap<String, String>*> arrayHashMap;
-	HashMap<String, String> hashMap;
-	hashMap.put("Key1", "Value1");
-	arrayHashMap.push(&hashMap);
-	for (auto hashMap : arrayHashMap) {
-		assertEquals("Value1", hashMap->get("Key1").toString());
-	}
 }
 
 TEST (JavaLang, ArrayConstructorWithSize) {
@@ -128,7 +119,7 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 	}
 }
 
-TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
+TEST (JavaLang, ArrayConstructor) {
 	// Give an Array use constructor with contain size then assert size - Should equal
 	char *stringArray[3] = {
 		(char *) "hello",
@@ -140,7 +131,7 @@ TEST (JavaLang, ArrayConstructorWithCharPointerPointer) {
 	assertEquals(2, arrayString.length);
 }
 
-TEST (JavaLang, ObjectConstructor) {
+TEST (JavaLangObject, Constructor) {
 	// Normal declaration
 	Object objectNormalDeclaration;
 	objectNormalDeclaration.hashCode();
@@ -151,7 +142,7 @@ TEST (JavaLang, ObjectConstructor) {
 	delete objectPointerDeclaration;
 }
 
-TEST (JavaLang, ObjectEquals) {
+TEST (JavaLangObject, Equals) {
 	// Given two difference instances of Object - Return instances are not equal
 	Object object1;
 	Object object2;
@@ -168,7 +159,7 @@ TEST (JavaLang, ObjectEquals) {
 	assertFalse(object3 != object3);
 }
 
-TEST (JavaLang, ObjectHashCode) {
+TEST (JavaLangObject, HashCode) {
 	// Given two difference instances of Object - Return memory addresses are not equal
 	Object object;
 	Object object2;

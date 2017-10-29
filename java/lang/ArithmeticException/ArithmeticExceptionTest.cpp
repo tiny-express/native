@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ArithmeticExceptionConstructor) {
+TEST (JavaLangArithmeticException, Constructor) {
 	// Constructs a new ArithmeticException with null as its detail message.
 	ArithmeticException arithmeticExceptionWithNullMessage;
 	assertEquals("", arithmeticExceptionWithNullMessage.getMessage().toString());
@@ -39,7 +39,7 @@ TEST (JavaLang, ArithmeticExceptionConstructor) {
 	assertEquals("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage().toString());
 }
 
-TEST (JavaLang, ArithmeticExceptionTryCatch) {
+TEST (JavaLangArithmeticException, TryCatch) {
 	try {
 		throw ArithmeticException("Throw ArithmeticException");
 	} catch (ArithmeticException &e) {

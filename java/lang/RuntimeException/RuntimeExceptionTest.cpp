@@ -29,31 +29,30 @@
 
 using namespace Java::Lang;
 
-
-TEST (JavaLang, RuntimeExceptionConstructor) {
-// Constructs a new RuntimeException with null as its detail message.
+TEST (JavaLangRuntimeException, Constructor) {
+	// Constructs a new RuntimeException with null as its detail message.
 	RuntimeException runtimeExceptionWithNullMessage;
 	assertEquals("", runtimeExceptionWithNullMessage.getMessage().toString());
-
-// Constructs a new RuntimeException with the specified detail message.
+	
+	// Constructs a new RuntimeException with the specified detail message.
 	RuntimeException runtimeExceptionWithMessage = RuntimeException("RuntimeException with the specified message");
 	assertEquals("RuntimeException with the specified message", runtimeExceptionWithMessage.getMessage().toString());
-
-// Constructs a new RuntimeException with the specified detail message and cause.
+	
+	// Constructs a new RuntimeException with the specified detail message and cause.
 	RuntimeException runtimeExceptionWithMessageAndCause = RuntimeException("RuntimeException with the specified message and cause", &runtimeExceptionWithMessage);
 	assertEquals("RuntimeException with the specified message and cause", runtimeExceptionWithMessageAndCause.getMessage().toString());
 	assertEquals("RuntimeException with the specified message", runtimeExceptionWithMessageAndCause.getCause()->getMessage().toString());
-
-// Constructs a new RuntimeException with the specified cause.
+	
+	// Constructs a new RuntimeException with the specified cause.
 	RuntimeException runtimeExceptionWithCause = RuntimeException(&runtimeExceptionWithMessageAndCause);
 	assertEquals("RuntimeException with the specified message and cause", runtimeExceptionWithCause.getCause()->getMessage().toString());
 	assertEquals("RuntimeException with the specified message", runtimeExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST (JavaLang, RuntimeExceptionTryCatch) {
+TEST (JavaLangRuntimeException, TryCatch) {
 	try {
 		throw RuntimeException("Throw RuntimeException");
-	} catch (Exception e) {
+	} catch (Exception &e) {
 		assertEquals("Throw RuntimeException", e.getMessage().toString());
 	}
 }

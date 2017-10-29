@@ -187,8 +187,8 @@ String Date::toGMTString() const {
     return this->timeToString(pattern, utcTimer);
 }
 
-long Date::hashCode() const {
-    return this->timer;
+int Date::hashCode() const {
+    return Object::hashCode();
 }
 
 String Date::removeBracket(String inputString) {
@@ -237,7 +237,7 @@ long Date::parse(String inputString) {
     char currentChar;
     
     if (inputString.isEmpty()) {
-        throw IllegalArgumentException();
+        throw InterruptedException();
     }
     
     inputString = Date::removeBracket(inputString);
@@ -271,18 +271,18 @@ long Date::parse(String inputString) {
                 }   // plus means east of GMT
                 
                 if (timeZoneOffset != 0 && timeZoneOffset != -1) {
-                    throw IllegalArgumentException();
+                    throw InterruptedException();
                 }
                 
                 timeZoneOffset = currentNumber;
             } else if (currentNumber >= 70) {
                 if (year != Integer::MIN_VALUE) {
-                    throw IllegalArgumentException();
+                    throw InterruptedException();
                 } else if (currentChar <= ' ' || currentChar == ','
                            || currentChar == '/' || index >= stringLength) {
                     year = currentNumber;
                 } else {
-                    throw IllegalArgumentException();
+                    throw InterruptedException();
                 }
             } else if (currentChar == ':') {
                 if (hour < 0) {
@@ -290,7 +290,7 @@ long Date::parse(String inputString) {
                 } else if (minute < 0) {
                     minute = (byte) currentNumber;
                 } else {
-                    throw IllegalArgumentException();
+                    throw InterruptedException();
                 }
             } else if (currentChar == '/') {
                 if (month < 0) {
@@ -298,12 +298,12 @@ long Date::parse(String inputString) {
                 } else if (dayOfMonth < 0) {
                     dayOfMonth = (byte) currentNumber;
                 } else {
-                    throw IllegalArgumentException();
+                    throw InterruptedException();
                 }
             } else if (index < stringLength && currentChar != ','
                        && currentChar > ' ' && currentChar != '-') {
                 
-                throw IllegalArgumentException();
+                throw InterruptedException();
             } else if (hour >= 0 && minute < 0) {
                 minute = (byte) currentNumber;
             } else if (minute >= 0 && second < 0) {
@@ -315,7 +315,7 @@ long Date::parse(String inputString) {
                 
                 year = currentNumber;
             } else {
-                throw IllegalArgumentException();
+                throw InterruptedException();
             }
             previousChar = '\0';
         } else if (currentChar == '/' || currentChar == ':'
@@ -327,7 +327,7 @@ long Date::parse(String inputString) {
             int sequenceStart = index - 1;
             String currentWord = Date::getSequenceChar(inputString, index);
             if (index <= sequenceStart + 1) {
-                throw IllegalArgumentException();
+                throw InterruptedException();
             }
             
             int tableIndex;
@@ -339,13 +339,13 @@ long Date::parse(String inputString) {
                     if (action != 0) {
                         if (action == 1) {  // pm
                             if (hour > 12 || hour < 1) {
-                                throw IllegalArgumentException();
+                                throw InterruptedException();
                             } else if (hour < 12) {
                                 hour += 12;
                             }
                         } else if (action == 14) {  // am
                             if (hour > 12 || hour < 1) {
-                                throw IllegalArgumentException();
+                                throw InterruptedException();
                             } else if (hour == 12) {
                                 hour = 0;
                             }
@@ -354,7 +354,7 @@ long Date::parse(String inputString) {
                                 month = (byte) (action - 2);
                             }
                             else {
-                                throw IllegalArgumentException();
+                                throw InterruptedException();
                             }
                         } else {
                             timeZoneOffset = action - 10000;
@@ -365,13 +365,13 @@ long Date::parse(String inputString) {
             }
             
             if (tableIndex < 0)
-                throw IllegalArgumentException();
+                throw InterruptedException();
             previousChar = 0;
         }
     }
     
     if (year == Integer::MIN_VALUE || month < 0 || dayOfMonth < 0) {
-        throw IllegalArgumentException();
+        throw InterruptedException();
     }
     
     // Parse 2-digit years within the correct default century.

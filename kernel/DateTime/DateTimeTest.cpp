@@ -27,7 +27,7 @@
 #include "../DateTime.hpp"
 #include "../Test.hpp"
 
-TEST (KernelDateTime, UnixTimestampInMilliseconds) {
+TEST (KernelDateTime, TimestampForWindows) {
 #ifdef WIN
 	unsigned int millisecond = 123;
 	unsigned int second = 3;
@@ -49,7 +49,7 @@ TEST (KernelDateTime, UnixTimestampInMilliseconds) {
 #endif
 }
 
-TEST (KernelDateTime, TimestampInNanoSeconds) {
+TEST (KernelDateTime, Timestamp) {
     // Timestamp in seconds is 1506237734
     // but nano seconds we need multiply with 1,000,000,000
     // so it will be look likes this 1506237734000000000
@@ -59,7 +59,7 @@ TEST (KernelDateTime, TimestampInNanoSeconds) {
     assertTrue(timestamps < 2506237163070843650);
 }
 
-TEST (KernelDateTime, Format) {
+TEST (KernelDateTime, Date) {
 	long timestamp = 1473765499;
 	auto format = (string) "d/m/y";
 	string result1 = date(timestamp, format);

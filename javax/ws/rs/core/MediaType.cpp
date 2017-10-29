@@ -28,7 +28,7 @@
 #include "../../../../java/lang/StringBuilder/StringBuilder.hpp"
 #include "MediaTypeException/MediaTypeException.hpp"
 
-using namespace Javax::Ws;
+using namespace Javax::Ws::Rs::Core;
 
 #define CHAR_NOT_FOUND -1
 

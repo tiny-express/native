@@ -25,8 +25,8 @@
  */
 
 
-#ifndef JAVA_UTIL_DATE_HPP
-#define JAVA_UTIL_DATE_HPP
+#ifndef NATIVE_JAVA_UTIL_DATE_HPP
+#define NATIVE_JAVA_UTIL_DATE_HPP
 
 #include "../../Lang.hpp"
 #include "../ArrayList/ArrayList.hpp"
@@ -304,7 +304,7 @@ namespace Java {
 						 *
 						 * @return long
 						 */
-						long hashCode() const override ;
+						int hashCode() const override ;
 						
 						/**
 						 * Attempts to interpret the string s as a representation
@@ -393,7 +393,7 @@ namespace Java {
 						 *
 						 * @return string
 						 */
-						virtual String toString() const override ;
+						String toString() const ;
 						
 						/**
 						 * Return the time in seconds after
@@ -421,4 +421,4 @@ namespace Java {
 		}  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_DATE_HPP
+#endif // NATIVE_JAVA_UTIL_DATE_HPP

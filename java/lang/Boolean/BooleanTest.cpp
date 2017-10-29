@@ -27,7 +27,7 @@
 #include "../../../kernel/Test.hpp"
 #include "Boolean.hpp"
 
-TEST (JavaLang, BooleanConstructor) {
+TEST (JavaLangBoolean, Constructor) {
 	// Give a object Boolean with value true - Should be true
 	Boolean objectBoolean1(true);
 	assertTrue(objectBoolean1.booleanValue());
@@ -45,7 +45,7 @@ TEST (JavaLang, BooleanConstructor) {
 	assertFalse(objectBoolean4.booleanValue());
 }
 
-TEST (JavaLang, BooleanDestructor) {
+TEST (JavaLangBoolean, Destructor) {
 	// Create new object Boolean, then delete - Should not leak memory
 	Boolean *newBoolean = new Boolean(true);
 	boolean result = newBoolean->booleanValue();
@@ -53,7 +53,7 @@ TEST (JavaLang, BooleanDestructor) {
 	delete newBoolean;
 }
 
-TEST (JavaLang, BooleanCompare) {
+TEST (JavaLangBoolean, Compare) {
 	boolean booleanTrue = true;
 	boolean booleanFalse = false;
 	
@@ -73,7 +73,7 @@ TEST (JavaLang, BooleanCompare) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanCompareTo) {
+TEST (JavaLangBoolean, CompareTo) {
 	Boolean objectBooleanTrue(true);
 	Boolean objectBooleanFalse(false);
 	
@@ -93,7 +93,7 @@ TEST (JavaLang, BooleanCompareTo) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanGetBoolean) {
+TEST (JavaLangBoolean, GetBoolean) {
 	// Give two value boolean (true - true) - Should equal
 	boolean expect = true;
 	boolean result = Boolean::getBoolean("True");
@@ -105,7 +105,7 @@ TEST (JavaLang, BooleanGetBoolean) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanParseBoolean) {
+TEST (JavaLangBoolean, ParseBoolean) {
 	// Give two value boolean (true - true) - Should equal
 	boolean expect = true;
 	boolean result = Boolean::parseBoolean("True");
@@ -117,7 +117,7 @@ TEST (JavaLang, BooleanParseBoolean) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanToString) {
+TEST (JavaLangBoolean, ToString) {
 	// Give two string - Should equal
 	Boolean objectBooleanTrue(true);
 	string expect = (string) "true";
@@ -136,7 +136,7 @@ TEST (JavaLang, BooleanToString) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanStaticValueOf) {
+TEST (JavaLangBoolean, StaticValueOf) {
 	// Give two value boolean (true - true) - Should equal
 	boolean expect = true;
 	boolean result = Boolean::valueOf("True");
@@ -148,7 +148,7 @@ TEST (JavaLang, BooleanStaticValueOf) {
 	assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanValueOf) {
+TEST (JavaLangBoolean, ValueOf) {
 	// Give two boolean - Should equal
 	boolean expect = true;
 	boolean result = Boolean::valueOf(expect).booleanValue();

@@ -24,11 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_NOSUCHELEMENTEXCEPTION_HPP
-#define NATIVE_NOSUCHELEMENTEXCEPTION_HPP
+#ifndef NATIVE_JAVA_LANG_NO_SUCH_ELEMENT_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_NO_SUCH_ELEMENT_EXCEPTION_HPP
 
 #include "../RuntimeException/RuntimeException.hpp"
-#include "../../Lang.hpp"
 
 class NoSuchElementException : public RuntimeException {
 public:
@@ -38,4 +37,4 @@ public:
 		NoSuchElementException(String message, Throwable *cause);
 };
 
-#endif //NATIVE_NOSUCHELEMENTEXCEPTION_HPP
+#endif // NATIVE_JAVA_LANG_NO_SUCH_ELEMENT_EXCEPTION_HPP

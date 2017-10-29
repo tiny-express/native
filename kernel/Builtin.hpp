@@ -68,7 +68,10 @@
 #include <bitset>
 #include <vector>
 #include <map>
+#include <unordered_map>
+#include <iostream>
 #include <set>
+#include <bitset>
 #include <type_traits>
 #include <iostream>
 #include <typeinfo>

@@ -25,10 +25,9 @@
  */
 
 #include "../Common.hpp"
-#include <cstdlib>
 #include "../Test.hpp"
 
-TEST (KernelCommon, AppendPointerChar) {
+TEST (KernelCommonAppend, PointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

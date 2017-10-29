@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_CLASS_CAST_EXCEPTION_HPP
-#define JAVA_LANG_CLASS_CAST_EXCEPTION_HPP
+#ifndef NATIVE_JAVA_LANG_CLASS_CAST_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_CLASS_CAST_EXCEPTION_HPP
 
 #include "../RuntimeException/RuntimeException.hpp"
 #include "../../Lang.hpp"
@@ -36,8 +36,10 @@ namespace Java {
 				public:
 						ClassCastException();
 						ClassCastException(String message);
+						ClassCastException(Throwable *cause);
+						ClassCastException(String message, Throwable *cause);
 				};
 		}
 }
 
-#endif // JAVA_LANG_CLASS_CAST_EXCEPTION_HPP
+#endif // NATIVE_JAVA_LANG_CLASS_CAST_EXCEPTION_HPP

@@ -29,7 +29,7 @@
 
 using namespace Java::Util;
 
-TEST (JavaUtil, LinkedListAdd) {
+TEST (JavaUtilLinkedList, Add) {
 	// Given linked list with 2 elements - Return size is 2 and added elements
 	LinkedList<int> linkedList;
 	linkedList.add(25);
@@ -39,7 +39,7 @@ TEST (JavaUtil, LinkedListAdd) {
 	assertEquals(24, linkedList.getLast());
 }
 
-TEST(JavaUtil, LinkedListContains) {
+TEST(JavaUtilLinkedList, Contains) {
 	// Given valid linked list to test contains of a element inside list
 	LinkedList<char> linkedList;
 	linkedList.add('6');
@@ -54,7 +54,7 @@ TEST(JavaUtil, LinkedListContains) {
 	assertFalse(linkedList.contains(unexpectedValue));
 }
 
-TEST (JavaUtil, LinkedListGetFirst) {
+TEST (JavaUtilLinkedList, GetFirst) {
 	// Given list of strings - Return first element
 	LinkedList<String> linkedList;
 	linkedList.add("Hello");
@@ -62,7 +62,7 @@ TEST (JavaUtil, LinkedListGetFirst) {
 	assertEquals("Hello", linkedList.getFirst().toString());
 }
 
-TEST (JavaUtil, LinkedListGetLast) {
+TEST (JavaUtilLinkedList, GetLast) {
 	// Given list of strings - Return last element
 	LinkedList<String> linkedList;
 	linkedList.add("Hello");
@@ -70,7 +70,7 @@ TEST (JavaUtil, LinkedListGetLast) {
 	assertEquals("World", linkedList.getLast().toString());
 }
 
-TEST (JavaUtil, LinkedListPeek) {
+TEST (JavaUtilLinkedList, Peek) {
 	//Given valid linked list to test peek(), peek..() also
 	LinkedList<String> linkedList;
 	linkedList.add("sample 1");
@@ -89,7 +89,7 @@ TEST (JavaUtil, LinkedListPeek) {
 	assertEquals(expectedValue.toString(), result.toString());
 }
 
-TEST (JavaUtil, LinkedListPoll) {
+TEST (JavaUtilLinkedList, Poll) {
 	// Given valid linked list to test poll(), poll..() also
 	// Brief: after called function, linked list must return correct value and decrease linked list size also
 	LinkedList<Integer> linkedList;
@@ -118,7 +118,7 @@ TEST (JavaUtil, LinkedListPoll) {
 	// In this test case, we get element and remove it also, so don't need to clear after finished
 }
 
-TEST (JavaUtil, LinkedListRemove) {
+TEST (JavaUtilLinkedList, Remove) {
 	// Given valid linked list to test remove(), remove..()
 	LinkedList<float> linkedList;
 	linkedList.add(1.3);
@@ -136,7 +136,7 @@ TEST (JavaUtil, LinkedListRemove) {
 	assertEquals(7.3f, linkedList.getLast());
 }
 
-TEST (JavaUtil, LinkedListSize) {
+TEST (JavaUtilLinkedList, Size) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<int> linkedList;
 	assertEquals(0, linkedList.size());

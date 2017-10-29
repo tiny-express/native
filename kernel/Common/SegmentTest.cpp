@@ -27,7 +27,7 @@
 #include "../Kernel.hpp"
 #include "../Test.hpp"
 
-TEST (KernelCommon, SegmentPointerChar) {
+TEST (KernelCommonSegment, PointerChar) {
 	auto charArray = (string) "Hello World";
 	int from = 6;
 	int to = 10;
@@ -133,7 +133,7 @@ TEST (KernelCommon, SegmentPointerChar) {
 	free(result13);
 }
 
-TEST (KernelCommon, SegmentPointerConstChar) {
+TEST (KernelCommonSegment, PointerConstChar) {
 	auto charArray = (string) "Hello World";
 	int from = 6;
 	int to = 6;
@@ -150,7 +150,7 @@ TEST (KernelCommon, SegmentPointerConstChar) {
 	free(result2);
 }
 
-TEST (KernelCommon, SegmentPointerPointerChar) {
+TEST (KernelCommonSegment, PointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

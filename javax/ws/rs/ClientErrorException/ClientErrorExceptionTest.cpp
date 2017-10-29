@@ -29,35 +29,27 @@
 
 using namespace Javax::Ws::Rs;
 
-TEST(ClientErrorException, Constructor) {
+TEST(JavaxWsRsClientErrorException,  Constructor) {
     // Default constructor, expected empty message
     ClientErrorException clientErrorException;
     assertEquals("", clientErrorException.getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified detail message.
-    ClientErrorException clientErrorExceptionWithMessage = ClientErrorException(
-            "Illegal param");
-    assertEquals("Illegal param",
-               clientErrorExceptionWithMessage.getMessage().toString());
+    ClientErrorException clientErrorExceptionWithMessage = ClientErrorException("Illegal param");
+    assertEquals("Illegal param", clientErrorExceptionWithMessage.getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified detail message and cause.
-    ClientErrorException clientErrorExceptionWithMessageAndCause =
-            ClientErrorException("Illegal param", &clientErrorExceptionWithMessage);
-    assertEquals("Illegal param",
-               clientErrorExceptionWithMessageAndCause.getMessage().toString());
-    assertEquals("Illegal param",
-               clientErrorExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    auto clientErrorExceptionWithMessageAndCause = ClientErrorException("Illegal param", &clientErrorExceptionWithMessage);
+    assertEquals("Illegal param", clientErrorExceptionWithMessageAndCause.getMessage().toString());
+    assertEquals("Illegal param", clientErrorExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new ClientErrorException with the specified cause.
-    ClientErrorException clientErrorExceptionWithCause =
-            ClientErrorException(&clientErrorExceptionWithMessageAndCause);
-    assertEquals("Illegal param",
-               clientErrorExceptionWithCause.getCause()->getMessage().toString());
-    assertEquals("Illegal param",
-               clientErrorExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    auto clientErrorExceptionWithCause = ClientErrorException(&clientErrorExceptionWithMessageAndCause);
+    assertEquals("Illegal param", clientErrorExceptionWithCause.getCause()->getMessage().toString());
+    assertEquals("Illegal param", clientErrorExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST(ClientErrorException, TryCatch) {
+TEST(JavaxWsRsClientErrorException,  TryCatch) {
     // Throw ClientErrorException with message "throw ClientErrorException"
     // expected message "throw ClientErrorException"
     ClientErrorException clientErrorException;

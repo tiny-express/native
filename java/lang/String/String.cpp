@@ -756,7 +756,7 @@ String String::format(const String &format) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
                 regfree(&regex);
-                throw IllegalArgumentException("Missing arguments.");
+                throw InterruptedException("Missing arguments.");
             } else {
                 result += "%";
             }

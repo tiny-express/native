@@ -24,11 +24,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_SEGMENT_HPP
-#define NATIVE_COMMON_SEGMENT_HPP
+#ifndef NATIVE_KERNEL_COMMON_SEGMENT_HPP
+#define NATIVE_KERNEL_COMMON_SEGMENT_HPP
 
 #include "../Builtin.hpp"
 
+/**
+ * Segment of char pointer
+ * Retrieve a sub segment of char pointer from position to position
+ *
+ * @param targetParam
+ * @param from
+ * @param to
+ * @return char*
+ */
 inline char *segmentPointerChar(char *targetParam, int from, int to) {
 	if (targetParam == nullptr) {
 		return stringCopy("");
@@ -49,6 +58,15 @@ inline char *segmentPointerChar(char *targetParam, int from, int to) {
 	return pointer;
 }
 
+/**
+* Segment of char pointer pointer
+ * Retrieve a sub segment of char pointer pointer from position to position
+ *
+ * @param target
+ * @param from
+ * @param to
+ * @return char**
+ */
 inline char **segmentPointerPointerChar(char **target, int from, int to) {
 	int lengthTarget = lengthPointerPointerChar(target);
 	if (from > to || from < 0 || from > lengthTarget || to < 0 || to > lengthTarget) {
@@ -59,4 +77,4 @@ inline char **segmentPointerPointerChar(char **target, int from, int to) {
 	return pointer;
 }
 
-#endif
+#endif // NATIVE_KERNEL_COMMON_SEGMENT_HPP

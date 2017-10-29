@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_DOUBLE_DOUBLE_HPP
-#define JAVA_LANG_DOUBLE_DOUBLE_HPP
+#ifndef NATIVE_JAVA_LANG_DOUBLE_DOUBLE_HPP
+#define NATIVE_JAVA_LANG_DOUBLE_DOUBLE_HPP
 
 #include "../Number/Number.hpp"
 #include <limits>
@@ -492,59 +492,74 @@ namespace Java {
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
-
-            /**
-            * Convert from string to double
-            *
-            * @param      s   the string to be parsed.
-            * @return     a {Double} object holding the value
-            *             represented by the {String} argument.
-            */
-            static Double valueOf(String stringInput);
-
-            /**
-            * Assign value to Double variable
-            *
-            * @param  d a double value.
-            * @return a {Double} instance representing {d}.
-            */
-            static Double valueOf(double doubleInput);
-
-        private:
-            double original;
-            string originalString;
-
-            /**
-            * Convert double to binary 64 bit
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            *
-            * @param double
-            * @return string binary 64 bit of input
-            */
-            static String doubleToBinary64StringType(double doubleInput);
-
-            /**
-            * Convert binary64StringType To Double
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-            * To Double
-             *
-            * @param  string
-            * @return double
-            */
-            static double binary64StringTypeToDouble(String Binary64StringTypeInput);
-
-            /**
-            * Convert longBits To Binary64StringType
-            * (Double-precision floating-point format
-            * In IEEE 754-2008)
-             *
-            * @param  long
-            * @return string
-            */
-            static String longBitsToBinary64StringType(long longBitsInput);
-        };
-    }  // namespace Lang
+						
+						/**
+						* Convert from string to double
+						*
+						* @param      s   the string to be parsed.
+						* @return     a {Double} object holding the value
+						*             represented by the {String} argument.
+						*/
+						static Double valueOf(String stringInput);
+						
+						/**
+						* Assign value to Double variable
+						*
+						* @param  d a double value.
+						* @return a {Double} instance representing {d}.
+						*/
+						static Double valueOf(double doubleInput);
+				
+				private:
+						double original;
+						string originalString;
+						
+						/**
+						* Convert double to binary 64 bit
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						*
+						* @param double
+						* @return string binary 64 bit of input
+						*/
+						static String doubleToBinary64StringType(double doubleInput);
+						
+						/**
+						* Convert binary64StringType To Double
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						* To Double
+						 *
+						* @param  string
+						* @return double
+						*/
+						static double binary64StringTypeToDouble(String Binary64StringTypeInput);
+						
+						/**
+						* Convert longBits To Binary64StringType
+						* (Double-precision floating-point format
+						* In IEEE 754-2008)
+						 *
+						* @param  long
+						* @return string
+						*/
+						static String longBitsToBinary64StringType(long longBitsInput);
+				
+				public:
+						inline size_t operator()(const Double &target) const {
+							return std::hash<std::string>{}(target.toString().toCharPointer());
+						}
+				};
+		}  // namespace Lang
 }  // namespace Java
-#endif  // JAVA_LANG_DOUBLE_DOUBLE_HPP
+
+namespace std {
+		template <>
+		struct hash<Double> {
+				std::size_t operator()(const Double &k) const {
+					return Double()(k);
+				}
+		};
+}
+
+#endif // NATIVE_JAVA_LANG_DOUBLE_DOUBLE_HPP

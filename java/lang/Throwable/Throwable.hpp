@@ -27,13 +27,11 @@
 #ifndef NATIVE_JAVA_LANG_THROWABLE_HPP
 #define NATIVE_JAVA_LANG_THROWABLE_HPP
 
-#include "../Object/Object.hpp"
 #include "../String/String.hpp"
 
 namespace Java {
 		namespace Lang {
-				class Throwable //: public Object 
-		       {
+				class Throwable {
 				private:
 						Throwable *cause;
 						String message;
@@ -47,8 +45,9 @@ namespace Java {
 				public:
 						Throwable *getCause();
 						String getMessage();
+						String toString();
 				};
 		}
 }
 
-#endif//NATIVE_JAVA_LANG_THROWABLE_HPP
+#endif // NATIVE_JAVA_LANG_THROWABLE_HPP

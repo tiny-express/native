@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_ARRAY_LIST_HPP
-#define JAVA_UTIL_ARRAY_LIST_HPP
+#ifndef NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
+#define NATIVE_JAVA_UTIL_ARRAY_LIST_HPP
 
 #include "../../../kernel/String.hpp"
 #include "../../Lang.hpp"
@@ -167,9 +167,7 @@ namespace Java {
 						 *
 						 * @param collection
 						 */
-						ArrayList(Collection<E> collection) {
-						
-						}
+						ArrayList(Collection<E> &collection);
 						
 						/**
 						 * Constructs an empty list with the specified initial capacity.
@@ -481,7 +479,7 @@ namespace Java {
 						 * @param element
 						 * @return E
 						 */
-						E set(int index, E &element) {
+						E set(int index, E element) {
 							if (index < 0 || index >= this->size()) {
 								String message = "Index out of range: ";
 								message += Integer(index).stringValue();
@@ -610,7 +608,7 @@ namespace Java {
  *
  * @return long
  */
-						long hashCode() const {
+						int hashCode() const {
 							return Object::hashCode();
 						}
 
@@ -668,4 +666,4 @@ namespace Java {
 		} // namespace Util
 } // namespace Java
 
-#endif  // JAVA_UTIL_ARRAY_LIST_HPP
+#endif // NATIVE_JAVA_UTIL_ARRAY_LIST_HPP

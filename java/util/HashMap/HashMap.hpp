@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
-#define JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
+#ifndef NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
+#define NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
 
 #include "../../lang/String/String.hpp"
 #include "../AbstractMap/AbstractMap.hpp"
@@ -42,10 +42,10 @@ namespace Java {
                 public virtual Serializable {
 
         private:
-            std::map<Key, Value> original;
+            std::unordered_map<Key, Value> original;
             String backup;
-            typedef typename std::map<Key, Value>::iterator IteratorType;
-            typedef typename std::map<Key, Value>::const_iterator ConstIteratorType;
+            typedef typename std::unordered_map<Key, Value>::iterator IteratorType;
+            typedef typename std::unordered_map<Key, Value>::const_iterator ConstIteratorType;
 
         public:
             /**
@@ -220,7 +220,7 @@ namespace Java {
              * Called by clone and readObject.
              */
             void reinitialize() {
-                std::map<Key, Value> newMap;
+                std::unordered_map<Key, Value> newMap;
                 this->original = newMap;
             }
 
@@ -265,13 +265,19 @@ namespace Java {
              *
              * @return HashMap<Key, Value>
              */
-            HashMap<Key, Value> clone() const {
-                HashMap<Key, Value> result;
-                for (auto const &element : this->original) {
-                    result.put(element.first, element.second);
+                /***
+				 * Returns a shallow copy of this HashMap instance:
+				 * the keys and values themselves are not cloned.
+				 *
+				 * @return HashMap<Key, Value>
+				 */
+                HashMap<Key, Value> clone() const {
+                    HashMap<Key, Value> result;
+                    for (auto const &element : this->original) {
+                        result.put(element.first, element.second);
+                    }
+                    return result;
                 }
-                return result;
-            }
 
             /**
              * Attempts to compute a mapping for the specified key and
@@ -682,7 +688,7 @@ namespace Java {
                 String endString = "}";
                 String totalString;
 
-                typename std::map<Key, Value>::iterator it;
+                typename std::unordered_map<Key, Value>::iterator it;
                 for (it = this->original.begin(); it != this->original.end(); ++it) {
                     if (instanceof<String>(it->first)) {
                         String first = it->first.toString();
@@ -766,4 +772,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
+#endif // NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP

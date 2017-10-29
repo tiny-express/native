@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_CHARACTER_HPP
-#define JAVA_LANG_CHARACTER_HPP
+#ifndef NATIVE_JAVA_LANG_CHARACTER_HPP
+#define NATIVE_JAVA_LANG_CHARACTER_HPP
 
 #include "../Object/Object.hpp"
 #include "../CharSequence/CharSequence.hpp"
@@ -371,4 +371,4 @@ namespace Java {
 		}
 }
 
-#endif  // JAVA_LANG_CHARACTER_HPP
+#endif // NATIVE_JAVA_LANG_CHARACTER_HPP

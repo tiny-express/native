@@ -984,7 +984,7 @@ TEST (JavaLangString, Format) {
 		String format = "%d %d";
 		try {
 			String result = String::format(format, shortObject);
-		} catch (IllegalArgumentException &e) {
+		} catch (InterruptedException &e) {
 			assertEquals("Missing arguments.", e.getMessage().toString());
 		}
 	}
@@ -993,7 +993,7 @@ TEST (JavaLangString, Format) {
 		String format = "%%% d";
 		try {
 			String result = String::format(format);
-		} catch (IllegalArgumentException &e) {
+		} catch (InterruptedException &e) {
 			assertEquals("Missing arguments.", e.getMessage().toString());
 		}
 	}

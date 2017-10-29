@@ -220,7 +220,7 @@ StringBufferUnSafe &StringBufferUnSafe::appendCodePoint(int codePoint) {
 		return *this;
 	}
 	
-	throw IllegalArgumentException();
+	throw InterruptedException();
 }
 
 char StringBufferUnSafe::charAt(int index) const {

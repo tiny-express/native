@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_EMPTY_STACK_EXCEPTION_H
-#define NATIVE_EMPTY_STACK_EXCEPTION_H
+#ifndef NATIVE_EMPTY_STACK_EXCEPTION_HPP
+#define NATIVE_EMPTY_STACK_EXCEPTION_HPP
 
 #include "../../Lang.hpp"
 #include "../../lang/RuntimeException/RuntimeException.hpp"

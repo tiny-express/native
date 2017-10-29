@@ -501,7 +501,7 @@ int Integer::hashCode(int inputInt) {
 	return inputInt;
 }
 
-long Integer::hashCode() const {
+int Integer::hashCode() const {
 	return Integer::hashCode(this->original);
 }
 
