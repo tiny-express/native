@@ -28,7 +28,7 @@
 #define NATIVE_KERNEL_JAVA_HPP
 
 #include "Builtin.hpp"
-#include "../kernel/String/Process.hpp"
+#include "../kernel/string/Process.hpp"
 
 namespace Java {
 		namespace Lang {

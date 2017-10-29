@@ -27,7 +27,7 @@
 #ifndef NATIVE_KERNEL_STRING_PROCESS_HPP
 #define NATIVE_KERNEL_STRING_PROCESS_HPP
 
-#include "../Common/Segment.hpp"
+#include "../common/Segment.hpp"
 
 /**
  * String replace
