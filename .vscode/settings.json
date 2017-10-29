@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "stack": "cpp",
-        "map": "cpp",
-        "type_traits": "cpp"
-    }
-}
