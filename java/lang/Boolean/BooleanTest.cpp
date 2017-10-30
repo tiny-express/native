@@ -119,7 +119,6 @@ TEST (JavaLang, BooleanHashCode) {
 
     //Test expectedResult and false-hashcode-booleanValue are equal
     expectedResult = 1237;
-    booleanFalseValue = false;
     result = booleanFalseValue.hashCode();
     assertEquals(expectedResult, result);
 }
