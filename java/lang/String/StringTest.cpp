@@ -121,6 +121,24 @@ TEST (JavaLangString, Constructor) {
 		assertEquals("String index out of range: 15",
 		             e.getMessage().toString());
 	}
+
+	StringBuffer stringBuffer;
+	stringBuffer
+			.append("string")
+			.append("to")
+			.append("test")
+			.append(1);
+	String stringFromBuffer = String(stringBuffer);
+	assertEquals("stringtotest1", stringFromBuffer);
+
+    StringBuilder stringBuilder;
+    stringBuilder
+            .append("test")
+            .append("string")
+            .append("builder");
+    String stringFromBuilder = String(stringBuilder);
+    assertEquals("teststringbuilder", stringFromBuilder);
+
 }
 
 TEST (JavaLangString, Destructor) {
