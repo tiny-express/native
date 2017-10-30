@@ -105,7 +105,7 @@ TEST (JavaLangBoolean, GetBoolean) {
     assertEquals(expect, result);
 }
 
-TEST (JavaLang, BooleanHashCode) {
+TEST (JavaLangBoolean, HashCode) {
     //Giving an expected result and a boolean value
     long expectedResult;
     Boolean booleanTrueValue(true);
