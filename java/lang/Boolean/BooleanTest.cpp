@@ -153,6 +153,10 @@ TEST (JavaLangBoolean, ToString) {
     expect = (string) "true";
     result = Boolean::toString(true);
     assertEquals(expect, result);
+
+    expect = (string) "false";
+    result = Boolean::toString(false);
+    assertEquals(expect, result);
 }
 
 TEST (JavaLangBoolean, StaticValueOf) {
