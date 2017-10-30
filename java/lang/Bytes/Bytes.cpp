@@ -33,12 +33,12 @@ using namespace Java::Lang;
 ByteCache *ByteCache::instance = nullptr;
 
 Bytes::Bytes(byte byteValue) {
-	this->original = byteValue;
+    this->original = byteValue;
     this->originalString = stringFromInt(this->original);
 }
 
 Bytes::Bytes(String inputString) {
-	this->original = parseBytes(inputString, 10);
+    this->original = parseBytes(inputString, 10);
     this->originalString = stringFromInt(this->original);
 }
 
@@ -58,7 +58,7 @@ char Bytes::charValue() const {
 }
 
 byte Bytes::byteValue() const {
-	return this->original;
+    return this->original;
 }
 
 int Bytes::compare(byte byteA, byte byteB) {
@@ -66,7 +66,7 @@ int Bytes::compare(byte byteA, byte byteB) {
 }
 
 int Bytes::compareTo(const Bytes &other) const {
-	return this->original - other.original;
+    return this->original - other.original;
 }
 
 Bytes Bytes::decode(String stringToDecode) {
@@ -78,7 +78,7 @@ Bytes Bytes::decode(String stringToDecode) {
 }
 
 double Bytes::doubleValue() const {
-	return (double) this->original;
+    return (double) this->original;
 }
 
 //TODO need instanceof
@@ -112,7 +112,7 @@ long Bytes::longValue() const {
 }
 
 byte Bytes::parseBytes(String stringToParse) {
-	return parseBytes(stringToParse, 10);
+    return parseBytes(stringToParse, 10);
 }
 
 byte Bytes::parseBytes(String stringToParse, int radix) {
@@ -156,53 +156,53 @@ Bytes Bytes::valueOf(String stringValue, int radix) {
 }
 
 Bytes Bytes::operator+(const Bytes &target) {
-	return this->original + target.original;
+    return this->original + target.original;
 }
 
 Bytes Bytes::operator-(const Bytes &target) {
-	return this->original - target.original;
+    return this->original - target.original;
 }
 
 Bytes Bytes::operator/(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
-	return this->original / target.original;
+    return this->original / target.original;
 }
 
 Bytes Bytes::operator%(const Bytes &target) {
     if (target.intValue() == 0) {
         throw ArithmeticException("Divide by zero");
     }
-	return this->original % target.original;
+    return this->original % target.original;
 }
 
 Bytes Bytes::operator*(const Bytes &target) {
-	return this->original * target.original;
+    return this->original * target.original;
 }
 
 boolean Bytes::operator==(const Bytes &target) {
-	return this->original == target.original;
+    return this->original == target.original;
 }
 
 boolean Bytes::operator!=(const Bytes &target) {
-	return this->original != target.original;
+    return this->original != target.original;
 }
 
 boolean Bytes::operator<(const Bytes &target) {
-	return this->original < target.original;
+    return this->original < target.original;
 }
 
 boolean Bytes::operator>(const Bytes &target) {
-	return this->original > target.original;
+    return this->original > target.original;
 }
 
 boolean Bytes::operator<=(const Bytes &target) {
-	return this->original <= target.original;
+    return this->original <= target.original;
 }
 
-boolean Bytes::operator>=(const  Bytes &target) {
-	return this->original >= target.original;
+boolean Bytes::operator>=(const Bytes &target) {
+    return this->original >= target.original;
 }
 
 Bytes &Bytes::operator-=(const Bytes &target) {

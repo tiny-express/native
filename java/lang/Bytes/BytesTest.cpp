@@ -25,7 +25,6 @@
  */
 
 #include "../../../kernel/Test.hpp"
-#include "Bytes.hpp"
 #include "../NumberFormatException/NumberFormatException.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 
@@ -38,13 +37,13 @@ TEST (JavaLangByte, Constructor) {
     int actualByteValue = defaultConstructorBytes.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("0", defaultConstructorBytes.toString());
-    
+
     Bytes byteConstructorBytes = Bytes(3);
     expectResult = 3;
     actualByteValue = byteConstructorBytes.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("3", byteConstructorBytes.toString());
-    
+
     // Constructor with String
     Bytes stringConstructorBytes = Bytes("3");
     actualByteValue = stringConstructorBytes.intValue();
@@ -172,7 +171,7 @@ TEST (JavaLangByte, DoubleValue) {
     assertEquals(expectResult, actualResult);
 }
 
-TEST(JavaLangByte, Equals) {
+TEST (JavaLangByte, Equals) {
     // Given 3 Byte
     Bytes firstBytes = 1;
     Bytes secondBytes = 1;
@@ -191,11 +190,10 @@ TEST (JavaLangByte, FloatValue) {
 }
 
 TEST (JavaLangByte, HashCode) {
-// Given a Byte
-//    Bytes byteToGetValue = 5;
-//    long expectResult = 5;
-//    long actualResult = byteToGetValue.hashCode();
-//    assertEquals(expectResult, actualResult);
+    Bytes byteToGetValue = 5;
+    long expectResult = 5;
+    long actualResult = byteToGetValue.hashCode();
+    assertEquals(expectResult, actualResult);
 }
 
 TEST (JavaLangByte, IntValue) {
@@ -335,7 +333,7 @@ TEST (JavaLangByte, ValueOfString) {
     Bytes expectResult = Bytes(static_cast<byte>(50));
     Bytes actualResult = Bytes::valueOf(stringToGetValue);
     assertEquals(expectResult.intValue(), actualResult.intValue());
-    
+
     try {
         Bytes::valueOf("");
     } catch (NumberFormatException &e) {
