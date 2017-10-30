@@ -137,7 +137,7 @@ TEST (JavaLangString, Constructor) {
             .append("string")
             .append("builder");
     String stringFromBuilder = String(stringBuilder);
-    assertEquals("truetruetrue, stringFromBuilder);
+    assertEquals("truetruetrue", stringFromBuilder);
 
 }
 

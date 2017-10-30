@@ -1023,11 +1023,33 @@ TEST (JavaLangInteger, Equals) {
 
 // }
 
-TEST (JavaLangInteger, HashCode) {
+TEST (JavaLangInteger, StaticHashCode) {
 	assertEquals(0, Integer::hashCode(0));
 	assertEquals(1, Integer::hashCode(1));
 	assertEquals(-1, Integer::hashCode(-1));
 	assertEquals(13, Integer::hashCode(13));
+}
+
+TEST (JavaLangInteger, HashCode) {
+	{
+		Integer integer = Integer(0);
+        assertEquals(0, integer.hashCode());
+	}
+
+    {
+        Integer integer = Integer(1);
+        assertEquals(1, integer.hashCode());
+    }
+
+    {
+        Integer integer = Integer(-1);
+        assertEquals(-1, integer.hashCode());
+    }
+
+    {
+        Integer integer = Integer(13);
+        assertEquals(13, integer.hashCode());
+    }
 }
 
 TEST (JavaLangInteger, HighestOneBit) {

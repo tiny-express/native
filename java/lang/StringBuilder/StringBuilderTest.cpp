@@ -198,15 +198,45 @@ TEST(JavaLangStringBuilder, CharAt) {
 }
 
 TEST(JavaLangStringBuilder, CodePointAt) {
-	// TODO
+    StringBuilder stringBuilder("JAVA");
+    assertEquals(65, stringBuilder.codePointAt(1));
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.codePointAt(-1);
+        } catch (IndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("-1", exceptionMessage);
+    }
 }
 
 TEST(JavaLangStringBuilder, CodePointBefore) {
-	// TODO
+    StringBuilder stringBuilder("JAVA");
+    assertEquals(65, stringBuilder.codePointBefore(2));
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.codePointBefore(-1);
+        } catch (IndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("-2", exceptionMessage);
+    }
 }
 
 TEST(JavaLangStringBuilder, CodePointCount) {
-	// TODO
+    StringBuilder stringBuilder("JAVA programming language");
+    assertEquals(7, stringBuilder.codePointCount(1, 8));
+    {
+        boolean isException = false;
+        try {
+            stringBuilder.codePointCount(5, 1);
+        } catch (IndexOutOfBoundsException &exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
 }
 
 TEST(JavaLangStringBuilder, DeleteRange) {
@@ -248,6 +278,25 @@ TEST(JavaLangStringBuilder, DeleteCharAt) {
 	assertEquals("BCXYZ", stringBuilder.toString());
 	stringBuilder.deleteCharAt(1);
 	assertEquals("BXYZ", stringBuilder.toString());
+	{
+		String exceptionMessage;
+		try {
+			stringBuilder.deleteCharAt(-1);
+		} catch (StringIndexOutOfBoundsException &exception) {
+			exceptionMessage = exception.getMessage();
+		}
+		assertEquals("String index out of range: -1", exceptionMessage);
+	}
+
+	{
+		String exceptionMessage;
+		try {
+			stringBuilder.deleteCharAt(20);
+		} catch (StringIndexOutOfBoundsException &exception) {
+			exceptionMessage = exception.getMessage();
+		}
+		assertEquals("String index out of range: 20", exceptionMessage);
+	}
 }
 
 TEST(JavaLangStringBuilder, EnsureCapacity) {
@@ -556,6 +605,16 @@ TEST(JavaLangStringBuilder, SetCharAt) {
 	assertEquals("TBCXYZ", stringBuilder.toString());
 	stringBuilder.setCharAt(1, Character('V'));
 	assertEquals("TVCXYZ", stringBuilder.toString());
+
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.setCharAt(-1, 'T');
+        } catch (StringIndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("String index out of range: -1", exceptionMessage);
+    }
 }
 
 TEST(JavaLangStringBuilder, SetLength) {
@@ -568,6 +627,16 @@ TEST(JavaLangStringBuilder, SetLength) {
 	stringBuilder.setLength(6);
 	assertEquals(6, stringBuilder.length());
 	assertEquals("Hello!", stringBuilder.toString());
+
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.setLength(-1);
+        } catch (IndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("-1", exceptionMessage);
+    }
 }
 
 TEST(JavaLangStringBuilder, SubString) {
@@ -579,6 +648,26 @@ TEST(JavaLangStringBuilder, SubString) {
 	} catch (StringIndexOutOfBoundsException &ex) {
 		assertEquals("String index out of range: -999", ex.getMessage().toString());
 	}
+
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.substring(3, -1);
+        } catch (StringIndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("String index out of range: -1", exceptionMessage);
+    }
+
+    {
+        String exceptionMessage;
+        try {
+            stringBuilder.substring(3, 1);
+        } catch (StringIndexOutOfBoundsException &exception) {
+            exceptionMessage = exception.getMessage();
+        }
+        assertEquals("String index out of range: -2", exceptionMessage);
+    }
 }
 
 TEST(JavaLangStringBuilder, ToString) {
