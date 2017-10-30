@@ -322,6 +322,11 @@ TEST (JavaUtilHashMap, RemoveKey) {
 	// Make sure the old data must not exist any more
 	actual = hashMap.get("another key");
 	assertTrue(actual.isEmpty());
+
+    /* Remove a non-existent key */
+    isSucceedRemove = hashMap.remove("non-existent key");
+    expected = "";
+    assertEquals(expected, isSucceedRemove);
 }
 
 TEST (JavaUtilHashMap, RemoveKeyValue) {
@@ -471,13 +476,14 @@ TEST (JavaUtilHashMap, ToString) {
 	HashMap<String, String> hashMap;
 	hashMap.put("key1", "value1");
 	
-	String expectedResult = R"({"key1": "value1"})";
-	assertEquals(expectedResult, expectedResult);
+	String expected = R"({"key1": "value1"})";
+    String actual = hashMap.toString();
+	assertEquals(expected, actual);
 	
 	// Given empty hash map to test default toString()
 	HashMap<String, Float> emptyHashMap;
-	expectedResult = (string) "{}";
-	assertEquals(expectedResult, emptyHashMap.toString());
+	expected = (string) "{}";
+	assertEquals(expected, emptyHashMap.toString());
 }
 
 TEST (JavaUtilHashMap, Reinitialize) {
