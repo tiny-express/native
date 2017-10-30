@@ -141,7 +141,7 @@ namespace Java {
             void add(int index, const E &element) {
                 int size = (int) this->original.size();
                 if (index < 0 || index > size) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IllegalArgumentException("index is out of range");
                 }
                 this->ensureCapacity(size + 1);
                 this->original.insert(this->original.begin() + index, element);
@@ -335,7 +335,7 @@ namespace Java {
              */
             E firstElement() {
                 if (this->original.empty()) {
-                    throw std::out_of_range("vector is empty");
+                    throw Exception("vector is empty");
                 }
                 return this->original.front();
             }
@@ -348,7 +348,7 @@ namespace Java {
              */
             E get(int index) const {
                 if (index < 0 || index >= this->original.size()) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IllegalArgumentException("index is out of range");
                 }
                 return this->original.at(index);
             }
@@ -388,13 +388,12 @@ namespace Java {
              * @return int
              */
             int indexOf(const E &element, int index) {
-                if (index < 0) {
-                    throw std::invalid_argument("index is negative");
+                if (index < 0 || index >= this->size()) {
+                    throw IllegalArgumentException("index is out of range");
                 }
 
                 register int position;
-                for (position = index;
-                     position < this->original.size(); position++) {
+                for (position = index; position < this->original.size(); position++) {
                     if (element == this->original[position]) {
                         return position;
                     }
@@ -437,7 +436,7 @@ namespace Java {
              */
             E lastElement() const {
                 if (this->original.empty()) {
-                    throw std::out_of_range("vector is empty");
+                    throw Exception("vector is empty");
                 }
                 return this->original.back();
             }
@@ -464,9 +463,8 @@ namespace Java {
              * @return int
              */
             int lastIndexOf(const E &element, int index) const {
-                if (index >= this->original.size()) {
-                    throw std::invalid_argument(
-                            "index is greater than or equal to the current size of this vector");
+                if (index < 0 || index >= this->original.size()) {
+                    throw IllegalArgumentException("index is out of range");
                 }
 
                 register int position;
@@ -507,7 +505,7 @@ namespace Java {
              */
             E remove(int index) {
                 if (index < 0 || index >= this->original.size()) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IllegalArgumentException("index is out of range");
                 }
                 E removedItem = this->original.at(index);
                 this->original.erase(this->original.begin() + index);
@@ -599,13 +597,22 @@ namespace Java {
              * @param toIndex
              */
             void removeRange(int fromIndex, int toIndex) {
-                if (fromIndex >= toIndex) {
-                    return;
+                int currentSize = (int) this->original.size();
+
+                if (fromIndex < 0
+                    || fromIndex >= currentSize
+                    || toIndex < 0
+                    || toIndex >= currentSize) {
+                    throw IllegalArgumentException("index is out of range");
                 }
 
-                int currentSize = (int) this->original.size();
-                if (fromIndex < 0 || fromIndex >= currentSize || toIndex < 0 ||
-                    toIndex >= currentSize) {
+                if (fromIndex > toIndex) {
+                    throw IllegalArgumentException("start index greater than "
+                                                           "end index");
+                }
+
+                if (fromIndex == toIndex) {
+                    this->remove(fromIndex);
                     return;
                 }
 
@@ -670,7 +677,7 @@ namespace Java {
              */
             E set(int index, const E &element) {
                 if (index < 0 || index >= this->original.size()) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IllegalArgumentException("index is out of range");
                 }
                 E removedElement = this->get(index);
                 this->original[index] = element;
@@ -694,7 +701,7 @@ namespace Java {
              */
             void setSize(int newSize) {
                 if (newSize < 0) {
-                    throw std::invalid_argument("new size is negative");
+                    throw IllegalArgumentException("new size is negative");
                 }
                 if (newSize > this->original.size()) {
                     this->ensureCapacity(newSize);
@@ -867,7 +874,7 @@ namespace Java {
              */
             E &operator[](const int index) {
                 if (index < 0 || index >= this->original.size()) {
-                    throw std::invalid_argument("index is out of range");
+                    throw IllegalArgumentException("index is out of range");
                 }
                 E *vectorData = this->original.data();
                 return *(vectorData + index);

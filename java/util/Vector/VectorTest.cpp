@@ -60,8 +60,10 @@ TEST (JavaUtilVector, Constructor) {
 TEST (JavaUtilVector, InitializerListConstructor) {
     // Given a vector construct from a std::initializer_list.
     Vector<int> vector{1, 2, 3, 4, 5};
+
     // Checks size.
     assertEquals(5, vector.size());
+
     // Check the first-last elements.
     assertEquals(1, vector.firstElement());
     assertEquals(5, vector.lastElement());
@@ -75,6 +77,7 @@ TEST (JavaUtilVector, CopyConstructor) {
     target.add(3);
     target.add(4);
     target.add(5);
+
     // Use copy-constructor.
     Vector<int> vector(target);
     assertEquals(target.size(), vector.size());
@@ -94,19 +97,36 @@ TEST (JavaUtilVector, Add) {
     assertEquals(1, vector.firstElement());
     assertEquals(5, vector.lastElement());
 
-    // Add an element at specified index in vector - return that element at that index.
+    // Add an element at specified index in vector
+    // return that element at that index.
     vector.add(3, 100);
     assertEquals(100, vector.get(3));
     assertEquals(4, vector.get(4));
+
+    // Test exception
+    try {
+        vector.add(-1, 100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.add(100, 100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, AddAll) {
     // Given an empty vector.
     Vector<int> vector1;
+
     // Add all elements from initializer list.
     assertTrue(vector1.addAll({1, 2, 3, 4, 5}));
+
     // Checks size.
     assertEquals(5, vector1.size());
+
     // Check the first-last elements.
     assertEquals(1, vector1.firstElement());
     assertEquals(5, vector1.lastElement());
@@ -118,12 +138,15 @@ TEST (JavaUtilVector, AddAll) {
     vector2.add(3);
     vector2.add(4);
     vector2.add(5);
+
     // Add initializer list at index 2.
     assertTrue(vector2.addAll(2, {7, 8, 9}));
+
     // Check the first-last element.
     assertEquals(8, vector2.size());
     assertEquals(1, vector2.firstElement());
     assertEquals(5, vector2.lastElement());
+
     // Check element at index 2.
     assertEquals(7, vector2.get(2));
 }
@@ -161,7 +184,8 @@ TEST (JavaUtilVector, Clone) {
     Vector<int> clonedVector1 = vector.clone();
     assertEquals(0, clonedVector1.size());
 
-    // Given a valid vector, check size of cloned vector; check first-last element.7
+    // Given a valid vector, check size of cloned vector;
+    // check first-last element.7
     vector.add(1);
     vector.add(2);
     vector.add(3);
@@ -188,6 +212,7 @@ TEST (JavaUtilVector, Contains) {
 TEST (JavaUtilVector, ContainsAll) {
     // Given a valid vector.
     Vector<int> vector{1, 2, 3, 4, 5};
+
     // Checks vector for having all elements in a list.
     assertFalse(vector.containsAll({1, 2, 3, 4, 6}));
     assertTrue(vector.containsAll({1, 2, 3, 4, 5}));
@@ -212,6 +237,7 @@ TEST (JavaUtilVector, ElementAt) {
     vector.add(3);
     vector.add(4);
     vector.add(5);
+
     // Get element at the first and the last position.
     assertEquals(vector.firstElement(), vector.elementAt(0));
     assertEquals(vector.lastElement(), vector.elementAt(4));
@@ -221,18 +247,22 @@ TEST (JavaUtilVector, EnsureCapacity) {
     // Given an empty vector with initial capacity is 10 and capacity increment is 5.
     Vector<int> vector1(10, 5);
     assertEquals(10, vector1.capacity());
+
     // New capacity = old capacity + capacity increment.
     vector1.ensureCapacity(12);
     assertEquals(15, vector1.capacity());
+
     // New capacity = min capacity (because old capacity + capacity increment < min capacity).
     vector1.ensureCapacity(25);
     assertEquals(25, vector1.capacity());
 
     // Given an empty vector with initial capacity is 10 and capacity increment is 0.
     Vector<int> vector2(10, 0);
+
     // New capacity = old capacity * 2 (because capacity increment is zero).
     vector2.ensureCapacity(15);
     assertEquals(20, vector2.capacity());
+
     // New capacity = min capacity (because old capacity * 2 < min capacity).
     vector2.ensureCapacity(100);
     assertEquals(100, vector2.capacity());
@@ -243,10 +273,15 @@ TEST (JavaUtilVector, Equals) {
     Vector<int> vector1{1, 2, 3, 4, 5};
     Vector<int> target1{1, 2, 3, 5, 4};
     assertFalse(vector1.equals(target1));
+
     // Given two valid vector, check they are equals or not.
     Vector<int> vector2{1, 2, 3, 4, 5, 6, 7};
     Vector<int> target2{1, 2, 3, 4, 5, 6, 7};
     assertTrue(vector2.equals(target2));
+
+    // Test different size
+    vector2.setSize(10);
+    assertFalse(vector2.equals(target2));
 }
 
 TEST (JavaUtilVector, FirstElement) {
@@ -256,6 +291,14 @@ TEST (JavaUtilVector, FirstElement) {
     vector.add("World");
     vector.add("Vector");
     assertEquals("Hello", vector.firstElement().toString());
+
+    // Test exception
+    Vector<String> emptyVector;
+    try {
+        emptyVector.firstElement();
+    } catch (Exception exception) {
+        assertEquals("vector is empty", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, Get) {
@@ -266,15 +309,30 @@ TEST (JavaUtilVector, Get) {
     vector.add("I'm");
     vector.add("a");
     vector.add("Vector");
+
     // Get element at index 0, then index 4.
     assertEquals("Hello", vector.get(0).toString());
     assertEquals("Vector", vector.get(4).toString());
+
+    // Test exception
+    try {
+        vector.get(-1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.remove(100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, IsEmpty) {
     // Given an empty vector, vector is empty.
     Vector<int> vector;
     assertTrue(vector.isEmpty());
+
     // Add an element into vector, vector is not empty.
     vector.add(0);
     assertFalse(vector.isEmpty());
@@ -297,6 +355,19 @@ TEST (JavaUtilVector, IndexOf) {
     vector.add(5);
     assertEquals(-1, vector.indexOf(4, 4));
     assertEquals(2, vector.indexOf(4, 0));
+
+    // Test exception
+    try {
+        vector.indexOf(4, -1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.indexOf(4, 100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, InsertElementAt) {
@@ -309,8 +380,10 @@ TEST (JavaUtilVector, InsertElementAt) {
     vector.add(5);
     assertEquals(1, vector.firstElement());
     assertEquals(5, vector.lastElement());
+
     // Inserts an element.
     vector.insertElementAt(0, 0);
+
     // Checks that element after added.
     assertEquals(0, vector.get(0));
 }
@@ -322,6 +395,14 @@ TEST (JavaUtilVector, LastElement) {
     vector.add("World");
     vector.add("Vector");
     assertEquals("Vector", vector.lastElement().toString());
+
+    // Test exception
+    Vector<String> emptyVector;
+    try {
+        emptyVector.lastElement();
+    } catch (Exception exception) {
+        assertEquals("vector is empty", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, LastIndexOf) {
@@ -337,6 +418,20 @@ TEST (JavaUtilVector, LastIndexOf) {
 
     assertEquals(3, vector.lastIndexOf(2, 4));
     assertEquals(1, vector.lastIndexOf(2, 1));
+
+    // Test exception
+
+    try {
+        vector.lastIndexOf(2, -1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.lastIndexOf(2, 100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, Remove) {
@@ -349,6 +444,7 @@ TEST (JavaUtilVector, Remove) {
     assertEquals(2, vector1.remove(1));
     assertEquals(3, vector1.remove(1));
     assertEquals(1, vector1.remove(0));
+
     // Check size of vector.
     assertEquals(0, vector1.size());
 
@@ -371,13 +467,28 @@ TEST (JavaUtilVector, Remove) {
     vector3.remove(Integer(3));
     assertFalse(vector3.contains(Integer(3)));
     assertFalse(vector3.remove(Integer(10)));
+
+    // Test execption
+    try {
+        vector1.remove(-1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector1.remove(100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, RemoveAll) {
     // Given a valid vector.
     Vector<int> vector({1, 2, 3, 4, 5});
+
     // Removes element appearing in the specified list.
     assertTrue(vector.removeAll({1, 2, 3}));
+
     // Checks size and the first-last element.
     assertEquals(2, vector.size());
     assertEquals(4, vector.firstElement());
@@ -421,8 +532,10 @@ TEST (JavaUtilVector, RemoveElementAt) {
     vector.add(3);
     vector.add(4);
     vector.add(5);
+
     // Removes element at index = 2.
     vector.removeElementAt(2);
+
     // Checks element value at index = 2.
     assertEquals(4, vector.get(2));
 }
@@ -447,13 +560,57 @@ TEST (JavaUtilVector, RemoveRange) {
     vector.add(6);
     vector.add(7);
     vector.add(8);
+
     // index: 0 1 2 3 4 5 6 7
     // value: 1 2 3 4 5 6 7 8
-    vector.removeRange(1, 3); // Removes elements at index: {1, 2}
+    // Removes elements at index: {1, 2}
+    vector.removeRange(1, 3);
+
     // index: 0 1 2 3 4 5
     // value: 1 4 5 6 7 8
     assertEquals(1, vector.get(0));
     assertEquals(4, vector.get(1));
+
+    // index: 0 1 2 3 4 5
+    // value: 1 4 5 6 7 8
+    // Remove element at index : {1, 1}
+    vector.removeRange(1, 1);
+
+    // index: 0 1 2 3 4
+    // value: 1 5 6 7 8
+    assertEquals(1, vector.get(0));
+    assertEquals(5, vector.get(1));
+
+    // Test Exception
+    try {
+        vector.removeRange(3, 1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("start index greater than end index", exception.getMessage());
+    }
+
+    try {
+        vector.removeRange(-1, 5);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.removeRange(100, 3);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.removeRange(1, -1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.removeRange(1, 100);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, RetainAll) {
@@ -472,14 +629,33 @@ TEST (JavaUtilVector, Set) {
     vector.add(3);
     vector.add(4);
     vector.add(5);
+
     // Change element at index 0.
     assertEquals(1, vector.set(0, 10));
+
     // Check element at index 0.
     assertEquals(10, vector.get(0));
+
     // Change element at index 4.
     assertEquals(5, vector.set(4, 0));
+
     // Check element at index 4.
     assertEquals(0, vector.get(4));
+
+    // Test index out of range
+    try {
+        vector.set(-1, 1302);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+    try {
+        vector.set(100, 1302);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
+
+
 }
 
 TEST (JavaUtilVector, SetElementAt) {
@@ -490,12 +666,16 @@ TEST (JavaUtilVector, SetElementAt) {
     vector.add(3);
     vector.add(4);
     vector.add(5);
+
     // Change element at index 0.
     vector.setElementAt(10, 0);
+
     // Check element at index 0.
     assertEquals(10, vector.get(0));
+
     // Change element at index 4.
     vector.setElementAt(0, 4);
+
     // Check element at index 4.
     assertEquals(0, vector.get(4));
 }
@@ -512,9 +692,21 @@ TEST (JavaUtilVector, SetSize) {
     vector.add(7);
     vector.add(8);
     vector.add(9);
+
     // Sets size and checks size.
     vector.setSize(5);
     assertEquals(5, vector.size());
+
+    // Set negative size
+    try {
+        vector.setSize(-1);
+    } catch (IllegalArgumentException exception) {
+        assertEquals("new size is negative", exception.getMessage());
+    }
+
+    // Set new size > original size
+    vector.setSize(20);
+    assertEquals(20, vector.size());
 }
 
 TEST (JavaUtilVector, Size) {
@@ -538,8 +730,10 @@ TEST (JavaUtilVector, Size) {
 
 TEST (JavaUtilVector, ToArray) {
     // Given a valid vector.
+
     Vector<int> vector{1, 2, 3, 4, 5};
     // Copies vector to an array.
+
     Array<int> anArray = vector.toArray();
     // Check elements of vector and array at same order.
     register int index;
@@ -557,10 +751,13 @@ TEST (JavaUtilVector, TrimToSize) {
     vector.add(4);
     vector.add(5);
     vector.add(6);
-    vector.trimToSize(); // Trims the capacity to be the current size.
+
+    // Trims the capacity to be the current size.
+    vector.trimToSize();
     assertEquals(vector.size(), vector.capacity());
-    vector.remove(
-            0); // After removing an element, capacity is not equal with size.
+
+    // After removing an element, capacity is not equal with size.
+    vector.remove(0);
     assertNotEquals(vector.size(), vector.capacity());
     vector.trimToSize();
     assertEquals(vector.size(), vector.capacity());
@@ -574,6 +771,7 @@ TEST (JavaUtilVector, RangeBasedForLoop) {
     vector.add(2);
     vector.add(3);
     vector.add(4);
+
     // Using range-base-for-loop and checks element value.
     int index = 0;
     for (int element : vector) {
@@ -590,6 +788,7 @@ TEST (JavaUtilVector, ArrayOperator) {
     vector.add(2);
     vector.add(3);
     vector.add(4);
+
     // Accesses element value using array operator.
     int index;
     for (index = 0; index < vector.size(); index++) {
@@ -597,14 +796,23 @@ TEST (JavaUtilVector, ArrayOperator) {
     }
     vector[0] = -1;
     assertEquals(-1, vector.get(0));
+
+    // Test IllegalArgumentException
+    try {
+        vector[-1] = 1302;
+    } catch (IllegalArgumentException exception) {
+        assertEquals("index is out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaUtilVector, AssignmentOperator) {
     // Given an empty vector and add an element to it.
     Vector<int> vector;
     vector.add(-1);
+
     // Assigns with an initializer list.
     vector = {1, 2, 3, 4, 5};
+
     // Checks size and the first-last element.
     assertEquals(5, vector.size());
     assertEquals(1, vector.firstElement());
@@ -612,8 +820,10 @@ TEST (JavaUtilVector, AssignmentOperator) {
 
     // Given an target vector with some elements inside.
     Vector<int> target{10, 11, 12};
+
     // Assigns target to vector.
     vector = target;
+
     // Checks size and the first-last element.
     assertEquals(3, vector.size());
     assertEquals(10, vector.firstElement());
