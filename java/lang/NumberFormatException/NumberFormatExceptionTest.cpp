@@ -30,17 +30,17 @@
 TEST (JavaLangNumberFormatException, Constructor) {
 	// Constructs a new NumberFormatException with null as its detail message.
 	NumberFormatException NumberFormatExceptionWithNullMessage;
-	assertEquals("", NumberFormatExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", NumberFormatExceptionWithNullMessage.getMessage());
 	
 	// Constructs a new NumberFormatException with the specified detail message.
 	NumberFormatException NumberFormatExceptionWithMessage = NumberFormatException("NumberFormatException with the specified message");
-	assertEquals("NumberFormatException with the specified message", NumberFormatExceptionWithMessage.getMessage().toString());
+	assertEquals("NumberFormatException with the specified message", NumberFormatExceptionWithMessage.getMessage());
 }
 
 TEST (JavaLangNumberFormatException, TryCatch) {
 	try {
 		throw NumberFormatException("Throw NumberFormatException");
 	} catch (NumberFormatException &e) {
-		assertEquals("Throw NumberFormatException", e.getMessage().toString());
+		assertEquals("Throw NumberFormatException", e.getMessage());
 	}
 }

@@ -32,27 +32,27 @@ using namespace Java::Lang;
 TEST (JavaLangUnsupportedOperationException, Constructor) {
 	// Constructs a new UnsupportedOperationException with null as its detail message.
 	UnsupportedOperationException unsupportedOperationExceptionWithNullMessage;
-	assertEquals("", unsupportedOperationExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", unsupportedOperationExceptionWithNullMessage.getMessage());
 	
 	// Constructs a new UnsupportedOperationException with the specified detail message.
 	UnsupportedOperationException unsupportedOperationExceptionWithMessage = UnsupportedOperationException("UnsupportedOperationException with the specified message");
-	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessage.getMessage().toString());
+	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessage.getMessage());
 	
 	// Constructs a new UnsupportedOperationException with the specified detail message and cause.
 	UnsupportedOperationException unsupportedOperationExceptionWithMessageAndCause = UnsupportedOperationException("UnsupportedOperationException with the specified message and cause", &unsupportedOperationExceptionWithMessage);
-	assertEquals("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithMessageAndCause.getMessage().toString());
-	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithMessageAndCause.getMessage());
+	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithMessageAndCause.getCause()->getMessage());
 	
 	// Constructs a new UnsupportedOperationException with the specified cause.
 	UnsupportedOperationException unsupportedOperationExceptionWithCause = UnsupportedOperationException(&unsupportedOperationExceptionWithMessageAndCause);
-	assertEquals("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithCause.getCause()->getMessage().toString());
-	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("UnsupportedOperationException with the specified message and cause", unsupportedOperationExceptionWithCause.getCause()->getMessage());
+	assertEquals("UnsupportedOperationException with the specified message", unsupportedOperationExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangUnsupportedOperationException, TryCatch) {
 	try {
 		throw UnsupportedOperationException("Throw UnsupportedOperationException");
 	} catch (Exception e) {
-		assertEquals("Throw UnsupportedOperationException", e.getMessage().toString());
+		assertEquals("Throw UnsupportedOperationException", e.getMessage());
 	}
 }

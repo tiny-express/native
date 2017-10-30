@@ -32,11 +32,11 @@ using namespace Java::Lang;
 TEST (JavaLangClassCastException, Constructor) {
 // Constructs a new ClassCastException with null as its detail message.
 	ClassCastException classCastExceptionWithNullMessage;
-	assertEquals("", classCastExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", classCastExceptionWithNullMessage.getMessage());
 
 // Constructs a new ClassCastException with the specified detail message.
 	ClassCastException classCastExceptionWithMessage = ClassCastException("ClassCastException with the specified message");
-	assertEquals("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage().toString());
+	assertEquals("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage());
 }
 
 TEST (JavaLangClassCastException, TryCatch) {
@@ -44,6 +44,6 @@ TEST (JavaLangClassCastException, TryCatch) {
 		throw ClassCastException("Throw ClassCastException");
 	}
 	catch (ClassCastException ex) {
-		assertEquals("Throw ClassCastException", ex.getMessage().toString());
+		assertEquals("Throw ClassCastException", ex.getMessage());
 	}
 }

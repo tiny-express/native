@@ -1,2 +1,2 @@
 cmake -DCMAKE_BUILD_TYPE=Release
-make native && sudo make install
+make native -j8 && sudo make install

@@ -60,28 +60,28 @@ TEST (JavaLangByte, Constructor) {
     try {
         Bytes exceptionBytes = Bytes("");
     } catch (NumberFormatException &e) {
-        assertEquals(String("input string is null"), e.getMessage().toString());
+        assertEquals(String("input string is null"), e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes("abcd");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes("999999999999");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Integer out of range", e.getMessage().toString());
+        assertEquals("Integer out of range", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes("256");
     }
     catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -139,28 +139,28 @@ TEST (JavaLangByte, Decode) {
         Bytes exceptionBytes = Bytes::decode("");
     }
     catch (NumberFormatException &e) {
-        assertEquals("input string is null", e.getMessage().toString());
+        assertEquals("input string is null", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::decode("abcd");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::decode("999999999999");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Integer out of range", e.getMessage().toString());
+        assertEquals("Integer out of range", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::decode("256");
     }
     catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -225,28 +225,28 @@ TEST (JavaLangByte, ParseBytes) {
         Bytes exceptionBytes = Bytes::parseBytes("");
     }
     catch (NumberFormatException &e) {
-        assertEquals("input string is null", e.getMessage().toString());
+        assertEquals("input string is null", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::parseBytes("abcd");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::parseBytes("999999999999");
     }
     catch (NumberFormatException &e) {
-        assertEquals("Integer out of range", e.getMessage().toString());
+        assertEquals("Integer out of range", e.getMessage());
     }
 
     try {
         Bytes exceptionBytes = Bytes::parseBytes("256");
     }
     catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -273,28 +273,28 @@ TEST (JavaLangByte, ParseByteWithRadix) {
         Bytes::parseBytes((String) "99", 8);
     }
     catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes::parseBytes((String) "Kona", 33);
     }
     catch (NumberFormatException &e) {
-        assertEquals("radix out of range", e.getMessage().toString());
+        assertEquals("radix out of range", e.getMessage());
     }
 
     try {
         Bytes::parseBytes((String) "", 2);
     }
     catch (NumberFormatException &e) {
-        assertEquals("input string is null", e.getMessage().toString());
+        assertEquals("input string is null", e.getMessage());
     }
 
     try {
         Bytes::parseBytes("256", 10);
     }
     catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -339,19 +339,19 @@ TEST (JavaLangByte, ValueOfString) {
     try {
         Bytes::valueOf("");
     } catch (NumberFormatException &e) {
-        assertEquals("input string is null", e.getMessage().toString());
+        assertEquals("input string is null", e.getMessage());
     }
 
     try {
         Bytes::valueOf("abcd");
     } catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes::valueOf("256");
     } catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -378,25 +378,25 @@ TEST (JavaLangByte, ValueOfStringWithRadix) {
         expectResult = Bytes::valueOf((String) "99", 8);
     }
     catch (NumberFormatException &e) {
-        assertEquals("Not a number", e.getMessage().toString());
+        assertEquals("Not a number", e.getMessage());
     }
 
     try {
         Bytes::valueOf((String) "Kona", 33);
     } catch (NumberFormatException &e) {
-        assertEquals("radix out of range", e.getMessage().toString());
+        assertEquals("radix out of range", e.getMessage());
     }
 
     try {
         Bytes::valueOf((String) "", 2);
     } catch (NumberFormatException &e) {
-        assertEquals("input string is null", e.getMessage().toString());
+        assertEquals("input string is null", e.getMessage());
     }
 
     try {
         Bytes::valueOf("256", 10);
     } catch (NumberFormatException &e) {
-        assertEquals("out of byte range", e.getMessage().toString());
+        assertEquals("out of byte range", e.getMessage());
     }
 }
 
@@ -459,7 +459,7 @@ TEST (JavaLangByte, ByteOperator) {
     try {
         divisionBytes = validBytes / zeroBytes;
     } catch (ArithmeticException &e) {
-        assertEquals("Divide by zero", e.getMessage().toString());
+        assertEquals("Divide by zero", e.getMessage());
     }
 
     // Make a modulo with targetByte
@@ -469,7 +469,7 @@ TEST (JavaLangByte, ByteOperator) {
     try {
         modulusBytes = validBytes % zeroBytes;
     } catch (ArithmeticException &e) {
-        assertEquals("Divide by zero", e.getMessage().toString());
+        assertEquals("Divide by zero", e.getMessage());
     }
 
     // Determine if 2 byte is equal
@@ -524,7 +524,7 @@ TEST (JavaLangByte, ByteOperator) {
     try {
         validBytes /= zeroBytes;
     } catch (ArithmeticException &e) {
-        assertEquals("Divide by zero", e.getMessage().toString());
+        assertEquals("Divide by zero", e.getMessage());
     }
 
     // Make a modulo from validBytes with targetBytes and assign the result value to this Byte
@@ -536,7 +536,7 @@ TEST (JavaLangByte, ByteOperator) {
     try {
         validBytes %= zeroBytes;
     } catch (ArithmeticException &e) {
-        assertEquals("Divide by zero", e.getMessage().toString());
+        assertEquals("Divide by zero", e.getMessage());
     }
 }
 

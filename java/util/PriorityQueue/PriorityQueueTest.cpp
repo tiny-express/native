@@ -47,7 +47,7 @@ TEST (JavaUtilPriorityQueue, Constructor) {
 		PriorityQueue<int> customCapacityConstructor(-1);
 	}
 	catch (InterruptedException ex) {
-		assertEquals("initialCapacity < 1", ex.getMessage().toString());
+		assertEquals("initialCapacity < 1", ex.getMessage());
 	}
 }
 

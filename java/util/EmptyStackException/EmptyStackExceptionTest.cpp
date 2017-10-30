@@ -31,13 +31,13 @@ using namespace Java::Util;
 
 TEST (JavaUtilEmptyStackException, Constructor) {
 	EmptyStackException emptyStackExceptionNullMess;
-	assertEquals("", emptyStackExceptionNullMess.getMessage().toString());
+	assertEquals("", emptyStackExceptionNullMess.getMessage());
 }
 
 TEST (JavaUtilEmptyStackException, TryCatch) {
 	try {
 		throw EmptyStackException();
 	} catch (EmptyStackException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }

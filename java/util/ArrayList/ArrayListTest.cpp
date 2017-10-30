@@ -235,7 +235,7 @@ TEST(JavaUtilArrayList, RemoveIndex) {
     try {
         validArrayList.remove(-1);
     } catch (IndexOutOfBoundsException &exception) {
-        assertEquals("Index out of range: -1", exception.getMessage().toString());
+        assertEquals("Index out of range: -1", exception.getMessage());
     }
 }
 
@@ -267,7 +267,7 @@ TEST(JavaUtilArrayList, Set) {
     try {
         validArrayList.set(-1, "String");
     } catch (IndexOutOfBoundsException &exception) {
-        assertEquals("Index out of range: -1", exception.getMessage().toString());
+        assertEquals("Index out of range: -1", exception.getMessage());
     }
 }
 

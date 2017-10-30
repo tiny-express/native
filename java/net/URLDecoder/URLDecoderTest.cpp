@@ -47,6 +47,6 @@ TEST(JavaNet, URLDecoderDecodeUsingSpecificEncodingScheme) {
     try {
         URLDecoder::decode(target, "UTF-0");
     } catch (UnsupportedEncodingException &ex) {
-        assertEquals("UTF-0", ex.getMessage().toString());
+        assertEquals("UTF-0", ex.getMessage());
     }
 }

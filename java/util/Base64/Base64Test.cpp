@@ -79,7 +79,7 @@ TEST (JavaUtilBase64, Encoder) {
 		basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
 	} catch (InterruptedException ex) {
 		assertEquals("Output byte array is too small for encoding all input bytes",
-		           ex.getMessage().toString());
+		           ex.getMessage());
 	}
 	Array<byte> outputByteArray(100);
 	int index;
@@ -214,7 +214,7 @@ TEST (JavaUtilBase64, Decoder) {
 		basicDecoder.decode(inputArray, outputArrayNotEnoughSize);
 	} catch (InterruptedException &e) {
 		assertEquals("Output byte array is too small for decoding all input bytes",
-		           e.getMessage().toString());
+		           e.getMessage());
 	}
 	Array<byte> outputArray(100);
 	int index;

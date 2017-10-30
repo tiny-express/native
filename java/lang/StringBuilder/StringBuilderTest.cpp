@@ -44,7 +44,7 @@ TEST(JavaLangStringBuilder, Constructor) {
 	try {
 		StringBuilder negativeCapacityStringBuilder(-1);
 	} catch (NegativeArraySizeException &ex) {
-		assertEquals("Capacity is negative", ex.getMessage().toString());
+		assertEquals("Capacity is negative", ex.getMessage());
 	}
 
 	String aString = "Hello! Welcome to VietNam!";
@@ -150,7 +150,7 @@ TEST(JavaLangStringBuilder, Append) {
 		// start < 0
 		stringBuilder7.append(*charSequence, -1, 3);
 	} catch (IndexOutOfBoundsException &ex){
-		assertEquals("", ex.getMessage().toString());
+		assertEquals("", ex.getMessage());
 		assertEquals("123Hello!", stringBuilder7.toString());
 	}
 
@@ -158,7 +158,7 @@ TEST(JavaLangStringBuilder, Append) {
 		// start > end
 		stringBuilder7.append(*charSequence, 4, 3);
 	} catch (IndexOutOfBoundsException &ex){
-		assertEquals("", ex.getMessage().toString());
+		assertEquals("", ex.getMessage());
 		assertEquals("123Hello!", stringBuilder7.toString());
 	}
 
@@ -166,7 +166,7 @@ TEST(JavaLangStringBuilder, Append) {
 		// end > current length of StringBuilder instance.
 		stringBuilder7.append(*charSequence, 4, 999);
 	} catch (IndexOutOfBoundsException &ex){
-		assertEquals("", ex.getMessage().toString());
+		assertEquals("", ex.getMessage());
 		assertEquals("123Hello!", stringBuilder7.toString());
 	}
 
@@ -193,7 +193,7 @@ TEST(JavaLangStringBuilder, CharAt) {
 	try {
 		stringBuilder.charAt(999);
 	} catch (IndexOutOfBoundsException &ex) {
-		assertEquals("999", ex.getMessage().toString());
+		assertEquals("999", ex.getMessage());
 	}
 }
 
@@ -577,7 +577,7 @@ TEST(JavaLangStringBuilder, SubString) {
 	try {
 		stringBuilder.substring(-999);
 	} catch (StringIndexOutOfBoundsException &ex) {
-		assertEquals("String index out of range: -999", ex.getMessage().toString());
+		assertEquals("String index out of range: -999", ex.getMessage());
 	}
 }
 

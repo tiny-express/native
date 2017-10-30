@@ -33,27 +33,27 @@ using namespace Java::Lang;
 TEST (JavaIoIOException, Constructor) {
     // Constructs a new IOException with null as its detail message.
     IOException ioExceptionWithNullMessage;
-    assertEquals("", ioExceptionWithNullMessage.getMessage().toString());
+    assertEquals("", ioExceptionWithNullMessage.getMessage());
 
     // Constructs a new IOException with the specified detail message.
     IOException ioExceptionWithMessage = IOException("IOException with the specified message");
-    assertEquals("IOException with the specified message", ioExceptionWithMessage.getMessage().toString());
+    assertEquals("IOException with the specified message", ioExceptionWithMessage.getMessage());
 
     // Constructs a new IOException with the specified detail message and cause.
     IOException ioExceptionWithMessageAndCause = IOException("IOException with the specified message and cause", &ioExceptionWithMessage);
-    assertEquals("IOException with the specified message and cause", ioExceptionWithMessageAndCause.getMessage().toString());
-    assertEquals("IOException with the specified message", ioExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    assertEquals("IOException with the specified message and cause", ioExceptionWithMessageAndCause.getMessage());
+    assertEquals("IOException with the specified message", ioExceptionWithMessageAndCause.getCause()->getMessage());
 
     // Constructs a new IOException with the specified cause.
     IOException ioExceptionWithCause = IOException(&ioExceptionWithMessageAndCause);
-    assertEquals("IOException with the specified message and cause", ioExceptionWithCause.getCause()->getMessage().toString());
-    assertEquals("IOException with the specified message", ioExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    assertEquals("IOException with the specified message and cause", ioExceptionWithCause.getCause()->getMessage());
+    assertEquals("IOException with the specified message", ioExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaIoIOException, TryCatch) {
     try {
         throw IOException("Throw IOException");
     } catch (IOException &ex) {
-        assertEquals("Throw IOException", ex.getMessage().toString());
+        assertEquals("Throw IOException", ex.getMessage());
     }
 }

@@ -34,7 +34,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithNullMessage;
     assertEquals(
             "",
-            noSuchAlgorithmExceptionWithNullMessage.getMessage().toString());
+            noSuchAlgorithmExceptionWithNullMessage.getMessage());
 
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithMessage =
             NoSuchAlgorithmException(
@@ -42,7 +42,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
 
     assertEquals(
             "NoSuchAlgorithmException with the specified message",
-            noSuchAlgorithmExceptionWithMessage.getMessage().toString());
+            noSuchAlgorithmExceptionWithMessage.getMessage());
 
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithMessageAndCause =
             NoSuchAlgorithmException(
@@ -50,27 +50,27 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
                     &noSuchAlgorithmExceptionWithMessage);
     assertEquals(
             "NoSuchAlgorithmException with the specified message and cause",
-            noSuchAlgorithmExceptionWithMessageAndCause.getMessage().toString());
+            noSuchAlgorithmExceptionWithMessageAndCause.getMessage());
     assertEquals(
             "NoSuchAlgorithmException with the specified message",
             noSuchAlgorithmExceptionWithMessageAndCause.getCause()
-                    ->getMessage().toString());
+                    ->getMessage());
 
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithCause =
             NoSuchAlgorithmException(&noSuchAlgorithmExceptionWithMessageAndCause);
     assertEquals("NoSuchAlgorithmException with the specified message and cause",
                noSuchAlgorithmExceptionWithCause.getCause()
-                       ->getMessage().toString());
+                       ->getMessage());
     assertEquals("NoSuchAlgorithmException with the specified message",
                noSuchAlgorithmExceptionWithCause.getCause()
                        ->getCause()
-                       ->getMessage().toString());
+                       ->getMessage());
 }
 
 TEST(JavaLang, NoSuchAlgorithmExceptionTryCatch) {
     try {
         throw NoSuchAlgorithmException("Throw NoSuchAlgorithmException");
     } catch (Exception e) {
-        assertEquals("Throw NoSuchAlgorithmException", e.getMessage().toString());
+        assertEquals("Throw NoSuchAlgorithmException", e.getMessage());
     }
 }

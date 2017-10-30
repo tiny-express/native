@@ -32,17 +32,17 @@ using namespace Java::Lang;
 TEST (JavaLangArithmeticException, Constructor) {
 	// Constructs a new ArithmeticException with null as its detail message.
 	ArithmeticException arithmeticExceptionWithNullMessage;
-	assertEquals("", arithmeticExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", arithmeticExceptionWithNullMessage.getMessage());
 	
 	// Constructs a new ArithmeticException with the specified detail message.
 	ArithmeticException arithmeticExceptionWithMessage = ArithmeticException("ArithmeticException with the specified message");
-	assertEquals("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage().toString());
+	assertEquals("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage());
 }
 
 TEST (JavaLangArithmeticException, TryCatch) {
 	try {
 		throw ArithmeticException("Throw ArithmeticException");
 	} catch (ArithmeticException &e) {
-		assertEquals("Throw ArithmeticException", e.getMessage().toString());
+		assertEquals("Throw ArithmeticException", e.getMessage());
 	}
 }

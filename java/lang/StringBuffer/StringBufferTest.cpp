@@ -29,7 +29,6 @@
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
-#include "../IllegalArgumentException/IllegalArgumentException.hpp"
 #include "../../../kernel/Test.hpp"
 
 using namespace Java::Lang;
@@ -50,7 +49,7 @@ TEST(JavaLangStringBuffer, Constructor) {
 		StringBuffer negativeCapacityConstructor = StringBuffer(-1);
 	}
 	catch (NegativeArraySizeException &e) {
-		assertEquals("Capacity must be non-negative", e.getMessage().toString());
+		assertEquals("Capacity must be non-negative", e.getMessage());
 	}
 	
 	// Init a StringBuffer with a charsequence
@@ -65,12 +64,12 @@ TEST(JavaLangStringBuffer, Constructor) {
 	String *charSequenceString = dynamic_cast<String *>(sequence);
 	delete charSequenceString;
 	
-	// Init a StringBuffer with a charsequence
+	// Init a StringBuffer with a char sequence
 	CharSequence *nullSequence = nullptr;
 	StringBuffer nullSequenceConstructor = StringBuffer(*nullSequence);
 	int expectNullSequenceCapacity = 20;
 	int expectNullSequenceLength = 4;
-	string expectNullSequenceValue = (string)("null");
+	auto expectNullSequenceValue = "null";
 	assertEquals(expectNullSequenceCapacity, nullSequenceConstructor.capacity());
 	assertEquals(expectNullSequenceLength, nullSequenceConstructor.length());
 	assertEquals(expectNullSequenceValue, nullSequenceConstructor.getValue());
@@ -276,7 +275,7 @@ TEST(JavaLangStringBuffer, Append) {
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test start > end
@@ -285,7 +284,7 @@ TEST(JavaLangStringBuffer, Append) {
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test start > sequence length
@@ -296,7 +295,7 @@ TEST(JavaLangStringBuffer, Append) {
 //    }
 //    catch (IndexOutOfBoundsException &e) {
 //        assertEquals(expectCharSequenceAppend, charSequenceAppendStringBuffer.getValue());
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    String *charSequenceString = dynamic_cast<String *>(charSequenceToAppend);
@@ -457,7 +456,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertStringBuffer.insert(-1, *charSequenceToInsert);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("offset must be positive", e.getMessage().toString());
+//        assertEquals("offset must be positive", e.getMessage());
 //    }
 //
 //    // Test null CharSequence
@@ -479,7 +478,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(-1, *charSequenceToInsert, 0, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("offset must be positive", e.getMessage().toString());
+//        assertEquals("offset must be positive", e.getMessage());
 //    }
 //
 //    // Test destinationOffset > length
@@ -487,7 +486,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(100, *charSequenceToInsert, 0, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test negative start
@@ -495,7 +494,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, -1, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test negative end
@@ -503,7 +502,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, -1);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test start > end
@@ -511,7 +510,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 5, 4);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test end > sequence length
@@ -519,7 +518,7 @@ TEST(JavaLangStringBuffer, Insert) {
 //        charSequenceInsertWithOffsetStringBuffer.insert(17, *charSequenceToInsert, 0, 100);
 //    }
 //    catch (IndexOutOfBoundsException &e) {
-//        assertEquals("", e.getMessage().toString());
+//        assertEquals("", e.getMessage());
 //    }
 //
 //    // Test null CharSequence
@@ -584,7 +583,7 @@ TEST(JavaLangStringBuffer, CharAt) {
 		char expectNegativeIndex = stringBuffer.charAt(-1);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test equal to length index
@@ -592,7 +591,7 @@ TEST(JavaLangStringBuffer, CharAt) {
 		char expectEqualToLengthIndex = stringBuffer.charAt(stringBuffer.length());
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test greater than length index
@@ -600,7 +599,7 @@ TEST(JavaLangStringBuffer, CharAt) {
 		char expectGreaterThanLengthIndex = stringBuffer.charAt(stringBuffer.length() + 1);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -616,7 +615,7 @@ TEST(JavaLangStringBuffer, CodePointAt) {
 		char expectNegativeIndex = (char) ( stringBuffer.codePointAt(-1));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test equal to length index
@@ -624,7 +623,7 @@ TEST(JavaLangStringBuffer, CodePointAt) {
 		char expectEqualToLengthIndex = (char) ( stringBuffer.codePointAt(stringBuffer.length()));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test greater than length index
@@ -632,7 +631,7 @@ TEST(JavaLangStringBuffer, CodePointAt) {
 		char expectGreaterThanLengthIndex = (char) ( stringBuffer.codePointAt(stringBuffer.length() + 1));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -648,7 +647,7 @@ TEST(JavaLangStringBuffer, CodePointBefore) {
 		char expectEqualToLengthIndex = (char) ( stringBuffer.codePointBefore(0));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test negative index
@@ -656,7 +655,7 @@ TEST(JavaLangStringBuffer, CodePointBefore) {
 		char expectNegativeIndex = (char) ( stringBuffer.codePointBefore(-1));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test greater than length index
@@ -664,7 +663,7 @@ TEST(JavaLangStringBuffer, CodePointBefore) {
 		char expectGreaterThanLengthIndex = (char) ( stringBuffer.codePointBefore(stringBuffer.length() + 1));
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -680,7 +679,7 @@ TEST(JavaLangStringBuffer, CodePointCount) {
 		int expectNegativeBegin = stringBuffer.codePointCount(-1, 9);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test greater than length endIndex
@@ -688,7 +687,7 @@ TEST(JavaLangStringBuffer, CodePointCount) {
 		int expectEqualToLengthEnd = stringBuffer.codePointCount(1, stringBuffer.length() + 1);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test beginIndex greather than endIndex
@@ -696,7 +695,7 @@ TEST(JavaLangStringBuffer, CodePointCount) {
 		int expectBeginGreaterThanEnd = stringBuffer.codePointCount(10, 1);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -714,7 +713,7 @@ TEST(JavaLangStringBuffer, DeleteCharAt) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectDeleteCharResult, stringBuffer.getValue());
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test equal to length index
@@ -760,7 +759,7 @@ TEST(JavaLangStringBuffer, Delete) {
 		stringBuffer.deletes(-1, 9);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 		assertEquals(expectEndGreaterThanLengthResult, stringBuffer.getValue());
 	}
 	
@@ -769,7 +768,7 @@ TEST(JavaLangStringBuffer, Delete) {
 		stringBuffer.deletes(7, 10);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 		assertEquals(expectEndGreaterThanLengthResult, stringBuffer.getValue());
 	}
 	
@@ -779,7 +778,7 @@ TEST(JavaLangStringBuffer, Delete) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectEndGreaterThanLengthResult, stringBuffer.getValue());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -928,7 +927,7 @@ TEST(JavaLangStringBuffer, OffSetByCodePoint) {
 		int negativeIndexResult = stringBuffer.offsetByCodePoints(-1, 4);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test index > length()
@@ -936,7 +935,7 @@ TEST(JavaLangStringBuffer, OffSetByCodePoint) {
 		int greaterThanLengthIndexResult = stringBuffer.offsetByCodePoints(stringBuffer.length() + 1, 4);
 	}
 	catch (IndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -974,7 +973,7 @@ TEST(JavaLangStringBuffer, Replace) {
 		stringBuffer.replace(-1, 10, stringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("start must be positive", e.getMessage().toString());
+		assertEquals("start must be positive", e.getMessage());
 		assertEquals(expectNotChangeResult, stringBuffer.getValue());
 	}
 	
@@ -983,7 +982,7 @@ TEST(JavaLangStringBuffer, Replace) {
 		stringBuffer.replace(stringBuffer.length() + 1, 10, stringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 		assertEquals(expectNotChangeResult, stringBuffer.getValue());
 	}
 	
@@ -992,7 +991,7 @@ TEST(JavaLangStringBuffer, Replace) {
 		stringBuffer.replace(10, 1, stringToReplace);
 	}
 	catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 		assertEquals(expectNotChangeResult, stringBuffer.getValue());
 	}
 }
@@ -1029,7 +1028,7 @@ TEST(JavaLangStringBuffer, SetCharAt) {
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
-		assertEquals("index must be positive", e.getMessage().toString());
+		assertEquals("index must be positive", e.getMessage());
 	}
 	
 	// Test index greater than length
@@ -1038,7 +1037,7 @@ TEST(JavaLangStringBuffer, SetCharAt) {
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test index equal to length
@@ -1047,7 +1046,7 @@ TEST(JavaLangStringBuffer, SetCharAt) {
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
@@ -1070,7 +1069,7 @@ TEST(JavaLangStringBuffer, SetLength) {
 	}
 	catch (IndexOutOfBoundsException &e) {
 		assertEquals(expectSetCharAtResult, stringBuffer.getValue());
-		assertEquals("newLength must be positive", e.getMessage().toString());
+		assertEquals("newLength must be positive", e.getMessage());
 	}
 }
 
@@ -1089,7 +1088,7 @@ TEST(JavaLangStringBuffer, SubString) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectSubStringResult, result.toString());
-		assertEquals("start and end must be positive", e.getMessage().toString());
+		assertEquals("start and end must be positive", e.getMessage());
 	}
 	
 	// Test negative end
@@ -1098,7 +1097,7 @@ TEST(JavaLangStringBuffer, SubString) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectSubStringResult, result.toString());
-		assertEquals("start and end must be positive", e.getMessage().toString());
+		assertEquals("start and end must be positive", e.getMessage());
 	}
 	
 	// Test start greater than length
@@ -1107,7 +1106,7 @@ TEST(JavaLangStringBuffer, SubString) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectSubStringResult, result.toString());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test end greater than length
@@ -1116,7 +1115,7 @@ TEST(JavaLangStringBuffer, SubString) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectSubStringResult, result.toString());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test start greater than end
@@ -1125,7 +1124,7 @@ TEST(JavaLangStringBuffer, SubString) {
 	}
 	catch (StringIndexOutOfBoundsException &e) {
 		assertEquals(expectSubStringResult, result.toString());
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 	
 	// Test subString(start)
@@ -1150,7 +1149,7 @@ TEST(JavaLangStringBuffer, SubString) {
     }
     catch (IndexOutOfBoundsException &e) {
         assertEquals(expectSubStringResult, result->toString());
-        assertEquals("start and end must be positive", e.getMessage().toString());
+        assertEquals("start and end must be positive", e.getMessage());
     }
 
     // Test negative end
@@ -1159,7 +1158,7 @@ TEST(JavaLangStringBuffer, SubString) {
     }
     catch (IndexOutOfBoundsException &e) {
         assertEquals(expectSubStringResult, result->toString());
-        assertEquals("start and end must be positive", e.getMessage().toString());
+        assertEquals("start and end must be positive", e.getMessage());
     }
 
     // Test start greater than length
@@ -1168,7 +1167,7 @@ TEST(JavaLangStringBuffer, SubString) {
     }
     catch (IndexOutOfBoundsException &e) {
         assertEquals(expectSubStringResult, result->toString());
-        assertEquals("", e.getMessage().toString());
+        assertEquals("", e.getMessage());
     }
 
     // Test end greater than length
@@ -1177,7 +1176,7 @@ TEST(JavaLangStringBuffer, SubString) {
     }
     catch (IndexOutOfBoundsException &e) {
         assertEquals(expectSubStringResult, result->toString());
-        assertEquals("", e.getMessage().toString());
+        assertEquals("", e.getMessage());
     }
 
     // Test start greater than end
@@ -1186,7 +1185,7 @@ TEST(JavaLangStringBuffer, SubString) {
     }
     catch (IndexOutOfBoundsException &e) {
         assertEquals(expectSubStringResult, result->toString());
-        assertEquals("", e.getMessage().toString());
+        assertEquals("", e.getMessage());
     }
     String *charSequenceString = dynamic_cast<String *>(result);
     delete charSequenceString;

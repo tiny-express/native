@@ -32,31 +32,31 @@ using namespace Java::Lang;
 TEST (JavaLangStringIndexOutOfBoundsException, Constructor) {
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with null as its detail message.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithNullMessage;
-	assertEquals("", stringIndexOutOfBoundsExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", stringIndexOutOfBoundsExceptionWithNullMessage.getMessage());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessage = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message");
-	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessage.getMessage());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified detail message and cause.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithMessageAndCause = StringIndexOutOfBoundsException("StringIndexOutOfBoundsException with the specified message and cause", &stringIndexOutOfBoundsExceptionWithMessage);
-	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithMessageAndCause.getMessage().toString());
-	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithMessageAndCause.getMessage());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage());
 	
 	// Constructs a new StringIndexOutOfBoundsExceptionConstructor with the specified cause.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithCause = StringIndexOutOfBoundsException(&stringIndexOutOfBoundsExceptionWithMessageAndCause);
-	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithCause.getCause()->getMessage().toString());
-	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("StringIndexOutOfBoundsException with the specified message and cause", stringIndexOutOfBoundsExceptionWithCause.getCause()->getMessage());
+	assertEquals("StringIndexOutOfBoundsException with the specified message", stringIndexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage());
 	
 	// Constructs a new StringIndexOutOfBoundsException class with an argument indicating the illegal index.
 	StringIndexOutOfBoundsException stringIndexOutOfBoundsExceptionWithIllegalIndex = StringIndexOutOfBoundsException(999);
-	assertEquals("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage().toString());
+	assertEquals("String index out of range: 999", stringIndexOutOfBoundsExceptionWithIllegalIndex.getMessage());
 }
 
 TEST (JavaLangStringIndexOutOfBoundsException, TryCatch) {
 	try {
 		throw StringIndexOutOfBoundsException("Throw StringIndexOutOfBoundsException");
 	} catch (Exception e) {
-		assertEquals("Throw StringIndexOutOfBoundsException", e.getMessage().toString());
+		assertEquals("Throw StringIndexOutOfBoundsException", e.getMessage());
 	}
 }

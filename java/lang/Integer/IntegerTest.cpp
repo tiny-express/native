@@ -122,7 +122,7 @@ TEST (JavaLangInteger, Operator) {
 		actualResult = validNumberOperator / 0;
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 	
 	expectedResult = 1;
@@ -134,7 +134,7 @@ TEST (JavaLangInteger, Operator) {
 		actualResult /= 0;
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 	
 	// Make a modulo
@@ -146,7 +146,7 @@ TEST (JavaLangInteger, Operator) {
 		actualResult = validNumberOperator % 0;
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 	
 	expectedResult = 2;
@@ -158,7 +158,7 @@ TEST (JavaLangInteger, Operator) {
 		actualResult %= 0;
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 }
 
@@ -464,7 +464,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 	
 	// Cast all case of input a string of type decimal number
@@ -494,7 +494,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	stringInput = (String) "-2147483650";
@@ -502,7 +502,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	
@@ -511,7 +511,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	// Cast all case of input a string of type octal
@@ -541,7 +541,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	stringInput = (String) "-020000000002";
@@ -549,7 +549,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	// Cast all case of input a string of type hexadecimal number
@@ -589,7 +589,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	stringInput = (String) "-0x80000002";
@@ -597,7 +597,7 @@ TEST (JavaLangInteger, Decode) {
 		exceptionResult = Integer::decode(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 }
 
@@ -613,7 +613,7 @@ TEST (JavaLangInteger, DivideUnsigned) {
 		int exceptionResult = Integer::divideUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 	
 	// Positive divide
@@ -1094,28 +1094,28 @@ TEST (JavaLangInteger, ParseIntWithRadix) {
 		exceptionResult = Integer::parseInt((String) "2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "99999999999999999999", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	assertEquals(Integer::parseInt((String) "Kona", 27), 411787);
@@ -1124,21 +1124,21 @@ TEST (JavaLangInteger, ParseIntWithRadix) {
 		exceptionResult = Integer::parseInt((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 }
 
@@ -1153,7 +1153,7 @@ TEST (JavaLangInteger, ParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 	
 	// Cast all case of input a string of type decimal number
@@ -1182,7 +1182,7 @@ TEST (JavaLangInteger, ParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	// Test out of range
@@ -1191,7 +1191,7 @@ TEST (JavaLangInteger, ParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	stringInput = (String) "-21474834650";
@@ -1199,7 +1199,7 @@ TEST (JavaLangInteger, ParseInt) {
 		exceptionResult = Integer::parseInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 }
 
@@ -1213,14 +1213,14 @@ TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "-0", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "-FF", 16);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage());
 	}
 	
 	assertEquals(Integer::parseUnsignedInt((String) "1100110", 2), 102);
@@ -1230,21 +1230,21 @@ TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "-2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	assertEquals(Integer::parseUnsignedInt((String) "Kona", 27), 411787);
@@ -1253,21 +1253,21 @@ TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 	
 	// Test out of range
@@ -1275,14 +1275,14 @@ TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 		exceptionResult = Integer::parseUnsignedInt((String) "4294967297", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::parseUnsignedInt((String) "12345678901234567890123456789", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage());
 	}
 }
 
@@ -1308,7 +1308,7 @@ TEST (JavaLangInteger, ParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Illegal leading minus sign", e.getMessage().toString());
+		assertEquals("Illegal leading minus sign", e.getMessage());
 	}
 	
 	stringInput = (String) "13";
@@ -1321,7 +1321,7 @@ TEST (JavaLangInteger, ParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	// Test out of range
@@ -1330,7 +1330,7 @@ TEST (JavaLangInteger, ParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage());
 	}
 	
 	stringInput = (String) "12345678901234567890123456789";
@@ -1338,7 +1338,7 @@ TEST (JavaLangInteger, ParseUnsignedInt) {
 		exceptionResult = Integer::parseUnsignedInt(stringInput);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Unsigned integer out of range", e.getMessage().toString());
+		assertEquals("Unsigned integer out of range", e.getMessage());
 	}
 }
 
@@ -1354,7 +1354,7 @@ TEST (JavaLangInteger, RemainderUnsigned) {
 		int exceptionResult = Integer::remainderUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("Divide by zero", e.getMessage().toString());
+		assertEquals("Divide by zero", e.getMessage());
 	}
 	
 	// Positive divide
@@ -1495,7 +1495,7 @@ TEST (JavaLangInteger, ToStringWithRadix) {
 		String exceptionString = Integer::toString(100, 20);
 	}
 	catch (UnsupportedOperationException &e) {
-		assertEquals("Haven't support this radix yet", e.getMessage().toString());
+		assertEquals("Haven't support this radix yet", e.getMessage());
 	}
 }
 
@@ -1523,7 +1523,7 @@ TEST (JavaLangInteger, ToUnsignedString) {
 		String exceptionString = Integer::toUnsignedString(100, 20);
 	}
 	catch (UnsupportedOperationException &e) {
-		assertEquals("Haven't support this radix yet", e.getMessage().toString());
+		assertEquals("Haven't support this radix yet", e.getMessage());
 	}
 }
 
@@ -1543,14 +1543,14 @@ TEST (JavaLangInteger, ValueOfFromString) {
 		exceptionResult = Integer::parseInt((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "-FF");
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	// Test out of range
@@ -1558,14 +1558,14 @@ TEST (JavaLangInteger, ValueOfFromString) {
 		exceptionResult = Integer::valueOf((String) "21474836450");
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "-21474836458");
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 }
 
@@ -1592,21 +1592,21 @@ TEST (JavaLangInteger, ValueOfWithRadix) {
 		exceptionResult = Integer::valueOf((String) "2147483648", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Integer out of range", e.getMessage().toString());
+		assertEquals("Integer out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "99", 8);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "Kona", 10);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("Not a number", e.getMessage().toString());
+		assertEquals("Not a number", e.getMessage());
 	}
 	
 	assertEquals(411787, Integer::valueOf((String) "Kona", 27).intValue());
@@ -1615,20 +1615,20 @@ TEST (JavaLangInteger, ValueOfWithRadix) {
 		exceptionResult = Integer::valueOf((String) "Kona", 33);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "Kona", 1);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("radix out of range", e.getMessage().toString());
+		assertEquals("radix out of range", e.getMessage());
 	}
 	
 	try {
 		exceptionResult = Integer::valueOf((String) "", 2);
 	}
 	catch (NumberFormatException &e) {
-		assertEquals("input string is null", e.getMessage().toString());
+		assertEquals("input string is null", e.getMessage());
 	}
 }

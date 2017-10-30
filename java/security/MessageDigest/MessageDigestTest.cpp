@@ -46,7 +46,7 @@ TEST(JavaSecurity, Constructor) {
         try {
             MessageDigest md = MessageDigest::getInstance("MDx");
         } catch (NoSuchAlgorithmException e) {
-            result = e.getMessage().toString();
+            result = e.getMessage();
         }
 
         assertEquals(expect.toString(), result.toString());
@@ -191,7 +191,7 @@ TEST(JavaSecurity, Exception) {
         try {
             md5.update(nullptr, 0);
         } catch (InterruptedException e) {
-            result = e.getMessage().toString();
+            result = e.getMessage();
         }
 
         assertEquals(expect.toString(), result.toString());
@@ -205,7 +205,7 @@ TEST(JavaSecurity, Exception) {
         try {
             sha1.digest(nullptr, 1);
         } catch (InterruptedException e) {
-            result = e.getMessage().toString();
+            result = e.getMessage();
         }
 
         assertEquals(expect.toString(), result.toString());
@@ -220,7 +220,7 @@ TEST(JavaSecurity, Exception) {
             byte buf[1] = { 0 };
             sha1.digest(buf, sizeof(buf));
         } catch (InterruptedException e) {
-            result = e.getMessage().toString();
+            result = e.getMessage();
         }
 
         assertEquals(expect.toString(), result.toString());

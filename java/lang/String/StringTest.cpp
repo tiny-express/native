@@ -75,21 +75,21 @@ TEST (JavaLangString, Constructor) {
 		String exceptionConstructor(charArray, -1, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(charArray, 5, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(charArray, 10, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 15",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	// Given a byte Array
@@ -105,21 +105,21 @@ TEST (JavaLangString, Constructor) {
 		String exceptionConstructor(byteArray, -1, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(byteArray, 5, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(byteArray, 10, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 15",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 }
 
@@ -157,7 +157,7 @@ TEST (JavaLangString, CharAt) {
 		char negativePositionIsNotExist = text.charAt(-1);
 	} catch (StringIndexOutOfBoundsException &exception) {
 		assertEquals("String index out of range",
-		             exception.getMessage().toString());
+		             exception.getMessage());
 	}
 	
 	// Given a string - Return out of scope position is not exist
@@ -165,7 +165,7 @@ TEST (JavaLangString, CharAt) {
 		char outOfScopePositionIsNotExist = text.charAt(1000);
 	} catch (StringIndexOutOfBoundsException &exception) {
 		assertEquals("String index out of range",
-		             exception.getMessage().toString());
+		             exception.getMessage());
 	}
 }
 
@@ -257,21 +257,21 @@ TEST (JavaLangString, CopyValueOf) {
 		String exceptionString = String::copyValueOf(charArray, -1, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionString = String::copyValueOf(charArray, 5, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		String exceptionString = String::copyValueOf(charArray, 10, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 15",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 }
 
@@ -307,14 +307,14 @@ TEST (JavaLangString, GetStringFromIndex) {
 		result = aString.getStringFromIndex(-1);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		result = aString.getStringFromIndex(20);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 20",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 }
 
@@ -438,35 +438,35 @@ TEST (JavaLangString, GetChars) {
 		testString.getChars(-1, 16, charArray, 0);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		testString.getChars(10, 5, charArray, 0);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -5",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		testString.getChars(10, 50, charArray, 0);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 50",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		testString.getChars(10, 16, charArray, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: -1",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	try {
 		testString.getChars(10, 16, charArray, 29);
 	} catch (StringIndexOutOfBoundsException &e) {
 		assertEquals("String index out of range: 35",
-		             e.getMessage().toString());
+		             e.getMessage());
 	}
 	
 	testString.getChars(10, 16, charArray, 10);
@@ -985,7 +985,7 @@ TEST (JavaLangString, Format) {
 		try {
 			String result = String::format(format, shortObject);
 		} catch (InterruptedException &e) {
-			assertEquals("Missing arguments.", e.getMessage().toString());
+			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
 	
@@ -994,7 +994,7 @@ TEST (JavaLangString, Format) {
 		try {
 			String result = String::format(format);
 		} catch (InterruptedException &e) {
-			assertEquals("Missing arguments.", e.getMessage().toString());
+			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
 	

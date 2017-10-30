@@ -32,19 +32,19 @@ using namespace Java::Lang;
 TEST (JavaLangError, Constructor) {
 	// Constructs a new Error with null as its detail message.
 	Error errorWithNullMessage;
-	assertEquals("", errorWithNullMessage.getMessage().toString());
+	assertEquals("", errorWithNullMessage.getMessage());
 	
 	// Constructs a new Error with the specified detail message.
 	Error errorWithMessage = Error("Error with the specified message");
-	assertEquals("Error with the specified message", errorWithMessage.getMessage().toString());
+	assertEquals("Error with the specified message", errorWithMessage.getMessage());
 	
 	// Constructs a new Error with the specified detail message and cause.
 	Error errorWithMessageAndCause = Error("Error with the specified message and cause", &errorWithMessage);
-	assertEquals("Error with the specified message and cause", errorWithMessageAndCause.getMessage().toString());
-	assertEquals("Error with the specified message", errorWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("Error with the specified message and cause", errorWithMessageAndCause.getMessage());
+	assertEquals("Error with the specified message", errorWithMessageAndCause.getCause()->getMessage());
 	
 	// Constructs a new Error with the specified cause.
 	Error errorWithCause = Error(&errorWithMessageAndCause);
-	assertEquals("Error with the specified message and cause", errorWithCause.getCause()->getMessage().toString());
-	assertEquals("Error with the specified message", errorWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("Error with the specified message and cause", errorWithCause.getCause()->getMessage());
+	assertEquals("Error with the specified message", errorWithCause.getCause()->getCause()->getMessage());
 }
