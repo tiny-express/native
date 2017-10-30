@@ -164,18 +164,16 @@ TEST (JavaLangString, CharAt) {
 	
 	// Given a string - Return negative position is not exist
 	try {
-		char negativePositionIsNotExist = text.charAt(-1);
+		text.charAt(-1);
 	} catch (StringIndexOutOfBoundsException &exception) {
-		assertEquals("String index out of range",
-		             exception.getMessage());
+		assertEquals("String index out of range", exception.getMessage());
 	}
 	
 	// Given a string - Return out of scope position is not exist
 	try {
 		char outOfScopePositionIsNotExist = text.charAt(1000);
 	} catch (StringIndexOutOfBoundsException &exception) {
-		assertEquals("String index out of range",
-		             exception.getMessage());
+		assertEquals("String index out of range", exception.getMessage());
 	}
 }
 
