@@ -37,10 +37,10 @@ using namespace Java::Util;
 TEST (JavaLangString, Constructor) {
 	// Give NULL for String constructor
 	String nullString;
-	assertEquals("", nullString.toString().toCharPointer());
+	assertEquals("", nullString.toString());
 	
 	// Given value for String constructor and assign value - Return string
-	String simpleStringConstructor = (string) "Hello world";
+	String simpleStringConstructor = "Hello world";
 	assertEquals("Hello world", simpleStringConstructor.toString());
 	
 	// Given empty value for String constructor and assign value - Return string
@@ -74,22 +74,19 @@ TEST (JavaLangString, Constructor) {
 	try {
 		String exceptionConstructor(charArray, -1, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
+		assertEquals("String index out of range: -1", e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(charArray, 5, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
+		assertEquals("String index out of range: -1", e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(charArray, 10, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 15",
-		             e.getMessage());
+		assertEquals("String index out of range: 15", e.getMessage());
 	}
 	
 	// Given a byte Array
@@ -104,23 +101,36 @@ TEST (JavaLangString, Constructor) {
 	try {
 		String exceptionConstructor(byteArray, -1, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
+		assertEquals("String index out of range: -1", e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(byteArray, 5, -1);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
+		assertEquals("String index out of range: -1", e.getMessage());
 	}
 	
 	try {
 		String exceptionConstructor(byteArray, 10, 5);
 	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 15",
-		             e.getMessage());
+		assertEquals("String index out of range: 15", e.getMessage());
 	}
+
+	StringBuffer stringBuffer;
+	stringBuffer
+			.append((String) "string")
+			.append((String) "to")
+			.append((String) "test")
+			.append(1);
+	String stringFromBuffer = String(stringBuffer);
+	assertEquals("stringtotest1", stringFromBuffer);
+
+    StringBuilder stringBuilder;
+    stringBuilder.append((String) "test");
+	stringBuilder.append((String) "string");
+	stringBuilder.append((String) "builder");
+    String stringFromBuilder = String(stringBuilder);
+    assertEquals("teststringbuilder", stringFromBuilder);
 }
 
 TEST (JavaLangString, Destructor) {

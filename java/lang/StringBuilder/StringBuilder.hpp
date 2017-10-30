@@ -111,7 +111,7 @@ namespace Java {
 						 * @param target
 						 * @return StringBuilder
 						 */
-                        StringBuilder &append(const Boolean target);
+                        StringBuilder &append(Boolean target);
                         
                         /**
 						 * Appends the string representation of the boolean argument to the sequence.

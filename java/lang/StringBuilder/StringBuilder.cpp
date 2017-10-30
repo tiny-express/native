@@ -77,7 +77,7 @@ StringBuilder::~StringBuilder() {
 	free(original);
 }
 
-StringBuilder &StringBuilder::append(const Boolean target) {
+StringBuilder &StringBuilder::append(Boolean target) {
 	return this->append(target.toString());
 }
 
