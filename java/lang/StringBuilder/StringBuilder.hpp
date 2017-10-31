@@ -306,7 +306,8 @@ namespace Java {
 						 * @param codePoint
 						 * @return StringBuilder
 						 */
-                        StringBuilder &appendCodePoint(int codePoint);
+                        // TODO
+                        // StringBuilder &appendCodePoint(int codePoint);
                         
                         /**
 						 * Returns the current capacity.
@@ -424,7 +425,8 @@ namespace Java {
 						 *        srcEnd is greater than this.length();
 						 *        targetBegin+sourceEnd-sourceBegin is greater than target.length.
 						 */
-                        void getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const;
+                        // TODO: copyOfRange method for Array is not implemented.
+                        // void getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const;
                         
                         /**
 						 * Returns the index within this string of the first occurrence of the specified substring.
@@ -702,7 +704,8 @@ namespace Java {
 						 * or if codePointOffset is positive and the subsequence starting with index has fewer than codePointOffset code points,
 						 * or if codePointOffset is negative and the subsequence before index has fewer than the absolute value of codePointOffset code points.
 						 */
-                        int offsetByCodePoints(int index, int codePointOffset) const;
+                        // TODO: Waiting for Character::offsetByCodePoints
+                        // int offsetByCodePoints(int index, int codePointOffset) const;
                         
                         /**
 						 * Replaces the characters in a substring of this sequence with characters in the specified String.

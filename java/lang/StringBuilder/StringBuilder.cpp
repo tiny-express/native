@@ -213,9 +213,9 @@ StringBuilder &StringBuilder::append(long target) {
 	return this->append(Long(target));
 }
 
-StringBuilder &StringBuilder::appendCodePoint(int codePoint) {
+//StringBuilder &StringBuilder::appendCodePoint(int codePoint) {
 	// TODO
-}
+//}
 
 int StringBuilder::capacity() const {
 	return this->currentCapacity;
@@ -313,20 +313,20 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
 	this->currentCapacity = newCapacity;
 }
 
-void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const {
-	if (sourceBegin < 0) {
-		throw StringIndexOutOfBoundsException(sourceBegin);
-	}
-	if (sourceEnd < 0 || sourceEnd > this->currentLength) {
-		throw StringIndexOutOfBoundsException(sourceEnd);
-	}
-	if (sourceBegin > sourceEnd) {
-		throw StringIndexOutOfBoundsException("sourceBegin > sourceEnd");
-	}
-	
-	// TODO: copyOfRange method for Array is not implemented.
-	throw UnsupportedOperationException();
-}
+//void StringBuilder::getChars(int sourceBegin, int sourceEnd, Array<Character> &target, int targetBegin) const {
+//	if (sourceBegin < 0) {
+//		throw StringIndexOutOfBoundsException(sourceBegin);
+//	}
+//	if (sourceEnd < 0 || sourceEnd > this->currentLength) {
+//		throw StringIndexOutOfBoundsException(sourceEnd);
+//	}
+//	if (sourceBegin > sourceEnd) {
+//		throw StringIndexOutOfBoundsException("sourceBegin > sourceEnd");
+//	}
+//
+//	// TODO: copyOfRange method for Array is not implemented.
+//	throw UnsupportedOperationException();
+//}
 
 int StringBuilder::indexOf(const String target) const {
 	return this->stringMatches(this->toString(), target, 0);
@@ -535,13 +535,13 @@ int StringBuilder::length() const {
 	return this->currentLength;
 }
 
-int StringBuilder::offsetByCodePoints(int index, int codePointOffset) const {
-	if (index < 0 || index > this->currentLength) {
-		throw IndexOutOfBoundsException();
-	}
-	// TODO: Waiting for Character::offsetByCodePoints
-	throw UnsupportedOperationException();
-}
+//int StringBuilder::offsetByCodePoints(int index, int codePointOffset) const {
+//	if (index < 0 || index > this->currentLength) {
+//		throw IndexOutOfBoundsException();
+//	}
+//	// TODO: Waiting for Character::offsetByCodePoints
+//	throw UnsupportedOperationException();
+//}
 
 StringBuilder StringBuilder::replace(int start, int end, const String target) {
 	if (start < 0) {
