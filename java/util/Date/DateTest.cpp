@@ -33,7 +33,7 @@ using namespace Java::Util;
 
 TEST (JavaUtilDate, Constructor) {
     // Get the current local time
-    long long now = time(nullptr);
+    const time_t now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
 
@@ -413,7 +413,7 @@ TEST (JavaUtilDate, GetMinutes) {
     Date date;
 
     // Get the current local time
-    long long now = time(nullptr);
+    time_t now = time(nullptr);
     tm tempCurrentTime;
     tm *currentTime = localtime_r(&now, &tempCurrentTime);
     assertEquals(currentTime->tm_min, date.getMinutes());
@@ -610,7 +610,7 @@ TEST (JavaUtilDate, GetTimezoneOffset) {
     Date date;
     long int expectedResult;
 
-    long long now = time(nullptr);
+    time_t now = time(nullptr);
     tm tempLocalTimer = {0};
     tm *localTimer = localtime_r(&now, &tempLocalTimer);
     expectedResult = static_cast<int> (-localTimer->tm_gmtoff / 60);

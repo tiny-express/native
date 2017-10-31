@@ -304,7 +304,6 @@ namespace Java {
             HASH_CODE(float);
             HASH_CODE(int);
             HASH_CODE(long int);
-            HASH_CODE(long long);
 
             static long int hashCode(Array<boolean> array) {
                 if (array.length == 0) {
@@ -372,7 +371,7 @@ namespace Java {
             SORT_BY_ARRAY_SIZE(long long);
             SORT_BY_ARRAY_SIZE(long int);
             SORT_BY_INDEX_ARRAY_SIZE(long int);
-            SORT_BY_INDEX_ARRAY_SIZE(long int);
+            SORT_BY_INDEX_ARRAY_SIZE(long long);
 
             template<typename Type>
             static void sort(Type array[], long int arraySize) {

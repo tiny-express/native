@@ -125,7 +125,7 @@ TEST (JavaUtilBitSet, Clear) {
 
     // Clear a large range.
     // Set all bits set at index[0..1023] to 1.
-    bitSet.set(0, 1024);
+    bitSet.set(0, (long int) 1024);
     assertEquals(1024, bitSet.length());
     assertEquals(true, bitSet.get(0));
     assertEquals(true, bitSet.get(512));
@@ -518,7 +518,7 @@ TEST (JavaUtilBitSet, Set) {
     assertEquals(true, bitSet1.get(9));
 
     BitSet bitSet2;
-    bitSet2.set(0, 100);
+    bitSet2.set(0, (long int) 100);
     // index[0..100) => 100 bits set => logical length = 100.
     // maxIndex = 99.
     assertEquals(100, bitSet2.length());
@@ -535,21 +535,21 @@ TEST (JavaUtilBitSet, Set) {
 
     // fromIndex < 0
     try {
-        bitSet2.set(-1, 100);
+        bitSet2.set(-1, (long int) 100);
     } catch (IndexOutOfBoundsException &ex) {
         assertEquals("fromIndex < 0: -1", ex.getMessage());
     }
 
     // toIndex < 0
     try {
-        bitSet2.set(0, -1);
+        bitSet2.set(0, (long int) -1);
     } catch (IndexOutOfBoundsException &ex) {
         assertEquals("toIndex < 0: -1", ex.getMessage());
     }
 
     // fromIndex > toIndex
     try {
-        bitSet2.set(20, 10);
+        bitSet2.set(20, (long int) 10);
     } catch (IndexOutOfBoundsException &ex) {
         assertEquals("fromIndex: 20 > toIndex: 10", ex.getMessage());
     }

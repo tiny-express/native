@@ -36,16 +36,15 @@ TEST (JavaUtilPriorityQueue, Constructor) {
 
     PriorityQueue<Integer> initializerListConstructor{1, 2, 3, 4, 5};
     assertEquals(5, initializerListConstructor.size());
-    assertEquals(5, initializerListConstructor.peek());
+    assertEquals("5", initializerListConstructor.peek().toString());
 
     PriorityQueue<Integer> copyConstructor(initializerListConstructor);
     assertEquals(5, copyConstructor.size());
-    assertEquals(5, copyConstructor.peek());
+    assertEquals("5", copyConstructor.peek().toString());
 
     try {
         PriorityQueue<Integer> customCapacityConstructor(-1);
-    }
-    catch (InterruptedException &ex) {
+    } catch (InterruptedException &ex) {
         assertEquals("initialCapacity < 1", ex.getMessage());
     }
 }
@@ -53,10 +52,10 @@ TEST (JavaUtilPriorityQueue, Constructor) {
 TEST (JavaUtilPriorityQueue, Add) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals("5", priorityQueue.peek().toString());
     priorityQueue.add(10);
     assertEquals(6, priorityQueue.size());
-    assertEquals(10, priorityQueue.peek());
+    assertEquals("10", priorityQueue.peek().toString());
 }
 
 TEST (JavaUtilPriorityQueue, Clear) {
@@ -69,7 +68,7 @@ TEST (JavaUtilPriorityQueue, Clear) {
 TEST (JavaUtilPriorityQueue, Contains) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals("5", priorityQueue.peek().toString());
     assertTrue(priorityQueue.contains(1));
     assertFalse(priorityQueue.contains(7));
 }
@@ -77,52 +76,52 @@ TEST (JavaUtilPriorityQueue, Contains) {
 TEST (JavaUtilPriorityQueue, Offer) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals("5", priorityQueue.peek().toString());
     priorityQueue.offer(10);
     assertEquals(6, priorityQueue.size());
-    assertEquals(10, priorityQueue.peek());
+    assertEquals("10", priorityQueue.peek().toString());
 }
 
 TEST (JavaUtilPriorityQueue, Peek) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals("5", priorityQueue.peek().toString());
     assertEquals(5, priorityQueue.size());
     priorityQueue.add(10);
-    assertEquals(10, priorityQueue.peek());
+    assertEquals(10, priorityQueue.peek().toString());
     assertEquals(6, priorityQueue.size());
 
     PriorityQueue<Integer> integerPriorityQueue;
     assertEquals(0, integerPriorityQueue.size());
-    assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer (same as null).
+    assertTrue(Integer() == integerPriorityQueue.peek().toString()); // default value of Integer (same as null).
 }
 
 TEST (JavaUtilPriorityQueue, Poll) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.poll());
+    assertEquals("5", priorityQueue.poll().toString());
     assertEquals(4, priorityQueue.size());
     priorityQueue.add(10);
-    assertEquals(10, priorityQueue.poll());
+    assertEquals("10", priorityQueue.poll().toString());
     assertEquals(4, priorityQueue.size());
 
     PriorityQueue<Integer> integerPriorityQueue;
     assertEquals(0, integerPriorityQueue.size());
-    assertTrue(Integer() == integerPriorityQueue.peek()); // default value of Integer.
+    assertTrue(Integer() == integerPriorityQueue.peek().toString()); // default value of Integer.
 }
 
 TEST (JavaUtilPriorityQueue, Remove) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals(5, priorityQueue.peek().toString());
 
     assertTrue(priorityQueue.remove(5));
     assertEquals(4, priorityQueue.size());
-    assertEquals(4, priorityQueue.peek());
+    assertEquals(4, priorityQueue.peek().toString());
 
     assertFalse(priorityQueue.remove(10));
     assertEquals(4, priorityQueue.size());
-    assertEquals(4, priorityQueue.peek());
+    assertEquals(4, priorityQueue.peek().toString());
 }
 
 TEST (JavaUtilPriorityQueue, Size) {
@@ -135,13 +134,13 @@ TEST (JavaUtilPriorityQueue, Size) {
 TEST (JavaUtilPriorityQueue, ToArray) {
     PriorityQueue<Integer> priorityQueue{1, 2, 3, 4, 5};
     assertEquals(5, priorityQueue.size());
-    assertEquals(5, priorityQueue.peek());
+    assertEquals(5, priorityQueue.peek().toString());
     Array<Integer> arrayResult1 = priorityQueue.toArray();
     assertTrue(arrayResult1.length == priorityQueue.size());
 
     PriorityQueue<Integer> integerPriorityQueue{Integer(1), Integer(2)};
     assertEquals(2, integerPriorityQueue.size());
-    assertTrue(Integer(2) == integerPriorityQueue.peek());
+    assertTrue(Integer(2) == integerPriorityQueue.peek().toString());
 
     // if length of array is less than queue size.
     Array<Integer> integerArray2;

@@ -411,7 +411,7 @@ Character::~Character() {
 }
 
 long int Character::charCount(long int codePoint) {
-    if (codePolong int >= MIN_SUPPLEMENTARY_CODE_POINT) {
+    if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
         return 2;
     }
     return 1;

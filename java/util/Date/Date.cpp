@@ -181,7 +181,7 @@ String Date::toLocaleString() const {
 String Date::toGMTString() const {
     string pattern = (string) "%d %b %Y %T GMT";
 
-    long long utcTime = getUTCTime(this->timer);
+    const time_t utcTime = getUTCTime(this->timer);
     tm *utcTimer = localtime(&utcTime);
 
     return this->timeToString(pattern, utcTimer);
@@ -424,7 +424,7 @@ long long Date::parse(String inputString) {
 }
 
 long long Date::getOffsetFromUTC() {
-    long long currentTime;
+    time_t currentTime;
     struct tm *timeInfo;
 
     time(&currentTime);
@@ -549,7 +549,7 @@ String Date::timeToString(String pattern, tm *timeManagement) const {
 
 long long Date::getUTCTime(long long timer) {
     tm tempTimer = {0};
-    tm *utcTimer = gmtime_r(&timer, &tempTimer);
+    tm *utcTimer = gmtime_r((time_t*) timer, &tempTimer);
 
     return mktime(utcTimer);
 }

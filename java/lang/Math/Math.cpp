@@ -180,7 +180,7 @@ long int Math::getExponent(double value) {
     }
 
     double mantissas;
-    long int exponent;
+    int exponent;
     mantissas = std::frexp(value, &exponent);
     if (mantissas * 10 >= 1.0 && exponent - 1 < Double::MIN_EXPONENT) {
         return Double::MIN_EXPONENT - 1;
@@ -199,7 +199,7 @@ long int Math::getExponent(float value) {
     }
 
     double mantissas;
-    long int exponent;
+    int exponent;
     mantissas = std::frexp(value, &exponent);
     if ((mantissas * 10) >= 1.0 && (exponent - 1) < Float::MIN_EXPONENT) {
         return Float::MIN_EXPONENT - 1;

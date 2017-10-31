@@ -40,7 +40,7 @@ namespace Java {
                 public Object,
                 public Comparable<Date> {
         private:
-            long long timer;
+            time_t timer;
             tm *localTimer;
             string backUp = nullptr;
         private:

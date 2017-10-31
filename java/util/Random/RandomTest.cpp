@@ -109,8 +109,8 @@ TEST (JavaUtilRandom, NextLong) {
 
     // Test if every generated long long is in long long range
     //TODO change to Long::MAX_VALUE and Long::MIN_VALUE
-    longMax = 0x7fffffffffffffffL;
-    longMin = 0x8000000000000000L;
+    long long longMax = 0x7fffffffffffffffL;
+    long long longMin = 0x8000000000000000L;
     long int index;
     for (index = 0; index < 100; index++) {
         double generatedLong = random1.nextLong();

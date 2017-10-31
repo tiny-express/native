@@ -80,7 +80,7 @@ void BitSet::ensureCapacity(long int wordsRequired) {
         return;
     }
     // Allocate larger of doubled size or required size.
-    long int wordsRequested = Math::max((int) (2 * this->words.length), (int) wordsRequired);
+    long int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
     long int oldWordsArrayLength = (int) this->words.length;
     this->words = Arrays::copyOf(this->words, wordsRequested);
     this->sizeIsSticky = false;

@@ -481,8 +481,7 @@ long int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
     return originalString.lastIndexOf(stringToGetIndex);
 }
 
-int
-StringBufferUnSafe::lastIndexOf(String stringToGetIndex, long int fromIndex) const {
+long int StringBufferUnSafe::lastIndexOf(String stringToGetIndex, long int fromIndex) const {
     string reversedOriginal = stringReverse(this->original);
     string reversedString = stringReverse(stringToGetIndex.toCharPointer());
     String reversedOriginalString = reversedOriginal;
@@ -503,8 +502,7 @@ StringBufferUnSafe::lastIndexOf(String stringToGetIndex, long int fromIndex) con
     return result;
 }
 
-int
-StringBufferUnSafe::offsetByCodePoints(long int index, long int codePointOffset) const {
+long int StringBufferUnSafe::offsetByCodePoints(long int index, long int codePointOffset) const {
     if (index < 0 || index > this->currentLength) {
         throw IndexOutOfBoundsException();
     }
@@ -513,8 +511,7 @@ StringBufferUnSafe::offsetByCodePoints(long int index, long int codePointOffset)
     return 0;
 }
 
-StringBufferUnSafe &
-StringBufferUnSafe::replace(long int start, long int end, String stringToReplace) {
+StringBufferUnSafe &StringBufferUnSafe::replace(long int start, long int end, String stringToReplace) {
     if (start < 0) {
         throw StringIndexOutOfBoundsException("start must be positive");
     }
