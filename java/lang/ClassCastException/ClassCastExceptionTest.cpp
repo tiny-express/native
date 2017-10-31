@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,44 @@
  */
 
 #include "../../../kernel/Test.hpp"
-#include "../ClassCastException/ClassCastException.hpp"
+#include "ClassCastException.hpp"
 
 using namespace Java::Lang;
 
 TEST (JavaLangClassCastException, Constructor) {
-// Constructs a new ClassCastException with null as its detail message.
-	ClassCastException classCastExceptionWithNullMessage;
-	assertEquals("", classCastExceptionWithNullMessage.getMessage());
+    // Constructs a new ClassCastException with null as its detail message.
+    InterruptedException classCastExceptionWithNullMessage;
+    assertEquals("", classCastExceptionWithNullMessage.getMessage());
 
-// Constructs a new ClassCastException with the specified detail message.
-	ClassCastException classCastExceptionWithMessage = ClassCastException("ClassCastException with the specified message");
-	assertEquals("ClassCastException with the specified message", classCastExceptionWithMessage.getMessage());
+    // Constructs a new ClassCastException with the specified detail message.
+    InterruptedException classCastExceptionWithMessage = InterruptedException(
+            "ClassCastException with the specified message");
+    assertEquals("ClassCastException with the specified message",
+                 classCastExceptionWithMessage.getMessage());
+
+    // Constructs a new ClassCastException with the specified detail message and cause.
+    InterruptedException classCastExceptionWithMessageAndCause = InterruptedException(
+            "ClassCastException with the specified message and cause",
+            &classCastExceptionWithMessage);
+    assertEquals("ClassCastException with the specified message and cause",
+                 classCastExceptionWithMessageAndCause.getMessage());
+    assertEquals("ClassCastException with the specified message",
+                 classCastExceptionWithMessageAndCause.getCause()->getMessage());
+
+    // Constructs a new ClassCastException with the specified cause.
+    InterruptedException classCastExceptionWithCause = InterruptedException(
+            &classCastExceptionWithMessageAndCause);
+    assertEquals("ClassCastException with the specified message and cause",
+                 classCastExceptionWithCause.getCause()->getMessage());
+    assertEquals("ClassCastException with the specified message",
+                 classCastExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangClassCastException, TryCatch) {
-	try {
-		throw ClassCastException("Throw ClassCastException");
-	}
-	catch (ClassCastException ex) {
-		assertEquals("Throw ClassCastException", ex.getMessage());
-	}
+    try {
+        throw InterruptedException("Throw ClassCastException");
+    }
+    catch (InterruptedException e) {
+        assertEquals("Throw ClassCastException", e.getMessage());
+    }
 }

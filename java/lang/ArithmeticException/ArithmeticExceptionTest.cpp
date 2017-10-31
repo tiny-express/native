@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Food Tiny Project. All rights reserved.
+ * Copyright (c) 2016 Food Tiny Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,19 +30,39 @@
 using namespace Java::Lang;
 
 TEST (JavaLangArithmeticException, Constructor) {
-	// Constructs a new ArithmeticException with null as its detail message.
-	ArithmeticException arithmeticExceptionWithNullMessage;
-	assertEquals("", arithmeticExceptionWithNullMessage.getMessage());
-	
-	// Constructs a new ArithmeticException with the specified detail message.
-	ArithmeticException arithmeticExceptionWithMessage = ArithmeticException("ArithmeticException with the specified message");
-	assertEquals("ArithmeticException with the specified message", arithmeticExceptionWithMessage.getMessage());
+    // Constructs a new ArithmeticException with null as its detail message.
+    InterruptedException arithmeticExceptionWithNullMessage;
+    assertEquals("", arithmeticExceptionWithNullMessage.getMessage());
+
+    // Constructs a new ArithmeticException with the specified detail message.
+    InterruptedException arithmeticExceptionWithMessage = InterruptedException(
+            "ArithmeticException with the specified message");
+    assertEquals("ArithmeticException with the specified message",
+                 arithmeticExceptionWithMessage.getMessage());
+
+    // Constructs a new ArithmeticException with the specified detail message and cause.
+    InterruptedException arithmeticExceptionWithMessageAndCause = InterruptedException(
+            "ArithmeticException with the specified message and cause",
+            &arithmeticExceptionWithMessage);
+    assertEquals("ArithmeticException with the specified message and cause",
+                 arithmeticExceptionWithMessageAndCause.getMessage());
+    assertEquals("ArithmeticException with the specified message",
+                 arithmeticExceptionWithMessageAndCause.getCause()->getMessage());
+
+    // Constructs a new ArithmeticException with the specified cause.
+    InterruptedException arithmeticExceptionWithCause = InterruptedException(
+            &arithmeticExceptionWithMessageAndCause);
+    assertEquals("ArithmeticException with the specified message and cause",
+                 arithmeticExceptionWithCause.getCause()->getMessage());
+    assertEquals("ArithmeticException with the specified message",
+                 arithmeticExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangArithmeticException, TryCatch) {
-	try {
-		throw ArithmeticException("Throw ArithmeticException");
-	} catch (ArithmeticException &e) {
-		assertEquals("Throw ArithmeticException", e.getMessage());
-	}
+    try {
+        throw InterruptedException("Throw ArithmeticException");
+    }
+    catch (InterruptedException e) {
+        assertEquals("Throw ArithmeticException", e.getMessage());
+    }
 }
