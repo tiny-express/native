@@ -450,7 +450,7 @@ TEST (JavaLangLong, ToHexString) {
 
 TEST (JavaLangLong, StaticToString) {
     // Give valid string covert from static function toString of class Long - Should equal
-    longNumber = 999738373833883736;
+    long long longNumber = 999738373833883736;
     String expect = "999738373833883736";
     String result = Long::toString(longNumber);
     assertEquals(expect, result);

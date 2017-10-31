@@ -297,10 +297,10 @@ TEST (JavaLangByte, ParseByteWithRadix) {
 }
 
 TEST (JavaLangByte, ShortValue) {
-    // Given a short and a Bytes with the same value
+    // Given a int and a Bytes with the same value
     Bytes byteToGetValue = 5;
-    short expectResult = 5;
-    short actualResult = byteToGetValue.shortValue();
+    int expectResult = 5;
+    int actualResult = byteToGetValue.shortValue();
     assertEquals(expectResult, actualResult);
 }
 

@@ -271,7 +271,7 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const override;
+            int shortValue() const override;
 
             /**
              * Double value in Double

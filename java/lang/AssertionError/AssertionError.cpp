@@ -40,6 +40,9 @@ AssertionError::AssertionError(double doubleValue) : AssertionError(String::valu
 AssertionError::AssertionError(float floatValue) : AssertionError(String::valueOf(floatValue)) {
 }
 
+AssertionError::AssertionError(int floatValue) : AssertionError(String::valueOf(floatValue)) {
+}
+
 AssertionError::AssertionError(long long longValue) : AssertionError(String::valueOf(longValue)) {
 }
 

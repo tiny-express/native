@@ -121,7 +121,7 @@ TEST (JavaLangString, Constructor) {
             .append((String) "string")
             .append((String) "to")
             .append((String) "test")
-            .append(1);
+            .append((long int) 1);
     String stringFromBuffer = String(stringBuffer);
     assertEquals("stringtotest1", stringFromBuffer);
 
@@ -730,8 +730,8 @@ TEST (JavaLangString, ValueOf) {
     valueOfString = String::valueOf(givenObjectString);
     assertEquals(givenObjectString, valueOfString.toString());
 
-    // Value of short number
-    short givenShortNumber = 5;
+    // Value of int number
+    int givenShortNumber = 5;
     String valueOfShort = String::valueOf(givenShortNumber);
     assertEquals("5", valueOfShort.toString());
 
@@ -935,8 +935,8 @@ TEST (JavaLangString, CompareOperater) {
 }
 
 TEST (JavaLangString, Format) {
-    unsigned short ushortValue = 1;
-    short shortValue = -1;
+    unsigned int ushortValue = 1;
+    int shortValue = -1;
     long int intValue = -123;
     unsigned long int uintValue = 123;
     long long longValue = 123;

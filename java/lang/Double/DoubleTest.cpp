@@ -361,8 +361,8 @@ TEST (JavaLangDouble, CharValue) {
 TEST (JavaLangDouble, ShortValue) {
     // Create variable to test
     Double variableTestShortValue;
-    short expectedResultShortValue;
-    short actualResultShortValue;
+    int expectedResultShortValue;
+    int actualResultShortValue;
 
     // Test Double::POSITIVE_INFINITY
     variableTestShortValue = Double::POSITIVE_INFINITY;

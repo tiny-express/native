@@ -293,7 +293,7 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const;
+            int shortValue() const;
 
             /**
              * Returns the signum function of the specified long long value.

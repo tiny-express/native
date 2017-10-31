@@ -35,13 +35,13 @@ namespace Java {
     namespace Lang {
         class Short : public virtual Number {
         private:
-            short original;
+            int original;
             string originalString;
 
         public:
             Short();
 
-            Short(short original);
+            Short(int original);
 
             Short(const Short &target);
 
@@ -50,7 +50,7 @@ namespace Java {
         public:
             char charValue() const;
 
-            short shortValue() const;
+            int shortValue() const;
 
             long int intValue() const;
 

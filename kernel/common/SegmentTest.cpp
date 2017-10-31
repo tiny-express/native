@@ -32,7 +32,7 @@ TEST (KernelCommonSegment, PointerChar) {
 	long int from = 6;
 	long int to = 10;
 	char *result = segmentPointerChar(charArray, from, to);
-	assertEquals(5, (short) lengthPointerChar(result));
+	assertEquals(5, (int) lengthPointerChar(result));
 	assertEquals("World", result);
 	free(result);
 	
@@ -40,7 +40,7 @@ TEST (KernelCommonSegment, PointerChar) {
 	from = 6;
 	to = 6;
 	char *result2 = segmentPointerChar(charArray, from, to);
-	assertEquals(1, (short) lengthPointerChar(result2));
+	assertEquals(1, (int) lengthPointerChar(result2));
 	assertEquals("W", result2);
 	free(result2);
 	

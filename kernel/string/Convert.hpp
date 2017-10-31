@@ -91,8 +91,7 @@ inline TYPE stringTo##NAME(string target) {\
     return result;\
 }
 
-
-STR_FROM(Short, short, "%d");
+STR_FROM(Short, int, "%d");
 STR_FROM(Float, float, "%g");
 STR_TO(Short, short, "%hi");
 STR_TO(Float, float, "%g");

@@ -32,17 +32,17 @@
 using namespace Java::Lang;
 
 TEST (JavaLangMath, Abs) {
-    double double_value = -123;
-    assertEquals(123, Math::abs(double_value));
+    double doubleValue = -123;
+    assertEquals(123, Math::abs(doubleValue));
 
-    float float_value = -123.123f;
-    assertEquals(123.123f, Math::abs(float_value));
+    float floatValue = -123.123f;
+    assertEquals(123.123f, Math::abs(floatValue));
 
-    long int int_value = -123;
-    assertEquals(123, Math::abs(int_value));
+    long int intValue = -123;
+    assertEquals(123, Math::abs(intValue));
 
-    long_value = -1233453453;
-    assertEquals(1233453453, Math::abs(long_value));
+    long long longValue = -1233453453;
+    assertEquals(1233453453, Math::abs(longValue));
 }
 
 TEST (JavaLangMath, AddExactInt) {
@@ -56,9 +56,8 @@ TEST (JavaLangMath, AddExactInt) {
     // test if addExact throw ArithmeticException("integer overflow")
     long int c = Integer::MAX_VALUE;
     try {
-        long int overFlowResult = Math::addExact(c, b);
-    }
-    catch (ArithmeticException &e) {
+        Math::addExact(c, b);
+    } catch (ArithmeticException &e) {
         assertEquals("integer overflow", e.getMessage());
     }
 }
@@ -74,9 +73,8 @@ TEST (JavaLangMath, AddExactLong) {
     // test if addExact throw ArithmeticException("long long overflow")
     long long c = Long::MAX_VALUE;
     try {
-        long long overFlowResult = Math::addExact(c, b);
-    }
-    catch (ArithmeticException &e) {
+        Math::addExact(c, b);
+    } catch (ArithmeticException &e) {
         assertEquals("long long overflow", e.getMessage());
     }
 }
@@ -506,18 +504,16 @@ TEST (JavaLangMath, MultiplyExactLong) {
     // test if multiplyExact throw ArithmeticException("long long overflow")
     long long c = Long::MAX_VALUE;
     try {
-        long long overFlowResult = Math::multiplyExact(c, (long) 2);
-    }
-    catch (ArithmeticException &e) {
+        long long overFlowResult = Math::multiplyExact(c, 2);
+    } catch (ArithmeticException &e) {
         assertEquals("long long overflow", e.getMessage());
     }
 
     // Given an long long equal to Long::MIN_VALUE, multiply with -1
     // test if multiplyExact throw ArithmeticException("long long overflow")
     try {
-        long long overFlowResult = Math::multiplyExact(Long::MIN_VALUE, (long) -1);
-    }
-    catch (ArithmeticException &e) {
+        long long overFlowResult = Math::multiplyExact(Long::MIN_VALUE, -1);
+    } catch (ArithmeticException &e) {
         assertEquals("long long overflow", e.getMessage());
     }
 }
@@ -532,9 +528,8 @@ TEST (JavaLangMath, NegateExactInt) {
     // test if negateExact throw ArithmeticException("integer overflow")
     long int c = Integer::MIN_VALUE;
     try {
-        long int overFlowResult = Math::negateExact(c);
-    }
-    catch (ArithmeticException &e) {
+        Math::negateExact(c);
+    } catch (ArithmeticException &e) {
         assertEquals("integer overflow", e.getMessage());
     }
 }
@@ -550,8 +545,7 @@ TEST (JavaLangMath, NegateExactLong) {
     long long c = Long::MIN_VALUE;
     try {
         long long overFlowResult = Math::negateExact(c);
-    }
-    catch (ArithmeticException &e) {
+    } catch (ArithmeticException &e) {
         assertEquals("long long overflow", e.getMessage());
     }
 }
@@ -606,14 +600,14 @@ TEST (JavaLangMath, NextAfterDouble) {
     assertEquals(expectInfResult, Math::nextAfter(inf, direction));
 
     // Given a start value equal to -Double::MIN_VALUE
-    double startMinValue = -Double::MIN_VALUE;
-    double expectMinValueResult = -0.0;
-    assertEquals(expectMinValueResult, Math::nextAfter(startMinValue, -1.0));
+    double startMIN_VALUE = -Double::MIN_VALUE;
+    double expectMIN_VALUEResult = -0.0;
+    assertEquals(expectMIN_VALUEResult, Math::nextAfter(startMIN_VALUE, -1.0));
 
     // Given a start value equal to Double::MAX_VALUE
-    double startMaxValue = Double::MAX_VALUE;
-    double expectMaxValueResult = INFINITY;
-    assertEquals(expectMaxValueResult, Math::nextAfter(startMaxValue, INFINITY));
+    double startMAX_VALUE = Double::MAX_VALUE;
+    double expectMAX_VALUEResult = INFINITY;
+    assertEquals(expectMAX_VALUEResult, Math::nextAfter(startMAX_VALUE, INFINITY));
 
     // Given 2 value equal to two sign ZERO
     double positiveZero = 0.0;
@@ -643,14 +637,14 @@ TEST (JavaLangMath, NextAfterFloat) {
     assertEquals(expectInfResult, Math::nextAfter(inf, direction));
 
     // Given a start value equal to -Float::MIN_VALUE
-    float startMinValue = -Float::MIN_VALUE;
-    float expectMinValueResult = -0.0f;
-    assertEquals(expectMinValueResult, Math::nextAfter(startMinValue, -1));
+    float startMIN_VALUE = -Float::MIN_VALUE;
+    float expectMIN_VALUEResult = -0.0f;
+    assertEquals(expectMIN_VALUEResult, Math::nextAfter(startMIN_VALUE, -1));
 
     // Given a start value equal to Float::MAX_VALUE
-    float startMaxValue = Float::MAX_VALUE;
-    float expectMaxValueResult = INFINITY;
-    assertEquals(expectMaxValueResult, Math::nextAfter(startMaxValue, INFINITY));
+    float startMAX_VALUE = Float::MAX_VALUE;
+    float expectMAX_VALUEResult = INFINITY;
+    assertEquals(expectMAX_VALUEResult, Math::nextAfter(startMAX_VALUE, INFINITY));
 
     // Given 2 value equal to two sign ZERO
     float positiveZero = 0.0f;
@@ -1043,9 +1037,9 @@ TEST (JavaLangMath, ToDegree) {
 }
 
 TEST (JavaLangMath, Floor) {
-    double floor_value = 2.3;
+    double floorValue = 2.3;
     double expectResult = 2;
-    assertEquals(expectResult, Math::floor(floor_value));
+    assertEquals(expectResult, Math::floor(floorValue));
 
     // Given a double value equal to a mathematical integer
     double equalInt = 100;
@@ -1248,39 +1242,39 @@ TEST (JavaLangMath, FloorModLong) {
 
 TEST (JavaLangMath, Max) {
     // return;
-    double double_value_max_1 = 4;
-    double double_value_max_2 = 2;
-    assertEquals(4, Math::max(double_value_max_1, double_value_max_2));
+    double doubleValue_max_1 = 4;
+    double doubleValue_max_2 = 2;
+    assertEquals(4, Math::max(doubleValue_max_1, doubleValue_max_2));
 
-    float float_value_max_1 = 4.123f;
-    float float_value_max_2 = 2.312f;
-    assertEquals(4.123, Math::max(float_value_max_1, float_value_max_2));
+    float floatValue_max_1 = 4.123f;
+    float floatValue_max_2 = 2.312f;
+    assertEquals(4.123, Math::max(floatValue_max_1, floatValue_max_2));
 
-    long int int_value_max_1 = 4;
-    long int int_value_max_2 = 2;
-    assertEquals(4, Math::max(int_value_max_1, int_value_max_2));
+    long int intValue_max_1 = 4;
+    long int intValue_max_2 = 2;
+    assertEquals(4, Math::max(intValue_max_1, intValue_max_2));
 
-    long_value_max_1 = 4;
-    long_value_max_2 = 2;
-    assertEquals(4, Math::max(long_value_max_1, long_value_max_2));
+    long long longValueMax1 = 4;
+    long long longValueMax2 = 2;
+    assertEquals(4, Math::max(longValueMax1, longValueMax2));
 }
 
 TEST (JavaLangMath, Min) {
-    double double_value_min_1 = 4;
-    double double_value_min_2 = 2;
-    assertEquals(2, Math::min(double_value_min_1, double_value_min_2));
+    double doubleValueMin1 = 4;
+    double doubleValueMin2 = 2;
+    assertEquals(2, Math::min(doubleValueMin1, doubleValueMin2));
 
-    float float_value_min_1 = 4.123f;
-    float float_value_min_2 = 2.312f;
-    assertEquals(2.312, Math::min(float_value_min_1, float_value_min_2));
+    float floatValueMin1 = 4.123f;
+    float floatValueMin2 = 2.312f;
+    assertEquals(2.312, Math::min(floatValueMin1, floatValueMin2));
 
-    long_value_min_1 = 4;
-    long_value_min_2 = 2;
-    assertEquals(2, Math::min(long_value_min_1, long_value_min_2));
+    long long longValueMin1 = 4;
+    long long longValueMin2 = 2;
+    assertEquals(2, Math::min(longValueMin1, longValueMin2));
 
-    long int int_value_min_1 = 4;
-    long int int_value_min_2 = 2;
-    assertEquals(2, Math::min(int_value_min_1, int_value_min_2));
+    long int intValueMin1 = 4;
+    long int intValueMin2 = 2;
+    assertEquals(2, Math::min(intValueMin1, intValueMin2));
 }
 
 TEST (JavaLangMath, Pow) {
@@ -1290,11 +1284,11 @@ TEST (JavaLangMath, Pow) {
 }
 
 TEST (JavaLangMath, Round) {
-    double double_value_round = 1.23643435;
-    assertEquals(1, Math::round(double_value_round));
+    double doubleValueRound = 1.23643435;
+    assertEquals(1, Math::round(doubleValueRound));
 
-    float float_value_round = 1.23643435f;
-    assertEquals(1, Math::round(float_value_round));
+    float floatValueRound = 1.23643435f;
+    assertEquals(1, Math::round(floatValueRound));
 }
 
 TEST (JavaLangMath, Random) {
@@ -1484,14 +1478,14 @@ TEST (JavaLangMath, UlpDouble) {
     assertEquals(expectNegativeZeroResult, Math::ulp(negativeZero));
 
     // Given a Double::MAX_VALUE
-    double positiveDoubleMaxValue = Double::MAX_VALUE;
-    double expectPositiveDoubleMaxValueResult = Math::pow(2, 971);
-    assertEquals(expectPositiveDoubleMaxValueResult, Math::ulp(positiveDoubleMaxValue));
+    double positiveDoubleMAX_VALUE = Double::MAX_VALUE;
+    double expectPositiveDoubleMAX_VALUEResult = Math::pow(2, 971);
+    assertEquals(expectPositiveDoubleMAX_VALUEResult, Math::ulp(positiveDoubleMAX_VALUE));
 
     // Given a -Double::MAX_VALUE
-    double negativeDoubleMaxValue = Double::MAX_VALUE;
-    double expectNegativeDoubleMaxValueResult = Math::pow(2, 971);
-    assertEquals(expectNegativeDoubleMaxValueResult, Math::ulp(negativeDoubleMaxValue));
+    double negativeDoubleMAX_VALUE = Double::MAX_VALUE;
+    double expectNegativeDoubleMAX_VALUEResult = Math::pow(2, 971);
+    assertEquals(expectNegativeDoubleMAX_VALUEResult, Math::ulp(negativeDoubleMAX_VALUE));
 }
 
 TEST (JavaLangMath, UlpFloat) {
@@ -1526,9 +1520,9 @@ TEST (JavaLangMath, UlpFloat) {
 //    assertEquals(expectNegativeZeroResult, Math::ulp(negativeZero));
 
     // Given a Float::MAX_VALUE
-    float floatMaxValue = Float::MAX_VALUE;
-    float expectFloatMaxValueResult = (float) Math::pow(2, 104);
-    assertEquals(expectFloatMaxValueResult, Math::ulp(floatMaxValue));
+    float floatMAX_VALUE = Float::MAX_VALUE;
+    float expectFloatMAX_VALUEResult = (float) Math::pow(2, 104);
+    assertEquals(expectFloatMAX_VALUEResult, Math::ulp(floatMAX_VALUE));
 
     // Given a -Float::MAX_VALUE
     float negativeFloatMaxValue = Float::MAX_VALUE;

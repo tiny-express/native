@@ -933,12 +933,12 @@ namespace Java {
             static String valueOf(const_string constStringValue);
 
             /**
-             * Returns the String representation of the short argument.
+             * Returns the String representation of the int argument.
              *
              * @param shortValue
-             * @return a String representation of the short argument.
+             * @return a String representation of the int argument.
              */
-            static String valueOf(short shortValue);
+            static String valueOf(int shortValue);
 
             /**
              * Returns the String representation of the long int argument.
@@ -1248,13 +1248,13 @@ namespace Java {
                 return result;
             }
 
-            static String print(const String &format, short value);
+            static String print(const String &format, int value);
 
             static String print(const String &format, long int value);
 
             static String print(const String &format, long long value);
 
-            static String print(const String &format, unsigned short value);
+            static String print(const String &format, unsigned int value);
 
             static String print(const String &format, unsigned long int value);
 

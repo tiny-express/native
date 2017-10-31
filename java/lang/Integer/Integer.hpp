@@ -592,11 +592,11 @@ namespace Java {
 
             /**
              * Returns the value of this Integer as
-             * a short after a narrowing primitive conversion.
+             * a int after a narrowing primitive conversion.
              *
              * @return the value of this Integer as a short
              */
-            short shortValue() const override;
+            int shortValue() const override;
 
             /**
              * Returns the signum function of the specified long int value.

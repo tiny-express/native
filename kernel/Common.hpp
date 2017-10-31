@@ -53,7 +53,7 @@
 #define typename(x)  _Generic((x),                                            \
         _Bool: _BOOL,                  unsigned char: UNSIGNED_CHAR,          \
          char: CHAR,                     signed char: SIGNED_CHAR,            \
-    short int: SHORT_INT,         unsigned short int: UNSIGNED_SHORT_INT,     \
+    int int: SHORT_INT,         unsigned int int: UNSIGNED_SHORT_INT,     \
           int: INT,                     unsigned int: UNSIGNED_INT,           \
      int: LONG_INT,           unsigned int: UNSIGNED_LONG_INT,      \
 int: LONG_LONG_INT, unsigned int: UNSIGNED_LONG_LONG_INT, \

@@ -69,7 +69,7 @@ char Double::charValue() const {
     return charValueResult;
 }
 
-short Double::shortValue() const {
+int Double::shortValue() const {
     return static_cast<short> (this->original);
 }
 

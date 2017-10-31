@@ -319,8 +319,8 @@ TEST (JavaLangFloat, AssignmentOperator) {
 TEST (JavaLangFloat, ShortValue) {
 // Create variable to test
     Float variableTestShortValue;
-    short expectedResultShortValue;
-    short actualResultShortValue;
+    int expectedResultShortValue;
+    int actualResultShortValue;
 
     // Test Float::POSITIVE_INFINITY
     variableTestShortValue = Float::POSITIVE_INFINITY;

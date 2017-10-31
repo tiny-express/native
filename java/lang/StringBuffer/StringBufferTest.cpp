@@ -412,7 +412,7 @@ TEST (JavaLangStringBuffer, Insert) {
 
     // int
     int intToInsert = 13;
-    numberInsertStringBuffer.insert(2, intToInsert);
+    numberInsertStringBuffer.insert(2, (long int) intToInsert);
     String expectIntInsert = "1013100.00000090";
     assertEquals(expectIntInsert, numberInsertStringBuffer.getValue());
 

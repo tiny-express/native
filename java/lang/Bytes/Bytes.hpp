@@ -218,7 +218,7 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const override;
+            int shortValue() const override;
 
             /**
              * Returns a string representing this Byte's value

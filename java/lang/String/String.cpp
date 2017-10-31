@@ -423,7 +423,7 @@ String String::valueOf(string stringValue) {
     return stringValue;
 }
 
-String String::valueOf(short shortValue) {
+String String::valueOf(int shortValue) {
     string pointerHolder = stringFromShort(shortValue);
     String result = pointerHolder;
     free(pointerHolder);
@@ -598,7 +598,7 @@ Array<String> String::split(String regex, long int limit) const {
     return stringArrayLimit;
 }
 
-String String::print(const String &format, short value) {
+String String::print(const String &format, int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
@@ -628,7 +628,7 @@ String String::print(const String &format, long long value) {
     return result;
 }
 
-String String::print(const String &format, unsigned short value) {
+String String::print(const String &format, unsigned int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
     const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);

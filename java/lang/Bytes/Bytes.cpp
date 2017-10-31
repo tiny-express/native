@@ -123,8 +123,8 @@ byte Bytes::parseBytes(String stringToParse, long int radix) {
     return (byte) value;
 }
 
-short Bytes::shortValue() const {
-    return (short) this->original;
+int Bytes::shortValue() const {
+    return (int) this->original;
 }
 
 String Bytes::toString() const {

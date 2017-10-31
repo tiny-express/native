@@ -472,8 +472,8 @@ long long Long::rotateRight(long long i, long int distance) {
  *
  * @return short
  */
-short Long::shortValue() const {
-    return (short) this->original;
+int Long::shortValue() const {
+    return (int) this->original;
 }
 
 /**

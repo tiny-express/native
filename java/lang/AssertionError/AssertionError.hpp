@@ -43,6 +43,8 @@ namespace Java {
 
             AssertionError(float floatValue);
 
+            AssertionError(int longValue);
+
             AssertionError(long long longValue);
 
             AssertionError(long int intValue);

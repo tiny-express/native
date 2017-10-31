@@ -134,17 +134,30 @@ namespace Java {
             template<typename AnotherType, typename... Type>
             static List<AnotherType> asList(Type... array) {
                 //FIXME: Please implement ArrayList<Type>(array);
-            }BINARY_SEARCH_BY_INDEX(char);BINARY_SEARCH_BY_INDEX(byte);BINARY_SEARCH_BY_INDEX(
-                    short);BINARY_SEARCH_BY_INDEX(int);BINARY_SEARCH_BY_INDEX(long);BINARY_SEARCH_BY_INDEX(
-                    float);BINARY_SEARCH_BY_INDEX(double);
+            }
+
+            BINARY_SEARCH_BY_INDEX(char);
+            BINARY_SEARCH_BY_INDEX(byte);
+            BINARY_SEARCH_BY_INDEX(short);
+            BINARY_SEARCH_BY_INDEX(int);
+            BINARY_SEARCH_BY_INDEX(long int);
+            BINARY_SEARCH_BY_INDEX(long long);
+            BINARY_SEARCH_BY_INDEX(float);
+            BINARY_SEARCH_BY_INDEX(double);
 
             static long int binarySearchByIndex(Object *array,
                                            long int fromIndex,
                                            long int toIndex,
                                            Object key) {
                 return -1;
-            }BINARY_SEARCH_BY_KEY(char);BINARY_SEARCH_BY_KEY(byte);BINARY_SEARCH_BY_KEY(short);BINARY_SEARCH_BY_KEY(
-                    int);BINARY_SEARCH_BY_KEY(long);BINARY_SEARCH_BY_KEY(float);BINARY_SEARCH_BY_KEY(double);
+            }
+
+            BINARY_SEARCH_BY_KEY(char);
+            BINARY_SEARCH_BY_KEY(byte);
+            BINARY_SEARCH_BY_KEY(long int);
+            BINARY_SEARCH_BY_KEY(long long);
+            BINARY_SEARCH_BY_KEY(float);
+            BINARY_SEARCH_BY_KEY(double);
 
             static long int binarySearchByKey(Object *array,
                                          Object key,
@@ -180,7 +193,15 @@ namespace Java {
                                     long int toIndex,
                                     Type key) {
                 return BinarySearch(array, 0, toIndex, key);
-            }COPY_OF(boolean);COPY_OF(char);COPY_OF(short);COPY_OF(int);COPY_OF(long);COPY_OF(float);COPY_OF(double);
+            }
+
+            COPY_OF(boolean);
+            COPY_OF(char);
+            COPY_OF(int);
+            COPY_OF(long int);
+            COPY_OF(long long);
+            COPY_OF(float);
+            COPY_OF(double);
 
             template<typename Type>
             static Array<Type> copyOf(Array<Type> original,
@@ -199,8 +220,16 @@ namespace Java {
                 }
 
                 return result;
-            }COPY_OF_RANGE(boolean);COPY_OF_RANGE(byte);COPY_OF_RANGE(char);COPY_OF_RANGE(short);COPY_OF_RANGE(
-                    int);COPY_OF_RANGE(long);COPY_OF_RANGE(float);COPY_OF_RANGE(double);
+            }
+
+            COPY_OF_RANGE(boolean);
+            COPY_OF_RANGE(byte);
+            COPY_OF_RANGE(char);
+            COPY_OF_RANGE(int);
+            COPY_OF_RANGE(long int);
+            COPY_OF_RANGE(long long);
+            COPY_OF_RANGE(float);
+            COPY_OF_RANGE(double);
 
             template<typename Type>
             static Array<Type> copyOfRange(Array<Type> original,
@@ -256,10 +285,26 @@ namespace Java {
              */
             //static void fill(Array<boolean> *array, long int fromIndex, long int toIndex, boolean value) {}
 
-            FILL(byte);FILL(char);FILL(double);FILL(float);FILL(int);FILL(long);FILL(short);FILL_BY_INDEX(
-                    byte);FILL_BY_INDEX(char);FILL_BY_INDEX(double);FILL_BY_INDEX(float);FILL_BY_INDEX(
-                    int);FILL_BY_INDEX(long);FILL_BY_INDEX(short);HASH_CODE(byte);HASH_CODE(char);HASH_CODE(
-                    float);HASH_CODE(int);HASH_CODE(short);
+            FILL(byte);
+            FILL(char);
+            FILL(double);
+            FILL(float);
+            FILL(int);
+            FILL(long);
+
+            FILL_BY_INDEX(byte);
+            FILL_BY_INDEX(char);
+            FILL_BY_INDEX(double);
+            FILL_BY_INDEX(float);
+            FILL_BY_INDEX(long int);
+            FILL_BY_INDEX(long long);
+
+            HASH_CODE(byte);
+            HASH_CODE(char);
+            HASH_CODE(float);
+            HASH_CODE(int);
+            HASH_CODE(long int);
+            HASH_CODE(long long);
 
             static long int hashCode(Array<boolean> array) {
                 if (array.length == 0) {
@@ -287,7 +332,7 @@ namespace Java {
                 return result;
             }
 
-            static long int hashCode(Array<long> array) {
+            static long int hashCode(Array<long long> array) {
                 if (array.length == 0) {
                     return 0;
                 }
@@ -312,9 +357,22 @@ namespace Java {
                 }
 
                 return result;
-            }SORT(byte);SORT(char);SORT(double);SORT(float);SORT(int);SORT_BY_INDEX(byte);SORT_BY_INDEX(
-                    char);SORT_BY_INDEX(double);SORT_BY_INDEX(float);SORT_BY_INDEX(long);SORT_BY_ARRAY_SIZE(
-                    long);SORT_BY_ARRAY_SIZE(short);SORT_BY_INDEX_ARRAY_SIZE(int);SORT_BY_INDEX_ARRAY_SIZE(short);
+            }
+
+            SORT(byte);
+            SORT(char);
+            SORT(double);
+            SORT(float);
+            SORT(long int);
+            SORT_BY_INDEX(byte);
+            SORT_BY_INDEX(char);
+            SORT_BY_INDEX(double);
+            SORT_BY_INDEX(float);
+            SORT_BY_INDEX(long long);
+            SORT_BY_ARRAY_SIZE(long long);
+            SORT_BY_ARRAY_SIZE(long int);
+            SORT_BY_INDEX_ARRAY_SIZE(long int);
+            SORT_BY_INDEX_ARRAY_SIZE(long int);
 
             template<typename Type>
             static void sort(Type array[], long int arraySize) {

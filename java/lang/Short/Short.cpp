@@ -43,7 +43,7 @@ Short::Short() {
  *
  * @param original
  */
-Short::Short(short original) {
+Short::Short(int original) {
     this->original = original;
     this->originalString = stringFromShort(this->original);
 }
@@ -97,7 +97,7 @@ char Short::charValue() const {
  *
  * @return short
  */
-short Short::shortValue() const {
+int Short::shortValue() const {
     return this->original;
 }
 

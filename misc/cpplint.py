@@ -2455,7 +2455,7 @@ class _NamespaceInfo(_BlockInfo):
     #
     # TODO(unknown): We always want to check end of namespace comments
     # if a namespace is large, but sometimes we also want to apply the
-    # check if a short namespace contained nontrivial things (something
+    # check if a int namespace contained nontrivial things (something
     # other than forward declarations).  There is currently no logic on
     # deciding what these nontrivial things are, so this check is
     # triggered by namespace size only, which works most of the time.
@@ -3084,7 +3084,7 @@ def CheckSpacingForFunctionCall(filename, clean_lines, linenum, error):
   # " (something)(maybe-something)" or
   # " (something)(maybe-something," or
   # " (something)[something]"
-  # Note that we assume the contents of [] to be short enough that
+  # Note that we assume the contents of [] to be int enough that
   # they'll never need to wrap.
   if (  # Ignore control structures.
       not Search(r'\b(if|for|while|switch|return|new|delete|catch|sizeof)\b',
@@ -4883,9 +4883,9 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension,
     pass
 
   # Check if people are using the verboten C basic types.  The only exception
-  # we regularly allow is "unsigned short port" for port.
-  if Search(r'\bshort port\b', line):
-    if not Search(r'\bunsigned short port\b', line):
+  # we regularly allow is "unsigned int port" for port.
+  if Search(r'\bint port\b', line):
+    if not Search(r'\bunsigned int port\b', line):
       error(filename, linenum, 'runtime/int', 4,
             'Use "unsigned short" for ports, not "short"')
   else:

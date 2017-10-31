@@ -117,12 +117,11 @@ Array<byte> bytes = {};
 ```
 
 #### Data Types
-All data types are implemented and ready to use in C++ Application
+Java data types equivalent with range in Native Library
 - [x] char - Java.Lang.Character
-- [x] byte - Java.Lang.Byte
 - [x] string - Java.Lang.String
-- [x] unicode - java.lang.Character
-- [x] short - Java.Lang.Short
+- [x] byte - Java.Lang.Byte
+- [x] int - Java.Lang.Short
 - [x] long int - Java.Lang.Integer
 - [x] long long - Java.Lang.Long
 - [x] float - Java.Lang.Float

@@ -136,8 +136,8 @@ float Float::floatValue() const {
     return this->original;
 }
 
-short Float::shortValue() const {
-    return (short) this->original;
+int Float::shortValue() const {
+    return (int) this->original;
 }
 
 long int Float::intValue() const {

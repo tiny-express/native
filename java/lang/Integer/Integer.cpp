@@ -70,8 +70,8 @@ string Integer::stringValue() const {
     return this->originalString;
 }
 
-short Integer::shortValue() const {
-    return (short) this->original;
+int Integer::shortValue() const {
+    return (int) this->original;
 }
 
 long int Integer::intValue() const {

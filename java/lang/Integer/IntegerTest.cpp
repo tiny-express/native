@@ -259,8 +259,8 @@ TEST (JavaLangInteger, ShortValue) {
     Integer notExpectedIntegerShortValue = 9999;
 
     // Make a comparison between expected result and the real result
-    short expectedResultShortValue = 1302;
-    short realResultShortValue = positiveIntegerShortValue.shortValue();
+    int expectedResultShortValue = 1302;
+    int realResultShortValue = positiveIntegerShortValue.shortValue();
     assertEquals(expectedResultShortValue, realResultShortValue);
 
     // Make a comparison between expected result and the real result
@@ -269,7 +269,7 @@ TEST (JavaLangInteger, ShortValue) {
     assertEquals(expectedResultShortValue, realResultShortValue);
 
     // Make a comparison between expected result and the real result
-    short notExpectedResultShortValue = -1111;
+    int notExpectedResultShortValue = -1111;
     realResultShortValue = notExpectedIntegerShortValue.shortValue();
     assertNotEquals(notExpectedResultShortValue, realResultShortValue);
 }

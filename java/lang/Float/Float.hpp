@@ -309,7 +309,7 @@ namespace Java {
              *
              * @return short
              */
-            short shortValue() const override;
+            int shortValue() const override;
 
             /**
              * Float value in Float

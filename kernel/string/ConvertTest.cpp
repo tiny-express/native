@@ -51,7 +51,7 @@ TEST (KernelStringConvert, StringFromChar) {
 }
 
 TEST (KernelStringConvert, StringFromShort) {
-	// Input a positive short number to convert from short to string
+	// Input a positive int number to convert from int to string
 	long int number = 123;
 	
 	// The expected result
@@ -64,7 +64,7 @@ TEST (KernelStringConvert, StringFromShort) {
 	assertEquals(expect, result);
 	free(result);
 	
-	// Input a negative short number to convert from short to string
+	// Input a negative int number to convert from int to string
 	long int number2 = -123;
 	
 	// The expected result
@@ -196,21 +196,21 @@ TEST (KernelStringConvert, StringFromDouble) {
 
 TEST (KernelStringConvert, StringToShort) {
 	// Make a comparison between 0 and result of stringToShort(nullptr)
-	assertEquals(0, (short) stringToShort(nullptr));
+	assertEquals(0, (int) stringToShort(nullptr));
 	
-	// Input a positive value of type short to convert from short to string
+	// Input a positive value of type int to convert from int to string
 	auto input = (string) "123";
 	
 	// The result
-	short result = stringToShort(input);
+	int result = stringToShort(input);
 	
 	// Make a comparison between the input and the result
 	assertEquals(123, result);
 	
-	// Input a negative value of type short to convert from short to string
+	// Input a negative value of type int to convert from int to string
 	// Than make a comparison between the input and the result
 	auto input1 = (string) "-123";
-	short result1 = stringToShort(input1);
+	int result1 = stringToShort(input1);
 	assertEquals(-123, result1);
 }
 

@@ -165,7 +165,7 @@ namespace Java {
              * @param longValue
              * @return reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &append(longValue);
+            StringBufferUnSafe &append(long long longValue);
 
             /**
              * Appends the specified StringBuffer to this sequence.
@@ -431,7 +431,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBufferUnSafe
              */
-            StringBufferUnSafe &insert(long int offset, longValue);
+            StringBufferUnSafe &insert(long int offset, long long longValue);
 
             /**
              * Inserts the string representation of the Object argument into this character sequence.
@@ -771,7 +771,7 @@ namespace Java {
              * @param longValue
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(longValue);
+            StringBuffer &append(long long longValue);
 
             /**
              * Appends the specified StringBuffer to this sequence.
@@ -1023,7 +1023,7 @@ namespace Java {
              * @throw StringIndexOutOfBoundsException - if the offset is invalid.
              * @return a reference to this StringBuffer
              */
-            StringBuffer &insert(long int offset, longValue);
+            StringBuffer &insert(long int offset, long long longValue);
 
             /**
              * Inserts the string representation of the Object argument into this character sequence.

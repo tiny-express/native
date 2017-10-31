@@ -35,7 +35,7 @@ namespace Java {
     namespace Lang {
         class Number : public Object {
         protected:
-            virtual short shortValue() const = 0;
+            virtual int shortValue() const = 0;
 
             virtual long int intValue() const = 0;
 

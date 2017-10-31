@@ -106,13 +106,13 @@ TEST (JavaLangStringBuilder, Append) {
     assertEquals("0.8000000000000000.8000000000000000.7", stringBuilder3.toString());
     stringBuilder3.append(0.7f);
     assertEquals("0.8000000000000000.8000000000000000.70.7", stringBuilder3.toString());
-    stringBuilder3.append(Integer(10));
+    stringBuilder3.append((long int) 10);
     assertEquals("0.8000000000000000.8000000000000000.70.710", stringBuilder3.toString());
-    stringBuilder3.append(100);
+    stringBuilder3.append((long int) 100);
     assertEquals("0.8000000000000000.8000000000000000.70.710100", stringBuilder3.toString());
-    stringBuilder3.append(Long(1000l));
+    stringBuilder3.append((long int) 1000l);
     assertEquals("0.8000000000000000.8000000000000000.70.7101001000", stringBuilder3.toString());
-    stringBuilder3.append(1001);
+    stringBuilder3.append((long int) 1001);
     assertEquals("0.8000000000000000.8000000000000000.70.71010010001001", stringBuilder3.toString());
 
     // Boolean and boolean
@@ -367,7 +367,7 @@ TEST (JavaLangStringBuilder, Insert) {
     assertEquals("01000", stringBuilder3.toString());
     stringBuilder3.insert(1, Long(10l));
     assertEquals("0101000", stringBuilder3.toString());
-    stringBuilder3.insert(0, 10);
+    stringBuilder3.insert(0, (long int) 10);
     assertEquals("100101000", stringBuilder3.toString());
     stringBuilder3.insert(0, Integer(100));
     assertEquals("100100101000", stringBuilder3.toString());
