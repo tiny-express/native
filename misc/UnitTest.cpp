@@ -27,7 +27,7 @@
 #define TESTING
 #include "../kernel/Test.hpp"
 
-long int main(long int argc, const char *argv[]) {
-	long int result = ctest_main(argc, argv);
+int main(long int argc, const char *argv[]) {
+	int result = ctest_main(argc, argv);
 	return result;
 }

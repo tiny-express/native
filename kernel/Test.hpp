@@ -837,22 +837,6 @@ void assertEqualsUnsignedInt(uintmax_t expected,
                    long int line);
 
 /**
- * Asserts that two intmax_ts are not equal.
- *
- * @param expected
- * @param actual
- */
-void assertNotEqualsInt(intmax_t expected,
-                            intmax_t actual,
-                            const_string file,
-                            long int line) {
-    if ((expected) == (actual)) {
-        CTEST_ERR("%s:%d  should not be %" PRIdMAX,
-                  file, line, actual);
-    }
-}
-
-/**
  * Asserts that two unsigned intmax_ts are not equal.
  *
  * @param expected

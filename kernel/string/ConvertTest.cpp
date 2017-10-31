@@ -176,7 +176,7 @@ TEST (KernelStringConvert, StringFromDouble) {
 	double input = 125.569123;
 	
 	// The expected result
-	auto expect = (string) "125.569123000000005";
+	auto expect = (string) "125.569123";
 	
 	// The real result
 	char *result = stringFromDouble(input);
@@ -184,7 +184,7 @@ TEST (KernelStringConvert, StringFromDouble) {
 	// Make a comparison between the expected result and the real result
 	assertEquals(expect, result);
 	free(result);
-	
+
 	// Input a negative value of type double to convert from double to string
 	// Than make a comparison between the expected result and the real result
 	double input1 = -125.56123;

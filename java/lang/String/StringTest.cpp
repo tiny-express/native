@@ -1059,9 +1059,9 @@ TEST (JavaLangString, Format) {
         String result;
         unsigned long long ul = timestamp();
 
-        long int length = asprintf(&expected, "%lu", ul);
+        long int length = asprintf(&expected, "%llu", ul);
         assertTrue(length > 0);
-        result = String::format("%lu", ul);
+        result = String::format("%llu", ul);
         assertEquals(expected, result.toString());
         free(expected);
     }
