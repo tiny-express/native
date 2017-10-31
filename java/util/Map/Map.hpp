@@ -152,7 +152,7 @@ namespace Java {
 								 *
 								 * @return int
 								 */
-								int hashCode() {
+	long int hashCode() {
 									return 0;
 								}
 								
@@ -224,7 +224,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int size() {
+	long int size() {
 							return 0;
 						}
 				};

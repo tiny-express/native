@@ -53,12 +53,12 @@ namespace Java {
 								// Maximum number of characters of a single line.
 								// RFC2045: Each line of character SHOULD be no more than 78 characters.
 								//          (Excluding CRLF => 78 - 2 (of CRLF) = 76)
-								static const int mimeLineMax = 76;
+								static const long int mimeLineMax = 76;
 								static const Array<byte> crlf;
 						
 						private:
 								Array<byte> newLine;
-								int lineMax;
+	long int lineMax;
 								boolean isUrl;
 								boolean doPadding;
 						
@@ -86,7 +86,7 @@ namespace Java {
 								 * @param sourceLength
 								 * @return int
 								 */
-								int outLength(int sourceLength) const;
+	long int outLength(int sourceLength) const;
 								
 								/**
 								 * Encodes all bytes from offset (inclusive) to end (exclusive).
@@ -97,7 +97,7 @@ namespace Java {
 								 * @param destination
 								 * @return int
 								 */
-								int encoding(const Array<byte> &source, int offset, int end,
+	long int encoding(const Array<byte> &source, int offset, int end,
 									Array<byte> &destination) const;
 						
 						public:
@@ -139,7 +139,7 @@ namespace Java {
 								 * @throw IllegalArgumentException - if destination does not have enough space
 								 * for encoding all input bytes.
 								 */
-								int encode(const Array<byte> &source, Array<byte> &destination) const;
+	long int encode(const Array<byte> &source, Array<byte> &destination) const;
 								
 								/**
 								 * Encodes all remaining bytes from the specified byte buffer into
@@ -221,7 +221,7 @@ namespace Java {
 								 * @param end
 								 * @return int
 								 */
-								int outLength(const Array<byte> &source, int offset, int end) const;
+	long int outLength(const Array<byte> &source, int offset, int end) const;
 								
 								/**
 								 * Decodes all bytes from offset (inclusive) to end (exclusive).
@@ -232,7 +232,7 @@ namespace Java {
 								 * @param destination
 								 * @return int
 								 */
-								int decoding(const Array<byte> &source, int offset, int end,
+	long int decoding(const Array<byte> &source, int offset, int end,
 									Array<byte> &destination) const;
 						
 						public:
@@ -276,7 +276,7 @@ namespace Java {
 								 * @throw IllegalArgumentException - if source is not in valid Base64 scheme,
 								 * or destination does not have enough space for decoding all input bytes.
 								 */
-								int decode(const Array<byte> &source, Array<byte> &destination) const;
+	long int decode(const Array<byte> &source, Array<byte> &destination) const;
 								
 								/**
 								 * Decodes all bytes from the input byte buffer using the Base64 encoding scheme,

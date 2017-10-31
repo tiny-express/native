@@ -32,7 +32,7 @@ namespace Java {
 				template <typename T>
 				class Comparable {
 				public:
-						virtual int compareTo(const T &o) const = 0;
+						virtual long int compareTo(const T &o) const = 0;
 				};
 		}
 }

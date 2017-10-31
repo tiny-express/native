@@ -52,7 +52,7 @@ TEST(JavaUtilConcurrentSemaphore, Constructor) {
     }
 
     {
-        const int initPermits = 3;
+        const long int initPermits = 3;
         Semaphore semaphoreObject(initPermits);
         assertEquals(initPermits, semaphoreObject.availablePermits());
     }
@@ -68,14 +68,14 @@ TEST(JavaUtilConcurrentSemaphore, ToString) {
 }
 
 TEST(JavaUtilConcurrentSemaphore, Release) {
-    const int expectPermits = 2;
+    const long int expectPermits = 2;
     Semaphore semaphoreObject(1);
     semaphoreObject.release();
     assertEquals(semaphoreObject.availablePermits(), expectPermits);
 }
 
 TEST(JavaUtilConcurrentSemaphore, AcquireNotPassingPermits) {
-    const int expectPermits = 0;
+    const long int expectPermits = 0;
     Semaphore semaphoreObject;
     std::thread testThread(SemaphoreTestThread, 100, 1, &semaphoreObject);
     semaphoreObject.acquire();
@@ -87,8 +87,8 @@ TEST(JavaUtilConcurrentSemaphore, AcquireNotPassingPermits) {
 }
 
 TEST(JavaUtilConcurrentSemaphore, AcquirePassingPermits) {
-    const int expectPermits = 1;
-    const int threadCount = 3;
+    const long int expectPermits = 1;
+    const long int threadCount = 3;
     Semaphore semaphoreObject;
     std::vector<std::thread> testThreads(threadCount);
     for (auto& it : testThreads) {
@@ -108,7 +108,7 @@ TEST(JavaUtilConcurrentSemaphore, AcquirePassingPermits) {
 }
 
 TEST(JavaUtilConcurrentSemaphore, TryAcquireNotPassingPermits) {
-    const int expectPermits = 1;
+    const long int expectPermits = 1;
     Semaphore semaphoreObject;
     std::thread testThread(SemaphoreTestThread,
                            100, 1, &semaphoreObject);
@@ -123,7 +123,7 @@ TEST(JavaUtilConcurrentSemaphore, TryAcquireNotPassingPermits) {
 }
 
 TEST(JavaUtilConcurrentSemaphore, TryAcquirePassingPermitsWithTimeout) {
-    const int expectPermits = 0;
+    const long int expectPermits = 0;
     Semaphore semaphoreObject;
     std::thread testThread(SemaphoreTestThread2, 100, 2, &semaphoreObject);
 
@@ -139,7 +139,7 @@ TEST(JavaUtilConcurrentSemaphore, TryAcquirePassingPermitsWithTimeout) {
 }
 
 TEST(JavaUtilConcurrentSemaphore, TryAcquirePassingPermitsWithInitPermits) {
-    const int expectPermits = 1;
+    const long int expectPermits = 1;
     Semaphore semaphoreObject(2);
     semaphoreObject.tryAcquire();
     assertEquals(expectPermits, semaphoreObject.availablePermits());

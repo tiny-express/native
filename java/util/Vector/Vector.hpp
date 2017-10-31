@@ -126,7 +126,7 @@ namespace Java {
              * @return boolean
              */
             boolean add(const E &element) {
-                int oldSize = (int) this->original.size();
+                int oldSize = (long int) this->original.size();
                 this->ensureCapacity(oldSize + 1);
                 this->original.push_back(element);
                 return (oldSize != this->original.size());
@@ -139,7 +139,7 @@ namespace Java {
              * @param element
              */
             void add(int index, const E &element) {
-                int size = (int) this->original.size();
+                int size = (long int) this->original.size();
                 if (index < 0 || index > size) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -191,7 +191,7 @@ namespace Java {
              * @return int
              */
             int capacity() const {
-                return (int) this->original.capacity();
+                return (long int) this->original.capacity();
             }
 
             /**
@@ -369,7 +369,7 @@ namespace Java {
              * @return int
              */
             int indexOf(const E &element) const {
-                int currentSize = (int) this->original.size();
+                int currentSize = (long int) this->original.size();
                 register int index;
                 for (index = 0; index < currentSize; index++) {
                     if (element == this->original[index]) {
@@ -450,7 +450,7 @@ namespace Java {
              * @return int
              */
             int lastIndexOf(const E &element) const {
-                int maxIndex = (int) this->original.size() - 1;
+                int maxIndex = (long int) this->original.size() - 1;
                 return this->lastIndexOf(element, maxIndex);
             }
 
@@ -537,7 +537,7 @@ namespace Java {
              * @return boolean
              */
             boolean removeAll(const std::initializer_list<E> &list) {
-                int oldSize = (int) this->original.size();
+                int oldSize = (long int) this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin();
@@ -597,7 +597,7 @@ namespace Java {
              * @param toIndex
              */
             void removeRange(int fromIndex, int toIndex) {
-                int currentSize = (int) this->original.size();
+                int currentSize = (long int) this->original.size();
 
                 if (fromIndex < 0
                     || fromIndex >= currentSize
@@ -652,7 +652,7 @@ namespace Java {
              * @return boolean
              */
             boolean retainAll(const std::initializer_list<E> &list) {
-                int oldSize = (int) this->original.size();
+                int oldSize = (long int) this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin();
@@ -715,7 +715,7 @@ namespace Java {
              * @return int
              */
             int size() const {
-                return (int) this->original.size();
+                return (long int) this->original.size();
             }
 
             /**
@@ -771,7 +771,7 @@ namespace Java {
              */
             Array<E> toArray(const Array<E> &anArray) const {
                 int arrayLength = anArray.length;
-                int vectorLength = (int) this->original.size();
+                int vectorLength = (long int) this->original.size();
                 if (arrayLength < vectorLength) {
                     return toArray();
                 }
@@ -872,7 +872,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E &operator[](const int index) {
+            E &operator[](const long int index) {
                 if (index < 0 || index >= this->original.size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -880,7 +880,7 @@ namespace Java {
                 return *(vectorData + index);
             }
 
-            const E &operator[](const int index) const {
+            const E &operator[](const long int index) const {
                 if (index < 0 || index >= this->original.size()) {
                     throw std::invalid_argument("index is out of range");
                 }
@@ -915,7 +915,7 @@ namespace Java {
              */
             Vector<E> &operator=(const std::initializer_list<E> &list) {
                 this->clear();
-                this->ensureCapacity((int) list.size());
+                this->ensureCapacity((long int) list.size());
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin();
                      listIterator != list.end(); listIterator++) {

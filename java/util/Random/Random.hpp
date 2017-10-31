@@ -69,7 +69,7 @@ namespace Java {
 						}*/
 				
 				protected:
-						int next(int bits);
+	long int next(int bits);
 				
 				public:
 						Random();
@@ -118,9 +118,9 @@ namespace Java {
 						
 						double nextGaussian();
 						
-						int nextInt();
+	long int nextInt();
 						
-						int nextInt(int bound);
+	long int nextInt(int bound);
 						
 						long nextLong();
 						

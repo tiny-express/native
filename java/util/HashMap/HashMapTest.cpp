@@ -144,12 +144,12 @@ TEST (JavaUtilHashMap, ContainsValue) {
 
 TEST (JavaUtilHashMap, EntrySet) {
 	HashMap<String, String> hashMap;
-	int index = 1;
+	long int index = 1;
 	for (index; index <= 100; index++) {
 		hashMap.put("Key " + String::valueOf(index),
 		            "Value " + String::valueOf(index));
 	}
-	int counter = 0;
+	long int counter = 0;
 	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
 	// TODO - loint@foodtiny.com will improve entrySet
 	// then we can put it inside foreach without any performance issue

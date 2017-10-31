@@ -47,7 +47,7 @@ namespace Java {
                         int currentCapacity = 0;
                 
                 public:
-                        static const int defaultCapacity = 16;
+                        static const long int defaultCapacity = 16;
                 
                 public:
                         /**

@@ -48,8 +48,8 @@ TEST (JavaLangCharacter, Constructor) {
 TEST (JavaLangCharacter, CharCount) {
 	// Create variable to test Character::charCount(int codePoint).
 	Character variableTestCharCount;
-	int expectedResultCharCount;
-	int actualResultCharCount;
+	long int expectedResultCharCount;
+	long int actualResultCharCount;
 	
 	// Test LATIN CAPITAL LETTER A :  UTF-32 (hex)	0x00000041 (0041)
 	expectedResultCharCount = 1;
@@ -91,9 +91,9 @@ TEST (JavaLangCharacter, CharValue) {
 TEST (JavaLangCharacter, CodePointAt) {
 	// Create variable to test
 	Array<char> arrayCodePointAt;
-	int index;
-	int expectedResultCodePointAt;
-	int actualResultCodePointAt;
+	long int index;
+	long int expectedResultCodePointAt;
+	long int actualResultCodePointAt;
 	
 	// Assign value to arrayCodePointAt
 	arrayCodePointAt.push('a');
@@ -115,10 +115,10 @@ TEST (JavaLangCharacter, CodePointAt) {
 TEST (JavaLangCharacter, CodePointAt2) {
 	// Create variable to test
 	Array<char> arrayCodePointAt2;
-	int indexCodePointAt2;
-	int limitCodePointAt2;
-	int expectedResultCodePointAt2;
-	int actualResultCodePointAt2;
+	long int indexCodePointAt2;
+	long int limitCodePointAt2;
+	long int expectedResultCodePointAt2;
+	long int actualResultCodePointAt2;
 	
 	// Assign value to arrayCodePointAt2
 	arrayCodePointAt2.push('a');
@@ -171,9 +171,9 @@ TEST (JavaLangCharacter, CodePointAt2) {
 TEST (JavaLangCharacter, CodePointBefore) {
 	// Create variable to test
 	Array<char> arrayCodePointBefore;
-	int indexCodePointBefore;
-	int expectedResultCodePointBefore;
-	int actualResultCodePointBefore;
+	long int indexCodePointBefore;
+	long int expectedResultCodePointBefore;
+	long int actualResultCodePointBefore;
 	arrayCodePointBefore.push('a');
 	arrayCodePointBefore.push('b');
 	arrayCodePointBefore.push('c');
@@ -194,10 +194,10 @@ TEST (JavaLangCharacter, CodePointBefore) {
 TEST (JavaLangCharacter, CodePointBefore2) {
 	// Create variable to test
 	Array<char> arrayCodePointBefore2;
-	int indexCodePointBefore2;
-	int startCodePointBefore2;
-	int expectedResultCodePointBefore2;
-	int actualResultCodePointBefore2;
+	long int indexCodePointBefore2;
+	long int startCodePointBefore2;
+	long int expectedResultCodePointBefore2;
+	long int actualResultCodePointBefore2;
 	
 	// Assign value to a
 	arrayCodePointBefore2.push('a');
@@ -250,10 +250,10 @@ TEST (JavaLangCharacter, CodePointBefore2) {
 TEST (JavaLangCharacter, CodePointCount) {
 	// Create variable to test
 	Array<char> arrayCodePointCount;
-	int offsetCodePointCount;
-	int countCodePointCount;
-	int expectedResultCodePointCount;
-	int actualResultCodePointCount;
+	long int offsetCodePointCount;
+	long int countCodePointCount;
+	long int expectedResultCodePointCount;
+	long int actualResultCodePointCount;
 	
 	// Assign value to a
 	arrayCodePointCount.push('a');
@@ -307,8 +307,8 @@ TEST (JavaLangCharacter, Compare) {
 	// Create variable to test
 	char xCompare;
 	char yCompare;
-	int expectedResultCompare;
-	int actualResultCompare;
+	long int expectedResultCompare;
+	long int actualResultCompare;
 	
 	// Test valid case
 	xCompare = 'd';
@@ -336,8 +336,8 @@ TEST (JavaLangCharacter, CompareTo) {
 	// Create variable to test
 	Character variableTestCompareTo;
 	Character anotherCharacterCompareTo;
-	int expectedResultCompareTo;
-	int actualResultCompareTo;
+	long int expectedResultCompareTo;
+	long int actualResultCompareTo;
 	
 	// Test valid case
 	variableTestCompareTo = 'd';
@@ -364,8 +364,8 @@ TEST (JavaLangCharacter, CompareTo) {
 // TEST sample
 TEST (JavaLangCharacter, TestSample) {
 	// Create variable to test
-	int expectedResultTestSample;
-	int actualResultTestSample;
+	long int expectedResultTestSample;
+	long int actualResultTestSample;
 	
 	// Test valid case
 	
@@ -378,8 +378,8 @@ TEST (JavaLangCharacter, ToCodePoint) {
 	// Create variable to test
 	unicode variableTest1ToCodePoint;
 	unicode variableTest2ToCodePoint;
-	int expectedResultToCodePoint;
-	int actualResultToCodePoint;
+	long int expectedResultToCodePoint;
+	long int actualResultToCodePoint;
 	
 	// Test valid case
 	variableTest1ToCodePoint = (unicode) '\u000D800';
@@ -456,7 +456,7 @@ TEST (JavaLangCharacter, Digit) {
 	
 	char wrongValueDigit = 'q';
 	
-	int expectedResultDigit = 11;
+	long int expectedResultDigit = 11;
 	assertEquals(expectedResultDigit, Character::digit(hexValueDigit, 16));
 	
 	expectedResultDigit = 13;

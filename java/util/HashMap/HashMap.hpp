@@ -152,7 +152,7 @@ namespace Java {
              * Map.Entry hashCode() on each element (entry) in the
              * set, and adding up the results.
              *
-             * @return 	int the hash code value for this map
+             * @return 	long int the hash code value for this map
              */
             int hashCode();
 

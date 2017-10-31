@@ -78,7 +78,7 @@ String URL::getPath() {
 	return this->path;
 }
 
-int URL::getPort() {
+long int URL::getPort() {
 	return this->port;
 }
 
@@ -93,7 +93,7 @@ String URL::getQuery() {
 String URL::toString() const {
 	String protocol = this->protocol;
 	String host = this->host;
-	int port = this->port;
+	long int port = this->port;
 	String path = this->path;
 	String query = this->query;
 	

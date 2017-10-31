@@ -122,14 +122,14 @@ Random::Random(const Random &other) {
  * @param bits
  * @return the next pseudorandom value from this random number generator's sequence
  */
-int Random::next(int bits) {
+long int Random::next(int bits) {
 	long oldSeed = 0;
 	long nextSeed = 0;
 	do {
 		oldSeed = seed.load();
 		nextSeed = (( oldSeed * MULTIPLIER + ADDEND ) & MASK );
 	} while (!seed.compare_exchange_weak(oldSeed, nextSeed));
-	return (int) ( nextSeed >> ( 48 - bits ));
+	return (long int) ( nextSeed >> ( 48 - bits ));
 }
 
 /**
@@ -148,7 +148,7 @@ boolean Random::nextBoolean() {
  *
  * @return int
  */
-int Random::nextInt() {
+long int Random::nextInt() {
 	return next(32);
 }
 
@@ -160,16 +160,16 @@ int Random::nextInt() {
  * @return int
  * @throw IllegalArgumentException("bound must be positive");
  */
-int Random::nextInt(int bound) {
+long int Random::nextInt(int bound) {
 	if (bound <= 0) {
 		throw InterruptedException(BADBOUND);
 	}
 	
 	if (( bound & ( bound - 1 )) == 0) {
-		return (int) (( bound * (long) next(31)) >> 31 );
+		return (long int) (( bound * (long) next(31)) >> 31 );
 	}
 	
-	int bits, value;
+	long int bits, value;
 	do {
 		bits = next(31);
 		value = bits % bound;
@@ -184,10 +184,10 @@ int Random::nextInt(int bound) {
  * @param bytes
  */
 void Random::nextBytes(Array<byte> *bytes) {
-	int len = bytes->length;
-	int index = 0;
+	long int len = bytes->length;
+	long int index = 0;
 	for (index; index < len; index++) {
-		int randomNumber = nextInt();
+	long int randomNumber = nextInt();
 		//TODO change to BYTE::SIZE
 		randomNumber >>= 8;
 		bytes->push((byte) randomNumber);
@@ -264,8 +264,8 @@ void Random::setSeed(long seed) {
  */
 String Random::nextString(int length) {
 	char charArray[length];
-	int charListLength = 62;
-	int index;
+	long int charListLength = 62;
+	long int index;
 	for (index = 0; index < length; ++index) {
 		charArray[ index ] = CHAR_LIST[ nextInt(charListLength) ];
 	}

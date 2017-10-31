@@ -48,10 +48,10 @@ TEST(JavaLangStringBuilder, Constructor) {
 	}
 
 	String aString = "Hello! Welcome to VietNam!";
-	int aStringLength = aString.length();
+	long int aStringLength = aString.length();
 	StringBuilder nullTerminatedStringStringBuilder(aString);
 //	StringBuilder stringStringBuilder(aString);
-//	int newCapacity = StringBuilder::defaultCapacity + aStringLength;
+//	long int newCapacity = StringBuilder::defaultCapacity + aStringLength;
 //	assertEquals(aStringLength, nullTerminatedStringStringBuilder.length());
 //	assertEquals(newCapacity, nullTerminatedStringStringBuilder.capacity());
 //	assertEquals(aStringLength, stringStringBuilder.length());

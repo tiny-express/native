@@ -147,7 +147,7 @@ TEST (JavaUtilPriorityQueue, ToArray) {
 	// if length of array is larger than queue size.
 	Array<Integer> integerArray1 = { Integer(), Integer(), Integer(), Integer(4) };
 	assertEquals(4, integerArray1.length);
-	integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
+	long integerArray1 = integerPriorityQueue.toArray(integerArray1); // this array will be modified.
 	assertTrue(Integer() != integerArray1[ 0 ]);
 	assertTrue(Integer().intValue() == integerArray1[ 2 ].intValue()); // default Integer value (same as null).
 	

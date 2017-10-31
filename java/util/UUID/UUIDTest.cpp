@@ -55,7 +55,7 @@ TEST (JavaUtilUUID, Constructor) {
 TEST (JavaUtilUUID, ClockSequence) {
 	// Given valid uuid and expectedResult based on result of java code
 	UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
-	int expectedResult = 12862;
+	long int expectedResult = 12862;
 	
 	assertEquals(expectedResult, uuid.clockSequence());
 }

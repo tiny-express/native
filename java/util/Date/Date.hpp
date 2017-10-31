@@ -65,7 +65,7 @@ namespace Java {
 						 * @param   second     the seconds between 0-59.
 						 */
 						void initializeDate(int year, int month, int date,
-							int hour, int minute, int second);
+	long int hour, int minute, int second);
 						
 						/**
 						 * Allocates a Date object and initializes it
@@ -100,7 +100,7 @@ namespace Java {
 						 * @param indexStart
 						 * @return int
 						 */
-						static int getSequenceNumber(const String &inputString, int &indexStart);
+						static long int getSequenceNumber(const String &inputString, int &indexStart);
 						
 						/**
 						* Get current char sequence from processing String                                                                                                        From InputString
@@ -223,7 +223,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int compareTo(const Date &anotherDate) const;
+	long int compareTo(const Date &anotherDate) const;
 						
 						/**
 						 * Compares two dates for equality.
@@ -239,42 +239,42 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int getDate() const;
+	long int getDate() const;
 						
 						/**
 						 * Get day of week
 						 *
 						 * @return int
 						 */
-						int getDay() const;
+	long int getDay() const;
 						
 						/**
 						 * Get hour
 						 *
 						 * @return int
 						 */
-						int getHours() const;
+	long int getHours() const;
 						
 						/**
 						 * Get minute
 						 *
 						 * @return int
 						 */
-						int getMinutes() const;
+	long int getMinutes() const;
 						
 						/**
 						 * Get month
 						 *
 						 * @return int
 						 */
-						int getMonth() const;
+	long int getMonth() const;
 						
 						/**
 						 * Get second
 						 *
 						 * @return int
 						 */
-						int getSeconds() const;
+	long int getSeconds() const;
 						
 						/**
 						 * Returns the number of seconds since
@@ -290,21 +290,21 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int getTimezoneOffset() const;
+	long int getTimezoneOffset() const;
 						
 						/**
 						 * Get year
 						 *
 						 * @return int
 						 */
-						int getYear() const;
+	long int getYear() const;
 						
 						/**
 						 * Returns a hash code value for this object.
 						 *
 						 * @return long
 						 */
-						int hashCode() const override ;
+	long int hashCode() const override ;
 						
 						/**
 						 * Attempts to interpret the string s as a representation
@@ -408,7 +408,7 @@ namespace Java {
 						 * @return long
 						 */
 						static long UTC(int year, int month, int date,
-							int hour, int minute, int second);
+	long int hour, int minute, int second);
 						
 						/**
 						 * Assign operator

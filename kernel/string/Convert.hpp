@@ -39,7 +39,7 @@
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
         string convert;\
-        int length = asprintf(&convert, FORMAT, target);\
+        long int length = asprintf(&convert, FORMAT, target);\
 		if (length <= 0) {\
 			return (string) "";\
 		}\
@@ -103,7 +103,7 @@ inline char stringToChar(string target) {
  * @param target
  * @return string
  */
-inline int stringToInt(string target) {
+inline long int stringToInt(string target) {
 	if (target == nullptr) {
 		return 0;
 	}
@@ -152,7 +152,7 @@ inline boolean stringToBoolean(string target) {
  * @param target
  * @return string
  */
-inline string stringFromBoolean(int target) {
+inline string stringFromBoolean(long int target) {
 	if (!target) {
 		return stringCopy("false");
 	}
@@ -161,19 +161,7 @@ inline string stringFromBoolean(int target) {
 }
 
 inline string stringFromDouble(double target) {
-	int precision = 15;
-
-	// max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
-	string result = (string) calloc(1079, sizeof(char));
-
-	// Get string type of input number
-	if (target == 0.0f && target < 0) {
-		sprintf(result, "-%.*f", precision, target);
-	} else {
-		sprintf(result, "%.*f", precision, target);
-	}
-
-	return result;
+	return (string) std::to_string(target).c_str();
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP

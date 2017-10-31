@@ -125,7 +125,7 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						virtual int indexOf(E &element) = 0;
+						virtual long int indexOf(E &element) = 0;
 						
 						/**
 						 * Returns true if this list contains no elements.
@@ -145,7 +145,7 @@ namespace Java {
 						 * @param o
 						 * @return
 						 */
-						virtual int lastIndexOf(E &element) = 0;
+						virtual long int lastIndexOf(E &element) = 0;
 						
 						/**
 						 * Don't support this method
@@ -193,7 +193,7 @@ namespace Java {
 						 * Returns the number of elements in this list.
 						 * @return int
 						 */
-						virtual int size() = 0;
+						virtual long int size() = 0;
 						
 						/**
 						 * Don't support this method

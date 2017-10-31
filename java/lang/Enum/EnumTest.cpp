@@ -39,7 +39,7 @@ TEST (JavaLangEnum, GetName) {
 TEST (JavaLangEnum, GetOrdinal) {
 	// Given valid enum and name to test getOrdinal()
 	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
-	int expectedValue = 18;
+	long int expectedValue = 18;
 	assertEquals(expectedValue, validEnum.getOrdinal());
 }
 

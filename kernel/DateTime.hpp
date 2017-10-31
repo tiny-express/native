@@ -38,12 +38,12 @@
 #define IS_LEAP_YEAR(year)  ( (((year)%4 == 0) && ((year)%100 != 0)) || ((year)%400 == 0) )
 
 
-static int daysPerMonth[2][MOS_PER_YEAR] = {
+static long int daysPerMonth[2][MOS_PER_YEAR] = {
         {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
         {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 };
 
-static int daysPerYear[2] = {
+static long int daysPerYear[2] = {
         365, 366
 };
 
@@ -59,13 +59,13 @@ static int daysPerYear[2] = {
  * @return
  */
 unsigned long unixTimeInMilliseconds(
-        unsigned int millisecond,
-        unsigned int second,
-        unsigned int minute,
-        unsigned int hour,
-        unsigned int day,
-        unsigned int month,
-        unsigned int year
+        unsigned long int millisecond,
+        unsigned long int second,
+        unsigned long int minute,
+        unsigned long int hour,
+        unsigned long int day,
+        unsigned long int month,
+        unsigned long int year
 );
 
 /**

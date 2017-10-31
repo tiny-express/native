@@ -36,7 +36,7 @@ namespace Java {
 				class Number : public Object {
 				protected:
 						virtual short shortValue() const = 0;
-						virtual int intValue() const = 0;
+						virtual long int intValue() const = 0;
 						virtual long longValue() const = 0;
 						virtual float floatValue() const = 0;
 						virtual double doubleValue() const = 0;

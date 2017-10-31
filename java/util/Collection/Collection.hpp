@@ -88,7 +88,7 @@ namespace Java {
 						 * Make a hashcode through this virtual address on memory
 						 * @return int
 						 */
-						virtual int hashCode() = 0;
+						virtual long int hashCode() = 0;
 						
 						/**
 						 * A hash code value for this object.
@@ -133,7 +133,7 @@ namespace Java {
 						 * Return number of element inside this collection
 						 * @return
 						 */
-						virtual int size() = 0;
+						virtual long int size() = 0;
 						
 						/**
 						 * Don't support this method

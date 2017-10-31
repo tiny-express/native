@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-int Math::abs(int value) {
+long int Math::abs(int value) {
 	return value >= 0 ? value : -value;
 }
 
@@ -74,8 +74,8 @@ long Math::addExact(long valueA, long valueB) {
 	return result;
 }
 
-int Math::addExact(int valueA, int valueB) {
-	int result = valueA + valueB;
+long int Math::addExact(int valueA, int valueB) {
+	long int result = valueA + valueB;
 	if (((valueA ^ result) & (valueB ^ result)) < 0) {
 		throw ArithmeticException("integer overflow");
 	}
@@ -119,7 +119,7 @@ long Math::decrementExact(long value) {
 	return value - 1;
 }
 
-int Math::decrementExact(int value) {
+long int Math::decrementExact(int value) {
 	if (value == Integer::MIN_VALUE) {
 		throw ArithmeticException("integer overflow");
 	}
@@ -138,11 +138,11 @@ double Math::floor(double value) {
 	return ::floor(value);
 }
 
-int Math::floorDiv(int dividend, int divisor) {
+long int Math::floorDiv(int dividend, int divisor) {
 	if (divisor == 0) {
 		throw ArithmeticException();
 	}
-	int result = dividend / divisor;
+	long int result = dividend / divisor;
 	// if the signs are different and modulo not zero, round down
 	if ((dividend ^ divisor) < 0 && (result * divisor != dividend)) {
 		result--;
@@ -162,7 +162,7 @@ long Math::floorDiv(long dividend, long divisor) {
 	return result;
 }
 
-int Math::floorMod(int dividend, int divisor) {
+long int Math::floorMod(int dividend, int divisor) {
 	return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
@@ -170,7 +170,7 @@ long Math::floorMod(long dividend, long divisor) {
 	return dividend - (floorDiv(dividend, divisor) * divisor);
 }
 
-int Math::getExponent(double value) {
+long int Math::getExponent(double value) {
 	if (Double::isNaN(value) || value == -INFINITY || value == INFINITY) {
 		return Double::MAX_EXPONENT + 1;
 	}
@@ -180,7 +180,7 @@ int Math::getExponent(double value) {
 	}
 	
 	double mantissas;
-	int exponent;
+	long int exponent;
 	mantissas = std::frexp(value, &exponent);
 	if (mantissas * 10 >= 1.0 && exponent - 1 < Double::MIN_EXPONENT) {
 		return Double::MIN_EXPONENT - 1;
@@ -189,7 +189,7 @@ int Math::getExponent(double value) {
 	return exponent - 1;
 }
 
-int Math::getExponent(float value) {
+long int Math::getExponent(float value) {
 	if (Float::isNaN(value) || value == -INFINITY || value == INFINITY) {
 		return Float::MAX_EXPONENT + 1;
 	}
@@ -199,7 +199,7 @@ int Math::getExponent(float value) {
 	}
 	
 	double mantissas;
-	int exponent;
+	long int exponent;
 	mantissas = std::frexp(value, &exponent);
 	if ((mantissas * 10) >= 1.0 && (exponent - 1) < Float::MIN_EXPONENT) {
 		return Float::MIN_EXPONENT - 1;
@@ -224,7 +224,7 @@ double Math::IEEERemainder(double dividend, double divisor) {
 	return result;
 }
 
-int Math::incrementExact(int value) {
+long int Math::incrementExact(int value) {
 	if (value == Integer::MAX_VALUE) {
 		throw ArithmeticException("integer overflow");
 	}
@@ -256,7 +256,7 @@ double Math::log1p(double value) {
 	return ::log1p(value);
 }
 
-int Math::max(int valueA, int valueB) {
+long int Math::max(int valueA, int valueB) {
 	return valueA > valueB ? valueA : valueB;
 }
 
@@ -272,7 +272,7 @@ double Math::max(double valueA, double valueB) {
 	return valueA > valueB ? valueA : valueB;
 }
 
-int Math::min(int valueA, int valueB) {
+long int Math::min(int valueA, int valueB) {
 	return valueA < valueB ? valueA : valueB;
 }
 
@@ -288,12 +288,12 @@ double Math::min(double valueA, double valueB) {
 	return valueA < valueB ? valueA : valueB;
 }
 
-int Math::multiplyExact(int valueA, int valueB) {
+long int Math::multiplyExact(int valueA, int valueB) {
 	long result = (long) valueA * (long) valueB;
-	if (result -  (int) result > 0) {
+	if (result -  (long int) result > 0) {
 		throw ArithmeticException("integer overflow");
 	}
-	return (int) result;
+	return (long int) result;
 }
 
 long Math::multiplyExact(long valueA, long valueB) {
@@ -314,7 +314,7 @@ long Math::multiplyExact(long valueA, long valueB) {
 	return result;
 }
 
-int Math::negateExact(int intValue) {
+long int Math::negateExact(int intValue) {
 	if (intValue == Integer::MIN_VALUE) {
 		throw ArithmeticException("integer overflow");
 	}
@@ -408,8 +408,8 @@ double Math::rint(double value) {
 	return ::rint(value);
 }
 
-int Math::round(float value) {
-	return (int) ::roundf(value);
+long int Math::round(float value) {
+	return (long int) ::roundf(value);
 }
 
 long Math::round(double value) {
@@ -463,8 +463,8 @@ long Math::subtractExact(long valueA, long valueB) {
 	return result;
 }
 
-int Math::subtractExact(int valueA, int valueB) {
-	int result = valueA - valueB;
+long int Math::subtractExact(int valueA, int valueB) {
+	long int result = valueA - valueB;
 	if (((valueA ^ valueB) & (valueA ^ result)) < 0) {
 		throw ArithmeticException("integer overflow");
 	}
@@ -483,11 +483,11 @@ double Math::toDegrees(double angleRadian) {
 	return angleRadian * 180.0 / PI;
 }
 
-int Math::toIntExact(long value) {
-	if (value - (int) value > 0) {
+long int Math::toIntExact(long value) {
+	if (value - (long int) value > 0) {
 		throw ArithmeticException("integer overflow");
 	}
-	return (int) value;
+	return (long int) value;
 }
 
 double Math::toRadians(double angleDegree) {
@@ -499,7 +499,7 @@ float Math::ulp(float value) {
 	if (value == Float::MAX_VALUE || value == -Float::MAX_VALUE) {
 		return (float) Math::pow(2, 104);
 	}
-	int exp = getExponent(value);
+	long int exp = getExponent(value);
 	switch(exp) {
 		case Float::MAX_EXPONENT + 1:        // NaN or infinity
 			return Math::abs(value);
@@ -523,7 +523,7 @@ double Math::ulp(double value) {
 	if (value == Double::MAX_VALUE || value == -Double::MAX_VALUE) {
 		return Math::pow(2, 971);
 	}
-	int exp = getExponent(value);
+	long int exp = getExponent(value);
 	switch (exp) {
 		case Double::MAX_EXPONENT + 1:        // NaN or infinity
 			return Math::abs(value);

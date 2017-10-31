@@ -57,7 +57,7 @@ namespace Java {
             /**
              * The number of bits used to represent a byte value in two's complement binary form.
              */
-            static const int SIZE = 8;
+            static const long int SIZE = 8;
 
             /**
              * The number of bytes used to represent a byte value in two's complement binary form.
@@ -121,7 +121,7 @@ namespace Java {
              * @return the value 0 if byteA == byteB; a value less than 0 if byteA < byteB;
              * and a value greater than 0 if byteA > byteB
              */
-            static int compare(byte byteA, byte byteB);
+            static long int compare(byte byteA, byte byteB);
 
             /**
              * Compares two Byte objects numerically
@@ -178,7 +178,7 @@ namespace Java {
              * @param byteValue
              * @return int
              */
-            static int hashCode(byte byteValue);
+            static long int hashCode(byte byteValue);
 
             /**
              * Returns the value of this Byte as an int.
@@ -241,7 +241,7 @@ namespace Java {
              * @param byteValue
              * @return int
              */
-            static int toUnsignedInt(byte byteValue);
+            static long int toUnsignedInt(byte byteValue);
 
             /**
              * Converts the argument to an int by an unsigned conversion.

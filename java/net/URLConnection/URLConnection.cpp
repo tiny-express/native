@@ -81,7 +81,7 @@ void URLConnection::setReadTimeout(int timeout) {
 	this->readTimeout = timeout;
 }
 
-int URLConnection::getReadTimeout() {
+long int URLConnection::getReadTimeout() {
 	return this->readTimeout;
 }
 
@@ -97,7 +97,7 @@ void URLConnection::setConnectTimeout(int timeout) {
 	this->connectTimeout = timeout;
 }
 
-int URLConnection::getConnectTimeout() {
+long int URLConnection::getConnectTimeout() {
 	return this->connectTimeout;
 }
 

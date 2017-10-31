@@ -64,7 +64,7 @@ namespace Java {
 						virtual E removeLast() = 0;
 //            virtual boolean removeLastOccurrence(Object &o) = 0;
 						virtual boolean removeLastOccurrence(E &e) = 0;
-						virtual int size() = 0;
+						virtual long int size() = 0;
 				};
 		}
 }

@@ -46,9 +46,9 @@ TEST (JavaLangLong, Constructor) {
 TEST (JavaLangLong, BitCount) {
 	// Given valid long number to test bit count based on java source code and result
 	long validValue = 393459834753422L;
-	int result = Long::bitCount(validValue);
+	long int result = Long::bitCount(validValue);
 	
-	int expectedResult = 24;
+	long int expectedResult = 24;
 	assertEquals(expectedResult, result);
 	
 	validValue = 4547830931350L;
@@ -61,9 +61,9 @@ TEST (JavaLangLong, BitCount) {
 TEST (JavaLangLong, ByteValue) {
 	// Given valid long value to test byteValue() based on java source code result
 	Long validValue = 393239259234023474L;
-	int result = validValue.byteValue();
+	long int result = validValue.byteValue();
 	
-	int expectedResult = 50;
+	long int expectedResult = 50;
 	assertEquals(expectedResult, result);
 	
 	validValue = 200L;
@@ -80,8 +80,8 @@ TEST (JavaLangLong, Compare) {
 	long equalValue = 79473043431L;
 	long moreValue = 794730534312L;
 	
-	int result = Long::compare(validValue, lessValue);
-	int expectedResult = 1;
+	long int result = Long::compare(validValue, lessValue);
+	long int expectedResult = 1;
 	assertEquals(expectedResult, result);
 	
 	result = Long::compare(validValue, equalValue);
@@ -100,8 +100,8 @@ TEST (JavaLangLong, CompareTo) {
 	Long equalValue = 857503832954L;
 	Long moreValue = 857503832954222L;
 	
-	int result = validValue.compareTo(lessValue);
-	int expectedValue = 1;
+	long int result = validValue.compareTo(lessValue);
+	long int expectedValue = 1;
 	assertEquals(expectedValue, result);
 	
 	result = validValue.compareTo(equalValue);

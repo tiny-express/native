@@ -91,7 +91,7 @@ namespace Java {
 						 *
 						 * @return int - The clock sequence of this UUID
 						 */
-						int clockSequence();
+	long int clockSequence();
 						/**
 						 * Compares this UUID with the specified UUID.
 						 *
@@ -101,7 +101,7 @@ namespace Java {
 						 *  0 : if this object equal both of mostSigBits and leastSigBits
 						 *  1 : if this object more than target either mostSigBits or leastSigBits
 						 */
-						int compareTo(UUID target);
+	long int compareTo(UUID target);
 						
 						/**
 						 * Compares this object to the specified object.
@@ -132,7 +132,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int hashCode();
+	long int hashCode();
 						
 						/**
 						 * The node value associated with this UUID.
@@ -160,14 +160,14 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int variant();
+	long int variant();
 						
 						/**
 						 * The version number associated with this UUID.
 						 *
 						 * @return int
 						 */
-						int version();
+	long int version();
 						
 						/**
 						 * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.

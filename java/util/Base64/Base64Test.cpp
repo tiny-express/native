@@ -82,12 +82,12 @@ TEST (JavaUtilBase64, Encoder) {
 		           ex.getMessage());
 	}
 	Array<byte> outputByteArray(100);
-	int index;
+	long int index;
 	for (index = 0; index < outputByteArray.length; index++) {
 		// Filling with '*' character.
 		outputByteArray[ index ] = '*';
 	}
-	int realLength = basicEncoder.encode(stringInputToArrayOfByte, outputByteArray);
+	long int realLength = basicEncoder.encode(stringInputToArrayOfByte, outputByteArray);
 	Array<byte> expectedResultOfOutputByteArray =
 		{ 'V', '2', 'V', 's', 'Y', '2', '9', 't', 'Z', 'S',
 		  'B', '0', 'b', 'y', 'B', 'W', 'a', 'W', 'V', '0',
@@ -145,7 +145,7 @@ TEST (JavaUtilBase64, MimeEncoder) {
 		  'E', '=' };
 	Array<byte> resultFromMimeInput = mimeEncoder.encode(mimeInput);
 	
-	int maximumNumberOfCharacterOnALine = 76;  // Doesn't sum length of line separator.
+	long int maximumNumberOfCharacterOnALine = 76;  // Doesn't sum length of line separator.
 	Array<byte> lineSeparator = { '@', '#' };
 	Base64::Encoder mimeDecoderWithCustomNewLineSeparator =
 		Base64::getMimeEncoder(maximumNumberOfCharacterOnALine, lineSeparator);
@@ -217,12 +217,12 @@ TEST (JavaUtilBase64, Decoder) {
 		           e.getMessage());
 	}
 	Array<byte> outputArray(100);
-	int index;
+	long int index;
 	for (index = 0; index < outputArray.length; index++) {
 		// Filling with '*'.
 		outputArray[ index ] = '*';
 	}
-	int realLength = basicDecoder.decode(inputArray, outputArray);
+	long int realLength = basicDecoder.decode(inputArray, outputArray);
 	String expectedOutputAsString = "Welcome to Vietnam!";
 	Array<byte> expectedOutputArray =
 		{ 'W', 'e', 'l', 'c', 'o', 'm', 'e', ' ', 't', 'o',

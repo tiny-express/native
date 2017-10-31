@@ -60,7 +60,7 @@ namespace Java {
 						 * @throw EmptyStackException
 						 */
 						E peek() {
-							int len = this->size();
+	long int len = this->size();
 							if (len == 0) {
 								throw EmptyStackException();
 							}
@@ -74,7 +74,7 @@ namespace Java {
 						 * @throw EmptyStackException
 						 */
 						E pop() {
-							int len = this->size();
+	long int len = this->size();
 							E result = this->peek();
 							this->removeElementAt(len - 1);
 							return result;
@@ -97,8 +97,8 @@ namespace Java {
 						 * @param object
 						 * @return the 1-based position from the top, -1 if can not find the object in Stack
 						 */
-						int search(const E &object) {
-							int index = this->lastIndexOf(object);
+	long int search(const E &object) {
+	long int index = this->lastIndexOf(object);
 							if (index >= 0) {
 								return index;
 							}

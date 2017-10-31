@@ -74,7 +74,7 @@ namespace Java {
 						 * @param value
 						 * @return value if value is positive, else -value
 						 */
-						static int abs(int value);
+						static long int abs(int value);
 						
 						/**
 						 * Returns the absolute value of an float value
@@ -182,7 +182,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return the sum of valueA and valueB
 						 */
-						static int addExact(int valueA, int valueB);
+						static long int addExact(int valueA, int valueB);
 						
 						/**
 						 * Returns the cube root of a double value.
@@ -268,7 +268,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return value decremented by one
 						 */
-						static int decrementExact(int value);
+						static long int decrementExact(int value);
 						
 						/**
 						 * Returns Euler's number e raised to the power of a double value
@@ -315,7 +315,7 @@ namespace Java {
 						 * @return the largest (closest to positive infinity)
 						 * int value that is less than or equal to the algebraic quotient
 						 */
-						static int floorDiv(int dividend, int divisor);
+						static long int floorDiv(int dividend, int divisor);
 						
 						/**
 						 * Returns the largest (closest to positive infinity)
@@ -340,7 +340,7 @@ namespace Java {
 						 * and the % operator are the same.
 						 * If the signs of the arguments are different, the results differ from the % operator.
 						 */
-						static int floorMod(int dividend, int divisor);
+						static long int floorMod(int dividend, int divisor);
 						
 						/**
 						 * Returns the floor modulus of the long arguments.
@@ -363,7 +363,7 @@ namespace Java {
 						 * If the argument is NaN or infinite, then the result is Double::MAX_EXPONENT + 1.
 						 * If the argument is zero or subnormal, then the result is Double::MIN_EXPONENT -1.
 						 */
-						static int getExponent(double value);
+						static long int getExponent(double value);
 						
 						/**
 						 * Returns the unbiased exponent used in the representation of a float
@@ -373,7 +373,7 @@ namespace Java {
 						 * If the argument is NaN or infinite, then the result is Float::MAX_EXPONENT + 1.
 						 * If the argument is zero or subnormal, then the result is Float::MIN_EXPONENT -1.
 						 */
-						static int getExponent(float value);
+						static long int getExponent(float value);
 						
 						/**
 						 * Returns sqrt(valueA ^ 2 + valueB ^ 2) without intermediate overflow or underflow.
@@ -407,7 +407,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return value incremented by one
 						 */
-						static int incrementExact(int value);
+						static long int incrementExact(int value);
 						
 						/**
 						 * Returns the argument incremented by one,
@@ -461,7 +461,7 @@ namespace Java {
 						 * @param valueB
 						 * @return valueA if valueA > valueB; else valueB
 						 */
-						static int max(int valueA, int valueB);
+						static long int max(int valueA, int valueB);
 						
 						/**
 						 * Returns the greater of two float values.
@@ -497,7 +497,7 @@ namespace Java {
 						 * @param valueB
 						 * @return valueA if valueA < valueB; else valueB
 						 */
-						static int min(int valueA, int valueB);
+						static long int min(int valueA, int valueB);
 						
 						/**
 						 * Returns the greater of two float values.
@@ -535,7 +535,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return the product of valueA and valueB
 						 */
-						static int multiplyExact(int valueA, int valueB);
+						static long int multiplyExact(int valueA, int valueB);
 						
 						/**
 						* Returns the product of the arguments,
@@ -556,7 +556,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return the negation of intValue
 						 */
-						static int negateExact(int intValue);
+						static long int negateExact(int intValue);
 						
 						/**
 						 * Returns the negation of the argument,
@@ -689,7 +689,7 @@ namespace Java {
 						 * If the argument is positive infinity or any value greater than or equal
 						 * to the value of Integer.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
 						 */
-						static int round(float value);
+						static long int round(float value);
 						
 						/**
 						 * Returns the closest long to the argument.
@@ -805,7 +805,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return the difference of valueA and valueB
 						 */
-						static int subtractExact(int valueA, int valueB);
+						static long int subtractExact(int valueA, int valueB);
 						
 						/**
 						 * Returns the trigonometric tangent of an angle
@@ -849,7 +849,7 @@ namespace Java {
 						 * @throw ArithmeticException("integer overflow")
 						 * @return the value of the long argument
 						 */
-						static int toIntExact(long value);
+						static long int toIntExact(long value);
 						
 						/**
 						 * Converts an angle measured in degrees to an approximately equivalent angle measured in radians.

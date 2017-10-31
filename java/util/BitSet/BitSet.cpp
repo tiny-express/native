@@ -31,7 +31,7 @@
 
 using namespace Java::Util;
 
-int BitSet::wordIndex(int bitIndex) {
+long int BitSet::wordIndex(int bitIndex) {
     // indexOfWord = bitIndex / (2 ^ addressBitsPerWord)
     // (2 ^ addressBitsPerWord) is size of word.
     int indexOfWord = bitIndex >> ADDRESS_BITS_PER_WORD;
@@ -80,8 +80,8 @@ void BitSet::ensureCapacity(int wordsRequired) {
         return;
     }
     // Allocate larger of doubled size or required size.
-    int wordsRequested = Math::max((int) (2 * this->words.length), (int) wordsRequired);
-    int oldWordsArrayLength = (int) this->words.length;
+    int wordsRequested = Math::max((long int) (2 * this->words.length), (long int) wordsRequired);
+    int oldWordsArrayLength = (long int) this->words.length;
     this->words = Arrays::copyOf(this->words, wordsRequested);
     this->sizeIsSticky = false;
     // Set value of new word to 0.
@@ -231,7 +231,7 @@ void BitSet::andNot(const BitSet &set) {
     this->recalculateWordsInUse();
 }
 
-int BitSet::cardinality() const {
+long int BitSet::cardinality() const {
     int numberOfBitsSetToTrue = 0;
     int indexOfWords;
     for (indexOfWords = 0; indexOfWords < this->wordsInUse; indexOfWords++) {
@@ -427,7 +427,7 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
     return result;
 }
 
-int BitSet::hashCode() const {
+long int BitSet::hashCode() const {
     // BitSet hash code algorithm.
     long hash = 1234;
     for (int i = words.length; --i >= 0; )
@@ -450,7 +450,7 @@ boolean BitSet::isEmpty() const {
     return (this->wordsInUse == 0);
 }
 
-int BitSet::length() const {
+long int BitSet::length() const {
     if (this->wordsInUse == 0) {
         return 0;
     }
@@ -461,7 +461,7 @@ int BitSet::length() const {
     return logicalSize;
 }
 
-int BitSet::nextClearBit(int fromIndex) const {
+long int BitSet::nextClearBit(int fromIndex) const {
     if (fromIndex < 0) {
         throw IndexOutOfBoundsException("fromIndex < 0: " +
                                                 String::valueOf(fromIndex));
@@ -490,7 +490,7 @@ int BitSet::nextClearBit(int fromIndex) const {
     // while loop must return a value, so don't need to return anything after while loop.
 }
 
-int BitSet::nextSetBit(int fromIndex) const {
+long int BitSet::nextSetBit(int fromIndex) const {
     if (fromIndex < 0) {
         throw IndexOutOfBoundsException("fromIndex < 0: " +
                                                 String::valueOf(fromIndex));
@@ -519,7 +519,7 @@ int BitSet::nextSetBit(int fromIndex) const {
     // while loop must return a value, so don't need to return anything after while loop.
 }
 
-int BitSet::previousClearBit(int fromIndex) const {
+long int BitSet::previousClearBit(int fromIndex) const {
     if (fromIndex < 0) {
         if (fromIndex == -1) {
             return -1;
@@ -552,7 +552,7 @@ int BitSet::previousClearBit(int fromIndex) const {
     // while loop must return a value, so don't need to return anything after while loop.
 }
 
-int BitSet::previousSetBit(int fromIndex) const {
+long int BitSet::previousSetBit(int fromIndex) const {
     if (fromIndex < 0) {
         if (fromIndex == -1) {
             return -1;
@@ -643,8 +643,8 @@ void BitSet::set(int fromIndex, int toIndex, boolean value) {
     }
 }
 
-int BitSet::size() const {
-    return (int) this->words.length * BITS_PER_WORD;
+long int BitSet::size() const {
+    return (long int) this->words.length * BITS_PER_WORD;
 }
 
 Array<byte> BitSet::toByteArray() const {
@@ -654,7 +654,7 @@ Array<byte> BitSet::toByteArray() const {
         return Array<byte>();
     }
 
-    const int numberOfBytesPerWord = 8;
+    const long int numberOfBytesPerWord = 8;
 
     Array<byte> result;
     int indexOfWord;
@@ -736,7 +736,7 @@ String BitSet::toString() const {
 BitSet BitSet::valueOf(const Array<byte> &bytes) {
     // This is an alternative version, without supports from ByteBuffer data type.
 
-    const int bytesPerWord = 8;
+    const long int bytesPerWord = 8;
 
     int numberOfHeadingNoneZeroBytes = bytes.length;
     while (numberOfHeadingNoneZeroBytes > 0 &&

@@ -182,7 +182,7 @@ TEST (JavaLangString, CompareTo) {
 	String greaterString = "abcdef";
 	String equalToGreater = "abcdef";
 	
-	int compareResult = greaterString.compareTo(smallerString);
+	long int compareResult = greaterString.compareTo(smallerString);
 	assertTrue(compareResult > 0);
 	
 	compareResult = greaterString.compareTo(equalToGreater);
@@ -201,7 +201,7 @@ TEST (JavaLangString, CompareToIgnoreCase) {
 	String greaterString = "hello";
 	String greaterUpperCase = "HELLO";
 	
-	int compareResult = greaterString.compareToIgnoreCase(smallerString);
+	long int compareResult = greaterString.compareToIgnoreCase(smallerString);
 	assertTrue(compareResult > 0);
 	
 	compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
@@ -329,7 +329,7 @@ TEST (JavaLangString, GetStringFromIndex) {
 TEST (JavaLangString, IndexOf) {
 	String textPlus = "Hello Hello Hello ";
 	
-	int result = textPlus.indexOf('H');
+	long int result = textPlus.indexOf('H');
 	assertEquals(0, result);
 	
 	result = textPlus.indexOf('k');
@@ -376,7 +376,7 @@ TEST (JavaLangString, LastIndexOf) {
 	String subString = "awesome";
 	String wrongString = "some thing";
 	
-	int result = textPlus.lastIndexOf('H');
+	long int result = textPlus.lastIndexOf('H');
 	assertEquals(12, result);
 	
 	result = textPlus.lastIndexOf('a');
@@ -615,7 +615,7 @@ TEST (JavaLangString, Split) {
 	}
 	
 	Array<String> splitWithLimit1 = stringToSplit.split(" ", 3);
-	int index;
+	long int index;
 	for (index = 0; index < splitWithLimit1.length - 1; index++) {
 		assertEquals("Hello", splitWithLimit1[ index ].toString());
 	}
@@ -732,7 +732,7 @@ TEST (JavaLangString, ValueOf) {
 	assertEquals("5", valueOfShort.toString());
 	
 	// Value of integer number
-	int givenIntegerNumber = 34567;
+	long int givenIntegerNumber = 34567;
 	String valueOfInt = String::valueOf(givenIntegerNumber);
 	assertEquals("34567", valueOfInt.toString());
 	
@@ -761,7 +761,7 @@ TEST (JavaLangString, OperatorPlusStringObject) {
 	
 	// Concat a string with valueOf(number) - Return string
 	textPlus1 = "Hello ";
-	int aNumber = 1;
+	long int aNumber = 1;
 	textResult = textPlus1 + String::valueOf(aNumber);
 	assertEquals("Hello 1", textResult.toString());
 	
@@ -805,7 +805,7 @@ TEST (JavaLangString, OperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
 	String textCompare2 = "Hello";
-	int comparable = false;
+	long int comparable = false;
 	if (textCompare1 == textCompare2) {
 		comparable = true;
 	}
@@ -816,7 +816,7 @@ TEST (JavaLangString, OperatorNotEquals) {
 	// Given two Strings and compare not equal them - Return comparable
 	String textCompare1 = "Hello1";
 	String textCompare2 = "Hello2";
-	int comparable = false;
+	long int comparable = false;
 	if (textCompare1 != textCompare2) {
 		comparable = true;
 	}
@@ -851,7 +851,7 @@ TEST (JavaLangString, OperatorPlusEqualsString) {
 	assertEquals("Hello Galaxy!", stringTest.toString());
 	
 	// Check a String concat with valueOf(number) use "+=" operator
-	int number = 1;
+	long int number = 1;
 	stringTest = "Hello ";
 	stringTest += String::valueOf(number);
 	assertEquals("Hello 1", stringTest.toString());
@@ -868,8 +868,8 @@ TEST (JavaLangString, MemoryCheck) {
 	String stringTest = validString;
 	free(validString);
 	
-	int expect = 8;
-	int result = stringTest.length();
+	long int expect = 8;
+	long int result = stringTest.length();
 	assertEquals(expect, result);
 	
 	// Test copy String and change data of stringTest
@@ -925,7 +925,7 @@ TEST (JavaLangString, CompareOperater) {
 TEST (JavaLangString, Format) {
 	unsigned short ushortValue = 1;
 	short shortValue = -1;
-	int intValue = -123;
+	long int intValue = -123;
 	unsigned int uintValue = 123;
 	long longValue = 123;
 	unsigned long ulongValue = 123456;
@@ -981,7 +981,7 @@ TEST (JavaLangString, Format) {
 	}
 	
 	{
-		integerObject = 65;
+	long integerObject = 65;
 		String expect = "Characters: a A";
 		String format = "Characters: %c %c";
 		String result = String::format(format, 'a', integerObject);
@@ -1027,7 +1027,7 @@ TEST (JavaLangString, Format) {
 		                               body);
 		
 		string expected;
-		int length = asprintf(&expected,
+	long int length = asprintf(&expected,
 		                      REQUEST_TEMPLATE.toCharPointer(),
 		                      "POST",
 		                      "CASSANDRA",
@@ -1047,7 +1047,7 @@ TEST (JavaLangString, Format) {
 		String result;
 		unsigned long ul = timestamp();
 		
-		int length = asprintf(&expected, "%lu", ul);
+	long int length = asprintf(&expected, "%lu", ul);
 		assertTrue(length > 0);
 		result = String::format("%lu", ul);
 		assertEquals(expected, result.toString());

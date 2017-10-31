@@ -58,7 +58,7 @@ Base64::Encoder Base64::Encoder::RFC2045
 	= Base64::Encoder(false, crlf, mimeLineMax, true);
 
 Base64::Encoder::Encoder(boolean isUrl, const Array<byte> &newLine,
-	int lineMax, boolean doPadding) {
+	long int lineMax, boolean doPadding) {
 	this->isUrl = isUrl;
 	this->newLine = newLine;
 	this->lineMax = lineMax;
@@ -76,18 +76,18 @@ Base64::Encoder::~Encoder() {
 }
 
 Array<byte> Base64::Encoder::encode(const Array<byte> &source) const {
-	int length = this->outLength(source.length);
+	long int length = this->outLength(source.length);
 	Array<byte> destination(length);
-	int destinationLength = this->encoding(source, 0, source.length, destination);
+	long int destinationLength = this->encoding(source, 0, source.length, destination);
 	if (length != destinationLength) {
 		return Arrays::copyOf(destination, destinationLength);
 	}
 	return destination;
 }
 
-int Base64::Encoder::encode(const Array<byte> &source,
+long int Base64::Encoder::encode(const Array<byte> &source,
 	Array<byte> &destination) const {
-	int length = this->outLength(source.length);
+	long int length = this->outLength(source.length);
 	if (destination.length < length) {
 		throw InterruptedException(
 			"Output byte array is too small for encoding all input bytes");
@@ -107,13 +107,13 @@ Base64::Encoder Base64::Encoder::withoutPadding() const {
 	return Encoder(this->isUrl, this->newLine, this->lineMax, false);
 }
 
-int Base64::Encoder::outLength(int sourceLength) const {
-	int length = 0;
+long int Base64::Encoder::outLength(int sourceLength) const {
+	long int length = 0;
 	
 	if (this->doPadding) {
 		length = 4 * (( sourceLength + 2 ) / 3 );
 	} else {
-		int numberOfBytesLeftOver = sourceLength % 3;
+	long int numberOfBytesLeftOver = sourceLength % 3;
 		if (numberOfBytesLeftOver == 0) {
 			length = 4 * ( sourceLength / 3 );
 		} else {
@@ -128,7 +128,7 @@ int Base64::Encoder::outLength(int sourceLength) const {
 	return length;
 }
 
-int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
+long int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
 	Array<byte> &destination) const {
 	Array<char> base64IndexTable;
 	if (this->isUrl) {
@@ -137,25 +137,25 @@ int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
 		base64IndexTable = toBase64;
 	}
 	
-	int sourcePosition = offset;
+	long int sourcePosition = offset;
 	// Because each 3 bytes (24 bits) per block will be processed at a time.
 	// If there are only 1 or 2 bytes in a block (at the end), they will be processed later.
-	int sourceLength = ( end - offset ) / 3 * 3;
-	int sourceStopPosition = offset + sourceLength;
-	int destinationPosition = 0;
+	long int sourceLength = ( end - offset ) / 3 * 3;
+	long int sourceStopPosition = offset + sourceLength;
+	long int destinationPosition = 0;
 	
 	// Change lineMax (number of base64 digit per line) to equivalent length of source.
 	// 4 Base64 digits present for 3 bytes of data.
-	int base64LineMaxToEquivalentSourceLength = this->lineMax / 4 * 3;
+	long int base64LineMaxToEquivalentSourceLength = this->lineMax / 4 * 3;
 	// Length of source will be encoded into ONE line of base64 "string" (depending on Base64 scheme).
-	int chunksOfSourceLength = sourceLength;  // Doesn't have linemax condition.
+	long int chunksOfSourceLength = sourceLength;  // Doesn't have linemax condition.
 	if (this->lineMax > 0 && sourceLength > base64LineMaxToEquivalentSourceLength) {
 		chunksOfSourceLength = base64LineMaxToEquivalentSourceLength;
 	}
 	
-	int chunksOfSourceWillBeEncodedPausePosition;
-	int chunksOfSourceWillBeEncodedPosition;
-	int chunksOfDestinationPosition;
+	long int chunksOfSourceWillBeEncodedPausePosition;
+	long int chunksOfSourceWillBeEncodedPosition;
+	long int chunksOfDestinationPosition;
 	unsigned int group24Bits;
 	while (sourcePosition < sourceStopPosition) {
 		chunksOfSourceWillBeEncodedPausePosition =
@@ -180,7 +180,7 @@ int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
 				static_cast<byte>(base64IndexTable[ group24Bits & 0x3f ]);
 			
 			// 4:3 is the ratio of output bytes to input bytes.
-			int encodedLength =
+	long int encodedLength =
 				( chunksOfSourceWillBeEncodedPausePosition - sourcePosition ) / 3 * 4;
 			destinationPosition += encodedLength;
 			sourcePosition = chunksOfSourceWillBeEncodedPausePosition;
@@ -226,7 +226,7 @@ int Base64::Encoder::encoding(const Array<byte> &source, int offset, int end,
 const Array<int> Base64::Decoder::fromBase64 = [ ]() -> Array<int> {
 		Array<int> result(256);
 		Arrays::fill(&result, -1);
-		int index;
+	long int index;
 		for (index = 0; index < Encoder::toBase64.length; index++) {
 			result[ Encoder::toBase64[ index ]] = index;
 		}
@@ -237,7 +237,7 @@ const Array<int> Base64::Decoder::fromBase64 = [ ]() -> Array<int> {
 const Array<int> Base64::Decoder::fromBase64Url = [ ]() -> Array<int> {
 		Array<int> result(256);
 		Arrays::fill(&result, -1);
-		int index;
+	long int index;
 		for (index = 0; index < Encoder::toBase64Url.length; index++) {
 			result[ Encoder::toBase64Url[ index ]] = index;
 		}
@@ -268,18 +268,18 @@ Base64::Decoder::~Decoder() {
 }
 
 Array<byte> Base64::Decoder::decode(const Array<byte> &source) const {
-	int length = this->outLength(source, 0, source.length);
+	long int length = this->outLength(source, 0, source.length);
 	Array<byte> destination(length);
-	int destinationLength = this->decoding(source, 0, source.length, destination);
+	long int destinationLength = this->decoding(source, 0, source.length, destination);
 	if (destinationLength != length) {
 		return Arrays::copyOf(destination, destinationLength);
 	}
 	return destination;
 }
 
-int Base64::Decoder::decode(const Array<byte> &source,
+long int Base64::Decoder::decode(const Array<byte> &source,
 	Array<byte> &destination) const {
-	int length = this->outLength(source, 0, source.length);
+	long int length = this->outLength(source, 0, source.length);
 	if (destination.length < length) {
 		throw InterruptedException(
 			"Output byte array is too small for decoding all input bytes");
@@ -291,8 +291,8 @@ Array<byte> Base64::Decoder::decode(const String &source) const {
 	return this->decode(source.getBytes());
 }
 
-int Base64::Decoder::outLength(const Array<byte> &source,
-	int offset, int end) const {
+long int Base64::Decoder::outLength(const Array<byte> &source,
+	long int offset, int end) const {
 	Array<int> fromBase64Table;
 	if (this->isUrl) {
 		fromBase64Table = fromBase64Url;
@@ -300,10 +300,10 @@ int Base64::Decoder::outLength(const Array<byte> &source,
 		fromBase64Table = fromBase64;
 	}
 	
-	int sourcePosition = offset;
-	int sourceEndPosition = end;
-	int paddingCount = 0;
-	int length = sourceEndPosition - sourcePosition;
+	long int sourcePosition = offset;
+	long int sourceEndPosition = end;
+	long int paddingCount = 0;
+	long int length = sourceEndPosition - sourcePosition;
 	if (length == 0) {
 		return 0;
 	}
@@ -315,10 +315,10 @@ int Base64::Decoder::outLength(const Array<byte> &source,
 			"Input byte[] should at least have 2 bytes for based64 bytes");
 	}
 	if (this->isMime) {
-		int nonAlphabet = 0;
-		int currentByteDecoded;
+	long int nonAlphabet = 0;
+	long int currentByteDecoded;
 		while (sourcePosition < sourceEndPosition) {
-			int currentByte = source[ sourcePosition++ ] & 0xff;
+	long int currentByte = source[ sourcePosition++ ] & 0xff;
 			if (currentByte == '=') {
 				length -= sourceEndPosition - sourcePosition + 1;
 				break;
@@ -343,7 +343,7 @@ int Base64::Decoder::outLength(const Array<byte> &source,
 	return 3 * (( length + 3 ) / 4 ) - paddingCount;
 }
 
-int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
+long int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 	Array<byte> &destination) const {
 	Array<int> fromBase64Table;
 	if (this->isUrl) {
@@ -352,15 +352,15 @@ int Base64::Decoder::decoding(const Array<byte> &source, int offset, int end,
 		fromBase64Table = fromBase64;
 	}
 	
-	int sourcePosition = offset;
-	int sourceStopPosition = end;
-	int destinationPosition = 0;
-	int groupBits = 0;
+	long int sourcePosition = offset;
+	long int sourceStopPosition = end;
+	long int destinationPosition = 0;
+	long int groupBits = 0;
 	// 18 is number of bits (3 sextet) behind first sextet.
-	int shiftTo = 18;
+	long int shiftTo = 18;
 	
-	int currentByte;
-	int currentByteDecoded;
+	long int currentByte;
+	long int currentByteDecoded;
 	while (sourcePosition < sourceStopPosition) {
 		currentByte = source[ sourcePosition++ ] & 0xff;
 		currentByteDecoded = fromBase64Table[ currentByte ];
@@ -453,7 +453,7 @@ Base64::Encoder Base64::getMimeEncoder(int lineLength,
 		return Encoder::RFC4648;
 	}
 	// Rounded down to nearest multiple of 4.
-	int roundedLineLength = lineLength >> 2 << 2;
+	long int roundedLineLength = lineLength >> 2 << 2;
 	return Encoder(false, lineSeparator, roundedLineLength, true);
 }
 

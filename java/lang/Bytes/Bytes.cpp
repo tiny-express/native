@@ -61,11 +61,11 @@ byte Bytes::byteValue() const {
     return this->original;
 }
 
-int Bytes::compare(byte byteA, byte byteB) {
+long int Bytes::compare(byte byteA, byte byteB) {
     return byteA - byteB;
 }
 
-int Bytes::compareTo(const Bytes &other) const {
+long int Bytes::compareTo(const Bytes &other) const {
     return this->original - other.original;
 }
 
@@ -95,20 +95,20 @@ float Bytes::floatValue() const {
     return (float) this->original;
 }
 
-int Bytes::hashCode() const {
-    return (int) this->original;
+long int Bytes::hashCode() const {
+    return (long int) this->original;
 }
 
-int Bytes::hashCode(byte value) {
-    return (int) value;
+long int Bytes::hashCode(byte value) {
+    return value;
 }
 
-int Bytes::intValue() const {
-    return (int) this->original;
+long int Bytes::intValue() const {
+    return (long int) this->original;
 }
 
 long Bytes::longValue() const {
-    return (long) this->original;
+    return this->original;
 }
 
 byte Bytes::parseBytes(String stringToParse) {
@@ -116,7 +116,7 @@ byte Bytes::parseBytes(String stringToParse) {
 }
 
 byte Bytes::parseBytes(String stringToParse, int radix) {
-    int value = Integer::parseInt(stringToParse, radix);
+    long int value = Integer::parseInt(stringToParse, radix);
     if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
@@ -132,11 +132,11 @@ String Bytes::toString() const {
 }
 
 String Bytes::toString(byte byteValue) {
-    return Integer::toString((int) byteValue, 10);
+    return Integer::toString((long int) byteValue, 10);
 }
 
-int Bytes::toUnsignedInt(byte byteValue) {
-    return ((int) byteValue) & 0xff;
+long int Bytes::toUnsignedInt(byte byteValue) {
+    return ((long int) byteValue) & 0xff;
 }
 
 long Bytes::toUnsignedLong(byte byteValue) {
@@ -144,7 +144,7 @@ long Bytes::toUnsignedLong(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(byte byteValue) {
-    return ByteCache::getInstance()->getByteAtIndex((int) byteValue);
+    return ByteCache::getInstance()->getByteAtIndex((long int) byteValue);
 }
 
 Bytes Bytes::valueOf(String stringValue) {

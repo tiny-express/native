@@ -40,7 +40,7 @@ Concurrent::Semaphore::~Semaphore() {
     conditionObject.notify_one();
 }
 
-int Concurrent::Semaphore::availablePermits() {
+long int Concurrent::Semaphore::availablePermits() {
     std::unique_lock<std::mutex> locker(permitMutexObject);
     return permitCounter;
 }

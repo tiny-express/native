@@ -34,11 +34,11 @@ namespace Java {
         class BitSet : public Object, public Cloneable, public Serializable {
         private:
             // Number of bits need to address every bit in a word with default size.
-            static const int ADDRESS_BITS_PER_WORD = 6;
+            static const long int ADDRESS_BITS_PER_WORD = 6;
             // Number of bits of a word (default size of a word).
-            static const int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
+            static const long int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
             // Maximum index of a bit in a single word.
-            static const int BIT_INDEX_MASK = BITS_PER_WORD - 1;
+            static const long int BIT_INDEX_MASK = BITS_PER_WORD - 1;
             // Used to shift left or right for a partial word mask.
             static const long WORD_MASK = 0xffffffffffffffffL;
 
@@ -96,7 +96,7 @@ namespace Java {
              * @param bitIndex
              * @return int
              */
-            static int wordIndex(int bitIndex);
+            static long int wordIndex(int bitIndex);
 
             /**
              * Checks that fromIndex ... toIndex is a valid range of bit indices.

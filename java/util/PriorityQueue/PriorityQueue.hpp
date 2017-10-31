@@ -99,8 +99,8 @@ namespace Java {
 						 * @param target
 						 */
 						PriorityQueue(const PriorityQueue<E> &target) {
-							int targetSize = (int) target.original.size();
-							int index;
+	long int targetSize = (long int) target.original.size();
+	long int index;
 							for (index = 0; index < targetSize; index++) {
 								this->original.push_back(target.original[ index ]);
 							}
@@ -183,10 +183,10 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean offer(const E &target) {
-							int oldSize = (int) this->original.size();
+	long int oldSize = (long int) this->original.size();
 							this->original.push_back(target);
 							std::make_heap(this->original.begin(), this->original.end());
-							int newSize = (int) this->original.size();
+	long int newSize = (long int) this->original.size();
 							return ( newSize != oldSize );
 						}
 						
@@ -236,8 +236,8 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int size() const {
-							return (int) this->original.size();
+	long int size() const {
+							return (long int) this->original.size();
 						}
 						
 						/**
@@ -268,7 +268,7 @@ namespace Java {
 						 * @return Array<E>
 						 */
 						Array<E> toArray(Array<E> &anArray) const {
-							int originalSize = (int) this->original.size();
+	long int originalSize = (long int) this->original.size();
 							typename std::vector<E>::const_iterator originalIterator;
 							if (anArray.length < originalSize) {
 								Array<E> result;
@@ -277,7 +277,7 @@ namespace Java {
 								}
 								return result;
 							}
-							int indexOfArray = 0;
+	long int indexOfArray = 0;
 							for (originalIterator = this->original.begin(); originalIterator != this->original.end(); originalIterator++) {
 								anArray[ indexOfArray ] = *originalIterator;
 								indexOfArray = indexOfArray + 1;

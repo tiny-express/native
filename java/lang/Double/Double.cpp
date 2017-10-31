@@ -73,7 +73,7 @@ short Double::shortValue() const {
     return static_cast<short> (this->original);
 }
 
-int Double::intValue() const {
+long int Double::intValue() const {
     return static_cast<int> (this->original);
 }
 
@@ -168,7 +168,7 @@ Double Double::operator/=(const Double &target) const {
     return (Double) (this->original / target.original);
 }
 
-int Double::compare(double double1, double double2) {
+long int Double::compare(double double1, double double2) {
     long thisBits = Double::doubleToLongBits(double1);
     long anotherBits = Double::doubleToLongBits(double2);
 
@@ -183,7 +183,7 @@ int Double::compare(double double1, double double2) {
     return 1;
 }
 
-int Double::compareTo(Double anotherDouble) {
+long int Double::compareTo(Double anotherDouble) {
     return Double::compare(this->original, anotherDouble.original);
 }
 

@@ -111,22 +111,22 @@ namespace Java {
 						/**
 						 * Bias used in representing a float exponent.
 						 */
-						static const int EXP_BIAS = 127;
+						static const long int EXP_BIAS = 127;
 						
 						/**
 						 * Bit mask to isolate the sign bit of a float.
 						 */
-						static const int SIGN_BIT_MASK = 0x80000000;
+						static const long int SIGN_BIT_MASK = 0x80000000;
 						
 						/**
 						 * Bit mask to isolate the exponent field of a float.
 						 */
-						static const int EXP_BIT_MASK = 0x7F800000;
+						static const long int EXP_BIT_MASK = 0x7F800000;
 						
 						/**
 						 * Bit mask to isolate the significand field of a float.
 						 */
-						static const int SIGNIF_BIT_MASK = 0x007FFFFF;
+						static const long int SIGNIF_BIT_MASK = 0x007FFFFF;
 				
 				public:
 						/**
@@ -316,7 +316,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int intValue() const override;
+	long int intValue() const override;
 						
 						/**
 						 * Float value in Long
@@ -387,7 +387,7 @@ namespace Java {
 						 *          if float1 is numerically greater than
 						 *          float2.
 						 */
-						static int compare(float float1, float float2);
+						static long int compare(float float1, float float2);
 						
 						/**
 						 * Compares two Float objects numerically.
@@ -401,7 +401,7 @@ namespace Java {
 						 *          Float is numerically greater than
 						 *          anotherFloat.
 						 */
-						int compareTo(const Float &anotherFloat) const override;
+	long int compareTo(const Float &anotherFloat) const override;
 						
 						/**
 						 * Compares this object against the specified object.
@@ -418,7 +418,7 @@ namespace Java {
 						 *
 						 * @return  a hash code value for this object.
 						 */
-						int hashCode();
+	long int hashCode();
 						
 						/**
 						 * Returns a hash code for a float value; compatible with
@@ -427,7 +427,7 @@ namespace Java {
 						 * @param value the value to hash
 						 * @return a hash code value for a float value.
 						 */
-						static int hashCode(float floatInput);
+						static long int hashCode(float floatInput);
 						
 						/**
 						 * Returns true if the argument is a finite floating-point
@@ -539,7 +539,7 @@ namespace Java {
 						 * @param   floatInput  - float precision floating-point number.
 						 * @return  int         - the bits that represent the floating-point number.
 						 */
-						static int floatToRawIntBits(float floatInput);
+						static long int floatToRawIntBits(float floatInput);
 						
 						/**
 						 * Returns a representation of the specified floating-point value
@@ -549,7 +549,7 @@ namespace Java {
 						 * @param   floatInput  - value   a float precision floating-point number.
 						 * @return  int         - the bits that represent the floating-point number.
 						 */
-						static int floatToIntBits(float inputFloat);
+						static long int floatToIntBits(float inputFloat);
 				
 				private:
 						/**

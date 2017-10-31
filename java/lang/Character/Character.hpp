@@ -71,7 +71,7 @@ namespace Java {
 						 * @param   codePoint the character (Unicode code point) to be tested.
 						 * @return  2 if the character is a valid supplementary character; 1 otherwise.
 						 */
-						int charCount(int codePoint);
+	long int charCount(int codePoint);
 						
 						/**
 						 * Returns the value of this {@code Character} object.
@@ -97,7 +97,7 @@ namespace Java {
 						 *         {@link #MAX_HIGH_SURROGATE} inclusive;
 						 *         {@code false} otherwise.
 						 * @see    Character::isLowSurrogate(char)
-						 * @see    Character.UnicodeBlock#of(int)
+						 * @see    Character.UnicodeBlock#of(long int)
 						 */
 						static boolean isHighSurrogate(unicode ch);
 						
@@ -152,7 +152,7 @@ namespace Java {
 						 * {@code index} is negative or not less than
 						 * {@link CharSequence#length() seq.length()}.
 						 */
-						static int toCodePoint(unicode high, unicode low);
+						static long int toCodePoint(unicode high, unicode low);
 						
 						/**
 						 * Returns the code point at the given index of the
@@ -174,7 +174,7 @@ namespace Java {
 						 * {@code index} is negative or not less than
 						 * the length of the {@code char} array.
 						 */
-						static int codePointAt(Array<char> a, int index);
+						static long int codePointAt(Array<char> a, int index);
 						
 						/**
 						 * Returns the code point at the given index of the
@@ -200,7 +200,7 @@ namespace Java {
 						 * argument, or if the {@code limit} argument is negative or
 						 * greater than the length of the {@code char} array.
 						 */
-						static int codePointAt(Array<char> a, int index, int limit);
+						static long int codePointAt(Array<char> a, int index, int limit);
 						
 						/**
 						* Returns the code point preceding the given index of the
@@ -222,7 +222,7 @@ namespace Java {
 						* argument is less than 1 or greater than the length of the
 						* {@code char} array
 						*/
-						static int codePointBefore(Array<char> a, int index);
+						static long int codePointBefore(Array<char> a, int index);
 						
 						/**
 						* Returns the code point preceding the given index of the
@@ -250,7 +250,7 @@ namespace Java {
 						* if the {@code start} argument is negative or not less than
 						* the length of the {@code char} array.
 						*/
-						static int codePointBefore(Array<char> a, int index, int start);
+						static long int codePointBefore(Array<char> a, int index, int start);
 						
 						/**
 						 * Returns the number of Unicode code points in a subarray of the
@@ -270,7 +270,7 @@ namespace Java {
 						 * {@code count} is negative, or if {@code offset +
 						 * count} is larger than the length of the given array.
 						 */
-						static int codePointCount(Array<char> a, int offset, int count);
+						static long int codePointCount(Array<char> a, int offset, int count);
 						
 						/**
 						 * Compares two {@code char} values numerically.
@@ -285,7 +285,7 @@ namespace Java {
 						 *         a value less than {@code 0} if {@code x < y}; and
 						 *         a value greater than {@code 0} if {@code x > y}
 						 */
-						static int compare(char x, char y);
+						static long int compare(char x, char y);
 						
 						/**
 						 * Compares two {@code Character} objects numerically.
@@ -301,7 +301,7 @@ namespace Java {
 						 *          Note that this is strictly a numerical comparison; it is not
 						 *          locale-dependent.
 						 */
-						int compareTo(Character &anotherCharacter);
+	long int compareTo(Character &anotherCharacter);
 						
 						/**
 						 * Returns the numeric value of the specified character (Unicode
@@ -313,7 +313,7 @@ namespace Java {
 						 * radix, {@code -1} is returned. A character is a valid digit
 						 * if at least one of the following is true:
 						 * <ul>
-						 * <li>The method {@link #isDigit(int) isDigit(codePoint)} is {@code true} of the character
+						 * <li>The method {@link #isDigit(long int) isDigit(codePoint)} is {@code true} of the character
 						 *     and the Unicode decimal digit value of the character (or its
 						 *     single-character decomposition) is less than the specified radix.
 						 *     In this case the decimal digit value is returned.
@@ -348,19 +348,19 @@ namespace Java {
 						 * @return  the numeric value represented by the character in the
 						 *          specified radix.
 						 * @see     Character#forDigit(int, int)
-						 * @see     Character#isDigit(int)
+						 * @see     Character#isDigit(long int)
 						 */
-						static int digit(int codePoint, int radix);
+						static long int digit(int codePoint, int radix);
 				
 				private:
 						
 						// throws ArrayIndexOutOfBoundsException if index out of bounds
-						static int codePointAtImpl(Array<char> a, int index, int limit);
+						static long int codePointAtImpl(Array<char> a, int index, int limit);
 						
 						// throws ArrayIndexOutOfBoundsException if index-1 out of bounds
-						static int codePointBeforeImpl(Array<char> a, int index, int start);
+						static long int codePointBeforeImpl(Array<char> a, int index, int start);
 						
-						static int codePointCountImpl(Array<char> a, int offset, int count);
+						static long int codePointCountImpl(Array<char> a, int offset, int count);
 				
 				public:
 						friend std::ostream &operator<<(std::ostream &os, const Character &target) {

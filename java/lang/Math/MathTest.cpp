@@ -38,7 +38,7 @@ TEST(JavaLangMath, Abs) {
 	float float_value = -123.123f;
 	assertEquals(123.123f, Math::abs(float_value));
 	
-	int int_value = -123;
+	long int int_value = -123;
 	assertEquals(123, Math::abs(int_value));
 	
 	long long_value = -1233453453;
@@ -47,16 +47,16 @@ TEST(JavaLangMath, Abs) {
 
 TEST(JavaLangMath, AddExactInt) {
 	// Given 2 int
-	int a = 1;
-	int b = 2;
-	int expectResult = 3;
+	long int a = 1;
+	long int b = 2;
+	long int expectResult = 3;
 	assertEquals(expectResult, Math::addExact(a, b));
 	
 	// Given an int equal to Integer::MAX_VALUE,
 	// test if addExact throw ArithmeticException("integer overflow")
-	int c = Integer::MAX_VALUE;
+	long int c = Integer::MAX_VALUE;
 	try {
-		int overFlowResult = Math::addExact(c, b);
+	long int overFlowResult = Math::addExact(c, b);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -408,15 +408,15 @@ TEST(JavaLangMath, Ceil) {
 
 TEST(JavaLangMath, DecrementExactInt) {
 	// Given 2 int
-	int a = 5;
-	int expectResult = 4;
+	long int a = 5;
+	long int expectResult = 4;
 	assertEquals(expectResult, Math::decrementExact(a));
 	
 	// Given an int equal to Integer::MIN_VALUE,
 	// test if decrementExact throw ArithmeticException("integer overflow")
-	int c = Integer::MIN_VALUE;
+	long int c = Integer::MIN_VALUE;
 	try {
-		int overFlowResult = Math::decrementExact(c);
+	long int overFlowResult = Math::decrementExact(c);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -441,15 +441,15 @@ TEST(JavaLangMath, DecrementExactLong) {
 
 TEST(JavaLangMath, IncrementExactInt) {
 	// Given 2 int
-	int a = 5;
-	int expectResult = 6;
+	long int a = 5;
+	long int expectResult = 6;
 	assertEquals(expectResult, Math::incrementExact(a));
 	
 	// Given an int equal to Integer::MAX_VALUE,
 	// test if incrementExact throw ArithmeticException("integer overflow")
-	int c = Integer::MAX_VALUE;
+	long int c = Integer::MAX_VALUE;
 	try {
-		int overFlowResult = Math::incrementExact(c);
+	long int overFlowResult = Math::incrementExact(c);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -476,10 +476,10 @@ TEST(JavaLangMath, IncrementExactLong) {
 TEST(JavaLangMath, MultiplyExact) {
 	// Given 2 int which multiply result overflow an integer
 	// test if multiplyExact throw ArithmeticException("integer overflow")
-	int x = Integer::MAX_VALUE;
-	int y = 2;
+	long int x = Integer::MAX_VALUE;
+	long int y = 2;
 	try {
-		int overFlowResult = Math::multiplyExact(x, y);
+	long int overFlowResult = Math::multiplyExact(x, y);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -487,9 +487,9 @@ TEST(JavaLangMath, MultiplyExact) {
 	
 	
 	// Given 2 int
-	int a = 10;
-	int b = 20;
-	int expectResult = 200;
+	long int a = 10;
+	long int b = 20;
+	long int expectResult = 200;
 	assertEquals(expectResult, Math::multiplyExact(a, b));
 }
 
@@ -522,15 +522,15 @@ TEST(JavaLangMath, MultiplyExactLong) {
 
 TEST(JavaLangMath, NegateExactInt) {
 	// Given an int
-	int x = 100;
-	int expectResult = -100;
+	long int x = 100;
+	long int expectResult = -100;
 	assertEquals(expectResult, Math::negateExact(x));
 	
 	// Given an int equal to Integer::MIN_VALUE,
 	// test if negateExact throw ArithmeticException("integer overflow")
-	int c = Integer::MIN_VALUE;
+	long int c = Integer::MIN_VALUE;
 	try {
-		int overFlowResult = Math::negateExact(c);
+	long int overFlowResult = Math::negateExact(c);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -663,7 +663,7 @@ TEST(JavaLangMath, NextAfterFloat) {
 TEST(JavaLangMath, ScalbFloat) {
 	// Given a float an a scale factor
 	float a = 50.14;
-	int scaleFactor = 4;
+	long int scaleFactor = 4;
 	float expectResult = 802.24;
 	assertEquals(expectResult, Math::scalb(a, scaleFactor));
 	
@@ -696,7 +696,7 @@ TEST(JavaLangMath, ScalbFloat) {
 TEST(JavaLangMath, ScalbDouble) {
 	// Given a float an a scale factor
 	double a = 50.14;
-	int scaleFactor = 4;
+	long int scaleFactor = 4;
 	double expectResult = 802.24;
 	assertEquals(expectResult, Math::scalb(a, scaleFactor));
 	
@@ -1072,9 +1072,9 @@ TEST(JavaLangMath, Floor) {
 
 TEST(JavaLangMath, FloorDivInt) {
 	// Given 2 int
-	int dividend = 10;
-	int divisor = 5;
-	int expectResult = 2;
+	long int dividend = 10;
+	long int divisor = 5;
+	long int expectResult = 2;
 	assertEquals(expectResult, Math::floorDiv(dividend, divisor));
 	
 	// Given 2 int
@@ -1087,7 +1087,7 @@ TEST(JavaLangMath, FloorDivInt) {
 	dividend = 11;
 	divisor = 0;
 	try {
-		int divideByZero = Math::floorDiv(dividend, divisor);
+	long int divideByZero = Math::floorDiv(dividend, divisor);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("", e.getMessage());
@@ -1140,16 +1140,16 @@ TEST(JavaLangMath, SignNumFloat) {
 
 TEST(JavaLangMath, SubtractExactInt) {
 	// Given 2 int
-	int a = 10;
-	int b = 20;
-	int expectResult = -10;
+	long int a = 10;
+	long int b = 20;
+	long int expectResult = -10;
 	assertEquals(expectResult, Math::subtractExact(a, b));
 	
 	// Given an int equal to Integer::MIN_VALUE,
 	// test if subtractExact throw ArithmeticException("integer overflow")
-	int c = Integer::MIN_VALUE;
+	long int c = Integer::MIN_VALUE;
 	try {
-		int overFlowResult = Math::subtractExact(c, b);
+	long int overFlowResult = Math::subtractExact(c, b);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -1177,14 +1177,14 @@ TEST(JavaLangMath, SubtractExactLong) {
 TEST(JavaLangMath, ToIntExact) {
 	// Given a long
 	long a = 100;
-	int expectResult = 100;
+	long int expectResult = 100;
 	assertEquals(expectResult, Math::toIntExact(a));
 	
 	// Given an int equal to Long::MAX_VALUE,
 	// test if toIntExact throw ArithmeticException("integer overflow")
 	long c = Long::MAX_VALUE;
 	try {
-		int overFlowResult = Math::toIntExact(c);
+	long int overFlowResult = Math::toIntExact(c);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("integer overflow", e.getMessage());
@@ -1217,9 +1217,9 @@ TEST(JavaLangMath, FloorDivLong) {
 
 TEST(JavaLangMath, FloorModInt) {
 	// Given 2 int
-	int dividend = 10;
-	int divisor = 5;
-	int expectResult = 0;
+	long int dividend = 10;
+	long int divisor = 5;
+	long int expectResult = 0;
 	assertEquals(expectResult, Math::floorMod(dividend, divisor));
 	
 	// Given 2 int
@@ -1253,8 +1253,8 @@ TEST(JavaLangMath, Max) {
 	float float_value_max_2 = 2.312f;
 	assertEquals(4.123, Math::max(float_value_max_1, float_value_max_2));
 	
-	int int_value_max_1 = 4;
-	int int_value_max_2 = 2;
+	long int int_value_max_1 = 4;
+	long int int_value_max_2 = 2;
 	assertEquals(4, Math::max(int_value_max_1, int_value_max_2));
 	
 	long long_value_max_1 = 4;
@@ -1275,8 +1275,8 @@ TEST(JavaLangMath, Min) {
 	long long_value_min_2 = 2;
 	assertEquals(2, Math::min(long_value_min_1, long_value_min_2));
 	
-	int int_value_min_1 = 4;
-	int int_value_min_2 = 2;
+	long int int_value_min_1 = 4;
+	long int int_value_min_2 = 2;
 	assertEquals(2, Math::min(int_value_min_1, int_value_min_2));
 }
 
@@ -1305,54 +1305,54 @@ TEST(JavaLangMath, Random) {
 TEST(JavaLangMath, GetExponentDouble) {
 	// Given a double to get exponent
 	double doubleNumber = 60984.1;
-	int expectResult = 15;
+	long int expectResult = 15;
 	assertEquals(expectResult, Math::getExponent(doubleNumber));
 	
 	// Given a NAN to get exponent
 	double nan = NAN;
-	int expectNANResult = Double::MAX_EXPONENT + 1;
+	long int expectNANResult = Double::MAX_EXPONENT + 1;
 	assertEquals(expectNANResult, Math::getExponent(nan));
 	
 	// Given an Infinity to get exponent
 	double infinity = -INFINITY;
-	int expectInfiniteResult = Double::MAX_EXPONENT + 1;
+	long int expectInfiniteResult = Double::MAX_EXPONENT + 1;
 	assertEquals(expectInfiniteResult, Math::getExponent(infinity));
 	
 	// Given a zero to get exponent
 	double zero = 0.0;
-	int expectZeroResult = Double::MIN_EXPONENT - 1;
+	long int expectZeroResult = Double::MIN_EXPONENT - 1;
 	assertEquals(expectZeroResult, Math::getExponent(zero));
 	
 	// Given a subnormal to get exponent
 	double subNormal = 3.952525e-323;
-	int expectSubNormalResult = Double::MIN_EXPONENT - 1;
+	long int expectSubNormalResult = Double::MIN_EXPONENT - 1;
 	assertEquals(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
 TEST(JavaLangMath, GetExponentFloat) {
 	// Given a float to get exponent
 	float floatNumber = 60984.1f;
-	int expectResult = 15;
+	long int expectResult = 15;
 	assertEquals(expectResult, Math::getExponent(floatNumber));
 	
 	// Given a NAN to get exponent
 	float nan = NAN;
-	int expectNANResult = Float::MAX_EXPONENT + 1;
+	long int expectNANResult = Float::MAX_EXPONENT + 1;
 	assertEquals(expectNANResult, Math::getExponent(nan));
 	
 	// Given an Infinity to get exponent
 	float infinity = INFINITY;
-	int expectInfiniteResult = Float::MAX_EXPONENT + 1;
+	long int expectInfiniteResult = Float::MAX_EXPONENT + 1;
 	assertEquals(expectInfiniteResult, Math::getExponent(infinity));
 	
 	// Given a zero to get exponent
 	float zero = 0.0;
-	int expectZeroResult = Float::MIN_EXPONENT - 1;
+	long int expectZeroResult = Float::MIN_EXPONENT - 1;
 	assertEquals(expectZeroResult, Math::getExponent(zero));
 	
 	// Given a subnormal to get exponent
 	float subNormal = 3.952525e-40;
-	int expectSubNormalResult = Float::MIN_EXPONENT - 1;
+	long int expectSubNormalResult = Float::MIN_EXPONENT - 1;
 	assertEquals(expectSubNormalResult, Math::getExponent(subNormal));
 }
 

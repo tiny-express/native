@@ -84,7 +84,7 @@ boolean Boolean::booleanValue() const {
  * @param target2
  * @return int
  */
-int Boolean::compare(const boolean &target1, const boolean &target2) {
+long int Boolean::compare(const boolean &target1, const boolean &target2) {
 	return ( target1 - target2 );
 }
 
@@ -99,7 +99,7 @@ int Boolean::compare(const boolean &target1, const boolean &target2) {
  * @param target
  * @return int
  */
-int Boolean::compareTo(const Boolean &target) const {
+long int Boolean::compareTo(const Boolean &target) const {
 	return Boolean::compare(this->original, target.original);
 }
 
@@ -121,7 +121,7 @@ boolean Boolean::getBoolean(const_string target) {
  *
  * @return long
  */
-int Boolean::hashCode() const {
+long int Boolean::hashCode() const {
 	return Object::hashCode();
 }
 

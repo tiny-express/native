@@ -74,7 +74,7 @@ short Integer::shortValue() const {
 	return (short) this->original;
 }
 
-int Integer::intValue() const {
+long int Integer::intValue() const {
 	return this->original;
 }
 
@@ -188,10 +188,10 @@ Integer &Integer::operator%=(const Integer &target) {
 	return *this;
 }
 
-int Integer::bitCount(int inputInt) {
+long int Integer::bitCount(int inputInt) {
 	String inputInBinary = Integer::toBinaryString(inputInt);
-	int resultBitCount = 0;
-	int index;
+	long int resultBitCount = 0;
+	long int index;
 	for (index = 0; index < inputInBinary.length(); index++) {
 		if (inputInBinary.charAt(index) == '1') {
 			resultBitCount++;
@@ -205,7 +205,7 @@ byte Integer::byteValue() {
 	return static_cast<byte> (this->original);
 }
 
-int Integer::compare(int inputInt1, int inputInt2) {
+long int Integer::compare(int inputInt1, int inputInt2) {
 	if (inputInt1 < inputInt2) {
 		return -1;
 	}
@@ -217,11 +217,11 @@ int Integer::compare(int inputInt1, int inputInt2) {
 	return 0;
 }
 
-int Integer::compareTo(const Integer &anotherInteger) const {
+long int Integer::compareTo(const Integer &anotherInteger) const {
 	return this->compare(this->original, anotherInteger.intValue());
 }
 
-int Integer::compareUnsigned(int intA, int intB) {
+long int Integer::compareUnsigned(int intA, int intB) {
 	return Integer::compare(intA + MIN_VALUE, intB + MIN_VALUE);
 }
 
@@ -235,7 +235,7 @@ Integer Integer::decode(String inputString) {
 	}
 	
 	boolean isNegative = false;
-	int base = 10;
+	long int base = 10;
 	char sign = inputString.charAt(0);
 	if (sign == '-' && (( isdigit(sign)) == 0 )) {
 		isNegative = true;
@@ -250,18 +250,18 @@ Integer Integer::decode(String inputString) {
 		}
 	}
 	
-	int result = parseInt(inputString, base);
+	long int result = parseInt(inputString, base);
 	if (isNegative) {
 		return static_cast<Integer>(-result);
 	}
 	return static_cast<Integer>(result);
 }
 
-int Integer::divideUnsigned(int dividend, int divisor) {
+long int Integer::divideUnsigned(int dividend, int divisor) {
 	if (divisor == 0) {
 		throw ArithmeticException("Divide by zero");
 	}
-	return (int) ( Integer::toUnsignedLong(dividend) / Integer::toUnsignedLong(divisor));
+	return (long int) ( Integer::toUnsignedLong(dividend) / Integer::toUnsignedLong(divisor));
 }
 
 // Integer Integer::getInteger(String inputString) {
@@ -280,7 +280,7 @@ int Integer::divideUnsigned(int dividend, int divisor) {
 // }
 
 
-int Integer::highestOneBit(int inputInt) {
+long int Integer::highestOneBit(int inputInt) {
 	inputInt |= ( inputInt >> 1 );
 	inputInt |= ( inputInt >> 2 );
 	inputInt |= ( inputInt >> 4 );
@@ -290,24 +290,24 @@ int Integer::highestOneBit(int inputInt) {
 	return inputInt - ((unsigned int) inputInt >> 1 );
 }
 
-int Integer::lowestOneBit(int inputInt) {
+long int Integer::lowestOneBit(int inputInt) {
 	return inputInt & -inputInt;
 }
 
-int Integer::max(int intA, int intB) {
+long int Integer::max(int intA, int intB) {
 	return Math::max(intA, intB);
 }
 
-int Integer::min(int intA, int intB) {
+long int Integer::min(int intA, int intB) {
 	return Math::min(intA, intB);
 }
 
-int Integer::numberOfLeadingZeros(int inputInt) {
+long int Integer::numberOfLeadingZeros(int inputInt) {
 	if (inputInt == 0) {
 		return 32;
 	}
 	
-	int numberOfZero = 1;
+	long int numberOfZero = 1;
 	
 	if ((unsigned int) inputInt >> 16 == 0) {
 		numberOfZero += 16;
@@ -334,18 +334,18 @@ int Integer::numberOfLeadingZeros(int inputInt) {
 	return numberOfZero;
 }
 
-int Integer::numberOfTrailingZeros(int inputInt) {
+long int Integer::numberOfTrailingZeros(int inputInt) {
 	if (inputInt == 0) {
 		return 32;
 	}
 	
 	String inputInBinary = Integer::toBinaryString(inputInt);
-	int lastIndexOfOneBit = inputInBinary.lastIndexOf('1');
-	int numberOfTrailingZeros = inputInBinary.length() - lastIndexOfOneBit - 1;
+	long int lastIndexOfOneBit = inputInBinary.lastIndexOf('1');
+	long int numberOfTrailingZeros = inputInBinary.length() - lastIndexOfOneBit - 1;
 	return numberOfTrailingZeros;
 }
 
-int Integer::parseInt(String inputString, int radix) {
+long int Integer::parseInt(String inputString, int radix) {
 	if (inputString.length() == 0) {
 		throw NumberFormatException("input string is null");
 	}
@@ -386,14 +386,14 @@ int Integer::parseInt(String inputString, int radix) {
 		throw NumberFormatException("Integer out of range");
 	}
 	
-	return (int) result;
+	return (long int) result;
 }
 
-int Integer::parseInt(String inputString) {
+long int Integer::parseInt(String inputString) {
 	return Integer::parseInt(inputString, 10);
 }
 
-int Integer::parseUnsignedInt(String inputString, int radix) {
+long int Integer::parseUnsignedInt(String inputString, int radix) {
 	if (inputString.length() == 0) {
 		throw NumberFormatException("input string is null");
 	}
@@ -435,21 +435,21 @@ int Integer::parseUnsignedInt(String inputString, int radix) {
 		throw NumberFormatException("Unsigned integer out of range");
 	}
 	
-	return (int) result;
+	return (long int) result;
 }
 
-int Integer::parseUnsignedInt(String inputString) {
+long int Integer::parseUnsignedInt(String inputString) {
 	return Integer::parseUnsignedInt(inputString, 10);
 }
 
-int Integer::remainderUnsigned(int dividend, int divisor) {
+long int Integer::remainderUnsigned(int dividend, int divisor) {
 	if (divisor == 0) {
 		throw ArithmeticException("Divide by zero");
 	}
-	return (int) ( toUnsignedLong(dividend) % toUnsignedLong(divisor));
+	return (long int) ( toUnsignedLong(dividend) % toUnsignedLong(divisor));
 }
 
-int Integer::reverse(int inputInt) {
+long int Integer::reverse(int inputInt) {
 	inputInt = ( inputInt & 0x55555555 ) << 1
 	           | ((unsigned int) inputInt >> 1 ) & 0x55555555;
 	
@@ -466,7 +466,7 @@ int Integer::reverse(int inputInt) {
 	return inputInt;
 }
 
-int Integer::reverseBytes(int inputInt) {
+long int Integer::reverseBytes(int inputInt) {
 	inputInt = (((unsigned int) inputInt >> 24 ))
 	           | (( inputInt >> 8 ) & 0xFF00 )
 	           | (( inputInt << 8 ) & 0xFF0000 )
@@ -475,12 +475,12 @@ int Integer::reverseBytes(int inputInt) {
 	return inputInt;
 }
 
-int Integer::rotateLeft(int inputInt, int distance) {
+long int Integer::rotateLeft(int inputInt, int distance) {
 	inputInt = ( inputInt << distance ) | ((unsigned int) inputInt >> -distance );
 	return inputInt;
 }
 
-int Integer::rotateRight(int inputInt, int distance) {
+long int Integer::rotateRight(int inputInt, int distance) {
 	return ((unsigned int) inputInt >> distance ) | ( inputInt << -distance );
 }
 
@@ -497,15 +497,15 @@ boolean Integer::equals(Integer object) {
 	return this->original == object.intValue();
 }
 
-int Integer::hashCode(int inputInt) {
+long int Integer::hashCode(int inputInt) {
 	return inputInt;
 }
 
-int Integer::hashCode() const {
+long int Integer::hashCode() const {
 	return Integer::hashCode(this->original);
 }
 
-int Integer::signum(int inputInt) {
+long int Integer::signum(int inputInt) {
 	if (inputInt == 0) {
 		return 0;
 	}
@@ -517,7 +517,7 @@ int Integer::signum(int inputInt) {
 	return -1;
 }
 
-int Integer::sum(int intA, int intB) {
+long int Integer::sum(int intA, int intB) {
 	return intA + intB;
 }
 

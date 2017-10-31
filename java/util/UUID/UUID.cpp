@@ -58,7 +58,7 @@ UUID::UUID(Array<byte> data) {
 	long mostSigBits = 0;
 	long leastSigBits = 0;
 	
-	int index;
+	long int index;
 	for (index = 0; index < 8; ++index) {
 		mostSigBits = ( mostSigBits << 8 ) | ( data[ index ] & 0xff );
 	}
@@ -96,13 +96,13 @@ UUID::~UUID() {
  *
  * @return int - The clock sequence of this UUID
  */
-int UUID::clockSequence() {
+long int UUID::clockSequence() {
 	if (version() != 1) {
 		//FIXME: exception ("Not a time-based UUID");
 		return -1;
 	}
 	
-	return (int) (( this->leastSigBits & 0x3FFF000000000000L ) >> 48 );
+	return (long int) (( this->leastSigBits & 0x3FFF000000000000L ) >> 48 );
 };
 
 /**
@@ -114,7 +114,7 @@ int UUID::clockSequence() {
  *  0 : if this object equal both of mostSigBits and leastSigBits
  *  1 : if this object more than target either mostSigBits or leastSigBits
  */
-int UUID::compareTo(UUID target) {
+long int UUID::compareTo(UUID target) {
 	if (this->mostSigBits < target.mostSigBits) {
 		return -1;
 	}
@@ -166,9 +166,9 @@ long UUID::getMostSignificantBits() {
  *
  * @return int
  */
-int UUID::hashCode() {
+long int UUID::hashCode() {
 	long xorValue = this->mostSigBits ^this->leastSigBits;
-	return ((int) ( xorValue >> 32 )) ^ (int) xorValue;
+	return ((long int) ( xorValue >> 32 )) ^ (long int) xorValue;
 }
 
 /**
@@ -214,8 +214,8 @@ String UUID::toString() {
  *
  * @return int
  */
-int UUID::variant() {
-	return (int) (( this->leastSigBits >> ( 64 - ( this->leastSigBits >> 62 ))) & ( this->leastSigBits >> 63 ));
+long int UUID::variant() {
+	return (long int) (( this->leastSigBits >> ( 64 - ( this->leastSigBits >> 62 ))) & ( this->leastSigBits >> 63 ));
 }
 
 /**
@@ -223,8 +223,8 @@ int UUID::variant() {
  *
  * @return int
  */
-int UUID::version() {
-	return (int) (( this->mostSigBits >> 12 ) & 0x0f );
+long int UUID::version() {
+	return (long int) (( this->mostSigBits >> 12 ) & 0x0f );
 }
 
 /**
@@ -236,7 +236,7 @@ UUID UUID::randomUUID() {
 	Array<byte> randomBytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	
 	srand(time(0));
-	int index;
+	long int index;
 	for (index = 0; index < 16; ++index) {
 		randomBytes[ index ] = (byte) ( random() % 1000000 );
 	}
@@ -261,7 +261,7 @@ UUID UUID::fromString(String name) {
 		return UUID();
 	}
 	
-	int index;
+	long int index;
 	for (index = 0; index < 5; ++index) {
 		components[ index ] = "0x" + components[ index ];
 	}

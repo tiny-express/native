@@ -47,7 +47,7 @@ namespace Java {
 				public:
 						char charValue() const;
 						short shortValue() const;
-						int intValue() const;
+	long int intValue() const;
 						long longValue() const;
 						float floatValue() const;
 						double doubleValue() const;

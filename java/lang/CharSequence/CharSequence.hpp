@@ -62,7 +62,7 @@ namespace Java {
              *
              * @return  the number of <code>char</code>s in this sequence
              */
-            virtual int length() const = 0;
+            virtual long int length() const = 0;
         };
     }
 }

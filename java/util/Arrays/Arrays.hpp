@@ -32,7 +32,7 @@
 #include "../ArrayList/ArrayList.hpp"
 
 #define BINARY_SEARCH_BY_INDEX(TYPE); \
-static int binarySearchByIndex(TYPE array[],\
+static long int binarySearchByIndex(TYPE array[],\
                                 int fromIndex,\
                                 int toIndex,\
                                 TYPE key) {\
@@ -40,7 +40,7 @@ static int binarySearchByIndex(TYPE array[],\
 }
 
 #define BINARY_SEARCH_BY_KEY(TYPE); \
-static int binarySearchByKey(TYPE array[],\
+static long int binarySearchByKey(TYPE array[],\
                             TYPE key,\
                             int arraySize) {\
     return BinarySearch(array, 0, arraySize - 1, key);\
@@ -80,7 +80,7 @@ static void fillByIndex(Array<TYPE> *array,\
 }
 
 #define HASH_CODE(TYPE); \
-static int hashCode(Array<TYPE> array) {\
+static long int hashCode(Array<TYPE> array) {\
     if (array.length == 0) {\
         return 0;\
     }\
@@ -139,12 +139,12 @@ namespace Java {
             BINARY_SEARCH_BY_INDEX(char);
             BINARY_SEARCH_BY_INDEX(byte);
             BINARY_SEARCH_BY_INDEX(short);
-            BINARY_SEARCH_BY_INDEX(int);
+            BINARY_SEARCH_BY_INDEX(long int);
             BINARY_SEARCH_BY_INDEX(long);
             BINARY_SEARCH_BY_INDEX(float);
             BINARY_SEARCH_BY_INDEX(double);
 
-            static int binarySearchByIndex(Object *array,
+            static long int binarySearchByIndex(Object *array,
                                            int fromIndex,
                                            int toIndex,
                                            Object key) {
@@ -154,26 +154,26 @@ namespace Java {
             BINARY_SEARCH_BY_KEY(char);
             BINARY_SEARCH_BY_KEY(byte);
             BINARY_SEARCH_BY_KEY(short);
-            BINARY_SEARCH_BY_KEY(int);
+            BINARY_SEARCH_BY_KEY(long int);
             BINARY_SEARCH_BY_KEY(long);
             BINARY_SEARCH_BY_KEY(float);
             BINARY_SEARCH_BY_KEY(double);
 
-            static int binarySearchByKey(Object *array,
+            static long int binarySearchByKey(Object *array,
                                          Object key,
                                          int arraySize) {
                 return -1;
             }
 
             template<typename Type>
-            static int binarySearchByKey(Type *array,
+            static long int binarySearchByKey(Type *array,
                                          Type key,
                                          int arraySize) {
                 return BinarySearch(array, 0, arraySize - 1, key);
             }
 
             template<typename Type>
-            static int binarySearch(Type array[],
+            static long int binarySearch(Type array[],
                                     int fromIndex,
                                     int toIndex,
                                     Type key) {
@@ -181,14 +181,14 @@ namespace Java {
             }
 
             template<typename Type>
-            static int binarySearch(Array<Type> array,
+            static long int binarySearch(Array<Type> array,
                                     Type key,
                                     int arraySize) {
                 return BinarySearch(array, 0, arraySize - 1, key);
             }
 
             template<typename Type>
-            static int binarySearch(Array<Type> array,
+            static long int binarySearch(Array<Type> array,
                                     int fromIndex,
                                     int toIndex,
                                     Type key) {
@@ -198,7 +198,7 @@ namespace Java {
             COPY_OF(boolean);
             COPY_OF(char);
             COPY_OF(short);
-            COPY_OF(int);
+            COPY_OF(long int);
             COPY_OF(long);
             COPY_OF(float);
             COPY_OF(double);
@@ -211,7 +211,7 @@ namespace Java {
 
             template<typename Type, typename AnotherType>
             static Array<Type> copyOf(Array<AnotherType> anotherType, 
-                                      int newLength, 
+                                      int newLength,
                                       Type newType) {
                 Array<Type> result;
                 for (AnotherType element: anotherType) {
@@ -226,21 +226,21 @@ namespace Java {
             COPY_OF_RANGE(byte);
             COPY_OF_RANGE(char);
             COPY_OF_RANGE(short);
-            COPY_OF_RANGE(int);
+            COPY_OF_RANGE(long int);
             COPY_OF_RANGE(long);
             COPY_OF_RANGE(float);
             COPY_OF_RANGE(double);
 
             template<typename Type>
             static Array<Type> copyOfRange(Array<Type> original, 
-                                           int from, 
+                                           int from,
                                            int to) {
                 return copyOfRangeOrigin(original, from, to);
             }
 
             template<typename Type, typename AnotherType>
             static Array<Type> copyOfRange(Array<AnotherType> original, 
-                                           int from, int to, 
+                                           int from, int to,
                                            Type newType) {
                 Array<Type> result;
 
@@ -264,7 +264,7 @@ namespace Java {
                 return false; /// Don't support this method
             }
 
-            static int deepHashCode(Object array[]) {
+            static long int deepHashCode(Object array[]) {
                 return -1; /// Don't support this method
             }
 
@@ -277,7 +277,7 @@ namespace Java {
             EQUALS(char);
             EQUALS(double);
             EQUALS(float);
-            EQUALS(int);
+            EQUALS(long int);
             EQUALS(long);
             EQUALS(short);
 
@@ -297,7 +297,7 @@ namespace Java {
             FILL(char);
             FILL(double);
             FILL(float);
-            FILL(int);
+            FILL(long int);
             FILL(long);
             FILL(short);
 
@@ -305,17 +305,17 @@ namespace Java {
             FILL_BY_INDEX(char);
             FILL_BY_INDEX(double);
             FILL_BY_INDEX(float);
-            FILL_BY_INDEX(int);
+            FILL_BY_INDEX(long int);
             FILL_BY_INDEX(long);
             FILL_BY_INDEX(short);
 
             HASH_CODE(byte);
             HASH_CODE(char);
             HASH_CODE(float);
-            HASH_CODE(int);
+            HASH_CODE(long int);
             HASH_CODE(short);
 
-            static int hashCode(Array<boolean> array) {
+            static long int hashCode(Array<boolean> array) {
                 if (array.length == 0) {
                     return 0;
                 }
@@ -328,7 +328,7 @@ namespace Java {
                 return result;
             }
 
-            static int hashCode(Array<double> array) {
+            static long int hashCode(Array<double> array) {
                 if (array.length == 0) {
                     return 0;
                 }
@@ -336,26 +336,26 @@ namespace Java {
                 int result = 1;
                 for (double element : array) {
                     long bits = long(element);
-                    result = 31 * result + (int) (bits ^ (bits >> 32));
+                    result = 31 * result + (long int) (bits ^ (bits >> 32));
                 }
                 return result;
             }
 
-            static int hashCode(Array<long> array) {
+            static long int hashCode(Array<long> array) {
                 if (array.length == 0) {
                     return 0;
                 }
 
                 int result = 1;
                 for (long element : array) {
-                    int elementHash = (int) (element ^ (element >> 32));
+                    int elementHash = (long int) (element ^ (element >> 32));
                     result = 31 * result + elementHash;
                 }
 
                 return result;
             }
 
-            static int hashCode(Array<Object> array) {
+            static long int hashCode(Array<Object> array) {
                 if (array.length == 0) {
                     return 0;
                 }
@@ -372,7 +372,7 @@ namespace Java {
             SORT(char);
             SORT(double);
             SORT(float);
-            SORT(int);
+            SORT(long int);
 
             SORT_BY_INDEX(byte);
             SORT_BY_INDEX(char);
@@ -383,7 +383,7 @@ namespace Java {
             SORT_BY_ARRAY_SIZE(long);
             SORT_BY_ARRAY_SIZE(short);
 
-            SORT_BY_INDEX_ARRAY_SIZE(int);
+            SORT_BY_INDEX_ARRAY_SIZE(long int);
             SORT_BY_INDEX_ARRAY_SIZE(short);
 
             template<typename Type>
@@ -393,7 +393,7 @@ namespace Java {
 
             template<typename Type>
             static void sort(Type array[], 
-                             int fromIndex, 
+                             int fromIndex,
                              int toIndex) {
                 return sortOrigin(array, fromIndex, toIndex);
             }
@@ -405,14 +405,14 @@ namespace Java {
 
             template<typename Type>
             static void sort(Array<Type> *array, 
-                             int fromIndex, 
+                             int fromIndex,
                              int toIndex) {
                 return sortOrigin(array, fromIndex, toIndex);
             }
 
         private:
             template<typename Type>
-            static int BinarySearch(Type array[],
+            static long int BinarySearch(Type array[],
                                     int fromIndex,
                                     int toIndex,
                                     Type key) {
@@ -451,7 +451,7 @@ namespace Java {
 
             // Support Array<E>
             template<typename Type>
-            static int BinarySearch(Array<Type> array,
+            static long int BinarySearch(Array<Type> array,
                                     int fromIndex,
                                     int toIndex,
                                     Type key) {

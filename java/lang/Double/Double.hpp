@@ -40,17 +40,17 @@ namespace Java {
              * The number of logical bits in the significand of a double number,
              * including the implicit bit.
              */
-            static const int SIGNIFICAND_WIDTH = 53;
+            static const long int SIGNIFICAND_WIDTH = 53;
 
             /**
              * Maximum exponent a finite double number may have.
              */
-            static const int MAX_EXPONENT = 1023;
+            static const long int MAX_EXPONENT = 1023;
 
             /**
              * Minimum exponent a normalized double number may have.
              */
-            static const int MIN_EXPONENT = -1022;
+            static const long int MIN_EXPONENT = -1022;
 
             /**
              * The exponent the smallest positive double subnormal value would have
@@ -61,7 +61,7 @@ namespace Java {
             /**
              * Bias used in representing a double exponent.
              */
-            static const int EXP_BIAS = 1023;
+            static const long int EXP_BIAS = 1023;
 
             /**
              * Bit mask to isolate the sign bit of a double.
@@ -349,7 +349,7 @@ namespace Java {
              *          if {double1} is numerically greater than
              *          {double2}.
              */
-            static int compare(double double1, double double2);
+            static long int compare(double double1, double double2);
 
             /**
              * Compares two {Double} objects numerically.

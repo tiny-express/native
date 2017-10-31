@@ -100,7 +100,7 @@ String::~String() {
     free(original);
 }
 
-int String::getSize() const {
+long int String::getSize() const {
     return this->size;
 }
 
@@ -118,11 +118,11 @@ char String::charAt(int index) const {
     return (this->original[index]);
 }
 
-int String::compareTo(const String &anotherString) const {
+long int String::compareTo(const String &anotherString) const {
     return strcmp(this->original, anotherString.original);
 }
 
-int String::compareToIgnoreCase(const String &anotherString) const {
+long int String::compareToIgnoreCase(const String &anotherString) const {
     return strcasecmp(this->original, anotherString.original);
 }
 
@@ -173,14 +173,14 @@ String String::fromCharArray(Array<char> &charArray) {
     return result;
 }
 
-int String::indexOf(int character) const {
+long int String::indexOf(int character) const {
     string pointerHolder = stringFromChar((char) character);
     int result = stringIndex(this->original, pointerHolder, 1);
     free(pointerHolder);
     return result;
 }
 
-int String::indexOf(int character, int fromIndex) const {
+long int String::indexOf(int character, int fromIndex) const {
     if (fromIndex > this->size) {
         return -1;
     }
@@ -201,11 +201,11 @@ int String::indexOf(int character, int fromIndex) const {
     return -1;
 }
 
-int String::indexOf(String subString) const {
+long int String::indexOf(String subString) const {
     return stringIndex(this->original, subString.original, 1);
 }
 
-int String::indexOf(String subString, int fromIndex) const {
+long int String::indexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return this->indexOf(subString);
     }
@@ -226,7 +226,7 @@ boolean String::isEmpty() const {
     return (boolean) isEmptyString(this->original);
 }
 
-int String::lastIndexOf(int character) {
+long int String::lastIndexOf(int character) {
 #ifdef LINUX
     register
 #endif
@@ -240,7 +240,7 @@ int String::lastIndexOf(int character) {
     return -1;
 }
 
-int String::lastIndexOf(int character, int fromIndex) {
+long int String::lastIndexOf(int character, int fromIndex) {
     if (fromIndex < 0) {
         return -1;
     }
@@ -260,7 +260,7 @@ int String::lastIndexOf(int character, int fromIndex) {
     return -1;
 }
 
-int String::lastIndexOf(String subString) const {
+long int String::lastIndexOf(String subString) const {
     string reversedString = stringReverse(subString.toCharPointer());
     string currentReversedString = stringReverse(this->toCharPointer());
     int result = stringIndex(currentReversedString, reversedString, 1);
@@ -274,7 +274,7 @@ int String::lastIndexOf(String subString) const {
     return result;
 }
 
-int String::lastIndexOf(String subString, int fromIndex) const {
+long int String::lastIndexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return -1;
     }
@@ -606,7 +606,7 @@ Array<String> String::split(String regex, int limit) const {
 String String::print(const String &format, short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -616,7 +616,7 @@ String String::print(const String &format, short value) {
 String String::print(const String &format, int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -626,7 +626,7 @@ String String::print(const String &format, int value) {
 String String::print(const String &format, long value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -636,7 +636,7 @@ String String::print(const String &format, long value) {
 String String::print(const String &format, unsigned short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -646,7 +646,7 @@ String String::print(const String &format, unsigned short value) {
 String String::print(const String &format, unsigned int value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -656,7 +656,7 @@ String String::print(const String &format, unsigned int value) {
 String String::print(const String &format, unsigned long value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -666,7 +666,7 @@ String String::print(const String &format, unsigned long value) {
 String String::print(const String &format, double value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }
@@ -676,7 +676,7 @@ String String::print(const String &format, double value) {
 String String::print(const String &format, float value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
-    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    const long int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
     if (length > 0) {
         result = String(buffer, length);
     }

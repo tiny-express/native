@@ -46,26 +46,26 @@ StringBuilder::StringBuilder(int capacity) {
 }
 
 StringBuilder::StringBuilder(String target) {
-	int newCapacity = defaultCapacity + target.length();
+	long int newCapacity = defaultCapacity + target.length();
 	this->ensureCapacity(newCapacity);
 	this->append(target);
 }
 
 StringBuilder::StringBuilder(const std::initializer_list<char> target) {
-	int newCapacity = defaultCapacity + (int) target.size();
+	long int newCapacity = defaultCapacity + (long int) target.size();
 	this->ensureCapacity(newCapacity);
 	this->append(target);
 }
 
 StringBuilder::StringBuilder(const CharSequence &charSequence) {
-	int newCapacity = defaultCapacity + charSequence.length();
+	long int newCapacity = defaultCapacity + charSequence.length();
 	this->ensureCapacity(newCapacity);
 	this->append(charSequence);
 }
 
 StringBuilder::StringBuilder(const StringBuilder &target) {
 	this->original = (string) calloc((size_t) target.currentCapacity, sizeof(char));
-	int index;
+	long int index;
 	for (index = 0; index < target.currentLength; index++) {
 		this->original[ index ] = target.original[ index ];
 	}
@@ -91,7 +91,7 @@ StringBuilder &StringBuilder::append(const Character &target) {
 }
 
 StringBuilder &StringBuilder::append(char target) {
-	int newLength = this->currentLength + 1;
+	long int newLength = this->currentLength + 1;
 	this->ensureCapacity(newLength);
 	this->original[this->currentLength] = target;
 	this->currentLength = newLength;
@@ -99,9 +99,9 @@ StringBuilder &StringBuilder::append(char target) {
 }
 
 StringBuilder &StringBuilder::append(const Array<Character> target) {
-	int newLength = this->currentLength + target.length;
+	long int newLength = this->currentLength + target.length;
 	this->ensureCapacity(newLength);
-	int indexOfOriginal = this->currentLength;
+	long int indexOfOriginal = this->currentLength;
 	for (Character character : target) {
 		this->original[indexOfOriginal] = character.charValue();
 		indexOfOriginal = indexOfOriginal + 1;
@@ -111,9 +111,9 @@ StringBuilder &StringBuilder::append(const Array<Character> target) {
 }
 
 StringBuilder &StringBuilder::append(const Array<char> target) {
-	int newLength = this->currentLength + target.length;
+	long int newLength = this->currentLength + target.length;
 	this->ensureCapacity(newLength);
-	int indexOfOriginal = this->currentLength;
+	long int indexOfOriginal = this->currentLength;
 	for (char character: target) {
 		this->original[indexOfOriginal] = character;
 		indexOfOriginal = indexOfOriginal + 1;
@@ -137,16 +137,16 @@ StringBuilder &StringBuilder::append(const CharSequence &target) {
 
 StringBuilder &StringBuilder::append(const CharSequence &target, int start, int end) {
 	String targetString = target.toString();
-	int lengthOfTarget = targetString.length();
+	long int lengthOfTarget = targetString.length();
 	if (start < 0 || start > end || end > lengthOfTarget) {
 		throw IndexOutOfBoundsException();
 	}
 	
-	int numberOfCharacter = end - start;
-	int newLength = currentLength + numberOfCharacter;
+	long int numberOfCharacter = end - start;
+	long int newLength = currentLength + numberOfCharacter;
 	this->ensureCapacity(newLength);
-	int indexOfTarget;
-	int indexOfOriginal;
+	long int indexOfTarget;
+	long int indexOfOriginal;
 	for (indexOfTarget = start, indexOfOriginal = this->currentLength; indexOfTarget < end; indexOfTarget++, indexOfOriginal++) {
 		this->original[indexOfOriginal] = targetString[indexOfTarget];
 	}
@@ -155,9 +155,9 @@ StringBuilder &StringBuilder::append(const CharSequence &target, int start, int 
 }
 
 StringBuilder &StringBuilder::append(const std::initializer_list<char> target) {
-	int newLength = this->currentLength + (int)target.size();
+	long int newLength = this->currentLength + (long int)target.size();
 	this->ensureCapacity(newLength);
-	int index = this->currentLength;
+	long int index = this->currentLength;
 	std::initializer_list<char>::const_iterator listIterator;
 	for (listIterator = target.begin(); listIterator != target.end(); listIterator++) {
 		this->original[index] = *listIterator;
@@ -168,11 +168,11 @@ StringBuilder &StringBuilder::append(const std::initializer_list<char> target) {
 }
 
 StringBuilder &StringBuilder::append(String target) {
-	int stringLength = target.length();
-	int newLength = this->currentLength + stringLength;
+	long int stringLength = target.length();
+	long int newLength = this->currentLength + stringLength;
 	this->ensureCapacity(newLength);
-	int indexOfOriginal;
-	int indexOfString = 0;
+	long int indexOfOriginal;
+	long int indexOfString = 0;
 	for (indexOfOriginal = this->currentLength; indexOfOriginal < newLength; indexOfOriginal++) {
 		this->original[indexOfOriginal] = target[indexOfString];
 		indexOfString = indexOfString + 1;
@@ -217,7 +217,7 @@ StringBuilder &StringBuilder::append(long target) {
 	// TODO
 //}
 
-int StringBuilder::capacity() const {
+long int StringBuilder::capacity() const {
 	return this->currentCapacity;
 }
 
@@ -229,38 +229,38 @@ char StringBuilder::charAt(int index) const {
 	return this->original[index];
 }
 
-int StringBuilder::codePointAt(int index) const {
+long int StringBuilder::codePointAt(int index) const {
 	if (index < 0 || index >= this->currentLength) {
 		throw IndexOutOfBoundsException(String::valueOf(index));
 	}
 	
 	Array<char> originalArray;
-	int indexOfOriginal;
+	long int indexOfOriginal;
 	for (indexOfOriginal = 0; indexOfOriginal < this->currentLength; indexOfOriginal++) {
 		originalArray.push(this->original[indexOfOriginal]);
 	}
-	int result = Character::codePointAt(originalArray, index);
+	long int result = Character::codePointAt(originalArray, index);
 	return result;
 }
 
-int StringBuilder::codePointBefore(int index) const {
-	int beforeOfIndex = index - 1;
+long int StringBuilder::codePointBefore(int index) const {
+	long int beforeOfIndex = index - 1;
 	return this->codePointAt(beforeOfIndex);
 }
 
-int StringBuilder::codePointCount(int beginIndex, int endIndex) {
+long int StringBuilder::codePointCount(int beginIndex, int endIndex) {
 	if (beginIndex < 0 || endIndex > this->currentLength || beginIndex > endIndex) {
 		throw IndexOutOfBoundsException();
 	}
 	
 	Array<char> originalArray;
-	int numberOfCharacters = endIndex - beginIndex;
-	int index;
-	int stopIndex = beginIndex + numberOfCharacters;
+	long int numberOfCharacters = endIndex - beginIndex;
+	long int index;
+	long int stopIndex = beginIndex + numberOfCharacters;
 	for (index = 0; index < stopIndex; index++) {
 		originalArray.push(this->original[ index ]);
 	}
-	int result = Character::codePointCount(originalArray, 0, numberOfCharacters);
+	long int result = Character::codePointCount(originalArray, 0, numberOfCharacters);
 	return result;
 }
 
@@ -275,10 +275,10 @@ StringBuilder StringBuilder::deleteRange(int start, int end) {
 		throw StringIndexOutOfBoundsException("start > end");
 	}
 	
-	int lengthOfSubStringWillBeRemoved = end - start;
+	long int lengthOfSubStringWillBeRemoved = end - start;
 	string newPositionOfTail = this->original + start;
 	string oldPositionOfTail = this->original + end;
-	int memorySizeOfTailPart = this->currentLength - end;
+	long int memorySizeOfTailPart = this->currentLength - end;
 	memmove(newPositionOfTail, oldPositionOfTail, (size_t) memorySizeOfTailPart);
 	
 	this->currentLength = this->currentLength - lengthOfSubStringWillBeRemoved;
@@ -292,7 +292,7 @@ StringBuilder StringBuilder::deleteCharAt(int index) {
 	
 	string newPositionOfTail = this->original + index;
 	string oldPositionOfTail = this->original + index + 1;
-	int memorySizeOfTailPart = this->currentLength - ( index + 1 );
+	long int memorySizeOfTailPart = this->currentLength - ( index + 1 );
 	memmove(newPositionOfTail, oldPositionOfTail, (size_t) memorySizeOfTailPart);
 	
 	this->currentLength = this->currentLength - 1;
@@ -304,11 +304,11 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
 		return;
 	}
 	
-	int newCapacity = this->currentCapacity * 2 + 2;
+	long int newCapacity = this->currentCapacity * 2 + 2;
 	if (newCapacity < minimumCapacity) {
 		newCapacity = minimumCapacity;
 	}
-	int numberOfBytes = newCapacity * sizeof(char);
+	long int numberOfBytes = newCapacity * sizeof(char);
 	this->original = (string) allocateMemory(this->original, (size_t) numberOfBytes);
 	this->currentCapacity = newCapacity;
 }
@@ -328,11 +328,11 @@ void StringBuilder::ensureCapacity(int minimumCapacity) {
 //	throw UnsupportedOperationException();
 //}
 
-int StringBuilder::indexOf(const String target) const {
+long int StringBuilder::indexOf(const String target) const {
 	return this->stringMatches(this->toString(), target, 0);
 }
 
-int StringBuilder::indexOf(const String target, int fromIndex) const {
+long int StringBuilder::indexOf(const String target, int fromIndex) const {
 	return this->stringMatches(this->toString(), target, fromIndex);
 }
 
@@ -349,12 +349,12 @@ StringBuilder &StringBuilder::insert(int offset, char target) {
 		throw IndexOutOfBoundsException(String::valueOf(offset));
 	}
 	
-	int newLength = this->currentLength + 1;
+	long int newLength = this->currentLength + 1;
 	this->ensureCapacity(newLength);
 	
 	string newShiftPosition = this->original + offset + 1;
 	string oldShiftPosition = this->original + offset;
-	int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
+	long int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
 	memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
 	this->original[offset] = target;
 	this->currentLength = newLength;
@@ -380,20 +380,20 @@ StringBuilder &StringBuilder::insert(int index, const Array<char> &target, int o
 		throw StringIndexOutOfBoundsException(offset);
 	}
 	
-	int stopIndexOfTarget = offset + length;
+	long int stopIndexOfTarget = offset + length;
 	if (offset < 0 || length < 0 || stopIndexOfTarget > target.length) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
 	
-	int newLength = this->currentLength + length;
+	long int newLength = this->currentLength + length;
 	this->ensureCapacity(newLength);
 	
 	string newShiftPosition = this->original + index + length;
 	string oldShiftPosition = this->original + index;
-	int sizeOfShiftMemory = sizeof(char) * (this->currentLength - index);
+	long int sizeOfShiftMemory = sizeof(char) * (this->currentLength - index);
 	memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
-	int indexOfTarget;
-	int indexOfOriginal = index;
+	long int indexOfTarget;
+	long int indexOfOriginal = index;
 	for (indexOfTarget = offset; indexOfTarget < stopIndexOfTarget; indexOfTarget++) {
 		this->original[indexOfOriginal] = target.get(indexOfTarget);
 		indexOfOriginal = indexOfOriginal + 1;
@@ -408,20 +408,20 @@ StringBuilder &StringBuilder::insert(int index, const Array<Character> &target, 
 		throw StringIndexOutOfBoundsException(offset);
 	}
 	
-	int stopIndexOfTarget = offset + length;
+	long int stopIndexOfTarget = offset + length;
 	if (offset < 0 || length < 0 || stopIndexOfTarget > target.length) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
 	
-	int newLength = this->currentLength + length;
+	long int newLength = this->currentLength + length;
 	this->ensureCapacity(newLength);
 	
 	string newShiftPosition = this->original + index + length;
 	string oldShiftPosition = this->original + index;
-	int sizeOfShiftMemory = sizeof(char) * (this->currentLength - index);
+	long int sizeOfShiftMemory = sizeof(char) * (this->currentLength - index);
 	memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
-	int indexOfTarget;
-	int indexOfOriginal = index;
+	long int indexOfTarget;
+	long int indexOfOriginal = index;
 	for (indexOfTarget = offset; indexOfTarget < stopIndexOfTarget; indexOfTarget++) {
 		this->original[indexOfOriginal] = target.get(indexOfTarget).charValue();
 		indexOfOriginal = indexOfOriginal + 1;
@@ -440,22 +440,22 @@ StringBuilder &StringBuilder::insert(int destinationOffset, const CharSequence &
 		throw IndexOutOfBoundsException();
 	}
 	String targetString = target.toString();
-	int lengthOfTarget = targetString.length();
+	long int lengthOfTarget = targetString.length();
 	if (start < 0 || end < 0 || start > end || end > lengthOfTarget){
 		throw IndexOutOfBoundsException();
 	}
 	
-	int lengthOfSubStringOfTarget = end - start;
-	int newLength = this->currentLength + lengthOfSubStringOfTarget;
+	long int lengthOfSubStringOfTarget = end - start;
+	long int newLength = this->currentLength + lengthOfSubStringOfTarget;
 	this->ensureCapacity(newLength);
 	
 	string newShiftPosition = this->original + destinationOffset + lengthOfSubStringOfTarget;
 	string oldShiftPosition = this->original + destinationOffset;
-	int sizeOfShiftMemory = sizeof(char) * (this->currentLength - destinationOffset);
+	long int sizeOfShiftMemory = sizeof(char) * (this->currentLength - destinationOffset);
 	memmove(newShiftPosition, oldShiftPosition, (size_t)sizeOfShiftMemory);
 	
-	int indexOfOriginal = destinationOffset;
-	int indexOfTarget;
+	long int indexOfOriginal = destinationOffset;
+	long int indexOfTarget;
 	for (indexOfTarget = start; indexOfTarget < end; indexOfTarget++) {
 		this->original[indexOfOriginal] = targetString[indexOfTarget];
 		indexOfOriginal = indexOfOriginal + 1;
@@ -502,18 +502,18 @@ StringBuilder &StringBuilder::insert(int offset, const String target) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
 	
-	int targetLength = target.length();
-	int newLength = this->currentLength + targetLength;
+	long int targetLength = target.length();
+	long int newLength = this->currentLength + targetLength;
 	this->ensureCapacity(newLength);
 	
 	string newShiftPosition = this->original + offset + targetLength;
 	string oldShiftPosition = this->original + offset;
 	// Number of bytes of memory will be to shift = size of char type multiple with number of character begin from the offset to the end.
-	int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
+	long int sizeOfShiftMemory = sizeof(char) * (this->currentLength - offset);
 	memmove(newShiftPosition, oldShiftPosition, (size_t) sizeOfShiftMemory);
 	
-	int indexOfOriginal = offset;
-	int indexOfTarget;
+	long int indexOfOriginal = offset;
+	long int indexOfTarget;
 	for (indexOfTarget = 0; indexOfTarget < targetLength; indexOfTarget++) {
 		this->original[indexOfOriginal] = target[indexOfTarget];
 		indexOfOriginal = indexOfOriginal + 1;
@@ -523,15 +523,15 @@ StringBuilder &StringBuilder::insert(int offset, const String target) {
 	return *this;
 }
 
-int StringBuilder::lastIndexOf(String target) const {
+long int StringBuilder::lastIndexOf(String target) const {
 	return this->stringMatchesReverse(this->toString(), target, this->currentLength);
 }
 
-int StringBuilder::lastIndexOf(String target, int fromIndex) const {
+long int StringBuilder::lastIndexOf(String target, int fromIndex) const {
 	return this->stringMatchesReverse(this->toString(), target, fromIndex);
 }
 
-int StringBuilder::length() const {
+long int StringBuilder::length() const {
 	return this->currentLength;
 }
 
@@ -557,18 +557,18 @@ StringBuilder StringBuilder::replace(int start, int end, const String target) {
 		end = this->currentLength;
 	}
 	
-	int lengthOfTarget = target.length();
-	int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
-	int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
+	long int lengthOfTarget = target.length();
+	long int lengthOfSubStringWillBeOverwrite = end - start; // tail part of this sequence.
+	long int newLength = this->currentLength + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
 	this->ensureCapacity(newLength);
 	
 	string newPositionOfTailPart = this->original + end + lengthOfTarget - lengthOfSubStringWillBeOverwrite;
 	string oldPositionOfTailPart = this->original + end;
-	int memorySizeOfTailPart = ( this->currentLength - end ) * sizeof(char);
+	long int memorySizeOfTailPart = ( this->currentLength - end ) * sizeof(char);
 	memmove(newPositionOfTailPart, oldPositionOfTailPart, (size_t) memorySizeOfTailPart);
 	
 	string insertPosition = this->original + start;
-	int memorySizeForTarget = lengthOfTarget * sizeof(char);
+	long int memorySizeForTarget = lengthOfTarget * sizeof(char);
 	memcpy(insertPosition, target.toCharPointer(), (size_t) memorySizeForTarget);
 	
 	this->currentLength = newLength;
@@ -577,9 +577,9 @@ StringBuilder StringBuilder::replace(int start, int end, const String target) {
 
 StringBuilder StringBuilder::reverse() {
 	boolean hasSurrogates = false;
-	int index;
-	int oppositeIndex;
-	int stopIndex = this->currentLength / 2;
+	long int index;
+	long int oppositeIndex;
+	long int stopIndex = this->currentLength / 2;
 	char temp;
 	for (index = 0; index < stopIndex; index++) {
 		oppositeIndex = ( this->currentLength - 1 ) - index;
@@ -616,7 +616,7 @@ void StringBuilder::setLength(int newLength) {
 	
 	this->ensureCapacity(newLength);
 	if (this->currentLength < newLength) {
-		int index;
+	long int index;
 		for (index = this->currentLength; index < newLength; index++) {
 			this->original[index] = '\0';
 		}
@@ -639,10 +639,10 @@ String StringBuilder::substring(int start, int end) const {
 		throw StringIndexOutOfBoundsException(end - start);
 	}
 	
-	int lengthOfSubString = end - start + 1;
+	long int lengthOfSubString = end - start + 1;
 	auto copyOfSubString = (string) calloc((size_t) lengthOfSubString, sizeof(char));
-	int indexOfOriginal;
-	int indexOfSubString = 0;
+	long int indexOfOriginal;
+	long int indexOfSubString = 0;
 	for (indexOfOriginal = start; indexOfOriginal < end; indexOfOriginal++) {
 		copyOfSubString[ indexOfSubString ] = this->original[ indexOfOriginal ];
 		indexOfSubString = indexOfSubString + 1;
@@ -654,9 +654,9 @@ String StringBuilder::substring(int start, int end) const {
 }
 
 String StringBuilder::toString() const {
-	int numberOfElementIncludeNullTerminator = this->currentLength + 1;
+	long int numberOfElementIncludeNullTerminator = this->currentLength + 1;
 	string content = (string)calloc((size_t)numberOfElementIncludeNullTerminator, sizeof(char));
-	int index;
+	long int index;
 	for (index = 0; index < this->currentLength; index++) {
 		content[index] = this->original[index];
 	}
@@ -668,19 +668,19 @@ String StringBuilder::toString() const {
 
 void StringBuilder::trimToSize() {
 	if (this->currentCapacity > this->currentLength) {
-		int numberOfBytesForCapacity = this->currentLength * sizeof(char);
+	long int numberOfBytesForCapacity = this->currentLength * sizeof(char);
 		this->original = (string) allocateMemory(this->original, (size_t) numberOfBytesForCapacity);
 		this->currentCapacity = this->currentLength;
 	}
 }
 
-int *StringBuilder::initializeNextTable(const String pattern) const {
-	int lengthOfPattern = pattern.length();
+long int *StringBuilder::initializeNextTable(const String pattern) const {
+	long int lengthOfPattern = pattern.length();
 	if (lengthOfPattern == 0) {
 		return nullptr;
 	}
 	
-	int *nextTable = (int *) calloc((size_t) lengthOfPattern, sizeof(int));
+	long int *nextTable = (int *) calloc((size_t) lengthOfPattern, sizeof(long int));
 	
 	if (nextTable == nullptr) {
 		return nullptr;
@@ -695,8 +695,8 @@ int *StringBuilder::initializeNextTable(const String pattern) const {
 		return nextTable;
 	}
 	
-	int position = 2;
-	int lengthOfTheLongestPrefixSuffix = 0;
+	long int position = 2;
+	long int lengthOfTheLongestPrefixSuffix = 0;
 	
 	while (position < lengthOfPattern) {
 		if (pattern[ position - 1 ] == pattern[ lengthOfTheLongestPrefixSuffix ]) {
@@ -714,9 +714,9 @@ int *StringBuilder::initializeNextTable(const String pattern) const {
 	return nextTable;
 }
 
-int StringBuilder::stringMatches(const String target, const String pattern, int startIndex) const {
-	int lengthOfPattern = pattern.length();
-	int lengthOfTarget = target.length();
+long int StringBuilder::stringMatches(const String target, const String pattern, int startIndex) const {
+	long int lengthOfPattern = pattern.length();
+	long int lengthOfTarget = target.length();
 	
 	if (startIndex > lengthOfTarget) {
 		if (lengthOfPattern == 0) {
@@ -735,12 +735,12 @@ int StringBuilder::stringMatches(const String target, const String pattern, int 
 	}
 	
 	// KMP algorithm.
-	int *nextTable = this->initializeNextTable(target);
+	long int *nextTable = this->initializeNextTable(target);
 	if (nextTable == nullptr) {
 		return -1;
 	}
 	
-	int position = 0;
+	long int position = 0;
 	while (startIndex + position < lengthOfTarget) {
 		if (pattern[ position ] == target[ startIndex + position ]) {
 			if (position == lengthOfPattern - 1) {
@@ -763,15 +763,15 @@ int StringBuilder::stringMatches(const String target, const String pattern, int 
 	return -1;
 }
 
-int StringBuilder::stringMatchesReverse(const String target, const String pattern, int startIndex) const {
-	int lengthOfPattern = pattern.length();
-	int lengthOfTarget = target.length();
+long int StringBuilder::stringMatchesReverse(const String target, const String pattern, int startIndex) const {
+	long int lengthOfPattern = pattern.length();
+	long int lengthOfTarget = target.length();
 	
 	if (startIndex < 0) {
 		return -1;
 	}
 	
-	int rightIndex = lengthOfTarget - lengthOfPattern;
+	long int rightIndex = lengthOfTarget - lengthOfPattern;
 	if (startIndex < rightIndex) {
 		startIndex = rightIndex;
 	}
@@ -782,12 +782,12 @@ int StringBuilder::stringMatchesReverse(const String target, const String patter
 	}
 	
 	// KMP algorithm.
-	int *nextTable = this->initializeNextTable(pattern);
+	long int *nextTable = this->initializeNextTable(pattern);
 	if (nextTable == nullptr) {
 		return -1;
 	}
 	
-	int position = 0;
+	long int position = 0;
 	while (startIndex - position >= 0) {
 		if (pattern[ lengthOfPattern - position - 1 ] == target[ startIndex - position ]) {
 			if (position == lengthOfPattern - 1) {
@@ -811,8 +811,8 @@ int StringBuilder::stringMatchesReverse(const String target, const String patter
 }
 
 void StringBuilder::reverseAllValidSurrogatePairs() {
-	int stopIndex = this->currentLength - 1;
-	int index;
+	long int stopIndex = this->currentLength - 1;
+	long int index;
 	char ch1;
 	char ch2;
 	for (index = 0; index < stopIndex; index++) {

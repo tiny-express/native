@@ -45,7 +45,7 @@ namespace Java {
 				private:
 						String protocol;
 						String host;
-						int port;
+	long int port;
 						String path;
 						String query;
 				public:
@@ -57,7 +57,7 @@ namespace Java {
 				public:
 						String getHost();
 						String getPath();
-						int getPort();
+	long int getPort();
 						String getProtocol();
 						String getQuery();
 						//URLConnection openConnection();
@@ -66,8 +66,8 @@ namespace Java {
 				
 				class URLConnection : public Object {
 				private:
-						int connectTimeout;
-						int readTimeout;
+	long int connectTimeout;
+	long int readTimeout;
 				protected:
 						URL url;
 						boolean doInput = true;
@@ -92,14 +92,14 @@ namespace Java {
 						void setIfModifiedSince(long ifModifiedSince);
 						long getIfModifiedSince();
 						void setReadTimeout(int timeout);
-						int getReadTimeout();
+	long int getReadTimeout();
 						void setAllowUserInteraction(boolean allowUserInteraction);
 						boolean getAllowUserInteraction();
 						void setConnectTimeout(int timeout);
-						int getConnectTimeout();
+	long int getConnectTimeout();
 						virtual void connect() = 0;
 						String getContentEncoding();
-						int getContentLength();
+	long int getContentLength();
 						String getContentType();
                         HashMap< String, Array<String> > getRequestProperties();
 						String getRequestProperty(String key);

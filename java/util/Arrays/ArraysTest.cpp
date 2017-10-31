@@ -39,12 +39,12 @@ TEST (JavaUtilArrays, BinarySearch) {
 	
 	// With correct key appeared inside array, return correct position
 	byte keyByte = 4;
-	int positionByte = 3;
+	long int positionByte = 3;
 	assertEquals(positionByte, Arrays::binarySearchByKey(arrayByte, keyByte, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	byte keyByte2 = 101;
-	int positionByte2 = -1;
+	long int positionByte2 = -1;
 	assertEquals(positionByte2, Arrays::binarySearchByKey(arrayByte, keyByte2, 5));
 	
 	/// Given valid char[] to test binary search
@@ -52,12 +52,12 @@ TEST (JavaUtilArrays, BinarySearch) {
 	
 	// With correct key appeared inside array, return correct position
 	char keyChar = 'b';
-	int positionChar = 1;
+	long int positionChar = 1;
 	assertEquals(positionChar, Arrays::binarySearchByKey(arrayChar, keyChar, 5));
 	
 	// With correct key but not appear inside array, return -1
 	char keyChar2 = 'f';
-	int positionChar2 = -1;
+	long int positionChar2 = -1;
 	assertEquals(positionChar2, Arrays::binarySearchByKey(arrayChar, keyChar2, 5));
 	
 	/// Given valid double[] to test binary search - this test case wrapped <float> also
@@ -65,12 +65,12 @@ TEST (JavaUtilArrays, BinarySearch) {
 	
 	// With correct key appeared inside array, return correct position
 	double keyDouble = 15.5;
-	int positionDouble = 0;
+	long int positionDouble = 0;
 	assertEquals(positionDouble, Arrays::binarySearchByKey(arrayDouble, keyDouble, 6));
 	
 	// With correct key2 but not appear inside array, return -1
 	double keyDouble2 = 65;
-	int positionDouble2 = -1;
+	long int positionDouble2 = -1;
 	assertEquals(positionDouble2, Arrays::binarySearchByKey(arrayDouble, keyDouble2, 6));
 	
 	/// Given valid Integer[] to test binary search with Object
@@ -78,12 +78,12 @@ TEST (JavaUtilArrays, BinarySearch) {
 	
 	// With correct key appeared inside array, return correct position
 	Integer keyObject = Integer(5);
-	int positionObject = 4;
+	long int positionObject = 4;
 	assertEquals(positionObject, Arrays::binarySearchByKey(arrayObject, keyObject, 5));
 	
 	// With correct key2 but not appear inside array, return -1
 	Integer keyObject2 = Integer(99);
-	int positionObject2 = -1;
+	long int positionObject2 = -1;
 	assertEquals(positionObject2, Arrays::binarySearchByKey(arrayObject, keyObject2, 5));
 	
 }

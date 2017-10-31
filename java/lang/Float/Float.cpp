@@ -140,8 +140,8 @@ short Float::shortValue() const {
     return (short) this->original;
 }
 
-int Float::intValue() const {
-    return (int) this->original;
+long int Float::intValue() const {
+    return (long int) this->original;
 }
 
 long Float::longValue() const {
@@ -269,7 +269,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     floatInput = fabs(floatInput);
 
     /** Get size of integerPartNormalizeForm  */
-    integerPartFloatInput = (int) floor(floatInput);
+    integerPartFloatInput = (long int) floor(floatInput);
     sizeOfIntegerPartNormalizeForm = 0;
 
     if (integerPartFloatInput == 0) {
@@ -283,7 +283,7 @@ String Float::floatToBinary32StringType(float floatInput) {
         }
     }
 
-    integerPartFloatInput = (int) floor(floatInput);
+    integerPartFloatInput = (long int) floor(floatInput);
     index = sizeOfIntegerPartNormalizeForm -1;
     while (integerPartFloatInput != 0) {
         if ((integerPartFloatInput & 1) == 1) {
@@ -304,7 +304,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     while ((fractionPartFloatInput != 0) && (index < 24)) {
         fractionPartFloatInput = fractionPartFloatInput * 2;
 
-        int integerPart = (int) floor(fractionPartFloatInput);
+        int integerPart = (long int) floor(fractionPartFloatInput);
 
         if (integerPart == 1) {
             fractionPartNormalizeForm[index] = '1';
@@ -349,7 +349,7 @@ String Float::floatToBinary32StringType(float floatInput) {
         }
     }
 
-    integerPartFloatInput = (int) floor(floatInput);
+    integerPartFloatInput = (long int) floor(floatInput);
     if (integerPartFloatInput != 0) {
         powerExponentBase2 = indexOfDotFloatInputNormalizeForm
                              - indexFirstBit1FloatInputNormalizeForm -1;
@@ -478,7 +478,7 @@ float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
     return resultBinary32StringTypeToFloat;
 }
 
-int Float::floatToRawIntBits(float floatInput) {
+long int Float::floatToRawIntBits(float floatInput) {
     String floatInputToBinary32StringType;
     int resultFloatToRawIntBits;
     int tempValue;
@@ -500,7 +500,7 @@ int Float::floatToRawIntBits(float floatInput) {
             tempValue = 0;
         }
         resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue
-                                                            * (int) Math::pow(2, exponent);
+                                                            * (long int) Math::pow(2, exponent);
         exponent--;
     }
 
@@ -511,7 +511,7 @@ int Float::floatToRawIntBits(float floatInput) {
     return resultFloatToRawIntBits;
 }
 
-int Float::floatToIntBits(float inputFloat) {
+long int Float::floatToIntBits(float inputFloat) {
     return floatToRawIntBits(inputFloat);
 }
 
@@ -553,7 +553,7 @@ String Float::intBitsToBinary32StringType(int intBitsInput) {
     return result;
 }
 
-int Float::compare(float float1, float float2) {
+long int Float::compare(float float1, float float2) {
     int thisBits = Float::floatToIntBits(float1);
     int anotherBits = Float::floatToIntBits(float2);
 
@@ -567,7 +567,7 @@ int Float::compare(float float1, float float2) {
     return 1;
 }
 
-int Float::compareTo(const Float &anotherFloat) const {
+long int Float::compareTo(const Float &anotherFloat) const {
     return Float::compare(this->original, anotherFloat.original);
 }
 
@@ -582,11 +582,11 @@ boolean Float::equals(const Float &object) const {
     // return (isFloat && isEqual);
 }
 
-int Float::hashCode(float floatInput) {
+long int Float::hashCode(float floatInput) {
     return  floatToIntBits(floatInput);
 }
 
-int Float::hashCode() {
+long int Float::hashCode() {
     return Float::hashCode(this->original);
 }
 

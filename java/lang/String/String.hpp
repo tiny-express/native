@@ -286,7 +286,7 @@ namespace Java {
             * @param index
             * @return char
             */
-            inline char &operator[](const int index) {
+            inline char &operator[](const long int index) {
                 return this->original[index];
             }
 
@@ -1124,7 +1124,7 @@ namespace Java {
              * @param index
              * @return char
              */
-            const char &operator[](const int index) const {
+            const char &operator[](const long int index) const {
                 return this->original[index];
             }
         

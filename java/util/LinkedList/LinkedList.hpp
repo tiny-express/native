@@ -73,7 +73,7 @@ namespace Java {
 				private:
 						Node<E> *first = nullptr;
 						Node<E> *last = nullptr;
-						int nodeSize = 0;
+	long int nodeSize = 0;
 				
 				public:
 						/**
@@ -166,8 +166,8 @@ namespace Java {
 						 * Removes all of the elements from this list.
 						 */
 						void clear() {
-							int nodeSize = this->nodeSize;
-							int index;
+	long int nodeSize = this->nodeSize;
+	long int index;
 							for (index = 0; index < nodeSize; ++index) {
 								remove();
 							}
@@ -250,9 +250,9 @@ namespace Java {
 						 * @param element
 						 * @return int
 						 */
-						int indexOf(const E &element) const {
+	long int indexOf(const E &element) const {
 							Node<E> *temp = this->first;
-							int index;
+	long int index;
 							for (index = 0; index < this->nodeSize; ++index) {
 								if (temp->element == element) {
 									return index;
@@ -269,9 +269,9 @@ namespace Java {
 						 * @param element
 						 * @return int
 						 */
-						int lastIndexOf(const E &element) const {
+	long int lastIndexOf(const E &element) const {
 							Node<E> *temp = this->last;
-							int index;
+	long int index;
 							for (index = 0; index < this->nodeSize; ++index) {
 								if (temp->element == element) {
 									return index;
@@ -470,7 +470,7 @@ namespace Java {
 						boolean removeFirstOccurrence(const E &element) {
 							Node<E> *temp = this->first;
 							
-							int index;
+	long int index;
 							for (index = 0; index < this->nodeSize; ++index) {
 								if (temp->element == element) {
 									return remove(index);
@@ -489,7 +489,7 @@ namespace Java {
 						boolean removeLastOccurrrence(const E &element) {
 							Node<E> *temp = this->last;
 							
-							int index;
+	long int index;
 							for (index = this->nodeSize; index > 0; ++index) {
 								if (temp->element == element) {
 									return remove(index);
@@ -518,7 +518,7 @@ namespace Java {
 						 *
 						 * @return
 						 */
-						int size() {
+	long int size() {
 							return this->nodeSize;
 						}
 						
@@ -581,7 +581,7 @@ namespace Java {
 							}
 							
 							Node<E> *temp = this->first;
-							int _index;
+	long int _index;
 							for (_index = 1; _index < index; ++_index) {
 								temp = temp->next;
 							}
@@ -590,7 +590,7 @@ namespace Java {
 						
 						Node<E> *node1(const E &element) const {
 							Node<E> *temp = this->first;
-							int index;
+	long int index;
 							for (index = 0; index < this->nodeSize; ++index) {
 								if (temp->element == element) {
 									return temp;

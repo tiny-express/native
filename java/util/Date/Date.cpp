@@ -101,31 +101,31 @@ void Date::setYear(int year) {
     this->updateDateStatus();
 }
 
-int Date::getDate() const {
+long int Date::getDate() const {
     return this->localTimer->tm_mday;
 }
 
-int Date::getDay() const {
+long int Date::getDay() const {
     return this->localTimer->tm_wday;
 }
 
-int Date::getHours() const {
+long int Date::getHours() const {
     return this->localTimer->tm_hour;
 }
 
-int Date::getMinutes() const {
+long int Date::getMinutes() const {
     return this->localTimer->tm_min;
 }
 
-int Date::getMonth() const {
+long int Date::getMonth() const {
     return this->localTimer->tm_mon;
 }
 
-int Date::getSeconds() const {
+long int Date::getSeconds() const {
     return this->localTimer->tm_sec;
 }
 
-int Date::getYear() const {
+long int Date::getYear() const {
     return this->localTimer->tm_year;
 }
 
@@ -133,8 +133,8 @@ long Date::getTime() const {
     return this->timer;
 }
 
-int Date::getTimezoneOffset() const {
-    return (int) -(this->localTimer->tm_gmtoff / 60);
+long int Date::getTimezoneOffset() const {
+    return (long int) -(this->localTimer->tm_gmtoff / 60);
 }
 
 boolean Date::after(Date specifiedDate) const {
@@ -145,7 +145,7 @@ boolean Date::before(Date specifiedDate) const {
     return this->timer < specifiedDate.timer;
 }
 
-int Date::compareTo(const Date &anotherDate) const {
+long int Date::compareTo(const Date &anotherDate) const {
     long timeOffset = this->timer - anotherDate.timer;
     
     if (timeOffset < 0) {
@@ -187,7 +187,7 @@ String Date::toGMTString() const {
     return this->timeToString(pattern, utcTimer);
 }
 
-int Date::hashCode() const {
+long int Date::hashCode() const {
     return Object::hashCode();
 }
 
@@ -440,7 +440,7 @@ long Date::getOffsetFromUTC() {
     return (long) offsetFromUTC;
 }
 
-int Date::getSequenceNumber(const String &inputString, int &index) {
+long int Date::getSequenceNumber(const String &inputString, int &index) {
     boolean isNumber;
     boolean isInRange;
     char currentChar;

@@ -57,10 +57,10 @@ namespace Java {
 				
 				public:
 						boolean booleanValue() const;
-						static int compare(const boolean &target1, const boolean &target2);
-						int compareTo(const Boolean &target) const;
+						static long int compare(const boolean &target1, const boolean &target2);
+	long int compareTo(const Boolean &target) const;
 						static boolean getBoolean(const_string target);
-						virtual int hashCode() const;
+						virtual long int hashCode() const;
 						static boolean parseBoolean(const_string target);
 						String toString() const;
 						static String toString(const boolean &target);

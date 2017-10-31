@@ -106,7 +106,7 @@ short Short::shortValue() const {
  *
  * @return int
  */
-int Short::intValue() const {
+long int Short::intValue() const {
 	return this->original;
 }
 

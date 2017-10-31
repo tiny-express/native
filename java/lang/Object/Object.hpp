@@ -117,7 +117,7 @@ namespace Java {
              * @see     java.lang.Object#equals(java.lang.Object)
              * @see     java.lang.System#identityHashCode
              */
-            virtual int hashCode() const {
+            virtual long int hashCode() const {
                 return (intptr_t) std::addressof(*this);
             }
 

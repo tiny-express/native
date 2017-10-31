@@ -99,7 +99,7 @@ TEST (JavaUtilLinkedList, Poll) {
 	
 	Integer result = linkedList.poll();
 	Integer expectedValue = 10;
-	int expectedSize = 2;
+	long int expectedSize = 2;
 	assertEquals(expectedValue.intValue(), result.intValue());
 	assertEquals(expectedSize, linkedList.size());
 	

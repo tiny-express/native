@@ -40,7 +40,7 @@ void HttpURLConnection::setMethod(String method) {
 	this->method = method;
 }
 
-int HttpURLConnection::getResponseCode() {
+long int HttpURLConnection::getResponseCode() {
 	return this->responseCode;
 }
 

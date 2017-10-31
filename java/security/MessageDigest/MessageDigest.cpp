@@ -54,11 +54,11 @@ String MessageDigest::getAlgorithm() {
     return algorithm;
 }
 
-int MessageDigest::getDigestLength() {
+long int MessageDigest::getDigestLength() {
     return engineGetDigestLength();
 }
 
-int MessageDigest::digest(byte buf[], int len) {
+long int MessageDigest::digest(byte buf[], int len) {
     if (buf == nullptr)
         throw InterruptedException("No output buffer given");
     if (len < engineGetDigestLength())
@@ -81,14 +81,14 @@ MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
     this->algorithm = algorithm;
 }
 
-int MessageDigest::engineDigest(byte buffer[], int len) {
+long int MessageDigest::engineDigest(byte buffer[], int len) {
     if (spi) {
         return spi->engineDigest(buffer, len);
     }
     return 0;
 }
 
-int MessageDigest::engineGetDigestLength() {
+long int MessageDigest::engineGetDigestLength() {
     if (spi) {
         return spi->engineGetDigestLength();
     }

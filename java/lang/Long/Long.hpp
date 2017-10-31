@@ -54,7 +54,7 @@ namespace Java {
 						/**
 						 * The number of bits used to represent a long value in two's complement binary form.
 						 */
-						static const int SIZE = 64;
+						static const long int SIZE = 64;
 				
 				public:
 						/**
@@ -93,7 +93,7 @@ namespace Java {
 						 * @param long i
 						 * @return int
 						 */
-						static int bitCount(long i);
+						static long int bitCount(long i);
 						
 						/**
 						 * Returns the value of this Long as a int
@@ -101,7 +101,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int byteValue();
+	long int byteValue();
 						
 						/**
 						 * Compares two long values numerically.
@@ -110,7 +110,7 @@ namespace Java {
 						 * @param long y
 						 * @return int
 						 */
-						static int compare(long x, long y);
+						static long int compare(long x, long y);
 						
 						/**
 						 * Compares two Long objects numerically.
@@ -118,7 +118,7 @@ namespace Java {
 						 * @param Long anotherLong
 						 * @return int
 						 */
-						int compareTo(Long anotherLong);
+	long int compareTo(Long anotherLong);
 						
 						/**
 						 * Decodes a String into a Long.
@@ -181,7 +181,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int hashCode();
+	long int hashCode();
 						
 						/**
 						 * Returns a long value with at most a single one-bit, in the position of the highest-order ("leftmost")
@@ -197,7 +197,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int intValue() const;
+	long int intValue() const;
 						
 						/**
 						 * Returns the value of this Long as a long value.
@@ -222,7 +222,7 @@ namespace Java {
 						 * @param long i
 						 * @return int
 						 */
-						static int numberOfLeadingZeros(long i);
+						static long int numberOfLeadingZeros(long i);
 						
 						/**
 						 * Returns the number of zero bits following the lowest-order ("rightmost") one-bit
@@ -231,7 +231,7 @@ namespace Java {
 						 * @param long i
 						 * @return int
 						 */
-						static int numberOfTrailingZeros(long i);
+						static long int numberOfTrailingZeros(long i);
 						
 						/**
 						 * Parses the string argument as a signed decimal long.
@@ -301,7 +301,7 @@ namespace Java {
 						 * @param long i
 						 * @return int
 						 */
-						static int signum(long i);
+						static long int signum(long i);
 						
 						/**
 						 * Returns a string representation of the long argument as an unsigned integer in base 2.
@@ -388,7 +388,7 @@ namespace Java {
 						 * @param int len
 						 * @return int
 						 */
-						static int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
+						static long int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
 				
 				public:
 						

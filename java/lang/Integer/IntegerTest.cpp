@@ -284,8 +284,8 @@ TEST (JavaLangInteger, IntValue) {
 	Integer notExpectedIntegerIntValue = 1111;
 	
 	// Make a comparison between expected realResult and the real result
-	int expectedResultIntValue = 0;
-	int realResultIntValue = zeroIntegerIntValue.intValue();
+	long int expectedResultIntValue = 0;
+	long int realResultIntValue = zeroIntegerIntValue.intValue();
 	assertEquals(expectedResultIntValue, realResultIntValue);
 	
 	// Make a comparison between expected realResult and the real result
@@ -309,7 +309,7 @@ TEST (JavaLangInteger, IntValue) {
 	assertEquals(expectedResultIntValue, realResultIntValue);
 	
 	// Make a comparison between expected realResult and the real result
-	int notExpectedResult = 9999;
+	long int notExpectedResult = 9999;
 	realResultIntValue = minIntegerIntValue.intValue();
 	assertNotEquals(notExpectedResult, realResultIntValue);
 }
@@ -364,9 +364,9 @@ TEST (JavaLangInteger, DoubleValue) {
 }
 
 TEST (JavaLangInteger, BitCount) {
-	int inputInt;
-	int expectedResult;
-	int actualResult;
+	long int inputInt;
+	long int expectedResult;
+	long int actualResult;
 	
 	inputInt = 0;
 	expectedResult = 0;
@@ -402,29 +402,29 @@ TEST (JavaLangInteger, BitCount) {
 TEST (JavaLangInteger, ByteValue) {
 	Integer integerInput;
 	
-	integerInput = 0;
+	long integerInput = 0;
 	assertEquals((byte) 0, integerInput.byteValue());
 	
-	integerInput = 1;
+	long integerInput = 1;
 	assertEquals((byte) 1, integerInput.byteValue());
 	
-	integerInput = -1;
+	long integerInput = -1;
 	assertEquals((byte) -1, integerInput.byteValue());
 	
-	integerInput = 13;
+	long integerInput = 13;
 	assertEquals((byte) 13, integerInput.byteValue());
 	
-	integerInput = Integer::MAX_VALUE;
+	long integerInput = Integer::MAX_VALUE;
 	assertEquals((byte) -1, integerInput.byteValue());
 	
-	integerInput = Integer::MIN_VALUE;
+	long integerInput = Integer::MIN_VALUE;
 	assertEquals((byte) 0, integerInput.byteValue());
 }
 
 TEST (JavaLangInteger, Compare) {
 	// Given 2 int
-	int greater = 10;
-	int smaller = 5;
+	long int greater = 10;
+	long int smaller = 5;
 	
 	// Compare 2 equal value;
 	assertEquals(0, Integer::compare(greater, greater));
@@ -436,9 +436,9 @@ TEST (JavaLangInteger, Compare) {
 
 TEST (JavaLangInteger, CompareUnsigned) {
 	// Given 3 int
-	int greater = 10;
-	int smaller = 5;
-	int negative = -10;
+	long int greater = 10;
+	long int smaller = 5;
+	long int negative = -10;
 	
 	// Compare 2 equal value;
 	assertEquals(0, Integer::compareUnsigned(greater, greater));
@@ -603,14 +603,14 @@ TEST (JavaLangInteger, Decode) {
 
 TEST (JavaLangInteger, DivideUnsigned) {
 	// Given 4 int
-	int positiveDividend = 10;
-	int positiveDivisor = 5;
-	int negativeDividend = -10;
-	int negativeDivisor = -5;
+	long int positiveDividend = 10;
+	long int positiveDivisor = 5;
+	long int negativeDividend = -10;
+	long int negativeDivisor = -5;
 	
 	// Divide by zero
 	try {
-		int exceptionResult = Integer::divideUnsigned(positiveDividend, 0);
+	long int exceptionResult = Integer::divideUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("Divide by zero", e.getMessage());
@@ -1166,9 +1166,9 @@ TEST (JavaLangInteger, ParseIntWithRadix) {
 
 TEST (JavaLangInteger, ParseInt) {
 	String stringInput;
-	int expectedResult;
-	int actualResult;
-	int exceptionResult;
+	long int expectedResult;
+	long int actualResult;
+	long int exceptionResult;
 	
 	stringInput = "";
 	try {
@@ -1310,9 +1310,9 @@ TEST (JavaLangInteger, ParseUnsignedIntWithRadix) {
 
 TEST (JavaLangInteger, ParseUnsignedInt) {
 	String stringInput;
-	int expectedResult;
-	int actualResult;
-	int exceptionResult;
+	long int expectedResult;
+	long int actualResult;
+	long int exceptionResult;
 	
 	// Cast all case of inputString a string of type decimal number
 	stringInput = (String) "0";
@@ -1366,14 +1366,14 @@ TEST (JavaLangInteger, ParseUnsignedInt) {
 
 TEST (JavaLangInteger, RemainderUnsigned) {
 	// Given 4 int
-	int positiveDividend = 10;
-	int positiveDivisor = 4;
-	int negativeDividend = -10;
-	int negativeDivisor = -4;
+	long int positiveDividend = 10;
+	long int positiveDivisor = 4;
+	long int negativeDividend = -10;
+	long int negativeDivisor = -4;
 	
 	// Divide by zero
 	try {
-		int exceptionResult = Integer::remainderUnsigned(positiveDividend, 0);
+	long int exceptionResult = Integer::remainderUnsigned(positiveDividend, 0);
 	}
 	catch (ArithmeticException &e) {
 		assertEquals("Divide by zero", e.getMessage());

@@ -34,9 +34,9 @@ TEST (JavaUtilStack, Push) {
 	// int
 	Stack<int> pushIntStack;
 	
-	int pushInt1 = 1;
-	int pushInt2 = 2;
-	int pushInt3 = 3;
+	long int pushInt1 = 1;
+	long int pushInt2 = 2;
+	long int pushInt3 = 3;
 	
 	// Push elements to Stack
 	pushIntStack.push(pushInt1);
@@ -116,7 +116,7 @@ TEST (JavaUtilStack, Empty) {
 	
 	// int
 	Stack<int> notEmptyIntStack;
-	int intTemp = 123;
+	long int intTemp = 123;
 	notEmptyIntStack.push(intTemp);
 	assertFalse(notEmptyIntStack.empty());
 	
@@ -143,9 +143,9 @@ TEST (JavaUtilStack, Peek) {
 	//int
 	Stack<int> peekIntStack;
 	
-	int pushInt1 = 1;
-	int pushInt2 = 2;
-	int pushInt3 = 3;
+	long int pushInt1 = 1;
+	long int pushInt2 = 2;
+	long int pushInt3 = 3;
 	
 	// Push elements to Stack
 	peekIntStack.push(pushInt1);
@@ -153,7 +153,7 @@ TEST (JavaUtilStack, Peek) {
 	peekIntStack.push(pushInt3);
 	
 	// Return the top element without removing it
-	int intResult = peekIntStack.peek();
+	long int intResult = peekIntStack.peek();
 	assertEquals(intResult, peekIntStack.peek());
 	assertEquals(3, peekIntStack.size());// check size to make sure the top element is not removed
 	
@@ -206,9 +206,9 @@ TEST (JavaUtilStack, Pop) {
 	//int
 	Stack<int> popIntStack;
 	
-	int pushInt1 = 1;
-	int pushInt2 = 2;
-	int pushInt3 = 3;
+	long int pushInt1 = 1;
+	long int pushInt2 = 2;
+	long int pushInt3 = 3;
 	
 	// Push elements to Stack
 	popIntStack.push(pushInt1);
@@ -216,7 +216,7 @@ TEST (JavaUtilStack, Pop) {
 	popIntStack.push(pushInt3);
 	
 	// Return the top element and remove it
-	int intResult = popIntStack.pop();
+	long int intResult = popIntStack.pop();
 	assertEquals(intResult, pushInt3);
 	assertEquals(2, popIntStack.size()); // check size to make sure the top element is removed
 	
@@ -269,9 +269,9 @@ TEST (JavaUtilStack, Search) {
 	//int
 	Stack<int> searchIntStack;
 	
-	int pushInt1 = 1;
-	int pushInt2 = 2;
-	int pushInt3 = 3;
+	long int pushInt1 = 1;
+	long int pushInt2 = 2;
+	long int pushInt3 = 3;
 	
 	// Push elements to Stack
 	searchIntStack.push(pushInt1);

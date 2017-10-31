@@ -78,14 +78,14 @@ Long::~Long() {
  * @param long i
  * @return int
  */
-int Long::bitCount(long i) {
+long int Long::bitCount(long i) {
 	i = i - (( i >> 1 ) & 0x5555555555555555L );
 	i = ( i & 0x3333333333333333L ) + (( i >> 2 ) & 0x3333333333333333L );
 	i = ( i + ( i >> 4 )) & 0x0f0f0f0f0f0f0f0fL;
 	i = i + ( i >> 8 );
 	i = i + ( i >> 16 );
 	i = i + ( i >> 32 );
-	return (int) i & 0x7f;
+	return (long int) i & 0x7f;
 }
 
 /**
@@ -93,8 +93,8 @@ int Long::bitCount(long i) {
  *
  * @return int
  */
-int Long::byteValue() {
-	int result = (int) (char) this->original;
+long int Long::byteValue() {
+	long int result = (long int) (char) this->original;
 	return result;
 }
 
@@ -105,7 +105,7 @@ int Long::byteValue() {
  * @param long y
  * @return int
  */
-int Long::compare(long x, long y) {
+long int Long::compare(long x, long y) {
 	if (x < y) {
 		return -1;
 	}
@@ -121,8 +121,8 @@ int Long::compare(long x, long y) {
  * @param Long anotherLong
  * @return int
  */
-int Long::compareTo(Long anotherLong) {
-	int result = compare(this->original, anotherLong.original);
+long int Long::compareTo(Long anotherLong) {
+	long int result = compare(this->original, anotherLong.original);
 	return result;
 }
 
@@ -133,8 +133,8 @@ int Long::compareTo(Long anotherLong) {
  * @return Long
  */
 Long Long::decode(String target) {
-	int radix = 10;
-	int index = 0;
+	long int radix = 10;
+	long int index = 0;
 	boolean negative = false;
 	Long result;
 	
@@ -246,8 +246,8 @@ Long Long::getLong(String nm, Long val) {
  *
  * @return int
  */
-int Long::hashCode() {
-	return (int) ( this->original ^ ( this->original >> 32 ));
+long int Long::hashCode() {
+	return (long int) ( this->original ^ ( this->original >> 32 ));
 }
 
 /**
@@ -272,8 +272,8 @@ long Long::highestOneBit(long i) {
  *
  * @return int
  */
-int Long::intValue() const {
-	return (int) this->original;
+long int Long::intValue() const {
+	return (long int) this->original;
 }
 
 /**
@@ -303,7 +303,7 @@ long Long::lowestOneBit(long i) {
  * @param source
  * @return int
  */
-int Long::numberOfLeadingZeros(long source) {
+long int Long::numberOfLeadingZeros(long source) {
     if (source == 0L) {
         return 64;
     }
@@ -326,7 +326,7 @@ int Long::numberOfLeadingZeros(long source) {
  * @param source
  * @return int
  */
-int Long::numberOfTrailingZeros(long source) {
+long int Long::numberOfTrailingZeros(long source) {
     if (source == 0L) {
         return 64;
     }
@@ -364,11 +364,11 @@ long Long::parseLong(String s, int radix) {
 	
 	long result = 0;
 	boolean negative = false;
-	int index = 0;
-	int length = s.length();
+	long int index = 0;
+	long int length = s.length();
 	long limit = -Long::MAX_VALUE;
 	long multmin;
-	int digit;
+	long int digit;
 	
 	if (length > 0) {
 		char firstChar = s.charAt(0);
@@ -482,8 +482,8 @@ short Long::shortValue() const {
  * @param long i
  * @return int
  */
-int Long::signum(long i) {
-	return (int) (( i >> 63 ) | ( -i >> 63 ));
+long int Long::signum(long i) {
+	return (long int) (( i >> 63 ) | ( -i >> 63 ));
 }
 
 /**
@@ -584,10 +584,10 @@ Long Long::valueOf(String s, int radix) {
  * @param int len
  * @return int
  */
-int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
-	int charPos = len;
-	int radix = 1 << shift;
-	int mask = radix - 1;
+long int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
+	long int charPos = len;
+	long int radix = 1 << shift;
+	long int mask = radix - 1;
 	
 	//FIXME: move this to Integer.digits
 	static char digits[] = {
@@ -600,7 +600,7 @@ int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, 
 	};
 	
 	do {
-		buf[ offset + --charPos ] = digits[ ((int) val ) & mask ];
+		buf[ offset + --charPos ] = digits[ ((long int) val ) & mask ];
 		val >>= shift;
 	} while (val != 0 && charPos > 0);
 	
@@ -616,10 +616,10 @@ int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, 
  */
 String Long::toUnsignedString0(long val, int shift) {
 	// assert shift > 0 && shift <=5 : "Illegal shift value";
-	static int SIZE = 64;
+	static long int SIZE = 64;
 	
-	int mag = SIZE - Long::numberOfLeadingZeros(val);
-	int chars = Math::max((( mag + ( shift - 1 )) / shift ), 1);
+	long int mag = SIZE - Long::numberOfLeadingZeros(val);
+	long int chars = Math::max((( mag + ( shift - 1 )) / shift ), 1);
 	
 	Array<char> buff;
 	for (int i = 0; i < chars; ++i) { //Set empty array

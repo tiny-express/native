@@ -62,7 +62,7 @@ StringBufferUnSafe::StringBufferUnSafe(CharSequence &sequence) {
     this->append(sequence);
 }
 
-int StringBufferUnSafe::capacity() const {
+long int StringBufferUnSafe::capacity() const {
     return this->currentCapacity;
 }
 
@@ -113,7 +113,7 @@ StringBufferUnSafe &StringBufferUnSafe::append(String stringToAppend) {
     return this->append(stringToAppend.toString(), 0, stringToAppend.length());
 }
 
-int StringBufferUnSafe::length() const {
+long int StringBufferUnSafe::length() const {
     return this->currentLength;
 }
 
@@ -246,7 +246,7 @@ char StringBufferUnSafe::charAt(int index) const {
     return this->original[index];
 }
 
-int StringBufferUnSafe::codePointAt(int index) const {
+long int StringBufferUnSafe::codePointAt(int index) const {
     if (index < 0) {
         throw IndexOutOfBoundsException("index must be positive");
     }
@@ -268,7 +268,7 @@ int StringBufferUnSafe::codePointAt(int index) const {
     return charAtIndex;
 }
 
-int StringBufferUnSafe::codePointBefore(int index) const {
+long int StringBufferUnSafe::codePointBefore(int index) const {
     if (index < 0 || index == 0) {
         throw IndexOutOfBoundsException("index must be positive");
     }
@@ -286,7 +286,7 @@ int StringBufferUnSafe::codePointBefore(int index) const {
     return charAtPreviousIndex;
 }
 
-int StringBufferUnSafe::codePointCount(int beginIndex, int endIndex) const {
+long int StringBufferUnSafe::codePointCount(int beginIndex, int endIndex) const {
     if (beginIndex < 0 || endIndex > this->currentLength ||
         beginIndex > endIndex) {
         throw IndexOutOfBoundsException();
@@ -368,11 +368,11 @@ StringBufferUnSafe::~StringBufferUnSafe() {
      // TODO need arrayCopy
 }*/
 
-int StringBufferUnSafe::indexOf(String stringToGetIndex) const {
+long int StringBufferUnSafe::indexOf(String stringToGetIndex) const {
     return stringIndex(this->original, stringToGetIndex.toCharPointer(), 1);
 }
 
-int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) const {
+long int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) const {
     String originalString = this->original;
     String fromIndexString = originalString.getStringFromIndex(fromIndex);
     int result = fromIndexString.indexOf(stringToGetIndex);
@@ -469,7 +469,7 @@ StringBufferUnSafe::insert(int destinationOffset, CharSequence &sequence,
                         end - start);
 }
 
-int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
+long int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
     String originalString = this->original;
     return originalString.lastIndexOf(stringToGetIndex);
 }
@@ -774,7 +774,7 @@ StringBuffer &StringBuffer::append(StringBuffer stringBuffer) {
     return *this;
 }
 
-int StringBuffer::capacity() const {
+long int StringBuffer::capacity() const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::capacity();
 }
@@ -784,17 +784,17 @@ char StringBuffer::charAt(int index) const {
     return StringBufferUnSafe::charAt(index);
 }
 
-int StringBuffer::codePointAt(int index) const {
+long int StringBuffer::codePointAt(int index) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::codePointAt(index);
 }
 
-int StringBuffer::codePointBefore(int index) const {
+long int StringBuffer::codePointBefore(int index) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::codePointBefore(index);
 }
 
-int StringBuffer::codePointCount(int beginIndex, int endIndex) const {
+long int StringBuffer::codePointCount(int beginIndex, int endIndex) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::codePointCount(beginIndex, endIndex);
 }
@@ -825,7 +825,7 @@ StringBuffer &StringBuffer::deleteCharAt(int index) {
     return *this;
 }
 
-int StringBuffer::length() const {
+long int StringBuffer::length() const {
     return StringBufferUnSafe::length();
 }
 
@@ -836,12 +836,12 @@ StringBuffer::~StringBuffer() = default;
     StringBufferUnSafe::getChars(sourceBegin, sourceEnd, destination, destinationBegin);
 }*/
 
-int StringBuffer::indexOf(String stringToGetIndex) const {
+long int StringBuffer::indexOf(String stringToGetIndex) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::indexOf(stringToGetIndex);
 }
 
-int StringBuffer::indexOf(String stringToGetIndex, int fromIndex) const {
+long int StringBuffer::indexOf(String stringToGetIndex, int fromIndex) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::indexOf(stringToGetIndex, fromIndex);
 }
@@ -915,17 +915,17 @@ StringBuffer::insert(int index, String stringToInsert, int offset, int len) {
     return *this;
 }
 
-int StringBuffer::lastIndexOf(String stringToGetIndex) const {
+long int StringBuffer::lastIndexOf(String stringToGetIndex) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::lastIndexOf(stringToGetIndex);
 }
 
-int StringBuffer::lastIndexOf(String stringToGetIndex, int fromIndex) const {
+long int StringBuffer::lastIndexOf(String stringToGetIndex, int fromIndex) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::lastIndexOf(stringToGetIndex, fromIndex);
 }
 
-int StringBuffer::offsetByCodePoints(int index, int codePointOffset) const {
+long int StringBuffer::offsetByCodePoints(int index, int codePointOffset) const {
     std::lock_guard<std::mutex> guard(this->mutex);
     return StringBufferUnSafe::offsetByCodePoints(index, codePointOffset);
 }

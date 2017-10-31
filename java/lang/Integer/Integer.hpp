@@ -42,7 +42,7 @@ namespace Java {
 							public Number,
 							public virtual Comparable<Integer> {
 				private:
-						int original;
+	long int original;
 						string originalString;
 				
 				private:
@@ -60,13 +60,13 @@ namespace Java {
 						/**
 						 * The number of bits used to represent an int value in two's complement binary form.
 						 */
-						static const int SIZE = 32;
+						static const long int SIZE = 32;
 						
 						/**
 						 * The number of bytes used to represent a int value in two's complement binary form.
 						 */
 						// TODO change from 8 to Byte::SIZE
-						static const int BYTES = SIZE / 8;
+						static const long int BYTES = SIZE / 8;
 						
 						/**
 						 * A constant holding the maximum value of type int
@@ -150,7 +150,7 @@ namespace Java {
 						 * and a value greater than 0 if this Integer is numerically greater than
 						 * the argument Integer (signed comparison).
 						 */
-						int compareTo(const Integer &anotherInteger) const override;
+	long int compareTo(const Integer &anotherInteger) const override;
 						
 						/**
 						 * Make a summation with target Integer
@@ -282,7 +282,7 @@ namespace Java {
 						 * @param inputInt
 						 * @return int
 						 */
-						static int bitCount(int inputInt);
+						static long int bitCount(int inputInt);
 						
 						/**
 						 * Returns the value of this Integer as a byte
@@ -300,7 +300,7 @@ namespace Java {
 						 * @return the value 0 if intA == intB; a value less than 0 if intA < intB;
 						 * and a value greater than 0 if intA > intB
 						 */
-						static int compare(int intA, int intB);
+						static long int compare(int intA, int intB);
 						
 						/**
 						 * Compares two int values numerically
@@ -312,7 +312,7 @@ namespace Java {
 						 * a value less than 0 if intA < intB as unsigned values;
 						 * and a value greater than 0 if intA > intB as unsigned values
 						 */
-						static int compareUnsigned(int intA, int intB);
+						static long int compareUnsigned(int intA, int intB);
 						
 						/**
 						 * Decodes a String into an Integer. Accepts decimal, hexadecimal, and octal numbers
@@ -332,7 +332,7 @@ namespace Java {
 						 * @param divisor
 						 * @return the unsigned quotient of the first argument divided by the second argument
 						 */
-						static int divideUnsigned(int dividend, int divisor);
+						static long int divideUnsigned(int dividend, int divisor);
 						
 						/**
 						 * Returns the value of this Integer as a double after
@@ -397,14 +397,14 @@ namespace Java {
 						 * @param inputInt
 						 * @return a hash code value for inputInt
 						 */
-						static int hashCode(int inputInt);
+						static long int hashCode(int inputInt);
 						
 						/**
 						 * Returns a hash code
 						 *
 						 * @return a hash code value of current value
 						 */
-						int hashCode() const override;
+	long int hashCode() const override;
 						
 						/**
 						 * Returns an int value with at most a single one-bit, in the position of
@@ -415,14 +415,14 @@ namespace Java {
 						 * in the position of the highest-order one-bit in the specified value,
 						 * or zero if the specified value is itself equal to zero.
 						 */
-						static int highestOneBit(int inputInt);
+						static long int highestOneBit(int inputInt);
 						
 						/**
 						 * Returns the value of this Integer as an int .
 						 *
 						 * @return the value of this Integer as an int
 						 */
-						int intValue() const override;
+	long int intValue() const override;
 						
 						/**
 						 * Returns the value of this Integer as an long after
@@ -441,7 +441,7 @@ namespace Java {
 						 * in the position of the lowest-order one-bit in the specified value,
 						 * or zero if the specified value is itself equal to zero
 						 */
-						static int lowestOneBit(int inputInt);
+						static long int lowestOneBit(int inputInt);
 						
 						/**
 						 * Returns the greater of two int values
@@ -451,7 +451,7 @@ namespace Java {
 						 * @param intB
 						 * @return intA if intA >= intB, else intB
 						 */
-						static int max(int intA, int intB);
+						static long int max(int intA, int intB);
 						
 						/**
 						 * Returns the smaller of two int values
@@ -461,7 +461,7 @@ namespace Java {
 						 * @param intB
 						 * @return intA if intA <= intB, else intB
 						 */
-						static int min(int intA, int intB);
+						static long int min(int intA, int intB);
 						
 						/**
 						 * Returns the number of zero bits preceding the highest-order
@@ -473,7 +473,7 @@ namespace Java {
 						 * in the two's complement binary representation of the specified int value,
 						 * or 32 if the value is equal to zero.
 						 */
-						static int numberOfLeadingZeros(int inputInt);
+						static long int numberOfLeadingZeros(int inputInt);
 						
 						/**
 						 * Returns the number of zero bits following the lowest-order ("rightmost")
@@ -484,7 +484,7 @@ namespace Java {
 						 * in the two's complement binary representation of the specified int value,
 						 * or 32 if the value is equal to zero.
 						 */
-						static int numberOfTrailingZeros(int inputInt);
+						static long int numberOfTrailingZeros(int inputInt);
 						
 						/**
 						 * Parses the string argument as
@@ -500,7 +500,7 @@ namespace Java {
 						 * The value represented by the string is not a value of type int.
 						 * @return int
 						 */
-						static int parseInt(String inputString, int radix);
+						static long int parseInt(String inputString, int radix);
 						
 						/**
 						 * Parses the string argument as a signed decimal integer.
@@ -509,7 +509,7 @@ namespace Java {
 						 * @throw NumberFormatException - if the string does not contain a parsable integer.
 						 * @return the integer value represented by the argument in decimal.
 						 */
-						static int parseInt(String inputString);
+						static long int parseInt(String inputString);
 						
 						/**
 						 * Parses the string argument as
@@ -525,7 +525,7 @@ namespace Java {
 						 * The value represented by the string is not a value of type unsigned int.
 						 * @return unsigned integer value represented by the argument in decimal
 						 */
-						static int parseUnsignedInt(String inputString, int radix);
+						static long int parseUnsignedInt(String inputString, int radix);
 						
 						/**
 						 * Parses the string argument as an unsigned decimal integer
@@ -534,7 +534,7 @@ namespace Java {
 						 * @throw NumberFormatException - if the string does not contain a parsable unsigned integer.
 						 * @return unsigned integer value represented by the argument in decimal
 						 */
-						static int parseUnsignedInt(String inputString);
+						static long int parseUnsignedInt(String inputString);
 						
 						/**
 						 * Returns the unsigned remainder from dividing the first argument by the second
@@ -545,7 +545,7 @@ namespace Java {
 						 * @throw ArithmeticException if the divisor is zero
 						 * @return the unsigned remainder of the first argument divided by the second argument
 						 */
-						static int remainderUnsigned(int dividend, int divisor);
+						static long int remainderUnsigned(int dividend, int divisor);
 						
 						/**
 						 * Returns the value obtained by reversing the order
@@ -555,7 +555,7 @@ namespace Java {
 						 * @param inputInt
 						 * @return the value obtained by reversing order of the bits in the specified int value.
 						 */
-						static int reverse(int inputInt);
+						static long int reverse(int inputInt);
 						
 						/**
 						 * Returns the value obtained by reversing the order of the bytes in the two's complement
@@ -564,7 +564,7 @@ namespace Java {
 						 * @param inputInt
 						 * @return the value obtained by reversing the bytes in the specified int value.
 						 */
-						static int reverseBytes(int inputInt);
+						static long int reverseBytes(int inputInt);
 						
 						/**
 						 * Returns the value obtained by rotating the
@@ -576,7 +576,7 @@ namespace Java {
 						 * @return the value obtained by rotating the two's complement binary
 						 * representation of the specified int value left by the specified number of bits.
 						 */
-						static int rotateLeft(int inputInt, int distance);
+						static long int rotateLeft(int inputInt, int distance);
 						
 						/**
 						 * Returns the value obtained by rotating the
@@ -588,7 +588,7 @@ namespace Java {
 						 * @return the value obtained by rotating the two's complement binary
 						 * representation of the specified int value right by the specified number of bits.
 						 */
-						static int rotateRight(int inputInt, int distance);
+						static long int rotateRight(int inputInt, int distance);
 						
 						/**
 						 * Returns the value of this Integer as
@@ -604,7 +604,7 @@ namespace Java {
 						 * @param inputInt
 						 * @return the signum function of the specified int value.
 						 */
-						static int signum(int inputInt);
+						static long int signum(int inputInt);
 						
 						/**
 						 * Adds two integers together as per the + operator.
@@ -613,7 +613,7 @@ namespace Java {
 						 * @param intA
 						 * @return sum of intA and intB
 						 */
-						static int sum(int intA, int intB);
+						static long int sum(int intA, int intB);
 						
 						/**
 						 * Returns a string representation of
