@@ -15,9 +15,9 @@
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
  * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -46,27 +46,27 @@ String::String(string original, int length) {
 }
 
 String::String(Array<char> &charArray) {
-	this->original = (string) malloc(charArray.length + 1);
+    this->original = (string) malloc(charArray.length + 1);
 #ifdef LINUX
-	register
+    register
 #endif
-	int i;
-	for (i = 0; i<charArray.length; i++) {
-		this->original[i] = charArray[i];
-	}
-	this->original[charArray.length] = '\0';
-	this->size = charArray.length;
-	this->capacity = this->size == 0 ? -1 : this->size;
+    int i;
+    for (i = 0; i<charArray.length; i++) {
+        this->original[i] = charArray[i];
+    }
+    this->original[charArray.length] = '\0';
+    this->size = charArray.length;
+    this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(Array<byte> &byteArray) {
-	Array<char> chars;
-	for (byte byte : byteArray) {
-		chars.push((char) byte);
-	}
-	this->original = stringCopy(String::fromCharArray(chars).toCharPointer());
-	this->size = chars.length;
-	this->capacity = this->size == 0 ? -1 : this->size;
+    Array<char> chars;
+    for (byte byte : byteArray) {
+        chars.push((char) byte);
+    }
+    this->original = stringCopy(String::fromCharArray(chars).toCharPointer());
+    this->size = chars.length;
+    this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const String &target) {
@@ -135,7 +135,7 @@ String String::concat(String target) {
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-	return (stringIndex(this->original, charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
+    return (stringIndex(this->original, charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
 }
 
 Array<byte> String::getBytes() const {
@@ -261,17 +261,17 @@ int String::lastIndexOf(int character, int fromIndex) {
 }
 
 int String::lastIndexOf(String subString) const {
-	string reversedString = stringReverse(subString.toCharPointer());
-	string currentReversedString = stringReverse(this->toCharPointer());
-	int result = stringIndex(currentReversedString, reversedString, 1);
-	free(reversedString);
-	free(currentReversedString);
-	if (result == NOT_FOUND) {
-		return result;
-	}
-	// Re-calculate first character of subString
-	result = this->size - (result + subString.size);
-	return result;
+    string reversedString = stringReverse(subString.toCharPointer());
+    string currentReversedString = stringReverse(this->toCharPointer());
+    int result = stringIndex(currentReversedString, reversedString, 1);
+    free(reversedString);
+    free(currentReversedString);
+    if (result == NOT_FOUND) {
+        return result;
+    }
+    // Re-calculate first character of subString
+    result = this->size - (result + subString.size);
+    return result;
 }
 
 int String::lastIndexOf(String subString, int fromIndex) const {
@@ -282,18 +282,18 @@ int String::lastIndexOf(String subString, int fromIndex) const {
         return this->lastIndexOf(subString);
     }
     string thisStringReversed = stringReverse(this->original);
-	string subStringFromIndex = &(thisStringReversed)[ this->size - fromIndex - subString.size];
-	string reversedString = stringReverse(subString.toCharPointer());
-	// string currentReversedString = stringReverse(subStringFromIndex);
-	int result = stringIndex(subStringFromIndex, reversedString, 1);
-	free(reversedString);
-	free(thisStringReversed);
-	if (result == NOT_FOUND) {
-		return result;
-	}
-	// Re-calculate first character of str
-	result = fromIndex - result;
-	return result;
+    string subStringFromIndex = &(thisStringReversed)[ this->size - fromIndex - subString.size];
+    string reversedString = stringReverse(subString.toCharPointer());
+    // string currentReversedString = stringReverse(subStringFromIndex);
+    int result = stringIndex(subStringFromIndex, reversedString, 1);
+    free(reversedString);
+    free(thisStringReversed);
+    if (result == NOT_FOUND) {
+        return result;
+    }
+    // Re-calculate first character of str
+    result = fromIndex - result;
+    return result;
 }
 
 String String::replace(char oldChar, char newChar) const {
@@ -314,8 +314,8 @@ String String::replaceAll(String regex, String replacement) const {
 
 Array<String> String::split(String regex) const {
     // TODO (anhnt) fix this later, temporary use replace, need Pattern
-	string *splitStrings = stringSplit(this->original, regex.toCharPointer());
-	Array<String> strings;
+    string *splitStrings = stringSplit(this->original, regex.toCharPointer());
+    Array<String> strings;
 
 #ifdef LINUX
     register
@@ -383,7 +383,7 @@ string String::toCharPointer() const {
 }
 
 String String::toString() const {
-	return *this;
+    return *this;
 }
 
 String String::toLowerCase() const {

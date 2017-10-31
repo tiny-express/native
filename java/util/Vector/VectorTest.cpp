@@ -280,8 +280,11 @@ TEST (JavaUtilVector, Equals) {
     assertTrue(vector2.equals(target2));
 
     // Test different size
-    vector2.setSize(10);
-    assertFalse(vector2.equals(target2));
+    Vector<int> vector3;
+    Vector<int> target3;
+    vector3.setSize(5);
+    target3.setSize(10);
+    assertFalse(vector3.equals(target3));
 }
 
 TEST (JavaUtilVector, FirstElement) {
@@ -693,6 +696,10 @@ TEST (JavaUtilVector, SetSize) {
     vector.add(8);
     vector.add(9);
 
+    // Set new size > original size
+    vector.setSize(20);
+    assertEquals(20, vector.size());
+
     // Sets size and checks size.
     vector.setSize(5);
     assertEquals(5, vector.size());
@@ -703,10 +710,6 @@ TEST (JavaUtilVector, SetSize) {
     } catch (IllegalArgumentException exception) {
         assertEquals("new size is negative", exception.getMessage());
     }
-
-    // Set new size > original size
-    vector.setSize(20);
-    assertEquals(20, vector.size());
 }
 
 TEST (JavaUtilVector, Size) {
