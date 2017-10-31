@@ -62,7 +62,7 @@ TEST (JavaLangClassCastException, TryCatch) {
     try {
         throw ClassCastException("Throw ClassCastException");
     }
-    catch (ClassCastException e) {
+    catch (ClassCastException &e) {
         assertEquals("Throw ClassCastException", e.getMessage());
     }
 }

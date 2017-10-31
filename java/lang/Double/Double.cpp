@@ -73,11 +73,11 @@ short Double::shortValue() const {
     return static_cast<short> (this->original);
 }
 
-int Double::intValue() const {
+long int Double::intValue() const {
     return static_cast<int> (this->original);
 }
 
-long Double::longValue() const {
+long long Double::longValue() const {
     return static_cast<long> (this->original);
 }
 
@@ -118,22 +118,22 @@ boolean Double::operator!=(const Double &target) const {
 }
 
 boolean Double::operator<(const Double &target) const {
-    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    long int compareResult = compare(this->doubleValue(), target.doubleValue());
     return compareResult == -1;
 }
 
 boolean Double::operator>(const Double &target) const {
-    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    long int compareResult = compare(this->doubleValue(), target.doubleValue());
     return compareResult == 1;
 }
 
 boolean Double::operator>=(const Double &target) const {
-    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    long int compareResult = compare(this->doubleValue(), target.doubleValue());
     return compareResult == 1 || compareResult == 0;
 }
 
 boolean Double::operator<=(const Double &target) const {
-    int compareResult = compare(this->doubleValue(), target.doubleValue());
+    long int compareResult = compare(this->doubleValue(), target.doubleValue());
     return compareResult == -1 || compareResult == 0;
 }
 
@@ -168,9 +168,9 @@ Double Double::operator/=(const Double &target) const {
     return (Double) (this->original / target.original);
 }
 
-int Double::compare(double double1, double double2) {
-    long thisBits = Double::doubleToLongBits(double1);
-    long anotherBits = Double::doubleToLongBits(double2);
+long int Double::compare(double double1, double double2) {
+    long long thisBits = Double::doubleToLongBits(double1);
+    long long anotherBits = Double::doubleToLongBits(double2);
 
     if (thisBits == anotherBits) {
         return 0;
@@ -183,20 +183,20 @@ int Double::compare(double double1, double double2) {
     return 1;
 }
 
-int Double::compareTo(Double anotherDouble) {
+long int Double::compareTo(Double anotherDouble) {
     return Double::compare(this->original, anotherDouble.original);
 }
 
-long Double::doubleToLongBits(double valueDouble) {
+long long Double::doubleToLongBits(double valueDouble) {
     return doubleToRawLongBits(valueDouble);
 }
 
-long Double::doubleToRawLongBits(double doubleInput) {
+long long Double::doubleToRawLongBits(double doubleInput) {
     String doubleInputToBinary64StringType;
-    long resultDoubleToRawLongBits;
-    int tempValue;
-    int exponent;
-    int i;
+    long long resultDoubleToRawLongBits;
+    long int tempValue;
+    long int exponent;
+    long int i;
 
     doubleInputToBinary64StringType = doubleToBinary64StringType(doubleInput);
 
@@ -227,20 +227,20 @@ long Double::doubleToRawLongBits(double doubleInput) {
 boolean Double::equals(const Double &object) const {
     boolean isDouble = instanceof<Double>(object);
     auto castObjectToDouble = (Double *) &object;
-    long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
-    long doubleToLongBitsThis = doubleToLongBits(this->original);
+    long long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
+    long long doubleToLongBitsThis = doubleToLongBits(this->original);
     boolean isEqual = (doubleToLongBitsObject == doubleToLongBitsThis);
     return isEqual;
     // return (isDouble && isEqual);
 }
 
-long Double::hashCode() {
+long long Double::hashCode() {
     return Double::hashCode(this->original);
 }
 
-long Double::hashCode(double doubleInput) {
-    long bits = doubleToLongBits(doubleInput);
-    long rightShiftBits = bits >> 32;
+long long Double::hashCode(double doubleInput) {
+    long long bits = doubleToLongBits(doubleInput);
+    long long rightShiftBits = bits >> 32;
     return (bits ^ rightShiftBits);
 }
 
@@ -266,7 +266,7 @@ boolean Double::isNaN() {
     return isNaN(this->original);
 }
 
-double Double::longBitsToDouble(long longBitsInput) {
+double Double::longBitsToDouble(long long longBitsInput) {
     if (Double::isNaN(longBitsInput)) {
         return NAN;
     }
@@ -314,7 +314,7 @@ double Double::min(double doubleA, double doubleB) {
 //            // Isolate significand bits and OR in a high-order bit
 //            // so that the string representation has a known
 //            // length.
-//            long signifBits = (Double::doubleToLongBits(doubleValue) & SIGNIF_BIT_MASK) | 0x1000000000000000L;
+//            long long signifBits = (Double::doubleToLongBits(doubleValue) & SIGNIF_BIT_MASK) | 0x1000000000000000L;
 //
 //            // Subnormal values have a 0 implicit bit; normal
 //            // values have a 1 implicit bit.
@@ -346,23 +346,23 @@ String Double::doubleToBinary64StringType(double doubleInput) {
     auto doubleInputNormalizeForm = (string) allocateMemory(2102 * sizeof(char));
     auto resultDoubleToBinary64StringType = (string) allocateMemory(65 * sizeof(char));
 
-    int powerExponentBase2 = 0;
-    int integerPartDoubleInput;
+    long int powerExponentBase2 = 0;
+    long int integerPartDoubleInput;
 
-    int sizeOfIntegerPartNormalizeForm;
-    int sizeOfFractionPartNormalizeForm;
-    int sizeOfDoubleInputNormalizeForm;
+    long int sizeOfIntegerPartNormalizeForm;
+    long int sizeOfFractionPartNormalizeForm;
+    long int sizeOfDoubleInputNormalizeForm;
 
-    int sizeOfExponentPartBinary64 = 11;
+    long int sizeOfExponentPartBinary64 = 11;
 
-    int i;
-    int index;
-    int indexOfDotDoubleInputNormalizeForm;
-    int indexFirstBit1DoubleInputNormalizeForm;
-    int indexBeginFractionPartResultDoubleToBinary64StringType = 0;
+    long int i;
+    long int index;
+    long int indexOfDotDoubleInputNormalizeForm;
+    long int indexFirstBit1DoubleInputNormalizeForm;
+    long int indexBeginFractionPartResultDoubleToBinary64StringType = 0;
 
-    int exponentBiasBinary64 = 1023;
-    int exponentDoubleInput;
+    long int exponentBiasBinary64 = 1023;
+    long int exponentDoubleInput;
 
     double fractionPartDoubleInput;
 
@@ -376,7 +376,7 @@ String Double::doubleToBinary64StringType(double doubleInput) {
         fractionPartNormalizeForm[i] = '0';
     }
 
-    /** Set end point for string type */
+    /** Set end polong int for string type */
     integerPartNormalizeForm[2047] = '\0';
     fractionPartNormalizeForm[53] = '\0';
     doubleInputNormalizeForm[2101] = '\0';
@@ -456,7 +456,7 @@ String Double::doubleToBinary64StringType(double doubleInput) {
     while ((fractionPartDoubleInput != 0) && (index < 53)) {
         fractionPartDoubleInput = fractionPartDoubleInput * 2;
 
-        int integerPart = static_cast<int> (floor(fractionPartDoubleInput));
+        long int integerPart = static_cast<int> (floor(fractionPartDoubleInput));
 
         if (integerPart == 1) {
             fractionPartNormalizeForm[index] = '1';
@@ -565,15 +565,15 @@ String Double::doubleToBinary64StringType(double doubleInput) {
 
 double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
     // Create variable
-    int signOfResultbinary64StringTypeToDouble;
+    long int signOfResultbinary64StringTypeToDouble;
     double exponent;
     double exponentAdjusted;
     double mantisaBase10;
     double resultBinary64StringTypeToDouble;
 
-    int tempValue = 0;
-    int tempExponent;
-    int i;
+    long int tempValue = 0;
+    long int tempExponent;
+    long int i;
 
     boolean isNaN = true;
 
@@ -620,7 +620,7 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
         tempExponent--;
     }
 
-    // 5. Find the Double precision floating point decimal value
+    // 5. Find the Double precision floating polong int decimal value
     resultBinary64StringTypeToDouble
             = signOfResultbinary64StringTypeToDouble * (1 + mantisaBase10)
               * Math::pow(2, exponentAdjusted);
@@ -628,10 +628,10 @@ double Double::binary64StringTypeToDouble(String binary64StringTypeInput) {
     return resultBinary64StringTypeToDouble;
 }
 
-String Double::longBitsToBinary64StringType(long longBitsInput) {
+String Double::longBitsToBinary64StringType(long long longBitsInput) {
     auto resultLongBitsToBinary64StringType = (string) allocateMemory(65 * sizeof(char));
-    int index;
-    int i;
+    long int index;
+    long int i;
 
     for (i = 0; i <= 63; i++) {
         resultLongBitsToBinary64StringType[i] = '0';

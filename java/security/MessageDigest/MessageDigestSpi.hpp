@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
-#define NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
+#ifndef NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP
+#define NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP
 
 #include "../../../kernel/Type.hpp"
 #include "../../Lang.hpp"
@@ -34,13 +34,16 @@ namespace Java {
     namespace Security {
         class MessageDigestSpi : public Object {
         public:
-            virtual int engineDigest(byte buffer[], int len) = 0;
-            virtual int engineGetDigestLength() = 0;
+            virtual long int engineDigest(byte buffer[], long int len) = 0;
+
+            virtual long int engineGetDigestLength() = 0;
+
             virtual void engineReset() = 0;
-            virtual void engineUpdate(const byte input[], int len)
+
+            virtual void engineUpdate(const byte input[], long int len)
             = 0;
         };
     } // namespace Security
 } // namespace Java
 
-#endif // NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP_
+#endif // NATIVE_JAVA_SECURITY_MESSAGEDIGESTSPI_HPP

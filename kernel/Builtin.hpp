@@ -85,14 +85,14 @@
 
 // Builtin functions
 #define P_LEN(NAME, TYPE); \
-inline int lengthPointer##NAME(TYPE *target) {\
+inline long int lengthPointer##NAME(TYPE *target) {\
     if (NULL == target) return 0;\
     return __builtin_strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
-inline int lengthPointerPointer##NAME(TYPE **target) {\
+inline long int lengthPointerPointer##NAME(TYPE **target) {\
     if (NULL == target) return 0;\
     register TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\

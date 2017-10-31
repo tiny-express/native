@@ -61,8 +61,7 @@ TEST (JavaLangArithmeticException, Constructor) {
 TEST (JavaLangArithmeticException, TryCatch) {
     try {
         throw ArithmeticException("Throw ArithmeticException");
-    }
-    catch (ArithmeticException e) {
+    } catch (ArithmeticException &e) {
         assertEquals("Throw ArithmeticException", e.getMessage());
     }
 }

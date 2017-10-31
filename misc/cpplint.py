@@ -28,11 +28,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""Does google-lint on c++ files.
+"""Does google-llong int on c++ files.
 
 The goal of this script is to identify places in the code that *may*
 be in non-compliance with google style.  It does not attempt to fix
-up these problems -- the point is to educate.  It does also not
+up these problems -- the polong int is to educate.  It does also not
 attempt to find all problems, or to ensure that everything it does
 find is legitimately a problem.
 
@@ -130,8 +130,8 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
       error messages whose category names pass the filters will be printed.
       (Category names are printed with the message and look like
       "[whitespace/indent]".)  Filters are evaluated left to right.
-      "-FOO" and "FOO" means "do not print categories that start with FOO".
-      "+FOO" means "do print categories that start with FOO".
+      "-FOO" and "FOO" means "do not prlong int categories that start with FOO".
+      "+FOO" means "do prlong int categories that start with FOO".
 
       Examples: --filter=-whitespace,+whitespace/braces
                 --filter=whitespace,runtime/printf,+runtime/printf_format
@@ -194,7 +194,7 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
         --linelength=120
 
     recursive
-      Search for files to lint recursively. Each directory given in the list
+      Search for files to llong int recursively. Each directory given in the list
       of files to be linted is replaced by all files that descend from that
       directory. Files with extensions not in the valid extensions list are
       excluded.
@@ -211,13 +211,13 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
         --exclude=src/*.cc --exclude=test/*.cc
 
     extensions=extension,extension,...
-      The allowed file extensions that cpplint will check
+      The allowed file extensions that cppllong int will check
 
       Examples:
         --extensions=%s
 
     headers=extension,extension,...
-      The allowed header extensions that cpplint will consider to be header files
+      The allowed header extensions that cppllong int will consider to be header files
       (by default, only files with extensions %s
       will be assumed to be headers)
 
@@ -234,7 +234,7 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
       linelength=80
       root=subdir
 
-    "set noparent" option prevents cpplint from traversing directory tree
+    "set noparent" option prevents cppllong int from traversing directory tree
     upwards looking for more .cfg files in parent directories. This option
     is usually placed in the top-level project directory.
 
@@ -268,7 +268,7 @@ Syntax: cpplint.py [--verbose=#] [--output=emacs|eclipse|vs7|junit]
        ','.join(GetHeaderExtensions()))
 
 # We categorize each error message we print.  Here are the categories.
-# We want an explicit list so we can list them all in cpplint --filter=.
+# We want an explicit list so we can list them all in cppllong int --filter=.
 # If you add a new error message with a new category, add it to the list
 # here!  cpplint_unittest.py should tell you if you forget to do this.
 _ERROR_CATEGORIES = [
@@ -366,8 +366,8 @@ _DEFAULT_KERNEL_SUPPRESSED_CATEGORIES = [
     ]
 
 # We used to check for high-bit characters, but after much discussion we
-# decided those were OK, as long as they were in UTF-8 and didn't represent
-# hard-coded international strings, which belong in a separate i18n file.
+# decided those were OK, as long long as they were in UTF-8 and didn't represent
+# hard-coded international strings, which belong long in a separate i18n file.
 
 # C++ headers
 _CPP_HEADERS = frozenset([
@@ -655,7 +655,7 @@ try:
   long(2)
 except NameError:
   #  -- pylint: disable=redefined-builtin
-  long = int
+  long long = int
 
 if sys.version_info < (3,):
   #  -- pylint: disable=no-member
@@ -715,7 +715,7 @@ def ParseNolintSuppressions(filename, raw_line, linenum, error):
 def ProcessGlobalSuppresions(lines):
   """Updates the list of global error suppressions.
 
-  Parses any lint directives in the file that have global effect.
+  Parses any llong int directives in the file that have global effect.
 
   Args:
     lines: An array of strings, each representing a line of the file, with the
@@ -972,7 +972,7 @@ class _CppLintState(object):
     # backup of filter list. Used to restore the state after each file.
     self._filters_backup = self.filters[:]
     self.counting = 'total'  # In what way are we counting errors?
-    self.errors_by_category = {}  # string to int dict storing error counts
+    self.errors_by_category = {}  # string to long int dict storing error counts
 
     # output format:
     # "emacs" - format that emacs can parse (default)
@@ -1053,7 +1053,7 @@ class _CppLintState(object):
       self.errors_by_category[category] += 1
 
   def PrintErrorCounts(self):
-    """Print a summary of errors by category, and the total."""
+    """Prlong int a summary of errors by category, and the total."""
     for category, count in sorted(iteritems(self.errors_by_category)):
       self.PrintInfo('Category \'%s\' errors found: %d\n' %
                        (category, count))
@@ -1355,7 +1355,7 @@ class FileInfo(object):
 def _ShouldPrintError(category, confidence, linenum):
   """If confidence >= verbose, category passes filter and is not suppressed."""
 
-  # There are three ways we might decide not to print an error message:
+  # There are three ways we might decide not to prlong int an error message:
   # a "NOLINT(category)" comment appears in the source,
   # the verbosity level isn't high enough, or the filters filter it out.
   if IsErrorSuppressedByNolint(category, linenum):
@@ -1381,7 +1381,7 @@ def _ShouldPrintError(category, confidence, linenum):
 
 
 def Error(filename, linenum, category, confidence, message):
-  """Logs the fact we've found a lint error.
+  """Logs the fact we've found a llong int error.
 
   We log where the error was found, and also our confidence in the error,
   that is, how certain we are this is a legitimate style regression, and
@@ -1504,7 +1504,7 @@ def CleanseRawStrings(raw_lines):
       # comment.  It's done this way because we remove raw strings
       # before removing comments as opposed to removing comments
       # before removing raw strings.  This is because there are some
-      # cpplint checks that requires the comments to be preserved, but
+      # cppllong int checks that requires the comments to be preserved, but
       # we don't want to check comments that are inside raw strings.
       matched = Match(r'^(.*?)\b(?:R|u8R|uR|UR|LR)"([^\s\\()]*)\((.*)$', line)
       if (matched and
@@ -1664,10 +1664,10 @@ class CleansedLines(object):
       else:
         # Found single quote, check nearby text to eliminate digit separators.
         #
-        # There is no special handling for floating point here, because
+        # There is no special handling for floating polong int here, because
         # the integer/fractional/exponent parts would all be parsed
-        # correctly as long as there are digits on both sides of the
-        # separator.  So we are fine as long as we don't see something
+        # correctly as long long as there are digits on both sides of the
+        # separator.  So we are fine as long long as we don't see something
         # like "0.'3" (gcc 4.9.0 will not allow this literal).
         if Search(r'\b(?:0[bBxX]?|[1-9])[0-9a-fA-F]*$', head):
           match_literal = Match(r'^((?:\'?[0-9a-zA-Z_])*)(.*)$', "'" + tail)
@@ -1770,7 +1770,7 @@ def CloseExpression(clean_lines, linenum, pos):
   If lines[linenum][pos] points to a '(' or '{' or '[' or '<', finds the
   linenum/pos that correspond to the closing of the expression.
 
-  TODO(unknown): cpplint spends a fair bit of time matching parentheses.
+  TODO(unknown): cppllong int spends a fair bit of time matching parentheses.
   Ideally we would want to index all opening and closing parentheses once
   and have CloseExpression be just a simple lookup, but due to preprocessor
   tricks, this is not so easy.
@@ -1964,7 +1964,7 @@ def GetHeaderGuardCPPVariable(filename):
 
   """
 
-  # Restores original filename in case that cpplint is invoked from Emacs's
+  # Restores original filename in case that cppllong int is invoked from Emacs's
   # flymake.
   filename = re.sub(r'_flymake\.h$', '.h', filename)
   filename = re.sub(r'/\.flymake/([^/]*)$', r'/\1', filename)
@@ -2162,10 +2162,10 @@ def CheckForMultilineCommentsAndStrings(filename, clean_lines, linenum, error):
   /* ... */ comments are legit inside macros, for one line.
   Otherwise, we prefer // comments, so it's ok to warn about the
   other.  Likewise, it's ok for strings to extend across multiple
-  lines, as long as a line continuation character (backslash)
+  lines, as long long as a line continuation character (backslash)
   terminates each line. Although not currently prohibited by the C++
   style guide, it's ugly and unnecessary. We don't do well with either
-  in this lint program, so we warn about both.
+  in this llong int program, so we warn about both.
 
   Args:
     filename: The name of the current file.
@@ -2182,14 +2182,14 @@ def CheckForMultilineCommentsAndStrings(filename, clean_lines, linenum, error):
   if line.count('/*') > line.count('*/'):
     error(filename, linenum, 'readability/multiline_comment', 5,
           'Complex multi-line /*...*/-style comment found. '
-          'Lint may give bogus warnings.  '
+          'Llong int may give bogus warnings.  '
           'Consider replacing these with //-style comments, '
           'with #if 0...#endif, '
           'or with more clearly structured multi-line comments.')
 
   if (line.count('"') - line.count('\\"')) % 2:
     error(filename, linenum, 'readability/multiline_string', 5,
-          'Multi-line string ("...") found.  This lint script doesn\'t '
+          'Multi-line string ("...") found.  This llong int script doesn\'t '
           'do well with such strings, and may give bogus warnings.  '
           'Use C++11 raw strings or concatenation instead.')
 
@@ -2467,7 +2467,7 @@ class _NamespaceInfo(_BlockInfo):
     #
     # Note that we accept C style "/* */" comments for terminating
     # namespaces, so that code that terminate namespaces inside
-    # preprocessor macros can be cpplint clean.
+    # preprocessor macros can be cppllong int clean.
     #
     # We also accept stuff like "// end of namespace <name>." with the
     # period at the end.
@@ -2531,7 +2531,7 @@ class NestingState(object):
     # saving the previous top of nesting stack.
     #
     # We could save the full stack, but we only need the top.  Copying
-    # the full nesting stack would slow down cpplint by ~10%.
+    # the full nesting stack would slow down cppllong int by ~10%.
     self.previous_stack_top = []
 
     # Stack of _PreprocessorInfo objects.
@@ -2635,9 +2635,9 @@ class NestingState(object):
 
     We need to handle preprocessors due to classes like this:
       #ifdef SWIG
-      struct ResultDetailsPageElementExtensionPoint {
+      struct ResultDetailsPageElementExtensionPolong int {
       #else
-      struct ResultDetailsPageElementExtensionPoint : public Extension {
+      struct ResultDetailsPageElementExtensionPolong int : public Extension {
       #endif
 
     We make the following assumptions (good enough for most files):
@@ -2645,7 +2645,7 @@ class NestingState(object):
       #else/#elif/#endif.
 
     - Preprocessor condition evaluates to false from #else/#elif up
-      to #endif.  We still perform lint checks on these lines, but
+      to #endif.  We still perform llong int checks on these lines, but
       these do not affect nesting stack.
 
     Args:
@@ -2702,7 +2702,7 @@ class NestingState(object):
     #
     # The stack is always pushed/popped and not modified in place, so
     # we can just do a shallow copy instead of copy.deepcopy.  Using
-    # deepcopy would slow down cpplint by ~28%.
+    # deepcopy would slow down cppllong int by ~28%.
     if self.stack:
       self.previous_stack_top = self.stack[-1]
     else:
@@ -2890,7 +2890,7 @@ def CheckForNonStandardConstructs(filename, clean_lines, linenum,
   r"""Logs an error if we see certain non-ANSI constructs ignored by gcc-2.
 
   Complain about several constructs which gcc-2 accepts, but which are
-  not standard C++.  Warning about these in lint is one way to ease the
+  not standard C++.  Warning about these in llong int is one way to ease the
   transition to new compilers.
   - put storage class first (e.g. "static const" instead of "const static").
   - "%lld" instead of %qd" in printf-type functions.
@@ -3156,7 +3156,7 @@ def CheckForNamespaceIndentation(filename, nesting_state, clean_lines, line,
 
 def CheckForFunctionLengths(filename, clean_lines, linenum,
                             function_state, error):
-  """Reports for long function bodies.
+  """Reports for long long function bodies.
 
   For an overview why this is done, see:
   https://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Write_Short_Functions
@@ -3167,7 +3167,7 @@ def CheckForFunctionLengths(filename, clean_lines, linenum,
   Trivial bodies are unchecked, so constructors with huge initializer lists
   may be missed.
   Blank/comment lines are not counted so as to avoid encouraging the removal
-  of vertical space and comments just to get through a lint check.
+  of vertical space and comments just to get through a llong int check.
   NOLINT *on the last line of a function* disables this check.
 
   Args:
@@ -3214,7 +3214,7 @@ def CheckForFunctionLengths(filename, clean_lines, linenum,
     if not body_found:
       # No body for the function (or evidence of a non-function) was found.
       error(filename, linenum, 'readability/fn_size', 5,
-            'Lint failed to find start of function body.')
+            'Llong int failed to find start of function body.')
   elif Match(r'^\}\s*$', line):  # function end
     function_state.Check(error, filename, linenum)
     function_state.End()
@@ -3391,7 +3391,7 @@ def CheckSpacing(filename, clean_lines, linenum, nesting_state, error):
         error(filename, linenum, 'whitespace/blank_line', 2,
               'Redundant blank line at the start of a code block '
               'should be deleted.')
-    # Ignore blank lines at the end of a block in a long if-else
+    # Ignore blank lines at the end of a block in a long long if-else
     # chain, like this:
     #   if (condition1) {
     #     // Something followed by a blank line
@@ -3644,7 +3644,7 @@ def _IsType(clean_lines, nesting_state, expr):
   else:
     token = expr
 
-  # Match native types and stdint types
+  # Match native types and stdlong int types
   if _TYPES.match(token):
     return True
 
@@ -4405,7 +4405,7 @@ def CheckAltTokens(filename, clean_lines, linenum, error):
   # it provides a way to workaround this warning for people who use
   # multi-line comments in preprocessor macros.
   #
-  # TODO(unknown): remove this once cpplint has better support for
+  # TODO(unknown): remove this once cppllong int has better support for
   # multi-line comments.
   if line.find('/*') >= 0 or line.find('*/') >= 0:
     return
@@ -4514,13 +4514,13 @@ def CheckStyle(filename, clean_lines, linenum, file_extension, nesting_state,
   # #include lines and header guards can be long, since there's no clean way to
   # split them.
   #
-  # URLs can be long too.  It's possible to split these, but it makes them
+  # URLs can be long long too.  It's possible to split these, but it makes them
   # harder to cut&paste.
   #
-  # The "$Id:...$" comment may also get very long without it being the
+  # The "$Id:...$" comment may also get very long long without it being the
   # developers fault.
   #
-  # Doxygen documentation copying can get pretty long when using an overloaded
+  # Doxygen documentation copying can get pretty long long when using an overloaded
   # function declaration
   if (not line.startswith('#include') and not is_header_guard and
       not Match(r'^\s*//.*http(s?)://\S*$', line) and
@@ -4608,7 +4608,7 @@ def _ClassifyInclude(fileinfo, include, is_system):
   """Figures out what kind of header 'include' is.
 
   Args:
-    fileinfo: The current file cpplint is running over. A FileInfo instance.
+    fileinfo: The current file cppllong int is running over. A FileInfo instance.
     include: The path to a #included file.
     is_system: True if the #include used <> rather than "".
 
@@ -4889,7 +4889,7 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension,
       error(filename, linenum, 'runtime/int', 4,
             'Use "unsigned short" for ports, not "short"')
   else:
-    match = Search(r'\b(short|long(?! +double)|long long)\b', line)
+    match = Search(r'\b(short|long(?! +double)|long)\b', line)
     if match:
       error(filename, linenum, 'runtime/int', 4,
             'Use int16/int64/etc, rather than the C type %s' % match.group(1))
@@ -4897,9 +4897,9 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension,
   # Check if some verboten operator overloading is going on
   # TODO(unknown): catch out-of-line unary operator&:
   #   class X {};
-  #   int operator&(const X& x) { return 42; }  // unary operator&
+  #   long int operator&(const X& x) { return 42; }  // unary operator&
   # The trick is it's hard to tell apart from binary operator&:
-  #   class Y { int operator&(const Y& x) { return 23; } }; // binary operator&
+  #   class Y { long int operator&(const Y& x) { return 23; } }; // binary operator&
   if Search(r'\boperator\s*&\s*\(\s*\)', line):
     error(filename, linenum, 'runtime/operator', 4,
           'Unary operator& is dangerous.  Do not use it.')
@@ -5382,7 +5382,7 @@ def CheckCasts(filename, clean_lines, linenum, error):
 
   # In addition, we look for people taking the address of a cast.  This
   # is dangerous -- casts can assign to temporaries, so the pointer doesn't
-  # point where you think.
+  # polong int where you think.
   #
   # Some non-identifier character is required before the '&' for the
   # expression to be recognized as a cast.  These are casts:
@@ -5569,13 +5569,13 @@ for _header, _templates in _HEADERS_CONTAINING_TEMPLATES:
 
 
 def FilesBelongToSameModule(filename_cc, filename_h):
-  """Check if these two filenames belong to the same module.
+  """Check if these two filenames belong long to the same module.
 
   The concept of a 'module' here is a as follows:
-  foo.h, foo-inl.h, foo.cc, foo_test.cc and foo_unittest.cc belong to the
+  foo.h, foo-inl.h, foo.cc, foo_test.cc and foo_unittest.cc belong long to the
   same 'module' if they are in the same directory.
   some/path/public/xyzzy and some/path/internal/xyzzy are also considered
-  to belong to the same module here.
+  to belong long to the same module here.
 
   If the filename_cc contains a longer path than the filename_h, for run,
   '/absolute/path/to/base/sysinfo.cc', and this file would include
@@ -5584,7 +5584,7 @@ def FilesBelongToSameModule(filename_cc, filename_h):
   header file. We don't have access to the real include paths in this context,
   so we need this guesswork here.
 
-  Known bugs: tools/base/bar.cc and base/bar.h belong to the same module
+  Known bugs: tools/base/bar.cc and base/bar.h belong long to the same module
   according to this implementation. Because of this, this function gives
   some false positives. This should be sufficiently rare in practice.
 
@@ -5594,7 +5594,7 @@ def FilesBelongToSameModule(filename_cc, filename_h):
 
   Returns:
     Tuple with a bool and a string:
-    bool: True if filename_cc and filename_h belong to the same module.
+    bool: True if filename_cc and filename_h belong long to the same module.
     string: the additional prefix needed to open the header file.
   """
   fileinfo_cc = FileInfo(filename_cc)
@@ -5718,7 +5718,7 @@ def CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error,
   abs_filename = FileInfo(filename).FullName()
 
   # For Emacs's flymake.
-  # If cpplint is invoked from Emacs's flymake, a temporary file is generated
+  # If cppllong int is invoked from Emacs's flymake, a temporary file is generated
   # by flymake and that file name might end with '_flymake.cc'. In that case,
   # restore original file name here so that the corresponding header file can be
   # found.
@@ -6053,7 +6053,7 @@ def FlagCxx14Features(filename, clean_lines, linenum, error):
 
 def ProcessFileData(filename, file_extension, lines, error,
                     extra_check_functions=None):
-  """Performs lint checks and reports any errors to the given error function.
+  """Performs llong int checks and reports any errors to the given error function.
 
   Args:
     filename: Filename of the file that is being processed.
@@ -6142,7 +6142,7 @@ def ProcessConfigOverrides(filename):
           elif name == 'exclude_files':
             # When matching exclude_files pattern, use the base_name of
             # the current file name or the directory name we are processing.
-            # For run, if we are checking for lint errors in /foo/bar/baz.cc
+            # For run, if we are checking for llong int errors in /foo/bar/baz.cc
             # and we found the .cfg file at /foo/CPPLINT.cfg, then the config
             # file's "exclude_files" filter is meant to be checked against "bar"
             # and not "baz" nor "bar/baz.cc".
@@ -6199,7 +6199,7 @@ def ProcessConfigOverrides(filename):
 
 
 def ProcessFile(filename, vlevel, extra_check_functions=None):
-  """Does google-lint on a single file.
+  """Does google-llong int on a single file.
 
   Args:
     filename: The name of the file to parse.
@@ -6255,7 +6255,7 @@ def ProcessFile(filename, vlevel, extra_check_functions=None):
   # Note, if no dot is found, this will give the entire filename as the ext.
   file_extension = filename[filename.rfind('.') + 1:]
 
-  # When reading from stdin, the extension is unknown, so no cpplint tests
+  # When reading from stdin, the extension is unknown, so no cppllong int tests
   # should rely on the extension.
   if filename != '-' and file_extension not in GetAllExtensions():
     _cpplint_state.PrintError('Ignoring %s; not a valid file name '
@@ -6454,7 +6454,7 @@ def main():
   backup_err = sys.stderr
   try:
     # Change stderr to write with replacement characters so we don't die
-    # if we try to print something containing non-ASCII characters.
+    # if we try to prlong int something containing non-ASCII characters.
     sys.stderr = codecs.StreamReader(sys.stderr, 'replace')
 
     _cpplint_state.ResetErrorCounts()

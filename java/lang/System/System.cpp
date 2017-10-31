@@ -28,13 +28,13 @@
 
 using namespace Java::Lang;
 
-long System::currentTimeMillis() {
-	unsigned long timestampInNanoSeconds = timestamp();
-	return (long) timestampInNanoSeconds / 1000;
+long long System::currentTimeMillis() {
+    unsigned long long timestampInNanoSeconds = timestamp();
+    return (long) timestampInNanoSeconds / 1000;
 }
 
-void System::exit(int status) {
-	::exit(status);
+void System::exit(long int status) {
+    ::exit(status);
 }
 
 void System::gc() {

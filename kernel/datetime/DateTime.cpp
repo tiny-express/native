@@ -79,20 +79,20 @@ string date(time_t timestamp, string format) {
  * @param year
  * @return
  */
-unsigned long unixTimeInMilliseconds(
-		unsigned int millisecond,
-		unsigned int second,
-		unsigned int minute,
-		unsigned int hour,
-		unsigned int day,
-		unsigned int month,
-		unsigned int year)
+unsigned long long  unixTimeInMilliseconds(
+		unsigned long int millisecond,
+		unsigned long int second,
+		unsigned long int minute,
+		unsigned long int hour,
+		unsigned long int day,
+		unsigned long int month,
+		unsigned long int year)
 {
-	unsigned long ts = 0;
+	unsigned long long  ts = 0;
 	//  Add up the seconds from all prev years, up until this year.
-	unsigned int years = 0;
-	unsigned int leap_years = 0;
-	int y_k;
+	unsigned long int years = 0;
+	unsigned long int leap_years = 0;
+	long int y_k;
 	for (y_k  = EPOCH_YEAR; y_k<year; y_k++ ) {
 		if( IS_LEAP_YEAR( y_k ) ) {
 			leap_years++;
@@ -102,8 +102,8 @@ unsigned long unixTimeInMilliseconds(
 	}
 	ts += ( (years*daysPerYear[0]) + (leap_years*daysPerYear[1]) ) * SEC_PER_DAY;
 	//  Add up the seconds from all prev days this year, up until today.
-	unsigned int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
-	int mo_k;
+	unsigned long int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
+	long int mo_k;
 	for (mo_k = 0; mo_k<(month - 1); mo_k++ ) { //  days from previous months this year
 		ts += daysPerMonth[ year_index ][ mo_k ] * SEC_PER_DAY;
 	}
@@ -123,22 +123,22 @@ unsigned long unixTimeInMilliseconds(
  *
  * @return long
  */
-unsigned long timestamp() {
+unsigned long long  timestamp() {
 #ifdef DARWIN
 	struct timeval time;
 	gettimeofday(&time, NULL);
-	long timestamp_in_millisecond = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	long long  timestamp_in_millisecond = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	return timestamp_in_millisecond * 1000000;
 #endif
 #ifdef LINUX
 	struct timespec tsp;
 	clock_gettime(0, &tsp);
-	return (long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
+	return (long long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
 #endif
 #ifdef WIN
 	SYSTEMTIME current_time;
 	GetSystemTime(&current_time);
-	unsigned long timestamp_in_millisecond = unixTimeInMilliseconds(
+	unsigned long long  timestamp_in_millisecond = unixTimeInMilliseconds(
 			current_time.wMilliseconds,
 			current_time.wSecond,
 			current_time.wMinute,

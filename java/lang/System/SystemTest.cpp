@@ -30,14 +30,14 @@
 using namespace Java::Lang;
 
 TEST (JavaLangSystem, In) {
-	// TODO
+    // TODO
 }
 
 TEST (JavaLangSystem, Out) {
-	// TODO
+    // TODO
 }
 
 TEST (JavaLangSystem, CurrentTimeMillis) {
-	long currentMilliSeconds = System::currentTimeMillis();
-	assertTrue(currentMilliSeconds > 1500199237190);
+    long long currentMilliSeconds = System::currentTimeMillis();
+    assertTrue(currentMilliSeconds > 1500199237190);
 }

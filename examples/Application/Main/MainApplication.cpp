@@ -4,7 +4,7 @@ class MainApplication {
 public:
 		static void main(Array<String> arguments) {
 			HashMap<String, String> hashMap;
-			int counter = 0;
+			long int counter = 0;
 			for (String argument : arguments) {
 				hashMap.put("argument " + String::valueOf(counter), argument);
 				counter++;
@@ -22,6 +22,6 @@ public:
 		}
 };
 
-int main(int argc, char **argv) {
+long int main(long int argc, char **argv) {
 	return Application(MainApplication::main, argc, argv);
 }

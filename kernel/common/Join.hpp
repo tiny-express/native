@@ -41,7 +41,7 @@ inline char *joinPointerPointerChar(char **target) {
 #ifdef LINUX
     register
 #endif
-    int totalLength = 0, itemLength = 0;
+    long int totalLength = 0, itemLength = 0;
     char **pointer;
     auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
     for (pointer = target; *pointer; ++pointer) {
@@ -68,9 +68,9 @@ inline char *joinDelimiterPointerPointerChar(char **target, const char *delimite
 #ifdef LINUX
     register
 #endif
-    int totalLength = 0, itemLength = 0;
+    long int totalLength = 0, itemLength = 0;
     char **pointer;
-    int delimiterLength = lengthPointerChar((char *) delimiter);
+    long int delimiterLength = lengthPointerChar((char *) delimiter);
     auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
     for (pointer = target; *pointer; ++pointer) {
         itemLength = lengthPointerChar(*pointer);

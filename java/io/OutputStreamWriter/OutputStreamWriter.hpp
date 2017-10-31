@@ -32,11 +32,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace IO {
-				class OutputStreamWriter : public virtual Writer {
-				
-				};
-		}
+    namespace IO {
+        class OutputStreamWriter : public virtual Writer {
+
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_IO_OUTPUT_SREAM_WRITER_HPP

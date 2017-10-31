@@ -30,203 +30,203 @@
 using namespace Java::Lang;
 
 TEST (JavaLangLong, Constructor) {
-	// Given empty value for Long constructor and assign value - Return Long
-	Long emptyLong;
-	emptyLong = 3;
-	assertEquals(3, emptyLong.longValue());
-	
-	// Given value for Integer constructor and assign value - Return string
-	Long validLong = 3;
-	assertEquals(3, validLong.longValue());
-	
-	Long test = 3;
-	assertEquals(3, test.intValue());
+    // Given empty value for Long constructor and assign value - Return Long
+    Long emptyLong;
+    emptyLong = 3;
+    assertEquals(3, emptyLong.longValue());
+
+    // Given value for Integer constructor and assign value - Return string
+    Long validLong = 3;
+    assertEquals(3, validLong.longValue());
+
+    Long test = 3;
+    assertEquals(3, test.intValue());
 }
 
 TEST (JavaLangLong, BitCount) {
-	// Given valid long number to test bit count based on java source code and result
-	long validValue = 393459834753422L;
-	int result = Long::bitCount(validValue);
-	
-	int expectedResult = 24;
-	assertEquals(expectedResult, result);
-	
-	validValue = 4547830931350L;
-	result = Long::bitCount(validValue);
-	
-	expectedResult = 25;
-	assertEquals(expectedResult, result);
+    // Given valid long long number to test bit count based on java source code and result
+    long long validValue = 393459834753422L;
+    long int result = Long::bitCount(validValue);
+
+    long int expectedResult = 24;
+    assertEquals(expectedResult, result);
+
+    validValue = 4547830931350L;
+    result = Long::bitCount(validValue);
+
+    expectedResult = 25;
+    assertEquals(expectedResult, result);
 }
 
 TEST (JavaLangLong, ByteValue) {
-	// Given valid long value to test byteValue() based on java source code result
-	Long validValue = 393239259234023474L;
-	int result = validValue.byteValue();
-	
-	int expectedResult = 50;
-	assertEquals(expectedResult, result);
-	
-	validValue = 200L;
-	result = validValue.byteValue();
-	
-	expectedResult = -56;
-	assertEquals(expectedResult, result);
+    // Given valid long long value to test byteValue() based on java source code result
+    Long validValue = 393239259234023474L;
+    long int result = validValue.byteValue();
+
+    long int expectedResult = 50;
+    assertEquals(expectedResult, result);
+
+    validValue = 200L;
+    result = validValue.byteValue();
+
+    expectedResult = -56;
+    assertEquals(expectedResult, result);
 }
 
 TEST (JavaLangLong, Compare) {
-	// Given valid long value to test compare()
-	long validValue = 79473043431L;
-	long lessValue = 7947304343L;
-	long equalValue = 79473043431L;
-	long moreValue = 794730534312L;
-	
-	int result = Long::compare(validValue, lessValue);
-	int expectedResult = 1;
-	assertEquals(expectedResult, result);
-	
-	result = Long::compare(validValue, equalValue);
-	expectedResult = 0;
-	assertEquals(expectedResult, result);
-	
-	result = Long::compare(validValue, moreValue);
-	expectedResult = -1;
-	assertEquals(expectedResult, result);
+    // Given valid long long value to test compare()
+    long long validValue = 79473043431L;
+    long long lessValue = 7947304343L;
+    long long equalValue = 79473043431L;
+    long long moreValue = 794730534312L;
+
+    long int result = Long::compare(validValue, lessValue);
+    long int expectedResult = 1;
+    assertEquals(expectedResult, result);
+
+    result = Long::compare(validValue, equalValue);
+    expectedResult = 0;
+    assertEquals(expectedResult, result);
+
+    result = Long::compare(validValue, moreValue);
+    expectedResult = -1;
+    assertEquals(expectedResult, result);
 }
 
 TEST (JavaLangLong, CompareTo) {
-	// Given valid Long value to test compareTo()
-	Long validValue = 857503832954L;
-	Long lessValue = 23932827534L;
-	Long equalValue = 857503832954L;
-	Long moreValue = 857503832954222L;
-	
-	int result = validValue.compareTo(lessValue);
-	int expectedValue = 1;
-	assertEquals(expectedValue, result);
-	
-	result = validValue.compareTo(equalValue);
-	expectedValue = 0;
-	assertEquals(expectedValue, result);
-	
-	result = validValue.compareTo(moreValue);
-	expectedValue = -1;
-	assertEquals(expectedValue, result);
+    // Given valid Long value to test compareTo()
+    Long validValue = 857503832954L;
+    Long lessValue = 23932827534L;
+    Long equalValue = 857503832954L;
+    Long moreValue = 857503832954222L;
+
+    long int result = validValue.compareTo(lessValue);
+    long int expectedValue = 1;
+    assertEquals(expectedValue, result);
+
+    result = validValue.compareTo(equalValue);
+    expectedValue = 0;
+    assertEquals(expectedValue, result);
+
+    result = validValue.compareTo(moreValue);
+    expectedValue = -1;
+    assertEquals(expectedValue, result);
 }
 
 TEST (JavaLangLong, Comparision) {
-	// Give a valid number and make a comparision
-	Long validNumber = 123000000000;
-	Long targetNumber;
-	
-	// Test validNumber is equal targetNumber
-	targetNumber = 123000000000;
-	assertTrue(validNumber == targetNumber);
-	
-	// Test validNumber is not equal targetNumber
-	targetNumber = 113000000000;
-	assertTrue(validNumber != targetNumber);
-	
-	// Test validNumber is less than targetNumber
-	targetNumber = 124000000000;
-	assertTrue(validNumber < targetNumber);
-	
-	// Test validNumber is equal or less then targetNumber
-	targetNumber = 125000000000;
-	assertTrue(validNumber <= targetNumber);
-	
-	// Test validNumber is more than targetNumber
-	targetNumber = 122000000000;
-	assertTrue(validNumber > targetNumber);
-	
-	// Test validNumber is equal or more than targetNumber
-	targetNumber = 121000000000;
-	assertTrue(validNumber >= targetNumber);
+    // Give a valid number and make a comparision
+    Long validNumber = 123000000000;
+    Long targetNumber;
+
+    // Test validNumber is equal targetNumber
+    targetNumber = 123000000000;
+    assertTrue(validNumber == targetNumber);
+
+    // Test validNumber is not equal targetNumber
+    targetNumber = 113000000000;
+    assertTrue(validNumber != targetNumber);
+
+    // Test validNumber is less than targetNumber
+    targetNumber = 124000000000;
+    assertTrue(validNumber < targetNumber);
+
+    // Test validNumber is equal or less then targetNumber
+    targetNumber = 125000000000;
+    assertTrue(validNumber <= targetNumber);
+
+    // Test validNumber is more than targetNumber
+    targetNumber = 122000000000;
+    assertTrue(validNumber > targetNumber);
+
+    // Test validNumber is equal or more than targetNumber
+    targetNumber = 121000000000;
+    assertTrue(validNumber >= targetNumber);
 }
 
 TEST (JavaLangLong, Operator) {
-	// Given a valid number
-	Long validNumber = 5;
-	Long targetNumber = 3;
-	
-	// Make a summation with targetNumber
-	Long summationNumber = 8;
-	assertTrue(summationNumber == ( validNumber + targetNumber ));
-	
-	// Make a subtraction with targetNumber
-	Long subtractionNumber = 2;
-	assertTrue(subtractionNumber == ( validNumber - targetNumber ));
-	
-	// Make a multiplication with targetNumber
-	Long multiplicationNumber = 15;
-	assertTrue(multiplicationNumber == ( validNumber * targetNumber ));
-	
-	// Make a division with targetNumber
-	Long divisionNumber = 1;
-	assertTrue(divisionNumber == ( validNumber / targetNumber ));
-	
-	// Make a modulo with targetNumber
-	Long modNumber = 2;
-	assertTrue(modNumber == ( validNumber % targetNumber ));
+    // Given a valid number
+    Long validNumber = 5;
+    Long targetNumber = 3;
+
+    // Make a summation with targetNumber
+    Long summationNumber = 8;
+    assertTrue(summationNumber == (validNumber + targetNumber));
+
+    // Make a subtraction with targetNumber
+    Long subtractionNumber = 2;
+    assertTrue(subtractionNumber == (validNumber - targetNumber));
+
+    // Make a multiplication with targetNumber
+    Long multiplicationNumber = 15;
+    assertTrue(multiplicationNumber == (validNumber * targetNumber));
+
+    // Make a division with targetNumber
+    Long divisionNumber = 1;
+    assertTrue(divisionNumber == (validNumber / targetNumber));
+
+    // Make a modulo with targetNumber
+    Long modNumber = 2;
+    assertTrue(modNumber == (validNumber % targetNumber));
 }
 
 TEST (JavaLangLong, ParseLong) {
-	// Given value for Long constructor and assign value - Return long
-	Long validLong = Long::parseLong("6");
-	long expectedResult = 6;
-	assertEquals(expectedResult, validLong.longValue());
-	
-	// Given valid string to test parseLong with radix 16
-	String validNumberString = "1b";
-	Long result = Long::parseLong(validNumberString, 16);
-	
-	expectedResult = 27;
-	assertEquals(expectedResult, result.longValue());
-	
-	String invalidNumbeString = "122q3";
-	result = Long::parseLong(invalidNumbeString, 16);
-	
-	expectedResult = -1;
-	assertEquals(expectedResult, result.longValue());
+    // Given value for Long constructor and assign value - Return long
+    Long validLong = Long::parseLong("6");
+    long long expectedResult = 6;
+    assertEquals(expectedResult, validLong.longValue());
+
+    // Given valid string to test parseLong with radix 16
+    String validNumberString = "1b";
+    Long result = Long::parseLong(validNumberString, 16);
+
+    expectedResult = 27;
+    assertEquals(expectedResult, result.longValue());
+
+    String invalidNumbeString = "122q3";
+    result = Long::parseLong(invalidNumbeString, 16);
+
+    expectedResult = -1;
+    assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLangLong, Equals) {
-	// Given valid Long value to test equals()
-	Long validValue = 1231372934234234L;
-	Long anotherValue = 2434234234234L;
-	
-	assertTrue(validValue.equals(validValue));
-	
-	assertFalse(validValue.equals(anotherValue));
+    // Given valid Long value to test equals()
+    Long validValue = 1231372934234234L;
+    Long anotherValue = 2434234234234L;
+
+    assertTrue(validValue.equals(validValue));
+
+    assertFalse(validValue.equals(anotherValue));
 }
 
 TEST (JavaLangLong, GetLong) {
-	// Given valid hexString and decimalString to test getLong through those String
-	// The result is based on java code result
-	String hexString = "0x23";
-	String decimalString = "123";
-	
-	Long result = Long::getLong(hexString);
-	long expectedResult = 35;
-	assertEquals(expectedResult, result.longValue());
-	
-	result = Long::getLong(decimalString);
-	expectedResult = 123;
-	assertEquals(expectedResult, result.longValue());
+    // Given valid hexString and decimalString to test getLong through those String
+    // The result is based on java code result
+    String hexString = "0x23";
+    String decimalString = "123";
+
+    Long result = Long::getLong(hexString);
+    long long expectedResult = 35;
+    assertEquals(expectedResult, result.longValue());
+
+    result = Long::getLong(decimalString);
+    expectedResult = 123;
+    assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLangLong, Decode) {
-	// Given valid numberString to test decode value
-	String validNumberString = "0x1b";
-	Long result = Long::decode(validNumberString);
-	
-	long expectedResult = 27;
-	assertEquals(expectedResult, result.longValue());
-	
-	String invalidNumberString = "0x23xx";
-	result = Long::decode(invalidNumberString);
-	
-	expectedResult = -1;
-	assertEquals(expectedResult, result.longValue());
+    // Given valid numberString to test decode value
+    String validNumberString = "0x1b";
+    Long result = Long::decode(validNumberString);
+
+    long long expectedResult = 27;
+    assertEquals(expectedResult, result.longValue());
+
+    String invalidNumberString = "0x23xx";
+    result = Long::decode(invalidNumberString);
+
+    expectedResult = -1;
+    assertEquals(expectedResult, result.longValue());
 }
 
 TEST (JavaLangLong, NumberOfLeadingZeros) {
@@ -300,7 +300,7 @@ TEST (JavaLangLong, NumberOfLeadingZeros) {
     assertEquals(0, Long::numberOfLeadingZeros(9223372036854775808uL));
 }
 
-TEST(JavaLangLong, NumberOfTrailingZeros) {
+TEST (JavaLangLong, NumberOfTrailingZeros) {
     assertEquals(0, Long::numberOfTrailingZeros(-1L));
     assertEquals(2, Long::numberOfTrailingZeros(100L));
 
@@ -434,24 +434,24 @@ TEST(JavaLangLong, NumberOfTrailingZeros) {
 }
 
 TEST (JavaLangLong, ToHexString) {
-	// Given valid long value to test toHexString() - this test case was confirm by java source code
-	long validValue = 4053239666997989821;
-	String result = Long::toHexString(validValue);
-	
-	String expectedString = "384000008cf011bd";
-	assertEquals(expectedString.toString(), result.toString());
-	
-	validValue = -5603022497796657139;
-	result = Long::toHexString(validValue);
-	
-	expectedString = "b23e10b96e4ef00d";
-	assertEquals(expectedString.toString(), result.toString());
+    // Given valid long long value to test toHexString() - this test case was confirm by java source code
+    long long validValue = 4053239666997989821;
+    String result = Long::toHexString(validValue);
+
+    String expectedString = "384000008cf011bd";
+    assertEquals(expectedString.toString(), result.toString());
+
+    validValue = -5603022497796657139;
+    result = Long::toHexString(validValue);
+
+    expectedString = "b23e10b96e4ef00d";
+    assertEquals(expectedString.toString(), result.toString());
 }
 
 TEST (JavaLangLong, StaticToString) {
-	// Give valid string covert from static function toString of class Long - Should equal
-	long longNumber = 999738373833883736;
-	String expect = "999738373833883736";
-	String result = Long::toString(longNumber);
-	assertEquals(expect, result);
+    // Give valid string covert from static function toString of class Long - Should equal
+    longNumber = 999738373833883736;
+    String expect = "999738373833883736";
+    String result = Long::toString(longNumber);
+    assertEquals(expect, result);
 }

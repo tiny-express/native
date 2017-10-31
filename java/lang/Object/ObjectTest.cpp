@@ -76,7 +76,7 @@ TEST (JavaLang, DataTypeArray) {
     // Push new element and loop in array
     bytes.push(67);
     bytes.push(68);
-    int length = 0;
+    long int length = 0;
     for (byte byte : bytes) {
         length++;
     }
@@ -92,7 +92,7 @@ TEST (JavaLang, DataTypeArray) {
     assertEquals(4, initializedStrings.length);
 
     // Loop in string array
-    int totalCharacters = 0;
+    long int totalCharacters = 0;
     for (String element : initializedStrings) {
         totalCharacters += element.length();
     }
@@ -106,11 +106,11 @@ TEST (JavaLang, DataTypeArray) {
 TEST (JavaLang, ArrayConstructorWithSize) {
     // Give an Array use constructor with contain size then assert size - Should equal
     Array<int> validArray(10);
-    int expect = 10;
-    int result = validArray.length;
+    long int expect = 10;
+    long int result = validArray.length;
     assertEquals(expect, result);
 
-    int index;
+    long int index;
     for (index = 10; index < 20; index++) {
         validArray.push(index);
         expect = index + 1;
@@ -184,7 +184,7 @@ TEST (JavaLangObject, Wait) {
     Object object;
     try {
         object.wait();
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }
@@ -193,7 +193,7 @@ TEST (JavaLangObject, WaitWithTimeout) {
     Object object;
     try {
         object.wait(1000);
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }
@@ -202,7 +202,7 @@ TEST (JavaLangObject, WaitWithTimeoutNanoSecond) {
     Object object;
     try {
         object.wait(1000, 5);
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }

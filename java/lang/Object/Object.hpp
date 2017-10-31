@@ -117,7 +117,7 @@ namespace Java {
              * @see     java.lang.Object#equals(java.lang.Object)
              * @see     java.lang.System#identityHashCode
              */
-            virtual int hashCode() const {
+            virtual long int hashCode() const {
                 return (intptr_t) std::addressof(*this);
             }
 
@@ -275,7 +275,7 @@ namespace Java {
              * determined that there is no longer any means by which this object can
              * be accessed by any thread that has not yet died, including possible
              * actions by other objects or classes which are ready to be finalized,
-             * at which point the object may be discarded.
+             * at which polong int the object may be discarded.
              * <p>
              * The {@code finalize} method is never invoked more than once by a Java
              * virtual machine for any given object.
@@ -480,7 +480,7 @@ namespace Java {
              * @see        java.lang.Object#notify()
              * @see        java.lang.Object#notifyAll()
              */
-            virtual void wait(int timeout) throw(InterruptedException) final {
+            virtual void wait(long int timeout) throw(InterruptedException) final {
                 throw InterruptedException();
             }
 
@@ -547,7 +547,7 @@ namespace Java {
              *             this exception is thrown.
              */
             virtual void
-            wait(int timeout, int nanos) throw(InterruptedException) final {
+            wait(long int timeout, long int nanos) throw(InterruptedException) final {
                 throw InterruptedException();
             }
 

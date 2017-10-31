@@ -31,22 +31,29 @@
 #include "../Error/Error.hpp"
 
 namespace Java {
-		namespace Lang {
-				class AssertionError : public Error {
-				private:
-						AssertionError(String message);
-				
-				public:
-						AssertionError();
-						AssertionError(double doubleValue);
-						AssertionError(float floatValue);
-						AssertionError(long longValue);
-						AssertionError(int intValue);
-						AssertionError(char charValue);
-						AssertionError(boolean boolValue);
-						AssertionError(String message, Throwable *cause);
-				};
-		}
+    namespace Lang {
+        class AssertionError : public Error {
+        private:
+            AssertionError(String message);
+
+        public:
+            AssertionError();
+
+            AssertionError(double doubleValue);
+
+            AssertionError(float floatValue);
+
+            AssertionError(long long longValue);
+
+            AssertionError(long int intValue);
+
+            AssertionError(char charValue);
+
+            AssertionError(boolean boolValue);
+
+            AssertionError(String message, Throwable *cause);
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_LANG_ASSERTION_ERROR_HPP

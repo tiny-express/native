@@ -31,15 +31,18 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-		namespace Lang {
-				class ArithmeticException : public RuntimeException {
-				public:
-						ArithmeticException();
-						ArithmeticException(String message);
-						ArithmeticException(Throwable *cause);
-						ArithmeticException(String message, Throwable *cause);
-				};
-		}
+    namespace Lang {
+        class ArithmeticException : public RuntimeException {
+        public:
+            ArithmeticException();
+
+            ArithmeticException(String message);
+
+            ArithmeticException(Throwable *cause);
+
+            ArithmeticException(String message, Throwable *cause);
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_LANG_ARITHMETIC_EXCEPTION_HPP

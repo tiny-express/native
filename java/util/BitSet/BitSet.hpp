@@ -34,18 +34,18 @@ namespace Java {
         class BitSet : public Object, public Cloneable, public Serializable {
         private:
             // Number of bits need to address every bit in a word with default size.
-            static const int ADDRESS_BITS_PER_WORD = 6;
+            static const long int ADDRESS_BITS_PER_WORD = 6;
             // Number of bits of a word (default size of a word).
-            static const int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
+            static const long int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
             // Maximum index of a bit in a single word.
-            static const int BIT_INDEX_MASK = BITS_PER_WORD - 1;
+            static const long int BIT_INDEX_MASK = BITS_PER_WORD - 1;
             // Used to shift left or right for a partial word mask.
-            static const long WORD_MASK = 0xffffffffffffffffL;
+            static const long long WORD_MASK = 0xffffffffffffffffL;
 
         private:
             Array<long> words;
             // The number of words in the logical size of this BitSet.
-            int wordsInUse = 0;
+            long int wordsInUse = 0;
             // The size of "words" array (array<long> words) is user-specified or by default.
             boolean sizeIsSticky = false;
 
@@ -65,7 +65,7 @@ namespace Java {
              * @param numberOfBits
              * @throw NegativeArraySizeException - if the specified initial size is negative.
              */
-            BitSet(int numberOfBits);
+            BitSet(long int numberOfBits);
 
             /**
              * BitSet Constructor
@@ -96,7 +96,7 @@ namespace Java {
              * @param bitIndex
              * @return int
              */
-            static int wordIndex(int bitIndex);
+            static long int wordIndex(long int bitIndex);
 
             /**
              * Checks that fromIndex ... toIndex is a valid range of bit indices.
@@ -104,7 +104,7 @@ namespace Java {
              * @param fromIndex
              * @param toIndex
              */
-            static void checkRange(int fromIndex, int toIndex);
+            static void checkRange(long int fromIndex, long int toIndex);
 
         private:
             /**
@@ -113,21 +113,21 @@ namespace Java {
              *
              * @param numberOfBits
              */
-            void initializeWords(int numberOfBits);
+            void initializeWords(long int numberOfBits);
 
             /**
              * Ensures that the BitSet can accommodate a given wordIndex.
              *
              * @param wordIndex
              */
-            void expandTo(int wordIndex);
+            void expandTo(long int wordIndex);
 
             /**
              * Ensures that the BitSet can hold enough words.
              *
              * @param wordsRequired
              */
-            void ensureCapacity(int wordsRequired);
+            void ensureCapacity(long int wordsRequired);
 
             /**
              * Sets the field wordsInUse to the logical size in words of the bit set.
@@ -209,7 +209,7 @@ namespace Java {
              *
              * @return int
              */
-            int cardinality() const;
+            long int cardinality() const;
 
             /**
              * Sets all of the bits in this BitSet to false.
@@ -222,7 +222,7 @@ namespace Java {
              * @param bitIndex
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            void clear(int bitIndex);
+            void clear(long int bitIndex);
 
             /**
              * Sets the bits from the specified fromIndex (inclusive) to the specified
@@ -233,7 +233,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if fromIndex is negative,
              * or toIndex is negative, or fromIndex is larger than toIndex.
              */
-            void clear(int fromIndex, int toIndex);
+            void clear(long int fromIndex, long int toIndex);
 
             /**
              * Cloning this BitSet produces a new BitSet that is equal to it.
@@ -253,9 +253,9 @@ namespace Java {
              * @param target
              * @return boolean
              */
-            template  <typename T>
+            template<typename T>
             boolean equals(const T &target) const {
-                const BitSet* pointerToTarget = dynamic_cast<const BitSet *>(&target);
+                const BitSet *pointerToTarget = dynamic_cast<const BitSet *>(&target);
                 if (pointerToTarget == nullptr) {
                     return false;
                 }
@@ -264,7 +264,7 @@ namespace Java {
                     return false;
                 }
 
-                int indexOfWord;
+                long int indexOfWord;
                 for (indexOfWord = 0; indexOfWord < this->wordsInUse; ++indexOfWord) {
                     if (this->words[indexOfWord] != pointerToTarget->words[indexOfWord]) {
                         return false;
@@ -279,7 +279,7 @@ namespace Java {
              *
              * @param bitIndex
              */
-            void flip(int bitIndex);
+            void flip(long int bitIndex);
 
             /**
              * Sets each bit from the specified fromIndex (inclusive) to the specified
@@ -287,7 +287,7 @@ namespace Java {
              * @param fromIndex
              * @param toIndex
              */
-            void flip(int fromIndex, int toIndex);
+            void flip(long int fromIndex, long int toIndex);
 
             /**
              * Returns the value of the bit with the specified index.
@@ -298,7 +298,7 @@ namespace Java {
              * @return boolean
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            boolean get(int bitIndex) const;
+            boolean get(long int bitIndex) const;
 
             /**
              * Returns a new BitSet composed of bits from this BitSet from
@@ -310,7 +310,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if fromIndex is negative,
              * or toIndex is negative, or fromIndex is larger than toIndex.
              */
-            BitSet get(int fromIndex, int toIndex) const;
+            BitSet get(long int fromIndex, long int toIndex) const;
 
             /**
              * Returns the hash code value for this bit set.
@@ -318,7 +318,7 @@ namespace Java {
              *
              * @return long
              */
-            int hashCode() const;
+            long int hashCode() const;
 
             /**
              * Returns true if the specified BitSet has any bits set to true that
@@ -343,7 +343,7 @@ namespace Java {
              *
              * @return int
              */
-            int length() const;
+            long int length() const;
 
             /**
              * Returns the index of the first bit that is set to false that occurs on or after
@@ -353,7 +353,7 @@ namespace Java {
              * @return int
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            int nextClearBit(int fromIndex) const;
+            long int nextClearBit(long int fromIndex) const;
 
             /**
              * Returns the index of the first bit that is set to true that occurs on or after
@@ -364,7 +364,7 @@ namespace Java {
              * @return int
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            int nextSetBit(int fromIndex) const;
+            long int nextSetBit(long int fromIndex) const;
 
             /**
              * Returns the index of the nearest bit that is set to false that occurs on or
@@ -376,7 +376,7 @@ namespace Java {
              * @return int
              * @throw IndexOutOfBoundsException - if the specified index is less than -1.
              */
-            int previousClearBit(int fromIndex) const;
+            long int previousClearBit(long int fromIndex) const;
 
             /**
              * Returns the index of the nearest bit that is set to true that occurs on or
@@ -387,7 +387,7 @@ namespace Java {
              * @return int
              * @throw IndexOutOfBoundsException - if the specified index is less than -1.
              */
-            int previousSetBit(int fromIndex) const;
+            long int previousSetBit(long int fromIndex) const;
 
             /**
              * Sets the bit at the specified index to true.
@@ -395,7 +395,7 @@ namespace Java {
              * @param bitIndex
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            void set(int bitIndex);
+            void set(long int bitIndex);
 
             /**
              * Sets the bit at the specified index to the specified value.
@@ -404,7 +404,7 @@ namespace Java {
              * @param value
              * @throw IndexOutOfBoundsException - if the specified index is negative.
              */
-            void set(int bitIndex, boolean value);
+            void set(long int bitIndex, boolean value);
 
             /**
              * Sets the bits from the specified fromIndex (inclusive) to the specified toIndex (exclusive) to true.
@@ -414,7 +414,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
              * or fromIndex is larger than toIndex.
              */
-            void set(int fromIndex, int toIndex);
+            void set(long int fromIndex, long int toIndex);
 
             /**
              * Sets the bits from the specified fromIndex (inclusive) to the specified toIndex (exclusive)
@@ -426,7 +426,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException - if fromIndex is negative, or toIndex is negative,
              * or fromIndex is larger than toIndex.
              */
-            void set(int fromIndex, int toIndex, boolean value);
+            void set(long int fromIndex, long int toIndex, boolean value);
 
             /**
              * Returns the number of bits of space actually in use by this BitSet to represent bit values.
@@ -434,7 +434,7 @@ namespace Java {
              *
              * @return int
              */
-            int size() const;
+            long int size() const;
 
             /**
              * Returns a stream of indices for which this BitSet contains a bit in the set state.
@@ -458,7 +458,7 @@ namespace Java {
             Array<byte> toByteArray() const;
 
             /**
-             * Returns a new long array containing all the bits in this bit set.
+             * Returns a new long long array containing all the bits in this bit set.
              *
              * @return Array<long>
              */
@@ -496,7 +496,7 @@ namespace Java {
             // TODO(truongchauhien): Waiting for ByteBuffer class.
 
             /**
-             * Returns a new bit set containing all the bits in the given long array.
+             * Returns a new bit set containing all the bits in the given long long array.
              *
              * @param longs
              * @return BitSet
@@ -504,7 +504,7 @@ namespace Java {
             static BitSet valueOf(const Array<long> &longs);
 
             /**
-             * Returns a new bit set containing all the bits in the given long buffer
+             * Returns a new bit set containing all the bits in the given long long buffer
              * between its position and limit.
              *
              * @param longBuffer

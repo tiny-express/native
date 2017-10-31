@@ -423,8 +423,8 @@ TEST (JavaLangDouble, ShortValue) {
 TEST (JavaLangDouble, IntValue) {
     // Create variable to test
     Double variableTestIntValue;
-    int expectedResultIntValue;
-    int actualResultIntValue;
+    long int expectedResultIntValue;
+    long int actualResultIntValue;
 
     // Test Double::POSITIVE_INFINITY
     variableTestIntValue = Double::POSITIVE_INFINITY;
@@ -484,8 +484,8 @@ TEST (JavaLangDouble, IntValue) {
 TEST (JavaLangDouble, LongValue) {
     // Create variable to test
     Double variableTestLongValue;
-    long expectedResultLongValue;
-    long actualResultLongValue;
+    long long expectedResultLongValue;
+    long long actualResultLongValue;
 
     // Test Double::POSITIVE_INFINITY
     variableTestLongValue = Double::POSITIVE_INFINITY;
@@ -944,8 +944,8 @@ TEST (JavaLangDouble, CompareTo) {
 TEST (JavaLangDouble, ToRawLongBits) {
     // Create variable to test
     double input;
-    long expectedResult;
-    long actualResult;
+    long long expectedResult;
+    long long actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1029,8 +1029,8 @@ TEST (JavaLangDouble, ToRawLongBits) {
 TEST (JavaLangDouble, ToLongBits) {
     // Create variable to test
     double input;
-    long expectedResult;
-    long actualResult;
+    long long expectedResult;
+    long long actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1233,8 +1233,8 @@ TEST (JavaLangDouble, Equals) {
 TEST (JavaLangDouble, HashCode) {
     // Create variable to test
     double input;
-    long expectedResult;
-    long actualResult;
+    long long expectedResult;
+    long long actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1318,8 +1318,8 @@ TEST (JavaLangDouble, HashCode) {
 TEST (JavaLangDouble, HashCodeNotInput) {
     // Create variable to test
     Double variableDouble;
-    long expectedResult;
-    long actualResult;
+    long long expectedResult;
+    long long actualResult;
 
     // Input 0.0
     variableDouble = 0.0;
@@ -1468,7 +1468,7 @@ TEST (JavaLangDouble, Min) {
 
 TEST (JavaLangDouble, LongBitsToDouble) {
     // Create variable to test
-    long longBitsInput;
+    long long longBitsInput;
     double expectedResult;
     double actualResult;
 

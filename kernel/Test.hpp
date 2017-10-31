@@ -50,13 +50,13 @@ struct CTEST {
     const char *ttname;  // test name
     void (*run)();
 
-    int skip;
+    long int skip;
 
     void *data;
     SetupFunc setup;
     TearDownFunc teardown;
 
-    unsigned int magic;
+    unsigned long int magic;
 };
 
 #define __FNAME(sname, tname) __ctest_##sname##_##tname##_run
@@ -140,17 +140,17 @@ boolean isSame(Type type, AnotherType anotherType) {
 void assertEqualsString(String expected,
                         String actual,
                         const_string file,
-                        int line);
+                        long int line);
 
 /**
  * Asserts that two intmax_ts are equal.
  * @param expected
  * @param actual
  */
-void assertEqualsInt(int expected,
-                     int actual,
+void assertEqualsInt(long int expected,
+                     long int actual,
                      const_string file,
-                     int line);
+                     long int line);
 
 /**
  * Asserts that two doubles are equal.
@@ -163,7 +163,7 @@ void assertEqualsInt(int expected,
 void assertEqualsDouble(double expected,
                         double actual,
                         const_string file,
-                        int line);
+                        long int line);
 
 /**
  * Asserts that two strings are not equal.
@@ -174,17 +174,17 @@ void assertEqualsDouble(double expected,
 void assertNotEqualsString(String expected,
                            String actual,
                            const_string file,
-                           int line);
+                           long int line);
 
 /**
  * Asserts that two intmax_ts are not equal.
  * @param expected
  * @param actual
  */
-void assertNotEqualsInt(int expected,
-                        int actual,
+void assertNotEqualsInt(long int expected,
+                        long int actual,
                         const_string file,
-                        int line);
+                        long int line);
 
 /**
  * Asserts that two doubles are not equal.
@@ -197,7 +197,7 @@ void assertNotEqualsInt(int expected,
 void assertNotEqualsDouble(double expected,
                            double actual,
                            const_string file,
-                           int line);
+                           long int line);
 
 /**
  * Assert Array All Type
@@ -211,7 +211,7 @@ template<typename Type>
 void assertArrayAllType(Type expected,
                         Type actual,
                         const_string file,
-                        int line);
+                        long int line);
 
 #define assertArray(expected, actual)\
 assertArrayAllType(expected, actual, __FILE__, __LINE__)
@@ -228,11 +228,11 @@ template<typename Type>
 void assertArrayAllType(ArrayList<Type> &expected,
                         ArrayList<Type> &actual,
                         const_string file,
-                        int line) {
+                        long int line) {
     size_t index;
 
-    int expectedSize = expected.size();
-    int actualSize = actual.size();
+    long int expectedSize = expected.size();
+    long int actualSize = actual.size();
 
     if (expectedSize != actualSize) {
         CTEST_ERR("%s:%d  expected size %" PRIuMAX " bytes, got %" PRIuMAX,
@@ -272,11 +272,11 @@ template<typename Type>
 void assertArrayAllType(Type *expected,
                         Type *actual,
                         const_string file,
-                        int line) {
+                        long int line) {
     size_t index;
 
-    int expectedSize = ARRAY_SIZE(expected);
-    int actualSize = ARRAY_SIZE(actual);
+    long int expectedSize = ARRAY_SIZE(expected);
+    long int actualSize = ARRAY_SIZE(actual);
 
     if (expectedSize != actualSize) {
         CTEST_ERR("%s:%d  expected size %" PRIuMAX " bytes, got %" PRIuMAX,
@@ -301,7 +301,7 @@ void assertArrayAllType(Type *expected,
 void assertEqualsIntUnsignedInt(uintmax_t expected,
                                 uintmax_t actual,
                                 string file,
-                                int line);
+                                long int line);
 
 #define assertEqualsUnsigned(expected, actual)\
 assertEqualsIntUnsignedInt(expected, actual, __FILE__, __LINE__)
@@ -315,7 +315,7 @@ assertEqualsIntUnsignedInt(expected, actual, __FILE__, __LINE__)
 void assertNotEqualsUnsignedInt(uintmax_t expected,
                                 uintmax_t actual,
                                 const_string file,
-                                int line);
+                                long int line);
 
 #define assertNotEqualsUnsigned(expected, actual)\
 assertNotEqualsUnsignedInt(expected, actual, __FILE__, __LINE__)
@@ -331,7 +331,7 @@ void assertIntervalInt(intmax_t expectedFirst,
                        intmax_t expectedSecond,
                        intmax_t actual,
                        string file,
-                       int line);
+                       long int line);
 
 #define assertInterval(expectedFirst, expectedSecond, actual)\
 assertInteverInt(expectedFirst, expectedSecond, actual, __FILE__, __LINE__);
@@ -343,7 +343,7 @@ assertInteverInt(expectedFirst, expectedSecond, actual, __FILE__, __LINE__);
  */
 void assertNullVoid(void *actual,
                     const_string file,
-                    int line);
+                    long int line);
 
 #define assertNull(actual)\
 assertNullVoid(actual, __FILE__, __LINE__)
@@ -355,7 +355,7 @@ assertNullVoid(actual, __FILE__, __LINE__)
  */
 void assertNotNullVoid(const void *actual,
                        string file,
-                       int line);
+                       long int line);
 
 #define assertNotNull(actual)\
 assertNotNullVoid(actual, __FILE__, __LINE__)
@@ -365,9 +365,9 @@ assertNotNullVoid(actual, __FILE__, __LINE__)
  *
  * @param actual
  */
-void assertTrueInt(int actual,
+void assertTrueInt(long int actual,
                    const_string file,
-                   int line);
+                   long int line);
 
 #define assertTrue(actual)\
 assertTrueInt(actual, __FILE__, __LINE__)
@@ -377,9 +377,9 @@ assertTrueInt(actual, __FILE__, __LINE__)
  *
  * @param actual
  */
-void assertFalseInt(int actual,
+void assertFalseInt(long int actual,
                     const_string file,
-                    int line);
+                    long int line);
 
 #define assertFalse(actual)\
 assertFalseInt(actual, __FILE__, __LINE__);
@@ -387,7 +387,7 @@ assertFalseInt(actual, __FILE__, __LINE__);
 /**
  * Assert Fail
  */
-void assertFailNoneArgument(const_string file, int line);
+void assertFailNoneArgument(const_string file, long int line);
 
 #define assertFail()\
 assertFailNoneArgument(__FILE__, __LINE__);
@@ -402,9 +402,9 @@ assertFailNoneArgument(__FILE__, __LINE__);
  */
 void assertEqualsPrecisionDouble(double expected,
                                  double actual,
-                                 int precision,
+                                 long int precision,
                                  const_string file,
-                                 int line);
+                                 long int line);
 
 #define assertEqualsPrecision(expected, actual, precision)\
 assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
@@ -420,9 +420,9 @@ assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
  */
 void assertNotEqualsPrecisionDouble(double expected,
                                     double actual,
-                                    int precision,
+                                    long int precision,
                                     const_string file,
-                                    int line);
+                                    long int line);
 
 #define assertNotEqualsPrecision(expected, actual, precision)\
 assertNotEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
@@ -440,7 +440,7 @@ template<typename Type, typename AnotherType>
 void assertEqualsAll(Type expected,
                      AnotherType actual,
                      const_string file,
-                     int line) {
+                     long int line) {
 
     String expectedString = String::valueOf(expected);
     String actualString = String::valueOf(actual);
@@ -453,10 +453,10 @@ void assertEqualsAll(Type expected,
                        || isSame(expected, sampleConstString)
                        || isSame(expected, sampleObjectString);
 
-    // Assert int equals
+    // Assert long int equals
     if (isInt) {
-        int expectedInt = Integer::valueOf(expectedString).intValue();
-        int actualInt = Integer::valueOf(actualString).intValue();
+        long int expectedInt = Integer::valueOf(expectedString).intValue();
+        long int actualInt = Integer::valueOf(actualString).intValue();
         assertEqualsInt(expectedInt, actualInt, file, line);
     }
 
@@ -490,7 +490,7 @@ template<typename Type, typename AnotherType>
 void assertNotEqualsAll(Type expected,
                         AnotherType actual,
                         const_string file,
-                        int line) {
+                        long int line) {
 
     String expectedString = String::valueOf(expected);
     String actualString = String::valueOf(actual);
@@ -502,10 +502,10 @@ void assertNotEqualsAll(Type expected,
     boolean isString = isSame(expected, sampleString)
                        || isSame(expected, sampleConstString);
 
-    // Assert int equals
+    // Assert long int equals
     if (isInt) {
-        int expectedInt = Integer::valueOf(expectedString).intValue();
-        int actualInt = Integer::valueOf(actualString).intValue();
+        long int expectedInt = Integer::valueOf(expectedString).intValue();
+        long int actualInt = Integer::valueOf(actualString).intValue();
         assertNotEqualsInt(expectedInt, actualInt, file, line);
     }
 
@@ -546,10 +546,10 @@ static string ctest_errormsg;
 #define MSG_SIZE 4096
 static char ctest_errorbuffer[MSG_SIZE];
 static jmp_buf ctest_err;
-static int color_output = 1;
+static long int color_output = 1;
 static const_string suite_name;
 
-typedef int (*filter_func)(struct CTEST*);
+typedef long int (*filter_func)(struct CTEST*);
 
 #define ANSI_BLACK    "\033[0;30m"
 #define ANSI_RED      "\033[0;31m"
@@ -573,7 +573,7 @@ static CTEST(suite, test) { }
 
 inline static void vprint_errormsg(const_string fmt, va_list ap) {
     // (v)snprintf returns the number that would have been written
-    const int ret = vsnprintf(ctest_errormsg, ctest_errorsize, fmt, ap);
+    const long int ret = vsnprintf(ctest_errormsg, ctest_errorsize, fmt, ap);
     if (ret < 0) {
         ctest_errormsg[0] = 0x00;
     } else {
@@ -634,7 +634,7 @@ void CTEST_ERR(const_string fmt, ...)
 void assertEqualsIntUnsigned(uintmax_t expected,
                     uintmax_t actual,
                     string file,
-                    int line) {
+                    long int line) {
     if (expected != actual) {
     CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
                 file, line, expected, actual);
@@ -644,7 +644,7 @@ void assertEqualsIntUnsigned(uintmax_t expected,
 void assertNotEqualsIntUnsigned(uintmax_t expected,
                         uintmax_t actual,
                         string file,
-                        int line) {
+                        long int line) {
     if ((expected) == (actual)) {
     CTEST_ERR("%s:%d  should not be %" PRIuMAX,
             file, line, actual);
@@ -655,7 +655,7 @@ void assertIntervalInt(intmax_t expectedFirst,
                         intmax_t expectedSecond,
                         intmax_t actual,
                         string file,
-                        int line) {
+                        long int line) {
 
     if (actual < expectedFirst || actual > expectedSecond) {
     CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
@@ -663,7 +663,7 @@ void assertIntervalInt(intmax_t expectedFirst,
     }
 }
 
-void assert_dbl_far(double expected, double actual, int precision, const_string caller, int line) {
+void assert_dbl_far(double expected, double actual, long int precision, const_string caller, long int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
     string actualString = (string) calloc(1079, sizeof(char));
@@ -696,17 +696,17 @@ void assert_dbl_far(double expected, double actual, int precision, const_string 
 void assertEqualsString(String expected,
                         String actual,
                         const_string file,
-                        int line) {
+                        long int line) {
     if (expected != actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
-void assertEqualsInt(int expected,
-                     int actual,
+void assertEqualsInt(long int expected,
+                     long int actual,
                      const_string file,
-                     int line) {
+                     long int line) {
 
     if (expected != actual) {
         CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
@@ -725,8 +725,8 @@ void assertEqualsInt(int expected,
 void assertEqualsDouble(double expected,
                         double actual,
                         const_string file,
-                        int line) {
-    int precision = 15;
+                        long int line) {
+    long int precision = 15;
 
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
@@ -763,17 +763,17 @@ void assertEqualsDouble(double expected,
 void assertNotEqualsString(String expected,
                         String actual,
                         const_string file,
-                        int line) {
+                        long int line) {
     if (expected == actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
                   file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
-void assertNotEqualsInt(int expected,
-                     int actual,
+void assertNotEqualsInt(long int expected,
+                     long int actual,
                      const_string file,
-                     int line) {
+                     long int line) {
 
     if (expected == actual) {
         CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
@@ -792,8 +792,8 @@ void assertNotEqualsInt(int expected,
 void assertNotEqualsDouble(double expected,
                         double actual,
                         const_string file,
-                        int line) {
-    int precision = 15;
+                        long int line) {
+    long int precision = 15;
 
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
@@ -834,7 +834,7 @@ void assertNotEqualsDouble(double expected,
 void assertEqualsUnsignedInt(uintmax_t expected,
                    uintmax_t actual,
                    string file,
-                   int line);
+                   long int line);
 
 /**
  * Asserts that two intmax_ts are not equal.
@@ -845,7 +845,7 @@ void assertEqualsUnsignedInt(uintmax_t expected,
 void assertNotEqualsInt(intmax_t expected,
                             intmax_t actual,
                             const_string file,
-                            int line) {
+                            long int line) {
     if ((expected) == (actual)) {
         CTEST_ERR("%s:%d  should not be %" PRIdMAX,
                   file, line, actual);
@@ -861,7 +861,7 @@ void assertNotEqualsInt(intmax_t expected,
 void assertNotEqualsUnsignedInt(uintmax_t expected,
                         uintmax_t actual,
                         string file,
-                        int line);
+                        long int line);
 
 /**
  * Assert Null
@@ -870,7 +870,7 @@ void assertNotEqualsUnsignedInt(uintmax_t expected,
  */
 void assertNullVoid(void *actual,
                 const_string file,
-                int line) {
+                long int line) {
     if ((actual) != nullptr) {
         CTEST_ERR("%s:%d  should be nullptr", file, line);
     }
@@ -883,7 +883,7 @@ void assertNullVoid(void *actual,
  */
 void assertNotNullVoid(const void* actual,
                    const_string file,
-                   int line) {
+                   long int line) {
     if (actual == nullptr) {
     CTEST_ERR("%s:%d  should not be nullptr", __FILE__, __LINE__);
     }
@@ -894,7 +894,7 @@ void assertNotNullVoid(const void* actual,
  *
  * @param actual
  */
-void assertTrueInt(int actual, const_string file, int line) {
+void assertTrueInt(long int actual, const_string file, long int line) {
     if ((actual) == 0) {
         CTEST_ERR("%s:%d  should be true", file, line);
     }
@@ -905,7 +905,7 @@ void assertTrueInt(int actual, const_string file, int line) {
  *
  * @param actual
  */
-void assertFalseInt(int actual, const_string file, int line) {
+void assertFalseInt(long int actual, const_string file, long int line) {
     if ((actual) != 0) {
         CTEST_ERR("%s:%d  should be false", file, line);
     }
@@ -914,7 +914,7 @@ void assertFalseInt(int actual, const_string file, int line) {
 /**
  * Assert Fail
  */
-void assertFailNoneArgument(const_string file, int line) {
+void assertFailNoneArgument(const_string file, long int line) {
     CTEST_ERR("%s:%d  shouldn't come here", file, line);
 }
 
@@ -928,9 +928,9 @@ void assertFailNoneArgument(const_string file, int line) {
  */
 void assertEqualsPrecisionDouble(double expected,
                                   double actual,
-                                  int precision,
+                                  long int precision,
                                   const_string file,
-                                  int line) {
+                                  long int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
     string actualString = (string) calloc(1079, sizeof(char));
@@ -971,9 +971,9 @@ void assertEqualsPrecisionDouble(double expected,
  */
 void assertNotEqualsPrecisionDouble(double expected,
                                   double actual,
-                                  int precision,
+                                  long int precision,
                                   const_string file,
-                                  int line) {
+                                  long int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
     string actualString = (string) calloc(1079, sizeof(char));
@@ -1004,12 +1004,12 @@ void assertNotEqualsPrecisionDouble(double expected,
     free(actualString);
 }
 
-static int suite_all(struct CTEST* t) {
+static long int suite_all(struct CTEST* t) {
     (void) t; // fix unused parameter warning
     return 1;
 }
 
-static int suite_filter(struct CTEST* t) {
+static long int suite_filter(struct CTEST* t) {
     return strncmp(suite_name, t->ssname, strlen((char *)suite_name)) == 0;
 }
 
@@ -1054,7 +1054,7 @@ static void *find_symbol(struct CTEST *test, const char *fname)
 #include <signal.h>
 #endif
 
-static void sighandler(int signum)
+static void sighandler(long int signum)
 {
     char msg[128];
     sprintf(msg, "[SIGNAL %d]", signum);
@@ -1068,13 +1068,13 @@ static void sighandler(int signum)
 }
 #endif
 
-int ctest_main(int argc, const char *argv[])
+long int ctest_main(long int argc, const char *argv[])
 {
-    static int total = 0;
-    static int num_ok = 0;
-    static int num_fail = 0;
-    static int num_skip = 0;
-    static int index = 1;
+    static long int total = 0;
+    static long int num_ok = 0;
+    static long int num_fail = 0;
+    static long int num_skip = 0;
+    static long int index = 1;
     static filter_func filter = suite_all;
 
 #ifdef CTEST_SEGFAULT
@@ -1125,7 +1125,7 @@ int ctest_main(int argc, const char *argv[])
         color_print(ANSI_BYELLOW, "[SKIPPED]");
         num_skip++;
         } else {
-        int result = setjmp(ctest_err);
+        long int result = setjmp(ctest_err);
         if (result == 0) {
 #ifdef __APPLE__
             if (!test->setup) {

@@ -39,7 +39,7 @@ void ArraySerialize() {
 	//System::out::println(arrayString.toCharPointer());
 }
 
-int main() {
+long int main() {
 	ArrayAssignment();
 	ArrayException();
 	ArrayForeach();
