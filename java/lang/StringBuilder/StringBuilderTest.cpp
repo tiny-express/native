@@ -62,11 +62,11 @@ TEST(JavaLangStringBuilder, Constructor) {
 //	assertEquals(StringBuilder::defaultCapacity + initializerListStringBuilder.length(),
 //	             initializerListStringBuilder.capacity());
 //
-//	CharSequence *charSequence = new String("Hello!");
-//	StringBuilder charSequenceStringBuilder(*charSequence);
-//	assertEquals("Hello!", charSequenceStringBuilder.toString());
-//	String *charSequenceString = dynamic_cast<String *>(charSequence);
-//	delete charSequenceString;
+	CharSequence *charSequence = new String("Hello!");
+	StringBuilder charSequenceStringBuilder(*charSequence);
+	assertEquals("Hello!", charSequenceStringBuilder.toString());
+	String *charSequenceString = dynamic_cast<String *>(charSequence);
+	delete charSequenceString;
 }
 
 TEST(JavaLangStringBuilder, Destructor) {
