@@ -38,13 +38,13 @@ namespace Java {
 
             ~MD5MessageDigest();
 
-            int engineDigest(byte *buffer, int len) override;
+            long int engineDigest(byte *buffer, long int len) override;
 
-            int engineGetDigestLength() override;
+            long int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte *input, int len) override;
+            void engineUpdate(const byte *input, long int len) override;
 
         private:
             byte hash[16];

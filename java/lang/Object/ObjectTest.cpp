@@ -184,7 +184,7 @@ TEST (JavaLangObject, Wait) {
     Object object;
     try {
         object.wait();
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }
@@ -193,7 +193,7 @@ TEST (JavaLangObject, WaitWithTimeout) {
     Object object;
     try {
         object.wait(1000);
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }
@@ -202,7 +202,7 @@ TEST (JavaLangObject, WaitWithTimeoutNanoSecond) {
     Object object;
     try {
         object.wait(1000, 5);
-    } catch (InterruptedException exception) {
+    } catch (InterruptedException &exception) {
         assertEquals("", exception.getMessage());
     }
 }

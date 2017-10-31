@@ -52,7 +52,7 @@ TEST (JavaLangIndexOutOfBoundsException, Constructor) {
 TEST (JavaLangIndexOutOfBoundsException, TryCatch) {
 	try {
 		throw IndexOutOfBoundsException("Throw IndexOutOfBoundsException");
-	} catch (Exception e) {
+	} catch (Exception &e) {
 		assertEquals("Throw IndexOutOfBoundsException", e.getMessage());
 	}
 }

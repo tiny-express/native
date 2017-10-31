@@ -58,7 +58,7 @@ long int MessageDigest::getDigestLength() {
     return engineGetDigestLength();
 }
 
-long int MessageDigest::digest(byte buf[], int len) {
+long int MessageDigest::digest(byte buf[], long int len) {
     if (buf == nullptr)
         throw InterruptedException("No output buffer given");
     if (len < engineGetDigestLength())
@@ -70,7 +70,7 @@ void MessageDigest::reset() {
     engineReset();
 }
 
-void MessageDigest::update(const byte input[], int len) {
+void MessageDigest::update(const byte input[], long int len) {
     if (input == nullptr || len == 0)
         throw InterruptedException("No input buffer given");
     engineUpdate(input, len);
@@ -81,7 +81,7 @@ MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
     this->algorithm = algorithm;
 }
 
-long int MessageDigest::engineDigest(byte buffer[], int len) {
+long int MessageDigest::engineDigest(byte buffer[], long int len) {
     if (spi) {
         return spi->engineDigest(buffer, len);
     }
@@ -101,7 +101,7 @@ void MessageDigest::engineReset() {
     }
 }
 
-void MessageDigest::engineUpdate(const byte input[], int len) {
+void MessageDigest::engineUpdate(const byte input[], long int len) {
     if (spi) {
         spi->engineUpdate(input, len);
     }

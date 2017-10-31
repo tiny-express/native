@@ -188,7 +188,7 @@ namespace Java {
              * @return reference to this StringBufferUnSafe
              */
             StringBufferUnSafe &
-            append(String stringToAppend, int offset, int len);
+            append(String stringToAppend, int offset, long int len);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
@@ -503,7 +503,7 @@ namespace Java {
              */
 
             StringBufferUnSafe &
-            insert(int index, String stringToInsert, int offset, int len);
+            insert(int index, String stringToInsert, int offset, long int len);
 
             /**
              * Returns the index within this string of the rightmost occurrence of the specified substring.
@@ -792,7 +792,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException  if offset < 0 or len < 0 or offset+len > str.length
              * @return reference to this StringBuffer
              */
-            StringBuffer &append(string stringToAppend, int offset, int len);
+            StringBuffer &append(string stringToAppend, int offset, long int len);
 
             /**
              * Appends a subsequence of the specified CharSequence to this sequence.
@@ -1095,7 +1095,7 @@ namespace Java {
              */
 
             StringBuffer &
-            insert(int index, String stringToInsert, int offset, int len);
+            insert(int index, String stringToInsert, int offset, long int len);
 
             /**
              * Returns the index within this string of the rightmost occurrence of the specified substring.

@@ -30,7 +30,7 @@
 using namespace Java::Util;
 
 TEST (JavaUtilEmptyStackException, Constructor) {
-	EmptyStackException emptyStackExceptionNullMess;
+	EmptyStackException &emptyStackExceptionNullMess;
 	assertEquals("", emptyStackExceptionNullMess.getMessage());
 }
 

@@ -197,7 +197,7 @@ TEST (JavaUtilStack, Peek) {
 	try {
 		emptyStack.peek();
 	}
-	catch (Exception e) {
+	catch (Exception &e) {
 		assertEquals("", e.getMessage());
 	}
 }
@@ -260,7 +260,7 @@ TEST (JavaUtilStack, Pop) {
 	try {
 		emptyStack.peek();
 	}
-	catch (Exception e) {
+	catch (Exception &e) {
 		assertEquals("", e.getMessage());
 	}
 }

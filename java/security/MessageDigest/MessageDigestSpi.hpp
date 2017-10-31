@@ -34,10 +34,10 @@ namespace Java {
     namespace Security {
         class MessageDigestSpi : public Object {
         public:
-            virtual long int engineDigest(byte buffer[], int len) = 0;
+            virtual long int engineDigest(byte buffer[], long int len) = 0;
             virtual long int engineGetDigestLength() = 0;
             virtual void engineReset() = 0;
-            virtual void engineUpdate(const byte input[], int len)
+            virtual void engineUpdate(const byte input[], long int len)
             = 0;
         };
     } // namespace Security

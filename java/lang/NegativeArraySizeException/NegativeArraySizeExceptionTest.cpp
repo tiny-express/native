@@ -42,7 +42,7 @@ TEST (JavaLangNegativeArraySizeException, Constructor) {
 TEST (JavaLangNegativeArraySizeException, TryCatch) {
 	try {
 		throw RuntimeException("Throw NegativeArraySizeException");
-	} catch (Exception e) {
+	} catch (Exception &e) {
 		assertEquals("Throw NegativeArraySizeException", e.getMessage());
 	}
 }

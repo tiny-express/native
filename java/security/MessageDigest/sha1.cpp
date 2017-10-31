@@ -40,7 +40,7 @@
 static void shaHashBlock(SHA_CTX *ctx);
 
 void SHA1_Init(SHA_CTX *ctx) {
-    int i;
+    long int i;
 
     ctx->lenW = 0;
     ctx->sizeHi = ctx->sizeLo = 0;
@@ -57,15 +57,15 @@ void SHA1_Init(SHA_CTX *ctx) {
         ctx->W[i] = 0;
 }
 
-void SHA1_Update(SHA_CTX *ctx, const void *_dataIn, int len) {
+void SHA1_Update(SHA_CTX *ctx, const void *_dataIn, long int len) {
     const unsigned char *dataIn = (unsigned char *)_dataIn;
-    int i;
+    long int i;
 
     /* Read the data into W and process blocks as they get full
      */
     for (i = 0; i < len; i++) {
         ctx->W[ctx->lenW / 4] <<= 8;
-        ctx->W[ctx->lenW / 4] |= (unsigned int)dataIn[i];
+        ctx->W[ctx->lenW / 4] |= (unsigned long int)dataIn[i];
         if ((++ctx->lenW) % 64 == 0) {
             shaHashBlock(ctx);
             ctx->lenW = 0;
@@ -79,7 +79,7 @@ void SHA1_Final(unsigned char hashout[20], SHA_CTX *ctx) {
     unsigned char pad0x80 = 0x80;
     unsigned char pad0x00 = 0x00;
     unsigned char padlen[8];
-    int i;
+    long int i;
 
     /* Pad with a binary 1 (e.g. 0x80), then zeroes, then length
      */
@@ -110,7 +110,7 @@ void SHA1_Final(unsigned char hashout[20], SHA_CTX *ctx) {
 }
 
 static void shaHashBlock(SHA_CTX *ctx) {
-    int t;
+    long int t;
     unsigned int A,B,C,D,E,TEMP;
 
     for (t = 16; t <= 79; t++)

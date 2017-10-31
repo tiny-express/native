@@ -40,7 +40,7 @@ that follows (in reverse chronological order):
 2002-04-13 lpd Clarified derivation from RFC 1321; now handles byte order
 either statically or dynamically; added missing #include <string.h>
 in library.
-2002-03-11 lpd Corrected argument list for main(), and added int return
+2002-03-11 lpd Corrected argument list for main(), and added long int return
 type, in test program and T value program.
 2002-02-21 lpd Added missing #include <stdio.h> in test program.
 2000-07-03 lpd Patched to eliminate warnings about "constant is
@@ -52,7 +52,7 @@ self-checking.
 */
 
 #include "md5.hpp"
-#include <string.h>
+#include <cstring>
 
 #undef BYTE_ORDER	/* 1 = big-endian, -1 = little-endian, 0 = unknown */
 #ifdef ARCH_IS_BIG_ENDIAN
@@ -149,7 +149,7 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
         * little-endian machine, since we can use a more efficient
         * algorithm on the latter.
         */
-        static const long int w = 1;
+        static const long long int w = 1;
 
         if (*((const md5_byte_t *)&w)) /* dynamic little-endian */
 #endif
@@ -180,7 +180,7 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
             * right order.
             */
             const md5_byte_t *xp = data;
-            int i;
+            long int i;
 
 #  if BYTE_ORDER == 0
             X = xbuf;		/* (dynamic only) */
@@ -317,11 +317,11 @@ void md5_init(md5_state_t *pms)
     pms->abcd[3] = 0x10325476;
 }
 
-void md5_append(md5_state_t *pms, const md5_byte_t *data, int nbytes)
+void md5_append(md5_state_t *pms, const md5_byte_t *data, long int nbytes)
 {
     const md5_byte_t *p = data;
-    int left = nbytes;
-    int offset = (pms->count[0] >> 3) & 63;
+    long int left = nbytes;
+    long int offset = (pms->count[0] >> 3) & 63;
     md5_word_t nbits = (md5_word_t)(nbytes << 3);
 
     if (nbytes <= 0)
@@ -335,7 +335,7 @@ void md5_append(md5_state_t *pms, const md5_byte_t *data, int nbytes)
 
     /* Process an initial partial block. */
     if (offset) {
-        int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
+        long int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
 
         memcpy(pms->buf + offset, p, copy);
         if (offset + copy < 64)
@@ -363,7 +363,7 @@ void md5_finish(md5_state_t *pms, md5_byte_t digest[16])
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     };
     md5_byte_t data[8];
-    int i;
+    long int i;
 
     /* Save the length before padding. */
     for (i = 0; i < 8; ++i)

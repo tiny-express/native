@@ -43,13 +43,13 @@ namespace Java {
 
             String getAlgorithm();
 
-            int getDigestLength();
+            long int getDigestLength();
 
-            int digest(byte buf[], int len);
+            long int digest(byte buf[], long int len);
 
             void reset();
 
-            void update(const byte input[], int len);
+            void update(const byte input[], long int len);
 
         private:
             MessageDigestSpi* spi;
@@ -57,13 +57,13 @@ namespace Java {
 
             MessageDigest(MessageDigestSpi* spi, String algorithm);
 
-            int engineDigest(byte buffer[], int len) override;
+            long int engineDigest(byte buffer[], long int len) override;
 
-            int engineGetDigestLength() override;
+            long int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte input[], int len) override;
+            void engineUpdate(const byte input[], long int len) override;
 
         };
     } // namespace Security

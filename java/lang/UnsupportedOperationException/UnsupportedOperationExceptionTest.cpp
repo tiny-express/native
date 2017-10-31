@@ -52,7 +52,7 @@ TEST (JavaLangUnsupportedOperationException, Constructor) {
 TEST (JavaLangUnsupportedOperationException, TryCatch) {
 	try {
 		throw UnsupportedOperationException("Throw UnsupportedOperationException");
-	} catch (Exception e) {
+	} catch (Exception &e) {
 		assertEquals("Throw UnsupportedOperationException", e.getMessage());
 	}
 }

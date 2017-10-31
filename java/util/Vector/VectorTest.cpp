@@ -106,13 +106,13 @@ TEST (JavaUtilVector, Add) {
     // Test exception
     try {
         vector.add(-1, 100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.add(100, 100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -299,7 +299,7 @@ TEST (JavaUtilVector, FirstElement) {
     Vector<String> emptyVector;
     try {
         emptyVector.firstElement();
-    } catch (Exception exception) {
+    } catch (Exception &exception) {
         assertEquals("vector is empty", exception.getMessage());
     }
 }
@@ -320,13 +320,13 @@ TEST (JavaUtilVector, Get) {
     // Test exception
     try {
         vector.get(-1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.remove(100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -362,13 +362,13 @@ TEST (JavaUtilVector, IndexOf) {
     // Test exception
     try {
         vector.indexOf(4, -1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.indexOf(4, 100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -403,7 +403,7 @@ TEST (JavaUtilVector, LastElement) {
     Vector<String> emptyVector;
     try {
         emptyVector.lastElement();
-    } catch (Exception exception) {
+    } catch (Exception &exception) {
         assertEquals("vector is empty", exception.getMessage());
     }
 }
@@ -426,13 +426,13 @@ TEST (JavaUtilVector, LastIndexOf) {
 
     try {
         vector.lastIndexOf(2, -1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.lastIndexOf(2, 100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -474,13 +474,13 @@ TEST (JavaUtilVector, Remove) {
     // Test execption
     try {
         vector1.remove(-1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector1.remove(100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -587,31 +587,31 @@ TEST (JavaUtilVector, RemoveRange) {
     // Test Exception
     try {
         vector.removeRange(3, 1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("start index greater than end index", exception.getMessage());
     }
 
     try {
         vector.removeRange(-1, 5);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.removeRange(100, 3);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.removeRange(1, -1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.removeRange(1, 100);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }
@@ -648,13 +648,13 @@ TEST (JavaUtilVector, Set) {
     // Test index out of range
     try {
         vector.set(-1, 1302);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
     try {
         vector.set(100, 1302);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 
@@ -707,7 +707,7 @@ TEST (JavaUtilVector, SetSize) {
     // Set negative size
     try {
         vector.setSize(-1);
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("new size is negative", exception.getMessage());
     }
 }
@@ -803,7 +803,7 @@ TEST (JavaUtilVector, ArrayOperator) {
     // Test IllegalArgumentException
     try {
         vector[-1] = 1302;
-    } catch (IllegalArgumentException exception) {
+    } catch (IllegalArgumentException &exception) {
         assertEquals("index is out of range", exception.getMessage());
     }
 }

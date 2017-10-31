@@ -203,7 +203,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-             String(Array<byte> &byteArray, int offset, int length);
+             String(Array<byte> &byteArray, int offset, long int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -217,7 +217,7 @@ namespace Java {
              * characters outside the bounds of the bytes array
              */
             // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, int offset, int length, Charset charset);
+            // String(Array<byte> &byteArray, int offset, long int length, Charset charset);
 
             /**
              * Constructs a new String by decoding the specified
@@ -232,7 +232,7 @@ namespace Java {
              * characters outside the bounds of the bytes array
              */
             // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, int offset, int length, String charsetName);
+            // String(Array<byte> &byteArray, int offset, long int length, String charsetName);
 
             /**
              * Construct a new String from specific string
@@ -271,7 +271,7 @@ namespace Java {
              * @param original
              * @param length
              */
-            String(string target, int length);
+            String(string target, long int length);
 
             /**
              * Destructor
@@ -681,7 +681,7 @@ namespace Java {
              * matches the specified subregion of the String argument; false otherwise.
              */
             boolean regionMatches(int thisOffset,
-                                  String otherString, int otherOffset, int len);
+                                  String otherString, int otherOffset, long int len);
 
             /**
              * Tests if two string regions are equal.
@@ -696,7 +696,7 @@ namespace Java {
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
             boolean regionMatches(boolean ignoreCase, int thisOffset,
-                                  String otherString, int otherOffset, int len);
+                                  String otherString, int otherOffset, long int len);
 
             /**
              * Returns a string resulting from replacing all occurrences

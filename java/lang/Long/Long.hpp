@@ -388,7 +388,7 @@ namespace Java {
 						 * @param int len
 						 * @return int
 						 */
-						static long int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
+						static long int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, long int len);
 				
 				public:
 						

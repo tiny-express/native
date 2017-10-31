@@ -53,7 +53,7 @@ TEST (JavaLangIllegalArgumentException, TryCatch) {
 	try {
 		throw IllegalArgumentException("Throw IllegalArgumentException");
 	}
-	catch (IllegalArgumentException e) {
+	catch (IllegalArgumentException &e) {
 		assertEquals("Throw IllegalArgumentException", e.getMessage());
 	}
 }

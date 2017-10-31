@@ -122,11 +122,11 @@ StringBuilder &StringBuilder::append(const Array<char> target) {
 	return *this;
 }
 
-StringBuilder &StringBuilder::append(const Array<Character> &target, int offset, int length) {
+StringBuilder &StringBuilder::append(const Array<Character> &target, int offset, long int length) {
 	return this->insert(this->currentLength, target, offset, length);
 }
 
-StringBuilder &StringBuilder::append(const Array<char> &target, int offset, int length) {
+StringBuilder &StringBuilder::append(const Array<char> &target, int offset, long int length) {
 	return this->insert(this->currentLength, target, offset, length);
 }
 
@@ -375,7 +375,7 @@ StringBuilder &StringBuilder::insert(int offset, const Array<Character> target) 
 	return this->insert(offset, target, 0, target.length);
 }
 
-StringBuilder &StringBuilder::insert(int index, const Array<char> &target, int offset, int length) {
+StringBuilder &StringBuilder::insert(int index, const Array<char> &target, int offset, long int length) {
 	if (index < 0 || index > this->currentLength) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
@@ -403,7 +403,7 @@ StringBuilder &StringBuilder::insert(int index, const Array<char> &target, int o
 	return *this;
 }
 
-StringBuilder &StringBuilder::insert(int index, const Array<Character> &target, int offset, int length) {
+StringBuilder &StringBuilder::insert(int index, const Array<Character> &target, int offset, long int length) {
 	if (index < 0 || index > this->currentLength) {
 		throw StringIndexOutOfBoundsException(offset);
 	}

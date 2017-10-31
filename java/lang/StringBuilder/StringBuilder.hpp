@@ -170,7 +170,7 @@ namespace Java {
 						 * @return StringBuilder
 						 * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
 						 */
-                        StringBuilder &append(const Array<Character> &target, int offset, int length);
+                        StringBuilder &append(const Array<Character> &target, int offset, long int length);
                         
                         /**
 						 * Appends the string representation of a subarray of the char array argument to this sequence.
@@ -183,7 +183,7 @@ namespace Java {
 						 * @return StringBuilder
 						 * @throw IndexOutOfBoundsException - if offset < 0 or length < 0 or offset+length > target.length
 						 */
-                        StringBuilder &append(const Array<char> &target, int offset, int length);
+                        StringBuilder &append(const Array<char> &target, int offset, long int length);
                         
                         /**
 						 * Appends the specified character sequence to this sequence.
@@ -518,7 +518,7 @@ namespace Java {
 						 * @return StringBuilder
 						 * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(), or offset or length are negative, or (offset+length) is greater than target.length().
 						 */
-                        StringBuilder &insert(int index, const Array<char> &target, int offset, int length);
+                        StringBuilder &insert(int index, const Array<char> &target, int offset, long int length);
                         
                         /**
 						 * Inserts the string representation of a subarray of the 'target' array argument into this sequence.
@@ -534,7 +534,7 @@ namespace Java {
 						 * @throw StringIndexOutOfBoundsException - if index is negative or greater than length(),
 						 * or offset or length are negative, or (offset+length) is greater than target.length
 						 */
-                        StringBuilder &insert(int index, const Array<Character> &target, int offset, int length);
+                        StringBuilder &insert(int index, const Array<Character> &target, int offset, long int length);
                         
                         /**
 						 * Inserts the specified CharSequence into this sequence.

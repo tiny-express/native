@@ -45,7 +45,7 @@ TEST(JavaSecurity, Constructor) {
         String result;
         try {
             MessageDigest md = MessageDigest::getInstance("MDx");
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException &e) {
             result = e.getMessage();
         }
 
@@ -59,7 +59,7 @@ TEST(JavaSecurity, MD5) {
     String input = "the quick brown fox jumps over the lazy dog";
     byte* result = nullptr;
     MessageDigest md5 = MessageDigest::getInstance("MD5");
-    int digestLength = 0;
+    long int digestLength = 0;
 
 
     digestLength = md5.getDigestLength();
@@ -88,12 +88,12 @@ TEST(JavaSecurity, MD5MultiUpdate) {
             " magna ultricies non.";
     byte* result = nullptr;
     MessageDigest md5 = MessageDigest::getInstance("MD5");
-    int digestLength = 0;
+    long int digestLength = 0;
 
     digestLength = md5.getDigestLength();
     result = new byte[digestLength]();
 
-    srand((unsigned int)GetTickCount());
+    srand((unsigned long int) GetTickCount());
     int offset = 0;
     while (offset < input.getSize()) {
         int range = input.getSize() - offset;
@@ -118,7 +118,7 @@ TEST(JavaSecurity, SHA1) {
     String input = "the quick brown fox jumps over the lazy dog";
     byte* result = nullptr;
     MessageDigest sha1 = MessageDigest::getInstance("SHA1");
-    int digestLength = 0;
+    long int digestLength = 0;
 
     digestLength = sha1.getDigestLength();
     result = new byte[digestLength];
@@ -140,12 +140,12 @@ TEST(JavaSecurity, SHA1MultiUpdate) {
             " magna ultricies non.";
     byte* result = nullptr;
     MessageDigest sha1 = MessageDigest::getInstance("SHA1");
-    int digestLength = 0;
+    long int digestLength = 0;
 
     digestLength = sha1.getDigestLength();
     result = new byte[digestLength]();
 
-    srand((unsigned int)GetTickCount());
+    srand((unsigned long int)GetTickCount());
     int offset = 0;
     while (offset < input.getSize()) {
         int range = input.getSize() - offset;
@@ -190,7 +190,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             md5.update(nullptr, 0);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException &e) {
             result = e.getMessage();
         }
 
@@ -204,7 +204,7 @@ TEST(JavaSecurity, Exception) {
 
         try {
             sha1.digest(nullptr, 1);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException &e) {
             result = e.getMessage();
         }
 
@@ -219,7 +219,7 @@ TEST(JavaSecurity, Exception) {
         try {
             byte buf[1] = { 0 };
             sha1.digest(buf, sizeof(buf));
-        } catch (InterruptedException e) {
+        } catch (InterruptedException &e) {
             result = e.getMessage();
         }
 

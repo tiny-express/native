@@ -287,7 +287,7 @@ long int Integer::highestOneBit(int inputInt) {
 	inputInt |= ( inputInt >> 8 );
 	inputInt |= ( inputInt >> 16 );
 	
-	return inputInt - ((unsigned int) inputInt >> 1 );
+	return inputInt - ((unsigned long int) inputInt >> 1 );
 }
 
 long int Integer::lowestOneBit(int inputInt) {
@@ -309,27 +309,27 @@ long int Integer::numberOfLeadingZeros(int inputInt) {
 	
 	long int numberOfZero = 1;
 	
-	if ((unsigned int) inputInt >> 16 == 0) {
+	if ((unsigned long int) inputInt >> 16 == 0) {
 		numberOfZero += 16;
 		inputInt <<= 16;
 	}
 	
-	if ((unsigned int) inputInt >> 24 == 0) {
+	if ((unsigned long int) inputInt >> 24 == 0) {
 		numberOfZero += 8;
 		inputInt <<= 8;
 	}
 	
-	if ((unsigned int) inputInt >> 28 == 0) {
+	if ((unsigned long int) inputInt >> 28 == 0) {
 		numberOfZero += 4;
 		inputInt <<= 4;
 	}
 	
-	if ((unsigned int) inputInt >> 30 == 0) {
+	if ((unsigned long int) inputInt >> 30 == 0) {
 		numberOfZero += 2;
 		inputInt <<= 2;
 	}
 	
-	numberOfZero -= (unsigned int) inputInt >> 31;
+	numberOfZero -= (unsigned long int) inputInt >> 31;
 	
 	return numberOfZero;
 }
@@ -451,23 +451,23 @@ long int Integer::remainderUnsigned(int dividend, int divisor) {
 
 long int Integer::reverse(int inputInt) {
 	inputInt = ( inputInt & 0x55555555 ) << 1
-	           | ((unsigned int) inputInt >> 1 ) & 0x55555555;
+	           | ((unsigned long int) inputInt >> 1 ) & 0x55555555;
 	
 	inputInt = ( inputInt & 0x33333333 ) << 2
-	           | ((unsigned int) inputInt >> 2 ) & 0x33333333;
+	           | ((unsigned long int) inputInt >> 2 ) & 0x33333333;
 	
 	inputInt = ( inputInt & 0x0f0f0f0f ) << 4
-	           | ((unsigned int) inputInt >> 4 ) & 0x0f0f0f0f;
+	           | ((unsigned long int) inputInt >> 4 ) & 0x0f0f0f0f;
 	
 	inputInt = ( inputInt << 24 ) | (( inputInt & 0xff00 ) << 8 )
-	           | (((unsigned int) inputInt >> 8 ) & 0xff00 )
-	           | ((unsigned int) inputInt >> 24 );
+	           | (((unsigned long int) inputInt >> 8 ) & 0xff00 )
+	           | ((unsigned long int) inputInt >> 24 );
 	
 	return inputInt;
 }
 
 long int Integer::reverseBytes(int inputInt) {
-	inputInt = (((unsigned int) inputInt >> 24 ))
+	inputInt = (((unsigned long int) inputInt >> 24 ))
 	           | (( inputInt >> 8 ) & 0xFF00 )
 	           | (( inputInt << 8 ) & 0xFF0000 )
 	           | (( inputInt << 24 ));
@@ -476,12 +476,12 @@ long int Integer::reverseBytes(int inputInt) {
 }
 
 long int Integer::rotateLeft(int inputInt, int distance) {
-	inputInt = ( inputInt << distance ) | ((unsigned int) inputInt >> -distance );
+	inputInt = ( inputInt << distance ) | ((unsigned long int) inputInt >> -distance );
 	return inputInt;
 }
 
 long int Integer::rotateRight(int inputInt, int distance) {
-	return ((unsigned int) inputInt >> distance ) | ( inputInt << -distance );
+	return ((unsigned long int) inputInt >> distance ) | ( inputInt << -distance );
 }
 
 String Integer::toString() const {

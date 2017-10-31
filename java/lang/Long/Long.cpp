@@ -584,7 +584,7 @@ Long Long::valueOf(String s, int radix) {
  * @param int len
  * @return int
  */
-long int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
+long int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, long int len) {
 	long int charPos = len;
 	long int radix = 1 << shift;
 	long int mask = radix - 1;

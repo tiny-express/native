@@ -118,7 +118,7 @@ long int StringBufferUnSafe::length() const {
 }
 
 StringBufferUnSafe &
-StringBufferUnSafe::append(String stringToAppend, int offset, int len) {
+StringBufferUnSafe::append(String stringToAppend, int offset, long int len) {
     if (offset < 0 || len < 0 || (offset + len) > stringToAppend.length()) {
         throw IndexOutOfBoundsException();
     }
@@ -750,7 +750,7 @@ StringBuffer &StringBuffer::append(long longValue) {
     return *this;
 }
 
-StringBuffer &StringBuffer::append(string stringToAppend, int offset, int len) {
+StringBuffer &StringBuffer::append(string stringToAppend, int offset, long int len) {
     std::lock_guard<std::mutex> guard(this->mutex);
     StringBufferUnSafe::append(stringToAppend, offset, len);
     return *this;
@@ -909,7 +909,7 @@ StringBuffer &StringBuffer::insert(int offset, CharSequence &charSequence) {
 }
 
 StringBuffer &
-StringBuffer::insert(int index, String stringToInsert, int offset, int len) {
+StringBuffer::insert(int index, String stringToInsert, int offset, long int len) {
     std::lock_guard<std::mutex> guard(this->mutex);
     StringBufferUnSafe::insert(index, stringToInsert, offset, len);
     return *this;

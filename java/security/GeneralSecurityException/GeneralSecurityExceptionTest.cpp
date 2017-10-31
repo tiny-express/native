@@ -71,7 +71,7 @@ TEST(JavaLang, GeneralSecurityExceptionConstructor) {
 TEST(JavaLang, GeneralSecurityExceptionTryCatch) {
     try {
         throw GeneralSecurityException("Throw GeneralException");
-    } catch (Exception e) {
+    } catch (Exception &e) {
         assertEquals("Throw GeneralException", e.getMessage());
     }
 }

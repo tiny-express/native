@@ -56,7 +56,7 @@ TEST (JavaLangStringIndexOutOfBoundsException, Constructor) {
 TEST (JavaLangStringIndexOutOfBoundsException, TryCatch) {
 	try {
 		throw StringIndexOutOfBoundsException("Throw StringIndexOutOfBoundsException");
-	} catch (Exception e) {
+	} catch (Exception &e) {
 		assertEquals("Throw StringIndexOutOfBoundsException", e.getMessage());
 	}
 }

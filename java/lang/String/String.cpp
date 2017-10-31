@@ -39,7 +39,7 @@ String::String() {
     this->capacity = DEFAULT_CAPACITY;
 }
 
-String::String(string original, int length) {
+String::String(string original, long int length) {
     this->original = strndup(original, (size_t) length);
     this->size = length;
     this->capacity = this->size == 0 ? -1 : this->size;
@@ -88,11 +88,11 @@ String::String(const StringBuffer &stringBuffer) {
     this->capacity = this->size == 0 ? -1 : this->size;
 }
 
-String::String(Array<char> &array, int offset, int length) {
+String::String(Array<char> &array, int offset, long int length) {
     STRING_CONSTRUCTOR_ARRAY
 }
 
-String::String(Array<byte> &array, int offset, int length) {
+String::String(Array<byte> &array, int offset, long int length) {
     STRING_CONSTRUCTOR_ARRAY
 }
 
@@ -508,13 +508,13 @@ long String::hashCode() const {
 }
 
 boolean String::regionMatches(int thisOffset,
-                              String otherString, int otherOffset, int len) {
+                              String otherString, int otherOffset, long int len) {
 
     return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
 }
 
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
-                              String otherString, int otherOffset, int len) {
+                              String otherString, int otherOffset, long int len) {
 
     String thisString = this->subString(thisOffset, thisOffset + len);
     otherString = otherString.subString(otherOffset, otherOffset + len);

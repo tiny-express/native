@@ -70,7 +70,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
 TEST(JavaLang, NoSuchAlgorithmExceptionTryCatch) {
     try {
         throw NoSuchAlgorithmException("Throw NoSuchAlgorithmException");
-    } catch (Exception e) {
+    } catch (Exception &e) {
         assertEquals("Throw NoSuchAlgorithmException", e.getMessage());
     }
 }

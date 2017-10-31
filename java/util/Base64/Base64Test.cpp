@@ -77,7 +77,7 @@ TEST (JavaUtilBase64, Encoder) {
 	Array<byte> outputByteArrayIsNotEnoughSize(10);  // Not enough size.
 	try {
 		basicEncoder.encode(stringInputToArrayOfByte, outputByteArrayIsNotEnoughSize);
-	} catch (InterruptedException ex) {
+	} catch (InterruptedException &ex) {
 		assertEquals("Output byte array is too small for encoding all input bytes",
 		           ex.getMessage());
 	}
