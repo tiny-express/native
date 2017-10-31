@@ -30,29 +30,34 @@
 using namespace Java::Lang;
 
 TEST (JavaLangRuntimeException, Constructor) {
-	// Constructs a new RuntimeException with null as its detail message.
-	RuntimeException runtimeExceptionWithNullMessage;
-	assertEquals("", runtimeExceptionWithNullMessage.getMessage());
-	
-	// Constructs a new RuntimeException with the specified detail message.
-	RuntimeException runtimeExceptionWithMessage = RuntimeException("RuntimeException with the specified message");
-	assertEquals("RuntimeException with the specified message", runtimeExceptionWithMessage.getMessage());
-	
-	// Constructs a new RuntimeException with the specified detail message and cause.
-	RuntimeException runtimeExceptionWithMessageAndCause = RuntimeException("RuntimeException with the specified message and cause", &runtimeExceptionWithMessage);
-	assertEquals("RuntimeException with the specified message and cause", runtimeExceptionWithMessageAndCause.getMessage());
-	assertEquals("RuntimeException with the specified message", runtimeExceptionWithMessageAndCause.getCause()->getMessage());
-	
-	// Constructs a new RuntimeException with the specified cause.
-	RuntimeException runtimeExceptionWithCause = RuntimeException(&runtimeExceptionWithMessageAndCause);
-	assertEquals("RuntimeException with the specified message and cause", runtimeExceptionWithCause.getCause()->getMessage());
-	assertEquals("RuntimeException with the specified message", runtimeExceptionWithCause.getCause()->getCause()->getMessage());
+    // Constructs a new RuntimeException with null as its detail message.
+    RuntimeException runtimeExceptionWithNullMessage;
+    assertEquals("", runtimeExceptionWithNullMessage.getMessage());
+
+    // Constructs a new RuntimeException with the specified detail message.
+    RuntimeException runtimeExceptionWithMessage = RuntimeException("RuntimeException with the specified message");
+    assertEquals("RuntimeException with the specified message", runtimeExceptionWithMessage.getMessage());
+
+    // Constructs a new RuntimeException with the specified detail message and cause.
+    RuntimeException runtimeExceptionWithMessageAndCause = RuntimeException(
+            "RuntimeException with the specified message and cause", &runtimeExceptionWithMessage);
+    assertEquals("RuntimeException with the specified message and cause",
+                 runtimeExceptionWithMessageAndCause.getMessage());
+    assertEquals("RuntimeException with the specified message",
+                 runtimeExceptionWithMessageAndCause.getCause()->getMessage());
+
+    // Constructs a new RuntimeException with the specified cause.
+    RuntimeException runtimeExceptionWithCause = RuntimeException(&runtimeExceptionWithMessageAndCause);
+    assertEquals("RuntimeException with the specified message and cause",
+                 runtimeExceptionWithCause.getCause()->getMessage());
+    assertEquals("RuntimeException with the specified message",
+                 runtimeExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangRuntimeException, TryCatch) {
-	try {
-		throw RuntimeException("Throw RuntimeException");
-	} catch (Exception &e) {
-		assertEquals("Throw RuntimeException", e.getMessage());
-	}
+    try {
+        throw RuntimeException("Throw RuntimeException");
+    } catch (Exception &e) {
+        assertEquals("Throw RuntimeException", e.getMessage());
+    }
 }

@@ -32,10 +32,10 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Util {
-				class RandomAccess : public Object {
-				};
-		}
+    namespace Util {
+        class RandomAccess : public Object {
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_UTIL_RANDOM_ACCESS_HPP

@@ -32,69 +32,93 @@
 #include "../String/String.hpp"
 
 namespace Java {
-		namespace Lang {
-				class Short : public virtual Number {
-				private:
-						short original;
-						string originalString;
-				
-				public:
-						Short();
-						Short(short original);
-						Short(const Short &target);
-						~Short();
-				
-				public:
-						char charValue() const;
-						short shortValue() const;
-	long int intValue() const;
-						long longValue() const;
-						float floatValue() const;
-						double doubleValue() const;
-						String toString() const;
-						
-						static Short parseShort(String target);
-				
-				public:
-						Short operator=(const Short &target);
-						Short operator+(const Short &target);
-						Short operator-(const Short &target);
-						Short operator/(const Short &target);
-						Short operator*(const Short &target);
-						Short operator%(const Short &target);
-						
-						boolean operator==(const Short &target) const;
-						boolean operator!=(const Short &target) const;
-						boolean operator<(const Short &target) const;
-						boolean operator>(const Short &target) const;
-						boolean operator<=(const Short &target) const;
-						boolean operator>=(const Short &target) const;
-						
-						void operator+=(const Short &target);
-						void operator-=(const Short &target);
-						void operator*=(const Short &target);
-						void operator/=(const Short &target);
-						void operator%=(const Short &target);
-				
-				public:
-						friend std::ostream &operator<<(std::ostream &os, const Short &target) {
-							os << target.original;
-							return os;
-						}
-						
-						inline size_t operator()(const Short &target) const {
-							return std::hash<std::string>{}(target.toString().toCharPointer());
-						}
-				};
-		}
+    namespace Lang {
+        class Short : public virtual Number {
+        private:
+            short original;
+            string originalString;
+
+        public:
+            Short();
+
+            Short(short original);
+
+            Short(const Short &target);
+
+            ~Short();
+
+        public:
+            char charValue() const;
+
+            short shortValue() const;
+
+            long int intValue() const;
+
+            long long longValue() const;
+
+            float floatValue() const;
+
+            double doubleValue() const;
+
+            String toString() const;
+
+            static Short parseShort(String target);
+
+        public:
+            Short operator=(const Short &target);
+
+            Short operator+(const Short &target);
+
+            Short operator-(const Short &target);
+
+            Short operator/(const Short &target);
+
+            Short operator*(const Short &target);
+
+            Short operator%(const Short &target);
+
+            boolean operator==(const Short &target) const;
+
+            boolean operator!=(const Short &target) const;
+
+            boolean operator<(const Short &target) const;
+
+            boolean operator>(const Short &target) const;
+
+            boolean operator<=(const Short &target) const;
+
+            boolean operator>=(const Short &target) const;
+
+            void operator+=(const Short &target);
+
+            void operator-=(const Short &target);
+
+            void operator*=(const Short &target);
+
+            void operator/=(const Short &target);
+
+            void operator%=(const Short &target);
+
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const Short &target) {
+                os << target.original;
+                return os;
+            }
+
+            inline size_t operator()(const Short &target) const {
+                return std::hash<std::string>{}(target.toString().toCharPointer());
+            }
+        };
+    }
 }
 
 namespace std {
-		template <> struct hash<Short> {
-				std::size_t operator()(const Short& k) const {
-					return Short()(k);
-				}
-		};
+    template<>
+    struct hash<Short> {
+        std::size_t operator()(const Short &k) const {
+            return Short()(k);
+        }
+    };
 }
 
 #endif // NATIVE_JAVA_LANG_SHORT_SHORT_HPP

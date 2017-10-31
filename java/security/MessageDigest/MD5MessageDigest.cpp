@@ -49,7 +49,7 @@ long int MD5MessageDigest::engineDigest(byte *buffer, long int len) {
 }
 
 long int MD5MessageDigest::engineGetDigestLength() {
-    return (long int)sizeof(this->hash);
+    return (int) sizeof(this->hash);
 }
 
 void MD5MessageDigest::engineReset() {
@@ -59,5 +59,5 @@ void MD5MessageDigest::engineReset() {
 }
 
 void MD5MessageDigest::engineUpdate(const byte *input, long int len) {
-    md5_append(&this->state, (const md5_byte_t*)input, len);
+    md5_append(&this->state, (const md5_byte_t *) input, len);
 }

@@ -54,7 +54,7 @@ namespace Java {
              *          if the index argument is negative or not less than
              *          length()
              */
-            virtual char charAt(int index) const = 0;
+            virtual char charAt(long int index) const = 0;
 
             /**
              * Returns the length of this character sequence.  The length is the number

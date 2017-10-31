@@ -37,7 +37,7 @@ void ArrayListSerialize() {
 	System::out::println(arrayList.toString());
 }
 
-int main() {
+long int main() {
 	ArrayListSetGet();
 	ArrayListException();
 	ArrayListForeach();

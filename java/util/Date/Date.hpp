@@ -35,390 +35,390 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Util {
-				class Date :
-					public Object,
-					public Comparable<Date>
-				{
-				private:
-						long timer;
-						tm *localTimer;
-						string backUp = nullptr;
-				private:
-						/**
-						 * Update Date status
-						 */
-						void updateDateStatus();
-						
-						/**
-						 * Allocates a Date object and initializes it so that
-						 * it represents the instant at the start of the second specified
-						 * by the year, month, date,
-						 * hour, minute, and second arguments,
-						 * in the local time zone.
-						 *
-						 * @param   year    the year minus 1900.
-						 * @param   month   the month between 0-11.
-						 * @param   date    the day of the month between 1-31.
-						 * @param   hour     the hours between 0-23.
-						 * @param   minute     the minutes between 0-59.
-						 * @param   second     the seconds between 0-59.
-						 */
-						void initializeDate(int year, int month, int date,
-	long int hour, int minute, int second);
-						
-						/**
-						 * Allocates a Date object and initializes it
-						 *
-						 * @param timer time seconds after
-						 *              January 1, 1970 00:00:00 GMT.
-						 */
-						void initializeDate(long timer);
-						
-						/**
-						 * Convert the time seconds to String
-						 *
-						 * @param pattern
-						 * @param timeManagement
-						 * @return String
-						 */
-						String timeToString(String pattern, tm *timeManagement) const;
-						
-						/**
-						 * Get the UTC time
-						 *
-						 * @param timer
-						 * @return long
-						 */
-						static long getUTCTime(long timer);
-						
-						/**
-						 * Get current number from processing String
-						 * Sub method of Date::parse(String inputString)
-						 *
-						 * @param inputString
-						 * @param indexStart
-						 * @return int
-						 */
-						static long int getSequenceNumber(const String &inputString, int &indexStart);
-						
-						/**
-						* Get current char sequence from processing String                                                                                                        From InputString
-						* Sub method of Date::parse(String inputString)
-						*
-						* @param inputString
-						* @param indexStart
-						* @return String
-						*/
-						static String getSequenceChar(const String &inputString, int &index);
-						
-						/**
-						 * Remove bracket and character inside bracket
-						 *
-						 * @param inputString
-						 * @return String with bracket and character inside it removed
-						 */
-						static String removeBracket(String inputString);
-						
-						/**
-						 * Get time offset in second from local time zone to UTC
-						 *
-						 * @return long time offset in seconds
-						 */
-						static long getOffsetFromUTC();
-				
-				public:
-						/**
-						 * Default constructor
-						 */
-						Date();
-						
-						/**
-						 * Create a date instance with specified year, month, date
-						 *
-						 * @param year
-						 * @param month
-						 * @param date
-						 */
-						Date(int year, int month, int date);
-						
-						/**
-						 * Create a date instance with specified year, month, date,
-						 * hour, minute
-						 *
-						 * @param year
-						 * @param month
-						 * @param date
-						 * @param hour
-						 * @param minute
-						 */
-						Date(int year, int month, int date, int hour, int minute);
-						
-						/**
-						 * Create a date instance with specified year, month, date,
-						 * hour, minute, second
-						 *
-						 * @param year
-						 * @param month
-						 * @param date
-						 * @param hour
-						 * @param minute
-						 * @param second
-						 */
-						Date(int year, int month, int date, int hour, int minute, int second);
-						
-						/**
-						 * Create a date instance with specified timestamp since
-						 * "the epoch" in second
-						 *
-						 * @param date
-						 */
-						Date(long date);
-						
-						/**
-						 * Create a date instance with specified String
-						 *
-						 * @param inputString
-						 */
-						Date(String inputString);
-						
-						/**
-						 * Copy constructor
-						 *
-						 * @param anotherDate
-						 */
-						Date(const Date &anotherDate);
-						
-						/**
-						 * Destructor, free backup string
-						 */
-						~Date();
-				public:
-						/**
-						 * Tests if this date is after the specified date.
-						 *
-						 * @param specifiedDate
-						 * @return boolean
-						 */
-						boolean after(Date specifiedDate) const;
-						
-						/**
-						 * Tests if this date is before the specified date.
-						 *
-						 * @param specifiedDate
-						 * @return boolean
-						 */
-						boolean before(Date specifiedDate) const;
-						
-						/**
-						 * Return a copy of this object.
-						 *
-						 * @return Object
-						 */
-						Date clone();
-						
-						/**
-						 * Compares two Dates for ordering.
-						 * @param anotherDate
-						 *
-						 * @return int
-						 */
-	long int compareTo(const Date &anotherDate) const;
-						
-						/**
-						 * Compares two dates for equality.
-						 *
-						 * @param obj
-						 * @return int
-						 */
-						// TODO (anhnt) need instanceof, use Date instead of Object
-						boolean equals(Date obj) const;
-						
-						/**
-						 * Get day of month
-						 *
-						 * @return int
-						 */
-	long int getDate() const;
-						
-						/**
-						 * Get day of week
-						 *
-						 * @return int
-						 */
-	long int getDay() const;
-						
-						/**
-						 * Get hour
-						 *
-						 * @return int
-						 */
-	long int getHours() const;
-						
-						/**
-						 * Get minute
-						 *
-						 * @return int
-						 */
-	long int getMinutes() const;
-						
-						/**
-						 * Get month
-						 *
-						 * @return int
-						 */
-	long int getMonth() const;
-						
-						/**
-						 * Get second
-						 *
-						 * @return int
-						 */
-	long int getSeconds() const;
-						
-						/**
-						 * Returns the number of seconds since
-						 * January 1, 1970, 00:00:00 GMT represented
-						 * by this Date object.
-						 *
-						 * @return long
-						 */
-						long getTime() const;
-						
-						/**
-						 * Get time zone offset in minute
-						 *
-						 * @return int
-						 */
-	long int getTimezoneOffset() const;
-						
-						/**
-						 * Get year
-						 *
-						 * @return int
-						 */
-	long int getYear() const;
-						
-						/**
-						 * Returns a hash code value for this object.
-						 *
-						 * @return long
-						 */
-	long int hashCode() const override ;
-						
-						/**
-						 * Attempts to interpret the string s as a representation
-						 * of a date and time. If the attempt is successful, the time
-						 * indicated is returned represented as the distance, measured in
-						 * seconds, of that time from the epoch (00:00:00 GMT on
-						 * January 1, 1970).
-						 *
-						 * @param inputString   a string to be parsed as a date.
-						 *
-						 * @return long the number of seconds since January 1, 1970, 00:00:00 GMT
-						 * represented by the string argument.
-						 */
-						static long parse(String inputString);
-						
-						/**
-						 * Set date
-						 *
-						 * @param date
-						 */
-						void setDate(int date);
-						
-						/**
-						 * Set hour
-						 *
-						 * @param hours
-						 */
-						void setHours(int hours);
-						
-						/**
-						 * Set minute
-						 *
-						 * @param minutes
-						 */
-						void setMinutes(int minutes);
-						
-						/**
-						 * Set month
-						 *
-						 * @param month
-						 */
-						void setMonth(int month);
-						
-						/**
-						 * Set second
-						 *
-						 * @param seconds
-						 */
-						void setSeconds(int seconds);
-						
-						/**
-						 * Sets this Date object to represent a point
-						 * in time that is time seconds after
-						 * January 1, 1970 00:00:00 GMT.
-						 *
-						 * @param time
-						 */
-						void setTime(long time);
-						
-						/**
-						 * Set year
-						 *
-						 * @param year
-						 */
-						void setYear(int year);
-						
-						/**
-						 * Return a string type of Date
-						 * using a GMT TimeZone.
-						 *
-						 * @return String
-						 */
-						String toGMTString() const;
-						
-						/**
-						 * Return a string type of Date
-						 * using a local TimeZone.
-						 *
-						 * @return String
-						 */
-						String toLocaleString() const;
-						
-						/**
-						 * Return a string type of Date
-						 * Example: "Mar 13, 2017 10:01:13 AM"
-						 *
-						 * @return string
-						 */
-						String toString() const ;
-						
-						/**
-						 * Return the time in seconds after
-						 * January 1, 1970 00:00:00 GMT.
-						 *
-						 * @param year
-						 * @param month
-						 * @param date
-						 * @param hour
-						 * @param minute
-						 * @param second
-						 * @return long
-						 */
-						static long UTC(int year, int month, int date,
-	long int hour, int minute, int second);
-						
-						/**
-						 * Assign operator
-						 *
-						 * @param anotherDate
-						 * @return a Date reference
-						 */
-						Date& operator=(const Date& anotherDate);
-				};
-		}  // namespace Util
+    namespace Util {
+        class Date :
+                public Object,
+                public Comparable<Date> {
+        private:
+            long long timer;
+            tm *localTimer;
+            string backUp = nullptr;
+        private:
+            /**
+             * Update Date status
+             */
+            void updateDateStatus();
+
+            /**
+             * Allocates a Date object and initializes it so that
+             * it represents the instant at the start of the second specified
+             * by the year, month, date,
+             * hour, minute, and second arguments,
+             * in the local time zone.
+             *
+             * @param   year    the year minus 1900.
+             * @param   month   the month between 0-11.
+             * @param   date    the day of the month between 1-31.
+             * @param   hour     the hours between 0-23.
+             * @param   minute     the minutes between 0-59.
+             * @param   second     the seconds between 0-59.
+             */
+            void initializeDate(long int year, long int month, long int date,
+                                long int hour, long int minute, long int second);
+
+            /**
+             * Allocates a Date object and initializes it
+             *
+             * @param timer time seconds after
+             *              January 1, 1970 00:00:00 GMT.
+             */
+            void initializeDate(long long timer);
+
+            /**
+             * Convert the time seconds to String
+             *
+             * @param pattern
+             * @param timeManagement
+             * @return String
+             */
+            String timeToString(String pattern, tm *timeManagement) const;
+
+            /**
+             * Get the UTC time
+             *
+             * @param timer
+             * @return long
+             */
+            static long long getUTCTime(long long timer);
+
+            /**
+             * Get current number from processing String
+             * Sub method of Date::parse(String inputString)
+             *
+             * @param inputString
+             * @param indexStart
+             * @return int
+             */
+            static long int getSequenceNumber(const String &inputString, long int &indexStart);
+
+            /**
+            * Get current char sequence from processing String                                                                                                        From InputString
+            * Sub method of Date::parse(String inputString)
+            *
+            * @param inputString
+            * @param indexStart
+            * @return String
+            */
+            static String getSequenceChar(const String &inputString, long int &index);
+
+            /**
+             * Remove bracket and character inside bracket
+             *
+             * @param inputString
+             * @return String with bracket and character inside it removed
+             */
+            static String removeBracket(String inputString);
+
+            /**
+             * Get time offset in second from local time zone to UTC
+             *
+             * @return long long time offset in seconds
+             */
+            static long long getOffsetFromUTC();
+
+        public:
+            /**
+             * Default constructor
+             */
+            Date();
+
+            /**
+             * Create a date instance with specified year, month, date
+             *
+             * @param year
+             * @param month
+             * @param date
+             */
+            Date(long int year, long int month, long int date);
+
+            /**
+             * Create a date instance with specified year, month, date,
+             * hour, minute
+             *
+             * @param year
+             * @param month
+             * @param date
+             * @param hour
+             * @param minute
+             */
+            Date(long int year, long int month, long int date, long int hour, long int minute);
+
+            /**
+             * Create a date instance with specified year, month, date,
+             * hour, minute, second
+             *
+             * @param year
+             * @param month
+             * @param date
+             * @param hour
+             * @param minute
+             * @param second
+             */
+            Date(long int year, long int month, long int date, long int hour, long int minute, long int second);
+
+            /**
+             * Create a date instance with specified timestamp since
+             * "the epoch" in second
+             *
+             * @param date
+             */
+            Date(long long date);
+
+            /**
+             * Create a date instance with specified String
+             *
+             * @param inputString
+             */
+            Date(String inputString);
+
+            /**
+             * Copy constructor
+             *
+             * @param anotherDate
+             */
+            Date(const Date &anotherDate);
+
+            /**
+             * Destructor, free backup string
+             */
+            ~Date();
+
+        public:
+            /**
+             * Tests if this date is after the specified date.
+             *
+             * @param specifiedDate
+             * @return boolean
+             */
+            boolean after(Date specifiedDate) const;
+
+            /**
+             * Tests if this date is before the specified date.
+             *
+             * @param specifiedDate
+             * @return boolean
+             */
+            boolean before(Date specifiedDate) const;
+
+            /**
+             * Return a copy of this object.
+             *
+             * @return Object
+             */
+            Date clone();
+
+            /**
+             * Compares two Dates for ordering.
+             * @param anotherDate
+             *
+             * @return int
+             */
+            long int compareTo(const Date &anotherDate) const;
+
+            /**
+             * Compares two dates for equality.
+             *
+             * @param obj
+             * @return int
+             */
+            // TODO (anhnt) need instanceof, use Date instead of Object
+            boolean equals(Date obj) const;
+
+            /**
+             * Get day of month
+             *
+             * @return int
+             */
+            long int getDate() const;
+
+            /**
+             * Get day of week
+             *
+             * @return int
+             */
+            long int getDay() const;
+
+            /**
+             * Get hour
+             *
+             * @return int
+             */
+            long int getHours() const;
+
+            /**
+             * Get minute
+             *
+             * @return int
+             */
+            long int getMinutes() const;
+
+            /**
+             * Get month
+             *
+             * @return int
+             */
+            long int getMonth() const;
+
+            /**
+             * Get second
+             *
+             * @return int
+             */
+            long int getSeconds() const;
+
+            /**
+             * Returns the number of seconds since
+             * January 1, 1970, 00:00:00 GMT represented
+             * by this Date object.
+             *
+             * @return long
+             */
+            long long getTime() const;
+
+            /**
+             * Get time zone offset in minute
+             *
+             * @return int
+             */
+            long int getTimezoneOffset() const;
+
+            /**
+             * Get year
+             *
+             * @return int
+             */
+            long int getYear() const;
+
+            /**
+             * Returns a hash code value for this object.
+             *
+             * @return long
+             */
+            long int hashCode() const override;
+
+            /**
+             * Attempts to interpret the string s as a representation
+             * of a date and time. If the attempt is successful, the time
+             * indicated is returned represented as the distance, measured in
+             * seconds, of that time from the epoch (00:00:00 GMT on
+             * January 1, 1970).
+             *
+             * @param inputString   a string to be parsed as a date.
+             *
+             * @return long long the number of seconds since January 1, 1970, 00:00:00 GMT
+             * represented by the string argument.
+             */
+            static long long parse(String inputString);
+
+            /**
+             * Set date
+             *
+             * @param date
+             */
+            void setDate(long int date);
+
+            /**
+             * Set hour
+             *
+             * @param hours
+             */
+            void setHours(long int hours);
+
+            /**
+             * Set minute
+             *
+             * @param minutes
+             */
+            void setMinutes(long int minutes);
+
+            /**
+             * Set month
+             *
+             * @param month
+             */
+            void setMonth(long int month);
+
+            /**
+             * Set second
+             *
+             * @param seconds
+             */
+            void setSeconds(long int seconds);
+
+            /**
+             * Sets this Date object to represent a point
+             * in time that is time seconds after
+             * January 1, 1970 00:00:00 GMT.
+             *
+             * @param time
+             */
+            void setTime(long long time);
+
+            /**
+             * Set year
+             *
+             * @param year
+             */
+            void setYear(long int year);
+
+            /**
+             * Return a string type of Date
+             * using a GMT TimeZone.
+             *
+             * @return String
+             */
+            String toGMTString() const;
+
+            /**
+             * Return a string type of Date
+             * using a local TimeZone.
+             *
+             * @return String
+             */
+            String toLocaleString() const;
+
+            /**
+             * Return a string type of Date
+             * Example: "Mar 13, 2017 10:01:13 AM"
+             *
+             * @return string
+             */
+            String toString() const;
+
+            /**
+             * Return the time in seconds after
+             * January 1, 1970 00:00:00 GMT.
+             *
+             * @param year
+             * @param month
+             * @param date
+             * @param hour
+             * @param minute
+             * @param second
+             * @return long
+             */
+            static long long UTC(long int year, long int month, long int date,
+                                 long int hour, long int minute, long int second);
+
+            /**
+             * Assign operator
+             *
+             * @param anotherDate
+             * @return a Date reference
+             */
+            Date &operator=(const Date &anotherDate);
+        };
+    }  // namespace Util
 }  // namespace Java
 
 #endif // NATIVE_JAVA_UTIL_DATE_HPP

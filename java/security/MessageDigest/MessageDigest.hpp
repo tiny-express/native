@@ -52,10 +52,10 @@ namespace Java {
             void update(const byte input[], long int len);
 
         private:
-            MessageDigestSpi* spi;
+            MessageDigestSpi *spi;
             String algorithm;
 
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
+            MessageDigest(MessageDigestSpi *spi, String algorithm);
 
             long int engineDigest(byte buffer[], long int len) override;
 

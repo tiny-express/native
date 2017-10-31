@@ -64,11 +64,11 @@ Float Float::operator-(const Float &target) {
 }
 
 Float Float::operator*(const Float &target) {
-    return Float( this->original * target.original );
+    return Float(this->original * target.original);
 }
 
 Float Float::operator/(const Float &target) {
-    return Float( this->original / target.original );
+    return Float(this->original / target.original);
 }
 
 boolean Float::operator==(const Float &target) const {
@@ -91,14 +91,14 @@ boolean Float::operator>=(const Float &target) const {
     boolean isGreater = compare(this->floatValue(), target.floatValue()) == 1;
     boolean isEqual = compare(this->floatValue(), target.floatValue()) == 0;
 
-    return  (boolean) (isEqual || isGreater);
+    return (boolean) (isEqual || isGreater);
 }
 
 boolean Float::operator<=(const Float &target) const {
     boolean isLess = compare(this->floatValue(), target.floatValue()) == -1;
     boolean isEqual = compare(this->floatValue(), target.floatValue()) == 0;
 
-    return  (boolean) (isLess || isEqual);
+    return (boolean) (isLess || isEqual);
 }
 
 boolean Float::operator&&(const Float &target) const {
@@ -109,7 +109,7 @@ boolean Float::operator||(const Float &target) const {
     return (boolean) (this->original || target.original);
 }
 
-Float& Float::operator=(const Float &target) {
+Float &Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
     this->originalString = stringFromFloat(this->original);
@@ -141,10 +141,10 @@ short Float::shortValue() const {
 }
 
 long int Float::intValue() const {
-    return (long int) this->original;
+    return (int) this->original;
 }
 
-long Float::longValue() const {
+long long Float::longValue() const {
     return (long) this->original;
 }
 
@@ -171,7 +171,7 @@ boolean Float::isFinite(float valueFloat) {
 boolean Float::isInfinite(float valueFloat) {
     boolean isPOSITIVE_INFINITY = (valueFloat == Float::POSITIVE_INFINITY);
     boolean isNEGATIVE_INFINITY = (valueFloat == Float::NEGATIVE_INFINITY);
-    return (isPOSITIVE_INFINITY || isNEGATIVE_INFINITY) ;
+    return (isPOSITIVE_INFINITY || isNEGATIVE_INFINITY);
 }
 
 boolean Float::isInfinite() {
@@ -195,43 +195,43 @@ Float Float::valueOf(float inputFloat) {
 }
 
 String Float::floatToBinary32StringType(float floatInput) {
-    string integerPartNormalizeForm = (string) calloc (280, sizeof(char));
-    string fractionPartNormalizeForm = (string) calloc (25, sizeof(char));
-    string floatInputNormalizeForm = (string) calloc (280, sizeof(char));
+    string integerPartNormalizeForm = (string) calloc(280, sizeof(char));
+    string fractionPartNormalizeForm = (string) calloc(25, sizeof(char));
+    string floatInputNormalizeForm = (string) calloc(280, sizeof(char));
     string resultFloatToBinary32StringType
-            = (string) calloc (33, sizeof(char));
+            = (string) calloc(33, sizeof(char));
 
-    int powerExponentBase2 = 0;
-    int integerPartFloatInput;
+    long int powerExponentBase2 = 0;
+    long int integerPartFloatInput;
 
-    int sizeOfIntegerPartNormalizeForm;
-    int sizeOfFractionPartNormalizeForm;
-    int sizeOfFloatInputNormalizeForm;
+    long int sizeOfIntegerPartNormalizeForm;
+    long int sizeOfFractionPartNormalizeForm;
+    long int sizeOfFloatInputNormalizeForm;
 
-    int sizeOfExponentPartBinary32 = 8;
+    long int sizeOfExponentPartBinary32 = 8;
 
-    int indexOfFor;
-    int index;
-    int indexOfDotFloatInputNormalizeForm;
-    int indexFirstBit1FloatInputNormalizeForm;
-    int indexBeginFractionPartResultFloatToBinary32StringType = 0;
+    long int indexOfFor;
+    long int index;
+    long int indexOfDotFloatInputNormalizeForm;
+    long int indexFirstBit1FloatInputNormalizeForm;
+    long int indexBeginFractionPartResultFloatToBinary32StringType = 0;
 
-    int exponentBiasBinary32 = 127;
-    int exponentFloatInput;
+    long int exponentBiasBinary32 = 127;
+    long int exponentFloatInput;
 
     float fractionPartFloatInput;
 
-    for (indexOfFor = 0 ; indexOfFor <= 31; indexOfFor++) {
+    for (indexOfFor = 0; indexOfFor <= 31; indexOfFor++) {
         floatInputNormalizeForm[indexOfFor] = '0';
         resultFloatToBinary32StringType[indexOfFor] = '0';
     }
 
-    for (indexOfFor = 0 ; indexOfFor <= 23; indexOfFor++) {
+    for (indexOfFor = 0; indexOfFor <= 23; indexOfFor++) {
         integerPartNormalizeForm[indexOfFor] = '0';
         fractionPartNormalizeForm[indexOfFor] = '0';
     }
 
-    /** Set end point for string type */
+    /** Set end polong int for string type */
     integerPartNormalizeForm[279] = '\0';
     fractionPartNormalizeForm[24] = '\0';
     floatInputNormalizeForm[279] = '\0';
@@ -269,7 +269,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     floatInput = fabs(floatInput);
 
     /** Get size of integerPartNormalizeForm  */
-    integerPartFloatInput = (long int) floor(floatInput);
+    integerPartFloatInput = (int) floor(floatInput);
     sizeOfIntegerPartNormalizeForm = 0;
 
     if (integerPartFloatInput == 0) {
@@ -283,8 +283,8 @@ String Float::floatToBinary32StringType(float floatInput) {
         }
     }
 
-    integerPartFloatInput = (long int) floor(floatInput);
-    index = sizeOfIntegerPartNormalizeForm -1;
+    integerPartFloatInput = (int) floor(floatInput);
+    index = sizeOfIntegerPartNormalizeForm - 1;
     while (integerPartFloatInput != 0) {
         if ((integerPartFloatInput & 1) == 1) {
             integerPartNormalizeForm[index] = '1';
@@ -304,7 +304,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     while ((fractionPartFloatInput != 0) && (index < 24)) {
         fractionPartFloatInput = fractionPartFloatInput * 2;
 
-        int integerPart = (long int) floor(fractionPartFloatInput);
+        long int integerPart = (int) floor(fractionPartFloatInput);
 
         if (integerPart == 1) {
             fractionPartNormalizeForm[index] = '1';
@@ -332,7 +332,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     /** Copy value from fractionPartNormalizeForm
      * to floatInputNormalizeForm
      */
-    index = indexOfDotFloatInputNormalizeForm +1;
+    index = indexOfDotFloatInputNormalizeForm + 1;
     for (indexOfFor = 0; indexOfFor <= sizeOfFractionPartNormalizeForm; indexOfFor++, index++) {
         floatInputNormalizeForm[index]
                 = fractionPartNormalizeForm[indexOfFor];
@@ -349,10 +349,10 @@ String Float::floatToBinary32StringType(float floatInput) {
         }
     }
 
-    integerPartFloatInput = (long int) floor(floatInput);
+    integerPartFloatInput = (int) floor(floatInput);
     if (integerPartFloatInput != 0) {
         powerExponentBase2 = indexOfDotFloatInputNormalizeForm
-                             - indexFirstBit1FloatInputNormalizeForm -1;
+                             - indexFirstBit1FloatInputNormalizeForm - 1;
     }
 
     if (integerPartFloatInput == 0) {
@@ -383,7 +383,7 @@ String Float::floatToBinary32StringType(float floatInput) {
     index = indexBeginFractionPartResultFloatToBinary32StringType;
     indexOfFor = indexFirstBit1FloatInputNormalizeForm + 1;
 
-    for (index ; index <= 31; index++) {
+    for (index; index <= 31; index++) {
         if (indexOfFor == sizeOfFloatInputNormalizeForm) {
             break;
         }
@@ -405,20 +405,20 @@ String Float::floatToBinary32StringType(float floatInput) {
     String result = resultFloatToBinary32StringType;
     free(resultFloatToBinary32StringType);
 
-    return  result;
+    return result;
 }
 
 float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
     // Create variable
-    int signOfResultbinary32StringTypeToFloat;
+    long int signOfResultbinary32StringTypeToFloat;
     float exponent;
     float exponentAdjusted;
     float mantisaBase10;
     float resultBinary32StringTypeToFloat;
 
-    int tempValue = 0;
-    int tempExponent;
-    int indexOfFor;
+    long int tempValue = 0;
+    long int tempExponent;
+    long int indexOfFor;
 
     boolean isNaN = true;
 
@@ -466,7 +466,7 @@ float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
         tempExponent--;
     }
 
-    // 5. Find the Float precision floating point decimal value
+    // 5. Find the Float precision floating polong int decimal value
     resultBinary32StringTypeToFloat
             = signOfResultbinary32StringTypeToFloat * (1 + mantisaBase10)
               * (float) (Math::pow(2, exponentAdjusted));
@@ -480,10 +480,10 @@ float Float::binary32StringTypeToFloat(String binary32StringTypeInput) {
 
 long int Float::floatToRawIntBits(float floatInput) {
     String floatInputToBinary32StringType;
-    int resultFloatToRawIntBits;
-    int tempValue;
-    int exponent;
-    int indexOfFor;
+    long int resultFloatToRawIntBits;
+    long int tempValue;
+    long int exponent;
+    long int indexOfFor;
 
     floatInputToBinary32StringType = floatToBinary32StringType(floatInput);
 
@@ -500,12 +500,12 @@ long int Float::floatToRawIntBits(float floatInput) {
             tempValue = 0;
         }
         resultFloatToRawIntBits = resultFloatToRawIntBits + tempValue
-                                                            * (long int) Math::pow(2, exponent);
+                                                            * (int) Math::pow(2, exponent);
         exponent--;
     }
 
     if (floatInputToBinary32StringType.charAt(0) == '1') {
-        resultFloatToRawIntBits =  (-1) * resultFloatToRawIntBits;
+        resultFloatToRawIntBits = (-1) * resultFloatToRawIntBits;
     }
 
     return resultFloatToRawIntBits;
@@ -515,11 +515,11 @@ long int Float::floatToIntBits(float inputFloat) {
     return floatToRawIntBits(inputFloat);
 }
 
-String Float::intBitsToBinary32StringType(int intBitsInput) {
+String Float::intBitsToBinary32StringType(long int intBitsInput) {
     string resultIntBitsToBinary32StringType
-            = (string) calloc(33, sizeof (char));
-    int index;
-    int indexOfFor;
+            = (string) calloc(33, sizeof(char));
+    long int index;
+    long int indexOfFor;
 
     for (indexOfFor = 0; indexOfFor <= 31; indexOfFor++) {
         resultIntBitsToBinary32StringType[indexOfFor] = '0';
@@ -535,11 +535,11 @@ String Float::intBitsToBinary32StringType(int intBitsInput) {
     index = 31;
     while ((intBitsInput != 0) || (index > 1)) {
 
-        if ( (intBitsInput & 1) ==1 ) {
+        if ((intBitsInput & 1) == 1) {
             resultIntBitsToBinary32StringType[index] = '1';
         }
 
-        if ( (intBitsInput & 1) == 0 ) {
+        if ((intBitsInput & 1) == 0) {
             resultIntBitsToBinary32StringType[index] = '0';
         }
 
@@ -554,8 +554,8 @@ String Float::intBitsToBinary32StringType(int intBitsInput) {
 }
 
 long int Float::compare(float float1, float float2) {
-    int thisBits = Float::floatToIntBits(float1);
-    int anotherBits = Float::floatToIntBits(float2);
+    long int thisBits = Float::floatToIntBits(float1);
+    long int anotherBits = Float::floatToIntBits(float2);
 
     if (thisBits == anotherBits) {
         return 0;
@@ -574,16 +574,16 @@ long int Float::compareTo(const Float &anotherFloat) const {
 // TODO(thoangminh): Wait for instanceof<>
 boolean Float::equals(const Float &object) const {
     boolean isFloat = instanceof<Float>(object);
-    auto castObjectToFloat = (Float*)&object;
-    int floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
-    int floatToIntBitsThis = floatToIntBits(this->original);
+    auto castObjectToFloat = (Float *) &object;
+    long int floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
+    long int floatToIntBitsThis = floatToIntBits(this->original);
     boolean isEqual = (floatToIntBitsObject == floatToIntBitsThis);
     return isEqual;
     // return (isFloat && isEqual);
 }
 
 long int Float::hashCode(float floatInput) {
-    return  floatToIntBits(floatInput);
+    return floatToIntBits(floatInput);
 }
 
 long int Float::hashCode() {
@@ -594,7 +594,7 @@ float Float::min(float numberFloat, float anotherNumberFloat) {
     return Math::min(numberFloat, anotherNumberFloat);
 }
 
-float Float::intBitsToFloat(int intBitsInput) {
+float Float::intBitsToFloat(long int intBitsInput) {
     float resultIntBitsToFloat;
     String convertIntBitsToBinary32StringType;
 
@@ -604,7 +604,7 @@ float Float::intBitsToFloat(int intBitsInput) {
     resultIntBitsToFloat
             = binary32StringTypeToFloat(convertIntBitsToBinary32StringType);
 
-    return  resultIntBitsToFloat;
+    return resultIntBitsToFloat;
 }
 
 String Float::toString(float inputFloat) {

@@ -12,6 +12,6 @@ public:
 	}
 };
 
-int main(int argc, char **argv) {
+long int main(long int argc, char **argv) {
 	return Application(MainApplication::main, argc, argv);
 }

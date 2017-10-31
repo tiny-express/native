@@ -33,211 +33,212 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Util {
-				template <class E>
-				class Set :
-					//public virtual Collection<E>,
-					public virtual Iterable<E> {
-				private:
-						std::set<E> original;
-						typedef typename std::set<E>::iterator _iterator;
-						typedef typename std::set<E>::const_iterator _const_iterator;
-						
-				public:
-						_iterator begin() {
-							return this->original.begin();
-						}
-						
-						_const_iterator begin() const {
-							return this->original.begin();
-						}
-						
-						_iterator end() {
-							return this->original.end();
-						}
-						
-						_const_iterator end() const {
-							return this->original.end();
-						}
-				public:
-						Set() {
-							// TODO - loint@foodtiny.com
-						}
-						
-						~Set() {
-							// TODO - loint@foodtiny.com
-						}
-						
-						/**
-						 * Adds the specified element to this set if
-						 * it is not already present (optional operation).
-						 *
-						 * @param e
-						 * @return boolean
-						 */
-						boolean add(const E &e) {
-							auto insertResult = this->original.insert(e);
-							if (insertResult.first != this->original.end()) {
-								return true;
-							}
-							return false;
-						}
-						
-						/**
-						 * Adds all of the elements in the specified collection
-						 * to this set if they're not already present (optional operation).
-						 *
-						 * @param c
-						 * @return boolean
-						 */
-						boolean addAll(Collection<E> &c) {
-							// TODO - loint@foodtiny.com
-							return true;
-						}
-						
-						/**
-						 * Removes all of the elements from this set
-						 * (optional operation).
-						 */
-						void clear() {
-							this->original.clear();
-						}
-						
-						/**
-						 * Returns true if this set contains the specified element.
-						 *
-						 * @param o
-						 * @return
-						 */
-						boolean contains(Object o) {
-							// TODO - loint@foodtiny.com
-							return true;
-						}
-						
-						/**
-						 * Returns true if this set contains all of the elements
-						 * of the specified collection.
-						 *
-						 * @param c
-						 * @return
-						 */
-						boolean containsAll(Collection<E> &c) {
-							return true;
-						}
-						
-						/**
-						 *  Compares the specified object with this set for equality.
-						 *
-						 * @param o
-						 * @return boolean
-						 */
-						boolean equals(Object o) {
-							return true;
-						}
-						
-						/**
-						 * Returns the hash code value for this set.
-						 *
-						 * @return int
-						 */
-	long int hashCode() {
-							return 0;
-						}
-						
-						/**
-						 * Returns true if this set contains no elements.
-						 *
-						 * @return boolean
-						 */
-						boolean isEmpty() {
-							return this->original.empty();
-						}
-						
-						/**
-						 * Returns an iterator over the elements in this set.
-						 *
-						 * @return Iterator<E>
-						 */
-						Iterator<E> iterator() {
-							// TODO - loint@foodtiny.com
-						}
-						
-						/**
-						 * Removes the specified element from this set
-						 * if it is present (optional operation).
-						 *
-						 * @param o
-						 * @return boolean
-						 */
-						boolean remove(Object o) {
-							return true;
-						}
-						
-						/**
-						 * Removes from this set all of its elements
-						 * that are contained in the specified collection
-						 * (optional operation).
-						 *
-						 * @return boolean
-						 */
-						boolean removeAll(Collection<E> &c) {
-							return true;
-						}
-						
-						/**
-						 * Retains only the elements in this set
-						 * that are contained in the specified collection
-						 * (optional operation).
-						 *
-						 * @param c
-						 * @return boolean
-						 */
-						boolean retainAll(Collection<E> &c) {
-							return true;
-						}
-						
-						/**
-						 * Returns the number of elements in this set (its cardinality).
-						 *
-						 * @return int
-						 */
-	long int size() {
-							return original.size();
-						}
-						
-						/**
-						 * Creates a Spliterator over the elements in this set.
-						 *
-						 * @return
-						 */
-						Spliterator<E> spliterator() {
-							// TODO - loint@foodtiny.com
-						}
-						
-						/**
-						 * Returns an array containing all of the elements in this set.
-						 *
-						 * @return Array<Object>
-						 */
-						Array<Object> toArray() {
-							Array<Object> array;
-							// TODO - loint@foodtiny.com
-							return array;
-						}
-						
-						/**
-						 * Returns an array containing all of the elements in this set;
-						 * the runtime type of the returned array is that of the specified array.
-						 *
-						 * @param T
-						 */
-						template <class T>
-						Array<E> toArray(Array<T> a) {
-							Array<E> array;
-							return array;
-						}
-				};
-		}
+    namespace Util {
+        template<class E>
+        class Set :
+                //public virtual Collection<E>,
+                public virtual Iterable<E> {
+        private:
+            std::set<E> original;
+            typedef typename std::set<E>::iterator _iterator;
+            typedef typename std::set<E>::const_iterator _const_iterator;
+
+        public:
+            _iterator begin() {
+                return this->original.begin();
+            }
+
+            _const_iterator begin() const {
+                return this->original.begin();
+            }
+
+            _iterator end() {
+                return this->original.end();
+            }
+
+            _const_iterator end() const {
+                return this->original.end();
+            }
+
+        public:
+            Set() {
+                // TODO - loint@foodtiny.com
+            }
+
+            ~Set() {
+                // TODO - loint@foodtiny.com
+            }
+
+            /**
+             * Adds the specified element to this set if
+             * it is not already present (optional operation).
+             *
+             * @param e
+             * @return boolean
+             */
+            boolean add(const E &e) {
+                auto insertResult = this->original.insert(e);
+                if (insertResult.first != this->original.end()) {
+                    return true;
+                }
+                return false;
+            }
+
+            /**
+             * Adds all of the elements in the specified collection
+             * to this set if they're not already present (optional operation).
+             *
+             * @param c
+             * @return boolean
+             */
+            boolean addAll(Collection<E> &c) {
+                // TODO - loint@foodtiny.com
+                return true;
+            }
+
+            /**
+             * Removes all of the elements from this set
+             * (optional operation).
+             */
+            void clear() {
+                this->original.clear();
+            }
+
+            /**
+             * Returns true if this set contains the specified element.
+             *
+             * @param o
+             * @return
+             */
+            boolean contains(Object o) {
+                // TODO - loint@foodtiny.com
+                return true;
+            }
+
+            /**
+             * Returns true if this set contains all of the elements
+             * of the specified collection.
+             *
+             * @param c
+             * @return
+             */
+            boolean containsAll(Collection<E> &c) {
+                return true;
+            }
+
+            /**
+             *  Compares the specified object with this set for equality.
+             *
+             * @param o
+             * @return boolean
+             */
+            boolean equals(Object o) {
+                return true;
+            }
+
+            /**
+             * Returns the hash code value for this set.
+             *
+             * @return int
+             */
+            long int hashCode() {
+                return 0;
+            }
+
+            /**
+             * Returns true if this set contains no elements.
+             *
+             * @return boolean
+             */
+            boolean isEmpty() {
+                return this->original.empty();
+            }
+
+            /**
+             * Returns an iterator over the elements in this set.
+             *
+             * @return Iterator<E>
+             */
+            Iterator<E> iterator() {
+                // TODO - loint@foodtiny.com
+            }
+
+            /**
+             * Removes the specified element from this set
+             * if it is present (optional operation).
+             *
+             * @param o
+             * @return boolean
+             */
+            boolean remove(Object o) {
+                return true;
+            }
+
+            /**
+             * Removes from this set all of its elements
+             * that are contained in the specified collection
+             * (optional operation).
+             *
+             * @return boolean
+             */
+            boolean removeAll(Collection<E> &c) {
+                return true;
+            }
+
+            /**
+             * Retains only the elements in this set
+             * that are contained in the specified collection
+             * (optional operation).
+             *
+             * @param c
+             * @return boolean
+             */
+            boolean retainAll(Collection<E> &c) {
+                return true;
+            }
+
+            /**
+             * Returns the number of elements in this set (its cardinality).
+             *
+             * @return int
+             */
+            long int size() {
+                return original.size();
+            }
+
+            /**
+             * Creates a Spliterator over the elements in this set.
+             *
+             * @return
+             */
+            Spliterator<E> spliterator() {
+                // TODO - loint@foodtiny.com
+            }
+
+            /**
+             * Returns an array containing all of the elements in this set.
+             *
+             * @return Array<Object>
+             */
+            Array<Object> toArray() {
+                Array<Object> array;
+                // TODO - loint@foodtiny.com
+                return array;
+            }
+
+            /**
+             * Returns an array containing all of the elements in this set;
+             * the runtime type of the returned array is that of the specified array.
+             *
+             * @param T
+             */
+            template<class T>
+            Array<E> toArray(Array<T> a) {
+                Array<E> array;
+                return array;
+            }
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_UTIL_SET_HPP

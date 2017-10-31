@@ -30,21 +30,21 @@
 using namespace Java::Lang;
 
 TEST (JavaLangEnum, GetName) {
-	// Given valid enum and name to test getName()
-	Enum<Integer> validEnum = Enum<Integer>("validName", 7);
-	String expectedValue = "validName";
-	assertEquals(expectedValue.toString(), validEnum.getName().toString());
+    // Given valid enum and name to test getName()
+    Enum<Integer> validEnum = Enum<Integer>("validName", 7);
+    String expectedValue = "validName";
+    assertEquals(expectedValue.toString(), validEnum.getName().toString());
 }
 
 TEST (JavaLangEnum, GetOrdinal) {
-	// Given valid enum and name to test getOrdinal()
-	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
-	long int expectedValue = 18;
-	assertEquals(expectedValue, validEnum.getOrdinal());
+    // Given valid enum and name to test getOrdinal()
+    Enum<Integer> validEnum = Enum<Integer>("validName", 18);
+    long int expectedValue = 18;
+    assertEquals(expectedValue, validEnum.getOrdinal());
 }
 
 TEST (JavaLangEnum, ToString) {
-	// Given valid enum and name to test getOrdinal()
-	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
-	assertEquals("18", validEnum.toString());
+    // Given valid enum and name to test getOrdinal()
+    Enum<Integer> validEnum = Enum<Integer>("validName", 18);
+    assertEquals("18", validEnum.toString());
 }

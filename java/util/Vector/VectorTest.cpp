@@ -223,7 +223,7 @@ TEST (JavaUtilVector, CopyInto) {
     Array<int> anArray;
     vector.copyInto(anArray);
     assertEquals(vector.size(), anArray.length);
-    register int index;
+    register long int index;
     for (index = 0; index < vector.size(); index++) {
         assertEquals(vector.get(index), anArray.get(index));
     }
@@ -547,7 +547,7 @@ TEST (JavaUtilVector, RemoveElementAt) {
 template<typename E>
 class VectorFriend : public Vector<E> {
 public:
-    void removeRange(int fromIndex, int toIndex) {
+    void removeRange(long int fromIndex, long int toIndex) {
         Vector<E>::removeRange(fromIndex, toIndex);
     }
 };
@@ -739,7 +739,7 @@ TEST (JavaUtilVector, ToArray) {
 
     Array<int> anArray = vector.toArray();
     // Check elements of vector and array at same order.
-    register int index;
+    register long int index;
     for (index = 0; index < vector.size(); index++) {
         assertEquals(vector[index], anArray[index]);
     }
@@ -776,8 +776,8 @@ TEST (JavaUtilVector, RangeBasedForLoop) {
     vector.add(4);
 
     // Using range-base-for-loop and checks element value.
-    int index = 0;
-    for (int element : vector) {
+    long int index = 0;
+    for (long int element : vector) {
         assertEquals(index, element);
         index++;
     }
@@ -793,7 +793,7 @@ TEST (JavaUtilVector, ArrayOperator) {
     vector.add(4);
 
     // Accesses element value using array operator.
-    int index;
+    long int index;
     for (index = 0; index < vector.size(); index++) {
         assertEquals(index, vector[index]);
     }

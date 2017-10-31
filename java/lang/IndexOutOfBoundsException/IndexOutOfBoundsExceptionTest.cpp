@@ -30,29 +30,37 @@
 using namespace Java::Lang;
 
 TEST (JavaLangIndexOutOfBoundsException, Constructor) {
-	// Constructs a new IndexOutOfBoundsException with null as its detail message.
-	IndexOutOfBoundsException indexOutOfBoundsExceptionWithNullMessage;
-	assertEquals("", indexOutOfBoundsExceptionWithNullMessage.getMessage());
-	
-	// Constructs a new IndexOutOfBoundsException with the specified detail message.
-	IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessage = IndexOutOfBoundsException("IndexOutOfBoundsException with the specified message");
-	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessage.getMessage());
-	
-	// Constructs a new IndexOutOfBoundsException with the specified detail message and cause.
-	IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessageAndCause = IndexOutOfBoundsException("IndexOutOfBoundsException with the specified message and cause", &indexOutOfBoundsExceptionWithMessage);
-	assertEquals("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithMessageAndCause.getMessage());
-	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage());
-	
-	// Constructs a new IndexOutOfBoundsException with the specified cause.
-	IndexOutOfBoundsException indexOutOfBoundsExceptionWithCause = IndexOutOfBoundsException(&indexOutOfBoundsExceptionWithMessageAndCause);
-	assertEquals("IndexOutOfBoundsException with the specified message and cause", indexOutOfBoundsExceptionWithCause.getCause()->getMessage());
-	assertEquals("IndexOutOfBoundsException with the specified message", indexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage());
+    // Constructs a new IndexOutOfBoundsException with null as its detail message.
+    IndexOutOfBoundsException indexOutOfBoundsExceptionWithNullMessage;
+    assertEquals("", indexOutOfBoundsExceptionWithNullMessage.getMessage());
+
+    // Constructs a new IndexOutOfBoundsException with the specified detail message.
+    IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessage = IndexOutOfBoundsException(
+            "IndexOutOfBoundsException with the specified message");
+    assertEquals("IndexOutOfBoundsException with the specified message",
+                 indexOutOfBoundsExceptionWithMessage.getMessage());
+
+    // Constructs a new IndexOutOfBoundsException with the specified detail message and cause.
+    IndexOutOfBoundsException indexOutOfBoundsExceptionWithMessageAndCause = IndexOutOfBoundsException(
+            "IndexOutOfBoundsException with the specified message and cause", &indexOutOfBoundsExceptionWithMessage);
+    assertEquals("IndexOutOfBoundsException with the specified message and cause",
+                 indexOutOfBoundsExceptionWithMessageAndCause.getMessage());
+    assertEquals("IndexOutOfBoundsException with the specified message",
+                 indexOutOfBoundsExceptionWithMessageAndCause.getCause()->getMessage());
+
+    // Constructs a new IndexOutOfBoundsException with the specified cause.
+    IndexOutOfBoundsException indexOutOfBoundsExceptionWithCause = IndexOutOfBoundsException(
+            &indexOutOfBoundsExceptionWithMessageAndCause);
+    assertEquals("IndexOutOfBoundsException with the specified message and cause",
+                 indexOutOfBoundsExceptionWithCause.getCause()->getMessage());
+    assertEquals("IndexOutOfBoundsException with the specified message",
+                 indexOutOfBoundsExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangIndexOutOfBoundsException, TryCatch) {
-	try {
-		throw IndexOutOfBoundsException("Throw IndexOutOfBoundsException");
-	} catch (Exception &e) {
-		assertEquals("Throw IndexOutOfBoundsException", e.getMessage());
-	}
+    try {
+        throw IndexOutOfBoundsException("Throw IndexOutOfBoundsException");
+    } catch (Exception &e) {
+        assertEquals("Throw IndexOutOfBoundsException", e.getMessage());
+    }
 }

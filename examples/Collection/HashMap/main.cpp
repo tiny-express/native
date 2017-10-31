@@ -29,7 +29,7 @@ void HashMapToString() {
 	std::cout << std::endl;
 }
 
-int main() {
+long int main() {
 	HashMapAddGet();
 	HashMapToString();
 	return 0;

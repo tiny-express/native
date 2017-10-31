@@ -1,5 +1,5 @@
 #include <native/library.hpp>
-int main() {
+long int main() {
 	String text = "Native Library: ";
 	Array<byte> bytes = { 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100 };
 	for (byte number : bytes) {

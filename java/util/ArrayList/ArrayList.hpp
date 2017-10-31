@@ -76,11 +76,11 @@ namespace Java {
 //                     */
 //                    //TODO (anhnt) need String support unicode for unicode character
 //                    String replaceEscapeSequence(const String stringToReplace) {
-//                        int index = 0;
+//                        long int index = 0;
 //                        String replacementString;
 //                        String result;
 //                        while (index < stringToReplace.length()) {
-//                            int charAtIndex = stringToReplace.charAt(index);
+//                            long int charAtIndex = stringToReplace.charAt(index);
 //                            switch (charAtIndex) {
 //                                case '\"':
 //                                    replacementString = R"(\")";
@@ -174,7 +174,7 @@ namespace Java {
              *
              * @param initialCapacity
              */
-            ArrayList(int initialCapacity) {
+            ArrayList(long int initialCapacity) {
                 this->original.resize(initialCapacity);
             }
 
@@ -204,7 +204,7 @@ namespace Java {
              * @param index
              * @param element
              */
-            void add(int index, E element) {
+            void add(long int index, E element) {
                 if (index < 0 || index > this->original.size() - 1) {
                     return;
                 }
@@ -231,7 +231,7 @@ namespace Java {
              * @param collection
              * @return boolean
              */
-            boolean addAll(int index, Collection<E> collection) {
+            boolean addAll(long int index, Collection<E> collection) {
                 // TODO: Please discuss about param Collection
                 return true;
             }
@@ -287,7 +287,7 @@ namespace Java {
              *
              * @param minCapacity
              */
-            void ensureCapacity(int minCapacity) const {
+            void ensureCapacity(long int minCapacity) const {
                 this->original.reserve(minCapacity);
             }
 
@@ -307,7 +307,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E get(int index) const {
+            E get(long int index) const {
                 if (index < 0 || index >= this->size()) {
                     String message = "Index out of range: ";
                     message += Integer(index).stringValue();
@@ -323,8 +323,8 @@ namespace Java {
              * @param element
              * @return int
              */
-            int indexOf(E element) const {
-                int index;
+            long int indexOf(E element) const {
+                long int index;
                 for (index = 0; index < this->size(); ++index) {
                     if (this->get(index) == element) {
                         return index;
@@ -360,8 +360,8 @@ namespace Java {
              * @param object
              * @return int
              */
-            int lastIndexOf(E element) const {
-                int index;
+            long int lastIndexOf(E element) const {
+                long int index;
                 for (index = this->size() - 1; index >= 0; --index) {
                     if (this->get(index) == element) {
                         return index;
@@ -387,7 +387,7 @@ namespace Java {
              * @param index
              * @return Address of ListIterator<E>
              */
-            ListIterator<E> &listIterator(int index) const {
+            ListIterator<E> &listIterator(long int index) const {
                 ListIterator<E> *listIterator = new ListIterator<E>();
                 return *listIterator;
             }
@@ -398,7 +398,7 @@ namespace Java {
              * @param index
              * @return Address of element
              */
-            E remove(int index) {
+            E remove(long int index) {
                 if (index < 0 || index >= this->size()) {
                     String message = "Index out of range: ";
                     message += Integer(index).stringValue();
@@ -418,7 +418,7 @@ namespace Java {
              * @return boolean
              */
             boolean remove(E element) {
-                int position = this->indexOf(element);
+                long int position = this->indexOf(element);
                 if (position == -1) {
                     return false;
                 }
@@ -479,7 +479,7 @@ namespace Java {
              * @param element
              * @return E
              */
-            E set(int index, E element) {
+            E set(long int index, E element) {
                 if (index < 0 || index >= this->size()) {
                     String message = "Index out of range: ";
                     message += Integer(index).stringValue();
@@ -494,7 +494,7 @@ namespace Java {
              *
              * @return int
              */
-            int size() const {
+            long int size() const {
                 return static_cast<int>(this->original.size());
             }
 
@@ -518,7 +518,7 @@ namespace Java {
                 return *spliterator;
             }
 
-            //            List<E> &subList(int fromIndex, int toIndex) const {
+            //            List<E> &subList(long int fromIndex, long int toIndex) const {
             //                // TODO: Please discuss about type return List
             //                List<E> *list = new ArrayList<E>();
             //                return *list;
@@ -579,7 +579,7 @@ namespace Java {
                 if (instanceof<String>(this->original[0])) {
                     isStringArrayList = true;
                 }
-                int index;
+                long int index;
                 for (index = 0; index < this->size(); ++index) {
                     if (isStringArrayList) {
                         String stringAtIndex = this->original[index].toString();
@@ -611,7 +611,7 @@ namespace Java {
              *
              * @return long
              */
-            int hashCode() const {
+            long int hashCode() const {
                 return Object::hashCode();
             }
 
@@ -621,7 +621,7 @@ namespace Java {
 //            }
 
             /**
-             * Print ArrayList to screen
+             * Prlong int ArrayList to screen
              *
              * @param os
              * @param target
@@ -642,7 +642,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E &operator[](int index) {
+            E &operator[](long int index) {
                 return this->original[index];
             }
 
@@ -655,7 +655,7 @@ namespace Java {
              * @param fromIndex
              * @param toIndex
              */
-            void removeRange(int fromIndex, int toIndex) {
+            void removeRange(long int fromIndex, long int toIndex) {
                 this->original.erase(this->original.begin() + fromIndex,
                                      this->original.begin() + toIndex);
             }

@@ -29,21 +29,21 @@
 using namespace Java::Net;
 
 HttpURLConnection::HttpURLConnection(URL url) {
-	this->url = url;
+    this->url = url;
 }
 
 String HttpURLConnection::getMethod() {
-	return this->method;
+    return this->method;
 }
 
 void HttpURLConnection::setMethod(String method) {
-	this->method = method;
+    this->method = method;
 }
 
 long int HttpURLConnection::getResponseCode() {
-	return this->responseCode;
+    return this->responseCode;
 }
 
 String HttpURLConnection::getResponseMessage() {
-	return this->responseMessage;
+    return this->responseMessage;
 }

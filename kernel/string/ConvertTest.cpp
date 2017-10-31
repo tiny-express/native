@@ -52,7 +52,7 @@ TEST (KernelStringConvert, StringFromChar) {
 
 TEST (KernelStringConvert, StringFromShort) {
 	// Input a positive short number to convert from short to string
-	long long  int number = 123;
+	long int number = 123;
 	
 	// The expected result
 	auto expect = (string) "123";
@@ -65,7 +65,7 @@ TEST (KernelStringConvert, StringFromShort) {
 	free(result);
 	
 	// Input a negative short number to convert from short to string
-	long long  int number2 = -123;
+	long int number2 = -123;
 	
 	// The expected result
 	auto expect2 = (string) "-123";
@@ -79,8 +79,8 @@ TEST (KernelStringConvert, StringFromShort) {
 }
 
 TEST (KernelStringConvert, StringFromInt) {
-	// Input a 0 value to convert from long long  int to string
-	long long  int input = 0;
+	// Input a 0 value to convert from long int to string
+	long int input = 0;
 	
 	// The expect result
 	char *expect = (string) "0";
@@ -92,33 +92,33 @@ TEST (KernelStringConvert, StringFromInt) {
 	assertEquals(expect, result);
 	free(result);
 	
-	// Input a 1 value to convert from long long  int to string
+	// Input a 1 value to convert from long int to string
 	// Than make a comparison between the expect result and the real result
-	long long  int input1 = 1;
+	long int input1 = 1;
 	auto expect1 = (string) "1";
 	char *result1 = stringFromInt(input1);
 	assertEquals(expect1, result1);
 	free(result1);
 	
-	// Input a random positive value of type long long  int such as 10 to convert from long long  int to string
+	// Input a random positive value of type long int such as 10 to convert from long int to string
 	// Than make a comparison between the expect result and the real result
-	long long  int input2 = 10;
+	long int input2 = 10;
 	auto expect2 = (string) "10";
 	char *result2 = stringFromInt(input2);
 	assertEquals(expect2, result2);
 	free(result2);
 	
-	// Input the maximum value of type long long  int to convert from long long  int to string
+	// Input the maximum value of type long int to convert from long int to string
 	// Than make a comparison between the expect result and the real result
-	long long  int input3 = 2147483647;
+	long int input3 = 2147483647;
 	auto expect3 = (string) "2147483647";
 	char *result3 = stringFromInt(input3);
 	assertEquals(expect3, result3);
 	free(result3);
 	
-	// Input the minimum value of type long long  int to convert from long long  int to string
+	// Input the minimum value of type long int to convert from long int to string
 	// Than make a comparison between the expect result and the real result
-	long long  int input4 = -2147483647;
+	long int input4 = -2147483647;
 	auto expect4 = (string) "-2147483647";
 	char *result4 = stringFromInt(input4);
 	assertEquals(expect4, result4);
@@ -127,7 +127,7 @@ TEST (KernelStringConvert, StringFromInt) {
 
 TEST (KernelStringConvert, StringFromLong) {
 	// Input the maximum value of type long long  to convert from long long  to string
-	auto input = (long) 393239259234023474;
+	auto input = (long long) 393239259234023474;
 	
 	// The expected result
 	auto expect = (string) "393239259234023474";
@@ -196,10 +196,10 @@ TEST (KernelStringConvert, StringFromDouble) {
 
 TEST (KernelStringConvert, StringToShort) {
 	// Make a comparison between 0 and result of stringToShort(nullptr)
-	assertEquals(0, stringToShort(nullptr));
+	assertEquals(0, (short) stringToShort(nullptr));
 	
 	// Input a positive value of type short to convert from short to string
-	char *input = (string) "123";
+	auto input = (string) "123";
 	
 	// The result
 	short result = stringToShort(input);
@@ -219,7 +219,7 @@ TEST (KernelStringConvert, StringToInt) {
 	auto input = (string) "123\0";
 	
 	// The result of stringToInt
-	long long  int result = stringToInt(input);
+	long int result = stringToInt(input);
 	
 	// Than make a comparison between the result and the right answer
 	assertEquals(123, result);
@@ -227,43 +227,43 @@ TEST (KernelStringConvert, StringToInt) {
 	// Input a string representing negative number to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-123\0";
-	long long  int result1 = stringToInt(input1);
+	long int result1 = stringToInt(input1);
 	assertEquals(-123, result1);
 	
 	// Input a string representing 0 number to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input2 = (string) "\0";
-	long long  int result2 = stringToInt(input2);
+	long int result2 = stringToInt(input2);
 	assertEquals(0, result2);
 	
 	// Input a string representing nothing to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input3 = (string) "";
-	long long  int result3 = stringToInt(input3);
+	long int result3 = stringToInt(input3);
 	assertEquals(0, result3);
 	
 	// Input a string representing positive value of type float to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input4 = (string) "12.321";
-	long long  int result4 = stringToInt(input4);
+	long int result4 = stringToInt(input4);
 	assertEquals(12, result4);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input5 = (string) "kajshdkashd";
-	long long  int result5 = stringToInt(input5);
+	long int result5 = stringToInt(input5);
 	assertEquals(0, result5);
 	
 	// Input a string representing nullptr to convert from string to int
 	// Than make a comparison between the result and the right answer
 	char *input6 = nullptr;
-	long long  int result6 = stringToInt(input6);
+	long int result6 = stringToInt(input6);
 	assertEquals(0, result6);
 	
 	// Input a string representing characters to convert from string to int
 	// Than make a comparison between the result and the right answer
 	auto input7 = (string) "foodtiny.com";
-	long long  int result7 = stringToInt(input7);
+	long int result7 = stringToInt(input7);
 	assertEquals(0, result7);
 }
 
@@ -329,7 +329,7 @@ TEST (KernelStringConvert, StringToBoolean) {
 	char *target0 = (string) "1";
 	
 	// The result
-	long long  int boolean0 = stringToBoolean(target0);
+	long int boolean0 = stringToBoolean(target0);
 	
 	// Check if the result is TRUE or not
 	assertTrue(boolean0);
@@ -337,43 +337,43 @@ TEST (KernelStringConvert, StringToBoolean) {
 	// Input a string representing "TRUE" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target1 = (string) "TRUE";
-	long long  int boolean1 = stringToBoolean(target1);
+	long int boolean1 = stringToBoolean(target1);
 	assertTrue(boolean1);
 	
 	// Input a string representing "True" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target2 = (string) "True";
-	long long  int boolean2 = stringToBoolean(target2);
+	long int boolean2 = stringToBoolean(target2);
 	assertTrue(boolean2);
 	
 	// Input a string representing "true" to convert from string to boolean
 	// Than check if the result is TRUE or not
 	auto target3 = (string) "true";
-	long long  int boolean3 = stringToBoolean(target3);
+	long int boolean3 = stringToBoolean(target3);
 	assertTrue(boolean3);
 	
 	// Input a string representing "FALSE" to convert from string to boolean
 	// Than check if the result is FALSE or not
 	auto target4 = (string) "FALSE";
-	long long  int boolean4 = stringToBoolean(target4);
+	long int boolean4 = stringToBoolean(target4);
 	assertFalse(boolean4);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
 	auto target5 = (string) "False";
-	long long  int boolean5 = stringToBoolean(target5);
+	long int boolean5 = stringToBoolean(target5);
 	assertFalse(boolean5);
 	
 	// Input a string representing "False" to convert from string to boolean
 	// Than check if the result is FALSE or not
 	auto target6 = (string) "false";
-	long long  int boolean6 = stringToBoolean(target6);
+	long int boolean6 = stringToBoolean(target6);
 	assertFalse(boolean6);
 }
 
 TEST (KernelStringConvert, StringFromBoolean) {
 	// Input value 0 to convert from Boolean to String
-	long long  int value = 0;
+	long int value = 0;
 	
 	// The expected result
 	

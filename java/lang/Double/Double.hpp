@@ -56,7 +56,7 @@ namespace Java {
              * The exponent the smallest positive double subnormal value would have
              * if it could be normalized.
              */
-            static constexpr int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
+            static constexpr long int MIN_SUB_EXPONENT = MIN_EXPONENT - (SIGNIFICAND_WIDTH - 1);
 
             /**
              * Bias used in representing a double exponent.
@@ -66,17 +66,17 @@ namespace Java {
             /**
              * Bit mask to isolate the sign bit of a double.
              */
-            static const long SIGN_BIT_MASK = 0x8000000000000000L;
+            static const long long SIGN_BIT_MASK = 0x8000000000000000L;
 
             /**
              * Bit mask to isolate the exponent field of a double.
              */
-            static const long EXP_BIT_MASK = 0x7FF0000000000000L;
+            static const long long EXP_BIT_MASK = 0x7FF0000000000000L;
 
             /**
              * Bit mask to isolate the significand field of a double.
              */
-            static const long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+            static const long long SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
 
             /**
              * A constant holding the positive infinity of type
@@ -278,14 +278,14 @@ namespace Java {
              *
              * @return int
              */
-            int intValue() const override;
+            long int intValue() const override;
 
             /**
              * Double value in Long
              *
              * @return long
              */
-            long longValue() const override;
+            long long longValue() const override;
 
             /**
              * Double value in float
@@ -363,27 +363,27 @@ namespace Java {
              *          {Double} is numerically greater than
              *          {anotherDouble}.
              */
-            int compareTo(Double anotherDouble);
+            long int compareTo(Double anotherDouble);
 
             /**
-             * Returns a representation of the specified floating-point value
-             * according to the IEEE 754 floating-point "double
+             * Returns a representation of the specified floating-polong int value
+             * according to the IEEE 754 floating-polong int "double
              * format" bit layout.
              *
-             * @param   value   a double precision floating-point number.
-             * @return the bits that represent the floating-point number.
+             * @param   value   a double precision floating-polong int number.
+             * @return the bits that represent the floating-polong int number.
              */
-            static long doubleToLongBits(double valueDouble);
+            static long long doubleToLongBits(double valueDouble);
 
             /**
-             * Returns a representation of the specified floating-point value
-             * according to the IEEE 754 floating-point "double
+             * Returns a representation of the specified floating-polong int value
+             * according to the IEEE 754 floating-polong int "double
              * format" bit layout, preserving Not-a-Number (NaN) values.
              *
-             * @param   value   a double precision floating-point number.
-             * @return the bits that represent the floating-point number.
+             * @param   value   a double precision floating-polong int number.
+             * @return the bits that represent the floating-polong int number.
              */
-            static long doubleToRawLongBits(double doubleInput);
+            static long long doubleToRawLongBits(double doubleInput);
 
             /**
              * Compares this object against the specified object.
@@ -400,7 +400,7 @@ namespace Java {
              *
              * @return  a {hash code} value for this object.
              */
-            long hashCode();
+            long long hashCode();
 
             /**
              * Returns a hash code for a double value; compatible with
@@ -409,7 +409,7 @@ namespace Java {
              * @param value the value to hash
              * @return a hash code value for a double value.
              */
-            static long hashCode(double doubleInput);
+            static long long hashCode(double doubleInput);
 
             /**
              * Returns {true} if the argument is a finite floating-point
@@ -418,7 +418,7 @@ namespace Java {
              *
              * @param d the double value to be tested
              * @return {true} if the argument is a finite
-             * floating-point value, {false} otherwise.
+             * floating-polong int value, {false} otherwise.
              */
             static boolean isFinite(double d);
 
@@ -466,10 +466,10 @@ namespace Java {
              * bit representation.
              *
              * @param   bits   any {long} integer.
-             * @return  the double floating-point value with the same
+             * @return  the double floating-polong int value with the same
              *          bit pattern.
              */
-            static double longBitsToDouble(long bits);
+            static double longBitsToDouble(long long bits);
 
             /**
              * Returns the smaller of two double values
@@ -492,74 +492,74 @@ namespace Java {
 //             * @return a hex string representation of the argument.
 //             */
 //            static String toHexString(double d);
-						
-						/**
-						* Convert from string to double
-						*
-						* @param      s   the string to be parsed.
-						* @return     a {Double} object holding the value
-						*             represented by the {String} argument.
-						*/
-						static Double valueOf(String stringInput);
-						
-						/**
-						* Assign value to Double variable
-						*
-						* @param  d a double value.
-						* @return a {Double} instance representing {d}.
-						*/
-						static Double valueOf(double doubleInput);
-				
-				private:
-						double original;
-						string originalString;
-						
-						/**
-						* Convert double to binary 64 bit
-						* (Double-precision floating-point format
-						* In IEEE 754-2008)
-						*
-						* @param double
-						* @return string binary 64 bit of input
-						*/
-						static String doubleToBinary64StringType(double doubleInput);
-						
-						/**
-						* Convert binary64StringType To Double
-						* (Double-precision floating-point format
-						* In IEEE 754-2008)
-						* To Double
-						 *
-						* @param  string
-						* @return double
-						*/
-						static double binary64StringTypeToDouble(String Binary64StringTypeInput);
-						
-						/**
-						* Convert longBits To Binary64StringType
-						* (Double-precision floating-point format
-						* In IEEE 754-2008)
-						 *
-						* @param  long
-						* @return string
-						*/
-						static String longBitsToBinary64StringType(long longBitsInput);
-				
-				public:
-						inline size_t operator()(const Double &target) const {
-							return std::hash<std::string>{}(target.toString().toCharPointer());
-						}
-				};
-		}  // namespace Lang
+
+            /**
+            * Convert from string to double
+            *
+            * @param      s   the string to be parsed.
+            * @return     a {Double} object holding the value
+            *             represented by the {String} argument.
+            */
+            static Double valueOf(String stringInput);
+
+            /**
+            * Assign value to Double variable
+            *
+            * @param  d a double value.
+            * @return a {Double} instance representing {d}.
+            */
+            static Double valueOf(double doubleInput);
+
+        private:
+            double original;
+            string originalString;
+
+            /**
+            * Convert double to binary 64 bit
+            * (Double-precision floating-polong int format
+            * In IEEE 754-2008)
+            *
+            * @param double
+            * @return string binary 64 bit of input
+            */
+            static String doubleToBinary64StringType(double doubleInput);
+
+            /**
+            * Convert binary64StringType To Double
+            * (Double-precision floating-polong int format
+            * In IEEE 754-2008)
+            * To Double
+             *
+            * @param  string
+            * @return double
+            */
+            static double binary64StringTypeToDouble(String Binary64StringTypeInput);
+
+            /**
+            * Convert longBits To Binary64StringType
+            * (Double-precision floating-polong int format
+            * In IEEE 754-2008)
+             *
+            * @param  long
+            * @return string
+            */
+            static String longBitsToBinary64StringType(long long longBitsInput);
+
+        public:
+            inline size_t operator()(const Double &target) const {
+                return std::hash<std::string>{}(target.toString().toCharPointer());
+            }
+        };
+    }  // namespace Lang
 }  // namespace Java
 
 namespace std {
-		template <>
-		struct hash<Double> {
-				std::size_t operator()(const Double &k) const {
-					return Double()(k);
-				}
-		};
+    template<>
+    struct hash<Double> {
+        std::size_t operator()(const Double &k) const {
+            return Double()(k);
+        }
+    };
 }
 
 #endif // NATIVE_JAVA_LANG_DOUBLE_DOUBLE_HPP

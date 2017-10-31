@@ -32,16 +32,20 @@
 #include "../Object/Object.hpp"
 
 namespace Java {
-		namespace Lang {
-				class Number : public Object {
-				protected:
-						virtual short shortValue() const = 0;
-						virtual long int intValue() const = 0;
-						virtual long longValue() const = 0;
-						virtual float floatValue() const = 0;
-						virtual double doubleValue() const = 0;
-				};
-		}
+    namespace Lang {
+        class Number : public Object {
+        protected:
+            virtual short shortValue() const = 0;
+
+            virtual long int intValue() const = 0;
+
+            virtual long long longValue() const = 0;
+
+            virtual float floatValue() const = 0;
+
+            virtual double doubleValue() const = 0;
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_LANG_NUMBER_HPP

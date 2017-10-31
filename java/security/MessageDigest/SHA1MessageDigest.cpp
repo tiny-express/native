@@ -50,7 +50,7 @@ long int SHA1MessageDigest::engineDigest(byte *buffer, long int len) {
 }
 
 long int SHA1MessageDigest::engineGetDigestLength() {
-    return (long int)sizeof(this->hash);
+    return (int) sizeof(this->hash);
 }
 
 void SHA1MessageDigest::engineReset() {

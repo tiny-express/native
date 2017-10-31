@@ -54,7 +54,7 @@ self-checking.
 #include "md5.hpp"
 #include <cstring>
 
-#undef BYTE_ORDER	/* 1 = big-endian, -1 = little-endian, 0 = unknown */
+#undef BYTE_ORDER    /* 1 = big-endian, -1 = little-endian, 0 = unknown */
 #ifdef ARCH_IS_BIG_ENDIAN
 #  define BYTE_ORDER (ARCH_IS_BIG_ENDIAN ? 1 : -1)
 #else
@@ -127,15 +127,14 @@ self-checking.
 #define T63    0x2ad7d2bb
 #define T64 /* 0xeb86d391 */ (T_MASK ^ 0x14792c6e)
 
-static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
-{
+static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/) {
     md5_word_t
             a = pms->abcd[0], b = pms->abcd[1],
             c = pms->abcd[2], d = pms->abcd[3];
     md5_word_t t;
 #if BYTE_ORDER > 0
     /* Define storage only for big-endian CPUs. */
-	md5_word_t X[16];
+    md5_word_t X[16];
 #else
     /* Define storage for little-endian or both types of CPUs. */
     md5_word_t xbuf[16];
@@ -149,21 +148,20 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
         * little-endian machine, since we can use a more efficient
         * algorithm on the latter.
         */
-        static const long long int w = 1;
+        static const long int w = 1;
 
-        if (*((const md5_byte_t *)&w)) /* dynamic little-endian */
+        if (*((const md5_byte_t *) &w)) /* dynamic little-endian */
 #endif
-#if BYTE_ORDER <= 0		/* little-endian */
+#if BYTE_ORDER <= 0        /* little-endian */
         {
             /*
             * On little-endian machines, we can process properly aligned
             * data without copying it.
             */
-            if (!((data - (const md5_byte_t *)0) & 3)) {
+            if (!((data - (const md5_byte_t *) 0) & 3)) {
                 /* data are properly aligned */
-                X = (const md5_word_t *)data;
-            }
-            else {
+                X = (const md5_word_t *) data;
+            } else {
                 /* not aligned */
                 memcpy(xbuf, data, 64);
                 X = xbuf;
@@ -171,9 +169,9 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
         }
 #endif
 #if BYTE_ORDER == 0
-        else			/* dynamic big-endian */
+        else            /* dynamic big-endian */
 #endif
-#if BYTE_ORDER >= 0		/* big-endian */
+#if BYTE_ORDER >= 0        /* big-endian */
         {
             /*
             * On big-endian machines, we must arrange the bytes in the
@@ -183,7 +181,7 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
             long int i;
 
 #  if BYTE_ORDER == 0
-            X = xbuf;		/* (dynamic only) */
+            X = xbuf;        /* (dynamic only) */
 #  else
 #    define xbuf X		/* (static only) */
 #  endif
@@ -308,8 +306,7 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)
     pms->abcd[3] += d;
 }
 
-void md5_init(md5_state_t *pms)
-{
+void md5_init(md5_state_t *pms) {
     pms->count[0] = pms->count[1] = 0;
     pms->abcd[0] = 0x67452301;
     pms->abcd[1] = /*0xefcdab89*/ T_MASK ^ 0x10325476;
@@ -317,12 +314,11 @@ void md5_init(md5_state_t *pms)
     pms->abcd[3] = 0x10325476;
 }
 
-void md5_append(md5_state_t *pms, const md5_byte_t *data, long int nbytes)
-{
+void md5_append(md5_state_t *pms, const md5_byte_t *data, long int nbytes) {
     const md5_byte_t *p = data;
     long int left = nbytes;
     long int offset = (pms->count[0] >> 3) & 63;
-    md5_word_t nbits = (md5_word_t)(nbytes << 3);
+    md5_word_t nbits = (md5_word_t) (nbytes << 3);
 
     if (nbytes <= 0)
         return;
@@ -354,8 +350,7 @@ void md5_append(md5_state_t *pms, const md5_byte_t *data, long int nbytes)
         memcpy(pms->buf, p, left);
 }
 
-void md5_finish(md5_state_t *pms, md5_byte_t digest[16])
-{
+void md5_finish(md5_state_t *pms, md5_byte_t digest[16]) {
     static const md5_byte_t pad[64] = {
             0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -367,11 +362,11 @@ void md5_finish(md5_state_t *pms, md5_byte_t digest[16])
 
     /* Save the length before padding. */
     for (i = 0; i < 8; ++i)
-        data[i] = (md5_byte_t)(pms->count[i >> 2] >> ((i & 3) << 3));
+        data[i] = (md5_byte_t) (pms->count[i >> 2] >> ((i & 3) << 3));
     /* Pad to 56 bytes mod 64. */
     md5_append(pms, pad, ((55 - (pms->count[0] >> 3)) & 63) + 1);
     /* Append the length. */
     md5_append(pms, data, 8);
     for (i = 0; i < 16; ++i)
-        digest[i] = (md5_byte_t)(pms->abcd[i >> 2] >> ((i & 3) << 3));
+        digest[i] = (md5_byte_t) (pms->abcd[i >> 2] >> ((i & 3) << 3));
 }

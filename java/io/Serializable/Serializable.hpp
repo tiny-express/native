@@ -28,13 +28,14 @@
 #define NATIVE_JAVA_IO_SERIALIZABLE_HPP
 
 namespace Java {
-		namespace IO {
-				class Serializable {
-				protected:
-						Serializable() = default;
-						virtual ~Serializable() = default;
-				};
-		}
+    namespace IO {
+        class Serializable {
+        protected:
+            Serializable() = default;
+
+            virtual ~Serializable() = default;
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_IO_SERIALIZABLE_HPP

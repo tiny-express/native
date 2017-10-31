@@ -214,7 +214,7 @@ static byte INITIAL_QUOTE_PUNCTUATION = 29;
 static byte FINAL_QUOTE_PUNCTUATION = 30;
 
 /**
- * Error flag. Use int (code point) to avoid confusion with U+FFFF.
+ * Error flag. Use long int (code point) to avoid confusion with U+FFFF.
  */
 static long int ERROR = 0xFFFFFFFF;
 
@@ -395,7 +395,7 @@ static long int MAX_CODE_POINT = 0X10FFFF;
  * @param original
  */
 Character::Character() {
-	this->original = '\0';
+    this->original = '\0';
 }
 
 /**
@@ -404,179 +404,179 @@ Character::Character() {
  * @param original
  */
 Character::Character(char original) {
-	this->original = original;
+    this->original = original;
 }
 
 Character::~Character() {
 }
 
-long int Character::charCount(int codePoint) {
-	if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
-		return 2;
-	}
-	return 1;
+long int Character::charCount(long int codePoint) {
+    if (codePolong int >= MIN_SUPPLEMENTARY_CODE_POINT) {
+        return 2;
+    }
+    return 1;
 }
 
 char Character::charValue() {
-	return this->original;
+    return this->original;
 }
 
-long int Character::codePointAt(Array<char> a, int index) {
-	return codePointAtImpl(a, index, a.length);
+long int Character::codePointAt(Array<char> a, long int index) {
+    return codePointAtImpl(a, index, a.length);
 }
 
-long int Character::codePointAt(Array<char> a, int index, int limit) {
-	if (index >= limit || limit < 0 || limit > a.length) {
-		return -1;
-	}
-	return codePointAtImpl(a, index, limit);
+long int Character::codePointAt(Array<char> a, long int index, long int limit) {
+    if (index >= limit || limit < 0 || limit > a.length) {
+        return -1;
+    }
+    return codePointAtImpl(a, index, limit);
 }
 
 // throws ArrayIndexOutOfBoundsException if index out of bounds
-long int Character::codePointAtImpl(Array<char> a, int index, int limit) {
-	unicode c1 = (unicode) a[ index ];
-	if (isHighSurrogate(c1) && ++index < limit) {
-		unicode c2 = (unicode) a[ index ];
-		if (isLowSurrogate(c2)) {
-			return toCodePoint(c1, c2);
-		}
-	}
-	return (long int) c1;
+long int Character::codePointAtImpl(Array<char> a, long int index, long int limit) {
+    unicode c1 = (unicode) a[index];
+    if (isHighSurrogate(c1) && ++index < limit) {
+        unicode c2 = (unicode) a[index];
+        if (isLowSurrogate(c2)) {
+            return toCodePoint(c1, c2);
+        }
+    }
+    return (int) c1;
 }
 
-long int Character::codePointBefore(Array<char> a, int index) {
-	return codePointBeforeImpl(a, index, 0);
+long int Character::codePointBefore(Array<char> a, long int index) {
+    return codePointBeforeImpl(a, index, 0);
 }
 
-long int Character::codePointBefore(Array<char> a, int index, int start) {
-	if (index <= start || start < 0 || start >= a.length) {
-		return -1;
-	}
-	return codePointBeforeImpl(a, index, start);
+long int Character::codePointBefore(Array<char> a, long int index, long int start) {
+    if (index <= start || start < 0 || start >= a.length) {
+        return -1;
+    }
+    return codePointBeforeImpl(a, index, start);
 }
 
 // throws ArrayIndexOutOfBoundsException if index-1 out of bounds
-long int Character::codePointBeforeImpl(Array<char> a, int index, int start) {
-	char c2 = a[ --index ];
-	if (isLowSurrogate(c2) && index > start) {
-		char c1 = a[ --index ];
-		if (isHighSurrogate(c1)) {
-			return toCodePoint(c1, c2);
-		}
-	}
-	return c2;
+long int Character::codePointBeforeImpl(Array<char> a, long int index, long int start) {
+    char c2 = a[--index];
+    if (isLowSurrogate(c2) && index > start) {
+        char c1 = a[--index];
+        if (isHighSurrogate(c1)) {
+            return toCodePoint(c1, c2);
+        }
+    }
+    return c2;
 }
 
-long int Character::codePointCount(Array<char> a, int offset, int count) {
-	if (count > a.length - offset || offset < 0 || count < 0) {
-		return -1;
-	}
-	return codePointCountImpl(a, offset, count);
+long int Character::codePointCount(Array<char> a, long int offset, long int count) {
+    if (count > a.length - offset || offset < 0 || count < 0) {
+        return -1;
+    }
+    return codePointCountImpl(a, offset, count);
 }
 
-long int Character::codePointCountImpl(Array<char> a, int offset, int count) {
-	long int endIndex = offset + count;
-	long int n = count;
-	for (int i = offset; i < endIndex;) {
-		if (isHighSurrogate(a[ i++ ]) && i < endIndex
-		    && isLowSurrogate(a[ i ])) {
-			n--;
-			i++;
-		}
-	}
-	return n;
+long int Character::codePointCountImpl(Array<char> a, long int offset, long int count) {
+    long int endIndex = offset + count;
+    long int n = count;
+    for (long int i = offset; i < endIndex;) {
+        if (isHighSurrogate(a[i++]) && i < endIndex
+            && isLowSurrogate(a[i])) {
+            n--;
+            i++;
+        }
+    }
+    return n;
 }
 
 long int Character::compare(char x, char y) {
-	return x - y;
+    return x - y;
 }
 
 long int Character::compareTo(Character &anotherCharacter) {
-	return compare(this->charValue(), anotherCharacter.charValue());
+    return compare(this->charValue(), anotherCharacter.charValue());
 }
 
 boolean Character::isHighSurrogate(unicode ch) {
-	// Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
-	return ch >= MIN_HIGH_SURROGATE && ch < ( MAX_HIGH_SURROGATE + 1 );
+    // Help VM constant-fold; MAX_HIGH_SURROGATE + 1 == MIN_LOW_SURROGATE
+    return ch >= MIN_HIGH_SURROGATE && ch < (MAX_HIGH_SURROGATE + 1);
 }
 
 boolean Character::isLowSurrogate(unicode ch) {
-	return ch >= MIN_LOW_SURROGATE && ch < ( MAX_LOW_SURROGATE + 1 );
+    return ch >= MIN_LOW_SURROGATE && ch < (MAX_LOW_SURROGATE + 1);
 }
 
 boolean Character::isSurrogate(unicode ch) {
-	return ch >= MIN_SURROGATE && ch < ( MAX_SURROGATE + 1 );
+    return ch >= MIN_SURROGATE && ch < (MAX_SURROGATE + 1);
 }
 
 long int Character::toCodePoint(unicode high, unicode low) {
-	return (( high << 10 ) + low ) + ( MIN_SUPPLEMENTARY_CODE_POINT
-	                                   - ( MIN_HIGH_SURROGATE << 10 )
-	                                   - MIN_LOW_SURROGATE );
+    return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
+                                   - (MIN_HIGH_SURROGATE << 10)
+                                   - MIN_LOW_SURROGATE);
 }
 
-long int Character::digit(int codePoint, int radix) {
-	if (radix == 10) {
-		switch (codePoint) {
-			case (long int) '0':
-				return 0;
-			case (long int) '1':
-				return 1;
-			case (long int) '2':
-				return 2;
-			case (long int) '3':
-				return 3;
-			case (long int) '4':
-				return 4;
-			case (long int) '5':
-				return 5;
-			case (long int) '6':
-				return 6;
-			case (long int) '7':
-				return 7;
-			case (long int) '8':
-				return 8;
-			case (long int) '9':
-				return 9;
-			default:
-				return -1;
-		}
-	}
-	if (radix == 16) {
-		switch (codePoint) {
-			case (long int) '0':
-				return 0;
-			case (long int) '1':
-				return 1;
-			case (long int) '2':
-				return 2;
-			case (long int) '3':
-				return 3;
-			case (long int) '4':
-				return 4;
-			case (long int) '5':
-				return 5;
-			case (long int) '6':
-				return 6;
-			case (long int) '7':
-				return 7;
-			case (long int) '8':
-				return 8;
-			case (long int) '9':
-				return 9;
-			case (long int) 'a':
-				return 10;
-			case (long int) 'b':
-				return 11;
-			case (long int) 'c':
-				return 12;
-			case (long int) 'd':
-				return 13;
-			case (long int) 'e':
-				return 14;
-			case (long int) 'f':
-				return 15;
-			default:
-				return -1;
-		}
-	}
+long int Character::digit(long int codePoint, long int radix) {
+    if (radix == 10) {
+        switch (codePoint) {
+            case (int) '0':
+                return 0;
+            case (int) '1':
+                return 1;
+            case (int) '2':
+                return 2;
+            case (int) '3':
+                return 3;
+            case (int) '4':
+                return 4;
+            case (int) '5':
+                return 5;
+            case (int) '6':
+                return 6;
+            case (int) '7':
+                return 7;
+            case (int) '8':
+                return 8;
+            case (int) '9':
+                return 9;
+            default:
+                return -1;
+        }
+    }
+    if (radix == 16) {
+        switch (codePoint) {
+            case (int) '0':
+                return 0;
+            case (int) '1':
+                return 1;
+            case (int) '2':
+                return 2;
+            case (int) '3':
+                return 3;
+            case (int) '4':
+                return 4;
+            case (int) '5':
+                return 5;
+            case (int) '6':
+                return 6;
+            case (int) '7':
+                return 7;
+            case (int) '8':
+                return 8;
+            case (int) '9':
+                return 9;
+            case (int) 'a':
+                return 10;
+            case (int) 'b':
+                return 11;
+            case (int) 'c':
+                return 12;
+            case (int) 'd':
+                return 13;
+            case (int) 'e':
+                return 14;
+            case (int) 'f':
+                return 15;
+            default:
+                return -1;
+        }
+    }
 }

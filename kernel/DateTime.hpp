@@ -58,7 +58,7 @@ static long int daysPerYear[2] = {
  * @param year
  * @return
  */
-unsigned long unixTimeInMilliseconds(
+unsigned long long unixTimeInMilliseconds(
         unsigned long int millisecond,
         unsigned long int second,
         unsigned long int minute,
@@ -73,7 +73,7 @@ unsigned long unixTimeInMilliseconds(
  *
  * @return unsigned long
  */
-unsigned long timestamp();
+unsigned long long timestamp();
 
 /**
  *

@@ -34,10 +34,10 @@ using namespace Java::Security;
 
 MessageDigest MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
-        MessageDigestSpi* spi = new MD5MessageDigest();
+        MessageDigestSpi *spi = new MD5MessageDigest();
         return MessageDigest(spi, algorithm);
     } else if (algorithm == "SHA1") {
-        MessageDigestSpi* spi = new SHA1MessageDigest();
+        MessageDigestSpi *spi = new SHA1MessageDigest();
         return MessageDigest(spi, algorithm);
     } else {
         throw NoSuchAlgorithmException(algorithm + (string) " not found");

@@ -154,7 +154,7 @@ namespace Java {
              *
              * @return 	long int the hash code value for this map
              */
-            int hashCode();
+            long int hashCode();
 
             /**
              * Returns a Set view of the keys contained in this map.
@@ -247,7 +247,7 @@ namespace Java {
 //			}
 //
 //			final class Values extends AbstractCollection<Value> {
-//				public final int size() {
+//				public final long int size() {
 //					return size;
 //				}
 
@@ -265,19 +265,19 @@ namespace Java {
              *
              * @return HashMap<Key, Value>
              */
-                /***
-				 * Returns a shallow copy of this HashMap instance:
-				 * the keys and values themselves are not cloned.
-				 *
-				 * @return HashMap<Key, Value>
-				 */
-                HashMap<Key, Value> clone() const {
-                    HashMap<Key, Value> result;
-                    for (auto const &element : this->original) {
-                        result.put(element.first, element.second);
-                    }
-                    return result;
+            /***
+             * Returns a shallow copy of this HashMap instance:
+             * the keys and values themselves are not cloned.
+             *
+             * @return HashMap<Key, Value>
+             */
+            HashMap<Key, Value> clone() const {
+                HashMap<Key, Value> result;
+                for (auto const &element : this->original) {
+                    result.put(element.first, element.second);
                 }
+                return result;
+            }
 
             /**
              * Attempts to compute a mapping for the specified key and
@@ -660,7 +660,7 @@ namespace Java {
              *
              * @return int
              */
-            int size() const {
+            long int size() const {
                 return this->original.size();
             }
 
@@ -727,12 +727,12 @@ namespace Java {
 //             * @return a String with add escape sequence replaced
 //             */
 //            String replaceEscapeSequence(const String stringToReplace) {
-//                int index = 0;
+//                long int index = 0;
 //                String replacementString;
 //                String result;
 //
 //                while (index < stringToReplace.length()) {
-//                    int charAtIndex = stringToReplace.charAt(index);
+//                    long int charAtIndex = stringToReplace.charAt(index);
 //
 //                    switch (charAtIndex) {
 //                        case '\"':

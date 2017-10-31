@@ -80,19 +80,19 @@ string date(time_t timestamp, string format) {
  * @return
  */
 unsigned long long  unixTimeInMilliseconds(
-		unsigned long long  int millisecond,
-		unsigned long long  int second,
-		unsigned long long  int minute,
-		unsigned long long  int hour,
-		unsigned long long  int day,
-		unsigned long long  int month,
-		unsigned long long  int year)
+		unsigned long int millisecond,
+		unsigned long int second,
+		unsigned long int minute,
+		unsigned long int hour,
+		unsigned long int day,
+		unsigned long int month,
+		unsigned long int year)
 {
 	unsigned long long  ts = 0;
 	//  Add up the seconds from all prev years, up until this year.
-	unsigned long long  int years = 0;
-	unsigned long long  int leap_years = 0;
-	long long  int y_k;
+	unsigned long int years = 0;
+	unsigned long int leap_years = 0;
+	long int y_k;
 	for (y_k  = EPOCH_YEAR; y_k<year; y_k++ ) {
 		if( IS_LEAP_YEAR( y_k ) ) {
 			leap_years++;
@@ -102,8 +102,8 @@ unsigned long long  unixTimeInMilliseconds(
 	}
 	ts += ( (years*daysPerYear[0]) + (leap_years*daysPerYear[1]) ) * SEC_PER_DAY;
 	//  Add up the seconds from all prev days this year, up until today.
-	unsigned long long  int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
-	long long  int mo_k;
+	unsigned long int year_index = (IS_LEAP_YEAR( year )) ? 1 : 0;
+	long int mo_k;
 	for (mo_k = 0; mo_k<(month - 1); mo_k++ ) { //  days from previous months this year
 		ts += daysPerMonth[ year_index ][ mo_k ] * SEC_PER_DAY;
 	}
@@ -133,7 +133,7 @@ unsigned long long  timestamp() {
 #ifdef LINUX
 	struct timespec tsp;
 	clock_gettime(0, &tsp);
-	return (long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
+	return (long long) tsp.tv_sec * 1000000000 + tsp.tv_nsec;
 #endif
 #ifdef WIN
 	SYSTEMTIME current_time;

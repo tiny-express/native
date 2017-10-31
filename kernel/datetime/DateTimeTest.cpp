@@ -29,13 +29,13 @@
 
 TEST (KernelDateTime, TimestampForWindows) {
 #ifdef WIN
-	unsigned long long  int millisecond = 123;
-	unsigned long long  int second = 3;
-	unsigned long long  int minute = 20;
-	unsigned long long  int hour = 17;
-	unsigned long long  int day  = 16;
-	unsigned long long  int month = 7;
-	unsigned long long  int year = 2017;
+	unsigned long int millisecond = 123;
+	unsigned long int second = 3;
+	unsigned long int minute = 20;
+	unsigned long int hour = 17;
+	unsigned long int day  = 16;
+	unsigned long int month = 7;
+	unsigned long int year = 2017;
 	unsigned long long  timestamp = unixTimeInMilliseconds(
 			millisecond,
 			second,
@@ -45,7 +45,7 @@ TEST (KernelDateTime, TimestampForWindows) {
 			month,
 			year
 	);
-	assertEquals(1500225603123, (long) timestamp);
+	assertEquals(1500225603123, (long long) timestamp);
 #endif
 }
 

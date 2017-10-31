@@ -47,7 +47,7 @@ namespace Java {
         {
         protected:
             std::vector<E> original;
-            int capacityIncrement;
+            long int capacityIncrement;
 
         public:
             /**
@@ -64,7 +64,7 @@ namespace Java {
              * @param initialCapacity
              * @throw - if the specified initial capacity is negative
              */
-            Vector(int initialCapacity) : Vector(initialCapacity, 0) {
+            Vector(long int initialCapacity) : Vector(initialCapacity, 0) {
             }
 
             /**
@@ -75,7 +75,7 @@ namespace Java {
              * @param capacityIncrement
              * @throw - if the specified initial capacity is negative
              */
-            Vector(int initialCapacity, int capacityIncrement) {
+            Vector(long int initialCapacity, long int capacityIncrement) {
                 if (initialCapacity < 0) {
                     throw std::invalid_argument("initial capacity is negative");
                 }
@@ -106,7 +106,7 @@ namespace Java {
              */
             Vector(const Vector<E> &target) {
                 const E *targetData = target.original.data();
-                register int index;
+                register long int index;
                 for (index = 0; index < target.original.size(); index++) {
                     this->original.push_back(targetData[index]);
                 }
@@ -126,7 +126,7 @@ namespace Java {
              * @return boolean
              */
             boolean add(const E &element) {
-                int oldSize = (long int) this->original.size();
+                long int oldSize = (int) this->original.size();
                 this->ensureCapacity(oldSize + 1);
                 this->original.push_back(element);
                 return (oldSize != this->original.size());
@@ -138,8 +138,8 @@ namespace Java {
              * @param index
              * @param element
              */
-            void add(int index, const E &element) {
-                int size = (long int) this->original.size();
+            void add(long int index, const E &element) {
+                long int size = (int) this->original.size();
                 if (index < 0 || index > size) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -164,7 +164,7 @@ namespace Java {
              * @param list
              * @return boolean
              */
-            boolean addAll(int index, const std::initializer_list<E> &list) {
+            boolean addAll(long int index, const std::initializer_list<E> &list) {
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin();
                      listIterator != list.end(); listIterator++) {
@@ -190,8 +190,8 @@ namespace Java {
              *
              * @return int
              */
-            int capacity() const {
-                return (long int) this->original.capacity();
+            long int capacity() const {
+                return (int) this->original.capacity();
             }
 
             /**
@@ -209,7 +209,7 @@ namespace Java {
             Vector<E> clone() const {
                 Vector<E> clonedVector;
                 const E *vectorData = this->original.data();
-                register int index;
+                register long int index;
                 for (index = 0; index < this->original.size(); index++) {
                     clonedVector.add(vectorData[index]);
                 }
@@ -266,7 +266,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E elementAt(int index) const {
+            E elementAt(long int index) const {
                 return this->get(index);
             }
 
@@ -286,10 +286,10 @@ namespace Java {
              *
              * @param minCapacity
              */
-            void ensureCapacity(int minCapacity) {
-                int oldCapacity = this->capacity();
+            void ensureCapacity(long int minCapacity) {
+                long int oldCapacity = this->capacity();
                 if ((minCapacity > 0) && (minCapacity > oldCapacity)) {
-                    int newCapacity;
+                    long int newCapacity;
                     if (this->capacityIncrement > 0) {
                         newCapacity = oldCapacity + this->capacityIncrement;
                     } else {
@@ -311,12 +311,12 @@ namespace Java {
              * @return boolean
              */
             boolean equals(const Vector<E> &target) const {
-                int size = this->size();
+                long int size = this->size();
                 if (size != target.size()) {
                     return false;
                 }
 
-                register int index;
+                register long int index;
                 for (index = 0; index < size; index++) {
                     E elementOfVector = this->original[index];
                     E elementOfTarget = target.original[index];
@@ -346,7 +346,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E get(int index) const {
+            E get(long int index) const {
                 if (index < 0 || index >= this->original.size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -358,7 +358,7 @@ namespace Java {
              *
              * @return int
              */
-            int hashCode() const {
+            long int hashCode() const {
                 // TODO
             }
 
@@ -368,9 +368,9 @@ namespace Java {
              * @param element
              * @return int
              */
-            int indexOf(const E &element) const {
-                int currentSize = (long int) this->original.size();
-                register int index;
+            long int indexOf(const E &element) const {
+                long int currentSize = (int) this->original.size();
+                register long int index;
                 for (index = 0; index < currentSize; index++) {
                     if (element == this->original[index]) {
                         return index;
@@ -387,12 +387,12 @@ namespace Java {
              * @param index
              * @return int
              */
-            int indexOf(const E &element, int index) {
+            long int indexOf(const E &element, long int index) {
                 if (index < 0 || index >= this->size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
 
-                register int position;
+                register long int position;
                 for (position = index; position < this->original.size(); position++) {
                     if (element == this->original[position]) {
                         return position;
@@ -408,7 +408,7 @@ namespace Java {
              * @param element
              * @param index
              */
-            void insertElementAt(const E &element, int index) {
+            void insertElementAt(const E &element, long int index) {
                 this->add(index, element);
             }
 
@@ -449,8 +449,8 @@ namespace Java {
              * @param element
              * @return int
              */
-            int lastIndexOf(const E &element) const {
-                int maxIndex = (long int) this->original.size() - 1;
+            long int lastIndexOf(const E &element) const {
+                long int maxIndex = (int) this->original.size() - 1;
                 return this->lastIndexOf(element, maxIndex);
             }
 
@@ -462,12 +462,12 @@ namespace Java {
              * @param index
              * @return int
              */
-            int lastIndexOf(const E &element, int index) const {
+            long int lastIndexOf(const E &element, long int index) const {
                 if (index < 0 || index >= this->original.size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
 
-                register int position;
+                register long int position;
                 for (position = index; position >= 0; position--) {
                     if (element == this->original[position]) {
                         return position;
@@ -493,7 +493,7 @@ namespace Java {
              * @param index
              * @return ListIterator<E>
              */
-            ListIterator<E> listIterator(int index) {
+            ListIterator<E> listIterator(long int index) {
                 // TODO
             }
 
@@ -503,7 +503,7 @@ namespace Java {
              * @param index
              * @return E
              */
-            E remove(int index) {
+            E remove(long int index) {
                 if (index < 0 || index >= this->original.size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -520,7 +520,7 @@ namespace Java {
              */
             boolean remove(const Object &element) {
                 const E *referenceToElement = dynamic_cast<const E *>(&element);
-                register int index;
+                register long int index;
                 for (index = 0; index < this->original.size(); index++) {
                     if ((*referenceToElement) == this->original[index]) {
                         this->remove(index);
@@ -537,7 +537,7 @@ namespace Java {
              * @return boolean
              */
             boolean removeAll(const std::initializer_list<E> &list) {
-                int oldSize = (long int) this->original.size();
+                long int oldSize = (int) this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin();
@@ -575,7 +575,7 @@ namespace Java {
              *
              * @param index
              */
-            void removeElementAt(int index) {
+            void removeElementAt(long int index) {
                 this->remove(index);
             }
 
@@ -596,8 +596,8 @@ namespace Java {
              * @param fromIndex
              * @param toIndex
              */
-            void removeRange(int fromIndex, int toIndex) {
-                int currentSize = (long int) this->original.size();
+            void removeRange(long int fromIndex, long int toIndex) {
+                long int currentSize = (int) this->original.size();
 
                 if (fromIndex < 0
                     || fromIndex >= currentSize
@@ -616,9 +616,9 @@ namespace Java {
                     return;
                 }
 
-                int numberOfElementsWillBeDeleted =
+                long int numberOfElementsWillBeDeleted =
                         toIndex - fromIndex; // Excluding element at toIndex;
-                int numberOfElementsDeleted;
+                long int numberOfElementsDeleted;
                 for (numberOfElementsDeleted = 0; numberOfElementsDeleted <
                                                   numberOfElementsWillBeDeleted; numberOfElementsDeleted++) {
                     this->remove(fromIndex);
@@ -652,7 +652,7 @@ namespace Java {
              * @return boolean
              */
             boolean retainAll(const std::initializer_list<E> &list) {
-                int oldSize = (long int) this->original.size();
+                long int oldSize = (int) this->original.size();
                 typename std::vector<E>::iterator vectorIterator;
                 typename std::initializer_list<E>::iterator listIterator;
                 for (vectorIterator = this->original.begin();
@@ -675,7 +675,7 @@ namespace Java {
              * @param element
              * @return E
              */
-            E set(int index, const E &element) {
+            E set(long int index, const E &element) {
                 if (index < 0 || index >= this->original.size()) {
                     throw IllegalArgumentException("index is out of range");
                 }
@@ -690,7 +690,7 @@ namespace Java {
              * @param element
              * @param index
              */
-            void setElementAt(const E &element, int index) {
+            void setElementAt(const E &element, long int index) {
                 this->set(index, element);
             }
 
@@ -699,7 +699,7 @@ namespace Java {
              *
              * @param newSize
              */
-            void setSize(int newSize) {
+            void setSize(long int newSize) {
                 if (newSize < 0) {
                     throw IllegalArgumentException("new size is negative");
                 }
@@ -714,8 +714,8 @@ namespace Java {
              *
              * @return int
              */
-            int size() const {
-                return (long int) this->original.size();
+            long int size() const {
+                return (int) this->original.size();
             }
 
             /**
@@ -743,7 +743,7 @@ namespace Java {
              * @param toIndex
              * @return List<E>
              */
-            List<E> subList(int fromIndex, int toIndex) const {
+            List<E> subList(long int fromIndex, long int toIndex) const {
                 // TODO
             }
 
@@ -770,14 +770,14 @@ namespace Java {
              * @return Array<E>
              */
             Array<E> toArray(const Array<E> &anArray) const {
-                int arrayLength = anArray.length;
-                int vectorLength = (long int) this->original.size();
+                long int arrayLength = anArray.length;
+                long int vectorLength = (int) this->original.size();
                 if (arrayLength < vectorLength) {
                     return toArray();
                 }
 
                 typename std::vector<E>::iterator vectorIterator;
-                int arrayIndex = 0;
+                long int arrayIndex = 0;
                 for (vectorIterator = this->original.begin();
                      vectorIterator != this->original; vectorIterator++) {
                     anArray[arrayIndex] = *vectorIterator;
@@ -899,7 +899,7 @@ namespace Java {
                 this->clear();
                 this->ensureCapacity(target.size());
                 const E *targetData = target.original.data();
-                register int index;
+                register long int index;
                 for (index = 0; index < target.size(); index++) {
                     this->original.push_back(targetData[index]);
                 }
@@ -915,7 +915,7 @@ namespace Java {
              */
             Vector<E> &operator=(const std::initializer_list<E> &list) {
                 this->clear();
-                this->ensureCapacity((long int) list.size());
+                this->ensureCapacity((int) list.size());
                 typename std::initializer_list<E>::iterator listIterator;
                 for (listIterator = list.begin();
                      listIterator != list.end(); listIterator++) {

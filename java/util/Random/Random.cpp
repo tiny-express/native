@@ -28,17 +28,16 @@
 #include <chrono>
 #include <functional>
 #include "Random.hpp"
-#include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 /**
  * Set seedUniquifierField
  */
-std::atomic_long Random::seedUniquifierField { 8682522807148012L };
+std::atomic_llong Random::seedUniquifierField{8682522807148012L};
 
 /**
  * Set seed offset;
  */
-//long Random::seedOffset = setSeedOffset();
+//long long Random::seedOffset = setSeedOffset();
 
 
 /**
@@ -52,11 +51,11 @@ Random::Random() : Random(seedUniquifier() ^ nanoTime()) {
  *
  * @return long
  */
-long Random::nanoTime() {
-	auto now = std::chrono::system_clock::now();
-	auto duration = now.time_since_epoch();
-	auto nanosecond = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
-	return nanosecond;
+long long Random::nanoTime() {
+    auto now = std::chrono::system_clock::now();
+    auto duration = now.time_since_epoch();
+    auto nanosecond = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
+    return nanosecond;
 }
 
 /**
@@ -64,8 +63,8 @@ long Random::nanoTime() {
  *
  * @param seed
  */
-Random::Random(long seed) {
-	this->seed.store(initialScramble(seed));
+Random::Random(long long seed) {
+    this->seed.store(initialScramble(seed));
 }
 
 /**
@@ -74,8 +73,8 @@ Random::Random(long seed) {
  * @param seed
  * @return
  */
-long Random::initialScramble(long seed) {
-	return ( seed ^ MULTIPLIER ) & MASK;
+long long Random::initialScramble(long long seed) {
+    return (seed ^ MULTIPLIER) & MASK;
 }
 
 /**
@@ -83,25 +82,25 @@ long Random::initialScramble(long seed) {
  *
  * @return
  */
-long Random::seedUniquifier() {
-	long current = 0;
-	long next = 0;
-	do {
-		current = seedUniquifierField.load();
-		next = current * 181783497276652981L;
-	} while (!seedUniquifierField.compare_exchange_strong(current, next));
-	return next;
+long long Random::seedUniquifier() {
+    long long current = 0;
+    long long next = 0;
+    do {
+        current = seedUniquifierField.load();
+        next = current * 181783497276652981L;
+    } while (!seedUniquifierField.compare_exchange_strong(current, next));
+    return next;
 }
 
 /**
- * Reset the seed to a long seed value
+ * Reset the seed to a long long seed value
  *
  * @param seedVal
  */
 /*
-void Random::resetSeed(long seedVal) {
+void Random::resetSeed(long long seedVal) {
     char *base = (char *) this;
-    long *seed = (long *) (base + seedOffset);
+    long long *seed = (long long *) (base + seedOffset);
     *seed = std::atomic_long{seedVal};
 }*/
 
@@ -113,7 +112,7 @@ void Random::resetSeed(long seedVal) {
  * @param other
  */
 Random::Random(const Random &other) {
-	this->seed.store(other.seed.load());
+    this->seed.store(other.seed.load());
 }
 
 /**
@@ -122,14 +121,14 @@ Random::Random(const Random &other) {
  * @param bits
  * @return the next pseudorandom value from this random number generator's sequence
  */
-long int Random::next(int bits) {
-	long oldSeed = 0;
-	long nextSeed = 0;
-	do {
-		oldSeed = seed.load();
-		nextSeed = (( oldSeed * MULTIPLIER + ADDEND ) & MASK );
-	} while (!seed.compare_exchange_weak(oldSeed, nextSeed));
-	return (long int) ( nextSeed >> ( 48 - bits ));
+long int Random::next(long int bits) {
+    long long oldSeed = 0;
+    long long nextSeed = 0;
+    do {
+        oldSeed = seed.load();
+        nextSeed = ((oldSeed * MULTIPLIER + ADDEND) & MASK);
+    } while (!seed.compare_exchange_weak(oldSeed, nextSeed));
+    return (int) (nextSeed >> (48 - bits));
 }
 
 /**
@@ -139,42 +138,42 @@ long int Random::next(int bits) {
  * @return true if next(1) return a pseudorandom != 0, false otherwise
  */
 boolean Random::nextBoolean() {
-	return next(1) != 0;
+    return next(1) != 0;
 }
 
 /**
  * Returns the next pseudorandom,
- * uniformly distributed int value from this random number generator's sequence
+ * uniformly distributed long int value from this random number generator's sequence
  *
  * @return int
  */
 long int Random::nextInt() {
-	return next(32);
+    return next(32);
 }
 
 /**
- * Returns a pseudorandom, uniformly distributed int value between 0 (inclusive)
+ * Returns a pseudorandom, uniformly distributed long int value between 0 (inclusive)
  * and the specified value (exclusive), drawn from this random number generator's sequence.
  *
  * @param bound
  * @return int
  * @throw IllegalArgumentException("bound must be positive");
  */
-long int Random::nextInt(int bound) {
-	if (bound <= 0) {
-		throw InterruptedException(BADBOUND);
-	}
-	
-	if (( bound & ( bound - 1 )) == 0) {
-		return (long int) (( bound * (long) next(31)) >> 31 );
-	}
-	
-	long int bits, value;
-	do {
-		bits = next(31);
-		value = bits % bound;
-	} while (bits - value + ( bound - 1 ) < 0);
-	return value;
+long int Random::nextInt(long int bound) {
+    if (bound <= 0) {
+        throw InterruptedException(BADBOUND);
+    }
+
+    if ((bound & (bound - 1)) == 0) {
+        return (int) ((bound * (long) next(31)) >> 31);
+    }
+
+    long int bits, value;
+    do {
+        bits = next(31);
+        value = bits % bound;
+    } while (bits - value + (bound - 1) < 0);
+    return value;
 }
 
 /**
@@ -184,14 +183,14 @@ long int Random::nextInt(int bound) {
  * @param bytes
  */
 void Random::nextBytes(Array<byte> *bytes) {
-	long int len = bytes->length;
-	long int index = 0;
-	for (index; index < len; index++) {
-	long int randomNumber = nextInt();
-		//TODO change to BYTE::SIZE
-		randomNumber >>= 8;
-		bytes->push((byte) randomNumber);
-	}
+    long int len = bytes->length;
+    long int index = 0;
+    for (index; index < len; index++) {
+        long int randomNumber = nextInt();
+        //TODO change to BYTE::SIZE
+        randomNumber >>= 8;
+        bytes->push((byte) randomNumber);
+    }
 }
 
 /**
@@ -201,16 +200,16 @@ void Random::nextBytes(Array<byte> *bytes) {
  * @return double
  */
 double Random::nextDouble() {
-	return (((long) ( next(26)) << 27 ) + next(27)) * DOUBLE_UNIT;
+    return (((long) (next(26)) << 27) + next(27)) * DOUBLE_UNIT;
 }
 
 /**
- * Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence.
+ * Returns the next pseudorandom, uniformly distributed long long value from this random number generator's sequence.
  *
  * @return long
  */
-long Random::nextLong() {
-	return ((long) ( next(32)) << 32 ) + next(32);
+long long Random::nextLong() {
+    return ((long) (next(32)) << 32) + next(32);
 }
 
 /**
@@ -220,7 +219,7 @@ long Random::nextLong() {
  * @return float
  */
 float Random::nextFloat() {
-	return next(24) / ((float) ( 1 << 24 ));
+    return next(24) / ((float) (1 << 24));
 }
 
 /**
@@ -230,31 +229,31 @@ float Random::nextFloat() {
  * @return double
  */
 double Random::nextGaussian() {
-	if (haveNextGaussianNumber) {
-		haveNextGaussianNumber = false;
-		return nextGaussianNumber;
-	} else {
-		double value1, value2, squareSum;
-		do {
-			value1 = 2 * nextDouble() - 1; // between -1 and 1
-			value2 = 2 * nextDouble() - 1; // between -1 and 1
-			squareSum = value1 * value1 + value2 * value2;
-		} while (squareSum >= 1 || squareSum == 0);
-		double multiplier = sqrt(-2 * log(squareSum) / squareSum);
-		nextGaussianNumber = value2 * multiplier;
-		haveNextGaussianNumber = true;
-		return value1 * multiplier;
-	}
+    if (haveNextGaussianNumber) {
+        haveNextGaussianNumber = false;
+        return nextGaussianNumber;
+    } else {
+        double value1, value2, squareSum;
+        do {
+            value1 = 2 * nextDouble() - 1; // between -1 and 1
+            value2 = 2 * nextDouble() - 1; // between -1 and 1
+            squareSum = value1 * value1 + value2 * value2;
+        } while (squareSum >= 1 || squareSum == 0);
+        double multiplier = sqrt(-2 * log(squareSum) / squareSum);
+        nextGaussianNumber = value2 * multiplier;
+        haveNextGaussianNumber = true;
+        return value1 * multiplier;
+    }
 }
 
 /**
- * Sets the seed of this random number generator using a single long seed.
+ * Sets the seed of this random number generator using a single long long seed.
  *
  * @param seed
  */
-void Random::setSeed(long seed) {
-	this->seed.store(initialScramble(seed));
-	haveNextGaussianNumber = false;
+void Random::setSeed(long long seed) {
+    this->seed.store(initialScramble(seed));
+    haveNextGaussianNumber = false;
 }
 
 /**
@@ -262,15 +261,15 @@ void Random::setSeed(long seed) {
  *
  * @return
  */
-String Random::nextString(int length) {
-	char charArray[length];
-	long int charListLength = 62;
-	long int index;
-	for (index = 0; index < length; ++index) {
-		charArray[ index ] = CHAR_LIST[ nextInt(charListLength) ];
-	}
-	charArray[ length ] = 0;
-	String result = &charArray[ 0 ];
-	return result;
+String Random::nextString(long int length) {
+    char charArray[length];
+    long int charListLength = 62;
+    long int index;
+    for (index = 0; index < length; ++index) {
+        charArray[index] = CHAR_LIST[nextInt(charListLength)];
+    }
+    charArray[length] = 0;
+    String result = &charArray[0];
+    return result;
 }
 

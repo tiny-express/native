@@ -66,13 +66,13 @@ TEST (JavaUtilArrayList, Size) {
     // Give an empty ArrayList
     // then compare size of this list - Should equal
     ArrayList<Integer> emptyArray;
-    int expect = 0;
-    int result = emptyArray.size();
+    long int expect = 0;
+    long int result = emptyArray.size();
     assertEquals(expect, result);
 
     // Give an valid ArrayList
     // then compare size of this list - Should equal
-    int size = 10;
+    long int size = 10;
     ArrayList<Integer> validArray(size);
     expect = size;
     result = validArray.size();
@@ -84,8 +84,8 @@ TEST (JavaUtilArrayList, Add) {
     // then add one element - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3};
     validArrayList.add(4);
-    int sizeExpect = 4;
-    int sizeResult = validArrayList.size();
+    long int sizeExpect = 4;
+    long int sizeResult = validArrayList.size();
     assertEquals(sizeExpect, sizeResult);
 
     // Compare validArrayList toString
@@ -132,8 +132,8 @@ TEST (JavaUtilArrayList, Clear) {
 
     // Clear validArrayList - Should equal
     validArrayList.clear();
-    int sizeExpect = 0;
-    int sizeResult = validArrayList.size();
+    long int sizeExpect = 0;
+    long int sizeResult = validArrayList.size();
     assertEquals(sizeExpect, sizeResult);
 
     stringExpect = (string) "[]";
@@ -148,8 +148,8 @@ TEST (JavaUtilArrayList, Clone) {
 
     auto stringExpect = (string) R"(["food", "tiny"])";
     assertEquals(stringExpect, cloneArrayList.toString());
-    int sizeExpect = 2;
-    int sizeResult = cloneArrayList.size();
+    long int sizeExpect = 2;
+    long int sizeResult = cloneArrayList.size();
     assertEquals(sizeExpect, sizeResult);
 }
 
@@ -157,7 +157,7 @@ TEST (JavaUtilArrayList, ForEach) {
     ArrayList<Integer> expected;
     ArrayList<Integer> actual;
 
-    int index = 1;
+    long int index = 1;
     for (index; index <= 100; ++index) {
         expected.add(index);
     }
@@ -173,8 +173,8 @@ TEST (JavaUtilArrayList, ForEach) {
 TEST (JavaUtilArrayList, Get) {
     // Give a valid ArrayList and get value some index
     ArrayList<Integer> validArrayList = {1, 2, 3};
-    int expect = 1;
-    int result = validArrayList.get(0).intValue();
+    long int expect = 1;
+    long int result = validArrayList.get(0).intValue();
     assertEquals(expect, result);
 
     try {
@@ -198,8 +198,8 @@ TEST (JavaUtilArrayList, IndexOf) {
     // Give a valid ArrayList
     // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3};
-    int expect = 2;
-    int result = validArrayList.indexOf(3);
+    long int expect = 2;
+    long int result = validArrayList.indexOf(3);
     assertEquals(expect, result);
 
     expect = -1;
@@ -211,8 +211,8 @@ TEST (JavaUtilArrayList, LastIndexOf) {
     // Give a valid ArrayList
     // then test method indexOf - Should equal
     ArrayList<Integer> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
-    int expect = 7;
-    int result = validArrayList.lastIndexOf(3);
+    long int expect = 7;
+    long int result = validArrayList.lastIndexOf(3);
     assertEquals(expect, result);
 
     expect = -1;
@@ -224,8 +224,8 @@ TEST (JavaUtilArrayList, RemoveIndex) {
     // Give a valid ArrayList
     // then test method with index remove - Should equal
     ArrayList<Long> validArrayList = {1, 2, 3, 4, 1, 2, 3, 3, 1, 4};
-    int expect = 3;
-    int result = validArrayList.remove(7).intValue();
+    long int expect = 3;
+    long int result = validArrayList.remove(7).intValue();
     assertEquals(expect, result);
 
     auto stringExpect = (string) "[1, 2, 3, 4, 1, 2, 3, 1, 4]";

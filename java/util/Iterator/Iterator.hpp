@@ -30,15 +30,17 @@
 #include "../../lang/Object/Object.hpp"
 
 namespace Java {
-		namespace Util {
-				template <typename E>
-				class Iterator {
-				public:
-						boolean hasNext();
-						E next();
-						void remove();
-				};
-		}
+    namespace Util {
+        template<typename E>
+        class Iterator {
+        public:
+            boolean hasNext();
+
+            E next();
+
+            void remove();
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_UTIL_ITERATOR_HPP

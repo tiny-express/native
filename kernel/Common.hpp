@@ -55,11 +55,11 @@
          char: CHAR,                     signed char: SIGNED_CHAR,            \
     short int: SHORT_INT,         unsigned short int: UNSIGNED_SHORT_INT,     \
           int: INT,                     unsigned int: UNSIGNED_INT,           \
-     long int: LONG_INT,           unsigned long int: UNSIGNED_LONG_INT,      \
-long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
+     int: LONG_INT,           unsigned int: UNSIGNED_LONG_INT,      \
+int: LONG_LONG_INT, unsigned int: UNSIGNED_LONG_LONG_INT, \
         float: FLOAT,                         double: DOUBLE,                 \
-  long double: LONG_DOUBLE,                   char *: CHAR_POINTER,           \
-       void *: VOID_POINTER,                   int *: INT_POINTER,            \
+  long long double: LONG_DOUBLE,                   char *: CHAR_POINTER,           \
+       void *: VOID_POINTER,                   long int *: INT_POINTER,            \
       default: OTHER)
 
 #include "common/Append.hpp"
