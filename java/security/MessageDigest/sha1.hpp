@@ -38,7 +38,7 @@
 typedef struct {
     unsigned int H[5];
     unsigned int W[80];
-    int lenW;
+    long int lenW;
     unsigned int sizeHi,sizeLo;
 } SHA_CTX;
 

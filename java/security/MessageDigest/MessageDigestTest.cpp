@@ -94,7 +94,7 @@ TEST(JavaSecurity, MD5MultiUpdate) {
     result = new byte[digestLength]();
 
     srand((unsigned long int) GetTickCount());
-    int offset = 0;
+    long long long long long int offset = 0;
     while (offset < input.getSize()) {
         int range = input.getSize() - offset;
         int size = rand() % range;
