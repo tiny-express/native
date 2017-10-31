@@ -445,8 +445,14 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, double doubleValue) {
-    String value = String::valueOf(doubleValue);
-    return this->insert(offset, value.toString(), 0, value.length());
+    string convert;
+    int length = asprintf(&convert, "%f", doubleValue);
+    if (length <= 0)
+        convert = (string) "";
+
+    String value = convert;
+    free(convert);
+    return this->insert(offset, value, 0, value.length());
 }
 
 StringBufferUnSafe &

@@ -406,20 +406,20 @@ TEST (JavaLangStringBuffer, Insert) {
     // TODO(thoangminh): @anhnt please check leak error for this double case
     // double
     double doubleToInsert = 100.0;
-    String expectDoubleInsert = "10100.00000000000000090";
-//    String actual = numberInsertStringBuffer.insert(2, doubleToInsert);
-//    assertEquals(expectDoubleInsert, actual);
+    String expectDoubleInsert = "10100.00000090";
+    String actual = numberInsertStringBuffer.insert(2, doubleToInsert);
+    assertEquals(expectDoubleInsert, actual);
 
-//    // int
-//    int intToInsert = 13;
-//    numberInsertStringBuffer.insert(2, intToInsert);
-//    String expectIntInsert = "1013100.00000000000000090";
-//    assertEquals(expectIntInsert, numberInsertStringBuffer.getValue());
-//
-//    // long
-//    long longToInsert = 900L;
-//    numberInsertStringBuffer.insert(2, longToInsert);
-//    string expectLongInsert = (string)("1090013100.00000000000000090");
+    // int
+    int intToInsert = 13;
+    numberInsertStringBuffer.insert(2, intToInsert);
+    String expectIntInsert = "1013100.00000090";
+    assertEquals(expectIntInsert, numberInsertStringBuffer.getValue());
+
+    // long
+    long longToInsert = 900L;
+    numberInsertStringBuffer.insert(2, longToInsert);
+    string expectLongInsert = (string)("1090013100.00000090");
 //    assertEquals(expectLongInsert, numberInsertStringBuffer.getValue());
 //
 //    // Test boolean

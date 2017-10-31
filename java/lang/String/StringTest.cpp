@@ -152,8 +152,12 @@ TEST (JavaLangString, Equals) {
 	
 	// Compare with another String object - Return they are not equal
 	String stringEqual3 = "Food Tiny";
-	assertTrue(!stringEqual1.equals(stringEqual3));
+	assertFalse(stringEqual1.equals(stringEqual3));
 	assertTrue(stringEqual1 != stringEqual3);
+
+	// Test another object
+	Integer integerObject = 1;
+	assertFalse(stringEqual1.equals(integerObject));
 }
 
 TEST (JavaLangString, CharAt) {
@@ -862,6 +866,14 @@ TEST (JavaLangString, OperatorPlusEqualsString) {
 	assertEquals("Hello 11", stringTest.toString());
 }
 
+TEST (JavaLangString, OperatorBitwiseLeftShift) {
+	std::ostringstream stringStream;
+	String stringObject= "text";
+	stringStream << stringObject;
+
+	assertEquals("text", stringStream.str().c_str());
+}
+
 TEST (JavaLangString, MemoryCheck) {
 	// Test create object String with validString and change data of validString
 	string validString = stringCopy("foodtiny");
@@ -949,14 +961,14 @@ TEST (JavaLangString, Format) {
 		                               stringObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "%% hello %D %S %d world";
 		String format = "%%% hello %D %S %%d world";
 		String result = String::format(format);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "123.46 +1e+02 1.234568E+02";
 		String format = "%4.2f %+.0e %E";
@@ -964,14 +976,14 @@ TEST (JavaLangString, Format) {
 		                               doubleValue);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "Preceding with zeros: 0000000123";
 		String format = "Preceding with zeros: %010d";
 		String result = String::format(format, longValue);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "1 123 123456 123";
 		String format = "%u %u %u %d";
@@ -979,7 +991,7 @@ TEST (JavaLangString, Format) {
 		                               ulongValue, shortObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		integerObject = 65;
 		String expect = "Characters: a A";
@@ -987,7 +999,7 @@ TEST (JavaLangString, Format) {
 		String result = String::format(format, 'a', integerObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String format = "%d %d";
 		try {
@@ -996,7 +1008,7 @@ TEST (JavaLangString, Format) {
 			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
-	
+
 	{
 		String format = "%%% d";
 		try {
@@ -1005,7 +1017,7 @@ TEST (JavaLangString, Format) {
 			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
-	
+
 	{
 		auto key = (string) "Nhà hàng";
 		double latitude = 10.824093;
@@ -1013,11 +1025,11 @@ TEST (JavaLangString, Format) {
 		string url = urlDecode(key);
 		auto queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
 		String body = String::format(queryFormat, url, latitude, longitude);
-		
+
 		String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
 			"%s\r\n\r\n"
 			"%s";
-		
+
 		String result = String::format(REQUEST_TEMPLATE,
 		                               "POST",
 		                               "CASSANDRA",
@@ -1025,7 +1037,7 @@ TEST (JavaLangString, Format) {
 		                               "http1.1",
 		                               "HEADER:HEADER",
 		                               body);
-		
+
 		string expected;
 		int length = asprintf(&expected,
 		                      REQUEST_TEMPLATE.toCharPointer(),
@@ -1035,18 +1047,18 @@ TEST (JavaLangString, Format) {
 		                      "http1.1",
 		                      "HEADER:HEADER",
 		                      body.toCharPointer());
-		
+
 		assertTrue(length > 0);
 		assertEquals(expected, result.toString());
 		free(expected);
 		free(url);
 	}
-	
+
 	{
 		string expected;
 		String result;
 		unsigned long ul = timestamp();
-		
+
 		int length = asprintf(&expected, "%lu", ul);
 		assertTrue(length > 0);
 		result = String::format("%lu", ul);
