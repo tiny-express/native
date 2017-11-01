@@ -287,7 +287,8 @@ void assertArrayAllType(Type *expected,
     for (index = 0; index < expectedSize; index++) {
         if (expected[index] != actual[index]) {
             CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
-                      file, line, expected[index], (uintmax_t) index, actual[index]);
+                      file, line, expected[index], (uintmax_t) index,
+                      actual[index]);
         }
     }
 }
@@ -661,36 +662,6 @@ void assertIntervalInt(intmax_t expectedFirst,
     CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
                 file, line, expectedFirst, expectedSecond, actual);
     }
-}
-
-void assert_dbl_far(double expected, double actual, long int precision, const_string caller, long int line) {
-    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
-    string expectedString = (string) calloc(1079, sizeof(char));
-    string actualString = (string) calloc(1079, sizeof(char));
-
-    // Get string type of input number
-    if(expected == 0.0f && expected < 0) {
-        sprintf(expectedString, "-%.*f", precision, expected);
-    } else {
-        sprintf(expectedString, "%.*f", precision, expected);
-    }
-
-    if(actual == -0.0f && actual < 0) {
-        sprintf(actualString, "-%.*f", precision, actual);
-    } else {
-        sprintf(actualString, "%.*f", precision, actual);
-    }
-
-    // Compare with string type
-    if ((expectedString == nullptr && actualString != nullptr) ||
-    (expectedString != nullptr && actualString == nullptr) ||
-    (expectedString && actualString && strcmp(expectedString, actualString) == 0)) {
-    CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n", caller, line, expectedString, actualString);
-    }
-
-    // Free
-    free(expectedString);
-    free(actualString);
 }
 
 void assertEqualsString(String expected,
@@ -1078,43 +1049,52 @@ long int ctest_main(long int argc, const char *argv[])
 
     struct CTEST* ctest_begin = &__TNAME(suite, test);
     struct CTEST* ctest_end = &__TNAME(suite, test);
+
     // find begin and end of section by comparing magics
     while (1) {
-    struct CTEST* t = ctest_begin-1;
-    if (t->magic != __CTEST_MAGIC) break;
-    ctest_begin--;
-    }
-    while (1) {
-    struct CTEST* t = ctest_end+1;
-    if (t->magic != __CTEST_MAGIC) break;
-    ctest_end++;
-    }
-    ctest_end++;    // end after last one
+        struct CTEST* t = ctest_begin-1;
 
-    static struct CTEST* test;
+        if (t->magic != __CTEST_MAGIC) break;
+            ctest_begin--;
+        }
+
+        while (1) {
+            struct CTEST* t = ctest_end+1;
+            if (t->magic != __CTEST_MAGIC) break;
+            ctest_end++;
+        }
+        ctest_end++;    // end after last one
+
+        static struct CTEST* test;
     for (test = ctest_begin; test != ctest_end; test++) {
-    if (test == &__TNAME(suite, test)) continue;
-    if (filter(test)) total++;
+        if (test == &__TNAME(suite, test)) continue;
+        if (filter(test)) total++;
     }
 
     for (test = ctest_begin; test != ctest_end; test++) {
+
     if (test == &__TNAME(suite, test)) continue;
+
     if (filter(test)) {
         ctest_errorbuffer[0] = 0;
         ctest_errorsize = MSG_SIZE-1;
         ctest_errormsg = ctest_errorbuffer;
+
         printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
         fflush(stdout);
+
         if (test->skip) {
-        color_print(ANSI_BYELLOW, "[SKIPPED]");
-        num_skip++;
+            color_print(ANSI_BYELLOW, "[SKIPPED]");
+            num_skip++;
         } else {
-        long int result = setjmp(ctest_err);
+            long int result = setjmp(ctest_err);
+
         if (result == 0) {
 #ifdef __APPLE__
             if (!test->setup) {
-            test->setup = (SetupFunc) find_symbol(test, "setup");
+                test->setup = (SetupFunc) find_symbol(test, "setup");
             }
+
             if (!test->teardown) {
             test->teardown = (TearDownFunc) find_symbol(test, "teardown");
             }
@@ -1137,17 +1117,21 @@ long int ctest_main(long int argc, const char *argv[])
             color_print(ANSI_BRED, "[FAIL]");
             num_fail++;
         }
+
         if (ctest_errorsize != MSG_SIZE-1) printf("%s", ctest_errorbuffer);
         }
+
         index++;
     }
-    }
+}
     uint64_t t2 = getCurrentTime();
 
     const_string color = (num_fail) ? ANSI_BRED : ANSI_GREEN;
     char results[80];
+
     sprintf(results, "RESULTS: %d tests (%d ok, %d failed, %d skipped) ran in %" PRIu64 " ms", total, num_ok, num_fail, num_skip, (t2 - t1)/1000);
     color_print(color, results);
+
     return num_fail;
 }
 

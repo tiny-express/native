@@ -152,6 +152,19 @@ inline long long stringToLong(string target) {
     return atol(target);
 }
 
+///**
+// * String to float
+// *
+// * @param target
+// * @return string
+// */
+//inline float stringToFloat(string target) {
+//    if (target == nullptr) {
+//        return 0;
+//    }
+//    return (float) atof(target);
+//}
+
 /**
  * String to boolean
  *
@@ -190,7 +203,8 @@ inline string stringFromBoolean(long int target) {
 }
 
 inline string stringFromDouble(double target) {
-    return (string) std::to_string(target).c_str();
+    string result = (string) std::to_string(target).c_str();
+    return result;
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP

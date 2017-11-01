@@ -445,17 +445,11 @@ String String::valueOf(long long longValue) {
 }
 
 String String::valueOf(float floatValue) {
-    string pointerHolder = stringFromFloat(floatValue);
-    String result = pointerHolder;
-    free(pointerHolder);
-    return result;
+    return stringFromFloat(floatValue);
 }
 
 String String::valueOf(double doubleValue) {
-    string pointerHolder = stringFromDouble(doubleValue);
-    String result = pointerHolder;
-    free(pointerHolder);
-    return result;
+    return stringFromDouble(doubleValue);
 }
 
 String String::subString(long int beginIndex) const {

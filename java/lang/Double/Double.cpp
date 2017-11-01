@@ -65,7 +65,6 @@ String Double::toString() const {
 char Double::charValue() const {
     string convertResult = stringFromDouble(this->original);
     char charValueResult = stringToChar(convertResult);
-    free(convertResult);
     return charValueResult;
 }
 
@@ -147,7 +146,6 @@ boolean Double::operator||(const Double &target) const {
 
 Double &Double::operator=(const Double &target) {
     this->original = target.original;
-    free(this->originalString);
     this->originalString = stringFromDouble(target.original);
     return *this;
 }

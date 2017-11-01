@@ -176,22 +176,20 @@ TEST (KernelStringConvert, StringFromDouble) {
 	double input = 125.569123;
 	
 	// The expected result
-	auto expect = (string) "125.569123";
+	auto expect = (string) "125.5691";
 	
 	// The real result
 	char *result = stringFromDouble(input);
 	
 	// Make a comparison between the expected result and the real result
 	assertEquals(expect, result);
-	free(result);
 
 	// Input a negative value of type double to convert from double to string
 	// Than make a comparison between the expected result and the real result
 	double input1 = -125.56123;
-	auto expect1 = (string) "-125.561229999999995";
+	auto expect1 = (string) "-125.561230";
 	char *result1 = stringFromDouble(input1);
 	assertEquals(expect1, result1);
-	free(result1);
 }
 
 TEST (KernelStringConvert, StringToShort) {
@@ -296,10 +294,10 @@ TEST (KernelStringConvert, StringToFloat) {
 	
 	// The result
 	float result = stringToFloat(input);
-	
+
 	// Than make a comparison between the result and the right answer
 	assertEquals(12.56, result);
-	
+
 	// Input a string representing a negative value of type float to convert from string to float
 	// Than make a comparison between the result and the right answer
 	auto input1 = (string) "-1.56799";
