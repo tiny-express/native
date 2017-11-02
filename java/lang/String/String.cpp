@@ -105,9 +105,9 @@ long int String::getSize() const {
 }
 
 String String::clone() {
-    string pointerHolder = stringCopy(this->original);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringCopy(this->original);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
@@ -174,9 +174,9 @@ String String::fromCharArray(Array<char> &charArray) {
 }
 
 long int String::indexOf(long int character) const {
-    string pointerHolder = stringFromChar((char) character);
-    long int result = stringIndex(this->original, pointerHolder, 1);
-    free(pointerHolder);
+    string resultHolder = stringFromChar((char) character);
+    long int result = stringIndex(this->original, resultHolder, 1);
+    free(resultHolder);
     return result;
 }
 
@@ -299,9 +299,9 @@ long int String::lastIndexOf(String subString, long int fromIndex) const {
 String String::replace(char oldChar, char newChar) const {
     string oldString = stringFromChar(oldChar);
     string newString = stringFromChar(newChar);
-    string pointerHolder = stringReplace(this->original, oldString, newString);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringReplace(this->original, oldString, newString);
+    String result = resultHolder;
+    free(resultHolder);
     free(oldString);
     free(newString);
     return result;
@@ -382,23 +382,23 @@ String String::toString() const {
 }
 
 String String::toLowerCase() const {
-    string holdPointer = stringLower(this->original);
-    String result = holdPointer;
-    free(holdPointer);
+    string resultHolder = stringLower(this->original);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
 String String::toUpperCase() {
-    string holdPointer = stringUpper(this->original);
-    String result = holdPointer;
-    free(holdPointer);
+    string resultHolder = stringUpper(this->original);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
 String String::trim() {
-    string holdPointer = stringTrim(this->original);
-    String result = holdPointer;
-    free(holdPointer);
+    string resultHolder = stringTrim(this->original);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
@@ -410,9 +410,9 @@ String String::valueOf(boolean target) {
 }
 
 String String::valueOf(char charValue) {
-    string pointerHolder = stringFromChar(charValue);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringFromChar(charValue);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
@@ -424,32 +424,39 @@ String String::valueOf(string stringValue) {
 }
 
 String String::valueOf(int shortValue) {
-    string pointerHolder = stringFromShort(shortValue);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringFromShort(shortValue);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
 String String::valueOf(long int intValue) {
-    string pointerHolder = stringFromInt(intValue);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringFromInt(intValue);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
 String String::valueOf(long long longValue) {
-    string pointerHolder = stringFromLong(longValue);
-    String result = pointerHolder;
-    free(pointerHolder);
+    string resultHolder = stringFromLong(longValue);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 
 String String::valueOf(float floatValue) {
-    return stringFromFloat(floatValue);
+    string resultHolder = stringFromFloat(floatValue);
+    String result = resultHolder;
+    free(resultHolder);
+    return result;
 }
 
 String String::valueOf(double doubleValue) {
-    return stringFromDouble(doubleValue);
+    string resultHolder = stringFromDouble(doubleValue);
+    // Copy to result and free result holder
+    String result = resultHolder;
+    free(resultHolder);
+    return result;
 }
 
 String String::subString(long int beginIndex) const {
@@ -549,13 +556,13 @@ void String::getChars(long int sourceBegin, long int sourceEnd,
 }
 
 String String::replace(CharSequence &target, CharSequence &replacement) const {
-    string pointerHolder = stringReplace(
+    string resultHolder = stringReplace(
             this->original,
             target.toString().toCharPointer(),
             replacement.toString().toCharPointer()
     );
-    String result = pointerHolder;
-    free(pointerHolder);
+    String result = resultHolder;
+    free(resultHolder);
     return result;
 }
 

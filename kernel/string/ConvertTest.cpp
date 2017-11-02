@@ -176,20 +176,18 @@ TEST (KernelStringConvert, StringFromDouble) {
 	double input = 125.569123;
 	
 	// The expected result
-	auto expect = (string) "125.5691";
-	
-	// The real result
-	char *result = stringFromDouble(input);
-	
-	// Make a comparison between the expected result and the real result
+	auto expect = (string) "125.569123";
+	string result = stringFromDouble(input);
 	assertEquals(expect, result);
+	free(result);
 
 	// Input a negative value of type double to convert from double to string
 	// Than make a comparison between the expected result and the real result
 	double input1 = -125.56123;
 	auto expect1 = (string) "-125.561230";
-	char *result1 = stringFromDouble(input1);
+	string result1 = stringFromDouble(input1);
 	assertEquals(expect1, result1);
+	free(result1);
 }
 
 TEST (KernelStringConvert, StringToShort) {
@@ -308,12 +306,8 @@ TEST (KernelStringConvert, StringToFloat) {
 TEST (KernelStringConvert, StringToDouble) {
 	// Input a string representing a positive value of type double to convert from string to double
 	auto input = (string) "125.569123";
-	
-	// The result
-	double result = stringToDouble(input);
-	
 	// Than make a comparison between the result and the right answer
-	assertEquals(125.569123, result);
+	assertEquals(125.569123, stringToDouble(input));
 	
 	// Input a string representing a negative value of type double to convert from string to double
 	// Than make a comparison between the result and the right answer
@@ -324,12 +318,8 @@ TEST (KernelStringConvert, StringToDouble) {
 
 TEST (KernelStringConvert, StringToBoolean) {
 	// Input a string representing 1 to convert from string to boolean
-	char *target0 = (string) "1";
-	
-	// The result
+	auto target0 = (string) "1";
 	long int boolean0 = stringToBoolean(target0);
-	
-	// Check if the result is TRUE or not
 	assertTrue(boolean0);
 	
 	// Input a string representing "TRUE" to convert from string to boolean

@@ -91,11 +91,14 @@ inline TYPE stringTo##NAME(string target) {\
     return result;\
 }
 
+inline double stringToDouble(string target) {
+    return atof(target);
+}
+
 STR_FROM(Short, int, "%d");
 STR_FROM(Float, float, "%g");
 STR_TO(Short, short, "%hi");
 STR_TO(Float, float, "%g");
-STR_TO(Double, double, "%lg");
 
 /**
  * String from char
@@ -203,7 +206,7 @@ inline string stringFromBoolean(long int target) {
 }
 
 inline string stringFromDouble(double target) {
-    string result = (string) std::to_string(target).c_str();
+    string result = stringCopy(std::to_string(target).c_str());
     return result;
 }
 
