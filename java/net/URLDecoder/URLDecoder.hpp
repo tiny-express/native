@@ -24,10 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_NET_URL_ENCODER_HPP
-#define JAVA_NET_URL_ENCODER_HPP
+#ifndef NATIVE_JAVA_NET_URL_ENCODER_HPP
+#define NATIVE_JAVA_NET_URL_ENCODER_HPP
 
-#include "../../../kernel/String.hpp"
+#include "../../lang/Object/Object.hpp"
 #include "../../lang/String/String.hpp"
 
 using namespace Java::Lang;
@@ -64,4 +64,4 @@ namespace Java {
     }  // namespace Net
 }  // namespace Java
 
-#endif  // JAVA_NET_URL_ENCODER_HPP
+#endif // NATIVE_JAVA_NET_URL_ENCODER_HPP

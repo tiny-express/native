@@ -29,30 +29,30 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, NoSuchElementExceptionConstructor) {
+TEST (NoSuchElementException, Constructor) {
 	// Constructs a new NoSuchElementException with null as its detail message.
 	NoSuchElementException NoSuchElementExceptionWithNullMessage;
-	assertEquals("", NoSuchElementExceptionWithNullMessage.getMessage().toString());
+	assertEquals("", NoSuchElementExceptionWithNullMessage.getMessage());
 	
 	// Constructs a new NoSuchElementException with the specified detail message.
 	NoSuchElementException NoSuchElementExceptionWithMessage = NoSuchElementException("NoSuchElementException with the specified message");
-	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessage.getMessage().toString());
+	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessage.getMessage());
 	
 	// Constructs a new NoSuchElementException with the specified detail message and cause.
 	NoSuchElementException NoSuchElementExceptionWithMessageAndCause = NoSuchElementException("NoSuchElementException with the specified message and cause", &NoSuchElementExceptionWithMessage);
-	assertEquals("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithMessageAndCause.getMessage().toString());
-	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithMessageAndCause.getMessage());
+	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithMessageAndCause.getCause()->getMessage());
 	
 	// Constructs a new NoSuchElementException with the specified cause.
 	NoSuchElementException NoSuchElementExceptionWithCause = NoSuchElementException(&NoSuchElementExceptionWithMessageAndCause);
-	assertEquals("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithCause.getCause()->getMessage().toString());
-	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("NoSuchElementException with the specified message and cause", NoSuchElementExceptionWithCause.getCause()->getMessage());
+	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
-TEST (JavaLang, NoSuchElementExceptionTryCatch) {
+TEST (NoSuchElementException, TryCatch) {
 	try {
 		throw NoSuchElementException("Throw NoSuchElementException");
-	} catch (NoSuchElementException exception) {
-		assertEquals("Throw NoSuchElementException", exception.getMessage().toString());
+	} catch (NoSuchElementException &exception) {
+		assertEquals("Throw NoSuchElementException", exception.getMessage());
 	}
 }

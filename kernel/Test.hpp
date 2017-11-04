@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef NATIVE_KERNEL_TEST_H
-#define NATIVE_KERNEL_TEST_H
+#ifndef NATIVE_KERNEL_TEST_HPP
+#define NATIVE_KERNEL_TEST_HPP
 
 #include "Type.hpp"
 #include "../java/lang/String/String.hpp"
@@ -249,9 +249,9 @@ void assertArrayAllType(ArrayList<Type> &expected,
             CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
                       file,
                       line,
-                      expectedString.toString(),
+                      expectedString.toCharPointer(),
                       (uintmax_t) index,
-                      actualString.toString());
+                      actualString.toCharPointer());
         }
     }
 }
@@ -699,7 +699,7 @@ void assertEqualsString(String expected,
                         int line) {
     if (expected != actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
@@ -766,7 +766,7 @@ void assertNotEqualsString(String expected,
                         int line) {
     if (expected == actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
@@ -1169,6 +1169,6 @@ int ctest_main(int argc, const char *argv[])
 
 #endif
 
-#endif//NATIVE_KERNEL_TEST_H
-
 #define TEST CTEST
+
+#endif//NATIVE_KERNEL_TEST_HPP

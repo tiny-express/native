@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_LIBRARY_HPP_
-#define NATIVE_LIBRARY_HPP_
+#ifndef NATIVE_LIBRARY_HPP
+#define NATIVE_LIBRARY_HPP
 
 // Java Core Packages
 #include "java/Io.hpp"
@@ -43,7 +43,4 @@
 // Java::Lang is imported by default
 using namespace Java::Lang;
 
-// Application starting point
-int Application(void (*program)(Array<String>), char **argument);
-
-#endif//NATIVE_LIBRARY_HPP_
+#endif//NATIVE_LIBRARY_HPP

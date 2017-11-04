@@ -24,10 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_ARRAYS_ARRAYS_HPP
-#define JAVA_UTIL_ARRAYS_ARRAYS_HPP
+#ifndef NATIVE_JAVA_UTIL_ARRAYS_ARRAYS_HPP
+#define NATIVE_JAVA_UTIL_ARRAYS_ARRAYS_HPP
 
-#include <stack>
 #include "../../Lang.hpp"
 #include "../List/List.hpp"
 #include "../ArrayList/ArrayList.hpp"
@@ -654,4 +653,4 @@ namespace Java {
     }
 }
 
-#endif //JAVA_UTIL_ARRAYS_ARRAYS_HPP
+#endif // NATIVE_JAVA_UTIL_ARRAYS_ARRAYS_HPP

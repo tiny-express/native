@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_RUNTIME_RUNTIME_HPP
-#define JAVA_LANG_RUNTIME_RUNTIME_HPP
+#ifndef NATIVE_JAVA_LANG_RUNTIME_RUNTIME_HPP
+#define NATIVE_JAVA_LANG_RUNTIME_RUNTIME_HPP
 
 #include "../Object/Object.hpp"
 #include "../Process/Process.hpp"
@@ -39,9 +39,9 @@ namespace Java {
 						void exit(int status);
 						long freeMemory();
 						void gc();
-						string toString() const;
+						String toString() const;
 				};
 		}
 }
 
-#endif  // JAVA_LANG_RUNTIME_RUNTIME_HPP
+#endif // NATIVE_JAVA_LANG_RUNTIME_RUNTIME_HPP

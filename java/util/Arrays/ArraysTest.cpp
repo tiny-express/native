@@ -33,7 +33,7 @@ using namespace Java::Util;
  *  Those test case below assume that :
  *  The array must be sorted into ascending order according to the natural ordering of its elements
  * */
-TEST (JavaUtil, ArraysBinarySearch) {
+TEST (JavaUtilArrays, BinarySearch) {
 	/// Given valid byte[] to test binary search - this test case wrapped <long>, <int>, <short> also
 	byte arrayByte[5] = { 1, 2, 3, 4, 5 };
 	
@@ -88,7 +88,7 @@ TEST (JavaUtil, ArraysBinarySearch) {
 	
 }
 
-TEST (JavaUtil, ArraysSort) {
+TEST (JavaUtilArrays, Sort) {
 	/// Given valid arrayLong[] to test Arrays::sort() with arrayLongSorted[] - this test case wrapped <byte>, <int>, <short>
 	long arrayLong[5] = { 5, 2, 4, 1, 7 };
 	long arrayLongSorted[5] = { 1, 2, 4, 5, 7 };
@@ -120,7 +120,7 @@ TEST (JavaUtil, ArraysSort) {
 	}
 }
 
-TEST (JavaUtil, ArraysCopyOf) {
+TEST (JavaUtilArrays, CopyOf) {
 	/// Give valid array boolean and arrayLength to test copyOf with equal length
 	Array<boolean> arrayBoolean = { false, false, false, false, true };
 	
@@ -147,7 +147,7 @@ TEST (JavaUtil, ArraysCopyOf) {
 	}
 }
 
-TEST (JavaUtil, ArraysEquals) {
+TEST (JavaUtilArrays, Equals) {
 	/// Give valid array boolean to test equals
 	Array<boolean> arrayBoolean = { false, false, false, false, true };
 	Array<boolean> arrayCompareBoolean = { false, false, false, false, true };
@@ -161,7 +161,7 @@ TEST (JavaUtil, ArraysEquals) {
 	assertTrue(Arrays::equals(arrayLong, arrayCompareLong));
 }
 
-TEST (JavaUtil, ArraysFill) {
+TEST (JavaUtilArrays, Fill) {
 	/// Given valid array char to test fill
 	Array<char> arrayChar = { 'w', 'b', 'a', 'z', 'p' };
 	char filledCharVal = 't';
@@ -184,6 +184,6 @@ TEST (JavaUtil, ArraysFill) {
 /**
  * Those hashCode() functions inside header is based on source code of native java
  * */
-TEST (JavaUtil, ArraysHashCode) {
+TEST (JavaUtilArrays, HashCode) {
 	//TODO: Add more test case
 }

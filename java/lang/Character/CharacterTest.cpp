@@ -29,7 +29,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, CharacterConstructor) {
+TEST (JavaLangCharacter, Constructor) {
 	// Create variable to test CharacterConstructor.
 	Character variableTestConstructor;
 	
@@ -45,7 +45,7 @@ TEST (JavaLang, CharacterConstructor) {
 	assertFalse(variableTestConstructor.charValue() == 'm');
 }
 
-TEST (JavaLang, CharacterCharCount) {
+TEST (JavaLangCharacter, CharCount) {
 	// Create variable to test Character::charCount(int codePoint).
 	Character variableTestCharCount;
 	int expectedResultCharCount;
@@ -72,7 +72,7 @@ TEST (JavaLang, CharacterCharCount) {
 	assertEquals(expectedResultCharCount, actualResultCharCount);
 }
 
-TEST (JavaLang, CharacterCharValue) {
+TEST (JavaLangCharacter, CharValue) {
 	// Create variable to test Character::charValue().
 	Character variableTestCharValue;
 	
@@ -88,7 +88,7 @@ TEST (JavaLang, CharacterCharValue) {
 	assertFalse(variableTestCharValue.charValue() == 'm');
 }
 
-TEST (JavaLang, CharacterCodePointAt) {
+TEST (JavaLangCharacter, CodePointAt) {
 	// Create variable to test
 	Array<char> arrayCodePointAt;
 	int index;
@@ -112,7 +112,7 @@ TEST (JavaLang, CharacterCodePointAt) {
 	assertNotEquals(expectedResultCodePointAt, actualResultCodePointAt);
 }
 
-TEST (JavaLang, CharacterCodePointAt2) {
+TEST (JavaLangCharacter, CodePointAt2) {
 	// Create variable to test
 	Array<char> arrayCodePointAt2;
 	int indexCodePointAt2;
@@ -168,7 +168,7 @@ TEST (JavaLang, CharacterCodePointAt2) {
 	assertEquals(expectedResultCodePointAt2, actualResultCodePointAt2);
 }
 
-TEST (JavaLang, CharacterCodePointBefore) {
+TEST (JavaLangCharacter, CodePointBefore) {
 	// Create variable to test
 	Array<char> arrayCodePointBefore;
 	int indexCodePointBefore;
@@ -191,7 +191,7 @@ TEST (JavaLang, CharacterCodePointBefore) {
 	assertNotEquals(expectedResultCodePointBefore, actualResultCodePointBefore);
 }
 
-TEST (JavaLang, CharacterCodePointBefore2) {
+TEST (JavaLangCharacter, CodePointBefore2) {
 	// Create variable to test
 	Array<char> arrayCodePointBefore2;
 	int indexCodePointBefore2;
@@ -247,7 +247,7 @@ TEST (JavaLang, CharacterCodePointBefore2) {
 	assertEquals(expectedResultCodePointBefore2, actualResultCodePointBefore2);
 }
 
-TEST (JavaLang, CharacterCodePointCount) {
+TEST (JavaLangCharacter, CodePointCount) {
 	// Create variable to test
 	Array<char> arrayCodePointCount;
 	int offsetCodePointCount;
@@ -303,7 +303,7 @@ TEST (JavaLang, CharacterCodePointCount) {
 	assertEquals(expectedResultCodePointCount, actualResultCodePointCount);
 }
 
-TEST (JavaLang, CharacterCompare) {
+TEST (JavaLangCharacter, Compare) {
 	// Create variable to test
 	char xCompare;
 	char yCompare;
@@ -332,7 +332,7 @@ TEST (JavaLang, CharacterCompare) {
 	assertEquals(expectedResultCompare, actualResultCompare);
 }
 
-TEST (JavaLang, CharacterCompareTo) {
+TEST (JavaLangCharacter, CompareTo) {
 	// Create variable to test
 	Character variableTestCompareTo;
 	Character anotherCharacterCompareTo;
@@ -362,7 +362,7 @@ TEST (JavaLang, CharacterCompareTo) {
 }
 
 // TEST sample
-TEST (JavaLang, CharacterTestSample) {
+TEST (JavaLangCharacter, TestSample) {
 	// Create variable to test
 	int expectedResultTestSample;
 	int actualResultTestSample;
@@ -374,7 +374,7 @@ TEST (JavaLang, CharacterTestSample) {
 	// Test exception
 }
 
-TEST (JavaLang, CharacterToCodePoint) {
+TEST (JavaLangCharacter, ToCodePoint) {
 	// Create variable to test
 	unicode variableTest1ToCodePoint;
 	unicode variableTest2ToCodePoint;
@@ -397,7 +397,7 @@ TEST (JavaLang, CharacterToCodePoint) {
 }
 
 #ifdef __linux__
-TEST (JavaLang, CharacterIsHighSurrogate) {
+TEST (JavaLangCharacter, IsHighSurrogate) {
 	// Create variable to test
 	unicode variableTestIsHighSurrogate;
 	boolean actualResultIsHighSurrogate;
@@ -415,7 +415,7 @@ TEST (JavaLang, CharacterIsHighSurrogate) {
 #endif
 
 #ifdef __linux__
-TEST (JavaLang, CharacterisLowSurrogate) {
+TEST (JavaLangCharacter, isLowSurrogate) {
 	// Create variable to test
 	unicode variableTestisLowSurrogate;
 	boolean actualResultisLowSurrogate;
@@ -431,7 +431,7 @@ TEST (JavaLang, CharacterisLowSurrogate) {
 	assertFalse(actualResultisLowSurrogate);
 }
 
-TEST (JavaLang, CharacterIsSurrogate) {
+TEST (JavaLangCharacter, IsSurrogate) {
 	// Create variable to test
 	unicode variableTestIsSurrogate;
 	boolean actualResultIsSurrogate;
@@ -448,7 +448,7 @@ TEST (JavaLang, CharacterIsSurrogate) {
 }
 #endif
 
-TEST (JavaLang, CharacterDigit) {
+TEST (JavaLangCharacter, Digit) {
 	//Given valid and invalid value to test with digit(char char, int radix)
 	char hexValueDigit = 'b';
 	char hexValue2Digit = 'd';

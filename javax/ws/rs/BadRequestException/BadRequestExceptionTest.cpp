@@ -29,35 +29,27 @@
 
 using namespace Javax::Ws::Rs;
 
-TEST(BadRequestException, Constructor) {
+TEST(JavaxWsRsBadRequestException,  Constructor) {
     // Default constructor, expected empty message
     BadRequestException badRequestException;
     assertEquals("", badRequestException.getMessage().toString());
 
     // Constructs a new BadRequestException with the specified detail message.
-    BadRequestException badRequestExceptionWithMessage = BadRequestException(
-            "Illegal param");
-    assertEquals("Illegal param",
-               badRequestExceptionWithMessage.getMessage().toString());
+    auto badRequestExceptionWithMessage = BadRequestException("Illegal param");
+    assertEquals("Illegal param", badRequestExceptionWithMessage.getMessage().toString());
 
     // Constructs a new BadRequestException with the specified detail message and cause.
-    BadRequestException badRequestExceptionWithMessageAndCause =
-            BadRequestException("Illegal param", &badRequestExceptionWithMessage);
-    assertEquals("Illegal param",
-               badRequestExceptionWithMessageAndCause.getMessage().toString());
-    assertEquals("Illegal param",
-               badRequestExceptionWithMessageAndCause.getCause()->getMessage().toString());
+    auto badRequestExceptionWithMessageAndCause = BadRequestException("Illegal param", &badRequestExceptionWithMessage);
+    assertEquals("Illegal param", badRequestExceptionWithMessageAndCause.getMessage().toString());
+    assertEquals("Illegal param", badRequestExceptionWithMessageAndCause.getCause()->getMessage().toString());
 
     // Constructs a new BadRequestException with the specified cause.
-    BadRequestException badRequestExceptionWithCause =
-            BadRequestException(&badRequestExceptionWithMessageAndCause);
-    assertEquals("Illegal param",
-               badRequestExceptionWithCause.getCause()->getMessage().toString());
-    assertEquals("Illegal param",
-               badRequestExceptionWithCause.getCause()->getCause()->getMessage().toString());
+    auto badRequestExceptionWithCause = BadRequestException(&badRequestExceptionWithMessageAndCause);
+    assertEquals("Illegal param", badRequestExceptionWithCause.getCause()->getMessage().toString());
+    assertEquals("Illegal param", badRequestExceptionWithCause.getCause()->getCause()->getMessage().toString());
 }
 
-TEST(BadRequestException, TryCatch) {
+TEST(JavaxWsRsBadRequestException,  TryCatch) {
     // Throw BadRequestException with message "throw BadRequestException"
     // expected message "throw BadRequestException"
     BadRequestException badRequestException;

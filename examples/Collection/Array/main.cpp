@@ -7,7 +7,7 @@ void ArrayAssignment() {
 	        '\0'
 	};
 	Array<String> array = (char**) stringSequence;
-	//System::out::println(array.length);
+	System::out::println(array.length);
 }
 
 void ArrayException() {
@@ -36,14 +36,13 @@ void ArraySerialize() {
 	Array<String> arrayString;
 	arrayString.push("hello");
 	arrayString.push("world");
-	// ERROR - Does not work
-	// System::out::println(arrayString.toString());
+	//System::out::println(arrayString.toCharPointer());
 }
 
 int main() {
-	//ArrayAssignment();
-	//ArrayException();
-	//ArrayForeach();
-	//ArraySerialize();
+	ArrayAssignment();
+	ArrayException();
+	ArrayForeach();
+	ArraySerialize();
 	return 0;
 }

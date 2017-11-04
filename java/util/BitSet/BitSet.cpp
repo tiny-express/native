@@ -80,8 +80,8 @@ void BitSet::ensureCapacity(int wordsRequired) {
         return;
     }
     // Allocate larger of doubled size or required size.
-    int wordsRequested = Math::max(2 * this->words.length, wordsRequired);
-    int oldWordsArrayLength = this->words.length;
+    int wordsRequested = Math::max((int) (2 * this->words.length), (int) wordsRequired);
+    int oldWordsArrayLength = (int) this->words.length;
     this->words = Arrays::copyOf(this->words, wordsRequested);
     this->sizeIsSticky = false;
     // Set value of new word to 0.
@@ -315,26 +315,6 @@ BitSet BitSet::clone() {
     return *this;
 }
 
-boolean BitSet::equals(const Object &target) const {
-    const BitSet* pointerToTarget = dynamic_cast<const BitSet *>(&target);
-    if (pointerToTarget == nullptr) {
-        return false;
-    }
-
-    if (this->wordsInUse != pointerToTarget->wordsInUse) {
-        return false;
-    }
-
-    int indexOfWord;
-    for (indexOfWord = 0; indexOfWord < this->wordsInUse; ++indexOfWord) {
-        if (this->words[indexOfWord] != pointerToTarget->words[indexOfWord]) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 void BitSet::flip(int bitIndex) {
     if (bitIndex < 0) {
         throw IndexOutOfBoundsException("bitIndex < 0: " +
@@ -447,7 +427,7 @@ BitSet BitSet::get(int fromIndex, int toIndex) const {
     return result;
 }
 
-long BitSet::hashCode() const {
+int BitSet::hashCode() const {
     // BitSet hash code algorithm.
     long hash = 1234;
     for (int i = words.length; --i >= 0; )
@@ -664,14 +644,14 @@ void BitSet::set(int fromIndex, int toIndex, boolean value) {
 }
 
 int BitSet::size() const {
-    return this->words.length * BITS_PER_WORD;
+    return (int) this->words.length * BITS_PER_WORD;
 }
 
 Array<byte> BitSet::toByteArray() const {
     // This is an alternative version, without supports from ByteBuffer data type.
 
     if (this->wordsInUse == 0) {
-        return Array<byte>(0);
+        return Array<byte>();
     }
 
     const int numberOfBytesPerWord = 8;
@@ -723,7 +703,7 @@ Array<long> BitSet::toLongArray() const {
     return Arrays::copyOf(this->words, this->wordsInUse);
 }
 
-string BitSet::toString() const {
+String BitSet::toString() const {
     // Optimizing String Builder initial size.
     int numberOfBits;
     if (this->wordsInUse > 128) {
@@ -748,7 +728,7 @@ string BitSet::toString() const {
     stringBuilder.append('}');
 
     free(this->backupForToString);
-    this->backupForToString = stringCopy(stringBuilder.toString());
+    this->backupForToString = stringCopy(stringBuilder.toString().toCharPointer());
 
     return this->backupForToString;
 }

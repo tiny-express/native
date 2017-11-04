@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_PRIORITY_QUEUE_HPP
-#define JAVA_UTIL_PRIORITY_QUEUE_HPP
+#ifndef NATIVE_JAVA_UTIL_PRIORITY_QUEUE_HPP
+#define NATIVE_JAVA_UTIL_PRIORITY_QUEUE_HPP
 
 #include "../Collection/Collection.hpp"
 #include "../Comparator/Comparator.hpp"
@@ -78,7 +78,7 @@ namespace Java {
 						 */
 						PriorityQueue(int initialCapacity) {
 							if (initialCapacity < 1) {
-								throw IllegalArgumentException("initialCapacity < 1");
+								throw InterruptedException("initialCapacity < 1");
 							}
 							this->original.reserve(initialCapacity);
 						}
@@ -293,4 +293,4 @@ namespace Java {
 		}
 }
 
-#endif // JAVA_UTIL_PRIORITY_QUEUE_HPP
+#endif // NATIVE_JAVA_UTIL_PRIORITY_QUEUE_HPP

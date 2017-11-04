@@ -156,12 +156,12 @@ byte Float::byteValue() const {
     return (byte) this->original;
 }
 
-string Float::toString() const {
+String Float::toString() const {
     return this->originalString;
 }
 
 Float Float::parseFloat(String inputString) {
-    return (Float) stringToFloat(inputString.toString());
+    return (Float) stringToFloat(inputString.toCharPointer());
 }
 
 boolean Float::isFinite(float valueFloat) {
@@ -574,7 +574,7 @@ int Float::compareTo(const Float &anotherFloat) const {
 // TODO(thoangminh): Wait for instanceof<>
 boolean Float::equals(const Float &object) const {
     boolean isFloat = instanceof<Float>(object);
-    Float* castObjectToFloat = (Float*)&object;
+    auto castObjectToFloat = (Float*)&object;
     int floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
     int floatToIntBitsThis = floatToIntBits(this->original);
     boolean isEqual = (floatToIntBitsObject == floatToIntBitsThis);

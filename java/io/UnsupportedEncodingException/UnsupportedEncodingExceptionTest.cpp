@@ -29,20 +29,20 @@
 
 using namespace Java::Lang;
 
-TEST(JavaIO, UnsupportedEncodingExceptionConstructor) {
+TEST(JavaIoUnsupportedEncodingException, Constructor) {
     // Constructs a new UnsupportedEncodingException with null as its detail message.
     UnsupportedEncodingException unsupportedEncodingExceptionWithNullMessage;
-    assertEquals("", unsupportedEncodingExceptionWithNullMessage.getMessage().toString());
+    assertEquals("", unsupportedEncodingExceptionWithNullMessage.getMessage());
 
     // Constructs a new UnsupportedEncodingException with the specified detail message.
     UnsupportedEncodingException unsupportedEncodingExceptionWithMessage = UnsupportedEncodingException("UnsupportedEncodingException with the specified message");
-    assertEquals("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage().toString());
+    assertEquals("UnsupportedEncodingException with the specified message", unsupportedEncodingExceptionWithMessage.getMessage());
 }
 
-TEST(JavaIO, UnsupportedEncodingExceptionTryCatch) {
+TEST(JavaIoUnsupportedEncodingException, TryCatch) {
     try {
         throw UnsupportedEncodingException("Throw UnsupportedEncodingException");
     } catch (UnsupportedEncodingException &ex) {
-        assertEquals("Throw UnsupportedEncodingException", ex.getMessage().toString());
+        assertEquals("Throw UnsupportedEncodingException", ex.getMessage());
     }
 }

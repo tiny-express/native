@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_UUID_HPP
-#define JAVA_UTIL_UUID_HPP
+#ifndef NATIVE_JAVA_UTIL_UUID_HPP
+#define NATIVE_JAVA_UTIL_UUID_HPP
 
 #include "../../Lang.hpp"
 
@@ -33,9 +33,10 @@ using namespace Java::Lang;
 
 namespace Java {
 		namespace Util {
-				class UUID : public Object
-//                , public virtual Serializable
-//                , public virtual Comparable<UUID>
+				class UUID :
+							public Object,
+							public virtual Serializable
+							//public virtual Comparable<UUID>
 				{
 				
 				private:
@@ -187,4 +188,4 @@ namespace Java {
 }
 
 
-#endif //JAVA_UTIL_UUID_HPP
+#endif // NATIVE_JAVA_UTIL_UUID_HPP

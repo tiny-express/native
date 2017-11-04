@@ -54,7 +54,3 @@ String Throwable::getMessage() {
 Throwable* Throwable::getCause() {
     return this->cause;
 }
-
-string Throwable::toString() {
-    return this->message.toString();
-}

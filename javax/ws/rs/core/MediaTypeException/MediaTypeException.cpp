@@ -26,7 +26,7 @@
 
 #include "MediaTypeException.hpp"
 
-using namespace Javax::Ws;
+using namespace Javax::Ws::Rs::Core;
 
 MediaTypeException::MediaTypeException() : Exception() {
 };

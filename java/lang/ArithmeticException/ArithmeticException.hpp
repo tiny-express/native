@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_ARITHMETICEXCEPTION_H
-#define NATIVE_ARITHMETICEXCEPTION_H
+#ifndef NATIVE_JAVA_LANG_ARITHMETIC_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_ARITHMETIC_EXCEPTION_HPP
 
 #include "../String/String.hpp"
 #include "../RuntimeException/RuntimeException.hpp"
@@ -36,9 +36,10 @@ namespace Java {
 				public:
 						ArithmeticException();
 						ArithmeticException(String message);
+						ArithmeticException(Throwable *cause);
+						ArithmeticException(String message, Throwable *cause);
 				};
 		}
 }
 
-
-#endif //NATIVE_ARITHMETICEXCEPTION_H
+#endif // NATIVE_JAVA_LANG_ARITHMETIC_EXCEPTION_HPP

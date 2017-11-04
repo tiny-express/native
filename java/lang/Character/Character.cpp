@@ -491,7 +491,7 @@ int Character::compare(char x, char y) {
 	return x - y;
 }
 
-int Character::compareTo(Character anotherCharacter) {
+int Character::compareTo(Character &anotherCharacter) {
 	return compare(this->charValue(), anotherCharacter.charValue());
 }
 

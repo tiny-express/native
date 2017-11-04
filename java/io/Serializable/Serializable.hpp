@@ -24,19 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_IO_SERIALIZABLE_HPP
-#define JAVA_IO_SERIALIZABLE_HPP
+#ifndef NATIVE_JAVA_IO_SERIALIZABLE_HPP
+#define NATIVE_JAVA_IO_SERIALIZABLE_HPP
 
 namespace Java {
 		namespace IO {
 				class Serializable {
 				protected:
-						Serializable() {
-						};
-						virtual ~Serializable() {
-						};
+						Serializable() = default;
+						virtual ~Serializable() = default;
 				};
 		}
 }
 
-#endif  // JAVA_IO_SERIALIZABLE_HPP
+#endif // NATIVE_JAVA_IO_SERIALIZABLE_HPP

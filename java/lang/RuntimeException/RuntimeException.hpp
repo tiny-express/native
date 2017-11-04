@@ -24,11 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_RUNTIMEEXCEPTION_HPP
-#define NATIVE_JAVA_LANG_RUNTIMEEXCEPTION_HPP
+#ifndef NATIVE_JAVA_LANG_RUNTIME_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_RUNTIME_EXCEPTION_HPP
 
+#include "../String/String.hpp"
 #include "../Exception/Exception.hpp"
-#include "../../Lang.hpp"
 
 namespace Java {
 		namespace Lang {
@@ -42,4 +42,4 @@ namespace Java {
 		}
 }
 
-#endif // NATIVE_JAVA_LANG_RUNTIMEEXCEPTION_HPP
+#endif // NATIVE_JAVA_LANG_RUNTIME_EXCEPTION_HPP

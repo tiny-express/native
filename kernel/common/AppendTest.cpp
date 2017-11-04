@@ -24,55 +24,39 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../DateTime.hpp"
+#include "../Common.hpp"
 #include "../Test.hpp"
 
-TEST (KernelDateTime, UnixTimestampInMilliseconds) {
-#ifdef WIN
-	unsigned int millisecond = 123;
-	unsigned int second = 3;
-	unsigned int minute = 20;
-	unsigned int hour = 17;
-	unsigned int day  = 16;
-	unsigned int month = 7;
-	unsigned int year = 2017;
-	unsigned long timestamp = unixTimeInMilliseconds(
-			millisecond,
-			second,
-			minute,
-			hour,
-			day,
-			month,
-			year
-	);
-	assertEquals(1500225603123, (long) timestamp);
-#endif
+TEST (KernelCommonAppend, PointerChar) {
+	char *target[] = {
+		(char *) "The",
+		(char *) "quick",
+		(char *) "brown",
+		(char *) "fox",
+		(char *) "jumps",
+		(char *) "over",
+		(char *) "the",
+		(char *) "lazy",
+		nullptr
+	};
+	auto append = (string) "dog";
+	assertEquals(8, lengthPointerPointerChar(target));
+	char **result = appendPointerChar(target, append);
+	assertEquals(9, lengthPointerPointerChar(result));
+	assertEquals("The", result[ 0 ]);
+	assertEquals("quick", result[ 1 ]);
+	assertEquals("brown", result[ 2 ]);
+	assertEquals("fox", result[ 3 ]);
+	assertEquals("jumps", result[ 4 ]);
+	assertEquals("over", result[ 5 ]);
+	assertEquals("the", result[ 6 ]);
+	assertEquals("lazy", result[ 7 ]);
+	assertEquals("dog", result[ 8 ]);
+	append = (string) "";
+	free(result);
+	result = appendPointerChar(target, append);
+	assertEquals(9, lengthPointerPointerChar(result));
+	free(result);
 }
 
-TEST (KernelDateTime, TimestampInNanoSeconds) {
-    // Timestamp in seconds is 1506237734
-    // but nano seconds we need multiply with 1,000,000,000
-    // so it will be look likes this 1506237734000000000
-    // length of timestamp in nano seconds is 19 digits
-	long timestamps = timestamp();
-	assertTrue(timestamps > 1506237163070843650);
-    assertTrue(timestamps < 2506237163070843650);
-}
 
-TEST (KernelDateTime, Format) {
-	long timestamp = 1473765499;
-	auto format = (string) "d/m/y";
-	string result1 = date(timestamp, format);
-	assertEquals("13/09/2016", result1);
-	free(result1);
-
-	timestamp = 1511208660;
-	char *result2 = date(timestamp, format);
-	assertEquals("20/11/2017", result2);
-	free(result2);
-
-	format = (string) "y-m-d";
-	char *result3 = date(timestamp, format);
-	assertEquals("2017-11-20", result3);
-	free(result3);
-}

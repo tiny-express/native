@@ -24,17 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_HASHMAP_HASHMAP_HPP_
-#define JAVA_UTIL_HASHMAP_HASHMAP_HPP_
+#ifndef NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
+#define NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP
 
-#include <initializer_list>
-#include <iostream>
-#include <unordered_map>
 #include "../../lang/String/String.hpp"
 #include "../AbstractMap/AbstractMap.hpp"
 #include "../Map/Map.hpp"
 #include "../Set/Set.hpp"
-#include <functional>
 
 namespace Java {
     namespace Util {
@@ -269,13 +265,19 @@ namespace Java {
              *
              * @return HashMap<Key, Value>
              */
-            HashMap<Key, Value> clone() const {
-                HashMap<Key, Value> result;
-                for (auto const &element : this->original) {
-                    result.put(element.first, element.second);
+                /***
+				 * Returns a shallow copy of this HashMap instance:
+				 * the keys and values themselves are not cloned.
+				 *
+				 * @return HashMap<Key, Value>
+				 */
+                HashMap<Key, Value> clone() const {
+                    HashMap<Key, Value> result;
+                    for (auto const &element : this->original) {
+                        result.put(element.first, element.second);
+                    }
+                    return result;
                 }
-                return result;
-            }
 
             /**
              * Attempts to compute a mapping for the specified key and
@@ -674,7 +676,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() {
+            String toString() {
                 if (this->size() == 0) {
                     this->backup = "{}";
                     return this->backup.toString();
@@ -770,4 +772,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_HASHMAP_HASHMAP_HPP_
+#endif // NATIVE_JAVA_UTIL_HASH_MAP_HASH_MAP_HPP

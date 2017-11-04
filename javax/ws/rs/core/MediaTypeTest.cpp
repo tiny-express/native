@@ -28,7 +28,7 @@
 #include "MediaTypeException/MediaTypeException.hpp"
 #include "../../../../kernel/Test.hpp"
 
-using namespace Javax::Ws;
+using namespace Javax::Ws::Rs::Core;
 
 TEST(JavaxWsRsCoreMediaType, Constructor) {
     // Default constructor expected type and subtype are wildcard, parameters empty
@@ -194,12 +194,11 @@ TEST(JavaxWsRsCoreMediaType, ValueOf) {
 }
 
 TEST(JavaxWsRsCoreMediaType, ToString) {
-
     // Default constructor, expected WILDCARD
     MediaType mediaType;
     mediaType.toString();
     assertEquals("*/*", MediaType::WILDCARD.toString());
-//    assertEquals("*/*", mediaType.toString());
+    //   assertEquals("*/*", mediaType.toString());
 
     // Constructor with type "application", subtype "*+xml", expected "application/*+xml"
     MediaType mediaType2("application", "*+xml");

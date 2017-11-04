@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_SECURITY_MESSAGEDIGEST_HPP_
-#define JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#ifndef NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#define NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
 
 #include "../../../kernel/Type.hpp"
 #include "../../Lang.hpp"
@@ -69,4 +69,4 @@ namespace Java {
     } // namespace Security
 } // namespace Java
 
-#endif //JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#endif // NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_

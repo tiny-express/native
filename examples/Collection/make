@@ -3,7 +3,7 @@ cd Array && make && cd ..
 echo "-------------------------------"
 cd ArrayList && make && cd ..
 echo "-------------------------------"
-cd Arrays && make && cd ..
+#cd Arrays && make && cd ..
 echo "-------------------------------"
 cd HashMap && make && cd ..
 echo "-------------------------------"

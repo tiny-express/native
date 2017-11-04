@@ -29,22 +29,22 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ExceptionConstructor) {
+TEST (JavaLangException, Constructor) {
 	// Constructs a new Exception with null as its detail message.
 	Exception exceptionWithNullMessage;
-	assertEquals("", exceptionWithNullMessage.getMessage().toString());
+	assertEquals("", exceptionWithNullMessage.getMessage());
 	
 	// Constructs a new Exception with the specified detail message.
 	Exception exceptionWithMessage = Exception("Exception with the specified message");
-	assertEquals("Exception with the specified message", exceptionWithMessage.getMessage().toString());
+	assertEquals("Exception with the specified message", exceptionWithMessage.getMessage());
 	
 	// Constructs a new Exception with the specified detail message and cause.
 	Exception exceptionWithMessageAndCause = Exception("Exception with the specified message and cause", &exceptionWithMessage);
-	assertEquals("Exception with the specified message and cause", exceptionWithMessageAndCause.getMessage().toString());
-	assertEquals("Exception with the specified message", exceptionWithMessageAndCause.getCause()->getMessage().toString());
+	assertEquals("Exception with the specified message and cause", exceptionWithMessageAndCause.getMessage());
+	assertEquals("Exception with the specified message", exceptionWithMessageAndCause.getCause()->getMessage());
 	
 	// Constructs a new Exception with the specified cause.
 	Exception exceptionWithCause = Exception(&exceptionWithMessageAndCause);
-	assertEquals("Exception with the specified message and cause", exceptionWithCause.getCause()->getMessage().toString());
-	assertEquals("Exception with the specified message", exceptionWithCause.getCause()->getCause()->getMessage().toString());
+	assertEquals("Exception with the specified message and cause", exceptionWithCause.getCause()->getMessage());
+	assertEquals("Exception with the specified message", exceptionWithCause.getCause()->getCause()->getMessage());
 }

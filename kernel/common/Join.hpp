@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_JOIN_HPP
-#define NATIVE_COMMON_JOIN_HPP
+#ifndef NATIVE_KERNEL_COMMON_JOIN_HPP
+#define NATIVE_KERNEL_COMMON_JOIN_HPP
 
 #include "../Type.hpp"
 #include "../Common.hpp"
@@ -88,4 +88,4 @@ inline char *joinDelimiterPointerPointerChar(char **target, const char *delimite
     return result;
 }
 
-#endif
+#endif // NATIVE_KERNEL_COMMON_JOIN_HPP

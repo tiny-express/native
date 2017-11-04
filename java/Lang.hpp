@@ -24,13 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_LANG_HPP
-#define JAVA_LANG_HPP
+#ifndef NATIVE_JAVA_LANG_HPP
+#define NATIVE_JAVA_LANG_HPP
 
 #include "lang/Appendable/Appendable.hpp"
 #include "lang/AutoCloseable/AutoCloseable.hpp"
 #include "lang/Boolean/Boolean.hpp"
-#include "lang/Byte/Byte.hpp"
+#include "lang/Bytes/Bytes.hpp"
 #include "lang/Character/Character.hpp"
 #include "lang/CharSequence/CharSequence.hpp"
 #include "lang/Cloneable/Cloneable.hpp"
@@ -54,4 +54,4 @@
 #include "lang/Throwable/Throwable.hpp"
 #include "lang/Thread/Thread.hpp"
 
-#endif  // JAVA_LANG_HPP
+#endif // NATIVE_JAVA_LANG_HPP

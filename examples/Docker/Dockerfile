@@ -1,4 +1,4 @@
-FROM foodtiny/native:latest
+FROM foodtiny/native:development
 MAINTAINER Loi Nguyen <loint@foodtiny.com>
 
 ADD HelloWorld.cpp .

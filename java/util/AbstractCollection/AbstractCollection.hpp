@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef  JAVA_UTIL_ABSTRACT_COLLECTION_HPP
-#define JAVA_UTIL_ABSTRACT_COLLECTION_HPP
+#ifndef  NATIVE_JAVA_UTIL_ABSTRACT_COLLECTION_HPP
+#define NATIVE_JAVA_UTIL_ABSTRACT_COLLECTION_HPP
 
 #include "../../lang/Object/Object.hpp"
 #include "../Collection/Collection.hpp"
@@ -33,15 +33,16 @@
 using namespace Java::Lang;
 
 namespace Java {
-	namespace Util {
-		template <typename E>
-		class AbstractCollection : public virtual Object, public virtual Collection<E> {
-
-		protected:
-			AbstractCollection() {}
-			virtual ~AbstractCollection() {}
-		};
-	}
+		namespace Util {
+				template <class E>
+				class AbstractCollection :
+							public virtual Object,
+							public virtual Collection<E> {
+				public:
+						AbstractCollection();
+						virtual ~AbstractCollection();
+				};
+		}
 }
 
-#endif //JAVA_UTIL_ABSTRACT_COLLECTION_HPP
+#endif // NATIVE_JAVA_UTIL_ABSTRACT_COLLECTION_HPP

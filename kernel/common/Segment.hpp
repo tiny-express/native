@@ -24,31 +24,57 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_COMMON_APPEND_HPP
-#define NATIVE_COMMON_APPEND_HPP
+#ifndef NATIVE_KERNEL_COMMON_SEGMENT_HPP
+#define NATIVE_KERNEL_COMMON_SEGMENT_HPP
 
-#include "../Common.hpp"
 #include "../Builtin.hpp"
-#include <memory>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
 
 /**
- * Append pointer char
- * Use to append one more element to array
+ * Segment of char pointer
+ * Retrieve a sub segment of char pointer from position to position
  *
- * @param target
- * @param append
- * @return char pointer pointer
+ * @param targetParam
+ * @param from
+ * @param to
+ * @return char*
  */
-inline char **appendPointerChar(char **target, char *append) {
-	int targetLength = lengthPointerPointerChar(target);
-	auto **pointer = (char **) allocateMemory((targetLength + 2)* sizeof(char *));
-	memcpy(pointer, target, targetLength * sizeof(char *));
-	*( pointer + targetLength ) = append;
-	*( pointer + targetLength + 1 ) = nullptr;
+inline char *segmentPointerChar(char *targetParam, int from, int to) {
+	if (targetParam == nullptr) {
+		return stringCopy("");
+	}
+	int lengthTarget = lengthPointerChar(targetParam);
+	if (from > to || from < 0 || from > lengthTarget || to < 0) {
+		return stringCopy("");
+	}
+	char *target = stringCopy(targetParam);
+	int length = to - from + 1;
+	if (to >= lengthTarget) {
+		length = lengthTarget - from + 1;
+	}
+	auto *pointer = (char *) calloc(length + 1, sizeof(char));
+	memcpy(pointer, &target[ from ], length);
+	free(target);
+	pointer[ length ] = '\0';
 	return pointer;
 }
 
-#endif
+/**
+* Segment of char pointer pointer
+ * Retrieve a sub segment of char pointer pointer from position to position
+ *
+ * @param target
+ * @param from
+ * @param to
+ * @return char**
+ */
+inline char **segmentPointerPointerChar(char **target, int from, int to) {
+	int lengthTarget = lengthPointerPointerChar(target);
+	if (from > to || from < 0 || from > lengthTarget || to < 0 || to > lengthTarget) {
+		return nullptr;
+	}
+	auto **pointer = (char **) calloc(( to - from + 2 ), sizeof(char *));
+	memcpy(pointer, &target[ from ], ( to - from + 1 ) * sizeof(char *));
+	return pointer;
+}
+
+#endif // NATIVE_KERNEL_COMMON_SEGMENT_HPP

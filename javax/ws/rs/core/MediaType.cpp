@@ -28,7 +28,7 @@
 #include "../../../../java/lang/StringBuilder/StringBuilder.hpp"
 #include "MediaTypeException/MediaTypeException.hpp"
 
-using namespace Javax::Ws;
+using namespace Javax::Ws::Rs::Core;
 
 #define CHAR_NOT_FOUND -1
 
@@ -152,7 +152,7 @@ boolean MediaType::isCompatible(MediaType other) {
 
 string MediaType::toString() {
    this->backupForToString = this->type + String("/") + this->subtype;
-    return backupForToString.toString();
+    return backupForToString.toCharPointer();
 }
 
 boolean MediaType::isWildcardSubtype() {

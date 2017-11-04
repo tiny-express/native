@@ -34,16 +34,20 @@
 // C Compatible Library
 #include <cerrno>
 #include <cassert>
-#include <cstdio>
 #include <cmath>
-#include <cstddef>
-#include <cstdlib>
 #include <cstring>
-#include <cstdio>
 #include <climits>
 #include <cstdarg>
+#include <cstdbool>
+#include <cstddef>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <csignal>
+#include <cstdbool>
 #include <cctype>
 #include <ctime>
+#include <regex.h>
 
 #ifdef LINUX
 #include <stdint.h>
@@ -54,28 +58,42 @@
 #include <mach/mach_time.h>
 #endif
 
+#ifdef UNIX
+#include <unistd.h>
+#endif
+
 // C++ Standard Library
 #include <thread>
 #include <memory>
 #include <algorithm>
+#include <stack>
+#include <queue>
+#include <bitset>
 #include <vector>
 #include <map>
-#include <set>
-#include <type_traits>
-#include <string>
+#include <unordered_map>
 #include <iostream>
+#include <set>
+#include <bitset>
+#include <type_traits>
+#include <iostream>
+#include <typeinfo>
+#include <regex>
+#include <string>
+#include <initializer_list>
+#include <functional>
 
 // Builtin functions
 #define P_LEN(NAME, TYPE); \
-inline long lengthPointer##NAME(TYPE *target) {\
-    if (target == nullptr) return 0;\
+inline int lengthPointer##NAME(TYPE *target) {\
+    if (NULL == target) return 0;\
     return __builtin_strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
-inline long lengthPointerPointer##NAME(TYPE **target) {\
-    if (target == nullptr) return 0;\
+inline int lengthPointerPointer##NAME(TYPE **target) {\
+    if (NULL == target) return 0;\
     register TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
@@ -101,7 +119,7 @@ inline boolean isEmptyString(const char *input) {
  * @param size
  * @return void pointer
  */
-inline void *allocateMemory(long size) {
+inline void *allocateMemory(size_t size) {
 #ifdef DARWIN
     return malloc(size);
 #else
@@ -131,7 +149,24 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  * @return char*
  */
 inline char *stringCopy(const char *target) {
+#ifdef DARWIN
+	return strdup(target);
+#else
     return __builtin_strdup(target);
+#endif
+}
+
+/**
+ * Check if instance t is an instance of Base class
+ *
+ * @tparam Base
+ * @tparam T
+ * @param t
+ * @return
+ */
+template<typename Base, typename T>
+inline boolean instanceof(T t) {
+    return typeid(t).name() == typeid(Base).name();
 }
 
 #endif //NATIVE_KERNEL_BUILTIN_HPP

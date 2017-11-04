@@ -24,11 +24,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_NET_HPP
-#define JAVA_NET_HPP
+#ifndef NATIVE_JAVA_NET_HPP
+#define NATIVE_JAVA_NET_HPP
 
 #include "net/HttpURLConnection/HttpURLConnection.hpp"
 #include "net/URL/URL.hpp"
 #include "net/URLEncoder/URLEncoder.hpp"
 
-#endif  // JAVA_NET_HPP
+#endif // NATIVE_JAVA_NET_HPP

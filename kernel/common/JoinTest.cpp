@@ -27,7 +27,7 @@
 #include "../Kernel.hpp"
 #include "../Test.hpp"
 
-TEST (KernelCommon, JoinPointerPointerChar) {
+TEST (KernelCommonJoin, PointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",
@@ -46,7 +46,7 @@ TEST (KernelCommon, JoinPointerPointerChar) {
 	free(result);
 }
 
-TEST (KernelCommon, JoinDelimiterPointerPointerChar) {
+TEST (KernelCommonJoin, DelimiterPointerPointerChar) {
 	char *target[] = {
 		(char *) "The",
 		(char *) "quick",

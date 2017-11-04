@@ -28,7 +28,7 @@
 #include "Random.hpp"
 #include "../../lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
-TEST (JavaUtil, RandomNextInt) {
+TEST (JavaUtilRandom,NextInt) {
 	// Given a random number generator
 	Random random1;
 	
@@ -43,7 +43,7 @@ TEST (JavaUtil, RandomNextInt) {
 	}
 }
 
-TEST (JavaUtil, RandomNextIntWithBound) {
+TEST (JavaUtilRandom,NextIntWithBound) {
 	// Given a random number generator
 	Random random1;
 	
@@ -52,8 +52,8 @@ TEST (JavaUtil, RandomNextIntWithBound) {
 	try {
 		random1.nextInt(-10);
 	}
-	catch (IllegalArgumentException &e) {
-		assertEquals("bound must be positive", e.getMessage().toString());
+	catch (InterruptedException &e) {
+		assertEquals("bound must be positive", e.getMessage());
 	}
 	
 	// Test nextInt(bound) with bound = 100
@@ -72,7 +72,7 @@ TEST (JavaUtil, RandomNextIntWithBound) {
 	}
 }
 
-TEST (JavaUtil, RandomNextBytes) {
+TEST (JavaUtilRandom,NextBytes) {
 	// Given a random number generator
 	Random random1;
 	
@@ -91,7 +91,7 @@ TEST (JavaUtil, RandomNextBytes) {
 	}
 }
 
-TEST (JavaUtil, RandomNextDouble) {
+TEST (JavaUtilRandom,NextDouble) {
 	// Given a random number generator
 	Random random1;
 	
@@ -103,7 +103,7 @@ TEST (JavaUtil, RandomNextDouble) {
 	}
 }
 
-TEST (JavaUtil, RandomNextLong) {
+TEST (JavaUtilRandom,NextLong) {
 	// Given a random number generator
 	Random random1;
 	
@@ -118,7 +118,7 @@ TEST (JavaUtil, RandomNextLong) {
 	}
 }
 
-TEST (JavaUtil, RandomNextFloat) {
+TEST (JavaUtilRandom,NextFloat) {
 	// Given a random number generator
 	Random random1;
 	
@@ -130,7 +130,7 @@ TEST (JavaUtil, RandomNextFloat) {
 	}
 }
 
-TEST (JavaUtil, RandomNextBoolean) {
+TEST (JavaUtilRandom,NextBoolean) {
 	// Given a random number generator
 	Random random1;
 	
@@ -142,7 +142,7 @@ TEST (JavaUtil, RandomNextBoolean) {
 	}
 }
 
-TEST (JavaUtil, RandomNextGaussian) {
+TEST (JavaUtilRandom,NextGaussian) {
 	// Given a random number generator
 	Random random1;
 	
@@ -153,7 +153,7 @@ TEST (JavaUtil, RandomNextGaussian) {
 	}
 }
 
-TEST (JavaUtil, RandomSetSeed) {
+TEST (JavaUtilRandom,SetSeed) {
 	// Given a random number generator
 	Random random1;
 	long expectSeed = ( 100 ^ 0x5DEECE66DL ) & (( 1L << 48 ) - 1 );
@@ -161,7 +161,7 @@ TEST (JavaUtil, RandomSetSeed) {
 	//assertEquals(expectSeed, random1.getSeed());
 }
 
-TEST (JavaUtil, RandomNextString) {
+TEST (JavaUtilRandom,NextString) {
 	// Given a random number generator
 	Random random1;
 	String string = random1.nextString(10);

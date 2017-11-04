@@ -30,8 +30,7 @@
 
 using namespace Java::Lang;
 
-TEST (JavaLang, ShortConstructor) {
-	
+TEST (JavaLangShort, Constructor) {
 	// 	Given empty value for Short constructor and assign value - Return Long
 	Short emptyShort;
 	emptyShort = 3;
@@ -43,7 +42,7 @@ TEST (JavaLang, ShortConstructor) {
 	
 }
 
-TEST (JavaLang, ShortComparision) {
+TEST (JavaLangShort, Comparision) {
 	// Give a valid number and make a comparision
 	Short validNumber = 30000;
 	Short targetNumber;
@@ -73,7 +72,7 @@ TEST (JavaLang, ShortComparision) {
 	assertTrue(validNumber >= targetNumber);
 }
 
-TEST (JavaLang, ShortOperator) {
+TEST (JavaLangShort, Operator) {
 	// 	Given a valid number
 	Long validNumber = 5;
 	Long targetNumber = 3;
@@ -99,17 +98,17 @@ TEST (JavaLang, ShortOperator) {
 	assertTrue(modNumber == ( validNumber % targetNumber ));
 }
 
-TEST (JavaLang, ShortParseShort) {
+TEST (JavaLangShort, ParseShort) {
 	// Given value for Long constructor and assign value - Return long
 	Short validShortPointer = Short::parseShort("6");
 	assertEquals(6, validShortPointer.shortValue());
 }
 
-TEST (JavaLang, ShortToString) {
+TEST (JavaLangShort, ToString) {
 	// Give a valid Short object then compare result of method toString - Should be equals
 	Short validShort = 12344;
 	
-	string expect = (string) "12344";
-	string result = validShort.toString();
+	String expect = (string) "12344";
+	String result = validShort.toString();
 	assertEquals(expect, result);
 }

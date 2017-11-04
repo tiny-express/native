@@ -60,9 +60,9 @@ int MessageDigest::getDigestLength() {
 
 int MessageDigest::digest(byte buf[], int len) {
     if (buf == nullptr)
-        throw IllegalArgumentException("No output buffer given");
+        throw InterruptedException("No output buffer given");
     if (len < engineGetDigestLength())
-        throw IllegalArgumentException("Output buffer too small");
+        throw InterruptedException("Output buffer too small");
     return engineDigest(buf, len);
 }
 
@@ -72,7 +72,7 @@ void MessageDigest::reset() {
 
 void MessageDigest::update(const byte input[], int len) {
     if (input == nullptr || len == 0)
-        throw IllegalArgumentException("No input buffer given");
+        throw InterruptedException("No input buffer given");
     engineUpdate(input, len);
 }
 

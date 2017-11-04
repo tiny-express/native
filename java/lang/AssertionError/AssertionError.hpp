@@ -24,9 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_ASSERTIONERROR_H
-#define NATIVE_ASSERTIONERROR_H
-
+#ifndef NATIVE_JAVA_LANG_ASSERTION_ERROR_HPP
+#define NATIVE_JAVA_LANG_ASSERTION_ERROR_HPP
 
 #include "../String/String.hpp"
 #include "../Error/Error.hpp"
@@ -39,23 +38,15 @@ namespace Java {
 				
 				public:
 						AssertionError();
-						
 						AssertionError(double doubleValue);
-						
 						AssertionError(float floatValue);
-						
 						AssertionError(long longValue);
-						
 						AssertionError(int intValue);
-						
 						AssertionError(char charValue);
-						
 						AssertionError(boolean boolValue);
-						
 						AssertionError(String message, Throwable *cause);
 				};
 		}
 }
 
-
-#endif //NATIVE_ASSERTIONERROR_H
+#endif // NATIVE_JAVA_LANG_ASSERTION_ERROR_HPP

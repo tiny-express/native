@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVA_UTIL_BITSET_HPP
-#define JAVA_UTIL_BITSET_HPP
+#ifndef NATIVE_JAVA_UTIL_BITSET_HPP
+#define NATIVE_JAVA_UTIL_BITSET_HPP
 
 #include "../../Lang.hpp"
 
@@ -253,7 +253,26 @@ namespace Java {
              * @param target
              * @return boolean
              */
-            boolean equals(const Object &target) const;
+            template  <typename T>
+            boolean equals(const T &target) const {
+                const BitSet* pointerToTarget = dynamic_cast<const BitSet *>(&target);
+                if (pointerToTarget == nullptr) {
+                    return false;
+                }
+
+                if (this->wordsInUse != pointerToTarget->wordsInUse) {
+                    return false;
+                }
+
+                int indexOfWord;
+                for (indexOfWord = 0; indexOfWord < this->wordsInUse; ++indexOfWord) {
+                    if (this->words[indexOfWord] != pointerToTarget->words[indexOfWord]) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
 
             /**
              * Sets the bit at the specified index to the complement of its current value.
@@ -299,7 +318,7 @@ namespace Java {
              *
              * @return long
              */
-            long hashCode() const;
+            int hashCode() const;
 
             /**
              * Returns true if the specified BitSet has any bits set to true that
@@ -455,7 +474,7 @@ namespace Java {
              *
              * @return string
              */
-            string toString() const;
+            String toString() const;
 
         public:
             /**
@@ -515,4 +534,4 @@ namespace Java {
     }  // namespace Util
 }  // namespace Java
 
-#endif  // JAVA_UTIL_BITSET_HPP
+#endif // NATIVE_JAVA_UTIL_BITSET_HPP

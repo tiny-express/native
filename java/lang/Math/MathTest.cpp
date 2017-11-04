@@ -31,7 +31,7 @@
 
 using namespace Java::Lang;
 
-TEST(JavaLang, MathAbs) {
+TEST(JavaLangMath, Abs) {
 	double double_value = -123;
 	assertEquals(123, Math::abs(double_value));
 	
@@ -45,7 +45,7 @@ TEST(JavaLang, MathAbs) {
 	assertEquals(1233453453, Math::abs(long_value));
 }
 
-TEST(JavaLang, MathAddExactInt) {
+TEST(JavaLangMath, AddExactInt) {
 	// Given 2 int
 	int a = 1;
 	int b = 2;
@@ -59,11 +59,11 @@ TEST(JavaLang, MathAddExactInt) {
 		int overFlowResult = Math::addExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathAddExactLong) {
+TEST(JavaLangMath, AddExactLong) {
 	// Given 2 long
 	long a = 1;
 	long b = 2;
@@ -77,11 +77,11 @@ TEST(JavaLang, MathAddExactLong) {
 		long overFlowResult = Math::addExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathCos) {
+TEST(JavaLangMath, Cos) {
 	// Given an angle equal to PI/ 2
 	double angle = Math::PI / 2;
 	double expectResult = 0;
@@ -98,7 +98,7 @@ TEST(JavaLang, MathCos) {
 	assertEquals(expectINFResult, Math::cos(infAngle));
 }
 
-TEST(JavaLang, MathAcos) {
+TEST(JavaLangMath, Acos) {
 	// Given a cosine equal to 0
 	double cos = 0;
 	double expectResult = Math::PI/2;
@@ -115,7 +115,7 @@ TEST(JavaLang, MathAcos) {
 	assertEquals(expectBiggerThanOneResult, Math::acos(biggerThanOneCos));
 }
 
-TEST(JavaLang, MathSin) {
+TEST(JavaLangMath, Sin) {
 	// Given an angle equal to PI/ 2
 	double angle = Math::PI / 2;
 	double expectResult = 1;
@@ -137,7 +137,7 @@ TEST(JavaLang, MathSin) {
 	assertEquals(expectPositiveZeroAngleResult, Math::sin(positiveZeroAngle));
 }
 
-TEST(JavaLang, MathAsin) {
+TEST(JavaLangMath, Asin) {
 	// Given a sine equal to 1
 	double sin = 1;
 	double expectResult = Math::PI/2;
@@ -164,7 +164,7 @@ TEST(JavaLang, MathAsin) {
 	assertEquals(expectPositiveZeroAngleResult, Math::sin(positiveZeroSin));
 }
 
-TEST(JavaLang, MathTan) {
+TEST(JavaLangMath, Tan) {
 	// Given an angle equal to PI/ 4
 	double angle = Math::PI / 4;
 	double expectResult = 1;
@@ -186,7 +186,7 @@ TEST(JavaLang, MathTan) {
 	assertEquals(expectPositiveZeroAngleResult, Math::tan(positiveZeroAngle));
 }
 
-TEST(JavaLang, MathAtan) {
+TEST(JavaLangMath, Atan) {
 	// Given a tangent equal to 1
 	double tan = 1;
 	double expectResult = Math::PI/4;
@@ -208,7 +208,7 @@ TEST(JavaLang, MathAtan) {
 	assertEquals(expectPositiveZeroAngleResult, Math::atan(positiveZeroSin));
 }
 
-TEST(JavaLang, MathAtan2) {
+TEST(JavaLangMath, Atan2) {
 	// Given 2 double for coordinate x and coordinate y
 	double coordinateX = Math::PI / 2;
 	double coordinateY = Math::PI / 3;
@@ -305,7 +305,7 @@ TEST(JavaLang, MathAtan2) {
 	assertEquals(expectNegativeThreeFourthsPiResult, Math::atan2(negativeInfiniteCoordinateX, negativeInfiniteCoordinateY));
 }
 
-TEST(JavaLang, MathCbrt) {
+TEST(JavaLangMath, Cbrt) {
 	// Given a variable equal to 3 ^ 3 = 27
 	double cube = 27;
 	double expectResult = 3;
@@ -337,7 +337,7 @@ TEST(JavaLang, MathCbrt) {
 	assertEquals(expectNegativeZeroResult, Math::cbrt(negativeZeroCube));
 }
 
-TEST(JavaLang, MathSqrt) {
+TEST(JavaLangMath, Sqrt) {
 	// Given a variable equal to 3 ^ 2 = 9
 	double square = 9;
 	double expectResult = 3;
@@ -369,7 +369,7 @@ TEST(JavaLang, MathSqrt) {
 	assertEquals(expectNegativeZeroResult, Math::sqrt(negativeZeroSquare));
 }
 
-TEST(JavaLang, MathCeil) {
+TEST(JavaLangMath, Ceil) {
 	// Given a double to
 	double x = 125.9;
 	double expectResult = 126;
@@ -406,7 +406,7 @@ TEST(JavaLang, MathCeil) {
 	assertEquals(expectBetweenResult, Math::ceil(between));
 }
 
-TEST(JavaLang, MathDecrementExactInt) {
+TEST(JavaLangMath, DecrementExactInt) {
 	// Given 2 int
 	int a = 5;
 	int expectResult = 4;
@@ -419,11 +419,11 @@ TEST(JavaLang, MathDecrementExactInt) {
 		int overFlowResult = Math::decrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathDecrementExactLong) {
+TEST(JavaLangMath, DecrementExactLong) {
 	// Given 2 int
 	long a = 5;
 	long expectResult = 4;
@@ -435,11 +435,11 @@ TEST(JavaLang, MathDecrementExactLong) {
 		long overFlowResult = Math::decrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathIncrementExactInt) {
+TEST(JavaLangMath, IncrementExactInt) {
 	// Given 2 int
 	int a = 5;
 	int expectResult = 6;
@@ -452,11 +452,11 @@ TEST(JavaLang, MathIncrementExactInt) {
 		int overFlowResult = Math::incrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathIncrementExactLong) {
+TEST(JavaLangMath, IncrementExactLong) {
 	// Given 2 int
 	long a = 5;
 	long expectResult = 6;
@@ -469,11 +469,11 @@ TEST(JavaLang, MathIncrementExactLong) {
 		long overFlowResult = Math::incrementExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathMultiplyExact) {
+TEST(JavaLangMath, MultiplyExact) {
 	// Given 2 int which multiply result overflow an integer
 	// test if multiplyExact throw ArithmeticException("integer overflow")
 	int x = Integer::MAX_VALUE;
@@ -482,7 +482,7 @@ TEST(JavaLang, MathMultiplyExact) {
 		int overFlowResult = Math::multiplyExact(x, y);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 	
 	
@@ -493,7 +493,7 @@ TEST(JavaLang, MathMultiplyExact) {
 	assertEquals(expectResult, Math::multiplyExact(a, b));
 }
 
-TEST(JavaLang, MathMultiplyExactLong) {
+TEST(JavaLangMath, MultiplyExactLong) {
 	// Given 2 int
 	long a = 5;
 	long b = 6;
@@ -507,7 +507,7 @@ TEST(JavaLang, MathMultiplyExactLong) {
 		long overFlowResult = Math::multiplyExact(c, (long) 2);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 	
 	// Given an long equal to Long::MIN_VALUE, multiply with -1
@@ -516,11 +516,11 @@ TEST(JavaLang, MathMultiplyExactLong) {
 		long overFlowResult = Math::multiplyExact(Long::MIN_VALUE, (long) -1);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathNegateExactInt) {
+TEST(JavaLangMath, NegateExactInt) {
 	// Given an int
 	int x = 100;
 	int expectResult = -100;
@@ -533,11 +533,11 @@ TEST(JavaLang, MathNegateExactInt) {
 		int overFlowResult = Math::negateExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathNegateExactLong) {
+TEST(JavaLangMath, NegateExactLong) {
 	// Given an int
 	long x = 100;
 	long expectResult = -100;
@@ -550,11 +550,11 @@ TEST(JavaLang, MathNegateExactLong) {
 		long overFlowResult = Math::negateExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathLog) {
+TEST(JavaLangMath, Log) {
 	// Given a variable equal to E
 	double natural = Math::E;
 	double expectNaturalResult = 1;
@@ -586,7 +586,7 @@ TEST(JavaLang, MathLog) {
 	assertEquals(expectLessThanZeroResult, Math::log(lessThanZero));
 }
 
-TEST(JavaLang, MathNextAfterDouble) {
+TEST(JavaLangMath, NextAfterDouble) {
 	// Given 2 double
 	double start = 98759.765;
 	double direction = 154.28764;
@@ -623,7 +623,7 @@ TEST(JavaLang, MathNextAfterDouble) {
 	assertEquals(expectNegativeZeroResult, Math::nextAfter(positiveZero, negativeZero));
 }
 
-TEST(JavaLang, MathNextAfterFloat) {
+TEST(JavaLangMath, NextAfterFloat) {
 	// Given 2 float
 	float start = 98759.765f;
 	double direction = 154.28764;
@@ -660,7 +660,7 @@ TEST(JavaLang, MathNextAfterFloat) {
 	assertEquals(expectNegativeZeroResult, Math::nextAfter(positiveZero, negativeZero));
 }
 
-TEST(JavaLang, MathScalbFloat) {
+TEST(JavaLangMath, ScalbFloat) {
 	// Given a float an a scale factor
 	float a = 50.14;
 	int scaleFactor = 4;
@@ -693,7 +693,7 @@ TEST(JavaLang, MathScalbFloat) {
 	assertEquals(expectNegativeZeroResult, Math::scalb(negativeZero, scaleFactor));
 }
 
-TEST(JavaLang, MathScalbDouble) {
+TEST(JavaLangMath, ScalbDouble) {
 	// Given a float an a scale factor
 	double a = 50.14;
 	int scaleFactor = 4;
@@ -726,7 +726,7 @@ TEST(JavaLang, MathScalbDouble) {
 	assertEquals(expectNegativeZeroResult, Math::scalb(negativeZero, scaleFactor));
 }
 
-TEST(JavaLang, MathLog10) {
+TEST(JavaLangMath, Log10) {
 	// Given a variable equal to 10
 	double tenBase = 10;
 	double expectTenBaseResult = 1;
@@ -758,7 +758,7 @@ TEST(JavaLang, MathLog10) {
 	assertEquals(expectLessThanZeroResult, Math::log10(lessThanZero));
 }
 
-TEST(JavaLang, MathLog1p) {
+TEST(JavaLangMath, Log1p) {
 	// Given a variable equal to E-1
 	double natural = Math::E - 1;
 	double expectNaturalResult = 1;
@@ -795,7 +795,7 @@ TEST(JavaLang, MathLog1p) {
 	assertEquals(expectLessThanZeroResult, Math::log1p(lessThanZero));
 }
 
-TEST(JavaLang, MathRInt) {
+TEST(JavaLangMath, RInt) {
 	// Given a double number
 	double x = 125.9;
 	double expectXResult = 126;
@@ -832,7 +832,7 @@ TEST(JavaLang, MathRInt) {
 	assertEquals(expectNegativeZeroResult, Math::rint(negativeZero));
 }
 
-TEST(JavaLang, MathExp) {
+TEST(JavaLangMath, Exp) {
 	// Given a variable equal to E^3
 	double eCubed = 3;
 	double expectResult = Math::pow(Math::E, 3);
@@ -854,7 +854,7 @@ TEST(JavaLang, MathExp) {
 	assertEquals(expectPositiveInfResult, Math::exp(positiveInf));
 }
 
-TEST(JavaLang, MathExpm1) {
+TEST(JavaLangMath, Expm1) {
 	// Given a variable equal to E^3
 	double eCubed = 3;
 	double expectResult = Math::pow(Math::E, 3) - 1;
@@ -886,7 +886,7 @@ TEST(JavaLang, MathExpm1) {
 	assertEquals(expectNegativeZeroResult, Math::expm1(negativeZero));
 }
 
-TEST(JavaLang, MathHypot) {
+TEST(JavaLangMath, Hypot) {
 	// Given two double numbers
 	double x = 6;
 	double y = 8;
@@ -912,7 +912,7 @@ TEST(JavaLang, MathHypot) {
 	assertEquals(expectBothInfResult, Math::hypot(inf1, inf2));
 }
 
-TEST(JavaLang, MathIEEERemainder) {
+TEST(JavaLangMath, IEEERemainder) {
 	// Given two double numbers
 	double x = 8;
 	double y = 6;
@@ -945,7 +945,7 @@ TEST(JavaLang, MathIEEERemainder) {
 	assertEquals(expectSecondInfResult, Math::IEEERemainder(z, inf));
 }
 
-TEST(JavaLang, MathCosh) {
+TEST(JavaLangMath, Cosh) {
 	// Given a variable equal PI/2
 	double radian = Math::PI/2;
 	double expectResult = 2.5091784786580567;
@@ -967,7 +967,7 @@ TEST(JavaLang, MathCosh) {
 	assertEquals(expectZeroResult, Math::cosh(zero));
 }
 
-TEST(JavaLang, MathSinh) {
+TEST(JavaLangMath, Sinh) {
 	// Given a variable equal PI/2
 	double radian = Math::PI/2;
 	double expectResult = 2.3012989023072947;
@@ -994,7 +994,7 @@ TEST(JavaLang, MathSinh) {
 	assertEquals(expectNegativeZeroResult, Math::sinh(negativeZero));
 }
 
-TEST(JavaLang, MathTanh) {
+TEST(JavaLangMath, Tanh) {
 	// Given a variable equal PI/2
 	double radian = Math::PI/2;
 	double expectResult = 0.9171523356672744;
@@ -1025,21 +1025,21 @@ TEST(JavaLang, MathTanh) {
 	double expectNegativeZeroResult = -0.0;
 	assertEquals(expectNegativeZeroResult, Math::tanh(negativeZero));
 }
-TEST(JavaLang, MathToRadian) {
+TEST(JavaLangMath, ToRadian) {
 	// Given a variable degree which is equal to PI
 	double degree = 180;
 	double expectResult = Math::PI;
 	assertEquals(expectResult, Math::toRadians(degree));
 }
 
-TEST(JavaLang, MathToDegree) {
+TEST(JavaLangMath, ToDegree) {
 	// Given a variable degree which is equal to PI
 	double radian = Math::PI;
 	double expectResult = 180;
 	assertEquals(expectResult, Math::toDegrees(radian));
 }
 
-TEST(JavaLang, MathFloor) {
+TEST(JavaLangMath, Floor) {
 	double floor_value = 2.3;
 	double expectResult = 2;
 	assertEquals(expectResult, Math::floor(floor_value));
@@ -1070,7 +1070,7 @@ TEST(JavaLang, MathFloor) {
 	assertEquals(expectNegativeZeroResult, Math::floor(negativeZero));
 }
 
-TEST(JavaLang, MathFloorDivInt) {
+TEST(JavaLangMath, FloorDivInt) {
 	// Given 2 int
 	int dividend = 10;
 	int divisor = 5;
@@ -1090,11 +1090,11 @@ TEST(JavaLang, MathFloorDivInt) {
 		int divideByZero = Math::floorDiv(dividend, divisor);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathSignNumDouble) {
+TEST(JavaLangMath, SignNumDouble) {
 	// Given a double
 	double a = 50.14;
 	double expectResult = 1.0;
@@ -1116,7 +1116,7 @@ TEST(JavaLang, MathSignNumDouble) {
 	assertEquals(expectNegativeZeroResult, Math::signum(negativeZero));
 }
 
-TEST(JavaLang, MathSignNumFloat) {
+TEST(JavaLangMath, SignNumFloat) {
 	// Given a float
 	float a = 50.14;
 	float expectResult = 1.0;
@@ -1138,7 +1138,7 @@ TEST(JavaLang, MathSignNumFloat) {
 	assertEquals(expectNegativeZeroResult, Math::signum(negativeZero));
 }
 
-TEST(JavaLang, MathSubtractExactInt) {
+TEST(JavaLangMath, SubtractExactInt) {
 	// Given 2 int
 	int a = 10;
 	int b = 20;
@@ -1152,11 +1152,11 @@ TEST(JavaLang, MathSubtractExactInt) {
 		int overFlowResult = Math::subtractExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathSubtractExactLong) {
+TEST(JavaLangMath, SubtractExactLong) {
 	// Given 2 long
 	long a = 10;
 	long b = 20;
@@ -1170,11 +1170,11 @@ TEST(JavaLang, MathSubtractExactLong) {
 		long overFlowResult = Math::subtractExact(c, b);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("long overflow", e.getMessage().toString());
+		assertEquals("long overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathToIntExact) {
+TEST(JavaLangMath, ToIntExact) {
 	// Given a long
 	long a = 100;
 	int expectResult = 100;
@@ -1187,11 +1187,11 @@ TEST(JavaLang, MathToIntExact) {
 		int overFlowResult = Math::toIntExact(c);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("integer overflow", e.getMessage().toString());
+		assertEquals("integer overflow", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathFloorDivLong) {
+TEST(JavaLangMath, FloorDivLong) {
 	// Given 2 int
 	long dividend = 10;
 	long divisor = 5;
@@ -1211,11 +1211,11 @@ TEST(JavaLang, MathFloorDivLong) {
 		long divideByZero = Math::floorDiv(dividend, divisor);
 	}
 	catch (ArithmeticException &e) {
-		assertEquals("", e.getMessage().toString());
+		assertEquals("", e.getMessage());
 	}
 }
 
-TEST(JavaLang, MathFloorModInt) {
+TEST(JavaLangMath, FloorModInt) {
 	// Given 2 int
 	int dividend = 10;
 	int divisor = 5;
@@ -1229,7 +1229,7 @@ TEST(JavaLang, MathFloorModInt) {
 	assertEquals(expectResult, Math::floorMod(dividend, divisor));
 }
 
-TEST(JavaLang, MathFloorModLong) {
+TEST(JavaLangMath, FloorModLong) {
 	// Given 2 int
 	long dividend = 10;
 	long divisor = 5;
@@ -1243,7 +1243,7 @@ TEST(JavaLang, MathFloorModLong) {
 	assertEquals(expectResult, Math::floorMod(dividend, divisor));
 }
 
-TEST(JavaLang, MathMax) {
+TEST(JavaLangMath, Max) {
 	// return;
 	double double_value_max_1 = 4;
 	double double_value_max_2 = 2;
@@ -1262,7 +1262,7 @@ TEST(JavaLang, MathMax) {
 	assertEquals(4, Math::max(long_value_max_1, long_value_max_2));
 }
 
-TEST(JavaLang, MathMin) {
+TEST(JavaLangMath, Min) {
 	double double_value_min_1 = 4;
 	double double_value_min_2 = 2;
 	assertEquals(2, Math::min(double_value_min_1, double_value_min_2));
@@ -1280,13 +1280,13 @@ TEST(JavaLang, MathMin) {
 	assertEquals(2, Math::min(int_value_min_1, int_value_min_2));
 }
 
-TEST(JavaLang, MathPow) {
+TEST(JavaLangMath, Pow) {
 	double base = 3;
 	double power = 3;
 	assertEquals(27, Math::pow(base, power));
 }
 
-TEST(JavaLang, MathRound) {
+TEST(JavaLangMath, Round) {
 	double double_value_round = 1.23643435;
 	assertEquals(1, Math::round(double_value_round));
 	
@@ -1294,7 +1294,7 @@ TEST(JavaLang, MathRound) {
 	assertEquals(1, Math::round(float_value_round));
 }
 
-TEST(JavaLang, MathRandom) {
+TEST(JavaLangMath, Random) {
 	// Test 100 number generated, check if all number are in range [0, 1)
 	for (int index = 0; index < 100; index++) {
 		double generatedNumber = Math::random();
@@ -1302,7 +1302,7 @@ TEST(JavaLang, MathRandom) {
 	}
 }
 
-TEST(JavaLang, MathGetExponentDouble) {
+TEST(JavaLangMath, GetExponentDouble) {
 	// Given a double to get exponent
 	double doubleNumber = 60984.1;
 	int expectResult = 15;
@@ -1329,7 +1329,7 @@ TEST(JavaLang, MathGetExponentDouble) {
 	assertEquals(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
-TEST(JavaLang, MathGetExponentFloat) {
+TEST(JavaLangMath, GetExponentFloat) {
 	// Given a float to get exponent
 	float floatNumber = 60984.1f;
 	int expectResult = 15;
@@ -1356,7 +1356,7 @@ TEST(JavaLang, MathGetExponentFloat) {
 	assertEquals(expectSubNormalResult, Math::getExponent(subNormal));
 }
 
-TEST(JavaLang, MathNextDownDouble) {
+TEST(JavaLangMath, NextDownDouble) {
 	// Given a double
 	double doubleNumber = 98759.765;
 	double expectResult = 98759.76499999998;
@@ -1378,7 +1378,7 @@ TEST(JavaLang, MathNextDownDouble) {
 	assertEquals(expectZeroResult, Math::nextDown(zero));
 }
 
-TEST(JavaLang, MathNextDownFloat) {
+TEST(JavaLangMath, NextDownFloat) {
 	// Given a float
 	float floatNumber = 98759.765f;
 	float expectResult = 98759.76f;
@@ -1400,7 +1400,7 @@ TEST(JavaLang, MathNextDownFloat) {
 	assertEquals(expectZeroResult, Math::nextDown(zero));
 }
 
-TEST(JavaLang, MathNextUpDouble) {
+TEST(JavaLangMath, NextUpDouble) {
 	// Given a double
 	double doubleNumber = 98759.765;
 	double expectResult = 98759.7650000001;
@@ -1422,7 +1422,7 @@ TEST(JavaLang, MathNextUpDouble) {
 	assertEquals(expectZeroResult, Math::nextUp(zero));
 }
 
-TEST(JavaLang, MathNextUpFloat) {
+TEST(JavaLangMath, NextUpFloat) {
 	// Given a float
 	float floatNumber = 98759.765f;
 	float expectResult = 98759.77f;
@@ -1444,7 +1444,7 @@ TEST(JavaLang, MathNextUpFloat) {
 	assertEquals(expectZeroResult, Math::nextUp(zero));
 }
 
-TEST(JavaLang, MathUlpDouble) {
+TEST(JavaLangMath, UlpDouble) {
 	// Given a double
 	double doubleNumber = 956.294;
 	double expectResult = 1.1368683772161603E-13;
@@ -1491,7 +1491,7 @@ TEST(JavaLang, MathUlpDouble) {
 	assertEquals(expectNegativeDoubleMaxValueResult, Math::ulp(negativeDoubleMaxValue));
 }
 
-TEST(JavaLang, MathUlpFloat) {
+TEST(JavaLangMath, UlpFloat) {
 //    // Given a float
 //    float floatNumber = 956.294f;
 //    float expectResult = 1.1368683772161603E-13f;
