@@ -938,8 +938,8 @@ TEST (JavaLangString, Format) {
 	Float floatObject = 123.456;
 	Double doubleObject = 123.456789;
 	String stringObject = "String";
-	
-	{
+
+    {
 		String expect = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
 		String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
 		String result = String::format(format, intValue, longValue,
@@ -949,7 +949,7 @@ TEST (JavaLangString, Format) {
 		                               stringObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "%% hello %D %S %d world";
 		String format = "%%% hello %D %S %%d world";
