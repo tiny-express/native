@@ -1196,7 +1196,7 @@ namespace Java {
             static String formatInternal(regex_t& regex,
                                               const char* format,
                                               int size,
-                                              T value,
+                                              const T &value,
                                               const Args&... args) {
                 String result;
                 string input_ptr = (string)format;
@@ -1296,17 +1296,17 @@ namespace Java {
 
             static String print(const String &format, string value);
 
-            static String print(const String &format, Short value);
+            static String print(const String &format, const Short &value);
 
-            static String print(const String &format, Integer value);
+            static String print(const String &format, const Integer &value);
 
-            static String print(const String &format, Long value);
+            static String print(const String &format, const Long &value);
 
-            static String print(const String &format, Float value);
+            static String print(const String &format, const Float &value);
 
-            static String print(const String &format, Double value);
+            static String print(const String &format, const Double &value);
 
-            static String print(const String &format, String value);
+            static String print(const String &format, const String &value);
         };
     } // namespace Lang
 } // namespace Java
