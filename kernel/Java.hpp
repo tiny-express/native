@@ -42,7 +42,7 @@ class Array;
 template <typename E>
 class ArrayIterator {
 public:
-		ArrayIterator(const Array<E> *p_vec, int pos) : _pos(pos), _p_vec(p_vec) {
+		ArrayIterator(const Array<E> *p_vec, long int pos) : _pos(pos), _p_vec(p_vec) {
 		}
 		
 		boolean operator!=(const ArrayIterator<E> &other) const {
@@ -59,7 +59,7 @@ public:
 		}
 
 private:
-		int _pos;
+		long int _pos;
 		const Array<E> *_p_vec;
 };
 
@@ -90,11 +90,11 @@ public:
 		}
 		
 		Array(char **charPointerArray) {
-			int size = lengthPointerPointerChar(charPointerArray);
+			long int size = lengthPointerPointerChar(charPointerArray);
 #ifdef LINUX
 			register
 #endif
-			int index;
+			long int index;
 			for (index = 0; index < size; index++) {
 				original.push_back(charPointerArray[ index ]);
 			}
@@ -106,7 +106,7 @@ public:
 		 *
 		 * @param containerSize
 		 */
-		Array(long containerSize) {
+		Array(long long containerSize) {
 			this->original.resize(containerSize);
 			this->length = containerSize;
 		}
@@ -121,7 +121,7 @@ public:
 		 *
 		 * Don't set this property when you coding
 		 */
-		int length;
+		long int length;
 		
 		/**
 		 * Get the first element in Array
@@ -159,7 +159,7 @@ public:
 		 * @param index
 		 * @return E
 		 */
-		E get(const int index) const {
+		E get(const long int index) const {
 			return (E) original.at(index);
 		}
 		
@@ -186,7 +186,7 @@ public:
 		* @param index
 		* @return E
 		*/
-		E &operator[](const int index) {
+		E &operator[](const long int index) {
 			return this->original.at(index);
 		}
 		
@@ -196,7 +196,7 @@ public:
 		 * @param index
 		 * @return E
 		 */
-		const E &operator[](const int index) const {
+		const E &operator[](const long int index) const {
 			return this->original.at(index);
 		}
 		
@@ -216,7 +216,7 @@ public:
 		}
 };
 
-Java::Lang::String IntegerToHexString(int inputInt);
+Java::Lang::String IntegerToHexString(long int inputInt);
 
 /**
  * Application starting point
@@ -226,6 +226,6 @@ Java::Lang::String IntegerToHexString(int inputInt);
  * @param argument
  * @return int
  */
-int Application(void (*program)(Array<Java::Lang::String>), int argc, char **argument);
+long int Application(void (*program)(Array<Java::Lang::String>), long int argc, char **argument);
 
 #endif// NATIVE_KERNEL_JAVA_HPP

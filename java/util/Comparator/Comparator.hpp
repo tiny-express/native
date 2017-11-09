@@ -33,11 +33,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Util {
-				template <typename E>
-				class Comparator {
-				};
-		}
+    namespace Util {
+        template<typename E>
+        class Comparator {
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_UTIL_COMPARATOR_HPP

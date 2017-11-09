@@ -28,82 +28,82 @@
 #include "UUID.hpp"
 
 TEST (JavaUtilUUID, Constructor) {
-	UUID uuid;
+    UUID uuid;
     String str = uuid.toString();
 
-	// Given valid construct to test
-	uuid = UUID(123, 456);
+    // Given valid construct to test
+    uuid = UUID(123, 456);
 
-	long result = uuid.getMostSignificantBits();
-	long expectedValue = 123;
-	assertEquals(expectedValue, result);
+    long long result = uuid.getMostSignificantBits();
+    long long expectedValue = 123;
+    assertEquals(expectedValue, result);
 
-	result = uuid.getLeastSignificantBits();
-	expectedValue = 456;
-	assertEquals(expectedValue, result);
+    result = uuid.getLeastSignificantBits();
+    expectedValue = 456;
+    assertEquals(expectedValue, result);
 
-	// Given valid static constructor with randomUUID
-	String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
-	uuid = UUID::fromString(expectedString);
-	long expectedMostSigBits = 4053239666997989821;
-	long expectedLeastSigBits = -5603022497796657139;
+    // Given valid static constructor with randomUUID
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    uuid = UUID::fromString(expectedString);
+    long long expectedMostSigBits = 4053239666997989821;
+    long long expectedLeastSigBits = -5603022497796657139;
 
-	assertEquals(expectedMostSigBits, uuid.getMostSignificantBits());
-	assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
+    assertEquals(expectedMostSigBits, uuid.getMostSignificantBits());
+    assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtilUUID, ClockSequence) {
-	// Given valid uuid and expectedResult based on result of java code
-	UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
-	int expectedResult = 12862;
-	
-	assertEquals(expectedResult, uuid.clockSequence());
+    // Given valid uuid and expectedResult based on result of java code
+    UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+    long int expectedResult = 12862;
+
+    assertEquals(expectedResult, uuid.clockSequence());
 }
 
 TEST (JavaUtilUUID, Compare) {
-	// Given valid 2 UUIDs, both of them will never be equal if different instance
-	
-	UUID uuid = UUID(123, 456);
-	
-	UUID targetLessThan = UUID(123, 455);
-	UUID targetEqual = UUID(123, 456);
-	UUID targetMoreThan = UUID(345, 345);
-	
-	long result = uuid.compareTo(targetLessThan);
-	long expectedValue = 1;
-	assertEquals(expectedValue, result);
-	
-	result = uuid.compareTo(targetEqual);
-	expectedValue = 0;
-	assertEquals(expectedValue, result);
-	
-	result = uuid.compareTo(targetMoreThan);
-	expectedValue = -1;
-	assertEquals(expectedValue, result);
+    // Given valid 2 UUIDs, both of them will never be equal if different instance
+
+    UUID uuid = UUID(123, 456);
+
+    UUID targetLessThan = UUID(123, 455);
+    UUID targetEqual = UUID(123, 456);
+    UUID targetMoreThan = UUID(345, 345);
+
+    long long result = uuid.compareTo(targetLessThan);
+    long long expectedValue = 1;
+    assertEquals(expectedValue, result);
+
+    result = uuid.compareTo(targetEqual);
+    expectedValue = 0;
+    assertEquals(expectedValue, result);
+
+    result = uuid.compareTo(targetMoreThan);
+    expectedValue = -1;
+    assertEquals(expectedValue, result);
 }
 
 TEST (JavaUtilUUID, Equals) {
-	// Given valid an instance of UUID, test equals with ifself
-	UUID uuid = UUID::randomUUID();
-	
-	assertTrue(uuid.equals(uuid));
+    // Given valid an instance of UUID, test equals with ifself
+    UUID uuid = UUID::randomUUID();
+
+    assertTrue(uuid.equals(uuid));
 }
 
 TEST (JavaUtilUUID, GetSignificantBits) {
-	// Given valid UUID to test getLeast and getMost of significant bits inside this class
-	long expectedMost = 100000000;
-	long expectedLeast = 5000000;
-	UUID uuid = UUID(expectedMost, expectedLeast);
-	
-	assertEquals(expectedMost, uuid.getMostSignificantBits());
-	
-	assertEquals(expectedLeast, uuid.getLeastSignificantBits());
+    // Given valid UUID to test getLeast and getMost of significant bits inside this class
+    long long expectedMost = 100000000;
+    long long expectedLeast = 5000000;
+    UUID uuid = UUID(expectedMost, expectedLeast);
+
+    assertEquals(expectedMost, uuid.getMostSignificantBits());
+
+    assertEquals(expectedLeast, uuid.getLeastSignificantBits());
 }
 
 TEST (JavaUtilUUID, ToString) {
-	// Given valid uuid to test toString() - this test case was based on java's result
-	UUID uuid = UUID(4053239666997989821, -5603022497796657139);
-	
-	String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
-	assertEquals(expectedString.toString(), uuid.toString().toString());
+    // Given valid uuid to test toString() - this test case was based on java's result
+    UUID uuid = UUID(4053239666997989821, -5603022497796657139);
+
+    String expectedString = "38400000-8cf0-11bd-b23e-10b96e4ef00d";
+    assertEquals(expectedString.toString(), uuid.toString().toString());
 }

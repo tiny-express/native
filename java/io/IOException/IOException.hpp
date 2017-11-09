@@ -36,8 +36,11 @@ namespace Java {
         class IOException : public Exception {
         public:
             IOException();
+
             IOException(String message);
+
             IOException(String message, Throwable *cause);
+
             IOException(Throwable *cause);
         };  // class IOException
     }  // namespace IO

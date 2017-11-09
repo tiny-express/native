@@ -30,21 +30,22 @@
 using namespace Java::Lang;
 
 TEST (JavaLangThrowable, Constructor) {
-	// Constructs a new throwable with null as its detail message.
-	Throwable throwableWithNullMessage;
-	assertEquals("", throwableWithNullMessage.getMessage());
-	
-	// Constructs a new throwable with the specified detail message.
-	Throwable throwableWithMessage = Throwable("Throwable with the specified message");
-	assertEquals("Throwable with the specified message", throwableWithMessage.getMessage());
-	
-	// Constructs a new throwable with the specified detail message and cause.
-	Throwable throwableWithMessageAndCause = Throwable("Throwable with the specified message and cause", &throwableWithMessage);
-	assertEquals("Throwable with the specified message and cause", throwableWithMessageAndCause.getMessage());
-	assertEquals("Throwable with the specified message", throwableWithMessageAndCause.getCause()->getMessage());
-	
-	// Constructs a new throwable with the specified cause.
-	Throwable throwableWithCause = Throwable(&throwableWithMessageAndCause);
-	assertEquals("Throwable with the specified message and cause", throwableWithCause.getCause()->getMessage());
-	assertEquals("Throwable with the specified message", throwableWithCause.getCause()->getCause()->getMessage());
+    // Constructs a new throwable with null as its detail message.
+    Throwable throwableWithNullMessage;
+    assertEquals("", throwableWithNullMessage.getMessage());
+
+    // Constructs a new throwable with the specified detail message.
+    Throwable throwableWithMessage = Throwable("Throwable with the specified message");
+    assertEquals("Throwable with the specified message", throwableWithMessage.getMessage());
+
+    // Constructs a new throwable with the specified detail message and cause.
+    Throwable throwableWithMessageAndCause = Throwable("Throwable with the specified message and cause",
+                                                       &throwableWithMessage);
+    assertEquals("Throwable with the specified message and cause", throwableWithMessageAndCause.getMessage());
+    assertEquals("Throwable with the specified message", throwableWithMessageAndCause.getCause()->getMessage());
+
+    // Constructs a new throwable with the specified cause.
+    Throwable throwableWithCause = Throwable(&throwableWithMessageAndCause);
+    assertEquals("Throwable with the specified message and cause", throwableWithCause.getCause()->getMessage());
+    assertEquals("Throwable with the specified message", throwableWithCause.getCause()->getCause()->getMessage());
 }

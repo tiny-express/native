@@ -58,8 +58,8 @@ TEST (JavaLangBoolean, Compare) {
     boolean booleanFalse = false;
 
     // Give two boolean (true - true) to compare - Should be equal
-    int expect = 0;
-    int result = Boolean::compare(booleanTrue, booleanTrue);
+    long int expect = 0;
+    long int result = Boolean::compare(booleanTrue, booleanTrue);
     assertEquals(expect, result);
 
     // Give two boolean (true - false) to compare - Should equal
@@ -78,8 +78,8 @@ TEST (JavaLangBoolean, CompareTo) {
     Boolean objectBooleanFalse(false);
 
     // Give two object Boolean (true - true) to compare - Should be equal
-    int expect = 0;
-    int result = objectBooleanTrue.compareTo(objectBooleanTrue);
+    long int expect = 0;
+    long int result = objectBooleanTrue.compareTo(objectBooleanTrue);
     assertEquals(expect, result);
 
     // Give two object Boolean (true - false) to compare - Should equal
@@ -107,10 +107,10 @@ TEST (JavaLangBoolean, GetBoolean) {
 
 TEST (JavaLangBoolean, HashCode) {
     //Giving an expected result and a boolean value
-    long expectedResult;
+    long long expectedResult;
     Boolean booleanTrueValue(true);
     Boolean booleanFalseValue(false);
-    long result;
+    long long result;
 
     //Test expectedResult and true-hashcode-booleanValue are equal
     expectedResult = 1231;

@@ -30,15 +30,18 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-		namespace Lang {
-				class CloneNotSupportedException : public RuntimeException {
-				public:
-						CloneNotSupportedException();
-						CloneNotSupportedException(String message);
-						CloneNotSupportedException(Throwable *cause);
-						CloneNotSupportedException(String message, Throwable *cause);
-				};
-		}
+    namespace Lang {
+        class CloneNotSupportedException : public RuntimeException {
+        public:
+            CloneNotSupportedException();
+
+            CloneNotSupportedException(String message);
+
+            CloneNotSupportedException(Throwable *cause);
+
+            CloneNotSupportedException(String message, Throwable *cause);
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_LANG_CLONE_NOT_SUPPORTED_EXCEPTION_HPP

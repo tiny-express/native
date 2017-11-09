@@ -36,77 +36,109 @@
 using namespace Java::Lang;
 
 namespace Java {
-		namespace Net {
-				
-				// Pre-declaration
-				class URLConnection;
-				
-				class URL : public Object {
-				private:
-						String protocol;
-						String host;
-						int port;
-						String path;
-						String query;
-				public:
-						URL();
-						URL(String spec);
-						URL(const URL &target);
-						~URL();
-				
-				public:
-						String getHost();
-						String getPath();
-						int getPort();
-						String getProtocol();
-						String getQuery();
-						//URLConnection openConnection();
-						String toString() const;
-				};
-				
-				class URLConnection : public Object {
-				private:
-						int connectTimeout;
-						int readTimeout;
-				protected:
-						URL url;
-						boolean doInput = true;
-						boolean doOutput = false;
-						boolean connected = false;
-						long ifModifiedSince;
-						boolean allowUserInteraction;
-						boolean useCaches;
-				public:
-						URLConnection();
-						URLConnection(URL url);
-						~URLConnection();
-				
-				public:
-						URL getURL();
-						void setDoInput(boolean doInput);
-						boolean getDoInput();
-						void setDoOutput(boolean doOutput);
-						boolean getDoOutput();
-						void setUseCaches(boolean useCaches);
-						boolean getUseCaches();
-						void setIfModifiedSince(long ifModifiedSince);
-						long getIfModifiedSince();
-						void setReadTimeout(int timeout);
-						int getReadTimeout();
-						void setAllowUserInteraction(boolean allowUserInteraction);
-						boolean getAllowUserInteraction();
-						void setConnectTimeout(int timeout);
-						int getConnectTimeout();
-						virtual void connect() = 0;
-						String getContentEncoding();
-						int getContentLength();
-						String getContentType();
-                        HashMap< String, Array<String> > getRequestProperties();
-						String getRequestProperty(String key);
-						void setRequestProperty(String key, String value);
-						String toString() const;
-				};
-		}
+    namespace Net {
+
+        // Pre-declaration
+        class URLConnection;
+
+        class URL : public Object {
+        private:
+            String protocol;
+            String host;
+            long int port;
+            String path;
+            String query;
+        public:
+            URL();
+
+            URL(String spec);
+
+            URL(const URL &target);
+
+            ~URL();
+
+        public:
+            String getHost();
+
+            String getPath();
+
+            long int getPort();
+
+            String getProtocol();
+
+            String getQuery();
+
+            //URLConnection openConnection();
+            String toString() const;
+        };
+
+        class URLConnection : public Object {
+        private:
+            long int connectTimeout;
+            long int readTimeout;
+        protected:
+            URL url;
+            boolean doInput = true;
+            boolean doOutput = false;
+            boolean connected = false;
+            long long ifModifiedSince;
+            boolean allowUserInteraction;
+            boolean useCaches;
+        public:
+            URLConnection();
+
+            URLConnection(URL url);
+
+            ~URLConnection();
+
+        public:
+            URL getURL();
+
+            void setDoInput(boolean doInput);
+
+            boolean getDoInput();
+
+            void setDoOutput(boolean doOutput);
+
+            boolean getDoOutput();
+
+            void setUseCaches(boolean useCaches);
+
+            boolean getUseCaches();
+
+            void setIfModifiedSince(long long ifModifiedSince);
+
+            long long getIfModifiedSince();
+
+            void setReadTimeout(long int timeout);
+
+            long int getReadTimeout();
+
+            void setAllowUserInteraction(boolean allowUserInteraction);
+
+            boolean getAllowUserInteraction();
+
+            void setConnectTimeout(long int timeout);
+
+            long int getConnectTimeout();
+
+            virtual void connect() = 0;
+
+            String getContentEncoding();
+
+            long int getContentLength();
+
+            String getContentType();
+
+            HashMap<String, Array<String> > getRequestProperties();
+
+            String getRequestProperty(String key);
+
+            void setRequestProperty(String key, String value);
+
+            String toString() const;
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_NET_URL_HPP

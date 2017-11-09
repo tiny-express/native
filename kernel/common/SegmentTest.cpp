@@ -29,10 +29,10 @@
 
 TEST (KernelCommonSegment, PointerChar) {
 	auto charArray = (string) "Hello World";
-	int from = 6;
-	int to = 10;
+	long int from = 6;
+	long int to = 10;
 	char *result = segmentPointerChar(charArray, from, to);
-	assertEquals(5, lengthPointerChar(result));
+	assertEquals(5, (int) lengthPointerChar(result));
 	assertEquals("World", result);
 	free(result);
 	
@@ -40,7 +40,7 @@ TEST (KernelCommonSegment, PointerChar) {
 	from = 6;
 	to = 6;
 	char *result2 = segmentPointerChar(charArray, from, to);
-	assertEquals(1, lengthPointerChar(result2));
+	assertEquals(1, (int) lengthPointerChar(result2));
 	assertEquals("W", result2);
 	free(result2);
 	
@@ -135,8 +135,8 @@ TEST (KernelCommonSegment, PointerChar) {
 
 TEST (KernelCommonSegment, PointerConstChar) {
 	auto charArray = (string) "Hello World";
-	int from = 6;
-	int to = 6;
+	long int from = 6;
+	long int to = 6;
 	char *result = segmentPointerChar(charArray, from, to);
 	assertEquals(1, lengthPointerChar(result));
 	assertEquals("W", result);
@@ -163,8 +163,8 @@ TEST (KernelCommonSegment, PointerPointerChar) {
 		(char *) "dog",
 		nullptr
 	};
-	int from = 2;
-	int to = 5;
+	long int from = 2;
+	long int to = 5;
 
 	char **result = segmentPointerPointerChar(target, from, to);
 	
