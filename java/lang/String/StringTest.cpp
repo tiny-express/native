@@ -753,7 +753,7 @@ TEST (JavaLangString, ValueOf) {
     // Value of double number
     auto givenDoubleNumber = (double) 456.324234234240009;
     String valueOfDouble = String::valueOf(givenDoubleNumber);
-    assertEquals("456.324234234240009", valueOfDouble.toString());
+    assertEquals("456.324234", valueOfDouble.toString());
 }
 
 TEST (JavaLangString, OperatorPlusStringObject) {

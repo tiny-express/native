@@ -99,21 +99,21 @@ TEST (JavaLangStringBuilder, Append) {
     // Double and double, Float and float, Integer and int, Long and long
     StringBuilder stringBuilder3;
     stringBuilder3.append(Double(0.8));
-    assertEquals("0.800000000000000", stringBuilder3.toString());
+    assertEquals("0.800000", stringBuilder3.toString());
     stringBuilder3.append(0.8);
-    assertEquals("0.8000000000000000.800000000000000", stringBuilder3.toString());
+    assertEquals("0.8000000.800000", stringBuilder3.toString());
     stringBuilder3.append(Float(0.7f));
-    assertEquals("0.8000000000000000.8000000000000000.7", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.7", stringBuilder3.toString());
     stringBuilder3.append(0.7f);
-    assertEquals("0.8000000000000000.8000000000000000.70.7", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.70.7", stringBuilder3.toString());
     stringBuilder3.append((long int) 10);
-    assertEquals("0.8000000000000000.8000000000000000.70.710", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.70.710", stringBuilder3.toString());
     stringBuilder3.append((long int) 100);
-    assertEquals("0.8000000000000000.8000000000000000.70.710100", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.70.710100", stringBuilder3.toString());
     stringBuilder3.append((long int) 1000l);
-    assertEquals("0.8000000000000000.8000000000000000.70.7101001000", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.70.7101001000", stringBuilder3.toString());
     stringBuilder3.append((long int) 1001);
-    assertEquals("0.8000000000000000.8000000000000000.70.71010010001001", stringBuilder3.toString());
+    assertEquals("0.8000000.8000000.70.71010010001001", stringBuilder3.toString());
 
     // Boolean and boolean
     StringBuilder stringBuilder4;
@@ -379,9 +379,9 @@ TEST (JavaLangStringBuilder, Insert) {
     stringBuilder4.insert(0, 0.7f);
     assertEquals("0.7a0.8bc", stringBuilder4.toString());
     stringBuilder4.insert(0, 0.1);
-    assertEquals("0.1000000000000000.7a0.8bc", stringBuilder4.toString());
+    assertEquals("0.1000000.7a0.8bc", stringBuilder4.toString());
     stringBuilder4.insert(1, Double(0.2));
-    assertEquals("00.200000000000000.1000000000000000.7a0.8bc", stringBuilder4.toString());
+    assertEquals("00.200000.1000000.7a0.8bc", stringBuilder4.toString());
 
     // Character and char
     StringBuilder stringBuilder5(String("abc"));

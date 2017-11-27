@@ -36,7 +36,7 @@ TEST (JavaLangAssertionError, Constructor) {
 
     // Constructs a new AssertionError with double
     AssertionError assertionErrorWithDouble = AssertionError(10000.0);
-    assertEquals("10000.000000000000000", assertionErrorWithDouble.getMessage());
+    assertEquals("10000.000000", assertionErrorWithDouble.getMessage());
 
     // Constructs a new AssertionError with float
     AssertionError assertionErrorWithFloat = AssertionError(10000.0f);
@@ -44,7 +44,7 @@ TEST (JavaLangAssertionError, Constructor) {
 
     // Constructs a new AssertionError with long
     AssertionError assertionErrorWithLong = AssertionError((long long) 100000000000000);
-    assertEquals("100000000000", assertionErrorWithLong.getMessage());
+    assertEquals("100000000000000", assertionErrorWithLong.getMessage());
 
     // Constructs a new AssertionError with int
     AssertionError assertionErrorWithInt = AssertionError(10000);
@@ -66,7 +66,7 @@ TEST (JavaLangAssertionError, Constructor) {
     AssertionError assertionErrorWithMessageAndCause = AssertionError(
             "AssertionError with the specified message and cause", &assertionErrorWithDouble);
     assertEquals("AssertionError with the specified message and cause", assertionErrorWithMessageAndCause.getMessage());
-    assertEquals("10000.000000000000000", assertionErrorWithMessageAndCause.getCause()->getMessage());
+    assertEquals("10000.000000", assertionErrorWithMessageAndCause.getCause()->getMessage());
 }
 
 TEST (JavaLangAssertionError, TryCatch) {

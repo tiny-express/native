@@ -163,7 +163,7 @@ String Date::toString() const {
     return this->backUp;
 }
 
-long long Date::UTC(long int year, long int month, long int date, long int hour, long int minute, long int second) {
+long Date::UTC(int year, int month, int date, int hour, int minute, int second) {
     Date tempDate = Date(year, month, date, hour, minute, second);
     return Date::getUTCTime(tempDate.getTime());
 }
@@ -547,7 +547,7 @@ String Date::timeToString(String pattern, tm *timeManagement) const {
     return result;
 }
 
-long long Date::getUTCTime(long long timer) {
+long Date::getUTCTime(long timer) {
     tm tempTimer = {0};
     tm *utcTimer = gmtime_r((time_t*) timer, &tempTimer);
 

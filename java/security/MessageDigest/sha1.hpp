@@ -36,10 +36,10 @@
 #ifndef sha1_INCLUDED
 #define sha1_INCLUDED
 typedef struct {
-    unsigned long int H[5];
-    unsigned long int W[80];
+    unsigned int H[5];
+    unsigned int W[80];
     long int lenW;
-    unsigned long int sizeHi, sizeLo;
+    unsigned int sizeHi, sizeLo;
 } SHA_CTX;
 
 void SHA1_Init(SHA_CTX *ctx);

@@ -681,7 +681,7 @@ long int *StringBuilder::initializeNextTable(const String pattern) const {
         return nullptr;
     }
 
-    long int *nextTable = (long int *) calloc((size_t) lengthOfPattern, sizeof(int));
+    long int *nextTable = (long int *) calloc((size_t) lengthOfPattern, sizeof(long int));
 
     if (nextTable == nullptr) {
         return nullptr;

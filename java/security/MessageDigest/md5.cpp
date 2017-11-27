@@ -148,7 +148,7 @@ static void md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/) {
         * little-endian machine, since we can use a more efficient
         * algorithm on the latter.
         */
-        static const long int w = 1;
+        static const long long int w = 1;
 
         if (*((const md5_byte_t *) &w)) /* dynamic little-endian */
 #endif

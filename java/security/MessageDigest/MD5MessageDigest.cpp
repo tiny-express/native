@@ -42,6 +42,7 @@ long int MD5MessageDigest::engineDigest(byte *buffer, long int len) {
 
     if (!this->isFinished) {
         md5_finish(&this->state, this->hash);
+        this->isFinished = true;
     }
 
     memcpy(buffer, this->hash, sizeof(this->hash));

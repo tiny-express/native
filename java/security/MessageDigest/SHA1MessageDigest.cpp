@@ -43,6 +43,7 @@ long int SHA1MessageDigest::engineDigest(byte *buffer, long int len) {
 
     if (!this->isFinished) {
         SHA1_Final(this->hash, &this->state);
+        this->isFinished = true;
     }
 
     memcpy(buffer, this->hash, sizeof(this->hash));

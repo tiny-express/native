@@ -65,7 +65,7 @@ void SHA1_Update(SHA_CTX *ctx, const void *_dataIn, long int len) {
      */
     for (i = 0; i < len; i++) {
         ctx->W[ctx->lenW / 4] <<= 8;
-        ctx->W[ctx->lenW / 4] |= (unsigned int) dataIn[i];
+        ctx->W[ctx->lenW / 4] |= (unsigned long int) dataIn[i];
         if ((++ctx->lenW) % 64 == 0) {
             shaHashBlock(ctx);
             ctx->lenW = 0;
@@ -111,7 +111,7 @@ void SHA1_Final(unsigned char hashout[20], SHA_CTX *ctx) {
 
 static void shaHashBlock(SHA_CTX *ctx) {
     long int t;
-    unsigned long int A, B, C, D, E, TEMP;
+    unsigned int A, B, C, D, E, TEMP;
 
     for (t = 16; t <= 79; t++)
         ctx->W[t] =

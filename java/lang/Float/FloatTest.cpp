@@ -324,25 +324,25 @@ TEST (JavaLangFloat, ShortValue) {
 
     // Test Float::POSITIVE_INFINITY
     variableTestShortValue = Float::POSITIVE_INFINITY;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestShortValue = Float::NEGATIVE_INFINITY;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NaN
     variableTestShortValue = Float::NaN;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::MAX_VALUE
     variableTestShortValue = Float::MAX_VALUE;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
