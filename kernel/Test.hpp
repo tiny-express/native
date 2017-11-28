@@ -697,7 +697,7 @@ void assertEqualsDouble(double expected,
                         double actual,
                         const_string file,
                         long int line) {
-    int precision = 15;
+    long int precision = 15;
 
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
@@ -764,7 +764,7 @@ void assertNotEqualsDouble(double expected,
                         double actual,
                         const_string file,
                         long int line) {
-    int precision = 15;
+    long int precision = 15;
 
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     string expectedString = (string) calloc(1079, sizeof(char));
@@ -883,7 +883,7 @@ void assertFailNoneArgument(const_string file, long int line) {
  */
 void assertEqualsPrecisionDouble(double expected,
                                   double actual,
-                                  int precision,
+                                  long int precision,
                                   const_string file,
                                   long int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
@@ -926,7 +926,7 @@ void assertEqualsPrecisionDouble(double expected,
  */
 void assertNotEqualsPrecisionDouble(double expected,
                                   double actual,
-                                  int precision,
+                                  long int precision,
                                   const_string file,
                                   long int line) {
     // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
@@ -1009,7 +1009,7 @@ static void *find_symbol(struct CTEST *test, const char *fname)
 #include <signal.h>
 #endif
 
-static void sighandler(int signum)
+static void sighandler(long int signum)
 {
     char msg[128];
     sprintf(msg, "[SIGNAL %d]", signum);
@@ -1025,11 +1025,11 @@ static void sighandler(int signum)
 
 long int ctest_main(long int argc, const char *argv[])
 {
-    static int total = 0;
-    static int num_ok = 0;
-    static int num_fail = 0;
-    static int num_skip = 0;
-    static int index = 1;
+    static long int total = 0;
+    static long int num_ok = 0;
+    static long int num_fail = 0;
+    static long int num_skip = 0;
+    static long int index = 1;
     static filter_func filter = suite_all;
 
 #ifdef CTEST_SEGFAULT

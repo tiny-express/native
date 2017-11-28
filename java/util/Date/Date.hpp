@@ -89,7 +89,7 @@ namespace Java {
              * @param timer
              * @return long
              */
-            static long getUTCTime(long timer);
+            static long long getUTCTime(long long timer);
 
             /**
              * Get current number from processing String
@@ -407,7 +407,7 @@ namespace Java {
              * @param second
              * @return long
              */
-            static long UTC(int year, int month, int date,
+            static long long UTC(int year, int month, int date,
                                  int hour, int minute, int second);
 
             /**
