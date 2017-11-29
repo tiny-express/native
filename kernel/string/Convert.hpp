@@ -207,6 +207,7 @@ inline string stringFromBoolean(long int target) {
 
 inline string stringFromDouble(double target) {
     string result = stringCopy(std::to_string(target).c_str());
+
     return result;
 }
 
