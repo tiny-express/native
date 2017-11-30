@@ -452,10 +452,11 @@ String String::valueOf(float floatValue) {
 }
 
 String String::valueOf(double doubleValue) {
-    string resultHolder = stringFromDouble(doubleValue);
-    // Copy to result and free result holder
-    String result = resultHolder;
-    free(resultHolder);
+//    string resultHolder = stringFromDouble(doubleValue);
+//    // Copy to result and free result holder
+//    String result = resultHolder;
+//    free(resultHolder);
+    String result = (string) std::to_string(doubleValue).c_str();
     return result;
 }
 

@@ -28,31 +28,39 @@
 
 using namespace Java::Lang;
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 Double::Double() {
     this->original = 0;
-    this->originalString = stringFromDouble(this->original);
+//    this->originalString = stringFromDouble(this->original);
+    this->originalString = (string) std::to_string(this->original).c_str();
 }
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 Double::Double(double original) {
     this->original = original;
-    this->originalString = stringFromDouble(this->original);
+//    this->originalString = stringFromDouble(this->original);
+    this->originalString = (string) std::to_string(this->original).c_str();
 }
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 Double::Double(const Double &doubleNumber) {
     this->original = doubleNumber.original;
-    this->originalString = stringFromDouble(this->original);
+//    this->originalString = stringFromDouble(this->original);
+    this->originalString = (string) std::to_string(this->original).c_str();
 }
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 Double::~Double() {
-    if (this->originalString != nullptr) {
-        free(this->originalString);
-    }
+//    if (this->originalString != nullptr) {
+//        free(this->originalString);
+//    }
 }
 
 Double Double::parseDouble(String target) {
     return Double(stringToDouble(target.toCharPointer()));
 }
 
+// TODO(thoangminh): Leak memory here. Check it again.
 String Double::toString() const {
     return this->originalString;
 }
@@ -62,8 +70,13 @@ String Double::toString() const {
 //    return FloatingDecimal.toJavaFormatString(d);
 //}
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 char Double::charValue() const {
-    string convertResult = stringFromDouble(this->original);
+//    string convertResult = stringFromDouble(this->original);
+
+    std::string converResultHolder = std::to_string(this->original);
+    string convertResult = &converResultHolder[0u];
+
     char charValueResult = stringToChar(convertResult);
     return charValueResult;
 }
@@ -144,9 +157,13 @@ boolean Double::operator||(const Double &target) const {
     return (boolean) (this->original || target.original);
 }
 
+// TODO(thoangminh): Edited this function to pass leak memory. Check it again.
 Double &Double::operator=(const Double &target) {
     this->original = target.original;
-    this->originalString = stringFromDouble(target.original);
+//    this->originalString = stringFromDouble(target.original);
+
+    this->originalString = (string) std::to_string(target.original).c_str();
+
     return *this;
 }
 
