@@ -32,10 +32,7 @@
 namespace Java {
 		namespace Net {
 				class HttpURLConnection : public URLConnection {
-				protected:
-						String method = "GET";
-						int responseCode;
-						String responseMessage;
+				public:
 						/**
 						* HTTP Status-Code 200: OK.
 						*/
@@ -223,7 +220,11 @@ namespace Java {
 						*/
 						const int HTTP_VERSION = 505;
 				protected:
-						HttpURLConnection(URL url);
+					String method = "GET";
+					int responseCode;
+					String responseMessage;
+
+					HttpURLConnection(URL url);
 						~HttpURLConnection();
 				
 				public:
