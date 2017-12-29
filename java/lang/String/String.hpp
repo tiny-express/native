@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
+#include <string>
 #include "../../../kernel/Java.hpp"
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
@@ -95,9 +96,7 @@ namespace Java {
                 public virtual CharSequence {
 
         private:
-            string original;
-            int size;
-            int capacity;
+            std::string original;
             mutable int hash = 0;
 
         public:
@@ -240,8 +239,7 @@ namespace Java {
              * @param original
              */
             inline String(string target) {
-                this->size = lengthPointerChar(target);
-                STRING_CONSTRUCTOR
+               this->original = std::string(target);
             }
 
             /**
@@ -250,8 +248,7 @@ namespace Java {
              * @param target
              */
             inline String(const_string target) {
-                this->size = lengthPointerChar(target);
-                STRING_CONSTRUCTOR
+                this->original = std::string(target);
             }
 
             /**
@@ -260,9 +257,7 @@ namespace Java {
              * @param target
              */
             inline String(const std::string &targetString) {
-                string target = (string) targetString.c_str();
-                this->size = targetString.length();
-                STRING_CONSTRUCTOR
+                this->original = targetString;
             }
 
             /**
@@ -437,7 +432,7 @@ namespace Java {
             template<class T>
             boolean equals(T anObject) const {
                 if (instanceof<String>(anObject)) {
-                    return (boolean) stringEquals(original, anObject.toString().toCharPointer());
+                    return (boolean) stringEquals(this->original.c_str(), anObject.toString().toCharPointer());
                 }
                 return false;
             }
@@ -580,11 +575,15 @@ namespace Java {
             static String join(CharSequence &delimiter, Args &&... elements) {
                 String result;
                 std::initializer_list<CharSequence *> paramList = {&elements...};
+
+                int i = 0;
                 for (const CharSequence *arg : paramList) {
                     result += arg->toString();
-                    result += delimiter.toString();
+                    if (i < paramList.size() - 1) {
+                        result += delimiter.toString();
+                    }
+                    ++i;
                 }
-                result = result.subString(0, result.size - delimiter.length());
                 return result;
             }
 
@@ -638,7 +637,7 @@ namespace Java {
              * @return int
              */
             inline int length() const override {
-                return this->size;
+                return this->original.size();
             }
 
             /**
@@ -980,11 +979,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String operator+(const string &target) {
-                auto targetValue = (string) target;
-                int targetLength = lengthPointerChar((string) target);
-                int newLength = this->size + targetLength;
-                STRING_OPERATOR_PLUS
-                return this->original;
+                return this->original + std::string(target);
             }
 
             /**
@@ -994,11 +989,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String operator+(const String &target) {
-                string targetValue = target.original;
-                int targetLength = target.size;
-                int newLength = this->size + target.size;
-                STRING_OPERATOR_PLUS
-                return this->original;
+                return this->original + target.original;
             }
 
             /**
@@ -1008,10 +999,7 @@ namespace Java {
              * @return a String contain value of this String and target string
              */
             inline String &operator+=(const String &target) {
-                string targetValue = target.original;
-                int targetLength = target.size;
-                int newLength = this->size + target.size;
-                STRING_OPERATOR_PLUS
+                this->original += target.original;
                 return *this;
             }
 
@@ -1022,10 +1010,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String &operator+=(const_string target) {
-                auto targetValue = target;
-                int targetLength = lengthPointerChar(target);
-                int newLength = this->size + targetLength;
-                STRING_OPERATOR_PLUS
+                this->original.append(target);
                 return *this;
             }
 
@@ -1036,9 +1021,7 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator+=(const char &target) {
-                stringAppend(&this->original, target);
-                this->size++;
-                this->capacity = this->size;
+                this->original += target;
                 return *this;
             }
 
@@ -1049,7 +1032,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return stringEquals(this->original, target.toCharPointer()) != 0;
+                return this->original == target.original;
             }
 
             /**
@@ -1059,12 +1042,7 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator=(const String &target) {
-                if (this->original != nullptr) {
-                    free(this->original);
-                }
-                this->original = stringCopy(target.original);
-                this->size = target.size;
-                this->capacity = target.capacity;
+                this->original = target.original;
                 return *this;
             }
 
@@ -1085,7 +1063,7 @@ namespace Java {
             * @return true if this String is smaller than target; false otherwise
             */
             inline boolean operator<(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) < 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) < 0;
             }
 
             /**
@@ -1095,7 +1073,7 @@ namespace Java {
              * @return true if this String is greater than target; false otherwise
              */
             inline boolean operator>(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) > 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) > 0;
             }
 
             /**
@@ -1105,7 +1083,7 @@ namespace Java {
             * @return true if this String is smaller than or equal to target; false otherwise
             */
             inline boolean operator<=(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) <= 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) <= 0;
             }
 
             /**
@@ -1115,7 +1093,7 @@ namespace Java {
              * @return true if this String is greater than or equal to target; false otherwise
              */
             inline boolean operator>=(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) >= 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) >= 0;
             }
 
             /**
