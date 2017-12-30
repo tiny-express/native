@@ -838,7 +838,7 @@ namespace Java {
              *
              * @return the String, converted to lowercase.
              */
-            String toLowerCase() const;
+            String toLowerCase();
 
             /**
              * Converts all of the characters in this String to lower case using the rules of the given Locale.
@@ -850,7 +850,7 @@ namespace Java {
             // String toLowerCase(Locale locale);
 
             /**
-             * Converts all of the characters in this String to upper case
+             * Converts all of the characters in this String to ` case
              * using the rules of the default locale.
              *
              * @return the String, converted to uppercase.

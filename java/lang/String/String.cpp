@@ -33,6 +33,59 @@
 
 using namespace Java::Lang;
 
+std::string wideStringToMultiByteString(const std::wstring& input) {
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH]();
+    size_t len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+    std::string result;
+
+    if (len != static_cast<std::size_t>(-1)) {
+        if (len > DEFAULT_BUFFER_LENGTH) {
+            delete[] buffer;
+            buffer = new char[len]();
+            len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+        }
+        result = std::string(buffer, buffer + len);
+    }
+
+    delete[] buffer;
+    return result;
+}
+
+std::wstring multiByteStringToWideString(const std::string& input) {
+    wchar_t* buffer = new wchar_t[DEFAULT_BUFFER_LENGTH]();
+    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH * sizeof(wchar_t));
+    std::wstring result;
+
+    if (len != static_cast<std::size_t>(-1)) {
+        if (len > DEFAULT_BUFFER_LENGTH) {
+            delete[] buffer;
+            buffer = new wchar_t[len]();
+            len = mbstowcs(buffer, input.c_str(), len * sizeof(wchar_t));
+        }
+
+        result = std::wstring(buffer, buffer + len);
+    }
+
+    delete[] buffer;
+    return result;
+}
+
+std::string toUpper(const std::string& input) {
+    std::setlocale(LC_CTYPE, "en_US.utf8");
+    std::wstring wideString = multiByteStringToWideString(input);
+    auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
+    return wideStringToMultiByteString(wideString);
+}
+
+std::string toLower(const std::string& input) {
+    std::setlocale(LC_CTYPE, "en_US.utf8");
+    std::wstring wideString = multiByteStringToWideString(input);
+    auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
+    return wideStringToMultiByteString(wideString);
+}
+
 String::String() {
 }
 
@@ -384,16 +437,12 @@ String String::toString() const {
     return *this;
 }
 
-String String::toLowerCase() const {
-    std::string result = this->original;
-    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
-    return result;
+String String::toLowerCase() {
+    return toLower(this->original);
 }
 
 String String::toUpperCase() {
-    std::string result = this->original;
-    std::transform(result.begin(), result.end(), result.begin(), ::toupper);
-    return result;
+    return toUpper(this->original);
 }
 
 String String::trim() {
@@ -777,4 +826,3 @@ String String::valueOf(const_string constStringValue) {
 String String::valueOf(String stringValue) {
     return stringValue;
 }
-

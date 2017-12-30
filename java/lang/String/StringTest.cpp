@@ -843,11 +843,11 @@ TEST (JavaLangString, ToLowerCase) {
         assertEquals("hello hello hello ", result.toString());
     }
 
-//    {
-//        String unicodeString = "Đây Là Tiếng VIỆT";
-//        String result = unicodeString.toLowerCase();
-//        assertEquals("đây là tiếng việt", result.toString());
-//    }
+    {
+        String unicodeString = "Đây Là Tiếng VIỆT";
+        String result = unicodeString.toLowerCase();
+        assertEquals("đây là tiếng việt", result.toString());
+    }
 }
 
 TEST (JavaLangString, ToUpperCase) {
@@ -857,11 +857,11 @@ TEST (JavaLangString, ToUpperCase) {
         assertEquals("HELLO HELLO HELLO ", result.toString());
     }
 
-//    {
-//        String unicodeString = "Đây Là Tiếng VIỆT";
-//        String result = unicodeString.toLowerCase();
-//        assertEquals("ĐÂY LÀ TIẾNG VIỆT", result.toString());
-//    }
+    {
+        String unicodeString = "Đây Là Tiếng VIỆT";
+        String result = unicodeString.toUpperCase();
+        assertEquals("ĐÂY LÀ TIẾNG VIỆT", result.toString());
+    }
 }
 
 TEST (JavaLangString, Trim) {
