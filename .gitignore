@@ -23,3 +23,5 @@ main
 native_test.exe
 build
 libbenchmark.gcno
+/remove_old_build.sh
+/unit_test.sh
