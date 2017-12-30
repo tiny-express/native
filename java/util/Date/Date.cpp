@@ -51,12 +51,12 @@ Date::Date(int year, int month, int date, int hour, int minute, int second) {
 }
 
 Date::Date(long date) {
-    long timer = date;
+    long timer = date / 1000;
     this->initializeDate(timer);
 }
 
 Date::Date(String inputString) {
-    long timer = Date::parse(inputString);
+    long timer = Date::parse(inputString) / 1000;
     this->initializeDate(timer);
 }
 
@@ -92,7 +92,7 @@ void Date::setSeconds(int seconds) {
 }
 
 void Date::setTime(long time) {
-    this->initializeDate(time);
+    this->initializeDate(time / 1000);
 }
 
 void Date::setYear(int year) {
@@ -130,7 +130,7 @@ int Date::getYear() const {
 }
 
 long Date::getTime() const {
-    return this->timer;
+    return this->timer * 1000;
 }
 
 int Date::getTimezoneOffset() const {
@@ -416,12 +416,12 @@ long Date::parse(String inputString) {
     
     // Add timeZoneOffset to result
     if (timeZoneOffset == -1) {
-        return result;
+        return result * 1000;
     }
     
     long offsetFromUTC = Date::getOffsetFromUTC();
     
-    return result + (timeZoneOffset * 60) - offsetFromUTC;
+    return (result + timeZoneOffset * 60 - offsetFromUTC) * 1000;
 }
 
 long Date::getOffsetFromUTC() {

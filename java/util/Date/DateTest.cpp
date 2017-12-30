@@ -67,8 +67,9 @@ TEST(JavaUtilDate, Constructor) {
     assertEquals(13, date.getSeconds());
 
     // Test Date(long date)
-    date = Date(1498042091);  // 2017
-    assertEquals(117, date.getYear());
+    long timeNow = 1514648078629;
+    date = Date(timeNow);
+    assertEquals("Sat Dec 30 22:34:38 +07 2017", date.toString());
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
@@ -82,7 +83,6 @@ TEST(JavaUtilDate, Constructor) {
     assertEquals(sameDate.getSeconds(), date.getSeconds());
 
     // Test Date::Date(String inputString)
-    // Create variable to test
     Date expected;
     Date actualDate;
     String actualString;
