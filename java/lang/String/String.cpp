@@ -26,6 +26,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <locale>
 #include "String.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
@@ -72,7 +73,7 @@ std::wstring multiByteStringToWideString(const std::string& input) {
 }
 
 std::string toUpper(const std::string& input) {
-    std::setlocale(LC_CTYPE, "en_US.utf8");
+    setlocale(LC_CTYPE, "en_US.utf8");
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
@@ -80,7 +81,7 @@ std::string toUpper(const std::string& input) {
 }
 
 std::string toLower(const std::string& input) {
-    std::setlocale(LC_CTYPE, "en_US.utf8");
+    setlocale(LC_CTYPE, "en_US.utf8");
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
