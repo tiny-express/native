@@ -530,7 +530,6 @@ TEST (JavaLangString, LastIndexOf) {
 
         // TODO(thoangminh): Leak hear
         // assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
-        assertEquals(0, -1);
 
         // assertEquals(0, unicodeString.lastIndexOf("iệt", 10));
 
