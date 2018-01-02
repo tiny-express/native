@@ -235,7 +235,7 @@ void assertArrayAllType(ArrayList<Type> &expected,
     int actualSize = actual.size();
 
     if (expectedSize != actualSize) {
-        CTEST_ERR("%s:%d  expected size %" PRIuMAX " bytes, got %" PRIuMAX,
+        CTEST_ERR("%s:%d  expected size %d bytes, got %d",
                   file, line, (uintmax_t) expectedSize,
                   (uintmax_t) actualSize);
     }
@@ -246,7 +246,7 @@ void assertArrayAllType(ArrayList<Type> &expected,
             String expectedString = expected.get(index).toString();
             String actualString = actual.get(index).toString();
 
-            CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
+            CTEST_ERR("%s:%d expected %s at offset %d got %s",
                       file,
                       line,
                       expectedString.toCharPointer(),
@@ -279,14 +279,14 @@ void assertArrayAllType(Type *expected,
     int actualSize = ARRAY_SIZE(actual);
 
     if (expectedSize != actualSize) {
-        CTEST_ERR("%s:%d  expected size %" PRIuMAX " bytes, got %" PRIuMAX,
+        CTEST_ERR("%s:%d  expected size %d bytes, got %d",
                   file, line, (uintmax_t) expectedSize,
                   (uintmax_t) actualSize);
     }
 
     for (index = 0; index < expectedSize; index++) {
         if (expected[index] != actual[index]) {
-            CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
+            CTEST_ERR("%s:%d expected 0x%02x at offset %d got %d",
                       file, line, expected[index], (uintmax_t) index, actual[index]);
         }
     }
@@ -636,7 +636,7 @@ void assertEqualsIntUnsigned(uintmax_t expected,
                     string file,
                     int line) {
     if (expected != actual) {
-    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
+    CTEST_ERR("%s:%d  expected %d, got %d",
                 file, line, expected, actual);
     }
 }
@@ -646,7 +646,7 @@ void assertNotEqualsIntUnsigned(uintmax_t expected,
                         string file,
                         int line) {
     if ((expected) == (actual)) {
-    CTEST_ERR("%s:%d  should not be %" PRIuMAX,
+    CTEST_ERR("%s:%d  should not be %d",
             file, line, actual);
     }
 }
@@ -658,7 +658,7 @@ void assertIntervalInt(intmax_t expectedFirst,
                         int line) {
 
     if (actual < expectedFirst || actual > expectedSecond) {
-    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
+    CTEST_ERR("%s:%d  expected %d -%d , got %d",
                 file, line, expectedFirst, expectedSecond, actual);
     }
 }
@@ -709,7 +709,7 @@ void assertEqualsInt(int expected,
                      int line) {
 
     if (expected != actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %d, got %d",
                   file, line, expected, actual);
     }
 }
@@ -776,7 +776,7 @@ void assertNotEqualsInt(int expected,
                      int line) {
 
     if (expected == actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %d, got %d",
                   file, line, expected, actual);
     }
 }
@@ -847,7 +847,7 @@ void assertNotEqualsInt(intmax_t expected,
                             const_string file,
                             int line) {
     if ((expected) == (actual)) {
-        CTEST_ERR("%s:%d  should not be %" PRIdMAX,
+        CTEST_ERR("%s:%d  should not be %d",
                   file, line, actual);
     }
 }
